@@ -8,4 +8,8 @@ export interface WorldFrameRequest {
   current(): boolean;
   fail(error: unknown): void;
 }
-export interface WorldFramePresenter { present(request: WorldFrameRequest): void; }
+export interface WorldFramePresenter {
+  /** Input can replace pending views. Flights await the displayed view before
+   * advancing their checkpoint or releasing the current navigation owner. */
+  present(request: WorldFrameRequest, signal?: AbortSignal): void | Promise<boolean>;
+}

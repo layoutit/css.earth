@@ -1,0 +1,1841 @@
+{
+  "schema": "cssearth-surface-sites@1",
+  "source": "Spacecraft landing, touchdown and impact sites compiled from NASA NSSDCA, PDS, LROC, mission releases and cited papers; every coordinate quotes its page",
+  "retrievedAt": "2026-09-12",
+  "sites": [
+    {
+      "id": "luna-2",
+      "name": "Luna 2 impact",
+      "kind": "impact",
+      "date": "1959-09-13",
+      "machineId": null,
+      "latitudeDeg": 30.0,
+      "longitudeDegEast": 0.0,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Impact site unknown, typically given as within the range of 29 - 31 N, 1 W to 1 E.",
+      "naming": {
+        "name": "Sinus Lunicus",
+        "authority": "IAU (landing area of Luna 2)",
+        "gazetteerFeatureId": 5566
+      },
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 2 | Impact | 13 September 1959 | 30 N, 0 E | 30., 0. | a"
+    },
+    {
+      "id": "ranger-4",
+      "name": "Ranger 4 impact (far side)",
+      "kind": "impact",
+      "date": "1962-04-26",
+      "machineId": null,
+      "latitudeDeg": -15.5,
+      "longitudeDegEast": 229.3,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Siddiqi, A., 2002, 2018; Ulivi and Harland, 2004.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Ranger 4 | Impact | 26 April 1962 | 15.5 S, 130.7 W | -15.5, 229.3 | c"
+    },
+    {
+      "id": "ranger-6",
+      "name": "Ranger 6 impact",
+      "kind": "impact",
+      "date": "1964-02-02",
+      "machineId": null,
+      "latitudeDeg": 9.3864,
+      "longitudeDegEast": 21.4806,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Ranger 6 | Impact | 2 February 1964 | 9.3864 N, 21.4806 E | 9.3864, 21.4806 | d"
+    },
+    {
+      "id": "ranger-7",
+      "name": "Ranger 7 impact",
+      "kind": "impact",
+      "date": "1964-07-31",
+      "machineId": null,
+      "latitudeDeg": -10.634,
+      "longitudeDegEast": 339.323,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Ranger 7 | Impact | 31 July 1964 | 10.6340 S, 20.6770 W | -10.6340, 339.3230 | d"
+    },
+    {
+      "id": "ranger-8",
+      "name": "Ranger 8 impact",
+      "kind": "impact",
+      "date": "1965-02-20",
+      "machineId": null,
+      "latitudeDeg": 2.6376,
+      "longitudeDegEast": 24.7881,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Ranger 8 | Impact | 20 February 1965 | 2.6376 N, 24.7881 E | 2.6376, 24.7881 | d"
+    },
+    {
+      "id": "ranger-9",
+      "name": "Ranger 9 impact (Alphonsus)",
+      "kind": "impact",
+      "date": "1965-03-24",
+      "machineId": null,
+      "latitudeDeg": -12.8281,
+      "longitudeDegEast": 357.6116,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Ranger 9 | Impact | 24 March 1965 | 12.8281 S, 2.3884 W | -12.8281, 357.6116 | d"
+    },
+    {
+      "id": "luna-5",
+      "name": "Luna 5 impact",
+      "kind": "impact",
+      "date": "1965-05-12",
+      "machineId": null,
+      "latitudeDeg": -1.35,
+      "longitudeDegEast": 334.52,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Ksanfomality, 2018. Other results for Luna 5 have been reported (8.17 N, 23.43 W; 30 S, 8 W; 31 S, 8 W; 1.6 S, 25 W).",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 5 | Impact | 12 May 1965 | 1.35 S, 25.48 W | -1.35, 334.52 | e"
+    },
+    {
+      "id": "luna-7",
+      "name": "Luna 7 impact",
+      "kind": "impact",
+      "date": "1965-10-07",
+      "machineId": null,
+      "latitudeDeg": 9.0,
+      "longitudeDegEast": 311.0,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Siddiqi, A., 2002, 2018; Ulivi and Harland, 2004.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 7 | Impact | 7 October 1965 | 9 N, 49 W | 9., 311. | c"
+    },
+    {
+      "id": "luna-8",
+      "name": "Luna 8 impact",
+      "kind": "impact",
+      "date": "1965-12-06",
+      "machineId": null,
+      "latitudeDeg": 9.1,
+      "longitudeDegEast": 296.7,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Siddiqi, A., 2002, 2018; Ulivi and Harland, 2004.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 8 | Impact | 6 December 1965 | 9.1 N, 63.3 W | 9.1, 296.7 | c"
+    },
+    {
+      "id": "luna-9",
+      "name": "Luna 9 (Planitia Descensus)",
+      "kind": "lander",
+      "date": "1966-02-03",
+      "machineId": null,
+      "latitudeDeg": 7.13,
+      "longitudeDegEast": 295.63,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Wagner et al., 2017: Luna 9 coordinates come from initial Pravda report; LROC images show no sign of lander at these coordinates; lander site is probably at least 10 km away, direction unknown.",
+      "naming": {
+        "name": "Planitia Descensus",
+        "authority": "IAU",
+        "gazetteerFeatureId": 4750
+      },
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 9 | Soft Landing | 3 February 1966 | 7.13 N, 64.37 W | 7.13, 295.63 | f"
+    },
+    {
+      "id": "surveyor-1",
+      "name": "Surveyor 1",
+      "kind": "lander",
+      "date": "1966-06-02",
+      "machineId": null,
+      "latitudeDeg": -2.4745,
+      "longitudeDegEast": 316.6602,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Surveyor 1 | Soft Landing | 2 June 1966 | 2.4745 S, 43.3398 W | -2.4745, 316.6602 | d"
+    },
+    {
+      "id": "surveyor-2",
+      "name": "Surveyor 2 impact",
+      "kind": "impact",
+      "date": "1966-09-22",
+      "machineId": null,
+      "latitudeDeg": 5.5,
+      "longitudeDegEast": 348.0,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Siddiqi, A., 2002, 2018; Ulivi and Harland, 2004.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Surveyor 2 | Impact | 22 September 1966 | 5.5 N, 12.0 W | 5.5, 348.0 | c"
+    },
+    {
+      "id": "lunar-orbiter-1",
+      "name": "Lunar Orbiter 1 impact",
+      "kind": "impact",
+      "date": "1966-10-29",
+      "machineId": null,
+      "latitudeDeg": 6.35,
+      "longitudeDegEast": 160.71,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Boeing Co., 1968. For Lunar Orbiter 1, impact site also listed as 6.7 N, 162 E in other references.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Lunar Orbiter 1 | Impact | 29 October 1966 | 6.35 N, 160.71 E | 6.35, 160.71 | h"
+    },
+    {
+      "id": "luna-13",
+      "name": "Luna 13",
+      "kind": "lander",
+      "date": "1966-12-24",
+      "machineId": null,
+      "latitudeDeg": 18.87,
+      "longitudeDegEast": 297.95,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Siddiqi, A., 2002, 2018; Ulivi and Harland, 2004.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 13 | Soft Landing | 24 December 1966 | 18.87 N, 62.05 W | 18.87, 297.95 | c"
+    },
+    {
+      "id": "surveyor-3",
+      "name": "Surveyor 3",
+      "kind": "lander",
+      "date": "1967-04-20",
+      "machineId": null,
+      "latitudeDeg": -3.0162,
+      "longitudeDegEast": 336.582,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Surveyor 3 | Soft Landing | 20 April 1967 | 3.0162 S, 23.4180 W | -3.0162, 336.5820 | d"
+    },
+    {
+      "id": "surveyor-5",
+      "name": "Surveyor 5",
+      "kind": "lander",
+      "date": "1967-09-11",
+      "machineId": null,
+      "latitudeDeg": 1.4551,
+      "longitudeDegEast": 23.1943,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Surveyor 5 | Soft Landing | 11 September 1967 | 1.4551 N, 23.1943 E | 1.4551, 23.1943 | d"
+    },
+    {
+      "id": "lunar-orbiter-3",
+      "name": "Lunar Orbiter 3 impact",
+      "kind": "impact",
+      "date": "1967-10-09",
+      "machineId": null,
+      "latitudeDeg": 14.3,
+      "longitudeDegEast": 267.3,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Boeing Co., 1968. For Lunar Orbiter 2, impact site is also listed as 4 N, 98 E; for Lunar Orbiter 3, some references give 14.6 N, 91.7 W or 14.3 N, 97.7 W.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Lunar Orbiter 3 | Impact | 9 October 1967 | 14.3 N, 92.7 W | 14.3, 267.3 | j"
+    },
+    {
+      "id": "lunar-orbiter-2",
+      "name": "Lunar Orbiter 2 impact",
+      "kind": "impact",
+      "date": "1967-10-11",
+      "machineId": null,
+      "latitudeDeg": 3.0,
+      "longitudeDegEast": 119.1,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Boeing Co., 1968. For Lunar Orbiter 2, impact site is also listed as 4 N, 98 E; for Lunar Orbiter 3, some references give 14.6 N, 91.7 W or 14.3 N, 97.7 W.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Lunar Orbiter 2 | Impact | 11 October 1967 | 3.0 N, 119.1 E | 3.0, 119.1 | j"
+    },
+    {
+      "id": "surveyor-6",
+      "name": "Surveyor 6",
+      "kind": "lander",
+      "date": "1967-11-10",
+      "machineId": null,
+      "latitudeDeg": 0.4742,
+      "longitudeDegEast": 358.5725,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Surveyor 6 | Soft Landing | 10 November 1967 | 0.4742 N, 1.4275 W | 0.4742, 358.5725 | d"
+    },
+    {
+      "id": "surveyor-7",
+      "name": "Surveyor 7 (Tycho)",
+      "kind": "lander",
+      "date": "1968-01-10",
+      "machineId": null,
+      "latitudeDeg": -40.9812,
+      "longitudeDegEast": 348.4873,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Surveyor 7 | Soft Landing | 10 January 1968 | 40.9812 S, 11.5127 W | -40.9812, 348.4873 | d"
+    },
+    {
+      "id": "lunar-orbiter-5",
+      "name": "Lunar Orbiter 5 impact",
+      "kind": "impact",
+      "date": "1968-01-31",
+      "machineId": null,
+      "latitudeDeg": -2.79,
+      "longitudeDegEast": 276.96,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Boeing Co., 1968.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Lunar Orbiter 5 | Impact | 31 January 1968 | 2.79 S, 83.04 W | -2.79, 276.96 | l"
+    },
+    {
+      "id": "apollo-11",
+      "name": "Apollo 11 (Statio Tranquillitatis)",
+      "kind": "lander",
+      "date": "1969-07-20",
+      "machineId": null,
+      "latitudeDeg": 0.67416,
+      "longitudeDegEast": 23.47314,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": {
+        "name": "Statio Tranquillitatis",
+        "authority": "IAU; NASA informal name Tranquility Base",
+        "gazetteerFeatureId": 5684
+      },
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 11 LM descent stage | Crewed Landing | 20 July 1969 | 0.67416 N, 23.47314 E | 0.67416, 23.47314 | d"
+    },
+    {
+      "id": "luna-15",
+      "name": "Luna 15 impact",
+      "kind": "impact",
+      "date": "1969-07-21",
+      "machineId": null,
+      "latitudeDeg": 17.0,
+      "longitudeDegEast": 60.0,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Siddiqi, A., 2002, 2018; Ulivi and Harland, 2004. Luna 15 crash sites also given as 12 N, 59 E or 17 N, 49 E.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 15 | Impact | 21 July 1969 | 17 N, 60 E | 17., 60. | c1"
+    },
+    {
+      "id": "apollo-12",
+      "name": "Apollo 12 (Oceanus Procellarum)",
+      "kind": "lander",
+      "date": "1969-11-19",
+      "machineId": null,
+      "latitudeDeg": -3.0128,
+      "longitudeDegEast": 336.5781,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 12 LM descent stage | Crewed Landing | 19 November 1969 | 3.0128 S, 23.4219 W | -3.0128, 336.5781 | d"
+    },
+    {
+      "id": "apollo-12-lm-ascent",
+      "name": "Apollo 12 LM ascent stage impact",
+      "kind": "impact",
+      "date": "1969-11-20",
+      "machineId": null,
+      "latitudeDeg": -3.94,
+      "longitudeDegEast": 338.8,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Coordinates estimated from seismic data in Toksoz et al., 1974, see Orloff, 2000; Wagner et al., 2017.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 12 LM ascent stage | Impact | 20 November 1969 | 3.94 S, 21.20 W | -3.94, 338.80 | m"
+    },
+    {
+      "id": "apollo-13-sivb",
+      "name": "Apollo 13 S-IVB impact",
+      "kind": "impact",
+      "date": "1970-04-15",
+      "machineId": null,
+      "latitudeDeg": -2.555,
+      "longitudeDegEast": 332.1125,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 13 S-IVB | Impact | 15 April 1970 | 2.5550 S, 27.8875 W | -2.5550, 332.1125 | d"
+    },
+    {
+      "id": "luna-16",
+      "name": "Luna 16 (Mare Fecunditatis)",
+      "kind": "sample-site",
+      "date": "1970-09-20",
+      "machineId": null,
+      "latitudeDeg": -0.5137,
+      "longitudeDegEast": 56.3638,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 16 | Soft Landing | 20 September 1970 | 0.5137 S, 56.3638 E | -0.5137, 56.3638 | d"
+    },
+    {
+      "id": "luna-17",
+      "name": "Luna 17 (Lunokhod 1 lander)",
+      "kind": "lander",
+      "date": "1970-11-17",
+      "machineId": null,
+      "latitudeDeg": 38.23764,
+      "longitudeDegEast": 324.99837,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 17 | Soft Landing | 17 November 1970 | 38.23764 N, 35.00163 W | 38.23764, 324.99837 | d"
+    },
+    {
+      "id": "lunokhod-1-final",
+      "name": "Lunokhod 1 final position",
+      "kind": "rover-traverse",
+      "date": "1970-11-17",
+      "machineId": null,
+      "latitudeDeg": 38.315,
+      "longitudeDegEast": 324.9919,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Lunokhod 1 | Rover | 17 November 1970 | 38.3150 N, 35.0081 W | 38.3150, 324.9919 | d"
+    },
+    {
+      "id": "apollo-14-sivb",
+      "name": "Apollo 14 S-IVB impact",
+      "kind": "impact",
+      "date": "1971-02-04",
+      "machineId": null,
+      "latitudeDeg": -8.181,
+      "longitudeDegEast": 333.9695,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 14 S-IVB | Impact | 4 February 1971 | 8.1810 S, 26.0305 W | -8.1810, 333.9695 | d"
+    },
+    {
+      "id": "apollo-14",
+      "name": "Apollo 14 (Fra Mauro)",
+      "kind": "lander",
+      "date": "1971-02-05",
+      "machineId": null,
+      "latitudeDeg": -3.64589,
+      "longitudeDegEast": 342.52806,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 14 LM descent stage | Crewed Landing | 5 February 1971 | 3.64589 S, 17.47194 W | -3.64589, 342.52806 | d"
+    },
+    {
+      "id": "apollo-14-lm-ascent",
+      "name": "Apollo 14 LM ascent stage impact",
+      "kind": "impact",
+      "date": "1971-02-07",
+      "machineId": null,
+      "latitudeDeg": -3.42,
+      "longitudeDegEast": 340.33,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Coordinates estimated from seismic data in Toksoz et al., 1974, see Orloff, 2000; Wagner et al., 2017.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 14 LM ascent stage | Impact | 7 February 1971 | 3.42 S, 19.67 W | -3.42, 340.33 | m"
+    },
+    {
+      "id": "apollo-15-sivb",
+      "name": "Apollo 15 S-IVB impact",
+      "kind": "impact",
+      "date": "1971-07-29",
+      "machineId": null,
+      "latitudeDeg": -1.2897,
+      "longitudeDegEast": 348.1755,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 15 S-IVB | Impact | 29 July 1971 | 1.2897 S, 11.8245 W | -1.2897, 348.1755 | d"
+    },
+    {
+      "id": "apollo-15",
+      "name": "Apollo 15 (Hadley-Apennine)",
+      "kind": "lander",
+      "date": "1971-07-30",
+      "machineId": null,
+      "latitudeDeg": 26.13239,
+      "longitudeDegEast": 3.6333,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 15 LM descent stage | Crewed Landing | 30 July 1971 | 26.13239 N, 3.63330 E | 26.13239, 3.63330 | d"
+    },
+    {
+      "id": "apollo-15-lm-ascent",
+      "name": "Apollo 15 LM ascent stage impact",
+      "kind": "impact",
+      "date": "1971-08-03",
+      "machineId": null,
+      "latitudeDeg": 26.36,
+      "longitudeDegEast": 0.25,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Coordinates estimated from seismic data in Toksoz et al., 1974, see Orloff, 2000; Wagner et al., 2017.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 15 LM ascent stage | Impact | 3 August 1971 | 26.36 N, 0.25 E | 26.36, 0.25 | m"
+    },
+    {
+      "id": "luna-18",
+      "name": "Luna 18 impact (unconfirmed)",
+      "kind": "impact",
+      "date": "1971-09-11",
+      "machineId": null,
+      "latitudeDeg": 3.76,
+      "longitudeDegEast": 56.66,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Unconfirmed, contact lost with Luna 18 during landing phase 100 meters above surface; object identified in LROC image M119482862R at given coordinates may be lander.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 18 | Impact | 11 September 1971 | 3.76 N, 56.66 E | 3.76, 56.66 | n"
+    },
+    {
+      "id": "luna-20",
+      "name": "Luna 20",
+      "kind": "sample-site",
+      "date": "1972-02-21",
+      "machineId": null,
+      "latitudeDeg": 3.7863,
+      "longitudeDegEast": 56.6242,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 20 | Soft Landing | 21 February 1972 | 3.7863 N, 56.6242 E | 3.7863, 56.6242 | d"
+    },
+    {
+      "id": "apollo-16-sivb",
+      "name": "Apollo 16 S-IVB impact",
+      "kind": "impact",
+      "date": "1972-04-19",
+      "machineId": null,
+      "latitudeDeg": 1.921,
+      "longitudeDegEast": 335.377,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 16 S-IVB | Impact | 19 April 1972 | 1.9210 N, 24.6230 W | 1.9210, 335.3770 | d"
+    },
+    {
+      "id": "apollo-16",
+      "name": "Apollo 16 (Descartes)",
+      "kind": "lander",
+      "date": "1972-04-21",
+      "machineId": null,
+      "latitudeDeg": -8.9734,
+      "longitudeDegEast": 15.5011,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 16 LM descent stage | Crewed Landing | 21 April 1972 | 8.9734 S, 15.5011 E | -8.9734, 15.5011 | d"
+    },
+    {
+      "id": "apollo-16-subsatellite",
+      "name": "Apollo 16 subsatellite impact",
+      "kind": "impact",
+      "date": "1972-05-29",
+      "machineId": null,
+      "latitudeDeg": 10.16,
+      "longitudeDegEast": 111.9,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Ulivi and Harland, 2004.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 16 subsatellite | Impact | 29 May 1972 | 10.16 N, 111.9 E | 10.16, 111.9 | o"
+    },
+    {
+      "id": "apollo-17-sivb",
+      "name": "Apollo 17 S-IVB impact",
+      "kind": "impact",
+      "date": "1972-12-10",
+      "machineId": null,
+      "latitudeDeg": -4.1681,
+      "longitudeDegEast": 347.6693,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 17 S-IVB | Impact | 10 December 1972 | 4.1681 S, 12.3307 W | -4.1681, 347.6693 | d"
+    },
+    {
+      "id": "apollo-17",
+      "name": "Apollo 17 (Taurus-Littrow)",
+      "kind": "lander",
+      "date": "1972-12-11",
+      "machineId": null,
+      "latitudeDeg": 20.1911,
+      "longitudeDegEast": 30.7723,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 17 LM descent stage | Crewed Landing | 11 December 1972 | 20.1911 N, 30.7723 E | 20.1911, 30.7723 | d"
+    },
+    {
+      "id": "apollo-17-lm-ascent",
+      "name": "Apollo 17 LM ascent stage impact",
+      "kind": "impact",
+      "date": "1972-12-15",
+      "machineId": null,
+      "latitudeDeg": 19.97,
+      "longitudeDegEast": 30.49,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Coordinates estimated from seismic data in Toksoz et al., 1974, see Orloff, 2000; Wagner et al., 2017.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Apollo 17 LM ascent stage | Impact | 15 December 1972 | 19.97 N, 30.49 E | 19.97, 30.49 | m"
+    },
+    {
+      "id": "luna-21",
+      "name": "Luna 21 (Lunokhod 2 lander)",
+      "kind": "lander",
+      "date": "1973-01-15",
+      "machineId": null,
+      "latitudeDeg": 25.9994,
+      "longitudeDegEast": 30.4076,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 21 | Soft Landing | 15 January 1973 | 25.9994 N, 30.4076 E | 25.9994, 30.4076 | d"
+    },
+    {
+      "id": "lunokhod-2-final",
+      "name": "Lunokhod 2 final position",
+      "kind": "rover-traverse",
+      "date": "1973-01-15",
+      "machineId": null,
+      "latitudeDeg": 25.8323,
+      "longitudeDegEast": 30.9222,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Lunokhod 2 | Rover | 15 January 1973 | 25.8323 N, 30.9222 E | 25.8323, 30.9222 | d"
+    },
+    {
+      "id": "luna-23",
+      "name": "Luna 23",
+      "kind": "lander",
+      "date": "1974-11-06",
+      "machineId": null,
+      "latitudeDeg": 12.6667,
+      "longitudeDegEast": 62.1511,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 23 | Soft Landing | 6 November 1974 | 12.6667 N, 62.1511 E | 12.6667, 62.1511 | d"
+    },
+    {
+      "id": "luna-24",
+      "name": "Luna 24",
+      "kind": "sample-site",
+      "date": "1976-08-18",
+      "machineId": null,
+      "latitudeDeg": 12.7142,
+      "longitudeDegEast": 62.2129,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 24 | Soft Landing | 18 August 1976 | 12.7142 N, 62.2129 E | 12.7142, 62.2129 | d"
+    },
+    {
+      "id": "hiten",
+      "name": "Hiten impact",
+      "kind": "impact",
+      "date": "1993-04-10",
+      "machineId": null,
+      "latitudeDeg": -34.0,
+      "longitudeDegEast": 55.3,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Estimate from Uesugi, K., 1996. The same paper also lists an estimated impact point of 34.3 S, 55.6 E.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Hiten | Impact | 10 April 1993 | 34.0 S, 55.3 E | -34.0, 55.3 | q"
+    },
+    {
+      "id": "lunar-prospector",
+      "name": "Lunar Prospector impact",
+      "kind": "impact",
+      "date": "1999-07-31",
+      "machineId": null,
+      "latitudeDeg": -87.7,
+      "longitudeDegEast": 42.0,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Ulivi and Harland, 2004.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Lunar Prospector | Impact | 31 July 1999 | 87.7 S, 42.0 E | -87.7, 42.0 | o"
+    },
+    {
+      "id": "smart-1",
+      "name": "SMART-1 impact",
+      "kind": "impact",
+      "date": "2006-09-03",
+      "machineId": null,
+      "latitudeDeg": -34.4,
+      "longitudeDegEast": 313.8,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Burchell et al., 2015.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "SMART-1 | Impact | 3 September 2006 | 34.4 S, 46.2 W | -34.4, 313.8 | s"
+    },
+    {
+      "id": "chandrayaan-1-mip",
+      "name": "Chandrayaan-1 Moon Impact Probe (Shackleton, estimate)",
+      "kind": "impact",
+      "date": "2008-11-14",
+      "machineId": null,
+      "latitudeDeg": -89.0,
+      "longitudeDegEast": 330.0,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Impacted in Shackleton crater near south pole, exact coordinates unknown, estimate from Sridharan et al., 2010.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Chandraya'an 1 MIP | Impact | 14 November 2008 | 89 S, 30 W | -89., 330. | t"
+    },
+    {
+      "id": "kaguya-okina",
+      "name": "Kaguya relay satellite Okina impact",
+      "kind": "impact",
+      "date": "2009-02-12",
+      "machineId": null,
+      "latitudeDeg": 28.213,
+      "longitudeDegEast": 200.967,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "JAXA, Selene status, 18 February 2009.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Okina | Impact | 12 February 2009 | 28.213 N, 159.033 W | 28.213, 200.967 | u"
+    },
+    {
+      "id": "change-1",
+      "name": "Chang'e 1 impact",
+      "kind": "impact",
+      "date": "2009-03-01",
+      "machineId": null,
+      "latitudeDeg": -1.5,
+      "longitudeDegEast": 52.36,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Xinhua News Agency, 2009. Given as 1.66 S, 52.27 E in Siddiqi (2018).",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Chang'e 1 | Impact | 1 March 2009 | 1.50 S, 52.36 E | -1.50, 52.36 | w"
+    },
+    {
+      "id": "kaguya",
+      "name": "Kaguya (SELENE) impact",
+      "kind": "impact",
+      "date": "2009-06-10",
+      "machineId": null,
+      "latitudeDeg": -65.5,
+      "longitudeDegEast": 80.4,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "JAXA, 2009. Press release.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Kaguya | Impact | 10 June 2009 | 65.5 S, 80.4 E | -65.5, 80.4 | x"
+    },
+    {
+      "id": "lcross-centaur",
+      "name": "LCROSS Centaur impact (Cabeus)",
+      "kind": "impact",
+      "date": "2009-10-09",
+      "machineId": null,
+      "latitudeDeg": -84.6796,
+      "longitudeDegEast": 311.2907,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Marshall et al., 2012, LCROSS and LCROSS Centaur impacted in permanently shadowed Cabeus crater, not easily observable.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "LCROSS Centaur | Impact | 9 October 2009 | 84.6796 S, 48.7093 W | -84.6796, 311.2907 | y"
+    },
+    {
+      "id": "lcross",
+      "name": "LCROSS shepherding spacecraft impact (Cabeus)",
+      "kind": "impact",
+      "date": "2009-10-09",
+      "machineId": null,
+      "latitudeDeg": -84.719,
+      "longitudeDegEast": 310.39,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Marshall et al., 2012, LCROSS and LCROSS Centaur impacted in permanently shadowed Cabeus crater, not easily observable.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "LCROSS spacecraft | Impact | 9 October 2009 | 84.719 S, 49.61 W | -84.719, 310.39 | y"
+    },
+    {
+      "id": "grail-a",
+      "name": "GRAIL A (Ebb) impact",
+      "kind": "impact",
+      "date": "2012-12-17",
+      "machineId": "grail-a",
+      "latitudeDeg": 75.6088,
+      "longitudeDegEast": 333.406,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "GRAIL A | Impact | 17 December 2012 | 75.6088 N, 26.5940 W | 75.6088, 333.4060 | d"
+    },
+    {
+      "id": "grail-b",
+      "name": "GRAIL B (Flow) impact",
+      "kind": "impact",
+      "date": "2012-12-17",
+      "machineId": "grail-b",
+      "latitudeDeg": 75.6508,
+      "longitudeDegEast": 333.1659,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "GRAIL B | Impact | 17 December 2012 | 75.6508 N, 26.8341 W | 75.6508, 333.1659 | d"
+    },
+    {
+      "id": "change-3",
+      "name": "Chang'e 3 (Guang Han Gong)",
+      "kind": "lander",
+      "date": "2013-12-14",
+      "machineId": null,
+      "latitudeDeg": 44.1214,
+      "longitudeDegEast": 340.4883,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": {
+        "name": "Guang Han Gong",
+        "authority": "IAU",
+        "gazetteerFeatureId": 15415
+      },
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Chang'e 3 | Soft Landing | 14 December 2013 | 44.1214 N, 19.5117 W | 44.1214, 340.4883 | d"
+    },
+    {
+      "id": "yutu-final",
+      "name": "Yutu rover final position",
+      "kind": "rover-traverse",
+      "date": "2013-12-14",
+      "machineId": null,
+      "latitudeDeg": 44.1208,
+      "longitudeDegEast": 340.4878,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Yutu Rover | Soft Landing | 14 December 2013 | 44.1208 N, 19.5122 W | 44.1208, 340.4878 | d"
+    },
+    {
+      "id": "ladee",
+      "name": "LADEE impact",
+      "kind": "impact",
+      "date": "2014-04-18",
+      "machineId": null,
+      "latitudeDeg": 11.8494,
+      "longitudeDegEast": 266.7506,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "LADEE | Impact | 18 April 2014 | 11.8494 N, 93.2494 W | 11.8494, 266.7506 | d"
+    },
+    {
+      "id": "change-4",
+      "name": "Chang'e 4 (Statio Tianhe)",
+      "kind": "lander",
+      "date": "2019-01-03",
+      "machineId": null,
+      "latitudeDeg": -45.4561,
+      "longitudeDegEast": 177.5885,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": {
+        "name": "Statio Tianhe",
+        "authority": "IAU",
+        "gazetteerFeatureId": 15781
+      },
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Chang'e 4 | Soft Landing | 3 January 2019 | 45.4561 S, 177.5885 E | -45.4561, 177.5885 | d"
+    },
+    {
+      "id": "yutu-2-landing",
+      "name": "Yutu-2 rover (position at deployment; traverse ongoing)",
+      "kind": "rover-traverse",
+      "date": "2019-01-03",
+      "machineId": null,
+      "latitudeDeg": -45.46,
+      "longitudeDegEast": 177.59,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Yutu 2 rover still mobile as of January 2023, approximately 850 m northwest of Chang'e 4, final coordinates TBD.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Yutu 2 | Soft Landing | 3 January 2019 | 45.46 S, 177.59 E | -45.46, 177.59 | z"
+    },
+    {
+      "id": "beresheet",
+      "name": "Beresheet impact",
+      "kind": "impact",
+      "date": "2019-04-11",
+      "machineId": null,
+      "latitudeDeg": 32.5956,
+      "longitudeDegEast": 19.3496,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Beresheet | Impact | 11 April 2019 | 32.5956 N, 19.3496 E | 32.5956, 19.3496 | d"
+    },
+    {
+      "id": "longjiang-2",
+      "name": "Longjiang-2 impact",
+      "kind": "impact",
+      "date": "2019-07-31",
+      "machineId": null,
+      "latitudeDeg": 16.6956,
+      "longitudeDegEast": 159.517,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Longjiang 2 | Impact | 31 July 2019 | 16.6956 N, 159.5170 E | 16.6956, 159.5170 | d"
+    },
+    {
+      "id": "chandrayaan-2-vikram",
+      "name": "Chandrayaan-2 Vikram impact",
+      "kind": "impact",
+      "date": "2019-09-06",
+      "machineId": null,
+      "latitudeDeg": -70.881,
+      "longitudeDegEast": 22.784,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Vikram | Impact | 6 September 2019 | 70.8810 S, 22.7840 E | -70.8810, 22.7840 | d"
+    },
+    {
+      "id": "change-5",
+      "name": "Chang'e 5 (Statio Tianchuan)",
+      "kind": "sample-site",
+      "date": "2020-12-01",
+      "machineId": null,
+      "latitudeDeg": 43.0576,
+      "longitudeDegEast": 308.0839,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": {
+        "name": "Statio Tianchuan",
+        "authority": "IAU",
+        "gazetteerFeatureId": 15994
+      },
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Chang'e 5 | Soft Landing | 1 December 2020 | 43.0576 N, 51.9161 W | 43.0576, 308.0839 | d"
+    },
+    {
+      "id": "change-5-t1-booster",
+      "name": "Chang'e 5-T1 booster impact (double crater)",
+      "kind": "impact",
+      "date": "2022-03-04",
+      "machineId": null,
+      "latitudeDeg": 5.226,
+      "longitudeDegEast": 234.486,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "An object, considered most likely to be the booster stage of the Chang'e 5-T1, impacted the far side of the Moon on 4 March 2022 (NASA, 2022), double crater imaged by LROC camera.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Chang'e 5-T1 Booster | Impact | 4 March 2022 | 5.226 N, 234.486 E | 5.226, 234.486 | bb"
+    },
+    {
+      "id": "hakuto-r-m1",
+      "name": "Hakuto-R Mission 1 impact",
+      "kind": "impact",
+      "date": "2023-04-25",
+      "machineId": null,
+      "latitudeDeg": 47.581,
+      "longitudeDegEast": 44.094,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Hakuto-R Mission 1 | Impact | 25 April 2023 | 47.581 N, 44.094 E | 47.581, 44.094 | d"
+    },
+    {
+      "id": "luna-25",
+      "name": "Luna 25 impact",
+      "kind": "impact",
+      "date": "2023-08-19",
+      "machineId": null,
+      "latitudeDeg": -57.865,
+      "longitudeDegEast": 61.36,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Luna 25 | Impact | 19 August 2023 | 57.865 S, 61.360 E | -57.865, 61.360 | d"
+    },
+    {
+      "id": "chandrayaan-3",
+      "name": "Chandrayaan-3 Vikram (Statio Shiv Shakti)",
+      "kind": "lander",
+      "date": "2023-08-23",
+      "machineId": null,
+      "latitudeDeg": -69.3741,
+      "longitudeDegEast": 32.32,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": {
+        "name": "Statio Shiv Shakti",
+        "authority": "IAU",
+        "gazetteerFeatureId": 16272
+      },
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Chandrayaan 3 | Lander | 23 August 2023 | 69.3741 S, 32.32 E | -69.3741, 32.32 | d"
+    },
+    {
+      "id": "slim",
+      "name": "SLIM (near Shioli crater)",
+      "kind": "lander",
+      "date": "2024-01-19",
+      "machineId": null,
+      "latitudeDeg": -13.316,
+      "longitudeDegEast": 25.251,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "SLIM | Lander | 19 January 2024 | 13.3160 S, 25.2510 E | -13.3160, 25.2510 | d"
+    },
+    {
+      "id": "im-1-odysseus",
+      "name": "Intuitive Machines IM-1 Odysseus",
+      "kind": "lander",
+      "date": "2024-02-22",
+      "machineId": null,
+      "latitudeDeg": -80.13,
+      "longitudeDegEast": 1.44,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Odysseus (IM-1) | Lander | 22 February 2024 | 80.13 S, 1.44 E | -80.13, 1.44 | d"
+    },
+    {
+      "id": "change-6",
+      "name": "Chang'e 6 (Statio Tianjiang)",
+      "kind": "sample-site",
+      "date": "2024-06-01",
+      "machineId": null,
+      "latitudeDeg": -41.6385,
+      "longitudeDegEast": 206.0148,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": {
+        "name": "Statio Tianjiang",
+        "authority": "IAU",
+        "gazetteerFeatureId": 16328
+      },
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Chang'e 6 | Lander | 1 June 2024 | 41.6385 S, 153.9852 W | -41.6385, 206.0148 | d"
+    },
+    {
+      "id": "blue-ghost-m1",
+      "name": "Firefly Blue Ghost Mission 1",
+      "kind": "lander",
+      "date": "2025-03-02",
+      "machineId": null,
+      "latitudeDeg": 18.562,
+      "longitudeDegEast": 61.81,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Blue Ghost 1 | Lander | 2 March 2025 | 18.562 N, 61.810 E | 18.562, 61.810 | d"
+    },
+    {
+      "id": "im-2-athena",
+      "name": "Intuitive Machines IM-2 Athena",
+      "kind": "lander",
+      "date": "2025-03-06",
+      "machineId": null,
+      "latitudeDeg": -84.7906,
+      "longitudeDegEast": 29.1957,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Intuitive Machines 2 | Lander | 6 March 2025 | 84.7906 S, 29.1957 E | -84.7906, 29.1957 | d"
+    },
+    {
+      "id": "hakuto-r-m2-resilience",
+      "name": "Hakuto-R Mission 2 Resilience impact",
+      "kind": "impact",
+      "date": "2025-06-05",
+      "machineId": null,
+      "latitudeDeg": 60.4445,
+      "longitudeDegEast": 355.412,
+      "coordinateNote": "NSSDCA table column 'Latitude, Longitude (N, E Positive)'; DE 421 mean Earth/polar axis reference frame (Williams et al., 2008); precision of the coordinates reflects the precision of knowledge (0.001 deg is about 30 m). Latitude as stated: planetocentric (Moon treated as a sphere in the ME/PA frame, so planetocentric and planetographic coincide).",
+      "precisionNote": "Object or impact imaged on surface by Lunar Reconnaissance Orbiter Camera (LROC), see LROC, 2016 and LROC, 2024.",
+      "naming": null,
+      "source": {
+        "title": "NSSDCA: Table of Anthropogenic Impacts and Spacecraft on the Moon",
+        "url": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_artifact_impacts.html",
+        "publisher": "NASA NSSDCA (curator D. R. Williams)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Hakuto-R Mission 2 | Impact | 5 June 2025 | 60.4445 N, 4.588 W | 60.4445, 355.412 | d"
+    },
+    {
+      "id": "apollo-15-lrv",
+      "name": "Apollo 15 Lunar Roving Vehicle (final parking position)",
+      "kind": "rover-traverse",
+      "date": "1971-08-02",
+      "machineId": null,
+      "latitudeDeg": 26.13174,
+      "longitudeDegEast": 3.63803,
+      "coordinateNote": "LROC 2016 table, mean Earth/polar axis (ME) system; uncertainty 0.5 m (table column). Latitude as stated: planetocentric (ME system).",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "LROC: Spacecraft Related Coordinates - 2016 Update",
+        "url": "https://www.lroc.asu.edu/posts/938",
+        "publisher": "Lunar Reconnaissance Orbiter Camera team, Arizona State University (NASA/GSFC/ASU)",
+        "rights": {
+          "statement": "LROC web content is credited NASA/GSFC/Arizona State University; the coordinates derive from NASA LRO data. No separate licence statement was found on the post; treated as NASA-funded public information.",
+          "evidenceUrl": "https://www.lroc.asu.edu/posts/938"
+        }
+      },
+      "quote": "Apollo 15 LRV | 26.13174 | 3.63803 | -1928 | 0.5"
+    },
+    {
+      "id": "apollo-16-lrv",
+      "name": "Apollo 16 Lunar Roving Vehicle (final parking position)",
+      "kind": "rover-traverse",
+      "date": "1972-04-23",
+      "machineId": null,
+      "latitudeDeg": -8.9729,
+      "longitudeDegEast": 15.5037,
+      "coordinateNote": "LROC 2016 table, mean Earth/polar axis (ME) system; uncertainty 3.7 m (table column). Latitude as stated: planetocentric (ME system).",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "LROC: Spacecraft Related Coordinates - 2016 Update",
+        "url": "https://www.lroc.asu.edu/posts/938",
+        "publisher": "Lunar Reconnaissance Orbiter Camera team, Arizona State University (NASA/GSFC/ASU)",
+        "rights": {
+          "statement": "LROC web content is credited NASA/GSFC/Arizona State University; the coordinates derive from NASA LRO data. No separate licence statement was found on the post; treated as NASA-funded public information.",
+          "evidenceUrl": "https://www.lroc.asu.edu/posts/938"
+        }
+      },
+      "quote": "Apollo 16 LRV | -8.9729 | 15.5037 | 10 | 3.7"
+    },
+    {
+      "id": "apollo-17-lrv",
+      "name": "Apollo 17 Lunar Roving Vehicle (final parking position)",
+      "kind": "rover-traverse",
+      "date": "1972-12-13",
+      "machineId": null,
+      "latitudeDeg": 20.1896,
+      "longitudeDegEast": 30.7769,
+      "coordinateNote": "LROC 2016 table, mean Earth/polar axis (ME) system; uncertainty 3.2 m (table column). Latitude as stated: planetocentric (ME system).",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "LROC: Spacecraft Related Coordinates - 2016 Update",
+        "url": "https://www.lroc.asu.edu/posts/938",
+        "publisher": "Lunar Reconnaissance Orbiter Camera team, Arizona State University (NASA/GSFC/ASU)",
+        "rights": {
+          "statement": "LROC web content is credited NASA/GSFC/Arizona State University; the coordinates derive from NASA LRO data. No separate licence statement was found on the post; treated as NASA-funded public information.",
+          "evidenceUrl": "https://www.lroc.asu.edu/posts/938"
+        }
+      },
+      "quote": "Apollo 17 LRV | 20.1896 | 30.7769 | -2628 | 3.2"
+    }
+  ],
+  "traverses": [
+    {
+      "id": "apollo-11-eva-traverse",
+      "name": "Apollo 11 EVA traverse (CDR/LMP paths)",
+      "machineId": null,
+      "date": "1969-07-20",
+      "source": {
+        "title": "LROC Apollo 11 spatio-temporal mapping dataset (full zip; contains APOLLO_11-1_CDR_PATHS / LMP_PATHS shapefiles)",
+        "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_11/APOLLO_11.ZIP",
+        "publisher": "NASA/GSFC/Arizona State University (LROC)",
+        "rights": {
+          "statement": "PDS archive extras (NASA LRO); NASA content not subject to copyright, credit NASA/GSFC/Arizona State University",
+          "evidenceUrl": "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_11"
+        }
+      },
+      "path": {
+        "file": "traverses/APOLLO_11.ZIP",
+        "format": "lroc-shapefile-zip",
+        "member": "APOLLO_11-1_CDR_PATHS"
+      }
+    },
+    {
+      "id": "apollo-12-eva-traverse",
+      "name": "Apollo 12 EVA 1-2 traverse (CDR/LMP paths)",
+      "machineId": null,
+      "date": "1969-11-19",
+      "source": {
+        "title": "LROC Apollo 12 spatio-temporal mapping dataset (full zip; contains APOLLO_12-1/2_CDR_PATHS / LMP_PATHS shapefiles)",
+        "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_12/APOLLO_12.ZIP",
+        "publisher": "NASA/GSFC/Arizona State University (LROC)",
+        "rights": {
+          "statement": "PDS archive extras (NASA LRO); NASA content not subject to copyright, credit NASA/GSFC/Arizona State University",
+          "evidenceUrl": "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_12"
+        }
+      },
+      "path": {
+        "file": "traverses/APOLLO_12.ZIP",
+        "format": "lroc-shapefile-zip",
+        "member": "APOLLO_12-1_CDR_PATHS"
+      }
+    }
+  ]
+}

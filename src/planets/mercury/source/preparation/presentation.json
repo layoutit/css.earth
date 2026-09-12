@@ -1,5 +1,9 @@
 {
   "schema": "cssearth-css-presentation-profile@1",
   "namespace": "mercury",
-  "mode": "row-bank-cutaway"
+  "mode": "row-bank-cutaway",
+  "textureLevels": {
+    "hysteresis": 0.2,
+    "texelsPerCssPixel": 2
+  }
 }

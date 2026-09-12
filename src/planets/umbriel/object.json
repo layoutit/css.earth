@@ -8,9 +8,14 @@
       "label": "Umbriel",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
@@ -21,14 +26,34 @@
       "schema": "cssearth-authored-object@1",
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "aec77ec2e1a287e54f454b9dde398cca4231ad17cbbe77752516f970e3afbc3c"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "ff1fe18bde6efe17b5e820a7a7f8969965fc853d59e8bc8b019c9be5c7f425ad"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "34cdf4e5cdad51bc33dac936369e4784a2c3c5298449fcb53d9d968ca12ed256"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "aa611e5d6a0e5a47fac3f0065de863b0ca343c18d0521bd223b853bab1fd9e7b"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "6e395c12a68d3e5cae9be3d9b6f1900f7b605849a6fcef4bf5bdcdd8f14e5a01"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "1fefac76013624994caaffff0efb92fe4e5e6e5960a312e6ec316a6e89f879f3"
+          "sha256": "f5fd068fb26185a5962ccdd66d47f5d690068e13e67ee53563113e66ea3a2801"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "31481c1a6bcba32d86352e14f5cd13e0fd8d7388f0acbe13e2b509a7616eb2f9"
         },
         {
           "id": "title",
@@ -43,7 +68,12 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "b31912981d1322cf8f5464e1fe4cf4cbffca185778573f8ddb563b5e83a02bf3"
+          "sha256": "831114299ba525bd094243d6d4d2d8a615f7d315e0eabfb10260f22211666b19"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "b0c1e58544c9c8e165641b9129f82fdba4bf5a83ec3456a425024c46d90f28e3"
         }
       ],
       "shape": {
@@ -53,7 +83,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -67,10 +97,14 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 12000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -101,11 +135,11 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/umbriel-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8199f8b699b694df8a56f369f5d6d6eb87f4e44b17334af3b79bdaee9bda3357"
+        "sha256": "07907dde35cdf2c91d1b4fbd93597c651f2ce74e43c5d6da723aed9f2b6c39cc"
       }
     },
     "catalog": {
@@ -122,8 +156,8 @@
     }
   },
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5cd086b7f623491f842cb51a0f3a7a68a08b28997502cb856762ec355475cbc1"
+    "sha256": "1c97f4d657142fa87b56d5741f0de7d40b580cf92e574b560adb3e53d2b25975"
   }
 }

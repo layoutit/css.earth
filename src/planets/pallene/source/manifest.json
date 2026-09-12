@@ -121,8 +121,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.IMG"
           }
@@ -164,8 +164,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.LBL"
           }
@@ -437,6 +437,12 @@
       "path": "survey/radial-error.json",
       "expectedBytes": 300,
       "expectedSha256": "27ffbc964efd12edd5a301b54cb593e5e8f7ed3e5d2447cb382d45d8600da4b1"
+    },
+    {
+      "path": "survey/registration-attempt-2026-09-10.json",
+      "expectedBytes": 1743,
+      "expectedSha256": "ceb946de0fdbc3a5751106493e5737379271b0f2424c72b66e0edf069a406a90",
+      "purpose": "Direct source-level check of whether the selected Pallene image contains an independent surface control suitable for image-to-shape registration."
     }
   ],
   "generatedIntermediates": [

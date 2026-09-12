@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "2053",
+      "item": "Q4176592",
+      "title": "Gaea (crater)",
+      "url": "https://en.wikipedia.org/wiki/Gaea_(crater)",
+      "revision": "1321287487",
+      "extract": "Gaea is an impact crater on Amalthea, one of the small moons of Jupiter. It is 75 km wide and at least 10–20 km deep. Its center coordinates are -80°S, 90°W. One of two named craters on Amalthea, it is named after the Greek goddess Gaia."
+    },
+    {
+      "id": "2646",
+      "item": "Q624430",
+      "title": "Ida Facula",
+      "url": "https://en.wikipedia.org/wiki/Ida_Facula",
+      "revision": "1330086454",
+      "extract": "Ida Facula is a bright mountain on Amalthea, one of Jupiter's smallest moons. It is known to be about 15 kilometers in width, somewhat smaller than the neighboring mountain Lyctos Facula. It was discovered by Voyager 1 in 1979 and in the same year named for Mount Ida, a mountain in Crete where Zeus played as a child."
+    },
+    {
+      "id": "3528",
+      "item": "Q624434",
+      "title": "Lyctos Facula",
+      "url": "https://en.wikipedia.org/wiki/Lyctos_Facula",
+      "revision": "1330086842",
+      "extract": "Lyctos Facula is a bright mountain on one of Jupiter's smallest moons Amalthea. It is believed to have a width of 25 kilometers and height of 20 kilometers, almost two and a half times higher than Mount Everest . It is one of two named faculae that appear on Amalthea, the other being Ida Facula."
+    },
+    {
+      "id": "4569",
+      "item": "Q4179801",
+      "title": "Pan (crater)",
+      "url": "https://en.wikipedia.org/wiki/Pan_(crater)",
+      "revision": "1322355854",
+      "extract": "Pan is the largest crater on Jupiter's moon Amalthea. It is 89±4 kilometers across and at least 8 kilometers deep, with its center's coordinates being 30°N, 30°W. It is named after Pan, the Greek god of shepherds and the countryside, or the son of Amalthea and Hermes in some legends."
+    }
+  ]
+}

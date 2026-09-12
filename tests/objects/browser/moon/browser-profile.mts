@@ -1,7 +1,6 @@
-import { readPreparedFixture } from '../../fixtures.mts';
-const objectControls = await readPreparedFixture('moon', 'controls');
-import { browserProfileLensIds, createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
-
+import { createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
+import { readPreparedFixture } from "../../fixtures.mts";
+const objectControls = await readPreparedFixture("moon", "controls");
 
 export const browserProfile = createObjectBrowserProfile({
   id: "moon", controls: objectControls,
@@ -12,16 +11,12 @@ export const browserProfile = createObjectBrowserProfile({
         two: "/scenes/moon/moon-surface@2x.webp",
       }),
       Object.freeze({
-        one: "/scenes/moon/moon-surface-poles.webp",
-        two: "/scenes/moon/moon-surface-poles@2x.webp",
+        one: "/scenes/moon/moon-poles-surface.webp",
+        two: "/scenes/moon/moon-poles-surface@2x.webp",
       }),
       Object.freeze({
-        one: "/scenes/moon/moon-curvature.webp",
-        two: "/scenes/moon/moon-curvature@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/moon/moon-starfield-front-standard.webp",
-        two: "/scenes/moon/moon-starfield-front-standard@2x.webp",
+        one: "/scenes/moon/moon-starfield-front.webp",
+        two: "/scenes/moon/moon-starfield-front@2x.webp",
       }),
       Object.freeze({
         one: "/scenes/moon/moon-directional-sun.webp",
@@ -36,7 +31,7 @@ export const browserProfile = createObjectBrowserProfile({
       preReadyDisabled: true,
     }),
     retained: Object.freeze({
-      lensIds: Object.freeze(browserProfileLensIds(objectControls)),
+      lensIds: Object.freeze(["surface", "midnight-temperature", "heat-anomalies", "rock-abundance", "topography", "crust", "silicate-signature", "geology"]),
       speedClicks: 5,
       allowedMountSelectors: Object.freeze([]),
     }),

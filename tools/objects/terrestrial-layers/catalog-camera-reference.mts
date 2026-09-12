@@ -6,7 +6,7 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import {loadCameraShape,resolveCatalogCamera,controlledShapeCamera} from './shape-camera-mosaic.mts';
-import {readFitsPrimary} from '../static-surface/fits-map.mts';
+import {readFitsPrimary} from '../observation/fits.mts';
 
 const [sourceArg,outputArg,frameId]=process.argv.slice(2);
 if (!sourceArg || !outputArg || (process.argv.length < 4 || process.argv.length > 5)) throw new TypeError('Usage: catalog-camera-reference.mts <source-directory> <output> [frame-id]');

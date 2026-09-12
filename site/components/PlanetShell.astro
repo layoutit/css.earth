@@ -4,11 +4,13 @@ import PlanetInformationPanel from "./PlanetInformationPanel.astro";
 import PreparedFocusLenses from "./PreparedFocusLenses.astro";
 import type { Props } from "../planet-shell-types";
 import { OBJECTS } from "../objects.mts";
+import { objectClassificationLabel } from "../planet-search-objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "../scene-contract.mts";
-import { sceneSources } from "../scene-sources.mts";
+import { sceneSources, sceneSourceGroups } from "../scene-sources.mts";
 import PlanetObjectResults from "./PlanetObjectResults.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
+import GitHubIcon from "./GitHubIcon.astro";
 import ExplorerRail from "./ExplorerRail.astro";
 import CssEarthWordmark from "./CssEarthWordmark.astro";
 import PlanetCard from './PlanetCard.astro';
@@ -20,8 +22,8 @@ import PlanetNavigationMarker from './PlanetNavigationMarker.astro';
 import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
 import overviewFacts from '../source/overview-facts.json';
 import planetarySystems from '../source/planetary-systems.json';
-import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
 import { temperatureColor } from '../../src/preparation/stars/color.ts';
+import featureIndex from '../prepared-feature-index.json' with { type: 'json' };
 
 declare const __CSSEARTH_VERSION__: string;
 
@@ -32,6 +34,7 @@ const {
   lenses,
   settings,
   destinations,
+  features,
   navigation = false,
 } = Astro.props;
 requireObjectControls({ lenses, settings }, objectId);
@@ -54,11 +57,18 @@ const activeObject = OBJECTS.find((object) => object.id === objectId);
 const systemStar = OBJECTS.find(object => object.classification === 'star' && object.distanceAu === 0)!;
 const unavailableSystems = planetarySystems.unavailable.map(system => ({
   ...system,
-  markerStyle: `--planet-size:${PREPARED_NAVIGATION_MARKERS[systemStar.id].presentation.size * system.radiusSolar}px;--planet-color:rgb(${temperatureColor(system.temperatureK).join(' ')})`,
+  markerColor: `rgb(${temperatureColor(system.temperatureK).join(' ')})`,
 }));
 const sources = sceneSources(resources);
+// One footer entry per provider name, so a shared name is printed once.
+const sourceGroups = sceneSourceGroups(sources);
 const hasResources = sources.length > 0;
-const searchPlaceholder = `Search ${OBJECTS.length} planets, moons, comets, asteroids...`;
+const searchPlaceholder = `Search ${OBJECTS.length} celestial bodies...`;
+// Each pill types the plural classification query the search already understands.
+const searchCategories = ([
+  ['planet', 'public'], ['satellite', 'moon_stars'], ['comet', 'motion_blur'], ['asteroid', 'grain'],
+] as const).map(([classification, icon]) =>
+  ({ classification, icon, label: `${objectClassificationLabel(classification)}s` }));
 ---
 
 <header class="explorer-shell-header">
@@ -66,15 +76,7 @@ const searchPlaceholder = `Search ${OBJECTS.length} planets, moons, comets, aste
     <div class="explorer-shell-wordmark">
       <CssEarthWordmark />
     </div>
-    <div class="planet-project-links" role="group" aria-label="App and project actions">
-      <button class="planet-toolbar-action planet-settings-action" type="button" hidden
-        aria-label="Settings" title="Settings" aria-controls={`${objectId}-settings`} aria-pressed="false">
-        <MaterialSymbol name="settings" />
-      </button>
-      <a class="planet-github-link" title="GitHub" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer">
-        <span>v{__CSSEARTH_VERSION__}</span>
-      </a>
-    </div>
+    <a class="explorer-brand-version" title="GitHub" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer">v{__CSSEARTH_VERSION__}</a>
   </div>
   <div class="planet-search-toolbar">
     <ExplorerRail objectId={objectId} />
@@ -97,118 +99,36 @@ const searchPlaceholder = `Search ${OBJECTS.length} planets, moons, comets, aste
           <MaterialSymbol name="search" />
         </span>
       </button>
+      <button class="planet-sidebar-search-clear" type="button" aria-label="Clear search" title="Clear search">
+        <MaterialSymbol name="close" />
+      </button>
     </div>
+  </div>
+  <div class="planet-search-categories" role="group" aria-label="Browse by type">
+    {searchCategories.map(category => <button
+      class="planet-search-category"
+      type="button"
+      data-search-query={category.label}
+      data-search-classification={category.classification}
+      aria-pressed="false"
+    ><MaterialSymbol name={category.icon} /><span>{category.label}</span></button>)}
+  </div>
+  <div class="planet-header-actions" role="group" aria-label="App actions">
+    <a class="planet-header-link" href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+      <GitHubIcon />
+    </a>
+    <button class="planet-header-action planet-settings-action" type="button"
+      aria-label="Settings" title="Settings" aria-controls={`${objectId}-settings`} aria-pressed="false">
+      <MaterialSymbol name="settings" />
+    </button>
+    <button class="planet-header-action planet-machine-toggle" type="button" disabled
+      aria-pressed="false" aria-label="Machines" title="Machines">
+      <MaterialSymbol name="satellite_alt" />
+    </button>
   </div>
 </header>
-<div class="planet-dataset-context-dock"><aside class="planet-dataset-context-rail" aria-label="Selected dataset context" hidden></aside></div>
-<div class="planet-sidebar-frame">
-<aside id={`${objectId}-sidebar`} class="planet-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Planet information">
-  <section class="explorer-about-panel" id={`${objectId}-about`} aria-labelledby={`${objectId}-about-title`} hidden>
-    <h2 id={`${objectId}-about-title`}>About</h2>
-    <div class="explorer-about-content">
-      <div class="explorer-about-introduction">
-        <p>A 3D CSS planetary explorer. cssEarth renders planets as real HTML and CSS 3D geometry through <a href="https://github.com/LayoutitStudio/polycss">PolyCSS</a>, without a WebGL or canvas scene renderer.</p>
-        <p>It preprocesses planetary data into browser-ready textures, charts, and retained scene plans, then lets you orbit and inspect one planet at a time.</p>
-      </div>
-      <div class="explorer-about-links" aria-label="About details">
-        <div class="explorer-about-row">
-          <span>Version</span>
-          <span class="explorer-about-link-destination">v{__CSSEARTH_VERSION__}</span>
-        </div>
-        <a class="explorer-about-row explorer-about-link" href="https://github.com/layoutit/cssEarth">
-          <span>Source code</span>
-          <span class="explorer-about-link-destination">github.com/layoutit/cssEarth</span>
-        </a>
-        <a class="explorer-about-row explorer-about-link" href="mailto:agustin@lowpoly.gg">
-          <span>Contact</span>
-          <span class="explorer-about-link-destination">agustin@lowpoly.gg</span>
-        </a>
-      </div>
-    </div>
-  </section>
-  <div class="planet-drawer-content" id={`${objectId}-information`}>
-    <button class="planet-sheet-handle" type="button" aria-label="Resize information sheet" aria-expanded="false"></button>
-    <nav
-      id={`${objectId}-object-browser`}
-      class="planet-object-browser maps-object-results"
-      aria-label="Planets"
-      hidden
-    >
-      {!navigation && <><PlanetCard data-prepared-focus-card hidden>
-        <section class="planet-selected-panel">
-          <div class="planet-title-row">
-            <h1 class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-focus-name></h1>
-            <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-focus-status></span></div>
-          </div>
-          <p class="planet-introduction" data-focus-aliases hidden></p>
-        </section>
-        <PreparedFocusLenses />
-        <PlanetAccordion title="Factsheet" open>
-          <div class="planet-factsheet-body"><div class="planet-facts"><ul class="planet-primary-facts">
-            {[['distance', 'Distance from Sun'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
-              <li><span class="planet-fact-label">{label}</span><span class="planet-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
-          </ul></div></div>
-          <p class="planet-introduction" data-focus-basis></p>
-          <p class="planet-introduction" data-focus-reference></p>
-          <div class="planet-resources-links">
-            {Array.from({ length: 3 }, () => <a class="planet-resource-row" data-focus-source target="_blank" rel="noreferrer" hidden></a>)}
-          </div>
-        </PlanetAccordion>
-      </PlanetCard>
-      <PlanetCard class="planet-galactic-overview" data-galactic-overview hidden>
-        <PlanetCardHeader title={OVERVIEW_TITLES['milky-way']}
-          introduction="Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.">
-          <PlanetBreadcrumbs scope="milky-way" />
-        </PlanetCardHeader>
-        <PlanetFactsheet id={`${objectId}-milky-way`} facts={overviewFacts['milky-way'].facts} />
-        <PlanetAccordion title="Planetary systems" count={1 + unavailableSystems.length} open>
-          <ul class="planet-object-list">
-            <li>
-              <a class="planet-object-link" href={`${systemStar.route}?overview=solar-system`} data-browse-solar-system aria-label="Browse Solar System">
-                <PlanetNavigationMarker planetId={systemStar.id} color={systemStar.color} />
-                <span class="planet-object-name">Solar System</span>
-              </a>
-            </li>
-            {unavailableSystems.map(system => <li>
-              <span class="planet-object-link" role="link" aria-disabled="true" title="Not available yet">
-                <span class="planet-navigation-marker" style={system.markerStyle} aria-hidden="true"><i></i></span>
-                <span class="planet-object-name">{system.name}</span>
-                <span class="planet-object-distance">
-                  <span class="planet-object-distance-value">≈{system.distanceLy}</span>{" "}
-                  <span class="planet-object-distance-unit">ly</span>
-                </span>
-              </span>
-            </li>)}
-          </ul>
-        </PlanetAccordion>
-      </PlanetCard>
-      <PlanetCard data-solar-system-results>
-        <PlanetCardHeader title={OVERVIEW_TITLES['solar-system']}
-          introduction="The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.">
-          <PlanetBreadcrumbs scope="solar-system" />
-        </PlanetCardHeader>
-        <PlanetObjectResults activeObjectId={objectId} />
-      </PlanetCard>
-      {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
-        <p class="planet-destination-hint" role="status"></p>
-        <ul class="planet-destination-list">
-          {Array.from({ length: 8 }, () => <li hidden>
-            <button class="planet-destination-result" type="button">
-              <span class="planet-destination-result-name"></span>
-              <span class="planet-destination-result-context"></span>
-            </button>
-          </li>)}
-        </ul>
-      </section>}</>}
-    </nav>
-    {destinations && <section class="planet-destination-panel" aria-label="Selected city" hidden>
-      <button class="planet-destination-back" type="button">← Back to {activeObject?.name}</button>
-      <h2 class="planet-destination-name"></h2>
-      <p class="planet-destination-context"></p>
-      <p class="planet-destination-status" role="status"></p>
-    </section>}
-    <PlanetInformationPanel {...Astro.props} />
-  </div>
+<div class="planet-dataset-context-dock">
+<aside class="planet-dataset-context-rail" aria-label="Selected dataset context" hidden></aside>
 <section
   id={`${objectId}-settings`}
   class="planet-settings-panel explorer-settings-panel"
@@ -262,14 +182,26 @@ const searchPlaceholder = `Search ${OBJECTS.length} planets, moons, comets, aste
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="planet-setting-control">
+      <input class="planet-asteroid-bodies-setting" type="checkbox" name="asteroidBodies" />
+      <span class="planet-setting-text">Asteroids</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
+    <label class="planet-setting-control">
       <input class="planet-asteroid-orbits-setting" type="checkbox" name="asteroidOrbits" />
-      <span class="planet-setting-text">Asteroids Orbits</span>
+      <span class="planet-setting-text">Asteroid orbits</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="planet-setting-control">
       <input class="planet-asteroid-labels-setting" type="checkbox" name="asteroidLabels" />
-      <span class="planet-setting-text">Asteroid Labels</span>
+      <span class="planet-setting-text">Asteroid labels</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
+    <label class="planet-setting-control">
+      <span class="planet-setting-text">Orbit lines</span>
+      <select class="planet-orbit-renderer-setting planet-setting-select" name="orbitRenderer">
+        <option value="strokes">SVG strokes</option>
+        <option value="bars">CSS chords</option>
+      </select>
     </label>
     {remainingSettings.map((setting) => setting.kind === "cycle" ? (
       <button class="planet-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`}>
@@ -282,8 +214,137 @@ const searchPlaceholder = `Search ${OBJECTS.length} planets, moons, comets, aste
         <span class="planet-setting-switch" aria-hidden="true"></span>
       </label>
       ))}
+  </div>
+</section>
+</div>
+<div class="planet-sidebar-frame">
+<aside id={`${objectId}-sidebar`} class="planet-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Planet information">
+  <section class="explorer-about-panel" id={`${objectId}-about`} aria-labelledby={`${objectId}-about-title`} hidden>
+    <h2 id={`${objectId}-about-title`}>About</h2>
+    <div class="explorer-about-content">
+      <div class="explorer-about-introduction">
+        <p>A 3D CSS planetary explorer. cssEarth renders planets as real HTML and CSS 3D geometry through <a href="https://github.com/LayoutitStudio/polycss">PolyCSS</a>, without a WebGL or canvas scene renderer.</p>
+        <p>It preprocesses planetary data into browser-ready textures, charts, and retained scene plans, then lets you orbit and inspect one planet at a time.</p>
       </div>
-    </section>
+      <div class="explorer-about-links" aria-label="About details">
+        <div class="explorer-about-row">
+          <span>Version</span>
+          <span class="explorer-about-link-destination">v{__CSSEARTH_VERSION__}</span>
+        </div>
+        <a class="explorer-about-row explorer-about-link" href="https://github.com/layoutit/cssEarth">
+          <span>Source code</span>
+          <span class="explorer-about-link-destination">github.com/layoutit/cssEarth</span>
+        </a>
+        <a class="explorer-about-row explorer-about-link" href="mailto:agustin@lowpoly.gg">
+          <span>Contact</span>
+          <span class="explorer-about-link-destination">agustin@lowpoly.gg</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <div class="planet-drawer-content" id={`${objectId}-information`}>
+    <button class="planet-sheet-handle" type="button" aria-label="Resize information sheet" aria-expanded="false"></button>
+    <nav
+      id={`${objectId}-object-browser`}
+      class="planet-object-browser maps-object-results"
+      aria-label="Planets"
+      hidden
+    >
+      {!navigation && <><PlanetCard data-prepared-focus-card hidden>
+        <section class="planet-selected-panel">
+          <div class="planet-title-row">
+            <p class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-focus-name></p>
+            <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-focus-status></span></div>
+          </div>
+          <p class="planet-introduction" data-focus-aliases hidden></p>
+        </section>
+        <PreparedFocusLenses />
+        <PlanetAccordion title="Factsheet" open>
+          <div class="planet-factsheet-body"><div class="planet-facts"><ul class="planet-primary-facts">
+            {[['distance', 'Distance from Sun'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
+              <li><span class="planet-fact-label">{label}</span><span class="planet-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
+          </ul></div></div>
+          <p class="planet-introduction" data-focus-basis></p>
+          <p class="planet-introduction" data-focus-reference></p>
+          <div class="planet-resources-links">
+            {Array.from({ length: 3 }, () => <a class="planet-resource-row" data-focus-source target="_blank" rel="noreferrer" hidden></a>)}
+          </div>
+        </PlanetAccordion>
+      </PlanetCard>
+      <PlanetCard class="planet-galactic-overview" data-galactic-overview hidden>
+        <PlanetCardHeader heading={false} title={OVERVIEW_TITLES['milky-way']}
+          introduction="Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.">
+          <PlanetBreadcrumbs scope="milky-way" />
+        </PlanetCardHeader>
+        <PlanetFactsheet id={`${objectId}-milky-way`} facts={overviewFacts['milky-way'].facts} />
+        <PlanetAccordion title="Planetary systems" count={1 + unavailableSystems.length} open>
+          <ul class="planet-object-list">
+            <li>
+              <a class="planet-object-link" href={`${systemStar.route}?overview=solar-system`} data-browse-solar-system aria-label="Browse Solar System">
+                <PlanetNavigationMarker planetId={systemStar.id} color={systemStar.color} />
+                <span class="planet-object-name">Solar System</span>
+              </a>
+            </li>
+            {unavailableSystems.map(system => <li>
+              <span class="planet-object-link" role="link" aria-disabled="true" title="Not available yet">
+                <PlanetNavigationMarker planetId={systemStar.id} color={system.markerColor} scale={system.radiusSolar} />
+                <span class="planet-object-name">{system.name}</span>
+                <span class="planet-object-distance">
+                  <span class="planet-object-distance-value">≈{system.distanceLy}</span>{" "}
+                  <span class="planet-object-distance-unit">ly</span>
+                </span>
+              </span>
+            </li>)}
+          </ul>
+        </PlanetAccordion>
+      </PlanetCard>
+      <PlanetCard data-solar-system-results>
+        <PlanetCardHeader heading={false} title={OVERVIEW_TITLES['solar-system']}
+          introduction="The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.">
+          <PlanetBreadcrumbs scope="solar-system" />
+        </PlanetCardHeader>
+        <PlanetObjectResults activeObjectId={objectId} />
+      </PlanetCard>
+      <section class="planet-feature-results" aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
+        <p class="planet-feature-hint planet-destination-hint" role="status"></p>
+        <ul class="planet-destination-list">
+          {Array.from({ length: 8 }, () => <li hidden>
+            <button class="planet-destination-result" type="button">
+              <span class="planet-destination-result-name"></span>
+              <span class="planet-destination-result-context"></span>
+            </button>
+          </li>)}
+        </ul>
+      </section>
+      {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
+        <p class="planet-destination-hint" role="status"></p>
+        <ul class="planet-destination-list">
+          {Array.from({ length: 8 }, () => <li hidden>
+            <button class="planet-destination-result" type="button">
+              <span class="planet-destination-result-name"></span>
+              <span class="planet-destination-result-context"></span>
+            </button>
+          </li>)}
+        </ul>
+      </section>}</>}
+    </nav>
+    {destinations && <section class="planet-destination-panel" aria-label="Selected city" hidden>
+      <button class="planet-destination-back" type="button">← Back to {activeObject?.name}</button>
+      <h2 class="planet-destination-name"></h2>
+      <p class="planet-destination-context"></p>
+      <p class="planet-destination-status" role="status"></p>
+    </section>}
+    <PlanetInformationPanel {...Astro.props} />
+    {!navigation && <template data-object-card-preview>
+      <section class="planet-selected-panel" data-card-preview>
+        <div class="planet-title-row">
+          <p class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-card-preview-name></p>
+          <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-card-preview-classification></span></div>
+        </div>
+        <p class="planet-introduction" data-card-preview-description></p>
+      </section>
+    </template>}
+  </div>
 </aside>
 </div>
 
@@ -293,23 +354,33 @@ const searchPlaceholder = `Search ${OBJECTS.length} planets, moons, comets, aste
   hidden={!hasResources}
   aria-label={`${title.label} and shared universe sources`}
 >
-  {sources.map((resource, index) => (
+  {sourceGroups.map((group, index) => (
     <>
-      {index > 0 && <span class="planet-attribution-separator" aria-hidden="true">·</span>}
-      <a
-        class="planet-attribution-link"
-        href={resource.href}
-        title={`${resource.role}: ${resource.description}`}
-        aria-label={`${resource.role}: ${resource.label}`}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <span class="planet-attribution-source">{resource.label}</span>
-      </a>
+      {index > 0 && <span class="planet-attribution-separator" aria-hidden="true">,</span>}
+      <span class="planet-attribution-group">
+        {group.provider && <span class="planet-attribution-provider">{group.provider}</span>}
+        {group.members.map((resource, member) => (
+          <>
+            {member > 0 && <span class="planet-attribution-group-separator" aria-hidden="true">,</span>}
+            <a
+              class="planet-attribution-link"
+              href={resource.href}
+              title={`${resource.role}: ${resource.description}`}
+              aria-label={`${resource.role}: ${resource.label}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="planet-attribution-source">{resource.part}</span>
+            </a>
+          </>
+        ))}
+      </span>
     </>
   ))}
 </nav>
     <div class="planet-view-readout" aria-label="View information">
+      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-motion-record" title="Record stage input; press again to stop and copy the recording">Record</button>}
+      {DIAGNOSTICS_ENABLED && <button type="button" class="planet-motion-script" title="Replay the recorded motion for tracing">Do motion</button>}
       {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
       <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
         <span>Epoch: <span data-view-date></span></span>

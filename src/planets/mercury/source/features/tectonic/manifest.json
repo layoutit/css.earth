@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-surface-features-source@1",
+  "source": "Klimczak, Byrne and Crane, A Global Tectonic Map of Mercury, version 2, Mendeley Data",
+  "snapshotDate": "2026-09-11",
+  "sourcePage": "https://data.mendeley.com/datasets/p43b9wttpj/2",
+  "license": "CC BY 4.0",
+  "licenseEvidence": "The Mendeley Data record for DOI 10.17632/p43b9wttpj.2 declares the Creative Commons Attribution 4.0 International licence.",
+  "qualification": "18,451 mapped fault traces (contractional landforms, extensional landforms and troughs) compiled from Byrne et al. 2014, Crane and Klimczak 2019, Byrne et al. 2018 and Klimczak et al. 2012, in Plate Carrée metres on a 2,440,000 m sphere. The traces carry no feature names; preparation associates them with Gazetteer names by their published extents.",
+  "inputs": [
+    {
+      "path": "global-tectonic-map.zip",
+      "origin": "https://data.mendeley.com/public-files/datasets/p43b9wttpj/files/cb3689ee-0937-4010-973c-6a79b053341f/file_downloaded",
+      "bytes": 6908708,
+      "sha256": "1df40ad95a5e8de90b6add4cb3d849f61697c78f872e3bf0bf46bb67234c2f7e"
+    }
+  ]
+}

@@ -189,8 +189,10 @@ if (!(input instanceof HTMLInputElement)) throw new Error("Expected HTMLInputEle
 
     const resources = await page.evaluate(() =>
       performance.getEntriesByType("resource").filter((entry): entry is PerformanceResourceTiming => entry instanceof PerformanceResourceTiming).map((entry) => entry.name));
+    // Mount decodes the prepared level-0 surface; @2x follows only when the
+    // projected silhouette needs it.
     assert.ok(resources.some((url) =>
-      url.endsWith("/scenes/mercury/mercury-surface-normal@2x.webp")));
+      url.endsWith("/scenes/mercury/mercury-surface-normal.jpg")));
     const expectedLightingDensity = "/scenes/mercury/mercury-lighting-2x-row-";
     const wrongLightingDensity = "/scenes/mercury/mercury-lighting-1x-row-";
     assert.ok(resources.some((url) => url.includes(expectedLightingDensity)));

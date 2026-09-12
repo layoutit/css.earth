@@ -1,4 +1,4 @@
-import { prepareSystemView } from './system-view.js';
+import { prepareGroupView, prepareSystemView } from './system-view.js';
 import type { PreparedSystemView, SystemViewPolicy } from './system-view.js';
 import { M_PER_AU } from '@cssearth/astronomy';
 import { prepareHyperbolicPath } from '../platform/prepare-hyperbolic-path.mts';
@@ -79,12 +79,14 @@ export interface PreparedWorldContext {
   readonly sky: { readonly sceneRegistration: string };
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: WorldContextFocus & { readonly positionM: Vector3; readonly radiusM: number; readonly systemView?: PreparedSystemView };
+  /** Each classification framed by its members' prepared positions, keyed by classification. */
+  readonly classificationViews?: Readonly<Record<string, PreparedSystemView>>;
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
     readonly systemView?: PreparedSystemView;
     readonly placement?: 'approximate';
     readonly orbit: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
       readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[];
-      readonly extentChords: readonly number[];
+      readonly extentChords: readonly number[]; readonly lod: PreparedOrbitLod;
       /** Open trajectories carry N-1 chords, an explicit epoch vertex and a finite display window. */
       readonly closed?: false; readonly bodyVertexIndex?: number; readonly displayExtentAu?: number;
       readonly trailModel?: 'finite-open-trajectory-constant-weight' } }[];
@@ -202,23 +204,83 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     const centerM = [0, 1, 2].map(axis => (Math.min(...endpoints.map(v => v[axis]!)) + Math.max(...endpoints.map(v => v[axis]!))) / 2) as unknown as Vector3;
     const bounds = freeze({ centerM: copy(centerM), radiusM: Math.max(...endpoints.map(vertex =>
       Math.hypot(...vertex.map((value, axis) => value - centerM[axis]!)))) * (1 + 8 * Number.EPSILON) });
+    const lod = prepareOrbitLod(verticesM, trail, path ? path.closed !== false : true, path?.bodyVertexIndex ?? 0);
     return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM,
-      orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, bounds, trail, activeChords, extentChords,
+      orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, bounds, trail, activeChords, extentChords, lod,
         ...(path ? { closed: path.closed, bodyVertexIndex: path.bodyVertexIndex, displayExtentAu: path.displayExtentAu, trailModel: path.trailModel } : {}) }) });
   });
   const focus = { ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM };
   // The root system frames its major planets, including the smaller terrestrial planets.
-  const focusView = systemViewPolicy === undefined ? undefined : prepareSystemView(focus,
-    bodies.filter(body => facts[body.id]?.classification === 'planet'), states,
+  const planets = bodies.filter(body => facts[body.id]?.classification === 'planet');
+  const focusView = systemViewPolicy === undefined ? undefined : prepareSystemView(focus, planets, states,
     { ...systemViewPolicy, minimumRadiusShare: 0 });
+  // Each classification frames the nearest 90% of its members from the root system's candidate
+  // angles, so a few distant outliers cannot shrink the rest. Every member is still highlighted.
+  const framedShare = .9, distance = (body: (typeof bodies)[number]) =>
+    Math.hypot(...body.positionM.map((value, axis) => value - focus.positionM[axis]!));
+  const classifications = [...new Set(bodies.flatMap(body => facts[body.id]?.classification ?? []))].sort();
+  const classificationViews = systemViewPolicy === undefined ? {} : Object.fromEntries(classifications.flatMap(classification => {
+    const members = bodies.filter(body => facts[body.id]?.classification === classification)
+      .sort((a, b) => distance(a) - distance(b) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+    const view = prepareGroupView(focus, planets, members.slice(0, Math.ceil(members.length * framedShare)), states,
+      { ...systemViewPolicy, minimumRadiusShare: 0 });
+    return view ? [[classification, view] as const] : [];
+  }));
   return freeze({ schema: 'cssearth-world-context@1',
     ...(Object.keys(orbitCenters).length ? { orbitCenters: freeze(Object.fromEntries(Object.entries(orbitCenters).map(([id, center]) =>
       [id, freeze({ positionM: copy(center.positionM), centerBodyId: center.centerBodyId })]))) } : {}),
     sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...focus, ...(focusView ? { systemView: focusView } : {}) }),
+    ...(Object.keys(classificationViews).length ? { classificationViews: freeze(classificationViews) } : {}),
     bodies: freeze(bodies.map(body => {
       const systemView = systemViewPolicy === undefined ? undefined : prepareSystemView(body, bodies, states, systemViewPolicy);
       return systemView ? freeze({ ...body, systemView }) : body;
     })), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
+}
+
+export interface PreparedOrbitLodLevel {
+  readonly vertexIndices: readonly number[]; readonly trail: readonly number[];
+  readonly activeChords: readonly number[]; readonly deviationM: number;
+}
+export interface PreparedOrbitLod {
+  readonly bounds: { readonly centerM: Vector3; readonly radiusM: number };
+  readonly levels: readonly PreparedOrbitLodLevel[];
+}
+
+// Coarser chord banks for small projections. Each level keeps every step-th
+// prepared vertex plus the body's own vertex (and an open path's end), averages
+// the trail weights it spans, and records its largest distance from the full
+// path. The runtime selects a level by projected error; it never derives one.
+const ORBIT_LOD_STEPS = [2, 4, 8] as const;
+function prepareOrbitLod(verticesM: readonly Vector3[], trail: readonly number[], closed: boolean, pinned: number): PreparedOrbitLod {
+  const count = verticesM.length;
+  const centerM = [0, 1, 2].map(axis => (Math.min(...verticesM.map(v => v[axis]!)) + Math.max(...verticesM.map(v => v[axis]!))) / 2) as unknown as Vector3;
+  const radiusM = Math.max(...verticesM.map(vertex => Math.hypot(...vertex.map((value, axis) => value - centerM[axis]!)))) * (1 + 8 * Number.EPSILON);
+  const levels = ORBIT_LOD_STEPS.map(step => {
+    const keep = new Set([0, pinned]);
+    for (let index = 0; index < count; index += step) keep.add(index);
+    if (!closed) keep.add(count - 1);
+    const vertexIndices = [...keep].sort((a, b) => a - b);
+    const chords = closed ? vertexIndices.length : vertexIndices.length - 1;
+    const weights: number[] = [];
+    let deviationM = 0;
+    for (let chord = 0; chord < chords; chord++) {
+      const from = vertexIndices[chord]!, to = chord + 1 < vertexIndices.length ? vertexIndices[chord + 1]! : count;
+      let sum = 0;
+      for (let index = from; index < to; index++) sum += trail[index]!;
+      weights.push(sum / (to - from));
+      const a = verticesM[from]!, b = verticesM[to % count]!;
+      for (let index = from + 1; index < to; index++) deviationM = Math.max(deviationM, distanceToSegment(verticesM[index]!, a, b));
+    }
+    return freeze({ vertexIndices: freeze(vertexIndices), trail: freeze(weights),
+      activeChords: freeze(weights.flatMap((weight, index) => weight > 0 ? [index] : [])), deviationM });
+  });
+  return freeze({ bounds: freeze({ centerM: copy(centerM), radiusM }), levels: freeze(levels) });
+}
+function distanceToSegment(point: Vector3, a: Vector3, b: Vector3): number {
+  const ab = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], ap = [point[0] - a[0], point[1] - a[1], point[2] - a[2]];
+  const length = ab[0]! ** 2 + ab[1]! ** 2 + ab[2]! ** 2;
+  const t = length > 0 ? Math.max(0, Math.min(1, (ap[0]! * ab[0]! + ap[1]! * ab[1]! + ap[2]! * ab[2]!) / length)) : 0;
+  return Math.hypot(ap[0]! - t * ab[0]!, ap[1]! - t * ab[1]!, ap[2]! - t * ab[2]!);
 }
 
 // Measurement can stop when the existing fade saturates. Visit separated

@@ -7,8 +7,17 @@
 | OSIRIS reflectance | WAC OI-filter `W20080905T183606461ID4DF17` and `W20080905T183630497ID4DF17`, 5 September 2008 at 18:36:22.008 and 18:36:46.044 UTC; 129/113 m per pixel. Acquisition illumination retained, with 1.29646 relative display gain. |
 | Monochrome | [Stooke V3 map](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html), a processed photographic visualization with broader coverage; not natural color or albedo. |
 | Shape and Elevation | [Jorda et al. PDS 2013 shape](https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-steins-shape-v1.0/dataset.shtml). Elevation is radius minus 2.58 km, false color over −0.7 to +1.1 km; not gravitational height. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/STEINS/target) Steins centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
+
+The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
+
+| View | Original grid | Both lighting images, before → current |
+| --- | --- | --- |
+| normal | 3600 × 1800 | 0.57 → 0.84 MB |
+
+Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/steins/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
 
 [The 9 September 2026 mosaic report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/README.md) records 107 focused tests, 60 browser conformance cases, DPR 1/2 production checks and fresh remote installation for the four-body change. [Validation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/validation.json) identifies tested commit `8ded7a5` and base `1fb76e4`; these are historical results.
 
@@ -16,9 +25,13 @@ The broader preparation suite was not green (1,666/1,957 passed); global platfor
 
 ## Known problems
 
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Steins (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (this export ships no projection file, so the metadata datum is recorded and the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
+
 Rosetta imaged about 60% of the body; unseen terrain is less certain. The published shape’s artificial jump between image-derived and lightcurve-derived terrain remains. The two selected photographs span only tens of original pixels and keep gaps as a grid.
 
 The 18:37:16 candidate needed a 1.56 gain, above the 1.35 limit; later frames had poorer footprint agreement and are excluded. Neither selected image has a surface-intercept anchor or fitted image-to-shape registration. The former near-opposition Minnaert correction is superseded; no global albedo is inferred.
+
+**Faithfulness status:** The OSIRIS photographic lens is deferred. The separate Stooke Monochrome map remains source material with its own published control; it does not promote the OSIRIS frames to a registered surface.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 

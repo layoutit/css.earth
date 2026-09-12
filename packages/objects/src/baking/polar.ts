@@ -1,5 +1,113 @@
 import { clamp, mix, modulo, angularDistance } from "./math.js";
-export function createPolarSprite(map: Uint8Array, width: number, height: number, tileSize: number, latitudeBands: number) {
+/** A source-backed cylindrical photograph sampled in its declared body frame. */
+export interface NativePolarSampler {
+    sample(longitudeDegrees: number, latitudeDegrees: number, color: number[]): boolean;
+}
+export interface PolarSpriteOptions {
+    sampling?: 'bilinear' | 'nearest';
+    /** Optional direct photographic path. It is preparation-only and leaves the retained texture layout unchanged. */
+    nativePhotograph?: NativePolarSampler;
+    /** Applied only after a direct photograph reports no valid source contributor for an output texel. */
+    missingColor?: (longitudeDegrees: number, latitudeDegrees: number, pixelDegrees: number) => readonly number[];
+}
+/** Numeric and categorical maps keep one source cell per sprite pixel: no supersampling, no bilinear mix, no pole blend. */
+function createNearestPolarSprite(map: Uint8Array, width: number, height: number, tileSize: number, latitudeBands: number) {
+    const output = new Uint8Array(tileSize * tileSize * 2 * 4);
+    const boundaryLatitude = Math.PI / 2 - Math.PI / latitudeBands;
+    for (let poleIndex = 0; poleIndex < 2; poleIndex += 1) {
+        const north = poleIndex === 0;
+        for (let y = 0; y < tileSize; y += 1) {
+            for (let x = 0; x < tileSize; x += 1) {
+                const unitX = (x + 0.5) / tileSize * 2 - 1, unitY = (y + 0.5) / tileSize * 2 - 1;
+                const radius = Math.hypot(unitX, unitY);
+                if (radius > 1) continue;
+                const longitude = modulo(Math.atan2(unitY, unitX), Math.PI * 2);
+                const latitudeMagnitude = Math.acos(Math.min(1, radius * Math.cos(boundaryLatitude)));
+                const latitude = north ? latitudeMagnitude : -latitudeMagnitude;
+                const sourceX = modulo(Math.floor(longitude / (Math.PI * 2) * width), width);
+                const sourceY = clamp(Math.floor((Math.PI / 2 - latitude) / Math.PI * height), 0, height - 1);
+                const sourceOffset = (sourceY * width + sourceX) * 4, targetOffset = (y * tileSize * 2 + poleIndex * tileSize + x) * 4;
+                output.set(map.subarray(sourceOffset, sourceOffset + 4), targetOffset);
+            }
+        }
+    }
+    return output;
+}
+/** Prepare a polar sprite directly from a source-backed photographic sampler. No density-map intermediate is read. */
+export function createNativePhotographPolarSprite(tileSize: number, latitudeBands: number, nativePhotograph: NativePolarSampler,
+    missingColor: NonNullable<PolarSpriteOptions['missingColor']>) {
+    const output = new Uint8Array(tileSize * tileSize * 2 * 4);
+    const sampleCount = 4;
+    const boundaryLatitude = Math.PI / 2 - Math.PI / latitudeBands;
+    const pixelDegrees = 180 / tileSize;
+    const color = [0, 0, 0, 255];
+    const direct = [0, 0, 0, 255];
+    const average = [0, 0, 0, 0];
+    const poleBlendRadius = 2 / tileSize;
+    for (let poleIndex = 0; poleIndex < 2; poleIndex += 1) {
+        const north = poleIndex === 0;
+        for (let y = 0; y < tileSize; y += 1) {
+            for (let x = 0; x < tileSize; x += 1) {
+                const targetOffset = (y * tileSize * 2 + poleIndex * tileSize + x) * 4;
+                const premultiplied = [0, 0, 0];
+                let alpha = 0;
+                let valid = true;
+                let centerLongitudeX = 0, centerLongitudeY = 0, centerLatitude = 0, coveredSamples = 0;
+                for (let sampleY = 0; sampleY < 2; sampleY += 1) {
+                    for (let sampleX = 0; sampleX < 2; sampleX += 1) {
+                        const unitX = (x + (sampleX + 0.5) / 2) / tileSize * 2 - 1;
+                        const unitY = (y + (sampleY + 0.5) / 2) / tileSize * 2 - 1;
+                        const radius = Math.hypot(unitX, unitY);
+                        if (radius > 1) continue;
+                        const longitude = modulo(Math.atan2(unitY, unitX), Math.PI * 2);
+                        const latitudeMagnitude = Math.acos(Math.min(1, radius * Math.cos(boundaryLatitude)));
+                        const latitude = north ? latitudeMagnitude : -latitudeMagnitude;
+                        coveredSamples++;
+                        centerLongitudeX += Math.cos(longitude);
+                        centerLongitudeY += Math.sin(longitude);
+                        centerLatitude += latitude * 180 / Math.PI;
+                        direct[3] = 255;
+                        if (!nativePhotograph.sample(longitude * 180 / Math.PI, latitude * 180 / Math.PI, direct)) { valid = false; continue; }
+                        if (radius < poleBlendRadius) {
+                            average.fill(0);
+                            for (let longitudeIndex = 0; longitudeIndex < 32; longitudeIndex += 1) {
+                                color[3] = 255;
+                                if (!nativePhotograph.sample((longitudeIndex + 0.5) / 32 * 360, latitude * 180 / Math.PI, color)) {
+                                    valid = false;
+                                    break;
+                                }
+                                for (let channel = 0; channel < 4; channel += 1) average[channel] += color[channel] / 32;
+                            }
+                            const directAmount = radius / poleBlendRadius;
+                            for (let channel = 0; channel < 4; channel += 1) color[channel] = directAmount * direct[channel] + (1 - directAmount) * average[channel];
+                        }
+                        else for (let channel = 0; channel < 4; channel += 1) color[channel] = direct[channel];
+                        const sampleAlpha = color[3] / 255;
+                        alpha += sampleAlpha;
+                        for (let channel = 0; channel < 3; channel += 1) premultiplied[channel] += color[channel] * sampleAlpha;
+                    }
+                }
+                if (coveredSamples === 0) continue;
+                const centerLongitude = modulo(Math.atan2(centerLongitudeY, centerLongitudeX), Math.PI * 2) * 180 / Math.PI;
+                centerLatitude /= coveredSamples;
+                const resolved = valid && alpha > 0
+                    ? premultiplied.map(value => value / alpha)
+                    : valid ? [0, 0, 0] : missingColor(centerLongitude, centerLatitude, pixelDegrees);
+                for (let channel = 0; channel < 3; channel += 1) output[targetOffset + channel] = Math.round(resolved[channel] ?? 0);
+                output[targetOffset + 3] = valid ? Math.round(alpha / sampleCount * 255) : Math.round(coveredSamples / sampleCount * 255);
+            }
+        }
+    }
+    return output;
+}
+export function createPolarSprite(map: Uint8Array, width: number, height: number, tileSize: number, latitudeBands: number,
+    { sampling = 'bilinear', nativePhotograph, missingColor }: PolarSpriteOptions = {}) {
+    if (nativePhotograph) {
+        if (sampling === 'nearest') throw new TypeError('Native photographic polar sampling cannot replace nearest-sampled data.');
+        if (!missingColor) throw new TypeError('Native photographic polar sampling needs an output-resolution missing-coverage color.');
+        return createNativePhotographPolarSprite(tileSize, latitudeBands, nativePhotograph, missingColor);
+    }
+    if (sampling === 'nearest') return createNearestPolarSprite(map, width, height, tileSize, latitudeBands);
     const output = new Uint8Array(tileSize * tileSize * 2 * 4);
     const sampleCount = 4;
     const boundaryLatitude = Math.PI / 2 - Math.PI / latitudeBands;

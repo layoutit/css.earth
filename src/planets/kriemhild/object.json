@@ -113,7 +113,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "adb1df730f65f78b8249828b1cb8f8e163c7333780eee813c9501ca95cf5de4d"
+        "sha256": "4508926db26f75fd0e176bfc79c11866dc9b07399ef022410c0f021f3f6adb20"
       }
     },
     "catalog": {
@@ -132,8 +132,8 @@
   "schema": "cssearth-object@1",
   "type": "layered-body",
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ae6fbe2cc39e5247ef4b7fb1a868ecf702b8e2c57fd6d73b75ed6d4e3ee8effb"
+    "sha256": "c71b78be26f926bd20fb3dadec95d4cf599e19cdf3b5e2f7997ffab8da94d719"
   }
 }

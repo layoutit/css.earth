@@ -20,6 +20,8 @@
 
 - This is a coarse filter-color observation, not true color or a calibrated albedo map. Only the common reliable interior is mapped; roughly 40 km or coarser near the image centre is a conservative interpretation scale.
 
+- **Faithfulness status:** The Monochrome and Filter color lenses retain broad observed brightness, but their outline/inter-band checks do not provide independent cartographic feature control. They are coarse observations, not feature-registered photographic surfaces.
+
 - Unseen shape is modelled, not measured local topography. The authored six-pixel envelope is conservative working uncertainty, not a confidence interval or absolute ground truth.
 
 - The applied illumination model is a display normalization, not an albedo inversion.

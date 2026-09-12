@@ -1,0 +1,383 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/ganymede/",
+  "sourceWidth": 8192,
+  "sourceHeight": 4096,
+  "width": 4096,
+  "height": 2048,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "ganymede-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssganymede-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
+    {
+      "id": "normal",
+      "output": "ganymede-{id}{suffix}.webp",
+      "thumbnail": "ganymede-lens-{id}.webp",
+      "source": "ganymede-mono.tif",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "usgs-voyager-galileo-mono",
+        "id": "normal",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 180,
+          "channels": "monochrome",
+          "zeroValidity": "any-channel",
+          "resampling": "source-georeferenced-bilinear"
+        },
+        "reportComposition": true,
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
+      }
+    },
+    {
+      "id": "enhanced",
+      "output": "ganymede-{id}{suffix}.webp",
+      "thumbnail": "ganymede-lens-{id}.webp",
+      "source": "ganymede-color.tif",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "usgs-voyager-galileo-color",
+        "id": "enhanced",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 180,
+          "channels": "rgb",
+          "zeroValidity": "any-channel",
+          "withholdLongitudeDegrees": [
+            110,
+            150
+          ],
+          "resampling": "source-georeferenced-bilinear"
+        },
+        "monochromeBase": "normal",
+        "reportComposition": true,
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
+      }
+    },
+    {
+      "id": "geology",
+      "output": "ganymede-{id}{suffix}.webp",
+      "thumbnail": "ganymede-lens-{id}.webp",
+      "source": "science/geology-sim3237/GeologyUnits.shp",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "geology",
+        "label": "Geology",
+        "format": "geologic-shapefile",
+        "path": "science/geology-sim3237/GeologyUnits.shp",
+        "consumer": "geology-surfaces",
+        "sampling": "nearest",
+        "overlapPolicy": "withhold-conflicts",
+        "sourceUrl": "https://pubs.usgs.gov/sim/3237/",
+        "description": "USGS SIM 3237 interpreted geologic units",
+        "title": "Categorical map of interpreted geologic units; colors are cartographic choices, not measurements of surface color or height.",
+        "grid": {
+          "attributePath": "science/geology-sim3237/GeologyUnits.dbf",
+          "projectionPath": "science/geology-sim3237/GeologyUnits.prj",
+          "coordinateSystem": "GCS_Ganymede_2000",
+          "referenceRadiusMeters": 2632345,
+          "longitudeDirection": "east-positive",
+          "latitudeType": "planetocentric",
+          "longitudeDomain": [
+            -180,
+            180
+          ],
+          "field": "Unit",
+          "expectedRecords": 3046,
+          "expectedBounds": [
+            -180,
+            -90,
+            180.00017138671876,
+            89.5970728515625
+          ],
+          "unknownValues": [],
+          "withheldDegenerateRings": [
+            {
+              "record": 3023,
+              "ring": 0,
+              "point": [
+                -179.9998779296875,
+                72.97808837890625
+              ]
+            }
+          ]
+        },
+        "categories": [
+          {
+            "value": "dc",
+            "label": "Dark cratered terrain",
+            "color": "#79574a"
+          },
+          {
+            "value": "dl",
+            "label": "Dark lineated terrain",
+            "color": "#98705b"
+          },
+          {
+            "value": "d",
+            "label": "Dark terrain, undivided",
+            "color": "#b38e78"
+          },
+          {
+            "value": "r",
+            "label": "Reticulate terrain",
+            "color": "#998781"
+          },
+          {
+            "value": "lg1",
+            "label": "Light grooved terrain 1",
+            "color": "#729e83"
+          },
+          {
+            "value": "lg2",
+            "label": "Light grooved terrain 2",
+            "color": "#98bd94"
+          },
+          {
+            "value": "lg3",
+            "label": "Light grooved terrain 3",
+            "color": "#c4d9a1"
+          },
+          {
+            "value": "ls1",
+            "label": "Light subdued terrain 1",
+            "color": "#77aeb2"
+          },
+          {
+            "value": "ls2",
+            "label": "Light subdued terrain 2",
+            "color": "#9bc9c6"
+          },
+          {
+            "value": "ls3",
+            "label": "Light subdued terrain 3",
+            "color": "#c3e4d9"
+          },
+          {
+            "value": "li1",
+            "label": "Light irregular terrain 1",
+            "color": "#8079a9"
+          },
+          {
+            "value": "li2",
+            "label": "Light irregular terrain 2",
+            "color": "#aaa0c6"
+          },
+          {
+            "value": "li3",
+            "label": "Light irregular terrain 3",
+            "color": "#d3c4e0"
+          },
+          {
+            "value": "l",
+            "label": "Light terrain, undivided",
+            "color": "#d0d0bd"
+          },
+          {
+            "value": "p",
+            "label": "Palimpsest material",
+            "color": "#daac75"
+          },
+          {
+            "value": "pi",
+            "label": "Palimpsest interior",
+            "color": "#b88957"
+          },
+          {
+            "value": "bi",
+            "label": "Basin interior",
+            "color": "#c87770"
+          },
+          {
+            "value": "br",
+            "label": "Rugged basin material",
+            "color": "#a34f51"
+          },
+          {
+            "value": "bs",
+            "label": "Smooth basin material",
+            "color": "#dea398"
+          },
+          {
+            "value": "c1",
+            "label": "Crater material 1",
+            "color": "#ad8c27"
+          },
+          {
+            "value": "c2",
+            "label": "Crater material 2",
+            "color": "#dbbc42"
+          },
+          {
+            "value": "c3",
+            "label": "Crater material 3",
+            "color": "#f4df86"
+          },
+          {
+            "value": "cu",
+            "label": "Crater material, undivided",
+            "color": "#d1c59f"
+          }
+        ]
+      }
+    },
+    {
+      "id": "oxygen-signature",
+      "output": "ganymede-{id}{suffix}.webp",
+      "thumbnail": "ganymede-lens-{id}.webp",
+      "source": "muse/ganymede/577.3nm_band-night-1.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "oxygen-signature",
+        "label": "Oxygen signature",
+        "minimum": 0.98,
+        "maximum": 1.02,
+        "colors": [
+          "#2166ac",
+          "#92c5de",
+          "#f7f7f7",
+          "#f4a582",
+          "#b2182b"
+        ],
+        "labels": [
+          "0.98",
+          "1.00",
+          "1.02"
+        ],
+        "units": "565 / 577.3 nm reflectance ratio",
+        "title": "Oxygen-sensitive visible reflectance ratio",
+        "description": "A visible spectral signature associated with oxygen in surface ice.",
+        "format": "geotiff",
+        "path": "muse/ganymede/577.3nm_band-night-1.tif",
+        "consumer": "oxygen-signature",
+        "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "textureScale": 0.125,
+        "grid": {
+          "width": 180,
+          "height": 90,
+          "centerLongitude": -1,
+          "referenceRadiusMeters": 2631200,
+          "origin": [
+            -8266158.590125465,
+            4087156.1917842575
+          ],
+          "resolution": [
+            91846.2065569496,
+            -91846.2065569496
+          ],
+          "wrapLongitude": true,
+          "noData": -9999
+        },
+        "additionalGrids": [
+          {
+            "path": "muse/ganymede/577.3nm_band-night-2.tif",
+            "grid": {
+              "width": 180,
+              "height": 90,
+              "centerLongitude": -1,
+              "referenceRadiusMeters": 2631200,
+              "origin": [
+                -8266158.590125465,
+                4087156.1917842575
+              ],
+              "resolution": [
+                91846.2065569496,
+                -91846.2065569496
+              ],
+              "wrapLongitude": true,
+              "noData": -9999
+            }
+          },
+          {
+            "path": "muse/ganymede/577.3nm_band-night-3.tif",
+            "grid": {
+              "width": 180,
+              "height": 90,
+              "centerLongitude": -1,
+              "referenceRadiusMeters": 2631200,
+              "origin": [
+                -8266158.590125465,
+                4087156.1917842575
+              ],
+              "resolution": [
+                91846.2065569496,
+                -91846.2065569496
+              ],
+              "wrapLongitude": true,
+              "noData": -9999
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "ganymede-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "ganymede-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "cssganymede-prepared-lighting-bank@1",
+    "billboardSchema": "cssganymede-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "cssganymede-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

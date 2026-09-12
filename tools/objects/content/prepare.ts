@@ -270,7 +270,9 @@ async function deriveLensBillboardColors(
       const { channels } = await sharp(path)
         .removeAlpha()
         .stats();
-      colors.set(controlId, `#${channels.slice(0, 3).map(({ mean }) => Math.round(mean).toString(16).padStart(2, "0")).join("")}`);
+      // A one-channel grayscale map displays its value in all three channels.
+      const rgb = channels.length === 1 ? [channels[0], channels[0], channels[0]] : channels.slice(0, 3);
+      colors.set(controlId, `#${rgb.map(({ mean }) => Math.round(mean).toString(16).padStart(2, "0")).join("")}`);
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
     }

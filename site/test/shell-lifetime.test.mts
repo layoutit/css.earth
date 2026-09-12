@@ -62,13 +62,16 @@ class FixtureDocument extends Element {
 interface VisibilityObserver { observed: globalThis.Element[]; disconnected: boolean; options?: IntersectionObserverInit; observe(node: globalThis.Element): void; disconnect(): void; }
 class FixtureWindow extends Element {
   Event = Event;
-  HTMLElement = Element; HTMLButtonElement = Element; HTMLInputElement = Element; HTMLDetailsElement = Element; HTMLLIElement = Element;
+  CustomEvent = CustomEvent;
+  HTMLElement = Element; HTMLButtonElement = Element; HTMLInputElement = Element; HTMLSelectElement = Element; HTMLDetailsElement = Element; HTMLLIElement = Element;
   performance = { now: () => 0 };
   localStorage = { getItem: (_key?: string): string | null => null };
   setTimeout: (callback: () => void, delay?: number) => number = () => { throw new Error('Timer fixture is not installed.'); };
   clearTimeout: (id: number) => void = () => {};
   requestAnimationFrame: (callback: FrameRequestCallback) => number = () => { throw new Error('Frame fixture is not installed.'); };
   cancelAnimationFrame: (id: number) => void = () => {};
+  // The fixture is a wide layout, so phone-only sheet gestures stay idle.
+  matchMedia = (_query: string) => Object.assign(new EventTarget(), { matches: false });
   IntersectionObserver?: new (callback: IntersectionObserverCallback, options?: IntersectionObserverInit) => VisibilityObserver;
   MutationObserver?: new (callback: MutationCallback) => { observe(target: Node): void; disconnect(): void };
 }
@@ -80,7 +83,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
     ".planet-information-panel", ".planet-object-browser", ".planet-object-empty",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
     ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
-    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-asteroid-orbits-setting", ".planet-asteroid-labels-setting"]) {
+    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-asteroid-bodies-setting", ".planet-asteroid-orbits-setting", ".planet-asteroid-labels-setting", ".planet-orbit-renderer-setting"]) {
     const element = new Element();
     selectors.set(selector, element); elements.push(element);
   }
@@ -110,7 +113,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
   };
   const windowTarget = new FixtureWindow();
   windowTarget.Event = Event;
-  for (const name of ["HTMLElement", "HTMLButtonElement", "HTMLInputElement", "HTMLDetailsElement", "HTMLLIElement"] as const)
+  for (const name of ["HTMLElement", "HTMLButtonElement", "HTMLInputElement", "HTMLSelectElement", "HTMLDetailsElement", "HTMLLIElement"] as const)
     windowTarget[name] = Element;
   const frames = new Map<number, FrameRequestCallback>(), timers = new Map<number, () => void>();
   windowTarget.performance = { now: () => 0 };
@@ -161,6 +164,28 @@ test('retained catalogue groups follow filters and release their visibility obse
   assert.equal(f.selectors.element('.planet-information-panel').inert, false);
   shell.destroy();
   assert.equal(getObserver().disconnected, true);
+});
+
+// Asteroid dots default off: the busiest layer must not cost a first view.
+test('Asteroids starts off and retains its independent preference across body navigation', () => {
+  const changes: boolean[] = [], f = fixture({ onAsteroidBodiesChange: value => changes.push(value) }), shell = f.mount();
+  const toggle = f.selectors.element('.planet-asteroid-bodies-setting');
+  assert.equal(toggle.checked, false);
+  assert.equal(f.documentTarget.body.dataset.asteroidBodies, 'off');
+  for (const enabled of [true, false]) {
+    toggle.checked = enabled; toggle.dispatchEvent(new Event('change'));
+    for (const id of ['itokawa', 'sun', 'saturn']) {
+      shell.setObject({ id, name: id, apply() {}, dispose() {} });
+      assert.equal(toggle.checked, enabled);
+      assert.equal(f.documentTarget.body.dataset.asteroidBodies, enabled ? 'on' : 'off');
+      assert.equal(f.selectors.element('.planet-heliosphere-setting').checked, false);
+    }
+  }
+  assert.deepEqual(changes, [true, false]);
+  shell.destroy();
+  toggle.dispatchEvent(new Event('change'));
+  assert.deepEqual(changes, [true, false]);
+  assert.ok(f.elements.every(element => element.listeners.size === 0));
 });
 
 test('Asteroids Orbits starts off and retains its independent preference across body navigation', () => {
@@ -651,6 +676,15 @@ test('category pills reuse search, retain the query through navigation, and dism
   const search = f.selectors.element('.planet-sidebar-search');
   const shell = f.mount();
   shell.setObject({ id: 'earth', name: 'Earth', apply() {}, dispose() {} });
+  // Observe the router request without adding a listener the shell's leak check would count.
+  const navigations: unknown[] = [];
+  for (const button of buttons) {
+    const dispatch = button.dispatchEvent.bind(button);
+    button.dispatchEvent = (event: Event) => {
+      if (event.type === 'categorynavigate' && event instanceof CustomEvent) navigations.push((event.detail as { classification?: unknown }).classification);
+      return dispatch(event);
+    };
+  }
   buttons.forEach((button, index) => {
     button.dispatchEvent(new Event('click'));
     assert.equal(search.value, categories[index].label);
@@ -661,6 +695,7 @@ test('category pills reuse search, retain the query through navigation, and dism
       i !== index && !(index === 0 && item === dwarf)));
     assert.deepEqual(buttons.map(item => item.ariaPressed), buttons.map((_, i) => String(i === index)));
   });
+  assert.deepEqual(navigations, categories.map(category => category.type), 'each pill asks the router to frame its classification');
   for (const query of ['planet', 'planets']) {
     search.value = query; search.dispatchEvent(new Event('input'));
     assert.deepEqual(items.map(item => item.hidden), [false, true, true, false]);
@@ -744,5 +779,31 @@ test('a Milky Way breadcrumb previews its own card and preserves the search quer
   assert.equal(search.value, 'moon');
   cancel();
   assert.equal(search.value, 'moon');
+  shell.destroy();
+});
+
+test('camera handoffs retain filtered results and reset only a scrolled results panel', () => {
+  const f = fixture(), browser = f.selectors.element('.planet-object-browser');
+  const results = browser.requireSelector('#object-category-results');
+  let scrollTop = 0, scrollWrites = 0, countWrites = 0;
+  Object.defineProperty(results, 'scrollTop', { get: () => scrollTop, set(value: number) { scrollTop = value; scrollWrites++; } });
+  for (const tab of browser.querySelectorAll('[data-object-tab]')) {
+    Object.defineProperty(tab.requireSelector('.planet-object-tab-count'), 'textContent', { get: () => '', set() { countWrites++; } });
+  }
+  const shell = f.mount(), listeners: CameraNotifications = new Set();
+  shell.setOverview(true);
+  const publishedCounts = countWrites;
+  shell.setCamera(shellCamera(() => worldAt(context.volume.fadeStartDistanceM * .9), listeners));
+  shell.setOverview(true);
+  assert.equal(countWrites, publishedCounts, 'The same catalogue query is not republished at camera handoff');
+  assert.equal(scrollWrites, 0, 'An unscrolled catalogue never triggers a synchronous scroll reset');
+  scrollTop = 120;
+  results.dispatchEvent(new Event('scroll'));
+  shell.setOverview(false);
+  assert.equal(scrollTop, 0, 'Closing a scrolled catalogue restores its next opening position');
+  assert.equal(scrollWrites, 1);
+  shell.setOverview(true);
+  assert.equal(browser.hidden, false, 'Cached results reopen without another filter');
+  assert.equal(countWrites, publishedCounts);
   shell.destroy();
 });

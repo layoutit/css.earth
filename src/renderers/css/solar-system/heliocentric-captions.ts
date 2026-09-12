@@ -43,7 +43,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
     for (let index = 0; index < policy.poolSize; index += 1) {
       const element = document.createElement("s");
       element.className = `planet-heliocentric-caption ${objectId}-caption`;
-      element.style.setProperty("--planet-caption-opacity", "0");
+      element.dataset.captionOpacity = "0";
       element.style.visibility = "hidden";
       group.appendChild(element);
       elements.push(element);
@@ -78,7 +78,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
       }
       const element = document.createElement("s");
       element.className = `planet-heliocentric-caption planet-cubic-sky-caption ${objectId}-star-caption`;
-      element.style.setProperty("--planet-caption-opacity", "0");
+      element.dataset.captionOpacity = "0";
       element.style.visibility = "hidden";
       starGroup.appendChild(element);
       const starNavigation = bindObjectNavigationTarget(element, host);
@@ -245,7 +245,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
         element.dataset.occupant = slot.occupant!;
         element.style.transform = `translate(${formatNumber(slot.anchor[0])}px, ${formatNumber(slot.anchor[1] - slot.bottomOffsetPx)}px) translate(-50%, -100%)`;
       }
-      element.style.setProperty("--planet-caption-opacity", formatNumber(slot.alpha));
+      element.dataset.captionOpacity = formatNumber(slot.alpha);
       element.style.visibility = visible ? "" : "hidden";
     }
     field.settled = true;
@@ -272,7 +272,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
         }
         const opacity = formatNumber(slot.alpha);
         if (published.opacity !== opacity) {
-          element.style.setProperty("--planet-caption-opacity", opacity);
+          element.dataset.captionOpacity = opacity;
           published.opacity = opacity;
         }
       }

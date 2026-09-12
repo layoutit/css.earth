@@ -125,7 +125,8 @@ try {
   });
   await page.goto(`${origin}/mercury/`);
   await page.waitForFunction(()=>window.__cssEarth?.ready);
-  const panel = page.locator('.planet-lens-details');
+  // Each surface lens has its own details section; the dataset context adds one more.
+  const panel = page.locator('section[id$="-surface-lens"].planet-lens-details');
   await panel.evaluate(node=>window.__cssearthTest.detailsElement(node).open=true);
   const map = page.locator('[data-surface-minimap]:visible').first();
   await page.waitForFunction(()=>document.querySelector('[data-surface-minimap][data-ready="true"]'));

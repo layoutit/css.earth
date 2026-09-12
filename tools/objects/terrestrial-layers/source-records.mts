@@ -179,7 +179,23 @@ export const parseControlledMetadata = shape({IsisCube:shape({BandBin:shape({Fil
 
 export const geoFramePathFields = {path:optional(text),qualityPath:optional(text),labelPath:optional(text),originalPath:optional(text),flatPath:optional(text),cameraPath:optional(text),startTime:optional(text)};
 export const parsePhasePhotometry = shape({model:text,asymmetry:number,amplitude:number,width:number,minimumDegrees:number,maximumDegrees:number,referenceDegrees:number,maximumGain:number});
-export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),
+/** A PDS4 product whose Array_2D_Image planes carry an image with its geometric backplanes. The recipe names the planes by
+ * their label identifiers, the archive identity and DSK to bind, and optional FITS header expectations. */
+export const parseGeometryCube = shape({collection:text,target:text,observingSystem:array(text),shapeKernel:optional(text),quantity:text,
+  planes:shape({image:text,x:text,y:text,z:text,incidence:text,emission:text,phase:text,pixelScale:optional(array(text))}),
+  header:optional(dictionary(text)),headerTime:optional(text),headerPlaneNames:optional(shape({prefix:text,names:dictionary(text)}))});
+export type GeometryCubeDeclaration = ReturnType<typeof parseGeometryCube>;
+/** A camera derived from SPICE kernels for an image without archived geometry: the kernel set in load order, the SPK ids and
+ * body-fixed frame, the instrument whose kernel variables define the pixel model, how the exposure epoch is read from the
+ * image header, the aberration correction, the instrument-frame axes stored columns and rows follow, and how the image is read. */
+export const parseSpiceCamera = shape({kernels:array(text),observer:number,target:number,bodyFrame:text,instrument:number,
+  clock:shape({header:text,spacecraft:number}),aberration:text,
+  pixels:shape({focalLength:shape({key:text,unit:text}),pixelPitch:shape({key:text,unit:text}),center:text,boresight:text,samples:text,lines:text,frame:text,origin:number,column:text,row:text}),
+  image:shape({quantity:text,plane:optional(number),header:optional(dictionary(text)),missingValueKeys:optional(array(text)),saturationKey:optional(text)})});
+export type SpiceCameraDeclaration = ReturnType<typeof parseSpiceCamera>;
+/** Pointing refinement of an archived or kernel camera against the retained mesh's lit limb, with its evidence budget. */
+export const parseLimbRefinement = shape({method:text,maximumCorrectionDegrees:number,maximumResidualPixels:number,minimumControls:number,threshold:optional(number),searchPixels:optional(number),maximumControls:optional(number),minimumSharpness:optional(number)});
+export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),cube:optional(parseGeometryCube),spice:optional(parseSpiceCamera),refinement:optional(parseLimbRefinement),
  frames:optional(array(shape({id:text,...geoFramePathFields}))),selection:optional(text),levelMatching:optional(parseLevelMatching),
  transfer:surfaceTransfer,photometry:shape({model:text,phaseCorrection:optional(parsePhasePhotometry),coefficient:optional(number),phaseCoefficientPerDegree:optional(number),
  referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,maximumGain:number}),displayPercentiles:array(number)});

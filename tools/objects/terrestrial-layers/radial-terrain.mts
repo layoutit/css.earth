@@ -57,6 +57,7 @@ import { renderRadialSnapshot } from './radial-snapshot.mts';
 import { createSourceMeshLighting } from './source-mesh-lighting.mts';
 import { preparePdsConstraintMap } from './pds-constraint-map.mts';
 import { orientObservedSurface, validateObservedReduction } from './open-surface.mts';
+import {prepareNativePhotographicAtlas} from './native-photograph.mts';
 
 const sub = (a: readonly number[], b: readonly number[]) => a.map((v, i) => v - b[i]);
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
@@ -344,11 +345,11 @@ export function createRadialScienceColorSampler<T extends SourceSurfaceSample>(s
 /** Bake opaque triangle rasters, coordinates and fixed-epoch Sun illumination. The
  * renderer switches between these prepared banks through ordinary variants.
  */
-export async function prepareRadialMaterials({ radial, surfaces, config, source, publicDirectory, outputDirectory, sunDirection,
+export async function prepareRadialMaterials({ radial, surfaces, config, source, sourceDirectory, publicDirectory, outputDirectory, sunDirection,
   artifactId = null, snapshotEntries = source.manifest.generatedIntermediates }: {
     radial: Pick<RadialState,'width'|'height'|'tileSize'|'faces'|'observationSurfaces'|'completion'|'coverage'|'simplification'> & {scientificSurfaces?:ReadonlyMap<string,{samplePoint?:(point:readonly number[])=>SourceSurfaceSample|null;report?:unknown}>;grid?:RadialState['grid'];plans:readonly {face:PreparedTriangle;rect:{x:number;y:number};matrix:readonly number[];geometry:{leafWidth:number;leafHeight:number}}[]}; surfaces: RadialMaterialSurface[]; config: RadialMaterialConfig;
     source: Pick<Awaited<ReturnType<typeof createSourceManifest>>, 'manifest' | 'assertBytes'>;
-    publicDirectory: string; outputDirectory: string; sunDirection: readonly number[]; artifactId?: string | null;
+    sourceDirectory?: string; publicDirectory: string; outputDirectory: string; sunDirection: readonly number[]; artifactId?: string | null;
     snapshotEntries?: Awaited<ReturnType<typeof createSourceManifest>>['manifest']['generatedIntermediates'];
   }) {
   if (artifactId !== null && !/^[a-z][a-z0-9-]*$/.test(artifactId)) throw new TypeError('Invalid surface model artifact id.');
@@ -364,6 +365,18 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   let reusedLightingSamples = 0;
   const emit = createRasterEmitter(publicDirectory, config.publicBase);
   for (const surface of surfaces) {
+    const photograph=config.raster.observations?.find(observation=>observation.id===surface.id);
+    if(photograph?.nativePhotographicSampling) {
+      if(!sourceDirectory || lightingRecipe || artifactId || surface.textureScale || radial.observationSurfaces?.has(surface.id) || radial.scientificSurfaces?.has(surface.id)) {
+        throw new Error('Native photograph refresh requires the existing cylindrical-map terrain and lighting.');
+      }
+      const input=source.manifest.inputs.find(entry=>requireRecord(entry).lensId===surface.id && entry.consumers.includes('surfaces'));
+      if(!input)throw new Error(`No pinned photograph for ${surface.id}.`);
+      Object.assign(surface,await prepareNativePhotographicAtlas({radial,sourceDirectory,source:input,validity:photograph.validity,
+        sampling:photograph.nativePhotographicSampling,publicDirectory,publicBase:config.publicBase,id:`${config.namespace}-${surface.id}`,
+        sunDirection,mapWidth:config.raster.width}));
+      continue;
+    }
     // The retained CSS background size stays canonical. Only prepared image
     // pixels and atlas rectangles scale; each normalized UV keeps its owner.
     const scale = surface.textureScale ?? 1;

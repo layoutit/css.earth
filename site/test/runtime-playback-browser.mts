@@ -4,11 +4,12 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 import { OBJECTS } from "../objects.mts";
+import { browserObjects } from './browser-objects.mts';
 import { assertRenderedObjectControls, loadPlanetBrowserProfile } from "./load-browser-profile.mts";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const selected = process.argv[3]
-  ? OBJECTS.filter(({ id }) => id === process.argv[3]) : OBJECTS;
+  ? OBJECTS.filter(({ id }) => id === process.argv[3]) : browserObjects();
 assert.ok(selected.length, "Select an implemented object.");
 const output = resolve(process.argv[4] ??
   `output/playwright/runtime-playback-${Date.now()}`);

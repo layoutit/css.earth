@@ -1,8 +1,8 @@
 {
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5647bd56888848f3259678383d4e22e4eb7b6de092fa0734973e8ed2c8f93197"
+    "sha256": "a79e9829262be35b737241d99a07faf023071230137599cb849f433a56b68a58"
   },
   "id": "sun",
   "properties": {
@@ -13,7 +13,11 @@
         "verify-sources",
         "title",
         "assets",
+        "panel-content",
+        "lenses",
         "starfield",
+        "system-markers",
+        "world-context",
         "scene",
         "controls",
         "presentation",
@@ -26,22 +30,32 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "0a760fe0c4566b1e8f944849b2282edaab99020f62af6facb95472f83fd8761e"
+          "sha256": "9a1e44e8ca4086f661e89398cc968e08f488d5cd4c0a3b5773a5faa9e9f1d40a"
         },
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "2779b13352f8804830f9f437a5334933582672a748330472ba80769d281f4ef2"
+          "sha256": "10ac1e75449db66f2a21d32d790e9d4b5126e73395fcab8c6d7b86e49a40f6ba"
         },
         {
           "id": "celestial",
           "path": "source/preparation/celestial.json",
-          "sha256": "38e2fe700b658e9ca7e739d8bb4de649a1f26ea8c6c68f32211f2d503bfa69b4"
+          "sha256": "30aa265ca327e3970915c21c0e9f5fa0ea141546e0a6741ff887d6fa09bc20b6"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "f756ccac74803c94810b3a1aaf201814cc0c093609284c140a34fe0ba440ec42"
         },
         {
           "id": "content",
-          "path": "source/content/static.json",
-          "sha256": "eff4d5a3ee2f3a1e4fa77638774944588271838379db85ed8c6675e26597c864"
+          "path": "source/content/object.json",
+          "sha256": "f2ae43e88009d924e46647e38caf07da251cea5e15cff65074cc163a2ff6dd4f"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "b364b77492858f86894ce47a0a90d8e4fc8c0e4583efc4f63ecb963207abae8e"
         },
         {
           "id": "title",
@@ -52,11 +66,6 @@
           "id": "navigation",
           "path": "source/preparation/navigation.json",
           "sha256": "52d121bd54a171a4aeaa0de8fbd812d2018bd1089143803c76b1786890bcde6c"
-        },
-        {
-          "id": "physical",
-          "path": "source/preparation/physical.json",
-          "sha256": "84fc8f676449f2090b33495ecf5d093ce3074704b67add334efc8e25f4ab54ce"
         },
         {
           "id": "acquisition",
@@ -71,7 +80,7 @@
       ],
       "shape": {
         "kind": "sphere",
-        "radiusKm": 700000
+        "radiusKm": 695700
       },
       "surfaces": [
         {
@@ -138,11 +147,11 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/sun-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e1c77f71a60d9f6ecb8d78921eb3fa1976a3fa2b9f127365d43050b1ffbb2844"
+        "sha256": "0ec286f30c82394938bf65db054fc3420ac0f28d2f8982fa376be6ba249847f6"
       }
     },
     "catalog": {

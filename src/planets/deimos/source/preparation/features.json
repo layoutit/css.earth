@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": "DEIMOS_nomenclature_center_pts.zip",
+  "members": {
+    "attributes": "DEIMOS_nomenclature_center_pts.dbf",
+    "projection": "DEIMOS_nomenclature_center_pts.prj",
+    "metadata": "metadata_nomenclature_points_DEIMOS.xml"
+  },
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 0,
+  "output": "deimos-features.json",
+  "publicBase": "/scenes/deimos/",
+  "target": {
+    "className": "deimos-body"
+  },
+  "lensIds": [
+    "normal",
+    "elevation",
+    "albedo",
+    "slope"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {
+    "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+  },
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 40,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  },
+  "notes": "notes.json"
+}

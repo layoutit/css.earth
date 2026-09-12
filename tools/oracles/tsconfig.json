@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": [
+    "venus/**/*.mts",
+    "../../tests/objects/unit/venus/oracle.test.mts"
+  ],
+  "exclude": []
+}

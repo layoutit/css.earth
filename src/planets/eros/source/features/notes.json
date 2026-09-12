@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "2508",
+      "item": "Q3696648",
+      "title": "Himeros (crater)",
+      "url": "https://en.wikipedia.org/wiki/Himeros_(crater)",
+      "revision": "1348490294",
+      "extract": "Himeros, also nicknamed the Saddle, is a large impact crater on the asteroid Eros.7°E, on Eros's eastern hemisphere. The crater is named after Himeros of Greek mythology, one of seven Erotes, attendant to Eros, and the personification of the longing for love."
+    },
+    {
+      "id": "2513",
+      "item": "Q3785714",
+      "title": "List of geological features on 433 Eros",
+      "url": "https://en.wikipedia.org/wiki/List_of_geological_features_on_433_Eros",
+      "revision": "1355194624",
+      "extract": "This is a list of named geological features on asteroid 433 Eros."
+    }
+  ]
+}

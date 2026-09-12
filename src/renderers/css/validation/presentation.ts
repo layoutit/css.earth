@@ -166,4 +166,40 @@ export function requireOptionalPresentation(plan: Record<string, unknown>, tree:
     integer(catalog.bytes, 'catalog bytes', 1); integer(catalog.count, 'catalog count', 1);
     const statuses = record(destinations.statuses, 'destination statuses', ['detail', 'overview']); text(statuses.detail, 'detail status'); text(statuses.overview, 'overview status');
   }
+  if (plan.features !== undefined) requireSurfaceFeatures(plan.features, tree, lensIds);
+}
+
+/** Prepared nomenclature labels: a pinned catalogue anchored to one scene mesh, shown for declared lenses. */
+export function requireSurfaceFeatures(value: unknown, tree: PreparedTree, lensIds: readonly string[]): void {
+  const features = record(value, 'surface features', ['catalog', 'target', 'lensIds', 'meshRadiusUnits', 'policy', 'outline', 'surfaceRadiusUnits', 'surfaceEllipsoidUnits']);
+  const catalog = record(features.catalog, 'surface feature catalog', ['url', 'bytes', 'sha256', 'count']);
+  if (!text(catalog.url, 'feature catalog URL').startsWith('/scenes/') || !/^[a-f0-9]{64}$/.test(text(catalog.sha256, 'feature catalog hash'))) fail('surface features require a pinned catalogue');
+  integer(catalog.bytes, 'feature catalog bytes', 1); integer(catalog.count, 'feature catalog count', 1);
+  if (!ancestor(nodeReference(features.target, tree), tree.scene, tree)) fail('surface feature target must belong to scene');
+  const lenses = array(features.lensIds, 'surface feature lenses').map(id => text(id, 'surface feature lens'));
+  unique(lenses, 'surface feature lenses');
+  if (!lenses.length || lenses.some(id => !lensIds.includes(id))) fail('surface features require declared lenses');
+  positive(features.meshRadiusUnits, 'surface feature mesh radius');
+  if (features.surfaceRadiusUnits !== undefined) {
+    const band = record(features.surfaceRadiusUnits, 'surface feature radius band', ['minimum', 'maximum']);
+    const minimum = positive(band.minimum, 'surface feature radius minimum'), maximum = positive(band.maximum, 'surface feature radius maximum');
+    if (maximum < minimum) fail('surface feature radius band is inverted');
+  }
+  if (features.surfaceEllipsoidUnits !== undefined) {
+    if (features.surfaceRadiusUnits !== undefined) fail('surface features declare one surface model');
+    const ellipsoid = record(features.surfaceEllipsoidUnits, 'surface feature ellipsoid', ['equatorial', 'polar', 'north', 'minimumShare', 'maximumShare']);
+    const equatorial = positive(ellipsoid.equatorial, 'surface feature equatorial semi-axis'), polar = positive(ellipsoid.polar, 'surface feature polar semi-axis');
+    if (polar > equatorial || Math.abs(equatorial - Number(features.meshRadiusUnits)) > 1e-6 * equatorial) fail('surface feature ellipsoid semi-axes must fit the mesh radius');
+    const north = array(ellipsoid.north, 'surface feature polar axis').map(n => finite(n, 'surface feature polar axis'));
+    if (north.length !== 3 || Math.abs(Math.hypot(north[0]!, north[1]!, north[2]!) - 1) > 1e-9) fail('surface feature polar axis must be a unit axis');
+    const minimumShare = positive(ellipsoid.minimumShare, 'surface feature ellipsoid minimum share'), maximumShare = positive(ellipsoid.maximumShare, 'surface feature ellipsoid maximum share');
+    if (minimumShare > 1 || maximumShare < 1 || maximumShare < minimumShare) fail('surface feature ellipsoid band must contain the reference surface');
+  }
+  const policy = record(features.policy, 'surface feature policy', ['minimumZoomShare', 'minimumDiameterPixels', 'alwaysVisibleCount', 'maximumVisible', 'limbCosine']);
+  const share = finite(policy.minimumZoomShare, 'surface feature zoom share'); if (share < 0 || share > 1) fail('surface feature zoom share is out of range');
+  positive(policy.minimumDiameterPixels, 'surface feature size floor'); integer(policy.alwaysVisibleCount, 'surface feature head count');
+  integer(policy.maximumVisible, 'surface feature cap', 1);
+  const limb = finite(policy.limbCosine, 'surface feature limb cosine'); if (limb < 0 || limb >= 1) fail('surface feature limb cosine is out of range');
+  const outline = record(features.outline, 'surface feature outline', ['pieces']);
+  integer(outline.pieces, 'surface feature outline pieces', 8); if (Number(outline.pieces) > 512) fail('surface feature outline pool is too large');
 }

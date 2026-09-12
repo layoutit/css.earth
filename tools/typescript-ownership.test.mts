@@ -88,6 +88,7 @@ test('source-local tests and audit runners may import harnesses while production
   repo.write('src/platform/test/illumination-browser.mts', 'import "../../../site/test/browser-helper.mts";');
   repo.write('src/test/shared-helper.mts', 'import "../../tools/capture-image.mts";');
   repo.write('tools/audits/worlds/browser-check.mts', 'import "../../../site/test/browser-helper.mts"; import "../../capture-image.mts";');
+  repo.write('tools/oracles/mars/compare.mts', 'import "../../../site/test/browser-helper.mts";');
   assert.deepEqual(repo.audit().violations, [], 'Actual test and audit owners may use browser/capture helpers.');
   repo.write('src/platform/owner.mts', 'import "./test/illumination-browser.mts"; import "../../tools/audits/worlds/browser-check.mts";');
   repo.write('src/testimonials/owner.mts', 'import "../../site/test/browser-helper.mts";');

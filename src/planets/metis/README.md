@@ -18,6 +18,8 @@
 
 - **Photometry:** They are relative detector counts, **not calibrated I/F**. These are empirical display corrections, not recovery of calibrated albedo.
 
+- **Faithfulness status:** The Monochrome lens is a coarse ellipsoid projection with no independent surface landmarks. It remains available as an observation of the broad outline, not a feature-registered photographic surface.
+
 - Unreliable source samples and cast shadows remain missing; no geometry, hidden texture or false neutral colour is inferred from them. Gaps use the shared neutral grid.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

@@ -1,8 +1,8 @@
 {
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "7929486b08c06bb514808c5b4ea71cd75816d8e0f8783e4bc9e996b291185e7b"
+    "sha256": "a7130938e3d735fe75126bf019e04028e4b1c59a0abd5a9a72b8fa1a979a493a"
   },
   "id": "pluto",
   "properties": {
@@ -13,7 +13,12 @@
         "verify-sources",
         "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
+        "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
@@ -26,22 +31,32 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "15d16c2b012ada865c77c3996b73cd2f1f28454358dce98dcbe485e4721cd010"
+          "sha256": "7521e019234efcf9286f841c3dbe382389efe580b2a00d1ab8d882a9185ab776"
         },
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "b95a195119f9b51ec660482150a35d8e70ccba428bf6e43011275bd694fc2df6"
+          "sha256": "35ad4db7a77e961ead346fa0223d45c78974fdcae2a4f3176f858e852d0207ef"
         },
         {
           "id": "celestial",
           "path": "source/preparation/celestial.json",
-          "sha256": "c9218698f561b18c3d94e28614ed56c2e10aedd06702f27e21664493979394ba"
+          "sha256": "a510ef9ffb0f65da272702eb8351bae713b0e4056d24f5926378b12424b6d8f6"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "a38367a5b81d5a7d41cfb9a6ad6b30164549d30bdf106d8c4040d32e5d5f686e"
         },
         {
           "id": "content",
-          "path": "source/content/static.json",
-          "sha256": "9ede7bc869b0ef857d53914fa143681dfcfb1d701dabf3e2045c222bde6e436d"
+          "path": "source/content/object.json",
+          "sha256": "924a299604725b552468ce335eb075a2d15b99c94c30082f2329ded994c6f599"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "ef3df7c9ba745d79d866f20f01f5b311e2ae492af013dbf03519d24e40e2a640"
         },
         {
           "id": "title",
@@ -49,19 +64,19 @@
           "sha256": "43474864cc1b0c6a2f87d53d955754e76b0318e15b9d0867a495a83ea1b60fa0"
         },
         {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "5e0ef5f318b20f4a662c4b17783f9bb073df019dde58d3c3171d7fb4fa30aba1"
+        },
+        {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
           "sha256": "2c2d7a33e27e26f044fce5e94163aafbaa167976b95b4cff890e0c6e92a0ce84"
         },
         {
-          "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "58d733528f1f1602e1aa3f9e1bccefc4f10b2847e4111b655a2b76cf9d9a5160"
-        },
-        {
-          "id": "physical",
-          "path": "source/preparation/physical.json",
-          "sha256": "a31a4d007e2447f6ab924af3a5dbafc854260f675b52a937755f9901c2e7442c"
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "22e358610fede5e6683bc1351b4edc990afc988074298b3ebbcd10b14f73c10c"
         }
       ],
       "shape": {
@@ -77,28 +92,32 @@
             {
               "id": "surface",
               "source": "content",
-              "material": "curvature"
+              "material": "lighting"
             },
             {
               "id": "topography",
               "source": "content",
-              "material": "curvature"
+              "material": "lighting"
             },
             {
               "id": "monochrome",
               "source": "content",
-              "material": "curvature"
+              "material": "lighting"
             }
           ]
         }
       ],
       "materials": [
         {
-          "id": "curvature",
+          "id": "lighting",
           "source": "raster",
           "model": "lit"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 12000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -109,31 +128,31 @@
         -2106856009266.7188
       ],
       "presentationToReference": [
-        0.9655191531695833,
-        0.09604588932324507,
-        0.24196684071747843,
-        -0.23733928901316054,
-        -0.057161823121107555,
-        0.9697435680983909,
-        0.10697114916377254,
-        -0.9937342266026555,
-        -0.03239537196890559
+        0.5604032228444342,
+        0,
+        0.8282199151346045,
+        -0.7598769155844597,
+        0.39777715593191376,
+        0.5141599044855268,
+        -0.3294469623284138,
+        -0.9174820620691818,
+        0.22291560015813752
       ],
       "orbitUpReference": [
         0,
         -0.39777715593191376,
         0.9174820620691818
       ],
-      "metersPerUnit": 4696.837944664032,
+      "metersPerUnit": 5166.521739130435,
       "bodyRadiusM": 1188300
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/pluto-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d724f2a3908f73b5c6d52decf911f7f1b6987824006fcd92694fb6c0f0e6b2fd"
+        "sha256": "e6be92b9b712166ca51d302e471d22873a2891441040d2e992d563779cdfd02c"
       }
     },
     "catalog": {

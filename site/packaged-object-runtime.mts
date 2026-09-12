@@ -2,13 +2,14 @@ import type { ObjectRuntimeDefinition } from '../src/renderers/css/runtime/objec
 import type { SceneFactory } from './browser-types.mts';
 import { requiredElement } from './browser-types.mts';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { parsePreparedWorldContext } from '../src/renderers/css/dist/index.js';
 import { parsePreparedWorldCameraFrame } from '../src/renderers/css/dist/navigation.js';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createObjectRuntime, createNavigableObjectMount, preparedObjectCapabilities,
   createWorldContextObjectRuntime, createPreparedObjectNavigation } from '../src/renderers/css/dist/index.js';
-import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import { APPLICATION_WORLD_CONTEXT } from './world-context-plan.mts';
 import * as runtimePolicy from './runtime-policy.mts';
+
+export const SHARED_BANK_URL = '/shared';
 
 // The application supplies its shell nodes and authoritative input policy.
 // The CSS renderer consumes prepared content; the engine supplies numeric behavior.
@@ -23,7 +24,8 @@ export function bindPackagedObject(definition: ObjectRuntimeDefinition, mount = 
   });
 }
 
-export function bindContextualObject(definition: ObjectRuntimeDefinition, context: unknown, frame = parsePreparedWorldContext(context).frame) {
+// The shared context plan is already validated: a detail mount reuses it instead of revalidating the JSON.
+export function bindContextualObject(definition: ObjectRuntimeDefinition, context = APPLICATION_WORLD_CONTEXT, frame = context.frame) {
   const mount = bindPackagedObject(definition, createWorldContextObjectRuntime({ definition, context, frame }));
   return Object.assign(mount, { navigation: createPreparedObjectNavigation(async () => definition, frame) });
 }
@@ -44,7 +46,14 @@ export async function loadPackagedObject(input: unknown) {
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);
       return response.arrayBuffer();
     },
+    // Content-addressed banks shared by every object; the decode worker caches each one.
+    sharedUrl: SHARED_BANK_URL,
+    async readShared(reference, signal) {
+      const response = await fetch(`${SHARED_BANK_URL}/${reference.kind}/${reference.sha256}.json`, { signal });
+      if (!response.ok) throw new Error(`Prepared shared bank request failed: ${response.status}.`);
+      return response.arrayBuffer();
+    },
   }, definition => descriptorInput.properties.worldFrame
-    ? bindContextualObject(definition, applicationContext, parsePreparedWorldCameraFrame(descriptorInput.properties.worldFrame) ?? undefined)
+    ? bindContextualObject(definition, APPLICATION_WORLD_CONTEXT, parsePreparedWorldCameraFrame(descriptorInput.properties.worldFrame) ?? undefined)
     : bindPackagedObject(definition));
 }

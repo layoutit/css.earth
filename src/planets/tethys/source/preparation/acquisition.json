@@ -7,7 +7,7 @@
         "refresh"
       ],
       "path": "observations/Tethys_Cassini_mosaic_global_293m.tif",
-      "url": "https://planetarymaps.usgs.gov/mosaic/Tethys_Cassini_mosaic_global_293m.tif"
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Tethys_Cassini_mosaic_global_293m.tif"
     },
     {
       "kind": "download",
@@ -468,6 +468,14 @@
       ],
       "path": "cassini-ice/raw/v1606213356_1.qub",
       "url": "https://vims.univ-nantes.fr/cube/1606213356_1.qub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/TETHYS_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TETHYS_nomenclature_center_pts.zip"
     }
   ]
 }

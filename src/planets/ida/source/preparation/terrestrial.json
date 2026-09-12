@@ -26,6 +26,10 @@
             255
           ],
           "bitpix": 8
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     ],

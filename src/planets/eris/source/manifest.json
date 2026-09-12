@@ -75,47 +75,238 @@
           }
         ]
       }
+    },
+    {
+      "id": "hyg-registration-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 100844,
+      "expectedSha256": "2fe5171f1a8ba5081b963443ba67a122f9c8e471087d3bc736266212117e41c2",
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
+      ],
+      "acquisition": "checked prepared registration field from HYG v4.1",
+      "redistribution": "CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "src/planets/eris/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eris-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 1941,
+      "expectedSha256": "2f157ab93e92ca89cf42e7ab084c40462273c84e54ba2f4a8bdbf6179b3295a7",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "deterministically generated Eris title path from the repository-pinned Inter font",
+      "redistribution": "generated outline under the Inter license",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/eris/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eris-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 1567,
+      "expectedSha256": "074449421f0ffa141060f8a69bc8ab5c60abd681acdf62c3679b8e90852fbe25",
+      "origin": "Repository-authored Eris solar-system recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "eris-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2376,
+      "expectedSha256": "57411f2b8be902225031f476a1bfe4bb95fe27ea67451752a0c080ece4f6da05",
+      "origin": "Repository-authored Eris raster recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "eris-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1410,
+      "expectedSha256": "2b24539030f8cb3920e3d89dbe46092d240dc9d8dc3486efa3e2e7cf6cba077e",
+      "origin": "Repository-authored Eris geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "eris-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 222,
+      "expectedSha256": "7382a069ad44040eb34fe2ae29f0cafc6ce1478c2a8847d92296a613cc388584",
+      "origin": "Repository-authored Eris celestial recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "eris-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 100,
+      "expectedSha256": "88db6f593a192e14b23a741c400799500aea97c511c9d171c810b78252eac7d4",
+      "origin": "Repository-authored Eris presentation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "eris-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 852,
+      "expectedSha256": "ec4926b5bc3275601ec90f907e6cd0fb77b873c9f99bc9c8fd2bef198525b7ea",
+      "origin": "Repository-authored Eris navigation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "eris-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 470,
+      "expectedSha256": "e228401d8d2676f4acf78ebb2b0776a22d5d61e10287b6049d93eba8e1e19736",
+      "origin": "Repository-authored Eris acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "eris-preparation-rotation",
+      "path": "preparation/rotation.json",
+      "expectedBytes": 459,
+      "expectedSha256": "6e531fcb60f0c3c93c6227f2e3c6d696c77a1d220da38626dfd2fb1c40cebf9e",
+      "origin": "Repository-authored Eris rotation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored display orientation record; content only, not an ephemeris."
+      }
+    },
+    {
+      "id": "eris-object-content",
+      "path": "content/object.json",
+      "expectedBytes": 5991,
+      "expectedSha256": "649563d1dc65838ad58371ee5a064253dbde2a34d298904934996bfdc056d1c9",
+      "origin": "Repository-authored Eris object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
     }
   ],
   "documents": [
     {
-      "path": "content/object.json",
-      "expectedBytes": 3810,
-      "expectedSha256": "641eee8ead357712179e462aa1f6efe05b7ae5ff9ca2cf97b03459a64e630d0b",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 470,
-      "expectedSha256": "e228401d8d2676f4acf78ebb2b0776a22d5d61e10287b6049d93eba8e1e19736"
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 852,
-      "expectedSha256": "ec4926b5bc3275601ec90f907e6cd0fb77b873c9f99bc9c8fd2bef198525b7ea"
-    },
-    {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 459,
-      "expectedSha256": "6e531fcb60f0c3c93c6227f2e3c6d696c77a1d220da38626dfd2fb1c40cebf9e"
-    },
-    {
-      "path": "preparation/shape-model.json",
-      "expectedBytes": 451,
-      "expectedSha256": "abc023870658f0d1d49f23131ada3573ecc8acb8d50a4624eec9b619ed397723"
-    },
-    {
       "path": "presentation/navigation-marker.svg",
       "expectedBytes": 114,
       "expectedSha256": "677dba4cd7635440de2bde04c6bbee6956ad07c276f146ff7ebef594d7f6b0c2"
-    },
-    {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 1941,
-      "expectedSha256": "2f157ab93e92ca89cf42e7ab084c40462273c84e54ba2f4a8bdbf6179b3295a7"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
@@ -126,11 +317,6 @@
       "path": "stars/LICENSE.md",
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 100844,
-      "expectedSha256": "2fe5171f1a8ba5081b963443ba67a122f9c8e471087d3bc736266212117e41c2"
     }
   ],
   "generatedIntermediates": []

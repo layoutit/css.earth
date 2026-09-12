@@ -28,18 +28,20 @@ type MockPrepare = (options: MockRequest) => unknown | Promise<unknown>;
 type FocusController = ReturnType<typeof createPreparedContextNavigation>;
 type FocusCallbacks = NonNullable<Parameters<FocusController['connect']>[1]>;
 type MockWorldContext = { mount(options: { stage: HTMLElement; signal: AbortSignal; windowTarget: Window }): Promise<MockWorldMount> };
-type MockWorldMount = { destroy(): void; publish?(world: WorldCameraPose & {pose: {id?: string}}, viewport: {principalOffsetPixels: readonly [number, number]}): void; selectObject?(id: string, frame: PreparedWorldCameraFrame & {id?: string}): void; previewSelection?(id?: string | null): void; setHighContrastSky?(value: boolean): void; setAsteroidLabelsEnabled?(value: boolean): void; setAsteroidOrbitsEnabled?(value: boolean): void; setNavigationInFlight?(value: boolean): void; connectNavigation?: FocusController['connect']; suspendFocus?: FocusController['suspend']; restoreFocus?: FocusController['restore'] };
+type MockWorldMount = { destroy(): void; publish?(world: WorldCameraPose & {pose: {id?: string}}, viewport: {principalOffsetPixels: readonly [number, number]}): void; selectObject?(id: string, frame: PreparedWorldCameraFrame & {id?: string}): void; previewSelection?(id?: string | null): void; setHighContrastSky?(value: boolean): void; setAsteroidBodiesEnabled?(value: boolean): void; setAsteroidLabelsEnabled?(value: boolean): void; setAsteroidOrbitsEnabled?(value: boolean): void; setNavigationInFlight?(value: boolean): void; connectNavigation?: FocusController['connect']; suspendFocus?: FocusController['suspend']; restoreFocus?: FocusController['restore'] };
 type MockDataset = { ids: readonly string[]; defaultId: string; current(): string; select(id: string, options?: { signal?: AbortSignal }): Promise<boolean>; subscribe(listener: (id: string) => void): () => void };
 type MockMount = Mutable<Omit<ObjectSceneLifecycle, 'navigation' | 'datasets'>> & { id: string; options: MountOptions & {proof?: string}; value: SharedView; calls: string[]; restores: number; publishCamera?(camera: WorldCameraPose): void; manualDataset?(id: string): void; datasets?: MockDataset; navigation?: ObjectWorldNavigation };
 type MockShell = { input: Record<string, never>; options: ShellOptions; destroyed: number; selected: string; playback?: unknown; datasetShown?: boolean; datasetNotice?: string | null; preparedFocus?: PreparedGalaxyRecord | null; focusSources?: readonly SpatialCatalogSource[]; focusPresentation?: PreparedFocusPresentation | null; beginCardNavigation?: (object: ObjectEntry, world: unknown) => () => void; beginOverviewSelection?: (scope?: string) => (() => void) | void; setPlaybackState(value: unknown): void; showDataset(): void; setDatasetNotice(message: string | null): void; setMotionEnabled(value: boolean): void; setPreparedFocus(record: PreparedGalaxyRecord | null, sources: readonly SpatialCatalogSource[], presentation: PreparedFocusPresentation | null): void; setObject(content: { id: string; apply(): void }): void; destroy(): void };
 type MockDocument = EventTarget & {hidden: boolean; documentElement: {dataset: Record<string, string>}; body: {classList: {add(): void; remove(): void}}};
 type MockMedia = EventTarget & {matches: boolean};
 type MockHistory = {readonly state: Record<string, unknown>; replaceState(state: Record<string, unknown>, unused: string, url: string | URL | null): void; pushState(state: Record<string, unknown>, unused: string, url: string | URL | null): void; back(): void; forward(): void};
-type MockWindow = EventTarget & {readonly location: URL; history: MockHistory; matchMedia(): MockMedia; setTimeout(callback: () => void, delay?: number): ReturnType<typeof setTimeout> | number; clearTimeout(id: ReturnType<typeof setTimeout> | number | undefined): void};
+type MockWindow = EventTarget & {readonly location: URL; history: MockHistory; matchMedia(): MockMedia; performance: Pick<Performance, 'now'>; setTimeout(callback: () => void, delay?: number): ReturnType<typeof setTimeout> | number; clearTimeout(id: ReturnType<typeof setTimeout> | number | undefined): void; requestAnimationFrame(callback: FrameRequestCallback): number; cancelAnimationFrame(handle: number): void};
 type Harness = { router: ReturnType<typeof createSceneRouter>; windowTarget: MockWindow; documentTarget: MockDocument; media: MockMedia; mounts: MockMount[]; shells: MockShell[]; renders: Set<MockMount>; errors: unknown[]; writes: string[]; entries: { state: Record<string, unknown>; url: string }[]; preparations: MockRequest[]; disposedContent: string[]; maxRendered(): number };
 type HarnessOptions = { prepare?: MockPrepare; focus?: MockFocus; centerTarget?: MockTarget; systemTarget?: MockTarget; overviewTarget?: MockTarget; initialUrl?: string | null; factoryGate?: Deferred | null; contentGate?: Deferred | null; persistentWorldContext?: MockWorldContext | null; withSun?: boolean; worldFrames?: Record<string, PreparedWorldCameraFrame> | null; datasets?: boolean; datasetGate?: Deferred | null };
 
-const flush = (): Promise<void> => new Promise(resolve => setImmediate(resolve));
+// A navigation lets the sidebar swap render in its own frame (a timer, then a
+// zero-delay timer in the harness), so one flush spans three timer turns.
+const flush = async (): Promise<void> => { for (let turn = 0; turn < 3; turn++) await new Promise(resolve => setTimeout(resolve, 0)); };
 function deferred(): Deferred {
   let resolve!: (value: unknown) => void, reject!: (reason?: unknown) => void;
   const promise = new Promise<unknown>((yes, no) => { resolve = yes; reject = no; });
@@ -55,7 +57,10 @@ function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget
   documentTarget.hidden = false; documentTarget.documentElement = { dataset: {} };
   documentTarget.body = { classList: { add() {}, remove() {} } };
   media.matches = false; windowTarget.matchMedia = () => media;
-  windowTarget.setTimeout = setTimeout; windowTarget.clearTimeout = clearTimeout;
+  windowTarget.setTimeout = setTimeout; windowTarget.clearTimeout = clearTimeout; windowTarget.performance = performance;
+  // The router lets the sidebar swap render in its own frame before mounting; a timer stands in for the frame.
+  windowTarget.requestAnimationFrame = callback => windowTarget.setTimeout(() => callback(windowTarget.performance.now()), 0) as number;
+  windowTarget.cancelAnimationFrame = handle => windowTarget.clearTimeout(handle);
   let location = new URL(initialUrl ?? 'https://example.test/mercury/?campaign=test#vault'), index = 0;
   const entries: { state: Record<string, unknown>; url: string }[] = [{ state: { campaign: 'preserved' }, url: location.href }], writes: string[] = [];
   Object.defineProperty(windowTarget, 'location', { get: () => location });
@@ -361,26 +366,36 @@ test('the destination card stays held until arrival, including the new camera mo
 });
 
 test('asteroid label and orbit settings default off and reach the retained context independently', async () => {
-  const labels: (boolean)[] = [], orbits: (boolean)[] = [];
+  const labels: (boolean)[] = [], orbits: (boolean)[] = [], bodies: (boolean)[] = [];
   const h = harness({ persistentWorldContext: { async mount() {
     return { selectObject() {}, publish() {}, destroy() {},
       setAsteroidLabelsEnabled: value => labels.push(value),
-      setAsteroidOrbitsEnabled: value => orbits.push(value) };
+      setAsteroidOrbitsEnabled: value => orbits.push(value),
+      setAsteroidBodiesEnabled: value => bodies.push(value) };
   } } });
   await h.router.settled;
   const settings = h.shells[0].options;
   assert.equal(settings.asteroidLabelsEnabled, false);
-  assert.deepEqual(labels, [false]); assert.deepEqual(orbits, [false]);
+  assert.equal(settings.asteroidBodiesEnabled, false);
+  // The mount itself carries the defaults: a context that never received them
+  // would draw the asteroids the shell reports as off.
+  assert.deepEqual(labels, [false]); assert.deepEqual(orbits, [false]); assert.deepEqual(bodies, [false]);
   required(settings.onAsteroidLabelsChange)(true);
+  required(settings.onAsteroidBodiesChange)(true);
   await h.router.navigate('venus');
   assert.equal(h.shells.length, 1);
+  // Each setting carries its own preference across the body change, so turning
+  // one on cannot switch on the asteroid work the others still leave off.
   assert.deepEqual(labels, [false, true]); assert.deepEqual(orbits, [false]);
+  assert.deepEqual(bodies, [false, true]);
   required(settings.onAsteroidOrbitsChange)(true);
   required(settings.onAsteroidLabelsChange)(false);
   assert.deepEqual(labels, [false, true, false]); assert.deepEqual(orbits, [false, true]);
+  assert.deepEqual(bodies, [false, true]);
   h.router.destroy();
   required(settings.onAsteroidLabelsChange)(true);
-  assert.deepEqual(labels, [false, true, false]);
+  required(settings.onAsteroidBodiesChange)(false);
+  assert.deepEqual(labels, [false, true, false]); assert.deepEqual(bodies, [false, true]);
 });
 
 test('entering overview on the current object changes selection without invoking focus or restoring the camera', async () => {
@@ -722,7 +737,13 @@ test('zooming out after first-click system framing restores the overview at the 
   h.windowTarget.clearTimeout = id => { if (typeof id === 'number') timers.delete(id); };
   try {
     await h.router.settled;
-    await h.router.navigate('venus', { sceneSelection: true });
+    // The frame gate and its follow-up run through this test's manual timers.
+    const drain = async (pending: Promise<unknown> | null) => {
+      let finished = pending === null; pending?.then(() => { finished = true; }, () => { finished = true; });
+      while (!finished) { await flush(); for (const [id, callback] of timers) { timers.delete(id); callback(); } }
+      return pending;
+    };
+    assert.equal(await drain(h.router.navigate('venus', { sceneSelection: true })), true);
     const selected = required(h.mounts.at(-1));
     required(selected.publishCamera)(camera(1400));
     assert.equal(timers.size, 0, 'The selected system remains below the existing orbital cutoff');
@@ -733,7 +754,7 @@ test('zooming out after first-click system framing restores the overview at the 
     const zoomedOut = camera(1700);
     required(selected.publishCamera)(zoomedOut);
     for (const [id, callback] of timers) { timers.delete(id); callback(); }
-    await h.router.settled;
+    await drain(h.router.settled);
     assert.equal(h.router.state().activeObjectId, 'sun');
     assert.equal(h.router.state().selectedObjectId, null);
     assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');

@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-solar-system-preparation@1",
+  "bodyId": "ariel",
+  "displayName": "Ariel",
+  "bodyRadiusUnits": 230,
+  "bodyRadiusKilometers": 578.9,
+  "defaultZoom": 1.1,
+  "initialScenePitchDegrees": 37.54960298331237,
+  "defaultControlYawDegrees": -104.50039439240241,
+  "markerAtlasUrl": "/navigation/planet-markers@2x.webp",
+  "captionNames": {
+    "sun": "Sun",
+    "mercury": "Mercury",
+    "venus": "Venus",
+    "earth": "Earth",
+    "mars": "Mars",
+    "jupiter": "Jupiter",
+    "saturn": "Saturn",
+    "uranus": "Uranus",
+    "neptune": "Neptune",
+    "pluto": "Pluto",
+    "ceres": "Ceres",
+    "eris": "Eris",
+    "haumea": "Haumea",
+    "makemake": "Makemake",
+    "ariel": "Ariel"
+  },
+  "markerStrip": {
+    "schema": "cssariel-prepared-system-markers@1",
+    "provenance": "Flat-colour discs from published visible colours; not imagery. Pluto uses the shell's navigation atlas tile instead.",
+    "tiles": [
+      {
+        "id": "ceres",
+        "color": [
+          110,
+          106,
+          102
+        ],
+        "size": 5
+      },
+      {
+        "id": "eris",
+        "color": [
+          232,
+          230,
+          226
+        ],
+        "size": 6
+      },
+      {
+        "id": "haumea",
+        "color": [
+          217,
+          216,
+          212
+        ],
+        "size": 5
+      },
+      {
+        "id": "makemake",
+        "color": [
+          185,
+          138,
+          106
+        ],
+        "size": 5
+      }
+    ],
+    "urls": {
+      "1": "/scenes/ariel/ariel-system-markers.webp",
+      "2": "/scenes/ariel/ariel-system-markers@2x.webp"
+    }
+  },
+  "geometryScale": 1
+}

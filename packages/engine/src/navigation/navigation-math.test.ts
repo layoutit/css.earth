@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from './sphere-drag.js';
 import { sampleDestinationFlight, rotationAxisAngle } from './destination-flight.js';
-import { createGoogleEarthDragHistory, recordGoogleEarthDragSample, estimateGoogleEarthDragThrow, advanceGoogleEarthDragThrow } from './google-earth-drag-inertia.js';
+import { createDragHistory, recordDragSample, estimateDragThrow, advanceDragThrow } from './trackball-drag-inertia.js';
 
 const trackball = { centerX: 704, centerY: 479.5, radius: 295.4867, surfaceRadius: 295.4867,
   focalLength: 1408 * Math.sqrt(3) / 2, viewportWidth: 1408 };
@@ -42,18 +42,18 @@ describe('retained navigation math', () => {
   });
 
   it('rejects stale releases and decays a qualified throw', () => {
-    const history = createGoogleEarthDragHistory();
+    const history = createDragHistory();
     for (const [x, timestamp, yaw] of [[600, 0, 0], [620, 16, 5], [670, 32, 17], [760, 48, 39]]) {
-      recordGoogleEarthDragSample(history, { x, y: 450, timestamp, yaw, pitch: 0 });
+      recordDragSample(history, { x, y: 450, timestamp, yaw, pitch: 0 });
     }
-    expect(estimateGoogleEarthDragThrow({ history, releaseTimestamp: 149, trackball })).toBeNull();
-    const motion = estimateGoogleEarthDragThrow({ history, releaseTimestamp: 48, trackball });
+    expect(estimateDragThrow({ history, releaseTimestamp: 149, trackball })).toBeNull();
+    const motion = estimateDragThrow({ history, releaseTimestamp: 48, trackball });
     expect(motion).not.toBeNull();
     if (!motion) throw new Error('Expected a qualified release.');
-    const step = advanceGoogleEarthDragThrow({ ...motion, elapsedMilliseconds: 16 });
+    const step = advanceDragThrow({ ...motion, elapsedMilliseconds: 16 });
     expect(step.active).toBe(true);
     expect(Math.abs(step.yawDegreesPerMillisecond)).toBeLessThan(Math.abs(motion.yawDegreesPerMillisecond));
-    expect(advanceGoogleEarthDragThrow({ ...motion, elapsedMilliseconds: 1200 }).active).toBe(false);
+    expect(advanceDragThrow({ ...motion, elapsedMilliseconds: 1200 }).active).toBe(false);
   });
 
 

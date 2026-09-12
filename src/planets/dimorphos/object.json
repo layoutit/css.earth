@@ -12,6 +12,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -61,7 +62,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "02535109d6f9ee4ad87707f89db30843eb0da3c1e1ebd326e34aeef119d1c335"
+          "sha256": "0f0a02c055da9d1e62184cd92e5f4e63a85d1db97d463a3d45eaedc4d5aff453"
         },
         {
           "id": "rotation",
@@ -71,7 +72,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3bc06226f6b0f40911fd374884cb90e83240655234998dbda0c847740bb3fdf0"
+          "sha256": "0f4ac1a0365de8455d889f20449e977414ba0e9da9a8019a06faefdd33f484ce"
         },
         {
           "id": "title",
@@ -86,9 +87,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "ff9aae8403b1936cbe7f8ceaef2cdfd3795cf538fe69b872b83261f069088cd8"
+          "sha256": "c249750d7b119e50ca2de1e3561c8ccb08a4f1db7519787a7aa1727ba086eb30"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "62621f87e15f29b0e0e081826b60c070c30c4c35ad939d802a4a27541d1e2dd6"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -123,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "764d57889ad43bdd3d7e2dcfbb655cb0705d0a4de74ad31f1ab6cdb0f8041948"
+        "sha256": "58be7394a0621352e9adaff88184242aee5ac757ea027cfc46238f56665cc6f5"
       }
     },
     "catalog": {
@@ -142,8 +152,8 @@
   "schema": "cssearth-object@1",
   "type": "layered-body",
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "7396d2603d19ff4922bf212a1b9eeb0a083d32f97704ec8fbfa19e515c8eec7e"
+    "sha256": "32694867479931edd3e91180c69b3004e591e4adb895a7cd78d85b7afc918024"
   }
 }

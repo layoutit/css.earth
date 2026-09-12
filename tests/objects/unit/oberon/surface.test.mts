@@ -1,4 +1,6 @@
 import {required} from '../../../../tools/test-values.mts';
+import {shape} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
+import {requireRecord} from '../../../../tools/source-values.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
@@ -6,6 +8,7 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
+import {parseInterpreterRecipe} from '../../../../tools/objects/observation/interpret.mts';
 
 const root = new URL('../../../../src/planets/oberon/source/', import.meta.url).pathname;
 const read = async (path: string) => JSON.parse((await readFile(root + path)).toString('utf8'));
@@ -20,10 +23,10 @@ test('Oberon preserves the original cube inside its source gzip', async () => {
 });
 
 test('Oberon native tile order and negative-longitude map origin preserve geographic samples', async () => {
-  const config = await read('preparation/terrestrial.json');
+  const recipe = parseInterpreterRecipe(await read('preparation/raster.json'));
   const {inputs} = await read('manifest.json');
   const entry = inputs.find((input: { lensId: string; }) => input.lensId === 'normal');
-  const policy = config.raster.observations[0].validity;
+  const policy = shape({validity: requireRecord})(required(recipe.surfaces.find(surface => surface.id === 'normal')?.science, 'normal science')).validity;
   const mosaic = await loadScienceSurface(root, {path: entry.path, format: 'isis3', grid: policy.grid, sampling: 'bilinear'});
   // Independently decoded with Python struct from the pinned original's 319x479
   // tiles, then projected and interpolated at USGS Gazetteer feature centres.

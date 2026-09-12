@@ -8,6 +8,7 @@ import sharp from 'sharp';
 import {fromFile} from 'geotiff';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {prepareMaskedObservation} from '../../../../tools/objects/terrestrial-layers/observed-geotiff.mts';
+import {parseInterpreterRecipe} from '../../../../tools/objects/observation/interpret.mts';
 const root=new URL('../../../../src/planets/callisto/source/',import.meta.url);
 const json=async (path: string|URL)=>JSON.parse(await readFile(new URL(path,root),'utf8'));
 const hash=(b: string|NodeJS.ArrayBufferView<ArrayBufferLike>|Buffer<ArrayBufferLike>)=>createHash('sha256').update(b).digest('hex');
@@ -90,8 +91,10 @@ test('every derived texel obeys the 65-degree camera footprint and original opaq
 });
 
 test('the shared observation decoder honors this actual GeoTIFF footprint and geographic pixel centers',async()=>{
- const config=await json('preparation/terrestrial.json');const lens=config.raster.observations.find((o: { id: string; })=>o.id==='enhanced');
- assert.deepEqual(lens.focus,{longitudeDegrees:145.2,latitudeDegrees:-.15,zoom:1.1});
+ const config=parseInterpreterRecipe(await json('preparation/raster.json'));const lens=required(config.surfaces.find(s=>s.id==='enhanced')?.science,'enhanced science');
+ // The lens focus moved out of the raster recipe into the shared presentation profile.
+ const presentation=shape({lensFocus:shape({enhanced:shape({longitudeDegrees:number,latitudeDegrees:number,zoom:number})})})(await json('preparation/presentation.json'));
+ assert.deepEqual(presentation.lensFocus.enhanced,{longitudeDegrees:145.2,latitudeDegrees:-.15,zoom:1.1});
  const result=await prepareMaskedObservation(new URL(entry.path,root).pathname,entry,lens.validity,360,180);
  let valid=0,edge=0;
  for(let y=0;y<180;y++)for(let x=0;x<360;x++){

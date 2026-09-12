@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-surface-features-source@1",
+  "source": "IAU/USGS Gazetteer of Planetary Nomenclature, Rhea centre points",
+  "snapshotDate": "2026-09-11",
+  "sourcePage": "https://planetarynames.wr.usgs.gov/Page/RHEA/target",
+  "license": "Public domain (United States Government work)",
+  "licenseEvidence": "metadata_nomenclature_points_RHEA.xml inside the archive declares the use constraint “Public domain.”",
+  "qualification": "IAU-adopted feature names with Gazetteer centre coordinates, diameters and latitude–longitude extents, positive-east longitudes 0–360°. Centre points only: feature outlines are not published, and features without a diameter are not labelled.",
+  "inputs": [
+    {
+      "path": "RHEA_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RHEA_nomenclature_center_pts.zip",
+      "bytes": 414397,
+      "sha256": "e483758bc3e1d9b3f38a8ccdc4f73d8e11a68e792249b24a2ea62d1ded1b51c9"
+    }
+  ]
+}

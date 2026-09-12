@@ -141,7 +141,7 @@ async function markerPresentations(descriptors: readonly ObjectMarkerDescriptor[
       if (image.width !== markerTileSize * density || image.height !== markerTileSize * density) throw new TypeError(`Invalid marker dimensions: ${id}.`);
     }
     const context = parents.has(id) || descriptor.context ? await metadata(`${id}-context.webp`) : null;
-    entries.push([id, { url: `/navigation/body-${id}.webp`, url2x: `/navigation/body-${id}@2x.webp`, index: 0, count: 1,
+    entries.push([id, { url: `/navigation/body-${id}.webp`, url2x: `/navigation/body-${id}@2x.webp`, url2xPixels: markerTileSize * 2, index: 0, count: 1,
       presentation: descriptor.presentation, ...(context ? { context: { url: `/navigation/${id}-context.webp`, pixels: context.width } } : {}) }]);
   }
   return Object.fromEntries(entries);

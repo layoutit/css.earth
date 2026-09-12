@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
-import {readFitsPrimary} from '../../../../tools/objects/static-surface/fits-map.mts';
+import {readFitsPrimary} from '../../../../tools/objects/observation/fits.mts';
 import {parseObjTextureCoordinates,createObjUvFitsSampler} from '../../../../tools/objects/terrestrial-layers/obj-uv-fits.mts';
 const root=new URL('../../../../src/planets/arrokoth/source/',import.meta.url);
 const json=async (path: string|URL)=>JSON.parse((await readFile(new URL(path,root))).toString('utf8'));

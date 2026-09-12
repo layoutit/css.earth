@@ -1,28 +1,26 @@
-import PREPARED_MARS_LIGHTING from "../../../../src/planets/mars/prepared/lighting.json" with {type:'json'};
 import { createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
-import objectControls from "../../../../src/planets/mars/prepared/controls.json" with {type:'json'};
-
-const materialOne = PREPARED_MARS_LIGHTING.banks["1"];
-const materialTwo = PREPARED_MARS_LIGHTING.banks["2"];
-const defaultMaterialOne = materialOne.rows[materialOne.transport.defaultRow];
-const defaultMaterialTwo = materialTwo.rows[materialTwo.transport.defaultRow];
+import { readPreparedFixture } from "../../fixtures.mts";
+const objectControls = await readPreparedFixture("mars", "controls");
 
 export const browserProfile = createObjectBrowserProfile({
-  id: "mars", controls: objectControls,
-  cameraFields: ["pitch", "controlPitch", "controlYaw", "zoom"],
+  id: "mars", controls: objectControls, cameraFields: ["pitch", "controlPitch", "controlYaw", "zoom"],
   audit: Object.freeze({
     preparedAssetPairs: Object.freeze([
       Object.freeze({
-        one: "/scenes/mars/mars-surface.webp",
-        two: "/scenes/mars/mars-surface@2x.webp",
+        one: "/scenes/mars/mars-surface-normal.webp",
+        two: "/scenes/mars/mars-surface-normal@2x.webp",
       }),
       Object.freeze({
-        one: "/scenes/mars/mars-poles.webp",
-        two: "/scenes/mars/mars-poles@2x.webp",
+        one: "/scenes/mars/mars-poles-normal.webp",
+        two: "/scenes/mars/mars-poles-normal@2x.webp",
       }),
       Object.freeze({
-        one: defaultMaterialOne.url,
-        two: defaultMaterialTwo.url,
+        one: "/scenes/mars/mars-material.webp",
+        two: "/scenes/mars/mars-material@2x.webp",
+      }),
+      Object.freeze({
+        one: "/scenes/mars/mars-lighting.webp",
+        two: "/scenes/mars/mars-lighting@2x.webp",
       }),
       Object.freeze({
         one: "/scenes/mars/mars-starfield-front.webp",
@@ -37,8 +35,8 @@ export const browserProfile = createObjectBrowserProfile({
       defaultId: "normal",
       slowId: "elevation",
       winnerId: "thermal",
-      slowAsset: "/scenes/mars/mars-lens-elevation@2x.webp",
-      preReadyDisabled: false,
+      slowAsset: "/scenes/mars/mars-surface-elevation@2x.webp",
+      preReadyDisabled: true,
     }),
     retained: Object.freeze({
       lensIds: Object.freeze(["normal", "elevation", "thermal"]),

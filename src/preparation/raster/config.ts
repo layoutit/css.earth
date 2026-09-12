@@ -1,18 +1,38 @@
 import type { AtmosphericRasterConfig, LambertRasterConfig, CutawayAngles, InteriorPalette } from '@cssearth/objects';
+/** Delivered surface map encoding. Absent means the lossy WebP default. */
+export interface SurfaceEncoding {
+    format: 'jpeg';
+    /** libjpeg: sharp's libjpeg-compatible defaults; mozjpeg: its trellis preset. */
+    encoder: 'libjpeg' | 'mozjpeg';
+    progressive: boolean;
+    quality: number;
+    grayscale?: boolean;
+    chromaSubsampling?: '4:2:0' | '4:4:4';
+}
 export interface SurfaceRasterRecipe {
     id: string;
     source: string;
     falseColor: boolean;
     output: string;
+    encoding?: SurfaceEncoding;
     thumbnail: string;
+    /** Offline surface resolution relative to the shared layout; does not change geometry or lighting. */
+    resolutionScale?: number;
     sharpen?: number[];
     exposure?: number[];
+    /** Opt in to sampling the pinned source image directly for pole sprites. The delivered latitude bands stay unchanged. */
+    nativeSourcePoles?: boolean;
     coverage?: {
         normal: string;
         topography: string;
         references: string[];
     };
+    /** Scientific interpretation before packing (numeric grids, colour ramps, categorical palettes, tonal presentation,
+     * missing-coverage grid): the static lane's observation fields, applied by an injected adapter. */
+    science?: Record<string, unknown>;
 }
+/** An unlit body: per-lens off-limb context and limb plates written by the interpretation instead of a lighting bank. */
+export interface EmissionRecipe { offLimbSize: number; limbSize: number; bodyDiameter: number; offLimbOutput: string; limbOutput: string; metadata: Record<string, unknown>; }
 export interface LightingRecipe extends LambertRasterConfig {
     frameSize: number;
     columns: number;
@@ -91,6 +111,9 @@ export interface RasterRecipe {
     polarTile: number;
     densities: number[];
     resample: 'source-packed' | 'density-before-pack';
+    /** Source-packed maps normally pack first, then resize. This opt-in resizes the accepted source map before
+     * packing so the resampler never reads across stored latitude-strip gutters. */
+    unpackedResizeBeforePack?: boolean;
     polarProjection: 'angular-nearest' | 'orthographic-bilinear';
     surfaces: SurfaceRasterRecipe[];
     polesOutput: string;
@@ -110,6 +133,7 @@ export interface RasterRecipe {
         quality: number;
     };
     lighting?: LightingRecipe;
+    emission?: EmissionRecipe;
     atmosphere?: AtmosphereRecipe;
     interior?: InteriorRecipe;
 }

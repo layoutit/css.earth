@@ -25,7 +25,9 @@ export function createCameraViewport(stage: HTMLElement, previewElement: HTMLEle
     let changed = false;
     for (const entry of projections.values()) {
       const focalPixels = Number.parseFloat(view.getComputedStyle(entry.probe).perspective);
-      if (!(bounds.width > 0 && bounds.height > 0 && focalPixels > 0)) throw new Error('Shared camera viewport has no projection.');
+      if (!(bounds.width > 0 && bounds.height > 0 && focalPixels > 0)) {
+        throw new Error(`Shared camera viewport has no projection: stage ${bounds.width}×${bounds.height}, probe '${entry.probe.style.perspective}' → '${view.getComputedStyle(entry.probe).perspective}'${entry.probe.isConnected ? '' : ', probe detached'}.`);
+      }
       const previous = entry.snapshot;
       if (previous && previous.focalPixels === focalPixels && previous.previewTop === previewTop &&
           Object.entries(measuredBounds).every(([key, value]) => previous.bounds[key as keyof CameraViewportSnapshot['bounds']] === value)) continue;
@@ -34,17 +36,25 @@ export function createCameraViewport(stage: HTMLElement, previewElement: HTMLEle
     }
     return changed;
   };
+  const refresh = () => {
+    if (destroyed || projections.size === 0) return;
+    if (measure()) for (const listener of listeners) listener();
+  };
   const invalidate = () => {
     // Keep the last published measurement until the layout owner refreshes it.
     // Sidebar content resizes must not force an incoming scene to measure DOM.
     if (destroyed || frame !== null || projections.size === 0) return;
     frame = view.requestAnimationFrame(() => {
       frame = null;
-      if (destroyed) return;
-      if (measure()) for (const listener of listeners) listener();
+      refresh();
     });
   };
-  const observer = new view.ResizeObserver(invalidate);
+  // ResizeObserver runs after layout. Measure here while geometry is current,
+  // instead of next frame after camera/scene writes have dirtied style again.
+  const observer = new view.ResizeObserver(() => {
+    if (frame !== null) { view.cancelAnimationFrame(frame); frame = null; }
+    refresh();
+  });
   observer.observe(stage);
   if (previewElement) observer.observe(previewElement);
   view.addEventListener('resize', invalidate, { passive: true });

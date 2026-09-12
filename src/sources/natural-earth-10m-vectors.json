@@ -1,0 +1,53 @@
+{
+  "id": "natural-earth-10m-vectors",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Natural Earth · 1:10m cultural and physical vectors",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://naciscdn.org/naturalearth/10m/",
+      "label": "Download mirror (NACIS CDN)"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "label": "Terms of use (public domain)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/earth/source/features/manifest.json",
+      "revision": "7b137a84f2aa47a630cb36f392a0ee5ccd3c5ab6",
+      "sha256": "0bf33af0e8562409821c519e0b401f1c1412e651edc5f2ca89a4debd2584c3c2",
+      "locator": "/inputs"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Natural Earth: Tom Patterson, Nathaniel Vaughn Kelso and contributors.",
+      "scope": "Place, region, sea and river names, ranks and geometry on Earth.",
+      "evidence": "naturalearthdata.com About and Terms of use pages, read 2026-09-12."
+    },
+    {
+      "kind": "rights",
+      "text": "Public domain: all versions of Natural Earth raster and vector map data are in the public domain.",
+      "scope": "The five pinned archives.",
+      "evidence": "https://www.naturalearthdata.com/about/terms-of-use/ (read 2026-09-12)."
+    },
+    {
+      "kind": "limitation",
+      "text": "Editorial cartographic selection and English names; not an official gazetteer, and populations are Natural Earth's estimates.",
+      "scope": "Earth labels and their ranking.",
+      "evidence": "tools/objects/surface-features/natural-earth.ts reads the pinned attribute tables as published."
+    }
+  ]
+}

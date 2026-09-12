@@ -1,12 +1,32 @@
 import { isArray } from '../../../src/platform/is-array.mts';
+import { isRecord } from '../../source-values.mts';
 import type {ProjectiveGeometry} from '../../../src/platform/projective-surface-raster.mts';
-import type {RasterInfo} from '../static-surface/contracts.mts';
+import type {RasterInfo} from '../observation/raster.mts';
 export interface PagedRasterConfiguration {publicBase: string; atlas: {density: number; gutter: number; pageSize: number; sourceWidth: number};}
 export interface PagedSurfacePresentation {packedRect: {x: number; y: number; width: number; height: number}; overscan: number;
   layout: {gutter: number; bands: readonly {y: number; height: number; packedY: number}[]};}
 export interface PagedSurfaceRasterCell {
   index: number; size: number; density: number; reversed: boolean; perspectiveY: number; page: number; x: number; y: number;
   source: {x: number; southY: number; width: number; height: number}; layer: ReturnType<typeof prepareProjectiveTextureLayer>;
+}
+export interface PagedSurfaceRasterBakeCell {
+  size: number; density: number; reversed: boolean; perspectiveY: number; page: number; x: number; y: number;
+  source: {x: number; southY: number; width: number; height: number};
+}
+export interface PagedSurfaceRasterPlan {
+  atlas: {pageSize: number; density: number; gutter: number; sourceWidth: number; sourceHeight?: number};
+  cells: readonly PagedSurfaceRasterBakeCell[];
+  pages: readonly {width: number; height: number}[];
+}
+export interface NativePhotographicCloudComposite {
+  data: Uint8Array;
+  width: number;
+  height: number;
+  channels: 3;
+  maximumAlpha: number;
+  threshold: number;
+  scale: number;
+  color: readonly number[];
 }
 import { prepareProjectiveTextureLayer } from "../../../src/platform/projective-surface-raster.mts";
 
@@ -126,9 +146,12 @@ function createSurfaceRasterPlan() {
 // Bake the projective texture into RGBA, as in Pluto, so the browser only
 // positions an affine rectangle. Pixels outside the trapezoid stay transparent
 // instead of relying on Chrome to flatten a perspective-warped child.
-function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: RasterInfo, cells: readonly PagedSurfaceRasterCell[], density = 8, page = 0) {
+function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: RasterInfo, cells: readonly PagedSurfaceRasterBakeCell[], density = 8, page = 0,
+  nativeClouds?: NativePhotographicCloudComposite, nativeDisplayGamma = 1) {
   if (channels !== 3 || data.length !== width * height * channels ||
-      ![2, 4, 8].includes(density) || width !== 1024 * density || height !== 512 * density) {
+      ![2, 4, 8].includes(density) || width !== height * 2 ||
+      (nativeClouds && (nativeClouds.channels !== 3 || nativeClouds.width !== nativeClouds.height * 2 ||
+        nativeClouds.data.length !== nativeClouds.width * nativeClouds.height * nativeClouds.channels))) {
     throw new Error("Paged ellipsoid surface source dimensions do not match the prepared density.");
   }
   if (!isArray(cells)) throw new Error("Paged ellipsoid raster cells are invalid.");
@@ -156,13 +179,16 @@ function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: Raster
     cell.y + cell.size + SURFACE_ATLAS.gutter)) / 4) * 4 * atlasScale;
   const output = Buffer.alloc(outputWidth * outputHeight * 4);
   const scale = width / SURFACE_ATLAS.sourceWidth;
-  const sample = (x: number, y: number, channel: number) => {
+  const sourceSample = (raster: Uint8Array, rasterWidth: number, rasterHeight: number, rasterChannels: number,
+    x: number, y: number, channel: number) => {
     const x0 = Math.floor(x), y0 = Math.floor(y), tx = x - x0, ty = y - y0;
-    const at = (sx: number, sy: number) => data[(Math.max(0, Math.min(height - 1, sy)) * width +
-      ((sx % width) + width) % width) * channels + channel];
+    const at = (sx: number, sy: number) => raster[(Math.max(0, Math.min(rasterHeight - 1, sy)) * rasterWidth +
+      ((sx % rasterWidth) + rasterWidth) % rasterWidth) * rasterChannels + channel];
     return (at(x0, y0) * (1 - tx) + at(x0 + 1, y0) * tx) * (1 - ty) +
       (at(x0, y0 + 1) * (1 - tx) + at(x0 + 1, y0 + 1) * tx) * ty;
   };
+  const displaySample = (value: number) => nativeDisplayGamma === 1 ? value :
+    Math.round(255 * (Math.round(value) / 255) ** (1 / nativeDisplayGamma));
   for (const cell of pageCells) {
     const cellDensity = cell.density * atlasScale;
     const left = Math.floor(cell.x * atlasScale), top = Math.floor(cell.y * atlasScale);
@@ -181,7 +207,18 @@ function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: Raster
         // Sample continuous original north-to-south rows, including adjacent
         // latitudes at boundaries. Do not reverse or clamp individual bands.
         const sy = (cell.source.southY - v / 32 * cell.source.height) * scale - 0.5;
-        for (let channel = 0; channel < 3; channel++) rgb[channel] += sample(sx, sy, channel);
+        if (nativeClouds) {
+          const cloudX = (sx + .5) / width * nativeClouds.width - .5;
+          const cloudY = (sy + .5) / height * nativeClouds.height - .5;
+          const red = sourceSample(nativeClouds.data, nativeClouds.width, nativeClouds.height, nativeClouds.channels, cloudX, cloudY, 0);
+          const green = sourceSample(nativeClouds.data, nativeClouds.width, nativeClouds.height, nativeClouds.channels, cloudX, cloudY, 1);
+          const blue = sourceSample(nativeClouds.data, nativeClouds.width, nativeClouds.height, nativeClouds.channels, cloudX, cloudY, 2);
+          const luminance = red * .2126 + green * .7152 + blue * .0722;
+          const alpha = Math.max(0, Math.min(nativeClouds.maximumAlpha,
+            (luminance - nativeClouds.threshold) / 255 * nativeClouds.scale));
+          for (let channel = 0; channel < 3; channel++) rgb[channel] +=
+            displaySample(sourceSample(data, width, height, channels, sx, sy, channel)) * (1 - alpha) + nativeClouds.color[channel] * alpha;
+        } else for (let channel = 0; channel < 3; channel++) rgb[channel] += displaySample(sourceSample(data, width, height, channels, sx, sy, channel));
         count++;
       }
       if (!count) continue;
@@ -194,4 +231,24 @@ function bakeSurfaceRaster(data: Uint8Array, { width, height, channels }: Raster
 }
 
 return { atlas: SURFACE_ATLAS, surfacePageUrls, createSurfaceRasterPlan, bakeSurfaceRaster };
+}
+
+/** Parse a checked-in raster layout for a selective asset refresh without rebuilding geometry. */
+export function parsePreparedSurfaceRasterPlan(input: unknown): PagedSurfaceRasterPlan {
+  const finite=(value: unknown): value is number => typeof value==='number'&&Number.isFinite(value);
+  const integer=(value: unknown): value is number => finite(value)&&Number.isInteger(value);
+  const value=isRecord(input)?input:null,atlas=isRecord(value?.atlas)?value.atlas:null,cells=isArray(value?.cells)?value.cells:null,pages=isArray(value?.pages)?value.pages:null;
+  const pageSize=atlas?.pageSize,density=atlas?.density,gutter=atlas?.gutter,sourceWidth=atlas?.sourceWidth,sourceHeight=atlas?.sourceHeight;
+  if(!atlas||!cells?.length||!pages?.length||!integer(pageSize)||!integer(density)||!integer(gutter)||!integer(sourceWidth)||!integer(sourceHeight)||
+    pageSize<=0||density<=0||gutter<0||sourceWidth<=0||sourceHeight<=0)throw new TypeError('Prepared surface raster plan is invalid.');
+  const preparedPages=pages.map(page=>{const candidate=isRecord(page)?page:null,width=candidate?.width,height=candidate?.height;if(!candidate||!integer(width)||!integer(height)||width<=0||height<=0)throw new TypeError('Prepared surface raster page is invalid.');return {width,height};});
+  const preparedCells=cells.map(cell=>{const candidate=isRecord(cell)?cell:null,source=isRecord(candidate?.source)?candidate.source:null;
+    const size=candidate?.size,cellDensity=candidate?.density,perspectiveY=candidate?.perspectiveY,page=candidate?.page,x=candidate?.x,y=candidate?.y,reversed=candidate?.reversed;
+    const sourceX=source?.x,southY=source?.southY,width=source?.width,height=source?.height;
+    if(!candidate||!source||!finite(size)||!finite(cellDensity)||!finite(perspectiveY)||!finite(sourceX)||!finite(southY)||!finite(width)||!finite(height)||
+      !integer(page)||!integer(x)||!integer(y)||typeof reversed!=='boolean'||size<=0||cellDensity<=0||width<=0||height<=0||page<0||page>=preparedPages.length||x<gutter||y<gutter)throw new TypeError('Prepared surface raster cell is invalid.');
+    return {size,density:cellDensity,reversed,perspectiveY,page,x,y,source:{x:sourceX,southY,width,height}};
+  });
+  if(new Set(preparedCells.map(cell=>cell.page)).size!==preparedPages.length)throw new TypeError('Prepared surface raster page has no cells.');
+  return {atlas:{pageSize,density,gutter,sourceWidth,sourceHeight},cells:preparedCells,pages:preparedPages};
 }

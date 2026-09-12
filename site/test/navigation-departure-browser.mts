@@ -10,6 +10,8 @@ import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
+import { selectObject } from './navigate-object.mts';
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://127.0.0.1:4210';
 const unlimitedDeparture = process.env.CSSEARTH_TEST_UNLIMITED_DEPARTURE === '1';
@@ -19,7 +21,7 @@ const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const reports = [];
 try {
   for (const [from, to] of [['mercury', 'venus'], ['venus', 'mercury']]) {
-    const definition = parsePreparedObjectRuntime(requireRecord(JSON.parse(await readFile(`src/planets/${from}/prepared/object.json`, 'utf8'))).data);
+    const definition = parsePreparedObjectRuntime(await loadObjectTestDefinition(from));
     const lod = required(definition.camera.levelOfDetail);
     const page = await createTestPage(browser, { viewport: { width: 1440, height: 1000 } });
     const errors:string[] = []; page.on('pageerror', error => errors.push(error.message));
@@ -71,7 +73,7 @@ try {
       }
       proof.raf = requestAnimationFrame(sample);
     }, { from, to, radiusUnits: definition.camera.logicalBodyDiameter / (2 * definition.camera.sceneScale) });
-    await page.locator(`a.scale-stop[href="/${to}/"]`).click();
+    await selectObject(page, to);
     await page.waitForFunction(id => window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === id, to, { timeout: 60000 });
     const frames = await page.evaluate(() => { cancelAnimationFrame(window.__departureProof.raf); return window.__departureProof.frames; });
     const sourceFrames = frames.flatMap(frame => frame.source ? [{...frame,source:{...frame.source,diameter:required(frame.source.diameter),centre:required(frame.source.centre)}}] : []);

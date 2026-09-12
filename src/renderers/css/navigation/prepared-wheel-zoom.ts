@@ -1,6 +1,7 @@
-import type { RuntimePolicy, WheelInputKind } from './runtime-policy.js';
+import type { RuntimePolicy, WheelInputKind, WheelZoomInertia } from './runtime-policy.js';
+import { createOpacityClock } from '../stars/opacity-clock.js';
 import type { NavigationCamera, TrackballMetrics, CameraDelta, ControlsUpdate } from './types.js';
-export interface PreparedWheelZoomOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; rotate(delta: CameraDelta): void; minimumZoom: number; maximumZoom: number; speedMultiplier?: number; useScrollDistance?: boolean; dolly?: { stepPerDelta: number } | null; onError?: ((error: unknown) => void) | null; }
+export interface PreparedWheelZoomOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; rotate(delta: CameraDelta): void; minimumZoom: number; maximumZoom: number; speedMultiplier?: number; useScrollDistance?: boolean; dolly?: { stepPerDelta: number } | null; inertia?: WheelZoomInertia | null; inertiaInputKinds?: readonly WheelInputKind[]; onError?: ((error: unknown) => void) | null; }
 export type PreparedWheelZoomControls = ReturnType<typeof createPreparedWheelZoomControls>;
 import { projectSphereDrag } from "@cssearth/engine";
 
@@ -37,8 +38,12 @@ export function createPreparedWheelZoomControls({
   speedMultiplier = runtimePolicy.WHEEL_ZOOM_SPEED_MULTIPLIER,
   useScrollDistance = runtimePolicy.WHEEL_ZOOM_USE_SCROLL_DISTANCE,
   dolly = null,
+  inertia = runtimePolicy.WHEEL_ZOOM_INERTIA,
+  inertiaInputKinds = runtimePolicy.WHEEL_ZOOM_INERTIA_INPUT_KINDS,
   onError = null,
 }: PreparedWheelZoomOptions) {
+  const glidePolicy = inertia ?? null;
+  const glideKinds = Object.freeze([...inertiaInputKinds]);
   if (!(inputSurface instanceof HTMLElement) ||
       typeof camera?.state !== "object" ||
       typeof trackballMetrics !== "function" || typeof rotate !== "function" ||
@@ -47,6 +52,10 @@ export function createPreparedWheelZoomControls({
       !Number.isFinite(speedMultiplier) || speedMultiplier <= 0 ||
       typeof useScrollDistance !== "boolean" ||
       (dolly !== null && !(dolly.stepPerDelta > 0)) ||
+      (glidePolicy !== null && !(glidePolicy.dampingSeconds > 0 && glidePolicy.gain > 0 &&
+        glidePolicy.stopLogRatePerSecond > 0 &&
+        glidePolicy.stopRateRatio > 0 && glidePolicy.stopRateRatio < 1)) ||
+      !glideKinds.every(kind => kind === "wheel" || kind === "trackpad") ||
       (onError !== null && typeof onError !== "function")) {
     throw new TypeError("Prepared wheel zoom controls are invalid.");
   }
@@ -61,8 +70,12 @@ export function createPreparedWheelZoomControls({
       onError(error);
     }
   };
-  const requestFrame = (callback: FrameRequestCallback) => windowTarget.requestAnimationFrame(guard(callback));
-  const cancelFrame = windowTarget.cancelAnimationFrame.bind(windowTarget);
+  // The zoom glide moves the camera, so it belongs to the same input lane as a
+  // thrown drag: one clock, and the glide always resolves before the publication
+  // that reads its distance.
+  const frameClock = createOpacityClock(windowTarget);
+  const requestFrame = (callback: FrameRequestCallback) => frameClock.request(guard(callback), 'input');
+  const cancelFrame = (id: number) => frameClock.cancel(id);
   let enabled = true;
   let frame: number | null = null;
   let direction = 0;
@@ -75,6 +88,12 @@ export function createPreparedWheelZoomControls({
   let previousInputTimestamp = -Infinity;
   let events = 0;
   let frames = 0;
+  // The rate the camera is actually travelling at, in log units per millisecond,
+  // and the glide it is released into. Both are signed: negative approaches.
+  // Seeding from the camera rather than from the commanded target keeps the
+  // release continuous: a short gesture commands far more than it has run.
+  let travelRate = 0;
+  let gliding = false, glideRate = 0, releasedRate = 0, glidePrevious = 0;
 
   const stop = () => {
     if (frame !== null) cancelFrame(frame);
@@ -84,6 +103,81 @@ export function createPreparedWheelZoomControls({
     anchor = null;
     targetZoom = null;
     targetDistance = null;
+    gliding = false;
+    glideRate = 0;
+    releasedRate = 0;
+    travelRate = 0;
+  };
+  // The camera's own recent speed, averaged over the frames it just travelled.
+  const recordTravel = (ratio: number, elapsed: number) => {
+    if (!(elapsed > 0) || !(ratio > 0)) return;
+    const applied = Math.log(ratio) / elapsed;
+    travelRate = travelRate === 0 ? applied : travelRate * .6 + applied * .4;
+  };
+  // One zoom step for the scale camera, holding the anchor under the cursor.
+  const applyZoom = (previousZoom: number, zoom: number) => {
+    let rotation;
+    if (anchor !== null && zoom !== previousZoom) {
+      const trackball = trackballMetrics();
+      const scale = zoom / previousZoom;
+      rotation = scale < 1 ? zoomOutRayRotation(trackball, anchor, scale) : projectSphereDrag({
+        ...trackball,
+        radius: trackball.surfaceRadius,
+        previousX: anchor.x,
+        previousY: anchor.y,
+        currentX: trackball.centerX +
+          (anchor.x - trackball.centerX) / scale,
+        currentY: trackball.centerY +
+          (anchor.y - trackball.centerY) / scale,
+      });
+    }
+    rotate({
+      controlPitchDelta: 0,
+      controlYawDelta: 0,
+      zoom,
+      ...(rotation === undefined ? {} : { rotation }),
+    });
+  };
+  // The released gesture keeps its rate and decays it toward zero. The wheel
+  // commands log-distance, so the glide is exponential in the gesture's own
+  // units; a bound, a new event or a stop ends it at once.
+  const glide = (timestamp: number) => {
+    if (glidePolicy === null) { frame = null; gliding = false; return; }
+    const step = Math.max(0, timestamp - glidePrevious);
+    glidePrevious = timestamp;
+    glideRate *= Math.max(0, 1 - step / (glidePolicy.dampingSeconds * 1000));
+    if (step > 0 && glideRate !== 0) {
+      if (dolly !== null) {
+        const distance = camera.state.distance * Math.exp(glideRate * step);
+        rotate({ controlPitchDelta: 0, controlYawDelta: 0, distance });
+        if (disposed) return;
+        frames += 1;
+        // A bound refused the step: the glide has nowhere left to travel.
+        if (camera.state.distance !== distance) glideRate = 0;
+      } else {
+        const previousZoom = camera.state.zoom;
+        const zoom = clamp(previousZoom * Math.exp(glideRate * step), minimumZoom, maximumZoom);
+        applyZoom(previousZoom, zoom);
+        if (disposed) return;
+        frames += 1;
+        if (zoom === previousZoom) glideRate = 0;
+      }
+    }
+    // A glide ends when its own motion stops being visible, not when it falls to
+    // a share of whatever rate released it: an eye reads distance change per frame,
+    // so the absolute floor is what keeps the strongest gestures from snapping and
+    // the gentlest from drifting invisibly. The ratio bounds an extreme fling.
+    const stopRate = Math.max(glidePolicy.stopLogRatePerSecond / 1000,
+      Math.abs(releasedRate) * glidePolicy.stopRateRatio);
+    if (Math.abs(glideRate) > stopRate) {
+      frame = requestFrame(glide);
+    } else {
+      frame = null;
+      previousTimestamp = null;
+      direction = 0;
+      gliding = false;
+      glideRate = 0;
+    }
   };
   const animate = (timestamp: number) => {
     if (previousTimestamp === null) previousTimestamp = timestamp;
@@ -92,6 +186,10 @@ export function createPreparedWheelZoomControls({
       timestamp - previousTimestamp,
       expiresAt - previousTimestamp,
     ));
+    // The commanded interval rarely ends on a frame boundary. Whatever is left
+    // of this frame belongs to the glide, so the released gesture keeps moving
+    // at its own rate instead of showing one short step at the handoff.
+    const leftover = Math.max(0, timestamp - previousTimestamp - elapsed);
     previousTimestamp = timestamp;
     if (elapsed > 0 && direction !== 0 && dolly !== null) {
       // The dolly: the outstanding log-distance, spread over the interval.
@@ -101,6 +199,7 @@ export function createPreparedWheelZoomControls({
       rotate({ controlPitchDelta: 0, controlYawDelta: 0, distance });
       if (disposed) return;
       frames += 1;
+      recordTravel(camera.state.distance / previousDistance, elapsed);
       // A clamped dolly drops what the bound refused.
       if (camera.state.distance !== distance) targetDistance = camera.state.distance;
     } else if (elapsed > 0 && direction !== 0) {
@@ -110,29 +209,10 @@ export function createPreparedWheelZoomControls({
           ? Math.log(targetZoom! / previousZoom) * Math.min(1, elapsed / remaining)
           : direction * PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * speedMultiplier * elapsed,
       ), minimumZoom, maximumZoom);
-      let rotation;
-      if (anchor !== null && zoom !== previousZoom) {
-        const trackball = trackballMetrics();
-        const scale = zoom / previousZoom;
-        rotation = direction < 0 ? zoomOutRayRotation(trackball, anchor, scale) : projectSphereDrag({
-          ...trackball,
-          radius: trackball.surfaceRadius,
-          previousX: anchor.x,
-          previousY: anchor.y,
-          currentX: trackball.centerX +
-            (anchor.x - trackball.centerX) / scale,
-          currentY: trackball.centerY +
-            (anchor.y - trackball.centerY) / scale,
-        });
-      }
-      rotate({
-        controlPitchDelta: 0,
-        controlYawDelta: 0,
-        zoom,
-        ...(rotation === undefined ? {} : { rotation }),
-      });
+      applyZoom(previousZoom, zoom);
       if (disposed) return;
       frames += 1;
+      recordTravel(camera.state.zoom / previousZoom, elapsed);
     }
     const continuing = dolly !== null
       ? timestamp < expiresAt && camera.state.distance !== targetDistance
@@ -140,15 +220,40 @@ export function createPreparedWheelZoomControls({
         camera.state.zoom < maximumZoom;
     if (continuing) {
       frame = requestFrame(animate);
-    } else {
-      frame = null;
-      previousTimestamp = null;
+      return;
     }
+    // The commanded interval is spent. A gesture still carrying rate releases
+    // into its glide instead of stopping dead at the target.
+    if (glidePolicy !== null && direction !== 0 && travelRate !== 0 &&
+        (inputKind === null || glideKinds.includes(inputKind))) {
+      releasedRate = travelRate * glidePolicy.gain;
+      glideRate = releasedRate;
+      glidePrevious = timestamp - leftover;
+      travelRate = 0;
+      gliding = true;
+      if (leftover > 0) { glide(timestamp); return; }
+      frame = requestFrame(glide);
+      return;
+    }
+    frame = null;
+    previousTimestamp = null;
   };
   const onWheel = (event: WheelEvent) => {
     if (!enabled || !Number.isFinite(event.deltaY) || event.deltaY === 0 || event.defaultPrevented) return;
     event.preventDefault();
+    // A new gesture owns the camera: any glide ends where it stands.
+    if (gliding) {
+      if (frame !== null) cancelFrame(frame);
+      frame = null;
+      gliding = false;
+      glideRate = 0;
+      releasedRate = 0;
+      previousTimestamp = null;
+      travelRate = 0;
+    }
     const nextDirection = -Math.sign(event.deltaY);
+    // A reversal has nothing in common with the travel behind it.
+    if (direction !== 0 && nextDirection !== direction) travelRate = 0;
     const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2
       ? inputSurface.clientHeight || windowTarget.innerHeight || 800 : 1;
     if (dolly !== null) {
@@ -182,6 +287,7 @@ export function createPreparedWheelZoomControls({
     if (disposed) return;
     disposed = true;
     stop();
+    frameClock.destroy();
     inputSurface.removeEventListener("wheel", guardedWheel);
   }
   return Object.freeze({
@@ -192,7 +298,7 @@ export function createPreparedWheelZoomControls({
       if (!enabled) stop();
     },
     destroy,
-    stats: () => Object.freeze({ active:frame !== null, events, frames, inputKind,
+    stats: () => Object.freeze({ active:frame !== null, gliding, events, frames, inputKind,
       model: dolly === null ? "scale-zoom-with-anchor" : "perspective-dolly" }),
   });
 }

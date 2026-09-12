@@ -1,4 +1,7 @@
 import type { PreparedCatalogObject, SpatialCatalogSource } from '@cssearth/catalog';
+import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
+import { createMotionRecorder, runMotionScript } from './motion-script.mts';
+const isOrbitRenderer = (value: string): value is OrbitRenderer => ['strokes', 'bars'].includes(value);
 import { createPreparedFocusCard } from './prepared-focus-card.mts';
 import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
@@ -10,7 +13,7 @@ import type { OverviewScope } from './overview-context.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { createNavigationContent } from './navigation-content.mts';
 export type NavigationContent = Awaited<ReturnType<ReturnType<typeof createNavigationContent>['load']>>;
-export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; }
+export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; asteroidBodiesEnabled?: boolean; onAsteroidBodiesChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; orbitRenderer?: OrbitRenderer; onOrbitRendererChange?(renderer: OrbitRenderer): void; onCategoryChange?(classification: string | null): void; }
 interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame | null; commit?(): void; restore(): void; }
 type Panel = readonly [string, HTMLDetailsElement];
 import { objectCategory, matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
@@ -18,6 +21,8 @@ import { createDatasetContextController } from './dataset-context-controller.mts
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createChartPixelAlignmentController } from "./chart-pixel-alignment.mts";
 import { createDestinationBrowser } from "./destination-browser.mts";
+import { createFeatureBrowser } from "./feature-browser.mts";
+import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createExplorerRailController } from "./explorer-rail.mts";
 import { createSurfaceMinimap, loadSurfacePreview } from "./surface-minimap.mts";
@@ -25,6 +30,10 @@ import { createViewReadout } from "./view-readout.mts";
 import { createSurfaceMapReader } from "./surface-map-context.mts";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
+import { bindNavigationIntent, navigationFragments } from './navigation-fragments.mts';
+import { OBJECTS } from './objects.mts';
+import { objectClassificationLabel } from './planet-search-objects.mts';
+import { MOBILE_SHEET_POLICY, MOBILE_VIEWPORT_QUERY, mobileSheetKeyboardInset } from './runtime-policy.mts';
 
 export function mountPlanetShell({
   objectId,
@@ -36,17 +45,24 @@ export function mountPlanetShell({
   onSkyContrastChange = () => {},
   heliosphereEnabled = false,
   onHeliosphereChange = () => {},
+  asteroidBodiesEnabled = false,
+  onAsteroidBodiesChange = () => {},
   asteroidOrbitsEnabled = false,
   onAsteroidOrbitsChange = () => {},
   asteroidLabelsEnabled = false,
   onAsteroidLabelsChange = () => {},
+  orbitRenderer = 'strokes',
+  onOrbitRendererChange = () => {},
+  onCategoryChange = () => {},
 }: ShellOptions) {
   const drawer = requiredElement(documentTarget, ".planet-drawer-content");
   if (!(drawer instanceof windowTarget.HTMLElement)) {
     throw new Error("Planet shell information drawer is missing.");
   }
   const lifetime = createSceneLifetime();
+  const fragments = navigationFragments(windowTarget);
   let informationTabs: ReturnType<typeof createInformationTabsController>;
+  let sheet: ReturnType<typeof createSheetController>;
   let settingsController: ReturnType<typeof createSettingsController>, objectBrowser: ReturnType<typeof createObjectBrowserController>, contentLifetime: SceneLifetime | null, minimapController: ReturnType<typeof createSurfaceMinimap>, viewReadout: ReturnType<typeof createViewReadout>;
   let selectionPreview: SelectionPreview | null = null;
   let cardNavigation: { view: 'detail' | 'overview' } | null = null;
@@ -56,8 +72,10 @@ export function mountPlanetShell({
   const focusCard = createPreparedFocusCard(drawer.querySelector<HTMLElement>('[data-prepared-focus-card]'));
   lifetime.onDispose(() => focusCard.destroy());
   lifetime.onDispose(() => unsubscribeOverview?.());
+  // The card panel is retained; a camera frame re-queries it only after a card swap.
+  let information: HTMLElement | null = null;
   function updateBodyCard(world = camera?.navigation?.capture()) {
-    const information = drawer.querySelector<HTMLElement>('.planet-information-panel');
+    if (!information?.isConnected || !drawer.contains(information)) information = drawer.querySelector<HTMLElement>('.planet-information-panel');
     const view = cardNavigation?.view ?? bodyCardViewAtCamera(world, selectionPreview?.frame ?? camera?.navigation?.frame,
       camera?.navigation?.optics?.(), selectionPreview?.id ?? cardObjectId);
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
@@ -77,8 +95,10 @@ export function mountPlanetShell({
   }
   try {
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
-    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
-    own(createSheetController(drawer, windowTarget, lifetime));
+    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, onCategoryChange));
+    // Hover, focus or press on another body fetches its card before the click.
+    own(bindNavigationIntent({ documentTarget, windowTarget, objects: OBJECTS, fragments, skip: id => id === cardObjectId }));
+    sheet = own(createSheetController(documentTarget, windowTarget, lifetime));
     own(createExplorerRailController(documentTarget, windowTarget, {
       onOpenSolarSystem: () => objectBrowser.showSolarSystem(),
     }));
@@ -123,6 +143,7 @@ export function mountPlanetShell({
       return preview.restore;
     },
     beginObjectSelection(object: ObjectEntry) {
+      sheet.showSelection();
       selectionPreview?.restore();
       if (object.id === cardObjectId) {
         const restoreBrowser = objectBrowser.previewObject(object.name);
@@ -137,23 +158,35 @@ export function mountPlanetShell({
       const information = requiredElement(drawer, '.planet-information-panel');
       const previous = [...information.childNodes], restoreBrowser = objectBrowser.previewObject(object.name);
       const previousBusy = information.ariaBusy;
-      const card = documentTarget.querySelector<HTMLTemplateElement>(`template[data-object-card="${object.id}"]`)
-        ?.content.querySelector('.planet-information-panel');
-      if (!card) throw new Error(`Prepared sidebar card is missing for ${object.id}.`);
-      information.replaceChildren(...[...card.childNodes].map(node => node.cloneNode(true)));
-      restorePanelState([...information.querySelectorAll<HTMLElement>(':scope > details, :scope > [data-information-panel] > details')].filter(node => node instanceof windowTarget.HTMLDetailsElement)
-        .map(node => [panelKey(node), node] as const), object.id, windowTarget);
-      for (const map of information.querySelectorAll<HTMLElement>('.planet-surface-minimap')) {
-        if (!map.closest('[hidden], details:not([open])')) loadSurfacePreview(map);
-      }
-      // Detail controls wait for their renderer; navigation anchors stay usable
-      // so another breadcrumb or moon can replace an in-progress selection.
-      const pendingControls = [...information.querySelectorAll<HTMLElement>('.planet-card-tabs, [data-information-panel], .planet-destination-intro')]
-        .filter(node => node.dataset.informationGroup !== 'overview')
-        .map(node => [node, node.inert] as const);
-      for (const [node] of pendingControls) node.inert = true;
       const previewLifetime = createSceneLifetime();
-      createInformationTabsController(drawer, previewLifetime, 'overview');
+      let pendingControls: (readonly [HTMLElement, boolean])[] = [];
+      const showCard = (card: Element) => {
+        information.replaceChildren(...[...card.childNodes].map(node => documentTarget.importNode(node, true)));
+        restorePanelState([...information.querySelectorAll<HTMLElement>(':scope > details, :scope > [data-information-panel] > details')].filter(node => node instanceof windowTarget.HTMLDetailsElement)
+          .map(node => [panelKey(node), node] as const), object.id, windowTarget);
+        for (const map of information.querySelectorAll<HTMLElement>('.planet-surface-minimap')) {
+          if (!map.closest('[hidden], details:not([open])')) loadSurfacePreview(map);
+        }
+        // Detail controls wait for their renderer; navigation anchors stay usable
+        // so another breadcrumb or moon can replace an in-progress selection.
+        pendingControls = [...information.querySelectorAll<HTMLElement>('.planet-card-tabs, [data-information-panel], .planet-destination-intro')]
+          .filter(node => node.dataset.informationGroup !== 'overview')
+          .map(node => [node, node.inert] as const);
+        for (const [node] of pendingControls) node.inert = true;
+        createInformationTabsController(drawer, previewLifetime, 'overview');
+      };
+      // The destination's static fragment is its card; intent usually fetched it.
+      const card = fragments.peek(object.id)?.querySelector('.planet-information-panel');
+      if (card) showCard(card);
+      else {
+        // Registry facts show at once; the card follows its fragment without
+        // blocking the flight. A failed fragment fails the destination load.
+        information.replaceChildren(objectCardPreview(documentTarget, object));
+        fragments.get(object.id).then(source => {
+          const arrived = source.querySelector('.planet-information-panel');
+          if (arrived && selectionPreview === preview) { showCard(arrived); updateBodyCard(); }
+        }, () => {});
+      }
       information.ariaBusy = 'true';
       const preview = { id: object.id, frame: object.worldFrame, commit() {
         previewLifetime.destroy();
@@ -189,6 +222,7 @@ export function mountPlanetShell({
       mountContent(content.id, motion, contrast);
     },
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
+    setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setFeatures(provider); },
     setPreparedFocus(record: PreparedCatalogObject | null, sources: readonly SpatialCatalogSource[] = [], presentation: PreparedFocusPresentation | null = null) {
       if (lifetime.disposed) return;
       preparedFocus = record; focusCard.set(record, sources, presentation);
@@ -237,8 +271,10 @@ export function mountPlanetShell({
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
+      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, orbitRenderer,
+        onOrbitRendererChange(renderer) { orbitRenderer = renderer; onOrbitRendererChange(renderer); },
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
+        onAsteroidBodiesChange(enabled) { asteroidBodiesEnabled = enabled; onAsteroidBodiesChange(enabled); },
         onAsteroidOrbitsChange(enabled) { asteroidOrbitsEnabled = enabled; onAsteroidOrbitsChange(enabled); },
         onAsteroidLabelsChange(enabled) { asteroidLabelsEnabled = enabled; onAsteroidLabelsChange(enabled); },
       }, owner));
@@ -253,7 +289,11 @@ export function mountPlanetShell({
 }
 
 function createInformationTabsController(drawer: HTMLElement, lifetime: SceneLifetime, requestedGroup?: string) {
-  const card = drawer.querySelector<HTMLElement>('.planet-information-panel');
+  return createTabsController(drawer.querySelector<HTMLElement>('.planet-information-panel'), lifetime, requestedGroup);
+}
+
+/** Shared tablist behaviour: selection, roving tabindex and arrow keys. */
+export function createTabsController(card: HTMLElement | null, lifetime: SceneLifetime, requestedGroup?: string) {
   const group = (item: HTMLElement) => item.dataset.informationGroup ?? 'detail';
   const tabs = [...(card?.querySelectorAll<HTMLElement>('[data-information-tab]:not([hidden])') ?? [])]
     .filter(tab => requestedGroup === undefined || group(tab) === requestedGroup);
@@ -342,7 +382,7 @@ function createSettingsController(
   documentTarget: Document,
   windowTarget: BrowserWindow,
   { motionEnabled, onMotionChange, highContrastSky = false, onSkyContrastChange = () => {}, heliosphereEnabled, onHeliosphereChange,
-    asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'asteroidOrbitsEnabled' | 'onAsteroidOrbitsChange' | 'asteroidLabelsEnabled' | 'onAsteroidLabelsChange'>> & { highContrastSky?: boolean; onSkyContrastChange?: (enabled: boolean) => void },
+    asteroidBodiesEnabled, onAsteroidBodiesChange, asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange, orbitRenderer, onOrbitRendererChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'asteroidBodiesEnabled' | 'onAsteroidBodiesChange' | 'asteroidOrbitsEnabled' | 'onAsteroidOrbitsChange' | 'asteroidLabelsEnabled' | 'onAsteroidLabelsChange' | 'orbitRenderer' | 'onOrbitRendererChange'>> & { highContrastSky?: boolean; onSkyContrastChange?: (enabled: boolean) => void },
   lifetime: SceneLifetime,
 ) {
   if (typeof onMotionChange !== "function") {
@@ -350,8 +390,10 @@ function createSettingsController(
   }
   const motion = documentTarget.querySelector(".planet-motion-setting");
   const heliosphere = documentTarget.querySelector(".planet-heliosphere-setting");
+  const asteroidBodies = documentTarget.querySelector(".planet-asteroid-bodies-setting");
   const asteroidOrbits = documentTarget.querySelector(".planet-asteroid-orbits-setting");
   const asteroidLabels = documentTarget.querySelector(".planet-asteroid-labels-setting");
+  const orbitRendererSelect = documentTarget.querySelector(".planet-orbit-renderer-setting");
   const skyContrast = documentTarget.querySelector(
     ".planet-sky-contrast-setting",
   );
@@ -360,8 +402,10 @@ function createSettingsController(
   );
   if (!(motion instanceof windowTarget.HTMLInputElement) ||
       !(heliosphere instanceof windowTarget.HTMLInputElement) ||
+      !(asteroidBodies instanceof windowTarget.HTMLInputElement) ||
       !(asteroidOrbits instanceof windowTarget.HTMLInputElement) ||
       !(asteroidLabels instanceof windowTarget.HTMLInputElement) ||
+      !(orbitRendererSelect instanceof windowTarget.HTMLSelectElement) ||
       (speed !== null && !(speed instanceof windowTarget.HTMLInputElement)) ||
       !(skyContrast instanceof windowTarget.HTMLInputElement)) {
     throw new Error("Planet shell settings controls are incomplete.");
@@ -392,6 +436,16 @@ function createSettingsController(
   }, { signal: events.signal });
   heliosphere.checked = heliosphereEnabled === true;
   heliosphere.addEventListener("change", () => onHeliosphereChange(heliosphere.checked), { signal: events.signal });
+  const renderAsteroidBodies = () => {
+    asteroidBodies.checked = asteroidBodiesEnabled === true;
+    documentTarget.body.dataset.asteroidBodies = asteroidBodies.checked ? 'on' : 'off';
+  };
+  asteroidBodies.addEventListener("change", () => {
+    asteroidBodiesEnabled = asteroidBodies.checked;
+    renderAsteroidBodies();
+    onAsteroidBodiesChange(asteroidBodiesEnabled);
+  }, { signal: events.signal });
+  renderAsteroidBodies();
   const renderAsteroidOrbits = () => {
     asteroidOrbits.checked = asteroidOrbitsEnabled === true;
     documentTarget.body.dataset.asteroidOrbits = asteroidOrbits.checked ? 'on' : 'off';
@@ -412,6 +466,34 @@ function createSettingsController(
     onAsteroidLabelsChange(asteroidLabelsEnabled);
   }, { signal: events.signal });
   renderAsteroidLabels();
+  const motionScript = documentTarget.querySelector(".planet-motion-script");
+  if (motionScript instanceof windowTarget.HTMLButtonElement) {
+    motionScript.addEventListener("click", () => {
+      motionScript.disabled = true;
+      runMotionScript(documentTarget, windowTarget).catch(error => windowTarget.alert(String(error))).finally(() => { motionScript.disabled = false; });
+    }, { signal: events.signal });
+  }
+  const motionRecord = documentTarget.querySelector(".planet-motion-record");
+  if (motionRecord instanceof windowTarget.HTMLButtonElement) {
+    let recorder: ReturnType<typeof createMotionRecorder> | null = null;
+    motionRecord.addEventListener("click", () => {
+      if (!recorder) { recorder = createMotionRecorder(documentTarget, windowTarget); motionRecord.textContent = "Stop"; motionRecord.setAttribute("aria-pressed", "true"); return; }
+      const recording = recorder.stop(); recorder = null;
+      motionRecord.textContent = "Record"; motionRecord.setAttribute("aria-pressed", "false");
+      const text = JSON.stringify(recording);
+      (windowTarget as unknown as { __cssEarthMotion?: string }).__cssEarthMotion = text;
+      console.log("MOTION_RECORDING", text);
+      windowTarget.navigator.clipboard?.writeText(text).then(() => windowTarget.alert(`Recorded ${recording.length} events; copied to clipboard.`),
+        () => windowTarget.alert(`Recorded ${recording.length} events; see console (MOTION_RECORDING).`));
+    }, { signal: events.signal });
+  }
+  orbitRendererSelect.value = orbitRenderer;
+  orbitRendererSelect.addEventListener("change", () => {
+    const next = orbitRendererSelect.value;
+    if (!isOrbitRenderer(next)) { orbitRendererSelect.value = orbitRenderer; return; }
+    orbitRenderer = next;
+    onOrbitRendererChange(orbitRenderer);
+  }, { signal: events.signal });
   renderMotion();
   renderSkyContrast();
 
@@ -442,7 +524,8 @@ function createSettingsController(
   });
 }
 
-function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
+function createObjectBrowserController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime,
+  onCategoryChange: (classification: string | null) => void = () => {}) {
   const setPanelHidden = (panel: HTMLElement, hidden: boolean) => {
     if (panel.hidden !== hidden) panel.hidden = hidden;
     const inert = hidden || panel.ariaBusy === 'true';
@@ -498,9 +581,17 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
   ];
   let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
-  // Reset the outgoing layout before changing result visibility. Hidden panels
-  // were reset when closed, so opening one needs no synchronous layout readback.
-  const resetResultsScroll = () => { if (!browser.hidden) resultsPanel.scrollTop = 0; };
+  // Scroll events arrive after layout. Retain that state so publishing an
+  // unchanged camera or selection never forces layout to rewrite a zero offset.
+  let resultsScrolled = false;
+  const onResultsScroll = () => { resultsScrolled = resultsPanel.scrollTop !== 0; };
+  resultsPanel.addEventListener('scroll', onResultsScroll, { passive: true });
+  lifetime.onDispose(() => resultsPanel.removeEventListener('scroll', onResultsScroll));
+  const resetResultsScroll = () => {
+    if (!resultsScrolled) return;
+    resultsPanel.scrollTop = 0;
+    resultsScrolled = false;
+  };
   const selectTab = (classification: string, { focus = false, resetScroll = true } = {}) => {
     if (resetScroll) resetResultsScroll();
     if (classification !== activeCategory) {
@@ -543,22 +634,50 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     onReset() { render(false); },
   });
   lifetime.onDispose(() => destinations?.destroy());
+  const features = createFeatureBrowser({
+    documentTarget, objectId: documentTarget.body.dataset.objectShell ?? '',
+    onResults(count) { empty.hidden = visibleObjects + count > 0; },
+    onSelected() { render(false); search.blur(); },
+  });
+  lifetime.onDispose(() => features?.destroy());
   let open = false;
   let browsing = false;
   const categoryButtons = [...documentTarget.querySelectorAll<HTMLElement>('.planet-search-category')];
+  // A pill's classification highlights its bodies in the scene; other searches clear it.
+  // Filtering resets then re-marks the category, so report only the settled value.
+  let reportedCategory: string | null = null, pendingCategory: string | null = null, reportQueued = false;
   const markCategory = (classification: string | null | undefined = null) => {
     for (const button of categoryButtons) {
       button.ariaPressed = String(button.dataset.searchClassification === classification);
     }
+    pendingCategory = categoryButtons.some(button => button.dataset.searchClassification === classification) ? classification ?? null : null;
+    if (reportQueued) return;
+    reportQueued = true;
+    queueMicrotask(() => {
+      reportQueued = false;
+      if (pendingCategory === reportedCategory || lifetime.disposed) return;
+      reportedCategory = pendingCategory;
+      onCategoryChange(reportedCategory);
+    });
   };
+  let filteredQuery: string | null = null, filteredClassification: string | null | undefined = null;
   const filter = (resetScroll = true) => {
-    if (resetScroll) resetResultsScroll();
-    markCategory();
     // Search text belongs to the user; the card context is only a fallback.
     const query = (browsing ? search.value.trim().toLocaleLowerCase("en") : "")
       || (preparedFocus ? preparedFocus.name.toLocaleLowerCase('en')
         : overview ? overviewName().toLocaleLowerCase("en") : "");
     setPanelHidden(information, query.length > 0);
+    // A camera handoff republishes the same card context. Its results, counts
+    // and chips are already current; only a closed browser needs reopening.
+    if (query === filteredQuery) {
+      setPanelHidden(browser, query.length === 0);
+      markCategory(filteredClassification);
+      return;
+    }
+    filteredQuery = query;
+    filteredClassification = null;
+    if (resetScroll) resetResultsScroll();
+    markCategory();
     destinations?.setOpen(query.length > 0);
     const focused = preparedFocus && query === preparedFocus.name.toLocaleLowerCase('en');
     const galactic = !focused && query === 'milky way';
@@ -568,13 +687,13 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     if (focused && preparedFocus) {
       browser.ariaLabel = preparedFocus.name;
       setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
-      void destinations?.search('');
+      void destinations?.search(''); void features?.search('');
       return;
     }
     browser.ariaLabel = galactic ? 'Milky Way' : 'Solar System objects';
     if (galactic) {
       setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
-      void destinations?.search('');
+      void destinations?.search(''); void features?.search('');
       return;
     }
     const showAll = query === "all objects";
@@ -583,10 +702,12 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       return name && (query === name || query === `${name}s` || query === item.dataset.objectClassification);
     })?.dataset.objectClassification;
     markCategory(classification);
+    filteredClassification = classification;
     const systemName = items.find(item =>
       query === item.dataset.objectSystemName)?.dataset.objectSystemName;
     visibleObjects = 0;
     void destinations?.search(classification || systemName || showAll ? "" : query);
+    void features?.search(classification || systemName || showAll ? "" : query);
     if (query.length === 0) {
       for (const item of items) item.hidden = true;
       empty.hidden = true;
@@ -595,7 +716,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     }
     setPanelHidden(browser, false);
     for (const item of items) {
-      const match = classification === "dwarf-planet" || classification === "star" ? item.dataset.objectClassification === classification
+      // A class search stays exact inside grouped tabs; only Planets deliberately includes dwarf planets.
+      const match = classification && classification !== "planet" ? item.dataset.objectClassification === classification
         : showAll || classification || (systemName
         ? item.dataset.objectSystemName === systemName
         : (item.dataset.objectName ?? "").includes(query));
@@ -610,19 +732,22 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       : showAll ? 'all' : matches.some(item => matchesObjectCategory(item.dataset.objectClassification, activeCategory))
         ? activeCategory : objectCategory(matches[0]?.dataset.objectClassification) ?? activeCategory;
     selectTab(nextCategory, { resetScroll: false });
-    empty.hidden = visibleObjects !== 0 || Boolean(destinations && !classification && !showAll);
+    empty.hidden = visibleObjects !== 0 || Boolean((destinations || features) && !classification && !showAll);
   };
   const render = (next: boolean, { resetQuery = false } = {}) => {
-    resetResultsScroll();
     if (!next) browsing = false;
     if ((preparedFocus || overview) && !next) next = true;
+    // Only an actual open/close transition may reset a scrolled result list.
+    if (open !== next) resetResultsScroll();
     open = next;
     if (next && resetQuery) search.value = "";
     destinations?.setOpen(next);
-    setPanelHidden(information, next);
-    setPanelHidden(browser, !next);
-    if (next) filter(false);
-    else markCategory();
+    if (next) filter();
+    else {
+      setPanelHidden(information, false);
+      setPanelHidden(browser, true);
+      markCategory();
+    }
   };
 
   trigger.addEventListener("click", () => {
@@ -632,11 +757,20 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   }, {
     signal: events.signal,
   });
+  // Clearing empties the query and returns to the selected card, like Escape.
+  documentTarget.querySelector<HTMLElement>('.planet-sidebar-search-clear')?.addEventListener('click', () => {
+    search.value = "";
+    render(false);
+    search.focus();
+  }, { signal: events.signal });
   for (const button of categoryButtons) {
     button.addEventListener('click', () => {
       search.value = button.dataset.searchQuery ?? "";
       search.dispatchEvent(new windowTarget.Event('input', { bubbles: true }));
       requiredElement(documentTarget, '.planet-sidebar').scrollTop = 0;
+      // Frame every body of this classification; the router owns the camera flight.
+      button.dispatchEvent(new windowTarget.CustomEvent('categorynavigate', { bubbles: true,
+        detail: { classification: button.dataset.searchClassification } }));
     }, { signal: events.signal });
     button.addEventListener('keydown', event => {
       if (event.key !== 'Escape') return;
@@ -745,7 +879,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       overview = enabled;
       overviewScope = scope;
       markSelection();
-      if (enabled) destinations?.bind(null);
+      if (enabled) { destinations?.bind(null); features?.bind(null); }
       render(editing);
     },
     setObject(name: string) {
@@ -756,10 +890,11 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       preparedFocus = null;
       selectedObjectName = name;
       markSelection();
-      destinations?.bind(null);
+      destinations?.bind(null); features?.bind(null);
       render(editing);
     },
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) { destinations?.bind(provider); },
+    setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { features?.bind(provider); },
     setPreparedFocus(record: PreparedCatalogObject | null) {
       if (preparedFocus === record) return;
       const editing = browsing;
@@ -835,108 +970,235 @@ function createChartSwitcherController(drawer: HTMLElement, windowTarget: Browse
   });
 }
 
-function createSheetController(drawer: HTMLElement, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
-  const handle = drawer.querySelector<HTMLElement>(".planet-sheet-handle");
-  if (!(handle instanceof windowTarget.HTMLButtonElement)) {
-    throw new Error("Planet shell sheet handle is missing.");
-  }
+type SheetState = typeof MOBILE_SHEET_POLICY.states[number];
+type SheetStops = Readonly<Record<SheetState, number>>;
+interface SheetGesture {
+  pointerId: number; x: number; y: number; start: number; offset: number; stops: SheetStops;
+  fromHandle: boolean; active: boolean; lastY: number; lastTime: number; velocity: number;
+}
 
-  let startY = 0;
-  let startOffset = 0;
-  let offset = 0;
-  let startTime = 0;
-  let moved = false;
-  let tracking = false;
-  let draggedAt = -Infinity;
+// Phones show information in a bottom sheet that snaps between the heights
+// declared in shell-layout.css. Wider layouts ignore every sheet gesture.
+function createSheetController(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
+  const sheet = documentTarget.querySelector(".planet-sidebar");
+  const handle = documentTarget.querySelector(".planet-sheet-handle");
+  const search = documentTarget.querySelector(".planet-sidebar-search");
+  if (!(sheet instanceof windowTarget.HTMLElement) ||
+      !(handle instanceof windowTarget.HTMLButtonElement) ||
+      !(search instanceof windowTarget.HTMLInputElement)) {
+    throw new Error("Planet shell sheet is incomplete.");
+  }
+  const { body } = documentTarget;
+  const { states, dragSlopPixels, flingPixelsPerMillisecond, flingFreshnessMilliseconds,
+    overdragPixels, overdragResistance } = MOBILE_SHEET_POLICY;
+  const mobile = windowTarget.matchMedia(MOBILE_VIEWPORT_QUERY);
+  const events = new AbortController();
+  const { signal } = events;
+  lifetime.onDispose(() => events.abort());
+  let state: SheetState = "peek";
+  // Search opens the whole sheet; leaving search returns to the earlier height.
+  let searchReturn: SheetState | null = null;
+  let gesture: SheetGesture | null = null;
+  let dragged = false;
   let snapFrame = 0;
   lifetime.onDispose(() => {
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     snapFrame = 0;
   });
-  const events = new AbortController();
-  lifetime.onDispose(() => events.abort());
-  const limit = () => Math.max(0, windowTarget.innerHeight * 0.35 - 56);
-  const expanded = () => drawer.classList.contains("is-expanded");
-  const currentOffset = () => {
-    const transform = windowTarget.getComputedStyle(drawer).transform;
-    return transform === "none"
-      ? 0
-      : new windowTarget.DOMMatrixReadOnly(transform).m42;
+
+  // Distances from the fully open sheet down to each snap state.
+  const stops = (): SheetStops => {
+    const style = windowTarget.getComputedStyle(sheet);
+    const peek = Number.parseFloat(style.getPropertyValue("--sheet-peek"));
+    const half = Number.parseFloat(style.getPropertyValue("--sheet-half"));
+    if (!Number.isFinite(peek) || !Number.isFinite(half)) {
+      throw new Error("Planet shell sheet heights are missing.");
+    }
+    const height = sheet.offsetHeight;
+    return { peek: Math.max(0, height - peek), half: Math.max(0, height - half), full: 0 };
   };
-  const snap = (next: boolean, speed = 0) => {
-    const range = Math.max(1, limit());
-    const destination = next ? -range : 0;
-    const distance = Math.min(1,
-      Math.abs(destination - currentOffset()) / range);
+  const currentOffset = () => {
+    const transform = windowTarget.getComputedStyle(sheet).transform;
+    return transform === "none" ? 0 : new windowTarget.DOMMatrixReadOnly(transform).m42;
+  };
+  const nearest = (offset: number, points: SheetStops, candidates: readonly SheetState[] = states) =>
+    candidates.reduce((best, next) =>
+      Math.abs(points[next] - offset) < Math.abs(points[best] - offset) ? next : best);
+  const settle = (next: SheetState, speed = 0) => {
+    const points = stops();
+    const distance = Math.min(1, Math.abs(points[next] - currentOffset()) / Math.max(1, points.peek));
     const velocity = Math.min(1, Math.abs(speed) / 1.2);
-    const duration = Math.round(Math.max(180,
-      Math.min(340, 220 + 120 * distance - 60 * velocity)));
-    drawer.style.setProperty("--sheet-snap-duration", `${duration}ms`);
-    drawer.classList.toggle("is-expanded", next);
-    handle.ariaExpanded = String(next);
-    drawer.classList.remove("is-dragging");
+    const duration = Math.round(Math.max(180, Math.min(340, 220 + 120 * distance - 60 * velocity)));
+    sheet.style.setProperty("--sheet-snap-duration", `${duration}ms`);
+    if (next !== "full") sheet.scrollTop = 0;
+    state = next;
+    body.dataset.sheet = next;
+    handle.ariaExpanded = String(next !== "peek");
+    sheet.classList.remove("is-dragging");
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     snapFrame = windowTarget.requestAnimationFrame(() => {
       snapFrame = 0;
-      if (!lifetime.disposed) drawer.style.removeProperty("transform");
+      if (!lifetime.disposed) sheet.style.removeProperty("transform");
     });
   };
+  // Scrolled content keeps its own drags until it returns to the top.
+  const scrolled = (target: EventTarget | null) => {
+    for (let node = target instanceof windowTarget.Element ? target : null; node; node = node.parentElement) {
+      if (node.scrollTop > 0) return true;
+      if (node === sheet) return false;
+    }
+    return false;
+  };
+  const ownsGesture = (target: EventTarget | null) => target instanceof windowTarget.Element &&
+    target.closest("input, select, textarea, [data-surface-minimap]") !== null;
 
-  handle.addEventListener("pointerdown", (event) => {
-    if (!event.isPrimary || event.button > 0) return;
-    startOffset = currentOffset();
-    offset = startOffset;
-    startY = event.clientY;
-    startTime = event.timeStamp;
-    moved = false;
-    tracking = true;
-    drawer.style.transform = `translate3d(0, ${offset}px, 0)`;
-    drawer.classList.add("is-dragging");
-    handle.setPointerCapture(event.pointerId);
-  }, { signal: events.signal });
+  sheet.addEventListener("pointerdown", (event) => {
+    dragged = false;
+    if (!mobile.matches || !event.isPrimary || event.button > 0 || ownsGesture(event.target)) return;
+    const fromHandle = event.target instanceof windowTarget.Node && handle.contains(event.target);
+    if (state === "full" && !fromHandle && scrolled(event.target)) return;
+    const start = currentOffset();
+    gesture = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, start, offset: start,
+      stops: stops(), fromHandle, active: false, lastY: event.clientY, lastTime: event.timeStamp, velocity: 0 };
+  }, { signal });
 
-  handle.addEventListener("pointermove", (event) => {
-    if (!tracking) return;
-    const delta = event.clientY - startY;
-    moved ||= Math.abs(delta) > 3;
-    const range = limit();
-    const raw = startOffset + delta;
-    offset = raw > 0
-      ? Math.min(24, raw * 0.18)
-      : raw < -range
-        ? -range - Math.min(24, (-range - raw) * 0.18)
-        : raw;
-    drawer.style.transform = `translate3d(0, ${offset}px, 0)`;
-  }, { signal: events.signal });
+  // A quick pointer can leave the sheet before the drag captures it, so the
+  // gesture follows the document until it becomes a drag.
+  documentTarget.addEventListener("pointermove", (event) => {
+    const drag = gesture;
+    if (drag === null || event.pointerId !== drag.pointerId) return;
+    const dx = event.clientX - drag.x;
+    const dy = event.clientY - drag.y;
+    if (!drag.active) {
+      if (Math.hypot(dx, dy) < dragSlopPixels) return;
+      // Sideways swipes belong to carousels; pulling up an open sheet scrolls it.
+      if (Math.abs(dx) > Math.abs(dy) || (state === "full" && !drag.fromHandle && dy < 0)) {
+        gesture = null;
+        return;
+      }
+      drag.active = true;
+      sheet.setPointerCapture(event.pointerId);
+      sheet.classList.add("is-dragging");
+    }
+    const raw = drag.start + dy;
+    const overdrag = (distance: number) => Math.min(overdragPixels, distance * overdragResistance);
+    drag.offset = raw < 0 ? -overdrag(-raw)
+      : raw > drag.stops.peek ? drag.stops.peek + overdrag(raw - drag.stops.peek) : raw;
+    const elapsed = event.timeStamp - drag.lastTime;
+    if (elapsed > 0) drag.velocity = 0.8 * (event.clientY - drag.lastY) / elapsed + 0.2 * drag.velocity;
+    drag.lastY = event.clientY;
+    drag.lastTime = event.timeStamp;
+    sheet.style.transform = `translate3d(0, ${drag.offset}px, 0)`;
+  }, { signal });
 
-  handle.addEventListener("pointerup", (event) => {
-    if (!tracking) return;
-    tracking = false;
-    if (!moved) {
-      drawer.classList.remove("is-dragging");
-      drawer.style.removeProperty("transform");
+  const release = (event: PointerEvent) => {
+    const drag = gesture;
+    if (drag === null || event.pointerId !== drag.pointerId) return;
+    gesture = null;
+    if (!drag.active) return;
+    dragged = true;
+    searchReturn = null;
+    if (event.type === "pointercancel") {
+      settle(state);
       return;
     }
-    draggedAt = event.timeStamp;
-    const speed = (event.clientY - startY) /
-      Math.max(1, event.timeStamp - startTime);
-    snap(Math.abs(speed) > 0.35 ? speed < 0 : offset < -limit() / 2, speed);
-  }, { signal: events.signal });
+    // A pause before release places the sheet; a flick carries it to the next stop.
+    const velocity = event.timeStamp - drag.lastTime > flingFreshnessMilliseconds ? 0 : drag.velocity;
+    const ahead = states.filter((candidate) => velocity < 0
+      ? drag.stops[candidate] < drag.offset - 1
+      : drag.stops[candidate] > drag.offset + 1);
+    settle(Math.abs(velocity) >= flingPixelsPerMillisecond && ahead.length > 0
+      ? nearest(drag.offset, drag.stops, ahead)
+      : nearest(drag.offset, drag.stops), velocity);
+  };
+  documentTarget.addEventListener("pointerup", release, { signal });
+  documentTarget.addEventListener("pointercancel", release, { signal });
+  // Once the sheet follows a finger, native scrolling must not claim the touch.
+  sheet.addEventListener("touchmove", (event) => {
+    if (gesture?.active) event.preventDefault();
+  }, { passive: false, signal });
+  sheet.addEventListener("click", (event) => {
+    if (!dragged) return;
+    dragged = false;
+    event.preventDefault();
+    event.stopPropagation();
+  }, { capture: true, signal });
 
-  handle.addEventListener("pointercancel", () => {
-    tracking = false;
-    snap(expanded());
-  }, { signal: events.signal });
+  handle.addEventListener("click", () => {
+    if (!mobile.matches) return;
+    searchReturn = null;
+    settle(state === "peek" ? "half" : state === "half" ? "full" : "peek");
+  }, { signal });
+  handle.addEventListener("keydown", (event) => {
+    const step = event.key === "ArrowUp" ? 1 : event.key === "ArrowDown" ? -1 : 0;
+    if (step === 0 || !mobile.matches) return;
+    event.preventDefault();
+    settle(states[Math.max(0, Math.min(states.length - 1, states.indexOf(state) + step))] ?? state);
+  }, { signal });
 
-  handle.addEventListener("click", (event) => {
-    if (event.timeStamp - draggedAt > 100) snap(!expanded());
-  }, { signal: events.signal });
+  const openSearch = () => {
+    if (!mobile.matches || state === "full") return;
+    searchReturn = state;
+    settle("full");
+  };
+  const leaveSearch = () => {
+    if (searchReturn === null) return;
+    const previous = searchReturn;
+    searchReturn = null;
+    settle(previous);
+  };
+  const closeSearch = (event: KeyboardEvent) => {
+    if (event.key === "Escape") leaveSearch();
+  };
+  search.addEventListener("focus", openSearch, { signal });
+  search.addEventListener("input", openSearch, { signal });
+  search.addEventListener("keydown", closeSearch, { signal });
+  sheet.addEventListener("keydown", closeSearch, { signal });
+  // Clearing the query leaves the results behind, exactly as Escape does.
+  documentTarget.querySelector(".planet-sidebar-search-clear")
+    ?.addEventListener("click", leaveSearch, { signal });
+  // The machine card sits inside the sheet, so opening it has to show it.
+  const machineToggle = documentTarget.querySelector(".planet-machine-toggle");
+  machineToggle?.addEventListener("click", () => {
+    if (mobile.matches && state === "peek" && machineToggle.getAttribute("aria-pressed") === "true") settle("half");
+  }, { signal });
+  mobile.addEventListener("change", () => {
+    gesture = null;
+    sheet.classList.remove("is-dragging");
+    sheet.style.removeProperty("transform");
+  }, { signal });
+  // Typing in search opens a keyboard over the sheet it just opened. The layout
+  // viewport keeps its height, so the visual viewport reports the lost room.
+  const visual = windowTarget.visualViewport ?? null;
+  const followKeyboard = () => {
+    const inset = visual === null || !mobile.matches ? 0 : mobileSheetKeyboardInset({
+      layoutHeight: windowTarget.innerHeight,
+      visualHeight: visual.height,
+      offsetTop: visual.offsetTop,
+    });
+    if (inset > 0) body.style.setProperty("--sheet-keyboard", `${inset}px`);
+    else body.style.removeProperty("--sheet-keyboard");
+  };
+  visual?.addEventListener("resize", followKeyboard, { signal });
+  visual?.addEventListener("scroll", followKeyboard, { signal });
+  lifetime.onDispose(() => body.style.removeProperty("--sheet-keyboard"));
 
+  body.dataset.sheet = state;
+  handle.ariaExpanded = "false";
   return Object.freeze({
+    // A choice from search reveals its card over the scene.
+    showSelection() {
+      if (!mobile.matches || state !== "full") return;
+      searchReturn = null;
+      settle("peek");
+    },
     destroy() {
       events.abort();
-      drawer.classList.remove("is-expanded", "is-dragging");
-      drawer.style.removeProperty("transform");
+      gesture = null;
+      sheet.classList.remove("is-dragging");
+      sheet.style.removeProperty("transform");
+      sheet.style.removeProperty("--sheet-snap-duration");
+      delete body.dataset.sheet;
       handle.ariaExpanded = "false";
     },
   });
@@ -975,6 +1237,20 @@ function createPanelController(drawer: HTMLElement, objectId: string, windowTarg
       events.abort();
     },
   });
+}
+
+/** Fill the shell's one preview card with registry facts; no object content is derived. */
+function objectCardPreview(documentTarget: Document, object: ObjectEntry) {
+  const template = requiredElement<HTMLTemplateElement>(documentTarget, 'template[data-object-card-preview]');
+  const card = template.content.firstElementChild;
+  if (!card) throw new Error('Object card preview is empty.');
+  const preview = documentTarget.importNode(card, true);
+  const name = requiredElement(preview, '[data-card-preview-name]');
+  name.textContent = object.name;
+  name.setAttribute('aria-label', object.name);
+  requiredElement(preview, '[data-card-preview-classification]').textContent = objectClassificationLabel(object.classification);
+  requiredElement(preview, '[data-card-preview-description]').textContent = object.description;
+  return preview;
 }
 
 function restorePanelState(panels: readonly Panel[], objectId: string, windowTarget: Window) {

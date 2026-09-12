@@ -1,0 +1,353 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/europa/",
+  "sourceWidth": 4096,
+  "sourceHeight": 2048,
+  "width": 2048,
+  "height": 1024,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "europa-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csseuropa-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
+    {
+      "id": "normal",
+      "output": "europa-{id}{suffix}.webp",
+      "thumbnail": "europa-lens-{id}.webp",
+      "source": "europa-global-500m.tif",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "usgs-voyager-galileo-global-500m",
+        "id": "normal",
+        "validity": {
+          "kind": "geotiff-monochrome-alpha",
+          "noData": 0,
+          "centerLongitude": 180,
+          "resampling": "source-georeferenced-bilinear"
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
+      },
+      "resolutionScale": 2
+    },
+    {
+      "id": "enhanced",
+      "output": "europa-{id}{suffix}.webp",
+      "thumbnail": "europa-lens-{id}.webp",
+      "source": "color/s0349875152.equi.photr.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-observed-color",
+        "id": "enhanced",
+        "consumer": "color",
+        "monochromeBase": "normal",
+        "profile": {
+          "referenceRadiusMeters": 1560800,
+          "centerLongitude": 180,
+          "standardParallel": 0,
+          "sampleFormat": 3,
+          "sampleBytes": 4,
+          "noData": 0,
+          "specialValueMagnitude": 1e+30,
+          "filters": [
+            "IR-7560",
+            "GREEN",
+            "VIOLET"
+          ],
+          "gamma": 2.2
+        },
+        "metadata": {
+          "label": "Enhanced color",
+          "falseColor": true,
+          "projection": {
+            "type": "equirectangular",
+            "longitudeDegrees": [
+              0,
+              360
+            ],
+            "latitudeDegrees": [
+              90,
+              -90
+            ],
+            "longitudeDirection": "east-positive",
+            "referenceRadiusMeters": 1560800
+          },
+          "coverage": "Valid infrared/green/violet observations over the observed monochrome base. Gray grid only where neither source has imagery."
+        },
+        "photometry": {
+          "consumer": "photometry",
+          "vectors": {
+            "sun": "photometry/horizons-sun.json",
+            "observer": "photometry/horizons-galileo.json"
+          },
+          "profile": {
+            "model": "Lunar-Lambert",
+            "observationWeights": {
+              "14ESGLOCOL01": 1,
+              "12ESGLOCOL01": 0.5,
+              "G1ESGLOBAL01": 0.5
+            },
+            "referenceIncidenceDegrees": 30,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 75,
+            "maximumEmissionDegrees": 75,
+            "phaseNormalization": false,
+            "radiusKm": 1560.8
+          },
+          "levels": {
+            "boundaryPixels": 4,
+            "luminance": [
+              0.2126,
+              0.7152,
+              0.0722
+            ]
+          }
+        }
+      },
+      "resolutionScale": 2
+    },
+    {
+      "id": "elevation",
+      "output": "europa-{id}{suffix}.webp",
+      "thumbnail": "europa-lens-{id}.webp",
+      "source": "science/controlled-dtms/Agenor/Agenor.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "geotiff",
+        "path": "science/controlled-dtms/Agenor/Agenor.tif",
+        "consumer": "agenor-elevation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "description": "Agenor Linea · relative height",
+        "title": "Released relative heights of Agenor Linea; independent local stereo datum, not elevation above a global reference sphere.",
+        "sourceUrl": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
+        "minimum": -700,
+        "maximum": 300,
+        "colors": [
+          "#254c89",
+          "#6c9cac",
+          "#d3c88f",
+          "#9b4f32"
+        ],
+        "labels": [
+          "−700",
+          "−200",
+          "300"
+        ],
+        "units": "m",
+        "grid": {
+          "width": 642,
+          "height": 133,
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 1560800,
+          "noData": -3.4028226550889045e+38,
+          "origin": [
+            -1236786.1079616144,
+            -1146374.9999678
+          ],
+          "resolution": [
+            614.0078951699215,
+            -614.0078951699215
+          ],
+          "longitudeRange": [
+            0,
+            360
+          ]
+        },
+        "relief": {
+          "referenceRadiusMeters": 1560800,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.35
+        }
+      }
+    },
+    {
+      "id": "geology",
+      "output": "europa-{id}{suffix}.webp",
+      "thumbnail": "europa-lens-{id}.webp",
+      "source": "geology/europa-geologic-units.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "geology",
+        "label": "Geology",
+        "format": "geotiff",
+        "path": "geology/europa-geologic-units.tif",
+        "consumer": "geology",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "categories": [
+          {
+            "value": "c",
+            "label": "Crater material",
+            "color": "#ff8000"
+          },
+          {
+            "value": "ce",
+            "label": "Continuous crater ejecta",
+            "color": "#ffeb80"
+          },
+          {
+            "value": "cpre",
+            "label": "Pwyll radial crater ejecta",
+            "color": "#ffffb2"
+          },
+          {
+            "value": "cpr",
+            "label": "Pwyll crater rays",
+            "color": "#ffcc00"
+          },
+          {
+            "value": "chl",
+            "label": "Low-brightness chaos",
+            "color": "#99eb66"
+          },
+          {
+            "value": "chm",
+            "label": "Mottled chaos",
+            "color": "#ccff66"
+          },
+          {
+            "value": "chh",
+            "label": "High-brightness chaos",
+            "color": "#deffb2"
+          },
+          {
+            "value": "chM",
+            "label": "Moytura chaos",
+            "color": "#b2ff99"
+          },
+          {
+            "value": "b",
+            "label": "Bands",
+            "color": "#cc80ff"
+          },
+          {
+            "value": "pr",
+            "label": "Regional plains",
+            "color": "#ebffff"
+          }
+        ],
+        "description": "Interpreted geologic units",
+        "title": "USGS global geology (2024 SIM 3513)",
+        "sourceUrl": "https://pubs.usgs.gov/publication/sim3513",
+        "grid": {
+          "width": 2048,
+          "height": 1024,
+          "centerLongitude": 0,
+          "referenceRadiusMeters": 1562090,
+          "noData": -32768,
+          "origin": [
+            -4907450.46824608,
+            2453725.23412304
+          ],
+          "resolution": [
+            4792.4320978965625,
+            -4792.4320978965625
+          ],
+          "wrapLongitude": true
+        },
+        "textureScale": 0.5,
+        "minimum": 0,
+        "maximum": 9,
+        "colors": [
+          "#ff8000",
+          "#ffeb80",
+          "#ffffb2",
+          "#ffcc00",
+          "#99eb66",
+          "#ccff66",
+          "#deffb2",
+          "#b2ff99",
+          "#cc80ff",
+          "#ebffff"
+        ]
+      }
+    },
+    {
+      "id": "infrared",
+      "output": "europa-{id}{suffix}.webp",
+      "thumbnail": "europa-lens-{id}.webp",
+      "source": "nims/europa-nims-composite.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "europa-registered-nims-composite",
+        "id": "infrared",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 0,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "resampling": "source-georeferenced-bilinear"
+        },
+        "textureScale": 0.5
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "europa-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "europa-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "csseuropa-prepared-lighting-bank@1",
+    "billboardSchema": "csseuropa-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "csseuropa-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

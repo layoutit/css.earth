@@ -14,9 +14,12 @@ import { authoredObject } from './authored-object.mts';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
 import { writePreparedText } from './write-prepared-text.mts';
 import { prepareMarkerBindings } from './prepare-marker-bindings.mts';
+import { sharedTwinName } from '../src/platform/prepared-shared.mts';
+import { syncPreparedShared } from '../src/platform/prepared-shared-banks.mts';
+import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const format = 'cssearth-css-object@4';
+const format = PREPARED_CSS_OBJECT_FORMAT;
 
 export function serializeObjectJson(descriptorValue:unknown, definitionValue:unknown) {
   const descriptor=requireRecord(descriptorValue),definition=requireRecord(definitionValue);
@@ -48,20 +51,39 @@ export async function writeObjectJson(id:string, definitionValue:unknown, option
   const scene:unknown = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/scene.json'), 'utf8'));
   await writeWorldNavigationArtifacts(resolve(objectDirectory, 'prepared'), { ...preparedNavigation, definition }, requireRecord(scene));
   descriptor = parseObjectDescriptor({ ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } });
-  const payload = serializeObjectJson(descriptor, definition);
-  const asset = resolve(root, 'src/planets', id, 'prepared/object.json');
-  await mkdir(resolve(root, 'src/planets', id, 'prepared'), { recursive: true });
-  await writePreparedText(asset, payload);
+  const pin = await pinPreparedObject(id, originalDescriptor, { worldFrame: preparedNavigation.frame }, root);
+  return { id, ...pin };
+}
+
+/** Sync the shared twins and banks, transport the referenced runtime, and pin descriptor and page to it. */
+async function pinPreparedObject(id: string, originalDescriptor: Record<string, unknown>, properties: Record<string, unknown>, root: string) {
+  const objectDirectory = resolve(root, 'src/planets', id), preparedDirectory = resolve(objectDirectory, 'prepared');
+  await mkdir(preparedDirectory, { recursive: true });
+  await syncPreparedShared(root, preparedDirectory);
+  const definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8')));
+  const runtime: unknown = JSON.parse(await readFile(resolve(preparedDirectory, sharedTwinName('runtime.json')), 'utf8'));
+  const originalProperties = requireRecord(originalDescriptor.properties);
+  const descriptor = parseObjectDescriptor({ ...originalDescriptor, properties: { ...originalProperties, ...properties } });
+  const payload = serializeObjectJson(descriptor, runtime);
+  await writePreparedText(resolve(preparedDirectory, 'object.json'), payload);
   const prepared = { format, url: 'prepared/object.json', sha256: createHash('sha256').update(payload).digest('hex') };
   const page = preparePageMetadata(id, prepared.sha256, definition);
-  await writePreparedText(resolve(objectDirectory, 'prepared/page.json'), page.text);
-  const originalProperties = requireRecord(originalDescriptor.properties);
+  await writePreparedText(resolve(preparedDirectory, 'page.json'), page.text);
   // Validation may normalize key order. Retain the authored document's order
   // so an unchanged prepared object does not rewrite its descriptor.
-  await writePreparedText(descriptorPath, `${JSON.stringify({ ...originalDescriptor,
-    properties: { ...originalProperties, worldFrame: preparedNavigation.frame,
+  await writePreparedText(resolve(objectDirectory, 'object.json'), `${JSON.stringify({ ...originalDescriptor,
+    properties: { ...originalProperties, ...properties,
       page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
-  return { id, bytes: Buffer.byteLength(payload), ...prepared };
+  return { bytes: Buffer.byteLength(payload), ...prepared };
+}
+
+/** Re-pin an already prepared object to its shared-bank transport without preparing anything. */
+export async function repinObjectJson(id: string, projectRoot = root) {
+  const descriptorPath = resolve(projectRoot, 'src/planets', id, 'object.json');
+  const originalDescriptor = requireRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));
+  const before = JSON.stringify(originalDescriptor.prepared);
+  const pin = await pinPreparedObject(id, originalDescriptor, {}, projectRoot);
+  return before !== JSON.stringify({ format: pin.format, url: pin.url, sha256: pin.sha256 });
 }
 
 /** Existing descriptors opt into JSON baking; planned objects get no fallback. */

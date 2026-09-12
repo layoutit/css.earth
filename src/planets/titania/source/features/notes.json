@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "678",
+      "item": "Q3637840",
+      "title": "Belmont Chasma",
+      "url": "https://en.wikipedia.org/wiki/Belmont_Chasma",
+      "revision": "1370817586",
+      "extract": "Belmont Chasma is a chasma on Titania, an Uranian moon."
+    },
+    {
+      "id": "2150",
+      "item": "Q2321534",
+      "title": "Gertrude (crater)",
+      "url": "https://en.wikipedia.org/wiki/Gertrude_(crater)",
+      "revision": "1370818107",
+      "extract": "Gertrude is the largest known crater on Uranus's moon Titania. A peak-ring impact basin, it is roughly 326–400 kilometers across, 1/5 to 1/4 of Titania's diameter. Gertrude was first observed by the Voyager 2 spacecraft on its January 1986 flyby of the Uranian system."
+    },
+    {
+      "id": "3870",
+      "item": "Q2734318",
+      "title": "Messina Chasmata",
+      "url": "https://en.wikipedia.org/wiki/Messina_Chasmata",
+      "revision": "1365415729",
+      "extract": "The Messina Chasmata is the largest canyon or system of canyons on the surface of the Uranian moon Titania, named after a location in William Shakespeare's comedy Much Ado About Nothing."
+    },
+    {
+      "id": "5202",
+      "item": "Q2567496",
+      "title": "Rousillon Rupes",
+      "url": "https://en.wikipedia.org/wiki/Rousillon_Rupes",
+      "revision": "1353050203",
+      "extract": "Rousillon Rupes is a scarp on the surface of the Uranian moon Titania named after \"Bertram, count of Rousillon\" in William Shakespeare's comedy All's Well That Ends Well. The 402 km long feature is a normal fault situated near the equator and running perpendicular to it."
+    },
+    {
+      "id": "6245",
+      "item": "Q2455978",
+      "title": "Ursula (crater)",
+      "url": "https://en.wikipedia.org/wiki/Ursula_(crater)",
+      "revision": "1370817568",
+      "extract": "Ursula is the second-largest impact crater known on Uranus's moon Titania. It is about 135 km across, and is cut by Belmont Chasma. It is named after Hero's attendant in William Shakespeare's comedy Much Ado About Nothing; the name Ursula was officially adopted by the International Astronomical Union (IAU) in 1988."
+    }
+  ]
+}

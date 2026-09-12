@@ -22,6 +22,10 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             throw new TypeError(`raster.${key} must be an integer.`);
     if (recipe.resample !== 'source-packed' && recipe.resample !== 'density-before-pack')
         throw new TypeError('Unknown raster resampling operator.');
+    if (recipe.unpackedResizeBeforePack !== undefined && recipe.unpackedResizeBeforePack !== true)
+        throw new TypeError('unpackedResizeBeforePack must be true when declared.');
+    if (recipe.unpackedResizeBeforePack && recipe.resample !== 'source-packed')
+        throw new TypeError('unpackedResizeBeforePack needs source-packed storage.');
     if (recipe.polarProjection !== 'angular-nearest' && recipe.polarProjection !== 'orthographic-bilinear')
         throw new TypeError('Unknown polar projection operator.');
     if (typeof recipe.polesCombined !== 'boolean')
@@ -58,10 +62,46 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             path(surface[key], `surface.${key}`);
         if (typeof surface.falseColor !== 'boolean')
             throw new TypeError('falseColor must be boolean.');
+        if (surface.resolutionScale !== undefined) {
+            finite(surface.resolutionScale, 'surface.resolutionScale', true);
+            if (!Number.isInteger(surface.resolutionScale) || recipe.resample !== 'density-before-pack' || recipe.polesCombined || thumbnail.crop !== undefined || recipe.emission !== undefined)
+                throw new TypeError('Surface resolution scaling needs integer density-before-pack output with separate poles and an uncropped thumbnail.');
+        }
+        if (surface.encoding !== undefined) {
+            const encoding = record(surface.encoding, 'surface.encoding');
+            if (Object.keys(encoding).some(key => !['format', 'encoder', 'progressive', 'quality', 'grayscale', 'chromaSubsampling'].includes(key)) || encoding.format !== 'jpeg' ||
+                (encoding.encoder !== 'libjpeg' && encoding.encoder !== 'mozjpeg') || typeof encoding.progressive !== 'boolean')
+                throw new TypeError('Unsupported surface encoding.');
+            finite(encoding.quality, 'surface.encoding.quality', true);
+            if (!Number.isInteger(encoding.quality) || encoding.quality > 100)
+                throw new TypeError('surface.encoding.quality must be an integer from 1 to 100.');
+            if (encoding.grayscale !== undefined && typeof encoding.grayscale !== 'boolean')
+                throw new TypeError('surface.encoding.grayscale must be boolean.');
+            if (encoding.chromaSubsampling !== undefined && encoding.chromaSubsampling !== '4:2:0' && encoding.chromaSubsampling !== '4:4:4')
+                throw new TypeError('Unknown surface chroma subsampling.');
+            if (encoding.grayscale === true && encoding.chromaSubsampling !== undefined)
+                throw new TypeError('A grayscale surface has no chroma subsampling.');
+        }
+        const extension = surface.encoding === undefined ? '.webp' : '.jpg';
+        if (!String(surface.output).endsWith(extension))
+            throw new TypeError(`surface.output must end in ${extension} for its encoding.`);
         if (surface.exposure !== undefined)
             numbers(surface.exposure, 'surface.exposure', 3);
+        if (surface.nativeSourcePoles !== undefined && surface.nativeSourcePoles !== true)
+            throw new TypeError('surface.nativeSourcePoles must be true when declared.');
+        if (surface.nativeSourcePoles && recipe.resample !== 'density-before-pack')
+            throw new TypeError('Native source poles need density-before-pack storage.');
+        if (surface.science !== undefined) {
+            const science = record(surface.science, 'surface.science');
+            if (recipe.resample === 'source-packed') throw new TypeError('surface.science needs density-before-pack resampling.');
+            if (surface.coverage !== undefined || surface.sharpen !== undefined || surface.exposure !== undefined) throw new TypeError('surface.science replaces coverage, sharpen and exposure.');
+            // Absent kind keeps the static-observation contract; other kinds are validated by their decoder owners in tools.
+            if (science.kind !== undefined) text(science.kind, 'surface.science.kind');
+        }
         if (surface.sharpen !== undefined)
             numbers(surface.sharpen, 'surface.sharpen', 2);
+        if (surface.nativeSourcePoles && surface.sharpen !== undefined)
+            throw new TypeError('Native source poles cannot reproduce a resized-map sharpen pass.');
         if (surface.coverage !== undefined) {
             const coverage = record(surface.coverage, 'coverage');
             path(coverage.normal, 'coverage.normal');
@@ -81,6 +121,13 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         for (const key of ['bankSchema', 'billboardSchema'])
             text(lighting[key], `lighting.${key}`);
         record(lighting.metadata, 'lighting.metadata');
+    }
+    if (recipe.emission !== undefined) {
+        const emission = record(recipe.emission, 'emission');
+        for (const key of ['offLimbSize', 'limbSize', 'bodyDiameter']) finite(emission[key], `emission.${key}`, true);
+        for (const key of ['offLimbOutput', 'limbOutput']) path(emission[key], `emission.${key}`);
+        record(emission.metadata, 'emission.metadata');
+        if (recipe.lighting !== undefined || recipe.atmosphere !== undefined) throw new TypeError('An emissive surface carries no lighting or atmosphere bank.');
     }
     if (recipe.atmosphere !== undefined) {
         const atmosphere = record(recipe.atmosphere, 'atmosphere');
