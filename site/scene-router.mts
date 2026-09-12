@@ -489,6 +489,7 @@ export function createSceneRouter({
       pending = null; request.controller.abort(); request.lifetime.destroy();
       centeredObjectId = null;
       worldContextMount?.setNavigationInFlight?.(false);
+      shellOwner?.shell?.setNavigationInFlight?.(false);
       if (active === source && source) {
         source.shell?.setDatasetNotice?.(errorMessage(error));
         // The source still owns the last drawn camera when destination loading
@@ -570,7 +571,9 @@ export function createSceneRouter({
   }
 
   function publishSceneState() {
-    worldContextMount?.setNavigationInFlight?.(Boolean(pending && pending.options.preserveView !== true));
+    const inFlight = Boolean(pending && pending.options.preserveView !== true);
+    worldContextMount?.setNavigationInFlight?.(inFlight);
+    shellOwner?.shell?.setNavigationInFlight?.(inFlight);
     const state = readSceneState();
     const root = documentTarget.documentElement;
     const body = documentTarget.body;
