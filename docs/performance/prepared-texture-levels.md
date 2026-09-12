@@ -14,6 +14,26 @@ densities 1 and 2 over one atlas layout becomes two levels. The leaves size thei
 backgrounds in CSS pixels, so a level changes only the prepared address: nothing
 is resampled offline or at runtime, and device pixel ratio is never an input.
 
+## Where the density pair came from
+
+The `@2x` suffix and the `url`/`url2x` pairs in a prepared lens record are older
+than levels. They named a device-pixel-ratio choice, one raster for a 1x display
+and one for a 2x display, until the project settled on shipping the higher density
+to every display as the canonical dataset. Levels are not that: they read the
+projected silhouette and never the device.
+
+That decision left the lower rasters in place. On the twenty-one bodies this change
+levels, the manifests still declared 144 density-1 files, 50.1 MiB of published
+bytes, that the accepted runtime plan reached through no resource at all — the
+stylesheet pinned the canonical density, so no pixel could use them. Levelling
+gives those exact files a job again as level 0; it adds no prepared raster.
+
+The naming residue is still visible in the prepared lens records: across 472
+bodies, 1655 density pairs name the same single file and only 192 name two real
+densities. That is why the shared builder decides whether a layer can level by
+comparing the two addresses rather than trusting the field names, and why 446
+bodies have nothing to level.
+
 ## The rule
 
 A disc `d` CSS pixels across shows half the equator, so a map `W` texels around
@@ -108,10 +128,11 @@ Levels reach 23 of the 473 prepared bodies. The other 450 fall into three cases,
 counted from their prepared manifests.
 
 **446 bodies write one prepared density.** The shape-model and static raster lanes
-emit only the `@2x` map, with no lower twin on disk, so there is nothing for a
-level to select. This is where the heaviest mounts in the project are: Phoebe warms
-568.3 MiB, Mimas 488.3 MiB, and Dione, Enceladus, Rhea and Tethys 378.3 MiB each —
-each one larger than anything levelling recovered above.
+write a single map and still give it the `@2x` suffix, then record it as both
+addresses of the pair, so nothing is there for a level to select. This is where the
+heaviest mounts in the project are: Phoebe warms 568.3 MiB, Mimas 488.3 MiB, and
+Dione, Enceladus, Rhea and Tethys 378.3 MiB each — each one larger than anything
+levelling recovered above.
 
 A second density there is a preparation change, not wiring, and it is not a matter
 of halving the existing atlas. Each density is packed independently with its own
