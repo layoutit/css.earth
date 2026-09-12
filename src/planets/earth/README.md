@@ -39,8 +39,10 @@ The linked reports identify their tested sources, prepared files and limitations
   18,087,832 bytes, up 1,972,070 bytes (12.24%) from the baseline inventory;
   the 29 cloud files total 33,073,610 bytes, up 1,264,694 bytes (3.98%). The
   51,161,442-byte combined download is 3,236,764 bytes larger. This receipt
-  verifies source, recipe, raster-plan and texture-level pins; it is
-  preparation evidence, not a browser review.
+  verifies source, recipe, raster-plan and texture-level pins. On revision
+  `3dc424757`, both views displayed at whole-globe scale with Shadows on and off
+  in Chromium at DPR 1, without script errors. Close-zoom behavior has the
+  limitation below; these captures do not qualify texture-level selection.
 - **Scientific maps:** numeric height checks, six independent tomography anchors and
   geographic registration. [Elevation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/earth-elevation/README.md) ·
   [Tomography](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/planet-cross-sections.md) · [Night-light interpretation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-night-lights.md) ·
@@ -51,6 +53,14 @@ The linked reports identify their tested sources, prepared files and limitations
   application deployment. [Geometry delivery report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/global-earth-coverage.md).
 
 ## Known problems
+
+- **Close zoom, observed 12 September 2026:** wheel input reaching 4× zoom kept
+  the clear surface on 512-pixel pages and showed missing tiles over Asia in the
+  local Chromium run. The same camera and unchanged renderer reproduced the
+  problem with the previous pinned photographic assets and the new assets.
+  Waiting for application readiness and rebuilding the renderer did not resolve
+  it. The cause is not established; native-source preparation does not fix this
+  runtime behavior. Whole-globe display passed the focused visual check.
 
 Named features: Earth has no IAU nomenclature, so its labels come from Natural Earth 1:10m vectors (public domain, retrieved 2026-09-12) pinned under `source/features/`: populated places ranked by population, geographic region points and areas, marine areas and river centrelines. Places are unsized points; regions and seas trace their bounding box; rivers trace their centreline. Anchors are cast onto the rendered ellipsoid through the paged lane's own surface sampler (`tools/objects/surface-features/ellipsoid.ts`), and the runtime parser checks every anchor against the ellipsoid band recorded in the plan. Natural Earth's names, ranks and geometry are its editors' choices, not an official gazetteer.
 

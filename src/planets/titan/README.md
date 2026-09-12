@@ -75,7 +75,7 @@ The [2019 VIMS/ISS Enhanced color composite](https://data.caltech.edu/records/8q
 
 Facts: [NASA Science](https://science.nasa.gov/saturn/moons/titan/facts/). Exact input identities, acquisition URLs, credits and consumers are in `source/manifest.json`; preparation is authored in `object.json` and source JSON.
 
-Delivery uses full-resolution WebP quality 90 for the surface and pole atlases, with lossless alpha. Source observations and preparation maps remain lossless; the latter are excluded from runtime installation.
+The normal photographic polar sprites sample the pinned source grid directly with a 2 × 2 footprint and retain lossless WebP encoding. Latitude-band surface assets retain their existing encoding and alpha handling. Source observations and preparation maps remain lossless; the latter are excluded from runtime installation.
 
 ## B2 quantitative GTDR views
 

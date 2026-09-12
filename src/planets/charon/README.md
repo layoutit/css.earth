@@ -82,9 +82,11 @@ height gradients, spherical pixel spacing and unit vertical scale; ambient is
 mapping artifacts; 300 m post spacing is not a claim of 300 m terrain accuracy.
 Gaps remain the shared neutral grid, with no invented neighboring heights.
 
-The shared solid-body recipe prepares a 12,800 × 6,400 map and 1,024 px polar
-tiles. Terminal WebP encoding is q90; lossless intermediate maps are preparation
-inputs, not globe downloads. One generic object adapter owns runtime behavior.
+The shared solid-body recipe retains its 12,800 × 6,400 latitude-band layout and
+1,024 px polar tiles. The normal photographic polar sprites sample the pinned
+source grid directly at their final coordinates with a 2 × 2 footprint and lossless WebP
+encoding; the latitude bands retain their existing preparation. Lossless maps
+are preparation inputs, not globe downloads. One generic object adapter owns runtime behavior.
 The resolved context billboard has a dedicated 512 px image from the same
 observed navigation crop, rather than enlarging the 32 px UI icon. Prepared
 35% ambient / 65% diffuse full-phase shading rounds its circular silhouette;

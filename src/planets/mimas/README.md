@@ -56,7 +56,7 @@ Both use north at the top. Different control networks can leave positional diffe
 
 Preserve all supplied pixels, including black crater shadows; do not infer missing coverage from darkness. No inpainting, polar repetition, color synthesis, or patch blending is performed here.
 
-The observation maps retain an 8192 × 4096 preparation raster: monochrome is sourced at 5760 × 2880 and color at 6356 × 3178. Preparation maps them onto 720 native PolyCSS raster triangles, with 256-pixel atlas cells (4096 × 11520). The texture allocation is independent of geometry reduction. Terminal atlases retain WebP quality 90 and lossless alpha.
+The retained 8192 × 4096 layout serves the latitude bands: monochrome is sourced at 5760 × 2880 and color at 6356 × 3178. The normal and enhanced photographic atlases sample those pinned original grids directly with a 2 × 2 footprint onto 720 native PolyCSS raster triangles, with 256-pixel atlas cells (4096 × 11520). The texture allocation is independent of geometry reduction. Those photographic atlases use WebP quality 95; latitude bands retain their existing encoding and alpha handling.
 
 ## Elevation
 

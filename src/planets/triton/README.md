@@ -104,8 +104,10 @@ transfer is I/F divided by 0.9 with gamma 1.4.
 
 The 14,336 × 7,168 preparation grid retains approximately 593 m equatorial
 texels. It does not make the coarser observations sharper. Source masks become
-the shared gray coverage grid. Runtime surfaces use WebP q90 with lossless
-alpha; poles and 640-pixel previews are prepared separately. Previews center
+the shared gray coverage grid. The enhanced photographic polar sprites sample
+their pinned source grid directly with a 2 × 2 footprint and retain lossless WebP
+encoding; latitude-band surfaces retain their existing q90 encoding with lossless
+alpha. Poles and 640-pixel previews are prepared separately. Previews center
 longitude zero so the observed region is continuous; globe coordinates stay
 unchanged. Both datasets retain the app's flood and directional lighting.
 
