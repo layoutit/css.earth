@@ -113,3 +113,28 @@ function nearestValidValue(fits: ReturnType<typeof readFitsPrimary>, x: number, 
 }
 const modulo = (value: number, divisor: number) => ((value % divisor) + divisor) % divisor;
 const clamp = (value: number, minimum: number, maximum: number) => Math.max(minimum, Math.min(maximum, value));
+
+/** One plane of a FITS primary array (NAXIS 2, or NAXIS 3 with a 1-based plane index) as Float64 values with BSCALE/BZERO
+ * applied; the header keeps raw card values. Big-endian 16-bit integers and IEEE floats are the layouts archives use here. */
+export function readFitsPlane(bytes: Buffer, plane = 1) {
+  let endCard = -1;
+  const header: Record<string, string> = {};
+  for (let offset = 0; offset + 80 <= bytes.length; offset += 80) {
+    const card = bytes.toString('ascii', offset, offset + 80), key = card.slice(0, 8).trim();
+    if (key === 'END') { endCard = offset + 80; break; }
+    if (card[8] === '=') header[key] = card.slice(10).split('/')[0].trim();
+  }
+  if (endCard < 0) throw new Error('FITS header has no END card.');
+  const bitpix = Number(header.BITPIX), axes = Number(header.NAXIS), width = Number(header.NAXIS1), height = Number(header.NAXIS2), planes = axes === 3 ? Number(header.NAXIS3) : 1;
+  const dataOffset = Math.ceil(endCard / 2880) * 2880, bytesPerValue = Math.abs(bitpix) / 8, planeBytes = width * height * bytesPerValue;
+  if (![16, -32, -64].includes(bitpix) || ![2, 3].includes(axes) || !Number.isSafeInteger(width) || width < 1 || !Number.isSafeInteger(height) || height < 1 ||
+      !Number.isSafeInteger(planes) || planes < 1 || !Number.isInteger(plane) || plane < 1 || plane > planes || dataOffset + planeBytes * planes > bytes.length) throw new Error('Unsupported or truncated FITS image.');
+  const scale = Number(header.BSCALE ?? 1), zero = Number(header.BZERO ?? 0);
+  if (!Number.isFinite(scale) || !Number.isFinite(zero)) throw new Error('Invalid FITS value scaling.');
+  const values = new Float64Array(width * height), start = dataOffset + (plane - 1) * planeBytes;
+  for (let index = 0; index < values.length; index++) {
+    const at = start + index * bytesPerValue;
+    values[index] = (bitpix === 16 ? bytes.readInt16BE(at) : bitpix === -32 ? bytes.readFloatBE(at) : bytes.readDoubleBE(at)) * scale + zero;
+  }
+  return { bitpix, width, height, planes, values, header };
+}
