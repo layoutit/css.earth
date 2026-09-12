@@ -26,6 +26,13 @@ The dimensions describe a smooth envelope. Galileo’s resolved craters are evid
 
 ## Evidence
 
+The [whole-body label capture](evidence/surface-labels/whole-body-2c24ca749.jpg), taken at
+`2c24ca749` on 2026-09-12 in the in-app browser at 1280 × 720, shows Acmon and
+Celmis with neither place selected. Both names are visible while the whole moon
+fits on screen; rotating hides the far-side names. The catalog's coordinates,
+diameters and mesh anchors remain unchanged. All 68 catalog and terrain checks
+passed on this revision, including Dactyl's two names.
+
 The [browser conformance report](evidence/dactyl-conformance.json) passed desktop/mobile input, picking, wheel/pinch zoom, lighting, single-scene lifecycle and retained identity at DPR 1/2. Its [DPR 1 video](evidence/dactyl-dpr-1.webm) and [DPR 2 video](evidence/dactyl-dpr-2.webm) retain the input sequences. These were captured at `514f6b497`; body geometry, asset banks and input/lifecycle code remain unchanged in the final renderer at `66448c17d`. The production check below repeats the navigation and presentation affected by later changes.
 
 ![Dactyl with Shadows off](evidence/dactyl-shadows-false.png)
@@ -41,6 +48,11 @@ The [production navigation check](../dinkinesh/evidence/galileo-lucy/production-
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Dactyl (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and the metadata datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries.
 
 Named features run of 2026-09-12 (this version): the catalogue labels 2 IAU names on the hit mesh (nothing skipped); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band, and a headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page, selected every lens and pinned Acmon from the sidebar search with no console errors or failed requests.
+
+The label-discovery update restores the current Gazetteer ZIP and records its
+new byte pin. Its prepared names, coordinates, diameters, notes and mesh anchors
+match the previous catalogue exactly. Both names become eligible while the
+whole moon fits on screen; their projected size and facing still control display.
 
 ## Preparation
 
