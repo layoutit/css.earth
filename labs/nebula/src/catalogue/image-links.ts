@@ -24,5 +24,6 @@ export function imageLinks(image: ArchiveImage) {
   const sourceUrl = sourceIsFits ? viewer(image.sourceUrl, 'image', title) : sourceIsTable ? viewer(image.sourceUrl, 'table', title) : image.sourceUrl;
   const filesUrl = table ? viewer(table, 'table', title) : null;
   return { sourceUrl, viewUrl, filesUrl, downloadUrl: table ? null : image.accessUrl, fits: Boolean(fits),
+    sourceLabel: sourceIsTable ? 'File listing' : sourceIsFits ? 'View FITS' : 'Source record',
     sourceIsViewer: Boolean(sourceIsFits || sourceIsTable) };
 }

@@ -61,6 +61,27 @@
 .catalogue-pagination { display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding-top: 12px; font-size: 11px; color: var(--text-secondary); }
 .catalogue-pagination button { font-size: 11px; padding: 5px 9px; }
 .catalogue-footer { margin: 15px 0 18px; color: var(--text-muted); font-size: 10px; }
+.catalogue-image-modes { display: flex; gap: 8px; padding: 8px 0 12px; }
+.catalogue-image-modes button { padding: 9px 18px; }
+.catalogue-image-modes button[aria-pressed="true"] { background: #35373b; border-color: #a9acb5; }
+.catalogue-survey-note { font-size: 11px; color: var(--text-secondary); margin: 6px 0 18px; }
+.catalogue-survey-note span { color: var(--text-muted); }
+.catalogue-survey-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(235px, 1fr)); gap: 18px; }
+.catalogue-survey-card { min-width: 0; }
+.catalogue-survey-card h3 { margin: 12px 0 5px; font-size: 14px; font-weight: 500; }
+.catalogue-survey-card p { font-size: 11px; color: var(--text-secondary); }
+.catalogue-survey-card small { display: block; color: var(--text-muted); font-size: 10px; margin-top: 12px; }
+.catalogue-survey-card .catalogue-product-links { align-items: center; font-size: 11px; }
+.catalogue-survey-preview { position: relative; aspect-ratio: 1; background: #050506; border-radius: 5px; overflow: hidden; }
+.catalogue-survey-preview img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.catalogue-survey-preview [role="status"] { position: absolute; inset: 35% 12px auto; text-align: center; color: var(--text-muted); font-size: 11px; }
+.catalogue-survey-preview > button { position: absolute; top: 55%; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+.catalogue-image-dialog { background: #151515; color: var(--shell-text); border: 1px solid #484b51; border-radius: 8px; padding: 16px; width: min(1000px, 94vw); max-height: 94vh; }
+.catalogue-image-dialog::backdrop { background: #000c; }
+.catalogue-image-dialog header { display: flex; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.catalogue-image-dialog h3 { margin: 0; font-weight: 500; font-size: 14px; }
+.catalogue-image-dialog .catalogue-survey-preview { width: min(100%, 72vh); margin: auto; }
+.catalogue-image-dialog footer { font-size: 10px; color: var(--text-secondary); margin-top: 12px; }
 @media (max-width: 1000px) { .catalogue-layout { grid-template-columns: 255px minmax(0, 1fr); } .catalogue-detail { padding: 16px 14px 0; } }
 @media (max-width: 700px) {
   .catalogue-layout { grid-template-columns: 1fr; grid-template-rows: 255px minmax(0, 1fr); }
