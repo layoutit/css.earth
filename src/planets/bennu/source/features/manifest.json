@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-surface-features-source@1",
+  "source": "IAU/USGS Gazetteer of Planetary Nomenclature, Bennu centre points",
+  "snapshotDate": "2026-09-12",
+  "sourcePage": "https://planetarynames.wr.usgs.gov/Page/BENNU/target",
+  "license": "Public domain (United States Government work)",
+  "licenseEvidence": "The archive ships no FGDC record; USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits, read 2026-09-12) states that USGS-authored or produced data and information are in the U.S. Public Domain, and every Gazetteer export that ships a record declares the use constraint “Public domain.”",
+  "qualification": "IAU-adopted feature names with Gazetteer centre coordinates, diameters and latitude–longitude extents, positive-east longitudes 0–360°. Centre points only: feature outlines are not published; names without a published diameter are labelled without a rim, names without a published centre are not placed.",
+  "inputs": [
+    {
+      "path": "BENNU_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/BENNU_nomenclature_center_pts.zip",
+      "bytes": 95757,
+      "sha256": "5da9153f28e1551d3285ed76735c5ddd9bb69f1c60354a299d7f5d8f41250c6f"
+    }
+  ]
+}
