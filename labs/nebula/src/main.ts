@@ -551,6 +551,7 @@ window.addEventListener('popstate', onHistoryChange);
 async function selectEmissionInspection(mode: 'sources' | 'structure' | 'volume') {
   const item = subjects.find(value => value.id === sourceSubject);
   if (!item?.emissionExperiment?.observationStructures || disposed) return;
+  if (mode === 'volume' && !item.emissionExperiment.directory) return;
   emissionInspection = mode;
   setBusy(busy);
   if (mode !== 'volume' || busy) return;

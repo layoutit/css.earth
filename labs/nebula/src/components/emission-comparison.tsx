@@ -9,8 +9,8 @@ import { JointFitPanel } from './joint-fit-panel';
 import { CompilerPanel } from './compiler-panel';
 
 /** Observation views and explicitly configured bounded inference workbenches. */
-export function EmissionComparison({ directory, structureDirectory, observationStructures, observationManifest, kinematicsSource, jointFitSource, compilerSource, onModeChange, sourceCatalogue, modeled = false, methodUrl, credit, statusNote }: {
-  directory: string; structureDirectory?: string; observationStructures?: string; observationManifest?: string; kinematicsSource?: string; jointFitSource?: string; compilerSource?: string; onModeChange?(mode: 'sources' | 'structure' | 'volume'): void;
+export function EmissionComparison({ directory, structureDirectory, observationStructures, observationManifest, kinematicsSource, jointFitSource, compilerSource, compilerPublished, onModeChange, sourceCatalogue, modeled = false, methodUrl, credit, statusNote }: {
+  directory?: string; structureDirectory?: string; observationStructures?: string; observationManifest?: string; kinematicsSource?: string; jointFitSource?: string; compilerSource?: string; compilerPublished?: string; onModeChange?(mode: 'sources' | 'structure' | 'volume'): void;
   sourceCatalogue?: string; modeled?: boolean; methodUrl?: string; credit?: string; statusNote?: string;
 }) {
   const [mode, setMode] = useState<'sources' | 'structure' | 'volume' | 'combined' | 'kinematics' | 'joint' | 'compiler'>(() => {
@@ -38,9 +38,9 @@ export function EmissionComparison({ directory, structureDirectory, observationS
       {observationStructures && <button type="button" aria-pressed={combinedMode} onClick={() => changeMode('combined')}>Combined</button>}
       {kinematicsSource && <button type="button" aria-pressed={velocityMode} onClick={() => changeMode('kinematics')}>Velocity</button>}
       {jointFitSource && observationStructures && <button type="button" aria-pressed={jointMode} onClick={() => changeMode('joint')}>Joint fit</button>}
-      <button type="button" aria-pressed={!structureMode && !sourcesMode && !advanced} title="Earlier Hubble volume baseline; retained for comparison." onClick={() => changeMode('volume')}>Volume</button>
+      {directory && <button type="button" aria-pressed={!structureMode && !sourcesMode && !advanced} title="Earlier volume baseline; retained for comparison." onClick={() => changeMode('volume')}>Volume</button>}
     </div>}
-    {compilerMode && compilerSource && observationStructures ? <CompilerPanel recipePath={compilerSource} cataloguePath={observationStructures} observationManifest={observationManifest} /> : jointMode && jointFitSource && observationStructures ? <JointFitPanel cataloguePath={observationStructures} recipePath={jointFitSource} observationManifest={observationManifest} /> : combinedMode && observationStructures ? <EvidenceFusion cataloguePath={observationStructures} observationManifest={observationManifest} /> : velocityMode && kinematicsSource ? <KinematicsPanel sourcePath={kinematicsSource} /> : sourcesMode && sourceCatalogue ? <EmissionSources key={sourceCatalogue} catalogue={sourceCatalogue} /> : structureMode && observationStructures ? <ObservationStructures key={observationStructures} cataloguePath={observationStructures} observationManifest={observationManifest} /> : structureMode && structureDirectory ? <EmissionStructures key={structureDirectory} directory={structureDirectory} /> : <fieldset>
+    {compilerMode && compilerSource && observationStructures ? <CompilerPanel recipePath={compilerSource} cataloguePath={observationStructures} observationManifest={observationManifest} publishedPath={compilerPublished} /> : jointMode && jointFitSource && observationStructures ? <JointFitPanel cataloguePath={observationStructures} recipePath={jointFitSource} observationManifest={observationManifest} /> : combinedMode && observationStructures ? <EvidenceFusion cataloguePath={observationStructures} observationManifest={observationManifest} /> : velocityMode && kinematicsSource ? <KinematicsPanel sourcePath={kinematicsSource} /> : sourcesMode && sourceCatalogue ? <EmissionSources key={sourceCatalogue} catalogue={sourceCatalogue} /> : structureMode && observationStructures ? <ObservationStructures key={observationStructures} cataloguePath={observationStructures} observationManifest={observationManifest} /> : structureMode && structureDirectory ? <EmissionStructures key={structureDirectory} directory={structureDirectory} /> : directory ? <fieldset>
       <legend>{modeled ? 'Image + geometric prior' : 'Image → inferred volume'}</legend>
       {observationStructures && <p className="interaction-hint">Previous Hubble baseline</p>}
       {statusNote && <p className="interaction-hint">{statusNote}</p>}
@@ -53,8 +53,8 @@ export function EmissionComparison({ directory, structureDirectory, observationS
         <figcaption className="interaction-hint">{label}</figcaption>
       </figure>)}
       <p className="interaction-hint" title={modeled ? 'The published geometry sets a depth prior. Color is allocated along its rays; agreement with the photo does not prove the geometry.' : 'The depth is inferred under an authored axial-symmetry assumption. Physical size and gas mass density are not measured. The projection comparison is numerical; the PolyCSS display uses an approximate opacity transfer.'}>{modeled ? 'Authored depth · photo agreement imposed' : 'Symmetry-based experiment · unmeasured depth'}</p>
-    </fieldset>}
-    {!structureMode && !sourcesMode && !advanced && <a className="model-source" href={methodUrl ?? 'https://doi.org/10.1111/cgf.12216'} target="_blank" rel="noreferrer">Reconstruction paper ↗</a>}
+    </fieldset> : <p role="status">No baseline volume is configured.</p>}
+    {directory && !structureMode && !sourcesMode && !advanced && <a className="model-source" href={methodUrl ?? 'https://doi.org/10.1111/cgf.12216'} target="_blank" rel="noreferrer">Reconstruction paper ↗</a>}
     {!sourcesMode && !advanced && !(structureMode && observationStructures) && credit && <p className="interaction-hint">{credit}</p>}
   </aside>;
 }

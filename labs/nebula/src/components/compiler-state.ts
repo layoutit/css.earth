@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { readCloudJob, activeCloudJob, type CloudJob } from './shape-cloud-client';
 import { readCompilerRequest, type CompilerRequest } from '../reconstruction/compiler/model';
 import { readCompilerResult, type CompilerResult } from '../reconstruction/compiler/result';
+import { loadPublishedCompiler } from './compiler-published';
+import { localFile } from '../viewer/viewer';
 
 interface Pointer { id: string; signature: string; request: CompilerRequest }
 interface Ledger { active?: Pointer; completed?: Pointer; paused?: string; cancelRequested?: boolean }
@@ -24,15 +26,16 @@ function readLedger(key: string): Ledger {
 class CompilerHttpError extends Error { constructor(readonly status: number, message: string) { super(message); } }
 
 /** Explicit first compile; subsequent edits are latest-only. Detachment never cancels server work. */
-export function useCompiler(request: CompilerRequest, storageKey: string, inputsReady = true) {
+export function useCompiler(request: CompilerRequest, storageKey: string, inputsReady = true, publishedPath?: string) {
   const [result, setResult] = useState<CompilerResult | null>(null), [job, setJob] = useState<CloudJob | null>(null);
   const [busy, setBusy] = useState(true), [error, setError] = useState(''), [storageError, setStorageError] = useState('');
   const [status, setStatus] = useState('Ready to compile');
   const desired = useRef(request); desired.current = request;
   const ready = useRef(inputsReady); ready.current = inputsReady;
+  const published = useRef(publishedPath); published.current = publishedPath;
   const actions = useRef<{ compile(): void; cancel(): void; changed(): void } | null>(null);
   useEffect(() => {
-    let stopped = false, running = false, booting = true, cancelWanted = false, cancelSent = false, manualWanted = false;
+    let stopped = false, running = false, booting = true, cancelWanted = false, cancelSent = false, manualWanted = false, publishedBaseline = false;
     let timer: ReturnType<typeof setTimeout> | undefined;
     const controller = new AbortController(), jobKey = `${storageKey}:jobs`;
     let ledger = readLedger(jobKey), accepted = '';
@@ -77,7 +80,7 @@ export function useCompiler(request: CompilerRequest, storageKey: string, inputs
     async function run() {
       if (stopped || running || booting || !ready.current) return;
       const initialKey = signature(desired.current);
-      if (!manualWanted && !ledger.active && (!ledger.completed || ledger.paused === initialKey || accepted === initialKey)) { setBusy(false); return; }
+      if (!manualWanted && !ledger.active && ((!ledger.completed && !publishedBaseline) || ledger.paused === initialKey || accepted === initialKey)) { setBusy(false); return; }
       running = true; cancelWanted = Boolean(ledger.active && ledger.cancelRequested); cancelSent = false; setBusy(true); setError('');
       try {
         do {
@@ -134,6 +137,21 @@ export function useCompiler(request: CompilerRequest, storageKey: string, inputs
             const prepared = readCompilerResult(completed.result);
             if (JSON.stringify(prepared.controls) !== JSON.stringify(ledger.completed.request.controls)) throw new Error('Saved cloud controls changed.');
             accepted = ledger.completed.signature; setResult(prepared); setStatus('Nebula ready');
+          }
+        } else if (!ledger.active && !ledger.paused && published.current) {
+          while (!ready.current && !stopped) await pause();
+          if (stopped || !published.current) return;
+          const prepared = await loadPublishedCompiler(published.current, desired.current.recipePath,
+            async path => {
+              if (path.endsWith('.ts')) {
+                const module: unknown = await import(/* @vite-ignore */ `${localFile(path)}?raw&revision=${Date.now()}`);
+                if (!object(module) || typeof module.default !== 'string') throw new Error('Compiler source is unavailable for verification.');
+                return new Response(module.default);
+              }
+              return fetch(localFile(path), { cache: 'no-store', signal: controller.signal });
+            });
+          if (!stopped && prepared && JSON.stringify(prepared.controls) === JSON.stringify(desired.current.controls)) {
+            publishedBaseline = true; accepted = signature(desired.current); setResult(prepared); setStatus('Prepared nebula ready');
           }
         }
       } catch (reason) {

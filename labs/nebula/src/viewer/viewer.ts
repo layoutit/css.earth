@@ -46,7 +46,7 @@ export interface LabSubjectRecord {
   modelNote?: string;
   framingRadiusUnits?: number;
   hasDetail?: boolean;
-  emissionExperiment?: { directory: string; modeled?: boolean; methodUrl?: string; statusNote?: string; structureDirectory?: string; sourceCatalogue?: string; observationStructures?: string; kinematicsSource?: string; jointFitSource?: string; compilerSource?: string };
+  emissionExperiment?: { directory?: string; modeled?: boolean; methodUrl?: string; statusNote?: string; structureDirectory?: string; sourceCatalogue?: string; observationStructures?: string; kinematicsSource?: string; jointFitSource?: string; compilerSource?: string; compilerPublished?: string };
   comparisonGroup?: string;
   reconstructionImage?: { group: string; label: string; note: string };
   referenceProjectionScale?: number;
@@ -77,6 +77,8 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
     throw new TypeError('Joint fitting requires registered observations and a valid recipe.');
   if (record.emissionExperiment?.compilerSource !== undefined && (!relativePath(record.emissionExperiment.compilerSource) || !record.emissionExperiment.observationStructures))
     throw new TypeError('Nebula compilation requires registered observations and a valid recipe.');
+  if (record.emissionExperiment?.compilerPublished !== undefined && (!relativePath(record.emissionExperiment.compilerPublished) || !record.emissionExperiment.compilerSource))
+    throw new TypeError('A prepared compiler result requires a compiler recipe and valid local path.');
   const sharedDensity = record.density && subjectRecords.filter(item => item.density?.directory === record.density!.directory);
   const configuredRadii = sharedDensity?.flatMap(item => item.density?.referenceFramingRadiusUnits === undefined ? [] : [item.density.referenceFramingRadiusUnits]) ?? [];
   if (configuredRadii.some(value => !Number.isFinite(value) || value <= 0) || new Set(configuredRadii).size > 1)
@@ -109,7 +111,7 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
     throw new TypeError(`Lab subject ${record.id} has an invalid original overlay path.`);
   const recipe = recipes[`../../../../${record.directory}/source/recipe.json`];
   const imagePath = record.imagePath ?? (record.image ? `${record.directory}/${record.image}` : null);
-  if (!imagePath && !density) throw new TypeError(`Lab subject ${record.id} has no comparison image or density reference.`);
+  if (!imagePath && !density && !record.observationAlignment) throw new TypeError(`Lab subject ${record.id} has no image, density or registered-observation workspace.`);
   const sourceUrl = imagePath ? localFile(imagePath) : '';
   const sourcePageUrl = record.sourcePageUrl ?? recipe?.source.publisherUrl;
   const credit = record.credit ?? recipe?.source.credit;

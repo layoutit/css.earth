@@ -129,7 +129,7 @@ export function CompilerStage({ result, lensId, mode, stars, showOriginal, view,
         style={{ width: '100%', height: '100%' }} />
       {showOriginal && source && <img src={`${localFile(source.original.path)}?v=${source.original.sha256}`} alt="" aria-hidden="true"
         data-compiler-original-source={source.id} style={originalStyle} />}
-      {(error || !ready) && <p className="shape-cloud-empty" role={error ? 'alert' : 'status'}>{error || 'Preparing compiled cloud…'}</p>}
+      {(error || result && !ready) && <p className="shape-cloud-empty" role={error ? 'alert' : 'status'}>{error || 'Preparing compiled cloud…'}</p>}
     </div>
   </section>;
 }

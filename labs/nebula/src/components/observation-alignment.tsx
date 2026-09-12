@@ -7,7 +7,7 @@ type Camera = { x: number; y: number; zoom: number };
 const layers = [{ id: 'original', label: 'Original', symbol: '▧' }, { id: 'diffuse', label: 'Without stars', symbol: '☁' }, { id: 'stars', label: 'Residual', symbol: '✧' }] as const;
 
 /** Common astrometric canvas. Inspection never launches image processing. */
-export function ObservationAlignment({ manifestPath }: { manifestPath: string }) {
+export function ObservationAlignment({ manifestPath, onOpenCompiler }: { manifestPath: string; onOpenCompiler?(): void }) {
   const [data, setData] = useState<Observations | null>(null), [error, setError] = useState('');
   const [selected, setSelected] = useState('');
   const [layer, setLayer] = useState<LayerId>('original');
@@ -112,6 +112,7 @@ export function ObservationAlignment({ manifestPath }: { manifestPath: string })
       <div className="observation-compass" title="Common sky orientation: celestial north up, east left.">N ↑ · E ←</div>
       {!data && <div className="observation-loading" role={error ? 'alert' : 'status'}>{error || 'Loading aligned images…'}
         {error && <p><button type="button" disabled={loading} onPointerDown={event => event.stopPropagation()} onClick={() => setReload(value => value + 1)}>Reload aligned images</button></p>}
+        {error && onOpenCompiler && <p><button type="button" onPointerDown={event => event.stopPropagation()} onClick={onOpenCompiler} title="Compile restores the configured source images and validates their alignment before reconstruction.">Open nebula compiler</button></p>}
       </div>}
     </div>
     <aside className="floating-panel observation-camera" aria-label="Alignment camera">

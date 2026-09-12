@@ -122,5 +122,119 @@
       "manifest": ".local/nebula-lab/observations/helix/observations.json",
       "recipe": "labs/nebula/models/helix/observations.json"
     }
+  },
+  {
+    "id": "m42",
+    "name": "M42 · Orion",
+    "menuLabel": "M42 · Orion",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/m42",
+    "hasDetail": false,
+    "modelNote": "Star-forming emission and reflection cloud. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/m42/observations.json",
+      "recipe": "labs/nebula/models/m42/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/m42/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/m42/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/m42.json",
+      "statusNote": "Image-only conditional depth; not measured density."
+    }
+  },
+  {
+    "id": "m8",
+    "name": "M8 · Lagoon",
+    "menuLabel": "M8 · Lagoon",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/m8",
+    "hasDetail": false,
+    "modelNote": "Star-forming emission cloud with obscuring dust. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/m8/observations.json",
+      "recipe": "labs/nebula/models/m8/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/m8/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/m8/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/m8.json",
+      "statusNote": "Image-only conditional depth; not measured density."
+    }
+  },
+  {
+    "id": "carina",
+    "name": "Carina",
+    "menuLabel": "Carina",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/carina",
+    "hasDetail": false,
+    "modelNote": "Extended star-forming emission and dust complex. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/carina/observations.json",
+      "recipe": "labs/nebula/models/carina/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/carina/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/carina/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/carina.json",
+      "statusNote": "Image-only conditional depth; not measured density."
+    }
+  },
+  {
+    "id": "ngc6357",
+    "name": "NGC 6357",
+    "menuLabel": "NGC 6357",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/ngc6357",
+    "hasDetail": false,
+    "modelNote": "Irregular star-forming emission complex. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/ngc6357/observations.json",
+      "recipe": "labs/nebula/models/ngc6357/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/ngc6357/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/ngc6357/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/ngc6357.json",
+      "statusNote": "Image-only conditional depth; not measured density."
+    }
+  },
+  {
+    "id": "m78",
+    "name": "M78",
+    "menuLabel": "M78",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/m78",
+    "hasDetail": false,
+    "modelNote": "Reflection nebula: scattered light does not directly measure gas density. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/m78/observations.json",
+      "recipe": "labs/nebula/models/m78/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/m78/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/m78/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/m78.json",
+      "statusNote": "Image-only conditional depth; not measured density."
+    }
+  },
+  {
+    "id": "horsehead",
+    "name": "Horsehead",
+    "menuLabel": "Horsehead",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/horsehead",
+    "hasDetail": false,
+    "modelNote": "Dark and reflection nebula: the silhouette traces absorption; positive emission fitting cannot recover the obscuring dust. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": ".local/nebula-lab/observations/horsehead/observations.json",
+      "recipe": "labs/nebula/models/horsehead/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": ".local/nebula-lab/observations/horsehead/structures/catalogue.json",
+      "compilerSource": "labs/nebula/models/horsehead/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/horsehead.json",
+      "statusNote": "Image-only conditional depth; not measured density."
+    }
   }
 ]

@@ -11,7 +11,7 @@ import type { CompilerInspectionFrame } from '../viewer/compiler-framing';
 import { useCompiler } from './compiler-state';
 import './compiler.css';
 
-export interface CompilerPanelProps { recipePath: string; cataloguePath: string; observationManifest?: string }
+export interface CompilerPanelProps { recipePath: string; cataloguePath: string; observationManifest?: string; publishedPath?: string }
 interface Presentation { view: CloudView; mode: 'neutral' | 'textured'; lensId: string | null; stars: boolean; original: boolean }
 const object = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
@@ -32,7 +32,7 @@ function savedPresentation(key: string): Presentation {
 export function CompilerPanel(props: CompilerPanelProps) {
   return <CompilerSession key={`${props.recipePath}:${props.cataloguePath}`} {...props} />;
 }
-function CompilerSession({ recipePath, cataloguePath, observationManifest }: CompilerPanelProps) {
+function CompilerSession({ recipePath, cataloguePath, observationManifest, publishedPath }: CompilerPanelProps) {
   const storageKey = `nebula:compiler:1:${recipePath}:${cataloguePath}`;
   const [catalogue, setCatalogue] = useState<StructureCatalogue | null>(null), [observations, setObservations] = useState<Observations | null>(null);
   const [inputsReady, setInputsReady] = useState(false);
@@ -90,7 +90,10 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest }: Com
   }, [catalogue, cataloguePath, matrices]);
   const request = useMemo<CompilerRequest>(() => ({ action: 'apply', imageId: 'compiler', recipePath, cataloguePath, imageToFrame: matrices,
     evidence, controls }), [recipePath, cataloguePath, matrices, evidence, controls]);
-  const state = useCompiler(request, storageKey, inputsReady), { result } = state;
+  const hasInspectionEdits = Boolean(registration?.images.some(image => {
+    const actual = matrices[image.id]; return actual?.some((value, index) => Math.abs(value - image.imageToFrame[index]!) > 1e-10);
+  })) || evidence.sensitivity !== 1 || evidence.weights.some(weight => weight !== 1);
+  const state = useCompiler(request, storageKey, inputsReady, hasInspectionEdits ? undefined : publishedPath), { result } = state;
   const inspectionFrame: CompilerInspectionFrame | undefined = result?.inspectionBoundsArcsec
     ? { boundsArcsec: result.inspectionBoundsArcsec, paddingPixels: 18 } : liveInspectionFrame;
   const source = result?.sources.find(item => item.id === (presentation.lensId ?? result.defaultSourceId)) ?? result?.sources[0];
