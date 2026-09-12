@@ -44,6 +44,18 @@ test('duplicates, unknown references, invalid agencies and ambiguous participati
   ]) assert.throws(() => parseExplorationCatalog({ ...f, missions: [changed] }, agencies));
 });
 
+test('a mission short name is cited and shorter than its full name', () => {
+  const f = fixture();
+  const mission = { ...f.missions[0], name: cited('Juno Jupiter Orbiter'), shortName: cited('Juno') };
+  const parsed = parseExplorationCatalog({ ...f, missions: [mission] }, agencies).missions[0];
+  assert.equal(parsed.shortName?.value, 'Juno');
+  assert.equal(parsed.name.value, 'Juno Jupiter Orbiter');
+  assert.ok(Object.isFrozen(parsed.shortName?.citations));
+  assert.equal(parseExplorationCatalog(f, agencies).missions[0].shortName, undefined, 'a short name is optional');
+  for (const shortName of [cited(''), cited('Juno Jupiter Orbiter'), 'Juno'])
+    assert.throws(() => parseExplorationCatalog({ ...f, missions: [{ ...mission, shortName }] }, agencies));
+});
+
 test('dates preserve source precision and reject only provable interval contradictions', () => {
   for (const date of ['2024', '2024-02', '2024-02-29']) assert.equal(explorationDate(date), date);
   for (const date of ['2023-02-29', '2024-00', '2024-13', '2024-04-31', '2024-1-1', '0000', 'yesterday']) assert.throws(() => explorationDate(date));

@@ -243,6 +243,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
           setSuppressedLabels(ids: readonly string[]) { spatial!.setSuppressedLabels(ids); },
           setRotationActive(active: boolean) { spatial!.setRotationActive(active); pointField!.holdSelection(active); },
           setHiddenIndicators(ids: readonly string[]) { spatial!.setHiddenIndicators(ids); },
+          setHighlighted(ids: readonly string[]) { spatial!.setHighlighted(ids); },
           inspect() {
             return Object.freeze({ opacity: spatial!.opacityStats(), publication: spatial!.publicationStats(), stars: pointField!.inspect(), bodies: spatial!.inspect(), environmentLabels: environmentLabels!.inspect(), galaxies: galaxyCatalog?.inspect(),
               foregroundLabelExclusions: [...spatial!.backgroundExclusionRects(), ...environmentLabels!.labelExclusionRects()] });

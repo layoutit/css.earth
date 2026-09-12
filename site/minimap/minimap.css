@@ -86,3 +86,7 @@
 @media (max-width: 640px) {
   .space-minimap { --explorer-minimap-size: 140px; right: 8px; --map-scale: .7368421; }
 }
+/* Phones give the scene the whole screen, with no minimap over it. */
+@media (max-width: 820px), (orientation: portrait) {
+  .space-minimap { display: none; }
+}
