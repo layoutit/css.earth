@@ -62,6 +62,11 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             path(surface[key], `surface.${key}`);
         if (typeof surface.falseColor !== 'boolean')
             throw new TypeError('falseColor must be boolean.');
+        if (surface.resolutionScale !== undefined) {
+            finite(surface.resolutionScale, 'surface.resolutionScale', true);
+            if (!Number.isInteger(surface.resolutionScale) || recipe.resample !== 'density-before-pack' || recipe.polesCombined || thumbnail.crop !== undefined || recipe.emission !== undefined)
+                throw new TypeError('Surface resolution scaling needs integer density-before-pack output with separate poles and an uncropped thumbnail.');
+        }
         if (surface.encoding !== undefined) {
             const encoding = record(surface.encoding, 'surface.encoding');
             if (Object.keys(encoding).some(key => !['format', 'encoder', 'progressive', 'quality', 'grayscale', 'chromaSubsampling'].includes(key)) || encoding.format !== 'jpeg' ||

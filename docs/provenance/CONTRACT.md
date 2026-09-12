@@ -178,6 +178,19 @@ comparisons, retain reference, result and diff with matching capture settings.
 Disclose different sources or framing and inspect affected views, boundaries and
 lighting before making comparison claims.
 
+**Use Pixelmatch for matched visual evidence.** This cssEarth requirement makes
+pixel changes inspectable and reproducible. Compare equal-sized, unscaled
+captures or identical documented crops. Retain the input images, generated diff,
+input hashes, Pixelmatch version, threshold, anti-aliasing setting, mismatch count
+and compared pixel count beside the owning evidence. Choose settings before
+comparing and disclose masks or exclusions. Keep camera, viewport, DPR, dataset,
+lighting and browser fixed. If capture instability could affect the conclusion,
+compare independent unchanged A/A captures first and report their differences;
+comparing a file with itself does not establish stability. Inspect the diff with
+both inputs. A changed-pixel count locates change; it does not measure sharpness,
+scientific accuracy or improvement. Explain the visible result separately and
+keep independent source/registration checks for scientific claims.
+
 **An old pass describes an old version.** Preserve its original revision, paths,
 hashes and outcome. To reuse it, identify the new revision and show that relevant
 dependencies still match. Unchanged textures do not qualify a changed camera.

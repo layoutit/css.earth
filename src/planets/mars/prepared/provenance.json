@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "51c2c6359908b295097e1448aa24e085bd773913fb78870f6b673e6c5c4c8c29"
+    "sha256": "218708b34be7f9195187fb649c13cf2867b87f238fb381a1b6ca3abed134a194"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1122,7 +1122,15 @@
       "bytes": 349568,
       "dependencies": [],
       "verification": "manifest-pin",
-      "acquisitionOperation": null,
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "features/traverses/msl_localized_pos.csv",
+        "url": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/localized_pos.csv"
+      },
       "verificationOperations": []
     },
     {
@@ -1148,7 +1156,15 @@
       "bytes": 171404,
       "dependencies": [],
       "verification": "manifest-pin",
-      "acquisitionOperation": null,
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "features/traverses/m2020_best_tactical.csv",
+        "url": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/best_tactical.csv"
+      },
       "verificationOperations": []
     }
   ],

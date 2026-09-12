@@ -8,7 +8,6 @@ import { clipSegmentToRectangle, rayHitsSphereBefore } from '../solar-system/hel
 import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter } from '../solar-system/prepared-ring-projection.js';
 import type { OrbitSegment } from '../solar-system/heliocentric-view.js';
 import { createWorldFrameProjection } from './world-frame-projection.js';
-import type { PointFrameState, PreparedPointFrame } from '../stars/point-field-frame.js';
 
 export const BODY_INDICATOR_DIAMETER = 16;
 export const CONTEXT_LINE_WIDTH = 1;
@@ -108,7 +107,6 @@ export interface WorldContextView {
   orbitLodPixels?: number;
   anchorOnly: boolean;
   bodies: readonly WorldBodyPresentation[];
-  points?: PointFrameState;
   contextCommittedId?: number;
 }
 
@@ -418,7 +416,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
     return { emphasizedId, opacity, width, height, projectedBodies: projectedBodies.map(plannedBody) };
   };
 }
-export type PlannedWorldContext = ReturnType<ReturnType<typeof createWorldContextPlanner>> & { points?: PreparedPointFrame };
+export type PlannedWorldContext = ReturnType<ReturnType<typeof createWorldContextPlanner>>;
 
 /** The picking bounds of the final clipped chords, including the marker cutout,
  * written into the body's retained bounds object; the paint owner formats the strokes. */

@@ -191,6 +191,11 @@ Read the applicable preparation guidance **before** processing those assets:
 | Unresolved appearance, rings or atmosphere | [Shape and optional layers](references/surface-preparation.md#shape-and-optional-layers): evidence determines the presentation and supported capabilities. |
 | UV banding, edge artifacts or detached lighting | [Registration](references/surface-preparation.md#registration): distinguish source projection, geometry and overlay fit. |
 
+For a photographic resolution refresh on the existing raster lane, use the
+[partial photographic preparer](../../../docs/surface-preparation.md#refresh-photographs-without-rebuilding-geometry).
+Keep geometry and lighting fixed, prepare one body at a time, and compare actual
+close-ups and image delivery size before accepting the larger texture.
+
 Generate the assets actually consumed by each selected view—surface and pole
 atlases, thumbnails, minimaps, markers and legends where applicable—from the
 same prepared interpretation. A minimap needs its own small image, not an HD

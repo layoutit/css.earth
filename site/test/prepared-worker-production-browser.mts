@@ -30,9 +30,11 @@ try {
     const decoders = workers.filter(worker => /\/_astro\/prepared-object-worker-.*\.js$/.test(worker.url()));
     const selectors = workers.filter(worker => /\/_astro\/point-field-selection-worker-.*\.js$/.test(worker.url()));
     assert.equal(decoders.length, 5, 'Each cold package is decoded by the emitted production worker');
-    assert.equal(selectors.length, 1, 'One star selection worker survives object navigation');
-    assert.deepEqual(page.workers(), selectors, 'Completed decode jobs retire; only the shared selector remains');
-    console.log(`PRODUCTION WORKER PASS DPR ${dpr}: five packages, retained document, one scene, decode jobs retired, one retained selector`);
+    assert.equal(selectors.length, 0, 'Background stars are baked; no star selection worker is started');
+    assert.ok(decoders.every(worker => !page.workers().includes(worker)), 'Completed decode jobs retire');
+    assert.equal(page.workers().filter(worker => /\/_astro\/world-context-planner-worker-.*\.js$/.test(worker.url())).length, 1,
+      'One shared world planner survives object navigation');
+    console.log(`PRODUCTION WORKER PASS DPR ${dpr}: five packages, retained document, one scene, decode jobs retired, no star selector`);
     await page.close();
   }
   assert.deepEqual(errors, []);

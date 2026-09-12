@@ -16,6 +16,8 @@ export interface SurfaceRasterRecipe {
     output: string;
     encoding?: SurfaceEncoding;
     thumbnail: string;
+    /** Offline surface resolution relative to the shared layout; does not change geometry or lighting. */
+    resolutionScale?: number;
     sharpen?: number[];
     exposure?: number[];
     /** Opt in to sampling the pinned source image directly for pole sprites. The delivered latitude bands stay unchanged. */

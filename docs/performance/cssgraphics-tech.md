@@ -316,7 +316,7 @@ Source entry points in this working tree:
 - [Planner client](../../src/renderers/css/universe/world-context-planner-client.ts)
   and [planner](../../src/renderers/css/universe/world-context-planner.ts).
 - [World frame queue](../../src/renderers/css/navigation/world-frame-queue.ts).
-- [Prepared point field](../../src/renderers/css/stars/prepared-point-field-runtime.ts)
+- [Baked celestial sky](../../src/renderers/css/sky/prepared-sky-runtime.ts)
   and [opacity fader](../../src/renderers/css/stars/opacity-fader.ts).
 - [Retained leaf pool](../../src/renderers/css/rendering/retained-leaf-pool.ts).
 - Existing overview image-bank results were recorded in local run output, not in a tracked guide.

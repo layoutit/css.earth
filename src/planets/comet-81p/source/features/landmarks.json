@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-surface-landmarks@1",
+  "source": "Brownlee et al. (2004) and NASA PIA06285; approximate image-to-PDS-model registration",
+  "frame": "Native Cartesian metres in PDS Wild 2 full plate model V2.1. Image callouts project through the existing N2073 camera; label points are not surveyed centres or mapped boundaries.",
+  "entries": [
+    {
+      "id": "85000000",
+      "name": "Mayo",
+      "kind": "region",
+      "type": "Mission-named depression",
+      "position": {
+        "pointMeters": [
+          -1955.8305527456396,
+          -1007.3754243194571,
+          265.77558693187893
+        ],
+        "maximumDistanceMeters": 55
+      },
+      "minimumZoomShare": 0.45,
+      "description": "A roughly 1.2 km depression with a scalloped rim and a comparatively flat floor.",
+      "qualification": "Approximate location transferred from Stardust’s named-feature image.",
+      "reference": {
+        "title": "Brownlee et al. (2004), Surface of Young Jupiter Family Comet 81P/Wild 2, Fig. 2",
+        "url": "https://doi.org/10.1126/science.1097899",
+        "credit": "Stardust science team · NASA/JPL-Caltech"
+      }
+    },
+    {
+      "id": "85000001",
+      "name": "Left Foot",
+      "kind": "region",
+      "type": "Mission-named depression",
+      "position": {
+        "pointMeters": [
+          21.46509780632914,
+          874.1430504120126,
+          1097.2946637244604
+        ],
+        "maximumDistanceMeters": 55
+      },
+      "minimumZoomShare": 0.45,
+      "description": "A double depression with flat floors and steep cliffs. Its northern lobe is about 650 m wide and 140 m deep.",
+      "qualification": "Approximate location transferred from Stardust’s named-feature image.",
+      "reference": {
+        "title": "Brownlee et al. (2004), Surface of Young Jupiter Family Comet 81P/Wild 2, Fig. 2",
+        "url": "https://doi.org/10.1126/science.1097899",
+        "credit": "Stardust science team · NASA/JPL-Caltech"
+      }
+    },
+    {
+      "id": "85000002",
+      "name": "Right Foot",
+      "kind": "region",
+      "type": "Mission-named depression",
+      "position": {
+        "pointMeters": [
+          1317.0852987413527,
+          -398.2281710876341,
+          867.810406164499
+        ],
+        "maximumDistanceMeters": 55
+      },
+      "minimumZoomShare": 0.45,
+      "description": "A roughly 1 km depression, deeper and less flat than Left Foot. Its southeast rim exposes more than 150 m of cliff.",
+      "qualification": "Approximate location transferred from Stardust’s named-feature image.",
+      "reference": {
+        "title": "Brownlee et al. (2004), Surface of Young Jupiter Family Comet 81P/Wild 2, Fig. 2",
+        "url": "https://doi.org/10.1126/science.1097899",
+        "credit": "Stardust science team · NASA/JPL-Caltech"
+      }
+    }
+  ]
+}

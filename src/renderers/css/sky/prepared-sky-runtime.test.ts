@@ -12,12 +12,10 @@ import { createPreparedUniverse } from '../universe/prepared-universe-runtime.js
 import { logarithmicFade } from '../universe/prepared-world-context.js';
 import { readCanonicalPointField } from '../preparation/stars/canonical-point-field-fixture.js';
 
-const starPublish = vi.hoisted(() => vi.fn());
 const spatialPublish = vi.hoisted(() => vi.fn());
 const foregroundRects = vi.hoisted(() => [{ left: 100, top: 100, right: 150, bottom: 114 }]);
 // These unrelated layers keep their normal publication contract; the test mounts
 // the actual universe, sky and volume compositor without building a star catalogue.
-vi.mock('../stars/prepared-point-field-runtime.js', () => ({ mountPreparedCssPointField: () => ({ publish: starPublish, inspect: () => ({}), setOccluder() {}, destroy() {} }) }));
 vi.mock('../universe/world-context-point-source.js', () => ({ mountWorldContextPointSource: () => null }));
 vi.mock('../universe/prepared-world-context.js', async importOriginal => ({ ...await importOriginal<typeof import('../universe/prepared-world-context.js')>(),
   mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, backgroundExclusionRects: () => foregroundRects, destroy() {} }) }));
@@ -128,7 +126,7 @@ test.each([
   ] };
   const stars = readCanonicalPointField();
   const document = new FakeDocument(), stage = document.createElement(), detail = document.createElement(); stage.appendChild(detail);
-  const universe = createPreparedUniverse({ context, volume: data, stars, resolveResource: path => `/volume/${path}`, resolveStarResource: path => `/stars/${path}`, sprites: {} });
+  const universe = createPreparedUniverse({ context, volume: data, pointAppearance: stars, resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`, sprites: {} });
   const skyAssets = universe.assets.entries.filter(entry => entry.key.includes(':sky/'));
   expect(skyAssets).toHaveLength(withSky ? 6 : 0);
   for (const asset of skyAssets) expect(universe.assets.startup).toContain(asset.key);
@@ -188,7 +186,6 @@ test.each([
         expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBe(.4);
       }
     } else expect(completedPixel(volumeRoot, volumeImage, undefined, .4)).toBeCloseTo(.4 * expected * expectedGain, 12);
-    const starCalls = starPublish.mock.calls.length;
     for (const high of [true, false]) {
       mounted.setHighContrastSky(high);
       const effectiveGain = high ? 1 : expectedGain;
@@ -197,10 +194,6 @@ test.each([
         .2 * expected * effectiveGain + (withSky ? .7 * (1 - expected) : 0), 12);
       expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     }
-    expect(starPublish.mock.calls.length).toBe(starCalls);
-    expect(starPublish).toHaveBeenLastCalledWith(camera, viewport, 1 - logarithmicFade(distance, context.volume.fadeStartDistanceM, context.volume.fullDistanceM), mounted.inspect().foregroundLabelExclusions);
-    expect(starPublish.mock.lastCall![3]).toEqual(expect.arrayContaining(foregroundRects));
-    expect(spatialPublish.mock.invocationCallOrder.at(-1)).toBeLessThan(starPublish.mock.invocationCallOrder.at(-1)!);
     mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport);
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? expectedGain : 1), 12);
@@ -217,7 +210,7 @@ function completedPixel(host: FakeElement, image: FakeElement, sky: FakeElement 
   return t * g * volumeValue + (1 - foregroundAlpha) * underlay;
 }
 
-test('a near cube with baked stars crossfades over the far cube and only a contributing cube paints', () => {
+test('baked stars use one six-face cube throughout travel, with no plain-cube handoff', () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
   const nearFaces = fixture().faces.map(face => ({ ...face, texturePath: `sky-near/${face.id}.webp` }));
   const payload: PreparedCssSky = { ...fixture(), nearFaces, stars: { objectId: 'stellar-neighbourhood', cssPixelsPerDegree: 21.8 } };
@@ -225,16 +218,19 @@ test('a near cube with baked stars crossfades over the far cube and only a contr
   const { stars: _stars, ...withoutStars } = payload;
   expect(() => validatePreparedCssSky(withoutStars, nearResources)).toThrow('come together');
   const runtime = mountPreparedCssSky({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resources: nearResources, resolveResource: path => `/prepared/${path}` });
-  const root = runtime.root as unknown as FakeElement, [far, near] = root.children as [FakeElement, FakeElement];
-  const scene = (cube: FakeElement) => cube.children[0]!.children[0]!;
-  expect(scene(near).children.map(leaf => leaf.dataset.skyFace)).toEqual(bases.map(([id]) => id));
-  expect(scene(near).children.map(leaf => leaf.style.backgroundImage)).toEqual(bases.map(([id]) => `url("/prepared/sky-near/${id}.webp")`));
-  runtime.publish(world(), viewport, true, 1);
-  expect(far.style.visibility).toBe('hidden'); expect(near.style.visibility ?? '').toBe(''); expect(near.style.opacity ?? '').toBe('');
-  runtime.publish(world(), viewport, true, .25);
-  expect(far.style.visibility).toBe(''); expect(near.style.opacity).toBe('0.25');
-  runtime.publish(world([0, 0, 0], [0, Math.SQRT1_2, 0, Math.SQRT1_2]), viewport, true, 0);
-  expect(near.style.visibility).toBe('hidden'); expect(far.style.visibility).toBe('');
-  expect(scene(near).style.transform).toBe(scene(far).style.transform);
-  expect(near.children[0]!.style.perspectiveOrigin).toBe(far.children[0]!.style.perspectiveOrigin);
+  const root = runtime.root as unknown as FakeElement;
+  expect(root.children).toHaveLength(1);
+  const cube = root.children[0]!, scene = cube.children[0]!.children[0]!;
+  const leaves = [...scene.children], count = document.count;
+  expect(leaves.map(leaf => leaf.style.backgroundImage)).toEqual(bases.map(([id]) => `url("/prepared/sky-near/${id}.webp")`));
+  for (const distance of [1, 100 * 149597870700, 140.3 * 149597870700, 3.085677581491367e15, 1e20]) {
+    runtime.publish(world([0, 0, distance]), viewport);
+    expect(root.children).toEqual([cube]);
+    expect(scene.children).toEqual(leaves);
+    expect(cube.style.opacity ?? '').toBe('');
+    expect(root.style.visibility).toBe('visible');
+  }
+  runtime.publish(world([0, 0, 0], [0, Math.SQRT1_2, 0, Math.SQRT1_2]), viewport);
+  expect(scene.style.transform).toBe(preparedSkyCameraTransform(world([0,0,0], [0,Math.SQRT1_2,0,Math.SQRT1_2]), viewport));
+  expect(document.count).toBe(count);
 });

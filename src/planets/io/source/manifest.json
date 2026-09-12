@@ -209,7 +209,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -927,7 +927,7 @@
       "expectedSha256": "be1afafaa7adb0492cef2cfc8dc7ec8dc063f23e386fe9bdebf6d5a3ca2ac37c",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IO_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -971,8 +971,8 @@
     {
       "id": "io-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1179,
-      "expectedSha256": "2a5947114e6ef23f9571f4f2052403e38a54222fc4dfaa83f5dc63804b4db2b8",
+      "expectedBytes": 1177,
+      "expectedSha256": "773f25e55fd348ab4193cabd51fbada8b6a52d6092586ac65116debe011cfbcf",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -1064,8 +1064,8 @@
     {
       "id": "io-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 12507,
-      "expectedSha256": "0ca5347ef6235349ea9a2915a2b649584d87d8b8a96de9fb977299fb1b81d159",
+      "expectedBytes": 12563,
+      "expectedSha256": "eea8a761f448acd288b104e90f63055bdb1a53a3def123ec2a6109cfbf0d50ee",
       "origin": "Repository-authored Io raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
