@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": null,
+  "members": null,
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 0,
+  "output": "comet-8p-features.json",
+  "publicBase": "/scenes/comet-8p/",
+  "target": {
+    "className": "comet-8p-body"
+  },
+  "lensIds": [
+    "model"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "IM"
+    ],
+    "linear": [
+      "RU"
+    ],
+    "region": [
+      "RE"
+    ]
+  },
+  "excludedTypeCodes": {},
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 20,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 32
+  },
+  "landmarks": {
+    "document": "landmarks.json",
+    "inputs": []
+  }
+}

@@ -6,6 +6,7 @@ import { parseDbf } from './dbf.js';
 import { parseFeatureNotes, type FeatureNotes } from './notes-schema.js';
 import { loadNaturalEarthRows, parseNaturalEarthConfig, type NaturalEarthConfig } from './natural-earth.js';
 import { loadSiteRows, parseSurfaceSites, type SiteRow } from './sites.js';
+import { prepareLandmarks } from './landmarks.js';
 /** Spacecraft sites are discovered past the whole-body view (which sits near 0.43 of the zoom range), once the camera closes in. */
 const SITE_ZOOM_SHARE = 0.6;
 import { parseShpPolylines } from './shp.js';
@@ -63,6 +64,8 @@ export interface SurfaceFeaturesConfig {
   readonly naturalEarth?: NaturalEarthConfig;
   /** Optional landing, impact and sample sites and traverses (inside `directory`): the document and its pinned path files. */
   readonly sites?: { readonly document: string; readonly inputs: readonly string[] };
+  /** Mission-defined regions or source-backed model anatomy, independent of IAU naming. */
+  readonly landmarks?: { readonly document: string; readonly inputs: readonly string[] };
 }
 export interface SurfaceFeaturesSourceManifest {
   readonly schema: typeof SURFACE_FEATURES_SOURCE_SCHEMA;
@@ -106,6 +109,7 @@ export interface PreparedSurfaceFeatureCatalog {
   readonly notes?: { readonly source: string; readonly retrievedAt: string; readonly license: string; readonly licenseUrl: string; readonly count: number };
   /** Present when the recipe pins a sites document: its provenance and how many sites and traverses were placed. */
   readonly sites?: { readonly source: string; readonly retrievedAt: string; readonly count: number };
+  readonly landmarks?: { readonly source: string; readonly frame: string; readonly evidence: Awaited<ReturnType<typeof prepareLandmarks>>['evidence'] };
   readonly features: readonly PreparedSurfaceFeature[];
 }
 export interface SurfaceFeatureCatalogDescriptor { readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number; }
@@ -145,7 +149,7 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
   const input = record(value, 'features recipe');
   if (input.schema !== SURFACE_FEATURES_CONFIG_SCHEMA) throw new TypeError('Unsupported surface features recipe schema.');
   const members = input.archive === null ? null : record(input.members, 'features recipe members'), target = record(input.target, 'features recipe target');
-  if (input.archive === null && input.sites === undefined && input.naturalEarth === undefined) throw new TypeError('A features recipe without an archive must list sites or Natural Earth layers.');
+  if (input.archive === null && input.sites === undefined && input.naturalEarth === undefined && input.landmarks === undefined) throw new TypeError('A features recipe without an archive must list sites, landmarks or Natural Earth layers.');
   const kindsInput = record(input.kinds, 'features recipe kinds'), policyInput = record(input.labelPolicy, 'features label policy');
   const kinds = { point: codes(kindsInput.point, 'kinds.point'), linear: codes(kindsInput.linear, 'kinds.linear'), region: codes(kindsInput.region, 'kinds.region') };
   const all = [...kinds.point, ...kinds.linear, ...kinds.region];
@@ -176,7 +180,7 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
     surfaceMap: relativePath(input.surfaceMap, 'features recipe surfaceMap'), mapLeftEdgeLongitudeDeg: finite(input.mapLeftEdgeLongitudeDeg, 'features recipe mapLeftEdgeLongitudeDeg'),
     output, publicBase, target: { className: text(target.className, 'target.className'), withoutClassName: target.withoutClassName === undefined ? null : text(target.withoutClassName, 'target.withoutClassName') },
     lensIds: Object.freeze([...lensIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
-    outline: Object.freeze(outline), ...(traces ? { traces } : {}), ...(input.notes === undefined ? {} : { notes: relativePath(input.notes, 'features recipe notes') }), ...(input.naturalEarth === undefined ? {} : { naturalEarth: parseNaturalEarthConfig(input.naturalEarth) }), ...(input.sites === undefined ? {} : { sites: parseSitesRecipe(input.sites) }),
+    outline: Object.freeze(outline), ...(traces ? { traces } : {}), ...(input.notes === undefined ? {} : { notes: relativePath(input.notes, 'features recipe notes') }), ...(input.naturalEarth === undefined ? {} : { naturalEarth: parseNaturalEarthConfig(input.naturalEarth) }), ...(input.sites === undefined ? {} : { sites: parseSitesRecipe(input.sites) }), ...(input.landmarks === undefined ? {} : { landmarks: parseSitesRecipe(input.landmarks) }),
   });
 }
 
@@ -443,6 +447,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   }
   if (config.naturalEarth) { for (const layer of config.naturalEarth.layers) if (!manifest.inputs.some(entry => entry.path === layer.archive)) throw new TypeError(`Natural Earth layer ${layer.id} is not pinned by its source manifest.`); }
   else if (config.archive !== null && !manifest.inputs.some(entry => entry.path === config.archive)) throw new TypeError('Surface feature archive is not pinned by its source manifest.');
+  if (config.landmarks && !manifest.inputs.some(entry => entry.path === config.landmarks!.document)) throw new TypeError('Landmark document is not pinned by its source manifest.');
   for (const id of config.lensIds) if (!context.declaredLensIds.includes(id)) throw new TypeError(`Surface feature lens ${id} is not declared by the object.`);
   const axes = parseSurfaceAxes(JSON.parse(await readFile(resolve(context.sourceDirectory, config.surfaceMap), 'utf8')));
   const loadedTraces = config.traces ? await loadTraces(context.sourceDirectory, config.traces) : null;
@@ -527,7 +532,12 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   if (!(context.meshRadiusUnits > 0) || !Number.isFinite(context.meshRadiusUnits)) throw new TypeError('Surface features need the prepared mesh radius.');
   const scale = context.meshRadiusUnits / context.radiusKm;
   const features: PreparedSurfaceFeature[] = [];
+  const landmarks = config.landmarks ? await prepareLandmarks(JSON.parse(await readFile(resolve(directory, config.landmarks.document), 'utf8')), context, axes, config.mapLeftEdgeLongitudeDeg) : null;
+  if (landmarks) for (const feature of landmarks.features) {
+    features.push(feature); zoomShareById.set(feature.id, feature.minimumZoomShare); priorityById.set(feature.id, 10);
+  }
   const ids = new Map<string, PreparedSurfaceFeature>();
+  const landmarkIds = new Set(features.map(feature => feature.id));
   const duplicateIds = new Set<string>();
   let duplicateRows = 0, maxSeparationDeg = 0, maxDiameterDifferenceKm = 0;
   for (const row of rows) {
@@ -552,6 +562,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     if (diameterKm === 0) unsized[code] = (unsized[code] ?? 0) + 1;
     const id = /#feature-(\d+)$/u.exec(row.link!)?.[1] ?? /\/Feature\/(\d+)$/u.exec(row.link!)?.[1];
     if (!id) throw new TypeError(`Gazetteer feature identity is missing for ${row.name}.`);
+    if (landmarkIds.has(id)) throw new TypeError(`Landmark identity conflicts with another feature: ${id}.`);
     const first = ids.get(id);
     if (first) {
       // The export repeats some features (one row per map quadrangle). Keep the
@@ -639,6 +650,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
       traces: loadedTraces.traces.length, matched: traceStats.matched, byCode: traceStats.byCode, unmatched: traceStats.unmatched, maximumVertices: config.traces.maximumVertices } } : {}),
     ...(notes ? { notes: { source: notes.source, retrievedAt: notes.retrievedAt, license: notes.license, licenseUrl: notes.licenseUrl, count: features.filter(feature => feature.note && feature.note.credit.startsWith('Wikipedia')).length } } : {}),
     ...(siteDocument ? { sites: { source: siteDocument.source, retrievedAt: siteDocument.retrievedAt, count: siteRows.length } } : {}),
+    ...(landmarks ? { landmarks: { source: landmarks.source, frame: landmarks.frame, evidence: landmarks.evidence } } : {}),
     features,
   };
   const bytes = Buffer.from(`${JSON.stringify(catalog)}\n`);

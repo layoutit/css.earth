@@ -28,7 +28,7 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
   const authored = authoredPresentationBasis(parsed, [1, 0, 0, 0, 1, 0, 0, 0, 1]);
   const meshRadiusUnits = authored.sourceRadiusUnits * authored.tilePixels;
   if (!(meshRadiusUnits > 0)) throw new TypeError('Surface features need a positive mesh radius from the authored lane.');
-  const hit = definition.surfaceHit as { target?: number; triangles?: readonly (readonly (readonly number[])[])[] } | undefined;
+  const hit = definition.surfaceHit as { target?: number; triangles?: readonly (readonly (readonly number[])[])[]; lensRanges?: readonly { lensId: string; start: number; count: number }[] } | undefined;
   const radialTerrain = descriptor.recipe.shape.kind === 'radial-terrain';
   if (hit?.triangles?.length && !radialTerrain) {
     const vertexRadius = Math.max(...hit.triangles.flat().map(point => Math.hypot(point[0]!, point[1]!, point[2]!)));
@@ -36,7 +36,12 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
   }
   // Shape-model bodies anchor on their picking mesh: the sampler's body-fixed frame is the tool's 0° edge with the shared axes.
   if (radialTerrain && !(hit?.triangles?.length && typeof hit.target === 'number')) throw new TypeError('Shape-model surface features need the prepared hit mesh.');
-  const hitMesh = radialTerrain && hit?.triangles && typeof hit.target === 'number' ? { target: hit.target, triangles: hit.triangles } : undefined;
+  const featureConfig = parseSurfaceFeaturesConfig(config.value);
+  const ranges = featureConfig.landmarks ? hit?.lensRanges?.filter(range => featureConfig.lensIds.includes(range.lensId)) ?? [] : [];
+  if (featureConfig.landmarks && hit?.lensRanges?.length && (ranges.length !== 1 || featureConfig.lensIds.some(id => id !== ranges[0]!.lensId))) throw new TypeError('Features on alternative shapes must select one matching lens range.');
+  const range = ranges[0];
+  if (range && (!Number.isSafeInteger(range.start) || !Number.isSafeInteger(range.count) || range.start < 0 || range.count < 1 || range.start + range.count > (hit?.triangles?.length ?? 0))) throw new TypeError('Invalid feature mesh range.');
+  const hitMesh = radialTerrain && hit?.triangles && typeof hit.target === 'number' ? { target: hit.target, triangles: range ? hit.triangles.slice(range.start, range.start + range.count) : hit.triangles } : undefined;
   // The paged ellipsoid lane renders an oblate flat-leaf globe whose equatorial radius is the mesh radius: geodetic
   // catalogue positions anchor where its leaf frames draw them, checked against the authored reference ellipsoid.
   const paged = parsed.get('paged-ellipsoid');
@@ -49,7 +54,9 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
     declaredLensIds: descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)) };
   const features = await prepareSurfaceFeatures(context);
   return { definition: { ...definition, features: features.plan },
-    features: { searchLabel: 'Named features', description: `${features.plan.catalog.count.toLocaleString('en')} IAU names from the Gazetteer of Planetary Nomenclature` } };
+    features: { searchLabel: 'Named features', description: features.catalog.landmarks || (features.catalog.sites && !parseSurfaceFeaturesConfig(config.value).archive)
+      ? `${features.plan.catalog.count.toLocaleString('en')} surface places from mission maps and cited studies`
+      : `${features.plan.catalog.count.toLocaleString('en')} IAU names from the Gazetteer of Planetary Nomenclature` } };
 }
 
 /** The paged lane's own geodetic mapping (the one its city destinations use) becomes the feature sampler. The lane
