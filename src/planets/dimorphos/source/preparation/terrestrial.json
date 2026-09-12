@@ -16,7 +16,58 @@
     "surfaceObservations": [
       {
         "id": "draco",
-        "format": "draco-geo",
+        "format": "pds4-geometry-cube",
+        "cube": {
+          "collection": "urn:nasa:pds:dart:data_dracoddp",
+          "target": "(65803) Didymos I (Dimorphos)",
+          "observingSystem": [
+            "DART:Host",
+            "DRACO:Instrument"
+          ],
+          "shapeKernel": "dimorphos_g_00243mm_spc_0000n00000_v004.bds",
+          "quantity": "I/F",
+          "planes": {
+            "image": "ioverf",
+            "x": "xcoord",
+            "y": "ycoord",
+            "z": "zcoord",
+            "incidence": "incidence",
+            "emission": "emission",
+            "phase": "phase",
+            "pixelScale": [
+              "horizpixscale",
+              "vertpixscale"
+            ]
+          },
+          "header": {
+            "MISSION": "DART",
+            "INSTRUME": "DRACO",
+            "TARGET": "(65803) Didymos I (Dimorphos)",
+            "BADIMAGE": "FALSE",
+            "IOVERF": "PERFORM",
+            "RADIANCE": "PERFORM",
+            "CALIB": "ON",
+            "BINNING": "ON",
+            "MISPXVAL": "1E10",
+            "PXOUTWIN": "-1E10",
+            "SATPXVAL": "1E09",
+            "GEOINVAL": "-999",
+            "SHAPREF2": "dimorphos_g_0243mm_spc_obj_0000n00000_v004.obj"
+          },
+          "headerTime": "ACQ_UTC",
+          "headerPlaneNames": {
+            "prefix": "PLANE",
+            "names": {
+              "ioverf": "Pixel value",
+              "xcoord": "X coordinate of pixel center",
+              "ycoord": "Y coordinate of pixel center",
+              "zcoord": "Z coordinate of pixel center",
+              "incidence": "Solar incidence angle",
+              "emission": "Emission angle",
+              "phase": "Solar phase angle"
+            }
+          }
+        },
         "consumer": "draco-observation",
         "filter": "unfiltered",
         "allowLossy": false,
