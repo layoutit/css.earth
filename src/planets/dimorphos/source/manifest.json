@@ -173,6 +173,30 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-dimorphos-nomenclature-center-pts",
+      "path": "features/DIMORPHOS_nomenclature_center_pts.zip",
+      "expectedBytes": 30289,
+      "expectedSha256": "665b495e7b2841e18d8c362f41ec6775c4399a94d473e975ec936cec99684963",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIMORPHOS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dimorphos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Dimorphos centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DIMORPHOS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -214,8 +238,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2165,
-      "expectedSha256": "ff9aae8403b1936cbe7f8ceaef2cdfd3795cf538fe69b872b83261f069088cd8"
+      "expectedBytes": 2425,
+      "expectedSha256": "23e725f0efedf0fadfefa45d6f86087e1193940064f3398ed9a6a4634c4dc4c3"
     },
     {
       "path": "preparation/navigation.json",
@@ -303,6 +327,60 @@
             "locator": "Identification_Area and File_Area_Observational/File"
           }
         ]
+      }
+    },
+    {
+      "id": "dimorphos-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1319,
+      "expectedSha256": "0ced0dce2347e266e2393a9e20df4efb6355a7f6749092ba6f08a3080faa8d29",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "dimorphos-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1090,
+      "expectedSha256": "abe0dca58846b815382b14e2a4037d97d65cfe8c2b5c50c9b6a4ad637446d8bb",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "dimorphos-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 156,
+      "expectedSha256": "49a8398207a279568f098d9629215d1b3f33dee77c82ac50669540b4837a704d",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
       }
     }
   ]

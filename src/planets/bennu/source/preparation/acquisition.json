@@ -69,6 +69,14 @@
       ],
       "path": "maps/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.tif",
       "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/BENNU_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/BENNU_nomenclature_center_pts.zip"
     }
   ]
 }

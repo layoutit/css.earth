@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": "BENNU_nomenclature_center_pts.zip",
+  "members": {
+    "attributes": "BENNU_nomenclature_center_pts.dbf",
+    "projection": null,
+    "metadata": null
+  },
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 0,
+  "output": "bennu-features.json",
+  "publicBase": "/scenes/bennu/",
+  "target": {
+    "className": "bennu-body"
+  },
+  "lensIds": [
+    "normal",
+    "surface",
+    "spectral",
+    "elevation"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {
+    "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+  },
+  "labelPolicy": {
+    "minimumZoomShare": 1,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 48,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  }
+}

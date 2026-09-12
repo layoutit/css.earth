@@ -80,6 +80,30 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-dactyl-nomenclature-center-pts",
+      "path": "features/DACTYL_nomenclature_center_pts.zip",
+      "expectedBytes": 42071,
+      "expectedSha256": "d45cb56ed4a6e2d3a53f278ad0c52b89fd824e798534c9571a135059b0fc0520",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DACTYL_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dactyl on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Dactyl centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DACTYL/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -131,8 +155,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 526,
-      "expectedSha256": "179dcbdf58198c6218d0fbf511a76a3661e0db2ce9558eedb4022e632384b554"
+      "expectedBytes": 780,
+      "expectedSha256": "8d44612ea049b4fe1c177a80a41c0d2923d02efecc73ea4c89f2bd080f005f73"
     },
     {
       "path": "preparation/navigation.json",
@@ -193,6 +217,60 @@
       "path": "validation/epoch-state.json",
       "expectedBytes": 1724,
       "expectedSha256": "e129722404c4366e34a05feb988e4f0d17d3afe925e3d08a15c7092538176dd4"
+    },
+    {
+      "id": "dactyl-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1066,
+      "expectedSha256": "d182e8c57379e68ec2f94447df0e5a48d9152dee9d5ac14a8bd77002052bf21c",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "dactyl-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1068,
+      "expectedSha256": "e508033c5e16f0e056431b75398ecd704a4de550c15189df15e5fe57ce7a1eca",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "dactyl-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 153,
+      "expectedSha256": "e4cf71e29027f0275c16de63ac1146d120953c0777bc32b22dcefdfe515b61a8",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ]
 }

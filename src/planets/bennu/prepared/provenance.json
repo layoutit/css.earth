@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "bennu",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e3d9fd7b9e28868adefdb9c40b1f9bfe20038eed49fe1dc5ee2df165c520962a"
+    "sha256": "c24059abe8d9c4f4edcb8b19a4f0275efb66c61eda111c55b02cd37b117064c1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -411,6 +411,65 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "016bbf80dfe888dcba7fb3bdfb024163f25e8dcde1cd1e4c222b5b736d65d88b",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "BENNU_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "BENNU_nomenclature_center_pts.dbf",
+          "projection": null,
+          "metadata": null
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "bennu-features.json",
+        "publicBase": "/scenes/bennu/",
+        "target": {
+          "className": "bennu-body"
+        },
+        "lensIds": [
+          "normal",
+          "surface",
+          "spectral",
+          "elevation"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -458,7 +517,7 @@
       "sha256": "71bfeecce5615a5602d16d176c4cc17cc2550b2dc8c7cdac1332dea8d9f3da36",
       "bytes": 315960161,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -511,7 +570,7 @@
       "sha256": "815a7685113c9d77cd063e058b0da9cd9749dc07ad4bc54c04aace6ec28e1e7d",
       "bytes": 195300487,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -567,7 +626,7 @@
       "sha256": "7bab2d349967ea0b31021f93c37411e4be48147cb8ad4c1612b9e7e1371445bd",
       "bytes": 493624548,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -623,7 +682,7 @@
       "sha256": "a7ace83ab2fb6afa45d53dbd77c150d2339017909aab02c912a7826332e7e95c",
       "bytes": 114072003,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -651,7 +710,84 @@
       "sha256": "9fa5d2d6d4bc79e16ed5c2f0664a38227f61cd58f0cd1b3da7f5aab46bd32ace",
       "bytes": 10578,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "bennu-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "kind": "source-document",
+      "title": "features/manifest.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "8498d3fbaa7ffefbe3c86d25f798de80df044be4973313f2fa8091f6e4344352",
+      "bytes": 1303,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-bennu-nomenclature-center-pts",
+      "path": "features/BENNU_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/BENNU_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Bennu on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Bennu centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/BENNU/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "5da9153f28e1551d3285ed76735c5ddd9bb69f1c60354a299d7f5d8f41250c6f",
+      "bytes": 95757,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/BENNU_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/BENNU_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "id": "bennu-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "kind": "source-document",
+      "title": "presentation/surface-map.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "fb29f3953b009b6ddf6555b7b5c4be8996b07f93311d015ff9c94d8fb04c5ea7",
+      "bytes": 152,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -699,13 +835,13 @@
           "url": "/scenes/bennu/bennu-normal-thumbnail.webp",
           "bytes": 3050,
           "sha256": "d109e039408b99c5100b7d51c3d1359df84a6d4239b3bf8028879873965f152d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-normal-surface@2x.webp",
           "bytes": 4836700,
           "sha256": "f48e56950870b2f67ea5a0f21fefbf9e28a9f3529e1c5536a7d60518ee1e8e1c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -752,13 +888,13 @@
           "url": "/scenes/bennu/bennu-surface-thumbnail.webp",
           "bytes": 3486,
           "sha256": "db32b93c91974e4b84cb360cdc91d65bd0709a5a159d49c2acaf3f78b5bdc39e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-surface-surface@2x.webp",
           "bytes": 7419092,
           "sha256": "e22c354a68e7e15677967a7c1fbd1287b66d503e12e2180f45a251dbf88f71f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -812,13 +948,13 @@
           "url": "/scenes/bennu/bennu-spectral-thumbnail.webp",
           "bytes": 7048,
           "sha256": "d99a8add79833c48f8490e193df1a142ebc4d1456c68f8d0df4241233316858d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-spectral-surface@2x.webp",
           "bytes": 5680926,
           "sha256": "70792870462b06dc89af0e468f1dabd0b0487e282f2c1c4ad0225827d0d05d8b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -850,19 +986,19 @@
           "url": "/scenes/bennu/bennu-elevation-thumbnail.webp",
           "bytes": 7640,
           "sha256": "b5645f84329eabb9394de28aa23e38dfa73f32784a0bbd20261bf502548354a7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-elevation-surface@2x.webp",
           "bytes": 2846108,
           "sha256": "f9c0122c83a6bda3f7d35f86dbe6e1c3f029e9625bf557ee42835d545639de36",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -885,8 +1021,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4930,
-          "sha256": "725ede14ecda2c86bf7deb0acd3553812aaa6783d6b5e1f5d7588f9bcb0dfdbe",
+          "bytes": 5048,
+          "sha256": "065865a5fee921bfb19151ae79c73635c8bd937e03a0f2491a069546dae6b4d8",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "bennu-surface-features-source",
+        "usgs-gazetteer-bennu-nomenclature-center-pts",
+        "bennu-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/bennu/bennu-features.json",
+          "bytes": 33178,
+          "sha256": "063f88ae6cce6d10b2413ed2aa2b2e46ae54aaf0022b147729ad60077e554823",
           "verification": "bytes-verified"
         }
       ],

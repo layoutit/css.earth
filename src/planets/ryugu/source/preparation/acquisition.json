@@ -72,6 +72,14 @@
       ],
       "path": "reference/info.zip",
       "url": "https://dataverse.harvard.edu/api/access/datafile/13463836"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/RYUGU_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RYUGU_nomenclature_center_pts.zip"
     }
   ]
 }

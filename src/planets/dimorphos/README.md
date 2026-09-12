@@ -20,6 +20,10 @@
 
 ## Known problems
 
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Dimorphos (retrieved 2026-09-12, public domain as USGS-produced data; the export ships no FGDC record, so the pin cites the USGS Copyrights and Credits statement) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (no projection file or metadata: the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries.
+
+Named features run of 2026-09-12 (this version): the catalogue labels 11 IAU names on the hit mesh (nothing skipped); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band, and a headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page, selected every lens and pinned Bala from the sidebar search with no console errors or failed requests.
+
 - Model precision varies with DRACO/LICIACube coverage and SPC constraints. A closed model does not mean every facet was photographed with the same precision.
 
 - **Relative albedo:** This is the encounter-facing SPC model's relative brightness field, not a photograph, absolute/geometric albedo, or a measurement of the post-impact surface. `SIGMA > 0` requires multiple contributing images in the archive; zero-sigma nominal values remain unavailable.
