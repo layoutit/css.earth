@@ -529,6 +529,42 @@
       }
     },
     {
+      "id": "herschel",
+      "path": "images/herschel.webp",
+      "url": "/shell/machine-renders/herschel.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 36466,
+      "sha256": "7b16384a09c08ef312b154884c5c0cc555eb2600798e1adf17e24162a502f3c7",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-herschel",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/7"
+          }
+        ]
+      },
+      "source": {
+        "id": "herschel",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Maquette_Herschel_salon_du_Bourget_2013_DSC_0217.JPG",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Maquette_Herschel_salon_du_Bourget_2013_DSC_0217.JPG",
+        "credit": "Pline (full-scale model, Paris Air Show 2013)",
+        "license": "CC BY-SA 3.0",
+        "sha256": "fb6cfc07e50411fa6c7b1dcce909eeac9a01cd9a22726d3cd320d7b15e4db643",
+        "bytes": 2350978,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+      }
+    },
+    {
       "id": "hubble",
       "path": "images/hubble.webp",
       "url": "/shell/machine-renders/hubble.webp",

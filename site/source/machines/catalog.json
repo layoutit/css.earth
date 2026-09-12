@@ -240,6 +240,15 @@
           }
         ]
       },
+      "band": {
+        "value": "Optical",
+        "citations": [
+          {
+            "catalogueId": "reference-hubble",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "1990",
         "citations": [
@@ -383,6 +392,15 @@
       },
       "setting": {
         "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-sdo",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "band": {
+        "value": "Ultraviolet",
         "citations": [
           {
             "catalogueId": "reference-sdo",
@@ -1821,6 +1839,15 @@
           }
         ]
       },
+      "band": {
+        "value": "Radar",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
       "commissioned": {
         "value": "1963",
         "citations": [
@@ -1912,6 +1939,15 @@
           }
         ]
       },
+      "band": {
+        "value": "Radar",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
       "commissioned": {
         "value": "1964",
         "citations": [
@@ -1985,6 +2021,15 @@
           }
         ]
       },
+      "band": {
+        "value": "Optical",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-vlt-ut3",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
       "imageId": "vlt-ut3"
     },
     {
@@ -2029,6 +2074,15 @@
       },
       "setting": {
         "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-alma",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "band": {
+        "value": "Millimetre",
         "citations": [
           {
             "catalogueId": "pds-telescope-alma",
@@ -2100,6 +2154,15 @@
           }
         ]
       },
+      "band": {
+        "value": "Infrared",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-irtf",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
       "site": {
         "value": {
           "latitude": 19.8262,
@@ -2164,6 +2227,15 @@
           }
         ]
       },
+      "band": {
+        "value": "Infrared",
+        "citations": [
+          {
+            "catalogueId": "pds-instrument-host-spitzer",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
       "imageId": "spitzer"
     },
     {
@@ -2215,6 +2287,15 @@
           }
         ]
       },
+      "band": {
+        "value": "Far-infrared",
+        "citations": [
+          {
+            "catalogueId": "reference-herschel",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
       "launch": {
         "value": "2009-05-14",
         "citations": [
@@ -2223,7 +2304,8 @@
             "checkedOn": "2026-09-11"
           }
         ]
-      }
+      },
+      "imageId": "herschel"
     },
     {
       "id": "vlba",
@@ -2267,6 +2349,15 @@
       },
       "setting": {
         "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-vlba",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "band": {
+        "value": "Radio",
         "citations": [
           {
             "catalogueId": "reference-vlba",
