@@ -43,7 +43,7 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
 | `prepared/provenance.json` | Generated connections between inputs, processing and outputs; never edit by hand |
 | `runtime-assets.json` at the body root | Generated delivery inventory used by installation and publication |
-| `site/prepared-sources.json` and `site/prepared-spacecraft.json` | Ignored source usage and mission attribution outputs; prepare together |
+| `site/prepared-sources.json` and `site/prepared-machines.json` | Ignored source usage and mission attribution outputs; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
 | Test fixtures under `tests/`; processing code under `tools/` | Inputs and implementation used by executable checks and preparation |
 | Root README and [body contributor guide](../../src/planets/README.md) | Shared installation, controls, commands and contribution workflow |

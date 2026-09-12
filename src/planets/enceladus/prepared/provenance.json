@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0ba796327b52f0097b63609c5590cfb5509efffc9faeb0494667e72453eb8438"
+    "sha256": "e058b6d21b2662b2bd2347ae3c19456df5938f92e85559c9dec1520038533aa1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -590,8 +590,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif",
             "missionId": "cassini"
           }
@@ -707,8 +707,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_DEM_global_200m_schenk2024.tif",
             "missionId": "cassini"
           }

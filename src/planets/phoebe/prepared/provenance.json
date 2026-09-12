@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8fe9375a0471cea939064d3d5cb2975b04e6ab527da9b43fe8d31f21fb471314"
+    "sha256": "9e2fa1e4152687b5b476cb32ff2aa14cb1951086c90a0856b724c1ddf3013e29"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -787,8 +787,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1465671822_1",
             "missionId": "cassini"
           }
@@ -887,8 +887,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_albedo_c.cub",
             "missionId": "cassini"
           }
@@ -951,8 +951,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub",
             "missionId": "cassini"
           }
@@ -1015,8 +1015,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_bestmap_c.cub",
             "missionId": "cassini"
           }
@@ -1079,8 +1079,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_radius_c.cub",
             "missionId": "cassini"
           }
@@ -1140,8 +1140,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1465671822_1",
             "missionId": "cassini"
           }

@@ -1,0 +1,32 @@
+{
+  "id": "artwork-photo-vlba",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "vlba photograph",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://commons.wikimedia.org/wiki/File:Very_Long_Baseline_Array_Dish_(3S8A8130).jpg",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Very_Long_Baseline_Array_Dish_%283S8A8130%29.jpg",
+      "label": "Original file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Very_Long_Baseline_Array_Dish_(3S8A8130).jpg",
+      "checkedOn": "2026-09-11",
+      "locator": "File licence, author and original file size"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Wikimedia Commons",
+  "creators": [
+    "Kitt Peak National Observatory/NOIRLab/NSF/AURA/P. Marenfeld"
+  ]
+}

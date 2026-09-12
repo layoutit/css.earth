@@ -33,6 +33,16 @@
       "path": "shape/216_Kleopatra_mpcd.obj",
       "origin": "https://observations.lam.fr/astero/3Dshape/216_Kleopatra_mpcd.obj",
       "credit": "F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
       "license": "Public scientific model from the source-author release accompanying CC-BY-4.0 research; retain credit and citations.",
       "acquisition": "Original OBJ restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",

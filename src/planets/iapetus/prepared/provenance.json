@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d7ffa4fd13d19bcf3f944ac9457ead706df625b431bf6e684ae49e59f6eaea2a"
+    "sha256": "9af54407ff10f93b9cc21ed5a085b9a02ded44e75951abf625cbcf11d01143b2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -446,20 +446,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
             "missionId": "cassini"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-1",
+            "kind": "machine",
+            "machineId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
             "missionId": "voyager-2"
           }
@@ -517,8 +517,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg",
             "missionId": "cassini"
           }
@@ -578,8 +578,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1",
             "missionId": "cassini"
           }
@@ -632,8 +632,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1",
             "missionId": "cassini"
           }

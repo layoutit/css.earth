@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8a21afd035585609ade587a4b5b3abd1e7265f07dfaa8635a757e816fe412972"
+    "sha256": "3184b9d0e0fd9650e0cd8fa352e1172881e13447053e0b383874283d4ca6ba54"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -769,8 +769,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f",
             "missionId": "cassini"
           }
@@ -1189,8 +1189,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz",
             "missionId": "cassini"
           }
@@ -1245,8 +1245,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz",
             "missionId": "cassini"
           }

@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9156fb3d4ace841aeb8bc9b503afc9c32e7d07fa3b738f21a9a5e3411a641dbe"
+    "sha256": "260ee3ea59b5de555759bd9f7e0ee28a462ec1023175a4a915696f2288069d77"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1051,8 +1051,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
             "missionId": "hubble"
           }
@@ -1135,8 +1135,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
             "missionId": "hubble"
           }
@@ -1182,8 +1182,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
             "missionId": "hubble"
           }

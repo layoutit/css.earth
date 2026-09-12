@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "21f87d4d41874ea573ce4e4fd16dd0b3c21f5a2c48239bf0ddbf1bc7259d4ad4"
+    "sha256": "efcd0c2b35933997e0e723509ec28027474fd6c0823310631970439599d7a3d0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -743,20 +743,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif",
             "missionId": "galileo"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-1",
+            "kind": "machine",
+            "machineId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif",
             "missionId": "voyager-2"
           }
@@ -822,8 +822,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://doi.org/10.17189/4sz4-5024",
             "missionId": "galileo"
           }
@@ -1016,8 +1016,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1068,8 +1068,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875178/s0349875178.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1120,8 +1120,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875200/s0349875200.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1172,8 +1172,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234600/s0426234600.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1224,8 +1224,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234626/s0426234626.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1276,8 +1276,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234639/s0426234639.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1328,8 +1328,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234678/s0426234678.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1380,8 +1380,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984852/s0440984852.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1432,8 +1432,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984865/s0440984865.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1484,8 +1484,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984878/s0440984878.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1536,8 +1536,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984901_00/s0440984901_00.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1588,8 +1588,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984914_13/s0440984914_13.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1640,8 +1640,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984926/s0440984926.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1692,8 +1692,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984939/s0440984939.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1744,8 +1744,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984952/s0440984952.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1796,8 +1796,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984965/s0440984965.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1848,8 +1848,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984978/s0440984978.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1900,8 +1900,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985113/s0440985113.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -1952,8 +1952,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985126/s0440985126.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -2004,8 +2004,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985139/s0440985139.equi.photr.tif",
             "missionId": "galileo"
           }

@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6af7a0b77213694bc6b954e0c62fbeebbba6002c719f630654c64040ee4fa92a"
+    "sha256": "69b8eb3c072cd4da97492f9e419643197c3b84b9c034343eaefecfa3568c0472"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -637,20 +637,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
             "missionId": "cassini"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-1",
+            "kind": "machine",
+            "machineId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
             "missionId": "voyager-2"
           }
@@ -750,8 +750,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18438.jpg",
             "missionId": "cassini"
           }
@@ -860,8 +860,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_radius_g.tif",
             "missionId": "cassini"
           }
