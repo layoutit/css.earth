@@ -259,6 +259,30 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-ryugu-nomenclature-center-pts",
+      "path": "features/RYUGU_nomenclature_center_pts.zip",
+      "expectedBytes": 35497,
+      "expectedSha256": "68cea46d06151259e792a964297f7865838d2a9d66258fb63bb5f55a777bd44f",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RYUGU_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Ryugu on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Ryugu centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/RYUGU/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -301,8 +325,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2278,
-      "expectedSha256": "47f3950584d598f6c40a56454e0b2d7eec685c58619389080ee9082cf45dc6f0"
+      "expectedBytes": 2530,
+      "expectedSha256": "94ed273d5be8c9ece286e9741c26a0a0505f38ab09f4157245aa7a86e1c102bb"
     },
     {
       "path": "preparation/navigation.json",
@@ -383,6 +407,60 @@
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 89771,
       "expectedSha256": "11d325c515fecc6566d5564f78dda3b4e6ac7aeda786fdde8c1059307c6ba8ae"
+    },
+    {
+      "id": "ryugu-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1303,
+      "expectedSha256": "240264bb8b1877af766883962890fe26305aa74ad6b516da2b5d8bb4c0e2d4c7",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "ryugu-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1060,
+      "expectedSha256": "cddaaba5a7f49ff220c633a02cc9448ef7bcc008b1cc0452516a770bc8426499",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "ryugu-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "d9f3627a502321ef4f782957a1826b28f3c3a29ad332c048c63b1453bb47d09d",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ]
 }

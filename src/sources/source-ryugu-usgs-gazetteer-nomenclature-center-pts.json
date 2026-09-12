@@ -1,0 +1,48 @@
+{
+  "id": "source-ryugu-usgs-gazetteer-nomenclature-center-pts",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gazetteer of Planetary Nomenclature · Ryugu centre points",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://planetarynames.wr.usgs.gov/Page/RYUGU/target",
+      "label": "Source"
+    },
+    {
+      "role": "archive",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RYUGU_nomenclature_center_pts.zip",
+      "label": "Shapefile archive"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/ryugu/source/features/manifest.json",
+      "revision": "ba83e19e793913b78101b1d112c4a0b89ccf9da8",
+      "sha256": "240264bb8b1877af766883962890fe26305aa74ad6b516da2b5d8bb4c0e2d4c7",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature.",
+      "scope": "Feature names, centres, diameters, extents and name origins.",
+      "evidence": "Gazetteer target page https://planetarynames.wr.usgs.gov/Page/RYUGU/target and the pinned export's attribute table; the archive ships no FGDC record."
+    },
+    {
+      "kind": "rights",
+      "text": "Public domain United States Government work.",
+      "scope": "The archived shapefile export and its metadata.",
+      "evidence": "USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits, read 2026-09-12): USGS-authored or produced data and information are in the U.S. Public Domain; every Gazetteer export that ships an FGDC record declares the use constraint “Public domain.”"
+    },
+    {
+      "kind": "limitation",
+      "text": "Centre points, diameters and latitude–longitude extents only; the Gazetteer publishes no feature outlines, and the export is regenerated weekly.",
+      "scope": "Prepared labels and outlines.",
+      "evidence": "planetarynames.wr.usgs.gov/GIS_Downloads lists centre-point files only; this export ships no metadata record."
+    }
+  ]
+}

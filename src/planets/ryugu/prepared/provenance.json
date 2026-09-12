@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ryugu",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b4384c173b993bc5b99bf0117dc6d185ed3d4a573ddf21bf00c7cee91a81c66a"
+    "sha256": "0a29af8b5e9d16b8c2854918198cae2e8edd1ddec28194ed30a8194453cdfb12"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -357,6 +357,64 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "cddaaba5a7f49ff220c633a02cc9448ef7bcc008b1cc0452516a770bc8426499",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "RYUGU_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "RYUGU_nomenclature_center_pts.dbf",
+          "projection": null,
+          "metadata": null
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "ryugu-features.json",
+        "publicBase": "/scenes/ryugu/",
+        "target": {
+          "className": "ryugu-body"
+        },
+        "lensIds": [
+          "normal",
+          "enhanced",
+          "elevation"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -404,7 +462,7 @@
       "sha256": "b01f45512c7028865cc656712d8982f837a29bcbea07df6460f4d7acd0c1c969",
       "bytes": 12965947,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -457,7 +515,7 @@
       "sha256": "da62f1d56deab22343b301d7972a1a8a14867c1714c626411617698a78e32595",
       "bytes": 3150352,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -505,7 +563,7 @@
       "sha256": "984780a02a343e13873e76030b56dd9f34fbb476baf983f52af6ac12b4741974",
       "bytes": 9557231,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "zip-member",
         "groups": [
@@ -536,7 +594,84 @@
       "sha256": "c1cb474f7b85860defdf548e47326188ec2a48efa25bed3c1685c4a236ccb7ed",
       "bytes": 9404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "ryugu-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "kind": "source-document",
+      "title": "features/manifest.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "240264bb8b1877af766883962890fe26305aa74ad6b516da2b5d8bb4c0e2d4c7",
+      "bytes": 1303,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-ryugu-nomenclature-center-pts",
+      "path": "features/RYUGU_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RYUGU_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Ryugu on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Ryugu centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/RYUGU/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "68cea46d06151259e792a964297f7865838d2a9d66258fb63bb5f55a777bd44f",
+      "bytes": 35497,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/RYUGU_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RYUGU_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "id": "ryugu-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "kind": "source-document",
+      "title": "presentation/surface-map.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "d9f3627a502321ef4f782957a1826b28f3c3a29ad332c048c63b1453bb47d09d",
+      "bytes": 152,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -586,13 +721,13 @@
           "url": "/scenes/ryugu/ryugu-normal-thumbnail.webp",
           "bytes": 3246,
           "sha256": "8d3fd455c4117bc51b2cc022229b7544f80d41b26d311db27752d52f2894d1e5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
           "bytes": 719664,
           "sha256": "79502ba6edea06184a5e384b869861b7d82326155179c16dc36fb0699e4ffb52",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -629,13 +764,13 @@
           "url": "/scenes/ryugu/ryugu-enhanced-thumbnail.webp",
           "bytes": 6194,
           "sha256": "1438099ab967c8e2ae9687620752424bce56ff9b8f830bfa190ee2ee84c75247",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-enhanced-surface@2x.webp",
           "bytes": 2916650,
           "sha256": "0b9ea2d81e0ab8a1b9104f833f4af9dedf5e26296bf02ae9472249ba6dfcbf23",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -667,19 +802,19 @@
           "url": "/scenes/ryugu/ryugu-elevation-thumbnail.webp",
           "bytes": 8348,
           "sha256": "b8e016ee261c5d3c576c84802d7d06eb4245d9c1e8c91a84de9df9dca1ca7676",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ryugu/ryugu-elevation-surface@2x.webp",
           "bytes": 1295984,
           "sha256": "1ee247140b3f768061042fbaf4ede07849181451c6a29892f32e9aeb827f753f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -702,8 +837,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4801,
-          "sha256": "6d6c0cc33e4f5c193c161b696f3f4ff09ad948429eb0a59302fc03b9af58638f",
+          "bytes": 4919,
+          "sha256": "ef850a07c3f88808cd505d1a6bb4f083080e4033300ed68147d0ad29b3816af9",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "ryugu-surface-features-source",
+        "usgs-gazetteer-ryugu-nomenclature-center-pts",
+        "ryugu-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ryugu/ryugu-features.json",
+          "bytes": 16646,
+          "sha256": "9ada2ef914fb71bcff53a2af9558d1c3202cf92610513e23ba923263d3b73698",
           "verification": "bytes-verified"
         }
       ],
