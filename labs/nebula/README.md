@@ -1,10 +1,10 @@
 # Nebula Lab
 
-Local React tooling for aligning photographs, removing stars and comparing baked 3D clouds. The retained PolyCSS renderer stays in plain TypeScript. The lab is separate from the production website; current objects are **LMC and SMC**, plus the [M2–9](models/m2-9/README.md) and [Helix](models/helix/README.md) image-to-volume experiments. The experiments have explicit preparation commands and unmeasured-depth assumptions.
+Local React tooling for aligning photographs, removing stars and comparing baked 3D clouds. The retained PolyCSS renderer stays in plain TypeScript. The lab is separate from the production website; objects include **LMC/SMC**, [M2–9](models/m2-9/README.md), [Helix](models/helix/README.md) and [six irregular nebula candidates](models/inference-candidates/README.md). Image-to-volume experiments have explicit preparation commands and unmeasured-depth assumptions.
 
 The [Helix compiler](docs/emission-compiler.md) turns three registered ESO observations into one conditional 3D emission cloud with three image lenses. **Reconstruction → Nebula → Compile nebula** restores the required inputs and runs the pipeline. Detail, faint-emission and depth controls update automatically after the first successful compile. The final cloud is the main view; alignment, structures and velocity comparisons remain diagnostics. Visual acceptance is still open.
 
-The shell is shared across three configured methods: **Density model** (LMC/SMC), **Symmetry** (M2–9), and **Constrained inference** (Helix). Objects select a method and supply recipes; shared registration, star separation and viewing tools remain object-agnostic. The compiler's depth and compact-light placement are model assumptions. Its older Hubble-based volumes remain failed comparison baselines. A second compiler object is deferred until the Helix machinery is assessed.
+The shell is shared across three configured methods: **Density model** (LMC/SMC), **Symmetry** (M2–9), and **Constrained inference** (Helix and the [six irregular nebula candidates](models/inference-candidates/README.md)). Objects select a method and supply recipes; shared registration, star separation and viewing tools remain object-agnostic. The compiler's depth and compact-light placement are model assumptions. Its older Hubble-based volumes remain failed comparison baselines.
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts

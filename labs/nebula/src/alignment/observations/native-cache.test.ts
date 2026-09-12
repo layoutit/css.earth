@@ -4,7 +4,14 @@ import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, writeFile, stat, rm } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
-import { nativeStarless } from '../../reconstruction/emission-inference/native-source.js';
+import { nativeRemovalTimeoutMs, nativeStarless } from '../../reconstruction/emission-inference/native-source.js';
+
+test('full published native grids receive a larger bounded work budget than small previews', () => {
+  const preview = nativeRemovalTimeoutMs([512, 512]), native = nativeRemovalTimeoutMs([23000, 23000]);
+  assert.ok(preview >= 300_000);
+  assert.ok(native > preview * 10);
+  assert.ok(native < 12 * 60 * 60 * 1000);
+});
 
 test('alignment-only missing or invalid receipt cannot launch NOX or create a worker request', async () => {
   const cache = resolve('.local/nebula-lab');
@@ -17,6 +24,9 @@ test('alignment-only missing or invalid receipt cannot launch NOX or create a wo
     await writeFile(modelPath, model);
     const source = await sharp({ create: { width: 8, height: 8, channels: 3, background: '#222222' } }).png().toBuffer();
     const script = await readFile('labs/nebula/src/star-removal/star-removal.py');
+    await assert.rejects(nativeStarless(source, [16, 8], { directory: relative(process.cwd(), output),
+      model: { path: modelPath, sha256: sha(model) }, scriptSha256: sha(script) }), /source dimensions differ/);
+    await assert.rejects(stat(resolve(output, 'request.json')), { code: 'ENOENT' });
     await assert.rejects(nativeStarless(source, [8, 8], { directory: relative(process.cwd(), output),
       model: { path: modelPath, sha256: sha(model) }, scriptSha256: sha(script) }, { allowProcessing: false }), /cannot start NOX/);
     await assert.rejects(stat(resolve(output, 'request.json')), { code: 'ENOENT' });

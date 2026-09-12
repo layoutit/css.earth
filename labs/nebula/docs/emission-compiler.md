@@ -1,6 +1,6 @@
 # Compile an emission nebula
 
-The compiler prepares one conditional 3D emission cloud from registered images, with an optional measured-velocity scaffold. **Reconstruction → Nebula** shows that final cloud. The first configured example is [Helix](../models/helix/README.md); its visual acceptance remains open. A second nebula is deferred until this machinery is assessed.
+The compiler prepares one conditional 3D emission cloud from registered images, with an optional measured-velocity scaffold. **Reconstruction → Nebula** shows that final cloud. [Helix](../models/helix/README.md) uses a velocity scaffold; the [six irregular candidates](../models/inference-candidates/README.md) test image-only fitting without transferring planetary assumptions. Visual and physical acceptance remain separate from successful processing.
 
 ## Use the main view
 

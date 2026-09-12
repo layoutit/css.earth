@@ -53,3 +53,21 @@ test('observation recipe rejects unpinned and malformed sky inputs', async () =>
   const invalid = structuredClone(value); invalid.images[0].sha256 = 'unverified';
   assert.throws(() => readObservationRecipe(invalid));
 });
+
+test('registration measures coverage over the actual shared footprint, preserving held-out error gates', () => {
+  const source = { width: 1000, height: 1000, fieldArcminutes: [60, 60] as [number, number], centerIcrsDegrees: [20, 20] as [number, number], northRightDegrees: 0 };
+  const frame: SkyFrame = { width: 1000, height: 1000, fieldArcminutes: [60, 60], centerIcrsDegrees: [20, 20], northUp: true };
+  const identity: Affine = [1, 0, 0, 1, 0, 0], pairs: Pair[] = [];
+  for (let y = 0; y < 10; y++) for (let x = 0; x < 10; x++) {
+    const point: [number, number] = [110 + 28 * x, 210 + 28 * y];
+    pairs.push({ source: point, frame: [...point], sourceIndex: y * 10 + x, referenceIndex: y * 10 + x });
+  }
+  const reference = { width: 300, height: 300, imageToFrame: [1, 0, 0, 1, 100, 200] as Affine };
+  assert.equal(verifyRegistration(pairs, source, frame, identity).pass, false, 'The reference does not observe the full source.');
+  assert.equal(verifyRegistration(pairs, source, frame, identity, reference).pass, true);
+  const corrupted = structuredClone(pairs); corrupted[0]!.frame[0] += 3;
+  assert.equal(verifyRegistration(corrupted, source, frame, identity, reference).pass, false, 'Bad held-out astrometry must still fail.');
+  const concentrated = pairs.map(pair => ({ ...pair, source: [110 + (pair.source[0] - 110) * .2, 210 + (pair.source[1] - 210) * .2] as [number, number],
+    frame: [110 + (pair.frame[0] - 110) * .2, 210 + (pair.frame[1] - 210) * .2] as [number, number] }));
+  assert.equal(verifyRegistration(concentrated, source, frame, identity, reference).pass, false, 'A small matched patch cannot certify the overlap.');
+});

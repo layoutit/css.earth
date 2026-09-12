@@ -40,19 +40,41 @@ for (const source of recipe.images) {
 const reference = sources.find(row => row.source.id === recipe.referenceId)!;
 const aligned: Array<typeof sources[number] & { imageToFrame: typeof reference.initial;
   registration: ReturnType<typeof verifyRegistration>['evidence'] & { referenceId: string } }> = [];
+const expandedStars = new Map<string, Awaited<ReturnType<typeof detectStars>>>();
+const expand = async (row: typeof sources[number]) => {
+  let stars = expandedStars.get(row.source.id);
+  if (!stars) { stars = await detectStars(row.bytes, [row.source.width, row.source.height], 2048, 12000); expandedStars.set(row.source.id, stars); }
+  return stars;
+};
 for (const row of sources) {
   if (row === reference) continue;
-  const pairs = matchStars(row.stars, reference.stars, row.initial, reference.initial);
-  const result = verifyRegistration(pairs, row.source, recipe.frame, row.initial);
-  await json(resolve(directory, `${row.source.id}-registration.json`), { ...result, sourceSha256: row.source.sha256, referenceSha256: reference.source.sha256, recipeSha256: sha(recipeBytes) });
+  let result: ReturnType<typeof verifyRegistration> | undefined;
+  const attempts: unknown[] = [];
+  for (const maximumStars of [6000, 12000]) {
+    try {
+      const pool = maximumStars === 6000 ? [row.stars, reference.stars] : [await expand(row), await expand(reference)];
+      const pairs = matchStars(pool[0]!, pool[1]!, row.initial, reference.initial);
+      result = verifyRegistration(pairs, row.source, recipe.frame, row.initial,
+        { width: reference.source.width, height: reference.source.height, imageToFrame: reference.initial });
+      attempts.push({ maximumStars, sourceStars: pool[0]!.length, referenceStars: pool[1]!.length, pass: result.pass, evidence: { ...result.evidence, matches: undefined } });
+      if (result.pass) break;
+    } catch (error) { attempts.push({ maximumStars, pass: false, error: error instanceof Error ? error.message : String(error) }); }
+    console.log(`OBSERVATION_ALIGNMENT_RETRY ${row.source.id}; pool=${maximumStars}; residual gates unchanged`);
+  }
+  await json(resolve(directory, `${row.source.id}-registration.json`), { ...result, attempts, sourceSha256: row.source.sha256, referenceSha256: reference.source.sha256, recipeSha256: sha(recipeBytes) });
+  if (!result) throw new Error(`${row.source.id}: neither bounded star pool supplied a verified registration. No native removal performed.`);
   console.log(`OBSERVATION_ALIGNMENT ${row.source.id} ${JSON.stringify({ ...result.evidence, matches: undefined })}`);
-  if (!result.pass) throw new Error(`${row.source.id}: held-out star registration failed. No native removal performed.`);
-  aligned.push({ ...row, imageToFrame: result.matrix, registration: { ...result.evidence, referenceId: recipe.referenceId } });
+  // Failed relative fits remain inspectable at the original publisher placement.
+  // They never become inputs to star removal or reconstruction.
+  aligned.push({ ...row, imageToFrame: result.pass ? result.matrix : row.initial, registration: { ...result.evidence, referenceId: recipe.referenceId } });
 }
-const anchorPeer = aligned[0]!;
+const verified = aligned.every(row => row.registration.status === 'verified');
+const anchorPeer = aligned.find(row => row.registration.status === 'verified') ?? aligned[0]!;
 aligned.push({ ...reference, imageToFrame: reference.initial, registration: { ...anchorPeer.registration, referenceId: anchorPeer.source.id,
-  matches: anchorPeer.registration.matches.map(match => ({ ...match, source: applyAffine(invertAffine(reference.initial), match.frame), frame: match.predictedFrame, predictedFrame: match.frame })),
-  interpretation: 'Publisher sky anchor; corroborated by other images through held-out stars. Absolute sky coordinates are not independently catalogue calibrated.' } });
+  matches: anchorPeer.registration.matches.map(match => ({ ...match, source: applyAffine(invertAffine(reference.initial), match.frame), frame: applyAffine(anchorPeer.imageToFrame, match.source), predictedFrame: match.frame })),
+  interpretation: anchorPeer.registration.status === 'verified'
+    ? 'Publisher sky anchor; corroborated by other images through held-out stars. Absolute sky coordinates are not independently catalogue calibrated.'
+    : 'Publisher sky anchor only; relative star registration failed. No removal or reconstruction is authorized by this preview.' } });
 type Layer = { path: string; width: number; height: number; sha256: string };
 const preview = async (output: string, layer: string, bytes: Buffer): Promise<Layer> => {
   const path = resolve(output, `${layer}.png`);
@@ -91,14 +113,15 @@ for (const source of recipe.images) {
   const layers: { original: Layer; diffuse?: Layer; stars?: Layer } = { original };
   images.push({ id: source.id, label: source.label, source: { ...source, path: relative(process.cwd(), resolve(directory, 'sources', `${source.id}.tif`)) },
     layers, imageToFrame: row.imageToFrame, publisherImageToFrame: row.initial, registration: row.registration });
-  if (await addSeparation(images.at(-1)!, row, false)) console.log(`NEBULA_OBSERVATION_REUSED ${source.id}`);
+  if (verified && await addSeparation(images.at(-1)!, row, false)) console.log(`NEBULA_OBSERVATION_REUSED ${source.id}`);
 }
 const publish = () => json(resolve(directory, 'observations.json'), { schema: 'cssearth-nebula-observations@1', id: recipe.id, frame: recipe.frame, images,
   provenance: { recipePath, recipeSha256: sha(recipeBytes), sourceFrameConvention: 'Native raster pixel edges; pixel centres at n+.5. CSS matrix x=a*x+c*y+e, y=b*x+d*y+f.',
-    registrationMethod: 'Gaussian high-pass compact maxima; reciprocal publisher-position matches; six neighbouring star-pattern confirmations within 0.4 frame pixels; fixed spatial holdout; deterministic affine RANSAC on training stars.',
+    registrationMethod: 'Gaussian high-pass compact maxima; reciprocal publisher-position matches; six neighbouring star-pattern confirmations within 0.4 frame pixels; fixed spatial holdout; deterministic affine RANSAC on training stars. Start with 6000 brightest candidates; retry once with 12000 if verification fails. Unchanged residual gates and spatial coverage over the common observed footprint.',
     limits: 'Relative observation alignment, not measured 3D structure. RGB composites have different bands and stretches; no common photometric calibration is implied.' } });
 await publish();
 console.log(`NEBULA_ALIGNMENT_READY ${directory}/observations.json`);
+if (!verified) throw new Error('Held-out star registration failed. Publisher-only image previews are available; no native removal performed.');
 for (const image of images) {
   const row = aligned.find(item => item.source.id === image.id)!, source = row.source;
   if (mode !== '--alignment-only' && !image.layers.diffuse) {

@@ -16,7 +16,9 @@ const pin = (value: unknown) => { const s = string(value); if (!/^[0-9a-f]{64}$/
 const https = (value: unknown) => { const s = string(value); if (new URL(s).protocol !== 'https:') throw new TypeError('HTTPS source required.'); return s; };
 function sky(value: Record<string, unknown>) {
   const result = { width: dimension(value.width), height: dimension(value.height), fieldArcminutes: pair(value.fieldArcminutes), centerIcrsDegrees: pair(value.centerIcrsDegrees) };
-  if (result.fieldArcminutes.some(n => n <= 0 || n > 120) || result.centerIcrsDegrees[0] < 0 || result.centerIcrsDegrees[0] >= 360 || Math.abs(result.centerIcrsDegrees[1]) > 90) throw new TypeError('Unsupported small-field sky frame.');
+  // Wide official context mosaics reach several degrees. Independent star residuals
+  // still determine whether the affine registration is adequate on that footprint.
+  if (result.fieldArcminutes.some(n => n <= 0 || n > 360) || result.centerIcrsDegrees[0] < 0 || result.centerIcrsDegrees[0] >= 360 || Math.abs(result.centerIcrsDegrees[1]) > 90) throw new TypeError('Unsupported small-field sky frame.');
   return result;
 }
 export function readObservationRecipe(value: unknown): ObservationRecipe {

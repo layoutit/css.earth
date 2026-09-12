@@ -1,6 +1,7 @@
 /** Offline point-source registration. All coordinates are raster pixel edges (centres at n + .5). */
 import sharp from 'sharp';
 import { wcsPixelRay, type ImageWcs } from '../overlay-wcs.js';
+import { registrationOverlap, type ReferenceFootprint } from './overlap';
 
 export type Point = [number, number];
 export type Affine = [number, number, number, number, number, number];
@@ -52,7 +53,7 @@ export function publisherTransform(source: SkyRaster, frame: SkyFrame): Affine {
 }
 
 /** A positive Gaussian high-pass rejects smooth nebular emission before finding compact maxima. */
-export async function detectStars(source: Buffer, native: Point, workingMaximum = 2048): Promise<Star[]> {
+export async function detectStars(source: Buffer, native: Point, workingMaximum = 2048, maximumStars = 6000): Promise<Star[]> {
   const { data: gray, info } = await sharp(source).removeAlpha().resize({ width: workingMaximum, height: workingMaximum, fit: 'inside', withoutEnlargement: true })
     .greyscale().raw().toBuffer({ resolveWithObject: true });
   const { width, height } = info;
@@ -76,7 +77,7 @@ export async function detectStars(source: Buffer, native: Point, workingMaximum 
     }
     found.push({ point: [(x + cx / weight + .5) * native[0] / width, (y + cy / weight + .5) * native[1] / height], peak });
   }
-  return found.sort((a, b) => b.peak - a.peak).slice(0, 6000);
+  return found.sort((a, b) => b.peak - a.peak).slice(0, maximumStars);
 }
 
 const distance = (a: Point, b: Point) => Math.hypot(a[0] - b[0], a[1] - b[1]);
@@ -132,7 +133,7 @@ export function fitAffine(pairs: Pair[]): Affine {
   return [x[0]!, y[0]!, x[1]!, y[1]!, x[2]!, y[2]!];
 }
 
-export function verifyRegistration(pairs: Pair[], source: SkyRaster, frame: SkyFrame, initial: Affine) {
+export function verifyRegistration(pairs: Pair[], source: SkyRaster, frame: SkyFrame, initial: Affine, reference?: ReferenceFootprint) {
   if (pairs.length < 45) throw new Error(`Registration impasse: only ${pairs.length} independently matched stars (need 45).`);
   const ordered = [...pairs].sort((a, b) => Math.floor(a.source[1] / source.height * 5) - Math.floor(b.source[1] / source.height * 5) || a.source[0] - b.source[0]);
   const train = ordered.filter((_, i) => i % 3 !== 0), heldOut = ordered.filter((_, i) => i % 3 === 0);
@@ -150,9 +151,12 @@ export function verifyRegistration(pairs: Pair[], source: SkyRaster, frame: SkyF
   const residuals = heldOut.map(pair => distance(applyAffine(matrix, pair.source), pair.frame));
   const rmsPixels = Math.sqrt(residuals.reduce((sum, d) => sum + d * d, 0) / residuals.length);
   const maxResidualPixels = Math.max(...residuals);
-  const cells = new Set(heldOut.map(pair => `${pair.source[0] >= source.width / 2 ? 1 : 0},${pair.source[1] >= source.height / 2 ? 1 : 0}`));
-  const spanX = (Math.max(...heldOut.map(p => p.source[0])) - Math.min(...heldOut.map(p => p.source[0]))) / source.width;
-  const spanY = (Math.max(...heldOut.map(p => p.source[1])) - Math.min(...heldOut.map(p => p.source[1]))) / source.height;
+  const overlap = registrationOverlap(source.width, source.height, initial, reference);
+  const min = [Math.min(...overlap.map(p => p[0])), Math.min(...overlap.map(p => p[1]))];
+  const max = [Math.max(...overlap.map(p => p[0])), Math.max(...overlap.map(p => p[1]))];
+  const cells = new Set(heldOut.map(pair => `${pair.source[0] >= (min[0]! + max[0]!) / 2 ? 1 : 0},${pair.source[1] >= (min[1]! + max[1]!) / 2 ? 1 : 0}`));
+  const spanX = (Math.max(...heldOut.map(p => p.source[0])) - Math.min(...heldOut.map(p => p.source[0]))) / (max[0]! - min[0]!);
+  const spanY = (Math.max(...heldOut.map(p => p.source[1])) - Math.min(...heldOut.map(p => p.source[1]))) / (max[1]! - min[1]!);
   const determinant = matrix[0] * matrix[3] - matrix[1] * matrix[2];
   const initialDeterminant = initial[0] * initial[3] - initial[1] * initial[2];
   const relativeScale = Math.sqrt(determinant / initialDeterminant);
@@ -162,6 +166,7 @@ export function verifyRegistration(pairs: Pair[], source: SkyRaster, frame: SkyF
     trainingStars: best.length, trainingCandidates: train.length, rejectedTrainingStars: train.length - best.length,
     heldOutStars: heldOut.length, rmsPixels, maxResidualPixels,
     spatialQuadrants: cells.size, coverageFraction: [spanX, spanY], relativeScale, centreShiftPixels,
+    coverageDomain: { kind: reference ? 'common-observed-footprint' : 'complete-source', sourcePixelPolygon: overlap },
     residualArcseconds: rmsPixels * frame.fieldArcminutes[0] * 60 / frame.width,
     matches: ordered.map((pair, index) => ({ source: pair.source, frame: pair.frame, predictedFrame: applyAffine(matrix, pair.source),
       heldOut: index % 3 === 0, fitInlier: best.includes(pair), residualPixels: distance(applyAffine(matrix, pair.source), pair.frame) })),
