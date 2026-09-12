@@ -5,8 +5,8 @@ import { EXPLORATION, referenceUrl } from '../exploration-catalog.mts';
 import { SOURCE_CATALOGUE, SOURCES } from '../sources-catalog.mts';
 import PlanetCard from './PlanetCard.astro';
 import SelectedContent from './SelectedContent.astro';
-const { objectId, lenses, provenance, deferMissionContent } = Astro.props;
-const contexts = deferMissionContent ? [] : (lenses?.controls ?? []).map(lens => ({ lens,
+const { objectId, lenses, provenance } = Astro.props;
+const contexts = (lenses?.controls ?? []).map(lens => ({ lens,
   ...datasetContext(objectId, lens.id, provenance, EXPLORATION.graph, EXPLORATION.catalog, SOURCE_CATALOGUE.usage, SOURCES),
 }));
 const span = (from?: { value: string }, to?: { value: string }) =>
@@ -49,7 +49,7 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
   return bands.every(Boolean) && new Set(bands).size === bands.length;
 };
 ---
-<template data-prepared-detail="dataset-context" data-deferred-detail={deferMissionContent ? 'true' : undefined}>
+<template data-prepared-detail="dataset-context">
   {contexts.map(context => {
     const credited = contributors(context);
     const tabbed = credited.length > 1 && distinctBands(credited);
