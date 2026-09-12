@@ -6,19 +6,21 @@ type GeoRecipe = ReturnType<typeof parseGeoRecipe>;
 import { validateEncounterRecipe, loadEncounterSurface } from './encounter-surface.mts';
 import { validateOrthographicObservation, loadOrthographicObservation } from './image-dem-observation.mts';
 import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { basename, resolve } from 'node:path';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, fitCamera, project, sampleGeo, observationGain, osirisRadianceFactorScale } from './osiris-geo.mts';
 import { sampleTrianglePoints, fitObservationLevels, selectObservation } from './observation-mosaic.mts';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
 import { decodeAmicaGeo } from './amica-geo.mts';
 import { decodeOsirisReflectance, attachSourceGeometry } from './archived-camera.mts';
 import { decodeLlorri } from './llorri-geo.mts';
+import { decodeDracoGeo } from './draco-geo.mts';
 
 const safePath = (path: unknown) => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.split(/[\\/]/).includes('..');
 const positive = (value: number) => Number.isFinite(value) && value > 0;
 const archivedCamera = (recipe: {format:string}) => ['osiris-camera', 'llorri-camera'].includes(recipe.format);
 const framePaths = (recipe: Pick<GeoRecipe,"format"|"path"|"labelPath"|"originalPath"|"flatPath"|"cameraPath"|"qualityPath">): string[] => ( recipe.format === 'amica-gaskell'
   ? [recipe.path, recipe.labelPath, recipe.originalPath, recipe.flatPath]
+  : recipe.format === 'draco-geo' ? [recipe.path, recipe.labelPath]
   : archivedCamera(recipe) ? [recipe.path, recipe.cameraPath] : [recipe.path, recipe.qualityPath]).map(path=>requireString(path,'source-bound observation path'));
 export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown) {
   const format=requireRecord(value).format;
@@ -30,7 +32,8 @@ export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown
     const ownedPaths = Array.isArray(frames) ? frames.flatMap(frame => framePaths({ ...recipe, ...frame })
       .filter(path => recipe.format !== 'amica-gaskell' || path !== recipe.flatPath)) : [];
     if (!Array.isArray(frames) || frames.length < 2 || frames.length > 8 || recipe.path !== undefined ||
-        recipe.qualityPath !== undefined || recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.cameraPath !== undefined || recipe.startTime !== undefined || recipe.selection !== 'lowest-emission' ||
+        recipe.qualityPath !== undefined || recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.cameraPath !== undefined || recipe.startTime !== undefined ||
+        recipe.selection === undefined || !['lowest-emission', 'recipe-order'].includes(recipe.selection) ||
         !levels || !Number.isInteger(levels.samplesPerTriangle) || levels.samplesPerTriangle === undefined || levels.samplesPerTriangle < 4 || levels.samplesPerTriangle > 64 ||
         !Number.isInteger(levels.minimumPairs) || levels.minimumPairs < 64 || levels.minimumPairs > 10000 ||
         !positive(levels.maximumLogMad) || levels.maximumLogMad > .3 || !positive(levels.maximumGain) || levels.maximumGain < 1 || levels.maximumGain > 1.5 ||
@@ -51,15 +54,16 @@ export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown
       !positive(phase.minimumDegrees) || !(phase.maximumDegrees > phase.minimumDegrees) || phase.maximumDegrees >= 90 ||
       !(phase.referenceDegrees >= phase.minimumDegrees && phase.referenceDegrees <= phase.maximumDegrees) ||
       !positive(phase.maximumGain) || phase.maximumGain < 1 || phase.maximumGain > 1.5)) throw new TypeError('Invalid observation phase correction.');
-  const paths = framePaths(recipe), amica = recipe.format === 'amica-gaskell', controlled = archivedCamera(recipe);
+  const paths = framePaths(recipe), amica = recipe.format === 'amica-gaskell', draco = recipe.format === 'draco-geo', controlled = archivedCamera(recipe);
   const validPhotometry = photometry && (photometry.model === 'lommel-seeliger' ||
     (recipe.format === 'osiris-camera' && photometry.model === 'minnaert' &&
       Number.isFinite(photometry.coefficient) && photometry.coefficient !== undefined && photometry.coefficient >= .5 && photometry.coefficient <= 1 &&
       Number.isFinite(photometry.phaseCoefficientPerDegree) && photometry.phaseCoefficientPerDegree !== undefined && photometry.phaseCoefficientPerDegree >= 0 && photometry.phaseCoefficientPerDegree <= .01) ||
     (controlled && photometry.model === 'retained-observation' && photometry.maximumGain === 1));
-  if (!['osiris-geo', 'amica-gaskell', 'osiris-camera', 'llorri-camera'].includes(recipe.format) || !/^[a-z][a-z0-9-]*$/.test(recipe.id) || !/^[a-z][a-z0-9-]*$/.test(recipe.consumer) ||
+  if (!['osiris-geo', 'amica-gaskell', 'osiris-camera', 'llorri-camera', 'draco-geo'].includes(recipe.format) || !/^[a-z][a-z0-9-]*$/.test(recipe.id) || !/^[a-z][a-z0-9-]*$/.test(recipe.consumer) ||
       !paths.every(safePath) || new Set(paths).size !== paths.length ||
       (amica ? recipe.qualityPath !== undefined || recipe.allowLossy !== true || recipe.filter !== 'V'
+        : draco ? recipe.qualityPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.allowLossy !== false || recipe.filter !== 'unfiltered'
         : recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined) ||
       (controlled ? recipe.qualityPath !== undefined : recipe.cameraPath !== undefined) ||
       !recipe.startTime || !recipe.filter || typeof recipe.allowLossy !== 'boolean' ||
@@ -119,6 +123,7 @@ async function loadSingleGeoObservationSurface({ sourceDirectory, source, recipe
   const frame: GeoObservationFrame = camera ? attachSourceGeometry(recipe.format === 'llorri-camera'
     ? decodeLlorri(await read(recipe.path), camera)
     : decodeOsirisReflectance(await read(recipe.path), camera, recipe.allowLossy), radial.grid)
+    : recipe.format === 'draco-geo' ? decodeDracoGeo(await read(recipe.path), (await read(recipe.labelPath)).toString('utf8'), { fileName: basename(requireString(recipe.path)) })
     : recipe.format === 'amica-gaskell' ? decodeAmicaGeo(await read(recipe.path),
     (await read(recipe.labelPath)).toString('ascii'), await read(recipe.originalPath), await read(recipe.flatPath))
     : decodeOsirisGeo(await read(recipe.path));
@@ -160,7 +165,7 @@ export function prepareGeoFrameSurface({ frame, recipe:value, radial, config, en
     display: { percentiles: recipe.displayPercentiles, low, high, units: recipe.format === 'amica-gaskell'
       ? 'relative flat-fielded detector brightness with approximate disk normalization; linear grayscale display'
       : recipe.format === 'llorri-camera' ? 'relative DN/s with original illumination; linear grayscale display'
-      : recipe.format === 'osiris-camera' ? 'relative disk-normalized I/F; linear grayscale display'
+      : recipe.format === 'osiris-camera' || recipe.format === 'draco-geo' ? 'relative disk-normalized I/F; linear grayscale display'
       : frame.radianceFactor ? 'relative disk- and phase-normalized I/F; linear grayscale display' : 'relative disk-normalized radiance; linear grayscale display' },
     sourceIds: entries.map(e => ({ id: e.id, sha256: e.expectedSha256 })),
     previewPolicy: 'Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D.' };
@@ -230,7 +235,9 @@ export async function loadGeoObservationSurface(options: SurfaceOptions) {
     display: { ...display, referenceFrame: frames[0].id },
     previewPolicy: observations[0].report.previewPolicy };
   const samplePoint = (point: readonly number[]): SurfaceColorSample => {
-    const values = observations.map(observation => observation.samplePoint(point)), index = selectObservation(values);
+    const values = observations.map(observation => observation.samplePoint(point));
+    // Frames sharing one viewing direction tie on emission; recipe order then ranks them, finest pixel scale first.
+    const index = recipe.selection === 'recipe-order' ? values.findIndex(value => value.reason === undefined) : selectObservation(values);
     if (index < 0) return { color:values[0].color, reason: 'no-qualified-observation' };
     const value = values[index];if(value.reason!==undefined)return value;
     const radiance = value.radiance * levels.gains[index];

@@ -1,0 +1,57 @@
+{
+  "id": "source-dimorphos-draco-0401930040-12262-label",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Dimorphos \u00b7 DRACO frame 2022-09-26 23:14:12.737 UTC geometry label",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930040_12262_01_geo.xml",
+      "label": "Source"
+    },
+    {
+      "role": "archive",
+      "url": "https://pds.nasa.gov/api/search/1/products/urn%3Anasa%3Apds%3Adart%3Adata_dracoddp",
+      "label": "Collection record (PDS registry)"
+    }
+  ],
+  "creators": [
+    "Carolyn M. Ernst",
+    "R. Terik Daly",
+    "Olivier S. Barnouin",
+    "Ray Espiritu",
+    "Dany Waller"
+  ],
+  "publisher": "NASA Planetary Data System, Small Bodies Node",
+  "publicationDate": "2023-11-06",
+  "evidence": [
+    {
+      "path": "src/planets/dimorphos/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "part-of",
+      "catalogueId": "source-dimorphos-draco-geometry-collection",
+      "evidence": "PDS4 collection membership (collection_data_dracoddp.csv)."
+    }
+  ],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ernst, C., Daly, T., Barnouin, O., Espiritu, R. and Waller, D. (2023), DART Spacecraft Bundle, Calibrated Images with Geometric Backplanes, NASA PDS, DOI 10.26007/QAAN-F992.",
+      "scope": "The calibrated I/F frame and its geometric backplanes.",
+      "evidence": "Collection citation in the PDS registry record."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA public scientific data; retain the dataset citation and source notices.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "PDS Small Bodies Node data policy."
+    }
+  ]
+}

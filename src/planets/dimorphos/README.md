@@ -12,7 +12,19 @@
 
 - **Relative albedo:** The original v004 relative-albedo FITS table and its [PDS4 label](source/science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml) are pinned in [source/science/](source/science/).
 
+- **DRACO photograph:** one calibrated DRACO frame with its geometric backplanes from the [DART calibrated images with geometric backplanes collection](https://pds.nasa.gov/api/search/1/products/urn%3Anasa%3Apds%3Adart%3Adata_dracoddp) (Ernst, Daly, Barnouin, Espiritu and Waller 2023, DOI 10.26007/QAAN-F992), acquired 2022-09-26T23:14:12.737Z, about 11 s before impact, from 70.4 km. The cube and its [PDS4 label](source/observations/dart_0401930040_12262_01_geo.xml) are pinned in [source/observations/](source/observations/). The I/F plane keeps the acquisition illumination at 60.5° phase; the surface intercepts were computed by the archive on the 0.243 m v004 DSK.
+
 ## Evidence
+
+- **DRACO camera:** a pinhole camera fitted to 716 archived pixel-to-surface pairs (every 179th on-body pixel) projects the other 127,575 on-body pixels with a maximum residual of 0.00015 px and an RMS of 0.00003 px. Its recovered range, 70.39 km, agrees with the header's 70.41 km. This proves the archive's geometry is projective and that the decoder reads it in the archive's pixel convention; it does not add absolute accuracy beyond the DART SPICE solution.
+
+- **DRACO model transfer:** the archived intercepts lie on the 0.243 m DSK; the package renders the 0.972 m OBJ. For 2,419 sampled on-body pixels the closest OBJ point is 0.057 m away on average and 0.41 m at most, within the recipe's 2 m bound. Adjacent intercepts at the nadir pixel are 0.348 m apart, the header range times its 4.95 µrad IFOV.
+
+- **DRACO coverage:** 17.2% of the displayed 800-face mesh area carries qualified DRACO texture, measured with 24 deterministic samples per triangle weighted by area (32.7% of samples unweighted). The atlas accepted 1,778,235 of 5,673,346 interior texels; the rest are the hidden hemisphere projecting into the frame (1,681,180 geometry mismatches), emission above 80° (959,818), incidence above 80° (1,031,288), outside the on-body pixels (222,092), occluded (230) or beyond the 2 m source bound (503). Coverage is one hemisphere at one phase angle, not a global map.
+
+- **DRACO pixel-scale planes:** the archived horizontal and vertical pixel-scale planes read 19.94 m where the intercepts are 0.348 m apart, a ratio of 57.3, which is 180/π. The decoder reports and never uses them.
+
+- **DRACO checks:** `tools/objects/terrestrial-layers/draco-geo.test.mts` (synthetic cube and label), `tests/objects/unit/dimorphos/draco.test.mts` (the pinned cube, camera fit and OBJ transfer), `tests/objects/unit/dimorphos/prepared.test.mts` (package with the new lens) and the profile validator cases in `tools/objects/terrestrial-layers/profile.test.mts` passed at the revision that prepared this package. The lens was inspected in Chrome at `/dimorphos/#dataset=draco`; [the capture](evidence/draco-lens-dpr1.webp) is Chrome 152 at 1280 × 800, DPR 1, Shadows off, with the view centred at 8.2° S, 274.6° E beside the sub-spacecraft point; no console errors or failed requests.
 
 - **Slope registration:** A verified centroid bijection reconciles 131,072 exporter-order differences; all rows match uniquely within 0.001 m (maximum observed residual 0.00002393 m). That residual measures source registration, not scientific accuracy.
 
@@ -25,6 +37,8 @@ Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point sh
 Landing sites: 1 spacecraft landing, touchdown or impact sites are labelled beside the IAU names (`source/features/sites.json`). Each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from, with the stated latitude kind and longitude convention; sites are unsized points ranked like a 20 km feature and the caption shows the quoted source sentence with its publisher.
 
 Named features run of 2026-09-12 (this version): the catalogue labels 11 IAU names on the hit mesh (nothing skipped); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band, and a headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page, selected every lens and pinned Bala from the sidebar search with no console errors or failed requests.
+
+- **DRACO photograph:** a single viewing direction. The far side and the terminator region beyond 80° incidence keep the grid; surface seen at high emission is stretched along the view direction; boulder shadows are retained as dark patches because brightness is not a quality mask. Display brightness is disk-normalized I/F between the 1st and 99th percentiles (0.0130–0.0625); it is not albedo.
 
 - Model precision varies with DRACO/LICIACube coverage and SPC constraints. A closed model does not mean every facet was photographed with the same precision.
 
@@ -64,6 +78,12 @@ Exact URL, byte size and SHA-256 are in `source/manifest.json`; original label a
 The FITS header names the selected OBJ, but its rows use a different facet order: 131,072 of 196,608 rows are permuted. Preparation resolves a complete bijection from recorded centroids to the exact original triangles within 1 mm. An independent Astropy/scipy cKDTree check gives a maximum correspondence residual of 0.024 mm, with every second-nearest candidate at least 0.289 m away. Duplicate, ambiguous or displaced centroids fail. The index-ordered Didymos path retains its original strict behavior.
 
 There are 60,464 accepted facets and 136,144 withheld facets. Display transfer uses the existing closest-source-point sampler and 2 m acceptance bound. Values span 0.451341–1.290672 and use a linear grayscale display range of 0.45–1.30. No facet is filled from its neighbours.
+
+## DRACO photograph
+
+The cube `dart_0401930040_12262_01_geo.fits` is one FITS primary data unit with sixteen 1024 × 1024 big-endian float planes. Its PDS4 label is the authority for plane identity, byte offsets, units and special constants; the decoder (`tools/objects/terrestrial-layers/draco-geo.mts`) also requires the FITS header to agree on plane descriptions, mission, instrument, target, calibration flags, special values, the MET in the file name, the acquisition time and the shape reference. Valid pixels need finite intercepts, angles and I/F; the 512 × 512 readout window leaves 128,291 on-body pixels, none saturated.
+
+The camera is recovered from the archived intercepts by the shared projective fit used for 67P (`observed-geo-surface.mts`), then every displayed sample is re-derived on the retained OBJ: closest source point within 2 m, every bilinear contributor within 2 m of that point, visibility from the recovered camera against the full mesh within 0.5 m, emission below 80°, and Lommel-Seeliger disk normalization with incidence below 80° and gain at most 3. No phase correction is applied; the frame has a single phase angle. The equirectangular preview and the 640 × 320 minimap are derived from the same samples.
 
 ## Geometry and lighting
 
