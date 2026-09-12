@@ -176,6 +176,45 @@ because lowest-emission selection cannot separate them. The
 [Dimorphos README](../../../../src/planets/dimorphos/README.md) records the
 measured residuals, transfer distances and the archive's pixel-scale unit slip.
 
+Archives that ship images with SPICE kernels and no geometry at all use
+`format: "spice-camera"`: the recipe's `spice` block names the kernel set (pinned
+inputs of the observation's consumer group, in metakernel order), the observer
+and target SPK ids, the body-fixed frame, the instrument whose `INS<id>_*`
+variables define the pixel model, the header card that carries the exposure's
+spacecraft clock, the aberration correction (`LT+S`, `LT` or `NONE`), the
+instrument-frame axes that stored columns and rows follow, and how the image
+plane and its flag values are read. `tools/spice/` is the strict-TypeScript
+kernel subset (DAF, SPK types 1, 2, 3, 5, 8, 9 and 13, CK types 1 to 3, text
+kernels, leap seconds, SCLK, PCK pole models, frame classes 2 to 6, light time
+and stellar aberration) and `tools/spice/camera.mts` assembles the camera;
+`tools/objects/terrestrial-layers/spice-camera.mts` turns it into the same
+`cssearth-archived-camera@1` closure the OSIRIS and L'LORRI routes feed to
+`attachSourceGeometry`, so per-pixel geometry comes from the retained mesh. The
+route is validated end to end against Dimorphos's DRACO backplanes in
+`tests/objects/unit/dimorphos/draco-spice.test.mts` (0.5 px against the
+archive's own intercepts, the constant offset explained by kernel versions); no
+lens uses it yet, so a body that adopts it needs a rendered inspection.
+
+Archived and kernel pointing carries the archive's error: a fraction of a pixel
+for a solution tuned to the images, tens of pixels for a reconstructed C-kernel.
+A `spice-camera` or `osiris-camera` recipe may declare `refinement: { method:
+"mesh-limb", maximumCorrectionDegrees, maximumResidualPixels, minimumControls,
+searchPixels?, maximumControls?, minimumSharpness?, threshold? }` and
+`tools/objects/terrestrial-layers/limb-refinement.mts` then fits one rotation of
+the camera to the lit limb of the retained mesh before geometry is derived:
+edges are the sub-pixel coverage crossings of the body against background
+connected to space, sharp enough not to be terminator; each edge is matched to
+the mesh limb along its normal; terminator edges are recognised because the
+limb they reach faces away from the Sun; the match window grows until the
+count plateaus; a damped least-squares fit with a robust cut follows; and the
+holdout half of the edges must land within the declared residual budget, with
+the correction below its bound, or preparation refuses the frame. The report
+(correction, residuals before and after, matched fractions) lands in the lens
+metadata. Range, focal length and Sun direction are never changed.
+`tests/objects/unit/dimorphos/draco-refinement.test.mts` measures it against the
+DRACO backplanes: the kernel camera stays within 0.6 px of the archive, and
+cameras pushed 30 and 150 px away return to 0.24 and 0.55 px.
+
 The PDS3 routes (OSIRIS GEO, AMICA) stay instrument decoders behind the same
 seam, decided 2026-09-12 after a code review: their archives do not declare
 plane units or semantics the way a PDS4 label does, and about half of each

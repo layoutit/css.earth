@@ -82,6 +82,39 @@ test('a mosaic may rank frames in recipe order when one viewing direction ties t
  assert.throws(() => parseTerrestrialProfile(profile), /mosaic/);
 });
 
+test('SPICE camera recipes declare their kernels, bodies, instrument and pixel axes and nothing of the archived-geometry formats', async () => {
+ const profile = await read('dimorphos'), cube = profile.raster.surfaceObservations[0];
+ const kernels = ['spice/lsk/naif0012.tls', 'spice/fk/dart_009.tf', 'spice/ik/dart_draco_003.ti', 'spice/sclk/dart_sclk_0204.tsc', 'spice/spk/dart_2022_269_2022_269_spc_v04.bsp', 'spice/ck/dart_2022_269_2022_269_spc_v04.bc'];
+ const spice = { kernels, observer: -135, target: 120065803, bodyFrame: 'DIMORPHOS_FIXED', instrument: -135102, clock: { header: 'ACQTMSOC', spacecraft: -135 }, aberration: 'LT+S',
+  pixels: { focalLength: { key: 'FOCAL_LENGTH', unit: 'mm' }, pixelPitch: { key: 'PIXEL_SIZE', unit: 'micrometre' }, center: 'DETECTOR_CENTER', boresight: 'BORESIGHT', samples: 'PIXEL_SAMPLES', lines: 'PIXEL_LINES', frame: 'FOV_FRAME', origin: 0, column: '-X', row: '-Y' },
+  image: { quantity: 'I/F', plane: 1, missingValueKeys: ['MISPXVAL'], saturationKey: 'SATPXVAL' } };
+ profile.raster.surfaceObservations[0] = { id: 'draco-spice', format: 'spice-camera', consumer: 'draco-spice', path: cube.path, startTime: cube.startTime, filter: cube.filter, allowLossy: false,
+  metadata: cube.metadata, spice, transfer: cube.transfer, photometry: cube.photometry, displayPercentiles: cube.displayPercentiles };
+ assert.doesNotThrow(() => parseTerrestrialProfile(profile));
+ for (const alter of [(p: unknown) => fixtureRecord(p)["spice"] = undefined, (p: unknown) => fixtureRecord(p)["labelPath"] = cube.labelPath, (p: unknown) => fixtureRecord(p)["cameraPath"] = 'observations/camera.json',
+  (p: unknown) => fixtureRecord(p)["allowLossy"] = true, (p: unknown) => fixtureRecord(p)["cube"] = cube.cube, (p: unknown) => fixtureRecord(p,"spice")["aberration"] = 'XLT+S',
+  (p: unknown) => fixtureRecord(p,"spice")["kernels"] = ['spice/lsk/naif0012.tls'], (p: unknown) => fixtureRecord(p,"spice")["kernels"] = [...kernels, '../elsewhere.bsp'],
+  (p: unknown) => fixtureRecord(p,"spice","pixels")["row"] = 'X', (p: unknown) => fixtureRecord(p,"spice","pixels")["origin"] = 2, (p: unknown) => fixtureRecord(p,"spice","pixels","pixelPitch")["unit"] = 'nm',
+  (p: unknown) => fixtureRecord(p,"spice")["target"] = -135, (p: unknown) => fixtureRecord(p,"spice","image")["plane"] = 0, (p: unknown) => fixtureRecord(p,"photometry")["model"] = 'minnaert']) {
+  const changed = structuredClone(profile); alter(changed.raster.surfaceObservations[0]);
+  assert.throws(() => parseTerrestrialProfile(changed), /source-bound|SPICE camera|spice block/);
+ }
+ // The cube format may not carry a spice block either.
+ const mixed = structuredClone(profile); mixed.raster.surfaceObservations[0] = { ...cube, spice };
+ assert.throws(() => parseTerrestrialProfile(mixed), /spice block/);
+ // Limb refinement belongs to the camera formats and keeps its budget within bounds.
+ const refined = structuredClone(profile);
+ refined.raster.surfaceObservations[0].refinement = { method: 'mesh-limb', maximumCorrectionDegrees: 0.1, maximumResidualPixels: 2, minimumControls: 48, searchPixels: 256, maximumControls: 1500, minimumSharpness: 0.15 };
+ assert.doesNotThrow(() => parseTerrestrialProfile(refined));
+ for (const alter of [(r: unknown) => fixtureRecord(r)["method"] = 'landmarks', (r: unknown) => fixtureRecord(r)["maximumCorrectionDegrees"] = 5, (r: unknown) => fixtureRecord(r)["maximumResidualPixels"] = 0,
+  (r: unknown) => fixtureRecord(r)["minimumControls"] = 8, (r: unknown) => fixtureRecord(r)["searchPixels"] = 1024, (r: unknown) => fixtureRecord(r)["maximumControls"] = 50, (r: unknown) => fixtureRecord(r)["minimumSharpness"] = 1]) {
+  const changed = structuredClone(refined); alter(changed.raster.surfaceObservations[0].refinement);
+  assert.throws(() => parseTerrestrialProfile(changed), /limb refinement/);
+ }
+ const cubeRefined = structuredClone(profile); cubeRefined.raster.surfaceObservations[0] = { ...cube, refinement: refined.raster.surfaceObservations[0].refinement };
+ assert.throws(() => parseTerrestrialProfile(cubeRefined), /limb refinement/);
+});
+
 test('a cube declaration belongs only to the geometry-cube format', async () => {
  const profile = await read('comet-67p');
  profile.raster.surfaceObservations[0].cube = { collection: 'urn:x', target: 'x', observingSystem: [], quantity: 'x', planes: { image: 'a', x: 'b', y: 'c', z: 'd', incidence: 'e', emission: 'f', phase: 'g' } };
