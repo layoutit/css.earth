@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { OBJECTS } from '../objects.mts';
+import { browserObjects } from './browser-objects.mts';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const sourcePath = '/sun/?overview=solar-system&v=QMa8GhQkxq0kCjwwjGyvKEVkwdEH0KlHMa5BQsczQAAAAD_NAzq-TAs4v9ZvIAwo9nM_43yA9Ilr5wABAAAAAAAAAAA';
 const output = 'output/playwright/navigation-capacity';
@@ -21,7 +22,7 @@ try {
     page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
     await page.goto(origin + sourcePath);
     await ready(page, 'sun');
-    for (const object of OBJECTS) {
+    for (const object of browserObjects()) {
       const bank = await page.evaluate(async ({ id, sourceFrame }) => {
         const modulePath='/site/packaged-object-runtime.mts';
         const { loadPackagedObject }:typeof import('../packaged-object-runtime.mts') = await import(modulePath);

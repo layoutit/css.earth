@@ -7,7 +7,7 @@ import { mkdir, open, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { scrollToDistance } from './wheel-zoom-distance.mts';
 
-const origin = process.env.ORIGIN ?? 'http://127.0.0.1:4221';
+const origin = process.argv[2] ?? process.env.CSSEARTH_TEST_ORIGIN ?? process.env.ORIGIN ?? 'http://127.0.0.1:4221';
 const id = process.env.OBJECT ?? 'deimos', dpr = Number(process.env.DPR ?? 1);
 const output = process.env.OUTPUT ?? `output/playwright/prepared-depth/${id}-${dpr}`;
 const baseline = process.env.BASELINE === '1';

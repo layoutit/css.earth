@@ -5,6 +5,7 @@ import { chromium } from 'playwright';
 import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 import { OBJECTS } from '../objects.mts';
+import { browserObjects } from './browser-objects.mts';
 
 import { parsePreparedObjectRuntime } from '../../src/renderers/css/dist/index.js';
 import { requireRecord } from '../../tools/source-values.mts';
@@ -24,7 +25,7 @@ await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const report: { browser: string; cases: BindingCase[]; errors: string[]; error?: string } = { browser: browser.version(), cases: [], errors: [] };
 try {
-  for (const object of OBJECTS.filter(object => !ids || ids.includes(object.id))) {
+  for (const object of browserObjects().filter(object => !ids || ids.includes(object.id))) {
     const plan = parsePreparedObjectRuntime(await loadObjectTestDefinition(object.id));
     assert.ok(plan.motion && plan.facing, 'Prepared binding plans must declare their motion and facing arrays.');
     const definition = { ...plan, motion: plan.motion, facing: plan.facing };
