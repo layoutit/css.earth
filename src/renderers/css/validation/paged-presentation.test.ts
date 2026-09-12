@@ -28,7 +28,8 @@ test('the external runtime boundary preserves both source-backed page plans and 
   }));
 });
 
-test('malformed page budgets, roots and matrices fail at the external runtime boundary', () => {
+// Dozens of full-definition parses take about four seconds alone and longer under suite load.
+test('malformed page budgets, roots and matrices fail at the external runtime boundary', { timeout: 30000 }, () => {
   const mutations: Array<{ mutate(page: Record<string, unknown>): void; error: RegExp }> = [
     { mutate: page => { page.poolSize = 0; }, error: /page plan/ },
     { mutate: page => { page.poolSize = 513; }, error: /page plan/ },

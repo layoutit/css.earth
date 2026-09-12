@@ -5,7 +5,7 @@ import { projectSphereDrag } from "@cssearth/engine";
 import {
   advanceDragThrow,
   createDragHistory,
-  estimateDragThrow as estimateDragThrow,
+  estimateDragThrow as estimateThrow,
   TRACKBALL_DRAG_INERTIA,
   directAngularDegreesPerTrackballRadius,
   directPitchResponseForZoom,
@@ -16,7 +16,7 @@ import {
 
 const trackball = {centerX:346.5,centerY:300,radius:144.65263161811257,viewportWidth:693,surfaceRadius:144.65263161811257,
   focalLength:598.73636504};
-const estimateDragThrow = (options: Omit<Parameters<typeof estimateDragThrow>[0], "trackball">) => estimateDragThrow({trackball,...options});
+const estimateDragThrow = (options: Omit<Parameters<typeof estimateThrow>[0], "trackball"> & { trackball?: typeof trackball }) => estimateThrow({trackball,...options});
 
 function requiredThrow(...args: Parameters<typeof estimateDragThrow>) {
   const value = estimateDragThrow(...args); assert.ok(value, 'Expected a drag throw'); return value;
