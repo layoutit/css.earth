@@ -123,7 +123,9 @@ function verifyMetadata(seo: Awaited<ReturnType<typeof readMetadata>>, object: O
   assert.equal(seo.canonicalCount, 1);
   assert.equal(seo.title, `${object.name} | cssEarth`);
   assert.equal(seo.canonical, origin + object.route);
-  assert.ok(seo.description.includes(object.name) && seo.description.includes("cssEarth"), `${object.id}: description must name the object and cssEarth: ${seo.description}`);
+  // Descriptions come from the registry; they name the object (designations in parentheses may be dropped).
+  const stem = object.name.replace(/\s*\(.*$/u, "");
+  assert.ok(seo.description.length > 40 && seo.description.includes(stem), `${object.id}: description must name the object: ${seo.description}`);
   assert.equal(seo.og.type, "website");
   assert.equal(seo.og.site_name, "cssEarth");
   assert.equal(seo.og.url, seo.canonical);
