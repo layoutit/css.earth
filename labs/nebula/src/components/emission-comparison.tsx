@@ -6,14 +6,16 @@ import { ObservationStructures } from './observation-structures';
 import { EvidenceFusion } from './evidence-fusion';
 import { KinematicsPanel } from './kinematics-panel';
 import { JointFitPanel } from './joint-fit-panel';
+import { CompilerPanel } from './compiler-panel';
 
 /** Observation views and explicitly configured bounded inference workbenches. */
-export function EmissionComparison({ directory, structureDirectory, observationStructures, observationManifest, kinematicsSource, jointFitSource, onModeChange, sourceCatalogue, modeled = false, methodUrl, credit, statusNote }: {
-  directory: string; structureDirectory?: string; observationStructures?: string; observationManifest?: string; kinematicsSource?: string; jointFitSource?: string; onModeChange?(mode: 'sources' | 'structure' | 'volume'): void;
+export function EmissionComparison({ directory, structureDirectory, observationStructures, observationManifest, kinematicsSource, jointFitSource, compilerSource, onModeChange, sourceCatalogue, modeled = false, methodUrl, credit, statusNote }: {
+  directory: string; structureDirectory?: string; observationStructures?: string; observationManifest?: string; kinematicsSource?: string; jointFitSource?: string; compilerSource?: string; onModeChange?(mode: 'sources' | 'structure' | 'volume'): void;
   sourceCatalogue?: string; modeled?: boolean; methodUrl?: string; credit?: string; statusNote?: string;
 }) {
-  const [mode, setMode] = useState<'sources' | 'structure' | 'volume' | 'combined' | 'kinematics' | 'joint'>(() => {
+  const [mode, setMode] = useState<'sources' | 'structure' | 'volume' | 'combined' | 'kinematics' | 'joint' | 'compiler'>(() => {
     const requested = new URLSearchParams(location.search).get('inspection');
+    if (compilerSource && observationStructures && (requested === 'compiler' || !requested && !new URLSearchParams(location.search).has('fit'))) return 'compiler';
     if (requested === 'combined' && observationStructures) return 'combined';
     if (requested === 'kinematics' && kinematicsSource) return 'kinematics';
     if (requested === 'joint' && jointFitSource && observationStructures) return 'joint';
@@ -23,21 +25,22 @@ export function EmissionComparison({ directory, structureDirectory, observationS
   const sourcesMode = Boolean(sourceCatalogue) && mode === 'sources';
   const combinedMode = mode === 'combined' && Boolean(observationStructures), velocityMode = mode === 'kinematics' && Boolean(kinematicsSource);
   const jointMode = mode === 'joint' && Boolean(jointFitSource && observationStructures);
-  const advanced = combinedMode || velocityMode || jointMode;
+  const compilerMode = mode === 'compiler', advanced = combinedMode || velocityMode || jointMode || compilerMode;
   function changeMode(next: typeof mode) {
-    setMode(next); onModeChange?.(next === 'combined' || next === 'kinematics' || next === 'joint' ? 'structure' : next);
+    setMode(next); onModeChange?.(next === 'combined' || next === 'kinematics' || next === 'joint' || next === 'compiler' ? 'structure' : next);
     const url = new URL(location.href); url.searchParams.set('inspection', next); history.replaceState(history.state, '', url);
   }
   return <aside className={`floating-panel cloud-adjustment-panel${(structureMode && observationStructures || advanced) ? ' observation-structures-panel' : ''}`} aria-label="Emission inference comparison">
     {(structureDirectory || observationStructures) && <div className="emission-view-buttons" role="group" aria-label="Inspection mode">
+      {compilerSource && observationStructures && <button type="button" aria-pressed={compilerMode} onClick={() => changeMode('compiler')}>Nebula</button>}
       {sourceCatalogue && <button type="button" aria-pressed={sourcesMode} onClick={() => changeMode('sources')}>Source candidates</button>}
       <button type="button" aria-pressed={structureMode} onClick={() => changeMode('structure')}>Structure map</button>
       {observationStructures && <button type="button" aria-pressed={combinedMode} onClick={() => changeMode('combined')}>Combined</button>}
       {kinematicsSource && <button type="button" aria-pressed={velocityMode} onClick={() => changeMode('kinematics')}>Velocity</button>}
       {jointFitSource && observationStructures && <button type="button" aria-pressed={jointMode} onClick={() => changeMode('joint')}>Joint fit</button>}
-      <button type="button" aria-pressed={!structureMode && !sourcesMode && !advanced} title="Previous Hubble volume baseline; the current observations have not supplied new depths." onClick={() => changeMode('volume')}>Volume</button>
+      <button type="button" aria-pressed={!structureMode && !sourcesMode && !advanced} title="Earlier Hubble volume baseline; retained for comparison." onClick={() => changeMode('volume')}>Volume</button>
     </div>}
-    {jointMode && jointFitSource && observationStructures ? <JointFitPanel cataloguePath={observationStructures} recipePath={jointFitSource} observationManifest={observationManifest} /> : combinedMode && observationStructures ? <EvidenceFusion cataloguePath={observationStructures} observationManifest={observationManifest} /> : velocityMode && kinematicsSource ? <KinematicsPanel sourcePath={kinematicsSource} /> : sourcesMode && sourceCatalogue ? <EmissionSources key={sourceCatalogue} catalogue={sourceCatalogue} /> : structureMode && observationStructures ? <ObservationStructures key={observationStructures} cataloguePath={observationStructures} observationManifest={observationManifest} /> : structureMode && structureDirectory ? <EmissionStructures key={structureDirectory} directory={structureDirectory} /> : <fieldset>
+    {compilerMode && compilerSource && observationStructures ? <CompilerPanel recipePath={compilerSource} cataloguePath={observationStructures} observationManifest={observationManifest} /> : jointMode && jointFitSource && observationStructures ? <JointFitPanel cataloguePath={observationStructures} recipePath={jointFitSource} observationManifest={observationManifest} /> : combinedMode && observationStructures ? <EvidenceFusion cataloguePath={observationStructures} observationManifest={observationManifest} /> : velocityMode && kinematicsSource ? <KinematicsPanel sourcePath={kinematicsSource} /> : sourcesMode && sourceCatalogue ? <EmissionSources key={sourceCatalogue} catalogue={sourceCatalogue} /> : structureMode && observationStructures ? <ObservationStructures key={observationStructures} cataloguePath={observationStructures} observationManifest={observationManifest} /> : structureMode && structureDirectory ? <EmissionStructures key={structureDirectory} directory={structureDirectory} /> : <fieldset>
       <legend>{modeled ? 'Image + geometric prior' : 'Image → inferred volume'}</legend>
       {observationStructures && <p className="interaction-hint">Previous Hubble baseline</p>}
       {statusNote && <p className="interaction-hint">{statusNote}</p>}

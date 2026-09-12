@@ -22,7 +22,7 @@ The first run uses a small outreach image and explicit compact-source masks to t
 
 ## After the first visual decision
 
-The active follow-up is the [nebula compiler structure inspector](nebula-compiler.md). It preserves and decomposes the full observed field before any new depth assignment. It does not yet replace the failed Helix volumes below.
+The active follow-up is the [emission compiler](emission-compiler.md): one final cloud from the registered wider Helix observations, with positive multiscale emission and conditional depth. The [structure inspector](nebula-compiler.md) remains a diagnostic. Visual acceptance is open; the failed Helix volumes below retain their historical verdicts. A second compiler nebula is deferred until the current machinery is assessed.
 
 Helix is now an additional stress test: [observation, registration, recipes and comparison results](../models/helix/README.md). The one-axis method fits its front but produces a box-like side volume. A separately authored disk/ring prior produces curved components but fails on detailed structure and outer-emission coverage. Both remain visible and unaccepted. This is a concrete example of why good reprojection alone cannot establish 3D quality.
 

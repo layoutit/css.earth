@@ -1,8 +1,28 @@
-# Helix: observation alignment and shape inference
+# Helix: conditional emission compiler
 
-**Current step:** compare the automatic molecular-wall candidates at `/reconstruction?subject=helix-model-prior&inspection=joint`. Image ridges and measured HCO+ velocities jointly constrain a coarse shell or waisted lobe model, with withheld residuals beside the rotatable volume. The earlier manually tuned cloud remains at `fit=helix-tuned`; **Volume** retains the cropped Hubble experiment. None is an accepted physical reconstruction.
+**Current step:** assess the compiled cloud at `/reconstruction?subject=helix-model-prior&inspection=compiler`. **Nebula → Compile nebula** runs the configured sources through separation, evidence, an optional velocity scaffold, positive multiscale emission fitting and a shared three-lens bake. Fit controls apply automatically after the first successful compile; display changes do not bake. The [compiler method and complete setup](../../docs/emission-compiler.md) describe durable jobs, replay and assumptions. Visual acceptance remains open, and another compiler nebula is deferred until this machinery is assessed.
 
 **Initial visual verdict: neither baseline is accepted.** The one-axis fit reproduces the photograph but becomes a box from the side. The disk/ring prior has finite curved components, but is too smooth, cuts off outer emission and changes brightness under rotation. These are deliberately visible comparisons, not production nebula assets.
+
+## Current compiler inputs and interpretation
+
+[compiler.json](compiler.json) combines the complete registered ESO WFI optical, wider ESO field and VISTA infrared sources from [observations.json](observations.json). It uses WFI as the initial RGB lens and compact-light reference. [joint-fit.json](joint-fit.json) supplies the optional molecular scaffold from independently retained HCO+ measurements. The initial configuration allows up to 650 compact lights; this is a display budget, not a measured stellar population.
+
+The three independently normalized starless images form one relative-luminosity target. A positive multiscale fit supplies projected emission; the molecular surface conditions its depth where it intersects the image supports. Equal scaffold front/back allocation and support thickness remain assumptions. Unsupported emission uses a diffuse prior centered at z = 0 with finite depth tied to the scaffold size; it is not a measured outer shell. Uncovered velocities and unexplained image light stay recorded. Changing Depth stretches the inferred field without refitting the measured velocity law.
+
+All three image lenses share the same 3D field, geometry and alpha. Their RGB colors are different observations, not additional viewpoints or interchangeable calibrated emission lines. Compact lights retain measured image positions and relative display brightness, but their field-conditioned depths do not measure stellar distance or establish nebular membership. Residual stellar cores, removed knots, photographic normalization and uncertain outer-halo depth remain limitations.
+
+The **Joint fit** view retains its alternative coarse surfaces and withheld residuals. **Velocity** retains the separate ionized-core slit. The manually tuned cloud remains at `fit=helix-tuned`; **Volume** retains the cropped Hubble experiment. Those results and their recorded failures are independent of the compiler.
+
+### Compiler checkpoint · 2026-09-12
+
+The default recipe (Detail 65%, Faint emission 35%, Depth 1×) produced result `2e6d9eccd15ca15ccc053b1d564e2b0763522207c1c6ba79c42c86111796c9ce`. The complete compile took 25.95 seconds on this workstation with verified native removal and structure inputs already prepared; this is not a cold-download or native-NOX timing. It fitted 287 emission components, prepared 650 conditional compact lights, and baked three materials from identical neutral alpha at 512px with four samples per slab. All axes use comparable physical slab spacing, with 192 slabs on the longest axis.
+
+Projection RMSE against the normalized combined target fell from the zero-emission baseline **0.22271 to 0.03958**. Positive missing signal is 10.97% and excess is 11.73% of that target sum; these are display-signal measures, not gas-mass errors. 137 components have no measured-velocity coverage. The recorded molecular scaffold and all unresolved source/depth assumptions still apply.
+
+Front, oblique, side and polar renders were inspected. The main ring and asymmetric emission form a connected cloud under rotation. The first fallback incorrectly placed diffuse material on distant surfaces of a footprint-sized sphere; the current centered diffuse prior removes those detached clumps without changing its projected light. **Visual acceptance remains open:** VISTA shows oblique color streaks, bright stellar halos survive in the input evidence, and fine knots/depth are not recovered. Increasing slab sampling does not solve the source-to-volume color interpretation.
+
+The lab suite passed 291 tests, including real prepared multiband and ridge evidence; strict source and new-test TypeScript checks and the lab build passed. Real Chromium 148 checks exercise the completed pipeline, all three lenses, neutral/textured/original/star controls, rotation, automatic depth updates and refresh. Earth framing uses the prepared union of registered native-image footprints, including the observation-to-velocity-origin translation. Its 18px inset and source landmarks were compared against Alignment in the actual browser. Generated field, method, source/projection/residual panels, textures and browser receipts remain under the ignored local cache; no prepared image bank is committed.
 
 ## Combined observations and measured velocities
 
@@ -20,24 +40,24 @@ The actual front, oblique and side renders were inspected with `ring-sectors@2` 
 
 ## Wider source candidates
 
-The current Hubble/CTIO **photograph itself clips the wider nebula**. Retaining its full frame in the inspector does not repair that missing observation. The separate disk/ring prior also drops signal within that frame; both limits must be fixed before accepting a volume.
+The historical Hubble/CTIO **photograph itself clips the wider nebula**. Retaining its full frame in the inspector does not repair that missing observation. The separate disk/ring prior also drops signal within that frame. These limitations motivated the wider ESO source selection.
 
 Historical publisher previews remain in **Helix · symmetry baseline → Source candidates**, or `/reconstruction?subject=helix-single-axis&inspection=sources`. These are unprocessed full photographs independently fitted to the viewport, not registered overlays. Use **Helix → Alignment** for current source comparison at a shared sky scale. Field sizes describe angular coverage; a small preview must never become the processing input.
 
 | Observation | Native pixels | Publisher field | Inspection result |
 | --- | --- | --- | --- |
-| [Hubble / CTIO · current](https://esahubble.org/images/opo0432b/) | 4731 × 3129 | 20.96′ × 13.86′ | Crops the outer nebula. Keep for central detail and comparison. |
+| [Hubble / CTIO · historical baseline](https://esahubble.org/images/opo0432b/) | 4731 × 3129 | 20.96′ × 13.86′ | Crops the outer nebula. Keep for central detail and comparison. |
 | [ESO WFI · optical B/V/R](https://www.eso.org/public/images/eso0907a/) | 7059 × 6535 | 28.02′ × 25.94′ | Sharp main ring and northeast arc; still tight for faint outer structures. |
 | [ESO 3.6 m · wider field](https://www.eso.org/public/images/helix/) | 6850 × 4759 | 48.82′ × 33.92′ | More surrounding sky, but softer, weaker outer emission and visible artifacts. Filters are not listed by the publisher. |
 | [ESO VISTA · near-infrared Y/J/K](https://www.eso.org/public/images/eso1205a/) | 6592 × 6592 | 37.51′ × 37.51′ | Best coverage/detail compromise of these wider previews; different emission and colors from optical. |
 
-The recommendation is to inspect VISTA for extended structure and retain WFI as an optical detail candidate. This is a visual judgment, not a claim of complete all-band coverage. [Zhang, Hsia & Kwok (2012)](https://arxiv.org/abs/1207.4606) report a roughly 40′ halo at 12 μm; even VISTA's wider frame cannot establish that the entire halo is included. A sufficiently large field and sufficient sensitivity to the intended emission are separate requirements.
+The compiler combines VISTA's extended structure, WFI's optical detail and the wider ESO field while retaining their separate footprints and colors. This selection does not establish complete all-band coverage. [Zhang, Hsia & Kwok (2012)](https://arxiv.org/abs/1207.4606) report a roughly 40′ halo at 12 μm; even VISTA's wider frame cannot establish that the entire halo is included. A sufficiently large field and sufficient sensitivity to the intended emission are separate requirements.
 
 [Source-candidates metadata](source-candidates.json) records preview URLs, exact preview byte hashes, native links, field sizes, credits and terms. Previews use the ignored local cache when available, otherwise the publisher URL; no image processing is launched by selection. Before processing a chosen replacement: acquire/hash its native original, verify sky orientation and central-star registration, inspect the intended outer boundary, then explicitly remove stars and recompute evidence. Do not reuse the cropped source's pixel coordinates or NOX cache identity.
 
 Other inspected references: the [CFHT/Coelum optical composite](https://www.cfht.hawaii.edu/HawaiianStarlight/AIOM/English/CFHT-Coelum-AIOM-Mar2017.html) still clips its upper extended structures; its public high-resolution version requires a request. [Chatzifrantzis's 2025 APOD](https://apod.nasa.gov/apod/ap250729.html) shows strong optical outer structure, but the published image is watermarked and has no supplied astrometric registration; it is credited to the photographer, not a NASA observation. Neither is a processing input.
 
-## Current step: aligned observations and native star removal
+## Aligned observations and native star removal
 
 Open `/alignment?subject=helix-model-prior`. The **Image** dropdown shows one aligned photograph at a time. Switching keeps the camera and sky scale unchanged; there is no background reference image. **Matched stars** displays measured counterparts; pan/zoom to inspect them. Original / Without stars / Residual use the same native-pixel transformation. Fine adjustments and copied positioning remain separate from the measured fit. **Reload prepared layers** loads completed processing without changing the camera or local adjustments.
 
@@ -52,28 +72,11 @@ Both checks span all four quadrants and a broad overlap. The 1024 × 1024 refere
 
 All three full-native NOX separations completed: approximately 52.6 s for VISTA, 51.9 s for WFI and 36.9 s for the wider ESO image. Native dimensions, tile coverage and source = diffuse + residual accounting passed. The nine 2048-pixel-or-smaller inspection images preserve full aspect/coverage and have recorded hashes. **Bright stellar cores/halos remain in places; some compact nebular knot light enters the residual.** The user authorized a first structure-inspection pass using these inputs; their contamination must remain visible as uncertainty. Optical/infrared differences are also real band differences, not evidence of misregistration.
 
-To recreate this step from the repository root with Node, pnpm and Python 3.9–3.12 installed:
-
-```sh
-pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:packages
-python3 -m venv .local/open-star-removal/venv
-.local/open-star-removal/venv/bin/python -m pip install tensorflow==2.16.2 numpy==1.26.4 opencv-python-headless==4.11.0.86 scipy==1.13.1
-curl -fL https://github.com/charvey2718/nox/releases/download/v1.1.0/noxGeneratorColor.pb -o .local/open-star-removal/noxGeneratorColor.pb
-node --experimental-strip-types labs/nebula/src/run.ts prepare-observations labs/nebula/models/helix/observations.json --alignment-only
-node --experimental-strip-types labs/nebula/src/run.ts prepare-observations labs/nebula/models/helix/observations.json
-node --experimental-strip-types labs/nebula/src/run.ts prepare-observation-structures labs/nebula/models/helix/observation-structures.json
-node --experimental-strip-types labs/nebula/src/run.ts prepare-kinematics labs/nebula/models/helix/kinematics-oiii.json
-node --experimental-strip-types labs/nebula/src/run.ts molecular-acquire labs/nebula/models/helix/kinematics-hco.json
-node --experimental-strip-types labs/nebula/src/run.ts prepare-joint-fit labs/nebula/models/helix/joint-fit.json .local/nebula-lab/observations/helix/structures/catalogue.json
-pnpm exec vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort
-```
-
-The first preparation command acquires/verifies native originals and alignment without starting NOX; it also preserves existing separation layers after validating their matching receipts. The second explicitly performs native separation or validates/reuses its completed cache. Omit the server command if the lab already runs. New observations, native outputs, previews and correspondence receipts stay ignored under `.local/nebula-lab/observations/helix/`. Recipes and shared TypeScript remain tracked. Adding another object uses another recipe and an `observationAlignment` configuration; Alignment requires no baked volume.
+The [complete compiler setup](../../docs/emission-compiler.md#reproduce-from-a-clean-checkout) restores these stages automatically and reuses their matching native-removal receipts. For inspection-only preparation, use the [structure guide's complete sequence](../../docs/nebula-compiler.md). New observations, native outputs, previews and correspondence receipts stay ignored under `.local/nebula-lab/observations/helix/`. Recipes and shared TypeScript remain tracked. Alignment still requires no baked volume.
 
 Browser verification passed for all nine real layers, identical transforms and retained image nodes, full footprints, matched markers, pan/zoom, reload, saved manual adjustments/copy, and navigation among the density/symmetry/inference examples. Helix inspection issued no processing requests and loaded Alignment without a baked volume. A cache-only replay retained every completed layer and launched no inference. Removing the AVM offset path and the no-processing guard each makes a focused test fail. These checks establish registration/display/replay behavior, not star-removal quality or physical depth.
 
-The user authorized extraction of the new observations on 2026-09-11 and the subsequent joint-fit experiment on 2026-09-12. Keep the old Hubble volume distinct. Neither matching stars nor keeping a projected feature establishes the nebula's 3D form; the next decision uses the [joint model's residuals](../../docs/joint-fit.md).
+The user authorized extraction of the new observations on 2026-09-11 and the subsequent joint-fit and full compiler experiments on 2026-09-12. Keep the old Hubble volume distinct. Neither matching stars nor keeping a projected feature establishes the nebula's 3D form. The current assessment must compare the compiled volume, its image residuals and the [joint model's independent limits](../../docs/joint-fit.md).
 
 ## Difficulty and scientific basis
 
@@ -118,10 +121,10 @@ If the lab is already running, keep it alive and omit the last command. Choose *
 
 For each image ray, the prepared source RGB is distributed in proportion to the prior's depth weights. Empty support stays empty. Consequently front agreement on supported rays is imposed by construction; it is not evidence that the depth is correct. The prior remains unchanged when the image changes. The renderer samples the resulting RGB voxel field for every XYZ bank, never a stack of repeated source images.
 
-## First run and next decision
+## Historical first run and decision
 
 Native NOX took 22.4 seconds over 117 tiles, including encoding; both fits share its result. One-axis fitting took 14.6 seconds, 18.3 seconds through baking. The geometric allocation/bake took 3.4 seconds. Per-channel front relative L2 errors: single-axis 3.86/4.76/4.85%; prior 41.95/17.32/17.47%. The latter loses 25.75/9.98/10.57% of total R/G/B signal outside its modeled support. These numbers are not physical mass fractions.
 
 Both browser checks passed transport, retained PolyCSS rotation and refresh without processing. Screenshots at Front, Y +60°, Edge X and Edge Y were inspected. The visual failures above remain. Current tests protect the prior's empty center, absent support and unchanged depth when RGB changes. No independent scientific validation is claimed.
 
-One baseline per method has been produced; at most two controlled adjustments remain. The next useful change is to decide which published geometry to investigate, then add the missing extended components and constrain their thickness. Improving the prior may help the large shape; restoring knot-scale detail needs additional structure and observations. Do not try to rescue wrong geometry with exposure sliders or a larger bake.
+At this checkpoint, one baseline per method had been produced, with at most two controlled adjustments remaining. The proposed follow-up was to investigate published geometry, add missing extended components and constrain thickness. The wider observations, joint diagnostics and current compiler followed this failure; they do not retroactively accept it. Restoring knot-scale detail needs additional structure and observations. Do not try to rescue wrong geometry with exposure sliders or a larger bake.

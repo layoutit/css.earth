@@ -2,9 +2,9 @@
 
 Local React tooling for aligning photographs, removing stars and comparing baked 3D clouds. The retained PolyCSS renderer stays in plain TypeScript. The lab is separate from the production website; current objects are **LMC and SMC**, plus the [M2–9](models/m2-9/README.md) and [Helix](models/helix/README.md) image-to-volume experiments. The experiments have explicit preparation commands and unmeasured-depth assumptions.
 
-The [Helix experiment](models/helix/README.md) aligns three wider observations, compares native star removal and provides [2D structure inspection](docs/nebula-compiler.md) before depth inference. Its older Hubble-based volume baselines remain available for comparison; they are not results of the new observation stage.
+The [Helix compiler](docs/emission-compiler.md) turns three registered ESO observations into one conditional 3D emission cloud with three image lenses. **Reconstruction → Nebula → Compile nebula** restores the required inputs and runs the pipeline. Detail, faint-emission and depth controls update automatically after the first successful compile. The final cloud is the main view; alignment, structures and velocity comparisons remain diagnostics. Visual acceptance is still open.
 
-The shell is shared across three configured methods: **Density model** (LMC/SMC), **Symmetry** (M2–9), and **Constrained inference** (Helix). New objects select a method and supply recipes; shared registration, star separation and viewing tools remain object-agnostic. The current Helix step is **Alignment + star removal** for three wider ESO observations. Structure extraction on those new observations waits for visual acceptance. See [the staged workflow](docs/workflows.md#image-driven-methods).
+The shell is shared across three configured methods: **Density model** (LMC/SMC), **Symmetry** (M2–9), and **Constrained inference** (Helix). Objects select a method and supply recipes; shared registration, star separation and viewing tools remain object-agnostic. The compiler's depth and compact-light placement are model assumptions. Its older Hubble-based volumes remain failed comparison baselines. A second compiler object is deferred until the Helix machinery is assessed.
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
@@ -14,8 +14,11 @@ pnpm lab:nebula
 
 Open [Alignment](http://127.0.0.1:4331/alignment) or [Reconstruction](http://127.0.0.1:4331/reconstruction). Choose the object in the header; camera/density controls are on the left and image/cloud controls on the right.
 
+For the compiler's complete clean-state setup, including the pinned NOX environment/model and an offline compile, use [Compile an emission nebula](docs/emission-compiler.md#reproduce-from-a-clean-checkout).
+
 - **Alignment:** inspect the full density field and registered image footprint. Adjust the saved fit, run automatic NOX removal, and compare Original / Without stars / Residual.
-- **Reconstruction:** choose a completed starless source, adjust brightness/gamma/color/detail, then press **Preview**. Settings persist per image. Progress and Cancel are explicit; refresh reconnects to the job. Switching completed sources loads their saved banks at the retained camera pose.
+- **Nebula:** compile once, then adjust Detail, Faint emission and Depth. Lens, Neutral/Textured, Stars, Original and camera changes load or display prepared state without baking. Progress, Cancel, Retry, settings and refresh reconnection are retained.
+- **Density reconstruction:** choose a completed starless source, adjust brightness/gamma/color/detail, then press **Preview**. Settings persist per image. Progress and Cancel are explicit; refresh reconnects to the job. Switching completed sources loads their saved banks at the retained camera pose.
 - **Current LMC variants:** ESO VISTA, NASA/IPAC WISE and Horálek optical. They use separate color treatments and an approximate stellar-density depth prior. SMC has a neutral density model; extending this new reconstruction flow requires its own registered sources and recipe.
 - Large originals, native removal products and newly processed volumes stay in the ignored local cache. Neutral density slices and inspection/reference images regenerate at lab startup (missing native originals are downloaded). Extraction previews and production LMC slice textures are also ignored; the full bake restores them against saved hashes. Interactive lab processing does not publish or replace production assets.
 

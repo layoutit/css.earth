@@ -2,10 +2,11 @@
 
 ## Current app
 
-- [Next steps](../NEXTSTEPS.md): current extragalactic handoff and the next bounded reconstruction experiment.
+- [Next steps](../NEXTSTEPS.md): current compiler assessment and preserved handoff history.
 - [Research and papers](../RESEARCH.md): implemented method, novelty assessment and objects without a simulation.
-- [Workflow](workflows.md): Alignment → automatic star removal → explicit Preview → compare saved reconstructions.
-- [Structure review and nebula compiler](nebula-compiler.md): aligned Helix evidence, human filtering, and the physical constraints for later shape hypotheses.
+- [Workflow](workflows.md): the main Nebula compiler, source diagnostics and the separate density Preview workflow.
+- [Emission compiler](emission-compiler.md): complete clean-state setup, automatic fitting, prepared image lenses, durable jobs and conditional depth.
+- [Structure review](nebula-compiler.md): aligned Helix evidence, human filtering and separate editable shape hypotheses.
 - [Combined evidence](multimodal-workflow.md) and [joint 3D fit](joint-fit.md): multiband ridges, measured molecular velocities, alternative surfaces and withheld residuals.
 - [Bake command](baking.md): recreate the accepted lenses from pinned inputs and saved settings without browser state.
 - [Reconstruction](reconstruction.md): source selection, cache/jobs, exact current bake and depth limits.

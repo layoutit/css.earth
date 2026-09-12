@@ -5,11 +5,12 @@
 From the repository root:
 
 ```sh
-pnpm install --frozen-lockfile
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm build:packages
 pnpm lab:nebula
 ```
 
-Open [Alignment](http://127.0.0.1:4331/alignment). Startup recreates any missing LMC/SMC density slices from the tracked scalar grids; repeat starts verify and reuse them. Processing additionally needs the pinned native source, the local NOX environment/model for star removal, and the existing density prior. Missing inputs produce an actionable error; starting the viewer does not download or bake them. See [star-removal dependencies](star-removal.md#model-and-dependencies).
+Open [Alignment](http://127.0.0.1:4331/alignment). Startup restores neutral density and inspection/reference images, acquiring missing originals without running star removal or reconstruction. Repeat starts verify and reuse them. For the compiler's complete setup, including its Python environment, pinned NOX model and offline replay, use [Compile an emission nebula](emission-compiler.md#reproduce-from-a-clean-checkout).
 
 Do not restart an already running server to switch views. Legacy `?subject=…&tab=alignment|reconstruction` links normalize to the corresponding path. Object selection remains in the URL; camera and per-image adjustments are retained locally.
 
@@ -33,11 +34,13 @@ The object configuration selects the available depth evidence; it never selects 
 | Symmetry | Explicit axis, inclination and symmetry assumptions | M2–9 |
 | Constrained inference | Registered observations, then competing shape assumptions and external constraints | Helix |
 
-**For Helix, start at `/alignment?subject=helix-model-prior`.** The observation workspace shares one north-up angular frame across ESO WFI optical, the wider ESO field and VISTA infrared. It does not require a prepared volume. Select one image at a time; switching preserves the camera and sky scale, so corresponding stars stay in place. Native source pixel transforms remain fixed across Original / Without stars / Residual. Manual nudges are saved separately from the measured registration.
+**For Helix, open `/reconstruction?subject=helix-model-prior&inspection=compiler`.** The default **Nebula** view keeps the final cloud in the workspace. Press **Compile nebula** once; this authorizes source restoration, registration/star separation, structure preparation, the optional velocity scaffold, emission fitting and baking. Missing prepared files do not disable Compile. The configured current sources are already authorized; there are no intermediate acceptance clicks.
 
-Advance in visible steps: **alignment → inspect star removal → approve structure extraction → inspect structures and automatic projected shape fits → compare depth hypotheses**. Selecting an image or a prepared layer starts no processing. The planetary observation command currently prepares inputs offline; LMC's existing removal and reconstruction job buttons retain their own workflow. No new Helix structure map or volume is inferred automatically. Infrared and optical emission are allowed to differ after their stars align.
+After the first successful compile, **Detail**, **Faint emission** and **Depth** update automatically. Only the latest pending settings follow the active job; the previous cloud remains visible until the replacement decodes. Progress, **Cancel** and **Retry compile** are explicit. Refresh reconnects to the server-owned job and restores saved settings and camera. Cancellation does not restart work on refresh. Lens, **Neutral/Textured**, **Stars**, **Original**, **Earth view** and **Orbit** change prepared display state without baking.
 
-For the current Helix observations, **Reconstruction → Structure map** is the next inspection stage. Choose the ESO image, filter candidate morphology/scale/area/contrast/elongation, and mark individual regions **Keep / Unsure / Reject**. The prepared support overlay shows the detected pixels. Automatic projected geometry candidates add solid supported arcs and dashed extrapolations; these are fitted image-space hypotheses, not recovered 3D objects. The operator checks proposed geometry rather than drawing every guide manually. Reviews persist per source/extraction, and filters start no processing. **Volume** explicitly loads the older Hubble baseline. See [the extraction command, limits and physics plan](nebula-compiler.md).
+**Alignment** remains available at `/alignment?subject=helix-model-prior`. Its north-up angular frame registers ESO WFI optical, the wider ESO field and VISTA infrared. One image is visible at a time; switching preserves the camera and sky scale. Original / Without stars / Residual use the same native-pixel transform, and manual nudges remain separate from measured registration. Infrared and optical emission may differ after their stars align. Browsing a source or layer starts no processing.
+
+**Structure map** is a diagnostic for prepared morphology/scale/area/contrast/elongation and **Keep / Unsure / Reject** reviews. Supported arcs and dashed extrapolations are image-space hypotheses, not recovered physical objects. Reviews persist per source/extraction; filters start no processing. **Volume** loads the older failed Hubble baseline. See [structure inspection](nebula-compiler.md) and the [compiler's method and limits](emission-compiler.md).
 
 **Combined** inspects the three registered sources together. **Joint fit** automatically fits a coarse molecular shell/lobe pair to connected image ridges and published HCO+ velocities, then compares the prepared neutral volumes with withheld measurements. Sliders refit; source/candidate/camera switches only inspect. The separate **Velocity** view retains the inner [O III] slit. See [the joint-fit workflow and limits](joint-fit.md) before interpreting these conditional models as depth.
 
@@ -72,6 +75,7 @@ Current processing repaints the Alignment density cloud’s exact 144 prepared q
 | Native NOX outputs | `.local/nebula-lab/star-removal-nox-applied/`; diffuse, residual, mask and receipts |
 | Running/saved job records | Separate star-removal and reconstruction job directories in the local cache |
 | Completed reconstruction banks | `.local/nebula-lab/reconstructions/`; descriptors, XYZ textures, provenance and manifest |
+| Compiler jobs and results | `.local/nebula-lab/compiler-jobs/` and `.local/nebula-lab/compiler/<result-id>/`; field, method, comparison images and shared lens banks |
 | Explicit lens-settings handoff | **Save lens settings** in Reconstruction writes `.local/nebula-lab/lens-settings/latest.json` and an immutable timestamped receipt |
 | Versioned recipes/evidence | `models/lmc/`, `models/smc/`, shared recipe files and `sources/` |
 
@@ -88,3 +92,5 @@ Read [AGENTS.md](../AGENTS.md) for module ownership and development rules. Histo
 ## Replay without browser state
 
 Use the [bake command](baking.md) to rebuild the accepted three-source LMC bank. It owns acquisition, the saved baseline and NOX pass, fixed-density coloring, catalogue-star placement and saved display settings. It also restores ignored extraction previews and the configured app slice textures against their accepted hashes. Interactive jobs and the running server remain independent.
+
+Use the [emission compiler command](emission-compiler.md#reproduce-from-a-clean-checkout) for configured inference subjects. It restores its source stages and compiles recipe defaults without browser state. This remains a local experimental cloud; it does not promote a production asset.

@@ -107,7 +107,8 @@
       "methodUrl": "https://doi.org/10.1086/424621",
       "statusNote": "Previous Hubble baseline: outer emission omitted; side detail unresolved. Not fitted from the ESO structure candidates.",
       "kinematicsSource": "labs/nebula/models/helix/kinematics-oiii.json",
-      "jointFitSource": "labs/nebula/models/helix/joint-fit.json"
+      "jointFitSource": "labs/nebula/models/helix/joint-fit.json",
+      "compilerSource": "labs/nebula/models/helix/compiler.json"
     },
     "sourcePageUrl": "https://esahubble.org/images/opo0432b/",
     "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute).",

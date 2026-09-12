@@ -2,11 +2,15 @@
 
 Updated 2026-09-12. Research sources and method status are in [RESEARCH.md](RESEARCH.md). The current reproducible pipeline is in [METHOD.md](METHOD.md).
 
-**Active next decision:** inspect the [joint molecular-wall fit](docs/joint-fit.md) at `/reconstruction?subject=helix-model-prior&inspection=joint`. It now combines connected ridges from the three aligned ESO observations with published HCO+ velocities, retaining two coarse 3D alternatives and withheld residuals. Both single-component surfaces leave substantial unexplained structure. The next bounded experiment is a coherent component combination or constrained swept wall using the same evidence and velocity holdout. Preserve the independent ionized-core slit, original photographs and earlier failed baselines; do not treat a smooth fitted surface as recovered density.
+**Active next decision:** assess the [emission compiler](docs/emission-compiler.md) at `/reconstruction?subject=helix-model-prior&inspection=compiler`. One Compile produces the main cloud from the three aligned ESO sources, with a molecular velocity scaffold, multiscale positive emission and three RGB-only lenses. Check front, oblique and side structure, faint coverage, compact-light contamination and source registration. Validate automatic control updates, refresh, Cancel/Retry and retained camera against the actual completed result. Visual acceptance remains open; another compiler nebula is deferred until this machinery works.
+
+The [joint molecular-wall fit](docs/joint-fit.md) remains an independent diagnostic with alternative surfaces and withheld residuals. Its single-component models leave substantial unexplained structure. Preserve the separate ionized-core slit, original photographs and failed Hubble baselines. Better image reprojection cannot establish individual depths or physical density.
+
+The full compiler now runs through a textured, rotatable result with shared stars and three lenses; [its current receipt and visual assessment](models/helix/README.md#compiler-checkpoint--2026-09-12) record the evidence. Next, address **color placement in the continuous field**: VISTA retains oblique streaks even with finer slab spacing. Compare emission-weighted slab color integration with fitting per-component color coefficients, keeping neutral geometry/alpha fixed and checking the Earth projection. Also distinguish residual stellar halos from real faint nebular emission before fitting more components. These are follow-up experiments, not established solutions. Add the second nebula after this final-output comparison is assessed.
 
 **M2–9 baseline:** the [image-to-volume experiment](models/m2-9/README.md) remains available. Front/oblique/side views show connected lobes, with remaining ring artifacts, background and color/brightness differences. It is not promoted; see [planetary-nebulae.md](docs/planetary-nebulae.md).
 
-**Helix comparison:** [two completed trial recipes](models/helix/README.md) share one full-native Hubble/CTIO image and NOX separation. One-axis fitting fails from the side; the published-diameter/orientation disk/ring prior gives distinct components but is oversimplified and omits outer signal. Neither passes visual acceptance. Next, constrain the component thicknesses and halo or test a joint component fit; higher image resolution alone cannot fix the current depth assumptions.
+**Historical Helix comparison:** [two completed trial recipes](models/helix/README.md) share one full-native Hubble/CTIO image and NOX separation. One-axis fitting fails from the side; the published-diameter/orientation disk/ring prior gives distinct components but is oversimplified and omits outer signal. Neither passes visual acceptance. Those failures motivated the current wider-source compiler; higher image resolution alone cannot repair their depth assumptions.
 
 ## Completed handoff: LMC into the extragalactic app
 
@@ -17,9 +21,9 @@ Updated 2026-09-12. Research sources and method status are in [RESEARCH.md](RESE
 5. Integrate the lenses into the app's existing object/sidebar mechanism and shared world renderer. Do not introduce a separate LMC page owner or runtime image processing. Preserve existing M31 and SMC renderings and the other extragalactic objects.
 6. Verify actual LMC world placement, orientation, scale, lens switching and retained camera. Verify stars and labels in context and byte preservation for untouched M31/SMC sources. Open the resulting local app for the user.
 
-## Next experiment: reconstruct a cloud without a simulation
+## Earlier research plan: reconstruct a cloud without a simulation
 
-The checklist below records the research path. A small M2–9 baseline now covers the 2013 method, explicit assumptions and a first XYZ bake; it is not a production feature or authorization for large jobs.
+The checklist below preserves the research path that led to the M2–9 baseline and Helix compiler. Current work is the compiler assessment above; this list does not authorize a second object or production promotion.
 
 1. Read the Wenger 2012 method and 2013 follow-up in full. Check available code and licensing before reuse. Record exact algorithmic assumptions; do not infer them from an abstract.
 2. Choose **one** roughly symmetric planetary nebula with a high-quality, sufficiently wide observation and published morphology/distance. A shell or bipolar example is a better first test than Orion/Tarantula.
@@ -39,7 +43,7 @@ The checklist below records the research path. A small M2–9 baseline now cover
 
 ## Do not lose these boundaries
 
-- The currently accepted shape reference is the exact Alignment density cloud. Older photo-derived benchmarks are historical experiments.
+- For the density method, the accepted shape reference is the exact Alignment density cloud. The separate emission compiler has conditional depth; older photo-derived benchmarks remain historical experiments.
 - Source registration and the image-to-simulation visual fit are different; preserve both.
 - Candidate photos change the material, not the star catalogue or the model's extent.
 - A plausible volume is not a measured gas-density reconstruction. Record priors and uncertainty.

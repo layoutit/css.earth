@@ -1,8 +1,8 @@
-# Nebula compiler: first inspect the evidence
+# Nebula structure and shape diagnostics
 
-Updated 2026-09-12. **Current stage: inspect combined multiband evidence and a separate measured velocity slit.** See the [multimodal workflow](multimodal-workflow.md) and [research leads](multimodal-research.md). The existing per-image workbench still compares structure before color against each aligned ESO observation. Detected image contours seed editable ellipsoidal emission hypotheses; prepared luminance, edges and signed residual expose their mismatch before texturing. The model can also be viewed beside, above or painted with the source. This is an inspection prototype, not a validated reconstruction. The prior Hubble-based Helix volumes remain failed comparison baselines.
+Updated 2026-09-12. **The main cloud now uses the [emission compiler](emission-compiler.md).** This page retains the separate structure inspector and editable shape experiments; they require no acceptance clicks before an authorized full Compile. See also the [multimodal workflow](multimodal-workflow.md) and [research leads](multimodal-research.md). The per-image workbench compares prepared luminance, edges and signed residual before color. Detected contours seed editable ellipsoidal hypotheses, not validated physical structures. The prior Hubble-based Helix volumes remain failed comparison baselines.
 
-## Intended contract
+## Structure experiment contract
 
 ```text
 registered observations
@@ -16,9 +16,9 @@ registered observations
 
 The compiler should preserve an intermediate evidence model, then compare hypotheses rather than return one unexplained geometry. In transparent emission, front/back permutations can give the same projection. Image scales, colors and aligned ridge directions are not measurements of depth. Velocities, extinction and appropriate physical priors can provide extra constraints; more photographs from the same direction are not new viewing angles.
 
-## Human review before depth
+## Inspect the evidence
 
-The current observations are ESO VISTA infrared, ESO WFI optical detail and the wider ESO field. Reuse their completed native NOX diffuse images and the star-verified registration from [the observation step](../models/helix/README.md#current-step-aligned-observations-and-native-star-removal). Do not rerun star removal, analyze the smaller alignment previews, crop to a ring or use the Hubble baseline accidentally.
+The current observations are ESO VISTA infrared, ESO WFI optical detail and the wider ESO field. Reuse their completed native NOX diffuse images and the star-verified registration from [the observation step](../models/helix/README.md#aligned-observations-and-native-star-removal). Do not rerun star removal, analyze the smaller alignment previews, crop to a ring or use the Hubble baseline accidentally.
 
 The inspector lets the operator:
 
@@ -41,7 +41,7 @@ Scale regions overlap and recur; their count is not the count of physical struct
 
 These are hypotheses to compare, not automated classifications. For planetary nebulae, interacting winds, ionization, evaporation and interaction with the surrounding medium motivate different constraints. A shape merely looking like a shell does not demonstrate that its formation is dynamically possible. A morpho-kinematic fit is also not a hydrodynamic simulation.
 
-After projected detection is useful, the next bounded experiment should fit a few explicit shell/barrel/bipolar alternatives to accepted automatically detected landmarks and widths. Fit the measured projections, constrain velocity where data exist, and retain an unconstrained-depth designation elsewhere. Do not force optical and infrared RGB values to match, infer front/back from color alone, assume homologous expansion without justification, or silently discard an outer component that does not fit. Compare several plausible solutions when the data cannot distinguish them.
+The [joint fit](joint-fit.md) now compares explicit molecular shell/lobe alternatives, and the [emission compiler](emission-compiler.md) uses a fitted surface as an optional scaffold for a multiscale field. Retain an unconstrained-depth designation where observations do not constrain the model. Do not force optical and infrared RGB values to match, infer front/back from color alone, assume homologous expansion without justification, or silently discard an outer component that does not fit. Compare plausible solutions when the data cannot distinguish them.
 
 Primary references and what they actually support:
 
@@ -219,11 +219,11 @@ node --experimental-strip-types labs/nebula/src/run.ts test structure-map struct
 pnpm exec vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort
 ```
 
-The first prepare command restores the existing comparison volume needed by the current viewer; it does not create a new inferred geometry. The second generates the structure map. Open `/reconstruction?subject=helix-model-prior`. If the lab already runs, keep it alive and omit the server command. All generated images, float fields, graph output and native caches remain ignored under `.local/nebula-lab/`; track the recipe and TypeScript implementation only.
+The first prepare command restores the historical comparison volume; it does not create a new inferred geometry. The second generates its structure map. Open `/reconstruction?subject=helix-model-prior&inspection=volume` for that baseline. If the lab already runs, keep it alive and omit the server command. All generated images, float fields, graph output and native caches remain ignored under `.local/nebula-lab/`; track the recipe and TypeScript implementation only.
 
-## Next experiment, after inspecting the shape cloud
+## Earlier shape-cloud research plan
 
-The user authorized structure inspection of the [aligned wider observations](../models/helix/README.md#current-step-aligned-observations-and-native-star-removal) on 2026-09-11, then the editable shape-cloud comparison. The next acceptance gate is whether the neutral model explains the main projected features and which unsupported emission needs another model family. The complete downloaded Hubble frame is not the complete nebula; its numerical benchmark above remains historical.
+The user authorized structure inspection of the [aligned wider observations](../models/helix/README.md#aligned-observations-and-native-star-removal) on 2026-09-11, then the editable shape-cloud comparison. The plan below records that experiment's questions. Current work assesses the [emission compiler](emission-compiler.md); this historical plan adds no approval stages to it. The complete downloaded Hubble frame is not the complete nebula; its numerical benchmark above remains historical.
 
 1. Inspect automatically fitted arcs/ellipses and their neutral cloud contribution, especially faint outer regions and possible NOX damage. Use scope controls and Solo to distinguish duplicate contours from missing components. Assess supported intervals rather than accepting full extrapolated ellipses. If relationships remain unreliable after the bounded prototype adjustments, identify the detector limitation instead of hiding it with texture.
 2. Compare three coarse interpretations: a deformed shell, a barrel-like shell, and a bipolar structure, each with a separately represented outer component. Derive projected landmarks from accepted image evidence. Bound depth and orientation using published alternatives. Do not silently inflate rings or extrude the full rectangular image.

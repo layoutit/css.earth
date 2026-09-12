@@ -46,7 +46,7 @@ export interface LabSubjectRecord {
   modelNote?: string;
   framingRadiusUnits?: number;
   hasDetail?: boolean;
-  emissionExperiment?: { directory: string; modeled?: boolean; methodUrl?: string; statusNote?: string; structureDirectory?: string; sourceCatalogue?: string; observationStructures?: string; kinematicsSource?: string; jointFitSource?: string };
+  emissionExperiment?: { directory: string; modeled?: boolean; methodUrl?: string; statusNote?: string; structureDirectory?: string; sourceCatalogue?: string; observationStructures?: string; kinematicsSource?: string; jointFitSource?: string; compilerSource?: string };
   comparisonGroup?: string;
   reconstructionImage?: { group: string; label: string; note: string };
   referenceProjectionScale?: number;
@@ -75,6 +75,8 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
     throw new TypeError('Invalid kinematics source path.');
   if (record.emissionExperiment?.jointFitSource !== undefined && (!relativePath(record.emissionExperiment.jointFitSource) || !record.emissionExperiment.observationStructures))
     throw new TypeError('Joint fitting requires registered observations and a valid recipe.');
+  if (record.emissionExperiment?.compilerSource !== undefined && (!relativePath(record.emissionExperiment.compilerSource) || !record.emissionExperiment.observationStructures))
+    throw new TypeError('Nebula compilation requires registered observations and a valid recipe.');
   const sharedDensity = record.density && subjectRecords.filter(item => item.density?.directory === record.density!.directory);
   const configuredRadii = sharedDensity?.flatMap(item => item.density?.referenceFramingRadiusUnits === undefined ? [] : [item.density.referenceFramingRadiusUnits]) ?? [];
   if (configuredRadii.some(value => !Number.isFinite(value) || value <= 0) || new Set(configuredRadii).size > 1)

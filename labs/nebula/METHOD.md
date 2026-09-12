@@ -4,11 +4,13 @@ This is the repeatable workflow for bringing observed images into the lab, separ
 
 **Without an existing density model:** the separate [planetary-nebula experiment](docs/planetary-nebulae.md) fits a plausible emission field from an image plus symmetry assumptions before baking. Its M2–9 recipe is not a replacement for the fixed LMC density workflow described below.
 
-**Choose the method from the evidence:** `density` uses an independent spatial prior; `symmetry` declares an axis/inclination; `inference` preserves image evidence and compares alternative geometry. All methods share the lab shell and source-registration/separation utilities. Helix automatically proposes projected arc/ellipse fits from the three aligned ESO images, then groups nearby duplicate contours to initialize editable ellipsoidal emission hypotheses. This needs no hand-drawn primitives. The new shape-cloud comparison is an experiment, not an accepted replacement for the historical volumes. Observation colors and shapes can differ by wavelength even when field stars align correctly.
+**Choose the method from the evidence:** `density` uses an independent spatial prior; `symmetry` declares an axis/inclination; `inference` preserves image evidence and compares conditional geometry. All methods share the lab shell and source-registration/separation utilities. Helix now uses the [emission compiler](docs/emission-compiler.md) for its main cloud; projected shape editing and joint molecular-wall comparisons remain diagnostics. Observation colors and shapes can differ by wavelength even when field stars align correctly.
+
+**Current inference stage:** **Nebula → Compile nebula** runs the authorized pipeline from pinned observations to one prepared cloud. Independent per-image normalization forms a combined relative-luminosity target with explicit coverage. A bounded positive multiscale fit supplies projected emission; an optional velocity-conditioned scaffold and an explicitly uncertain halo supply its depth. Near/far allocation and thickness remain assumptions. Every image lens repaints the same geometry and alpha, and compact lights use observed sky positions with conditional field depths. None of these products is calibrated gas density or confirmed stellar membership. The [compiler guide](docs/emission-compiler.md) records setup, controls, replay and limits; visual acceptance remains open.
 
 **Current density stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Preview** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the Alignment density cloud; it does not recover measured gas depth.
 
-## Order of operations
+## Density method: order of operations
 
 ```text
 Pinned original + source metadata
@@ -34,7 +36,7 @@ Star detections → verified image registration → full-density overlay
                  Same geometry/alpha → rotation review
 ```
 
-Image import and registration do not themselves authorize separation or a volume bake. An explicit user instruction for named candidates or a processing-button click authorizes that operation; do not request the same approval again. Never skip alignment because an image looks approximately right.
+Image import and registration do not themselves authorize separation or a volume bake. An explicit user instruction for named candidates or a processing-button click authorizes that operation; do not request the same approval again. A full **Compile nebula** authorizes its configured source and fit stages together, while preserving their validation. Never skip alignment because an image looks approximately right.
 
 ## 1. Acquire and preserve the observation
 
@@ -102,7 +104,7 @@ Original-image inspection uses up to 2048px within four million pixels. The clou
 
 ## Shape-cloud inference preview
 
-For an `inference` subject, use the [shape-cloud workbench](docs/nebula-compiler.md#shape-cloud-comparison) after inspecting aligned, separated image evidence. Start with **Structure** to compare source and model in grayscale, inspect edges, and reveal missing/excess signal with shared display levels. **Compare / Overlay / Textured** show the registered photograph beside, behind or painted onto the same cloud. Earth view preserves registration and linked framing. Unlock rotation and drag either 3D pane to rotate both; the source remains a flat plane. The corner axes identify image X/Y and the original direction toward Earth.
+The [shape-cloud workbench](docs/nebula-compiler.md#shape-cloud-comparison) remains a separate diagnostic for editable shape hypotheses. The compiler's main **Nebula** view does not require these manual edits. In the diagnostic, start with **Structure** to compare source and model in grayscale, inspect edges, and reveal missing/excess signal with shared display levels. **Compare / Overlay / Textured** show the registered photograph beside, behind or painted onto the same cloud. Earth view preserves registration and linked framing. Unlock rotation and drag either 3D pane to rotate both; the source remains a flat plane. The corner axes identify image X/Y and the original direction toward Earth.
 
 - Detected contours initialize the components automatically. Nearby duplicate brightness boundaries share one shell; distinct projected-center groups remain selectable. No hidden photo-column normalization makes the model match the image.
 - In **Shapes**, the visible **Detector** has Sensitivity (25–400%, default 100%), Min. size (minimum ellipse radius, 2–40% of the shorter image side; default 7%), and Max. shapes (1–32, default 12). Slide to update the structures and cloud directly: a bounded draft during dragging and full refinement after release. No Detect/Apply step or view switch. The retained viewer keeps its camera; source-scoped settings and server-owned jobs survive refresh. Reuse the existing starless raster, never another NOX run. Every geometry has its own saved shape edits. Sensitivity lowers contrast/edge thresholds; it cannot establish whether faint light belongs to the nebula. See the [actual Helix fitting trial](docs/helix-fitting-trial.md) before extending this detector.
