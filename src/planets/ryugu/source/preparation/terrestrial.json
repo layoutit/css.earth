@@ -31,6 +31,10 @@
             0.035
           ],
           "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       {
@@ -39,6 +43,10 @@
           "kind": "image-rgb-no-data",
           "noData": 0,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     ],

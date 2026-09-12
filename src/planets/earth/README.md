@@ -33,6 +33,14 @@ The linked reports identify their tested sources, prepared files and limitations
 - **Surface:** source restoration, 179-file image installation and browser checks.
   The report records an ownership-test failure and excludes full-suite success.
   [Surface verification results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth/cloud-free-default/README.md).
+- **Photographic source sampling, 12 September 2026:** the pinned July JPEG and
+  cloud TIFF were sampled at the existing atlas footprints, then 58 current
+  surface assets were staged and applied. The 29 clear-surface files total
+  18,087,832 bytes, up 1,972,070 bytes (12.24%) from the baseline inventory;
+  the 29 cloud files total 33,073,610 bytes, up 1,264,694 bytes (3.98%). The
+  51,161,442-byte combined download is 3,236,764 bytes larger. This receipt
+  verifies source, recipe, raster-plan and texture-level pins; it is
+  preparation evidence, not a browser review.
 - **Scientific maps:** numeric height checks, six independent tomography anchors and
   geographic registration. [Elevation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/earth-elevation/README.md) ·
   [Tomography](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/planet-cross-sections.md) · [Night-light interpretation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-night-lights.md) ·
@@ -68,14 +76,25 @@ Named features run of 2026-09-12 (this version): `node tools/objects/dist/prepar
 The OpenSpace Earth asset configuration at commit `56e29b54b8592084ff1fef47c2e08de0b22ce516` is
 checked beside the image sources. It records the upstream parameters used in preparation.
 
-The July mosaic uses a display-only midtone lift before atlas rasterization: each RGB code
-value becomes `round(255 * (value / 255) ** (1 / 1.25))`. Black and white endpoints are
-unchanged. This is a presentation adjustment, not radiometric calibration or recovered albedo.
+The July mosaic uses a display-only midtone lift: each sampled RGB code value becomes
+`round(255 * (value / 255) ** (1 / 1.25))`. Black and white endpoints are unchanged.
+This is a presentation adjustment, not radiometric calibration or recovered albedo.
 
-The same adjusted base feeds the clear surface, cloud composite, cutaway exterior, thumbnails
-and minimaps; the original source JPEG remains unchanged. Scientific dataset palettes and the
-prepared lighting/atmosphere banks are unaffected. Dataset selection is manual at every zoom
-level.
+For the clear and cloud views, preparation bilinearly samples the complete 21,600 × 10,800
+July grid at each existing page or polar-footprint coordinate instead of first resampling it to
+the 8,192 × 4,096 canonical map. The cloud view independently samples the complete
+8,192 × 4,096 cloud TIFF at the same geographic coordinate, applies the midtone lift to the
+July value, then applies the existing cloud alpha recipe. This keeps the source grids separate;
+it does not make the July surface and cloud observation simultaneous or turn display RGB into
+calibrated albedo.
+
+The prepared page layout remains fixed: seven 4,096-pixel-wide pages per view, their existing
+512/1,024/2,048-pixel texture levels, and one 2,048 × 512 pole atlas. The existing 4,096-pixel
+page size, density-8 atlas, four-pixel gutter and 450 retained surface leaves are unchanged.
+No source projection, Earth geometry, lighting, atmosphere, scientific palette or runtime
+selection rule changed. The same adjusted base still feeds the clear surface, cloud composite,
+cutaway exterior, thumbnails and minimaps; the original source JPEG remains unchanged.
+Dataset selection is manual at every zoom level.
 
 Visible color and Cloud coverage share the adjusted July surface. Cloud coverage adds the
 archival NASA cloud TIFF using the existing alpha recipe. The sources are not simultaneous

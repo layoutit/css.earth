@@ -62,8 +62,12 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       const emission = maybeRecord(raster.emission);
       if (emission) outputUrls.push(...numbers(raster.densities).flatMap(d => [name(emission.offLimbOutput, d, plan.id), name(emission.limbOutput, d, plan.id)]));
       const synoptic = maybeRecord(maybeRecord(plan.science)?.synoptic);
-      add(plan.id, 'raster', `/surfaces/${index}`, used, 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
+      const nativePoles = plan.nativeSourcePoles || maybeRecord(plan.science)?.nativePhotographicSampling;
+      add(plan.id, 'raster', `/surfaces/${index}`, used, nativePoles
+        ? 'Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.'
+        : 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
         urls: outputUrls, interpretation: { falseColor: plan.falseColor,
+          ...(nativePoles ? { polarSampling: 'original-photograph-footprint' } : {}),
           ...(surface(plan.id)?.coverageCompletion ? { coverageCompletion: surface(plan.id)?.coverageCompletion } : {}),
           ...(synoptic ? { synoptic: { kind: synoptic.kind, ...(synoptic.fits ? { fits: synoptic.fits } : {}), ...(maybeRecord(synoptic.continuum) ? { observationInterval: synoptic.continuum } : {}) } } : {}) },
       });
@@ -93,8 +97,11 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       // This is the same lensId/consumer join used by prepareSolidRasters.
       const observation = manifest.inputs.filter(input => input.consumers.includes('surfaces') && input.lensId === plan.id);
       add(plan.id, 'terrestrial', `/raster/observations/${index}`, observation.map(input => input.path),
-        'Apply the source-defined validity and registration policy, then prepare the projected observation texture.', {
-          parents: plan.monochromeBase ? [text(plan.monochromeBase)] : [], interpretation: { validity: plan.validity },
+        plan.nativePhotographicSampling
+          ? 'Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.'
+          : 'Apply the source-defined validity and registration policy, then prepare the projected observation texture.', {
+          parents: plan.monochromeBase ? [text(plan.monochromeBase)] : [], interpretation: { validity: plan.validity,
+            ...(plan.nativePhotographicSampling ? {nativePhotographicSampling:plan.nativePhotographicSampling} : {}) },
         });
     });
     for (const kind of ['scientific', 'mosaics', 'observedColors', 'shapeViews', 'surfaceObservations']) {
@@ -162,7 +169,9 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
           ? 'Decode signed terrain heights and coordinate axes, interpolate elevations, apply the authored palette and cartographic relief, and prepare the globe, minimap and unshaded legend.'
           : maybeRecord(map.scientific)?.kind === 'black-marble-radiance'
             ? 'Decode pinned annual snow-free radiance, average native cells by spherical area before applying logarithmic false color, and prepare the globe, poles, minimap, thumbnail and legend. Preserve missing coverage separately from valid zero radiance.'
-          : 'Prepare the global reference map and its declared cloud composite.',
+          : map.nativePhotographicSampling
+            ? 'Sample the original photographic grids at each retained atlas footprint, apply the declared display transfer and cloud composite, and encode the existing texture layout.'
+            : 'Prepare the global reference map and its declared cloud composite.',
         maybeRecord(map.scientific)?.kind === 'gebco-elevation' ? {
           interpretation: { kind: 'modeled-elevation', units: 'm', datum: 'mean sea level',
             grid: record(map.scientific).grid, palette: record(map.scientific).palette, relief: record(map.scientific).relief },

@@ -36,6 +36,55 @@ maps become two levels, chosen by the same texels-per-CSS-pixel rule
 
 ## Decode the source before choosing its display
 
+### Preserve photographic detail through preparation
+
+A large source can still produce a soft texture if preparation resizes it to an
+intermediate map and then samples that map again for an atlas or pole. Trace the
+actual path before increasing texture dimensions. Latitude-band packing itself
+copies pixels and adds gutters; it does not need an image filter.
+
+The direct photographic paths sample the pinned original grid at the final
+texture coordinates. Terrain atlases use the existing leaf transforms and a
+2 × 2 subpixel footprint. Polar sprites retain their existing projection and
+footprint. Earth samples Blue Marble and clouds on their separate native grids,
+then applies the declared display transfer and cloud composite. These changes
+affect preparation, without adding faces, runtime work or decoded texture pixels.
+
+Source coordinates, validity and presentation still govern the result:
+
+- Respect pixel centres, map origins, positive-east/positive-west conventions
+  and cropped extents. A projection's central meridian is not its left edge.
+- Reject interpolation footprints that include missing source contributors.
+  Apply the gray coverage grid afterwards; valid black pixels remain observations.
+- Preserve required mosaicking, spectral calculations, photometric correction
+  and authored presentation transforms. Bypassing a necessary composite is not
+  an image-quality improvement.
+- Resize an unpacked map before copying it into latitude bands. Filtering an
+  already packed map can mix stored strips and their gutters.
+
+Compare identical product views, including shadow settings, and keep encoding
+quality fixed in a control comparison. Record compressed bytes separately from
+decoded dimensions. A higher WebP quality can help independently of sampling;
+neither method creates detail absent from the observations. Source coverage and
+photograph-to-shape registration require their own evidence.
+
+The current native sampling recipes cover these existing presentations:
+
+| Preparation path | Bodies | Affected views |
+| --- | --- | --- |
+| Retained terrain atlases | Bennu, Deimos, Dione, Enceladus, Eros, Gaspra, Ida, Mathilde, Mimas, Phobos, Rhea, Ryugu, Steins, Tethys, Vesta | 22 photographic views |
+| Spherical polar sprites | Ariel, Callisto, Ceres, Charon, Europa, Ganymede, Iapetus, Io, Mars, Miranda, Oberon, Pluto, Titan, Titania, Triton, Umbriel, Venus | 23 photographic views; latitude-band maps keep their existing pixels |
+| Unpacked resizing | Mercury | Three 1× maps; the three canonical 2× maps reproduce their previous hashes |
+| Paged surface and poles | Earth | Clear surface and cloud composite, including their existing lower resolution pages |
+| Observed polar atlas | Neptune | Visible color; the atmospheric calibration remains before sampling |
+
+This is not a blanket bypass of image processing. Controlled camera mosaics,
+observed-color registration, scientific fields, solar products and giant-planet
+composites keep the processing that defines their meaning. The Moon's current
+presentation includes authored color and sharpening operations, which also stay
+in place. Low-resolution or unobserved source areas cannot gain measured detail
+from this change.
+
 ### Format and field references
 
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation)

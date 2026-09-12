@@ -14,6 +14,14 @@
 
 ## Evidence
 
+The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
+
+| View | Original grid | Both lighting images, before → current |
+| --- | --- | --- |
+| normal | 16098 × 8049 | 8.31 → 12.18 MB |
+
+Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/enceladus/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
+
 - The formal pinned Python environment reproduced the exact ZIP hash (see [docs/moons/b2-preparation/enceladus-dsk-reproduction.json](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b2-preparation/enceladus-dsk-reproduction.json)).
 
 - The visual-trial candidate uses 2,000 source-preserving native triangles with regularization and a 2,523 m rendering error ceiling. Four barycentric positions on every retained triangle gave a maximum one-way source distance of 1,822.01 m; source Cartesian extrema differ by at most 533 m. These rendering measurements are not source uncertainty or an exhaustive Hausdorff bound.

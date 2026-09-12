@@ -28,7 +28,8 @@
       "source": "surface/mars-viking-mdim21-color-1km.jpg",
       "falseColor": false,
       "output": "mars-surface-{id}{suffix}.webp",
-      "thumbnail": "mars-lens-{id}.webp"
+      "thumbnail": "mars-lens-{id}.webp",
+      "nativeSourcePoles": true
     },
     {
       "id": "elevation",

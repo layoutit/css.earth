@@ -14,6 +14,14 @@ Venus shows a cloud map, Magellan radar and elevation displays, modeled atmosphe
 
 ## Evidence
 
+Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
+
+| View | Both prepared levels, before → current |
+| --- | --- |
+| clouds | 110.0 → 117.6 kB |
+
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/venus/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+
 The sky section records camera-fit comparisons. No dated test or browser-run report is cited.
 
 ## Known problems
