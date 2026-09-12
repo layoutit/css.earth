@@ -234,12 +234,6 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
           setHiddenOrbits(ids: readonly string[]) { spatial!.setHiddenOrbits(ids); },
           setHiddenBodies(ids: readonly string[]) { spatial!.setHiddenBodies(ids); },
           setHiddenLabels(ids: readonly string[]) { spatial!.setHiddenLabels(ids); },
-          /** Diagnostics only: stop star selection and rendering until re-enabled. */
-          setStarfieldEnabled(enabled: boolean) {
-            if (destroyed) return;
-            pointField!.setEnabled(enabled);
-            requestPublication?.();
-          },
           setSuppressedLabels(ids: readonly string[]) { spatial!.setSuppressedLabels(ids); },
           setRotationActive(active: boolean) { spatial!.setRotationActive(active); pointField!.holdSelection(active); },
           setHiddenIndicators(ids: readonly string[]) { spatial!.setHiddenIndicators(ids); },

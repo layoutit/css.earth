@@ -180,6 +180,11 @@ const searchCategories = ([
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
     <label class="planet-setting-control">
+      <input class="planet-asteroid-bodies-setting" type="checkbox" name="asteroidBodies" />
+      <span class="planet-setting-text">Asteroids</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
+    <label class="planet-setting-control">
       <input class="planet-asteroid-orbits-setting" type="checkbox" name="asteroidOrbits" />
       <span class="planet-setting-text">Asteroid orbits</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
@@ -355,15 +360,6 @@ const searchCategories = ([
 </nav>
     <div class="planet-view-readout" aria-label="View information">
       {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
-      {DIAGNOSTICS_ENABLED && <label class="planet-diagnostic-toggle" title="Temporarily stop rendering and updating the 3D starfield">
-        <input type="checkbox" data-disable-starfield disabled /> Disable starfield
-      </label>}
-      {DIAGNOSTICS_ENABLED && <label class="planet-diagnostic-toggle" title="Temporarily hide the minimap and stop its updates">
-        <input type="checkbox" data-hide-minimap disabled /> Hide minimap
-      </label>}
-      {DIAGNOSTICS_ENABLED && <label class="planet-diagnostic-toggle" title="Temporarily hide asteroid dots, labels and orbits">
-        <input type="checkbox" data-hide-asteroids disabled /> Hide asteroids
-      </label>}
       <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
         <span>Epoch: <span data-view-date></span></span>
         <span class="planet-view-separator" aria-hidden="true">·</span>

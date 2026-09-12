@@ -371,19 +371,3 @@ test('an unchanged worker cut updates diagnostics without projecting the same im
     expect(layer.inspect().projectedPoints).toBeGreaterThan(after.projectedPoints);
   } finally { layer.destroy(); vi.unstubAllGlobals(); }
 });
-
-test('diagnostic disabling parks the field without selection work and redraws once re-enabled',()=>{
-  vi.useFakeTimers();const {layer,root}=mount();
-  layer.publish(world(),viewport,1);layer.publish(world(-10),viewport,1);
-  expect(vi.getTimerCount()).toBe(1);
-  layer.setEnabled(false);
-  expect(vi.getTimerCount()).toBe(0);expect(root.style.display).toBe('none');expect(layer.inspect().enabled).toBe(false);
-  const passes=layer.inspect().renderPasses;
-  layer.publish(world(1),viewport,1);
-  expect(layer.inspect().renderPasses).toBe(passes);
-  layer.setEnabled(true);
-  expect(root.style.display).toBe('');
-  layer.publish(world(1),viewport,1);
-  expect(layer.inspect().renderPasses).toBe(passes+1);expect(layer.inspect().enabled).toBe(true);
-  layer.destroy();
-});

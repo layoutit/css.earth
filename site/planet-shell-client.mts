@@ -10,7 +10,7 @@ import type { OverviewScope } from './overview-context.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { createNavigationContent } from './navigation-content.mts';
 export type NavigationContent = Awaited<ReturnType<ReturnType<typeof createNavigationContent>['load']>>;
-export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; onCategoryChange?(classification: string | null): void; }
+export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; asteroidBodiesEnabled?: boolean; onAsteroidBodiesChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; onCategoryChange?(classification: string | null): void; }
 interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame | null; commit?(): void; restore(): void; }
 type Panel = readonly [string, HTMLDetailsElement];
 import { objectCategory, matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
@@ -40,6 +40,8 @@ export function mountPlanetShell({
   onSkyContrastChange = () => {},
   heliosphereEnabled = false,
   onHeliosphereChange = () => {},
+  asteroidBodiesEnabled = false,
+  onAsteroidBodiesChange = () => {},
   asteroidOrbitsEnabled = false,
   onAsteroidOrbitsChange = () => {},
   asteroidLabelsEnabled = false,
@@ -261,8 +263,9 @@ export function mountPlanetShell({
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
+      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
+        onAsteroidBodiesChange(enabled) { asteroidBodiesEnabled = enabled; onAsteroidBodiesChange(enabled); },
         onAsteroidOrbitsChange(enabled) { asteroidOrbitsEnabled = enabled; onAsteroidOrbitsChange(enabled); },
         onAsteroidLabelsChange(enabled) { asteroidLabelsEnabled = enabled; onAsteroidLabelsChange(enabled); },
       }, owner));
@@ -366,7 +369,7 @@ function createSettingsController(
   documentTarget: Document,
   windowTarget: BrowserWindow,
   { motionEnabled, onMotionChange, highContrastSky = false, onSkyContrastChange = () => {}, heliosphereEnabled, onHeliosphereChange,
-    asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'asteroidOrbitsEnabled' | 'onAsteroidOrbitsChange' | 'asteroidLabelsEnabled' | 'onAsteroidLabelsChange'>> & { highContrastSky?: boolean; onSkyContrastChange?: (enabled: boolean) => void },
+    asteroidBodiesEnabled, onAsteroidBodiesChange, asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'asteroidBodiesEnabled' | 'onAsteroidBodiesChange' | 'asteroidOrbitsEnabled' | 'onAsteroidOrbitsChange' | 'asteroidLabelsEnabled' | 'onAsteroidLabelsChange'>> & { highContrastSky?: boolean; onSkyContrastChange?: (enabled: boolean) => void },
   lifetime: SceneLifetime,
 ) {
   if (typeof onMotionChange !== "function") {
@@ -374,6 +377,7 @@ function createSettingsController(
   }
   const motion = documentTarget.querySelector(".planet-motion-setting");
   const heliosphere = documentTarget.querySelector(".planet-heliosphere-setting");
+  const asteroidBodies = documentTarget.querySelector(".planet-asteroid-bodies-setting");
   const asteroidOrbits = documentTarget.querySelector(".planet-asteroid-orbits-setting");
   const asteroidLabels = documentTarget.querySelector(".planet-asteroid-labels-setting");
   const skyContrast = documentTarget.querySelector(
@@ -384,6 +388,7 @@ function createSettingsController(
   );
   if (!(motion instanceof windowTarget.HTMLInputElement) ||
       !(heliosphere instanceof windowTarget.HTMLInputElement) ||
+      !(asteroidBodies instanceof windowTarget.HTMLInputElement) ||
       !(asteroidOrbits instanceof windowTarget.HTMLInputElement) ||
       !(asteroidLabels instanceof windowTarget.HTMLInputElement) ||
       (speed !== null && !(speed instanceof windowTarget.HTMLInputElement)) ||
@@ -416,6 +421,16 @@ function createSettingsController(
   }, { signal: events.signal });
   heliosphere.checked = heliosphereEnabled === true;
   heliosphere.addEventListener("change", () => onHeliosphereChange(heliosphere.checked), { signal: events.signal });
+  const renderAsteroidBodies = () => {
+    asteroidBodies.checked = asteroidBodiesEnabled === true;
+    documentTarget.body.dataset.asteroidBodies = asteroidBodies.checked ? 'on' : 'off';
+  };
+  asteroidBodies.addEventListener("change", () => {
+    asteroidBodiesEnabled = asteroidBodies.checked;
+    renderAsteroidBodies();
+    onAsteroidBodiesChange(asteroidBodiesEnabled);
+  }, { signal: events.signal });
+  renderAsteroidBodies();
   const renderAsteroidOrbits = () => {
     asteroidOrbits.checked = asteroidOrbitsEnabled === true;
     documentTarget.body.dataset.asteroidOrbits = asteroidOrbits.checked ? 'on' : 'off';
