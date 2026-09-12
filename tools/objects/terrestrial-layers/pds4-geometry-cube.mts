@@ -1,4 +1,4 @@
-import { cardValue } from './encounter-fits.mts';
+import { readFitsHeader } from '../observation/fits.mts';
 import type { GeometryCubeDeclaration } from './source-records.mts';
 
 /**
@@ -26,7 +26,6 @@ const DATA_TYPES: Record<string, { bytes: number; read: (buffer: Buffer, offset:
   IEEE754MSBSingle: { bytes: 4, read: (buffer, offset) => buffer.readFloatBE(offset) }, IEEE754LSBSingle: { bytes: 4, read: (buffer, offset) => buffer.readFloatLE(offset) },
   IEEE754MSBDouble: { bytes: 8, read: (buffer, offset) => buffer.readDoubleBE(offset) }, IEEE754LSBDouble: { bytes: 8, read: (buffer, offset) => buffer.readDoubleLE(offset) },
 };
-const RECORD = 2880;
 
 const escapeName = (name: string) => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 /** Exactly one text element with this name inside the fragment; attributes are allowed. */
@@ -43,18 +42,6 @@ function labelNumber(xml: string, name: string) {
   return value;
 }
 
-function readCubeHeader(bytes: Buffer) {
-  const header: FitsHeader = {}; let end = -1;
-  for (let offset = 0; offset + 80 <= bytes.length && offset < 131040; offset += 80) {
-    const card = bytes.toString('ascii', offset, offset + 80), key = card.slice(0, 8).trim();
-    if (key === 'END') { end = offset + 80; break; }
-    if (card[8] !== '=') continue;
-    if (Object.hasOwn(header, key)) throw new Error(`Duplicate FITS field: ${key}`);
-    header[key] = cardValue(card);
-  }
-  if (end < 0) throw new Error('Geometry cube header has no END card.');
-  return { header, dataOffset: Math.ceil(end / RECORD) * RECORD };
-}
 const headerText = (header: FitsHeader, key: string) => typeof header[key] === 'string' ? (header[key] as string).trim() : header[key] === undefined ? '' : String(header[key]);
 
 interface LabelPlane { id: string; index: number; offset: number; width: number; height: number; dataType: string; unit: string | null; constants: Record<string, number> }
@@ -129,7 +116,7 @@ export function decodePds4GeometryCube(bytes: Buffer, xml: string, { fileName, c
   const width = roles.image.width, height = roles.image.height, count = width * height;
   if (ROLES.some(name => roles[name].width !== width || roles[name].height !== height)) throw new Error('Geometry cube planes differ in size.');
 
-  const headers = labelBlocks(xml, 'Header'), { header, dataOffset } = readCubeHeader(bytes);
+  const headers = labelBlocks(xml, 'Header'), { header, dataOffset } = readFitsHeader(bytes);
   if (headers.length !== 1 || labelNumber(headers[0], 'offset') !== 0 || labelNumber(headers[0], 'object_length') !== dataOffset ||
       !labelField(headers[0], 'parsing_standard_id').startsWith('FITS')) throw new Error('Geometry cube header disagrees with its label.');
   if (header.SIMPLE !== true || (header.BSCALE ?? 1) !== 1 || (header.BZERO ?? 0) !== 0 || header.NAXIS1 !== width || header.NAXIS2 !== height ||
