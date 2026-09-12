@@ -20,13 +20,17 @@ const positionedPlanets = positionPlanetsByDistance(PLANET_NAVIGATION_OBJECTS);
 <nav class="planetary-navigation" aria-label={PLANETARY_SCALE_LABEL}>
   <ol
     class="scale-stops"
-    style={`--planet-track-start:${positionedPlanets[0].scalePositionPercent}%`}
   >
+    <i
+      class="scale-track"
+      style={`left:${positionedPlanets[0].scalePositionPercent}%`}
+      aria-hidden="true"
+    ></i>
     {positionedPlanets.map((planet) => (
       <li
         class:list={["scale-planet", planet.id, { active: planet.id === activeObjectId }]}
         data-planet-id={planet.id}
-        style={`--planet-offset:${planet.scalePositionPercent}%`}
+        style={`left:${planet.scalePositionPercent}%;`}
       >
         <a
           class="scale-stop"
@@ -37,6 +41,7 @@ const positionedPlanets = positionPlanetsByDistance(PLANET_NAVIGATION_OBJECTS);
           <PlanetNavigationMarker
             planetId={planet.id}
             color={planet.color}
+            minSize={6}
           />
           <span class="scale-label">{planet.name}</span>
         </a>

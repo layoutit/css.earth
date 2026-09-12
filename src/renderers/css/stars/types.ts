@@ -71,3 +71,48 @@ export interface PreparedCssPointField {
   readonly resources: readonly PreparedPointFieldResource[];
   readonly provenance: unknown;
 }
+
+export type PointFieldBankStorage = 'uint8' | 'int16' | 'uint32' | 'float32' | 'float64';
+
+export interface PreparedPointFieldBankColumn {
+  readonly name: string;
+  readonly storage: PointFieldBankStorage;
+  /** Element count, not rows: a 3-vector column holds three elements per row. */
+  readonly count: number;
+  readonly offset: number;
+  readonly bytes: number;
+}
+
+/** Declared decode rule, bound and measured preparation error of one bank field. */
+export interface PreparedPointFieldQuantization {
+  readonly field: string;
+  readonly storage: PointFieldBankStorage;
+  readonly decode: string;
+  readonly unit: string;
+  readonly bound: number;
+  readonly measured: number;
+  /** Worst composited per-pixel alpha change a field error of `bound` can cause. */
+  readonly displayAlphaChange: number;
+}
+
+export interface PreparedPointFieldBank {
+  readonly encoding: 'cssearth-point-field-bank@1';
+  readonly path: string;
+  readonly bytes: number;
+  readonly sha256: string;
+  readonly starIdPrefix: string;
+  readonly starCount: number;
+  readonly nodeCount: number;
+  readonly childLinkCount: number;
+  readonly anchorCount: number;
+  readonly columns: readonly PreparedPointFieldBankColumn[];
+  /** Named rows only, as increasing [star index, name] pairs. */
+  readonly names: readonly (readonly [number, string])[];
+  readonly quantization: readonly PreparedPointFieldQuantization[];
+}
+
+/** Prepared transport: this JSON manifest plus its pinned binary column bank. */
+export interface PreparedCssPointFieldManifest extends Omit<PreparedCssPointField, 'schema' | 'stars' | 'nodes'> {
+  readonly schema: 'cssearth-css-point-field-bank@1';
+  readonly bank: PreparedPointFieldBank;
+}

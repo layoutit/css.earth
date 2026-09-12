@@ -107,6 +107,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       const { weight, opticalGain } = strengths[index]!;
       total += weight;
       root.style.visibility = weight > 0 ? 'visible' : 'hidden';
+      // A zero-weight axis stack leaves layout and compositing, not just paint.
+      root.style.display = weight > 0 ? 'block' : 'none';
       root.style.opacity = total > 0 ? String(weight / total) : '0';
       // Opacity belongs to atomic images, never the mesh (which flattens 3D).
       // n full copies plus a fraction f give T=(1-alpha)^n*(1-f*alpha).
@@ -114,10 +116,14 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       const copies = opticalCopies[index]!;
       for (let copy = 1; copy < 3; copy++) {
         const alpha = Math.min(1, Math.max(0, opticalGain - copy));
-        if (alpha === copies.alpha[copy - 1]) continue;
+        const previous = copies.alpha[copy - 1]!;
+        if (alpha === previous) continue;
         copies.alpha[copy - 1] = alpha;
-        const value = String(alpha);
-        for (const node of copies.nodes[copy - 1]!) node.style.opacity = value;
+        const value = String(alpha), entering = (alpha > 0) !== (previous > 0);
+        for (const node of copies.nodes[copy - 1]!) {
+          node.style.opacity = value;
+          if (entering) node.style.display = alpha > 0 ? '' : 'none';
+        }
       }
     }
   };
@@ -152,7 +158,8 @@ export function preparedVolumeCameraTransform(publication: VolumeCameraPublicati
 
 function createLeaf(document: Document, leaf: PreparedCssVolume['stacks'][number]['leaves'][number], textureUrl: string, copy: number): HTMLElement {
   const node = document.createElement('s');
-  if (copy > 0) node.style.opacity = '0';
+  // A zero-alpha optical copy contributes nothing; it stays out of layout and compositing.
+  if (copy > 0) { node.style.opacity = '0'; node.style.display = 'none'; }
   node.style.width = leaf.style.width;
   node.style.height = leaf.style.height;
   node.style.transform = leaf.style.transform;

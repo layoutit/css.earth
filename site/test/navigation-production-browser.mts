@@ -23,10 +23,14 @@ try {
       window.__productionSamples = [];
       const sample = () => {
         const stage = window.__cssearthTest.element('.planet-stage');
+        // The shared world presents beside the detail stage and owns the loading opacity.
+        const world = window.__cssearthTest.element('.planet-world-stage');
         const scene = document.querySelector<HTMLElement>('.planet-stage [class$="-scene"]');
         window.__productionSamples.push({ count: document.querySelectorAll('.polycss-camera').length,
-          transform: scene?.style.transform, opacity: Number(getComputedStyle(window.__cssearthTest.required(stage, 'computed style element')).opacity),
-          universes: stage.querySelectorAll('.prepared-universe').length });
+          transform: scene?.style.transform,
+          opacity: Number(getComputedStyle(window.__cssearthTest.required(stage, 'computed style element')).opacity)
+            * Number(getComputedStyle(window.__cssearthTest.required(world, 'computed style element')).opacity),
+          universes: world?.querySelectorAll('.prepared-universe').length ?? 0 });
         window.__productionFrame = requestAnimationFrame(sample);
       };
       sample();

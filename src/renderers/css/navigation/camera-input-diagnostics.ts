@@ -1,5 +1,5 @@
-import { GOOGLE_EARTH_DRAG_INERTIA } from "@cssearth/engine";
-import { GOOGLE_EARTH_SURFACE_FLY_TO } from './google-earth-surface-fly-to.js';
+import { TRACKBALL_DRAG_INERTIA } from "@cssearth/engine";
+import { SURFACE_FLY_TO } from './surface-fly-to.js';
 export type ActiveMode = 'idle' | 'drag' | 'inertia' | 'fly-to';
 export type InterruptionMode = 'drag' | 'pointer' | 'wheel' | 'fly-to' | 'programmatic' | 'disabled' | 'destroy';
 interface DragDiagnostics {
@@ -12,7 +12,7 @@ interface DragDiagnostics {
 }
 export function dragControlDiagnostics({ skyGesture, pointerActive, inertiaActive, flyToActive, destinationActive, surfaceFlyToEnabled, activeMode, pointerDragging, inertiaStarts, inertiaFrames, inertiaCancels, pointerCancels, interruptionCounts, lastInterruption, flyToStarts, flyToFrames, flyToCompletions, flyToCancels, destinationFlight }: DragDiagnostics) {
       return Object.freeze({
-        schema: GOOGLE_EARTH_DRAG_INERTIA.schema,
+        schema: TRACKBALL_DRAG_INERTIA.schema,
         projection: skyGesture && (pointerActive || inertiaActive)
           ? "screen-plane-orbit" : "screen-space-sphere",
         historyStorage: "fixed-capacity-float64-ring",
@@ -29,8 +29,8 @@ export function dragControlDiagnostics({ skyGesture, pointerActive, inertiaActiv
         interruptions: Object.freeze({ ...interruptionCounts }),
         lastInterruption,
         surfaceFlyTo: Object.freeze({
-          schema: GOOGLE_EARTH_SURFACE_FLY_TO.schema,
-          qualification: GOOGLE_EARTH_SURFACE_FLY_TO.qualification,
+          schema: SURFACE_FLY_TO.schema,
+          qualification: SURFACE_FLY_TO.qualification,
           enabled: surfaceFlyToEnabled,
           active: flyToActive && !destinationActive,
           starts: flyToStarts,

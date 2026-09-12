@@ -1,4 +1,3 @@
-import type { DensityVolumeFrame } from '@cssearth/objects';
 export type Point3 = readonly [number, number, number];
 export type Rgb = readonly [number, number, number];
 export interface PreparedStar {
@@ -27,14 +26,5 @@ export interface StarsRecipe {
   readonly labels: RuntimeLabelPolicy;
   readonly diffuseSky?: { readonly faces: readonly { readonly id: string; readonly path: string; readonly sha256: string }[]; readonly width: number; readonly blurSigmaPixels: number };
 }
-export interface PreparedCssPointField {
-  readonly schema: 'cssearth-css-point-field@1'; readonly id: string; readonly frame: DensityVolumeFrame;
-  readonly stars: readonly PreparedStar[]; readonly nodes: readonly PreparedStarNode[];
-  readonly atlas: { readonly path: string; readonly columns: number; readonly tileSize: number; readonly colors: readonly Rgb[]; readonly haloRadii: number };
-  readonly photometry: { readonly minimumMagnitude: number; readonly maximumMagnitude: number; readonly step: number; readonly floor: number; readonly limitingMagnitude: number; readonly hintsLimitMagnitude: number; readonly minimumRadiusPx: number; readonly samples: readonly { readonly radiusPx: number; readonly luminance: number }[] };
-  readonly policy: StarsRecipe['policy'];
-  readonly labels: RuntimeLabelPolicy;
-  readonly resources: readonly { readonly path: string; readonly sha256: string; readonly bytes: number; readonly width: number; readonly height: number }[];
-  readonly provenance: unknown;
-  readonly diffuseSky?: readonly { readonly id: string; readonly path: string }[];
-}
+/** The prepared transport (JSON manifest plus binary bank) is owned by the renderer decoder. */
+export type { PreparedCssPointFieldManifest } from '../../renderers/css/stars/types.js';

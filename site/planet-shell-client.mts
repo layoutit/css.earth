@@ -25,6 +25,9 @@ import { createViewReadout } from "./view-readout.mts";
 import { createSurfaceMapReader } from "./surface-map-context.mts";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
+import { bindNavigationIntent, navigationFragments } from './navigation-fragments.mts';
+import { OBJECTS } from './objects.mts';
+import { objectClassificationLabel } from './planet-search-objects.mts';
 
 export function mountPlanetShell({
   objectId,
@@ -46,6 +49,7 @@ export function mountPlanetShell({
     throw new Error("Planet shell information drawer is missing.");
   }
   const lifetime = createSceneLifetime();
+  const fragments = navigationFragments(windowTarget);
   let informationTabs: ReturnType<typeof createInformationTabsController>;
   let settingsController: ReturnType<typeof createSettingsController>, objectBrowser: ReturnType<typeof createObjectBrowserController>, contentLifetime: SceneLifetime | null, minimapController: ReturnType<typeof createSurfaceMinimap>, viewReadout: ReturnType<typeof createViewReadout>;
   let selectionPreview: SelectionPreview | null = null;
@@ -56,8 +60,10 @@ export function mountPlanetShell({
   const focusCard = createPreparedFocusCard(drawer.querySelector<HTMLElement>('[data-prepared-focus-card]'));
   lifetime.onDispose(() => focusCard.destroy());
   lifetime.onDispose(() => unsubscribeOverview?.());
+  // The card panel is retained; a camera frame re-queries it only after a card swap.
+  let information: HTMLElement | null = null;
   function updateBodyCard(world = camera?.navigation?.capture()) {
-    const information = drawer.querySelector<HTMLElement>('.planet-information-panel');
+    if (!information?.isConnected || !drawer.contains(information)) information = drawer.querySelector<HTMLElement>('.planet-information-panel');
     const view = cardNavigation?.view ?? bodyCardViewAtCamera(world, selectionPreview?.frame ?? camera?.navigation?.frame,
       camera?.navigation?.optics?.(), selectionPreview?.id ?? cardObjectId);
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
@@ -78,6 +84,8 @@ export function mountPlanetShell({
   try {
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
+    // Hover, focus or press on another body fetches its card before the click.
+    own(bindNavigationIntent({ documentTarget, windowTarget, objects: OBJECTS, fragments, skip: id => id === cardObjectId }));
     own(createSheetController(drawer, windowTarget, lifetime));
     own(createExplorerRailController(documentTarget, windowTarget, {
       onOpenSolarSystem: () => objectBrowser.showSolarSystem(),
@@ -137,23 +145,35 @@ export function mountPlanetShell({
       const information = requiredElement(drawer, '.planet-information-panel');
       const previous = [...information.childNodes], restoreBrowser = objectBrowser.previewObject(object.name);
       const previousBusy = information.ariaBusy;
-      const card = documentTarget.querySelector<HTMLTemplateElement>(`template[data-object-card="${object.id}"]`)
-        ?.content.querySelector('.planet-information-panel');
-      if (!card) throw new Error(`Prepared sidebar card is missing for ${object.id}.`);
-      information.replaceChildren(...[...card.childNodes].map(node => node.cloneNode(true)));
-      restorePanelState([...information.querySelectorAll<HTMLElement>(':scope > details, :scope > [data-information-panel] > details')].filter(node => node instanceof windowTarget.HTMLDetailsElement)
-        .map(node => [panelKey(node), node] as const), object.id, windowTarget);
-      for (const map of information.querySelectorAll<HTMLElement>('.planet-surface-minimap')) {
-        if (!map.closest('[hidden], details:not([open])')) loadSurfacePreview(map);
-      }
-      // Detail controls wait for their renderer; navigation anchors stay usable
-      // so another breadcrumb or moon can replace an in-progress selection.
-      const pendingControls = [...information.querySelectorAll<HTMLElement>('.planet-card-tabs, [data-information-panel], .planet-destination-intro')]
-        .filter(node => node.dataset.informationGroup !== 'overview')
-        .map(node => [node, node.inert] as const);
-      for (const [node] of pendingControls) node.inert = true;
       const previewLifetime = createSceneLifetime();
-      createInformationTabsController(drawer, previewLifetime, 'overview');
+      let pendingControls: (readonly [HTMLElement, boolean])[] = [];
+      const showCard = (card: Element) => {
+        information.replaceChildren(...[...card.childNodes].map(node => documentTarget.importNode(node, true)));
+        restorePanelState([...information.querySelectorAll<HTMLElement>(':scope > details, :scope > [data-information-panel] > details')].filter(node => node instanceof windowTarget.HTMLDetailsElement)
+          .map(node => [panelKey(node), node] as const), object.id, windowTarget);
+        for (const map of information.querySelectorAll<HTMLElement>('.planet-surface-minimap')) {
+          if (!map.closest('[hidden], details:not([open])')) loadSurfacePreview(map);
+        }
+        // Detail controls wait for their renderer; navigation anchors stay usable
+        // so another breadcrumb or moon can replace an in-progress selection.
+        pendingControls = [...information.querySelectorAll<HTMLElement>('.planet-card-tabs, [data-information-panel], .planet-destination-intro')]
+          .filter(node => node.dataset.informationGroup !== 'overview')
+          .map(node => [node, node.inert] as const);
+        for (const [node] of pendingControls) node.inert = true;
+        createInformationTabsController(drawer, previewLifetime, 'overview');
+      };
+      // The destination's static fragment is its card; intent usually fetched it.
+      const card = fragments.peek(object.id)?.querySelector('.planet-information-panel');
+      if (card) showCard(card);
+      else {
+        // Registry facts show at once; the card follows its fragment without
+        // blocking the flight. A failed fragment fails the destination load.
+        information.replaceChildren(objectCardPreview(documentTarget, object));
+        fragments.get(object.id).then(source => {
+          const arrived = source.querySelector('.planet-information-panel');
+          if (arrived && selectionPreview === preview) { showCard(arrived); updateBodyCard(); }
+        }, () => {});
+      }
       information.ariaBusy = 'true';
       const preview = { id: object.id, frame: object.worldFrame, commit() {
         previewLifetime.destroy();
@@ -498,9 +518,17 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
   ];
   let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
-  // Reset the outgoing layout before changing result visibility. Hidden panels
-  // were reset when closed, so opening one needs no synchronous layout readback.
-  const resetResultsScroll = () => { if (!browser.hidden) resultsPanel.scrollTop = 0; };
+  // Scroll events arrive after layout. Retain that state so publishing an
+  // unchanged camera or selection never forces layout to rewrite a zero offset.
+  let resultsScrolled = false;
+  const onResultsScroll = () => { resultsScrolled = resultsPanel.scrollTop !== 0; };
+  resultsPanel.addEventListener('scroll', onResultsScroll, { passive: true });
+  lifetime.onDispose(() => resultsPanel.removeEventListener('scroll', onResultsScroll));
+  const resetResultsScroll = () => {
+    if (!resultsScrolled) return;
+    resultsPanel.scrollTop = 0;
+    resultsScrolled = false;
+  };
   const selectTab = (classification: string, { focus = false, resetScroll = true } = {}) => {
     if (resetScroll) resetResultsScroll();
     if (classification !== activeCategory) {
@@ -551,14 +579,24 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       button.ariaPressed = String(button.dataset.searchClassification === classification);
     }
   };
+  let filteredQuery: string | null = null, filteredClassification: string | null | undefined = null;
   const filter = (resetScroll = true) => {
-    if (resetScroll) resetResultsScroll();
-    markCategory();
     // Search text belongs to the user; the card context is only a fallback.
     const query = (browsing ? search.value.trim().toLocaleLowerCase("en") : "")
       || (preparedFocus ? preparedFocus.name.toLocaleLowerCase('en')
         : overview ? overviewName().toLocaleLowerCase("en") : "");
     setPanelHidden(information, query.length > 0);
+    // A camera handoff republishes the same card context. Its results, counts
+    // and chips are already current; only a closed browser needs reopening.
+    if (query === filteredQuery) {
+      setPanelHidden(browser, query.length === 0);
+      markCategory(filteredClassification);
+      return;
+    }
+    filteredQuery = query;
+    filteredClassification = null;
+    if (resetScroll) resetResultsScroll();
+    markCategory();
     destinations?.setOpen(query.length > 0);
     const focused = preparedFocus && query === preparedFocus.name.toLocaleLowerCase('en');
     const galactic = !focused && query === 'milky way';
@@ -583,6 +621,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       return name && (query === name || query === `${name}s` || query === item.dataset.objectClassification);
     })?.dataset.objectClassification;
     markCategory(classification);
+    filteredClassification = classification;
     const systemName = items.find(item =>
       query === item.dataset.objectSystemName)?.dataset.objectSystemName;
     visibleObjects = 0;
@@ -613,16 +652,19 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     empty.hidden = visibleObjects !== 0 || Boolean(destinations && !classification && !showAll);
   };
   const render = (next: boolean, { resetQuery = false } = {}) => {
-    resetResultsScroll();
     if (!next) browsing = false;
     if ((preparedFocus || overview) && !next) next = true;
+    // Only an actual open/close transition may reset a scrolled result list.
+    if (open !== next) resetResultsScroll();
     open = next;
     if (next && resetQuery) search.value = "";
     destinations?.setOpen(next);
-    setPanelHidden(information, next);
-    setPanelHidden(browser, !next);
-    if (next) filter(false);
-    else markCategory();
+    if (next) filter();
+    else {
+      setPanelHidden(information, false);
+      setPanelHidden(browser, true);
+      markCategory();
+    }
   };
 
   trigger.addEventListener("click", () => {
@@ -975,6 +1017,20 @@ function createPanelController(drawer: HTMLElement, objectId: string, windowTarg
       events.abort();
     },
   });
+}
+
+/** Fill the shell's one preview card with registry facts; no object content is derived. */
+function objectCardPreview(documentTarget: Document, object: ObjectEntry) {
+  const template = requiredElement<HTMLTemplateElement>(documentTarget, 'template[data-object-card-preview]');
+  const card = template.content.firstElementChild;
+  if (!card) throw new Error('Object card preview is empty.');
+  const preview = documentTarget.importNode(card, true);
+  const name = requiredElement(preview, '[data-card-preview-name]');
+  name.textContent = object.name;
+  name.setAttribute('aria-label', object.name);
+  requiredElement(preview, '[data-card-preview-classification]').textContent = objectClassificationLabel(object.classification);
+  requiredElement(preview, '[data-card-preview-description]').textContent = object.description;
+  return preview;
 }
 
 function restorePanelState(panels: readonly Panel[], objectId: string, windowTarget: Window) {
