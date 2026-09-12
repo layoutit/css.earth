@@ -3,6 +3,9 @@
     "expect": "fail",
     "reason": "deedee: source startup assets are not decoded before the detailed mount"
   },
+  "baked-sky-browser.mts": {
+    "expect": "pass"
+  },
   "dataset-navigation-browser.mts": {
     "expect": "pass"
   },
@@ -83,9 +86,6 @@
   "overview-selection-browser.mts": {
     "expect": "fail",
     "reason": "search reads an empty value instead of Solar System after the Ceres zoom-out handoff"
-  },
-  "point-field-worker-browser.mts": {
-    "expect": "pass"
   },
   "prepared-bindings-browser.mts": {
     "expect": "intermittent",

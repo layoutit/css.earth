@@ -1,12 +1,30 @@
 import { parseDensityVolumeFrame, parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
-import type { PreparedCssPointField } from './types.js';
+import type { PreparedCssPointField, PreparedPointAppearance } from './types.js';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from './validation.js';
 
 /** Loads one pinned point-field manifest and the binary column bank it pins. Image
  * resources stay in the prepared asset bank. */
 export async function loadPreparedCssPointField(input: unknown, transport: PreparedCssTransport): Promise<PreparedCssPointField> {
+  const { descriptor, manifest } = await loadManifest(input, transport);
+  const url = descriptor.prepared!.url;
+  // The bank sits beside its manifest. Length and digest are verified before any byte is decoded.
+  const bank = await transport.read(`${url.slice(0, url.lastIndexOf('/') + 1)}${manifest.bank.path}`);
+  if (bank.byteLength !== manifest.bank.bytes || await sha256(bank) !== manifest.bank.sha256) {
+    throw new TypeError('Prepared point-field bank length or SHA-256 identity mismatch.');
+  }
+  return decodePreparedCssPointField(manifest, bank);
+}
+
+/** The Sun needs the prepared optics and atlas, not the individual-star bank. */
+export async function loadPreparedPointAppearance(input: unknown, transport: PreparedCssTransport): Promise<PreparedPointAppearance> {
+  const { manifest } = await loadManifest(input, transport);
+  const { id, frame, atlas, photometry, resources } = manifest;
+  return { id, frame, atlas, photometry, resources };
+}
+
+async function loadManifest(input: unknown, transport: PreparedCssTransport) {
   const { descriptor, frame } = parsePointFieldDescriptor(input);
   const url = descriptor.prepared!.url;
   const bytes = await transport.read(url);
@@ -16,12 +34,7 @@ export async function loadPreparedCssPointField(input: unknown, transport: Prepa
   if (manifest.id !== descriptor.id || JSON.stringify(manifest.frame) !== JSON.stringify(frame)) {
     throw new TypeError('Prepared point field frame does not match its authored descriptor.');
   }
-  // The bank sits beside its manifest. Length and digest are verified before any byte is decoded.
-  const bank = await transport.read(`${url.slice(0, url.lastIndexOf('/') + 1)}${manifest.bank.path}`);
-  if (bank.byteLength !== manifest.bank.bytes || await sha256(bank) !== manifest.bank.sha256) {
-    throw new TypeError('Prepared point-field bank length or SHA-256 identity mismatch.');
-  }
-  return decodePreparedCssPointField(manifest, bank);
+  return { descriptor, manifest };
 }
 
 function parsePointFieldDescriptor(input: unknown): { readonly descriptor: ObjectDescriptor; readonly frame: PreparedCssPointField['frame'] } {

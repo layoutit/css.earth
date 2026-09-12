@@ -1,7 +1,6 @@
 import type { PreparedWorldContext } from './prepared-world-context.js';
 import type { WorldContextView } from './world-context-planner.js';
 import type { WorldContextFrame } from './world-context-frame.js';
-import type { PreparedCssPointField } from '../stars/types.js';
 import { packWorldBodies } from './world-context-view-transport.js';
 
 export interface WorldPlannerWorker {
@@ -14,17 +13,15 @@ export interface WorldPlannerWorker {
 /** Prepared files the planner worker loads and validates itself, off the main thread. */
 export interface WorldPlannerSource {
   readonly contextUrl: string;
-  /** The point-field descriptor and the URL of each prepared file it references. */
-  readonly stars?: { readonly descriptor: unknown; readonly files: Readonly<Record<string, string>> };
 }
 
 /** The publication queue owns admission; this transport owns one persistent prepared bank.
  * With a `source`, the worker reads its own copy of the bank instead of receiving
- * a structured clone of the main thread's (≈40 ms for the plan, ≈110 ms for stars). */
+ * a structured clone of the main thread's context. */
 export function createWorldContextPlannerClient(plan: PreparedWorldContext,
   createWorker: () => WorldPlannerWorker = () => new Worker(new URL('./world-context-planner-worker.js', import.meta.url),
     { type: 'module', name: 'cssearth-world-planner' }),
-  annotationPriorities: Readonly<Record<string, number>> = {}, stars?: PreparedCssPointField, source?: WorldPlannerSource) {
+  annotationPriorities: Readonly<Record<string, number>> = {}, source?: WorldPlannerSource) {
   const worker = createWorker();
   let resolveReady!: () => void, rejectReady!: (error: Error) => void;
   const ready = new Promise<void>((resolve, reject) => { resolveReady = resolve; rejectReady = reject; });
@@ -46,8 +43,8 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
     const complete = pending; pending = null; complete.resolve(data.frame);
   };
   worker.onerror = event => destroy(new Error(event.message));
-  if (source && (source.stars !== undefined) === (stars !== undefined)) worker.postMessage({ source, annotationPriorities });
-  else worker.postMessage({ plan, annotationPriorities, ...(stars ? { stars } : {}) });
+  if (source) worker.postMessage({ source, annotationPriorities });
+  else worker.postMessage({ plan, annotationPriorities });
   return { async plan(view: WorldContextView): Promise<WorldContextFrame> {
     await ready;
     if (destroyed) throw new Error('World frame planner was destroyed.');
@@ -56,8 +53,7 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
       pending = { id: ++sequence, resolve, reject };
       try {
         const { bodies, ...rest } = view, packed = packWorldBodies(bodies);
-        worker.postMessage({ id: sequence, view: rest, bodies: packed }, [packed.buffer as ArrayBuffer,
-          ...(view.points ? [view.points.active.buffer, view.points.outgoing.buffer] as ArrayBuffer[] : [])]);
+        worker.postMessage({ id: sequence, view: rest, bodies: packed }, [packed.buffer as ArrayBuffer]);
       }
       catch (error) { destroy(error instanceof Error ? error : new Error(String(error))); }
     });

@@ -94,7 +94,7 @@ export function mountPreparedCataloguePoints({ host, before, payload }: {
     const local = presentPhysicalPoseInVolume(world.pose, data.frame);
     const rotation = transposeWorldRotation(worldRotationFromQuaternion(local.orientationXyzw));
     let visible = 0;
-    // The projectPreparedPoint arithmetic, inlined: no object per point, and only
+    // Perspective projection, inlined: no object per point, and only
     // changed visibility and transforms are written to the retained nodes.
     const [ex, ey, ez] = local.positionUnits, focal = viewport.focalPixels;
     const [r0, r1, r2, r3, r4, r5, r6, r7, r8] = rotation;
