@@ -39,7 +39,8 @@
           "centerLongitude": 180,
           "resampling": "source-georeferenced-bilinear"
         }
-      }
+      },
+      "resolutionScale": 2
     },
     {
       "id": "enhanced",
@@ -114,7 +115,8 @@
             ]
           }
         }
-      }
+      },
+      "resolutionScale": 2
     },
     {
       "id": "elevation",

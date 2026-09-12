@@ -91,20 +91,20 @@
     "controls": [
       {
         "id": "surface",
-        "label": "Visible color",
-        "description": "NASA CGI Moon Kit display map from LROC color imagery. Small gaps are inpainted; beyond 70° north/south, lower-resolution monochrome LOLA albedo replaces missing color. The app reduces saturation and adjusts tone for display.",
-        "title": "CGI Moon Kit surface mosaic",
+        "label": "Monochrome",
+        "description": "LROC WAC 643 nm photography, mapped from observations in 2009–2011. Crater shadows are part of the photographs; the Shadows control adds scene lighting. Gray grid marks missing data. Brightness is adjusted for display.",
+        "title": "LROC photographic mosaic",
         "thumbnail": "moon-lens-surface.webp",
         "surface": "moon-surface.webp",
         "poles": "moon-poles-surface.webp",
         "source": {
-          "id": "nasa-lro-moon-color",
-          "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg"
+          "id": "lroc-wac-global-032p",
+          "url": "https://data.lroc.im-ldi.com/lroc/view_rdr_product/WAC_GLOBAL_E000N1800_032P"
         },
-        "detail": "Global mosaic",
-        "summary": "Surface detail comes from LROC imagery. Small gaps are filled; monochrome replaces unavailable color near the poles.",
+        "detail": "LROC mosaic",
+        "summary": "Monochrome photography from 2009–2011. Crater shadows remain in the images; gray grid marks missing observations.",
         "falseColor": false,
-        "qualification": "NASA LRO/LROC visible-colour global surface mosaic"
+        "qualification": "LROC WAC global morphologic mosaic v1.3, 32 pixels/degree, mapped to the 1,737.4 km lunar reference sphere."
       },
       {
         "id": "midnight-temperature",
