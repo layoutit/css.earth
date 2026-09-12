@@ -14,6 +14,8 @@
 
 - The mesh is an analytic ellipsoid approximating those axes, not a copy of the detailed irregular shape solution. The body is only about 9 × 7 native pixels.
 
+- **Faithfulness status:** The Monochrome frame is retained as coarse pointing evidence only. At roughly 9 × 7 pixels, it cannot establish surface-feature registration to the analytic ellipsoid.
+
 - The 1-pixel inset and 55° incidence/emission cuts limit limb/registration uncertainty. Bounded Lommel-Seeliger normalization (gain ≤2) suppresses geometric shading without inventing fine terrain or recovering albedo. Gray grid retains true gaps.
 
 - Display pole aligned to the fitted orbital normal; arbitrary meridian, no measured spin or current landmark phase is claimed. This is distinct from the orbital position, which uses JPL Horizons samples over 2020–2032 and the shared fitted ellipse plus prepared slow-longitude libration terms. Independent fractional-day reference epochs measure fit residuals, not a universal accuracy bound; extrapolation outside the fitted interval is not qualified.
