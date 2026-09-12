@@ -12,7 +12,8 @@ import { apply, multiply, transpose, type Matrix3 } from './ck.mts';
 import { stelab, type Ephemeris } from './geometry.mts';
 import { frameDefinition } from './frames.mts';
 
-export type Aberration = 'LT+S' | 'LT' | 'NONE';
+/** SPICE aberration corrections: one light-time iteration (LT), converged (CN), each with or without stellar aberration (+S), or none. */
+export type Aberration = 'LT+S' | 'LT' | 'CN+S' | 'CN' | 'NONE';
 export interface PixelModelKeys {
   /** INS<id>_ variable suffixes: focal length, pixel pitch, detector centre (sample, line), boresight, samples, lines, frame. */
   readonly focalLength: { readonly key: string; readonly unit: 'mm' };
@@ -87,8 +88,8 @@ export function pixelModel(pool: KernelPool, instrument: number, keys: PixelMode
  */
 export function spiceCamera({ pool, ephemeris, rotation, observer, target, bodyFrame, instrument, et, aberration, pixels, sun = 10 }: SpiceCameraRequest): SpiceCamera {
   const model = pixelModel(pool, instrument, pixels);
-  const lightTime = aberration !== 'NONE', stellarAberration = aberration === 'LT+S';
-  const apparent = ephemeris.apparent(target, observer, et, { lightTime, stellarAberration }), emissionEt = apparent.emissionEt;
+  const lightTime = aberration !== 'NONE', stellarAberration = aberration.endsWith('+S'), converged = aberration.startsWith('CN');
+  const apparent = ephemeris.apparent(target, observer, et, { lightTime, stellarAberration, converged }), emissionEt = apparent.emissionEt;
   const observerState = ephemeris.state(observer, 0, et), targetAtEmission = ephemeris.state(target, 0, emissionEt).position;
   const bodyRotation = rotation(bodyFrame, emissionEt); // J2000 -> body
   const positionKm = apply(bodyRotation, [observerState.position[0] - targetAtEmission[0], observerState.position[1] - targetAtEmission[1], observerState.position[2] - targetAtEmission[2]]);
@@ -107,7 +108,7 @@ export function spiceCamera({ pool, ephemeris, rotation, observer, target, bodyF
   const matrix = projection.map(row => [...row, -dot(row, positionKm)]);
   const rayMatrix = multiply(transpose(instrumentRotation), invert(intrinsic));
   // The Sun as the body sees it at emission (light time and the body's own aberration), for incidence and phase.
-  const sunApparent = ephemeris.apparent(sun, target, emissionEt, { lightTime, stellarAberration });
+  const sunApparent = ephemeris.apparent(sun, target, emissionEt, { lightTime, stellarAberration, converged });
   const sunDirection = unit(apply(bodyRotation, sunApparent.position));
   const toObserver = unit(positionKm);
   return { schema: 'cssearth-archived-camera@1', matrix, rayMatrix: rayMatrix.map(row => [...row]), positionKm, sunDirection, width: model.width, height: model.height,
