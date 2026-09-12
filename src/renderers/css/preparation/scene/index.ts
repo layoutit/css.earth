@@ -7,6 +7,7 @@ import type { RasterRecipe } from '../../../../preparation/raster/config.js';
 import type { GeometryProfile } from './profile.js';
 import { createLeafProjector, rendererPolygon } from './projector.js';
 import { prepareCutaway } from './cutaway.js';
+import { prepareSeamOutsetSteps } from './seam-outset.js';
 import type { InteriorAssets } from './cutaway.js';
 import { prepareAtmosphericMaterial } from './atmosphere.js';
 export { parseGeometryProfile } from './profile.js';
@@ -47,7 +48,12 @@ export async function prepareGeometryScene({profile,raster,assets,solarSource,st
  const bodyLeaves=[...leaves,...innerPolarLeaves];
  const interior=profile.cutaway&&assets.interior?prepareCutaway(profile,assets.interior,polygons,leaves,projector):undefined;
  if(Boolean(profile.cutaway)!==Boolean(assets.interior))throw new TypeError('Cutaway geometry and prepared assets must be supplied together.');
- const seamRepair={model:'prepared-zero-seam-bleed-with-compositor-overlap',seamBleed:profile.projection.seamBleed,presentationOverlap:profile.projection.overlap,rasterGutter:profile.projection.rasterGutter,rasterOverscan:profile.projection.rasterOverscan,runtimeEdgeDiscovery:false};
+ // A stepped outset replaces the stretched compositor overlap. Leaves overlap only by their matched raster overscan,
+ // which keeps texels continuous across a seam when magnified, and grow by a prepared amount per silhouette step,
+ // so their antialiased edges stay covered at every zoom (see seam-outset.ts).
+ const outset=profile.projection.seamOutset?prepareSeamOutsetSteps(profile.projection.seamOutset):undefined;
+ const seamRepair=outset?{model:profile.projection.rasterOverscan>0?'prepared-matched-raster-overscan-with-silhouette-stepped-outset':'prepared-exact-tiling-with-silhouette-stepped-outset',seamBleed:0,presentationOverlap:profile.projection.overlap,rasterGutter:profile.projection.rasterGutter,rasterOverscan:profile.projection.rasterOverscan,runtimeEdgeDiscovery:false,outset}
+  :{model:'prepared-zero-seam-bleed-with-compositor-overlap',seamBleed:profile.projection.seamBleed,presentationOverlap:profile.projection.overlap,rasterGutter:profile.projection.rasterGutter,rasterOverscan:profile.projection.rasterOverscan,runtimeEdgeDiscovery:false};
  const material=assets.atmosphere?prepareAtmosphericMaterial(profile,raster,assets.atmosphere.source,assets.atmosphere.model,adapters.sunReferenceViewDirection(solarSource)):
   assets.lighting?{schema:profile.output.materialSchema,frameCount:assets.lighting.frameCount,logicalDiameter:profile.surface.radius*2,defaultFrame:assets.lighting.defaultFrame,runtimeLighting:false}:
   assets.emission?{...assets.emission,schema:profile.output.materialSchema,model:'emissive',lighting:false,shadows:false,runtimeLighting:false}:undefined;

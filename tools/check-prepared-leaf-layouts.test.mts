@@ -36,7 +36,16 @@ const requireObject = <T,>(value: T | undefined, label: string): T => {
 };
 
 async function changedObject(id: string, mutate: (plan: PreparedPlan) => unknown) {
-  const { changed, readText } = await preparedObjectOverlay(id, runtime => mutate(requirePreparedPlan(runtime, `${id} prepared runtime`)));
+  const { changed, readText } = await preparedObjectOverlay(id, runtime => {
+    const label = `${id} prepared runtime`, plan = requirePreparedPlan(runtime, label), result = mutate(plan);
+    // The validated plan holds copies; write the mutated fields back so the census reads them.
+    const tree = requireRecord(runtime.tree, `${label}.tree`);
+    for (const key of ["nodes", "properties"] as const) {
+      const original = requireArray(tree[key], `${label}.tree.${key}`);
+      tree[key] = plan.tree[key].map((entry, index) => index < original.length ? Object.assign(requireRecord(original[index], `${label}.tree.${key}[${index}]`), entry) : entry);
+    }
+    return result;
+  });
   const result = await censusPreparedLeafLayouts({ objects: OBJECTS.filter(object => object.id === id),
     readText });
   return { result, changed };
@@ -51,6 +60,17 @@ test("all existing objects supply complete reachable prepared texture layouts", 
   assert.deepEqual(result.objects.map(object => object.id), OBJECTS.map(object => object.id));
   assert.ok(result.objects.every(object => object.count > 0 && object.failures.length === 0 && object.sourceSha256 !== null && /^[a-f0-9]{64}$/.test(object.sourceSha256)));
   assert.equal(requireObject(result.objects.find(object => object.id === "saturn"), "Saturn census").completedByDescriptor, 162);
+});
+test("projective leaves accept only their prepared seam outset after the matrix", async () => {
+  const { result } = await changedObject("venus", plan => {
+    const node = requireObject(plan.tree.nodes[firstTexture(plan)], "Venus surface leaf");
+    const id = node.properties.find(id => plan.tree.properties[id]?.name === "transform");
+    const property = requireObject(id === undefined ? undefined : plan.tree.properties[id], "Venus leaf transform");
+    assert.match(property.value, / translate\(50%, 50%\) scale\(calc\(1 \+ var\(--surface-seam-outset, 0\)/u);
+    property.value = property.value.replace(/ translate\(50%, 50%\).*$/u, " scale(1.02)");
+  });
+  assert.equal(result.complete, false);
+  assert.match(JSON.stringify(result.objects.flatMap(object => object.failures)), /carrier transform is missing or invalid/);
 });
 test("native raster triangle audit rejects missing dimensions, addresses, flattening and projective matrices", async () => {
   const mutations: readonly [(node: PreparedNode) => void, RegExp][] = [
