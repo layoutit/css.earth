@@ -85,6 +85,20 @@ presentation includes authored color and sharpening operations, which also stay
 in place. Low-resolution or unobserved source areas cannot gain measured detail
 from this change.
 
+The 12 September 2026 review used revision `3dc424757`: all 51 selected views
+across 35 bodies were captured in Chromium at DPR 1 with Shadows on and off
+(102 captures), then inspected for visible texture, coverage and lighting.
+There were no script errors in those captures. Some unchanged scientific-view
+thumbnails were unavailable in the local checkout; this was not a full catalogue
+delivery or browser-conformance pass. [Earth's close-zoom limitation](../src/planets/earth/README.md#known-problems)
+occurred with both the previous and new photographic bytes.
+
+The [Enceladus comparison](../src/planets/enceladus/evidence/native-source-sampling.png)
+separates source sampling from WebP quality at an identical camera position.
+[Dione's enhanced-color capture](../src/planets/dione/evidence/native-source-enhanced.png)
+shows a complete product view. These examples demonstrate the prepared result;
+they do not establish new observational resolution or remove the sources' seams.
+
 ### Format and field references
 
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation)
