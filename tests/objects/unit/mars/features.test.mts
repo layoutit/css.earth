@@ -19,7 +19,7 @@ test("the prepared Mars nomenclature catalogue is pinned by the runtime plan and
   assert.deepEqual({ url: descriptor.url, bytes: descriptor.bytes, sha256: descriptor.sha256, count: descriptor.count }, plan.catalog);
   assert.equal(descriptor.mapLeftEdgeLongitudeDeg, 180);
   assert.equal(descriptor.excluded.AL.count, 126);
-  assert.equal(plan.catalog.count, 1923, "the unchanged features recipe keeps the affine-lane count");
+  assert.equal(plan.catalog.count, 1941, "the affine-lane count of 1,923 plus two unsized names and sixteen spacecraft sites and traverses");
 });
 
 test("the plan anchors labels to the body mesh for the three surface lenses", () => {
@@ -28,5 +28,6 @@ test("the plan anchors labels to the body mesh for the three surface lenses", ()
   assert.deepEqual(plan.lensIds, ["normal", "elevation", "thermal"]);
   assert.equal(plan.meshRadiusUnits, runtimeDefinition.camera.logicalBodyDiameter / 2 / runtimeDefinition.camera.sceneScale);
   assert.deepEqual(plan.outline, { pieces: 256 });
-  assert.equal(plan.policy.minimumZoomShare, 1);
+  assert.equal(plan.policy.minimumZoomShare, 0, "the policy gate is open; every name carries its own discovery tier");
+  assert.ok(catalog.features.some(feature => feature.minimumZoomShare === 0) && catalog.features.some(feature => feature.minimumZoomShare >= 0.99), "tiers span the zoom range");
 });

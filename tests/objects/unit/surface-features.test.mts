@@ -77,11 +77,14 @@ for (const id of bodies) {
         assert.ok(expected.every((n, i) => Math.abs(n * length - feature.anchorUnits[i]) < 1e-2), `${id}: ${feature.name} anchor follows the body frame`);
         assert.ok(length >= band!.minimum * (1 - 1e-3) && length <= band!.maximum * (1 + 1e-3), `${id}: ${feature.name} anchor lies within the hit mesh band`);
       } else assert.ok(expected.every((n, i) => Math.abs(n * plan.meshRadiusUnits - feature.anchorUnits[i]) < 1e-2), `${id}: ${feature.name} anchor follows the map axes`);
-      assert.ok(feature.diameterKm <= previous, `${id}: prepared priority is diameter order`);
-      previous = feature.diameterKm;
+      // Spacecraft sites rank as 20 km features and Natural Earth names by population or scale rank; the Gazetteer names around them keep diameter order.
+      const site = ["LS", "IM", "SS", "RT"].includes(feature.code);
+      if (site) assert.equal(feature.diameterKm, 0, `${id}: ${feature.name} site is unsized`);
+      else if (id !== "earth") { assert.ok(feature.diameterKm <= previous, `${id}: prepared priority is diameter order`); previous = feature.diameterKm; }
+      assert.ok(feature.minimumZoomShare >= 0 && feature.minimumZoomShare <= 1, `${id}: ${feature.name} discovery tier`);
       assert.ok(feature.searchNames.length > 0 && feature.origin.length >= 0, feature.name);
       // A caption note is a short Wikipedia lead summary pinned with its article; the pinned document is the only source.
-      if (feature.note) { assert.ok(feature.note.text.length <= 321 && feature.note.url.startsWith("https://en.wikipedia.org/wiki/"), `${id}: ${feature.name} note`); noted++; }
+      if (feature.note) { assert.ok(feature.note.text.length <= 321 && /^https?:\/\//u.test(feature.note.url), `${id}: ${feature.name} note`); if (feature.note.credit.startsWith("Wikipedia")) noted++; }
     }
     const rawCatalog: unknown = JSON.parse(bytes.toString("utf8"));
     assert.ok(record(rawCatalog));
@@ -90,7 +93,7 @@ for (const id of bodies) {
       const pinned: unknown = JSON.parse(await readFile(new URL(`${id}/source/features/notes.json`, roots), "utf8"));
       assert.ok(record(pinned) && Array.isArray(pinned.entries), `${id}: pinned notes`);
       const byId = new Map((pinned.entries as { id: string; extract: string; url: string }[]).map(entry => [entry.id, entry]));
-      for (const feature of catalog.features) if (feature.note) assert.deepEqual(feature.note, { text: byId.get(feature.id)!.extract, title: (byId.get(feature.id) as { title: string }).title, url: byId.get(feature.id)!.url }, `${id}: ${feature.name} note matches its pin`);
+      for (const feature of catalog.features) if (feature.note) if (feature.note.credit.startsWith("Wikipedia")) assert.deepEqual(feature.note, { text: byId.get(feature.id)!.extract, title: (byId.get(feature.id) as { title: string }).title, url: byId.get(feature.id)!.url, credit: "Wikipedia, CC BY-SA 4.0" }, `${id}: ${feature.name} note matches its pin`);
     } else assert.equal(noted, 0, `${id}: notes without a pinned document`);
   });
 }

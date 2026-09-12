@@ -20,7 +20,7 @@ type Input = Record<string, unknown>;
 
 function record(value: unknown, at: string): Input { if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`); return value as Input; }
 function contained(root: string, path: string): string { const resolved = resolve(root, path), offset = relative(root, resolved); if (offset === '..' || offset.startsWith(`..${String.fromCharCode(47)}`) || offset.startsWith(`..${String.fromCharCode(92)}`)) throw new TypeError(`Source ${path} escapes its object directory.`); return resolved; }
-async function verifiedSource(root: string, reference: SourceReference): Promise<VerifiedSource> {
+export async function verifiedSource(root: string, reference: SourceReference): Promise<VerifiedSource> {
   const path = contained(root, reference.path), bytes = await readFile(path);
   if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) throw new TypeError(`Source ${reference.path} does not match its descriptor digest.`);
   try { return Object.freeze({ reference, path, value: JSON.parse(bytes.toString('utf8')) as unknown }); }
@@ -112,15 +112,18 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     return prepareLayeredOblateObject({ objectDirectory, publicDirectory, outputDirectory, write, prepareContent: prepareObjectContentAssets });
   }
   if (source(sources, 'paged-ellipsoid')) {
-    genericLaneOnly();
     const { preparePagedEllipsoidObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/paged-ellipsoid/index.mts')).href) as typeof import('./paged-ellipsoid/index.mts');
     const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
+    // Named features anchor on the rendered ellipsoid (attach.ts casts map directions through the lane's own surface sampler).
+    const attached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: prepared.definition as unknown as Record<string, unknown> });
+    if (attached.features) { await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(attached.definition)}\n`); await writeFeatureContent(outputDirectory, attached.features); }
+    const definition = attached.definition as typeof prepared.definition;
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
       allowPreparationArtifacts: true,
-      values: [prepared.definition, prepared.content] });
-    if (write) await writePreparedObject(descriptor.id, prepared.definition);
-    return Object.freeze({ ...prepared });
+      values: [definition, prepared.content] });
+    if (write) await writePreparedObject(descriptor.id, definition);
+    return Object.freeze({ ...prepared, definition });
   }
   if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-banded-ellipsoid@1') {
     genericLaneOnly();

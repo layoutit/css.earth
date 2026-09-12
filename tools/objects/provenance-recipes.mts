@@ -222,7 +222,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
   if (features?.schema === 'cssearth-surface-features@1') {
     const directory = text(features.directory);
     const traces = maybeRecord(features.traces);
-    add('features', 'features', '', [`${directory}/manifest.json`, `${directory}/${text(features.archive)}`, text(features.surfaceMap), ...(typeof features.notes === 'string' ? [`${directory}/${features.notes}`] : []),
+    add('features', 'features', '', [`${directory}/manifest.json`, ...(features.archive === null ? [] : [`${directory}/${text(features.archive)}`]), text(features.surfaceMap), ...(typeof features.notes === 'string' ? [`${directory}/${features.notes}`] : []), ...(maybeRecord(features.sites) ? [`${directory}/${text(maybeRecord(features.sites)!.document)}`, ...(Array.isArray(maybeRecord(features.sites)!.inputs) ? (maybeRecord(features.sites)!.inputs as unknown[]).map(item => `${directory}/${text(item)}`) : [])] : []),
         ...(traces ? [`${text(traces.directory)}/manifest.json`, `${text(traces.directory)}/${text(traces.archive)}`] : [])],
       'Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.', {
         label: 'Named features', urls: [prefix + text(features.output)], lensIds: [],

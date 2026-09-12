@@ -19,9 +19,9 @@ test("the prepared Moon nomenclature catalogue is pinned by the runtime plan and
   assert.equal(catalog.features.length, plan.catalog.count);
   assert.deepEqual({ url: descriptor.url, bytes: descriptor.bytes, sha256: descriptor.sha256, count: descriptor.count }, plan.catalog);
   assert.equal(descriptor.mapLeftEdgeLongitudeDeg, 180);
-  assert.equal(descriptor.excluded.SF.count, 7063);
+  assert.equal(descriptor.excluded.SF, undefined, "lettered satellite craters are labelled now");
   assert.equal(descriptor.excluded.AL.count, 1);
-  assert.equal(plan.catalog.count, 2018, "the unchanged features recipe keeps the static-lane count");
+  assert.equal(plan.catalog.count, 9167, "2,018 parent names, 7,063 lettered satellite craters, four unsized names and 82 spacecraft sites and traverses");
 });
 
 test("the plan anchors labels to the single body mesh for every surface lens", () => {
@@ -31,5 +31,6 @@ test("the plan anchors labels to the single body mesh for every surface lens", (
   assert.deepEqual(plan.lensIds, ['surface', 'midnight-temperature', 'heat-anomalies', 'rock-abundance', 'topography', 'crust', 'silicate-signature', 'geology']);
   assert.equal(plan.meshRadiusUnits, runtimeDefinition.camera.logicalBodyDiameter / 2 / runtimeDefinition.camera.sceneScale);
   assert.deepEqual(plan.outline, { pieces: 256 });
-  assert.equal(plan.policy.minimumZoomShare, 1);
+  assert.equal(plan.policy.minimumZoomShare, 0, "the policy gate is open; every name carries its own discovery tier");
+  assert.ok(catalog.features.some(feature => feature.minimumZoomShare === 0) && catalog.features.some(feature => feature.minimumZoomShare >= 0.99), "tiers span the zoom range");
 });
