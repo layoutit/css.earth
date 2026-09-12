@@ -1,6 +1,6 @@
 # Nebula compiler: first inspect the evidence
 
-Updated 2026-09-12. **Current stage: compare structure before color against each aligned ESO observation.** Detected image contours seed editable ellipsoidal emission hypotheses; prepared luminance, edges and signed residual expose their mismatch before texturing. The model can also be viewed beside, above or painted with the source. This is an inspection prototype, not a validated reconstruction. The prior Hubble-based Helix volumes remain failed comparison baselines.
+Updated 2026-09-12. **Current stage: inspect combined multiband evidence and a separate measured velocity slit.** See the [multimodal workflow](multimodal-workflow.md) and [research leads](multimodal-research.md). The existing per-image workbench still compares structure before color against each aligned ESO observation. Detected image contours seed editable ellipsoidal emission hypotheses; prepared luminance, edges and signed residual expose their mismatch before texturing. The model can also be viewed beside, above or painted with the source. This is an inspection prototype, not a validated reconstruction. The prior Hubble-based Helix volumes remain failed comparison baselines.
 
 ## Intended contract
 

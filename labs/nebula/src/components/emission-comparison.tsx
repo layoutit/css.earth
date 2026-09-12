@@ -3,23 +3,37 @@ import { localFile } from '../viewer/viewer';
 import { EmissionStructures } from './emission-structures';
 import { EmissionSources } from './emission-sources';
 import { ObservationStructures } from './observation-structures';
+import { EvidenceFusion } from './evidence-fusion';
+import { KinematicsPanel } from './kinematics-panel';
 
 /** Read-only numerical comparisons; selecting a view never starts a reconstruction. */
-export function EmissionComparison({ directory, structureDirectory, observationStructures, observationManifest, onModeChange, sourceCatalogue, modeled = false, methodUrl, credit, statusNote }: {
-  directory: string; structureDirectory?: string; observationStructures?: string; observationManifest?: string; onModeChange?(mode: 'sources' | 'structure' | 'volume'): void;
+export function EmissionComparison({ directory, structureDirectory, observationStructures, observationManifest, kinematicsSource, onModeChange, sourceCatalogue, modeled = false, methodUrl, credit, statusNote }: {
+  directory: string; structureDirectory?: string; observationStructures?: string; observationManifest?: string; kinematicsSource?: string; onModeChange?(mode: 'sources' | 'structure' | 'volume'): void;
   sourceCatalogue?: string; modeled?: boolean; methodUrl?: string; credit?: string; statusNote?: string;
 }) {
-  const [mode, setMode] = useState<'sources' | 'structure' | 'volume'>(() => sourceCatalogue && new URLSearchParams(location.search).get('inspection') === 'sources' ? 'sources' : 'structure');
+  const [mode, setMode] = useState<'sources' | 'structure' | 'volume' | 'combined' | 'kinematics'>(() => {
+    const requested = new URLSearchParams(location.search).get('inspection');
+    if (requested === 'combined' && observationStructures) return 'combined';
+    if (requested === 'kinematics' && kinematicsSource) return 'kinematics';
+    return requested === 'sources' && sourceCatalogue ? 'sources' : 'structure';
+  });
   const structureMode = Boolean(observationStructures || structureDirectory) && mode === 'structure';
   const sourcesMode = Boolean(sourceCatalogue) && mode === 'sources';
-  function changeMode(next: typeof mode) { setMode(next); onModeChange?.(next); }
-  return <aside className={`floating-panel cloud-adjustment-panel${structureMode && observationStructures ? ' observation-structures-panel' : ''}`} aria-label="Emission inference comparison">
+  const combinedMode = mode === 'combined' && Boolean(observationStructures), velocityMode = mode === 'kinematics' && Boolean(kinematicsSource);
+  const advanced = combinedMode || velocityMode;
+  function changeMode(next: typeof mode) {
+    setMode(next); onModeChange?.(next === 'combined' || next === 'kinematics' ? 'structure' : next);
+    const url = new URL(location.href); url.searchParams.set('inspection', next); history.replaceState(history.state, '', url);
+  }
+  return <aside className={`floating-panel cloud-adjustment-panel${(structureMode && observationStructures || advanced) ? ' observation-structures-panel' : ''}`} aria-label="Emission inference comparison">
     {(structureDirectory || observationStructures) && <div className="emission-view-buttons" role="group" aria-label="Inspection mode">
       {sourceCatalogue && <button type="button" aria-pressed={sourcesMode} onClick={() => changeMode('sources')}>Source candidates</button>}
       <button type="button" aria-pressed={structureMode} onClick={() => changeMode('structure')}>Structure map</button>
-      <button type="button" aria-pressed={!structureMode && !sourcesMode} title="Previous Hubble volume baseline; the current observations have not supplied new depths." onClick={() => changeMode('volume')}>Volume</button>
+      {observationStructures && <button type="button" aria-pressed={combinedMode} onClick={() => changeMode('combined')}>Combined</button>}
+      {kinematicsSource && <button type="button" aria-pressed={velocityMode} onClick={() => changeMode('kinematics')}>Velocity</button>}
+      <button type="button" aria-pressed={!structureMode && !sourcesMode && !advanced} title="Previous Hubble volume baseline; the current observations have not supplied new depths." onClick={() => changeMode('volume')}>Volume</button>
     </div>}
-    {sourcesMode && sourceCatalogue ? <EmissionSources key={sourceCatalogue} catalogue={sourceCatalogue} /> : structureMode && observationStructures ? <ObservationStructures key={observationStructures} cataloguePath={observationStructures} observationManifest={observationManifest} /> : structureMode && structureDirectory ? <EmissionStructures key={structureDirectory} directory={structureDirectory} /> : <fieldset>
+    {combinedMode && observationStructures ? <EvidenceFusion cataloguePath={observationStructures} observationManifest={observationManifest} /> : velocityMode && kinematicsSource ? <KinematicsPanel sourcePath={kinematicsSource} /> : sourcesMode && sourceCatalogue ? <EmissionSources key={sourceCatalogue} catalogue={sourceCatalogue} /> : structureMode && observationStructures ? <ObservationStructures key={observationStructures} cataloguePath={observationStructures} observationManifest={observationManifest} /> : structureMode && structureDirectory ? <EmissionStructures key={structureDirectory} directory={structureDirectory} /> : <fieldset>
       <legend>{modeled ? 'Image + geometric prior' : 'Image → inferred volume'}</legend>
       {observationStructures && <p className="interaction-hint">Previous Hubble baseline</p>}
       {statusNote && <p className="interaction-hint">{statusNote}</p>}
@@ -33,7 +47,7 @@ export function EmissionComparison({ directory, structureDirectory, observationS
       </figure>)}
       <p className="interaction-hint" title={modeled ? 'The published geometry sets a depth prior. Color is allocated along its rays; agreement with the photo does not prove the geometry.' : 'The depth is inferred under an authored axial-symmetry assumption. Physical size and gas mass density are not measured. The projection comparison is numerical; the PolyCSS display uses an approximate opacity transfer.'}>{modeled ? 'Authored depth · photo agreement imposed' : 'Symmetry-based experiment · unmeasured depth'}</p>
     </fieldset>}
-    {!structureMode && !sourcesMode && <a className="model-source" href={methodUrl ?? 'https://doi.org/10.1111/cgf.12216'} target="_blank" rel="noreferrer">Reconstruction paper ↗</a>}
-    {!sourcesMode && !(structureMode && observationStructures) && credit && <p className="interaction-hint">{credit}</p>}
+    {!structureMode && !sourcesMode && !advanced && <a className="model-source" href={methodUrl ?? 'https://doi.org/10.1111/cgf.12216'} target="_blank" rel="noreferrer">Reconstruction paper ↗</a>}
+    {!sourcesMode && !advanced && !(structureMode && observationStructures) && credit && <p className="interaction-hint">{credit}</p>}
   </aside>;
 }

@@ -4,6 +4,10 @@
 
 **Initial visual verdict: neither baseline is accepted.** The one-axis fit reproduces the photograph but becomes a box from the side. The disk/ring prior has finite curved components, but is too smooth, cuts off outer emission and changes brightness under rotation. These are deliberately visible comparisons, not production nebula assets.
 
+## Combined observations and measured velocities
+
+Open `/reconstruction?subject=helix-model-prior&inspection=combined` for the three-image evidence map, or `inspection=kinematics` for the measured core slit. [Workflow and limits](../../docs/multimodal-workflow.md) explain the shared sky grid, source weights, saved jobs and independent velocity hypothesis. [kinematics-oiii.json](kinematics-oiii.json) preserves the actual figure-9 digitization and calibration; [research](../../docs/multimodal-research.md) records original-data alternatives. These views do not yet produce a jointly constrained 3D Helix.
+
 ## Saved coarse fit · 2026-09-12
 
 [tuned-shape-fit.json](tuned-shape-fit.json) stores the fit adjusted through the running workbench: a main annulus, faint cavity, northwest/southeast rim sectors, diffuse envelope and outer northwest arc. Arc length/angle control finite 3D ring sectors with soft ends. Image registration stays unchanged. The widths, depths, weights and arc extents are authored hypotheses, not measured gas geometry.
@@ -58,6 +62,7 @@ python3 -m venv .local/open-star-removal/venv
 curl -fL https://github.com/charvey2718/nox/releases/download/v1.1.0/noxGeneratorColor.pb -o .local/open-star-removal/noxGeneratorColor.pb
 node --experimental-strip-types labs/nebula/src/run.ts prepare-observations labs/nebula/models/helix/observations.json --alignment-only
 node --experimental-strip-types labs/nebula/src/run.ts prepare-observations labs/nebula/models/helix/observations.json
+node --experimental-strip-types labs/nebula/src/run.ts prepare-kinematics labs/nebula/models/helix/kinematics-oiii.json
 pnpm exec vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort
 ```
 

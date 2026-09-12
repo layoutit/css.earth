@@ -116,6 +116,10 @@ For an `inference` subject, use the [shape-cloud workbench](docs/nebula-compiler
 
 This preview models relative emission, not measured gas density. Depth and wall shape are authored assumptions; unsupported arcs, asymmetries and outer emission still need better hypotheses. The photo texture must not conceal a poor neutral fit.
 
+## Multiband evidence and kinematic constraints
+
+The [multimodal inspector](docs/multimodal-workflow.md) combines registered, independently normalized broad/ridge/compact evidence while retaining each source's footprint and attribution. Single-band features survive; compatible repeated support is an additional display, not a membership test. A separate real Helix slit compares observed velocities with an explicitly assumed expanding ellipsoid. It is not yet jointly fitted to the image map or promoted to a volume. See [research and dataset leads](docs/multimodal-research.md) before choosing a depth model.
+
 ## Selected LMC inputs
 
 | Candidate | Pinned processing grid | Active registration | Remaining limitation |
