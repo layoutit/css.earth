@@ -198,6 +198,7 @@ export async function scrollToDistance(page: Page, targetKilometers: number): Pr
   const box = await page.locator(".planet-stage").boundingBox();
   assert.ok(box, "planet stage must be visible");
   await page.mouse.move(box.x + box.width * .72, box.y + box.height * .6);
+  let previousDistance: number | null = null, stalled = 0;
   for (let attempt = 0; attempt < 60; attempt++) {
     const { distance, step, kind } = await page.evaluate((): { readonly distance: number; readonly step: number; readonly kind: string } => {
       const app = Reflect.get(window, "__cssEarth") as { readonly activeObjectId?: unknown } | undefined;
@@ -213,6 +214,13 @@ export async function scrollToDistance(page: Page, targetKilometers: number): Pr
         kind: camera.stats().dragInertia.wheelZoom.inputKind };
     });
     if (Math.abs(distance / targetKilometers - 1) < 1e-6) return;
+    // A camera clamped at its own limit never reaches the target; say so at once
+    // instead of spending sixty gestures discovering it.
+    if (previousDistance !== null && Math.abs(distance / previousDistance - 1) < 1e-9 && ++stalled >= 2) {
+      throw new Error(`Native wheel stalled at ${distance} km while reaching ${targetKilometers} km; the camera will not travel further.`);
+    }
+    if (previousDistance === null || Math.abs(distance / previousDistance - 1) >= 1e-9) stalled = 0;
+    previousDistance = distance;
     const coarse = Math.log(targetKilometers / distance) / step / WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER;
     let delta: number;
     if (Math.abs(coarse) >= 100) {
@@ -220,8 +228,11 @@ export async function scrollToDistance(page: Page, targetKilometers: number): Pr
       if (kind === "trackpad") await page.waitForTimeout(410);
       delta = Math.sign(coarse) * Math.min(300, Math.floor(Math.abs(coarse) / 100) * 100);
     } else {
-      delta = Math.log(targetKilometers / distance) / step / WHEEL_ZOOM_SPEED_MULTIPLIER;
-      assert.ok(Math.abs(delta) < 40, "final correction must be precision input");
+      // The discrete and precision multipliers are equal today, so the remainder
+      // after the coarse notches can still exceed one precision gesture. Send at
+      // most a gesture's worth and let the loop close the rest.
+      const correction = Math.log(targetKilometers / distance) / step / WHEEL_ZOOM_SPEED_MULTIPLIER;
+      delta = Math.max(-39, Math.min(39, correction));
     }
     await wheelWithReceipt(page, delta);
     await page.waitForFunction((): boolean => {

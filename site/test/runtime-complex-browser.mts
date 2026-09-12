@@ -5,14 +5,15 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
-import rawNeptune from "../../src/planets/neptune/prepared/runtime.json" with { type: "json" };
-import rawSaturn from "../../src/planets/saturn/prepared/runtime.json" with { type: "json" };
+import { readJsonSource } from "../../tools/source-values.mts";
 import { selectedPreparedVariant, preparedMaterialState } from "../../src/renderers/css/dist/testing.js";
 import { waitForAuditPreparedReadiness } from "../../tools/audit-prepared-readiness.mts";
 
 import { parsePreparedObjectRuntime } from '../../src/renderers/css/dist/index.js';
 import type { ObjectRuntimeDefinition } from '../../src/renderers/css/runtime/object-runtime-types.ts';
 import { required } from './navigation-test-values.mts';
+// Prepared runtimes are generated, ignored files: read them when the suite runs rather than at typecheck.
+const [rawNeptune, rawSaturn] = await Promise.all(["neptune", "saturn"].map(id => readJsonSource(new URL(`../../src/planets/${id}/prepared/runtime.json`, import.meta.url))));
 const NEPTUNE = parsePreparedObjectRuntime(rawNeptune), SATURN = parsePreparedObjectRuntime(rawSaturn);
 interface DecodeRule { fragment: string; mode: 'hold' | 'fail'; released: boolean; }
 interface DecodeProbe { gate: DecodeRule | null; pending: { path: string; resolve(): void; rule: DecodeRule }[];

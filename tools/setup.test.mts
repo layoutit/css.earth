@@ -28,3 +28,15 @@ test("setup installs pinned files, reuses them offline, and repairs a corrupt fi
     assert.deepEqual(await readFile(asset.file), bytes);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test("setup reports every unavailable file instead of stopping at the first", async () => {
+  const root = await mkdtemp(join(tmpdir(), "cssearth-setup-"));
+  const asset = (name: string) => ({ id: "sun", key: `sun/${name}`, filename: name, file: join(root, name),
+    url: `https://example.invalid/${name}`, bytes: 3, sha256: createHash("sha256").update("abc").digest("hex") });
+  try {
+    const missing = ["first.webp", "second.webp"];
+    await assert.rejects(installRuntimeAssets(missing.map(asset), {
+      concurrency: 1, fetcher: async () => new Response(null, { status: 404 }),
+    }), (error: Error) => missing.every(name => error.message.includes(name)) && error.message.includes("2 of 2"));
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

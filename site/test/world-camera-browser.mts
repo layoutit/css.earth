@@ -23,7 +23,7 @@ const near = (a: readonly number[], b: readonly number[], tolerance = .0002): vo
 };
 type Vector3 = readonly [number, number, number];
 type Quaternion = readonly [number, number, number, number];
-interface BrowserCameraState { silhouetteRadius: number; distance: number; principalOffset: readonly [number, number]; focal: number; bodyCenterKilometers: Vector3; zoom: number; pose: { scene: string }; }
+interface BrowserCameraState { silhouetteRadius: number; distance: number; principalOffset: readonly [number, number]; focal: number; bodyCenterKilometers: Vector3 | null; zoom: number; pose: { scene: string }; }
 interface BrowserSnapshot { camera: BrowserCameraState; world: WorldCameraPose; }
 declare global { interface Window { __ownerSelections?: unknown[]; } }
 
@@ -31,6 +31,8 @@ function rotated([x, y, z, w]: Quaternion, vector: Vector3): Vector3 {
   const [a, b, c] = vector, tx = 2 * (y * c - z * b), ty = 2 * (z * a - x * c), tz = 2 * (x * b - y * a);
   return [a + w * tx + y * tz - z * ty, b + w * ty + z * tx - x * tz, c + w * tz + x * ty - y * tx];
 }
+/** Every comparison below runs after a world camera was applied, so the centre must exist. */
+const centreOf = (snapshot: BrowserSnapshot, label: string): Vector3 => vector3(required(snapshot.camera.bodyCenterKilometers, `${label} body centre`));
 function withCentre(world: WorldCameraPose, oldCentre: Vector3, newCentre: Vector3): WorldCameraPose {
   const shift = rotated(quaternion(world.pose.orientationXyzw), vector3(newCentre.map((component, i) => (required(oldCentre[i]) - component) * frame.metersPerUnit)));
   const position = vector3(world.pose.positionM.map((component, i) => component + required(shift[i])));
@@ -54,7 +56,7 @@ try {
   const applied = await read(page);
   near(applied.world.pose.positionM, desired.pose.positionM);
   near(applied.world.pose.orientationXyzw, desired.pose.orientationXyzw, 1e-12);
-  near(applied.camera.bodyCenterKilometers.map(value => value * 1000 / frame.metersPerUnit), centre, 1e-8);
+  near(centreOf(applied, 'applied').map(value => value * 1000 / frame.metersPerUnit), centre, 1e-8);
   await assertMarkerCentre(page);
   report.applied = applied;
 
@@ -78,14 +80,14 @@ try {
   await settled(page);
   const dragged = await read(page);
   assert.notEqual(dragged.camera.pose.scene, resized.camera.pose.scene);
-  near(dragged.camera.bodyCenterKilometers, resized.camera.bodyCenterKilometers, 1e-8);
+  near(centreOf(dragged, 'dragged'), centreOf(resized, 'resized'), 1e-8);
   await page.mouse.move(960, 460);
   await page.mouse.wheel(0, 160);
   await settled(page);
   const wheeled = await read(page);
   assert.ok(wheeled.camera.distance > dragged.camera.distance);
-  near(wheeled.camera.bodyCenterKilometers.map(value => value / wheeled.camera.distance),
-    dragged.camera.bodyCenterKilometers.map(value => value / dragged.camera.distance), 1e-12);
+  near(centreOf(wheeled, 'wheeled').map(value => value / wheeled.camera.distance),
+    centreOf(dragged, 'dragged').map(value => value / dragged.camera.distance), 1e-12);
   report.afterInput = wheeled;
 
   // The URL carries the translated observer, not a centred reconstruction.
@@ -96,14 +98,14 @@ try {
   const restored = await read(page);
   near(restored.world.pose.positionM, wheeled.world.pose.positionM, .01);
   near(restored.world.pose.orientationXyzw, wheeled.world.pose.orientationXyzw, 1e-11);
-  near(restored.camera.bodyCenterKilometers, wheeled.camera.bodyCenterKilometers, 1e-8);
+  near(centreOf(restored, 'restored'), centreOf(wheeled, 'wheeled'), 1e-8);
   assert.equal(new URL(page.url()).hash, '#physical');
   report.restored = restored;
   console.log('WORLD CAMERA: pose, resize, native input and v4 restore passed');
 
   // A legal observer just outside the surface must not fail input calibration.
   const nearCentre: Vector3 = [0, 0, -frame.bodyRadiusM / frame.metersPerUnit * 1.001];
-  const currentCentre = vector3(restored.camera.bodyCenterKilometers.map(value => value * 1000 / frame.metersPerUnit));
+  const currentCentre = vector3(centreOf(restored, 'restored').map(value => value * 1000 / frame.metersPerUnit));
   const closeWorld = withCentre(restored.world, currentCentre, nearCentre);
   await apply(page, closeWorld);
   const close = await read(page);
@@ -178,7 +180,8 @@ async function read(page: Page): Promise<BrowserSnapshot> {
     return { camera: { silhouetteRadius: observations.number(state.silhouetteRadius, 'silhouette radius'),
       distance: observations.number(state.distance, 'camera distance'), focal: state.focal,
       principalOffset, zoom: observations.number(state.zoom, 'camera zoom'),
-      bodyCenterKilometers: observations.required(state.bodyCenterKilometers, 'body centre'), pose: state.pose },
+      // A cold mount tracks no world body centre; it appears once a world camera drives the dolly.
+      bodyCenterKilometers: state.bodyCenterKilometers ?? null, pose: state.pose },
       world: observations.required(mercury.camera.captureWorldCamera(frame), 'world camera') };
   }, frame);
 }

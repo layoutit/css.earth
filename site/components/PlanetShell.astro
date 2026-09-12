@@ -253,7 +253,7 @@ const searchCategories = ([
       {!navigation && <><PlanetCard data-prepared-focus-card hidden>
         <section class="planet-selected-panel">
           <div class="planet-title-row">
-            <h1 class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-focus-name></h1>
+            <p class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-focus-name></p>
             <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-focus-status></span></div>
           </div>
           <p class="planet-introduction" data-focus-aliases hidden></p>
@@ -272,7 +272,7 @@ const searchCategories = ([
         </PlanetAccordion>
       </PlanetCard>
       <PlanetCard class="planet-galactic-overview" data-galactic-overview hidden>
-        <PlanetCardHeader title={OVERVIEW_TITLES['milky-way']}
+        <PlanetCardHeader heading={false} title={OVERVIEW_TITLES['milky-way']}
           introduction="Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.">
           <PlanetBreadcrumbs scope="milky-way" />
         </PlanetCardHeader>
@@ -299,7 +299,7 @@ const searchCategories = ([
         </PlanetAccordion>
       </PlanetCard>
       <PlanetCard data-solar-system-results>
-        <PlanetCardHeader title={OVERVIEW_TITLES['solar-system']}
+        <PlanetCardHeader heading={false} title={OVERVIEW_TITLES['solar-system']}
           introduction="The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.">
           <PlanetBreadcrumbs scope="solar-system" />
         </PlanetCardHeader>
@@ -338,7 +338,7 @@ const searchCategories = ([
     {!navigation && <template data-object-card-preview>
       <section class="planet-selected-panel" data-card-preview>
         <div class="planet-title-row">
-          <h1 class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-card-preview-name></h1>
+          <p class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-card-preview-name></p>
           <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-card-preview-classification></span></div>
         </div>
         <p class="planet-introduction" data-card-preview-description></p>
