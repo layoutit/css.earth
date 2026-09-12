@@ -297,7 +297,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   }
   if (plan.features !== undefined) {
     const features = plan.features;
-    record(features, "surface features", ["catalog", "target", "lensIds", "meshRadiusUnits", "policy", "outline"]);
+    record(features, "surface features", ["catalog", "target", "lensIds", "meshRadiusUnits", "policy", "outline", "surfaceRadiusUnits"]);
     record(features.catalog, "surface feature catalog", ["url", "bytes", "sha256", "count"]);
     if (!features.catalog.url?.startsWith("/scenes/") || !/^[a-f0-9]{64}$/.test(features.catalog.sha256 ?? "")) fail("surface features require a pinned catalogue");
     integer(features.catalog.bytes, "feature catalog bytes", 1); integer(features.catalog.count, "feature catalog count", 1);
@@ -305,6 +305,11 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     const lenses = array(features.lensIds, "surface feature lenses"); unique(lenses, "surface feature lenses");
     if (!lenses.length || lenses.some(id => !lensIds.includes(id))) fail("surface features require declared lenses");
     finite(features.meshRadiusUnits, "surface feature mesh radius"); if (!(features.meshRadiusUnits > 0)) fail("surface feature mesh radius must be positive");
+    if (features.surfaceRadiusUnits !== undefined) {
+      record(features.surfaceRadiusUnits, "surface feature radius band", ["minimum", "maximum"]);
+      finite(features.surfaceRadiusUnits.minimum, "surface feature radius minimum"); finite(features.surfaceRadiusUnits.maximum, "surface feature radius maximum");
+      if (!(features.surfaceRadiusUnits.minimum > 0) || features.surfaceRadiusUnits.maximum < features.surfaceRadiusUnits.minimum) fail("surface feature radius band is invalid");
+    }
     record(features.policy, "surface feature policy", ["minimumZoomShare", "minimumDiameterPixels", "alwaysVisibleCount", "maximumVisible", "limbCosine"]);
     finite(features.policy.minimumZoomShare, "surface feature zoom share"); if (features.policy.minimumZoomShare < 0 || features.policy.minimumZoomShare > 1) fail("surface feature zoom share is out of range");
     finite(features.policy.minimumDiameterPixels, "surface feature size floor"); if (!(features.policy.minimumDiameterPixels > 0)) fail("surface feature size floor must be positive");

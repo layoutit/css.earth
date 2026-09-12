@@ -140,7 +140,7 @@
         "centerLongitude": 180,
         "referenceRadiusMeters": 26400
       },
-      "coverage": "Partial NEAR photomosaic by Stooke and Pfau at 10 pixels per degree. Map registration matches Thomas annotated FITS (west 360 left to 0 right). Missing exterior uses connected gray-fill heuristic 78±3 after sRGB decode; this is not an authoritative coverage mask. Photographed shadows and extensive display processing remain.",
+      "coverage": "Partial NEAR photomosaic by Stooke and Pfau at 10 pixels per degree. Map registration matches Thomas annotated FITS (west 360 left to 0 right). Missing exterior uses connected gray-fill heuristic 78\u00b13 after sRGB decode; this is not an authoritative coverage mask. Photographed shadows and extensive display processing remain.",
       "licenseEvidence": [
         "reference/stooke-map-guide.html"
       ],
@@ -193,6 +193,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-mathilde-nomenclature-center-pts",
+      "path": "features/MATHILDE_nomenclature_center_pts.zip",
+      "expectedBytes": 97468,
+      "expectedSha256": "d042bf056ae40cd5a3f0c846412ba7a42c48b0bb1aa9893473b267b80be47bc2",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MATHILDE_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Mathilde on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Mathilde centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MATHILDE/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "mathilde-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1014,
+      "expectedSha256": "708bbfc4219549d9db2276503c78fc69e9e74a1bd0347fca41f6d6b8294bf7be",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "mathilde-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1132,
+      "expectedSha256": "d9e9649421a8948c74030ecf368a5c2277fb1a808514c2a87aad770778c24bfa",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "mathilde-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 155,
+      "expectedSha256": "9f339dacb4f64327dfbf20a49e53eac2a9f087196735fa43369648c80e992155",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -240,8 +318,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2536,
-      "expectedSha256": "50bc55ef788b3df6bbf93a70b9813b83b6b8eb2a15282458e542be1497ca41ff"
+      "expectedBytes": 2794,
+      "expectedSha256": "202f59b24a7d90dcc1a6848640adc6123b5a9e3aa4b370d9fe6b733d2b4a4c58"
     },
     {
       "path": "preparation/navigation.json",

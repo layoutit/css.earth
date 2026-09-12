@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lutetia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "49394a97db23f758541133a7a8f720160ddc8f0f456e630203e208da8d30c773"
+    "sha256": "8aa54be56cba51a3e11ffeb9aa4c0de9f572223540b81c78b8cc4b32c8a843bb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -403,6 +403,64 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "9717b584132bd22456e868342783dabc77e15b5c44e52c3e2bbd0c995abcab28",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "LUTETIA_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "LUTETIA_nomenclature_center_pts.dbf",
+          "projection": "LUTETIA_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_LUTETIA.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "lutetia-features.json",
+        "publicBase": "/scenes/lutetia/",
+        "target": {
+          "className": "lutetia-body"
+        },
+        "lensIds": [
+          "osiris",
+          "shape",
+          "elevation"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -447,7 +505,7 @@
       "sha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52",
       "bytes": 2954640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -481,7 +539,7 @@
       "sha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd",
       "bytes": 37775872,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -509,7 +567,7 @@
       "sha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac",
       "bytes": 5070,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -535,7 +593,7 @@
       "sha256": "b9435d017f9469503f099f224ca86567b6722ff877aa27d3a178a857e23b43b1",
       "bytes": 37775872,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -566,7 +624,7 @@
       "sha256": "619648154d976db683f43838d45668a140e9fac3ee508335eaf53076f2866fde",
       "bytes": 5104,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -586,7 +644,80 @@
       "sha256": "bd587a259341019b545870b8ec95df98192d86003d5dee82bac00122471b0ce1",
       "bytes": 10209,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lutetia-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "4c8dd8e79922736361cfec1d91ef62c077141e96d6a5930abfc0589971e7f58b",
+      "bytes": 1010,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-lutetia-nomenclature-center-pts",
+      "path": "features/LUTETIA_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/LUTETIA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Lutetia on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Lutetia centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/LUTETIA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "5feb1d89610b0dcc1be87d6f4d80d604e723c1be4ec310262951de0581a4fbf7",
+      "bytes": 134132,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/LUTETIA_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/LUTETIA_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lutetia-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "f508382e29ce3a5c5f70723acc78f74488ac01491c005469b370bb423c97386d",
+      "bytes": 154,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -619,19 +750,19 @@
           "url": "/scenes/lutetia/lutetia-elevation-thumbnail.webp",
           "bytes": 6322,
           "sha256": "28eadc457171bd3c6386469daa3fe910a13dd8318598c50868392df0d4114a30",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lutetia/lutetia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lutetia/lutetia-elevation-surface@2x.webp",
           "bytes": 375170,
           "sha256": "7d7960dce265687aaba2acf3897e4cb20f9f87e9bf21c289490817286ce78534",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -663,13 +794,13 @@
           "url": "/scenes/lutetia/lutetia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lutetia/lutetia-shape-surface@2x.webp",
           "bytes": 220590,
           "sha256": "1080889eaa3f187ed7029f70483458f9b9cec4b3bbe392c20ea09b56ddc4b4fe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -705,13 +836,13 @@
           "url": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
           "bytes": 2266,
           "sha256": "1632f8974f762530b7827e9f105f90eed71de8dbdb2987cbf656eb3b4bb62974",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
           "bytes": 838004,
           "sha256": "c9a1287c2b3fd59416e0e156442b3fc9cbac8629a59e8f277f1659b4be37fe97",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -734,8 +865,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5642,
-          "sha256": "e2223a97691e8b50582b084e148fdff2b75ad10991f1f9455be367a322fc9092",
+          "bytes": 5760,
+          "sha256": "9846c45f349b5fa74245934ed585ab1dedf3c9e9845c1d02711240588771140e",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "lutetia-surface-features-source",
+        "usgs-gazetteer-lutetia-nomenclature-center-pts",
+        "lutetia-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/lutetia/lutetia-features.json",
+          "bytes": 68292,
+          "sha256": "36e06790a76384ed5abc8608f2828ad8a3eef955df9963caa24bbde9fa95bcc3",
           "verification": "bytes-verified"
         }
       ],

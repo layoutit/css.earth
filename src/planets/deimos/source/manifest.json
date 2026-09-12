@@ -36,7 +36,7 @@
       "lensId": "normal",
       "label": "Monochrome",
       "falseColor": false,
-      "coverage": "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask.",
+      "coverage": "Stooke\u2019s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask.",
       "capture": {
         "attributions": [
           {
@@ -185,6 +185,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-deimos-nomenclature-center-pts",
+      "path": "features/DEIMOS_nomenclature_center_pts.zip",
+      "expectedBytes": 42393,
+      "expectedSha256": "9c81729a25ba60d24b34174d9d578d13f164894dbd88821124cd57dbe57f067c",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DEIMOS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Deimos on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Deimos centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DEIMOS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "deimos-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1004,
+      "expectedSha256": "189ecc12549ac04c847cc2e2bf7b060e64a18dc01ad39a13f3ae0579335711e9",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "deimos-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1145,
+      "expectedSha256": "2f07f80b5cdb5055e63a78cf05a3eed9f633fd5f276ddae37e10c487de37968b",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "deimos-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 153,
+      "expectedSha256": "8faeb7e748cac8fda155b3cc657fe7d6b8e176f9a81d12a5ff978c6ae649fffc",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -227,8 +305,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1280,
-      "expectedSha256": "d6e894a49e5e1bff9ae5d987d04d02e62dff958a2fd8a0d4476b1fda3b190024"
+      "expectedBytes": 1534,
+      "expectedSha256": "8af9a1146de078517bde2c0c07e0608a72b61cf84e1c0de3cc68e842b0e161f4"
     },
     {
       "path": "preparation/navigation.json",

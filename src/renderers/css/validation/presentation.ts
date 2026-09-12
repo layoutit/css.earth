@@ -171,7 +171,7 @@ export function requireOptionalPresentation(plan: Record<string, unknown>, tree:
 
 /** Prepared nomenclature labels: a pinned catalogue anchored to one scene mesh, shown for declared lenses. */
 export function requireSurfaceFeatures(value: unknown, tree: PreparedTree, lensIds: readonly string[]): void {
-  const features = record(value, 'surface features', ['catalog', 'target', 'lensIds', 'meshRadiusUnits', 'policy', 'outline']);
+  const features = record(value, 'surface features', ['catalog', 'target', 'lensIds', 'meshRadiusUnits', 'policy', 'outline', 'surfaceRadiusUnits']);
   const catalog = record(features.catalog, 'surface feature catalog', ['url', 'bytes', 'sha256', 'count']);
   if (!text(catalog.url, 'feature catalog URL').startsWith('/scenes/') || !/^[a-f0-9]{64}$/.test(text(catalog.sha256, 'feature catalog hash'))) fail('surface features require a pinned catalogue');
   integer(catalog.bytes, 'feature catalog bytes', 1); integer(catalog.count, 'feature catalog count', 1);
@@ -180,6 +180,11 @@ export function requireSurfaceFeatures(value: unknown, tree: PreparedTree, lensI
   unique(lenses, 'surface feature lenses');
   if (!lenses.length || lenses.some(id => !lensIds.includes(id))) fail('surface features require declared lenses');
   positive(features.meshRadiusUnits, 'surface feature mesh radius');
+  if (features.surfaceRadiusUnits !== undefined) {
+    const band = record(features.surfaceRadiusUnits, 'surface feature radius band', ['minimum', 'maximum']);
+    const minimum = positive(band.minimum, 'surface feature radius minimum'), maximum = positive(band.maximum, 'surface feature radius maximum');
+    if (maximum < minimum) fail('surface feature radius band is inverted');
+  }
   const policy = record(features.policy, 'surface feature policy', ['minimumZoomShare', 'minimumDiameterPixels', 'alwaysVisibleCount', 'maximumVisible', 'limbCosine']);
   const share = finite(policy.minimumZoomShare, 'surface feature zoom share'); if (share < 0 || share > 1) fail('surface feature zoom share is out of range');
   positive(policy.minimumDiameterPixels, 'surface feature size floor'); integer(policy.alwaysVisibleCount, 'surface feature head count');

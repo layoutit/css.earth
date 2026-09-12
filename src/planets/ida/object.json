@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e977ae015a067c8b2f2d53b8d3e8c42d2dcd9c9ceb972527163abc2e8114ee6a"
+    "sha256": "7dc16e22747b1fcf51e3b986ea9ab08a431fd5721c6596f934be17695a289586"
   },
   "id": "ida",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -86,9 +87,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "ffcf423e1fa29020819262dd40794339c4de062ae4ee15004ae75f095885fabc"
+          "sha256": "a15f6558ccf59374ea03b736cd6319f4fbfad7429e9624425aa5ded82fca61f3"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "b7b149d9ef66efbc4b50892579a449a36bf39b2edf255db73423046a0801d487"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -123,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "289710cec5b8bd48592567643971eecfbfc941606ceed376a61bd405eb90a055"
+        "sha256": "ed02e8091d05ea326a019ba3548fc085792d7d3afebeafa0ffa130c77a3b3590"
       }
     },
     "catalog": {

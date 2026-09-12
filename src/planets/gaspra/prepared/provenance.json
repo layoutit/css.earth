@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "gaspra",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "079cc04951c992c470cf5b2d0591b50052844b21c0b3d2202f7588238906474c"
+    "sha256": "ab1f243b5702fbd8ac6e2c0aff3a94143a8dc10c3f5def0324de169cb0ff78e2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -426,6 +426,64 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "a8b4d62115de1da00ce1582d98a0ffc6822ec9b0c8948e099030a8ee10f6f64d",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "GASPRA_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "GASPRA_nomenclature_center_pts.dbf",
+          "projection": null,
+          "metadata": "metadata_nomenclature_points_GASPRA.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "gaspra-features.json",
+        "publicBase": "/scenes/gaspra/",
+        "target": {
+          "className": "gaspra-body"
+        },
+        "lensIds": [
+          "normal",
+          "calibrated",
+          "elevation"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -476,7 +534,7 @@
       "sha256": "7dc37fa0ab91303f1875b2e4293aa420727d67d9479d63fc1e9e680e26ec02e1",
       "bytes": 262080,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -532,7 +590,7 @@
       "sha256": "ec751b328485ad20e9625395d7634e7f75c7167c615357b03cb8c94d3d6590b0",
       "bytes": 527072,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -573,7 +631,7 @@
       "sha256": "5b6a64135b22c8431ec91f0b3cb8f2cb24e6509edcb2ad4df56bcabdfa07ccc6",
       "bytes": 2563200,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -610,7 +668,7 @@
       "sha256": "53ef20427179844ab1bfc6fcc66395ba78e949244cd2b614a482ddf6fe1a3301",
       "bytes": 9633,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -647,7 +705,7 @@
       "sha256": "0cb9e6bccee046cc5838760072410efc2d2a665b39cce142577db4699647bea6",
       "bytes": 1152,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -684,7 +742,7 @@
       "sha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee",
       "bytes": 8616,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -721,7 +779,7 @@
       "sha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652",
       "bytes": 9964,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -758,7 +816,7 @@
       "sha256": "ec66eee211c1b1f3de267375f976b01517365bacd7b22e4eb9842713c2e9541d",
       "bytes": 645120,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -795,7 +853,7 @@
       "sha256": "dd3e14be6e822c73bd3efbda58e5cb586b0654dfde8da58e9a19c0d306c2e792",
       "bytes": 10480,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -832,7 +890,7 @@
       "sha256": "d38c32fca409f5ceb2c51da96a9bc8fe58e3fcabe7168b52e23886fadcf71654",
       "bytes": 35828,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -869,7 +927,7 @@
       "sha256": "55be9710b892ce9a79464f42cf358bb2bc4e583231affa557e61a818b3ab6dc9",
       "bytes": 9120,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -908,7 +966,7 @@
       "sha256": "33c2768822732f79334f80fba161f86aacc27d3c70de3a4cce2315789b3d9f8e",
       "bytes": 2563200,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -945,7 +1003,7 @@
       "sha256": "cd2bf7b4bee1f6e2896082dfb78eabe574d62b6880d3fef2d8ec85dd3647c59b",
       "bytes": 9633,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -982,7 +1040,7 @@
       "sha256": "89e3fe56ef9eddb0e7a2bd1af0a8be0d0ca6ebf92b661fbdf070283e1b6cab00",
       "bytes": 645120,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1019,7 +1077,7 @@
       "sha256": "f411a08eb9d4a918e4f9feb6a5929366ffd51cee0654c5de3ccc61be184bf9f3",
       "bytes": 10480,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1050,7 +1108,80 @@
       "sha256": "3609f1150269c46ced3e4175b8e19dfeb37b470f0d88e9a7e7a4666b755535cb",
       "bytes": 11333,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "gaspra-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "61c8b4787b3d0fdd7587690eac12243cdea76018599f898dc2e40c34429d7c78",
+      "bytes": 1005,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-gaspra-nomenclature-center-pts",
+      "path": "features/GASPRA_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GASPRA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Gaspra on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Gaspra centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/GASPRA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "f4f3eb723f28d36a45690f0ff0a5be07b5ae42a4c52d36bc55506a03936a582f",
+      "bytes": 125910,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/GASPRA_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GASPRA_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "gaspra-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "d7e2f54918ea9f280437edf5ebd10a617c6fd23307f04b1b9670f77b5df71a7d",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1095,13 +1226,13 @@
           "url": "/scenes/gaspra/gaspra-normal-thumbnail.webp",
           "bytes": 2838,
           "sha256": "9d16c2204a5422ea2e49e280d8cce1a30fe927497a2ecda5636d8fc32f47fe21",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-normal-surface@2x.webp",
           "bytes": 451108,
           "sha256": "af3f5db4a9868d9598c62cd5ffce6b97e3bcd7e42bde76ea02df76afe9493723",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1133,19 +1264,19 @@
           "url": "/scenes/gaspra/gaspra-elevation-thumbnail.webp",
           "bytes": 5142,
           "sha256": "9550dd773d53982d62217e1dc8ab4a917e79c9d97514c42d7778301cc499ceea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-elevation-surface@2x.webp",
           "bytes": 271424,
           "sha256": "6f5395308515087e9da6cd09c692fb85f8383973e59ed6589393823ef51c5a5c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1190,13 +1321,13 @@
           "url": "/scenes/gaspra/gaspra-calibrated-thumbnail.webp",
           "bytes": 1926,
           "sha256": "0220d5c452f7e1f9819f1762e5081f56c02ac0c6c6b6e92ff59558d81ed2e11c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
           "bytes": 242376,
           "sha256": "e935327a81bab8a8eed2cff9ca57657a6fe85819a7c93ce08110378b3fc07ff1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1219,8 +1350,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6688,
-          "sha256": "5b12b91c2674473aa8a6a3e04bd23d3f8ec3ab3975f49077825c87fa93ff2b7e",
+          "bytes": 6806,
+          "sha256": "2811d9440019bd95a9ec3df5363a84c4530302e51d0eeab7e0d7b5a1a9213ee9",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "gaspra-surface-features-source",
+        "usgs-gazetteer-gaspra-nomenclature-center-pts",
+        "gaspra-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/gaspra/gaspra-features.json",
+          "bytes": 17809,
+          "sha256": "914a0ca09d3ad622fd500a9362ac500c4a085705d6e30b842db9874ca3d778b7",
           "verification": "bytes-verified"
         }
       ],

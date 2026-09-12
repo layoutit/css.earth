@@ -468,6 +468,14 @@
       ],
       "path": "cassini-ice/raw/v1606213356_1.qub",
       "url": "https://vims.univ-nantes.fr/cube/1606213356_1.qub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/TETHYS_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TETHYS_nomenclature_center_pts.zip"
     }
   ]
 }

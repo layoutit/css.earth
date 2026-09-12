@@ -92,7 +92,7 @@
         ]
       },
       "coverage": "Published Cassini mosaic/model. Exact PDS missing constant and floating-point special values are excluded; observed zero values remain valid.",
-      "units": "km above the Thomas et al. (2016) reference ellipsoid: 256.2 × 251.4 × 248.6 km.",
+      "units": "km above the Thomas et al. (2016) reference ellipsoid: 256.2 \u00d7 251.4 \u00d7 248.6 km.",
       "capture": {
         "attributions": [
           {
@@ -234,7 +234,7 @@
       "expectedBytes": 757411,
       "expectedSha256": "0ae941db5fb7d2cdcad92232fd6db09863bedeac37d98c7f3e3784021acac8c6",
       "origin": "https://vims.univ-nantes.fr/cube/C1487299582_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -263,7 +263,7 @@
       "expectedBytes": 213344,
       "expectedSha256": "5a6e920af9d083a2e33d04a9b087a353a633e291fc04a55472c6c72de5d077ba",
       "origin": "https://vims.univ-nantes.fr/cube/N1487299582_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -292,7 +292,7 @@
       "expectedBytes": 1107563,
       "expectedSha256": "df1b0ddb11694cde200398d4d153f180450a697606111a21a9d6aab3b7b2eb74",
       "origin": "https://vims.univ-nantes.fr/cube/C1489049741_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -321,7 +321,7 @@
       "expectedBytes": 243496,
       "expectedSha256": "ba88b03a3b4581b928cfab37dc7f9615c7e3ad2db821abd4577be9d34cda0ee6",
       "origin": "https://vims.univ-nantes.fr/cube/N1489049741_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -350,7 +350,7 @@
       "expectedBytes": 1170945,
       "expectedSha256": "8d4c78ee7c7e4710965b21f971e68b5c801eaa31275f13a4b3cd6888b6e429cc",
       "origin": "https://vims.univ-nantes.fr/cube/C1702362997_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -379,7 +379,7 @@
       "expectedBytes": 360878,
       "expectedSha256": "7f40c09a40dfc1bfa27ace7ef930ad1038b862d68ee04b9c3af569d7d3a7dc23",
       "origin": "https://vims.univ-nantes.fr/cube/N1702362997_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -408,7 +408,7 @@
       "expectedBytes": 299893,
       "expectedSha256": "765fb230fac501fcedc4d892825b3342383abdc90fdecb97d0f754397baefc84",
       "origin": "https://vims.univ-nantes.fr/cube/C1702361128_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -437,7 +437,7 @@
       "expectedBytes": 155826,
       "expectedSha256": "2ab80161634205a0b8cb191a6d57a3b84a947fe6a2f173784947eac3db6ecd4b",
       "origin": "https://vims.univ-nantes.fr/cube/N1702361128_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -466,7 +466,7 @@
       "expectedBytes": 562059,
       "expectedSha256": "cb800f624fbb67db7b49c7d9410372e1b08ae988718ca12e40636e8b6c306266",
       "origin": "https://vims.univ-nantes.fr/cube/C1500061929_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -495,7 +495,7 @@
       "expectedBytes": 169992,
       "expectedSha256": "74bb3f1b9b266fb04aea6c2f94d13994197b3e48726f3565479a59aebc5625a1",
       "origin": "https://vims.univ-nantes.fr/cube/N1500061929_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -524,7 +524,7 @@
       "expectedBytes": 446859,
       "expectedSha256": "eecba704d3ec11c14a1278f2ba96ac460d3ad4badb58a114044dcf5c41989d41",
       "origin": "https://vims.univ-nantes.fr/cube/C1500061170_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -553,7 +553,7 @@
       "expectedBytes": 158792,
       "expectedSha256": "b2431342079d460b5111262868a33bb753be16fef3f160ece425500015a90b24",
       "origin": "https://vims.univ-nantes.fr/cube/N1500061170_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -582,7 +582,7 @@
       "expectedBytes": 101934,
       "expectedSha256": "2e3d5caa47220371e2b8e4ad12192f4613b3f6f1de4f933881b1a277ae4a9d4d",
       "origin": "https://vims.univ-nantes.fr/cube/1487299582_1",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline index and partial mapping",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9; cssEarth offline index and partial mapping",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -631,7 +631,7 @@
       "expectedBytes": 109752,
       "expectedSha256": "1857dd4eadd3af1e7808941bfb0e4dfa57f61a04b6dc48d3157b292c9ef601ec",
       "origin": "https://vims.univ-nantes.fr/cube/1487299582_1",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline index and partial mapping",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9; cssEarth offline index and partial mapping",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -672,6 +672,84 @@
             "evidence": "src/planets/enceladus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
           }
         ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-enceladus-nomenclature-center-pts",
+      "path": "features/ENCELADUS_nomenclature_center_pts.zip",
+      "expectedBytes": 265163,
+      "expectedSha256": "116964fc1780821aa5af3b9807616a272de3cb5ac1e469a46fff2fa603d4abfb",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ENCELADUS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Enceladus on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Enceladus centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/ENCELADUS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "enceladus-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1020,
+      "expectedSha256": "0949b3d8937a3b19b9d6b80215059f7a6451a33e684ccaabcf57a617b87d1cd0",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "enceladus-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1196,
+      "expectedSha256": "7becf03d8cde73623afa6066a83607213a4e00af81dbd92b20402af9a94b923d",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "enceladus-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 156,
+      "expectedSha256": "02505cf90f3299d9da02f513681d1dc5ca2d1458d3ac48edbc8fea6ae861de65",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
       }
     }
   ],
@@ -718,8 +796,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 6267,
-      "expectedSha256": "e9cecdb23b82d24073b8a26f21ed9ca957b5b78c98571c474004d19e09ebad2a"
+      "expectedBytes": 6527,
+      "expectedSha256": "e226a72fd6c571910c0a42169fd5893cde63bbdeb85c16624d045b3c2ee49f63"
     },
     {
       "path": "preparation/navigation.json",

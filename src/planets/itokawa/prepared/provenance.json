@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "itokawa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1904d55f07a6780c77ae456bdcd06f5ac0dd5087e27e194f4d7fcaa5ce079551"
+    "sha256": "de9d7b41f8d6793181c44c897eefc423590b27ac15d21a2e728d3f9d41e77430"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -365,6 +365,63 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "fbd470bf52e47ad758b40e3619f3760abd8f178750b24957bd2102779fbd731d",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "ITOKAWA_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "ITOKAWA_nomenclature_center_pts.dbf",
+          "projection": null,
+          "metadata": "metadata_nomenclature_points_ITOKAWA.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "itokawa-features.json",
+        "publicBase": "/scenes/itokawa/",
+        "target": {
+          "className": "itokawa-body"
+        },
+        "lensIds": [
+          "amica",
+          "elevation"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -409,7 +466,7 @@
       "sha256": "e9d3a15129ec04b01064840a3425def21238e2fc818f127311b9d52fa52f5964",
       "bytes": 16897935,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -443,7 +500,7 @@
       "sha256": "b68d5b25053f7a6574d876619cb4f00dd5f609392a861d1c3998976f9f8980d6",
       "bytes": 4199040,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -477,7 +534,7 @@
       "sha256": "f5fae5ef42a701c050693523d1d149a99b85b83da6e1c0c5ce58626decee1ca6",
       "bytes": 1861460,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -511,7 +568,7 @@
       "sha256": "f6cf948ba2df7c3196732b02e414710e9a7e80a71fcb859c6a586b37cd6085e6",
       "bytes": 6640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -545,7 +602,7 @@
       "sha256": "639a57f2daaf2bac9700307565449bcb9b540a714e223d1bf321ff0d4c4f1c32",
       "bytes": 1056960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -579,7 +636,7 @@
       "sha256": "589cb14fb9df512057d4446a556633fdfa106e2d69efaa66813ad56786726540",
       "bytes": 2686546,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -613,7 +670,7 @@
       "sha256": "db3803da5a7ee636edf6e3282c679fb13788c97a64a2a2977f62aedd70733435",
       "bytes": 6640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -647,7 +704,7 @@
       "sha256": "771627b27137dc9a3fe3b35cf8c89084415e186920f5d86f307e0ef76fa8883d",
       "bytes": 1056960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -681,7 +738,7 @@
       "sha256": "8b7a63ee56d362fcb7e59c80187c2706305955aacb6b517dbfb2a470b6762266",
       "bytes": 8142529,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -715,7 +772,7 @@
       "sha256": "d9cc5ecc1ca1e98103ed3acbfe8ec5d10bd04f5067d17a11c8bc2c7c3f24189f",
       "bytes": 6640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -749,7 +806,7 @@
       "sha256": "796fbc5cff65320b6d66f9e541a36e3d1933b3460217980dfc6b3334a3d8c7ad",
       "bytes": 1056960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -777,7 +834,80 @@
       "sha256": "2e8fb3414b446234b87f4255bff80b19bdd473806e1037d35e9dc547b1ad2275",
       "bytes": 9583,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "itokawa-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "b57556ffe5028a8041de33852d8239fe1900eb05d47caa8748bc97212e52b891",
+      "bytes": 1009,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-itokawa-nomenclature-center-pts",
+      "path": "features/ITOKAWA_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ITOKAWA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Itokawa on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Itokawa centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/ITOKAWA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "f26f0ede45114bcaaead6c875b6f8992bd0c52498affc647efe14ab059db38a1",
+      "bytes": 81389,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/ITOKAWA_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ITOKAWA_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "itokawa-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "20963b041eabf0efcd3a8b7b1ece44e045b7f43f316b3224ff62fe7d4ab73b8e",
+      "bytes": 154,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -810,19 +940,19 @@
           "url": "/scenes/itokawa/itokawa-elevation-thumbnail.webp",
           "bytes": 5648,
           "sha256": "add0ac1961a98fc08b94692da8b36925015b44c5ac32eb54bcf384f8de9d5fb0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/itokawa/itokawa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/itokawa/itokawa-elevation-surface@2x.webp",
           "bytes": 918790,
           "sha256": "c9f9fec5995292bdf489d6da4ad09adf804424458c279f24c2302fa5b8d7f6af",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -864,13 +994,13 @@
           "url": "/scenes/itokawa/itokawa-amica-thumbnail.webp",
           "bytes": 1328,
           "sha256": "d98cd125395540779f36d78dcfc157d25ac8abcabc5ba019242fbd127ae574f5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/itokawa/itokawa-amica-surface@2x.webp",
           "bytes": 991332,
           "sha256": "699a1909293935949bf52d38d856e17700d5d6f54da82b95d0b47dd780bc823c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -893,8 +1023,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5915,
-          "sha256": "c8ab917f1ae5dff051257655d2328878b1d97e33b4e93b5ad37f0a505e73e98c",
+          "bytes": 6033,
+          "sha256": "7533d5efc9445d99f8f5b24e603e0d9f0e41462c486a0ce3e6652984768747e4",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "itokawa-surface-features-source",
+        "usgs-gazetteer-itokawa-nomenclature-center-pts",
+        "itokawa-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/itokawa/itokawa-features.json",
+          "bytes": 10936,
+          "sha256": "952d99382cb5af41179bce0e993506e44821bf3e19f63a1e0bd3d9422382e207",
           "verification": "bytes-verified"
         }
       ],

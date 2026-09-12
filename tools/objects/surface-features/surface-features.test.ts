@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { parseDbf } from './dbf.js';
-import { budgetTracePaths, extentPolygon, nodeIndex as nodeIndexForTest, normalizeExtent, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, rimVectors, selectTraces, surfaceDirection } from './index.js';
+import { budgetTracePaths, extentPolygon, meshRadiusBand, nodeIndex as nodeIndexForTest, normalizeExtent, projectRadial, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, rimVectors, selectTraces, surfaceDirection } from './index.js';
 import { parseShpPolylines } from './shp.js';
 
 const root = process.cwd();
@@ -83,6 +83,27 @@ test('the Mercury recipe parses and rejects overlapping or excluded label kinds'
   assert.throws(() => parseSurfaceFeaturesConfig({ ...config, kinds: { ...config.kinds, region: [...config.kinds.region, 'AA'] } }), /one label kind/u);
   assert.throws(() => parseSurfaceFeaturesConfig({ ...config, excludedTypeCodes: { AA: 'no' } }), /must not also be labelled/u);
   assert.throws(() => parseSurfaceFeaturesConfig({ ...config, labelPolicy: { ...config.labelPolicy, limbCosine: 1 } }), /out of range/u);
+});
+
+test('the radius band spans the nearest face point to the farthest vertex, so sagging faces stay inside it', () => {
+  // A square face at y = 100 with corners 50 units out: its centre is the nearest surface point (100), its corners the farthest.
+  const square = [[[-50, 100, -50], [50, 100, -50], [50, 100, 50]], [[-50, 100, -50], [50, 100, 50], [-50, 100, 50]]];
+  const band = meshRadiusBand(square);
+  assert.equal(band.minimum, 100);
+  assert.ok(Math.abs(band.maximum - Math.hypot(50, 100, 50)) < 1e-3);
+  // A face whose plane passes near the origin but whose triangle does not: the nearest point is a vertex, not the plane.
+  const skew = [[[100, 0, 0], [100, 10, 0], [100, 0, 10]]];
+  assert.equal(meshRadiusBand(skew).minimum, 100);
+});
+
+test('shape-model anchors cast onto the farthest hit of the picking mesh and report misses as null', () => {
+  // Two squares facing +y at 100 and 90 units: the outer one is the surface; +x misses entirely.
+  const square = (y: number) => [[[-50, y, -50], [50, y, -50], [50, y, 50]], [[-50, y, -50], [50, y, 50], [-50, y, 50]]];
+  const triangles = [...square(90), ...square(100)];
+  assert.ok(Math.abs(projectRadial(triangles, [0, 1, 0])! - 100) < 1e-9);
+  assert.ok(Math.abs(projectRadial(triangles, [0.3, 1, 0.2].map(v => v / Math.hypot(0.3, 1, 0.2)) as [number, number, number])! - 100 * Math.hypot(0.3, 1, 0.2)) < 1e-9);
+  assert.equal(projectRadial(triangles, [1, 0, 0]), null);
+  assert.equal(projectRadial(triangles, [0, -1, 0]), null);
 });
 
 test('a banded body resolves to the first band when every band shares one frame', () => {

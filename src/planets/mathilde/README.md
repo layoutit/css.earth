@@ -7,6 +7,7 @@
 | Visible shape | [Stooke 5° visualization model](https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.xml): 2016 model migrated to PDS4 in 2025. Smoothed unseen areas and modified shadowed crater floors are aesthetic modeling. |
 | Elevation | [Thomas 3° radii](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.xml), minus 26.4 km; false-color scale −11 to +10 km. The [legacy label](https://sbnarchive.psi.edu/pds3/near/NEAR_A_5_COLLECTED_MODELS_V1_0/data/msi/253mathilde.lbl) identifies 26.5 km as missing, never measured height. |
 | Monochrome | [Stooke/Pfau photomosaic](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg), partial NEAR MSI observations from 27 June 1997. Processed visualization, not calibrated albedo or natural color. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MATHILDE/target) Mathilde centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
@@ -15,6 +16,8 @@ The retained notes report a successful 35-asset bake, eight downloads restored, 
 [Source test definitions](../../../tests/objects/unit/mathilde/source.test.mts).
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Mathilde (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
 
 The visible Stooke shape differs from the Thomas radii used for Elevation, especially in unseen areas and shadowed craters. Neither product establishes global measured terrain. The JPEG has no authoritative validity mask: a narrow edge-connected gray test estimates exterior fill, so ambiguous pixels can remain. Pole, phase and added directional lighting are illustrative.
 

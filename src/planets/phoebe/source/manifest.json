@@ -313,7 +313,7 @@
       "falseColor": true,
       "width": 360,
       "height": 180,
-      "coverage": "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
+      "coverage": "Finest contributing SPC maplet spacing in each 1\u00b0 cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
       "projection": {
         "type": "simple-cylindrical",
         "longitudeDirection": "east-positive",
@@ -368,7 +368,7 @@
       "falseColor": true,
       "width": 360,
       "height": 180,
-      "coverage": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
+      "coverage": "Contributing image count in each 1\u00b0 source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
       "projection": {
         "type": "simple-cylindrical",
         "longitudeDirection": "east-positive",
@@ -406,7 +406,7 @@
       "expectedBytes": 1090377,
       "expectedSha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee",
       "origin": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -435,7 +435,7 @@
       "expectedBytes": 226310,
       "expectedSha256": "97fee2316839da6b2f5849b35b4ed8bd04af9e26f6cc8842f3254309c915a5a3",
       "origin": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -464,7 +464,7 @@
       "expectedBytes": 680448,
       "expectedSha256": "df43d42c42ab29cf00eee62c6f22796d85631b60f6c8b4da56ba590cb01f3030",
       "origin": "https://vims.univ-nantes.fr/cube/1465671822_1.qub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -493,7 +493,7 @@
       "expectedBytes": 57492,
       "expectedSha256": "d4b6945058358ceb42460ef5966e1ece2a5e1eb6bf481847b25ab42ff835ca1b",
       "origin": "https://vims.univ-nantes.fr/cube/1465671822_1",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9; cssEarth offline detector mapping and display",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -545,7 +545,7 @@
       "expectedBytes": 52468,
       "expectedSha256": "f22812b0e21b9f448bd83482bd2a664cafe67ea6f8dc23e8c0e205dd0c3e2e8b",
       "origin": "https://vims.univ-nantes.fr/cube/1465671822_1",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9; cssEarth offline detector mapping and display",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -589,6 +589,84 @@
             "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
           }
         ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-phoebe-nomenclature-center-pts",
+      "path": "features/PHOEBE_nomenclature_center_pts.zip",
+      "expectedBytes": 102659,
+      "expectedSha256": "0e5998039dacbd9301441347a883b8a419782c9f791562c0f610a8507e6450ed",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PHOEBE_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Phoebe on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Phoebe centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/PHOEBE/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "phoebe-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1005,
+      "expectedSha256": "a59fac018757fc0cf8c4a6a792b6f0a1363eee128294f3fac9431fc8b563da26",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "phoebe-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1200,
+      "expectedSha256": "f7c68244cea030c6fdc9ec2ca55c309dfbf99adffa23aa1cb89694bc2ce58166",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "phoebe-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 153,
+      "expectedSha256": "cd6e8b9772febaa12eb1fc6fc3314f8166e31b560f0bc0765a9aeebb9b13ec54",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
       }
     }
   ],
@@ -645,8 +723,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2906,
-      "expectedSha256": "2b19a56f223fa38db69e30275699579456e5ef36ac429ae232b1933b7dd76027"
+      "expectedBytes": 3160,
+      "expectedSha256": "d66c1de2762c316ddc8e76ca17c209794ab0daeff4e6e6b9924230f31796c13b"
     },
     {
       "path": "preparation/navigation.json",

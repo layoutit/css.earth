@@ -236,7 +236,7 @@
       "consumers": [
         "shape"
       ],
-      "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
+      "units": "Native Cartesian coordinates in kilometres, +X at 0\u00b0 longitude and +Z north; no height exaggeration.",
       "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
       "expectedBytes": 17694840,
       "expectedSha256": "e4b25f158adf4b430a145946996f4dbde85f50ca0d3c236084c956733e42beb2",
@@ -684,6 +684,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-rhea-nomenclature-center-pts",
+      "path": "features/RHEA_nomenclature_center_pts.zip",
+      "expectedBytes": 414397,
+      "expectedSha256": "e483758bc3e1d9b3f38a8ccdc4f73d8e11a68e792249b24a2ea62d1ded1b51c9",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RHEA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Rhea on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Rhea centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/RHEA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "rhea-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 995,
+      "expectedSha256": "3e3dee1d341968b2aba0e30ffbc2759e9d4e25f72277fa7ce2b6ca483ee12db3",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "rhea-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1194,
+      "expectedSha256": "311d9657cb0b08d1608ac5341743a637c9a613acd6fc3a49b6e4ca0c01c98193",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "rhea-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 151,
+      "expectedSha256": "3f6b4ebe26f761e0296aa0d8b0eaca7347713080afffbe76a56db94cb0f5c8cc",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "documents": [
@@ -734,8 +812,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 9038,
-      "expectedSha256": "4d334c6aacb886dc42665d16ee88da2e9e3abfaa6f0c367b10487169b883014a"
+      "expectedBytes": 9288,
+      "expectedSha256": "87c1d6b69f3f08dff94fdb4fe4aa7de58beba5dcaa9eb5e2360109c5b404d640"
     },
     {
       "path": "content/object.json",

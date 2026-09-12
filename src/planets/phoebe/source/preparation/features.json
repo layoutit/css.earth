@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": "PHOEBE_nomenclature_center_pts.zip",
+  "members": {
+    "attributes": "PHOEBE_nomenclature_center_pts.dbf",
+    "projection": "PHOEBE_nomenclature_center_pts.prj",
+    "metadata": "metadata_nomenclature_points_PHOEBE.xml"
+  },
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 0,
+  "output": "phoebe-features.json",
+  "publicBase": "/scenes/phoebe/",
+  "target": {
+    "className": "phoebe-body"
+  },
+  "lensIds": [
+    "normal",
+    "elevation",
+    "maplet-resolution",
+    "image-count",
+    "infrared",
+    "ice-absorption"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {
+    "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+  },
+  "labelPolicy": {
+    "minimumZoomShare": 1,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 48,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  }
+}

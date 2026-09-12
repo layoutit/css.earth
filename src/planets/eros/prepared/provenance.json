@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "eros",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cfed4ad3b27c6382c09b8d22ec28f51708d585b966248ffcc83029287767bd05"
+    "sha256": "f25581ea7ae48fafad24e5b9f78e19b2e40f0f7e65841a0fa5f7353902bf88b4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -363,6 +363,64 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "3fa7d6f718b8566cae6381244bd727aef1e4fc973c23a01c3d8bd811d75c8032",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "EROS_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "EROS_nomenclature_center_pts.dbf",
+          "projection": null,
+          "metadata": "metadata_nomenclature_points_EROS.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "eros-features.json",
+        "publicBase": "/scenes/eros/",
+        "target": {
+          "className": "eros-body"
+        },
+        "lensIds": [
+          "normal",
+          "infrared",
+          "elevation"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 1,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 48,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        }
+      }
     }
   ],
   "sources": [
@@ -410,7 +468,7 @@
       "sha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
       "bytes": 228242957,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "zip-member",
         "groups": [
@@ -466,7 +524,7 @@
       "sha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458",
       "bytes": 16897935,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -522,7 +580,7 @@
       "sha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b",
       "bytes": 228242957,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "zip-member",
         "groups": [
@@ -553,7 +611,80 @@
       "sha256": "a74d3889fef4ca98093d5171922fed1b973e2e0cec643dc3bf2293bb580ace5a",
       "bytes": 8676,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eros-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "ceb31a5e361d2d38e47a902c773d9da9d28c03d7f881d35340eecde2d92740c7",
+      "bytes": 995,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-eros-nomenclature-center-pts",
+      "path": "features/EROS_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EROS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Eros on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Eros centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/EROS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "6c42a16f2ee32aea95f5a4bd753d8723b9ec75c68470f8f3c5f8d5de2ad5f9cb",
+      "bytes": 144223,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/EROS_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EROS_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eros-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "60ada4ee5030f75a1b46489f3ea38c55251306c400a700886db709e16e6f447e",
+      "bytes": 151,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -601,13 +732,13 @@
           "url": "/scenes/eros/eros-normal-thumbnail.webp",
           "bytes": 3270,
           "sha256": "77accf9615eaf183f69f407eb84a1a7f49732eceda53e953d1655b05898408d6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eros/eros-normal-surface@2x.webp",
           "bytes": 2693140,
           "sha256": "62a13d42ba65f6d9058d3b907c62a2aaade7fcb202963c6789412448c1bc25f1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -654,13 +785,13 @@
           "url": "/scenes/eros/eros-infrared-thumbnail.webp",
           "bytes": 3388,
           "sha256": "ff552f2688e6ed2444b8c3d0f11971cd6c4b08b8f29ccc0b979468474c8c1bbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eros/eros-infrared-surface@2x.webp",
           "bytes": 4196638,
           "sha256": "81a72e39736dd03315608e461010a856e9e69d1fcc684fa22bb0efe6a523be0a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -692,19 +823,19 @@
           "url": "/scenes/eros/eros-elevation-thumbnail.webp",
           "bytes": 5950,
           "sha256": "c539675bb3866856c490255573e9e4c46533f3080a8b533686f53f7f75caf57b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eros/eros-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eros/eros-elevation-surface@2x.webp",
           "bytes": 922744,
           "sha256": "deb0f2ed973f54fc0aaf840e703a65d4e6e5e0fee0e62400adcc8d8a9009e329",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -727,8 +858,42 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4113,
-          "sha256": "13eceee65ae2780b6891361af21f41a9a4a4b00e2620354d1f69d853801901a8",
+          "bytes": 4231,
+          "sha256": "5df2e4e9f25cadf31d341573e940afdf62841a8796593de32f955c9cfe86d8f3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "eros-surface-features-source",
+        "usgs-gazetteer-eros-nomenclature-center-pts",
+        "eros-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/eros/eros-features.json",
+          "bytes": 23935,
+          "sha256": "9085cb82535cacab75feef8518987455ea8a4d4c516434d679889a102acfc0d5",
           "verification": "bytes-verified"
         }
       ],

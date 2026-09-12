@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b6d71276e5af83e688b3d1727e860276c92838d0f8e75578933e4ade1f2b4837"
+    "sha256": "a76ff3fd319655dd4f9afd976eeb21ac687ad2c248d8439b44ad4af15c7e3c89"
   },
   "id": "eros",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -86,9 +87,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "4c680ec90ff29a7ee3c962ea5f55daa44cf5210d7008932934afb118c7dfc7db"
+          "sha256": "0e1f7535b646c906f932e79a57a47a0a53a627dd56966239a5c1971b6b64ab8b"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "3fa7d6f718b8566cae6381244bd727aef1e4fc973c23a01c3d8bd811d75c8032"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -123,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0e813a8f0cb912b8ef3303881056c9ba2127868b7494d18a05055f72cb95454b"
+        "sha256": "8eb3ba0de6649f838de963cf87c2118b9aca54de667d8f6b269bd6ddb4df706d"
       }
     },
     "catalog": {
