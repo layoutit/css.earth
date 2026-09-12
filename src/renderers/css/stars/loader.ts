@@ -2,25 +2,31 @@ import { parseDensityVolumeFrame, parseObjectDescriptor, readPreparedObject } fr
 import type { ObjectDescriptor } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
 import type { PreparedCssPointField } from './types.js';
-import { parsePreparedCssPointField } from './validation.js';
+import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from './validation.js';
 
-/** Loads one pinned point-field transport; resources stay in the prepared asset bank. */
+/** Loads one pinned point-field manifest and the binary column bank it pins. Image
+ * resources stay in the prepared asset bank. */
 export async function loadPreparedCssPointField(input: unknown, transport: PreparedCssTransport): Promise<PreparedCssPointField> {
   const { descriptor, frame } = parsePointFieldDescriptor(input);
-  const bytes = await transport.read(descriptor.prepared!.url);
-  const digest = await sha256(bytes);
-  if (digest !== descriptor.prepared!.sha256) throw new TypeError('Prepared point field SHA-256 identity mismatch.');
+  const url = descriptor.prepared!.url;
+  const bytes = await transport.read(url);
+  if (await sha256(bytes) !== descriptor.prepared!.sha256) throw new TypeError('Prepared point field SHA-256 identity mismatch.');
   const envelope: unknown = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
-  const payload = readPreparedObject(envelope, descriptor, parsePreparedCssPointField).data;
-  if (payload.id !== descriptor.id || JSON.stringify(payload.frame) !== JSON.stringify(frame)) {
+  const manifest = readPreparedObject(envelope, descriptor, parsePreparedCssPointFieldManifest).data;
+  if (manifest.id !== descriptor.id || JSON.stringify(manifest.frame) !== JSON.stringify(frame)) {
     throw new TypeError('Prepared point field frame does not match its authored descriptor.');
   }
-  return payload;
+  // The bank sits beside its manifest. Length and digest are verified before any byte is decoded.
+  const bank = await transport.read(`${url.slice(0, url.lastIndexOf('/') + 1)}${manifest.bank.path}`);
+  if (bank.byteLength !== manifest.bank.bytes || await sha256(bank) !== manifest.bank.sha256) {
+    throw new TypeError('Prepared point-field bank length or SHA-256 identity mismatch.');
+  }
+  return decodePreparedCssPointField(manifest, bank);
 }
 
 function parsePointFieldDescriptor(input: unknown): { readonly descriptor: ObjectDescriptor; readonly frame: PreparedCssPointField['frame'] } {
   const descriptor = parseObjectDescriptor(input);
-  if (descriptor.type !== 'point-field' || descriptor.prepared?.format !== 'cssearth-css-point-field@1') {
+  if (descriptor.type !== 'point-field' || descriptor.prepared?.format !== 'cssearth-css-point-field-bank@1') {
     throw new TypeError('A point field requires its prepared artifact.');
   }
   const properties = descriptor.properties as Record<string, unknown>;

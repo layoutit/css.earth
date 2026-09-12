@@ -159,8 +159,8 @@ test('merges duplicate source links without dropping full credits or changing th
 
 test('app credits and prepared body provenance have separate consumers on direct and cached routes', async () => {
   const read = (name: string) => readFile(new URL(`../components/${name}.astro`, import.meta.url), 'utf8');
-  const [shell, information, object, cards, context] = await Promise.all([
-    read('PlanetShell'), read('PlanetInformationPanel'), read('PreparedObjectPanel'), read('PreparedSidebarCards'), read('DatasetContextPanels'),
+  const [shell, information, object, context] = await Promise.all([
+    read('PlanetShell'), read('PlanetInformationPanel'), read('PreparedObjectPanel'), read('DatasetContextPanels'),
   ]);
   assert.match(shell, /const sources = sceneSources\(resources\)/u);
   assert.doesNotMatch(information, /sceneSources/u);
@@ -171,7 +171,6 @@ test('app credits and prepared body provenance have separate consumers on direct
   assert.doesNotMatch(object, /sourceManifests|sourceCharts|sourceLenses/u);
   assert.match(object, /resources=\{content.resources\}/u);
   assert.match(object, /provenance=\{provenance\}/u);
-  assert.match(cards, /<PreparedObjectPanel informationOnly/u);
-  assert.match(object, /const Panel = informationOnly \? PlanetInformationPanel : PlanetShell/u);
+  assert.match(object, /<PlanetShell\n/u);
   assert.match(shell, /<PlanetInformationPanel \{\.\.\.Astro\.props\} \/>/u);
 });

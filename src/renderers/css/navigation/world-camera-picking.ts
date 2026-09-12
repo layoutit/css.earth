@@ -1,4 +1,5 @@
 import { screenPicking } from './screen-picking.js';
+import { setHoverCursor } from './cursor-state.js';
 
 /** The transparent input surface owns gestures. The presentation publishes
  * its already-clipped targets; input never searches the rendered document. */
@@ -35,7 +36,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     return target && detailOccludes?.(event.clientX, event.clientY) ? null : target;
   };
   let hoveredGroup: HTMLElement | null = null;
-  const setHovered = (target: HTMLElement | null) => {
+  const setHovered = (target: HTMLElement | null, interactive: boolean) => {
     if (target === hovered) return;
     if (hovered) delete hovered.dataset.objectHovered;
     if (hoveredGroup) delete hoveredGroup.dataset.objectHovered;
@@ -45,27 +46,30 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     if (hoveredGroup) hoveredGroup.dataset.objectHovered = 'true';
     if (target) {
       target.dataset.objectHovered = 'true';
-      if (target.dataset.objectNavigate) inputSurface.style.setProperty('--object-hover-cursor', 'pointer');
-      else inputSurface.style.removeProperty('--object-hover-cursor');
+      setHoverCursor(inputSurface, target.dataset.objectNavigate ? 'pointer' : null);
     } else {
-      inputSurface.style.removeProperty('--object-hover-cursor');
+      setHoverCursor(inputSurface, null);
     }
     hovered = target;
-    host.dispatchEvent(new Event('objecthoverchange'));
+    host.dispatchEvent(new CustomEvent('objecthoverchange', { detail: { interactive } }));
   };
   let hoverPoint: PointerEvent | null = null, hoverFrame: number | null = null;
-  const scheduleHover = () => {
+  let hoverInteractive = false;
+  const scheduleHover = (interactive = false) => {
+    hoverInteractive ||= interactive;
     if (!hoverPoint || hoverFrame !== null) return;
     hoverFrame = windowTarget.requestAnimationFrame(() => {
       hoverFrame = null;
-      setHovered(hoverPoint ? pick(hoverPoint) : null);
+      const interactive = hoverInteractive; hoverInteractive = false;
+      setHovered(hoverPoint ? pick(hoverPoint) : null, interactive);
     });
   };
   const unsubscribe = registry.subscribe(scheduleHover);
-  const clearHover = () => {
+  const clearHover = (event?: Event) => {
     hoverPoint = null;
     if (hoverFrame !== null) windowTarget.cancelAnimationFrame(hoverFrame);
-    hoverFrame = null; setHovered(null);
+    hoverFrame = null; hoverInteractive = false;
+    setHovered(null, event?.type === 'pointerleave');
   };
   const matchesSelection = (event: MouseEvent) => {
     const selected = gesture.selected;
@@ -89,7 +93,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   };
   const move = (event: PointerEvent) => {
     if (event.target === inputSurface && event.buttons === 0 && event.pointerType !== 'touch') {
-      hoverPoint = event; scheduleHover();
+      hoverPoint = event; scheduleHover(true);
     } else clearHover();
     const second = gesture.second;
     if (second?.pointerId === event.pointerId) {

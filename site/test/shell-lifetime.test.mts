@@ -746,3 +746,29 @@ test('a Milky Way breadcrumb previews its own card and preserves the search quer
   assert.equal(search.value, 'moon');
   shell.destroy();
 });
+
+test('camera handoffs retain filtered results and reset only a scrolled results panel', () => {
+  const f = fixture(), browser = f.selectors.element('.planet-object-browser');
+  const results = browser.requireSelector('#object-category-results');
+  let scrollTop = 0, scrollWrites = 0, countWrites = 0;
+  Object.defineProperty(results, 'scrollTop', { get: () => scrollTop, set(value: number) { scrollTop = value; scrollWrites++; } });
+  for (const tab of browser.querySelectorAll('[data-object-tab]')) {
+    Object.defineProperty(tab.requireSelector('.planet-object-tab-count'), 'textContent', { get: () => '', set() { countWrites++; } });
+  }
+  const shell = f.mount(), listeners: CameraNotifications = new Set();
+  shell.setOverview(true);
+  const publishedCounts = countWrites;
+  shell.setCamera(shellCamera(() => worldAt(context.volume.fadeStartDistanceM * .9), listeners));
+  shell.setOverview(true);
+  assert.equal(countWrites, publishedCounts, 'The same catalogue query is not republished at camera handoff');
+  assert.equal(scrollWrites, 0, 'An unscrolled catalogue never triggers a synchronous scroll reset');
+  scrollTop = 120;
+  results.dispatchEvent(new Event('scroll'));
+  shell.setOverview(false);
+  assert.equal(scrollTop, 0, 'Closing a scrolled catalogue restores its next opening position');
+  assert.equal(scrollWrites, 1);
+  shell.setOverview(true);
+  assert.equal(browser.hidden, false, 'Cached results reopen without another filter');
+  assert.equal(countWrites, publishedCounts);
+  shell.destroy();
+});

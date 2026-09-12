@@ -3,7 +3,8 @@ import type { OrbitSegment } from '../solar-system/heliocentric-view.js';
 export type ScreenPickShape =
   | { kind: 'rect'; left: number; top: number; right: number; bottom: number }
   | { kind: 'circle'; x: number; y: number; radius: number }
-  | { kind: 'segments'; segments: readonly OrbitSegment[]; halfWidth: number };
+  | { kind: 'segments'; segments: readonly OrbitSegment[]; halfWidth: number;
+      bounds?: { left: number; top: number; right: number; bottom: number } | null };
 export interface ScreenPickTarget {
   element: HTMLElement;
   /** Same back-to-front rank as the retained presentation. */
@@ -25,17 +26,24 @@ function createRegistry() {
     },
     subscribe(listener: () => void) { listeners.add(listener); return () => { listeners.delete(listener); }; },
     pick(x: number, y: number) {
-      let direct: ScreenPickTarget | null = null, orbit: ScreenPickTarget | null = null;
+      let direct: ScreenPickTarget | null = null;
       for (const targets of publications.values()) for (const target of targets) {
+        if (target.shape.kind === 'segments') continue;
         if (target.element.ariaDisabled === 'true') continue;
-        const isOrbit = target.shape.kind === 'segments';
-        const previous = isOrbit ? orbit : direct;
-        if (previous && previous.rank > target.rank) continue;
+        if (direct && direct.rank > target.rank) continue;
         if (!hitsScreenShape(target.shape, x, y)) continue;
-        if (isOrbit) orbit = target; else direct = target;
+        direct = target;
       }
-      // Preserve the existing priority of direct labels/markers over orbit chords.
-      return (direct ?? orbit)?.element ?? null;
+      // Direct labels/markers always win, regardless of orbit depth. Do not
+      // traverse any chord banks when that decision is already resolved.
+      if (direct) return direct.element;
+      let orbit: ScreenPickTarget | null = null;
+      for (const targets of publications.values()) for (const target of targets) {
+        if (target.shape.kind !== 'segments' || target.element.ariaDisabled === 'true' ||
+            (orbit && orbit.rank > target.rank)) continue;
+        if (hitsScreenShape(target.shape, x, y)) orbit = target;
+      }
+      return orbit?.element ?? null;
     },
   };
 }
@@ -52,6 +60,9 @@ export function screenPicking(host: HTMLElement) {
 export function hitsScreenShape(shape: ScreenPickShape, x: number, y: number): boolean {
   if (shape.kind === 'rect') return x >= shape.left && x <= shape.right && y >= shape.top && y <= shape.bottom;
   if (shape.kind === 'circle') return (x - shape.x) ** 2 + (y - shape.y) ** 2 <= shape.radius ** 2;
+  const bounds = shape.bounds;
+  if (bounds === null || (bounds && (x < bounds.left - shape.halfWidth || x > bounds.right + shape.halfWidth ||
+      y < bounds.top - shape.halfWidth || y > bounds.bottom + shape.halfWidth))) return false;
   for (const [x0, y0, x1, y1, opacity] of shape.segments) {
     if (opacity <= .1 || x < Math.min(x0, x1) - shape.halfWidth || x > Math.max(x0, x1) + shape.halfWidth ||
         y < Math.min(y0, y1) - shape.halfWidth || y > Math.max(y0, y1) + shape.halfWidth) continue;

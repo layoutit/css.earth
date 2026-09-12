@@ -30,6 +30,9 @@ importers:
       '@cssearth/objects':
         specifier: workspace:*
         version: link:packages/objects
+      '@discoveryjs/json-ext':
+        specifier: ^1.1.0
+        version: 1.1.0
       '@types/fontkit':
         specifier: 2.0.9
         version: 2.0.9
@@ -96,6 +99,12 @@ importers:
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)
+      source-map-js:
+        specifier: 1.2.1
+        version: 1.2.1
+      stream-json:
+        specifier: ^3.6.0
+        version: 3.6.0
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -373,6 +382,10 @@ packages:
   '@clack/prompts@1.7.0':
     resolution: {integrity: sha512-y7/yvZ2TPAnR9+jnc00klvNNLkJiXFFrQA/hlLCcxA9a2A4zQIOimyFQ9XfwYKiGD1fb5GY8vbKIIgO8d5Tb2A==}
     engines: {node: '>= 20.12.0'}
+
+  '@discoveryjs/json-ext@1.1.0':
+    resolution: {integrity: sha512-Xc3VhU02wqZ1HvHRJUwL09HkZSTvidqY5Ya0NXBSYOxAp+Ln9dcJr9fySI+CkONzP3PekQo9WdzCv0PGER/mOA==}
+    engines: {node: '>=14.17.0'}
 
   '@emmetio/abbreviation@2.3.3':
     resolution: {integrity: sha512-mgv58UrU3rh4YgbE/TzgLQwJ3pFsHHhCLqY20aJq+9comytTXUDNGG/SMtSeMJdkpxgXSXunBGLD8Boka3JyVA==}
@@ -3386,6 +3399,13 @@ packages:
   std-env@3.10.0:
     resolution: {integrity: sha512-5GS12FdOZNliM5mAOxFRg7Ir0pWz8MdpYm6AY6VPkGpbA7ZzmbzNcBJQ0GPvvyWgcY7QAhCgf9Uy89I03faLkg==}
 
+  stream-chain@4.2.5:
+    resolution: {integrity: sha512-Wtyq3bNE3ggLR0v2vftqvuhltym3WbZAkZpfIrkr5F/6vpeUmWmwTgXa16zD87gpahwJ/Qulq3zVfUlgIc0J2A==}
+    engines: {node: '>=22'}
+
+  stream-json@3.6.0:
+    resolution: {integrity: sha512-NiJdqxKyau579z/E8vfqcjWfSDWxW/AT99javFXdPXF147Z5za85LRXSHEmSX9TKOakB7gaIccfD0fOIctb7KQ==}
+
   strict-uri-encode@1.1.0:
     resolution: {integrity: sha512-R3f198pcvnB+5IpnBlRkphuE9n46WyVl8I39W/ZUTZLz4nqSP/oLYUrcnJrw462Ds8he4YKMov2efsTIw1BDGQ==}
     engines: {node: '>=0.10.0'}
@@ -4282,6 +4302,8 @@ snapshots:
       fast-string-width: 3.0.2
       fast-wrap-ansi: 0.2.2
       sisteransi: 1.0.5
+
+  '@discoveryjs/json-ext@1.1.0': {}
 
   '@emmetio/abbreviation@2.3.3':
     dependencies:
@@ -7173,6 +7195,12 @@ snapshots:
   stackback@0.0.2: {}
 
   std-env@3.10.0: {}
+
+  stream-chain@4.2.5: {}
+
+  stream-json@3.6.0:
+    dependencies:
+      stream-chain: 4.2.5
 
   strict-uri-encode@1.1.0: {}
 

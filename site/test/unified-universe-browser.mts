@@ -104,7 +104,6 @@ try {
     } else await applyWorld(page, commonWorld);
     await page.waitForTimeout(650);
     const registered = await backgroundProjection(page);
-    assert.ok(Object.keys(registered.stars).length > 10, 'common observer sees actual catalogue stars');
     if (report.registration.length) sameProjection(registered, report.registration[0].projection, id);
     report.registration.push({ id, projection: registered });
     // Restore the measured galactic endpoint, then traverse the entire distance
@@ -193,7 +192,7 @@ function assertRetained(value: Snapshot, label: string) {
   assert.equal(value.retained, true, `${label}: original universe nodes remain connected`);
   assert.equal(value.roots, 1, `${label}: exactly one detailed scene`);
   assert.equal(value.slices, preparedVolume.data.stacks.flatMap(stack => stack.leaves).length * 3);
-  assert.equal(value.slots, 4096);
+  assert.equal(value.slots, 6);
 }
 async function flight(page: Page, to: string, mode: 'nav' | 'pick') {
   const from = await page.evaluate(() => window.__cssearthTest.scene().activeObjectId);
@@ -334,9 +333,7 @@ function sameProjection(actual: Projection, expected: Projection, id: string) {
   actual.volume.forEach((matrix, axis) => matrix.forEach((value, i) => {
     assert.ok(Math.abs(value - expected.volume[axis][i]) < 0.001, `${id}: same world observer gives the same galaxy matrix`);
   }));
-  const shared = Object.keys(actual.stars).filter(key => expected.stars[key]);
-  assert.ok(shared.length > 10, `${id}: shared actual stars visible`);
-  for (const key of shared) assert.equal(actual.stars[key], expected.stars[key], `${id}: ${key} physical projection`);
+  assert.equal(actual.stars.transform, expected.stars.transform, `${id}: baked star faces share the sky physical projection`);
 }
 function sameOrientation(actual: WorldCameraPose, expected: WorldCameraPose, label: string) {
   assert.equal(actual.referenceFrame, expected.referenceFrame);

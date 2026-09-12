@@ -9,8 +9,8 @@ export type MatrixDragControls = ReturnType<typeof createUnboundedMatrixDragCont
 import { isOrbitDragStart, SKYBOX_DRAG_ENABLED } from "../../site/runtime-policy.mts";
 import { createSceneLifetime } from "@cssearth/engine";
 import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from "@cssearth/engine";
-import { advanceGoogleEarthDragThrow, createGoogleEarthDragHistory, estimateGoogleEarthDragThrow, GOOGLE_EARTH_DRAG_INERTIA, projectGoogleEarthTrackballDelta, recordGoogleEarthDragSample, resetGoogleEarthDragHistory } from "./google-earth-drag-inertia.mts";
-import { GOOGLE_EARTH_SURFACE_FLY_TO, planGoogleEarthSurfaceFlyTo, sampleGoogleEarthSurfaceFlyTo } from "./google-earth-surface-fly-to.mts";
+import { advanceDragThrow, createDragHistory, estimateDragThrow, TRACKBALL_DRAG_INERTIA, projectTrackballDelta, recordDragSample, resetDragHistory } from "./trackball-drag-inertia.mts";
+import { SURFACE_FLY_TO, planSurfaceFlyTo, sampleSurfaceFlyTo } from "./surface-fly-to.mts";
 import { conjugateRotation, isTrackballMetrics } from "@cssearth/engine";
 
 const POINTER_POSITION_EPSILON = 1e-6;
@@ -59,7 +59,7 @@ export function createUnboundedMatrixDragControls({
   let skyGesture = false;
   const projectSkyRotation = (pointer: SphereDragInput) => {
     if (activeTrackball === null) throw new Error("Sky drag has no active trackball.");
-    const projected = projectGoogleEarthTrackballDelta({
+    const projected = projectTrackballDelta({
       ...activeTrackball, ...pointer, radius: activeTrackball.radius,
     });
     return rotationFromAngularVelocity([
@@ -72,7 +72,7 @@ export function createUnboundedMatrixDragControls({
   let cadenceFrame: number | null = null;
   let previousCadenceTimestamp: number | null = null;
   let frameMilliseconds = 1000 / 60;
-  const history = createGoogleEarthDragHistory();
+  const history = createDragHistory();
   let inertiaFrame: number | null = null;
   let inertiaState: ({ -readonly [K in keyof DragThrow]: DragThrow[K] } & { previousTimestamp: number }) | null = null;
   let interactionActive = false;
@@ -157,7 +157,7 @@ export function createUnboundedMatrixDragControls({
     const activePointerId = pointerId;
     pointerId = null;
     pointerDragging = false;
-    resetGoogleEarthDragHistory(history);
+    resetDragHistory(history);
     activeTrackball = null;
     if (inputSurface.hasPointerCapture(activePointerId)) {
       inputSurface.releasePointerCapture(activePointerId);
@@ -219,9 +219,9 @@ export function createUnboundedMatrixDragControls({
     const progress = Math.min(
       1,
       Math.max(0, timestamp - flyToMotion.startedAt) /
-        GOOGLE_EARTH_SURFACE_FLY_TO.durationMilliseconds,
+        SURFACE_FLY_TO.durationMilliseconds,
     );
-    const sample = sampleGoogleEarthSurfaceFlyTo(
+    const sample = sampleSurfaceFlyTo(
       flyToMotion.plan,
       progress,
     );
@@ -259,7 +259,7 @@ export function createUnboundedMatrixDragControls({
       throw new TypeError("Unbounded matrix drag trackball is invalid.");
     }
     const cameraState = surfaceFlyToState();
-    const plan = planGoogleEarthSurfaceFlyTo({
+    const plan = planSurfaceFlyTo({
       clientX: event.clientX,
       clientY: event.clientY,
       trackball: measuredTrackball,
@@ -312,7 +312,7 @@ export function createUnboundedMatrixDragControls({
       0,
       timestamp - inertiaState.previousTimestamp,
     );
-    const step = advanceGoogleEarthDragThrow({
+    const step = advanceDragThrow({
       pitchDegreesPerMillisecond:
         inertiaState.pitchDegreesPerMillisecond,
       yawDegreesPerMillisecond: inertiaState.yawDegreesPerMillisecond,
@@ -350,7 +350,7 @@ export function createUnboundedMatrixDragControls({
     if (throwState === null) return false;
     // The release frame projects the pointer and advances the first coast
     // step. Compose both rotations before publishing the retained scene.
-    const firstStep = advanceGoogleEarthDragThrow({
+    const firstStep = advanceDragThrow({
       ...throwState,
       elapsedMilliseconds: frameMilliseconds,
     });
@@ -417,8 +417,8 @@ export function createUnboundedMatrixDragControls({
     trackballInvalidated = false;
     frameMilliseconds = 1000 / 60;
     cadenceFrame = requestFrame(measureCadence);
-    resetGoogleEarthDragHistory(history);
-    recordGoogleEarthDragSample(history, {
+    resetDragHistory(history);
+    recordDragSample(history, {
       x: event.clientX,
       y: event.clientY,
       timestamp: event.timeStamp,
@@ -463,11 +463,11 @@ export function createUnboundedMatrixDragControls({
         activeTrackball = measuredTrackball;
         trackballInvalidated = false;
         // Velocity from before zoom belongs to a different screen projection.
-        resetGoogleEarthDragHistory(history);
+        resetDragHistory(history);
         accumulatedPitch = 0;
         accumulatedYaw = 0;
       }
-      const projected = projectGoogleEarthTrackballDelta({
+      const projected = projectTrackballDelta({
         previousX,
         previousY,
         currentX: sampleEvent.clientX,
@@ -476,7 +476,7 @@ export function createUnboundedMatrixDragControls({
       });
       const fittedPitch = projected.pitchDegrees *
         (skyGesture ? 1 : activeTrackball.pitchResponse ??
-          GOOGLE_EARTH_DRAG_INERTIA.directPitchResponse);
+          TRACKBALL_DRAG_INERTIA.directPitchResponse);
       const sampleRotation = (skyGesture ? projectSkyRotation : projectSphereDrag)({
         previousX,
         previousY,
@@ -497,7 +497,7 @@ export function createUnboundedMatrixDragControls({
       previousX = sampleEvent.clientX;
       previousY = sampleEvent.clientY;
       previousPointerTimestamp = sampleEvent.timeStamp;
-      recordGoogleEarthDragSample(history, {
+      recordDragSample(history, {
         x: sampleEvent.clientX,
         y: sampleEvent.clientY,
         timestamp: sampleEvent.timeStamp,
@@ -534,9 +534,9 @@ export function createUnboundedMatrixDragControls({
     // location is not another movement and cannot refresh a paused drag.
     const releaseAge = event.timeStamp - previousPointerTimestamp;
     const freshRelease = releaseAge >= 0 &&
-      releaseAge <= GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds;
+      releaseAge <= TRACKBALL_DRAG_INERTIA.releaseFreshnessMilliseconds;
     const throwState = wasDragging && event.type === "pointerup" && freshRelease
-      ? estimateGoogleEarthDragThrow({ history, releaseTimestamp: event.timeStamp,
+      ? estimateDragThrow({ history, releaseTimestamp: event.timeStamp,
         trackball: activeTrackball, frameMilliseconds,
         projectRotation: skyGesture ? projectSkyRotation : undefined }) : null;
     // A rejected release clears the native rotation pending for the next
@@ -645,7 +645,7 @@ export function createUnboundedMatrixDragControls({
     },
     stats() {
       return Object.freeze({
-        schema: GOOGLE_EARTH_DRAG_INERTIA.schema,
+        schema: TRACKBALL_DRAG_INERTIA.schema,
         projection: skyGesture && (pointerId !== null || inertiaState !== null)
           ? "screen-plane-orbit" : "screen-space-sphere",
         historyStorage: "fixed-capacity-float64-ring",
@@ -662,8 +662,8 @@ export function createUnboundedMatrixDragControls({
         interruptions: Object.freeze({ ...interruptionCounts }),
         lastInterruption,
         surfaceFlyTo: Object.freeze({
-          schema: GOOGLE_EARTH_SURFACE_FLY_TO.schema,
-          qualification: GOOGLE_EARTH_SURFACE_FLY_TO.qualification,
+          schema: SURFACE_FLY_TO.schema,
+          qualification: SURFACE_FLY_TO.qualification,
           enabled: surfaceFlyToState !== null,
           active: flyToFrame !== null && !flyToMotion?.sample,
           starts: flyToStarts,
