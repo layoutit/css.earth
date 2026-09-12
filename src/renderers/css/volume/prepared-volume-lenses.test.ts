@@ -219,3 +219,24 @@ test('generic descriptor loader verifies pinned bytes, wrapper identity and all 
   await expect(loadPreparedVolumeLenses(drift, { read })).rejects.toThrow('identity/frame');
   await expect(loadPreparedVolumeLenses({ ...f.descriptor, id: 'different' }, { read })).rejects.toThrow('identity');
 });
+
+test('angular compact-light footprints zoom and change lens material without changing their positions or nodes', () => {
+  const f = dom(), initial = points();
+  const angular = { ...initial, points: initial.points.map(point => ({ ...point, diameterUnits: .2 })) };
+  const mount = mountPreparedCataloguePoints({ ...f.options, payload: angular });
+  const root = mount.root as unknown as FakeElement, nodes = [...root.children];
+  mount.publish(publication(10)); expect(nodes[0].style.width).toBe('2px');
+  mount.publish(publication(5)); expect(nodes[0].style.width).toBe('4px');
+  const center = nodes[0].style.transform;
+  mount.setPresentation({ ...angular, points: angular.points.map(point => ({ ...point, colorCss: '#ff1100', opacity: .1 })) });
+  expect(root.children).toEqual(nodes); expect(nodes[0].style.transform).toBe(center);
+  expect(nodes[0].style.background).toBe('#ff1100'); expect(nodes[0].style.opacity).toBe('0.1');
+  expect(() => validatePreparedCataloguePoints({ ...angular, points: [{ ...angular.points[0], diameterUnits: NaN }] })).toThrow();
+  mount.destroy();
+});
+
+test('nearby volume visibility is explicit and rejects unknown policies', () => {
+  expect(validatePreparedVolumeLenses({ ...payload(), contextVisibility: 'independent' }).contextVisibility).toBe('independent');
+  expect(validatePreparedVolumeLenses(payload()).contextVisibility).toBe('galactic');
+  expect(() => validatePreparedVolumeLenses({ ...payload(), contextVisibility: 'maybe' })).toThrow();
+});

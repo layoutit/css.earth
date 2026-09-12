@@ -111,7 +111,7 @@
     "typecheck:astro": "astro check --tsconfig site/astro.tsconfig.json",
     "prepare:catalog": "node tools/prepare-catalog.mts",
     "lab:nebula": "pnpm lab:nebula:bake --stage=assets && vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort",
-    "prepare:nebulae": "node --experimental-strip-types labs/nebula/src/run.ts bake-nebula --if-missing",
+    "prepare:nebulae": "node --experimental-strip-types labs/nebula/src/run.ts bake-nebula --if-missing && node --experimental-strip-types labs/nebula/src/run.ts prepare-nebula-objects --if-missing",
     "lab:nebula:bake": "node --experimental-strip-types labs/nebula/src/run.ts bake-nebula",
     "lab:nebula:extract": "node --experimental-strip-types labs/nebula/src/run.ts extract",
     "test:lab:nebula": "pnpm lab:nebula:bake --stage=assets && node --experimental-strip-types labs/nebula/src/run.ts test",
@@ -134,7 +134,9 @@
     "typecheck:tests": "node tools/typecheck-tests.mts",
     "typecheck:oracles": "tsc -p tools/oracles/tsconfig.json",
     "pretest": "pnpm prepare:shell",
-    "typecheck:configs": "tsc -p tsconfig.configs.json"
+    "typecheck:configs": "tsc -p tsconfig.configs.json",
+    "lab:nebula:catalogue": "node --experimental-strip-types labs/nebula/src/run.ts inventory-messier",
+    "lab:nebula:catalogue:enrich": "node --experimental-strip-types labs/nebula/src/run.ts enrich-messier-catalogue"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",

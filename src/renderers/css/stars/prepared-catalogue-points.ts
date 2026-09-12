@@ -9,6 +9,8 @@ export interface PreparedCataloguePoint {
   readonly positionUnits: VolumeVector;
   /** Final prepared presentation, including saved size, exposure and support. */
   readonly sizePx: number;
+  /** Optional physical footprint; historical catalogue points retain fixed screen sizes. */
+  readonly diameterUnits?: number;
   readonly colorCss: string;
   readonly opacity: number;
 }
@@ -26,13 +28,14 @@ export function validatePreparedCataloguePoints(input: unknown): PreparedCatalog
   const points = value.points.map(point => {
     if (!point || typeof point.id !== 'string' || !point.id || ids.has(point.id) ||
         !Array.isArray(point.positionUnits) || point.positionUnits.length !== 3 || !point.positionUnits.every(Number.isFinite) ||
-        !Number.isFinite(point.sizePx) || point.sizePx <= 0 || !Number.isFinite(point.opacity) || point.opacity < 0 || point.opacity > 1 ||
+        !Number.isFinite(point.sizePx) || point.sizePx <= 0 ||
+        (point.diameterUnits !== undefined && (!Number.isFinite(point.diameterUnits) || point.diameterUnits <= 0)) || !Number.isFinite(point.opacity) || point.opacity < 0 || point.opacity > 1 ||
         typeof point.colorCss !== 'string' || !/^#[0-9a-f]{6}$/iu.test(point.colorCss)) {
       throw new TypeError('Prepared catalogue point identity, position or presentation is invalid.');
     }
     ids.add(point.id);
     return Object.freeze({ id: point.id, positionUnits: Object.freeze([...point.positionUnits]) as VolumeVector,
-      sizePx: point.sizePx, colorCss: point.colorCss, opacity: point.opacity });
+      sizePx: point.sizePx, ...(point.diameterUnits === undefined ? {} : { diameterUnits: point.diameterUnits }), colorCss: point.colorCss, opacity: point.opacity });
   });
   return Object.freeze({ frame, points: Object.freeze(points) });
 }
@@ -99,14 +102,16 @@ export function mountPreparedCataloguePoints({ host, before, payload }: {
     const [ex, ey, ez] = local.positionUnits, focal = viewport.focalPixels;
     const [r0, r1, r2, r3, r4, r5, r6, r7, r8] = rotation;
     for (let index = 0; index < data.points.length; index++) {
-      const position = data.points[index].positionUnits, node = nodes[index], size = materials[index].sizePx;
+      const position = data.points[index].positionUnits, node = nodes[index], material = materials[index];
       const x = position[0] - ex, y = position[1] - ey, z = position[2] - ez;
       const depth = -(r6 * x + r7 * y + r8 * z);
+      const size = material.diameterUnits === undefined ? material.sizePx : material.diameterUnits * focal / Math.max(Number.MIN_VALUE, depth);
       const px = ox + focal * (r0 * x + r1 * y + r2 * z) / depth, py = oy + focal * (r3 * x + r4 * y + r5 * z) / depth;
       const shown = materials[index].opacity > 0 && depth > 0 && Math.abs(px) < width / 2 + size && Math.abs(py) < height / 2 + size;
       if (shownState[index] !== Number(shown)) { node.style.visibility = shown ? 'visible' : 'hidden'; shownState[index] = Number(shown); }
       if (shown) {
         visible++;
+        if (material.diameterUnits !== undefined) node.style.width = node.style.height = `${size}px`;
         const transform = `translate(${px - size / 2}px,${py - size / 2}px)`;
         if (writtenTransform[index] !== transform) { node.style.transform = transform; writtenTransform[index] = transform; }
       }

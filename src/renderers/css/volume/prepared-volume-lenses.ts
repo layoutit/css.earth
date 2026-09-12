@@ -31,6 +31,8 @@ export interface PreparedVolumeLenses {
   readonly lenses: readonly PreparedVolumeLens[];
   /** Visibility remains toggleable; saved exposure and support belong in prepared point opacity. */
   readonly starsEnabled?: boolean;
+  /** Nearby volumes must not inherit the Milky Way overview fade. */
+  readonly contextVisibility?: 'galactic' | 'independent';
   readonly pointVisibility?: PreparedPointVisibility;
   readonly provenance?: unknown;
 }
@@ -69,7 +71,8 @@ export function validatePreparedVolumeLenses(input: unknown): PreparedVolumeLens
   const value = input as PreparedVolumeLenses, validId = (id: unknown) => typeof id === 'string' && /^[a-z][a-z0-9-]*$/u.test(id);
   if (value.schema !== 'cssearth-volume-lenses@1' || !validId(value.id) || !Number.isFinite(value.framingRadiusUnits) ||
       value.framingRadiusUnits <= 0 || !Array.isArray(value.lenses) || !value.lenses.length ||
-      (value.starsEnabled !== undefined && typeof value.starsEnabled !== 'boolean')) {
+      (value.starsEnabled !== undefined && typeof value.starsEnabled !== 'boolean') ||
+      (value.contextVisibility !== undefined && !['galactic', 'independent'].includes(value.contextVisibility))) {
     throw new TypeError('Prepared volume lens identity, framing or bank is invalid.');
   }
   const ids = new Set<string>(), resources = new Map<string, string>();
@@ -102,7 +105,7 @@ export function validatePreparedVolumeLenses(input: unknown): PreparedVolumeLens
     throw new TypeError('Prepared point visibility needs increasing non-negative projected-radius thresholds.');
   }
   return Object.freeze({ schema: value.schema, id: value.id, defaultLens: value.defaultLens,
-    framingRadiusUnits: value.framingRadiusUnits, lenses: Object.freeze(lenses), starsEnabled: value.starsEnabled ?? true,
+    contextVisibility: value.contextVisibility ?? 'galactic', framingRadiusUnits: value.framingRadiusUnits, lenses: Object.freeze(lenses), starsEnabled: value.starsEnabled ?? true,
     pointVisibility: Object.freeze({ ...visibility }),
     ...(Object.hasOwn(value, 'provenance') ? { provenance: value.provenance } : {}) });
 }

@@ -14,6 +14,8 @@ pnpm lab:nebula
 
 Open [Alignment](http://127.0.0.1:4331/alignment) or [Reconstruction](http://127.0.0.1:4331/reconstruction). Choose the object in the header; camera/density controls are on the left and image/cloud controls on the right.
 
+The separate [archive catalogue](docs/archive-catalogue.md) browses MAST, IRSA and ESO candidates for all 110 Messier objects. It retains wide views and local detail fields without starting image processing or changing the cloud workspace.
+
 For the compiler's complete clean-state setup, including the pinned NOX environment/model and an offline compile, use [Compile an emission nebula](docs/emission-compiler.md#reproduce-from-a-clean-checkout).
 
 - **Alignment:** inspect the full density field and registered image footprint. Adjust the saved fit, run automatic NOX removal, and compare Original / Without stars / Residual.
@@ -33,19 +35,22 @@ labs/nebula/
 ├── docs/                 # Current workflow and archived research
 ├── src/
 │   ├── components/       # React UI
+│   ├── catalogue/        # Archive discovery, receipts and metadata browser
 │   ├── alignment/        # Registration and saved image placement
 │   ├── star-removal/     # Automatic NOX pipeline
 │   ├── pipeline/         # Reproducible command and stage orchestration
 │   ├── reconstruction/   # Volume model, worker and saved variants
 │   ├── density/          # Full prior and cutoff preparation
 │   ├── stars/            # Catalogue and particle tooling
+│   ├── delivery/         # Pinned lab results and sky frames for app volumes
 │   ├── viewer/           # Retained TypeScript PolyCSS scene
 │   ├── utils/            # Jobs, stores and shared utilities
 │   ├── cli/              # Offline preparation commands
 │   └── browser/          # Browser checks
 ├── models/
 │   ├── lmc/              # LMC recipes, evidence and prepared models
-│   └── smc/              # SMC recipes, evidence and prepared models
+│   ├── smc/              # SMC recipes, evidence and prepared models
+│   └── messier/          # Discovery catalogue and its source evidence
 └── sources/              # Acquisition metadata and credits
 ```
 

@@ -35,6 +35,7 @@ export function App() {
       <h1>Nebula Lab</h1>
       <div className="subject-field"><label htmlFor="subject">Object</label><select id="subject" value={shell.objectId} disabled={shell.busy} onChange={event => void controller.current?.changeObject(event.target.value)}>{labObjects.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}</select></div>
       {workflow && <span className="interaction-hint" title={selectedSubject?.modelNote ?? workflow.description}>{workflow.label}</span>}
+      <a className="text-button" href="/catalogue" target="_blank" rel="noreferrer" title="Open archive candidates without closing this workspace or changing its camera.">Catalogue ↗</a>
       <div role="tablist" aria-label="View" ref={navigation}>
         <button id="density-tab" type="button" role="tab" aria-selected={shell.view === "alignment"} aria-controls="render-panel" tabIndex={shell.view === "alignment" ? 0 : -1} disabled={shell.busy || !shell.alignmentAvailable} onClick={() => void controller.current?.selectView("alignment")} onKeyDown={event => navigateKey(event, 0)}>Alignment</button>
         <button id="render-tab" type="button" role="tab" aria-selected={shell.view === "reconstruction"} aria-controls="render-panel" tabIndex={shell.view === "reconstruction" ? 0 : -1} disabled={shell.busy} onClick={() => void controller.current?.selectView("reconstruction")} onKeyDown={event => navigateKey(event, 1)}>Reconstruction</button>

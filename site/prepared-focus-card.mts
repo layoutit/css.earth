@@ -1,4 +1,4 @@
-import { isPreparedCluster } from '@cssearth/catalog';
+import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
 import type { PreparedCatalogObject, SpatialCatalogSource } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
 import { requiredElement } from './browser-types.mts';
@@ -58,15 +58,15 @@ export function createPreparedFocusCard(root: HTMLElement | null): PreparedFocus
     write('name', record.name);
     write('aliases', record.aliases.length ? `Also known as ${record.aliases.join(', ')}` : '');
     fields.aliases.hidden = record.aliases.length === 0;
-    const cluster = isPreparedCluster(record);
-    write('status', cluster ? record.classification.name : `${words(record.status)} galaxy`);
+    const cluster = isPreparedCluster(record), nebula = isPreparedNebula(record);
+    write('status', cluster || nebula ? record.classification.name : `${words(record.status)} galaxy`);
     write('distance', `${number.format(record.distance.valuePc)} pc${cluster ? ' (comoving, redshift-derived)' : ''}`);
     const { minusPc, plusPc, uncertainty } = record.distance;
     write('uncertainty', uncertainty ? `${number.format(uncertainty.statisticalPc)} pc statistical; ${number.format(uncertainty.systematicPc)} pc systematic`
       : minusPc !== undefined && plusPc !== undefined ? `−${number.format(minusPc)} / +${number.format(plusPc)} pc` : 'Not supplied');
-    write('membership', cluster ? 'Galaxy cluster' : words(record.membership.group));
-    write('association', cluster ? `Spectroscopic redshift ${record.redshift.value}` : words(record.membership.subgroup));
-    write('basis', cluster ? `${record.classification.basis} ${record.distance.method}` : record.membership.basis);
+    write('membership', cluster ? 'Galaxy cluster' : nebula ? 'Milky Way' : words(record.membership.group));
+    write('association', cluster ? `Spectroscopic redshift ${record.redshift.value}` : nebula ? 'Galactic nebula' : words(record.membership.subgroup));
+    write('basis', cluster || nebula ? `${record.classification.basis} ${record.distance.method}` : record.membership.basis);
     write('reference', `Distance reference: ${record.distance.sourceRef}`);
     for (const [index, link] of links.entries()) {
       const source = sources[index];

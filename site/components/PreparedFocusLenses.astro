@@ -32,10 +32,10 @@ const banks = Object.entries(descriptors).filter(([, descriptor]) => descriptor.
         <SelectedContent title={lens.title} description={lens.description} href={lens.sourceUrl} />
       </div>)}
     </div>
-    <label class="planet-setting-control">
+    {bank.lenses.some(lens => lens.stars.points.length > 0) && <label class="planet-setting-control">
       <input type="checkbox" data-focus-stars checked />
       <span class="planet-setting-text">Catalogue stars</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
-    </label>
+    </label>}
   </section>
 </div>)}

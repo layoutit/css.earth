@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "m2-9",
+  "type": "volume-lens-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "metersPerUnit": 564324590702700,
+      "localToReferenceXyzw": [
+        -0.34101329716160933,
+        0.6868469990897411,
+        -0.4917021814714364,
+        -0.41252890291059086
+      ],
+      "originM": [
+        -4639854198945162000,
+        -19190526609290568000,
+        -3531975474921165300
+      ],
+      "boundsUnits": {
+        "min": [
+          -5,
+          -2.7777777777777777,
+          -2.7777777777777777
+        ],
+        "max": [
+          5,
+          2.7777777777777777,
+          2.7777777777777777
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json",
+      "sha256": "b4c999b140798a2e00b20d61f62d9e1c0eca1273d178b7230cbba7c8667f279d"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-volume-lenses@1",
+    "url": "prepared/lenses.json",
+    "sha256": "14eab031c16c5ee8c3dc353950c61372586ade1da6d5fdb2ac761fd96e52d932"
+  }
+}

@@ -1,5 +1,5 @@
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import { projectPreparedPoint } from '../../../../src/renderers/css/stars/prepared-point-field-runtime';
+import { projectPreparedPoint } from '../stars/point-projection';
 import { transposeWorldRotation, worldRotationFromQuaternion } from '../../../../src/renderers/css/navigation/world-camera-math';
 import { mountPreparedCssVolume } from '../../../../src/renderers/css/volume/prepared-volume-runtime';
 import type { PreparedCssVolume } from '../../../../src/renderers/css/volume/types';
