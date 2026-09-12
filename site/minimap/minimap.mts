@@ -261,6 +261,9 @@ function multiply(a: readonly number[], b: readonly number[]) {
 function cssMatrix(m: readonly number[], preservePrecision = false) {
   // Keep the precision of the former variable-substituted grid matrix. Chrome
   // rounds direct matrix tokens on its fast parser; calc uses full precision.
+  // The diagram has no perspective, so its flat pieces project orthographically:
+  // the 2D part of the rotation draws the same picture without a 3D scene, and
+  // the spokes, ring and dots share one compositor layer instead of one each.
   const first = preservePrecision ? `calc(${m[0]})` : m[0];
-  return `matrix3d(${[first, m[3], m[6], 0, m[1], m[4], m[7], 0, m[2], m[5], m[8], 0, 0, 0, 0, 1].join(',')})`;
+  return `matrix(${[first, m[3], m[1], m[4], 0, 0].join(',')})`;
 }

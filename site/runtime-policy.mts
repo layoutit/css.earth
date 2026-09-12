@@ -18,7 +18,11 @@ export const WHEEL_ZOOM_USE_SCROLL_DISTANCE = true;
 // distance directly, so a glide outliving its gesture reads as drift.
 export const WHEEL_ZOOM_INERTIA = Object.freeze({
   dampingSeconds: 0.25,
-  stopRateRatio: 0.12,
+  // A third of a percent of distance per 60 Hz frame: about three pixels across a
+  // thousand-pixel orbit, which is where a stop stops reading as a snap. Lower
+  // costs a longer invisible tail; the ratio only bounds an extreme fling.
+  stopLogRatePerSecond: 0.2,
+  stopRateRatio: 0.02,
   gain: 1,
 });
 

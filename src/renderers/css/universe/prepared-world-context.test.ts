@@ -225,11 +225,14 @@ test('semantic changes invalidate worker snapshots without synchronously republi
     layer.publish(world, viewport, planner(fresh.view));
     clock.advance(1000);
   }
+  // A hover decides which annotations show, not where bodies project: a plan in
+  // flight stays valid (discarding it would cost a full repair of every body),
+  // nothing is drawn synchronously, and the next captured view carries the hover.
   const before = drawing(), stale = layer.captureFrame(world, viewport);
   find(root, 'contextGroup', 'mercury').dataset.objectHovered = 'true';
   root.parentNode!.dispatchEvent(new Event('objecthoverchange'));
   clock.advance(16);
-  expect(stale.current()).toBe(false);
+  expect(stale.current()).toBe(true);
   expect(drawing()).toBe(before);
   expect(layer.captureFrame(world, viewport).view.bodies[1].hovered).toBe(true);
   layer.destroy();
@@ -1949,10 +1952,12 @@ test('world presentation leaves the detail scope while retaining its input regis
   expect((layer.root as unknown as FakeElement).parentNode).toBe(presentationHost);
   expect(screenPicking(host as unknown as HTMLElement).pick(30, -20)).not.toBeNull();
   expect(screenPicking(presentationHost as unknown as HTMLElement).pick(30, -20)).toBeNull();
+  // Focus, like hover, changes annotations only: the plan in flight stays valid
+  // and a publication is still requested so the change reaches the screen.
   const stale = layer.captureFrame(world, viewport);
   presentationHost.dispatchEvent(new Event('focusin'));
   document.defaultView.advance(16);
-  expect(stale.current()).toBe(false);
+  expect(stale.current()).toBe(true);
   expect(request).toHaveBeenCalledOnce();
   layer.destroy();
   presentationHost.dispatchEvent(new Event('focusin'));

@@ -1,13 +1,21 @@
 # Prepared orbit stroke groups
 
-This is the record of the SVG experiment, not the current paint architecture.
-The 2026-09-10 replacement uses retained CSS line instances and direct transform
-publication (`prepared-orbit-lines.ts`). SVG path construction and `d` writes
-have been removed. Frame receipt reuses numeric chord slots, and the unused
-unclipped `orbitClip` geometry is no longer copied across the worker boundary.
-Screen-width strokes and exact marker/occlusion cutouts still require camera
-projection; this is not a claim that arbitrary-view strokes need only one
-parent transform. The measurements below apply to the earlier SVG build.
+Current paint architecture (2026-09-12): every orbit's planned chords are drawn
+by one `<path>` per trail-opacity level inside a `<g>` per orbit, all in a single
+`<svg>` per world context (`prepared-orbit-lines.ts`, renderer `strokes`). The
+worker still projects, clips and cuts the chords; the main thread formats one
+`d` per changed level, so a camera frame writes a few strings per orbit instead
+of one transform per chord, and the whole orbit bank is one paint chunk. The
+retained CSS unit-bar owner (`bars`) remains as the fallback and as the
+"Orbit lines" setting for comparison. Measured with the same recorded motion on
+the Solar System overview (per-frame task medians, user traces): CSS chords
+6.2 ms, one SVG per orbit 3.8 ms, shared SVG 3.0 ms; prebaked arc images placed
+in 2D (3.9 ms) or 3D (3.7 ms) did not beat it, and static 3D chord leaves behind
+one transform cost 14 ms because every 3D leaf is compositor work.
+
+The rest of this note is the record of the earlier SVG bank experiment
+(one path per prepared material, 9,465 retained paths) and its 2026-09-10
+replacement by CSS bars; the measurements below apply to those builds.
 
 The world orbit renderer retained 240 independently styled bars per orbit: 97,200
 bars for the current 405 orbits. Camera projection generated a CSS matrix for

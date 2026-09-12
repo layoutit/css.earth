@@ -848,6 +848,23 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   transform: translateY(0.3em);
 }
 
+.planet-setting-select {
+  grid-column: 3;
+  grid-row: 1;
+  max-width: 11em;
+  padding: 0 2px;
+  border: 0;
+  border-radius: 3px;
+  color: var(--shell-text-secondary);
+  background: transparent;
+  font: 13px/1.4 var(--shell-ui-font);
+  cursor: pointer;
+}
+.planet-setting-select:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
+
 .planet-setting-control[data-state]::after {
   grid-column: 3;
   grid-row: 1;
@@ -1033,6 +1050,9 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   height: var(--explorer-footer-height);
   background: var(--shell-background);
   pointer-events: auto;
+  /* A relayout boundary: the readout's ruler and text change while the camera
+     moves, and a fixed box would otherwise lay the whole document out again. */
+  contain: layout size;
 }
 
 .planet-attribution-footer {
@@ -1126,8 +1146,10 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   gap: 8px;
 }
 
+.planet-motion-record,
+.planet-motion-script,
 .planet-diagnostic-record {
-  flex: 0 0 52px;
+  flex: 0 0 auto;
   padding: 0;
   border: 0;
   background: none;
@@ -1135,7 +1157,11 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   font: inherit;
   cursor: pointer;
 }
+.planet-motion-record:hover,
+.planet-motion-script:hover,
 .planet-diagnostic-record:hover { color: var(--shell-text); }
+.planet-motion-record[aria-pressed="true"] { color: #e98679; }
+.planet-motion-script[disabled] { opacity: .5; cursor: default; }
 .planet-diagnostic-record[aria-pressed="true"] { color: #e98679; }
 
 .planet-view-scale {

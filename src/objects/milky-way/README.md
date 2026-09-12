@@ -15,7 +15,8 @@ milky-way/
     ├── volume.json             Prepared object envelope with PolyCSS leaves
     ├── volume-slices.json      Physical quad and texture intermediates
     ├── slices/{x,y,z}/*.webp    Generated, ignored 256 / 256 / 32 texture bank
-    └── sky/{px,nx,py,ny,pz,nz}.webp  Generated, ignored six celestial cube faces
+    ├── sky/{px,nx,py,ny,pz,nz}.webp  Generated, ignored six celestial cube faces
+    └── sky-near/{px,nx,py,ny,pz,nz}.webp  The same faces with neighbourhood stars baked in
 ```
 
 App startup restores missing images from the pinned sources via `pnpm prepare:environment-images`, preserving the accepted metadata. See the [shared bake commands](../../../labs/nebula/docs/baking.md).
@@ -126,10 +127,11 @@ original 130.95 MiB EXR stays in the acquisition cache. Source acquisition,
 original and decoded SHA256, exact Node/Zstd versions, NASA/Gaia credits and
 usage notice live together under `source/sky/`.
 
-Six opaque 1536 × 1536 WebP faces add **0.30 MiB download and 54 MiB decoded**.
-The complete volume + sky bank is therefore **14.57 MiB download and
-185.05 MiB decoded**, across 550 unique images. Sky faces use quality 90. Original source
-chunks are offline inputs and are never sent to the browser.
+Six opaque 1536 × 1536 WebP faces add **0.30 MiB download and 54 MiB decoded**,
+and the near set below adds **0.44 MiB download and 54 MiB decoded**. The complete
+volume + sky bank is therefore **15.01 MiB download and 239.05 MiB decoded**, across
+556 unique images. Sky faces use quality 90. Original source chunks are offline
+inputs and are never sent to the browser.
 
 The offline baker samples linear RGB before applying a fixed exposure of 4.5
 and the standard sRGB display curve. Before final attenuation, the transfer at
@@ -143,6 +145,27 @@ rendered catalogue stars. Alpha stays opaque and source HDR pixels stay unchange
 The NASA Milky Way-only image omits bright Hipparcos/Tycho stars, so the
 application's separately prepared bright stars and labels coexist with it.
 Faint Gaia stars remain in the image; it is not literally star-free.
+
+## Neighbourhood stars in the near faces
+
+`source/sky/recipe.json` pins the sibling `stellar-neighbourhood` object by its
+descriptor digest and one authored screen scale, 43.6 CSS pixels per degree. The
+baker composites that prepared point field, seen from its own origin, onto a copy
+of each face: about 17,500 sprites in total, drawn with the same atlas tile,
+photometry table and source-over blend the browser uses, supersampled three times
+per axis. The result is `prepared/sky-near/`, a second complete cube.
+
+The runtime shows the near cube while the observer sits where the field's own
+parallax is invisible, and crossfades to the plain faces over the existing
+stellar band (100 AU to 0.1 pc), which is where that assumption stops holding.
+Inside the band no star is drawn as DOM: the planner selects no star slots and
+the point field writes nothing. Beyond it the prepared point field returns
+unchanged, because parallax is real there.
+
+The baked faces are 1536 px across, so a star's disc is about three times softer
+than the browser's own sprite at device pixel ratio 2, and the sprite radius is
+fixed at the authored screen scale instead of following the viewport. This is a
+deliberate visual difference, not a reproduction of the DOM starfield.
 
 The cube's authored bases are ICRF directions, independent of the volume's
 Galactic local frame. Its six prepared PolyCSS planes form one closed shell
