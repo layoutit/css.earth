@@ -1260,8 +1260,8 @@
     {
       "id": "comet-9p-features-landmarks",
       "path": "features/landmarks.json",
-      "expectedBytes": 969,
-      "expectedSha256": "9df9a04ae6ebfa5d8b5758659c3b8e4d322b0ae4fb24cc2d105bd59be1c12dcc",
+      "expectedBytes": 4944,
+      "expectedSha256": "8a8eed86424e7e467495f3faff70382ab657f74ac888f667fbdbce2a34542f33",
       "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -1277,6 +1277,11 @@
             "catalogueId": "pds-tempel1-shape-2012",
             "role": "material",
             "evidence": "src/planets/comet-9p/source/features/landmarks.json: per-place coordinates, descriptions and publication references; checked 2026-09-12."
+          },
+          {
+            "catalogueId": "thomas-2013-tempel1-geology",
+            "role": "reference",
+            "evidence": "src/planets/comet-9p/source/features/landmarks.json: Fig. 2b axis calibration and interior controls for S1–S4; checked 2026-09-12."
           }
         ]
       }
@@ -1284,8 +1289,8 @@
     {
       "id": "comet-9p-features-manifest",
       "path": "features/manifest.json",
-      "expectedBytes": 1014,
-      "expectedSha256": "80b2e6c9341e1444588598c79e937c2f7c3c886bc0a030c1b724b1f24c7ddb7a",
+      "expectedBytes": 1016,
+      "expectedSha256": "798a12f8e5cc0d0aa33417010f442bf79f02cefb7b0c93b72c868620a6cf3d5c",
       "origin": "Byte pins and source qualifications for the surface-place compilation.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -1372,8 +1377,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7026,
-      "expectedSha256": "d0ec3bbfd36638a1f8cadda2f7544ae52cceed8dc2b0f1e33f7fe041aac31e8c",
+      "expectedBytes": 7259,
+      "expectedSha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
