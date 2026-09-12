@@ -195,6 +195,26 @@ route is validated end to end against Dimorphos's DRACO backplanes in
 archive's own intercepts, the constant offset explained by kernel versions); no
 lens uses it yet, so a body that adopts it needs a rendered inspection.
 
+Archived and kernel pointing carries the archive's error: a fraction of a pixel
+for a solution tuned to the images, tens of pixels for a reconstructed C-kernel.
+A `spice-camera` or `osiris-camera` recipe may declare `refinement: { method:
+"mesh-limb", maximumCorrectionDegrees, maximumResidualPixels, minimumControls,
+searchPixels?, maximumControls?, minimumSharpness?, threshold? }` and
+`tools/objects/terrestrial-layers/limb-refinement.mts` then fits one rotation of
+the camera to the lit limb of the retained mesh before geometry is derived:
+edges are the sub-pixel coverage crossings of the body against background
+connected to space, sharp enough not to be terminator; each edge is matched to
+the mesh limb along its normal; terminator edges are recognised because the
+limb they reach faces away from the Sun; the match window grows until the
+count plateaus; a damped least-squares fit with a robust cut follows; and the
+holdout half of the edges must land within the declared residual budget, with
+the correction below its bound, or preparation refuses the frame. The report
+(correction, residuals before and after, matched fractions) lands in the lens
+metadata. Range, focal length and Sun direction are never changed.
+`tests/objects/unit/dimorphos/draco-refinement.test.mts` measures it against the
+DRACO backplanes: the kernel camera stays within 0.6 px of the archive, and
+cameras pushed 30 and 150 px away return to 0.24 and 0.55 px.
+
 The PDS3 routes (OSIRIS GEO, AMICA) stay instrument decoders behind the same
 seam, decided 2026-09-12 after a code review: their archives do not declare
 plane units or semantics the way a PDS4 label does, and about half of each

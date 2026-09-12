@@ -1,6 +1,6 @@
 import type { SurfaceOptions, SurfaceColorSample, GeoFrame, GeoObservationFrame, RadialSurface, SurfaceConfig } from './contracts.mts';
 import type {SourceInput} from '../../../src/platform/source-manifest.mts';
-import {parseGeoRecipe,parseSurfaceGeometry,parseGeoCameraClosure,decodeProfile} from './source-records.mts';
+import {parseGeoRecipe,parseSurfaceGeometry,parseGeoCameraClosure,decodeProfile,type NumericRaster} from './source-records.mts';
 import {requireRecord,requireString} from '../../source-values.mts';
 type GeoRecipe = ReturnType<typeof parseGeoRecipe>;
 import { validateEncounterRecipe, loadEncounterSurface } from './encounter-surface.mts';
@@ -16,6 +16,7 @@ import { decodeLlorri } from './llorri-geo.mts';
 import { decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT } from './pds4-geometry-cube.mts';
 import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, ABERRATIONS } from './spice-camera.mts';
 import { loadKernelSet } from '../../spice/kernel-set.mts';
+import { refineCameraByLimb } from './limb-refinement.mts';
 
 const safePath = (path: unknown) => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.split(/[\\/]/).includes('..');
 const positive = (value: number) => Number.isFinite(value) && value > 0;
@@ -68,6 +69,14 @@ export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown
       spice.pixels.focalLength.unit !== 'mm' || !['micrometre', 'mm'].includes(spice.pixels.pixelPitch.unit) || ![0, 1].includes(spice.pixels.origin) ||
       !['X', '-X', 'Y', '-Y', 'Z', '-Z'].includes(spice.pixels.column) || !['X', '-X', 'Y', '-Y', 'Z', '-Z'].includes(spice.pixels.row) || spice.pixels.column.replace('-', '') === spice.pixels.row.replace('-', '') ||
       (spice.image.plane !== undefined && (!Number.isInteger(spice.image.plane) || spice.image.plane < 1)) || !spice.image.quantity)) throw new TypeError('Invalid SPICE camera declaration.');
+  const refinement = recipe.refinement;
+  if (refinement !== undefined && (!(kernels || recipe.format === 'osiris-camera') || refinement.method !== 'mesh-limb' ||
+      !positive(refinement.maximumCorrectionDegrees) || refinement.maximumCorrectionDegrees > 2 || !positive(refinement.maximumResidualPixels) || refinement.maximumResidualPixels > 5 ||
+      !Number.isInteger(refinement.minimumControls) || refinement.minimumControls < 16 || refinement.minimumControls > 5000 ||
+      (refinement.threshold !== undefined && !Number.isFinite(refinement.threshold)) ||
+      (refinement.searchPixels !== undefined && (!Number.isInteger(refinement.searchPixels) || refinement.searchPixels < 8 || refinement.searchPixels > 512)) ||
+      (refinement.maximumControls !== undefined && (!Number.isInteger(refinement.maximumControls) || refinement.maximumControls < 2 * refinement.minimumControls || refinement.maximumControls > 20000)) ||
+      (refinement.minimumSharpness !== undefined && (!Number.isFinite(refinement.minimumSharpness) || refinement.minimumSharpness < 0 || refinement.minimumSharpness > 0.9)))) throw new TypeError('Invalid camera limb refinement.');
   const validPhotometry = photometry && (photometry.model === 'lommel-seeliger' ||
     (recipe.format === 'osiris-camera' && photometry.model === 'minnaert' &&
       Number.isFinite(photometry.coefficient) && photometry.coefficient !== undefined && photometry.coefficient >= .5 && photometry.coefficient <= 1 &&
@@ -135,11 +144,18 @@ async function loadSingleGeoObservationSurface({ sourceDirectory, source, recipe
       await source.validatePath(entry.path);
     }
   }
+  // A declared refinement fits one rotation of the camera to the mesh's lit limb before geometry is derived.
+  const refined = <T extends { camera: unknown; width: number; height: number; planes: Record<string, NumericRaster>; acceptPixel?(index: number): boolean; qualityReport: Record<string, unknown> }>(decoded: T): T => {
+    if (!recipe.refinement) return decoded;
+    const result = refineCameraByLimb({ ...decoded, planes: { IMAGE: decoded.planes.IMAGE } }, radial.grid, recipe.refinement);
+    decoded.qualityReport.refinement = result.report;
+    return { ...decoded, camera: result.camera };
+  };
   const frame: GeoObservationFrame = camera ? attachSourceGeometry(recipe.format === 'llorri-camera'
     ? decodeLlorri(await read(recipe.path), camera)
-    : decodeOsirisReflectance(await read(recipe.path), camera, recipe.allowLossy), radial.grid)
-    : kernelCamera(recipe) ? attachSourceGeometry(decodeSpiceCameraFrame(await read(recipe.path),
-      await loadKernelSet(spiceDeclaration(recipe).kernels.map(path => resolve(sourceDirectory, path))), spiceDeclaration(recipe), recipe.filter), radial.grid)
+    : refined(decodeOsirisReflectance(await read(recipe.path), camera, recipe.allowLossy)), radial.grid)
+    : kernelCamera(recipe) ? attachSourceGeometry(refined(decodeSpiceCameraFrame(await read(recipe.path),
+      await loadKernelSet(spiceDeclaration(recipe).kernels.map(path => resolve(sourceDirectory, path))), spiceDeclaration(recipe), recipe.filter)), radial.grid)
     : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? decodePds4GeometryCube(await read(recipe.path), (await read(recipe.labelPath)).toString('utf8'),
       { fileName: basename(requireString(recipe.path)), cube: cubeDeclaration(recipe), filter: recipe.filter })
     : recipe.format === 'amica-gaskell' ? decodeAmicaGeo(await read(recipe.path),
