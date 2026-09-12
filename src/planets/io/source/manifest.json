@@ -971,8 +971,8 @@
     {
       "id": "io-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1179,
-      "expectedSha256": "2a5947114e6ef23f9571f4f2052403e38a54222fc4dfaa83f5dc63804b4db2b8",
+      "expectedBytes": 1177,
+      "expectedSha256": "773f25e55fd348ab4193cabd51fbada8b6a52d6092586ac65116debe011cfbcf",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -1064,8 +1064,8 @@
     {
       "id": "io-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 12295,
-      "expectedSha256": "b937065debfbcd62352c9e6b5189f1febe5fffb604d3a94fc96821d964aa2d77",
+      "expectedBytes": 12351,
+      "expectedSha256": "ddb2e34e401c27f4b97d1e9de21fd6d684400036133639bb7418cae9965adacb",
       "origin": "Repository-authored Io raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
