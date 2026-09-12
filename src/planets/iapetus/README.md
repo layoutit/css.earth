@@ -70,7 +70,7 @@ All supplied pixels are preserved because there is no independent validity mask.
 
 No qualified downloadable height raster was found: the [current PDS SPC archive](https://sbnarchive.psi.edu/pds4/cassini/) has no Iapetus bundle, the [2025 author abstract](https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-115.html) says Iapetus is forthcoming, and the [USGS inventory](https://fdp.astrogeology.usgs.gov/fdp/saturn/) lists older stereo topography as unreleased. These are acquisition findings on 2026-09-06, not a claim that terrain models do not exist.
 
-Both photographic sources are resampled into the shared 8192 × 4096 preparation layout; this adds no detail to the 5760 × 2880 monochrome mosaic. Surface and pole atlases use WebP quality 90. Shared curvature lighting and the Shadows control apply to both lenses. No atmosphere, fake elevation, synthetic gap filling or displaced ridge geometry is introduced.
+The shared 8192 × 4096 latitude-band layout remains fixed and adds no detail to the 5760 × 2880 monochrome mosaic. The normal and enhanced photographic polar sprites instead sample their pinned source grids directly with a 2 × 2 footprint and retain lossless WebP encoding. Shared curvature lighting and the Shadows control apply to both lenses. No atmosphere, fake elevation, synthetic gap filling or displaced ridge geometry is introduced.
 
 Iapetus is NAIF 608. Physical facts are from [NASA](https://science.nasa.gov/saturn/moons/iapetus/); the astronomy package supplies the Iapetus orbit and IAU rotation. NASA rounds the mean radius to 736 km, while the renderer uses the package value 734.5 km. ESO/HYG sky and Inter title font retain their pinned provenance.
 

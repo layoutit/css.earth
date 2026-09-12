@@ -168,10 +168,10 @@ to 764 km. Keep that physical value separate from the 764.1 km monochrome projec
 
 The very tenuous exosphere does not justify a visible halo; proposed rings are not rendered.
 
-Map preparation uses the shared 8192 × 4096 intermediate layout and 1024-pixel pole products.
-The final source-mesh scene samples these maps into prepared per-triangle atlases. Prepared
-surface/pole atlases use WebP quality 90 with lossless alpha; intermediate maps remain
-lossless.
+Map preparation retains the shared 8192 × 4096 latitude-band layout and 1024-pixel pole products.
+The normal and enhanced photographic atlases sample their pinned original grids directly with a
+2 × 2 footprint into the fixed per-triangle layout and use WebP quality 95. Latitude bands,
+scientific products and their lossless inputs retain their existing preparation and encoding.
 
 Native observations are downsampled, and larger textures would not increase the terrain model's
 detail.

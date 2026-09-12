@@ -64,7 +64,7 @@ The source model spacing is about 1.5 km. The product description’s one-to-two
 
 The astronomy package provides the Saturn-relative orbit and IAU orientation. The old spherical display reference is retained only as the package’s scale normalization; the native model now supplies vertex positions. Numeric height datums and factsheet mean radii remain independent quantities. [NASA](https://science.nasa.gov/saturn/moons/tethys/) describes a mildly nonspherical body; the newly selected source model supplies a finite-resolution approximation to silhouette and topography.
 
-Photographic and SPC map preparation uses the shared 8192 × 4096 intermediate layout and 1024-pixel pole products. The final source-mesh scene samples these maps into prepared per-triangle atlases. Terminal surface and pole atlases use WebP quality 90 with lossless alpha. Sources and intermediate maps retain their original detail; only prepared files reach runtime. No visible atmosphere or cutaway is added.
+Photographic and SPC map preparation retains the shared 8192 × 4096 latitude-band layout and 1024-pixel pole products. The normal and enhanced photographic atlases sample their pinned original grids directly with a 2 × 2 footprint into the fixed per-triangle layout and use WebP quality 95. SPC products and latitude bands retain their existing preparation and encoding. Sources remain distinct from the prepared files that reach runtime. No visible atmosphere or cutaway is added.
 
 Pinned files, URLs and hashes are in `source/manifest.json`; acquisition and preparation use the shared authored-object pipeline.
 
