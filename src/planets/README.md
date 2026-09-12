@@ -112,6 +112,7 @@ Read the current `package.json` and runner arguments before using commands:
 | Run body tests | `node --test tests/objects/unit/<id>/*.test.mts` |
 | Run shared package, renderer, platform and shell tests | `pnpm test` |
 | Check source identities, bindings and catalogue generation | `pnpm test:sources` |
+| Create the oracle environment and regenerate oracle fixtures | `pnpm oracles:setup`, `pnpm oracles:run`; see `tools/oracles/README.md` |
 | Run a preparation test | `node --test tools/objects/<recipe>/<name>.test.mts` when the selected test uses Node |
 | Production build and assembly | `pnpm build` |
 | Shared DOM/browser checks | `pnpm test:browser <served-worktree-url> <id>` |

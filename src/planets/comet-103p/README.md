@@ -20,6 +20,8 @@
 
 - **Surface places, 2026-09-12:** preparation and the runtime parser accepted three locations; three focused unit tests passed. Browser inspection on base `53b262bd` with this addition covered the waist search, camera arrival and EPOXI dataset. The published catalog passed a fresh byte-count and SHA-256 check. Surface assets are unchanged.
 
+- **Reader oracle, 2026-09-12:** `tools/oracles/fits/encounter.py` reads the pinned MRI product `mv10110413_6000001_001_r.fit` with astropy. `tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts` requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, border, flagged and non-finite pixels to agree.
+
 ## Known problems
 
 - The default Source constraints lens uses solid gray for stereo control, blue for limb silhouettes, and the shared gray grid for poorly constrained regions. The grid means poorly constrained by those methods, not necessarily wholly unobserved. Neither view claims observed albedo.
