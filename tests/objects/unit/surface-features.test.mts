@@ -17,7 +17,7 @@ for (const entry of await readdir(roots, { withFileTypes: true })) {
   if (descriptor !== null) bodies.push(entry.name);
 }
 
-test("at least Mercury declares a prepared feature catalogue", () => { assert.ok(bodies.includes("mercury")); assert.ok(bodies.length >= 37, bodies.join(",")); });
+test("at least Mercury declares a prepared feature catalogue", () => { assert.ok(bodies.includes("mercury")); assert.ok(bodies.length >= 45, bodies.join(",")); });
 
 for (const id of bodies) {
   test(`${id}: the prepared feature catalogue is pinned, anchored on its mesh and parses at the runtime boundary`, async () => {

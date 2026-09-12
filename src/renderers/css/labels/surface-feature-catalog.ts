@@ -64,7 +64,8 @@ export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: Prepare
     ids.add(id);
     const anchorUnits = vector(feature.anchorUnits, 'feature anchor'), normal = vector(feature.normal, 'feature normal');
     const radiusUnits = finite(feature.radiusUnits, 'feature radius'), diameterKm = finite(feature.diameterKm, 'feature diameter');
-    if (!(radiusUnits >= 0) || !(diameterKm > 0) || !onBody(anchorUnits, plan) ||
+    // A diameter of zero is a name the Gazetteer has not sized: labelled, ranked last, no rim.
+    if (!(radiusUnits >= 0) || !(diameterKm >= 0) || !onBody(anchorUnits, plan) ||
         Math.abs(Math.hypot(...normal) - 1) > 1e-3) throw new TypeError('Surface feature geometry is not on the prepared body.');
     const outline = parseOutline(feature.outline, plan);
     const name = text(feature.name, 'feature name'), link = text(feature.link, 'feature link');

@@ -18,7 +18,7 @@ export type SurfaceFeatureKind = 'point' | 'linear' | 'region';
 export const DEFAULT_TYPE_KINDS: Readonly<Record<string, SurfaceFeatureKind>> = Object.freeze({
   AA: 'point', AS: 'point', CB: 'point', ER: 'point', FA: 'point', FR: 'point', LF: 'point', MA: 'point', PE: 'point', PU: 'point', SF: 'point', SA: 'point', ST: 'point', TH: 'point',
   MN: 'region', CH: 'region', LU: 'region', AR: 'linear', CA: 'linear', CM: 'linear', DO: 'linear', FE: 'linear', FM: 'linear', FO: 'linear', FT: 'linear', LI: 'linear', RI: 'linear', RU: 'linear', SC: 'linear', SE: 'linear', SU: 'linear', VA: 'linear', VI: 'linear',
-  CO: 'region', CR: 'region', FL: 'region', IN: 'region', LA: 'region', LB: 'region', LG: 'region', LC: 'region', LN: 'region', MR: 'region', ME: 'region', MO: 'region', OC: 'region', PA: 'region', PL: 'region', PM: 'region', PR: 'region', RE: 'region', SI: 'region', TA: 'region', TE: 'region', UN: 'region', VS: 'region',
+  CO: 'region', CL: 'region', LO: 'region', CR: 'region', FL: 'region', IN: 'region', LA: 'region', LB: 'region', LG: 'region', LC: 'region', LN: 'region', MR: 'region', ME: 'region', MO: 'region', OC: 'region', PA: 'region', PL: 'region', PM: 'region', PR: 'region', RE: 'region', SI: 'region', TA: 'region', TE: 'region', UN: 'region', VS: 'region',
 });
 export type SurfaceFeatureOutline =
   | { readonly kind: 'circle'; readonly center: readonly [number, number, number]; readonly east: readonly [number, number, number]; readonly north: readonly [number, number, number] }
@@ -36,8 +36,9 @@ export interface SurfaceFeaturePolicy { readonly minimumZoomShare: number; reado
 export interface SurfaceFeaturesConfig {
   readonly schema: typeof SURFACE_FEATURES_CONFIG_SCHEMA;
   readonly directory: string; readonly archive: string;
-  /** Some small-body exports ship no .prj; their datum then comes from the FGDC metadata (`semiaxis`, `horizdn`). */
-  readonly members: { readonly attributes: string; readonly projection: string | null; readonly metadata: string };
+  /** Some small-body exports ship no .prj; their datum then comes from the FGDC metadata (`semiaxis`, `horizdn`). The newest
+   * asteroid exports ship neither: the datum is then the authored radius and the pin manifest carries the licence evidence. */
+  readonly members: { readonly attributes: string; readonly projection: string | null; readonly metadata: string | null };
   readonly surfaceMap: string; readonly mapLeftEdgeLongitudeDeg: number;
   readonly output: string; readonly publicBase: string;
   readonly target: { readonly className: string; readonly withoutClassName: string | null };
@@ -74,7 +75,8 @@ export interface PreparedSurfaceFeatureCatalog {
   /** Rows left out for a reason other than an excluded type: not adopted, no label kind, or no diameter. */
   readonly skipped: Readonly<Record<string, { readonly count: number; readonly reason: string }>>;
   /** Type codes outside the kind table, labelled as regions, and features whose empty extent fell back to a circle. */
-  readonly assumed: { readonly regionTypes: Readonly<Record<string, number>>; readonly extentFallbacks: number; readonly meshMisses: number };
+  /** `unsized` counts labelled names the Gazetteer publishes without a diameter, by type code. */
+  readonly assumed: { readonly regionTypes: Readonly<Record<string, number>>; readonly extentFallbacks: number; readonly meshMisses: number; readonly unsized: Readonly<Record<string, number>> };
   /** Mapped-structure traces associated with named features, when a trace archive is declared. */
   readonly traces?: TraceSummary;
   /** Rows the export repeats for one feature identity; the first row's centre is kept. */
@@ -142,7 +144,7 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
   return Object.freeze({
     schema: SURFACE_FEATURES_CONFIG_SCHEMA,
     directory: relativePath(input.directory, 'features recipe directory'), archive: relativePath(input.archive, 'features recipe archive'),
-    members: { attributes: relativePath(members.attributes, 'members.attributes'), projection: members.projection === null ? null : relativePath(members.projection, 'members.projection'), metadata: relativePath(members.metadata, 'members.metadata') },
+    members: { attributes: relativePath(members.attributes, 'members.attributes'), projection: members.projection === null ? null : relativePath(members.projection, 'members.projection'), metadata: members.metadata === null ? null : relativePath(members.metadata, 'members.metadata') },
     surfaceMap: relativePath(input.surfaceMap, 'features recipe surfaceMap'), mapLeftEdgeLongitudeDeg: finite(input.mapLeftEdgeLongitudeDeg, 'features recipe mapLeftEdgeLongitudeDeg'),
     output, publicBase, target: { className: text(target.className, 'target.className'), withoutClassName: target.withoutClassName === undefined ? null : text(target.withoutClassName, 'target.withoutClassName') },
     lensIds: Object.freeze([...lensIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
@@ -409,9 +411,16 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const loadedTraces = config.traces ? await loadTraces(context.sourceDirectory, config.traces) : null;
   const traceStats = { matched: 0, byCode: {} as Record<string, number>, unmatched: [] as string[] };
   const archive = resolve(directory, config.archive);
-  const metadata = new TextDecoder().decode(unzipMember(archive, config.members.metadata));
+  const metadata = config.members.metadata === null ? null : new TextDecoder().decode(unzipMember(archive, config.members.metadata));
   let datumName: string, radiusM: number;
-  if (config.members.projection !== null) {
+  if (metadata === null) {
+    // The newest asteroid exports ship neither a projection file nor an FGDC record: anchors are cast onto the shape model and
+    // the authored radius scales outline sizes; the pin manifest names the public-domain evidence outside the archive.
+    if (config.members.projection !== null) throw new TypeError('An export without metadata is expected to ship without a projection file too.');
+    if (!context.hitMesh) throw new TypeError('An export without a datum can only anchor on a prepared hit mesh.');
+    if (!/https?:\/\//u.test(manifest.licenseEvidence)) throw new TypeError('An export without metadata must name its licence evidence by URL in the pin manifest.');
+    datumName = 'none in export (no projection file or metadata; authored radius used)'; radiusM = context.radiusKm * 1000;
+  } else if (config.members.projection !== null) {
     const projection = new TextDecoder().decode(unzipMember(archive, config.members.projection));
     const spheroid = /SPHEROID\["([^"]+)",\s*([\d.]+)/u.exec(projection), name = /GEOGCS\["([^"]+)"/u.exec(projection)?.[1];
     if (!spheroid || !name) throw new TypeError('Gazetteer projection file does not declare a spheroid.');
@@ -429,14 +438,14 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   // their anchors are cast onto the shape model, so the datum only scales outline sizes and is recorded, not enforced.
   const datumTolerance = context.hitMesh ? 0.15 : 0.01;
   if (Math.abs(radiusM - context.radiusKm * 1000) > datumTolerance * context.radiusKm * 1000) throw new TypeError(`Gazetteer datum radius ${radiusM} m differs from the authored ${context.radiusKm} km body.`);
-  if (!/<useconst>\s*Public domain\.?\s*<\/useconst>/iu.test(metadata)) throw new TypeError('Gazetteer metadata no longer declares public-domain use constraints.');
+  if (metadata !== null && !/<useconst>\s*Public domain\.?\s*<\/useconst>/iu.test(metadata)) throw new TypeError('Gazetteer metadata no longer declares public-domain use constraints.');
   const table = parseDbf(unzipMember(archive, config.members.attributes));
   for (const name of ['name', 'clean_name', 'approvaldt', 'origin', 'diameter', 'center_lon', 'center_lat', 'type', 'code', 'approval', 'quad_code', 'link', 'min_lon', 'max_lon', 'min_lat', 'max_lat']) {
     if (!table.fields.some(field => field.name === name)) throw new TypeError(`Gazetteer table lacks the ${name} field.`);
   }
   const kindOf = new Map<string, SurfaceFeatureKind>(Object.entries(DEFAULT_TYPE_KINDS));
   for (const kind of ['point', 'linear', 'region'] as const) for (const code of config.kinds[kind]) kindOf.set(code, kind);
-  const skipped: Record<string, { count: number; reason: string }> = {}, assumed: Record<string, number> = {};
+  const skipped: Record<string, { count: number; reason: string }> = {}, assumed: Record<string, number> = {}, unsized: Record<string, number> = {};
   let extentFallbacks = 0, meshMisses = 0;
   // On a shape model every surface point is cast through the hit mesh; a miss (a hole in the coarse mesh) keeps the reference radius.
   const onSurface = (direction: Vector3): Vector3 => {
@@ -466,7 +475,13 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     if (!Number.isFinite(rawLongitude) || !Number.isFinite(latitudeDeg) || Math.abs(latitudeDeg) > 90) throw new TypeError(`Gazetteer centre is out of range for ${row.name}.`);
     // Some exports write centres just below 0° or at 360° and beyond; the catalogue keeps positive-east 0–360°.
     const longitudeDeg = ((rawLongitude % 360) + 360) % 360;
-    if (!(diameterKm > 0)) { skip(`diameter:${code}`, 'Features without a published diameter cannot be ranked or outlined.'); continue; }
+    const extentInput = { minLon: Number(row.min_lon), maxLon: Number(row.max_lon), minLat: Number(row.min_lat), maxLat: Number(row.max_lat) };
+    // Some exports carry names the Gazetteer has not positioned: centre 0° or 360°, 0° with a degenerate extent at the same point.
+    const degenerateExtent = [row.min_lon, row.max_lon, row.min_lat, row.max_lat].some(value => value === '') || (extentInput.minLon === extentInput.maxLon && extentInput.minLat === extentInput.maxLat);
+    if (longitudeDeg === 0 && latitudeDeg === 0 && degenerateExtent) { skip(`position:${code}`, 'Features without a published centre cannot be placed.'); continue; }
+    if (!(diameterKm >= 0)) throw new TypeError(`Gazetteer diameter is not a number for ${row.name}.`);
+    // A feature without a published diameter is still labelled and searchable; it ranks after every sized feature and draws no rim.
+    if (diameterKm === 0) unsized[code] = (unsized[code] ?? 0) + 1;
     const id = /\/Feature\/(\d+)$/u.exec(row.link!)?.[1];
     if (!id) throw new TypeError(`Gazetteer feature identity is missing for ${row.name}.`);
     const first = ids.get(id);
@@ -483,7 +498,6 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     if (!approved) throw new TypeError(`Gazetteer approval date is missing for ${row.name}.`);
     const direction = surfaceDirection(longitudeDeg, latitudeDeg, axes, config.mapLeftEdgeLongitudeDeg);
     const radiusUnits = diameterKm / 2 * scale;
-    const extentInput = { minLon: Number(row.min_lon), maxLon: Number(row.max_lon), minLat: Number(row.min_lat), maxLat: Number(row.max_lat) };
     // Some exports leave the extent empty or degenerate: those features fall back to their diameter circle.
     const hasExtent = [row.min_lon, row.max_lon, row.min_lat, row.max_lat].every(value => value !== '') && Object.values(extentInput).every(Number.isFinite) && extentInput.maxLat >= extentInput.minLat && (extentInput.maxLon !== extentInput.minLon || extentInput.maxLat !== extentInput.minLat);
     const extent = hasExtent ? normalizeExtent(extentInput, longitudeDeg) : null;
@@ -493,7 +507,10 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     // so their published extent box is the honest shape.
     const anchor = onSurface(direction), anchorRadius = Math.hypot(anchor[0], anchor[1], anchor[2]);
     let outline: SurfaceFeatureOutline;
-    if (kind === 'point' || !extent) {
+    if (diameterKm === 0 && !extent) {
+      // No published size and no extent: the anchor alone, with a rim of zero radius that draws nothing.
+      outline = { kind: 'circle', center: [round(anchor[0], 3), round(anchor[1], 3), round(anchor[2], 3)], east: [0, 0, 0], north: [0, 0, 0] };
+    } else if (kind === 'point' || !extent) {
       const rim = rimVectors(direction, axes.north, context.meshRadiusUnits, radiusUnits), lift = anchorRadius / context.meshRadiusUnits;
       outline = context.hitMesh ? { kind: 'circle', center: scaled(rim.center, lift), east: scaled(rim.east, lift), north: scaled(rim.north, lift) } : rim;
     } else {
@@ -528,7 +545,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     schema: PREPARED_SURFACE_FEATURES_SCHEMA, objectId: context.objectId,
     source: manifest.source, snapshotDate: manifest.snapshotDate, sourcePage: manifest.sourcePage, license: manifest.license, qualification: manifest.qualification,
     datum: { name: datumName, radiusM, authoredRadiusM: context.radiusKm * 1000, longitude: 'positive-east-0-360' },
-    excluded, skipped, assumed: { regionTypes: assumed, extentFallbacks, meshMisses }, duplicates: { features: duplicateIds.size, rows: duplicateRows, maxSeparationDeg: round(maxSeparationDeg, 4), maxDiameterDifferenceKm: round(maxDiameterDifferenceKm, 4) },
+    excluded, skipped, assumed: { regionTypes: assumed, extentFallbacks, meshMisses, unsized }, duplicates: { features: duplicateIds.size, rows: duplicateRows, maxSeparationDeg: round(maxSeparationDeg, 4), maxDiameterDifferenceKm: round(maxDiameterDifferenceKm, 4) },
     ...(loadedTraces && config.traces ? { traces: { source: loadedTraces.manifest.source, sourcePage: loadedTraces.manifest.sourcePage, license: loadedTraces.manifest.license, snapshotDate: loadedTraces.manifest.snapshotDate,
       traces: loadedTraces.traces.length, matched: traceStats.matched, byCode: traceStats.byCode, unmatched: traceStats.unmatched, maximumVertices: config.traces.maximumVertices } } : {}),
     features,
