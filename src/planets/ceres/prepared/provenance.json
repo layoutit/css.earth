@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43684d5900c2721521afa0a177c9add7bdc0e8e6644c10cf4c8096abe4fae453"
+    "sha256": "b8a5af99f3934b0c8cb02c3a1499e0881e8edf48332ae8acdd7724563d651a5f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -378,7 +378,7 @@
         ],
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
+      "coverage": "Dawn FC2 body-fixed orthorectified global mosaic. The PDS bundle-block adjustment uses Dawn orbit/attitude and the high-resolution Ceres shape model for ray intersections; the Kait-anchored longitude system is shared with the Dawn shape/topography work. Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting; the extreme south pole and other source gaps remain missing.",
       "capture": {
         "attributions": [
           {
@@ -443,7 +443,7 @@
         ],
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
+      "coverage": "Dawn FC2 map-projected false-color image from the PIA19977 release. Its 920/750/440 nm assignments are retained as a separate mapped interpretation; it is not calibrated monochrome. The PDS mosaic family uses the Dawn body-fixed cartographic control, while this public composite retains its source epoch and gaps. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
       "capture": {
         "attributions": [
           {
