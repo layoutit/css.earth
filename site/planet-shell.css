@@ -650,7 +650,6 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
 .planet-breadcrumbs :is(a, button):focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 3px; }
 .planet-breadcrumbs [aria-current="page"] { color: var(--shell-text-secondary); }
 /* Mission headings overlay their artwork without taking input; keep the trail usable. */
-.planet-machine-heading > .planet-breadcrumbs { pointer-events: auto; }
 /* Missions titled by a short name open their description with the full name. */
 .planet-lens-details-lead { color: var(--shell-text); font-weight: 500; }
 /* Mission and spacecraft names title their cards at the shell's panel heading size,

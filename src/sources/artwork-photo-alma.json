@@ -1,0 +1,32 @@
+{
+  "id": "artwork-photo-alma",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "alma photograph",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://commons.wikimedia.org/wiki/File:ALMA_antennas_on_Chajnantor_(malin-dsc0027).jpg",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/98/ALMA_antennas_on_Chajnantor_%28malin-dsc0027%29.jpg",
+      "label": "Original file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:ALMA_antennas_on_Chajnantor_(malin-dsc0027).jpg",
+      "checkedOn": "2026-09-11",
+      "locator": "File licence, author and original file size"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Wikimedia Commons",
+  "creators": [
+    "ESO/C. Malin"
+  ]
+}

@@ -47,6 +47,78 @@
   },
   "entries": [
     {
+      "id": "alma",
+      "path": "images/alma.webp",
+      "url": "/shell/machine-renders/alma.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 37070,
+      "sha256": "f2bbefe509ab2041292f92b6271e20ecfa2dca30b863521c7aa1bcfd30bb8663",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-alma",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/3"
+          }
+        ]
+      },
+      "source": {
+        "id": "alma",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/98/ALMA_antennas_on_Chajnantor_%28malin-dsc0027%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:ALMA_antennas_on_Chajnantor_(malin-dsc0027).jpg",
+        "credit": "ESO/C. Malin",
+        "license": "CC BY 4.0",
+        "sha256": "4cf4338bff764a96435e52c37cb925a61d37c02d2a420bc4fa48a7b164fbfe0f",
+        "bytes": 4881446,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+      }
+    },
+    {
+      "id": "arecibo-305m",
+      "path": "images/arecibo-305m.webp",
+      "url": "/shell/machine-renders/arecibo-305m.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 83284,
+      "sha256": "3adec33f5bafc740520468c134160efb9d6af145b8e89ff1f1f2e926977e7f75",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-arecibo-305m",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/0"
+          }
+        ]
+      },
+      "source": {
+        "id": "arecibo-305m",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Arecibo_Observatory_Aerial_View.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Arecibo_Observatory_Aerial_View.jpg",
+        "credit": "H. Schweiker/WIYN and NOAO/AURA/NSF",
+        "license": "CC BY 4.0",
+        "sha256": "df12a79eab50ab41b3d748f9d340430e2b7cf27e50ca8e52694a0be20ab356d6",
+        "bytes": 157987,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+      }
+    },
+    {
       "id": "cassini",
       "path": "images/cassini.webp",
       "url": "/shell/machine-renders/cassini.webp",
@@ -247,6 +319,42 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/2"
           }
         ]
+      }
+    },
+    {
+      "id": "goldstone-dss14",
+      "path": "images/goldstone-dss14.webp",
+      "url": "/shell/machine-renders/goldstone-dss14.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 30506,
+      "sha256": "666a4e9cb61bf6f625a29cd3e44cd46d578a526edf05793c84bacff15f855972",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-goldstone-dss14",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/1"
+          }
+        ]
+      },
+      "source": {
+        "id": "goldstone-dss14",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Goldstone_DSN_antenna.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Goldstone_DSN_antenna.jpg",
+        "credit": "NASA/JPL-Caltech",
+        "license": "Public domain",
+        "sha256": "7d2e414851977038d44d5f0a21a26a4152e54d2127dcc11b42472d988dbaccde",
+        "bytes": 219929,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
       }
     },
     {
@@ -468,6 +576,42 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/6"
           }
         ]
+      }
+    },
+    {
+      "id": "irtf",
+      "path": "images/irtf.webp",
+      "url": "/shell/machine-renders/irtf.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 31714,
+      "sha256": "63a59b968aae939b9c05e98523e27e944183ec5388c1eaa951392a45dadff5b2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-irtf",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/4"
+          }
+        ]
+      },
+      "source": {
+        "id": "irtf",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/NASA_Infrared_Telescope_Facility_%28MaunaKea_Summit_Dome%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:NASA_Infrared_Telescope_Facility_(MaunaKea_Summit_Dome).jpg",
+        "credit": "NOIRLab/NSF/AURA/P. Horálek",
+        "license": "CC BY 4.0",
+        "sha256": "06664b18a54f4763eff97d510b0f66e2ad4586bbe90793d546f92b551dc342f3",
+        "bytes": 5308013,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
       }
     },
     {
@@ -1115,6 +1259,42 @@
       }
     },
     {
+      "id": "spitzer",
+      "path": "images/spitzer.webp",
+      "url": "/shell/machine-renders/spitzer.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 32972,
+      "sha256": "39934aab7f9aedb22ed02f319fbf562c2227c5196d6e3c667cf0cd4cb01f36b0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-spitzer",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/6"
+          }
+        ]
+      },
+      "source": {
+        "id": "spitzer",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Spitzer_earth_trailing2.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Spitzer_earth_trailing2.jpg",
+        "credit": "NASA/JPL-Caltech",
+        "license": "Public domain",
+        "sha256": "cca887b222fcf58f969e6d12a8042a58c138082905775268f255543ae25c0a0d",
+        "bytes": 1638522,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+      }
+    },
+    {
       "id": "suomi-npp",
       "path": "images/suomi-npp.webp",
       "url": "/shell/machine-renders/suomi-npp.webp",
@@ -1246,6 +1426,78 @@
             "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/21"
           }
         ]
+      }
+    },
+    {
+      "id": "vlba",
+      "path": "images/vlba.webp",
+      "url": "/shell/machine-renders/vlba.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 25324,
+      "sha256": "24e1c1f68be8831030abc8317d3d9b634369dd73ea1dde714b1186481084ab53",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-vlba",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/5"
+          }
+        ]
+      },
+      "source": {
+        "id": "vlba",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Very_Long_Baseline_Array_Dish_%283S8A8130%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Very_Long_Baseline_Array_Dish_(3S8A8130).jpg",
+        "credit": "Kitt Peak National Observatory/NOIRLab/NSF/AURA/P. Marenfeld",
+        "license": "CC BY 4.0",
+        "sha256": "71a86756f440d89b5cc5a798aa2c204661e56e49904aed2faefc0d229a7e69a4",
+        "bytes": 4932391,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+      }
+    },
+    {
+      "id": "vlt-ut3",
+      "path": "images/vlt-ut3.webp",
+      "url": "/shell/machine-renders/vlt-ut3.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 31458,
+      "sha256": "390b79a9201c8abc3e1baffe767fdc2d81f267b8c8c99cdebd65f784db078c6b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-vlt-ut3",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/2"
+          }
+        ]
+      },
+      "source": {
+        "id": "vlt-ut3",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/ESO%E2%80%99s_Very_Large_Telescope_%28VLT%29_observatory_at_Paranal.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:ESO%E2%80%99s_Very_Large_Telescope_(VLT)_observatory_at_Paranal.jpg",
+        "credit": "ESO/Y. Beletsky",
+        "license": "CC BY 4.0",
+        "sha256": "a6af073c1f272b3369f9514fed918d0ffa26d9b6e975068e22705a47443414b1",
+        "bytes": 2381531,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
       }
     },
     {
