@@ -5,6 +5,7 @@
  "tool": {
   "spiceypy": "8.2.0",
   "cspice": "CSPICE_N0067",
+  "pds4_tools": "1.4",
   "python": "3.12.14",
   "numpy": "2.5.3"
  },
@@ -83,14 +84,24 @@
    "path": "src/planets/dimorphos/source/spice/ck/dart_2022_269_2022_269_spc_v04.bc",
    "sha256": "1a3f4a50808b9ad0a5c790659da1aea41b45bfae6336104606dba2efcaa76517",
    "bytes": 11264
+  },
+  {
+   "path": "src/planets/dimorphos/source/observations/dart_0401930040_12262_01_geo.fits",
+   "sha256": "280764106bd4a2eb43fd614a5f70a5008b3820b0ef22d3f75bfea8875300edd2",
+   "bytes": 67132800
+  },
+  {
+   "path": "src/planets/dimorphos/source/observations/dart_0401930040_12262_01_geo.xml",
+   "sha256": "3b417f2952fb40a01ff395e6b55c81fbe7d1b150a61fb47a0118e8b4bff48890",
+   "bytes": 40081
   }
  ],
- "exposure": {
-  "sclk": "1/0401930040:07327",
-  "et": 717506121.9190404,
-  "utc": "2022-09-26T23:14:12.737Z"
- },
  "cases": {
+  "exposure": {
+   "sclk": "1/0401930040:07327",
+   "et": 717506121.9190404,
+   "utc": "2022-09-26T23:14:12.737Z"
+  },
   "times": [
    {
     "et": 717505521.9190404,

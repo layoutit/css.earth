@@ -3,7 +3,8 @@
   "include": [
     "venus/**/*.mts",
     "setup.mts",
-    "spice/*.mts",
+    "run.mts",
+    "fixture.mts",
     "../../tests/objects/unit/venus/oracle.test.mts"
   ],
   "exclude": []

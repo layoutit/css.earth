@@ -5,12 +5,12 @@ a fixture that the pds4-geometry-cube decoder must reproduce exactly. Oracles
 verify; they never produce pipeline inputs.
 Usage: .local/oracles/venv/bin/python tools/oracles/pds/dart-draco-cube.py
 """
-import hashlib, json, platform
+import sys
 from pathlib import Path
 import numpy as np
 import pds4_tools
-
-root = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from fixture import ROOT as root, write
 source = root / 'src/planets/dimorphos/source'
 label = source / 'observations/dart_0401930040_12262_01_geo.xml'
 fits = source / 'observations/dart_0401930040_12262_01_geo.fits'
@@ -31,13 +31,4 @@ for structure in structures:
     planes[structure.id] = {'width': int(width), 'height': int(height), 'dataType': str(structure.data.dtype),
         'samples': [{'index': int(i), 'value': float(flat[i])} for i in np.concatenate([picks, extremes])],
         'onBodyCount': int(len(on_body)), 'sum': float(flat[on_body].sum()) if len(on_body) else 0.0}
-fixture = {
-    'schema': 'cssearth-oracle-fixture@1', 'oracle': 'pds4_tools', 'generatedBy': 'tools/oracles/pds/dart-draco-cube.py',
-    'tool': {'pds4_tools': pds4_tools.__version__, 'python': platform.python_version(), 'numpy': np.__version__},
-    'inputs': [{'path': f'src/planets/dimorphos/source/observations/{p.name}', 'sha256': hashlib.sha256(p.read_bytes()).hexdigest(), 'bytes': p.stat().st_size} for p in (fits, label)],
-    'planes': planes,
-}
-out = root / 'tests/oracles/pds/dart-draco-cube.json'
-out.parent.mkdir(parents=True, exist_ok=True)
-out.write_text(json.dumps(fixture, indent=1) + '\n')
-print(json.dumps({'written': str(out.relative_to(root)), 'planes': list(planes.keys()), 'pds4_tools': pds4_tools.__version__}))
+write('pds/dart-draco-cube.json', 'pds4_tools', 'tools/oracles/pds/dart-draco-cube.py', {'pds4_tools': pds4_tools.__version__}, [fits, label], {'planes': planes})

@@ -19,6 +19,6 @@ const run = (command: string, args: readonly string[]) => {
 if (!existsSync(resolve(venv, 'bin/python'))) run(python, ['-m', 'venv', venv]);
 run(resolve(venv, 'bin/python'), ['-m', 'pip', 'install', '--quiet', '--upgrade', 'pip']);
 run(resolve(venv, 'bin/python'), ['-m', 'pip', 'install', '--quiet', '--require-virtualenv', '-r', requirements]);
-const versions = spawnSync(resolve(venv, 'bin/python'), ['-c', 'import spiceypy, pds4_tools, numpy; print(f"spiceypy {spiceypy.__version__} ({spiceypy.tkvrsn(\'TOOLKIT\')}), pds4_tools {pds4_tools.__version__}, numpy {numpy.__version__}")'], { encoding: 'utf8' });
+const versions = spawnSync(resolve(venv, 'bin/python'), ['-c', 'import spiceypy, pds4_tools, pvl, astropy, numpy; print(f"spiceypy {spiceypy.__version__} ({spiceypy.tkvrsn(\'TOOLKIT\')}), pds4_tools {pds4_tools.__version__}, pvl {pvl.__version__}, astropy {astropy.__version__}, numpy {numpy.__version__}")'], { encoding: 'utf8' });
 if (versions.status !== 0) throw new Error(versions.stderr);
 console.log(`Oracle environment ready at ${venv}: ${versions.stdout.trim()}`);
