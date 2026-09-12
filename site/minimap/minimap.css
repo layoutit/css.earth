@@ -27,6 +27,9 @@
   inset: 7px;
   border-radius: 50%;
   overflow: hidden;
+  /* One composited layer: the spokes, ring and dots paint into it instead of
+     each earning a layer by overlapping the scene. */
+  will-change: opacity;
 }
 .space-minimap-galaxy {
   background: url("./galaxy.png") center / 100% 100% no-repeat;
@@ -42,7 +45,6 @@
   top: 88px;
   width: 0;
   height: 0;
-  transform-style: preserve-3d;
 }
 .space-minimap-ring,
 .space-minimap-spoke {
