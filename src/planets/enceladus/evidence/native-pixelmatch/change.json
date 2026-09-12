@@ -1,0 +1,40 @@
+{
+  "tool": "pixelmatch",
+  "version": "7.2.0",
+  "settings": {
+    "threshold": 0,
+    "includeAA": true,
+    "alpha": 0.2,
+    "diffColor": [
+      255,
+      0,
+      0
+    ]
+  },
+  "reference": {
+    "path": "before.png",
+    "bytes": 208938,
+    "sha256": "db841bce6c69c0d8cabec7d016f9dc4f17c2de50c7a16c9139e13cfc3451ec1e"
+  },
+  "result": {
+    "path": "current.png",
+    "bytes": 203854,
+    "sha256": "002885d31e72708111999e0d5d1fdb034ab6f2a97176334a801ce7427421031e"
+  },
+  "diff": {
+    "path": "change-diff.png",
+    "bytes": 85730,
+    "sha256": "aa914eb574b27b749d0529ba5dd7326acaa0aea8b2c120a36af5233ff67e90cb"
+  },
+  "width": 520,
+  "height": 480,
+  "comparedPixels": 249600,
+  "mismatchedPixels": 193769,
+  "mismatchPercent": 77.6318108974359,
+  "perceptualSummary": {
+    "threshold": 0.1,
+    "includeAA": true,
+    "mismatchedPixels": 20
+  },
+  "exclusions": "None; every supplied pixel is compared, including anti-aliasing."
+}

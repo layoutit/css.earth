@@ -1,6 +1,7 @@
 # Moon notices
 
-- Moon surface map: NASA SVS, LRO, LROC and LOLA. NASA media usage guidelines.
+- Moon surface: LROC WAC Global Morphologic Map v1.3, NASA/GSFC/Arizona State University. PDS archive data are public domain under [LROC terms](https://lroc.im-ldi.com/about/terms). The app resamples the map and adjusts brightness; see README.md.
+- Moon navigation sprite: NASA SVS CGI Moon Kit, LRO/LROC and LOLA. NASA media usage guidelines.
 - Physical and orbital facts: NASA JPL Solar System Dynamics.
 - Globe configuration snapshot (provenance only; no preparation step reads it):
   OpenSpace Project, MIT license. See `LICENSE.OPENSPACE-MIT`.

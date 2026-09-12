@@ -99,7 +99,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "5ecbd740c7c0de7b4a57e0f7e8c89e49368fb7fb3beb87495121ce3353053908"
+          "sha256": "d4e14590f9608d9d88132dc1fcd314c862c00be1c840f462dff0ae5c41709d24"
         },
         {
           "id": "navigation",
@@ -171,7 +171,7 @@
       "classification": "planet",
       "color": "#a95e47",
       "distanceAu": 1.52,
-      "description": "Explore Mars in 3D with cssEarth. Discover the red planet’s volcanoes, deep canyons, polar ice, and thin atmosphere in an interactive explorer.",
+      "description": "Explore Mars in 3D with cssEarth. Discover the red planet\u2019s volcanoes, deep canyons, polar ice, and thin atmosphere in an interactive explorer.",
       "systemName": "Solar System",
       "order": 121,
       "context": {

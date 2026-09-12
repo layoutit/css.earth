@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0d981d851205d227cca9246f471c8df8b9a3757fc472076484916a886e004c5c"
+    "sha256": "96685c2f25ea5d10719f18c7901278fccdb566fb8c067e70fedaa2b4b55ce760"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "0ca5347ef6235349ea9a2915a2b649584d87d8b8a96de9fb977299fb1b81d159",
+      "sha256": "eea8a761f448acd288b104e90f63055bdb1a53a3def123ec2a6109cfbf0d50ee",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/io/",
@@ -71,7 +71,8 @@
                 "samplesPerAxis": 2,
                 "quality": 95
               }
-            }
+            },
+            "resolutionScale": 2
           },
           {
             "id": "enhanced",
@@ -109,7 +110,8 @@
                 "samplesPerAxis": 2,
                 "quality": 95
               }
-            }
+            },
+            "resolutionScale": 2
           },
           {
             "id": "geology",
@@ -905,7 +907,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "2a5947114e6ef23f9571f4f2052403e38a54222fc4dfaa83f5dc63804b4db2b8",
+      "sha256": "773f25e55fd348ab4193cabd51fbada8b6a52d6092586ac65116debe011cfbcf",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -916,7 +918,7 @@
           "metadata": "metadata_nomenclature_points_IO.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
+        "mapLeftEdgeLongitudeDeg": 0,
         "output": "io-features.json",
         "publicBase": "/scenes/io/",
         "target": {
@@ -1743,20 +1745,20 @@
       "outputs": [
         {
           "url": "/scenes/io/io-normal.webp",
-          "bytes": 253510,
-          "sha256": "7c5648f5e4db1ed0f9acb765a4fb0302d58890a2a1b045aa9768e542317b3762",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/io/io-normal@2x.webp",
           "bytes": 635896,
           "sha256": "0f6a8c10ef75250f87bf08fffed57bee0ee0e1055b58cca5705b7b324e457fb4",
           "verification": "asset-manifest-pin"
         },
         {
+          "url": "/scenes/io/io-normal@2x.webp",
+          "bytes": 1777218,
+          "sha256": "8ad1fcb7cd1be3683f5ac873072719684ef3b60d11731af3c01084da5b82f01f",
+          "verification": "asset-manifest-pin"
+        },
+        {
           "url": "/scenes/io/io-lens-normal.webp",
-          "bytes": 928,
-          "sha256": "f09a024f569f1ee3b5240342358db9e23e019a653fe750d89f7a108272c2cc45",
+          "bytes": 916,
+          "sha256": "9cf1e7ddfc22581986694897e0816321c467db6d477c8d03cf4d759c464bc385",
           "verification": "asset-manifest-pin"
         },
         {
@@ -1800,20 +1802,20 @@
       "outputs": [
         {
           "url": "/scenes/io/io-enhanced.webp",
-          "bytes": 288330,
-          "sha256": "f3a7342ef71db0968cd68ff5c0735ec1035ec2b4bde2f1e5480dd02fb1df9f6d",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/io/io-enhanced@2x.webp",
           "bytes": 751536,
           "sha256": "a7b7bf538ffaa876e506db60cbee92cbba10f729daacd4e531d22538aadbfcbf",
           "verification": "asset-manifest-pin"
         },
         {
+          "url": "/scenes/io/io-enhanced@2x.webp",
+          "bytes": 1683698,
+          "sha256": "1ae43bbc2805c9de5fc4a70efb3a975a3f3e850cf542e89dfca7baf8a36052cd",
+          "verification": "asset-manifest-pin"
+        },
+        {
           "url": "/scenes/io/io-lens-enhanced.webp",
-          "bytes": 1400,
-          "sha256": "4ff8de71d29e1bbd748540bd02716fb3f4ee45d2441d64948e97ec81bb685b2b",
+          "bytes": 1384,
+          "sha256": "98ab7ec61d8165f86352d71bb7f80562ce860714e44468432a57dd3ecc94c936",
           "verification": "asset-manifest-pin"
         },
         {
@@ -2460,7 +2462,7 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
+        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -2474,8 +2476,8 @@
       "outputs": [
         {
           "url": "/scenes/io/io-features.json",
-          "bytes": 745914,
-          "sha256": "63f11b9ecb262c21517eb9c319ec6091add993e1e0bded57cb4d99aa9d036210",
+          "bytes": 746562,
+          "sha256": "c3277f1908675a532a5f612a7a67e3390a978931c207c84c07cc60ac33dbd258",
           "verification": "asset-manifest-pin"
         }
       ],

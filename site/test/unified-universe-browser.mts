@@ -28,9 +28,6 @@ import { chromium } from 'playwright';
 import { scrollToDistance, wheelWithReceipt } from './wheel-zoom-distance.mts';
 import preparedVolume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
 
-// The point field keeps a fixed pool of star slots; its size is the renderer's
-// business, but it must not change while the universe stays mounted.
-let retainedSlots: number | null = null;
 
 const origin = process.argv[2] ?? process.env.CSSEARTH_TEST_ORIGIN ?? 'http://localhost:4210';
 const output = '.local/unified-universe-browser';
@@ -46,7 +43,7 @@ try {
   await page.goto(`${origin}/sun/`, { waitUntil: 'domcontentloaded' });
   await ready(page, 'sun');
   await page.evaluate(frames => {
-    const selectors = ['.planet-stage', '.planet-sidebar', '.planet-input-surface', '.prepared-universe', '.prepared-volume-context', '.prepared-point-field', '.prepared-world-context'];
+    const selectors = ['.planet-stage', '.planet-sidebar', '.planet-input-surface', '.prepared-universe', '.prepared-volume-context', '.prepared-celestial-sky-near', '.prepared-world-context'];
     const roots = selectors.map(selector => window.__cssearthTest.element(selector));
     if (roots.some(root => !root)) throw new Error('All universe and shell roots must exist before first interaction.');
     const probe: UnifiedProbe = window.__unifiedProof = {
@@ -199,9 +196,7 @@ function assertRetained(value: Snapshot, label: string) {
   assert.equal(value.retained, true, `${label}: original universe nodes remain connected`);
   assert.equal(value.roots, 1, `${label}: exactly one detailed scene`);
   assert.equal(value.slices, preparedVolume.data.stacks.flatMap(stack => stack.leaves).length * 3);
-  assert.ok(value.slots > 0, `${label}: the point field retains its star slots`);
-  retainedSlots ??= value.slots;
-  assert.equal(value.slots, retainedSlots, `${label}: the retained star pool does not change size`);
+  assert.equal(value.slots, 0, `${label}: no individual-star DOM is mounted`);
 }
 async function flight(page: Page, to: string, mode: 'nav' | 'pick') {
   const from = await page.evaluate(() => window.__cssearthTest.scene().activeObjectId);
@@ -333,9 +328,7 @@ async function backgroundProjection(page: Page) {
       return Array.from(matrix.toFloat64Array());
     }),
     sky: Array.from(new DOMMatrix(getComputedStyle(window.__cssearthTest.element('.prepared-celestial-sky-scene')).transform).toFloat64Array()),
-    stars: Object.fromEntries(window.__cssearthTest.universe().inspect().stars.points
-      .filter(({ element, reference }) => reference && element.style.visibility !== 'hidden' && Number(element.style.opacity) > 0)
-      .map(({ element, reference }) => [reference, element.style.transform])),
+    stars: { transform: window.__cssearthTest.html('.prepared-celestial-sky-near .prepared-celestial-sky-scene').style.transform },
   }));
 }
 function sameProjection(actual: Projection, expected: Projection, id: string) {

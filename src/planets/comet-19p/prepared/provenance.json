@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8f5a4464a68ab960d37979ef036d6608e22e2108c178abbf2f00128c01dc91c8"
+    "sha256": "f2b01921b62f0f7c6cc495009a65af3f9a25c5478db3ab36aa6411319af5b032"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
   },
   "recipes": [
     {
@@ -652,6 +652,62 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "7ac6fe2ffaad5b11157eed3232f451c7f9b19bc0110851d507bd3c2234e20de1",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": null,
+        "members": null,
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "comet-19p-features.json",
+        "publicBase": "/scenes/comet-19p/",
+        "target": {
+          "className": "comet-19p-body"
+        },
+        "lensIds": [
+          "micas"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "IM"
+          ],
+          "linear": [
+            "RU"
+          ],
+          "region": [
+            "RE"
+          ]
+        },
+        "excludedTypeCodes": {},
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 20,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 32
+        },
+        "landmarks": {
+          "document": "landmarks.json",
+          "inputs": [
+            "features/image-registration.json",
+            "features/control-measurements.json",
+            "features/evidence/image-landmarks.json",
+            "micas/dem_x_component.cub",
+            "micas/dem_y_component.cub",
+            "micas/dem_z_component.cub",
+            "micas/ccd_near_1_ortho.cub"
+          ]
+        }
+      }
     }
   ],
   "sources": [
@@ -969,6 +1025,126 @@
       "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-19p-features-manifest",
+      "path": "features/manifest.json",
+      "origin": "Authored terrain-place records and source-frame display attachment.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored terrain-place records and source-frame display attachment."
+      },
+      "sha256": "cdd55d374342c9982a06e95bf1c090a32f9e1a85eadbb3fcc6cee80fb25cf317",
+      "bytes": 1847,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-19p-presentation-surface-map",
+      "path": "presentation/surface-map.json",
+      "origin": "Authored terrain-place records and source-frame display attachment.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored terrain-place records and source-frame display attachment."
+      },
+      "sha256": "7c3d92c8f600faa16a501fab68162fb473f92ed528199e427825ef1d0bbf4059",
+      "bytes": 156,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-19p-features-landmarks",
+      "path": "features/landmarks.json",
+      "origin": "Authored terrain-place records and source-frame display attachment.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored terrain-place records and source-frame display attachment."
+      },
+      "sha256": "8167356f2187d1e4b7d63d27d61871762965bdc6d01325ac0f2e67e9e387b1af",
+      "bytes": 3506,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-19p-features-image-registration-json",
+      "path": "features/image-registration.json",
+      "origin": "Project registration recipe, exact XYZ cube identities, source-image anchor pixels and captions.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project registration recipe, exact XYZ cube identities, source-image anchor pixels and captions."
+      },
+      "sha256": "5308b6cbff25b419b9dc89cf8d22e0d3b620da513377863bc35b21b48c8f3c1c",
+      "bytes": 56879,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-19p-features-control-measurements-json",
+      "path": "features/control-measurements.json",
+      "origin": "Project measurements of the published terrain-map and photograph correspondences, with preassigned fit and holdout partitions.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project measurements of the published terrain-map and photograph correspondences, with preassigned fit and holdout partitions."
+      },
+      "sha256": "9adf195d756bd5b95bb39be59f1cf5956e8795d554d8775b57dec68c46cd9635",
+      "bytes": 56004,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-19p-features-evidence-image-landmarks-json",
+      "path": "features/evidence/image-landmarks.json",
+      "origin": "Generated fit residuals and native XYZ samples supporting the displayed landmark coordinates.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated fit residuals and native XYZ samples supporting the displayed landmark coordinates."
+      },
+      "sha256": "872724f5243c30c4e64fc1df8e4e55f899440e60d8282ec6ea35f4b991e95ba3",
+      "bytes": 80209,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -1207,9 +1383,48 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4960,
-          "sha256": "e738d3abffea2d544aa517d02d3352117ccc5e61d9bead364be2f0a02d1fb6d2",
+          "bytes": 5073,
+          "sha256": "54d50b2c8cd4ea670d165646605a26df45219813c6ce81a10ffa66aedde4f414",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {}
+      },
+      "inputs": [
+        "comet-19p-features-manifest",
+        "comet-19p-presentation-surface-map",
+        "comet-19p-features-landmarks",
+        "comet-19p-features-image-registration-json",
+        "comet-19p-features-control-measurements-json",
+        "comet-19p-features-evidence-image-landmarks-json",
+        "micas-x",
+        "micas-y",
+        "micas-z",
+        "micas-orthophoto"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-19p/comet-19p-features.json",
+          "bytes": 5291,
+          "sha256": "350379377f75c3aea675ea8238276ce480e6ee454e87913774ec9e6e4ae97b7d",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

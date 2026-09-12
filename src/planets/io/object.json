@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "4d33c4b53e992d34e70c64dcf80929d763c0909a67cf7c78d983e6b50a0249dc"
+    "sha256": "b18c13aa0f7be6e4b5a05e0c40eb1db474b8998575f006d7225775f5c32c266b"
   },
   "id": "io",
   "properties": {
@@ -103,7 +103,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "0ca5347ef6235349ea9a2915a2b649584d87d8b8a96de9fb977299fb1b81d159"
+          "sha256": "eea8a761f448acd288b104e90f63055bdb1a53a3def123ec2a6109cfbf0d50ee"
         },
         {
           "id": "geometry",
@@ -148,7 +148,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "2a5947114e6ef23f9571f4f2052403e38a54222fc4dfaa83f5dc63804b4db2b8"
+          "sha256": "773f25e55fd348ab4193cabd51fbada8b6a52d6092586ac65116debe011cfbcf"
         }
       ],
       "features": {
@@ -162,7 +162,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "726a80230bacc09930b6d00729dd623413cdc31a383a3f713b3b7ee562181a8c"
+        "sha256": "4f086c3e6b128765deffa54613b27eb13839329317282bb2a0c404e5fabcf333"
       }
     },
     "catalog": {

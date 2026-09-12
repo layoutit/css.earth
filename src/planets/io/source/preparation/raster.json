@@ -53,7 +53,8 @@
           "samplesPerAxis": 2,
           "quality": 95
         }
-      }
+      },
+      "resolutionScale": 2
     },
     {
       "id": "enhanced",
@@ -91,7 +92,8 @@
           "samplesPerAxis": 2,
           "quality": 95
         }
-      }
+      },
+      "resolutionScale": 2
     },
     {
       "id": "geology",

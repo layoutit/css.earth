@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { expect, test, vi } from 'vitest';
-import { loadPreparedCssPointField } from './loader.js';
+import { loadPreparedCssPointField, loadPreparedPointAppearance } from './loader.js';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from './validation.js';
 import { readCanonicalPointFieldFiles } from '../preparation/stars/canonical-point-field-fixture.js';
 import { POINT_FIELD_MAGNITUDE_BOUND } from './point-field-bank.js';
@@ -79,4 +79,15 @@ test('rejects malformed hierarchy, rows, manifest fields and either pinned trans
   const drifted = structuredClone(descriptor) as { properties: { frame: { originM: number[] } } };
   drifted.properties.frame.originM[0]! += 1;
   await expect(loadPreparedCssPointField(drifted, transport())).rejects.toThrow('frame');
+});
+
+test('Sun appearance verifies the manifest without fetching or decoding the star bank', async () => {
+  const { descriptor, url, manifest, transport, manifestBytes } = fixture();
+  const reader = transport();
+  const appearance = await loadPreparedPointAppearance(descriptor, reader);
+  expect(reader.read.mock.calls).toEqual([[url]]);
+  expect(Object.keys(appearance).sort()).toEqual(['atlas', 'frame', 'id', 'photometry', 'resources']);
+  expect(appearance.atlas).toEqual(manifest.atlas);
+  expect(appearance.photometry).toEqual(manifest.photometry);
+  await expect(loadPreparedPointAppearance(descriptor, transport(new TextEncoder().encode(new TextDecoder().decode(manifestBytes) + '\n')))).rejects.toThrow('SHA-256');
 });

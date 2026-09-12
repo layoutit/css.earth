@@ -58,9 +58,7 @@ try {
   await page.waitForTimeout(250);
   snapshots.stars = await read(page);
   await page.screenshot({ path: resolve(output, 'stellar-neighbourhood-integrated.png') });
-  check('the complete catalogue feeds bounded exact-position star slots', snapshots.stars.starField.catalogueCount === 109389 &&
-    snapshots.stars.starField.consideredCount === 109389 && snapshots.stars.starSlots === 4096 && Number(snapshots.stars.starField.visiblePoints) > 50 &&
-    snapshots.stars.starField.individualPoints === snapshots.stars.starField.visiblePoints);
+  check('baked stars require no individual-star slots', snapshots.stars.starSlots === 0 && snapshots.stars.skyFaces === 6);
   check('the prepared NASA sky replaces local volume haze', snapshots.initial.volumeOpacity === 0 && snapshots.initial.skyVisible && snapshots.stars.volumeOpacity === 0 && snapshots.stars.skyVisible);
   check('background catalogue stars do not create labels for unavailable objects', await page.locator('.prepared-star-label').count() === 0);
   check('the incompatible photographic background is retired at solar scale', await page.locator('.prepared-context-sky-fade').evaluate(node => getComputedStyle(node).visibility === 'hidden'));
@@ -70,7 +68,7 @@ try {
   snapshots.distantStars = await read(page);
   await page.screenshot({ path: resolve(output, 'stellar-neighbourhood-distant.png') });
   const distantPositions = await starPositions(page);
-  check('catalogued stars change projection as the observer moves',
+  check('the baked sky follows the shared physical camera',
     Object.entries(nearbyPositions).some(([id, transform]) => distantPositions[id] && distantPositions[id] !== transform));
   check('stellar textures were ready before leaving the solar system', await starRequests(page) === starRequestsBefore);
   await scrollTo(page, 1.8e18);
@@ -153,9 +151,7 @@ async function starRequests(page: Page) {
   return page.evaluate(() => performance.getEntriesByType('resource').filter(entry => entry.name.includes('/stellar-neighbourhood/prepared/')).length);
 }
 async function starPositions(page: Page) {
-  return page.evaluate(() => Object.fromEntries(window.__cssearthTest.universe().inspect().stars.points
-    .filter(({ element, reference }) => reference && element.style.visibility !== 'hidden')
-    .map(({ element, reference }) => [reference, element.style.transform])));
+  return page.evaluate(() => ({ cube: window.__cssearthTest.html('.prepared-celestial-sky-scene').style.transform }));
 }
 async function read(page: Page) {
   return page.evaluate(() => ({
@@ -165,7 +161,7 @@ async function read(page: Page) {
     // The galaxy image-layer banks mount their own volume meshes; count the prepared density volume.
     slices: document.querySelectorAll('.prepared-volume-image .css-volume-mesh > s').length,
     stable: window.__cssearthTest.object('sun').assertStableDomIdentity(),
-    starField: (({ points, ...stats }) => stats)(window.__cssearthTest.universe().inspect().stars),
+    skyFaces: document.querySelectorAll('.prepared-celestial-sky-near [data-sky-face]').length,
     starSlots: document.querySelectorAll('.prepared-point-field-block > s').length,
     volumeOpacity: Number(window.__cssearthTest.html('.prepared-volume-context').dataset.volumeOpacity),
     skyVisible: getComputedStyle(window.__cssearthTest.required(document.querySelector('.prepared-celestial-sky'), 'computed style element')).visibility === 'visible',

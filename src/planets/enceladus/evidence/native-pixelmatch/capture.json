@@ -1,0 +1,145 @@
+{
+  "browser": "153.0.8010.12",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "dpr": 1,
+  "url": "http://127.0.0.1:4284/enceladus/?v=QAY-akrZt8z3_D5Vq93KeW81wHouYf9C2SFBQsczQAAAAD-8NziUTAVBv6SKEyvbwWM_4C-Y5iXNwAAA",
+  "zoom": 4,
+  "crop": {
+    "x": 400,
+    "y": 140,
+    "width": 520,
+    "height": 480
+  },
+  "cases": [
+    {
+      "name": "current",
+      "error": null,
+      "pose": "matrix3d(0.972485583424,0.147809276196,-0.180067231621,0,0.228973460066,-0.46401621637,0.85572197911,0,0.042929530848,-0.873407905171,-0.485093482295,0,0,0,0,1)",
+      "settings": {
+        "shadows": false,
+        "orbit": true
+      },
+      "stats": {
+        "selectedPreparedDensity": 2,
+        "visibleAssetsDecodedBeforeMount": 0,
+        "textureStats": {
+          "selectedPreparedDensity": 2,
+          "retainedInteractiveImageCount": 2,
+          "pendingInteractiveImageCount": 0
+        }
+      }
+    },
+    {
+      "name": "repeat",
+      "error": null,
+      "pose": "matrix3d(0.972485583424,0.147809276196,-0.180067231621,0,0.228973460066,-0.46401621637,0.85572197911,0,0.042929530848,-0.873407905171,-0.485093482295,0,0,0,0,1)",
+      "settings": {
+        "shadows": false,
+        "orbit": true
+      },
+      "stats": {
+        "selectedPreparedDensity": 2,
+        "visibleAssetsDecodedBeforeMount": 0,
+        "textureStats": {
+          "selectedPreparedDensity": 2,
+          "retainedInteractiveImageCount": 2,
+          "pendingInteractiveImageCount": 0
+        }
+      }
+    },
+    {
+      "name": "encoding-control",
+      "error": null,
+      "pose": "matrix3d(0.972485583424,0.147809276196,-0.180067231621,0,0.228973460066,-0.46401621637,0.85572197911,0,0.042929530848,-0.873407905171,-0.485093482295,0,0,0,0,1)",
+      "settings": {
+        "shadows": false,
+        "orbit": true
+      },
+      "stats": {
+        "selectedPreparedDensity": 2,
+        "visibleAssetsDecodedBeforeMount": 0,
+        "textureStats": {
+          "selectedPreparedDensity": 2,
+          "retainedInteractiveImageCount": 2,
+          "pendingInteractiveImageCount": 0
+        }
+      }
+    },
+    {
+      "name": "before",
+      "error": null,
+      "pose": "matrix3d(0.972485583424,0.147809276196,-0.180067231621,0,0.228973460066,-0.46401621637,0.85572197911,0,0.042929530848,-0.873407905171,-0.485093482295,0,0,0,0,1)",
+      "settings": {
+        "shadows": false,
+        "orbit": true
+      },
+      "stats": {
+        "selectedPreparedDensity": 2,
+        "visibleAssetsDecodedBeforeMount": 0,
+        "textureStats": {
+          "selectedPreparedDensity": 2,
+          "retainedInteractiveImageCount": 2,
+          "pendingInteractiveImageCount": 0
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "code": {
+    "branchParent": "e0487eff589fb4e64debe0a34243872ee6f4e177",
+    "mergedMain": "c13f3643b53171523dbf59dc92fc7ce49e9c0e24",
+    "state": "Uncommitted merge; renderer, camera and shell equal mergedMain. Photographic atlas bytes equal branchParent."
+  },
+  "settling": "Await object ready, network idle, document.fonts.ready and 1800 ms for feature-label fades; fresh navigation for each case.",
+  "referenceKind": "Current application with exact previous-main atlas substituted; encoding-only control uses the same intermediate-map sampling at quality 95. Neither is a native spacecraft capture.",
+  "sourceAndAssetPins": {
+    "src/planets/enceladus/source/manifest.json": {
+      "bytes": 46555,
+      "sha256": "bb515cc66f6b7a833e00b326754954c981e146beff80bcd38a4595f1929d9abe"
+    },
+    "src/planets/enceladus/source/preparation/terrestrial.json": {
+      "bytes": 7016,
+      "sha256": "d8ba4b58c263b53fa726bc8e998d46671b5b3c2fd650f8e46d52d88b7ef0aa07"
+    },
+    "src/planets/enceladus/prepared/scene.refs.json": {
+      "bytes": 1624056,
+      "sha256": "e8fe306ce2b7dfe82ae243416abe6d2398282df818f4a96bd2a1c2fbd5ba1c29"
+    },
+    "src/planets/enceladus/prepared/runtime.refs.json": {
+      "bytes": 1684708,
+      "sha256": "faf02424ad839343434d1cf309ab110f157cb0f8480ef0ab4c864319a5f3dd6c"
+    },
+    "src/planets/enceladus/runtime-assets.json": {
+      "bytes": 8278,
+      "sha256": "d862943f37a3e389ff95ee2d6c514cf5b7a390d248b50effaca594a4a7456c49"
+    }
+  },
+  "photographs": {
+    "before": {
+      "bytes": 6337990,
+      "sha256": "6c043a2fd0389034fb71739fce4d7a0726575b81b3111007e6bbea854a3ce1c2",
+      "width": 2048,
+      "height": 16000
+    },
+    "encoding-control": {
+      "bytes": 9054530,
+      "sha256": "da958303b28dc5b3d727e02517e6f45a0e25ad77d6c443ea68feda93c883ad4b",
+      "width": 2048,
+      "height": 16000
+    },
+    "current": {
+      "bytes": 9033580,
+      "sha256": "03b9058083f3096d4c5a0acdb2659bf2d3154ce26ce5a450e3e4de4e4d399a92",
+      "width": 2048,
+      "height": 16000
+    }
+  },
+  "repeatRawChannels": {
+    "changedChannels": 3,
+    "maximumChannelDelta": 1
+  },
+  "initialProbe": "An earlier unsettled capture differed at fading feature labels; those captures were replaced after waiting for the existing animation. At threshold 0.1 the retained repeat has zero mismatches; exact comparison retains its one-pixel difference."
+}

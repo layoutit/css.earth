@@ -14,17 +14,40 @@
 
 ## Evidence
 
-Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
+Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; the 8K latitude-band images from #151, geometry and lighting are retained. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
 
 | View | Both prepared levels, before → current |
 | --- | --- |
-| normal | 171.2 → 178.0 kB |
+| normal | 175.2 → 178.0 kB |
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/europa/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/c13f3643b53171523dbf59dc92fc7ce49e9c0e24/src/planets/europa/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
-Lane change (this PR): the terrestrial solid-observation lane was retired for Europa; the same pinned inputs and the same decoders (`terrestrial-observation`, `terrestrial-observed-color`, `terrestrial-scientific` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 2048 × 1024 (DPR 1) and 4096 × 2048 (DPR 2) — retired 4096 × 2048 atlas (native 500 m mosaic is 19,631 px wide; unchanged budget). Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
+Photographic refresh, 12 September 2026, on base `3efdf2c9`: these matched
+Chrome crops show Pwyll at 1280 × 720, DPR 1. The before atlas was reproduced
+with the exact `53b262bd` delivery hash. The fractures gain detail without moving
+the crater or filling missing observations.
 
-Run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js europa --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/europa/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
+| Before | Current |
+| --- | --- |
+| ![Pwyll before finer sampling](evidence/photographic-detail/before.png) | ![Pwyll with finer sampling](evidence/photographic-detail/after.png) |
+
+[The controlled-color view](evidence/photographic-detail/controlled-color.png)
+shows the retained three-band footprints near Falga Regio. Both photographic
+views were inspected with Shadows on/off and at DPR 1 and 2. Preparation
+build/type checks, source-record generation and unchanged scene/geometry checks
+pass. The ten photographic files total 18.95 MB, previously 6.95 MB; the largest
+decoded atlas is 195 MiB. Three unrelated scientific thumbnails were unavailable
+locally, and the cross-body search preview covered only these three moons;
+this is not aggregate browser or scientific-lens qualification.
+
+Earlier shared-lane migration (base `53b262bd`) qualified the sphere, lighting,
+source interpretation and feature placement. This photographic refresh retains
+those source files, coordinate transforms, masks, geometry and scene structure.
+Its new evidence concerns finer sampling of the photographs; it does not repeat
+the scientific-lens review.
+
+
+Earlier run at base `53b262bd` (12 September 2026): `node tools/objects/dist/prepare-authored.js europa --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/europa/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
 A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced, elevation, geology, infrared) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 4878).
 
@@ -35,6 +58,9 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 - Focused checks are defined in the [unit tests](../../../tests/objects/unit/europa) and [browser profile](../../../tests/objects/browser/europa/browser-profile.mts).
 
 ## Known problems
+
+The existing atlas seams can remain visible at extreme close zoom. This change
+retains the geometry and its packing layout.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Europa (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries, and the readout longitude counts from the map’s left edge, which here coincides with the Gazetteer origin. The map edge was fixed by cropping the source raster at a landmark’s Gazetteer centre under both hypotheses (see the pull request that added the feature).
 
@@ -67,7 +93,7 @@ Individual observations range from about 200 m to 20 km per pixel. Differences i
 
 The GeoTIFF's cylindrical coordinates increase eastward, with a central longitude of 180°. The actual outer left edge is −0.011003118° and the map spans 360.003667706°, with rows running north to south. Native bilinear preparation back-projects each canonical output pixel centre through the GeoTIFF's actual origin and resolution; it does not stretch those bounds to exactly 0–360°. Its projection uses a 1,562,089.9658 m sphere; the rendered mean-radius sphere uses the astronomy catalogue's 1,560.8 km physical radius. It is not a resolved shape model.
 
-The explicit no-data value is zero. Preparation samples to 4096 × 2048 only where every nonzero-weight native bilinear contributor is valid, retaining dark nonzero observations and withholding incomplete or masked footprints. The corrected registration changes prepared monochrome pixels and their co-located color fallback; the original mosaic and controlled I/F source values are unchanged. The shared gray cartographic grid marks missing data. It is not invented terrain. Band textures are reprojected for the shared projective surface geometry; polar textures use the same map and hemisphere-specific longitude mapping.
+The explicit no-data value is zero. Preparation now samples the photographs to 4096 × 2048 and 8192 × 4096 only where every nonzero-weight native bilinear contributor is valid, retaining dark nonzero observations and withholding incomplete or masked footprints. The corrected registration changes prepared monochrome pixels and their co-located color fallback; the original mosaic and controlled I/F source values are unchanged. The shared gray cartographic grid marks missing data. It is not invented terrain. Band textures are reprojected for the shared projective surface geometry; polar textures use the same map and hemisphere-specific longitude mapping.
 
 The source already contains shadows. The Shadows setting adds approximate spherical illumination; with Shadows off, a fixed curvature overlay gives depth. Neither mode recovers unlit albedo or physically relights photographed features. Europa's tenuous oxygen atmosphere does not justify a visible halo.
 
@@ -107,7 +133,7 @@ The NASA Trek/Jónsson 2015 color mosaic was rejected: its [author documents fic
 
 This package contains authored JSON recipes, source provenance, and generated JSON. Reusable observation masking, projection, lighting, celestial, and retained-scene operations live in `tools/objects/terrestrial-layers/`; no package-local executable preparer or runtime is required.
 
-Delivery keeps the prepared HD texture dimensions. The photographic normal polar sprites sample their pinned source grid directly with a 2 × 2 footprint and retain lossless WebP encoding. Latitude-band and non-photographic prepared assets retain their existing encodings; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
+Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
 
 ## Agenor relative stereo terrain
 
