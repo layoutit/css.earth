@@ -1,557 +1,614 @@
 {
-  "schema": "cssearth-static-surface-raster@1",
-  "kind": "observation-lenses",
-  "width": 1024,
-  "height": 512,
-  "latitudeSegments": 16,
-  "polarTile": 128,
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/moon/",
+  "sourceWidth": 2048,
+  "sourceHeight": 1024,
+  "width": 2048,
+  "height": 1024,
+  "latitudeBands": 16,
+  "polarTile": 256,
   "densities": [
     1,
     2
   ],
-  "surfaceProjection": "oriented-bands",
-  "thumbnail": "source-center-crop",
-  "material": {
-    "frameSize": 512,
-    "limbFloor": 0.52,
-    "radiusScale": 0.505,
-    "output": "moon-curvature"
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "moon-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssmoon-prepared-assets@1"
   },
-  "lenses": [
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
     {
       "id": "surface",
-      "label": "Surface",
-      "input": "surface/lroc-color-2k.jpg",
-      "output": "moon-surface",
-      "qualification": "NASA LRO/LROC visible-colour global surface mosaic",
-      "presentation": {
-        "model": "prepared-neutral-lunar-reflectance-presentation",
-        "saturation": 0.35,
-        "linearGain": 0.9,
-        "linearOffset": -78,
-        "sharpenSigma": 0.65,
-        "qualification": "Prepared tonal presentation preserves the LROC surface structure; brightness and saturation are display choices, not calibrated albedo."
+      "source": "surface/lroc-color-2k.jpg",
+      "falseColor": false,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "presentation": {
+          "model": "prepared-neutral-lunar-reflectance-presentation",
+          "saturation": 0.35,
+          "linearGain": 0.9,
+          "linearOffset": -78,
+          "sharpenSigma": 0.65,
+          "qualification": "Prepared tonal presentation preserves the LROC surface structure; brightness and saturation are display choices, not calibrated albedo."
+        }
       }
     },
     {
       "id": "midnight-temperature",
-      "label": "Midnight temperature",
-      "input": "science/diviner-ghrm/tbol_m-compact.tif",
-      "output": "moon-midnight-temperature",
-      "rasterScale": 2,
-      "qualification": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009–2022. Colors span 80–140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond ±70°. This combines many nights; it is not a current temperature map.",
-      "scientific": {
-        "format": "geotiff",
-        "path": "tbol_m-compact.tif",
-        "sampling": "nearest",
-        "displaySampling": "nearest",
-        "minimum": 80,
-        "maximum": 140,
-        "colors": [
-          "#24204f",
-          "#3a468b",
-          "#258da4",
-          "#81c9b0",
-          "#f4d17b",
-          "#ec803c",
-          "#9b283a"
-        ],
-        "units": "K",
-        "valueTransform": {
-          "scale": 0.01,
-          "offset": 100
-        },
-        "outputLongitudeOrigin": -180,
-        "grid": {
-          "width": 4096,
-          "height": 2048,
-          "noData": -32768,
-          "origin": [
-            -5458203.076346907,
-            2729101.5381734534
+      "source": "science/diviner-ghrm/tbol_m-compact.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "tbol_m-compact.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 80,
+          "maximum": 140,
+          "colors": [
+            "#24204f",
+            "#3a468b",
+            "#258da4",
+            "#81c9b0",
+            "#f4d17b",
+            "#ec803c",
+            "#9b283a"
           ],
-          "resolution": [
-            2665.138220872513,
-            -2665.138220872513
-          ],
-          "referenceRadiusMeters": 1737400,
-          "centerLongitude": 0,
-          "wrapLongitude": true
+          "units": "K",
+          "valueTransform": {
+            "scale": 0.01,
+            "offset": 100
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "noData": -32768,
+            "origin": [
+              -5458203.076346907,
+              2729101.5381734534
+            ],
+            "resolution": [
+              2665.138220872513,
+              -2665.138220872513
+            ],
+            "referenceRadiusMeters": 1737400,
+            "centerLongitude": 0,
+            "wrapLongitude": true
+          }
         }
       }
     },
     {
       "id": "heat-anomalies",
-      "label": "Heat anomalies",
-      "input": "science/diviner-ghrm/tbol_anom-compact.tif",
-      "output": "moon-heat-anomalies",
-      "rasterScale": 2,
-      "qualification": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span −10 to +10 K. Observations cover 2009–2022 within ±70°; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
-      "scientific": {
-        "format": "geotiff",
-        "path": "tbol_anom-compact.tif",
-        "sampling": "nearest",
-        "displaySampling": "nearest",
-        "minimum": -10,
-        "maximum": 10,
-        "colors": [
-          "#344e99",
-          "#409eb5",
-          "#9bced1",
-          "#e5e2d7",
-          "#e9be80",
-          "#d67743",
-          "#a22c35"
-        ],
-        "units": "K difference",
-        "valueTransform": {
-          "scale": 0.01,
-          "offset": 0
-        },
-        "outputLongitudeOrigin": -180,
-        "grid": {
-          "width": 4096,
-          "height": 2048,
-          "noData": -32768,
-          "origin": [
-            -5458203.076346907,
-            2729101.5381734534
+      "source": "science/diviner-ghrm/tbol_anom-compact.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "tbol_anom-compact.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": -10,
+          "maximum": 10,
+          "colors": [
+            "#344e99",
+            "#409eb5",
+            "#9bced1",
+            "#e5e2d7",
+            "#e9be80",
+            "#d67743",
+            "#a22c35"
           ],
-          "resolution": [
-            2665.138220872513,
-            -2665.138220872513
-          ],
-          "referenceRadiusMeters": 1737400,
-          "centerLongitude": 0,
-          "wrapLongitude": true
+          "units": "K difference",
+          "valueTransform": {
+            "scale": 0.01,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "noData": -32768,
+            "origin": [
+              -5458203.076346907,
+              2729101.5381734534
+            ],
+            "resolution": [
+              2665.138220872513,
+              -2665.138220872513
+            ],
+            "referenceRadiusMeters": 1737400,
+            "centerLongitude": 0,
+            "wrapLongitude": true
+          }
         }
       }
     },
     {
       "id": "rock-abundance",
-      "label": "Rock abundance",
-      "input": "science/diviner-ghrm/ra_sam-compact.tif",
-      "output": "moon-rock-abundance",
-      "rasterScale": 2,
-      "qualification": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009–2022 at slope-adjusted midnight. Colors span 0–2%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond ±70°. This estimates rock area, not individual boulder counts.",
-      "scientific": {
-        "format": "geotiff",
-        "path": "ra_sam-compact.tif",
-        "sampling": "nearest",
-        "displaySampling": "nearest",
-        "minimum": 0,
-        "maximum": 2,
-        "colors": [
-          "#292544",
-          "#456582",
-          "#5b9e95",
-          "#b7c85c",
-          "#fff0a0"
-        ],
-        "units": "% surface area",
-        "valueTransform": {
-          "scale": 0.002,
-          "offset": 50
-        },
-        "outputLongitudeOrigin": -180,
-        "grid": {
-          "width": 4096,
-          "height": 2048,
-          "noData": -32768,
-          "origin": [
-            -5458203.076346907,
-            2729101.5381734534
+      "source": "science/diviner-ghrm/ra_sam-compact.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "ra_sam-compact.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 0,
+          "maximum": 2,
+          "colors": [
+            "#292544",
+            "#456582",
+            "#5b9e95",
+            "#b7c85c",
+            "#fff0a0"
           ],
-          "resolution": [
-            2665.138220872513,
-            -2665.138220872513
-          ],
-          "referenceRadiusMeters": 1737400,
-          "centerLongitude": 0,
-          "wrapLongitude": true
+          "units": "% surface area",
+          "valueTransform": {
+            "scale": 0.002,
+            "offset": 50
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 4096,
+            "height": 2048,
+            "noData": -32768,
+            "origin": [
+              -5458203.076346907,
+              2729101.5381734534
+            ],
+            "resolution": [
+              2665.138220872513,
+              -2665.138220872513
+            ],
+            "referenceRadiusMeters": 1737400,
+            "centerLongitude": 0,
+            "wrapLongitude": true
+          }
         }
       }
     },
     {
       "id": "topography",
-      "label": "Topography",
-      "input": "science/ldem_16.img",
-      "output": "moon-topography",
-      "qualification": "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere",
-      "scientific": {
-        "schema": "cssearth-pds-int16-cylindrical@1",
-        "format": "pds-image",
-        "path": "ldem_16.img",
-        "labelPath": "ldem_16.lbl",
-        "datasetId": "LRO-L-LOLA-4-GDR-V1.0",
-        "productId": "LDEM_16",
-        "productVersion": "V3.1",
-        "lidvid": "urn:nasa:pds:lro_lola_rdr:data_gridded:ldem_16::1.0",
-        "target": "MOON",
-        "sourceUnit": "METER",
-        "sampling": "nearest",
-        "grid": {
-          "width": 5760,
-          "height": 2880,
-          "pixelsPerDegree": 16,
-          "latitudeRange": [
-            -90,
-            90
+      "source": "science/ldem_16.img",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "schema": "cssearth-pds-int16-cylindrical@1",
+          "format": "pds-image",
+          "path": "ldem_16.img",
+          "labelPath": "ldem_16.lbl",
+          "datasetId": "LRO-L-LOLA-4-GDR-V1.0",
+          "productId": "LDEM_16",
+          "productVersion": "V3.1",
+          "lidvid": "urn:nasa:pds:lro_lola_rdr:data_gridded:ldem_16::1.0",
+          "target": "MOON",
+          "sourceUnit": "METER",
+          "sampling": "nearest",
+          "grid": {
+            "width": 5760,
+            "height": 2880,
+            "pixelsPerDegree": 16,
+            "latitudeRange": [
+              -90,
+              90
+            ],
+            "longitudeRange": [
+              0,
+              360
+            ],
+            "referenceRadiusMeters": 1737400,
+            "frame": "MEAN EARTH/POLAR AXIS OF DE421",
+            "scalingFactor": 0.5,
+            "offset": 1737400,
+            "noData": null
+          },
+          "valueTransform": {
+            "scale": 0.5,
+            "offset": 0
+          },
+          "minimum": -12000,
+          "maximum": 12000,
+          "colors": [
+            "#243b85",
+            "#40a0c4",
+            "#dddac4",
+            "#ce9449",
+            "#89382d"
           ],
-          "longitudeRange": [
-            0,
-            360
-          ],
-          "referenceRadiusMeters": 1737400,
-          "frame": "MEAN EARTH/POLAR AXIS OF DE421",
-          "scalingFactor": 0.5,
-          "offset": 1737400,
-          "noData": null
-        },
-        "valueTransform": {
-          "scale": 0.5,
-          "offset": 0
-        },
-        "minimum": -12000,
-        "maximum": 12000,
-        "colors": [
-          "#243b85",
-          "#40a0c4",
-          "#dddac4",
-          "#ce9449",
-          "#89382d"
-        ],
-        "units": "m above 1737.4 km sphere",
-        "outputLongitudeOrigin": -180,
-        "displaySampling": "nearest"
+          "units": "m above 1737.4 km sphere",
+          "outputLongitudeOrigin": -180,
+          "displaySampling": "nearest"
+        }
       }
     },
     {
       "id": "crust",
-      "label": "Crust",
-      "input": "lenses/grail-crustal-thickness-print.jpg",
-      "output": "moon-crustal-thickness",
-      "qualification": "NASA GRAIL crustal-thickness map with shaded relief"
+      "source": "lenses/grail-crustal-thickness-print.jpg",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp"
     },
     {
       "id": "silicate-signature",
-      "label": "Silicate signature",
-      "input": "science/diviner-cf-2021-georeferenced.tif",
-      "output": "moon-silicate-signature",
-      "qualification": "Diviner Christiansen-feature wavelength with improved viewing-geometry and space-weathering corrections; composition proxy within ±70° latitude",
-      "scientific": {
-        "minimum": 8,
-        "maximum": 8.5,
-        "colors": [
-          "#3b4b9b",
-          "#4ea8ae",
-          "#e3e6b3",
-          "#d49950",
-          "#873640"
-        ],
-        "units": "µm",
-        "outputLongitudeOrigin": -180,
-        "displaySampling": "nearest",
-        "format": "geotiff",
-        "path": "diviner-cf-2021-georeferenced.tif",
-        "sampling": "nearest",
-        "grid": {
-          "width": 2048,
-          "height": 1024,
-          "noData": -9999,
-          "origin": [
-            -5458203.076346907,
-            2729101.5381734534
+      "source": "science/diviner-cf-2021-georeferenced.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "minimum": 8,
+          "maximum": 8.5,
+          "colors": [
+            "#3b4b9b",
+            "#4ea8ae",
+            "#e3e6b3",
+            "#d49950",
+            "#873640"
           ],
-          "referenceRadiusMeters": 1737400,
-          "resolutionMeters": 5330.276441745026,
-          "centerLongitude": 0,
-          "wrapLongitude": true
+          "units": "µm",
+          "outputLongitudeOrigin": -180,
+          "displaySampling": "nearest",
+          "format": "geotiff",
+          "path": "diviner-cf-2021-georeferenced.tif",
+          "sampling": "nearest",
+          "grid": {
+            "width": 2048,
+            "height": 1024,
+            "noData": -9999,
+            "origin": [
+              -5458203.076346907,
+              2729101.5381734534
+            ],
+            "referenceRadiusMeters": 1737400,
+            "resolutionMeters": 5330.276441745026,
+            "centerLongitude": 0,
+            "wrapLongitude": true
+          }
         }
       }
     },
     {
       "id": "geology",
-      "label": "Geology",
-      "input": "geology/moon-geologic-units.tif",
-      "output": "moon-geology",
-      "qualification": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale.",
-      "scientific": {
-        "id": "geology",
-        "label": "Geology",
-        "format": "geotiff",
-        "path": "moon-geologic-units.tif",
-        "consumer": "geology",
-        "sampling": "nearest",
-        "displaySampling": "nearest",
-        "categories": [
-          {
-            "value": "Cc",
-            "label": "Cc · Copernican crater",
-            "color": "#b84040"
-          },
-          {
-            "value": "Ccc",
-            "label": "Ccc · Copernican crater cluster",
-            "color": "#7b99e0"
-          },
-          {
-            "value": "Csc",
-            "label": "Csc · Copernican secondary crater",
-            "color": "#a4e04f"
-          },
-          {
-            "value": "EIp",
-            "label": "EIp · Eratosthenian-Imbrian plateau",
-            "color": "#b865ad"
-          },
-          {
-            "value": "Ec",
-            "label": "Ec · Eratosthenian crater",
-            "color": "#4fe0c8"
-          },
-          {
-            "value": "Ecc",
-            "label": "Ecc · Eratosthenian crater cluster",
-            "color": "#e0b27b"
-          },
-          {
-            "value": "Em",
-            "label": "Em · Eratosthenian mare",
-            "color": "#5e40b8"
-          },
-          {
-            "value": "Esc",
-            "label": "Esc · Eratosthenian secondary crater",
-            "color": "#80e07b"
-          },
-          {
-            "value": "INp",
-            "label": "INp · Imbrian-Nectarian plains",
-            "color": "#e04f7f"
-          },
-          {
-            "value": "INt",
-            "label": "INt · Imbrian-Nectarian terra",
-            "color": "#6599b8"
-          },
-          {
-            "value": "Ib",
-            "label": "Ib · Imbrian basin undivided",
-            "color": "#d4e04f"
-          },
-          {
-            "value": "Ibm",
-            "label": "Ibm · Imbrian basin massif",
-            "color": "#cb7be0"
-          },
-          {
-            "value": "Ic",
-            "label": "Ic · Imbrian crater undivided",
-            "color": "#40b87c"
-          },
-          {
-            "value": "Ic1",
-            "label": "Ic1 · Imbrian lower crater",
-            "color": "#e0907b"
-          },
-          {
-            "value": "Ic2",
-            "label": "Ic2 · Imbrian upper crater",
-            "color": "#4f5be0"
-          },
-          {
-            "value": "Icc",
-            "label": "Icc · Imbrian crater cluster",
-            "color": "#84b865"
-          },
-          {
-            "value": "Icf",
-            "label": "Icf · Imbrian crater fracture floor",
-            "color": "#e04fb0"
-          },
-          {
-            "value": "Id",
-            "label": "Id · Imbrian dark mantling",
-            "color": "#7bdce0"
-          },
-          {
-            "value": "Ig",
-            "label": "Ig · Imbrian grooved terrain",
-            "color": "#b89940"
-          },
-          {
-            "value": "Iia",
-            "label": "Iia · Imbrian imbrium alpes formation",
-            "color": "#a97be0"
-          },
-          {
-            "value": "Iiap",
-            "label": "Iiap · Imbrian imbrium apenninus formation",
-            "color": "#4fe066"
-          },
-          {
-            "value": "Iic",
-            "label": "Iic · Imbrian imbrium crater",
-            "color": "#b86570"
-          },
-          {
-            "value": "Iif",
-            "label": "Iif · Imbrian imbrium fra mauro formation",
-            "color": "#4f8ce0"
-          },
-          {
-            "value": "Im1",
-            "label": "Im1 · Imbrian lower mare",
-            "color": "#c3e07b"
-          },
-          {
-            "value": "Im2",
-            "label": "Im2 · Imbrian upper mare",
-            "color": "#b740b8"
-          },
-          {
-            "value": "Imd",
-            "label": "Imd · Imbrian mare dome",
-            "color": "#7be0c3"
-          },
-          {
-            "value": "Iohi",
-            "label": "Iohi · Imbrian orientale hevelius formation, inner facies",
-            "color": "#e08b4f"
-          },
-          {
-            "value": "Ioho",
-            "label": "Ioho · Imbrian orientale hevelius formation, inner facies",
-            "color": "#6f65b8"
-          },
-          {
-            "value": "Iohs",
-            "label": "Iohs · Imbrian orientale hevelius formation, secondary crater facies",
-            "color": "#67e04f"
-          },
-          {
-            "value": "Iom",
-            "label": "Iom · Imbrian orientale maunder formation",
-            "color": "#e07baa"
-          },
-          {
-            "value": "Iork",
-            "label": "Iork · Imbrian orientale montes rook formation, knobby facies",
-            "color": "#409ab8"
-          },
-          {
-            "value": "Iorm",
-            "label": "Iorm · Imbrian orientale montes rook formation, massif facies",
-            "color": "#e0dc7b"
-          },
-          {
-            "value": "Ip",
-            "label": "Ip · Imbrian plains",
-            "color": "#af4fe0"
-          },
-          {
-            "value": "Isc",
-            "label": "Isc · Imbrian secondary crater",
-            "color": "#65b884"
-          },
-          {
-            "value": "It",
-            "label": "It · Imbrian terra",
-            "color": "#e05a4f"
-          },
-          {
-            "value": "Itd",
-            "label": "Itd · Imbrian terra dome",
-            "color": "#7b91e0"
-          },
-          {
-            "value": "Nb",
-            "label": "Nb · Nectarian basin undivided",
-            "color": "#7cb840"
-          },
-          {
-            "value": "Nbl",
-            "label": "Nbl · Nectarian basin lineated",
-            "color": "#e07bcc"
-          },
-          {
-            "value": "Nbm",
-            "label": "Nbm · Nectarian basin massif",
-            "color": "#4fe0d4"
-          },
-          {
-            "value": "Nbsc",
-            "label": "Nbsc · Nectarian basin secondary crater",
-            "color": "#b89865"
-          },
-          {
-            "value": "Nc",
-            "label": "Nc · Nectarian crater",
-            "color": "#7e4fe0"
-          },
-          {
-            "value": "Nnj",
-            "label": "Nnj · Nectarian nectaris janssen formation",
-            "color": "#7be07f"
-          },
-          {
-            "value": "Np",
-            "label": "Np · Nectarian plains",
-            "color": "#b8405f"
-          },
-          {
-            "value": "Nt",
-            "label": "Nt · Nectarian terra",
-            "color": "#7bb3e0"
-          },
-          {
-            "value": "Ntp",
-            "label": "Ntp · Nectarian plains and mantling, terra",
-            "color": "#c9e04f"
-          },
-          {
-            "value": "pNb",
-            "label": "pNb · Pre-Nectarian basin undivided",
-            "color": "#ad65b8"
-          },
-          {
-            "value": "pNbm",
-            "label": "pNbm · Pre-Nectarian basin massif",
-            "color": "#4fe0a3"
-          },
-          {
-            "value": "pNc",
-            "label": "pNc · Pre-Nectarian crater",
-            "color": "#e0987b"
-          },
-          {
-            "value": "pNt",
-            "label": "pNt · Pre-Nectarian terra",
-            "color": "#4041b8"
-          }
-        ],
-        "description": "Interpreted geologic units",
-        "title": "USGS unified global geology (2020 v2)",
-        "sourceUrl": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020",
-        "grid": {
-          "width": 2048,
-          "height": 1024,
-          "centerLongitude": 0,
-          "referenceRadiusMeters": 1737400,
-          "noData": -32768,
-          "origin": [
-            -5458203.076346907,
-            2729101.5381734534
+      "source": "geology/moon-geologic-units.tif",
+      "falseColor": true,
+      "output": "moon-{id}{suffix}.webp",
+      "thumbnail": "moon-lens-{id}.webp",
+      "science": {
+        "scientific": {
+          "id": "geology",
+          "label": "Geology",
+          "format": "geotiff",
+          "path": "moon-geologic-units.tif",
+          "consumer": "geology",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "categories": [
+            {
+              "value": "Cc",
+              "label": "Cc · Copernican crater",
+              "color": "#b84040"
+            },
+            {
+              "value": "Ccc",
+              "label": "Ccc · Copernican crater cluster",
+              "color": "#7b99e0"
+            },
+            {
+              "value": "Csc",
+              "label": "Csc · Copernican secondary crater",
+              "color": "#a4e04f"
+            },
+            {
+              "value": "EIp",
+              "label": "EIp · Eratosthenian-Imbrian plateau",
+              "color": "#b865ad"
+            },
+            {
+              "value": "Ec",
+              "label": "Ec · Eratosthenian crater",
+              "color": "#4fe0c8"
+            },
+            {
+              "value": "Ecc",
+              "label": "Ecc · Eratosthenian crater cluster",
+              "color": "#e0b27b"
+            },
+            {
+              "value": "Em",
+              "label": "Em · Eratosthenian mare",
+              "color": "#5e40b8"
+            },
+            {
+              "value": "Esc",
+              "label": "Esc · Eratosthenian secondary crater",
+              "color": "#80e07b"
+            },
+            {
+              "value": "INp",
+              "label": "INp · Imbrian-Nectarian plains",
+              "color": "#e04f7f"
+            },
+            {
+              "value": "INt",
+              "label": "INt · Imbrian-Nectarian terra",
+              "color": "#6599b8"
+            },
+            {
+              "value": "Ib",
+              "label": "Ib · Imbrian basin undivided",
+              "color": "#d4e04f"
+            },
+            {
+              "value": "Ibm",
+              "label": "Ibm · Imbrian basin massif",
+              "color": "#cb7be0"
+            },
+            {
+              "value": "Ic",
+              "label": "Ic · Imbrian crater undivided",
+              "color": "#40b87c"
+            },
+            {
+              "value": "Ic1",
+              "label": "Ic1 · Imbrian lower crater",
+              "color": "#e0907b"
+            },
+            {
+              "value": "Ic2",
+              "label": "Ic2 · Imbrian upper crater",
+              "color": "#4f5be0"
+            },
+            {
+              "value": "Icc",
+              "label": "Icc · Imbrian crater cluster",
+              "color": "#84b865"
+            },
+            {
+              "value": "Icf",
+              "label": "Icf · Imbrian crater fracture floor",
+              "color": "#e04fb0"
+            },
+            {
+              "value": "Id",
+              "label": "Id · Imbrian dark mantling",
+              "color": "#7bdce0"
+            },
+            {
+              "value": "Ig",
+              "label": "Ig · Imbrian grooved terrain",
+              "color": "#b89940"
+            },
+            {
+              "value": "Iia",
+              "label": "Iia · Imbrian imbrium alpes formation",
+              "color": "#a97be0"
+            },
+            {
+              "value": "Iiap",
+              "label": "Iiap · Imbrian imbrium apenninus formation",
+              "color": "#4fe066"
+            },
+            {
+              "value": "Iic",
+              "label": "Iic · Imbrian imbrium crater",
+              "color": "#b86570"
+            },
+            {
+              "value": "Iif",
+              "label": "Iif · Imbrian imbrium fra mauro formation",
+              "color": "#4f8ce0"
+            },
+            {
+              "value": "Im1",
+              "label": "Im1 · Imbrian lower mare",
+              "color": "#c3e07b"
+            },
+            {
+              "value": "Im2",
+              "label": "Im2 · Imbrian upper mare",
+              "color": "#b740b8"
+            },
+            {
+              "value": "Imd",
+              "label": "Imd · Imbrian mare dome",
+              "color": "#7be0c3"
+            },
+            {
+              "value": "Iohi",
+              "label": "Iohi · Imbrian orientale hevelius formation, inner facies",
+              "color": "#e08b4f"
+            },
+            {
+              "value": "Ioho",
+              "label": "Ioho · Imbrian orientale hevelius formation, inner facies",
+              "color": "#6f65b8"
+            },
+            {
+              "value": "Iohs",
+              "label": "Iohs · Imbrian orientale hevelius formation, secondary crater facies",
+              "color": "#67e04f"
+            },
+            {
+              "value": "Iom",
+              "label": "Iom · Imbrian orientale maunder formation",
+              "color": "#e07baa"
+            },
+            {
+              "value": "Iork",
+              "label": "Iork · Imbrian orientale montes rook formation, knobby facies",
+              "color": "#409ab8"
+            },
+            {
+              "value": "Iorm",
+              "label": "Iorm · Imbrian orientale montes rook formation, massif facies",
+              "color": "#e0dc7b"
+            },
+            {
+              "value": "Ip",
+              "label": "Ip · Imbrian plains",
+              "color": "#af4fe0"
+            },
+            {
+              "value": "Isc",
+              "label": "Isc · Imbrian secondary crater",
+              "color": "#65b884"
+            },
+            {
+              "value": "It",
+              "label": "It · Imbrian terra",
+              "color": "#e05a4f"
+            },
+            {
+              "value": "Itd",
+              "label": "Itd · Imbrian terra dome",
+              "color": "#7b91e0"
+            },
+            {
+              "value": "Nb",
+              "label": "Nb · Nectarian basin undivided",
+              "color": "#7cb840"
+            },
+            {
+              "value": "Nbl",
+              "label": "Nbl · Nectarian basin lineated",
+              "color": "#e07bcc"
+            },
+            {
+              "value": "Nbm",
+              "label": "Nbm · Nectarian basin massif",
+              "color": "#4fe0d4"
+            },
+            {
+              "value": "Nbsc",
+              "label": "Nbsc · Nectarian basin secondary crater",
+              "color": "#b89865"
+            },
+            {
+              "value": "Nc",
+              "label": "Nc · Nectarian crater",
+              "color": "#7e4fe0"
+            },
+            {
+              "value": "Nnj",
+              "label": "Nnj · Nectarian nectaris janssen formation",
+              "color": "#7be07f"
+            },
+            {
+              "value": "Np",
+              "label": "Np · Nectarian plains",
+              "color": "#b8405f"
+            },
+            {
+              "value": "Nt",
+              "label": "Nt · Nectarian terra",
+              "color": "#7bb3e0"
+            },
+            {
+              "value": "Ntp",
+              "label": "Ntp · Nectarian plains and mantling, terra",
+              "color": "#c9e04f"
+            },
+            {
+              "value": "pNb",
+              "label": "pNb · Pre-Nectarian basin undivided",
+              "color": "#ad65b8"
+            },
+            {
+              "value": "pNbm",
+              "label": "pNbm · Pre-Nectarian basin massif",
+              "color": "#4fe0a3"
+            },
+            {
+              "value": "pNc",
+              "label": "pNc · Pre-Nectarian crater",
+              "color": "#e0987b"
+            },
+            {
+              "value": "pNt",
+              "label": "pNt · Pre-Nectarian terra",
+              "color": "#4041b8"
+            }
           ],
-          "resolution": [
-            5330.276441745026,
-            -5330.276441745026
-          ],
-          "wrapLongitude": true
-        },
-        "outputLongitudeOrigin": -180
+          "description": "Interpreted geologic units",
+          "title": "USGS unified global geology (2020 v2)",
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020",
+          "grid": {
+            "width": 2048,
+            "height": 1024,
+            "centerLongitude": 0,
+            "referenceRadiusMeters": 1737400,
+            "noData": -32768,
+            "origin": [
+              -5458203.076346907,
+              2729101.5381734534
+            ],
+            "resolution": [
+              5330.276441745026,
+              -5330.276441745026
+            ],
+            "wrapLongitude": true
+          },
+          "outputLongitudeOrigin": -180
+        }
       }
     }
-  ]
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "moon-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "moon-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "cssmoon-prepared-lighting-bank@1",
+    "billboardSchema": "cssmoon-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "cssmoon-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
 }

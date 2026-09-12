@@ -78,6 +78,11 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             throw new TypeError(`surface.output must end in ${extension} for its encoding.`);
         if (surface.exposure !== undefined)
             numbers(surface.exposure, 'surface.exposure', 3);
+        if (surface.science !== undefined) {
+            record(surface.science, 'surface.science');
+            if (recipe.resample === 'source-packed') throw new TypeError('surface.science needs density-before-pack resampling.');
+            if (surface.coverage !== undefined || surface.sharpen !== undefined || surface.exposure !== undefined) throw new TypeError('surface.science replaces coverage, sharpen and exposure.');
+        }
         if (surface.sharpen !== undefined)
             numbers(surface.sharpen, 'surface.sharpen', 2);
         if (surface.coverage !== undefined) {

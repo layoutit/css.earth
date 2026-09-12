@@ -12,8 +12,7 @@
   "output": "moon-features.json",
   "publicBase": "/scenes/moon/",
   "target": {
-    "className": "moon-body",
-    "withoutClassName": "moon-body-polar"
+    "className": "moon-body"
   },
   "lensIds": [
     "surface",

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "af7b70c390f8d230fef96d2a0cd57cd73ba637acb9f328f6bae411140d5663d8"
+    "sha256": "3c68fd3c32113182f1d9df5ddd242c932dc740c9b924b1774c6351055d37530b"
   },
   "id": "mercury",
   "properties": {
@@ -99,7 +99,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "1e9217f574286a21b1e4da04b284aeabd8d241b9407cafa935feaa60cdadbf56"
+          "sha256": "44c6ae47afafc1446e186fdb253249783c1574a025d34e2c7122ac83678176f5"
         },
         {
           "id": "navigation",
@@ -169,7 +169,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "57723d75b543e4561b9e9dd36050898e534d06b16abf9964061fc9de0989d6e1"
+        "sha256": "fbb945686764ee5c9eaf71728aec5251e609aebdd7c9f149645ef5d98e901897"
       }
     },
     "catalog": {
