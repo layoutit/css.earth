@@ -16,11 +16,6 @@ export function authoredPresentationBasis(sources: ReadonlyMap<string, Input>, e
   }
   if (terrestrial?.schema === 'cssearth-terrestrial-preparation@1') {
     if (terrestrial.kind === 'solid-observation-body') return checked(eclipticBasis, terrestrial.geometry.radius, 50);
-    if (terrestrial.kind === 'affine-photographic-atmosphere') {
-      const shape = sources.get('ellipsoid');
-      if (!shape) throw new TypeError('Affine navigation requires its authored ellipsoid.');
-      return checked(chain(mesh([shape.axialTiltDegrees, 0, 0]), mesh([0, 0, shape.bodyRotationDegrees])), shape.equatorialRadius, terrestrial.projection.tileSize);
-    }
   }
   if (geometry?.schema === 'cssearth-static-surface-geometry@1' && geometry.kind === 'disc-poles') {
     return checked(chain(geometry.metadata.body.systemTransform, geometry.metadata.body.meshTransform), geometry.parameters.displayRadius, geometry.parameters.tileSize);

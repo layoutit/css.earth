@@ -2,14 +2,13 @@ import type {RasterImage} from './objects/static-surface/contracts.mts';
 import type {SurfacePreviewDirectories} from './surface-preview-source.mts';
 import {optionalPreviewJson as optionalJson,parsePreviewControls,parseEmissionPreview,parsePolarPreview,parseObservedPreview,parseSpectralPreview,parseGeometryPreview} from './surface-preview-source.mts';
 import {parsePagedProfile} from './objects/paged-ellipsoid/profile-source.mts';
-import {requireRecord,requireFiniteNumber} from './source-values.mts';
+import {requireRecord} from './source-values.mts';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import { createProjectiveSurfaceRasterLayout } from '../src/platform/projective-surface-raster.mts';
 import { orientLatitudeBands } from './objects/static-surface/projection.mts';
 import { latitudeRasterBands } from './objects/giant-layers/geometry.mts';
-import { createEllipsoidGeometry } from './objects/terrestrial-layers/ellipsoid-geometry.mts';
 import { preparePagedSurfaceMap } from './objects/paged-ellipsoid/assets.mts';
 
 // Reverse only the declared lossless packing, before downsizing. Unrepresented
@@ -38,8 +37,8 @@ export function assertSurfacePreviewCoverage(controls:readonly {id:string}[], im
 /** Small previews for preparation recipes that do not publish surfaces.json. */
 export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory, outputDirectory }:SurfacePreviewDirectories) {
   const config = (name:string) => optionalJson(resolve(objectDirectory, 'source/preparation', `${name}.json`));
-  const [rawRaster, rawObservations, terrestrial, rawPaged, rawSpectral, rawGeometry, rawLenses] = await Promise.all([
-    ...['raster', 'observations', 'terrestrial', 'paged-ellipsoid', 'surface', 'geometry'].map(config),
+  const [rawRaster, rawObservations, rawPaged, rawSpectral, rawGeometry, rawLenses] = await Promise.all([
+    ...['raster', 'observations', 'paged-ellipsoid', 'surface', 'geometry'].map(config),
     optionalJson(resolve(outputDirectory, 'lenses.json')),
   ]);
   const read = (file:string) => sharp(resolve(publicDirectory, basename(file))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -67,15 +66,6 @@ export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory,
       const { bandCount, gutter } = product.packing;
       const width = image.info.width - 2 * gutter, height = image.info.height - 2 * gutter * bandCount;
       yield { id: lens.id, raster: unpackSurfacePreview(image, { width, height, bandCount, gutter }) };
-    }
-  }
-  if (terrestrial?.schema === 'cssearth-terrestrial-preparation@1' && terrestrial.kind === 'affine-photographic-atmosphere') {
-    const shape = createEllipsoidGeometry(await config('ellipsoid'));
-    const width = requireFiniteNumber(terrestrial.width) * 2, height = requireFiniteNumber(terrestrial.height) * 2;
-    const lenses=parsePreviewControls(rawLenses);
-    for (const lens of lenses.controls) {
-      if (!lens.surface2xUrl) continue;
-      yield { id: lens.id, raster: await packed(lens.surface2xUrl, { width, height, bands: shape.rasterBands(height), gutter: height / 16 / 4 }) };
     }
   }
   if (rawPaged?.schema === 'cssearth-paged-ellipsoid@1') {
