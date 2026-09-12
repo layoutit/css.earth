@@ -36,6 +36,8 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   const sourceSurfaces=requireArray(rasterInput?.surfaces ?? []).map(parsePreviewSurface);
   const sourceLenses=requireArray(rasterInput?.lenses ?? []).map(value=>shape({id:text})(value));
   const surfaces = new Map(sourceSurfaces.map(surface => [surface.id, surface] as const));
+  // Raster-lane surfaces with a scientific interpretation preview through the same decoders the lane packs with.
+  const science = new Map(requireArray(rasterInput?.surfaces ?? []).flatMap(value => { const record = requireRecord(value); return isRecord(record.science) ? [[requireString(record.id), record.science] as const] : []; }));
   for (const surface of requireArray(prepared?.surfaces ?? []).map(parsePreviewSurface)) if (surface.map) surfaces.set(surface.id, surface);
   const framingValue=await optionalJson(resolve(objectDirectory, 'source/presentation/minimap.json'));
   const framing=framingValue && parseMinimapFraming(framingValue);
@@ -80,8 +82,15 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     if (!input) continue;
     const path = `minimaps/${surface.id}.webp`;
     await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
-    const nearest = nearestDisplay(surface);
-    let pipeline = sharp(input).resize(minimapResize(nearest));
+    const interpretation = science.get(surface.id);
+    const nearest = nearestDisplay(surface, interpretation?.scientific);
+    let pipeline;
+    if (interpretation && typeof surface.source === 'string') {
+      const plan = parseObservationPreviewLens({ id: surface.id, input: surface.source, ...interpretation });
+      const recipe = requireRecord(rasterInput);
+      const { data, info } = await observationRaster({ input, plan, width: requireFiniteNumber(recipe.width), height: requireFiniteNumber(recipe.height) });
+      pipeline = sharp(data, { raw: info }).resize(minimapResize(nearest));
+    } else pipeline = sharp(input).resize(minimapResize(nearest));
     if (framing?.centerLongitudeDegrees !== undefined) {
       if (!Number.isFinite(framing.centerLongitudeDegrees)) throw new Error('Invalid minimap framing');
       const { data, info } = await pipeline.raw().toBuffer({ resolveWithObject: true });

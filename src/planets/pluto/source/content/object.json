@@ -1,0 +1,306 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "pluto",
+  "displayName": "Pluto",
+  "title": {
+    "label": "Pluto",
+    "viewBox": "0 0 61.3776 35",
+    "width": 61.3776,
+    "height": 35,
+    "path": "M0 29L0 8.63L7.51 8.63Q9.72 8.63 11.31 9.43Q12.89 10.23 13.73 11.66Q14.57 13.1 14.57 15.04Q14.57 16.98 13.71 18.42Q12.85 19.85 11.25 20.65Q9.64 21.44 7.42 21.44L1.75 21.44L1.75 18.81L7.3 18.81Q8.67 18.81 9.61 18.34Q10.55 17.87 11.05 17.02Q11.55 16.16 11.55 15.04Q11.55 13.89 11.05 13.04Q10.55 12.2 9.61 11.73Q8.67 11.27 7.3 11.27L3.05 11.27L3.05 29ZM20.04 8.63L20.04 29L17.13 29L17.13 8.63ZM28.59 29.27Q27.1 29.27 25.92 28.62Q24.74 27.97 24.05 26.69Q23.37 25.4 23.37 23.52L23.37 14.37L26.28 14.37L26.28 23.18Q26.28 24.88 27.13 25.77Q27.98 26.66 29.47 26.66Q30.46 26.66 31.25 26.26Q32.04 25.86 32.5 25Q32.97 24.15 32.97 22.85L32.97 14.37L35.88 14.37L35.88 29L33.03 29L33.03 25.38L33.61 25.38Q32.93 27.35 31.65 28.31Q30.38 29.27 28.59 29.27ZM46.07 14.37L46.07 16.78L37.73 16.78L37.73 14.37ZM40.2 10.5L43.11 10.5L43.11 25.1Q43.11 25.94 43.46 26.28Q43.81 26.62 44.67 26.62Q44.97 26.62 45.37 26.61Q45.76 26.59 46.05 26.58L46.16 28.97Q45.79 29.01 45.28 29.03Q44.77 29.05 44.29 29.05Q42.25 29.05 41.23 28.15Q40.2 27.25 40.2 25.47ZM54.4 29.33Q52.34 29.33 50.77 28.36Q49.2 27.4 48.32 25.68Q47.45 23.97 47.45 21.71Q47.45 19.46 48.32 17.73Q49.2 16.01 50.77 15.04Q52.34 14.07 54.4 14.07Q56.51 14.07 58.07 15.04Q59.63 16.01 60.5 17.73Q61.38 19.46 61.38 21.71Q61.38 23.97 60.5 25.68Q59.63 27.4 58.07 28.36Q56.51 29.33 54.4 29.33ZM54.4 26.81Q55.69 26.81 56.59 26.17Q57.48 25.53 57.96 24.38Q58.44 23.23 58.44 21.73Q58.44 20.18 57.96 19.03Q57.48 17.88 56.59 17.24Q55.69 16.59 54.4 16.59Q53.15 16.59 52.25 17.23Q51.36 17.87 50.88 19.03Q50.41 20.18 50.41 21.73Q50.41 23.24 50.88 24.39Q51.36 25.53 52.26 26.17Q53.16 26.81 54.4 26.81Z",
+    "source": "Inter Variable 4.001 git-9221beed3",
+    "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+    "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+    "weight": 500,
+    "opticalSize": 28,
+    "fontSize": 28,
+    "letterSpacing": -0.1,
+    "baseline": 29,
+    "xOrigin": "trim-left-bearing",
+    "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+  },
+  "panel": {
+    "schema": "cssearth-prepared-panel@1",
+    "planetId": "pluto",
+    "introduction": "Pluto is an icy dwarf planet in the Kuiper Belt. New Horizons revealed mountains, glaciers, and a heart-shaped plain during its 2015 flyby.",
+    "facts": [
+      {
+        "id": "distance-from-sun",
+        "label": "Solar semimajor axis",
+        "value": "39.482 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-approximate-planetary-positions",
+          "locator": "/references/0; distance-from-sun"
+        }
+      },
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "1,188.3 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "source-pluto-orbit-jpl-physical-values",
+          "locator": "/references/1; radius"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "247.92 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "source-pluto-orbit-jpl-physical-values",
+          "locator": "/references/1; orbital-period"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "6.39 days · retrograde",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "source-pluto-orbit-jpl-physical-values",
+          "locator": "/references/1; rotation-period"
+        }
+      },
+      {
+        "id": "axial-tilt",
+        "label": "Axial tilt",
+        "value": "About 120°",
+        "source": {
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/plutofact.html?level=1",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "nssdc-pluto-factsheet",
+          "locator": "/references/2; axial-tilt"
+        }
+      },
+      {
+        "id": "moon-count",
+        "label": "Moons",
+        "value": "5"
+      },
+      {
+        "id": "ring-system",
+        "label": "Rings",
+        "value": "None"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.302 × 10²² kg",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "source-pluto-orbit-jpl-physical-values",
+          "locator": "/references/1; mass"
+        }
+      },
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.853 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "source-pluto-orbit-jpl-physical-values",
+          "locator": "/references/1; density"
+        }
+      }
+    ],
+    "sources": {
+      "editorial": {
+        "sourceUrl": "https://science.nasa.gov/dwarf-planets/pluto/facts/",
+        "modified": "2025-04-22T19:25:01",
+        "credit": "NASA Science"
+      }
+    }
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "surface",
+    "controls": [
+      {
+        "id": "surface",
+        "label": "Visible color",
+        "description": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
+        "title": "MVIC color mosaic",
+        "thumbnail": "pluto-lens-surface.webp",
+        "surface": "pluto-surface.webp",
+        "poles": "pluto-poles-surface.webp",
+        "source": {
+          "id": "surface-pluto-color-mosaic-jpg",
+          "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/l/pluto_color_mapmosaic.jpg?crop=faces%2Cfocalpoint&fit=clip&h=2963&w=5926"
+        },
+        "detail": "Color mosaic",
+        "summary": "Color observations cover only part of the surface, with detail varying by region. The gray grid marks missing imagery.",
+        "falseColor": false,
+        "qualification": "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
+      },
+      {
+        "id": "topography",
+        "label": "Elevation",
+        "description": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+        "title": "Stereo elevation map",
+        "thumbnail": "pluto-lens-topography.webp",
+        "surface": "pluto-topography.webp",
+        "poles": "pluto-poles-topography.webp",
+        "source": {
+          "id": "lenses-pluto-dem-tif",
+          "url": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
+        },
+        "detail": "Stereo relief",
+        "summary": "Colors span heights from −8 to +8 km, with shading to reveal slopes. The gray grid marks areas without elevation data.",
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "labels": [
+            "−8",
+            "0",
+            "+8"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                28,
+                85,
+                153
+              ],
+              [
+                187,
+                171,
+                128
+              ],
+              [
+                170,
+                62,
+                36
+              ]
+            ],
+            "labels": [
+              "−8",
+              "0",
+              "+8"
+            ]
+          },
+          "meta": "km",
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
+        },
+        "falseColor": true,
+        "qualification": "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data"
+      },
+      {
+        "id": "monochrome",
+        "label": "Monochrome",
+        "description": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
+        "title": "LORRI/MVIC mosaic",
+        "thumbnail": "pluto-lens-monochrome.webp",
+        "surface": "pluto-monochrome.webp",
+        "poles": "pluto-poles-monochrome.webp",
+        "source": {
+          "id": "lenses-pluto-monochrome-tif",
+          "url": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"
+        },
+        "detail": "Photo mosaic",
+        "summary": "Images from LORRI and MVIC provide varying surface detail. The gray grid marks regions without imagery in this mosaic.",
+        "falseColor": false,
+        "qualification": "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "cycle",
+        "name": "speed",
+        "label": "Speed",
+        "state": "normal"
+      },
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "stars",
+        "label": "Stars",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Pluto facts",
+      "href": "https://science.nasa.gov/dwarf-planets/pluto/facts/"
+    },
+    {
+      "label": "New Horizons",
+      "role": "surface",
+      "description": "MVIC color map",
+      "href": "https://science.nasa.gov/resource/pluto-global-color-map/"
+    },
+    {
+      "label": "USGS",
+      "role": "maps",
+      "description": "Mosaic and elevation",
+      "href": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
+    },
+    {
+      "label": "JPL",
+      "role": "physical",
+      "description": "Physical parameters",
+      "href": "https://ssd.jpl.nasa.gov/planets/phys_par.html"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Background star field",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "sourceUrl": "https://science.nasa.gov/dwarf-planets/pluto/facts/",
+      "modified": "2025-04-22T19:25:01",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../orbit/jpl-physical.json",
+      "credit": "JPL Solar System Dynamics"
+    },
+    "presentation": {
+      "path": "../presentation/solar-system.json",
+      "credit": "Published physical facts and repository-authored presentation"
+    }
+  }
+}

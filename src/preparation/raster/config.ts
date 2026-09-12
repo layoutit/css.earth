@@ -23,6 +23,9 @@ export interface SurfaceRasterRecipe {
         topography: string;
         references: string[];
     };
+    /** Scientific interpretation before packing (numeric grids, colour ramps, categorical palettes, tonal presentation,
+     * missing-coverage grid): the static lane's observation fields, applied by an injected adapter. */
+    science?: Record<string, unknown>;
 }
 export interface LightingRecipe extends LambertRasterConfig {
     frameSize: number;

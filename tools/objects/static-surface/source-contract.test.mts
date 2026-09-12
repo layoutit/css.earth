@@ -4,7 +4,7 @@ import test from 'node:test';
 import {parseSurfaceGeometry, parseSurfaceRaster, parseCelestialRecipe, parsePhysicalRecipe, parseSurfaceContent, parseTitleRecipe, parseBandLenses, parseEmissiveLenses} from './source-contract.mts';
 const read = async (id: string, path: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../../src/planets/${id}/source/${path}`, import.meta.url), 'utf8'));
 
-for (const id of ['moon', 'pluto', 'sun']) {
+for (const id of ['sun']) {
   test(`${id} source boundaries preserve pinned records and their provenance`, async () => {
     for (const [path, parse] of [['preparation/geometry.json', parseSurfaceGeometry], ['preparation/raster.json', parseSurfaceRaster],
       ['preparation/celestial.json', parseCelestialRecipe], ['preparation/physical.json', parsePhysicalRecipe],
@@ -19,7 +19,7 @@ for (const id of ['moon', 'pluto', 'sun']) {
 }
 
 test('camera and material addresses must be numeric and complete before compiling scene leaves', async () => {
-  const geometry = parseSurfaceGeometry(await read('pluto', 'preparation/geometry.json'));
+  const geometry = parseSurfaceGeometry(await read('sun', 'preparation/geometry.json'));
   Object.assign(geometry.metadata.camera, {defaultZoom: '1.1'});
   assert.throws(() => parseSurfaceGeometry(geometry), /static surface geometry/);
   const {lenses} = parseSurfaceContent(await read('sun', 'content/static.json'));

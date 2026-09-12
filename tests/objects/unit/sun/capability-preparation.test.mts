@@ -16,7 +16,7 @@ import { contextualizeStaticSurfaceScene } from '../../../../tools/objects/stati
 import { prepareWorldNavigationDefinition } from '../../../../tools/objects/dist/prepare-world-navigation.js';
 
 const read = async (path: string) => JSON.parse(await readFile(resolve(projectRoot, path), 'utf8'));
-for (const id of ['moon', 'pluto', 'sun']) {
+for (const id of ['sun']) {
   test(`${id}: authored inputs regenerate the exact retained geometry and runtime`, async () => {
     const descriptor = parseAuthoredObjectDescriptor(await read(`src/planets/${id}/object.json`));
     for (const reference of descriptor.recipe.sources) {

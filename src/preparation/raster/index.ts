@@ -6,17 +6,21 @@ import { prepareAtmosphere } from './materials.js';
 import { prepareLighting } from '../../renderers/css/preparation/materials/lighting.js';
 import { prepareInterior } from './interior.js';
 import { outputName, hashFile } from './io.js';
+import type { ObservationInterpretation } from './science.js';
+export type { ObservationInterpretation, InterpretedSurface } from './science.js';
 export { parseRasterRecipe } from './validation.js';
 export type { RasterRecipe } from './config.js';
-export async function prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config }: {
+export async function prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config, interpret }: {
     sourceDirectory: string;
     publicDirectory: string;
     outputDirectory: string;
     config: RasterRecipe;
+    /** Required when any surface declares `science`; supplied by the preparation tools, never by src. */
+    interpret?: ObservationInterpretation;
 }) {
     await mkdir(publicDirectory, { recursive: true });
     await mkdir(outputDirectory, { recursive: true });
-    const { metadata } = await prepareSurfaces(config, sourceDirectory, publicDirectory);
+    const { metadata } = await prepareSurfaces(config, sourceDirectory, publicDirectory, interpret);
     const lighting = config.lighting ? await prepareLighting(config, config.lighting, publicDirectory) : undefined;
     const atmosphere = config.atmosphere ? await prepareAtmosphere(config, config.atmosphere, sourceDirectory, publicDirectory) : undefined;
     const interior = config.interior ? await prepareInterior(config, config.interior, sourceDirectory, publicDirectory) : undefined;

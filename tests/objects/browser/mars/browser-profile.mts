@@ -3,7 +3,7 @@ import { readPreparedFixture } from "../../fixtures.mts";
 const objectControls = await readPreparedFixture("mars", "controls");
 
 export const browserProfile = createObjectBrowserProfile({
-  id: "mars", controls: objectControls,
+  id: "mars", controls: objectControls, cameraFields: ["pitch", "controlPitch", "controlYaw", "zoom"],
   audit: Object.freeze({
     preparedAssetPairs: Object.freeze([
       Object.freeze({
