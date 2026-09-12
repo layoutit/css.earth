@@ -753,6 +753,51 @@
           ]
         }
       }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "features/ne_10m_geography_marine_polys.zip",
+      "url": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_marine_polys.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "features/ne_10m_geography_regions_points.zip",
+      "url": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_regions_points.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "features/ne_10m_geography_regions_polys.zip",
+      "url": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_regions_polys.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "features/ne_10m_populated_places.zip",
+      "url": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_populated_places.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "features/ne_10m_rivers_lake_centerlines.zip",
+      "url": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_rivers_lake_centerlines.zip"
     }
   ]
 }
