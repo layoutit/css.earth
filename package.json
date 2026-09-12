@@ -134,7 +134,9 @@
     "typecheck:tests": "node tools/typecheck-tests.mts",
     "typecheck:oracles": "tsc -p tools/oracles/tsconfig.json",
     "pretest": "pnpm prepare:shell",
-    "typecheck:configs": "tsc -p tsconfig.configs.json"
+    "typecheck:configs": "tsc -p tsconfig.configs.json",
+    "oracles:setup": "node tools/oracles/setup.mts",
+    "oracles:run": "node tools/oracles/run.mts"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",
