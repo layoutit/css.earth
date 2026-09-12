@@ -7,6 +7,8 @@ export interface WheelZoomInertia {
   readonly dampingSeconds: number;
   /** The glide ends below this share of the rate it was released with. */
   readonly stopRateRatio: number;
+  /** Log-distance per second below which a glide is no longer visible motion and stops. */
+  readonly stopLogRatePerSecond: number;
   readonly gain: number;
 }
 export interface ResponsiveOrbitPolicyOptions {

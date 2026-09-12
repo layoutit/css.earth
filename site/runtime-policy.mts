@@ -27,7 +27,14 @@ export const WHEEL_ZOOM_USE_SCROLL_DISTANCE = true;
 // At 0.088 s that coast is a third of the gesture; a longer one doubles it.
 export const WHEEL_ZOOM_INERTIA = Object.freeze({
   dampingSeconds: 0.088,
-  stopRateRatio: 0.12,
+  // Where the coast ends. An eye reads distance change per frame, so the floor is
+  // absolute: a third of a percent per 60 Hz frame, about three pixels across a
+  // thousand-pixel orbit, which is where a stop stops reading as a snap. A share
+  // of the released rate would instead snap hardest on the strongest gestures.
+  // At the damping above this adds about a fifteenth of the commanded interval to
+  // the coast's travel; the ratio is only a bound for an extreme fling.
+  stopLogRatePerSecond: 0.2,
+  stopRateRatio: 0.02,
   gain: 1,
 });
 // A precision pointer scrolls with the platform's own momentum, which keeps

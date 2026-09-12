@@ -77,7 +77,7 @@ test('off-screen camera motion sends no unused marker state, and reveal repairs 
   }
 });
 
-test('camera updates reuse numeric chord slots and publish changed CSS transforms without SVG paths', () => {
+test('camera updates reuse numeric chord slots and carry no formatted CSS or SVG strings', () => {
   const calculate = createWorldContextPlanner(plan), encode = createWorldContextFrameEncoder(), receive = createWorldContextFrameReceiver();
   const input = view();
   const first = receive.accept(structuredClone(encode(1, 0, calculate(input))));
@@ -92,7 +92,7 @@ test('camera updates reuse numeric chord slots and publish changed CSS transform
   expect(next.segments).toBe(bank);
   expect(next.segments[0]).toBe(slot);
   expect(next.segments[0]).not.toEqual(before);
-  expect(next.transforms[0]).toMatch(/^matrix\(/);
+  expect(next).not.toHaveProperty('transforms');
   expect(next).not.toHaveProperty('strokePaths');
   expect(next).not.toHaveProperty('orbitClip');
 });
@@ -124,7 +124,7 @@ test('an incomplete growth patch cannot resize the retained chord bank', () => {
   expect(receive.committedId).toBe(1);
 });
 
-test('a discarded worker result cannot become a publication baseline', () => {
+test('a discarded worker result cannot become a publication baseline, and costs no full repair', () => {
   const calculate = createWorldContextPlanner(plan), encode = createWorldContextFrameEncoder(), receive = createWorldContextFrameReceiver();
   const input = view(); receive.accept(structuredClone(encode(1, 0, calculate(input))));
   input.world.pose.positionM[2] *= 2;
@@ -132,8 +132,11 @@ test('a discarded worker result cannot become a publication baseline', () => {
   expect(dropped.baseId).toBe(1);
   input.world.pose.positionM[2] *= 2;
   const full = structuredClone(calculate(input));
+  // The baseline is the frame the client acknowledged, so the repair is an
+  // ordinary delta against it; the discarded frame's state is never promoted,
+  // which the resolved frame below proves by matching the full plan exactly.
   const repair = structuredClone(encode(3, receive.committedId, full));
-  expect(repair.baseId).toBe(0); expect(receive.accept(repair).frame).toEqual(full);
+  expect(repair.baseId).toBe(1); expect(receive.accept(repair).frame).toEqual(full);
   expect(() => receive.accept(dropped)).toThrow('baseline is stale');
   expect(receive.committedId).toBe(3);
 });
@@ -147,11 +150,10 @@ test('one edited chord sends one slot; shrinking and regrowing restores every le
   const body = full.projectedBodies.find(body => body.segments.length > 3)!;
   const changed = structuredClone(full), next = changed.projectedBodies[body.index];
   next.segments = next.segments.map((segment, i) => i === 1 ? [segment[0] + 1, ...segment.slice(1)] as typeof segment : segment);
-  next.transforms[1] += ' translateX(1px)';
   const packet = encode(2, 1, changed);
   expect([...packet.updates.find(update => update.index === body.index)!.orbit!.indices]).toEqual([1]);
   expect(receive.accept(packet).frame).toEqual(changed);
-  next.segments = next.segments.slice(0, 1); next.transforms = next.transforms.slice(0, 1);
+  next.segments = next.segments.slice(0, 1);
   const shrink = encode(3, 2, changed);
   expect(shrink.updates.find(update => update.index === body.index)!.orbit!.indices.length).toBe(0);
   expect(receive.accept(shrink).frame).toEqual(changed);
