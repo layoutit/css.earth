@@ -43,7 +43,8 @@
           "samplesPerAxis": 2,
           "quality": 95
         }
-      }
+      },
+      "resolutionScale": 2
     },
     {
       "id": "enhanced",
@@ -118,7 +119,8 @@
             ]
           }
         }
-      }
+      },
+      "resolutionScale": 2
     },
     {
       "id": "elevation",

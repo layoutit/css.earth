@@ -460,8 +460,8 @@
     {
       "id": "mars-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "5ecbd740c7c0de7b4a57e0f7e8c89e49368fb7fb3beb87495121ce3353053908",
-      "expectedBytes": 3917,
+      "expectedSha256": "d4e14590f9608d9d88132dc1fcd314c862c00be1c840f462dff0ae5c41709d24",
+      "expectedBytes": 4473,
       "origin": "Repository-authored Mars acquisition and qualification recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -578,7 +578,7 @@
       "expectedSha256": "58136a4ad15b287d1a01058d659974b44dfc67a65f2a53569d7654987d308e54",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
       "licenseEvidence": [
         "features/manifest.json"
       ],

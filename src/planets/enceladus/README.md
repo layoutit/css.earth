@@ -30,6 +30,27 @@ retains finer fracture detail; some improvement also comes from encoding quality
 The selected view was also inspected with Shadows on. This checks visible output,
 not scientific registration accuracy or full browser conformance.
 
+A fresh [Pixelmatch comparison](evidence/native-pixelmatch/comparison.png) uses
+Chrome 153.0.8010.12, 1280 × 720, DPR 1 and an unchanged 520 × 480 crop. It runs
+on the merge of `e0487eff5` with main `c13f3643b`, whose renderer and scene are
+retained. [Capture settings and byte pins](evidence/native-pixelmatch/capture.json)
+identify the exact previous-main atlas and the encoding-only control.
+
+| Comparison | Exact changed pixels / 249,600 | At threshold 0.1 |
+| --- | ---: | ---: |
+| [Independent unchanged repeat](evidence/native-pixelmatch/repeat.json) | 1 | 0 |
+| [Previous atlas → native sampling](evidence/native-pixelmatch/change.json) | 193,769 | 20 |
+| [Quality-95 control → native sampling](evidence/native-pixelmatch/sampling.json) | 177,539 | 19 |
+
+Both settings include anti-aliasing, without masks. The repeat differs by one
+8-bit value in three channels of one pixel, after waiting for label fades.
+The exact diffs locate many small brightness changes; the 0.1 threshold shows
+that few are large. Inspection shows finer fracture texture, not a large
+contrast change. These counts do not measure sharpness or registration accuracy.
+The four input crops and three diffs are retained beside their reports. Reproduce
+a comparison with `node tools/compare-visual-evidence.mts <reference.png>
+<result.png> <diff.png> <report.json>` from the repository root.
+
 - The formal pinned Python environment reproduced the exact ZIP hash (see [docs/moons/b2-preparation/enceladus-dsk-reproduction.json](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b2-preparation/enceladus-dsk-reproduction.json)).
 
 - The visual-trial candidate uses 2,000 source-preserving native triangles with regularization and a 2,523 m rendering error ceiling. Four barycentric positions on every retained triangle gave a maximum one-way source distance of 1,822.01 m; source Cartesian extrema differ by at most 533 m. These rendering measurements are not source uncertainty or an exhaustive Hausdorff bound.

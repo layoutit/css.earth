@@ -55,3 +55,17 @@ test('landmarks reject unqualified, malformed and unpinned positions', () => {
   assert.throws(() => parseLandmarks(document({ latitudeDeg: 0, longitudeDeg: 0, pointMeters: [0, 0, 1] })), /one position frame/u);
   assert.throws(() => parseLandmarks({ ...document({ latitudeDeg: 0, longitudeDeg: 0 }), entries: [{ ...entry, qualification: '', position: { latitudeDeg: 0, longitudeDeg: 0 } }] }), /qualification/u);
 });
+
+test('an image-plane landmark uses its observed facet normal even below the arbitrary body origin', async () => {
+  const ctx = context('.');
+  const triangles = [[[-10, -10, -5], [0, 10, -5], [10, -10, -5]]] as const;
+  const observed = { ...ctx, hitMesh: { target: 0, triangles } }, before = JSON.stringify(triangles);
+  const doc = document({ pointMeters: [2, 1, -5], maximumDistanceMeters: 0.01 });
+  const radial = await prepareLandmarks(doc, observed, axes, 0);
+  const surface = await prepareLandmarks({ ...doc, entries: [{ ...doc.entries[0]!, normal: 'surface' }] }, observed, axes, 0);
+  assert.deepEqual(surface.features[0]!.anchorUnits, [1, 2, -5]);
+  assert.deepEqual(surface.features[0]!.normal, [0, 0, 1]);
+  assert.ok(radial.features[0]!.normal[2] < 0, 'default radial behavior remains unchanged');
+  assert.equal(JSON.stringify(triangles), before, 'surface direction does not modify the mesh');
+  assert.throws(() => parseLandmarks({ ...document({ longitudeDeg: 0, latitudeDeg: 0 }), entries: [{ ...entry, position: { longitudeDeg: 0, latitudeDeg: 0 }, normal: 'surface' }] }), /Cartesian landmark/u);
+});
