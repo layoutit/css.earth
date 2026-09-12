@@ -83,7 +83,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
     ".planet-information-panel", ".planet-object-browser", ".planet-object-empty",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
     ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
-    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-asteroid-orbits-setting", ".planet-asteroid-labels-setting"]) {
+    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-asteroid-bodies-setting", ".planet-asteroid-orbits-setting", ".planet-asteroid-labels-setting"]) {
     const element = new Element();
     selectors.set(selector, element); elements.push(element);
   }
@@ -164,6 +164,28 @@ test('retained catalogue groups follow filters and release their visibility obse
   assert.equal(f.selectors.element('.planet-information-panel').inert, false);
   shell.destroy();
   assert.equal(getObserver().disconnected, true);
+});
+
+// Asteroid dots default off: the busiest layer must not cost a first view.
+test('Asteroids starts off and retains its independent preference across body navigation', () => {
+  const changes: boolean[] = [], f = fixture({ onAsteroidBodiesChange: value => changes.push(value) }), shell = f.mount();
+  const toggle = f.selectors.element('.planet-asteroid-bodies-setting');
+  assert.equal(toggle.checked, false);
+  assert.equal(f.documentTarget.body.dataset.asteroidBodies, 'off');
+  for (const enabled of [true, false]) {
+    toggle.checked = enabled; toggle.dispatchEvent(new Event('change'));
+    for (const id of ['itokawa', 'sun', 'saturn']) {
+      shell.setObject({ id, name: id, apply() {}, dispose() {} });
+      assert.equal(toggle.checked, enabled);
+      assert.equal(f.documentTarget.body.dataset.asteroidBodies, enabled ? 'on' : 'off');
+      assert.equal(f.selectors.element('.planet-heliosphere-setting').checked, false);
+    }
+  }
+  assert.deepEqual(changes, [true, false]);
+  shell.destroy();
+  toggle.dispatchEvent(new Event('change'));
+  assert.deepEqual(changes, [true, false]);
+  assert.ok(f.elements.every(element => element.listeners.size === 0));
 });
 
 test('Asteroids Orbits starts off and retains its independent preference across body navigation', () => {
@@ -757,5 +779,31 @@ test('a Milky Way breadcrumb previews its own card and preserves the search quer
   assert.equal(search.value, 'moon');
   cancel();
   assert.equal(search.value, 'moon');
+  shell.destroy();
+});
+
+test('camera handoffs retain filtered results and reset only a scrolled results panel', () => {
+  const f = fixture(), browser = f.selectors.element('.planet-object-browser');
+  const results = browser.requireSelector('#object-category-results');
+  let scrollTop = 0, scrollWrites = 0, countWrites = 0;
+  Object.defineProperty(results, 'scrollTop', { get: () => scrollTop, set(value: number) { scrollTop = value; scrollWrites++; } });
+  for (const tab of browser.querySelectorAll('[data-object-tab]')) {
+    Object.defineProperty(tab.requireSelector('.planet-object-tab-count'), 'textContent', { get: () => '', set() { countWrites++; } });
+  }
+  const shell = f.mount(), listeners: CameraNotifications = new Set();
+  shell.setOverview(true);
+  const publishedCounts = countWrites;
+  shell.setCamera(shellCamera(() => worldAt(context.volume.fadeStartDistanceM * .9), listeners));
+  shell.setOverview(true);
+  assert.equal(countWrites, publishedCounts, 'The same catalogue query is not republished at camera handoff');
+  assert.equal(scrollWrites, 0, 'An unscrolled catalogue never triggers a synchronous scroll reset');
+  scrollTop = 120;
+  results.dispatchEvent(new Event('scroll'));
+  shell.setOverview(false);
+  assert.equal(scrollTop, 0, 'Closing a scrolled catalogue restores its next opening position');
+  assert.equal(scrollWrites, 1);
+  shell.setOverview(true);
+  assert.equal(browser.hidden, false, 'Cached results reopen without another filter');
+  assert.equal(countWrites, publishedCounts);
   shell.destroy();
 });

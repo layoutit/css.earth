@@ -5,11 +5,9 @@ const objectControls = await readPreparedFixture("mercury", "controls");
 export const browserProfile = createObjectBrowserProfile({
   id: "mercury", controls: objectControls,
   audit: Object.freeze({
+    // The surface maps are prepared silhouette levels, not a density pair:
+    // mount uses the 1x level and refines to @2x by projected size.
     preparedAssetPairs: Object.freeze([
-      Object.freeze({
-        one: "/scenes/mercury/mercury-surface-normal.webp",
-        two: "/scenes/mercury/mercury-surface-normal@2x.webp",
-      }),
       Object.freeze({
         one: "/scenes/mercury/mercury-poles.webp",
         two: "/scenes/mercury/mercury-poles@2x.webp",
@@ -31,7 +29,7 @@ export const browserProfile = createObjectBrowserProfile({
       defaultId: "normal",
       slowId: "enhanced",
       winnerId: "topography",
-      slowAsset: "/scenes/mercury/mercury-surface-enhanced@2x.webp",
+      slowAsset: "/scenes/mercury/mercury-surface-enhanced@2x.jpg",
       preReadyDisabled: true,
     }),
     retained: Object.freeze({

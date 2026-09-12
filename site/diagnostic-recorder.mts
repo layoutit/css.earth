@@ -117,6 +117,9 @@ export function mountDiagnosticRecorder({ documentTarget: d, windowTarget: w, re
     const camera = readCamera();
     const view = call(property(runtime, 'runtime'), 'view');
     const requestedCamera = camera?.navigation?.capture() ?? null;
+    // The shared world presents outside the detail stage; report both owners.
+    const detailGeometry = geometry();
+    const worldGeometry: unknown = call(Reflect.get(w, '__cssEarthUniverse'), 'geometry');
     return {
       active: id ?? null, selected: property(app, 'selectedObjectId') ?? null, overview: property(app, 'overview') ?? null,
       mountedObjects: property(app, 'mountedObjectCount') ?? null, lifecycle: property(app, 'lifecycle') ?? null,
@@ -125,7 +128,8 @@ export function mountDiagnosticRecorder({ documentTarget: d, windowTarget: w, re
       framePublication: call(property(runtime, 'camera'), 'publication'), worldFrames: call(Reflect.get(w, '__cssEarthUniverse'), 'frames'),
       view, selection: call(property(runtime, 'runtime'), 'selection') ?? null,
       resources: call(property(runtime, 'runtime'), 'resources') ?? null, materials: call(property(runtime, 'material'), 'state') ?? null,
-      geometry: geometry(),
+      geometry: sumGeometry(detailGeometry, worldGeometry),
+      geometryOwners: { detail: detailGeometry, world: worldGeometry ?? null },
     };
   };
   const api = createDiagnosticRecorder({ windowTarget: w, button, capture,
@@ -137,4 +141,13 @@ export function mountDiagnosticRecorder({ documentTarget: d, windowTarget: w, re
     } });
   Reflect.set(w, '__cssEarthRecorder', api);
   return { destroy() { api.destroy(); if (Reflect.get(w, '__cssEarthRecorder') === api) Reflect.deleteProperty(w, '__cssEarthRecorder'); } };
+}
+
+/** Detail and world counters share keys; a missing owner passes through. */
+function sumGeometry(detail: unknown, world: unknown): unknown {
+  if (typeof detail !== 'object' || detail === null || typeof world !== 'object' || world === null) return detail;
+  return Object.fromEntries(Object.entries(detail).map(([key, value]) => {
+    const other: unknown = Reflect.get(world, key);
+    return [key, typeof value === 'number' && typeof other === 'number' ? value + other : value];
+  }));
 }

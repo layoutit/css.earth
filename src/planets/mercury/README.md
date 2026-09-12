@@ -14,6 +14,19 @@
 
 No dated test report is cited in the existing source notes.
 
+The [presentation compiler test](../../renderers/css/preparation/presentation/presentation.test.ts) checks Mercury's surface texture levels: their thresholds, a startup list with only level 0, and a level-0 mount URL. Regenerating Mercury for that change left every public image byte-identical.
+
+JPEG surface maps, compared with the lossy WebP maps they replaced (2026-09-11, on the change that introduced them). Mismatch is pixelmatch at threshold 0.1; PSNR is over RGB. Decode is the median `createImageBitmap` time in headless Chrome 152 on macOS. All other public images stayed byte-identical.
+
+| Map | WebP | JPEG | Mismatch | PSNR | Decode, WebP → JPEG |
+| --- | --- | --- | --- | --- | --- |
+| Monochrome 1x | 0.83 MB | 0.98 MB | 0 px (0.000%) | 36.7 dB | 46 → 12 ms |
+| Monochrome @2x | 3.88 MB | 4.04 MB | 0 px (0.000%) | 37.0 dB | 200 → 45 ms |
+| Enhanced 1x | 1.33 MB | 1.38 MB | 12 px (0.000%) | 32.5 dB | 71 → 14 ms |
+| Enhanced @2x | 5.61 MB | 5.27 MB | 0 px (0.000%) | 33.9 dB | 307 → 63 ms |
+| Topography 1x | 1.14 MB | 1.23 MB | 4 px (0.000%) | 31.9 dB | 76 → 17 ms |
+| Topography @2x | 3.58 MB | 3.80 MB | 0 px (0.000%) | 34.4 dB | 189 → 41 ms |
+
 ## Known problems
 
 The interior’s shape shading is illustrative in both exterior-lighting states.
@@ -36,6 +49,8 @@ Filled enhanced-color poles are not direct observations. The 366 km rendered out
 - Surface spectrum: a 326-point, 350–1000 nm global area-weighted mean prepared from M. D'Amore's DLR/Zenodo MESSENGER MASCS one-degree spectral cube (DOI `10.5281/zenodo.7433033`, CC-BY-4.0). The committed snapshot records the exact 197,099,868-byte archive identity, aggregation rule, parsed counts, and the archive/record count discrepancy.
 - Atmospheric context: a pinned NASA GSFC Planetary Spectrum Generator configuration explicitly reports `ATMOSPHERE-STRUCTURE` as `None`. Mercury's thin exosphere is described separately, so the object package deliberately publishes no temperature-pressure chart.
 - Background sky and Sun: ESO's 6000-by-3000 `eso0932a` photographic full-sky panorama by S. Brunier, licensed CC-BY-4.0, is projected during preparation into six 1024-square retained CSS cubemap faces and six 2048-square DPR-2 faces. The shared Venus cubic-sky standard owns the fixed black point 8, gamma 1.2, gain 0.6, wrapped Gaussian diffuse separation, registered Galactic orientation, inverse camera response, weak 0.12 field-of-view zoom response, and Sun presentation. The exact locally retained Google Maps Sun oracle input is median-filtered and levelled once, then direction-space composited into the six prepared faces without a radial mask. It is not a runtime billboard or overlay. The HYG v4.1 subset by David Nash/Astronexus (CC-BY-SA-4.0) remains the coordinate-registration audit; it does not render a second star layer. This is a photographed full sky and presentation-derived Sun direction, not an epoch-correct Mercury observer sky or ephemeris claim.
+- Surface texture levels: the [presentation recipe](source/preparation/presentation.json) declares two prepared levels for each exterior lens. They reuse the raster outputs: the 2080-by-1536 maps (2048 texels around the equator) and their 4160-by-3072 @2x versions. Mount and startup decode only the smaller map. The shared selection switches to @2x once the projected disc is at least 326 CSS pixels across, where the smaller map would give fewer than 2 texels per CSS pixel at the disc centre. It switches back below 261 pixels (20% hysteresis). This is Earth's rule; it ignores device DPR and resamples nothing at runtime ([method](../../renderers/css/preparation/presentation/surface-texture-levels.ts)).
+- Surface map format: the [raster recipe](source/preparation/raster.json) writes the three lens maps as baseline JPEG at quality 90 with sharp's libjpeg-compatible settings. The monochrome map is one-channel grayscale; the colour maps use 4:2:0 chroma subsampling. Each is encoded from the same prepared raster as the earlier lossy WebP, not from the WebP. Chrome decodes them in about a fifth to a quarter of the WebP time; progressive mozjpeg files were smaller but decoded about twice as slowly. Decode time, not file size, sets the frame held when the view switches to @2x. Lens thumbnails, billboard colours, poles, lighting and sky are unchanged.
 - Renderer dimensions: the OpenSpace Mercury globe declaration at commit `56e29b54b8592084ff1fef47c2e08de0b22ce516`.
 - Prepared lighting: exact Oren-Nayar and shaded-color excerpts from OpenSpace's pinned globe shader. Mercury uses its zero-roughness Lambert result, 0.05 ambient term, and 0.0–0.1 terminator smoothstep without an atmospheric or limb term. Preparation stores 256 complete light-view phase frames at each DPR. The camera transforms the same fixed direction used by the baked cube Sun, selects the nearest prepared phase from view-space light Z, and rotates that retained overlay to the same view-space azimuth; no lighting pixels are calculated at runtime. The optional shadowless presentation reuses the final view-aligned frame with a declared 0.35 flood-light limb floor. This limits its center-to-limb lighting ratio to about 2.9:1, preserving spherical curvature without the near-black edge treatment of the directional source light. This presentation-only floor does not change any directional-light frame.
 - Title vector: Inter Variable 4.001 at commit `9221beed3`, used only during preparation.

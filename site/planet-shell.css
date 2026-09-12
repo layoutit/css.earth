@@ -1280,7 +1280,6 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   line-height: 18px;
   text-align: left;
   cursor: pointer;
-  transition: color 120ms ease;
 }
 
 .planet-observation-control:hover,

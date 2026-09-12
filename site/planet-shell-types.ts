@@ -96,7 +96,6 @@ export interface Resource {
 }
 
 export interface Props {
-  deferMissionContent?: boolean;
   navigation?: boolean;
   objectId: string;
   destinations?: { searchLabel: string; description: string; };

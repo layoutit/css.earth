@@ -1,2 +1,0 @@
-// The checked TypeScript owner is shared with the renderer.
-export { GOOGLE_EARTH_DRAG_INERTIA, googleEarthInteractionTrackball, googleEarthDirectAngularDegreesPerTrackballRadius, directPitchResponseForZoom, createGoogleEarthDragHistory, resetGoogleEarthDragHistory, recordGoogleEarthDragSample, projectGoogleEarthTrackballDelta, estimateGoogleEarthDragThrow, advanceGoogleEarthDragThrow } from "@cssearth/engine";

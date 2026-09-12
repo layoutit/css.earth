@@ -20,8 +20,6 @@
 }
 
 .planet-heliocentric-orbit {
-  --planet-orbit-line-thickness: 1.5px;
-  --planet-orbit-line-color: rgba(255, 243, 224, 0.6);
   position: absolute;
   z-index: 2;
   inset: 0;
@@ -43,9 +41,9 @@
   left: 50%;
   display: block;
   width: 1px;
-  height: var(--planet-orbit-line-thickness);
-  margin-top: calc(var(--planet-orbit-line-thickness) / -2);
-  background-color: var(--planet-orbit-line-color);
+  height: 1.5px;
+  margin-top: -0.75px;
+  background-color: rgba(255, 243, 224, 0.6);
   transform-origin: 0 50%;
   pointer-events: none;
 }
@@ -66,11 +64,15 @@
 /* Only the other planets' orbit pieces fade as the camera dollies out.
    Planetary points and captions remain in the celestial layer. */
 .planet-heliocentric-system {
-  --planet-orbit-line-thickness: 1px;
-  --planet-orbit-line-color: rgba(255, 243, 224, 0.42);
   position: absolute;
   inset: 0;
   pointer-events: none;
+}
+
+.planet-heliocentric-system > .planet-heliocentric-system-orbit-piece {
+  height: 1px;
+  margin-top: -0.5px;
+  background-color: rgba(255, 243, 224, 0.42);
 }
 
 .planet-heliocentric-system-markers {
@@ -114,10 +116,10 @@
   inset: 0;
   /* The shell's navigation typography (its UI stack, weight and secondary
      text colour), sized by the caption policy's cap height. */
-  font-family: var(--shell-ui-font);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-weight: 400;
   line-height: 1.3;
-  color: var(--shell-text-secondary);
+  color: #b0b0b0;
   pointer-events: none;
 }
 
@@ -137,7 +139,7 @@
 }
 
 .planet-heliocentric-caption {
-  opacity: var(--planet-caption-opacity, 0);
+  opacity: attr(data-caption-opacity type(<number>), 0);
 }
 
 .planet-heliocentric-caption[data-object-navigate][aria-disabled="false"] {

@@ -34,17 +34,25 @@ export function createCameraViewport(stage: HTMLElement, previewElement: HTMLEle
     }
     return changed;
   };
+  const refresh = () => {
+    if (destroyed || projections.size === 0) return;
+    if (measure()) for (const listener of listeners) listener();
+  };
   const invalidate = () => {
     // Keep the last published measurement until the layout owner refreshes it.
     // Sidebar content resizes must not force an incoming scene to measure DOM.
     if (destroyed || frame !== null || projections.size === 0) return;
     frame = view.requestAnimationFrame(() => {
       frame = null;
-      if (destroyed) return;
-      if (measure()) for (const listener of listeners) listener();
+      refresh();
     });
   };
-  const observer = new view.ResizeObserver(invalidate);
+  // ResizeObserver runs after layout. Measure here while geometry is current,
+  // instead of next frame after camera/scene writes have dirtied style again.
+  const observer = new view.ResizeObserver(() => {
+    if (frame !== null) { view.cancelAnimationFrame(frame); frame = null; }
+    refresh();
+  });
   observer.observe(stage);
   if (previewElement) observer.observe(previewElement);
   view.addEventListener('resize', invalidate, { passive: true });

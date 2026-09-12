@@ -1,8 +1,8 @@
 import { expect, it } from 'vitest';
-import prepared from '../../../objects/stellar-neighbourhood/prepared/stars.json' with { type: 'json' };
-import { selectPreparedPointField, selectVisiblePreparedStars, type Node, type Point } from '@cssearth/engine';
+import { selectPreparedPointField, selectVisiblePreparedStars } from '@cssearth/engine';
+import { readCanonicalPointField } from '../preparation/stars/canonical-point-field-fixture.js';
 
-const field = (prepared as { data: { stars: readonly Point[]; nodes: readonly Node[] } }).data;
+const field = readCanonicalPointField();
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1] as const;
 
 it('selects the real 109389-star hierarchy at four observer distances', () => {

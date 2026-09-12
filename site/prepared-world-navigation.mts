@@ -13,9 +13,9 @@ interface Timing {mark(name: string): void;}
 interface TargetRequest {objectId: string; fromId: string; mount?: ShellCamera | null; force?: boolean;}
 export interface WorldHandoff {mountOptions: Partial<MountOptions>; afterMount(mount: ObjectSceneLifecycle, options: {signal: AbortSignal}): Promise<void>;}
 interface FocusRequest {objectId: string; mount: ShellCamera; signal: AbortSignal; reducedMotion?: boolean; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; timing?: Timing;}
-interface PrepareRequest {fromId: string; toId: string; fromMount: ShellCamera | null; toFactory: SceneFactory | Promise<SceneFactory>; signal: AbortSignal; reducedMotion?: boolean; url?: string | URL | null; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; preserveView?: boolean; presentWorld?: ((world: WorldCamera, optics: Optics) => void) | null; cameraViewport?: Parameters<NonNullable<SceneFactory['navigation']>['prepare']>[0]['cameraViewport']; timing?: Timing;}
+interface PrepareRequest {fromId: string; toId: string; fromMount: ShellCamera | null; toFactory: SceneFactory | Promise<SceneFactory>; signal: AbortSignal; reducedMotion?: boolean; url?: string | URL | null; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; preserveView?: boolean; presentWorld?: ((world: WorldCamera, optics: Optics, options: { signal: AbortSignal; commit?: () => void }) => Promise<boolean> | void) | null; cameraViewport?: Parameters<NonNullable<SceneFactory['navigation']>['prepare']>[0]['cameraViewport']; timing?: Timing;}
 interface FlightCheckpoint {world: WorldCamera; elapsedS: number; time?: number;}
-interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera) => void; stopWhen?: (elapsedS: number) => boolean;}
+interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera) => void; stopWhen?: (elapsedS: number) => boolean;}
 
 import { CENTER_SELECTION_DURATION_SECONDS } from './runtime-policy.mts';
 import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, CLASSIFICATION_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
@@ -145,7 +145,9 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         ? detailHandoffTime(flight, from, source.frame, optics) : 0;
       // A replacement can arrive while the previous detail is still activating.
       // Its retirement must not retire the application's camera progression.
-      const departureOwner = source ?? (presentWorld ? { apply(world: WorldCamera) { presentWorld(world, optics); } } : null);
+      const departureOwner = source ?? (presentWorld ? { apply(world: WorldCamera) {
+        return presentWorld(world, optics, { signal: controller.signal });
+      } } : null);
       const approachLimitS = departureOwner && !reducedMotion
         ? destinationDetailTime(flight, from, targetFrame, optics) : 0;
       const controller = new AbortController();
@@ -212,13 +214,19 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         // of a detailed object. Keep presenting the coarse world while the
         // destination activates its prepared groups over successive paints.
         let incomingOwner: ObjectWorldNavigation | null = null, detailReady = false;
+        const activation = new AbortController();
+        const activationSignal = AbortSignal.any([controller.signal, activation.signal]);
         const continuation = presentWorld && !reducedMotion && checkpoint.elapsedS < flight.durationS
           ? animateWorldFlight({ owner: { apply(world: WorldCamera) {
-              incomingOwner?.apply(world);
-              if (!detailReady) presentWorld(world, optics);
+              if (detailReady) return incomingOwner?.apply(world, { signal: controller.signal });
+              // The activating detail and the surrounding world share the
+              // worker's publication, instead of racing two camera owners.
+              return presentWorld(world, optics, { signal: activationSignal,
+                commit: () => incomingOwner?.apply(world) });
             } }, from, flight, anchors, signal: controller.signal,
             startElapsedS: checkpoint.elapsedS, startTime: checkpoint.time ?? null,
-            limitElapsedS: () => detailReady ? flight.durationS : Math.max(checkpoint.elapsedS, approachLimitS),
+            // The approach holds only until the incoming detail is fully active.
+            limitElapsedS: () => detailReady || incomingOwner?.detailActivated?.() ? flight.durationS : Math.max(checkpoint.elapsedS, approachLimitS),
             windowTarget, documentTarget, onPaint }) : null;
         continuation?.catch(() => {});
         return {
@@ -237,6 +245,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
               timing.mark('mounted');
               if (continuation) {
                 incomingOwner = mount.navigation; detailReady = true;
+                activation.abort();
                 incomingOwner.apply(lastCamera ?? from);
                 await continuation;
               } else if (checkpoint.elapsedS < flight.durationS) {
@@ -349,6 +358,7 @@ export function animateWorldFlight({ owner, from, flight, anchors, signal, reduc
         const permittedEndS = reducedMotion ? endElapsedS : limitElapsedS();
         const requestedElapsedS = reducedMotion ? endElapsedS
           : Math.min(endElapsedS, permittedEndS, startElapsedS + (time - started) / 1000);
+        const previousElapsed = elapsedS;
         elapsedS = reducedMotion ? requestedElapsedS
           : advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample);
         // At extreme range ratios the source curve reaches its exact terminal
@@ -358,9 +368,22 @@ export function animateWorldFlight({ owner, from, flight, anchors, signal, reduc
         if (endElapsedS === flight.durationS && permittedEndS >= endElapsedS &&
             sample.progress === 1) elapsedS = endElapsedS;
         const world = worldSample(flight, from, elapsedS, sample);
-        if (publishedElapsed !== elapsedS) { owner.apply(world); onPaint(world); publishedElapsed = elapsedS; }
-        if (elapsedS >= endElapsedS || stopWhen(elapsedS)) finish(null, { world, elapsedS, time });
-        else frameId = windowTarget.requestAnimationFrame(paint);
+        const advance = (shown = true, continueNow = false) => {
+          if (finished) return;
+          if (!shown) elapsedS = previousElapsed;
+          else {
+            if (publishedElapsed !== elapsedS) { onPaint(world); publishedElapsed = elapsedS; }
+            if (elapsedS >= endElapsedS || stopWhen(elapsedS)) { finish(null, { world, elapsedS, time }); return; }
+          }
+          // An asynchronous publication already crossed its presentation rAF.
+          // Plan the next pose now, so a second admission rAF cannot halve the
+          // flight cadence. A stationary readiness hold still sleeps on rAF.
+          if (continueNow && shown) paint(windowTarget.performance.now());
+          else frameId = windowTarget.requestAnimationFrame(paint);
+        };
+        const publication = publishedElapsed !== elapsedS ? owner.apply(world, { signal }) : undefined;
+        if (publication && typeof publication.then === 'function') publication.then(shown => advance(shown, true)).catch(finish);
+        else advance();
       } catch (error) { finish(error); }
     }
     signal.addEventListener('abort', abort, { once: true });

@@ -19,8 +19,18 @@ try {
         .map(node => node.outerHTML).sort(),
     });
     const initialMetadata = headMetadata(document);
-    const fragmentText = await fetch('/navigation/venus/').then(response => response.text());
-    if (new DOMParser().parseFromString(fragmentText,'text/html').querySelector('template[data-object-card], [data-solar-system-results]')) throw new Error('Fragment repeats resident cards/catalog');
+    const { navigationFragments } = await import('/site/navigation-fragments.mts');
+    if (document.querySelector('template[data-object-card]')) throw new Error('Route ships a resident card bank');
+    // Count requests at the page fetch the shared fragment cache calls.
+    let fragmentRequests = 0;
+    const nativeFetch = window.fetch;
+    window.fetch = (input: RequestInfo | URL, init?: RequestInit) => {
+      if (String(input) === '/navigation/venus/') fragmentRequests++;
+      return nativeFetch.call(window, input, init);
+    };
+    navigationFragments(window).prefetch('venus');
+    const fragment = await navigationFragments(window).get('venus');
+    if (fragment.querySelector('template[data-object-card], [data-solar-system-results]')) throw new Error('Fragment repeats resident cards/catalog');
     const expectedMetadata = headMetadata(new DOMParser().parseFromString(await fetch('/venus/').then(response => response.text()), 'text/html'));
     const selectors = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content', '.planet-input-surface'];
     const retained = selectors.map(selector => document.querySelector(selector));
@@ -34,6 +44,7 @@ try {
     const controller = new AbortController();
     const transport = createNavigationContent({ documentTarget: document, windowTarget: window });
     const content = await transport.load(object('venus'), { signal: controller.signal });
+    window.fetch = nativeFetch;
     const afterPreparation = getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')).cssText + getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')).perspective + getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')).width;
     const surfaceAfterPreparation = getComputedStyle(window.__cssearthTest.required(leaf, 'computed style element')).backgroundImage;
     window.dispatchEvent(new Event('pagehide'));
@@ -64,6 +75,7 @@ try {
       selectedTitle: window.__cssearthTest.element('.planet-information-panel .planet-title').getAttribute('aria-label'),
       aboutLabelBound: Boolean(document.getElementById(window.__cssearthTest.required(window.__cssearthTest.element('.explorer-about-panel').getAttribute('aria-labelledby'), 'about label reference'))),
       breadcrumbs: breadcrumbs(),
+      fragmentRequests,
     };
     const reverse = await transport.load(object('mercury'), { signal: new AbortController().signal });
     shell.setObject(reverse);
@@ -96,6 +108,7 @@ try {
   assert.equal(proof.first.activeBrowser, 'venus');
   assert.equal(proof.first.selectedTitle, 'Venus');
   assert.equal(proof.first.aboutLabelBound, true);
+  assert.equal(proof.first.fragmentRequests, 1, 'The destination load reuses the intent-fetched fragment');
   for (const transition of [proof.first, proof.second]) {
     assert.ok(transition.breadcrumbs.includes('/sun/?overview=milky-way'));
     assert.ok(transition.breadcrumbs.includes('/sun/?overview=solar-system'));
@@ -105,5 +118,5 @@ try {
   assert.equal(proof.second.surfaceStylesRetained, true);
   assert.equal(proof.second.selectedSurface, proof.first.surfaceBefore,
     'Returning to Mercury must restore its image using the retained shared stylesheet.');
-  console.log(JSON.stringify({ status: 'passed', checks: 19, ...proof }));
+  console.log(JSON.stringify({ status: 'passed', checks: 20, ...proof }));
 } finally { await browser.close(); }

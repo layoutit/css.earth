@@ -197,7 +197,6 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   background: transparent;
   box-shadow: none;
   color: var(--explorer-control-text);
-  transition: border-color 120ms ease, color 120ms ease;
 }
 
 .explorer-shell-header .planet-sidebar-search-icon {
@@ -308,7 +307,6 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   white-space: nowrap;
   cursor: pointer;
   touch-action: manipulation;
-  transition: border-color 120ms ease, color 120ms ease;
 }
 
 .explorer-shell-header .material-symbol {

@@ -31,7 +31,7 @@ import { createSceneLifetime } from "@cssearth/engine";
 import { sampleDestinationFlight } from "./destination-flight.mts";
 import { viewSunDirectionToPhysicalLightDirection, viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mts";
 import { createPerspectiveDolly } from "./perspective-dolly.mts";
-import { googleEarthDirectAngularDegreesPerTrackballRadius, googleEarthInteractionTrackball, directPitchResponseForZoom } from "./google-earth-drag-inertia.mts";
+import { directAngularDegreesPerTrackballRadius, interactionTrackball, directPitchResponseForZoom } from "./trackball-drag-inertia.mts";
 import { createPreparedWheelZoomControls } from "./prepared-wheel-zoom.mts";
 import { createCubicSkyCameraOrientation } from "./camera-orientation.mts";
 import { preparedScenePitch, clamp } from "@cssearth/engine";
@@ -66,14 +66,14 @@ export function createObjectInteractionControls({
   };
   try {
   const interactionTrackballMetrics = () =>
-    googleEarthInteractionTrackball(trackballMetrics());
+    interactionTrackball(trackballMetrics());
   const dragControls = createUnboundedMatrixDragControls({
     inputSurface,
     onError: fail,
     trackballMetrics: () => Object.freeze({
       ...interactionTrackballMetrics(),
       angularDegreesPerTrackballRadius:
-        googleEarthDirectAngularDegreesPerTrackballRadius(camera.state.zoom),
+        directAngularDegreesPerTrackballRadius(camera.state.zoom),
       pitchResponse: directPitchResponseForZoom(camera.state.zoom),
     }),
     flyToTrackballMetrics: () => Object.freeze({

@@ -25,7 +25,7 @@ export async function decodePreparedCssObject(descriptorInput: unknown, bytes: A
   catch (cause) { throw new TypeError(`Prepared object ${descriptor.id} is not valid UTF-8 JSON.`, { cause }); }
   const prepared = readPreparedObject(value, descriptor, input => {
     if (record(input, 'runtime plan').id !== descriptor.id) throw new TypeError(`Prepared CSS definition does not match object ${descriptor.id}.`);
-    return parsePreparedObjectRuntime(input);
+    return parsePreparedObjectRuntime(input, { parsedJson: true });
   });
   return prepared.data;
 }
