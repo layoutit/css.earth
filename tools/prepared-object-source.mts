@@ -11,6 +11,9 @@ import { requirePreparedControlSource, requirePreparedDefinitionSource, readPrep
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../src/platform/prepared-schema.mts';
 import { requireObjectRuntimeDefinition } from './object-runtime-contract.mts';
 import { requireAuthoredWorldFrame } from './authored-world-frame.mts';
+import { sharedTwinName } from '../src/platform/prepared-shared.mts';
+import { inlineSharedFromBanks } from '../src/platform/prepared-shared-banks.mts';
+import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
 
 export function requireDescriptorAdapterSource(text: string, exported: string): string {
   const ast = parseRuntimeSource(text, 'site/packaged-object-runtime.mts');
@@ -234,6 +237,8 @@ async function readAuthoredDefinition({ objectId, descriptor, root, source, clos
   const runtime = requireRecord(JSON.parse(await source(runtimePath)));
   const scene: unknown = JSON.parse(await source(scenePath));
   closure.add(runtimePath); closure.add(scenePath);
+  // The full files are restored from the checked-in twins; ownership follows the twins too.
+  for (const file of ['runtime.json', 'scene.json', 'sky.json']) closure.add(resolve(preparation, sharedTwinName(file)));
   if (runtime.id !== objectId || runtime.schema !== PREPARED_OBJECT_RUNTIME_SCHEMA) throw new TypeError('Authored runtime identity is invalid.');
   await requireAuthoredWorldFrame({ descriptor, scene, runtime, directory, readText: source, closure });
   return requireObjectRuntimeDefinition(runtime, { objectId });
@@ -245,7 +250,7 @@ export async function readDescriptorDefinition({ objectId, descriptorFile, root,
     !descriptor.properties || isArray(descriptor.properties) || typeof descriptor.properties !== 'object' ||
     Object.keys(descriptor).some(key => !['schema', 'id', 'type', 'properties', 'prepared'].includes(key))) throw new TypeError('Registered JSON descriptor identity or shape is invalid.');
   const reference = requireRecord(descriptor.prepared);
-  if (reference?.format !== 'cssearth-css-object@4' || !/^[a-f0-9]{64}$/.test(typeof reference.sha256 === 'string' ? reference.sha256 : '') ||
+  if (reference?.format !== PREPARED_CSS_OBJECT_FORMAT || !/^[a-f0-9]{64}$/.test(typeof reference.sha256 === 'string' ? reference.sha256 : '') ||
     typeof reference.url !== 'string' || Object.keys(reference).some(key => !['format', 'url', 'sha256'].includes(key))) throw new TypeError('JSON descriptor requires its pinned prepared CSS artifact.');
   const descriptorDirectory = dirname(descriptorPath);
   const payloadPath = resolve(descriptorDirectory, reference.url);
@@ -260,7 +265,9 @@ export async function readDescriptorDefinition({ objectId, descriptorFile, root,
   const closure = new Set([descriptorPath, payloadPath]);
   const authored = await readAuthoredDefinition({ objectId, descriptor, root, source, closure });
   if (authored) {
-    if (!isDeepStrictEqual(payload.data, authored)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
+    // The transport references shared banks; the checked runtime is their inlined form.
+    const transported = await inlineSharedFromBanks(root, payload.data, { read: source, visited: closure });
+    if (!isDeepStrictEqual(transported, authored)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
     return { plan: authored, definition: authored, closure, payloadPath };
   }
   const directory = resolve(root, `src/planets/${objectId}`);
