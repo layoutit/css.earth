@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4480ebdf809e478d65de79ae42263846b7122b4f20d5cb8167ddbae3e9e0294b"
+    "sha256": "f3975815e1ed15baec2ad0f1f82f16ee6b43e6815a92453b82f06d4cef844587"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
@@ -570,7 +570,7 @@
         "kind": "local",
         "reason": "Byte pins and source qualifications for the surface-place compilation."
       },
-      "sha256": "93198869010161d64779eaae9c299eee40ea49ea86e13b5301a6e7559a3b1fb0",
+      "sha256": "4ec0506d8e02b4fcc8fd5bb42bfb9584c0ac9c0ca2b703b268d335bd92a1a22e",
       "bytes": 1010,
       "dependencies": [],
       "verification": "manifest-pin",
@@ -616,7 +616,7 @@
           }
         ]
       },
-      "sha256": "599239a0f268f04dfc90bc18a9c0129ccee30d5bb723a2d0ef87100c4ae0e4fa",
+      "sha256": "8c9a1e0d2803bed6d99a69492b943693ff5b5fecf9bf17b25654c17d1fb647ad",
       "bytes": 2066,
       "dependencies": [],
       "verification": "manifest-pin",
@@ -762,7 +762,7 @@
         {
           "url": "/scenes/comet-8p/comet-8p-features.json",
           "bytes": 3454,
-          "sha256": "6fd56cb5582b569a1d39ae6cd603e0908f9be97179228c7106aa3e1d6c960458",
+          "sha256": "9facda5bfcfcbfe502828c83e72538e1e479b96e1dae80007b1c96d56a9d7df0",
           "verification": "asset-manifest-pin"
         }
       ],

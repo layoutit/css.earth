@@ -18,6 +18,14 @@ export const SURFACE_FEATURES_CONFIG_SCHEMA = 'cssearth-surface-features@1';
 export const SURFACE_FEATURES_SOURCE_SCHEMA = 'cssearth-surface-features-source@1';
 export const PREPARED_SURFACE_FEATURES_SCHEMA = 'cssearth-prepared-surface-features@1';
 
+/** Sparse catalogues must not spread a handful of names across the entire zoom range.
+ * A floor of 200 keeps roughly ten unnoted names eligible at whole-body framing
+ * (share 0.43). Denser catalogues retain their existing progression. Actual label
+ * admission still checks projected feature size, facing, overlap and the label cap. */
+export function featureDiscoveryZoomShare(rank: number, count: number, noted = false): number {
+  return Math.min(1, Math.log10(1 + (noted ? rank / 4 : rank)) / Math.log10(Math.max(200, count)));
+}
+
 export type SurfaceFeatureKind = 'point' | 'linear' | 'region';
 /** Gazetteer descriptor-term codes and the label kind their geometry suggests: compact landforms get a point
  * marker and rim circle, elongated ones a linear label, extended terrains a region label. Recipes may override. */
@@ -629,14 +637,10 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   // Prepared priority: larger features label first; the runtime never re-ranks.
   const priority = (feature: PreparedSurfaceFeature) => priorityById.get(feature.id) ?? feature.diameterKm;
   features.sort((a, b) => priority(b) - priority(a) || b.diameterKm - a.diameterKm || a.name.localeCompare(b.name, 'en'));
-  // Discovery tiers: the largest names of a body appear from far away and the rest as the camera closes in. A name's tier
-  // is the logarithm of its prepared rank over the logarithm of the count, so ten names show at the whole body, about a
-  // hundred a quarter of the way in, a thousand at three quarters; a name with an encyclopedia article ranks four
-  // times higher (it is what people look for). Natural Earth names and spacecraft sites carry their own share.
-  // The whole-body view sits near 0.43 of the zoom range, so about ten names show there and the logarithm carries the rest to the closest view.
-  const tierOf = (rank: number, noted: boolean) => features.length <= 1 ? 0 : Math.min(1, Math.log10(1 + (noted ? rank / 4 : rank)) / Math.log10(features.length));
+  // Names with an encyclopedia article rank four times higher. Natural Earth
+  // names, spacecraft sites and mission landmarks retain their authored tiers.
   features.forEach((feature, rank) => {
-    const share = zoomShareById.get(feature.id) ?? tierOf(rank, feature.note !== undefined && feature.note.credit.startsWith('Wikipedia'));
+    const share = zoomShareById.get(feature.id) ?? featureDiscoveryZoomShare(rank, features.length, feature.note !== undefined && feature.note.credit.startsWith('Wikipedia'));
     (feature as { minimumZoomShare: number }).minimumZoomShare = round(share, 3);
   });
   if (!features.length) throw new TypeError('Gazetteer archive produced no labelled features.');

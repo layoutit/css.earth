@@ -26,7 +26,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "d0ec3bbfd36638a1f8cadda2f7544ae52cceed8dc2b0f1e33f7fe041aac31e8c"
+          "sha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02"
         },
         {
           "id": "title",
@@ -132,7 +132,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "71c5564deb0b891f495b8723fa8e2a30fafc2bf2785a6c6fb7fb1f0583d4d4c9"
+        "sha256": "3f26762e0821c07c5f4c3ce6738d3bd99432c8b54cf4f7c6f813fe8aefec9dc9"
       }
     },
     "catalog": {
@@ -152,7 +152,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f0c61a2b84a03368b370207bd35fdbbe5c75c196ffc49b7c531b10d06c48a343"
+    "sha256": "e06275ab63ebfe0fe47d482363f787024dbfad08e7e4ae958310b28d61f412ee"
   },
   "type": "layered-body",
   "id": "comet-9p"
