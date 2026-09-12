@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d44bee5d777efda8adb1fd8dba2ef27451c3d379843a30d24c808331db30632c"
+    "sha256": "4480ebdf809e478d65de79ae42263846b7122b4f20d5cb8167ddbae3e9e0294b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
   },
   "recipes": [
     {
@@ -358,6 +358,54 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "aa1ae823d931b7340cc3151355b2daa2170e235093c5aea59df20023d92a8db4",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": null,
+        "members": null,
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "comet-8p-features.json",
+        "publicBase": "/scenes/comet-8p/",
+        "target": {
+          "className": "comet-8p-body"
+        },
+        "lensIds": [
+          "model"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "IM"
+          ],
+          "linear": [
+            "RU"
+          ],
+          "region": [
+            "RE"
+          ]
+        },
+        "excludedTypeCodes": {},
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 20,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 32
+        },
+        "landmarks": {
+          "document": "landmarks.json",
+          "inputs": []
+        }
+      }
     }
   ],
   "sources": [
@@ -508,6 +556,72 @@
       "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-8p-features-manifest",
+      "path": "features/manifest.json",
+      "origin": "Byte pins and source qualifications for the surface-place compilation.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte pins and source qualifications for the surface-place compilation."
+      },
+      "sha256": "93198869010161d64779eaae9c299eee40ea49ea86e13b5301a6e7559a3b1fb0",
+      "bytes": 1010,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-8p-presentation-surface-map",
+      "path": "presentation/surface-map.json",
+      "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
+      },
+      "sha256": "c44248203014bbbaacb4b926763a747f4dc0fce5536d672bbeef191671ba4bac",
+      "bytes": 155,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-8p-features-landmarks",
+      "path": "features/landmarks.json",
+      "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1911-04897",
+            "role": "material",
+            "evidence": "src/planets/comet-8p/source/features/landmarks.json: per-place coordinates, descriptions and publication references; checked 2026-09-12."
+          }
+        ]
+      },
+      "sha256": "599239a0f268f04dfc90bc18a9c0129ccee30d5bb723a2d0ef87100c4ae0e4fa",
+      "bytes": 2066,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -615,9 +729,41 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3438,
-          "sha256": "c7914c3ea48c3b7e1af30f19283f212e5cdd0ab075605699e1a0b148f671031b",
+          "bytes": 3551,
+          "sha256": "580eb5479ea6a4eae8dc2817c14843dcf3a2a9a92c514ec64fbbc3bad3d613b4",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {}
+      },
+      "inputs": [
+        "comet-8p-features-manifest",
+        "comet-8p-presentation-surface-map",
+        "comet-8p-features-landmarks"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-8p/comet-8p-features.json",
+          "bytes": 3454,
+          "sha256": "6fd56cb5582b569a1d39ae6cd603e0908f9be97179228c7106aa3e1d6c960458",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

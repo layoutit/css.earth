@@ -52,5 +52,11 @@
   "sites": {
     "document": "sites.json",
     "inputs": []
+  },
+  "landmarks": {
+    "document": "landmarks.json",
+    "inputs": [
+      "geology/shap7-regions.vtk"
+    ]
   }
 }

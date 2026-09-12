@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": null,
+  "members": null,
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 0,
+  "output": "comet-9p-features.json",
+  "publicBase": "/scenes/comet-9p/",
+  "target": {
+    "className": "comet-9p-body"
+  },
+  "lensIds": [
+    "model",
+    "constraints",
+    "deep-impact",
+    "next"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "IM"
+    ],
+    "linear": [
+      "RU"
+    ],
+    "region": [
+      "RE"
+    ]
+  },
+  "excludedTypeCodes": {},
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 20,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 32
+  },
+  "landmarks": {
+    "document": "landmarks.json",
+    "inputs": []
+  }
+}

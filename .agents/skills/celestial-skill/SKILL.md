@@ -33,6 +33,17 @@ Explain meaningful model differences beside the dataset and qualify registration
 coverage and picking against the selected mesh. The [implementation map](references/implementation-map.md)
 locates the existing support for alternative models.
 
+Surface places also belong to a source frame. Use `source/preparation/features.json`
+and its pinned `landmarks` document for mission-defined regions, paper coordinates,
+or explicitly inferred model anatomy. Keep mission names distinct from IAU names.
+Derive region anchors from the released map and check them against the unchanged
+display mesh; a label point does not establish a region centre, size or boundary.
+For alternative meshes, select the matching prepared `surfaceHit.lensRanges`
+entry and expose those places only on that dataset. A shared body name does not
+make coordinates transferable between models. Keep approximate placement visible
+in the caption. Unresolved photograph-to-shape registration cannot establish a
+terrain landmark; neither can a camera direction alone.
+
 ## Scope for existing moon upgrades
 
 For Moons-owner follow-up proposals and PRs, keep existing body geometry,

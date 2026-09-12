@@ -9,7 +9,7 @@
 | Shape | ESA/RMOC MTP019 NAVCAM model | Reduced to 1,000 triangles. Default gray is an authored material, not measured color. |
 | OSIRIS | Eight calibrated orange-filter photographs: August 2014 and October–November 2015 | Grayscale composite with solar-distance, disk and approximate phase correction; not measured albedo. |
 | Albedo, spectral slope, absorption and ice | [Rosetta VIRTIS maps](https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/) | Reflectivity, its change with wavelength, infrared absorption and modeled ice. Registration near the neck is uncertain. |
-| Regions | [Thomas et al. (2018), v1](https://doi.org/10.17632/2845znt54k.1) | 26 named regions transferred from SHAP7 to the display mesh. |
+| Surface places | [Thomas et al. (2018)](https://doi.org/10.1016/j.pss.2018.05.019) and the [released SHAP7 regional map, v1](https://doi.org/10.17632/2845znt54k.1) | 26 named regional labels, plus the existing Agilkia and Abydos Philae sites. |
 | Geology | [ESA OSIRIS geological map, v1.0](https://doi.org/10.5270/esa-kokoti7) | Lines and dots mark mapped features; their display widths are not measured sizes. |
 
 The displayed rotation phase is arbitrary. Grid marks missing or rejected imagery.
@@ -29,6 +29,12 @@ Recorded results for the southern coverage update:
 - **Delivery:** a fresh installation verified all 56 runtime assets (21,933,880
   bytes) against their hashes, with no reused local files.
   [Delivery record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/67p-southern/runtime-delivery.json).
+- **Surface places, 2026-09-12:** preparation and the runtime parser accepted 28
+  places (26 regions and two existing Philae sites). Three focused unit tests
+  passed. On base `53b262bd` with this addition, browser checks covered searching
+  for Hapi, clicking Seth on the surface, and the Regions dataset.
+  [Captured Hapi card](evidence/surface-places.png). The published catalog was
+  downloaded and its byte count and SHA-256 verified; surface assets are unchanged.
 
 The wider recorded runs include two missing Europa originals, three Earth fixture
 failures and two registry-audit failures. The [report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-SOUTHERN-OSIRIS.md#verification-records)
@@ -36,7 +42,12 @@ separates those results from the comet checks. Earlier runs are retained below.
 
 ## Known problems
 
-Landing sites: the two Philae touchdown sites (Agilkia and Abydos) are labelled on the shape model (`source/features/sites.json`); 67P has no IAU nomenclature, so the feature catalogue carries sites only. Each coordinate quotes the ESA release or paper it was read from, in the body-fixed frame stated there; sites are unsized points and the caption shows the quoted sentence with its publisher.
+Surface places use the native, released SHAP7 regional map and Thomas et al.'s
+Table 1 names. The 26 regional points are representative on-region locations,
+not published centres or boundaries. They transfer to the unchanged 1,000-triangle
+RMOC display mesh only when the point is within 100 m of that surface. The two
+Philae sites remain unsized coordinates from their cited ESA release or paper.
+Neither set supplies IAU feature nomenclature.
 
 - Photographed shadows, seams and real seasonal differences remain. The composite
   spans a perihelion passage; it cannot measure surface change.
