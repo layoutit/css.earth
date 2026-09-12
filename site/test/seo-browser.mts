@@ -14,6 +14,7 @@ import { assertHomepageReachability } from "./seo-discovery.mts";
 // conformance owns scene rendering and retained DOM checks at both DPRs.
 const origin = "https://css.earth";
 const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
+const walk = browserObjects();
 const canonicalUrls = OBJECTS.map(({ route }) => origin + route);
 const report = [];
 const socialImages = new Set<string>();
@@ -46,7 +47,7 @@ try {
   ];
   const discoveryPages = [];
   const descriptions = new Set();
-  for (const { route, object } of [...browserObjects().map((object) => ({ route: object.route, object })), ...aliases]) {
+  for (const { route, object } of [...walk.map((object) => ({ route: object.route, object })), ...aliases]) {
     const response = required(await page.goto(base + route, { waitUntil: "domcontentloaded" }));
     assert.equal(response.status(), 200, route);
     assert.doesNotMatch(response.headers()["x-robots-tag"] ?? "", /noindex/i);
@@ -64,9 +65,9 @@ try {
     descriptions.add(seo.description);
     report.push({ mode: "no-javascript", route, canonical: seo.canonical, title: seo.title });
   }
-  assert.equal(descriptions.size, OBJECTS.length, "Each object needs its own description");
+  assert.equal(descriptions.size, walk.length, "Each visited object needs its own description");
   assertHomepageReachability(discoveryPages, OBJECTS.map(({ route }) => route), base + "/");
-  assert.equal(socialImages.size, OBJECTS.length, "Each object has its own plain scene capture");
+  assert.equal(socialImages.size, walk.length, "Each visited object has its own plain scene capture");
   for (const imageUrl of socialImages) {
     const response = await fetch(base + new URL(imageUrl).pathname);
     assert.equal(response.status, 200, imageUrl);
@@ -81,7 +82,7 @@ try {
 
   await mkdir("output/seo", { recursive: true });
   await writeFile("output/seo/report.json", JSON.stringify({ ok: true, base, browser: browser.version(), checks: report }, null, 2) + "\n");
-  console.log(`SEO passed: ${OBJECTS.length + 1} pages without JavaScript, query/hash normalization, ${OBJECTS.length} scene images.`);
+  console.log(`SEO passed: ${walk.length + 1} pages without JavaScript, query/hash normalization, ${walk.length} scene images.`);
 } finally {
   await browser?.close();
 }

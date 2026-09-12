@@ -74,6 +74,8 @@ try {
           minimapShown: document.querySelectorAll(".space-minimap").length > 0
             && getComputedStyle(test.required(test.element(".space-minimap"), "minimap style")).display !== "none",
           isolated: getComputedStyle(test.required(test.element('.planet-viewport'), 'computed style element')).isolation === 'isolate',
+          // The world presentation wraps the detail stage; the stage still has to live inside the viewport.
+          sceneInViewport: test.element('.planet-stage').closest('.planet-viewport') !== null,
           sceneParent: test.required(test.element('.planet-stage').parentElement,'scene parent').className,
           uiInScene: test.element('.planet-stage').querySelectorAll('.planet-sidebar, .explorer-shell-header, .planet-view-readout, .space-minimap').length,
           wordmarkSlot: box(".explorer-shell-wordmark"),
@@ -100,7 +102,8 @@ try {
         assert.deepEqual(result.stage, result.viewport, `${config.name}: scene fills its own viewport`);
         assert.deepEqual(result.input, result.viewport, `${config.name}: input uses the rendered viewport`);
         assert.deepEqual(result.overlays, result.viewport, `${config.name}: overlays share the bounded viewport`);
-        assert.equal(result.sceneParent, 'planet-viewport');
+        assert.equal(result.sceneInViewport, true, `${config.name}: the scene renders inside the viewport`);
+        assert.equal(result.sceneParent, 'planet-world-stage');
         assert.equal(result.isolated, true);
         assert.equal(result.uiInScene, 0, `${config.name}: UI stays outside the 3D scene`);
         near(result.stage.left, 0, "scene starts at the window edge");
