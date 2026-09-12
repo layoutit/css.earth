@@ -184,19 +184,6 @@ export function createApplicationWorldContext() {
         layer.setHiddenIndicators(asteroidIds);
         const diagnostics = DIAGNOSTICS_ENABLED ? createWorldContextDiagnostics(layer, frameQueue, presentationHost !== stage) : null;
         if (diagnostics) Reflect.set(target, '__cssEarthUniverse', diagnostics);
-        // Temporary diagnostic controls belong to the retained application owner.
-        const diagnosticControls = DIAGNOSTICS_ENABLED ? bindDiagnosticToggles(stage.ownerDocument, target, {
-          starfield(enabled) { layer.setStarfieldEnabled(enabled); },
-          minimap(enabled) {
-            minimap.setEnabled(enabled);
-            if (enabled && publication) minimap.publish(publication.world, publication.viewport);
-          },
-          asteroids(enabled) {
-            const hidden = enabled ? [] : asteroidIds;
-            layer.setHiddenBodies(hidden); minimap.setHiddenBodies(hidden);
-            if (publication) minimap.publish(publication.world, publication.viewport);
-          },
-        }) : null;
         return { ...layer, viewport, publish,
           connectNavigation: contextNavigation.connect,
           suspendFocus: contextNavigation.suspend, restoreFocus: contextNavigation.restore,
@@ -221,6 +208,15 @@ export function createApplicationWorldContext() {
           selectObject(id: string, frame: PreparedWorldCameraFrame) {
             layer.selectObject(id, frame);
             minimap.selectObject(frame);
+          },
+          setAsteroidBodiesEnabled(enabled: boolean) {
+            if (destroyed) return;
+            const hidden = enabled === true ? [] : asteroidIds;
+            layer.setHiddenBodies(hidden);
+            // The minimap shows the same asteroids, so the overview must agree
+            // with the main world. It only redraws on a fresh publication.
+            minimap.setHiddenBodies(hidden);
+            if (publication) minimap.publish(publication.world, publication.viewport);
           },
           setAsteroidOrbitsEnabled(enabled: boolean) {
             if (!destroyed) layer.setHiddenOrbits(enabled === true ? hiddenOrbitIds : [...hiddenOrbitIds, ...asteroidIds]);
@@ -250,7 +246,7 @@ export function createApplicationWorldContext() {
             inputSurface?.removeEventListener('objectrotationchange', rotationChanged);
             frameQueue.destroy(); framePlanner.destroy(); stagedFrame = null;
             if (diagnostics && Reflect.get(target, '__cssEarthUniverse') === diagnostics) Reflect.deleteProperty(target, '__cssEarthUniverse');
-            diagnosticControls?.destroy(); contextNavigation?.destroy(); minimap.destroy();
+            contextNavigation?.destroy(); minimap.destroy();
             viewport.destroy(); layer.destroy(); resources.destroy();
           },
         };
@@ -268,26 +264,4 @@ function createWorldContextDiagnostics(layer: ReturnType<ReturnType<typeof creat
   return Object.freeze({ inspect: layer.inspect, frames: frameQueue.stats, ...(geometry ? { geometry } : {}) });
 }
 
-const DIAGNOSTIC_TOGGLES = [
-  ['starfield', '[data-disable-starfield]'], ['minimap', '[data-hide-minimap]'], ['asteroids', '[data-hide-asteroids]'],
-] as const;
-
-/** A checked control turns its subsystem off until it is unchecked. */
-function bindDiagnosticToggles(documentTarget: Document, target: Window,
-  apply: Readonly<Record<(typeof DIAGNOSTIC_TOGGLES)[number][0], (enabled: boolean) => void>>) {
-  const bindings = DIAGNOSTIC_TOGGLES.flatMap(([name, selector]) => {
-    const input = documentTarget.querySelector<HTMLInputElement>(selector);
-    if (!input) return [];
-    const change = () => {
-      const enabled = !input.checked;
-      apply[name](enabled);
-      target.performance.mark(`cssEarth:${name}:enabled`, { detail: { enabled } });
-    };
-    input.disabled = false;
-    input.addEventListener('change', change);
-    if (input.checked) change();
-    return [{ input, change }];
-  });
-  return { destroy() { for (const { input, change } of bindings) { input.removeEventListener('change', change); input.disabled = true; } } };
-}
 export type WorldContextDiagnostics = ReturnType<typeof createWorldContextDiagnostics>;

@@ -45,9 +45,10 @@ function harness(controls: ObjectControls = moonControls, mutate: HarnessMutatio
   const settingInputs = (controls.settings?.controls ?? []).map(control => new Input({ name: control.name,
     type: control.kind === "toggle" ? "checkbox" : "range", checked: control.kind === "toggle" && control.checked, value: String(initial[control.name]) }));
   const motion = new Input({ name: "motion" }), contrast = new Input({ name: "skyContrast" }), heliosphere = new Input({ name: "heliosphere" });
+  const asteroidBodies = new Input({ name: "asteroidBodies" });
   const asteroidOrbits = new Input({ name: "asteroidOrbits" });
   const asteroidLabels = new Input({ name: "asteroidLabels" });
-  settingInputs.push(motion, contrast, heliosphere, asteroidOrbits, asteroidLabels);
+  settingInputs.push(motion, contrast, heliosphere, asteroidBodies, asteroidOrbits, asteroidLabels);
   const lensRoot = new Root(lensInputs), settingsRoot = new Root(settingInputs);
   const information: InformationPanel = { querySelector: selector => selector === ".planet-lenses" ? lensRoot : null };
   const document: HarnessDocument = { querySelector: selector => selector === ".planet-information-panel" ? information : selector === ".planet-lenses" ? lensRoot : settingsRoot };
@@ -62,7 +63,7 @@ function harness(controls: ObjectControls = moonControls, mutate: HarnessMutatio
   mutate({ lensInputs, settingInputs, stage, document, lensRoot });
   binding = createObjectControlBinding({ stage, controls, initialSelection: initial, getState: () => state,
     onAction(action) { actions.push(action); return actionImplementation(action); }, onError: error => errors.push(error) } satisfies ObjectControlBindingOptions);
-  return { binding, lensInputs, settingInputs, lensRoot, settingsRoot, motion, contrast, heliosphere, asteroidOrbits, asteroidLabels, errors, actions, initial,
+  return { binding, lensInputs, settingInputs, lensRoot, settingsRoot, motion, contrast, heliosphere, asteroidBodies, asteroidOrbits, asteroidLabels, errors, actions, initial,
     setState(next: ObjectSelectionState) { state = next; binding.publish(state); }, state: () => state,
     onAction(callback: (action: ObjectAction) => unknown) { actionImplementation = callback; },
     ready() { state = { ...state, committed: initial, desired: initial, pending: false }; binding.setReady(); },
@@ -72,9 +73,10 @@ function harness(controls: ObjectControls = moonControls, mutate: HarnessMutatio
 for (const object of OBJECTS) test(`${object.id}: one binder consumes every actual control and owns no shell preference listener`, async () => {
   const {controls} = parsePreparedObjectRuntime(await loadObjectTestDefinition(object.id));
   const h = harness(controls);
-  assert.ok([...h.lensInputs, ...h.settingInputs.filter(input => !["motion", "skyContrast", "heliosphere", "asteroidOrbits", "asteroidLabels"].includes(input.name))].every(input => input.disabled));
+  assert.ok([...h.lensInputs, ...h.settingInputs.filter(input => !["motion", "skyContrast", "heliosphere", "asteroidBodies", "asteroidOrbits", "asteroidLabels"].includes(input.name))].every(input => input.disabled));
   assert.equal(h.motion.disabled, false); assert.equal(h.contrast.disabled, false);
-  assert.equal(h.heliosphere.disabled, false); assert.equal(h.asteroidOrbits.disabled, false); assert.equal(h.asteroidLabels.disabled, false);
+  assert.equal(h.heliosphere.disabled, false); assert.equal(h.asteroidBodies.disabled, false);
+  assert.equal(h.asteroidOrbits.disabled, false); assert.equal(h.asteroidLabels.disabled, false);
   h.lensInputs[0]?.emit("click"); assert.equal(h.actions.length, 0);
   h.ready();
   for (const input of h.lensInputs) input.emit("click");
@@ -89,7 +91,8 @@ for (const object of OBJECTS) test(`${object.id}: one binder consumes every actu
     }
   }
   const count = h.actions.length;
-  h.motion.emit("change"); h.contrast.emit("change"); h.heliosphere.emit("change"); h.asteroidOrbits.emit("change"); h.asteroidLabels.emit("change"); assert.equal(h.actions.length, count);
+  h.motion.emit("change"); h.contrast.emit("change"); h.heliosphere.emit("change");
+  h.asteroidBodies.emit("change"); h.asteroidOrbits.emit("change"); h.asteroidLabels.emit("change"); assert.equal(h.actions.length, count);
   assert.deepEqual(h.errors, []);
   assert.equal(h.binding.stats().listenerCount, (controls.lenses?.controls.length ?? 0) + (controls.settings?.controls.length ?? 0));
   h.binding.destroy(); h.binding.destroy(); h.lensInputs[0]?.emit("click");

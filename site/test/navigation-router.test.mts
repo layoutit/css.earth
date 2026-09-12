@@ -28,7 +28,7 @@ type MockPrepare = (options: MockRequest) => unknown | Promise<unknown>;
 type FocusController = ReturnType<typeof createPreparedContextNavigation>;
 type FocusCallbacks = NonNullable<Parameters<FocusController['connect']>[1]>;
 type MockWorldContext = { mount(options: { stage: HTMLElement; signal: AbortSignal; windowTarget: Window }): Promise<MockWorldMount> };
-type MockWorldMount = { destroy(): void; publish?(world: WorldCameraPose & {pose: {id?: string}}, viewport: {principalOffsetPixels: readonly [number, number]}): void; selectObject?(id: string, frame: PreparedWorldCameraFrame & {id?: string}): void; previewSelection?(id?: string | null): void; setHighContrastSky?(value: boolean): void; setAsteroidLabelsEnabled?(value: boolean): void; setAsteroidOrbitsEnabled?(value: boolean): void; setNavigationInFlight?(value: boolean): void; connectNavigation?: FocusController['connect']; suspendFocus?: FocusController['suspend']; restoreFocus?: FocusController['restore'] };
+type MockWorldMount = { destroy(): void; publish?(world: WorldCameraPose & {pose: {id?: string}}, viewport: {principalOffsetPixels: readonly [number, number]}): void; selectObject?(id: string, frame: PreparedWorldCameraFrame & {id?: string}): void; previewSelection?(id?: string | null): void; setHighContrastSky?(value: boolean): void; setAsteroidBodiesEnabled?(value: boolean): void; setAsteroidLabelsEnabled?(value: boolean): void; setAsteroidOrbitsEnabled?(value: boolean): void; setNavigationInFlight?(value: boolean): void; connectNavigation?: FocusController['connect']; suspendFocus?: FocusController['suspend']; restoreFocus?: FocusController['restore'] };
 type MockDataset = { ids: readonly string[]; defaultId: string; current(): string; select(id: string, options?: { signal?: AbortSignal }): Promise<boolean>; subscribe(listener: (id: string) => void): () => void };
 type MockMount = Mutable<Omit<ObjectSceneLifecycle, 'navigation' | 'datasets'>> & { id: string; options: MountOptions & {proof?: string}; value: SharedView; calls: string[]; restores: number; publishCamera?(camera: WorldCameraPose): void; manualDataset?(id: string): void; datasets?: MockDataset; navigation?: ObjectWorldNavigation };
 type MockShell = { input: Record<string, never>; options: ShellOptions; destroyed: number; selected: string; playback?: unknown; datasetShown?: boolean; datasetNotice?: string | null; preparedFocus?: PreparedGalaxyRecord | null; focusSources?: readonly SpatialCatalogSource[]; focusPresentation?: PreparedFocusPresentation | null; beginCardNavigation?: (object: ObjectEntry, world: unknown) => () => void; beginOverviewSelection?: (scope?: string) => (() => void) | void; setPlaybackState(value: unknown): void; showDataset(): void; setDatasetNotice(message: string | null): void; setMotionEnabled(value: boolean): void; setPreparedFocus(record: PreparedGalaxyRecord | null, sources: readonly SpatialCatalogSource[], presentation: PreparedFocusPresentation | null): void; setObject(content: { id: string; apply(): void }): void; destroy(): void };
@@ -361,26 +361,36 @@ test('the destination card stays held until arrival, including the new camera mo
 });
 
 test('asteroid label and orbit settings default off and reach the retained context independently', async () => {
-  const labels: (boolean)[] = [], orbits: (boolean)[] = [];
+  const labels: (boolean)[] = [], orbits: (boolean)[] = [], bodies: (boolean)[] = [];
   const h = harness({ persistentWorldContext: { async mount() {
     return { selectObject() {}, publish() {}, destroy() {},
       setAsteroidLabelsEnabled: value => labels.push(value),
-      setAsteroidOrbitsEnabled: value => orbits.push(value) };
+      setAsteroidOrbitsEnabled: value => orbits.push(value),
+      setAsteroidBodiesEnabled: value => bodies.push(value) };
   } } });
   await h.router.settled;
   const settings = h.shells[0].options;
   assert.equal(settings.asteroidLabelsEnabled, false);
-  assert.deepEqual(labels, [false]); assert.deepEqual(orbits, [false]);
+  assert.equal(settings.asteroidBodiesEnabled, false);
+  // The mount itself carries the defaults: a context that never received them
+  // would draw the asteroids the shell reports as off.
+  assert.deepEqual(labels, [false]); assert.deepEqual(orbits, [false]); assert.deepEqual(bodies, [false]);
   required(settings.onAsteroidLabelsChange)(true);
+  required(settings.onAsteroidBodiesChange)(true);
   await h.router.navigate('venus');
   assert.equal(h.shells.length, 1);
+  // Each setting carries its own preference across the body change, so turning
+  // one on cannot switch on the asteroid work the others still leave off.
   assert.deepEqual(labels, [false, true]); assert.deepEqual(orbits, [false]);
+  assert.deepEqual(bodies, [false, true]);
   required(settings.onAsteroidOrbitsChange)(true);
   required(settings.onAsteroidLabelsChange)(false);
   assert.deepEqual(labels, [false, true, false]); assert.deepEqual(orbits, [false, true]);
+  assert.deepEqual(bodies, [false, true]);
   h.router.destroy();
   required(settings.onAsteroidLabelsChange)(true);
-  assert.deepEqual(labels, [false, true, false]);
+  required(settings.onAsteroidBodiesChange)(false);
+  assert.deepEqual(labels, [false, true, false]); assert.deepEqual(bodies, [false, true]);
 });
 
 test('entering overview on the current object changes selection without invoking focus or restoring the camera', async () => {

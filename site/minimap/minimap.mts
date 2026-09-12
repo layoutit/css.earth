@@ -81,26 +81,20 @@ export function mountSpaceMinimap(documentTarget: Document) {
   const included = new Uint8Array(count), foreground: (typeof projected)[number][] = [];
   let viewportKey = '', coverageGuard = Infinity;
   let focus: {positionM: readonly number[]; radiusM: number} = prepared.defaultFocus;
-  let lastView = '', lastGridTransform = '', lastGalaxyTransform = '', lastGalaxyOpacity = '', destroyed = false, enabled = true;
+  let lastView = '', lastGridTransform = '', lastGalaxyTransform = '', lastGalaxyOpacity = '', destroyed = false;
   // Phones hide the minimap, so its points are never worth projecting there.
   const phone = documentTarget.defaultView!.matchMedia(MOBILE_VIEWPORT_QUERY);
   return {
     selectObject(frame: PreparedWorldCameraFrame) { focus = { positionM: frame.originM, radiusM: frame.bodyRadiusM }; lastView = ''; },
-    /** Diagnostics only: omit these bodies from the next publication. */
+    /** Omit these bodies from the next publication. The asteroid setting hides
+     * its dots here as well, so the overview agrees with the main world. */
     setHiddenBodies(ids: readonly string[]) {
       hiddenMask.fill(0);
       for (const id of ids) { const index = indexById.get(id); if (index !== undefined) hiddenMask[index] = 1; }
       lastView = '';
     },
-    /** Diagnostics only: hide the minimap and skip its publication work. */
-    setEnabled(active: boolean) {
-      if (destroyed) return;
-      enabled = active;
-      root.hidden = !enabled;
-      if (enabled) lastView = '';
-    },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport) {
-      if (destroyed || !enabled || phone.matches) return;
+      if (destroyed || phone.matches) return;
       const compatible = world.referenceFrame === prepared.referenceFrame && world.epochJdTt === prepared.epochJdTt;
       if (root.hidden !== !compatible) root.hidden = !compatible;
       if (!compatible) return;
