@@ -16,6 +16,8 @@ export interface SurfaceRasterRecipe {
     output: string;
     encoding?: SurfaceEncoding;
     thumbnail: string;
+    /** Offline surface resolution relative to the shared layout; does not change geometry or lighting. */
+    resolutionScale?: number;
     sharpen?: number[];
     exposure?: number[];
     coverage?: {
