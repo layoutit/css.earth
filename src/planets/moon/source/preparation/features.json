@@ -47,14 +47,21 @@
     "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
   },
   "labelPolicy": {
-    "minimumZoomShare": 1,
+    "minimumZoomShare": 0,
     "minimumDiameterPixels": 40,
     "alwaysVisibleCount": 0,
-    "maximumVisible": 48,
+    "maximumVisible": 40,
     "limbCosine": 0.12
   },
   "outline": {
     "pieces": 256
   },
-  "notes": "notes.json"
+  "notes": "notes.json",
+  "sites": {
+    "document": "sites.json",
+    "inputs": [
+      "traverses/APOLLO_11.ZIP",
+      "traverses/APOLLO_12.ZIP"
+    ]
+  }
 }

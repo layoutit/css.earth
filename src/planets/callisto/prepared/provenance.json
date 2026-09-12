@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "570ac31925efccd809745fbd2304b027d13bea7ed100753dd584b72b54d0d738"
+    "sha256": "a244286079ad59143a7a4ce7ea1ce1352e010a1f26c10861f029113103b84b7a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -384,7 +384,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "c3e5ca7bfcdcffafb96eb9cf33ee60b9366b85ce0b69d3368a2328d71bd3bdfb",
+      "sha256": "23e234f835da8bc7877fd8be8c16bcb218afa9cee16abd01ce065bb42767828a",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -428,10 +428,10 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
@@ -1409,8 +1409,8 @@
       "outputs": [
         {
           "url": "/scenes/callisto/callisto-features.json",
-          "bytes": 183042,
-          "sha256": "637f47a9cc9b6bade1bfd84c74f8b159afa59b14f565132ae4d20b4718b739bb",
+          "bytes": 191289,
+          "sha256": "87d1648f88ecc291f7ca1f8dc73d404a4d81d57e5c5ac0eaefde6cb462dfffdf",
           "verification": "bytes-verified"
         }
       ],

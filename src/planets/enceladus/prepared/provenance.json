@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "enceladus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a731b2f481c9b7b0403dd7721f835748b5a28aee72d9527fbe05d3ce3885d6d"
+    "sha256": "7b8ebe3de1b40e26e975ebf6422dbfcd7c545a06cb59d5d8d92d6ac959a61755"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -557,7 +557,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "7becf03d8cde73623afa6066a83607213a4e00af81dbd92b20402af9a94b923d",
+      "sha256": "c363ef21603ad9114928376bae4d0390766c05c202881098d3166a52017107fe",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -603,15 +603,16 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
           "pieces": 256
-        }
+        },
+        "notes": "notes.json"
       }
     }
   ],
@@ -670,7 +671,7 @@
       "sha256": "1738c5cf8e856c7ae262d858261af0fbb32503a68a524884d36194afb23afcc5",
       "bytes": 518340175,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -709,7 +710,7 @@
       "sha256": "0f7971cbf4bb493c17b9bbb640b3affa5f390f7c55c8db06d8e39faa3ad59b5c",
       "bytes": 10207923,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "dsk-mesh",
         "groups": [
@@ -787,7 +788,7 @@
       "sha256": "7c08c46238cde6528c9143f0c667d42cd3bc6ac60c572595a7e6cad2d6775f91",
       "bytes": 129613723,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -845,7 +846,7 @@
       "sha256": "2e3d5caa47220371e2b8e4ad12192f4613b3f6f1de4f933881b1a277ae4a9d4d",
       "bytes": 101934,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -896,7 +897,7 @@
       "sha256": "1857dd4eadd3af1e7808941bfb0e4dfa57f61a04b6dc48d3157b292c9ef601ec",
       "bytes": 109752,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -916,7 +917,7 @@
       "sha256": "433e669926c4bb484f84e74bdd9eacc67d751ab5d091473e768a11d56b0065f0",
       "bytes": 16090,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -936,7 +937,7 @@
       "sha256": "0949b3d8937a3b19b9d6b80215059f7a6451a33e684ccaabcf57a617b87d1cd0",
       "bytes": 1020,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -962,7 +963,7 @@
       "sha256": "116964fc1780821aa5af3b9807616a272de3cb5ac1e469a46fff2fa603d4abfb",
       "bytes": 265163,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -989,7 +990,34 @@
       "sha256": "02505cf90f3299d9da02f513681d1dc5ca2d1458d3ac48edbc8fea6ae861de65",
       "bytes": 156,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "enceladus-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 43 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts enceladus: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "12e908511c7d63a7fd2e1e45421350b68e224e55a4125955b398bfafdcd0f858",
+      "bytes": 19545,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1037,13 +1065,13 @@
           "url": "/scenes/enceladus/enceladus-normal-thumbnail.webp",
           "bytes": 1850,
           "sha256": "b1f5ecdd4895028a00197aab2cf9583d37846f0daf3aa171e3f9cfa839c092b5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
           "bytes": 6337990,
           "sha256": "6c043a2fd0389034fb71739fce4d7a0726575b81b3111007e6bbea854a3ce1c2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1077,19 +1105,19 @@
           "url": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
           "bytes": 8066,
           "sha256": "eef7b61cc108d1146a560fb5d5b7dded77dcda4e03e29df0342609a5fc431588",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-surface@2x.webp",
           "bytes": 10574576,
           "sha256": "90ec8ae36835ca0c5a83d0cf2a83f7182fddf281f4e9a387b73624f9617d1900",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1123,19 +1151,19 @@
           "url": "/scenes/enceladus/enceladus-ice-absorption-thumbnail.webp",
           "bytes": 1520,
           "sha256": "12fff2fb2f5df848aedc72db8598c2192a5b75521ac4c6e9b286805d743b10cc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-ice-absorption-legend.webp",
           "bytes": 146,
           "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-ice-absorption-surface@2x.webp",
           "bytes": 67618,
           "sha256": "530427bb129a342b15aaa01415a6d3106c64a389bcd125101d2a74d1c3bd3717",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1169,19 +1197,19 @@
           "url": "/scenes/enceladus/enceladus-infrared-ratio-thumbnail.webp",
           "bytes": 2166,
           "sha256": "7ce993b429aa895f5d6f306b27ca52b08e5b53d4e8c7ceb99ba1eebf76301ae2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-infrared-ratio-legend.webp",
           "bytes": 196,
           "sha256": "cb891375c261f05e633ed9af6366e538fe4a3551f53ea2e5edcdd8c0c7897c7f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-infrared-ratio-surface@2x.webp",
           "bytes": 68880,
           "sha256": "db9135d4a85f658a52b89c269b1eb624d262b12248bbc3b526aa60c826f188d6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1213,13 +1241,13 @@
           "url": "/scenes/enceladus/enceladus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-shape-surface@2x.webp",
           "bytes": 460676,
           "sha256": "8cad6dfddbf10543a581ab03a6737292410e7e9821afd1db57ee2fedf339150f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1271,14 +1299,15 @@
       "inputs": [
         "enceladus-surface-features-source",
         "usgs-gazetteer-enceladus-nomenclature-center-pts",
-        "enceladus-surface-map-frame"
+        "enceladus-surface-map-frame",
+        "enceladus-surface-feature-notes"
       ],
       "outputs": [
         {
           "url": "/scenes/enceladus/enceladus-features.json",
-          "bytes": 297235,
-          "sha256": "b06fada6bcc39330994277edac5768df6ae9237f3f93c51940c9d8912599193c",
-          "verification": "asset-manifest-pin"
+          "bytes": 317843,
+          "sha256": "88c328d51960c7600b696a301d6398bc1055af85d0db437c613b8843e4805d47",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "69aaf6ce2e1e673d57c42c05d8e4ea545005c4bf6f4dbbc90f338422ed328d51"
+    "sha256": "f516ce539972eb9369862a1674fb3a3a8272c866c8dc0a2ea1aa88e47cfcd669"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -609,7 +609,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "311d9657cb0b08d1608ac5341743a637c9a613acd6fc3a49b6e4ca0c01c98193",
+      "sha256": "0d60851f07e5662ec9d7ae9ac587e9db984cacfcc7d3e68e25c1f754d96e54d9",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -657,15 +657,16 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
           "pieces": 256
-        }
+        },
+        "notes": "notes.json"
       }
     }
   ],
@@ -1161,6 +1162,33 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "rhea-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 4 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts rhea: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "572d392dec7cc44cb7ff4239bdee0dc84271c43610c5213b8f20568e644609dd",
+      "bytes": 2096,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -1524,13 +1552,14 @@
       "inputs": [
         "rhea-surface-features-source",
         "usgs-gazetteer-rhea-nomenclature-center-pts",
-        "rhea-surface-map-frame"
+        "rhea-surface-map-frame",
+        "rhea-surface-feature-notes"
       ],
       "outputs": [
         {
           "url": "/scenes/rhea/rhea-features.json",
-          "bytes": 199176,
-          "sha256": "6645f146f0bbfc05f5127ab9f2db4e327a513d1a547f57ec95532b836ef84fde",
+          "bytes": 208075,
+          "sha256": "4dd9c879a4238ca17071233b238fc57c2fb915853c07e0792bae6d6f160ca054",
           "verification": "bytes-verified"
         }
       ],

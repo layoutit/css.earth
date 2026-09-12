@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a76ff3fd319655dd4f9afd976eeb21ac687ad2c248d8439b44ad4af15c7e3c89"
+    "sha256": "3f13f9664be57dd8df80a9fc229da0b817aee7a23d297c9c6c79cffe08be83db"
   },
   "id": "eros",
   "properties": {
@@ -92,7 +92,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "b968d3f8c23a082d116588cf875ab7e0e9588f3ddfc039eaba8a58fc15860f02"
+          "sha256": "3ff3335cfad4cb3e06beec85aabb6215a123609eeb010e1e940630bc4070e25e"
         }
       ],
       "features": {
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8eb3ba0de6649f838de963cf87c2118b9aca54de667d8f6b269bd6ddb4df706d"
+        "sha256": "58104badef41490beac4094e6f066fa25007aeec0b8d44d500bd5ce0b5c57260"
       }
     },
     "catalog": {

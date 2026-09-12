@@ -37,7 +37,7 @@
       "lensId": "normal",
       "label": "Monochrome",
       "falseColor": false,
-      "coverage": "Stooke\u2019s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
+      "coverage": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
       "capture": {
         "attributions": [
           {
@@ -187,7 +187,7 @@
       "expectedSha256": "6eb5a87209dc6c9b6020befcd96e8a60f40687a14db128f07b0163bef6c1fae5",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PHOBOS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -225,8 +225,8 @@
     {
       "id": "phobos-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1145,
-      "expectedSha256": "343d3feda10cda9ca1b0d84875dba4619c4ef05d107a6e7ef5d3536095fb024b",
+      "expectedBytes": 1170,
+      "expectedSha256": "b4fb52c28b1245b21503a18b63a4feda442193616310d99855c92c82118cbb8a",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -348,6 +348,29 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1084,
       "expectedSha256": "1a9a57bdcf869489c29463406b296496251b53a67bfc4c9183f165ebae34a147"
+    },
+    {
+      "id": "phobos-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 1716,
+      "expectedSha256": "4ec49c52048f7a43cbc1720871eefd120be8ad2e44c5dcb7ead7ffb7289494b4",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 3 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts phobos: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b19b8690d4a7f2306a14f4f89cb799f677bd90c2046db6e6d1fecebd280120e4"
+    "sha256": "2529e701368c8949ebe3a51f22d844e28406aad476813c46c3bf12205876daed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -453,7 +453,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "bb4efebd1abb8747cb87609aff716cbeea4b76d4ebe93d64a6f3c3dc3fa7b1e8",
+      "sha256": "62621f87e15f29b0e0e081826b60c070c30c4c35ad939d802a4a27541d1e2dd6",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -498,16 +498,20 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
           "pieces": 256
         },
-        "notes": "notes.json"
+        "notes": "notes.json",
+        "sites": {
+          "document": "sites.json",
+          "inputs": []
+        }
       }
     }
   ],
@@ -825,6 +829,31 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "dimorphos-surface-sites",
+      "path": "features/sites.json",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      },
+      "kind": "source-document",
+      "title": "features/sites.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "609602bd18bbf589de8d86c3a374a6f0f5bfe73a86bb790053ccfbc4223ad0a2",
+      "bytes": 1428,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -1021,7 +1050,7 @@
         {
           "url": "object:prepared/content.json",
           "bytes": 7242,
-          "sha256": "38836153526d2a9de7e32d80ee419f614e6d1f1386f92e44838f44628186399c",
+          "sha256": "922b072f3962b6e160474fb308062b27a93e561afde63b42a329123ebd822dce",
           "verification": "bytes-verified"
         }
       ],
@@ -1050,13 +1079,14 @@
         "dimorphos-surface-features-source",
         "usgs-gazetteer-dimorphos-nomenclature-center-pts",
         "dimorphos-surface-map-frame",
-        "dimorphos-surface-feature-notes"
+        "dimorphos-surface-feature-notes",
+        "dimorphos-surface-sites"
       ],
       "outputs": [
         {
           "url": "/scenes/dimorphos/dimorphos-features.json",
-          "bytes": 8196,
-          "sha256": "41670f5a3bdd39808a88ca3d6c66081492167208c9c733dccf42d03f53e824f0",
+          "bytes": 9932,
+          "sha256": "79abbe95544a779630a36f76cf52d8006d76769cf8c51d7877b227ff386a0c04",
           "verification": "bytes-verified"
         }
       ],

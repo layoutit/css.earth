@@ -5,3 +5,5 @@ Scientific shape and SPC relative-albedo field: NASA/Johns Hopkins Applied Physi
 Milky Way panorama: ESO/S. Brunier, CC BY 4.0; see source/stars/ESO-IMAGE-LICENSE.md. HYG catalogue: David Nash/Astronexus, CC BY-SA 4.0; see source/stars/LICENSE.md. Title: Inter Project Authors, SIL Open Font License 1.1; see source/presentation/LICENSE.INTER-OFL.
 
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
+
+Landing, touchdown and impact sites (1): compiled from NASA NSSDCA, PDS and LROC pages, agency releases and cited papers; each site's source, rights and quoted sentence are in `source/features/sites.json`. NASA content is not subject to copyright; other publishers are cited for facts only.

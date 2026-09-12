@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3c68fd3c32113182f1d9df5ddd242c932dc740c9b924b1774c6351055d37530b"
+    "sha256": "c3c03131d6106b4448fff9b509d8b8cc2a13b2636a831bd5264030e32335b805"
   },
   "id": "mercury",
   "properties": {
@@ -109,7 +109,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "e16079e7a44b9056e02327d8c142109aedd59384dece6c00454f605c754a33b1"
+          "sha256": "f14b49150c5ee8b43e702f874cfa65c13303aad58a94c8ebd0b0c93e71c1e77f"
         }
       ],
       "shape": {
@@ -169,7 +169,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fbb945686764ee5c9eaf71728aec5251e609aebdd7c9f149645ef5d98e901897"
+        "sha256": "fbe34fc7745440592e194e0a864c204c2e7025345a790f9f572a329ac0b332bc"
       }
     },
     "catalog": {

@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e765a24ad415abea1c3bda7cf551744a41cc999bc2e43878cef1e8de8fee0120"
+    "sha256": "d1ee87bb79744f7b4d5dfa103bace8240056befa49beb380134f1e71bec58623"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -297,7 +297,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "ff14929f8ef7f12447aaec8c69f0e6c369dbe07daf1fe41c033385711d7335ae",
+      "sha256": "e051d0ae8c5eca92e27231fbcdfe7d1dc3780ec19898aa74a8be968b9503b624",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -340,15 +340,16 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
           "pieces": 256
-        }
+        },
+        "notes": "notes.json"
       }
     }
   ],
@@ -537,6 +538,33 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "donaldjohanson-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts donaldjohanson: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "bytes": 478,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -665,13 +693,14 @@
       "inputs": [
         "donaldjohanson-surface-features-source",
         "usgs-gazetteer-donaldjohanson-nomenclature-center-pts",
-        "donaldjohanson-surface-map-frame"
+        "donaldjohanson-surface-map-frame",
+        "donaldjohanson-surface-feature-notes"
       ],
       "outputs": [
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-features.json",
-          "bytes": 7215,
-          "sha256": "6c424a69586d64a9c4bb5cd3d6d11f00308194fb562e6ce8dd1d15d95ee39990",
+          "bytes": 7924,
+          "sha256": "8a474d8e09bc395efca4cc296825d638f5a527151cb4b4c1951c1ef17394c47b",
           "verification": "bytes-verified"
         }
       ],

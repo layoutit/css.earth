@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eebc41a652782c0a7105ec0e7f72a05c06533d32c98ae1ffdf6b62bdb20f1bf5"
+    "sha256": "cb565cb7894c86458af7873c7eceb4a4c855f7054287184130390c12be98e82a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -619,7 +619,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "ba5861a3d68659b0f35174b97842558585f36d4c87d5bf611d74dfd51e41246b",
+      "sha256": "945f147e0b32b66861c9bdb643b9c15bfca032e49893286b4ae746e7f8c00ff1",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -663,14 +663,22 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
           "pieces": 256
+        },
+        "notes": "notes.json",
+        "sites": {
+          "document": "sites.json",
+          "inputs": [
+            "traverses/msl_localized_pos.csv",
+            "traverses/m2020_best_tactical.csv"
+          ]
         }
       }
     }
@@ -1037,6 +1045,110 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "mars-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 644 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts mars: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "b2236444ed13365223dca094ead1db1c8a258bc6b8ea7009b0f02e7950919dfd",
+      "bytes": 301501,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "mars-surface-sites",
+      "path": "features/sites.json",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      },
+      "kind": "source-document",
+      "title": "features/sites.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "a14285fa6b38fd1dd403119fee66b3d285eac41851e5ca57972df6285dd1921c",
+      "bytes": 19986,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mars-msl-curiosity-traverse-path",
+      "path": "features/traverses/msl_localized_pos.csv",
+      "origin": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/",
+      "credit": "NASA PDS",
+      "license": "NASA PDS archive; NASA content not subject to copyright",
+      "licenseEvidence": [
+        "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/.",
+      "redistribution": "NASA data product, credit the publisher",
+      "title": "Curiosity traverse (PLACES localizations)",
+      "displayCredit": "NASA PDS",
+      "sourceUrl": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      },
+      "sha256": "d456ce9025ca71673af8b9f72a78dc508f5d963cbac74fa68eeac88a4c7c3a3b",
+      "bytes": 349568,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mars-m2020-perseverance-traverse-path",
+      "path": "features/traverses/m2020_best_tactical.csv",
+      "origin": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/",
+      "credit": "NASA PDS",
+      "license": "NASA PDS archive; NASA content not subject to copyright",
+      "licenseEvidence": [
+        "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/.",
+      "redistribution": "NASA data product, credit the publisher",
+      "title": "Perseverance traverse (PLACES localizations)",
+      "displayCredit": "NASA PDS",
+      "sourceUrl": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      },
+      "sha256": "9da19e4f70287fe0d33ba716ff2169c10447c30c7a048583f730e4155226cde9",
+      "bytes": 171404,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -1285,7 +1397,7 @@
         {
           "url": "object:prepared/content.json",
           "bytes": 9414,
-          "sha256": "9a5d4f14335829f8f1548eb0988cb6c406ba3ef4aaa46ba01e70c57ab7464417",
+          "sha256": "0e6b6ab5e678dae656e90d089852e5b96f08e1cde278fd58d874cdf85ddf856d",
           "verification": "bytes-verified"
         }
       ],
@@ -1396,13 +1508,17 @@
       "inputs": [
         "mars-surface-features-source",
         "usgs-gazetteer-mars-nomenclature-center-pts",
-        "mars-surface-map-frame"
+        "mars-surface-map-frame",
+        "mars-surface-feature-notes",
+        "mars-surface-sites",
+        "mars-msl-curiosity-traverse-path",
+        "mars-m2020-perseverance-traverse-path"
       ],
       "outputs": [
         {
           "url": "/scenes/mars/mars-features.json",
-          "bytes": 5663323,
-          "sha256": "7dac523090ec599d78f4c8d47a8333ac29f928b4215897f2bfcd450180600535",
+          "bytes": 6046256,
+          "sha256": "bb7c7398fb9e27b63ff774796cf088ceeeac05340b0a71898cd4dd5a82d82cdb",
           "verification": "bytes-verified"
         }
       ],

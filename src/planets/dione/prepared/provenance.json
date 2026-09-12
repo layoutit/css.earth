@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dione",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7a6e000a0d31d9b9f7f7165ba2111642cc7045f80776a24b52a3dfa878c19d22"
+    "sha256": "cce45d430369f068016c3ec93f384d75e26d169bf82a63e3f9e29ffb7857e066"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -721,7 +721,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "51d945ca40edad15577b66f1b5431ef3e2cfc1e634db73989f7a7b3044d39f1c",
+      "sha256": "17dec8cd07da353b0dbd4b4ed0664462264038a3da6c8e1bd6757d26bc5dee6a",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -769,15 +769,16 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
           "pieces": 256
-        }
+        },
+        "notes": "notes.json"
       }
     }
   ],
@@ -843,7 +844,7 @@
       "sha256": "5c5d796c02e3c99fde5dd034e01dd1f25905699a4885843aed445ded955e08b5",
       "bytes": 265490551,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -882,7 +883,7 @@
       "sha256": "6fa66be6d8065fccb55bda4f9b272aefddbd2ddb1402ff284c00ca21e15df9ad",
       "bytes": 17694840,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -944,7 +945,7 @@
       "sha256": "5e885d0e3bac1e1ee36934063d5c9cdf609dc10ad44677cba31bc9e703b674ff",
       "bytes": 10255303,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1010,7 +1011,7 @@
       "sha256": "d92f949b03e5446f10f0270ec3d71bfcb9df97d24db3767fa8e54cbbe4226698",
       "bytes": 67254,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1064,7 +1065,7 @@
       "sha256": "08a2a6141d0095531da511468d4176577dd3ac8ce45c0d154ba5a655a9711617",
       "bytes": 6044025,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1126,7 +1127,7 @@
       "sha256": "f2a0bf4a4eba63ddfd566231fc02fc7f1f8aeaba0687e437d8669d8844f436ee",
       "bytes": 790785,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1188,7 +1189,7 @@
       "sha256": "416107461ff452d07944f5391d3e9e5bdda8c6d7544379444778e6ec52c72970",
       "bytes": 790785,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1245,7 +1246,7 @@
       "sha256": "e08ad608fd0786dd507f290a6df8d29fbad9f24631d21aafd91c2dc4732fdfb6",
       "bytes": 6044025,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1302,7 +1303,7 @@
       "sha256": "3b809800678f9a21574bd4ea45dda127ce8f122e35d13d9881c823ab4c4b2a4d",
       "bytes": 790785,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1359,7 +1360,7 @@
       "sha256": "10c4f91d0686b03e554e8da9f9bc44acf60dccefae2406c8351e6bf01852a3b8",
       "bytes": 790785,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1415,7 +1416,7 @@
       "sha256": "e58c7acfa469ac606b8cf4db2133dc2d9ad0b29edb37030beafb89f8480abf54",
       "bytes": 142499,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1435,7 +1436,7 @@
       "sha256": "4f5f16b3e18064fb49c59fc1f684851a23293371ae91ed15ae1a632d49f675b8",
       "bytes": 14848,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1455,7 +1456,7 @@
       "sha256": "77348111da79c07a2c685672a33a578e7e464cf4f84d3ec4bc10f0004570b82a",
       "bytes": 1000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1481,7 +1482,7 @@
       "sha256": "36134cefcab7413862b4069f52fa0f98d9ab052a9f35151feb15b243b3f50061",
       "bytes": 293898,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1508,7 +1509,34 @@
       "sha256": "604b8ba839009129405750184ca9fbcf99209450c6e5f75bd3ae62aa9dc6a180",
       "bytes": 152,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "dione-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts dione: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "b0ec3b6f42390fd3745894d0c75a1d62f46a31674f379ff896aacb89dd685591",
+      "bytes": 1412,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1549,13 +1577,13 @@
           "url": "/scenes/dione/dione-normal-thumbnail.webp",
           "bytes": 3404,
           "sha256": "3fa0418a8627fd84fad2af811005c1cee1d2e707ceef5b6d9e81748a76c76175",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione/dione-normal-surface@2x.webp",
           "bytes": 9528006,
           "sha256": "538bef027dea266add82922a0d4ed720b71cc65da443c51eab5cccdbaa995f87",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1592,13 +1620,13 @@
           "url": "/scenes/dione/dione-enhanced-thumbnail.webp",
           "bytes": 5686,
           "sha256": "6c7afd5c45392cf68f8911a67d52a8b249c5a5da062a13ba795c4bd94fc0d5d0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione/dione-enhanced-surface@2x.webp",
           "bytes": 7963588,
           "sha256": "307caf835d40f77d20bd3df9d036bd4f21cf23892ec00ea5e27af49bf157255b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1638,13 +1666,13 @@
           "url": "/scenes/dione/dione-infrared-thumbnail.webp",
           "bytes": 5282,
           "sha256": "3ffff60af0ed43572dea9d7204dd9a03283ec1fdb02a2762a43f382d0a99197f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione/dione-infrared-surface@2x.webp",
           "bytes": 293986,
           "sha256": "e4791d7fb224e216eaccf4d5e495712c6e1f49bbef24ae2c85a5ef3be8d047ee",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1683,19 +1711,19 @@
           "url": "/scenes/dione/dione-elevation-thumbnail.webp",
           "bytes": 6576,
           "sha256": "a78215a343e7974777db0d8bf527f09c685d5617477eafa5f75fdca1c8ebbbfd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione/dione-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione/dione-elevation-surface@2x.webp",
           "bytes": 3711216,
           "sha256": "2e3b5af78c3547a7c5d48e653cb2fac2fb0269758be7251c1319e9fada5a61e8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1734,19 +1762,19 @@
           "url": "/scenes/dione/dione-relative-albedo-thumbnail.webp",
           "bytes": 3820,
           "sha256": "3ca9e442cf8651e4a6fec3b07a8ed444d28474af6feae454c13bf020e654c360",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione/dione-relative-albedo-legend.webp",
           "bytes": 276,
           "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione/dione-relative-albedo-surface@2x.webp",
           "bytes": 24244394,
           "sha256": "3e114305b06e862b66b5b9c480defa263dd040d74ac3cacffba6b71abd973b32",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1780,19 +1808,19 @@
           "url": "/scenes/dione/dione-ice-absorption-thumbnail.webp",
           "bytes": 3876,
           "sha256": "4a4ddd8621409cdc530a663df53cd069ec83007dd35c81ee3f0297c88d02ddc0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione/dione-ice-absorption-legend.webp",
           "bytes": 162,
           "sha256": "989724748ca27ff3f9100c05b4eeb7b936f787550b41223655a1fbee8c888477",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione/dione-ice-absorption-surface@2x.webp",
           "bytes": 198478,
           "sha256": "94f684e773ac46c667e29b528acba20fd27dde98adbb9f6f0868b61d4124f0b0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1824,13 +1852,13 @@
           "url": "/scenes/dione/dione-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dione/dione-shape-surface@2x.webp",
           "bytes": 439616,
           "sha256": "0c5e2a4c8a4ac2ce1d8e055952ddf7169b66b1ac05341cbfe3e274bb223f55d0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1882,14 +1910,15 @@
       "inputs": [
         "dione-surface-features-source",
         "usgs-gazetteer-dione-nomenclature-center-pts",
-        "dione-surface-map-frame"
+        "dione-surface-map-frame",
+        "dione-surface-feature-notes"
       ],
       "outputs": [
         {
           "url": "/scenes/dione/dione-features.json",
-          "bytes": 207692,
-          "sha256": "a25775e1ad0bd6bf4835b3995b50f3806ae8466925f07c745494840aa4006c3d",
-          "verification": "asset-manifest-pin"
+          "bytes": 213576,
+          "sha256": "8c49cd0220c15e313f61ba48584aa45cd1339ed33d992bfefd38d6991033da0f",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": null,
+  "members": null,
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 0,
+  "output": "comet-67p-features.json",
+  "publicBase": "/scenes/comet-67p/",
+  "target": {
+    "className": "comet-67p-body"
+  },
+  "lensIds": [
+    "model",
+    "osiris",
+    "albedo",
+    "slope",
+    "absorption",
+    "ice",
+    "regions",
+    "geology"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {},
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 40,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  },
+  "sites": {
+    "document": "sites.json",
+    "inputs": []
+  }
+}

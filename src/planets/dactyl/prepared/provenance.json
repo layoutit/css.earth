@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "34d9ec15eb5d940b4c376786a30493330723e53a355e3cb552e97a857f4b3daf"
+    "sha256": "84f65c5455847ea9adba6a033dd740b340087f91db29f0da6a73f06c1e5230c0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -219,7 +219,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "e508033c5e16f0e056431b75398ecd704a4de550c15189df15e5fe57ce7a1eca",
+      "sha256": "0e98bb5293fca7af9430cada585f2c42ae71d012105044f9985124b0b6937d4a",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -261,15 +261,16 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
           "pieces": 256
-        }
+        },
+        "notes": "notes.json"
       }
     }
   ],
@@ -397,6 +398,33 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "dactyl-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts dactyl: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "bytes": 478,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -485,13 +513,14 @@
       "inputs": [
         "dactyl-surface-features-source",
         "usgs-gazetteer-dactyl-nomenclature-center-pts",
-        "dactyl-surface-map-frame"
+        "dactyl-surface-map-frame",
+        "dactyl-surface-feature-notes"
       ],
       "outputs": [
         {
           "url": "/scenes/dactyl/dactyl-features.json",
-          "bytes": 2132,
-          "sha256": "e3d7a843120e403e7c9e685906fd0ccbf92ca5dbab4f331dcf4660ab9f8e3351",
+          "bytes": 2486,
+          "sha256": "a84e853b7bf135494d28a2b8b44247deefcd37e7fd6b297b3ed2ae6b3e0606fd",
           "verification": "bytes-verified"
         }
       ],

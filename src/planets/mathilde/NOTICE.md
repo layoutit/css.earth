@@ -11,3 +11,5 @@ Physical/orbital data: NASA/JPL Horizons. ESO/S. Brunier panorama is CC BY 4.0; 
 README.md records coordinate conventions, partial coverage, modeled geometry, illumination limits and surveyed alternatives. Research-paper PDFs are not redistributed as body-package sources.
 
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
+
+Feature caption notes: 4 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.

@@ -441,7 +441,7 @@
         "type": "body-centered-radius-grid",
         "longitudeDirection": "west-positive"
       },
-      "coverage": "Radial height above a 49.3 km reference sphere from Stooke\u2019s Galileo-derived shape model. Shows the broad irregular shape, not local altitude above a geoid. The archived 5\u00b0 grid includes modeled unseen terrain and may exaggerate depressions; it is not a high-resolution terrain survey.",
+      "coverage": "Radial height above a 49.3 km reference sphere from Stooke’s Galileo-derived shape model. Shows the broad irregular shape, not local altitude above a geoid. The archived 5° grid includes modeled unseen terrain and may exaggerate depressions; it is not a high-resolution terrain survey.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -514,7 +514,7 @@
       "expectedSha256": "d2be31bf0d2f433219d73345aa7be659964d2c2a0421796728244c45c0846cea",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/THEBE_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -552,8 +552,8 @@
     {
       "id": "thebe-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1111,
-      "expectedSha256": "ae87e772c54c51cb32b5035c0e43e2890f830a3f1239305d58993767e324c21e",
+      "expectedBytes": 1136,
+      "expectedSha256": "4f8a2d2ee66fe2ffaded784f2d8bf7d8982bc75e7153c02ec5a478f063751b98",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -714,6 +714,29 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1083,
       "expectedSha256": "06cd7dae5c0e2b480dae147ce75f56fe1a62000c8a4bacffbff41aa356d3c7df"
+    },
+    {
+      "id": "thebe-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 478,
+      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts thebe: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

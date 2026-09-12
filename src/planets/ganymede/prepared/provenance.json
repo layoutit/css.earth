@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "32922cb1d26c05634a76f48adc70742b416324856340c2749255975b8d5b56ce"
+    "sha256": "61eb362e72cc39f6130e1831649e7e4303e6d33c5bde1c5d32857995d78f62f3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -820,7 +820,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "70bcbe1b426ad6e82832d675427329c7477d0bcfa5401d5a1f7dec491526803f",
+      "sha256": "0b14c40775ff55e03f351957f2a0ad0b3be4757eac37fe29175ee12b1cdbf281",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -865,10 +865,10 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
@@ -2146,8 +2146,8 @@
       "outputs": [
         {
           "url": "/scenes/ganymede/ganymede-features.json",
-          "bytes": 498144,
-          "sha256": "d00f7588382b15fcd1e846d689bcc6c337c24e479035176c0bd8ac239eafbf8e",
+          "bytes": 510496,
+          "sha256": "0720a175ce6f6c9351a5cda4a02bf7f8ccea4d37311b018ecb17ae0a7bb9c5e4",
           "verification": "bytes-verified"
         }
       ],

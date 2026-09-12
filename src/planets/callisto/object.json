@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e68f92e349558074ab282b66de85fb8be7256b9b15f17b31426ca17d551a9f1d"
+    "sha256": "cd2f70d59157daed81b2987e99bd3275a180d155e9300ecf5f89ce012ca0cabf"
   },
   "id": "callisto",
   "properties": {
@@ -138,7 +138,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "c3e5ca7bfcdcffafb96eb9cf33ee60b9366b85ce0b69d3368a2328d71bd3bdfb"
+          "sha256": "23e234f835da8bc7877fd8be8c16bcb218afa9cee16abd01ce065bb42767828a"
         }
       ],
       "features": {
@@ -152,7 +152,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b14373b8c2c681ef6f355871e15f06d49f845a0e1a7bbe6988fbfc664910cd26"
+        "sha256": "e5acc54b118e4351651efb863240a808ced6d42d6f2f7e74b0c4d8332ac5ff0d"
       }
     },
     "catalog": {

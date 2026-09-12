@@ -42,7 +42,7 @@
         "scene"
       ],
       "title": "MESSENGER MDIS monochrome mosaic",
-      "displayCredit": "USGS \u00b7 NASA/MESSENGER",
+      "displayCredit": "USGS · NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
@@ -89,7 +89,7 @@
         "scene"
       ],
       "title": "MESSENGER MDIS enhanced-color mosaic",
-      "displayCredit": "USGS \u00b7 NASA/MESSENGER",
+      "displayCredit": "USGS · NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
@@ -137,7 +137,7 @@
         "scene"
       ],
       "title": "MESSENGER global shaded relief",
-      "displayCredit": "USGS \u00b7 NASA/MESSENGER",
+      "displayCredit": "USGS · NASA/MESSENGER",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
@@ -505,7 +505,7 @@
         "charts"
       ],
       "title": "MESSENGER MASCS spectral cube",
-      "displayCredit": "M. D\u2019Amore \u00b7 DLR \u00b7 NASA/MESSENGER",
+      "displayCredit": "M. D’Amore · DLR · NASA/MESSENGER",
       "sourceUrl": "https://doi.org/10.5281/zenodo.7433033",
       "sourceBinding": {
         "kind": "catalogued",
@@ -878,7 +878,7 @@
       "expectedSha256": "cd5c44d20ce0a9e167620c7b6799d0adaf228a418539c09e71ac27caa6cdf506",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MERCURY_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -922,8 +922,8 @@
     {
       "id": "mercury-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1733,
-      "expectedSha256": "e16079e7a44b9056e02327d8c142109aedd59384dece6c00454f605c754a33b1",
+      "expectedBytes": 1823,
+      "expectedSha256": "f14b49150c5ee8b43e702f874cfa65c13303aad58a94c8ebd0b0c93e71c1e77f",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -954,7 +954,7 @@
         "features"
       ],
       "title": "A Global Tectonic Map of Mercury (Klimczak, Byrne and Crane)",
-      "displayCredit": "Klimczak, Byrne and Crane \u00b7 Mendeley Data",
+      "displayCredit": "Klimczak, Byrne and Crane · Mendeley Data",
       "sourceUrl": "https://data.mendeley.com/datasets/p43b9wttpj/2",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1012,6 +1012,50 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1434,
       "expectedSha256": "a16802b765a74431dd446798afb9c0234cd8663156d194a78c2d3de674f6ebcd"
+    },
+    {
+      "id": "mercury-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 1647,
+      "expectedSha256": "4568f15244d6886ab3f1c11c39ee64f05f8c5ec7ab91a3971e6af34bf0b82858",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "id": "mercury-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 203960,
+      "expectedSha256": "c61971591f74b61d6f1d4eee6ae84f8b61658d8ab0e7b762e45fc691125d29e1",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 486 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts mercury: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

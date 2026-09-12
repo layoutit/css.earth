@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f121dcdbe0b47c9bed6c668ff27a90aa6b5d3a2e71f7ba302812f861d47c670a"
+    "sha256": "843c426487cf47b401ad0621b28270d7f72327c455fc86e765e72dd9d5a6e59a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -701,7 +701,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "3f140d0bc1ef7508cb9d2c4298166a109cce90d979f390b78d8f44f716aef61c",
+      "sha256": "e14d03d75a1c6845344528ae0146a539a6dd977a1ced11a0a93be27be1fc6cb2",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -745,14 +745,19 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
           "pieces": 256
+        },
+        "notes": "notes.json",
+        "sites": {
+          "document": "sites.json",
+          "inputs": []
         }
       }
     }
@@ -1105,6 +1110,58 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "venus-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 112 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts venus: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "178fc3594826922982cd7211a40df10a6bb4c9b690bfa0926771b87a16399bf6",
+      "bytes": 44881,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "venus-surface-sites",
+      "path": "features/sites.json",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      },
+      "kind": "source-document",
+      "title": "features/sites.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "54cc7c82a696f47dca88aa7d4e7e4679fbc3012394628b357b9eb12715883d04",
+      "bytes": 14477,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -1353,7 +1410,7 @@
         {
           "url": "object:prepared/content.json",
           "bytes": 11986,
-          "sha256": "421b588f474e3bf33b7ee4f0362f4848b17192f2c78224d64ce10fa7a9646785",
+          "sha256": "913508c4096f2849e63e25ac316057ce0ac2719cf2ecbbcd4b28b00c337a734f",
           "verification": "bytes-verified"
         }
       ],
@@ -1464,13 +1521,15 @@
       "inputs": [
         "venus-surface-features-source",
         "usgs-gazetteer-venus-nomenclature-center-pts",
-        "venus-surface-minimap-frame"
+        "venus-surface-minimap-frame",
+        "venus-surface-feature-notes",
+        "venus-surface-sites"
       ],
       "outputs": [
         {
           "url": "/scenes/venus/venus-features.json",
-          "bytes": 3798617,
-          "sha256": "296b86d9047bc0d706255791faf1adfd2d1467cfc9f362b7f1174d427986bb73",
+          "bytes": 3949796,
+          "sha256": "ca6a4e547d6b1761584c7e0f0d53cb497d09403894046b894c057604aa41c34c",
           "verification": "bytes-verified"
         }
       ],
