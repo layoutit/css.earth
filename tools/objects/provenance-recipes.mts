@@ -53,12 +53,19 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
     const name = (template: unknown, density: number, key?: string) => prefix + text(template).replaceAll('{id}', key ?? '')
       .replaceAll('{suffix}', density === 2 ? '@2x' : '').replaceAll('{density}', String(density));
     namedRecords(raster.surfaces).forEach((plan, index) => {
-      const used = [text(plan.source), ...paths(plan.coverage)];
+      // A science block names its pinned inputs (continuum frames, off-limb context images) beside the surface source.
+      // A continuum mosaic names its frames under the science block; its `source` is their directory, not an input.
+      const frames = Array.isArray(maybeRecord(maybeRecord(plan.science)?.synoptic)?.mapFiles);
+      const used = [...(frames ? [] : [text(plan.source)]), ...paths(plan.coverage), ...paths(plan.science)];
       const outputUrls = [...numbers(raster.densities).map(d => name(plan.output, d, plan.id)), name(plan.thumbnail, 1, plan.id)];
       if (!raster.polesCombined) outputUrls.push(...numbers(raster.densities).map(d => name(raster.polesOutput, d, plan.id)));
+      const emission = maybeRecord(raster.emission);
+      if (emission) outputUrls.push(...numbers(raster.densities).flatMap(d => [name(emission.offLimbOutput, d, plan.id), name(emission.limbOutput, d, plan.id)]));
+      const synoptic = maybeRecord(maybeRecord(plan.science)?.synoptic);
       add(plan.id, 'raster', `/surfaces/${index}`, used, 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
         urls: outputUrls, interpretation: { falseColor: plan.falseColor,
-          ...(surface(plan.id)?.coverageCompletion ? { coverageCompletion: surface(plan.id)?.coverageCompletion } : {}) },
+          ...(surface(plan.id)?.coverageCompletion ? { coverageCompletion: surface(plan.id)?.coverageCompletion } : {}),
+          ...(synoptic ? { synoptic: { kind: synoptic.kind, ...(synoptic.fits ? { fits: synoptic.fits } : {}), ...(maybeRecord(synoptic.continuum) ? { observationInterval: synoptic.continuum } : {}) } } : {}) },
       });
     });
     if (raster.polesCombined) add('surface-poles', 'raster', '/polesOutput', [], 'Assemble polar tiles from the interpreted surface maps.', {
@@ -80,16 +87,6 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
     if (raster.atmosphere) add('atmosphere', 'raster', '/atmosphere', paths(raster.atmosphere), 'Prepare the declared atmospheric material and observation layers.', {
       urls: numbers(raster.densities).flatMap(d => ['materialOutput', 'observationOutput', 'lightingOutput'].map(key => name(record(raster.atmosphere)[key], d))), lensIds: [],
     });
-  } else if (raster?.kind === 'observation-lenses') {
-    namedRecords(raster.lenses).forEach((plan, index) => add(plan.id, 'raster', `/lenses/${index}`, [text(plan.input)],
-      'Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.', {
-        interpretation: { qualification: plan.qualification, coverage: plan.coverage, elevation: plan.elevation },
-      }));
-  } else if (raster?.kind === 'synoptic-emission') {
-    namedRecords(raster.variants).forEach((plan, index) => add(plan.id, 'raster', `/variants/${index}`, paths(plan),
-      'Prepare the declared synoptic map, stabilize polar sampling, project surface/poles, and prepare limb context.', {
-        interpretation: { kind: plan.kind, ...(plan.kind === 'continuum-disc-mosaic' ? { observationInterval: raster.continuum } : {}), fits: plan.fits },
-      }));
   } else if (terrestrial?.kind === 'solid-observation-body') {
     const plans = record(terrestrial.raster), geometry = record(terrestrial.geometry);
     namedRecords(plans.observations).forEach((plan, index) => {

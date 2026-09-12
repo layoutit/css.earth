@@ -1,7 +1,7 @@
 import { isArray } from '../../../src/platform/is-array.mts';
 import {basename} from 'node:path';
 import type {WebpOptions} from 'sharp';
-import type {RasterInfo} from '../static-surface/contracts.mts';
+import type {RasterInfo} from '../observation/raster.mts';
 import type {PagedAssetConfiguration, SurfaceAssetsConfiguration, SurfaceMapInput, ResizeKernel} from './asset-contract.mts';
 import type {Cutaway} from './contracts.mts';
 import type {InteriorSource} from './scene-contract.mts';

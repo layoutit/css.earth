@@ -56,8 +56,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const sun = alreadyPhysical ? definition.sun : definition.sun ? { ...definition.sun, localDirection,
     referenceViewDirection: direction.prepareSunReferenceViewDirection({ bodyId: descriptor.id,
       initialScenePitchDegrees: camera.initialScenePitchDegrees, defaultControlYawDegrees: camera.defaultControlYawDegrees, sceneDirection: localDirection }) } : definition.sun;
-  const viewBindings = prepareWorldNavigationBindings(definition.viewBindings, sources);
-  const prepared = preparePhysicalMaterialTracks({ definition: { ...definition, camera, sky, sun, viewBindings }, ...authored, sources,
+  const prepared = preparePhysicalMaterialTracks({ definition: { ...definition, camera, sky, sun }, ...authored, sources,
     physicalShape: { equatorialRadiusM: bodyRadiusM, polarRadiusM: (descriptor.recipe.shape.polarRadiusKm ?? descriptor.recipe.shape.radiusKm) * 1000 } });
   return { definition: prepared, frame,
     receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id, sources: descriptor.recipe.sources,
@@ -65,19 +64,6 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
       tilePixels: authored.tilePixels, sceneScale: camera.sceneScale, renderedRadiusUnits,
       sourceGeometryConvention: 'PolyCSS authored mesh axes; world raster X/Y transport is shared with the retained source geometry',
       ephemerisSource: 'src/platform/solar-geometry.mts' } };
-}
-
-function prepareWorldNavigationBindings(bindings: Input[], sources: ReadonlyMap<string, Input>): Input[] {
-  const raster = sources.get('raster');
-  if (raster?.schema !== 'cssearth-static-surface-raster@1' || !raster.material) return bindings;
-  const material = sources.get('content')?.lenses?.material;
-  const radius = material?.presentationSize * raster.material.radiusScale;
-  if (!Number.isFinite(radius) || radius <= 0 || material.frameSize !== raster.material.frameSize) throw new TypeError('Static curvature needs its authored raster dimensions.');
-  // Fit the raster's actual authored disc, including its declared radiusScale;
-  // the geometry's nominal display radius is a separate preparation measure.
-  return bindings.map(binding => ['shell-scale', 'silhouette-fit'].includes(binding.kind)
-    ? { kind: 'silhouette-fit', target: binding.target, minimumRadius: 0, unitScale: 1 / radius }
-    : binding);
 }
 
 function physicalCamera(camera: Input, projection: Input, paged: boolean): Input {

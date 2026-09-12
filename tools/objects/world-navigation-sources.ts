@@ -17,9 +17,6 @@ export function authoredPresentationBasis(sources: ReadonlyMap<string, Input>, e
   if (terrestrial?.schema === 'cssearth-terrestrial-preparation@1') {
     if (terrestrial.kind === 'solid-observation-body') return checked(eclipticBasis, terrestrial.geometry.radius, 50);
   }
-  if (geometry?.schema === 'cssearth-static-surface-geometry@1' && geometry.kind === 'disc-poles') {
-    return checked(chain(geometry.metadata.body.systemTransform, geometry.metadata.body.meshTransform), geometry.parameters.displayRadius, geometry.parameters.tileSize);
-  }
   if (geometry?.schema === 'cssearth-layered-oblate-preparation@1') {
     const p = geometry.parameters;
     return checked(chain(mesh([0, 0, p.objectPresentationNodeDegrees]), mesh([p.objectObliquityDegrees, 0, 0]), mesh([0, 0, p.meshRotationZ])), p.equatorialRadius, p.tileSize);

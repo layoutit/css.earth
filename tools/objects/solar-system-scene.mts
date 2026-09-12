@@ -3,6 +3,7 @@ import type {PreparedCubicSkyPlan} from '../../src/platform/cubic-sky-contract.m
 import type {PreparedDirectionalSunPlan} from '../../src/platform/directional-sun-contract.mts';
 import type {PlanetarySystemPreparationOptions} from '../../src/platform/prepare-planetary-system.mts';
 import {requireFiniteNumber} from '../source-values.mts';
+import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';
 interface SolarCameraOptions {bodyRadiusUnits:number;defaultZoom:number;skyProjection:{horizontalFovDegrees:number;focalLengthOverViewportWidth:number;cssPerspective:string};geometryScale?:number;initialScenePitchDegrees?:number;defaultControlYawDegrees?:number;}
 interface SolarSceneOptions extends Omit<SolarCameraOptions,'skyProjection'> {bodyId:BodyId;bodyRadiusKilometers:number;starfield:PreparedCubicSkyPlan & {astrometricRegistration?:{cubeFrame:string}};sun:PreparedDirectionalSunPlan;astronomy?:PlanetarySystemPreparationOptions['astronomy'];}
 // Shared preparation of the physical camera and its sky/body reference frame.
@@ -122,6 +123,32 @@ export async function prepareSolarSystemScene({
       sceneRegistration: registration.cssTransform, sceneRegistrationModel: registration.model,
       sceneRegistrationChain: registration.chain, sceneRegistrationEpoch: registration.epoch }),
     worldFrame: prepareWorldFrame(bodyId, frame, bodyRadiusUnits, bodyRadiusKilometers),
+  });
+}
+
+/** A star at the origin of the heliocentric frame: no ephemeris pole, Sun direction, orbit or planetary system.
+ * The presentation axis is authored (`star`) and the camera, sky registration and world frame come from the authored
+ * world context, exactly as the retired static lane merged them; nothing here claims an ephemeris-derived frame. */
+export function prepareStarCentredScene({
+  bodyId, bodyRadiusUnits, bodyRadiusKilometers, defaultZoom, starfield, star, context, geometryScale = 1,
+  initialScenePitchDegrees = 40, defaultControlYawDegrees = 0,
+}:Omit<SolarSceneOptions,'sun'|'astronomy'|'starfield'|'bodyId'> & {bodyId:string;starfield:PreparedCubicSkyPlan;
+  star:{model:string;systemTransform:string;axialTiltDegrees:number};context:unknown}) {
+  const checked = parsePreparedWorldContext(context);
+  if (checked.focus.id !== bodyId || checked.frame.bodyRadiusM !== bodyRadiusKilometers * 1000) throw new TypeError("Star-centred scene context identity differs.");
+  if (!starfield.projection) throw new TypeError("Physical sky requires its prepared projection.");
+  if (!Number.isFinite(star.axialTiltDegrees) || !star.systemTransform.trim() || !star.model.trim()) throw new TypeError("Star-centred scene needs its authored axis presentation.");
+  const base = prepareSolarSystemCamera({ bodyRadiusUnits, defaultZoom, geometryScale, initialScenePitchDegrees, defaultControlYawDegrees,
+    skyProjection: { ...starfield.projection, focalLengthOverViewportWidth: requireFiniteNumber(starfield.projection.focalLengthOverViewportWidth) } });
+  // The authored context owns projection, dolly, level of detail, orbit fade and drag.
+  const camera = Object.freeze({ ...base, ...checked.camera.presentation });
+  return Object.freeze({
+    camera, systemTransform: star.systemTransform,
+    presentationFrame: Object.freeze({ model: star.model, poleTiltDegrees: star.axialTiltDegrees, sunDirection: null, poleDirection: Object.freeze([0, 0, 1]) }),
+    heliocentricView: undefined,
+    starfield: Object.freeze({ ...starfield, cameraContract: "scene-locked-unbounded-accumulated-matrix3d",
+      sceneRegistration: checked.sky.sceneRegistration, sceneRegistrationModel: "world-context-sky-baseline" }),
+    worldFrame: checked.frame,
   });
 }
 

@@ -1,9 +1,14 @@
 /** A scientific surface is interpreted before packing: numeric grids become colour ramps, categorical maps keep their
  * palette, photographs get their tonal presentation and missing coverage its grid. The interpretation lives with the
  * source decoders in tools; the raster lane only receives finished pixels and whether they must stay nearest-sampled. */
-export interface InterpretedSurface { readonly data: Uint8Array; readonly channels: 1 | 2 | 3 | 4; readonly nearest: boolean; }
+export interface InterpretedPlate { readonly data: Uint8Array; readonly size: number; readonly lossless: boolean; }
+export interface InterpretedSurface {
+    readonly data: Uint8Array; readonly channels: 1 | 2 | 3 | 4; readonly nearest: boolean;
+    /** Emissive bodies: the stationary off-limb context and the limb plate at this density. */
+    readonly plates?: { readonly offLimb: InterpretedPlate; readonly limb: InterpretedPlate };
+}
 export interface ObservationInterpretation {
-    (surface: { readonly id: string; readonly source: string; readonly science: Record<string, unknown> }, width: number, height: number): Promise<InterpretedSurface>;
+    (surface: { readonly id: string; readonly source: string; readonly science: Record<string, unknown> }, width: number, height: number, density: number): Promise<InterpretedSurface>;
 }
 /** Expand interpreted pixels to the RGBA layout the packer and polar sampler read. */
 export function withAlpha(interpreted: InterpretedSurface, width: number, height: number): Uint8Array {
