@@ -48,8 +48,15 @@ authored JavaScript and stale migration entries. See the
 [TypeScript ownership policy](docs/architecture/typescript-ownership.md) for the
 remaining backlog and justified JavaScript exceptions.
 
-`pnpm test` runs package, renderer, platform, and shell behavior tests. It does
-not reconstruct bodies or verify the full archive of scientific source files.
+`pnpm test` runs package, renderer, platform, shell and universe-preparation
+behavior tests. It does not reconstruct bodies or verify the full archive of
+scientific source files; `pnpm test:preparation` without `--universe` runs the
+body preparation tests too and needs the restored sources.
+
+`pnpm test:browser:all` starts a dev server and runs every browser suite under
+`site/test/` against it in sequence, reporting pass, fail or skip per suite
+(`--origin=<url>` reuses a running server, `--only=<name>` selects suites,
+`--list` shows them). It needs Chromium through Playwright.
 
 `pnpm test:browser` uses the existing server on **4210** for the shared body
 and navigation checks at DPR 1 and DPR 2. It never starts a server or saves a
