@@ -2,7 +2,7 @@ import {parseEncounterPolicy} from './source-records.mts';
 // Preparation-only decoding of calibrated Stardust and Deep Impact/EPOXI
 // observations. Detector quality is independent of brightness and display tone.
 const integer = (n: unknown, min: number, max: number): n is number => typeof n === "number" && Number.isSafeInteger(n) && n >= min && n <= max;
-function cardValue(card: string) {
+export function cardValue(card: string) {
   const s = card.slice(10).trimStart();
   if (s[0] === "'") {
     let out = '';

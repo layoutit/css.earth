@@ -161,6 +161,18 @@ bits are instrument-specific; source identity, geometry qualification and
 provenance are transferable requirements. 67P's distances, angles, sample counts,
 photometric model and gain limits are evidence for that dataset, not defaults.
 
+The Dimorphos DRACO view uses the same seam with a PDS4 product that carries the
+image and its geometry in one cube: `format: "draco-geo"` in
+`src/planets/dimorphos/source/preparation/terrestrial.json` pairs each cube with
+its PDS4 label, and `tools/objects/terrestrial-layers/draco-geo.mts` decodes
+planes, units, special constants and acquisition identity from the label and
+the FITS header together. The camera is recovered from the archived intercepts
+by the shared fit above; no pointing file or camera model is read. Frames that
+share one viewing direction use `selection: "recipe-order"`, finest footprint
+first, because lowest-emission selection cannot separate them. The
+[Dimorphos README](../../../../src/planets/dimorphos/README.md) records the
+measured residuals, transfer distances and the archive's pixel-scale unit slip.
+
 ## Commands and test routing
 
 Read `package.json` for the selected checkout. The commands below have distinct
