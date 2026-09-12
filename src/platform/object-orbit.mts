@@ -322,7 +322,9 @@ export function createRetainedCubicSkyOrbit({
         ? lightDirection(skySunViewDirection)
         : skySunViewDirection;
     }
-    if (perspective) sunPresentation = projected!.sun;
+    // A publication without heliocentric geometry resolves no Sun, so the
+    // shared owner reports one only when its projection carries it.
+    if (perspective) sunPresentation = projected!.sun ?? null;
     onPublish(Object.freeze({
       sceneMatrix,
       skyboxMatrix: sky.matrix,
