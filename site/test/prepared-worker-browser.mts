@@ -27,10 +27,10 @@ try {
         terminate() { retired++; super.terminate(); }
       };
       const bytes = source.slice(0);
-      const definition = await loadPreparedCssObject(descriptor, { read: async () => bytes });
+      const definition = await loadPreparedCssObject(descriptor, { read: async () => bytes, sharedUrl: '/shared' });
       const detached = bytes.byteLength === 0;
       const failure = async (descriptor:unknown, bytes:ArrayBuffer) => {
-        try { await loadPreparedCssObject(descriptor, { read: async () => bytes }); return null; }
+        try { await loadPreparedCssObject(descriptor, { read: async () => bytes, sharedUrl: '/shared' }); return null; }
         catch (error) { if(!(error instanceof Error))throw error;return { name: error.name, message: error.message }; }
       };
       const stale = await failure(descriptor, new Uint8Array([...new Uint8Array(source), 32]).buffer);
@@ -41,7 +41,7 @@ try {
       const sha256 = [...new Uint8Array(hash)].map(value => value.toString(16).padStart(2, '0')).join('');
       const malformed = await failure({ ...descriptor, prepared: { ...record(descriptor.prepared), sha256 } }, invalidBytes);
       const controller = new AbortController();
-      const cancelled = loadPreparedCssObject(descriptor, { read: async () => source.slice(0) }, { signal: controller.signal })
+      const cancelled = loadPreparedCssObject(descriptor, { read: async () => source.slice(0), sharedUrl: '/shared' }, { signal: controller.signal })
         .then(() => 'unexpected success', (error:unknown) => {if(!(error instanceof Error))throw error;return error.name;});
       // The load starts its worker in a microtask before this timer aborts it.
       await new Promise<void>(resolve => setTimeout(() => { controller.abort(); resolve(); }, 0));
