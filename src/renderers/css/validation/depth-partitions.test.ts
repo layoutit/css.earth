@@ -2,8 +2,12 @@ import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
 import { parsePreparedObjectRuntime } from './index.js';
 import { prepareActivationGroups } from '../../../../tools/prepared-activation-groups.mts';
+import { inlineSharedFromBanks } from '../../../platform/prepared-shared-banks.mts';
+import { fileURLToPath } from 'node:url';
 
-const source = JSON.parse(await readFile(new URL('../../../planets/deimos/prepared/object.json', import.meta.url), 'utf8')).data;
+// The transport references shared banks; validation sees them inlined, as the decoder does.
+const source = await inlineSharedFromBanks(fileURLToPath(new URL('../../../../', import.meta.url)),
+  JSON.parse(await readFile(new URL('../../../planets/deimos/prepared/object.json', import.meta.url), 'utf8')).data);
 // The published Deimos package can retain native depth. Validate the optional
 // partition transport against explicit carriers, independent of that bake choice.
 const prepared = structuredClone(source), groups: { root: number; scene: number }[] = [];
