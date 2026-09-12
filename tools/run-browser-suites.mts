@@ -24,13 +24,27 @@ const OPT_IN: Readonly<Record<string, string>> = Object.freeze({
 
 export interface SuiteResult { readonly suite: string; readonly status: 'passed' | 'failed' | 'skipped'; readonly seconds: number; readonly reason?: string; }
 /** The checked-in expectation per suite: which ones a routine run must pass, and why the others do not yet. */
-export interface SuiteExpectations { readonly [suite: string]: { readonly expect: 'pass' | 'fail'; readonly reason?: string } }
+export interface SuiteExpectation { readonly expect: 'pass' | 'fail' | 'intermittent'; readonly reason?: string }
+export interface SuiteExpectations { readonly [suite: string]: SuiteExpectation }
+
+/** Compare one result with its record. An intermittent suite passes and fails on the same
+ * build, so either outcome matches; its reason says how often each was measured. */
+export function compareWithExpectation(result: SuiteResult, expectation: SuiteExpectation | undefined): { readonly differs: boolean; readonly note?: string } {
+  const expected = expectation?.expect ?? 'pass';
+  if (result.status === 'skipped') return { differs: false, note: result.reason };
+  if (expected === 'intermittent') return { differs: false, note: `intermittent: ${expectation?.reason ?? 'passes and fails on the same build'}` };
+  if (result.status === 'failed' && expected === 'fail') return { differs: false, note: `known: ${expectation?.reason ?? 'expected failure'}` };
+  if (result.status === 'passed' && expected === 'fail') return { differs: true, note: 'passes now: set expect to pass in browser-suites.json' };
+  return { differs: result.status === 'failed', note: result.reason };
+}
 export async function readSuiteExpectations(): Promise<SuiteExpectations> {
   const { readFile } = await import('node:fs/promises');
   const value: unknown = JSON.parse(await readFile(resolve(root, suiteDirectory, 'browser-suites.json'), 'utf8'));
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('browser-suites.json must be a record of suite expectations.');
   for (const [suite, entry] of Object.entries(value)) {
-    if (!entry || typeof entry !== 'object' || !['pass', 'fail'].includes((entry as { expect?: unknown }).expect as string)) throw new TypeError(`browser-suites.json: ${suite} needs expect: pass | fail.`);
+    const { expect, reason } = (entry ?? {}) as { expect?: unknown; reason?: unknown };
+    if (!entry || typeof entry !== 'object' || !['pass', 'fail', 'intermittent'].includes(expect as string)) throw new TypeError(`browser-suites.json: ${suite} needs expect: pass | fail | intermittent.`);
+    if (expect !== 'pass' && (typeof reason !== 'string' || !reason.trim())) throw new TypeError(`browser-suites.json: ${suite} needs a measured reason.`);
   }
   return value as SuiteExpectations;
 }
@@ -110,11 +124,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     console.log('\nBrowser suites:');
     const unexpected: string[] = [];
     for (const result of results) {
-      const expected = expectations[result.suite]?.expect ?? 'pass';
-      const note = result.status === 'failed' && expected === 'fail' ? `known: ${expectations[result.suite]?.reason ?? 'expected failure'}`
-        : result.status === 'passed' && expected === 'fail' ? 'passes now: set expect to pass in browser-suites.json'
-        : result.reason;
-      if ((result.status === 'failed' && expected === 'pass') || (result.status === 'passed' && expected === 'fail')) unexpected.push(result.suite);
+      const { differs, note } = compareWithExpectation(result, expectations[result.suite]);
+      if (differs) unexpected.push(result.suite);
       console.log(`  ${result.status.padEnd(7)} ${String(result.seconds).padStart(4)}s  ${result.suite}${note ? `  (${note})` : ''}`);
     }
     const counts = { passed: results.filter(r => r.status === 'passed').length, failed: results.filter(r => r.status === 'failed').length, skipped: results.filter(r => r.status === 'skipped').length };
