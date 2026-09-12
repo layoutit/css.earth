@@ -7,6 +7,7 @@ import { resolve } from "node:path";
 import { chromium } from "playwright";
 import sharp from "sharp";
 import { OBJECTS } from "../objects.mts";
+import { browserObjects } from './browser-objects.mts';
 import { assertHomepageReachability } from "./seo-discovery.mts";
 
 // Inspect the supplied server as a crawler without JavaScript. General browser
@@ -45,7 +46,7 @@ try {
   ];
   const discoveryPages = [];
   const descriptions = new Set();
-  for (const { route, object } of [...OBJECTS.map((object) => ({ route: object.route, object })), ...aliases]) {
+  for (const { route, object } of [...browserObjects().map((object) => ({ route: object.route, object })), ...aliases]) {
     const response = required(await page.goto(base + route, { waitUntil: "domcontentloaded" }));
     assert.equal(response.status(), 200, route);
     assert.doesNotMatch(response.headers()["x-robots-tag"] ?? "", /noindex/i);
@@ -122,7 +123,9 @@ function verifyMetadata(seo: Awaited<ReturnType<typeof readMetadata>>, object: O
   assert.equal(seo.canonicalCount, 1);
   assert.equal(seo.title, `${object.name} | cssEarth`);
   assert.equal(seo.canonical, origin + object.route);
-  assert.ok(seo.description.includes(object.name) && seo.description.includes("cssEarth"));
+  // Descriptions come from the registry; they name the object (designations in parentheses may be dropped).
+  const stem = object.name.replace(/\s*\(.*$/u, "");
+  assert.ok(seo.description.length > 40 && seo.description.includes(stem), `${object.id}: description must name the object: ${seo.description}`);
   assert.equal(seo.og.type, "website");
   assert.equal(seo.og.site_name, "cssEarth");
   assert.equal(seo.og.url, seo.canonical);

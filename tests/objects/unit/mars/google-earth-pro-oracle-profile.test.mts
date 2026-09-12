@@ -5,13 +5,13 @@ import {
   createMarsNativeCaptureKml,
   GOOGLE_EARTH_PRO_MARS_ORACLE,
   GOOGLE_EARTH_PRO_MARS_POSES,
-} from "../../oracle/mars/google-earth-pro/profile.mts";
+} from "../../../../tools/oracles/mars/google-earth-pro/profile.mts";
 import {
   GOOGLE_EARTH_PRO_APPLE_EVENT_API,
   GOOGLE_EARTH_PRO_MARS_ORACLE_PATCH,
-} from "../../oracle/mars/google-earth-pro/api-contract.mts";
+} from "../../../../tools/oracles/mars/google-earth-pro/api-contract.mts";
 import { parseViewInfo } from
-  "../../oracle/mars/google-earth-pro/controller.mts";
+  "../../../../tools/oracles/mars/google-earth-pro/controller.mts";
 
 test("Mars Google Earth Pro oracle binds the corrected native renderer facts", () => {
   const oracle = GOOGLE_EARTH_PRO_MARS_ORACLE;
@@ -144,7 +144,7 @@ test("Mars oracle parses Google Earth's Apple-event view record", () => {
 
 
 test("Mars oracle resolves native application members inside the recorded app bundle", async () => {
-  const { appBundleForMember } = await import("../../oracle/mars/google-earth-pro/native-evidence.mts");
+  const { appBundleForMember } = await import("../../../../tools/oracles/mars/google-earth-pro/native-evidence.mts");
   const app = "/tmp/native oracle/Google Earth Pro Mars Oracle.app";
   assert.equal(appBundleForMember(`${app}/Contents/Frameworks/headless.dylib`), app);
   assert.equal(appBundleForMember(`${app}/Contents/MacOS/Google Earth`), app);
@@ -152,7 +152,7 @@ test("Mars oracle resolves native application members inside the recorded app bu
 });
 
 test("Mars interaction corpus rejects malformed external event and camera values", async () => {
-  const { loadInteractionCorpus, parseInteractionScenario } = await import("../../oracle/mars/google-earth-pro/interaction-corpus.mts");
+  const { loadInteractionCorpus, parseInteractionScenario } = await import("../../../../tools/oracles/mars/google-earth-pro/interaction-corpus.mts");
   const corpus = await loadInteractionCorpus();
   const scenario = corpus.scenarios[0];
   assert.deepEqual(parseInteractionScenario(scenario), scenario);
@@ -163,7 +163,7 @@ test("Mars interaction corpus rejects malformed external event and camera values
 });
 
 test("Mars native event parser preserves batch receipts without inventing gesture fields", async () => {
-  const { parseNativeCaptureEvent, parseRenderedFrame, parseRenderedMotionScenario } = await import("../../oracle/mars/google-earth-pro/rendered-motion-inputs.mts");
+  const { parseNativeCaptureEvent, parseRenderedFrame, parseRenderedMotionScenario } = await import("../../../../tools/oracles/mars/google-earth-pro/rendered-motion-inputs.mts");
   const batch = { event: "native-input-batch-accepted", revision: 100, acceptedMonotonicSeconds: 12.5 };
   assert.deepEqual(JSON.parse(JSON.stringify(parseNativeCaptureEvent(batch))), batch);
   assert.equal(parseNativeCaptureEvent(batch).kind, undefined);
@@ -175,8 +175,8 @@ test("Mars native event parser preserves batch receipts without inventing gestur
 });
 
 test("Mars native window audit and suite resume reject invalid process and path fields", async () => {
-  const { parseWindowAudit } = await import("../../oracle/mars/google-earth-pro/native-evidence.mts");
-  const { parseSuiteManifest } = await import("../../oracle/mars/google-earth-pro/interaction-suite-manifest.mts");
+  const { parseWindowAudit } = await import("../../../../tools/oracles/mars/google-earth-pro/native-evidence.mts");
+  const { parseSuiteManifest } = await import("../../../../tools/oracles/mars/google-earth-pro/interaction-suite-manifest.mts");
   assert.throws(() => parseWindowAudit({ visibleWindowCount: 0, frontmostApplication: { pid: "123" }, windows: [] }), /finite/u);
   const manifest = { schema: "cssearth-oracle-interaction-suite@1", startedAt: "2026-09-11T00:00:00Z", configPath: "config.json", configurationSha256: "hash", configuration: { appRoot: "app", renderHook: "hook", seedAudit: "seed", outputRoot: "out", cases: [] }, cases: [{ id: "test", set: "training", tags: [], runs: [{ repeat: 0, status: "captured", native: "report.json" }] }] };
   assert.deepEqual(JSON.parse(JSON.stringify(parseSuiteManifest(manifest))), manifest);

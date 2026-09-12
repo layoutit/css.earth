@@ -6,10 +6,10 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { compareTrajectories, bindInputReceipts, verifyWheelReceipts, interruptionObservations,
   assertMotionOnlyReference, readBrowserRun } from
-  "../../tests/objects/oracle/mars/google-earth-pro/interaction-suite-analysis.mts";
+  "../../tools/oracles/mars/google-earth-pro/interaction-suite-analysis.mts";
 
-import type { MotionFrame } from '../../tests/objects/oracle/mars/google-earth-pro/interaction-suite-analysis.mts';
-import { object, array, finite, text } from '../../tests/objects/oracle/mars/google-earth-pro/oracle-values.mts';
+import type { MotionFrame } from '../../tools/oracles/mars/google-earth-pro/interaction-suite-analysis.mts';
+import { object, array, finite, text } from '../../tools/oracles/mars/google-earth-pro/oracle-values.mts';
 
 const pose = (time: number, degrees: number): MotionFrame => {
   const angle = degrees * Math.PI / 180;
@@ -69,7 +69,7 @@ test("an interruption interval ends at each renderer's next actual input receipt
 });
 
 test("oracle registration rejects an independent CSS translation of the scene", async () => {
-  const {assertRegisteredProjection}=await import('../../tests/objects/oracle/mars/google-earth-pro/interaction-suite-analysis.mts');
+  const {assertRegisteredProjection}=await import('../../tools/oracles/mars/google-earth-pro/interaction-suite-analysis.mts');
   const native={startMatrix:[1,0,0,0,0,1,0,0,0,0,1,0,0,0,-4,1],focalLength:600,
     report:{viewport:{sceneLeft:207,width:693,height:600}}};
   const browser={state:{trackball:{centerX:553.5,centerY:300,focalLength:600}}};
@@ -138,7 +138,7 @@ test("input pairing retains the final consumed release position even without a t
         acceptedMonotonicSeconds:100 + index * .02}))],
   }));
   execFileSync(process.execPath, [new URL(
-    "../../tests/objects/oracle/mars/google-earth-pro/pair-rendered-motion-inputs.mts",
+    "../../tools/oracles/mars/google-earth-pro/pair-rendered-motion-inputs.mts",
     import.meta.url).pathname, directory]);
   const result = object(JSON.parse(await readFile(join(directory, "paired-input-report.json"), 'utf8')));
   const launch = object(object(result.consumedInputEvidence).launch);

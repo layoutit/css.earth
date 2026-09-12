@@ -4,7 +4,7 @@ import test from "node:test";
 import {
   MARS_LIMB_CONTOUR_THRESHOLDS,
   measureMarsLimbContour,
-} from "../../oracle/mars/audit/limb-contour-metric.mts";
+} from "../../../../tools/oracles/mars/audit/limb-contour-metric.mts";
 
 test("the Mars limb metric accepts its smooth prepared control", () => {
   const size = 64;
