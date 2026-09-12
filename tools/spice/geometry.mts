@@ -71,19 +71,22 @@ export class Ephemeris {
 
   /**
    * Apparent position of target seen from observer: reception-case light time
-   * (target evaluated at et minus the one-way light time, iterated to
-   * convergence) and, with `stellarAberration`, the observer's velocity
-   * relative to the barycenter deflecting the apparent direction.
+   * (target evaluated at et minus the one-way light time) and, with
+   * `stellarAberration`, the observer's velocity relative to the barycenter
+   * deflecting the apparent direction. As in SPICE, `LT` takes one light-time
+   * iteration and `converged` (SPICE's `CN`) iterates to convergence.
    */
-  apparent(target: number, observer: number, et: number, { lightTime = true, stellarAberration = true } = {}): { position: [number, number, number]; lightTimeSeconds: number; emissionEt: number } {
+  apparent(target: number, observer: number, et: number, { lightTime = true, stellarAberration = true, converged = false } = {}): { position: [number, number, number]; lightTimeSeconds: number; emissionEt: number } {
     const observerState = this.barycentric(observer, et);
-    let lt = 0, position = sub(this.barycentric(target, et).position, observerState.position);
-    if (lightTime) for (let i = 0; i < 4; i++) {
-      lt = norm(position) / SPEED_OF_LIGHT_KM_S;
-      position = sub(this.barycentric(target, et - lt).position, observerState.position);
+    let used = 0, position = sub(this.barycentric(target, et).position, observerState.position);
+    if (lightTime) for (let i = 0; i < (converged ? 5 : 1); i++) {
+      used = norm(position) / SPEED_OF_LIGHT_KM_S;
+      position = sub(this.barycentric(target, et - used).position, observerState.position);
     }
+    // SPICE reports the light time of the corrected position; the emission epoch is the one the position was evaluated at.
+    const lt = lightTime ? norm(position) / SPEED_OF_LIGHT_KM_S : 0;
     if (stellarAberration) position = stelab(position, observerState.velocity);
-    return { position, lightTimeSeconds: lt, emissionEt: et - lt };
+    return { position, lightTimeSeconds: lt, emissionEt: et - used };
   }
 }
 
