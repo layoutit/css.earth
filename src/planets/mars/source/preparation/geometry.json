@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "mars",
+  "surface": {
+    "radius": 230,
+    "polarRadius": 228.646218,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/mars/mars-surface-normal.webp",
+      "width": 2048,
+      "height": 1536
+    },
+    "surfaceLatitudeHeight": 1024,
+    "packedBandGutter": 16,
+    "poles": {
+      "url": "/scenes/mars/mars-poles-normal.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#b45e3a"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 0,
+    "interiorSeamBleed": 8,
+    "overlap": 0.005,
+    "fitToSource": false,
+    "rasterScale": 4,
+    "rasterGutter": 16.0,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.05
+  },
+  "bodyRotationDegrees": 145,
+  "output": {
+    "schema": "cssmars-prepared-runtime-scene@1",
+    "materialSchema": "cssmars-prepared-view-material@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 25.19,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 1.02595676
+    },
+    "animation": {
+      "cloudsVisualSeconds": 48,
+      "surfaceVisualSeconds": 48,
+      "direction": "prograde"
+    }
+  }
+}

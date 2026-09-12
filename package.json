@@ -59,7 +59,6 @@
     "refresh:earth-enso": "node tools/objects/paged-ellipsoid/refresh-earth-enso.mts && node tools/objects/dist/prepare-authored.js earth --write",
     "prepare:earth-global": "node tools/objects/geographic-pages/operations/prepare-global-wmts.mts --object=earth && node tools/objects/geographic-pages/operations/integrate-global-wmts.mts --object=earth --latest",
     "test:earth-global": "node tests/objects/browser/earth/wmts-tree-browser.mts --global",
-    "oracle:interactions": "node tests/objects/oracle/mars/google-earth-pro/run-interaction-suite.mts",
     "lint:packages": "eslint packages --max-warnings 0",
     "build:engine": "pnpm --filter @cssearth/engine build",
     "build:objects": "pnpm --filter @cssearth/objects build",
