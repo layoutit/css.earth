@@ -25,7 +25,8 @@ try {
     page.on('pageerror', error => errors.push(error.message));
     for (const id of objects) {
       await page.goto(new URL(`/${id}/`, baseUrl).href, { waitUntil: 'networkidle' });
-      await page.waitForFunction(() => window.__cssEarth?.ready && document.querySelector('[data-sky-stars]'));
+      // The retained star layer is the subject of the contrast setting; [data-sky-stars] never existed in the shipped renderer.
+      await page.waitForFunction(() => window.__cssEarth?.ready && document.querySelector('.prepared-point-field-stars'));
       const motion = page.locator('input[name="motion"]');
       if (await motion.isChecked()) await motion.uncheck({ force: true });
       await checkContrast(page, id, dpr, 'near', 0);
@@ -88,8 +89,8 @@ async function checkContrast(page: Page, id:string, dpr:number, view:"near"|"tra
 
 function read(page: Page) {
   return page.evaluate(() => {
-    const layer = document.querySelector('[data-sky-stars]');
-    const starNodes = [...document.querySelectorAll('[data-sky-stars]')];
+    const layer = document.querySelector('.prepared-point-field-stars');
+    const starNodes = [...document.querySelectorAll('.prepared-point-field-stars')];
     return {
       mode: document.body.dataset.skyContrast,
       scene: document.querySelector('.polycss-scene')?.getAttribute('style'),

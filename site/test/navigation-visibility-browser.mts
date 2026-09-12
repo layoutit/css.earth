@@ -6,6 +6,7 @@ import { required } from '../../tools/test-values.mts';
 import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
+import { selectObject } from './navigate-object.mts';
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://127.0.0.1:4210';
 const lateWorldCamera = process.env.CSSEARTH_TEST_LATE_WORLD_CAMERA === '1';
@@ -44,7 +45,12 @@ try {
     });
     await page.goto(`${origin}/mercury/`, { waitUntil: 'domcontentloaded' });
     await page.waitForFunction(() => document.documentElement.dataset.ready === 'loading');
-    const initial = await page.locator('.planet-stage').evaluate(stage => Number(getComputedStyle(stage).opacity));
+    // The shared world owns the loading opacity; the effective value is the product, as below.
+    const initial = await page.evaluate(() => {
+      const test = window.__cssearthTest;
+      const stage = test.required(test.element('.planet-stage'), 'stage'), world = test.required(test.element('.planet-world-stage'), 'world stage');
+      return Number(getComputedStyle(stage).opacity) * Number(getComputedStyle(world).opacity);
+    });
     assert.equal(initial, .001, 'Cold startup stays hidden until the first native scene is ready');
     required(releaseStartup)();
     await page.waitForFunction(() => window.__cssEarth?.ready === true);
@@ -129,7 +135,7 @@ try {
       proof.raf = requestAnimationFrame(sample);
     });
     for (const id of ['venus', 'mercury']) {
-      await page.locator(`a.scale-stop[href="/${id}/"]`).click();
+      await selectObject(page, id);
       await page.waitForFunction(id => location.pathname === `/${id}/` && window.__cssEarth?.ready === true, id, { timeout: 60000 }).catch(async error => {
         console.error(JSON.stringify({ delayedSelection, errors, diagnostics: await page.evaluate(() => ({
           url: location.href, state: window.__cssEarth, stage: window.__cssearthTest.html('.planet-stage').dataset.objectId,

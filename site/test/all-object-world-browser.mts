@@ -160,7 +160,7 @@ try {
   report.trace = { frames: trace.length, maximumDetailedRoots: trace.reduce((maximum, sample) => Math.max(maximum, sample.roots), 0) };
   report.completedAt = new Date().toISOString();
   report.status = 'passed';
-  console.log(`ALL_OBJECT_WORLD_BROWSER_PASSED: ${OBJECTS.length} native flights; Earth/Jupiter refocus; Earth/Saturn galaxy round trips; one retained universe.`);
+  console.log(`ALL_OBJECT_WORLD_BROWSER_PASSED: ${walk.length} native flights; Earth/Jupiter refocus; Earth/Saturn galaxy round trips; one retained universe.`);
 } catch (error) {
   report.status = 'failed'; report.failure = { message: error instanceof Error ? error.message : String(error), stack: error instanceof Error ? error.stack : undefined };
   if (page) {

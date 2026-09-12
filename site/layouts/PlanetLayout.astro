@@ -1,5 +1,4 @@
 ---
-import PlanetaryScale from "../components/PlanetaryScale.astro";
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mts";
 import { requireObject } from "../objects.mts";
@@ -57,7 +56,6 @@ const seo = objectSeo(objectRecord);
     <div class="planet-ui-layer">
       <slot name="planet-ui" />
     </div>
-    {!navigation && <PlanetaryScale activeObjectId={objectRecord.id} />}
     <div class="planet-viewport">
       <div class="planet-world-stage">
         <main

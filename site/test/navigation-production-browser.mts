@@ -2,6 +2,7 @@ import { createTestPage } from './browser-observations.mts';
 import type { Page } from 'playwright';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
+import { selectObject } from './navigate-object.mts';
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://127.0.0.1:4212';
 const browser = await chromium.launch({ headless: true, channel: 'chrome' });
@@ -35,7 +36,7 @@ try {
       };
       sample();
     });
-    await page.locator(`.scale-planet[data-planet-id="${id}"] a`).click();
+    await selectObject(page, id);
     await ready(page, id);
     const result = await page.evaluate(id => {
       cancelAnimationFrame(window.__productionFrame);
