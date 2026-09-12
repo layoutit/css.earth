@@ -527,7 +527,7 @@ function requireApplicationWorldContextSource(source: string) {
   const calls = (name: string) => nodes.filter((node): node is CallExpression => node.type === 'CallExpression' && (imports.get(nameOf(node.callee))?.name ?? nameOf(node.callee)) === name);
   const globs = nodes.filter((node): node is CallExpression => node.type === 'CallExpression' && node.callee.type === 'MemberExpression' && nameOf(node.callee.property) === 'glob' && node.callee.object.type === 'MetaProperty');
   const patterns = globs.map(node => astKind(node.arguments[0], 'Literal')?.value);
-  if (!patterns.includes('../src/objects/*/object.json') || !patterns.includes('../src/objects/*/prepared/**/*.{json,png,webp}') ||
+  if (!patterns.includes('../src/objects/*/object.json') || !patterns.includes('../src/objects/*/prepared/**/*.{json,png,webp,bin}') ||
     calls('loadPreparedCssVolume').length !== 1 || calls('loadPreparedCssPointField').length !== 1 || calls('createPreparedUniverse').length !== 1 ||
     calls('loadPreparedCssSurfaceShell').length !== 1 || calls('prepareObjectResources').length !== 1) fail();
   const resourceCalls = nodes.filter((node): node is CallExpression => node.type === 'CallExpression' && nameOf(node.callee) === 'resourceSet');
@@ -635,7 +635,7 @@ async function requireContextPointField(root: string, context: ReturnType<typeof
   const properties = descriptor.properties, prepared = descriptor.prepared;
   if (descriptor.schema !== 'cssearth-object@1' || descriptor.id !== id || descriptor.type !== 'point-field' || !isRecord(properties) ||
       Object.keys(properties).length !== 2 || !isRecord(properties.frame) || properties.frame.referenceFrame !== context.frame.referenceFrame ||
-      properties.frame.epochJdTt !== context.frame.epochJdTt || !isRecord(prepared) || prepared.format !== 'cssearth-css-point-field@1' ||
+      properties.frame.epochJdTt !== context.frame.epochJdTt || !isRecord(prepared) || prepared.format !== 'cssearth-css-point-field-bank@1' ||
       typeof prepared.url !== 'string' || !prepared.url.startsWith('prepared/') || prepared.url.split('/').includes('..') ||
       typeof prepared.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(prepared.sha256)) fail('descriptor identity, frame, or pin drifted');
   const payloadPath = resolve(directory, prepared.url);
@@ -643,7 +643,7 @@ async function requireContextPointField(root: string, context: ReturnType<typeof
   const {bytes, value: payload} = await readRecord(payloadPath, 'prepared payload cannot be read');
   const data = payload.data;
   if (createHash('sha256').update(bytes).digest('hex') !== prepared.sha256 || payload.schema !== 'cssearth-prepared-object@1' || payload.id !== id ||
-      payload.type !== 'point-field' || payload.format !== prepared.format || !isRecord(data) || data.schema !== 'cssearth-css-point-field@1' || data.id !== id ||
+      payload.type !== 'point-field' || payload.format !== prepared.format || !isRecord(data) || data.schema !== 'cssearth-css-point-field-bank@1' || data.id !== id ||
       JSON.stringify(data.frame) !== JSON.stringify(properties.frame) || !isRecord(data.frame) || data.frame.referenceFrame !== context.frame.referenceFrame ||
       data.frame.epochJdTt !== context.frame.epochJdTt || JSON.stringify(data.frame.originM) !== JSON.stringify(context.frame.originM)) fail('prepared payload identity or physical frame drifted');
 }

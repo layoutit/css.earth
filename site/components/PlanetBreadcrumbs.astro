@@ -1,11 +1,11 @@
 ---
 import type { OverviewScope } from '../overview-context.mts';
-interface Props { objectId?: string; scope?: OverviewScope; }
+interface Props { objectId?: string; scope?: OverviewScope; includeObject?: boolean; }
 import { OBJECTS } from '../objects.mts';
 import preparedWorld from '../../src/planets/sun/prepared/world-context.json';
 import { solarSystemFocus } from '../overview-selection.mts';
 
-const { objectId, scope } = Astro.props;
+const { objectId, scope, includeObject = false } = Astro.props;
 const object = OBJECTS.find(object => object.id === objectId);
 const systemRoute = solarSystemFocus(OBJECTS)!.route;
 const crumbs: { label: string; href: string }[] = [
@@ -18,14 +18,17 @@ if (object && !scope) {
   const parent = object.classification === 'satellite' ? OBJECTS.find(body => body.id === parentId) : null;
   if (parent) crumbs.push({ label: parent.name, href: parent.route });
 }
+// Mission cards end their trail at the body they describe, which is the current page.
+if (object && includeObject) crumbs.push({ label: object.name, href: object.route });
 const visibleCrumbs = crumbs.slice(-2);
+const lastIsCurrent = Boolean(scope) || includeObject;
 ---
 
 <nav class="planet-breadcrumbs" aria-label="Breadcrumb">
   <ol>
     {visibleCrumbs.map((crumb, index) => <li>
       {index > 0 && <span class="planet-breadcrumb-separator" aria-hidden="true">&raquo;</span>}
-      {scope && index === visibleCrumbs.length - 1 ? <span aria-current="page">{crumb.label}</span>
+      {lastIsCurrent && index === visibleCrumbs.length - 1 ? <span aria-current="page">{crumb.label}</span>
         : <a href={crumb.href}>{crumb.label}</a>}
     </li>)}
   </ol>

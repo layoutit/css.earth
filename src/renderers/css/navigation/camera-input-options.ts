@@ -1,4 +1,4 @@
-import type { SurfaceFlyToPlan } from './google-earth-surface-fly-to.js';
+import type { SurfaceFlyToPlan } from './surface-fly-to.js';
 import type { Quaternion } from './types.js';
 import type { RuntimePolicy } from './runtime-policy.js';
 import type { TrackballMetrics, CameraDelta } from './types.js';

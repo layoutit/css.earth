@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "pluto",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "87ac6a32ba570c43d6cea721f23303bf2b8b347743b8bfd1124b31c11435a96a"
+    "sha256": "fb6ca3943de4102dd83d55374d4a20866ae0021106d6181d2ec11e61c52b42ff"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -409,65 +409,6 @@
           "qualification": "Accepted source-backed facts, labels and observation interpretation; no scientific values changed during JSON migration."
         }
       }
-    },
-    {
-      "id": "features",
-      "path": "source/preparation/features.json",
-      "sha256": "1e43643e5b4079fccd6ea159f1f7866b4f76abd75e9ab3c9bfb191f7403df1e4",
-      "parameters": {
-        "schema": "cssearth-surface-features@1",
-        "directory": "features",
-        "archive": "PLUTO_nomenclature_center_pts.zip",
-        "members": {
-          "attributes": "PLUTO_nomenclature_center_pts.dbf",
-          "projection": "PLUTO_nomenclature_center_pts.prj",
-          "metadata": "metadata_nomenclature_points_PLUTO.xml"
-        },
-        "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
-        "output": "pluto-features.json",
-        "publicBase": "/scenes/pluto/",
-        "target": {
-          "className": "pluto-body",
-          "withoutClassName": "pluto-body-polar"
-        },
-        "lensIds": [
-          "surface",
-          "topography",
-          "monochrome"
-        ],
-        "kinds": {
-          "point": [
-            "AA",
-            "FA"
-          ],
-          "linear": [
-            "RU",
-            "DO",
-            "VA",
-            "CA",
-            "FO"
-          ],
-          "region": [
-            "PL",
-            "PM",
-            "MO"
-          ]
-        },
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        },
-        "labelPolicy": {
-          "minimumZoomShare": 1,
-          "minimumDiameterPixels": 40,
-          "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
-          "limbCosine": 0.12
-        },
-        "outline": {
-          "pieces": 256
-        }
-      }
     }
   ],
   "sources": [
@@ -486,8 +427,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "evidence": "https://science.nasa.gov/resource/pluto-global-color-map/",
             "missionId": "new-horizons"
           }
@@ -506,7 +447,7 @@
       "sha256": "1c13296bb0d2678224f3579033c4fe4cd302dc2a0afa02c94a0ff1baa56d53c9",
       "bytes": 952315,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -532,8 +473,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif",
             "missionId": "new-horizons"
           }
@@ -552,7 +493,7 @@
       "sha256": "259b3e962540285f9833b13b4ad28c6b38aadb68300a52d733990b4b8870a640",
       "bytes": 619512743,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -578,8 +519,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif",
             "missionId": "new-horizons"
           }
@@ -598,7 +539,7 @@
       "sha256": "592b7fb0f88cafa0bedf9f33bb71e983952a250ee8577edf2abfe814b473356b",
       "bytes": 309806463,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -625,80 +566,7 @@
       "sha256": "9ede7bc869b0ef857d53914fa143681dfcfb1d701dabf3e2045c222bde6e436d",
       "bytes": 11555,
       "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "pluto-surface-features-source",
-      "path": "features/manifest.json",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      },
-      "sha256": "ed793e267093321adfc265114b968db229e5010c7a541695b27be8431a6e9e39",
-      "bytes": 1000,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-gazetteer-pluto-nomenclature-center-pts",
-      "path": "features/PLUTO_nomenclature_center_pts.zip",
-      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PLUTO_nomenclature_center_pts.zip",
-      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
-      "licenseEvidence": [
-        "features/manifest.json"
-      ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Pluto on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
-      "title": "Gazetteer of Planetary Nomenclature: Pluto centre points",
-      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
-      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/PLUTO/target",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Catalogued once the shared source record cites this manifest revision."
-      },
-      "sha256": "8d5260b74c48515765a6981532d89168a88e0c797752c1d6d21b4a0a83baa916",
-      "bytes": 228401,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "features/PLUTO_nomenclature_center_pts.zip",
-        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PLUTO_nomenclature_center_pts.zip"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "pluto-surface-map-frame",
-      "path": "presentation/surface-map.json",
-      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation parameters",
-      "acquisition": "Authored from the shared mesh convention.",
-      "redistribution": "Repository-authored parameters; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored map frame."
-      },
-      "sha256": "3fbd8649a9ae4e41027a8fb1f52cdc0cadd18b61d39f77a3f17147336e146c7f",
-      "bytes": 152,
-      "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -712,7 +580,8 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
+        "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
+        "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
       ],
       "lensIds": [
         "surface"
@@ -735,31 +604,31 @@
           "url": "/scenes/pluto/pluto-surface-thumbnail.webp",
           "bytes": 2000,
           "sha256": "83373cca290f2c62a7ba4f83520f94ed6a726f99c356519efe4084879e43b9f9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-surface.webp",
           "bytes": 408950,
           "sha256": "bbfd4db3ec0cfbb9381ac42be010063e93f524e820d48aab89e9b466d9bb5cbc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-surface@2x.webp",
           "bytes": 1228176,
           "sha256": "8741c34af81b47fa07c9685ab06fc7158aeea0375643c559af3a38d60bfc0777",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-surface-poles.webp",
           "bytes": 5922,
           "sha256": "e54eb38e559b8c6e2dc48ff1cfbab81665c39ef6c6a30031dc84c23ee2685ffe",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-surface-poles@2x.webp",
           "bytes": 16092,
           "sha256": "4577ff6421cd2e3144a0e70be2f11cb40eb5a4354b6554a65b95e97892898a64",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -772,7 +641,8 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data"
+        "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+        "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data"
       ],
       "lensIds": [
         "topography"
@@ -821,37 +691,37 @@
           "url": "/scenes/pluto/pluto-topography-thumbnail.webp",
           "bytes": 1536,
           "sha256": "9fc22365d6380abfe6dea4c1882bd630790ce9a3faed435e954b0fa9e950277a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-topography.webp",
           "bytes": 285754,
           "sha256": "85734161c5cd9cc4b9532a9621d75df3373250c1d2032e56f83412fa0ce90012",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-topography@2x.webp",
           "bytes": 988232,
           "sha256": "75a985e67423ac50b0c581df6a381a527bf1a08d11a850909be5d39547e14154",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-topography-poles.webp",
           "bytes": 7884,
           "sha256": "4cd7dabdaa4ef9d60b552b6ea9fc777b9c44b1c0ce4bd378c79ec6e324e3c0ff",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-topography-poles@2x.webp",
           "bytes": 22706,
           "sha256": "28c3cba5c38d775f2da18b01dd845436c3072e6b71af7917b2001c516935f9f0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-topography-legend.webp",
           "bytes": 164,
           "sha256": "0607cf3c07d4f572d5d97b6a54065f4b2d20d7a550e85805c358cc22eddc13c9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -864,7 +734,8 @@
       "parents": [],
       "process": "Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.",
       "limitations": [
-        "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
+        "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
+        "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
       ],
       "lensIds": [
         "monochrome"
@@ -887,31 +758,31 @@
           "url": "/scenes/pluto/pluto-monochrome-thumbnail.webp",
           "bytes": 1822,
           "sha256": "eca9f430e940dc005d95b084d7e8da68e694d5f38221b53ab78e3085d085bb95",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-monochrome.webp",
           "bytes": 210320,
           "sha256": "4bab96f55fd00f8c138617fc2aa97222c23ae75a25d876a57a05ba1a183d5dea",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-monochrome@2x.webp",
           "bytes": 694504,
           "sha256": "c2bfbeb4eb2d2ea5f69ef4e2bbdd693d2ce5bdd937eb1fd9865e490185c80191",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-monochrome-poles.webp",
           "bytes": 5752,
           "sha256": "58de6e67b6a38fe2dc2313b53ebbaf2fef77e60b0f1c4142b46da50211d021f9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pluto/pluto-monochrome-poles@2x.webp",
           "bytes": 17652,
           "sha256": "7061300bfec1c417b45f3e23ec82186dc96bd247e1fa6911795067236f63ef55",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -934,42 +805,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6041,
-          "sha256": "cece77017e54b39687db485e6655499879242f1dc468cddc4dcfb3a72afdf78a",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "features",
-      "label": "Named features",
-      "recipe": "features",
-      "selector": "",
-      "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
-      "limitations": [],
-      "lensIds": [],
-      "recipeDependencies": [
-        "features"
-      ],
-      "interpretation": {
-        "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        }
-      },
-      "inputs": [
-        "pluto-surface-features-source",
-        "usgs-gazetteer-pluto-nomenclature-center-pts",
-        "pluto-surface-map-frame"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/pluto/pluto-features.json",
-          "bytes": 441324,
-          "sha256": "029cc92ed864f3fcdb7bf7691b06186cba912684a73d8c9ee71bacb0f4e120e0",
+          "bytes": 5923,
+          "sha256": "fc916076e651978f544a0fabf3b5b1b8042cf5df7decf6817379a7023cbcb000",
           "verification": "bytes-verified"
         }
       ],

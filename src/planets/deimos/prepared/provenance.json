@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "deimos",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "251f1c9502deb0f4729be00476ace3c11081e1a538d5681438d97a8833a2d1cc"
+    "sha256": "7c10f56a82d3a68501bd2aa7bd6883f96849a35e1b2a9a0951793f466f43dadf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -491,65 +491,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         }
       }
-    },
-    {
-      "id": "features",
-      "path": "source/preparation/features.json",
-      "sha256": "2f07f80b5cdb5055e63a78cf05a3eed9f633fd5f276ddae37e10c487de37968b",
-      "parameters": {
-        "schema": "cssearth-surface-features@1",
-        "directory": "features",
-        "archive": "DEIMOS_nomenclature_center_pts.zip",
-        "members": {
-          "attributes": "DEIMOS_nomenclature_center_pts.dbf",
-          "projection": "DEIMOS_nomenclature_center_pts.prj",
-          "metadata": "metadata_nomenclature_points_DEIMOS.xml"
-        },
-        "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
-        "output": "deimos-features.json",
-        "publicBase": "/scenes/deimos/",
-        "target": {
-          "className": "deimos-body"
-        },
-        "lensIds": [
-          "normal",
-          "elevation",
-          "albedo",
-          "slope"
-        ],
-        "kinds": {
-          "point": [
-            "AA",
-            "FA"
-          ],
-          "linear": [
-            "RU",
-            "DO",
-            "VA",
-            "CA",
-            "FO"
-          ],
-          "region": [
-            "PL",
-            "PM",
-            "MO"
-          ]
-        },
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        },
-        "labelPolicy": {
-          "minimumZoomShare": 1,
-          "minimumDiameterPixels": 40,
-          "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
-          "limbCosine": 0.12
-        },
-        "outline": {
-          "pieces": 256
-        }
-      }
     }
   ],
   "sources": [
@@ -594,8 +535,8 @@
             "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "mro",
+            "kind": "machine",
+            "machineId": "mro",
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/m2deimos/deimos_cyl_viking_mro.jpg",
             "missionId": "mro"
           }
@@ -614,7 +555,7 @@
       "sha256": "90ff4ac7f23ece9255774cf72f9ed9ca5be861d9f2aa136977fc2d460141ad6d",
       "bytes": 4948381,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -659,7 +600,7 @@
       "sha256": "1572a49fa5dbe08eaf6f340ecd5c92f0cfcc41ceaae4c232b6a5d30bde53a68b",
       "bytes": 3530934,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -697,7 +638,7 @@
       "sha256": "ddb6fdcca05fab3ce471999ded12b0f532d28274ad983e261d85e5d1f8a4c4f1",
       "bytes": 26366556,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -724,80 +665,7 @@
       "sha256": "47f2a22a4fb4108758d921f49bcea52756c31515e4473657b7e5005b63d231f7",
       "bytes": 11990,
       "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "deimos-surface-features-source",
-      "path": "features/manifest.json",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      },
-      "sha256": "189ecc12549ac04c847cc2e2bf7b060e64a18dc01ad39a13f3ae0579335711e9",
-      "bytes": 1004,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-gazetteer-deimos-nomenclature-center-pts",
-      "path": "features/DEIMOS_nomenclature_center_pts.zip",
-      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DEIMOS_nomenclature_center_pts.zip",
-      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
-      "licenseEvidence": [
-        "features/manifest.json"
-      ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Deimos on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
-      "title": "Gazetteer of Planetary Nomenclature: Deimos centre points",
-      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
-      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DEIMOS/target",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Catalogued once the shared source record cites this manifest revision."
-      },
-      "sha256": "9c81729a25ba60d24b34174d9d578d13f164894dbd88821124cd57dbe57f067c",
-      "bytes": 42393,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "features/DEIMOS_nomenclature_center_pts.zip",
-        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DEIMOS_nomenclature_center_pts.zip"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "deimos-surface-map-frame",
-      "path": "presentation/surface-map.json",
-      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation parameters",
-      "acquisition": "Authored from the shared mesh convention.",
-      "redistribution": "Repository-authored parameters; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored map frame."
-      },
-      "sha256": "8faeb7e748cac8fda155b3cc657fe7d6b8e176f9a81d12a5ff978c6ae649fffc",
-      "bytes": 153,
-      "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -835,13 +703,13 @@
           "url": "/scenes/deimos/deimos-normal-thumbnail.webp",
           "bytes": 2700,
           "sha256": "402211c01217e09af3ead77b049d3e31c74bafb46f76a108e938c9e50b6d8f5f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-normal-surface@2x.webp",
           "bytes": 1669392,
           "sha256": "6ad790e385e9701c2d39de34c5c577b8fc69f5210b0413006901651d8f46e033",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -874,19 +742,19 @@
           "url": "/scenes/deimos/deimos-elevation-thumbnail.webp",
           "bytes": 4836,
           "sha256": "baaaf4e3351c480ff7eb6a291d751e5fb682446536367e95eb554a0ac9ad8b38",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-elevation-surface@2x.webp",
           "bytes": 785732,
           "sha256": "613db32f3dc4761d77932d1466ebd808e9dd7c82e7ac329e4aa7cf569961a4f5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -919,19 +787,19 @@
           "url": "/scenes/deimos/deimos-albedo-thumbnail.webp",
           "bytes": 666,
           "sha256": "63b57ea31454100e8ebe65c595d0551fa5dd65f48850d009270afd9ef5a23ffd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-albedo-legend.webp",
           "bytes": 192,
           "sha256": "84c28272b31f82773de272bfd6760dd36f6633203510f00fd80df0defb229c44",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-albedo-surface@2x.webp",
           "bytes": 1809984,
           "sha256": "4f0f6883ed631ad3366c5f506a191e0f2b13e58a3f157f51ff12e8fae366c550",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -964,19 +832,19 @@
           "url": "/scenes/deimos/deimos-slope-thumbnail.webp",
           "bytes": 790,
           "sha256": "a593fd3f599edf0a54948423a53816e8c77596f063b19cb5f73190071826d331",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-slope-legend.webp",
           "bytes": 232,
           "sha256": "280a1b9142a95b4915e78f4dad454eb491ea0e9fbb6ffb6c721dd6fbf4b3b987",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-slope-surface@2x.webp",
           "bytes": 2377332,
           "sha256": "489d9c879f4b96f744ee80f4f1ee87ad8454f52c09dff3e3982ee3b94dad3b27",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -999,42 +867,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6191,
-          "sha256": "1c9a9850c81cbc137a3c2e817fefee36fd34343256b83befa4cf4aca9411a887",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "features",
-      "label": "Named features",
-      "recipe": "features",
-      "selector": "",
-      "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
-      "limitations": [],
-      "lensIds": [],
-      "recipeDependencies": [
-        "features"
-      ],
-      "interpretation": {
-        "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        }
-      },
-      "inputs": [
-        "deimos-surface-features-source",
-        "usgs-gazetteer-deimos-nomenclature-center-pts",
-        "deimos-surface-map-frame"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/deimos/deimos-features.json",
-          "bytes": 1994,
-          "sha256": "489a67b904cf5185cfb43069b9fd31d829d565407f7146d87066ac360eb68077",
+          "bytes": 6074,
+          "sha256": "599285fbf05e832f34a9718fe7bbbbd10d318367c1b5cc4f01eb91bff6aee146",
           "verification": "bytes-verified"
         }
       ],

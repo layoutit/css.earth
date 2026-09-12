@@ -1,3 +1,4 @@
+import type { OpacityClock } from './opacity-clock.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 
@@ -16,7 +17,7 @@ type LabelSlot = {
 };
 
 /** Named stars retain their own projected anchor throughout admission and retirement. */
-export function mountPointFieldLabels(host: HTMLElement, policy: PointFieldLabelPolicy) {
+export function mountPointFieldLabels(host: HTMLElement, policy: PointFieldLabelPolicy, opacityClock?: OpacityClock) {
   const make = (): LabelSlot => {
     const element = host.ownerDocument.createElement('span');
     element.className = 'prepared-star-label';
@@ -29,7 +30,7 @@ export function mountPointFieldLabels(host: HTMLElement, policy: PointFieldLabel
   const retiring = Array.from({ length: policy.transitionSlots }, make);
   let timer: ReturnType<typeof setTimeout> | null = null;
   let destroyed = false;
-  const fader = createOpacityFader(host.ownerDocument.defaultView!);
+  const fader = createOpacityFader(host.ownerDocument.defaultView!, opacityClock);
   let latest: { candidates: readonly StarLabelCandidate[]; project(index: number): StarLabelCandidate | null;
     exclusions: readonly LabelScreenRect[] } | null = null;
 
@@ -79,7 +80,7 @@ export function mountPointFieldLabels(host: HTMLElement, policy: PointFieldLabel
           departure.widthPx = slot.widthPx; departure.heightPx = slot.heightPx;
           departure.bounds = slot.bounds; departure.magnitude = slot.magnitude;
         }
-        const carriedOpacity = Number.parseFloat(slot.element.style.opacity);
+        const carriedOpacity = fader.current(slot.element);
         fader.set(departure.element, Number.isFinite(carriedOpacity) ? carriedOpacity : 0);
         departure.accepted = false;
         departure.fadeUntil = clock() + policy.fadeMs;

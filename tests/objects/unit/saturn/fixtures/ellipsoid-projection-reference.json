@@ -1305,7 +1305,7 @@
       }
     },
     {
-      "url": "http://127.0.0.1:4304/src/platform/google-earth-drag-inertia.mjs",
+      "url": "http://127.0.0.1:4304/src/platform/trackball-drag-inertia.mjs",
       "status": 200,
       "headers": {
         "access-control-allow-origin": "http://127.0.0.1:4304",
@@ -1322,7 +1322,7 @@
       }
     },
     {
-      "url": "http://127.0.0.1:4304/src/platform/google-earth-surface-fly-to.mjs",
+      "url": "http://127.0.0.1:4304/src/platform/surface-fly-to.mjs",
       "status": 200,
       "headers": {
         "access-control-allow-origin": "http://127.0.0.1:4304",

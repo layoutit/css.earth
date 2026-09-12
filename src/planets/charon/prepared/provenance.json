@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "charon",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "01899a5a1126f18b7d019041df03614916eaf1502e83597cf0d65d679a861c26"
+    "sha256": "9191c62e546891e5d02c3e941e500534e814f492efad980b71e29cf9019df864"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -463,65 +463,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         }
       }
-    },
-    {
-      "id": "features",
-      "path": "source/preparation/features.json",
-      "sha256": "c7de15df6b8049ea6f9e99252bb927b916f6d9eb840337cdc5cc04ff162c8ed9",
-      "parameters": {
-        "schema": "cssearth-surface-features@1",
-        "directory": "features",
-        "archive": "CHARON_nomenclature_center_pts.zip",
-        "members": {
-          "attributes": "CHARON_nomenclature_center_pts.dbf",
-          "projection": "CHARON_nomenclature_center_pts.prj",
-          "metadata": "metadata_nomenclature_points_CHARON.xml"
-        },
-        "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "output": "charon-features.json",
-        "publicBase": "/scenes/charon/",
-        "target": {
-          "className": "charon-body"
-        },
-        "lensIds": [
-          "normal",
-          "enhanced-color",
-          "elevation",
-          "albedo"
-        ],
-        "kinds": {
-          "point": [
-            "AA",
-            "FA"
-          ],
-          "linear": [
-            "RU",
-            "DO",
-            "VA",
-            "CA",
-            "FO"
-          ],
-          "region": [
-            "PL",
-            "PM",
-            "MO"
-          ]
-        },
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        },
-        "labelPolicy": {
-          "minimumZoomShare": 1,
-          "minimumDiameterPixels": 40,
-          "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
-          "limbCosine": 0.12
-        },
-        "outline": {
-          "pieces": 256
-        }
-      }
     }
   ],
   "sources": [
@@ -560,8 +501,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif",
             "missionId": "new-horizons"
           }
@@ -580,7 +521,7 @@
       "sha256": "4a874809e0a33a851cd026b8e4647f5875ed15807e677d413812367509564b00",
       "bytes": 80613890,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -598,6 +539,16 @@
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.img",
       "catalog": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx",
       "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "evidence": "The preserved credit for this input reads: NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
+            "missionId": "new-horizons"
+          }
+        ]
+      },
       "license": "Public NASA scientific mission data; retain archive and author attribution",
       "licenseEvidence": [
         "https://pds.nasa.gov/datastandards/citing/",
@@ -637,7 +588,7 @@
       "sha256": "dd23352035996d670b9c278a1466461623556acc88d66aabd3bc2da1dd15fc5a",
       "bytes": 116006912,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -683,8 +634,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif",
             "missionId": "new-horizons"
           }
@@ -703,7 +654,7 @@
       "sha256": "4496de98a9b682fd3440da616ef7f5adfbc315b438e4d18833ae3a843eb41bcc",
       "bytes": 161176369,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -748,7 +699,7 @@
       "sha256": "bb936d47510a45c1bb99b143c2cc25b6e677a344dc9eff579d1ff06d07057dfc",
       "bytes": 107840,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -768,80 +719,7 @@
       "sha256": "c8d61908e6aa09a19ef00f47b77a01a97df26aa3819bfeb4eb90e27bd75e689e",
       "bytes": 12373,
       "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "charon-surface-features-source",
-      "path": "features/manifest.json",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      },
-      "sha256": "bccf79b8dd338107720151a034eb60cd27a3b16c52c0f22182a24d71cf9b8251",
-      "bytes": 1004,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-gazetteer-charon-nomenclature-center-pts",
-      "path": "features/CHARON_nomenclature_center_pts.zip",
-      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CHARON_nomenclature_center_pts.zip",
-      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
-      "licenseEvidence": [
-        "features/manifest.json"
-      ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Charon on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
-      "title": "Gazetteer of Planetary Nomenclature: Charon centre points",
-      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
-      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/CHARON/target",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Catalogued once the shared source record cites this manifest revision."
-      },
-      "sha256": "f4dbc26dd073cbfb0266ccfac7324e4fa982bfb978bcf5d0af8e6c81d5870382",
-      "bytes": 76458,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "features/CHARON_nomenclature_center_pts.zip",
-        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CHARON_nomenclature_center_pts.zip"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "charon-surface-map-frame",
-      "path": "presentation/surface-map.json",
-      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation parameters",
-      "acquisition": "Authored from the shared mesh convention.",
-      "redistribution": "Repository-authored parameters; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored map frame."
-      },
-      "sha256": "d8712c5634f5b486dd8afdb44f234205d0e0819de974220ae2fed4d93d2cb61b",
-      "bytes": 153,
-      "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -889,19 +767,19 @@
           "url": "/scenes/charon/charon-normal-thumbnail.webp",
           "bytes": 3452,
           "sha256": "c9fd5a93cfd90fba665e2a0f2494bb2408c639f9c83805eecef7f523a09e2f27",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-normal-surface@2x.webp",
           "bytes": 5592554,
           "sha256": "dc310910d19b395f1fbac788045bf58acc423e82c35f41487149f15f1a73d91c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-normal-poles@2x.webp",
           "bytes": 68758,
           "sha256": "63a60ac73881606ba0870cbd59da34eb99f3d3b31c0787a6b3b6348807d42630",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -951,19 +829,19 @@
           "url": "/scenes/charon/charon-enhanced-color-thumbnail.webp",
           "bytes": 4270,
           "sha256": "2ddc21438bea327353ead88f43e91309ece5d4f6d8b88905e539dfdf81dfa7ff",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-enhanced-color-surface@2x.webp",
           "bytes": 2203286,
           "sha256": "27c5ae040df6a7c649b98a1592179cb4ac71288b0c5bc37ad6d63ade7e215824",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-enhanced-color-poles@2x.webp",
           "bytes": 36788,
           "sha256": "0899084045985bd7d5868f4e3baad691f936eb737dbcde1041afbbb796cc666c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -996,25 +874,25 @@
           "url": "/scenes/charon/charon-elevation-thumbnail.webp",
           "bytes": 4394,
           "sha256": "4c9d95b24093e7c0a5937068624ba30a046b6bf7a1fcf8a5ad521c73ff803fa0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-elevation-legend.webp",
           "bytes": 180,
           "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-elevation-surface@2x.webp",
           "bytes": 2559100,
           "sha256": "c7329a7ddbd484799b9388c4e7357759424e5db7bbd1b14abfe23434280501a3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-elevation-poles@2x.webp",
           "bytes": 55022,
           "sha256": "33c65356e5d342fa5ac3d14ddc45a5e26b888b751cd466f15c7c9073203d2052",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1047,25 +925,25 @@
           "url": "/scenes/charon/charon-albedo-thumbnail.webp",
           "bytes": 1518,
           "sha256": "62d79f826284d5f1826ca11c80479ab2f84427908a2d73fdd177278b60ca8771",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-albedo-legend.webp",
           "bytes": 196,
           "sha256": "736d11631a7c54a437a74430333a43dad33a9a63bb88261be3064ffdf93f2435",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-albedo-surface@2x.webp",
           "bytes": 132016,
           "sha256": "f488fe48dedf328dee7bd9f09533e80ed9c13a732351cc5c7456cba36a630648",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-albedo-poles@2x.webp",
           "bytes": 6626,
           "sha256": "99e24392167a3790fcbf0f3693e1dbf5aaef867264f20e2692214fd521d1180e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1088,42 +966,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6441,
-          "sha256": "03b0ee4e9efb40c25d58cf2de517b5a7e6057b8252d04eb25e2fff389dd5b984",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "features",
-      "label": "Named features",
-      "recipe": "features",
-      "selector": "",
-      "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
-      "limitations": [],
-      "lensIds": [],
-      "recipeDependencies": [
-        "features"
-      ],
-      "interpretation": {
-        "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        }
-      },
-      "inputs": [
-        "charon-surface-features-source",
-        "usgs-gazetteer-charon-nomenclature-center-pts",
-        "charon-surface-map-frame"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/charon/charon-features.json",
-          "bytes": 73439,
-          "sha256": "fa99931268943e7d2bab88b7fe0bbd19b15067722b746dbcfe704bc66aaf71ce",
+          "bytes": 6323,
+          "sha256": "e51928e38855849574ff3853ed68144f90564c71d59e6c8f9f531a86272b0539",
           "verification": "bytes-verified"
         }
       ],

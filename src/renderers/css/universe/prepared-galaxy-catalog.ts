@@ -64,10 +64,13 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
   });
   let destroyed = false, selectedId: string | null = null;
   let exclusions: readonly LabelScreenRect[] = [];
-  const measure = () => { if (!destroyed) for (const entry of entries) {
-    entry.width = entry.label.offsetWidth; entry.height = entry.label.offsetHeight;
-  } };
-  measure(); document.fonts?.addEventListener('loadingdone', measure); void document.fonts?.ready.then(measure);
+  let dormant = false;
+  // Labels are measured when the catalogue first wakes, not at mount: reading
+  // their sizes then forced a layout of the whole starting page for labels that
+  // only appear at intergalactic range. Font changes mark the sizes stale.
+  let measured = false;
+  const measure = () => { measured = false; };
+  document.fonts?.addEventListener('loadingdone', measure);
   return Object.freeze({ root, catalog,
     select(id: string | null) { selectedId = id; },
     resolve(id: string) { return entries.find(entry => entry.object.id === id)?.object ?? null; },
@@ -82,6 +85,16 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
       const apertures = new Set<string>();
       const alpha = Math.max(0, Math.min(1, opacity));
       const clusterAlpha = Math.max(0, Math.min(1, clusterOpacity));
+      // Invisible catalogues still animate out: publish one complete frame at
+      // zero, then skip projection and DOM writes until a fade rises again.
+      if (alpha === 0 && clusterAlpha === 0) {
+        if (dormant) return exclusions;
+        dormant = true;
+      } else dormant = false;
+      if (!measured && !dormant) {
+        for (const entry of entries) { entry.width = entry.label.offsetWidth; entry.height = entry.label.offsetHeight; }
+        measured = true;
+      }
       for (const entry of entries) {
         const point = projectCatalogPosition(entry.object.positionM, world, viewport);
         if (!point || !(width > 0 && height > 0)) continue;

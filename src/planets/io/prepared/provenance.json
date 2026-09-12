@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e0f0e9f3dc0bce4fa0d9f3da5e4026512f944a026595ce1add52c748a4d0efcd"
+    "sha256": "a1c44e2d61ba547ba6b9eb880493e4a1f759852cece7500a3056ee302ecd282f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "867672765ca42de37db80c5aeded776c2ec7725b0441ec3ddfd619cd2cb83107"
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -834,66 +834,6 @@
           }
         }
       }
-    },
-    {
-      "id": "features",
-      "path": "source/preparation/features.json",
-      "sha256": "f29c31e3ceebecf4aee0b208dff06fe8960601aaa2ba3f0989a9a7e742443073",
-      "parameters": {
-        "schema": "cssearth-surface-features@1",
-        "directory": "features",
-        "archive": "IO_nomenclature_center_pts.zip",
-        "members": {
-          "attributes": "IO_nomenclature_center_pts.dbf",
-          "projection": "IO_nomenclature_center_pts.prj",
-          "metadata": "metadata_nomenclature_points_IO.xml"
-        },
-        "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "output": "io-features.json",
-        "publicBase": "/scenes/io/",
-        "target": {
-          "className": "io-body"
-        },
-        "lensIds": [
-          "normal",
-          "enhanced",
-          "geology",
-          "spectral-slope",
-          "visible-absorption"
-        ],
-        "kinds": {
-          "point": [
-            "AA",
-            "FA"
-          ],
-          "linear": [
-            "RU",
-            "DO",
-            "VA",
-            "CA",
-            "FO"
-          ],
-          "region": [
-            "PL",
-            "PM",
-            "MO"
-          ]
-        },
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        },
-        "labelPolicy": {
-          "minimumZoomShare": 1,
-          "minimumDiameterPixels": 40,
-          "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
-          "limbCosine": 0.12
-        },
-        "outline": {
-          "pieces": 256
-        }
-      }
     }
   ],
   "sources": [
@@ -932,20 +872,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_GalileoSSI-Voyager_Global_Mosaic_1km.tif",
             "missionId": "galileo"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-1",
+            "kind": "machine",
+            "machineId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_GalileoSSI-Voyager_Global_Mosaic_1km.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_GalileoSSI-Voyager_Global_Mosaic_1km.tif",
             "missionId": "voyager-2"
           }
@@ -1010,20 +950,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif",
             "missionId": "galileo"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-1",
+            "kind": "machine",
+            "machineId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif",
             "missionId": "voyager-2"
           }
@@ -1167,6 +1107,16 @@
       "path": "muse/io/485nm_slope-night-1.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+            "missionId": "eso-muse-galilean-moons"
+          }
+        ]
+      },
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.11402374",
@@ -1217,6 +1167,16 @@
       "path": "muse/io/485nm_slope-night-2.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+            "missionId": "eso-muse-galilean-moons"
+          }
+        ]
+      },
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.11402374",
@@ -1267,6 +1227,16 @@
       "path": "muse/io/485nm_slope-night-3.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+            "missionId": "eso-muse-galilean-moons"
+          }
+        ]
+      },
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.11402374",
@@ -1317,6 +1287,16 @@
       "path": "muse/io/560nm_band-night-1.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+            "missionId": "eso-muse-galilean-moons"
+          }
+        ]
+      },
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.11402374",
@@ -1367,6 +1347,16 @@
       "path": "muse/io/560nm_band-night-2.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+            "missionId": "eso-muse-galilean-moons"
+          }
+        ]
+      },
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.11402374",
@@ -1417,6 +1407,16 @@
       "path": "muse/io/560nm_band-night-3.tif",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+            "missionId": "eso-muse-galilean-moons"
+          }
+        ]
+      },
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://doi.org/10.5281/zenodo.11402374",
@@ -1476,85 +1476,6 @@
       "upstreamLineage": "not-recorded",
       "sha256": "8824b8518243eb3ea9ddca8707730cfa75514c5ce5c506e2afc13d76c30e8f28",
       "bytes": 14930,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "io-surface-features-source",
-      "path": "features/manifest.json",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      },
-      "sha256": "f928ea4502983b8137f168d63b0f5012258e7685b9848bc3292e12c2e4cccd85",
-      "bytes": 985,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "usgs-gazetteer-io-nomenclature-center-pts",
-      "path": "features/IO_nomenclature_center_pts.zip",
-      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IO_nomenclature_center_pts.zip",
-      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
-      "licenseEvidence": [
-        "features/manifest.json"
-      ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Io on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
-      "title": "Gazetteer of Planetary Nomenclature: Io centre points",
-      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
-      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/IO/target",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-io-usgs-gazetteer-nomenclature-center-pts",
-            "role": "material",
-            "evidence": "src/planets/io/source/features/manifest.json@01bd7bd566517f8b80cc21bd138e7f5901bca24e#/inputs/0"
-          }
-        ]
-      },
-      "sha256": "be1afafaa7adb0492cef2cfc8dc7ec8dc063f23e386fe9bdebf6d5a3ca2ac37c",
-      "bytes": 718280,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "features/IO_nomenclature_center_pts.zip",
-        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IO_nomenclature_center_pts.zip"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "io-surface-minimap-frame",
-      "path": "presentation/surface-map.json",
-      "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation metadata",
-      "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
-      "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored texture axes and CSS surface selector."
-      },
-      "sha256": "2bc17bb8b5b0e11c048f22d0e630fa19596b4c1501c7d72f56bf31cb11d299a4",
-      "bytes": 149,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1842,43 +1763,9 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4663,
-          "sha256": "7870b2e61a3065d9a7beb6b2ca47977d5478e3bf454ab59cebbd9ba74065e5fe",
+          "bytes": 4544,
+          "sha256": "7d761287828b03252b84314250ad29563bd946503da860d4bd98b17af2edc4de",
           "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "features",
-      "label": "Named features",
-      "recipe": "features",
-      "selector": "",
-      "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
-      "limitations": [],
-      "lensIds": [],
-      "recipeDependencies": [
-        "features"
-      ],
-      "interpretation": {
-        "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
-        "excludedTypeCodes": {
-          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
-        }
-      },
-      "inputs": [
-        "io-surface-features-source",
-        "usgs-gazetteer-io-nomenclature-center-pts",
-        "io-surface-minimap-frame"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/io/io-features.json",
-          "bytes": 636623,
-          "sha256": "be3d0fc6330735068cb90ff387bad238b54d56ca3ea5c1c1604884922b3700cc",
-          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

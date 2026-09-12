@@ -11,6 +11,7 @@ interface FakeHistoryWindow extends EventTarget {
   history: { state: { existing: boolean }; replaceState(state: unknown, title: string, next: string | URL): void };
   setTimeout(callback: () => void, delay?: number): number;
   clearTimeout(id: number): void;
+  performance: { now(): number };
 }
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
 const saved = () => ({ camera: { controlPitch: 37, controlYaw: 92, zoom: 0.8, distanceKilometers: 12345,
@@ -22,7 +23,7 @@ function fixture(href = "http://localhost:4210/mercury?keep=value#details", capt
   const windowTarget = new EventTarget() as FakeHistoryWindow;
   const timers = new Map<number, { callback(): void; delay?: number }>(), writes: (string | URL)[] = [],
     errors: string[] = [], restored: SharedView[] = [];
-  let sequence = 0, motion = false;
+  let sequence = 0, motion = false, time = 0;
   let listener: (() => void) | null = null;
   windowTarget.location = new URL(href);
   const historyState = { existing: true };
@@ -31,6 +32,8 @@ function fixture(href = "http://localhost:4210/mercury?keep=value#details", capt
   } };
   windowTarget.setTimeout = (callback, delay) => { const id = ++sequence; timers.set(id, { callback, delay }); return id; };
   windowTarget.clearTimeout = id => timers.delete(id);
+  // Fired timers advance the fake clock by their delay.
+  windowTarget.performance = { now: () => time };
   const view: ObjectSharedView = { capture: requested => ({ ...captured(), playback: { ...captured().playback, motionRequested: requested ?? false } }),
     async restore(value) { restored.push(value); listener?.(); return true; },
     subscribe(next) { listener = next; return () => { listener = null; }; } };
@@ -38,7 +41,7 @@ function fixture(href = "http://localhost:4210/mercury?keep=value#details", capt
     onError: error => errors.push(error instanceof Error ? error.message : String(error)) });
   return { owner, windowTarget, timers, writes, errors, restored,
     changed: () => listener?.(), motion: () => motion,
-    tick() { const [id, entry] = required(timers.entries().next().value); timers.delete(id); entry.callback(); } };
+    tick() { const [id, entry] = required(timers.entries().next().value); timers.delete(id); time += entry.delay ?? 0; entry.callback(); } };
 }
 
 test("camera changes coalesce into replaceState while preserving the route, other queries, hash and history state", async () => {

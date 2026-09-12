@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "616cce1e7f26de1697aa07e62dd2098dbfc41e7b4d871c3b6905121828d83739"
+    "sha256": "e40cbaf57fde00b807e92929f101e048f27d7424c043b89a9939245ddfb58a96"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -232,6 +232,20 @@
       "path": "material/neutral.png",
       "origin": "https://arxiv.org/pdf/1706.06837",
       "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "spitzer",
+            "evidence": "The preserved credit for this input reads: Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+          },
+          {
+            "kind": "machine",
+            "machineId": "herschel",
+            "evidence": "The preserved credit for this input reads: Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+          }
+        ]
+      },
       "license": "MIT authored approximation from published numerical scientific facts",
       "licenseEvidence": [
         "https://arxiv.org/pdf/1706.06837"
@@ -272,6 +286,20 @@
       "path": "shape/ellipsoid.tab",
       "origin": "https://arxiv.org/pdf/1706.06837",
       "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "spitzer",
+            "evidence": "The preserved credit for this input reads: Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+          },
+          {
+            "kind": "machine",
+            "machineId": "herschel",
+            "evidence": "The preserved credit for this input reads: Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+          }
+        ]
+      },
       "license": "MIT authored approximation from published numerical scientific facts",
       "licenseEvidence": [
         "https://arxiv.org/pdf/1706.06837"

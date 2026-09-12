@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "403fcbb9a69c8f6dc055f03bc3357b43ee0da898944dd832a8ba2a7b26418a77"
+    "sha256": "1a0d06de2fc83cd6925d36376037dc6a689d571c812ea37521549a34ab1c6ad3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -314,6 +314,22 @@
       "path": "shape/Nereus_alt1.mod.wf",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/Nereus_alt1.mod.wf",
       "credit": "Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "evidence": "The preserved credit for this input reads: Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy",
+            "missionId": "arecibo-planetary-radar"
+          },
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "evidence": "The preserved credit for this input reads: Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy",
+            "missionId": "goldstone-solar-system-radar"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",

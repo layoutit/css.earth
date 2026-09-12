@@ -1,0 +1,32 @@
+{
+  "id": "artwork-photo-irtf",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "irtf photograph",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://commons.wikimedia.org/wiki/File:NASA_Infrared_Telescope_Facility_(MaunaKea_Summit_Dome).jpg",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/NASA_Infrared_Telescope_Facility_%28MaunaKea_Summit_Dome%29.jpg",
+      "label": "Original file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:NASA_Infrared_Telescope_Facility_(MaunaKea_Summit_Dome).jpg",
+      "checkedOn": "2026-09-11",
+      "locator": "File licence, author and original file size"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Wikimedia Commons",
+  "creators": [
+    "NOIRLab/NSF/AURA/P. Horálek"
+  ]
+}
