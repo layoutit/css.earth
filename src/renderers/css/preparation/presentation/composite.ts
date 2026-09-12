@@ -3,8 +3,13 @@ import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant, PreparedWrite } from '../../rendering/prepared-presentation.js';
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
 import type { PreparedNode, PresentationAdapters } from './adapters.js';
+import { DEFAULT_TEXTURE_LEVELS, preparePreparedTextureLevels } from '../../../../platform/prepared-texture-levels.mts';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard';
+/** The layers the banded mesh paints from a whole-body map, each written at both
+ * prepared densities over one atlas layout. The material plane is not one of
+ * them: it carries its own projection and frame addressing. */
+const LEVELLED_LAYERS = ['surface', 'poles'] as const;
 export async function prepareComposite(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
   const { namespace: ns, scene: plan, assets, lenses, sun, markers: systemMarkerStrip, solarSource: solarSystemSource } = input;
   const { createPreparedNodeTree, prepareCssomDeclarationReads, prepareCatalogueStars, prepareSolarSystemPresentation, navigationMarkers: PREPARED_NAVIGATION_MARKERS } = adapters;
@@ -20,8 +25,21 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
     ...(atmospheric?[{key:"lighting",url:canonicalPreparedAsset(material.lightingUrl,material.lighting2xUrl),pool:"warm"}]
       :[{key:"shadowless",url:bank!.presentations[bank!.presentations.length-1]!.url,pool:"warm"},{key:BILLBOARD_LIGHTING_KEY,url:bank!.billboard.url,pool:"warm"}])];
   const lightingRows=atmospheric?[]:bank!.rows.map((row,index)=>({key:`lighting:${index}`,url:row.url,pool:"lighting"}));
-  const entries=[...warm,...lenses.controls.flatMap(lens=>layers.map(layer=>({key:`${layer}:${lens.id}`,
-    url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material"}))),...lightingRows];
+  // The published rule used to pin one address per body, per lens and per layer at
+  // the canonical density, so no prepared level could reach a pixel. It reads the
+  // layer property these writes own instead, and the shared selection swaps the
+  // pair by projected silhouette. Absent profile takes the shared rule; null declines.
+  const profile=input.textureLevels===null?null:input.textureLevels??DEFAULT_TEXTURE_LEVELS;
+  const levels=profile?preparePreparedTextureLevels(profile,assets.surfaceDimensions?.width,
+    lenses.controls.flatMap(lens=>LEVELLED_LAYERS.map(layer=>({key:`${layer}:${lens.id}`,pool:"material",
+      one:lens[`${layer}Url`],two:lens[`${layer}2xUrl`],width:assets.surfaceDimensions?.width})))):null;
+  const initialResource=(key: string)=>levels?.initialResource(key)??key;
+  const entries=[...warm,
+    ...(levels?levels.entries:lenses.controls.flatMap(lens=>LEVELLED_LAYERS.map(layer=>({key:`${layer}:${lens.id}`,
+      url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material"})))),
+    ...(atmospheric?lenses.controls.map(lens=>({key:`material:${lens.id}`,
+      url:canonicalPreparedAsset(lens.materialUrl,lens.material2xUrl),pool:"material"})):[]),
+    ...lightingRows];
   const required=(id: string)=>[...layers.map(layer=>`${layer}:${id}`),...(atmospheric?[]:["shadowless",BILLBOARD_LIGHTING_KEY])];
   const b=createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.leaves.map(leaf => leaf.style)) });
   const camera=b.element("div","polycss-camera planet-render-root");
@@ -29,6 +47,14 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   const system=b.mesh(`${ns}-system`,`transform:${plan.systemTransform}`),body=b.mesh(`${ns}-body`,"",{style:""});
   b.append(null,camera);b.append(camera,scene);b.append(scene,system);b.append(system,body);
   for(const leaf of plan.body.leaves)b.append(body,b.leaf(leaf));
+  // The published rule for each layer reads this property, so one write repaints
+  // every leaf of that layer. It lives on the system mesh, not the body: the body
+  // keeps the empty source declaration the contract preserves for its runtime
+  // pose. The retained tree stands alone here before the first selection commits.
+  for(const layer of LEVELLED_LAYERS){
+    const mounted=entries.find(entry=>entry.key===initialResource(`${layer}:${lenses.defaultLens}`));
+    if(mounted)system.style.setProperty(`--${ns}-${layer}-image`,`url("${mounted.url}")`);
+  }
   const composite=b.element("div",`${ns}-material-composite planet-render-root`,"",{"aria-hidden":"true"});
   const plane=b.element("s",`${ns}-fixed-material`);
   if(atmospheric){plane.style.backgroundSize=material.backgroundSize;plane.style.backgroundPosition=material.backgroundPositions[material.defaultFrame];}
@@ -60,6 +86,8 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   for(const lens of lenses.controls)for(const atmosphere of atmospheres)for(const stars of [false,true])for(const shadows of [false,true]){
     const focus=input.lensFocus?.[lens.id];
     variants.push({...(focus?{navigation:adapters.prepareLensNavigation(solarSystemSource.bodyId,focus,plan.camera)}:{}),when:{lensId:lens.id,...(atmosphere===null?{}:{atmosphere}),stars,shadows},required:required(lens.id),writes:[
+      ...LEVELLED_LAYERS.map(layer=>({kind:"texture",target:index(system),name:`--${ns}-${layer}-image`,
+        resource:`${layer}:${lens.id}`,quoted:true} as PreparedWrite)),
       {kind:"attribute",target:-1,name:"data-lens",value:lens.id},{kind:"attribute",target:-1,name:"data-view",value:null},
       ...(atmosphere===null?[]:[{kind:"class",target:-1,name:`${ns}-hide-atmosphere`,value:!atmosphere} as PreparedWrite]),
       {kind:"class",target:-1,name:`${ns}-hide-stars`,value:!stars},
@@ -88,8 +116,8 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
       preparedResourcePool("material",entries,{retention:"selection",capacity:6,concurrency:6}),
       ...(atmospheric?[]:[preparedResourcePool("lighting",entries,{retention:"selection",decoding:"sync",capacity:bank!.transport.maximumRetainedRowCount,
         concurrency:bank!.transport.maximumRetainedRowCount,eviction:"capacity",reuse:true})])],
-      startup:[...new Set([...warm.map(entry=>entry.key),...required(lenses.defaultLens),...(atmospheric?[]:bank!.transport.initialWarmRows.map(row=>`lighting:${row}`))])]},
-    tree,variants,...(atmospheric?{}:{resourceOrder:"materials-first" as const}),materials:[track],
+      startup:[...new Set([...warm.map(entry=>entry.key),...required(lenses.defaultLens).map(initialResource),...(atmospheric?[]:bank!.transport.initialWarmRows.map(row=>`lighting:${row}`))])]},
+    tree,variants,...(levels?{textureLevels:levels.textureLevels}:{}),...(atmospheric?{}:{resourceOrder:"materials-first" as const}),materials:[track],
     heliocentricView,
     viewBindings:[{kind:"silhouette-fit",target:index(composite),minimumRadius:POINT_MIN_RADIUS_PX,
       unitScale:2/plan.camera.logicalBodyDiameter},

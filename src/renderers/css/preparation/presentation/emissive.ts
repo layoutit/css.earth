@@ -7,6 +7,7 @@ import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant } from '../../rendering/prepared-presentation.js';
 import type { PresentationInputs, PresentationDraft } from './types.js';
 import type { PresentationAdapters } from './adapters.js';
+import { DEFAULT_TEXTURE_LEVELS, preparePreparedTextureLevels } from '../../../../platform/prepared-texture-levels.mts';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const LAYERS = ['surface', 'poles', 'corona', 'limb'] as const;
 
@@ -16,7 +17,15 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   const material = plan.material as unknown as { model?: string; offLimbContext?: { logicalSize: number }; limbMaterial?: { logicalSize: number } };
   if (material.model !== 'emissive' || !assets.emission) throw new TypeError('Emissive presentation needs the prepared emission material and plates.');
   if (input.sun !== null && input.sun !== undefined) throw new TypeError('An emissive body carries no directional Sun.');
-  const entries = lenses.controls.flatMap(lens => LAYERS.map(layer => ({ key: `${layer}:${lens.id}`,
+  // Every plate of an unlit body is written at both prepared densities over one
+  // layout, so the shared selection swaps the pair by projected silhouette.
+  const profile = input.textureLevels === null ? null : input.textureLevels ?? DEFAULT_TEXTURE_LEVELS;
+  const levels = profile ? preparePreparedTextureLevels(profile, assets.surfaceDimensions?.width,
+    lenses.controls.flatMap(lens => LAYERS.map(layer => ({ key: `${layer}:${lens.id}`, pool: 'material',
+      one: lens[`${layer}Url` as 'surfaceUrl'], two: lens[`${layer}2xUrl` as 'surface2xUrl'],
+      width: assets.surfaceDimensions?.width })))) : null;
+  const initialResource = (key: string) => levels?.initialResource(key) ?? key;
+  const entries = levels ? levels.entries : lenses.controls.flatMap(lens => LAYERS.map(layer => ({ key: `${layer}:${lens.id}`,
     url: canonicalPreparedAsset(lens[`${layer}Url` as 'surfaceUrl'], lens[`${layer}2xUrl` as 'surface2xUrl']), pool: 'material' })));
   const required = (id: string) => LAYERS.map(layer => `${layer}:${id}`);
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.leaves.map(leaf => leaf.style)) });
@@ -41,8 +50,8 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   ], materials: [] }));
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun: null,
     assets: { entries, pools: [preparedResourcePool('material', entries, { retention: 'selection', capacity: 8, concurrency: 8 })],
-      startup: required(lenses.defaultLens) },
-    tree, variants, materials: [],
+      startup: required(lenses.defaultLens).map(initialResource) },
+    tree, variants, ...(levels ? { textureLevels: levels.textureLevels } : {}), materials: [],
     viewBindings: [
       ...[corona, limb].map(node => ({ kind: 'silhouette-fit' as const, target: index(node), minimumRadius: POINT_MIN_RADIUS_PX, unitScale: 2 / plan.camera.logicalBodyDiameter })),
       { kind: 'view-attribute', target: -1, property: 'data-lod', source: 'level-of-detail-stage', precision: null },

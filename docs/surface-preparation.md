@@ -28,11 +28,26 @@ according to projected CSS size, independently of DPR; dataset selection remains
 manual. These texture levels are separate from its retired geographic paging.
 The [texture-level implementation and measurements](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-prepared-texture-levels.md)
 record that change; [Earth's README](../src/planets/earth/README.md) describes the
-current datasets and retained source history. A row-bank cutaway body can declare
-the same kind of levels in its presentation recipe. Its density 1 and 2 surface
-maps become two levels, chosen by the same texels-per-CSS-pixel rule
-([surface texture levels](../src/renderers/css/preparation/presentation/surface-texture-levels.ts)).
-[Mercury's README](../src/planets/mercury/README.md) records its thresholds.
+current datasets and retained source history.
+
+Every other prepared body levels its layers by the same texels-per-CSS-pixel
+rule, in one shared builder
+([prepared texture levels](../src/platform/prepared-texture-levels.mts)). Levels
+are a property of the prepared layers, not of a material mode: a layer the raster
+recipe wrote at densities 1 and 2 over one atlas layout becomes two levels, and
+the shared selection swaps them by projected silhouette alone. A presentation
+recipe may set `textureLevels` to change the rule, or to `null` to decline levels
+for a body that should not have them. Because the leaves size their backgrounds
+in CSS pixels, a level changes only the prepared address; nothing is resampled
+offline or at runtime, and device pixel ratio is never an input.
+
+One threshold governs a whole body, taken from the surface map that covers the
+whole disc. The other layers ride that switch rather than carrying thresholds of
+their own, because the prepared transport does not carry each layer's own mapping
+of texels to screen. [Mercury's README](../src/planets/mercury/README.md) records
+its thresholds, and the
+[measurements](performance/prepared-texture-levels.md) record what levelling the
+shared raster lane recovered.
 
 ## Decode the source before choosing its display
 

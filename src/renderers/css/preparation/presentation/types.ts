@@ -9,6 +9,7 @@ import type { PreparedTree, PreparedVariant, PreparedViewBinding } from '../../r
 import type { PreparedMaterialTrack, PreparedMaterialAddress, PreparedMaterialRotation } from '../../rendering/prepared-material.js';
 import type { HeliocentricViewPlan } from '../../../../platform/heliocentric-view.mts';
 import type { PreparedTextureLevels } from '../../rendering/prepared-texture-levels.js';
+import type { TextureLevelProfile } from '../../../../platform/prepared-texture-levels.mts';
 type PreparedMarkers = Awaited<ReturnType<typeof import('../../../../../tools/objects/solar-system-markers.mts').prepareSolarSystemMarkerStrip>>['plan'];
 
 export interface Lens {
@@ -23,8 +24,10 @@ export interface AtlasAddress { frameIndex: number; rowIndex: number; url: strin
 export interface Billboard { schema: string; url: string; columns: number; rowCount: number; frameCount: number; presentations: AtlasAddress[]; }
 export interface Bank { billboard: Billboard; presentations: AtlasAddress[]; rows: {url: string}[];
   transport: {framesPerRow: number; maximumRetainedRowCount: number; defaultFrame: number; initialWarmRows: number[]}; }
-/** Authored silhouette rule for prepared surface levels; see surface-texture-levels.ts. */
-export interface TextureLevelProfile { hysteresis: number; texelsPerCssPixel: number; }
+/** The silhouette rule and its default belong to the shared platform builder,
+ * so the in-renderer compiler and the object tools level layers by one rule. */
+export type { TextureLevelProfile };
+export { DEFAULT_TEXTURE_LEVELS } from '../../../../platform/prepared-texture-levels.mts';
 export interface RasterAssets {
   surfaceDimensions: { width: number; height: number };
   poles: { url: string; url2x?: string };
@@ -65,7 +68,7 @@ export interface PresentationInputs {
   namespace: string; mode: 'row-bank-cutaway' | 'composite' | 'emissive';
   scene: Scene; assets: RasterAssets; lenses: Lenses; sun: DirectionalSunPlan | null;
   markers?: PreparedMarkers; solarSource: SolarSource; controls: ObjectControls;
-  textureLevels?: TextureLevelProfile;
+  textureLevels?: TextureLevelProfile | null;
   /** Authored surface targets (positive-east degrees) a lens selects; composite only. */
   lensFocus?: Record<string, { longitudeDegrees: number; latitudeDegrees: number; zoom: number }>;
 }

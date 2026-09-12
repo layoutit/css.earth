@@ -1,9 +1,9 @@
 import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant, PreparedWrite } from '../../rendering/prepared-presentation.js';
-import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
+import type { AtlasAddress, Lens, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
 import type { PreparedNode, PresentationAdapters } from './adapters.js';
-import { prepareSurfaceTextureLevels } from './surface-texture-levels.js';
+import { preparePreparedTextureLevels } from '../../../../platform/prepared-texture-levels.mts';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard';
 export async function prepareRowBankCutaway(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
@@ -27,16 +27,20 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   const interiorKeys = ["outerSurface", "outerPoles", "outerSurfaceUnlit", "outerPolesUnlit", "core", "corePoles", "section"];
   // Optional prepared surface levels: mount and startup use level 0; the
   // shared selection refines by projected silhouette after first paint.
-  const levels = input.textureLevels ? prepareSurfaceTextureLevels(input.textureLevels, lenses.controls, assets.surfaceDimensions?.width) : null;
-  const initialResource = (key: string) => levels?.textureLevels.levels[0].resources[key] ?? key;
+  const exterior = lenses.controls.filter(lens => lens.view === "exterior");
+  const surfacePool = (lens: Lens) => lens.id === lenses.defaultLens ? "warm" : "lenses";
+  const levels = input.textureLevels
+    ? preparePreparedTextureLevels(input.textureLevels, assets.surfaceDimensions?.width,
+      exterior.map(lens => ({ key: `surface:${lens.id}`, pool: surfacePool(lens),
+        one: lens.surfaceUrl, two: lens.surface2xUrl, width: assets.surfaceDimensions?.width })))
+    : null;
+  const initialResource = (key: string) => levels?.initialResource(key) ?? key;
   const entries = [...preparedSunResources(sun, "warm"),
     { key: "poles", url: canonicalPreparedAsset(assets.poles), pool: "warm" },
     { key: "shadowless", url: bank.presentations[bank.presentations.length - 1].url, pool: "warm" },
     { key: BILLBOARD_LIGHTING_KEY, url: billboard.url, pool: "warm" },
-    ...lenses.controls.filter(lens => lens.view === "exterior").flatMap(lens => {
-      const pool = lens.id === lenses.defaultLens ? "warm" : "lenses";
-      return levels ? levels.entries(lens, pool) : [{ key: `surface:${lens.id}`, url: canonicalPreparedAsset(lens.surfaceUrl, lens.surface2xUrl), pool }];
-    }),
+    ...(levels ? levels.entries : exterior.map(lens => ({ key: `surface:${lens.id}`,
+      url: canonicalPreparedAsset(lens.surfaceUrl, lens.surface2xUrl), pool: surfacePool(lens) }))),
     ...interiorKeys.map(name => ({ key: `interior:${name}`, pool: "lenses", url: canonicalPreparedAsset(assets.interior[`${name}Url`], assets.interior[`${name}2xUrl`]) })),
     ...bank.rows.map((row, index) => ({ key: `lighting:${index}`, url: row.url, pool: "lighting" })),
   ];

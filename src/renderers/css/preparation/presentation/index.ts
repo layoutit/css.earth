@@ -4,15 +4,16 @@ import { prepareRowBankCutaway } from './row-bank-cutaway.js';
 import { prepareComposite } from './composite.js';
 import { prepareEmissive } from './emissive.js';
 import type { PresentationInputs, TextureLevelProfile } from './types.js';
-import { parseTextureLevelProfile } from './surface-texture-levels.js';
+import { parseTextureLevelProfile } from '../../../../platform/prepared-texture-levels.mts';
 import { prepareActivationGroups } from '../../../../../tools/prepared-activation-groups.mts';
 export type { PresentationInputs } from './types.js';
 
 export interface PresentationProfile {
   schema: 'cssearth-css-presentation-profile@1'; namespace: string;
   mode: PresentationInputs['mode'];
-  /** Prepared surface levels chosen by projected silhouette; row-bank cutaway only. */
-  textureLevels?: TextureLevelProfile;
+  /** Prepared layer levels chosen by projected silhouette. Absent takes the
+   * shared default; `null` declines levels for a body that should not have them. */
+  textureLevels?: TextureLevelProfile | null;
   /** Authored surface targets (positive-east degrees) selected with a lens; composite only. */
   lensFocus?: Record<string, { longitudeDegrees: number; latitudeDegrees: number; zoom: number }>;
 }
@@ -23,10 +24,9 @@ export function parsePresentationProfile(value: unknown): PresentationProfile {
       !/^[a-z][a-z0-9-]*$/.test(input.namespace) || !['row-bank-cutaway', 'composite', 'emissive'].includes(String(input.mode))) {
     throw new TypeError('Unsupported CSS presentation profile.');
   }
-  if (input.textureLevels !== undefined) {
-    if (input.mode !== 'row-bank-cutaway') throw new TypeError('Surface texture levels require the row-bank cutaway presentation.');
-    parseTextureLevelProfile(input.textureLevels);
-  }
+  // Levels are a property of the prepared layers, not of the material mode: the
+  // shared selection only ever reads the projected silhouette.
+  if (input.textureLevels !== undefined && input.textureLevels !== null) parseTextureLevelProfile(input.textureLevels);
   if (input.lensFocus !== undefined) {
     if (input.mode !== 'composite' || !input.lensFocus || typeof input.lensFocus !== 'object' || Array.isArray(input.lensFocus)) throw new TypeError('Lens focus requires the composite presentation.');
     for (const [lens, focus] of Object.entries(input.lensFocus as Record<string, Record<string, unknown>>)) {
@@ -38,7 +38,6 @@ export function parsePresentationProfile(value: unknown): PresentationProfile {
 /** Compile capabilities into a retained CSS tree; the runtime accepts only validated data. */
 export async function prepareCssPresentation(input: PresentationInputs) {
   if (input.namespace !== input.solarSource.bodyId) throw new TypeError('Presentation and physical source identities disagree.');
-  if (input.textureLevels !== undefined && input.mode !== 'row-bank-cutaway') throw new TypeError('Surface texture levels require the row-bank cutaway presentation.');
   const adapters = await loadPresentationAdapters();
   const compile = input.mode === 'row-bank-cutaway' ? prepareRowBankCutaway : input.mode === 'composite' ? prepareComposite : input.mode === 'emissive' ? prepareEmissive : null;
   if (!compile) throw new TypeError('Unsupported material composition.');
