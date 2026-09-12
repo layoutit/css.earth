@@ -67,6 +67,45 @@
         "summary": "Shape from DART and LICIACube encounter images, including modeled terrain. It is not a post-impact map."
       },
       {
+        "id": "draco",
+        "label": "DRACO image",
+        "description": "One DRACO photograph, taken 11 seconds before DART struck, projected onto the shape model through the camera recovered from the archived per-pixel geometry. Grid marks surface the camera did not see or that lay in shadow; the far side was never photographed. Brightness is disk-normalized; it is not measured albedo.",
+        "title": "DRACO terminal approach image",
+        "thumbnail": "/scenes/dimorphos/dimorphos-draco-thumbnail.webp",
+        "surface": "dimorphos-draco-surface@2x.webp",
+        "poles": "dimorphos-draco-poles@2x.webp",
+        "source": {
+          "id": "draco-0401930040-12262-geo",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/"
+        },
+        "falseColor": false,
+        "detail": "DRACO · DART",
+        "facts": [
+          {
+            "id": "observed",
+            "label": "Observed",
+            "value": "26 September 2022, 23:14:12 UTC"
+          },
+          {
+            "id": "coverage",
+            "label": "Surface photographed",
+            "value": "About 17% of the displayed mesh"
+          },
+          {
+            "id": "footprint",
+            "label": "Pixel footprint",
+            "value": "0.35 m from 70 km"
+          },
+          {
+            "id": "filter",
+            "label": "Camera filter",
+            "value": "None · panchromatic"
+          }
+        ],
+        "summary": "One DRACO photograph from 11 seconds before impact, projected onto the shape model. Grid marks unphotographed or shadowed surface."
+      },
+      {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows source-mesh radius minus a 75 m reference sphere, including the overall flattened shape. It is not height above an equipotential or a map of impact-induced change. Terrain coverage and precision follow the published encounter model. Cartographic relief and optional Sun lighting are display treatments.",
@@ -155,6 +194,7 @@
       }
     ],
     "labels": {
+      "draco": "DRACO image",
       "slope": "Slope"
     }
   },

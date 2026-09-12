@@ -14,14 +14,31 @@ Borrelly compares two reconstructions of the Deep Space 1 encounter terrain and 
 
 The [9 September 2026 browser record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/borrelly/browser.json) covers five datasets, lighting states, DPR 1/2 and a fresh asset installation. The [qualification report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/BORRELLY.md) links source-fit, registration and capture evidence. These are recorded results; they do not establish physical-mobile performance or a fresh unrestricted all-body preparation run.
 
+Four terrain places follow [Britt et al. (2004), Figs. 1 and 4](https://doi.org/10.1016/j.icarus.2003.09.004): Upper Mottled Terrain, Central Mesas, Central Smooth Terrain and Lower Mottled Terrain. Image controls transfer selected interiors from the published unit map to the native MICAS orthophoto and XYZ cubes. The map-to-photo fit has 55 withheld controls (1.41 pixels RMS, 5.43 maximum); the photo-to-orthophoto fit has 32 (1.10 native pixels RMS, 2.19 maximum). These measure image correspondence, not absolute geological accuracy. [Recomputed placements](source/features/evidence/image-landmarks.json) retain both fitted and withheld residuals.
+
+The [terrain-place browser record](evidence/terrain-places/browser.json) covers all four search flights at 1440 × 900 and 390 × 844 on main `e986b9280` plus this change. Inspected [desktop](evidence/terrain-places/desktop.png) and [mobile viewport](evidence/terrain-places/mobile.png) captures show the MICAS labels and qualified captions. Shadows stay Off, all 2,856 retained leaves survive the selections, and switching to DLR hides the labels. Sixteen focused tests, preparation build/typecheck, coordinate reproduction and both changed bodies' provenance pass. Aggregate source preparation is blocked by unchanged Earth, Moon and Mars recipe pins on that main revision; full browser conformance was not rerun.
+
 ## Known problems
 
 - The 16 m USGS grid oversamples roughly 150 m stereo terrain. Height is displacement above an arbitrary image plane.
 - The orthophoto comes from a rescued website outside formal PDS product review; verified placement does not establish radiometric calibration.
 - Model differences include registration sensitivity of about 200–206 m RMS. They are not physical change.
 - The gridded rear and 3.15 km depth are assumptions. Sampled geometry checks are not continuous error bounds.
+- Terrain labels are limited to the MICAS source-range mesh. They do not apply to the estimated rear, the DLR alternative, or a terrain-unit boundary.
+- Lower Smooth Terrain remains withheld: its selected source point is too close to the photograph's support edge for the broad placement check. The four included places remain approximate and carry that qualification in their captions.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
+
+<details>
+<summary>Reproducing terrain places</summary>
+
+The [control measurements](source/features/control-measurements.json) retain two image matches: the annotated unit map to its unannotated photograph, then that photograph to the archived orthophoto. Interior patches use fixed checkerboard fit/holdout partitions; white map annotations, weak matches and ambiguous matches are excluded before fitting. Every retained control contributes to the reported residuals. Initial image alignment and the fitted correction are separate in the recipe.
+
+The [landmark recipe](source/features/image-registration.json) pins those measurements and all four native cubes. `node tools/objects/surface-features/project-orthophoto-landmarks.mts comet-19p` recomputes the affine fits, reads each XYZ sample and compares the resulting landmarks and evidence. The 16 m sample spacing oversamples the roughly 150 m source terrain. Subpixel image residuals do not increase that terrain resolution.
+
+Preparation applies the existing −2200 m Z translation once and attaches each point to the unchanged display within 85 m. Since this image-plane datum is arbitrary, a radial direction can point through the gridded rear. These labels opt into the local display facet's normal for facing and the existing camera flight. Neither the renderer nor the mesh changes.
+
+</details>
 
 <details>
 <summary>Selected terrain and photograph products</summary>

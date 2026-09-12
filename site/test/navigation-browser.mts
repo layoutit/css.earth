@@ -7,6 +7,7 @@ declare global {interface Window {__navigationProof:NavigationProof;}}
 import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
+import { revealObjectLink, selectObject } from './navigate-object.mts';
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://127.0.0.1:4210';
 const browser = await chromium.launch({ headless: true, channel: 'chrome' });
@@ -34,14 +35,15 @@ try {
   });
   const capture = () => page.evaluate(() => window.__navigationProof.capture());
   const waitFor = (id:string) => page.waitForFunction(id => location.pathname === `/${id}/` && window.__cssEarth?.activeObjectId === id && window.__cssEarth?.ready === true, id, { timeout: 60000 });
-  const select = async (id:string) => { await page.locator(`a.scale-stop[href="/${id}/"]`).click(); await waitFor(id); };
+  const select = async (id:string) => { await selectObject(page, id); await waitFor(id); };
   const mercury = await capture();
   await page.waitForFunction(() => new URL(location.href).searchParams.has('v'));
   const savedMercuryUrl = page.url();
   await select('venus');
   const venus = await capture();
-  await page.locator('a.scale-stop[href="/mercury/"]').evaluate((anchor, href) => { if(!(anchor instanceof HTMLAnchorElement))throw new Error("Expected navigation anchor"); anchor.href = href; }, savedMercuryUrl);
-  await page.locator(`a.scale-stop[href="${savedMercuryUrl}"]`).click(); await waitFor('mercury');
+  const mercuryLink = await revealObjectLink(page, 'mercury');
+  await mercuryLink.evaluate((anchor, href) => { if(!(anchor instanceof HTMLAnchorElement))throw new Error("Expected navigation anchor"); anchor.href = href; }, savedMercuryUrl);
+  await mercuryLink.click(); await waitFor('mercury');
   samePose(await capture(), mercury);
   assert.equal(await page.evaluate(() => window.__navigationProof.pushes), 2);
   await page.evaluate(() => history.back()); await waitFor('venus');
@@ -49,7 +51,7 @@ try {
   await page.evaluate(() => history.back()); await waitFor('mercury');
   samePose(await capture(), mercury);
   const before = await capture();
-  await page.locator('a.scale-stop[href="/venus/"]').click();
+  await (await revealObjectLink(page, 'venus')).click();
   await page.waitForFunction(before => {
     const p = window.__navigationProof;
     return p && window.__cssearthTest.scene().activeObjectId === 'mercury' &&

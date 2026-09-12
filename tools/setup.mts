@@ -12,9 +12,11 @@ import { runtimeAssets, setupObjectIds } from "./runtime-assets.mts";
 export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation[], { fetcher = fetch, concurrency = 8,
   onProgress = () => {} }: {fetcher?: typeof fetch; concurrency?: number; onProgress?: (progress: InstallProgress) => void} = {}) {
   let next = 0, installed = 0, reused = 0;
-  let failure: unknown;
+  // A fresh checkout should learn about every missing or drifted file in one
+  // run, so keep installing after a failure and report them together.
+  const failures: string[] = [];
   await Promise.all(Array.from({ length: Math.min(concurrency, assets.length) }, async () => {
-    while (!failure && next < assets.length) {
+    while (next < assets.length) {
       const asset = assets[next++];
       try {
         let existing: Buffer | undefined;
@@ -42,10 +44,12 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
           installed++;
         }
         onProgress({ completed: installed + reused, total: assets.length, installed, reused });
-      } catch (error) { failure ??= error; }
+      } catch (error) { failures.push(error instanceof Error ? error.message : String(error)); }
     }
   }));
-  if (failure) throw failure;
+  if (failures.length) {
+    throw new Error(`${failures.length} of ${assets.length} prepared files could not be installed:\n${failures.join('\n')}`);
+  }
   return { installed, reused };
 }
 

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bf596c698ec0bb86bad3436808340d3781d51814a074cd517e0cb6bb6bb2307d"
+    "sha256": "3b7c103abe61ea36a1f85268b98e847cbe066b57724c6fe42fa3b9ece40875f7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
   },
   "recipes": [
     {
@@ -2368,7 +2368,15 @@
       "bytes": 116096,
       "dependencies": [],
       "verification": "manifest-pin",
-      "acquisitionOperation": null,
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "features/traverses/APOLLO_11.ZIP",
+        "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_11/APOLLO_11.ZIP"
+      },
       "verificationOperations": []
     },
     {
@@ -2394,7 +2402,15 @@
       "bytes": 313003,
       "dependencies": [],
       "verification": "manifest-pin",
-      "acquisitionOperation": null,
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "features/traverses/APOLLO_12.ZIP",
+        "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_12/APOLLO_12.ZIP"
+      },
       "verificationOperations": []
     }
   ],

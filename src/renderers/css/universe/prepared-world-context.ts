@@ -725,7 +725,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         get center() { return entry.center; },
         get labelRect() { return entry.labelRect; },
         // Orbit leaves are built on first use; report the retained leaves now.
-        get orbit() { return Object.freeze(entry.pieces.filter((piece): piece is Element => piece !== undefined)); },
+        get orbit() { return Object.freeze(entry.pieces.filter((piece): piece is HTMLElement | SVGElement => piece !== undefined)); },
       })));
     },
     selectObject(id: string) {
