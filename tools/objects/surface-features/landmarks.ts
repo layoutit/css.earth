@@ -41,11 +41,12 @@ export function parseLandmarks(value: unknown) {
       if (longitudeDeg < 0 || longitudeDeg >= 360 || Math.abs(latitudeDeg) > 90) throw new TypeError('Landmark coordinates out of range.');
       position = { longitudeDeg, latitudeDeg };
     }
+    if (e.normal !== undefined && (e.normal !== 'surface' || !('pointMeters' in position))) throw new TypeError('Surface normals require a Cartesian landmark on the display mesh.');
     const minimumZoomShare = number(e.minimumZoomShare, 'landmark zoom');
     if (minimumZoomShare < 0 || minimumZoomShare > 1) throw new TypeError('Landmark zoom out of range.');
     const description = text(e.description, 'landmark description'), qualification = text(e.qualification, 'landmark qualification');
     if (`${description} ${qualification}`.length > 400) throw new TypeError('Landmark caption exceeds the shared 400-character limit.');
-    return { id, name: text(e.name, 'landmark name'), kind: kind as 'point' | 'region', type: text(e.type, 'landmark type'), position, minimumZoomShare,
+    return { id, name: text(e.name, 'landmark name'), kind: kind as 'point' | 'region', type: text(e.type, 'landmark type'), position, minimumZoomShare, normal: e.normal === 'surface' ? 'surface' as const : 'radial' as const,
       description, qualification,
       reference: { title: text(s.title, 'reference title'), url: url(s.url), credit: text(s.credit, 'reference credit') } };
   });
@@ -118,7 +119,7 @@ export async function prepareLandmarks(value: unknown, context: SurfaceFeaturePr
   }
   const evidence: { id: string; sourceFace?: number; displayFace?: number; distanceMeters?: number; regionId?: number }[] = [];
   const features: PreparedSurfaceFeature[] = doc.entries.map(e => {
-    let anchor: Vec, longitudeDeg: number, latitudeDeg: number;
+    let anchor: Vec, longitudeDeg: number, latitudeDeg: number, surfaceNormal: Vec | undefined;
     if ('regionId' in e.position) {
       const selected = regions.get(e.position.regionId);
       if (!selected) throw new TypeError(`No interior display triangle maps to ${e.name}; do not substitute a sphere point.`);
@@ -128,6 +129,10 @@ export async function prepareLandmarks(value: unknown, context: SurfaceFeaturePr
       const closest = preparedMesh.closestPoint(e.position.pointMeters, e.position.maximumDistanceMeters);
       if (!closest) throw new TypeError(`No display surface within the source-position budget for ${e.name}.`);
       anchor = prepared(closest.point);
+      // Image-plane DEMs have an arbitrary translated origin. Its radial direction can
+      // point through the rear completion; use the unchanged observed facet's normal
+      // for label facing and the existing flight contract when the source opts in.
+      if (e.normal === 'surface') surfaceNormal = unit(prepared(closest.normal));
       evidence.push({ id: e.id, displayFace: closest.faceId, distanceMeters: Number(closest.distanceMeters.toFixed(3)) });
     } else {
       const direction = surfaceDirection(e.position.longitudeDeg, e.position.latitudeDeg, axes, leftEdge);
@@ -140,7 +145,7 @@ export async function prepareLandmarks(value: unknown, context: SurfaceFeaturePr
     longitudeDeg = ((Math.atan2(body[1], body[0]) * 180 / Math.PI + leftEdge) % 360 + 360) % 360;
     latitudeDeg = Math.asin(body[2] / length(body)) * 180 / Math.PI;
     return { id: e.id, name: e.name, kind: e.kind, type: e.type, code: 'RE', diameterKm: 0, longitudeDeg, latitudeDeg,
-      anchorUnits: rounded(anchor, 3), normal: rounded(unit(anchor)), radiusUnits: 0,
+      anchorUnits: rounded(anchor, 3), normal: rounded(surfaceNormal ?? unit(anchor)), radiusUnits: 0,
       outline: { kind: 'circle', center: rounded(anchor, 3), east: [0, 0, 0], north: [0, 0, 0] },
       searchNames: [normalizeSearchText(e.name)], searchContext: normalizeSearchText(e.type),
       origin: '', approved: '', quad: 'mission-geography', link: e.reference.url, credit: e.reference.credit,
