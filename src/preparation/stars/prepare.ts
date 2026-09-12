@@ -8,8 +8,9 @@ import { loadStarSource } from './source.js';
 import { prepareStarHierarchy } from './hierarchy.js';
 import { preparePointAtlas, preparePointPhotometry } from '../../renderers/css/preparation/stars/material.js';
 import { containedPath, verifiedBytes, sha256 } from '../volume/source.js';
-import type { PreparedCssPointField } from './types.js';
+import type { PreparedCssPointFieldManifest } from './types.js';
 import { prepareDiffuseSky } from '../../renderers/css/preparation/stars/diffuse-sky.js';
+import { encodePointFieldBank } from '../../renderers/css/preparation/stars/point-field-bank.js';
 
 export async function prepareStarsObject(options: { objectDirectory: string; outputDirectory?: string }) {
   const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory,'prepared'));
@@ -28,16 +29,22 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
   const atlasPath = 'point-atlas.png', atlas = await preparePointAtlas(colors,recipe.atlas);
   await writeFile(resolve(outputDirectory,atlasPath),atlas);
   const diffuse=await prepareDiffuseSky(sourceDirectory,outputDirectory,recipe.diffuseSky);
-  const data: PreparedCssPointField = { schema:'cssearth-css-point-field@1',id,frame,stars:hierarchy.stars,nodes:hierarchy.nodes,
+  const photometry=preparePointPhotometry(recipe.photometry);
+  // Rows travel as a pinned binary column bank; the encoder decodes it again and asserts every bound.
+  const encoded = encodePointFieldBank({path:'stars.bin',idPrefix:recipe.catalogue.idPrefix,frame,colorCount:colors.length,
+    stars:hierarchy.stars,nodes:hierarchy.nodes,photometry,atlas:recipe.atlas});
+  await writeFile(resolve(outputDirectory,encoded.bank.path),encoded.bytes);
+  const data: PreparedCssPointFieldManifest = { schema:'cssearth-css-point-field-bank@1',id,frame,bank:encoded.bank,
     atlas:{path:atlasPath,columns:colors.length,tileSize:recipe.atlas.tileSize,colors,haloRadii:recipe.atlas.haloRadii},
-    photometry:preparePointPhotometry(recipe.photometry),policy:recipe.policy,labels:recipe.labels,
+    photometry,policy:recipe.policy,labels:recipe.labels,
     ...(recipe.diffuseSky ? {diffuseSky:diffuse.diffuseSky} : {}),
     resources:[{path:atlasPath,sha256:sha256(atlas),bytes:atlas.length,width:colors.length*recipe.atlas.tileSize,height:recipe.atlas.tileSize},...diffuse.resources],
     provenance:{source:source.provenance,catalogueMetadata:source.catalogueMetadata,qualification:'All catalogue rows retained at their recorded astrometry; no proper-motion propagation to the navigation epoch. Internal nodes approximate unresolved luminosity and position; no fixed pixel-error guarantee when the point pool is saturated.'} };
-  const envelope = {schema:'cssearth-prepared-object@1',id,type:'point-field',format:'cssearth-css-point-field@1',data};
+  const envelope = {schema:'cssearth-prepared-object@1',id,type:'point-field',format:'cssearth-css-point-field-bank@1',data};
   const bytes = Buffer.from(JSON.stringify(envelope)+'\n'), outputPath = resolve(outputDirectory,'stars.json');
   await writeFile(outputPath,bytes);
   if (outputDirectory===resolve(objectDirectory,'prepared')) await writeFile(descriptorPath,JSON.stringify({...descriptor,prepared:{format:envelope.format,url:relative(objectDirectory,outputPath).split('\\').join('/'),sha256:sha256(bytes)}},null,2)+'\n');
-  console.log(`PREPARED ${id}: ${data.stars.length} catalogue rows; ${data.nodes.length} hierarchy nodes; ${bytes.length} JSON bytes; ${atlas.length} atlas bytes`);
+  const magnitude = encoded.bank.quantization.find(entry => entry.field === 'star.absoluteMagnitude')!;
+  console.log(`PREPARED ${id}: ${encoded.bank.starCount} catalogue rows; ${encoded.bank.nodeCount} hierarchy nodes; ${bytes.length} manifest bytes; ${encoded.bytes.length} bank bytes; ${atlas.length} atlas bytes; magnitude error ${magnitude.measured} <= ${magnitude.bound} mag (pixel alpha <= ${magnitude.displayAlphaChange})`);
   return envelope;
 }

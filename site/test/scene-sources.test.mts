@@ -7,7 +7,7 @@ import { SourceEvidence } from './source-evidence-values.mts';
 import { required } from './navigation-test-values.mts';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { validatePreparedVolumeLenses } from '../../src/renderers/css/dist/universe.js';
-import { sceneSources } from '../scene-sources.mts';
+import { sceneSources, sceneSourceGroups } from '../scene-sources.mts';
 const sharedLabels = ['NASA SVS', 'OpenSpace', 'HYG', 'IBEX', 'LVDB', 'McConnachie', 'ESA/Hubble', 'ESO', 'NOIRLab', 'ESO VISTA', 'NOIRLab Horálek', 'NASA/IPAC WISE', 'Dryad', 'Bonanos', 'NOIRLab', 'MCXC-II'];
 
 test('small shell attribution records match the checked scientific provenance', async () => {
@@ -157,10 +157,28 @@ test('merges duplicate source links without dropping full credits or changing th
   assert.deepEqual(sceneSources(sources), sources);
 });
 
+test('footer groups print a shared provider name once and keep every source link', () => {
+  const sources = [
+    { label: 'NASA Science', role: 'facts', href: 'https://science.nasa.gov/', description: 'Facts' },
+    { label: 'JPL', role: 'orbit', href: 'https://ssd.jpl.nasa.gov/', description: 'Orbit' },
+    { label: 'NASA/IPAC WISE', role: 'LMC WISE image', href: 'https://irsa.ipac.caltech.edu/', description: 'Infrared' },
+    { label: 'NOIRLab', role: 'LMC registration', href: 'https://noirlab.edu/public/images/noirlab2030a/', description: 'LMC' },
+    { label: 'NOIRLab', role: 'SMC image', href: 'https://noirlab.edu/public/images/noirlab2030b/', description: 'SMC' },
+  ];
+  const groups = sceneSourceGroups(sources);
+  assert.deepEqual(groups.map(group => group.provider), ['NASA', '', 'NOIRLab']);
+  assert.deepEqual(groups.map(group => group.members.map(member => member.part)),
+    [['Science', 'IPAC WISE'], ['JPL'], ['LMC registration', 'SMC image']]);
+  assert.deepEqual(new Set(groups.flatMap(group => group.members.map(member => member.href))), new Set(sources.map(source => source.href)),
+    'every source keeps its own link; grouping gathers a provider’s entries together');
+  assert.deepEqual(sceneSourceGroups([sources[1]]), [{ provider: '', members: [{ ...sources[1], part: 'JPL' }] }],
+    'a lone provider keeps its whole label');
+});
+
 test('app credits and prepared body provenance have separate consumers on direct and cached routes', async () => {
   const read = (name: string) => readFile(new URL(`../components/${name}.astro`, import.meta.url), 'utf8');
-  const [shell, information, object, cards, context] = await Promise.all([
-    read('PlanetShell'), read('PlanetInformationPanel'), read('PreparedObjectPanel'), read('PreparedSidebarCards'), read('DatasetContextPanels'),
+  const [shell, information, object, context] = await Promise.all([
+    read('PlanetShell'), read('PlanetInformationPanel'), read('PreparedObjectPanel'), read('DatasetContextPanels'),
   ]);
   assert.match(shell, /const sources = sceneSources\(resources\)/u);
   assert.doesNotMatch(information, /sceneSources/u);
@@ -171,7 +189,6 @@ test('app credits and prepared body provenance have separate consumers on direct
   assert.doesNotMatch(object, /sourceManifests|sourceCharts|sourceLenses/u);
   assert.match(object, /resources=\{content.resources\}/u);
   assert.match(object, /provenance=\{provenance\}/u);
-  assert.match(cards, /<PreparedObjectPanel informationOnly/u);
-  assert.match(object, /const Panel = informationOnly \? PlanetInformationPanel : PlanetShell/u);
+  assert.match(object, /<PlanetShell\n/u);
   assert.match(shell, /<PlanetInformationPanel \{\.\.\.Astro\.props\} \/>/u);
 });

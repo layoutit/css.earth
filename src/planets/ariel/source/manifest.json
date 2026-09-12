@@ -46,8 +46,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/fcdd781c-765e-4686-928f-257395918dc8/download"
           }
@@ -108,8 +108,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/55639bf1-6c1c-4824-8634-d4a4500fb095/download"
           }
@@ -179,34 +179,295 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-ariel-nomenclature-center-pts",
+      "path": "features/ARIEL_nomenclature_center_pts.zip",
+      "expectedBytes": 105258,
+      "expectedSha256": "888421dd560af82e394a36241795dc5a751eca6267cd7b00255bc61424164923",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ARIEL_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Ariel on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Ariel centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/ARIEL/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "ariel-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1000,
+      "expectedSha256": "c3d77603c5fa77cff3567e76151f8c8d320f2b328f1af08c3dcd16668ee77d73",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "ariel-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1138,
+      "expectedSha256": "a1a54cf072c5a9c9c29ebadfd71732cbb44c288827bd5a79300c98703e4600a8",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "ariel-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "2cf793e4c2668bf456a4aa356ff01d593571943d37a020272c2a68f768c593f8",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "hyg-registration-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 848,
+      "expectedSha256": "e984aae46a79dde088dbbf3217f8737f5d498422a823ba4a46759a2c07186653",
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
+      ],
+      "acquisition": "checked prepared registration field from HYG v4.1",
+      "redistribution": "CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "src/planets/ariel/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ariel-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2044,
+      "expectedSha256": "c8f43a2c956afbda402deda755d32ac438e74e4e9578bec827a2d6887d35e8ee",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "deterministically generated Ariel title path from the repository-pinned Inter font",
+      "redistribution": "generated outline under the Inter license",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/ariel/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ariel-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 1628,
+      "expectedSha256": "8c153a4a3f0f7b4d975cc507463d82ac37a8b8c9aac1231f8e229f168b1dc605",
+      "origin": "Repository-authored Ariel solar-system recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "ariel-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 4822,
+      "expectedSha256": "7a953c407170a5deb2652171dee904c25bec3ed01f9d2c605124a876d239c950",
+      "origin": "Repository-authored Ariel raster recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "ariel-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1406,
+      "expectedSha256": "486563f5a4ad4ce7abafc4a11aa5cab421424387d509a251dc171a0d9ac10995",
+      "origin": "Repository-authored Ariel geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "ariel-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 222,
+      "expectedSha256": "1b6e3aaecbf5ea8b7c629984b5a546ddab73e5cfc9c24e2203da47fd628ef51b",
+      "origin": "Repository-authored Ariel celestial recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "ariel-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 101,
+      "expectedSha256": "1ee353b0d92170be9865cd4437945232eec6ab57178b5063eed3e1c557152022",
+      "origin": "Repository-authored Ariel presentation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "ariel-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 3289,
+      "expectedSha256": "a65c5d6f64bb8b39e6d1d8bf7cca259a85c8be5328c8768049fbcb0bed4cc637",
+      "origin": "Repository-authored Ariel navigation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "ariel-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1319,
+      "expectedSha256": "f03d3eaca0cdf89bfe4a4d121473fa083e23eb55ee1285d3bda118506d6fe286",
+      "origin": "Repository-authored Ariel acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "ariel-object-content",
+      "path": "content/object.json",
+      "expectedBytes": 8184,
+      "expectedSha256": "f353330cd8626bf91a855035e348c881104be918e8faab51889937b3036c9194",
+      "origin": "Repository-authored Ariel object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
     }
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 3588,
-      "expectedSha256": "4979ea9b66dcb5e0cb6d31e5de86383b67f9b974636436e223b4f1b4e4ffe209"
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 3289,
-      "expectedSha256": "a65c5d6f64bb8b39e6d1d8bf7cca259a85c8be5328c8768049fbcb0bed4cc637"
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1067,
-      "expectedSha256": "27f06730160eb35e1e73917009ae14f1ad9b21de163cf54ed9d115f7a1d2e2df"
-    },
-    {
-      "path": "content/object.json",
-      "expectedBytes": 7907,
-      "expectedSha256": "e7fd70a48468c97a3159353edd4d9f8e7af6a0175e3d8f952db40aca62ea7765",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
-    },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
@@ -223,20 +484,9 @@
       "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 848,
-      "expectedSha256": "e984aae46a79dde088dbbf3217f8737f5d498422a823ba4a46759a2c07186653"
-    },
-    {
       "path": "observations/aaReadMe_uranian_MAP_DEM.txt",
       "expectedBytes": 2426,
       "expectedSha256": "655661b4e4d5f5ada71d7b4b797afffefc2e908ae63b51d9d1fe3fca964d51a3"
-    },
-    {
-      "path": "presentation/title-mark.json",
-      "purpose": "Shared prepared Ariel title source.",
-      "expectedBytes": 2044,
-      "expectedSha256": "c8f43a2c956afbda402deda755d32ac438e74e4e9578bec827a2d6887d35e8ee"
     },
     {
       "path": "editorial/factsheet-review.json",
@@ -244,6 +494,29 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1073,
       "expectedSha256": "e139401178ff9b036c04fb60af3defe9e1cf38f6123516f5e58461cd43bebd3a"
+    },
+    {
+      "id": "ariel-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 2600,
+      "expectedSha256": "aa8ea37a21b17f98d4a0c4603d4e9c487295f3e51d6a7b2d85e2cea2cd14b7d5",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 5 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts ariel: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

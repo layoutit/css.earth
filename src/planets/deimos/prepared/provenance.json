@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7a7c9ed97431e20c1713e1e9f9f1cba7defbc1159a0183bd8e5080c7b5db6328"
+    "sha256": "6d52d35022823235d4744699d8ee2fb130012b097e4454f9e5197ef0101b47ff"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c55768b273de837e73cfbd6c0845dafd8ffaf1ff859d51b14ae9be82d0a4f3db",
+      "sha256": "b014c49a47cd0b550c2118f7770021d4516ce7d49311226de8b7071255018efe",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -38,6 +38,10 @@
                 "kind": "image-monochrome-no-data",
                 "noData": null,
                 "centerLongitude": 0
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           ],
@@ -491,6 +495,66 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "a506a4444aefd96a26db378ff62c80c4f35ef86f6ce0234d1519a939bd73c30f",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "DEIMOS_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "DEIMOS_nomenclature_center_pts.dbf",
+          "projection": "DEIMOS_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_DEIMOS.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "deimos-features.json",
+        "publicBase": "/scenes/deimos/",
+        "target": {
+          "className": "deimos-body"
+        },
+        "lensIds": [
+          "normal",
+          "elevation",
+          "albedo",
+          "slope"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 40,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        },
+        "notes": "notes.json"
+      }
     }
   ],
   "sources": [
@@ -535,8 +599,8 @@
             "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "mro",
+            "kind": "machine",
+            "machineId": "mro",
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/m2deimos/deimos_cyl_viking_mro.jpg",
             "missionId": "mro"
           }
@@ -668,6 +732,106 @@
       "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "deimos-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "189ecc12549ac04c847cc2e2bf7b060e64a18dc01ad39a13f3ae0579335711e9",
+      "bytes": 1004,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-deimos-nomenclature-center-pts",
+      "path": "features/DEIMOS_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DEIMOS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Deimos on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Deimos centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DEIMOS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "9c81729a25ba60d24b34174d9d578d13f164894dbd88821124cd57dbe57f067c",
+      "bytes": 42393,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/DEIMOS_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DEIMOS_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "deimos-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "8faeb7e748cac8fda155b3cc657fe7d6b8e176f9a81d12a5ff978c6ae649fffc",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "deimos-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts deimos: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "3381847add3b9ca15bce9d5d487792cab0ecd270708ab7348e5290ee8917aa7e",
+      "bytes": 1478,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -677,7 +841,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask."
       ],
@@ -692,6 +856,10 @@
           "kind": "image-monochrome-no-data",
           "noData": null,
           "centerLongitude": 0
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -707,8 +875,8 @@
         },
         {
           "url": "/scenes/deimos/deimos-normal-surface@2x.webp",
-          "bytes": 1669392,
-          "sha256": "6ad790e385e9701c2d39de34c5c577b8fc69f5210b0413006901651d8f46e033",
+          "bytes": 1611872,
+          "sha256": "64882bfe4920d016dd5c918b1d727a03a0d0e0f08ddbc5b6d2becd5864419123",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -867,9 +1035,44 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6074,
-          "sha256": "599285fbf05e832f34a9718fe7bbbbd10d318367c1b5cc4f01eb91bff6aee146",
+          "bytes": 6191,
+          "sha256": "1c9a9850c81cbc137a3c2e817fefee36fd34343256b83befa4cf4aca9411a887",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "deimos-surface-features-source",
+        "usgs-gazetteer-deimos-nomenclature-center-pts",
+        "deimos-surface-map-frame",
+        "deimos-surface-feature-notes"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/deimos/deimos-features.json",
+          "bytes": 3217,
+          "sha256": "fb10c6f199ce9d415a293d9a8f396881af6589236dc7d61b944e0819685dba60",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

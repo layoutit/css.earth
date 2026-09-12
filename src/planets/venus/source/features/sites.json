@@ -1,0 +1,294 @@
+{
+  "schema": "cssearth-surface-sites@1",
+  "source": "Spacecraft landing, touchdown and impact sites compiled from NASA NSSDCA, PDS, LROC, mission releases and cited papers; every coordinate quotes its page",
+  "retrievedAt": "2026-09-12",
+  "sites": [
+    {
+      "id": "venera-8",
+      "name": "Venera 8",
+      "kind": "lander",
+      "date": "1972-07-22",
+      "machineId": null,
+      "latitudeDeg": -10.7,
+      "longitudeDegEast": 335.25,
+      "coordinateNote": "As stated by NSSDCA (east longitude). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Venera 8",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1972-021A",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Venera 8 landed at 09:32 UT at approximately 10.70 degrees south, 335.25 degrees east, at 6:24 local Venus solar time, solar zenith angle was 84.5 degrees."
+    },
+    {
+      "id": "venera-9",
+      "name": "Venera 9 lander (Beta Regio)",
+      "kind": "lander",
+      "date": "1975-10-22",
+      "machineId": null,
+      "latitudeDeg": 31.7,
+      "longitudeDegEast": 291.0,
+      "coordinateNote": "As stated by NSSDCA (east longitude). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Venera 9 Descent Craft",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-050D",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "The landing was at 31.7 N, 291 E, near Beta Regio, about 2,200 km from the Venera 10 landing site."
+    },
+    {
+      "id": "venera-10",
+      "name": "Venera 10 lander (Beta Regio)",
+      "kind": "lander",
+      "date": "1975-10-25",
+      "machineId": null,
+      "latitudeDeg": 16.0,
+      "longitudeDegEast": 291.0,
+      "coordinateNote": "As stated by NSSDCA (east longitude). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Venera 10 Descent Craft",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-054D",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "The descent craft landed at 02:17 UT on 25 October at 16 N, 291 E near Beta Regio."
+    },
+    {
+      "id": "venera-11",
+      "name": "Venera 11 lander",
+      "kind": "lander",
+      "date": "1978-12-25",
+      "machineId": null,
+      "latitudeDeg": -14.0,
+      "longitudeDegEast": 299.0,
+      "coordinateNote": "As stated by NSSDCA (east longitude). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Venera 11 Descent Craft",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1978-084D",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "It made a soft landing on the surface at 03:24 UT on 25 December after a descent time of approximately 1 hour. The touchdown speed was 7-8 m/s. The landing site was 14 S, 299 E."
+    },
+    {
+      "id": "venera-12",
+      "name": "Venera 12 lander",
+      "kind": "lander",
+      "date": "1978-12-21",
+      "machineId": null,
+      "latitudeDeg": -7.0,
+      "longitudeDegEast": 294.0,
+      "coordinateNote": "As stated by NSSDCA (east longitude). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Venera 12 Descent Craft",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1978-086C",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "It made a soft landing on the surface at 03:30 UT on 21 December after a descent time of approximately 1 hour. The touchdown speed was 7-8 m/s. The landing site was 7 S, 294 E."
+    },
+    {
+      "id": "venera-13",
+      "name": "Venera 13 lander (east of Phoebe Regio)",
+      "kind": "lander",
+      "date": "1982-03-01",
+      "machineId": null,
+      "latitudeDeg": -7.5,
+      "longitudeDegEast": 303.0,
+      "coordinateNote": "As stated by NSSDCA (east longitude). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Venera 13 Descent Craft",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1981-106D",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Venera 13 landed at 03:57:21 UT at 7.5 S, 303 E, just east of the eastern extension of an elevated region known as Phoebe Regio."
+    },
+    {
+      "id": "venera-14",
+      "name": "Venera 14 lander (eastern flank of Phoebe Regio)",
+      "kind": "lander",
+      "date": "1982-03-05",
+      "machineId": null,
+      "latitudeDeg": -13.25,
+      "longitudeDegEast": 310.0,
+      "coordinateNote": "13 deg 15 min converted to 13.25 deg; east longitude as stated. Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Venera 14 Descent Craft",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1981-110D",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "Venera 14 landed at 07:00:10 UT about 950 km southwest of Venera 13 near the eastern flank of Phoebe Regio at 13 deg 15 min S by 310 E on a basaltic plain."
+    },
+    {
+      "id": "vega-1",
+      "name": "Vega 1 lander (north of eastern Aphrodite Terra)",
+      "kind": "lander",
+      "date": "1985-06-11",
+      "machineId": null,
+      "latitudeDeg": 7.5,
+      "longitudeDegEast": 177.7,
+      "coordinateNote": "As stated by NSSDCA (east longitude). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Vega 1 Descent Craft",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1984-125E",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "The lander touched down at 03:02:54 UT on 11 June 1985 at 7.5 N, 177.7 E, just north of eastern Aphrodite Terra."
+    },
+    {
+      "id": "vega-2",
+      "name": "Vega 2 lander (eastern Aphrodite Terra)",
+      "kind": "lander",
+      "date": "1985-06-15",
+      "machineId": null,
+      "latitudeDeg": -8.5,
+      "longitudeDegEast": 164.5,
+      "coordinateNote": "As stated by NSSDCA (east longitude). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Vega 2 Descent Craft",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1984-128E",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "The lander touched down at 03:00:50 UT on 15 June 1985 at 8.5 S, 164.5 E, in eastern Aphrodite Terra."
+    },
+    {
+      "id": "pioneer-venus-large-probe",
+      "name": "Pioneer Venus Large Probe impact",
+      "kind": "impact",
+      "date": "1978-12-09",
+      "machineId": null,
+      "latitudeDeg": 4.4,
+      "longitudeDegEast": 304.0,
+      "coordinateNote": "As stated by NSSDCA (east longitude). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Pioneer Venus Large Probe",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1978-078D",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "The parachute was jettisoned at 19:03:28 UT at an altitude of roughly 45 km, and the probe impacted the surface (4.4 N, 304 E) at 19:39:55 UT, at which point transmissions ended."
+    },
+    {
+      "id": "pioneer-venus-north-probe",
+      "name": "Pioneer Venus North Probe impact",
+      "kind": "impact",
+      "date": "1978-12-09",
+      "machineId": null,
+      "latitudeDeg": 59.3,
+      "longitudeDegEast": 4.8,
+      "coordinateNote": "As stated by NSSDCA (east longitude). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Pioneer Venus North Probe",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1978-078E",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "After a 53 minute descent, the probe touched down on the surface (59.3 N, 4.8 E) at 19:42:40 UT. Signals ended at this time."
+    },
+    {
+      "id": "pioneer-venus-night-probe",
+      "name": "Pioneer Venus Night Probe impact",
+      "kind": "impact",
+      "date": "1978-12-09",
+      "machineId": null,
+      "latitudeDeg": -28.7,
+      "longitudeDegEast": 56.7,
+      "coordinateNote": "As stated by NSSDCA (east longitude). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Pioneer Venus Night Probe",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1978-078F",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "After a 56 minute descent, the probe touched down on the surface (28.7 S, 56.7 E) at 19:52:05 UT. The probe transmitted for 2 more seconds after impact."
+    },
+    {
+      "id": "pioneer-venus-day-probe",
+      "name": "Pioneer Venus Day Probe (survived landing)",
+      "kind": "lander",
+      "date": "1978-12-09",
+      "machineId": null,
+      "latitudeDeg": -31.3,
+      "longitudeDegEast": 317.0,
+      "coordinateNote": "As stated by NSSDCA (east longitude). Latitude as stated: not stated.",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "NSSDCA Master Catalog: Pioneer Venus Day Probe",
+        "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1978-078G",
+        "publisher": "NASA Space Science Data Coordinated Archive (NSSDCA)",
+        "rights": {
+          "statement": "NASA content generally is not subject to copyright in the United States; NASA should be acknowledged as the source (NASA Images and Media Usage Guidelines).",
+          "evidenceUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        }
+      },
+      "quote": "After a 56 minute descent, the probe touched down on the surface (31.3 S, 317 E) at 19:47:59 UT. The probe continued to transmit for another 67 minutes, 37 seconds after landing."
+    }
+  ],
+  "traverses": []
+}

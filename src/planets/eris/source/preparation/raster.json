@@ -1,0 +1,87 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/eris/",
+  "sourceWidth": 2048,
+  "sourceHeight": 1024,
+  "width": 2048,
+  "height": 1024,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "eris-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csseris-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
+    {
+      "id": "illustration",
+      "output": "eris-{id}{suffix}.webp",
+      "thumbnail": "eris-lens-{id}.webp",
+      "source": "nasa-eris.glb",
+      "falseColor": false,
+      "science": {
+        "kind": "glb-base-color",
+        "model": "nasa-eris.glb",
+        "mesh": {
+          "latitudeSegments": 16,
+          "longitudeSegments": 32,
+          "width": 2048,
+          "height": 1024,
+          "poleSize": 256,
+          "seamOverlap": 0.025
+        }
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "eris-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "eris-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "csseris-prepared-lighting-bank@1",
+    "billboardSchema": "csseris-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "csseris-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

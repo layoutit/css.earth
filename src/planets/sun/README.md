@@ -15,17 +15,63 @@ They combine observations across one rotation, not one simultaneous view.
 
 ## Evidence
 
-No dated scientific, installation or browser run is cited here.
-[Unit tests](../../../tests/objects/unit/sun) and the
-[browser profile](../../../tests/objects/browser/sun/browser-profile.mts) define checks;
-they are not passing results. No body tests were rerun for this documentation edit.
+Lane change (this PR): the static-surface lane was retired; the Sun now prepares
+through the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto.
+The same pinned inputs and the same numerical interpretation (continuum strip
+mosaic with limb normalization, HMI and AIA FITS decoding and colour transforms,
+polar-boundary continuation, off-limb registration and limb plates) moved from
+`tools/objects/static-surface/synoptic-emission.mts` into the shared observation
+adapter (`tools/objects/observation/solar-synoptic.mts`) without numerical changes.
+Verified with the package, source-closure, minimap and browser conformance checks
+listed in the pull request. No new scientific review is claimed.
 
-The SN263 integration refreshes the prepared universe to 464 selectable bodies. The [integration receipt](https://github.com/layoutit/cssEarth/blob/bbfbf86b5c9b71fc56ef5e6b4759fd00af11d8ec/src/planets/asteroid-2001-sn263/evidence/main-integration.json) binds its registry, marker, minimap and world-context checks. Solar surface data is unchanged; these navigation checks do not establish new scientific or browser qualification of the Sun.
+Three prepared products differ from the retired lane and were inspected, not
+re-derived from science: each pole closes with the shared lane's single flat
+cap instead of the retired 32-segment band ring (see Known problems), the polar
+cap no longer blends a blurred low-latitude proxy texture into the continuation
+(the cap shows the Fourier continuation of the measured boundary only), and the
+lens thumbnails crop the central half-height square of the map instead of the
+central full-height square.
+
+Run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js sun --write`
+prepared the package through the shared raster lane, the `emissive` presentation
+and the star-centred scene; `node --test tests/objects/unit/sun/*.test.mts` passes
+except the shared runtime-package and import-closure tests that fail identically on
+`main` (recorded once in the pull request). A headless Chrome probe
+(`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server and
+selected the photosphere, magnetic, chromosphere and corona lenses with no console
+errors or failed requests; the captures show the limb-darkened continuum disc, the
+off-limb 171 Å context behind the sphere and the band step at the polar cap listed
+under Known problems. [Unit tests](../../../tests/objects/unit/sun) and the
+[browser profile](../../../tests/objects/browser/sun/browser-profile.mts) define the
+checks; no dated scientific review is cited for this version.
+
+## Shared banks
+
+`prepared/shared/planet-points/` holds the point photometry table of each planet
+and dwarf planet, one file per body and epoch, and `prepared/shared/heliocentric-labels/`
+the heliocentric label set. Every body's prepared runtime references them by
+content hash instead of repeating them; see [prepared shared banks](../../../docs/prepared-shared-banks.md).
 
 ## Known problems
 
+- Polar silhouette dent: the shared sphere closes each pole with one flat
+  patch at the 78.75° band boundary (z = R·sin 78.75° + offset ≈ 0.981 R), so
+  seen from the equator the disc is about 1.9% of R (≈ 6 CSS px at the default
+  310 px radius) short at each pole. The retired lane hid this behind 32 band
+  leaves up to 89° plus a centre cap; the limb plate's rim alpha (≤ 0.68 for
+  the FITS lenses, ≤ 0.36 for the continuum) does not cover it. A polar band
+  extension of the shared geometry would remove it.
 - Unobserved poles and missing samples are continued from nearby values.
 - These filled areas and color choices must not be read as additional observations.
+- The Sun has no entry in the shared solar geometry tables; its presentation
+  axis (7.25° tilt) and world frame are authored in
+  `source/presentation/solar-system.json` and `source/navigation/universe.json`,
+  not derived from an ephemeris. The prepared sky keeps the retired lane's
+  visual baseline registration; it is not astrometrically registered.
+- The shape radius is the IAU nominal 695,700 km (the world frame's
+  `bodyRadiusM`); the NASA fact sheet's rounded "700,000 km" stays a fact
+  sheet value only.
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
@@ -51,6 +97,13 @@ observations across one solar rotation; it is a full-surface temporal map, not a
 snapshot. Preparation fills only missing AIA samples from the nearest valid latitude in the
 same checked map.
 
+Each surface declares its interpretation in the `science.synoptic` block of
+`source/preparation/raster.json`; the shared observation adapter decodes the
+source values and applies the colour transform before the raster lane packs the
+latitude bands, projects the poles and encodes the textures at both prepared
+densities. The legends in `source/content/object.json` name the same palette stops
+as the raster recipe.
+
 The browse images and FITS maps are already processed mission products. Strip assembly,
 resampling, missing-sample filling and color mapping are our additional steps; the textures are
 display outputs.
@@ -68,23 +121,25 @@ global surface.
 <summary>Globe projection, limb smoothing and sky source</summary>
 
 PolyCSS maps the prepared 1,024 × 512 global texture onto 448 HTML surface elements arranged by
-longitude and latitude. Each pole adds 32 textured band elements and one center cap, for 514
-visible surface elements in total. Camera pitch and yaw change the visible source texels, and
-the body animation rotates actual global longitudes around the prepared solar axis.
+longitude and latitude, the shared raster-lane sphere. Each pole adds one flat cap element textured
+from the 512 × 256 polar sprite, for 450 visible surface elements in total. Camera pitch and yaw
+change the visible source texels, and the body animation rotates actual global longitudes around
+the authored solar axis.
 
-Because all longitudes converge at a pole, preparation tapers each source sample to the
-same-latitude longitudinal mean near the cap centre, to reduce the visible seam. This is a
+Because all longitudes converge at a pole, preparation replaces the rows inside one latitude
+band of each pole with the Fourier continuation of the band boundary before packing. This is a
 display treatment, not another pole observation.
 
 Each lens also has one source-derived, antialiased 512-pixel limb asset. It covers only the
 outer edge to smooth the visible corners of the surface elements; its transparent center does
-not replace the globe material. At device DPR 1 and 2, the scene uses the same
+not replace the globe material. The emissive presentation has no lighting track: no Shadows
+toggle, no directional Sun, no terminator. At device DPR 1 and 2, the scene uses the same
 highest-resolution surface, polar, limb and off-limb images, selected once when the scene
 opens.
 
 The retained cubic starfield is prepared from ESO/S. Brunier's photographic `eso0932a` full-sky
 panorama at DPR 1 and DPR 2. The HYG v4.1 subset remains the reference for checking sky
-coordinates.
+coordinates. The application's shared universe renders the sky; the object's bank only warms it.
 
 The star panorama is not tied to the solar maps’ observation epoch; its background omits the
 Sun itself.

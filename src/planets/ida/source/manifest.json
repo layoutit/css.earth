@@ -56,8 +56,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "missionId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab"
           }
@@ -103,8 +103,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "missionId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit"
           }
@@ -180,6 +180,16 @@
       "path": "observations/0202561278rcal_gre.fit",
       "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561278rcal_gre.fit",
       "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "The preserved credit for this input reads: NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)"
+          }
+        ]
+      },
       "license": "Public mission scientific data; retain attribution and source notices.",
       "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
       "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
@@ -492,6 +502,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-ida-nomenclature-center-pts",
+      "path": "features/IDA_nomenclature_center_pts.zip",
+      "expectedBytes": 102286,
+      "expectedSha256": "0e34dd48b84100fdcac5380daa1351d482d6a3aba6babdec989215eafaeedf3b",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IDA_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Ida on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Ida centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/IDA/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "ida-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 990,
+      "expectedSha256": "d96ef7584c4b486ea702c078aa810d462de615c754769927bc5f88907f928783",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "ida-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1111,
+      "expectedSha256": "5c97f6239a9bb0f080ee6d2a514130e8a177c89de30bcc0e9f13626fea968e20",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "ida-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 150,
+      "expectedSha256": "09dd7bb976ffd672491c6a67a0a135b6cb78be58571ffe2926048a63426bd19b",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -534,8 +622,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 5688,
-      "expectedSha256": "ffcf423e1fa29020819262dd40794339c4de062ae4ee15004ae75f095885fabc"
+      "expectedBytes": 5936,
+      "expectedSha256": "a15f6558ccf59374ea03b736cd6319f4fbfad7429e9624425aa5ded82fca61f3"
     },
     {
       "path": "preparation/navigation.json",
@@ -549,8 +637,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5975,
-      "expectedSha256": "0951113d2fde4f212face8867951d7f1a6d805e26f25581a9a33157a945d160c"
+      "expectedBytes": 6081,
+      "expectedSha256": "ad066349ab00928c5446417c2064a88f2a61a62172e094319b1cf101b2ef587b"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -637,6 +725,29 @@
       "expectedBytes": 5362,
       "expectedSha256": "1639b5b74d5b4f66ffcf5d8b0ce8c3bb249bc1bd6f27b69cc747f662f38a69ed",
       "purpose": "Ida parent point photometry and the original JPL SBDB response."
+    },
+    {
+      "id": "ida-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 1458,
+      "expectedSha256": "5e082892cc749c1ed62f02f8982494cdc78926ed5b19aa4db2256dc787dcdcca",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts ida: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

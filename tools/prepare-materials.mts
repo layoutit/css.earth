@@ -9,7 +9,7 @@ export interface MaterialSourceTrack extends Omit<PreparedMaterialTrack, 'frame'
   demand: {capacity: number; defaultFrame: number};
   rotation: (PreparedMaterialRotation & {source?: string}) | null;
 }
-export interface MaterialSourcePlan {sun?: {referenceViewDirection?: readonly number[]}; sky: {sun?: {initialViewDirection?: readonly number[]}}; materials: readonly MaterialSourceTrack[];}
+export interface MaterialSourcePlan {sun?: {referenceViewDirection?: readonly number[]} | null; sky: {sun?: {initialViewDirection?: readonly number[]}}; materials: readonly MaterialSourceTrack[];}
 
 // Source lighting is normalized during preparation. Runtime selects by view Z.
 export function prepareFrameLookup(count: number, frameAtPhase: (phase: number) => number) {

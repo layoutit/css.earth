@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a5b1465a30fb3226f0ed4f831ba38482068a03f7a8fa22ee5be5b373d73a10f9"
+    "sha256": "a18c6ba6642fa756b69a5dde387ce346e323220b0964c25357727c222eadf7a5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "adc92d1680c0b857589f58eed3f53427735baf55d1e0d3c34c06d17485af20f2",
+      "sha256": "80d4ea346ca435f14e7d6c1b07887649d5813884f8b8caf8cc35e8ce02c0e865",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -41,6 +41,10 @@
                 "noData": 0,
                 "centerLongitude": 0,
                 "resolutionMeters": 153.53443263638
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -49,6 +53,10 @@
                 "kind": "image-rgb-no-data",
                 "noData": null,
                 "centerLongitude": 180
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -717,6 +725,69 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "17dec8cd07da353b0dbd4b4ed0664462264038a3da6c8e1bd6757d26bc5dee6a",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "DIONE_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "DIONE_nomenclature_center_pts.dbf",
+          "projection": "DIONE_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_DIONE.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "dione-features.json",
+        "publicBase": "/scenes/dione/",
+        "target": {
+          "className": "dione-body"
+        },
+        "lensIds": [
+          "normal",
+          "enhanced",
+          "elevation",
+          "relative-albedo",
+          "shape",
+          "infrared",
+          "ice-absorption"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 40,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        },
+        "notes": "notes.json"
+      }
     }
   ],
   "sources": [
@@ -749,20 +820,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif",
             "missionId": "cassini"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-1",
+            "kind": "machine",
+            "machineId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif",
             "missionId": "voyager-2"
           }
@@ -788,7 +859,7 @@
           "refresh"
         ],
         "path": "observations/Dione_Cassini_Voyager_mosaic_global_154m.tif",
-        "url": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
+        "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif"
       },
       "verificationOperations": []
     },
@@ -862,8 +933,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18434.jpg",
             "missionId": "cassini"
           }
@@ -899,6 +970,16 @@
       "path": "vims/dione-infrared.tif",
       "origin": "https://doi.org/10.17189/ctqe-ta30",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
       "licenseEvidence": [
         "https://doi.org/10.17189/ctqe-ta30",
@@ -972,8 +1053,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqradius_g.tif",
             "missionId": "cassini"
           }
@@ -1034,8 +1115,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npradius_g.tif",
             "missionId": "cassini"
           }
@@ -1096,8 +1177,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spradius_g.tif",
             "missionId": "cassini"
           }
@@ -1133,6 +1214,16 @@
     {
       "kind": "source-input",
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
@@ -1180,6 +1271,16 @@
     {
       "kind": "source-input",
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
@@ -1227,6 +1328,16 @@
     {
       "kind": "source-input",
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
@@ -1336,6 +1447,106 @@
       "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "dione-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "77348111da79c07a2c685672a33a578e7e464cf4f84d3ec4bc10f0004570b82a",
+      "bytes": 1000,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-dione-nomenclature-center-pts",
+      "path": "features/DIONE_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIONE_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dione on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Dione centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DIONE/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      },
+      "sha256": "36134cefcab7413862b4069f52fa0f98d9ab052a9f35151feb15b243b3f50061",
+      "bytes": 293898,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/DIONE_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIONE_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "dione-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "sha256": "604b8ba839009129405750184ca9fbcf99209450c6e5f75bd3ae62aa9dc6a180",
+      "bytes": 152,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "dione-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts dione: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "b0ec3b6f42390fd3745894d0c75a1d62f46a31674f379ff896aacb89dd685591",
+      "bytes": 1412,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -1345,7 +1556,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "USGS Cassini/Voyager mosaic, about 154 m per source pixel, downsampled to the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       ],
@@ -1363,6 +1574,10 @@
           "noData": 0,
           "centerLongitude": 0,
           "resolutionMeters": 153.53443263638
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -1378,8 +1593,8 @@
         },
         {
           "url": "/scenes/dione/dione-normal-surface@2x.webp",
-          "bytes": 9528006,
-          "sha256": "538bef027dea266add82922a0d4ed720b71cc65da443c51eab5cccdbaa995f87",
+          "bytes": 12038078,
+          "sha256": "f6729f8681603d812304e23cf1ee63c072e9dc4eb243824da18b4a7da48f3f76",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1391,7 +1606,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Published 2014 enhanced-color composite, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       ],
@@ -1406,6 +1621,10 @@
           "kind": "image-rgb-no-data",
           "noData": null,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -1421,8 +1640,8 @@
         },
         {
           "url": "/scenes/dione/dione-enhanced-surface@2x.webp",
-          "bytes": 7963588,
-          "sha256": "307caf835d40f77d20bd3df9d036bd4f21cf23892ec00ea5e27af49bf157255b",
+          "bytes": 11353038,
+          "sha256": "8ef948d87ecbbb2a1008336fe0fef175cca4bf72f2c7f53b8d293db51283a4db",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1569,8 +1788,8 @@
         },
         {
           "url": "/scenes/dione/dione-relative-albedo-surface@2x.webp",
-          "bytes": 2884740,
-          "sha256": "ae823f52207862d7a16e28283344859de0cebb0a92ef9b9fd48db5a723d836a9",
+          "bytes": 24244394,
+          "sha256": "3e114305b06e862b66b5b9c480defa263dd040d74ac3cacffba6b71abd973b32",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1678,9 +1897,44 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5836,
-          "sha256": "633c1ff4b64926f69348ee9af39735ab133cb98ce56db23446b520fd9b408bfb",
+          "bytes": 5954,
+          "sha256": "4244515099e180170c9671a3623308e8be8136f6b83a28a69a83669f4cf79412",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "dione-surface-features-source",
+        "usgs-gazetteer-dione-nomenclature-center-pts",
+        "dione-surface-map-frame",
+        "dione-surface-feature-notes"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/dione/dione-features.json",
+          "bytes": 213576,
+          "sha256": "8c49cd0220c15e313f61ba48584aa45cd1339ed33d992bfefd38d6991033da0f",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

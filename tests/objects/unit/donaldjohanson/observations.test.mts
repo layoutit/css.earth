@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {decodeLlorri,bindSipCamera,sipPixel} from '../../../../tools/objects/terrestrial-layers/llorri-geo.mts';
-import {readFitsPrimary} from '../../../../tools/objects/static-surface/fits-map.mts';
+import {readFitsPrimary} from '../../../../tools/objects/observation/fits.mts';
 const root='src/planets/donaldjohanson/source/';
 const camera=JSON.parse((await readFile(root+'observations/llorri-camera.json')).toString('utf8'));
 const bytes=await readFile(root+'observations/lor_0798443290_04598_00035_1x1_sci_03.fit');

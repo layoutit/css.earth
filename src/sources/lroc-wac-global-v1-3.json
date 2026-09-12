@@ -1,0 +1,40 @@
+{
+  "id": "lroc-wac-global-v1-3",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "LROC WAC Global Morphologic Map",
+  "version": "v1.3",
+  "publisher": "NASA/GSFC/Arizona State University",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://data.lroc.im-ldi.com/lroc/view_rdr/WAC_GLOBAL/",
+      "label": "LROC global mosaic"
+    },
+    {
+      "role": "archive",
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG",
+      "label": "Original 32 pixels/degree PDS product"
+    },
+    {
+      "role": "original",
+      "url": "https://www.lpi.usra.edu/meetings/lpsc2011/pdf/2387.pdf",
+      "label": "Speyerer et al. (2011)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG",
+      "checkedOn": "2026-09-12",
+      "locator": "Attached label: WAC_GLOBAL_E000N1800_032P, v1.3, 11520 x 5760, IMAGE_MAP_PROJECTION; original observation interval 2009-11-07 to 2011-01-31."
+    },
+    {
+      "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_README.TXT",
+      "checkedOn": "2026-09-12",
+      "locator": "Map projection, LOLA/GRAIL ephemeris, camera calibration and Hapke correction."
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

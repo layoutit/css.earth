@@ -62,6 +62,16 @@
       "release": "urn:nasa:pds:gbo.ast-153591.radar.shape-model::1.0",
       "product": "urn:nasa:pds:gbo.ast-153591.radar.shape-model:data:a153591beta_tab::1.0",
       "credit": "Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "The preserved credit for this input reads: Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams"
+          }
+        ]
+      },
       "license": "NASA PDS archived scientific data; retain citation and attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified PDS file through source/preparation/acquisition.json.",
       "redistribution": "Attributed NASA PDS scientific data; retain archive citation and model limits.",

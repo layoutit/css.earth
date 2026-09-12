@@ -1,0 +1,106 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "974",
+      "item": "Q25908877",
+      "title": "Callanish (Europa)",
+      "url": "https://en.wikipedia.org/wiki/Callanish_(Europa)",
+      "revision": "1374460087",
+      "extract": "Callanish is a large, multi-ring impact crater structure on Europa, the smallest of Jupiter's four Galilean moons."
+    },
+    {
+      "id": "1048",
+      "item": "Q25908928",
+      "title": "Castalia Macula",
+      "url": "https://en.wikipedia.org/wiki/Castalia_Macula",
+      "revision": "1369078925",
+      "extract": "Castalia Macula is a very dark spot on the surface of Jupiter's fourth largest moon Europa. It is considered as one of the darkest and reddest surface features on the moon."
+    },
+    {
+      "id": "1216",
+      "item": "Q25908032",
+      "title": "Cilix (crater)",
+      "url": "https://en.wikipedia.org/wiki/Cilix_(crater)",
+      "revision": "1327858772",
+      "extract": "Cilix is a small crater on Europa that serves as the reference point for the moon's system of longitude. The longitude of Cilix's center is defined as being 182° W, thus establishing the moon's prime meridian. It is named after Cilix, the brother of Europa."
+    },
+    {
+      "id": "1282",
+      "item": "Q2487816",
+      "title": "Conamara Chaos",
+      "url": "https://en.wikipedia.org/wiki/Conamara_Chaos",
+      "revision": "1365149490",
+      "extract": "Conamara Chaos is a region of chaotic terrain on Jupiter's moon Europa. It is named after Connemara in Ireland due to its similarly rugged landscape."
+    },
+    {
+      "id": "4074",
+      "item": "Q3867401",
+      "title": "Murias Chaos",
+      "url": "https://en.wikipedia.org/wiki/Murias_Chaos",
+      "revision": "1373884932",
+      "extract": "Murias Chaos, is a large, 116 km (72 mi) by 77 km (48 mi) elevated chaos terrain on the leading hemisphere of Jupiter's fourth largest moon Europa. Although it superficially resembles typical Europan chaos terrain, data show that it is fundamentally different in structure, evolution, and origin."
+    },
+    {
+      "id": "4878",
+      "item": "Q941555",
+      "title": "Pwyll (crater)",
+      "url": "https://en.wikipedia.org/wiki/Pwyll_(crater)",
+      "revision": "1327858889",
+      "extract": "Pwyll is an impact crater on the surface of Jupiter's moon Europa. It is thought to be one of the youngest features on the moon. The crater was first observed from Voyager images in 1986, and the name was officially recognized by the IAU in 1997, after Pwyll of Welsh mythology."
+    },
+    {
+      "id": "5012",
+      "item": "Q25908913",
+      "title": "Rhadamanthys Linea",
+      "url": "https://en.wikipedia.org/wiki/Rhadamanthys_Linea",
+      "revision": "1351343492",
+      "extract": "Rhadamanthys Linea is a linea structure on Jupiter's fourth largest moon Europa."
+    },
+    {
+      "id": "6170",
+      "item": "Q25908878",
+      "title": "Tyre (Europa)",
+      "url": "https://en.wikipedia.org/wiki/Tyre_(Europa)",
+      "revision": "1373696139",
+      "extract": "Tyre is a large, multiring impact crater structure on Jupiter's fourth largest moon Europa."
+    },
+    {
+      "id": "14291",
+      "item": "Q25909111",
+      "title": "Annwn Regio",
+      "url": "https://en.wikipedia.org/wiki/Annwn_Regio",
+      "revision": "1372255311",
+      "extract": "Annwn Regio is an extensive, relatively dark surface feature on Jupiter's fourth largest moon Europa. It is an irregular feature dominated by several crisscrossing lineae."
+    },
+    {
+      "id": "14294",
+      "item": "Q25909115",
+      "title": "Falga Regio",
+      "url": "https://en.wikipedia.org/wiki/Falga_Regio",
+      "revision": "1351343445",
+      "extract": "Falga Regio is an extensive, relatively bright surface feature on Jupiter's fourth largest moon Europa. It is an irregular feature dominated by several crisscrossing lineae."
+    },
+    {
+      "id": "14296",
+      "item": "Q25909118",
+      "title": "Tara Regio",
+      "url": "https://en.wikipedia.org/wiki/Tara_Regio",
+      "revision": "1351343498",
+      "extract": "Tara Regio is an extensive, slightly darkened, and chaotic surface feature on Europa, the fourth largest moon of Jupiter. It is an irregular feature dominated by jumbled, disrupted and chaotic terrain."
+    },
+    {
+      "id": "15825",
+      "item": "Q64374250",
+      "title": "Moyle Cavus",
+      "url": "https://en.wikipedia.org/wiki/Moyle_Cavus",
+      "revision": "1364554506",
+      "extract": "Moyle Cavus is a cavus on Europa, a moon of Jupiter. The cavus was named after Moyle, a cold sea where, according to Celtic mythology, the children of Lir (Llyr) spent three hundred years as swans. The name \"Moyle Cavus\" was officially approved by the International Astronomical Union (IAU) on 28 May 2019."
+    }
+  ]
+}

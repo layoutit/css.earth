@@ -1,68 +1,86 @@
 import { parseDensityVolumeFrame } from '@cssearth/objects';
-import type { PreparedCssPointField, PreparedPointFieldNode, PreparedPointFieldResource, PreparedPointFieldStar, PointFieldRgb, PointFieldVector } from './types.js';
+import { POINT_FIELD_BANK_ENCODING, POINT_FIELD_BANK_QUANTIZATION, decodePointFieldBank, pointFieldBankLayout } from './point-field-bank.js';
+import type { PreparedCssPointField, PreparedCssPointFieldManifest, PreparedPointFieldBank, PreparedPointFieldNode,
+  PreparedPointFieldQuantization, PreparedPointFieldResource, PointFieldRgb } from './types.js';
 
 const IDENTIFIER = /^[a-z][a-z0-9-]*$/u;
+const ID_PREFIX = /^[a-z0-9][a-z0-9.-]*$/u;
 const HASH = /^[a-f0-9]{64}$/u;
 const MAX_LEAF_STARS = 32;
 
-/** Decodes one fully prepared point field. Selection and rendering consume this immutable data only. */
-export function parsePreparedCssPointField(value: unknown): PreparedCssPointField {
+/** Validates the JSON manifest of one prepared point field; its rows arrive in the pinned bank. */
+export function parsePreparedCssPointFieldManifest(value: unknown): PreparedCssPointFieldManifest {
   const input = record(value, 'prepared CSS point field');
-  allowedKeys(input, ['schema', 'id', 'frame', 'stars', 'nodes', 'atlas', 'photometry', 'policy', 'labels', 'diffuseSky', 'resources', 'provenance'], 'prepared CSS point field');
-  for (const key of ['schema', 'id', 'frame', 'stars', 'nodes', 'atlas', 'photometry', 'policy', 'labels', 'resources', 'provenance']) if (!(key in input)) {
+  allowedKeys(input, ['schema', 'id', 'frame', 'bank', 'atlas', 'photometry', 'policy', 'labels', 'diffuseSky', 'resources', 'provenance'], 'prepared CSS point field');
+  for (const key of ['schema', 'id', 'frame', 'bank', 'atlas', 'photometry', 'policy', 'labels', 'resources', 'provenance']) if (!(key in input)) {
     throw new TypeError(`prepared CSS point field is missing ${key}.`);
   }
-  if (input.schema !== 'cssearth-css-point-field@1' || typeof input.id !== 'string' || !IDENTIFIER.test(input.id)) {
+  if (input.schema !== 'cssearth-css-point-field-bank@1' || typeof input.id !== 'string' || !IDENTIFIER.test(input.id)) {
     throw new TypeError('Prepared point field identity is invalid.');
   }
   const frame = parseDensityVolumeFrame(input.frame);
   const atlas = parseAtlas(input.atlas);
-  const stars = parseStars(input.stars, frame, atlas.colors.length);
-  const nodes = parseNodes(input.nodes, atlas.colors.length);
-  validateHierarchy(nodes, stars.length);
+  const bank = parseBank(input.bank);
   const resources = parseResources(input.resources);
   const atlasResource = resources.find(resource => resource.path === atlas.path);
   if (!atlasResource || atlasResource.width !== atlas.columns * atlas.tileSize || atlasResource.height !== atlas.tileSize) {
     throw new TypeError('Point-field atlas metadata does not match its prepared resource.');
   }
+  if (resources.some(resource => resource.path === bank.path)) throw new TypeError('Point-field bank cannot also be an image resource.');
   const diffuseSky = parseDiffuseSky(input.diffuseSky, resources);
   const photometry = parsePhotometry(input.photometry);
   const policy = parsePolicy(input.policy);
   const labels = parseLabels(input.labels);
-  return Object.freeze({ schema: 'cssearth-css-point-field@1', id: input.id, frame, stars, nodes, atlas,
+  return Object.freeze({ schema: 'cssearth-css-point-field-bank@1', id: input.id, frame, bank, atlas,
     photometry, policy, labels, ...(diffuseSky === undefined ? {} : { diffuseSky }), resources, provenance: input.provenance });
 }
 
-function parseStars(value: unknown, frame: PreparedCssPointField['frame'], colors: number): readonly PreparedPointFieldStar[] {
-  if (!Array.isArray(value) || value.length === 0) throw new TypeError('Prepared point field needs stars.');
-  const ids = new Set<string>();
-  return Object.freeze(value.map((entry, index) => {
-    const input = record(entry, `point-field star ${index}`);
-    exactKeys(input, ['id', 'positionUnits', 'absoluteMagnitude', 'colorIndex', 'name', 'coverageAnchor'], 'point-field star');
-    const id = text(input.id, 'star identity');
-    const positionUnits = vector(input.positionUnits, 'star position');
-    if (ids.has(id) || !within(positionUnits, frame.boundsUnits.min, frame.boundsUnits.max) ||
-        !finite(input.absoluteMagnitude) || !indexOf(input.colorIndex, colors) || (input.name !== null && typeof input.name !== 'string') || typeof input.coverageAnchor !== 'boolean') {
-      throw new TypeError('Prepared point-field star is invalid.');
-    }
-    ids.add(id);
-    return Object.freeze({ id, positionUnits, absoluteMagnitude: input.absoluteMagnitude, colorIndex: input.colorIndex, name: input.name, coverageAnchor: input.coverageAnchor });
-  }));
+/** Decodes verified bank bytes into the immutable point field that selection and rendering consume. */
+export function decodePreparedCssPointField(manifest: PreparedCssPointFieldManifest, bytes: ArrayBuffer | Uint8Array): PreparedCssPointField {
+  const { stars, nodes } = decodePointFieldBank(bytes, manifest.bank, { frame: manifest.frame, colorCount: manifest.atlas.colors.length });
+  validateHierarchy(nodes, stars.length);
+  const { id, frame, atlas, photometry, policy, labels, diffuseSky, resources, provenance } = manifest;
+  return Object.freeze({ schema: 'cssearth-css-point-field@1', id, frame, stars, nodes, atlas,
+    photometry, policy, labels, ...(diffuseSky === undefined ? {} : { diffuseSky }), resources, provenance });
 }
 
-function parseNodes(value: unknown, colors: number): readonly PreparedPointFieldNode[] {
-  if (!Array.isArray(value) || value.length === 0) throw new TypeError('Prepared point field needs hierarchy nodes.');
-  return Object.freeze(value.map((entry, index) => {
-    const input = record(entry, `point-field node ${index}`);
-    exactKeys(input, ['positionUnits', 'radiusUnits', 'absoluteMagnitude', 'colorIndex', 'first', 'count', 'children'], 'point-field node');
-    if (!nonnegative(input.radiusUnits) || !finite(input.absoluteMagnitude) || !indexOf(input.colorIndex, colors) ||
-        !safeNonnegative(input.first) || !safePositive(input.count) || !Array.isArray(input.children) ||
-        input.children.some(child => !safeNonnegative(child))) throw new TypeError('Prepared point-field hierarchy node is invalid.');
-    const children = Object.freeze([...input.children]);
-    if (new Set(children).size !== children.length) throw new TypeError('Prepared point-field hierarchy cannot repeat a child.');
-    return Object.freeze({ positionUnits: vector(input.positionUnits, 'node position'), radiusUnits: input.radiusUnits,
-      absoluteMagnitude: input.absoluteMagnitude, colorIndex: input.colorIndex, first: input.first, count: input.count, children });
+function parseBank(value: unknown): PreparedPointFieldBank {
+  const input = record(value, 'point-field bank');
+  exactKeys(input, ['encoding', 'path', 'bytes', 'sha256', 'starIdPrefix', 'starCount', 'nodeCount', 'childLinkCount', 'anchorCount', 'columns', 'names', 'quantization'], 'point-field bank');
+  const { starCount, nodeCount, childLinkCount, anchorCount } = input;
+  if (input.encoding !== POINT_FIELD_BANK_ENCODING || !relativePath(input.path) || !safePositive(input.bytes) ||
+      typeof input.sha256 !== 'string' || !HASH.test(input.sha256) || typeof input.starIdPrefix !== 'string' || !ID_PREFIX.test(input.starIdPrefix) ||
+      !safePositive(starCount) || !safePositive(nodeCount) || !safeNonnegative(childLinkCount) || !safeNonnegative(anchorCount) ||
+      !Array.isArray(input.columns) || !Array.isArray(input.names) || !Array.isArray(input.quantization)) throw new TypeError('Prepared point-field bank is invalid.');
+  const layout = pointFieldBankLayout({ starCount, nodeCount, childLinkCount, anchorCount });
+  if (input.bytes !== layout.bytes || input.columns.length !== layout.columns.length) throw new TypeError('Prepared point-field bank layout is invalid.');
+  input.columns.forEach((entry, index) => {
+    const column = record(entry, `point-field bank column ${index}`), expected = layout.columns[index]!;
+    exactKeys(column, ['name', 'storage', 'count', 'offset', 'bytes'], 'point-field bank column');
+    if (column.name !== expected.name || column.storage !== expected.storage || column.count !== expected.count ||
+        column.offset !== expected.offset || column.bytes !== expected.bytes) throw new TypeError('Prepared point-field bank layout is invalid.');
+  });
+  let previousName = -1;
+  const names = Object.freeze(input.names.map((entry: unknown) => {
+    if (!Array.isArray(entry) || entry.length !== 2 || !safeNonnegative(entry[0]) || entry[0] >= starCount || entry[0] <= previousName ||
+        typeof entry[1] !== 'string' || !entry[1]) {
+      throw new TypeError('Prepared point-field names must be increasing named star indices.');
+    }
+    previousName = entry[0];
+    return Object.freeze([entry[0], entry[1]] as const);
   }));
+  if (input.quantization.length !== POINT_FIELD_BANK_QUANTIZATION.length) throw new TypeError('Prepared point-field quantization is invalid.');
+  const quantization = Object.freeze(input.quantization.map((entry: unknown, index): PreparedPointFieldQuantization => {
+    const field = record(entry, `point-field quantization ${index}`), expected = POINT_FIELD_BANK_QUANTIZATION[index]!;
+    exactKeys(field, ['field', 'storage', 'decode', 'unit', 'bound', 'measured', 'displayAlphaChange'], 'point-field quantization');
+    if (field.field !== expected.field || field.storage !== expected.storage || field.decode !== expected.decode || field.unit !== expected.unit ||
+        field.bound !== expected.bound || !nonnegative(field.measured) || field.measured > expected.bound || !nonnegative(field.displayAlphaChange)) {
+      throw new TypeError('Prepared point-field quantization does not match the bank decoder.');
+    }
+    return Object.freeze({ ...expected, measured: field.measured, displayAlphaChange: field.displayAlphaChange });
+  }));
+  return Object.freeze({ encoding: POINT_FIELD_BANK_ENCODING, path: input.path, bytes: input.bytes, sha256: input.sha256, starIdPrefix: input.starIdPrefix,
+    starCount, nodeCount, childLinkCount, anchorCount, columns: layout.columns, names, quantization });
 }
 
 function validateHierarchy(nodes: readonly PreparedPointFieldNode[], starCount: number): void {
@@ -177,20 +195,13 @@ function exactKeys(value: Record<string, unknown>, keys: readonly string[], labe
 function allowedKeys(value: Record<string, unknown>, keys: readonly string[], label: string): void {
   if (Object.keys(value).some(key => !keys.includes(key))) throw new TypeError(`${label} has unsupported fields.`);
 }
-function text(value: unknown, label: string): string { if (typeof value !== 'string' || !value) throw new TypeError(`${label} must be a nonempty string.`); return value; }
-function vector(value: unknown, label: string): PointFieldVector {
-  if (!Array.isArray(value) || value.length !== 3 || value.some(item => !finite(item))) throw new TypeError(`${label} must contain three finite numbers.`);
-  return Object.freeze([value[0], value[1], value[2]]);
-}
 function rgb(value: unknown): PointFieldRgb {
   if (!Array.isArray(value) || value.length !== 3 || value.some(component => !Number.isInteger(component) || component < 0 || component > 255)) throw new TypeError('Point-field atlas color is invalid.');
   return Object.freeze([value[0], value[1], value[2]]);
 }
-function within(value: PointFieldVector, min: PointFieldVector, max: PointFieldVector): boolean { return value.every((component, axis) => component >= min[axis]! && component <= max[axis]!); }
 function relativePath(value: unknown): value is string { return typeof value === 'string' && value.length > 0 && !value.startsWith('/') && !value.split('/').includes('..') && !/[\\\u0000-\u0020]/u.test(value); }
 function finite(value: unknown): value is number { return typeof value === 'number' && Number.isFinite(value); }
 function positive(value: unknown): value is number { return finite(value) && value > 0; }
 function nonnegative(value: unknown): value is number { return finite(value) && value >= 0; }
 function safePositive(value: unknown): value is number { return typeof value === 'number' && Number.isSafeInteger(value) && value > 0; }
 function safeNonnegative(value: unknown): value is number { return typeof value === 'number' && Number.isSafeInteger(value) && value >= 0; }
-function indexOf(value: unknown, length: number): value is number { return typeof value === 'number' && Number.isSafeInteger(value) && value >= 0 && value < length; }

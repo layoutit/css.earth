@@ -1,15 +1,17 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
+import { required } from '../../../../tools/test-values.mts';
+import { parseInterpreterRecipe } from '../../../../tools/objects/observation/interpret.mts';
 import { decodePds4Color, mapPds4Color } from '../../../../tools/objects/terrestrial-layers/observed-pds4.mts';
 
 const root = new URL('../../../../src/planets/charon/source/', import.meta.url);
 test('Charon MVIC bands and missing masks match independent NumPy source anchors', async () => {
-  const config = JSON.parse((await readFile(new URL('preparation/terrestrial.json', root))).toString('utf8'));
+  const recipe = parseInterpreterRecipe(JSON.parse((await readFile(new URL('preparation/raster.json', root))).toString('utf8')));
   const manifest = JSON.parse((await readFile(new URL('manifest.json', root))).toString('utf8'));
-  const policy = config.raster.observations.find((x: { id: string; }) => x.id === 'enhanced-color').validity;
+  const policy = required(recipe.surfaces.find(surface => surface.id === 'enhanced-color')?.science, 'enhanced-color science').validity;
   const entry = manifest.inputs.find((x: { lensId: string; }) => x.lensId === 'enhanced-color');
-  const source = decodePds4Color(await readFile(new URL(entry.path, root)), await readFile(new URL(policy.labelPath, root), 'utf8'), entry, policy);
+  const source = decodePds4Color(await readFile(new URL(entry.path, root)), await readFile(new URL(required(policy, 'enhanced-color validity').labelPath, root), 'utf8'), entry, policy);
   const anchors = JSON.parse((await readFile(new URL('validation/color-source-inspection.json', root))).toString('utf8'));
   assert.equal(source.sourceMissingPixels, 3145121);
   assert.equal(source.valid.reduce((a, b) => a + b), anchors.validRgbPixels);

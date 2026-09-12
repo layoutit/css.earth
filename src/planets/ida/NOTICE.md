@@ -9,3 +9,7 @@ Physical/orbital data and legacy pole constants: NASA/JPL Horizons and NAIF. The
 ESO/S. Brunier Milky Way panorama: CC BY 4.0, with complete terms in `source/stars/ESO-IMAGE-LICENSE.md`. HYG Stellar Database: David Nash/Astronexus, CC BY-SA 4.0, with notice in `source/stars/LICENSE.md`. Inter title outlines/font: Inter Project Authors, SIL Open Font License 1.1; see `source/presentation/LICENSE.INTER-OFL`.
 
 Calibrated Galileo SSI observation: D. L. Domingue / NASA Planetary Data System; raw detector images and bad-data tables: NASA/JPL/Galileo SSI team. Camera controls and shape: P. C. Thomas and colleagues. Galileo SSI instrument geometry: NASA/JPL NAIF. The separate I/F image lens retains observed illumination and does not portray absolute surface albedo.
+
+Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
+
+Feature caption notes: 2 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.

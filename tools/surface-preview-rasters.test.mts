@@ -6,6 +6,8 @@ import { join } from 'node:path';
 import sharp from 'sharp';
 import { unpackSurfacePreview, assertSurfacePreviewCoverage, recipeSurfacePreviews } from './surface-preview-rasters.mts';
 import { preparePagedSurfaceMap } from './objects/paged-ellipsoid/assets.mts';
+import { createPagedSurfaceRaster } from './objects/paged-ellipsoid/surface-raster.mts';
+import { prepareProjectiveTextureLayer } from '../src/platform/projective-surface-raster.mts';
 
 // Two reversed bands with conspicuous padding: the preview must recover
 // north-to-south rows and must never show a gutter or fill an absent polar row.
@@ -53,6 +55,44 @@ test('paged previews keep the shared cloud composition and raw scientific maps d
     assert.deepEqual([...plain.data],[20,40,60]);
     assert.deepEqual([...cloudy.data],[60,80,100]);
   } finally { await rm(directory,{recursive:true,force:true}); }
+});
+
+test('native photographic maps retain their source grids and defer cloud composition to the atlas sample', async () => {
+  const directory = await mkdtemp(join(tmpdir(),'cssearth-native-paged-'));
+  try {
+    const base = Buffer.from([
+      10,20,30, 40,50,60, 70,80,90, 100,110,120,
+      130,140,150, 160,170,180, 190,200,210, 220,230,240,
+    ]);
+    const clouds = Buffer.from([255,255,255, 0,0,0, 255,255,255, 0,0,0]);
+    await sharp(base,{raw:{width:4,height:2,channels:3}}).png().toFile(join(directory,'base.png'));
+    await sharp(clouds,{raw:{width:2,height:1,channels:3}}).png().toFile(join(directory,'cloud.png'));
+    const config = {surface:{width:2,height:1,quality:90,maps:[],clouds:{path:'cloud.png',maximumAlpha:.5,threshold:0,scale:1,color:[100,120,140]}}};
+    const prepared = await preparePagedSurfaceMap({config,sourceDirectory:directory,
+      map:{path:'base.png',compositeClouds:true,displayGamma:1.25,nativePhotographicSampling:true}});
+    assert.deepEqual([prepared.info.width,prepared.info.height,prepared.info.channels],[4,2,3]);
+    assert.deepEqual([...prepared.data], [...base], 'gamma remains after native-grid interpolation, before cloud composition');
+    assert.deepEqual(prepared.nativePhotographicClouds && [prepared.nativePhotographicClouds.width,prepared.nativePhotographicClouds.height], [2,1]);
+  } finally { await rm(directory,{recursive:true,force:true}); }
+});
+
+test('the fixed atlas accepts a larger native photographic grid without changing page dimensions', () => {
+  const raster = createPagedSurfaceRaster({publicBase:'/',atlas:{density:2,gutter:0,pageSize:16,sourceWidth:2}});
+  const layer = prepareProjectiveTextureLayer('1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1');
+  const cells = [{index:0,size:2,density:1,reversed:false,perspectiveY:0,page:0,x:0,y:0,
+    source:{x:0,southY:2,width:2,height:2},layer}];
+  const source = Buffer.from([
+    0,1,2, 20,21,22, 40,41,42, 60,61,62,
+    80,81,82, 100,101,102, 120,121,122, 140,141,142,
+  ]);
+  const baked = raster.bakeSurfaceRaster(source,{width:4,height:2,channels:3},cells,2);
+  assert.deepEqual([baked.width,baked.height,baked.channels],[16,4,4]);
+  assert.deepEqual([...baked.data.subarray(0,4)],[106,107,108,255]);
+  const clouded = raster.bakeSurfaceRaster(source,{width:4,height:2,channels:3},cells,2,0,{
+    data:Buffer.alloc(2*1*3,255),width:2,height:1,channels:3,
+    maximumAlpha:.5,threshold:0,scale:1,color:[200,200,200],
+  });
+  assert.deepEqual([...clouded.data.subarray(0,4)],[153,154,154,255]);
 });
 
 test('missing surface previews fail preparation while explicit non-surface views remain valid', () => {

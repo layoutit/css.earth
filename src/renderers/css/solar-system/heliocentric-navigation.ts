@@ -15,7 +15,9 @@ export interface ObjectNavigationTarget extends EventTarget {
 }
 
 export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host: EventTarget,
-  { activation = 'click' }: { activation?: 'click' | 'dblclick' } = {}) {
+  { activation = 'click', pointerTarget = true }: { activation?: 'click' | 'dblclick';
+    /** False when a stage picker owns hits: the target keeps no pointer or cursor style. */
+    pointerTarget?: boolean } = {}) {
   let objectId: string | null = null;
   let previousLabel: string | null | undefined;
   const stopPointer = (event: Event) => { if (objectId !== null) event.stopPropagation(); };
@@ -41,8 +43,10 @@ export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host
     if (objectId === next && previousLabel === label) return;
     objectId = next;
     previousLabel = label;
-    element.style.pointerEvents = next === null ? 'none' : 'auto';
-    element.style.cursor = next === null ? '' : 'pointer';
+    if (pointerTarget) {
+      element.style.pointerEvents = next === null ? 'none' : 'auto';
+      element.style.cursor = next === null ? '' : 'pointer';
+    }
     element.tabIndex = next === null ? -1 : 0;
     element.setAttribute('aria-disabled', String(next === null));
     if (next === null) {

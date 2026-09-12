@@ -1,8 +1,8 @@
 {
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ba99c6a727706fe047d9a94dc36cf0e8c0ef1fcebd36c872b017aea770f117f3"
+    "sha256": "c7f2e85ec893b4dfebd5afa502610e9e7161c4b8d18e8b545ee3cdb92def2f45"
   },
   "id": "ceres",
   "properties": {
@@ -38,9 +38,14 @@
       "label": "Ceres",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
@@ -51,7 +56,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -80,20 +85,40 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
       ],
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "be6a65986876dfd24e2df64f3f0038f934894692fae8a3eb260b271b3955d46c"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "13ff29595f573384132dfc5b75978de019f15085d501aac457c3df1df3794744"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "4a156cf21e19c8594398f95bb3e68ca13016655599a3ac9d7351820f477c1abc"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "7382a069ad44040eb34fe2ae29f0cafc6ce1478c2a8847d92296a613cc388584"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "44904697b9cb89cf76767293d969a51cce48ff0b698041e897ec3829a17ae89a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7ce4889f588f2f57bcc0844b117fb4d939e4a24ccca8b69f66c92f33211802a2"
+          "sha256": "465f5536a8561d2c66a0e1cafa0afdca64b6f51f458043e500cb6c115c8d8ea9"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "6ef42f0d2bef147f371835eaf317501d5ee173c41f0b1d70dc366a452e40eab1"
         },
         {
           "id": "title",
@@ -108,17 +133,26 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "bbd89c12f8573468cdd8f6ccc3e010e88480841ab53f84189df01e59a20720d8"
+          "sha256": "19dc30473b1f818b604a3e5b6d8dcc39681523042db06f381b47192c796411a2"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "ff88ecfc748ec421f40500362a9c4621e1ef7ba2197233ca57a8fea4b5d2079b"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2500
+      }
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/ceres-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cb75761ab768d5da0f0dbe63f92663054e7f35351a8d8ddded9496e7f34525fc"
+        "sha256": "9056cd87e26ea5cc5c29e22075ee694f15fa7e7e75436db13866ffec066b980b"
       }
     },
     "catalog": {
@@ -126,7 +160,7 @@
       "classification": "dwarf-planet",
       "color": "#8e8b86",
       "distanceAu": 2.77,
-      "description": "NASA Dawn, USGS, JPL, ESO, and HYG",
+      "description": "Explore Ceres in 3D with cssEarth. Inspect the largest body in the asteroid belt, its cratered surface and the bright salt deposits Dawn mapped.",
       "systemName": "Solar System",
       "order": 424,
       "context": {

@@ -1,0 +1,3334 @@
+{
+  "schema": "cssearth-orthophoto-landmarks-evidence@1",
+  "source": "Britt et al. (2004) Fig. 4 registered through its unannotated Fig. 1 to the pinned MICAS XYZ cubes.",
+  "frame": "USGS local image-plane XYZ metres; the preparation display frame applies its documented -2200 m Z translation.",
+  "inputs": [
+    {
+      "id": "controls",
+      "path": "features/control-measurements.json",
+      "bytes": 56004,
+      "sha256": "9adf195d756bd5b95bb39be59f1cf5956e8795d554d8775b57dec68c46cd9635"
+    },
+    {
+      "id": "x",
+      "path": "micas/dem_x_component.cub",
+      "bytes": 704000,
+      "sha256": "3c415666d9ca641371c8579f659171273e36abfc4d1407a150f3900f67e8bf1e"
+    },
+    {
+      "id": "y",
+      "path": "micas/dem_y_component.cub",
+      "bytes": 704000,
+      "sha256": "237a7f02e7ea4b64a92640abc2e69054218f4eb44b0710cce4ca6f81bd9f7e54"
+    },
+    {
+      "id": "z",
+      "path": "micas/dem_z_component.cub",
+      "bytes": 704000,
+      "sha256": "ebda490e2e50e974406cda51fdba84859894e5d232a3a66ef4e0e14684705bc6"
+    },
+    {
+      "id": "orthophoto",
+      "path": "micas/ccd_near_1_ortho.cub",
+      "bytes": 704512,
+      "sha256": "19912df4bac7177bafe5556bebbcd4dd178dd1ea57d94c5f3ecfd2f60c8cccd1"
+    }
+  ],
+  "stages": [
+    {
+      "index": 0,
+      "model": "affine",
+      "initialAffine": [
+        0.65165,
+        0.00012,
+        40.156,
+        -0.00012,
+        0.65165,
+        -24.814
+      ],
+      "coefficients": [
+        1.0045291298927932,
+        0.004026870921647696,
+        -2.267337453470166,
+        0.004580494437063307,
+        1.0029127944750913,
+        -1.834693612308763
+      ],
+      "stats": {
+        "fit": {
+          "count": 60,
+          "rmsPixels": 1.675792702166584,
+          "maximumPixels": 7.290208196280577
+        },
+        "holdout": {
+          "count": 55,
+          "rmsPixels": 1.4129723359845772,
+          "maximumPixels": 5.425345527061792
+        }
+      },
+      "residuals": [
+        {
+          "id": "patch-0-21",
+          "partition": "holdout",
+          "sourcePixel": [
+            376,
+            40
+          ],
+          "targetPixel": [
+            375.8511097681781,
+            40.49700330570728
+          ],
+          "transformedPixel": [
+            375.59669022308594,
+            40.0040840750307
+          ],
+          "residualPixels": 0.5547059337123574
+        },
+        {
+          "id": "patch-0-22",
+          "partition": "fit",
+          "sourcePixel": [
+            392,
+            40
+          ],
+          "targetPixel": [
+            391.7009239635976,
+            40.02702851199777
+          ],
+          "transformedPixel": [
+            391.66915630137066,
+            40.07737198602371
+          ],
+          "residualPixels": 0.05952856239120266
+        },
+        {
+          "id": "patch-0-23",
+          "partition": "holdout",
+          "sourcePixel": [
+            409,
+            40
+          ],
+          "targetPixel": [
+            408.195983923609,
+            40.08827219305249
+          ],
+          "transformedPixel": [
+            408.74615150954816,
+            40.15524039145378
+          ],
+          "residualPixels": 0.5542283935484017
+        },
+        {
+          "id": "patch-1-16",
+          "partition": "holdout",
+          "sourcePixel": [
+            296,
+            56
+          ],
+          "targetPixel": [
+            296.0459653496306,
+            55.51461486050266
+          ],
+          "transformedPixel": [
+            295.2987897664089,
+            55.68424923166709
+          ],
+          "residualPixels": 0.7661900365072776
+        },
+        {
+          "id": "patch-1-20",
+          "partition": "holdout",
+          "sourcePixel": [
+            361,
+            57
+          ],
+          "targetPixel": [
+            360.1508040464001,
+            55.53894610205824
+          ],
+          "transformedPixel": [
+            360.59721008036206,
+            56.9848941645513
+          ],
+          "residualPixels": 1.5132891814141454
+        },
+        {
+          "id": "patch-1-24",
+          "partition": "holdout",
+          "sourcePixel": [
+            421,
+            54
+          ],
+          "targetPixel": [
+            424.41557250893476,
+            55.89020601136142
+          ],
+          "transformedPixel": [
+            420.85687726116475,
+            54.25098544734982
+          ],
+          "residualPixels": 3.918080642863202
+        },
+        {
+          "id": "patch-2-14",
+          "partition": "fit",
+          "sourcePixel": [
+            263,
+            72
+          ],
+          "targetPixel": [
+            264.48479821036204,
+            71.52364086436636
+          ],
+          "transformedPixel": [
+            262.213758414693,
+            71.57969762684544
+          ],
+          "residualPixels": 2.271731523338981
+        },
+        {
+          "id": "patch-2-18",
+          "partition": "fit",
+          "sourcePixel": [
+            328,
+            72
+          ],
+          "targetPixel": [
+            327.74579950623865,
+            72.16654720668234
+          ],
+          "transformedPixel": [
+            327.5081518577246,
+            71.87742976525456
+          ],
+          "residualPixels": 0.37425298900876863
+        },
+        {
+          "id": "patch-2-19",
+          "partition": "holdout",
+          "sourcePixel": [
+            344,
+            72
+          ],
+          "targetPixel": [
+            343.85062299698984,
+            72.02561590808658
+          ],
+          "transformedPixel": [
+            343.5806179360093,
+            71.95071767624758
+          ],
+          "residualPixels": 0.2802007817400367
+        },
+        {
+          "id": "patch-2-20",
+          "partition": "fit",
+          "sourcePixel": [
+            360,
+            72
+          ],
+          "targetPixel": [
+            359.76466466587163,
+            72.02368482054109
+          ],
+          "transformedPixel": [
+            359.653084014294,
+            72.0240055872406
+          ],
+          "residualPixels": 0.11158111263904016
+        },
+        {
+          "id": "patch-3-13",
+          "partition": "fit",
+          "sourcePixel": [
+            247,
+            89
+          ],
+          "targetPixel": [
+            248.07900827187123,
+            88.41101595274975
+          ],
+          "transformedPixel": [
+            246.20974914207642,
+            88.55592722192898
+          ],
+          "residualPixels": 1.8748677207356246
+        },
+        {
+          "id": "patch-3-14",
+          "partition": "holdout",
+          "sourcePixel": [
+            264,
+            88
+          ],
+          "targetPixel": [
+            263.9432704099439,
+            87.90151270126515
+          ],
+          "transformedPixel": [
+            263.28271747933223,
+            87.63088283288398
+          ],
+          "residualPixels": 0.7138422093149813
+        },
+        {
+          "id": "patch-3-17",
+          "partition": "fit",
+          "sourcePixel": [
+            312,
+            88
+          ],
+          "targetPixel": [
+            312.1302717509176,
+            87.98010123137092
+          ],
+          "transformedPixel": [
+            311.5001157141863,
+            87.85074656586302
+          ],
+          "residualPixels": 0.6432956242021007
+        },
+        {
+          "id": "patch-3-18",
+          "partition": "holdout",
+          "sourcePixel": [
+            328,
+            88
+          ],
+          "targetPixel": [
+            327.7902729965647,
+            87.98928877697605
+          ],
+          "transformedPixel": [
+            327.572581792471,
+            87.92403447685604
+          ],
+          "residualPixels": 0.22726104818888496
+        },
+        {
+          "id": "patch-3-19",
+          "partition": "fit",
+          "sourcePixel": [
+            344,
+            88
+          ],
+          "targetPixel": [
+            344.07884824661284,
+            87.96446051574907
+          ],
+          "transformedPixel": [
+            343.64504787075566,
+            87.99732238784905
+          ],
+          "residualPixels": 0.43504329523823443
+        },
+        {
+          "id": "patch-3-20",
+          "partition": "holdout",
+          "sourcePixel": [
+            360,
+            88
+          ],
+          "targetPixel": [
+            359.57281412836454,
+            87.99665271034598
+          ],
+          "transformedPixel": [
+            359.7175139490404,
+            88.07061029884207
+          ],
+          "residualPixels": 0.16250465531724448
+        },
+        {
+          "id": "patch-4-10",
+          "partition": "fit",
+          "sourcePixel": [
+            206,
+            105
+          ],
+          "targetPixel": [
+            199.73557620891424,
+            103.57380602516405
+          ],
+          "transformedPixel": [
+            205.08848475121826,
+            104.41473166161086
+          ],
+          "residualPixels": 5.418559383111423
+        },
+        {
+          "id": "patch-4-13",
+          "partition": "holdout",
+          "sourcePixel": [
+            248,
+            104
+          ],
+          "targetPixel": [
+            247.6844465235112,
+            103.98265072185775
+          ],
+          "transformedPixel": [
+            247.2746813357939,
+            103.60419963349241
+          ],
+          "residualPixels": 0.5577927351175462
+        },
+        {
+          "id": "patch-4-14",
+          "partition": "fit",
+          "sourcePixel": [
+            264,
+            104
+          ],
+          "targetPixel": [
+            263.87903965778486,
+            103.95348818859219
+          ],
+          "transformedPixel": [
+            263.34714741407856,
+            103.67748754448543
+          ],
+          "residualPixels": 0.5992376110210895
+        },
+        {
+          "id": "patch-4-15",
+          "partition": "holdout",
+          "sourcePixel": [
+            280,
+            104
+          ],
+          "targetPixel": [
+            279.987034712113,
+            103.89788750089711
+          ],
+          "transformedPixel": [
+            279.4196134923632,
+            103.75077545547845
+          ],
+          "residualPixels": 0.586181537179016
+        },
+        {
+          "id": "patch-4-18",
+          "partition": "fit",
+          "sourcePixel": [
+            328,
+            104
+          ],
+          "targetPixel": [
+            327.6661434547737,
+            103.96690817455705
+          ],
+          "transformedPixel": [
+            327.6370117272173,
+            103.97063918845748
+          ],
+          "residualPixels": 0.029369678499161868
+        },
+        {
+          "id": "patch-4-19",
+          "partition": "holdout",
+          "sourcePixel": [
+            344,
+            104
+          ],
+          "targetPixel": [
+            343.97026692213274,
+            104.17795940575621
+          ],
+          "transformedPixel": [
+            343.709477805502,
+            104.0439270994505
+          ],
+          "residualPixels": 0.29321599971126
+        },
+        {
+          "id": "patch-4-20",
+          "partition": "fit",
+          "sourcePixel": [
+            360,
+            104
+          ],
+          "targetPixel": [
+            360.0877714646176,
+            104.08663865333689
+          ],
+          "transformedPixel": [
+            359.7819438837867,
+            104.11721501044352
+          ],
+          "residualPixels": 0.3073522780309221
+        },
+        {
+          "id": "patch-4-22",
+          "partition": "fit",
+          "sourcePixel": [
+            392,
+            105
+          ],
+          "targetPixel": [
+            392.2970630667352,
+            103.51753675373868
+          ],
+          "transformedPixel": [
+            391.93090291127777,
+            105.26670362690463
+          ],
+          "residualPixels": 1.7870808626432466
+        },
+        {
+          "id": "patch-5-12",
+          "partition": "holdout",
+          "sourcePixel": [
+            232,
+            120
+          ],
+          "targetPixel": [
+            232.23512347443673,
+            120.32176143162503
+          ],
+          "transformedPixel": [
+            231.2666451922556,
+            119.57751643410089
+          ],
+          "residualPixels": 1.221413443268187
+        },
+        {
+          "id": "patch-5-13",
+          "partition": "fit",
+          "sourcePixel": [
+            248,
+            120
+          ],
+          "targetPixel": [
+            247.8418310301161,
+            120.18055340478676
+          ],
+          "transformedPixel": [
+            247.33911127054026,
+            119.65080434509389
+          ],
+          "residualPixels": 0.7303158377808123
+        },
+        {
+          "id": "patch-5-14",
+          "partition": "holdout",
+          "sourcePixel": [
+            264,
+            120
+          ],
+          "targetPixel": [
+            264.00671768970795,
+            119.66777920985083
+          ],
+          "transformedPixel": [
+            263.41157734882495,
+            119.7240922560869
+          ],
+          "residualPixels": 0.5977986153569833
+        },
+        {
+          "id": "patch-7-18",
+          "partition": "holdout",
+          "sourcePixel": [
+            328,
+            152
+          ],
+          "targetPixel": [
+            327.72643258363627,
+            151.94504208960936
+          ],
+          "transformedPixel": [
+            327.8303015314564,
+            152.11045332326188
+          ],
+          "residualPixels": 0.19531931430279967
+        },
+        {
+          "id": "patch-7-20",
+          "partition": "holdout",
+          "sourcePixel": [
+            360,
+            152
+          ],
+          "targetPixel": [
+            359.7516676677518,
+            151.9622157897944
+          ],
+          "transformedPixel": [
+            359.9752336880258,
+            152.2570291452479
+          ],
+          "residualPixels": 0.3699955134524048
+        },
+        {
+          "id": "patch-8-12",
+          "partition": "fit",
+          "sourcePixel": [
+            232,
+            168
+          ],
+          "targetPixel": [
+            232.11689148883158,
+            167.95861946161745
+          ],
+          "transformedPixel": [
+            231.4599349964947,
+            167.71733056890525
+          ],
+          "residualPixels": 0.6998658175463807
+        },
+        {
+          "id": "patch-8-13",
+          "partition": "holdout",
+          "sourcePixel": [
+            248,
+            168
+          ],
+          "targetPixel": [
+            247.82163577510673,
+            168.01607685647824
+          ],
+          "transformedPixel": [
+            247.53240107477936,
+            167.79061847989826
+          ],
+          "residualPixels": 0.3667263168134286
+        },
+        {
+          "id": "patch-8-18",
+          "partition": "fit",
+          "sourcePixel": [
+            328,
+            168
+          ],
+          "targetPixel": [
+            328.14492754785607,
+            168.00425585761965
+          ],
+          "transformedPixel": [
+            327.8947314662028,
+            168.15705803486333
+          ],
+          "residualPixels": 0.29316647940214763
+        },
+        {
+          "id": "patch-8-19",
+          "partition": "holdout",
+          "sourcePixel": [
+            344,
+            168
+          ],
+          "targetPixel": [
+            343.5513534313703,
+            168.46888758881548
+          ],
+          "transformedPixel": [
+            343.9671975444875,
+            168.23034594585633
+          ],
+          "residualPixels": 0.4794042572191895
+        },
+        {
+          "id": "patch-8-20",
+          "partition": "fit",
+          "sourcePixel": [
+            360,
+            168
+          ],
+          "targetPixel": [
+            359.58884717674846,
+            168.1488309288928
+          ],
+          "transformedPixel": [
+            360.0396636227722,
+            168.30363385684936
+          ],
+          "residualPixels": 0.4766543973461216
+        },
+        {
+          "id": "patch-8-21",
+          "partition": "holdout",
+          "sourcePixel": [
+            376,
+            168
+          ],
+          "targetPixel": [
+            375.55334153332706,
+            168.01904851298917
+          ],
+          "transformedPixel": [
+            376.11212970105686,
+            168.37692176784236
+          ],
+          "residualPixels": 0.6635642266834795
+        },
+        {
+          "id": "patch-8-22",
+          "partition": "fit",
+          "sourcePixel": [
+            392,
+            168
+          ],
+          "targetPixel": [
+            391.5697546260869,
+            168.4195334818506
+          ],
+          "transformedPixel": [
+            392.1845957793416,
+            168.45020967883536
+          ],
+          "residualPixels": 0.6156059395400755
+        },
+        {
+          "id": "patch-8-23",
+          "partition": "holdout",
+          "sourcePixel": [
+            408,
+            168
+          ],
+          "targetPixel": [
+            407.90253445849004,
+            168.41356543986006
+          ],
+          "transformedPixel": [
+            408.25706185762624,
+            168.5234975898284
+          ],
+          "residualPixels": 0.3711802181352605
+        },
+        {
+          "id": "patch-8-24",
+          "partition": "fit",
+          "sourcePixel": [
+            424,
+            168
+          ],
+          "targetPixel": [
+            423.96905799162624,
+            167.89916207562592
+          ],
+          "transformedPixel": [
+            424.32952793591096,
+            168.5967855008214
+          ],
+          "residualPixels": 0.7852496571881399
+        },
+        {
+          "id": "patch-9-15",
+          "partition": "fit",
+          "sourcePixel": [
+            280,
+            183
+          ],
+          "targetPixel": [
+            279.9900849909449,
+            183.52281879020632
+          ],
+          "transformedPixel": [
+            279.7377362951734,
+            182.98088621901067
+          ],
+          "residualPixels": 0.5978049648341008
+        },
+        {
+          "id": "patch-9-19",
+          "partition": "fit",
+          "sourcePixel": [
+            344,
+            184
+          ],
+          "targetPixel": [
+            343.76438455246665,
+            183.9880798718313
+          ],
+          "transformedPixel": [
+            344.0316274792338,
+            184.2769506574578
+          ],
+          "residualPixels": 0.39352904936681027
+        },
+        {
+          "id": "patch-9-20",
+          "partition": "holdout",
+          "sourcePixel": [
+            360,
+            184
+          ],
+          "targetPixel": [
+            359.66754036406167,
+            184.08280389994064
+          ],
+          "transformedPixel": [
+            360.1040935575185,
+            184.35023856845083
+          ],
+          "residualPixels": 0.5119570222572768
+        },
+        {
+          "id": "patch-9-21",
+          "partition": "fit",
+          "sourcePixel": [
+            376,
+            184
+          ],
+          "targetPixel": [
+            375.7678379318763,
+            183.72012472116356
+          ],
+          "transformedPixel": [
+            376.1765596358032,
+            184.42352647944384
+          ],
+          "residualPixels": 0.8135277898220249
+        },
+        {
+          "id": "patch-9-22",
+          "partition": "holdout",
+          "sourcePixel": [
+            392,
+            184
+          ],
+          "targetPixel": [
+            391.89820341137755,
+            183.97127579625374
+          ],
+          "transformedPixel": [
+            392.2490257140879,
+            184.49681439043687
+          ],
+          "residualPixels": 0.6318758596868368
+        },
+        {
+          "id": "patch-9-23",
+          "partition": "fit",
+          "sourcePixel": [
+            409,
+            184
+          ],
+          "targetPixel": [
+            408.1812505697901,
+            183.63755167828597
+          ],
+          "transformedPixel": [
+            409.3260209222654,
+            184.57468279586692
+          ],
+          "residualPixels": 1.4794302590676305
+        },
+        {
+          "id": "patch-10-10",
+          "partition": "fit",
+          "sourcePixel": [
+            200,
+            200
+          ],
+          "targetPixel": [
+            200.3229634210333,
+            200.03121796904117
+          ],
+          "transformedPixel": [
+            199.44386270941803,
+            199.66396417012214
+          ],
+          "residualPixels": 0.9527294547682179
+        },
+        {
+          "id": "patch-10-12",
+          "partition": "fit",
+          "sourcePixel": [
+            232,
+            200
+          ],
+          "targetPixel": [
+            231.78286717579945,
+            199.809682451248
+          ],
+          "transformedPixel": [
+            231.5887948659874,
+            199.81053999210818
+          ],
+          "residualPixels": 0.19407420439643303
+        },
+        {
+          "id": "patch-10-13",
+          "partition": "holdout",
+          "sourcePixel": [
+            247,
+            201
+          ],
+          "targetPixel": [
+            248.4913516216115,
+            199.50577044632973
+          ],
+          "transformedPixel": [
+            246.66075868530095,
+            200.88216020313922
+          ],
+          "residualPixels": 2.290309861376877
+        },
+        {
+          "id": "patch-10-15",
+          "partition": "holdout",
+          "sourcePixel": [
+            280,
+            200
+          ],
+          "targetPixel": [
+            279.8237922130943,
+            199.98246792118994
+          ],
+          "transformedPixel": [
+            279.8061931008414,
+            200.0304037250872
+          ],
+          "residualPixels": 0.051064371604544447
+        },
+        {
+          "id": "patch-10-20",
+          "partition": "fit",
+          "sourcePixel": [
+            360,
+            200
+          ],
+          "targetPixel": [
+            360.1119685258883,
+            200.31746304599775
+          ],
+          "transformedPixel": [
+            360.1685234922649,
+            200.39684328005228
+          ],
+          "residualPixels": 0.09746633152227825
+        },
+        {
+          "id": "patch-10-21",
+          "partition": "holdout",
+          "sourcePixel": [
+            377,
+            200
+          ],
+          "targetPixel": [
+            376.0495743766014,
+            199.87126804579003
+          ],
+          "transformedPixel": [
+            377.2455187004424,
+            200.47471168548236
+          ],
+          "residualPixels": 1.3395622613423424
+        },
+        {
+          "id": "patch-10-23",
+          "partition": "holdout",
+          "sourcePixel": [
+            408,
+            200
+          ],
+          "targetPixel": [
+            407.77898890194496,
+            199.99280299370514
+          ],
+          "transformedPixel": [
+            408.38592172711896,
+            200.61670701303132
+          ],
+          "residualPixels": 0.8704158084530916
+        },
+        {
+          "id": "patch-11-7",
+          "partition": "fit",
+          "sourcePixel": [
+            156,
+            213
+          ],
+          "targetPixel": [
+            152.43150570621304,
+            215.76343874631172
+          ],
+          "transformedPixel": [
+            155.29693031611652,
+            212.50028874306756
+          ],
+          "residualPixels": 4.342672695324026
+        },
+        {
+          "id": "patch-11-9",
+          "partition": "fit",
+          "sourcePixel": [
+            184,
+            216
+          ],
+          "targetPixel": [
+            184.1835442278808,
+            215.85326177436545
+          ],
+          "transformedPixel": [
+            183.43582656587967,
+            215.63728097073061
+          ],
+          "residualPixels": 0.77828620031912
+        },
+        {
+          "id": "patch-11-12",
+          "partition": "holdout",
+          "sourcePixel": [
+            232,
+            216
+          ],
+          "targetPixel": [
+            232.17330051937068,
+            215.93751436485218
+          ],
+          "transformedPixel": [
+            231.65322480073377,
+            215.85714470370965
+          ],
+          "residualPixels": 0.5262490242726067
+        },
+        {
+          "id": "patch-11-13",
+          "partition": "fit",
+          "sourcePixel": [
+            248,
+            216
+          ],
+          "targetPixel": [
+            247.92006985731982,
+            216.1742811892816
+          ],
+          "transformedPixel": [
+            247.72569087901843,
+            215.93043261470265
+          ],
+          "residualPixels": 0.31184181010518097
+        },
+        {
+          "id": "patch-11-18",
+          "partition": "holdout",
+          "sourcePixel": [
+            328,
+            216
+          ],
+          "targetPixel": [
+            328.1438526795777,
+            215.97016701453782
+          ],
+          "transformedPixel": [
+            328.0880212704419,
+            216.29687216966772
+          ],
+          "residualPixels": 0.331441404526565
+        },
+        {
+          "id": "patch-11-20",
+          "partition": "holdout",
+          "sourcePixel": [
+            360,
+            216
+          ],
+          "targetPixel": [
+            359.963982213466,
+            215.87262528288582
+          ],
+          "transformedPixel": [
+            360.2329534270113,
+            216.44344799165376
+          ],
+          "residualPixels": 0.6310182870259671
+        },
+        {
+          "id": "patch-11-21",
+          "partition": "fit",
+          "sourcePixel": [
+            376,
+            216
+          ],
+          "targetPixel": [
+            375.684310392186,
+            216.11635733072083
+          ],
+          "transformedPixel": [
+            376.30541950529596,
+            216.51673590264676
+          ],
+          "residualPixels": 0.7389719421234554
+        },
+        {
+          "id": "patch-11-22",
+          "partition": "holdout",
+          "sourcePixel": [
+            393,
+            217
+          ],
+          "targetPixel": [
+            392.25770837615437,
+            216.49695235529518
+          ],
+          "transformedPixel": [
+            393.3864415843951,
+            217.59751710255193
+          ],
+          "residualPixels": 1.5764775349777982
+        },
+        {
+          "id": "patch-12-6",
+          "partition": "fit",
+          "sourcePixel": [
+            139,
+            235
+          ],
+          "targetPixel": [
+            135.6295044691952,
+            231.57386227669093
+          ],
+          "transformedPixel": [
+            138.3085262682153,
+            234.4865018160895
+          ],
+          "residualPixels": 3.957350993542609
+        },
+        {
+          "id": "patch-12-12",
+          "partition": "fit",
+          "sourcePixel": [
+            232,
+            232
+          ],
+          "targetPixel": [
+            232.49004994772025,
+            232.09391577914272
+          ],
+          "transformedPixel": [
+            231.71765473548012,
+            231.9037494153111
+          ],
+          "residualPixels": 0.7954606274507947
+        },
+        {
+          "id": "patch-12-13",
+          "partition": "holdout",
+          "sourcePixel": [
+            249,
+            232
+          ],
+          "targetPixel": [
+            248.42201085499195,
+            231.93501276505472
+          ],
+          "transformedPixel": [
+            248.7946499436576,
+            231.98161782074118
+          ],
+          "residualPixels": 0.3755421702247212
+        },
+        {
+          "id": "patch-12-14",
+          "partition": "fit",
+          "sourcePixel": [
+            264,
+            232
+          ],
+          "targetPixel": [
+            263.7378059053276,
+            232.00737791895574
+          ],
+          "transformedPixel": [
+            263.8625868920495,
+            232.05032523729713
+          ],
+          "residualPixels": 0.13196502112302747
+        },
+        {
+          "id": "patch-13-9",
+          "partition": "fit",
+          "sourcePixel": [
+            184,
+            248
+          ],
+          "targetPixel": [
+            184.03010321651018,
+            248.00672725699891
+          ],
+          "transformedPixel": [
+            183.5646864353724,
+            247.73049039393354
+          ],
+          "residualPixels": 0.5412204584832774
+        },
+        {
+          "id": "patch-13-10",
+          "partition": "holdout",
+          "sourcePixel": [
+            200,
+            248
+          ],
+          "targetPixel": [
+            200.09614763573242,
+            248.25680669345144
+          ],
+          "transformedPixel": [
+            199.63715251365713,
+            247.80377830492654
+          ],
+          "residualPixels": 0.6449118101712672
+        },
+        {
+          "id": "patch-13-14",
+          "partition": "holdout",
+          "sourcePixel": [
+            264,
+            248
+          ],
+          "targetPixel": [
+            264.04348106105385,
+            247.80588538586053
+          ],
+          "transformedPixel": [
+            263.92701682679586,
+            248.0969299488986
+          ],
+          "residualPixels": 0.3134818264833248
+        },
+        {
+          "id": "patch-13-15",
+          "partition": "fit",
+          "sourcePixel": [
+            280,
+            248
+          ],
+          "targetPixel": [
+            279.9470408389895,
+            248.0556380301361
+          ],
+          "transformedPixel": [
+            279.9994829050805,
+            248.1702178598916
+          ],
+          "residualPixels": 0.126010744314517
+        },
+        {
+          "id": "patch-13-18",
+          "partition": "holdout",
+          "sourcePixel": [
+            328,
+            248
+          ],
+          "targetPixel": [
+            328.08225661737373,
+            248.11735230829336
+          ],
+          "transformedPixel": [
+            328.2168811399346,
+            248.39008159287064
+          ],
+          "residualPixels": 0.30414638702569724
+        },
+        {
+          "id": "patch-13-19",
+          "partition": "fit",
+          "sourcePixel": [
+            344,
+            248
+          ],
+          "targetPixel": [
+            343.9566583089653,
+            247.61934154938368
+          ],
+          "transformedPixel": [
+            344.2893472182193,
+            248.46336950386365
+          ],
+          "residualPixels": 0.9072293526359527
+        },
+        {
+          "id": "patch-13-20",
+          "partition": "holdout",
+          "sourcePixel": [
+            361,
+            248
+          ],
+          "targetPixel": [
+            360.4727381101675,
+            247.63928589415536
+          ],
+          "transformedPixel": [
+            361.3663424263968,
+            248.54123790929373
+          ],
+          "residualPixels": 1.2696637789571652
+        },
+        {
+          "id": "patch-14-9",
+          "partition": "holdout",
+          "sourcePixel": [
+            184,
+            264
+          ],
+          "targetPixel": [
+            183.97968033062386,
+            263.9355808797834
+          ],
+          "transformedPixel": [
+            183.62911637011877,
+            263.777095105535
+          ],
+          "residualPixels": 0.38472435722752496
+        },
+        {
+          "id": "patch-14-14",
+          "partition": "fit",
+          "sourcePixel": [
+            265,
+            264
+          ],
+          "targetPixel": [
+            263.5051708361031,
+            264
+          ],
+          "transformedPixel": [
+            264.99597589143497,
+            264.14811515493716
+          ],
+          "residualPixels": 1.4981447901071159
+        },
+        {
+          "id": "patch-14-15",
+          "partition": "holdout",
+          "sourcePixel": [
+            280,
+            264
+          ],
+          "targetPixel": [
+            280.0495346592065,
+            263.9127182408065
+          ],
+          "transformedPixel": [
+            280.06391283982686,
+            264.2168225714931
+          ],
+          "residualPixels": 0.30444404415308884
+        },
+        {
+          "id": "patch-14-16",
+          "partition": "fit",
+          "sourcePixel": [
+            296,
+            264
+          ],
+          "targetPixel": [
+            295.8659517268423,
+            264.09582253951993
+          ],
+          "transformedPixel": [
+            296.1363789181116,
+            264.2901104824861
+          ],
+          "residualPixels": 0.3329844899688598
+        },
+        {
+          "id": "patch-14-21",
+          "partition": "holdout",
+          "sourcePixel": [
+            374,
+            262
+          ],
+          "targetPixel": [
+            376.4162690190544,
+            264.25458279534934
+          ],
+          "transformedPixel": [
+            374.4815973079062,
+            262.64156345962687
+          ],
+          "residualPixels": 2.518885866277333
+        },
+        {
+          "id": "patch-15-8",
+          "partition": "holdout",
+          "sourcePixel": [
+            168,
+            280
+          ],
+          "targetPixel": [
+            168.12924271310433,
+            280.06616437766905
+          ],
+          "transformedPixel": [
+            167.62108022658046,
+            279.7504119061435
+          ],
+          "residualPixels": 0.5982714567691081
+        },
+        {
+          "id": "patch-15-9",
+          "partition": "fit",
+          "sourcePixel": [
+            184,
+            280
+          ],
+          "targetPixel": [
+            184.17719828818363,
+            279.89970726095686
+          ],
+          "transformedPixel": [
+            183.69354630486512,
+            279.82369981713646
+          ],
+          "residualPixels": 0.48958796194763526
+        },
+        {
+          "id": "patch-15-10",
+          "partition": "holdout",
+          "sourcePixel": [
+            200,
+            280
+          ],
+          "targetPixel": [
+            200.49723889078837,
+            280.4967207018206
+          ],
+          "transformedPixel": [
+            199.76601238314984,
+            279.8969877281295
+          ],
+          "residualPixels": 0.9457123480242948
+        },
+        {
+          "id": "patch-15-13",
+          "partition": "fit",
+          "sourcePixel": [
+            248,
+            280
+          ],
+          "targetPixel": [
+            247.948798340296,
+            280.08758052590673
+          ],
+          "transformedPixel": [
+            247.9834106180039,
+            280.1168514611085
+          ],
+          "residualPixels": 0.04532987332560001
+        },
+        {
+          "id": "patch-15-15",
+          "partition": "fit",
+          "sourcePixel": [
+            280,
+            280
+          ],
+          "targetPixel": [
+            279.50739823424874,
+            280.4692100187515
+          ],
+          "transformedPixel": [
+            280.12834277457324,
+            280.26342728309453
+          ],
+          "residualPixels": 0.6541549177780946
+        },
+        {
+          "id": "patch-15-16",
+          "partition": "holdout",
+          "sourcePixel": [
+            297,
+            281
+          ],
+          "targetPixel": [
+            296.4180028994353,
+            280.14763481715585
+          ],
+          "transformedPixel": [
+            297.2093648536724,
+            281.3442084829997
+          ],
+          "residualPixels": 1.4345878433909154
+        },
+        {
+          "id": "patch-15-19",
+          "partition": "fit",
+          "sourcePixel": [
+            341,
+            273
+          ],
+          "targetPixel": [
+            343.51098988847815,
+            280.49315777920214
+          ],
+          "transformedPixel": [
+            341.3764316015821,
+            273.5224478824298
+          ],
+          "residualPixels": 7.290208196280577
+        },
+        {
+          "id": "patch-16-6",
+          "partition": "fit",
+          "sourcePixel": [
+            135,
+            296
+          ],
+          "targetPixel": [
+            135.502646236476,
+            295.76814634099014
+          ],
+          "transformedPixel": [
+            134.53604887486463,
+            295.6458603013218
+          ],
+          "residualPixels": 0.9743019731950865
+        },
+        {
+          "id": "patch-16-8",
+          "partition": "fit",
+          "sourcePixel": [
+            168,
+            296
+          ],
+          "targetPixel": [
+            168.12191260764018,
+            296.02003564088403
+          ],
+          "transformedPixel": [
+            167.68551016132682,
+            295.79701661774493
+          ],
+          "residualPixels": 0.4900862983498004
+        },
+        {
+          "id": "patch-16-9",
+          "partition": "holdout",
+          "sourcePixel": [
+            184,
+            296
+          ],
+          "targetPixel": [
+            184.11583055795413,
+            295.66952118045924
+          ],
+          "transformedPixel": [
+            183.75797623961148,
+            295.8703045287379
+          ],
+          "residualPixels": 0.4103336034283209
+        },
+        {
+          "id": "patch-16-10",
+          "partition": "fit",
+          "sourcePixel": [
+            200,
+            296
+          ],
+          "targetPixel": [
+            200.30788079310867,
+            295.8440237156456
+          ],
+          "transformedPixel": [
+            199.8304423178962,
+            295.94359243973093
+          ],
+          "residualPixels": 0.48771039401388844
+        },
+        {
+          "id": "patch-16-13",
+          "partition": "holdout",
+          "sourcePixel": [
+            249,
+            296
+          ],
+          "targetPixel": [
+            247.50334307251302,
+            296.26053500579064
+          ],
+          "transformedPixel": [
+            249.05236968264305,
+            296.168036667147
+          ],
+          "residualPixels": 1.5517858684569708
+        },
+        {
+          "id": "patch-16-16",
+          "partition": "fit",
+          "sourcePixel": [
+            297,
+            296
+          ],
+          "targetPixel": [
+            296.3404169167424,
+            296.4945232408292
+          ],
+          "transformedPixel": [
+            297.2697679174971,
+            296.38790040012606
+          ],
+          "residualPixels": 0.9354473329714428
+        },
+        {
+          "id": "patch-17-6",
+          "partition": "holdout",
+          "sourcePixel": [
+            135,
+            311
+          ],
+          "targetPixel": [
+            136.32317689921493,
+            312.47594556620624
+          ],
+          "transformedPixel": [
+            134.59645193868937,
+            310.68955221844817
+          ],
+          "residualPixels": 2.4845080563798256
+        },
+        {
+          "id": "patch-20-6",
+          "partition": "fit",
+          "sourcePixel": [
+            136,
+            360
+          ],
+          "targetPixel": [
+            136.0530808398841,
+            359.9422727066847
+          ],
+          "transformedPixel": [
+            135.7982977437429,
+            359.8368596421647
+          ],
+          "residualPixels": 0.27572874396914165
+        },
+        {
+          "id": "patch-20-7",
+          "partition": "holdout",
+          "sourcePixel": [
+            152,
+            360
+          ],
+          "targetPixel": [
+            151.70203216170123,
+            359.5105387160574
+          ],
+          "transformedPixel": [
+            151.87076382202756,
+            359.91014755315774
+          ],
+          "residualPixels": 0.4337713636066473
+        },
+        {
+          "id": "patch-21-3",
+          "partition": "fit",
+          "sourcePixel": [
+            88,
+            376
+          ],
+          "targetPixel": [
+            88.05940074600181,
+            375.7779182528711
+          ],
+          "transformedPixel": [
+            87.64532944363518,
+            375.6636006207871
+          ],
+          "residualPixels": 0.42956206123083596
+        },
+        {
+          "id": "patch-21-4",
+          "partition": "holdout",
+          "sourcePixel": [
+            104,
+            376
+          ],
+          "targetPixel": [
+            104.31572901342338,
+            375.87197263774544
+          ],
+          "transformedPixel": [
+            103.71779552191987,
+            375.73688853178015
+          ],
+          "residualPixels": 0.6130025904888341
+        },
+        {
+          "id": "patch-21-5",
+          "partition": "fit",
+          "sourcePixel": [
+            120,
+            376
+          ],
+          "targetPixel": [
+            119.9878024992274,
+            375.8714748389081
+          ],
+          "transformedPixel": [
+            119.79026160020456,
+            375.8101764427732
+          ],
+          "residualPixels": 0.20683302481824986
+        },
+        {
+          "id": "patch-21-7",
+          "partition": "fit",
+          "sourcePixel": [
+            152,
+            376
+          ],
+          "targetPixel": [
+            151.7814294067339,
+            376.201570488859
+          ],
+          "transformedPixel": [
+            151.9351937567739,
+            375.9567522647592
+          ],
+          "residualPixels": 0.2891010864638867
+        },
+        {
+          "id": "patch-21-8",
+          "partition": "holdout",
+          "sourcePixel": [
+            168,
+            376
+          ],
+          "targetPixel": [
+            167.9098418117644,
+            376.152566198914
+          ],
+          "transformedPixel": [
+            168.00765983505863,
+            376.0300401757522
+          ],
+          "residualPixels": 0.1567832645183278
+        },
+        {
+          "id": "patch-21-9",
+          "partition": "fit",
+          "sourcePixel": [
+            182,
+            377
+          ],
+          "targetPixel": [
+            184.4915008681112,
+            375.52538542870366
+          ],
+          "transformedPixel": [
+            182.07509452447937,
+            377.0970798923462
+          ],
+          "residualPixels": 2.88257577603585
+        },
+        {
+          "id": "patch-21-11",
+          "partition": "fit",
+          "sourcePixel": [
+            213,
+            377
+          ],
+          "targetPixel": [
+            215.51009939942682,
+            376.3548025452961
+          ],
+          "transformedPixel": [
+            213.21549755115595,
+            377.23907521989514
+          ],
+          "residualPixels": 2.459092475920879
+        },
+        {
+          "id": "patch-22-3",
+          "partition": "holdout",
+          "sourcePixel": [
+            88,
+            391
+          ],
+          "targetPixel": [
+            87.5337553028893,
+            392.46986697412507
+          ],
+          "transformedPixel": [
+            87.70573250745989,
+            390.70729253791353
+          ],
+          "residualPixels": 1.7709446072868367
+        },
+        {
+          "id": "patch-22-4",
+          "partition": "fit",
+          "sourcePixel": [
+            104,
+            392
+          ],
+          "targetPixel": [
+            104.01621456237471,
+            392.0194948192369
+          ],
+          "transformedPixel": [
+            103.78222545666623,
+            391.78349324338166
+          ],
+          "residualPixels": 0.33233664467888857
+        },
+        {
+          "id": "patch-23-3",
+          "partition": "fit",
+          "sourcePixel": [
+            88,
+            408
+          ],
+          "targetPixel": [
+            88.0021390711656,
+            407.9256345592603
+          ],
+          "transformedPixel": [
+            87.7741893131279,
+            407.7568100439901
+          ],
+          "residualPixels": 0.28365967134167575
+        },
+        {
+          "id": "patch-23-4",
+          "partition": "holdout",
+          "sourcePixel": [
+            104,
+            408
+          ],
+          "targetPixel": [
+            103.87307559405683,
+            407.9065809971132
+          ],
+          "transformedPixel": [
+            103.8466553914126,
+            407.8300979549831
+          ],
+          "residualPixels": 0.0809177535602675
+        },
+        {
+          "id": "patch-23-5",
+          "partition": "fit",
+          "sourcePixel": [
+            120,
+            408
+          ],
+          "targetPixel": [
+            119.88063486662709,
+            407.72385654778446
+          ],
+          "transformedPixel": [
+            119.91912146969729,
+            407.90338586597613
+          ],
+          "residualPixels": 0.1836082642645708
+        },
+        {
+          "id": "patch-23-7",
+          "partition": "fit",
+          "sourcePixel": [
+            152,
+            408
+          ],
+          "targetPixel": [
+            152.14671550591746,
+            407.9193518375727
+          ],
+          "transformedPixel": [
+            152.06405362626666,
+            408.04996168796214
+          ],
+          "residualPixels": 0.1545701114903842
+        },
+        {
+          "id": "patch-23-9",
+          "partition": "fit",
+          "sourcePixel": [
+            185,
+            409
+          ],
+          "targetPixel": [
+            183.5141310478956,
+            407.50533977007507
+          ],
+          "transformedPixel": [
+            185.2175417836505,
+            409.20403079886034
+          ],
+          "residualPixels": 2.405651542921498
+        },
+        {
+          "id": "patch-24-5",
+          "partition": "holdout",
+          "sourcePixel": [
+            120,
+            424
+          ],
+          "targetPixel": [
+            120.27147897833575,
+            423.70267760716445
+          ],
+          "transformedPixel": [
+            119.98355140444365,
+            423.9499905775776
+          ],
+          "residualPixels": 0.3795602628594849
+        },
+        {
+          "id": "patch-24-6",
+          "partition": "fit",
+          "sourcePixel": [
+            136,
+            424
+          ],
+          "targetPixel": [
+            136.00705056793421,
+            423.8348298623327
+          ],
+          "transformedPixel": [
+            136.05601748272835,
+            424.02327848857055
+          ],
+          "residualPixels": 0.19470655735077794
+        },
+        {
+          "id": "patch-24-10",
+          "partition": "fit",
+          "sourcePixel": [
+            200,
+            424
+          ],
+          "targetPixel": [
+            200.16465191402892,
+            424.1168888767604
+          ],
+          "transformedPixel": [
+            200.34588179586711,
+            424.3164301325426
+          ],
+          "residualPixels": 0.2695570122074836
+        },
+        {
+          "id": "patch-25-8",
+          "partition": "holdout",
+          "sourcePixel": [
+            168,
+            440
+          ],
+          "targetPixel": [
+            167.93958361947125,
+            440.1388800255581
+          ],
+          "transformedPixel": [
+            168.2653795740441,
+            440.21645902215806
+          ],
+          "residualPixels": 0.33490521753100216
+        },
+        {
+          "id": "patch-25-9",
+          "partition": "fit",
+          "sourcePixel": [
+            184,
+            440
+          ],
+          "targetPixel": [
+            184.18896374534225,
+            440.02579861628175
+          ],
+          "transformedPixel": [
+            184.33784565232875,
+            440.28974693315104
+          ],
+          "residualPixels": 0.30304213602413177
+        },
+        {
+          "id": "patch-26-1",
+          "partition": "holdout",
+          "sourcePixel": [
+            60,
+            455
+          ],
+          "targetPixel": [
+            55.73493679522328,
+            456.41652319231105
+          ],
+          "transformedPixel": [
+            59.836636609447126,
+            454.7654575400816
+          ],
+          "residualPixels": 4.4215335749008755
+        },
+        {
+          "id": "patch-26-7",
+          "partition": "holdout",
+          "sourcePixel": [
+            152,
+            456
+          ],
+          "targetPixel": [
+            151.79615996903865,
+            455.78686499618266
+          ],
+          "transformedPixel": [
+            152.25734343050573,
+            456.18977582276653
+          ],
+          "residualPixels": 0.61239474141215
+        },
+        {
+          "id": "patch-26-9",
+          "partition": "holdout",
+          "sourcePixel": [
+            184,
+            456
+          ],
+          "targetPixel": [
+            183.84361305490106,
+            455.89524818677967
+          ],
+          "transformedPixel": [
+            184.4022755870751,
+            456.33635164475254
+          ],
+          "residualPixels": 0.7118118329240891
+        },
+        {
+          "id": "patch-26-10",
+          "partition": "fit",
+          "sourcePixel": [
+            201,
+            455
+          ],
+          "targetPixel": [
+            200.07369942316748,
+            456.06911788054236
+          ],
+          "transformedPixel": [
+            201.47524392433095,
+            455.4113072557075
+          ],
+          "residualPixels": 1.5482382913773844
+        },
+        {
+          "id": "patch-28-5",
+          "partition": "holdout",
+          "sourcePixel": [
+            125,
+            490
+          ],
+          "targetPixel": [
+            120.32106078831231,
+            487.94638405790516
+          ],
+          "transformedPixel": [
+            125.27197053473635,
+            490.1651374851189
+          ],
+          "residualPixels": 5.425345527061792
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "model": "affine",
+      "initialAffine": [
+        0.818023497,
+        -0.040130942,
+        -13.4303298,
+        -0.0187376885,
+        0.889953034,
+        25.5233659
+      ],
+      "coefficients": [
+        1.07334134182753,
+        0.03591409041014404,
+        -20.014922346073753,
+        0.00027106026768032663,
+        1.0004436521786517,
+        -0.23978884157724412
+      ],
+      "stats": {
+        "fit": {
+          "count": 38,
+          "rmsPixels": 1.3700453922772324,
+          "maximumPixels": 5.283479586140004
+        },
+        "holdout": {
+          "count": 32,
+          "rmsPixels": 1.1019250000213399,
+          "maximumPixels": 2.185250230145976
+        }
+      },
+      "residuals": [
+        {
+          "id": "patch-0-14",
+          "partition": "fit",
+          "sourcePixel": [
+            263,
+            39
+          ],
+          "targetPixel": [
+            263.9426268155779,
+            40.07851327171401
+          ],
+          "transformedPixel": [
+            263.6745000805622,
+            38.8488024437901
+          ],
+          "residualPixels": 1.258602664204826
+        },
+        {
+          "id": "patch-0-15",
+          "partition": "holdout",
+          "sourcePixel": [
+            277,
+            40
+          ],
+          "targetPixel": [
+            280.3775674851206,
+            40.16051651389969
+          ],
+          "transformedPixel": [
+            278.73719295655775,
+            39.85304093971627
+          ],
+          "residualPixels": 1.6689427260026755
+        },
+        {
+          "id": "patch-1-11",
+          "partition": "fit",
+          "sourcePixel": [
+            217,
+            56
+          ],
+          "targetPixel": [
+            215.73743854236398,
+            55.74631998775492
+          ],
+          "transformedPixel": [
+            214.91133789346833,
+            55.84387575851389
+          ],
+          "residualPixels": 0.8318409766981816
+        },
+        {
+          "id": "patch-1-12",
+          "partition": "holdout",
+          "sourcePixel": [
+            233,
+            55
+          ],
+          "targetPixel": [
+            232.47831583553733,
+            55.761791122496156
+          ],
+          "transformedPixel": [
+            232.04888527229863,
+            54.84776907061812
+          ],
+          "residualPixels": 1.0098747050811987
+        },
+        {
+          "id": "patch-1-14",
+          "partition": "holdout",
+          "sourcePixel": [
+            262,
+            56
+          ],
+          "targetPixel": [
+            263.59342756536944,
+            56.30440733622207
+          ],
+          "transformedPixel": [
+            263.21169827570714,
+            55.8560734705595
+          ],
+          "residualPixels": 0.5888297764940467
+        },
+        {
+          "id": "patch-1-15",
+          "partition": "fit",
+          "sourcePixel": [
+            277,
+            55
+          ],
+          "targetPixel": [
+            279.75038789846053,
+            55.50424798288767
+          ],
+          "transformedPixel": [
+            279.27590431270994,
+            54.859695722396054
+          ],
+          "residualPixels": 0.8003638482912561
+        },
+        {
+          "id": "patch-2-10",
+          "partition": "fit",
+          "sourcePixel": [
+            202,
+            73
+          ],
+          "targetPixel": [
+            200.38020021266104,
+            71.69439232381643
+          ],
+          "transformedPixel": [
+            199.42175730302782,
+            72.84735194153576
+          ],
+          "residualPixels": 1.4993094047319595
+        },
+        {
+          "id": "patch-2-12",
+          "partition": "fit",
+          "sourcePixel": [
+            232,
+            72
+          ],
+          "targetPixel": [
+            231.68838999757028,
+            72.09065559505899
+          ],
+          "transformedPixel": [
+            231.58608346744356,
+            71.85504009738752
+          ],
+          "residualPixels": 0.25686823246471585
+        },
+        {
+          "id": "patch-2-15",
+          "partition": "holdout",
+          "sourcePixel": [
+            276,
+            71
+          ],
+          "targetPixel": [
+            280.402155855493,
+            71.56001800552163
+          ],
+          "transformedPixel": [
+            278.7771884174447,
+            70.86652309698681
+          ],
+          "residualPixels": 1.7667638107231596
+        },
+        {
+          "id": "patch-3-14",
+          "partition": "holdout",
+          "sourcePixel": [
+            260,
+            87
+          ],
+          "targetPixel": [
+            263.5298234888082,
+            87.70265579911275
+          ],
+          "transformedPixel": [
+            262.17835239476653,
+            86.86928456756235
+          ],
+          "residualPixels": 1.5877599716600574
+        },
+        {
+          "id": "patch-4-10",
+          "partition": "fit",
+          "sourcePixel": [
+            202,
+            104
+          ],
+          "targetPixel": [
+            199.72854273309056,
+            103.52867920638752
+          ],
+          "transformedPixel": [
+            200.53509410574227,
+            103.86110515907396
+          ],
+          "residualPixels": 0.8723715554428877
+        },
+        {
+          "id": "patch-5-9",
+          "partition": "fit",
+          "sourcePixel": [
+            186,
+            121
+          ],
+          "targetPixel": [
+            183.6167874041969,
+            120.11461841297972
+          ],
+          "transformedPixel": [
+            183.97217217347426,
+            120.86431028182815
+          ],
+          "residualPixels": 0.8296603114840235
+        },
+        {
+          "id": "patch-5-11",
+          "partition": "fit",
+          "sourcePixel": [
+            216,
+            120
+          ],
+          "targetPixel": [
+            216.15981524053058,
+            119.97546323259361
+          ],
+          "transformedPixel": [
+            216.13649833789,
+            119.87199843767992
+          ],
+          "residualPixels": 0.10605961406342253
+        },
+        {
+          "id": "patch-5-12",
+          "partition": "holdout",
+          "sourcePixel": [
+            230,
+            120
+          ],
+          "targetPixel": [
+            232.12401525820712,
+            120.27415973267534
+          ],
+          "transformedPixel": [
+            231.1632771234754,
+            119.87579328142745
+          ],
+          "residualPixels": 1.0400546105890849
+        },
+        {
+          "id": "patch-6-10",
+          "partition": "fit",
+          "sourcePixel": [
+            201,
+            135
+          ],
+          "targetPixel": [
+            200.28356797947043,
+            136.26612699083435
+          ],
+          "transformedPixel": [
+            200.5750895666292,
+            134.87458731634447
+          ],
+          "residualPixels": 1.4217480442958101
+        },
+        {
+          "id": "patch-7-7",
+          "partition": "fit",
+          "sourcePixel": [
+            156,
+            153
+          ],
+          "targetPixel": [
+            151.98435941275417,
+            152.3173807185236
+          ],
+          "transformedPixel": [
+            152.92118281177298,
+            152.8703753435146
+          ],
+          "residualPixels": 1.087860807372939
+        },
+        {
+          "id": "patch-7-9",
+          "partition": "fit",
+          "sourcePixel": [
+            185,
+            152
+          ],
+          "targetPixel": [
+            184.12453361318774,
+            152.40716614074998
+          ],
+          "transformedPixel": [
+            184.0121676343612,
+            151.87779243909867
+          ],
+          "residualPixels": 0.5411678382883234
+        },
+        {
+          "id": "patch-7-10",
+          "partition": "holdout",
+          "sourcePixel": [
+            200,
+            152
+          ],
+          "targetPixel": [
+            199.9931009920163,
+            152.1139454961315
+          ],
+          "transformedPixel": [
+            200.11228776177413,
+            151.8818583431139
+          ],
+          "residualPixels": 0.2609021515455916
+        },
+        {
+          "id": "patch-7-12",
+          "partition": "holdout",
+          "sourcePixel": [
+            228,
+            151
+          ],
+          "targetPixel": [
+            231.71948443947812,
+            152.0736351339102
+          ],
+          "transformedPixel": [
+            230.12993124253484,
+            150.88900437843026
+          ],
+          "residualPixels": 1.982430173484445
+        },
+        {
+          "id": "patch-8-10",
+          "partition": "fit",
+          "sourcePixel": [
+            199,
+            168
+          ],
+          "targetPixel": [
+            200.3624701726278,
+            168.07839418389648
+          ],
+          "transformedPixel": [
+            199.6135718665089,
+            167.88868571770462
+          ],
+          "residualPixels": 0.772552894663305
+        },
+        {
+          "id": "patch-9-7",
+          "partition": "fit",
+          "sourcePixel": [
+            154,
+            184
+          ],
+          "targetPixel": [
+            152.0750100659274,
+            183.8269295841654
+          ],
+          "transformedPixel": [
+            151.88783693083238,
+            183.88358644051743
+          ],
+          "residualPixels": 0.1955601745575715
+        },
+        {
+          "id": "patch-9-8",
+          "partition": "holdout",
+          "sourcePixel": [
+            169,
+            185
+          ],
+          "targetPixel": [
+            167.56378353484467,
+            184.22293880970904
+          ],
+          "transformedPixel": [
+            168.02387114865545,
+            184.8880959967113
+          ],
+          "residualPixels": 0.808773575114096
+        },
+        {
+          "id": "patch-9-9",
+          "partition": "fit",
+          "sourcePixel": [
+            185,
+            186
+          ],
+          "targetPixel": [
+            184.36209034384495,
+            184.0264750316097
+          ],
+          "transformedPixel": [
+            185.2332467083061,
+            185.89287661317283
+          ],
+          "residualPixels": 2.0597010159250155
+        },
+        {
+          "id": "patch-10-5",
+          "partition": "holdout",
+          "sourcePixel": [
+            124,
+            201
+          ],
+          "targetPixel": [
+            120.33194334985092,
+            200.46293503323693
+          ],
+          "transformedPixel": [
+            120.29813621297893,
+            200.8829967195241
+          ],
+          "residualPixels": 0.42141991266419976
+        },
+        {
+          "id": "patch-10-6",
+          "partition": "fit",
+          "sourcePixel": [
+            140,
+            200
+          ],
+          "targetPixel": [
+            135.87498047859856,
+            199.83992829515967
+          ],
+          "transformedPixel": [
+            137.43568359180924,
+            199.88689003162835
+          ],
+          "residualPixels": 1.5614094953847495
+        },
+        {
+          "id": "patch-10-7",
+          "partition": "holdout",
+          "sourcePixel": [
+            154,
+            200
+          ],
+          "targetPixel": [
+            152.33005416774182,
+            199.67263287224173
+          ],
+          "transformedPixel": [
+            152.46246237739467,
+            199.89068487537588
+          ],
+          "residualPixels": 0.2551050960962709
+        },
+        {
+          "id": "patch-10-9",
+          "partition": "holdout",
+          "sourcePixel": [
+            184,
+            198
+          ],
+          "targetPixel": [
+            184.1975913255866,
+            199.7861220568831
+          ],
+          "transformedPixel": [
+            184.59087445140028,
+            197.89792937904897
+          ],
+          "residualPixels": 1.9287154288998163
+        },
+        {
+          "id": "patch-10-10",
+          "partition": "fit",
+          "sourcePixel": [
+            198,
+            199
+          ],
+          "targetPixel": [
+            200.4266754686603,
+            200.38881943533252
+          ],
+          "transformedPixel": [
+            199.65356732739585,
+            198.90216787497513
+          ],
+          "residualPixels": 1.6756577991948236
+        },
+        {
+          "id": "patch-11-6",
+          "partition": "holdout",
+          "sourcePixel": [
+            139,
+            216
+          ],
+          "targetPixel": [
+            136.3541045698807,
+            215.6919425174569
+          ],
+          "transformedPixel": [
+            136.93696769654403,
+            215.89371740621908
+          ],
+          "residualPixels": 0.6168002352129522
+        },
+        {
+          "id": "patch-11-8",
+          "partition": "holdout",
+          "sourcePixel": [
+            168,
+            216
+          ],
+          "targetPixel": [
+            168.35187338672077,
+            216.39753602917392
+          ],
+          "transformedPixel": [
+            168.0638666095424,
+            215.90157815398183
+          ],
+          "residualPixels": 0.5735173211557978
+        },
+        {
+          "id": "patch-11-9",
+          "partition": "fit",
+          "sourcePixel": [
+            182,
+            216
+          ],
+          "targetPixel": [
+            184.30977308472222,
+            216.19669390024552
+          ],
+          "transformedPixel": [
+            183.09064539512784,
+            215.90537299772933
+          ],
+          "residualPixels": 1.2534513120893833
+        },
+        {
+          "id": "patch-12-5",
+          "partition": "holdout",
+          "sourcePixel": [
+            124,
+            233
+          ],
+          "targetPixel": [
+            120.155817476151,
+            232.17866334394355
+          ],
+          "transformedPixel": [
+            121.44738710610352,
+            232.89719358924097
+          ],
+          "residualPixels": 1.4779843782742943
+        },
+        {
+          "id": "patch-13-6",
+          "partition": "holdout",
+          "sourcePixel": [
+            137,
+            248
+          ],
+          "targetPixel": [
+            136.4238439729633,
+            248.07257911250818
+          ],
+          "transformedPixel": [
+            135.93953590601356,
+            247.90737215540057
+          ],
+          "residualPixels": 0.5117105064285485
+        },
+        {
+          "id": "patch-14-4",
+          "partition": "fit",
+          "sourcePixel": [
+            106,
+            264
+          ],
+          "targetPixel": [
+            103.80551564323432,
+            263.9299450810093
+          ],
+          "transformedPixel": [
+            103.24057975592245,
+            263.90606772196094
+          ],
+          "residualPixels": 0.5654402577177933
+        },
+        {
+          "id": "patch-14-5",
+          "partition": "holdout",
+          "sourcePixel": [
+            122,
+            264
+          ],
+          "targetPixel": [
+            119.58834026115613,
+            264.4873524567129
+          ],
+          "transformedPixel": [
+            120.41404122516295,
+            263.9104046862438
+          ],
+          "residualPixels": 1.0072987698846274
+        },
+        {
+          "id": "patch-14-6",
+          "partition": "fit",
+          "sourcePixel": [
+            136,
+            264
+          ],
+          "targetPixel": [
+            135.8059306561,
+            264.41233723745927
+          ],
+          "transformedPixel": [
+            135.44082001074835,
+            263.9141995299913
+          ],
+          "residualPixels": 0.6176139238638648
+        },
+        {
+          "id": "patch-14-8",
+          "partition": "fit",
+          "sourcePixel": [
+            167,
+            264
+          ],
+          "targetPixel": [
+            167.8626744757418,
+            264.1948552797285
+          ],
+          "transformedPixel": [
+            168.71440160740178,
+            263.9226023982894
+          ],
+          "residualPixels": 0.8941816025045375
+        },
+        {
+          "id": "patch-14-12",
+          "partition": "fit",
+          "sourcePixel": [
+            229,
+            268
+          ],
+          "targetPixel": [
+            232.01150663620743,
+            263.8917558394306
+          ],
+          "transformedPixel": [
+            235.4052211623492,
+            267.94118274360017
+          ],
+          "residualPixels": 5.283479586140004
+        },
+        {
+          "id": "patch-15-5",
+          "partition": "fit",
+          "sourcePixel": [
+            121,
+            280
+          ],
+          "targetPixel": [
+            120.35940107964052,
+            279.8474752428076
+          ],
+          "transformedPixel": [
+            119.91532532989771,
+            279.9172320608345
+          ],
+          "residualPixels": 0.44952117321754437
+        },
+        {
+          "id": "patch-15-7",
+          "partition": "fit",
+          "sourcePixel": [
+            150,
+            280
+          ],
+          "targetPixel": [
+            152.14030486772413,
+            280.2495109583102
+          ],
+          "transformedPixel": [
+            151.04222424289608,
+            279.92509280859724
+          ],
+          "residualPixels": 1.1450013949711768
+        },
+        {
+          "id": "patch-15-8",
+          "partition": "holdout",
+          "sourcePixel": [
+            165,
+            279
+          ],
+          "targetPixel": [
+            168.0602530919508,
+            279.8846653842871
+          ],
+          "transformedPixel": [
+            167.1064302798989,
+            278.92871506043383
+          ],
+          "residualPixels": 1.350414372874402
+        },
+        {
+          "id": "patch-16-3",
+          "partition": "holdout",
+          "sourcePixel": [
+            89,
+            295
+          ],
+          "targetPixel": [
+            87.53220259964637,
+            295.8285255441054
+          ],
+          "transformedPixel": [
+            86.10711374756892,
+            294.91521291494854
+          ],
+          "residualPixels": 1.6926364627092323
+        },
+        {
+          "id": "patch-16-5",
+          "partition": "holdout",
+          "sourcePixel": [
+            120,
+            296
+          ],
+          "targetPixel": [
+            119.8450402939354,
+            296.2551783232856
+          ],
+          "transformedPixel": [
+            119.41660943463248,
+            295.9240594354253
+          ],
+          "residualPixels": 0.5414727316318539
+        },
+        {
+          "id": "patch-17-3",
+          "partition": "fit",
+          "sourcePixel": [
+            91,
+            312
+          ],
+          "targetPixel": [
+            88.28906047332755,
+            311.8569143115626
+          ],
+          "transformedPixel": [
+            88.86433596819643,
+            311.92329712252103
+          ],
+          "residualPixels": 0.5790928877022864
+        },
+        {
+          "id": "patch-17-4",
+          "partition": "holdout",
+          "sourcePixel": [
+            105,
+            312
+          ],
+          "targetPixel": [
+            103.64779096377286,
+            312.31070260454834
+          ],
+          "transformedPixel": [
+            103.89111475378184,
+            311.92709196626856
+          ],
+          "residualPixels": 0.45427259281817567
+        },
+        {
+          "id": "patch-17-5",
+          "partition": "fit",
+          "sourcePixel": [
+            120,
+            312
+          ],
+          "targetPixel": [
+            120.24937106553396,
+            312.26413193226443
+          ],
+          "transformedPixel": [
+            119.9912348811948,
+            311.93115787028376
+          ],
+          "residualPixels": 0.4213146278223626
+        },
+        {
+          "id": "patch-18-2",
+          "partition": "fit",
+          "sourcePixel": [
+            76,
+            329
+          ],
+          "targetPixel": [
+            72.01318911904413,
+            328.3110829717093
+          ],
+          "transformedPixel": [
+            73.37475537775592,
+            328.92677330554284
+          ],
+          "residualPixels": 1.4943015974154814
+        },
+        {
+          "id": "patch-18-3",
+          "partition": "holdout",
+          "sourcePixel": [
+            90,
+            328
+          ],
+          "targetPixel": [
+            87.71801171197401,
+            328.0029376081782
+          ],
+          "transformedPixel": [
+            88.3656200729312,
+            327.9301244971117
+          ],
+          "residualPixels": 0.6516888355072696
+        },
+        {
+          "id": "patch-18-4",
+          "partition": "fit",
+          "sourcePixel": [
+            104,
+            328
+          ],
+          "targetPixel": [
+            104.33378453261605,
+            327.74454527230137
+          ],
+          "transformedPixel": [
+            103.3923988585166,
+            327.93391934085923
+          ],
+          "residualPixels": 0.9602445132578664
+        },
+        {
+          "id": "patch-18-5",
+          "partition": "holdout",
+          "sourcePixel": [
+            119,
+            328
+          ],
+          "targetPixel": [
+            119.86928241973675,
+            328.4030650134945
+          ],
+          "transformedPixel": [
+            119.49251898592956,
+            327.9379852448744
+          ],
+          "residualPixels": 0.5985397866757622
+        },
+        {
+          "id": "patch-19-2",
+          "partition": "holdout",
+          "sourcePixel": [
+            74,
+            344
+          ],
+          "targetPixel": [
+            71.61033535892591,
+            344.04295511717885
+          ],
+          "transformedPixel": [
+            71.76678405025302,
+            343.9328859676873
+          ],
+          "residualPixels": 0.1912888148527246
+        },
+        {
+          "id": "patch-19-3",
+          "partition": "fit",
+          "sourcePixel": [
+            89,
+            344
+          ],
+          "targetPixel": [
+            88.20008884303189,
+            344.32386623162904
+          ],
+          "transformedPixel": [
+            87.86690417766596,
+            343.9369518717025
+          ],
+          "residualPixels": 0.5106023336730663
+        },
+        {
+          "id": "patch-19-5",
+          "partition": "fit",
+          "sourcePixel": [
+            119,
+            344
+          ],
+          "targetPixel": [
+            119.66622333637213,
+            344.43708715829234
+          ],
+          "transformedPixel": [
+            120.06714443249186,
+            343.9450836797329
+          ],
+          "residualPixels": 0.6346693219531441
+        },
+        {
+          "id": "patch-20-0",
+          "partition": "fit",
+          "sourcePixel": [
+            44,
+            361
+          ],
+          "targetPixel": [
+            39.83818667245507,
+            360.10805472119324
+          ],
+          "transformedPixel": [
+            40.17708333239957,
+            360.9322962466939
+          ],
+          "residualPixels": 0.8911930422087028
+        },
+        {
+          "id": "patch-20-1",
+          "partition": "holdout",
+          "sourcePixel": [
+            59,
+            360
+          ],
+          "targetPixel": [
+            55.88101582902944,
+            359.5303693790127
+          ],
+          "transformedPixel": [
+            56.24128936940236,
+            359.93591849853055
+          ],
+          "residualPixels": 0.5424639271274524
+        },
+        {
+          "id": "patch-20-2",
+          "partition": "fit",
+          "sourcePixel": [
+            74,
+            360
+          ],
+          "targetPixel": [
+            71.78119699250769,
+            359.5751732422288
+          ],
+          "transformedPixel": [
+            72.34140949681532,
+            359.93998440254575
+          ],
+          "residualPixels": 0.6685246687104537
+        },
+        {
+          "id": "patch-20-3",
+          "partition": "holdout",
+          "sourcePixel": [
+            89,
+            360
+          ],
+          "targetPixel": [
+            88.47696429997389,
+            359.8359173935172
+          ],
+          "transformedPixel": [
+            88.44152962422828,
+            359.94405030656094
+          ],
+          "residualPixels": 0.11379078665920027
+        },
+        {
+          "id": "patch-20-4",
+          "partition": "fit",
+          "sourcePixel": [
+            103,
+            359
+          ],
+          "targetPixel": [
+            103.94321832637803,
+            359.941309873276
+          ],
+          "transformedPixel": [
+            103.43239431940353,
+            358.9474014981298
+          ],
+          "residualPixels": 1.117494977298434
+        },
+        {
+          "id": "patch-21-1",
+          "partition": "fit",
+          "sourcePixel": [
+            59,
+            376
+          ],
+          "targetPixel": [
+            56.16797090144826,
+            375.5691941929843
+          ],
+          "transformedPixel": [
+            56.81591481596467,
+            375.94301693338895
+          ],
+          "residualPixels": 0.7480472963673426
+        },
+        {
+          "id": "patch-21-2",
+          "partition": "holdout",
+          "sourcePixel": [
+            73,
+            377
+          ],
+          "targetPixel": [
+            71.8616105755446,
+            376.4985754881144
+          ],
+          "transformedPixel": [
+            71.87860769196024,
+            376.94725542931513
+          ],
+          "residualPixels": 0.4490017723821853
+        },
+        {
+          "id": "patch-21-4",
+          "partition": "holdout",
+          "sourcePixel": [
+            103,
+            375
+          ],
+          "targetPixel": [
+            104.45348668380993,
+            376.091315003231
+          ],
+          "transformedPixel": [
+            104.00701976596585,
+            374.9544999329882
+          ],
+          "residualPixels": 1.2213440189644802
+        },
+        {
+          "id": "patch-22-0",
+          "partition": "fit",
+          "sourcePixel": [
+            44,
+            392
+          ],
+          "targetPixel": [
+            40.20985729105832,
+            391.681870430531
+          ],
+          "transformedPixel": [
+            41.29042013511403,
+            391.94604946423215
+          ],
+          "residualPixels": 1.1123878018933206
+        },
+        {
+          "id": "patch-22-1",
+          "partition": "holdout",
+          "sourcePixel": [
+            58,
+            393
+          ],
+          "targetPixel": [
+            55.78937614060106,
+            392.41144560315905
+          ],
+          "transformedPixel": [
+            56.35311301110959,
+            392.95028796015833
+          ],
+          "residualPixels": 0.7798399482376489
+        },
+        {
+          "id": "patch-22-3",
+          "partition": "holdout",
+          "sourcePixel": [
+            87,
+            391
+          ],
+          "targetPixel": [
+            88.05328991341287,
+            391.91106042439486
+          ],
+          "transformedPixel": [
+            87.40818374328768,
+            390.95726140356373
+          ],
+          "residualPixels": 1.151474942355241
+        },
+        {
+          "id": "patch-22-4",
+          "partition": "fit",
+          "sourcePixel": [
+            102,
+            391
+          ],
+          "targetPixel": [
+            104.14705334754338,
+            391.8011741515512
+          ],
+          "transformedPixel": [
+            103.50830387070062,
+            390.961327307579
+          ],
+          "residualPixels": 1.0551509918002298
+        },
+        {
+          "id": "patch-23-0",
+          "partition": "holdout",
+          "sourcePixel": [
+            43,
+            408
+          ],
+          "targetPixel": [
+            40.10525080635824,
+            408.0277501126253
+          ],
+          "transformedPixel": [
+            40.7917042398488,
+            407.9528768388229
+          ],
+          "residualPixels": 0.690524672608349
+        },
+        {
+          "id": "patch-23-3",
+          "partition": "fit",
+          "sourcePixel": [
+            85,
+            408
+          ],
+          "targetPixel": [
+            87.7232115873212,
+            407.6135862042158
+          ],
+          "transformedPixel": [
+            85.87204059660505,
+            407.96426137006546
+          ],
+          "residualPixels": 1.8840931794401077
+        },
+        {
+          "id": "patch-23-4",
+          "partition": "holdout",
+          "sourcePixel": [
+            100,
+            407
+          ],
+          "targetPixel": [
+            103.90575023458592,
+            407.91465399220704
+          ],
+          "transformedPixel": [
+            101.93624663360785,
+            406.96788362190205
+          ],
+          "residualPixels": 2.185250230145976
+        },
+        {
+          "id": "patch-23-5",
+          "partition": "fit",
+          "sourcePixel": [
+            116,
+            406
+          ],
+          "targetPixel": [
+            120.0733049907716,
+            407.98590206436575
+          ],
+          "transformedPixel": [
+            119.07379401243821,
+            405.9717769340063
+          ],
+          "residualPixels": 2.2484933258861197
+        },
+        {
+          "id": "patch-24-2",
+          "partition": "fit",
+          "sourcePixel": [
+            71,
+            424
+          ],
+          "targetPixel": [
+            71.75423284682078,
+            423.71117749806405
+          ],
+          "transformedPixel": [
+            71.41988725758193,
+            423.9675649611764
+          ],
+          "residualPixels": 0.42133300877649243
+        }
+      ]
+    }
+  ],
+  "anchors": [
+    {
+      "id": "84000000",
+      "sourcePixel": [
+        470,
+        180
+      ],
+      "nativePixel": [
+        269.13211931288083,
+        101.18942978302009
+      ],
+      "samplePixel": [
+        269,
+        101
+      ],
+      "pointMeters": [
+        1160,
+        1832,
+        -613.672607421875
+      ]
+    },
+    {
+      "id": "84000001",
+      "sourcePixel": [
+        390,
+        340
+      ],
+      "nativePixel": [
+        222.41306049174054,
+        195.04791220934507
+      ],
+      "samplePixel": [
+        222,
+        195
+      ],
+      "pointMeters": [
+        408,
+        328,
+        -606.7635498046875
+      ]
+    },
+    {
+      "id": "84000002",
+      "sourcePixel": [
+        250,
+        455
+      ],
+      "nativePixel": [
+        141.4556916129033,
+        263.29868396046766
+      ],
+      "samplePixel": [
+        141,
+        263
+      ],
+      "pointMeters": [
+        -888,
+        -760,
+        -319.27880859375
+      ]
+    },
+    {
+      "id": "84000003",
+      "sourcePixel": [
+        175,
+        580
+      ],
+      "nativePixel": [
+        97.77793518901737,
+        336.74531843288275
+      ],
+      "samplePixel": [
+        98,
+        337
+      ],
+      "pointMeters": [
+        -1576,
+        -1944,
+        649.931640625
+      ]
+    }
+  ]
+}

@@ -236,6 +236,35 @@ test('satellite ellipses are translated to their parent with exact prepared cent
     { ...centers, unused: { positionM: [0, 0, 0], centerBodyId: 'unused' } }), /hierarchy/);
 });
 
+test('classification views share the root candidate angles and enclose their members\' positions', async () => {
+  const source = parseWorldContextSource(await readSource() as unknown);
+  const bodies = [{ id: 'parent', name: 'Parent', color: '#888888' }, { id: 'satellite', name: 'Satellite', color: '#999999' }];
+  const states: Record<string, OrbitalState> = {
+    parent: { positionM: [1000, 0, 0], centerBodyId: source.focus.id, centerPositionM: [0, 0, 0],
+      normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 1000, eccentricity: 0, trueAnomalyRadians: 0 },
+    satellite: { positionM: [1007, 0, 0], centerBodyId: 'parent', centerPositionM: [1000, 0, 0],
+      normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 },
+  };
+  const config = { ...source, bodies, orbit: { ...source.orbit, segments: 16 } };
+  const facts = { parent: { radiusM: 2, classification: 'planet' }, satellite: { radiusM: 1, classification: 'satellite' } };
+  const policy = { minimumRadiusShare: .2, elevationsDegrees: [30, 45, 60], azimuthStepDegrees: 15 };
+  const context = prepareWorldContext(config, facts, states, {}, policy);
+  assert.deepEqual(Object.keys(context.classificationViews ?? {}), ['planet', 'satellite']);
+  const view = context.classificationViews!.satellite!;
+  assert.deepEqual(view.memberIds, ['satellite']);
+  assert.deepEqual(view.memberRadiiM, [1]);
+  assert.equal(view.candidates.length, 72);
+  for (const [index, candidate] of view.candidates.entries()) {
+    assert.deepEqual(candidate.cameraToReference, context.focus.systemView!.candidates[index]!.cameraToReference,
+      'every classification uses the root system\'s camera angles');
+    for (const [axis, value] of candidate.memberPositionsM[0]!.entries()) {
+      assert.ok(value - 1 >= candidate.minimumM[axis]! - 1e-10 && value + 1 <= candidate.maximumM[axis]! + 1e-10,
+        'the view encloses the member\'s current position and radius');
+    }
+  }
+  assert.equal(prepareWorldContext(config, facts, states).classificationViews, undefined, 'views need a framing policy');
+});
+
 test('extent traversal covers each active chord once for sparse trails and uneven bank sizes', async () => {
   const source = parseWorldContextSource(await readSource());
   const body = source.bodies[0]!;

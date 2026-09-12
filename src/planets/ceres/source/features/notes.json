@@ -1,0 +1,258 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "15332",
+      "item": "Q20872010",
+      "title": "List of geological features on Ceres",
+      "url": "https://en.wikipedia.org/wiki/List_of_geological_features_on_Ceres",
+      "revision": "1370634411",
+      "extract": "Ceres is a dwarf planet in the asteroid belt that lies between the orbits of Mars and Jupiter. The International Astronomical Union (IAU) has adopted two themes for naming surface features on Ceres: agricultural deities for craters and agricultural festivals for everything else."
+    },
+    {
+      "id": "15333",
+      "item": "Q20872011",
+      "title": "Coniraya (crater)",
+      "url": "https://en.wikipedia.org/wiki/Coniraya_(crater)",
+      "revision": "1353675132",
+      "extract": "Coniraya is a large, shallow impact crater on the dwarf planet Ceres. It is the namesake for the Coniraya Quadrangle."
+    },
+    {
+      "id": "15335",
+      "item": "Q20804290",
+      "title": "Dantu (crater)",
+      "url": "https://en.wikipedia.org/wiki/Dantu_(crater)",
+      "revision": "1321241496",
+      "extract": "Dantu is a large crater on Ceres, located within the Vendimia Planitia. It is rimmed by a number of minor faculae, which together form Bright Spot 2. The crater is named after Dantu, the timekeeper and first god of planting (millet) of the Gã people of Accra, Ghana."
+    },
+    {
+      "id": "15336",
+      "item": "Q20872014",
+      "title": "Ezinu (crater)",
+      "url": "https://en.wikipedia.org/wiki/Ezinu_(crater)",
+      "revision": "1347502378",
+      "extract": "Ezinu is a large impact crater on the dwarf planet Ceres, located on the edge of Hanami Planum. It was officially named on 3 July 2015 by the International Astronomical Union (IAU) after a Sumerian goddess of grain."
+    },
+    {
+      "id": "15337",
+      "item": "Q20873199",
+      "title": "Fejokoo (crater)",
+      "url": "https://en.wikipedia.org/wiki/Fejokoo_(crater)",
+      "revision": "1348569451",
+      "extract": "Fejokoo is a hexagonal impact crater on the dwarf planet Ceres. Like all craters on Ceres, it is named after an agricultural deity; the crater is named for the Igbo deity who provided yams."
+    },
+    {
+      "id": "15338",
+      "item": "Q20717443",
+      "title": "Haulani (crater)",
+      "url": "https://en.wikipedia.org/wiki/Haulani_(crater)",
+      "revision": "1321320435",
+      "extract": "Haulani is an impact crater located on the dwarf planet Ceres that contains \"Spot 1\", one of the bright spots observed by the Dawn spacecraft. The crater was named after Haulani, the Hawaiian goddess of plants."
+    },
+    {
+      "id": "15339",
+      "item": "Q20717548",
+      "title": "Kerwan (crater)",
+      "url": "https://en.wikipedia.org/wiki/Kerwan_(crater)",
+      "revision": "1321353910",
+      "extract": "Kerwan is the largest confirmed impact basin and one of the largest geological features on the dwarf planet Ceres. It was discovered on February 19, 2015 from Dawn images as it approached Ceres. The crater is distinctly shallow for its size, and lacks a central peak."
+    },
+    {
+      "id": "15340",
+      "item": "Q20873203",
+      "title": "Nawish (crater)",
+      "url": "https://en.wikipedia.org/wiki/Nawish_(crater)",
+      "revision": "1330075557",
+      "extract": "Nawish is an impact crater on the dwarf planet Ceres. It is named after the Acoma guardian of the field. The name was officially approved by the International Astronomical Union (IAU) on 3 July 2015. It is the namesake of the Nawish Quadrangle."
+    },
+    {
+      "id": "15341",
+      "item": "Q20652331",
+      "title": "Occator (crater)",
+      "url": "https://en.wikipedia.org/wiki/Occator_(crater)",
+      "revision": "1322347143",
+      "extract": "Occator is an impact crater located on Ceres, the largest object in the main asteroid belt that lies between the orbits of Mars and Jupiter, that contains \"Spot 5\", the brightest of the bright spots observed by the Dawn spacecraft. It was known as \"Region A\" in ground-based images taken by the W. M."
+    },
+    {
+      "id": "15344",
+      "item": "Q20873205",
+      "title": "Sintana (crater)",
+      "url": "https://en.wikipedia.org/wiki/Sintana_(crater)",
+      "revision": "1330075579",
+      "extract": "4 ° E. It has a diameter of 58 km, hosting a central peak. The crater is named after the deity of the Kogi people of northern Colombia who produced fertile black earth. The name Sintana was officially adopted by the International Astronomical Union (IAU) on 3 July 2015. It is the namesake of the Sintana Quadrangle."
+    },
+    {
+      "id": "15347",
+      "item": "Q20727364",
+      "title": "Yalode (crater)",
+      "url": "https://en.wikipedia.org/wiki/Yalode_(crater)",
+      "revision": "1291749404",
+      "extract": "Yalode is the second-largest confirmed impact basin on the dwarf planet Ceres, after Kerwan. It is located adjacent to another large crater, Urvara, and serves as the namesake for the Yalode Quadrange."
+    },
+    {
+      "id": "15348",
+      "item": "Q20872035",
+      "title": "List of geological features on Ceres",
+      "url": "https://en.wikipedia.org/wiki/List_of_geological_features_on_Ceres",
+      "revision": "1370634411",
+      "extract": "Ceres is a dwarf planet in the asteroid belt that lies between the orbits of Mars and Jupiter. The International Astronomical Union (IAU) has adopted two themes for naming surface features on Ceres: agricultural deities for craters and agricultural festivals for everything else."
+    },
+    {
+      "id": "15350",
+      "item": "Q20732121",
+      "title": "Urvara (crater)",
+      "url": "https://en.wikipedia.org/wiki/Urvara_(crater)",
+      "revision": "1322514427",
+      "extract": "Urvara is the third-largest confirmed crater on Ceres after Kerwan and neighboring Yalode. Urvara means fertile. It is named after the ancient Indo-Iranian personification of fertility. It has a central peak, and a number of unexplained ridges intersect it."
+    },
+    {
+      "id": "15374",
+      "item": "Q21850392",
+      "title": "Ikapati (crater)",
+      "url": "https://en.wikipedia.org/wiki/Ikapati_(crater)",
+      "revision": "1330088461",
+      "extract": "Ikapati is a large impact crater on Ceres, a dwarf planet located in the main asteroid belt.7 mi) deep. Its crater floor and rim are lower in the southwest, and large portions of the floor are covered in plains of very smooth terrain."
+    },
+    {
+      "id": "15376",
+      "item": "Q21850344",
+      "title": "Achita (crater)",
+      "url": "https://en.wikipedia.org/wiki/Achita_(crater)",
+      "revision": "1361711133",
+      "extract": "Achita is a large impact crater on the dwarf planet Ceres. The crater is named after Achita, a Nigerian god of agriculture. The crater was imaged as part of NASA's Dawn mission."
+    },
+    {
+      "id": "15383",
+      "item": "Q21850435",
+      "title": "Oxo (crater)",
+      "url": "https://en.wikipedia.org/wiki/Oxo_(crater)",
+      "revision": "1318882592",
+      "extract": "Oxo is a small impact crater on the dwarf planet Ceres. Located in Ceres's northern hemisphere, it is the second-brightest feature on Ceres, after Haulani Crater. The crater was named after the Candomblé god of agriculture."
+    },
+    {
+      "id": "15384",
+      "item": "Q21850460",
+      "title": "Victa (crater)",
+      "url": "https://en.wikipedia.org/wiki/Victa_(crater)",
+      "revision": "1367310009",
+      "extract": "Victa is an impact crater on Ceres, a dwarf planet in the asteroid belt. It is roughly 32 kilometres (20 mi) in diameter, nearly the same size as the neighboring crater Abellio to its west. It was named after Victa, the Roman goddess of food and nourishment."
+    },
+    {
+      "id": "15409",
+      "item": "Q20652342",
+      "title": "Ahuna Mons",
+      "url": "https://en.wikipedia.org/wiki/Ahuna_Mons",
+      "revision": "1362770505",
+      "extract": "Ahuna Mons is the largest mountain on the dwarf planet and asteroid Ceres. It protrudes above the cratered terrain, is not an impact feature, and is the only mountain of its kind on Ceres."
+    },
+    {
+      "id": "15410",
+      "item": "Q21850443",
+      "title": "Samhain Catenae",
+      "url": "https://en.wikipedia.org/wiki/Samhain_Catenae",
+      "revision": "1320192378",
+      "extract": "Samhain Catenae is a crater chain on the surface of the dwarf planet and large asteroid Ceres. It is made up of a series of 6 linear pit chains totaling a distance of 1211 km. It is the largest known catenae on the dwarf planet. It is located to the West of Liberalia Mons and to the East of Homowo Regio."
+    },
+    {
+      "id": "15418",
+      "item": "Q21850458",
+      "title": "Tupo (crater)",
+      "url": "https://en.wikipedia.org/wiki/Tupo_(crater)",
+      "revision": "1267104964",
+      "extract": "Tupo is an impact crater in the southern hemisphere of the dwarf planet Ceres, located at 32.35° S, 88.38° E. It has a diameter of 36 km. The crater is named after a Polynesian deity, that was invoked on the island Mangareva during the planting of turmeric."
+    },
+    {
+      "id": "15419",
+      "item": "Q21850367",
+      "title": "List of geological features on Ceres",
+      "url": "https://en.wikipedia.org/wiki/List_of_geological_features_on_Ceres",
+      "revision": "1370634411",
+      "extract": "Ceres is a dwarf planet in the asteroid belt that lies between the orbits of Mars and Jupiter. The International Astronomical Union (IAU) has adopted two themes for naming surface features on Ceres: agricultural deities for craters and agricultural festivals for everything else."
+    },
+    {
+      "id": "15420",
+      "item": "Q21850386",
+      "title": "List of geological features on Ceres",
+      "url": "https://en.wikipedia.org/wiki/List_of_geological_features_on_Ceres",
+      "revision": "1370634411",
+      "extract": "Ceres is a dwarf planet in the asteroid belt that lies between the orbits of Mars and Jupiter. The International Astronomical Union (IAU) has adopted two themes for naming surface features on Ceres: agricultural deities for craters and agricultural festivals for everything else."
+    },
+    {
+      "id": "15426",
+      "item": "Q21850456",
+      "title": "Tibong (crater)",
+      "url": "https://en.wikipedia.org/wiki/Tibong_(crater)",
+      "revision": "1364891627",
+      "extract": "Tibong is an impact crater on Ceres, a dwarf planet. The crater was named after the Tibong, the eponymous malevolent spirit who, according to Indonesian mythology from the Land Dayak people located in Borneo and Kalimantan, devours and depletes rice crops."
+    },
+    {
+      "id": "15430",
+      "item": "Q21850424",
+      "title": "List of geological features on Ceres",
+      "url": "https://en.wikipedia.org/wiki/List_of_geological_features_on_Ceres",
+      "revision": "1370634411",
+      "extract": "Ceres is a dwarf planet in the asteroid belt that lies between the orbits of Mars and Jupiter. The International Astronomical Union (IAU) has adopted two themes for naming surface features on Ceres: agricultural deities for craters and agricultural festivals for everything else."
+    },
+    {
+      "id": "15449",
+      "item": "Q21850342",
+      "title": "Abellio (crater)",
+      "url": "https://en.wikipedia.org/wiki/Abellio_(crater)",
+      "revision": "1320192362",
+      "extract": "Abellio is a crater on the surface of the dwarf planet and large asteroid Ceres. It is a corner of the Fejokoo Quadrangle, located northwest of the namesake crater. It is named after the Gaul agricultural deity of apple trees much like other craters on Ceres."
+    },
+    {
+      "id": "15451",
+      "item": "Q21850411",
+      "title": "Kupalo (crater)",
+      "url": "https://en.wikipedia.org/wiki/Kupalo_(crater)",
+      "revision": "1367726692",
+      "extract": "Kupalo is an impact crater on the southern hemisphere of the dwarf planet Ceres. It is a young complex crater, with a long central ridge and a sharp rim. Its ejecta blanket is bright and prominent. The crater is named after Kupala, the deity of vegetation and harvest in Slavic mythologies."
+    },
+    {
+      "id": "15457",
+      "item": "Q21850417",
+      "title": "Liberalia Mons",
+      "url": "https://en.wikipedia.org/wiki/Liberalia_Mons",
+      "revision": "1323782312",
+      "extract": "Liberalia Mons is a mountain on the surface of the dwarf planet and large asteroid Ceres. It is located in Ceres's northern hemisphere; it is located north-west of Ahuna Mons, east of Samhain Catenae, and west of Rongo. Liberalia Mons is the largest mountain on Ceres in terms of base area."
+    },
+    {
+      "id": "15458",
+      "item": "Q21850346",
+      "title": "Annona (crater)",
+      "url": "https://en.wikipedia.org/wiki/Annona_(crater)",
+      "revision": "1336008919",
+      "extract": "Annona is a crater on the surface of the dwarf planet and large asteroid Ceres. It is a corner of the Sintana Quadrangle, located northwest of the namesake crater. It is named after the Roman Mythology agricultural deity of the harvest much like other craters on Ceres."
+    },
+    {
+      "id": "15480",
+      "item": "Q25907936",
+      "title": "Consus (crater)",
+      "url": "https://en.wikipedia.org/wiki/Consus_(crater)",
+      "revision": "1330088365",
+      "extract": "Consus is an impact crater on Ceres, a dwarf planet in the asteroid belt.5 mi) deep, it hosts a degraded central mound and a heavily cratered floor. Its floor hosts a variety of terrain units, several of which have been excavated by mass wasting processes and impact events."
+    },
+    {
+      "id": "15488",
+      "item": "Q25909101",
+      "title": "Hanami Planum",
+      "url": "https://en.wikipedia.org/wiki/Hanami_Planum",
+      "revision": "1330090259",
+      "extract": "Hanami Planum, formerly named Erntedank Planum, is a highland region on the dwarf planet and giant asteroid Ceres."
+    },
+    {
+      "id": "15533",
+      "item": "Q21850467",
+      "title": "Yamor Mons",
+      "url": "https://en.wikipedia.org/wiki/Yamor_Mons",
+      "revision": "1339485434",
+      "extract": "Yamor Mons, formerly Ysolo Mons, is a mountain on Ceres, a dwarf planet and the largest asteroid.8 mi) above the surrounding cratered terrain. Its shape has been battered by asteroid impacts, with some of its steep flanks carved out by nearby impact craters."
+    }
+  ]
+}

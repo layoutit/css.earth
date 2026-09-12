@@ -8,8 +8,24 @@
 | Enhanced color | [PIA18434](https://www.jpl.nasa.gov/images/pia18434-color-maps-of-dione-2014/), 2014. Ultraviolet/infrared colors extend beyond human vision; producer calibration, registration and photometric correction are retained. |
 | Shape and Elevation | [Weirich et al. 2025 SPC V1.0](https://doi.org/10.26033/bxx6-g543); Elevation is radius minus 561.4 km, colored over −7.5 to +7.5 km. |
 | Relative albedo | The same SPC release’s dimensionless brightness field, less validated than topography; not geometric albedo or calibrated reflectance. Its 0.5–1.5 display clips above 1.5. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/DIONE/target) Dione centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
+
+The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
+
+| View | Original grid | Both lighting images, before → current |
+| --- | --- | --- |
+| normal | 23040 × 11520 | 13.56 → 17.78 MB |
+| enhanced | 14134 × 7067 | 10.71 → 16.03 MB |
+
+Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/dione/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
+
+Both photographic views were inspected with Shadows on and off in Chromium at
+DPR 1 on revision `3dc424757`, with no script errors or missing image requests.
+The [enhanced-color capture](evidence/native-source-enhanced.png) shows the
+published color differences and fine crater texture on the retained geometry.
+This is a display check; independent map-to-shape registration remains separate.
 
 Independent landmarks: [Palinurus](https://planetarynames.wr.usgs.gov/Feature/4555) at 3.3° S, 63° W (297° E), and [Janiculum Dorsa](https://planetarynames.wr.usgs.gov/Feature/14379) near 24.6° N, 144.1° W (215.9° E). Bright trailing-hemisphere fractures lie near 90° E. These check orientation across the source maps.
 
@@ -17,13 +33,19 @@ Qualification status: source intake and recipe proposal. Final mesh selection (w
 
 ## Known problems
 
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Dione (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
+
+Feature notes: 2 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
+
 Different control networks, photographed shadows, seams and coarse inserts remain. No inpainting, synthetic color, polar repetition or patch correction is applied. The shared curvature overlay and optional directional Shadows operate on both lenses.
 
 Model spacing is about 1.58 km. The producer’s one-to-two-grid-spacing accuracy estimate derives from simulation experience, not independent per-cell Dione uncertainty. Increasing texture dimensions adds no terrain detail. This release includes roughly 1040 additional images compared with the previous archived model, through June 2017.
 
 Geographic registration, silhouette and feature review remain pending. The original photographic-map projection radii remain separate from shape geometry and the numeric elevation datum.
 
-Remote runtime installation remains unproven until these new assets are published through the existing publisher.
+The photographic runtime images were published to their content-addressed asset
+URLs on 12 September 2026. This does not establish availability of every scientific
+view or qualify its registration.
 
 SPC sigma measures internal maplet agreement, not absolute height uncertainty. Dione used calibrated ISS images.
 
@@ -46,7 +68,11 @@ The 2222 × 679 equatorial map spans 55° S–55° N; two 444 × 444 polar stere
 
 The astronomy package supplies the Saturn-relative orbit, IAU orientation and 562.5 km display scale reference. [NASA](https://science.nasa.gov/saturn/moons/dione/) rounds the mean radius to 562 km. Keep this physical radius distinct from the monochrome map's 563 km projection sphere and elevation's 561.4 km datum. The elevation colors and source-mesh silhouette are separate products with distinct resolutions. No visible atmosphere or cutaway is added.
 
-Map preparation uses the shared 8192 × 4096 intermediate layout and 1024-pixel pole products. The final source-mesh scene samples these maps into prepared per-triangle atlases. Surface/pole atlases use WebP quality 90 with lossless alpha; intermediate maps remain lossless. The 23K monochrome and 14K color sources are downsampled to this common delivery layout.
+Map preparation retains the shared 8192 × 4096 intermediate layout and 1024-pixel
+pole products for their existing consumers. The final photographic source-mesh
+atlases now sample the original 23K monochrome and 14K color grids directly at the
+retained triangle coordinates, with a 2 × 2 texel footprint and WebP quality 95.
+The other prepared maps and scientific views keep their existing processing.
 
 Pinned URLs, source bytes and hashes are in `source/manifest.json`. The shared acquisition recipe restores every large source; runtime uses prepared assets only.
 

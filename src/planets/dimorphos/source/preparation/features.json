@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": "DIMORPHOS_nomenclature_center_pts.zip",
+  "members": {
+    "attributes": "DIMORPHOS_nomenclature_center_pts.dbf",
+    "projection": null,
+    "metadata": null
+  },
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 0,
+  "output": "dimorphos-features.json",
+  "publicBase": "/scenes/dimorphos/",
+  "target": {
+    "className": "dimorphos-body"
+  },
+  "lensIds": [
+    "shape",
+    "elevation",
+    "albedo",
+    "slope"
+  ],
+  "kinds": {
+    "point": [
+      "AA",
+      "FA"
+    ],
+    "linear": [
+      "RU",
+      "DO",
+      "VA",
+      "CA",
+      "FO"
+    ],
+    "region": [
+      "PL",
+      "PM",
+      "MO"
+    ]
+  },
+  "excludedTypeCodes": {
+    "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+  },
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 40,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  },
+  "notes": "notes.json",
+  "sites": {
+    "document": "sites.json",
+    "inputs": []
+  }
+}

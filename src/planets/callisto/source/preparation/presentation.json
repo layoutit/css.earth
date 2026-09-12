@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-css-presentation-profile@1",
+  "namespace": "callisto",
+  "mode": "composite",
+  "lensFocus": {
+    "enhanced": {
+      "longitudeDegrees": 145.2,
+      "latitudeDegrees": -0.15,
+      "zoom": 1.1
+    },
+    "infrared": {
+      "longitudeDegrees": 315,
+      "latitudeDegrees": -20,
+      "zoom": 1.1
+    }
+  }
+}

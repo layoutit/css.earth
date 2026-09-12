@@ -1,111 +1,58 @@
 {
-  "schema": "cssearth-static-surface-geometry@1",
-  "kind": "disc-poles",
+  "schema": "cssearth-css-geometry-profile@1",
   "namespace": "pluto",
-  "parameters": {
+  "surface": {
+    "radius": 230,
+    "polarRadius": 230,
     "latitudeSegments": 16,
     "longitudeSegments": 32,
-    "displayRadius": 230,
+    "surface": {
+      "url": "/scenes/pluto/pluto-surface.webp",
+      "width": 2048,
+      "height": 1536
+    },
+    "surfaceLatitudeHeight": 1024,
+    "packedBandGutter": 16,
+    "poles": {
+      "url": "/scenes/pluto/pluto-poles-surface.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#bca18a"
+  },
+  "projection": {
     "tileSize": 50,
-    "surfaceOverlap": 0.008,
-    "projectiveRasterScale": 2,
-    "polarSurfaceOverlap": 1.035,
-    "polarInnerOverlap": 1.05,
-    "polarInnerInset": 2.4,
-    "cameraZoom": 1.1,
-    "cameraPitch": 40,
-    "rotationSeconds": 84
+    "layerElevation": 50,
+    "seamBleed": 0,
+    "interiorSeamBleed": 8,
+    "overlap": 0.005,
+    "fitToSource": false,
+    "rasterScale": 4,
+    "rasterGutter": 16.0,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.05
   },
-  "surface": {
-    "one": "/scenes/pluto/pluto-surface.webp",
-    "two": "/scenes/pluto/pluto-surface@2x.webp",
-    "width": 1024,
-    "height": 512,
-    "presentationCellSize": 32
-  },
-  "poles": {
-    "one": "/scenes/pluto/pluto-surface-poles.webp",
-    "two": "/scenes/pluto/pluto-surface-poles@2x.webp",
-    "width": 512,
-    "height": 128
-  },
-  "rasterAtlas": {
-    "columns": 32,
-    "rows": 14,
-    "cellSize": 66,
-    "gutter": 1,
-    "width": 2112,
-    "height": 924
-  },
-  "metadata": {
-    "schema": "csspluto-prepared-retained-scene@1",
-    "camera": {
-      "cameraModel": "accumulated-matrix3d",
-      "minimumControlPitchDegrees": 0,
-      "maximumControlPitchDegrees": 89,
-      "defaultControlPitchDegrees": 34.230769230769226,
-      "defaultControlYawDegrees": 0,
-      "materialReferenceControlPitchDegrees": 34.230769230769226,
-      "materialReferenceControlYawDegrees": 0,
-      "initialScenePitchDegrees": 40,
-      "maximumScenePitchDegrees": 65,
-      "minimumZoom": 0.42,
-      "maximumZoom": 4,
-      "defaultZoom": 1.1,
-      "sceneScale": 0.022,
-      "logicalBodyDiameter": 460,
-      "pitchBounded": false,
-      "yawBounded": false,
-      "style": "perspective:1000000px",
-      "responsiveFit": {
-        "model": "continuous-aspect-smoothstep",
-        "portraitBaseWidthShare": 0.34,
-        "narrowPortraitWidthShareGain": 0.08,
-        "landscapeWidthShareGain": 0.02,
-        "narrowPortraitAspectRatio": 0.46,
-        "portraitAspectRatio": 0.75,
-        "squareAspectRatio": 1,
-        "maximumHeightShare": 0.61,
-        "maximumMobilePreviewShare": 0.925,
-        "minimumZoom": 0.42,
-        "maximumZoom": 2
-      }
-    },
+  "bodyRotationDegrees": 180,
+  "output": {
+    "schema": "csspluto-prepared-runtime-scene@1",
+    "materialSchema": "csspluto-prepared-view-material@1",
+    "layout": "body-container",
     "body": {
-      "meanRadiusKm": 1188.3,
-      "meanDensityGPerCm3": 1.853,
-      "orbitalPeriodYears": 247.92065,
-      "displayAxisTiltDegrees": 57,
-      "displayRadius": 230,
-      "rotationSeconds": 84,
-      "systemTransform": "transform:rotateY(-57deg)",
-      "meshTransform": "transform:rotateZ(180deg)",
-      "latitudeSegments": 16,
-      "longitudeSegments": 32,
-      "assets": {
-        "surface": {
-          "one": "/scenes/pluto/pluto-surface.webp",
-          "two": "/scenes/pluto/pluto-surface@2x.webp",
-          "width": 2112,
-          "height": 924,
-          "presentationCellSize": 32
-        },
-        "poles": {
-          "one": "/scenes/pluto/pluto-surface-poles.webp",
-          "two": "/scenes/pluto/pluto-surface-poles@2x.webp",
-          "width": 512,
-          "height": 128
-        }
-      }
+      "axialTiltDegrees": 119.51,
+      "rotationDirection": "retrograde",
+      "rotationPeriodEarthDays": 6.3872
     },
-    "counts": {
-      "retainedLeafCount": 452,
-      "materialLeafCount": 1,
-      "retainedSkyboxFaceCount": 6,
-      "directionalSunLeafCount": 1,
-      "runtimeGeometryPreparation": false,
-      "runtimeRasterization": false
-    },
-    "qualification": "Source-backed standalone Pluto presentation; no epoch-specific ephemeris or native camera parity is claimed."
+    "animation": {
+      "cloudsVisualSeconds": 84,
+      "surfaceVisualSeconds": 84,
+      "direction": "retrograde"
+    }
   }
 }

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ef5d8d99264356422da05626d050236eba7757960a5659a24c0a3c4c56ff1887"
+    "sha256": "221c441793523c1ac082ecfc32edc6000ef64b7137918049e42af55d2cdd15b5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -902,8 +902,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2019/08/STScI-01EVSV9A3VN7VYXN5H6Z1GDG93.tif/jcr:content/renditions/Full%20Res.png",
             "missionId": "hubble"
           }
@@ -949,8 +949,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "juno",
+            "kind": "machine",
+            "machineId": "juno",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg",
             "missionId": "juno"
           }
@@ -997,8 +997,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "juno",
+            "kind": "machine",
+            "machineId": "juno",
             "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif",
             "missionId": "juno"
           }
@@ -1045,8 +1045,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "juno",
+            "kind": "machine",
+            "machineId": "juno",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23556/PIA23556.jpg",
             "missionId": "juno"
           }
@@ -1093,8 +1093,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "juno",
+            "kind": "machine",
+            "machineId": "juno",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21382/PIA21382.jpg",
             "missionId": "juno"
           }
@@ -1138,8 +1138,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
             "missionId": "hubble"
           }
@@ -1182,8 +1182,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
             "missionId": "hubble"
           }

@@ -82,9 +82,9 @@
         "description": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
         "title": "Monochrome mosaic",
         "detail": "Corrected mosaic",
-        "thumbnail": "/scenes/umbriel/umbriel-normal-thumbnail.webp",
-        "surface": "umbriel-normal-surface@2x.webp",
-        "poles": "umbriel-normal-poles@2x.webp",
+        "thumbnail": "umbriel-lens-normal.webp",
+        "surface": "umbriel-normal.webp",
+        "poles": "umbriel-poles-normal.webp",
         "source": {
           "id": "schenk-2020-umbriel-normal",
           "path": "../manifest.json",
@@ -105,8 +105,8 @@
       },
       {
         "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
+        "name": "stars",
+        "label": "Stars",
         "checked": true
       }
     ]

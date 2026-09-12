@@ -6,6 +6,7 @@
 | --- | --- |
 | OSIRIS reflectance | NAC orange-filter images `N20100710T154047674ID4DF22` and `N20100710T154135529ID4DF22`, 10 July 2010 at 15:41:06.632 and 15:41:54.488 UTC; 88/78 m per pixel. Resampled I/F with separate sigma, quality and camera records. |
 | Shape and Elevation | [Jorda et al. PDS release](https://doi.org/10.26007/aajh-r451), `lutetia_025k_cart.wrl`. Elevation is radius minus 49 km, false color from −16 to +16 km, not gravitational height. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/LUTETIA/target) Lutetia centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
 
@@ -14,6 +15,10 @@
 The broader preparation suite was not green (1,666/1,957 passed); global platform and shell audits were stopped. A later overview/navigation change was outside the tested implementation.
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Lutetia (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
+
+Feature notes: 2 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 The shape joins detailed northern OSIRIS reconstruction to coarser lightcurve/outline modeling; the published join discontinuity and local defects remain. Photographic coverage is partial and gaps remain a grid.
 

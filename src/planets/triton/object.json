@@ -8,9 +8,14 @@
       "label": "Triton",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
@@ -21,14 +26,34 @@
       "schema": "cssearth-authored-object@1",
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "931308680fdd1456c0dd0d1a16a14b4880c3084043aad766c5eb06d84fded2e0"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "b01cc2895974945754e13a929f3302e14f0ea6bb5ae787de2bf5c0bf08ae81ce"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "12e6ea96743bb0744c189bc41d9c15283344795904568dbba92984ec43453822"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "cb025a596b25308ab3fbbfe25241e99eb1c526b1919feba2335f42d5dd82ee2c"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "1527616dff13988c4c359ceab6b4ead42f7557a4aec32fa045171cc5831e5062"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "487062ba7cba76e661c8d61a90ccad34cdebb77c6a873fd11b6d17e266f87cff"
+          "sha256": "2dea5b396bb43746389ae3169fb9d7ca4ae87b9e44704441719648bdb1dae773"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "85b0b1aa6b199010892e6ec43a2d0d76ef78c2a85b1deedbef0804f489bbf866"
         },
         {
           "id": "title",
@@ -43,7 +68,12 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2f8ee7265450143ec1652b65ff793dd1fcd25feabf988b1c167dcdae57c70ffb"
+          "sha256": "3583a84c7a04b0c15c1c864b40357f875a2b9415e73de27009492b1dccbb80b5"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "cbe37fdbb767bafcffceb3ecc8c7e1b7d483fe643f06bcc06e4500744011431f"
         }
       ],
       "shape": {
@@ -53,7 +83,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -72,10 +102,14 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 12000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -106,11 +140,11 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/triton-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "784b6b36bf552643ea784b5ca5bbfc0ab8d6a489578394490420582f2b6ed8ac"
+        "sha256": "d73480678e06087dbe802efe421c5a4e4bb9441ebce9ebcf72a1156f19bdb62d"
       }
     },
     "catalog": {
@@ -127,8 +161,8 @@
     }
   },
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a561b9549008e5e54df6578c7b3ef00a4e52277ccd99bb9b90ff172cfdb07990"
+    "sha256": "73411fe08581c6ba57c320618a1f4ef15e4b559aba8a1695c1262f8b2fd8832a"
   }
 }

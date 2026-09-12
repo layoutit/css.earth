@@ -46,14 +46,6 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   background-image: var(--planet-cubic-sky-high-contrast-image);
 }
 
-.prepared-point-field-stars {
-  opacity: .5;
-}
-
-body[data-sky-contrast="high"] .prepared-point-field-stars {
-  opacity: 1;
-}
-
 .planet-cubic-sky-front {
   transform: translateZ(calc(-1 * var(--planet-cubic-sky-half-side)))
     scale(1.002);
@@ -649,6 +641,12 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
 .planet-breadcrumbs :is(a, button):hover { color: var(--shell-text); text-decoration: underline; }
 .planet-breadcrumbs :is(a, button):focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 3px; }
 .planet-breadcrumbs [aria-current="page"] { color: var(--shell-text-secondary); }
+/* Mission headings overlay their artwork without taking input; keep the trail usable. */
+/* Missions titled by a short name open their description with the full name. */
+.planet-lens-details-lead { color: var(--shell-text); font-weight: 500; }
+/* Mission and spacecraft names title their cards at the shell's panel heading size,
+   outranking the shared tab-panel text scale. */
+.planet-card-tabpanel .planet-machine .planet-lens-details-title { font: 500 22px/28px var(--shell-ui-font); }
 
 .planet-introduction {
   width: 100%;
@@ -842,6 +840,23 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   transform: translateY(0.3em);
 }
 
+.planet-setting-select {
+  grid-column: 3;
+  grid-row: 1;
+  max-width: 11em;
+  padding: 0 2px;
+  border: 0;
+  border-radius: 3px;
+  color: var(--shell-text-secondary);
+  background: transparent;
+  font: 13px/1.4 var(--shell-ui-font);
+  cursor: pointer;
+}
+.planet-setting-select:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
+
 .planet-setting-control[data-state]::after {
   grid-column: 3;
   grid-row: 1;
@@ -1027,6 +1042,9 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   height: var(--explorer-footer-height);
   background: var(--shell-background);
   pointer-events: auto;
+  /* A relayout boundary: the readout's ruler and text change while the camera
+     moves, and a fixed box would otherwise lay the whole document out again. */
+  contain: layout size;
 }
 
 .planet-attribution-footer {
@@ -1064,6 +1082,23 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
 .planet-attribution-separator {
   color: var(--shell-text-muted);
+  /* The comma hugs the provider before it; the footer gap opens the next one. */
+  margin-left: -8px;
+}
+
+/* Sources that share a provider name print it once, then their own parts. The
+   comma inside a group reads tighter than the dot between providers. */
+.planet-attribution-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.planet-attribution-provider { color: var(--shell-text-secondary); }
+/* The comma hugs the name before it; the group gap then separates the next one. */
+.planet-attribution-group-separator {
+  color: var(--shell-text-muted);
+  margin-left: -4px;
 }
 
 .planet-attribution-link:hover {
@@ -1103,8 +1138,10 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   gap: 8px;
 }
 
+.planet-motion-record,
+.planet-motion-script,
 .planet-diagnostic-record {
-  flex: 0 0 52px;
+  flex: 0 0 auto;
   padding: 0;
   border: 0;
   background: none;
@@ -1112,7 +1149,11 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   font: inherit;
   cursor: pointer;
 }
+.planet-motion-record:hover,
+.planet-motion-script:hover,
 .planet-diagnostic-record:hover { color: var(--shell-text); }
+.planet-motion-record[aria-pressed="true"] { color: #e98679; }
+.planet-motion-script[disabled] { opacity: .5; cursor: default; }
 .planet-diagnostic-record[aria-pressed="true"] { color: #e98679; }
 
 .planet-view-scale {
@@ -1257,7 +1298,6 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   line-height: 18px;
   text-align: left;
   cursor: pointer;
-  transition: color 120ms ease;
 }
 
 .planet-observation-control:hover,
@@ -1524,19 +1564,6 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     background-repeat: no-repeat;
   }
 
-  .planet-settings-action {
-    top: 0;
-    height: 59px;
-  }
-
-  .planet-settings-action .planet-action-marker {
-    top: 7px;
-    left: 6px;
-    width: 36px;
-    height: 36px;
-    background-size: 36px 36px;
-  }
-
   .planet-drawer-content {
     position: relative;
     z-index: 100;
@@ -1622,38 +1649,6 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
 @media (max-width: 820px), (orientation: portrait) {
 
-  .planet-sheet-handle {
-    appearance: none;
-    position: absolute;
-    z-index: 1;
-    inset: 0 0 auto;
-    display: block;
-    width: 100%;
-    height: 28px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    cursor: grab;
-    outline: 0;
-    touch-action: none;
-  }
-
-  .planet-sheet-handle::before {
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    width: 32px;
-    height: 4px;
-    border-radius: 0;
-    background: rgb(255 255 255 / 22%);
-    content: "";
-    transform: translateX(-50%);
-  }
-
-  .planet-sheet-handle:focus-visible::before {
-    box-shadow: 0 0 0 2px var(--shell-surface), 0 0 0 3px var(--shell-focus);
-  }
-
   .planet-drawer-content {
     box-sizing: border-box;
     position: relative;
@@ -1661,25 +1656,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    padding: 16px 24px 32px;
-    border-radius: 0;
-    background: var(--explorer-panel-background);
-    box-shadow: 0 -1px rgb(255 255 255 / 8%);
     pointer-events: auto;
-    transition: transform var(--sheet-snap-duration, 300ms)
-      cubic-bezier(.22, 1.12, .36, 1);
-  }
-
-  .planet-drawer-content.is-expanded {
-    transform: translateY(calc(-35svh + 56px));
-  }
-
-  .planet-drawer-content.is-dragging {
-    transition: none;
-  }
-
-  .planet-drawer-content.is-dragging > .planet-sheet-handle {
-    cursor: grabbing;
   }
 
   .planet-card {
@@ -1758,22 +1735,51 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 /* Mobile keeps the current shell language; only its spatial flow changes. */
 @media (max-width: 820px), (orientation: portrait) {
 
+  /* The grabber stays on top while the open sheet scrolls. */
   .planet-sheet-handle {
-    display: none;
+    appearance: none;
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    display: block;
+    flex: 0 0 auto;
+    width: 100%;
+    height: 20px;
+    margin: 0 0 -8px;
+    padding: 0;
+    border: 0;
+    background: var(--explorer-panel-background);
+    cursor: grab;
+    outline: 0;
+    touch-action: none;
   }
 
+  .planet-sheet-handle::before {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgb(255 255 255 / 28%);
+    content: "";
+    transform: translateX(-50%);
+  }
 
+  .planet-sheet-handle:focus-visible::before {
+    outline: 2px solid var(--shell-focus);
+    outline-offset: 2px;
+  }
+
+  .planet-sidebar.is-dragging .planet-sheet-handle { cursor: grabbing; }
+
+  /* Sections of the sheet are separated by bands of the scene background. */
   .planet-drawer-content {
-    gap: 10px;
+    gap: 8px;
     padding: 0;
     border-radius: 0;
-    background: transparent;
+    background: var(--shell-background);
     box-shadow: none;
-    transition: none;
-  }
-
-  .planet-drawer-content.is-expanded {
-    transform: none;
   }
 
   .planet-card {
@@ -1944,4 +1950,109 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   .planet-resources-panel {
     display: none;
   }
+}
+
+/* Prepared nomenclature labels. The renderer positions each retained span and
+   the shared tooltip; typography and the card belong to the shell. */
+.prepared-surface-features [data-feature-label] {
+  color: var(--shell-text);
+  font: 500 12px/14px var(--shell-ui-font);
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 2px rgb(0 0 0 / 95%), 0 1px 3px rgb(0 0 0 / 80%);
+  transition: color 120ms ease;
+}
+
+.prepared-surface-features [data-feature-kind="point"]::before {
+  position: absolute;
+  top: 50%;
+  left: -11px;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 70%);
+  content: "";
+}
+
+.prepared-surface-features [data-feature-kind="linear"] {
+  font-style: italic;
+  color: var(--shell-text-secondary);
+}
+
+.prepared-surface-features [data-feature-kind="region"] {
+  font: 600 11px/14px var(--shell-ui-font);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--shell-text-secondary);
+}
+
+.prepared-surface-features [data-feature-label][data-object-hovered="true"] {
+  color: #fff;
+}
+
+.prepared-surface-features [data-feature-tooltip] {
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 280px;
+  margin-top: -14px;
+  padding: 10px 12px 11px;
+  border-radius: 8px;
+  color: var(--shell-text);
+  background: rgb(32 33 36 / 94%);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 55%), 0 0 0 1px rgb(255 255 255 / 8%);
+  font: 400 12px/16px var(--shell-ui-font);
+  text-align: left;
+  white-space: normal;
+}
+
+.prepared-surface-features [data-feature-tooltip][hidden] {
+  display: none;
+}
+
+.prepared-surface-features [data-feature-tooltip-name] {
+  display: block;
+  font: 600 14px/18px var(--shell-ui-font);
+  color: #fff;
+}
+
+.prepared-surface-features [data-feature-tooltip-detail] {
+  display: block;
+  color: var(--shell-text-secondary);
+}
+
+.prepared-surface-features [data-feature-tooltip-origin] {
+  margin: 6px 0 0;
+  color: var(--shell-text-secondary);
+}
+
+.prepared-surface-features [data-feature-tooltip-origin]:empty {
+  display: none;
+}
+
+.prepared-surface-features [data-feature-tooltip-note] {
+  margin: 6px 0 0;
+  color: var(--shell-text);
+}
+
+.prepared-surface-features [data-feature-tooltip-note]:empty {
+  display: none;
+}
+
+.prepared-surface-features [data-feature-tooltip-credit] {
+  display: block;
+  margin-top: 6px;
+  font: 400 10px/13px var(--shell-ui-font);
+  letter-spacing: 0.02em;
+  color: var(--shell-text-secondary);
+  opacity: 0.8;
+}
+
+/* The hovered feature's published diameter, traced as retained screen chords
+   like the orbit lines. The stroke is a shell size in CSS pixels. */
+.prepared-surface-features [data-feature-outline-piece] {
+  height: 1.5px;
+  margin-top: -0.75px;
+  background: rgb(255 255 255 / 85%);
+  box-shadow: 0 0 2px rgb(0 0 0 / 60%);
 }

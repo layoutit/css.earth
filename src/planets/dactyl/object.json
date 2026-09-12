@@ -14,6 +14,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -43,12 +44,17 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "179dcbdf58198c6218d0fbf511a76a3661e0db2ce9558eedb4022e632384b554"
+          "sha256": "8d44612ea049b4fe1c177a80a41c0d2923d02efecc73ea4c89f2bd080f005f73"
         },
         {
           "id": "rotation",
           "path": "source/preparation/rotation.json",
           "sha256": "f5cbdd4577e22481dc57cdc9b6d419f7861734a2dd181fbf8e7b512eee8e1b7f"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "0e98bb5293fca7af9430cada585f2c42ae71d012105044f9985124b0b6937d4a"
         }
       ],
       "shape": {
@@ -75,7 +81,11 @@
           "source": "terrestrial",
           "model": "lit"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "page": {
       "stylesheets": [
@@ -83,7 +93,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1146a62c2dddd1252b601d00b273797f988d9f5d5e3a8e4d5abbc84dcee1969b"
+        "sha256": "e33064a72ef1ce09afede7343f3d546f290d9c14faca63a1236ad19e4f755d59"
       }
     },
     "worldFrame": {
@@ -124,8 +134,8 @@
     }
   },
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "cf818e298b820b3ef377d069442d69096fb96b312071b0e4cc51e93d94cdc870"
+    "sha256": "44c482cca7807fc7194b6c3cd56dd08ad8787c8a114c5fe6182d1f84373c1bb7"
   }
 }

@@ -28,9 +28,88 @@ according to projected CSS size, independently of DPR; dataset selection remains
 manual. These texture levels are separate from its retired geographic paging.
 The [texture-level implementation and measurements](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-prepared-texture-levels.md)
 record that change; [Earth's README](../src/planets/earth/README.md) describes the
-current datasets and retained source history.
+current datasets and retained source history. A row-bank cutaway body can declare
+the same kind of levels in its presentation recipe. Its density 1 and 2 surface
+maps become two levels, chosen by the same texels-per-CSS-pixel rule
+([surface texture levels](../src/renderers/css/preparation/presentation/surface-texture-levels.ts)).
+[Mercury's README](../src/planets/mercury/README.md) records its thresholds.
 
 ## Decode the source before choosing its display
+
+### Preserve photographic detail through preparation
+
+A large source can still produce a soft texture if preparation resizes it to an
+intermediate map and then samples that map again for an atlas or pole. Trace the
+actual path before increasing texture dimensions. Latitude-band packing itself
+copies pixels and adds gutters; it does not need an image filter.
+
+The direct photographic paths sample the pinned original grid at the final
+texture coordinates. Terrain atlases use the existing leaf transforms and a
+2 × 2 subpixel footprint. Polar sprites retain their existing projection and
+footprint. Earth samples Blue Marble and clouds on their separate native grids,
+then applies the declared display transfer and cloud composite. These changes
+affect preparation, without adding faces, runtime work or decoded texture pixels.
+
+Source coordinates, validity and presentation still govern the result:
+
+- Respect pixel centres, map origins, positive-east/positive-west conventions
+  and cropped extents. A projection's central meridian is not its left edge.
+- Reject interpolation footprints that include missing source contributors.
+  Apply the gray coverage grid afterwards; valid black pixels remain observations.
+- Preserve required mosaicking, spectral calculations, photometric correction
+  and authored presentation transforms. Bypassing a necessary composite is not
+  an image-quality improvement.
+- Resize an unpacked map before copying it into latitude bands. Filtering an
+  already packed map can mix stored strips and their gutters.
+
+Compare identical product views, including shadow settings, and keep encoding
+quality fixed in a control comparison. Record compressed bytes separately from
+decoded dimensions. A higher WebP quality can help independently of sampling;
+neither method creates detail absent from the observations. Source coverage and
+photograph-to-shape registration require their own evidence.
+
+The current native sampling recipes cover these existing presentations:
+
+| Preparation path | Bodies | Affected views |
+| --- | --- | --- |
+| Retained terrain atlases | Bennu, Deimos, Dione, Enceladus, Eros, Gaspra, Ida, Mathilde, Mimas, Phobos, Rhea, Ryugu, Steins, Tethys, Vesta | 22 photographic views |
+| Spherical polar sprites | Ariel, Callisto, Ceres, Charon, Europa, Ganymede, Iapetus, Io, Mars, Miranda, Oberon, Pluto, Titan, Titania, Triton, Umbriel, Venus | 23 photographic views; latitude-band maps keep their existing pixels |
+| Unpacked resizing | Mercury | Three 1× maps; the three canonical 2× maps reproduce their previous hashes |
+| Paged surface and poles | Earth | Clear surface and cloud composite, including their existing lower resolution pages |
+| Observed polar atlas | Neptune | Visible color; the atmospheric calibration remains before sampling |
+
+This is not a blanket bypass of image processing. Controlled camera mosaics,
+observed-color registration, scientific fields, solar products and giant-planet
+composites keep the processing that defines their meaning. The Moon retains the
+LROC mosaic delivered in #151; Europa and Io retain that change's 8K photographic
+bands and Io's corrected feature positions. Low-resolution or unobserved source
+areas cannot gain measured detail from this change.
+
+The 12 September 2026 review used revision `3dc424757`: all 51 selected views
+across 35 bodies were captured in Chromium at DPR 1 with Shadows on and off
+(102 captures), then inspected for visible texture, coverage and lighting.
+There were no script errors in those captures. Some unchanged scientific-view
+thumbnails were unavailable in the local checkout; this was not a full catalogue
+delivery or browser-conformance pass. [Earth's close-zoom limitation](../src/planets/earth/README.md#known-problems)
+occurred with both the previous and new photographic bytes.
+
+The [Enceladus comparison](../src/planets/enceladus/evidence/native-source-sampling.png)
+separates source sampling from WebP quality at an identical camera position.
+[Dione's enhanced-color capture](../src/planets/dione/evidence/native-source-enhanced.png)
+shows a complete product view. These examples demonstrate the prepared result;
+they do not establish new observational resolution or remove the sources' seams.
+The [Enceladus Pixelmatch evidence](../src/planets/enceladus/README.md#evidence)
+adds fresh matched crops on the `e0487eff5` / `c13f3643b` merge: Pixelmatch diffs
+at threshold 0.1, an independent repeat, byte pins and reproduction commands.
+Anti-aliasing is included. The repeat has zero mismatches; most photographic
+changes are subtle.
+
+On that merge, Europa's Monochrome and Io's Monochrome/Enhanced color views
+were recaptured at DPR 1 with Shadows on and off (six inspected views, no script
+errors). Their six native pole files reproduce their inventory hashes with the
+merged preparer; their bands retain #151's hashes. Unselected scientific
+thumbnails remained unavailable locally. The earlier 102 captures continue to
+document their recorded revision; they are not relabeled as a new full sweep.
 
 ### Format and field references
 
@@ -175,3 +254,33 @@ in its README and recipe. Keep shared algorithm explanations here. Add a
 [provenance binding](object-provenance.md#ownership-and-data-flow) when a new
 operation consumes inputs or emits products, and retain its original check results
 under the [evidence rules](provenance/CONTRACT.md#save-enough-evidence-to-check-the-result).
+
+## Refresh photographs without rebuilding geometry
+
+For a `density-before-pack` raster with separate pole sprites, a surface may set
+`resolutionScale` to a positive integer. It multiplies that photograph's map
+size at both prepared densities. Gutters scale with the map, preserving normalized
+atlas coordinates; polar sprite dimensions, lighting and scene geometry stay fixed.
+This setting does not change runtime texture selection or add a renderer feature.
+
+After pinning the changed recipe and content, use the shared preparer:
+
+```sh
+pnpm build:preparation
+node tools/objects/dist/refresh-photographs.js moon surface
+node tools/objects/dist/refresh-photographs.js europa normal enhanced
+node tools/objects/dist/refresh-photographs.js io normal enhanced
+```
+
+Run one body at a time. The command verifies the selected source closure, prepares
+its images and small minimaps, and updates the existing asset inventories and
+captions. It rejects scientific/emissive selections and new resource names.
+Unselected maps and the scene remain retained products; provenance records this
+as a partial refresh rather than a new full-package preparation. The ordinary
+full preparer uses the same image code.
+
+LROC's `pds-float-map` interpretation reads attached PDS3 labels, validates the
+product version, band, projection and lunar reference sphere, then integrates
+source pixel footprints before applying display gain/gamma. Source special values
+are masked before sampling; observed black is retained. It reads one row strip
+at a time and supplies the same interpretation to the globe and sidebar map.

@@ -1,12 +1,26 @@
-import { browserProfileLensIds, createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
-import objectControls from "../../../../src/planets/io/prepared/controls.json" with {type:"json"};
+import { createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
+import { readPreparedFixture } from "../../fixtures.mts";
+const objectControls = await readPreparedFixture("io", "controls");
 
-export const browserProfile = createObjectBrowserProfile({ id: "io", controls: objectControls,
-  audit: {
-    preparedAssetPairs: [{ one: "/scenes/io/io-directional-sun.webp", two: "/scenes/io/io-directional-sun@2x.webp" }],
-    canonicalPreparedAssets: ["/scenes/io/io-normal-surface@2x.webp", "/scenes/io/io-normal-poles@2x.webp", "/scenes/io/io-lighting.webp", "/scenes/io/io-parent-jupiter.webp"],
-    lensRace: { defaultId: "normal", slowId: "enhanced", winnerId: "normal",
-      slowAsset: "/scenes/io/io-enhanced-surface@2x.webp", preReadyDisabled: true },
-    retained: { lensIds: browserProfileLensIds(objectControls), allowedMountSelectors: [] },
-  },
+export const browserProfile = createObjectBrowserProfile({
+  id: "io", controls: objectControls,
+  audit: Object.freeze({
+    preparedAssetPairs: Object.freeze([
+      Object.freeze({ one: "/scenes/io/io-normal.webp", two: "/scenes/io/io-normal@2x.webp" }),
+      Object.freeze({ one: "/scenes/io/io-poles-normal.webp", two: "/scenes/io/io-poles-normal@2x.webp" }),
+      Object.freeze({ one: "/scenes/io/io-starfield-front.webp", two: "/scenes/io/io-starfield-front@2x.webp" }),
+      Object.freeze({ one: "/scenes/io/io-directional-sun.webp", two: "/scenes/io/io-directional-sun@2x.webp" }),
+    ]),
+    lensRace: Object.freeze({
+      defaultId: "normal",
+      slowId: "enhanced",
+      winnerId: "geology",
+      slowAsset: "/scenes/io/io-enhanced@2x.webp",
+      preReadyDisabled: true,
+    }),
+    retained: Object.freeze({
+      lensIds: Object.freeze(["normal","enhanced","geology","spectral-slope","visible-absorption"]),
+      allowedMountSelectors: Object.freeze([]),
+    }),
+  }),
 });

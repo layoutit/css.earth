@@ -87,7 +87,8 @@ function boundaryRoleFor(path: string): BoundaryRole | undefined {
   if (/\.(?:test|spec)\.[cm]?[jt]sx?$/u.test(path) || path.startsWith('site/test/')
     || /^src\/(?:[^/]+\/)*test\//u.test(path)
     || path.startsWith('tests/') || /(?:^|\/)(?:__fixtures__|fixtures)(?:\/|$)/u.test(path)) return 'test';
-  if (path.startsWith('tools/audits/') || /(?:^|\/)(?:capture|captures|evidence)(?:[./_-]|$)/u.test(path)) return 'evidence';
+  // Audits and external-oracle comparisons produce evidence; they may use test harnesses.
+  if (path.startsWith('tools/audits/') || path.startsWith('tools/oracles/') || /(?:^|\/)(?:capture|captures|evidence)(?:[./_-]|$)/u.test(path)) return 'evidence';
   return undefined;
 }
 

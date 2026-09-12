@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "charon",
+  "surface": {
+    "radius": 230,
+    "polarRadius": 230,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/charon/charon-normal.webp",
+      "width": 6400,
+      "height": 4800
+    },
+    "surfaceLatitudeHeight": 3200,
+    "packedBandGutter": 50,
+    "poles": {
+      "url": "/scenes/charon/charon-poles-normal.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#aaa9a3"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 0,
+    "interiorSeamBleed": 8,
+    "overlap": 0.005,
+    "fitToSource": false,
+    "rasterScale": 4,
+    "rasterGutter": 50,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.05
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "csscharon-prepared-runtime-scene@1",
+    "materialSchema": "csscharon-prepared-view-material@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 6.387222
+    },
+    "animation": {
+      "cloudsVisualSeconds": 84,
+      "surfaceVisualSeconds": 84,
+      "direction": "prograde"
+    }
+  }
+}

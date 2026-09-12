@@ -41,7 +41,7 @@ try {
   await scrollTo(page, 1e10);
   snapshots.system = await read(page);
   await page.screenshot({ path: resolve(output, 'solar-system-integrated.png') });
-  check('scroll exposes real prepared solar-system orbits', snapshots.system.visibleOrbits > 100 && snapshots.system.scale === 'system');
+  check('scroll exposes real prepared solar-system orbits', snapshots.system.visibleOrbitBodies >= 8 && snapshots.system.visibleOrbits > 0 && snapshots.system.scale === 'system');
   const objectLabels = await page.locator('[data-context-label]').evaluateAll(nodes => nodes.map(node => ({
     id: window.__cssearthTest.htmlElement(node).dataset.contextLabel, visible: getComputedStyle(node).visibility !== 'hidden' && Number(getComputedStyle(node).opacity) > 0,
   })));
@@ -58,9 +58,7 @@ try {
   await page.waitForTimeout(250);
   snapshots.stars = await read(page);
   await page.screenshot({ path: resolve(output, 'stellar-neighbourhood-integrated.png') });
-  check('the complete catalogue feeds bounded exact-position star slots', snapshots.stars.starField.catalogueCount === 109389 &&
-    snapshots.stars.starField.consideredCount === 109389 && snapshots.stars.starSlots === 4096 && Number(snapshots.stars.starField.visiblePoints) > 50 &&
-    snapshots.stars.starField.individualPoints === snapshots.stars.starField.visiblePoints);
+  check('baked stars require no individual-star slots', snapshots.stars.starSlots === 0 && snapshots.stars.skyFaces === 6);
   check('the prepared NASA sky replaces local volume haze', snapshots.initial.volumeOpacity === 0 && snapshots.initial.skyVisible && snapshots.stars.volumeOpacity === 0 && snapshots.stars.skyVisible);
   check('background catalogue stars do not create labels for unavailable objects', await page.locator('.prepared-star-label').count() === 0);
   check('the incompatible photographic background is retired at solar scale', await page.locator('.prepared-context-sky-fade').evaluate(node => getComputedStyle(node).visibility === 'hidden'));
@@ -70,7 +68,7 @@ try {
   snapshots.distantStars = await read(page);
   await page.screenshot({ path: resolve(output, 'stellar-neighbourhood-distant.png') });
   const distantPositions = await starPositions(page);
-  check('catalogued stars change projection as the observer moves',
+  check('the baked sky follows the shared physical camera',
     Object.entries(nearbyPositions).some(([id, transform]) => distantPositions[id] && distantPositions[id] !== transform));
   check('stellar textures were ready before leaving the solar system', await starRequests(page) === starRequestsBefore);
   await scrollTo(page, 1.8e18);
@@ -81,7 +79,17 @@ try {
   check('galaxy textures were ready before the first scroll', await volumeRequests(page) === loadedBefore);
   check('volume uses accepted 3D CSS transforms', snapshots.galaxy.volumeTransforms.every(value => value.startsWith('matrix3d(')));
   check('prepared galactic Sun anchor shares the same physical projection', await page.evaluate(anchor => {
-    const camera = window.__cssearthTest.html('.css-volume-camera'), scene = window.__cssearthTest.html('.css-volume-scene');
+    // Lens clouds and image-layer banks mount volume cameras of their own, and the density
+    // volume keeps unpainted ones beside the one it paints; the Sun anchor uses that one.
+    const painted = (node: Element) => {
+      for (let element: Element | null = node; element; element = element.parentElement) {
+        const style = getComputedStyle(element);
+        if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') return false;
+      }
+      return true;
+    };
+    const camera = window.__cssearthTest.htmlElement([...document.querySelectorAll('.prepared-volume-image .css-volume-camera')].find(painted));
+    const scene = window.__cssearthTest.htmlElement(camera.querySelector('.css-volume-scene'));
     const style = getComputedStyle(window.__cssearthTest.required(camera, 'computed style element')), rect = camera.getBoundingClientRect();
     const focal = parseFloat(style.perspective), [originX, originY] = style.perspectiveOrigin.split(' ').map(parseFloat);
     const point = new DOMPoint(anchor[1] * 50, anchor[0] * 50, anchor[2] * 50).matrixTransform(new DOMMatrix(getComputedStyle(window.__cssearthTest.required(scene, 'computed style element')).transform));
@@ -122,7 +130,10 @@ try {
 }
 
 async function ready(page: Page) {
-  await page.waitForFunction(() => window.__sun?.ready && window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === 'sun', null, { timeout: 25000 });
+  // The scene reports ready before the shared world context presents its first frame,
+  // so also wait until the volume context has published an opacity to read.
+  await page.waitForFunction(() => window.__sun?.ready && window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === 'sun' &&
+    document.querySelector<HTMLElement>('.prepared-volume-context')?.dataset.volumeOpacity !== undefined, null, { timeout: 25000 });
 }
 async function settled(page: Page) {
   await page.waitForFunction(() => {
@@ -140,22 +151,32 @@ async function starRequests(page: Page) {
   return page.evaluate(() => performance.getEntriesByType('resource').filter(entry => entry.name.includes('/stellar-neighbourhood/prepared/')).length);
 }
 async function starPositions(page: Page) {
-  return page.evaluate(() => Object.fromEntries(window.__cssearthTest.universe().inspect().stars.points
-    .filter(({ element, reference }) => reference && element.style.visibility !== 'hidden')
-    .map(({ element, reference }) => [reference, element.style.transform])));
+  return page.evaluate(() => ({ cube: window.__cssearthTest.html('.prepared-celestial-sky-scene').style.transform }));
 }
 async function read(page: Page) {
   return page.evaluate(() => ({
     camera: window.__cssearthTest.physicalCamera('sun'),
     scale: window.__cssearthTest.html('.planet-stage').dataset.contextScale,
     roots: document.querySelectorAll('.polycss-camera').length,
-    slices: document.querySelectorAll('.css-volume-mesh > s').length,
+    // The galaxy image-layer banks mount their own volume meshes; count the prepared density volume.
+    slices: document.querySelectorAll('.prepared-volume-image .css-volume-mesh > s').length,
     stable: window.__cssearthTest.object('sun').assertStableDomIdentity(),
-    starField: (({ points, ...stats }) => stats)(window.__cssearthTest.universe().inspect().stars),
+    skyFaces: document.querySelectorAll('.prepared-celestial-sky-near [data-sky-face]').length,
     starSlots: document.querySelectorAll('.prepared-point-field-block > s').length,
     volumeOpacity: Number(window.__cssearthTest.html('.prepared-volume-context').dataset.volumeOpacity),
     skyVisible: getComputedStyle(window.__cssearthTest.required(document.querySelector('.prepared-celestial-sky'), 'computed style element')).visibility === 'visible',
-    volumeTransforms: [...document.querySelectorAll('.css-volume-scene')].map(node => getComputedStyle(node).transform),
+    // Hidden volume scenes (unselected lens clouds, idle image-layer banks) compute no
+    // transform; the accepted-transform contract is about what is painted.
+    volumeTransforms: [...document.querySelectorAll('.css-volume-scene')].filter(node => {
+      for (let element: Element | null = node; element; element = element.parentElement) {
+        const style = getComputedStyle(element);
+        if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') return false;
+      }
+      return true;
+    }).map(node => getComputedStyle(node).transform),
     visibleOrbits: window.__cssearthTest.universe().inspect().bodies.flatMap(body => body.orbit).filter(node => getComputedStyle(node).visibility !== 'hidden').length,
+    // Orbits draw as shared SVG strokes since #144, so a body's path is a few polyline
+    // runs rather than hundreds of bars; count the bodies that show one.
+    visibleOrbitBodies: window.__cssearthTest.universe().inspect().bodies.filter(body => body.orbit.some(node => getComputedStyle(node).visibility !== 'hidden')).length,
   }));
 }

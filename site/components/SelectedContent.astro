@@ -1,12 +1,12 @@
 ---
-interface Props { title: string; metadata?: string | null; description?: string; descriptionDetail?: string; href?: string; }
-const { title, metadata, description, descriptionDetail, href } = Astro.props;
+interface Props { title: string; metadata?: string | null; lead?: string; description?: string; descriptionDetail?: string; href?: string; }
+const { title, metadata, lead, description, descriptionDetail, href } = Astro.props;
 ---
 <slot name="header">
   <h3 class="planet-lens-details-title">{title}{metadata && <span class="planet-selected-content-meta"> ({metadata})</span>}</h3>
 </slot>
 <slot />
-<p class="planet-lens-details-copy" title={descriptionDetail}>{description}</p>
+<p class="planet-lens-details-copy" title={descriptionDetail}>{lead && <><strong class="planet-lens-details-lead">{lead}.</strong> </>}{description}</p>
 {href && <a class="planet-dataset-caption planet-dataset-source" href={href} target="_blank" rel="noreferrer" aria-label={`View source for ${title} (opens in a new tab)`}>
   View source
 </a>}

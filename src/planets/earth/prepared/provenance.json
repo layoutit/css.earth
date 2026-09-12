@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9bcf0d025fa6e5620557e20afdb595d7549a5745c8e4b6d06dc17c4e915a8d5a"
+    "sha256": "802ab542a41a6999f0d8a71fb537ccfcc3dd42b922c50d7afb05e0fe638e1226"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "paged-ellipsoid",
       "path": "source/preparation/paged-ellipsoid.json",
-      "sha256": "3644c336b0dab1d58934826b3195bf01858c537463f0b3d477ed7606869a0e7f",
+      "sha256": "b762907dea0c0f73938fb52b860e4e57196ad5f170dd1624f3d5df4a5f42e653",
       "parameters": {
         "schema": "cssearth-paged-ellipsoid@1",
         "namespace": "earth",
@@ -137,7 +137,8 @@
               "name": "earth-surface",
               "compositeClouds": false,
               "thumbnail": "earth-lens-normal.webp",
-              "displayGamma": 1.25
+              "displayGamma": 1.25,
+              "nativePhotographicSampling": true
             },
             {
               "path": "blue-marble-july.jpg",
@@ -150,7 +151,8 @@
                 "spanDegrees": 50
               },
               "primarySource": "blue-marble-clouds.tif",
-              "displayGamma": 1.25
+              "displayGamma": 1.25,
+              "nativePhotographicSampling": true
             },
             {
               "path": "science/gebco-2026/latitude-00.dods.gz",
@@ -1197,6 +1199,362 @@
           "inner-core": "#eee0bd"
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "61e461be5dc366b3f856069c9ffecfb80c85c0de6f66dc529a7d2e09b04c4f8e",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": null,
+        "members": null,
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "output": "earth-features.json",
+        "publicBase": "/scenes/earth/",
+        "target": {
+          "className": "earth-body",
+          "withoutClassName": "earth-body-polar"
+        },
+        "lensIds": [
+          "normal",
+          "clouds",
+          "topography",
+          "night-lights",
+          "enso",
+          "cross-section",
+          "mantle-tomography"
+        ],
+        "kinds": {
+          "point": [
+            "CT",
+            "CP",
+            "PO",
+            "WF",
+            "MO",
+            "IS",
+            "DE",
+            "PL",
+            "PE"
+          ],
+          "linear": [
+            "RI",
+            "ST"
+          ],
+          "region": [
+            "CO",
+            "BA",
+            "VA",
+            "RE",
+            "OC",
+            "SE"
+          ]
+        },
+        "excludedTypeCodes": {},
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 40,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        },
+        "naturalEarth": {
+          "layers": [
+            {
+              "id": "populated-places",
+              "archive": "ne_10m_populated_places.zip",
+              "attributes": "ne_10m_populated_places.dbf",
+              "shapes": "ne_10m_populated_places.shp",
+              "classField": "FEATURECLA",
+              "classes": {
+                "Admin-0 capital": {
+                  "code": "CT",
+                  "type": "Capital"
+                },
+                "Admin-0 capital alt": {
+                  "code": "CT",
+                  "type": "Capital"
+                },
+                "Admin-0 region capital": {
+                  "code": "CT",
+                  "type": "Capital"
+                },
+                "Admin-1 capital": {
+                  "code": "CT",
+                  "type": "City"
+                },
+                "Admin-1 region capital": {
+                  "code": "CT",
+                  "type": "City"
+                },
+                "Populated place": {
+                  "code": "CT",
+                  "type": "City"
+                },
+                "Scientific station": {
+                  "code": "CT",
+                  "type": "Research station"
+                },
+                "Historic place": {
+                  "code": "CT",
+                  "type": "Historic place"
+                },
+                "Meteorological Station": {
+                  "code": "CT",
+                  "type": "Station"
+                }
+              },
+              "nameField": "NAME_EN",
+              "idField": "NE_ID",
+              "wikidataField": "WIKIDATAID",
+              "rankField": "POP_MAX",
+              "maximum": 3000,
+              "rankOrder": "descending",
+              "zoomField": "MIN_ZOOM"
+            },
+            {
+              "id": "regions-points",
+              "archive": "ne_10m_geography_regions_points.zip",
+              "attributes": "ne_10m_geography_regions_points.dbf",
+              "shapes": "ne_10m_geography_regions_points.shp",
+              "classField": "featurecla",
+              "classes": {
+                "cape": {
+                  "code": "CP",
+                  "type": "Cape"
+                },
+                "pole": {
+                  "code": "PO",
+                  "type": "Pole"
+                },
+                "plain": {
+                  "code": "PL",
+                  "type": "Plain"
+                },
+                "peninsula": {
+                  "code": "PE",
+                  "type": "Peninsula"
+                },
+                "island": {
+                  "code": "IS",
+                  "type": "Island"
+                },
+                "waterfall": {
+                  "code": "WF",
+                  "type": "Waterfall"
+                },
+                "mountain": {
+                  "code": "MO",
+                  "type": "Mountain"
+                },
+                "desert": {
+                  "code": "DE",
+                  "type": "Desert"
+                }
+              },
+              "nameField": "name_en",
+              "idField": "ne_id",
+              "wikidataField": "wikidataid",
+              "rankField": "scalerank",
+              "maximum": null,
+              "rankOrder": "ascending",
+              "zoomField": "min_zoom"
+            },
+            {
+              "id": "regions-polys",
+              "archive": "ne_10m_geography_regions_polys.zip",
+              "attributes": "ne_10m_geography_regions_polys.dbf",
+              "shapes": "ne_10m_geography_regions_polys.shp",
+              "classField": "FEATURECLA",
+              "classes": {
+                "Continent": {
+                  "code": "CO",
+                  "type": "Continent"
+                },
+                "Range/mtn": {
+                  "code": "MO",
+                  "type": "Mountain range"
+                },
+                "Desert": {
+                  "code": "DE",
+                  "type": "Desert"
+                },
+                "Island": {
+                  "code": "IS",
+                  "type": "Island"
+                },
+                "Island group": {
+                  "code": "IS",
+                  "type": "Island group"
+                },
+                "Peninsula": {
+                  "code": "PE",
+                  "type": "Peninsula"
+                },
+                "Plain": {
+                  "code": "PL",
+                  "type": "Plain"
+                },
+                "Plateau": {
+                  "code": "PL",
+                  "type": "Plateau"
+                },
+                "Basin": {
+                  "code": "BA",
+                  "type": "Basin"
+                },
+                "Valley": {
+                  "code": "VA",
+                  "type": "Valley"
+                },
+                "Lowland": {
+                  "code": "PL",
+                  "type": "Lowland"
+                },
+                "Tundra": {
+                  "code": "RE",
+                  "type": "Tundra"
+                },
+                "Wetlands": {
+                  "code": "RE",
+                  "type": "Wetlands"
+                },
+                "Delta": {
+                  "code": "RE",
+                  "type": "Delta"
+                },
+                "Isthmus": {
+                  "code": "RE",
+                  "type": "Isthmus"
+                },
+                "Gorge": {
+                  "code": "VA",
+                  "type": "Gorge"
+                },
+                "Foothills": {
+                  "code": "MO",
+                  "type": "Foothills"
+                },
+                "Coast": {
+                  "code": "RE",
+                  "type": "Coast"
+                },
+                "Depression": {
+                  "code": "BA",
+                  "type": "Depression"
+                },
+                "Geoarea": {
+                  "code": "RE",
+                  "type": "Region"
+                },
+                "Pen/cape": {
+                  "code": "PE",
+                  "type": "Peninsula"
+                }
+              },
+              "nameField": "NAME_EN",
+              "idField": "NE_ID",
+              "wikidataField": "WIKIDATAID",
+              "rankField": "SCALERANK",
+              "maximum": null,
+              "rankOrder": "ascending",
+              "zoomField": null
+            },
+            {
+              "id": "marine",
+              "archive": "ne_10m_geography_marine_polys.zip",
+              "attributes": "ne_10m_geography_marine_polys.dbf",
+              "shapes": "ne_10m_geography_marine_polys.shp",
+              "classField": "featurecla",
+              "classes": {
+                "ocean": {
+                  "code": "OC",
+                  "type": "Ocean"
+                },
+                "sea": {
+                  "code": "SE",
+                  "type": "Sea"
+                },
+                "bay": {
+                  "code": "SE",
+                  "type": "Bay"
+                },
+                "gulf": {
+                  "code": "SE",
+                  "type": "Gulf"
+                },
+                "strait": {
+                  "code": "ST",
+                  "type": "Strait"
+                },
+                "channel": {
+                  "code": "ST",
+                  "type": "Channel"
+                },
+                "sound": {
+                  "code": "SE",
+                  "type": "Sound"
+                },
+                "lagoon": {
+                  "code": "SE",
+                  "type": "Lagoon"
+                },
+                "fjord": {
+                  "code": "SE",
+                  "type": "Fjord"
+                },
+                "inlet": {
+                  "code": "SE",
+                  "type": "Inlet"
+                },
+                "reef": {
+                  "code": "IS",
+                  "type": "Reef"
+                },
+                "generic": {
+                  "code": "SE",
+                  "type": "Water body"
+                }
+              },
+              "nameField": "name_en",
+              "idField": "ne_id",
+              "wikidataField": "wikidataid",
+              "rankField": "scalerank",
+              "maximum": null,
+              "rankOrder": "ascending",
+              "zoomField": null
+            },
+            {
+              "id": "rivers",
+              "archive": "ne_10m_rivers_lake_centerlines.zip",
+              "attributes": "ne_10m_rivers_lake_centerlines.dbf",
+              "shapes": "ne_10m_rivers_lake_centerlines.shp",
+              "classField": "featurecla",
+              "classes": {
+                "River": {
+                  "code": "RI",
+                  "type": "River"
+                },
+                "Lake Centerline": {
+                  "code": "RI",
+                  "type": "Lake centreline"
+                }
+              },
+              "nameField": "name_en",
+              "idField": "ne_id",
+              "wikidataField": "wikidataid",
+              "rankField": "scalerank",
+              "maximum": 600,
+              "rankOrder": "ascending",
+              "zoomField": "min_zoom"
+            }
+          ]
+        }
+      }
     }
   ],
   "sources": [
@@ -1215,8 +1573,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "terra",
+            "kind": "machine",
+            "machineId": "terra",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg",
             "missionId": "terra"
           }
@@ -2475,6 +2833,50 @@
         ]
       },
       "verificationOperations": []
+    },
+    {
+      "id": "earth-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "kind": "source-document",
+      "title": "features/manifest.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "0bf33af0e8562409821c519e0b401f1c1412e651edc5f2ca89a4debd2584c3c2",
+      "bytes": 2292,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "earth-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "kind": "source-document",
+      "title": "presentation/surface-map.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "83f18034dde03b81602fb84f0cc132b45f45ba75d81d28555cc76f24566c23de",
+      "bytes": 175,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -2484,7 +2886,7 @@
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/0",
       "parents": [],
-      "process": "Prepare the global reference map and its declared cloud composite.",
+      "process": "Sample the original photographic grids at each retained atlas footprint, apply the declared display transfer and cloud composite, and encode the existing texture layout.",
       "limitations": [
         "NASA Blue Marble Next Generation July 2004, cloud-free global surface mosaic"
       ],
@@ -2506,50 +2908,50 @@
         },
         {
           "url": "/scenes/earth/earth-surface.webp",
-          "bytes": 251916,
-          "sha256": "c5f9a3fb57dc7ce90133e6a63922f190b7a1241c06242612dd996a27befe7124",
+          "bytes": 373038,
+          "sha256": "688f79e35702cafff851fb93a31bb0f44e990adacf4dce054f398223e3af6c37",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-poles.webp",
-          "bytes": 56774,
-          "sha256": "25b137750ac78502a0870e0d9b5aee01eaf7cb85c6df45386710f2c5a980ccc0",
+          "bytes": 63828,
+          "sha256": "4e008228ae97f8395cb08b87bf27dd18062b0fef55e134891bd1e27ea66dd059",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-page-1.webp",
-          "bytes": 187304,
-          "sha256": "14942a13622781df6fdf13ed797896ba897d68c38eac271a20e2b6fae27e0d50",
+          "bytes": 245396,
+          "sha256": "1a9f994418c5b8ff8c1b65e99e5cfbe42763c8a231e3f70b3bd61106f01ab3c9",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-page-2.webp",
-          "bytes": 297660,
-          "sha256": "6e77364e05383933ce32aaa5f708af082755d7e4618732f164428c94a21848c2",
+          "bytes": 371544,
+          "sha256": "0eaf3c20f766fb9714dbcd1758e4d6477c3f7a2c414b521c84e5c1f2c8079e78",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-page-3.webp",
-          "bytes": 616908,
-          "sha256": "739fb661dd8416c8b60e40c5c686da4054275c1aace0c9fa65664024cf8bf5e3",
+          "bytes": 822220,
+          "sha256": "4d7971337f14b17347c2d12c3e12e77d72a2cc2f370da7ce6844a830dd036b06",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-page-4.webp",
-          "bytes": 740818,
-          "sha256": "5a75d7e26ae2019b20a3e44d1537bf51bac54d1a9748142217a722314b4361da",
+          "bytes": 1100580,
+          "sha256": "5ed2fe5d6df5432e448be0632aa49047c813f7ce0d6786799dc5756441c9e12c",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-page-5.webp",
-          "bytes": 467874,
-          "sha256": "a6fc77d088a203f776e32fe5e4291e529bef5f47b13be07be9d18f68259707c9",
+          "bytes": 683174,
+          "sha256": "1292f31dc7e982034bc2ce404efc44b5023302a4fb264c355284b7fa7cfb9514",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-surface-page-6.webp",
-          "bytes": 76224,
-          "sha256": "8b1209d7014db4dc9b9d85ce6e6d33400e287df3b85b3d805173ae10d7a6a973",
+          "bytes": 118358,
+          "sha256": "e3b1a53692df7f82284659308924e44f12b33a2f264360b35b84acfe85df8bff",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -2561,7 +2963,7 @@
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/1",
       "parents": [],
-      "process": "Prepare the global reference map and its declared cloud composite.",
+      "process": "Sample the original photographic grids at each retained atlas footprint, apply the declared display transfer and cloud composite, and encode the existing texture layout.",
       "limitations": [
         "Archival NASA Blue Marble cloud composite over July 2004 surface imagery; not live weather"
       ],
@@ -2584,50 +2986,50 @@
         },
         {
           "url": "/scenes/earth/earth-clouds.webp",
-          "bytes": 330800,
-          "sha256": "d2f46871624bcbac960020c00064bfca5ed8679da0bba0d757494a3d1d58d627",
+          "bytes": 418704,
+          "sha256": "680a003e9b9fd7cacdaf48b6ff89b6f5da71b38e9dac1872b89821939fec476b",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-clouds-poles.webp",
-          "bytes": 80010,
-          "sha256": "eb39b0a9879f5a3b902f14c1f70251ef35e6b626b7bc080ec923c767b039b384",
+          "bytes": 84560,
+          "sha256": "96b1a5681a71a4dda1212d51ca23a4fd551895b6d0e85bde5538f2ee8db87afb",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-1.webp",
-          "bytes": 731792,
-          "sha256": "98d7a725dcb7c45645e6596068237d0057c087d78adf7b2dfb7f0de2f2866332",
+          "bytes": 807746,
+          "sha256": "e5b9cbe23944581b4486522e557b5b80895e61acb65f473304af78b8f6e27012",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-2.webp",
-          "bytes": 1637988,
-          "sha256": "a42ca276e92d26bf393c61aef7f85362024e02024d9e62db891c9a10158fbd35",
+          "bytes": 1722816,
+          "sha256": "0c234fc40ed2c2e74081d64cc6bd5b4d36070822c33caabf30d747e421035055",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-3.webp",
-          "bytes": 1668812,
-          "sha256": "b37154c1090db660e6189f7ec713368a9a2b23ad4033e6c4f0cc4013a5d5a0a7",
+          "bytes": 1823764,
+          "sha256": "8daaa65052c0bd4873be7ea56cc4f8387d58939195e23a9684b58903cb8756ca",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-4.webp",
-          "bytes": 1205924,
-          "sha256": "d4beca65e44652182b2015c3676b49a8abaca78d565647e5bcc3ad9e3aad1ce1",
+          "bytes": 1426102,
+          "sha256": "8326e8957d07b405e56f5621aa5858d1ba7b453ff6a9d96aa61a4df3a6e783e7",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-5.webp",
-          "bytes": 604754,
-          "sha256": "bdd8b5aaa7b5114d56b32d87627cdd03edaf12326d13ca096ac2036c9773b7c3",
+          "bytes": 749248,
+          "sha256": "9ea4bf9033e43529d0b05690d6277b0d7c291fc9b199d603c82b591f59220fee",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-6.webp",
-          "bytes": 87328,
-          "sha256": "9a3a6097609e25233462cd05e8731198f71fd3423628e7d0eddd1050f6cd09c9",
+          "bytes": 109840,
+          "sha256": "04511284eee1152a94d8f9f819a3bef8df983b083c71abde746e9f98c0773e46",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -3890,8 +4292,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8197,
-          "sha256": "e32319b1870f5039e301be2cd3ce71e9d6e432c999d4167388f6a687fcec2303",
+          "bytes": 8318,
+          "sha256": "979c17be432f365d07c6b3038539c0d39d174aeb8223ddd79220d8fff10b2004",
           "verification": "bytes-verified"
         }
       ],
@@ -3979,6 +4381,37 @@
         }
       ],
       "inputBasis": "authored-recipe"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "excludedTypeCodes": {}
+      },
+      "inputs": [
+        "earth-surface-features-source",
+        "earth-surface-map-frame"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/earth/earth-features.json",
+          "bytes": 8826522,
+          "sha256": "afc0c61c1299941c1d9e4f57af760a45704eddcdafe01e2d6a92897476130210",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
     },
     {
       "id": "preview:normal",

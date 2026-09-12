@@ -22,3 +22,5 @@ Leon-Dasi et al. (2021), https://doi.org/10.1051/0004-6361/202140497.
 Attribution follows Product User Guide §2.1. No additional Creative Commons
 license is asserted for these ESA archive products. cssEarth projects and
 rasterizes their coordinates; line and point sizes are cartographic symbols.
+
+Landing, touchdown and impact sites (2): compiled from NASA NSSDCA, PDS and LROC pages, agency releases and cited papers; each site's source, rights and quoted sentence are in `source/features/sites.json`. NASA content is not subject to copyright; other publishers are cited for facts only.

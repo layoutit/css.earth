@@ -43,8 +43,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/i/a/1/PIA17214_unlabeled.png"
           }
@@ -102,8 +102,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18437.jpg"
           }
@@ -159,8 +159,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_radius_g.tif"
           }
@@ -203,8 +203,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "cassini",
+            "kind": "machine",
+            "machineId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_128_o.obj"
           }
@@ -274,6 +274,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-mimas-nomenclature-center-pts",
+      "path": "features/MIMAS_nomenclature_center_pts.zip",
+      "expectedBytes": 147178,
+      "expectedSha256": "5fc3398feafe7379934e6a6b3b145450f96088981cf4a150bb1cadf072036836",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MIMAS_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Mimas on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Mimas centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MIMAS/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "mimas-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1000,
+      "expectedSha256": "65137b88ab2c9016e6ad318e0b95d1f2639b1bb17d0c3586a8694902b62f6631",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "mimas-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1152,
+      "expectedSha256": "bd22fd10cced0cdc89ba4b281b0f8df82a7186fa8fed71660a7a515c1d11e9f7",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "mimas-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "9597bd1485f74cf558df8674b3f221bc9939775a5be3b8ce042e69ce34814b2c",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ],
   "documents": [
@@ -299,8 +377,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3874,
-      "expectedSha256": "05e0f10925f40c390c6c7115a2482adad9c5e3e099e445dd053c2686377ba400"
+      "expectedBytes": 4086,
+      "expectedSha256": "36ff61912771d30b358dff5c52db241335a2277fa5bbb0ffc2f126e8f622e808"
     },
     {
       "path": "preparation/navigation.json",
@@ -309,8 +387,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1577,
-      "expectedSha256": "a6e562df87b0871c967523ecba84e657f0975b6d7d79028dbd1b86bd2fa608f0"
+      "expectedBytes": 1829,
+      "expectedSha256": "49a017fa1ef98881e265405c672a7a1cd8eccfe71f6cb8784e71bbf20e1a25e8"
     },
     {
       "path": "content/object.json",
@@ -353,6 +431,29 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1083,
       "expectedSha256": "87ee97453d388b3fe81c9c9a46abdab8f5c167d6d38cf022b53fe0d8c3ac7c13"
+    },
+    {
+      "id": "mimas-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 1391,
+      "expectedSha256": "28297a1c7b8eff50e9860d2894ba2c820b8facbaa623dbd7e031e688ead480c5",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts mimas: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ],
   "generatedIntermediates": [

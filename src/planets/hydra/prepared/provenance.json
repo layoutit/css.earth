@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ab54c6383244209f3c42a84f2463fe3f5958a90766792c763c20fb4f04e24948"
+    "sha256": "f6bc8a47ce6640444925e03dd5e01342481baea70e4f2d9b869219127be90cbb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -306,8 +306,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "evidence": "https://ndownloader.figshare.com/files/24176603",
             "missionId": "new-horizons"
           }

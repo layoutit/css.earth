@@ -10,11 +10,24 @@
 
 ## Evidence
 
+The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
+
+| View | Original grid | Both lighting images, before → current |
+| --- | --- | --- |
+| normal | 5760 × 2880 | 7.11 → 9.76 MB |
+| enhanced | 6356 × 3178 | 8.09 → 11.92 MB |
+
+Each atlas remains 4096 × 11520 pixels, with 720 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mimas/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
+
 - Herschel is at roughly 1.38° S, 111.76° W (248.24° E), independently documented in the [IAU gazetteer](https://planetarynames.wr.usgs.gov/Feature/2478).
 
 - On 1,800 independent viewing directions, the candidate differs from the Q128 surface by about 0.9 km at the median and 2.5 km at the 95th percentile; these are approximation errors, not measurement uncertainties.
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Mimas (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
+
+Feature notes: 2 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 - Published seams, residual shading, coarse inserts and limited-color regions remain; no detail is synthesized.
 
@@ -43,7 +56,7 @@ Both use north at the top. Different control networks can leave positional diffe
 
 Preserve all supplied pixels, including black crater shadows; do not infer missing coverage from darkness. No inpainting, polar repetition, color synthesis, or patch blending is performed here.
 
-The observation maps retain an 8192 × 4096 preparation raster: monochrome is sourced at 5760 × 2880 and color at 6356 × 3178. Preparation maps them onto 720 native PolyCSS raster triangles, with 256-pixel atlas cells (4096 × 11520). The texture allocation is independent of geometry reduction. Terminal atlases retain WebP quality 90 and lossless alpha.
+The retained 8192 × 4096 layout serves the latitude bands: monochrome is sourced at 5760 × 2880 and color at 6356 × 3178. The normal and enhanced photographic atlases sample those pinned original grids directly with a 2 × 2 footprint onto 720 native PolyCSS raster triangles, with 256-pixel atlas cells (4096 × 11520). The texture allocation is independent of geometry reduction. Those photographic atlases use WebP quality 95; latitude bands retain their existing encoding and alpha handling.
 
 ## Elevation
 

@@ -131,7 +131,8 @@
       "acquisition": "Original archive bytes; reviewed DEM release or explicitly identified rescued mission product.",
       "redistribution": "Preserve attribution, original labels, and the rescued-image qualification.",
       "consumers": [
-        "micas"
+        "micas",
+        "features"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -160,7 +161,8 @@
       "acquisition": "Original archive bytes; reviewed DEM release or explicitly identified rescued mission product.",
       "redistribution": "Preserve attribution, original labels, and the rescued-image qualification.",
       "consumers": [
-        "micas"
+        "micas",
+        "features"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -189,7 +191,8 @@
       "acquisition": "Original archive bytes; reviewed DEM release or explicitly identified rescued mission product.",
       "redistribution": "Preserve attribution, original labels, and the rescued-image qualification.",
       "consumers": [
-        "micas"
+        "micas",
+        "features"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -218,7 +221,8 @@
       "acquisition": "Original archive bytes; reviewed DEM release or explicitly identified rescued mission product.",
       "redistribution": "Preserve attribution, original labels, and the rescued-image qualification.",
       "consumers": [
-        "micas"
+        "micas",
+        "features"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -293,6 +297,132 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored neutral display material for the DLR shape model."
+      }
+    },
+    {
+      "id": "comet-19p-features-landmarks",
+      "path": "features/landmarks.json",
+      "expectedBytes": 3506,
+      "expectedSha256": "8167356f2187d1e4b7d63d27d61871762965bdc6d01325ac0f2e67e9e387b1af",
+      "origin": "Authored terrain-place records and source-frame display attachment.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored terrain-place records and source-frame display attachment."
+      }
+    },
+    {
+      "id": "comet-19p-features-manifest",
+      "path": "features/manifest.json",
+      "expectedBytes": 1847,
+      "expectedSha256": "cdd55d374342c9982a06e95bf1c090a32f9e1a85eadbb3fcc6cee80fb25cf317",
+      "origin": "Authored terrain-place records and source-frame display attachment.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored terrain-place records and source-frame display attachment."
+      }
+    },
+    {
+      "id": "comet-19p-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1062,
+      "expectedSha256": "7ac6fe2ffaad5b11157eed3232f451c7f9b19bc0110851d507bd3c2234e20de1",
+      "origin": "Authored terrain-place records and source-frame display attachment.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored terrain-place records and source-frame display attachment."
+      }
+    },
+    {
+      "id": "comet-19p-presentation-surface-map",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 156,
+      "expectedSha256": "7c3d92c8f600faa16a501fab68162fb473f92ed528199e427825ef1d0bbf4059",
+      "origin": "Authored terrain-place records and source-frame display attachment.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored terrain-place records and source-frame display attachment."
+      }
+    },
+    {
+      "id": "comet-19p-features-image-registration-json",
+      "path": "features/image-registration.json",
+      "expectedBytes": 56879,
+      "expectedSha256": "5308b6cbff25b419b9dc89cf8d22e0d3b620da513377863bc35b21b48c8f3c1c",
+      "origin": "Project registration recipe, exact XYZ cube identities, source-image anchor pixels and captions.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project registration recipe, exact XYZ cube identities, source-image anchor pixels and captions."
+      }
+    },
+    {
+      "id": "comet-19p-features-control-measurements-json",
+      "path": "features/control-measurements.json",
+      "expectedBytes": 56004,
+      "expectedSha256": "9adf195d756bd5b95bb39be59f1cf5956e8795d554d8775b57dec68c46cd9635",
+      "origin": "Project measurements of the published terrain-map and photograph correspondences, with preassigned fit and holdout partitions.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project measurements of the published terrain-map and photograph correspondences, with preassigned fit and holdout partitions."
+      }
+    },
+    {
+      "id": "comet-19p-features-evidence-image-landmarks-json",
+      "path": "features/evidence/image-landmarks.json",
+      "expectedBytes": 80209,
+      "expectedSha256": "872724f5243c30c4e64fc1df8e4e55f899440e60d8282ec6ea35f4b991e95ba3",
+      "origin": "Generated fit residuals and native XYZ samples supporting the displayed landmark coordinates.",
+      "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
+      "license": "MIT (project measurements and factual compilation)",
+      "acquisition": "Checked in; landmarks and evidence regenerate with project-orthophoto-landmarks.mts.",
+      "redistribution": "Factual numerical measurements and citations; no paper text or figures redistributed.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated fit residuals and native XYZ samples supporting the displayed landmark coordinates."
       }
     }
   ],

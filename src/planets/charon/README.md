@@ -10,12 +10,33 @@ Charon combines New Horizons monochrome and enhanced-color mosaics, a terrain mo
 | Enhanced color | [PDS nh_charon_color_mosaic::1.0](https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx) |
 | Bond albedo | [PDS nh_charon_bond::1.0](https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx) |
 | Physical placement | JPL Horizons PLU060 and NAIF pck00011 |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/CHARON/target) Charon centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
+
+Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
+
+| View | Both prepared levels, before → current |
+| --- | --- |
+| normal | 145.6 → 159.1 kB |
+
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/charon/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+
+Lane change (this PR): the terrestrial solid-observation lane was retired for Charon; the same pinned inputs and the same decoders (`terrestrial-observation`, `terrestrial-scientific` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 6400 × 3200 (DPR 1) and 12800 × 6400 (DPR 2) — retired 12800 × 6400 atlas; native 300 m mosaic 12,693 px wide. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
+
+Run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js charon --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/charon/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
+
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced-color, elevation, albedo) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 15738).
+
+Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
 
 [Independent color-source inspection](source/validation/color-source-inspection.json) records numeric and missing-value anchors. It found about 60% area-weighted RGB coverage before interpolation. No dated test or browser run is cited.
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Charon (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Dorothy, Nasreddin and the Mandjet/Argo chasmata rims on the New Horizons mosaic coincide with the imagery.
+
+Feature notes: 7 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 - Monochrome values are relative brightness. Enhanced color is false color, with mixed resolution and no per-pixel uncertainty array.
 - Terrain post spacing of 300 m is not a 300 m accuracy claim. Missing areas remain gridded.
@@ -61,9 +82,11 @@ height gradients, spherical pixel spacing and unit vertical scale; ambient is
 mapping artifacts; 300 m post spacing is not a claim of 300 m terrain accuracy.
 Gaps remain the shared neutral grid, with no invented neighboring heights.
 
-The shared solid-body recipe prepares a 12,800 × 6,400 map and 1,024 px polar
-tiles. Terminal WebP encoding is q90; lossless intermediate maps are preparation
-inputs, not globe downloads. One generic object adapter owns runtime behavior.
+The shared solid-body recipe retains its 12,800 × 6,400 latitude-band layout and
+1,024 px polar tiles. The normal photographic polar sprites sample the pinned
+source grid directly at their final coordinates with a 2 × 2 footprint and lossless WebP
+encoding; the latitude bands retain their existing preparation. Lossless maps
+are preparation inputs, not globe downloads. One generic object adapter owns runtime behavior.
 The resolved context billboard has a dedicated 512 px image from the same
 observed navigation crop, rather than enlarging the 32 px UI icon. Prepared
 35% ambient / 65% diffuse full-phase shading rounds its circular silhouette;
@@ -155,5 +178,12 @@ target, LIDVID and data object identify Charon. The source label is retained.
 
 Exact bytes, coordinates and validity rules are in the intake plans and receipts.
 See the [mapped-science conversion method](../../../tools/objects/acquisition/MAPPED-SCIENCE.md).
+
+</details>
+
+<details>
+<summary>Shape, rotation and camera on the shared raster lane</summary>
+
+The recipe declares a sphere of 606 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 6.3872-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 47.87° initial pitch, -171.78° yaw, taken from the retired lane's camera). The heliocentric view keeps the orbit around Pluto and the parent marker now comes from the shared navigation atlas.
 
 </details>

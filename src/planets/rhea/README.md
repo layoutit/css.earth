@@ -11,8 +11,18 @@
 | Shape and elevation | [Weirich et al. (2025), v1.0](https://doi.org/10.26033/tqxb-q714) | Shape reduced to 2,000 faces. Color shows modeled height above a 763.5 km reference sphere. |
 | Relative albedo | [Weirich et al. (2025), v1.0](https://doi.org/10.26033/tqxb-q714) | Relative brightness, with no units. Terrain and shadows affect its values; it is not calibrated reflectance. |
 | Infrared and ice absorption | [Scipioni/Combe VIMS collection](https://doi.org/10.17189/ctqe-ta30) | Infrared is false color. Absorption is a spectral indicator, not ice percentage, grain size or temperature. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/RHEA/target) Rhea centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
+
+The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
+
+| View | Original grid | Both lighting images, before → current |
+| --- | --- | --- |
+| normal | 11520 × 5760 | 6.66 → 9.69 MB |
+| enhanced | 12015 × 6008 | 15.34 → 20.46 MB |
+
+Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/rhea/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
 
 Existing reports; no body tests were rerun for this documentation edit.
 
@@ -29,6 +39,10 @@ Existing reports; no body tests were rerun for this documentation edit.
   [Run results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b7-cassini-atlas/evidence/integration/qualification.json).
 
 ## Known problems
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Rhea (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
+
+Feature notes: 4 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 - Shape simplification removes detail. Image seams, shadows and numeric-map gaps remain.
 - Absolute VIMS registration at fractions of a source pixel is unresolved.
@@ -154,10 +168,10 @@ to 764 km. Keep that physical value separate from the 764.1 km monochrome projec
 
 The very tenuous exosphere does not justify a visible halo; proposed rings are not rendered.
 
-Map preparation uses the shared 8192 × 4096 intermediate layout and 1024-pixel pole products.
-The final source-mesh scene samples these maps into prepared per-triangle atlases. Prepared
-surface/pole atlases use WebP quality 90 with lossless alpha; intermediate maps remain
-lossless.
+Map preparation retains the shared 8192 × 4096 latitude-band layout and 1024-pixel pole products.
+The normal and enhanced photographic atlases sample their pinned original grids directly with a
+2 × 2 footprint into the fixed per-triangle layout and use WebP quality 95. Latitude bands,
+scientific products and their lossless inputs retain their existing preparation and encoding.
 
 Native observations are downsampled, and larger textures would not increase the terrain model's
 detail.

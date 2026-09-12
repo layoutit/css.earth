@@ -11,13 +11,15 @@ import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
+import { selectObject } from './navigate-object.mts';
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://127.0.0.1:4210';
 const lateDetail = process.env.CSSEARTH_TEST_LATE_DETAIL === '1';
 const directory = `.local/navigation-quality${lateDetail ? '-late-detail' : ''}`;
 await mkdir(directory, { recursive: true });
 const definitions = Object.fromEntries(await Promise.all(['mercury', 'venus'].map(async id =>
-  [id, parsePreparedObjectRuntime(requireRecord(JSON.parse(await readFile(`src/planets/${id}/prepared/object.json`, 'utf8'))).data)] as const)));
+  [id, parsePreparedObjectRuntime(await loadObjectTestDefinition(id))] as const)));
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const reports = [];
 let interruption;
@@ -124,7 +126,7 @@ try {
         proof.raf = requestAnimationFrame(sample);
       }, { from, to });
       if (delayedImages && to === 'mercury') throttleUntil = Date.now() + 3500;
-      await page.locator(`a.scale-stop[href="/${to}/"]`).click();
+      await selectObject(page, to);
       await page.waitForFunction(to => location.pathname === `/${to}/` && window.__cssEarth?.activeObjectId === to && window.__cssEarth?.ready === true, to, { timeout: 60000 }).catch(async error => {
         await page.screenshot({ path: `${directory}/failed-${from}-to-${to}.png` });
         await writeFile(`${directory}/failed-${from}-to-${to}.json`, JSON.stringify(await page.evaluate(() => ({
@@ -184,7 +186,7 @@ try {
       console.log(JSON.stringify({ ...report, frames: undefined, decodes: undefined, imageRequests: undefined }));
     }
     if (!delayedImages && !lateDetail) {
-      await page.locator('a.scale-stop[href="/mercury/"]').click();
+      await selectObject(page, 'mercury');
       await page.mouse.move(720, 500);
       await page.evaluate(() => document.addEventListener('pointerdown', event => {
         window.__qualityPointerDown = { input: Boolean((event.target instanceof Element ? event.target : null)?.closest('.planet-input-surface')),

@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/oberon/",
+  "sourceWidth": 5760,
+  "sourceHeight": 2880,
+  "width": 2048,
+  "height": 1024,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "oberon-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssoberon-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
+    {
+      "id": "normal",
+      "output": "oberon-{id}{suffix}.webp",
+      "thumbnail": "oberon-lens-{id}.webp",
+      "source": "observations/oumap-cyl-180180.cub.gz",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "schenk-2020-oberon-normal",
+        "id": "normal",
+        "validity": {
+          "kind": "isis3-float-monochrome",
+          "grid": {
+            "width": 957,
+            "height": 479,
+            "targetName": "Oberon",
+            "centerLongitude": 180,
+            "referenceRadiusMeters": 761400,
+            "polarRadiusMeters": 761400,
+            "origin": [
+              -4785000,
+              1200000
+            ],
+            "resolutionMeters": 5000,
+            "specialValueMagnitude": 1e+30,
+            "longitudeRange": [
+              -180,
+              180
+            ]
+          },
+          "displayRange": [
+            0,
+            2100
+          ]
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "oberon-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "oberon-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "cssoberon-prepared-lighting-bank@1",
+    "billboardSchema": "cssoberon-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "cssoberon-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

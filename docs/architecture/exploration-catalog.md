@@ -1,20 +1,29 @@
-# Missions, spacecraft and dataset attribution
+# Missions, machines and dataset attribution
 
 `OBJECTS` owns navigable scenes. `MISSIONS` owns individual missions.
-`SPACECRAFT` owns physical science vehicles. A spacecraft can serve more than one
-mission, and a mission can operate several spacecraft. The mission's participant
-list owns that relationship; reverse participation is derived.
+`MACHINES` owns the physical instruments credited with observing. A machine can
+serve more than one mission, and a mission can operate several machines. The
+mission's participant list owns that relationship; reverse participation is
+derived.
+
+A machine is whatever a dataset credits as its observer, in orbit or on the
+ground. A cited `setting` of `space` or `ground` separates the two halves, and
+validation keeps them apart: a ground machine is `commissioned`, `retired` and
+sited at geodetic coordinates but never launched, while a space machine is
+launched but never sited. Arecibo's radar shape of an asteroid is the same
+contribution edge as an orbiter's imagery, so it is the same kind of record.
 
 The catalogues live in
-[`site/source/spacecraft/catalog.json`](../../site/source/spacecraft/catalog.json)
-under `cssearth-spacecraft-catalog@3`. They do not add scene loaders, routes or
-camera owners. Mission and spacecraft IDs are scoped to their domains: spacecraft
-Juno does not refer to the independently registered asteroid Juno.
+[`site/source/machines/catalog.json`](../../site/source/machines/catalog.json)
+under `cssearth-machine-catalog@4`. They do not add scene loaders, routes or
+camera owners. Mission and machine IDs are scoped to their domains: the
+spacecraft Juno does not refer to the independently registered asteroid Juno,
+whose own shape is credited to a ground telescope.
 
 ## Authoring and validation
 
 [`exploration-catalog.mts`](../../src/platform/exploration-catalog.mts) validates
-unknown input and returns immutable records. Names, descriptions, vehicle kinds,
+unknown input and returns immutable records. Names, descriptions, machine kinds, settings,
 agencies, dates and status claims carry citations to the
 [Sources catalogue](../sources-catalogue.md), with a checked date and a field or
 section locator. Participation requires its own citations. Agency records use the existing
@@ -26,15 +35,39 @@ that establish an end before a start. An active status must include its `asOf`
 date and cannot contradict a known earlier end. The card displays the claim's
 date instead of describing it as live status.
 
-Separately operated science vehicles get separate records. Instruments,
-containers and return capsules are not automatically spacecraft records. Routine
+A machine carries a `band` only where its own cited source states one. Most
+spacecraft carry several instruments across the spectrum, so no single band is
+true of them and none is invented. A body's contributor cards collapse into one
+tabbed card only when every contributor has a distinct band; otherwise they stay
+separate cards, which is the ordinary case for spacecraft.
+
+Separately operated machines get separate records. Instruments,
+containers and return capsules are not automatically machine records. Routine
 extensions, encounters and manoeuvres do not automatically create new missions;
 use the source's distinction. Coverage is limited to the records in the catalogue.
 
 Artwork references use `imageId` and `emblemId`. The approved
-[render library](../../site/source/spacecraft/render-library.json) and
-[emblem library](../../site/source/spacecraft/emblem-library.json) own the asset
-bytes and credits. An emblem represents a mission. Group artwork remains mission
+[render library](../../site/source/machines/render-library.json) and
+[emblem library](../../site/source/machines/emblem-library.json) own the asset
+bytes and credits. A machine with no 3D model carries a published photograph
+instead, pinned in
+[`photograph-records.json`](../../site/source/machines/photograph-records.json)
+and prepared by
+[`prepare-machine-photographs.mts`](../../tools/prepare-machine-photographs.mts)
+into the same library, where `source.kind` tells a photograph from a render.
+
+Artwork preparation is an explicit maintenance operation; normal builds reuse the
+committed files. `pnpm prepare:machine-photographs` re-acquires each pinned
+photograph and prepares it to the library's frame.
+`pnpm prepare:machine-renders` clears the flat sidebar background out of the
+approved renders to alpha, flood-filling only from the frame edges and refusing
+any change to artwork RGB, then records where each machine sits so a card can
+crop to it rather than to the empty frame around it.
+
+Approved artwork is public domain or CC BY, with one recorded exception: the
+Herschel photograph is CC BY-SA 3.0, because its only public-domain alternative
+is too small for the frame and ESA's own images are share-alike. Each entry
+carries its `license`, so the obligation stays attached to the file it covers. An emblem represents a mission. Group artwork remains mission
 artwork; the individual GRAIL vehicles have text details rather than duplicate
 portraits of the pair. The old Viking artwork remains in its approved library,
 without being relabelled as a specific orbiter or lander.
@@ -48,8 +81,8 @@ Source manifests use one of three explicit capture forms:
   "capture": {
     "attributions": [
       {
-        "kind": "spacecraft",
-        "spacecraftId": "osiris-rex",
+        "kind": "machine",
+        "machineId": "osiris-rex",
         "missionId": "osiris-rex",
         "evidence": "The specific pinned source label or archive reference."
       }
@@ -80,12 +113,12 @@ existing exclusions for schematic interiors, illustrative models, modeled noise
 and schematic morphology. Empty attribution stays empty; names, publishers,
 mission targets and aliases are not association rules.
 
-[`prepare-spacecraft.mts`](../../tools/prepare-spacecraft.mts) compiles the Sources
+[`prepare-machines.mts`](../../tools/prepare-machines.mts) compiles the Sources
 and Missions catalogues with their validated records, graphs and dependency hashes.
 The hashes cover source records, every body manifest/provenance/page/descriptor,
 registry and compiler owners, and approved artwork bytes. The common
 [site entry point](../../site/exploration-catalog.mts) verifies these pins and
-exposes `MISSIONS` and `SPACECRAFT`. A stale catalogue fails the build. Astro
+exposes `MISSIONS` and `MACHINES`. A stale catalogue fails the build. Astro
 renders the current body's cards and relevant vehicle details; the browser does
 not receive the complete graph or walk source provenance.
 

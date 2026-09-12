@@ -9,7 +9,7 @@ export interface PreparedPlanetarySystem {schema:string;observer:string;sun:{pos
 export interface HeliocentricViewPlan {schema:string;bodyId:string;units:{kilometersPerUnit:number;bodyRadiusUnits:number};sun:{direction:Vector3;position:Vector3;distanceUnits:number;radiusUnits:number;sprite:{worldDiameterUnits:number;imagePixels:number}};orbit:PreparedOrbit;system?:PreparedPlanetarySystem;runtimeGeometryDerivation:boolean;}
 export interface HeliocentricProjectionInput {rotation:Matrix3;distance:number;bodyCenter?:Vector3;focal:number;viewportWidth:number;viewportHeight:number;principalOffset?:Vector2;visibleRect?:VisibleRect|null;frustumPadding?:number;nearShare?:number;system?:boolean;systemOrbits?:boolean;trailWeights?:Readonly<Record<string,readonly number[]>>|null;}
 export interface SilhouetteEllipse {radialSemiAxis:number;tangentialSemiAxis:number;radial:Vector2;centre:Vector2;}
-export interface BodyProjection {distance:number;depth:number;offAxisDegrees:number;silhouetteRadius:number;silhouetteDiameter:number;silhouette:SilhouetteEllipse|null;orthographicRadius:number;translate:Vector3;}
+export interface BodyProjection {distance:number;depth:number;visible:boolean;screen:Vector2|null;offAxisDegrees:number;silhouetteRadius:number;silhouetteDiameter:number;silhouette:SilhouetteEllipse|null;orthographicRadius:number;translate:Vector3;}
 export interface SunProjection {visible:boolean;classification:'behind-camera'|'outside-viewport'|'behind-body'|'fully-visible'|'partially-visible';depth:number;centerNdc:Vector2|null;eye?:Vector3;screen?:Vector2;spriteDiameter?:number;discDiameter?:number;spriteScale?:number;}
 export interface PointProjection {visible:boolean;classification:'behind-camera'|'outside-viewport'|'behind-body'|'visible'|'intersects-camera-plane';depth:number;screen:Vector2|null;}
 export interface SystemBodyProjection {id:string;marker:PointProjection & {diameterPx:number;alpha:number;magnitude:number;labelPriority:number;physicalDiameterPx:number;photometricRadiusPx:number};orbitSegments:readonly OrbitSegment[];}
@@ -239,6 +239,10 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
   const body = Object.freeze({
     distance,
     depth: distance * axis.cosTheta,
+    // This centred projection always resolves the body, and its centre is the
+    // point that projects to the root's centre.
+    visible: silhouette !== null,
+    screen: Object.freeze([0, 0]),
     offAxisDegrees: Math.asin(axis.sinTheta) * 180 / Math.PI,
     silhouetteRadius: silhouette.tangentialSemiAxis,
     silhouetteDiameter: 2 * silhouette.tangentialSemiAxis,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "84830dae395ae124d5082afd001d0a502a01b6bee5d2c11d330c8a04130b3e9b"
+    "sha256": "a8539d32ba043f7205f393a2086a28a30c67214c9a3daa17716387833026d1e5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -246,6 +246,16 @@
       "release": "urn:nasa:pds:gbo.ast-153591.radar.shape-model::1.0",
       "product": "urn:nasa:pds:gbo.ast-153591.radar.shape-model:data:a153591gamma_tab::1.0",
       "credit": "Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "evidence": "The preserved credit for this input reads: Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams",
+            "missionId": "arecibo-planetary-radar"
+          }
+        ]
+      },
       "license": "NASA PDS archived scientific data; retain citation and attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified PDS file through source/preparation/acquisition.json.",
       "redistribution": "Attributed NASA PDS scientific data; retain archive citation and model limits.",

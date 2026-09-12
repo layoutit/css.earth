@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "14836",
+      "item": "Q21849731",
+      "title": "Hiberus Fossa",
+      "url": "https://en.wikipedia.org/wiki/Hiberus_Fossa",
+      "revision": "1365476760",
+      "extract": "The Hiberus Fossa is a fossa on 21 Lutetia, a main-belt asteroid, that was discovered via the Rosetta spacecraft in c. July 2010. The fossa was named after the Latin name of the Ebro River in Spain, at the time of Lutetia."
+    },
+    {
+      "id": "14870",
+      "item": "Q3696669",
+      "title": "Lauriacum (crater)",
+      "url": "https://en.wikipedia.org/wiki/Lauriacum_(crater)",
+      "revision": "1357080718",
+      "extract": "Lauriacum is a crater on the asteroid 21 Lutetia, a main-belt asteroid that was discovered via the Rosetta spacecraft in c. July 2010. The crater was named after Lauriacum, an important town at the time of Lutetia."
+    }
+  ]
+}

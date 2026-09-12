@@ -11,6 +11,8 @@ import type { ObjectEntry } from '../site/object-schema.mts';
 import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "../src/platform/prepared-presentation-contract.mts";
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mts";
 import { requireAuthoredWorldFrame } from './authored-world-frame.mts';
+import { inlineSharedFromBanks } from '../src/platform/prepared-shared-banks.mts';
+import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
 import { requireObjectControls } from '../site/scene-contract.mts';
 import { hasErrorCode, isRecord, requireRecord, requireArray } from './source-values.mts';
 import { nodeName, sourceStart, sourceEnd, staticObjectProperties } from './runtime-ast.mts';
@@ -133,7 +135,7 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
   const recipe = requireRecord(requireRecord(descriptor.properties).recipe, 'Authored recipe');
   const reference = requireRecord(descriptor.prepared, 'Prepared reference');
   if (!recipe || typeof recipe !== 'object' || recipe.schema !== 'cssearth-authored-object@1' || !isArray(recipe.sources) ||
-      !reference || reference.format !== 'cssearth-css-object@4' || (typeof reference.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(reference.sha256)) || typeof reference.url !== 'string') {
+      !reference || reference.format !== PREPARED_CSS_OBJECT_FORMAT || (typeof reference.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(reference.sha256)) || typeof reference.url !== 'string') {
     throw new TypeError('Authored descriptor identity or source references are invalid.');
   }
   const directory = resolve(root, `src/planets/${objectId}`);
@@ -155,7 +157,8 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
   const runtimePath = resolve(preparedDirectory, 'runtime.json');
   const runtime = requireObjectRuntimeDefinition(JSON.parse(await readText(runtimePath)), { objectId });
   const scene: unknown = JSON.parse(await readText(resolve(preparedDirectory, 'scene.json')));
-  if (payload.id !== objectId || !isDeepStrictEqual(payload.data, runtime)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
+  const transported = await inlineSharedFromBanks(root, payload.data, { read: readText });
+  if (payload.id !== objectId || !isDeepStrictEqual(transported, runtime)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
   await requireAuthoredWorldFrame({ descriptor, scene, runtime, directory, readText });
   requireObjectRuntimeDefinition(runtime, { objectId });
   return { runtime, payloadPath, runtimePath };
@@ -197,7 +200,8 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
           viewBindings: definition.viewBindings, animations: definition.animations.map(({ id, mode, target }) => ({ id, mode, target })),
           pageLayers: (definition.pageLayers ?? []).map(({ lensIds, plan: layer }) => ({ lensIds, schema: layer.schema,
             roots: 'roots' in layer && isArray(layer.roots) ? layer.roots.length : 0, poolSize: 'poolSize' in layer ? layer.poolSize : null })),
-          destinations: definition.destinations ? { defaultLens: definition.destinations.defaultLens, catalog: definition.destinations.catalog } : null });
+          destinations: definition.destinations ? { defaultLens: definition.destinations.defaultLens, catalog: definition.destinations.catalog } : null,
+          features: definition.features ? { target: definition.features.target, lensIds: definition.features.lensIds, catalog: definition.features.catalog } : null });
         continue;
       }
       const definitionSource = await readText(`${prefix}/runtime/definition.mjs`);

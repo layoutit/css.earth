@@ -1,12 +1,27 @@
-import { browserProfileLensIds, createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
-import objectControls from "../../../../src/planets/ceres/prepared/controls.json" with { type: "json" };
+import { createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
+import { readPreparedFixture } from "../../fixtures.mts";
+const objectControls = await readPreparedFixture("ceres", "controls");
 
-export const browserProfile = createObjectBrowserProfile({ id: "ceres", controls: objectControls,
-  audit: {
-    preparedAssetPairs: [{ one: "/scenes/ceres/ceres-directional-sun.webp", two: "/scenes/ceres/ceres-directional-sun@2x.webp" }],
-    canonicalPreparedAssets: ["/scenes/ceres/ceres-normal-surface@2x.webp", "/scenes/ceres/ceres-normal-poles@2x.webp", "/scenes/ceres/ceres-lighting.webp"],
-    lensRace: { defaultId: "normal", slowId: "elevation", winnerId: "enhanced",
-      slowAsset: "/scenes/ceres/ceres-elevation-surface@2x.webp", preReadyDisabled: true },
-    retained: { lensIds: browserProfileLensIds(objectControls), speedClicks: 5, allowedMountSelectors: [] },
-  },
+export const browserProfile = createObjectBrowserProfile({
+  id: "ceres", controls: objectControls,
+  audit: Object.freeze({
+    preparedAssetPairs: Object.freeze([
+      Object.freeze({ one: "/scenes/ceres/ceres-normal.webp", two: "/scenes/ceres/ceres-normal@2x.webp" }),
+      Object.freeze({ one: "/scenes/ceres/ceres-poles-normal.webp", two: "/scenes/ceres/ceres-poles-normal@2x.webp" }),
+      Object.freeze({ one: "/scenes/ceres/ceres-starfield-front.webp", two: "/scenes/ceres/ceres-starfield-front@2x.webp" }),
+      Object.freeze({ one: "/scenes/ceres/ceres-directional-sun.webp", two: "/scenes/ceres/ceres-directional-sun@2x.webp" }),
+    ]),
+    lensRace: Object.freeze({
+      defaultId: "normal",
+      slowId: "enhanced",
+      winnerId: "elevation",
+      slowAsset: "/scenes/ceres/ceres-enhanced@2x.webp",
+      preReadyDisabled: true,
+    }),
+    retained: Object.freeze({
+      lensIds: Object.freeze(["normal","enhanced","elevation"]),
+      speedClicks: 5,
+      allowedMountSelectors: Object.freeze([]),
+    }),
+  }),
 });

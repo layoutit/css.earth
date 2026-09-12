@@ -7,7 +7,7 @@
         "refresh"
       ],
       "path": "observations/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
-      "url": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif"
+      "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif"
     },
     {
       "kind": "download",
@@ -274,6 +274,14 @@
       "groups": [
         "cassini-atlas"
       ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/RHEA_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RHEA_nomenclature_center_pts.zip"
     }
   ]
 }

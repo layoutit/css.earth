@@ -96,6 +96,14 @@
       ],
       "path": "cassini-ice/raw/v1465671822_1.qub",
       "url": "https://vims.univ-nantes.fr/cube/1465671822_1.qub"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/PHOEBE_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PHOEBE_nomenclature_center_pts.zip"
     }
   ]
 }

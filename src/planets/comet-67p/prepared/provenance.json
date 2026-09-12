@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3c752dd0bd1dcee202ee89ca191eb3f64d8f705307568109b149ad1cd88d84d3"
+    "sha256": "ffd07006e16cc65450d3de96313a4165917b11e05638d192b7cfa9801ddf98b2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
   },
   "recipes": [
     {
@@ -1388,6 +1388,73 @@
           }
         }
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "716410e7330a882ec5da8e68c7a4030065e4ab0137e32cfd0caada91eac7fc80",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": null,
+        "members": null,
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "comet-67p-features.json",
+        "publicBase": "/scenes/comet-67p/",
+        "target": {
+          "className": "comet-67p-body"
+        },
+        "lensIds": [
+          "model",
+          "osiris",
+          "albedo",
+          "slope",
+          "absorption",
+          "ice",
+          "regions",
+          "geology"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {},
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 40,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        },
+        "sites": {
+          "document": "sites.json",
+          "inputs": []
+        },
+        "landmarks": {
+          "document": "landmarks.json",
+          "inputs": [
+            "geology/shap7-regions.vtk"
+          ]
+        }
+      }
     }
   ],
   "sources": [
@@ -1467,6 +1534,16 @@
       "path": "science/al01_glb_m006_m006_v01.tab",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/al01_glb_m006_m006_v01.tab",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "rosetta",
+            "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+            "missionId": "rosetta"
+          }
+        ]
+      },
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
@@ -1732,6 +1809,16 @@
       "path": "science/sl01_glb_m006_m006_v01.tab",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/sl01_glb_m006_m006_v01.tab",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "rosetta",
+            "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+            "missionId": "rosetta"
+          }
+        ]
+      },
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
@@ -1817,6 +1904,16 @@
       "path": "science/bd01_glb_m006_m006_v01.tab",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/bd01_glb_m006_m006_v01.tab",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "rosetta",
+            "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+            "missionId": "rosetta"
+          }
+        ]
+      },
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
@@ -1902,6 +1999,16 @@
       "path": "science/wi01_glb_m006_m006_v01.tab",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/wi01_glb_m006_m006_v01.tab",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "rosetta",
+            "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+            "missionId": "rosetta"
+          }
+        ]
+      },
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
       "licenseEvidence": [
         "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
@@ -2862,6 +2969,101 @@
       "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "comet-67p-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "kind": "source-document",
+      "title": "features/manifest.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "4a54a2dd7164ecdfb85203bf63c2ebffc71016369ece87c87a73a80cbe776c73",
+      "bytes": 935,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "comet-67p-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      },
+      "kind": "source-document",
+      "title": "presentation/surface-map.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "2c4d670c40f6c544aba99082892839f03047ee3fec94d3a7dfdc0d0aa332ed09",
+      "bytes": 156,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "comet-67p-surface-sites",
+      "path": "features/sites.json",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      },
+      "kind": "source-document",
+      "title": "features/sites.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "82872a1dc96d6d97fcd9ffef2c480ef39feafb4a50db2fc19d3a4db852d3999b",
+      "bytes": 3139,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-67p-features-landmarks",
+      "path": "features/landmarks.json",
+      "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-pss-2018-05-019",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/features/landmarks.json: per-place coordinates, descriptions and publication references; checked 2026-09-12."
+          }
+        ]
+      },
+      "sha256": "dd9670bdc5b53fab929a994379e95e865bac708ddbec8244921d4cb3230690ec",
+      "bytes": 15859,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -3296,9 +3498,43 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4962,
-          "sha256": "800a595263ae6cc467864583e56ec37cdef0e5990f3f2e404f561a877ef3da14",
+          "bytes": 5076,
+          "sha256": "1383ab82a24ac68338f4341940bb1242b2522f7c4bf54af68ab6a5682d5e7ff6",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {}
+      },
+      "inputs": [
+        "comet-67p-surface-features-source",
+        "comet-67p-surface-map-frame",
+        "comet-67p-surface-sites",
+        "comet-67p-features-landmarks",
+        "shap7-region-cells"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-67p/comet-67p-features.json",
+          "bytes": 28510,
+          "sha256": "f09e447c182a594b0d1e05ce7c328c69fad9e8a91bfe87e85a03973bec6b33d6",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

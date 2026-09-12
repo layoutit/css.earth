@@ -54,8 +54,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "near-shoemaker",
+            "kind": "machine",
+            "machineId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.tab"
           }
@@ -99,8 +99,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "near-shoemaker",
+            "kind": "machine",
+            "machineId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.tab"
           }
@@ -149,8 +149,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "near-shoemaker",
+            "kind": "machine",
+            "machineId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg"
           }
@@ -192,6 +192,84 @@
             "evidence": "src/planets/mathilde/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
           }
         ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-mathilde-nomenclature-center-pts",
+      "path": "features/MATHILDE_nomenclature_center_pts.zip",
+      "expectedBytes": 97468,
+      "expectedSha256": "d042bf056ae40cd5a3f0c846412ba7a42c48b0bb1aa9893473b267b80be47bc2",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MATHILDE_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Mathilde on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Mathilde centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MATHILDE/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "mathilde-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1014,
+      "expectedSha256": "708bbfc4219549d9db2276503c78fc69e9e74a1bd0347fca41f6d6b8294bf7be",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "mathilde-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1157,
+      "expectedSha256": "cf83a84097c1adaaf528f9c29592e8758df3d4c5b4be9c9ee6354862c56b7563",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "mathilde-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 155,
+      "expectedSha256": "9f339dacb4f64327dfbf20a49e53eac2a9f087196735fa43369648c80e992155",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
       }
     }
   ],
@@ -240,8 +318,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2536,
-      "expectedSha256": "50bc55ef788b3df6bbf93a70b9813b83b6b8eb2a15282458e542be1497ca41ff"
+      "expectedBytes": 2794,
+      "expectedSha256": "202f59b24a7d90dcc1a6848640adc6123b5a9e3aa4b370d9fe6b733d2b4a4c58"
     },
     {
       "path": "preparation/navigation.json",
@@ -255,8 +333,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3678,
-      "expectedSha256": "408085c4d91e5a7bb8968695a4fb99839d8a16be9b9dd63272c6e5955bd5e954"
+      "expectedBytes": 3784,
+      "expectedSha256": "0b727ee76829e037cb2480f9541d5e103965c98c2867e5dcb914133eba0cf453"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -342,6 +420,29 @@
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 89774,
       "expectedSha256": "7898287cb9d92e1e04f8cc83f3fee9206439527dd0183dfc82f01f39f10a37c3"
+    },
+    {
+      "id": "mathilde-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 2440,
+      "expectedSha256": "629eac8dad7dee858c26675c39fbbcab4841af2ca6a7f166c804400fce516a7d",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 4 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts mathilde: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

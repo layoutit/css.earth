@@ -1,7 +1,8 @@
 import { physicalProjectionFromCamera } from '../rendering/physical-projection.js';
+import { createOpacityClock } from '../stars/opacity-clock.js';
 import type { CameraPlan, PerspectiveCameraPlan, CameraUpdate, LevelOfDetailPlan, OrbitLineFade, PlanetarySystemFade, SunMarkerFade } from './types.js';
 import type { BodyProjection, HeliocentricProjection } from '../solar-system/heliocentric-view.js';
-import type { VisibleRect } from '../solar-system/types.js';
+import type { Matrix3dLike, VisibleRect } from '../solar-system/types.js';
 import type { PositionM } from '@cssearth/engine';
 import type { PhysicalProjection } from '../rendering/physical-projection.js';
 import type { CameraViewport } from './camera-viewport.js';
@@ -18,12 +19,20 @@ export interface PerspectiveWorldContext {
   readonly framingReferenceZoom?: number;
   /** Optional authored cubic-sky registration for a physical observer. */
   readonly sceneRegistration?: string;
-  /** The enclosing prepared context has no contribution beyond this distance.
-   * This only retires unresolved detail, never a nearby resolved object. */
-  readonly detailRetirement?: { readonly originM: PositionM; readonly distanceM: number };
   readonly onWorldPublish?: (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 }
-export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; heliocentric: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; viewport?: CameraViewport; }
+// Exactly what the dolly reads from a mounted heliocentric view. Naming that
+// surface lets a caller bind a prepared projection without standing up the
+// whole retained view, and keeps this option honest about its dependency.
+export type PerspectiveHeliocentric = Pick<ReturnType<typeof mountRetainedHeliocentricView>,
+  'plan' | 'setSystemOpacity' | 'setSunMarkerOpacity' | 'setOrbitOpacity' | 'setMarkerOpacity' | 'publish'> & {
+    sunRoot: Pick<HTMLElement, 'style'>;
+  };
+export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; heliocentric: PerspectiveHeliocentric | null; worldContext?: PerspectiveWorldContext; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; viewport?: CameraViewport;
+  /** Prepared activation groups of the mesh; a resolving mesh returns through them in stages. */
+  revealGroups?: readonly (readonly HTMLElement[])[];
+  /** False while the mesh has no committed material; it stays hidden until then. */
+  canReveal?: () => boolean; }
 export type PerspectiveDolly = ReturnType<typeof createPerspectiveDolly>;
 import {
   distanceForSilhouetteRadius,
@@ -115,10 +124,13 @@ export function validatePerspectiveCameraPlan(plan: CameraPlan): PerspectiveCame
   return plan;
 }
 
-// The stage from the projected disc: the coarser stage fades in over the
-// finer one, which stays painted until the coarser is opaque and then hides.
+// The stage from the projected disc. Presentation policy: a resolving body goes
+// from its marker straight to its mesh; no billboard disc is drawn. The marker
+// fades in over the mesh, which stays painted until the marker is opaque and
+// then hides. The prepared billboard band only times the selected navigation
+// marker's fade over the mesh (`proxyOpacity`).
 export function levelOfDetailFor(levelOfDetail: LevelOfDetailPlan, silhouetteDiameter: number) {
-  const billboardOpacity = clamp(
+  const proxyOpacity = clamp(
     (levelOfDetail.billboardFadeStartDiscPixels - silhouetteDiameter) /
       (levelOfDetail.billboardFadeStartDiscPixels -
         levelOfDetail.billboardFullDiscPixels),
@@ -132,16 +144,13 @@ export function levelOfDetailFor(levelOfDetail: LevelOfDetailPlan, silhouetteDia
     0,
     1,
   );
-  const stage = markerOpacity >= 1
-    ? "marker"
-    : billboardOpacity >= 1
-      ? "billboard"
-      : billboardOpacity > 0 ? "crossfade" : "geometry";
+  const stage = markerOpacity >= 1 ? "marker" : "geometry";
   return Object.freeze({
     stage,
     silhouetteDiameter,
-    billboardOpacity,
+    billboardOpacity: 0,
     markerOpacity,
+    proxyOpacity,
   });
 }
 
@@ -157,7 +166,7 @@ export function orbitLineOpacity(fade: OrbitLineFade, discHeightShare: number) {
 // The planetary system fades in with the camera's distance over the body's
 // own orbit extent: hidden while the body's orbit fills the view, opaque
 // once the camera stands well outside it.
-export function planetarySystemOpacity(fade: PlanetarySystemFade, distanceOverOrbitExtent: number) {
+export function planetarySystemOpacity(fade: Pick<PlanetarySystemFade, 'hiddenBelowDistanceOverOrbitExtent' | 'visibleAboveDistanceOverOrbitExtent'>, distanceOverOrbitExtent: number) {
   return clamp(
     (distanceOverOrbitExtent - fade.hiddenBelowDistanceOverOrbitExtent) /
       (fade.visibleAboveDistanceOverOrbitExtent -
@@ -169,7 +178,7 @@ export function planetarySystemOpacity(fade: PlanetarySystemFade, distanceOverOr
 
 // The Sun marker fades in as the Sun sprite's projected diameter falls
 // below the marker's size, the same crossfade as the body's own marker.
-export function sunMarkerOpacity(sunMarker: SunMarkerFade, spriteDiameter: number | undefined) {
+export function sunMarkerOpacity(sunMarker: Pick<SunMarkerFade, 'fadeStartSpritePixels' | 'fullSpritePixels'>, spriteDiameter: number | undefined) {
   if (typeof spriteDiameter !== "number" || !Number.isFinite(spriteDiameter)) return 0;
   return clamp(
     (sunMarker.fadeStartSpritePixels - spriteDiameter) /
@@ -188,6 +197,8 @@ export function createPerspectiveDolly({
   skyElement,
   stage,
   viewport,
+  revealGroups = [],
+  canReveal,
 }: PerspectiveDollyOptions) {
   const cameraPlan = validatePerspectiveCameraPlan(unvalidatedCameraPlan);
   const plan = heliocentric?.plan;
@@ -199,11 +210,6 @@ export function createPerspectiveDolly({
       !cameraElement?.style || !sceneElement?.style || !skyElement ||
       (heliocentric !== null && !heliocentric.sunRoot?.style) || !stage) {
     throw new TypeError("Perspective dolly requires a prepared physical camera context.");
-  }
-  const retirement = worldContext?.detailRetirement;
-  if (retirement && (!(retirement.distanceM > 0) || !Number.isFinite(retirement.distanceM) ||
-      retirement.originM.length !== 3 || !retirement.originM.every(Number.isFinite))) {
-    throw new TypeError('Detail retirement requires a finite prepared context extent.');
   }
   const levelOfDetail = cameraPlan.levelOfDetail;
   const framingReferenceZoom = worldContext?.framingReferenceZoom ?? cameraPlan.defaultZoom;
@@ -392,7 +398,36 @@ export function createPerspectiveDolly({
     },
   });
 
-  const capturePresentation = (sceneMatrix: DOMMatrix, scenePresentation: string) => ({
+  // Presentation policy: the detailed mesh is drawn only once it outgrows its
+  // proxy. In the marker stage the opaque marker or point-source star stands for
+  // the body. A mesh there adds a few pixels yet keeps hundreds of composited 3D
+  // leaves alive, so it leaves layout until the body resolves.
+  // On entry its prepared groups join over a few frames, so the leaves' layers
+  // are created across paints. The proxy beneath carries the body's colour.
+  const REVEAL_FRAMES = 4;
+  const revealView = cameraElement.ownerDocument.defaultView;
+  const revealClock = revealView && createOpacityClock(revealView);
+  const revealed = new Uint8Array(revealGroups.length).fill(1);
+  let revealCount = revealGroups.length, revealFrame: number | null = null;
+  // Flight activation writes the same nodes while the scene is hidden, so the
+  // entry reset checks each node rather than the cached group state.
+  const revealTo = (count: number, reset = false) => {
+    revealCount = count;
+    for (let group = 0; group < revealed.length; group++) {
+      const show = group < count ? 1 : 0;
+      if (!reset && revealed[group] === show) continue;
+      revealed[group] = show;
+      const display = show ? '' : 'none';
+      for (const node of revealGroups[group]!) if (node.style.display !== display) node.style.display = display;
+    }
+  };
+  const continueReveal = () => {
+    revealFrame = null;
+    if (sceneElement.hidden || revealCount >= revealGroups.length) return;
+    revealTo(Math.min(revealGroups.length, revealCount + Math.ceil(revealGroups.length / REVEAL_FRAMES)));
+    if (revealCount < revealGroups.length) revealFrame = revealClock!.request(continueReveal);
+  };
+  const capturePresentation = (sceneMatrix: Matrix3dLike, scenePresentation: string) => ({
     distance: cameraState.distance, rotation: rotationFromMatrix3d(sceneMatrix), scenePresentation,
     bodyCenter: bodyCenter === null ? null : [...bodyCenter] as PositionM,
     focal, viewportWidth, viewportHeight, principalOffset, stageViewport, visibleRect,
@@ -450,12 +485,18 @@ export function createPerspectiveDolly({
       );
       projectedBody = projection?.body ?? genericBody ?? null;
       if (projectedBody) lod = levelOfDetailFor(levelOfDetail, projectedBody.silhouetteDiameter);
-      // The enclosing context owns its far-scale handoff. A marker LOD alone
-      // does not mean an opaque proxy covers this mesh. Wait until the context
-      // has fully retired, and keep nearby resolved detail even outside it.
-      const contextRetired = retirement && publishedWorld && lod.stage === 'marker' &&
-        Math.hypot(...publishedWorld.pose.positionM.map((value, axis) => value - retirement.originM[axis]!)) >= retirement.distanceM;
-      const hidden = Boolean(contextRetired || (projection && !projection.body.visible));
+      // A marker-stage body is its proxy (see the presentation policy above).
+      // An undrawn mesh publishes no material, so it also waits for the one its
+      // resolving camera commits instead of revealing an untextured globe.
+      const hidden = Boolean(lod.stage === 'marker' || (projection && !projection.body.visible) ||
+        (canReveal !== undefined && !canReveal()));
+      if (revealGroups.length && revealView) {
+        if (hidden && revealFrame !== null) { revealClock!.cancel(revealFrame); revealFrame = null; }
+        if (!hidden && sceneElement.hidden) {
+          revealTo(0, true);
+          revealFrame = revealClock!.request(continueReveal);
+        }
+      }
       if (sceneElement.hidden !== hidden) sceneElement.hidden = hidden;
       // Raw prepared scene coordinates to the physical eye. Overlay and page
       // consumers compose their own retained body transforms after this matrix.
@@ -483,7 +524,7 @@ export function createPerspectiveDolly({
         }),
       });
   }
-  function preparePresentation(sceneMatrix: DOMMatrix, scenePresentation: string) {
+  function preparePresentation(sceneMatrix: Matrix3dLike, scenePresentation: string) {
     const snapshot = capturePresentation(sceneMatrix, scenePresentation);
     const world = !worldContext ? null : snapshot.bodyCenter === null
       ? worldCameraFromCenteredPresentation({ rotation: snapshot.rotation, distanceUnits: snapshot.distance }, worldContext.frame,
@@ -534,7 +575,7 @@ export function createPerspectiveDolly({
     // scale must be uniform in three dimensions: a 2D scale() leaves the
     // body's depth unscaled, which a real perspective camera notices.
     prepare: preparePresentation,
-    publish(sceneMatrix: DOMMatrix, scenePresentation: string) {
+    publish(sceneMatrix: Matrix3dLike, scenePresentation: string) {
       return preparePresentation(sceneMatrix, scenePresentation).commit();
     },
     // The drag trackball: the projected silhouette. A small body still orbits

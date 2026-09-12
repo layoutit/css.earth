@@ -189,6 +189,14 @@
       "headers": {
         "User-Agent": "Mozilla/5.0"
       }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/GASPRA_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GASPRA_nomenclature_center_pts.zip"
     }
   ]
 }

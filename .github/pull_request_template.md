@@ -21,16 +21,27 @@ Omit Sources and processing when sources, processing and interpretation are unch
 
 ## Evidence and limits
 
-- [Command or check] — [result and link to original evidence or inspected images].
-- [Relevant failure, check not run or unresolved problem].
+**Proves the change:** [check — result, and why that result is evidence; link the
+original evidence or inspected images.]
+
+**Clean:** [checks that only passed, named on one line.]
+
+**Pre-existing, identical on `main`:** [table of unrelated failures; state once that
+they match `main`. Cite a standing environment limit rather than re-explaining it.]
+
+[What was not run, and what remains unknown.]
 
 <!--
-Add only relevant checks. GitHub already records CI revisions. For local or reused
-evidence, name the tested revision and relevant differences, including uncommitted changes.
+Add only relevant checks, grouped by what they prove. GitHub already records CI
+revisions. For local or reused evidence, name the tested revision and relevant
+differences, including uncommitted changes.
 Explain why reused evidence still applies and what added evidence or unusually large files support.
 Do not repeat source inventories or paste run logs here.
 For images, use GitHub attachments or repository URLs pinned to a commit.
-Reload the published PR and inspect every image; fix broken embeds before handoff.
+For matched visual comparisons, link the retained inputs, Pixelmatch diff at threshold 0.1 and
+recorded settings/results required by the provenance contract.
+A relative link does not resolve in a PR body; pin repository links to a commit too.
+Reload the published PR and inspect every image and link; fix broken ones before handoff.
 If required visual evidence is unavailable, keep the PR in draft and say what is missing.
 -->
 

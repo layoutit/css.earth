@@ -60,8 +60,7 @@ try {
   assert.equal(await page.getByRole('tab', { name: 'Sources', exact: true }).count(), 0);
   assert.equal(await active().locator('[data-mission="mars-global-surveyor"]').isVisible(), true);
   assert.equal(await active().locator('[data-source="source-mars-usgs-mola-pseudocolor"]').isVisible(), true);
-  assert.equal(await page.locator('template[data-object-card]').evaluateAll(templates => templates.every(template =>
-    template instanceof HTMLTemplateElement && !template.content.querySelector('[data-mission], [data-source]'))), true);
+  assert.equal(await page.locator('template[data-object-card]').count(), 0, 'Routes ship no resident card bank');
   const stage = await page.locator('.planet-stage .polycss-camera').elementHandle();
   const before = await state();
   const thermal = page.locator('button[name="lens"][value="thermal"]');
@@ -117,13 +116,12 @@ try {
   await page.getByRole('searchbox').fill('Mercury');
   await page.locator('.planet-object-link[data-object-id="mercury"]').first().click();
   await ready('mercury');
-  assert.equal(await page.locator('.planet-information-panel [data-deferred-detail]').count(), 0);
   assert.equal(await page.locator('template[data-prepared-detail="dataset-context"]').evaluate(template =>
     template instanceof HTMLTemplateElement && !!template.content.querySelector('[data-mission="messenger"]')), true);
   assert.equal(await rail.locator('[data-mission="mars-global-surveyor"]').count(), 0);
   await page.goBack(); await ready('mars', 'elevation');
   assert.equal(await active().locator('[data-mission="mars-global-surveyor"]').isVisible(), true);
-  cases.push({ name: 'cross-body navigation hydrates deferred context and Back restores the dataset' });
+  cases.push({ name: 'cross-body navigation carries the destination dataset context and Back restores the dataset' });
 
   await visit('/mercury/#dataset=enhanced', 'mercury', 'enhanced');
   assert.equal(await active().locator('[data-mission="messenger"]').count(), 1);
@@ -149,7 +147,7 @@ try {
   assert.equal(await rail.isVisible(), true);
   cases.push({ name: 'responsive panels remain accessible and return to the right dock' });
 
-  assert.equal([...requests].some(path => /prepared-(?:spacecraft|sources)\.json|src\/sources|source\/spacecraft\/catalog\.json|prepared\/provenance\.json|prepare-(?:spacecraft|sources)/.test(path)), false,
+  assert.equal([...requests].some(path => /prepared-(?:machines|sources)\.json|src\/sources|source\/machines\/catalog\.json|prepared\/provenance\.json|prepare-(?:machines|sources)/.test(path)), false,
     'The production browser must not fetch the catalogue, compiler or provenance graph');
   assert.deepEqual(errors, [], 'No browser application errors');
   assert.deepEqual(failedResponses, [], 'All requested production assets are installed');
