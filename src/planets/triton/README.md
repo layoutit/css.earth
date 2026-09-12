@@ -20,6 +20,14 @@ enhanced contrast. Color resolution varies across observations.
 
 ## Evidence
 
+Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
+
+| View | Both prepared levels, before → current |
+| --- | --- |
+| enhanced | 160.4 → 169.7 kB |
+
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/triton/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+
 Lane change (this PR): the terrestrial solid-observation lane was retired for Triton; the same pinned inputs and the same decoders (`terrestrial-mosaic`, `terrestrial-observation` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 7168 × 3584 (DPR 1) and 14336 × 7168 (DPR 2) — retired 14336 × 7168 atlas from the controlled orthographic mosaic. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
 
 Run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js triton --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/triton/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
@@ -96,8 +104,10 @@ transfer is I/F divided by 0.9 with gamma 1.4.
 
 The 14,336 × 7,168 preparation grid retains approximately 593 m equatorial
 texels. It does not make the coarser observations sharper. Source masks become
-the shared gray coverage grid. Runtime surfaces use WebP q90 with lossless
-alpha; poles and 640-pixel previews are prepared separately. Previews center
+the shared gray coverage grid. The enhanced photographic polar sprites sample
+their pinned source grid directly with a 2 × 2 footprint and retain lossless WebP
+encoding; latitude-band surfaces retain their existing q90 encoding with lossless
+alpha. Poles and 640-pixel previews are prepared separately. Previews center
 longitude zero so the observed region is continuous; globe coordinates stay
 unchanged. Both datasets retain the app's flood and directional lighting.
 

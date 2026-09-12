@@ -14,6 +14,44 @@
 
 ## Evidence
 
+The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
+
+| View | Original grid | Both lighting images, before → current |
+| --- | --- | --- |
+| normal | 16098 × 8049 | 8.31 → 12.18 MB |
+
+Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/enceladus/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
+
+The [browser comparison](evidence/native-source-sampling.png) uses identical camera
+coordinates at 4× zoom, Shadows off, Chromium at DPR 1, on revision `3dc424757`.
+It separates the previous quality-90 image, the same intermediate-map sampling
+encoded at quality 95, and native-grid sampling at quality 95. The native result
+retains finer fracture detail; some improvement also comes from encoding quality.
+The selected view was also inspected with Shadows on. This checks visible output,
+not scientific registration accuracy or full browser conformance.
+
+A fresh [Pixelmatch comparison](evidence/native-pixelmatch/comparison.png) uses
+Chrome 153.0.8010.12, 1280 × 720, DPR 1 and an unchanged 520 × 480 crop. It runs
+on the merge of `e0487eff5` with main `c13f3643b`, whose renderer and scene are
+retained. [Capture settings and byte pins](evidence/native-pixelmatch/capture.json)
+identify the exact previous-main atlas and the encoding-only control.
+
+Pixelmatch 7.2.0 uses threshold **0.1**, including anti-aliasing, without masks.
+
+| Comparison | Mismatched pixels / 249,600 |
+| --- | ---: |
+| [Independent unchanged repeat](evidence/native-pixelmatch/repeat.json) | 0 |
+| [Previous atlas → native sampling](evidence/native-pixelmatch/change.json) | 20 |
+| [Quality-95 control → native sampling](evidence/native-pixelmatch/sampling.json) | 19 |
+
+The repeat has zero mismatches after waiting for label fades. Only a few pixels
+exceed the threshold; most photographic changes are subtle. Inspection shows
+finer fracture texture. These counts do not measure sharpness or registration
+accuracy.
+The four input crops and three diffs are retained beside their reports. Reproduce
+a comparison with `node tools/compare-visual-evidence.mts <reference.png>
+<result.png> <diff.png> <report.json>` from the repository root.
+
 - The formal pinned Python environment reproduced the exact ZIP hash (see [docs/moons/b2-preparation/enceladus-dsk-reproduction.json](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b2-preparation/enceladus-dsk-reproduction.json)).
 
 - The visual-trial candidate uses 2,000 source-preserving native triangles with regularization and a 2,523 m rendering error ceiling. Four barycentric positions on every retained triangle gave a maximum one-way source distance of 1,822.01 m; source Cartesian extrema differ by at most 533 m. These rendering measurements are not source uncertainty or an exhaustive Hausdorff bound.

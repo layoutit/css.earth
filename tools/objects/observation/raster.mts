@@ -17,6 +17,7 @@ export interface RasterImage {data: Buffer; info: RasterInfo;}
 export interface TonalPresentation {saturation: number; linearGain: number; linearOffset: number; sharpenSigma: number;}
 export interface ObservationLens {
   id: string; input: string; output?: string; rasterScale?: number;
+  nativeSourcePoles?: boolean;
   scientific?: SciencePalette & {displaySampling?: string};
   elevation?: ElevationRecipe;
   coverage?: {kind: string; southConnected: boolean};
@@ -31,11 +32,39 @@ const scientific = union(
   object({categories: array(object({color: string})), minimum: optional(number), maximum: optional(number), colors: optional(array(string)), relief: optional(relief), outputLongitudeOrigin: optional(number), displaySampling: optional(string)}),
   object({categories: (value): value is undefined => value === undefined, minimum: number, maximum: number, colors: array(string), relief: optional(relief), outputLongitudeOrigin: optional(number), displaySampling: optional(string)}));
 const observationLens = object({id: string, input: string, output: optional(string), rasterScale: optional(number), scientific: optional(scientific),
+  nativeSourcePoles: optional(boolean),
   elevation: optional(object({noData: number, palette: array(array(number)), rangeMetres: number, relief: optional(relief)})),
   coverage: optional(object({kind: string, southConnected: boolean})),
   presentation: optional(object({saturation: number, linearGain: number, linearOffset: number, sharpenSigma: number}))});
 /** Validate one surface's observation fields (the retired lane's `observation lens` record without a required output). */
 export const parseObservationLens = (value: unknown) => parse(value, observationLens, 'observation lens');
+
+/** Direct source sampler for a static photograph with the same normalized map domain as its established `fit: fill`
+ * decode. Coverage is evaluated against every native bilinear contributor before the polar output paints its grid. */
+export async function loadNativeObservationPoleSampler(input: string, plan: ObservationLens) {
+  if (plan.scientific || plan.elevation) throw new TypeError('Native observation poles require a photographic source, not a numeric grid.');
+  if (plan.presentation) throw new TypeError('Native observation poles cannot reproduce the resized-map Sharp tonal presentation.');
+  if (plan.coverage && plan.coverage.kind !== 'black-fill') throw new TypeError('Unsupported native observation coverage source.');
+  const source = await sharp(input, {limitInputPixels: false}).raw().toBuffer({resolveWithObject:true});
+  const display = await sharp(input, {limitInputPixels: false}).removeAlpha().toColourspace('srgb').raw().toBuffer({resolveWithObject:true});
+  if (source.info.width !== display.info.width || source.info.height !== display.info.height || display.info.channels !== 3 ||
+      source.info.width < 2 || source.info.height < 2) throw new Error('Native observation source decode drifted.');
+  const missing = plan.coverage ? blackFillCoverage(source.data, source.info, {southConnected: plan.coverage.southConnected}) : null;
+  const {width,height}=display.info, modulo=(value:number,divisor:number)=>((value%divisor)+divisor)%divisor;
+  return {sample(longitudeDegrees:number,latitudeDegrees:number,color:number[]) {
+    if (!Number.isFinite(longitudeDegrees) || !Number.isFinite(latitudeDegrees) || latitudeDegrees < -90 || latitudeDegrees > 90) return false;
+    const sourceX=modulo(longitudeDegrees,360)/360*width-.5,sourceY=Math.max(0,Math.min(height-1,(90-latitudeDegrees)/180*height-.5));
+    const x0=Math.floor(sourceX),y0=Math.floor(sourceY),x1=x0+1,y1=Math.min(height-1,y0+1),xAmount=sourceX-x0,yAmount=sourceY-y0;
+    color[0]=color[1]=color[2]=0;
+    for(let dy=0;dy<2;dy++)for(let dx=0;dx<2;dx++) {
+      const weight=(dx?xAmount:1-xAmount)*(dy?yAmount:1-yAmount);if(weight===0)continue;
+      const x=modulo(dx?x1:x0,width),y=dy?y1:y0,index=y*width+x;
+      if(missing?.[index])return false;
+      for(let channel=0;channel<3;channel++)color[channel]=(color[channel]??0)+display.data[index*3+channel]*weight;
+    }
+    color[3]=255;return true;
+  }};
+}
 
 /** The same source interpretation feeds globe atlases and small, unwarped maps. */
 export async function observationRaster({ input, plan, width, height, elevation, scientific, source, sourceMissing }: ObservationRasterInput): Promise<RasterImage> {
