@@ -40,14 +40,16 @@ export function runSuite(suite: string, origin: string, { timeoutMs = 20 * 60 * 
   const started = Date.now();
   const result = spawnSync(process.execPath, [resolve(root, suiteDirectory, suite), origin], {
     cwd: root, stdio: 'inherit', timeout: timeoutMs,
-    env: { ...process.env, CSSEARTH_TEST_ORIGIN: origin },
+    // Suites read the origin from argv[2], CSSEARTH_TEST_ORIGIN or ORIGIN; set all three.
+    env: { ...process.env, CSSEARTH_TEST_ORIGIN: origin, ORIGIN: origin },
   });
   const seconds = Math.round((Date.now() - started) / 1000);
   if (result.error) return { suite, status: 'failed', seconds, reason: result.error.message };
   return { suite, status: result.status === 0 ? 'passed' : 'failed', seconds, ...(result.status === 0 ? {} : { reason: `exit ${result.status ?? result.signal}` }) };
 }
 
-export async function runBrowserSuites({ origin, port = 4230, only, includeOptIn = false }: { origin?: string; port?: number; only?: string; includeOptIn?: boolean }): Promise<SuiteResult[]> {
+export async function runBrowserSuites({ origin, port = 4230, only, includeOptIn = false, objects }: { origin?: string; port?: number; only?: string; includeOptIn?: boolean; objects?: string }): Promise<SuiteResult[]> {
+  if (objects) process.env.CSSEARTH_TEST_OBJECTS = objects;
   const suites = (await listBrowserSuites()).filter(suite => !only || suite.includes(only));
   let server: ReturnType<typeof spawn> | null = null;
   let target = origin;
@@ -71,17 +73,18 @@ export async function runBrowserSuites({ origin, port = 4230, only, includeOptIn
 }
 
 function usage(): never {
-  throw new TypeError('Usage: run-browser-suites [--origin=<url> | --port=<n>] [--only=<substring>] [--include-opt-in] [--list]');
+  throw new TypeError('Usage: run-browser-suites [--origin=<url> | --port=<n>] [--only=<substring>] [--objects=all|<id,id>] [--include-opt-in] [--list]');
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const options: { origin?: string; port?: number; only?: string; includeOptIn?: boolean } = {};
+  const options: { origin?: string; port?: number; only?: string; includeOptIn?: boolean; objects?: string } = {};
   let list = false;
   for (const argument of process.argv.slice(2)) {
     const [key, value] = argument.split('=', 2);
     if (key === '--origin' && value) options.origin = value;
     else if (key === '--port' && value && /^\d+$/.test(value)) options.port = Number(value);
     else if (key === '--only' && value) options.only = value;
+    else if (key === '--objects' && value) options.objects = value;
     else if (argument === '--include-opt-in') options.includeOptIn = true;
     else if (argument === '--list') list = true;
     else usage();
