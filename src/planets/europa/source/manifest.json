@@ -1598,6 +1598,16 @@
       "expectedSha256": "335c16fcb53c5e278f5660f3df5f42f58cd65d0ce78722c9a055ee2e7a053d62",
       "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/Agenor.tif",
       "credit": "USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "missionId": "galileo",
+            "evidence": "The preserved credit for this input reads: USGS Astrogeology; Bland et al.; NASA/JPL Galileo"
+          }
+        ]
+      },
       "license": "CC0-1.0",
       "licenseEvidence": [
         "https://registry.opendata.aws/nasa-usgs-europa-dtms/"

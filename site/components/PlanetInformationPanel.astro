@@ -163,6 +163,15 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
                 </div>}
                 <DatasetLegend {objectId} {lens} />
               </DatasetDescription>
+              {lens.facts && lens.facts.length > 0 && <details class="planet-lens-facts">
+                <summary>Dataset details</summary>
+                <ul class="planet-facts" aria-label={`${lens.label} facts`}>
+                  {lens.facts.map((fact) => <li>
+                    <span class="planet-fact-label">{fact.label}</span>{" "}
+                    <span class="planet-fact-value">{fact.value}</span>
+                  </li>)}
+                </ul>
+              </details>}
               {lens.texture?.attribution && <p class="planet-lens-source">
                 Source: {lens.texture.attribution.url
                   ? <a href={lens.texture.attribution.url} target="_blank" rel="noreferrer">{lens.texture.attribution.label}</a>
