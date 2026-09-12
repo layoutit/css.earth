@@ -229,9 +229,11 @@ need a separate completion report in `docs/`.
 **Inspect PR images on GitHub.** Use a [GitHub attachment](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files)
 or an image committed at a fixed revision, for example
 `https://github.com/layoutit/css.earth/blob/<commit>/<path>?raw=true`.
-After publishing or editing the PR, reload it with normal repository access and
-inspect every image for loading, legibility, view and revision. File existence
-or HTTP success alone is insufficient. Fix broken embeds; if required images
+A relative link resolves against the PR URL, not the repository root, so pin a
+repository link in the body to a commit as well. After publishing or editing the
+PR, reload it with normal repository access and inspect every image for loading,
+legibility, view and revision, and follow every link. File existence or HTTP
+success alone is insufficient. Fix broken embeds and links; if required images
 are unavailable, keep the PR in draft and identify what is missing.
 
 **PROVENANCE DOCUMENTATION** maintains shared guidance. Contributors update rules
