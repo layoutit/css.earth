@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-joint-fit-recipe@1",
+  "id": "helix-molecular-wall",
+  "molecularSource": "labs/nebula/models/helix/kinematics-hco.json",
+  "centerIcrsDegrees": [337.4107083333334, -20.83717222222222],
+  "morphologyRadiusArcsec": [120, 650],
+  "radiusSearchArcsec": [240, 320, 400],
+  "systemicLsrKmS": -23.98,
+  "systemicUncertaintyKmS": 2,
+  "imageToleranceArcsec": 40,
+  "velocityToleranceKmS": 5,
+  "missingVelocityPenaltyKmS": 45,
+  "interpretation": "Coarse molecular-wall hypotheses conditioned on registered outreach-image ridges and Zeigler 2013 HCO+ line centroids. The central ionized core and wider halo are separate. The 120–650 arcsec image region, search bounds, morphology/velocity loss scales, missing-ray penalty and neutral wall thickness are explicit engineering assumptions, not measured errors or density. The systemic reference is Meaburn's heliocentric −27.1±2 plus the 3.12 km/s conversion stated by Zeigler. No unique depth, hydrodynamic solution or calibrated flux is claimed."
+}
