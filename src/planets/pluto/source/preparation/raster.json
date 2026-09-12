@@ -34,7 +34,8 @@
           "kind": "black-fill",
           "southConnected": true
         }
-      }
+      },
+      "nativeSourcePoles": true
     },
     {
       "id": "topography",
@@ -86,7 +87,8 @@
           "kind": "black-fill",
           "southConnected": false
         }
-      }
+      },
+      "nativeSourcePoles": true
     }
   ],
   "lighting": {

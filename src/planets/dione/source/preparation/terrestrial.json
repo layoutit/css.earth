@@ -23,6 +23,10 @@
           "noData": 0,
           "centerLongitude": 0,
           "resolutionMeters": 153.53443263638
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       {
@@ -31,6 +35,10 @@
           "kind": "image-rgb-no-data",
           "noData": null,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       {
@@ -292,7 +300,7 @@
           "width": 360,
           "height": 180,
           "centerLongitude": 0,
-          "referenceRadiusMeters": 561400.0,
+          "referenceRadiusMeters": 561400,
           "noData": -9999,
           "origin": [
             -1763690.1157253098,

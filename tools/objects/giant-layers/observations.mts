@@ -203,11 +203,26 @@ async function transformMap(map: RasterMap,operations?: readonly ObservationTran
   const {data,info}=await pipeline.raw().toBuffer({resolveWithObject:true});return {...map,data,width:info.width,height:info.height,channels:info.channels};
 }
 
-export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,config: input,write=false}: {sourceDirectory: string; publicDirectory?: string; config: unknown; write?: boolean}) {
+/** A same-aspect resize contributes no geographic operation to a polar projection. */
+function retainsNativePoleCoordinates(map: RasterMap,operations?: readonly ObservationTransform[]) {
+  return !!operations?.length&&operations.every(operation=>operation.kind==='resize'
+    &&(operation.options?.fit===undefined||operation.options.fit==='fill')
+    &&!operation.options?.withoutEnlargement
+    &&operation.width*map.height===operation.height*map.width);
+}
+
+export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,config: input,write=false,lensIds,productKinds}: {sourceDirectory: string; publicDirectory?: string; config: unknown; write?: boolean;lensIds?:readonly string[];productKinds?:readonly ('surface'|'poles'|'thumbnail')[]}) {
   const config = parseObservedSurfaceRecipe(input);
-  const inputs=await verifyObservationSources(sourceDirectory,config.sources),baselines=new Map<string, Baseline>(),maps=new Map<string, RasterMap>(),assets=[];
-  for(const recipe of config.baselines??[]){const map=await decodeRaster(inputs.get(recipe.source),{channels:3});baselines.set(recipe.id,centralDiscBaseline(map,recipe));}
-  for(const lens of config.lenses){
+  if(lensIds&&(!lensIds.length||new Set(lensIds).size!==lensIds.length))throw new TypeError('Observed surface selection requires distinct lens ids.');
+  if(productKinds&&(!productKinds.length||new Set(productKinds).size!==productKinds.length))throw new TypeError('Observed surface selection requires distinct product kinds.');
+  const lenses=lensIds?config.lenses.filter(lens=>lensIds.includes(lens.id)):config.lenses;
+  if(lensIds&&lenses.length!==lensIds.length)throw new Error('Observed surface selection requested an unknown lens.');
+  const baselineIds=new Set(lenses.flatMap(lens=>lens.coverage?.kind==='uniform-baseline'&&lens.coverage.baseline?[lens.coverage.baseline]:[])),baselinesToPrepare=(config.baselines??[]).filter(recipe=>baselineIds.has(recipe.id));
+  if(baselineIds.size!==baselinesToPrepare.length)throw new Error('Observed surface selection requested an unknown baseline.');
+  const sourcePaths=new Set([...lenses.flatMap(lens=>[lens.source,...(lens.calibration?[lens.calibration.source]:[])]),...baselinesToPrepare.map(recipe=>recipe.source)]);
+  const inputs=await verifyObservationSources(sourceDirectory,lensIds?config.sources.filter(source=>sourcePaths.has(source.path)):config.sources),baselines=new Map<string, Baseline>(),maps=new Map<string, RasterMap>(),assets=[];
+  for(const recipe of baselinesToPrepare){const map=await decodeRaster(inputs.get(recipe.source),{channels:3});baselines.set(recipe.id,centralDiscBaseline(map,recipe));}
+  for(const lens of lenses){
     if(!inputs.has(lens.source))throw new TypeError('Observation has no verified source.');
     let map: RasterMap;
     if(lens.decode.kind==='raster')map=await decodeRaster(inputs.get(lens.source),lens.decode);
@@ -225,10 +240,12 @@ export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,c
       if(!baseline || !baseline.provenance)throw new TypeError('Observation baseline is undefined.');map=completeUniformCoverage(map,{color:baseline.color,provenance:baseline.provenance},lens.coverage);
     }
     if(calibration){const data=Buffer.allocUnsafe(map.data.length);for(let offset=0;offset<data.length;offset+=3)for(let c=0;c<3;c++)data[offset+c]=Math.round(clamp(map.data[offset+c]*calibration.scale[c]+calibration.offset[c],0,255));map={...map,data,calibration};}
-    map=await transformMap(map,lens.transforms);if(lens.atmosphereColor)map.atmosphereColor=brightTailColor(map.data,lens.atmosphereColor);maps.set(lens.id,map);
-    for(const product of lens.products){
+    const nativePoleMap=map,transformedMap=await transformMap(map,lens.transforms);
+    if(lens.atmosphereColor)transformedMap.atmosphereColor=brightTailColor(transformedMap.data,lens.atmosphereColor);maps.set(lens.id,transformedMap);
+    for(const product of productKinds?lens.products.filter(product=>productKinds.includes(product.kind)):lens.products){
       if(!/^[a-z0-9][a-z0-9-]*(?:@2x)?\.webp$/u.test(product.filename))throw new TypeError('Invalid observation output name.');
-      let raster=await transformMap(map,product.transforms);
+      const productMap=product.kind==='poles'&&retainsNativePoleCoordinates(nativePoleMap,lens.transforms)?nativePoleMap:transformedMap;
+      let raster=await transformMap(productMap,product.transforms);
       if(product.kind==='surface'){const packed=packProjectiveSurfaceRaster(raster.data,{width:raster.width,height:raster.height,channels:raster.channels,...product.packing});raster={data:packed.data,width:packed.packedWidth,height:packed.packedHeight,channels:raster.channels};}
       else if(product.kind==='poles')raster=polarDiscAtlas(raster,product.projection);
       else if(product.kind!=='thumbnail')throw new TypeError('Unsupported observation product.');

@@ -33,7 +33,13 @@ runtime does not interpret a star catalog or synthesize a fallback background.
 
 ## Evidence
 
-No dated test report is cited in the existing source notes.
+- **Normal polar source sampling, 12 September 2026:** the staged normal-pole
+  refresh verified the OPAL TIFF, the Irwin et al. colour reference, the
+  observation recipe, source manifest and retained scene pin. It applied only
+  `neptune-poles-normal.webp`: the fixed 512 × 128 atlas changed from 4,538 to
+  4,524 bytes, a 14-byte (0.31%) smaller download. The normal surface bands,
+  thumbnail, material assets and retained geometry were not regenerated. This
+  is preparation evidence, not a browser review.
 
 ## Known problems
 
@@ -42,6 +48,15 @@ degrees latitude for this observing geometry. Preparation extends the checked
 +30-degree boundary row toward that row's longitudinal mean at the pole. This
 source-derived coverage treatment supplies no new storm or cloud detail. It is
 recorded in `source/preparation/observations.json` and happens only during preparation.
+
+The normal OPAL map is a 720 × 360 global raster. Its declared high-latitude
+coverage continuation and colour calibration run before the normal pole atlas
+samples that grid directly. The existing 2,880 × 1,440 same-aspect resize still
+serves the normal surface bands, but it is no longer an intermediate for the
+pole atlas. The fixed direct-segment, bilinear-wrapped projection remains four
+128-pixel pole tiles in a 512 × 128 file. This preserves the existing
+projection and retained 724-leaf scene; it does not establish a new geographic
+registration or recover unobserved polar features.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
