@@ -1,0 +1,906 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "15",
+      "item": "Q2821560",
+      "title": "Abeona Mons",
+      "url": "https://en.wikipedia.org/wiki/Abeona_Mons",
+      "revision": "1351748951",
+      "extract": "Abeona Mons is a mountain on Venus named after Abeona the Roman goddess of travelers."
+    },
+    {
+      "id": "24",
+      "item": "Q24293761",
+      "title": "Abundia Corona",
+      "url": "https://en.wikipedia.org/wiki/Abundia_Corona",
+      "revision": "1363947730",
+      "extract": "Abundia Corona is a corona on the surface of Venus, with a diameter of 250 km. Its name comes from the Norse goddess of giving."
+    },
+    {
+      "id": "50",
+      "item": "Q959273",
+      "title": "Addams (crater)",
+      "url": "https://en.wikipedia.org/wiki/Addams_(crater)",
+      "revision": "1372900965",
+      "extract": "Addams is an 87 km diameter impact crater on Venus, located on the eastern flank of the Triglava Corona, and is on the surface of Laimdota Planitia. It was named after American social worker Jane Addams, which was adopted by the International Astronomical Union in the year 1994."
+    },
+    {
+      "id": "52",
+      "item": "Q380420",
+      "title": "Adivar (crater)",
+      "url": "https://en.wikipedia.org/wiki/Adivar_(crater)",
+      "revision": "1371814660",
+      "extract": "Adivar is an impact crater on Venus, named in honor of Turkish writer Halide Edib Adıvar. The crater is located just north of the western Aphrodite highland. Surrounding the crater rim is ejected material which appears bright in the radar image due to the presence of rough fractured rock."
+    },
+    {
+      "id": "85",
+      "item": "Q2826880",
+      "title": "Aglaonice (crater)",
+      "url": "https://en.wikipedia.org/wiki/Aglaonice_(crater)",
+      "revision": "1359044081",
+      "extract": "Aglaonice is a crater on Venus which is part of the Lavinia Planitia. It was found in 1991 and named after the ancient Greek astronomer Aglaonice."
+    },
+    {
+      "id": "87",
+      "item": "Q2826931",
+      "title": "Agnesi (crater)",
+      "url": "https://en.wikipedia.org/wiki/Agnesi_(crater)",
+      "revision": "1363356665",
+      "extract": "Agnesi is a crater on the planet Venus. It was named after Maria Gaetana Agnesi, an Italian mathematician; Venusian craters are named after notable women. The crater was named by the International Astronomical Union's Working Group on Planetary System Nomenclature in 1991.7 degrees east.4 kilometers in diameter."
+    },
+    {
+      "id": "109",
+      "item": "Q23581119",
+      "title": "Aikhylu Chasma",
+      "url": "https://en.wikipedia.org/wiki/Aikhylu_Chasma",
+      "revision": "1309821554",
+      "extract": "Aikhylu Chasma is a tectonic rift valley on Venus, and the landing site of the Venera 9 lander. It is located in Beta Regio."
+    },
+    {
+      "id": "136",
+      "item": "Q651908",
+      "title": "Akna Montes",
+      "url": "https://en.wikipedia.org/wiki/Akna_Montes",
+      "revision": "1263829039",
+      "extract": "Akna Montes are a mountain range on Venus centered at 68.9°N, 318.2°E and stretching 830 km long."
+    },
+    {
+      "id": "153",
+      "item": "Q24297387",
+      "title": "Al-Uzza Undae",
+      "url": "https://en.wikipedia.org/wiki/Al-Uzza_Undae",
+      "revision": "1360608741",
+      "extract": "Al-Uzza Undae is one of the two major dune fields on Venus. The dune field was named after the Ussa, an Arabian goddess of the desert. The name \"Al-Uzza Undae\" was officially approved by the International Astronomical Union (IAU) in 1994. It was discovered by the NASA spacecraft Magellan, in the early 1990s."
+    },
+    {
+      "id": "168",
+      "item": "Q2408876",
+      "title": "Alcott (crater)",
+      "url": "https://en.wikipedia.org/wiki/Alcott_(crater)",
+      "revision": "1360093464",
+      "extract": "Alcott is an impact crater on Venus. Lava produced by a volcano at one point filled the crater and altered its rim, leaving only the radar-bright ejecta on the southeast rim of the crater. It is one of the few craters that has been changed by volcanic activity. It has a continuous ejecta radius of 39.2 km."
+    },
+    {
+      "id": "203",
+      "item": "Q933230",
+      "title": "Alpha Regio",
+      "url": "https://en.wikipedia.org/wiki/Alpha_Regio",
+      "revision": "1363810598",
+      "extract": "Alpha Regio is a region of the planet Venus extending for about 1500 kilometers centered at 22°S, 5°E."
+    },
+    {
+      "id": "213",
+      "item": "Q15299993",
+      "title": "Amanda (crater)",
+      "url": "https://en.wikipedia.org/wiki/Amanda_(crater)",
+      "revision": "1358277356",
+      "extract": "Amanda is a crater on Venus which has a diameter of 12.5 km. The crater got its name from the Latin first name."
+    },
+    {
+      "id": "249",
+      "item": "Q2845142",
+      "title": "Anala Mons",
+      "url": "https://en.wikipedia.org/wiki/Anala_Mons",
+      "revision": "1321141951",
+      "extract": "Anala Mons is a volcano on Venus. It is named after Anala, a Hindu fertility goddess. The feature was originally named Anala Corona. It is located at 11.0°N 14.1°E, in a region called the Sappho Patera quadrangle where numerous other volcanic features can be found."
+    },
+    {
+      "id": "317",
+      "item": "Q618528",
+      "title": "Aphrodite Terra",
+      "url": "https://en.wikipedia.org/wiki/Aphrodite_Terra",
+      "revision": "1339796486",
+      "extract": "Aphrodite Terra is one of the three continental regions on the planet Venus, the others being Ishtar Terra and Lada Terra. It is named for Aphrodite, the Greek equivalent of the goddess Venus, and is found near the equator of the planet."
+    },
+    {
+      "id": "374",
+      "item": "Q3696561",
+      "title": "Ariadne (crater)",
+      "url": "https://en.wikipedia.org/wiki/Ariadne_(crater)",
+      "revision": "1350313997",
+      "extract": "Ariadne is a crater on Venus. Its central peak serves as the prime meridian of the planet, a status formerly held by a crater known as Eve until relocated."
+    },
+    {
+      "id": "400",
+      "item": "Q706713",
+      "title": "Artemis Chasma",
+      "url": "https://en.wikipedia.org/wiki/Artemis_Chasma",
+      "revision": "1263765962",
+      "extract": "The Artemis Chasma is the nearly circular fracture in Venus's surface which almost encloses Artemis Corona. The chasma and its associating corona can be found on the Aphrodite Terra continent, at Latitude 35° South, Longitude 135° East. It was first described in 1980."
+    },
+    {
+      "id": "401",
+      "item": "Q2864876",
+      "title": "Artemis Corona",
+      "url": "https://en.wikipedia.org/wiki/Artemis_Corona",
+      "revision": "1356456364",
+      "extract": "Artemis Corona is a corona found in the Aphrodite Terra continent, on the planet Venus, at 35°S 135°E."
+    },
+    {
+      "id": "437",
+      "item": "Q20828274",
+      "title": "Asteria Regio",
+      "url": "https://en.wikipedia.org/wiki/Asteria_Regio",
+      "revision": "1351748764",
+      "extract": "Asteria Regio is a geological region on the planet Venus, located in the northern hemisphere near the western portion of the Ishtar Terra highlands and bordered on the southeast by Phoebe Regio."
+    },
+    {
+      "id": "472",
+      "item": "Q2871864",
+      "title": "Aurelia (crater)",
+      "url": "https://en.wikipedia.org/wiki/Aurelia_(crater)",
+      "revision": "1360169018",
+      "extract": "Aurelia is a crater on Venus. It has a large dark surface up range from the crater; lobate flows emanating from crater ejecta, and very radar-bright ejecta and floor. Aurelia has a continuous ejecta radius of 24.9 km, and a wall width of 4.4 km."
+    },
+    {
+      "id": "572",
+      "item": "Q2880626",
+      "title": "Balch (crater)",
+      "url": "https://en.wikipedia.org/wiki/Balch_(crater)",
+      "revision": "1263769300",
+      "extract": "9 in Devana Chasma, Central Beta Regio. It is 40 km in diameter and named after Emily Balch, though it was originally designated Somerville crater. This crater is one of the few examples of tectonically modified craters seen on Venus. Approximately half the crater was subsumed into a valley."
+    },
+    {
+      "id": "584",
+      "item": "Q789766",
+      "title": "Baltis Vallis",
+      "url": "https://en.wikipedia.org/wiki/Baltis_Vallis",
+      "revision": "1229586063",
+      "extract": "86 mi) wide and ~6,800 km (4,200 mi) long, slightly longer than the Nile and the longest known channel of any kind in the Solar System. It is thought the channel once held a river of lava. It is a single channel over most of its length, but anastomoses in several sections, for lengths of up to 400 km (250 mi)."
+    },
+    {
+      "id": "602",
+      "item": "Q15299966",
+      "title": "Baranamtarra (crater)",
+      "url": "https://en.wikipedia.org/wiki/Baranamtarra_(crater)",
+      "revision": "1365137109",
+      "extract": "Baranamtarra is a 25.5 km diameter crater on the surface of Venus. The crater is proximate to the Zverine Chasma, along with Montez, Wheatley, and Kono Mons."
+    },
+    {
+      "id": "623",
+      "item": "Q2614168",
+      "title": "Barton (crater)",
+      "url": "https://en.wikipedia.org/wiki/Barton_(crater)",
+      "revision": "1263769103",
+      "extract": "Barton crater is a 54-km (32-mi) diameter crater on Venus. It is the size at which craters on Venus begin to possess peak rings instead of a single central peak. The floor of Barton crater is flat and radar-dark, indicating possible infilling by lava flows sometime following the impact."
+    },
+    {
+      "id": "650",
+      "item": "Q4837024",
+      "title": "Baʽhet Corona",
+      "url": "https://en.wikipedia.org/wiki/Ba%CA%BDhet_Corona",
+      "revision": "1360183910",
+      "extract": "Baʽhet Corona is a corona on the surface of Venus. About 230 kilometres (140 mi) long and 150 kilometres (93 mi) across, it is adjacent to Onatah Corona. Both features are surrounded by a ring of ridges and troughs, which in places cut more radially-oriented fractures."
+    },
+    {
+      "id": "721",
+      "item": "Q2900039",
+      "title": "Beta Regio",
+      "url": "https://en.wikipedia.org/wiki/Beta_Regio",
+      "revision": "1351748766",
+      "extract": "Beta Regio is a region of the planet Venus known as a volcanic rise. Measuring about 3,000 kilometres in extent, it constitutes a prominent upland region of Venus centered at 25.3°N 282.8°E."
+    },
+    {
+      "id": "784",
+      "item": "Q24293833",
+      "title": "Boala Corona",
+      "url": "https://en.wikipedia.org/wiki/Boala_Corona",
+      "revision": "1371242962",
+      "extract": "Boala Corona is a 220 km diameter corona located in Lada Terra on the surface of Venus. The corona is contained on another corona named Quetzalpetlatl."
+    },
+    {
+      "id": "907",
+      "item": "Q2927445",
+      "title": "Buck (crater)",
+      "url": "https://en.wikipedia.org/wiki/Buck_(crater)",
+      "revision": "1263768700",
+      "extract": "Buck is a crater in the Navka region of Venus. It has the terraced walls, flat radar-dark floor, and central peak that are characteristic of craters classified as \"complex\". The central peak on its floor is unusually large."
+    },
+    {
+      "id": "1224",
+      "item": "Q2974853",
+      "title": "Ciuacoatl Mons",
+      "url": "https://en.wikipedia.org/wiki/Ciuacoatl_Mons",
+      "revision": "1263828253",
+      "extract": "Ciuacoatl Mons is a mountain on Venus. Its name is derived from the Aztec fertility goddess."
+    },
+    {
+      "id": "1240",
+      "item": "Q2545681",
+      "title": "Cleopatra (crater)",
+      "url": "https://en.wikipedia.org/wiki/Cleopatra_(crater)",
+      "revision": "1328141165",
+      "extract": "Cleopatra is an impact crater on Venus, in Maxwell Montes.6 mi) deep. A steep-walled, winding channel a few kilometers wide breaks through the rough terrain surrounding the crater rim. A large amount of lava originating in Cleopatra flowed through this channel and filled valleys in Fortuna Tessera."
+    },
+    {
+      "id": "1348",
+      "item": "Q3007554",
+      "title": "Cunitz (crater)",
+      "url": "https://en.wikipedia.org/wiki/Cunitz_(crater)",
+      "revision": "1263769170",
+      "extract": "Cunitz is a crater on Venus at latitude 14.5, longitude 350.9 in western Eistla Regio. It is 48.6 km in diameter and was named for a 17th-century Silesian astronomer Maria Cunitz."
+    },
+    {
+      "id": "1390",
+      "item": "Q5210889",
+      "title": "Dali Chasma",
+      "url": "https://en.wikipedia.org/wiki/Dali_Chasma",
+      "revision": "1263765886",
+      "extract": "The Dali and Diana Chasma system consist of deep troughs that extend for 7,400 kilometers (4,600 mi) and are very distinct features on Venus. Those chasma connect the Ovda Regio and Thetis Regio highlands with the large volcanoes at Atla Regio and thus are considered to be the \"Scorpion Tail\" of Aphrodite Terra."
+    },
+    {
+      "id": "1401",
+      "item": "Q1164114",
+      "title": "Danilova (crater)",
+      "url": "https://en.wikipedia.org/wiki/Danilova_(crater)",
+      "revision": "1320241570",
+      "extract": "Danilova is an impact crater on Venus. It was named in 1991 after the Russian ballet dancer Maria Danilova."
+    },
+    {
+      "id": "1406",
+      "item": "Q3015743",
+      "title": "Danu Montes",
+      "url": "https://en.wikipedia.org/wiki/Danu_Montes",
+      "revision": "1373374099",
+      "extract": "The Danu Montes are a large surface feature on the surface of Venus, which has a diameter of 808 km. It is one of the planet's four main mountain ranges.5 degrees east longitude. The northern extremity is comparable to Scandinavia, northern Russia, and Alaska on Earth."
+    },
+    {
+      "id": "1441",
+      "item": "Q3020188",
+      "title": "De Lalande (crater)",
+      "url": "https://en.wikipedia.org/wiki/De_Lalande_(crater)",
+      "revision": "1321242862",
+      "extract": "De Lalande is a multiring impact crater on Venus. It has a diameter of 21.6 km (13.4 mi) and wall width of 5.6 km (3.5 mi). The crater has an outer rim but no peak and is in close proximity to the volcano Gula Mons."
+    },
+    {
+      "id": "1512",
+      "item": "Q17149219",
+      "title": "Devana Chasma",
+      "url": "https://en.wikipedia.org/wiki/Devana_Chasma",
+      "revision": "1334583112",
+      "extract": "Devana Chasma is a weak extensional rift zone on Venus, with a length of 4000 km, a width of 150–250 km, and a depth reaching 5 km. Most of the faults are facing north–south. The rift is located in Beta Regio, a 3000 km rise created by volcanic activity."
+    },
+    {
+      "id": "1528",
+      "item": "Q3026664",
+      "title": "Dickinson (crater)",
+      "url": "https://en.wikipedia.org/wiki/Dickinson_(crater)",
+      "revision": "1351253102",
+      "extract": "2 east longitude, in the northeastern Atalanta Region of Venus. It is 69 kilometers (43 mi) in diameter. The crater is complex, characterized by a partial central ring and a floor flooded by radar-dark and radar-bright materials. Hummocky, rough-textured ejecta extend all around the crater, except to the west."
+    },
+    {
+      "id": "1584",
+      "item": "Q15299862",
+      "title": "Dorothy (Venusian crater)",
+      "url": "https://en.wikipedia.org/wiki/Dorothy_(Venusian_crater)",
+      "revision": "1363355558",
+      "extract": "Dorothy Crater is an impact crater on the surface of Venus."
+    },
+    {
+      "id": "1721",
+      "item": "Q15299855",
+      "title": "Edgeworth (crater)",
+      "url": "https://en.wikipedia.org/wiki/Edgeworth_(crater)",
+      "revision": "1360822927",
+      "extract": "Edgeworth is a 29 km diameter crater on the surface of Venus.3 km.5 km. The crater lies on an undistinguished plain near the Modron Corona and in the Bereghinya Planitia."
+    },
+    {
+      "id": "1747",
+      "item": "Q3049511",
+      "title": "Eistla Regio",
+      "url": "https://en.wikipedia.org/wiki/Eistla_Regio",
+      "revision": "1370028765",
+      "extract": "Eistla Regio is an 8015 km diameter region on the surface of Venus, located betweem the Bereghinya Planitia, and the Tinatin Planitia, centered 10.5° North 21.5° East. Its the third largest rise in planform on Venus, after Aphrodite Terra and Beta Regio."
+    },
+    {
+      "id": "1908",
+      "item": "Q2842906",
+      "title": "List of montes on Venus",
+      "url": "https://en.wikipedia.org/wiki/List_of_montes_on_Venus",
+      "revision": "1370042836",
+      "extract": "This is a list of montes on the planet Venus. The largest peaks are clustered in the northern hemisphere of the planet. Four major mountain ranges of Venus are Akna Montes, Danu Montes, Freyja Montes, and Maxwell Montes. They are on the Ishtar Terra, surrounding the Lakshmi Planum."
+    },
+    {
+      "id": "2000",
+      "item": "Q3079746",
+      "title": "Fotla Corona",
+      "url": "https://en.wikipedia.org/wiki/Fotla_Corona",
+      "revision": "1360299060",
+      "extract": "Fotla Corona is a 150 km diameter corona located on the surface of Nsomeka Planitia, on Venus."
+    },
+    {
+      "id": "2024",
+      "item": "Q3087590",
+      "title": "Freyja Montes",
+      "url": "https://en.wikipedia.org/wiki/Freyja_Montes",
+      "revision": "1370471431",
+      "extract": "The Freyja Montes are one of the big four mountain ranges of the planet Venus. They are located at 74.1° N latitude and 333.8° E longitude. Most of the planet's elevated terrain is located in its northern hemisphere."
+    },
+    {
+      "id": "2099",
+      "item": "Q19844528",
+      "title": "Ganis Chasma",
+      "url": "https://en.wikipedia.org/wiki/Ganis_Chasma",
+      "revision": "1327492190",
+      "extract": "Ganis Chasma is a group of rift zones on the surface of the planet Venus. Bright spots detected by the Venus Monitoring Camera on the European Space Agency's Venus Express in the area suggest that there may be active volcanism on Venus."
+    },
+    {
+      "id": "2203",
+      "item": "Q3109834",
+      "title": "Goeppert-Mayer (crater)",
+      "url": "https://en.wikipedia.org/wiki/Goeppert-Mayer_(crater)",
+      "revision": "1275568438",
+      "extract": "Goeppert-Mayer is a crater on the planet Venus. It was named in 1991 after German physicist and Nobel laureate Maria Goeppert-Mayer."
+    },
+    {
+      "id": "2216",
+      "item": "Q3110331",
+      "title": "Golubkina (crater)",
+      "url": "https://en.wikipedia.org/wiki/Golubkina_(crater)",
+      "revision": "1263769371",
+      "extract": "Golubkina is a crater on Venus. It was named in 1985 after the Soviet sculptor Anna Golubkina."
+    },
+    {
+      "id": "2247",
+      "item": "Q15302986",
+      "title": "Gregory (Venusian crater)",
+      "url": "https://en.wikipedia.org/wiki/Gregory_(Venusian_crater)",
+      "revision": "1263768417",
+      "extract": "Gregory is a crater on Venus named after Irish playwright Isabella Augusta Gregory by the IAU in 1994."
+    },
+    {
+      "id": "2253",
+      "item": "Q583686",
+      "title": "Grimke (crater)",
+      "url": "https://en.wikipedia.org/wiki/Grimke_(crater)",
+      "revision": "1263768346",
+      "extract": "Grimke is a crater on Venus at latitude 17.2, longitude 215.3. It is 34.8 km in diameter and is named after Sarah Grimké."
+    },
+    {
+      "id": "2271",
+      "item": "Q5615722",
+      "title": "Guilbert (crater)",
+      "url": "https://en.wikipedia.org/wiki/Guilbert_(crater)",
+      "revision": "1374258912",
+      "extract": "Guilbert is a small 25.5 km diameter impact crater on the surface of Venus. It has a continuous ejecta radius of 16.3 km, and a wall width of 2.5 km."
+    },
+    {
+      "id": "2273",
+      "item": "Q1158958",
+      "title": "Guinevere Planitia",
+      "url": "https://en.wikipedia.org/wiki/Guinevere_Planitia",
+      "revision": "1368869195",
+      "extract": "Guinevere Planitia is an expansive lowland region of Venus that lies east of Beta Regio and west of Eistla Regio. These low-lying plains, particularly in the western portion, are characterized by apparent volcanic source vents and broad regions of bright, dark, and mottled deposits."
+    },
+    {
+      "id": "2276",
+      "item": "Q1554199",
+      "title": "Gula Mons",
+      "url": "https://en.wikipedia.org/wiki/Gula_Mons",
+      "revision": "1347482461",
+      "extract": "Gula Mons is a volcano in western Eistla Regio on Venus; it is 3 kilometers (1.9 mi) high and located at approximately 22 degrees north latitude, 359 degrees east longitude. The name references the Babylonian earth mother or creative force."
+    },
+    {
+      "id": "2448",
+      "item": "Q3130276",
+      "title": "Heng-o Corona",
+      "url": "https://en.wikipedia.org/wiki/Heng-o_Corona",
+      "revision": "1351749419",
+      "extract": "Heng-o Corona is a corona in Guinevere Planitia on the planet Venus at Latitude 2° North, Longitude 355° East. It has a diameter of 1,060 kilometres (660 mi), and is the second largest corona on Venus."
+    },
+    {
+      "id": "2631",
+      "item": "Q15623645",
+      "title": "Iaso Tholus",
+      "url": "https://en.wikipedia.org/wiki/Iaso_Tholus",
+      "revision": "1263759883",
+      "extract": "Iaso Tholus is a feature on Venus."
+    },
+    {
+      "id": "2653",
+      "item": "Q24297245",
+      "title": "Idunn Mons",
+      "url": "https://en.wikipedia.org/wiki/Idunn_Mons",
+      "revision": "1347483099",
+      "extract": "Idunn Mons is a shield volcano on the planet Venus. It is named after Iðunn, a goddess in Norse mythology."
+    },
+    {
+      "id": "2716",
+      "item": "Q15300087",
+      "title": "Irina (crater)",
+      "url": "https://en.wikipedia.org/wiki/Irina_(crater)",
+      "revision": "1263768311",
+      "extract": "Irina is a crater on Venus with a diameter of 15.2 km. The crater is named for a Russian female first name Irina. The name was approved in 1994. Geographic coordinates: 35.0° N, 91.2° E."
+    },
+    {
+      "id": "2721",
+      "item": "Q3154503",
+      "title": "Irnini Mons",
+      "url": "https://en.wikipedia.org/wiki/Irnini_Mons",
+      "revision": "1327238773",
+      "extract": "Irnini Mons is a volcanic structure on the planet Venus, and is named after the Assyro-Babylonian goddess of cedar-tree mountains.09 mi), and is located in Venus' northern hemisphere. More specifically, it is located in the central Eistla Regio region at in the V-20 quadrangle."
+    },
+    {
+      "id": "2723",
+      "item": "Q3154839",
+      "title": "Isabella (crater)",
+      "url": "https://en.wikipedia.org/wiki/Isabella_(crater)",
+      "revision": "1263769412",
+      "extract": "Isabella is the second largest impact crater on Venus. The feature was named in 1994, in honor of the 15th Century queen of Spain, Isabella I of Castile. Located at 30 degrees south latitude, 204 degrees east longitude, the crater has two extensive flow-like structures extending to the south and to the southeast."
+    },
+    {
+      "id": "2733",
+      "item": "Q837306",
+      "title": "Ishtar Terra",
+      "url": "https://en.wikipedia.org/wiki/Ishtar_Terra",
+      "revision": "1367731777",
+      "extract": "Ishtar Terra is the second largest of the three continental terrae regions on the planet Venus, the others being Aphrodite Terra and Lada Terra."
+    },
+    {
+      "id": "2811",
+      "item": "Q6164385",
+      "title": "Jaszai Patera",
+      "url": "https://en.wikipedia.org/wiki/Jaszai_Patera",
+      "revision": "1347483411",
+      "extract": "Jászai Patera is a 40 km (25 mi) to 30 km (19 mi) wide volcanic caldera on Venus containing steep sided lava domes."
+    },
+    {
+      "id": "2813",
+      "item": "Q3175955",
+      "title": "Jeanne (crater)",
+      "url": "https://en.wikipedia.org/wiki/Jeanne_(crater)",
+      "revision": "1361635926",
+      "extract": "Jeanne is a 19.4 km diameter impact crater on the surface of Venus."
+    },
+    {
+      "id": "3222",
+      "item": "Q3215919",
+      "title": "Lada Terra",
+      "url": "https://en.wikipedia.org/wiki/Lada_Terra",
+      "revision": "1360168566",
+      "extract": "Lada Terra, named for a Slavic goddess of Love, is a major landmass near the south pole of Venus which is centered at 60°S and 20°E and has a diameter of 8,615 kilometres (5,353 mi). It is defined by the International Astronomical Union as one of the three \"major landmasses,\" or terrae, of Venus."
+    },
+    {
+      "id": "3244",
+      "item": "Q2368025",
+      "title": "Lakshmi Planum",
+      "url": "https://en.wikipedia.org/wiki/Lakshmi_Planum",
+      "revision": "1328860583",
+      "extract": "Lakshmi Planum is a plateau feature approximately 2 million km2 ringed by rugged mountains, the surface of Venus on the Western Ishtar Terra. It is named after Lakshmi, the Hindu goddess of wealth."
+    },
+    {
+      "id": "3550",
+      "item": "Q1478283",
+      "title": "Maat Mons",
+      "url": "https://en.wikipedia.org/wiki/Maat_Mons",
+      "revision": "1361236147",
+      "extract": "Maat Mons is a massive shield volcano on the planet Venus. It is the planet's tallest individual mountain and volcano. It rises 8 kilometres (5.0 mi) above Venus's mean planetary radius at 0.5°N 194.6°E, and nearly 5 km above the surrounding plains. It is named after the Egyptian goddess of truth and justice, Ma'at."
+    },
+    {
+      "id": "3705",
+      "item": "Q3080828",
+      "title": "Maria Celeste (crater)",
+      "url": "https://en.wikipedia.org/wiki/Maria_Celeste_(crater)",
+      "revision": "1360171781",
+      "extract": "Maria Celeste is an 96.6 km diameter impact crater on the surface of Venus, named in honor of Maria Celeste, the daughter of Galileo Galilei. The name was accepted by the IAU in the year 1991. It has a continuous ejecta radius of 65.3 km, and a wall width of 2.1 km."
+    },
+    {
+      "id": "3709",
+      "item": "Q6763442",
+      "title": "Mariko (crater)",
+      "url": "https://en.wikipedia.org/wiki/Mariko_(crater)",
+      "revision": "1322232036",
+      "extract": "Mariko is an impact crater on Venus. In 1997 it was named for a common female Japanese first name, in accordance with planetary nomenclature rules for Venusian craters under 20 km in diameter."
+    },
+    {
+      "id": "3719",
+      "item": "Q15299585",
+      "title": "Markham (crater)",
+      "url": "https://en.wikipedia.org/wiki/Markham_(crater)",
+      "revision": "1373679278",
+      "extract": "Markham is a 71.8 km diameter impact crater on the surface of Venus."
+    },
+    {
+      "id": "3766",
+      "item": "Q374841",
+      "title": "Maxwell Montes",
+      "url": "https://en.wikipedia.org/wiki/Maxwell_Montes",
+      "revision": "1348042978",
+      "extract": "Maxwell Montes is a mountain range on the planet Venus."
+    },
+    {
+      "id": "3787",
+      "item": "Q1114962",
+      "title": "Mead (crater)",
+      "url": "https://en.wikipedia.org/wiki/Mead_(crater)",
+      "revision": "1288826419",
+      "extract": "Mead is an impact crater on Venus named in honor of the cultural anthropologist Margaret Mead."
+    },
+    {
+      "id": "3808",
+      "item": "Q1754261",
+      "title": "Meitner (Venusian crater)",
+      "url": "https://en.wikipedia.org/wiki/Meitner_(Venusian_crater)",
+      "revision": "1263768635",
+      "extract": "Meitner is a multiring impact crater on Venus. This crater was named in 1979 after the female Austrian-Swedish physicist, Lise Meitner, in her honour."
+    },
+    {
+      "id": "3856",
+      "item": "Q3306514",
+      "title": "Merit Ptah (crater)",
+      "url": "https://en.wikipedia.org/wiki/Merit_Ptah_(crater)",
+      "revision": "1263768726",
+      "extract": "Merit Ptah is an impact crater on Venus, named in honor of alleged ancient Egyptian chief physician Merit Ptah whose existence was later exposed as a hoax."
+    },
+    {
+      "id": "3960",
+      "item": "Q3320058",
+      "title": "Mona Lisa (crater)",
+      "url": "https://en.wikipedia.org/wiki/Mona_Lisa_(crater)",
+      "revision": "1263768839",
+      "extract": "Mona Lisa is a crater on Venus at latitude 25.55, longitude 25.1. It was named in 1991 after Lisa Giacondo, Leonardo da Vinci's model for the painting Mona Lisa."
+    },
+    {
+      "id": "4140",
+      "item": "Q6963602",
+      "title": "Nanichi",
+      "url": "https://en.wikipedia.org/wiki/Nanichi",
+      "revision": "1356454557",
+      "extract": "Nanichi is a crater found the Magellian region on the planet Venus. It measures 19 km in diameter, and is located at +East, 0 - 360 using the planetocentric coordinate system."
+    },
+    {
+      "id": "4262",
+      "item": "Q3341415",
+      "title": "Nightingale Corona",
+      "url": "https://en.wikipedia.org/wiki/Nightingale_Corona",
+      "revision": "1351749396",
+      "extract": "Nightingale Corona is a corona found on the planet Venus. Latitude 63.6° North, Longitude 129.5° East. It has a diameter of 471 kilometers, and is the 35th largest corona on Venus."
+    },
+    {
+      "id": "4298",
+      "item": "Q24294021",
+      "title": "Ninmah Corona",
+      "url": "https://en.wikipedia.org/wiki/Ninmah_Corona",
+      "revision": "1351749384",
+      "extract": "Ninmah Corona is a corona found on the planet Venus, at 16.5°N 49°E Mead Quadrangle. It is named after Ninmah, a Sumer-Akkadian mother goddess."
+    },
+    {
+      "id": "4346",
+      "item": "Q24294027",
+      "title": "Nott Corona",
+      "url": "https://en.wikipedia.org/wiki/Nott_Corona",
+      "revision": "1351749370",
+      "extract": "Nott Corona is a corona, a geological formation in the shape of a crown, located on the planet Venus at -32.3° N and 202° E. It is located in the Isabella quadrangle. It is named after Nótt, the Scandinavian goddess of the Earth."
+    },
+    {
+      "id": "4349",
+      "item": "Q21038839",
+      "title": "Nsomeka Planitia",
+      "url": "https://en.wikipedia.org/wiki/Nsomeka_Planitia",
+      "revision": "1360344325",
+      "extract": "Nsomeka Planitia is a Planitia on the surface of Venus. It got its name from the Bantu culture heroine."
+    },
+    {
+      "id": "4463",
+      "item": "Q7091716",
+      "title": "Onatah Corona",
+      "url": "https://en.wikipedia.org/wiki/Onatah_Corona",
+      "revision": "1351749352",
+      "extract": "Onatah Corona is a corona on Venus adjacent to Ba'het Corona. Both features are surrounded by a ring of ridges and troughs, which in places cut more radially-oriented fractures. The centers of the features also contain radial fractures as well as volcanic domes and flows."
+    },
+    {
+      "id": "4531",
+      "item": "Q3046864",
+      "title": "Ovda Regio",
+      "url": "https://en.wikipedia.org/wiki/Ovda_Regio",
+      "revision": "1360355250",
+      "extract": "Ovda Regio is a Venusian crustal plateau located near the equator in the western highland region of Aphrodite Terra that stretches from 10°N to 15°S and 50°E to 110°E."
+    },
+    {
+      "id": "4538",
+      "item": "Q2043117",
+      "title": "Ozza Mons",
+      "url": "https://en.wikipedia.org/wiki/Ozza_Mons",
+      "revision": "1350260578",
+      "extract": "Ozza Mons is an inactive shield volcano on planet Venus near the equator."
+    },
+    {
+      "id": "4617",
+      "item": "Q24294059",
+      "title": "Pavlova Corona",
+      "url": "https://en.wikipedia.org/wiki/Pavlova_Corona",
+      "revision": "1351749347",
+      "extract": "Pavlova Corona is a corona found on the planet Venus, at 14.5°N 40°E, Mead Quadrangle. It is named after Anna Pavlova, a Russian ballerina (1881–1931)."
+    },
+    {
+      "id": "4705",
+      "item": "Q21038917",
+      "title": "Phoebe Regio",
+      "url": "https://en.wikipedia.org/wiki/Phoebe_Regio",
+      "revision": "1351748773",
+      "extract": "Phoebe Regio is a regio on the planet Venus. It lies to the southeast of Asteria Regio. It is 2,852 kilometres (1,772 mi) in diameter and is the principal feature of the V41 quadrangle, to which it gave its name."
+    },
+    {
+      "id": "4892",
+      "item": "Q15299463",
+      "title": "Qarlygha (crater)",
+      "url": "https://en.wikipedia.org/wiki/Qarlygha_(crater)",
+      "revision": "1263768362",
+      "extract": "Qarlygha is an impact crater on Venus. The crater, based on data provided by the Magellan spacecraft, has an estimated diameter of 9.3 kilometres (5.8 mi) and an elevation of 6,051.66 kilometres (3,760.33 mi)."
+    },
+    {
+      "id": "4899",
+      "item": "Q3414332",
+      "title": "Quetzalpetlatl Corona",
+      "url": "https://en.wikipedia.org/wiki/Quetzalpetlatl_Corona",
+      "revision": "1361944359",
+      "extract": "Quetzalpetlatl Corona is a corona in Lada Terra on the planet Venus. Latitude 68° South, Longitude 357° East. It has a diameter of 780 kilometers, and is the 4th largest corona on Venus."
+    },
+    {
+      "id": "4996",
+      "item": "Q7313460",
+      "title": "Renpet Mons",
+      "url": "https://en.wikipedia.org/wiki/Renpet_Mons",
+      "revision": "1313215005",
+      "extract": "Renpet Mons is a large shield volcano, located on the eastern portion of a ridge-belt province on Venus. It has a diameter of 300 km (190 mi) and is the source for massive lava flows overlying the Snegurochka Planitia plain."
+    },
+    {
+      "id": "5034",
+      "item": "Q3432054",
+      "title": "Riley (crater)",
+      "url": "https://en.wikipedia.org/wiki/Riley_(crater)",
+      "revision": "1263768651",
+      "extract": "Riley is a crater on Venus."
+    },
+    {
+      "id": "5238",
+      "item": "Q3453602",
+      "title": "Ruth (Venusian crater)",
+      "url": "https://en.wikipedia.org/wiki/Ruth_(Venusian_crater)",
+      "revision": "1320271316",
+      "extract": "Ruth is an impact crater on Venus. The crater, based on data provided by the Magellan spacecraft, has an estimated diameter of 18.5 kilometres (11.5 mi) and an elevation of 6,051.365 kilometres (3,760.144 mi)."
+    },
+    {
+      "id": "5264",
+      "item": "Q3329452",
+      "title": "Sacajawea Patera",
+      "url": "https://en.wikipedia.org/wiki/Sacajawea_Patera",
+      "revision": "1332270956",
+      "extract": "Sacajawea Patera is a large, elongate caldera located in Western Ishtar Terra on the smooth plateau of Lakshmi Planum, on the planet Venus.5 degrees North latitude and 337 degrees East longitude. It is approximately 420 km (260 mi) wide at the base."
+    },
+    {
+      "id": "5265",
+      "item": "Q7396776",
+      "title": "Sachs Patera",
+      "url": "https://en.wikipedia.org/wiki/Sachs_Patera",
+      "revision": "1332270896",
+      "extract": "Sachs Patera is a feature on Venus. Defined as a sag-caldera, Sachs is an elliptical depression 130 meters (81 feet) in depth, spanning 40 kilometers (25 mi) in width along its longest axis."
+    },
+    {
+      "id": "5300",
+      "item": "Q24294091",
+      "title": "Sand Corona",
+      "url": "https://en.wikipedia.org/wiki/Sand_Corona",
+      "revision": "1360234849",
+      "extract": "Sand Corona is a 181 km diameter corona and an arachnoid on the surface of Venus.5° E. It sits in a well-developed belt containing complex wrinkle edges that connects Trotula and Sand Coronae to the northwestern twin of Nana-Buluku Coronae."
+    },
+    {
+      "id": "5318",
+      "item": "Q1473902",
+      "title": "Sapas Mons",
+      "url": "https://en.wikipedia.org/wiki/Sapas_Mons",
+      "revision": "1362126745",
+      "extract": "Sapas Mons is a large volcano located in the Atla Regio region of Venus."
+    },
+    {
+      "id": "5404",
+      "item": "Q3110985",
+      "title": "Sedna Planitia",
+      "url": "https://en.wikipedia.org/wiki/Sedna_Planitia",
+      "revision": "1362059062",
+      "extract": "Sedna Planitia is a large lowland area of Venus, south of Ishtar Terra. It is thought to be lava-covered and similar to a lunar mare. Its name is derived from the Inuit sea goddess."
+    },
+    {
+      "id": "5518",
+      "item": "Q3483115",
+      "title": "List of geological features on Venus",
+      "url": "https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus",
+      "revision": "1354303986",
+      "extract": "Venus, the second planet from the Sun, is classified as a terrestrial planet. It is sometimes called Earth's \"sister planet\" due to their similar size, gravity, and bulk composition. The surface of Venus is covered by a dense atmosphere and presents clear evidence of former violent volcanic activity."
+    },
+    {
+      "id": "5524",
+      "item": "Q1476871",
+      "title": "Sif Mons",
+      "url": "https://en.wikipedia.org/wiki/Sif_Mons",
+      "revision": "1367077902",
+      "extract": "Sif Mons is a large shield volcano located in western Eistla Regio, a highland region on Venus. It is composed of a main volcanic structure with a 40-kilometre (25 mi) wide summit caldera surrounded by an outer apron of lava flows 1,200 kilometres (750 mi) in diameter.2 mi) from its base."
+    },
+    {
+      "id": "5649",
+      "item": "Q15299398",
+      "title": "Sophia (crater)",
+      "url": "https://en.wikipedia.org/wiki/Sophia_(crater)",
+      "revision": "1263768329",
+      "extract": "Sophia is a crater on Venus with a diameter of 17.6 km. The crater is named for a Greek female first name Sophia. The name was approved in 1994. Geographic coordinates: 28.6° S, 18.8° E."
+    },
+    {
+      "id": "5688",
+      "item": "Q2385550",
+      "title": "Stefania (crater)",
+      "url": "https://en.wikipedia.org/wiki/Stefania_(crater)",
+      "revision": "1263769091",
+      "extract": "Stefania is a crater on Venus in the northern Sedna Planitia.8 mi) it is one of the smaller craters on Venus.9 mi) in diameter, and even craters smaller than 25 kilometers (16 mi) are relatively scarce. The apron of ejected material suggests that the impacting body made contact with the surface from an oblique angle."
+    },
+    {
+      "id": "5958",
+      "item": "Q2416495",
+      "title": "Theia Mons",
+      "url": "https://en.wikipedia.org/wiki/Theia_Mons",
+      "revision": "1372345667",
+      "extract": "Theia Mons is a large highland shield volcano on the planet Venus. Located near the center of Beta Regio, a large region of recent volcanic uplift due to a currently active mantle plume, Theia Mons is situated at the junction of three branches of Devana Chasma, an extensive rift system."
+    },
+    {
+      "id": "6082",
+      "item": "Q24294133",
+      "title": "Triglava Corona",
+      "url": "https://en.wikipedia.org/wiki/Triglava_Corona",
+      "revision": "1363740728",
+      "extract": "Triglava Corona is a 400 km diameter corona on the surface of Venus, located on the western flank of the Addams crater, and the eastern flank of the Fredegonde crater, and in contact of the Reitia Chasma."
+    },
+    {
+      "id": "6092",
+      "item": "Q21234221",
+      "title": "Trotula Corona",
+      "url": "https://en.wikipedia.org/wiki/Trotula_Corona",
+      "revision": "1360237100",
+      "extract": "Trotula Corona is a 146 km diameter corona and an arachnoid on the surface of Venus. It is part of the largest arachnoid group on Bereghinya planitia, located at the west of the group."
+    },
+    {
+      "id": "6248",
+      "item": "Q586852",
+      "title": "Ushas Mons",
+      "url": "https://en.wikipedia.org/wiki/Ushas_Mons",
+      "revision": "1277366840",
+      "extract": "2-mile) volcano in the southern hemisphere of Venus at 25 degrees south latitude, 323 degrees east longitude. Its name is derived from Vedic goddess of dawn Ushas."
+    },
+    {
+      "id": "6485",
+      "item": "Q3138471",
+      "title": "Wanda (crater)",
+      "url": "https://en.wikipedia.org/wiki/Wanda_(crater)",
+      "revision": "1263769130",
+      "extract": "Wanda is a crater in the Akna Montes on Venus first mapped first by the Soviet Venera 15/16 mission in 1984. It was formed by the impact of an asteroid. The crater has a rugged central peak and a smooth radar-dark floor, probably volcanic material."
+    },
+    {
+      "id": "6531",
+      "item": "Q24294156",
+      "title": "Whatitiri Corona",
+      "url": "https://en.wikipedia.org/wiki/Whatitiri_Corona",
+      "revision": "1367190631",
+      "extract": "Whatitiri Corona is a 300 km diameter corona on the surface of Venus, located at 83.00° South, and 140.00° East. It neighbors a crater named Bickerdyke, and two fluctuses named Yagami, and Naunet."
+    },
+    {
+      "id": "6532",
+      "item": "Q7991926",
+      "title": "Wheatley (crater)",
+      "url": "https://en.wikipedia.org/wiki/Wheatley_(crater)",
+      "revision": "1305560570",
+      "extract": "Wheatley is a crater on Venus at latitude 16.6, longitude 268 in Asteria Regio. It was named in 1994 after Phillis Wheatley, the first black writer of note in America (1753–1784)."
+    },
+    {
+      "id": "6601",
+      "item": "Q15299289",
+      "title": "Xantippe (crater)",
+      "url": "https://en.wikipedia.org/wiki/Xantippe_(crater)",
+      "revision": "1358277464",
+      "extract": "Xantippe is a Crater on the surface of Venus. It was named after the Athenian woman, Xanthippe. It has a continuous ejecta radius of 42.1 km."
+    },
+    {
+      "id": "6603",
+      "item": "Q24294157",
+      "title": "Xcacau Corona",
+      "url": "https://en.wikipedia.org/wiki/Xcacau_Corona",
+      "revision": "1367285842",
+      "extract": "Xcacau Corona is a corona on the planet Venus, in the coordinates -56 ° S and 131 ° E."
+    },
+    {
+      "id": "6605",
+      "item": "Q15299288",
+      "title": "Xenia (crater)",
+      "url": "https://en.wikipedia.org/wiki/Xenia_(crater)",
+      "revision": "1358763875",
+      "extract": "Xenia is a crater on the surface of Venus. It got its name after the Greek first name, and has a continuous ejecta radius of 23.7 km."
+    },
+    {
+      "id": "6608",
+      "item": "Q15299287",
+      "title": "Xi Wang (crater)",
+      "url": "https://en.wikipedia.org/wiki/Xi_Wang_(crater)",
+      "revision": "1361118367",
+      "extract": "Xi Wang is a crater on the surface of Venus. It is also on the surface of the Alta Regio on the right side of Tkashi-mapa Chasma, and above the crater, Olesnicka. It has a continuous ejecta radius of 16.4 km."
+    },
+    {
+      "id": "6610",
+      "item": "Q15299286",
+      "title": "Xiao Hong (crater)",
+      "url": "https://en.wikipedia.org/wiki/Xiao_Hong_(crater)",
+      "revision": "1363082098",
+      "extract": "Xiao Hong is a impact crater on the surface of Venus. It has a continuous ejecta radius of 33.2 km, and a wall width of 5.8 km."
+    },
+    {
+      "id": "6613",
+      "item": "Q15299284",
+      "title": "Ximena (crater)",
+      "url": "https://en.wikipedia.org/wiki/Ximena_(crater)",
+      "revision": "1360826535",
+      "extract": "Ximena is a 12.8 km diameter crater on the surface of Nuptadi Planitia in Venus. It has a continuous ejecta radius of 10.8 km."
+    },
+    {
+      "id": "6622",
+      "item": "Q3571234",
+      "title": "Yablochkina (crater)",
+      "url": "https://en.wikipedia.org/wiki/Yablochkina_(crater)",
+      "revision": "1359601733",
+      "extract": "Yablochkina is an impact crater on the surface of Venus. It was named in 1985 after Soviet actress Aleksandra Yablochkina."
+    },
+    {
+      "id": "6693",
+      "item": "Q18777179",
+      "title": "Zakiya (crater)",
+      "url": "https://en.wikipedia.org/wiki/Zakiya_(crater)",
+      "revision": "1372909118",
+      "extract": "Zakiya is a 7.50 km diameter crater on the surface of Venus. It has a continuous ejecta radius of 13.1 km. It lies on the undistinguished plains, and it neighbors the Sayers crater, and the Vejas-mate Dorsa."
+    },
+    {
+      "id": "6699",
+      "item": "Q15299263",
+      "title": "Zamudio (crater)",
+      "url": "https://en.wikipedia.org/wiki/Zamudio_(crater)",
+      "revision": "1362291164",
+      "extract": "Zamudio is a 19 km diameter crater on the surface of Venus, with a continuous ejecta radius of 9.3 km. It is a flooded crater."
+    },
+    {
+      "id": "6745",
+      "item": "Q8072800",
+      "title": "Zisa Corona",
+      "url": "https://en.wikipedia.org/wiki/Zisa_Corona",
+      "revision": "1351749074",
+      "extract": "Zisa Corona is a corona found on the planet Venus at latitude 12° north, longitude 221° east. It has a diameter of 850 kilometers, and is the 3rd largest corona on Venus."
+    },
+    {
+      "id": "14338",
+      "item": "Q24293987",
+      "title": "Minona Corona",
+      "url": "https://en.wikipedia.org/wiki/Minona_Corona",
+      "revision": "1351749409",
+      "extract": "Minona Corona is a corona found on the planet Venus at 23.5°N 218.5°E. It is located in quadrangle V-27 and was named after the Beninese goddess Minona, who grants fertility to both women and the land."
+    }
+  ]
+}

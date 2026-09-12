@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "1047",
+      "item": "Q2738973",
+      "title": "Cassini Regio",
+      "url": "https://en.wikipedia.org/wiki/Cassini_Regio",
+      "revision": "1271629506",
+      "extract": "Cassini Regio is the enigmatic dark area that covers the leading half of Saturn's moon Iapetus. It is named after Giovanni Cassini, the discoverer of Iapetus; 'Regio' is a term used in planetary geology for a large area that is strongly differentiated in colour or albedo from its surroundings."
+    },
+    {
+      "id": "5173",
+      "item": "Q25908228",
+      "title": "Roland (crater)",
+      "url": "https://en.wikipedia.org/wiki/Roland_(crater)",
+      "revision": "1330089491",
+      "extract": "Roland is a 144 km-wide (89-mile) crater near the north pole of Iapetus, a moon of the planet Saturn. It lies inside one of the bright areas on Iapetus called Roncevaux Terra. Images of Roland show that it has a central peak."
+    },
+    {
+      "id": "5181",
+      "item": "Q1059834",
+      "title": "Roncevaux Terra",
+      "url": "https://en.wikipedia.org/wiki/Roncevaux_Terra",
+      "revision": "1322389751",
+      "extract": "Roncevaux Terra is the name given to the northern part of the highly reflective side of Saturn's moon Iapetus. The southern half of this side is named Saragossa Terra. The other half of Iapetus, named Cassini Regio, is extremely dark."
+    },
+    {
+      "id": "14463",
+      "item": "Q4066188",
+      "title": "Engelier",
+      "url": "https://en.wikipedia.org/wiki/Engelier",
+      "revision": "1336523452",
+      "extract": "Engelier is a 310-mile (500-kilometers) large crater on Saturn's moon Iapetus in Saragossa Terra. It partially obscures the slightly smaller crater Gerin."
+    },
+    {
+      "id": "14466",
+      "item": "Q4480962",
+      "title": "Falsaron (crater)",
+      "url": "https://en.wikipedia.org/wiki/Falsaron_(crater)",
+      "revision": "1347502923",
+      "extract": "Falsaron is a large impact basin located on Saturn's outermost major moon Iapetus."
+    },
+    {
+      "id": "14469",
+      "item": "Q4179635",
+      "title": "Gerin (crater)",
+      "url": "https://en.wikipedia.org/wiki/Gerin_(crater)",
+      "revision": "1336523475",
+      "extract": "Gerin is 445 km wide impact crater on Saturn's moon Iapetus, located on Saragossa Terra. It is partially obscured by the larger crater, Engelier, whose formation has destroyed about half of Gerin. Gerin is located at 45.6°S 233°W"
+    },
+    {
+      "id": "14488",
+      "item": "Q4465828",
+      "title": "Turgis (crater)",
+      "url": "https://en.wikipedia.org/wiki/Turgis_(crater)",
+      "revision": "1353421155",
+      "extract": "Turgis is the second largest known crater on Saturn's moon Iapetus. It is 580 km in diameter, 40% of the moon's diameter and one of the largest craters in the Solar System. It is named after a Saracen baron, Turgis of Turtelose (Tortosa)."
+    },
+    {
+      "id": "14490",
+      "item": "Q24655989",
+      "title": "Carcassone Montes",
+      "url": "https://en.wikipedia.org/wiki/Carcassone_Montes",
+      "revision": "1347415516",
+      "extract": "Carcassone Montes is one of the three mountain range segments of the enigmatic equatorial ridge on Iapetus, Saturn's third largest moon. It is located at the moon's equator, running almost exactly along it for approximately 740 kilometres (460 mi)."
+    },
+    {
+      "id": "14491",
+      "item": "Q24655956",
+      "title": "Cordova Mons",
+      "url": "https://en.wikipedia.org/wiki/Cordova_Mons",
+      "revision": "1353427421",
+      "extract": "Cordova Mons is one of the mountains that make up the equatorial ridge on Iapetus, the third-largest moon of Saturn. It is located exactly on the moon's equator. Cordova Mons is also one of the six or seven mountains that form the mountain range known as Carcassone Montes."
+    },
+    {
+      "id": "14499",
+      "item": "Q22669942",
+      "title": "Saragossa Terra",
+      "url": "https://en.wikipedia.org/wiki/Saragossa_Terra",
+      "revision": "1367803554",
+      "extract": "Saragossa Terra is the name given to the southern part of the highly reflective half of Saturn's moon Iapetus. It is bordered on the north by Roncevaux Terra, and on both the east and west sides by Cassini Regio."
+    },
+    {
+      "id": "15164",
+      "item": "Q24233361",
+      "title": "Abisme",
+      "url": "https://en.wikipedia.org/wiki/Abisme",
+      "revision": "1353421144",
+      "extract": "1°E. Craters such as Falsaron Climborin, Clarin, Dapamort, Johun and Valdebron can be found inside Abisme. It was imaged for the first time by the Cassini spacecraft in 2004.7 km, and covers 52% of the moon's diameter, making it included among the largest craters in the Solar System."
+    }
+  ]
+}
