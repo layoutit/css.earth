@@ -30,6 +30,8 @@ Both use the original [NASA PDS imagery](https://pdssbn.astro.umd.edu/holdings/d
   its qualified caption. [Browser capture](evidence/surface-places.png).
   The published catalog passed a fresh byte-count and SHA-256 check.
 
+- **Reader oracle, 2026-09-12:** `tools/oracles/fits/encounter.py` reads the pinned ITS product `iv05070405_9000632_001_r.fit` with astropy. `tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts` requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, border, flagged and non-finite pixels to agree.
+
 ## Known problems
 
 - Close-up registration measures alignment with an earlier photograph. Absolute placement still inherits the limb anchor and coarse shape model’s uncertainty; this is not a precise survey of the impact site.
