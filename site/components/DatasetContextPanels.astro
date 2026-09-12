@@ -34,30 +34,32 @@ const contributors = (context: (typeof contexts)[number]) => [
   })),
 ];
 // Tabs name the part of the spectrum rather than repeating the heading below
-// them, but two machines can share a band — Arecibo and Goldstone are both
-// radar — so a card falls back to names the moment its labels would collide.
-function tabLabels(credited: readonly { title: string; band?: string }[]) {
+// them, so they only earn their place when every label is different. Two
+// machines can share a band — Arecibo and Goldstone are both radar — and a
+// strip of identical tabs tells the reader nothing, so those stay separate
+// cards as they were.
+const distinctBands = (credited: readonly { band?: string }[]) => {
   const bands = credited.map(entry => entry.band);
-  const distinct = new Set(bands).size === bands.length && bands.every(Boolean);
-  return credited.map(entry => (distinct ? entry.band ?? entry.title : entry.title));
-}
+  return bands.every(Boolean) && new Set(bands).size === bands.length;
+};
 ---
 <template data-prepared-detail="dataset-context" data-deferred-detail={deferMissionContent ? 'true' : undefined}>
   {contexts.map(context => {
     const credited = contributors(context);
-    const tabbed = credited.length > 1;
-    const labels = tabLabels(credited);
+    const tabbed = credited.length > 1 && distinctBands(credited);
+    // Without tabs each contributor keeps its own card, so one card per group.
+    const groups = tabbed ? [credited] : credited.map(entry => [entry]);
     return <div data-dataset-context={context.lens.id} hidden={context.lens.id !== lenses?.defaultLens}>
-      {credited.length > 0 && <PlanetCard class="planet-dataset-context-card" role="region"
-        aria-label={tabbed ? 'Credited machines' : credited[0].title}>
+      {groups.map(group => <PlanetCard class="planet-dataset-context-card" role="region"
+        aria-label={tabbed ? 'Credited machines' : group[0].title}>
         {tabbed && <div class="planet-card-tabs" role="tablist" aria-label="Credited machines">
-          {credited.map((entry, index) => <button type="button" role="tab"
+          {group.map((entry, index) => <button type="button" role="tab"
             id={`${objectId}-${context.lens.id}-${entry.id}-tab`}
             data-information-group={`context-${context.lens.id}`} data-information-tab={entry.id}
             aria-controls={`${objectId}-${context.lens.id}-${entry.id}-panel`}
-            aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? 0 : -1}>{labels[index]}</button>)}
+            aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? 0 : -1}>{entry.band}</button>)}
         </div>}
-        {credited.map((entry, index) => <div class="planet-card-tabpanel"
+        {group.map((entry, index) => <div class="planet-card-tabpanel"
           id={tabbed ? `${objectId}-${context.lens.id}-${entry.id}-panel` : undefined}
           data-information-group={tabbed ? `context-${context.lens.id}` : undefined}
           data-information-panel={tabbed ? entry.id : undefined}
@@ -81,7 +83,7 @@ function tabLabels(credited: readonly { title: string; band?: string }[]) {
             </SelectedContent>
           </article>
         </div>)}
-      </PlanetCard>}
+      </PlanetCard>)}
       {context.notes.length > 0 && <PlanetCard class="planet-dataset-context-card">
         <div class="planet-card-tabpanel">
           {context.notes.map(note => <p class="planet-resource-description">{note}</p>)}
