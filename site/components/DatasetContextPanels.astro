@@ -39,13 +39,31 @@ const contexts = deferMissionContent ? [] : (lenses?.controls ?? []).map(lens =>
         </div>
       </PlanetCard>;
     })}
-    {context.machines.map(vehicle => <PlanetCard class="planet-dataset-context-card" role="region" aria-label={vehicle.name.value}>
-      <div class="planet-card-tabpanel">
-        <article class="planet-machine" data-machine={vehicle.id}>
-          <SelectedContent title={vehicle.name.value} description={vehicle.description.value} href={referenceUrl(vehicle.description)} />
-        </article>
-      </div>
-    </PlanetCard>)}
+    {context.machines.map(vehicle => {
+      const image = vehicle.imageId ? EXPLORATION.images[vehicle.imageId] : undefined;
+      // A machine credited without a mission gets the same card as a mission,
+      // so a ground observatory is not quietly the only text-only contributor.
+      const dates = vehicle.commissioned
+        ? `${vehicle.commissioned.value}${vehicle.retired ? `–${vehicle.retired.value}` : ''}`
+        : vehicle.launch?.value ?? null;
+      return <PlanetCard class="planet-dataset-context-card" role="region" aria-label={vehicle.name.value}>
+        <div class="planet-card-tabpanel">
+          <article class="planet-machine" data-machine={vehicle.id}>
+            <SelectedContent title={vehicle.name.value} description={vehicle.description.value} href={referenceUrl(vehicle.description)}>
+              <div slot="header" class:list={{ 'planet-machine-preview': Boolean(image) }}>
+                <div class:list={['planet-machine-heading', image?.kind === 'published-photograph' && 'planet-machine-heading-backdrop']}>
+                  <h3 class="planet-lens-details-title">{vehicle.name.value}</h3>
+                  {dates && <span class="planet-selected-content-meta">{dates}</span>}
+                </div>
+                {image && <a class="planet-machine-image-link" href={image.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${vehicle.name.value} artwork — ${image.credit}`}>
+                  <img class="planet-machine-image" src={image.src} width={image.width} height={image.height} alt={`${vehicle.name.value} illustration`} loading="lazy" decoding="async" />
+                </a>}
+              </div>
+            </SelectedContent>
+          </article>
+        </div>
+      </PlanetCard>;
+    })}
     {context.notes.length > 0 && <PlanetCard class="planet-dataset-context-card">
       <div class="planet-card-tabpanel">
         {context.notes.map(note => <p class="planet-resource-description">{note}</p>)}
