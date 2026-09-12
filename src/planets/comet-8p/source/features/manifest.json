@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-surface-features-source@1",
+  "source": "Groussin et al. (2019), Table 3 and Section 5.3; Hubble contact-sphere model scaled by Spitzer",
+  "snapshotDate": "2026-09-12",
+  "sourcePage": "https://arxiv.org/abs/1911.04897",
+  "license": "Repository-authored factual compilation; cited source data retain their own terms",
+  "licenseEvidence": "https://arxiv.org/abs/1911.04897",
+  "qualification": "Hubble/Spitzer inferred-model Cartesian metres. X joins the two lobe centres; the origin is the assumed equal-density volume centroid, and the meridian and rotation phase are arbitrary. These are model anatomy anchors, not terrain coordinates. Each caption identifies its source and placement limits. No official centre or boundary is claimed.",
+  "inputs": [
+    {
+      "path": "landmarks.json",
+      "origin": "Project compilation from the individually cited sources",
+      "bytes": 2066,
+      "sha256": "599239a0f268f04dfc90bc18a9c0129ccee30d5bb723a2d0ef87100c4ae0e4fa"
+    }
+  ]
+}

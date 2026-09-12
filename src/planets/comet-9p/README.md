@@ -6,6 +6,8 @@
 
 - 9P/Tempel 1 was visited by Deep Impact in 2005 and Stardust-NExT in 2011.
 
+- The [PDS Tempel 1 shape-model release, version 2.0](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DIF-C-HRIV%2FITS%2FMRI-5-TEMPEL1-SHAPE-V2.0) records the Deep Impact site at about 16° east, 28° south in its `TEMPEL1_2012_PLAN` frame.
+
 ## Photographic views
 
 **Deep Impact** combines eight archived ITS photographs from the 2005 approach. Three cropped close-ups add finer ridges and depressions within the existing view; source sampling reaches 3.1 m/pixel in a small patch. They improve detail over about 6.6 km² of the displayed surface. Total photographic coverage remains around 31%.
@@ -22,9 +24,17 @@ Both use the original [NASA PDS imagery](https://pdssbn.astro.umd.edu/holdings/d
 
 - The [shared qualification record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/QUALIFICATION.md) records verification.
 
+- **Surface place, 2026-09-12:** preparation and the runtime parser accepted the
+  Deep Impact site; three focused unit tests passed. On base `53b262bd` with this
+  addition, searching for the site and switching to the 2005 photographs showed
+  its qualified caption. [Browser capture](evidence/surface-places.png).
+  The published catalog passed a fresh byte-count and SHA-256 check.
+
 ## Known problems
 
 - Close-up registration measures alignment with an earlier photograph. Absolute placement still inherits the limb anchor and coarse shape model’s uncertainty; this is not a precise survey of the impact site.
+
+- The Deep Impact label is one approximate point, not a surveyed crater centre or boundary. Its 16° east, 28° south position follows the PDS 2012 shape model's east-positive, planetocentric frame; it is not transferred between the photographic views.
 
 - The default Source constraints lens uses solid gray for stereo control, blue for limb silhouettes, and the shared gray grid for poorly constrained regions. The grid means poorly constrained by those methods, not necessarily wholly unobserved. Neither view claims observed albedo.
 
