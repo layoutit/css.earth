@@ -26,6 +26,13 @@ The dimensions describe a smooth envelope. Galileo’s resolved craters are evid
 
 ## Evidence
 
+The [whole-body label capture](evidence/surface-labels/whole-body-2c24ca749.jpg), taken at
+`2c24ca749` on 2026-09-12 in the in-app browser at 1280 × 720, shows Acmon and
+Celmis with neither place selected. Both names are visible while the whole moon
+fits on screen; rotating hides the far-side names. The catalog's coordinates,
+diameters and mesh anchors remain unchanged. All 68 catalog and terrain checks
+passed on this revision, including Dactyl's two names.
+
 The [browser conformance report](evidence/dactyl-conformance.json) passed desktop/mobile input, picking, wheel/pinch zoom, lighting, single-scene lifecycle and retained identity at DPR 1/2. Its [DPR 1 video](evidence/dactyl-dpr-1.webm) and [DPR 2 video](evidence/dactyl-dpr-2.webm) retain the input sequences. These were captured at `514f6b497`; body geometry, asset banks and input/lifecycle code remain unchanged in the final renderer at `66448c17d`. The production check below repeats the navigation and presentation affected by later changes.
 
 ![Dactyl with Shadows off](evidence/dactyl-shadows-false.png)
