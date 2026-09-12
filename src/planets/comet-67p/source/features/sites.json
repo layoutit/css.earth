@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-surface-sites@1",
+  "source": "Spacecraft landing, touchdown and impact sites compiled from NASA NSSDCA, PDS, LROC, mission releases and cited papers; every coordinate quotes its page",
+  "retrievedAt": "2026-09-12",
+  "sites": [
+    {
+      "id": "philae-agilkia",
+      "name": "Philae first touchdown (Agilkia)",
+      "kind": "lander",
+      "date": "2014-11-12",
+      "machineId": "philae",
+      "latitudeDeg": 12.04,
+      "longitudeDegEast": 335.69,
+      "coordinateNote": "Actual first touchdown, 112 m from the target point (335.00, +14.75). Latitude as stated: as stated (ESA flight dynamics nucleus frame, version 00085, used for the planned site).",
+      "precisionNote": null,
+      "naming": {
+        "name": "Agilkia",
+        "authority": "ESA/Rosetta mission name (not an IAU name)"
+      },
+      "source": {
+        "title": "Ulamec, S., et al. (2017), The Philae lander mission and science overview, Phil. Trans. R. Soc. A 375:20160248 (PMC5454222)",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5454222/",
+        "publisher": "The Royal Society / PubMed Central",
+        "rights": {
+          "statement": "Page states: Published by the Royal Society. All rights reserved. Not an open licence; used only as the citation for the stated coordinates.",
+          "evidenceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5454222/"
+        }
+      },
+      "quote": "On 12 November 2014, 15:34:04 UTC, Philae touched down at Agilkia (335.69 longitude, 12.04 latitude), just 112 m away from the target point for the landing"
+    },
+    {
+      "id": "philae-abydos",
+      "name": "Philae final resting site (Abydos, Wosret region)",
+      "kind": "lander",
+      "date": "2014-11-12",
+      "machineId": "philae",
+      "latitudeDeg": -9.0,
+      "longitudeDegEast": 357.8,
+      "coordinateNote": "Preliminary 2016 OSIRIS identification refined this to 358.45, -8.15 (uncertain to about 3 m). Latitude as stated: as stated (approximate; same nucleus frame).",
+      "precisionNote": "Approximate; the paper's later imaged position is 358.45, -8.15.",
+      "naming": {
+        "name": "Abydos",
+        "authority": "ESA/Rosetta mission name (not an IAU name)"
+      },
+      "source": {
+        "title": "Ulamec, S., et al. (2017), The Philae lander mission and science overview, Phil. Trans. R. Soc. A 375:20160248 (PMC5454222)",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5454222/",
+        "publisher": "The Royal Society / PubMed Central",
+        "rights": {
+          "statement": "Page states: Published by the Royal Society. All rights reserved. Not an open licence; used only as the citation for the stated coordinates.",
+          "evidenceUrl": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5454222/"
+        }
+      },
+      "quote": "On 12 November 2014, 17:31:17 UTC Philae finally came to rest ... at approximately 357.8 longitude and -9.0 latitude, a site later named Abydos and located in the Wosret (close to the Hatmehit) region on the nucleus ... (preliminary result: 358.45 longitude, -8.15; uncertain to about 3 m"
+    }
+  ],
+  "traverses": []
+}

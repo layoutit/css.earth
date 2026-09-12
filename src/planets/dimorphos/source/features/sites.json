@@ -1,0 +1,30 @@
+{
+  "schema": "cssearth-surface-sites@1",
+  "source": "Spacecraft landing, touchdown and impact sites compiled from NASA NSSDCA, PDS, LROC, mission releases and cited papers; every coordinate quotes its page",
+  "retrievedAt": "2026-09-12",
+  "sites": [
+    {
+      "id": "dart-impact",
+      "name": "DART impact site",
+      "kind": "impact",
+      "date": "2022-09-26",
+      "machineId": null,
+      "latitudeDeg": -8.84,
+      "longitudeDegEast": 264.3,
+      "coordinateNote": "1-sigma uncertainty of the site location +/-68 cm; within 25 m of the centre of figure. Latitude as stated: as stated (Dimorphos body-fixed frame of Daly et al. 2023).",
+      "precisionNote": null,
+      "naming": null,
+      "source": {
+        "title": "Daly, R. T., et al. (2023), Successful kinetic impact into an asteroid for planetary defence, Nature 616, 443-447",
+        "url": "https://www.nature.com/articles/s41586-023-05810-5",
+        "publisher": "Springer Nature",
+        "rights": {
+          "statement": "Open Access - This article is licensed under a Creative Commons Attribution 4.0 International License - Creative Commons Attribution 4.0 International (CC BY 4.0).",
+          "evidenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+        }
+      },
+      "quote": "The spacecraft impacted Dimorphos at 8.84 +/- 0.45 S, 264.30 +/- 0.47 E, within 25 m of the centre of the figure"
+    }
+  ],
+  "traverses": []
+}

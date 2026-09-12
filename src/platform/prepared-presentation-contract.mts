@@ -297,7 +297,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   }
   if (plan.features !== undefined) {
     const features = plan.features;
-    record(features, "surface features", ["catalog", "target", "lensIds", "meshRadiusUnits", "policy", "outline", "surfaceRadiusUnits"]);
+    record(features, "surface features", ["catalog", "target", "lensIds", "meshRadiusUnits", "policy", "outline", "surfaceRadiusUnits", "surfaceEllipsoidUnits"]);
     record(features.catalog, "surface feature catalog", ["url", "bytes", "sha256", "count"]);
     if (!features.catalog.url?.startsWith("/scenes/") || !/^[a-f0-9]{64}$/.test(features.catalog.sha256 ?? "")) fail("surface features require a pinned catalogue");
     integer(features.catalog.bytes, "feature catalog bytes", 1); integer(features.catalog.count, "feature catalog count", 1);
@@ -309,6 +309,17 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       record(features.surfaceRadiusUnits, "surface feature radius band", ["minimum", "maximum"]);
       finite(features.surfaceRadiusUnits.minimum, "surface feature radius minimum"); finite(features.surfaceRadiusUnits.maximum, "surface feature radius maximum");
       if (!(features.surfaceRadiusUnits.minimum > 0) || features.surfaceRadiusUnits.maximum < features.surfaceRadiusUnits.minimum) fail("surface feature radius band is invalid");
+    }
+    if (features.surfaceEllipsoidUnits !== undefined) {
+      if (features.surfaceRadiusUnits !== undefined) fail("surface features declare one surface model");
+      const ellipsoid = features.surfaceEllipsoidUnits;
+      record(ellipsoid, "surface feature ellipsoid", ["equatorial", "polar", "north", "minimumShare", "maximumShare"]);
+      finite(ellipsoid.equatorial, "surface feature equatorial semi-axis"); finite(ellipsoid.polar, "surface feature polar semi-axis");
+      if (!(ellipsoid.polar > 0) || ellipsoid.polar > ellipsoid.equatorial || Math.abs(ellipsoid.equatorial - features.meshRadiusUnits) > 1e-6 * ellipsoid.equatorial) fail("surface feature ellipsoid semi-axes must fit the mesh radius");
+      const north = array(ellipsoid.north, "surface feature polar axis"); north.forEach(n => finite(n, "surface feature polar axis"));
+      if (north.length !== 3 || Math.abs(Math.hypot(north[0], north[1], north[2]) - 1) > 1e-9) fail("surface feature polar axis must be a unit axis");
+      finite(ellipsoid.minimumShare, "surface feature ellipsoid minimum share"); finite(ellipsoid.maximumShare, "surface feature ellipsoid maximum share");
+      if (!(ellipsoid.minimumShare > 0) || ellipsoid.minimumShare > 1 || ellipsoid.maximumShare < 1 || ellipsoid.maximumShare < ellipsoid.minimumShare) fail("surface feature ellipsoid band must contain the reference surface");
     }
     record(features.policy, "surface feature policy", ["minimumZoomShare", "minimumDiameterPixels", "alwaysVisibleCount", "maximumVisible", "limbCosine"]);
     finite(features.policy.minimumZoomShare, "surface feature zoom share"); if (features.policy.minimumZoomShare < 0 || features.policy.minimumZoomShare > 1) fail("surface feature zoom share is out of range");

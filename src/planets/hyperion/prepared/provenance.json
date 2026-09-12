@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "81d3422ea3f8b22dff519928d7926ae731ed97c425e7215b90a67c491802fbc8"
+    "sha256": "4b179c0a6cf6435da8254bd916e1d6f03bbf65f99f669d64942904bbfd22a3e5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
   },
   "recipes": [
     {
@@ -554,7 +554,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "0baeb83c7e847261c9f575ea659043954e36a2214d548e7a64a08528aa8a87ee",
+      "sha256": "3bff50881fb95797b72a029cc359a84dd3e1207a08a3b97c21a90e3ba4a816ba",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -605,7 +605,8 @@
         },
         "outline": {
           "pieces": 256
-        }
+        },
+        "notes": "notes.json"
       }
     }
   ],
@@ -1962,6 +1963,33 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "hyperion-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 1 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts hyperion: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "faa5bc44c08f938af43fbf01dbb5e0785f6c10cc9615e3b832951e9a9d08442f",
+      "bytes": 933,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -2118,13 +2146,14 @@
       "inputs": [
         "hyperion-surface-features-source",
         "usgs-gazetteer-hyperion-nomenclature-center-pts",
-        "hyperion-surface-map-frame"
+        "hyperion-surface-map-frame",
+        "hyperion-surface-feature-notes"
       ],
       "outputs": [
         {
           "url": "/scenes/hyperion/hyperion-features.json",
-          "bytes": 11087,
-          "sha256": "af7b0e6682ed053727ce4f71a9c6cd95e1040e5593e2c10865afe38cd4cbe6bb",
+          "bytes": 11691,
+          "sha256": "cba197d308878700f621ebbda45e9a57c4e21d40e7f9e74ae5ce8f09f32d7d0f",
           "verification": "bytes-verified"
         }
       ],

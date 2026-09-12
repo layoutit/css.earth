@@ -178,3 +178,27 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
       config, maxEntries: 1000, radiusKm: 2600, meshRadiusUnits: 11500, tree, declaredLensIds: ['normal', 'enhanced', 'topography'] }), /datum radius/u);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
+
+test('ellipsoid samplers put geodetic positions on the reference ellipsoid and check a rendered surface against it', async () => {
+  const { ellipsoidSampler, ellipsoidSurfacePoint, normalizedEllipsoidRadius, renderedEllipsoidSampler, surfaceCoordinates } = await import('./ellipsoid.js');
+  const semiAxes = { equatorial: 11500, polar: 11500 * 6356.752 / 6378.137 };
+  for (const [lon, lat] of [[281.53, -0.18], [103.82, 1.35], [338.06, 64.15], [0, 90], [180, -90]] as const) {
+    const point = ellipsoidSurfacePoint(lon, lat, axes, 180, semiAxes);
+    assert.ok(Math.abs(normalizedEllipsoidRadius(point, semiAxes, axes.north) - 1) < 1e-9, `${lon},${lat} lies on the ellipsoid`);
+    const back = surfaceCoordinates(point, axes, 180), geocentric = Math.atan((semiAxes.polar / semiAxes.equatorial) ** 2 * Math.tan(lat * Math.PI / 180)) * 180 / Math.PI;
+    assert.ok(Math.abs(back.latitudeDeg - geocentric) < 1e-6 && (Math.abs(lat) === 90 || Math.abs(back.longitudeDeg - lon) < 1e-6), `${lon},${lat} round-trips through geocentric coordinates`);
+  }
+  // The geodetic normal is the sphere direction; on the ellipsoid it is not radial except at the equator and poles.
+  const pure = ellipsoidSampler(axes, 180, semiAxes), point = pure.point(338.06, 64.15), normal = pure.normal(338.06, 64.15);
+  assert.deepEqual(normal, surfaceDirection(338.06, 64.15, axes, 180));
+  assert.ok(Math.abs(point[2] - semiAxes.polar * Math.sqrt(1 - (Math.hypot(point[0], point[1]) / semiAxes.equatorial) ** 2)) < 1e-6);
+  assert.deepEqual(pure.plan(), { ...semiAxes, north: axes.north, minimumShare: 1, maximumShare: 1 });
+  // A rendered surface that sags below the ellipsoid keeps longitude; the band records how far it sags.
+  const sagging = renderedEllipsoidSampler(axes, 180, semiAxes, (lon, lat) => { const p = ellipsoidSurfacePoint(lon, lat, axes, 180, semiAxes); return [p[0] * 0.99, p[1] * 0.99, p[2] * 0.99]; });
+  sagging.point(10, 20); sagging.point(200, -50);
+  const plan = sagging.plan();
+  assert.ok(Math.abs(plan.minimumShare - 0.99) < 1e-6 && plan.maximumShare === 1, JSON.stringify(plan));
+  assert.throws(() => renderedEllipsoidSampler(axes, 180, semiAxes, () => [0, 0, semiAxes.polar * 0.5]).point(10, 20), /of the ellipsoid radius/u);
+  assert.throws(() => renderedEllipsoidSampler(axes, 180, semiAxes, (lon, lat) => ellipsoidSurfacePoint(lon + 1, lat, axes, 180, semiAxes)).point(10, 20), /different longitude/u);
+  assert.throws(() => renderedEllipsoidSampler(axes, 180, semiAxes, (lon, lat) => ellipsoidSurfacePoint(lon, lat + 4, axes, 180, semiAxes)).point(10, 20), /geodetic latitude/u);
+});

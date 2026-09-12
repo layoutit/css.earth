@@ -94,7 +94,7 @@
         "longitudeDirection": "east",
         "referenceRadiusMeters": 17000
       },
-      "coverage": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05\u20130.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
+      "coverage": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
       "expectedBytes": 228242957,
       "expectedSha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
       "capture": {
@@ -140,7 +140,7 @@
         "longitudeDirection": "east",
         "referenceRadiusMeters": 17000
       },
-      "coverage": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05\u20130.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
+      "coverage": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
       "expectedBytes": 228242957,
       "expectedSha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b",
       "capture": {
@@ -171,7 +171,7 @@
       "expectedSha256": "6c42a16f2ee32aea95f5a4bd753d8723b9ec75c68470f8f3c5f8d5de2ad5f9cb",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EROS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -209,8 +209,8 @@
     {
       "id": "eros-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1090,
-      "expectedSha256": "3fa7d6f718b8566cae6381244bd727aef1e4fc973c23a01c3d8bd811d75c8032",
+      "expectedBytes": 1115,
+      "expectedSha256": "b968d3f8c23a082d116588cf875ab7e0e9588f3ddfc039eaba8a58fc15860f02",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -362,6 +362,29 @@
       "purpose": "Unmodified publisher metadata for the 950 nm albedo map.",
       "expectedBytes": 10462,
       "expectedSha256": "5e9c236b5b423104587b9dc0d351896c07fe709e635c35aff74e9c2ab7ab2c97"
+    },
+    {
+      "id": "eros-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 1269,
+      "expectedSha256": "00a18eafb133828c3a67250ae9b89e4c1b98cedbeebc4a33e2ebbf55d44163e0",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts eros: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

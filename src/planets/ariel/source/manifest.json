@@ -225,8 +225,8 @@
     {
       "id": "ariel-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1113,
-      "expectedSha256": "cbc9965117b82d23e1e57e7857ae55ea058dba84454d94c7f8b218ad7a369bb2",
+      "expectedBytes": 1138,
+      "expectedSha256": "6f276b1b1a5d980d6b15e7d38d6619cbb7b8d01a34bce3476faea22dcab98ef8",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -494,6 +494,29 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1073,
       "expectedSha256": "e139401178ff9b036c04fb60af3defe9e1cf38f6123516f5e58461cd43bebd3a"
+    },
+    {
+      "id": "ariel-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 2600,
+      "expectedSha256": "aa8ea37a21b17f98d4a0c4603d4e9c487295f3e51d6a7b2d85e2cea2cd14b7d5",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 5 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts ariel: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

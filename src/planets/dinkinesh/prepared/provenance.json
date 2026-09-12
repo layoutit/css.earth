@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d4c9cf70de15bc8574efe442d5d87b348d9a5b9f2023ded9c46ce712e5c727c5"
+    "sha256": "83b199aa5ab4b857ea97131574b898a1889fc62bbd9e8cab1d5ceb8db41d4aaa"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
   },
   "recipes": [
     {
@@ -219,7 +219,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "9ed124bd69d372f603596dafa7cd68874e594e7113b7ae200f9903085c88d308",
+      "sha256": "830e408270b9892a993080417cb0c3af620556d9b73489cd8bf9b86dff657bf7",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -269,7 +269,8 @@
         },
         "outline": {
           "pieces": 256
-        }
+        },
+        "notes": "notes.json"
       }
     }
   ],
@@ -397,6 +398,33 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "dinkinesh-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts dinkinesh: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "bytes": 478,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -485,13 +513,14 @@
       "inputs": [
         "dinkinesh-surface-features-source",
         "usgs-gazetteer-dinkinesh-nomenclature-center-pts",
-        "dinkinesh-surface-map-frame"
+        "dinkinesh-surface-map-frame",
+        "dinkinesh-surface-feature-notes"
       ],
       "outputs": [
         {
           "url": "/scenes/dinkinesh/dinkinesh-features.json",
-          "bytes": 3381,
-          "sha256": "e4c321ddd16a07808a255cd03aafcbab3e1622ad535671b56d8d8e10e7b9ed0c",
+          "bytes": 3641,
+          "sha256": "2e5315527afc5246dcf1a76bf5c08f3a4daa0afa8335bbbd87c46307bebf7d36",
           "verification": "bytes-verified"
         }
       ],

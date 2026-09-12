@@ -28,6 +28,8 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Charon (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Dorothy, Nasreddin and the Mandjet/Argo chasmata rims on the New Horizons mosaic coincide with the imagery.
 
+Feature notes: 7 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
+
 - Monochrome values are relative brightness. Enhanced color is false color, with mixed resolution and no per-pixel uncertainty array.
 - Terrain post spacing of 300 m is not a 300 m accuracy claim. Missing areas remain gridded.
 - Bond albedo depends on scattering assumptions and omits unobserved regions. Its label summary mistakenly names Pluto; the target, title, LIDVID and data identify Charon.

@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c24059abe8d9c4f4edcb8b19a4f0275efb66c61eda111c55b02cd37b117064c1"
+    "sha256": "38757b13b62702b453ac1d21370c94b06f20102cf0c1d113f82c6d38c8677d4b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
   },
   "recipes": [
     {
@@ -415,7 +415,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "016bbf80dfe888dcba7fb3bdfb024163f25e8dcde1cd1e4c222b5b736d65d88b",
+      "sha256": "4e2d782185756145e9a393f95e9a65f31404ea156ff5e468f26a3008b13647ce",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -468,7 +468,8 @@
         },
         "outline": {
           "pieces": 256
-        }
+        },
+        "notes": "notes.json"
       }
     }
   ],
@@ -790,6 +791,33 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "bennu-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts bennu: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "bytes": 478,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -1050,13 +1078,14 @@
       "inputs": [
         "bennu-surface-features-source",
         "usgs-gazetteer-bennu-nomenclature-center-pts",
-        "bennu-surface-map-frame"
+        "bennu-surface-map-frame",
+        "bennu-surface-feature-notes"
       ],
       "outputs": [
         {
           "url": "/scenes/bennu/bennu-features.json",
-          "bytes": 33178,
-          "sha256": "063f88ae6cce6d10b2413ed2aa2b2e46ae54aaf0022b147729ad60077e554823",
+          "bytes": 33438,
+          "sha256": "c6a944b30f109cf3696463e6a109a85edc849fe01d73e8c1df978fade0e797f4",
           "verification": "bytes-verified"
         }
       ],

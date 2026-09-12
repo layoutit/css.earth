@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7dc16e22747b1fcf51e3b986ea9ab08a431fd5721c6596f934be17695a289586"
+    "sha256": "20606e3c00f48868afece09a51ed00a86f70412339f65e0f05600eff66f7c520"
   },
   "id": "ida",
   "properties": {
@@ -92,7 +92,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "b7b149d9ef66efbc4b50892579a449a36bf39b2edf255db73423046a0801d487"
+          "sha256": "ca7280e12b6ca2abcde80ee2b3b41d91b7557b21ae5cf66ffe56b4854ee18cff"
         }
       ],
       "features": {
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ed02e8091d05ea326a019ba3548fc085792d7d3afebeafa0ffa130c77a3b3590"
+        "sha256": "06f5bd50e4829984cac1534d2d5a922d7d0f6c51e5a645b8ea7802187fc241ef"
       }
     },
     "catalog": {

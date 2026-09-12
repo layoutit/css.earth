@@ -441,7 +441,7 @@
         "type": "body-centered-radius-grid",
         "longitudeDirection": "west-positive"
       },
-      "coverage": "Radial height above an 83.5 km reference sphere from Stooke\u2019s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5\u00b0 grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
+      "coverage": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -514,7 +514,7 @@
       "expectedSha256": "6c8c8921eb0929a738207b862d02ee3d5452bcc89f7d8f98714260d7cc1ee8db",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/AMALTHEA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -552,8 +552,8 @@
     {
       "id": "amalthea-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1132,
-      "expectedSha256": "bd8daca1e7714fa17ab42a4d55e97d21e5460beffd869463e0cdd45c8bd5e239",
+      "expectedBytes": 1157,
+      "expectedSha256": "74d6b48f1962e6c6c3e7add995fe0b3f79e6156fe635279bd11c59f407e22284",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -719,6 +719,29 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1089,
       "expectedSha256": "cac7d991a2ef6c5ece98f64dc2dfe9e60b0a72a72ddb61b3b2801789f09c92b6"
+    },
+    {
+      "id": "amalthea-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 2424,
+      "expectedSha256": "1be489ba72361b411b6aff145ec081f6834c4c791c14c93de2fe45a6cf37359b",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 4 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts amalthea: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }
