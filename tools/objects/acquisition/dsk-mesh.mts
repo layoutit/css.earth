@@ -36,10 +36,17 @@ export async function prepareDskMesh({sourceRoot, recipe:recipeValue}:{sourceRoo
   if (source.length !== recipe.inputBytes || createHash('sha256').update(source).digest('hex') !== recipe.inputSha256) {
     throw new Error('Pinned DSK source bytes differ.');
   }
+  const python = process.env.CSSEARTH_SPICE_PYTHON ?? 'python3';
+  // Name the requirement before the conversion runs; a bare ModuleNotFoundError
+  // from inside the script tells a contributor nothing about what to install.
+  try { await promisify(execFile)(python, ['-c', 'import numpy'], {timeout: 60000}); }
+  catch (cause) {
+    throw new Error(`DSK mesh conversion needs Python 3 with numpy (\`${python} -m pip install numpy\`, or point CSSEARTH_SPICE_PYTHON at an interpreter that has it).`, {cause});
+  }
   const directory = await mkdtemp(resolve(tmpdir(), 'cssearth-dsk-mesh-'));
   try {
     const destination = resolve(directory, 'mesh.zip');
-    const {stdout} = await promisify(execFile)(process.env.CSSEARTH_SPICE_PYTHON ?? 'python3',
+    const {stdout} = await promisify(execFile)(python,
       [fileURLToPath(new URL('../acquisition/dsk-mesh.py', import.meta.url)), path, JSON.stringify(recipe), destination],
       {maxBuffer: 1024 * 1024, timeout: 300000});
     const report = requireRecord(JSON.parse(stdout)), bytes = await readFile(destination);

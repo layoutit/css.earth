@@ -1,7 +1,7 @@
 import type { RuntimePolicy, WheelInputKind, WheelZoomInertia } from './runtime-policy.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
 import type { NavigationCamera, TrackballMetrics, CameraDelta, ControlsUpdate } from './types.js';
-export interface PreparedWheelZoomOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; rotate(delta: CameraDelta): void; minimumZoom: number; maximumZoom: number; speedMultiplier?: number; useScrollDistance?: boolean; dolly?: { stepPerDelta: number } | null; inertia?: WheelZoomInertia | null; onError?: ((error: unknown) => void) | null; }
+export interface PreparedWheelZoomOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; rotate(delta: CameraDelta): void; minimumZoom: number; maximumZoom: number; speedMultiplier?: number; useScrollDistance?: boolean; dolly?: { stepPerDelta: number } | null; inertia?: WheelZoomInertia | null; inertiaInputKinds?: readonly WheelInputKind[]; onError?: ((error: unknown) => void) | null; }
 export type PreparedWheelZoomControls = ReturnType<typeof createPreparedWheelZoomControls>;
 import { projectSphereDrag } from "@cssearth/engine";
 
@@ -39,9 +39,11 @@ export function createPreparedWheelZoomControls({
   useScrollDistance = runtimePolicy.WHEEL_ZOOM_USE_SCROLL_DISTANCE,
   dolly = null,
   inertia = runtimePolicy.WHEEL_ZOOM_INERTIA,
+  inertiaInputKinds = runtimePolicy.WHEEL_ZOOM_INERTIA_INPUT_KINDS,
   onError = null,
 }: PreparedWheelZoomOptions) {
   const glidePolicy = inertia ?? null;
+  const glideKinds = Object.freeze([...inertiaInputKinds]);
   if (!(inputSurface instanceof HTMLElement) ||
       typeof camera?.state !== "object" ||
       typeof trackballMetrics !== "function" || typeof rotate !== "function" ||
@@ -53,6 +55,7 @@ export function createPreparedWheelZoomControls({
       (glidePolicy !== null && !(glidePolicy.dampingSeconds > 0 && glidePolicy.gain > 0 &&
         glidePolicy.stopLogRatePerSecond > 0 &&
         glidePolicy.stopRateRatio > 0 && glidePolicy.stopRateRatio < 1)) ||
+      !glideKinds.every(kind => kind === "wheel" || kind === "trackpad") ||
       (onError !== null && typeof onError !== "function")) {
     throw new TypeError("Prepared wheel zoom controls are invalid.");
   }
@@ -221,7 +224,8 @@ export function createPreparedWheelZoomControls({
     }
     // The commanded interval is spent. A gesture still carrying rate releases
     // into its glide instead of stopping dead at the target.
-    if (glidePolicy !== null && direction !== 0 && travelRate !== 0) {
+    if (glidePolicy !== null && direction !== 0 && travelRate !== 0 &&
+        (inputKind === null || glideKinds.includes(inputKind))) {
       releasedRate = travelRate * glidePolicy.gain;
       glideRate = releasedRate;
       glidePrevious = timestamp - leftover;

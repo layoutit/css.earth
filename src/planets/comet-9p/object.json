@@ -122,7 +122,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e9f974edc315d0ce24ab1063ff1201e493e87d9ed38b8045d6bcd234edd9a80c"
+        "sha256": "75ab647c2d3aedeeacdfe95d581610deaa033a85fe43cf425803ad78347903d4"
       }
     },
     "catalog": {
@@ -140,9 +140,9 @@
   },
   "schema": "cssearth-object@1",
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a206880d7ed3489f41ae62b5fc42a93fe1418500ef1912175ca3aaa4f1f95952"
+    "sha256": "b5864ed2f4b8782beffed78609dc5fcc7246df2e5b06f29190237dee256579f6"
   },
   "type": "layered-body",
   "id": "comet-9p"
