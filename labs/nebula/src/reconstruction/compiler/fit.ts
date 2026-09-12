@@ -4,6 +4,7 @@ import { jointRayDepths } from '../joint-fit/geometry.js';
 import { readJointParameters } from '../joint-fit/model.js';
 import { createEmissionField, emissionKernel, projectEmissionComponent } from './field.js';
 import { defaultCompilerControls, readCompilerControls, type CompilerControls, type EmissionComponent, type EmissionFieldModel, type EmissionFitInput, type EmissionFitResult } from './field-types.js';
+import { conditionDepthComponents, readDepthRecipe, type DepthRecipe } from './depth-model.js';
 
 interface Basis {
   x: number; y: number; sigma: number; weight: number; pixels: Uint32Array; values: Float32Array; norm: number;
@@ -96,8 +97,10 @@ function buildComponents(bases: Basis[], input: EmissionFitInput, controls: Comp
 }
 /** Fit only the supplied target. Image colors, source selection and stellar overlays never enter this field. */
 export function fitEmissionField(input: EmissionFitInput, requested: unknown = defaultCompilerControls,
-  options: { signal?: AbortSignal; onProgress?(message: string): void } = {}): EmissionFitResult {
+  options: { signal?: AbortSignal; onProgress?(message: string): void; depthRecipe?: DepthRecipe } = {}): EmissionFitResult {
   validateInput(input); const controls = readCompilerControls(requested), grid = fitGrid(input, controls.detail);
+  const depthRecipe = options.depthRecipe && readDepthRecipe(options.depthRecipe);
+  if (depthRecipe && input.scaffold) throw new TypeError('Choose a surface depth model or a joint velocity scaffold; do not silently combine incompatible depth methods.');
   const residual = Float64Array.from(grid.target), bases: Basis[] = [], blocked = new Uint8Array(grid.target.length);
   const componentBudget = Math.round(144 + 336 * controls.detail), cutoff = grid.target.reduce((a, b) => Math.max(a, b), 0) * (.004 + .056 * (1 - controls.faint));
   let outerRadius = 0;
@@ -125,11 +128,11 @@ export function fitEmissionField(input: EmissionFitInput, requested: unknown = d
     depths = depths.filter((z, i) => i === 0 || Math.abs(z - depths[i - 1]) > 1e-3);
     // Preserve the existing projected-basis budget: changing only the depth prior must not
     // consume extra image evidence or change its NNLS weights and residuals.
-    const depthSlots = halo ? 2 : depths.length;
+    const depthSlots = depthRecipe ? 1 : halo ? 2 : depths.length;
     if (allocated + depthSlots > componentBudget) break;
-    const narrowest = Math.max(minSigma, halo ? haloRadiusArcsec * .028 : 0);
+    const narrowest = Math.max(minSigma, halo && !depthRecipe ? haloRadiusArcsec * .028 : 0);
     let best: Basis | undefined, improvement = 0, coefficient = 0;
-    for (const scale of [1, 1.6, 2.7, 4.5, 7.5]) {
+    for (const scale of depthRecipe ? [1, 1.6, 2.7, 4.5, 7.5, 12, 20, 32] : [1, 1.6, 2.7, 4.5, 7.5]) {
       const basis = newBasis(x, y, narrowest * scale, grid, input, depths, halo), dot = correlation(basis, residual, grid);
       const gain = dot > 0 && basis.norm > 0 ? dot * dot / basis.norm : 0;
       if (gain > improvement) { best = basis; improvement = gain; coefficient = dot / basis.norm; }
@@ -139,7 +142,9 @@ export function fitEmissionField(input: EmissionFitInput, requested: unknown = d
     if (bases.length % 16 === 0) { refine(bases, residual, grid, 3); history.push(objective(residual, grid)); options.onProgress?.(`Fitting ${bases.length} smooth emission supports…`); }
   }
   refine(bases, residual, grid, 16); history.push(objective(residual, grid));
-  const components = buildComponents(bases, input, controls, diffuseDepthExtentArcsec);
+  const rawComponents = buildComponents(bases, input, controls, diffuseDepthExtentArcsec);
+  const conditioned = depthRecipe && conditionDepthComponents(rawComponents, depthRecipe, controls.depth);
+  const components = conditioned?.components ?? rawComponents;
   const model: EmissionFieldModel = { schema: 'cssearth-conditional-emission-field@1', identity: '', controls, components, bounds: { min: [-1, -1, -1], max: [1, 1, 1] },
     skyBounds: input.bounds, scaffold: input.scaffold ?? null,
     assumptions: { kernel: 'C1 finite separable squared shifted Gaussian; ±4 sigma support; analytic z integral with a sampled-kernel bake approximation.',
@@ -147,6 +152,12 @@ export function fitEmissionField(input: EmissionFitInput, requested: unknown = d
       depth: 'At depth=1, fitted image supports are split equally among the scaffold ray intersections. Velocities condition that scaffold; individual feature depths and thicknesses remain authored assumptions. Other depth values stretch z and thickness while preserving integrated light; they are authored departures and do not refit the velocity law.',
       halo: 'Unconstrained supports use one centered diffuse conditional prior at z=0, not remote surfaces. At depth=1 its sigmaZ varies with projected support width between 1/8 and 1/4 of the scaffold maximum radius, or twice the signal-squared central RMS radius without a scaffold. Its full finite depth support is bounded by that extent. The separate projected halo extent only sets minimum XY width (2.8%). This is authored uncertain depth, with no measured velocity assignment; analytic integration preserves the fitted light.',
       haloRadiusArcsec, diffuseDepthExtentArcsec, equalNearFarSplit: true, velocityUncoveredComponents: components.filter(c => !c.velocityCovered).length } };
+  if (depthRecipe && conditioned) {
+    model.depthConstraints = { recipeId: depthRecipe.id, evidenceSha256: depthRecipe.evidence.sha256,
+      paperGuidedComponents: conditioned.paperGuidedComponents, authoredComponents: conditioned.authoredComponents, assignments: conditioned.assignments };
+    model.assumptions.depth = 'Evidence-addressed, spatially curved emitting surfaces with locally tilted finite supports. Projected signal controls emission weight; it is never a depth coordinate. All normal thicknesses and surface interpolation remain authored. Depth control scales the assumed z geometry and thickness while preserving analytic projected light. No velocity-to-distance conversion or new kinematic fit.';
+    model.assumptions.halo = 'Outside scoped paper-guided features, the explicitly authored background surface supplies uncertain continuity. Small-scale supports use their own bounded thickness rather than a global depth floor. No observed 3D density or foreground membership is asserted.';
+  }
   model.bounds = createEmissionField(model).bounds;
   model.identity = createHash('sha256').update(JSON.stringify(model)).digest('hex');
   const projection = new Float32Array(input.target.length), fullResidual = new Float32Array(input.target.length), unassigned = new Float32Array(input.target.length);

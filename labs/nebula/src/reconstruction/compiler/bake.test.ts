@@ -6,7 +6,7 @@ import test from 'node:test';
 import sharp from 'sharp';
 import { sha256 } from '../../../../../src/preparation/volume/source.js';
 import type { VolumeSliceQuad, VolumeSlices } from '../../../../../src/preparation/volume/slices.js';
-import { compilerAlphaDigest, compilerFrame, verifyCompilerAlphaIdentity } from './bake.js';
+import { compilerAlphaDigest, compilerFrame, compilerSliceCounts, verifyCompilerAlphaIdentity } from './bake.js';
 
 function slices(path: string, bytes: Buffer): VolumeSlices {
   const quad: VolumeSliceQuad = { id: 'z-0', axis: 'z', sliceIndex: 0, texturePath: path, widthPx: 2, heightPx: 1,
@@ -24,6 +24,17 @@ test('compiler frame centers absolute west/north/away coordinates without changi
   assert.deepEqual(result.frame.boundsUnits, result.localBounds);
   assert.equal(result.frame.referenceFrame, 'lab-sky-angular');
   assert.throws(() => compilerFrame({ min: [0, 0, 0], max: [1, 0, 1] }), /finite increasing/);
+});
+
+test('thin supported features receive finer equally spaced banks without an unbounded slice count', () => {
+  const bounds = { min: [0, 0, 0] as [number, number, number], max: [960, 480, 120] as [number, number, number] };
+  const baseline = compilerSliceCounts(bounds), fine = compilerSliceCounts(bounds, 2);
+  assert.deepEqual(baseline, { x: 192, y: 96, z: 24 });
+  assert.deepEqual(fine, { x: 512, y: 256, z: 64 });
+  assert.equal(bounds.max[0] / fine.x, bounds.max[2] / fine.z);
+  assert.ok(fine.z > baseline.z * 2, 'Thin fronts must not retain the coarse depth stack.');
+  assert.deepEqual(compilerSliceCounts(bounds, 1000), baseline);
+  for (const scale of [0, -1, NaN, Infinity]) assert.throws(() => compilerSliceCounts(bounds, scale), /sampling/);
 });
 
 test('compiler alpha handoff checks decoded bytes, including transparent texels', async t => {

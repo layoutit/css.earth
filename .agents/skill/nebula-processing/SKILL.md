@@ -5,9 +5,9 @@ description: "Process a galaxy or nebula image in the local Nebula Lab: acquire 
 
 # Nebula image to baked 3D model
 
-Work in `labs/nebula`. Read its `AGENTS.md`, `METHOD.md`, `docs/workflows.md` and `docs/reconstruction.md` before changing the pipeline. They define the actual app and numerical gates; this skill explains how to apply it to another source.
+Work in `labs/nebula`. Read its `AGENTS.md`, `METHOD.md`, `docs/workflows.md`, `docs/reconstruction.md` and `docs/nebula-compiler-guidelines.md` before changing the pipeline. They define the actual app, evidence intake and numerical gates; this skill explains how to apply them to another source.
 
-The current app supports LMC/SMC inspection and LMC's VISTA, WISE and Horálek reconstruction variants. A new object requires its own data recipes, registration evidence, frame and appropriate prior. The general procedure is reusable; an arbitrary image is not automatically a configured reconstruction source.
+The app supports density-based LMC/SMC work, the M2–9 symmetry experiment and configured image/constraint-driven compiler subjects. A new object requires data recipes, registration evidence, a frame and appropriate priors. The procedure is reusable; an arbitrary image is not automatically a configured reconstruction source. Do not transfer one object's shell, expansion law or stellar simulation to another without evidence.
 
 ## 1. Define the output and evidence
 
@@ -23,6 +23,15 @@ The current app supports LMC/SMC inspection and LMC's VISTA, WISE and Horálek r
 - Compare angular footprint and resolution before selecting: a sharp central image may miss the full cloud. Keep no-data regions explicit. Never upscale a preview and call it native detail.
 - Use a suitable measured/simulated spatial dataset, with units, frame, observer transform, source hash and limitations. Preserve the full prior before cutting a delivery region. A single photo without depth constraints requires explicitly authored geometry; report this instead of inventing measured depth.
 - Put object-specific choices in `models/<object>/` and acquisition metadata in `sources/`. Reuse algorithms rather than adding image-name branches.
+
+### External physical evidence and method selection
+
+- Follow the guidelines' eligibility matrix: independent density, symmetry, kinematic surfaces, irregular fronts, connected filaments/lobes, and absorption/scattering are different constraints that may be combined. Do not reduce every object to shells.
+- Use bounded primary-source research for spectroscopy, extinction, density diagnostics, distances, proper motions and simulations. An authorized specialist returns source identities, actual coverage and candidate constraints before any costly bake. Keep literature discovery distinct from data qualification and runtime implementation.
+- Preserve exact products, hashes, units, WCS/epoch, beam, spectral frame, masks, missing errors and access status. Full arrays, inspected headers and unavailable downloads are distinct. Never invent validity masks or treat pixel sampling as resolution.
+- Write `models/<object>/physical-evidence.json`: source IDs plus evidence IDs classified `observed`, `published-model` or `authored`, with units, footprint, uncertainty when supplied and limitations. Use Orion's ledger as a record example, not its geometry as a template for other objects.
+- Keep executable method/parameter choices in a separate recipe. Pin its ledger, selected method/evidence IDs and every authored setting. Shared TypeScript owns validation and algorithms; object data owns all target-specific values. Changing evidence must change the affected fit identity.
+- Register constraints to the common image frame. Small core maps cannot constrain an entire complex; label unsupported regions and do not infer depth from image intensity or directly from velocity. Retain competing literature interpretations and explicit tracer-to-model mappings.
 
 ## 3. Register before baking
 
@@ -45,6 +54,8 @@ Importing and aligning a candidate does not authorize processing. A user instruc
 - The strength slider blends completed preview products; it does not change detection. Reconstruction consumes the complete native diffuse output, not this display blend, browser WebP or a second removal pass.
 
 ## 5. Process the volume explicitly
+
+Choose the configured method first. The numbered procedure below is the **fixed-density material workflow**. For image/physical-evidence inference, use `docs/emission-compiler.md` and the process guidelines: compile the selected support hypothesis, fit emission, then paint the same geometry with each lens. For symmetry use `docs/planetary-nebulae.md`. A full user-authorized Compile includes configured source stages; do not add repeated acceptance clicks. New unsupported physical operators remain research work until implemented and tested.
 
 1. Open `/reconstruction`, choose the completed starless source, and press **Preview**. Selecting a candidate alone must not start a bake.
 2. Pin the Alignment density descriptor, prepared slices, source textures, reference projection and catalogue alongside the native starless image and registration. A new object needs an explicitly selected density cloud before it can use this material workflow.

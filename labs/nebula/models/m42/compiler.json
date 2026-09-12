@@ -8,5 +8,6 @@
   "structureCatalogue": ".local/nebula-lab/observations/m42/structures/catalogue.json",
   "defaultSourceId": "eso-optical",
   "maximumStars": 650,
-  "interpretation": "Experimental relative display-emission fit to registered optical and near-infrared outreach composites. This is not calibrated luminosity, gas density, or a measured 3D reconstruction. Depth has a declared unconstrained diffuse prior; no planetary expansion or Helix velocity scaffold is transferred. Shared geometry is painted by separate source lenses. Compact lights retain observed image positions but have illustrative sampled depths and unconfirmed membership."
+  "interpretation": "Evidence-guided visualization using one smooth irregular emitting front and locally tilted finite emission supports. Only central reference scales are paper-guided; full-field curvature, depth ordering, thickness and interpolation are authored. Separate Orion-S/foreground structures, absorption and a measured velocity fit remain unimplemented. RGB brightness determines projected emission, never depth. All image lenses share geometry and alpha; star depths remain conditional, not measured.",
+  "depthRecipe": "labs/nebula/models/m42/depth-model.json"
 }

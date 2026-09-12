@@ -22,16 +22,22 @@ export interface EmissionFitInput {
 export interface EmissionComponent {
   id: string; basisId: string;
   center: EmissionVector3; sigma: EmissionVector3; angleRadians: number;
+  /** Local depth-plane slopes [dz/dxWest, dz/dyNorth]; absent historical records are untilted. */
+  depthGradient?: [number, number];
   /** This component's peak integrated projected emission; z integration recovers this weight. */
   projectedWeight: number;
   /** Historical halo-near/far records remain readable; new unconstrained supports use halo-diffuse. */
-  depthAssignment: 'scaffold-near' | 'scaffold-far' | 'halo-near' | 'halo-far' | 'halo-diffuse';
+  depthAssignment: 'scaffold-near' | 'scaffold-far' | 'halo-near' | 'halo-far' | 'halo-diffuse' | 'evidence-surface';
   velocityCovered: boolean;
 }
 export interface EmissionFieldModel {
   schema: 'cssearth-conditional-emission-field@1'; identity: string;
   controls: CompilerControls; components: EmissionComponent[]; bounds: EmissionBounds;
   skyBounds: SkyBounds; scaffold: JointParameters | null;
+  depthConstraints?: {
+    recipeId: string; evidenceSha256: string; paperGuidedComponents: number; authoredComponents: number;
+    assignments: { componentId: string; featureId: string; methodId: string; evidenceIds: string[]; support: string }[];
+  };
   assumptions: {
     kernel: string; projectionUnits: string; depth: string; halo: string;
     /** Projected extent used only to choose broad XY supports; never an inferred sphere radius. */

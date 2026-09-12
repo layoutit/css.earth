@@ -17,11 +17,20 @@
 .compiler-modes button, .compiler-camera-actions button { flex: 1; }
 .compiler-modes button[aria-pressed="true"], .compiler-camera-actions button[aria-pressed="true"] { background: #34383d; border-color: #788792; }
 .compiler-toggles .observation-check { flex: 1; margin: 0; gap: 6px; }
-.compiler-receipt { margin-top: 16px; border-top: 1px solid var(--divider); padding-top: 10px; font-size: 11px; color: var(--text-secondary); }
-.compiler-receipt summary { color: var(--text-primary); cursor: pointer; }
-.compiler-receipt ol { list-style: none; padding: 0; margin: 10px 0; }
-.compiler-receipt li { display: flex; justify-content: space-between; gap: 10px; margin: 6px 0; }
-.compiler-receipt p { line-height: 1.5; }
+.compiler-pipeline { margin: 0 0 15px; padding-bottom: 10px; border-bottom: 1px solid var(--divider); font-size: 10px; color: var(--text-secondary); }
+.compiler-pipeline-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 5px; }
+.compiler-pipeline-heading > :first-child { font-size: 11px; color: var(--text-primary); }
+.compiler-pipeline ol, .compiler-provenance ul { list-style: none; padding: 0; margin: 0; }
+.compiler-pipeline ol > li { display: grid; grid-template-columns: 11px minmax(0, 1fr) 38px; align-items: center; gap: 5px; line-height: 18px; }
+.compiler-pipeline-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.compiler-pipeline-state { text-align: right; font-size: 9px; }
+.compiler-pipeline-symbol { color: #a7c5d3; }
+.compiler-provenance { margin-top: 7px; }
+.compiler-provenance summary { cursor: pointer; }
+.compiler-provenance ul { margin-top: 8px; }
+.compiler-provenance li { margin: 5px 0; }
+.compiler-provenance p { margin: 8px 0; line-height: 1.5; }
+.compiler-provenance a { color: inherit; }
 .compiler-workspace { position: absolute; inset: 0 340px 0 0; z-index: 1; background: #000; overflow: hidden; }
 .compiler-workspace > section { width: 100%; height: 100%; }
 .compiler-empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--text-secondary); text-align: center; padding: 30px; font-size: 12px; pointer-events: none; }

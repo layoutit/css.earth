@@ -70,6 +70,23 @@ try {
       assert.equal(await page.locator('.compiler-stage').getAttribute('data-compiler-pose'), pose);
     }
     await page.getByRole('button', { name: 'Neutral', exact: true }).click(); await material('', 'neutral'); await snapshot(`${id}-neutral-oblique`);
+    if (id === 'm42' || id === 'carina') {
+      for (const axis of ['west', 'north'] as const) {
+        await page.getByRole('button', { name: 'Earth view', exact: true }).click();
+        await page.getByRole('button', { name: 'Orbit', exact: true }).click();
+        const x = rect.x + rect.width / 2, y = rect.y + rect.height / 2;
+        await page.mouse.move(x, y); await page.mouse.down();
+        await page.mouse.move(x + (axis === 'west' ? 90 / .35 : 0), y - (axis === 'north' ? 89 / .35 : 0), { steps: 12 }); await page.mouse.up();
+        const angles = (await page.locator('.compiler-stage').getAttribute('data-compiler-pose'))!.split(',').map(Number);
+        assert.ok(Math.abs(angles[axis === 'west' ? 0 : 1]! - (axis === 'west' ? 90 : 89)) < .5, 'Side inspection did not reach its intended camera.');
+        await snapshot(`${id}-neutral-${axis}-side`);
+        await page.getByRole('button', { name: 'Textured', exact: true }).click();
+        for (const lens of lenses) {
+          await page.locator('#compiler-lens').selectOption(lens); await material(lens); await snapshot(`${id}-${lens}-${axis}-side`);
+        }
+        await page.getByRole('button', { name: 'Neutral', exact: true }).click(); await material('', 'neutral');
+      }
+    }
     if (id === 'm42') {
       await page.getByRole('button', { name: 'Earth view', exact: true }).click();
       const beforeZoom = await starPresentation();

@@ -6,13 +6,14 @@ import { geometrySha, readGeometryPin } from '../geometry/registered-source';
 import { prepareEvidenceInputs } from '../evidence-fusion/provider';
 import { prepareJointInput, tangentOffsetWestNorth } from '../joint-fit/input';
 import { fitJointModels } from '../joint-fit/fitter';
-import { defaultJointControls, readJointRecipe } from '../joint-fit/model';
+import { defaultJointControls, readJointRecipe, jointRecord, jointPath } from '../joint-fit/model';
 import { readObservations } from '../../alignment/observations-ui/model';
 import { COMPILER_VERSION, readCompilerRecipe, type CompilerRequest } from './model';
 import { restoreCompilerInputs, type CompilerProgress } from './prerequisites';
 import { compilerTarget, loadCompilerImages, compilerImagePanel } from './images';
 import { fitEmissionField } from './fit';
 import { createEmissionField } from './field';
+import { loadDepthModel, readDepthRecipe, verifyDepthEvidence } from './depth-model';
 import { bakeCompiler } from './bake';
 import { compilerStars } from './stars';
 import { readCompilerResult, type CompilerResult } from './result';
@@ -20,6 +21,19 @@ import type { CompilerPin } from './bake-types';
 export async function validateCompilerResult(root: string, value: unknown) {
   const result = readCompilerResult(value);
   for (const pin of [result.model, result.method, result.target, result.projection, result.residual, ...result.sources.flatMap(s => [s.original, s.starless])]) await readGeometryPin(root, pin);
+  const method: unknown = JSON.parse((await readGeometryPin(root, result.method)).toString());
+  if (jointRecord(method) && method.physicalDepth !== undefined) {
+    const depth = method.physicalDepth;
+    if (!jointRecord(depth)) throw new TypeError('Invalid saved physical-depth method.');
+    const snapshot = async (v: unknown) => {
+      if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith(`.local/nebula-lab/compiler/${result.id}/`) ||
+          typeof v.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(v.sha256)) throw new TypeError('Invalid physical evidence snapshot.');
+      return readGeometryPin(root, { path: v.path, sha256: v.sha256 });
+    };
+    const recipe = readDepthRecipe(JSON.parse((await snapshot(depth.recipe)).toString())), evidence = await snapshot(depth.evidence);
+    if (geometrySha(evidence) !== recipe.evidence.sha256) throw new TypeError('Saved depth recipe and evidence differ.');
+    verifyDepthEvidence(recipe, JSON.parse(evidence.toString()));
+  }
   for (const pin of [result.scene.neutral, ...result.scene.lenses.map(lens => lens.volume)]) {
     const volume = validatePreparedCssVolume(JSON.parse((await readGeometryPin(root, pin)).toString())), directory = pin.path.slice(0, pin.path.lastIndexOf('/') + 1);
     for (const resource of volume.resources) await readGeometryPin(root, { path: directory + resource.path, sha256: resource.sha256 });
@@ -31,6 +45,14 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
   const recipeBytes = await readFile(resolve(root, request.recipePath)), recipe = readCompilerRecipe(JSON.parse(recipeBytes.toString()));
   if (request.cataloguePath !== recipe.structureCatalogue) throw new TypeError('Compiler recipe and source catalogue differ.');
   const pipeline = await restoreCompilerInputs(root, recipe, signal, progress), observations = readObservations(JSON.parse(await readFile(resolve(root, recipe.observationCatalogue), 'utf8')));
+  const evidenceStarted = performance.now();
+  if (recipe.depthRecipe) progress('Verifying physical evidence and depth assumptions…', .19);
+  const depthModel = recipe.depthRecipe ? await loadDepthModel(root, recipe.depthRecipe, recipe.id) : undefined;
+  if (depthModel) {
+    if (depthModel.recipe.centerIcrsDegrees.some((value, index) => Math.abs(value - observations.frame.centerIcrsDegrees[index]!) > 1e-8))
+      throw new TypeError('Depth model and registered images use different sky origins.');
+    pipeline.push({ id: 'evidence-intake', label: 'Verify physical evidence', state: 'complete', seconds: (performance.now() - evidenceStarted) / 1000 });
+  }
   const inputs = await prepareEvidenceInputs(root, recipe.structureCatalogue, { imageToFrame: request.imageToFrame });
   const weights = request.evidence.weights.length ? request.evidence.weights : inputs.sources.map(() => 1);
   if (weights.length !== inputs.sources.length || !weights.some(w => w > 0)) throw new TypeError('Enable at least one source image.');
@@ -48,6 +70,7 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
   const id = geometrySha(JSON.stringify({ version: COMPILER_VERSION, implementation, recipe: geometrySha(recipeBytes), input: inputs.identity,
     sourceLayers: sourceData.images.map(image => [image.id, image.original.sha256, image.diffuse.sha256, image.stars.sha256]),
     molecular: joint && { recipe: joint.recipeSha256, evidence: joint.evidence },
+    physicalDepth: depthModel && { recipe: depthModel.recipeSha256, evidence: depthModel.recipe.evidence.sha256 },
     request: { controls: request.controls, evidence: { sensitivity: request.evidence.sensitivity, weights } } }));
   const directory = `.local/nebula-lab/compiler/${id}`, receipt = resolve(root, directory, 'result.json');
   try { const cached = await validateCompilerResult(root, JSON.parse(await readFile(receipt, 'utf8'))); progress('Prepared nebula restored', 1); return cached; }
@@ -56,16 +79,17 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
   async function save(name: string, bytes: Uint8Array): Promise<CompilerPin> {
     signal.throwIfAborted(); const path = `${directory}/${name}`, target = resolve(root, path); await writeFile(`${target}.pending`, bytes); await rename(`${target}.pending`, target); return { path, sha256: geometrySha(bytes) };
   }
-  let started = performance.now(); progress('Fitting the velocity scaffold…', .22);
+  let started = performance.now();
+  if (joint) progress('Fitting the velocity scaffold…', .22);
   const scaffoldFit = joint ? fitJointModels(joint.evidence, defaultJointControls, joint.recipe, message => progress(message, .24), signal) : undefined;
-  pipeline.push({ id: 'scaffold', label: joint ? 'Fit velocity scaffold' : 'Explicit image-only depth prior', state: 'complete', seconds: (performance.now() - started) / 1000 });
+  if (!depthModel) pipeline.push({ id: 'scaffold', label: joint ? 'Fit velocity scaffold' : 'Explicit image-only depth prior', state: 'complete', seconds: (performance.now() - started) / 1000 });
   started = performance.now(); progress('Fitting the complete emission structure…', .3);
   const fitted = fitEmissionField({ ...target, scaffold: scaffoldFit?.fits[0]?.parameters,
     velocityCoverage: joint?.evidence.velocities.map(p => ({ x: p.x, y: p.y, radiusArcsec: joint!.evidence.beamFwhmArcsec / 2 })) }, request.controls,
-    { signal, onProgress: message => progress(message, .36) });
+    { signal, depthRecipe: depthModel?.recipe, onProgress: message => progress(message, .36) });
   if (fitted.field.components.length === 0) throw new Error('No usable nebular emission survived. Inspect source alignment and star removal.');
   const field = createEmissionField(fitted.field), model = await save('field.json', Buffer.from(JSON.stringify(fitted.field)));
-  pipeline.push({ id: 'field', label: 'Fit 3D emission components', state: 'complete', seconds: (performance.now() - started) / 1000 });
+  pipeline.push({ id: depthModel ? 'depth-model' : 'field', label: depthModel ? 'Fit emission on evidence-guided surfaces' : 'Fit 3D emission components', state: 'complete', seconds: (performance.now() - started) / 1000 });
   progress('Placing observed compact lights in the inferred field…', .42); started = performance.now();
   const stars = await compilerStars(source, fitted.field, recipe.maximumStars, sourceData.images);
   pipeline.push({ id: 'stars', label: 'Prepare compact lights', state: 'complete', seconds: (performance.now() - started) / 1000 });
@@ -76,6 +100,7 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
   started = performance.now();
   const scene = await bakeCompiler({ root, outputDirectory: `${directory}/scene`, id, fieldIdentity: fitted.field.identity,
     boundsArcsec: field.bounds, skyBoundsArcsec: skyBounds, sampleEmission: field.sampleEmission, stars,
+    minimumFeatureScaleArcsec: depthModel ? Math.min(...fitted.field.components.flatMap(component => component.sigma)) : undefined,
     lenses: sourceData.images.map(image => ({ id: image.id, label: image.label, sampleRgb: image.sampleRgb })), signal,
     progress: value => progress(value.message, value.phase === 'volume' ? .45 + .2 * value.completed / value.total : value.phase === 'texture' ? .65 + .25 * value.completed / value.total : .92) });
   pipeline.push({ id: 'bake', label: 'Bake shared geometry + image lenses', state: 'complete', seconds: (performance.now() - started) / 1000 });
@@ -92,10 +117,15 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
     return save(name, await sharp(rgba, { raw: { width: target.width, height: target.height, channels: 4 } }).png().toBuffer());
   };
   const [targetPin, projection, residual] = await Promise.all([panel('target.png', target.target), panel('projection.png', fitted.projection), panel('residual.png', fitted.residual, true)]);
+  const physicalDepth = depthModel ? {
+    recipe: await save('depth-recipe.json', depthModel.recipeBytes), evidence: await save('physical-evidence.json', depthModel.evidenceBytes),
+    methods: depthModel.methods, interpretation: depthModel.recipe.interpretation, assignments: fitted.field.depthConstraints,
+  } : undefined;
   const method = await save('method.json', Buffer.from(JSON.stringify({ version: COMPILER_VERSION, implementation, recipe, recipeSha256: geometrySha(recipeBytes), request,
+    physicalDepth,
     inputIdentity: inputs.identity, target: { ...target, target: undefined, coverage: undefined }, scaffoldFit, fieldMetrics: fitted.metrics,
     assumptions: fitted.field.assumptions, stars: 'Compact points detected once from the reference stellar residual. Each lens preserves its own local background-subtracted residual aperture display energy and angular footprint at the same registered xy; absent coverage or residual emits zero light. Only columns with fitted emission are included. Depth is a deterministic conditional field sample, unchanged across lenses, not a measured stellar distance or confirmed membership. Encoded RGB display accounting is not calibrated stellar flux, and stars visible only outside the reference catalogue are not added.',
-    materials: 'Independent RGB-only lenses. Every source uses the identical fitted field and every neutral alpha byte. No image ray normalization.',
+    materials: 'Independent RGB-only lenses. Every source uses the identical fitted field and every neutral alpha byte. Evidence-guided thin fields weight material chromaticity by the same emitting sub-samples used for each geometry slab; missing material remains neutral. No image ray normalization.',
     pipeline }, null, 2)));
   const m = fitted.metrics;
   const result: CompilerResult = { schema: 'cssearth-nebula-compiler-result@1', id, label: recipe.label, defaultSourceId: recipe.defaultSourceId, controls: request.controls, scene, sources, pipeline,

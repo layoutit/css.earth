@@ -32,9 +32,20 @@ The optical image covers the main M42 nebula and its immediate cluster; the infr
 
 The source packet was verified against both image SHA-256 values and decoded TIFF dimensions using the strict TypeScript observation, structure and compiler readers. This source qualification does **not** assert passed stellar registration, completed star removal, a completed bake or a validated 3D shape. Those processing receipts remain tied to their specific output identities.
 
-Without spectroscopy or an independent volume, the compiler’s depth is a conditional diffuse prior. Compact lights are detected image features with illustrative depths; they are not a catalog of confirmed members with measured distances.
+The compiler uses an evidence-addressed, authored irregular front. Compact lights are detected image features with conditional depths; they are not a catalog of confirmed members with measured distances.
 
-The [Orion structure and velocity research](physical-structure.md) identifies the current extrusion error, public spectroscopic maps, component-specific physical models and the next constrained experiment. These measurements are not yet wired into the compiler.
+The [Orion structure and velocity research](physical-structure.md) records public spectroscopic maps and component-specific physical models. Published morphology and local reference scales guide the current support recipe. The downloaded velocity/diagnostic arrays are not yet fitted.
+
+## Evidence-guided depth experiment
+
+[physical-evidence.json](physical-evidence.json) distinguishes observed quantities, published models and authored choices. [depth-model.json](depth-model.json) pins that ledger and contains every active support parameter. The generic compiler verifies both, preserves immutable copies with each result, then fits projected emission on locally tilted finite supports.
+
+- One curved front supplies coherent depth. Small features keep local thickness; the former global depth floor no longer stretches them into long columns. Inclination preserves each support's analytic observer projection.
+- The central reference uses the approximate 0.2 pc star/front separation and 0.1 pc equivalent emitting layer at the paper's 440 pc distance. The 100″ × 90″ blending window, curvature and interpolation are authored. These scales never define the whole 104′ image frame.
+- The wider curvature and southwest opening are visualization hypotheses. The separate Orion-S cloud, incomplete OIII cavity, foreground Veil, extinction and radiative-transfer physics remain unsupported by this single-surface model. A smooth deformation must not be described as their reconstruction.
+- The implementation fits relative image emission, not mass density. Changing depth does not fit velocities. Optical/VISTA use identical geometry and alpha, and keep their source-specific stellar appearance.
+
+The [Nebula Compiler Process Guidelines](../../docs/nebula-compiler-guidelines.md) describe the reusable evidence intake, method selection and acceptance workflow. Carina is the next independent experiment; Orion's numerical recipe is not transferred to it.
 
 ## Star photometry correction · 12 September 2026
 
@@ -47,3 +58,17 @@ The exact saved request (Detail 100%, Faint 35%, Depth 1×) was rebuilt as `e94e
 Validation: strict lab TypeScript, lab build and 300 passing tests (two skipped). Restoring the old opacity floor makes the photometry regression fail. Real Chromium inspection of both M42 lenses verified fixed star centers, lens-specific appearance, angular sizing during zoom, rotation, star visibility, original overlay and refresh. Front/oblique images were inspected: excessive star amplification is corrected; diffuse side geometry and optical coverage boundaries remain visible and unresolved.
 
 See [the completed batch assessment and current failures](../inference-candidates/README.md#first-processing-result--2026-09-12), [the compiler method](../../docs/emission-compiler.md) and [workflow](../../docs/workflows.md).
+
+## Coherent-front comparison · 12 September 2026
+
+Default result: `a4cfffa36c6c4c39b9239d550477a1ef408ae6cd625572ce6f8cf77fcce247a9` (Detail 65%, Faint 35%, Depth 1×). Its method record snapshots the runnable recipe and evidence ledger and pins the implementation owners. The fit contains 355 supports and 650 compact lights; observer RMSE is 0.030138, missing relative signal 8.05% and excess relative signal 9.86%. These compare against the combined display target, not calibrated flux.
+
+The XYZ bake uses 321/512/127 slabs, 512px in-plane width and four samples per slab. Material color is emission-weighted within each slab. Both source lenses preserve the neutral alpha digest `873b51ef6fda0ea8f156dd4e6df72a5020762e3385c999596f39163fbc04a564`. The final geometry/material bake took 38.6 seconds with alignment and NOX reused; source acquisition and initial separation are excluded.
+
+Real Chromium inspection passed source switching, stable star positions across lenses, star visibility, original overlay, refresh, observer/oblique and 90° west/89° north views. No inspection action started processing. The rotating shape has localized thickness rather than the previous uniform deep columns.
+
+The earlier default observer RMSE was 0.039561; the current fit reduces it by 23.8%. This gain also reflects narrower XY supports and a larger usable basis budget, not just changing depth. The saved 100% Detail request and original image transforms were separately completed as `a5bdb41f1919160d14010649395451a4b89314ca291b1fa796454ecfb1d63887`. User settings and historical receipts were not overwritten.
+
+Visual limits: the support remains a coarse authored surface, and oblique color bands/fine slice traces remain visible. Narrow optical coverage leaves explicitly neutral material outside its footprint. This is a useful experimental comparison, not production visual acceptance or a measured 3D density. Three bounded iterations addressed the depth floor/tilt, slab spacing and material sampling; further artifact work belongs in volumetric material reconstruction and sampling, not invented evidence or per-view image masks.
+
+Next: qualify physical-map coverage and uncertainty, implement a compatible forward observable, then compare multiple distinct fronts/embedded structures. Keep the present single-front hypothesis as a baseline; do not interpret its local smooth deformations as recovered cavities or shells.

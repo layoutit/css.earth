@@ -8,5 +8,6 @@
   "structureCatalogue": ".local/nebula-lab/observations/carina/structures/catalogue.json",
   "defaultSourceId": "eso-optical",
   "maximumStars": 650,
-  "interpretation": "Experimental relative display-emission fit to registered optical and near-infrared outreach composites. This is not calibrated luminosity, gas density, or a measured 3D reconstruction. Depth has a declared unconstrained diffuse prior; no planetary expansion or Helix velocity scaffold is transferred. Shared geometry is painted by separate source lenses. Compact lights retain observed image positions but have illustrative sampled depths and unconfirmed membership."
+  "interpretation": "Experimental relative display-emission fit to registered optical and near-infrared outreach images on an evidence-linked authored single height surface. Observed sky anchors and published local topology motivate deformations; all depth, curvature and thickness remain authored and the wide background is unconstrained. No velocities, extinction or gas-density measurements are fitted. This solver cannot represent overlapping shells or foreground absorption. Shared geometry and conditional compact lights remain identical across image lenses.",
+  "depthRecipe": "labs/nebula/models/carina/depth-model.json"
 }

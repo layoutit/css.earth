@@ -1,7 +1,7 @@
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { EmissionBounds, EmissionVector3, SkyBounds } from './field-types.js';
 
-export const COMPILER_LONGEST_AXIS_SLICES = 192;
+export const COMPILER_LONGEST_AXIS_SLICES = 512;
 
 export interface CompilerPin { path: string; sha256: string }
 export interface CompilerLensVolume {

@@ -2,6 +2,8 @@
 
 Updated 2026-09-11. Start with [NEXTSTEPS.md](NEXTSTEPS.md) to continue the work and [METHOD.md](METHOD.md) to reproduce the implemented pipeline.
 
+The [Nebula Compiler Process Guidelines](docs/nebula-compiler-guidelines.md) define how to combine methods for new objects and turn literature/data into source-pinned constraints. Keep the existing [paper and method assessment](docs/novelty-assessment.md) as the literature inventory; an evidence-assisted workflow does not itself establish a new reconstruction algorithm.
+
 The [12 September Orion structure/velocity intake](models/m42/physical-structure.md) records why the new image-only M42 depth fails, the published front/shell/flow models and public spectroscopic maps to constrain its replacement. Those measurements have not yet been integrated.
 
 ## What exists today

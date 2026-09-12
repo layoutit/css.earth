@@ -6,6 +6,7 @@ import { spawn } from 'node:child_process';
 import { readCompilerRecipe, defaultCompilerControls } from '../reconstruction/compiler/model';
 import { compileNebula, validateCompilerResult } from '../reconstruction/compiler/compile';
 import { jointRecord, jointPath } from '../reconstruction/joint-fit/model';
+import { loadDepthModel } from '../reconstruction/compiler/depth-model';
 
 const [cataloguePath, ...args] = process.argv.slice(2);
 if (!cataloguePath || args.some(arg => arg !== '--alignment-only' && !/^--object=[a-z0-9-]+$/.test(arg))) {
@@ -65,14 +66,23 @@ for (const candidate of selected) {
       const resultPin = await pin(`.local/nebula-lab/compiler/${result.id}/result.json`);
       const inputPaths = [candidate.compilerRecipe, recipe.observationRecipe, recipe.observationCatalogue, recipe.structureRecipe, recipe.structureCatalogue];
       if (recipe.jointRecipe) inputPaths.push(recipe.jointRecipe);
+      const depth = recipe.depthRecipe ? await loadDepthModel(root, recipe.depthRecipe, recipe.id) : undefined;
+      if (depth) inputPaths.push(depth.recipePath, depth.recipe.evidence.path);
       const method: unknown = JSON.parse(await readFile(result.method.path, 'utf8'));
       if (!jointRecord(method) || !Array.isArray(method.implementation)) throw new TypeError('Missing compiler implementation identity.');
+      if (depth && (!jointRecord(method.physicalDepth) || !jointRecord(method.physicalDepth.recipe) || !jointRecord(method.physicalDepth.evidence) ||
+          method.physicalDepth.recipe.sha256 !== depth.recipeSha256 || method.physicalDepth.evidence.sha256 !== depth.recipe.evidence.sha256))
+        throw new TypeError('Compiled depth sources differ from the configured recipe or evidence.');
       for (const owner of method.implementation) {
         if (!jointRecord(owner) || typeof owner.name !== 'string' || !/^[a-z0-9-]+\.ts$/.test(owner.name)) throw new TypeError('Invalid compiler implementation owner.');
         inputPaths.push(`labs/nebula/src/reconstruction/compiler/${owner.name}`);
       }
+      const inputs = await Promise.all(inputPaths.map(pin));
+      if (depth && (inputs.find(source => source.path === depth.recipePath)?.sha256 !== depth.recipeSha256 ||
+          inputs.find(source => source.path === depth.recipe.evidence.path)?.sha256 !== depth.recipe.evidence.sha256))
+        throw new TypeError('Depth inputs changed during publication. Compile again.');
       await save(resolve(published, `${candidate.id}.json`), { schema: 'cssearth-nebula-compiler-published@1', recipePath: candidate.compilerRecipe,
-        result: resultPin, inputs: await Promise.all(inputPaths.map(pin)) });
+        result: resultPin, inputs });
       results.push({ id: candidate.id, status: 'complete', result: resultPin, metrics: result.metrics, seconds: (performance.now() - started) / 1000 });
     }
     console.log(`CANDIDATE_COMPLETE ${candidate.id}`);

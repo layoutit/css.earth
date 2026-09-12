@@ -36,14 +36,37 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   const inputs = await Promise.all(publication.inputs.map(async source => [source.path, await checkedBytes(source, fetchLocal)] as const));
   const recipeBytes = inputs.find(([path]) => path === recipePath)![1];
   const recipe = readCompilerRecipe(JSON.parse(new TextDecoder().decode(recipeBytes)));
-  const required = [recipe.observationRecipe, recipe.observationCatalogue, recipe.structureRecipe, recipe.structureCatalogue, ...(recipe.jointRecipe ? [recipe.jointRecipe] : [])];
+  const required = [recipe.observationRecipe, recipe.observationCatalogue, recipe.structureRecipe, recipe.structureCatalogue,
+    ...(recipe.jointRecipe ? [recipe.jointRecipe] : []), ...(recipe.depthRecipe ? [recipe.depthRecipe] : [])];
   if (required.some(path => !inputs.some(([candidate]) => candidate === path))) throw new Error('Prepared nebula receipt does not pin every configured source.');
+  let depthInputs: { recipe: Pin; evidence: Pin } | undefined;
+  if (recipe.depthRecipe) {
+    const depth: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.depthRecipe)![1]));
+    if (!record(depth) || depth.schema !== 'cssearth-nebula-depth-model@1' || depth.id !== recipe.id)
+      throw new Error('Prepared depth recipe belongs to another nebula or has an invalid schema.');
+    const evidence = pin(depth.evidence);
+    if (!evidence.path.startsWith('labs/nebula/models/') || !publication.inputs.some(source => source.path === evidence.path && source.sha256 === evidence.sha256))
+      throw new Error('Prepared nebula receipt does not pin the declared depth evidence.');
+    const ledger: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === evidence.path)![1]));
+    if (!record(ledger) || ledger.schema !== 'cssearth-nebula-physical-evidence@1' || ledger.subjectId !== recipe.id ||
+        !Array.isArray(ledger.sources) || !Array.isArray(ledger.evidence) || !Array.isArray(ledger.methods))
+      throw new Error('Prepared physical evidence ledger belongs to another nebula or has an invalid schema.');
+    depthInputs = { recipe: publication.inputs.find(source => source.path === recipe.depthRecipe)!, evidence };
+  }
   const result = readCompilerResult(JSON.parse(new TextDecoder().decode(await checkedBytes(publication.result, fetchLocal))));
   if (publication.result.path !== `.local/nebula-lab/compiler/${result.id}/result.json` || result.defaultSourceId !== recipe.defaultSourceId)
     throw new Error('Prepared nebula result does not match its configured recipe.');
   const method: unknown = JSON.parse(new TextDecoder().decode(await checkedBytes(result.method, fetchLocal)));
   if (!record(method) || method.recipeSha256 !== publication.inputs.find(source => source.path === recipePath)!.sha256 || !Array.isArray(method.implementation))
     throw new Error('Prepared nebula method does not match its current recipe.');
+  if (depthInputs) {
+    if (!record(method.physicalDepth)) throw new Error('Prepared nebula method omits the configured depth sources.');
+    const recipeSnapshot = pin(method.physicalDepth.recipe), evidenceSnapshot = pin(method.physicalDepth.evidence);
+    if (!recipeSnapshot.path.startsWith('.local/nebula-lab/') || !evidenceSnapshot.path.startsWith('.local/nebula-lab/') ||
+        recipeSnapshot.sha256 !== depthInputs.recipe.sha256 || evidenceSnapshot.sha256 !== depthInputs.evidence.sha256)
+      throw new Error('Prepared nebula method uses different depth sources. Compile again.');
+    await Promise.all([checkedBytes(recipeSnapshot, fetchLocal), checkedBytes(evidenceSnapshot, fetchLocal)]);
+  }
   const request = readCompilerRequest(method.request);
   if (request.recipePath !== recipePath || request.cataloguePath !== recipe.structureCatalogue || JSON.stringify(request.controls) !== JSON.stringify(result.controls))
     throw new Error('Prepared nebula method belongs to different inputs or controls.');

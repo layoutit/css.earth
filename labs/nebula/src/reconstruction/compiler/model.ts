@@ -6,7 +6,7 @@ export const defaultCompilerControls: CompilerControls = { detail: .65, faint: .
 export interface CompilerRequest { action: 'apply'; imageId: 'compiler'; recipePath: string; cataloguePath: string;
   imageToFrame: Record<string, Matrix>; evidence: { sensitivity: number; weights: number[] }; controls: CompilerControls }
 export interface CompilerRecipe { schema: 'cssearth-nebula-compiler@1'; id: string; label: string; observationRecipe: string;
-  observationCatalogue: string; structureRecipe: string; structureCatalogue: string; jointRecipe?: string;
+  observationCatalogue: string; structureRecipe: string; structureCatalogue: string; jointRecipe?: string; depthRecipe?: string;
   defaultSourceId: string; maximumStars: number; interpretation: string }
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const range = (v: unknown, low: number, high: number): v is number => finite(v) && v >= low && v <= high;
@@ -29,8 +29,9 @@ export function readCompilerRequest(v: unknown): CompilerRequest {
 export function readCompilerRecipe(v: unknown): CompilerRecipe {
   if (!jointRecord(v) || v.schema !== 'cssearth-nebula-compiler@1' || typeof v.id !== 'string' || !/^[a-z0-9-]+$/.test(v.id) || typeof v.label !== 'string' ||
       !jointPath(v.observationRecipe) || !jointPath(v.observationCatalogue) || !jointPath(v.structureRecipe) || !jointPath(v.structureCatalogue) ||
-      (v.jointRecipe !== undefined && !jointPath(v.jointRecipe)) || typeof v.defaultSourceId !== 'string' || !range(v.maximumStars, 0, 2000) || !Number.isInteger(v.maximumStars) || typeof v.interpretation !== 'string') throw new TypeError('Invalid compiler recipe.');
+      (v.jointRecipe !== undefined && !jointPath(v.jointRecipe)) || (v.depthRecipe !== undefined && (!jointPath(v.depthRecipe) || !v.depthRecipe.startsWith('labs/nebula/models/'))) ||
+      (v.jointRecipe !== undefined && v.depthRecipe !== undefined) || typeof v.defaultSourceId !== 'string' || !range(v.maximumStars, 0, 2000) || !Number.isInteger(v.maximumStars) || typeof v.interpretation !== 'string') throw new TypeError('Invalid compiler recipe.');
   return { schema: v.schema, id: v.id, label: v.label, observationRecipe: v.observationRecipe, observationCatalogue: v.observationCatalogue,
-    structureRecipe: v.structureRecipe, structureCatalogue: v.structureCatalogue, jointRecipe: v.jointRecipe, defaultSourceId: v.defaultSourceId,
+    structureRecipe: v.structureRecipe, structureCatalogue: v.structureCatalogue, jointRecipe: v.jointRecipe, ...(v.depthRecipe ? { depthRecipe: v.depthRecipe } : {}), defaultSourceId: v.defaultSourceId,
     maximumStars: v.maximumStars, interpretation: v.interpretation };
 }

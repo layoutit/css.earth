@@ -1,6 +1,6 @@
 # Irregular nebula experiments
 
-Six official-image pairs test the compiler beyond planetary nebulae. These are **image-only relative-emission experiments**: no Helix ring geometry or planetary expansion law is transferred. The unknown depth comes from an explicit prior, not new measurements.
+Six official-image pairs test the compiler beyond planetary nebulae. They began as **image-only relative-emission experiments**; Orion and Carina now compare an evidence-addressed authored surface. No Helix ring geometry or planetary expansion law is transferred. The unknown depth comes from explicit priors, not new measurements.
 
 | Target | Sources and coverage | What it tests |
 | --- | --- | --- |
@@ -42,6 +42,12 @@ Next, isolate target-associated emission and residual stellar halos **without cr
 Implementation validation: strict lab TypeScript and the lab build pass; the lab test run reports 294 passed, 2 skipped and no failures. All twelve original previews load, with M78 visibly marked unverified and its missing separation controls disabled. These checks cover the lab only; no production suites were run.
 
 Completed result identities, in target order above: `fec6fa781e9ac155b5c53c48469afe7677c365baa818e3d346623883b0ae19b4`, `23abbe9ed2343dee93fd56ab13e5d758eefaefa696c530580371b45bced54f39`, `919868fcfa304c242380dcd6d4c6a1e20fd402e8cd16551f1e5f22cab16d496b`, `ce071ef9a3cd7dc267755f660bdaac0186a28499ef31678c15fd04af942b2fb7`, `fdc0523ce7248132545800b69d8afb6b45207a68e0b4c16db8ed7e04eb6363b2`. Each immutable local result records its exact recipes, compiler implementation hashes and source/evidence identities. Later implementation changes must not silently relabel these results as newly tested.
+
+### Evidence-guided continuation
+
+The newer [Orion](../m42/README.md#coherent-front-comparison--12-september-2026) and [Carina](../carina/README.md#coherent-front-comparison--12-september-2026) records retain their exact result identities, recipe/evidence pins and visual limitations. They replace global deep columns with locally tilted finite supports; Carina tests reuse with its own sky anchors and assumptions. Downloaded spectroscopy is not yet fitted. The other three completed candidates were rebuilt without changing their prior method so their local input/implementation receipts remain usable. M78's existing registration failure remains unchanged.
+
+Final validation: 320 lab tests pass, two are skipped; strict lab TypeScript and the lab build pass. A mutation removing the local tilt fails the regression test. Chromium checks pass for all five completed candidates; Orion/Carina additionally include near-edge-on west and north views. Residual chromatic banding means visual acceptance remains open. See [Nebula Compiler Process Guidelines](../../docs/nebula-compiler-guidelines.md) for the reusable intake and next physical constraints.
 
 ## Sources and processing
 

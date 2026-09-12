@@ -1,6 +1,6 @@
 # Compile an emission nebula
 
-The compiler prepares one conditional 3D emission cloud from registered images, with an optional measured-velocity scaffold. **Reconstruction → Nebula** shows that final cloud. [Helix](../models/helix/README.md) uses a velocity scaffold; the [six irregular candidates](../models/inference-candidates/README.md) test image-only fitting without transferring planetary assumptions. Visual and physical acceptance remain separate from successful processing.
+The compiler prepares one conditional 3D emission cloud from registered images, with an optional measured-velocity scaffold or evidence-addressed surface recipe. **Reconstruction → Nebula** shows that final cloud. [Helix](../models/helix/README.md) uses a velocity scaffold; Orion and Carina now test a paper-guided, authored irregular front. The other [irregular candidates](../models/inference-candidates/README.md) retain image-only priors. Visual and physical acceptance remain separate from successful processing.
 
 ## Use the main view
 
@@ -17,7 +17,7 @@ Open [Helix → Nebula](http://127.0.0.1:4331/reconstruction?subject=helix-model
 
 After the first successful compile, fit controls apply automatically; only the newest pending settings follow an active job. The old cloud remains until its replacement decodes. **Cancel** stops work; **Retry compile** reconnects or retries after failure. Settings, job pointers and camera persist per recipe/catalogue. Refresh detaches and reconnects an observer without cancelling server work; a server restart can mark unfinished work interrupted. A cancelled job does not restart merely on refresh. Display and camera changes do not bake.
 
-**Compilation details** gives the completed/reused stage receipt. Alignment, source comparison, structure maps, combined evidence, joint surfaces and the separate core slit remain diagnostics in the shared workbench. They are not prerequisites requiring manual shape authoring.
+**Stages** shows the completed/reused receipt directly; **Sources & method** contains the longer interpretation. Alignment, source comparison, structure maps, combined evidence, joint surfaces and the separate core slit remain diagnostics in the shared workbench. They are not prerequisites requiring manual shape authoring.
 
 ## What is fitted
 
@@ -50,6 +50,8 @@ Completion prints a JSON record with `status: "complete"`, result ID, metrics an
 
 ## Configuration and assessment
 
-The generic compiler recipe references observation and structure recipes/catalogues, an optional joint-fit recipe, a default image lens and a compact-light budget. Source-specific facts stay in those records. Omitting the joint recipe produces an explicitly assumed image-only depth prior; it does not make depth measured.
+The generic compiler recipe references observation and structure recipes/catalogues, an optional `jointRecipe` or `depthRecipe`, a default image lens and a compact-light budget. Source-specific facts stay in those records. Omitting both depth recipes produces an explicitly assumed image-only prior; it does not make depth measured.
+
+`depthRecipe` selects one coherent irregular height surface. It pins a physical evidence ledger, labels unmeasured coefficients as authored, and scopes local published guidance without extrapolating it across the photograph. Finite supports follow local depth and tilt; their analytic observer projection remains unchanged by that conditioning. Smaller XY supports and a larger usable basis budget improve image detail separately. Thin supports use finer bounded slab spacing and emission-weighted material sub-sampling, with unchanged alpha across all lenses. The surface and joint velocity methods cannot be combined silently. See the [process guidelines](nebula-compiler-guidelines.md), [Orion comparison](../models/m42/README.md) and [Carina comparison](../models/carina/README.md) for active operations, exact results and remaining limits.
 
 The [Helix README](../models/helix/README.md) owns source selection, registration evidence, version-specific results and historical failures. Use it with the [research limits](multimodal-research.md). Successful processing, runtime interaction, scientific fidelity and visual acceptance are separate claims. Current work has not accepted the compiler as a recovered physical Helix model.

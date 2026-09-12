@@ -11,6 +11,7 @@ import { compileCssVolume } from '../../../../../src/renderers/css/preparation/v
 import { validatePreparedCssVolume } from '../../../../../src/renderers/css/volume/validation.js';
 import { recolorCloudSlices } from '../cloud-material.js';
 import { bakeMasterVolumeSlices } from '../master-slices.js';
+import { compilerSlabMaterial } from './material.js';
 import { COMPILER_LONGEST_AXIS_SLICES, readCompilerBakeResult, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial } from './bake-types.js';
 import type { EmissionBounds, EmissionVector3, SkyBounds } from './field-types.js';
 
@@ -27,6 +28,8 @@ export interface BakeCompilerOptions {
   root: string; outputDirectory: string; id: string; fieldIdentity: string;
   boundsArcsec: EmissionBounds; skyBoundsArcsec: SkyBounds;
   sampleEmission(xWestArcsec: number, yNorthArcsec: number, zAwayArcsec: number, outRgb: Vector3): void;
+  /** Smallest supported kernel scale; reduces slab spacing for thin, tilted structures. */
+  minimumFeatureScaleArcsec?: number;
   lenses: CompilerLensInput[]; stars?: CompilerStarInput[]; signal?: AbortSignal;
   progress?(progress: CompilerBakeProgress): void;
 }
@@ -76,6 +79,17 @@ export function compilerFrame(bounds: EmissionBounds): { origin: EmissionVector3
     originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: localBounds } };
 }
 
+/** Preserve one physical pitch across banks, with a bounded fine bank for thin structures. */
+export function compilerSliceCounts(bounds: EmissionBounds, minimumFeatureScaleArcsec?: number) {
+  if (!validBounds(bounds) || minimumFeatureScaleArcsec !== undefined && (!Number.isFinite(minimumFeatureScaleArcsec) || minimumFeatureScaleArcsec <= 0))
+    throw new TypeError('Invalid compiler sampling extent or feature scale.');
+  const spans = bounds.max.map((n, i) => n - bounds.min[i]!), longest = Math.max(...spans);
+  const pitch = minimumFeatureScaleArcsec === undefined ? longest / 192 :
+    Math.max(longest / COMPILER_LONGEST_AXIS_SLICES, Math.min(longest / 192, minimumFeatureScaleArcsec / 2));
+  const count = (span: number) => Math.min(COMPILER_LONGEST_AXIS_SLICES, Math.max(1, Math.ceil(span / pitch)));
+  return { x: count(spans[0]!), y: count(spans[1]!), z: count(spans[2]!) };
+}
+
 /** Builds all RGB materials from the same decoded alpha and centered west/north/away frame. */
 export async function bakeCompiler(options: BakeCompilerOptions): Promise<CompilerBakeResult> {
   const { root, outputDirectory, boundsArcsec, skyBoundsArcsec, signal } = options;
@@ -98,16 +112,14 @@ export async function bakeCompiler(options: BakeCompilerOptions): Promise<Compil
       ...(star.materials ? { materials: structuredClone(star.materials) } : {}) });
   }
   if (stars.length > 5000) throw new TypeError('Compiler star count exceeds the retained point budget.');
-  const spans = boundsArcsec.max.map((n, i) => n - boundsArcsec.min[i]!), pitch = Math.max(...spans) / COMPILER_LONGEST_AXIS_SLICES;
-  const count = (span: number) => Math.min(COMPILER_LONGEST_AXIS_SLICES, Math.max(1, Math.ceil(span / pitch)));
-  const sliceCounts = { x: count(spans[0]!), y: count(spans[1]!), z: count(spans[2]!) };
+  const sliceCounts = compilerSliceCounts(boundsArcsec, options.minimumFeatureScaleArcsec);
   const output = containedPath(root, outputDirectory), masterDirectory = containedPath(output, 'masters');
   const neutralDirectory = containedPath(output, 'neutral');
   await mkdir(output, { recursive: true }); cancel(signal);
   const provenance = { schema: 'cssearth-compiler-volume-provenance@1', fieldIdentity: options.fieldIdentity,
     coordinates: { axes: ['west', 'north', 'away'], units: 'arcsec', localOriginArcsec: origin,
       mapping: 'absoluteArcsec = localUnits + localOriginArcsec', earthView: 'observer-at-negative-z-looking-away' },
-    boundsArcsec, skyBoundsArcsec,
+    boundsArcsec, skyBoundsArcsec, minimumFeatureScaleArcsec: options.minimumFeatureScaleArcsec,
     interpretation: 'Neutral relative display emission from the supplied fitted field. Source RGB supplies material chromaticity only and cannot change support, opacity, or depth.',
     limitations: ['This prepared preview transports the caller-owned analytic field; it does not define or validate the scientific model.',
       'Angular depth is an inferred display coordinate, not a measured line-of-sight distance.', 'Finite slabs, four depth samples per slab, and RGBA8 opacity approximate the continuous field.'] };
@@ -135,10 +147,12 @@ export async function bakeCompiler(options: BakeCompilerOptions): Promise<Compil
   const painted: { input: CompilerLensInput; slices: VolumeSlices; coverage: { positiveAlphaTexels: number; recoloredTexels: number; outsideImageTexels: number } }[] = [];
   for (let lensIndex = 0; lensIndex < options.lenses.length; lensIndex++) {
     const lens = options.lenses[lensIndex]!, directory = containedPath(output, `lenses/${lens.id}`);
+    const slabMaterial = options.minimumFeatureScaleArcsec === undefined ? undefined : compilerSlabMaterial(options.sampleEmission, lens.sampleRgb);
     options.progress?.({ phase: 'texture', completed: lensIndex * totalSlices, total: options.lenses.length * totalSlices,
       message: `Painting ${lens.label}; preserving shared opacity` });
     const result = await recolorCloudSlices({ slices: neutralSlices, loadResource: path => readFile(containedPath(neutralDirectory, path)),
-      outputDirectory: directory, encoding: { format: 'png' }, sampleImageRgb(x, y, _z, out) {
+      outputDirectory: directory, encoding: { format: 'png' }, sampleImageRgb(x, y, z, out, slab) {
+        if (slabMaterial) return slabMaterial(x + origin[0], y + origin[1], z + origin[2], out, slab);
         return lens.sampleRgb(x + origin[0], y + origin[1], out);
       }, onProgress(progress) { cancel(signal); options.progress?.({ phase: 'texture', completed: lensIndex * totalSlices + progress.completed,
         total: options.lenses.length * totalSlices, message: `Painting ${lens.label}; preserving shared opacity` }); } });

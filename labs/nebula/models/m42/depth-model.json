@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-nebula-depth-model@1",
+  "id": "m42",
+  "centerIcrsDegrees": [
+    83.78715182853901,
+    -5.400382551151912
+  ],
+  "evidence": {
+    "path": "labs/nebula/models/m42/physical-evidence.json",
+    "sha256": "4a86d6d830b7753fe2af9c1ba30f35ebc4526095bb605939f66fba765d17a8cc"
+  },
+  "background": {
+    "id": "wide-field-continuity",
+    "methodId": "coherent-irregular-front",
+    "evidenceIds": [
+      "coherent-front-trial"
+    ],
+    "support": "unconstrained",
+    "centerArcsec": [
+      -112.74719725406632,
+      38.45246546500806
+    ],
+    "radiusArcsec": [
+      4000,
+      4000
+    ],
+    "angleDegrees": 0,
+    "depthArcsec": 94,
+    "gradient": [
+      0.05,
+      -0.08
+    ],
+    "curvaturePerArcsec": [
+      -8e-05,
+      2.5e-05,
+      -3.5e-05
+    ],
+    "thicknessArcsec": 100,
+    "strength": 1,
+    "rationale": "Authored weakly curved wide-field support, anchored near the published local star/front scale. Gradient, curvature, extent and thickness outside the core are unmeasured continuity choices; no extrapolation of the small MUSE field is claimed."
+  },
+  "features": [
+    {
+      "id": "huygens-front",
+      "methodId": "coherent-irregular-front",
+      "evidenceIds": [
+        "core-reference-scales",
+        "local-front-curvature",
+        "coherent-front-trial"
+      ],
+      "support": "paper-guided",
+      "centerArcsec": [
+        -112.74719725406632,
+        38.45246546500806
+      ],
+      "radiusArcsec": [
+        100,
+        90
+      ],
+      "angleDegrees": 0,
+      "depthArcsec": 93.75673011231653,
+      "gradient": [
+        0,
+        0
+      ],
+      "curvaturePerArcsec": [
+        0.0006,
+        0,
+        0
+      ],
+      "thicknessArcsec": 46.878365056158266,
+      "strength": 1,
+      "rationale": "Local star/front and equivalent emitting-layer scales from O Dell 2009 at 440 pc. Window, convex EW curvature amplitude and smooth blending are authored. No direct conversion of the 15-degree flow inclination into gas geometry."
+    },
+    {
+      "id": "southern-opening",
+      "methodId": "coherent-irregular-front",
+      "evidenceIds": [
+        "coherent-front-trial"
+      ],
+      "support": "unconstrained",
+      "centerArcsec": [
+        67.25280274593368,
+        -461.54753453499194
+      ],
+      "radiusArcsec": [
+        720,
+        1000
+      ],
+      "angleDegrees": 0,
+      "depthArcsec": -120,
+      "gradient": [
+        0.18,
+        -0.24
+      ],
+      "curvaturePerArcsec": [
+        -0.00012,
+        0,
+        -6e-05
+      ],
+      "thicknessArcsec": 80,
+      "strength": 0.75,
+      "rationale": "Authored broad opening toward the observer in the southwest field. The location, depth and all coefficients are hypotheses for this initial wide-field visualization; they are not the 30-arcsecond OIII cavity or the neutral Veil."
+    }
+  ],
+  "detailThicknessRatio": 0.65,
+  "minimumThicknessArcsec": 2,
+  "interpretation": "Evidence-guided visualization using one smooth irregular emitting front and locally tilted finite emission supports. Only central reference scales are paper-guided; full-field curvature, depth ordering, thickness and interpolation are authored. Separate Orion-S/foreground structures, absorption and a measured velocity fit remain unimplemented. RGB brightness determines projected emission, never depth."
+}

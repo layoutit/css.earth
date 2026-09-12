@@ -9,6 +9,7 @@ import { earthCloudView, type CloudView } from './shape-cloud-stage';
 import { CompilerStage } from './compiler-stage';
 import type { CompilerInspectionFrame } from '../viewer/compiler-framing';
 import { useCompiler } from './compiler-state';
+import { CompilerPipeline } from './compiler-pipeline';
 import './compiler.css';
 
 export interface CompilerPanelProps { recipePath: string; cataloguePath: string; observationManifest?: string; publishedPath?: string }
@@ -123,6 +124,7 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
       <progress aria-label="Nebula compilation progress" hidden={!state.busy} max={state.job?.progress?.total || 1}
         value={state.job?.progress ? state.job.progress.current : undefined} />
     </div>
+    {result && <CompilerPipeline result={result} busy={state.busy} />}
     <CompilerSlider id="compiler-detail" label="Detail" value={controls.detail} min={0} max={1} step={.05} display={`${Math.round(controls.detail * 100)}%`}
       title="Retain more prepared small-scale image structure in the inferred cloud." onChange={detail => updateControls({ ...controls, detail })} />
     <CompilerSlider id="compiler-faint" label="Faint emission" value={controls.faint} min={0} max={1} step={.05} display={`${Math.round(controls.faint * 100)}%`}
@@ -147,10 +149,6 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
       <button type="button" aria-pressed={presentation.view.locked} onClick={() => updatePresentation({ ...presentation, view: { ...earthCloudView } })}>Earth view</button>
       <button type="button" aria-pressed={!presentation.view.locked} onClick={() => updatePresentation({ ...presentation, view: { ...presentation.view, locked: !presentation.view.locked } })}>Orbit</button>
     </div>
-    {result && <details className="compiler-receipt"><summary>Compilation details</summary>
-      <ol>{result.pipeline.map(step => <li key={step.id}><span>{step.label}</span><span>{step.state === 'reused' ? 'Reused' : 'Complete'}</span></li>)}</ol>
-      <p>{result.metrics.components} components · {result.metrics.unconstrainedComponents} outside velocity coverage</p>
-    </details>}
     {host && createPortal(<section className="compiler-workspace" aria-label="Compiled nebula" data-result-id={result?.id ?? ''}>
       <CompilerStage result={result} lensId={source?.id ?? null} mode={presentation.mode} stars={presentation.stars}
         showOriginal={presentation.original} view={presentation.view} onView={onView} inspectionFrame={inspectionFrame} />
