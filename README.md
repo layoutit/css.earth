@@ -143,6 +143,8 @@ maintainers publish their updated inventories with `pnpm publish:runtime-assets`
 (or `--object=earth`) before pushing the code that references them.
 
 `prepare:checkout` restores source bytes and generates `public/scenes/` locally.
+Some restores convert NAIF DSK shape kernels and need Python 3 with `numpy`
+(`CSSEARTH_SPICE_PYTHON` selects the interpreter); the tool says so when it is missing.
 This full-source command still restores Earth's retained 19,632-pack geographic
 release (25.4 GB), although the current globe does not use it. Normal
 `setup:assets` installs only prepared browser assets. The release's earlier
