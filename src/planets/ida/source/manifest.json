@@ -56,8 +56,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "missionId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab"
           }
@@ -103,8 +103,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "missionId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit"
           }

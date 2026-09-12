@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea462cb51fc8b1618f5577766667ea4ad428413964ad2e2e98b80734034a7a93"
+    "sha256": "e18e468b44bd73ff023ad5fa24e9184043abfb85af61b0570c2a8e287adf484d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -688,8 +688,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "mars-global-surveyor",
+            "kind": "machine",
+            "machineId": "mars-global-surveyor",
             "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}",
             "missionId": "mars-global-surveyor"
           }
@@ -782,8 +782,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "odyssey",
+            "kind": "machine",
+            "machineId": "odyssey",
             "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}",
             "missionId": "odyssey"
           }

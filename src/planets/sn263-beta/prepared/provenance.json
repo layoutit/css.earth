@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bfb1613621b53ff558931b5df8d37e7f5003bf6132c7ca9460a0aa2f2f7dd78f"
+    "sha256": "a50012cb9ccaa96f5426a56510b138795254f470fcb8a22e3efab83221dbaff5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -246,6 +246,16 @@
       "release": "urn:nasa:pds:gbo.ast-153591.radar.shape-model::1.0",
       "product": "urn:nasa:pds:gbo.ast-153591.radar.shape-model:data:a153591beta_tab::1.0",
       "credit": "Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "evidence": "The preserved credit for this input reads: Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams",
+            "missionId": "arecibo-planetary-radar"
+          }
+        ]
+      },
       "license": "NASA PDS archived scientific data; retain citation and attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified PDS file through source/preparation/acquisition.json.",
       "redistribution": "Attributed NASA PDS scientific data; retain archive citation and model limits.",

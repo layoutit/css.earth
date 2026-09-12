@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5205cf06fa362ea0caf345e93da082d5e4039a2c292392f6a040f1810b45d2e1"
+    "sha256": "409c2c1527dc92860e382c55b1b80f490ddc133eef71a2b7ff002a1f15cc4989"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -454,8 +454,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit",
             "missionId": "galileo"
           }
@@ -512,8 +512,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab",
             "missionId": "galileo"
           }

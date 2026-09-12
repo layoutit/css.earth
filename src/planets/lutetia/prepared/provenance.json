@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "49394a97db23f758541133a7a8f720160ddc8f0f456e630203e208da8d30c773"
+    "sha256": "c2fcfecdb481ce5805a2786dbd448289412a74258d35d553c61372b6cdb38f2d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -427,8 +427,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "rosetta",
+            "kind": "machine",
+            "machineId": "rosetta",
             "evidence": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl",
             "missionId": "rosetta"
           }

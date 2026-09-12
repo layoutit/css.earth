@@ -33,6 +33,16 @@
       "path": "shape/castalia.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/castalia.obj",
       "credit": "Hudson and Ostro (1994), Science 263, 940–943; Hudson, Ostro and Harris (1997), Icarus 130, 165–176; Arecibo and NASA/JPL",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "The preserved credit for this input reads: Hudson and Ostro (1994), Science 263, 940–943; Hudson, Ostro and Harris (1997), Icarus 130, 165–176; Arecibo and NASA/JPL"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -95,6 +105,16 @@
       "path": "reference/castalia-1997.pdf",
       "origin": "https://echo.jpl.nasa.gov/asteroids/hudson%2B1997_cas_lcurves_icarus.pdf",
       "credit": "Hudson and Ostro (1994), Science 263, 940–943; Hudson, Ostro and Harris (1997), Icarus 130, 165–176; Arecibo and NASA/JPL",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "The preserved credit for this input reads: Hudson and Ostro (1994), Science 263, 940–943; Hudson, Ostro and Harris (1997), Icarus 130, 165–176; Arecibo and NASA/JPL"
+          }
+        ]
+      },
       "license": "Original scientific article; source publisher copyright retained.",
       "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
       "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
@@ -120,6 +140,16 @@
       "path": "reference/castalia-1994.pdf",
       "origin": "https://echo.jpl.nasa.gov/asteroids/hudson%2Bostro_1994_castalia.pdf",
       "credit": "Hudson and Ostro (1994), Science 263, 940–943; Hudson, Ostro and Harris (1997), Icarus 130, 165–176; Arecibo and NASA/JPL",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "The preserved credit for this input reads: Hudson and Ostro (1994), Science 263, 940–943; Hudson, Ostro and Harris (1997), Icarus 130, 165–176; Arecibo and NASA/JPL"
+          }
+        ]
+      },
       "license": "Original scientific article; source publisher copyright retained.",
       "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
       "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",

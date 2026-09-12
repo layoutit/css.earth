@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f838df8309cfa50d7c50571cc6c7606a9116db144f236a66f41d2a126a1293b9"
+    "sha256": "8e873db36b34cf9325c60cb71047c2b21e1383df749c796a5ed556eca6a8c254"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -501,8 +501,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif",
             "missionId": "new-horizons"
           }
@@ -624,8 +624,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif",
             "missionId": "new-horizons"
           }

@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dbbf54eaa1b5716242d6c44017159fe90fc1892b40a8616e8d4dc23ecaceefde"
+    "sha256": "3834c61700e9a86e6a6718d9832ce9eb12cdd669dc79fe74c79b786980c68b0f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -425,20 +425,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
             "missionId": "galileo"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-1",
+            "kind": "machine",
+            "machineId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
             "missionId": "voyager-2"
           }
@@ -508,8 +508,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://science.nasa.gov/photojournal/global-callisto-in-color/",
             "missionId": "galileo"
           }
@@ -568,8 +568,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://doi.org/10.17189/4sq6-x165",
             "missionId": "galileo"
           }

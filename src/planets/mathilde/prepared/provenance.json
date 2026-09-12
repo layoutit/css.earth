@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d13f0516d3692a339fc6cecf250b95682377817fc159c5e0ca2467fde7254fa9"
+    "sha256": "49708f5e72c2783e98d71413a143005af827cb93a7d1088c7b851bda495e107d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -360,8 +360,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "near-shoemaker",
+            "kind": "machine",
+            "machineId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg",
             "missionId": "near-shoemaker"
           }
@@ -417,8 +417,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "near-shoemaker",
+            "kind": "machine",
+            "machineId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.tab",
             "missionId": "near-shoemaker"
           }
@@ -475,8 +475,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "near-shoemaker",
+            "kind": "machine",
+            "machineId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.tab",
             "missionId": "near-shoemaker"
           }

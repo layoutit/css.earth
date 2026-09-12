@@ -1,0 +1,32 @@
+{
+  "id": "artwork-photo-spitzer",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "spitzer photograph",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://commons.wikimedia.org/wiki/File:Spitzer_earth_trailing2.jpg",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Spitzer_earth_trailing2.jpg",
+      "label": "Original file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Spitzer_earth_trailing2.jpg",
+      "checkedOn": "2026-09-11",
+      "locator": "File licence, author and original file size"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Wikimedia Commons",
+  "creators": [
+    "NASA/JPL-Caltech"
+  ]
+}

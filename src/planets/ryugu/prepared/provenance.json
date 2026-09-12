@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "578ac941ad6978257f15f734a07a8622c6c7d13271c56265742817db86f470ae"
+    "sha256": "b4384c173b993bc5b99bf0117dc6d185ed3d4a573ddf21bf00c7cee91a81c66a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -384,8 +384,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hayabusa2",
+            "kind": "machine",
+            "machineId": "hayabusa2",
             "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif",
             "missionId": "hayabusa2"
           }
@@ -437,8 +437,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hayabusa2",
+            "kind": "machine",
+            "machineId": "hayabusa2",
             "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
             "missionId": "hayabusa2"
           }
@@ -485,8 +485,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hayabusa2",
+            "kind": "machine",
+            "machineId": "hayabusa2",
             "evidence": "https://doi.org/10.7910/DVN/WW3IH0",
             "missionId": "hayabusa2"
           }

@@ -10,33 +10,33 @@ const sources = sourceResolver(parseSourceCatalog({schema:'cssearth-source-catal
 const parseExplorationCatalog = (raw: unknown, agencies: Parameters<typeof parse>[1]) => parse(raw,agencies,sources);
 const cited = <T,>(value: T) => ({ value, citations: [{catalogueId:'source',checkedOn:'2026-09-10'}] });
 function fixture() {
-  return { schema: 'cssearth-spacecraft-catalog@3',
-    spacecraft: [{ id: 'juno', name: cited('Juno spacecraft'), description: cited('A spacecraft.'), aliases: [], kind: cited('orbiter'), launch: cited('2011') }],
-    missions: [{ id: 'juno', name: cited('Juno mission'), description: cited('An individual mission.'), agencyIds: cited(['NASA']), started: cited('2011'), participants: [{ spacecraftId: 'juno', role: 'orbiter', citations: cited('').citations }] }],
+  return { schema: 'cssearth-machine-catalog@4',
+    machines: [{ id: 'juno', name: cited('Juno spacecraft'), description: cited('A spacecraft.'), aliases: [], kind: cited('orbiter'), setting: cited('space'), launch: cited('2011') }],
+    missions: [{ id: 'juno', name: cited('Juno mission'), description: cited('An individual mission.'), agencyIds: cited(['NASA']), started: cited('2011'), participants: [{ machineId: 'juno', role: 'orbiter', citations: cited('').citations }] }],
   };
 }
 
 test('catalogue records are immutable and separate entity domains may use the same ID', () => {
   const catalog = parseExplorationCatalog(fixture(), agencies);
-  assert.equal(catalog.spacecraft[0].id, catalog.missions[0].id);
+  assert.equal(catalog.machines[0].id, catalog.missions[0].id);
   assert.ok(Object.isFrozen(catalog.missions[0].participants[0]));
-  assert.ok(Object.isFrozen(catalog.spacecraft[0].name.citations));
-  assert.equal(catalog.spacecraft[0].launch?.value, '2011');
+  assert.ok(Object.isFrozen(catalog.machines[0].name.citations));
+  assert.equal(catalog.machines[0].launch?.value, '2011');
   assert.equal(catalog.missions[0].status, undefined);
   assert.equal(agencies.NASA.src, undefined, 'an agency identity does not require a logo');
 });
 
 test('duplicates, unknown references, invalid agencies and ambiguous participation are rejected', () => {
   const f = fixture();
-  assert.throws(() => parseExplorationCatalog({ ...f, spacecraft: [...f.spacecraft, f.spacecraft[0]] }, agencies), /Duplicate spacecraft ID/);
+  assert.throws(() => parseExplorationCatalog({ ...f, machines: [...f.machines, f.machines[0]] }, agencies), /Duplicate machine ID/);
   assert.throws(() => parse(f, agencies, {}), /Unknown citation source/);
-  assert.throws(() => parseExplorationCatalog({ ...f, schema: 'cssearth-spacecraft-catalog@1' }, agencies), /schema/);
+  assert.throws(() => parseExplorationCatalog({ ...f, schema: 'cssearth-machine-catalog@1' }, agencies), /schema/);
   assert.throws(() => parseExplorationCatalog({ ...f, extra: true }, agencies), /Unexpected/);
   const mission = f.missions[0];
   for (const changed of [
     { ...mission, agencyIds: cited(['ESA']) },
     { ...mission, participants: [...mission.participants, mission.participants[0]] },
-    { ...mission, participants: [{ ...mission.participants[0], spacecraftId: 'unknown' }] },
+    { ...mission, participants: [{ ...mission.participants[0], machineId: 'unknown' }] },
     { ...mission, status: cited({ value: 'unknown-active-state', asOf: '2026-09-10' }) },
     { ...mission, status: cited({ value: 'active' }) },
     { ...mission, started: cited('2012'), ended: cited('2011') },
@@ -61,23 +61,41 @@ test('dates preserve source precision and reject only provable interval contradi
   for (const date of ['2023-02-29', '2024-00', '2024-13', '2024-04-31', '2024-1-1', '0000', 'yesterday']) assert.throws(() => explorationDate(date));
   const f = fixture();
   assert.doesNotThrow(() => parseExplorationCatalog({ ...f, missions: [{ ...f.missions[0], started: cited('2011-12'), ended: cited('2011') }] }, agencies));
-  assert.throws(() => parseExplorationCatalog({ ...f, spacecraft: [{...f.spacecraft[0],name:{value:'Juno',citations:[{catalogueId:'source',checkedOn:'2023-02-29'}]}}] }, agencies));
+  assert.throws(() => parseExplorationCatalog({ ...f, machines: [{...f.machines[0],name:{value:'Juno',citations:[{catalogueId:'source',checkedOn:'2023-02-29'}]}}] }, agencies));
 });
 
 test('capture validation separates membership from observation and rejects legacy browser inference', () => {
   const catalog = parseExplorationCatalog(fixture(), agencies);
-  const spacecraft = parseCapture({ attributions: [{ kind: 'spacecraft', spacecraftId: 'juno', evidence: 'A specific pinned image label.' }] });
-  validateCapture(spacecraft, catalog);
-  assert.equal(spacecraft.attributions[0].kind, 'spacecraft');
-  assert.equal('missionId' in spacecraft.attributions[0], false);
+  const machine = parseCapture({ attributions: [{ kind: 'machine', machineId: 'juno', evidence: 'A specific pinned image label.' }] });
+  validateCapture(machine, catalog);
+  assert.equal(machine.attributions[0].kind, 'machine');
+  assert.equal('missionId' in machine.attributions[0], false);
   validateCapture(parseCapture({ attributions: [{ kind: 'mission', missionId: 'juno', evidence: 'A mission-level source credit.' }] }), catalog);
   validateCapture(parseCapture({ attributions: [{ kind: 'unresolved', label: 'A vehicle group', reason: 'Individual vehicles not identified.', evidence: 'Preserved source credit.' }] }), catalog);
   for (const input of [
-    { spacecraftIds: ['juno'], evidence: 'Legacy credit' },
+    { machineIds: ['juno'], evidence: 'Legacy credit' },
     { attributions: [] },
-    { attributions: [{ kind: 'spacecraft', spacecraftId: 'juno', evidence: ' ' }] },
+    { attributions: [{ kind: 'machine', machineId: 'juno', evidence: ' ' }] },
     { attributions: [{ kind: 'unresolved', label: 'Group', evidence: 'Credit' }] },
-    { attributions: [...spacecraft.attributions, ...spacecraft.attributions] },
+    { attributions: [...machine.attributions, ...machine.attributions] },
   ]) assert.throws(() => parseCapture(input));
   assert.throws(() => validateCapture(parseCapture({ attributions: [{ kind: 'mission', missionId: 'missing', evidence: 'Credit' }] }), catalog), /Unknown capture mission/);
+});
+
+test('a ground machine is sited and retired instead of launched', () => {
+  const f = fixture();
+  const arecibo = { id: 'arecibo-305m', name: cited('Arecibo 305-m antenna'), description: cited('A fixed spherical reflector.'),
+    aliases: [], kind: cited('radar-telescope'), setting: cited('ground'), commissioned: cited('1963'), retired: cited('2020'),
+    band: cited('Radar'), site: cited({ latitude: 18.344219, longitude: 293.247306, altitude: 453.34 }) };
+  const catalog = parseExplorationCatalog({ ...f, machines: [...f.machines, arecibo] }, agencies);
+  const record = catalog.machines[1];
+  assert.equal(record.setting.value, 'ground');
+  assert.equal(record.launch, undefined);
+  assert.equal(record.site?.value.altitude, 453.34);
+  assert.equal(record.band?.value, 'Radar');
+  assert.ok(Object.isFrozen(record.site?.value));
+  assert.throws(() => parseExplorationCatalog({ ...f, machines: [{ ...arecibo, launch: cited('1963') }] }, agencies), /cannot be launched/);
+  assert.throws(() => parseExplorationCatalog({ ...f, machines: [{ ...f.machines[0], site: cited({ latitude: 0, longitude: 0 }) }] }, agencies), /cannot be sited/);
+  assert.throws(() => parseExplorationCatalog({ ...f, machines: [{ ...arecibo, retired: cited('1962') }] }, agencies), /retired before/);
+  assert.throws(() => parseExplorationCatalog({ ...f, machines: [{ ...arecibo, site: cited({ latitude: 91, longitude: 0 }) }] }, agencies), /site coordinate/);
 });

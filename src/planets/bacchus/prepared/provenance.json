@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea62a51e8372ec9661dd442aa906d6c3cff23c611f796a7fc237a04a5f6f607c"
+    "sha256": "cb89b9822f9b7431733ccc9ee67c7056cf2456988c4e141ec01cd479afaa2980"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -314,6 +314,16 @@
       "path": "shape/bacchus.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj",
       "credit": "Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "evidence": "The preserved credit for this input reads: Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy",
+            "missionId": "goldstone-solar-system-radar"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
