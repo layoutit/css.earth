@@ -6,7 +6,7 @@ The Moon combines LRO imagery and numeric science products with interpreted geol
 
 | View or quantity | Source |
 | --- | --- |
-| Visible surface | [NASA LRO Moon kit](https://svs.gsfc.nasa.gov/4720/) |
+| Monochrome surface | [LROC WAC global morphologic mosaic v1.3](https://data.lroc.im-ldi.com/lroc/view_rdr_product/WAC_GLOBAL_E000N1800_032P), 643 nm photography, 11,520 × 5,760 pixels |
 | Elevation | LRO LOLA LDEM16 v3.1 |
 | Midnight temperature, heat anomalies, rock abundance | [LRO Diviner GHRM v1.0](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/), 2009–2022, false-color thermal estimates within ±70° |
 | Geology | [USGS Unified Geologic Map v2 (2020)](https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020), 49 units |
@@ -16,7 +16,26 @@ The Moon combines LRO imagery and numeric science products with interpreted geol
 
 ## Evidence
 
-Lane change (this PR): the static-surface lane was retired for the Moon; the same pinned inputs and the same numeric interpretation (`observationRaster`) now feed the shared raster lane. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the three GHRM grids, LOLA, the Christiansen feature and the geology grid were re-anchored at the Copernicus, Tycho and Tsiolkovskiy cells after the lane change. No new science review is claimed.
+Photographic refresh, 12 September 2026, on base `3efdf2c9`: the new native
+LROC map replaces the 2K CGI texture. These are actual Chrome captures at the
+same Copernicus camera, 1280 × 720, DPR 1; the crops omit the sidebar. The
+before atlas was reproduced with the exact `53b262bd` delivery hash.
+
+| Before | Current |
+| --- | --- |
+| ![Copernicus from the former texture](evidence/photographic-detail/before.png) | ![Copernicus from native LROC photography](evidence/photographic-detail/after.png) |
+
+The PDS reader's two focused checks cover pixel-centre registration, 180° output
+origin, footprint integration, observed black and invalid samples. Preparation
+build/type checks, source-record generation and unchanged scene/geometry checks
+pass. Browser inspection covers Shadows on/off and the same canonical atlas at
+DPR 1 and 2. The five photographic files total 17.54 MB, previously 2.28 MB;
+the largest decoded atlas is 195 MiB. This is a photographic refresh, not a new
+qualification of the scientific views. Seven unrelated scientific thumbnails
+were unavailable in the local checkout; the cross-body search preview was
+restricted to Moon, Europa and Io.
+
+Earlier shared-lane migration (base `53b262bd`): the static-surface lane was retired for the Moon; the same pinned inputs and the same numeric interpretation (`observationRaster`) now feed the shared raster lane. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the three GHRM grids, LOLA, the Christiansen feature and the geology grid were re-anchored at the Copernicus, Tycho and Tsiolkovskiy cells after the lane change. No new science review is claimed.
 
 [The September 2026 lunar thermal review](https://github.com/layoutit/cssEarth/blob/8666462797772dc50bbebecd8618014f5e7bd16c/docs/moons/b10-lunar-thermal/VISUAL-REVIEW.md) records source, reproduction, Chrome, installation and test results. All three numeric grids reproduce exactly; 507 independent original-to-atlas probes and eight separately fetched byte anchors pass. Browser captures cover DPR 1 and 2, close zoom and the narrow selector. The scene geometry and retained tree of that review belong to the retired static lane; the current tree is the shared raster-lane sphere. Aggregate readiness remains limited by the shared audit and missing unrelated build inputs.
 
@@ -24,7 +43,10 @@ Lane change (this PR): the static-surface lane was retired for the Moon; the sam
 
 ## Known problems
 
-Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for the Moon (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code and the 7,063 lettered satellite craters (“Tycho A” and the like, which repeat a parent name), folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Tycho and Copernicus on the LROC colour mosaic coincide with the imagery.
+The existing atlas seams can remain visible at extreme close zoom. This change
+retains the geometry and its packing layout.
+
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for the Moon (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code and the 7,063 lettered satellite craters (“Tycho A” and the like, which repeat a parent name), folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Tycho and Copernicus coincide with the imagery. The replacement monochrome WAC map preserves that 180° E output edge.
 
 Landing sites: 80 spacecraft landing, touchdown or impact sites and 2 published traverse paths are labelled beside the IAU names (`source/features/sites.json`). Each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from, with the stated latitude kind and longitude convention; sites are unsized points ranked like a 20 km feature and the caption shows the quoted source sentence with its publisher.
 
@@ -34,7 +56,7 @@ Feature notes: 1749 of the labelled names carry a caption note, the lead summary
 - Diviner midnight maps combine 2009–2022 observations, not current temperatures. Unobserved polar caps and internal gaps stay neutral. Thermal-model anomalies retain terrain effects and do not establish geothermal activity. Rock abundance estimates area fraction, not boulder counts; values above 2% share the top display color. Per-cell uncertainty is not supplied.
 - Christiansen-feature values are wavelengths, not mineral abundances. Coverage stops at ±70° and residual viewing effects remain.
 - Geology colors are interpretations; the GRAIL display depends on model assumptions.
-- The LROC colour map is a 2,048 × 1,024 source; the DPR-2 atlas is a 2× Lanczos upsample of it, unlike the numeric lenses, which are painted at their native 4,096 × 2,048 grid. A larger CGI Moon Kit colour map is a candidate refresh (see the source survey).
+- The monochrome mosaic retains photographed crater shadows and differences between observation strips. The Shadows control adds spherical illumination; it cannot relight those shadows. Gray grid marks missing observations. The 947.6 m source grid is not an estimate of camera accuracy. Polar sprites retain their existing resolution.
 - The scene now uses the shared physical frame: pole, prime meridian and Sun direction at the shared epoch come from the IAU/WGCCRE rotation model in `src/platform/solar-geometry.mts`, and the Shadows toggle drives a Lambert terminator bank. The retired lane showed limb curvature only.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
@@ -88,16 +110,31 @@ chosen, at both prepared densities. Unit checks live under
 <details>
 <summary>Visible surface and crust-thickness sources</summary>
 
-## Surface
+The surface uses `WAC_GLOBAL_E000N1800_032P` v1.3, the original attached-label
+PDS3 float map. Its label identifies observations from 7 November 2009 to
+31 January 2011, a 1,737.4 km planetocentric sphere, east-positive longitude,
+32 pixels/degree and a 0–360° extent. The file name describes the map centre;
+the label's projection origin is 0°. Preparation reads the actual offsets,
+then rotates the output's left edge to 180° E to retain the existing feature registration.
 
-- NASA Scientific Visualization Studio CGI Moon Kit colour map, prepared from
-  LRO/LROC and LOLA data: <https://svs.gsfc.nasa.gov/4720/>
-- Checked input: `source/surface/lroc-color-2k.jpg`
-- The raster lane resamples the source to 2,048 × 1,024 texels for DPR 1 and
-  4,096 × 2,048 for DPR 2 (`density-before-pack`), applies the retained tonal
-  presentation (saturation 0.35, linear gain 0.9, offset −78, sharpen 0.65),
-  packs 16 latitude bands with a 16-texel gutter and prepares 256-pixel
-  orthographic polar tiles. Runtime performs no geometry or raster preparation.
+[LROC's native README](source/surface/WAC_GLOBAL_README.TXT) documents the
+GLD100/LOLA projection surfaces, LOLA/GRAIL ephemeris, camera calibration and
+Hapke photometric correction. See [Speyerer et al. (2011), abstract 2387](https://www.lpi.usra.edu/meetings/lpsc2011/pdf/2387.pdf)
+and [Wagner et al. (2015), abstract 1473](https://www.hou.usra.edu/meetings/lpsc2015/pdf/1473.pdf).
+
+The float reader integrates the original pixel footprints into 4,096 × 2,048
+and 8,192 × 4,096 display maps. Every contributing sample must be valid; the
+PDS special values are withheld and observed zero stays black. Display brightness
+is `255 × min(1, (4 × reflectance)^(1/2.2))`. No gaps are interpolated or painted
+as terrain. The same interpretation supplies the atlas, polar sprites, thumbnail
+and small sidebar map. Latitude bands, UV coordinates, geometry and lighting remain fixed.
+
+The source survey compared the NASA CGI Moon Kit, the LROC Hapke v1.2 colour
+tiles and this morphology product. The larger CGI map still fills gaps and uses
+LOLA albedo at the poles. Native colour tiles avoid that fill but stop at ±70°
+and showed less crater relief. The selected morphology map provides sharper
+photographed terrain and polar observations; it is explicitly monochrome.
+The old 2K Moon Kit remains the small navigation sprite's source.
 
 </details>
 
@@ -161,10 +198,9 @@ The older Bandfield GDR L3 32-pixel/degree rock map (2009–2010, ±60°) and it
 independent raw-DN anchors remain archived for provenance but no longer drive
 the rock-abundance lens. The expanded record and GHRM thermal model replace it.
 
-The [SVS color-map description](https://svs.gsfc.nasa.gov/4720/) independently
-confirms that the retained visible texture is centered on 0° longitude. Numeric
-output uses an explicit −180° left-edge origin to align with that texture and
-the retained crust lens; the original PDS coordinates are not relabeled. Fixed
+Numeric output retains its −180° left-edge origin, established against the
+previous SVS color map. The new LROC photograph uses the equivalent 180° E
+left edge; the original PDS coordinates are not relabeled. Fixed
 output-cell checks at USGS/IAU Copernicus, Tycho and Tsiolkovskiy coordinates
 verify the corresponding source values through the numeric painter. These are
 landform alignment anchors, not a claim of subpixel survey accuracy.
@@ -175,8 +211,8 @@ source grid (no image resampling), latitude-band packing copies pixels, polar
 tiles use nearest pixel-center samples, and thumbnails use nearest resizing.
 Surface, pole and thumbnail WebPs of numeric lenses are lossless. This preserves
 prepared palette colors, not a claim that browser-transformed screen pixels
-are quantitative samples. The visible-colour and GRAIL lenses use the ordinary
-Lanczos resampling and lossy WebP of the shared lane.
+are quantitative samples. The new monochrome photograph uses footprint integration and lossy WebP;
+the unchanged GRAIL display uses Lanczos resampling and lossy WebP.
 Independent B10 checks bind all original, compact and runtime hashes and verify
 507 original-to-texture probes plus eight separately fetched raw-byte anchors.
 The earlier LOLA numerical anchors remain in
