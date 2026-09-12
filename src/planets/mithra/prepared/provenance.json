@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ac16b43c78c9445153d1456f52f42472dda8a0c3bbf848cfdb2138feb7cce71f"
+    "sha256": "b12eeb2983e74d60681e7329b80634bbed3f3faacb577eb7948ca6c28df38e5a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -314,6 +314,22 @@
       "path": "shape/Mithra.v1.PA.prograde.mod.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/Mithra.v1.PA.prograde.mod.obj",
       "credit": "Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "evidence": "The preserved credit for this input reads: Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy",
+            "missionId": "arecibo-planetary-radar"
+          },
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "evidence": "The preserved credit for this input reads: Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy",
+            "missionId": "goldstone-solar-system-radar"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",

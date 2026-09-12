@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7c858b0131d915b3c502682c1e4fedf4a53ed9c88e6be11218af6b9aa9cf3af0"
+    "sha256": "478fb94fd96ebf87389b541cdae562fe7ff8e4884a9016c4fe8d6d39dd8f9b02"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -399,8 +399,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.IMG",
             "missionId": "galileo"
           }
@@ -446,8 +446,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.LBL",
             "missionId": "galileo"
           }
@@ -500,8 +500,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.IMG",
             "missionId": "galileo"
           }
@@ -547,8 +547,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.LBL",
             "missionId": "galileo"
           }
@@ -601,8 +601,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.IMG",
             "missionId": "galileo"
           }
@@ -648,8 +648,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.LBL",
             "missionId": "galileo"
           }
@@ -702,8 +702,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.IMG",
             "missionId": "galileo"
           }
@@ -749,8 +749,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.LBL",
             "missionId": "galileo"
           }
@@ -803,8 +803,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.IMG",
             "missionId": "galileo"
           }
@@ -850,8 +850,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "galileo",
+            "kind": "machine",
+            "machineId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.LBL",
             "missionId": "galileo"
           }

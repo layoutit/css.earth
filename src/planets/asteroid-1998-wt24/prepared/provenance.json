@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f72ad36ce352156478be4c552f35781f0b3fa1c538564d276f35e805086bc484"
+    "sha256": "122de05ed88201487f8a24d17dd42d5f8355384dd1f0d74496524822a31dca34"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -310,6 +310,22 @@
       "path": "shape/wt24.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/wt24.obj",
       "credit": "Busch et al. (2008), Icarus 195, 614–621; Arecibo, Goldstone and NASA/JPL",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "evidence": "The preserved credit for this input reads: Busch et al. (2008), Icarus 195, 614–621; Arecibo, Goldstone and NASA/JPL",
+            "missionId": "arecibo-planetary-radar"
+          },
+          {
+            "kind": "machine",
+            "machineId": "goldstone-dss14",
+            "evidence": "The preserved credit for this input reads: Busch et al. (2008), Icarus 195, 614–621; Arecibo, Goldstone and NASA/JPL",
+            "missionId": "goldstone-solar-system-radar"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",

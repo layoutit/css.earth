@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "658d1d382a468d7740b3ef2c441c69f0e12f08701b02828107dae1dbe1446fdf"
+    "sha256": "8bf9d48acf82c97dafd80032e4b943b0b74eaa7f3fe108303ae86eb0e06c1dad"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -276,6 +276,25 @@
       "path": "shape/ellipsoid.tab",
       "origin": "https://arxiv.org/abs/1801.07221",
       "credit": "Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "alma",
+            "evidence": "The preserved credit for this input reads: Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling."
+          },
+          {
+            "kind": "machine",
+            "machineId": "spitzer",
+            "evidence": "The preserved credit for this input reads: Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling."
+          },
+          {
+            "kind": "machine",
+            "machineId": "herschel",
+            "evidence": "The preserved credit for this input reads: Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling."
+          }
+        ]
+      },
       "license": "MIT numeric extraction of published scientific facts",
       "licenseEvidence": [
         "https://arxiv.org/abs/1801.07221"

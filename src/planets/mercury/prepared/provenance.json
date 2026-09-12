@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "114847bb1bf9f9a372e4fde252ac297af4a9efe26d6b0e1d8711b40d7b2912f1"
+    "sha256": "9f6d8b41a2779e525843330cc2072bf30785abf5af48e806823dac3ff36d79b6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -724,8 +724,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "messenger",
+            "kind": "machine",
+            "machineId": "messenger",
             "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}",
             "missionId": "messenger"
           }
@@ -787,8 +787,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "messenger",
+            "kind": "machine",
+            "machineId": "messenger",
             "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
             "missionId": "messenger"
           }
@@ -851,8 +851,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "messenger",
+            "kind": "machine",
+            "machineId": "messenger",
             "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}",
             "missionId": "messenger"
           }

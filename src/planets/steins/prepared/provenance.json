@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "859bbf5e024704b36ca20bdaed21b4d810fa951ef7eb5cec23fd2b00e58fb0b4"
+    "sha256": "765fdb41ba0f370b4d8d1cea61a23eed830c75c92259ccf615f948b924115cac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -437,8 +437,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "rosetta",
+            "kind": "machine",
+            "machineId": "rosetta",
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg",
             "missionId": "rosetta"
           }

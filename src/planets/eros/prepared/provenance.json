@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cfed4ad3b27c6382c09b8d22ec28f51708d585b966248ffcc83029287767bd05"
+    "sha256": "cf10e022af33bd6ae54f2258261a54f7ca507dbbda68d0a8f19a06c5b9441a78"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -390,8 +390,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "near-shoemaker",
+            "kind": "machine",
+            "machineId": "near-shoemaker",
             "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
             "missionId": "near-shoemaker"
           }
@@ -446,8 +446,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "near-shoemaker",
+            "kind": "machine",
+            "machineId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab",
             "missionId": "near-shoemaker"
           }
@@ -502,8 +502,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "near-shoemaker",
+            "kind": "machine",
+            "machineId": "near-shoemaker",
             "evidence": "NEAR MSI filter 4 (950 nm); pinned eros_nearmsi_filter4.lbl and PDS4 XML in the Golish 2023 archive.",
             "missionId": "near-shoemaker"
           }

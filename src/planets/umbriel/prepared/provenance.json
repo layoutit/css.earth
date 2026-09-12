@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4ceab1245b071f526b087c147abac47b017253a4ada05abfef4c506697bc5a56"
+    "sha256": "87776c5753ae1be65fa61ff1ed6a41104aa9b289214501a0fa9de7ca9ba4ce97"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -311,8 +311,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "voyager-2",
+            "kind": "machine",
+            "machineId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/c98739ae-8739-4065-85a3-8096a5500104/download",
             "missionId": "voyager-2"
           }

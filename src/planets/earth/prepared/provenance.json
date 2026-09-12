@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9bcf0d025fa6e5620557e20afdb595d7549a5745c8e4b6d06dc17c4e915a8d5a"
+    "sha256": "50a1b9e7db2e3f6355dff0f145e490afe21a2a31c007137167e4d5d98253e6d9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1215,8 +1215,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "terra",
+            "kind": "machine",
+            "machineId": "terra",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg",
             "missionId": "terra"
           }

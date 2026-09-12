@@ -17,7 +17,7 @@ const limitations = [...new Set(local.flatMap(use => use.limitations))];
   {source.identifiers.length > 0 && <ul>{source.identifiers.map(id => <li>{id.type}: {id.value}</li>)}</ul>}
   {(datasets.length > 0 || metadata.length > 0) && <h4>Used in cssEarth</h4>}
   {datasets.length > 0 && <ul class="planet-source-datasets">{datasets.map(view => <li><a href={view.href} data-dataset-link data-dataset-object={view.objectId} data-dataset-id={view.lensId}>{view.objectName} · {view.label}</a></li>)}</ul>}
-  {metadata.length > 0 && <ul>{metadata.map(use => <li>{use.consumerLabel} · {use.consumerKind === 'mission' || use.consumerKind === 'spacecraft' ? 'metadata citation' : use.kind.replaceAll('-', ' ')}{(use.credit || use.limitations.length > 0) && <p>{use.credit} {use.limitations.join(' ')}</p>}</li>)}</ul>}
+  {metadata.length > 0 && <ul>{metadata.map(use => <li>{use.consumerLabel} · {use.consumerKind === 'mission' || use.consumerKind === 'machine' ? 'metadata citation' : use.kind.replaceAll('-', ' ')}{(use.credit || use.limitations.length > 0) && <p>{use.credit} {use.limitations.join(' ')}</p>}</li>)}</ul>}
   {facts.length > 0 && <><h4>Factsheet</h4><ul class="planet-source-facts">{facts.map(use => <li><a href={use.citationUrl} target="_blank" rel="noreferrer">{use.consumerLabel}</a></li>)}</ul></>}
   {products.length > 0 && <>
     {limitations.map(limit => <p>{limit}</p>)}
