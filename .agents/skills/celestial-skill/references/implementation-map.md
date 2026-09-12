@@ -176,6 +176,14 @@ because lowest-emission selection cannot separate them. The
 [Dimorphos README](../../../../src/planets/dimorphos/README.md) records the
 measured residuals, transfer distances and the archive's pixel-scale unit slip.
 
+The PDS3 routes (OSIRIS GEO, AMICA) stay instrument decoders behind the same
+seam, decided 2026-09-12 after a code review: their archives do not declare
+plane units or semantics the way a PDS4 label does, and about half of each
+decoder is instrument policy (quality-bit polarity and HISTORY radiometry for
+OSIRIS; gzip band reversal and the paired flat for AMICA), so a declaration
+would restate constants while turning validity policy into data. Revisit only
+if a third attached-label, pointer-addressed PDS3 geometry archive appears.
+
 ## Commands and test routing
 
 Read `package.json` for the selected checkout. The commands below have distinct
