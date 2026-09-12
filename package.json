@@ -136,8 +136,7 @@
     "pretest": "pnpm prepare:shell",
     "typecheck:configs": "tsc -p tsconfig.configs.json",
     "oracles:setup": "node tools/oracles/setup.mts",
-    "oracle:spice-dart": "node tools/oracles/spice/dart-draco-points.mts .local/oracles/dart-draco-points.json && .local/oracles/venv/bin/python tools/oracles/spice/dart-draco.py .local/oracles/dart-draco-points.json",
-    "oracle:pds-dart": ".local/oracles/venv/bin/python tools/oracles/pds/dart-draco-cube.py"
+    "oracles:run": "node tools/oracles/run.mts"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",

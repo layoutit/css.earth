@@ -227,19 +227,19 @@ if a third attached-label, pointer-addressed PDS3 geometry archive appears.
 
 The pipeline derives nothing from an oracle; an oracle recomputes what the
 pipeline computed so a test can compare. `tools/oracles/` holds them with a
-pinned Python environment (`pnpm oracles:setup`, `tools/oracles/requirements.txt`)
-and each writes a fixture under `tests/oracles/` that names its version and the
-sha256 of every input it read. `tools/oracles/spice/dart-draco.py` runs SpiceyPy
-(CSPICE N0067) over the pinned DART kernels: `tools/spice/oracle.test.mts` then
-holds `tools/spice/` to a microsecond in time, a millimetre in position, a
-nanoradian in frame rotation and a few thousandths of a pixel in where the
-DRACO camera places archived intercepts. `tools/oracles/pds/dart-draco-cube.py`
-runs NASA's pds4_tools over the DRACO cube: the decoder must reproduce every
-sampled plane value exactly. Add an oracle when a new reader or a new geometry
-route arrives; regenerate a fixture only when its tool or inputs change, and
-say so in the PR. ALE and usgscsm (instrument pixel models and distortion) need
-a conda environment and arrive with the first Cassini ISS lens; ISIS `photomet`
-with the photometric step. See `tools/oracles/README.md`.
+pinned Python environment (`pnpm oracles:setup`, `tools/oracles/requirements.txt`),
+and each writes a fixture under `tests/oracles/` that names its versions and the
+sha256 of every input. Every archive reader on the observation seam has one:
+SpiceyPy for `tools/spice/` (a microsecond in time, a millimetre in position, a
+nanoradian in rotation); pds4_tools for the PDS4 geometry cube; pvl and numpy for
+the OSIRIS geometry, OSIRIS reflectance, AMICA and ISIS2 readers; astropy for
+the L'LORRI reader and its TAN-SIP distortion and for the three encounter FITS
+layouts. Comparing tests sit beside each reader, and `tools/oracle-fixtures.test.mts`
+refuses a fixture from an unpinned environment or unpinned inputs. A new reader
+or geometry route brings its oracle; regenerate a fixture only when its tool or
+inputs change, and say so in the PR. ALE and usgscsm (pixel models and
+distortion) need conda and arrive with the first Cassini ISS lens; ISIS
+`photomet` with the photometric step. See `tools/oracles/README.md`.
 
 ## Commands and test routing
 
@@ -253,7 +253,7 @@ purposes; run those needed for the task, not every preparation step by default.
 | Restore missing source pins and verify existing bytes | `node tools/objects/dist/operations.js acquire <id>` |
 | Verify source closure without acquiring | `node tools/objects/dist/operations.js acquire <id> --verify-only` |
 | Prepare selected objects through the cache and shared steps | `pnpm prepare:planets -- --object=<id>` |
-| Create the oracle environment and regenerate an oracle fixture | `pnpm oracles:setup`, then `pnpm oracle:spice-dart` or `pnpm oracle:pds-dart` |
+| Create the oracle environment and regenerate oracle fixtures | `pnpm oracles:setup`, then `pnpm oracles:run [group/name ...]` |
 | Invoke authored preparation directly | `node tools/objects/dist/prepare-authored.js <id> --write` |
 | Restore sources before root preparation | `pnpm prepare:checkout` |
 | Build the site and assemble declared runtime files | `pnpm build` |

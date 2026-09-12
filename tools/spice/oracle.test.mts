@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { loadKernelSet } from './kernel-set.mts';
 import { utcToEt, etToUtc } from './lsk.mts';
@@ -9,6 +8,7 @@ import { encodeClock, clockToEt, etToClock } from './sclk.mts';
 import { spiceCamera } from './camera.mts';
 import { apply, transpose } from './ck.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../source-values.mts';
+import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '../oracles/fixture.mts';
 
 /**
  * The SPICE toolkit as the oracle. tools/oracles/spice/dart-draco.py runs
@@ -17,26 +17,22 @@ import { requireRecord, requireArray, requireString, requireFiniteNumber } from 
  * fixture names the toolkit version and the sha256 of every kernel, so the
  * comparison is bound to exact inputs.
  */
-const root = resolve(import.meta.dirname, '../..');
-const fixture = requireRecord(JSON.parse(await readFile(resolve(root, 'tests/oracles/spice/dart-draco.json'), 'utf8')));
-const inputs = requireArray(fixture.inputs).map(entry => requireRecord(entry));
-const cases = requireRecord(fixture.cases);
+const fixture = await readOracleFixture('spice/dart-draco.json');
+const cases = fixture.cases;
+// The kernels in load order; the cube and label that supplied the intercepts follow them.
+const kernels = fixture.inputs.filter(entry => entry.path.includes('/source/spice/'));
 const numbers = (value: unknown) => requireArray(value).map(v => requireFiniteNumber(v));
-const set = await loadKernelSet(inputs.map(entry => resolve(root, requireString(entry.path))));
+const set = await loadKernelSet(kernels.map(entry => resolve(ORACLE_ROOT, entry.path)));
 const clock = set.clock(-135);
 const close = (a: readonly number[], b: readonly number[], tolerance: number) => a.every((v, i) => Math.abs(v - b[i]) <= tolerance);
 
-test('the fixture was generated from the pinned kernels by a named SPICE toolkit', () => {
-  assert.equal(fixture.schema, 'cssearth-oracle-fixture@1');
+test('the fixture was generated from the pinned kernels by a named SPICE toolkit', async () => {
   assert.equal(fixture.oracle, 'spiceypy');
-  const tool = requireRecord(fixture.tool);
-  assert.match(requireString(tool.cspice), /^CSPICE_N\d{4}$/);
-  for (const entry of inputs) {
-    const kernel = set.kernels.find(k => k.path.endsWith(requireString(entry.path).replace('src/planets/dimorphos/source/', '')));
-    assert.ok(kernel, `kernel ${entry.path} loaded`);
-    assert.equal(kernel.sha256, requireString(entry.sha256), `${entry.path} is the pinned kernel`);
-  }
-  assert.equal(inputs.length, 15);
+  assert.match(requireString(fixture.tool.cspice), /^CSPICE_N\d{4}$/);
+  await assertPinnedInputs(fixture.inputs);
+  assert.equal(kernels.length, 15);
+  assert.deepEqual(set.kernels.map(kernel => kernel.sha256), kernels.map(entry => entry.sha256), 'the same kernels in the same order');
+  assert.equal(fixture.inputs.length, 17, 'fifteen kernels, the cube and its label');
 });
 
 test('leap seconds, TDB and the spacecraft clock agree with CSPICE to a microsecond', () => {
@@ -84,7 +80,7 @@ test('every frame class in the DART set agrees with CSPICE to a nanoradian', () 
 });
 
 test('archived DRACO intercepts appear where CSPICE places them through the DART_DRACO frame with LT+S', () => {
-  const exposure = requireRecord(fixture.exposure), et = requireFiniteNumber(exposure.et);
+  const exposure = requireRecord(cases.exposure), et = requireFiniteNumber(exposure.et);
   const pixels = { focalLength: { key: 'FOCAL_LENGTH', unit: 'mm' as const }, pixelPitch: { key: 'PIXEL_SIZE', unit: 'micrometre' as const }, center: 'DETECTOR_CENTER', boresight: 'BORESIGHT', samples: 'PIXEL_SAMPLES', lines: 'PIXEL_LINES', frame: 'FOV_FRAME', origin: 0, column: '-X', row: '-Y' };
   const camera = spiceCamera({ pool: set.pool, ephemeris: set.ephemeris, rotation: set.rotation, observer: -135, target: 120065803, bodyFrame: 'DIMORPHOS_FIXED', instrument: -135102, et, aberration: 'LT+S', pixels });
   // Our camera folds one aberration rotation at the target; CSPICE aberrates each point: they agree to a few thousandths of a pixel.

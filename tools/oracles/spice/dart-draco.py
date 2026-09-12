@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """SpiceyPy oracle for the DART DRACO geometry: the reference SPICE toolkit computes
-times, states, frames and surface-point directions from the same pinned kernels that
-tools/spice/ reads, and writes them as a fixture that tools/spice/oracle.test.mts
-compares against. Oracles verify; they never produce pipeline inputs.
+times, states, frames and the apparent directions of archived surface intercepts
+from the same pinned kernels that tools/spice/ reads, and writes a fixture that
+tools/spice/oracle.test.mts compares against. The intercepts are read from the
+cube with NASA's pds4_tools, not with the pipeline's own decoder, so no pipeline
+code stands between the archive and the oracle.
 Usage: .local/oracles/venv/bin/python tools/oracles/spice/dart-draco.py
 """
 import hashlib, json, platform, sys
@@ -17,11 +19,8 @@ kernels = [entry['path'] for entry in manifest['inputs'] if entry['path'].starts
 order = ['lsk/', 'pck/pck00010', 'pck/didymos', 'fk/dart', 'fk/didymos', 'ik/', 'sclk/', 'spk/de430', 'spk/didymos_barycenter', 'spk/didymos_system', 'spk/dart_struct',
          'spk/dart_2022_231', 'spk/dart_2022_269_2022_269_rec', 'spk/dart_2022_269_2022_269_spc', 'ck/']
 kernels.sort(key=lambda path: next(i for i, prefix in enumerate(order) if path.startswith('spice/' + prefix)))
-inputs = []
 for path in kernels:
-    full = source / path
-    inputs.append({'path': f'src/planets/dimorphos/source/{path}', 'sha256': hashlib.sha256(full.read_bytes()).hexdigest(), 'bytes': full.stat().st_size})
-    spice.furnsh(str(full))
+    spice.furnsh(str(source / path))
 
 DART, DIMORPHOS, DIDYMOS, BARYCENTER, SUN = -135, 120065803, 920065803, 20065803, 10
 exposure_sclk = '1/0401930040:07327'
@@ -66,21 +65,26 @@ for et in [et0 - 30, et0, et0 + 11]:
         frames.append({'frame': frame, 'et': et, 'matrix': [vec(row) for row in matrix]})
 
 # Apparent directions of archived DRACO intercepts in the DART_DRACO frame: spkcpt handles a constant body-fixed point with LT+S.
-cube_points = json.loads(Path(sys.argv[1]).read_text()) if len(sys.argv) > 1 else []
+import pds4_tools
+cube_label = source / 'observations/dart_0401930040_12262_01_geo.xml'
+structures = {structure.id: np.asarray(structure.data, dtype=np.float64) for structure in pds4_tools.read(str(cube_label), quiet=True) if structure.id in ('xcoord', 'ycoord', 'zcoord')}
+width = structures['xcoord'].shape[1]
+flat = {axis: structures[axis].reshape(-1) for axis in structures}
+cube_points = []
+for i in range(0, flat['xcoord'].size, 4001):
+    xyz = [flat['xcoord'][i], flat['ycoord'][i], flat['zcoord'][i]]
+    # Off-body pixels inside the readout window carry -999; pixels outside the window carry -1e10.
+    if all(np.isfinite(v) and v != -999 and abs(v) < 1e8 for v in xyz):
+        cube_points.append({'pixel': [i % width, i // width], 'xyz': [float(v) for v in xyz]})
 surface = []
 for point in cube_points:
     state, lt = spice.spkcpt(point['xyz'], 'DIMORPHOS', 'DIMORPHOS_FIXED', et0, 'DART_DRACO', 'OBSERVER', 'LT+S', 'DART')
     direction = np.array(state[:3]); direction /= np.linalg.norm(direction)
     surface.append({'pixel': point['pixel'], 'xyz': point['xyz'], 'directionInDraco': vec(direction), 'rangeKm': float(np.linalg.norm(state[:3])), 'lightTime': float(lt)})
 
-fixture = {
-    'schema': 'cssearth-oracle-fixture@1', 'oracle': 'spiceypy', 'generatedBy': 'tools/oracles/spice/dart-draco.py',
-    'tool': {'spiceypy': spice.__version__, 'cspice': spice.tkvrsn('TOOLKIT'), 'python': platform.python_version(), 'numpy': np.__version__},
-    'inputs': inputs,
-    'exposure': {'sclk': exposure_sclk, 'et': et0, 'utc': utc0},
-    'cases': {'times': times, 'states': states, 'frames': frames, 'surface': surface},
-}
-out = root / 'tests/oracles/spice/dart-draco.json'
-out.parent.mkdir(parents=True, exist_ok=True)
-out.write_text(json.dumps(fixture, indent=1) + '\n')
-print(json.dumps({'written': str(out.relative_to(root)), 'times': len(times), 'states': len(states), 'frames': len(frames), 'surface': len(surface), 'cspice': spice.tkvrsn('TOOLKIT')}))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from fixture import write
+write('spice/dart-draco.json', 'spiceypy', 'tools/oracles/spice/dart-draco.py',
+      {'spiceypy': spice.__version__, 'cspice': spice.tkvrsn('TOOLKIT'), 'pds4_tools': pds4_tools.__version__},
+      [source / path for path in kernels] + [source / 'observations/dart_0401930040_12262_01_geo.fits', cube_label],
+      {'exposure': {'sclk': exposure_sclk, 'et': et0, 'utc': utc0}, 'times': times, 'states': states, 'frames': frames, 'surface': surface})
