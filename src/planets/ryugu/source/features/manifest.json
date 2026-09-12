@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-surface-features-source@1",
+  "source": "IAU/USGS Gazetteer of Planetary Nomenclature, Ryugu centre points",
+  "snapshotDate": "2026-09-12",
+  "sourcePage": "https://planetarynames.wr.usgs.gov/Page/RYUGU/target",
+  "license": "Public domain (United States Government work)",
+  "licenseEvidence": "The archive ships no FGDC record; USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits, read 2026-09-12) states that USGS-authored or produced data and information are in the U.S. Public Domain, and every Gazetteer export that ships a record declares the use constraint “Public domain.”",
+  "qualification": "IAU-adopted feature names with Gazetteer centre coordinates, diameters and latitude–longitude extents, positive-east longitudes 0–360°. Centre points only: feature outlines are not published; names without a published diameter are labelled without a rim, names without a published centre are not placed.",
+  "inputs": [
+    {
+      "path": "RYUGU_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RYUGU_nomenclature_center_pts.zip",
+      "bytes": 35497,
+      "sha256": "68cea46d06151259e792a964297f7865838d2a9d66258fb63bb5f55a777bd44f"
+    }
+  ]
+}
