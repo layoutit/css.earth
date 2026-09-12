@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-surface-features-source@1",
-  "source": "NASA PDS, Tempel 1 shape model version 2.0 (2012 model)",
+  "source": "NASA PDS 2012 shape model; Thomas et al. (2013), Fig. 2b",
   "snapshotDate": "2026-09-12",
   "sourcePage": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DIF-C-HRIV%2FITS%2FMRI-5-TEMPEL1-SHAPE-V2.0",
   "license": "Repository-authored factual compilation; cited source data retain their own terms",
@@ -10,8 +10,8 @@
     {
       "path": "landmarks.json",
       "origin": "Project compilation from the individually cited sources",
-      "bytes": 969,
-      "sha256": "9df9a04ae6ebfa5d8b5758659c3b8e4d322b0ae4fb24cc2d105bd59be1c12dcc"
+      "bytes": 4944,
+      "sha256": "8a8eed86424e7e467495f3faff70382ab657f74ac888f667fbdbce2a34542f33"
     }
   ]
 }
