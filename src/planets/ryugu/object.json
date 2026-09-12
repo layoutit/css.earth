@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "85321758aa7a0ee00beda650c61c305ce71056dd11b1f9d7228e0b09523a820e"
+    "sha256": "c3e1310178e0bcbe6ad5a0519974497cddb1d9827d0fb6a9892933321630ec54"
   },
   "id": "ryugu",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -86,9 +87,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "47f3950584d598f6c40a56454e0b2d7eec685c58619389080ee9082cf45dc6f0"
+          "sha256": "94ed273d5be8c9ece286e9741c26a0a0505f38ab09f4157245aa7a86e1c102bb"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "cddaaba5a7f49ff220c633a02cc9448ef7bcc008b1cc0452516a770bc8426499"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -123,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5c588985d6183d2ebad60954f557ed696becc66daa6d8626b8eac7a133305607"
+        "sha256": "38a00254d76b4118ab01de87058c6ec9ef1d15d434b8721e30a0d5682703179d"
       }
     },
     "catalog": {

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4f3ab61c866b6e4d48802c3dc549f63152d1539e9279d48e381c7b1a5413f0d2"
+    "sha256": "305300f481e3d8b69a9d981cd97c1b0106607f4adb562d1ba90a9c2d8bc5ba00"
   },
   "id": "bennu",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -91,9 +92,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "f6520b873d38373f357d5e08de62fd842b1558023ee4d14c7743164c157b06ba"
+          "sha256": "1a6598bcdf5a252189cb74246545630b9f9c7a5489f1fa8e3ad007d9691a70c5"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "016bbf80dfe888dcba7fb3bdfb024163f25e8dcde1cd1e4c222b5b736d65d88b"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -128,7 +138,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "19d141edc2060034ff7be0a5533aca19e7e1295bfef79c81ea3e9f169a85bc98"
+        "sha256": "8c03e29d5b6ee2934966dfdb506f47ce44d13a650cf9083f70040f6838ff1645"
       }
     },
     "catalog": {

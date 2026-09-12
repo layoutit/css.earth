@@ -1,0 +1,48 @@
+{
+  "id": "source-hyperion-usgs-gazetteer-nomenclature-center-pts",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gazetteer of Planetary Nomenclature · Hyperion centre points",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://planetarynames.wr.usgs.gov/Page/HYPERION/target",
+      "label": "Source"
+    },
+    {
+      "role": "archive",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/HYPERION_nomenclature_center_pts.zip",
+      "label": "Shapefile archive"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/hyperion/source/features/manifest.json",
+      "revision": "ba83e19e793913b78101b1d112c4a0b89ccf9da8",
+      "sha256": "9124922822c3294d6ee5bf2cb03131caad544883d59dd5bf3cc1c572f00d7525",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature.",
+      "scope": "Feature names, centres, diameters, extents and name origins.",
+      "evidence": "metadata_nomenclature_points_HYPERION.xml inside the pinned archive (datacred)."
+    },
+    {
+      "kind": "rights",
+      "text": "Public domain United States Government work.",
+      "scope": "The archived shapefile export and its metadata.",
+      "evidence": "metadata_nomenclature_points_HYPERION.xml inside the pinned archive (useconst: Public domain.)."
+    },
+    {
+      "kind": "limitation",
+      "text": "Centre points, diameters and latitude–longitude extents only; the Gazetteer publishes no feature outlines, and the export is regenerated weekly.",
+      "scope": "Prepared labels and outlines.",
+      "evidence": "planetarynames.wr.usgs.gov/GIS_Downloads lists centre-point files only; the archive metadata declares weekly updates."
+    }
+  ]
+}

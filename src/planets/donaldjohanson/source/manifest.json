@@ -294,6 +294,30 @@
         "kind": "local",
         "reason": "Camera geometry calculated from the pinned image and mission kernels for DONALDJOHANSON at 2025-04-20T17:50:14.018."
       }
+    },
+    {
+      "id": "usgs-gazetteer-donaldjohanson-nomenclature-center-pts",
+      "path": "features/DONALDJOHANSON_nomenclature_center_pts.zip",
+      "expectedBytes": 30329,
+      "expectedSha256": "1f516df5c1da65c45e435aa1a377998814561eec05c9823e1d5ddc715a97d5d9",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DONALDJOHANSON_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Donaldjohanson on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Donaldjohanson centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DONALDJOHANSON/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -335,8 +359,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2536,
-      "expectedSha256": "6d051e079932bc28935173e413c0f048ce250d4568cb6877c1459bc2dd1770b6"
+      "expectedBytes": 2806,
+      "expectedSha256": "b8f29469878851ac94f32e23401b9866a529e491e7ee00120de4f951231f9581"
     },
     {
       "path": "preparation/navigation.json",
@@ -407,6 +431,60 @@
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 144983,
       "expectedSha256": "cd2e765ce2c5aebdf4e02e8db87aaf3fedef71b7447d780570b591f62a9e0ee5"
+    },
+    {
+      "id": "donaldjohanson-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1339,
+      "expectedSha256": "b5ca18dfacbff53035e64239d9e9fc2753a54a5e7cd2ade76b27a44bb25fcb92",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "donaldjohanson-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1085,
+      "expectedSha256": "ff14929f8ef7f12447aaec8c69f0e6c369dbe07daf1fe41c033385711d7335ae",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "donaldjohanson-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 161,
+      "expectedSha256": "4b235e29f861125fdab3b736f8d727c782bb449da1df0f9df73dfbe4c536bf6a",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
     }
   ]
 }
