@@ -21,8 +21,10 @@ export function datasetContext(objectId: string, lensId: string, provenance: Pro
     attribution.kind !== 'unresolved' && attribution.missionId ? [attribution.missionId] : []));
   const machineIds = new Set(edges.flatMap(({ attribution }) =>
     attribution.kind === 'machine' && !attribution.missionId ? [attribution.machineId] : []));
-  const notes = [...new Set(edges.flatMap(({ attribution }) =>
-    attribution.kind === 'unresolved' ? [attribution.reason] : []))];
+  // An unresolved attribution still names who is credited; only the individual
+  // machine is unknown. Keeping the label lets the card say whose data this is.
+  const notes = [...new Map(edges.flatMap(({ attribution }) =>
+    attribution.kind === 'unresolved' ? [[attribution.label, { label: attribution.label, reason: attribution.reason }] as const] : [])).values()];
   const local = new Map(provenance?.sources.map(source => [source.id, source]));
   const groups = new Map<string, SourceGroup>();
   const seen = new Set<string>();

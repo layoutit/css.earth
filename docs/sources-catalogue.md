@@ -15,6 +15,13 @@ each body keeps its own input bytes, processing, credits and limits.
 | Body `README.md` | Adopted values, source choices, processing, results and known problems |
 | [Mission and machine catalogue](../site/source/machines/catalog.json) | Citations for individual claims, with checked dates and locators |
 | [Render library](../site/source/machines/render-library.json) and [emblem library](../site/source/machines/emblem-library.json) | Artwork bindings, original credits and file pins |
+
+Approved machine artwork is public domain or CC BY, so the repository carries no
+share-alike obligation, with one recorded exception. The Herschel photograph is
+CC BY-SA 3.0: its only public-domain alternative is narrower than the card frame
+and ESA's own images are share-alike. Each render-library entry carries its own
+`license`, so the obligation stays attached to the file it covers. Reusing that
+file elsewhere carries the share-alike terms with it.
 | Shared environment `source/provenance.json` | The source binding and meaning of that environment |
 
 `site/prepared-sources.json` and `site/prepared-machines.json` are generated

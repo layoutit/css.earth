@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f946e5f22b703af0001aa185af033e0d075d1f4b53ead83df63c1e733cc7f8b5"
+    "sha256": "15d4a4c657ce3f6ff4c4bd7c51d8faec53f633f6964219cb536997991d838b14"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -899,6 +899,16 @@
       "path": "vims/dione-infrared.tif",
       "origin": "https://doi.org/10.17189/ctqe-ta30",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
       "licenseEvidence": [
         "https://doi.org/10.17189/ctqe-ta30",
@@ -1133,6 +1143,16 @@
     {
       "kind": "source-input",
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
@@ -1180,6 +1200,16 @@
     {
       "kind": "source-input",
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
@@ -1227,6 +1257,16 @@
     {
       "kind": "source-input",
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"

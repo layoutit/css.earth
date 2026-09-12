@@ -35,6 +35,12 @@ that establish an end before a start. An active status must include its `asOf`
 date and cannot contradict a known earlier end. The card displays the claim's
 date instead of describing it as live status.
 
+A machine carries a `band` only where its own cited source states one. Most
+spacecraft carry several instruments across the spectrum, so no single band is
+true of them and none is invented. A body's contributor cards collapse into one
+tabbed card only when every contributor has a distinct band; otherwise they stay
+separate cards, which is the ordinary case for spacecraft.
+
 Separately operated machines get separate records. Instruments,
 containers and return capsules are not automatically machine records. Routine
 extensions, encounters and manoeuvres do not automatically create new missions;
@@ -49,7 +55,19 @@ instead, pinned in
 and prepared by
 [`prepare-machine-photographs.mts`](../../tools/prepare-machine-photographs.mts)
 into the same library, where `source.kind` tells a photograph from a render.
-Approved artwork is public domain or CC BY; share-alike files are not used. An emblem represents a mission. Group artwork remains mission
+
+Artwork preparation is an explicit maintenance operation; normal builds reuse the
+committed files. `pnpm prepare:machine-photographs` re-acquires each pinned
+photograph and prepares it to the library's frame.
+`pnpm prepare:machine-renders` clears the flat sidebar background out of the
+approved renders to alpha, flood-filling only from the frame edges and refusing
+any change to artwork RGB, then records where each machine sits so a card can
+crop to it rather than to the empty frame around it.
+
+Approved artwork is public domain or CC BY, with one recorded exception: the
+Herschel photograph is CC BY-SA 3.0, because its only public-domain alternative
+is too small for the frame and ESA's own images are share-alike. Each entry
+carries its `license`, so the obligation stays attached to the file it covers. An emblem represents a mission. Group artwork remains mission
 artwork; the individual GRAIL vehicles have text details rather than duplicate
 portraits of the pair. The old Viking artwork remains in its approved library,
 without being relabelled as a specific orbiter or lander.
