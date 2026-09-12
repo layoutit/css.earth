@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-surface-features-source@1",
+  "source": "Britt et al. (2004) Fig. 4 registered through its unannotated Fig. 1 to the pinned MICAS orthophoto and XYZ cubes.",
+  "snapshotDate": "2026-09-12",
+  "sourcePage": "https://doi.org/10.1016/j.icarus.2003.09.004",
+  "license": "Repository-authored factual compilation; cited source data retain their own terms",
+  "licenseEvidence": "https://doi.org/10.1016/j.icarus.2003.09.004",
+  "qualification": "USGS local image-plane XYZ metres; the preparation display frame applies its documented -2200 m Z translation. Each caption identifies its source and placement limits. No official centre or boundary is claimed.",
+  "inputs": [
+    {
+      "path": "landmarks.json",
+      "origin": "Project image-control measurements and native XYZ lookup; Britt et al. (2004), Figs. 1 and 4; NASA/MICAS/USGS",
+      "bytes": 3506,
+      "sha256": "8167356f2187d1e4b7d63d27d61871762965bdc6d01325ac0f2e67e9e387b1af"
+    },
+    {
+      "path": "image-registration.json",
+      "origin": "Project image-control measurements and native XYZ lookup; Britt et al. (2004), Figs. 1 and 4; NASA/MICAS/USGS",
+      "bytes": 56879,
+      "sha256": "5308b6cbff25b419b9dc89cf8d22e0d3b620da513377863bc35b21b48c8f3c1c"
+    },
+    {
+      "path": "control-measurements.json",
+      "origin": "Project image-control measurements and native XYZ lookup; Britt et al. (2004), Figs. 1 and 4; NASA/MICAS/USGS",
+      "bytes": 56004,
+      "sha256": "9adf195d756bd5b95bb39be59f1cf5956e8795d554d8775b57dec68c46cd9635"
+    },
+    {
+      "path": "evidence/image-landmarks.json",
+      "origin": "Project image-control measurements and native XYZ lookup; Britt et al. (2004), Figs. 1 and 4; NASA/MICAS/USGS",
+      "bytes": 80209,
+      "sha256": "872724f5243c30c4e64fc1df8e4e55f899440e60d8282ec6ea35f4b991e95ba3"
+    }
+  ]
+}
