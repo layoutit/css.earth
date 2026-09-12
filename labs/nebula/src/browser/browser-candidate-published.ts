@@ -4,7 +4,8 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 
 const base = process.argv[2] ?? 'http://127.0.0.1:4331';
-const candidates = process.argv.slice(3); if (!candidates.length) candidates.push('m42');
+const checkCancellation = process.argv.includes('--cancel');
+const candidates = process.argv.slice(3).filter(value => value !== '--cancel'); if (!candidates.length) candidates.push('m42');
 if (candidates.some(id => !/^[a-z0-9-]+$/.test(id))) throw new TypeError('Invalid candidate id.');
 const output = '.local/nebula-lab/candidate-published-browser'; await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ headless: true });
@@ -57,7 +58,17 @@ try {
     receipts.push({ id, result, lenses, stars });
   }
   assert.deepEqual(errors, []); assert.deepEqual(posts, [], 'Inspecting a CLI-prepared cloud started processing.');
+  if (checkCancellation) {
+    const originalResult = await page.locator('.compiler-controls').getAttribute('data-result-id');
+    const accepted = page.waitForResponse(response => response.request().method() === 'POST' && response.url().endsWith('/__nebula/compiler-jobs'));
+    await page.locator('#compiler-depth').press('ArrowRight'); assert.ok((await accepted).ok());
+    await page.getByRole('button', { name: 'Cancel', exact: true }).click();
+    await page.waitForFunction(() => document.querySelector('.compiler-controls')?.getAttribute('data-job-status') === 'cancelled');
+    const cancelledPosts = posts.length; await page.reload(); await ready();
+    assert.equal(await page.locator('.compiler-controls').getAttribute('data-result-id'), originalResult);
+    assert.equal(posts.length, cancelledPosts, 'Cancelled publication refit restarted on refresh.');
+  }
   await writeFile(`${output}/result.json`, JSON.stringify({ status: 'passed', candidates: receipts, browser: browser.version(),
-    directLoad: true, sourceSwitch: true, orbit: true, stars: true, originalOverlay: true, refresh: true, errors, posts }, null, 2));
+    directLoad: true, sourceSwitch: true, orbit: true, stars: true, originalOverlay: true, refresh: true, cancelledRefitRefresh: checkCancellation, errors, posts }, null, 2));
   console.log(`PASS prepared candidate inspection: ${receipts.map(item => `${item.id} (${item.lenses.length} lenses, ${item.stars} stars)`).join(', ')}.`);
 } catch (error) { await snapshot('failure'); throw error; } finally { await browser.close(); }

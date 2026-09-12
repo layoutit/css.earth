@@ -138,7 +138,7 @@ export function useCompiler(request: CompilerRequest, storageKey: string, inputs
             if (JSON.stringify(prepared.controls) !== JSON.stringify(ledger.completed.request.controls)) throw new Error('Saved cloud controls changed.');
             accepted = ledger.completed.signature; setResult(prepared); setStatus('Nebula ready');
           }
-        } else if (!ledger.active && !ledger.paused && published.current) {
+        } else if (published.current) {
           while (!ready.current && !stopped) await pause();
           if (stopped || !published.current) return;
           const prepared = await loadPublishedCompiler(published.current, desired.current.recipePath,
@@ -150,8 +150,9 @@ export function useCompiler(request: CompilerRequest, storageKey: string, inputs
               }
               return fetch(localFile(path), { cache: 'no-store', signal: controller.signal });
             });
-          if (!stopped && prepared && JSON.stringify(prepared.controls) === JSON.stringify(desired.current.controls)) {
-            publishedBaseline = true; accepted = signature(desired.current); setResult(prepared); setStatus('Prepared nebula ready');
+          if (!stopped && published.current && prepared && (ledger.active || ledger.paused || JSON.stringify(prepared.controls) === JSON.stringify(desired.current.controls))) {
+            publishedBaseline = true; accepted = signature({ ...desired.current, controls: prepared.controls }); setResult(prepared);
+            setStatus(ledger.paused ? 'Previous prepared nebula · compile paused' : 'Prepared nebula ready');
           }
         }
       } catch (reason) {
