@@ -21,7 +21,7 @@ test('prepared FOVs retain independent measurements across switches and resize t
   expect(viewport.read('120cqw')).toBe(narrow);
   expect(reads).toBe(preparedReads);
   expect(wide.focalPixels).toBe(800); expect(narrow.focalPixels).toBe(1200);
-  width = 700; resize(); refresh(0);
+  width = 700; resize();
   const resizedReads = reads;
   expect(viewport.read('80cqw').focalPixels).toBe(560);
   expect(viewport.read('120cqw').focalPixels).toBe(840);
@@ -61,12 +61,13 @@ test('one viewport snapshot survives camera mounts and refreshes on layout chang
   const changed = vi.fn(() => b.remeasure()), unsubscribe = viewport.subscribe(changed);
   resize();
   expect(viewport.read(scene.camera.projection.cssPerspective)).toBe(first);
-  expect(reads).toBe(measured);
-  frames.get(1)!(0); frames.clear();
+  expect(reads).toBeGreaterThan(measured);
+  expect(frames.size).toBe(0);
   expect(changed).not.toHaveBeenCalled();
-  width = 900; resize(); events.get('resize')!();
+  width = 900; events.get('resize')!();
   expect(frames.size).toBe(1);
-  frames.get(1)!(0); frames.clear();
+  resize();
+  expect(frames.size).toBe(0);
   expect(changed).toHaveBeenCalledOnce(); expect(b.state().focal).toBe(720);
   expect(viewport.read(scene.camera.projection.cssPerspective).bounds.width).toBe(900);
   unsubscribe(); viewport.destroy(); viewport.destroy();

@@ -702,8 +702,8 @@
     {
       "id": "mercury-object-content",
       "path": "content/object.json",
-      "expectedSha256": "0bb908b488c61db8b7254c02d2661f6ee64712c1e399879dbcf21b094a40722d",
-      "expectedBytes": 17104,
+      "expectedSha256": "4786a8cb8ed870bea24c6128736c5a42488b068365e20a9b30a01c729b45446f",
+      "expectedBytes": 17101,
       "origin": "Repository-authored Mercury panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -778,8 +778,8 @@
     {
       "id": "mercury-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedSha256": "8526916afcb8c7f8c875610d0b5b47297045f3677d0b5c78856850c797af84e1",
-      "expectedBytes": 2229,
+      "expectedSha256": "ef877dc3dd0b5b0b6f6378d92df9d6888542ac58f2fc8fe9b8f34b4f23412f15",
+      "expectedBytes": 2228,
       "origin": "Repository-authored Mercury CSS geometry recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -817,8 +817,8 @@
     {
       "id": "mercury-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedSha256": "93f35492fb9aa508c31dc024f67045900139e73d72f186cdaa353e8cf441a42f",
-      "expectedBytes": 110,
+      "expectedSha256": "da5bc1aa4ab75b761dd0b52beacc9b19d79f8e665a81bcd2a5709c89f4ba0a50",
+      "expectedBytes": 186,
       "origin": "Repository-authored Mercury presentation capability recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -835,8 +835,8 @@
     {
       "id": "mercury-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "d4deecc2acfe395857d22f00ec2354b5d5591efcf1f39f89d78ddfb53eeb36f3",
-      "expectedBytes": 4265,
+      "expectedSha256": "3eb4e17877104e779460cba8e6d6d683ec607300175e455a03442ff34225c372",
+      "expectedBytes": 4776,
       "origin": "Repository-authored Mercury raster preparation recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

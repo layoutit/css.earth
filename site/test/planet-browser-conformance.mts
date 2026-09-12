@@ -41,10 +41,10 @@ import { MOBILE_TOUCH_ACTION, WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_S
 import { loadPlanetBrowserProfile, assertRenderedObjectControls } from "./load-browser-profile.mts";
 import { proveSkyboxPointerBoundary } from "./skybox-pointer-boundary.mts";
 import { proveWheelZoomDistance, wheelWithReceipt } from "./wheel-zoom-distance.mts";
-import { GOOGLE_EARTH_SURFACE_FLY_TO } from
-  "../../src/platform/google-earth-surface-fly-to.mts";
-import { GOOGLE_EARTH_DRAG_INERTIA } from
-  "../../src/platform/google-earth-drag-inertia.mts";
+import { SURFACE_FLY_TO } from
+  "../../src/platform/surface-fly-to.mts";
+import { TRACKBALL_DRAG_INERTIA } from
+  "../../src/platform/trackball-drag-inertia.mts";
 import { PREPARED_WHEEL_ZOOM } from "../../src/platform/prepared-wheel-zoom.mts";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
@@ -610,7 +610,7 @@ async function proveDesktop(browser: Browser, planet: ObjectEntry, profile: Obje
     assert.equal((await interactionStats(page, planet.id)).surfaceFlyTo.starts,
       secondPressFlight.surfaceFlyTo.starts, `${planet.id}: double-click release must not restart flight`);
     await page.waitForTimeout(
-      GOOGLE_EARTH_SURFACE_FLY_TO.durationMilliseconds + 100,
+      SURFACE_FLY_TO.durationMilliseconds + 100,
     );
     const afterFlyTo = await profile.camera(page);
     assert.ok(Math.abs(afterFlyTo.pitch - beforeFlyTo.pitch) > 0.01,
@@ -1222,7 +1222,7 @@ async function proveWheelTakeover(page: Page, planet: ObjectEntry, profile: Obje
   const heldDrag = await cameraPose(page, planet.id);
   assert.deepEqual(heldDrag, heldPose,
     `${planet.id}: movement after held-wheel cancellation must wait for a new press`);
-  await page.waitForTimeout(GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds + 20);
+  await page.waitForTimeout(TRACKBALL_DRAG_INERTIA.releaseFreshnessMilliseconds + 20);
   await page.mouse.up();
   await page.evaluate(({ id, state }) => window.__cssearthTest.object(id).camera.setState(state),
     { id:planet.id, state:zoomedWhileHeld });
@@ -1232,7 +1232,7 @@ async function proveWheelTakeover(page: Page, planet: ObjectEntry, profile: Obje
   const freshDrag = await cameraPose(page, planet.id);
   assert.notDeepEqual(freshDrag.pose, heldPose.pose,
     `${planet.id}: a new press must restore dragging after wheel cancellation`);
-  await page.waitForTimeout(GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds + 20);
+  await page.waitForTimeout(TRACKBALL_DRAG_INERTIA.releaseFreshnessMilliseconds + 20);
   await page.mouse.up();
   return { bodyPressStopsWheel: true, skyPressStopsWheel: true,
     resetStopsWheel: true, heldWheelCancelsGrab: true };
@@ -1472,7 +1472,7 @@ async function proveInteractionInterruptions(page: Page, planet: ObjectEntry, pr
     { steps: 4 },
   );
   await page.waitForTimeout(
-    GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds + 20,
+    TRACKBALL_DRAG_INERTIA.releaseFreshnessMilliseconds + 20,
   );
   await page.mouse.up();
   const flyAfterDrag = await interactionStats(page, planet.id);
@@ -1526,7 +1526,7 @@ async function proveInteractionInterruptions(page: Page, planet: ObjectEntry, pr
     `${planet.id}: repeated double click must keep one fly-to only`);
   await page.waitForFunction(id =>
     !window.__cssearthTest.object(id).camera.stats().dragInertia.surfaceFlyTo.active,
-  planet.id, { timeout: GOOGLE_EARTH_SURFACE_FLY_TO.durationMilliseconds + 2000 });
+  planet.id, { timeout: SURFACE_FLY_TO.durationMilliseconds + 2000 });
   const completedFly = await interactionStats(page, planet.id);
   assert.equal(completedFly.surfaceFlyTo.completions,
     flyBeforeRepeat.surfaceFlyTo.completions + 1,

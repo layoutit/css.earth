@@ -4,13 +4,13 @@ export interface DragSample { x: number; y: number; timestamp: number; pitch: nu
 export interface DragHistory { x: Float64Array; y: Float64Array; timestamp: Float64Array; pitch: Float64Array; yaw: Float64Array; length: number; next: number; }
 export interface TrackballDeltaInput extends PointerDelta { centerX: number; centerY: number; radius: number; angularDegreesPerTrackballRadius?: number; }
 export interface DragThrowVelocity { pitchDegreesPerMillisecond: number; yawDegreesPerMillisecond: number; initialSpeedDegreesPerMillisecond: number; }
-export type DragThrow = NonNullable<ReturnType<typeof estimateGoogleEarthDragThrow>>;
+export type DragThrow = NonNullable<ReturnType<typeof estimateDragThrow>>;
 import { projectSphereDrag } from "./sphere-drag.js";
 
-export const GOOGLE_EARTH_DRAG_INERTIA = Object.freeze({
-  schema: "cssearth-google-earth-pro-trackball-throw@10",
+export const TRACKBALL_DRAG_INERTIA = Object.freeze({
+  schema: "cssearth-trackball-throw@10",
   qualification:
-    "GOOGLE_EARTH_PRO_7.3.7.1327_NATIVE_PROJECTION_AND_DECOMPILED_THROW",
+    "REFERENCE_APP_7.3.7.1327_NATIVE_PROJECTION_AND_DECOMPILED_THROW",
   rendererSha256:
     "11c6efe1ea0a75535485ab3804a09fc6f2ad3dd7c43f8c7d695a48d928890cd0",
   historyCapacity: 16,
@@ -56,9 +56,9 @@ export const GOOGLE_EARTH_DRAG_INERTIA = Object.freeze({
   }),
 });
 
-export function googleEarthInteractionTrackball(metrics: TrackballMetrics) {
+export function interactionTrackball(metrics: TrackballMetrics) {
   if (!Number.isFinite(metrics?.viewportWidth) || metrics.viewportWidth <= 0) {
-    throw new TypeError("Google Earth interaction viewport is invalid.");
+    throw new TypeError("Trackball interaction viewport is invalid.");
   }
   // The observed native horizontal projection is cot(30 degrees). Keep
   // input rays independent of the prepared texture camera's perspective.
@@ -68,11 +68,11 @@ export function googleEarthInteractionTrackball(metrics: TrackballMetrics) {
     focalLength: metrics.viewportWidth * Math.sqrt(3) / 2 });
 }
 
-export function googleEarthDirectAngularDegreesPerTrackballRadius(zoom: number) {
+export function directAngularDegreesPerTrackballRadius(zoom: number) {
   if (!Number.isFinite(zoom) || zoom <= 0) {
-    throw new TypeError("Google Earth direct angular response zoom is invalid.");
+    throw new TypeError("Direct angular response zoom is invalid.");
   }
-  const response = GOOGLE_EARTH_DRAG_INERTIA.directAngularResponseByZoom;
+  const response = TRACKBALL_DRAG_INERTIA.directAngularResponseByZoom;
   return clamp(
     response.interceptDegrees + response.slopeDegreesPerZoom * zoom,
     response.minimumDegrees,
@@ -84,7 +84,7 @@ export function directPitchResponseForZoom(zoom: number) {
   if (!Number.isFinite(zoom) || zoom <= 0) {
     throw new TypeError("Direct pitch response zoom is invalid.");
   }
-  const response = GOOGLE_EARTH_DRAG_INERTIA.directPitchResponseByZoom;
+  const response = TRACKBALL_DRAG_INERTIA.directPitchResponseByZoom;
   return clamp(
     response.intercept + response.slopePerZoom * zoom,
     response.minimum,
@@ -92,8 +92,8 @@ export function directPitchResponseForZoom(zoom: number) {
   );
 }
 
-export function createGoogleEarthDragHistory() {
-  const capacity = GOOGLE_EARTH_DRAG_INERTIA.historyCapacity;
+export function createDragHistory() {
+  const capacity = TRACKBALL_DRAG_INERTIA.historyCapacity;
   return {
     x: new Float64Array(capacity),
     y: new Float64Array(capacity),
@@ -105,16 +105,16 @@ export function createGoogleEarthDragHistory() {
   };
 }
 
-export function resetGoogleEarthDragHistory(history: DragHistory) {
+export function resetDragHistory(history: DragHistory) {
   validateHistory(history);
   history.length = 0;
   history.next = 0;
 }
 
-export function recordGoogleEarthDragSample(history: DragHistory, sample: DragSample) {
+export function recordDragSample(history: DragHistory, sample: DragSample) {
   validateHistory(history);
   if (!isSample(sample)) {
-    throw new TypeError("Google Earth drag sample is invalid.");
+    throw new TypeError("Drag sample is invalid.");
   }
   const index = history.next;
   history.x[index] = sample.x;
@@ -122,15 +122,15 @@ export function recordGoogleEarthDragSample(history: DragHistory, sample: DragSa
   history.timestamp[index] = sample.timestamp;
   history.pitch[index] = sample.pitch;
   history.yaw[index] = sample.yaw;
-  history.next = (index + 1) % GOOGLE_EARTH_DRAG_INERTIA.historyCapacity;
+  history.next = (index + 1) % TRACKBALL_DRAG_INERTIA.historyCapacity;
   history.length = Math.min(
     history.length + 1,
-    GOOGLE_EARTH_DRAG_INERTIA.historyCapacity,
+    TRACKBALL_DRAG_INERTIA.historyCapacity,
   );
   return history;
 }
 
-export function projectGoogleEarthTrackballDelta({
+export function projectTrackballDelta({
   previousX,
   previousY,
   currentX,
@@ -139,7 +139,7 @@ export function projectGoogleEarthTrackballDelta({
   centerY,
   radius,
   angularDegreesPerTrackballRadius =
-    GOOGLE_EARTH_DRAG_INERTIA.directAngularDegreesPerTrackballRadius,
+    TRACKBALL_DRAG_INERTIA.directAngularDegreesPerTrackballRadius,
 }: TrackballDeltaInput) {
   const values = [
     previousX,
@@ -152,7 +152,7 @@ export function projectGoogleEarthTrackballDelta({
     angularDegreesPerTrackballRadius,
   ];
   if (values.some((value) => !Number.isFinite(value)) || radius <= 0) {
-    throw new TypeError("Google Earth trackball projection is invalid.");
+    throw new TypeError("Trackball projection is invalid.");
   }
   const degreesPerPixel =
     angularDegreesPerTrackballRadius / radius;
@@ -164,7 +164,7 @@ export function projectGoogleEarthTrackballDelta({
   });
 }
 
-export function estimateGoogleEarthDragThrow({
+export function estimateDragThrow({
   history,
   releaseTimestamp,
   frameMilliseconds = 1000 / 60,
@@ -175,14 +175,14 @@ export function estimateGoogleEarthDragThrow({
   if (!Number.isFinite(releaseTimestamp) ||
       !Number.isFinite(frameMilliseconds) || frameMilliseconds <= 0 ||
       typeof projectRotation !== "function") {
-    throw new TypeError("Google Earth drag throw inputs are invalid.");
+    throw new TypeError("Drag throw inputs are invalid.");
   }
   if (history.length < 2) return null;
   const latestOffset = history.length - 1;
   const latestIndex = historyIndex(history, latestOffset);
   const freshness = releaseTimestamp - history.timestamp[latestIndex];
   if (freshness < 0 ||
-      freshness > GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds) {
+      freshness > TRACKBALL_DRAG_INERTIA.releaseFreshnessMilliseconds) {
     return null;
   }
 
@@ -198,12 +198,12 @@ export function estimateGoogleEarthDragThrow({
       (history.x[gateIndex] - history.x[beforeGateIndex]),
     history.y[latestIndex] - history.y[previousIndex] -
       (history.y[gateIndex] - history.y[beforeGateIndex]),
-  ) < GOOGLE_EARTH_DRAG_INERTIA.minimumThrowDisplacementPixels) {
+  ) < TRACKBALL_DRAG_INERTIA.minimumThrowDisplacementPixels) {
     return null;
   }
 
   const averagingWindow = frameMilliseconds *
-    GOOGLE_EARTH_DRAG_INERTIA.averagingFrameCount;
+    TRACKBALL_DRAG_INERTIA.averagingFrameCount;
   let averageStartOffset = history.length - 2;
   let includedIntervals = 1;
   while (averageStartOffset > 0) {
@@ -220,9 +220,9 @@ export function estimateGoogleEarthDragThrow({
   if (elapsed <= 0) return null;
 
   const maximumPitchVelocity =
-    GOOGLE_EARTH_DRAG_INERTIA.maximumPitchVelocityDegreesPerSecond / 1000;
+    TRACKBALL_DRAG_INERTIA.maximumPitchVelocityDegreesPerSecond / 1000;
   const maximumYawVelocity =
-    GOOGLE_EARTH_DRAG_INERTIA.maximumYawVelocityDegreesPerSecond / 1000;
+    TRACKBALL_DRAG_INERTIA.maximumYawVelocityDegreesPerSecond / 1000;
   const pitch = clamp(
     (history.pitch[latestIndex] - history.pitch[averageStartIndex]) / elapsed,
     -maximumPitchVelocity,
@@ -265,7 +265,7 @@ export function estimateGoogleEarthDragThrow({
   });
 }
 
-export function advanceGoogleEarthDragThrow({
+export function advanceDragThrow({
   pitchDegreesPerMillisecond,
   yawDegreesPerMillisecond,
   initialSpeedDegreesPerMillisecond,
@@ -279,10 +279,10 @@ export function advanceGoogleEarthDragThrow({
   ];
   if (values.some((value) => !Number.isFinite(value)) ||
       initialSpeedDegreesPerMillisecond <= 0 || elapsedMilliseconds < 0) {
-    throw new TypeError("Google Earth drag throw step is invalid.");
+    throw new TypeError("Drag throw step is invalid.");
   }
   const dampingMilliseconds =
-    GOOGLE_EARTH_DRAG_INERTIA.rotationalDampingSeconds * 1000;
+    TRACKBALL_DRAG_INERTIA.rotationalDampingSeconds * 1000;
   const multiplier = clamp(
     1 - elapsedMilliseconds / dampingMilliseconds,
     0,
@@ -297,17 +297,17 @@ export function advanceGoogleEarthDragThrow({
     pitchDeltaDegrees: pitch * elapsedMilliseconds,
     yawDeltaDegrees: yaw * elapsedMilliseconds,
     active: speed > initialSpeedDegreesPerMillisecond *
-      GOOGLE_EARTH_DRAG_INERTIA.stopVelocityRatio,
+      TRACKBALL_DRAG_INERTIA.stopVelocityRatio,
   });
 }
 
 function historyIndex(history: DragHistory, offset: number) {
-  const capacity = GOOGLE_EARTH_DRAG_INERTIA.historyCapacity;
+  const capacity = TRACKBALL_DRAG_INERTIA.historyCapacity;
   return (history.next - history.length + offset + capacity) % capacity;
 }
 
 function validateHistory(history: DragHistory) {
-  const capacity = GOOGLE_EARTH_DRAG_INERTIA.historyCapacity;
+  const capacity = TRACKBALL_DRAG_INERTIA.historyCapacity;
   if (history === null || typeof history !== "object" ||
       !(history.x instanceof Float64Array) || history.x.length !== capacity ||
       !(history.y instanceof Float64Array) || history.y.length !== capacity ||
@@ -320,7 +320,7 @@ function validateHistory(history: DragHistory) {
         history.length > capacity ||
       !Number.isInteger(history.next) || history.next < 0 ||
         history.next >= capacity) {
-    throw new TypeError("Google Earth drag history is invalid.");
+    throw new TypeError("Drag history is invalid.");
   }
 }
 

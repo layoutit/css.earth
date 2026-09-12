@@ -42,7 +42,11 @@ export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory,
     ...['raster', 'observations', 'terrestrial', 'paged-ellipsoid', 'surface', 'geometry'].map(config),
     optionalJson(resolve(outputDirectory, 'lenses.json')),
   ]);
-  const read = (file:string) => sharp(resolve(publicDirectory, basename(file))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  // One-channel grayscale maps are expanded to sRGB before the RGBA unpacking.
+  const read = async (file:string) => {
+    const image = sharp(resolve(publicDirectory, basename(file))), { channels = 3 } = await image.metadata();
+    return (channels < 3 ? image.toColourspace('srgb') : image).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  };
   const packed = async (file:string, layout:Parameters<typeof createProjectiveSurfaceRasterLayout>[0]) => unpackSurfacePreview(await read(file), layout);
   if (rawRaster?.kind === 'synoptic-emission') {
     const raster=parseEmissionPreview(rawRaster);

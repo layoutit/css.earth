@@ -20,7 +20,6 @@ import PlanetNavigationMarker from './PlanetNavigationMarker.astro';
 import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
 import overviewFacts from '../source/overview-facts.json';
 import planetarySystems from '../source/planetary-systems.json';
-import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
 import { temperatureColor } from '../../src/preparation/stars/color.ts';
 
 declare const __CSSEARTH_VERSION__: string;
@@ -54,7 +53,7 @@ const activeObject = OBJECTS.find((object) => object.id === objectId);
 const systemStar = OBJECTS.find(object => object.classification === 'star' && object.distanceAu === 0)!;
 const unavailableSystems = planetarySystems.unavailable.map(system => ({
   ...system,
-  markerStyle: `--planet-size:${PREPARED_NAVIGATION_MARKERS[systemStar.id].presentation.size * system.radiusSolar}px;--planet-color:rgb(${temperatureColor(system.temperatureK).join(' ')})`,
+  markerColor: `rgb(${temperatureColor(system.temperatureK).join(' ')})`,
 }));
 const sources = sceneSources(resources);
 const hasResources = sources.length > 0;
@@ -171,7 +170,7 @@ const searchPlaceholder = `Search ${OBJECTS.length} planets, moons, comets, aste
             </li>
             {unavailableSystems.map(system => <li>
               <span class="planet-object-link" role="link" aria-disabled="true" title="Not available yet">
-                <span class="planet-navigation-marker" style={system.markerStyle} aria-hidden="true"><i></i></span>
+                <PlanetNavigationMarker planetId={systemStar.id} color={system.markerColor} scale={system.radiusSolar} />
                 <span class="planet-object-name">{system.name}</span>
                 <span class="planet-object-distance">
                   <span class="planet-object-distance-value">≈{system.distanceLy}</span>{" "}
@@ -208,6 +207,15 @@ const searchPlaceholder = `Search ${OBJECTS.length} planets, moons, comets, aste
       <p class="planet-destination-status" role="status"></p>
     </section>}
     <PlanetInformationPanel {...Astro.props} />
+    {!navigation && <template data-object-card-preview>
+      <section class="planet-selected-panel" data-card-preview>
+        <div class="planet-title-row">
+          <h1 class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-card-preview-name></h1>
+          <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-card-preview-classification></span></div>
+        </div>
+        <p class="planet-introduction" data-card-preview-description></p>
+      </section>
+    </template>}
   </div>
 <section
   id={`${objectId}-settings`}
@@ -311,6 +319,15 @@ const searchPlaceholder = `Search ${OBJECTS.length} planets, moons, comets, aste
 </nav>
     <div class="planet-view-readout" aria-label="View information">
       {DIAGNOSTICS_ENABLED && <button type="button" class="planet-diagnostic-record" data-diagnostic-record aria-label="Record diagnostic data" aria-pressed="false" hidden>Record</button>}
+      {DIAGNOSTICS_ENABLED && <label class="planet-diagnostic-toggle" title="Temporarily stop rendering and updating the 3D starfield">
+        <input type="checkbox" data-disable-starfield disabled /> Disable starfield
+      </label>}
+      {DIAGNOSTICS_ENABLED && <label class="planet-diagnostic-toggle" title="Temporarily hide the minimap and stop its updates">
+        <input type="checkbox" data-hide-minimap disabled /> Hide minimap
+      </label>}
+      {DIAGNOSTICS_ENABLED && <label class="planet-diagnostic-toggle" title="Temporarily hide asteroid dots, labels and orbits">
+        <input type="checkbox" data-hide-asteroids disabled /> Hide asteroids
+      </label>}
       <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
         <span>Epoch: <span data-view-date></span></span>
         <span class="planet-view-separator" aria-hidden="true">·</span>

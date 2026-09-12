@@ -12,6 +12,14 @@ export const CENTER_SELECTION_DURATION_SECONDS = 0.35;
 export const WHEEL_ZOOM_SPEED_MULTIPLIER = 4;
 export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
 export const WHEEL_ZOOM_USE_SCROLL_DISTANCE = true;
+// A released wheel gesture keeps the rate it commanded and decays it, as a
+// thrown drag does. Damping is shorter than the trackball's: the wheel drives
+// distance directly, so a glide outliving its gesture reads as drift.
+export const WHEEL_ZOOM_INERTIA = Object.freeze({
+  dampingSeconds: 0.25,
+  stopRateRatio: 0.12,
+  gain: 1,
+});
 
 export const CONTEXT_ANNOTATION_PRIORITY = Object.freeze({
   planet: 3,

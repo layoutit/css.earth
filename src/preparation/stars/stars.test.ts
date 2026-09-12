@@ -9,17 +9,20 @@ import { createExposure, exposureLimits, POINT_MIN_RADIUS_PX, starPresentation }
 import sharp from 'sharp';
 import { parseStarsRecipe } from './config.js';
 import { sha256, verifiedBytes } from '../volume/source.js';
-import type { PreparedCssPointField } from './types.js';
+import type { PreparedCssPointField } from '../../renderers/css/stars/types.js';
+import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '../../renderers/css/stars/validation.js';
+import { POINT_FIELD_MAGNITUDE_BOUND } from '../../renderers/css/stars/point-field-bank.js';
 import { hierarchyPosition, hierarchyMagnitude, hierarchyRadius } from './precision.js';
 import { prepareStarHierarchy } from './hierarchy.js';
 
 const objectDirectory = 'src/objects/stellar-neighbourhood', sourceDirectory = `${objectDirectory}/source`, preparedDirectory = `${objectDirectory}/prepared`;
 function coverageCell(x:number,y:number,z:number,divisions:number):number { const ax=Math.abs(x),ay=Math.abs(y),az=Math.abs(z),d=Math.max(ax,ay,az); if (!(d>0)) return -1; let face:number,u:number,v:number; if(ax>=ay&&ax>=az){face=x>=0?0:1;u=(x>=0?-z:z)/d;v=y/d;}else if(ay>=az){face=y>=0?2:3;u=x/d;v=(y>=0?-z:z)/d;}else{face=z>=0?4:5;u=(z>=0?x:-x)/d;v=y/d;} const c=(n:number)=>Math.min(divisions-1,Math.max(0,Math.floor((n+1)*divisions/2))); return face*divisions**2+c(v)*divisions+c(u); }
 async function payload(): Promise<PreparedCssPointField> {
-  const value = JSON.parse(await readFile(`${preparedDirectory}/stars.json`, 'utf8')) as { data: PreparedCssPointField };
-  return value.data;
+  const manifest = parsePreparedCssPointFieldManifest((JSON.parse(await readFile(`${preparedDirectory}/stars.json`, 'utf8')) as { data: unknown }).data);
+  return decodePreparedCssPointField(manifest, new Uint8Array(await verifiedBytes(preparedDirectory, manifest.bank)));
 }
-function assertTree(data: PreparedCssPointField): void {
+// Hierarchy aggregates are computed from the float32 source magnitudes, before transport quantization.
+function assertTree(data: PreparedCssPointField, magnitudeOf = (star: PreparedCssPointField['stars'][number]) => star.absoluteMagnitude): void {
   const covered = new Uint8Array(data.stars.length), visited = new Set<number>();
   function visit(index: number): void {
     assert(!visited.has(index), 'tree cannot repeat a node'); visited.add(index);
@@ -37,7 +40,7 @@ function assertTree(data: PreparedCssPointField): void {
     for (let i=node.first;i<node.first+node.count;i++) {
       const star = data.stars[i]!;
       assert(Math.hypot(...star.positionUnits.map((v,axis)=>v-node.positionUnits[axis]!)) <= node.radiusUnits);
-      flux += 10**(-.4*star.absoluteMagnitude);
+      flux += 10**(-.4*magnitudeOf(star));
     }
     assert(Math.abs(10**(-.4*node.absoluteMagnitude)/flux-1) < 1e-12, 'aggregate luminosity must conserve source flux');
   }
@@ -80,17 +83,20 @@ test('full source catalogue survives at exact Cartesian positions in a bounded-l
     assert(!ids.has(star.id)); ids.add(star.id);
     const sourceIndex = Number(star.id.split(':').at(-1)); assert(Number.isSafeInteger(sourceIndex) && sourceIndex >= 0 && sourceIndex < catalogue.count);
     assert.deepEqual(star.positionUnits,[p[sourceIndex*3],p[sourceIndex*3+1],p[sourceIndex*3+2]]);
-    assert.equal(star.absoluteMagnitude,mag[sourceIndex]); assert(star.colorIndex>=0 && star.colorIndex<32); assert.equal(typeof star.coverageAnchor,'boolean');
+    // Transport quantization: int16 millimagnitudes on the float32 source grid, within the declared bound.
+    assert(Math.abs(star.absoluteMagnitude-mag[sourceIndex]!) <= POINT_FIELD_MAGNITUDE_BOUND); assert(star.colorIndex>=0 && star.colorIndex<32); assert.equal(typeof star.coverageAnchor,'boolean');
   }
+  assert.equal(data.stars.filter(star=>star.absoluteMagnitude!==mag[Number(star.id.split(':').at(-1))]).length,2,'only off-grid source magnitudes move');
+  const sourceMagnitude = (star: PreparedCssPointField['stars'][number]) => mag[Number(star.id.split(':').at(-1))]!;
   const anchors = data.stars.filter(star=>star.coverageAnchor);
   assert.equal(anchors.length,6*recipe.coverage.faceDivisions**2,'one real apparent-magnitude anchor per all-sky cube cell');
   const best = Array.from({length:6*recipe.coverage.faceDivisions**2},()=>({index:-1,magnitude:Infinity}));
   for(let index=0;index<catalogue.count;index++){const x=p[index*3]!,y=p[index*3+1]!,z=p[index*3+2]!,cell=coverageCell(x,y,z,recipe.coverage.faceDivisions), apparent=mag[index]!+5*Math.log10(Math.hypot(x,y,z))-5; if(apparent<best[cell]!.magnitude)best[cell]={index,magnitude:apparent};}
   assert.deepEqual(new Set(anchors.map(star=>star.id)),new Set(best.map(entry=>`${recipe.catalogue.idPrefix}:${entry.index}`)),'anchors retain the real brightest apparent row for every cube cell');
-  assertTree(data);
-  assert.throws(()=>assertTree({...data,stars:data.stars.slice(1)}));
+  assertTree(data,sourceMagnitude);
+  assert.throws(()=>assertTree({...data,stars:data.stars.slice(1)},sourceMagnitude));
   const firstChild = data.nodes[0]!.children[0]!;
-  assert.throws(()=>assertTree({...data,nodes:data.nodes.map((node,index)=>index===firstChild?{...node,first:node.first+1}:node)}),/partition/);
+  assert.throws(()=>assertTree({...data,nodes:data.nodes.map((node,index)=>index===firstChild?{...node,first:node.first+1}:node)},sourceMagnitude),/partition/);
 });
 
 test('prepared point-field closes every source and image digest and samples the actual photometry chain', async () => {
@@ -123,8 +129,10 @@ test('point-field recipe reproduces identical JSON and all PNG/WEBP bytes into a
   try {
     const api = await import(pathToFileURL(resolve('tools/objects/dist/prepare-stars.js')).href) as {prepareStarsObject(options:{objectDirectory:string;outputDirectory:string}):Promise<unknown>};
     await api.prepareStarsObject({objectDirectory,outputDirectory});
-    const canonical = await readFile(`${preparedDirectory}/stars.json`), rebuilt = await readFile(join(outputDirectory,'stars.json'));
-    assert.equal(sha256(rebuilt),sha256(canonical));
+    for (const file of ['stars.json','stars.bin']) {
+      const canonical = await readFile(`${preparedDirectory}/${file}`), rebuilt = await readFile(join(outputDirectory,file));
+      assert.equal(sha256(rebuilt),sha256(canonical),`${file} must rebuild byte-identically`);
+    }
     for (const resource of (await payload()).resources) assert.equal(sha256(await readFile(join(outputDirectory,resource.path))),resource.sha256);
   } finally { await rm(outputDirectory,{recursive:true,force:true}); }
 });

@@ -40,6 +40,13 @@ export function projectPreparedPoint(position: Vector3, eye: Vector3, rotation: 
     depth, distanceUnits: Math.hypot(x, y, z) };
 }
 
+/** Opacity below half an 8-bit step cannot change a composited pixel. Coverage
+ * anchors keep their prepared floor and stay shown at any positive luminance. */
+export const IMPERCEPTIBLE_LUMINANCE = 0.5 / 255;
+export function pointLuminanceVisible(luminance: number, coverageAnchor = false) {
+  return coverageAnchor ? luminance > 0 : luminance >= IMPERCEPTIBLE_LUMINANCE;
+}
+
 /** Apparent magnitude selects/interpolates prepared exposure samples, not source imagery. */
 export function pointPhotometry(payload: PreparedCssPointField, absoluteMagnitude: number, distanceUnits: number, coverageAnchor = false) {
   const distancePc = distanceUnits * payload.frame.metersPerUnit / 3.085677581491367e16;

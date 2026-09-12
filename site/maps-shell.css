@@ -461,9 +461,10 @@
   text-underline-offset: 3px;
 }
 
-/* Keep both body cards retained; zoom only changes which view is visible. */
+/* Keep both body cards retained; zoom only changes which view is visible.
+   A registry-only selection preview has one view until its fragment arrives. */
 .planet-information-panel:not([data-card-view="overview"]) > [data-body-overview],
-.planet-information-panel[data-card-view="overview"] > :not([data-body-overview]) {
+.planet-information-panel[data-card-view="overview"] > :not([data-body-overview], [data-card-preview]) {
   display: none !important;
 }
 .planet-body-overview-image {

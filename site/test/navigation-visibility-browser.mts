@@ -118,9 +118,12 @@ try {
           previousScene = scene; previousId = id;
           previousDiagnostics = window.__cssEarth?.object(id) ?? previousDiagnostics;
         }
+        // The shared world presents beside the detail stage and owns the loading opacity.
+        const world = window.__cssearthTest.required(stage.closest('.planet-world-stage'), 'world presentation stage');
         proof.frames.push({ time, id: window.__cssearthTest.htmlElement(stage).dataset.objectId, ready: document.documentElement.dataset.ready,
-          opacity: Number(getComputedStyle(window.__cssearthTest.required(stage, 'computed style element')).opacity), scenes: stage.querySelectorAll('.polycss-scene').length,
-          universes: stage.querySelectorAll('.prepared-universe').length });
+          opacity: Number(getComputedStyle(window.__cssearthTest.required(stage, 'computed style element')).opacity) * Number(getComputedStyle(world).opacity),
+          scenes: stage.querySelectorAll('.polycss-scene').length,
+          universes: world.querySelectorAll('.prepared-universe').length });
         proof.raf = requestAnimationFrame(sample);
       }
       proof.raf = requestAnimationFrame(sample);

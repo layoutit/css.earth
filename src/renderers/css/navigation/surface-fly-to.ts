@@ -1,12 +1,12 @@
 import type { TrackballMetrics, Vector3, Quaternion, Matrix3 } from './types.js';
 export interface SurfaceFlyToInput { clientX: number; clientY: number; trackball: TrackballMetrics; currentZoom: number; minimumZoom: number; maximumZoom: number; }
-export type SurfaceFlyToPlan = NonNullable<ReturnType<typeof planGoogleEarthSurfaceFlyTo>>;
-import { projectGoogleEarthTrackballDelta } from
+export type SurfaceFlyToPlan = NonNullable<ReturnType<typeof planSurfaceFlyTo>>;
+import { projectTrackballDelta } from
   "@cssearth/engine";
 
-export const GOOGLE_EARTH_SURFACE_FLY_TO = Object.freeze({
-  schema: "cssearth-google-earth-pro-surface-fly-to@4",
-  qualification: "GOOGLE_EARTH_PRO_7.3.7.1327_NATIVE_TRAINING_FIT",
+export const SURFACE_FLY_TO = Object.freeze({
+  schema: "cssearth-surface-fly-to@4",
+  qualification: "REFERENCE_APP_7.3.7.1327_NATIVE_TRAINING_FIT",
   rendererSha256:
     "11c6efe1ea0a75535485ab3804a09fc6f2ad3dd7c43f8c7d695a48d928890cd0",
   durationMilliseconds: 3652.3984590021428,
@@ -67,7 +67,7 @@ const SOURCE_OBJECT_BASIS = Object.freeze([
     0.245314506412372]),
 ]);
 
-export function planGoogleEarthSurfaceFlyTo({
+export function planSurfaceFlyTo({
   clientX,
   clientY,
   trackball,
@@ -91,13 +91,13 @@ export function planGoogleEarthSurfaceFlyTo({
       trackball.radius <= 0 || trackball.surfaceRadius <= 0 ||
       trackball.focalLength <= 0 || minimumZoom <= 0 ||
       maximumZoom < minimumZoom || currentZoom <= 0) {
-    throw new TypeError("Google Earth surface fly-to inputs are invalid.");
+    throw new TypeError("Surface fly-to inputs are invalid.");
   }
   const offsetX = clientX - trackball.centerX;
   const offsetY = clientY - trackball.centerY;
   if (Math.hypot(offsetX, offsetY) > trackball.radius) return null;
 
-  const projected = projectGoogleEarthTrackballDelta({
+  const projected = projectTrackballDelta({
     previousX: clientX,
     previousY: clientY,
     currentX: trackball.centerX,
@@ -109,25 +109,25 @@ export function planGoogleEarthSurfaceFlyTo({
     projected.yawDegrees,
   );
   const pitchDeltaDegrees = projected.pitchDegrees *
-    GOOGLE_EARTH_SURFACE_FLY_TO.angularResponse;
+    SURFACE_FLY_TO.angularResponse;
   const yawDeltaDegrees = projected.yawDegrees *
-    GOOGLE_EARTH_SURFACE_FLY_TO.angularResponse;
+    SURFACE_FLY_TO.angularResponse;
   const angularDistanceDegrees = rawAngularDistanceDegrees *
-    GOOGLE_EARTH_SURFACE_FLY_TO.angularResponse;
+    SURFACE_FLY_TO.angularResponse;
   const targetRotation = surfaceTargetRotation({
     clientX,
     clientY,
     trackball,
   });
   const { distance: startDistance, range } = surfaceIntersection(clientX, clientY, trackball);
-  const desiredDistance = 1 + range * GOOGLE_EARTH_SURFACE_FLY_TO.targetRangeRatio;
+  const desiredDistance = 1 + range * SURFACE_FLY_TO.targetRangeRatio;
   const targetZoom = clamp(currentZoom * Math.sqrt(
     (startDistance * startDistance - 1) / (desiredDistance * desiredDistance - 1)),
     minimumZoom, maximumZoom);
   const targetDistance = Math.sqrt(1 + (startDistance * startDistance - 1) *
     (currentZoom / targetZoom) ** 2);
   return Object.freeze({
-    schema: GOOGLE_EARTH_SURFACE_FLY_TO.schema,
+    schema: SURFACE_FLY_TO.schema,
     pitchDeltaDegrees,
     yawDeltaDegrees,
     rawAngularDistanceDegrees,
@@ -139,14 +139,14 @@ export function planGoogleEarthSurfaceFlyTo({
     minimumZoom,
     maximumZoom,
     swoopOut: rawAngularDistanceDegrees >=
-      GOOGLE_EARTH_SURFACE_FLY_TO.swoopOutThresholdDegrees,
+      SURFACE_FLY_TO.swoopOutThresholdDegrees,
   });
 }
 
-export function sampleGoogleEarthSurfaceFlyTo(plan: SurfaceFlyToPlan, progress: number) {
-  if (plan?.schema !== GOOGLE_EARTH_SURFACE_FLY_TO.schema ||
+export function sampleSurfaceFlyTo(plan: SurfaceFlyToPlan, progress: number) {
+  if (plan?.schema !== SURFACE_FLY_TO.schema ||
       !Number.isFinite(progress)) {
-    throw new TypeError("Google Earth surface fly-to sample is invalid.");
+    throw new TypeError("Surface fly-to sample is invalid.");
   }
   const time = clamp(progress, 0, 1);
   const [motionProgress, zoomProgress] = responseAt(time);
@@ -224,7 +224,7 @@ function surfaceTargetRotation({ clientX, clientY, trackball }: Pick<SurfaceFlyT
   const sceneDelta = multiply3(multiply3(flipY(), sourceDelta), flipY());
   return quaternionPower(
     matrixQuaternion(sceneDelta),
-    GOOGLE_EARTH_SURFACE_FLY_TO.angularResponse,
+    SURFACE_FLY_TO.angularResponse,
   );
 }
 

@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest';
 import { createPointSample, samplePreparedPoint, projectPreparedPoint, pointPhotometry } from './point-field-projection.js';
-import source from '../../../objects/stellar-neighbourhood/prepared/stars.json';
-import type { PreparedCssPointField, PointFieldVector } from './types.js';
-const payload = source.data as unknown as PreparedCssPointField;
+import { readCanonicalPointField } from '../preparation/stars/canonical-point-field-fixture.js';
+import type { PointFieldVector } from './types.js';
+const payload = readCanonicalPointField();
 
 test('retained point samples match the direct projection and photometry across translation and rotation', () => {
   const sample = createPointSample();

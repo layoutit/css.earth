@@ -2,8 +2,8 @@ import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { WorldCameraPose, PreparedWorldCameraFrame } from '../src/renderers/css/navigation/world-camera.js';
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 export type OverviewScope = 'solar-system' | 'milky-way';
-import context from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from './system-framing.mts';
+import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 
 const distance = (position: readonly number[], origin: readonly number[]) => Math.hypot(...position.map((value, axis) => value - origin[axis]));
 

@@ -18,7 +18,7 @@ export default {
     'platform/prepared-block': fileURLToPath(new URL('./paging/prepared-block.ts', import.meta.url)),
     'platform/prepared-camera-runtime': fileURLToPath(new URL('./rendering/prepared-camera-runtime.ts', import.meta.url)),
     'platform/planet-feature-controls': fileURLToPath(new URL('./rendering/planet-feature-controls.ts', import.meta.url)),
-    'platform/google-earth-surface-fly-to': fileURLToPath(new URL('./navigation/google-earth-surface-fly-to.ts', import.meta.url)),
+    'platform/surface-fly-to': fileURLToPath(new URL('./navigation/surface-fly-to.ts', import.meta.url)),
     'platform/directional-sun-runtime': fileURLToPath(new URL('./solar-system/directional-sun-runtime.ts', import.meta.url)),
     'platform/directional-sun-coordinate': fileURLToPath(new URL('./solar-system/directional-sun-coordinate.ts', import.meta.url)),
     index: fileURLToPath(new URL('./index.ts', import.meta.url)),
@@ -35,6 +35,7 @@ export default {
   format: ['esm', 'cjs'],
   external: ['@cssearth/engine', '@cssearth/objects', '@layoutit/polycss'],
   dts: true,
+  sourcemap: process.env.CSSEARTH_PERFORMANCE_SOURCEMAPS === '1',
   clean: true,
   target: 'es2022',
 };

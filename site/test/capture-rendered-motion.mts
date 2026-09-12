@@ -358,10 +358,10 @@ try {
   }));
   const trackball = await page.evaluate(async plan => {
     const cameraLayoutModule = '/src/platform/camera-layout.mts';
-    const inertiaModule = '/src/platform/google-earth-drag-inertia.mts';
+    const inertiaModule = '/src/platform/trackball-drag-inertia.mts';
     const { measureRetainedPlanetTrackball } = await import(cameraLayoutModule);
-    const { googleEarthInteractionTrackball } = await import(inertiaModule);
-    return googleEarthInteractionTrackball(measureRetainedPlanetTrackball({stage:window.__cssearthTest.html('.planet-stage'),
+    const { interactionTrackball } = await import(inertiaModule);
+    return interactionTrackball(measureRetainedPlanetTrackball({stage:window.__cssearthTest.html('.planet-stage'),
       cameraElement:document.querySelector<HTMLElement>('.polycss-camera')!,
       logicalBodyDiameter:plan.logicalBodyDiameter,sceneScale:plan.sceneScale,
       zoom:window.__cssearthTest.object('mars').view().zoom,defaultZoom:plan.defaultZoom}));
