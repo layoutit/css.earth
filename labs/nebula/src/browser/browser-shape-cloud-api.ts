@@ -28,6 +28,7 @@ async function apply(request: ShapeCloudRequest): Promise<{ jobId: string; resul
   assert.equal(job.status, 'completed', JSON.stringify(job));
   const result = readShapeCloudResult(job.result); await validateShapeCloudResult(process.cwd(), result);
   assert.deepEqual(result.settings, request.settings);
+  assert.equal(result.quality, request.quality ?? 'detailed');
   return { jobId, result };
 }
 const results = [], originals: { path: string; sha256: string }[] = [];
@@ -50,6 +51,11 @@ for (const image of catalogue.images) {
 for (const original of originals) assert.equal(createHash('sha256').update(await readFile(original.path)).digest('hex'), original.sha256);
 const first = results[0]!;
 const repeated = await apply(first.request); assert.equal(repeated.result.id, first.result.id, 'Same recipe must restore its exact prepared result.');
+const draftStarted = performance.now(), draft = await apply({ ...first.request, quality: 'draft' });
+assert.notEqual(draft.result.id, first.result.id, 'Draft must never reuse a detailed cache identity.');
+assert.deepEqual(draft.result.settings, first.result.settings);
+assert.equal(draft.result.unitsPerPixel, first.result.unitsPerPixel);
+console.log(`SHAPE_CLOUD_DRAFT_READY seconds=${((performance.now() - draftStarted) / 1000).toFixed(2)}`);
 const output = '.local/nebula-lab/observations/helix/structures/browser'; await mkdir(output, { recursive: true });
-await writeFile(`${output}/shape-cloud-api.json`, JSON.stringify({ passed: true, results, sourcePixelsUnchanged: true, repeatedId: repeated.result.id }, null, 2));
+await writeFile(`${output}/shape-cloud-api.json`, JSON.stringify({ passed: true, results, draft, sourcePixelsUnchanged: true, repeatedId: repeated.result.id }, null, 2));
 console.log('SHAPE_CLOUD_API_PASS');

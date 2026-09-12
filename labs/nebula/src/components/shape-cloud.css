@@ -40,10 +40,20 @@
 .cloud-guide-hit { fill: none; stroke: transparent; stroke-width: 14px; pointer-events: stroke; }
 .shape-cloud-guides g[data-enabled="false"] .cloud-guide-line { stroke-dasharray: 3 5; stroke-opacity: .4; }
 .shape-cloud-guides g[data-selected="true"] .cloud-guide-line { stroke: #f1c68b; stroke-width: 2px; stroke-opacity: 1; }
-.shape-cloud-guides g:hover .cloud-guide-line { stroke: #fff; stroke-width: 3px; stroke-opacity: 1; }
+.shape-cloud-guides g:hover .cloud-guide-line, .shape-cloud-guides g[data-hovered="true"] .cloud-guide-line { stroke: #fff; stroke-width: 3px; stroke-opacity: 1; }
 .structure-geometry g:hover .geometry-support, .structure-geometry g:hover .geometry-gap { stroke: #fff; stroke-width: 3px; opacity: 1; }
 .shape-cloud-empty { position: absolute; bottom: 10%; left: 10%; right: 10%; text-align: center; color: #a7adb5; font-size: 12px; pointer-events: none; }
 .shape-cloud-camera-hint { position: absolute; bottom: 10px; left: 10px; right: 338px; color: #9299a1; font-size: 11px; text-align: center; pointer-events: none; }
+.shape-cloud-types { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
+.shape-cloud-types label { font-size: 11px; color: var(--text-secondary); }
+.shape-cloud-types select { display: block; margin-top: 5px; width: 100%; }
+#shape-cloud-formula { width: 100%; box-sizing: border-box; font: 11px ui-monospace, monospace; margin: 6px 0 12px; }
+.shape-cloud-terms { position: absolute; top: 44px; left: 18px; right: 350px; display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+.shape-cloud-terms button { font-size: 11px; padding: 5px 8px; background: #16191d; }
+.shape-cloud-terms button > span { margin-right: 5px; }
+.shape-cloud-terms button[data-enabled="false"] { opacity: .4; }
+.shape-cloud-terms button[aria-pressed="true"] { border-color: #f1c68b; }
+.shape-cloud-terms button:hover, .shape-cloud-terms button:focus-visible { border-color: #fff; }
 .workspace-content:has(.shape-cloud-workspace) > #inspection-panel { visibility: hidden; }
 .observation-structures-workspace[data-cloud-active="true"] { visibility: hidden; pointer-events: none; }
 @media (max-width: 1100px) { .shape-cloud-stage { right: 288px; } .shape-cloud-camera-hint { right: 288px; } }

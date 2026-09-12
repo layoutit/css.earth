@@ -12,8 +12,10 @@ function fixture() {
 test('shape preview request validates its actual image grid and explicit settings', () => {
   const input = fixture();
   assert.equal(parseShapeCloudRequest(input).settings.components[0]!.x, 90);
+  assert.equal(parseShapeCloudRequest(input).quality, 'detailed');
+  assert.equal(parseShapeCloudRequest({ ...input, quality: 'draft' }).quality, 'draft');
   for (const changed of [{ width: 1 }, { height: Infinity }, { width: 4096, height: 4096 }, { cataloguePath: '../private.json' },
-    { action: 'automatic' }, { geometrySha256: 'changed' }, { mystery: true }]) assert.throws(() => parseShapeCloudRequest({ ...input, ...changed }));
+    { action: 'automatic' }, { quality: 'fastest' }, { geometrySha256: 'changed' }, { mystery: true }]) assert.throws(() => parseShapeCloudRequest({ ...input, ...changed }));
   assert.throws(() => parseShapeCloudRequest({ ...input, settings: { ...input.settings, components: [{ ...input.settings.components[0], x: 1000 }] } }));
 });
 test('completed shape result requires both material pins, finite registration and exact settings', () => {
@@ -23,7 +25,9 @@ test('completed shape result requires both material pins, finite registration an
     width: 192, height: 160, unitsPerPixel: 10 / 192, empty: false, settings: input.settings,
     source: pin, neutral: { ...pin, path: '.local/nebula-lab/test/neutral.json' }, textured: { ...pin, path: '.local/nebula-lab/test/textured.json' } };
   assert.equal(readShapeCloudResult(result).unitsPerPixel, 10 / 192);
+  assert.equal(readShapeCloudResult(result).quality, 'detailed');
+  assert.equal(readShapeCloudResult({ ...result, quality: 'draft' }).quality, 'draft');
   for (const changed of [{ neutral: undefined }, { textured: undefined }, { unitsPerPixel: NaN }, { unitsPerPixel: .5 }, { empty: true },
-    { source: { ...pin, path: '.local/nebula-lab/../../outside.png' } }]) assert.throws(() => readShapeCloudResult({ ...result, ...changed }));
+    { quality: 'unknown' }, { source: { ...pin, path: '.local/nebula-lab/../../outside.png' } }]) assert.throws(() => readShapeCloudResult({ ...result, ...changed }));
   assert.equal(readShapeCloudResult({ ...result, empty: true, neutral: undefined, textured: undefined }).empty, true);
 });

@@ -10,6 +10,7 @@ import { validatePreparedCssVolume } from '../../../../../src/renderers/css/volu
 import { initializeShapeCloud, readShapeCloudSettings } from './model.js';
 import { createShapeCloudField, createShapeImageSampler, shapePixelToUnits, shapeUnitsToPixel } from './field.js';
 import { bakeShapeCloud } from './bake.js';
+import type { ShapeCloudSettings } from './types.js';
 
 function candidate(id: string, radius = 50, x = 100, angle = .3): GeometryCandidate {
   return { id, center: [x, 80], radii: [radius, radius * .7], angleRadians: angle,
@@ -73,6 +74,29 @@ test('weight, thickness, softness and depth alter the emitting field while bound
   assert.ok(field.bounds.min[0] < -5 && field.bounds.max[0] > 6.13, 'Moved shell beyond the original image remains in the bounds.');
   assert.ok(field.bounds.min[1] < -5 && field.bounds.max[1] > 5);
 });
+test('3D rings keep their opening through depth; signed terms carve soft cavities without negative emission', () => {
+  const settings = initializeShapeCloud({ width: 200, height: 200, groups: [], candidates: [{ ...candidate('a'), center: [100, 100], radii: [40, 30], angleRadians: 0 }] });
+  const base = settings.components[0]!;
+  const value = (components: ShapeCloudSettings['components'], x: number, y = 0, z = 0) => {
+    const out: [number, number, number] = [0, 0, 0]; createShapeCloudField({ ...settings, components }, 200, 200).sampleEmission(x, y, z, out); return out[0];
+  };
+  const ring = { ...base, shape: 'ring' as const };
+  for (let z = -3; z <= 3; z += .1) assert.equal(value([ring], 0, 0, z), 0, 'A ring must have an actual opening along the viewing ray.');
+  assert.ok(value([ring], 2) > 0); assert.ok(value([base], 0, 0, .975) > 0, 'A shell front wall crosses that same central ray.');
+  const outer = { ...base, shape: 'ellipsoid' as const };
+  const cutter = { ...outer, id: 'cut', memberIds: ['cut'], operation: 'subtract' as const, radiusX: 20, radiusY: 15, depth: 2 };
+  const full = value([outer], 0), faint = value([outer, { ...cutter, weight: .2 }], 0);
+  assert.ok(full > faint && faint > 0, 'Partial subtraction must dim the cavity.');
+  assert.equal(value([outer, cutter], 0), 0); assert.ok(value([outer, cutter], 1.5) > 0);
+  assert.equal(value([cutter, outer], 0), value([outer, cutter], 0), 'Subtract after summing, not while traversing terms.');
+  assert.equal(value([cutter], 0), 0); assert.equal(createShapeCloudField({ ...settings, components: [cutter] }, 200, 200).empty, true);
+  assert.deepEqual(createShapeCloudField({ ...settings, components: [outer, { ...cutter, radiusX: 300 }] }, 200, 200).bounds,
+    createShapeCloudField({ ...settings, components: [outer] }, 200, 200).bounds, 'Subtraction cannot enlarge the emitting support.');
+  const { shape: _shape, operation: _operation, ...legacy } = base;
+  assert.equal(readShapeCloudSettings({ ...settings, components: [legacy] }, 200, 200).components[0]!.shape, 'shell');
+  assert.throws(() => readShapeCloudSettings({ ...settings, components: [{ ...base, shape: 'unknown' }] }, 200, 200));
+  assert.throws(() => readShapeCloudSettings({ ...settings, components: [{ ...base, operation: null }] }, 200, 200));
+});
 test('actual XYZ bake paints the exact neutral alpha and geometry, records pins, responds to exposure and handles empty controls', async t => {
   const root = resolve('.'), directory = await mkdtemp(resolve('.local/nebula-lab/shape-core-test-'));
   t.after(() => rm(directory, { recursive: true, force: true }));
@@ -121,7 +145,24 @@ test('actual XYZ bake paints the exact neutral alpha and geometry, records pins,
   assert.ok(lower.projection);
   const lowProjection = await sharp(await readFile(resolve(root, lower.projection.path))).ensureAlpha().raw().toBuffer();
   assert.ok(meanAlpha(projection) > meanAlpha(lowProjection) * 2, 'Exposure must change prepared integrated emission.');
+  const draft = await bakeShapeCloud({ ...input, quality: 'draft', outputDirectory: relative(root, resolve(directory, 'draft')) });
+  assert.equal(draft.quality, 'draft'); assert.equal(result.quality, 'detailed');
+  assert.deepEqual(draft.settings, result.settings); assert.equal(draft.unitsPerPixel, result.unitsPerPixel);
+  assert.ok(draft.neutral && draft.textured && draft.projection);
+  const draftNeutral = await payload(draft.neutral), draftTextured = await payload(draft.textured);
+  assert.deepEqual(draftNeutral.frame, neutral.frame, 'Quality must not move or rescale the cloud.');
+  assert.deepEqual(draftNeutral.stacks, draftTextured.stacks);
+  assert.ok(draftNeutral.resources.length < neutral.resources.length, 'Draft must actually reduce the slice count.');
+  const draftBytes = await readFile(resolve(root, draft.projection.path));
+  const draftMeta = await sharp(draftBytes).metadata(), detailMeta = await sharp(projectionBytes).metadata();
+  assert.ok(draftMeta.width! < detailMeta.width!, 'Draft must actually reduce texture resolution.');
+  const draftProjection = await sharp(draftBytes).ensureAlpha().raw().toBuffer();
+  assert.ok(Math.abs(meanAlpha(draftProjection) / meanAlpha(projection) - 1) < .04, 'Draft and refinement must keep integrated brightness close.');
   const empty = await bakeShapeCloud({ ...input, settings: { ...settings, components: settings.components.map(component => ({ ...component, enabled: false })) } });
   assert.equal(empty.empty, true); assert.equal(empty.neutral, undefined); assert.equal(empty.textured, undefined);
+  const cancelledTerms = await bakeShapeCloud({ ...input, quality: 'draft', outputDirectory: relative(root, resolve(directory, 'subtracted')),
+    settings: { ...settings, components: [settings.components[0]!, { ...settings.components[0]!, id: 'cutter', memberIds: ['cut'], operation: 'subtract' }] } });
+  assert.equal(cancelledTerms.empty, true, 'Equal positive and negative volumes must produce a valid empty preview.');
+  assert.equal(cancelledTerms.neutral, undefined);
   await assert.rejects(bakeShapeCloud(input, { signal: AbortSignal.abort() }), /cancelled/);
 });

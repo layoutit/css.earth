@@ -1,4 +1,5 @@
 import { readShapeCloudSettings } from './model.js';
+import { readShapeCloudQuality } from './quality.js';
 import type { ShapeCloudPin, ShapeCloudResult } from './types.js';
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 const hash = (value: unknown): value is string => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
@@ -19,7 +20,7 @@ export function readShapeCloudResult(value: unknown): ShapeCloudResult {
   if (value.empty ? neutral || textured : !neutral || !textured) throw new TypeError('Incomplete shape-cloud materials.');
   return { schema: value.schema, id: value.id, imageId: value.imageId, sourceSha256: value.sourceSha256,
     mapSha256: value.mapSha256, geometrySha256: value.geometrySha256, width: value.width, height: value.height,
-    unitsPerPixel: value.unitsPerPixel, settings, empty: value.empty, source: readShapeCloudPin(value.source),
+    unitsPerPixel: value.unitsPerPixel, settings, empty: value.empty, quality: readShapeCloudQuality(value.quality), source: readShapeCloudPin(value.source),
     ...(neutral ? { neutral } : {}), ...(textured ? { textured } : {}),
     ...(value.projection === undefined ? {} : { projection: readShapeCloudPin(value.projection) }) };
 }

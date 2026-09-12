@@ -11,6 +11,8 @@ type Material = 'neutral' | 'textured';
 interface LoadedBank { payload: PreparedCssVolume; textures: Map<string, string> }
 const pendingMounts = new WeakMap<HTMLElement, symbol>();
 export interface ShapeCloudViewer {
+  /** Reveal an already decoded scene atomically after its latest camera/material are configured. */
+  commit(): void;
   setMaterial(mode: Material): void;
   setPose(yawDegrees: number, pitchDegrees: number): void;
   setFraming(framing: ShapeCloudFraming): void;
@@ -20,21 +22,33 @@ export interface ShapeCloudViewerOptions {
   host: HTMLElement;
   result: ShapeCloudResult;
   resolvePath?: (path: string) => string;
+  deferCommit?: boolean;
+  signal?: AbortSignal;
 }
 
 /** A retained CSS3D volume: material switches transport pixels, never rebuild geometry. */
-export async function createShapeCloudViewer({ host, result: input, resolvePath = localPath }: ShapeCloudViewerOptions): Promise<ShapeCloudViewer> {
+export async function createShapeCloudViewer({ host, result: input, resolvePath = localPath, deferCommit = false, signal }: ShapeCloudViewerOptions): Promise<ShapeCloudViewer> {
+  signal?.throwIfAborted();
   const result = readShapeCloudResult(input);
   const mountToken = Symbol(result.id); pendingMounts.set(host, mountToken);
   const document = host.ownerDocument;
   const root = document.createElement('div');
   root.dataset.shapeCloudRoot = result.id;
+  root.dataset.cloudResult = result.id;
+  root.dataset.quality = result.quality;
+  root.dataset.visible = 'false';
   Object.assign(root.style, { position: 'absolute', inset: '0', pointerEvents: 'none', overflow: 'visible' });
-  let disposed = false;
+  let disposed = false, committed = false;
+  function commitRoot() {
+    if (disposed || committed) return;
+    signal?.throwIfAborted();
+    if (pendingMounts.get(host) !== mountToken) throw new DOMException('A newer shape cloud replaced this load.', 'AbortError');
+    host.replaceChildren(root); committed = true; root.dataset.visible = 'true';
+  }
   if (result.empty) {
-    host.replaceChildren(root);
-    root.dataset.empty = 'true';
-    return { setMaterial() {}, setPose() {}, setFraming() {}, destroy() { if (!disposed) {
+    root.dataset.empty = 'true'; root.dataset.ready = 'true';
+    if (!deferCommit) commitRoot();
+    return { commit: commitRoot, setMaterial() {}, setPose() {}, setFraming() {}, destroy() { if (!disposed) {
       disposed = true; root.remove(); if (pendingMounts.get(host) === mountToken) pendingMounts.delete(host);
     } } };
   }
@@ -43,13 +57,14 @@ export async function createShapeCloudViewer({ host, result: input, resolvePath 
   const release = () => { for (const url of urls) URL.revokeObjectURL(url); urls.length = 0; };
   let banks: { neutral: LoadedBank; textured: LoadedBank };
   try {
-    const settled = await Promise.allSettled([loadBank(result.neutral, resolvePath, urls), loadBank(result.textured, resolvePath, urls)]);
+    const settled = await Promise.allSettled([loadBank(result.neutral, resolvePath, urls, signal), loadBank(result.textured, resolvePath, urls, signal)]);
     const failure = settled.find(item => item.status === 'rejected');
     if (failure?.status === 'rejected') throw failure.reason;
     const neutral = settled[0]!, textured = settled[1]!;
     if (neutral.status !== 'fulfilled' || textured.status !== 'fulfilled') throw new Error('Shape cloud materials did not finish loading.');
     banks = { neutral: neutral.value, textured: textured.value };
     assertSharedGeometry(banks.neutral.payload, banks.textured.payload, result);
+    signal?.throwIfAborted();
     if (pendingMounts.get(host) !== mountToken) throw new DOMException('A newer shape cloud replaced this load.', 'AbortError');
   } catch (error) { release(); throw error; }
   const end = document.createElement('span'); end.hidden = true; root.append(end);
@@ -77,9 +92,14 @@ export async function createShapeCloudViewer({ host, result: input, resolvePath 
     root.dataset.framing = JSON.stringify(framing);
   }
   const observer = new ResizeObserver(publish);
-  host.replaceChildren(root); observer.observe(host); publish();
+  function commit() {
+    if (disposed || committed) return;
+    commitRoot(); observer.observe(host); publish();
+  }
   root.dataset.material = material; root.dataset.ready = 'true';
+  if (!deferCommit) commit();
   return {
+    commit,
     setMaterial(next) {
       if (next !== 'neutral' && next !== 'textured') throw new TypeError('Unknown shape cloud material.');
       if (disposed || material === next) return;
@@ -103,15 +123,15 @@ export async function createShapeCloudViewer({ host, result: input, resolvePath 
   };
 }
 
-async function loadBank(pin: ShapeCloudPin, resolvePath: (path: string) => string, urls: string[]): Promise<LoadedBank> {
-  const bytes = await readPinned(pin, resolvePath);
+async function loadBank(pin: ShapeCloudPin, resolvePath: (path: string) => string, urls: string[], signal?: AbortSignal): Promise<LoadedBank> {
+  const bytes = await readPinned(pin, resolvePath, signal);
   const payload = validatePreparedCssVolume(JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)));
   const directory = pin.path.slice(0, pin.path.lastIndexOf('/') + 1);
   const textures = new Map<string, string>(), queue = [...payload.resources];
   const settled = await Promise.allSettled(Array.from({ length: Math.min(6, queue.length) }, async () => {
     while (queue.length) {
       const resource = queue.shift()!;
-      const content = await readPinned({ path: `${directory}${resource.path}`, sha256: resource.sha256 }, resolvePath);
+      const content = await readPinned({ path: `${directory}${resource.path}`, sha256: resource.sha256 }, resolvePath, signal);
       if (content.byteLength !== resource.bytes) throw new Error(`Shape cloud texture byte length differs: ${resource.path}`);
       const url = URL.createObjectURL(new Blob([content])); urls.push(url);
       const image = new Image(); image.src = url; await image.decode();
@@ -124,9 +144,9 @@ async function loadBank(pin: ShapeCloudPin, resolvePath: (path: string) => strin
   return { payload, textures };
 }
 
-async function readPinned(pin: ShapeCloudPin, resolvePath: (path: string) => string): Promise<ArrayBuffer> {
+async function readPinned(pin: ShapeCloudPin, resolvePath: (path: string) => string, signal?: AbortSignal): Promise<ArrayBuffer> {
   if (!pin || !relativePath(pin.path) || !/^[a-f0-9]{64}$/.test(pin.sha256)) throw new TypeError('Shape cloud resource pin is invalid.');
-  const response = await fetch(resolvePath(pin.path));
+  const response = await fetch(resolvePath(pin.path), { signal });
   if (!response.ok) throw new Error(`Shape cloud resource failed to load: ${pin.path} (${response.status})`);
   const bytes = await response.arrayBuffer();
   const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(value => value.toString(16).padStart(2, '0')).join('');
@@ -153,6 +173,7 @@ function assertSharedGeometry(neutral: PreparedCssVolume, textured: PreparedCssV
 function supportHash(value: unknown, result: ShapeCloudResult): string {
   if (!record(value) || value.schema !== 'cssearth-shape-cloud-provenance@1' || typeof value.alphaSha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.alphaSha256) ||
       value.sourceSha256 !== result.sourceSha256 || value.mapSha256 !== result.mapSha256 || value.geometrySha256 !== result.geometrySha256 ||
+      (value.quality === undefined ? 'detailed' : value.quality) !== result.quality ||
       !record(value.projection) || value.projection.width !== result.width || value.projection.height !== result.height || value.projection.unitsPerPixel !== result.unitsPerPixel) {
     throw new TypeError('Prepared cloud provenance or alpha support differs from its result.');
   }

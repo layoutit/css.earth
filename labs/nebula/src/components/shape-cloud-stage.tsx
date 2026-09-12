@@ -9,13 +9,17 @@ type Renderer = Awaited<ReturnType<typeof createShapeCloudViewer>>;
 export interface CloudStageProps {
   mode: ShapeCloudMode; result: ShapeCloudResult | null; source: string; width: number; height: number; matrix: Matrix;
   frame: { width: number; height: number }; components: ShapeCloudComponent[]; selectedId: string;
+  hoveredId?: string;
   outlines: boolean; overlayOpacity: number; view: CloudView; onView(value: CloudView): void; onSelect(id: string): void;
 }
 function CloudPane({ kind, ...props }: CloudStageProps & { kind: 'source' | 'cloud' }) {
-  const { mode, result, source, width, height, matrix, frame, components, selectedId, outlines, overlayOpacity, view, onView, onSelect } = props;
+  const { mode, result, source, width, height, matrix, frame, components, selectedId, hoveredId, outlines, overlayOpacity, view, onView, onSelect } = props;
   const viewport = useRef<HTMLDivElement>(null), host = useRef<HTMLDivElement>(null), renderer = useRef<Renderer | null>(null);
   const [extent, setExtent] = useState({ width: 0, height: 0 }), [error, setError] = useState(''), [ready, setReady] = useState(false);
+  const [visibleResult, setVisibleResult] = useState<ShapeCloudResult | null>(null);
+  const committedId = useRef<string | null>(null);
   const viewRef = useRef(view); viewRef.current = view;
+  const modeRef = useRef(mode); modeRef.current = mode;
   const sourceVisible = kind === 'source' || mode === 'overlay';
   const scale = Math.min(extent.width / frame.width, extent.height / frame.height) * .94 * view.zoom;
   const scaleRef = useRef(scale); scaleRef.current = scale;
@@ -32,16 +36,29 @@ function CloudPane({ kind, ...props }: CloudStageProps & { kind: 'source' | 'clo
     return () => { observer.disconnect(); element.removeEventListener('wheel', wheel); };
   }, [onView]);
   useEffect(() => {
-    if (kind !== 'cloud' || !host.current || !result || result.empty) return;
-    let disposed = false; setError(''); setReady(false);
-    void createShapeCloudViewer({ host: host.current, result }).then(scene => {
+    return () => { renderer.current?.destroy(); renderer.current = null; committedId.current = null; };
+  }, []);
+  useEffect(() => {
+    if (kind !== 'cloud' || !host.current) return;
+    if (!result) {
+      renderer.current?.destroy(); renderer.current = null; committedId.current = null;
+      setVisibleResult(null); setReady(false); setError(''); return;
+    }
+    if (committedId.current === result.id) return;
+    const controller = new AbortController(); let disposed = false; setError('');
+    // The current scene remains visible while the next prepared materials decode.
+    void createShapeCloudViewer({ host: host.current, result, deferCommit: true, signal: controller.signal }).then(scene => {
       if (disposed) { scene.destroy(); return; }
-      renderer.current = scene;
-      scene.setFraming({ zoom: 1 / .94, panX: 0, panY: 0 });
-      scene.setPose(viewRef.current.yaw, viewRef.current.pitch);
-      scene.setMaterial(mode === 'textured' ? 'textured' : 'neutral'); setReady(true);
+      try {
+        scene.setFraming({ zoom: 1 / .94, panX: 0, panY: 0 });
+        scene.setPose(viewRef.current.yaw, viewRef.current.pitch);
+        scene.setMaterial(modeRef.current === 'textured' ? 'textured' : 'neutral');
+        scene.commit();
+        const previous = renderer.current; renderer.current = scene; committedId.current = result.id;
+        previous?.destroy(); setVisibleResult(result); setReady(true);
+      } catch (reason) { scene.destroy(); throw reason; }
     }).catch((reason: unknown) => { if (!disposed) setError(reason instanceof Error ? reason.message : 'Cloud could not be loaded.'); });
-    return () => { disposed = true; renderer.current?.destroy(); renderer.current = null; };
+    return () => { disposed = true; controller.abort(); };
   }, [kind, result]);
   useEffect(() => { renderer.current?.setMaterial(mode === 'textured' ? 'textured' : 'neutral'); }, [mode, ready]);
   useEffect(() => { renderer.current?.setPose(view.yaw, view.pitch); }, [view.yaw, view.pitch, ready]);
@@ -70,11 +87,12 @@ function CloudPane({ kind, ...props }: CloudStageProps & { kind: 'source' | 'clo
         <div className="shape-cloud-image-plane" data-cloud-source-frame={kind} style={{ width, height, transform: `matrix(${matrix.join(',')})` }}>
           <img className="shape-cloud-source" src={source} alt="Registered source without stars" width={width} height={height}
             style={{ visibility: sourceVisible ? 'visible' : 'hidden' }} draggable={false} onError={() => setError('Source image could not be loaded.')} />
-          {kind === 'cloud' && <div className="shape-cloud-render-host" data-cloud-result={result?.id ?? ''} ref={host}
+          {kind === 'cloud' && <div className="shape-cloud-render-host" data-cloud-result={visibleResult?.id ?? ''}
+            data-cloud-quality={visibleResult?.quality ?? ''} ref={host}
             style={{ width, height, opacity: mode === 'overlay' ? overlayOpacity : 1 }} />}
           <svg className="shape-cloud-guides" width={width} height={height} viewBox={`0 0 ${width} ${height}`}
             aria-label="Editable shape cloud guides" style={{ visibility: showGuides ? 'visible' : 'hidden' }}>
-            {components.map(component => <g key={component.id} data-cloud-component={component.id} data-selected={component.id === selectedId}
+            {components.map(component => <g key={component.id} data-cloud-component={component.id} data-selected={component.id === selectedId} data-hovered={component.id === hoveredId}
               data-enabled={component.enabled} transform={`translate(${component.x} ${component.y}) rotate(${component.rotationDegrees})`}>
               <title>{component.label} · click to select · weight {component.weight.toFixed(2)}{component.enabled ? '' : ' · disabled'}</title>
               <ellipse className="cloud-guide-line" rx={component.radiusX} ry={component.radiusY} vectorEffect="non-scaling-stroke" />
@@ -83,8 +101,8 @@ function CloudPane({ kind, ...props }: CloudStageProps & { kind: 'source' | 'clo
           </svg>
         </div>
       </div>
-      {kind === 'cloud' && (!ready || result?.empty) && <p className="shape-cloud-empty" role={error ? 'alert' : 'status'}>
-        {error || (result?.empty ? 'No enabled emission. Adjust the components and Preview.' : result ? 'Loading prepared cloud…' : 'Press Preview to build this cloud.')}
+      {kind === 'cloud' && (error || !ready || visibleResult?.empty) && <p className="shape-cloud-empty" role={error ? 'alert' : 'status'}>
+        {error || (visibleResult?.empty ? 'Adjust components to add emission.' : 'Preparing cloud…')}
       </p>}
       {kind === 'source' && error && <p className="shape-cloud-empty" role="alert">{error}</p>}
     </div>

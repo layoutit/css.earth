@@ -14,9 +14,10 @@ import { bakeMasterVolumeSlices } from '../master-slices.js';
 import { recolorCloudSlices } from '../cloud-material.js';
 import { createShapeCloudField, createShapeImageSampler } from './field.js';
 import { readShapeCloudSettings } from './model.js';
-import type { ShapeCloudPin, ShapeCloudResult, ShapeCloudSettings } from './types.js';
+import { readShapeCloudQuality, shapeCloudSampling } from './quality.js';
+import type { ShapeCloudPin, ShapeCloudResult, ShapeCloudSettings, ShapeCloudQuality } from './types.js';
 
-export const SHAPE_CLOUD_METHOD = 'detected-boundary-ellipsoidal-shell-preview@1';
+export const SHAPE_CLOUD_METHOD = 'detected-boundary-signed-emission-shapes@2';
 export interface ShapeCloudBakeProgress { phase: 'volume' | 'texture' | 'compile'; completed: number; total: number; message: string }
 export interface ShapeCloudBakeOptions { signal?: AbortSignal; onProgress?(progress: ShapeCloudBakeProgress): void }
 const hash = (value: string) => /^[a-f0-9]{64}$/.test(value);
@@ -62,7 +63,7 @@ async function inspectAlpha(directory: string, slices: VolumeSlices, options: Sh
 
 export async function bakeShapeCloud(input: {
   root: string; outputDirectory: string; id: string; image: StructureImage; geometry: GeometryMap;
-  geometrySha256: string; settings: ShapeCloudSettings; source: ShapeCloudPin;
+  geometrySha256: string; settings: ShapeCloudSettings; source: ShapeCloudPin; quality?: ShapeCloudQuality;
 }, options: ShapeCloudBakeOptions = {}): Promise<ShapeCloudResult> {
   const { root, image, geometry, source, outputDirectory, id } = input;
   if (!isAbsolute(root) || isAbsolute(outputDirectory) || !outputDirectory || !hash(id) ||
@@ -70,6 +71,7 @@ export async function bakeShapeCloud(input: {
       geometry.width !== image.width || geometry.height !== image.height || image.width * image.height > 1_000_000)
     throw new TypeError('Invalid shape cloud source or output identity.');
   const output = containedPath(root, outputDirectory);
+  const quality = readShapeCloudQuality(input.quality), sampling = shapeCloudSampling(quality), total = sampling.slabs * 3;
   const settings = readShapeCloudSettings(input.settings, image.width, image.height);
   const field = createShapeCloudField(settings, image.width, image.height);
   cancellation(options.signal);
@@ -79,7 +81,7 @@ export async function bakeShapeCloud(input: {
     throw new TypeError('Shape cloud source must retain the complete registered working-image pixels.');
   const result: ShapeCloudResult = { schema: 'cssearth-shape-cloud-result@1', id, imageId: image.id,
     sourceSha256: image.sourceSha256, mapSha256: image.mapSha256, geometrySha256: input.geometrySha256,
-    width: image.width, height: image.height, unitsPerPixel: field.unitsPerPixel, settings, empty: field.empty, source: { ...source } };
+    width: image.width, height: image.height, unitsPerPixel: field.unitsPerPixel, settings, quality, empty: field.empty, source: { ...source } };
   if (field.empty) return result;
   await mkdir(output, { recursive: true });
   const neutralDirectory = containedPath(output, 'neutral'), texturedDirectory = containedPath(output, 'textured');
@@ -87,25 +89,26 @@ export async function bakeShapeCloud(input: {
     cancellation(options.signal); options.onProgress?.({ phase, completed, total, message });
   };
   const provenance = { schema: 'cssearth-shape-cloud-provenance@1', method: SHAPE_CLOUD_METHOD, source: { ...source },
-    sourceSha256: image.sourceSha256, mapSha256: image.mapSha256, geometrySha256: input.geometrySha256, settings,
+    sourceSha256: image.sourceSha256, mapSha256: image.mapSha256, geometrySha256: input.geometrySha256, settings, quality, sampling,
     projection: { width: image.width, height: image.height, unitsPerPixel: field.unitsPerPixel,
       pixelEdgeToUnits: ['(x-width/2)*unitsPerPixel', '(height/2-y)*unitsPerPixel', '0'] },
-    interpretation: 'Automatically grouped projected boundaries seed hollow ellipsoidal emission hypotheses. Depth, wall thickness, softness and weights are authored assumptions, not recovered gas density. No photograph column normalization.',
+    interpretation: 'Automatically grouped projected boundaries seed editable shells, rings or filled ellipsoids. Nonnegative emission is max(0, sum(add terms) - sum(subtract terms)). Depth, wall thickness, softness and weights are authored assumptions, not recovered gas density. No photograph column normalization.',
     extent: 'Full image window and all finite shell support retained. Colors do not select support or alter depth.',
     coordinateMeaning: 'Image-relative dimensionless display units. No measured distance, physical size or 3D sky orientation.' };
-  report('volume', 0, 72, 'Preparing the shared neutral shape cloud');
+  report('volume', 0, total, 'Preparing the shared neutral shape cloud');
   let samples = 0;
   const { masters } = await bakeMasterVolumeSlices({ sampleEmission(x, y, z, out) {
     if (++samples % 65536 === 0) cancellation(options.signal);
     field.sampleEmission(x, y, z, out);
-  }, boundsKpc: field.bounds, sliceCounts: { x: 24, y: 24, z: 24 }, samplesPerSlab: 4,
-  exposureGain: settings.exposure, masterWidth: 192, masterDirectory: neutralDirectory, deliveryBanks: [],
-  unitsPerSourceUnit: 1, provenance, cropTransparent: false,
+  }, boundsKpc: field.bounds, sliceCounts: { x: sampling.slabs, y: sampling.slabs, z: sampling.slabs }, samplesPerSlab: sampling.samples,
+  exposureGain: settings.exposure, masterWidth: sampling.width, masterDirectory: neutralDirectory, deliveryBanks: [],
+  unitsPerSourceUnit: 1, provenance, cropTransparent: false, allowEmpty: true,
   onProgress: progress => report('volume', progress.completed, progress.total, `Preparing ${progress.axis.toUpperCase()} cloud slabs`) });
+  if (masters.quads.every(quad => quad.alphaCoverage === 0)) return { ...result, empty: true };
   const neutralAlpha = await inspectAlpha(neutralDirectory, masters, options, true);
   masters.provenance = { ...provenance, alphaSha256: neutralAlpha.alphaSha256 };
   await writeFile(containedPath(neutralDirectory, 'volume-slices.json'), json(masters));
-  report('texture', 0, 72, 'Painting source colors onto the same cloud');
+  report('texture', 0, total, 'Painting source colors onto the same cloud');
   const painted = await recolorCloudSlices({ slices: masters, loadResource: path => readFile(containedPath(neutralDirectory, path)),
     sampleImageRgb: createShapeImageSampler(rgb, image.width, image.height), outputDirectory: texturedDirectory, encoding: { format: 'png' },
     onProgress: progress => report('texture', progress.completed, progress.total, 'Painting source colors; preserving every alpha byte') });

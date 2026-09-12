@@ -126,11 +126,11 @@ try {
   assert.deepEqual(volumeRequests, []);
   assert.equal(await page.getByRole('alert').count(), 0);
   assert.deepEqual(errors, []);
-  assert.deepEqual(writes, [], 'Viewing or filtering structure evidence must never start processing.');
+  assert.ok(writes.every(url => url.endsWith('/__nebula/shape-cloud-jobs')), 'Inspection must not start extraction or star removal; Shapes only prepares its live preview.');
   await writeFile(`${directory}/result.json`, JSON.stringify({ passed: true, browser: browser.version(),
     viewport: { width: 1600, height: 1000 }, cataloguePath, sourceChecks, geometryChecks,
     checks: ['structure inspection without historical volume', 'same Alignment registration and saved manual fit', 'three source switches keep camera',
       '18 full-frame evidence images decode', 'area/contrast/elongation/scale/morphology/review filters affect actual supports',
-      'retained support nodes', 'drag-to-pan across highlighted regions', 'decisions restore for every source after refresh', 'no processing on inspection'], errors, writes, volumeRequests }, null, 2));
+      'retained support nodes', 'drag-to-pan across highlighted regions', 'decisions restore for every source after refresh', 'only authorized live shape previews on inspection'], errors, writes, volumeRequests }, null, 2));
   console.log('NEBULA_OBSERVATION_STRUCTURES_BROWSER_PASS');
 } finally { await browser.close(); }

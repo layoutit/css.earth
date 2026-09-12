@@ -4,7 +4,7 @@ import { componentScope, editShapeComponents } from './shape-cloud-state.js';
 import type { ShapeCloudComponent, ShapeCloudSettings } from '../reconstruction/shape-cloud/types.js';
 
 function fixture(): ShapeCloudSettings {
-  const base: ShapeCloudComponent = { id: 'a', label: 'A', memberIds: ['arc-a'], groupId: 'one', x: 100, y: 200,
+  const base: ShapeCloudComponent = { id: 'a', label: 'A', memberIds: ['arc-a'], groupId: 'one', shape: 'shell', operation: 'add', x: 100, y: 200,
     radiusX: 40, radiusY: 20, rotationDegrees: 10, weight: 1, thickness: .1, softness: .05, depth: .65, enabled: true };
   return { exposure: .8, components: [base, { ...base, id: 'b', memberIds: ['arc-b'], x: 160, radiusX: 80, rotationDegrees: 35 },
     { ...base, id: 'c', memberIds: ['arc-c'], groupId: 'two', x: 300 }] };

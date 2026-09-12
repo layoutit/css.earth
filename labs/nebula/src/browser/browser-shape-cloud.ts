@@ -1,4 +1,4 @@
-/** Actual sources, explicit server preparation, retained material switches and registered comparison. */
+/** Actual automatic draft/final preparation, retained material switches and registered comparison. */
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -13,6 +13,17 @@ const page = await context.newPage(); const errors: string[] = [], writes: strin
 page.on('pageerror', error => errors.push(error.message));
 page.on('request', request => { if (request.method() === 'POST') writes.push(request.url()); });
 const checks: unknown[] = [];
+async function waitFinal() {
+  await page.waitForFunction(() => {
+    const state = document.querySelector('.shape-cloud-workbench'), root = document.querySelector('[data-shape-cloud-root]');
+    return Boolean(document.querySelector('.shape-cloud-error, .shape-cloud-empty[role="alert"]')) ||
+      (state?.getAttribute('data-preview-quality') === 'detailed' && state.getAttribute('data-preview-current') === 'true' &&
+       state.getAttribute('data-preview-active') === 'false' && state.getAttribute('data-result-id') === root?.getAttribute('data-shape-cloud-root') && root?.getAttribute('data-ready') === 'true');
+  }, null, { timeout: 180_000 });
+  const alerts = await page.locator('.shape-cloud-error, .shape-cloud-empty[role="alert"]').allTextContents();
+  assert.equal(alerts.length, 0, alerts.join('\n'));
+}
+
 try {
   await page.goto(`${process.argv[2] ?? 'http://127.0.0.1:4331'}/reconstruction?subject=helix-model-prior`);
   await page.locator('.shape-cloud-workbench').waitFor();
@@ -20,22 +31,47 @@ try {
   assert.equal(await modes.getByRole('button').count(), 3);
   const sizes = await modes.getByRole('button').evaluateAll(nodes => nodes.map(node => node.getBoundingClientRect().height));
   assert.ok(sizes.every(size => size >= 64), 'Comparison buttons should be large, like alignment layer buttons.');
-  assert.deepEqual(writes, [], 'Entering the inspector started processing.');
+  assert.equal(await page.locator('#shape-cloud-preview').count(), 0, 'Manual preview should no longer be required.');
   for (const image of catalogue.images) {
     await page.locator('#structure-image').selectOption(image.id);
     await page.locator(`.shape-cloud-workbench[data-image-id="${image.id}"]`).waitFor();
     await page.locator('.shape-cloud-source-slot .shape-cloud-source').evaluate(async (node: HTMLImageElement) => node.decode());
-    const before: number = writes.length;
-    await page.locator('#shape-cloud-weight').press('ArrowRight');
-    await page.getByRole('button', { name: 'Reset to detected', exact: true }).click();
-    await modes.getByRole('button', { name: 'Overlay', exact: true }).click();
-    await modes.getByRole('button', { name: 'Compare', exact: true }).click();
-    assert.equal(writes.length, before, 'Edits or comparison modes started processing.');
-    await page.locator('#shape-cloud-preview').click();
-    await page.waitForFunction(() => document.querySelector('[data-shape-cloud-root]')?.getAttribute('data-ready') === 'true' ||
-      Boolean(document.querySelector('.shape-cloud-error, .shape-cloud-empty[role="alert"]')), null, { timeout: 180_000 });
-    const alertMessage: string = (await page.locator('.shape-cloud-error, .shape-cloud-empty[role="alert"]').allTextContents()).join('\n');
-    assert.equal(await page.locator('.shape-cloud-error, .shape-cloud-empty[role="alert"]').count(), 0, alertMessage);
+    await waitFinal();
+    if (image.id === catalogue.images[0]!.id) {
+      const slider = page.locator('#shape-cloud-weight'), bounds = await slider.boundingBox(); assert.ok(bounds);
+      const originalRoot = await page.locator('[data-shape-cloud-root]').getAttribute('data-shape-cloud-root');
+      const drafts = new Set<string>();
+      await page.mouse.move(bounds.x + bounds.width * .205, bounds.y + bounds.height / 2); await page.mouse.down();
+      const deadline = Date.now() + 12_000; let step = 0;
+      while (Date.now() < deadline && drafts.size < 2) {
+        await page.mouse.move(bounds.x + bounds.width * (.21 + Math.min(.12, step++ * .003)), bounds.y + bounds.height / 2);
+        await page.waitForTimeout(220);
+        const state = await page.locator('.shape-cloud-workbench').evaluate(node => ({ quality: node.getAttribute('data-preview-quality'), id: node.getAttribute('data-result-id') }));
+        const visible = await page.locator('[data-shape-cloud-root]').getAttribute('data-shape-cloud-root');
+        assert.ok(visible, 'The previous cloud disappeared while a draft was preparing.');
+        if (state.quality === 'draft' && state.id === visible && state.id !== originalRoot) drafts.add(visible);
+      }
+      assert.ok(drafts.size >= 2, 'Continuous dragging did not display successive drafts before release.');
+      await page.mouse.up(); await waitFinal();
+      const weight = await slider.inputValue(), completed = await page.locator('[data-shape-cloud-root]').getAttribute('data-shape-cloud-root');
+      const beforeReload: number = writes.length;
+      await page.reload(); await waitFinal();
+      assert.equal(await page.locator('#shape-cloud-weight').inputValue(), weight, 'Refresh lost the edited weight.');
+      assert.equal(await page.locator('[data-shape-cloud-root]').getAttribute('data-shape-cloud-root'), completed, 'Refresh did not reuse the final preview.');
+      assert.equal(writes.length, beforeReload, 'A current saved final was baked again after refresh.');
+      await page.locator('#shape-cloud-shape').selectOption('ring'); await waitFinal();
+      assert.equal(await page.locator('#shape-cloud-shape').inputValue(), 'ring');
+      await page.locator('#shape-cloud-operation').selectOption('subtract'); await waitFinal();
+      assert.equal(await page.locator('#shape-cloud-operation').inputValue(), 'subtract');
+      await page.locator('#shape-cloud-formula').fill('1 * S1 - 0.25 * S2');
+      await page.locator('#shape-cloud-formula').press('Enter'); await waitFinal();
+      assert.equal(await page.locator('[data-term-id="shape-2"]').getAttribute('data-operation'), 'subtract');
+      const term = page.locator('[data-term-id="shape-2"]'); await term.hover();
+      assert.equal(await page.locator('.shape-cloud-source-slot [data-cloud-component="shape-2"]').getAttribute('data-hovered'), 'true');
+      await term.click(); assert.equal(await page.locator('#shape-cloud-component').inputValue(), 'shape-2');
+      await page.getByRole('button', { name: 'Reset to detected', exact: true }).click(); await waitFinal();
+      await page.locator('.observation-structures-panel').evaluate(node => { node.scrollTop = 0; });
+    }
     const root = page.locator('[data-shape-cloud-root]');
     const rootNode = await root.elementHandle(); assert.ok(rootNode);
     const leaf = await root.locator('.css-volume-mesh s').first().elementHandle(); assert.ok(leaf, 'Preview has no real CSS volume leaves.');
@@ -87,17 +123,7 @@ try {
     assert.notEqual(await root.getAttribute('data-pose'), '0,0');
     await page.screenshot({ path: `${directory}/${image.id}-oblique.png` });
     await page.getByRole('button', { name: 'Earth view', exact: true }).click();
-    await page.locator('#shape-cloud-weight').press('ArrowRight');
-    assert.equal(await page.locator('.shape-cloud-status').getAttribute('data-unapplied'), 'true');
-    const changedWeight = await page.locator('#shape-cloud-weight').inputValue();
-    assert.equal(writes.length, initialPosts, 'Inspecting, rotating or editing started an extra job.');
-    if (image.id === catalogue.images[0]!.id) {
-      await page.reload(); await page.locator('[data-shape-cloud-root][data-ready="true"]').waitFor();
-      assert.equal(await page.locator('#shape-cloud-weight').inputValue(), changedWeight, 'Refresh lost the draft.');
-      assert.equal(await page.locator('[data-shape-cloud-root]').getAttribute('data-shape-cloud-root'), resultId, 'Refresh failed to reconnect the completed preview.');
-      assert.equal(await page.locator('.shape-cloud-status').getAttribute('data-unapplied'), 'true');
-    }
-    await page.getByRole('button', { name: 'Reset to detected', exact: true }).click();
+    assert.equal(writes.length, initialPosts, 'Mode, rotation, scope or selection triggered processing.');
     await page.locator('.observation-structures-panel').evaluate(node => { node.scrollTop = 0; });
     await page.screenshot({ path: `${directory}/${image.id}-compare.png` });
     checks.push({ imageId: image.id, resultId, leafCount: await root.locator('.css-volume-mesh s').count() });

@@ -18,13 +18,16 @@ export function readShapeCloudSettings(value: unknown, width: number, height: nu
   dimensions(width, height);
   if (!record(value) || Object.keys(value).some(key => key !== 'components' && key !== 'exposure') ||
       !Array.isArray(value.components) || value.components.length > 32) throw new TypeError('Invalid bounded shape cloud settings.');
-  const keys = ['id', 'label', 'memberIds', 'groupId', 'x', 'y', 'radiusX', 'radiusY', 'rotationDegrees', 'weight', 'thickness', 'softness', 'depth', 'enabled'];
+  const keys = ['id', 'label', 'memberIds', 'groupId', 'x', 'y', 'radiusX', 'radiusY', 'rotationDegrees', 'weight', 'thickness', 'softness', 'depth', 'enabled', 'shape', 'operation'];
   const maximum = Math.max(width, height);
   const components = value.components.map((item: unknown): ShapeCloudComponent => {
     if (!record(item) || Object.keys(item).some(key => !keys.includes(key)) || !text(item.id) || !text(item.label) || !text(item.groupId) ||
         !Array.isArray(item.memberIds) || !item.memberIds.length || item.memberIds.length > 32 || !item.memberIds.every(text) ||
         new Set(item.memberIds).size !== item.memberIds.length || typeof item.enabled !== 'boolean') throw new TypeError('Invalid shape cloud component.');
-    return { id: item.id, label: item.label, groupId: item.groupId, memberIds: [...item.memberIds], enabled: item.enabled,
+    const shape = item.shape === undefined ? 'shell' : item.shape, operation = item.operation === undefined ? 'add' : item.operation;
+    if ((shape !== 'shell' && shape !== 'ring' && shape !== 'ellipsoid') ||
+        (operation !== 'add' && operation !== 'subtract')) throw new TypeError('Unknown shape primitive or operation.');
+    return { id: item.id, label: item.label, groupId: item.groupId, memberIds: [...item.memberIds], enabled: item.enabled, shape, operation,
       x: bounded(item.x, 'x', -width, 2 * width), y: bounded(item.y, 'y', -height, 2 * height),
       radiusX: bounded(item.radiusX, 'radius X', 2, maximum * 2), radiusY: bounded(item.radiusY, 'radius Y', 2, maximum * 2),
       rotationDegrees: bounded(item.rotationDegrees, 'rotation', -360, 360), weight: bounded(item.weight, 'weight', 0, 5),
@@ -62,7 +65,7 @@ export function initializeShapeCloud(geometry: GeometryMap): ShapeCloudSettings 
     const mean = (sample: (member: GeometryCandidate) => number) => members.reduce((sum, member) => sum + sample(member) * Math.max(.001, member.score) / total, 0);
     const angle = Math.atan2(mean(member => Math.sin(2 * member.angleRadians)), mean(member => Math.cos(2 * member.angleRadians))) / 2;
     const groupId = members.find(member => member.groupId)?.groupId ?? `single-${index + 1}`;
-    return { id: `shape-${index + 1}`, label: `Shell ${index + 1}`, memberIds: members.map(member => member.id), groupId,
+    return { id: `shape-${index + 1}`, label: `Shape ${index + 1}`, memberIds: members.map(member => member.id), groupId, shape: 'shell', operation: 'add',
       x: mean(member => member.center[0]), y: mean(member => member.center[1]),
       radiusX: mean(member => member.radii[0]), radiusY: mean(member => member.radii[1]), rotationDegrees: angle * 180 / Math.PI,
       weight: 1, thickness: .12, softness: .08, depth: .65, enabled: true };

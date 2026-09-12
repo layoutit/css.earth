@@ -10,6 +10,7 @@ import { validatePreparedCssVolume } from '../../../../../src/renderers/css/volu
 import { initializeShapeCloud, readShapeCloudSettings } from './model.js';
 import { bakeShapeCloud } from './bake.js';
 import { readShapeCloudResult } from './result.js';
+import { readShapeCloudQuality } from './quality.js';
 import type { ShapeCloudRequest, ShapeCloudPin, ShapeCloudResult } from './types.js';
 
 const sha = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
@@ -19,13 +20,13 @@ const path = (value: unknown): value is string => typeof value === 'string' && v
 const hash = (value: unknown): value is string => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const cache = '.local/nebula-lab/shape-clouds';
 export function parseShapeCloudRequest(value: unknown): ShapeCloudRequest {
-  if (!object(value) || Object.keys(value).some(key => !['action', 'imageId', 'cataloguePath', 'geometrySha256', 'width', 'height', 'settings'].includes(key)) || value.action !== 'apply' ||
+  if (!object(value) || Object.keys(value).some(key => !['action', 'imageId', 'cataloguePath', 'geometrySha256', 'width', 'height', 'settings', 'quality'].includes(key)) || value.action !== 'apply' ||
       typeof value.imageId !== 'string' || !/^[a-z0-9-]+$/.test(value.imageId) || !path(value.cataloguePath) || !hash(value.geometrySha256) ||
       typeof value.width !== 'number' || typeof value.height !== 'number' || !Number.isInteger(value.width) || !Number.isInteger(value.height) ||
       value.width < 32 || value.height < 32 || value.width * value.height > 1_000_000)
     throw new TypeError('Choose prepared shapes and explicit preview settings.');
   return { action: 'apply', imageId: value.imageId, cataloguePath: value.cataloguePath, geometrySha256: value.geometrySha256,
-    width: value.width, height: value.height, settings: readShapeCloudSettings(value.settings, value.width, value.height) };
+    width: value.width, height: value.height, quality: readShapeCloudQuality(value.quality), settings: readShapeCloudSettings(value.settings, value.width, value.height) };
 }
 async function pinned(root: string, pin: ShapeCloudPin): Promise<Buffer> {
   if (!path(pin.path) || !hash(pin.sha256)) throw new TypeError('Invalid local shape-cloud resource.');
@@ -84,7 +85,7 @@ export function createShapeCloudJobs(root: string) {
     const staging = `${cache}/.staging-${id}-${crypto.randomUUID()}`;
     await mkdir(resolve(root, staging), { recursive: true });
     try {
-      const baked = await bakeShapeCloud({ root, outputDirectory: staging, id, image, geometry, geometrySha256: request.geometrySha256, settings, source }, {
+      const baked = await bakeShapeCloud({ root, outputDirectory: staging, id, image, geometry, geometrySha256: request.geometrySha256, settings, source, quality: request.quality }, {
         signal, onProgress(p) { signal.throwIfAborted(); progress({ type: 'progress', stage: p.phase, current: p.completed, total: p.total, message: `Preparing ${p.phase} ${p.completed}/${p.total}` }); },
       });
       signal.throwIfAborted();
@@ -100,6 +101,7 @@ export function createShapeCloudJobs(root: string) {
     } catch (error) { await rm(resolve(root, staging), { recursive: true, force: true }); throw error; }
   };
   return createStarRemovalJobs<ShapeCloudRequest>(root, { namespace: 'shape-cloud', label: 'Shape cloud', parseRequest: parseShapeCloudRequest,
+    history: { maxRecords: 128, retainPerImage: 4, preferred: request => request.quality === 'detailed' },
     sample(request, signal, progress) {
       const next = queue.then(() => sample(request, signal, progress)); queue = next.then(() => {}, () => {}); return next;
     }, validateResult: async result => { await validateShapeCloudResult(root, result); } });

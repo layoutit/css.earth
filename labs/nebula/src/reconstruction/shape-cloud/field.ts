@@ -18,13 +18,16 @@ export function createShapeCloudField(settings: ShapeCloudSettings, width: numbe
     // Raster rotation is clockwise; the physical x-right/y-up frame reverses it exactly once.
     const angle = -component.rotationDegrees * Math.PI / 180, c = Math.cos(angle), s = Math.sin(angle);
     const a = component.radiusX * unitsPerPixel, b = component.radiusY * unitsPerPixel;
-    const z = Math.min(a, b) * component.depth, outer = 1 + component.thickness / 2 + component.softness;
+    const halfThickness = component.thickness / 2;
+    const z = Math.min(a, b) * component.depth, outer = 1 + (component.shape === 'ellipsoid' ? 0 : halfThickness) + component.softness;
     const extentX = Math.hypot(a * c, b * s) * outer, extentY = Math.hypot(a * s, b * c) * outer;
-    return { x, y, c, s, a, b, z, outer, extentX, extentY, extentZ: z * outer,
-      halfThickness: component.thickness / 2, softness: component.softness, gain: component.weight * 1.8 / Math.min(a, b) };
+    return { x, y, c, s, a, b, z, outer, extentX, extentY, extentZ: component.shape === 'ring' ? z : z * outer,
+      shape: component.shape, operation: component.operation, halfThickness, softness: component.softness,
+      gain: component.weight * 1.8 / Math.min(a, b) };
   });
   const bounds: Bounds3 = { min: [-5, -height * unitsPerPixel / 2, -unitsPerPixel], max: [5, height * unitsPerPixel / 2, unitsPerPixel] };
   for (const component of components) {
+    if (component.operation === 'subtract') continue; // A cutter cannot create or enlarge emission support.
     bounds.min[0] = Math.min(bounds.min[0], component.x - component.extentX);
     bounds.max[0] = Math.max(bounds.max[0], component.x + component.extentX);
     bounds.min[1] = Math.min(bounds.min[1], component.y - component.extentY);
@@ -41,14 +44,18 @@ export function createShapeCloudField(settings: ShapeCloudSettings, width: numbe
       if (Math.abs(dx) >= component.extentX || Math.abs(dy) >= component.extentY || Math.abs(z) >= component.extentZ) continue;
       const localX = (dx * component.c + dy * component.s) / component.a;
       const localY = (-dx * component.s + dy * component.c) / component.b;
-      const distance = Math.abs(Math.sqrt(localX * localX + localY * localY + (z / component.z) ** 2) - 1);
-      if (distance >= component.halfThickness + component.softness) continue;
-      const t = Math.max(0, (distance - component.halfThickness) / component.softness);
-      value += component.gain * (1 - t * t * (3 - 2 * t));
+      const radial = Math.hypot(localX, localY), radius = Math.hypot(radial, z / component.z);
+      const halfThickness = component.shape === 'ellipsoid' ? 0 : component.halfThickness;
+      const distance = component.shape === 'ring'
+        ? Math.hypot(radial - 1, z / component.z * (halfThickness + component.softness))
+        : component.shape === 'ellipsoid' ? Math.max(0, radius - 1) : Math.abs(radius - 1);
+      if (distance >= halfThickness + component.softness) continue;
+      const t = Math.max(0, (distance - halfThickness) / component.softness);
+      value += (component.operation === 'subtract' ? -1 : 1) * component.gain * (1 - t * t * (3 - 2 * t));
     }
-    out[0] = out[1] = out[2] = value;
+    out[0] = out[1] = out[2] = Math.max(0, value);
   };
-  return { bounds, unitsPerPixel, empty: components.length === 0, sampleEmission };
+  return { bounds, unitsPerPixel, empty: !components.some(component => component.operation === 'add'), sampleEmission };
 }
 
 /** Pixel-edge convention: a world position at a source texel center samples that texel exactly. */
