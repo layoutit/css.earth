@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { readFile, readdir, mkdir, realpath, rename, rm, writeFile } from 'node:fs/promises';
 import { resolve, relative, dirname, isAbsolute } from 'node:path';
 import type { Plugin } from 'vite';
+import sharp from 'sharp';
 import { createStarRemovalJobs, starRemovalJobsHandler } from '../../utils/processing-jobs.js';
 import { readStructureCatalogue, readReviewMap } from '../../alignment/observations-ui/structures-model.js';
 import { readGeometryMap } from '../../alignment/observations-ui/geometry-model.js';
@@ -11,6 +12,7 @@ import { initializeShapeCloud, readShapeCloudSettings } from './model.js';
 import { bakeShapeCloud } from './bake.js';
 import { readShapeCloudResult } from './result.js';
 import { readShapeCloudQuality } from './quality.js';
+import { comparisonChannels, mapComparisonPins } from './comparison-result.js';
 import type { ShapeCloudRequest, ShapeCloudPin, ShapeCloudResult } from './types.js';
 
 const sha = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
@@ -40,6 +42,10 @@ export async function validateShapeCloudResult(root: string, value: unknown): Pr
   const result = readShapeCloudResult(value);
   await pinned(root, result.source);
   if (result.projection) await pinned(root, result.projection);
+  if (result.comparison) for (const level of result.comparison.levels) for (const channel of comparisonChannels) {
+    const metadata = await sharp(await pinned(root, level[channel])).metadata();
+    if (metadata.width !== result.width || metadata.height !== result.height) throw new TypeError('Structure comparison changed its source footprint.');
+  }
   for (const pin of [result.neutral, result.textured]) if (pin) {
     const volume = validatePreparedCssVolume(JSON.parse((await pinned(root, pin)).toString()));
     for (const resource of volume.resources) {
@@ -75,6 +81,7 @@ export function createShapeCloudJobs(root: string) {
     const moduleDirectory = 'labs/nebula/src/reconstruction/shape-cloud';
     const dependencies = (await readdir(resolve(root, moduleDirectory))).filter(name => name.endsWith('.ts') && !name.endsWith('.test.ts')).map(name => `${moduleDirectory}/${name}`)
       .concat(['labs/nebula/src/reconstruction/master-slices.ts', 'labs/nebula/src/reconstruction/cloud-material.ts', 'labs/nebula/src/reconstruction/cloud-appearance.ts',
+        'labs/nebula/src/reconstruction/geometry/ridges.ts',
         'src/renderers/css/preparation/volume.ts', 'src/renderers/css/preparation/volume-order.ts', 'src/renderers/css/preparation/leaf-bounds.ts',
         'src/preparation/volume/raster.ts', 'pnpm-lock.yaml']);
     const implementation = await Promise.all(dependencies.sort().map(async file => ({ path: file, sha256: sha(await readFile(resolve(root, file))) })));
@@ -93,7 +100,8 @@ export function createShapeCloudJobs(root: string) {
       signal.throwIfAborted();
       // Pins published to the immutable final directory, never to the staging path.
       const move = (pin: ShapeCloudPin | undefined) => pin ? { ...pin, path: pin.path.startsWith(`${staging}/`) ? `${directory}/${pin.path.slice(staging.length + 1)}` : pin.path } : undefined;
-      const result = readShapeCloudResult({ ...baked, source: move(baked.source), neutral: move(baked.neutral), textured: move(baked.textured), projection: move(baked.projection) });
+      const result = readShapeCloudResult({ ...baked, source: move(baked.source), neutral: move(baked.neutral), textured: move(baked.textured), projection: move(baked.projection),
+        ...(baked.comparison ? { comparison: mapComparisonPins(baked.comparison, pin => move(pin)!) } : {}) });
       await writeFile(resolve(root, staging, 'result.json'), JSON.stringify(result, null, 2) + '\n');
       await writeFile(resolve(root, staging, 'recipe.json'), JSON.stringify(identity, null, 2) + '\n');
       await rename(resolve(root, staging), resolve(root, directory));

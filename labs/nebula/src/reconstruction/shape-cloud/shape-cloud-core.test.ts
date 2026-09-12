@@ -125,6 +125,17 @@ test('actual XYZ bake paints the exact neutral alpha and geometry, records pins,
     outputDirectory: relative(root, resolve(directory, 'bake')) };
   const result = await bakeShapeCloud(input, { onProgress: value => progress.push(value.phase) });
   assert.equal(result.empty, false); assert.ok(result.neutral && result.textured && result.projection);
+  assert.ok(result.comparison); assert.equal(result.comparison.width, width); assert.equal(result.comparison.height, height);
+  assert.deepEqual(result.comparison.levels.map(level => level.gain), [1, 2, 4, 8]);
+  const diagnostic = result.comparison.levels[0]!.source, diagnosticBytes = await readFile(resolve(root, diagnostic.path));
+  assert.equal(sha256(diagnosticBytes), diagnostic.sha256);
+  const diagnosticImage = await sharp(diagnosticBytes).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  assert.equal(diagnosticImage.info.width, width); assert.equal(diagnosticImage.info.height, height);
+  assert.equal(diagnosticImage.info.channels, 3);
+  for (let p = 0; p < width * height; p++) {
+    assert.equal(diagnosticImage.data[p * 3], diagnosticImage.data[p * 3 + 1]);
+    assert.equal(diagnosticImage.data[p * 3], diagnosticImage.data[p * 3 + 2]);
+  }
   assert.ok(progress.includes('volume') && progress.includes('texture') && progress.includes('compile'));
   const payload = async (pin: { path: string; sha256: string }) => {
     const bytes = await readFile(resolve(root, pin.path)); assert.equal(sha256(bytes), pin.sha256);
@@ -170,9 +181,11 @@ test('actual XYZ bake paints the exact neutral alpha and geometry, records pins,
   assert.ok(Math.abs(meanAlpha(draftProjection) / meanAlpha(projection) - 1) < .04, 'Draft and refinement must keep integrated brightness close.');
   const empty = await bakeShapeCloud({ ...input, settings: { ...settings, components: settings.components.map(component => ({ ...component, enabled: false })) } });
   assert.equal(empty.empty, true); assert.equal(empty.neutral, undefined); assert.equal(empty.textured, undefined);
+  assert.equal(empty.comparison?.metrics.missingFraction, 1, 'Empty previews must still expose all source signal.');
   const cancelledTerms = await bakeShapeCloud({ ...input, quality: 'draft', outputDirectory: relative(root, resolve(directory, 'subtracted')),
     settings: { ...settings, components: [settings.components[0]!, { ...settings.components[0]!, id: 'cutter', memberIds: ['cut'], operation: 'subtract' }] } });
   assert.equal(cancelledTerms.empty, true, 'Equal positive and negative volumes must produce a valid empty preview.');
   assert.equal(cancelledTerms.neutral, undefined);
+  assert.equal(cancelledTerms.comparison?.metrics.missingFraction, 1);
   await assert.rejects(bakeShapeCloud(input, { signal: AbortSignal.abort() }), /cancelled/);
 });

@@ -8,6 +8,7 @@ import { formatShapeExpression, parseShapeExpression } from '../reconstruction/s
 import { localFile } from '../viewer/viewer';
 import { componentScope, editShapeComponents, useShapeCloudState, type EditScope, type NumericField } from './shape-cloud-state';
 import { ShapeCloudStage, earthCloudView, type CloudView } from './shape-cloud-stage';
+import { ShapeCloudDiagnostics, earthComparisonView, type ComparisonChannel } from './shape-cloud-diagnostics';
 import './shape-cloud.css';
 
 interface Props {
@@ -18,6 +19,7 @@ const modes = [
   { id: 'compare', label: 'Compare', symbol: '◫', title: 'Source and untextured cloud side by side, with linked framing.' },
   { id: 'overlay', label: 'Overlay', symbol: '▱', title: 'Untextured cloud over the registered source image.' },
   { id: 'textured', label: 'Textured', symbol: '◉', title: 'Source colors on exactly the same cloud.' },
+  { id: 'structure', label: 'Structure', symbol: '◐', title: 'Compare prepared luminance, edges and residuals at the registered Earth projection.' },
 ] as const;
 function Slider({ id, label, value, min, max, step = .01, display, title, onChange, onBegin, onSettle }: {
   id: string; label: string; value: number; min: number; max: number; step?: number; display?: string; title?: string; onChange(value: number): void;
@@ -31,8 +33,8 @@ function Slider({ id, label, value, min, max, step = .01, display, title, onChan
       onPointerCancel={onSettle} onKeyUp={onSettle} onBlur={onSettle} />
   </div>;
 }
-function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetected, mode, setMode, view, setView }: Props & {
-  mode: ShapeCloudMode; setMode(value: ShapeCloudMode): void; view: CloudView; setView(value: CloudView): void;
+function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetected, mode, stageMode, setMode, view, setView }: Props & {
+  mode: ShapeCloudMode; stageMode: Exclude<ShapeCloudMode, 'structure'>; setMode(value: ShapeCloudMode): void; view: CloudView; setView(value: CloudView): void;
 }) {
   const state = useShapeCloudState(image, geometry, cataloguePath), { settings, result } = state;
   const selectionKey = `nebula:shape-cloud-selection:1:${cataloguePath}:${image.id}:${image.sourceSha256}:${image.mapSha256}:${image.geometry?.sha256}`;
@@ -44,6 +46,8 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
   }
   const [outlines, setOutlines] = useState(true), [opacity, setOpacity] = useState(.5), [beforeSolo, setBeforeSolo] = useState<Record<string, boolean> | null>(null);
   const [hoveredId, setHoveredId] = useState(''), [formula, setFormula] = useState<string | null>(null), [formulaError, setFormulaError] = useState('');
+  const [channel, setChannel] = useState<ComparisonChannel>('luminosity'), [level, setLevel] = useState(0);
+  const [comparisonView, setComparisonView] = useState(earthComparisonView);
   const selected = settings.components.find(item => item.id === selectedId) ?? settings.components[0];
   const workingMatrix = useMemo<Matrix>(() => [matrix[0] * image.nativeWidth / image.width, matrix[1] * image.nativeWidth / image.width,
     matrix[2] * image.nativeHeight / image.height, matrix[3] * image.nativeHeight / image.height, matrix[4], matrix[5]], [matrix, image]);
@@ -93,12 +97,26 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
     </div>
     {(state.error || state.storageError) && <p className="interaction-hint shape-cloud-error" role="alert">{state.error || state.storageError}</p>}
     {state.error && <button type="button" onClick={state.retry}>Retry preview</button>}
+    {mode === 'structure' ? <div className="shape-cloud-diagnostic-controls">
+      <div className="shape-cloud-channels" role="group" aria-label="Structure channel">
+        {(['luminosity', 'edges', 'difference'] as const).map(value => <button type="button" key={value} aria-pressed={channel === value}
+          title={value === 'luminosity' ? 'Grayscale source and neutral model projection.' : value === 'edges' ? 'Prepared structure edges, with the same display gain.' : 'White: missing model signal. Black: excess model signal. Midgray: match.'}
+          onClick={() => setChannel(value)}>{value === 'luminosity' ? 'Luminance' : value === 'edges' ? 'Edges' : 'Difference'}</button>)}
+      </div>
+      <Slider id="shape-cloud-levels" label="Levels" value={level} min={0} max={3} step={1} display={`×${2 ** level}`}
+        title="Shared display gain above a source-derived white point. Does not change the cloud or trigger processing." onChange={setLevel} />
+      <p className="interaction-hint shape-cloud-diagnostic-legend" title={result?.comparison ? `One global model brightness fit: ${result.comparison.brightnessScale.toPrecision(3)}. This matches overall brightness; spatial differences remain. It does not change the cloud. Missing ${(100 * result.comparison.metrics.missingFraction).toFixed(1)}%; excess ${(100 * result.comparison.metrics.excessFraction).toFixed(1)}%; normalized RMSE ${result.comparison.metrics.normalizedRmse.toFixed(3)}.` : 'Prepared full-frame diagnostics are loading.'}>
+        {channel === 'difference' ? 'White: missing · black: excess · gray: match' : 'Shared gain · one global brightness fit'}
+      </p>
+      <div className="shape-cloud-camera-actions"><button type="button" onClick={() => setComparisonView(earthComparisonView)}>Earth view</button></div>
+    </div> : <>
     <div className="shape-cloud-camera-actions"><button type="button" onClick={() => setView(earthCloudView)}>Earth view</button>
       <button type="button" aria-pressed={!view.locked} onClick={() => setView(view.locked ? { ...view, locked: false } : { ...view, locked: true, yaw: 0, pitch: 0 })}>
         {view.locked ? 'Unlock rotation' : 'Lock to Earth'}</button></div>
     <label className="observation-check"><input type="checkbox" checked={outlines} onChange={event => setOutlines(event.target.checked)} /> Shape outlines</label>
     {mode === 'overlay' && <Slider id="shape-cloud-overlay-opacity" label="Cloud" value={opacity} min={0} max={1}
       display={`${Math.round(opacity * 100)}%`} onChange={setOpacity} />}
+    </>}
     <div className="shape-cloud-editing">
       <div className="shape-cloud-scope" role="group" aria-label="Edit scope">{(['all', 'group', 'selected'] as const).map(value =>
         <button type="button" key={value} aria-pressed={scope === value} onClick={() => setScope(value)}>{value === 'all' ? 'All' : value === 'group' ? 'Group' : 'Selected'}</button>)}</div>
@@ -135,7 +153,8 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
     <div className="shape-cloud-foot"><button type="button" className="text-button" onClick={onDetected}>Detected lines</button>
       <span className="interaction-hint" title="Nearby duplicate contours are merged. Shell depth, thickness and falloff are model assumptions, not physical measurements.">{settings.components.length} inferred components</span></div>
     {host && createPortal(<section className="shape-cloud-workspace" aria-label="Shape cloud comparison">
-      <ShapeCloudStage mode={mode} result={result} source={source} width={image.width} height={image.height} matrix={workingMatrix} frame={frame}
+      <div className="shape-cloud-three-d" hidden={mode === 'structure'}>
+      <ShapeCloudStage mode={stageMode} result={result} source={source} width={image.width} height={image.height} matrix={workingMatrix} frame={frame}
         components={settings.components} selectedId={selected?.id ?? ''} hoveredId={hoveredId} outlines={outlines} overlayOpacity={opacity} view={view} onView={setView} onSelect={setSelectedId} />
       <div className="shape-cloud-terms" role="group" aria-label="Cloud formula terms">{settings.components.map((component, index) => <button type="button" key={component.id}
         data-term-id={component.id} data-enabled={component.enabled} data-operation={component.operation} aria-pressed={component.id === selected?.id}
@@ -144,12 +163,17 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
         <span aria-hidden="true">{component.shape === 'ring' ? '◎' : component.shape === 'ellipsoid' ? '●' : '◯'}</span>
         {component.operation === 'subtract' ? '−' : '+'}{component.enabled ? Number(component.weight.toFixed(2)) : 0} S{index + 1}
       </button>)}</div>
-      <div className="shape-cloud-camera-hint">{view.locked ? 'Earth view · drag to pan · scroll to zoom' : 'Drag either pane to rotate · Shift-drag to pan · scroll to zoom'}</div>
+      </div>
+      {mode === 'structure' && <ShapeCloudDiagnostics comparison={result?.comparison} channel={channel} level={level}
+        matrix={workingMatrix} frame={frame} view={comparisonView} onView={setComparisonView} />}
+      <div className="shape-cloud-camera-hint">{mode === 'structure' || view.locked ? 'Earth view · drag to pan · scroll to zoom' : 'Drag either pane to rotate · Shift-drag to pan · scroll to zoom'}</div>
     </section>, host)}
   </section>;
 }
 /** Camera and comparison mode survive source changes; drafts/jobs are isolated by source identity. */
 export function ShapeCloudWorkbench(props: Props) {
   const [mode, setMode] = useState<ShapeCloudMode>('compare'), [view, setView] = useState<CloudView>(earthCloudView);
-  return <Session key={`${props.image.id}:${props.image.geometry?.sha256}`} {...props} mode={mode} setMode={setMode} view={view} setView={setView} />;
+  const [stageMode, setStageMode] = useState<Exclude<ShapeCloudMode, 'structure'>>('compare');
+  function chooseMode(value: ShapeCloudMode) { setMode(value); if (value !== 'structure') setStageMode(value); }
+  return <Session key={`${props.image.id}:${props.image.geometry?.sha256}`} {...props} mode={mode} stageMode={stageMode} setMode={chooseMode} view={view} setView={setView} />;
 }

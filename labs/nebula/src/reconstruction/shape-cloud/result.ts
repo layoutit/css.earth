@@ -1,5 +1,6 @@
 import { readShapeCloudSettings } from './model.js';
 import { readShapeCloudQuality } from './quality.js';
+import { readShapeCloudComparison } from './comparison-result.js';
 import type { ShapeCloudPin, ShapeCloudResult } from './types.js';
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 const hash = (value: unknown): value is string => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
@@ -24,5 +25,6 @@ export function readShapeCloudResult(value: unknown): ShapeCloudResult {
     mapSha256: value.mapSha256, geometrySha256: value.geometrySha256, width: value.width, height: value.height,
     unitsPerPixel: value.unitsPerPixel, settings, empty: value.empty, quality: readShapeCloudQuality(value.quality), preparationVersion: value.preparationVersion, source: readShapeCloudPin(value.source),
     ...(neutral ? { neutral } : {}), ...(textured ? { textured } : {}),
+    ...(value.comparison === undefined ? {} : { comparison: readShapeCloudComparison(value.comparison, value.width, value.height, readShapeCloudPin) }),
     ...(value.projection === undefined ? {} : { projection: readShapeCloudPin(value.projection) }) };
 }

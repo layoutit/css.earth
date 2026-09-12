@@ -15,10 +15,11 @@ import { recolorCloudSlices } from '../cloud-material.js';
 import { createShapeCloudField, createShapeImageSampler } from './field.js';
 import { readShapeCloudSettings } from './model.js';
 import { readShapeCloudQuality, shapeCloudSampling, SHAPE_CLOUD_PREPARATION_VERSION } from './quality.js';
+import { writeShapeComparison } from './comparison-artifacts.js';
 import type { ShapeCloudPin, ShapeCloudResult, ShapeCloudSettings, ShapeCloudQuality } from './types.js';
 
 export const SHAPE_CLOUD_METHOD = 'detected-boundary-signed-emission-shapes@2';
-export interface ShapeCloudBakeProgress { phase: 'volume' | 'texture' | 'compile'; completed: number; total: number; message: string }
+export interface ShapeCloudBakeProgress { phase: 'volume' | 'texture' | 'compile' | 'comparison'; completed: number; total: number; message: string }
 export interface ShapeCloudBakeOptions { signal?: AbortSignal; onProgress?(progress: ShapeCloudBakeProgress): void }
 const hash = (value: string) => /^[a-f0-9]{64}$/.test(value);
 function cancellation(signal?: AbortSignal) {
@@ -58,7 +59,8 @@ async function inspectAlpha(directory: string, slices: VolumeSlices, options: Sh
     }
     projectionPng = await sharp(rgba, { raw: { width: first.widthPx, height: first.heightPx, channels: 4 } }).png().toBuffer();
   }
-  return { alphaSha256: digest.digest('hex'), projectionPng };
+  return { alphaSha256: digest.digest('hex'), projectionPng,
+    projection: transmission ? { alpha: Float32Array.from(transmission, value => 1 - value), width: first.widthPx, height: first.heightPx } : undefined };
 }
 
 export async function bakeShapeCloud(input: {
@@ -84,7 +86,14 @@ export async function bakeShapeCloud(input: {
     preparationVersion: SHAPE_CLOUD_PREPARATION_VERSION,
     sourceSha256: image.sourceSha256, mapSha256: image.mapSha256, geometrySha256: input.geometrySha256,
     width: image.width, height: image.height, unitsPerPixel: field.unitsPerPixel, settings, quality, empty: field.empty, source: { ...source } };
-  if (field.empty) return result;
+  const compare = async (projection?: { alpha: Float32Array; width: number; height: number }) => {
+    options.onProgress?.({ phase: 'comparison', completed: 0, total: 1, message: 'Comparing neutral structure and source luminosity' });
+    result.comparison = await writeShapeComparison({ root, directory: outputDirectory, rgb, width: image.width, height: image.height,
+      projection: projection ? { ...projection, bounds: field.bounds } : undefined, signal: options.signal });
+    options.onProgress?.({ phase: 'comparison', completed: 1, total: 1, message: 'Prepared grayscale structure comparison' });
+    return result;
+  };
+  if (field.empty) return compare();
   await mkdir(output, { recursive: true });
   const neutralDirectory = containedPath(output, 'neutral'), texturedDirectory = containedPath(output, 'textured');
   const report = (phase: ShapeCloudBakeProgress['phase'], completed: number, total: number, message: string) => {
@@ -106,7 +115,7 @@ export async function bakeShapeCloud(input: {
   exposureGain: settings.exposure, masterWidth: sampling.width, masterDirectory: neutralDirectory, deliveryBanks: [],
   unitsPerSourceUnit: 1, provenance, cropTransparent: false, allowEmpty: true,
   onProgress: progress => report('volume', progress.completed, progress.total, `Preparing ${progress.axis.toUpperCase()} cloud slabs`) });
-  if (masters.quads.every(quad => quad.alphaCoverage === 0)) return { ...result, empty: true };
+  if (masters.quads.every(quad => quad.alphaCoverage === 0)) { result.empty = true; return compare(); }
   const neutralAlpha = await inspectAlpha(neutralDirectory, masters, options, true);
   masters.provenance = { ...provenance, alphaSha256: neutralAlpha.alphaSha256 };
   await writeFile(containedPath(neutralDirectory, 'volume-slices.json'), json(masters));
@@ -132,5 +141,5 @@ export async function bakeShapeCloud(input: {
   }
   if (neutralAlpha.projectionPng) result.projection = await writePin(root, relative(root, containedPath(output, 'projection.png')), neutralAlpha.projectionPng);
   cancellation(options.signal);
-  return result;
+  return compare(neutralAlpha.projection);
 }

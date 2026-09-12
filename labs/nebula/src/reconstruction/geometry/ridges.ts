@@ -1,6 +1,12 @@
 /** Offline smoothing and oriented boundary evidence sampling. */
 export interface RidgePoint { x: number; y: number; strength: number; nx: number; ny: number }
 export interface RidgeField { width: number; height: number; strength: Float32Array; nx: Float32Array; ny: Float32Array; points: RidgePoint[] }
+/** Relative display-sRGB signal only; no linear-light/flux or gas-density interpretation. */
+export function displayLuminance(rgb: Uint8Array, width: number, height: number): Float32Array {
+  if (!Number.isInteger(width) || !Number.isInteger(height) || width < 1 || height < 1 || width * height > 1_000_000 || rgb.length !== width * height * 3)
+    throw new TypeError('Luminance evidence requires a complete bounded RGB raster.');
+  return Float32Array.from({ length: width * height }, (_, p) => (.2126 * rgb[p * 3]! + .7152 * rgb[p * 3 + 1]! + .0722 * rgb[p * 3 + 2]!) / 255);
+}
 export function blur(input: Float32Array, width: number, height: number, sigma: number): Float32Array {
   const radius = Math.ceil(sigma * 3), kernel = Array.from({ length: radius * 2 + 1 }, (_, i) => Math.exp(-.5 * ((i - radius) / sigma) ** 2));
   const sum = kernel.reduce((a, b) => a + b, 0); for (let i = 0; i < kernel.length; i++) kernel[i] /= sum;

@@ -1,6 +1,6 @@
 import type { ShapeCloudQuality } from './types.js';
 import type { Bounds3 } from '../../../../../src/preparation/volume/config.js';
-export const SHAPE_CLOUD_PREPARATION_VERSION = 'tight-support-uniform-pitch@1';
+export const SHAPE_CLOUD_PREPARATION_VERSION = 'structure-comparison@1';
 
 /** Quality changes sampling only; both passes evaluate the same physical field and exposure. */
 export function readShapeCloudQuality(value: unknown): ShapeCloudQuality {

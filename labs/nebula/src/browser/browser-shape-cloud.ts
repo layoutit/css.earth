@@ -29,7 +29,7 @@ try {
   await page.goto(`${process.argv[2] ?? 'http://127.0.0.1:4331'}/reconstruction?subject=helix-model-prior`);
   await page.locator('.shape-cloud-workbench').waitFor();
   const modes = page.getByRole('group', { name: 'Cloud comparison mode', exact: true });
-  assert.equal(await modes.getByRole('button').count(), 3);
+  assert.equal(await modes.getByRole('button').count(), 4);
   const sizes = await modes.getByRole('button').evaluateAll(nodes => nodes.map(node => node.getBoundingClientRect().height));
   assert.ok(sizes.every(size => size >= 64), 'Comparison buttons should be large, like alignment layer buttons.');
   assert.equal(await page.locator('#shape-cloud-preview').count(), 0, 'Manual preview should no longer be required.');

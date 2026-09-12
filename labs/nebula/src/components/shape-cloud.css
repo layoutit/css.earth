@@ -1,4 +1,4 @@
-.shape-cloud-modes { margin: 6px 0 12px; gap: 8px; }
+.shape-cloud-modes { margin: 6px 0 12px; gap: 5px; }
 .observation-structures > .emission-layer-buttons[hidden] { display: none; }
 .shape-cloud-modes button { min-height: 70px; font-size: 12px; padding: 10px 4px; border-radius: 6px; }
 .shape-cloud-modes button > span:first-child { font-size: 30px; }
@@ -24,6 +24,11 @@
 .shape-cloud-foot { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-top: 15px; }
 .shape-cloud-foot .interaction-hint { margin: 0; }
 .shape-cloud-workspace { position: absolute; inset: 0; z-index: 1; background: #000; }
+.shape-cloud-three-d[hidden] { display: none; }
+.shape-cloud-channels { display: flex; gap: 4px; margin-bottom: 9px; }
+.shape-cloud-channels button { flex: 1; min-width: 0; padding: 7px 3px; font-size: 10px; }
+.shape-cloud-channels button[aria-pressed="true"] { background: #34383d; border-color: #788792; }
+.shape-cloud-diagnostic-legend { font-size: 10px; line-height: 16px; height: 16px; margin: 8px 0; white-space: nowrap; }
 .shape-cloud-stage { position: absolute; inset: 0 338px 30px 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; min-width: 0; }
 .shape-cloud-stage[data-mode="overlay"], .shape-cloud-stage[data-mode="textured"] { grid-template-columns: 1fr; }
 .shape-cloud-source-slot, .shape-cloud-output-slot { min-width: 0; min-height: 0; }
@@ -58,7 +63,11 @@
 .shape-cloud-terms button:hover, .shape-cloud-terms button:focus-visible { border-color: #fff; }
 .workspace-content:has(.shape-cloud-workspace) > #inspection-panel { visibility: hidden; }
 .observation-structures-workspace[data-cloud-active="true"] { visibility: hidden; pointer-events: none; }
-@media (max-width: 1100px) { .shape-cloud-stage { right: 288px; } .shape-cloud-camera-hint { right: 288px; } }
+@media (max-width: 1100px) {
+  .shape-cloud-stage { right: 288px; }
+  .shape-cloud-camera-hint { right: 288px; }
+  .shape-cloud-modes button { font-size: 11px; padding-inline: 2px; }
+}
 @media (max-width: 760px) {
   .shape-cloud-stage { inset: 220px 0 30px; gap: 0; }
   .shape-cloud-camera-hint { right: 0; }

@@ -33,4 +33,12 @@ test('completed shape result requires both material pins, finite registration an
     { quality: 'unknown' }, { preparationVersion: 1 }, { preparationVersion: 'invalid' },
     { source: { ...pin, path: '.local/nebula-lab/../../outside.png' } }]) assert.throws(() => readShapeCloudResult({ ...result, ...changed }));
   assert.equal(readShapeCloudResult({ ...result, empty: true, neutral: undefined, textured: undefined }).empty, true);
+  const comparison = { schema: 'cssearth-shape-cloud-comparison@1', width: result.width, height: result.height, brightnessScale: 1,
+    metrics: { missingFraction: .5, excessFraction: .2, normalizedRmse: .3 }, levels: [1, 2, 4, 8].map(gain => ({
+      gain, source: pin, model: pin, sourceEdges: pin, modelEdges: pin, difference: pin })) };
+  assert.deepEqual(readShapeCloudResult({ ...result, comparison }).comparison, comparison);
+  for (const change of [{ width: 191 }, { brightnessScale: NaN }, { levels: comparison.levels.slice(1) },
+    { levels: comparison.levels.map(level => ({ ...level, gain: 1 })) },
+    { levels: comparison.levels.map(level => ({ ...level, model: { ...pin, sha256: 'changed' } })) }])
+    assert.throws(() => readShapeCloudResult({ ...result, comparison: { ...comparison, ...change } }));
 });
