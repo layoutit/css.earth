@@ -1,6 +1,7 @@
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-residency.js';
 import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
+import { parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { mountSpaceMinimap } from './minimap/minimap.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
@@ -17,6 +18,11 @@ import galaxyPresentation from '../src/objects/local-group/source/presentation.j
 import clusterCatalog from '../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
 import clusterPresentation from '../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
+
+const nebulaParts = Object.values(import.meta.glob('../src/objects/*/source/nebula.json', { eager: true, import: 'default' })).map(parsePreparedNebulaCatalog);
+const nebulaCatalog = parsePreparedNebulaCatalog({ schema: 'cssearth-nebula-catalog@1', frame: galaxyCatalog.frame,
+  sources: [...new Map(nebulaParts.flatMap(part => part.sources).map(source => [source.id, source])).values()],
+  objects: nebulaParts.flatMap(part => part.objects) });
 
 const annotationOpacities = Object.fromEntries(OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
 const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
@@ -84,7 +90,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // The world worker reads its own prepared context; background stars are already baked.
     const plannerSource = { contextUrl: APPLICATION_WORLD_CONTEXT_URL };
     const universe = createPreparedUniverse({ context: applicationContext, volume, pointAppearance, sprites, imageLayers, volumeLenses, annotationPriorities, annotationOpacities, plannerSource,
-      catalog: { payload: galaxyCatalog, fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM,
+      catalog: { payload: galaxyCatalog, nebulae: nebulaCatalog, fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM,
         fullDistanceM: galaxyPresentation.fullDistanceM,
         clusters: { payload: clusterCatalog, fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } },
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
@@ -124,7 +130,7 @@ export function createApplicationWorldContext() {
         const layer = prepared.mount(stage, { presentationHost, requestPublication: () => refreshWorld(), onSelectGalaxy: object => { void contextNavigation?.select(object); } });
         pendingLayer = layer;
         contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
-          sources: [...galaxyCatalog.sources, ...clusterCatalog.sources], windowTarget });
+          sources: [...galaxyCatalog.sources, ...clusterCatalog.sources, ...nebulaCatalog.sources], windowTarget });
         layer.setHiddenOrbits(hiddenOrbitIds);
         const framePlanner = prepared.createFramePlanner();
         pendingPlanner = framePlanner;

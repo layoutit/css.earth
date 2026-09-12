@@ -5,6 +5,7 @@
 - [Next steps](../NEXTSTEPS.md): current compiler assessment and preserved handoff history.
 - [Research and papers](../RESEARCH.md): implemented method, novelty assessment and objects without a simulation.
 - [Workflow](workflows.md): the main Nebula compiler, source diagnostics and the separate density Preview workflow.
+- [Archive catalogue](archive-catalogue.md): all 110 Messier objects, bounded metadata discovery, coverage/size limits and future named detail regions.
 - [Emission compiler](emission-compiler.md): complete clean-state setup, automatic fitting, prepared image lenses, durable jobs and conditional depth.
 - [Structure review](nebula-compiler.md): aligned Helix evidence, human filtering and separate editable shape hypotheses.
 - [Combined evidence](multimodal-workflow.md) and [joint 3D fit](joint-fit.md): multiband ridges, measured molecular velocities, alternative surfaces and withheld residuals.

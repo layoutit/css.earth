@@ -7,6 +7,7 @@ Local development tooling, separate from the production website. Current objects
 From the repository root: `pnpm install --frozen-lockfile --ignore-scripts`, `pnpm build:packages`, then `pnpm lab:nebula`. Startup recreates missing neutral density textures and inspection/reference images from pinned sources, downloading missing originals without running extraction or reconstruction. `pnpm lab:nebula:bake` rebuilds the three accepted LMC lenses from their saved recipe; `pnpm lab:nebula:verify` validates the completed native, reconstruction and delivery artifacts without processing; see [docs/baking.md](docs/baking.md). The default server is `http://127.0.0.1:4331`.
 
 - `/alignment`: inspect the complete density field, choose an image, adjust placement/tone, compare Original / Without stars / Residual, and run optional Quick preview or full Remove stars.
+- `/catalogue`: browse all 110 Messier objects and bounded archive metadata; [workflow and limits](docs/archive-catalogue.md). Keep this independent of reconstruction subjects, processing and saved camera state. Retain close-up footprints/provenance for future named detail regions; catalogue metadata is neither processing acceptance nor measured 3D structure.
 - `/reconstruction`: choose the saved starless source and press Preview. Completed variants load without processing when selected. Show progress and Cancel; refresh reconnects to the same job.
 - Compiler subjects open **Reconstruction → Nebula** as the final cloud workspace. **Compile nebula** authorizes the configured source restoration, registration/separation, evidence, optional velocity scaffold, emission fit and bake together. After the first successful compile, Detail/Faint emission/Depth apply automatically with only the latest pending settings. Keep progress, Cancel/Retry, durable jobs and saved pose; lens/material/star/original/camera switches never bake. Diagnostics remain in the workbench bar. See [the compiler method](docs/emission-compiler.md).
 - Inference subjects add a cloud workbench in **Shapes**, reachable through **Cloud preview** from the detected-line inspector. **Structure** compares prepared luminance, edges and signed residual before color; shared Levels never change the model or start processing. **Compare / Overlay / Textured** inspect the same cloud in 3D. Hover/click guides to inspect/select components; **All / Group / Selected** scopes edit saved drafts. Shape controls automatically prepare a quick preview during dragging and a detailed pass on release. Combine intermediate edits; never queue every pointer event. Keep the old cloud visible until its replacement is decoded. Mode, camera and selection changes never bake.
@@ -18,12 +19,14 @@ From the repository root: `pnpm install --frozen-lockfile --ignore-scripts`, `pn
 ```text
 src/
   components/       React panels and reusable controls
+  catalogue/        archive discovery, query receipts and metadata browser
   alignment/        source registration, placement and saved fits
   star-removal/     NOX processing, residuals and saved removal state
   pipeline/         source acquisition, stage replay and completion receipts
   reconstruction/   structure/depth model, bake worker and saved variants
   density/          unchanged prior and integrated-signal inspection
   stars/            particle/catalogue preparation and stellar overlays
+  delivery/         pinned lab-to-app volume handoff and sky-frame conversion
   viewer/           retained plain-TypeScript PolyCSS scene
   utils/            shared stores, local jobs and path resolution
   cli/              offline preparation commands
@@ -31,6 +34,7 @@ src/
 models/
   lmc/              LMC inputs, recipes and prepared models
   smc/              SMC inputs, recipes and prepared models
+  messier/          discovery identities, sky extents and source evidence
 ```
 
 - React owns UI markup, control state and interaction. The PolyCSS renderer remains a plain TypeScript library mounted through a stable element/ref. UI rerenders must not recreate the cloud scene.

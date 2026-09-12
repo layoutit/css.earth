@@ -1,4 +1,5 @@
 import type { PreparedGalaxyRecord, SpatialCatalogSource } from './spatial.js';
+import type { PreparedNebulaRecord } from './nebulae.js';
 
 /** A catalogue centre and overdensity aperture, never a member-galaxy or density model. */
 export interface PreparedClusterRecord extends Pick<PreparedGalaxyRecord,
@@ -9,7 +10,7 @@ export interface PreparedClusterRecord extends Pick<PreparedGalaxyRecord,
   readonly aperture: { readonly definition: 'R500'; readonly properRadiusM: number;
     readonly comovingRadiusM: number; readonly sourceRef: string };
 }
-export type PreparedCatalogObject = PreparedGalaxyRecord | PreparedClusterRecord;
+export type PreparedCatalogObject = PreparedGalaxyRecord | PreparedClusterRecord | PreparedNebulaRecord;
 export interface PreparedClusterCatalog {
   readonly schema: 'cssearth-cluster-catalog@1';
   readonly frame: { readonly referenceFrame: string; readonly epochJdTt: number };

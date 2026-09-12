@@ -221,3 +221,11 @@ src/planets/*/source/**/*.bpc
 /src/planets/tethys/source/science/b2-intake/tethysshapeassessment.pdf
 /src/planets/titan/source/science/b2-intake/topo_4PPD.cub
 /src/planets/titan/source/science/b2-intake/topo_4PPD_interp.cub
+
+# Nebula display volumes are restored from their pinned lab delivery recipes.
+/src/objects/m42/prepared/
+/src/objects/helix/prepared/
+/src/objects/m2-9/prepared/
+/src/objects/m42/.prepared-*/
+/src/objects/helix/.prepared-*/
+/src/objects/m2-9/.prepared-*/
