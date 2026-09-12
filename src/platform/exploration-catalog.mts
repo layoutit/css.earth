@@ -10,6 +10,8 @@ export interface MachineSite { readonly latitude: number; readonly longitude: nu
 export interface MachineRecord {
   readonly id: string; readonly name: Cited<string>; readonly aliases: readonly Cited<string>[];
   readonly description: Cited<string>; readonly kind: Cited<MachineKind>; readonly setting: Cited<MachineSetting>;
+  /** The part of the spectrum this machine works in, as its source states it. */
+  readonly band?: Cited<string>;
   readonly launch?: Cited<string>; readonly commissioned?: Cited<string>; readonly retired?: Cited<string>;
   readonly site?: Cited<MachineSite>; readonly imageId?: string;
 }
@@ -118,7 +120,7 @@ export function parseExplorationCatalog(input: unknown, agencies: Readonly<Recor
     return Object.freeze({ value: parse(record.value), citations: refs(record.citations) });
   };
   const machines = explorationArray(value.machines, raw => {
-    const record = explorationRecord(raw, ['id', 'name', 'aliases', 'description', 'kind', 'setting', 'launch', 'commissioned', 'retired', 'site', 'imageId']);
+    const record = explorationRecord(raw, ['id', 'name', 'aliases', 'description', 'kind', 'setting', 'band', 'launch', 'commissioned', 'retired', 'site', 'imageId']);
     const aliases = explorationArray(record.aliases, alias => cited(alias, explorationText));
     unique(aliases.map(alias => alias.value), 'machine alias');
     const setting = cited(record.setting, machineSetting);
@@ -132,6 +134,7 @@ export function parseExplorationCatalog(input: unknown, agencies: Readonly<Recor
     if (commissioned && retired && dateBounds(commissioned.value)[0] > dateBounds(retired.value)[1]) throw new TypeError('Machine retired before it was commissioned.');
     return Object.freeze({ id: explorationId(record.id), name: cited(record.name, explorationText), aliases,
       description: cited(record.description, explorationText), kind: cited(record.kind, machineKind), setting,
+      ...(record.band === undefined ? {} : { band: cited(record.band, explorationText) }),
       ...(record.launch === undefined ? {} : { launch: cited(record.launch, explorationDate) }),
       ...(commissioned ? { commissioned } : {}), ...(retired ? { retired } : {}),
       ...(record.site === undefined ? {} : { site: cited(record.site, machineSite) }),

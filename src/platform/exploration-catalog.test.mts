@@ -86,12 +86,13 @@ test('a ground machine is sited and retired instead of launched', () => {
   const f = fixture();
   const arecibo = { id: 'arecibo-305m', name: cited('Arecibo 305-m antenna'), description: cited('A fixed spherical reflector.'),
     aliases: [], kind: cited('radar-telescope'), setting: cited('ground'), commissioned: cited('1963'), retired: cited('2020'),
-    site: cited({ latitude: 18.344219, longitude: 293.247306, altitude: 453.34 }) };
+    band: cited('Radar'), site: cited({ latitude: 18.344219, longitude: 293.247306, altitude: 453.34 }) };
   const catalog = parseExplorationCatalog({ ...f, machines: [...f.machines, arecibo] }, agencies);
   const record = catalog.machines[1];
   assert.equal(record.setting.value, 'ground');
   assert.equal(record.launch, undefined);
   assert.equal(record.site?.value.altitude, 453.34);
+  assert.equal(record.band?.value, 'Radar');
   assert.ok(Object.isFrozen(record.site?.value));
   assert.throws(() => parseExplorationCatalog({ ...f, machines: [{ ...arecibo, launch: cited('1963') }] }, agencies), /cannot be launched/);
   assert.throws(() => parseExplorationCatalog({ ...f, machines: [{ ...f.machines[0], site: cited({ latitude: 0, longitude: 0 }) }] }, agencies), /cannot be sited/);
