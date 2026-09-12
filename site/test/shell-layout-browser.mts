@@ -81,7 +81,7 @@ try {
           categories: box(".planet-search-categories"),
           categoryCount: document.querySelectorAll(".planet-search-category").length,
           githubShown: shown(".planet-header-link"), github: box(".planet-header-link"),
-          settings: box(".planet-settings-action"), spacecraft: box(".planet-spacecraft-toggle"),
+          settings: box(".planet-settings-action"), machine: box(".planet-machine-toggle"),
           clearShown: shown(".planet-sidebar-search-clear"),
           card: box(".planet-information-panel"),
           // The sheet declares its snap heights; the controller reads the same values.
