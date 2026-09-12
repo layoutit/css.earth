@@ -347,7 +347,7 @@
       "width": 1440,
       "height": 1440,
       "units": "Kilometres to nearest input measurement",
-      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument\u2019s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "west-positive",
@@ -398,7 +398,7 @@
       "width": 1440,
       "height": 1440,
       "units": "Kilometres to nearest input measurement",
-      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument\u2019s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "west-positive",
@@ -449,7 +449,7 @@
       "width": 1440,
       "height": 1440,
       "units": "Metres above 2575.0 km sphere",
-      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125\u00b0 (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "west-positive",
@@ -500,7 +500,7 @@
       "width": 1440,
       "height": 1440,
       "units": "Metres above 2575.0 km sphere",
-      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125\u00b0 (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "west-positive",
@@ -1747,7 +1747,7 @@
       "expectedSha256": "f4b6b33c557178e5b6d79c4689020f6bab38d4f9ff13eba81357e389aa3f4ae1",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TITAN_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -1817,6 +1817,213 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "hyg-registration-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 848,
+      "expectedSha256": "a331430a197b0a24a9b5e466ce3031832a012284e46f94b27addd212bfb0fc59",
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
+      ],
+      "acquisition": "checked prepared registration field from HYG v4.1",
+      "redistribution": "CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/58"
+          }
+        ]
+      }
+    },
+    {
+      "id": "titan-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2559,
+      "expectedSha256": "368b4ae5dc17b4ad70c9f7ff47c572486d9f8ad23aba5c9d325700462b904296",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "deterministically generated Titan title path from the repository-pinned Inter font",
+      "redistribution": "generated outline under the Inter license",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/titan/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/59"
+          }
+        ]
+      }
+    },
+    {
+      "id": "titan-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 1596,
+      "expectedSha256": "15e967900bca207b7d76ed95bf266e1e8da76f3174bcbbad46cd0aaed15833df",
+      "origin": "Repository-authored Titan solar-system recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "titan-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 13703,
+      "expectedSha256": "cb192954b5fc3c697e0601173ea85d67a32d3aa646c425d6f8b414a9f79d9cd2",
+      "origin": "Repository-authored Titan raster recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "titan-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1408,
+      "expectedSha256": "94404f7ee4a3e0f4405c30ce982dc632fd88670998e41ee41cfdb0b7d55a6db4",
+      "origin": "Repository-authored Titan geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "titan-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 222,
+      "expectedSha256": "732ebb21ef9a26a15156c0a11598ae7d765b44bd4b12074b03a9d4f47ee1d9f9",
+      "origin": "Repository-authored Titan celestial recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "titan-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 101,
+      "expectedSha256": "c96ba98613e0a191cadc1b4d1ac04cfc647f823386a7f8a49e0bb77c42a597ec",
+      "origin": "Repository-authored Titan presentation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "titan-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 2545,
+      "expectedSha256": "281c032a625f08b9e14edf141102b4638b0c73a80fc0112a5fd28854878663f8",
+      "origin": "Repository-authored Titan navigation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "titan-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 18771,
+      "expectedSha256": "ea46750b1a654aa2b999009928056505793a36b3b6cc30bee1265b251d82f94c",
+      "origin": "Repository-authored Titan acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "titan-object-content",
+      "path": "content/object.json",
+      "expectedBytes": 16133,
+      "expectedSha256": "fc03cf7c708181b9b3d29b199160edc74232bfe1bff00d22651c25b701f73a53",
+      "origin": "Repository-authored Titan object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -1834,11 +2041,6 @@
       "purpose": "Original USGS projection, spectral band and scientific processing metadata."
     },
     {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 848,
-      "expectedSha256": "a331430a197b0a24a9b5e466ce3031832a012284e46f94b27addd212bfb0fc59"
-    },
-    {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
       "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
@@ -1847,35 +2049,6 @@
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
       "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
-    },
-    {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 11481,
-      "expectedSha256": "baad0759b526300aab67e29d536eee12aead0e301e773ef5ca1ad85dad7d771e"
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 2545,
-      "expectedSha256": "281c032a625f08b9e14edf141102b4638b0c73a80fc0112a5fd28854878663f8"
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 18771,
-      "expectedSha256": "ea46750b1a654aa2b999009928056505793a36b3b6cc30bee1265b251d82f94c"
-    },
-    {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2559,
-      "expectedSha256": "368b4ae5dc17b4ad70c9f7ff47c572486d9f8ad23aba5c9d325700462b904296"
-    },
-    {
-      "path": "content/object.json",
-      "expectedBytes": 14736,
-      "expectedSha256": "43c125f9645ade91773e56b14f8c96c5f9433a6c905436bcaa50c9a50a19037c",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
     },
     {
       "path": "radar/MIBEF00N090_T126S00_V01.LBL",

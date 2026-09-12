@@ -716,8 +716,8 @@
     {
       "id": "moon-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1495,
-      "expectedSha256": "706e2452fc08417821f4be857cb3c6552099bcd157f065badf3e60f31ff37482",
+      "expectedBytes": 1452,
+      "expectedSha256": "a24102c8e12b7d9b2fbc5483994b6c439745e404bec65f84bd88bc2336788d8a",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",

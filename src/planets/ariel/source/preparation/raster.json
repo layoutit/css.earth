@@ -1,0 +1,165 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/ariel/",
+  "sourceWidth": 5760,
+  "sourceHeight": 2880,
+  "width": 2048,
+  "height": 1024,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "ariel-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssariel-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
+    {
+      "id": "normal",
+      "output": "ariel-{id}{suffix}.webp",
+      "thumbnail": "ariel-lens-{id}.webp",
+      "source": "observations/aumap-cyl-180180.cub.gz",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "schenk-2020-ariel-normal",
+        "id": "normal",
+        "validity": {
+          "kind": "isis3-float-monochrome",
+          "grid": {
+            "width": 3652,
+            "height": 1826,
+            "targetName": "Ariel",
+            "centerLongitude": 180,
+            "referenceRadiusMeters": 581100,
+            "polarRadiusMeters": 577700,
+            "origin": [
+              -3652000,
+              913000
+            ],
+            "resolutionMeters": 1000,
+            "specialValueMagnitude": 1e+30,
+            "longitudeRange": [
+              -180,
+              180
+            ]
+          },
+          "displayRange": [
+            0,
+            3000
+          ]
+        }
+      }
+    },
+    {
+      "id": "elevation",
+      "output": "ariel-{id}{suffix}.webp",
+      "thumbnail": "ariel-lens-{id}.webp",
+      "source": "science/audem-ZTL-cyl-180180.cub.gz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "isis3",
+        "path": "science/audem-ZTL-cyl-180180.cub.gz",
+        "description": "Voyager terrain model · shaded relief",
+        "title": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution.",
+        "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+        "minimum": -8,
+        "maximum": 6,
+        "colors": [
+          "#1c5599",
+          "#bbab80",
+          "#aa3e24"
+        ],
+        "labels": [
+          "−8",
+          "−1",
+          "6"
+        ],
+        "units": "km",
+        "consumer": "scientific-surfaces",
+        "sampling": "bilinear",
+        "grid": {
+          "width": 3652,
+          "height": 1826,
+          "targetName": "Ariel",
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 581100,
+          "polarRadiusMeters": 577700,
+          "origin": [
+            -3652000,
+            913000
+          ],
+          "resolutionMeters": 1000,
+          "specialValueMagnitude": 1e+30,
+          "longitudeRange": [
+            -180,
+            180
+          ]
+        },
+        "relief": {
+          "referenceRadiusMeters": 581100,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.25
+        }
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "ariel-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "ariel-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "cssariel-prepared-lighting-bank@1",
+    "billboardSchema": "cssariel-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "cssariel-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

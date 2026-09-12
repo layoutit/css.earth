@@ -14,6 +14,14 @@ Charon combines New Horizons monochrome and enhanced-color mosaics, a terrain mo
 
 ## Evidence
 
+Lane change (this PR): the terrestrial solid-observation lane was retired for Charon; the same pinned inputs and the same decoders (`terrestrial-observation`, `terrestrial-scientific` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 6400 × 3200 (DPR 1) and 12800 × 6400 (DPR 2) — retired 12800 × 6400 atlas; native 300 m mosaic 12,693 px wide. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
+
+Run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js charon --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/charon/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
+
+A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced-color, elevation, albedo) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 15738).
+
+Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
+
 [Independent color-source inspection](source/validation/color-source-inspection.json) records numeric and missing-value anchors. It found about 60% area-weighted RGB coverage before interpolation. No dated test or browser run is cited.
 
 ## Known problems
@@ -158,5 +166,12 @@ target, LIDVID and data object identify Charon. The source label is retained.
 
 Exact bytes, coordinates and validity rules are in the intake plans and receipts.
 See the [mapped-science conversion method](../../../tools/objects/acquisition/MAPPED-SCIENCE.md).
+
+</details>
+
+<details>
+<summary>Shape, rotation and camera on the shared raster lane</summary>
+
+The recipe declares a sphere of 606 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 6.3872-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 47.87° initial pitch, -171.78° yaw, taken from the retired lane's camera). The heliocentric view keeps the orbit around Pluto and the parent marker now comes from the shared navigation atlas.
 
 </details>

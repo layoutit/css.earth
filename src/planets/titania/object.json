@@ -8,13 +8,17 @@
       "label": "Titania",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
-        "features",
         "runtime-assets"
       ]
     },
@@ -22,14 +26,34 @@
       "schema": "cssearth-authored-object@1",
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "66af3b3720282972302367646b5d22f5f84790c4319c8d7a2da3a112788f5c6f"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "484762bee69d0195d3e7dadc828f707a852fd961b00feba1a0520ff2c4f393fd"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "aef8ddd1671d72a3cdbeb90eba0b0e9410af7795600837c0bfac71a3ee40a5b0"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "629b24307889fe022dd188b43161a38d10b8fb4da5d76573b7fc9c26fe59b0ce"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "d2e541e7099a7be54eff4fa45b027bbace1420f56c82c258ffb1dedc1c37b56a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "925b96d5f106d5123fa1e7df5ee024e65a1ccd21240e30f4cb2af7daf4c9f8be"
+          "sha256": "4b276f37299fed0e596a91f6227c33da9e6d079a790e4354c12c28c4e4a2c617"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "40d9193d596427b78207511575cd618e869c2b2c344bddc34a1fe12ad0f67bc5"
         },
         {
           "id": "title",
@@ -59,7 +83,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -83,7 +107,7 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
       ],
@@ -121,11 +145,11 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/titania-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b6005d9bf1e15c121702b90c572668e281f80732847d33049df6e961432a977c"
+        "sha256": "4f2ee3f2ffa46b3c302b03d4e321dc50b66dd1b7b971dad769ee728c0ee3cfd9"
       }
     },
     "catalog": {
@@ -144,6 +168,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fe4ba73f92bf44e1e3d072f13cdc23e3846b12c370922cdaf4097e390f8abe86"
+    "sha256": "85b780c563bdc8d70d7bed52e78fbe6b22a10563cee8889b3034c7525147495c"
   }
 }

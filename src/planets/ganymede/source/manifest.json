@@ -207,7 +207,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -637,7 +637,7 @@
       "expectedSha256": "75e6f837380cab4635d939ba9205f7832f85e10772878140197a67c2d082f561",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GANYMEDE_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -695,16 +695,217 @@
         "kind": "local",
         "reason": "Project-authored preparation parameters."
       }
+    },
+    {
+      "id": "hyg-registration-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "e6871a57d3f93c9957cc3a00415090221a13764647b45bddabad3199e15165c4",
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
+      ],
+      "acquisition": "checked prepared registration field from HYG v4.1",
+      "redistribution": "CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ganymede-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 5805,
+      "expectedSha256": "ad14deb360ace57ed760248ef68c7976066eeab0942acfadb2b7ff7f94e1ef76",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "deterministically generated Ganymede title path from the repository-pinned Inter font",
+      "redistribution": "generated outline under the Inter license",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ganymede-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 1623,
+      "expectedSha256": "b383792c26a9347aa7730d98e43020200ddeba7bd0528da8253c30292c076062",
+      "origin": "Repository-authored Ganymede solar-system recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "ganymede-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 10746,
+      "expectedSha256": "fdbbd7de506e50653d0b5d57e5c9a2cd654ea91f0658b94f0ff4206bf2239356",
+      "origin": "Repository-authored Ganymede raster recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "ganymede-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1428,
+      "expectedSha256": "dad480afc6e31e7fc961fe841ebdfec1d5f378c7691055f800a01988c8649251",
+      "origin": "Repository-authored Ganymede geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "ganymede-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 225,
+      "expectedSha256": "8cc8c7fa97d83204fc4f1e0ca20e7fc2f2bff7a34aeff7d0259b597774af3599",
+      "origin": "Repository-authored Ganymede celestial recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "ganymede-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 235,
+      "expectedSha256": "24cb6f3b2e1d8f21a0d14f86b3f8fb2aa86f194e6a8559267e3829a2e6f7a406",
+      "origin": "Repository-authored Ganymede presentation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "ganymede-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1696,
+      "expectedSha256": "29dda529e3ab8bbcff799ac336af4cbcefeb21bb80eed0e0eed5d41b2dc30a3c",
+      "origin": "Repository-authored Ganymede navigation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "ganymede-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 2591,
+      "expectedSha256": "1226fc64477bf1e22d8518c602c09e4fc37f5736f0845d6e120457ca5673c55f",
+      "origin": "Repository-authored Ganymede acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "ganymede-object-content",
+      "path": "content/object.json",
+      "expectedBytes": 19049,
+      "expectedSha256": "a4eb854350db772e27c6ac80631f75095378be3db5cca1fd7332e84b877b8b8c",
+      "origin": "Repository-authored Ganymede object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
     }
   ],
   "generatedIntermediates": [],
   "documents": [
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 851,
-      "expectedSha256": "e6871a57d3f93c9957cc3a00415090221a13764647b45bddabad3199e15165c4",
-      "purpose": "Shared astrometric sky source and licensing."
-    },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
@@ -740,35 +941,6 @@
       "expectedBytes": 2557,
       "expectedSha256": "d1a2d221f025e18e4cba756c3187c44447e65ff3fb00537dff009cd5011698c7",
       "purpose": "USGS published GeoTIFF mapping and pixel metadata."
-    },
-    {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 9818,
-      "expectedSha256": "b23900c986d151dd5656d7dbe781c189d9ad25c3fe4398462a72b6746fa821b9"
-    },
-    {
-      "path": "content/object.json",
-      "expectedBytes": 18669,
-      "expectedSha256": "f3ab4fb8d629419275f0a15edf9e1cc75eee1699f1fc54471f033ce906ce13cc",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
-    },
-    {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5805,
-      "expectedSha256": "ad14deb360ace57ed760248ef68c7976066eeab0942acfadb2b7ff7f94e1ef76"
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 1696,
-      "expectedSha256": "29dda529e3ab8bbcff799ac336af4cbcefeb21bb80eed0e0eed5d41b2dc30a3c"
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 2591,
-      "expectedSha256": "1226fc64477bf1e22d8518c602c09e4fc37f5736f0845d6e120457ca5673c55f"
     },
     {
       "path": "editorial/factsheet-review.json",

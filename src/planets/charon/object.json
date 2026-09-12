@@ -8,13 +8,17 @@
       "label": "Charon",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
-        "features",
         "runtime-assets"
       ]
     },
@@ -22,14 +26,34 @@
       "schema": "cssearth-authored-object@1",
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "4e4b1df6415a820d771b2b31ce65cd2170de5b40324e9a40febee252e743a812"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "88b98d77c72aeca435ff56ad1922ef1bca54f7aa727024fb3a87d2da80dd7eca"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "d27e407a837e0a9509cddfafefb27f6c5a2cd4dd24da744871f80b87b33dc93d"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "0a3f5b23d24caac6a9750e43eba0cd8698fa4f099795d7f1bbce422874922d62"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "1b5242c764391aac1d1575a7888e4fe13be66525a56bfac326209f252a05a25a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c8d61908e6aa09a19ef00f47b77a01a97df26aa3819bfeb4eb90e27bd75e689e"
+          "sha256": "c13e034a49e79d266f0119e801e14459092addbe8c9578d7b2e0a876043be798"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "8e90df9d43e45bba8920f56f5137d0e822819e2db80fe21671455d80f5e54350"
         },
         {
           "id": "title",
@@ -59,7 +83,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -88,7 +112,7 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
       ],
@@ -126,11 +150,11 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/charon-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7c808bb6bc6f5a1401c6d2bd4a38ba63336c5a1738c4900ce57389f7cb6f1dcb"
+        "sha256": "61cbaffdd02eaecacc505b686e8aa03b1c7c41c6e00562958d027054c980602c"
       }
     },
     "catalog": {
@@ -149,6 +173,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2406eac5177a66c3927ef2e450279c17bfb56102d31eddd99be3ba377ac9bdfe"
+    "sha256": "a30aaaedf0bdd89fbda8ede8b1d2da939269a406008a22d6ac30433e81a15c38"
   }
 }

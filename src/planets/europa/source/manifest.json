@@ -139,7 +139,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1859,7 +1859,7 @@
       "expectedSha256": "8405401201f42dca7e05fa205d8473f5e774845776fc1acd9b6c7e70de648d4a",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EUROPA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -1917,6 +1917,213 @@
         "kind": "local",
         "reason": "Project-authored preparation parameters."
       }
+    },
+    {
+      "id": "hyg-registration-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 849,
+      "expectedSha256": "ace986c73d37dcb3090921774c6c416ac33ef5dd8da01a313152f385edd2f999",
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
+      ],
+      "acquisition": "checked prepared registration field from HYG v4.1",
+      "redistribution": "CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/55"
+          }
+        ]
+      }
+    },
+    {
+      "id": "europa-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3620,
+      "expectedSha256": "8464f13133df4cee56c6f21fc903282df76bcf72cd0620f1d79784ad08441c9a",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "deterministically generated Europa title path from the repository-pinned Inter font",
+      "redistribution": "generated outline under the Inter license",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/56"
+          }
+        ]
+      }
+    },
+    {
+      "id": "europa-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 1605,
+      "expectedSha256": "4f6d21e75d3b88a7cccf2b984c2cee8778ad8f388159444859324ca477b10df6",
+      "origin": "Repository-authored Europa solar-system recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "europa-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 9777,
+      "expectedSha256": "25e96b1b046456eb88af3903bdf0bb4543addffedf61a1db8b0e7679171cd7c2",
+      "origin": "Repository-authored Europa raster recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "europa-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1414,
+      "expectedSha256": "da0a452d777481cde1a97248d2b5258d6d409c2bb377d82a0c50f963297abe48",
+      "origin": "Repository-authored Europa geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "europa-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 223,
+      "expectedSha256": "f0a89756833f75ca3f2691e5c98461b21289d9e90eeab6afc44113bcc30fe301",
+      "origin": "Repository-authored Europa celestial recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "europa-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 330,
+      "expectedSha256": "e688a2fc4afd8b205a34e7769384b9d56c4c7ad13e33befc1384119321d42c41",
+      "origin": "Repository-authored Europa presentation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "europa-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1715,
+      "expectedSha256": "0a9bedffcafea2db8cdc0f407c1abc300cf91e553a676c5da5b8f46de6505836",
+      "origin": "Repository-authored Europa navigation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "europa-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 18810,
+      "expectedSha256": "94cec47f070ff5ecd4418e1bb74ddc91bd58eb5d1b04339555e7443f81ba9cb3",
+      "origin": "Repository-authored Europa acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "europa-object-content",
+      "path": "content/object.json",
+      "expectedBytes": 16192,
+      "expectedSha256": "adea0fe714df61db29809426fc78d414766723e35b1cca490aae48371373a85d",
+      "origin": "Repository-authored Europa object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -1926,12 +2133,6 @@
       "expectedBytes": 6425,
       "expectedSha256": "31ef39932ea82df444f3a42e69842b438ce51f0226ff4298655d970a37607247",
       "purpose": "USGS Europa WMS metadata captured 2026-09-06."
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 849,
-      "expectedSha256": "ace986c73d37dcb3090921774c6c416ac33ef5dd8da01a313152f385edd2f999",
-      "purpose": "Shared astrometric sky source and licensing."
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
@@ -1959,7 +2160,7 @@
       "kind": "source-document",
       "title": "JPL Horizons Sun vectors relative to Europa",
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
-      "credit": "NASA/JPL Solar System Dynamics \u2014 Horizons",
+      "credit": "NASA/JPL Solar System Dynamics — Horizons",
       "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1980,7 +2181,7 @@
       "kind": "source-document",
       "title": "JPL Horizons Galileo vectors relative to Europa",
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-77%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
-      "credit": "NASA/JPL Solar System Dynamics \u2014 Horizons",
+      "credit": "NASA/JPL Solar System Dynamics — Horizons",
       "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1992,35 +2193,6 @@
           }
         ]
       }
-    },
-    {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 8710,
-      "expectedSha256": "8e8e832aefcefcab28c76a8c9c4eadb7eb31d5c8ff234a834d31967f83f73184"
-    },
-    {
-      "path": "content/object.json",
-      "expectedBytes": 15905,
-      "expectedSha256": "c07b3a4a304f992e6b46500b051a3838d80967e131556f0fcabf96c103ff18ee",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
-    },
-    {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3620,
-      "expectedSha256": "8464f13133df4cee56c6f21fc903282df76bcf72cd0620f1d79784ad08441c9a"
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 1715,
-      "expectedSha256": "0a9bedffcafea2db8cdc0f407c1abc300cf91e553a676c5da5b8f46de6505836"
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 18810,
-      "expectedSha256": "94cec47f070ff5ecd4418e1bb74ddc91bd58eb5d1b04339555e7443f81ba9cb3"
     },
     {
       "path": "editorial/factsheet-review.json",

@@ -185,7 +185,7 @@
       ],
       "lensId": "elevation",
       "format": "geotiff",
-      "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60\u00b0 latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+      "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
       "capture": {
         "attributions": [
           {
@@ -234,7 +234,7 @@
       "expectedSha256": "a2a803fd75989fc9e3fa562fca48845a2b48de040f30c18e96c5127208b94f61",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CERES_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -292,6 +292,213 @@
         "kind": "local",
         "reason": "Project-authored preparation parameters."
       }
+    },
+    {
+      "id": "hyg-registration-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 100844,
+      "expectedSha256": "2fe5171f1a8ba5081b963443ba67a122f9c8e471087d3bc736266212117e41c2",
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
+      ],
+      "acquisition": "checked prepared registration field from HYG v4.1",
+      "redistribution": "CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ceres-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3555,
+      "expectedSha256": "2c3e48c89492b374466d01b25d39c3d6dc45317a1b8543a42b20963df60c4c08",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "deterministically generated Ceres title path from the repository-pinned Inter font",
+      "redistribution": "generated outline under the Inter license",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ceres-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 1573,
+      "expectedSha256": "6ef42f0d2bef147f371835eaf317501d5ee173c41f0b1d70dc366a452e40eab1",
+      "origin": "Repository-authored Ceres solar-system recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "ceres-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 4334,
+      "expectedSha256": "03556b50a85d653a36a4921eaad797d91c266243956be4a4d3fd8b178135e02e",
+      "origin": "Repository-authored Ceres raster recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "ceres-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1409,
+      "expectedSha256": "4a156cf21e19c8594398f95bb3e68ca13016655599a3ac9d7351820f477c1abc",
+      "origin": "Repository-authored Ceres geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "ceres-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 222,
+      "expectedSha256": "7382a069ad44040eb34fe2ae29f0cafc6ce1478c2a8847d92296a613cc388584",
+      "origin": "Repository-authored Ceres celestial recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "ceres-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 101,
+      "expectedSha256": "44904697b9cb89cf76767293d969a51cce48ff0b698041e897ec3829a17ae89a",
+      "origin": "Repository-authored Ceres presentation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "ceres-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 897,
+      "expectedSha256": "a47655aefe82e5b07960ed532403171543890b56b27ba3a8992756aa0b1de98a",
+      "origin": "Repository-authored Ceres navigation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "ceres-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1639,
+      "expectedSha256": "19dc30473b1f818b604a3e5b6d8dcc39681523042db06f381b47192c796411a2",
+      "origin": "Repository-authored Ceres acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "ceres-object-content",
+      "path": "content/object.json",
+      "expectedBytes": 10474,
+      "expectedSha256": "465f5536a8561d2c66a0e1cafa0afdca64b6f51f458043e500cb6c115c8d8ea9",
+      "origin": "Repository-authored Ceres object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -301,12 +508,6 @@
       "expectedBytes": 6483,
       "expectedSha256": "33c538aca7929dc2bdf589300a34bbc02a696671fd052a9a9c76647a389d499f",
       "purpose": "USGS WMS 1.1.1 capabilities snapshot: Ceres_FC_global layer, projection, credit, and source resolution. Retrieved 2026-09-05."
-    },
-    {
-      "path": "stars/hyg-v41-field.json",
-      "expectedBytes": 100844,
-      "expectedSha256": "2fe5171f1a8ba5081b963443ba67a122f9c8e471087d3bc736266212117e41c2",
-      "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
@@ -319,35 +520,6 @@
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe",
       "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
-    },
-    {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2893,
-      "expectedSha256": "be6a65986876dfd24e2df64f3f0038f934894692fae8a3eb260b271b3955d46c"
-    },
-    {
-      "path": "content/object.json",
-      "expectedBytes": 10040,
-      "expectedSha256": "7ce4889f588f2f57bcc0844b117fb4d939e4a24ccca8b69f66c92f33211802a2",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
-    },
-    {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3555,
-      "expectedSha256": "2c3e48c89492b374466d01b25d39c3d6dc45317a1b8543a42b20963df60c4c08"
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 897,
-      "expectedSha256": "a47655aefe82e5b07960ed532403171543890b56b27ba3a8992756aa0b1de98a"
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1639,
-      "expectedSha256": "19dc30473b1f818b604a3e5b6d8dcc39681523042db06f381b47192c796411a2"
     },
     {
       "path": "editorial/factsheet-review.json",

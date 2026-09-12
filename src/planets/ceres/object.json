@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c9d9b02e5e72eed0fb580be9088492f4e8aa8a94eaed0e1277f199ed1926a5c8"
+    "sha256": "202b93a864529f3313db7a8295e58f0e73b1e7da3eb8f13f6d823cf1e888fb17"
   },
   "id": "ceres",
   "properties": {
@@ -38,13 +38,17 @@
       "label": "Ceres",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
-        "features",
         "runtime-assets"
       ]
     },
@@ -52,7 +56,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -81,20 +85,40 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
       ],
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "be6a65986876dfd24e2df64f3f0038f934894692fae8a3eb260b271b3955d46c"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "03556b50a85d653a36a4921eaad797d91c266243956be4a4d3fd8b178135e02e"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "4a156cf21e19c8594398f95bb3e68ca13016655599a3ac9d7351820f477c1abc"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "7382a069ad44040eb34fe2ae29f0cafc6ce1478c2a8847d92296a613cc388584"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "44904697b9cb89cf76767293d969a51cce48ff0b698041e897ec3829a17ae89a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7ce4889f588f2f57bcc0844b117fb4d939e4a24ccca8b69f66c92f33211802a2"
+          "sha256": "465f5536a8561d2c66a0e1cafa0afdca64b6f51f458043e500cb6c115c8d8ea9"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "6ef42f0d2bef147f371835eaf317501d5ee173c41f0b1d70dc366a452e40eab1"
         },
         {
           "id": "title",
@@ -124,11 +148,11 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/ceres-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "eb3cca46a3db50ebda0f4d61162d03592beb53d6c27457a3e65ba8c5814d0985"
+        "sha256": "16183539fa6f65c7bec3c44ba960aa8a450dec0e35b4984282614e3a1884049f"
       }
     },
     "catalog": {

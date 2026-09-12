@@ -1,0 +1,126 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/callisto/",
+  "sourceWidth": 8192,
+  "sourceHeight": 4096,
+  "width": 4096,
+  "height": 2048,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "callisto-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csscallisto-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
+    {
+      "id": "normal",
+      "output": "callisto-{id}{suffix}.webp",
+      "thumbnail": "callisto-lens-{id}.webp",
+      "source": "callisto-global-1km.tif",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "usgs-voyager-galileo-global-1km",
+        "id": "normal",
+        "validity": {
+          "kind": "geotiff-monochrome-alpha",
+          "noData": 0,
+          "centerLongitude": 180
+        }
+      }
+    },
+    {
+      "id": "enhanced",
+      "output": "callisto-{id}{suffix}.webp",
+      "thumbnail": "callisto-lens-{id}.webp",
+      "source": "observations/PIA03456-registered-rgba.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "galileo-pia03456-registered-color",
+        "id": "enhanced",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 180,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "resampling": "source-georeferenced-bilinear"
+        }
+      }
+    },
+    {
+      "id": "infrared",
+      "output": "callisto-{id}{suffix}.webp",
+      "thumbnail": "callisto-lens-{id}.webp",
+      "source": "nims/callisto-nims-composite.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "callisto-registered-nims-composite",
+        "id": "infrared",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 0,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "resampling": "source-georeferenced-bilinear"
+        },
+        "textureScale": 0.25
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "callisto-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "callisto-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "csscallisto-prepared-lighting-bank@1",
+    "billboardSchema": "csscallisto-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "csscallisto-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}
