@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "makemake",
+  "surface": {
+    "radius": 230,
+    "polarRadius": 230,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/makemake/makemake-illustration.webp",
+      "width": 2048,
+      "height": 1536
+    },
+    "surfaceLatitudeHeight": 1024,
+    "packedBandGutter": 16,
+    "poles": {
+      "url": "/scenes/makemake/makemake-poles-illustration.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#bfa48b"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 0,
+    "interiorSeamBleed": 8,
+    "overlap": 0.005,
+    "fitToSource": false,
+    "rasterScale": 4,
+    "rasterGutter": 16,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.05
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "cssmakemake-prepared-runtime-scene@1",
+    "materialSchema": "cssmakemake-prepared-view-material@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 0.9375
+    },
+    "animation": {
+      "cloudsVisualSeconds": 84,
+      "surfaceVisualSeconds": 84,
+      "direction": "prograde"
+    }
+  }
+}

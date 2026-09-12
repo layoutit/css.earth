@@ -8,13 +8,17 @@
       "label": "Ariel",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
-        "features",
         "runtime-assets"
       ]
     },
@@ -22,14 +26,34 @@
       "schema": "cssearth-authored-object@1",
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "4979ea9b66dcb5e0cb6d31e5de86383b67f9b974636436e223b4f1b4e4ffe209"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "5a2657a3271c4c6e082cae9fda2b3ba3802eb263b3488ab3912c8a2af7fb72cd"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "486563f5a4ad4ce7abafc4a11aa5cab421424387d509a251dc171a0d9ac10995"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "1b6e3aaecbf5ea8b7c629984b5a546ddab73e5cfc9c24e2203da47fd628ef51b"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "1ee353b0d92170be9865cd4437945232eec6ab57178b5063eed3e1c557152022"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e7fd70a48468c97a3159353edd4d9f8e7af6a0175e3d8f952db40aca62ea7765"
+          "sha256": "f353330cd8626bf91a855035e348c881104be918e8faab51889937b3036c9194"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "8c153a4a3f0f7b4d975cc507463d82ac37a8b8c9aac1231f8e229f168b1dc605"
         },
         {
           "id": "title",
@@ -59,7 +83,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -78,7 +102,7 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
       ],
@@ -116,11 +140,11 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/ariel-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a2217669be6b73cad7de7aa6ab415b182555354c18b27e61486f77aea9246f52"
+        "sha256": "75663e82dfc0a9c197670963da8bd5a9a1db9aa37dc8e6449b468a2b9468589e"
       }
     },
     "catalog": {
@@ -139,6 +163,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "da7f4e8b3ff77b2dfaf282ee272a777dc09235a07566beb2d63fad5bcd9a94c7"
+    "sha256": "2789b3f54924cdd11548a24fa2c5e314c8a5096a88e14d114161cf226f581215"
   }
 }

@@ -87,9 +87,9 @@
         "label": "Monochrome",
         "description": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
         "title": "FC visible-light mosaic",
-        "thumbnail": "/scenes/ceres/ceres-normal-thumbnail.webp",
-        "surface": "ceres-normal-surface@2x.webp",
-        "poles": "ceres-normal-poles@2x.webp",
+        "thumbnail": "ceres-lens-normal.webp",
+        "surface": "ceres-normal.webp",
+        "poles": "ceres-poles-normal.webp",
         "source": {
           "id": "usgs-dawn-fc-global-140m",
           "path": "../manifest.json"
@@ -102,9 +102,9 @@
         "label": "Enhanced color",
         "description": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
         "title": "False-color mosaic PIA19977",
-        "thumbnail": "/scenes/ceres/ceres-enhanced-thumbnail.webp",
-        "surface": "ceres-enhanced-surface@2x.webp",
-        "poles": "ceres-enhanced-poles@2x.webp",
+        "thumbnail": "ceres-lens-enhanced.webp",
+        "surface": "ceres-enhanced.webp",
+        "poles": "ceres-poles-enhanced.webp",
         "source": {
           "id": "nasa-dawn-fc-pia19977",
           "path": "../manifest.json"
@@ -117,14 +117,12 @@
         "label": "Elevation",
         "description": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
         "title": "HAMO digital terrain model",
-        "thumbnail": "/scenes/ceres/ceres-elevation-thumbnail.webp",
-        "surface": "ceres-elevation-surface@2x.webp",
-        "poles": "ceres-elevation-poles@2x.webp",
+        "thumbnail": "ceres-lens-elevation.webp",
+        "surface": "ceres-elevation.webp",
+        "poles": "ceres-poles-elevation.webp",
         "legend": {
           "kind": "scale",
           "title": "Elevation",
-          "width": 256,
-          "height": 16,
           "labels": [
             "−30",
             "−5",
@@ -132,7 +130,40 @@
           ],
           "meta": "km",
           "sourceUrl": "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m",
-          "image": "/scenes/ceres/ceres-elevation-legend.webp"
+          "recipe": {
+            "palette": [
+              [
+                37,
+                52,
+                148
+              ],
+              [
+                44,
+                127,
+                184
+              ],
+              [
+                65,
+                182,
+                196
+              ],
+              [
+                255,
+                255,
+                204
+              ],
+              [
+                217,
+                95,
+                14
+              ]
+            ],
+            "labels": [
+              "−30",
+              "−5",
+              "20"
+            ]
+          }
         },
         "source": {
           "id": "dawn-elevation",
@@ -160,8 +191,8 @@
       },
       {
         "kind": "toggle",
-        "name": "orbit",
-        "label": "Orbit",
+        "name": "stars",
+        "label": "Stars",
         "checked": true
       }
     ]

@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-css-presentation-profile@1",
+  "namespace": "europa",
+  "mode": "composite",
+  "lensFocus": {
+    "elevation": {
+      "longitudeDegrees": 142,
+      "latitudeDegrees": -43.7,
+      "zoom": 4
+    },
+    "infrared": {
+      "longitudeDegrees": 155,
+      "latitudeDegrees": 0,
+      "zoom": 1.1
+    }
+  }
+}

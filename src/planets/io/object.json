@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "056190c830e7be6bc3b06798ad02fc1cdbfa893969de604e0dd75e3a776db859"
+    "sha256": "5ca6e1dc5849bfcfb5ff1f4e0ec1fa16bf89c35dee4309d96166f80f1063ff26"
   },
   "id": "io",
   "properties": {
@@ -38,13 +38,17 @@
       "label": "Io",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
-        "features",
         "runtime-assets"
       ]
     },
@@ -52,7 +56,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -91,20 +95,40 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
       ],
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "a2ca8a5abc1cbb507b93a10f8898661c5ce400ddacdb8687b083b47565c1152a"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "b937065debfbcd62352c9e6b5189f1febe5fffb604d3a94fc96821d964aa2d77"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "7edfa226f8fdf6d490553e3e1e67866282d9cb28b4de2b72e68fa8dc690b7e02"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "6966d1cb5f5bb4a7dbddec153bf0ef7feb763647e5bc0a953709358c8018f225"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "8fbc994711fc3f155f07356751e52734dcf6536ccd5242289c9bd051f6cb48a6"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "8824b8518243eb3ea9ddca8707730cfa75514c5ce5c506e2afc13d76c30e8f28"
+          "sha256": "633b7683b64c3b503cdd339edb27922cbeb62894ebb3873e4bc98cf32c52308e"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "49d2308bd4d28ae21c042d35693552c2625a3ff310624a1cf4e55dae87669335"
         },
         {
           "id": "title",
@@ -134,11 +158,11 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/io-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b804963dec4cae00d6f4f644d220849eb7107858bc8861f72fb16f6b9e35d169"
+        "sha256": "84bd53f7ebf17a3820c339917ee01c7f055952c9de22791957e6b9cf93a3fca2"
       }
     },
     "catalog": {
@@ -146,7 +170,7 @@
       "classification": "satellite",
       "color": "#c6ac65",
       "distanceAu": 5.2,
-      "description": "Explore Io in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter\u2019s volcanic moon and its orbit around Jupiter.",
+      "description": "Explore Io in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s volcanic moon and its orbit around Jupiter.",
       "systemName": "Solar System",
       "order": 426,
       "context": {

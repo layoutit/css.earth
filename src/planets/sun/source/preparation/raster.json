@@ -1,194 +1,283 @@
 {
-  "schema": "cssearth-static-surface-raster@1",
-  "kind": "synoptic-emission",
-  "namespace": "sun",
-  "mapWidth": 1024,
-  "mapHeight": 512,
-  "latitudeSegments": 16,
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/sun/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
   "polarTile": 256,
-  "offLimbSize": 768,
-  "limbSize": 512,
-  "bodyDiameter": 496,
-  "continuum": {
-    "start": "2026-05-12T21:56:01Z",
-    "stop": "2026-06-09T02:57:22Z",
-    "maximumLatitudeDegrees": 80,
-    "minimumDiscRadius": 450,
-    "maximumDiscRadius": 490,
-    "discBrightnessThreshold": 72,
-    "solarPoleTiltDegrees": 7.25
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "sun-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csssun-prepared-assets@1"
   },
-  "variants": [
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
     {
       "id": "photosphere",
-      "kind": "continuum-disc-mosaic",
-      "mapFiles": [
-        "sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260514_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260515_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260516_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260517_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260518_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260519_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260520_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260521_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260522_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260523_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260524_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260525_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260527_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260528_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260529_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260530_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260531_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260601_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260602_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260603_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260604_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260605_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260606_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260607_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260608_000000_1024_HMIIC.jpg",
-        "sdo/continuum/CR2311/20260609_000000_1024_HMIIC.jpg"
-      ],
-      "observedFile": null,
-      "center": null,
-      "radius": null,
-      "limbMode": "continuum-darkening",
-      "polarDetailSigma": 0.6
+      "source": "sdo/continuum/CR2311",
+      "falseColor": false,
+      "output": "sun-surface-{id}{suffix}.webp",
+      "thumbnail": "sun-lens-{id}.webp",
+      "science": {
+        "synoptic": {
+          "kind": "continuum-disc-mosaic",
+          "mapFiles": [
+            "sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260514_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260515_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260516_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260517_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260518_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260519_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260520_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260521_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260522_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260523_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260524_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260525_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260527_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260528_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260529_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260530_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260531_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260601_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260602_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260603_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260604_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260605_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260606_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260607_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260608_000000_1024_HMIIC.jpg",
+            "sdo/continuum/CR2311/20260609_000000_1024_HMIIC.jpg"
+          ],
+          "continuum": {
+            "start": "2026-05-12T21:56:01Z",
+            "stop": "2026-06-09T02:57:22Z",
+            "maximumLatitudeDegrees": 80,
+            "minimumDiscRadius": 450,
+            "maximumDiscRadius": 490,
+            "discBrightnessThreshold": 72,
+            "solarPoleTiltDegrees": 7.25
+          },
+          "polarStabilization": {
+            "latitudeSegments": 16,
+            "polarDetailSigma": 0.6
+          },
+          "limb": {
+            "mode": "continuum-darkening"
+          },
+          "offLimb": null
+        }
+      }
     },
     {
       "id": "magnetic",
-      "kind": "fits-map",
-      "mapFile": "hmi/CR2311-synopMr.fits",
-      "fits": {
-        "bitpix": -32,
-        "width": 720,
-        "height": 360,
-        "latitude": "sine-latitude",
-        "reverseLongitude": true,
-        "nearestLatitudeLimit": 64,
-        "positiveOnly": false,
-        "color": {
-          "kind": "signed-asinh",
-          "softening": 8,
-          "maximum": 250,
-          "palette": [
-            [
-              28,
-              95,
-              190
-            ],
-            [
-              95,
-              32,
-              11
-            ],
-            [
-              255,
-              224,
-              110
-            ]
-          ]
+      "source": "hmi/CR2311-synopMr.fits",
+      "falseColor": true,
+      "output": "sun-surface-{id}{suffix}.webp",
+      "thumbnail": "sun-lens-{id}.webp",
+      "science": {
+        "synoptic": {
+          "kind": "fits-map",
+          "fits": {
+            "bitpix": -32,
+            "width": 720,
+            "height": 360,
+            "latitude": "sine-latitude",
+            "reverseLongitude": true,
+            "nearestLatitudeLimit": 64,
+            "positiveOnly": false,
+            "color": {
+              "kind": "signed-asinh",
+              "softening": 8,
+              "maximum": 250,
+              "palette": [
+                [
+                  28,
+                  95,
+                  190
+                ],
+                [
+                  95,
+                  32,
+                  11
+                ],
+                [
+                  255,
+                  224,
+                  110
+                ]
+              ]
+            }
+          },
+          "polarStabilization": {
+            "latitudeSegments": 16,
+            "polarDetailSigma": 1.2
+          },
+          "limb": {
+            "mode": "rim"
+          },
+          "offLimb": null
         }
-      },
-      "observedFile": null,
-      "center": null,
-      "radius": null,
-      "limbMode": "rim",
-      "polarDetailSigma": 1.2
+      }
     },
     {
       "id": "chromosphere",
-      "kind": "fits-map",
-      "mapFile": "sdo/synoptic/AIA0304/CR2311.fits",
-      "fits": {
-        "bitpix": -64,
-        "width": 3600,
-        "height": 1080,
-        "latitude": "equirectangular",
-        "reverseLongitude": false,
-        "nearestLatitudeLimit": 128,
-        "positiveOnly": true,
-        "color": {
-          "kind": "positive-log",
-          "range": [
-            0.3,
-            30
-          ],
-          "palette": [
-            [
-              19,
-              0,
-              0
+      "source": "sdo/synoptic/AIA0304/CR2311.fits",
+      "falseColor": true,
+      "output": "sun-surface-{id}{suffix}.webp",
+      "thumbnail": "sun-lens-{id}.webp",
+      "science": {
+        "synoptic": {
+          "kind": "fits-map",
+          "fits": {
+            "bitpix": -64,
+            "width": 3600,
+            "height": 1080,
+            "latitude": "equirectangular",
+            "reverseLongitude": false,
+            "nearestLatitudeLimit": 128,
+            "positiveOnly": true,
+            "color": {
+              "kind": "positive-log",
+              "range": [
+                0.3,
+                30
+              ],
+              "palette": [
+                [
+                  19,
+                  0,
+                  0
+                ],
+                [
+                  205,
+                  23,
+                  0
+                ],
+                [
+                  255,
+                  224,
+                  92
+                ]
+              ]
+            }
+          },
+          "polarStabilization": {
+            "latitudeSegments": 16,
+            "polarDetailSigma": 0.8
+          },
+          "limb": {
+            "mode": "rim"
+          },
+          "offLimb": {
+            "observedFile": "sdo/context/CR2311/20260527_000906_1024_0304.jpg",
+            "center": [
+              512,
+              502
             ],
-            [
-              205,
-              23,
-              0
-            ],
-            [
-              255,
-              224,
-              92
-            ]
-          ]
+            "radius": 407
+          }
         }
-      },
-      "observedFile": "sdo/context/CR2311/20260527_000906_1024_0304.jpg",
-      "center": [
-        512,
-        502
-      ],
-      "radius": 407,
-      "limbMode": "rim",
-      "polarDetailSigma": 0.8
+      }
     },
     {
       "id": "corona",
-      "kind": "fits-map",
-      "mapFile": "sdo/synoptic/AIA0171/CR2311.fits",
-      "fits": {
-        "bitpix": -64,
-        "width": 3600,
-        "height": 1080,
-        "latitude": "equirectangular",
-        "reverseLongitude": false,
-        "nearestLatitudeLimit": 128,
-        "positiveOnly": true,
-        "color": {
-          "kind": "positive-log",
-          "range": [
-            18,
-            1100
-          ],
-          "palette": [
-            [
-              11,
-              8,
-              0
+      "source": "sdo/synoptic/AIA0171/CR2311.fits",
+      "falseColor": true,
+      "output": "sun-surface-{id}{suffix}.webp",
+      "thumbnail": "sun-lens-{id}.webp",
+      "science": {
+        "synoptic": {
+          "kind": "fits-map",
+          "fits": {
+            "bitpix": -64,
+            "width": 3600,
+            "height": 1080,
+            "latitude": "equirectangular",
+            "reverseLongitude": false,
+            "nearestLatitudeLimit": 128,
+            "positiveOnly": true,
+            "color": {
+              "kind": "positive-log",
+              "range": [
+                18,
+                1100
+              ],
+              "palette": [
+                [
+                  11,
+                  8,
+                  0
+                ],
+                [
+                  210,
+                  133,
+                  0
+                ],
+                [
+                  255,
+                  248,
+                  176
+                ]
+              ]
+            }
+          },
+          "polarStabilization": {
+            "latitudeSegments": 16,
+            "polarDetailSigma": 0.8
+          },
+          "limb": {
+            "mode": "rim"
+          },
+          "offLimb": {
+            "observedFile": "sdo/context/CR2311/20260527_000710_1024_0171.jpg",
+            "center": [
+              512,
+              498
             ],
-            [
-              210,
-              133,
-              0
-            ],
-            [
-              255,
-              248,
-              176
-            ]
-          ]
+            "radius": 405
+          }
         }
-      },
-      "observedFile": "sdo/context/CR2311/20260527_000710_1024_0171.jpg",
-      "center": [
-        512,
-        498
-      ],
-      "radius": 405,
-      "limbMode": "rim",
-      "polarDetailSigma": 0.8
+      }
     }
-  ]
+  ],
+  "emission": {
+    "offLimbSize": 768,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "sun-corona-{id}{suffix}.webp",
+    "limbOutput": "sun-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csssun-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 768,
+        "source": "lens-specific pinned CR2311 Earth-facing SDO observation; transparent for continuum and magnetic lenses",
+        "composition": "source-disc-registered prepared off-limb pixels behind the retained Carrington sphere",
+        "rotation": "stationary observed context; never presented as rotating global material",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "body-registered lens-derived rim and continuum source-derived limb-darkening plate over visible retained leaves",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
 }

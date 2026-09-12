@@ -1,18 +1,18 @@
 import {required} from '../../../../tools/test-values.mts';
+import {array,shape,text} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
-import {parseTerrestrialProfile} from '../../../../tools/objects/terrestrial-layers/index.mts';
+import {parseInterpreterRecipe} from '../../../../tools/objects/observation/interpret.mts';
 
 const source = new URL('../../../../src/planets/titania/source/', import.meta.url).pathname;
-const profile = async () => JSON.parse((await readFile(source + 'preparation/terrestrial.json')).toString('utf8'));
+const recipe = async () => parseInterpreterRecipe(JSON.parse((await readFile(source + 'preparation/raster.json')).toString('utf8')));
 
 test('historical Titania categories retain named regions, valid black terrain and geographic gaps', async () => {
-  const config = parseTerrestrialProfile(await profile());assert.ok("raster" in config);
-  const lens = required(required(config.raster.scientific).find(lens => lens.id === 'geology'));
-  const categories=required(lens.categories);
+  const lens = required((await recipe()).surfaces.find(surface => surface.id === 'geology')?.science, 'geology science');
+  const {path, categories} = shape({path: text, categories: array(shape({value: text, color: text}))})(lens);
   const map = await loadScienceSurface(source, lens);
   const unit = (lon: number, lat: number) => categories[required(map.sample(lon, lat))]?.value;
   assert.equal(unit(45.2, -12.4), 'c2cratersshp', 'Ursula remains the archived crater-material unit');
@@ -23,18 +23,24 @@ test('historical Titania categories retain named regions, valid black terrain an
   assert.equal(categories[0].color, '#000000', 'Black categorical material is data, not missing coverage');
   assert.equal(map.sample(45.2, 30), null, 'Unmapped north remains unknown');
   const receipt = JSON.parse((await readFile(source + 'science/geology-2026/categories.receipt.json')).toString('utf8'));
-  const bytes = await readFile(source + lens.path);
+  const bytes = await readFile(source + path);
   assert.equal(createHash('sha256').update(bytes).digest('hex'), receipt.output.sha256);
   assert.ok(receipt.ambiguousCombinations.length > 0, 'Unresolved source overlaps are retained in the receipt');
 });
 
-test('categorical GeoTIFF profiles reject interpolation, relief and a missing code that erases unit zero', async () => {
-  for (const change of [{sampling: 'bilinear'}, {relief: {}}, {valueTransform: {scale: 1, offset: 0}}]) {
-    const config = await profile();
-    Object.assign(config.raster.scientific.find((lens: { id: string; }) => lens.id === 'geology'), change);
-    assert.throws(() => parseTerrestrialProfile(config), /Categorical scientific grids/);
+test('categorical GeoTIFF surfaces reject interpolation, relief and a missing code that erases unit zero', async () => {
+  const {createSurfaceInterpreter} = await import('../../../../tools/objects/observation/interpret.mts');
+  const raw = async () => JSON.parse((await readFile(source + 'preparation/raster.json')).toString('utf8')) as unknown;
+  const geology = (value: unknown) => {
+    const surface = required(parseInterpreterRecipe(value).surfaces.find(entry => entry.id === 'geology'), 'geology surface');
+    return {id: surface.id, source: surface.source, science: required(surface.science, 'geology science')};
+  };
+  const interpreter = await createSurfaceInterpreter({objectId: 'titania', displayName: 'Titania', sourceDirectory: source, recipe: parseInterpreterRecipe(await raw())});
+  for (const change of [{sampling: 'bilinear'}, {relief: {referenceRadiusMeters: 788400, lightDirection: [1, 0, 0], ambient: 0.2}}, {valueTransform: {scale: 1, offset: 0}}]) {
+    const surface = geology(await raw());
+    await assert.rejects(interpreter({...surface, science: {...surface.science, ...change}}, 64, 32, 1), /Categorical scientific grids/);
   }
-  const config = await profile();
-  config.raster.scientific.find((lens: { id: string; }) => lens.id === 'geology').grid.noData = 0;
-  assert.throws(() => parseTerrestrialProfile(config), /Categorical scientific grids/);
+  const surface = geology(await raw());
+  const grid = shape({noData: (value: unknown): value is number => typeof value === 'number'})(surface.science.grid);
+  await assert.rejects(interpreter({...surface, science: {...surface.science, grid: {...grid, noData: 0}}}, 64, 32, 1), /Categorical scientific grids/);
 });

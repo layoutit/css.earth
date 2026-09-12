@@ -8,13 +8,17 @@
       "label": "Miranda",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
-        "features",
         "runtime-assets"
       ]
     },
@@ -22,14 +26,34 @@
       "schema": "cssearth-authored-object@1",
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "957bfd5b0f4ccf1f91962816fbb70828bedcc6533112e9330a7d8f19c8d2c900"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "d1bd89ca8b1d8eaaa941debddd1f70715812a94320a1761da07f6c65cbc7e47f"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "6918aff045563afa496224f1ba904381a582e90ae1bb5689eb938893b943cb61"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "b1102c6415baeff105db4edc465d679e6d6aba4471601a239f2ab03c49d55847"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "85bc3fbff8907a8d1c112729f084a0f4c8f1f707dcefa1618d6ea1a092ca61f7"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ec2b46771b7c2a2425e67e634690a7d9db95b86d9b5b4f3c6504343a76b18077"
+          "sha256": "3e7037e99ecaf6f185da6abb191cef8c435048e3229bf49331eba12f2908164c"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "04e06de6bf0f3bc8c05fa0cb4573ec1e09fb0b63b417ec1f063006cef38f8807"
         },
         {
           "id": "title",
@@ -59,7 +83,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -83,7 +107,7 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
       ],
@@ -121,11 +145,11 @@
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/miranda-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cf405ddbea23ba63cc21687b9a833d26833126ec8b7930e4923fc979fda75371"
+        "sha256": "e1e6b101d76039b6aae8c0b68dc7866cf5b169e3bf20ec42ee11adcfa0252264"
       }
     },
     "catalog": {
@@ -144,6 +168,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4f47ef6e5ef37964689ac9436bf1b1c7a6d115918d410499edb80f84ab50be29"
+    "sha256": "a1dd1a877e55b1a2b18a368c97f91224ba4fb6f83268004df88efcb2d6db26a4"
   }
 }

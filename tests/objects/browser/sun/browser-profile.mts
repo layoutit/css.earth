@@ -1,7 +1,9 @@
+// DRAFT (sun-port): replaces tests/objects/browser/sun/browser-profile.mts. The asset names are unchanged because the
+// generic raster recipe reproduces them (sun-surface-{id}, sun-poles-{id}, sun-corona-{id}, sun-limb-{id},
+// sun-lens-{id}); only the polar atlas layout and the starfield sampling differ.
 import { readPreparedFixture } from '../../fixtures.mts';
 const objectControls = await readPreparedFixture('sun', 'controls');
 import { createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
-
 
 export const browserProfile = createObjectBrowserProfile({
   id: "sun", controls: objectControls,
@@ -14,6 +16,10 @@ export const browserProfile = createObjectBrowserProfile({
       Object.freeze({
         one: "/scenes/sun/sun-surface-photosphere.webp",
         two: "/scenes/sun/sun-surface-photosphere@2x.webp",
+      }),
+      Object.freeze({
+        one: "/scenes/sun/sun-poles-photosphere.webp",
+        two: "/scenes/sun/sun-poles-photosphere@2x.webp",
       }),
       Object.freeze({
         one: "/scenes/sun/sun-limb-photosphere.webp",
