@@ -1,8 +1,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import preparedContext from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { bodyCardViewAtCamera, overviewScopeAtCamera, viewDistance } from '../overview-context.mts';
 import { presentWorldCamera } from '../../src/renderers/css/dist/navigation.js';
+import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';
+
+// The same validated plan the application mounts; the raw JSON import is untyped.
+const context = parsePreparedWorldContext(preparedContext);
 
 import type { WorldCameraPose, PreparedWorldCameraFrame } from '../../src/renderers/css/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/world-navigation-types.ts';
@@ -50,7 +54,7 @@ test('overview follows the prepared galaxy fade and restores correctly at maximu
 });
 
 test('galactic distance is measured from the Sun, independent of selected body and surface radius', () => {
-  const plan = { ...context, focus: { ...context.focus, positionM: [100, 200, 300] } };
+  const plan = { ...context, focus: { ...context.focus, positionM: [100, 200, 300] as const } };
   const world = camera(500, plan), frame = frameAt([100, 200, 400], 20);
   const galactic = viewDistance(world, frame, 'milky-way', plan);
   assert.equal(galactic.label, 'Distance from Sun:');
