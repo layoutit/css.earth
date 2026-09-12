@@ -1,5 +1,6 @@
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-residency.js';
+import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { mountSpaceMinimap } from './minimap/minimap.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
@@ -220,6 +221,9 @@ export function createApplicationWorldContext() {
           },
           setAsteroidOrbitsEnabled(enabled: boolean) {
             if (!destroyed) layer.setHiddenOrbits(enabled === true ? hiddenOrbitIds : [...hiddenOrbitIds, ...asteroidIds]);
+          },
+          setOrbitRenderer(renderer: OrbitRenderer) {
+            if (!destroyed) layer.setOrbitRenderer(renderer);
           },
           setAsteroidLabelsEnabled(enabled: boolean) {
             if (!destroyed) layer.setHiddenLabels(enabled === true ? [] : asteroidIds);
