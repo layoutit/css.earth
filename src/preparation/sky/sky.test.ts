@@ -7,7 +7,8 @@ import { deflateSync, zstdCompressSync } from 'node:zlib';
 import { decodeExrRgbHalf, halfToFloat } from './exr.js';
 import { parseSkyRecipe } from './config.js';
 import { loadSkySource } from './source.js';
-import { SKY_BASES, skyRay, skyUv, sampleLinearSky, displayByte, skyFacePixels, prepareSkyFaces } from './bake.js';
+import { SKY_BASES, skyRay, skyUv, sampleLinearSky, displayByte, skyFacePixels, prepareSkyFaces, compositeSkyStars } from './bake.js';
+import type { PreparedCssPointField } from '../../renderers/css/stars/types.js';
 import { sha256 } from '../volume/source.js';
 import type { PreparedCssSky } from '../../renderers/css/sky/types.js';
 
@@ -173,4 +174,25 @@ test('actual compiled sky image corners retain ICRF orientation after PolyCSS re
       assert(Math.hypot(...actual.map((n, i) => n - expected[i]!)) < .025, face.id);
     }
   }
+});
+test('baked stars land at the gnomonic centre of their face, cross onto the neighbouring face, and never touch untouched sky', () => {
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 0, originM: [0, 0, 0] as [number, number, number], localToReferenceXyzw: [0, 0, 0, 1] as [number, number, number, number],
+    metersPerUnit: 3.085677581491367e16, boundsUnits: { min: [-100, -100, -100] as [number, number, number], max: [100, 100, 100] as [number, number, number] } };
+  const star = (id: string, positionUnits: [number, number, number]) => ({ id, positionUnits, absoluteMagnitude: 1, colorIndex: 0, name: null, coverageAnchor: false });
+  const field: PreparedCssPointField = { schema: 'cssearth-css-point-field@1', id: 'fixture', frame,
+    stars: [star('a', [10, 0, 0]), star('b', [-10, 0, 0]), star('c', [10, -10, 0])], nodes: [],
+    atlas: { path: 'atlas.png', columns: 1, tileSize: 4, colors: [[255, 0, 0]], haloRadii: 1 },
+    photometry: { minimumMagnitude: 0, maximumMagnitude: 10, step: 10, floor: 0, limitingMagnitude: 10, hintsLimitMagnitude: 10, minimumRadiusPx: .6, samples: [{ radiusPx: 4, luminance: 1 }, { radiusPx: 4, luminance: 1 }] },
+    policy: { activeSlots: 1, transitionSlots: 1, maxErrorPx: 1, transitionMs: 0 }, labels: { activeSlots: 0, transitionSlots: 0, capHeightPx: 1, gapPx: 1, maxAlpha: 1, fadeMs: 0 },
+    resources: [], provenance: {} };
+  const size = 64, atlas = { rgba: Buffer.alloc(4 * 4 * 4, 255), width: 4, height: 4 };
+  // One face pixel per CSS pixel at the face centre: an 8 px sprite covers pixels 28..35.
+  const sprites = { field, atlas, cssPixelsPerDegree: (size / 2) * Math.PI / 180 };
+  const px = Buffer.alloc(size * size * 4, 0), ny = Buffer.alloc(size * size * 4, 0);
+  assert.equal(compositeSkyStars(px, size, SKY_BASES[0]!, sprites), 2);
+  assert.equal(compositeSkyStars(ny, size, SKY_BASES[3]!, sprites), 1);
+  const pixel = (rgba: Buffer, x: number, y: number) => [...rgba.subarray((y * size + x) * 4, (y * size + x) * 4 + 3)];
+  assert.deepEqual(pixel(px, 31, 31), [255, 0, 0]); assert.deepEqual(pixel(px, 28, 28), [255, 0, 0]); assert.deepEqual(pixel(px, 27, 31), [0, 0, 0]);
+  assert.deepEqual(pixel(px, 20, 31), [0, 0, 0]); assert.deepEqual(pixel(px, 63, 31), [255, 0, 0]);
+  assert.deepEqual(pixel(ny, 0, 31), [255, 0, 0]); assert.deepEqual(pixel(ny, 8, 31), [0, 0, 0]);
 });

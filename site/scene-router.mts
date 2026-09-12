@@ -1,4 +1,5 @@
 import type { SceneState } from './shell-contract-types.mts';
+import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/deferred-object-mount.js';
 import type { BrowserWindow, SceneFactory } from './browser-types.mts';
@@ -55,6 +56,7 @@ export function createSceneRouter({
   let asteroidBodiesEnabled = false;
   let asteroidOrbitsEnabled = false;
   let asteroidLabelsEnabled = false;
+  let orbitRenderer: OrbitRenderer = 'strokes';
   let highlightedClassification: string | null = null;
   let scenePaused = true;
   let sceneError: unknown = null;
@@ -128,7 +130,7 @@ export function createSceneRouter({
       if (!shellOwner) {
         const owner: { shell: Shell | null } = { shell: null };
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
+        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, orbitRenderer,
           onMotionChange(next) { if (shellOwner === owner && active) {
             motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
           } },
@@ -151,6 +153,10 @@ export function createSceneRouter({
           onAsteroidLabelsChange(next) { if (shellOwner === owner && active) {
             asteroidLabelsEnabled = next === true;
             worldContextMount?.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
+          } },
+          onOrbitRendererChange(next) { if (shellOwner === owner && active) {
+            orbitRenderer = next;
+            worldContextMount?.setOrbitRenderer?.(orbitRenderer);
           } },
           onCategoryChange(next) { if (shellOwner === owner) {
             highlightedClassification = next;
@@ -629,6 +635,7 @@ export function createSceneRouter({
         value.setAsteroidBodiesEnabled?.(asteroidBodiesEnabled);
         value.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
         value.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
+        value.setOrbitRenderer?.(orbitRenderer);
         value.setHighlightedClassification?.(highlightedClassification);
         return value;
       }).catch(error => {

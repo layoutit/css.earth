@@ -32,7 +32,7 @@ test('complete context frames cross a structured-clone boundary without mutating
   const savedInput = structuredClone(input);
   const first = structuredClone(calculate(input));
   const savedFirst = structuredClone(first);
-  expect(first.projectedBodies.some(body => body.transforms.length > 0)).toBe(true);
+  expect(first.projectedBodies.some(body => body.segments.length > 0)).toBe(true);
   for (const distance of [5, 50, 5000, 20]) {
     const next = structuredClone(input);
     Object.assign(next.world.pose, { positionM: [next.world.pose.positionM[0], next.world.pose.positionM[1], distance * 149597870700] });
@@ -41,9 +41,8 @@ test('complete context frames cross a structured-clone boundary without mutating
     const packet = structuredClone(calculate(freeze(next)));
     expect(packet.emphasizedId).toBe('saturn');
     for (const body of packet.projectedBodies) {
-      expect(body.transforms).toHaveLength(body.segments.length);
-      expect(body.transforms.every(transform => !/NaN|Infinity/.test(transform))).toBe(true);
-      expect(body.transforms.every(transform => !/NaN|Infinity/.test(transform))).toBe(true);
+      expect(body).not.toHaveProperty('transforms');
+      expect(body.segments.every(segment => segment.length === 5 && segment.every(Number.isFinite))).toBe(true);
     }
   }
   expect(input).toEqual(savedInput);

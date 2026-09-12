@@ -1,4 +1,5 @@
 import type { RuntimePolicy, WheelInputKind, WheelZoomInertia } from './runtime-policy.js';
+import { createOpacityClock } from '../stars/opacity-clock.js';
 import type { NavigationCamera, TrackballMetrics, CameraDelta, ControlsUpdate } from './types.js';
 export interface PreparedWheelZoomOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; rotate(delta: CameraDelta): void; minimumZoom: number; maximumZoom: number; speedMultiplier?: number; useScrollDistance?: boolean; dolly?: { stepPerDelta: number } | null; inertia?: WheelZoomInertia | null; onError?: ((error: unknown) => void) | null; }
 export type PreparedWheelZoomControls = ReturnType<typeof createPreparedWheelZoomControls>;
@@ -50,6 +51,7 @@ export function createPreparedWheelZoomControls({
       typeof useScrollDistance !== "boolean" ||
       (dolly !== null && !(dolly.stepPerDelta > 0)) ||
       (glidePolicy !== null && !(glidePolicy.dampingSeconds > 0 && glidePolicy.gain > 0 &&
+        glidePolicy.stopLogRatePerSecond > 0 &&
         glidePolicy.stopRateRatio > 0 && glidePolicy.stopRateRatio < 1)) ||
       (onError !== null && typeof onError !== "function")) {
     throw new TypeError("Prepared wheel zoom controls are invalid.");
@@ -65,8 +67,12 @@ export function createPreparedWheelZoomControls({
       onError(error);
     }
   };
-  const requestFrame = (callback: FrameRequestCallback) => windowTarget.requestAnimationFrame(guard(callback));
-  const cancelFrame = windowTarget.cancelAnimationFrame.bind(windowTarget);
+  // The zoom glide moves the camera, so it belongs to the same input lane as a
+  // thrown drag: one clock, and the glide always resolves before the publication
+  // that reads its distance.
+  const frameClock = createOpacityClock(windowTarget);
+  const requestFrame = (callback: FrameRequestCallback) => frameClock.request(guard(callback), 'input');
+  const cancelFrame = (id: number) => frameClock.cancel(id);
   let enabled = true;
   let frame: number | null = null;
   let direction = 0;
@@ -154,7 +160,13 @@ export function createPreparedWheelZoomControls({
         if (zoom === previousZoom) glideRate = 0;
       }
     }
-    if (Math.abs(glideRate) > Math.abs(releasedRate) * glidePolicy.stopRateRatio) {
+    // A glide ends when its own motion stops being visible, not when it falls to
+    // a share of whatever rate released it: an eye reads distance change per frame,
+    // so the absolute floor is what keeps the strongest gestures from snapping and
+    // the gentlest from drifting invisibly. The ratio bounds an extreme fling.
+    const stopRate = Math.max(glidePolicy.stopLogRatePerSecond / 1000,
+      Math.abs(releasedRate) * glidePolicy.stopRateRatio);
+    if (Math.abs(glideRate) > stopRate) {
       frame = requestFrame(glide);
     } else {
       frame = null;
@@ -171,6 +183,10 @@ export function createPreparedWheelZoomControls({
       timestamp - previousTimestamp,
       expiresAt - previousTimestamp,
     ));
+    // The commanded interval rarely ends on a frame boundary. Whatever is left
+    // of this frame belongs to the glide, so the released gesture keeps moving
+    // at its own rate instead of showing one short step at the handoff.
+    const leftover = Math.max(0, timestamp - previousTimestamp - elapsed);
     previousTimestamp = timestamp;
     if (elapsed > 0 && direction !== 0 && dolly !== null) {
       // The dolly: the outstanding log-distance, spread over the interval.
@@ -208,9 +224,10 @@ export function createPreparedWheelZoomControls({
     if (glidePolicy !== null && direction !== 0 && travelRate !== 0) {
       releasedRate = travelRate * glidePolicy.gain;
       glideRate = releasedRate;
-      glidePrevious = timestamp;
+      glidePrevious = timestamp - leftover;
       travelRate = 0;
       gliding = true;
+      if (leftover > 0) { glide(timestamp); return; }
       frame = requestFrame(glide);
       return;
     }
@@ -266,6 +283,7 @@ export function createPreparedWheelZoomControls({
     if (disposed) return;
     disposed = true;
     stop();
+    frameClock.destroy();
     inputSurface.removeEventListener("wheel", guardedWheel);
   }
   return Object.freeze({

@@ -5,10 +5,9 @@ import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-c
 import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
 import { levelOfDetailFor, orbitLineOpacity } from '../navigation/perspective-dolly.js';
 import { clipSegmentToRectangle, rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
-import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute } from '../solar-system/prepared-ring-projection.js';
+import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter } from '../solar-system/prepared-ring-projection.js';
 import type { OrbitSegment } from '../solar-system/heliocentric-view.js';
 import { createWorldFrameProjection } from './world-frame-projection.js';
-import { orbitSegmentTransform } from '../solar-system/orbit-segment-presentation.js';
 import type { PointFrameState, PreparedPointFrame } from '../stars/point-field-frame.js';
 
 export const BODY_INDICATOR_DIAMETER = 16;
@@ -30,8 +29,13 @@ function orbitPresentation(segments: readonly OrbitSegment[] | number) {
   return orbitPresentationForExtent(Math.max(1, right - left, bottom - top));
 }
 
+/** The extent fade in 1/64 steps: rotation changes every orbit's extent a little
+ * each frame, and a step this small cannot change a composited pixel, so a body's
+ * marker and orbit keep their alpha instead of restyling on every frame. */
+const EXTENT_FADE_STEPS = 64;
+const quantizeAlpha = (alpha: number) => Math.round(alpha * EXTENT_FADE_STEPS) / EXTENT_FADE_STEPS;
 function orbitPresentationForExtent(extent: number) {
-  const opacity = logarithmicFade(extent, ORBIT_FADE_START_PIXELS, ORBIT_FULL_PIXELS);
+  const opacity = Math.round(logarithmicFade(extent, ORBIT_FADE_START_PIXELS, ORBIT_FULL_PIXELS) * EXTENT_FADE_STEPS) / EXTENT_FADE_STEPS;
   // Every orbit and its unresolved body annotation share one zoom fade.
   return { width: CONTEXT_LINE_WIDTH, opacity };
 }
@@ -100,6 +104,8 @@ export interface WorldContextView {
   /** Keep the committed labels and indicators while the view rotates: they follow
    * their bodies, but nothing is shown, hidden or re-sided until the hold ends. */
   holdAnnotations?: boolean;
+  /** Largest chord-bank deviation, in screen pixels, the paint owner accepts; default 0.1. */
+  orbitLodPixels?: number;
   anchorOnly: boolean;
   bodies: readonly WorldBodyPresentation[];
   points?: PointFrameState;
@@ -109,6 +115,19 @@ export interface WorldContextView {
 /** Project the prepared bank and resolve annotations without reading or writing DOM.
  * Segment buffers are borrowed until the next plan. A transport must copy/send
  * the result before requesting another view; the synchronous renderer consumes it inline. */
+/** One body's share of a planned frame: paint and picking state, no planner scratch. */
+export interface PlannedBodyOutput {
+  x: number; y: number; diameter: number; markerOpacity: number; visible: boolean; annotationVisible: boolean; hovered: boolean;
+  lineWidth: number; orbitVisibility: number; segments: readonly OrbitSegment[]; labelPosition: readonly number[] | undefined;
+  orbitBounds: { left: number; top: number; right: number; bottom: number } | null;
+  index: number; labelShown: boolean; labelPlacement: number; indicatorShown: boolean; indicatorCutout: boolean;
+  orbitAppearance: { width: number; opacity: number };
+}
+interface ProjectedBody<Entry> {
+  entry: Entry; x: number; y: number; depth: number; diameter: number; markerOpacity: number; indicatorOpacity: number; visible: boolean;
+  annotationVisible: boolean; hovered: boolean; inFrame: boolean; priority: number; lineWidth: number; orbitVisibility: number;
+  segments: readonly OrbitSegment[]; labelPosition?: readonly number[];
+}
 export function createWorldContextPlanner(plan: PreparedWorldContext, annotationPriorities: Readonly<Record<string, number>> = {}) {
   const points = [plan.focus, ...plan.bodies];
   const byId = new Map(points.map(point => [point.id, point]));
@@ -120,7 +139,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         trail: level.trail, activeChords: level.activeChords, deviationM: level.deviationM }))];
     return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null,
       closedOrbit: orbit?.trail.every(weight => weight === 1) === true,
-      orbitProjection: createRetainedRingProjection(orbit ? orbit.verticesM.length * 2 : 0) };
+      orbitProjection: createRetainedRingProjection(orbit ? orbit.verticesM.length * 2 : 0),
+      // A hidden body is the same retired stub every frame: no projection, no allocation, no packet.
+      hiddenStub: null as null | { projected: ProjectedBody<unknown> },
+      // Per-frame working objects are retained per body: the view's fields are
+      // assigned over them instead of spreading 470 new objects every frame.
+      state: null as unknown, projected: null as ProjectedBody<unknown> | null,
+      output: null as PlannedBodyOutput | null, bounds: { left: 0, top: 0, right: 0, bottom: 0 } };
   });
   const labels = createLabelDeclutter({ capacity: points.length, spacingPixels: 4 });
   const indicators = createLabelDeclutter({ capacity: points.length, spacingPixels: 2 });
@@ -130,7 +155,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         view.bodies.length !== prepared.length || !(viewport.widthPixels! > 0 && viewport.heightPixels! > 0)) {
       throw new TypeError('World context planning requires a matching frame, body state and measured viewport.');
     }
-    const bodies = prepared.map((entry, index) => ({ ...entry, ...view.bodies[index], index, indicatorCutout: false }));
+    const bodies = prepared.map((entry, index) => {
+      const state = (entry.state ??= { ...entry, ...view.bodies[index], index, indicatorCutout: false }) as typeof entry & WorldBodyPresentation & { index: number; indicatorCutout: boolean };
+      Object.assign(state, view.bodies[index]); state.indicatorCutout = false;
+      return state;
+    });
     const selectedEntry = bodies.find(entry => entry.body.id === selectedId);
     if (!selectedEntry) throw new TypeError('Selected context body is unavailable.');
     const publishingBodies = view.anchorOnly ? bodies.slice(0, 1) : bodies;
@@ -166,7 +195,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         if (!lod) return 0;
         const nearest = -toEye(lod.bounds.centerM)[2] - lod.bounds.radiusM;
         if (nearest > near) for (let level = entry.levels.length - 1; level > 0; level--) {
-          if (entry.levels[level]!.deviationM * pixelsPerMeterAtUnitDepth / nearest <= ORBIT_LOD_PIXELS) return level;
+          if (entry.levels[level]!.deviationM * pixelsPerMeterAtUnitDepth / nearest <= (view.orbitLodPixels ?? ORBIT_LOD_PIXELS)) return level;
         }
         return 0;
       };
@@ -181,15 +210,18 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       }
       let anchorLineWidth = CONTEXT_LINE_WIDTH;
       // Declutter annotations without changing physical bodies or projected orbits.
-      const projectedBodies: { entry: (typeof bodies)[number]; x: number; y: number; depth: number; diameter: number; markerOpacity: number; indicatorOpacity: number; visible: boolean; annotationVisible: boolean; hovered: boolean; inFrame: boolean; priority: number; lineWidth: number; orbitVisibility: number; segments: readonly OrbitSegment[]; labelPosition?: readonly number[] }[] = [];
+      type Entry = (typeof bodies)[number];
+      const projectedBodies: ProjectedBody<Entry>[] = [];
       for (const entry of publishingBodies) {
         const { body } = entry;
         if (entry.bodyHidden) {
           // A hidden body's changing depth has no consumer. Keeping its
           // retirement state stable avoids a worker patch on every camera move.
-          projectedBodies.push({ entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, indicatorOpacity: 0,
+          const stub = (prepared[entry.index]!.hiddenStub ??= { projected: { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, indicatorOpacity: 0,
             visible: false, annotationVisible: false, hovered: false, inFrame: false, priority: 0,
-            lineWidth: CONTEXT_LINE_WIDTH, orbitVisibility: 0, segments: [] });
+            lineWidth: CONTEXT_LINE_WIDTH, orbitVisibility: 0, segments: [] } });
+          stub.projected.entry = entry;
+          projectedBodies.push(stub.projected as ProjectedBody<Entry>);
           continue;
         }
         const eye = frame.eye(body), depth = -eye[2];
@@ -216,9 +248,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         // prepared sphere around every vertex. Either way a path that cannot reach
         // the fade's first visible extent inside the viewport is not projected.
         const bounds = fullOrbit ? entry.orbit?.lod?.bounds : entry.orbit?.bounds;
+        const boundsEye = bounds ? toEye(bounds.centerM) : null;
         let segments: readonly OrbitSegment[] = [], measuredExtent: number | null = null;
         if (entry.orbit && opacity > 0 && orbitOpacity > 0 &&
-            (!bounds || orbitBoundsMayContribute(toEye(bounds.centerM), bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS))) {
+            (!bounds || orbitBoundsMayContribute(boundsEye!, bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS))) {
           const projector = createPreparedRingProjector({ toEye, project, hidden: occlusion.hidden,
             mayOcclude: occlusion.mayOcclude,
             near, clipX: width / 2, clipY: height / 2 });
@@ -226,8 +259,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
             // Hidden paths have no geometry consumer. Their proxies still need
             // the exact existing fade, which saturates at 48 CSS pixels. A moon
             // outside the active system is drawn only once fully readable.
-            measuredExtent = projector.measureExtent(entry.orbit.verticesM, entry.orbit.trail,
-              ORBIT_FULL_PIXELS, entry.orbit.extentChords ?? entry.orbit.activeChords, entry.orbit.closed !== false);
+            // The prepared sphere bounds every measured vertex, so a sphere whose
+            // projected diameter cannot reach the fade's first visible pixel needs
+            // no projection at all: hundreds of small hidden orbits skip here.
+            const sphereDiameter = bounds && boundsEye ? projectedSphereDiameter(boundsEye, bounds.radiusM, focal, near) : Infinity;
+            measuredExtent = sphereDiameter < ORBIT_FADE_START_PIXELS ? Math.max(1, sphereDiameter)
+              : projector.measureExtent(entry.orbit.verticesM, entry.orbit.trail,
+                ORBIT_FULL_PIXELS, entry.orbit.extentChords ?? entry.orbit.activeChords, entry.orbit.closed !== false);
             if (measuredExtent < ORBIT_FULL_PIXELS) skipped = true;
           }
           if (!skipped) {
@@ -255,7 +293,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
             anchor: [x, y], widthPx: BODY_INDICATOR_DIAMETER + padding * 2,
             bottomOffsetPx: -radius - padding, topOffsetPx: radius + padding });
         }
-        projectedBodies.push({ entry, x, y, depth, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, hovered, inFrame, priority, lineWidth: appearance.width, orbitVisibility, segments });
+        const projected = (prepared[entry.index]!.projected ??= { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, indicatorOpacity: 0, visible: false,
+          annotationVisible: false, hovered: false, inFrame: false, priority: 0, lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
+        projected.entry = entry; projected.x = x; projected.y = y; projected.depth = depth; projected.diameter = diameter; projected.markerOpacity = markerOpacity;
+        projected.indicatorOpacity = indicatorOpacity; projected.visible = visible; projected.annotationVisible = annotationVisible; projected.hovered = hovered;
+        projected.inFrame = inFrame; projected.priority = priority; projected.lineWidth = appearance.width; projected.orbitVisibility = orbitVisibility;
+        projected.segments = segments; projected.labelPosition = undefined;
+        projectedBodies.push(projected);
       }
       // An orbitless anchor uses the same stroke as the visible system, then thins as it recedes.
       projectedBodies[0].lineWidth = anchorLineWidth;
@@ -346,33 +390,45 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       if (!holdAnnotations) for (const projected of projectedBodies) {
         projected.entry.labelShown = labels.accepted(0, projected.entry.body.id);
       }
-    return { emphasizedId, opacity, width, height,
-      projectedBodies: projectedBodies.map(({ entry, depth: _depth, priority: _priority,
-        indicatorOpacity: _indicatorOpacity, inFrame: _inFrame, ...projected }) => {
-        // The transport carries paint/picking state, not the planner's scratch
-        // values. Off-screen marker motion has no consumer; reveal sends its
-        // current position and alpha in the same packet as visibility.
-        const billboardShown = (projected.visible || (projected.annotationVisible &&
-          (entry.indicatorShown || entry.labelShown))) && projected.markerOpacity > 0;
-        return { ...projected,
-          ...(!billboardShown ? { x: 0, y: 0, diameter: 0, markerOpacity: 0 } : {}),
-          ...orbitPublication(projected.segments),
-          index: entry.index, labelShown: entry.labelShown, labelPlacement: entry.labelPlacement,
-          indicatorShown: entry.indicatorShown, indicatorCutout: entry.indicatorCutout, orbitAppearance: entry.orbitAppearance };
-      }) };
+    // The transport carries paint/picking state, not the planner's scratch
+    // values. Off-screen marker motion has no consumer; reveal sends its
+    // current position and alpha in the same packet as visibility.
+    // The transport object of each body is retained and overwritten: the worker
+    // clones the changed fields into its packet, so nothing keeps these references.
+    const plannedBody = (projected: ProjectedBody<Entry>): PlannedBodyOutput => {
+      const { entry } = projected, slot = prepared[entry.index]!;
+      const billboardShown = (projected.visible || (projected.annotationVisible &&
+        (entry.indicatorShown || entry.labelShown))) && projected.markerOpacity > 0;
+      const output = slot.output ??= { x: 0, y: 0, diameter: 0, markerOpacity: 0, visible: false, annotationVisible: false, hovered: false, lineWidth: 0,
+        orbitVisibility: 0, segments: [], labelPosition: undefined, orbitBounds: null, index: entry.index, labelShown: false, labelPlacement: 0,
+        indicatorShown: false, indicatorCutout: false, orbitAppearance: entry.orbitAppearance };
+      output.x = billboardShown ? projected.x : 0; output.y = billboardShown ? projected.y : 0;
+      // Alphas travel in 1/64 steps: every rotation frame moves a marker's silhouette a
+      // little, and a step this small cannot change a composited pixel, so unchanged
+      // steps neither cross the worker boundary nor restyle the marker's cue and caption.
+      output.diameter = billboardShown ? projected.diameter : 0; output.markerOpacity = billboardShown ? quantizeAlpha(projected.markerOpacity) : 0;
+      output.visible = projected.visible; output.annotationVisible = projected.annotationVisible; output.hovered = projected.hovered;
+      output.lineWidth = projected.lineWidth; output.orbitVisibility = quantizeAlpha(projected.orbitVisibility); output.segments = projected.segments;
+      output.labelPosition = projected.labelPosition;
+      output.orbitBounds = orbitBounds(projected.segments, slot.bounds);
+      output.labelShown = entry.labelShown; output.labelPlacement = entry.labelPlacement; output.indicatorShown = entry.indicatorShown;
+      output.indicatorCutout = entry.indicatorCutout; output.orbitAppearance = entry.orbitAppearance;
+      return output;
+    };
+    return { emphasizedId, opacity, width, height, projectedBodies: projectedBodies.map(plannedBody) };
   };
 }
 export type PlannedWorldContext = ReturnType<ReturnType<typeof createWorldContextPlanner>> & { points?: PreparedPointFrame };
 
-/** Finish the view-dependent paint and picking packet in the worker. Bounds
- * describe the final clipped chords, including the marker cutout. */
-function orbitPublication(segments: readonly OrbitSegment[]) {
+/** The picking bounds of the final clipped chords, including the marker cutout,
+ * written into the body's retained bounds object; the paint owner formats the strokes. */
+function orbitBounds(segments: readonly OrbitSegment[], into: NonNullable<PlannedBodyOutput['orbitBounds']>) {
+  if (segments.length === 0) return null;
   let left = Infinity, top = Infinity, right = -Infinity, bottom = -Infinity;
-  const transforms = segments.map(segment => {
-    const [x0, y0, x1, y1] = segment;
+  for (const [x0, y0, x1, y1] of segments) {
     left = Math.min(left, x0, x1); right = Math.max(right, x0, x1);
     top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
-    return orbitSegmentTransform(segment);
-  });
-  return { transforms, orbitBounds: segments.length ? { left, top, right, bottom } : null };
+  }
+  into.left = left; into.top = top; into.right = right; into.bottom = bottom;
+  return into;
 }

@@ -23,6 +23,13 @@ export function createRetainedRingProjection(capacity: number) {
   };
 }
 
+/** The one visibility guard for prepared geometry: the largest screen extent a
+ * sphere can reach, from its nearest point. Anything below `ORBIT_FADE_START`
+ * or one pixel cannot be seen, so its owner skips projection entirely. */
+export function projectedSphereDiameter(centerEye: Vector3, radiusM: number, focal: number, near: number): number {
+  return 2 * focal * radiusM / Math.max(near, -centerEye[2] - radiusM);
+}
+
 /** Conservative projected bounds for a prepared sphere. A near-plane crossing
  * requires the exact chord path. Otherwise its enclosing eye-space cube bounds
  * every projected chord, including viewport clipping and the existing fade. */

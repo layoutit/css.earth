@@ -12,6 +12,7 @@ import type { PreparedAssets } from '../rendering/prepared-residency.js';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js';
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
+import type { OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import { mountEnvironmentLabels } from './environment-labels.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
@@ -47,7 +48,10 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
     throw new TypeError('Context, volume and stars must share their prepared identities and epoch.');
   }
   const pool = `volume:${payload.id}`, starPool = `stars:${stars.id}`;
-  const skyPaths = new Set(payload.sky?.faces.map(face => face.texturePath) ?? []);
+  // Baked star faces replace the point field wherever the field's parallax is invisible.
+  const bakedStars = payload.sky?.nearFaces !== undefined;
+  const skyPaths = new Set([...payload.sky?.faces ?? [], ...payload.sky?.nearFaces ?? []].map(face => face.texturePath));
+  const startupSkyPaths = new Set((payload.sky?.nearFaces ?? payload.sky?.faces)?.map(face => face.texturePath) ?? []);
   const entries = payload.resources.map(resource => ({ key: `${pool}:${resource.path}`, url: resolveResource(resource.path), pool }));
   const starEntries = stars.resources.filter(resource => resource.path === stars.atlas.path).map(resource => ({
     key: `${starPool}:${resource.path}`, url: resolveStarResource(resource.path), pool: starPool }));
@@ -84,12 +88,14 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
     // Galaxy slices, image layers, lens banks and shells appear far away; the
     // browser decodes them again for raster when first drawn, so decoding them
     // here spent seconds and hundreds of megabytes that were never reused.
-    startup: [...entries.filter(entry => skyPaths.has(entry.key.slice(pool.length + 1))), ...starEntries].map(entry => entry.key),
+    startup: [...entries.filter(entry => startupSkyPaths.has(entry.key.slice(pool.length + 1))), ...bakedStars ? [] : starEntries].map(entry => entry.key),
   };
   // Their bytes are fetched once, a few wheel steps before the volume fades in.
   const galaxyUrls = [...entries.filter(entry => !skyPaths.has(entry.key.slice(pool.length + 1))), ...imageEntries,
     ...lensPlans.flatMap(bank => bank.assets.entries)].map(entry => entry.url);
   const galaxyPrefetchDistanceM = (plan.volume.opacityProfile?.fadeStartDistanceM ?? plan.volume.fadeStartDistanceM) * GALAXY_PREFETCH_RATIO;
+  const stellarFadeAt = (world: WorldCameraPose) => logarithmicFade(Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis])),
+    plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
   return Object.freeze({ assets,
     createFramePlanner: () => createWorldContextPlannerClient(plan, undefined, annotationPriorities, stars, plannerSource),
     mount(stage: HTMLElement, { onSelectGalaxy, requestPublication, presentationHost = stage }: {
@@ -219,9 +225,11 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
           },
           captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
             // The worker plans bodies and retained star slots from one captured view.
-            const spatialFrame = spatial!.captureFrame(world, viewport), pointFrame = pointField!.captureFrame();
-            return { view: { ...spatialFrame.view, points: pointFrame.state },
-              current: () => spatialFrame.current() && pointFrame.current() };
+            // Inside the baked band the sky cube carries the stars: no star slots are planned or written.
+            const spatialFrame = spatial!.captureFrame(world, viewport);
+            const pointFrame = bakedStars && stellarFadeAt(world) === 0 ? null : pointField!.captureFrame();
+            return { view: { ...spatialFrame.view, ...(pointFrame ? { points: pointFrame.state } : {}) },
+              current: () => spatialFrame.current() && (pointFrame?.current() ?? true) };
           },
           previewSelection(id?: string | null) { selectionPreview = id; spatial!.previewSelection(id); },
           setOverview(enabled: boolean) { overview = enabled; spatial!.setOverview(enabled); },
@@ -232,6 +240,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
           },
           setNavigationInFlight(active: boolean) { spatial!.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
           setHiddenOrbits(ids: readonly string[]) { spatial!.setHiddenOrbits(ids); },
+          setOrbitRenderer(renderer: OrbitRenderer) { spatial!.setOrbitRenderer(renderer); },
           setHiddenBodies(ids: readonly string[]) { spatial!.setHiddenBodies(ids); },
           setHiddenLabels(ids: readonly string[]) { spatial!.setHiddenLabels(ids); },
           setSuppressedLabels(ids: readonly string[]) { spatial!.setSuppressedLabels(ids); },
@@ -259,7 +268,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
             prefetchGalaxy(distanceM);
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
-            const stellarFade = logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
+            const stellarFade = stellarFadeAt(world);
             volumeOpacity = preparedVolumeOpacity(distanceM, plan.volume.opacityProfile);
             volumeBrightness = preparedVolumeOpacity(distanceM, plan.volume.brightnessProfile);
             const volumeVisible = volumeOpacity > 0;
@@ -273,7 +282,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
               volumeImage.dataset.volumeBrightness = String(volumeBrightness); publishedVolumeBrightness = volumeBrightness;
             }
             publishBackground();
-            skyLayer?.publish(world, viewport, volumeOpacity < 1);
+            skyLayer?.publish(world, viewport, volumeOpacity < 1, bakedStars ? 1 - stellarFade : 1);
             if (volumeOpacity > 0) volumeLayer!.publish({ world, viewport });
             // Like lens banks, a faded image bank leaves layout and compositing.
             for (const bank of imageBanks) {
@@ -298,8 +307,9 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
               catalog.clusters ? logarithmicFade(distanceM, catalog.clusters.fadeStartDistanceM, catalog.clusters.fullDistanceM) : 0) : [];
             const starExclusions = [...foregroundRects, ...environmentRects, ...galaxyRects];
             // A worker-planned view carries its star frame; a direct publication selects locally.
-            if (frame?.points) pointField!.publish(world, viewport, 1 - fade, starExclusions, frame.points);
-            else pointField!.publish(world, viewport, 1 - fade, starExclusions);
+            const starOpacity = bakedStars ? stellarFade * (1 - fade) : 1 - fade;
+            if (frame?.points) pointField!.publish(world, viewport, starOpacity, starExclusions, frame.points);
+            else pointField!.publish(world, viewport, starOpacity, starExclusions);
             const emphasizedId = selectionPreview === undefined ? (overview ? null : selected.id) : selectionPreview;
             focusPoint?.publish(world, viewport, { opacity: (1 - fade) * (emphasizedId !== null && emphasizedId !== plan.focus.id ? .75 : 1), selectedDetail: selected.id === plan.focus.id,
               ...(selected.id === plan.focus.id ? {} : { occluder: selected }) });
