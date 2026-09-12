@@ -12,6 +12,9 @@ import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } f
 import type { PreparedResourceLease } from './prepared-resource-lease.js';
 import type { PerspectiveWorldContext } from '../navigation/perspective-dolly.js';
 import type { PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
+import type { PreparedSurfaceFeaturePlan, SurfaceFeatureLayerRuntime, SurfaceFeatureNavigationRuntime } from '../labels/surface-feature-types.js';
+export type { SurfaceFeatureNavigationRuntime };
+import type { SurfaceFeatureMountOptions } from '../labels/surface-feature-labels.js';
 
 export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition {
   readonly schema: string; readonly id: string; readonly controls: ObjectControls;
@@ -21,6 +24,7 @@ export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition 
     systemMarkers?: HeliocentricMountOptions["systemMarkers"]; labels?: HeliocentricMountOptions["labels"] } | null;
   readonly destinations?: unknown;
   readonly surfaceHit?: PreparedSurfaceHit;
+  readonly features?: PreparedSurfaceFeaturePlan;
 }
 export interface ObjectRuntimeView extends OrbitPublication { readonly reference: OrbitPublication; readonly previous: OrbitPublication | null; readonly revision: number; }
 export type PageLayerStats = ReturnType<ReturnType<typeof import('../paging/city-pages.js').mountPreparedMapPages>['stats']>;
@@ -41,6 +45,8 @@ export interface ObjectRuntimeCapabilities {
     reset(): ReturnType<RetainedCubicSkyOrbit["flyToState"]> | undefined;
   }): PreparedDestinationRuntime;
   mountWorldContext?(options: { stage: HTMLElement; before: HTMLElement; skyElement: HTMLElement; worldContext: PerspectiveWorldContext; own(cleanup: () => void): void; onError(error: unknown): void }): WorldContextLayer;
+  /** Prepared nomenclature labels anchored to the body mesh; the catalogue is fetched and byte-verified by the layer. */
+  mountSurfaceFeatures?(options: SurfaceFeatureMountOptions): SurfaceFeatureLayerRuntime;
 }
 export interface WorldContextLayer { publish(world: WorldCameraPose, viewport: WorldCameraViewport): void; destroy(): void; }
 export interface ObjectMountOptions {

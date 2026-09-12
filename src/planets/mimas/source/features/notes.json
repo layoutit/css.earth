@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "403",
+      "item": "Q25908394",
+      "title": "Arthur (crater)",
+      "url": "https://en.wikipedia.org/wiki/Arthur_(crater)",
+      "revision": "1364092037",
+      "extract": "Arthur is a crater on Mimas, a moon of Saturn. The crater was named after the King Arthur, the eponymous king of Arthurian Legend. The name \"Arthur\" was officially approved by the International Astronomical Union (IAU) in 1982."
+    },
+    {
+      "id": "2478",
+      "item": "Q1426193",
+      "title": "Herschel (Mimantean crater)",
+      "url": "https://en.wikipedia.org/wiki/Herschel_(Mimantean_crater)",
+      "revision": "1363666964",
+      "extract": "Herschel is the largest impact crater on Saturn's moon Mimas. It is located on Mimas's leading hemisphere, centered on the equator at 112° longitude. It is named after the 18th-century astronomer William Herschel, who discovered Mimas in 1789."
+    }
+  ]
+}

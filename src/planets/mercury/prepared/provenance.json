@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9f6d8b41a2779e525843330cc2072bf30785abf5af48e806823dac3ff36d79b6"
+    "sha256": "3d6b809fb63180c3c0b4ed86b9928564f1f16808e38a9b95eb11a7e52c69b13b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -697,6 +697,90 @@
           }
         ]
       }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "f14b49150c5ee8b43e702f874cfa65c13303aad58a94c8ebd0b0c93e71c1e77f",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": "MERCURY_nomenclature_center_pts.zip",
+        "members": {
+          "attributes": "MERCURY_nomenclature_center_pts.dbf",
+          "projection": "MERCURY_nomenclature_center_pts.prj",
+          "metadata": "metadata_nomenclature_points_MERCURY.xml"
+        },
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "output": "mercury-features.json",
+        "publicBase": "/scenes/mercury/",
+        "target": {
+          "className": "mercury-body"
+        },
+        "lensIds": [
+          "normal",
+          "enhanced",
+          "topography"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "FA"
+          ],
+          "linear": [
+            "RU",
+            "DO",
+            "VA",
+            "CA",
+            "FO"
+          ],
+          "region": [
+            "PL",
+            "PM",
+            "MO"
+          ]
+        },
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        },
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 40,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 256
+        },
+        "traces": {
+          "directory": "features/tectonic",
+          "archive": "global-tectonic-map.zip",
+          "members": {
+            "shapes": "Combined_Tectonic_Map.shp",
+            "attributes": "Combined_Tectonic_Map.dbf",
+            "projection": "Combined_Tectonic_Map.prj"
+          },
+          "radiusM": 2440000,
+          "classField": "Fault_Type",
+          "classes": {
+            "RU": "Contractional Landform",
+            "DO": "Contractional Landform",
+            "FO": "Extensional Landform"
+          },
+          "paddingDeg": 0.3,
+          "insideFraction": 0.9,
+          "maximumTraces": 6,
+          "minimumLengthShare": 0.25,
+          "maximumVertices": 240
+        },
+        "notes": "notes.json",
+        "sites": {
+          "document": "sites.json",
+          "inputs": []
+        }
+      }
     }
   ],
   "sources": [
@@ -1002,6 +1086,196 @@
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mercury-surface-features-source",
+      "path": "features/manifest.json",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      },
+      "sha256": "098425552904c728f661ba20bc94cb7236a133d174a8aeceae74cb5078cc4eb1",
+      "bytes": 1013,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-gazetteer-mercury-nomenclature-center-pts",
+      "path": "features/MERCURY_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MERCURY_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Mercury on 2026-09-11 from the USGS Astrogeology GIS downloads page; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "title": "Gazetteer of Planetary Nomenclature: Mercury centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MERCURY/target",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-gazetteer-nomenclature-center-pts",
+            "role": "material",
+            "evidence": "src/planets/mercury/source/features/manifest.json@d1df0e9439e71dcf03fec387859d2817ca5285f1#/inputs/0"
+          }
+        ]
+      },
+      "sha256": "cd5c44d20ce0a9e167620c7b6799d0adaf228a418539c09e71ac27caa6cdf506",
+      "bytes": 1643245,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/MERCURY_nomenclature_center_pts.zip",
+        "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MERCURY_nomenclature_center_pts.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mercury-surface-minimap-frame",
+      "path": "presentation/surface-map.json",
+      "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation metadata",
+      "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
+      "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored texture axes and CSS surface selector."
+      },
+      "sha256": "b6f9051b9d032fe0dab9d5f5303171052b6390066d43fc7f29aebf83cb829669",
+      "bytes": 154,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "mercury-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 486 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts mercury: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "c61971591f74b61d6f1d4eee6ae84f8b61658d8ab0e7b762e45fc691125d29e1",
+      "bytes": 203960,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "mercury-surface-sites",
+      "path": "features/sites.json",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      },
+      "kind": "source-document",
+      "title": "features/sites.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "4568f15244d6886ab3f1c11c39ee64f05f8c5ec7ab91a3971e6af34bf0b82858",
+      "bytes": 1647,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mercury-tectonic-traces-source",
+      "path": "features/tectonic/manifest.json",
+      "origin": "Repository-authored pin of the tectonic map snapshot: record page, version, licence evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the tectonic archive."
+      },
+      "sha256": "4e4e306332d4a0f9d907780abb14a52583e9349602407d689c681ffa50dc8cc4",
+      "bytes": 1116,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "klimczak-mercury-global-tectonic-map",
+      "path": "features/tectonic/global-tectonic-map.zip",
+      "origin": "https://data.mendeley.com/public-files/datasets/p43b9wttpj/files/cb3689ee-0937-4010-973c-6a79b053341f/file_downloaded",
+      "credit": "Christian Klimczak, Paul Byrne and Kelsey Crane, A Global Tectonic Map of Mercury, Mendeley Data, DOI 10.17632/p43b9wttpj.2",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "features/tectonic/manifest.json"
+      ],
+      "acquisition": "Downloaded the \"Global tectonic map.zip\" file of version 2 of the Mendeley Data record on 2026-09-11; the archive holds the Combined_Tectonic_Map shapefile members and Esri metadata.",
+      "redistribution": "Committed CC-BY-4.0 snapshot with credit and licence link; the pinned bytes identify the exact version 2 file.",
+      "title": "A Global Tectonic Map of Mercury (Klimczak, Byrne and Crane)",
+      "displayCredit": "Klimczak, Byrne and Crane · Mendeley Data",
+      "sourceUrl": "https://data.mendeley.com/datasets/p43b9wttpj/2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-17632-p43b9wttpj-2",
+            "role": "material",
+            "evidence": "src/planets/mercury/source/features/tectonic/manifest.json@2a491c27cde809cb7b26b95a967b07b949b17d11#/inputs/0"
+          }
+        ]
+      },
+      "sha256": "1df40ad95a5e8de90b6add4cb3d849f61697c78f872e3bf0bf46bb67234c2f7e",
+      "bytes": 6908708,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "features/tectonic/global-tectonic-map.zip",
+        "url": "https://data.mendeley.com/public-files/datasets/p43b9wttpj/files/cb3689ee-0937-4010-973c-6a79b053341f/file_downloaded"
+      },
       "verificationOperations": []
     }
   ],
@@ -1716,8 +1990,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9421,
-          "sha256": "87f35aa2fc3a3eb8965eac52564e70d9594099495518efe2e38f5954cb732990",
+          "bytes": 9540,
+          "sha256": "40d81ff4711712386da8129c7ea183635ef409753aebfd67089cfc8458f0f097",
           "verification": "bytes-verified"
         }
       ],
@@ -1777,6 +2051,44 @@
         }
       ],
       "inputBasis": "authored-recipe"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 180,
+        "excludedTypeCodes": {
+          "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
+        }
+      },
+      "inputs": [
+        "mercury-surface-features-source",
+        "usgs-gazetteer-mercury-nomenclature-center-pts",
+        "mercury-surface-minimap-frame",
+        "mercury-surface-feature-notes",
+        "mercury-surface-sites",
+        "mercury-tectonic-traces-source",
+        "klimczak-mercury-global-tectonic-map"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/mercury/mercury-features.json",
+          "bytes": 954619,
+          "sha256": "684f5d1d39a9f30ca124dbb3e3fbcf1c621e61a4624a6cbbbea4acf7affdb853",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
     },
     {
       "id": "preview:normal",

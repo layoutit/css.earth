@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-solar-system-preparation@1",
+  "bodyId": "sun",
+  "displayName": "Sun",
+  "bodyRadiusUnits": 248,
+  "bodyRadiusKilometers": 695700,
+  "defaultZoom": 1.25,
+  "geometryScale": 1.25,
+  "initialScenePitchDegrees": 40,
+  "defaultControlYawDegrees": -105,
+  "markerAtlasUrl": "/navigation/planet-markers@2x.webp",
+  "captionNames": {
+    "sun": "Sun",
+    "mercury": "Mercury",
+    "venus": "Venus",
+    "earth": "Earth",
+    "mars": "Mars",
+    "jupiter": "Jupiter",
+    "saturn": "Saturn",
+    "uranus": "Uranus",
+    "neptune": "Neptune",
+    "pluto": "Pluto",
+    "ceres": "Ceres",
+    "eris": "Eris",
+    "haumea": "Haumea",
+    "makemake": "Makemake",
+    "moon": "Moon"
+  },
+  "markerStrip": {
+    "schema": "csssun-prepared-system-markers@1",
+    "provenance": "Flat-colour discs from published visible colours; not imagery. Pluto uses the shell's navigation atlas tile instead.",
+    "tiles": [
+      { "id": "ceres", "color": [110, 106, 102], "size": 5 },
+      { "id": "eris", "color": [232, 230, 226], "size": 6 },
+      { "id": "haumea", "color": [217, 216, 212], "size": 5 },
+      { "id": "makemake", "color": [185, 138, 106], "size": 5 }
+    ],
+    "urls": {
+      "1": "/scenes/sun/sun-system-markers.webp",
+      "2": "/scenes/sun/sun-system-markers@2x.webp"
+    }
+  },
+  "star": {
+    "model": "authored-star-axis-presentation-frame",
+    "systemTransform": "rotateY(-7.25deg)",
+    "axialTiltDegrees": 7.25,
+    "axisSource": "Solar rotation axis tilt of 7.25 degrees to the ecliptic (Carrington), carried from the retired static geometry; the Sun has no entry in src/platform/solar-geometry.mts, so this frame is authored, not ephemeris-derived",
+    "worldFrame": "navigation/universe.json"
+  }
+}

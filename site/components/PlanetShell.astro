@@ -23,6 +23,7 @@ import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
 import overviewFacts from '../source/overview-facts.json';
 import planetarySystems from '../source/planetary-systems.json';
 import { temperatureColor } from '../../src/preparation/stars/color.ts';
+import featureIndex from '../prepared-feature-index.json' with { type: 'json' };
 
 declare const __CSSEARTH_VERSION__: string;
 
@@ -33,6 +34,7 @@ const {
   lenses,
   settings,
   destinations,
+  features,
   navigation = false,
 } = Astro.props;
 requireObjectControls({ lenses, settings }, objectId);
@@ -303,6 +305,17 @@ const searchCategories = ([
         </PlanetCardHeader>
         <PlanetObjectResults activeObjectId={objectId} />
       </PlanetCard>
+      <section class="planet-feature-results" aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
+        <p class="planet-feature-hint planet-destination-hint" role="status"></p>
+        <ul class="planet-destination-list">
+          {Array.from({ length: 8 }, () => <li hidden>
+            <button class="planet-destination-result" type="button">
+              <span class="planet-destination-result-name"></span>
+              <span class="planet-destination-result-context"></span>
+            </button>
+          </li>)}
+        </ul>
+      </section>
       {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
         <p class="planet-destination-hint" role="status"></p>
         <ul class="planet-destination-list">

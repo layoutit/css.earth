@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { readFitsPrimary } from '../static-surface/fits-map.mts';
+import { readFitsPrimary } from '../observation/fits.mts';
 import { mapFitsObservation } from './observed-fits.mts';
 
 function fitsBytes(bitpix: number, values: readonly number[], extra: readonly string[] = []) {

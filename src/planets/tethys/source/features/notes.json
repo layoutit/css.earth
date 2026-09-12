@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "2751",
+      "item": "Q2035798",
+      "title": "Ithaca Chasma",
+      "url": "https://en.wikipedia.org/wiki/Ithaca_Chasma",
+      "revision": "1324632282",
+      "extract": "Ithaca Chasma is a valley (graben) of Saturn's moon Tethys, named after the island of Ithaca, in Greece.1 mi) deep and 2,000 km (1,200 mi) long, running approximately three-quarters of the way around Tethys's circumference, making it one of the longer valleys in the Solar System."
+    },
+    {
+      "id": "3811",
+      "item": "Q6811587",
+      "title": "Melanthius (crater)",
+      "url": "https://en.wikipedia.org/wiki/Melanthius_(crater)",
+      "revision": "1322314880",
+      "extract": "Melanthius is the third-largest impact crater on Tethys, one of Saturn's moons. Melanthius is 245 kilometers (152 mi) wide, and is located in the southern quadrant of Melanthius, named after the crater. Melanthius is noted for its prominent cluster of central peaks, which were formed in the original impact.61°W."
+    },
+    {
+      "id": "4168",
+      "item": "Q25908664",
+      "title": "Nausicaa (crater)",
+      "url": "https://en.wikipedia.org/wiki/Nausicaa_(crater)",
+      "revision": "1364611794",
+      "extract": "Nausicaa is an impact crater on Tethys, an icy moon of Saturn. Like most features on this moon, the crater was named after a character from The Odyssey, by Homer. Nausicaa was the daughter of Alcinous, she advised Odysseus."
+    },
+    {
+      "id": "4406",
+      "item": "Q2361863",
+      "title": "Odysseus (crater)",
+      "url": "https://en.wikipedia.org/wiki/Odysseus_(crater)",
+      "revision": "1348534620",
+      "extract": "Odysseus is the largest crater on Saturn's moon Tethys. It is 445 km across, more than 2/5 of the moon's diameter, and is one of the largest craters in the Solar System.9°W, respectively. It is named after the Greek hero Odysseus from Homer's the Iliad and the Odyssey."
+    },
+    {
+      "id": "4645",
+      "item": "Q7162556",
+      "title": "Penelope (crater)",
+      "url": "https://en.wikipedia.org/wiki/Penelope_(crater)",
+      "revision": "1348534128",
+      "extract": "Penelope is the third-largest impact crater on Saturn's moon Tethys.2°W. It is approximately opposite to the largest crater on Tethys—Odysseus. Penelope is named after Queen Penelope of Greek mythology, wife of the legendary King Odysseus from Homer's Odyssey."
+    },
+    {
+      "id": "14425",
+      "item": "Q25908663",
+      "title": "Naubolos (crater)",
+      "url": "https://en.wikipedia.org/wiki/Naubolos_(crater)",
+      "revision": "1263803886",
+      "extract": "Naubolos is an impact crater on Tethys, one of Saturn's moons. Its diameter is 54 kilometers (34 mi). It is named after Naubolus, father of Euryalus in Homer's Odyssey."
+    }
+  ]
+}

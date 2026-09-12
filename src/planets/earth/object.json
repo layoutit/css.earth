@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "665a4db0b38273cefc3da13ef7a8c7e6079b2ca3f84a9e466e2adc5b123b909d"
+    "sha256": "f1f3f3c672142df7ebffa593b410f77514bb66e841b9bea30a8a347b6d4fdd74"
   },
   "id": "earth",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -67,6 +68,11 @@
           "id": "mantle-tomography",
           "path": "source/interior/tomography.json",
           "sha256": "b0b06aae3a042ca407a554fe0d6b0e6433bab0c3195d8bec1531171eb3175288"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "61e461be5dc366b3f856069c9ffecfb80c85c0de6f66dc529a7d2e09b04c4f8e"
         }
       ],
       "shape": {
@@ -138,6 +144,10 @@
       "atmosphere": {
         "source": "paged-ellipsoid",
         "material": "atmosphere"
+      },
+      "features": {
+        "source": "features",
+        "maxEntries": 8000
       }
     },
     "worldFrame": {
@@ -173,7 +183,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "edc0a8bc5d85ed4bae43fc54bc2658cd9907bf70523f1db70109dc27c4ed0bf7"
+        "sha256": "c652135cc04dd4d3289cfa8f998ac36ed5a497b53491e0a9d74745bd2f74a393"
       }
     },
     "catalog": {

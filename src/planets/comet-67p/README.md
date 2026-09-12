@@ -36,6 +36,8 @@ separates those results from the comet checks. Earlier runs are retained below.
 
 ## Known problems
 
+Landing sites: the two Philae touchdown sites (Agilkia and Abydos) are labelled on the shape model (`source/features/sites.json`); 67P has no IAU nomenclature, so the feature catalogue carries sites only. Each coordinate quotes the ESA release or paper it was read from, in the body-fixed frame stated there; sites are unsized points and the caption shows the quoted sentence with its publisher.
+
 - Photographed shadows, seams and real seasonal differences remain. The composite
   spans a perihelion passage; it cannot measure surface change.
 - Phase correction extends the published 1.3–54° fit to observations at 47–64°.

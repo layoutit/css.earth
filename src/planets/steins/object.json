@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "a8d08098deb0c09813e9d5b9853ce41bac49dc4801f3569597307650cd4581bd"
+    "sha256": "b27b00426b011fe74703012dbff3f867b8d76e6ae21ddaeb60714e89d9d1f8da"
   },
   "id": "steins",
   "properties": {
@@ -17,6 +17,7 @@
         "scene",
         "controls",
         "presentation",
+        "features",
         "runtime-assets"
       ]
     },
@@ -86,9 +87,18 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "579ae74993161b67b086e5e37fd8970690dffaec00632ffe03941721fcbbeeca"
+          "sha256": "662232413a8433ecc88007289686dbbb52da14ef3a81998cadde9e4ffcba6e53"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "f2bdf5f88e50b1df5c73af5515dd22987c27a0ae7f4cef29098ca41b6f779abf"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
@@ -123,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0ddf1715205abbb6166742bb30d34e106774e1dd187b6641ac898b558c42c104"
+        "sha256": "8b4a50aed533f1a7caf55a86131bd5b0f55b21f0574ab356f387be54d8cdf7e7"
       }
     },
     "catalog": {

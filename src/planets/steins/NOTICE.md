@@ -9,3 +9,5 @@ OSIRIS imagery credit: ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/
 Background imagery: ESO/S. Brunier, CC BY 4.0; see the pinned `source/stars/ESO-IMAGE-LICENSE.md`. HYG star-field attribution and license are in `source/stars/LICENSE.md`. The shared Inter typeface is SIL Open Font License, with source identity carried by the prepared title.
 
 Original observations, source models and scientific interpretations retain their respective credits. This package is not endorsed by ESA, NASA, the mission teams or the data authors.
+
+Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.

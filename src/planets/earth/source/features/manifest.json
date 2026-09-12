@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-surface-features-source@1",
+  "source": "Natural Earth 1:10m cultural and physical vectors (populated places, geographic regions, marine areas, rivers and lake centerlines)",
+  "snapshotDate": "2026-09-12",
+  "sourcePage": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+  "license": "Public domain (Natural Earth)",
+  "licenseEvidence": "https://www.naturalearthdata.com/about/terms-of-use/ (read 2026-09-12): all versions of Natural Earth raster and vector map data are in the public domain; no permission is needed to use them.",
+  "qualification": "Natural Earth places, regions, seas and rivers with English names, a scale rank and Wikidata ids. Places are unsized points ranked by population; regions and seas carry their bounding box as the extent; rivers carry their centreline. Names, ranks and geometry are Natural Earth's editorial choices, not an official gazetteer.",
+  "inputs": [
+    {
+      "path": "ne_10m_populated_places.zip",
+      "origin": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_populated_places.zip",
+      "bytes": 2811199,
+      "sha256": "cd149186f03d2603e0410da399b980a4357d0ac32d3a2305a49ed3dffcc41d7b"
+    },
+    {
+      "path": "ne_10m_geography_regions_points.zip",
+      "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_regions_points.zip",
+      "bytes": 87372,
+      "sha256": "2cf54b21fc684f0f7023886379c7ae9c5c716d8bd4c3ead19050f3a7f53e4f7d"
+    },
+    {
+      "path": "ne_10m_geography_regions_polys.zip",
+      "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_regions_polys.zip",
+      "bytes": 2038519,
+      "sha256": "cb7b9db200284ed1551f20eacc7f3333e9b5f311c19f7cb2670694529f688682"
+    },
+    {
+      "path": "ne_10m_geography_marine_polys.zip",
+      "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_marine_polys.zip",
+      "bytes": 940563,
+      "sha256": "a2d3395904c41e718e02c3ec5bc988712164c524c236fad32d95d282ca303b2a"
+    },
+    {
+      "path": "ne_10m_rivers_lake_centerlines.zip",
+      "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_rivers_lake_centerlines.zip",
+      "bytes": 2079507,
+      "sha256": "ded71b01870855ccfe19b51f2ec14c9bb48fae23c0e9f3c11974d426433b5c38"
+    }
+  ]
+}

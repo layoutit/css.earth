@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "650573e8546d16a7ce3bf971f37dd21982643630a477e153ef53069c4eaed13e"
+    "sha256": "d45ae98aab9389d25a02b6f5c6136b7499b1f32165fd346d9015576745518530"
   },
   "id": "ganymede",
   "properties": {
@@ -38,9 +38,14 @@
       "label": "Ganymede",
       "steps": [
         "verify-sources",
+        "title",
         "assets",
+        "features",
+        "panel-content",
+        "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
@@ -51,7 +56,7 @@
       "surfaces": [
         {
           "id": "body",
-          "source": "terrestrial",
+          "source": "geometry",
           "projection": "equirectangular",
           "lenses": [
             {
@@ -85,20 +90,40 @@
       "materials": [
         {
           "id": "lighting",
-          "source": "terrestrial",
+          "source": "raster",
           "model": "lit"
         }
       ],
       "sources": [
         {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "b23900c986d151dd5656d7dbe781c189d9ad25c3fe4398462a72b6746fa821b9"
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "fdbbd7de506e50653d0b5d57e5c9a2cd654ea91f0658b94f0ff4206bf2239356"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "dad480afc6e31e7fc961fe841ebdfec1d5f378c7691055f800a01988c8649251"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "8cc8c7fa97d83204fc4f1e0ca20e7fc2f2bff7a34aeff7d0259b597774af3599"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "24cb6f3b2e1d8f21a0d14f86b3f8fb2aa86f194e6a8559267e3829a2e6f7a406"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "f3ab4fb8d629419275f0a15edf9e1cc75eee1699f1fc54471f033ce906ce13cc"
+          "sha256": "a4eb854350db772e27c6ac80631f75095378be3db5cca1fd7332e84b877b8b8c"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "b383792c26a9347aa7730d98e43020200ddeba7bd0528da8253c30292c076062"
         },
         {
           "id": "title",
@@ -113,17 +138,26 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2ff31beb903ee65c63b4d741196b45b918b05380c51138478e1d817fa87a36ee"
+          "sha256": "1226fc64477bf1e22d8518c602c09e4fc37f5736f0845d6e120457ca5673c55f"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "0b14c40775ff55e03f351957f2a0ad0b3be4757eac37fe29175ee12b1cdbf281"
         }
-      ]
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2500
+      }
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/ganymede-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2f0f649543aaf79f2d137e4208981b8a9922147ee419850fae029ada4503351a"
+        "sha256": "b39b9672792736f72dbe9dd6356b94e3eb158752751b4d775e1e4b94338d7fb1"
       }
     },
     "catalog": {

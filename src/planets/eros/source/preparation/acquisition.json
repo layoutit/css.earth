@@ -66,6 +66,14 @@
       "archiveSha256": "a8d56ce1de8edbb47c9dd3054456c60382703d503fde8e0afbea041d994a22a0",
       "member": "data/eros_nearmsi_filter4.xml",
       "path": "reference/eros_nearmsi_filter4.xml"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "features/EROS_nomenclature_center_pts.zip",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EROS_nomenclature_center_pts.zip"
     }
   ]
 }

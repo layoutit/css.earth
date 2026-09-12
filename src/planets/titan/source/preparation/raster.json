@@ -1,0 +1,423 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/titan/",
+  "sourceWidth": 8192,
+  "sourceHeight": 4096,
+  "width": 4096,
+  "height": 2048,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "titan-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csstitan-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [
+    {
+      "id": "normal",
+      "output": "titan-{id}{suffix}.webp",
+      "thumbnail": "titan-lens-{id}.webp",
+      "source": "observations/titan-iss-2026.png",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "usgs-cassini-iss-2026-938nm",
+        "id": "normal",
+        "validity": {
+          "kind": "image-monochrome-no-data",
+          "noData": 0,
+          "centerLongitude": 180
+        }
+      }
+    },
+    {
+      "id": "radar",
+      "output": "titan-{id}{suffix}.webp",
+      "thumbnail": "titan-lens-{id}.webp",
+      "source": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-mosaic",
+        "id": "radar",
+        "consumer": "radar",
+        "format": "pds3-byte-equirectangular",
+        "metadata": {
+          "label": "Radar",
+          "falseColor": false,
+          "coverage": "Observed SAR and HiSAR swaths only; gray grid marks exact source no-data.",
+          "projection": {
+            "type": "Equirectangular",
+            "longitudeDirection": "east",
+            "latitudeType": "planetocentric",
+            "referenceRadiusMeters": 2575000
+          },
+          "interpretation": "Incidence-normalized Ku-band backscatter. Brightness reflects roughness, slopes and material properties; globe lighting is approximate."
+        }
+      }
+    },
+    {
+      "id": "topography",
+      "output": "titan-{id}{suffix}.webp",
+      "thumbnail": "titan-lens-{id}.webp",
+      "source": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "topography",
+        "label": "Measured height",
+        "format": "pds3-float-map",
+        "path": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
+        "grid": {
+          "projection": "equirectangular",
+          "productId": "GTFED00N090_T126_V01",
+          "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+          "targetName": "TITAN",
+          "width": 1440,
+          "height": 1440,
+          "pixelsPerDegree": 8,
+          "referenceRadiusMeters": 2575000,
+          "centerLongitudeWestDegrees": 180,
+          "sampleProjectionOffset": -0.5,
+          "lineProjectionOffset": 719.5,
+          "projectionRotation": "0.0000000",
+          "missingBits": "FF7FFFFB",
+          "longitudeRangeWest": [
+            0,
+            180
+          ]
+        },
+        "description": "Measured height · Cassini GTDR",
+        "title": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+        "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+        "minimum": -2500,
+        "maximum": 2500,
+        "colors": [
+          "#2166ac",
+          "#92c5de",
+          "#f7f7f7",
+          "#f4a582",
+          "#b35806"
+        ],
+        "labels": [
+          "−2500",
+          "0",
+          "+2500"
+        ],
+        "units": "m",
+        "consumer": "scientific-surfaces",
+        "sampling": "nearest",
+        "additionalGrids": [
+          {
+            "path": "science/b2-intake/GTFED00N270_T126_V01.IMG.gz",
+            "grid": {
+              "projection": "equirectangular",
+              "productId": "GTFED00N270_T126_V01",
+              "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+              "targetName": "TITAN",
+              "width": 1440,
+              "height": 1440,
+              "pixelsPerDegree": 8,
+              "referenceRadiusMeters": 2575000,
+              "centerLongitudeWestDegrees": 180,
+              "sampleProjectionOffset": 1439.5,
+              "lineProjectionOffset": 719.5,
+              "projectionRotation": "0.0000000",
+              "missingBits": "FF7FFFFB",
+              "longitudeRangeWest": [
+                180,
+                360
+              ]
+            }
+          }
+        ],
+        "displaySampling": "nearest"
+      }
+    },
+    {
+      "id": "interpolated",
+      "output": "titan-{id}{suffix}.webp",
+      "thumbnail": "titan-lens-{id}.webp",
+      "source": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "interpolated",
+        "label": "Interpolated height",
+        "format": "pds3-float-map",
+        "path": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
+        "grid": {
+          "projection": "equirectangular",
+          "productId": "GTIED00N090_T126_V01",
+          "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+          "targetName": "TITAN",
+          "width": 1440,
+          "height": 1440,
+          "pixelsPerDegree": 8,
+          "referenceRadiusMeters": 2575000,
+          "centerLongitudeWestDegrees": 180,
+          "sampleProjectionOffset": -0.5,
+          "lineProjectionOffset": 719.5,
+          "projectionRotation": "NULL",
+          "missingBits": "FF7FFFFB",
+          "longitudeRangeWest": [
+            0,
+            180
+          ]
+        },
+        "description": "Interpolated height · Cassini GTDR",
+        "title": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+        "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+        "minimum": -2500,
+        "maximum": 2500,
+        "colors": [
+          "#2166ac",
+          "#92c5de",
+          "#f7f7f7",
+          "#f4a582",
+          "#b35806"
+        ],
+        "labels": [
+          "−2500",
+          "0",
+          "+2500"
+        ],
+        "units": "m",
+        "consumer": "scientific-surfaces",
+        "sampling": "nearest",
+        "additionalGrids": [
+          {
+            "path": "science/b2-intake/GTIED00N270_T126_V01.IMG.gz",
+            "grid": {
+              "projection": "equirectangular",
+              "productId": "GTIED00N270_T126_V01",
+              "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+              "targetName": "TITAN",
+              "width": 1440,
+              "height": 1440,
+              "pixelsPerDegree": 8,
+              "referenceRadiusMeters": 2575000,
+              "centerLongitudeWestDegrees": 180,
+              "sampleProjectionOffset": 1439.5,
+              "lineProjectionOffset": 719.5,
+              "projectionRotation": "NULL",
+              "missingBits": "FF7FFFFB",
+              "longitudeRangeWest": [
+                180,
+                360
+              ]
+            }
+          }
+        ],
+        "displaySampling": "nearest"
+      }
+    },
+    {
+      "id": "coverage-distance",
+      "output": "titan-{id}{suffix}.webp",
+      "thumbnail": "titan-lens-{id}.webp",
+      "source": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "coverage-distance",
+        "label": "Distance to data",
+        "format": "pds3-float-map",
+        "path": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
+        "grid": {
+          "projection": "equirectangular",
+          "productId": "GTDED00N090_T126_V01",
+          "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+          "targetName": "TITAN",
+          "width": 1440,
+          "height": 1440,
+          "pixelsPerDegree": 8,
+          "referenceRadiusMeters": 2575000,
+          "centerLongitudeWestDegrees": 180,
+          "sampleProjectionOffset": -0.5,
+          "lineProjectionOffset": 719.5,
+          "projectionRotation": "NULL",
+          "missingBits": "FF7FFFFB",
+          "longitudeRangeWest": [
+            0,
+            180
+          ]
+        },
+        "description": "Distance to data · Cassini GTDR",
+        "title": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+        "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+        "minimum": 0,
+        "maximum": 1000,
+        "colors": [
+          "#253494",
+          "#2c7fb8",
+          "#7fcdbb",
+          "#edf8b1",
+          "#ffffd9"
+        ],
+        "labels": [
+          "0",
+          "500",
+          "1000"
+        ],
+        "units": "km",
+        "consumer": "scientific-surfaces",
+        "sampling": "nearest",
+        "additionalGrids": [
+          {
+            "path": "science/b2-intake/GTDED00N270_T126_V01.IMG.gz",
+            "grid": {
+              "projection": "equirectangular",
+              "productId": "GTDED00N270_T126_V01",
+              "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+              "targetName": "TITAN",
+              "width": 1440,
+              "height": 1440,
+              "pixelsPerDegree": 8,
+              "referenceRadiusMeters": 2575000,
+              "centerLongitudeWestDegrees": 180,
+              "sampleProjectionOffset": 1439.5,
+              "lineProjectionOffset": 719.5,
+              "projectionRotation": "NULL",
+              "missingBits": "FF7FFFFB",
+              "longitudeRangeWest": [
+                180,
+                360
+              ]
+            }
+          }
+        ],
+        "displaySampling": "nearest"
+      }
+    },
+    {
+      "id": "geology",
+      "output": "titan-{id}{suffix}.webp",
+      "thumbnail": "titan-lens-{id}.webp",
+      "source": "geology/titan-geologic-units.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "geology",
+        "label": "Geology",
+        "format": "geotiff",
+        "path": "geology/titan-geologic-units.tif",
+        "consumer": "geology",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "categories": [
+          {
+            "value": "Pl",
+            "label": "Plains",
+            "color": "#66f0cc"
+          },
+          {
+            "value": "Dn",
+            "label": "Dunes",
+            "color": "#b665cb"
+          },
+          {
+            "value": "Mt",
+            "label": "Hummocky terrain",
+            "color": "#ffcc66"
+          },
+          {
+            "value": "Ba",
+            "label": "Lakes and basins",
+            "color": "#6699ff"
+          },
+          {
+            "value": "Lb",
+            "label": "Labyrinth terrain",
+            "color": "#ff66e0"
+          },
+          {
+            "value": "Cr",
+            "label": "Craters",
+            "color": "#ff6666"
+          }
+        ],
+        "description": "Interpreted surface terrains",
+        "title": "Cassini global geomorphology · Lopes et al. (2020)",
+        "sourceUrl": "https://doi.org/10.17632/f6jrtyfp66.2",
+        "grid": {
+          "width": 2048,
+          "height": 1024,
+          "centerLongitude": 0,
+          "referenceRadiusMeters": 2575000,
+          "noData": -32768,
+          "origin": [
+            -8089601.082993717,
+            4044800.5414968585
+          ],
+          "resolution": [
+            7900.001057611052,
+            -7900.001057611052
+          ],
+          "wrapLongitude": true
+        },
+        "textureScale": 0.25,
+        "minimum": 0,
+        "maximum": 5,
+        "colors": [
+          "#66f0cc",
+          "#b665cb",
+          "#ffcc66",
+          "#6699ff",
+          "#ff66e0",
+          "#ff6666"
+        ]
+      }
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "titan-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "titan-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "csstitan-prepared-lighting-bank@1",
+    "billboardSchema": "csstitan-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "csstitan-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "source-gaspra-usgs-gazetteer-nomenclature-center-pts",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gazetteer of Planetary Nomenclature · Gaspra centre points",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://planetarynames.wr.usgs.gov/Page/GASPRA/target",
+      "label": "Source"
+    },
+    {
+      "role": "archive",
+      "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GASPRA_nomenclature_center_pts.zip",
+      "label": "Shapefile archive"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/gaspra/source/features/manifest.json",
+      "revision": "867bcb5c1ac1f7389478f8552a2d9f8f27c42942",
+      "sha256": "61c8b4787b3d0fdd7587690eac12243cdea76018599f898dc2e40c34429d7c78",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature.",
+      "scope": "Feature names, centres, diameters, extents and name origins.",
+      "evidence": "metadata_nomenclature_points_GASPRA.xml inside the pinned archive (datacred)."
+    },
+    {
+      "kind": "rights",
+      "text": "Public domain United States Government work.",
+      "scope": "The archived shapefile export and its metadata.",
+      "evidence": "metadata_nomenclature_points_GASPRA.xml inside the pinned archive (useconst: Public domain.)."
+    },
+    {
+      "kind": "limitation",
+      "text": "Centre points, diameters and latitude–longitude extents only; the Gazetteer publishes no feature outlines, and the export is regenerated weekly.",
+      "scope": "Prepared labels and outlines.",
+      "evidence": "planetarynames.wr.usgs.gov/GIS_Downloads lists centre-point files only; the archive metadata declares weekly updates."
+    }
+  ]
+}

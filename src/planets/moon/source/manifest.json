@@ -114,9 +114,9 @@
       "credit": "OpenSpace Project",
       "license": "MIT, see ../../LICENSE.OPENSPACE-MIT",
       "acquisition": "checked configuration at pinned OpenSpace commit",
-      "redistribution": "permitted with OpenSpace MIT notice",
+      "redistribution": "permitted with OpenSpace MIT notice Retained as scene-configuration provenance; no generic-lane preparation step reads it.",
       "consumers": [
-        "scene"
+        "provenance"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -670,6 +670,285 @@
           }
         ]
       }
+    },
+    {
+      "id": "usgs-gazetteer-moon-nomenclature-center-pts",
+      "path": "features/MOON_nomenclature_center_pts.zip",
+      "expectedBytes": 23842450,
+      "expectedSha256": "3cf4d02e87f7ab896f668acb8caed93ea9f36136a756c6e6c69b01b20e6e2671",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for the Moon on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: the Moon centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/MOON/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "moon-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1001,
+      "expectedSha256": "84ebaac0d933fe026ec361a5a4e1da024ec72c35c7d08bda0360a576778c4171",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "moon-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1406,
+      "expectedSha256": "59fd79640b484ce809a31d4d42c670a5ab5665cf4d16a7cc726cabcf3c1f2f01",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "moon-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 151,
+      "expectedSha256": "59bd7a28b740a273bfa4e1a643dfc7a84f426f7bcbc0b5eace30e275f7763d6a",
+      "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "moon-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedSha256": "118b64ae531350d309ff002299cdc2aed9fa42691d0614bcde65ea71cda423cd",
+      "expectedBytes": 1587,
+      "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40°) carried over from the retired static-surface geometry",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source recipe authored from the retired static camera plan and the shared Mercury/Venus/Mars marker layout",
+      "redistribution": "Factual physical parameters and synthetic marker colours; no imagery",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "moon-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedSha256": "5d765dda296849b1a3cc5e10960bc7a8e536c3918d270d82e92c782b965b49cb",
+      "expectedBytes": 17912,
+      "origin": "Repository-authored Moon raster preparation recipe (generic sphere lane) carrying the science interpretation blocks of the retired static recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared raster assets.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "moon-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedSha256": "6ae467372e802177e682595ad04da3e834bf70849f45f2fa496ece1c711c33b1",
+      "expectedBytes": 1405,
+      "origin": "Repository-authored Moon CSS geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared CSS scene geometry.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "moon-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedSha256": "a510ef9ffb0f65da272702eb8351bae713b0e4056d24f5926378b12424b6d8f6",
+      "expectedBytes": 222,
+      "origin": "Repository-authored Moon sky, sun, and marker recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared celestial assets.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "moon-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedSha256": "2b58cc254008f2428bd2ebd7d649fc8a0e5a6162b121d0c8a4e76f591ace8daa",
+      "expectedBytes": 100,
+      "origin": "Repository-authored Moon presentation capability recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared CSS presentation capabilities.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "moon-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedSha256": "b1254ab4d5825c07bfd6998b1eb0828dc86d4c8b080b318a555cc18fe9cfa8d7",
+      "expectedBytes": 664,
+      "origin": "Repository-authored Moon navigation asset recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared navigation asset.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "moon-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedSha256": "4b5f0037859de0fe24e5d5e3c504623d1d779870fa643312952db571658f0310",
+      "expectedBytes": 5398,
+      "origin": "Repository-authored Moon acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Preparation provenance and reproducibility.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "moon-object-content",
+      "path": "content/object.json",
+      "expectedSha256": "6bd33814b53c7057c82cddf3f305415db71f23674a7da7adba57ccd1fd23379c",
+      "expectedBytes": 36437,
+      "origin": "Repository-authored Moon panel, lens, legend and provenance data (replaces content/static.json)",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source JSON maintained beside the inputs.",
+      "redistribution": "Prepared shell content with source provenance.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
+    },
+    {
+      "id": "moon-apollo-11-eva-traverse-path",
+      "path": "features/traverses/APOLLO_11.ZIP",
+      "expectedBytes": 116096,
+      "expectedSha256": "b1f63da2a1764cb17d99c73206f3448a7cb8d36d70323563a80c200ec852f767",
+      "origin": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_11/APOLLO_11.ZIP",
+      "credit": "NASA/GSFC/Arizona State University (LROC)",
+      "license": "PDS archive extras (NASA LRO); NASA content not subject to copyright, credit NASA/GSFC/Arizona State University",
+      "licenseEvidence": [
+        "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_11"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_11/APOLLO_11.ZIP.",
+      "redistribution": "NASA data product, credit the publisher",
+      "consumers": [
+        "features"
+      ],
+      "title": "Apollo 11 EVA traverse (CDR/LMP paths)",
+      "displayCredit": "NASA/GSFC/Arizona State University (LROC)",
+      "sourceUrl": "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_11",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      }
+    },
+    {
+      "id": "moon-apollo-12-eva-traverse-path",
+      "path": "features/traverses/APOLLO_12.ZIP",
+      "expectedBytes": 313003,
+      "expectedSha256": "f37d068ccc628226bff6068a48555722de659bedfc64b3fb994039a61f727591",
+      "origin": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_12/APOLLO_12.ZIP",
+      "credit": "NASA/GSFC/Arizona State University (LROC)",
+      "license": "PDS archive extras (NASA LRO); NASA content not subject to copyright, credit NASA/GSFC/Arizona State University",
+      "licenseEvidence": [
+        "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_12"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_12/APOLLO_12.ZIP.",
+      "redistribution": "NASA data product, credit the publisher",
+      "consumers": [
+        "features"
+      ],
+      "title": "Apollo 12 EVA 1-2 traverse (CDR/LMP paths)",
+      "displayCredit": "NASA/GSFC/Arizona State University (LROC)",
+      "sourceUrl": "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_12",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -685,45 +964,6 @@
       "expectedSha256": "6cff6933451962c3db6fc5dc1f8989a8cee8af1cd919fcd43960ac6c1770ec7e",
       "expectedBytes": 387,
       "purpose": "Checked HYG database attribution and license notice"
-    },
-    {
-      "path": "preparation/raster.json",
-      "expectedBytes": 16784,
-      "expectedSha256": "eb9a4f0565bb48499d42a7c22ff78cd43a0767191200c934fdb98cfea92238eb"
-    },
-    {
-      "path": "preparation/geometry.json",
-      "expectedBytes": 3171,
-      "expectedSha256": "d4d8b436629b9942f82d9330ca4782377afa8fafa0929894e47e1e80bc275238"
-    },
-    {
-      "path": "preparation/celestial.json",
-      "expectedBytes": 201,
-      "expectedSha256": "d8aaee891662c0b1ca9da02b080f95cee4410a122c128e2ab584bb12dd167c3d"
-    },
-    {
-      "path": "content/static.json",
-      "expectedBytes": 31642,
-      "expectedSha256": "9cbf4a5fdb11412dbacf29e2fba7f9bcc7f748be0867d1a6c93671a73e7bf587",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
-      }
-    },
-    {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 664,
-      "expectedSha256": "b1254ab4d5825c07bfd6998b1eb0828dc86d4c8b080b318a555cc18fe9cfa8d7"
-    },
-    {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 5151,
-      "expectedSha256": "6b5ca65f263838194f6c28b2f5096dabf34b2aa93ccbb39d637d3babf2094c45"
-    },
-    {
-      "path": "preparation/physical.json",
-      "expectedBytes": 561,
-      "expectedSha256": "8b653becc8e1cdbda5b2c87b0e3e4b53b9af1095c263aeca982383e6f3e76966"
     },
     {
       "path": "editorial/factsheet-review.json",
@@ -850,6 +1090,50 @@
       "expectedSha256": "aec2287b52f7d4ba9e773e46bd12ef0332f5cb872403040ad9fc11c741a78ef0",
       "expectedBytes": 16526,
       "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
+    },
+    {
+      "id": "moon-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 115231,
+      "expectedSha256": "9c85d21238be3cbf1186a964d9eff8718dff93f934dbfdb7aa71076d19b39cc2",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "id": "moon-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 804723,
+      "expectedSha256": "9c2120b8b5f87ffddfd3276cac3b97442c1c17e5ecbb0975eb3c44ccd649547d",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 1749 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts moon: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

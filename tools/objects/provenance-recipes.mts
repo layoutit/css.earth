@@ -53,12 +53,19 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
     const name = (template: unknown, density: number, key?: string) => prefix + text(template).replaceAll('{id}', key ?? '')
       .replaceAll('{suffix}', density === 2 ? '@2x' : '').replaceAll('{density}', String(density));
     namedRecords(raster.surfaces).forEach((plan, index) => {
-      const used = [text(plan.source), ...paths(plan.coverage)];
+      // A science block names its pinned inputs (continuum frames, off-limb context images) beside the surface source.
+      // A continuum mosaic names its frames under the science block; its `source` is their directory, not an input.
+      const frames = Array.isArray(maybeRecord(maybeRecord(plan.science)?.synoptic)?.mapFiles);
+      const used = [...(frames ? [] : [text(plan.source)]), ...paths(plan.coverage), ...paths(plan.science)];
       const outputUrls = [...numbers(raster.densities).map(d => name(plan.output, d, plan.id)), name(plan.thumbnail, 1, plan.id)];
       if (!raster.polesCombined) outputUrls.push(...numbers(raster.densities).map(d => name(raster.polesOutput, d, plan.id)));
+      const emission = maybeRecord(raster.emission);
+      if (emission) outputUrls.push(...numbers(raster.densities).flatMap(d => [name(emission.offLimbOutput, d, plan.id), name(emission.limbOutput, d, plan.id)]));
+      const synoptic = maybeRecord(maybeRecord(plan.science)?.synoptic);
       add(plan.id, 'raster', `/surfaces/${index}`, used, 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
         urls: outputUrls, interpretation: { falseColor: plan.falseColor,
-          ...(surface(plan.id)?.coverageCompletion ? { coverageCompletion: surface(plan.id)?.coverageCompletion } : {}) },
+          ...(surface(plan.id)?.coverageCompletion ? { coverageCompletion: surface(plan.id)?.coverageCompletion } : {}),
+          ...(synoptic ? { synoptic: { kind: synoptic.kind, ...(synoptic.fits ? { fits: synoptic.fits } : {}), ...(maybeRecord(synoptic.continuum) ? { observationInterval: synoptic.continuum } : {}) } } : {}) },
       });
     });
     if (raster.polesCombined) add('surface-poles', 'raster', '/polesOutput', [], 'Assemble polar tiles from the interpreted surface maps.', {
@@ -80,16 +87,6 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
     if (raster.atmosphere) add('atmosphere', 'raster', '/atmosphere', paths(raster.atmosphere), 'Prepare the declared atmospheric material and observation layers.', {
       urls: numbers(raster.densities).flatMap(d => ['materialOutput', 'observationOutput', 'lightingOutput'].map(key => name(record(raster.atmosphere)[key], d))), lensIds: [],
     });
-  } else if (raster?.kind === 'observation-lenses') {
-    namedRecords(raster.lenses).forEach((plan, index) => add(plan.id, 'raster', `/lenses/${index}`, [text(plan.input)],
-      'Decode the observation or elevation grid, apply its coverage/palette policy, and project the surface and poles.', {
-        interpretation: { qualification: plan.qualification, coverage: plan.coverage, elevation: plan.elevation },
-      }));
-  } else if (raster?.kind === 'synoptic-emission') {
-    namedRecords(raster.variants).forEach((plan, index) => add(plan.id, 'raster', `/variants/${index}`, paths(plan),
-      'Prepare the declared synoptic map, stabilize polar sampling, project surface/poles, and prepare limb context.', {
-        interpretation: { kind: plan.kind, ...(plan.kind === 'continuum-disc-mosaic' ? { observationInterval: raster.continuum } : {}), fits: plan.fits },
-      }));
   } else if (terrestrial?.kind === 'solid-observation-body') {
     const plans = record(terrestrial.raster), geometry = record(terrestrial.geometry);
     namedRecords(plans.observations).forEach((plan, index) => {
@@ -221,5 +218,16 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       label: text(plan.title ?? plan.kind), urls: [prefix + plan.output], lensIds: [],
       interpretation: { kind: plan.kind, qualification: maybeRecord(plan.metadata)?.qualification },
     }));
+  const features = recipe('features');
+  if (features?.schema === 'cssearth-surface-features@1') {
+    const directory = text(features.directory);
+    const traces = maybeRecord(features.traces);
+    add('features', 'features', '', [`${directory}/manifest.json`, ...(features.archive === null ? [] : [`${directory}/${text(features.archive)}`]), text(features.surfaceMap), ...(typeof features.notes === 'string' ? [`${directory}/${features.notes}`] : []), ...(maybeRecord(features.sites) ? [`${directory}/${text(maybeRecord(features.sites)!.document)}`, ...(Array.isArray(maybeRecord(features.sites)!.inputs) ? (maybeRecord(features.sites)!.inputs as unknown[]).map(item => `${directory}/${text(item)}`) : [])] : []),
+        ...(traces ? [`${text(traces.directory)}/manifest.json`, `${text(traces.directory)}/${text(traces.archive)}`] : [])],
+      'Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.', {
+        label: 'Named features', urls: [prefix + text(features.output)], lensIds: [],
+        interpretation: { kind: 'nomenclature-centre-points', mapLeftEdgeLongitudeDeg: features.mapLeftEdgeLongitudeDeg, excludedTypeCodes: features.excludedTypeCodes },
+      });
+  }
   return { products, unresolved };
 }

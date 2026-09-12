@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "200",
+      "item": "Q25908426",
+      "title": "Alonso (crater)",
+      "url": "https://en.wikipedia.org/wiki/Alonso_(crater)",
+      "revision": "1330087848",
+      "extract": "6 ° E. It has a diameter of 25 kilometres (16 mi). The crater is named after Alonso, King of Naples, one of the characters in Shakespeare's The Tempest. The name Alonso was officially approved by the International Astronomical Union (IAU) in 1988."
+    },
+    {
+      "id": "2704",
+      "item": "Q25907785",
+      "title": "Inverness Corona",
+      "url": "https://en.wikipedia.org/wiki/Inverness_Corona",
+      "revision": "1330087800",
+      "extract": "Inverness Corona is a prominent geological feature on Uranus's moon Miranda. Located near Miranda's south pole, it is the youngest of three Mirandan features termed coronae—large oval or polygonal regions that contrast with Miranda's older, cratered terrain. It has a diameter of 234 kilometres (145 mi)."
+    },
+    {
+      "id": "6359",
+      "item": "Q2517547",
+      "title": "Verona Rupes",
+      "url": "https://en.wikipedia.org/wiki/Verona_Rupes",
+      "revision": "1330072420",
+      "extract": "Verona Rupes is the tallest known cliff on Miranda, a moon of Uranus, and plausibly holds the record for the highest cliff in the Solar System. It was discovered by the Voyager 2 space probe in January 1986."
+    }
+  ]
+}

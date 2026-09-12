@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "15732",
+      "item": "Q52084229",
+      "title": "Caleuche Chasma",
+      "url": "https://en.wikipedia.org/wiki/Caleuche_Chasma",
+      "revision": "1344987166",
+      "extract": "Caleuche Chasma is a Y-shaped chasma on Pluto's moon, Charon. Caleuche Chasma is 400 km (250 mi) long. The feature was discovered using stereoscopic processing of New Horizons images.1 mi) deep, it is the deepest known feature on the natural satellite, and one of the deepest known canyons in the Solar System."
+    },
+    {
+      "id": "15733",
+      "item": "Q52084225",
+      "title": "Mandjet Chasma",
+      "url": "https://en.wikipedia.org/wiki/Mandjet_Chasma",
+      "revision": "1367438373",
+      "extract": "Mandjet Chasma is a chasma on Pluto's moon Charon.3 mi) deep with an average width of 30 km (19 mi). The chasma is part of a global tectonic belt: a series of canyons, scarps, and troughs that traverse the face of Charon along the northern edge of Vulcan Planitia."
+    },
+    {
+      "id": "15735",
+      "item": "Q52084197",
+      "title": "Butler Mons",
+      "url": "https://en.wikipedia.org/wiki/Butler_Mons",
+      "revision": "1374156307",
+      "extract": "Butler Mons is a mountain located on Pluto's moon Charon, on the side that faces Pluto."
+    },
+    {
+      "id": "15736",
+      "item": "Q20745351",
+      "title": "Kubrick Mons",
+      "url": "https://en.wikipedia.org/wiki/Kubrick_Mons",
+      "revision": "1298874317",
+      "extract": "Kubrick Mons is the name given to the largest of a series of mountain peaks on Pluto's moon Charon that rise out of depressions in the Vulcan Planitia region. The feature was first recorded by the Long Range Reconnaissance Imager (LORRI) aboard the New Horizons spacecraft during a flyby on 15 July 2015."
+    },
+    {
+      "id": "15738",
+      "item": "Q41600093",
+      "title": "Dorothy (Charonian crater)",
+      "url": "https://en.wikipedia.org/wiki/Dorothy_(Charonian_crater)",
+      "revision": "1344986810",
+      "extract": "Dorothy is the largest known impact basin on Pluto's moon Charon. The crater was discovered by the New Horizons space probe in 2015 during its flyby of Pluto and its moons."
+    },
+    {
+      "id": "15739",
+      "item": "Q52084123",
+      "title": "Nasreddin (crater)",
+      "url": "https://en.wikipedia.org/wiki/Nasreddin_(crater)",
+      "revision": "1330072190",
+      "extract": "Nasreddin is a crater on Pluto's largest moon, Charon. The crater was first observed by NASA's New Horizons space probe on its flyby of Pluto in 2015. The name was chosen as a reference to Nasreddin, the hero of humorous folktales told throughout the Middle East, Southern Europe, and parts of Asia."
+    },
+    {
+      "id": "15740",
+      "item": "Q52084125",
+      "title": "Pirx (crater)",
+      "url": "https://en.wikipedia.org/wiki/Pirx_(crater)",
+      "revision": "1322277509",
+      "extract": "Pirx is a 90 km wide impact crater on Pluto's natural satellite Charon, discovered in 2015 by the New Horizons spacecraft as it performed its flyby of Pluto and its system of moons. It is located in at 55.2°N 256.18°E. The crater is located near Charon's north pole."
+    }
+  ]
+}

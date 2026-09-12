@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-surface-features-source@1",
+  "source": "IAU/USGS Gazetteer of Planetary Nomenclature, Iapetus centre points",
+  "snapshotDate": "2026-09-11",
+  "sourcePage": "https://planetarynames.wr.usgs.gov/Page/IAPETUS/target",
+  "license": "Public domain (United States Government work)",
+  "licenseEvidence": "metadata_nomenclature_points_IAPETUS.xml inside the archive declares the use constraint “Public domain.”",
+  "qualification": "IAU-adopted feature names with Gazetteer centre coordinates, diameters and latitude–longitude extents, positive-east longitudes 0–360°. Centre points only: feature outlines are not published, and features without a diameter are not labelled.",
+  "inputs": [
+    {
+      "path": "IAPETUS_nomenclature_center_pts.zip",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IAPETUS_nomenclature_center_pts.zip",
+      "bytes": 220580,
+      "sha256": "46ed90aa5c81481750e7c9a1c4956af7e89e0c536b3f4d52a1227c2386290ff3"
+    }
+  ]
+}

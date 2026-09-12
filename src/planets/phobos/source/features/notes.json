@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "5707",
+      "item": "Q1983616",
+      "title": "Stickney (crater)",
+      "url": "https://en.wikipedia.org/wiki/Stickney_(crater)",
+      "revision": "1334393093",
+      "extract": "Stickney is the largest Impact crater on Phobos, the inner satellite of Mars. It is 9 km (5.6 mi) in diameter, taking up a substantial proportion of the moon's surface."
+    },
+    {
+      "id": "14259",
+      "item": "Q19760056",
+      "title": "Phobos (moon)",
+      "url": "https://en.wikipedia.org/wiki/Phobos_(moon)",
+      "revision": "1372391976",
+      "extract": "Phobos is the innermost and larger of the two natural satellites of Mars, the other being Deimos. The two moons were discovered in 1877 by American astronomer Asaph Hall. Phobos is named after the Greek god of fear and panic, who is the twin brother of Deimos and son of Ares (Mars)."
+    },
+    {
+      "id": "14262",
+      "item": "Q19758684",
+      "title": "Limtoc",
+      "url": "https://en.wikipedia.org/wiki/Limtoc",
+      "revision": "1313878977",
+      "extract": "Limtoc is an impact crater on the surface of Mars's moon Phobos. The crater, the diameter of which is 2 kilometers, is located within the larger and better-known Stickney crater."
+    }
+  ]
+}
