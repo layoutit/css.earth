@@ -1,0 +1,47 @@
+#
+#   VizieR Astronomical Server vizier.cds.unistra.fr
+#    Date: 2026-09-12T23:14:13 [V7.6]
+#   In case of problem, please report to:	cds-question@unistra.fr
+#
+#
+#Coosys	J2000:	eq_FK5 J2000
+#INFO	service_protocol=ASU	  IVOID of the protocol through which the data was retrieved
+#INFO	request_date=2026-09-12T23:14:13	  Query execution date
+#INFO	request=https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=VII%2f20%2fcatalog&Sh2=49	  Full request URL
+#INFO	contact=cds-question@unistra.fr	  Email or URL to contact publisher
+#INFO	server_software=VizieR/7.6	  Software version
+#INFO	publisher=CDS	  Data centre that produced the VOTable
+#INFO	MaxTuples=50000	
+
+#RESOURCE=yCat_7020
+#Name: VII/20
+#Title: Catalogue of HII Regions (Sharpless 1959)
+#INFO	ivoid=ivo://cds.vizier/vii/20	    IVOID of underlying data collection
+#INFO	data_ivoid=ivo://cds.vizier/vii/20	    IVOID of underlying data collection
+#INFO	creator=Sharpless S.	    First author or institution
+#INFO	cites=bibcode:1959ApJS....4..257S	    Article or Data origin sources
+#INFO	journal=ApJS	    Journal name
+#INFO	original_date=1959	    Year of the article publication
+#INFO	reference_url=https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/20	    Dataset landing page
+#INFO	publication_date=1998-02-28	    Date of first publication in the data centre
+#INFO	rights_uri=https://cds.unistra.fr/vizier-org/licences_vizier.html	    Licence URI
+#Coosys	B1900:	eq_FK4 B1900
+#Table	VII_20_catalog:
+#Name: VII/20/catalog
+#Title: The Sharpless (Sh 2) Catalogue
+#Column	Sh2	(I4)	[1/313]+ Sharpless HII catalog number	[ucd=meta.id;meta.main]
+#Column	GlLund	(F5.1)	[0/3600[ Galactic longitude based on Lund pole	[ucd=pos.galactic.lon]
+#Column	GbLund	(F5.1)	[-900/+900] Galactic latitude based on Lund pole	[ucd=pos.galactic.lat]
+#Column	GLon	(F5.1)	[0/3600[ Galactic longitude (1)	[ucd=pos.galactic.lon]
+#Column	GLat	(F5.1)	[-900/+900] Galactic latitude (1)	[ucd=pos.galactic.lat]
+#Column	RA1900	(A10)	Hours RA, 1900.0	[ucd=pos.eq.ra;meta.main]
+#Column	DE1900	(A9)	Sign Dec, 1900.0	[ucd=pos.eq.dec;meta.main]
+#Column	Diam	(I4)	Maximun angular diameter of H II region	[ucd=phys.angSize;src]
+#Column	Form	(I1)	[1/3] Classification as to form: 1=circular; 2=elliptical; 3=irregular	[ucd=src.class]
+#Column	Struct	(I1)	[1/3] Classification as to structure, from 1=amorphous to 3=filamentary	[ucd=meta.code;src.morph]
+#Column	Bright	(I1)	[1/3] Classification as to brightness, from 1=faintest to 3=brightest	[ucd=src.class]
+Sh2	GlLund	GbLund	GLon	GLat	RA1900	DE1900	Diam	Form	Struct	Bright
+ 	deg	deg	deg	deg	"h:m:s"	"d:m:s"	arcmin	 	 	
+----	-----	-----	-----	-----	----------	---------	----	-	-	-
+  49	344.5	 -0.7	 16.8	  0.7	18 13 00.0	-14 00 00	  90	3	3	3
+
