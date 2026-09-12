@@ -73,7 +73,8 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
         consumerLabel:`${id} ${emblem ? 'emblem' : 'artwork'}`,ownerPath:file,locator:`/entries/${index}/sourceBinding`,evidence:ref.evidence,lensIds:[],limitations:[],credit:explorationText(source.credit)});
       return parseExplorationImage({ id: image.id, src: emblem ? image.src : image.url,
         width: image.width, height: image.height, bytes: image.bytes, sha256: image.sha256,
-        kind: emblem ? 'emblem' : source.kind, sourceUrl: emblem ? source.sourceUrl : source.sourcePage, credit: source.credit });
+        kind: emblem ? 'emblem' : source.kind, sourceUrl: emblem ? source.sourceUrl : source.sourcePage, credit: source.credit,
+        ...(image.subject === undefined ? {} : { subject: image.subject }) });
     });
     for (const image of entries) {
       const bytes = await input(`public${image.src}`);

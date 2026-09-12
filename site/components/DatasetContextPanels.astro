@@ -68,12 +68,15 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
           tabindex={tabbed ? 0 : undefined} hidden={tabbed && index > 0}>
           <article class="planet-machine" {...entry.attribute}>
             <SelectedContent title={entry.title} lead={entry.lead} description={entry.description} href={entry.href}>
-              <div slot="header" class:list={{ 'planet-machine-preview': Boolean(entry.image || entry.emblem) }}>
+              <div slot="header" class:list={{ 'planet-machine-preview': Boolean(entry.image || entry.emblem),
+                'planet-machine-preview-overlay': entry.image?.kind === 'published-photograph' }}>
                 <div class:list={['planet-machine-heading', entry.image?.kind === 'published-photograph' && 'planet-machine-heading-backdrop']}>
                   <h3 class="planet-lens-details-title">{entry.title}</h3>
                   {entry.dates && <span class="planet-selected-content-meta">{entry.dates}</span>}
                 </div>
-                {entry.image && <a class="planet-machine-image-link" href={entry.image.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${entry.title} artwork — ${entry.image.credit}`}>
+                {entry.image && <a class:list={['planet-machine-image-link', entry.image.subject && 'planet-machine-image-crop']}
+                  style={entry.image.subject && `--frame-w:${entry.image.width};--frame-h:${entry.image.height};--subject-x:${entry.image.subject.left};--subject-y:${entry.image.subject.top};--subject-w:${entry.image.subject.width};--subject-h:${entry.image.subject.height}`}
+                  href={entry.image.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${entry.title} artwork — ${entry.image.credit}`}>
                   <img class="planet-machine-image" src={entry.image.src} width={entry.image.width} height={entry.image.height} alt={`${entry.title} illustration`} loading="lazy" decoding="async" />
                 </a>}
                 {entry.emblem && <a class={entry.image ? 'planet-machine-emblem' : 'planet-machine-image-link'} href={entry.emblem.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${entry.title} emblem — ${entry.emblem.credit}`}>
@@ -96,6 +99,10 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
             {context.sources.map(group => <li class="planet-resource-row">
               {group.links.map(link => <a class="planet-resource-label" data-source={link.id} href={link.href} target="_blank" rel="noreferrer">{link.title}</a>)}
               {group.credit && <span class="planet-resource-description">{group.credit}</span>}
+              {group.supporting.length > 0 && <details class="planet-resource-supporting">
+                <summary>{group.supporting.length} supporting {group.supporting.length === 1 ? 'file' : 'files'}</summary>
+                {group.supporting.map(link => <a class="planet-resource-label" data-source={link.id} href={link.href} target="_blank" rel="noreferrer">{link.title}</a>)}
+              </details>}
             </li>)}
           </ul>
         </div>
