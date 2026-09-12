@@ -38,6 +38,10 @@
           "noData": 0,
           "centerLongitude": 180,
           "resampling": "source-georeferenced-bilinear"
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "resolutionScale": 2

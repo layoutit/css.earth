@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "mimas",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9980e8a2d6be85d59e9fa0b1cb82ce052d981beb6ea514ec07feed5b517b2fcb"
+    "sha256": "3b0fdaa7fcba6486c08852d8c3b51689978e8d8fb307c7f99b931541db78c5a3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "05e0f10925f40c390c6c7115a2482adad9c5e3e099e445dd053c2686377ba400",
+      "sha256": "36ff61912771d30b358dff5c52db241335a2277fa5bbb0ffc2f126e8f622e808",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -38,6 +38,10 @@
                 "kind": "image-monochrome-no-data",
                 "noData": null,
                 "centerLongitude": 0
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -46,6 +50,10 @@
                 "kind": "image-rgb-no-data",
                 "noData": null,
                 "centerLongitude": 180
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           ],
@@ -499,7 +507,7 @@
       "sha256": "f8ffa667b2c35ec890973ea3300a33d3ee506f596b53d3818cdfee56943e038b",
       "bytes": 6959979,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -552,7 +560,7 @@
       "sha256": "e8191c356f899817536ef1d71dbddedc21077bd6bc44f1883264df2929a540ca",
       "bytes": 17694840,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -623,7 +631,7 @@
       "sha256": "303d5653875d507e8859a26d0afdedd0173c7d4e691f27c3266ca63d1aa4f97f",
       "bytes": 1848860,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -689,7 +697,7 @@
       "sha256": "cb2368b033cde32ae6cda6831d248299929518cbcf747bc832e671cc5751fc2c",
       "bytes": 9881891,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -719,7 +727,7 @@
       "sha256": "3c9f0a9edf4e6350a50076036fe14aa055b3e92329fca3fc276285c79fb0c312",
       "bytes": 10979,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -739,7 +747,7 @@
       "sha256": "65137b88ab2c9016e6ad318e0b95d1f2639b1bb17d0c3586a8694902b62f6631",
       "bytes": 1000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -765,7 +773,7 @@
       "sha256": "5fc3398feafe7379934e6a6b3b145450f96088981cf4a150bb1cadf072036836",
       "bytes": 147178,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -792,7 +800,7 @@
       "sha256": "9597bd1485f74cf558df8674b3f221bc9939775a5be3b8ce042e69ce34814b2c",
       "bytes": 152,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -819,7 +827,7 @@
       "sha256": "28297a1c7b8eff50e9860d2894ba2c820b8facbaa623dbd7e031e688ead480c5",
       "bytes": 1391,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -831,7 +839,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Cassini 2017 monochrome mosaic at 216 m per source pixel. Photographed shadows and variable resolution remain; Directional Shadows add approximate lighting. The surface follows a simplified version of the released 2025 shape model."
       ],
@@ -846,6 +854,10 @@
           "kind": "image-monochrome-no-data",
           "noData": null,
           "centerLongitude": 0
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -857,13 +869,13 @@
           "url": "/scenes/mimas/mimas-normal-thumbnail.webp",
           "bytes": 3512,
           "sha256": "5a2389f1edc4b94f766810fee2b2bfa95a546ad0e8f05d91b98adf86d603b981",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mimas/mimas-normal-surface@2x.webp",
-          "bytes": 5022396,
-          "sha256": "d75ebf0ccac010e33b6af02c79fd708a78978332ec39bfd003c70cbb35f55108",
-          "verification": "bytes-verified"
+          "bytes": 6635886,
+          "sha256": "c2e727a8729b5c1580bc63811cf1a05facbcf583a70759aededbb7ac3e08f311",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -874,7 +886,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors exceed human vision. Source resolution varies; seams and residual photographed shading remain. The surface follows a simplified version of the released 2025 shape model."
       ],
@@ -889,6 +901,10 @@
           "kind": "image-rgb-no-data",
           "noData": null,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -900,13 +916,13 @@
           "url": "/scenes/mimas/mimas-enhanced-thumbnail.webp",
           "bytes": 6952,
           "sha256": "8dd35129a7c0920bf379219fa69c54e4f5c46ecea83609576dc46b7866fc7391",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mimas/mimas-enhanced-surface@2x.webp",
-          "bytes": 5763164,
-          "sha256": "7df5425573da46ed36fcd0ff643f2dda2d20ecd1a8c6ee2bbd4cb726e50afdd3",
-          "verification": "bytes-verified"
+          "bytes": 8189424,
+          "sha256": "ffdee2030ac3cce437040c56bccd6b634ce287b6612770addfb4fdb2bebcf3f8",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -940,19 +956,19 @@
           "url": "/scenes/mimas/mimas-elevation-thumbnail.webp",
           "bytes": 7984,
           "sha256": "1f562fc11bd7a38e18555734c15bb7d7abda51c8dae1491c2a6894ff418084a3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mimas/mimas-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/mimas/mimas-elevation-surface@2x.webp",
           "bytes": 2419150,
           "sha256": "cd244dd80eb2a96e0d2c2714d7eff15a492306598eb5aa21ff88b5c9bc7763f5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1012,7 +1028,7 @@
           "url": "/scenes/mimas/mimas-features.json",
           "bytes": 82487,
           "sha256": "da8445f7fdec6d858c37736dc6c59f27b8d6e41c16bf1ef6d28773f3d4a84973",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

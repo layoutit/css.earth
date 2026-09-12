@@ -14,6 +14,14 @@
 
 ## Evidence
 
+Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; the 8K latitude-band images from #151, geometry and lighting are retained. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
+
+| View | Both prepared levels, before → current |
+| --- | --- |
+| normal | 175.2 → 178.0 kB |
+
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/c13f3643b53171523dbf59dc92fc7ce49e9c0e24/src/planets/europa/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+
 Photographic refresh, 12 September 2026, on base `3efdf2c9`: these matched
 Chrome crops show Pwyll at 1280 × 720, DPR 1. The before atlas was reproduced
 with the exact `53b262bd` delivery hash. The fractures gain detail without moving

@@ -29,6 +29,10 @@
             0.4
           ],
           "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       {
@@ -47,6 +51,10 @@
             0.4
           ],
           "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     ],
