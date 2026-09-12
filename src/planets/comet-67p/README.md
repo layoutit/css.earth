@@ -18,6 +18,8 @@ the current eight-image selection and its calibration.
 
 ## Evidence
 
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
+
 Recorded results for the southern coverage update:
 
 - **Coverage:** estimated accepted area rose from 56.25% to 71.26%, using 24

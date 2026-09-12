@@ -17,6 +17,8 @@ they are not observed terrain, named geography or Arecibo labels.
 
 ## Evidence
 
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
+
 The recorded independent checks compare Spitzer viewing angles with the paper and test the osculating position against JPL vectors. [Raw responses](source/reference/) are retained. Those earlier checks have no cited browser report.
 
 For the surface-place addition on base `53b262bd`, browser checks on 2026-09-12 covered both lobe searches and camera arrivals. Switching to Arecibo hides these labels; searching for one there selects the matching Hubble · Spitzer model. Shadows stayed Off. The runtime parser accepted both entries and a fresh download matched the published catalog's byte count and SHA-256. Surface assets are unchanged.
