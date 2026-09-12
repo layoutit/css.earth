@@ -28,7 +28,6 @@ export default {
     navigation: fileURLToPath(new URL('./navigation/index.ts', import.meta.url)),
     testing: fileURLToPath(new URL('./testing.ts', import.meta.url)),
     'scene-native-waits': fileURLToPath(new URL('./runtime/scene-native-waits.ts', import.meta.url)),
-    'point-field-selection-worker': fileURLToPath(new URL('./stars/point-field-selection-worker.ts', import.meta.url)),
     'world-context-planner-worker': fileURLToPath(new URL('./universe/world-context-planner-worker.ts', import.meta.url)),
     'prepared-object-worker': fileURLToPath(new URL('./prepared-object-worker.ts', import.meta.url)),
   },
