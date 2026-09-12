@@ -8,6 +8,7 @@ import type { PreparedResources, PreparedResourceDemand } from "./prepared-resid
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
 import { selectPreparedTextureLevel, type PreparedTextureLevels } from './prepared-texture-levels.js';
+import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
 import type { PreparedSurfaceFeaturePlan } from '../labels/surface-feature-types.js';
 export type PreparedSelection = ObjectSelection;
 export interface PreparedView {
@@ -34,6 +35,7 @@ export type PreparedViewBinding = { target: number } & (
   { kind: "view-attribute"; property: string; source: "scene-pitch" | "control-yaw" | "zoom" | "level-of-detail-stage" | "scene-matrix"; precision: number | null } |
   { kind: "view-property"; property: string; source: "billboard-opacity" | "marker-opacity"; precision: number | null } |
   { kind: "silhouette-fit"; minimumRadius: number; unitScale: number } |
+  ({ kind: "silhouette-step-property"; property: string } & PreparedSilhouetteSteps) |
   { kind: "zoom-property"; property: string } | { kind: "shell-scale"; variable: string; defaultZoom: number } |
   { kind: "counter-rotation"; systemTransform: string | null }
 );
@@ -175,6 +177,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const round = (value: number, precision: number | null) => precision === null ? value : Math.round(value * 10 ** precision) / 10 ** precision;
   const formatNumber = (value: number) => Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
   const target = (index: number) => index === -1 ? stage : nodes[index];
+  // Hysteresis needs the step each silhouette binding last published.
+  const silhouetteSteps = new Map<PreparedViewBinding, number>();
   return Object.freeze({ cameraElement, sceneElement, activate, revealGroups,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.lens) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
@@ -253,6 +257,14 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
               `scale(${formatNumber(radial * binding.unitScale)}, ${formatNumber(tangential * binding.unitScale)}) ` +
               `rotate(${formatNumber(-radialAngle)}deg)`;
             if (element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
+          }
+        } else if (binding.kind === "silhouette-step-property") {
+          // A prepared value per published silhouette step, such as the surface seam outset.
+          const level = selectPreparedSilhouetteStep(binding, levelOfDetail.silhouetteDiameter, silhouetteSteps.get(binding));
+          if (level !== undefined) {
+            silhouetteSteps.set(binding, level);
+            const value = binding.levels[level].value;
+            if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
           }
         } else if (binding.kind === "zoom-property") { writeStyle(element, binding.property, String(view.zoom)); styleWrites++; }
         else if (binding.kind === "shell-scale") {

@@ -2,7 +2,9 @@ export type PreparedProjectiveStyle = Pick<CSSStyleDeclaration, "width" | "heigh
 export interface PreparedProjectiveLayout { width?: string; height?: string; backgroundSize?: string; }
 export interface PreparedProjectiveTextureLeaf {
   tag?: string; className?: string; style: string;
-  projectiveTextureLayer?: { schema: string; rasterScale?: number; textureMatrix: string | readonly number[]; frameMatrix: string | readonly number[] };
+  projectiveTextureLayer?: { schema: string; rasterScale?: number; textureMatrix: string | readonly number[]; frameMatrix: string | readonly number[];
+    /** Preparation composes this stepped outset into the leaf transform; runtime transports the result. */
+    seamOutset?: { property: string; scale: readonly number[] } };
 }
 
 const PREPARED_PROJECTIVE_TEXTURE_LAYER_SCHEMA =
