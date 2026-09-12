@@ -30,6 +30,10 @@ and stops at the first failure. It takes about forty minutes on a laptop; the
 the ones your change touches. Choose checks by what changed, and say in the PR
 which ones you ran and which you did not.
 
+**Standing limit: GitHub Actions does not run on this repository.** Jobs complete
+as a failure with no steps recorded, so no branch has CI evidence and every check
+must be run locally. Cite this section in a PR instead of explaining it again.
+
 ## Where things live
 
 | You want to | Read |
