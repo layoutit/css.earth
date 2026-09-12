@@ -1,0 +1,30 @@
+{
+  "id": "pds-telescope-irtf",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "NASA Infrared Telescope Facility (IRTF) 3.2m Telescope",
+  "identifiers": [
+    {
+      "type": "PDS4 LID",
+      "value": "urn:nasa:pds:context:telescope:irtf-maunakea.3m2"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://pds.nasa.gov/data/pds4/context-pds4/telescope/irtf-maunakea.3m2_1.4.xml",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds.nasa.gov/data/pds4/context-pds4/telescope/irtf-maunakea.3m2_1.4.xml",
+      "checkedOn": "2026-09-11",
+      "locator": "Telescope/Instrument_Host title, type, aperture and geodetic coordinates"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA Planetary Data System",
+  "version": "1.4"
+}

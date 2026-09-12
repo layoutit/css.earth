@@ -8,7 +8,7 @@ import { validateObjectProvenance } from '../../src/platform/object-provenance.m
 
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 const prepared = parsePreparedSources(await read('../prepared-sources.json'));
-const exploration = parsePreparedExploration(await read('../prepared-spacecraft.json'), prepared.sources);
+const exploration = parsePreparedExploration(await read('../prepared-machines.json'), prepared.sources);
 const context = async (objectId: string, lensId: string) => datasetContext(objectId, lensId,
   validateObjectProvenance(await read(`../../src/planets/${objectId}/prepared/provenance.json`), objectId),
   exploration.graph, exploration.catalog, prepared.usage, prepared.sources);
@@ -46,5 +46,5 @@ test('unresolved capture attribution stays unresolved, without guessing a missio
 
 test('an unknown dataset does not inherit body, factsheet or shared-scene sources', async () => {
   const missing = await context('earth', 'missing-dataset');
-  assert.deepEqual(missing, { missions: [], spacecraft: [], notes: [], sources: [] });
+  assert.deepEqual(missing, { missions: [], machines: [], notes: [], sources: [] });
 });

@@ -674,14 +674,14 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   .planet-search-category { padding-inline: 10px 14px; box-shadow: var(--explorer-float-shadow); }
 
   /* Spacecraft opens like a map's layers button. */
-  .planet-spacecraft-toggle {
+  .planet-machine-toggle {
     grid-row: 3;
     grid-column: 2;
     width: var(--explorer-search-height);
     height: var(--explorer-search-height);
     box-shadow: var(--explorer-float-shadow);
   }
-  .planet-spacecraft-toggle:disabled { visibility: hidden; }
+  .planet-machine-toggle:disabled { visibility: hidden; }
 
   /* The wordmark sits over the scene like a map watermark. */
   .explorer-brand-row {
@@ -694,9 +694,9 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   }
 
   .explorer-brand-row,
-  .planet-spacecraft-toggle { transition: opacity 160ms ease, visibility 0s; }
+  .planet-machine-toggle { transition: opacity 160ms ease, visibility 0s; }
   body:is([data-sheet="half"], [data-sheet="full"]) .explorer-brand-row,
-  body[data-sheet="full"] .planet-spacecraft-toggle {
+  body[data-sheet="full"] .planet-machine-toggle {
     opacity: 0;
     visibility: hidden;
     transition: opacity 160ms ease, visibility 0s 160ms;
@@ -765,7 +765,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
       margin-inline: 0 calc(-1 * var(--explorer-panel-left));
       padding-inline: 0 var(--explorer-panel-left);
     }
-    .planet-spacecraft-toggle { grid-row: 2; }
+    .planet-machine-toggle { grid-row: 2; }
   }
 
   /* Settings opens as a secondary sheet over the information. The spacecraft

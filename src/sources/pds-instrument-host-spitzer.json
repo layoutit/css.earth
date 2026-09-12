@@ -1,0 +1,30 @@
+{
+  "id": "pds-instrument-host-spitzer",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Spitzer Space Telescope",
+  "identifiers": [
+    {
+      "type": "PDS4 LID",
+      "value": "urn:nasa:pds:context:instrument_host:spacecraft.spitzer"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://pds.nasa.gov/data/pds4/context-pds4/instrument_host/spacecraft.spitzer_1.0.xml",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds.nasa.gov/data/pds4/context-pds4/instrument_host/spacecraft.spitzer_1.0.xml",
+      "checkedOn": "2026-09-11",
+      "locator": "Telescope/Instrument_Host title, type, aperture and geodetic coordinates"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA Planetary Data System",
+  "version": "1.0"
+}
