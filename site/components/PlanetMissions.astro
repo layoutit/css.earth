@@ -1,13 +1,13 @@
 ---
 import type { MissionRecord } from '../../src/platform/exploration-catalog.mts';
 import type { ContributionEdge } from '../../src/platform/exploration-contributions.mts';
-import DatasetSpacecraft from './DatasetSpacecraft.astro';
-import SpacecraftDetails from './SpacecraftDetails.astro';
-import { spacecraftAgencies } from '../dataset-spacecraft.mts';
+import DatasetMachines from './DatasetMachines.astro';
+import MachineDetails from './MachineDetails.astro';
+import { machineAgencies } from '../dataset-machines.mts';
 import { AGENCIES, EXPLORATION } from '../exploration-catalog.mts';
 interface Props { objectId: string; missions: readonly MissionRecord[]; notes: readonly ContributionEdge[]; }
 const { objectId, missions, notes } = Astro.props;
-const agencies = spacecraftAgencies(missions);
+const agencies = machineAgencies(missions);
 const initialMissionIds = agencies[0]?.missions.map(mission => mission.id);
 const resultsId = `${objectId}-mission-results`;
 const noteGroups = [...new Map(notes.map(edge => [JSON.stringify(edge.attribution), edge.attribution])).values()];
@@ -24,7 +24,7 @@ const evidenceUrl = (value: string) => { try { const url = new URL(value); retur
     </button>)}
   </nav>
   <section class="planet-mission-details" id={resultsId} data-mission-results aria-label={`${agencies[0].name} missions`}>
-    <DatasetSpacecraft {objectId} {missions} visibleMissionIds={initialMissionIds} />
+    <DatasetMachines {objectId} {missions} visibleMissionIds={initialMissionIds} />
   </section>
 </>}
 {noteGroups.length > 0 && <section class="planet-capture-notes" aria-label="Attribution limits">
@@ -34,7 +34,7 @@ const evidenceUrl = (value: string) => { try { const url = new URL(value); retur
     const views = EXPLORATION.graph.datasets.filter(view => view.objectId === objectId && lensIds.has(view.lensId));
     const href = evidenceUrl(attribution.evidence);
     return <article>
-      {attribution.kind === 'unresolved' ? <><h4>{attribution.label}</h4><p>{attribution.reason}</p></> : attribution.kind === 'spacecraft' && <><p>The source identifies this spacecraft but does not identify the mission.</p><SpacecraftDetails spacecraftId={attribution.spacecraftId} {objectId} contributed={true} /></>}
+      {attribution.kind === 'unresolved' ? <><h4>{attribution.label}</h4><p>{attribution.reason}</p></> : attribution.kind === 'machine' && <><p>The source identifies this machine but does not identify the mission.</p><MachineDetails machineId={attribution.machineId} {objectId} contributed={true} /></>}
       <ul class="planet-mission-datasets">{views.map(view => <li><a href={view.href} data-dataset-link>{view.label}</a></li>)}</ul>
       {href ? <a href={href} target="_blank" rel="noreferrer">View source evidence</a> : <p>{attribution.evidence}</p>}
     </article>;

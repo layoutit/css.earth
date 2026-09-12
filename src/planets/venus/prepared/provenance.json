@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5bdcb9dbfbad472cc18fd3b17a31f9ca13ca5b27a5b93ce7439c3358dbbc3488"
+    "sha256": "05a92f5d90dc463689a74506ff5185ad777a6aaa5a9202dd3bc6ac91cce30610"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -752,8 +752,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "magellan",
+            "kind": "machine",
+            "machineId": "magellan",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
             "missionId": "magellan"
           }
@@ -799,8 +799,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "magellan",
+            "kind": "machine",
+            "machineId": "magellan",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
             "missionId": "magellan"
           }

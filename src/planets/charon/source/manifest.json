@@ -41,8 +41,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "missionId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"
           }
@@ -146,8 +146,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "missionId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
           }

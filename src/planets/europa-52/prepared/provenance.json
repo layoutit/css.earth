@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "96b847e2f20584be95e2c941deb7b8c70af42a626113ce79dd0cb65036b7d470"
+    "sha256": "b92d1912566fe87dc5d3d2ef2874da64f9bcf967dd3ca6c6c209e78b56c0d7b9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -310,6 +310,16 @@
       "path": "shape/52_Europa_mpcd.obj",
       "origin": "https://observations.lam.fr/astero/3Dshape/52_Europa_mpcd.obj",
       "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
       "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
       "acquisition": "Restore the unmodified OBJ through source/preparation/acquisition.json; the public-site cookie is recorded there.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",

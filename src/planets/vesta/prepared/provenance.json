@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "435fd2d90ef589bd9110bbd84f855c57bc84fcc6bc4e10e3a84a62efec7fc898"
+    "sha256": "da1efa3dffe2acc6ea3fdd61f8609bccff7c12d99c8db1e4f78dbc25c3f61f86"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -398,8 +398,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "dawn",
+            "kind": "machine",
+            "machineId": "dawn",
             "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/truecolor/Vesta_true_color_HAMO-1-2_global.png",
             "missionId": "dawn"
           }
@@ -453,8 +453,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "dawn",
+            "kind": "machine",
+            "machineId": "dawn",
             "evidence": "https://dawngis.dlr.de/data/Vesta/dtm/HAMO/Vesta_HAMO_dtm_global_64.pds.zip",
             "missionId": "dawn"
           }
@@ -509,8 +509,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "dawn",
+            "kind": "machine",
+            "machineId": "dawn",
             "evidence": "Dawn Framing Camera HAMO Clementine ratios; pinned DLR attached label identifies VESTA and the released HAMO archive.",
             "missionId": "dawn"
           }

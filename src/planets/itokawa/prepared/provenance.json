@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1904d55f07a6780c77ae456bdcd06f5ac0dd5087e27e194f4d7fcaa5ce079551"
+    "sha256": "c21e2cefe6e23ebc4150a0bf3d41376f25adccfb98b0b9b937b21f494a31f902"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -389,8 +389,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hayabusa",
+            "kind": "machine",
+            "machineId": "hayabusa",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab",
             "missionId": "hayabusa"
           }

@@ -20,6 +20,8 @@ Rosetta imaged about 60% of the body; unseen terrain is less certain. The publis
 
 The 18:37:16 candidate needed a 1.56 gain, above the 1.35 limit; later frames had poorer footprint agreement and are excluded. Neither selected image has a surface-intercept anchor or fitted image-to-shape registration. The former near-opposition Minnaert correction is superseded; no global albedo is inferred.
 
+**Faithfulness status:** The OSIRIS photographic lens is deferred. The separate Stooke Monochrome map remains source material with its own published control; it does not promote the OSIRIS frames to a registered surface.
+
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="steins-source-record"></a>

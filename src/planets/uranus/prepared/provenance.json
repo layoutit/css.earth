@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b6da0c2e37b0a3ec89e7eb15f3405afd1b0e4719763a2519ffa1272218638fc5"
+    "sha256": "74ef89d8ef21af0e6320a666241270031a9dd70d941f210eefcee6d75489eaec"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1031,8 +1031,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
             "missionId": "hubble"
           }
@@ -1074,8 +1074,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
             "missionId": "hubble"
           }
@@ -1117,8 +1117,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "hubble",
+            "kind": "machine",
+            "machineId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
             "missionId": "hubble"
           }

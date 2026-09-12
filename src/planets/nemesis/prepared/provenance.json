@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cc6f120e9d6ef31401932afce568e95334db6d9fbeb20e396a36cedfba2bc808"
+    "sha256": "2ccdb794228583a4726d6c8f11a6bf8a6c732d41d8f74b3598bc8fa2e70f15df"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -310,6 +310,16 @@
       "path": "shape/128_Nemesis_mpcd.obj",
       "origin": "https://observations.lam.fr/astero/3Dshape/128_Nemesis_mpcd.obj",
       "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
       "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
       "acquisition": "Restore the unmodified OBJ through source/preparation/acquisition.json; the public-site cookie is recorded there.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",

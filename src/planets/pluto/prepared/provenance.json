@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea0a44c8537f734ce9ad38c9c415e9ed6cfdf941c15b61a3d5c98a99abf92565"
+    "sha256": "fb6ca3943de4102dd83d55374d4a20866ae0021106d6181d2ec11e61c52b42ff"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -427,8 +427,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "evidence": "https://science.nasa.gov/resource/pluto-global-color-map/",
             "missionId": "new-horizons"
           }
@@ -473,8 +473,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif",
             "missionId": "new-horizons"
           }
@@ -519,8 +519,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "spacecraft",
-            "spacecraftId": "new-horizons",
+            "kind": "machine",
+            "machineId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif",
             "missionId": "new-horizons"
           }

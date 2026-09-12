@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d2e42fec48e5620b0bc1243479305977cc9ecf5c26bbb1ef8be829854e8289ea"
+    "sha256": "466d66f6ea388ccd9cd54be0035bd80af8fc9b163a3303e5faf9720b3710898d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -312,6 +312,16 @@
       "path": "shape/rashalom.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/rashalom.obj",
       "credit": "Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "arecibo-305m",
+            "evidence": "The preserved credit for this input reads: Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy",
+            "missionId": "arecibo-planetary-radar"
+          }
+        ]
+      },
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",

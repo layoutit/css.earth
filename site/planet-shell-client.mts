@@ -280,7 +280,11 @@ export function mountPlanetShell({
 }
 
 function createInformationTabsController(drawer: HTMLElement, lifetime: SceneLifetime, requestedGroup?: string) {
-  const card = drawer.querySelector<HTMLElement>('.planet-information-panel');
+  return createTabsController(drawer.querySelector<HTMLElement>('.planet-information-panel'), lifetime, requestedGroup);
+}
+
+/** Shared tablist behaviour: selection, roving tabindex and arrow keys. */
+export function createTabsController(card: HTMLElement | null, lifetime: SceneLifetime, requestedGroup?: string) {
   const group = (item: HTMLElement) => item.dataset.informationGroup ?? 'detail';
   const tabs = [...(card?.querySelectorAll<HTMLElement>('[data-information-tab]:not([hidden])') ?? [])]
     .filter(tab => requestedGroup === undefined || group(tab) === requestedGroup);
