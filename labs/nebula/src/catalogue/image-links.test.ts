@@ -23,4 +23,5 @@ test('DataLink metadata opens as browser records and cannot masquerade as an ima
   assert.equal(new URL(links.sourceUrl).searchParams.get('api'), 'table');
   assert.equal(new URL(links.sourceUrl).searchParams.get('source'), accessUrl);
   assert.equal(links.viewUrl, null); assert.equal(links.downloadUrl, null);
+  assert.equal(links.sourceLabel, 'File listing');
 });

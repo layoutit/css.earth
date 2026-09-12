@@ -64,3 +64,15 @@ The acquisition command requests only bounded JPEG thumbnails, four concurrently
 - **Optional facts:** HEASARC supplies constellation and historical apparent V magnitude for 109 entries. `:` marks an approximate magnitude; `*` marks an originally rounded whole-number magnitude. Neither is a numerical error estimate. M102 has no invented HEASARC row.
 
 Default thumbnail framing uses 1.4×the adopted major apparent extent, with a 180″ minimum; an unknown extent uses an authored 1680″ preview. Sorting uses the documented object extent separately. All source URLs, retrieval times and response hashes are in the supplement. Three focused tests validate the complete presentation, pin/path guards and damaged/changed image rejection; live acquisition decoded and hash-checked every cached JPEG.
+
+## Centered survey images
+
+The catalogue gallery uses CDS HiPS colour products through the [HiPS2FITS JPEG cutout service](https://alasky.cds.unistra.fr/hips-image-services/hips2fits). The survey identifiers, source links and credits are owned by the lab catalogue's survey definitions; the sky window comes from the existing sourced object center and display extent. These are visual discovery products, not photometrically calibrated reconstruction inputs. The browser requests only the selected object's 512px previews and an explicitly opened 2048px view. No generated mosaics are committed.
+
+| Product | Published mapping and provenance |
+| --- | --- |
+| `CDS/P/DSS2/color` | Red/blue photographic plates, with green from their mean; STScI/NASA with Palomar and UK Schmidt plates; colour/HiPS processing CDS. [Published properties and full plate acknowledgement](https://alasky.cds.unistra.fr/DSS/DSSColor/properties), [survey source](https://archive.stsci.edu/dss/). The existing DSS acknowledgement above also applies. |
+| `CDS/P/allWISE/color` | Red W4 (22μm), green W2 (4.6μm), blue W1 (3.4μm), from atlas imagery. NASA-funded WISE/NEOWISE; UCLA, JPL-Caltech and IPAC; CDS colour/HiPS product. [Published properties and acknowledgement](https://alasky.cds.unistra.fr/AllWISE/RGB-W4-W2-W1/properties), [IRSA mission and release documentation](https://irsa.ipac.caltech.edu/Missions/wise.html). Atlas seams can be conspicuous, including around M24. |
+| `CDS/P/2MASS/color` | Near-infrared J/H/Ks colour; University of Massachusetts and IPAC/Caltech, funded by NASA and NSF; CDS colour/HiPS product. [Published properties](https://alasky.cds.unistra.fr/2MASS/Color/properties), [IRSA source and acknowledgement](https://irsa.ipac.caltech.edu/Missions/2mass.html). Strong stellar signal does not imply visible diffuse gas. |
+
+All views use TAN/ICRS, zero rotation and the same center/field. This provides a shared sky comparison, not a fitted registration or a guarantee of complete faint-emission coverage. Display size is not native resolution. Retain original calibrated products and source-specific registration/acceptance before any later star removal or volume baking.

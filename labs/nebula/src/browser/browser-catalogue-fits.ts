@@ -12,9 +12,10 @@ context.on('page', page => page.on('download', download => downloads.push(downlo
 const page = await context.newPage();
 try {
   await page.goto(`${base}/catalogue?object=m42`);
+  await page.getByRole('button', {name:'Archive records',exact:true}).click();
   await page.getByRole('group', {name:'Filter archive'}).getByRole('button', {name:'MAST',exact:true}).click();
   await page.waitForFunction(() => document.querySelector('.catalogue-product-links a'));
-  const source = page.locator('.catalogue-product-links a').filter({hasText:'Source'}).first();
+  const source = page.locator('.catalogue-product-links a').filter({hasText:'View FITS'}).first();
   const href = await source.getAttribute('href'); assert.ok(href);
   const url = new URL(href); assert.equal(url.hostname,'irsa.ipac.caltech.edu'); assert.equal(url.searchParams.get('api'),'image');
   const next = context.waitForEvent('page'); await source.click(); const viewer = await next;
@@ -33,7 +34,7 @@ try {
   await writeFile(`${directory}/fits-viewer.json`,JSON.stringify({status:'passed',viewer:viewer.url(),fits:url.searchParams.get('url'),visiblePixels:true,downloads},null,2));
   console.log('PASS Source click: exact public FITS rendered in IRSA with visible pixels and zero browser downloads.');
   await page.getByRole('group', {name:'Filter archive'}).getByRole('button', {name:'IRSA',exact:true}).click();
-  const tableSource = page.locator('.catalogue-product-links a').filter({hasText:'Source'}).first();
+  const tableSource = page.locator('.catalogue-product-links a').filter({hasText:'File listing'}).first();
   const tableHref = await tableSource.getAttribute('href'); assert.ok(tableHref);
   const tableUrl = new URL(tableHref); assert.equal(tableUrl.searchParams.get('api'), 'table');
   assert.ok(tableUrl.searchParams.get('source')?.includes('/datalink/'));

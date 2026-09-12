@@ -3,6 +3,7 @@ import { archiveProviders, readArchiveQuery, readMessierCatalogue, readMessierIn
   type ArchiveQuery, type MessierCatalogue, type MessierInventory, type MessierObject } from './types';
 import { imageSuitability, inventoryStorage } from './selection';
 import { imageLinks } from './image-links';
+import { SurveyGallery } from './survey-gallery';
 import { imageRank, rankImages, type ImageOrder } from './image-ranking';
 import { readMessierPresentation } from './presentation';
 import { arcseconds, CatalogueThumbnail, displayObjectType, ObjectBrowser, objectExtent, orderObjects, type ObjectAppearance, type ObjectSort } from './object-browser';
@@ -16,7 +17,7 @@ const names: Record<ArchiveProvider, string> = { mast: 'MAST', irsa: 'IRSA', eso
 const bands = { all: 'All wavelengths', optical: 'Optical', infrared: 'Infrared', ultraviolet: 'Ultraviolet', radio: 'Radio / microwave', highEnergy: 'X-ray / gamma', unknown: 'Unreported' } as const;
 type Band = keyof typeof bands;
 type ImageRole = ReturnType<typeof imageSuitability>['role'];
-const roleLabels: Record<ImageRole, string> = { detail: 'Detail candidate', context: 'Context candidate', unrated: 'Unrated' };
+const roleLabels: Record<ImageRole, string> = { detail: 'Fine sampling', context: 'Coarse sampling', unrated: 'Sampling unknown' };
 const bandRanges: Record<Exclude<Band, 'all' | 'unknown'>, readonly [number, number]> = {
   optical: [380e-9, 780e-9], infrared: [780e-9, 1e-3], ultraviolet: [10e-9, 380e-9], radio: [1e-3, Infinity], highEnergy: [0, 10e-9],
 };
@@ -104,6 +105,7 @@ export function CatalogueView() {
   const [selectedId, setSelectedId] = useState(readObjectId), [objectSearch, setObjectSearch] = useState(''), [objectType, setObjectType] = useState('all');
   const [provider, setProvider] = useState<ArchiveProvider | 'all'>('all'), [band, setBand] = useState<Band>('all');
   const [imageRole, setImageRole] = useState<ImageRole | 'all'>('all');
+  const [imageMode, setImageMode] = useState<'surveys' | 'archives'>('surveys');
   const [imageOrder, setImageOrder] = useState<ImageOrder>('best');
   const [resolution, setResolution] = useState('all'), [productSearch, setProductSearch] = useState('');
   const [reload, setReload] = useState(0), [loading, setLoading] = useState(true), [error, setError] = useState('');
@@ -167,7 +169,7 @@ export function CatalogueView() {
       `${object.id} ${object.name} ${object.aliases.join(' ')}`.toLowerCase().includes(query)), objectSort, appearances);
   }, [catalogue, objectSearch, objectType, objectSort, appearances]);
   const target = inventory?.targets.find(item => item.objectId === selectedId);
-  const selectedQueries = useSelectedQueries(target, reload);
+  const selectedQueries = useSelectedQueries(imageMode === 'archives' ? target : undefined, reload);
   const queries = inventory?.targets.flatMap(item => item.queries) ?? [];
   const completeCount = queries.filter(query => query.status === 'complete').length;
   const partialCount = queries.filter(query => query.status === 'truncated').length, errorCount = queries.filter(query => query.status === 'error').length;
@@ -211,14 +213,19 @@ export function CatalogueView() {
         </div>
         {!selected && !loading && catalogue && <p className="catalogue-empty" role="status">Choose a Messier object from the catalogue.</p>}
         {selected && <>
+          <div className="catalogue-image-modes" role="group" aria-label="Image collection">
+            <button type="button" aria-pressed={imageMode === 'surveys'} onClick={() => setImageMode('surveys')}>Survey images</button>
+            <button type="button" aria-pressed={imageMode === 'archives'} onClick={() => setImageMode('archives')}>Archive records</button>
+          </div>
+          {imageMode === 'surveys' ? <div className="catalogue-candidates"><SurveyGallery key={selected.id} object={selected} majorArcsec={objectExtent(selected, appearances.get(selected.id)).majorArcsec} /></div> : <>
           <div className="catalogue-filters">
             <div className="catalogue-archive-filters" role="group" aria-label="Filter archive">
               <button type="button" aria-pressed={provider === 'all'} onClick={() => setProvider('all')}>All archives</button>
               {archiveProviders.map(archive => <button key={archive} type="button" aria-pressed={provider === archive} onClick={() => setProvider(archive)}>{names[archive]}</button>)}
             </div>
-            <label className="catalogue-field" title="Metadata triage across the selected archives: usable detail within the field, wider object coverage and combined products. This is not a visual quality measurement.">Rank images<select value={imageOrder} onChange={event => {
+            <label className="catalogue-field" title="Metadata triage across the selected archives: target footprint, reported sampling and combined products. This is not a visual quality measurement.">Order records<select value={imageOrder} onChange={event => {
               const value = event.target.value; if (value === 'best' || value === 'resolution' || value === 'coverage') setImageOrder(value);
-            }}><option value="best">Best available first</option><option value="resolution">Finest resolution</option><option value="coverage">Widest field</option></select></label>
+            }}><option value="best">Metadata order</option><option value="resolution">Finest resolution</option><option value="coverage">Widest field</option></select></label>
             <label className="catalogue-field">Wavelength<select value={band} onChange={event => { const next = Object.keys(bands).find(value => value === event.target.value); if (next) setBand(next as Band); }}>
               {Object.entries(bands).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label>
             <label className="catalogue-field" title="Provisional role from reported angular resolution and catalogue extent. Close-ups are retained; neither role establishes complete coverage.">Image role<select value={imageRole} onChange={event => {
@@ -240,6 +247,7 @@ export function CatalogueView() {
               {storage.unknownSizes ? ` · ${storage.unknownSizes.toLocaleString()} sizes unreported` : ''}
             </p>}
           </div>
+          </>}
         </>}
       </section>
     </main>
@@ -283,7 +291,7 @@ function ArchiveGroup({ provider, queries, loaded, images, object, order }: {
   const failed = queries.some(query => loaded[query.provider]?.error || query.status === 'error');
   return <section className="catalogue-archive" aria-label={`${label} candidates`} aria-busy={busy}>
     <div className="catalogue-archive-heading"><h3>{label}</h3>
-      <span className="catalogue-archive-status">{images.length} shown / {count} cached · {order === 'best' ? 'Best available first' : order === 'resolution' ? 'Finest resolution' : 'Widest field'}</span>
+      <span className="catalogue-archive-status">{images.length} shown / {count} cached · {order === 'best' ? 'Metadata order' : order === 'resolution' ? 'Finest resolution' : 'Widest field'}</span>
       {queries.map(query => <span key={query.provider} className="catalogue-archive-status" data-status={query.status}
         title="The result limit and missing metadata constrain this ranking; query completion is not exhaustive archive coverage.">{names[query.provider]}: {queryStatus(query)}</span>)}
     </div>
@@ -318,7 +326,7 @@ function ImageRow({ image, object }: { image: ArchiveImage; object: MessierObjec
       {image.raDegrees !== null && image.decDegrees !== null && <span className="catalogue-product-meta" title="Reported ICRS image center, retained for later sky registration.">{image.raDegrees.toFixed(4)}°, {image.decDegrees.toFixed(4)}°</span>}
       {image.footprint && <span className="catalogue-product-meta" title={image.footprint}>Sky footprint available ⓘ</span>}</td>
     <td><div className="catalogue-product-links"><a href={links.sourceUrl} target="_blank" rel="noreferrer"
-      title={links.sourceIsViewer ? 'Inspect this archive product in the IRSA web viewer.' : 'Open the published archive record.'}>Source ↗</a>
+      title={links.sourceLabel === 'File listing' ? 'Metadata table only; this product has no resolved image preview.' : links.sourceIsViewer ? 'Load the exact FITS in the IRSA viewer; large files may take time.' : 'Published metadata record; it may not include an image.'}>{links.sourceLabel} ↗</a>
       {links.viewUrl && links.viewUrl !== links.sourceUrl && <a href={links.viewUrl} target="_blank" rel="noreferrer">View image ↗</a>}
       {links.filesUrl && links.filesUrl !== links.sourceUrl && <a href={links.filesUrl} target="_blank" rel="noreferrer">Files ↗</a>}
       {links.downloadUrl && <a href={links.downloadUrl} target="_blank" rel="noreferrer" title={`Download original file; advertised size ${bytes(image.estimatedBytes)}.`}>Download{links.fits ? ' FITS' : ''} ↓</a>}</div></td>

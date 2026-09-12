@@ -38,7 +38,10 @@ async function screen(name: string) {
 }
 try {
   await page.goto(`${base}/catalogue?object=m42`); await ready(); await recordsReady();
-  assert.equal(await page.getByRole('combobox', {name:'Rank images'}).inputValue(), 'best');
+  assert.equal(await page.getByRole('button', {name:'Survey images',exact:true}).getAttribute('aria-pressed'), 'true');
+  assert.equal(await page.locator('.catalogue-product-table').count(), 0);
+  await page.getByRole('button', {name:'Archive records',exact:true}).click(); await recordsReady();
+  assert.equal(await page.getByRole('combobox', {name:'Order records'}).inputValue(), 'best');
   assert.equal(await page.locator('.catalogue-archive').count(), 1);
   const objects = page.getByRole('listbox', { name: 'Select Messier object' });
   assert.equal(await objects.getByRole('option').count(), 110);
@@ -58,7 +61,7 @@ try {
   assert.equal(await objects.getByRole('option').count(), 1);
   await page.getByRole('searchbox', { name: 'Find object' }).fill('');
   visited.add('m31'); await objects.locator('[data-object-id="m31"]').click(); assert.equal(new URL(page.url()).searchParams.get('object'), 'm31');
-  await page.reload(); await ready(); assert.equal(await objects.getByRole('option', { selected: true }).getAttribute('data-object-id'), 'm31');
+  await page.reload(); await ready(); await page.getByRole('button', {name:'Archive records',exact:true}).click(); await recordsReady(); assert.equal(await objects.getByRole('option', { selected: true }).getAttribute('data-object-id'), 'm31');
   await page.getByRole('combobox', { name: 'Order by' }).selectOption('number');
   visited.add('m32'); await objects.getByRole('option', { selected: true }).focus(); await objects.getByRole('option', { selected: true }).press('ArrowDown');
   assert.equal(await objects.getByRole('option', { selected: true }).getAttribute('data-object-id'), 'm32');
@@ -73,7 +76,7 @@ try {
     await recordsReady();
     assert.equal(await page.locator('.catalogue-archive').count(), 1);
     assert.ok(await page.locator('.catalogue-product-table tbody tr').count() > 0);
-    const sourceLinks = page.locator('.catalogue-product-links a').filter({ hasText: 'Source' });
+    const sourceLinks = page.locator('.catalogue-product-links a').filter({ hasText: /Source record|View FITS|File listing/ });
     assert.ok(await sourceLinks.count() > 0);
     for (const href of await sourceLinks.evaluateAll(links => links.map(link => (link as HTMLAnchorElement).href))) assert.ok(/^https?:\/\//.test(href));
     await page.getByRole('searchbox', { name: 'Find image' }).fill('no-candidate-with-this-sentinel');
@@ -86,7 +89,7 @@ try {
     if (available.imagesPath) {
       const archivePage = (url: URL) => url.pathname.endsWith(`/${available.imagesPath}`);
       await page.route(archivePage, route => route.fulfill({ contentType: 'application/json', body: '{}' }));
-      await page.reload(); await ready(); await recordsReady();
+      await page.reload(); await ready(); await page.getByRole('button', {name:'Archive records',exact:true}).click(); await recordsReady();
       await page.getByRole('group', {name:'Filter archive'}).getByRole('button', {name:available.provider.toUpperCase(),exact:true}).click();
       const archive = page.getByRole('region', { name: `${available.provider.toUpperCase()} candidates` });
       assert.match(await archive.locator('[role="alert"]').innerText(), /changed since this snapshot/);
@@ -97,7 +100,7 @@ try {
     }
   }
   await page.route(snapshot, route => route.fulfill({ status: 404, body: 'Not prepared' }));
-  await page.reload(); await ready(); assert.equal(await objects.getByRole('option').count(), catalogue.objects.length);
+  await page.reload(); await ready(); await page.getByRole('button', {name:'Archive records',exact:true}).click(); await recordsReady(); assert.equal(await objects.getByRole('option').count(), catalogue.objects.length);
   assert.equal(await page.getByText('No archive snapshot yet.', { exact: true }).count(), 1); await screen('missing');
   await page.unroute(snapshot);
   await page.route(snapshot, route => route.fulfill({ status: 503, body: 'Unavailable' }));

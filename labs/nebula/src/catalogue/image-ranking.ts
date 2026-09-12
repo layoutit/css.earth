@@ -1,4 +1,5 @@
 import type { ArchiveImage, MessierObject } from './types';
+import { footprintCoverage } from './footprint';
 
 export type ImageOrder = 'best' | 'resolution' | 'coverage';
 export function isSupportImage(image: ArchiveImage) {
@@ -23,16 +24,18 @@ export function imageRank(image: ArchiveImage, object: MessierObject, majorArcse
     // FOV can describe a bounding diameter. Only clearly disjoint fields are penalized here.
     outside = separation > (fieldArcsec + majorArcsec) / 2;
   }
+  const footprint = footprintCoverage(image, object, majorArcsec);
+  outside ||= footprint.center === false;
   const support = isSupportImage(image), reasons: string[] = [];
   if (support) reasons.push('Support product');
-  if (outside) reasons.push('Off target');
-  if (ratio !== null) reasons.push(ratio >= 1 ? 'Wide field' : 'Close-up');
-  if (detail !== null) reasons.push(detail >= 256 ? 'More detail' : detail >= 64 ? 'Moderate detail' : 'Low detail');
+  if (outside) reasons.push('Target center outside field');
+  else if (footprint.referenceExtent === true) reasons.push('Reference extent inside footprint');
+  else if (footprint.center === true) reasons.push('Target center inside · partial extent');
+  else reasons.push('Coverage unverified');
   if (image.calibrationLevel >= 3) reasons.push('Combined product');
-  if (image.previewUrl) reasons.push('Preview available');
-  if (detail === null) reasons.push('Detail unreported');
+  reasons.push(image.previewUrl ? 'Preview link available' : 'No image preview');
   const score = (detail === null ? -25 : 5 * Math.log2(1 + Math.max(0, detail))) +
-    (ratio === null ? -10 : 35 * Math.min(1, ratio)) + (image.calibrationLevel >= 3 ? 12 : 0) +
+    (footprint.referenceExtent === true ? 35 : footprint.center === true ? 10 : ratio === null ? -10 : 0) + (image.calibrationLevel >= 3 ? 12 : 0) +
     (image.previewUrl ? 4 : 0) - (outside ? 120 : 0) - (support ? 1000 : 0);
   return { score, reasons, support, outside, detail, fieldRatio: ratio };
 }
