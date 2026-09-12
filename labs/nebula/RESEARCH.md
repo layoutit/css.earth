@@ -15,6 +15,8 @@ Updated 2026-09-11. Start with [NEXTSTEPS.md](NEXTSTEPS.md) to continue the work
 
 ## Name and novelty
 
+The [12 September 2026 novelty assessment](docs/novelty-assessment.md) audits the completed Helix compiler against direct astronomical and rendering precedents. Its broad foundations are established; a narrower method or systems contribution needs comparative evidence. It distinguishes the coarse joint velocity/shape fit from the subsequent projected-emission fit and conditional depth placement.
+
 The active planetary-nebula direction is an evidence-preserving **nebula compiler**: structure extraction, alternative depth hypotheses, observation fitting, then offline delivery. The [Helix structure inspector](docs/nebula-compiler.md) uses starlets and directional curvature with full-frame evidence. The [joint-fit experiment](docs/joint-fit.md) now connects multiband ridge skeletons and real HCO+ velocities to two coarse 3D molecular-wall hypotheses, prepared as neutral PolyCSS volumes. Their remaining image/withheld-velocity mismatch exposes inadequate single-component geometry; no unique depth or measured density has been recovered. The [research survey](docs/multimodal-research.md) records spectroscopy and forward-modeling alternatives.
 
 A descriptive name is **image-based volumetric visualization guided by a density model**. It combines established image registration, projective material mapping, volume rendering and catalogue visualization techniques. The CSS/DOM delivery, repeatable baking and integrated authoring workflow are potentially distinctive engineering; no research-novelty or world-first claim has been established.
