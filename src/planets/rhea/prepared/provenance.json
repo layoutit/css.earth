@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "69b8eb3c072cd4da97492f9e419643197c3b84b9c034343eaefecfa3568c0472"
+    "sha256": "c618f9c9b1749f6e491540a937c8ba4a960444d61054a9f4b6740e1c9f6d4715"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -787,6 +787,16 @@
       "path": "vims/rhea-infrared.tif",
       "origin": "https://doi.org/10.17189/ctqe-ta30",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
       "licenseEvidence": [
         "https://doi.org/10.17189/ctqe-ta30",
@@ -897,6 +907,16 @@
     {
       "kind": "source-input",
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+            "missionId": "cassini"
+          }
+        ]
+      },
       "license": "Public PDS archive; cite authors",
       "licenseEvidence": [
         "https://sbn.psi.edu/pds/resource/weirichrheashape.html"
