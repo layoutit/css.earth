@@ -1139,20 +1139,6 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 .planet-diagnostic-record:hover { color: var(--shell-text); }
 .planet-diagnostic-record[aria-pressed="true"] { color: #e98679; }
 
-.planet-diagnostic-toggle {
-  display: inline-flex;
-  flex: 0 0 auto;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-}
-.planet-diagnostic-toggle input {
-  width: 12px;
-  height: 12px;
-  margin: 0;
-  accent-color: currentColor;
-}
-
 .planet-view-scale {
   display: inline-flex;
   flex: 0 0 auto;

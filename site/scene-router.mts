@@ -52,6 +52,7 @@ export function createSceneRouter({
   let motionEnabled = false;
   let heliosphereEnabled = false;
   let highContrastSky = false;
+  let asteroidBodiesEnabled = false;
   let asteroidOrbitsEnabled = false;
   let asteroidLabelsEnabled = false;
   let highlightedClassification: string | null = null;
@@ -127,7 +128,7 @@ export function createSceneRouter({
       if (!shellOwner) {
         const owner: { shell: Shell | null } = { shell: null };
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
+        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
           onMotionChange(next) { if (shellOwner === owner && active) {
             motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
           } },
@@ -138,6 +139,10 @@ export function createSceneRouter({
           onHeliosphereChange(next) { if (shellOwner === owner && active) {
             heliosphereEnabled = next === true;
             worldContextMount?.setHeliosphereEnabled?.(heliosphereEnabled);
+          } },
+          onAsteroidBodiesChange(next) { if (shellOwner === owner && active) {
+            asteroidBodiesEnabled = next === true;
+            worldContextMount?.setAsteroidBodiesEnabled?.(asteroidBodiesEnabled);
           } },
           onAsteroidOrbitsChange(next) { if (shellOwner === owner && active) {
             asteroidOrbitsEnabled = next === true;
@@ -621,6 +626,7 @@ export function createSceneRouter({
         worldContextMount = value;
         value.setHighContrastSky?.(highContrastSky);
         value.setHeliosphereEnabled?.(heliosphereEnabled);
+        value.setAsteroidBodiesEnabled?.(asteroidBodiesEnabled);
         value.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
         value.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
         value.setHighlightedClassification?.(highlightedClassification);

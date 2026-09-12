@@ -78,7 +78,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
     slot.shown = shown; slot.setVisible(shown);
   };
   let latest: Publication | null = null;
-  let destroyed = false, initialized = false, enabled = true, selectionHeld = false;
+  let destroyed = false, initialized = false, selectionHeld = false;
   let heldView: PointFieldView | null = null;
   let selected: PreparedPointFieldSelection | null = null;
   let visiblePoints = 0, individualPoints = 0;
@@ -95,7 +95,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   let adoptionFrame: number | null = null;
   const windowTarget = host.ownerDocument.defaultView!;
   const selector = framePlanned || typeof Worker === 'undefined' ? null : createPointFieldSelectionClient(payload, selection => {
-    if (!enabled || destroyed) return;
+    if (destroyed) return;
     pendingSelection = selection;
     // A regular camera publication consumes this first. If the camera has stopped,
     // publish the completed cut on the next frame using the latest observer pose.
@@ -293,24 +293,6 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   }
 
   return Object.freeze({ root,
-    setEnabled(value: boolean) {
-      if (destroyed || enabled === value) return;
-      enabled = value; frameRevision++;
-      latest = null;
-      pointFrames.invalidate();
-      // Resume only with a fresh camera publication, never a stale star image.
-      root.style.visibility = 'hidden';
-      root.style.display = enabled ? '' : 'none';
-      if (!enabled) {
-        if (timer !== null) clearTimeout(timer);
-        finishTransition();
-        if (adoptionFrame !== null) windowTarget.cancelAnimationFrame(adoptionFrame);
-        adoptionFrame = null; pendingSelection = null;
-        fader.batch(() => {
-          for (const slot of [...active, ...outgoing]) fader.visible(slot.element, false);
-        });
-      }
-    },
     /** Keep the current star selection while the view rotates: retained stars keep
      * moving, and nothing is selected, faded in or retired until the committed cut
      * no longer covers the view. A rotation carries its stars off screen, so the
@@ -325,18 +307,14 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
       const revision = frameRevision;
       // Membership is encoded only when it changes. Each request transfers its
       // own copy; detaching a message cannot corrupt retained slot ownership.
-      // A disabled field has no consumer: the planner selects and projects nothing.
-      // Re-enabling invalidates the receiver, so the next frame repairs every value.
       const select = timer === null && (!selectionHeld || heldViewOutgrown());
       if (select && selectionHeld && latest) heldView = selectionView(latest);
-      const state: PointFrameState = enabled
-        ? { committedId: pointFrames.committedId, active: activeIds.slice(), outgoing: outgoingIds.slice(), select }
-        : { committedId: pointFrames.committedId, active: new Uint32Array(0), outgoing: new Uint32Array(0), select: false };
+      const state: PointFrameState = { committedId: pointFrames.committedId, active: activeIds.slice(), outgoing: outgoingIds.slice(), select };
       return { state, current: () => !destroyed && revision === frameRevision };
     },
     // Allocate diagnostics only when requested; render leaves stay anonymous.
     inspect() {
-      return Object.freeze({ enabled, catalogueCount: payload.stars.length,
+      return Object.freeze({ catalogueCount: payload.stars.length,
         coveredCount: selected?.coveredCount ?? 0, consideredCount: selected?.consideredCount ?? 0,
         drawnCount: selected?.drawnCount ?? 0, representatives: selected?.representatives.length ?? 0,
         maxProjectedErrorPx: selected?.maxProjectedErrorPx ?? 0, budgetLimited: selected?.budgetLimited ?? false,
@@ -355,7 +333,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
     },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number,
       labelExclusionRects: readonly LabelScreenRect[] = [], plannedFrame?: PreparedPointFrame) {
-      if (destroyed || !enabled) return;
+      if (destroyed) return;
       fader.batch(() => {
       root.style.opacity = String(opacity); root.style.visibility = opacity > 0 ? '' : 'hidden';
       if (opacity <= 0) { latest = null; for (const slot of [...active, ...outgoing]) fader.visible(slot.element, false); return; }
