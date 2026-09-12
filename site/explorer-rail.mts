@@ -12,20 +12,20 @@ export function createExplorerRailController(documentTarget: Document, windowTar
   const settings = documentTarget.querySelector<HTMLElement>(".planet-settings-action");
   const settingsPanel = documentTarget.querySelector<HTMLElement>(".planet-settings-panel");
   const aside = documentTarget.querySelector<HTMLElement>(".planet-sidebar");
-  const spacecraftToggle = documentTarget.querySelector<HTMLElement>(".planet-spacecraft-toggle");
+  const machineToggle = documentTarget.querySelector<HTMLElement>(".planet-machine-toggle");
   if (!(explore instanceof windowTarget.HTMLButtonElement) || !(settings instanceof windowTarget.HTMLButtonElement)
       || (about !== null && !(about instanceof windowTarget.HTMLButtonElement))
       || !(panel instanceof windowTarget.HTMLElement) || !(settingsPanel instanceof windowTarget.HTMLElement)
       || !(drawer instanceof windowTarget.HTMLElement) || !(searchCard instanceof windowTarget.HTMLElement)
       || !(aside instanceof windowTarget.HTMLElement) || !(search instanceof windowTarget.HTMLInputElement)
-      || (spacecraftToggle !== null && !(spacecraftToggle instanceof windowTarget.HTMLButtonElement))) {
+      || (machineToggle !== null && !(machineToggle instanceof windowTarget.HTMLButtonElement))) {
     throw new Error("Explorer rail is incomplete.");
   }
 
   const events = new AbortController();
   let activePanel: "explore" | "about" = "explore";
   let settingsOpen = false;
-  // Settings shares the right-hand context slot with the spacecraft card, never the sidebar.
+  // Settings shares the right-hand context slot with the machine card, never the sidebar.
   const setSettingsOpen = (open: boolean) => {
     settingsOpen = open;
     settingsPanel.hidden = !open;
@@ -61,8 +61,8 @@ export function createExplorerRailController(documentTarget: Document, windowTar
       settingsPanel.scrollIntoView({ block: "nearest", behavior: "instant" });
     }
   }, { signal: events.signal });
-  // Choosing the spacecraft card hands the context slot back from Settings.
-  spacecraftToggle?.addEventListener("click", () => { if (settingsOpen) setSettingsOpen(false); }, { signal: events.signal });
+  // Choosing the machine card hands the context slot back from Settings.
+  machineToggle?.addEventListener("click", () => { if (settingsOpen) setSettingsOpen(false); }, { signal: events.signal });
   const showSearch = () => { if (activePanel !== "explore") show("explore"); };
   search.addEventListener("input", showSearch, { signal: events.signal });
   search.addEventListener("keydown", (event) => {

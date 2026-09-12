@@ -10,6 +10,8 @@
 
 - The authored solutions and sky samples are in [source/geometry/registration.json](source/geometry/registration.json); these are not modern photogrammetric control.
 
+- **Faithfulness status:** The Monochrome lens is retained as a coarse limb-pointed observation. No independently controlled surface feature fit is claimed, so the photographic surface is deferred under the catalog registration rule.
+
 - Display ephemerides use the vendored astronomy package; Larissa's fitted precessing orbit has a measured maximum position residual of 472 km over the checked 1900–2100 Horizons fixture epochs.
 
 ## Known problems

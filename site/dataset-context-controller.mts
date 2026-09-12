@@ -1,5 +1,6 @@
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser-types.mts';
+import { createTabsController } from './planet-shell-client.mts';
 
 /** Only reveal prepared content; dataset attribution stays out of the runtime. */
 export function createDatasetContextController(drawer: HTMLElement, documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
@@ -9,10 +10,13 @@ export function createDatasetContextController(drawer: HTMLElement, documentTarg
   const dock = documentTarget.querySelector<HTMLElement>('.planet-dataset-context-dock');
   if (!card || !template || !rail || !dock) return { destroy() {} };
   // The retained header toggle outlives object mounts, so a dismissed card stays dismissed.
-  const toggleNode = documentTarget.querySelector('.planet-spacecraft-toggle');
+  const toggleNode = documentTarget.querySelector('.planet-machine-toggle');
   const toggle = toggleNode && toggleNode instanceof windowTarget.HTMLButtonElement ? toggleNode : null;
   rail.replaceChildren(documentTarget.importNode(template.content, true));
   const contexts = [...rail.querySelectorAll<HTMLElement>('[data-dataset-context]')];
+  // A lens credited by several machines collapses into one tabbed card, which
+  // uses the shell's own tablist behaviour rather than a second implementation.
+  const tabs = createTabsController(rail, lifetime);
   const desktop = windowTarget.matchMedia('(min-width: 821px) and (orientation: landscape)');
   const place = () => (desktop.matches ? dock : drawer).append(rail);
   const render = () => {
@@ -44,6 +48,7 @@ export function createDatasetContextController(drawer: HTMLElement, documentTarg
   place();
   render();
   const destroy = () => {
+    tabs.destroy();
     events.abort();
     observer.disconnect();
     desktop.removeEventListener('change', place);

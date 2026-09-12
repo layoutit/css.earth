@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-spacecraft-render-library@2",
+  "schema": "cssearth-machine-render-library@3",
   "background": "#0d0d0d",
   "format": "webp",
   "quality": 90,
@@ -47,9 +47,81 @@
   },
   "entries": [
     {
+      "id": "alma",
+      "path": "images/alma.webp",
+      "url": "/shell/machine-renders/alma.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 37070,
+      "sha256": "f2bbefe509ab2041292f92b6271e20ecfa2dca30b863521c7aa1bcfd30bb8663",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-alma",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/3"
+          }
+        ]
+      },
+      "source": {
+        "id": "alma",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/98/ALMA_antennas_on_Chajnantor_%28malin-dsc0027%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:ALMA_antennas_on_Chajnantor_(malin-dsc0027).jpg",
+        "credit": "ESO/C. Malin",
+        "license": "CC BY 4.0",
+        "sha256": "4cf4338bff764a96435e52c37cb925a61d37c02d2a420bc4fa48a7b164fbfe0f",
+        "bytes": 4881446,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+      }
+    },
+    {
+      "id": "arecibo-305m",
+      "path": "images/arecibo-305m.webp",
+      "url": "/shell/machine-renders/arecibo-305m.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 83284,
+      "sha256": "3adec33f5bafc740520468c134160efb9d6af145b8e89ff1f1f2e926977e7f75",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-arecibo-305m",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/0"
+          }
+        ]
+      },
+      "source": {
+        "id": "arecibo-305m",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Arecibo_Observatory_Aerial_View.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Arecibo_Observatory_Aerial_View.jpg",
+        "credit": "H. Schweiker/WIYN and NOAO/AURA/NSF",
+        "license": "CC BY 4.0",
+        "sha256": "df12a79eab50ab41b3d748f9d340430e2b7cf27e50ca8e52694a0be20ab356d6",
+        "bytes": 157987,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+      }
+    },
+    {
       "id": "cassini",
       "path": "images/cassini.webp",
-      "url": "/shell/spacecraft-renders/cassini.webp",
+      "url": "/shell/machine-renders/cassini.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -58,8 +130,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 5306,
-      "sha256": "50328f1e86a645cd9784f36b5a024b31899403688dc1232cdb3530dffa0ada19",
+      "bytes": 6280,
+      "sha256": "2da3c46f3a63ec5b26109939d2e346cc761223a559f4b125d11e20c47379280e",
       "source": {
         "kind": "model-render",
         "id": "cassini",
@@ -90,15 +162,21 @@
           {
             "catalogueId": "artwork-render-cassini",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/0"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/0"
           }
         ]
+      },
+      "subject": {
+        "left": 246,
+        "top": 16,
+        "width": 228,
+        "height": 264
       }
     },
     {
       "id": "dawn",
       "path": "images/dawn.webp",
-      "url": "/shell/spacecraft-renders/dawn.webp",
+      "url": "/shell/machine-renders/dawn.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -107,8 +185,8 @@
         "scale": 1,
         "offsetXCssPixels": 13
       },
-      "bytes": 4432,
-      "sha256": "1f2da1c40a9c944722b37b9a6fbd04e53b1045a883d9396a8390e1fcb89e6062",
+      "bytes": 5206,
+      "sha256": "a34eec837d839c64f9be7f16b18837226a6d9611ff6f871f30c15a6232f962df",
       "source": {
         "kind": "model-render",
         "id": "dawn",
@@ -139,15 +217,21 @@
           {
             "catalogueId": "artwork-render-dawn",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/1"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/1"
           }
         ]
+      },
+      "subject": {
+        "left": 64,
+        "top": 83,
+        "width": 516,
+        "height": 130
       }
     },
     {
       "id": "galileo",
       "path": "images/galileo.webp",
-      "url": "/shell/spacecraft-renders/galileo.webp",
+      "url": "/shell/machine-renders/galileo.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -156,8 +240,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 6886,
-      "sha256": "40959f00347e14c2e091bad552b7d9eaaffaa201136bb72c20190abbcd8592df",
+      "bytes": 8566,
+      "sha256": "c571b5c59b281f026c5fa320b2419a9c210eefd020e0a4f4921a12cf3ebee417",
       "source": {
         "kind": "model-render",
         "id": "galileo-v2",
@@ -244,15 +328,57 @@
           {
             "catalogueId": "artwork-render-galileo",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/2"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/2"
           }
         ]
+      },
+      "subject": {
+        "left": 146,
+        "top": 16,
+        "width": 428,
+        "height": 264
+      }
+    },
+    {
+      "id": "goldstone-dss14",
+      "path": "images/goldstone-dss14.webp",
+      "url": "/shell/machine-renders/goldstone-dss14.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 30506,
+      "sha256": "666a4e9cb61bf6f625a29cd3e44cd46d578a526edf05793c84bacff15f855972",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-goldstone-dss14",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/1"
+          }
+        ]
+      },
+      "source": {
+        "id": "goldstone-dss14",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Goldstone_DSN_antenna.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Goldstone_DSN_antenna.jpg",
+        "credit": "NASA/JPL-Caltech",
+        "license": "Public domain",
+        "sha256": "7d2e414851977038d44d5f0a21a26a4152e54d2127dcc11b42472d988dbaccde",
+        "bytes": 219929,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
       }
     },
     {
       "id": "grail",
       "path": "images/grail.webp",
-      "url": "/shell/spacecraft-renders/grail.webp",
+      "url": "/shell/machine-renders/grail.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -261,8 +387,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 11480,
-      "sha256": "47a4438275531df9b17b0db12698e7b36f0ffb76300a8870f8d044384193042e",
+      "bytes": 12874,
+      "sha256": "285782d727866443e7e5c80931295f4b8c63f34b532e755a798cda4ae4f254ee",
       "source": {
         "kind": "model-render",
         "id": "grail",
@@ -343,15 +469,21 @@
           {
             "catalogueId": "artwork-render-grail",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/3"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/3"
           }
         ]
+      },
+      "subject": {
+        "left": 225,
+        "top": 16,
+        "width": 271,
+        "height": 264
       }
     },
     {
       "id": "hayabusa",
       "path": "images/hayabusa.webp",
-      "url": "/shell/spacecraft-renders/hayabusa.webp",
+      "url": "/shell/machine-renders/hayabusa.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -360,8 +492,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 13848,
-      "sha256": "13e162278cdd796bf05bae8ed52cea1bd0a9b9965685069361572b47e64711f9",
+      "bytes": 14674,
+      "sha256": "68eb248179af4a37cb7239263909d85c1e4b7f4f95ef9b51a76e7daf838b4c68",
       "source": {
         "id": "hayabusa",
         "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_1.png",
@@ -379,15 +511,21 @@
           {
             "catalogueId": "artwork-render-hayabusa",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/4"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/4"
           }
         ]
+      },
+      "subject": {
+        "left": 185,
+        "top": 40,
+        "width": 350,
+        "height": 216
       }
     },
     {
       "id": "hayabusa2",
       "path": "images/hayabusa2.webp",
-      "url": "/shell/spacecraft-renders/hayabusa2.webp",
+      "url": "/shell/machine-renders/hayabusa2.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -396,8 +534,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 11214,
-      "sha256": "845aa46eeee91142a5e0b15a8a019de6c9c6ed3767226b8eba3c1165f90fe733",
+      "bytes": 11906,
+      "sha256": "00e9187c83de1c977e7c6561cffc1576dfb34855bbca58c1aedb6e8ff4dcb3eb",
       "source": {
         "id": "hayabusa2",
         "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_2.png",
@@ -415,15 +553,57 @@
           {
             "catalogueId": "artwork-render-hayabusa2",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/5"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/5"
           }
         ]
+      },
+      "subject": {
+        "left": 241,
+        "top": 16,
+        "width": 239,
+        "height": 263
+      }
+    },
+    {
+      "id": "herschel",
+      "path": "images/herschel.webp",
+      "url": "/shell/machine-renders/herschel.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 36466,
+      "sha256": "7b16384a09c08ef312b154884c5c0cc555eb2600798e1adf17e24162a502f3c7",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-herschel",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/7"
+          }
+        ]
+      },
+      "source": {
+        "id": "herschel",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Maquette_Herschel_salon_du_Bourget_2013_DSC_0217.JPG",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Maquette_Herschel_salon_du_Bourget_2013_DSC_0217.JPG",
+        "credit": "Pline (full-scale model, Paris Air Show 2013)",
+        "license": "CC BY-SA 3.0",
+        "sha256": "fb6cfc07e50411fa6c7b1dcce909eeac9a01cd9a22726d3cd320d7b15e4db643",
+        "bytes": 2350978,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
       }
     },
     {
       "id": "hubble",
       "path": "images/hubble.webp",
-      "url": "/shell/spacecraft-renders/hubble.webp",
+      "url": "/shell/machine-renders/hubble.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -432,8 +612,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 11962,
-      "sha256": "ad78576337ae26e29a60006dff8de8adb9ee8b6f981eabe2aa8b9400676da240",
+      "bytes": 12980,
+      "sha256": "ac76d87a942faa21bfd9648bb32e9bc9ff495f9346a78393f209b2d29fd8ff26",
       "source": {
         "kind": "model-render",
         "id": "hubble-v2",
@@ -465,15 +645,57 @@
           {
             "catalogueId": "artwork-render-hubble",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/6"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/6"
           }
         ]
+      },
+      "subject": {
+        "left": 179,
+        "top": 16,
+        "width": 362,
+        "height": 264
+      }
+    },
+    {
+      "id": "irtf",
+      "path": "images/irtf.webp",
+      "url": "/shell/machine-renders/irtf.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 31714,
+      "sha256": "63a59b968aae939b9c05e98523e27e944183ec5388c1eaa951392a45dadff5b2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-irtf",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/4"
+          }
+        ]
+      },
+      "source": {
+        "id": "irtf",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/NASA_Infrared_Telescope_Facility_%28MaunaKea_Summit_Dome%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:NASA_Infrared_Telescope_Facility_(MaunaKea_Summit_Dome).jpg",
+        "credit": "NOIRLab/NSF/AURA/P. Horálek",
+        "license": "CC BY 4.0",
+        "sha256": "06664b18a54f4763eff97d510b0f66e2ad4586bbe90793d546f92b551dc342f3",
+        "bytes": 5308013,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
       }
     },
     {
       "id": "juno",
       "path": "images/juno.webp",
-      "url": "/shell/spacecraft-renders/juno.webp",
+      "url": "/shell/machine-renders/juno.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -482,8 +704,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 5498,
-      "sha256": "feea10a55946cc103ec91f2180b1b7aa8d1e46d062de24d7507f6531b09c88d2",
+      "bytes": 6470,
+      "sha256": "1f53c9672aef2917e0caf69539df685d25b9d826bfe3120edbb647b5c8ec7c4d",
       "source": {
         "kind": "model-render",
         "id": "juno",
@@ -514,15 +736,21 @@
           {
             "catalogueId": "artwork-render-juno",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/7"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/7"
           }
         ]
+      },
+      "subject": {
+        "left": 235,
+        "top": 16,
+        "width": 250,
+        "height": 264
       }
     },
     {
       "id": "lro",
       "path": "images/lro.webp",
-      "url": "/shell/spacecraft-renders/lro.webp",
+      "url": "/shell/machine-renders/lro.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -531,8 +759,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 13138,
-      "sha256": "be68108b5a6bf1b6486899f50fd5edece3e69ebe1571fa87783647764a48b61f",
+      "bytes": 14292,
+      "sha256": "f178d28c7c19786e25152e51ccdcdc2a2533f558dd61b068e36529b17847360b",
       "source": {
         "kind": "model-render",
         "id": "lro",
@@ -563,15 +791,21 @@
           {
             "catalogueId": "artwork-render-lro",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/8"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/8"
           }
         ]
+      },
+      "subject": {
+        "left": 154,
+        "top": 16,
+        "width": 412,
+        "height": 264
       }
     },
     {
       "id": "magellan",
       "path": "images/magellan.webp",
-      "url": "/shell/spacecraft-renders/magellan.webp",
+      "url": "/shell/machine-renders/magellan.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -580,8 +814,8 @@
         "scale": 1,
         "offsetXCssPixels": 21.5
       },
-      "bytes": 11620,
-      "sha256": "8979695c0bf847e9d5536d1777f2d6c89a6226dc173eac0bb9dc04c1a288b2a8",
+      "bytes": 13368,
+      "sha256": "2fd71b46da3689e4a2e624f2a89fceb8a6d77d373af6edc380859e7ca3007f71",
       "source": {
         "kind": "model-render",
         "id": "magellan",
@@ -612,15 +846,21 @@
           {
             "catalogueId": "artwork-render-magellan",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/9"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/9"
           }
         ]
+      },
+      "subject": {
+        "left": 98,
+        "top": 16,
+        "width": 482,
+        "height": 264
       }
     },
     {
       "id": "mars-global-surveyor",
       "path": "images/mars-global-surveyor.webp",
-      "url": "/shell/spacecraft-renders/mars-global-surveyor.webp",
+      "url": "/shell/machine-renders/mars-global-surveyor.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -629,8 +869,8 @@
         "scale": 1,
         "offsetXCssPixels": 20.5
       },
-      "bytes": 12098,
-      "sha256": "dee33e9a4b065ae24958967617c4299ed9bfe44699948c4fe2856f1b0a215705",
+      "bytes": 13460,
+      "sha256": "15599eaf440d759a366c591453a1962324bdaefb765f1f840755a4a8588d2eca",
       "source": {
         "kind": "model-render",
         "id": "mars-global-surveyor",
@@ -661,15 +901,21 @@
           {
             "catalogueId": "artwork-render-mars-global-surveyor",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/10"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/10"
           }
         ]
+      },
+      "subject": {
+        "left": 94,
+        "top": 15,
+        "width": 486,
+        "height": 266
       }
     },
     {
       "id": "messenger",
       "path": "images/messenger.webp",
-      "url": "/shell/spacecraft-renders/messenger.webp",
+      "url": "/shell/machine-renders/messenger.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -678,8 +924,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 8022,
-      "sha256": "e17b17ec7a9897fde0d12d98673b9eca0c30aff9f5d8f80bc44b44d828cd46a8",
+      "bytes": 9340,
+      "sha256": "2daebf31f243548d35fe6f9448b7af476b56ad2ab170fe16c6ace3bd43ad4946",
       "source": {
         "kind": "model-render",
         "id": "messenger",
@@ -710,15 +956,21 @@
           {
             "catalogueId": "artwork-render-messenger",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/11"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/11"
           }
         ]
+      },
+      "subject": {
+        "left": 158,
+        "top": 16,
+        "width": 404,
+        "height": 264
       }
     },
     {
       "id": "mro",
       "path": "images/mro.webp",
-      "url": "/shell/spacecraft-renders/mro.webp",
+      "url": "/shell/machine-renders/mro.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -727,8 +979,8 @@
         "scale": 1,
         "offsetXCssPixels": 24.5
       },
-      "bytes": 12650,
-      "sha256": "b6ebd5a83740dd5a08cafd2d7e4b31fcea5503944bc54efa18aea4ddfb6d0b97",
+      "bytes": 13956,
+      "sha256": "162a39ca85c234906234e1725565d8b14b3ae621c141b84d5a2c3c0ee922b826",
       "source": {
         "kind": "model-render",
         "id": "mro",
@@ -759,15 +1011,21 @@
           {
             "catalogueId": "artwork-render-mro",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/12"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/12"
           }
         ]
+      },
+      "subject": {
+        "left": 110,
+        "top": 16,
+        "width": 470,
+        "height": 264
       }
     },
     {
       "id": "near-shoemaker",
       "path": "images/near-shoemaker.webp",
-      "url": "/shell/spacecraft-renders/near-shoemaker.webp",
+      "url": "/shell/machine-renders/near-shoemaker.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -776,8 +1034,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 8578,
-      "sha256": "6e0a5bb99ada3c3d520cffd8ffb2797e27475c311f176d62a9687c24a3ae9f3b",
+      "bytes": 9612,
+      "sha256": "74795b0c803c88a28f9f2c92a92d3f33900db6050d7d828849e8523a5d8a76bb",
       "source": {
         "kind": "model-render",
         "id": "near-shoemaker",
@@ -808,15 +1066,21 @@
           {
             "catalogueId": "artwork-render-near-shoemaker",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/13"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/13"
           }
         ]
+      },
+      "subject": {
+        "left": 191,
+        "top": 16,
+        "width": 339,
+        "height": 264
       }
     },
     {
       "id": "new-horizons",
       "path": "images/new-horizons.webp",
-      "url": "/shell/spacecraft-renders/new-horizons.webp",
+      "url": "/shell/machine-renders/new-horizons.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -825,8 +1089,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 10060,
-      "sha256": "742f4d07938227c448ad60884bc3de786c8fc0b1cb2190fc2421c35f12d9873c",
+      "bytes": 10832,
+      "sha256": "de359b67985a4b524f18d072cbe8e3c0da77d25772fd86bfb992615f3f73bb37",
       "source": {
         "kind": "model-render",
         "id": "new-horizons",
@@ -857,15 +1121,21 @@
           {
             "catalogueId": "artwork-render-new-horizons",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/14"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/14"
           }
         ]
+      },
+      "subject": {
+        "left": 245,
+        "top": 15,
+        "width": 230,
+        "height": 265
       }
     },
     {
       "id": "odyssey",
       "path": "images/odyssey.webp",
-      "url": "/shell/spacecraft-renders/odyssey.webp",
+      "url": "/shell/machine-renders/odyssey.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -874,8 +1144,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 6106,
-      "sha256": "b974eaae8997f51738f8b8de1bf13b1b3152b9058aad73b7010bc9ae5175c305",
+      "bytes": 7136,
+      "sha256": "a070e425e815a82de54c019567f6652c4e9a56a02480c512ca5c662bda501b6b",
       "source": {
         "kind": "model-render",
         "id": "odyssey",
@@ -906,15 +1176,21 @@
           {
             "catalogueId": "artwork-render-odyssey",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/15"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/15"
           }
         ]
+      },
+      "subject": {
+        "left": 191,
+        "top": 16,
+        "width": 338,
+        "height": 264
       }
     },
     {
       "id": "osiris-rex",
       "path": "images/osiris-rex.webp",
-      "url": "/shell/spacecraft-renders/osiris-rex.webp",
+      "url": "/shell/machine-renders/osiris-rex.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -923,8 +1199,8 @@
         "scale": 1,
         "offsetXCssPixels": 24.5
       },
-      "bytes": 13170,
-      "sha256": "fc638ce13aa23be3b5648bbce53aaf5d1096ecf21ebe30f8afb574d637931347",
+      "bytes": 15194,
+      "sha256": "0b3a3f683b7cdbe0416b09e4e96b9d35e95f0a4eac6c02d858a19212d9878653",
       "source": {
         "kind": "model-render",
         "id": "osiris-rex",
@@ -955,15 +1231,21 @@
           {
             "catalogueId": "artwork-render-osiris-rex",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/16"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/16"
           }
         ]
+      },
+      "subject": {
+        "left": 110,
+        "top": 16,
+        "width": 470,
+        "height": 264
       }
     },
     {
       "id": "rosetta",
       "path": "images/rosetta.webp",
-      "url": "/shell/spacecraft-renders/rosetta.webp",
+      "url": "/shell/machine-renders/rosetta.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -972,8 +1254,8 @@
         "scale": 1,
         "offsetXCssPixels": 13
       },
-      "bytes": 4258,
-      "sha256": "783007d89940ded7679397859749744d110ea9238231d56bec2ff38ee194202a",
+      "bytes": 4970,
+      "sha256": "28f2aefc0c1c4c9e3a8c1707ee2cc73b3740db59ea030e3ce12f4dc5487db4f9",
       "source": {
         "kind": "model-render",
         "id": "rosetta-v2",
@@ -1060,15 +1342,21 @@
           {
             "catalogueId": "artwork-render-rosetta",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/17"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/17"
           }
         ]
+      },
+      "subject": {
+        "left": 64,
+        "top": 84,
+        "width": 516,
+        "height": 128
       }
     },
     {
       "id": "sdo",
       "path": "images/sdo.webp",
-      "url": "/shell/spacecraft-renders/sdo.webp",
+      "url": "/shell/machine-renders/sdo.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1077,8 +1365,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 7220,
-      "sha256": "ea3fb89c81c366e6c4856ce9ddb0cec725456f0bd542780d6f0f58b2eff89c96",
+      "bytes": 8080,
+      "sha256": "914f2123ec867790a64a4405e54889cf227cecf973fe3e8a9fbf6658bdcd2610",
       "source": {
         "kind": "model-render",
         "id": "sdo",
@@ -1109,15 +1397,57 @@
           {
             "catalogueId": "artwork-render-sdo",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/18"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/18"
           }
         ]
+      },
+      "subject": {
+        "left": 230,
+        "top": 16,
+        "width": 260,
+        "height": 264
+      }
+    },
+    {
+      "id": "spitzer",
+      "path": "images/spitzer.webp",
+      "url": "/shell/machine-renders/spitzer.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 32972,
+      "sha256": "39934aab7f9aedb22ed02f319fbf562c2227c5196d6e3c667cf0cd4cb01f36b0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-spitzer",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/6"
+          }
+        ]
+      },
+      "source": {
+        "id": "spitzer",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Spitzer_earth_trailing2.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Spitzer_earth_trailing2.jpg",
+        "credit": "NASA/JPL-Caltech",
+        "license": "Public domain",
+        "sha256": "cca887b222fcf58f969e6d12a8042a58c138082905775268f255543ae25c0a0d",
+        "bytes": 1638522,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
       }
     },
     {
       "id": "suomi-npp",
       "path": "images/suomi-npp.webp",
-      "url": "/shell/spacecraft-renders/suomi-npp.webp",
+      "url": "/shell/machine-renders/suomi-npp.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1126,8 +1456,8 @@
         "scale": 1,
         "offsetXCssPixels": 32
       },
-      "bytes": 7812,
-      "sha256": "d8247cd4e8da874bcc1b2569a03c3dd0685294233de876fb2855abe5310ec8b4",
+      "bytes": 8508,
+      "sha256": "2089948529c1f9f5acf8b5a813ad9ffce78af0aeca053ab5796224f3eda21c9e",
       "source": {
         "kind": "model-render",
         "id": "suomi-npp",
@@ -1158,15 +1488,21 @@
           {
             "catalogueId": "artwork-render-suomi-npp",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/19"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/19"
           }
         ]
+      },
+      "subject": {
+        "left": 180,
+        "top": 15,
+        "width": 361,
+        "height": 265
       }
     },
     {
       "id": "terra",
       "path": "images/terra.webp",
-      "url": "/shell/spacecraft-renders/terra.webp",
+      "url": "/shell/machine-renders/terra.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1175,8 +1511,8 @@
         "scale": 1,
         "offsetXCssPixels": 15.5
       },
-      "bytes": 11432,
-      "sha256": "7cb7ef720bc81d51dabeaf4a51318f2d383eb804bc8a7bea53190cd9f663d6c4",
+      "bytes": 13062,
+      "sha256": "b0d61c866c51aa65444e9339fdcd41c554ac762f5c1c815f4c06bb3737c3a08a",
       "source": {
         "kind": "model-render",
         "id": "terra",
@@ -1207,15 +1543,21 @@
           {
             "catalogueId": "artwork-render-terra",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/20"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/20"
           }
         ]
+      },
+      "subject": {
+        "left": 74,
+        "top": 15,
+        "width": 506,
+        "height": 265
       }
     },
     {
       "id": "viking",
       "path": "images/viking.webp",
-      "url": "/shell/spacecraft-renders/viking.webp",
+      "url": "/shell/machine-renders/viking.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1224,8 +1566,8 @@
         "scale": 1,
         "offsetXCssPixels": 19
       },
-      "bytes": 12344,
-      "sha256": "14c280a93514dad0cce7934b445444f68bc4fbcc8d94f9173dcb6d6402014f1d",
+      "bytes": 14206,
+      "sha256": "078a4c633f2384cc4332ae09e20bd4f3eb3c391edbd87035fc124f145ed2f2ae",
       "source": {
         "id": "viking",
         "url": "https://science.nasa.gov/wp-content/uploads/2023/10/Viking_Orbiter-2.png",
@@ -1243,15 +1585,93 @@
           {
             "catalogueId": "artwork-render-viking",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/21"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/21"
           }
         ]
+      },
+      "subject": {
+        "left": 89,
+        "top": 16,
+        "width": 491,
+        "height": 264
+      }
+    },
+    {
+      "id": "vlba",
+      "path": "images/vlba.webp",
+      "url": "/shell/machine-renders/vlba.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 25324,
+      "sha256": "24e1c1f68be8831030abc8317d3d9b634369dd73ea1dde714b1186481084ab53",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-vlba",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/5"
+          }
+        ]
+      },
+      "source": {
+        "id": "vlba",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Very_Long_Baseline_Array_Dish_%283S8A8130%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Very_Long_Baseline_Array_Dish_(3S8A8130).jpg",
+        "credit": "Kitt Peak National Observatory/NOIRLab/NSF/AURA/P. Marenfeld",
+        "license": "CC BY 4.0",
+        "sha256": "71a86756f440d89b5cc5a798aa2c204661e56e49904aed2faefc0d229a7e69a4",
+        "bytes": 4932391,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+      }
+    },
+    {
+      "id": "vlt-ut3",
+      "path": "images/vlt-ut3.webp",
+      "url": "/shell/machine-renders/vlt-ut3.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 31458,
+      "sha256": "390b79a9201c8abc3e1baffe767fdc2d81f267b8c8c99cdebd65f784db078c6b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-vlt-ut3",
+            "role": "artwork",
+            "evidence": "site/source/machines/photograph-records.json#/2"
+          }
+        ]
+      },
+      "source": {
+        "id": "vlt-ut3",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/ESO%E2%80%99s_Very_Large_Telescope_%28VLT%29_observatory_at_Paranal.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:ESO%E2%80%99s_Very_Large_Telescope_(VLT)_observatory_at_Paranal.jpg",
+        "credit": "ESO/Y. Beletsky",
+        "license": "CC BY 4.0",
+        "sha256": "a6af073c1f272b3369f9514fed918d0ffa26d9b6e975068e22705a47443414b1",
+        "bytes": 2381531,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
       }
     },
     {
       "id": "voyager-1",
       "path": "images/voyager-1.webp",
-      "url": "/shell/spacecraft-renders/voyager-1.webp",
+      "url": "/shell/machine-renders/voyager-1.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1260,8 +1680,8 @@
         "scale": 1,
         "offsetXCssPixels": 25
       },
-      "bytes": 8386,
-      "sha256": "8d7a95dc953819466479834502e1644e065bf19fc686c8529e7cb9adaba3ab1b",
+      "bytes": 9994,
+      "sha256": "aec2d8218eb24347f6529e5274e2fe292a940c2dda80c21254e9756ddf87226f",
       "source": {
         "kind": "model-render",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.usdz",
@@ -1301,15 +1721,21 @@
           {
             "catalogueId": "artwork-render-voyager-1",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/22"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/22"
           }
         ]
+      },
+      "subject": {
+        "left": 111,
+        "top": 16,
+        "width": 469,
+        "height": 264
       }
     },
     {
       "id": "voyager-2",
       "path": "images/voyager-2.webp",
-      "url": "/shell/spacecraft-renders/voyager-2.webp",
+      "url": "/shell/machine-renders/voyager-2.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1318,8 +1744,8 @@
         "scale": 1,
         "offsetXCssPixels": 25
       },
-      "bytes": 8386,
-      "sha256": "8d7a95dc953819466479834502e1644e065bf19fc686c8529e7cb9adaba3ab1b",
+      "bytes": 9994,
+      "sha256": "aec2d8218eb24347f6529e5274e2fe292a940c2dda80c21254e9756ddf87226f",
       "source": {
         "kind": "model-render",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.usdz",
@@ -1359,9 +1785,15 @@
           {
             "catalogueId": "artwork-render-voyager-2",
             "role": "artwork",
-            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/23"
+            "evidence": "site/source/machines/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/23"
           }
         ]
+      },
+      "subject": {
+        "left": 111,
+        "top": 16,
+        "width": 469,
+        "height": 264
       }
     }
   ]

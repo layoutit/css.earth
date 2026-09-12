@@ -1,6 +1,6 @@
 {
-  "schema": "cssearth-spacecraft-catalog@3",
-  "spacecraft": [
+  "schema": "cssearth-machine-catalog@4",
+  "machines": [
     {
       "id": "messenger",
       "name": {
@@ -24,6 +24,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-messenger",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-messenger",
@@ -72,6 +81,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-cassini",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "1997",
         "citations": [
@@ -106,6 +124,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-dawn",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-dawn",
@@ -154,6 +181,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-galileo",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "1989",
         "citations": [
@@ -188,6 +224,24 @@
       },
       "kind": {
         "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-hubble",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-hubble",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "band": {
+        "value": "Optical",
         "citations": [
           {
             "catalogueId": "reference-hubble",
@@ -236,6 +290,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-juno",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2011",
         "citations": [
@@ -270,6 +333,15 @@
       },
       "kind": {
         "value": "flyby",
+        "citations": [
+          {
+            "catalogueId": "reference-new-horizons",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-new-horizons",
@@ -318,6 +390,24 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-sdo",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "band": {
+        "value": "Ultraviolet",
+        "citations": [
+          {
+            "catalogueId": "reference-sdo",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2010",
         "citations": [
@@ -352,6 +442,15 @@
       },
       "kind": {
         "value": "flyby",
+        "citations": [
+          {
+            "catalogueId": "reference-voyager-1",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-voyager-1",
@@ -400,6 +499,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-voyager-2",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "1977",
         "citations": [
@@ -434,6 +542,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-lro",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-lro",
@@ -482,6 +599,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-mro",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2005",
         "citations": [
@@ -523,6 +649,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-odyssey",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2001",
         "citations": [
@@ -557,6 +692,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-near-shoemaker",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-near-shoemaker",
@@ -615,6 +759,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-osiris-rex",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2016",
         "citations": [
@@ -649,6 +802,15 @@
       },
       "kind": {
         "value": "sample-return",
+        "citations": [
+          {
+            "catalogueId": "reference-hayabusa2",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-hayabusa2",
@@ -697,6 +859,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-hayabusa",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "2003",
         "citations": [
@@ -731,6 +902,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-rosetta",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-rosetta",
@@ -779,6 +959,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-terra",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "1999",
         "citations": [
@@ -813,6 +1002,15 @@
       },
       "kind": {
         "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-suomi-npp",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-suomi-npp",
@@ -861,6 +1059,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-magellan",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "1989",
         "citations": [
@@ -895,6 +1102,15 @@
       },
       "kind": {
         "value": "orbiter",
+        "citations": [
+          {
+            "catalogueId": "reference-mars-global-surveyor",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-mars-global-surveyor",
@@ -943,6 +1159,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-viking-1",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
       "launch": {
         "value": "1975",
         "citations": [
@@ -976,6 +1201,15 @@
       },
       "kind": {
         "value": "lander",
+        "citations": [
+          {
+            "catalogueId": "reference-viking-1",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-viking-1",
@@ -1023,6 +1257,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-viking-2",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
       "launch": {
         "value": "1975",
         "citations": [
@@ -1056,6 +1299,15 @@
       },
       "kind": {
         "value": "lander",
+        "citations": [
+          {
+            "catalogueId": "reference-viking-2",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-viking-2",
@@ -1113,6 +1365,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-grail",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
       "launch": {
         "value": "2011",
         "citations": [
@@ -1163,6 +1424,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-grail",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
       "launch": {
         "value": "2011",
         "citations": [
@@ -1196,6 +1466,15 @@
       },
       "kind": {
         "value": "probe",
+        "citations": [
+          {
+            "catalogueId": "reference-huygens",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-huygens",
@@ -1243,6 +1522,15 @@
           }
         ]
       },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-galileo",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
       "launch": {
         "value": "1989",
         "citations": [
@@ -1276,6 +1564,15 @@
       },
       "kind": {
         "value": "lander",
+        "citations": [
+          {
+            "catalogueId": "reference-rosetta",
+            "checkedOn": "2026-09-08"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-rosetta",
@@ -1322,6 +1619,15 @@
             "checkedOn": "2026-09-10"
           }
         ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-minerva",
+            "checkedOn": "2026-09-10"
+          }
+        ]
       }
     },
     {
@@ -1347,6 +1653,15 @@
       },
       "kind": {
         "value": "rover",
+        "citations": [
+          {
+            "catalogueId": "reference-minerva-ii1",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-minerva-ii1",
@@ -1384,6 +1699,15 @@
             "checkedOn": "2026-09-10"
           }
         ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-minerva-ii1",
+            "checkedOn": "2026-09-10"
+          }
+        ]
       }
     },
     {
@@ -1409,6 +1733,15 @@
       },
       "kind": {
         "value": "rover",
+        "citations": [
+          {
+            "catalogueId": "reference-minerva-ii2",
+            "checkedOn": "2026-09-10"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
         "citations": [
           {
             "catalogueId": "reference-minerva-ii2",
@@ -1446,7 +1779,593 @@
             "checkedOn": "2026-09-10"
           }
         ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-mascot",
+            "checkedOn": "2026-09-10"
+          }
+        ]
       }
+    },
+    {
+      "id": "arecibo-305m",
+      "name": {
+        "value": "Arecibo",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "305-m fixed spherical reflecting antenna",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-arecibo-305m",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "A fixed 305-m spherical reflector that served as both radio telescope and planetary radar, until cable failures destroyed it in 2020.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "radar-telescope",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "band": {
+        "value": "Radar",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "commissioned": {
+        "value": "1963",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "retired": {
+        "value": "2020",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "site": {
+        "value": {
+          "latitude": 18.344219,
+          "longitude": 293.247306,
+          "altitude": 453.34
+        },
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "imageId": "arecibo-305m"
+    },
+    {
+      "id": "goldstone-dss14",
+      "name": {
+        "value": "Goldstone DSS-14",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Mars Station",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-goldstone-dss14",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        },
+        {
+          "value": "DSS-14 70-m Radio Telescope",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-goldstone-dss14",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "A steerable 70-m Deep Space Network antenna that transmits as well as receives.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "radar-telescope",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "band": {
+        "value": "Radar",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "commissioned": {
+        "value": "1964",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "site": {
+        "value": {
+          "latitude": 35.425901,
+          "longitude": 243.110462,
+          "altitude": 1001.39
+        },
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "imageId": "goldstone-dss14"
+    },
+    {
+      "id": "vlt-ut3",
+      "name": {
+        "value": "VLT UT3",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-vlt-ut3",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Melipal",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-vlt-ut3",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "Melipal, one of the four 8.2-m unit telescopes at ESO's Paranal Observatory in Chile.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-vlt-ut3",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-vlt-ut3",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-vlt-ut3",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "band": {
+        "value": "Optical",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-vlt-ut3",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "imageId": "vlt-ut3"
+    },
+    {
+      "id": "alma",
+      "name": {
+        "value": "ALMA",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-alma",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Atacama Large Millimeter/submillimeter Array",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-alma",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "Sixty-six antennas on Chile's Chajnantor plateau, working together as one millimetre-wave interferometer.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-alma",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "radio-telescope",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-alma",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-alma",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "band": {
+        "value": "Millimetre",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-alma",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "site": {
+        "value": {
+          "latitude": -23.01917,
+          "longitude": 292.24667,
+          "altitude": 5059
+        },
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-alma",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "imageId": "alma"
+    },
+    {
+      "id": "irtf",
+      "name": {
+        "value": "IRTF",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-irtf",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Infrared Telescope Facility",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-irtf",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "A 3.2-m Mauna Kea telescope built for Voyager, now the US national infrared facility. Half its time goes to planetary science.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-irtf",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-irtf",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-irtf",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "band": {
+        "value": "Infrared",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-irtf",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "site": {
+        "value": {
+          "latitude": 19.8262,
+          "longitude": 204.5281,
+          "altitude": 4168.07
+        },
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-irtf",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "imageId": "irtf"
+    },
+    {
+      "id": "spitzer",
+      "name": {
+        "value": "Spitzer",
+        "citations": [
+          {
+            "catalogueId": "pds-instrument-host-spitzer",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Spitzer Space Telescope",
+          "citations": [
+            {
+              "catalogueId": "pds-instrument-host-spitzer",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "An infrared observatory in an Earth-trailing orbit, with an 85-cm mirror and three cryogenically cooled instruments.",
+        "citations": [
+          {
+            "catalogueId": "pds-instrument-host-spitzer",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "pds-instrument-host-spitzer",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "pds-instrument-host-spitzer",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "band": {
+        "value": "Infrared",
+        "citations": [
+          {
+            "catalogueId": "pds-instrument-host-spitzer",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "imageId": "spitzer"
+    },
+    {
+      "id": "herschel",
+      "name": {
+        "value": "Herschel",
+        "citations": [
+          {
+            "catalogueId": "reference-herschel",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Herschel Space Observatory",
+          "citations": [
+            {
+              "catalogueId": "reference-herschel",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "ESA's far-infrared and submillimetre observatory, with a 3.5-m mirror. It observed comets and asteroids as well as distant galaxies.",
+        "citations": [
+          {
+            "catalogueId": "reference-herschel",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-herschel",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-herschel",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "band": {
+        "value": "Far-infrared",
+        "citations": [
+          {
+            "catalogueId": "reference-herschel",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "launch": {
+        "value": "2009-05-14",
+        "citations": [
+          {
+            "catalogueId": "reference-herschel",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "imageId": "herschel"
+    },
+    {
+      "id": "vlba",
+      "name": {
+        "value": "VLBA",
+        "citations": [
+          {
+            "catalogueId": "reference-vlba",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Very Long Baseline Array",
+          "citations": [
+            {
+              "catalogueId": "reference-vlba",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "A radio array operated by the NSF National Radio Astronomy Observatory.",
+        "citations": [
+          {
+            "catalogueId": "reference-vlba",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "kind": {
+        "value": "radio-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-vlba",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-vlba",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "band": {
+        "value": "Radio",
+        "citations": [
+          {
+            "catalogueId": "reference-vlba",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "imageId": "vlba"
     }
   ],
   "missions": [
@@ -1483,7 +2402,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "messenger",
+          "machineId": "messenger",
           "role": "orbiter",
           "citations": [
             {
@@ -1549,7 +2468,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "cassini",
+          "machineId": "cassini",
           "role": "orbiter",
           "citations": [
             {
@@ -1559,7 +2478,7 @@
           ]
         },
         {
-          "spacecraftId": "huygens",
+          "machineId": "huygens",
           "role": "probe",
           "citations": [
             {
@@ -1623,7 +2542,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "dawn",
+          "machineId": "dawn",
           "role": "orbiter",
           "citations": [
             {
@@ -1687,7 +2606,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "galileo",
+          "machineId": "galileo",
           "role": "orbiter",
           "citations": [
             {
@@ -1697,7 +2616,7 @@
           ]
         },
         {
-          "spacecraftId": "galileo-probe",
+          "machineId": "galileo-probe",
           "role": "probe",
           "citations": [
             {
@@ -1762,7 +2681,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "hubble",
+          "machineId": "hubble",
           "role": "observatory",
           "citations": [
             {
@@ -1829,7 +2748,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "juno",
+          "machineId": "juno",
           "role": "orbiter",
           "citations": [
             {
@@ -1896,7 +2815,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "new-horizons",
+          "machineId": "new-horizons",
           "role": "flyby",
           "citations": [
             {
@@ -1972,7 +2891,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "sdo",
+          "machineId": "sdo",
           "role": "observatory",
           "citations": [
             {
@@ -2039,7 +2958,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "voyager-1",
+          "machineId": "voyager-1",
           "role": "flyby",
           "citations": [
             {
@@ -2106,7 +3025,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "voyager-2",
+          "machineId": "voyager-2",
           "role": "flyby",
           "citations": [
             {
@@ -2182,7 +3101,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "lro",
+          "machineId": "lro",
           "role": "orbiter",
           "citations": [
             {
@@ -2258,7 +3177,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "mro",
+          "machineId": "mro",
           "role": "orbiter",
           "citations": [
             {
@@ -2334,7 +3253,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "odyssey",
+          "machineId": "odyssey",
           "role": "orbiter",
           "citations": [
             {
@@ -2401,7 +3320,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "near-shoemaker",
+          "machineId": "near-shoemaker",
           "role": "orbiter",
           "citations": [
             {
@@ -2465,7 +3384,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "osiris-rex",
+          "machineId": "osiris-rex",
           "role": "sample-return",
           "citations": [
             {
@@ -2529,7 +3448,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "hayabusa2",
+          "machineId": "hayabusa2",
           "role": "sample-return",
           "citations": [
             {
@@ -2539,7 +3458,7 @@
           ]
         },
         {
-          "spacecraftId": "minerva-ii-1a",
+          "machineId": "minerva-ii-1a",
           "role": "rover",
           "citations": [
             {
@@ -2549,7 +3468,7 @@
           ]
         },
         {
-          "spacecraftId": "minerva-ii-1b",
+          "machineId": "minerva-ii-1b",
           "role": "rover",
           "citations": [
             {
@@ -2559,7 +3478,7 @@
           ]
         },
         {
-          "spacecraftId": "minerva-ii-2",
+          "machineId": "minerva-ii-2",
           "role": "rover",
           "citations": [
             {
@@ -2569,7 +3488,7 @@
           ]
         },
         {
-          "spacecraftId": "mascot",
+          "machineId": "mascot",
           "role": "lander",
           "citations": [
             {
@@ -2636,7 +3555,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "hayabusa",
+          "machineId": "hayabusa",
           "role": "sample-return",
           "citations": [
             {
@@ -2646,7 +3565,7 @@
           ]
         },
         {
-          "spacecraftId": "minerva",
+          "machineId": "minerva",
           "role": "rover",
           "citations": [
             {
@@ -2710,7 +3629,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "rosetta",
+          "machineId": "rosetta",
           "role": "orbiter",
           "citations": [
             {
@@ -2720,7 +3639,7 @@
           ]
         },
         {
-          "spacecraftId": "philae",
+          "machineId": "philae",
           "role": "lander",
           "citations": [
             {
@@ -2784,7 +3703,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "terra",
+          "machineId": "terra",
           "role": "observatory",
           "citations": [
             {
@@ -2852,7 +3771,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "suomi-npp",
+          "machineId": "suomi-npp",
           "role": "observatory",
           "citations": [
             {
@@ -2919,7 +3838,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "magellan",
+          "machineId": "magellan",
           "role": "orbiter",
           "citations": [
             {
@@ -2992,7 +3911,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "mars-global-surveyor",
+          "machineId": "mars-global-surveyor",
           "role": "orbiter",
           "citations": [
             {
@@ -3056,7 +3975,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "viking-1-orbiter",
+          "machineId": "viking-1-orbiter",
           "role": "orbiter",
           "citations": [
             {
@@ -3066,7 +3985,7 @@
           ]
         },
         {
-          "spacecraftId": "viking-1-lander",
+          "machineId": "viking-1-lander",
           "role": "lander",
           "citations": [
             {
@@ -3128,7 +4047,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "viking-2-orbiter",
+          "machineId": "viking-2-orbiter",
           "role": "orbiter",
           "citations": [
             {
@@ -3138,7 +4057,7 @@
           ]
         },
         {
-          "spacecraftId": "viking-2-lander",
+          "machineId": "viking-2-lander",
           "role": "lander",
           "citations": [
             {
@@ -3200,7 +4119,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "grail-a",
+          "machineId": "grail-a",
           "role": "orbiter",
           "citations": [
             {
@@ -3210,7 +4129,7 @@
           ]
         },
         {
-          "spacecraftId": "grail-b",
+          "machineId": "grail-b",
           "role": "orbiter",
           "citations": [
             {
@@ -3274,7 +4193,7 @@
       },
       "participants": [
         {
-          "spacecraftId": "osiris-rex",
+          "machineId": "osiris-rex",
           "role": "probe",
           "citations": [
             {
@@ -3293,6 +4212,282 @@
           }
         ]
       }
+    },
+    {
+      "id": "arecibo-planetary-radar",
+      "name": {
+        "value": "Arecibo planetary radar",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "shortName": {
+        "value": "Arecibo radar",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "description": {
+        "value": "Solar system radar from the Arecibo 305-m antenna, at 430 MHz and later 2380 MHz.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NSF"
+        ],
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "machineId": "arecibo-305m",
+          "role": "radar-telescope",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-arecibo-305m",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "started": {
+        "value": "1963",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "ended": {
+        "value": "2020",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "status": {
+        "value": {
+          "value": "completed",
+          "asOf": "2026-09-11"
+        },
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-arecibo-305m",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "imageId": "arecibo-305m"
+    },
+    {
+      "id": "goldstone-solar-system-radar",
+      "name": {
+        "value": "Goldstone Solar System Radar",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "shortName": {
+        "value": "Goldstone radar",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "description": {
+        "value": "Planetary radar from DSS-14, the Deep Space Network antenna at Goldstone.",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "machineId": "goldstone-dss14",
+          "role": "radar-telescope",
+          "citations": [
+            {
+              "catalogueId": "pds-telescope-goldstone-dss14",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "started": {
+        "value": "1964",
+        "citations": [
+          {
+            "catalogueId": "pds-telescope-goldstone-dss14",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "imageId": "goldstone-dss14"
+    },
+    {
+      "id": "eso-sphere-asteroid-survey",
+      "name": {
+        "value": "ESO large programme 199.C-0074",
+        "citations": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "shortName": {
+        "value": "VLT/SPHERE",
+        "citations": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "description": {
+        "value": "A VLT/SPHERE survey that imaged large main-belt asteroids and reconstructed their shapes.",
+        "citations": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "ESO"
+        ],
+        "citations": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "machineId": "vlt-ut3",
+          "role": "optical-telescope",
+          "citations": [
+            {
+              "catalogueId": "vernazza-2021-survey",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "ended": {
+        "value": "2021",
+        "citations": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "status": {
+        "value": {
+          "value": "completed",
+          "asOf": "2026-09-11"
+        },
+        "citations": [
+          {
+            "catalogueId": "vernazza-2021-survey",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "imageId": "vlt-ut3"
+    },
+    {
+      "id": "eso-muse-galilean-moons",
+      "name": {
+        "value": "ESO programme 0103.C-0769(A)",
+        "citations": [
+          {
+            "catalogueId": "source-io-io-muse-original-485nm-slope-2",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "shortName": {
+        "value": "VLT/MUSE",
+        "citations": [
+          {
+            "catalogueId": "source-io-io-muse-original-485nm-slope-2",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "description": {
+        "value": "VLT/MUSE spectroscopy mapping the Galilean moons in reflectance.",
+        "citations": [
+          {
+            "catalogueId": "source-io-io-muse-original-485nm-slope-2",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "ESO"
+        ],
+        "citations": [
+          {
+            "catalogueId": "source-io-io-muse-original-485nm-slope-2",
+            "checkedOn": "2026-09-11"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "machineId": "vlt-ut3",
+          "role": "optical-telescope",
+          "citations": [
+            {
+              "catalogueId": "source-io-io-muse-original-485nm-slope-2",
+              "checkedOn": "2026-09-11"
+            }
+          ]
+        }
+      ],
+      "imageId": "vlt-ut3"
     }
   ]
 }
