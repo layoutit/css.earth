@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-surface-landmarks@1",
+  "source": "NASA PDS, Tempel 1 shape model version 2.0 (2012 model)",
+  "frame": "PDS TEMPEL1_2012_PLAN body-fixed, planetocentric latitude and east-positive longitude. Prime meridian passes through the reference crater west of the impact.",
+  "entries": [
+    {
+      "id": "83000000",
+      "name": "Deep Impact site",
+      "kind": "point",
+      "type": "Impact site",
+      "position": {
+        "longitudeDeg": 16,
+        "latitudeDeg": -28
+      },
+      "minimumZoomShare": 0.45,
+      "description": "Deep Impact struck here on 4 July 2005.",
+      "qualification": "Approximate location from the PDS shape-model release.",
+      "reference": {
+        "title": "DIF-C-HRIV/ITS/MRI-5-TEMPEL1-SHAPE-V2.0, Coordinate System",
+        "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DIF-C-HRIV%2FITS%2FMRI-5-TEMPEL1-SHAPE-V2.0",
+        "credit": "NASA PDS · Thomas et al., 2013"
+      }
+    }
+  ]
+}

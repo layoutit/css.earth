@@ -5,37 +5,27 @@
   "members": null,
   "surfaceMap": "presentation/surface-map.json",
   "mapLeftEdgeLongitudeDeg": 0,
-  "output": "comet-67p-features.json",
-  "publicBase": "/scenes/comet-67p/",
+  "output": "comet-9p-features.json",
+  "publicBase": "/scenes/comet-9p/",
   "target": {
-    "className": "comet-67p-body"
+    "className": "comet-9p-body"
   },
   "lensIds": [
     "model",
-    "osiris",
-    "albedo",
-    "slope",
-    "absorption",
-    "ice",
-    "regions",
-    "geology"
+    "constraints",
+    "deep-impact",
+    "next"
   ],
   "kinds": {
     "point": [
       "AA",
-      "FA"
+      "IM"
     ],
     "linear": [
-      "RU",
-      "DO",
-      "VA",
-      "CA",
-      "FO"
+      "RU"
     ],
     "region": [
-      "PL",
-      "PM",
-      "MO"
+      "RE"
     ]
   },
   "excludedTypeCodes": {},
@@ -43,20 +33,14 @@
     "minimumZoomShare": 0,
     "minimumDiameterPixels": 40,
     "alwaysVisibleCount": 0,
-    "maximumVisible": 40,
+    "maximumVisible": 20,
     "limbCosine": 0.12
   },
   "outline": {
-    "pieces": 256
-  },
-  "sites": {
-    "document": "sites.json",
-    "inputs": []
+    "pieces": 32
   },
   "landmarks": {
     "document": "landmarks.json",
-    "inputs": [
-      "geology/shap7-regions.vtk"
-    ]
+    "inputs": []
   }
 }

@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1016-j-icarus-2012-05-034",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Shape, density, and geology of the nucleus of Comet 103P/Hartley 2",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/j.icarus.2012.05.034"
+    },
+    {
+      "type": "NASA NTRS",
+      "value": "20140009994"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2012.05.034",
+      "label": "Publication"
+    },
+    {
+      "role": "archive",
+      "url": "https://ntrs.nasa.gov/api/citations/20140009994/downloads/20140009994.pdf",
+      "label": "NASA NTRS copy"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ntrs.nasa.gov/api/citations/20140009994/downloads/20140009994.pdf",
+      "checkedOn": "2026-09-12",
+      "locator": "Title page and publication DOI"
+    },
+    {
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0019103512002163",
+      "checkedOn": "2026-09-12",
+      "locator": "Title, DOI, journal volume, date and pages"
+    }
+  ],
+  "creators": [
+    "P. C. Thomas et al."
+  ],
+  "publisher": "Elsevier",
+  "publicationDate": "2013-02",
+  "relations": [],
+  "statements": []
+}

@@ -42,8 +42,11 @@ export async function refreshObjectFeatures(id: string): Promise<{ count: number
   await writeFile(manifestPath, manifestText);
   // The prepared directory keeps the staged copy the provenance compiler reads first.
   await writeFile(resolve(outputDirectory, 'runtime-assets.json'), manifestText);
-  const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mts')).href) as { prepareObjectProvenance: (input: { objectDirectory: string; publicDirectory: string; outputDirectory: string; basis: 'prepared' }) => Promise<unknown> };
-  await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'prepared' });
+  const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
+  // Feature preparation verified its own inputs above. The unchanged surfaces are reused from
+  // their delivery pins, not rebaked: record recovered lineage instead of claiming a fresh
+  // verification of every photographic source and terrain input in the object package.
+  await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
   const writer = record(await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-object-json.mts')).href), 'prepared object writer');
   if (typeof writer.writeObjectJson !== 'function') throw new TypeError('Prepared object writer is missing.');
   await (writer.writeObjectJson as (objectId: string, runtime: Record<string, unknown>) => Promise<unknown>)(id, attached.definition as Record<string, unknown>);

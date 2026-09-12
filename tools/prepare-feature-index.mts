@@ -17,7 +17,7 @@ function text(value: unknown, at: string): string { if (typeof value !== 'string
 function finite(value: unknown, at: string): number { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${at} must be finite.`); return value; }
 
 export async function prepareFeatureIndex({ root = process.cwd() }: { root?: string } = {}) {
-  const objects: { id: string; name: string; route: string; count: number }[] = [];
+  const objects: { id: string; name: string; route: string; count: number; lensIds?: string[] }[] = [];
   const features: IndexedFeature[] = [];
   for (const object of OBJECTS) {
     const descriptor: unknown = await readFile(resolve(root, 'src/planets', object.id, 'prepared/features.json'), 'utf8').then(JSON.parse, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
@@ -33,7 +33,15 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
       features.push({ objectId: object.id, id: text(value.id, 'feature id'), name: text(value.name, 'feature name'), type: text(value.type, 'feature type'), diameterKm: finite(value.diameterKm, 'feature diameter'),
         searchNames: value.searchNames.map(name => text(name, 'feature search name')), searchContext: text(value.searchContext, 'feature search context') });
     }
-    objects.push({ id: object.id, name: object.name, route: object.route, count: catalog.features.length });
+    // Mission places can belong to one of several shape models. Carry their prepared
+    // dataset selection so search never moves to a point on an incompatible model.
+    let lensIds: string[] | undefined;
+    if (catalog.landmarks !== undefined) {
+      const runtime: unknown = JSON.parse(await readFile(resolve(root, 'src/planets', object.id, 'prepared/runtime.refs.json'), 'utf8'));
+      if (!record(runtime) || !record(runtime.features) || !Array.isArray(runtime.features.lensIds) || !runtime.features.lensIds.length) throw new TypeError(`${object.id}: landmark datasets are missing.`);
+      lensIds = runtime.features.lensIds.map(id => text(id, 'landmark dataset'));
+    }
+    objects.push({ id: object.id, name: object.name, route: object.route, count: catalog.features.length, ...(lensIds ? { lensIds } : {}) });
   }
   const index = { schema: FEATURE_INDEX_SCHEMA, objects, features };
   const encoded = Buffer.from(`${JSON.stringify(index)}\n`);

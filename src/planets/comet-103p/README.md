@@ -6,11 +6,17 @@
 
 - The EPOXI mosaic combines three MRI images and two mission-restored HRI images from the short 4 November 2010 encounter sequence.
 
+- [Thomas et al. (2013)](https://ntrs.nasa.gov/api/citations/20140009994/downloads/20140009994.pdf), Figures 3 and 7, maps the waist and smooth large-lobe terrain in the same east-positive planetocentric frame as the PDS shape model. The three source landmarks retain its published panel centres or a plainly approximate regional point.
+
 ## Evidence
 
 - The [constraint-grid qualification](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/CONSTRAINT-GRIDS.md) records checks and captured views.
 
 - The [shared qualification record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/QUALIFICATION.md) records verification.
+
+- The [landmark source record](source/features/landmarks.json) links each location to the published figure and records its coordinate precision.
+
+- **Surface places, 2026-09-12:** preparation and the runtime parser accepted three locations; three focused unit tests passed. Browser inspection on base `53b262bd` with this addition covered the waist search, camera arrival and EPOXI dataset. The published catalog passed a fresh byte-count and SHA-256 check. Surface assets are unchanged.
 
 ## Known problems
 
@@ -19,6 +25,8 @@
 - Coverage is about 56% of the displayed surface; the remaining grid has no accepted photograph/shape correspondence. Original shadows and restoration grain remain.
 
 - The cartographic north direction follows the long axis at the 2010 encounter, not a spin pole. Hartley 2 tumbles; this display holds an arbitrary rotational phase and does not simulate that motion.
+
+- The landmarks are mapped terrain, not official names or precise boundaries. Two are published figure-panel centres; the elongate smooth area is a representative point read from the map. The ±3° and ±12° placement estimates are ours, not published measurement errors.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 

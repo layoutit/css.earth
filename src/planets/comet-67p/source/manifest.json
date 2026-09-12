@@ -848,7 +848,8 @@
       "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
       "redistribution": "Retain authors, dataset DOI and CC BY 4.0 attribution.",
       "consumers": [
-        "surface-geology"
+        "surface-geology",
+        "features"
       ],
       "projection": {
         "type": "cartesian-triangle-cells",
@@ -1248,6 +1249,84 @@
             "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/39"
           }
         ]
+      }
+    },
+    {
+      "id": "comet-67p-features-landmarks",
+      "path": "features/landmarks.json",
+      "expectedBytes": 15859,
+      "expectedSha256": "dd9670bdc5b53fab929a994379e95e865bac708ddbec8244921d4cb3230690ec",
+      "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-pss-2018-05-019",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/features/landmarks.json: per-place coordinates, descriptions and publication references; checked 2026-09-12."
+          }
+        ]
+      }
+    },
+    {
+      "id": "comet-67p-features-manifest",
+      "path": "features/manifest.json",
+      "expectedBytes": 1075,
+      "expectedSha256": "fa65437f4ffa6afe8c8431ab05c7425de31cf45136782b47494f2f2f2482c919",
+      "origin": "Byte pins and source qualifications for the surface-place compilation.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte pins and source qualifications for the surface-place compilation."
+      }
+    },
+    {
+      "id": "comet-67p-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1060,
+      "expectedSha256": "716410e7330a882ec5da8e68c7a4030065e4ab0137e32cfd0caada91eac7fc80",
+      "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned selection of surface-place source records, datasets and label policy."
+      }
+    },
+    {
+      "id": "comet-67p-presentation-surface-map",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 156,
+      "expectedSha256": "2c4d670c40f6c544aba99082892839f03047ee3fec94d3a7dfdc0d0aa332ed09",
+      "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
       }
     }
   ],
