@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dinkinesh",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "b3f2168353ab4564f45668893593bd2d026b9d200231e05cb0df6e9e310c9cd6"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
   },
   "recipes": [
     {
@@ -298,7 +298,7 @@
       "sha256": "fb25e4125e5743c6d8599986dc966acefa775c69e5ae30bed840ed90eb2fd04c",
       "bytes": 8490675,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -318,7 +318,7 @@
       "sha256": "600f7fa7918f799141a098e023a1af66d461e8b76c7bc3550f7b7dda25563f49",
       "bytes": 3579,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -340,7 +340,7 @@
       "sha256": "b16cab803ffb76d6b5874f63e6ffbb36beee9c211d5b6afdfdff419b10ff4d3a",
       "bytes": 1319,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -366,7 +366,7 @@
       "sha256": "816e61347e9ac78a896ee01077bd391da4e9c0bf8d90679eccbb8d9a5a1ab0b6",
       "bytes": 14569,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -395,7 +395,7 @@
       "sha256": "c14cbd72f51a57ba5b63df50709eb050dc4259a334c985a2768c5e819aa07ed7",
       "bytes": 156,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -422,7 +422,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -455,13 +455,13 @@
           "url": "/scenes/dinkinesh/dinkinesh-shape-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/dinkinesh/dinkinesh-shape-surface@2x.webp",
           "bytes": 98238,
           "sha256": "d5968fdbef52eea2f5ab8fccb6a81cb2cd56818a1009216770d8ca1fcf62265c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -519,9 +519,9 @@
       "outputs": [
         {
           "url": "/scenes/dinkinesh/dinkinesh-features.json",
-          "bytes": 3835,
-          "sha256": "3649215edeb17c2e5da5bad28ae9c1876946531df8278ee2dcd814959af0899e",
-          "verification": "bytes-verified"
+          "bytes": 3841,
+          "sha256": "84e40473b2eab763c6d106605167680b3b02aa9a50bcf13a17139e36bcb3bae7",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -42,6 +42,11 @@ Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point sh
 
 Named features run of 2026-09-12 (this version): the catalogue labels 2 IAU names on the hit mesh (nothing skipped); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band, and a headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page, selected every lens and pinned Acmon from the sidebar search with no console errors or failed requests.
 
+The label-discovery update restores the current Gazetteer ZIP and records its
+new byte pin. Its prepared names, coordinates, diameters, notes and mesh anchors
+match the previous catalogue exactly. Both names become eligible while the
+whole moon fits on screen; their projected size and facing still control display.
+
 ## Preparation
 
 [Reproduction instructions](../../../tools/objects/source-authoring/galileo-lucy/README.md). The canonical prepared mesh contains 512 triangles, independent of device DPR. Sources, conversion and reduction happen before runtime.

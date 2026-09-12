@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "didymos",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "c3d42e8f34f6328521759c40087837750452a298e7634ab7949d9bdd3bb4cd4d"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
   },
   "recipes": [
     {
@@ -466,7 +466,7 @@
       "sha256": "b5349374186d254ca21b7b00ddd9f6dea7e2762ca6bbff13f43151ee448e3f20",
       "bytes": 3616200,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -507,7 +507,7 @@
       "sha256": "eeaaefa6031372e2ade0be010ff77bd85f0402a845ce1c8125f1b135ca7b7b69",
       "bytes": 1189440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -541,7 +541,7 @@
       "sha256": "6fd1eede1d4c1bb8c5edd83c95b4c5de24dfdea2ca41e1263583fdb389b7a9e5",
       "bytes": 6724,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -569,7 +569,7 @@
       "sha256": "fa54f4213898bfbaaa4c3d83235897b5c4170eb9fc5e8893138acee69cc2a132",
       "bytes": 11172,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -591,7 +591,7 @@
       "sha256": "8ed3c280d5b3adb81f765b4b6363aee811b80e47958a17f5b0a1ce74193f90a5",
       "bytes": 1310,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -617,7 +617,7 @@
       "sha256": "b72760080705582e68464923dbcd079b49a49f4894ca2214b1b53baa1be93be9",
       "bytes": 6693,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -646,7 +646,7 @@
       "sha256": "05b03ddd8348fb0c98249dd46fa42334fbdb33c6822cb8323f1cbd37d5c08bd3",
       "bytes": 154,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -673,7 +673,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -706,19 +706,19 @@
           "url": "/scenes/didymos/didymos-elevation-thumbnail.webp",
           "bytes": 5004,
           "sha256": "cd4746448a1140e2b673d293d13883d930167f1cf1450c4329aca95fadabf2e1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-elevation-surface@2x.webp",
           "bytes": 266414,
           "sha256": "8e9557aa0ad081585ab38030268ddffa34ccaec7088d55a5f506c8f08bd5a7c6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -752,19 +752,19 @@
           "url": "/scenes/didymos/didymos-albedo-thumbnail.webp",
           "bytes": 2558,
           "sha256": "713c5a1e83de5145eb85c02ac447aa6bf452e74b9ba66308ad8a6853baecf041",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-albedo-legend.webp",
           "bytes": 64,
           "sha256": "fbf50802a71d951fd9e6393c53c70993edffbe7d465f76e25428470bac81ac3f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-albedo-surface@2x.webp",
           "bytes": 220476,
           "sha256": "cb356d725517464cba58633a62e9937d879bb38be31aca73ccc5430b70d9fdd6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -796,13 +796,13 @@
           "url": "/scenes/didymos/didymos-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-shape-surface@2x.webp",
           "bytes": 219240,
           "sha256": "fd36cf7c204e365b94bd58ecf2df23ace7403765e0fff7da3deab3ce69a51c0d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -860,9 +860,9 @@
       "outputs": [
         {
           "url": "/scenes/didymos/didymos-features.json",
-          "bytes": 2796,
-          "sha256": "7fcef8455fd7613856800cbb7cc672d290a0164656cd20a8bf0dbbdc00dba7dd",
-          "verification": "bytes-verified"
+          "bytes": 2800,
+          "sha256": "ee9e99967f0c679ac737bc5c350087575e67eb138478807b6d2f2c9a6f250a73",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

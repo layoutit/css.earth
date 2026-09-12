@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e80b2aff52ab786ed22be624d65e4c6bdbacac5af5ed790d370525107cb8173c"
+    "sha256": "8f3bb875536d51325fee13bb0c52c0a453c8194f0f79d055b3e9b1e223547175"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -2076,7 +2076,7 @@
         "kind": "local",
         "reason": "Byte pins and source qualifications for the surface-place compilation."
       },
-      "sha256": "798a12f8e5cc0d0aa33417010f442bf79f02cefb7b0c93b72c868620a6cf3d5c",
+      "sha256": "76d286a5de111ba36b41fac8bb1224585fac07f10c7347403537279b680731a9",
       "bytes": 1016,
       "dependencies": [],
       "verification": "manifest-pin",
@@ -2127,8 +2127,8 @@
           }
         ]
       },
-      "sha256": "8a8eed86424e7e467495f3faff70382ab657f74ac888f667fbdbce2a34542f33",
-      "bytes": 4944,
+      "sha256": "8a6244de19eeb4a33ad6b434a325817b658f51ab238e7dc05525d11577024f40",
+      "bytes": 4939,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2390,8 +2390,8 @@
       "outputs": [
         {
           "url": "/scenes/comet-9p/comet-9p-features.json",
-          "bytes": 6347,
-          "sha256": "2cc92af859f86ef27d28469f14e513789d4968ec792b998aa04525284119dc0a",
+          "bytes": 6342,
+          "sha256": "c1778069ed0ee9b77c4f0afcc7eac8de7479af3827d86f80ff72484b3957573e",
           "verification": "asset-manifest-pin"
         }
       ],
