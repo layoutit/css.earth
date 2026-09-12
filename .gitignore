@@ -51,6 +51,12 @@ src/planets/*/.prepared/
 
 # Prepared JSON transport rebuilt from checked-in object preparation output.
 /src/planets/*/prepared/object.json
+# Full prepared files restored from their checked-in `*.refs.json` twins and the
+# shared banks (`pnpm prepare:object-json`). The twins reference the planet point
+# photometry, star catalogue and label banks instead of repeating them per body.
+/src/planets/*/prepared/runtime.json
+/src/planets/*/prepared/scene.json
+/src/planets/*/prepared/sky.json
 
 /src/planets/charon/source/observations/*.tif
 /src/planets/charon/source/science/*.tif
