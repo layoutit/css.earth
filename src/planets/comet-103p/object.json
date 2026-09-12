@@ -117,7 +117,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "be9e44eb8639e2a8b53c7bd48316a7a8b2acf189c00ee165b960ac4be1769496"
+        "sha256": "aab928276fd06d6fccd0f35be08f82182c1d599fbb0b7dec41bc29ab0c9e9628"
       }
     },
     "catalog": {
@@ -135,9 +135,9 @@
   },
   "schema": "cssearth-object@1",
   "prepared": {
-    "format": "cssearth-css-object@4",
+    "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "be642b04af50267ca165dd3e1ada41a6ad2d1fce9eba28467d4ee9ff91da5a41"
+    "sha256": "94dae66e02b8af417e3bb4fe098a9ee4f6328694aefb89a4b981ae34cc29be39"
   },
   "type": "layered-body",
   "id": "comet-103p"

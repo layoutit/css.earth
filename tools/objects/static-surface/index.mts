@@ -1,6 +1,7 @@
 import { isRecord, readJsonSource, requireRecord } from '../../source-values.mts';
 import type { CameraPlan } from '../../../src/renderers/css/navigation/types.ts';
-import { parsePreparedWorldContext } from '../../../src/renderers/css/dist/index.js';
+import { parsePreparedWorldContext, PREPARED_CSS_OBJECT_FORMAT } from '../../../src/renderers/css/dist/index.js';
+import { extractPreparedShared, syncPreparedShared } from '../../../src/platform/prepared-shared-banks.mts';
 import type { PreparedWorldContext } from '../../../src/renderers/css/dist/index.js';
 import { validatePreparedCubicSky } from '../../../src/platform/cubic-sky-contract.mts';
 import { validateDirectionalSunPlan } from '../../../src/platform/directional-sun-contract.mts';
@@ -108,12 +109,13 @@ export async function prepareStaticSurfaceObject({ objectDirectory, publicDirect
   for (const [name, value] of Object.entries(values)) await writeJson(resolve(outputDirectory, `${name}.json`), value);
   const urls = collectSceneUrls(descriptor.id, values);
   const manifest = await prepareRuntimeAssetManifest({ planetId: descriptor.id, urls, publicRoot: publicDirectory, manifestPath: pathToFileURL(resolve(outputDirectory, 'runtime-assets.json')) });
-  const payload = JSON.stringify({ schema: 'cssearth-prepared-object@1', id: descriptor.id, type: descriptor.type, format: 'cssearth-css-object@4', data: definition });
+  const payload = JSON.stringify({ schema: 'cssearth-prepared-object@1', id: descriptor.id, type: descriptor.type, format: PREPARED_CSS_OBJECT_FORMAT, data: extractPreparedShared(definition).value });
   await writeFile(resolve(outputDirectory, 'object.json'), payload);
   if (write) {
+    await syncPreparedShared(resolve(objectDirectory, '../../..'), outputDirectory);
     await writeFile(descriptorPath, `${JSON.stringify({ ...rawDescriptor,
       properties: { ...requireRecord(rawDescriptor.properties), ...(scene.worldFrame ? { worldFrame: scene.worldFrame } : {}) },
-      prepared: { format: 'cssearth-css-object@4', url: 'prepared/object.json', sha256: hash(payload) } }, null, 2)}\n`);
+      prepared: { format: PREPARED_CSS_OBJECT_FORMAT, url: 'prepared/object.json', sha256: hash(payload) } }, null, 2)}\n`);
     await writeFile(resolve(objectDirectory, 'runtime-assets.json'), `${JSON.stringify(manifest, null, 2)}\n`);
   }
   await writeJson(resolve(outputDirectory, 'authored-preparation.json'), { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: [...sources.values()].map(value => value.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true } });

@@ -12,10 +12,13 @@ import {
   WHEEL_ZOOM_SPEED_MULTIPLIER,
   WHEEL_ZOOM_USE_SCROLL_DISTANCE,
   WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
+  WHEEL_ZOOM_INERTIA,
+  WHEEL_ZOOM_INERTIA_INPUT_KINDS,
   wheelZoomInputKind,
   mobileSheetKeyboardInset,
   MOBILE_SHEET_POLICY,
 } from "../runtime-policy.mts";
+import { PREPARED_WHEEL_ZOOM } from "../../src/renderers/css/navigation/prepared-wheel-zoom.ts";
 
 test("only a keyboard-sized covering takes room from the sheet", () => {
   // A phone with nothing over the layout viewport.
@@ -68,15 +71,45 @@ test("skybox orbit dragging is enabled by the shared input policy", () => {
   assert.equal(SKYBOX_DRAG_ENABLED, true);
 });
 
-test("discrete wheels and precision scroll gestures have separate shared gains", () => {
-  assert.equal(WHEEL_ZOOM_SPEED_MULTIPLIER, 4);
+// The traced reference response is one commanded interval of travel per 100
+// delta units. Both devices report the same units, so both sit on it: a gain
+// above 1 makes that device travel further than the trace it was taken from.
+test("every scroll device is calibrated to the traced reference response", () => {
   assert.equal(WHEEL_ZOOM_USE_SCROLL_DISTANCE, true);
-  assert.equal(WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER, 1);
+  // The controller's own expression for the log travel one gesture commands.
+  const response = (deltaUnits: number, gain: number) => deltaUnits / 100 *
+    PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * gain * PREPARED_WHEEL_ZOOM.intervalMilliseconds;
+  const reference =
+    PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * PREPARED_WHEEL_ZOOM.intervalMilliseconds;
+  for (const gain of [WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER]) {
+    assert.equal(response(100, gain), reference);
+  }
+});
+
+// The glide decays per frame, so `dampingSeconds` is a time constant and the
+// coast travels `dampingSeconds * (1 - stopRateRatio)` seconds at the released
+// rate. Keeping that under the commanded interval is what stops a released
+// gesture from travelling further than the gesture itself asked for.
+test("a released wheel gesture coasts for less than the interval it commanded", () => {
+  assert.notEqual(WHEEL_ZOOM_INERTIA, null);
+  const coastMilliseconds =
+    WHEEL_ZOOM_INERTIA.dampingSeconds * 1000 * (1 - WHEEL_ZOOM_INERTIA.stopRateRatio) * WHEEL_ZOOM_INERTIA.gain;
+  assert.ok(coastMilliseconds > 0);
+  assert.ok(coastMilliseconds < PREPARED_WHEEL_ZOOM.intervalMilliseconds / 2,
+    `coast ${coastMilliseconds} ms must stay well inside the ${PREPARED_WHEEL_ZOOM.intervalMilliseconds} ms interval`);
 });
 
 type WheelInput = Parameters<typeof wheelZoomInputKind>[0];
 const wheelEvent = (input: Partial<WheelInput> & Pick<WheelInput, 'deltaY'>): WheelInput => ({
   deltaMode: 0, ctrlKey: false, deltaX: 0, timeStamp: 0, ...input,
+});
+
+// A precision pointer arrives with the platform's momentum already applied, so
+// the shared glide belongs to discrete wheels only.
+test("only discrete wheels are released into the shared glide", () => {
+  assert.deepEqual([...WHEEL_ZOOM_INERTIA_INPUT_KINDS], ["wheel"]);
+  assert.equal(wheelZoomInputKind(wheelEvent({ deltaY: 100 })), "wheel");
+  assert.ok(!WHEEL_ZOOM_INERTIA_INPUT_KINDS.includes(wheelZoomInputKind(wheelEvent({ deltaY: 4 }))));
 });
 
 test("scroll input classification preserves accelerated precision gestures and permits device changes", () => {

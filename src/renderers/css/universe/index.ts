@@ -1,6 +1,7 @@
 // Application surroundings deliberately exclude detailed-object mounting and native input owners.
 export { createPreparedUniverse } from './prepared-universe-runtime.js';
 export { createWorldFrameQueue } from '../navigation/world-frame-queue.js';
+export type { QueuedRequest } from '../navigation/world-frame-queue.js';
 export { loadPreparedCssVolume } from '../volume/loader.js';
 export { loadPreparedCssPointField } from '../stars/loader.js';
 export { loadPreparedCssSurfaceShell } from '../shell/loader.js';
@@ -13,4 +14,4 @@ export type { PreparedCataloguePoints, PreparedCataloguePoint } from '../stars/p
 export { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
 export { createRetainedGeometrySnapshot } from '../rendering/retained-leaf-pool.js';
 
-export type { WorldContextView } from './world-context-planner.js';
+export type { WorldContextView, WorldBodyPresentation } from './world-context-planner.js';

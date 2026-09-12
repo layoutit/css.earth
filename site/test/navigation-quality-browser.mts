@@ -11,13 +11,14 @@ import { createTestPage } from './browser-observations.mts';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://127.0.0.1:4210';
 const lateDetail = process.env.CSSEARTH_TEST_LATE_DETAIL === '1';
 const directory = `.local/navigation-quality${lateDetail ? '-late-detail' : ''}`;
 await mkdir(directory, { recursive: true });
 const definitions = Object.fromEntries(await Promise.all(['mercury', 'venus'].map(async id =>
-  [id, parsePreparedObjectRuntime(requireRecord(JSON.parse(await readFile(`src/planets/${id}/prepared/object.json`, 'utf8'))).data)] as const)));
+  [id, parsePreparedObjectRuntime(await loadObjectTestDefinition(id))] as const)));
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const reports = [];
 let interruption;
