@@ -43,3 +43,24 @@ node labs/nebula/src/run.ts enrich-messier-catalogue --object=m42 --max-images=3
 ```
 
 Repeat `--object` to name another target; `--max-images` accepts 1–12 per object/provider. The command preserves discovery identities and receipts, updates overlapping-target copies together, recomputes known/unknown storage counts, and atomically replaces each changed page followed by the compact index. It rejects an index changed by another writer during enrichment. `MESSIER_ENRICHMENT_SAVED` reports verified preview, resolved file and failure counts; failures remain in each image's metadata evidence. A MAST thumbnail can represent its parent observation rather than the exact FITS file, and HEAD checks do not validate pixel content. Unsupported or unavailable previews remain unknown.
+
+## Recognition previews and apparent extents
+
+[presentation.json](presentation.json) is a separate presentation supplement: **110 north-up ICRS DSS2 colour cutouts, 192×192 pixels, 1,087,190 bytes in total**. These are genuine survey images for recognizing targets, not native science observations or reconstruction inputs. The existing SIMBAD catalogue and archive inventory hashes are unchanged. Local JPEGs stay ignored; the supplement pins their exact service URLs, hashes and decoded dimensions. A clean checkout can display the remote URLs while restoring its local cache:
+
+```sh
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm build:packages
+node labs/nebula/src/run.ts acquire-messier-presentation
+pnpm lab:nebula
+```
+
+The acquisition command requests only bounded JPEG thumbnails, four concurrently. It verifies the complete decoded image and its SHA256, reuses valid cached files and rejects changed published pixels. `--object=m42` restricts restoration to one object; repeat it for more. `MESSIER_PRESENTATION_SAVED` reports the actual results. The verified replay restored **110 cached images with zero downloads and zero failures**. Source changes require deliberate inspection and repinning; the command does not overwrite the catalogue or archive inventory.
+
+- **Image source:** [CDS DSS2 colour HiPS properties](https://alasky.cds.unistra.fr/DSS/DSSColor/properties), DOI [10.26093/cds/aladin/ht9n-7r](https://doi.org/10.26093/cds/aladin/ht9n-7r), through [HiPS2FITS](https://alasky.cds.unistra.fr/hips-image-services/hips2fits). DSS2 photographic red/blue plates provide the RGB composite; its green channel is their mean. This is not calibrated multiband photometry. Credit: Digitized Sky Survey, STScI/NASA; colour composition and HiPS by CDS. The HiPS properties declare ODbL-1.0; the underlying plates retain the [STScI-listed copyright provisions](https://archive.stsci.edu/dss/copyright.html), not a blanket public-domain license. The complete survey acknowledgment is preserved in [the source properties](presentation-sources/dss2-properties.txt).
+- **Historical apparent extents:** [NASA/GSFC HEASARC Messier table](https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html), mainly Hirshfeld & Sinnott's *Sky Catalog 2000.0*, Volume 2 (1985). Its 109 rows omit M102; they supplement, never replace, our 110 identifiers. Source bytes are retained in [the query response](presentation-sources/facts.xml). Cluster rows provide historical visible extents, distinct from SIMBAD's sometimes much larger membership footprints. M8/M17/M20 use the diffuse-nebula dimensions, with M43/M78/M82 filling previously unknown axes. All remain approximate historical measures, not common isophotal boundaries.
+- **M16:** [Sharpless (1959), CDS VII/20](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/20), Sh 2-49, reports a **90′ maximum H II-region diameter**. This describes the extended Eagle region, not the associated 7′ cluster or a circular boundary. The [retrieved row](presentation-sources/sharpless.tsv) preserves its original units and frame; its B1900 center is not substituted for the existing ICRS coordinates.
+- **M40/M73:** M40's **50″ optical-pair separation** is explicitly labeled as such; it is not a nebula diameter. M73's extent stays unknown because the selected source reports none. Thumbnail field of view is authored framing, never substituted as a measured size.
+- **Optional facts:** HEASARC supplies constellation and historical apparent V magnitude for 109 entries. `:` marks an approximate magnitude; `*` marks an originally rounded whole-number magnitude. Neither is a numerical error estimate. M102 has no invented HEASARC row.
+
+Default thumbnail framing uses 1.4×the adopted major apparent extent, with a 180″ minimum; an unknown extent uses an authored 1680″ preview. Sorting uses the documented object extent separately. All source URLs, retrieval times and response hashes are in the supplement. Three focused tests validate the complete presentation, pin/path guards and damaged/changed image rejection; live acquisition decoded and hash-checked every cached JPEG.

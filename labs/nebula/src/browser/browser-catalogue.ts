@@ -25,24 +25,47 @@ page.on('request', request => {
 const snapshot = (url: URL) => url.pathname.endsWith('/.local/nebula-lab/catalogue/messier/index.json');
 async function ready() { await page.waitForFunction(() => { const button = document.querySelector<HTMLButtonElement>('.catalogue-status button'); return Boolean(button && !button.disabled); }); }
 async function recordsReady() { await page.waitForFunction(() => !document.querySelector('.catalogue-archive[aria-busy="true"]')); }
-async function screen(name: string) { await page.screenshot({ path: `${directory}/${name}.png` }); }
+async function screen(name: string) {
+  if (name !== 'failure') await page.waitForFunction(() => {
+    const portrait = document.querySelector<HTMLImageElement>('.catalogue-object-portrait img');
+    const list = document.querySelector('.catalogue-object-list')?.getBoundingClientRect();
+    const visible = [...document.querySelectorAll<HTMLImageElement>('.catalogue-object-list img')].filter(image => {
+      const rect = image.getBoundingClientRect(); return list && rect.bottom > list.top && rect.top < list.bottom;
+    });
+    return portrait && portrait.complete && portrait.naturalWidth > 1 && visible.every(image => image.complete && image.naturalWidth > 1);
+  });
+  await page.screenshot({ path: `${directory}/${name}.png` });
+}
 try {
   await page.goto(`${base}/catalogue?object=m42`); await ready();
   const objects = page.getByRole('listbox', { name: 'Select Messier object' });
-  assert.equal(await objects.locator('option').count(), 110);
-  assert.equal(await objects.inputValue(), 'm42');
+  assert.equal(await objects.getByRole('option').count(), 110);
+  assert.equal(await objects.getByRole('option', { selected: true }).getAttribute('data-object-id'), 'm42');
+  await page.waitForFunction(() => document.querySelector<HTMLImageElement>('.catalogue-object-portrait img')?.naturalWidth);
+  assert.equal(await page.getByRole('combobox', { name: 'Order by' }).inputValue(), 'size');
+  assert.equal(await objects.getByRole('option').first().getAttribute('data-object-id'), 'm31');
+  assert.match(await objects.getByRole('option').first().innerText(), /11,971.8″/);
+  assert.ok(await objects.locator('img').count() === 110);
+  await screen('largest-first');
+  await page.getByRole('combobox', { name: 'Object type' }).selectOption('diffuse-nebula');
+  for (const id of ['m8', 'm17', 'm20']) assert.equal(await objects.locator(`[data-object-id="${id}"]`).count(), 1);
+  assert.equal(await objects.locator('[data-object-id="m45"]').count(), 0);
+  await page.getByRole('combobox', { name: 'Object type' }).selectOption('all');
+  await page.getByRole('combobox', { name: 'Order by' }).selectOption('number');
   await page.getByRole('searchbox', { name: 'Find object' }).fill('M 42');
-  assert.equal(await objects.locator('option').count(), 1);
+  assert.equal(await objects.getByRole('option').count(), 1);
   await page.getByRole('searchbox', { name: 'Find object' }).fill('');
-  visited.add('m31'); await objects.selectOption('m31'); assert.equal(new URL(page.url()).searchParams.get('object'), 'm31');
-  await page.reload(); await ready(); assert.equal(await objects.inputValue(), 'm31');
-  visited.add('m32'); await objects.focus(); await objects.press('ArrowDown'); assert.equal(await objects.inputValue(), 'm32');
+  visited.add('m31'); await objects.locator('[data-object-id="m31"]').click(); assert.equal(new URL(page.url()).searchParams.get('object'), 'm31');
+  await page.reload(); await ready(); assert.equal(await objects.getByRole('option', { selected: true }).getAttribute('data-object-id'), 'm31');
+  await page.getByRole('combobox', { name: 'Order by' }).selectOption('number');
+  visited.add('m32'); await objects.getByRole('option', { selected: true }).focus(); await objects.getByRole('option', { selected: true }).press('ArrowDown');
+  assert.equal(await objects.getByRole('option', { selected: true }).getAttribute('data-object-id'), 'm32');
   assert.equal(new URL(page.url()).searchParams.get('object'), 'm32');
   const populated = inventory?.targets.find(target => target.objectId === 'm42' && target.queries.some(query => query.imageCount ?? query.images.length)) ??
     inventory?.targets.find(target => target.queries.some(query => query.imageCount ?? query.images.length));
   if (inventory && !allowMissing) assert.ok(populated, 'The actual archive cache has no candidates to inspect.');
   if (populated) {
-    visited.add(populated.objectId); await objects.selectOption(populated.objectId);
+    visited.add(populated.objectId); await objects.locator(`[data-object-id="${populated.objectId}"]`).click();
     const available = populated.queries.find(query => query.imageCount ?? query.images.length)!;
     await page.getByRole('group', { name: 'Filter archive' }).getByRole('button', { name: available.provider.toUpperCase(), exact: true }).click();
     await recordsReady();
@@ -71,12 +94,12 @@ try {
     }
   }
   await page.route(snapshot, route => route.fulfill({ status: 404, body: 'Not prepared' }));
-  await page.reload(); await ready(); assert.equal(await objects.locator('option').count(), catalogue.objects.length);
+  await page.reload(); await ready(); assert.equal(await objects.getByRole('option').count(), catalogue.objects.length);
   assert.equal(await page.getByText('No archive snapshot yet.', { exact: true }).count(), 1); await screen('missing');
   await page.unroute(snapshot);
   await page.route(snapshot, route => route.fulfill({ status: 503, body: 'Unavailable' }));
   await page.reload(); await ready(); assert.match(await page.locator('.catalogue-status [role="alert"]').innerText(), /503/);
-  assert.equal(await objects.locator('option').count(), 110);
+  assert.equal(await objects.getByRole('option').count(), 110);
   await page.unroute(snapshot);
   await page.route(snapshot, route => route.fulfill({ contentType: 'application/json', body: '{}' }));
   await page.getByRole('button', { name: 'Reload snapshot' }).click(); await ready();
@@ -87,7 +110,7 @@ try {
   assert.ok(recordRequests.every(id => visited.has(id)), `Unselected object records were fetched: ${recordRequests.join(', ')}`);
   await writeFile(`${directory}/result.json`, JSON.stringify({ status: 'passed', actualCache: Boolean(populated), objects: 110,
     inspectedObject: populated?.objectId, missingSnapshot: true, failedSnapshot: true, invalidSnapshot: true, sourceLinks: Boolean(populated),
-    urlSelection: true, keyboardSelection: true, storagePreserved: true, selectedRecordsOnly: true,
+    thumbnailsLoaded: true, largestFirst: true, angularUnits: 'arcseconds', urlSelection: true, keyboardSelection: true, storagePreserved: true, selectedRecordsOnly: true,
     hashGuard: Boolean(populated?.queries.some(query => query.imagesPath)), browser: browser.version(), errors, processing, science }, null, 2));
-  console.log(`PASS Messier browser: 110 objects, URL/keyboard selection, ${populated ? 'actual archive candidates, filters and links, ' : ''}missing/error/invalid snapshots, no processing or science downloads.`);
+  console.log(`PASS Messier browser: 110 thumbnail cards, largest-first angular sorting, loaded survey preview, URL/keyboard selection, ${populated ? 'actual archive candidates, filters and links, ' : ''}missing/error/invalid snapshots, no processing or science downloads.`);
 } catch (error) { await screen('failure'); throw error; } finally { await browser.close(); }

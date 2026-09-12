@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { archiveProviders, readArchiveQuery, readMessierCatalogue, readMessierInventory, type ArchiveImage, type ArchiveProvider,
   type ArchiveQuery, type MessierCatalogue, type MessierInventory, type MessierObject } from './types';
 import { imageSuitability, inventoryStorage } from './selection';
+import { readMessierPresentation } from './presentation';
+import { arcseconds, CatalogueThumbnail, displayObjectType, ObjectBrowser, objectExtent, orderObjects, type ObjectAppearance, type ObjectSort } from './object-browser';
 import './catalogue.css';
 
 declare const __NEBULA_REPO_ROOT__: string;
@@ -103,6 +105,18 @@ export function CatalogueView() {
   const [resolution, setResolution] = useState('all'), [productSearch, setProductSearch] = useState('');
   const [reload, setReload] = useState(0), [loading, setLoading] = useState(true), [error, setError] = useState('');
   const [missing, setMissing] = useState(false);
+  const [appearances, setAppearances] = useState<ReadonlyMap<string, ObjectAppearance>>(new Map());
+  const [previewError, setPreviewError] = useState(''), [objectSort, setObjectSort] = useState<ObjectSort>('size');
+  useEffect(() => {
+    const controller = new AbortController(); setPreviewError('');
+    void fetch(localFile('labs/nebula/models/messier/presentation.json'), { cache: 'no-store', signal: controller.signal })
+      .then(async response => {
+        if (!response.ok) throw new Error(`Sky previews unavailable (${response.status}).`);
+        const data = readMessierPresentation(await response.json());
+        if (!controller.signal.aborted) setAppearances(new Map(data.objects.map(object => [object.objectId, object])));
+      }).catch(reason => { if (!controller.signal.aborted) setPreviewError(textError(reason)); });
+    return () => controller.abort();
+  }, [reload]);
   useEffect(() => {
     const onHistory = () => setSelectedId(readObjectId()); window.addEventListener('popstate', onHistory);
     return () => window.removeEventListener('popstate', onHistory);
@@ -138,12 +152,12 @@ export function CatalogueView() {
     return () => controller.abort();
   }, [reload]);
   const selected = catalogue?.objects.find(object => object.id === selectedId);
-  const types = useMemo(() => [...new Set(catalogue?.objects.map(object => object.type) ?? [])].sort(), [catalogue]);
+  const types = useMemo(() => [...new Set(catalogue?.objects.map(object => displayObjectType(object, appearances.get(object.id))) ?? [])].sort(), [catalogue, appearances]);
   const objects = useMemo(() => {
     const query = objectSearch.trim().toLowerCase().replace(/^m\s+(\d+)$/, 'm$1');
-    return (catalogue?.objects ?? []).filter(object => (objectType === 'all' || object.type === objectType) &&
-      `${object.id} ${object.name} ${object.aliases.join(' ')}`.toLowerCase().includes(query)).sort((a, b) => a.messier - b.messier);
-  }, [catalogue, objectSearch, objectType]);
+    return orderObjects((catalogue?.objects ?? []).filter(object => (objectType === 'all' || displayObjectType(object, appearances.get(object.id)) === objectType) &&
+      `${object.id} ${object.name} ${object.aliases.join(' ')}`.toLowerCase().includes(query)), objectSort, appearances);
+  }, [catalogue, objectSearch, objectType, objectSort, appearances]);
   const target = inventory?.targets.find(item => item.objectId === selectedId);
   const selectedQueries = useSelectedQueries(target, reload);
   const queries = inventory?.targets.flatMap(item => item.queries) ?? [];
@@ -172,15 +186,15 @@ export function CatalogueView() {
         <label className="catalogue-field">Find object<input type="search" value={objectSearch} onChange={event => setObjectSearch(event.target.value)} placeholder="M42, Orion, NGC…" /></label>
         <label className="catalogue-field">Object type<select value={objectType} onChange={event => setObjectType(event.target.value)}>
           <option value="all">All types</option>{types.map(type => <option key={type}>{type}</option>)}</select></label>
-        <div className="catalogue-object-count"><span>{objects.length} of {catalogue?.objects.length ?? '…'} objects</span><span>Messier</span></div>
-        <select className="catalogue-object-select" aria-label="Select Messier object" size={18} value={objects.some(object => object.id === selectedId) ? selectedId : ''}
-          onChange={event => chooseObject(event.target.value)} disabled={!catalogue}>
-          {!objects.some(object => object.id === selectedId) && <option value="" disabled hidden>Select an object</option>}
-          {objects.map(object => <option key={object.id} value={object.id}>{`M${object.messier} · ${object.name}`}</option>)}
-        </select>
+        <label className="catalogue-field catalogue-sort">Order by<select value={objectSort} onChange={event => {
+          const value = event.target.value; if (value === 'size' || value === 'number' || value === 'name') setObjectSort(value);
+        }}><option value="size">Largest on sky first</option><option value="number">Messier number</option><option value="name">Name</option></select></label>
+        <div className="catalogue-object-count"><span>{objects.length} of {catalogue?.objects.length ?? '…'} objects</span><span title="Apparent major-axis size, in arcseconds. Unknown sizes sort last.">Size (arcsec)</span></div>
+        <ObjectBrowser objects={objects} selectedId={selectedId} appearances={appearances} chooseObject={chooseObject} localFile={localFile} />
+        {previewError && <span className="catalogue-preview-error" role="status">{previewError}</span>}
       </aside>
       <section className="catalogue-detail" aria-label="Archive image candidates">
-        {selected && catalogue && <ObjectHeading object={selected} catalogue={catalogue} />}
+        {selected && catalogue && <ObjectHeading object={selected} catalogue={catalogue} appearance={appearances.get(selected.id)} />}
         <div className="catalogue-status">
           <span role={error ? 'alert' : 'status'}>{error || (loading ? 'Reading local snapshot…' : missing ? 'No archive snapshot yet.' :
             `${completeCount} of ${queries.length} queries complete${partialCount ? ` · ${partialCount} partial` : ''}${errorCount ? ` · ${errorCount} failed` : ''}`)}</span>
@@ -220,14 +234,25 @@ export function CatalogueView() {
   </>;
 }
 
-function ObjectHeading({ object, catalogue }: { object: MessierObject; catalogue: MessierCatalogue }) {
+function ObjectHeading({ object, catalogue, appearance }: { object: MessierObject; catalogue: MessierCatalogue; appearance?: ObjectAppearance }) {
   const sources = catalogue.sources.filter(source => object.sourceIds.includes(source.id));
+  const extent = objectExtent(object, appearance), thumbnail = appearance?.thumbnail;
   return <>
-    <div className="catalogue-object-heading"><div><h2>{`M${object.messier} · ${object.name}`}</h2><p>{object.type}{object.aliases.length ? ` · ${object.aliases.join(' · ')}` : ''}</p></div>
+    <div className="catalogue-object-heading">
+      {thumbnail && <a className="catalogue-object-portrait" href={thumbnail.sourceUrl} target="_blank" rel="noreferrer"
+        title={`${thumbnail.credit} · Sky preview field ${arcseconds(thumbnail.fieldArcsec)}. This survey overview is separate from the archive image candidates.`}>
+        <CatalogueThumbnail key={object.id} url={thumbnail.localPath ? localFile(thumbnail.localPath) : thumbnail.url} fallback={thumbnail.url} alt={`M${object.messier} sky preview`} />
+        <span>Survey source ↗</span></a>}
+      <div className="catalogue-object-title"><h2>{`M${object.messier} · ${object.name}`}</h2><p>{displayObjectType(object, appearance)}{object.aliases.length ? ` · ${object.aliases.join(' · ')}` : ''}</p></div>
       <div className="catalogue-object-links">{sources.map(source => <a href={source.url} key={source.id} target="_blank" rel="noreferrer" title={source.credit}>{source.id} ↗</a>)}</div>
     </div>
     <div className="catalogue-object-facts"><span title="Catalogue ICRS coordinates; not a fitted image registration.">RA {object.raDegrees.toFixed(5)}° · Dec {object.decDegrees.toFixed(5)}°</span>
-      <span title={object.notes ?? 'Catalogue reference extent. This does not establish that an archive image includes all surrounding nebulosity.'}>Catalogue extent {object.majorArcmin === null ? 'unreported' : `${object.majorArcmin}′${object.minorArcmin !== null ? ` × ${object.minorArcmin}′` : ''}`}</span>
+      <span title={`${extent.label}. ${extent.notes ?? 'Reference angular extent, not a measured image boundary.'}`}>Apparent size {extent.majorArcsec === null ? 'unreported' : arcseconds(extent.majorArcsec)}{extent.minorArcsec !== null ? ` × ${arcseconds(extent.minorArcsec)}` : ''}
+        {extent.sourceUrl && <> · <a href={extent.sourceUrl} target="_blank" rel="noreferrer">Size source ↗</a></>}</span>
+      {appearance?.facts && <span title="Historical NASA HEASARC catalogue values; constellation abbreviation and integrated visual magnitude.">
+        <a href={appearance.facts.sourceUrl} target="_blank" rel="noreferrer">Constellation {appearance.facts.constellation}</a>
+        {appearance.facts.visualMagnitude !== null && <> · V {appearance.facts.visualMagnitude.toFixed(1)} mag{appearance.facts.magnitudeUncertaintyFlag ? ' (approx.)' : ''}</>}
+      </span>}
       {object.notes && <span title={object.notes}>Source scope ⓘ</span>}
     </div>
   </>;
@@ -261,7 +286,8 @@ function ArchiveGroup({ provider, query, page: loaded, images, object }: { provi
 function ImageRow({ image, object }: { image: ArchiveImage; object: MessierObject }) {
   const suitability = imageSuitability(image, object);
   return <tr data-image-id={image.id}>
-    <td><h4 className="catalogue-product-title">{image.title || image.id}</h4><span className="catalogue-product-meta">{[image.collection, image.facility, image.instrument].filter(Boolean).join(' · ')}</span>
+    <td>{image.previewUrl && <a href={image.previewUrl} target="_blank" rel="noreferrer" className="catalogue-product-preview"><CatalogueThumbnail url={image.previewUrl} alt={`${image.title || image.id} archive preview`} /></a>}
+      <h4 className="catalogue-product-title">{image.title || image.id}</h4><span className="catalogue-product-meta">{[image.collection, image.facility, image.instrument].filter(Boolean).join(' · ')}</span>
       <span className="catalogue-product-meta">{wavelength(image)}{image.exposureSeconds !== null ? ` · ${image.exposureSeconds.toLocaleString()} s` : ''}</span>
       <span className="catalogue-product-meta" title="Metadata estimate only. Detail compares reported angular resolution with the catalogue extent, not the image's usable structure or accepted quality.">{roleLabels[suitability.role]}</span></td>
     <td>{image.resolutionArcsec === null ? 'Unreported' : `${image.resolutionArcsec.toLocaleString(undefined, { maximumSignificantDigits: 3 })}″`}
