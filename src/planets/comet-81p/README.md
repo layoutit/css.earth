@@ -24,6 +24,8 @@
 
 - The [terrain-place browser record](evidence/terrain-places/browser.json) covers all three search flights at 1440 × 900 and 390 × 844 on main `e986b9280` plus this change. Inspected [desktop](evidence/terrain-places/desktop.png) and [mobile viewport](evidence/terrain-places/mobile.png) captures show qualified captions on the photographs. Both matching datasets retain the labels; Shadows stay Off and all 992 leaves survive selection. Sixteen focused tests, preparation build/typecheck, coordinate reproduction and both changed bodies' provenance pass. Aggregate source preparation is blocked by unchanged Earth, Moon and Mars recipe pins on that main revision; full browser conformance was not rerun.
 
+- **Reader oracle, 2026-09-12:** `tools/oracles/fits/encounter.py` reads the pinned NAVCAM product `n2075we02_rr.fit` with astropy. `tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts` requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, flagged and non-finite pixels to agree.
+
 ## Known problems
 
 - The archive completes the hidden/unilluminated side using a fitted triaxial ellipsoid; we use its published vertices and connections, without synthesizing terrain.

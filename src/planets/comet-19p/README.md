@@ -20,6 +20,8 @@ Four terrain places follow [Britt et al. (2004), Figs. 1 and 4](https://doi.org/
 
 The [terrain-place browser record](evidence/terrain-places/browser.json) covers all four search flights at 1440 × 900 and 390 × 844 on main `e986b9280` plus this change. Inspected [desktop](evidence/terrain-places/desktop.png) and [mobile viewport](evidence/terrain-places/mobile.png) captures show the MICAS labels and qualified captions. Shadows stay Off, all 2,856 retained leaves survive the selections, and switching to DLR hides the labels. Sixteen focused tests, preparation build/typecheck, coordinate reproduction and both changed bodies' provenance pass. Aggregate source preparation is blocked by unchanged Earth, Moon and Mars recipe pins on that main revision; full browser conformance was not rerun.
 
+- **Reader oracle, 2026-09-12:** `tools/oracles/isis2/borrelly-micas.py` reads the four pinned MICAS cubes with pvl and numpy. `tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts` requires 48 sampled core values per cube to match exactly and the valid and special-pixel counts to agree.
+
 ## Known problems
 
 - The 16 m USGS grid oversamples roughly 150 m stereo terrain. Height is displacement above an arbitrary image plane.
