@@ -78,10 +78,10 @@ other UI chrome.
 Run the complete extraction and publication sequence with:
 
 ```sh
-node tests/objects/oracle/mars/google-earth-pro/extract-render-contracts.mts
-node tests/objects/oracle/mars/google-earth-pro/capture-sun-presentation-contract.mts
-node tests/objects/oracle/mars/google-earth-pro/publish-render-contract-index.mts
-node tests/objects/oracle/mars/google-earth-pro/capture-isolated-sun-components.mts
+node tools/oracles/mars/google-earth-pro/extract-render-contracts.mts
+node tools/oracles/mars/google-earth-pro/capture-sun-presentation-contract.mts
+node tools/oracles/mars/google-earth-pro/publish-render-contract-index.mts
+node tools/oracles/mars/google-earth-pro/capture-isolated-sun-components.mts
 ```
 
 The authoritative local index is
@@ -121,9 +121,9 @@ rather than relying only on filenames in the application resources.
 Run and publish the granular contract with:
 
 ```sh
-node tests/objects/oracle/mars/google-earth-pro/build-render-contract-hook.mts
-node tests/objects/oracle/mars/google-earth-pro/capture-granular-render-contract.mts
-node tests/objects/oracle/mars/google-earth-pro/publish-granular-render-contract.mts
+node tools/oracles/mars/google-earth-pro/build-render-contract-hook.mts
+node tools/oracles/mars/google-earth-pro/capture-granular-render-contract.mts
+node tools/oracles/mars/google-earth-pro/publish-granular-render-contract.mts
 ```
 
 The implementation-ready contract is
