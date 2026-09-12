@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c22c9126560e343ac8c36dd41dd11dc5888a5abe5e226d734325341e8e225d81"
+    "sha256": "3fb0e12ac948aaf98570ab753947ef69e2e76af4d17763dc3e0562562addf9bd"
   },
   "id": "steins",
   "properties": {
@@ -92,7 +92,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "48994c0671cf16afb5516182fd6276796fc40ed8ebb5fed87efefffb8110b600"
+          "sha256": "f2bdf5f88e50b1df5c73af5515dd22987c27a0ae7f4cef29098ca41b6f779abf"
         }
       ],
       "features": {
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7199d2563f1cffe9a2e875600e10ffbb082e002087c0931183fc3e3cc297adf1"
+        "sha256": "8641516654fc2719bece7339a29938a714dae69d61586e2e16d1029d06667bc9"
       }
     },
     "catalog": {

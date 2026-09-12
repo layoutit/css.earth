@@ -143,7 +143,7 @@
         "longitudeDirection": "east",
         "referenceRadiusMeters": 255000
       },
-      "coverage": "DLR\u2019s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
+      "coverage": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
       "expectedBytes": 446346023,
       "expectedSha256": "5c7bb9a5dcd87b16a969c40a0b4c931f9582038d04ca7066d72315ab2ac1e5e0",
       "capture": {
@@ -174,7 +174,7 @@
       "expectedSha256": "ee0007931abcecc970a2184b582995f9f6026d630661f0840607aa7c5006269f",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/VESTA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -212,8 +212,8 @@
     {
       "id": "vesta-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1094,
-      "expectedSha256": "349bfa63f1d765562e043414d88a0ae39a4a7dd1ab329235c296eda39cb49f7f",
+      "expectedBytes": 1119,
+      "expectedSha256": "2e00300733f8a2572e548323aaa05ad8afa6cba2131718cd4cefa3e9a6c47c89",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -350,6 +350,29 @@
       "purpose": "Unmodified publisher metadata for the spectral composite.",
       "expectedBytes": 2177,
       "expectedSha256": "8fd6341b4d9b66445a76883783c323d503cd822ecf3719a4e62bcdc7e7818c53"
+    },
+    {
+      "id": "vesta-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 4724,
+      "expectedSha256": "5f6e1fec30acfda423868511c7219ead5e38998c985d1aa96ecdd28e02f99e03",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 9 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts vesta: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

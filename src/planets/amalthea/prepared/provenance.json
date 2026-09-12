@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4f262dc99798f85226319820b3bba542d17fd67ce2eea3784e324981f5e05e35"
+    "sha256": "872fd6d1265bdddcf8cab5bf39e2aad2bf13b7b91cb2309659bf253aab410aa1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -446,7 +446,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "74d6b48f1962e6c6c3e7add995fe0b3f79e6156fe635279bd11c59f407e22284",
+      "sha256": "d67357bb1382bd4e03ebb6cf82a84390d492634dcafc20f331b03a7a776b479a",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -489,10 +489,10 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
@@ -1320,8 +1320,8 @@
       "outputs": [
         {
           "url": "/scenes/amalthea/amalthea-features.json",
-          "bytes": 4954,
-          "sha256": "efa1760c8d4735baf531a1f902c384c02330dab7d61e2ef925d248974e256dc0",
+          "bytes": 5294,
+          "sha256": "f345251e57d960ae4a28adbdb50eca3fe3bb80b95f63f5b9addcce823dd37eb7",
           "verification": "bytes-verified"
         }
       ],

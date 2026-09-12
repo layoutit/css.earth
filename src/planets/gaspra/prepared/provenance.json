@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b1d061b5bbeecb07d15db6fce9b9116ea318932a97a9590b6558c3391b24abcc"
+    "sha256": "d48a4d3285190b20eb96d4caa6b5b62cc0f3bee304f9b94bd1d5ac91527f68c3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -430,7 +430,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "8780519f14e672251fbc600e824398bb345d12d56c0b9b9d159350f6e6d2f5b6",
+      "sha256": "e56d3db7e5b847cc73d83d0652ad5c4d7658b992b79923a37433422a4941f1a7",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -474,10 +474,10 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
@@ -1423,8 +1423,8 @@
       "outputs": [
         {
           "url": "/scenes/gaspra/gaspra-features.json",
-          "bytes": 19897,
-          "sha256": "ddd29cf0bc9f3ab2065f7e64ac0af06e7f8ff91ee8885059b6c19cfb6c9ae905",
+          "bytes": 21654,
+          "sha256": "b1c2373caaa8950770b970ef7f0579fdaff55f2f7258d87c950f2353a3760004",
           "verification": "bytes-verified"
         }
       ],

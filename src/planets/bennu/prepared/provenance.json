@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "38757b13b62702b453ac1d21370c94b06f20102cf0c1d113f82c6d38c8677d4b"
+    "sha256": "dd7ba5d47e17d138b856acdac40a7edc3539bb914be99165e7096efc600b9bd1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -415,7 +415,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "4e2d782185756145e9a393f95e9a65f31404ea156ff5e468f26a3008b13647ce",
+      "sha256": "4a0542e5d1aff0f42e631f8e23b71238b49abe15a661d426c8a4e75b4cec0060",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -460,16 +460,20 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
           "pieces": 256
         },
-        "notes": "notes.json"
+        "notes": "notes.json",
+        "sites": {
+          "document": "sites.json",
+          "inputs": []
+        }
       }
     }
   ],
@@ -818,6 +822,31 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "bennu-surface-sites",
+      "path": "features/sites.json",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      },
+      "kind": "source-document",
+      "title": "features/sites.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "593a9885578080b1e8512aa67688dd1839c2b2e6a4e5a523c0fa28e9b50d05db",
+      "bytes": 1863,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -1050,7 +1079,7 @@
         {
           "url": "object:prepared/content.json",
           "bytes": 5048,
-          "sha256": "065865a5fee921bfb19151ae79c73635c8bd937e03a0f2491a069546dae6b4d8",
+          "sha256": "05f4a62f74e61e9009041c8cc832fcc446ceff63a617185bbfefb7401b526d1b",
           "verification": "bytes-verified"
         }
       ],
@@ -1079,13 +1108,14 @@
         "bennu-surface-features-source",
         "usgs-gazetteer-bennu-nomenclature-center-pts",
         "bennu-surface-map-frame",
-        "bennu-surface-feature-notes"
+        "bennu-surface-feature-notes",
+        "bennu-surface-sites"
       ],
       "outputs": [
         {
           "url": "/scenes/bennu/bennu-features.json",
-          "bytes": 33438,
-          "sha256": "c6a944b30f109cf3696463e6a109a85edc849fe01d73e8c1df978fade0e797f4",
+          "bytes": 36750,
+          "sha256": "b059ae8b3b0c48c78d3752b19e7465304486cb1fccb80fde6ca1832b344ebdb5",
           "verification": "bytes-verified"
         }
       ],

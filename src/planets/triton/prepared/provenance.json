@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "366991193f021eb6ad3c533d96349b6264eb25f3cfe47d21be95284dd91d6415"
+    "sha256": "ce0672d933d907906ad684590311e334607253ac4bf9290e4647d1e821f30ebf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -387,7 +387,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "a91b2e5ce2200faeb88c5b96432d8be30d2e4fc724335a8ce72a87743763861f",
+      "sha256": "cbe37fdbb767bafcffceb3ecc8c7e1b7d483fe643f06bcc06e4500744011431f",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -430,15 +430,16 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
           "pieces": 256
-        }
+        },
+        "notes": "notes.json"
       }
     }
   ],
@@ -705,6 +706,33 @@
       },
       "sha256": "d0f3f908574d4e81e0124751c533e1b653c5699d9af4fc28d0417557cb7d7b2c",
       "bytes": 153,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "triton-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 7 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts triton: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "10f3a8788729f56d50bb6808869917e8b22e23d0cd3a17acf7d14fb95a26ba15",
+      "bytes": 3320,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1289,13 +1317,14 @@
       "inputs": [
         "triton-surface-features-source",
         "usgs-gazetteer-triton-nomenclature-center-pts",
-        "triton-surface-map-frame"
+        "triton-surface-map-frame",
+        "triton-surface-feature-notes"
       ],
       "outputs": [
         {
           "url": "/scenes/triton/triton-features.json",
-          "bytes": 41972,
-          "sha256": "19a436b80d7d976376617b24036eb86d48335dc88f755a3aca5115c400008f12",
+          "bytes": 47759,
+          "sha256": "392cf282c0fc243bf4e1102c19e98245b2b37c978aab524201bcaae374aba2f5",
           "verification": "bytes-verified"
         }
       ],

@@ -5,3 +5,5 @@ JAXA/Hayabusa2 ONC team; N. Hirata and colleagues. Source data: https://doi.org/
 Physical and orbital data: NASA/JPL Horizons. ESO/S. Brunier sky and HYG notices remain in source/stars. Inter title outlines retain the SIL Open Font License.
 
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
+
+Landing, touchdown and impact sites (1): compiled from NASA NSSDCA, PDS and LROC pages, agency releases and cited papers; each site's source, rights and quoted sentence are in `source/features/sites.json`. NASA content is not subject to copyright; other publishers are cited for facts only.

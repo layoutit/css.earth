@@ -1,0 +1,351 @@
+{
+  "schema": "cssearth-surface-features@1",
+  "directory": "features",
+  "archive": null,
+  "members": null,
+  "surfaceMap": "presentation/surface-map.json",
+  "mapLeftEdgeLongitudeDeg": 180,
+  "output": "earth-features.json",
+  "publicBase": "/scenes/earth/",
+  "target": {
+    "className": "earth-body",
+    "withoutClassName": "earth-body-polar"
+  },
+  "lensIds": [
+    "normal",
+    "clouds",
+    "topography",
+    "night-lights",
+    "enso",
+    "cross-section",
+    "mantle-tomography"
+  ],
+  "kinds": {
+    "point": [
+      "CT",
+      "CP",
+      "PO",
+      "WF",
+      "MO",
+      "IS",
+      "DE",
+      "PL",
+      "PE"
+    ],
+    "linear": [
+      "RI",
+      "ST"
+    ],
+    "region": [
+      "CO",
+      "BA",
+      "VA",
+      "RE",
+      "OC",
+      "SE"
+    ]
+  },
+  "excludedTypeCodes": {},
+  "labelPolicy": {
+    "minimumZoomShare": 0,
+    "minimumDiameterPixels": 40,
+    "alwaysVisibleCount": 0,
+    "maximumVisible": 40,
+    "limbCosine": 0.12
+  },
+  "outline": {
+    "pieces": 256
+  },
+  "naturalEarth": {
+    "layers": [
+      {
+        "id": "populated-places",
+        "archive": "ne_10m_populated_places.zip",
+        "attributes": "ne_10m_populated_places.dbf",
+        "shapes": "ne_10m_populated_places.shp",
+        "classField": "FEATURECLA",
+        "classes": {
+          "Admin-0 capital": {
+            "code": "CT",
+            "type": "Capital"
+          },
+          "Admin-0 capital alt": {
+            "code": "CT",
+            "type": "Capital"
+          },
+          "Admin-0 region capital": {
+            "code": "CT",
+            "type": "Capital"
+          },
+          "Admin-1 capital": {
+            "code": "CT",
+            "type": "City"
+          },
+          "Admin-1 region capital": {
+            "code": "CT",
+            "type": "City"
+          },
+          "Populated place": {
+            "code": "CT",
+            "type": "City"
+          },
+          "Scientific station": {
+            "code": "CT",
+            "type": "Research station"
+          },
+          "Historic place": {
+            "code": "CT",
+            "type": "Historic place"
+          },
+          "Meteorological Station": {
+            "code": "CT",
+            "type": "Station"
+          }
+        },
+        "nameField": "NAME_EN",
+        "idField": "NE_ID",
+        "wikidataField": "WIKIDATAID",
+        "rankField": "POP_MAX",
+        "maximum": 3000,
+        "rankOrder": "descending",
+        "zoomField": "MIN_ZOOM"
+      },
+      {
+        "id": "regions-points",
+        "archive": "ne_10m_geography_regions_points.zip",
+        "attributes": "ne_10m_geography_regions_points.dbf",
+        "shapes": "ne_10m_geography_regions_points.shp",
+        "classField": "featurecla",
+        "classes": {
+          "cape": {
+            "code": "CP",
+            "type": "Cape"
+          },
+          "pole": {
+            "code": "PO",
+            "type": "Pole"
+          },
+          "plain": {
+            "code": "PL",
+            "type": "Plain"
+          },
+          "peninsula": {
+            "code": "PE",
+            "type": "Peninsula"
+          },
+          "island": {
+            "code": "IS",
+            "type": "Island"
+          },
+          "waterfall": {
+            "code": "WF",
+            "type": "Waterfall"
+          },
+          "mountain": {
+            "code": "MO",
+            "type": "Mountain"
+          },
+          "desert": {
+            "code": "DE",
+            "type": "Desert"
+          }
+        },
+        "nameField": "name_en",
+        "idField": "ne_id",
+        "wikidataField": "wikidataid",
+        "rankField": "scalerank",
+        "maximum": null,
+        "rankOrder": "ascending",
+        "zoomField": "min_zoom"
+      },
+      {
+        "id": "regions-polys",
+        "archive": "ne_10m_geography_regions_polys.zip",
+        "attributes": "ne_10m_geography_regions_polys.dbf",
+        "shapes": "ne_10m_geography_regions_polys.shp",
+        "classField": "FEATURECLA",
+        "classes": {
+          "Continent": {
+            "code": "CO",
+            "type": "Continent"
+          },
+          "Range/mtn": {
+            "code": "MO",
+            "type": "Mountain range"
+          },
+          "Desert": {
+            "code": "DE",
+            "type": "Desert"
+          },
+          "Island": {
+            "code": "IS",
+            "type": "Island"
+          },
+          "Island group": {
+            "code": "IS",
+            "type": "Island group"
+          },
+          "Peninsula": {
+            "code": "PE",
+            "type": "Peninsula"
+          },
+          "Plain": {
+            "code": "PL",
+            "type": "Plain"
+          },
+          "Plateau": {
+            "code": "PL",
+            "type": "Plateau"
+          },
+          "Basin": {
+            "code": "BA",
+            "type": "Basin"
+          },
+          "Valley": {
+            "code": "VA",
+            "type": "Valley"
+          },
+          "Lowland": {
+            "code": "PL",
+            "type": "Lowland"
+          },
+          "Tundra": {
+            "code": "RE",
+            "type": "Tundra"
+          },
+          "Wetlands": {
+            "code": "RE",
+            "type": "Wetlands"
+          },
+          "Delta": {
+            "code": "RE",
+            "type": "Delta"
+          },
+          "Isthmus": {
+            "code": "RE",
+            "type": "Isthmus"
+          },
+          "Gorge": {
+            "code": "VA",
+            "type": "Gorge"
+          },
+          "Foothills": {
+            "code": "MO",
+            "type": "Foothills"
+          },
+          "Coast": {
+            "code": "RE",
+            "type": "Coast"
+          },
+          "Depression": {
+            "code": "BA",
+            "type": "Depression"
+          },
+          "Geoarea": {
+            "code": "RE",
+            "type": "Region"
+          },
+          "Pen/cape": {
+            "code": "PE",
+            "type": "Peninsula"
+          }
+        },
+        "nameField": "NAME_EN",
+        "idField": "NE_ID",
+        "wikidataField": "WIKIDATAID",
+        "rankField": "SCALERANK",
+        "maximum": null,
+        "rankOrder": "ascending",
+        "zoomField": null
+      },
+      {
+        "id": "marine",
+        "archive": "ne_10m_geography_marine_polys.zip",
+        "attributes": "ne_10m_geography_marine_polys.dbf",
+        "shapes": "ne_10m_geography_marine_polys.shp",
+        "classField": "featurecla",
+        "classes": {
+          "ocean": {
+            "code": "OC",
+            "type": "Ocean"
+          },
+          "sea": {
+            "code": "SE",
+            "type": "Sea"
+          },
+          "bay": {
+            "code": "SE",
+            "type": "Bay"
+          },
+          "gulf": {
+            "code": "SE",
+            "type": "Gulf"
+          },
+          "strait": {
+            "code": "ST",
+            "type": "Strait"
+          },
+          "channel": {
+            "code": "ST",
+            "type": "Channel"
+          },
+          "sound": {
+            "code": "SE",
+            "type": "Sound"
+          },
+          "lagoon": {
+            "code": "SE",
+            "type": "Lagoon"
+          },
+          "fjord": {
+            "code": "SE",
+            "type": "Fjord"
+          },
+          "inlet": {
+            "code": "SE",
+            "type": "Inlet"
+          },
+          "reef": {
+            "code": "IS",
+            "type": "Reef"
+          },
+          "generic": {
+            "code": "SE",
+            "type": "Water body"
+          }
+        },
+        "nameField": "name_en",
+        "idField": "ne_id",
+        "wikidataField": "wikidataid",
+        "rankField": "scalerank",
+        "maximum": null,
+        "rankOrder": "ascending",
+        "zoomField": null
+      },
+      {
+        "id": "rivers",
+        "archive": "ne_10m_rivers_lake_centerlines.zip",
+        "attributes": "ne_10m_rivers_lake_centerlines.dbf",
+        "shapes": "ne_10m_rivers_lake_centerlines.shp",
+        "classField": "featurecla",
+        "classes": {
+          "River": {
+            "code": "RI",
+            "type": "River"
+          },
+          "Lake Centerline": {
+            "code": "RI",
+            "type": "Lake centreline"
+          }
+        },
+        "nameField": "name_en",
+        "idField": "ne_id",
+        "wikidataField": "wikidataid",
+        "rankField": "scalerank",
+        "maximum": 600,
+        "rankOrder": "ascending",
+        "zoomField": "min_zoom"
+      }
+    ]
+  }
+}

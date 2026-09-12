@@ -578,7 +578,7 @@
       "expectedSha256": "58136a4ad15b287d1a01058d659974b44dfc67a65f2a53569d7654987d308e54",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -616,8 +616,8 @@
     {
       "id": "mars-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1121,
-      "expectedSha256": "ba5861a3d68659b0f35174b97842558585f36d4c87d5bf611d74dfd51e41246b",
+      "expectedBytes": 1299,
+      "expectedSha256": "945f147e0b32b66861c9bdb643b9c15bfca032e49893286b4ae746e7f8c00ff1",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -650,6 +650,54 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "mars-msl-curiosity-traverse-path",
+      "path": "features/traverses/msl_localized_pos.csv",
+      "expectedBytes": 349568,
+      "expectedSha256": "d456ce9025ca71673af8b9f72a78dc508f5d963cbac74fa68eeac88a4c7c3a3b",
+      "origin": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/",
+      "credit": "NASA PDS",
+      "license": "NASA PDS archive; NASA content not subject to copyright",
+      "licenseEvidence": [
+        "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/.",
+      "redistribution": "NASA data product, credit the publisher",
+      "consumers": [
+        "features"
+      ],
+      "title": "Curiosity traverse (PLACES localizations)",
+      "displayCredit": "NASA PDS",
+      "sourceUrl": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      }
+    },
+    {
+      "id": "mars-m2020-perseverance-traverse-path",
+      "path": "features/traverses/m2020_best_tactical.csv",
+      "expectedBytes": 171404,
+      "expectedSha256": "9da19e4f70287fe0d33ba716ff2169c10447c30c7a048583f730e4155226cde9",
+      "origin": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/",
+      "credit": "NASA PDS",
+      "license": "NASA PDS archive; NASA content not subject to copyright",
+      "licenseEvidence": [
+        "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/.",
+      "redistribution": "NASA data product, credit the publisher",
+      "consumers": [
+        "features"
+      ],
+      "title": "Perseverance traverse (PLACES localizations)",
+      "displayCredit": "NASA PDS",
+      "sourceUrl": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -679,6 +727,50 @@
       "expectedSha256": "360618f1638471e2f3be37907a67c815104af4e9a57e713cf1938159ae9ad8a0",
       "origin": "Headless local measurements of Google Earth Pro 7.3.7.1327 Mars mode on 2026-09-02",
       "purpose": "Clean-room behavioural measurements retained as evidence for the shared directional-sun presentation standard, which cites this path (src/platform/directional-sun-contract.mts DIRECTIONAL_SUN_PRESENTATION_STANDARD.sourcePath). No Mars preparation step reads it since the generic raster lane replaced the affine lane."
+    },
+    {
+      "id": "mars-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 19986,
+      "expectedSha256": "a14285fa6b38fd1dd403119fee66b3d285eac41851e5ca57972df6285dd1921c",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "id": "mars-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 301501,
+      "expectedSha256": "b2236444ed13365223dca094ead1db1c8a258bc6b8ea7009b0f02e7950919dfd",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 644 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts mars: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

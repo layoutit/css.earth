@@ -381,7 +381,7 @@
       "expectedSha256": "16001f4727a58377f0482f02f19f38cb1da71930894acbc9c7c7e5f007ffb5e6",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/STEINS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -419,8 +419,8 @@
     {
       "id": "steins-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1100,
-      "expectedSha256": "48994c0671cf16afb5516182fd6276796fc40ed8ebb5fed87efefffb8110b600",
+      "expectedBytes": 1125,
+      "expectedSha256": "f2bdf5f88e50b1df5c73af5515dd22987c27a0ae7f4cef29098ca41b6f779abf",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -600,6 +600,29 @@
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 89772,
       "expectedSha256": "52fe1b607889f667ba3085901b704730d579f0ae5dd925a107b205d3dfaaced1"
+    },
+    {
+      "id": "steins-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 478,
+      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts steins: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

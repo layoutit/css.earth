@@ -27,6 +27,8 @@ The [retained source inspection](source/observations/source-inspection.json) pro
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Titania (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Gertrude and Messina Chasmata on the prepared minimap (±180° cylindrical cube) coincide with the imagery.
 
+Feature notes: 5 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
+
 - Approximate source coverage is 44.8% for monochrome and 27.7% for elevation before interpolation; the unobserved north stays missing.
 - Monochrome processing depends on an unavailable photometric parameter file. DN values are not calibrated albedo.
 - Terrain spacing is not accuracy; stereo noise and mapping artifacts remain. Geology records historical interpretations, not measured composition.

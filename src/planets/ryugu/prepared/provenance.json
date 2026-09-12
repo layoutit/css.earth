@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0a29af8b5e9d16b8c2854918198cae2e8edd1ddec28194ed30a8194453cdfb12"
+    "sha256": "4a30c8dbf76465044f3952fd109f7685dc1bf554a8c782ad4fe0628bef8eeb63"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -361,7 +361,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "cddaaba5a7f49ff220c633a02cc9448ef7bcc008b1cc0452516a770bc8426499",
+      "sha256": "65a2fe24d6ac8595591651b64c0cf23b76467352e5b13ef7625c1a57eebf5eae",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -405,14 +405,19 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
           "pieces": 256
+        },
+        "notes": "notes.json",
+        "sites": {
+          "document": "sites.json",
+          "inputs": []
         }
       }
     }
@@ -674,6 +679,58 @@
       "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
+    },
+    {
+      "id": "ryugu-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts ryugu: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "bytes": 478,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "ryugu-surface-sites",
+      "path": "features/sites.json",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      },
+      "kind": "source-document",
+      "title": "features/sites.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "8e7cb7fc9b9912414263cb5bb6095f0693ec4a671c8f7ece0f787627f5e0b641",
+      "bytes": 1789,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
     }
   ],
   "products": [
@@ -838,7 +895,7 @@
         {
           "url": "object:prepared/content.json",
           "bytes": 4919,
-          "sha256": "ef850a07c3f88808cd505d1a6bb4f083080e4033300ed68147d0ad29b3816af9",
+          "sha256": "1be71a476ed21b94c4b07c47f913cb06d176675c47267e9c5c769253f18399bc",
           "verification": "bytes-verified"
         }
       ],
@@ -866,13 +923,15 @@
       "inputs": [
         "ryugu-surface-features-source",
         "usgs-gazetteer-ryugu-nomenclature-center-pts",
-        "ryugu-surface-map-frame"
+        "ryugu-surface-map-frame",
+        "ryugu-surface-feature-notes",
+        "ryugu-surface-sites"
       ],
       "outputs": [
         {
           "url": "/scenes/ryugu/ryugu-features.json",
-          "bytes": 16646,
-          "sha256": "9ada2ef914fb71bcff53a2af9558d1c3202cf92610513e23ba923263d3b73698",
+          "bytes": 19032,
+          "sha256": "59cb1cd8f4b036a5b52931306cba4690d8c431a535c4691a3adfe10829e36fd9",
           "verification": "bytes-verified"
         }
       ],

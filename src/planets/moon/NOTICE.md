@@ -18,3 +18,7 @@ Lucey et al. (2021), corrected Diviner Christiansen-feature map, DOI 10.5281/zen
 Powell et al. (2023), LRO Diviner GHRM temperature, temperature-anomaly and rock-abundance products, NASA PDS Geosciences Node. The corresponding [author dataset](https://doi.org/10.25346/S6/LFAVXU) is CC0 1.0. Retain source attribution and exact product identities; processing and interpretation limits are described in README.md. The journal article itself is not redistributed or relicensed.
 
 Feature names, centres, diameters, extents and name origins are from the Gazetteer of Planetary Nomenclature, maintained by the USGS Astrogeology Science Center for the IAU Working Group for Planetary System Nomenclature. The archived export is a United States Government work in the public domain; see `source/features/manifest.json`.
+
+Feature caption notes: 1749 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.
+
+Landing, touchdown and impact sites (80, 2 traverses): compiled from NASA NSSDCA, PDS and LROC pages, agency releases and cited papers; each site's source, rights and quoted sentence are in `source/features/sites.json`. NASA content is not subject to copyright; other publishers are cited for facts only.

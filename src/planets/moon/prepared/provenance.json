@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "950afa3cfeb12673566167886c11e22d368450337486f9e79fb34ac9814cbd71"
+    "sha256": "520352a9fff5a7c95382be97308322e46abde18d456061eae311afcd950422dd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "301332926f3752d2c934acdedec2fe1858e17e76e7d72db34e421ace8490cf27"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -1787,7 +1787,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "9be698dd91e2412cbea30b385ec37b597c33d3aa9519daaa58b6f9d3d0af0f7b",
+      "sha256": "59fd79640b484ce809a31d4d42c670a5ab5665cf4d16a7cc726cabcf3c1f2f01",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -1837,14 +1837,22 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
           "pieces": 256
+        },
+        "notes": "notes.json",
+        "sites": {
+          "document": "sites.json",
+          "inputs": [
+            "traverses/APOLLO_11.ZIP",
+            "traverses/APOLLO_12.ZIP"
+          ]
         }
       }
     }
@@ -2261,6 +2269,110 @@
       },
       "sha256": "59bd7a28b740a273bfa4e1a643dfc7a84f426f7bcbc0b5eace30e275f7763d6a",
       "bytes": 151,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "moon-surface-feature-notes",
+      "path": "features/notes.json",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 1749 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts moon: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      },
+      "kind": "source-document",
+      "title": "features/notes.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "9c2120b8b5f87ffddfd3276cac3b97442c1c17e5ecbb0975eb3c44ccd649547d",
+      "bytes": 804723,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "moon-surface-sites",
+      "path": "features/sites.json",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      },
+      "kind": "source-document",
+      "title": "features/sites.json",
+      "upstreamLineage": "not-recorded",
+      "sha256": "9c85d21238be3cbf1186a964d9eff8718dff93f934dbfdb7aa71076d19b39cc2",
+      "bytes": 115231,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "moon-apollo-11-eva-traverse-path",
+      "path": "features/traverses/APOLLO_11.ZIP",
+      "origin": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_11/APOLLO_11.ZIP",
+      "credit": "NASA/GSFC/Arizona State University (LROC)",
+      "license": "PDS archive extras (NASA LRO); NASA content not subject to copyright, credit NASA/GSFC/Arizona State University",
+      "licenseEvidence": [
+        "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_11"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_11/APOLLO_11.ZIP.",
+      "redistribution": "NASA data product, credit the publisher",
+      "title": "Apollo 11 EVA traverse (CDR/LMP paths)",
+      "displayCredit": "NASA/GSFC/Arizona State University (LROC)",
+      "sourceUrl": "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_11",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      },
+      "sha256": "b1f63da2a1764cb17d99c73206f3448a7cb8d36d70323563a80c200ec852f767",
+      "bytes": 116096,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "moon-apollo-12-eva-traverse-path",
+      "path": "features/traverses/APOLLO_12.ZIP",
+      "origin": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_12/APOLLO_12.ZIP",
+      "credit": "NASA/GSFC/Arizona State University (LROC)",
+      "license": "PDS archive extras (NASA LRO); NASA content not subject to copyright, credit NASA/GSFC/Arizona State University",
+      "licenseEvidence": [
+        "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_12"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_12/APOLLO_12.ZIP.",
+      "redistribution": "NASA data product, credit the publisher",
+      "title": "Apollo 12 EVA 1-2 traverse (CDR/LMP paths)",
+      "displayCredit": "NASA/GSFC/Arizona State University (LROC)",
+      "sourceUrl": "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_12",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      },
+      "sha256": "f37d068ccc628226bff6068a48555722de659bedfc64b3fb994039a61f727591",
+      "bytes": 313003,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3159,7 +3271,7 @@
         {
           "url": "object:prepared/content.json",
           "bytes": 5806,
-          "sha256": "dba2598d3a5b4831df1ff10f4767fea3bbc6229e77bdb116a30c7fa7180c64b4",
+          "sha256": "69a7e54cc3a25d0a14acfd3c76cfe88cd7afb3e83d2da265803ba0963a1241c2",
           "verification": "bytes-verified"
         }
       ],
@@ -3187,13 +3299,17 @@
       "inputs": [
         "moon-surface-features-source",
         "usgs-gazetteer-moon-nomenclature-center-pts",
-        "moon-surface-map-frame"
+        "moon-surface-map-frame",
+        "moon-surface-feature-notes",
+        "moon-surface-sites",
+        "moon-apollo-11-eva-traverse-path",
+        "moon-apollo-12-eva-traverse-path"
       ],
       "outputs": [
         {
           "url": "/scenes/moon/moon-features.json",
-          "bytes": 8077008,
-          "sha256": "9be6652ef7b30be7069c0ec665e147c065f2b554d139a92226a5101549b41778",
+          "bytes": 9327754,
+          "sha256": "24006b77507356cece119118ee70e0d39e6bbf597273c2e9d9d4ddfd2e9499cb",
           "verification": "bytes-verified"
         }
       ],

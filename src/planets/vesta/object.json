@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "50e9bff708ac84e30e22fccb31f550b3a778a88ad3ea01641755874f55cba5e0"
+    "sha256": "43155a7b8619fde4ceda1f799abd0dee14f5d7f3d6cc0636044c5d366efb3e9b"
   },
   "id": "vesta",
   "properties": {
@@ -92,7 +92,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "349bfa63f1d765562e043414d88a0ae39a4a7dd1ab329235c296eda39cb49f7f"
+          "sha256": "2e00300733f8a2572e548323aaa05ad8afa6cba2131718cd4cefa3e9a6c47c89"
         }
       ],
       "features": {
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6015f2f909f267abaa17018d24f423daa9a089019a6b6298d336486a0bc39fc9"
+        "sha256": "c265e420379be7f178eed6fc8f847ff7667b137bb22dd43d98a6321f928c12b0"
       }
     },
     "catalog": {

@@ -209,8 +209,8 @@
     {
       "id": "eros-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1115,
-      "expectedSha256": "b968d3f8c23a082d116588cf875ab7e0e9588f3ddfc039eaba8a58fc15860f02",
+      "expectedBytes": 1180,
+      "expectedSha256": "3ff3335cfad4cb3e06beec85aabb6215a123609eeb010e1e940630bc4070e25e",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -362,6 +362,27 @@
       "purpose": "Unmodified publisher metadata for the 950 nm albedo map.",
       "expectedBytes": 10462,
       "expectedSha256": "5e9c236b5b423104587b9dc0d351896c07fe709e635c35aff74e9c2ab7ab2c97"
+    },
+    {
+      "id": "eros-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 1771,
+      "expectedSha256": "e91a00f6e8313ec4c2dfbe9841584f47c5299479d7c66c03f16a5bdf511f6ab9",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
     },
     {
       "id": "eros-surface-feature-notes",

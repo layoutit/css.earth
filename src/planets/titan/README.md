@@ -26,6 +26,10 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Titan (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Menrva, Xanadu and the Kraken Mare shoreline on the ISS mosaic coincide with the imagery.
 
+Feature notes: 58 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
+
+Landing sites: 1 spacecraft landing, touchdown or impact sites are labelled beside the IAU names (`source/features/sites.json`). Each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from, with the stated latitude kind and longitude convention; sites are unsized points ranked like a 20 km feature and the caption shows the quoted source sentence with its publisher.
+
 - **Near-infrared:** It is not visible color. This interpretation is source-informed: the release does not supply a separate PNG validity band.
 
 - **Radar:** Display brightness retains those byte levels; it is neither optical albedo nor elevation. Radar speckle and source swath boundaries remain.

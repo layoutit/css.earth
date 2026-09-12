@@ -772,7 +772,7 @@
       "expectedSha256": "d0a7aa47d482c0b9471fee7a9bd6ef0fecdd2a77aa42b71a8bdafdb65081bd4a",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/VENUS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -816,8 +816,8 @@
     {
       "id": "venus-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1126,
-      "expectedSha256": "3f140d0bc1ef7508cb9d2c4298166a109cce90d979f390b78d8f44f716aef61c",
+      "expectedBytes": 1216,
+      "expectedSha256": "e14d03d75a1c6845344528ae0146a539a6dd977a1ced11a0a93be27be1fc6cb2",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -858,6 +858,50 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1427,
       "expectedSha256": "9cc9d8b1cbf9eea41988fe9325b26b0a5feec6b0c5bba8368d9408ec93509216"
+    },
+    {
+      "id": "venus-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 14477,
+      "expectedSha256": "54cc7c82a696f47dca88aa7d4e7e4679fbc3012394628b357b9eb12715883d04",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "id": "venus-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 44881,
+      "expectedSha256": "178fc3594826922982cd7211a40df10a6bb4c9b690bfa0926771b87a16399bf6",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 112 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts venus: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

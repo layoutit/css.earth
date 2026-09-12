@@ -356,8 +356,8 @@
     {
       "id": "bennu-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1100,
-      "expectedSha256": "4e2d782185756145e9a393f95e9a65f31404ea156ff5e468f26a3008b13647ce",
+      "expectedBytes": 1165,
+      "expectedSha256": "4a0542e5d1aff0f42e631f8e23b71238b49abe15a661d426c8a4e75b4cec0060",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -387,6 +387,27 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "bennu-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 1863,
+      "expectedSha256": "593a9885578080b1e8512aa67688dd1839c2b2e6a4e5a523c0fa28e9b50d05db",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
       }
     },
     {

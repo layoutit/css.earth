@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3bb305b06e46c40ed8ea42600af43b36d818d05383cd8abb05e05fe74978ff8f"
+    "sha256": "62673b918186413b8023498d67364ba5a05d7843b7695c2a4c32a9b9cc6d4344"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "6d9541e43b2070445aaebb010a9712298a1b4dcf6b04503f9f880cd27b5c05b2"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
@@ -482,7 +482,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "296515b5f39f956283a9221e445a0b54e3fcccc6d6ab7d889947150593f0df4a",
+      "sha256": "095a3d6f8e4fa5b3d095c2f07da5d1fec48824177af43a21cfb9a4bd7ac9c715",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -527,10 +527,10 @@
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         },
         "labelPolicy": {
-          "minimumZoomShare": 1,
+          "minimumZoomShare": 0,
           "minimumDiameterPixels": 40,
           "alwaysVisibleCount": 0,
-          "maximumVisible": 48,
+          "maximumVisible": 40,
           "limbCosine": 0.12
         },
         "outline": {
@@ -1595,8 +1595,8 @@
       "outputs": [
         {
           "url": "/scenes/iapetus/iapetus-features.json",
-          "bytes": 119497,
-          "sha256": "4689702b645ce9fa3f65901e9395d79fbe8ca937ca9fd2f5b217c4d59162f847",
+          "bytes": 123441,
+          "sha256": "9318cf4e043b9d025c943b0097bc6ed30ca02148224d91fdec136c6ffcebfdb6",
           "verification": "bytes-verified"
         }
       ],

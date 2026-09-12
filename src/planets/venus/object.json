@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b185ccc322d6c2e7256ed656f6eabf321dc5be943fef35e9d75ba802c6aa4fcc"
+    "sha256": "00564cbf6a4bf1aae3f9856abf2f9fa3ca237f9eea87986a55ecf89e826a0f9a"
   },
   "id": "venus",
   "properties": {
@@ -110,7 +110,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "3f140d0bc1ef7508cb9d2c4298166a109cce90d979f390b78d8f44f716aef61c"
+          "sha256": "e14d03d75a1c6845344528ae0146a539a6dd977a1ced11a0a93be27be1fc6cb2"
         }
       ],
       "shape": {
@@ -163,7 +163,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ec1ee50c4f3b536d7e2b2a7b83113931e55e95dadf31f63f045d5651970cc760"
+        "sha256": "5a50729035c0a8e8fef0252115f96c42da78198f7e5ef39ac235882e28020afd"
       }
     },
     "catalog": {

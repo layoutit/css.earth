@@ -236,7 +236,7 @@
       "consumers": [
         "shape"
       ],
-      "units": "Native Cartesian coordinates in kilometres, +X at 0\u00b0 longitude and +Z north; no height exaggeration.",
+      "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
       "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
       "expectedBytes": 17694840,
       "expectedSha256": "e4b25f158adf4b430a145946996f4dbde85f50ca0d3c236084c956733e42beb2",
@@ -712,7 +712,7 @@
       "expectedSha256": "e483758bc3e1d9b3f38a8ccdc4f73d8e11a68e792249b24a2ea62d1ded1b51c9",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RHEA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -750,8 +750,8 @@
     {
       "id": "rhea-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1194,
-      "expectedSha256": "311d9657cb0b08d1608ac5341743a637c9a613acd6fc3a49b6e4ca0c01c98193",
+      "expectedBytes": 1219,
+      "expectedSha256": "0d60851f07e5662ec9d7ae9ac587e9db984cacfcc7d3e68e25c1f754d96e54d9",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -956,6 +956,29 @@
       "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
       "expectedBytes": 11294,
       "expectedSha256": "a64f9aa64816043325a0eedaf20bbb8c5ec640f1feab0212e9d4ec41ace479fc"
+    },
+    {
+      "id": "rhea-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 2096,
+      "expectedSha256": "572d392dec7cc44cb7ff4239bdee0dc84271c43610c5213b8f20568e644609dd",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 4 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts rhea: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ],
   "generatedIntermediates": []
