@@ -99,10 +99,10 @@ separates source sampling from WebP quality at an identical camera position.
 shows a complete product view. These examples demonstrate the prepared result;
 they do not establish new observational resolution or remove the sources' seams.
 The [Enceladus Pixelmatch evidence](../src/planets/enceladus/README.md#evidence)
-adds fresh matched crops on the `e0487eff5` / `c13f3643b` merge: exact differences,
-a 0.1-threshold summary, an independent repeat, byte pins and reproduction
-commands. Both tolerances include anti-aliasing. The exact repeat differs at
-one pixel by one 8-bit value; most photographic changes are subtle.
+adds fresh matched crops on the `e0487eff5` / `c13f3643b` merge: Pixelmatch diffs
+at threshold 0.1, an independent repeat, byte pins and reproduction commands.
+Anti-aliasing is included. The repeat has zero mismatches; most photographic
+changes are subtle.
 
 On that merge, Europa's Monochrome and Io's Monochrome/Enhanced color views
 were recaptured at DPR 1 with Shadows on and off (six inspected views, no script

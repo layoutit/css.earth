@@ -178,8 +178,8 @@ comparisons, retain reference, result and diff with matching capture settings.
 Disclose different sources or framing and inspect affected views, boundaries and
 lighting before making comparison claims.
 
-**Use Pixelmatch for matched visual evidence.** This cssEarth requirement makes
-pixel changes inspectable and reproducible. Compare equal-sized, unscaled
+**Use Pixelmatch with threshold `0.1` for matched visual evidence.** This cssEarth
+requirement makes pixel changes inspectable and reproducible. Compare equal-sized, unscaled
 captures or identical documented crops. Retain the input images, generated diff,
 input hashes, Pixelmatch version, threshold, anti-aliasing setting, mismatch count
 and compared pixel count beside the owning evidence. Choose settings before

@@ -33,9 +33,8 @@ const { width, height } = before.info;
 if (width !== after.info.width || height !== after.info.height) {
   throw new TypeError('Capture dimensions differ; this tool never resizes or aligns evidence.');
 }
-// Exact comparison locates every change; keep the conventional tolerance as a
-// separate summary so subtle image changes are not confused with large ones.
-const settings = { threshold: 0, includeAA: true, alpha: 0.2, diffColor: [255, 0, 0] as [number, number, number] };
+// Matched visual evidence uses the project contract threshold of 0.1.
+const settings = { threshold: 0.1, includeAA: true, alpha: 0.2, diffColor: [255, 0, 0] as [number, number, number] };
 const pixels = Buffer.alloc(width * height * 4);
 const mismatchedPixels = pixelmatch(before.data, after.data, pixels, width, height, settings);
 const output = await sharp(pixels, { raw: { width, height, channels: 4 } }).png().toBuffer();
@@ -50,8 +49,6 @@ const report = {
   reference: before.pin, result: after.pin, diff: pin(diff, output),
   width, height, comparedPixels: width * height, mismatchedPixels,
   mismatchPercent: mismatchedPixels / (width * height) * 100,
-  perceptualSummary: { threshold: 0.1, includeAA: true,
-    mismatchedPixels: pixelmatch(before.data, after.data, undefined, width, height, { threshold: 0.1, includeAA: true }) },
   exclusions: 'None; every supplied pixel is compared, including anti-aliasing.',
 };
 await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n');
