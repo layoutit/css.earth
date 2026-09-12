@@ -185,7 +185,15 @@ export const parseGeometryCube = shape({collection:text,target:text,observingSys
   planes:shape({image:text,x:text,y:text,z:text,incidence:text,emission:text,phase:text,pixelScale:optional(array(text))}),
   header:optional(dictionary(text)),headerTime:optional(text),headerPlaneNames:optional(shape({prefix:text,names:dictionary(text)}))});
 export type GeometryCubeDeclaration = ReturnType<typeof parseGeometryCube>;
-export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),cube:optional(parseGeometryCube),
+/** A camera derived from SPICE kernels for an image without archived geometry: the kernel set in load order, the SPK ids and
+ * body-fixed frame, the instrument whose kernel variables define the pixel model, how the exposure epoch is read from the
+ * image header, the aberration correction, the instrument-frame axes stored columns and rows follow, and how the image is read. */
+export const parseSpiceCamera = shape({kernels:array(text),observer:number,target:number,bodyFrame:text,instrument:number,
+  clock:shape({header:text,spacecraft:number}),aberration:text,
+  pixels:shape({focalLength:shape({key:text,unit:text}),pixelPitch:shape({key:text,unit:text}),center:text,boresight:text,samples:text,lines:text,frame:text,origin:number,column:text,row:text}),
+  image:shape({quantity:text,plane:optional(number),header:optional(dictionary(text)),missingValueKeys:optional(array(text)),saturationKey:optional(text)})});
+export type SpiceCameraDeclaration = ReturnType<typeof parseSpiceCamera>;
+export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),cube:optional(parseGeometryCube),spice:optional(parseSpiceCamera),
  frames:optional(array(shape({id:text,...geoFramePathFields}))),selection:optional(text),levelMatching:optional(parseLevelMatching),
  transfer:surfaceTransfer,photometry:shape({model:text,phaseCorrection:optional(parsePhasePhotometry),coefficient:optional(number),phaseCoefficientPerDegree:optional(number),
  referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,maximumGain:number}),displayPercentiles:array(number)});
