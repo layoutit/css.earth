@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "efcd0c2b35933997e0e723509ec28027474fd6c0823310631970439599d7a3d0"
+    "sha256": "9445c1c672af3f565f82f5271e7cc8b1346fd8520fabf0700fc2c3282e471d48"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -852,6 +852,16 @@
       "path": "science/controlled-dtms/Agenor/Agenor.tif",
       "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/Agenor.tif",
       "credit": "USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "evidence": "The preserved credit for this input reads: USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
+            "missionId": "galileo"
+          }
+        ]
+      },
       "license": "CC0-1.0",
       "licenseEvidence": [
         "https://registry.opendata.aws/nasa-usgs-europa-dtms/"

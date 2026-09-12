@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8e873db36b34cf9325c60cb71047c2b21e1383df749c796a5ed556eca6a8c254"
+    "sha256": "9191c62e546891e5d02c3e941e500534e814f492efad980b71e29cf9019df864"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -539,6 +539,16 @@
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.img",
       "catalog": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx",
       "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "evidence": "The preserved credit for this input reads: NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
+            "missionId": "new-horizons"
+          }
+        ]
+      },
       "license": "Public NASA scientific mission data; retain archive and author attribution",
       "licenseEvidence": [
         "https://pds.nasa.gov/datastandards/citing/",

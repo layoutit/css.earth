@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "169aa8e91876e37ae073af097ff581611b69490aa96abb9cdb282acee22f402d"
+    "sha256": "8e8693b31763f1d8a052b717d3128f65b94ded555ceed494e2ac0cb3fcaeb812"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -553,6 +553,16 @@
       "path": "observations/107318326rcal_clr.fit",
       "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318326rcal_clr.fit",
       "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "galileo",
+            "evidence": "The preserved credit for this input reads: NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+            "missionId": "galileo"
+          }
+        ]
+      },
       "license": "Public mission scientific data; retain attribution and source notices.",
       "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
       "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
