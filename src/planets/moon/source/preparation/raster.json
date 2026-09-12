@@ -1,8 +1,8 @@
 {
   "schema": "cssearth-raster-recipe@1",
   "publicBase": "/scenes/moon/",
-  "sourceWidth": 2048,
-  "sourceHeight": 1024,
+  "sourceWidth": 11520,
+  "sourceHeight": 5760,
   "width": 2048,
   "height": 1024,
   "latitudeBands": 16,
@@ -25,20 +25,21 @@
   "surfaces": [
     {
       "id": "surface",
-      "source": "surface/lroc-color-2k.jpg",
+      "source": "surface/WAC_GLOBAL_E000N1800_032P.IMG",
       "falseColor": false,
       "output": "moon-{id}{suffix}.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
-        "presentation": {
-          "model": "prepared-neutral-lunar-reflectance-presentation",
-          "saturation": 0.35,
-          "linearGain": 0.9,
-          "linearOffset": -78,
-          "sharpenSigma": 0.65,
-          "qualification": "Prepared tonal presentation preserves the LROC surface structure; brightness and saturation are display choices, not calibrated albedo."
-        }
-      }
+        "kind": "pds-float-map",
+        "productId": "WAC_GLOBAL_E000N1800_032P",
+        "productVersion": "v1.3",
+        "wavelengthNanometers": 643,
+        "gain": 4,
+        "gamma": 2.2,
+        "referenceRadiusMeters": 1737400,
+        "outputLongitudeOrigin": 180
+      },
+      "resolutionScale": 2
     },
     {
       "id": "midnight-temperature",

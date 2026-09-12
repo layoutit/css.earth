@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "moon",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "520352a9fff5a7c95382be97308322e46abde18d456061eae311afcd950422dd"
+    "sha256": "bf596c698ec0bb86bad3436808340d3781d51814a074cd517e0cb6bb6bb2307d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,12 +15,12 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "5d765dda296849b1a3cc5e10960bc7a8e536c3918d270d82e92c782b965b49cb",
+      "sha256": "9cd67764f11339404a5ef9bed8683efb738eda3ccb63f4b8a74817168e461b5a",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/moon/",
-        "sourceWidth": 2048,
-        "sourceHeight": 1024,
+        "sourceWidth": 11520,
+        "sourceHeight": 5760,
         "width": 2048,
         "height": 1024,
         "latitudeBands": 16,
@@ -43,20 +43,21 @@
         "surfaces": [
           {
             "id": "surface",
-            "source": "surface/lroc-color-2k.jpg",
+            "source": "surface/WAC_GLOBAL_E000N1800_032P.IMG",
             "falseColor": false,
             "output": "moon-{id}{suffix}.webp",
             "thumbnail": "moon-lens-{id}.webp",
             "science": {
-              "presentation": {
-                "model": "prepared-neutral-lunar-reflectance-presentation",
-                "saturation": 0.35,
-                "linearGain": 0.9,
-                "linearOffset": -78,
-                "sharpenSigma": 0.65,
-                "qualification": "Prepared tonal presentation preserves the LROC surface structure; brightness and saturation are display choices, not calibrated albedo."
-              }
-            }
+              "kind": "pds-float-map",
+              "productId": "WAC_GLOBAL_E000N1800_032P",
+              "productVersion": "v1.3",
+              "wavelengthNanometers": 643,
+              "gain": 4,
+              "gamma": 2.2,
+              "referenceRadiusMeters": 1737400,
+              "outputLongitudeOrigin": 180
+            },
+            "resolutionScale": 2
           },
           {
             "id": "midnight-temperature",
@@ -634,7 +635,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6bd33814b53c7057c82cddf3f305415db71f23674a7da7adba57ccd1fd23379c",
+      "sha256": "ebccc20d6f7f238fad5aca33df03e2763cfa63eabee7ed6503a0c3da56330375",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -728,20 +729,20 @@
           "controls": [
             {
               "id": "surface",
-              "label": "Visible color",
-              "description": "NASA CGI Moon Kit display map from LROC color imagery. Small gaps are inpainted; beyond 70° north/south, lower-resolution monochrome LOLA albedo replaces missing color. The app reduces saturation and adjusts tone for display.",
-              "title": "CGI Moon Kit surface mosaic",
+              "label": "Monochrome",
+              "description": "LROC WAC 643 nm photography, mapped from observations in 2009–2011. Crater shadows are part of the photographs; the Shadows control adds scene lighting. Gray grid marks missing data. Brightness is adjusted for display.",
+              "title": "LROC photographic mosaic",
               "thumbnail": "moon-lens-surface.webp",
               "surface": "moon-surface.webp",
               "poles": "moon-poles-surface.webp",
               "source": {
-                "id": "nasa-lro-moon-color",
-                "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg"
+                "id": "lroc-wac-global-032p",
+                "url": "https://data.lroc.im-ldi.com/lroc/view_rdr_product/WAC_GLOBAL_E000N1800_032P"
               },
-              "detail": "Global mosaic",
-              "summary": "Surface detail comes from LROC imagery. Small gaps are filled; monochrome replaces unavailable color near the poles.",
+              "detail": "LROC mosaic",
+              "summary": "Monochrome photography from 2009–2011. Crater shadows remain in the images; gray grid marks missing observations.",
               "falseColor": false,
-              "qualification": "NASA LRO/LROC visible-colour global surface mosaic"
+              "qualification": "LROC WAC global morphologic mosaic v1.3, 32 pixels/degree, mapped to the 1,737.4 km lunar reference sphere."
             },
             {
               "id": "midnight-temperature",
@@ -1860,23 +1861,40 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "nasa-lro-moon-color",
-      "path": "surface/lroc-color-2k.jpg",
-      "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg",
-      "credit": "NASA SVS, LRO, LROC and LOLA",
-      "license": "NASA media usage guidelines",
+      "id": "lroc-wac-global-032p",
+      "path": "surface/WAC_GLOBAL_E000N1800_032P.IMG",
+      "origin": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG",
+      "credit": "NASA/GSFC/Arizona State University",
+      "license": "Public domain PDS archive data",
       "licenseEvidence": [
-        "https://svs.gsfc.nasa.gov/4720/",
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        "https://lroc.im-ldi.com/about/terms"
       ],
-      "acquisition": "checked NASA SVS CGI Moon Kit colour map",
-      "redistribution": "NASA image with mission credit and no endorsement claim",
+      "acquisition": "Download the original attached-label PDS3 product and verify its pinned bytes.",
+      "redistribution": "Reacquirable source binary excluded from Git; derived images retain NASA/GSFC/ASU credit.",
+      "width": 11520,
+      "height": 5760,
+      "lensId": "surface",
+      "label": "Monochrome",
+      "falseColor": false,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1737400
+      },
       "capture": {
         "attributions": [
           {
             "kind": "machine",
             "machineId": "lro",
-            "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg",
+            "evidence": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG",
             "missionId": "lro"
           }
         ]
@@ -1885,23 +1903,24 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-moon-nasa-lro-moon-color",
+            "catalogueId": "lroc-wac-global-v1-3",
             "role": "material",
-            "evidence": "src/planets/moon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Attached PDS3 label: PRODUCT_ID WAC_GLOBAL_E000N1800_032P; PRODUCT_VERSION_ID v1.3; IMAGE_MAP_PROJECTION."
           }
         ]
       },
-      "sha256": "f7130a1822681fa7512d7dcfd40db8c10b9ba4f06777910348698260ed7a2170",
-      "bytes": 457942,
+      "sha256": "a15b60d0e0e4e5ad6a9e3dde04e798594511a13b061362ce02c8f69e2fb81c1a",
+      "bytes": 265466880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
-          "refresh"
+          "refresh",
+          "refresh-photographs"
         ],
-        "path": "surface/lroc-color-2k.jpg",
-        "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg"
+        "path": "surface/WAC_GLOBAL_E000N1800_032P.IMG",
+        "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG"
       },
       "verificationOperations": []
     },
@@ -1936,7 +1955,7 @@
       "sha256": "63bd05458e3b24d02bebe14dce7345b3b88f07db6233601eccc0f7afecfd6e57",
       "bytes": 9832777,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1971,7 +1990,7 @@
       "sha256": "009a700af3d4b25d3ee7454ea6d97b96eb2e7f513f00081f96f4001b7a50c1c6",
       "bytes": 9522044,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2006,7 +2025,7 @@
       "sha256": "2d87312b2b5cf7caa6a949f2d63e7fe1b0db8d5a7cb57822ba1af89281757ca3",
       "bytes": 9311218,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2046,7 +2065,7 @@
       "sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
       "bytes": 33177600,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2092,7 +2111,7 @@
       "sha256": "d791cb16b0e6ee74bda94ca5bc1577fc9589a9e7d70cdade255ad199f83a5e95",
       "bytes": 300978,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2131,7 +2150,7 @@
       "sha256": "adc63e4654a70093f5c060069f6394311aec52d6bdffd3eec1165173734f6632",
       "bytes": 3801047,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2177,7 +2196,7 @@
       "sha256": "16be1f099526cb91493e6004fa330b850b26f8ed72cd3a40dadcc5c427480bc5",
       "bytes": 430857,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2194,10 +2213,10 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet, view descriptions and legends."
       },
-      "sha256": "6bd33814b53c7057c82cddf3f305415db71f23674a7da7adba57ccd1fd23379c",
-      "bytes": 36437,
+      "sha256": "ebccc20d6f7f238fad5aca33df03e2763cfa63eabee7ed6503a0c3da56330375",
+      "bytes": 36485,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2217,7 +2236,7 @@
       "sha256": "84ebaac0d933fe026ec361a5a4e1da024ec72c35c7d08bda0360a576778c4171",
       "bytes": 1001,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2243,7 +2262,7 @@
       "sha256": "3cf4d02e87f7ab896f668acb8caed93ea9f36136a756c6e6c69b01b20e6e2671",
       "bytes": 23842450,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -2270,7 +2289,7 @@
       "sha256": "59bd7a28b740a273bfa4e1a643dfc7a84f426f7bcbc0b5eace30e275f7763d6a",
       "bytes": 151,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2297,7 +2316,7 @@
       "sha256": "9c2120b8b5f87ffddfd3276cac3b97442c1c17e5ecbb0975eb3c44ccd649547d",
       "bytes": 804723,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2322,7 +2341,7 @@
       "sha256": "9c85d21238be3cbf1186a964d9eff8718dff93f934dbfdb7aa71076d19b39cc2",
       "bytes": 115231,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2348,7 +2367,7 @@
       "sha256": "b1f63da2a1764cb17d99c73206f3448a7cb8d36d70323563a80c200ec852f767",
       "bytes": 116096,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -2374,7 +2393,7 @@
       "sha256": "f37d068ccc628226bff6068a48555722de659bedfc64b3fb994039a61f727591",
       "bytes": 313003,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -2382,14 +2401,14 @@
   "products": [
     {
       "id": "surface",
-      "label": "Visible color",
+      "label": "Monochrome",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "NASA LRO/LROC visible-colour global surface mosaic",
-        "NASA CGI Moon Kit display map from LROC color imagery. Small gaps are inpainted; beyond 70° north/south, lower-resolution monochrome LOLA albedo replaces missing color. The app reduces saturation and adjusts tone for display."
+        "LROC WAC global morphologic mosaic v1.3, 32 pixels/degree, mapped to the 1,737.4 km lunar reference sphere.",
+        "LROC WAC 643 nm photography, mapped from observations in 2009–2011. Crater shadows are part of the photographs; the Shadows control adds scene lighting. Gray grid marks missing data. Brightness is adjusted for display."
       ],
       "lensIds": [
         "surface"
@@ -2401,38 +2420,38 @@
         "falseColor": false
       },
       "inputs": [
-        "nasa-lro-moon-color"
+        "lroc-wac-global-032p"
       ],
       "outputs": [
         {
           "url": "/scenes/moon/moon-surface.webp",
-          "bytes": 684372,
-          "sha256": "184960750ce2f61341ff5969b2170c1d3c99c032f7d5706b72fa99990fc5a2b8",
-          "verification": "bytes-verified"
+          "bytes": 3599904,
+          "sha256": "844381b1e326f2f13ddc547b790a08b037530fec657ef85ca10785591a38f73a",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-surface@2x.webp",
-          "bytes": 1249796,
-          "sha256": "dc8c785d83a93cda443cc61217ace1e5b6e3fafe500f7f9f0c69d64a07451feb",
-          "verification": "bytes-verified"
+          "bytes": 13451346,
+          "sha256": "8aecd7be09a70f3cd3ea9454a0f46d50da16e917539d8cc709e0e1521815bde1",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lens-surface.webp",
-          "bytes": 922,
-          "sha256": "1d226d243ca68f958a7a25a771371dd108d01b18313dc4aa4daa2fa8479b094a",
-          "verification": "bytes-verified"
+          "bytes": 638,
+          "sha256": "9a7c1de34999142e821e1957f94560f2c1811f30e9aad073dc86bfcafc25dcb1",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-surface.webp",
-          "bytes": 84356,
-          "sha256": "402657072d4ac33097164239263d339fef82558e4a859ddd4b4773d1f72204ee",
-          "verification": "bytes-verified"
+          "bytes": 106794,
+          "sha256": "f830e2c3bdbbe24a715a5e66ca03d0b00982dc368d90557c18e586975e2b1af4",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-surface@2x.webp",
-          "bytes": 258992,
-          "sha256": "7e98cd37b1dfdad593afc592b2abbbf1386232eafe1e9f042b0fe0badc1bca20",
-          "verification": "bytes-verified"
+          "bytes": 385018,
+          "sha256": "f2dfb3f73eec5f423537d5448795a1af68d659a35b319cef0746e247b58da29a",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2465,31 +2484,31 @@
           "url": "/scenes/moon/moon-midnight-temperature.webp",
           "bytes": 2955320,
           "sha256": "ca762599f856e1ea817e03b30abc93b03cba75fcae3214f55fd437f0c297895c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-midnight-temperature@2x.webp",
           "bytes": 13982156,
           "sha256": "bbd563fae44d3ccbebb72e4bf0c6fc1cf1a10bc252476e6f56beddb683fd23f3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lens-midnight-temperature.webp",
           "bytes": 3642,
           "sha256": "d5bf78701c81bacc192ca107dda1ef6d0b3ce56b88b0b675743fc920ddc97c45",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-midnight-temperature.webp",
           "bytes": 4204,
           "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-midnight-temperature@2x.webp",
           "bytes": 9464,
           "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2522,31 +2541,31 @@
           "url": "/scenes/moon/moon-heat-anomalies.webp",
           "bytes": 1554006,
           "sha256": "0189faf6ad342bcd81ad66c2e6a584a8a92d45b0daa63a05ae3588d383b47260",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-heat-anomalies@2x.webp",
           "bytes": 9349372,
           "sha256": "db035b5eb92a3e09bcc8f87ada7923678e0d6466793ea36948508b7772050586",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lens-heat-anomalies.webp",
           "bytes": 4554,
           "sha256": "5a09317f6d8f48988b588024391853f494e82540e344bea150e9e9972db4af87",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-heat-anomalies.webp",
           "bytes": 4204,
           "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-heat-anomalies@2x.webp",
           "bytes": 9464,
           "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2579,31 +2598,31 @@
           "url": "/scenes/moon/moon-rock-abundance.webp",
           "bytes": 1498280,
           "sha256": "7adcbbee346722b9e52d4133b5ac58bed18561b98847e1cb5529a5bf5e60d313",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance@2x.webp",
           "bytes": 9022440,
           "sha256": "49fb72eb2e1738ce3d802fb87aa1b25f57cfc20483585af4f232e80d0fbcfe01",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lens-rock-abundance.webp",
           "bytes": 3916,
           "sha256": "70682ca05012dbe135a55752d5ea2389c9ee862931cea8006fe4a6a26a8fcaf4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-rock-abundance.webp",
           "bytes": 4204,
           "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-rock-abundance@2x.webp",
           "bytes": 9464,
           "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2636,31 +2655,31 @@
           "url": "/scenes/moon/moon-topography.webp",
           "bytes": 2055584,
           "sha256": "45280a882cfd5aa4983f67126ac5a635cf695b92ef4660879d2a096dbd159182",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-topography@2x.webp",
           "bytes": 8271894,
           "sha256": "61b1bddde1bb35a6a01701be98f64e127e861b2a45e150c9c2ac443789638e81",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lens-topography.webp",
           "bytes": 3534,
           "sha256": "4b40b491c3d8056f9d5a225d1f03a65c9fdbf98498ae34651607ffbc4fd09d49",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-topography.webp",
           "bytes": 84798,
           "sha256": "bb5a810646b0abe051fe5c8adaf26b28764811f5aa0179a62ba9e5ce35a82e98",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-topography@2x.webp",
           "bytes": 259114,
           "sha256": "a23f67cd7d290b7c5f768c8205853616ad2bc9f3bbfa5f9d7b0634720c2054cc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2693,31 +2712,31 @@
           "url": "/scenes/moon/moon-crust.webp",
           "bytes": 692496,
           "sha256": "e4276eb4cfa6d79bdfc249346913470f1418c1ee2093a25fe628e45119b06863",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-crust@2x.webp",
           "bytes": 1482016,
           "sha256": "d235a4866c59e480ef71c51356705cce91d23f0f60fbe65a44b00224e84f9b99",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lens-crust.webp",
           "bytes": 2410,
           "sha256": "9deeb6beb098289de0c7ed8dbc20c2721430ff9fdd0f5d213e1130acaefdec87",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-crust.webp",
           "bytes": 114872,
           "sha256": "33c621f951779ebdc35bf727149432c16554769e1055cade7b60f5867fcd3e2e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-crust@2x.webp",
           "bytes": 340552,
           "sha256": "19335c9d0b5982bf2e53da2652db64a0be082878a59c19d327eec946862e4d95",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2750,31 +2769,31 @@
           "url": "/scenes/moon/moon-silicate-signature.webp",
           "bytes": 2793884,
           "sha256": "ee2ec429307b98c4bd0d53738f536b33f6390225cc2635212205613308391617",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-silicate-signature@2x.webp",
           "bytes": 4450426,
           "sha256": "07bb12ed6a602c9d195f04028141bf78c13cd11126df29de5a2d0860590d5ce3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lens-silicate-signature.webp",
           "bytes": 5220,
           "sha256": "44cc35d44c508ceac3861f2733e7869f2985b2a7baa058346cf5a536b6209295",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-silicate-signature.webp",
           "bytes": 4204,
           "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-silicate-signature@2x.webp",
           "bytes": 9464,
           "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2807,31 +2826,31 @@
           "url": "/scenes/moon/moon-geology.webp",
           "bytes": 185000,
           "sha256": "07b44caf3fa4cc2c7fd86e5e4f8626441b8094c53575791d778d4b2257d5dfd2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-geology@2x.webp",
           "bytes": 328518,
           "sha256": "5b3d55f497ca734a5703a6743ccaea41d4e40adddc78c0aa014496797c6ec971",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lens-geology.webp",
           "bytes": 1706,
           "sha256": "203431b8cdb722cf166e2be0009d2869b671ee9c5ee2c00f8359a190af10caa4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-geology.webp",
           "bytes": 8122,
           "sha256": "46188a8aff2300cfc35fbe248e97fe8ffaf7e0f084f23a71427d39d3c55ae911",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-poles-geology@2x.webp",
           "bytes": 17540,
           "sha256": "0fa33c48c0916ba9474af08592b9f2dbc8faf285beef17fed9e743fa814c3456",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2857,397 +2876,397 @@
           "url": "/scenes/moon/moon-lighting-1x-billboard.webp",
           "bytes": 40826,
           "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-00.webp",
           "bytes": 14922,
           "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-01.webp",
           "bytes": 27532,
           "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-02.webp",
           "bytes": 34558,
           "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-03.webp",
           "bytes": 40648,
           "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-04.webp",
           "bytes": 45092,
           "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-05.webp",
           "bytes": 49044,
           "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-06.webp",
           "bytes": 52968,
           "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-07.webp",
           "bytes": 56198,
           "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-08.webp",
           "bytes": 59392,
           "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-09.webp",
           "bytes": 61906,
           "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-10.webp",
           "bytes": 62672,
           "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-11.webp",
           "bytes": 61062,
           "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-12.webp",
           "bytes": 59454,
           "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-13.webp",
           "bytes": 52762,
           "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-14.webp",
           "bytes": 42196,
           "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-15.webp",
           "bytes": 23242,
           "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-16.webp",
           "bytes": 28714,
           "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-17.webp",
           "bytes": 52870,
           "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-18.webp",
           "bytes": 65644,
           "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-19.webp",
           "bytes": 76630,
           "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-20.webp",
           "bytes": 85368,
           "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-21.webp",
           "bytes": 93744,
           "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-22.webp",
           "bytes": 99970,
           "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-23.webp",
           "bytes": 107422,
           "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-24.webp",
           "bytes": 112788,
           "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-25.webp",
           "bytes": 122328,
           "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-26.webp",
           "bytes": 130124,
           "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-27.webp",
           "bytes": 137048,
           "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-28.webp",
           "bytes": 148122,
           "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-29.webp",
           "bytes": 157328,
           "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-30.webp",
           "bytes": 167218,
           "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-1x-row-31.webp",
           "bytes": 182238,
           "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-billboard.webp",
           "bytes": 115740,
           "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-00.webp",
           "bytes": 37672,
           "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-01.webp",
           "bytes": 70898,
           "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-02.webp",
           "bytes": 92030,
           "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-03.webp",
           "bytes": 106840,
           "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-04.webp",
           "bytes": 120584,
           "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-05.webp",
           "bytes": 132094,
           "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-06.webp",
           "bytes": 143228,
           "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-07.webp",
           "bytes": 153142,
           "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-08.webp",
           "bytes": 163984,
           "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-09.webp",
           "bytes": 172632,
           "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-10.webp",
           "bytes": 177128,
           "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-11.webp",
           "bytes": 179144,
           "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-12.webp",
           "bytes": 173518,
           "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-13.webp",
           "bytes": 161150,
           "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-14.webp",
           "bytes": 132038,
           "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-15.webp",
           "bytes": 69930,
           "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-16.webp",
           "bytes": 74522,
           "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-17.webp",
           "bytes": 143520,
           "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-18.webp",
           "bytes": 185628,
           "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-19.webp",
           "bytes": 218252,
           "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-20.webp",
           "bytes": 245184,
           "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-21.webp",
           "bytes": 269836,
           "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-22.webp",
           "bytes": 291326,
           "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-23.webp",
           "bytes": 312110,
           "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-24.webp",
           "bytes": 333302,
           "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-25.webp",
           "bytes": 355976,
           "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-26.webp",
           "bytes": 377782,
           "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-27.webp",
           "bytes": 403282,
           "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-28.webp",
           "bytes": 429004,
           "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-29.webp",
           "bytes": 456570,
           "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-30.webp",
           "bytes": 481914,
           "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-lighting-2x-row-31.webp",
           "bytes": 526556,
           "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "authored-recipe"
@@ -3310,14 +3329,14 @@
           "url": "/scenes/moon/moon-features.json",
           "bytes": 9327754,
           "sha256": "24006b77507356cece119118ee70e0d39e6bbf597273c2e9d9d4ddfd2e9499cb",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
       "id": "preview:surface",
-      "label": "Visible color preview",
+      "label": "Monochrome preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -3333,8 +3352,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/surface.webp",
-          "bytes": 44688,
-          "sha256": "88ba77b6c93f0e10155a0bba42eacc8cb1cd59a64f8722595d2aadd331a4fe7c",
+          "bytes": 67242,
+          "sha256": "c948c0c7002351d20dcc44e71e27ad4481e78a1fa5cf9c123a328144f49d52f0",
           "verification": "bytes-verified"
         }
       ]
