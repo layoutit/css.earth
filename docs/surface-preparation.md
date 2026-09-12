@@ -179,3 +179,33 @@ in its README and recipe. Keep shared algorithm explanations here. Add a
 [provenance binding](object-provenance.md#ownership-and-data-flow) when a new
 operation consumes inputs or emits products, and retain its original check results
 under the [evidence rules](provenance/CONTRACT.md#save-enough-evidence-to-check-the-result).
+
+## Refresh photographs without rebuilding geometry
+
+For a `density-before-pack` raster with separate pole sprites, a surface may set
+`resolutionScale` to a positive integer. It multiplies that photograph's map
+size at both prepared densities. Gutters scale with the map, preserving normalized
+atlas coordinates; polar sprite dimensions, lighting and scene geometry stay fixed.
+This setting does not change runtime texture selection or add a renderer feature.
+
+After pinning the changed recipe and content, use the shared preparer:
+
+```sh
+pnpm build:preparation
+node tools/objects/dist/refresh-photographs.js moon surface
+node tools/objects/dist/refresh-photographs.js europa normal enhanced
+node tools/objects/dist/refresh-photographs.js io normal enhanced
+```
+
+Run one body at a time. The command verifies the selected source closure, prepares
+its images and small minimaps, and updates the existing asset inventories and
+captions. It rejects scientific/emissive selections and new resource names.
+Unselected maps and the scene remain retained products; provenance records this
+as a partial refresh rather than a new full-package preparation. The ordinary
+full preparer uses the same image code.
+
+LROC's `pds-float-map` interpretation reads attached PDS3 labels, validates the
+product version, band, projection and lunar reference sphere, then integrates
+source pixel footprints before applying display gain/gamma. Source special values
+are masked before sampling; observed black is retained. It reads one row strip
+at a time and supplies the same interpretation to the globe and sidebar map.

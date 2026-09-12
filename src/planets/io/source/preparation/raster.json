@@ -49,7 +49,8 @@
             360
           ]
         }
-      }
+      },
+      "resolutionScale": 2
     },
     {
       "id": "enhanced",
@@ -83,7 +84,8 @@
           "withheldColorLatitudeDegrees": 85,
           "sourceProcessing": "USGS Lunar-Lambert L=0.7, seam matching and color-ratio merge; no additional photometric normalization."
         }
-      }
+      },
+      "resolutionScale": 2
     },
     {
       "id": "geology",

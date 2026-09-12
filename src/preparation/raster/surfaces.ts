@@ -31,7 +31,8 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             preparedSources.push({ id: surface.id, rgba: source, fallback });
         }
         for (const density of config.densities) {
-            const width = config.width * density, height = config.height * density;
+            const scale = surface.resolutionScale ?? 1;
+            const width = config.width * density * scale, height = config.height * density * scale;
             let nearest = false, pixels: Uint8Array;
             if (surface.science) {
                 if (!interpret) throw new TypeError(`Surface ${surface.id} declares a scientific interpretation but none was supplied.`);
