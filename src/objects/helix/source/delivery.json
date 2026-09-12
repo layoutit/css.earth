@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-nebula-delivery@1",
+  "id": "helix",
+  "method": "compiler",
+  "request": {
+    "path": "src/objects/helix/source/request.json",
+    "sha256": "8a6057d0d9719ab5d48569921bd1a79238bc4c59b4bf2f90d17bcb738446223c"
+  },
+  "inputPins": [
+    {
+      "path": "labs/nebula/models/helix/compiler.json",
+      "sha256": "6589cf8db6deb4f418e8b9d33fbc1cdd9e7fe248fb3d7e1af49afd34c57adac2"
+    },
+    {
+      "path": "labs/nebula/models/helix/observations.json",
+      "sha256": "94c86a73e965bf38c4df792047cdbeb2321cccecb2bfd3a4d0340b84c4af38ea"
+    },
+    {
+      "path": "labs/nebula/models/helix/observation-structures.json",
+      "sha256": "31906fc965cd98acce4d3d8b6589135311f48a14ecfd94c20abbe2e298434156"
+    },
+    {
+      "path": "labs/nebula/models/helix/joint-fit.json",
+      "sha256": "5380e28a8c39c629c586a701c8dda36e4a7f5dd643c3c1adda552359549f2065"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      337.4107083333334,
+      -20.83717222222222
+    ],
+    "distancePc": 216,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 1
+  },
+  "sourceUrl": "https://www.eso.org/public/images/eso0907a/",
+  "description": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and the front/back assignment remain conditional. Compact lights have observed image positions, with illustrative field depths.",
+  "defaultLens": "eso-wfi",
+  "framingRadiusUnits": 1500,
+  "acceptedLabResult": "2e6d9eccd15ca15ccc053b1d564e2b0763522207c1c6ba79c42c86111796c9ce"
+}

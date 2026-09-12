@@ -24,6 +24,28 @@ class Element extends EventTarget {
 class Document { count = 0; defaultView = new Window(); createElement() { this.count++; return new Element(this); } }
 const read = (path: string) => JSON.parse(readFileSync(new URL(`../../../objects/${path}`, import.meta.url), 'utf8'));
 
+test('nearby nebula labels wake and follow the camera while both extragalactic fades are zero', () => {
+  const payload = { ...read('local-group/prepared/catalogue.json'), objects: [] };
+  const nebulae = read('m42/source/nebula.json'), object = nebulae.objects[0];
+  const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
+  const onSelect = vi.fn(), runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement,
+    before: before as unknown as HTMLElement, payload, nebulae, onSelect });
+  const viewport = { focalPixels: 600, principalOffsetPixels: [0,0] as const, widthPixels: 800, heightPixels: 600 };
+  const camera = (z: number, x = 0) => ({ ...nebulae.frame, pose: {
+    positionM: [object.positionM[0] + x, object.positionM[1], object.positionM[2] + z] as const,
+    orientationXyzw: [0,0,0,1] as const } });
+  const label = runtime.inspect().labels[object.id]!, nodes = document.count;
+  runtime.publish(camera(-1e17), viewport, 0, [], 0);
+  expect(label.style.pointerEvents).toBe('none');
+  runtime.publish(camera(1e17), viewport, 0, [], 0); document.defaultView.advance(250);
+  expect(label.style.pointerEvents).toBe('auto'); expect(Number(label.style.opacity)).toBe(.85);
+  const transform = label.style.transform;
+  runtime.publish(camera(1e17, 1e16), viewport, 0, [], 0);
+  expect(label.style.transform).not.toBe(transform);
+  label.dispatchEvent(new Event('dblclick')); expect(onSelect).toHaveBeenCalledWith(object);
+  expect(document.count).toBe(nodes); runtime.destroy();
+});
+
 test('one retained catalogue combines both classes; cluster fades, source-aware focus and aperture follow the same observer', () => {
   const payload = read('local-group/prepared/catalogue.json'), clusters = read('galaxy-clusters/prepared/catalogue.json');
   const galaxyCount = payload.objects.filter((row: { membership: { group: string } }) => row.membership.group === 'local-group').length;
