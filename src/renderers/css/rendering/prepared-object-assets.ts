@@ -1,12 +1,16 @@
 import type { PreparedResourceEntry, PreparedResourcePool } from "./prepared-residency.js";
 export interface PreparedAssetPair { two?: string; url2x?: string; one?: string; url?: string; }
-export interface PreparedSkyAssetPlan { faces: readonly { url: string; url2x?: string; highContrastUrl: string; highContrastUrl2x?: string }[]; }
 export type PreparedResourcePoolOptions = Partial<Omit<PreparedResourcePool, "id">>;
 
 export const CANONICAL_PREPARED_IMAGE_DENSITY = 2;
 
-// Addresses are selected from prepared data once when a definition is bound.
+// Addresses are read from prepared data once when a definition is bound.
 // No device-density input, asset generation, image owner, or eviction lives here.
+export function preparedAssetAddress(url: unknown): string {
+  if (typeof url !== "string" || !url.startsWith("/scenes/")) throw new TypeError("A prepared asset address is required.");
+  return url;
+}
+
 export function canonicalPreparedAsset(pair: string | PreparedAssetPair | null | undefined, high?: string) {
   if (typeof pair === "string") return high || pair;
   const url = [pair?.two, pair?.url2x, pair?.one, pair?.url].find(value => typeof value === "string");
@@ -16,8 +20,8 @@ export function canonicalPreparedAsset(pair: string | PreparedAssetPair | null |
 
 // The retained sky's selected CSS background loads on demand. Preloading both
 // modes here made every first visit download the unused high-contrast sky.
-export function preparedSunResources(sun: { asset: PreparedAssetPair | string } | null | undefined, pool: string): PreparedResourceEntry[] {
-  return sun ? [{ key: "directional-sun", url: canonicalPreparedAsset(sun.asset), pool }] : [];
+export function preparedSunResources(sun: { asset: { url: string } } | null | undefined, pool: string): PreparedResourceEntry[] {
+  return sun ? [{ key: "directional-sun", url: preparedAssetAddress(sun.asset.url), pool }] : [];
 }
 
 export function preparedResourcePool(id: string, entries: readonly PreparedResourceEntry[], { retention = "mount", concurrency, capacity, reuse = false, ...policy }: PreparedResourcePoolOptions = {}): Readonly<PreparedResourcePool> {

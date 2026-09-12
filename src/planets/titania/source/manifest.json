@@ -569,8 +569,8 @@
     {
       "id": "titania-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1647,
-      "expectedSha256": "40d9193d596427b78207511575cd618e869c2b2c344bddc34a1fe12ad0f67bc5",
+      "expectedBytes": 1569,
+      "expectedSha256": "e184f97a99f067ac8260eb897d28dc0198d4cc040d99198224533dc4e9ba66c1",
       "origin": "Repository-authored Titania solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -590,8 +590,8 @@
     {
       "id": "titania-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 7826,
-      "expectedSha256": "484762bee69d0195d3e7dadc828f707a852fd961b00feba1a0520ff2c4f393fd",
+      "expectedBytes": 7755,
+      "expectedSha256": "ee00a78286d559e5a3b01e3a0b2d65db25955562e06894f2d72541f44a2fc198",
       "origin": "Repository-authored Titania raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -609,8 +609,8 @@
     {
       "id": "titania-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1421,
-      "expectedSha256": "aef8ddd1671d72a3cdbeb90eba0b0e9410af7795600837c0bfac71a3ee40a5b0",
+      "expectedBytes": 1427,
+      "expectedSha256": "109859a38052dd2fbd1c898fe43f375c66c98cf2566b015e4aefa3cbc8545510",
       "origin": "Repository-authored Titania geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -703,8 +703,8 @@
     {
       "id": "titania-object-content",
       "path": "content/object.json",
-      "expectedBytes": 13209,
-      "expectedSha256": "4b276f37299fed0e596a91f6227c33da9e6d079a790e4354c12c28c4e4a2c617",
+      "expectedBytes": 13227,
+      "expectedSha256": "8693f0370c587d4dd93603826251bf20a13b49a0127bf6c6882f4915d6f3841a",
       "origin": "Repository-authored Titania object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

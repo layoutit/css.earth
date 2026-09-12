@@ -1418,8 +1418,8 @@
     {
       "id": "sun-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 8561,
-      "expectedSha256": "9a1e44e8ca4086f661e89398cc968e08f488d5cd4c0a3b5773a5faa9e9f1d40a",
+      "expectedBytes": 8491,
+      "expectedSha256": "012fbd58853fd31ceb52ab2be97a5b8b559db2bb6a162129db869193e64d8176",
       "origin": "Repository-authored raster recipe: four CR2311 synoptic surfaces interpreted by the shared observation adapter (continuum mosaic, HMI and AIA FITS maps), polar bands, off-limb and limb plates",
       "sourceBinding": {
         "kind": "local",
@@ -1437,8 +1437,8 @@
     {
       "id": "sun-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1972,
-      "expectedSha256": "10ac1e75449db66f2a21d32d790e9d4b5126e73395fcab8c6d7b86e49a40f6ba",
+      "expectedBytes": 1978,
+      "expectedSha256": "054204b5ae9d97e5bfc7828b738f483ec25791e56f832803b3fd0ccfdbc69a90",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, 32-segment polar bands with a centre cap, carried from the retired static-surface geometry",
       "sourceBinding": {
         "kind": "local",
@@ -1493,8 +1493,8 @@
     {
       "id": "sun-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1737,
-      "expectedSha256": "b364b77492858f86894ce47a0a90d8e4fc8c0e4583efc4f63ecb963207abae8e",
+      "expectedBytes": 1667,
+      "expectedSha256": "a8c1ef6366bf971637a67ad42ce0c6768070cad3352686f08075f68a436888e6",
       "origin": "Repository-authored star-centred scene recipe; IAU nominal radius 695,700 km, camera plan (defaultZoom 1.25, initial pitch 40, yaw -105) and the 7.25 degree axis tilt carried from the retired static-surface geometry",
       "sourceBinding": {
         "kind": "local",
@@ -1513,8 +1513,8 @@
     {
       "id": "sun-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12783,
-      "expectedSha256": "f2ae43e88009d924e46647e38caf07da251cea5e15cff65074cc163a2ff6dd4f",
+      "expectedBytes": 12807,
+      "expectedSha256": "dc7ba6b04205d2508fc2f9103ccb508b1cad912a2a548207e491e2f11c66619a",
       "origin": "Repository-authored object content: NASA Science facts with citations, four lens descriptions, legends as palette recipes, resources",
       "sourceBinding": {
         "kind": "local",

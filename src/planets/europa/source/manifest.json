@@ -1975,8 +1975,8 @@
     {
       "id": "europa-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1605,
-      "expectedSha256": "4f6d21e75d3b88a7cccf2b984c2cee8778ad8f388159444859324ca477b10df6",
+      "expectedBytes": 1529,
+      "expectedSha256": "3ea935df09463d5dea39af2ef8ff561eb2b817cd9367ce4a130e5d9fc87bc72f",
       "origin": "Repository-authored Europa solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1996,8 +1996,8 @@
     {
       "id": "europa-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 9833,
-      "expectedSha256": "eb11bca8bd5eca99bd8df57aef4d7c0e19582bfeeb6bb5545f15a1347c32cccb",
+      "expectedBytes": 9752,
+      "expectedSha256": "dbc711f8effd1cc1ff697e8604db4f40d1209c489a172dddaaf888c482895b72",
       "origin": "Repository-authored Europa raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2015,8 +2015,8 @@
     {
       "id": "europa-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1414,
-      "expectedSha256": "da0a452d777481cde1a97248d2b5258d6d409c2bb377d82a0c50f963297abe48",
+      "expectedBytes": 1420,
+      "expectedSha256": "1c8d1f924668e426140e4dd85c45720bc57175a39f4553e80550c250893233a9",
       "origin": "Repository-authored Europa geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2109,8 +2109,8 @@
     {
       "id": "europa-object-content",
       "path": "content/object.json",
-      "expectedBytes": 16192,
-      "expectedSha256": "adea0fe714df61db29809426fc78d414766723e35b1cca490aae48371373a85d",
+      "expectedBytes": 16222,
+      "expectedSha256": "ff68c87172d33b3113ba716dec9416f68df4e3336b3cb89784c3bf5c02b5f7c6",
       "origin": "Repository-authored Europa object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

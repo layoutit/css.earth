@@ -751,8 +751,8 @@
     {
       "id": "moon-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "118b64ae531350d309ff002299cdc2aed9fa42691d0614bcde65ea71cda423cd",
-      "expectedBytes": 1587,
+      "expectedSha256": "81d0ab4c1e9e558f5c4229303e950741ae030b3de5fcad33c9d30ca650857e8d",
+      "expectedBytes": 1515,
       "origin": "Repository-authored physical scene recipe; mean radius 1737.4 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40\u00b0) carried over from the retired static-surface geometry",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -772,8 +772,8 @@
     {
       "id": "moon-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "9cd67764f11339404a5ef9bed8683efb738eda3ccb63f4b8a74817168e461b5a",
-      "expectedBytes": 17834,
+      "expectedSha256": "60a51ab9ad9a8ff96e579ba70cc7eb1a0406c70441fe60d5915ac3cb7bc0263e",
+      "expectedBytes": 17738,
       "origin": "Repository-authored Moon raster preparation recipe (generic sphere lane) carrying the science interpretation blocks of the retired static recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -791,8 +791,8 @@
     {
       "id": "moon-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedSha256": "6ae467372e802177e682595ad04da3e834bf70849f45f2fa496ece1c711c33b1",
-      "expectedBytes": 1405,
+      "expectedSha256": "bdee5d629e3d998bb95e8fce9b887866dc4525d6cf98bdac6dd9fa7db203de93",
+      "expectedBytes": 1411,
       "origin": "Repository-authored Moon CSS geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -885,8 +885,8 @@
     {
       "id": "moon-object-content",
       "path": "content/object.json",
-      "expectedSha256": "ebccc20d6f7f238fad5aca33df03e2763cfa63eabee7ed6503a0c3da56330375",
-      "expectedBytes": 36485,
+      "expectedSha256": "de318f038cf63fb587cb85b310e544ae0e7a2307878b85f4a5029ba3017d3853",
+      "expectedBytes": 36533,
       "origin": "Repository-authored Moon panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

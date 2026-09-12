@@ -6,10 +6,6 @@
     {
       "kind": "annular-field",
       "size": 1200,
-      "densities": [
-        1,
-        2
-      ],
       "outerRadius": 106200,
       "mapping": {
         "kind": "linear",
@@ -329,7 +325,7 @@
           }
         }
       ],
-      "output": "uranus-rings{suffix}.webp",
+      "output": "uranus-rings@2x.webp",
       "qualification": "PDS center radii and physical widths, with the accepted pixel readability floor for narrow rings.",
       "overlays": [
         {
@@ -354,7 +350,7 @@
             "quality": 92,
             "alphaQuality": 100
           },
-          "output": "uranus-ring-shadow-plane{suffix}.webp"
+          "output": "uranus-ring-shadow-plane@2x.webp"
         }
       ]
     }

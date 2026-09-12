@@ -18,7 +18,8 @@ export interface SurfaceRasterRecipe {
     thumbnail: string;
     /** Offline surface resolution relative to the shared layout; does not change geometry or lighting. */
     resolutionScale?: number;
-    sharpen?: number[];
+    /** Sharpening sigma applied after resampling the source to the prepared map size. */
+    sharpen?: number;
     exposure?: number[];
     coverage?: {
         normal: string;
@@ -103,11 +104,11 @@ export interface RasterRecipe {
     publicBase: string;
     sourceWidth: number;
     sourceHeight: number;
+    /** Layout size of the packed map; every prepared raster carries two texels per layout pixel. */
     width: number;
     height: number;
     latitudeBands: number;
     polarTile: number;
-    densities: number[];
     resample: 'source-packed' | 'density-before-pack';
     polarProjection: 'angular-nearest' | 'orthographic-bilinear';
     surfaces: SurfaceRasterRecipe[];

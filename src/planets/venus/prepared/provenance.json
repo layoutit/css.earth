@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "843c426487cf47b401ad0621b28270d7f72327c455fc86e765e72dd9d5a6e59a"
+    "sha256": "1b60838c05b089b02f2b9be84dbfb7955c1f66cef37e7b25927bc1c3c71497b3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "382d8b464a53b58d1715f483ed70b8e3ad8496a634b2e8cc689814e9b2caafbe"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "a8f46765c150f436df7f8c3fd41c924ae67c42b63410e3f39b9979a164ef5919",
+      "sha256": "09df7aee16d2b074cd63a69a1a8b8064d26d6ab99b83b1b7e1c91e0953d7f256",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/venus/",
@@ -25,14 +25,10 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
-        "polesOutput": "venus-poles-{id}{suffix}.webp",
+        "polesOutput": "venus-poles-{id}@2x.webp",
         "surfaceMetadata": {
           "schema": "cssvenus-prepared-assets@1"
         },
@@ -45,7 +41,7 @@
             "id": "clouds",
             "source": "surface/venus-clouds.jpg",
             "falseColor": false,
-            "output": "venus-{id}{suffix}.webp",
+            "output": "venus-{id}@2x.webp",
             "thumbnail": "venus-lens-{id}.webp",
             "exposure": [
               1.4,
@@ -57,33 +53,27 @@
             "id": "radar",
             "source": "surface/venus-magellan-color-wms.png",
             "falseColor": true,
-            "output": "venus-{id}{suffix}.webp",
+            "output": "venus-{id}@2x.webp",
             "thumbnail": "venus-lens-{id}.webp",
             "exposure": [
               1.4,
               2.2,
               0.9
             ],
-            "sharpen": [
-              0.45,
-              0.65
-            ]
+            "sharpen": 0.65
           },
           {
             "id": "elevation",
             "source": "surface/venus-magellan-topography-wms.png",
             "falseColor": true,
-            "output": "venus-{id}{suffix}.webp",
+            "output": "venus-{id}@2x.webp",
             "thumbnail": "venus-lens-{id}.webp",
             "exposure": [
               1.4,
               2.2,
               0.9
             ],
-            "sharpen": [
-              0.45,
-              0.65
-            ]
+            "sharpen": 0.65
           }
         ],
         "atmosphere": {
@@ -110,16 +100,16 @@
             -0.18,
             0.08
           ],
-          "materialOutput": "venus-material{suffix}.webp",
-          "observationOutput": "venus-observation-material{suffix}.webp",
-          "lightingOutput": "venus-lighting{suffix}.webp"
+          "materialOutput": "venus-material@2x.webp",
+          "observationOutput": "venus-observation-material@2x.webp",
+          "lightingOutput": "venus-lighting@2x.webp"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c37d72b0d97d73041322c7ecd3c5849efe9acba5f426d8166e43acb8ab98dd30",
+      "sha256": "eda3fb5fe82287b5c405c63d19773fd1e30b5d270639ab1897f98406a79307a1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -283,13 +273,13 @@
               "description": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
               "title": "Cloud illustration",
               "thumbnail": "venus-lens-clouds.webp",
-              "surface": "venus-clouds.webp",
+              "surface": "venus-clouds@2x.webp",
               "source": {
                 "id": "openspace-clouds",
                 "url": "https://github.com/OpenSpace/OpenSpace"
               },
-              "poles": "venus-poles-clouds.webp",
-              "material": "venus-material.webp",
+              "poles": "venus-poles-clouds@2x.webp",
+              "material": "venus-material@2x.webp",
               "shortLabel": "VIS",
               "qualification": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
               "falseColor": false,
@@ -302,13 +292,13 @@
               "description": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic. Colors represent an archival radar presentation, not visible surface color.",
               "title": "C3-MDIR synthetic-color radar mosaic",
               "thumbnail": "venus-lens-radar.webp",
-              "surface": "venus-radar.webp",
+              "surface": "venus-radar@2x.webp",
               "source": {
                 "id": "magellan-radar",
                 "url": "https://astrogeology.usgs.gov/search/map/venus-magellan-global-products"
               },
-              "poles": "venus-poles-radar.webp",
-              "material": "venus-observation-material.webp",
+              "poles": "venus-poles-radar@2x.webp",
+              "material": "venus-observation-material@2x.webp",
               "shortLabel": "SAR",
               "qualification": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic",
               "falseColor": true,
@@ -321,13 +311,13 @@
               "description": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic with shaded relief. This archival scientific visualization is not visible surface color.",
               "title": "C3-MDIR colorized topography",
               "thumbnail": "venus-lens-elevation.webp",
-              "surface": "venus-elevation.webp",
+              "surface": "venus-elevation@2x.webp",
               "source": {
                 "id": "magellan-elevation",
                 "url": "https://astrogeology.usgs.gov/search/map/venus-magellan-global-products"
               },
-              "poles": "venus-poles-elevation.webp",
-              "material": "venus-observation-material.webp",
+              "poles": "venus-poles-elevation@2x.webp",
+              "material": "venus-observation-material@2x.webp",
               "legend": {
                 "kind": "scale",
                 "title": "Relative elevation",
@@ -939,8 +929,8 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
       },
-      "sha256": "c37d72b0d97d73041322c7ecd3c5849efe9acba5f426d8166e43acb8ab98dd30",
-      "bytes": 17582,
+      "sha256": "eda3fb5fe82287b5c405c63d19773fd1e30b5d270639ab1897f98406a79307a1",
+      "bytes": 17609,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1190,12 +1180,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/venus/venus-clouds.webp",
-          "bytes": 12928,
-          "sha256": "7b8a6cb754caed6b8f60232b098087620bcaa3a65e2a753e8844635220d20945",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/venus/venus-clouds@2x.webp",
           "bytes": 38640,
           "sha256": "c1dd0f9b1e9f7dc12bc4074ebcb66845bd6ab97c1fa21edb59c6468a6ba38a6b",
@@ -1205,12 +1189,6 @@
           "url": "/scenes/venus/venus-lens-clouds.webp",
           "bytes": 226,
           "sha256": "ecea3de3aab9b651c81367ea6555df4c8a3219c3c0aca3951aeb28c835225b9d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/venus/venus-poles-clouds.webp",
-          "bytes": 30402,
-          "sha256": "b0b637150e9061b087b5b45cdeff01b37485c6a5668eb112d097752f9a8d9160",
           "verification": "bytes-verified"
         },
         {
@@ -1247,12 +1225,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/venus/venus-radar.webp",
-          "bytes": 319602,
-          "sha256": "2f425091df878e19ea940b2933591cd89041a6974b27010b9f97d4cefbc44f9c",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/venus/venus-radar@2x.webp",
           "bytes": 1342124,
           "sha256": "d8a8ab642684a2934b252f69d4a4e84727388a43c2748b0d0945348b302e4783",
@@ -1262,12 +1234,6 @@
           "url": "/scenes/venus/venus-lens-radar.webp",
           "bytes": 1844,
           "sha256": "27afea38c42d0c98f0b75acb78e98d95474a86b0e66e3fc3997b7fdabbec2b63",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/venus/venus-poles-radar.webp",
-          "bytes": 120320,
-          "sha256": "093b573e7de2bbc5aa711b3d242cb9277424274ce4966a0abe7ca867ca5751bf",
           "verification": "bytes-verified"
         },
         {
@@ -1304,12 +1270,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/venus/venus-elevation.webp",
-          "bytes": 342682,
-          "sha256": "b55f3ee65a69ef17b0a5b346d2d3fab8369c0aa19b998050ea07b2dc2cb3df78",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/venus/venus-elevation@2x.webp",
           "bytes": 1606002,
           "sha256": "1d1982d1c830adce2434bea697fd2fb961cd87fa50e402178e299c4f851871e2",
@@ -1319,12 +1279,6 @@
           "url": "/scenes/venus/venus-lens-elevation.webp",
           "bytes": 2140,
           "sha256": "8057baad5c5ac313504433035423b839b4937687ba0adae19245adf9405c7224",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/venus/venus-poles-elevation.webp",
-          "bytes": 132918,
-          "sha256": "7e15aad4730e9cb1a94b0106d8ed70dfd59546f50d22f003a5dd1e4eddad96a6",
           "verification": "bytes-verified"
         },
         {
@@ -1352,24 +1306,6 @@
         "openspace-venus-atmosphere-specification"
       ],
       "outputs": [
-        {
-          "url": "/scenes/venus/venus-material.webp",
-          "bytes": 470778,
-          "sha256": "283259a1c7265f9d41dda42f7bff17ad3452f091d12844ac50dad690a414d136",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/venus/venus-observation-material.webp",
-          "bytes": 184874,
-          "sha256": "41a225f88f14b2df869f7be255d3dd06d2715bf1758bbe96157627940319a6a1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/venus/venus-lighting.webp",
-          "bytes": 71390,
-          "sha256": "f6839f8f0c2fa6b02ba296a74c1154accc9f584d7d3d136b69b9b8c8959642ca",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/venus/venus-material@2x.webp",
           "bytes": 1316794,

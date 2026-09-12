@@ -58,45 +58,6 @@
       "products": [
         {
           "kind": "surface",
-          "filename": "uranus-surface-normal.webp",
-          "transforms": [
-            {
-              "kind": "resize",
-              "width": 1920,
-              "height": 960
-            }
-          ],
-          "packing": {
-            "bandCount": 24,
-            "gutter": 10
-          },
-          "encoding": {
-            "quality": 94,
-            "alphaQuality": 100,
-            "smartSubsample": true
-          }
-        },
-        {
-          "kind": "poles",
-          "filename": "uranus-poles-normal.webp",
-          "projection": {
-            "tileSize": 128,
-            "poles": [
-              "north",
-              "south"
-            ],
-            "latitudeSegments": 24,
-            "angularMode": "boundary-difference",
-            "sampling": "nearest-closed"
-          },
-          "encoding": {
-            "quality": 94,
-            "alphaQuality": 100,
-            "smartSubsample": true
-          }
-        },
-        {
-          "kind": "surface",
           "filename": "uranus-surface-normal@2x.webp",
           "transforms": [
             {
@@ -213,45 +174,6 @@
         }
       },
       "products": [
-        {
-          "kind": "surface",
-          "filename": "uranus-surface-methane.webp",
-          "transforms": [
-            {
-              "kind": "resize",
-              "width": 1920,
-              "height": 960
-            }
-          ],
-          "packing": {
-            "bandCount": 24,
-            "gutter": 10
-          },
-          "encoding": {
-            "quality": 94,
-            "alphaQuality": 100,
-            "smartSubsample": true
-          }
-        },
-        {
-          "kind": "poles",
-          "filename": "uranus-poles-methane.webp",
-          "projection": {
-            "tileSize": 128,
-            "poles": [
-              "north",
-              "south"
-            ],
-            "latitudeSegments": 24,
-            "angularMode": "boundary-difference",
-            "sampling": "nearest-closed"
-          },
-          "encoding": {
-            "quality": 94,
-            "alphaQuality": 100,
-            "smartSubsample": true
-          }
-        },
         {
           "kind": "surface",
           "filename": "uranus-surface-methane@2x.webp",
@@ -373,45 +295,6 @@
         }
       },
       "products": [
-        {
-          "kind": "surface",
-          "filename": "uranus-surface-near-infrared.webp",
-          "transforms": [
-            {
-              "kind": "resize",
-              "width": 1920,
-              "height": 960
-            }
-          ],
-          "packing": {
-            "bandCount": 24,
-            "gutter": 10
-          },
-          "encoding": {
-            "quality": 94,
-            "alphaQuality": 100,
-            "smartSubsample": true
-          }
-        },
-        {
-          "kind": "poles",
-          "filename": "uranus-poles-near-infrared.webp",
-          "projection": {
-            "tileSize": 128,
-            "poles": [
-              "north",
-              "south"
-            ],
-            "latitudeSegments": 24,
-            "angularMode": "boundary-difference",
-            "sampling": "nearest-closed"
-          },
-          "encoding": {
-            "quality": 94,
-            "alphaQuality": 100,
-            "smartSubsample": true
-          }
-        },
         {
           "kind": "surface",
           "filename": "uranus-surface-near-infrared@2x.webp",

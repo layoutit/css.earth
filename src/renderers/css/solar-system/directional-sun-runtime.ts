@@ -1,25 +1,22 @@
 import type { Vector2, Vector3 } from './types.js';
-export interface DirectionalSunPlan {asset:{url:string;url2x:string};projection:{apparentViewportWidthShare:number;focalX:number};localDirection?:Vector3;referenceViewDirection?:Vector3;}
+export interface DirectionalSunPlan {asset:{url:string};projection:{apparentViewportWidthShare:number;focalX:number};localDirection?:Vector3;referenceViewDirection?:Vector3;}
 export interface DirectionalSunState {classification:'behind-camera'|'outside-viewport'|'fully-visible'|'partially-visible';visible:boolean;centerNdc:Vector2|null;}
-export interface DirectionalSunMountOptions {host:HTMLElement;plan:DirectionalSunPlan;imageDensity:number;objectId:string;before?:HTMLElement|null;}
+export interface DirectionalSunMountOptions {host:HTMLElement;plan:DirectionalSunPlan;objectId:string;before?:HTMLElement|null;}
 export type RetainedDirectionalSun = ReturnType<typeof mountRetainedDirectionalSun>;
 export function mountRetainedDirectionalSun({
   host,
   plan,
-  imageDensity,
   objectId,
   before = null,
 }: DirectionalSunMountOptions) {
-  if (!(host instanceof HTMLElement) || ![1, 2].includes(imageDensity) ||
-      !/^[a-z][a-z0-9-]*$/u.test(objectId) ||
+  if (!(host instanceof HTMLElement) || !/^[a-z][a-z0-9-]*$/u.test(objectId) ||
       (before !== null && !(before instanceof HTMLElement))) {
     throw new TypeError("Retained directional Sun mount arguments are invalid.");
   }
   const root = document.createElement("s");
   root.className = `planet-directional-sun ${objectId}-directional-sun`;
   root.ariaHidden = "true";
-  root.style.backgroundImage =
-    `url("${imageDensity === 2 ? plan.asset.url2x : plan.asset.url}")`;
+  root.style.backgroundImage = `url("${plan.asset.url}")`;
   root.style.width = `${plan.projection.apparentViewportWidthShare * 100}cqw`;
   root.style.height = root.style.width;
   host.insertBefore(root, before);

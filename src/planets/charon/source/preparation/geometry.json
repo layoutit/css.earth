@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/charon/charon-normal.webp",
+      "url": "/scenes/charon/charon-normal@2x.webp",
       "width": 6400,
       "height": 4800
     },
     "surfaceLatitudeHeight": 3200,
     "packedBandGutter": 50,
     "poles": {
-      "url": "/scenes/charon/charon-poles-normal.webp",
+      "url": "/scenes/charon/charon-poles-normal@2x.webp",
       "width": 512,
       "height": 256
     },

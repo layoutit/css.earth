@@ -429,8 +429,8 @@
     {
       "id": "neptune-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 3378,
-      "expectedSha256": "177e3fdc36690fe70646f7b68a8375a8a5ac391402b07fbc11f4f4306a72f464",
+      "expectedBytes": 3322,
+      "expectedSha256": "991552fe0901c13139c41336a7e6f3d01e367b18656fdfe8fd2efc7be1b7327e",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -526,8 +526,8 @@
     {
       "id": "neptune-authored-observations",
       "path": "preparation/observations.json",
-      "expectedBytes": 12996,
-      "expectedSha256": "67711c6f0e6aa548d94ca2a434a40ab10dea79da9d40965eba74654987e51a6c",
+      "expectedBytes": 11956,
+      "expectedSha256": "49bfceb1682fb4a1e576db36017f33ff7967653537c141605ad4cb9465591f9f",
       "origin": "Checked source-observation preparation parameters, preserving the accepted scientific interpretation",
       "credit": "cssEarth and the institutional sources identified in the recipe",
       "license": "Project-authored specification; observation source terms retained",

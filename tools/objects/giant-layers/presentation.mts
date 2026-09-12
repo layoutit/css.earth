@@ -46,8 +46,11 @@ export async function prepareLayeredSurfacePresentation({config:input,geometryCo
   const meshTransform=authoredTransform(config.meshTransform),systemTransform=authoredTransform(config.systemTransform);
   if(materialStyle.projection==='fixed-span'&&!geometryConfig.materialPlane)throw new TypeError('Fixed-span plane is missing.');
   const materialPlane=geometryConfig.materialPlane;
+  // The retained leaf keeps the material's layout size; its image may carry more texels.
+  const fixedMaterial=materialConfig.lenses[0].fixed.find(product=>!product.shadowless);
+  if(!fixedMaterial)throw new TypeError('Material plane needs a fixed material product.');
   const materialLeaf=materialStyle.projection==='fixed-span'&&materialPlane?prepareFixedSpanMaterialPlane(materialPlane,quantizedScenePitch(cameraPlan)):
-    rasterEllipsoidMaterial(materialConfig.raster,{size:materialConfig.lenses[0].fixed[0].size,state:materialConfig.fixedState,geometryOnly:true,textureUrl:url(prefix,materialConfig.lenses[0].fixed[0].filename)}).leaf;
+    rasterEllipsoidMaterial(materialConfig.raster,{size:fixedMaterial.size/fixedMaterial.density,state:materialConfig.fixedState,geometryOnly:true,textureUrl:url(prefix,fixedMaterial.filename)}).leaf;
   if(!materialLeaf)throw new TypeError('Material plane geometry is missing.');
   const styleReads=geometry.bodyBands.flatMap(band=>band.leaves).map(leaf=>leaf.style);
   if(config.readPlaneCssom)styleReads.push(...Object.values(geometry.planes).map(leaf=>leaf.style),materialLeaf.style);

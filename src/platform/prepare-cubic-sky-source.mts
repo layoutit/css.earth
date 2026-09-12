@@ -163,25 +163,16 @@ const sunOracle: CubicSkySunOracle | null = includeSun
   : null;
 const sunPresentation = includeSun ? createCubicSkySunPresentation() : null;
 const faces = [];
-let selectedPointSources: Map<string, PhotographicPoint[]> | null = null;
-for (const density of [1, 2]) {
-  const faceSize = FACE_SIZE * density;
-  const sun = includeSun
-    ? await prepareCubicSkySunPixels({
-      sourcePath: resolve(sourceRoot, "sun/google-maps-sun.png"),
-      oracle: sunOracle!,
-      density,
-    })
-    : null;
-  const preparedFaces = FACE_IDS.map((id) => {
-    // The photograph's detail is removed where the retained catalogue stars
-    // will be drawn as points.
+// Point sources are selected once on the standard faces, then drawn into the
+// prepared faces at two texels per standard face pixel. Selection writes nothing.
+const selectedPointSources = pointSourceContract === null ? null : selectPhotographicPointSources(
+  FACE_IDS.map((id) => {
     const detailMask = catalogueStars === null
       ? null
-      : prepareRetainedStarHoles({ faceId: id, faceSize, density, stars: catalogueStars.stars });
-    const highContrastPixels = preparePhotographicFace(
+      : prepareRetainedStarHoles({ faceId: id, faceSize: FACE_SIZE, density: 1, stars: catalogueStars.stars });
+    const photographicStandardPixels = prepareStandardCubicSkyPixels(preparePhotographicFace(
       id,
-      faceSize,
+      FACE_SIZE,
       basis,
       registration,
       photo.data,
@@ -191,119 +182,113 @@ for (const density of [1, 2]) {
       DIFFUSE_GAIN,
       astrometricMatrix,
       detailMask,
-    );
-    const photographicStandardPixels = prepareStandardCubicSkyPixels(
-      highContrastPixels,
-    );
-    const standardPixels = pointSourceContract === null
-      ? photographicStandardPixels
-      : prepareStandardCubicSkyPixels(preparePhotographicFace(
-        id,
-        faceSize,
-        basis,
-        registration,
-        photo.data,
-        diffusePhoto,
-        photo.info,
-        pointSourceContract.backgroundDetailGain,
-        pointSourceContract.backgroundDiffuseGain,
-        astrometricMatrix,
-        detailMask,
-      ));
-    const pointSelectionPixels = pointSourceContract !== null && density === 1
-      ? prepareStandardCubicSkyPixels(preparePhotographicFace(
-        id,
-        faceSize,
-        basis,
-        registration,
-        photo.data,
-        diffusePhoto,
-        photo.info,
-        pointSourceContract.backgroundDetailGain,
-        DIFFUSE_GAIN,
-        astrometricMatrix,
-        detailMask,
-      ))
-      : standardPixels;
-    return {
+    ));
+    const pointSelectionPixels = prepareStandardCubicSkyPixels(preparePhotographicFace(
       id,
-      highContrastPixels,
-      photographicStandardPixels,
-      pointSelectionPixels,
-      standardPixels,
-    };
-  });
-  if (pointSourceContract !== null && density === 1) {
-    selectedPointSources = selectPhotographicPointSources(
-      preparedFaces,
-      pointSourceContract.drawCount,
-      faceSize,
-    );
-  }
-  for (const {
+      FACE_SIZE,
+      basis,
+      registration,
+      photo.data,
+      diffusePhoto,
+      photo.info,
+      pointSourceContract.backgroundDetailGain,
+      DIFFUSE_GAIN,
+      astrometricMatrix,
+      detailMask,
+    ));
+    return { id, photographicStandardPixels, pointSelectionPixels };
+  }),
+  pointSourceContract.drawCount,
+  FACE_SIZE,
+);
+const density = 2;
+const faceSize = FACE_SIZE * density;
+const sun = includeSun
+  ? await prepareCubicSkySunPixels({
+    sourcePath: resolve(sourceRoot, "sun/google-maps-sun.png"),
+    oracle: sunOracle!,
+  })
+  : null;
+for (const id of FACE_IDS) {
+  // The photograph's detail is removed where the retained catalogue stars
+  // will be drawn as points.
+  const detailMask = catalogueStars === null
+    ? null
+    : prepareRetainedStarHoles({ faceId: id, faceSize, density, stars: catalogueStars.stars });
+  const highContrastPixels = preparePhotographicFace(
     id,
-    highContrastPixels,
-    standardPixels,
-  } of preparedFaces) {
-    if (pointSourceContract !== null) {
-      applyPreparedPointSources({
-        pixels: standardPixels,
+    faceSize,
+    basis,
+    registration,
+    photo.data,
+    diffusePhoto,
+    photo.info,
+    DETAIL_GAIN,
+    DIFFUSE_GAIN,
+    astrometricMatrix,
+    detailMask,
+  );
+  const standardPixels = pointSourceContract === null
+    ? prepareStandardCubicSkyPixels(highContrastPixels)
+    : prepareStandardCubicSkyPixels(preparePhotographicFace(
+      id,
+      faceSize,
+      basis,
+      registration,
+      photo.data,
+      diffusePhoto,
+      photo.info,
+      pointSourceContract.backgroundDetailGain,
+      pointSourceContract.backgroundDiffuseGain,
+      astrometricMatrix,
+      detailMask,
+    ));
+  if (pointSourceContract !== null) {
+    applyPreparedPointSources({
+      pixels: standardPixels,
+      faceSize,
+      density,
+      pointSources: selectedPointSources!.get(id)!,
+      logicalPointFootprintPixels:
+        pointSourceContract.logicalPointFootprintPixels,
+    });
+  }
+  if (includeSun) {
+    for (const facePixels of [standardPixels, highContrastPixels]) {
+      compositeSunIntoCubicSkyFace({
+        faceId: id,
+        facePixels,
+        sunPixels: sun!.pixels,
+        sunSize: sun!.size,
         faceSize,
-        density,
-        pointSources: selectedPointSources!.get(id)!,
-        logicalPointFootprintPixels:
-          pointSourceContract.logicalPointFootprintPixels,
-      });
-    }
-    if (includeSun) {
-      for (const facePixels of [standardPixels, highContrastPixels]) {
-        compositeSunIntoCubicSkyFace({
-          faceId: id,
-          facePixels,
-          sunPixels: sun!.pixels,
-          sunSize: sun!.size,
-          faceSize,
-          localDirection: sunPresentation!.localDirection,
-        });
-      }
-    }
-    const suffix = density === 1 ? "" : "@2x";
-    const highContrastFileName =
-      `${objectId}-starfield-${id}${suffix}.webp`;
-    const standardFileName =
-      `${objectId}-starfield-${id}-standard${suffix}.webp`;
-    await sharp(highContrastPixels, {
-      raw: { width: faceSize, height: faceSize, channels: 3 },
-    }).webp({ quality: 95, effort: 6, smartSubsample: true }).toFile(resolve(
-      publicRoot,
-      highContrastFileName,
-    ));
-    await sharp(standardPixels, {
-      raw: { width: faceSize, height: faceSize, channels: 3 },
-    }).webp({ quality: 95, effort: 6, smartSubsample: true }).toFile(resolve(
-      publicRoot,
-      standardFileName,
-    ));
-    if (density === 1) {
-      faces.push({
-        id,
-        url: `/scenes/${objectId}/${standardFileName}`,
-        url2x:
-          `/scenes/${objectId}/${objectId}-starfield-${id}-standard@2x.webp`,
-        highContrastUrl:
-          `/scenes/${objectId}/${highContrastFileName}`,
-        highContrastUrl2x:
-          `/scenes/${objectId}/${objectId}-starfield-${id}@2x.webp`,
+        localDirection: sunPresentation!.localDirection,
       });
     }
   }
+  const highContrastFileName = `${objectId}-starfield-${id}@2x.webp`;
+  const standardFileName = `${objectId}-starfield-${id}-standard@2x.webp`;
+  await sharp(highContrastPixels, {
+    raw: { width: faceSize, height: faceSize, channels: 3 },
+  }).webp({ quality: 95, effort: 6, smartSubsample: true }).toFile(resolve(
+    publicRoot,
+    highContrastFileName,
+  ));
+  await sharp(standardPixels, {
+    raw: { width: faceSize, height: faceSize, channels: 3 },
+  }).webp({ quality: 95, effort: 6, smartSubsample: true }).toFile(resolve(
+    publicRoot,
+    standardFileName,
+  ));
+  faces.push({
+    id,
+    url: `/scenes/${objectId}/${standardFileName}`,
+    highContrastUrl: `/scenes/${objectId}/${highContrastFileName}`,
+  });
 }
 
 const hashes = Object.fromEntries(await Promise.all(
   FACE_IDS.flatMap((id) => [
-    `${objectId}-starfield-${id}.webp`,
     `${objectId}-starfield-${id}@2x.webp`,
-    `${objectId}-starfield-${id}-standard.webp`,
     `${objectId}-starfield-${id}-standard@2x.webp`,
   ]).map(async (fileName) => {
     const bytes = await readFile(resolve(publicRoot, fileName));
@@ -322,8 +307,7 @@ const prepared = Object.freeze({
   sourceCredit: "ESO/S. Brunier",
   sourceLicense: "CC-BY-4.0",
   sourceMapSize: Object.freeze([PHOTO_WIDTH, PHOTO_HEIGHT]),
-  faceSize: FACE_SIZE,
-  faceSize2x: FACE_SIZE * 2,
+  faceSize: FACE_SIZE * 2,
   faces: Object.freeze(faces.map((face) => Object.freeze(face))),
   ...(astrometricSampling === null ? {
     centerRaDegrees: catalog.projection.centerRaDegrees,
@@ -492,7 +476,7 @@ await rm(resolve(publicRoot, `${objectId}-starfield.webp`), {
   force: true,
 });
 console.log(
-  `Prepared ${faces.length * 4} ${objectName} starfield cubemap images.`,
+  `Prepared ${faces.length * 2} ${objectName} starfield cubemap images.`,
 );
 return prepared;
 }

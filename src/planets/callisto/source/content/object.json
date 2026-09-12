@@ -96,8 +96,8 @@
         "description": "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate.",
         "title": "Global image mosaic",
         "thumbnail": "callisto-lens-normal.webp",
-        "surface": "callisto-normal.webp",
-        "poles": "callisto-poles-normal.webp",
+        "surface": "callisto-normal@2x.webp",
+        "poles": "callisto-poles-normal@2x.webp",
         "source": {
           "id": "usgs-voyager-galileo-global-1km",
           "path": "../manifest.json"
@@ -111,8 +111,8 @@
         "description": "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate.",
         "title": "Processed color mosaic",
         "thumbnail": "callisto-lens-enhanced.webp",
-        "surface": "callisto-enhanced.webp",
-        "poles": "callisto-poles-enhanced.webp",
+        "surface": "callisto-enhanced@2x.webp",
+        "poles": "callisto-poles-enhanced@2x.webp",
         "source": {
           "id": "galileo-pia03456-registered-color",
           "path": "../manifest.json"
@@ -161,8 +161,8 @@
         "description": "Galileo NIMS observations assign red, green and blue to 0.77, 2.25 and 3.66 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
         "title": "Galileo NIMS spectral color",
         "thumbnail": "callisto-lens-infrared.webp",
-        "surface": "callisto-infrared.webp",
-        "poles": "callisto-poles-infrared.webp",
+        "surface": "callisto-infrared@2x.webp",
+        "poles": "callisto-poles-infrared@2x.webp",
         "source": {
           "id": "callisto-registered-nims-composite",
           "path": "../manifest.json",

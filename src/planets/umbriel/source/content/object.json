@@ -83,8 +83,8 @@
         "title": "Monochrome mosaic",
         "detail": "Corrected mosaic",
         "thumbnail": "umbriel-lens-normal.webp",
-        "surface": "umbriel-normal.webp",
-        "poles": "umbriel-poles-normal.webp",
+        "surface": "umbriel-normal@2x.webp",
+        "poles": "umbriel-poles-normal@2x.webp",
         "source": {
           "id": "schenk-2020-umbriel-normal",
           "path": "../manifest.json",

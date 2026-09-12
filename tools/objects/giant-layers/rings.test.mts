@@ -9,7 +9,7 @@ import { createHash } from 'node:crypto';
 import { mapRadius, ringRayOccluded, parseRadialLayerRecipe, prepareGiantLayers, rasterAnnularField } from './index.mts';
 
 const recipe = () => ({schema:'cssearth-radial-layer-recipe@1',units:'kilometers',sources:[] as SourcePin[],layers:[{
-  kind:'annular-field',size:9,densities:[1],output:'hypothetical-ring{suffix}.webp',encoding:{lossless:true},
+  kind:'annular-field',size:9,output:'hypothetical-ring@2x.webp',encoding:{lossless:true},
   outerRadius:4,mapping:{kind:'linear',scale:1},grid:{centerInset:1,sampleOffset:0,marginPixels:0,scaleOrder:'divide-multiply'},
   composition:'maximum',alphaUnits:255,maximumAlpha:255,
   bands:[{envelope:'constant',bounds:[2,3],opacity:90,color:[10,20,30]}],
@@ -50,7 +50,7 @@ test('ring shadow uses the authored oblate body and a forward ray', () => {
 test('invalid recipes fail before raster output', () => {
   for (const mutate of [
 (input: unknown)=>fixtureRecord(input,'layers',0).size=Infinity,
-(input: unknown)=>fixtureRecord(input,'layers',0).output='../escaped{suffix}.webp',
+(input: unknown)=>fixtureRecord(input,'layers',0).output='../escaped@2x.webp',
 (input: unknown)=>fixtureRecord(input,'layers',0,'bands',0).envelope='unimplemented',
 (input: unknown)=>fixtureRecord(input,'layers',0).mapping={kind:'piecewise-log',knots:[[1,1],[2,1]]},
 (input: unknown)=>fixtureRecord(input).sources=[{path:'../source',expectedBytes:1,expectedSha256:'0'.repeat(64)}],

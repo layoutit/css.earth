@@ -61,10 +61,6 @@
     {
       "kind": "annular-field",
       "size": 1024,
-      "densities": [
-        1,
-        2
-      ],
       "outerRadius": 273.7771337507524,
       "mapping": {
         "kind": "piecewise-log",
@@ -92,7 +88,6 @@
       "composition": "front-to-back",
       "alphaUnits": 1,
       "maximumAlpha": 255,
-      "densityMode": "downsample-highest",
       "encoding": {
         "lossless": true,
         "effort": 6,
@@ -259,7 +254,7 @@
         "polarRadius": 66854,
         "luminance": 0.65
       },
-      "output": "jupiter-rings{suffix}.webp",
+      "output": "jupiter-rings@2x.webp",
       "qualification": "PDS radial bounds and optical-depth ordering; accepted logarithmic presentation-radius compression and low-opacity visibility emphasis."
     }
   ]

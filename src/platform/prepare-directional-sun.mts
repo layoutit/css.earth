@@ -14,6 +14,7 @@ import sharp from "sharp";
 import {
   DIRECTIONAL_SUN_DISTANCE_STANDARD,
   DIRECTIONAL_SUN_PRESENTATION_STANDARD,
+  DIRECTIONAL_SUN_SPRITE_PIXELS,
   PREPARED_DIRECTIONAL_SUN_SCHEMA,
   validateDirectionalSunPlan,
   validateDirectionalSunPresentationStandard,
@@ -40,25 +41,20 @@ export async function preparePlanetDirectionalSun({
     throw new TypeError("Planet directional Sun preparation is invalid.");
   }
   await ensureDirectories();
-  const assets: Record<number, DirectionalSunAsset> = {};
-  for (const density of [1, 2]) {
-    const size = 128 * density;
-    const filename = density === 1
-      ? `${objectId}-directional-sun.webp`
-      : `${objectId}-directional-sun@2x.webp`;
-    const path = resolve(publicRoot, filename);
-    await sharp(prepareCleanRoomSun(size, presentation), {
-      raw: { width: size, height: size, channels: 4 },
-    }).webp({ lossless: true, effort: 6 }).toFile(path);
-    const bytes = await readFile(path);
-    assets[density] = Object.freeze({
-      url: `/scenes/${objectId}/${filename}`,
-      width: size,
-      height: size,
-      bytes: bytes.byteLength,
-      sha256: createHash("sha256").update(bytes).digest("hex"),
-    });
-  }
+  const size = DIRECTIONAL_SUN_SPRITE_PIXELS * 2;
+  const filename = `${objectId}-directional-sun@2x.webp`;
+  const path = resolve(publicRoot, filename);
+  await sharp(prepareCleanRoomSun(size, presentation), {
+    raw: { width: size, height: size, channels: 4 },
+  }).webp({ lossless: true, effort: 6 }).toFile(path);
+  const bytes = await readFile(path);
+  const asset: DirectionalSunAsset = Object.freeze({
+    url: `/scenes/${objectId}/${filename}`,
+    width: size,
+    height: size,
+    bytes: bytes.byteLength,
+    sha256: createHash("sha256").update(bytes).digest("hex"),
+  });
   const googleEarthMarsSpriteViewportWidthShare =
     presentation.projection.apparentViewportWidthShare;
   const observerDistanceKilometers = meanHeliocentricDistanceAu *
@@ -72,7 +68,7 @@ export async function preparePlanetDirectionalSun({
     Math.tan(angularRadiusRadians);
   const spriteOpaqueCoreDiameterShare =
     presentation.appearance.analyticRadialFit.coreRadiusPixels * 2 /
-      assets[1].width;
+      DIRECTIONAL_SUN_SPRITE_PIXELS;
   const apparentViewportWidthShare = physicalDiskViewportWidthShare /
     spriteOpaqueCoreDiameterShare;
   const halfExtentOverCenter = apparentViewportWidthShare /
@@ -96,10 +92,7 @@ export async function preparePlanetDirectionalSun({
       sourcePixels: "repository-authored-clean-room-raster",
       generator: "src/platform/prepare-directional-sun.mts",
       googlePixelsRedistributed: false,
-      url: assets[1].url,
-      url2x: assets[2].url,
-      density1: assets[1],
-      density2: assets[2],
+      ...asset,
     }),
     appearance: presentation.appearance,
     projection,

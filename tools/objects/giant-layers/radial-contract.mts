@@ -19,7 +19,7 @@ const variant = obj({output: str, palette: s.tuple(vector3, vector3, vector3), o
 export type RadialVariant = s.Infer<typeof variant>;
 const overlay = obj({kind: s.literal('projected-strip-shadow'), bodyRadius: n, outerRadius: n, direction: vector2, color: vector3, startFraction: n, edgeFraction: n, maximumAlpha: n, centerInset: n, marginPixels: n, output: str, encoding: webpEncoding});
 export type RadialOverlay = s.Infer<typeof overlay>;
-const common = {size: n, densities: arr(n), output: str, encoding: webpEncoding, densityMode: opt(s.literal('independent', 'downsample-highest')), overlays: opt(arr(overlay)), variants: opt(arr(variant))};
+const common = {size: n, output: str, encoding: webpEncoding, overlays: opt(arr(overlay)), variants: opt(arr(variant))};
 const annular = obj({...common, kind: s.literal('annular-field'), outerRadius: n, grid: obj({centerInset: n, sampleOffset: n, marginPixels: n, scaleOrder: s.literal('divide-multiply', 'multiply-hypot')}), composition: s.literal('maximum', 'front-to-back'), alphaUnits: n, maximumAlpha: n, mapping: radiusMapping, bands: arr(band), defaultColor: opt(vector3), shadow: opt(shadow)});
 export type AnnularLayer = s.Infer<typeof annular>;
 const operationCommon = {bounds: vector2, inclusive: opt(s.tuple(s.boolean, s.boolean))};
@@ -29,7 +29,7 @@ const operation = s.union(
   obj({...operationCommon, kind: s.literal('alpha-gain'), gain: n}),
   obj({...operationCommon, kind: s.literal('edge-core'), center: n, sigma: n, baseDepth: n, peakDepth: n}),
 );
-const observed = obj({...common, kind: s.literal('observed-radial-profile'), bounds: vector2, sourceBounds: vector2, colorSource: str, transparencySource: str, channelFactors: vector3, interior: obj({color: vector3, centers: arr(n), sigma: n, baseAlpha: n, peakAlpha: n}), operations: arr(operation), readability: obj({features: arr(obj({kind: str, radius: n, additionalPixels: opt(n), alphaGain: opt(n), alphaScale: opt(n)})), alphaGain: n, minimumPixels: s.dictionary(n)})});
+const observed = obj({...common, kind: s.literal('observed-radial-profile'), bounds: vector2, sourceBounds: vector2, colorSource: str, transparencySource: str, channelFactors: vector3, interior: obj({color: vector3, centers: arr(n), sigma: n, baseAlpha: n, peakAlpha: n}), operations: arr(operation), readability: obj({features: arr(obj({kind: str, radius: n, additionalPixels: opt(n), alphaGain: opt(n), alphaScale: opt(n)})), alphaGain: n, minimumPixels: n})});
 export type ObservedRadialLayer = s.Infer<typeof observed>;
 export const radialRecipe = obj({schema: s.literal('cssearth-radial-layer-recipe@1'), units: s.literal('kilometers'), sources: arr(sourcePin), layers: arr(s.union(annular, observed))});
 export type RadialLayerRecipe = s.Infer<typeof radialRecipe>;

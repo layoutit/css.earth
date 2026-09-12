@@ -88,8 +88,8 @@
         "description": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
         "title": "FC visible-light mosaic",
         "thumbnail": "ceres-lens-normal.webp",
-        "surface": "ceres-normal.webp",
-        "poles": "ceres-poles-normal.webp",
+        "surface": "ceres-normal@2x.webp",
+        "poles": "ceres-poles-normal@2x.webp",
         "source": {
           "id": "usgs-dawn-fc-global-140m",
           "path": "../manifest.json"
@@ -103,8 +103,8 @@
         "description": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
         "title": "False-color mosaic PIA19977",
         "thumbnail": "ceres-lens-enhanced.webp",
-        "surface": "ceres-enhanced.webp",
-        "poles": "ceres-poles-enhanced.webp",
+        "surface": "ceres-enhanced@2x.webp",
+        "poles": "ceres-poles-enhanced@2x.webp",
         "source": {
           "id": "nasa-dawn-fc-pia19977",
           "path": "../manifest.json"
@@ -118,8 +118,8 @@
         "description": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
         "title": "HAMO digital terrain model",
         "thumbnail": "ceres-lens-elevation.webp",
-        "surface": "ceres-elevation.webp",
-        "poles": "ceres-poles-elevation.webp",
+        "surface": "ceres-elevation@2x.webp",
+        "poles": "ceres-poles-elevation@2x.webp",
         "legend": {
           "kind": "scale",
           "title": "Elevation",

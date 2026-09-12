@@ -34,6 +34,7 @@ import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-pr
 import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
 import { PREPARED_PRESENTATION_SCHEMA } from '../../../src/platform/prepared-presentation-contract.mts';
 import { preparedSunResources, preparedResourcePool } from '../../../src/platform/prepared-object-assets.mts';
+import { DIRECTIONAL_SUN_SPRITE_PIXELS } from '../../../src/platform/directional-sun-contract.mts';
 import { prepareCssomDeclarationReads } from '../../prepared-cssom.mts';
 import { createPreparedNodeTree } from '../../prepared-node-tree.mts';
 import { PREPARED_NAVIGATION_MARKERS } from '../../../site/prepared-navigation-markers.mjs';
@@ -71,7 +72,7 @@ async function prepareSolidEpochFrame({ config, celestial }:{config:SolidSceneCo
     systemTransform: frame.cssTransform,
     heliocentricView: prepareHeliocentricView({ bodyId: id, presentationFrame: frame,
       bodyRadiusUnits: radius, bodyRadiusKilometers: radiusKm,
-      sunSprite: { imagePixels: sun.asset.density1.width,
+      sunSprite: { imagePixels: DIRECTIONAL_SUN_SPRITE_PIXELS,
         opaqueCoreDiameterShare: sun.distanceScaling.spriteOpaqueCoreDiameterShare },
       system: await preparePlanetarySystem({ bodyId, presentationFrame: frame, kilometersPerUnit: radiusKm / radius }),
     }) };
@@ -217,7 +218,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   const sprite = (bodyId:string) => {
     if (bodyId === parentMarker?.id) return { url: parentMarker.url, index: 0, count: 1, size: parentMarker.size };
     const marker = PREPARED_NAVIGATION_MARKERS[bodyId];
-    return marker ? { url: atlasUrl.includes('@2x') ? marker.url2x : marker.url, index: marker.index, count: marker.count, size: marker.presentation.size }
+    return marker ? { url: marker.url, index: marker.index, count: marker.count, size: marker.presentation.size }
       : { url: pointUrl, index: 0, count: 1, size: 5 };
   };
   const { BODIES } = await loadAstronomyPackage();

@@ -16,7 +16,7 @@ export interface ObjectDiagnosticsOptions {
   orbit: RetainedCubicSkyOrbit; cubicSky: RetainedCubicSky; heliocentric: RetainedHeliocentricView | null;
   selection: ReturnType<typeof createObjectSelectionRuntime>; controls: ReturnType<typeof createObjectControlBinding>;
   resources: ReturnType<typeof createPreparedResidency>; playback: ReturnType<typeof createPreparedPlayback>; lifetime: SceneLifetime;
-  context: { density: number; own(cleanup: () => void): void }; initialSelection: ObjectSelection;
+  context: { own(cleanup: () => void): void }; initialSelection: ObjectSelection;
   startupDecodedAssets: number; pageLayers: ReadonlyMap<string, PageLayerRuntime>; surfaceFeatures?: SurfaceFeatureLayerRuntime | null; getCurrentView(): ObjectRuntimeView | null;
 }
 
@@ -73,9 +73,8 @@ export function publishObjectDiagnostics({ stage, definition, mounted, orbit, cu
         lenses: Object.freeze({ state: lensState, select: selectLens }),
         options, settings: Object.freeze({ state: settings() }), features,
         renderStats: Object.freeze({
-          selectedPreparedDensity: context.density, visibleAssetsDecodedBeforeMount: startupDecodedAssets,
+          visibleAssetsDecodedBeforeMount: startupDecodedAssets,
           textureStats: Object.freeze({
-            selectedPreparedDensity: context.density,
             get retainedInteractiveImageCount() { return resources.stats().images.entries.filter(entry => entry.ready).length; },
             get pendingInteractiveImageCount() { return resources.stats().images.entries.filter(entry => !entry.ready).length; },
           }),

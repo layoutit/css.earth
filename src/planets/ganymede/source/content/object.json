@@ -96,8 +96,8 @@
         "description": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
         "title": "Global image mosaic",
         "thumbnail": "ganymede-lens-normal.webp",
-        "surface": "ganymede-normal.webp",
-        "poles": "ganymede-poles-normal.webp",
+        "surface": "ganymede-normal@2x.webp",
+        "poles": "ganymede-poles-normal@2x.webp",
         "source": {
           "id": "usgs-voyager-galileo-mono",
           "path": "../manifest.json"
@@ -111,8 +111,8 @@
         "description": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary.",
         "title": "Color mosaic",
         "thumbnail": "ganymede-lens-enhanced.webp",
-        "surface": "ganymede-enhanced.webp",
-        "poles": "ganymede-poles-enhanced.webp",
+        "surface": "ganymede-enhanced@2x.webp",
+        "poles": "ganymede-poles-enhanced@2x.webp",
         "source": {
           "id": "usgs-voyager-galileo-color",
           "path": "../manifest.json"
@@ -127,8 +127,8 @@
         "description": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
         "title": "Global geologic map",
         "thumbnail": "ganymede-lens-geology.webp",
-        "surface": "ganymede-geology.webp",
-        "poles": "ganymede-poles-geology.webp",
+        "surface": "ganymede-geology@2x.webp",
+        "poles": "ganymede-poles-geology@2x.webp",
         "falseColor": true,
         "source": {
           "id": "usgs-sim3237-geologic-units",
@@ -288,8 +288,8 @@
         "title": "Oxygen-sensitive visible reflectance ratio",
         "summary": "A 565/577.3 nm surface-ice oxygen signature, not oxygen concentration. These 2° samples have approximate registration. Gray grid marks missing or withheld data; joins between nights remain.",
         "thumbnail": "ganymede-lens-oxygen-signature.webp",
-        "surface": "ganymede-oxygen-signature.webp",
-        "poles": "ganymede-poles-oxygen-signature.webp",
+        "surface": "ganymede-oxygen-signature@2x.webp",
+        "poles": "ganymede-poles-oxygen-signature@2x.webp",
         "source": {
           "id": "ganymede-muse-oxygen-signature-night-1",
           "path": "../manifest.json",

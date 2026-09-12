@@ -28,9 +28,6 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         throw new TypeError('polesCombined must be boolean.');
     if (recipe.polesCombined !== (recipe.polarProjection === 'angular-nearest'))
         throw new TypeError('The authored pole storage and projection combination is unsupported.');
-    numbers(recipe.densities, 'densities');
-    if (JSON.stringify(recipe.densities) !== '[1,2]')
-        throw new TypeError('The prepared responsive raster operator requires densities 1 and 2.');
     text(recipe.publicBase, 'publicBase');
     if (!recipe.publicBase.startsWith('/') || !recipe.publicBase.endsWith('/') || recipe.publicBase.includes('..'))
         throw new TypeError('publicBase must be an absolute asset URL prefix.');
@@ -44,6 +41,8 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
     if (thumbnail.crop !== undefined) {
         const crop = record(thumbnail.crop, 'thumbnail.crop');
         fields(crop, ['left', 'top', 'width', 'height'], 'thumbnail.crop');
+        if (recipe.resample !== 'source-packed')
+            throw new TypeError('A cropped thumbnail needs source-packed resampling.');
     }
     if (!Array.isArray(recipe.surfaces) || !recipe.surfaces.length)
         throw new TypeError('At least one source surface is required.');
@@ -91,7 +90,7 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             if (science.kind !== undefined) text(science.kind, 'surface.science.kind');
         }
         if (surface.sharpen !== undefined)
-            numbers(surface.sharpen, 'surface.sharpen', 2);
+            finite(surface.sharpen, 'surface.sharpen', true);
         if (surface.coverage !== undefined) {
             const coverage = record(surface.coverage, 'coverage');
             path(coverage.normal, 'coverage.normal');

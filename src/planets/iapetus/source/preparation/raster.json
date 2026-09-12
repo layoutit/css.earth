@@ -7,14 +7,10 @@
   "height": 2048,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "iapetus-poles-{id}{suffix}.webp",
+  "polesOutput": "iapetus-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "cssiapetus-prepared-assets@1"
   },
@@ -25,7 +21,7 @@
   "surfaces": [
     {
       "id": "normal",
-      "output": "iapetus-{id}{suffix}.webp",
+      "output": "iapetus-{id}@2x.webp",
       "thumbnail": "iapetus-lens-{id}.webp",
       "source": "observations/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
       "falseColor": false,
@@ -45,7 +41,7 @@
     },
     {
       "id": "enhanced",
-      "output": "iapetus-{id}{suffix}.webp",
+      "output": "iapetus-{id}@2x.webp",
       "thumbnail": "iapetus-lens-{id}.webp",
       "source": "observations/PIA18436.jpg",
       "falseColor": false,
@@ -62,7 +58,7 @@
     },
     {
       "id": "infrared",
-      "output": "iapetus-{id}{suffix}.webp",
+      "output": "iapetus-{id}@2x.webp",
       "thumbnail": "iapetus-lens-{id}.webp",
       "source": "cassini-ice/iapetus-infrared-display.tif",
       "falseColor": true,
@@ -97,7 +93,7 @@
     },
     {
       "id": "ice-absorption",
-      "output": "iapetus-{id}{suffix}.webp",
+      "output": "iapetus-{id}@2x.webp",
       "thumbnail": "iapetus-lens-{id}.webp",
       "source": "cassini-ice/iapetus-ice-absorption.tif",
       "falseColor": true,
@@ -154,8 +150,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "iapetus-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "iapetus-lighting-{density}x-billboard.webp",
+    "rowOutput": "iapetus-lighting-2x-row-{row}.webp",
+    "billboardOutput": "iapetus-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

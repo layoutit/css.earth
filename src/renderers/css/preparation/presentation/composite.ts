@@ -1,4 +1,4 @@
-import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
+import { preparedAssetAddress, preparedSunResources, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant, PreparedWrite } from '../../rendering/prepared-presentation.js';
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
@@ -13,15 +13,15 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   // An airless body carries Mercury's Lambert row bank instead of an atmospheric phase atlas: the composite plane
   // then streams the same row shards and billboard the row-bank cutaway uses, and no atmosphere toggle exists.
   const atmospheric='lightingUrl' in material && typeof material.lightingUrl==='string';
-  const bank=atmospheric?null:assets.lighting?.banks[String(CANONICAL_PREPARED_IMAGE_DENSITY)];
+  const bank=atmospheric?null:assets.lighting?.bank;
   if(!atmospheric&&(!bank||!bank.billboard||bank.billboard.presentations.length!==assets.lighting.frameCount))throw new TypeError('Airless composite needs the prepared lighting bank and billboard atlas.');
   const layers=atmospheric?(["surface","poles","material"] as const):(["surface","poles"] as const);
   const warm=[...preparedSunResources(sun,"warm"),
-    ...(atmospheric?[{key:"lighting",url:canonicalPreparedAsset(material.lightingUrl,material.lighting2xUrl),pool:"warm"}]
+    ...(atmospheric?[{key:"lighting",url:preparedAssetAddress(material.lightingUrl),pool:"warm"}]
       :[{key:"shadowless",url:bank!.presentations[bank!.presentations.length-1]!.url,pool:"warm"},{key:BILLBOARD_LIGHTING_KEY,url:bank!.billboard.url,pool:"warm"}])];
   const lightingRows=atmospheric?[]:bank!.rows.map((row,index)=>({key:`lighting:${index}`,url:row.url,pool:"lighting"}));
   const entries=[...warm,...lenses.controls.flatMap(lens=>layers.map(layer=>({key:`${layer}:${lens.id}`,
-    url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material"}))),...lightingRows];
+    url:preparedAssetAddress(lens[`${layer}Url`]),pool:"material"}))),...lightingRows];
   const required=(id: string)=>[...layers.map(layer=>`${layer}:${id}`),...(atmospheric?[]:["shadowless",BILLBOARD_LIGHTING_KEY])];
   const b=createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.leaves.map(leaf => leaf.style)) });
   const camera=b.element("div","polycss-camera planet-render-root");
@@ -77,7 +77,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
     bodyId: solarSystemSource.bodyId, plan: plan.heliocentricView,
     navigationMarkers: PREPARED_NAVIGATION_MARKERS, markerAtlasUrl: solarSystemSource.markerAtlasUrl,
     systemMarkerStrip: systemMarkerStrip, captionNames: solarSystemSource.captionNames, catalogue,
-    phaseAtlas: atmospheric ? { url: canonicalPreparedAsset(material.lightingUrl, material.lighting2xUrl),
+    phaseAtlas: atmospheric ? { url: preparedAssetAddress(material.lightingUrl),
       columns: material.frameColumns, rowCount: material.frameRows, frameCount: material.directionalFrameCount,
       minimumLightViewZ: material.minimumLightViewZ, maximumLightViewZ: material.maximumLightViewZ,
       baseLightAzimuthDegrees: material.baseLightAzimuthDegrees }

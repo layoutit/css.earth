@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "europa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e9f98d88d6655ce027eb4e4276bc6f4c54a0d2e1ad574f1b9802af8d73e10ec4"
+    "sha256": "4b04eaa1db3a35f76148b724b5c3844421ae5544b4dfd7c1f1e4765ededb91ee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "382d8b464a53b58d1715f483ed70b8e3ad8496a634b2e8cc689814e9b2caafbe"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "eb11bca8bd5eca99bd8df57aef4d7c0e19582bfeeb6bb5545f15a1347c32cccb",
+      "sha256": "dbc711f8effd1cc1ff697e8604db4f40d1209c489a172dddaaf888c482895b72",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/europa/",
@@ -25,14 +25,10 @@
         "height": 1024,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
-        "polesOutput": "europa-poles-{id}{suffix}.webp",
+        "polesOutput": "europa-poles-{id}@2x.webp",
         "surfaceMetadata": {
           "schema": "csseuropa-prepared-assets@1"
         },
@@ -43,7 +39,7 @@
         "surfaces": [
           {
             "id": "normal",
-            "output": "europa-{id}{suffix}.webp",
+            "output": "europa-{id}@2x.webp",
             "thumbnail": "europa-lens-{id}.webp",
             "source": "europa-global-500m.tif",
             "falseColor": false,
@@ -62,7 +58,7 @@
           },
           {
             "id": "enhanced",
-            "output": "europa-{id}{suffix}.webp",
+            "output": "europa-{id}@2x.webp",
             "thumbnail": "europa-lens-{id}.webp",
             "source": "color/s0349875152.equi.photr.tif",
             "falseColor": true,
@@ -138,7 +134,7 @@
           },
           {
             "id": "elevation",
-            "output": "europa-{id}{suffix}.webp",
+            "output": "europa-{id}@2x.webp",
             "thumbnail": "europa-lens-{id}.webp",
             "source": "science/controlled-dtms/Agenor/Agenor.tif",
             "falseColor": true,
@@ -200,7 +196,7 @@
           },
           {
             "id": "geology",
-            "output": "europa-{id}{suffix}.webp",
+            "output": "europa-{id}@2x.webp",
             "thumbnail": "europa-lens-{id}.webp",
             "source": "geology/europa-geologic-units.tif",
             "falseColor": true,
@@ -303,7 +299,7 @@
           },
           {
             "id": "infrared",
-            "output": "europa-{id}{suffix}.webp",
+            "output": "europa-{id}@2x.webp",
             "thumbnail": "europa-lens-{id}.webp",
             "source": "nims/europa-nims-composite.tif",
             "falseColor": true,
@@ -330,8 +326,8 @@
           "defaultFrame": 230,
           "billboardFrameSize": 24,
           "billboardColumns": 16,
-          "rowOutput": "europa-lighting-{density}x-row-{row}.webp",
-          "billboardOutput": "europa-lighting-{density}x-billboard.webp",
+          "rowOutput": "europa-lighting-2x-row-{row}.webp",
+          "billboardOutput": "europa-lighting-2x-billboard.webp",
           "minimumLightViewZ": -1,
           "maximumLightViewZ": 1,
           "frameCount": 256,
@@ -369,7 +365,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "adea0fe714df61db29809426fc78d414766723e35b1cca490aae48371373a85d",
+      "sha256": "ff68c87172d33b3113ba716dec9416f68df4e3336b3cb89784c3bf5c02b5f7c6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -484,8 +480,8 @@
               "description": "USGS Voyager/Galileo mosaic. Source resolution varies from about 200 m to 20 km per pixel. Gray grid marks documented no-data and its resampled boundary. Original image shading remains; globe lighting is approximate.",
               "title": "Global image mosaic",
               "thumbnail": "europa-lens-normal.webp",
-              "surface": "europa-normal.webp",
-              "poles": "europa-poles-normal.webp",
+              "surface": "europa-normal@2x.webp",
+              "poles": "europa-poles-normal@2x.webp",
               "source": {
                 "id": "usgs-voyager-galileo-global-500m",
                 "path": "../manifest.json"
@@ -499,8 +495,8 @@
               "description": "Galileo enhanced color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving color ratios. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources.",
               "title": "SSI enhanced-color mosaic",
               "thumbnail": "europa-lens-enhanced.webp",
-              "surface": "europa-enhanced.webp",
-              "poles": "europa-poles-enhanced.webp",
+              "surface": "europa-enhanced@2x.webp",
+              "poles": "europa-poles-enhanced@2x.webp",
               "source": {
                 "id": "observed-color",
                 "path": "../manifest.json"
@@ -515,8 +511,8 @@
               "description": "Agenor Linea only, near 142°E and 44°S. Colors encode the released local stereo heights in meters; their relative datum is not a global reference level. Effective detail is about 3 km. Fixed northwest cartographic relief shows slopes; it is not part of the numeric scale. Gray grid preserves the DTM’s finite/no-data footprint. The archive’s duplicated, cubic-resampled quality products are excluded; colors imply no quality class or pointwise accuracy.",
               "title": "Agenor Linea stereo terrain model",
               "thumbnail": "europa-lens-elevation.webp",
-              "surface": "europa-elevation.webp",
-              "poles": "europa-poles-elevation.webp",
+              "surface": "europa-elevation@2x.webp",
+              "poles": "europa-poles-elevation@2x.webp",
               "falseColor": true,
               "source": {
                 "id": "usgs-agenor-controlled-dtm",
@@ -597,8 +593,8 @@
               "description": "USGS interpreted regional plains, bands, chaos terrains and crater deposits (2024; 1:15,000,000). Colors identify map units, not measured surface color. Gray grid marks no-data polygons. Fine line and point features are not represented by this polygon view.",
               "title": "USGS global geology (2024 SIM 3513)",
               "thumbnail": "europa-lens-geology.webp",
-              "surface": "europa-geology.webp",
-              "poles": "europa-poles-geology.webp",
+              "surface": "europa-geology@2x.webp",
+              "poles": "europa-poles-geology@2x.webp",
               "source": {
                 "id": "usgs-europa-geologic-units-grid",
                 "path": "../manifest.json",
@@ -670,8 +666,8 @@
               "description": "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
               "title": "Galileo NIMS spectral color",
               "thumbnail": "europa-lens-infrared.webp",
-              "surface": "europa-infrared.webp",
-              "poles": "europa-poles-infrared.webp",
+              "surface": "europa-infrared@2x.webp",
+              "poles": "europa-poles-infrared@2x.webp",
               "source": {
                 "id": "europa-registered-nims-composite",
                 "path": "../manifest.json",
@@ -870,7 +866,7 @@
       "sha256": "a323f0c9ccb47d5af9902ea8297fe81f9a9708795645b80801f103c3f7c9a624",
       "bytes": 192777263,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -922,7 +918,7 @@
       "sha256": "3b44296107ab39a8ba575fc83248ae127d39693f4ce2e6889aff29e8eddcb88a",
       "bytes": 7287787,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -956,7 +952,7 @@
       "sha256": "0af0a446aa73341e382d3d006a8c9c1a0e6de8c1b2f0f81d33c2dd69bbac7cf1",
       "bytes": 9158,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -983,7 +979,7 @@
       "sha256": "0a4ca5c56c9a50be0a206701773b2b35715d4aad3120f587b3dffabf5d710113",
       "bytes": 9721,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1035,7 +1031,7 @@
       "sha256": "335c16fcb53c5e278f5660f3df5f42f58cd65d0ce78722c9a055ee2e7a053d62",
       "bytes": 168472,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1088,7 +1084,7 @@
       "sha256": "9aeae6182c48a4022c0bc86f8550a0cb4804b00172a89f3fa807deceb9706ba1",
       "bytes": 109007,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1148,7 +1144,7 @@
       "sha256": "01f3ec428dae8907f29701e4bac1aecab8bb800fea488991332e60d65b9d5287",
       "bytes": 351656,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1165,10 +1161,10 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet, view descriptions and legends."
       },
-      "sha256": "adea0fe714df61db29809426fc78d414766723e35b1cca490aae48371373a85d",
-      "bytes": 16192,
+      "sha256": "ff68c87172d33b3113ba716dec9416f68df4e3336b3cb89784c3bf5c02b5f7c6",
+      "bytes": 16222,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1188,7 +1184,7 @@
       "sha256": "b48ce7e198ad858dbc6ee2c2f8b26de2943c45cbfa06bdaad7491ad61094e698",
       "bytes": 1005,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1220,7 +1216,7 @@
       "sha256": "8405401201f42dca7e05fa205d8473f5e774845776fc1acd9b6c7e70de648d4a",
       "bytes": 375144,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1247,7 +1243,7 @@
       "sha256": "8ed6a12599f89c5048c1eb2499e8c6bcd3aa0eefd43213e150818f097ee07691",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1274,7 +1270,7 @@
       "sha256": "0ef4c7c2a3671e2fd7508ed2037d46b730e075080b8c40d851aa875bacb0e325",
       "bytes": 5228,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1304,34 +1300,22 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-normal.webp",
-          "bytes": 2634642,
-          "sha256": "8df05d1f567bebdf65d76c45d44117f342147b0b2c7255da7aaf9513b465e956",
-          "verification": "asset-manifest-pin"
-        },
-        {
           "url": "/scenes/europa/europa-normal@2x.webp",
           "bytes": 7179116,
           "sha256": "02d24726df09217cb9ee4403222c49b4454898f74924f1d035db51ab63de1395",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lens-normal.webp",
           "bytes": 1024,
           "sha256": "f825c07231986c76e555af5b29eadc1b7a91e96c2cc0b55f01446a4c22b1fd65",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-normal.webp",
-          "bytes": 43912,
-          "sha256": "d65a0dfbaee75fef3ffe24e6f6a6ec049e7cf63d766d806b993055fa08390b37",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-poles-normal@2x.webp",
           "bytes": 131284,
           "sha256": "ac1f6fcc6023daabb208d8f491b2cb8c56a8d156707debdaeffac329e8a5520a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1362,34 +1346,22 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-enhanced.webp",
-          "bytes": 2318986,
-          "sha256": "ece705e5acee7f14bebf24ada58a62973a6bf92b4f1799a27e674aee4c889b40",
-          "verification": "asset-manifest-pin"
-        },
-        {
           "url": "/scenes/europa/europa-enhanced@2x.webp",
           "bytes": 6463596,
           "sha256": "4b876dcda47989db898f4d9a8b87434f6e318baf43565fbafdcd04817ffd8042",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lens-enhanced.webp",
           "bytes": 924,
           "sha256": "43cd769a21ff3a01c63238687758c66bdf13817470dc481947c9718515688603",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-enhanced.webp",
-          "bytes": 43912,
-          "sha256": "d65a0dfbaee75fef3ffe24e6f6a6ec049e7cf63d766d806b993055fa08390b37",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-poles-enhanced@2x.webp",
           "bytes": 131284,
           "sha256": "ac1f6fcc6023daabb208d8f491b2cb8c56a8d156707debdaeffac329e8a5520a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1418,34 +1390,22 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-elevation.webp",
-          "bytes": 15924,
-          "sha256": "1002760c5d9e38a9ba1b2507cf260b459c0ca74f0bbe7421d56aa4fed797ea7e",
-          "verification": "asset-manifest-pin"
-        },
-        {
           "url": "/scenes/europa/europa-elevation@2x.webp",
           "bytes": 47256,
           "sha256": "e5407450266e800dfafade50ddceae75756150685d9fcc25b7f6694fefc57e08",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lens-elevation.webp",
           "bytes": 240,
           "sha256": "7f7eb1f866707be8ae0e57bfcbd9243f9f9b6438c7b33ca8e9f3b7cec345d904",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-elevation.webp",
-          "bytes": 4204,
-          "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-poles-elevation@2x.webp",
           "bytes": 9464,
           "sha256": "e5f4cc804e0cd3c4203162357f94e8571a46216093600f60d612a1bf1b908eec",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1474,34 +1434,22 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-geology.webp",
-          "bytes": 43076,
-          "sha256": "a5cc473103f9d4775aed9592af0ead1e2a0c929941cec0ae32c948dbab60d45f",
-          "verification": "asset-manifest-pin"
-        },
-        {
           "url": "/scenes/europa/europa-geology@2x.webp",
           "bytes": 77748,
           "sha256": "a3fd7b9f836f9d4c5e19c5f35da3da1b73fb7cd9974879ca81dae14dc99113a7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lens-geology.webp",
           "bytes": 470,
           "sha256": "697a5fbba5af0d0a2ea39cd3e0bc2ce3d82c4fd5176e7990a810713767d1558e",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-geology.webp",
-          "bytes": 6030,
-          "sha256": "7376b869d45db2f83376a2bb559bfccbd3404a853c8dd3eda497cf25fb04f792",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-poles-geology@2x.webp",
           "bytes": 12962,
           "sha256": "88cb0181282a36a3cc302af263ce148031dde2b24c824535233995645a64723d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1530,34 +1478,22 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-infrared.webp",
-          "bytes": 111272,
-          "sha256": "60a7fdea5d70e4c710b7ac5d156e0d9e475e1202463be3aeeab43e5336c952c0",
-          "verification": "asset-manifest-pin"
-        },
-        {
           "url": "/scenes/europa/europa-infrared@2x.webp",
           "bytes": 219612,
           "sha256": "ba2e605d83c8c8ca54534913934bcb7ce34687e1ec541370595b120504899a3b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lens-infrared.webp",
           "bytes": 710,
           "sha256": "26d66673fa26a82988d34d298d94708f97d3b3d0d34cc637ea0ff9ea38bca538",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-infrared.webp",
-          "bytes": 21526,
-          "sha256": "8613375c4dfc5864d22038eecafe17a10a12fcdefa77eeb9739f7690c4762987",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-poles-infrared@2x.webp",
           "bytes": 48836,
           "sha256": "be613fee1b4a2a256f6c079d6476673d292ea9c7a068693eb31e85e99f6fa3e8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1580,400 +1516,202 @@
       "inputs": [],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-lighting-1x-billboard.webp",
-          "bytes": 40826,
-          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-00.webp",
-          "bytes": 14922,
-          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-01.webp",
-          "bytes": 27532,
-          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-02.webp",
-          "bytes": 34558,
-          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-03.webp",
-          "bytes": 40648,
-          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-04.webp",
-          "bytes": 45092,
-          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-05.webp",
-          "bytes": 49044,
-          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-06.webp",
-          "bytes": 52968,
-          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-07.webp",
-          "bytes": 56198,
-          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-08.webp",
-          "bytes": 59392,
-          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-09.webp",
-          "bytes": 61906,
-          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-10.webp",
-          "bytes": 62672,
-          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-11.webp",
-          "bytes": 61062,
-          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-12.webp",
-          "bytes": 59454,
-          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-13.webp",
-          "bytes": 52762,
-          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-14.webp",
-          "bytes": 42196,
-          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-15.webp",
-          "bytes": 23242,
-          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-16.webp",
-          "bytes": 28714,
-          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-17.webp",
-          "bytes": 52870,
-          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-18.webp",
-          "bytes": 65644,
-          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-19.webp",
-          "bytes": 76630,
-          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-20.webp",
-          "bytes": 85368,
-          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-21.webp",
-          "bytes": 93744,
-          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-22.webp",
-          "bytes": 99970,
-          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-23.webp",
-          "bytes": 107422,
-          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-24.webp",
-          "bytes": 112788,
-          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-25.webp",
-          "bytes": 122328,
-          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-26.webp",
-          "bytes": 130124,
-          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-27.webp",
-          "bytes": 137048,
-          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-28.webp",
-          "bytes": 148122,
-          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-29.webp",
-          "bytes": 157328,
-          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-30.webp",
-          "bytes": 167218,
-          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-31.webp",
-          "bytes": 182238,
-          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
-          "verification": "asset-manifest-pin"
-        },
-        {
           "url": "/scenes/europa/europa-lighting-2x-billboard.webp",
           "bytes": 115740,
           "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-00.webp",
           "bytes": 37672,
           "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-01.webp",
           "bytes": 70898,
           "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-02.webp",
           "bytes": 92030,
           "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-03.webp",
           "bytes": 106840,
           "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-04.webp",
           "bytes": 120584,
           "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-05.webp",
           "bytes": 132094,
           "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-06.webp",
           "bytes": 143228,
           "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-07.webp",
           "bytes": 153142,
           "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-08.webp",
           "bytes": 163984,
           "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-09.webp",
           "bytes": 172632,
           "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-10.webp",
           "bytes": 177128,
           "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-11.webp",
           "bytes": 179144,
           "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-12.webp",
           "bytes": 173518,
           "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-13.webp",
           "bytes": 161150,
           "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-14.webp",
           "bytes": 132038,
           "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-15.webp",
           "bytes": 69930,
           "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-16.webp",
           "bytes": 74522,
           "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-17.webp",
           "bytes": 143520,
           "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-18.webp",
           "bytes": 185628,
           "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-19.webp",
           "bytes": 218252,
           "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-20.webp",
           "bytes": 245184,
           "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-21.webp",
           "bytes": 269836,
           "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-22.webp",
           "bytes": 291326,
           "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-23.webp",
           "bytes": 312110,
           "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-24.webp",
           "bytes": 333302,
           "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-25.webp",
           "bytes": 355976,
           "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-26.webp",
           "bytes": 377782,
           "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-27.webp",
           "bytes": 403282,
           "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-28.webp",
           "bytes": 429004,
           "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-29.webp",
           "bytes": 456570,
           "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-30.webp",
           "bytes": 481914,
           "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/europa/europa-lighting-2x-row-31.webp",
           "bytes": 526556,
           "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "authored-recipe"
@@ -2033,7 +1771,7 @@
           "url": "/scenes/europa/europa-features.json",
           "bytes": 700905,
           "sha256": "514b6e90449f5c3285e61734a360293b89bb181dc998ce9d5cb92907b7f05321",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

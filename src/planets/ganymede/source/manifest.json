@@ -753,8 +753,8 @@
     {
       "id": "ganymede-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1623,
-      "expectedSha256": "b383792c26a9347aa7730d98e43020200ddeba7bd0528da8253c30292c076062",
+      "expectedBytes": 1543,
+      "expectedSha256": "23c6c203acb913863b391e22acd7e3707dd304a134c407d7a75e81a73860567c",
       "origin": "Repository-authored Ganymede solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -774,8 +774,8 @@
     {
       "id": "ganymede-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 10746,
-      "expectedSha256": "fdbbd7de506e50653d0b5d57e5c9a2cd654ea91f0658b94f0ff4206bf2239356",
+      "expectedBytes": 10670,
+      "expectedSha256": "9a148f46ff81f92f83a8a40f2d56d1b0ae505b2ab3cd5e807431d2504779c379",
       "origin": "Repository-authored Ganymede raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -793,8 +793,8 @@
     {
       "id": "ganymede-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1428,
-      "expectedSha256": "dad480afc6e31e7fc961fe841ebdfec1d5f378c7691055f800a01988c8649251",
+      "expectedBytes": 1434,
+      "expectedSha256": "e3e09cbf346968af40544a4e99c9e418181ebdf17797b5bf1364f2c9127841e5",
       "origin": "Repository-authored Ganymede geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -887,8 +887,8 @@
     {
       "id": "ganymede-object-content",
       "path": "content/object.json",
-      "expectedBytes": 19049,
-      "expectedSha256": "a4eb854350db772e27c6ac80631f75095378be3db5cca1fd7332e84b877b8b8c",
+      "expectedBytes": 19073,
+      "expectedSha256": "98fe19bf1d998fd76c2a27fd3a9571d2f703f9947409586a1daef9c3f855f3de",
       "origin": "Repository-authored Ganymede object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

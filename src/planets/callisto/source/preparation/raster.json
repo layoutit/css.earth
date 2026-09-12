@@ -7,14 +7,10 @@
   "height": 2048,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "callisto-poles-{id}{suffix}.webp",
+  "polesOutput": "callisto-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "csscallisto-prepared-assets@1"
   },
@@ -25,7 +21,7 @@
   "surfaces": [
     {
       "id": "normal",
-      "output": "callisto-{id}{suffix}.webp",
+      "output": "callisto-{id}@2x.webp",
       "thumbnail": "callisto-lens-{id}.webp",
       "source": "callisto-global-1km.tif",
       "falseColor": false,
@@ -42,7 +38,7 @@
     },
     {
       "id": "enhanced",
-      "output": "callisto-{id}{suffix}.webp",
+      "output": "callisto-{id}@2x.webp",
       "thumbnail": "callisto-lens-{id}.webp",
       "source": "observations/PIA03456-registered-rgba.tif",
       "falseColor": true,
@@ -62,7 +58,7 @@
     },
     {
       "id": "infrared",
-      "output": "callisto-{id}{suffix}.webp",
+      "output": "callisto-{id}@2x.webp",
       "thumbnail": "callisto-lens-{id}.webp",
       "source": "nims/callisto-nims-composite.tif",
       "falseColor": true,
@@ -89,8 +85,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "callisto-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "callisto-lighting-{density}x-billboard.webp",
+    "rowOutput": "callisto-lighting-2x-row-{row}.webp",
+    "billboardOutput": "callisto-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

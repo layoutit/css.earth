@@ -12,7 +12,6 @@ import { publishObjectDiagnostics } from "./object-diagnostics.js";
 export type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView } from "./object-runtime-types.js";
 export type ObjectRuntimeServices = typeof nativeServices;
 
-import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../rendering/prepared-object-assets.js";
 import { createSceneLifetime } from "@cssearth/engine";
 import { waitForSceneDocument, waitForScenePaint } from "./scene-native-waits.js";
 import { createPreparedResidency } from "../rendering/prepared-residency.js";
@@ -87,7 +86,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     }
     lifetime.onDispose(() => resources.destroy());
     const context = Object.freeze({
-      density: CANONICAL_PREPARED_IMAGE_DENSITY,
       resources: resources.resources,
       own(disposer: () => void) {
         const errors = lifetime.onDispose(disposer);
@@ -326,7 +324,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Presentation owns its roots immediately during construction, including
       // partial construction failures. Shared celestial layers join afterwards.
       const cubicSky = environment.mountSky({ host: stage, plan: definition.sky,
-        imageDensity: context.density, objectId: definition.id, requireSun: false, renderContent: !externalWorldContext });
+        objectId: definition.id, requireSun: false, renderContent: !externalWorldContext });
       context.own(() => cubicSky.destroy());
       if (externalWorldContext) {
         // The application-owned context supplies the visible sky. Keep the
@@ -360,12 +358,12 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (definition.heliocentricView && !definition.sun) throw new TypeError("A heliocentric view requires its prepared Sun.");
       heliocentric = externalWorldContext || definition.heliocentricView == null || !definition.sun ? null : environment.mountHeliocentric({ host: stage,
         before: mounted.cameraElement, plan: definition.heliocentricView.plan, objectId: definition.id,
-        sunImageUrl: context.density === 2 ? definition.sun.asset.url2x : definition.sun.asset.url,
+        sunImageUrl: definition.sun.asset.url,
         markerSprite: definition.heliocentricView.bodyMarker, systemMarkers: definition.heliocentricView.systemMarkers ?? null,
         labels: definition.heliocentricView.labels ?? null });
       if (heliocentric) context.own(() => heliocentric?.destroy());
       const directionalSun = externalWorldContext || definition.sun == null || heliocentric ? null : environment.mountSun({ host: stage, plan: definition.sun,
-        imageDensity: context.density, objectId: definition.id, before: mounted.cameraElement });
+        objectId: definition.id, before: mounted.cameraElement });
       if (directionalSun) context.own(() => directionalSun.destroy());
       if (inputSurface?.nodeType !== 1) throw new Error("Shared object input surface is missing.");
       selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, deferTextureRefinement,

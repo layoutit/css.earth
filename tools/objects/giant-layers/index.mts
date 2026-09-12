@@ -9,6 +9,8 @@ import { rasterAnnularField, rasterObservedRadialField, colorizeRadialField, ras
 export { mapRadius, ringRayOccluded, rasterAnnularField, rasterObservedRadialField, sampleRadialProfile } from './rings.mts';
 
 const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+// Ring rasters carry two texels per layout pixel.
+const density = 2;
 function fail(message: string): never { throw new TypeError(`Radial preparation: ${message}`); }
 function positive(value: number) { return Number.isFinite(value) && value > 0; }
 function pair(value: readonly number[]) { return isArray(value) && value.length === 2 && value.every(Number.isFinite) && value[1] > value[0]; }
@@ -33,20 +35,16 @@ export function parseRadialLayerRecipe(input: unknown) {
   const outputs = new Set();
   for (const layer of value.layers) {
     if (!['annular-field', 'observed-radial-profile'].includes(layer.kind) ||
-        !Number.isInteger(layer.size) || layer.size < 2 || layer.size > 8192 ||
-        !isArray(layer.densities) || layer.densities.length === 0 ||
-        new Set(layer.densities).size !== layer.densities.length || layer.densities.some(density => ![1, 2].includes(density)) ||
-        layer.size * Math.max(...layer.densities) > 8192 ||
-        !/^[a-z0-9][a-z0-9-]*\{suffix\}\.webp$/.test(layer.output) || outputs.has(layer.output) ||
-        !layer.encoding || typeof layer.encoding !== 'object' ||
-        !['independent', 'downsample-highest', undefined].includes(layer.densityMode)) fail('invalid layer output.');
+        !Number.isInteger(layer.size) || layer.size < 2 || layer.size * density > 8192 ||
+        !/^[a-z0-9][a-z0-9-]*@2x\.webp$/.test(layer.output) || outputs.has(layer.output) ||
+        !layer.encoding || typeof layer.encoding !== 'object') fail('invalid layer output.');
     outputs.add(layer.output);
     for(const overlay of layer.overlays??[]){
-      if(overlay.kind!=='projected-strip-shadow'||layer.densityMode==='downsample-highest'||!positive(overlay.bodyRadius)||!positive(overlay.outerRadius)||overlay.outerRadius<=overlay.bodyRadius||!isArray(overlay.direction)||overlay.direction.length!==2||!overlay.direction.every(Number.isFinite)||Math.hypot(...overlay.direction)===0||!color(overlay.color)||!positive(overlay.startFraction)||!positive(overlay.edgeFraction)||!Number.isInteger(overlay.maximumAlpha)||overlay.maximumAlpha<1||overlay.maximumAlpha>255||![0,1].includes(overlay.centerInset)||!Number.isFinite(overlay.marginPixels)||overlay.marginPixels<0||!overlay.encoding||!/^[a-z0-9][a-z0-9-]*\{suffix\}\.webp$/u.test(overlay.output)||outputs.has(overlay.output))fail('invalid radial overlay.');
+      if(overlay.kind!=='projected-strip-shadow'||!positive(overlay.bodyRadius)||!positive(overlay.outerRadius)||overlay.outerRadius<=overlay.bodyRadius||!isArray(overlay.direction)||overlay.direction.length!==2||!overlay.direction.every(Number.isFinite)||Math.hypot(...overlay.direction)===0||!color(overlay.color)||!positive(overlay.startFraction)||!positive(overlay.edgeFraction)||!Number.isInteger(overlay.maximumAlpha)||overlay.maximumAlpha<1||overlay.maximumAlpha>255||![0,1].includes(overlay.centerInset)||!Number.isFinite(overlay.marginPixels)||overlay.marginPixels<0||!overlay.encoding||!/^[a-z0-9][a-z0-9-]*@2x\.webp$/u.test(overlay.output)||outputs.has(overlay.output))fail('invalid radial overlay.');
       outputs.add(overlay.output);
     }
     for (const variant of layer.variants ?? []) {
-      if (!/^[a-z0-9][a-z0-9-]*\{suffix\}\.webp$/.test(variant.output) || outputs.has(variant.output) ||
+      if (!/^[a-z0-9][a-z0-9-]*@2x\.webp$/.test(variant.output) || outputs.has(variant.output) ||
           !isArray(variant.palette) || variant.palette.length !== 3 || !variant.palette.every(color) ||
           !positive(variant.outerRadius) || !positive(variant.exponent) || !positive(variant.gain) || !positive(variant.outerGain) ||
           !isArray(variant.luminance) || variant.luminance.length !== 3 || !variant.luminance.every(positive) ||
@@ -87,7 +85,7 @@ export function parseRadialLayerRecipe(input: unknown) {
           !isArray(layer.operations) || layer.operations.some(operation => !pair(operation.bounds) ||
             !['alpha-cap', 'clear', 'edge-core', 'alpha-gain'].includes(operation.kind)) ||
           !layer.readability || !isArray(layer.readability.features) || !positive(layer.readability.alphaGain) ||
-          layer.densities.some(density => !Number.isSafeInteger(layer.readability.minimumPixels[density]) || layer.readability.minimumPixels[density] <= 0)) fail('invalid observed profile.');
+          !Number.isSafeInteger(layer.readability.minimumPixels) || layer.readability.minimumPixels <= 0) fail('invalid observed profile.');
     }
   }
   return value;
@@ -119,35 +117,22 @@ export async function prepareGiantLayers({ sourceDirectory, publicDirectory, con
   const inputs = await verifyInputs(sourceDirectory, recipe.sources);
   const assets = [];
   for (const layer of recipe.layers) {
-    const profile = layer.kind === 'observed-radial-profile' ? await observedInputs(layer, inputs) : null;
-    const highestDensity = Math.max(...layer.densities), highestSize = layer.size * highestDensity;
-    const raster = (size: number, density: number) => {
-      if (layer.kind === 'observed-radial-profile') {
-        if (!profile) throw new Error('Observed radial profile is unavailable.');
-        return rasterObservedRadialField(layer, size, layer.readability.minimumPixels[density], profile);
-      }
-      return rasterAnnularField(layer, size);
-    };
-    const master = layer.densityMode === 'downsample-highest' ? raster(highestSize, highestDensity) : null;
-    for (const density of layer.densities) {
-      const size = layer.size * density, data = master ?? raster(size, density), sourceSize = master ? highestSize : size;
-      let pipeline = sharp(data, { raw: { width: sourceSize, height: sourceSize, channels: 4 } });
-      if (sourceSize !== size) pipeline = pipeline.resize(size, size, { kernel: sharp.kernel.lanczos3 });
-      const bytes = await pipeline.webp(layer.encoding).toBuffer();
-      const filename = layer.output.replace('{suffix}', density === 2 ? '@2x' : '');
-      assets.push({ filename, width: size, height: size, bytes: bytes.length, sha256: digest(bytes), data: bytes });
-      for(const overlay of layer.overlays??[]){
-        const shadow=rasterProjectedStripShadow(data,size,overlay),encoded=await sharp(shadow,{raw:{width:size,height:size,channels:4}}).webp(overlay.encoding).toBuffer(),filename=overlay.output.replace('{suffix}',density===2?'@2x':'');
-        assets.push({filename,width:size,height:size,bytes:encoded.length,sha256:digest(encoded),data:encoded});
-      }
-      if (layer.variants?.length) {
-        const decoded = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-        for (const variant of layer.variants) {
-          const data = colorizeRadialField(decoded.data, decoded.info.width, decoded.info.height, variant);
-          const encoded = await sharp(data, { raw: decoded.info }).webp(variant.encoding).toBuffer();
-          const filename = variant.output.replace('{suffix}', density === 2 ? '@2x' : '');
-          assets.push({ filename, width: size, height: size, bytes: encoded.length, sha256: digest(encoded), data: encoded });
-        }
+    const size = layer.size * density;
+    const data = layer.kind === 'observed-radial-profile'
+      ? rasterObservedRadialField(layer, size, layer.readability.minimumPixels, await observedInputs(layer, inputs))
+      : rasterAnnularField(layer, size);
+    const bytes = await sharp(data, { raw: { width: size, height: size, channels: 4 } }).webp(layer.encoding).toBuffer();
+    assets.push({ filename: layer.output, width: size, height: size, bytes: bytes.length, sha256: digest(bytes), data: bytes });
+    for(const overlay of layer.overlays??[]){
+      const shadow=rasterProjectedStripShadow(data,size,overlay),encoded=await sharp(shadow,{raw:{width:size,height:size,channels:4}}).webp(overlay.encoding).toBuffer();
+      assets.push({filename:overlay.output,width:size,height:size,bytes:encoded.length,sha256:digest(encoded),data:encoded});
+    }
+    if (layer.variants?.length) {
+      const decoded = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+      for (const variant of layer.variants) {
+        const variantData = colorizeRadialField(decoded.data, decoded.info.width, decoded.info.height, variant);
+        const encoded = await sharp(variantData, { raw: decoded.info }).webp(variant.encoding).toBuffer();
+        assets.push({ filename: variant.output, width: size, height: size, bytes: encoded.length, sha256: digest(encoded), data: encoded });
       }
     }
   }

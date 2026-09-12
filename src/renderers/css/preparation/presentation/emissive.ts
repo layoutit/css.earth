@@ -2,7 +2,7 @@
 // (scene/index.ts body-container layout) with the composite node conventions (composite.ts).
 // An emissive body has no material track, no Shadows toggle and no directional Sun; its off-limb context and
 // limb plate are silhouette-fitted roots beside the camera, exactly as the retired static presentation mounted them.
-import { canonicalPreparedAsset, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
+import { preparedAssetAddress, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant } from '../../rendering/prepared-presentation.js';
 import type { PresentationInputs, PresentationDraft } from './types.js';
@@ -17,7 +17,7 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   if (material.model !== 'emissive' || !assets.emission) throw new TypeError('Emissive presentation needs the prepared emission material and plates.');
   if (input.sun !== null && input.sun !== undefined) throw new TypeError('An emissive body carries no directional Sun.');
   const entries = lenses.controls.flatMap(lens => LAYERS.map(layer => ({ key: `${layer}:${lens.id}`,
-    url: canonicalPreparedAsset(lens[`${layer}Url` as 'surfaceUrl'], lens[`${layer}2xUrl` as 'surface2xUrl']), pool: 'material' })));
+    url: preparedAssetAddress(lens[`${layer}Url` as 'surfaceUrl']), pool: 'material' })));
   const required = (id: string) => LAYERS.map(layer => `${layer}:${id}`);
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.leaves.map(leaf => leaf.style)) });
   // Same camera/scene/system/body nodes as composite.ts: the shared orbit writes the perspective and dolly.

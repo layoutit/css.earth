@@ -7,14 +7,10 @@
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "umbriel-poles-{id}{suffix}.webp",
+  "polesOutput": "umbriel-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "cssumbriel-prepared-assets@1"
   },
@@ -25,7 +21,7 @@
   "surfaces": [
     {
       "id": "normal",
-      "output": "umbriel-{id}{suffix}.webp",
+      "output": "umbriel-{id}@2x.webp",
       "thumbnail": "umbriel-lens-{id}.webp",
       "source": "observations/uumap-cyl-180180.cub.gz",
       "falseColor": false,
@@ -68,8 +64,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "umbriel-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "umbriel-lighting-{density}x-billboard.webp",
+    "rowOutput": "umbriel-lighting-2x-row-{row}.webp",
+    "billboardOutput": "umbriel-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

@@ -7,14 +7,10 @@
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "europa-poles-{id}{suffix}.webp",
+  "polesOutput": "europa-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "csseuropa-prepared-assets@1"
   },
@@ -25,7 +21,7 @@
   "surfaces": [
     {
       "id": "normal",
-      "output": "europa-{id}{suffix}.webp",
+      "output": "europa-{id}@2x.webp",
       "thumbnail": "europa-lens-{id}.webp",
       "source": "europa-global-500m.tif",
       "falseColor": false,
@@ -44,7 +40,7 @@
     },
     {
       "id": "enhanced",
-      "output": "europa-{id}{suffix}.webp",
+      "output": "europa-{id}@2x.webp",
       "thumbnail": "europa-lens-{id}.webp",
       "source": "color/s0349875152.equi.photr.tif",
       "falseColor": true,
@@ -120,7 +116,7 @@
     },
     {
       "id": "elevation",
-      "output": "europa-{id}{suffix}.webp",
+      "output": "europa-{id}@2x.webp",
       "thumbnail": "europa-lens-{id}.webp",
       "source": "science/controlled-dtms/Agenor/Agenor.tif",
       "falseColor": true,
@@ -182,7 +178,7 @@
     },
     {
       "id": "geology",
-      "output": "europa-{id}{suffix}.webp",
+      "output": "europa-{id}@2x.webp",
       "thumbnail": "europa-lens-{id}.webp",
       "source": "geology/europa-geologic-units.tif",
       "falseColor": true,
@@ -285,7 +281,7 @@
     },
     {
       "id": "infrared",
-      "output": "europa-{id}{suffix}.webp",
+      "output": "europa-{id}@2x.webp",
       "thumbnail": "europa-lens-{id}.webp",
       "source": "nims/europa-nims-composite.tif",
       "falseColor": true,
@@ -312,8 +308,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "europa-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "europa-lighting-{density}x-billboard.webp",
+    "rowOutput": "europa-lighting-2x-row-{row}.webp",
+    "billboardOutput": "europa-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

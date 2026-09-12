@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "61eb362e72cc39f6130e1831649e7e4303e6d33c5bde1c5d32857995d78f62f3"
+    "sha256": "b1ff1e706501008c89b4d146fb072ceef7dd3290e3d674c1853b6bd42f545f7e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "382d8b464a53b58d1715f483ed70b8e3ad8496a634b2e8cc689814e9b2caafbe"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "fdbbd7de506e50653d0b5d57e5c9a2cd654ea91f0658b94f0ff4206bf2239356",
+      "sha256": "9a148f46ff81f92f83a8a40f2d56d1b0ae505b2ab3cd5e807431d2504779c379",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ganymede/",
@@ -25,14 +25,10 @@
         "height": 2048,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
-        "polesOutput": "ganymede-poles-{id}{suffix}.webp",
+        "polesOutput": "ganymede-poles-{id}@2x.webp",
         "surfaceMetadata": {
           "schema": "cssganymede-prepared-assets@1"
         },
@@ -43,7 +39,7 @@
         "surfaces": [
           {
             "id": "normal",
-            "output": "ganymede-{id}{suffix}.webp",
+            "output": "ganymede-{id}@2x.webp",
             "thumbnail": "ganymede-lens-{id}.webp",
             "source": "ganymede-mono.tif",
             "falseColor": false,
@@ -64,7 +60,7 @@
           },
           {
             "id": "enhanced",
-            "output": "ganymede-{id}{suffix}.webp",
+            "output": "ganymede-{id}@2x.webp",
             "thumbnail": "ganymede-lens-{id}.webp",
             "source": "ganymede-color.tif",
             "falseColor": false,
@@ -90,7 +86,7 @@
           },
           {
             "id": "geology",
-            "output": "ganymede-{id}{suffix}.webp",
+            "output": "ganymede-{id}@2x.webp",
             "thumbnail": "ganymede-lens-{id}.webp",
             "source": "science/geology-sim3237/GeologyUnits.shp",
             "falseColor": true,
@@ -258,7 +254,7 @@
           },
           {
             "id": "oxygen-signature",
-            "output": "ganymede-{id}{suffix}.webp",
+            "output": "ganymede-{id}@2x.webp",
             "thumbnail": "ganymede-lens-{id}.webp",
             "source": "muse/ganymede/577.3nm_band-night-1.tif",
             "falseColor": true,
@@ -356,8 +352,8 @@
           "defaultFrame": 230,
           "billboardFrameSize": 24,
           "billboardColumns": 16,
-          "rowOutput": "ganymede-lighting-{density}x-row-{row}.webp",
-          "billboardOutput": "ganymede-lighting-{density}x-billboard.webp",
+          "rowOutput": "ganymede-lighting-2x-row-{row}.webp",
+          "billboardOutput": "ganymede-lighting-2x-billboard.webp",
           "minimumLightViewZ": -1,
           "maximumLightViewZ": 1,
           "frameCount": 256,
@@ -395,7 +391,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a4eb854350db772e27c6ac80631f75095378be3db5cca1fd7332e84b877b8b8c",
+      "sha256": "98fe19bf1d998fd76c2a27fd3a9571d2f703f9947409586a1daef9c3f855f3de",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -494,8 +490,8 @@
               "description": "USGS Voyager/Galileo mosaic at a 1 km map grid. Original observations vary from about 400 m to 20 km per pixel. Gray grid marks documented missing imagery. Photographed terrain shading remains; added globe lighting is approximate.",
               "title": "Global image mosaic",
               "thumbnail": "ganymede-lens-normal.webp",
-              "surface": "ganymede-normal.webp",
-              "poles": "ganymede-poles-normal.webp",
+              "surface": "ganymede-normal@2x.webp",
+              "poles": "ganymede-poles-normal@2x.webp",
               "source": {
                 "id": "usgs-voyager-galileo-mono",
                 "path": "../manifest.json"
@@ -509,8 +505,8 @@
               "description": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary.",
               "title": "Color mosaic",
               "thumbnail": "ganymede-lens-enhanced.webp",
-              "surface": "ganymede-enhanced.webp",
-              "poles": "ganymede-poles-enhanced.webp",
+              "surface": "ganymede-enhanced@2x.webp",
+              "poles": "ganymede-poles-enhanced@2x.webp",
               "source": {
                 "id": "usgs-voyager-galileo-color",
                 "path": "../manifest.json"
@@ -525,8 +521,8 @@
               "description": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
               "title": "Global geologic map",
               "thumbnail": "ganymede-lens-geology.webp",
-              "surface": "ganymede-geology.webp",
-              "poles": "ganymede-poles-geology.webp",
+              "surface": "ganymede-geology@2x.webp",
+              "poles": "ganymede-poles-geology@2x.webp",
               "falseColor": true,
               "source": {
                 "id": "usgs-sim3237-geologic-units",
@@ -686,8 +682,8 @@
               "title": "Oxygen-sensitive visible reflectance ratio",
               "summary": "A 565/577.3 nm surface-ice oxygen signature, not oxygen concentration. These 2° samples have approximate registration. Gray grid marks missing or withheld data; joins between nights remain.",
               "thumbnail": "ganymede-lens-oxygen-signature.webp",
-              "surface": "ganymede-oxygen-signature.webp",
-              "poles": "ganymede-poles-oxygen-signature.webp",
+              "surface": "ganymede-oxygen-signature@2x.webp",
+              "poles": "ganymede-poles-oxygen-signature@2x.webp",
               "source": {
                 "id": "ganymede-muse-oxygen-signature-night-1",
                 "path": "../manifest.json",
@@ -1334,8 +1330,8 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet, view descriptions and legends."
       },
-      "sha256": "a4eb854350db772e27c6ac80631f75095378be3db5cca1fd7332e84b877b8b8c",
-      "bytes": 19049,
+      "sha256": "98fe19bf1d998fd76c2a27fd3a9571d2f703f9947409586a1daef9c3f855f3de",
+      "bytes": 19073,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1473,12 +1469,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/ganymede/ganymede-normal.webp",
-          "bytes": 2241374,
-          "sha256": "6939be3eb3ea37770e63951340c0633b0f39a69dda57944bf71447aca086f027",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/ganymede/ganymede-normal@2x.webp",
           "bytes": 6281330,
           "sha256": "3454fa5d0089ce1df67be0b35b33d3a24124f6861ce039c7fe32839fb93801da",
@@ -1488,12 +1478,6 @@
           "url": "/scenes/ganymede/ganymede-lens-normal.webp",
           "bytes": 782,
           "sha256": "934d592258538d6fcf71309c3b7640d482402bd89af5b5fbcefa8cc6495ef8c6",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-poles-normal.webp",
-          "bytes": 51192,
-          "sha256": "985a82c8799e1f0a169d9a2c439bf2da826278431989f22c242fd75cfd35ab49",
           "verification": "bytes-verified"
         },
         {
@@ -1529,12 +1513,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/ganymede/ganymede-enhanced.webp",
-          "bytes": 2414108,
-          "sha256": "c0780d2be275443a22a4f4b028bcf0651c367ba9d8bcf1c3f13cc98f7a8e61af",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/ganymede/ganymede-enhanced@2x.webp",
           "bytes": 7128736,
           "sha256": "1310bc4ba61cdad4ca40f37630644457b2ce6a4c52128d8e958b88159ac15ee3",
@@ -1544,12 +1522,6 @@
           "url": "/scenes/ganymede/ganymede-lens-enhanced.webp",
           "bytes": 962,
           "sha256": "ddba6d84c5c2ce3daab48e0ad5eb247a3eddb5c4cfcd7f321e59c71ff6815202",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-poles-enhanced.webp",
-          "bytes": 66350,
-          "sha256": "8fc1d9936f543238a201f27d972e1a4c0b272ebd6da7dc8ab1f8a7f3607f6f84",
           "verification": "bytes-verified"
         },
         {
@@ -1587,12 +1559,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/ganymede/ganymede-geology.webp",
-          "bytes": 251458,
-          "sha256": "0740d52db76600c511cd1845c435ab9bbfbd0f3ff773b519cb655e81015ae905",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/ganymede/ganymede-geology@2x.webp",
           "bytes": 519220,
           "sha256": "84ec33a5e16159597629e5340f6a84505d76578d9bd5d429dfafd0fa02a49280",
@@ -1602,12 +1568,6 @@
           "url": "/scenes/ganymede/ganymede-lens-geology.webp",
           "bytes": 1388,
           "sha256": "592f356e5beeb0f3c92530e2ba2ae1888b43e6bf1bae867a5b52ddd704a3d8f7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-poles-geology.webp",
-          "bytes": 5430,
-          "sha256": "1d3840d4b6e68f8c7c8d8d2114e5a2b029935695f891b396a2b5561e7fa9d869",
           "verification": "bytes-verified"
         },
         {
@@ -1645,12 +1605,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/ganymede/ganymede-oxygen-signature.webp",
-          "bytes": 69048,
-          "sha256": "d9f9f557b8e6ee5bde65fd22fd3f906becc78dab8e35efe49ad057f91a4a325f",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/ganymede/ganymede-oxygen-signature@2x.webp",
           "bytes": 116896,
           "sha256": "66516e12e956363972ea58e1e354629cf6f98312fae7e98cd5ab95dcfbd30c3d",
@@ -1660,12 +1614,6 @@
           "url": "/scenes/ganymede/ganymede-lens-oxygen-signature.webp",
           "bytes": 2250,
           "sha256": "ba63dd160b278e0687775c7978ea785e225d27dbe94c500de39cbdd63136a6c4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-poles-oxygen-signature.webp",
-          "bytes": 3816,
-          "sha256": "939f4ec27c1376b25bf7a574cc0986d130ff0bee9fbd6d3df5d56d794e9bb814",
           "verification": "bytes-verified"
         },
         {
@@ -1694,204 +1642,6 @@
       },
       "inputs": [],
       "outputs": [
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-billboard.webp",
-          "bytes": 40826,
-          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-00.webp",
-          "bytes": 14922,
-          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-01.webp",
-          "bytes": 27532,
-          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-02.webp",
-          "bytes": 34558,
-          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-03.webp",
-          "bytes": 40648,
-          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-04.webp",
-          "bytes": 45092,
-          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-05.webp",
-          "bytes": 49044,
-          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-06.webp",
-          "bytes": 52968,
-          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-07.webp",
-          "bytes": 56198,
-          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-08.webp",
-          "bytes": 59392,
-          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-09.webp",
-          "bytes": 61906,
-          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-10.webp",
-          "bytes": 62672,
-          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-11.webp",
-          "bytes": 61062,
-          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-12.webp",
-          "bytes": 59454,
-          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-13.webp",
-          "bytes": 52762,
-          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-14.webp",
-          "bytes": 42196,
-          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-15.webp",
-          "bytes": 23242,
-          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-16.webp",
-          "bytes": 28714,
-          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-17.webp",
-          "bytes": 52870,
-          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-18.webp",
-          "bytes": 65644,
-          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-19.webp",
-          "bytes": 76630,
-          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-20.webp",
-          "bytes": 85368,
-          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-21.webp",
-          "bytes": 93744,
-          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-22.webp",
-          "bytes": 99970,
-          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-23.webp",
-          "bytes": 107422,
-          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-24.webp",
-          "bytes": 112788,
-          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-25.webp",
-          "bytes": 122328,
-          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-26.webp",
-          "bytes": 130124,
-          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-27.webp",
-          "bytes": 137048,
-          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-28.webp",
-          "bytes": 148122,
-          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-29.webp",
-          "bytes": 157328,
-          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-30.webp",
-          "bytes": 167218,
-          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lighting-1x-row-31.webp",
-          "bytes": 182238,
-          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/ganymede/ganymede-lighting-2x-billboard.webp",
           "bytes": 115740,

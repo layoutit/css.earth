@@ -259,8 +259,8 @@ async function deriveLensBillboardColors(
   for (const control of lenses.controls) {
     const controlId = typeof control.id === "string" ? control.id : "";
     const candidate = control.view === "interior"
-      ? defaultControl?.surface2xUrl
-      : control.surface2xUrl;
+      ? defaultControl?.surfaceUrl
+      : control.surfaceUrl;
     if (typeof candidate !== "string") continue;
     try {
       const path = resolve(publicDirectory, basename(new URL(candidate, "https://cssearth.invalid").pathname));

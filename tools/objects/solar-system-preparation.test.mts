@@ -139,9 +139,9 @@ test("shared marker and phase assembly preserves Mercury with only its reference
   assert.equal(prepared.labels.stars.records.length, 450);
 });
 
-test("shared strip reproduces both actual Mercury WebP files and metadata exactly", async () => {
+test("shared strip reproduces the actual Mercury WebP file and metadata exactly", async () => {
   const { plan, assets } = await prepareSolarSystemMarkerStrip({ tiles, schema: mercuryStrip.schema,
-    provenance: mercuryStrip.provenance, urls: { 1: mercuryStrip.density1.url, 2: mercuryStrip.density2.url } });
+    provenance: mercuryStrip.provenance, url: mercuryStrip.asset.url });
   assert.equal(JSON.stringify(plan), JSON.stringify(mercuryStrip));
   for (const asset of assets) {
     assert.deepEqual(asset.bytes, await readFile(new URL(`../../public${asset.url}`, import.meta.url)));
@@ -159,11 +159,9 @@ test("shared Sun presentation regenerates the original Mercury phase, raster, an
     assert.equal(expected.asset.generator, 'src/platform/prepare-directional-sun.mts');
     assert.equal(expected.provenance.sourcePath, 'src/platform/solar-geometry.mts');
     assert.equal(JSON.stringify(prepared), JSON.stringify(expected));
-    for (const density of [prepared.asset.density1, prepared.asset.density2]) {
-      const bytes = await readFile(join(root, required(density.url.split('/').at(-1))));
-      assert.equal(bytes.length, density.bytes);
-      assert.equal(createHash('sha256').update(bytes).digest('hex'), density.sha256);
-    }
+    const bytes = await readFile(join(root, required(prepared.asset.url.split('/').at(-1))));
+    assert.equal(bytes.length, prepared.asset.bytes);
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), prepared.asset.sha256);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

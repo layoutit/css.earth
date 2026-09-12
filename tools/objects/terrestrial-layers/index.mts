@@ -322,8 +322,7 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
     await writeFile(resolve(outputDirectory, 'material.json'), JSON.stringify(raster) + '\n');
   }
   const assets = { surfaces: Object.fromEntries(raster.surfaces.map(surface => [surface.id, {
-    url: surface.surface.url, url2x: surface.surface.url,
-    polesUrl: surface.polesUrl, polesUrl2x: surface.polesUrl,
+    url: surface.surface.url, polesUrl: surface.polesUrl,
   }])) };
   await writeFile(resolve(outputDirectory, 'assets.json'), `${JSON.stringify(assets)}\n`);
   const content = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });

@@ -133,8 +133,8 @@
     {
       "id": "eris-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1567,
-      "expectedSha256": "074449421f0ffa141060f8a69bc8ab5c60abd681acdf62c3679b8e90852fbe25",
+      "expectedBytes": 1495,
+      "expectedSha256": "f9493512800c0b2c37fd2d0f0c6f34d9fac16608ff84c3b8b85676b7df8b8338",
       "origin": "Repository-authored Eris solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -154,8 +154,8 @@
     {
       "id": "eris-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2376,
-      "expectedSha256": "57411f2b8be902225031f476a1bfe4bb95fe27ea67451752a0c080ece4f6da05",
+      "expectedBytes": 2315,
+      "expectedSha256": "e9294a0ca41d7f189151a1f1134a8c68561b4360961482a0daf77c45953becf1",
       "origin": "Repository-authored Eris raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -173,8 +173,8 @@
     {
       "id": "eris-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1410,
-      "expectedSha256": "2b24539030f8cb3920e3d89dbe46092d240dc9d8dc3486efa3e2e7cf6cba077e",
+      "expectedBytes": 1416,
+      "expectedSha256": "f91d4f6745503871538ae304ccc57dcf78001d00fa5e504d129e4d88b3b2f427",
       "origin": "Repository-authored Eris geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -285,8 +285,8 @@
     {
       "id": "eris-object-content",
       "path": "content/object.json",
-      "expectedBytes": 5991,
-      "expectedSha256": "649563d1dc65838ad58371ee5a064253dbde2a34d298904934996bfdc056d1c9",
+      "expectedBytes": 5997,
+      "expectedSha256": "920b6834bc3c17ec7bb5a9265fab55a2406556277152e58088cfd8f1623aa1b6",
       "origin": "Repository-authored Eris object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

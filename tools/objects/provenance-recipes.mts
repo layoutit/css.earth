@@ -1,4 +1,4 @@
-import {record, records, maybeRecord, text, texts, optionalText, numbers, namedRecords, textValues, provenanceManifest} from './provenance-records.mts';
+import {record, records, maybeRecord, text, texts, optionalText, namedRecords, textValues, provenanceManifest} from './provenance-records.mts';
 import type {ProductBinding, ProvenanceGap, ProvenanceRecipeSource, GeographicProvenance} from './provenance-records.mts';
 // Dependency bindings for the shared preparers. These follow acquisition paths
 // and recipe operations, never factsheet links, publisher names, or UI credits.
@@ -50,17 +50,16 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
   };
   const raster = recipe('raster'), terrestrial = recipe('terrestrial');
   if (raster?.schema === 'cssearth-raster-recipe@1') {
-    const name = (template: unknown, density: number, key?: string) => prefix + text(template).replaceAll('{id}', key ?? '')
-      .replaceAll('{suffix}', density === 2 ? '@2x' : '').replaceAll('{density}', String(density));
+    const name = (template: unknown, key?: string) => prefix + text(template).replaceAll('{id}', key ?? '');
     namedRecords(raster.surfaces).forEach((plan, index) => {
       // A science block names its pinned inputs (continuum frames, off-limb context images) beside the surface source.
       // A continuum mosaic names its frames under the science block; its `source` is their directory, not an input.
       const frames = Array.isArray(maybeRecord(maybeRecord(plan.science)?.synoptic)?.mapFiles);
       const used = [...(frames ? [] : [text(plan.source)]), ...paths(plan.coverage), ...paths(plan.science)];
-      const outputUrls = [...numbers(raster.densities).map(d => name(plan.output, d, plan.id)), name(plan.thumbnail, 1, plan.id)];
-      if (!raster.polesCombined) outputUrls.push(...numbers(raster.densities).map(d => name(raster.polesOutput, d, plan.id)));
+      const outputUrls = [name(plan.output, plan.id), name(plan.thumbnail, plan.id)];
+      if (!raster.polesCombined) outputUrls.push(name(raster.polesOutput, plan.id));
       const emission = maybeRecord(raster.emission);
-      if (emission) outputUrls.push(...numbers(raster.densities).flatMap(d => [name(emission.offLimbOutput, d, plan.id), name(emission.limbOutput, d, plan.id)]));
+      if (emission) outputUrls.push(name(emission.offLimbOutput, plan.id), name(emission.limbOutput, plan.id));
       const synoptic = maybeRecord(maybeRecord(plan.science)?.synoptic);
       add(plan.id, 'raster', `/surfaces/${index}`, used, 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
         urls: outputUrls, interpretation: { falseColor: plan.falseColor,
@@ -69,12 +68,12 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       });
     });
     if (raster.polesCombined) add('surface-poles', 'raster', '/polesOutput', [], 'Assemble polar tiles from the interpreted surface maps.', {
-      parents: namedRecords(raster.surfaces).map(plan => plan.id), urls: numbers(raster.densities).map(d => name(raster.polesOutput, d)), lensIds: [],
+      parents: namedRecords(raster.surfaces).map(plan => plan.id), urls: [name(raster.polesOutput)], lensIds: [],
     });
     if (raster.interior) {
       const plan = record(raster.interior);
       add('interior', 'raster', '/interior', [text(plan.source), text(plan.surface)], 'Prepare a schematic core and outer shell from the structural source; pack the cutaway textures.', {
-        urls: [...numbers(raster.densities).flatMap(d => ['outerOutput', 'outerPolesOutput', 'coreOutput', 'corePolesOutput', 'sectionOutput'].map(key => name(plan[key], d))), name(plan.thumbnail, 1)],
+        urls: [...['outerOutput', 'outerPolesOutput', 'coreOutput', 'corePolesOutput', 'sectionOutput'].map(key => name(plan[key])), name(plan.thumbnail)],
         interpretation: { kind: 'schematic-interior', observedInteriorImagery: false },
       });
     }
@@ -85,7 +84,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       });
     }
     if (raster.atmosphere) add('atmosphere', 'raster', '/atmosphere', paths(raster.atmosphere), 'Prepare the declared atmospheric material and observation layers.', {
-      urls: numbers(raster.densities).flatMap(d => ['materialOutput', 'observationOutput', 'lightingOutput'].map(key => name(record(raster.atmosphere)[key], d))), lensIds: [],
+      urls: ['materialOutput', 'observationOutput', 'lightingOutput'].map(key => name(record(raster.atmosphere)[key])), lensIds: [],
     });
   } else if (terrestrial?.kind === 'solid-observation-body') {
     const plans = record(terrestrial.raster), geometry = record(terrestrial.geometry);

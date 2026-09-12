@@ -7,14 +7,10 @@
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "io-poles-{id}{suffix}.webp",
+  "polesOutput": "io-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "cssio-prepared-assets@1"
   },
@@ -25,7 +21,7 @@
   "surfaces": [
     {
       "id": "normal",
-      "output": "io-{id}{suffix}.webp",
+      "output": "io-{id}@2x.webp",
       "thumbnail": "io-lens-{id}.webp",
       "source": "io-global-1km.tif",
       "falseColor": false,
@@ -54,7 +50,7 @@
     },
     {
       "id": "enhanced",
-      "output": "io-{id}{suffix}.webp",
+      "output": "io-{id}@2x.webp",
       "thumbnail": "io-lens-{id}.webp",
       "source": "io-color-1km.tif",
       "falseColor": false,
@@ -89,7 +85,7 @@
     },
     {
       "id": "geology",
-      "output": "io-{id}{suffix}.webp",
+      "output": "io-{id}@2x.webp",
       "thumbnail": "io-lens-{id}.webp",
       "source": "science/geology-sim3168/Io_GeoUnits.shp",
       "falseColor": true,
@@ -205,7 +201,7 @@
     },
     {
       "id": "spectral-slope",
-      "output": "io-{id}{suffix}.webp",
+      "output": "io-{id}@2x.webp",
       "thumbnail": "io-lens-{id}.webp",
       "source": "muse/io/485nm_slope-night-1.tif",
       "falseColor": true,
@@ -296,7 +292,7 @@
     },
     {
       "id": "visible-absorption",
-      "output": "io-{id}{suffix}.webp",
+      "output": "io-{id}@2x.webp",
       "thumbnail": "io-lens-{id}.webp",
       "source": "muse/io/560nm_band-night-1.tif",
       "falseColor": true,
@@ -393,8 +389,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "io-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "io-lighting-{density}x-billboard.webp",
+    "rowOutput": "io-lighting-2x-row-{row}.webp",
+    "billboardOutput": "io-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

@@ -66,7 +66,8 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
     return sharp(packed.data,{raw:{width:packed.packedWidth,height:packed.packedHeight,channels}}).webp(recipe.encoding.surface).toBuffer();
   };
   for(const lens of recipe.lenses) {
-    let source1x: ObservedRgb,source2x: ObservedRgb;
+    // The thumbnail keeps its accepted source: the packed surface at the layout size, encoded in memory only.
+    let layoutSource: ObservedRgb,source2x: ObservedRgb;
     let polar: ReturnType<typeof preparePolarContinuationAtlas> | ReturnType<typeof prepareMeasuredPolarAtlas>;
     let sourceRange: [number,number] | undefined;
     let measured: {firstMeasuredRow: number; lastMeasuredRow: number; sourceMissingPixels?: number};
@@ -75,12 +76,12 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
       const original=await sharp(bytes).removeAlpha().raw().toBuffer({resolveWithObject:true});
       measured=measureRgbCoverage(original,lens.coverage);
       source2x=await sharp(original.data,{raw:original.info}).resize(width*2,height*2,{fit:'fill'}).raw().toBuffer({resolveWithObject:true});
-      source1x=await sharp(original.data,{raw:original.info}).resize(width,height,{fit:'fill'}).raw().toBuffer({resolveWithObject:true});
+      layoutSource=await sharp(original.data,{raw:original.info}).resize(width,height,{fit:'fill'}).raw().toBuffer({resolveWithObject:true});
       for(const pole of ['north','south'] as const) { const detail=lens.polarDetails[pole]; if(detail)details[pole]={...detail,structure:await load(detail.structure),palette:await load(detail.palette)}; }
       const {edgeLatitudeDegrees,...continuation}=lens.continuation;
       polar=preparePolarContinuationAtlas({source:source2x,tileSize:polarTileSize*2,firstMeasuredRow:Math.round((90-edgeLatitudeDegrees)/180*(original.info.height-1)),lastMeasuredRow:Math.round((90+edgeLatitudeDegrees)/180*(original.info.height-1)),measuredHeight:original.info.height,polarDetails:details,...continuation});
       source2x=preparePolarSurfaceTransition({source:source2x,polarDetails:details,...lens.transition});
-      source1x=preparePolarSurfaceTransition({source:source1x,polarDetails:details,...lens.transition});
+      layoutSource=preparePolarSurfaceTransition({source:layoutSource,polarDetails:details,...lens.transition});
     } else {
       const scalar=readFitsPrimary(bytes);
       if(scalar.bitpix!==lens.scalar.bitpix||scalar.width!==lens.scalar.width||scalar.height!==lens.scalar.height)throw new Error('Pinned scalar polar dimensions changed.');
@@ -89,23 +90,21 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
       if(!(sourceRange[1]>sourceRange[0]))throw new Error('Scalar observation has no measured dynamic range.');
       const original={data:falseColorMap(measuredSource,lens.palette,...sourceRange),info:{width:scalar.width,height:scalar.height,channels:4},missing:measuredSource.missing};
       source2x=resizeObservedRgb(original,width*2,height*2);
-      source1x=resizeObservedRgb(original,width,height);
+      layoutSource=resizeObservedRgb(original,width,height);
       measured={firstMeasuredRow:measuredSource.firstMeasuredRow,lastMeasuredRow:measuredSource.lastMeasuredRow,sourceMissingPixels:measuredSource.sourceMissingPixels};
       polar=prepareMeasuredPolarAtlas(original,polarTileSize*2,{projection:'latitude-linear',...lens.projection});
     }
     maps.set(lens.id,{data:source2x.data,...source2x.info});
     coverage[lens.id]={...measured,...Object.fromEntries(Object.entries(polar).filter(([key])=>key!=='data'))};
-    const surface=await add(lens.files.surface,await pack(source1x)),surface2x=await add(lens.files.surface2x,await pack(source2x));
-    const raw={width:polar.width,height:polar.height,channels:4 as const};
-    const poles=await add(lens.files.poles,await sharp(polar.data,{raw}).resize(polarTileSize*2,polarTileSize).webp(recipe.encoding.polar).toBuffer());
-    const poles2x=await add(lens.files.poles2x,await sharp(polar.data,{raw}).webp(recipe.encoding.polar).toBuffer());
-    const thumbnail=await add(lens.files.thumbnail,await sharp(surface.data).resize(recipe.thumbnail.width,recipe.thumbnail.height,{fit:recipe.thumbnail.fit,position:recipe.thumbnail.position}).webp(recipe.encoding.thumbnail).toBuffer());
+    const surface=await add(lens.files.surface,await pack(source2x));
+    const poles=await add(lens.files.poles,await sharp(polar.data,{raw:{width:polar.width,height:polar.height,channels:4}}).webp(recipe.encoding.polar).toBuffer());
+    const thumbnail=await add(lens.files.thumbnail,await sharp(await pack(layoutSource)).resize(recipe.thumbnail.width,recipe.thumbnail.height,{fit:recipe.thumbnail.fit,position:recipe.thumbnail.position}).webp(recipe.encoding.thumbnail).toBuffer());
     if(lens.operation==='rgb-polar-structure'){controls.push(lens.control);continue;}
     if(!sourceRange) throw new Error('Scalar observation requires its measured range.');
     controls.push({id:lens.id,label:lens.label,shortLabel:lens.shortLabel,filter:lens.filter,wavelength:lens.wavelength,measurement:lens.measurement,
-      thumbnailUrl:recipe.publicPrefix+lens.files.thumbnail,surfaceUrl:recipe.publicPrefix+lens.files.surface,surface2xUrl:recipe.publicPrefix+lens.files.surface2x,polesUrl:recipe.publicPrefix+lens.files.poles,poles2xUrl:recipe.publicPrefix+lens.files.poles2x,falseColor:true,qualification:lens.qualification,
+      thumbnailUrl:recipe.publicPrefix+lens.files.thumbnail,surfaceUrl:recipe.publicPrefix+lens.files.surface,polesUrl:recipe.publicPrefix+lens.files.poles,falseColor:true,qualification:lens.qualification,
       coveragePreparation:{model:polar.model,...measured,projectionEdgeLatitudeDegrees:polar.measuredProjectionEdgeLatitudeDegrees,bodyLatitudeBoundsDegrees:recipe.packing.latitudeBoundsDegrees,unmeasuredCoreRadius:('unmeasuredCoreRadius' in polar ? polar.unmeasuredCoreRadius : undefined),polarProjectionAngularSamples:('polarProjectionAngularSamples' in polar ? polar.polarProjectionAngularSamples : undefined),unmeasuredCoreHarmonicOrder:('unmeasuredCoreHarmonicOrder' in polar ? polar.unmeasuredCoreHarmonicOrder : undefined),detailedPoles:polar.detailedPoles,structuralAuthority:lens.structuralAuthority,structuralDetailMeasurement:false,spectralColorAuthority:lens.measurement,runtimeCoverageRepair:false},
-      sourceFile:lens.source,sourceSha256:hash(bytes),sourceRange:sourceRange.map(value=>Number(value.toPrecision(8))),assetSha256:{surface:surface.sha256,surface2x:surface2x.sha256,poles:poles.sha256,poles2x:poles2x.sha256,thumbnail:thumbnail.sha256}});
+      sourceFile:lens.source,sourceSha256:hash(bytes),sourceRange:sourceRange.map(value=>Number(value.toPrecision(8))),assetSha256:{surface:surface.sha256,poles:poles.sha256,thumbnail:thumbnail.sha256}});
   }
   return {assets,maps,coverage,lenses:{...recipe.descriptor,controls}};
 }

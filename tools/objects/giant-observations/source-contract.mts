@@ -6,9 +6,9 @@ const detailImage = object({path: string, extract: optional(object({left: number
 export type DetailImage = Infer<typeof detailImage>;
 const detail = object({structure: detailImage, palette: detailImage, contrast: number, tint: number, structureRadius: optional(number)});
 const details = object({north: optional(detail), south: optional(detail)});
-const files = object({surface: string, surface2x: string, poles: string, poles2x: string, thumbnail: string});
-const control = object({id: string, label: string, shortLabel: string, measurement: string, thumbnailUrl: string, surfaceUrl: string, surface2xUrl: string,
-  polesUrl: string, poles2xUrl: string, falseColor: boolean, qualification: string});
+const files = object({surface: string, poles: string, thumbnail: string});
+const control = object({id: string, label: string, shortLabel: string, measurement: string, thumbnailUrl: string, surfaceUrl: string,
+  polesUrl: string, falseColor: boolean, qualification: string});
 const absent = (value: unknown): value is undefined => value === undefined;
 const lens = union(
   object({id: string, operation: literal('rgb-polar-structure'), source: string, files, control, polarDetails: details,

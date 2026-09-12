@@ -92,14 +92,11 @@ export function prepareLenses(
         ...(legend ? { legend } : {}),
         ...(control.legendNote ? { legendNote: control.legendNote } : {}),
         surfaceUrl: surface?.url ?? assetUrl(objectId, control.surface),
-        surface2xUrl: surface?.url2x ?? assetUrl(objectId, control.surface?.replace(/\.webp$/u, "@2x.webp")),
         polesUrl: surface?.polesUrl ?? poles?.url ?? assetUrl(objectId, control.poles),
-        poles2xUrl: surface?.polesUrl2x ?? poles?.url2x ?? assetUrl(objectId, control.poles?.replace(/(?:@2x)?\.webp$/u, "@2x.webp")),
         materialUrl: material?.url ?? assetUrl(objectId, control.material),
-        material2xUrl: material?.url2x ?? assetUrl(objectId, control.material?.replace(/\.webp$/u, "@2x.webp")),
         // Emissive bodies: the prepared off-limb context and limb plate keep the lens resource keys corona:/limb:.
-        ...(surface?.coronaUrl ? { coronaUrl: surface.coronaUrl, corona2xUrl: surface.coronaUrl2x } : {}),
-        ...(surface?.limbUrl ? { limbUrl: surface.limbUrl, limb2xUrl: surface.limbUrl2x } : {}),
+        ...(surface?.coronaUrl ? { coronaUrl: surface.coronaUrl } : {}),
+        ...(surface?.limbUrl ? { limbUrl: surface.limbUrl } : {}),
         source: control.source,
       };
     }),

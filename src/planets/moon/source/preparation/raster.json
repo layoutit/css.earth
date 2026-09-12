@@ -7,14 +7,10 @@
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "moon-poles-{id}{suffix}.webp",
+  "polesOutput": "moon-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "cssmoon-prepared-assets@1"
   },
@@ -27,7 +23,7 @@
       "id": "surface",
       "source": "surface/WAC_GLOBAL_E000N1800_032P.IMG",
       "falseColor": false,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "kind": "pds-float-map",
@@ -45,7 +41,7 @@
       "id": "midnight-temperature",
       "source": "science/diviner-ghrm/tbol_m-compact.tif",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "scientific": {
@@ -93,7 +89,7 @@
       "id": "heat-anomalies",
       "source": "science/diviner-ghrm/tbol_anom-compact.tif",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "scientific": {
@@ -141,7 +137,7 @@
       "id": "rock-abundance",
       "source": "science/diviner-ghrm/ra_sam-compact.tif",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "scientific": {
@@ -187,7 +183,7 @@
       "id": "topography",
       "source": "science/ldem_16.img",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "scientific": {
@@ -243,14 +239,14 @@
       "id": "crust",
       "source": "lenses/grail-crustal-thickness-print.jpg",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp"
     },
     {
       "id": "silicate-signature",
       "source": "science/diviner-cf-2021-georeferenced.tif",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "scientific": {
@@ -289,7 +285,7 @@
       "id": "geology",
       "source": "geology/moon-geologic-units.tif",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "scientific": {
@@ -578,8 +574,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "moon-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "moon-lighting-{density}x-billboard.webp",
+    "rowOutput": "moon-lighting-2x-row-{row}.webp",
+    "billboardOutput": "moon-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

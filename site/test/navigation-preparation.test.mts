@@ -20,9 +20,7 @@ const projectRoot = resolve(import.meta.dirname, "../..");
 const expectedOutputFiles = (await readdir(resolve(projectRoot, "public/navigation"))).sort();
 
 const transparentMarkerFiles = Object.freeze([
-  "blackhole-marker.png",
   "blackhole-marker@2x.png",
-  "supernova-marker.png",
   "supernova-marker@2x.png",
 ]);
 
@@ -49,7 +47,7 @@ test('adding and reordering bodies preserves existing marker bytes', async conte
 test('metadata-only preparation does not replace or remove images', async context => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-marker-metadata-'));
   context.after(() => rm(root, { recursive: true, force: true }));
-  const files = ['body-sun.webp', 'body-sun@2x.webp'];
+  const files = ['body-sun@2x.webp'];
   for (const file of files) await copyFile(resolve(projectRoot, 'public/navigation', file), resolve(root, file));
   await writeFile(resolve(root, 'sun-context.webp'), 'unrelated existing context');
   const before = new Map(await Promise.all((await readdir(root)).map(async file => [file, await readFile(resolve(root, file))] as const)));
@@ -154,12 +152,12 @@ for (const failure of ["object source", "late utility source", "publication", "r
       const cache = resolve(root, "node_modules/.cache");
       const [recovery] = await readdir(cache);
       assert.match(recovery, /^navigation-prepare-/u);
-      assert.equal(await readFile(resolve(cache, recovery, "backup-0"), "utf8"), "accepted blackhole-marker.png");
+      assert.equal(await readFile(resolve(cache, recovery, "backup-0"), "utf8"), "accepted blackhole-marker@2x.png");
       // Vite copies all of public, including dot directories. Neither staged
       // assets nor the preserved recovery directory can enter that tree.
       assert.deepEqual(await readdir(resolve(root, "public")), ["navigation"]);
       for (const [path, bytes] of previous) {
-        if (path === resolve(outputRoot, "blackhole-marker.png")) continue;
+        if (path === resolve(outputRoot, "blackhole-marker@2x.png")) continue;
         assert.equal(await readFile(path, "utf8"), bytes, path);
       }
       return;

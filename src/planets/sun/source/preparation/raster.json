@@ -7,14 +7,10 @@
   "height": 512,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "sun-poles-{id}{suffix}.webp",
+  "polesOutput": "sun-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "csssun-prepared-assets@1"
   },
@@ -27,7 +23,7 @@
       "id": "photosphere",
       "source": "sdo/continuum/CR2311",
       "falseColor": false,
-      "output": "sun-surface-{id}{suffix}.webp",
+      "output": "sun-surface-{id}@2x.webp",
       "thumbnail": "sun-lens-{id}.webp",
       "science": {
         "synoptic": {
@@ -85,7 +81,7 @@
       "id": "magnetic",
       "source": "hmi/CR2311-synopMr.fits",
       "falseColor": true,
-      "output": "sun-surface-{id}{suffix}.webp",
+      "output": "sun-surface-{id}@2x.webp",
       "thumbnail": "sun-lens-{id}.webp",
       "science": {
         "synoptic": {
@@ -136,7 +132,7 @@
       "id": "chromosphere",
       "source": "sdo/synoptic/AIA0304/CR2311.fits",
       "falseColor": true,
-      "output": "sun-surface-{id}{suffix}.webp",
+      "output": "sun-surface-{id}@2x.webp",
       "thumbnail": "sun-lens-{id}.webp",
       "science": {
         "synoptic": {
@@ -196,7 +192,7 @@
       "id": "corona",
       "source": "sdo/synoptic/AIA0171/CR2311.fits",
       "falseColor": true,
-      "output": "sun-surface-{id}{suffix}.webp",
+      "output": "sun-surface-{id}@2x.webp",
       "thumbnail": "sun-lens-{id}.webp",
       "science": {
         "synoptic": {
@@ -257,8 +253,8 @@
     "offLimbSize": 768,
     "limbSize": 512,
     "bodyDiameter": 496,
-    "offLimbOutput": "sun-corona-{id}{suffix}.webp",
-    "limbOutput": "sun-limb-{id}{suffix}.webp",
+    "offLimbOutput": "sun-corona-{id}@2x.webp",
+    "limbOutput": "sun-limb-{id}@2x.webp",
     "metadata": {
       "schema": "csssun-prepared-emission@1",
       "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
