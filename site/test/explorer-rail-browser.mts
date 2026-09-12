@@ -38,9 +38,8 @@ try {
     await page.goto(new URL(config.route, baseUrl).href);
     await page.waitForFunction(() => document.querySelector(".planet-stage")?.getAttribute("aria-busy") === "false");
     const rail = page.getByRole("navigation", { name: "Explorer", exact: true });
-    const planetaryNavigation = page.locator(".planetary-navigation");
-    assert.equal(await planetaryNavigation.isVisible(), false,
-      `${config.label}: top planet navigation is hidden`);
+    assert.equal(await page.locator(".planetary-navigation").count(), 0,
+      `${config.label}: the retired top planet navigation is not rendered`);
     const settings = rail.locator(".planet-settings-action");
     const about = rail.getByRole("button", { name: "About", exact: true });
     const explore = rail.getByRole("button", { name: "Planet information", exact: true });
