@@ -716,8 +716,8 @@
     {
       "id": "moon-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1246,
-      "expectedSha256": "9be698dd91e2412cbea30b385ec37b597c33d3aa9519daaa58b6f9d3d0af0f7b",
+      "expectedBytes": 1406,
+      "expectedSha256": "59fd79640b484ce809a31d4d42c670a5ab5665cf4d16a7cc726cabcf3c1f2f01",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -901,6 +901,54 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet, view descriptions and legends."
       }
+    },
+    {
+      "id": "moon-apollo-11-eva-traverse-path",
+      "path": "features/traverses/APOLLO_11.ZIP",
+      "expectedBytes": 116096,
+      "expectedSha256": "b1f63da2a1764cb17d99c73206f3448a7cb8d36d70323563a80c200ec852f767",
+      "origin": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_11/APOLLO_11.ZIP",
+      "credit": "NASA/GSFC/Arizona State University (LROC)",
+      "license": "PDS archive extras (NASA LRO); NASA content not subject to copyright, credit NASA/GSFC/Arizona State University",
+      "licenseEvidence": [
+        "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_11"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_11/APOLLO_11.ZIP.",
+      "redistribution": "NASA data product, credit the publisher",
+      "consumers": [
+        "features"
+      ],
+      "title": "Apollo 11 EVA traverse (CDR/LMP paths)",
+      "displayCredit": "NASA/GSFC/Arizona State University (LROC)",
+      "sourceUrl": "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_11",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      }
+    },
+    {
+      "id": "moon-apollo-12-eva-traverse-path",
+      "path": "features/traverses/APOLLO_12.ZIP",
+      "expectedBytes": 313003,
+      "expectedSha256": "f37d068ccc628226bff6068a48555722de659bedfc64b3fb994039a61f727591",
+      "origin": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_12/APOLLO_12.ZIP",
+      "credit": "NASA/GSFC/Arizona State University (LROC)",
+      "license": "PDS archive extras (NASA LRO); NASA content not subject to copyright, credit NASA/GSFC/Arizona State University",
+      "licenseEvidence": [
+        "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_12"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_12/APOLLO_12.ZIP.",
+      "redistribution": "NASA data product, credit the publisher",
+      "consumers": [
+        "features"
+      ],
+      "title": "Apollo 12 EVA 1-2 traverse (CDR/LMP paths)",
+      "displayCredit": "NASA/GSFC/Arizona State University (LROC)",
+      "sourceUrl": "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_APOLLO_12",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this pinned product."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -1042,6 +1090,50 @@
       "expectedSha256": "aec2287b52f7d4ba9e773e46bd12ef0332f5cb872403040ad9fc11c741a78ef0",
       "expectedBytes": 16526,
       "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
+    },
+    {
+      "id": "moon-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 115231,
+      "expectedSha256": "9c85d21238be3cbf1186a964d9eff8718dff93f934dbfdb7aa71076d19b39cc2",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "id": "moon-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 804723,
+      "expectedSha256": "9c2120b8b5f87ffddfd3276cac3b97442c1c17e5ecbb0975eb3c44ccd649547d",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 1749 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts moon: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

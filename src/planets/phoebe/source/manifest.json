@@ -313,7 +313,7 @@
       "falseColor": true,
       "width": 360,
       "height": 180,
-      "coverage": "Finest contributing SPC maplet spacing in each 1\u00b0 cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
+      "coverage": "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
       "projection": {
         "type": "simple-cylindrical",
         "longitudeDirection": "east-positive",
@@ -368,7 +368,7 @@
       "falseColor": true,
       "width": 360,
       "height": 180,
-      "coverage": "Contributing image count in each 1\u00b0 source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
+      "coverage": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
       "projection": {
         "type": "simple-cylindrical",
         "longitudeDirection": "east-positive",
@@ -406,7 +406,7 @@
       "expectedBytes": 1090377,
       "expectedSha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee",
       "origin": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -435,7 +435,7 @@
       "expectedBytes": 226310,
       "expectedSha256": "97fee2316839da6b2f5849b35b4ed8bd04af9e26f6cc8842f3254309c915a5a3",
       "origin": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -464,7 +464,7 @@
       "expectedBytes": 680448,
       "expectedSha256": "df43d42c42ab29cf00eee62c6f22796d85631b60f6c8b4da56ba590cb01f3030",
       "origin": "https://vims.univ-nantes.fr/cube/1465671822_1.qub",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -493,7 +493,7 @@
       "expectedBytes": 57492,
       "expectedSha256": "d4b6945058358ceb42460ef5966e1ece2a5e1eb6bf481847b25ab42ff835ca1b",
       "origin": "https://vims.univ-nantes.fr/cube/1465671822_1",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9; cssEarth offline detector mapping and display",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -545,7 +545,7 @@
       "expectedBytes": 52468,
       "expectedSha256": "f22812b0e21b9f448bd83482bd2a664cafe67ea6f8dc23e8c0e205dd0c3e2e8b",
       "origin": "https://vims.univ-nantes.fr/cube/1465671822_1",
-      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9; cssEarth offline detector mapping and display",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
       "license": "CC-BY-4.0",
       "licenseEvidence": [
         "https://vims.univ-nantes.fr/about",
@@ -598,7 +598,7 @@
       "expectedSha256": "0e5998039dacbd9301441347a883b8a419782c9f791562c0f610a8507e6450ed",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PHOEBE_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -636,8 +636,8 @@
     {
       "id": "phoebe-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1200,
-      "expectedSha256": "f7c68244cea030c6fdc9ec2ca55c309dfbf99adffa23aa1cb89694bc2ce58166",
+      "expectedBytes": 1225,
+      "expectedSha256": "42cd0c133a0460f95b0a6cc5e3942b2fcac9af3099e069c6673bc9bc0050de35",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -955,6 +955,29 @@
       "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
       "expectedBytes": 3417,
       "expectedSha256": "68162ebf0bc13325bf7d9ae295cf34903c1f100f3b13a7d35bd5d7db11689647"
+    },
+    {
+      "id": "phoebe-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 780,
+      "expectedSha256": "1a3e6466a0d402adbbc1dc0cdddd215ae471d9ec82599d8deb7afad8912f4419",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 1 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts phoebe: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

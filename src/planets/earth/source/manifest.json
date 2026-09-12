@@ -1492,6 +1492,126 @@
           }
         ]
       }
+    },
+    {
+      "id": "natural-earth-populated-places",
+      "path": "features/ne_10m_populated_places.zip",
+      "expectedBytes": 2811199,
+      "expectedSha256": "cd149186f03d2603e0410da399b980a4357d0ac32d3a2305a49ed3dffcc41d7b",
+      "origin": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_populated_places.zip",
+      "credit": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
+      "license": "Public domain; Natural Earth terms of use: all versions of the raster and vector map data are in the public domain",
+      "licenseEvidence": [
+        "https://www.naturalearthdata.com/about/terms-of-use/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://naciscdn.org/naturalearth/10m/cultural/ne_10m_populated_places.zip (1:10m vectors, version 5.1.x as published).",
+      "redistribution": "Public domain; credit Natural Earth",
+      "consumers": [
+        "features"
+      ],
+      "title": "Natural Earth 1:10m populated places",
+      "displayCredit": "Natural Earth",
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Natural Earth source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "natural-earth-geography-regions-points",
+      "path": "features/ne_10m_geography_regions_points.zip",
+      "expectedBytes": 87372,
+      "expectedSha256": "2cf54b21fc684f0f7023886379c7ae9c5c716d8bd4c3ead19050f3a7f53e4f7d",
+      "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_regions_points.zip",
+      "credit": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
+      "license": "Public domain; Natural Earth terms of use: all versions of the raster and vector map data are in the public domain",
+      "licenseEvidence": [
+        "https://www.naturalearthdata.com/about/terms-of-use/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_regions_points.zip (1:10m vectors, version 5.1.x as published).",
+      "redistribution": "Public domain; credit Natural Earth",
+      "consumers": [
+        "features"
+      ],
+      "title": "Natural Earth 1:10m geography regions points",
+      "displayCredit": "Natural Earth",
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Natural Earth source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "natural-earth-geography-regions-polys",
+      "path": "features/ne_10m_geography_regions_polys.zip",
+      "expectedBytes": 2038519,
+      "expectedSha256": "cb7b9db200284ed1551f20eacc7f3333e9b5f311c19f7cb2670694529f688682",
+      "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_regions_polys.zip",
+      "credit": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
+      "license": "Public domain; Natural Earth terms of use: all versions of the raster and vector map data are in the public domain",
+      "licenseEvidence": [
+        "https://www.naturalearthdata.com/about/terms-of-use/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_regions_polys.zip (1:10m vectors, version 5.1.x as published).",
+      "redistribution": "Public domain; credit Natural Earth",
+      "consumers": [
+        "features"
+      ],
+      "title": "Natural Earth 1:10m geography regions polys",
+      "displayCredit": "Natural Earth",
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Natural Earth source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "natural-earth-geography-marine-polys",
+      "path": "features/ne_10m_geography_marine_polys.zip",
+      "expectedBytes": 940563,
+      "expectedSha256": "a2d3395904c41e718e02c3ec5bc988712164c524c236fad32d95d282ca303b2a",
+      "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_marine_polys.zip",
+      "credit": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
+      "license": "Public domain; Natural Earth terms of use: all versions of the raster and vector map data are in the public domain",
+      "licenseEvidence": [
+        "https://www.naturalearthdata.com/about/terms-of-use/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_marine_polys.zip (1:10m vectors, version 5.1.x as published).",
+      "redistribution": "Public domain; credit Natural Earth",
+      "consumers": [
+        "features"
+      ],
+      "title": "Natural Earth 1:10m geography marine polys",
+      "displayCredit": "Natural Earth",
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Natural Earth source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "natural-earth-rivers-lake-centerlines",
+      "path": "features/ne_10m_rivers_lake_centerlines.zip",
+      "expectedBytes": 2079507,
+      "expectedSha256": "ded71b01870855ccfe19b51f2ec14c9bb48fae23c0e9f3c11974d426433b5c38",
+      "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_rivers_lake_centerlines.zip",
+      "credit": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
+      "license": "Public domain; Natural Earth terms of use: all versions of the raster and vector map data are in the public domain",
+      "licenseEvidence": [
+        "https://www.naturalearthdata.com/about/terms-of-use/"
+      ],
+      "acquisition": "Downloaded 2026-09-12 from https://naciscdn.org/naturalearth/10m/physical/ne_10m_rivers_lake_centerlines.zip (1:10m vectors, version 5.1.x as published).",
+      "redistribution": "Public domain; credit Natural Earth",
+      "consumers": [
+        "features"
+      ],
+      "title": "Natural Earth 1:10m rivers lake centerlines",
+      "displayCredit": "Natural Earth",
+      "sourceUrl": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Natural Earth source record cites this manifest revision."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -1638,12 +1758,6 @@
       "expectedSha256": "72515c37abfd6e66e8cdac6eef3fa85ca2d42c137ba91b6b6f5c670226398cf9"
     },
     {
-      "path": "presentation/surface-map.json",
-      "expectedBytes": 175,
-      "expectedSha256": "83f18034dde03b81602fb84f0cc132b45f45ba75d81d28555cc76f24566c23de",
-      "purpose": "Repository-authored surface map frame: the CSS selector of the leaf mesh and the mesh axes of the texture's left edge (180\u00b0), east and north, verified against the prepared leaf frames and a rendered probe; consumed by the shared minimap and surface-feature anchoring."
-    },
-    {
       "path": "editorial/earth.json",
       "expectedBytes": 10001,
       "expectedSha256": "afd5014507e89812e7ebd6f553324efce7c0dbec55b749dae552d7ba55f0f80d"
@@ -1694,6 +1808,60 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored sampling, units, color scale and coverage notes for VJ146A4.002."
+      }
+    },
+    {
+      "id": "earth-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 8433,
+      "expectedSha256": "61e461be5dc366b3f856069c9ffecfb80c85c0de6f66dc529a7d2e09b04c4f8e",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "earth-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 2292,
+      "expectedSha256": "0bf33af0e8562409821c519e0b401f1c1412e651edc5f2ca89a4debd2584c3c2",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "earth-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 175,
+      "expectedSha256": "83f18034dde03b81602fb84f0cc132b45f45ba75d81d28555cc76f24566c23de",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
       }
     }
   ]

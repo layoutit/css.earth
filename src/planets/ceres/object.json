@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "202b93a864529f3313db7a8295e58f0e73b1e7da3eb8f13f6d823cf1e888fb17"
+    "sha256": "a7d9e52a6933e19da1baed1b7f20d15b96ccfd752908bb7d1c19bb638fcd7e87"
   },
   "id": "ceres",
   "properties": {
@@ -138,7 +138,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "e00752a7449ec5fb5355bb24f27c55a254eb915f46cffed80ad91d859f7a9c83"
+          "sha256": "ff88ecfc748ec421f40500362a9c4621e1ef7ba2197233ca57a8fea4b5d2079b"
         }
       ],
       "features": {
@@ -152,7 +152,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "16183539fa6f65c7bec3c44ba960aa8a450dec0e35b4984282614e3a1884049f"
+        "sha256": "7ab27b432315eb281f0d2c86bce397de64c5e4772db1f64381551f64e3a82e6b"
       }
     },
     "catalog": {

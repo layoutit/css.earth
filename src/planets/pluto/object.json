@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "754a88069f97be1739d24ea5d76fe437b7a5173a3285bc0b0afe7edc9b5760dc"
+    "sha256": "10460916e65810730c1b03652a60c01cabbc094f33b0f582c7a88f291428bd7f"
   },
   "id": "pluto",
   "properties": {
@@ -76,7 +76,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "9142532ac8766d78839f32aaa1f40759919a4b204dd81750c9d4f09e03ca9e3c"
+          "sha256": "22e358610fede5e6683bc1351b4edc990afc988074298b3ebbcd10b14f73c10c"
         }
       ],
       "shape": {
@@ -152,7 +152,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6bfded7da630a7f33a72de9e2508a0d897f4470634580fc8203d5de43c24aa24"
+        "sha256": "fba461d1e620342fed9416a5a01a3f588b53c95d60bfe72b130ee46428f99119"
       }
     },
     "catalog": {

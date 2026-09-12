@@ -140,7 +140,7 @@
         "centerLongitude": 180,
         "referenceRadiusMeters": 26400
       },
-      "coverage": "Partial NEAR photomosaic by Stooke and Pfau at 10 pixels per degree. Map registration matches Thomas annotated FITS (west 360 left to 0 right). Missing exterior uses connected gray-fill heuristic 78\u00b13 after sRGB decode; this is not an authoritative coverage mask. Photographed shadows and extensive display processing remain.",
+      "coverage": "Partial NEAR photomosaic by Stooke and Pfau at 10 pixels per degree. Map registration matches Thomas annotated FITS (west 360 left to 0 right). Missing exterior uses connected gray-fill heuristic 78±3 after sRGB decode; this is not an authoritative coverage mask. Photographed shadows and extensive display processing remain.",
       "licenseEvidence": [
         "reference/stooke-map-guide.html"
       ],
@@ -201,7 +201,7 @@
       "expectedSha256": "d042bf056ae40cd5a3f0c846412ba7a42c48b0bb1aa9893473b267b80be47bc2",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MATHILDE_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -239,8 +239,8 @@
     {
       "id": "mathilde-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1132,
-      "expectedSha256": "d9e9649421a8948c74030ecf368a5c2277fb1a808514c2a87aad770778c24bfa",
+      "expectedBytes": 1157,
+      "expectedSha256": "cf83a84097c1adaaf528f9c29592e8758df3d4c5b4be9c9ee6354862c56b7563",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -420,6 +420,29 @@
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 89774,
       "expectedSha256": "7898287cb9d92e1e04f8cc83f3fee9206439527dd0183dfc82f01f39f10a37c3"
+    },
+    {
+      "id": "mathilde-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 2440,
+      "expectedSha256": "629eac8dad7dee858c26675c39fbbcab4841af2ca6a7f166c804400fce516a7d",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 4 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts mathilde: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

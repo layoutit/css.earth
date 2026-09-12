@@ -1785,8 +1785,8 @@
     {
       "id": "titan-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1185,
-      "expectedSha256": "98cd85fa596c81addf6200d057a0074e19d44d96af58ddc2bb43eec809c58347",
+      "expectedBytes": 1275,
+      "expectedSha256": "c43af9f444375838e7be7d5d50c7986a76acdc31152508e937e51cbf2630192f",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -2189,6 +2189,50 @@
       "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
       "expectedBytes": 2206,
       "expectedSha256": "99b6b5aa300db84639f6aff7a5c744cbb3d310ed18d3bd00526fa8d741a8702d"
+    },
+    {
+      "id": "titan-surface-sites",
+      "path": "features/sites.json",
+      "expectedBytes": 1395,
+      "expectedSha256": "9f2dd6d9f490b4c8b775ad1764699d27cd6899e65065cc93604f8a187d59d27f",
+      "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
+      "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
+      "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Compiled 2026-09-12 from the cited pages; see each site's source and quote.",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "id": "titan-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 23673,
+      "expectedSha256": "13dd2044647b2301d98f3e095210ad1b71b3a409f25f91dba162f29ce1230e15",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 58 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts titan: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
     }
   ]
 }

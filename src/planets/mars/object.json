@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e1a12975ef9b4f9fd023e83d19c5d754d513e4cda0629463cca9d7571f2089dd"
+    "sha256": "7521dc5c585482454febb13e6bcaaa385f617ea67c65a559dacc6d3df65725ed"
   },
   "id": "mars",
   "properties": {
@@ -109,7 +109,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "ba5861a3d68659b0f35174b97842558585f36d4c87d5bf611d74dfd51e41246b"
+          "sha256": "945f147e0b32b66861c9bdb643b9c15bfca032e49893286b4ae746e7f8c00ff1"
         }
       ],
       "shape": {
@@ -163,7 +163,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "65bc7ccca37eae538f66a90cb087757f9174ab8a5d8f51d01008c346d953218b"
+        "sha256": "3a818e48e586cacf6b1ec631a047425c04193ad203e8495621f513961705668f"
       }
     },
     "catalog": {
