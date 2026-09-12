@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "6026",
+      "item": "Q3370207",
+      "title": "Tirawa (crater)",
+      "url": "https://en.wikipedia.org/wiki/Tirawa_(crater)",
+      "revision": "1357318929",
+      "extract": "Tirawa is the largest impact basin on Saturn's moon Rhea. It was glimpsed by Voyager 1 during its flyby of the moon and later photographed in greater detail by the Cassini orbiter. Tirawa is elongated in shape and overlaps Mamaldi, a larger and more degraded basin to its southwest."
+    },
+    {
+      "id": "14671",
+      "item": "Q3369729",
+      "title": "Inktomi (crater)",
+      "url": "https://en.wikipedia.org/wiki/Inktomi_(crater)",
+      "revision": "1372887649",
+      "extract": "3 mi) in diameter located in the southern hemisphere of Saturn's moon Rhea.1 W. Inktomi is thought to be the youngest major surface feature on Rhea, with estimates ranging from 8 to 280 million years."
+    },
+    {
+      "id": "14759",
+      "item": "Q25907776",
+      "title": "Pulag Chasma",
+      "url": "https://en.wikipedia.org/wiki/Pulag_Chasma",
+      "revision": "1339533326",
+      "extract": "Pulag Chasma is a deep cliff or graben on Rhea, the second largest moon of planet Saturn."
+    },
+    {
+      "id": "14760",
+      "item": "Q25907777",
+      "title": "Vaupas Chasma",
+      "url": "https://en.wikipedia.org/wiki/Vaupas_Chasma",
+      "revision": "1347281241",
+      "extract": "Vaupas Chasma is a chasmata on Rhea, a moon of Saturn. The chasma was named after the Vaupés River flowing through Colombia and Brazil, officially approved by the International Astronomical Union (IAU) on 6 August 2010."
+    }
+  ]
+}

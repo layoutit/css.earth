@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-surface-feature-notes@1",
+  "source": "English Wikipedia lead summaries (REST page summary API), joined to the Gazetteer through Wikidata property P2824",
+  "retrievedAt": "2026-09-12",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "wikidataQuery": "SELECT ?item ?id ?article WHERE { ?item wdt:P2824 ?id . ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> }",
+  "entries": [
+    {
+      "id": "3362",
+      "item": "Q6533457",
+      "title": "Phoebe (moon)",
+      "url": "https://en.wikipedia.org/wiki/Phoebe_(moon)",
+      "revision": "1372364406",
+      "extract": "Phoebe is the most massive irregular satellite of Saturn with a mean diameter of 213 km (132 mi)."
+    }
+  ]
+}
