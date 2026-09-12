@@ -50,6 +50,18 @@ make coordinates transferable between models. Keep approximate placement visible
 in the caption. Unresolved photograph-to-shape registration cannot establish a
 terrain landmark; neither can a camera direction alone.
 
+Check label discovery with no place selected: selection bypasses the zoom gate.
+Inspect whole-body framing, a closer view and rotation on a sparse asteroid,
+comet and small moon. Physical size alone does not require a separate label
+rule: the shared camera expresses zoom relative to the body. The shared feature
+preparer gives sparse catalogues a count floor of 200 when assigning discovery
+tiers, so two names are not stretched from minimum to maximum zoom. Explicit
+mission-landmark tiers remain authored choices; broad regions should appear
+while the whole body is still visible. Keep the existing screen-size, limb,
+overlap and label-cap checks, and verify the smallest named features still need
+enough screen space. Do not use a successful search-and-fly-to as proof that
+places can be discovered by looking at the body.
+
 ## Scope for existing moon upgrades
 
 For Moons-owner follow-up proposals and PRs, keep existing body geometry,

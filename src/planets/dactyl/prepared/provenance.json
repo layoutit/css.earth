@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dactyl",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "84f65c5455847ea9adba6a033dd740b340087f91db29f0da6a73f06c1e5230c0"
+    "sha256": "a59c8ff57964af13ba61b7a918ef567a76015690388b8175cea8e8bf64a02ddb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
   },
   "recipes": [
     {
@@ -298,7 +298,7 @@
       "sha256": "ad79a5bea948b73c0f842a3609939da15914a0dbb1d88ecc8f371ffefe50c2b4",
       "bytes": 163,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -318,7 +318,7 @@
       "sha256": "06ab52cf7b5a8fd767b87d4f6f8e1c807b3199a982984fe35c6d81a788710aaa",
       "bytes": 3273,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -337,10 +337,10 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "d182e8c57379e68ec2f94447df0e5a48d9152dee9d5ac14a8bd77002052bf21c",
+      "sha256": "115d0cc3a554d49831e5858129c8a93359c67829d85a0bb26d479b8eb5f93895",
       "bytes": 1066,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -363,10 +363,10 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "d45cb56ed4a6e2d3a53f278ad0c52b89fd824e798534c9571a135059b0fc0520",
+      "sha256": "90b788ae7b1212174e6f98bf2fe305040883a0404afbd62c38f186eb63fdee09",
       "bytes": 42071,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -395,7 +395,7 @@
       "sha256": "e4cf71e29027f0275c16de63ac1146d120953c0777bc32b22dcefdfe515b61a8",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -422,7 +422,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -455,13 +455,13 @@
           "url": "/scenes/dactyl/dactyl-shape-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/dactyl/dactyl-shape-surface@2x.webp",
           "bytes": 53806,
           "sha256": "2e56e5dd6f8a78adf8602c84239a2ceb028916917e3b630aac864a584a1a1582",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -519,9 +519,9 @@
       "outputs": [
         {
           "url": "/scenes/dactyl/dactyl-features.json",
-          "bytes": 2486,
-          "sha256": "a84e853b7bf135494d28a2b8b44247deefcd37e7fd6b297b3ed2ae6b3e0606fd",
-          "verification": "bytes-verified"
+          "bytes": 2490,
+          "sha256": "68041afcde9f9de7ed21bea04cb90cd5e0d9eafaec75ece9b287965141183e66",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lutetia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "d8f55b50d6bd738d62a23b4c7dfb4f226c2bd5cb5a1c11ff5b4cbb25a4dd201e"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
   },
   "recipes": [
     {
@@ -506,7 +506,7 @@
       "sha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52",
       "bytes": 2954640,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -540,7 +540,7 @@
       "sha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd",
       "bytes": 37775872,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -568,7 +568,7 @@
       "sha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac",
       "bytes": 5070,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -594,7 +594,7 @@
       "sha256": "b9435d017f9469503f099f224ca86567b6722ff877aa27d3a178a857e23b43b1",
       "bytes": 37775872,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -625,7 +625,7 @@
       "sha256": "619648154d976db683f43838d45668a140e9fac3ee508335eaf53076f2866fde",
       "bytes": 5104,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -645,7 +645,7 @@
       "sha256": "bd587a259341019b545870b8ec95df98192d86003d5dee82bac00122471b0ce1",
       "bytes": 10209,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -665,7 +665,7 @@
       "sha256": "4c8dd8e79922736361cfec1d91ef62c077141e96d6a5930abfc0589971e7f58b",
       "bytes": 1010,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -691,7 +691,7 @@
       "sha256": "5feb1d89610b0dcc1be87d6f4d80d604e723c1be4ec310262951de0581a4fbf7",
       "bytes": 134132,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -718,7 +718,7 @@
       "sha256": "f508382e29ce3a5c5f70723acc78f74488ac01491c005469b370bb423c97386d",
       "bytes": 154,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -745,7 +745,7 @@
       "sha256": "92372088c940f9dddf30480811a68ac518a0704a943de78c4bd622c8e8e87cc9",
       "bytes": 1335,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -778,19 +778,19 @@
           "url": "/scenes/lutetia/lutetia-elevation-thumbnail.webp",
           "bytes": 6322,
           "sha256": "28eadc457171bd3c6386469daa3fe910a13dd8318598c50868392df0d4114a30",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-elevation-surface@2x.webp",
           "bytes": 375170,
           "sha256": "7d7960dce265687aaba2acf3897e4cb20f9f87e9bf21c289490817286ce78534",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -822,13 +822,13 @@
           "url": "/scenes/lutetia/lutetia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-shape-surface@2x.webp",
           "bytes": 220590,
           "sha256": "1080889eaa3f187ed7029f70483458f9b9cec4b3bbe392c20ea09b56ddc4b4fe",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -864,13 +864,13 @@
           "url": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
           "bytes": 2266,
           "sha256": "1632f8974f762530b7827e9f105f90eed71de8dbdb2987cbf656eb3b4bb62974",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
           "bytes": 838004,
           "sha256": "c9a1287c2b3fd59416e0e156442b3fc9cbac8629a59e8f277f1659b4be37fe97",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -928,9 +928,9 @@
       "outputs": [
         {
           "url": "/scenes/lutetia/lutetia-features.json",
-          "bytes": 77442,
-          "sha256": "446eafbd04d35213492ff79c97c49ff73b167d34e8a490df75f489fd3ce97a54",
-          "verification": "bytes-verified"
+          "bytes": 77450,
+          "sha256": "8dd8ba48ba244f14817761051a4354dc19b36dd348afacd912bfbedf0a451eaa",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

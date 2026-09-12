@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
   },
   "recipes": [
     {
@@ -2031,8 +2031,8 @@
       "outputs": [
         {
           "url": "/scenes/europa/europa-features.json",
-          "bytes": 700905,
-          "sha256": "514b6e90449f5c3285e61734a360293b89bb181dc998ce9d5cb92907b7f05321",
+          "bytes": 700906,
+          "sha256": "d1354e460f8f51451224b448eee0dd1d20456edb33773912b094c041a417b6e8",
           "verification": "asset-manifest-pin"
         }
       ],
