@@ -176,6 +176,25 @@ because lowest-emission selection cannot separate them. The
 [Dimorphos README](../../../../src/planets/dimorphos/README.md) records the
 measured residuals, transfer distances and the archive's pixel-scale unit slip.
 
+Archives that ship images with SPICE kernels and no geometry at all use
+`format: "spice-camera"`: the recipe's `spice` block names the kernel set (pinned
+inputs of the observation's consumer group, in metakernel order), the observer
+and target SPK ids, the body-fixed frame, the instrument whose `INS<id>_*`
+variables define the pixel model, the header card that carries the exposure's
+spacecraft clock, the aberration correction (`LT+S`, `LT` or `NONE`), the
+instrument-frame axes that stored columns and rows follow, and how the image
+plane and its flag values are read. `tools/spice/` is the strict-TypeScript
+kernel subset (DAF, SPK types 1, 2, 3, 5, 8, 9 and 13, CK types 1 to 3, text
+kernels, leap seconds, SCLK, PCK pole models, frame classes 2 to 6, light time
+and stellar aberration) and `tools/spice/camera.mts` assembles the camera;
+`tools/objects/terrestrial-layers/spice-camera.mts` turns it into the same
+`cssearth-archived-camera@1` closure the OSIRIS and L'LORRI routes feed to
+`attachSourceGeometry`, so per-pixel geometry comes from the retained mesh. The
+route is validated end to end against Dimorphos's DRACO backplanes in
+`tests/objects/unit/dimorphos/draco-spice.test.mts` (0.5 px against the
+archive's own intercepts, the constant offset explained by kernel versions); no
+lens uses it yet, so a body that adopts it needs a rendered inspection.
+
 The PDS3 routes (OSIRIS GEO, AMICA) stay instrument decoders behind the same
 seam, decided 2026-09-12 after a code review: their archives do not declare
 plane units or semantics the way a PDS4 label does, and about half of each
