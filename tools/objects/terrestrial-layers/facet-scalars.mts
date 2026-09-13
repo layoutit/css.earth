@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve, basename} from 'node:path';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
+import {gunzipSync} from 'node:zlib';
 const exec = promisify(execFile);
 const safePath = (p: unknown): p is string => typeof p === 'string' && p.length > 0 && !p.startsWith('/') && !p.includes('\\') && !p.split('/').includes('..');
 
@@ -11,7 +12,7 @@ export function validateFacetScalarProfile(value: unknown, terrainValue: unknown
   const lens=parseFacetProfile(value),terrain=parseTransferTerrain(terrainValue);
   const t = lens.table, s = lens.surfaceSampling;
   if (!safePath(lens.meshPath) || lens.meshPath !== terrain?.path ||
-      !['sbmt-csv-zip', 'pds4-fits'].includes(t.format ?? '') || !t.field || typeof t.units !== 'string' ||
+      !['sbmt-csv-zip', 'facet-csv-gzip', 'pds4-fits'].includes(t.format ?? '') || !t.field || typeof t.units !== 'string' ||
       !Number.isSafeInteger(t.expectedRows) || t.expectedRows !== terrain.grid?.expectedFaces ||
       !Number.isFinite(t.maximumCentroidErrorMeters) || !(t.maximumCentroidErrorMeters > 0) ||
       (t.format === 'sbmt-csv-zip' && !safePath(t.member)) ||
@@ -190,6 +191,8 @@ export async function loadFacetScalarSurface(root: string, value: unknown, mesh?
   if (lens.table.format === 'sbmt-csv-zip') {
     const {stdout} = await exec('unzip', ['-p', resolve(root, lens.path), text(lens.table.member)], {maxBuffer: 192 * 1024 * 1024});
     table = parseFacetCsv(stdout, lens.table, mesh);
+  } else if (lens.table.format === 'facet-csv-gzip') {
+    table = parseFacetCsv(gunzipSync(await readFile(resolve(root, lens.path))).toString('utf8'), lens.table, mesh);
   } else {
     const [bytes, xml] = await Promise.all([readFile(resolve(root, lens.path)), readFile(resolve(root, text(lens.table.labelPath)), 'utf8')]);
     table = parseFacetFits(bytes, xml, lens.table, mesh);
@@ -197,7 +200,7 @@ export async function loadFacetScalarSurface(root: string, value: unknown, mesh?
   if (!table.report.validRows) throw new Error('Facet table contains no valid source values.');
   return {...createFacetScalarSampler(mesh, table, lens), report: {...table.report, sourceFormat: 'facet-scalars',
     sourceTable: basename(lens.path), sourceMesh: lens.meshPath, field: lens.table.field, units: lens.table.units,
-    validity: lens.table.validityField ? 'Finite ' + lens.table.validityField + ' support in the original table.' : 'Finite released values; this does not establish photographed coverage.',
+    validity: lens.table.validityField ? 'Finite ' + lens.table.validityField + ' support in the original table.' : lens.table.format === 'facet-csv-gzip' ? 'Finite prepared values; NaN preserves rejected or missing source coverage.' : 'Finite released values; this does not establish photographed coverage.',
     uncertainty: 'Released sigma retained where supplied; zero sigma is not a coverage or certainty claim.',
     registration: 'Every original table centroid verified against its exact source face; ' + (lens.table.registration === 'centroid-bijection' ? 'explicit complete centroid bijection reconciles exporter face ordering; ' : '') + 'closest full-source triangle transfer bounded in metres. No cross-facet interpolation.',
     previewPolicy: 'Exact unique source ray and facet value; ambiguous radial surfaces withheld.',

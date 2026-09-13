@@ -1,0 +1,29 @@
+{
+  "id": "epoxi-hartley2-hri-deconvolved",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "version": "1.0",
+  "title": "EPOXI Hartley 2 deconvolved HRI images",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml",
+      "label": "HRI context photographs"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml",
+      "checkedOn": "2026-09-13",
+      "locator": "Dataset identity and citation"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
