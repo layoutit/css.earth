@@ -39,7 +39,7 @@ startup failure restores the original attributes and children on the same
 elements. No second scene is kept as a fallback. Successful startup releases the
 initial attribute snapshot; subsequent navigation uses the existing lifecycle.
 
-JavaScript still provides camera input, animation, search and category filtering,
+JavaScript still provides camera input, animation, live search and category filtering,
 dataset switching and world navigation. Dataset buttons remain disabled until their owner is ready.
 The HTML reference pose does not restore a saved camera URL or publish the
 surrounding interactive world. This change adds prepared HTML to the first page;
@@ -52,6 +52,44 @@ cancellation never disturbs another decode. Page disposal rejects pending jobs
 and releases the worker. Failed validation never falls back to main-thread
 scene decoding.
 
+## Native search on Netlify
+
+The existing search field is a GET form. Submitting `q` keeps the object URL and
+returns matches in the same shell. Category buttons submit that form too, and
+Clear search is an ordinary link. An empty submission lists all objects. Object
+names, nebula aliases and named features use the same matching code as live
+search. Earth's cities come from its active named-feature index. Feature results
+are links to their owning body with a `feature` parameter; JavaScript adds the
+camera flight after that body is ready.
+
+`netlify/edge-functions/search-route.ts` only routes requests that contain `q`
+to the Node function in `netlify/functions/search.ts`. It keeps optional category
+and view parameters, and passes ordinary pages and assets straight through.
+The search work runs in Node because parsing the shell and searching the index
+can exceed Netlify's edge CPU budget. The application continues to build static
+pages; it does not need an Astro server adapter.
+
+The function fetches the current object's prebuilt page without a query and
+updates the retained search controls and rows between the `search-shell`
+boundaries. The scene, head, stylesheet bytes and application scripts pass
+through unchanged. It neither bundles nor regenerates scene banks. The feature
+index is checked against its byte count and SHA-256 pin from that same page;
+warm function instances cache only authenticated index data. Query responses
+are not cached and carry `noindex, follow`. An index failure leaves object
+search usable and displays a retry message in the existing feature section.
+
+JavaScript adopts the submitted query and selected category, keeps the form and
+result elements, and adds live filtering and in-place navigation. Both native
+and enhanced controls use the same styles. Native navigation still uses the
+prepared reference pose described above; camera restoration and feature flights
+require JavaScript.
+
+`tools/search-server.mts` calls the same routing and request handler in Astro dev
+and `pnpm preview`. `netlify.toml` declares the production build, Node function
+and edge route. Deployment is deferred: before launch, verify a real Netlify
+Deploy Preview, prepared asset restoration, query routing and the initial page
+with JavaScript disabled. No site has been deployed by this PR.
+
 For image/DOM leases, read [prepared navigation ownership](prepared-navigation-ownership.md).
 For the camera handoff and interruption behavior, read [flight lifecycle](flight-lifecycle.md).
 
@@ -63,6 +101,8 @@ After building the packages and renderer, check page metadata with:
 node --test site/test/object-page-data.test.mts
 node --test tools/serialize-prepared-scene.test.mts
 node site/test/progressive-enhancement-browser.mts http://127.0.0.1:4210
+node --test site/test/search-response.test.mts
+node site/test/search-browser.mts http://127.0.0.1:4210
 ```
 
 Worker reuse, cancellation and disposal are covered by
@@ -76,6 +116,17 @@ phone widths, exercises native controls and links, then holds and releases
 scripts on one page to verify retained element identity, unchanged tab styles,
 selection-dependent dataset context and exactly one scene.
 It also aborts the object transport to check that the base scene stays usable.
+
+The search browser check submits the form, clears it, uses category buttons,
+matches aliases, and follows named-feature and city links with JavaScript
+disabled at desktop and phone widths. It then delays startup and verifies the
+same scene, form, result rows, query and computed result styles before exercising
+live search. Native feature links stay usable while the client index loads.
+The request tests cover parameter routing, escaping, pinned-index
+failure and unchanged scene bytes. Netlify's local function build checks the
+server bundle; it does not prove a deployed site's configuration.
+
+![A native Titan search in the existing Saturn scene with JavaScript disabled](images/native-search.png)
 
 The [continuous Saturn capture](../site/test/evidence/progressive-enhancement.mp4) shows
 this change at 1280×900: application scripts are held for the first ten seconds,

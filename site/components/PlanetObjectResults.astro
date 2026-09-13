@@ -5,8 +5,8 @@ import PreparedObjectResult from './PreparedObjectResult.astro';
 import { prepareNebulaSearch } from '../prepare-nebula-search.mts';
 import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount, matchesObjectCategory } from "../object-categories.mts";
 
-interface Props { activeObjectId?: string; }
-const { activeObjectId } = Astro.props;
+interface Props { activeObjectId?: string; formId?: string; }
+const { activeObjectId, formId } = Astro.props;
 const host = PLANET_SEARCH_OBJECTS.find(object => object.classification === 'star' && object.distanceAu === 0);
 if (!host) throw new Error('Prepared object search needs the shared world host.');
 const nebulae = prepareNebulaSearch(Object.values(import.meta.glob('../../src/objects/*/source/nebula.json', { eager: true, import: 'default' })), host.route);
@@ -31,10 +31,10 @@ const groups = [...types].map(([type, label]) => ({ type, label,
 ---
 
 <div class="planet-object-tabs" role="tablist" aria-label="Object categories">
-  {groups.map((group) => <button type="button" role="tab"
+  {groups.map((group) => <button type="submit" form={formId} name="category" value={group.type} role="tab"
     id={`object-tab-${group.type}`} data-object-tab={group.type}
     aria-controls="object-category-results" aria-selected={group.type === defaultCategory ? 'true' : 'false'}
-    tabindex={group.type === defaultCategory ? 0 : -1}>
+    tabindex="0">
     <span>{group.label}</span>{" "}<span class="planet-object-tab-count">({group.count})</span>
   </button>)}
 </div>

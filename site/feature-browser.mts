@@ -1,33 +1,9 @@
 import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
-import { record, requiredElement } from './browser-types.mts';
-import { searchDestinations } from './destination-search.mts';
+import { requiredElement } from './browser-types.mts';
 
-/** A row of the prepared cross-body feature index: enough to list, navigate and select. */
-export interface IndexedFeature { readonly objectId: string; readonly id: string; readonly name: string; readonly type: string; readonly diameterKm: number; readonly searchNames: readonly string[]; readonly searchContext: string; }
-interface FeatureIndex { readonly objects: readonly { readonly id: string; readonly name: string; readonly route: string; readonly count: number; readonly lensIds?: readonly string[] }[]; readonly features: readonly IndexedFeature[]; }
-interface FeatureIndexPin { readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number; }
-
-const kilometres = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
-
-function parsePin(source: string | undefined): FeatureIndexPin | null {
-  const value: unknown = JSON.parse(source ?? 'null');
-  if (!record(value) || value.count === 0) return null;
-  if (typeof value.url !== 'string' || !value.url.startsWith('/') || typeof value.sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(value.sha256) ||
-      !Number.isSafeInteger(value.bytes) || Number(value.bytes) < 1 || !Number.isSafeInteger(value.count)) throw new TypeError('Feature index pin is invalid.');
-  return { url: value.url, bytes: Number(value.bytes), sha256: value.sha256, count: Number(value.count) };
-}
-function parseIndex(value: unknown, pin: FeatureIndexPin): FeatureIndex {
-  if (!record(value) || value.schema !== 'cssearth-prepared-feature-index@1' || !Array.isArray(value.objects) || !Array.isArray(value.features) || value.features.length !== pin.count) throw new TypeError('Feature index is incompatible.');
-  for (const feature of value.features as unknown[]) {
-    if (!record(feature) || ['objectId', 'id', 'name', 'type', 'searchContext'].some(key => typeof feature[key] !== 'string') || typeof feature.diameterKm !== 'number' ||
-        !Array.isArray(feature.searchNames) || !feature.searchNames.every(name => typeof name === 'string')) throw new TypeError('Feature index row is invalid.');
-  }
-  for (const object of value.objects as unknown[]) {
-    if (!record(object) || ['id', 'name', 'route'].some(key => typeof object[key] !== 'string')) throw new TypeError('Feature index object is invalid.');
-    if (object.lensIds !== undefined && (!Array.isArray(object.lensIds) || !object.lensIds.length || !object.lensIds.every(id => typeof id === 'string' && id.length > 0))) throw new TypeError('Feature index datasets are invalid.');
-  }
-  return value as unknown as FeatureIndex;
-}
+import { parseFeaturePin, parseFeatureIndex, matchFeatures, featureResult } from './feature-search.mts';
+import type { IndexedFeature, FeatureIndex } from './feature-search.mts';
+export type { IndexedFeature } from './feature-search.mts';
 
 /** Retained search rows over every body's prepared named features. Selecting a feature of the
  * mounted body asks its runtime to fly there; another body's feature navigates first, carrying
@@ -36,13 +12,13 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
   const candidate = documentTarget.querySelector<HTMLElement>('.planet-feature-results');
   if (!candidate) return null;
   const root = candidate;
-  const pin = parsePin(root.dataset.featureIndex);
+  const pin = parseFeaturePin(root.dataset.featureIndex);
   const hint = requiredElement(root, '.planet-feature-hint');
-  const buttons = [...root.querySelectorAll('button')];
+  const buttons = [...root.querySelectorAll<HTMLAnchorElement>('.planet-destination-result')];
   const events = new AbortController();
   const currentObjectId = () => documentTarget.body.dataset.objectShell || objectId;
   let provider: SurfaceFeatureNavigationRuntime | null = null, index: FeatureIndex | null = null, pending: Promise<FeatureIndex> | null = null;
-  let matches: IndexedFeature[] = [], query = '', revision = 0, destroyed = false, selecting = false;
+  let matches: IndexedFeature[] = [], query = documentTarget.querySelector<HTMLInputElement>('.planet-sidebar-search')?.value.trim().toLocaleLowerCase('en') ?? '', revision = 0, destroyed = false, selecting = false;
   function clearRows() {
     matches = [];
     for (const button of buttons) button.parentElement!.hidden = true;
@@ -55,32 +31,29 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
     if (bytes.byteLength !== pin.bytes) throw new Error('Feature index size drifted.');
     const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(value => value.toString(16).padStart(2, '0')).join('');
     if (digest !== pin.sha256) throw new Error('Feature index identity drifted.');
-    return parseIndex(JSON.parse(new TextDecoder().decode(bytes)), pin);
+    return parseFeatureIndex(JSON.parse(new TextDecoder().decode(bytes)), pin);
   }
   async function search(value: string) {
     if (destroyed) return;
+    if (query !== value) clearRows();
     query = value;
     const request = ++revision;
-    clearRows();
     root.hidden = !value.trim() || !pin;
-    if (root.hidden) { onResults(0); return; }
+    if (root.hidden) { clearRows(); onResults(0); return; }
     try {
       pending ??= load().catch(error => { pending = null; throw error; });
       index ??= await pending;
       if (destroyed || request !== revision) return;
-      const names = new Map(index.objects.map(object => [object.id, object.name]));
-      // The mounted body's own matches list first; other bodies follow in search order.
-      const ranked = searchDestinations(index.features.map(feature => ({ feature, names: feature.searchNames, searchContext: `${feature.searchContext} ${names.get(feature.objectId)?.toLocaleLowerCase('en') ?? ''}` })), value, buttons.length).map(match => match.feature);
-      matches = [...ranked.filter(feature => feature.objectId === currentObjectId()), ...ranked.filter(feature => feature.objectId !== currentObjectId())];
+      matches = matchFeatures(index, value, currentObjectId(), buttons.length);
       for (const [row, button] of buttons.entries()) {
         const feature = matches[row];
         button.parentElement!.hidden = !feature;
         if (!feature) continue;
-        const body = feature.objectId === currentObjectId() ? '' : ` · ${names.get(feature.objectId) ?? feature.objectId}`;
-        requiredElement(button, '.planet-destination-result-name').textContent = feature.name;
-        const size = feature.diameterKm > 0 ? `${kilometres.format(feature.diameterKm)} km` : ['LS', 'IM', 'SS', 'RT'].includes(feature.searchContext) || /site|traverse|position/u.test(feature.type.toLowerCase()) ? '' : 'size unpublished';
-        requiredElement(button, '.planet-destination-result-context').textContent = `${feature.type}${size ? ` · ${size}` : ''}${body}`;
-        button.ariaLabel = `${feature.name}, ${feature.type}${size ? `, ${feature.diameterKm > 0 ? `${kilometres.format(feature.diameterKm)} kilometres` : size}` : ''}${body}`;
+        const result = featureResult(feature, index, currentObjectId());
+        requiredElement(button, '.planet-destination-result-name').textContent = result.name;
+        requiredElement(button, '.planet-destination-result-context').textContent = result.context;
+        button.ariaLabel = result.label;
+        button.href = result.href;
       }
       hint.textContent = matches.length ? 'Named features' : 'No matching named features.';
       onResults(matches.length || 1);
@@ -93,7 +66,7 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
   async function select(feature: IndexedFeature | undefined) {
     if (destroyed || selecting || !feature) return;
     selecting = true;
-    for (const button of buttons) button.disabled = true;
+    for (const button of buttons) button.ariaDisabled = 'true';
     try {
       onSelected(feature);
       if (feature.objectId === currentObjectId() && provider) {
@@ -111,10 +84,14 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
       else documentTarget.dispatchEvent(new CustomEvent('objectnavigate', { bubbles: true, detail: { objectId: feature.objectId, feature: feature.id } }));
     } finally {
       selecting = false;
-      if (!destroyed) for (const button of buttons) button.disabled = false;
+      if (!destroyed) for (const button of buttons) button.ariaDisabled = 'false';
     }
   }
-  buttons.forEach((button, row) => button.addEventListener('click', () => void select(matches[row]), { signal: events.signal }));
+  buttons.forEach((button, row) => button.addEventListener('click', event => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || !matches[row]) return;
+    event.preventDefault();
+    void select(matches[row]);
+  }, { signal: events.signal }));
   return Object.freeze({
     bind(next: SurfaceFeatureNavigationRuntime | null | undefined) { if (destroyed) return; provider = next ?? null; if (query) void search(query); },
     search,
