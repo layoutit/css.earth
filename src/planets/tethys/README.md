@@ -6,6 +6,7 @@
 | --- | --- |
 | Monochrome | [USGS Cassini mosaic](https://astrogeology.usgs.gov/search/map/tethys_cassini_global_mosaic_293m), 2012, about 293 m/pixel. Exactly zero marks gaps; other dark pixels remain observed. |
 | Enhanced color | [PIA18439](https://www.jpl.nasa.gov/images/pia18439-color-maps-of-tethys-2014/), 2014. Ultraviolet/infrared colors extend beyond human vision; producer calibration, registration and photometric correction are retained. |
+| ISS photograph | Cassini ISS narrow-angle frame [N1807429484](source/observations/N1807429484_1_CALIB.LBL), 11 April 2015, clear filters, about 1.1 km/pixel from 190,000 km. CISSCAL-calibrated I/F from the [PDS Ring-Moon Systems Node](https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484). Camera from Cassini SPICE kernels in the shared [Cassini kernel bank](../../spice/cassini/manifest.json), refined to the limb. Empirical Lommel-Seeliger brightness; not measured albedo. |
 | Shape and Elevation | [Weirich et al. 2025 SPC V1.0](https://doi.org/10.26033/hpv0-eh61); Elevation is radius minus 531 km, colored over −12.5 to +12.5 km. |
 | Relative albedo | The same SPC release’s dimensionless brightness field, less validated than topography; not geometric albedo or calibrated reflectance. Its 0.5–1.5 display clips above 1.5. |
 | Infrared and Ice absorption | [Nantes Cassini VIMS archive](https://vims.univ-nantes.fr/), 2007–2015. All 9 selected observations supply near-2.02 µm continuum-relative absorption; 7 supply near-2.02/1.59/1.28 µm false-color infrared after clipping exclusions. |
@@ -27,6 +28,8 @@ The [B9 qualification report](https://github.com/layoutit/cssEarth/blob/86664627
 The [Tethys visual review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b9-cassini-ice-surfaces/VISUAL-REVIEW-TETHYS.md#final-main-integration-review) covers six serial captures of the normal, infrared and ice views at DPR 1 and 2, reviewed on 2026-09-10. [Reports and images](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b9-cassini-ice-surfaces/evidence/README.md) identify capture base `80e19c51349f713c9a9a64b8ef1cbb78917f0fc7` plus the then-modified source, prepared and served-file pins. The same qualification report records failed broader suites and an incomplete full build.
 
 ## Known problems
+
+- The ISS photograph is one frame with an empirical Lommel-Seeliger law, and its reconstructed pointing needed a 6.8 px limb correction.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Tethys (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
 
@@ -103,3 +106,17 @@ Native source-camera reconstruction and dense independent aperture checks test d
 The [body registration record](source/cassini-ice/evidence/registration.md), [preparation receipt](source/cassini-ice/preparation-receipt.json) and [B9 source review](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b9-cassini-ice-surfaces/source-review/tethys.md) contain source-selection and independent-check evidence. The [B9 report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b9-cassini-ice-surfaces/README.md) gives reproduction commands and the shared measurement definitions.
 
 </details>
+
+## Cassini ISS photograph
+
+The lens projects one Cassini ISS narrow-angle frame onto the SPC shape model. The archive ships the calibrated image without geometry, so the camera comes from SPICE kernels. The spacecraft clock, frame, instrument, ephemeris and pointing kernels are pinned once in the [Cassini kernel bank](../../spice/cassini/manifest.json) for every Saturnian body; restore them with `node tools/spice/kernel-bank.mts acquire cassini`. The camera is evaluated at mid-exposure, halfway between the start and stop clock counts in the PDS3 label.
+
+| Check | Result |
+| --- | --- |
+| Range and phase against OPUS's geometry for this frame | Within 0.3 km and 0.001° |
+| Limb residual before and after refinement, holdout edges | 5.4 px → 0.70 px RMS |
+| Refinement rotation | 0.012°, a 6.8 px boresight shift |
+| Surface showing the photograph | 26% of the displayed surface: 3,428,177 of 13,174,380 texels |
+| Largest distance from the displayed mesh to the source surface | 4.39 km, within the 5.31 km limit |
+
+A texel keeps the photograph only when its four image contributors lie within 3 km of the closest source-mesh point, about two pixel footprints, and that point lies within 5.31 km of the displayed mesh and is visible to the camera. The far side, the night side and strongly foreshortened surface keep the grid. Brightness uses the empirical Lommel-Seeliger law with incidence and emission limited to 80°; no published Tethys photometric model has been checked yet.

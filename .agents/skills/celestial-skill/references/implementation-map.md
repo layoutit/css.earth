@@ -230,7 +230,9 @@ Tethys's Cassini ISS lens is the first lens on this route. It reads its kernels
 from the shared Cassini bank, decodes a VICAR image, and evaluates the camera at
 mid-exposure from the clock counts in the PDS3 label (`image.format:
 "vicar-pds3"`, `clock.start` and `clock.stop`). `IAU_<body>` frames resolve
-without a frame kernel, as they do in SPICE.
+without a frame kernel, as they do in SPICE. Kernel cameras bound the separation of
+bilinear image contributors by the displayed mesh's simplification error rather
+than 50 m, so frames with kilometre-scale pixels can transfer.
 
 Archived and kernel pointing carries the archive's error: a fraction of a pixel
 for a solution tuned to the images, tens of pixels for a reconstructed C-kernel.
