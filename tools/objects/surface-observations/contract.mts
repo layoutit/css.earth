@@ -54,6 +54,8 @@ export interface PixelGeometry {
   /** Distance from the camera to the pixel's surface point, in metres. */
   rangeMeters(index: number): number;
   incidence(index: number): number; emission(index: number): number; phase(index: number): number | undefined;
+  /** Whether the pixel's surface point lies in a cast shadow, when the geometry can trace a ray toward the Sun. */
+  shadowed?(index: number): boolean;
   report: Record<string, unknown>;
 }
 
@@ -62,6 +64,8 @@ export interface ObservationPhotometry {
   gain(incidence: number, emission: number, phase: number | undefined): number | null;
   report: Record<string, unknown>;
   units?: string;
+  /** Whether displayed brightness keeps the acquisition illumination. A normalizing model cannot invert a cast shadow, so its lens withholds shadowed pixels. */
+  retainsIllumination: boolean;
 }
 
 /** Transfer limits after validation. Separation is either a fixed distance or a multiple of the contributors' measured footprint. */
@@ -108,6 +112,8 @@ export interface SurfacePolicy {
   photometry: Record<string, unknown>;
   limits: Record<string, unknown>;
   limitations?: string;
+  /** Evidence the format measured once for the whole lens, such as filter camera registration. */
+  registration?: Record<string, unknown>;
 }
 
 export interface LoadContext { sourceDirectory: string; source: SourceAccess; radial: RadialSurface; config: SurfaceConfig; entries: readonly SourceInput[] }

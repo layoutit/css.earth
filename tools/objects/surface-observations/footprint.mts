@@ -3,7 +3,7 @@ import type { SourceMesh } from '../terrestrial-layers/contracts.mts';
 import type { FootprintSample, ObservationCamera, ObservationFrame, ObservationImage, ObservationPhotometry, PixelGeometry, TransferLimits } from './contract.mts';
 import { pixelAngle } from './cameras.mts';
 
-export interface FootprintSource { image: ObservationImage; camera: Pick<ObservationCamera, 'project'>; geometry: PixelGeometry; photometry: Pick<ObservationPhotometry, 'gain'> }
+export interface FootprintSource { image: ObservationImage; camera: Pick<ObservationCamera, 'project'>; geometry: PixelGeometry; photometry: Pick<ObservationPhotometry, 'gain' | 'retainsIllumination'> }
 
 /** Interpolate the four detector pixels around a projected point. Every contributor must have a surface point, pass the archive's
  * quality verdict, face the camera within the emission limit, lie on the sampled surface patch and admit a photometric gain.
@@ -23,6 +23,8 @@ export function sampleFootprint({ image, camera, geometry, photometry }: Footpri
   // Every bilinear contributor must lie on this surface patch. This rejects foreground and background mixing at a neck or limb.
   const separationMeters = Math.max(...ids.map(i => geometry.distanceMeters(i, point)));
   if (separationMeters > (typeof maximumSeparationMeters === 'number' ? maximumSeparationMeters : maximumSeparationMeters(ids))) return { reason: 'geometry-mismatch', separationMeters };
+  // A normalizing model cannot recover surface the Sun does not reach, so a cast shadow is withheld rather than brightened.
+  if (!photometry.retainsIllumination && geometry.shadowed && ids.some(i => geometry.shadowed!(i))) return { reason: 'shadowed' };
   const weights = [(1 - tx) * (1 - ty), tx * (1 - ty), (1 - tx) * ty, tx * ty];
   const gains = ids.map(i => photometry.gain(geometry.incidence(i), geometry.emission(i), geometry.phase(i)));
   if (!gains.every((gain): gain is number => gain !== null)) return { reason: 'photometry' };

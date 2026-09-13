@@ -4,7 +4,7 @@ import { resolvePublishedPhotometry, validPublishedPhotometryShape, type Resolve
 import type { SourceMesh } from './contracts.mts';
 import { parseControlledCamera, parseCameraFrame, parseCameraShape, parseRadialTableProfile, parseCameraMosaic, parseCameraColor } from './source-records.mts';
 type Vector = readonly number[] | Float32Array | Float64Array;
-interface CameraImage {data:Float32Array | Float64Array; width:number; height:number; offset?:number; encoding?:string; allowZero?:boolean; sampleFormat?:string;
+export interface CameraImage {data:Float32Array | Float64Array; width:number; height:number; offset?:number; encoding?:string; allowZero?:boolean; sampleFormat?:string;
  missing?:Uint8Array;allowFiniteSigned?:boolean;quality?:{records:number;badBlockPixels:number;saturatedPixels:number;specialPixels:number;withheldPixels:number}}
 type CameraFrame = ReturnType<typeof parseCameraFrame>;
 interface CameraEntry {expectedSha256?:string;path:string;width?:number;height?:number}
@@ -104,7 +104,7 @@ export async function resolveCatalogCamera(sourceDirectory: string, source: unkn
 
 // Only edge-connected low-signal sky is withheld. Isolated dark crater floors
 // remain observed, even when their intensity is below this authored threshold.
-function maskBackground(image: CameraImage,threshold: number | undefined){
+export function maskBackground(image: CameraImage,threshold: number | undefined){
   if(threshold===undefined)return;
   if(!Number.isFinite(threshold)||threshold<0)throw new Error('Invalid source background threshold.');
   const mask=image.missing??new Uint8Array(image.data.length),seen=new Uint8Array(mask.length),queue=new Int32Array(mask.length);let end=0;
@@ -230,7 +230,7 @@ export async function loadShapeCameraImage(sourceDirectory: string, source: unkn
   return image;
 }
 
-const framePaths=(f: CameraFrame)=>[f.path,f.labelPath,...(f.cameraCatalog?[f.cameraCatalog.path,f.cameraCatalog.labelPath,f.cameraCatalog.instrumentPath]:[]),...(f.quality?[f.quality.rawPath,f.quality.rawLabelPath,f.quality.badDataPath,f.quality.badDataLabelPath]:[])];
+export const framePaths=(f: CameraFrame)=>[f.path,f.labelPath,...(f.cameraCatalog?[f.cameraCatalog.path,f.cameraCatalog.labelPath,f.cameraCatalog.instrumentPath]:[]),...(f.quality?[f.quality.rawPath,f.quality.rawLabelPath,f.quality.badDataPath,f.quality.badDataLabelPath]:[])];
 
 function sampleStatistics(values: ArrayLike<number>,missing?: Uint8Array){
   let count=0,minimum=Infinity,maximum=-Infinity,sum=0,negative=0,zero=0;
@@ -312,8 +312,8 @@ export async function prepareShapeCameraColor(sourceDirectory: string,entries: r
 
 /** Measure every registered camera against its declared reference images. References are used in order: the first is the
  * camera seed, and each later one once a check has confirmed it. Every channel camera must be confirmed. */
-async function checkBandRegistration(sourceDirectory: string,channels: ReturnType<typeof parseCameraColor>['channels'],
-  registration: NonNullable<ReturnType<typeof parseCameraColor>['registration']>,mesh: Awaited<ReturnType<typeof loadCameraShape>>){
+export async function checkBandRegistration(sourceDirectory: string,channels: ReturnType<typeof parseCameraColor>['channels'],
+  registration: NonNullable<ReturnType<typeof parseCameraColor>['registration']>,mesh: Parameters<typeof registerCameraBands>[0]['mesh']){
   const frames=new Map<string,{frame:CameraFrame;filter:string}>();
   for(const entry of [...registration.references.map(frame=>({frame,filter:'reference'})),...channels.flatMap(channel=>channel.frames.map(frame=>({frame,filter:channel.filter})))]){
     if(frames.has(entry.frame.id))throw new Error(`Registered camera ids must be unique: ${entry.frame.id}`);

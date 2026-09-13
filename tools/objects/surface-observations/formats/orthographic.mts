@@ -2,7 +2,7 @@
 import type { ObservationFrame, SurfaceObservationFormat } from '../contract.mts';
 import { array, decodeProfile, dimensions, number, shape, text, parseSurfaceGeometry } from '../../terrestrial-layers/source-records.mts';
 import { requireArray, requireRecord } from '../../../source-values.mts';
-import { checkKeys, parseDisplay, validateEnvelope } from '../recipe.mts';
+import { OPTIONAL_LENS_KEYS, checkKeys, parseDisplay, validateEnvelope } from '../recipe.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeIsis2Qube } from '../../terrestrial-layers/isis2-qube.mts';
@@ -14,7 +14,7 @@ const parseOrthographicLens = shape({ id: text, format: text, consumer: text, me
 const lensPaths = (recipe: ReturnType<typeof parseOrthographicLens>) => recipe.frames.flatMap(frame => [frame.path, ...frame.coordinatePaths]);
 
 function validateOrthographicRecipe(value: unknown, sourceGeometry: unknown) {
-  checkKeys(value, ['id', 'format', 'consumer', 'metadata', 'frames', 'grid', 'maximumCoordinateErrorMeters', 'transfer', 'display'], [], CONTEXT);
+  checkKeys(value, ['id', 'format', 'consumer', 'metadata', 'frames', 'grid', 'maximumCoordinateErrorMeters', 'transfer', 'display'], [...OPTIONAL_LENS_KEYS], CONTEXT);
   for (const frame of requireArray(requireRecord(value).frames)) checkKeys(frame, ['id', 'path', 'coordinatePaths'], [], `${CONTEXT} frame`);
   checkKeys(requireRecord(value).transfer, ['maximumSourceDistanceMeters'], [], `${CONTEXT} transfer`);
   const recipe = decodeProfile(parseOrthographicLens, value, 'Invalid source-registered orthographic observation.'), geometry = parseSurfaceGeometry(sourceGeometry);
