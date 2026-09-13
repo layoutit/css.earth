@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8f3bb875536d51325fee13bb0c52c0a453c8194f0f79d055b3e9b1e223547175"
+    "sha256": "94f75fe55f49974ef9998d5fa8c04efca8a54d47687b1188fde3854ccc06cbc8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "89f308b718a7729029a33a51e7ac3ba8a1727b99ce01ad265e54868f4def0430",
+      "sha256": "4b4822785ae0925fce2407ce9c73ca97f97ad17383c46fdac3ed591cc88fac5b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -117,6 +117,13 @@
                   "controlPath": "photography/deep-impact/iv05070405_9000688_001_r.json"
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumLogMad": 0.3,
+                "maximumGain": 1.5
+              },
               "transfer": {
                 "maximumSourceDistanceMeters": 90,
                 "maximumSeparationMeters": 200,
@@ -127,17 +134,12 @@
                 "model": "observed",
                 "maximumGain": 1
               },
-              "selection": "finest-resolution",
-              "levelMatching": {
-                "samplesPerTriangle": 64,
-                "minimumPairs": 64,
-                "maximumLogMad": 0.3,
-                "maximumGain": 1.5
+              "display": {
+                "percentiles": [
+                  1,
+                  99.5
+                ]
               },
-              "displayPercentiles": [
-                1,
-                99.5
-              ],
               "metadata": {
                 "label": "Deep Impact · 2005",
                 "coverage": "Photographs taken as the impactor approached Tempel 1, before the collision. Wider views surround a closer view of the impact region. The gray grid marks gaps; the original shadows remain."
@@ -185,6 +187,13 @@
                   "controlPath": "photography/next/n30048te02_rr.json"
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 32,
+                "minimumPairs": 64,
+                "maximumLogMad": 0.3,
+                "maximumGain": 3
+              },
               "transfer": {
                 "maximumSourceDistanceMeters": 90,
                 "maximumSeparationMeters": 200,
@@ -195,17 +204,12 @@
                 "model": "observed",
                 "maximumGain": 1
               },
-              "selection": "finest-resolution",
-              "levelMatching": {
-                "samplesPerTriangle": 32,
-                "minimumPairs": 64,
-                "maximumLogMad": 0.3,
-                "maximumGain": 3
+              "display": {
+                "percentiles": [
+                  1,
+                  99.5
+                ]
               },
-              "displayPercentiles": [
-                1,
-                99.5
-              ],
               "metadata": {
                 "label": "Stardust-NExT · 2011",
                 "coverage": "Stardust returned six years after Deep Impact. These photographs show a different encounter and viewing direction, rather than a direct before-and-after comparison. Original shadows remain; the gray grid marks gaps."
