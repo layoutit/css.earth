@@ -20,7 +20,7 @@ Feature notes: 4 of the labelled names carry a caption note, the lead summary of
 
 - This is approximate registration, not a new photogrammetric solution. The closest observation withholds five source pixels next to known sky/invalid boundaries to reflect that uncertainty; valid lower-resolution imagery supplies overlap.
 
-- **Faithfulness status:** The Monochrome lens is retained as a coarse observation and pointing aid, not as a feature-registered photographic surface. The existing shape and Elevation view remain the supported measured/model views.
+- **Faithfulness status:** The Monochrome lens is retained as a coarse observation and pointing aid, not as a feature-registered photographic surface. A saturated white strip remains near the south pole of the map; its source frame is not identified. Limiting incidence and emission to 70° left the strip and cut coverage from 71.0% to 67.5%, so the lens keeps its 72° incidence and 75° emission limits. The existing shape and Elevation view remain the supported measured/model views.
 
 - **Shape and elevation:** It describes overall shape, not altimetry or height above a geoid; unresolved/modelled regions and potentially exaggerated facets/depressions remain source limitations.
 
