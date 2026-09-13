@@ -486,7 +486,7 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   lensButton.value = 'prepared-dataset'; lensDetail.dataset.focusLensDetails = lensButton.value;
   lensBank.selectors.set('[data-focus-lens]', [lensButton]);
   lensBank.selectors.set('[data-focus-lens-details]', [lensDetail]);
-  card.selectors.set('[data-focus-lens-bank]', [lensBank]);
+  card.selectors.set('[data-focus-lens-bank], [data-focus-facts-bank]', [lensBank]);
   const readout = new Element();
   for (const selector of ['.planet-view-date', '[data-view-date]', '.planet-view-coordinates', '[data-view-latitude]', '[data-view-longitude]',
     '[data-view-altitude]', '[data-view-distance-label]', '.planet-view-altitude', '.planet-view-scale', '[data-view-scale-label]', '.planet-view-ruler', '.planet-view-measure']) {

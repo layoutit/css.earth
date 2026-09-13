@@ -46,6 +46,29 @@ test('nearby nebula labels wake and follow the camera while both extragalactic f
   expect(document.count).toBe(nodes); runtime.destroy();
 });
 
+test('nebula label and its double-click target sit above the prepared cloud', () => {
+  const payload = { ...read('local-group/prepared/catalogue.json'), objects: [] };
+  const nebulae = read('m42/source/nebula.json'), object = nebulae.objects[0];
+  const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
+  const onSelect = vi.fn(), runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement,
+    before: before as unknown as HTMLElement, payload, nebulae, onSelect,
+    nebulaFrames: new Map([[object.detailedObjectId, { ...nebulae.frame, originM: object.positionM,
+      localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1e15,
+      boundsUnits: { min: [-5, -10, -2], max: [5, 10, 2] } }]]) });
+  const viewport = { focalPixels: 600, principalOffsetPixels: [0,0] as const, widthPixels: 800, heightPixels: 600 };
+  const pose = { ...nebulae.frame, pose: { positionM: [object.positionM[0], object.positionM[1], object.positionM[2] + 1e17] as const,
+    orientationXyzw: [0, 0, 0, 1] as const } };
+  runtime.select(object.id);
+  const rectangles = runtime.publish(pose, viewport, 0), top = -600 * 1e16 / 9.8e16;
+  expect(rectangles).toHaveLength(1);
+  expect(rectangles[0]!.bottom).toBeCloseTo(top - 8);
+  const picking = screenPicking(host as unknown as HTMLElement), label = runtime.inspect().labels[object.id]!;
+  expect(picking.pick(0, top - 12)).toBe(label);
+  expect(picking.pick(0, -12)).toBeNull();
+  label.dispatchEvent(new Event('dblclick')); expect(onSelect).toHaveBeenCalledWith(object);
+  runtime.destroy();
+});
+
 test('one retained catalogue combines both classes; cluster fades, source-aware focus and aperture follow the same observer', () => {
   const payload = read('local-group/prepared/catalogue.json'), clusters = read('galaxy-clusters/prepared/catalogue.json');
   const galaxyCount = payload.objects.filter((row: { membership: { group: string } }) => row.membership.group === 'local-group').length;

@@ -1,9 +1,10 @@
 import { isPreparedCluster, isPreparedNebula, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
+import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
-import { admitGalaxyLabels, projectCatalogAperture, projectCatalogPosition } from './galaxy-catalog-layout.js';
+import { admitGalaxyLabels, catalogVolumeCorners, projectCatalogAperture, projectCatalogBounds, projectCatalogPosition } from './galaxy-catalog-layout.js';
 import type { ProjectedGalaxy } from './galaxy-catalog-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
@@ -14,6 +15,7 @@ interface Entry {
   readonly label: HTMLElement;
   readonly aperture: HTMLElement | null;
   readonly activate: (event: Event) => void;
+  readonly cornersM: readonly (readonly number[])[] | null;
   width: number;
   height: number;
   /** This frame's projected label anchor; written to the label only while it shows or fades. */
@@ -24,8 +26,9 @@ interface Entry {
 }
 
 /** One fixed catalogue bank, shared by every detailed scene and every camera focus. */
-export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, nebulae, onSelect = () => {}, pickingHost = host }: {
+export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, nebulae, nebulaFrames, onSelect = () => {}, pickingHost = host }: {
   host: HTMLElement; before: Element; payload: unknown; clusters?: unknown; nebulae?: unknown; onSelect?: (object: PreparedCatalogObject) => void; pickingHost?: HTMLElement;
+  nebulaFrames?: ReadonlyMap<string, DensityVolumeFrame>;
 }) {
   const catalog = parsePreparedGalaxyCatalog(payload), document = host.ownerDocument;
   const clusterCatalog = clusters === undefined ? null : parsePreparedClusterCatalog(clusters);
@@ -67,7 +70,9 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
     label.addEventListener('keydown', event => { if (event.key === 'Enter') activate(event); });
     label.setAttribute('role', 'button'); label.tabIndex = -1;
     root.append(marker, label);
-    return { object, marker, label, aperture, activate, width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
+    const frame = isPreparedNebula(object) ? nebulaFrames?.get(object.detailedObjectId ?? object.id) : undefined;
+    return { object, marker, label, aperture, activate, cornersM: frame ? catalogVolumeCorners(frame) : null,
+      width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
   });
   let destroyed = false, selectedId: string | null = null;
   let exclusions: readonly LabelScreenRect[] = [];
@@ -117,9 +122,12 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ne
         if (Math.abs(point.x) > width / 2 + 4 || Math.abs(point.y) > height / 2 + 4) continue;
         visible.add(entry.object.id);
         entry.marker.style.transform = `translate(${point.x}px,${point.y}px) translate(-50%,-50%)`;
-        const y = point.y - 8;
-        entry.labelX = point.x; entry.labelY = y;
-        const labelRect = { left: point.x - entry.width / 2, right: point.x + entry.width / 2,
+        const bounds = entry.cornersM ? projectCatalogBounds(entry.cornersM, world, viewport) : null;
+        if (entry.cornersM && !bounds) continue;
+        const x = bounds ? (bounds.left + bounds.right) / 2 : point.x;
+        const y = (bounds?.top ?? point.y) - 8;
+        entry.labelX = x; entry.labelY = y;
+        const labelRect = { left: x - entry.width / 2, right: x + entry.width / 2,
           top: y - entry.height, bottom: y };
         const objectAlpha = isPreparedCluster(entry.object) ? clusterAlpha : isPreparedNebula(entry.object) ? 1 : alpha;
         if (labelRect.left >= -width / 2 && labelRect.right <= width / 2 && labelRect.top >= -height / 2 && labelRect.bottom <= height / 2 && objectAlpha > 0) {

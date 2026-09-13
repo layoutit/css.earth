@@ -1,5 +1,6 @@
 import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
+import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
@@ -37,6 +38,27 @@ export function projectCatalogAperture(radiusM: number, point: NonNullable<Retur
   return { x: point.x + ellipse.centre[0], y: point.y + ellipse.centre[1],
     a: ellipse.radialSemiAxis, b: ellipse.tangentialSemiAxis,
     angle: Math.atan2(axis.radial[1], axis.radial[0]) * 180 / Math.PI };
+}
+
+/** Resolve the prepared cloud bounds once; catalogue stars do not enlarge this box. */
+export function catalogVolumeCorners(frame: DensityVolumeFrame): readonly (readonly number[])[] {
+  const r = worldRotationFromQuaternion(frame.localToReferenceXyzw);
+  return [0, 1, 2, 3, 4, 5, 6, 7].map(index => {
+    const [x, y, z] = [0, 1, 2].map(axis =>
+      (index & (1 << axis) ? frame.boundsUnits.max[axis]! : frame.boundsUnits.min[axis]!) * frame.metersPerUnit);
+    return [frame.originM[0] + r[0] * x! + r[1] * y! + r[2] * z!,
+      frame.originM[1] + r[3] * x! + r[4] * y! + r[5] * z!,
+      frame.originM[2] + r[6] * x! + r[7] * y! + r[8] * z!];
+  });
+}
+
+/** Keep the label above the whole projected cloud, including during an orbit. */
+export function projectCatalogBounds(cornersM: readonly (readonly number[])[], world: WorldCameraPose, viewport: WorldCameraViewport) {
+  const points = cornersM.map(corner => projectCatalogPosition(corner, world, viewport));
+  // A cloud crossing the observer plane has no finite screen bounds.
+  if (!points.length || points.some(point => point === null)) return null;
+  return { left: Math.min(...points.map(point => point!.x)), right: Math.max(...points.map(point => point!.x)),
+    top: Math.min(...points.map(point => point!.y)), bottom: Math.max(...points.map(point => point!.y)) };
 }
 
 function priority(object: PreparedCatalogObject): number {
