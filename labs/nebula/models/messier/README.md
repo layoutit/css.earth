@@ -76,3 +76,7 @@ The catalogue gallery uses CDS HiPS colour products through the [HiPS2FITS JPEG 
 | `CDS/P/2MASS/color` | Near-infrared J/H/Ks colour; University of Massachusetts and IPAC/Caltech, funded by NASA and NSF; CDS colour/HiPS product. [Published properties](https://alasky.cds.unistra.fr/2MASS/Color/properties), [IRSA source and acknowledgement](https://irsa.ipac.caltech.edu/Missions/2mass.html). Strong stellar signal does not imply visible diffuse gas. |
 
 All views use TAN/ICRS, zero rotation and the same center/field. This provides a shared sky comparison, not a fitted registration or a guarantee of complete faint-emission coverage. Display size is not native resolution. Retain original calibrated products and source-specific registration/acceptance before any later star removal or volume baking.
+
+## Object bibliography
+
+The [Papers catalogue](../../docs/paper-catalogue.md) acquires SIMBAD object-linked references through `ident → has_ref → ref`, preserving titles, journals, years, DOIs, available abstracts and article object names. It retains source-query receipts and catalogue/object integrity checks in ignored compressed caches. Topic/title hints are discovery aids, not accepted reconstruction evidence. The guide records the source credit, database terms, current snapshot counts, reproducible acquisition command and verification scope.
