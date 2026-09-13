@@ -1,4 +1,4 @@
-import sn263Photometry from "../planets/asteroid-2001-sn263/source/preparation/photometry.json" with { type: "json" };
+import sn263Photometry from "../objects/asteroid-2001-sn263/source/preparation/photometry.json" with { type: "json" };
 import type { Vector3, Matrix3 } from "../renderers/css/solar-system/types.ts";
 import type { BodyId, PlanetId, DwarfPlanetId, SmallBodyId, CometId, KeplerianElements } from "@cssearth/astronomy";
 import type { HeliocentricPreparationOptions } from "./prepare-heliocentric-view.mts";
@@ -30,8 +30,8 @@ const isIncluded = <T extends string>(ids: readonly T[], id: string | null | und
 // tools only, through the package's build (astronomy-package.mjs); the
 // runtime only transports the result.
 
-import dinkineshPhotometry from "../planets/dinkinesh/source/preparation/photometry.json" with { type: "json" };
-import idaPhotometry from "../planets/ida/source/preparation/photometry.json" with { type: "json" };
+import dinkineshPhotometry from "../objects/dinkinesh/source/preparation/photometry.json" with { type: "json" };
+import idaPhotometry from "../objects/ida/source/preparation/photometry.json" with { type: "json" };
 import { loadAstronomyPackage } from "./astronomy-package.mts";
 import { preparePlanetPoint } from "./prepare-planet-points.mts";
 import {

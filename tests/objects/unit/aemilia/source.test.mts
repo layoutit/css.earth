@@ -8,7 +8,7 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 
-const directory=resolve(import.meta.dirname,'../../../../src/planets/aemilia'),sourceRoot=resolve(directory,'source');
+const directory=resolve(import.meta.dirname,'../../../../src/objects/aemilia'),sourceRoot=resolve(directory,'source');
 const read=async (path: string)=>JSON.parse(await readFile(resolve(directory,path),'utf8'));
 const cross=(a: number[],b: number[])=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
 const dot=(a: number[],b: number[])=>a.reduce((sum: number,v: number,i: number)=>sum+v*b[i],0),sub=(a: number[],b: number[])=>a.map((v: number,i: number)=>v-b[i]);

@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hydra",
+  "entries": [
+    {
+      "id": "lorri-lens",
+      "subject": "LORRI photograph as a photographic lens",
+      "status": "deferred",
+      "finding": "A draft fitted only two detector translations, [−12.875, −1.5] pixels, with the PDS camera, PCK pose and released mesh fixed. A nearby exposure repeats closely, but a 22.995° view change gave held raw correlations of 0.720 and 0.650 that fall to −0.136 and 0.372 once regional brightness planes are removed, so it does not independently confirm the registration.",
+      "revisitWhen": "A meaningfully different view confirms the registration with interior holdouts and the mesh-to-kernel frame binding is verified.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e426e79dae22144acf179dee2b388575592b6667/src/planets/hydra/README.md",
+        "https://github.com/layoutit/css.earth/pull/184"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e426e79dae22144acf179dee2b388575592b6667",
+          "pr": 184
+        }
+      ]
+    },
+    {
+      "id": "mvic-colour",
+      "subject": "MVIC colour sequence as a colour lens",
+      "status": "unresolved",
+      "finding": "The MVIC colour sequence is not used as colour: it has no qualified cross-band and image-to-mesh registration.",
+      "revisitWhen": "Cross-band and image-to-mesh registration qualify for this mesh.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e426e79dae22144acf179dee2b388575592b6667/src/planets/hydra/README.md",
+        "https://github.com/layoutit/css.earth/pull/184"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e426e79dae22144acf179dee2b388575592b6667",
+          "pr": 184
+        }
+      ]
+    }
+  ]
+}

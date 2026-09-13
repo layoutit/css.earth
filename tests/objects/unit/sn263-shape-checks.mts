@@ -17,7 +17,7 @@ const expected={
  gamma:{extent:[554.912,430.533,421.852],diameter:[.29,.57],role:'smaller, inner satellite'},
 };
 export function checkSn263Shape(id: Parameters<typeof preparePlanetarySystem>[0]["bodyId"],component: keyof typeof expected){
- const root=new URL(`../../../src/planets/${id}/source/`,import.meta.url);
+ const root=new URL(`../../../src/objects/${id}/source/`,import.meta.url);
  const read=async (path: string|URL)=>JSON.parse((await readFile(new URL(path,root))).toString('utf8'));
  test(`${id}: PDS component, units, input closure and shape agree`,async()=>{
   const source=await createSourceManifest({planetId:id,planetName:id,sourceRoot:root.pathname});await source.verify();

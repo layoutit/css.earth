@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';
 import {decodeCalibratedCamera, prepareShapeCameraColor} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 
-const source = resolve(import.meta.dirname, '../../../../src/planets/proteus/source');
+const source = resolve(import.meta.dirname, '../../../../src/objects/proteus/source');
 const readJson = async (path: string) => JSON.parse(await readFile(resolve(source, path), 'utf8'));
 const anchors:Record<string,readonly (readonly[number,number,number])[]> = {
   c1137328: [[474, 500, 295], [464, 505, 266], [414, 440, -48], [0, 0, 0]],

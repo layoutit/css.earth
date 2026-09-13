@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "varuna",
+  "entries": [
+    {
+      "id": "light-curve-model",
+      "subject": "Published numerical light-curve model",
+      "status": "included",
+      "finding": "The published numerical light-curve model is used without re-fitting or invented terrain.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/varuna/README.md#L35"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    },
+    {
+      "id": "nir-spectroscopy",
+      "subject": "Rotationally resolved near-infrared spectroscopy as surface data",
+      "status": "excluded",
+      "finding": "[Rotationally resolved near-infrared spectroscopy](https://arxiv.org/abs/1401.5962) is spatially unresolved, so it cannot provide registered surface texels.",
+      "revisitWhen": "Spatially registered surface measurements of Varuna are released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/varuna/README.md#L36",
+        "https://arxiv.org/abs/1401.5962"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    },
+    {
+      "id": "jwst-program",
+      "subject": "JWST Varuna observing program",
+      "status": "unresolved",
+      "finding": "The [JWST Varuna observing-program overview](https://www.hou.usra.edu/meetings/acm2023/pdf/2534.pdf) identifies spectral and imaging observations, not a released global surface map. No texture is inferred from the program description.",
+      "revisitWhen": "The program's imaging is released with a usable surface map or resolved shape.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/varuna/README.md#L37",
+        "https://www.hou.usra.edu/meetings/acm2023/pdf/2534.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    }
+  ]
+}

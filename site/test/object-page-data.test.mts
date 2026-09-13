@@ -12,7 +12,7 @@ import {OBJECTS} from '../objects.mts';
 test('page metadata stays hash-bound to its scene without needing scene bytes during page emission',async t=>{
  const root=await mkdtemp(resolve(tmpdir(),'cssearth-page-data-'));
  t.after(()=>rm(root,{recursive:true,force:true}));
- const directory=resolve(root,'src/planets/body');await mkdir(resolve(directory,'prepared'),{recursive:true});
+ const directory=resolve(root,'src/objects/body');await mkdir(resolve(directory,'prepared'),{recursive:true});
  const data={id:'body',assets:{entries:[{key:'surface',url:'/scenes/body/surface.webp',pool:'body'}],pools:[{id:'body',capacity:1,concurrency:1,retention:'mount',reuse:false}],startup:['surface']},
   controls:{lenses:{defaultLens:'shape',controls:[{id:'shape',label:'Shape'}]},settings:{controls:[{kind:'toggle',name:'shadows',label:'Shadows',checked:false}]}},tree:{nodes:[{tag:'u'}]}};
  const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:'body',data});
@@ -36,7 +36,7 @@ test('page metadata stays hash-bound to its scene without needing scene bytes du
 
 test('all registry objects own ordered CSS and scene-bound page metadata',async()=>{
  for(const {id} of OBJECTS){
-  const descriptor=JSON.parse(await readFile(new URL(`../../src/planets/${id}/object.json`,import.meta.url),'utf8'));
+  const descriptor=JSON.parse(await readFile(new URL(`../../src/objects/${id}/object.json`,import.meta.url),'utf8'));
   const page=await loadObjectPageData(id);
   const styles=objectPageStyles(descriptor);
   assert.equal(styles.at(-1),'site/planet-shell.css');

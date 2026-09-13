@@ -1,5 +1,5 @@
 import { browserProfileLensIds, createObjectBrowserProfile } from '../../../../site/test/object-browser-profile.mts';
-import objectControls from '../../../../src/planets/aegaeon/prepared/controls.json' with {type:'json'};
+import objectControls from '../../../../src/objects/aegaeon/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'aegaeon',controls:objectControls,audit:{
   preparedAssetPairs:[{one:'/scenes/aegaeon/aegaeon-directional-sun.webp',two:'/scenes/aegaeon/aegaeon-directional-sun@2x.webp'}],
   canonicalPreparedAssets:['/scenes/aegaeon/aegaeon-model-surface@2x.webp','/scenes/aegaeon/aegaeon-lighting.webp'],

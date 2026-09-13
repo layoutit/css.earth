@@ -5,7 +5,7 @@ import {readFile} from 'node:fs/promises';
 import test from 'node:test';
 import sharp from 'sharp';
 import {readPreparedFixture} from '../../fixtures.mts';
-import geometry from '../../../../src/planets/saturn/source/preparation/geometry.json' with {type:'json'};
+import geometry from '../../../../src/objects/saturn/source/preparation/geometry.json' with {type:'json'};
 const scene=await readPreparedFixture('saturn','scene');
 test('prepares three upper-hemisphere storms on separate retained bands',async()=>{
  const p=geometry.parameters,storms=p.weatherStorms;
@@ -22,8 +22,8 @@ test('prepares three upper-hemisphere storms on separate retained bands',async()
  assert.equal(weatherLeaves.length,9);assert.equal(scene.counts.planetPolygonCount,453);
  for(const leaf of weatherLeaves){assert.match(leaf.style,/background-image:url\(\/scenes\/saturn\/saturn-weather\.webp\),var\(--polycss-projective-texture-image\)/);assert.equal(leaf.style.match(/background-image:/g)?.length,1);}
  const asset=await readFile(new URL('../../../../public/scenes/saturn/saturn-weather.webp',import.meta.url));
- const source=await readFile(new URL('../../../../src/planets/saturn/source/saturn-weather-static.webp',import.meta.url));
- const manifest=JSON.parse(await readFile(new URL('../../../../src/planets/saturn/runtime-assets.json',import.meta.url),'utf8'));
+ const source=await readFile(new URL('../../../../src/objects/saturn/source/saturn-weather-static.webp',import.meta.url));
+ const manifest=JSON.parse(await readFile(new URL('../../../../src/objects/saturn/runtime-assets.json',import.meta.url),'utf8'));
  const pin=manifest.assets.find((asset: { filename: string; })=>asset.filename==='saturn-weather.webp');
  assert.equal(asset.length,pin.bytes);assert.equal(createHash('sha256').update(asset).digest('hex'),pin.sha256);
  const [preparedPixels,sourcePixels]=await Promise.all([sharp(asset).ensureAlpha().raw().toBuffer({resolveWithObject:true}),sharp(source).ensureAlpha().raw().toBuffer({resolveWithObject:true})]);

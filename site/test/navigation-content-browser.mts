@@ -35,7 +35,7 @@ try {
     const selectors = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content', '.planet-input-surface'];
     const retained = selectors.map(selector => document.querySelector(selector));
     const sharedStyles = [...document.head.querySelectorAll('style[data-vite-dev-id]')]
-      .filter(style => !window.__cssearthTest.required(window.__cssearthTest.htmlElement(style).dataset.viteDevId, 'Vite stylesheet id').includes('/src/planets/'));
+      .filter(style => !window.__cssearthTest.required(window.__cssearthTest.htmlElement(style).dataset.viteDevId, 'Vite stylesheet id').includes('/src/objects/'));
     const surfaceStyles = [...document.querySelectorAll('style[data-object-style="src/renderers/css/styles/planet-surfaces.css"]')];
     const camera = document.querySelector('.polycss-camera');
     const leaf = window.__cssearthTest.element('.mercury-body > s:not(.mercury-polar)');

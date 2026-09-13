@@ -14,7 +14,7 @@ const fixtureRoot=process.cwd();
 const readJson=async(path:string):Promise<unknown>=>JSON.parse(await readFile(join(fixtureRoot,path),'utf8')) as unknown;
 const hash=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 async function prepareAuthored(id:string,direction:[number,number,number],edit:(profile:GeometryProfile)=>GeometryProfile=profile=>profile){
- const root=`src/planets/${id}/source`, profile=edit(parseGeometryProfile(await readJson(`${root}/preparation/geometry.json`))),raster=parseRasterRecipe(await readJson(`${root}/preparation/raster.json`));
+ const root=`src/objects/${id}/source`, profile=edit(parseGeometryProfile(await readJson(`${root}/preparation/geometry.json`))),raster=parseRasterRecipe(await readJson(`${root}/preparation/raster.json`));
  const assets:GeometrySceneAssets={};
  if(raster.lighting)assets.lighting={frameCount:raster.lighting.frameCount,defaultFrame:raster.lighting.defaultFrame};
  if(raster.interior){
@@ -84,7 +84,7 @@ test('a leaf seam outset moves each edge by the same share of the body diameter'
  assert.deepEqual(prepareLeafSeamOutset(matrix,32,16,1000),{property:'--surface-seam-outset',scale:[10,40]});
 });
 test('a stepped seam outset requires an overlap matched to its raster overscan',async()=>{
- const profile=await readJson('src/planets/venus/source/preparation/geometry.json') as {projection:Record<string,unknown>};
+ const profile=await readJson('src/objects/venus/source/preparation/geometry.json') as {projection:Record<string,unknown>};
  assert.doesNotThrow(()=>parseGeometryProfile(profile));
  assert.throws(()=>parseGeometryProfile({...profile,projection:{...profile.projection,overlap:0.008}}),/matched to the raster overscan/);
  assert.doesNotThrow(()=>parseGeometryProfile({...profile,projection:{...profile.projection,overlap:0,rasterOverscan:0}}));

@@ -5,7 +5,7 @@ import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/nausikaa/source'),read=createSourceFixtureReader(root);
+const root=resolve(import.meta.dirname,'../../../../src/objects/nausikaa/source'),read=createSourceFixtureReader(root);
 test('Nausikaa retains source identity and restoration closure',async()=>{
  const source=await createSourceManifest({planetId:'nausikaa',planetName:'Nausikaa',sourceRoot:root});await source.verify();
  const plan=await read('preparation/acquisition.json');for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));

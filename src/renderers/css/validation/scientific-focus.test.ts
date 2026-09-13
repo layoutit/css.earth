@@ -11,7 +11,7 @@ import {requireRecord,requireString} from '../../../../tools/source-values.mts';
 
 // This small prepared carrier is independent of the focus helper's frame math.
 // No body raster preparation, browser, or complete runtime document is needed.
-const raw = requireRecord(JSON.parse(await readFile(new URL('../../../planets/europa/prepared/scene.json', import.meta.url), 'utf8')), 'Europa scene');
+const raw = requireRecord(JSON.parse(await readFile(new URL('../../../objects/europa/prepared/scene.json', import.meta.url), 'utf8')), 'Europa scene');
 const camera = raw.camera; requireCamera(camera);
 const scene = {camera, systemTransform:requireString(raw.systemTransform, 'Europa transform')};
 const focus = {longitudeDegrees:142, latitudeDegrees:-43.7, zoom:4};

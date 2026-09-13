@@ -46,7 +46,7 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | `site/prepared-sources.json` and `site/prepared-machines.json` | Ignored source usage and mission attribution outputs; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
 | Test fixtures under `tests/`; processing code under `tools/` | Inputs and implementation used by executable checks and preparation |
-| Root README and [body contributor guide](../../src/planets/README.md) | Shared installation, controls, commands and contribution workflow |
+| Root README and [body contributor guide](../../src/objects/README.md) | Shared installation, controls, commands and contribution workflow |
 
 Every file under `source/` needs a manifest entry. Body packages contain data,
 not private executables. Shared astronomy, artwork and sky sources keep their
@@ -64,16 +64,30 @@ and short paragraphs.
 Keep observation dates, measured-versus-modeled meaning, false color, coverage
 limits, failures and unresolved problems beside their claims, outside collapsed methods.
 
-Put long calculations, decoding steps and source surveys in labeled `<details>`
+Put long calculations and decoding steps in labeled `<details>`
 sections below the overview, using short paragraphs or steps. Link existing
 method notes instead of copying them. Do not create a second account, separate
 SOURCE summary, EVIDENCE index or body USAGE guide.
 
+### Investigation ledger
+
+Record every source, route, lens or frame examined for an object in its
+`investigations.json`, beside the README, including trials that failed. Each
+entry says what was examined, its status (`included`, `excluded`, `unresolved`
+or `deferred`), the finding, evidence links and the commit it was checked at.
+An entry that is not included names what would reopen it in `revisitWhen`.
+Link repository evidence at a commit or pull request; a branch link moves.
+
+The README links the ledger instead of repeating a source survey. Read the
+ledger before investigating an object. Reopen an excluded, unresolved or
+deferred entry only when its `revisitWhen` condition is met, and say which.
+`node tools/report-investigations.mts` lists every open entry across objects.
+
 ### Examples
 
-Examples: [67P](../../src/planets/comet-67p/README.md),
-[Earth](../../src/planets/earth/README.md), [Sun](../../src/planets/sun/README.md)
-and [Rhea](../../src/planets/rhea/README.md).
+Examples: [67P](../../src/objects/comet-67p/README.md),
+[Earth](../../src/objects/earth/README.md), [Sun](../../src/objects/sun/README.md)
+and [Rhea](../../src/objects/rhea/README.md).
 
 ## Identify and explain the sources
 

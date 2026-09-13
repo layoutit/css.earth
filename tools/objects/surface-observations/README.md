@@ -45,7 +45,7 @@ The [implementation map](../../../.agents/skills/celestial-skill/references/impl
 says which format fits what an archive ships.
 
 The NEAR MSI adapter retains calibrated I/F with its original illumination.
-Mathilde's [source method](../../../src/planets/mathilde/README.md) records the
+Mathilde's [source method](../../../src/objects/mathilde/README.md) records the
 reconstructed image table, inferred detector conventions, raw-data checks and
 limits of silhouette registration on the visualization shape.
 

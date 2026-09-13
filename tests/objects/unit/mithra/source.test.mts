@@ -6,7 +6,7 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireRadialTestConfig,requireRotation,requireScalarAnchors} from '../radial-fixture.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/mithra/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/mithra/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Mithra retains original source pins and acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'mithra',planetName:'Mithra',sourceRoot:root});await source.verify();

@@ -8,7 +8,7 @@ import { chromium } from 'playwright';
 import sharp from 'sharp';
 import { scrollToDistance as scrollTo } from './wheel-zoom-distance.mts';
 import volume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
-import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import context from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 
 const output = process.env.GALAXY_HANDOFF_OUTPUT ?? '.local/galaxy-handoff';
 const parsecKm = 3.085677581491367e13;

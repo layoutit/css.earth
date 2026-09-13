@@ -206,7 +206,7 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
   const markers: Record<string, {url: string; pixels: number}> = {};
   for (const descriptor of descriptors) {
     if (!parents.has(descriptor.planetId) && !descriptor.context) continue;
-    const sourcePath = resolve(projectRoot, "src/planets", descriptor.planetId, "source", descriptor.source.path);
+    const sourcePath = resolve(projectRoot, "src/objects", descriptor.planetId, "source", descriptor.source.path);
     let crop = await readMarkerImage(descriptor.source, sourcePath);
     for (const operation of descriptor.operations) {
       if (operation.type === "resize") break;
@@ -233,7 +233,7 @@ export async function prepareBodyMarkers({ projectRoot, outputRoot, descriptors 
     const tileSize = markerTileSize * density;
     for (const descriptor of descriptors) {
       const sourcePath = descriptor.owner === 'object'
-        ? resolve(projectRoot, 'src/planets', descriptor.planetId, 'source', descriptor.source.path)
+        ? resolve(projectRoot, 'src/objects', descriptor.planetId, 'source', descriptor.source.path)
         : resolve(projectRoot, 'src/navigation/source', descriptor.source.path);
       const tile = await renderMarker(descriptor, { sourcePath, tileSize });
       await sharp(tile).webp({ lossless: true, effort: 6 }).toFile(resolve(outputRoot, `body-${descriptor.planetId}${density === 2 ? '@2x' : ''}.webp`));
@@ -512,7 +512,7 @@ export async function prepareSunIndicator({
   projectRoot = resolve(import.meta.dirname, ".."),
   outputRoot = resolve(projectRoot, "public/navigation"),
 } = {}) {
-  const swatch = requireRecord(JSON.parse(await readFile(resolve(projectRoot, "src/planets/sun/swatch.json"), "utf8")));
+  const swatch = requireRecord(JSON.parse(await readFile(resolve(projectRoot, "src/objects/sun/swatch.json"), "utf8")));
   const hex = (isRecord(swatch.display) ? swatch.display.hex : undefined) ?? swatch.hex;
   if (typeof hex !== "string" || !/^#[0-9a-f]{6}$/i.test(hex)) throw new Error("Invalid Sun swatch.");
   const points = Array.from({ length: 7 }, (_, index) => {
@@ -536,11 +536,11 @@ export async function prepareSunIndicator({
 
 async function loadObjectDescriptor(planetId: string, projectRoot: string): Promise<unknown> {
   if (await authoredObject(planetId, projectRoot)) {
-    return JSON.parse(await readFile(resolve(projectRoot, 'src/planets', planetId, 'source/preparation/navigation.json'), 'utf8'));
+    return JSON.parse(await readFile(resolve(projectRoot, 'src/objects', planetId, 'source/preparation/navigation.json'), 'utf8'));
   }
   const modulePath = resolve(
     projectRoot,
-    "src/planets",
+    "src/objects",
     planetId,
     "tools/navigation-marker.mjs",
   );

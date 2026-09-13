@@ -8,7 +8,7 @@ import { decodeFitsImageMap } from '../../../../tools/objects/terrestrial-layers
 import { loadScienceSurface } from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 import { pinnedOracleVersions } from '../../../../tools/oracles/fixture.mts';
 
-const root = new URL('../../../../src/planets/pluto/source/', import.meta.url);
+const root = new URL('../../../../src/objects/pluto/source/', import.meta.url);
 const fixture = shape({ astropy: text, numpy: text, inputs: array(shape({ path: text, bytes: number, sha256: text })),
   cases: array(shape({ hdu: number, name: text, units: text, missingTupleCells: number, acceptedCells: number,
     acceptedAreaFraction: number, north60to90Mean: number,

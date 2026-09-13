@@ -24,7 +24,7 @@ export async function proveSkyboxPointerBoundary(page: Page, planet: PlanetRefer
   const initial = await cameraPose(page, planet.id);
   const bounds = await profile.bounds(page);
   const cameraPlan = parseCameraPlan(JSON.parse(await readFile(
-    new URL(`../../src/planets/${planet.id}/prepared/runtime.json`, import.meta.url), "utf8")), planet.id);
+    new URL(`../../src/objects/${planet.id}/prepared/runtime.json`, import.meta.url), "utf8")), planet.id);
   const viewport = page.viewportSize();
   assert.ok(viewport, `${planet.id}: test viewport must be configured`);
   let sky = { x: viewport.width - 32, y: 96 };
