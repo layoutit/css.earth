@@ -68,32 +68,6 @@
         "format": "amica-gaskell",
         "consumer": "amica-observation",
         "filter": "V",
-        "allowLossy": true,
-        "flatPath": "observations/flat_v.fit",
-        "transfer": {
-          "maximumSourceDistanceMeters": 6,
-          "maximumSeparationMeters": 5,
-          "maximumEmissionDegrees": 70,
-          "visibilityToleranceMeters": 0.05,
-          "interpretation": "Full-source nearest point within the existing 6 m display simplification allowance; all interpolation contributors within 5 m of that same point; full-source camera visibility to 0.05 m. These are acceptance bounds, not source accuracy estimates."
-        },
-        "photometry": {
-          "model": "lommel-seeliger",
-          "referenceIncidenceDegrees": 0,
-          "referenceEmissionDegrees": 0,
-          "maximumIncidenceDegrees": 70,
-          "maximumEmissionDegrees": 70,
-          "maximumGain": 1.5
-        },
-        "displayPercentiles": [
-          1,
-          99
-        ],
-        "metadata": {
-          "label": "AMICA mosaic",
-          "coverage": "Three Hayabusa AMICA v-band images from 24–29 September 2005 are registered with the archived Gaskell Cartesian backplanes. Grayscale shows flat-fielded detector brightness with approximate illumination correction and bounded overlap matching, not absolute albedo or natural color. The source images use lossy 8-bit compression; photographed shadows and some seams remain. The ordinary grid marks missing, grazing or geometrically rejected coverage.",
-          "falseColor": false
-        },
         "frames": [
           {
             "id": "sep24",
@@ -117,12 +91,39 @@
             "startTime": "2005-09-29T08:45:09"
           }
         ],
+        "flatPath": "observations/flat_v.fit",
         "selection": "lowest-emission",
         "levelMatching": {
           "samplesPerTriangle": 24,
           "minimumPairs": 128,
           "maximumLogMad": 0.25,
           "maximumGain": 1.35
+        },
+        "transfer": {
+          "maximumSourceDistanceMeters": 6,
+          "maximumSeparationMeters": 5,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.05,
+          "interpretation": "Full-source nearest point within the existing 6 m display simplification allowance; all interpolation contributors within 5 m of that same point; full-source camera visibility to 0.05 m. These are acceptance bounds, not source accuracy estimates."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1.5
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ]
+        },
+        "metadata": {
+          "label": "AMICA mosaic",
+          "coverage": "Three Hayabusa AMICA v-band images from 24–29 September 2005 are registered with the archived Gaskell Cartesian backplanes. Grayscale shows flat-fielded detector brightness with approximate illumination correction and bounded overlap matching, not absolute albedo or natural color. The source images use lossy 8-bit compression; photographed shadows and some seams remain. The ordinary grid marks missing, grazing or geometrically rejected coverage.",
+          "falseColor": false
         }
       }
     ]
