@@ -76,7 +76,9 @@
       "normal": "Monochrome",
       "elevation": "Elevation",
       "enhanced-color": "False color",
-      "albedo": "Bond albedo"
+      "albedo": "Bond albedo",
+      "water-ice": "Water ice",
+      "ammonia": "Ammonia"
     },
     "controls": [
       {
@@ -218,6 +220,120 @@
             ]
           }
         }
+      },
+      {
+        "id": "water-ice",
+        "label": "Water ice",
+        "description": "Water ice absorbs strongly near 2.0 µm across Charon’s observed terrain. Colors show the depth of that absorption, which also depends on ice grain size. Grid: no usable spectrum.",
+        "title": "Water-ice absorption",
+        "thumbnail": "charon-lens-water-ice.webp",
+        "surface": "charon-water-ice.webp",
+        "poles": "charon-poles-water-ice.webp",
+        "source": {
+          "id": "charon-leisa-water-ice",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx"
+        },
+        "detail": "LEISA",
+        "summary": "Depth of water ice’s 2.0 µm absorption; grain size also changes the signal. This is not ice abundance. Grid: no usable spectrum.",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "2.0 µm band depth",
+          "labels": [
+            "45",
+            "60",
+            "75"
+          ],
+          "meta": "% band depth",
+          "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+          "recipe": {
+            "palette": [
+              [
+                38,
+                63,
+                107
+              ],
+              [
+                53,
+                142,
+                172
+              ],
+              [
+                168,
+                217,
+                197
+              ],
+              [
+                255,
+                240,
+                176
+              ]
+            ],
+            "labels": [
+              "45",
+              "60",
+              "75"
+            ]
+          }
+        }
+      },
+      {
+        "id": "ammonia",
+        "label": "Ammonia",
+        "description": "A weak 2.2 µm absorption is associated with ammonia-bearing material, including ejecta around Organa crater. Colors show infrared contrast averaged over roughly 12 km; fine variations include instrument noise. Grid: no usable spectrum.",
+        "title": "Ammonia-related absorption",
+        "thumbnail": "charon-lens-ammonia.webp",
+        "surface": "charon-ammonia.webp",
+        "poles": "charon-poles-ammonia.webp",
+        "source": {
+          "id": "charon-leisa-ammonia",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx"
+        },
+        "detail": "LEISA",
+        "summary": "Infrared contrast associated with ammonia-bearing material, including Organa’s ejecta. Averaged over roughly 12 km; fine variations include noise. Grid: no usable spectrum.",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "2.2 µm contrast",
+          "labels": [
+            "0.75",
+            "0.85",
+            "0.95"
+          ],
+          "meta": "continuum / absorption band",
+          "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+          "recipe": {
+            "palette": [
+              [
+                38,
+                54,
+                72
+              ],
+              [
+                70,
+                105,
+                106
+              ],
+              [
+                112,
+                179,
+                138
+              ],
+              [
+                229,
+                244,
+                171
+              ]
+            ],
+            "labels": [
+              "0.75",
+              "0.85",
+              "0.95"
+            ]
+          }
+        }
       }
     ]
   },
@@ -257,6 +373,12 @@
       "role": "surface",
       "description": "MVIC enhanced-color mosaic · New Horizons team",
       "href": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx"
+    },
+    {
+      "label": "PDS",
+      "role": "surface",
+      "description": "LEISA infrared spectra and surface coordinates",
+      "href": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx"
     },
     {
       "label": "ESO",

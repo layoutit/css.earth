@@ -4,9 +4,28 @@ import { join } from 'node:path';
 import sharp from 'sharp';
 import { describe, expect, it } from 'vitest';
 import { loadNativeSourcePoleSampler } from './surfaces.js';
+import { parseRasterRecipe, prepareRasterAssets } from './index.js';
 import { loadNativeObservationPoleSampler, parseObservationLens } from '../../../tools/objects/observation/raster.mts';
 
 describe('native source pole sampling', () => {
+    it('packs a lower-resolution surface without changing the shared layout or pole dimensions', async () => {
+        const directory = await mkdtemp(join(tmpdir(), 'cssearth-small-surface-'));
+        try {
+            await sharp({ create: { width: 128, height: 64, channels: 3, background: '#488ecc' } }).png().toFile(join(directory, 'source.png'));
+            const config = parseRasterRecipe({ schema: 'cssearth-raster-recipe@1', publicBase: '/scenes/test/', sourceWidth: 128, sourceHeight: 64,
+                width: 128, height: 64, latitudeBands: 4, polarTile: 16, densities: [1,2], resample: 'density-before-pack',
+                polarProjection: 'orthographic-bilinear', polesCombined: false, polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
+                thumbnail: {size: 8, quality: 80}, surfaces: [{id: 'science', source: 'source.png', falseColor: true, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp', resolutionScale: .5}] });
+            const prepared = await prepareRasterAssets({config,sourceDirectory:directory,publicDirectory:directory,outputDirectory:directory});
+            expect(prepared.surfaceDimensions).toEqual({width:128,height:64});
+            expect(prepared.surfaces.science.dimensions).toEqual({width:64,height:32});
+            const small = await sharp(join(directory,'science.webp')).metadata(), doubled = await sharp(join(directory,'science@2x.webp')).metadata();
+            expect([small.width,small.height,doubled.width,doubled.height]).toEqual([68,48,136,96]);
+            const pole = await sharp(join(directory,'poles-science.webp')).metadata();
+            expect([pole.width,pole.height]).toEqual([32,16]);
+            expect(() => parseRasterRecipe({...config,surfaces:[{...config.surfaces[0],resolutionScale:.3}]})).toThrow(/integer/);
+        } finally { await rm(directory,{recursive:true,force:true}); }
+    });
     it('uses original image texels in the established wrapped normalized map domain', async () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-native-pole-'));
         try {

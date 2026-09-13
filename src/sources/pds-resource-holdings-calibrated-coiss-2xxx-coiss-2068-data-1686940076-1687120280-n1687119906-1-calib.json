@@ -1,0 +1,28 @@
+{
+  "id": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2068-data-1686940076-1687120280-n1687119906-1-calib",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Cassini ISS Helene · N1687119906_1_CALIB · CL1/IR1",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/calibrated/COISS_2xxx/COISS_2068/data/1686940076_1687120280/N1687119906_1_CALIB"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2068/data/1686940076_1687120280/N1687119906_1_CALIB.LBL",
+      "label": "Calibrated image label"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2068/data/1686940076_1687120280/N1687119906_1_CALIB.LBL",
+      "checkedOn": "2026-09-13",
+      "locator": "PRODUCT_ID 1_N1687119906.140; FILTER_NAME; CISSCAL I/F; full-resolution lossless detector product"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,18 @@
+{
+  "body": "calypso",
+  "baseline": "ebd16155a",
+  "purpose": "The current unchanged main preparer reproduces the unaffected elevation dataset using its main recipe, unchanged source mesh and byte-identical elevation map. Both atlases exactly match this branch; the shadow drift predates the new imagery.",
+  "recipeSha256": "855b79434bba107689f3d8a5c989b4ba4d4a9b35e5330d798bc727454a6de2f4",
+  "assets": [
+    {
+      "filename": "calypso-elevation-surface@2x.webp",
+      "sha256": "f00ccd34e415eceb7610b18ed6bfbcc7f9afc92f602058b88ff5807a094b51da",
+      "bytes": 395062
+    },
+    {
+      "filename": "calypso-elevation-shadow@2x.webp",
+      "sha256": "9776b03c2df81c5dee4850f693a5dfadbdd19d38e75fcd3e07f3287544a53a2f",
+      "bytes": 220564
+    }
+  ]
+}
