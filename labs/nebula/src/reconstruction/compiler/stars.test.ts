@@ -4,6 +4,8 @@ import { compilerStars, compilerStarLensPoints, createCompilerStarPhotometer } f
 import { compilerStarAppearance, validCompilerStarMaterials, validCompilerStarSize, type PreparedCompilerStar } from './bake-types';
 import type { CompilerImage } from './images';
 import type { EmissionFieldModel } from './field-types';
+import sharp from 'sharp';
+import { detectStars } from '../../alignment/observations/registration';
 
 function image(gain = 1, scale = 1, background = 0, centers: [number, number][] = [[16.5, 16.5]]): CompilerImage {
   const width = 33, height = 33, residual = new Uint8Array(width * height * 3), original = new Uint8Array(residual.length);
@@ -113,4 +115,48 @@ test('lens materials require complete known coverage and cannot carry geometry; 
   assert.equal(validCompilerStarMaterials({ optical: appearance, infrared: { ...appearance, alpha: 2 } }, ids), false);
   const historical: PreparedCompilerStar = { id: 'legacy', positionUnits: [1, 2, 3], rgb: [255, 255, 255], alpha: .2, widthPx: 1 };
   assert.equal(compilerStarAppearance(historical, 'infrared'), historical);
+});
+
+function selectionField(weight = 1): EmissionFieldModel {
+  return { schema: 'cssearth-conditional-emission-field@1', identity: 'selection-fixture', controls: { detail: 1, faint: 1, depth: 1 },
+    bounds: { min: [-100, -100, -100], max: [100, 100, 100] }, skyBounds: { min: [-100, -100], max: [100, 100] }, scaffold: null,
+    components: [{ id: 'cloud', basisId: 'cloud', center: [16.5, -16.5, 0], sigma: [20, 20, 20], angleRadians: 0,
+      projectedWeight: weight, depthAssignment: 'halo-diffuse', velocityCovered: false }],
+    assumptions: { kernel: 'fixture', projectionUnits: 'fixture', depth: 'fixture', halo: 'fixture', haloRadiusArcsec: 100,
+      equalNearFarSplit: true, velocityUncoveredComponents: 1 } };
+}
+
+test('the bounded catalogue favors broad bright residual energy over sharper faint peaks without changing stellar light or depth', async () => {
+  const source = image(), layer = source.stars;
+  for (let y = 0; y < layer.height; y++) for (let x = 0; x < layer.width; x++) {
+    // Isolated narrow source: higher detector peak, much lower integrated light.
+    const narrow = 180 * Math.exp(-((x - 8) ** 2 + (y - 16) ** 2) / .8);
+    const broad = 90 * Math.exp(-((x - 24) ** 2 + (y - 16) ** 2) / 10);
+    for (let c = 0; c < 3; c++) {
+      const p = (y * layer.width + x) * 3 + c;
+      layer.data[p] = Math.round(narrow + broad); source.original.data[p] = layer.data[p]!;
+    }
+  }
+  const bytes = await sharp(layer.data, { raw: { width: layer.width, height: layer.height, channels: 3 } }).png().toBuffer();
+  const detected = await detectStars(bytes, [source.nativeWidth, source.nativeHeight]);
+  assert.equal(detected.length, 2); assert.ok(detected[0]!.point[0] < 12, 'The detector must rank the sharper faint source first');
+  const photometer = createCompilerStarPhotometer(source, detected.map(star => star.point));
+  const bright = photometer.measure(1)!, faint = photometer.measure(0)!;
+  assert.ok(energy(bright)[0]! > energy(faint)[0]! * 3);
+  const complete = await compilerStars(source, selectionField(), 2);
+  const selected = await compilerStars(source, selectionField(), 1);
+  assert.equal(selected.length, 1); assert.equal(selected[0]!.id, 'fixture-1');
+  assert.deepEqual(selected[0], complete.find(star => star.id === 'fixture-1'), 'The budget cannot change coordinates, depths, materials or measured appearance');
+  assert.equal(selected[0]!.alpha, bright.alpha); assert.equal(selected[0]!.diameterUnits, bright.diameterUnits);
+  assert.deepEqual(selected[0]!.rgb, bright.rgb);
+});
+
+test('equal measured light keeps stable source identity order and weak positive columns retain field lights while zero columns do not', async () => {
+  const source = image(8, 1, 0, [[8.5, 16.5], [24.5, 16.5]]);
+  const full = await compilerStars(source, selectionField(), 2);
+  assert.deepEqual(full.map(star => star.id), ['fixture-0', 'fixture-1']);
+  const weak = await compilerStars(source, selectionField(.001), 2);
+  assert.deepEqual(weak, full, 'Scaling a positive depth distribution must not select or dim observed field stars');
+  assert.deepEqual(await compilerStars(source, selectionField(0), 2), [], 'No depth may be invented without positive field support');
+  assert.deepEqual(await compilerStars(source, selectionField(), 1), full.slice(0, 1));
 });

@@ -156,6 +156,43 @@ test('unresolved catalogue points fade away without changing prepared resolved s
   runtime.destroy();
 });
 
+test('distant prepared images suspend the retained slice renderer and hand off by projected size', () => {
+  const f = dom(), original = payload(), lens = original.lenses[0]!;
+  const directions = [
+    { id: 'front', back: [0, 0, 1] as const, right: [1, 0, 0] as const, down: [0, -1, 0] as const },
+    { id: 'back', back: [0, 0, -1] as const, right: [-1, 0, 0] as const, down: [0, -1, 0] as const },
+    { id: 'right', back: [1, 0, 0] as const, right: [0, 0, -1] as const, down: [0, -1, 0] as const },
+    { id: 'left', back: [-1, 0, 0] as const, right: [0, 0, 1] as const, down: [0, -1, 0] as const },
+  ];
+  const impostors = { schema: 'cssearth-volume-impostors@1' as const, radiusUnits: 1,
+    fullBelowDiameterPixels: 16, volumeAboveDiameterPixels: 32,
+    views: directions.map(view => ({ ...view, texturePath: `${view.id}.png` })) };
+  const data = { ...original, lenses: [{ ...lens, volume: { ...lens.volume, impostors,
+    resources: [...lens.volume.resources, ...impostors.views.map(view => ({ path: view.texturePath, sha256: 'b'.repeat(64), bytes: 1, width: 1, height: 1 }))] } }] };
+  const runtime = createPreparedVolumeLenses({ payload: data, resolveResource: path => `/prepared/${path}` }).mount(f.options);
+  const root = runtime.root as unknown as FakeElement, initial = descendants(root);
+  const detail = initial.find(node => node.className === 'css-volume-detail')!;
+  const distant = initial.find(node => node.className === 'css-volume-impostors')!;
+  const scenes = initial.filter(node => node.className === 'css-volume-scene');
+  runtime.publish(publication(100));
+  expect(detail.style.display).toBe('none'); expect(distant.style.display).toBe('block');
+  expect(distant.dataset.activeViews).toBe('1');
+  const inactiveTransforms = scenes.map(scene => scene.style.transform);
+  runtime.publish(publication(50));
+  expect(scenes.map(scene => scene.style.transform)).toEqual(inactiveTransforms);
+  runtime.publish(publication(200 / 24));
+  expect(detail.style.display).toBe('block'); expect(distant.style.display).toBe('block');
+  expect(Number(distant.style.opacity)).toBeCloseTo(.5);
+  expect(Number(detail.style.opacity)).toBeCloseTo(.5 * .8 * .9);
+  runtime.publish(publication(4));
+  expect(distant.style.display).toBe('none'); expect(detail.style.display).toBe('block');
+  const visibleTransforms = scenes.map(scene => scene.style.transform);
+  runtime.publish(publication(100));
+  expect(scenes.map(scene => scene.style.transform)).toEqual(visibleTransforms);
+  expect(descendants(root)).toEqual(initial);
+  runtime.destroy(); expect(f.host.children).toEqual([f.before]);
+});
+
 test('saved star visibility stays toggleable with retained points and committed lens subscriptions', () => {
   const f = dom(), prepared = createPreparedVolumeLenses({ payload: { ...payload(), starsEnabled: false }, resolveResource: path => `/prepared/${path}` });
   const runtime = prepared.mount(f.options), root = runtime.root as unknown as FakeElement;

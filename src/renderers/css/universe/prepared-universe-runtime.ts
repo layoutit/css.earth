@@ -21,6 +21,7 @@ import { createPreparedVolumeLenses } from '../volume/prepared-volume-lenses.js'
 import type { WorldPlannerSource } from './world-context-planner-client.js';
 import type { WorldContextPublication } from './world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context-planner-client.js';
+import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 // Galaxy files download from this fraction of the volume's fade-start distance:
@@ -131,6 +132,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       let galaxyCatalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
       const imageBanks: ReturnType<typeof mountPreparedCssImageLayers>[] = [];
       let prefetchGalaxy = (_distanceM: number) => {};
+      const prefetchAbort = new AbortController();
       const lensBanks: ReturnType<ReturnType<typeof createPreparedVolumeLenses>['mount']>[] = [];
       const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
       const mountedShells = [...shells];
@@ -155,6 +157,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const destroy = () => {
         if (destroyed) return;
         destroyed = true;
+        prefetchAbort.abort();
         volumeLayer?.destroy(); skyLayer?.destroy(); spatial?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy();
         for (const shell of shellLayers) shell.destroy();
         for (const bank of imageBanks) bank.destroy(); galaxyCatalog?.destroy();
@@ -176,7 +179,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           galaxyPrefetched = true;
           const target = document.defaultView;
           if (typeof target?.fetch !== 'function') return;
-          for (const url of galaxyUrls) target.fetch(url, { priority: 'low' }).then(response => response.arrayBuffer()).catch(() => {});
+          void prefetchPreparedResources(galaxyUrls, target.fetch.bind(target), prefetchAbort.signal);
         };
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         // Picking and navigation stay on the detail stage's input owner. Billboards

@@ -1,0 +1,47 @@
+{
+  "id": "eso-eso1723a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Orion Nebula · ESO eso1723a",
+  "identifiers": [
+    {
+      "type": "ESO image",
+      "value": "eso1723a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1723a/",
+      "label": "Published source"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.eso.org/public/outreach/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m42/observations.json",
+      "revision": "ab1967ed45fe7ad670cc5eaa4e892789a04f01f3",
+      "sha256": "be4195e2e45f37f977436584e9a94967d090d8a1c5f95328ae97730f71bb9df4",
+      "locator": "/images/0"
+    },
+    {
+      "url": "https://www.eso.org/public/images/eso1723a/",
+      "checkedOn": "2026-09-13",
+      "locator": "Image description and Colours & filters: named telescope and instrument"
+    }
+  ],
+  "publisher": "ESO/G. Beccari",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/G. Beccari",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m42/observations.json#/images/0"
+    }
+  ]
+}

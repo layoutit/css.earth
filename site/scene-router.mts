@@ -32,7 +32,7 @@ import * as applicationWorldContext from './application-world-context.mts';
 import { solarSystemFocus, watchOverviewSelection } from './overview-selection.mts';
 import { overviewScopeFromUrl } from './navigation-scope.mts';
 import { createNavigationTiming } from './navigation-timing.mts';
-import { readDatasetUrl, withDataset } from './dataset-url.mts';
+import { isFocusDatasetUrl, readDatasetUrl, withDataset } from './dataset-url.mts';
 
 
 export function createSceneRouter({
@@ -414,7 +414,9 @@ export function createSceneRouter({
     const source = active;
     try {
       if (source && objectId === object.id && sceneState === 'ready') {
-        const datasetLink = Boolean(request.options.url) && new URL(request.url).hash.split('&').some(field => /^#?dataset=/.test(field));
+        const destination = new URL(request.url);
+        const datasetLink = Boolean(request.options.url) &&
+          (destination.hash.split('&').some(field => /^#?dataset=/.test(field)) || isFocusDatasetUrl(destination));
         const datasetSelection = selectDataset(source, request.url, request.controller.signal);
         if (!(typeof datasetSelection === 'boolean' ? datasetSelection : await datasetSelection)) {
           if (pending !== request) return false;
