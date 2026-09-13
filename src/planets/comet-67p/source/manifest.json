@@ -1610,60 +1610,6 @@
         "kind": "local",
         "reason": "Catalogued once the shared landing-sites source record cites this document."
       }
-    },
-    {
-      "id": "comet-67p-preparation-features",
-      "path": "preparation/features.json",
-      "expectedBytes": 1060,
-      "expectedSha256": "716410e7330a882ec5da8e68c7a4030065e4ab0137e32cfd0caada91eac7fc80",
-      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored preparation parameters",
-      "acquisition": "Authored beside the other preparation recipes.",
-      "redistribution": "Repository-authored parameters; no imagery",
-      "consumers": [
-        "features"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored preparation parameters."
-      }
-    },
-    {
-      "id": "comet-67p-surface-features-source",
-      "path": "features/manifest.json",
-      "expectedBytes": 1075,
-      "expectedSha256": "fee7f80d11b9ddb05f0bb2e050276eb7c78c14b67e44f34be31bfdc0de8e47ab",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "consumers": [
-        "features"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      }
-    },
-    {
-      "id": "comet-67p-surface-map-frame",
-      "path": "presentation/surface-map.json",
-      "expectedBytes": 156,
-      "expectedSha256": "2c4d670c40f6c544aba99082892839f03047ee3fec94d3a7dfdc0d0aa332ed09",
-      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation parameters",
-      "acquisition": "Authored from the shared mesh convention.",
-      "redistribution": "Repository-authored parameters; no imagery",
-      "consumers": [
-        "features"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored map frame."
-      }
     }
   ]
 }

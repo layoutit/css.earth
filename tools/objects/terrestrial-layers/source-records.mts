@@ -214,10 +214,10 @@ export type GeometryCubeDeclaration = ReturnType<typeof parseGeometryCube>;
 /** A camera derived from SPICE kernels for an image without archived geometry: the kernel set in load order, the SPK ids and
  * body-fixed frame, the instrument whose kernel variables define the pixel model, how the exposure epoch is read from the
  * image header, the aberration correction, the instrument-frame axes stored columns and rows follow, and how the image is read. */
-export const parseSpiceCamera = shape({kernels:array(text),observer:number,target:number,bodyFrame:text,instrument:number,
-  clock:shape({header:text,spacecraft:number}),aberration:text,
+export const parseSpiceCamera = shape({kernels:array(text),kernelSet:optional(text),observer:number,target:number,bodyFrame:text,instrument:number,
+  clock:shape({header:optional(text),start:optional(text),stop:optional(text),spacecraft:number}),aberration:text,
   pixels:shape({focalLength:shape({key:text,unit:text}),pixelPitch:shape({key:text,unit:text}),center:text,boresight:text,samples:text,lines:text,frame:text,origin:number,column:text,row:text}),
-  image:shape({quantity:text,plane:optional(number),header:optional(dictionary(text)),missingValueKeys:optional(array(text)),saturationKey:optional(text)})});
+  image:shape({format:optional(text),quantity:text,plane:optional(number),header:optional(dictionary(text)),missingValueKeys:optional(array(text)),saturationKey:optional(text)})});
 export type SpiceCameraDeclaration = ReturnType<typeof parseSpiceCamera>;
 /** Pointing refinement of an archived or kernel camera against the retained mesh's lit limb, with its evidence budget. */
 export const parseLimbRefinement = shape({method:text,maximumCorrectionDegrees:number,maximumResidualPixels:number,minimumControls:number,threshold:optional(number),searchPixels:optional(number),maximumControls:optional(number),minimumSharpness:optional(number)});
