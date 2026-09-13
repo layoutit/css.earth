@@ -79,6 +79,87 @@
       ],
       "path": "reference/overview.txt",
       "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/overview.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/lor_0408625591_0x630_sci.fit",
+      "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408625591_0x630_sci.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/lor_0408625591_0x630_sci.lbl",
+      "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408625591_0x630_sci.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/lor_0408626332_0x636_sci.fit",
+      "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/lor_0408626332_0x636_sci.lbl",
+      "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/ca05_mvic_cube.fit",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/ca05_mvic_cube.lblx",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/mvic-overview.pdf",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/overview.pdf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/lor_0408626333_0x636_sci.fit",
+      "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626333_0x636_sci.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/lor_0408626333_0x636_sci.lbl",
+      "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626333_0x636_sci.lbl"
     }
   ]
 }
