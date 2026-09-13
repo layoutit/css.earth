@@ -1,3 +1,4 @@
+import { pds3Keyword } from '../pds-labels.mts';
 import { readFitsPlane } from '../observation/fits.mts';
 import type { KernelSet } from '../../spice/kernel-set.mts';
 import { encodeClock, clockToEt } from '../../spice/sclk.mts';
@@ -36,11 +37,6 @@ export function aberrationOf(spice: SpiceCameraDeclaration): Aberration {
 }
 
 /** A PDS3 label keyword's value without quotes; a list such as ("CL1","GRN") reads as CL1,GRN. */
-export function pds3Keyword(label: string, key: string) {
-  const match = new RegExp(`^\\s*${key}\\s*=\\s*(.+?)\\s*$`, 'mu').exec(label);
-  return match ? match[1].replace(/^\((.*)\)$/u, '$1').split(',').map(part => part.trim().replace(/^"(.*)"$/u, '$1')).join(',') : undefined;
-}
-
 /**
  * A VICAR calibrated image with a detached PDS3 label, as the PDS Ring-Moon
  * Systems Node publishes CISSCAL-calibrated Cassini ISS frames. The camera is

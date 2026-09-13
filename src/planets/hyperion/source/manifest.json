@@ -98,7 +98,8 @@
       "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
       "redistribution": "Retain mission and archive credits.",
       "consumers": [
-        "cassini-frames"
+        "cassini-frames",
+        "cassini-color-frames"
       ],
       "width": 1024,
       "height": 1024,
@@ -139,7 +140,8 @@
       "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
       "redistribution": "Retain mission and archive credits.",
       "consumers": [
-        "cassini-frames"
+        "cassini-frames",
+        "cassini-color-frames"
       ],
       "width": 1024,
       "height": 1024,
@@ -180,7 +182,8 @@
       "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
       "redistribution": "Retain mission and archive credits.",
       "consumers": [
-        "cassini-frames"
+        "cassini-frames",
+        "cassini-color-frames"
       ],
       "width": 1024,
       "height": 1024,
@@ -221,7 +224,8 @@
       "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
       "redistribution": "Retain mission and archive credits.",
       "consumers": [
-        "cassini-frames"
+        "cassini-frames",
+        "cassini-color-frames"
       ],
       "width": 1024,
       "height": 1024,
@@ -262,7 +266,8 @@
       "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
       "redistribution": "Retain mission and archive credits.",
       "consumers": [
-        "cassini-frames"
+        "cassini-frames",
+        "cassini-color-frames"
       ],
       "width": 1024,
       "height": 1024,
@@ -303,7 +308,8 @@
       "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
       "redistribution": "Retain mission and archive credits.",
       "consumers": [
-        "cassini-frames"
+        "cassini-frames",
+        "cassini-color-frames"
       ],
       "width": 1024,
       "height": 1024,
@@ -344,7 +350,8 @@
       "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
       "redistribution": "Retain mission and archive credits.",
       "consumers": [
-        "cassini-frames"
+        "cassini-frames",
+        "cassini-color-frames"
       ],
       "width": 1024,
       "height": 1024,
@@ -385,7 +392,8 @@
       "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
       "redistribution": "Retain mission and archive credits.",
       "consumers": [
-        "cassini-frames"
+        "cassini-frames",
+        "cassini-color-frames"
       ],
       "width": 1024,
       "height": 1024,
@@ -2386,7 +2394,8 @@
       "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
       "redistribution": "Retain mission and archive credits.",
       "consumers": [
-        "filter-color-registration"
+        "filter-color-registration",
+        "cassini-color-frames"
       ],
       "coverage": "Separate clear-frame registration reference; not delivered as a color channel.",
       "capture": {
@@ -2432,7 +2441,8 @@
       "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
       "redistribution": "Retain mission and archive credits.",
       "consumers": [
-        "filter-color-registration"
+        "filter-color-registration",
+        "cassini-color-frames"
       ],
       "capture": {
         "attributions": [
@@ -2527,8 +2537,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 23918,
-      "expectedSha256": "ef7af975e45ef41a69b45d122eb1183f3f9b095bad9ae6182db0e05cd41ea4b9"
+      "expectedBytes": 28318,
+      "expectedSha256": "408b1c66c9aa55f1b93a8febd509a482c49502ae6e20145a89f1c112a474cec3"
     },
     {
       "path": "presentation/minimap.json",
