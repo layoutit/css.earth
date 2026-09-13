@@ -9,7 +9,7 @@ import { parseSurfaceMapConfig } from './surface-map-context.mts';
 import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.js';
 import type { OverviewScope } from './overview-context.mts';
 type PreparedFocus = Pick<PreparedCatalogObject, 'name' | 'positionM'>;
-interface ViewReadout { setPreparedFocus(record: PreparedFocus | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; destroy(): void; }
+interface ViewReadout { setPreparedFocus(record: PreparedFocus | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; setNavigationInFlight(active: boolean): void; destroy(): void; }
 import Ellipsoid from '@cesium/engine/Source/Core/Ellipsoid.js';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
 import { minimapCamera } from './surface-minimap-rectangle.mts';
@@ -93,7 +93,7 @@ export function measurePreparedFocusView(world: WorldCameraPose, focus: Prepared
 
 export function createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }: { drawer: HTMLElement; documentTarget: Document; windowTarget: BrowserWindow; surfaceReader?: SurfaceMapReader }): ViewReadout {
   const root = documentTarget.querySelector<HTMLElement>('.planet-view-readout');
-  if (!root) return { setCamera() {}, setPreparedFocus() {}, setOverviewScope() {}, setPlaybackState() {}, destroy() {} };
+  if (!root) return { setCamera() {}, setPreparedFocus() {}, setOverviewScope() {}, setPlaybackState() {}, setNavigationInFlight() {}, destroy() {} };
   const dateGroup = requiredElement(root, '.planet-view-date'), date = requiredElement(root, '[data-view-date]');
   const coordinates = requiredElement(root, '.planet-view-coordinates');
   const latitude = requiredElement(root, '[data-view-latitude]'), longitude = requiredElement(root, '[data-view-longitude]');
@@ -106,7 +106,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
   const maps = [...drawer.querySelectorAll<HTMLElement>('[data-surface-minimap]')];
   const configs = new Map(maps.map(map => [map, parseSurfaceMapConfig(map.dataset.surfaceMinimap)]));
   const events = new AbortController();
-  let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let playing = false, disposed = false;
+  let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let playing = false, disposed = false, flying = false;
   let timer: number | null = null, dateDay: number | null = null, playbackReason: string | null = null; let lastRender = -Infinity;
   let overviewScope: OverviewScope = 'solar-system';
   let preparedFocus: PreparedFocus | null = null;
@@ -149,7 +149,8 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     if (playing) schedule();
   }
   function schedule(immediate = false) {
-    if (disposed || documentTarget.hidden) return;
+    // A fly-to holds the readout still; arrival refreshes it once.
+    if (disposed || documentTarget.hidden || flying) return;
     if (immediate && timer !== null) { windowTarget.clearTimeout(timer); timer = null; }
     if (frame !== null || timer !== null) return;
     const wait = immediate ? 0 : 100 - (windowTarget.performance.now() - lastRender);
@@ -175,6 +176,16 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
       const changed = playing !== state.allowed || playbackReason !== state.reason;
       playing = state.allowed; playbackReason = state.reason;
       if (changed) refresh();
+    },
+    setNavigationInFlight(active) {
+      if (flying === active) return;
+      flying = active;
+      if (!active) { refresh(); return; }
+      if (timer !== null) windowTarget.clearTimeout(timer);
+      if (frame !== null) windowTarget.cancelAnimationFrame(frame);
+      timer = frame = null;
+      // The departure's distance and coordinates go stale as soon as the camera moves.
+      coordinates.hidden = true; scale.hidden = true; write(altitude, '—');
     },
     destroy() {
       disposed = true; unsubscribe?.(); events.abort();

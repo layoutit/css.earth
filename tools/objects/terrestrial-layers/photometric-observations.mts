@@ -1,6 +1,8 @@
 import type {ObservationGeometry,PhotometryProfile,ObservedColorContext,ColorBand,RgbObservation} from './contracts.mts';
 import {shape,text,array as sourceArray,number} from './source-records.mts';
 import {requireRecord} from '../../source-values.mts';
+import { diskGain as diskFunctionGain } from '../../photometry/disk.mts';
+import { parseBandColorDisplay, bandColorEvidence, srgbToLinear } from '../color-transfer.mts';
 const numberArray=sourceArray(number);
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -58,14 +60,16 @@ export function colorPhotometricGain(normal: readonly number[], geometry: Observ
       mu0 < Math.cos(profile.maximumIncidenceDegrees * radians) ||
       mu < Math.cos(profile.maximumEmissionDegrees * radians)) return null;
   // ISIS Lunar-Lambert: weight 0 is Lambert, weight 1 is Lommel-Seeliger.
-  const disk = (incidence: number, emission: number) => (1 - weight) * incidence + 2 * weight * incidence / (incidence + emission);
-  return disk(Math.cos(profile.referenceIncidenceDegrees * radians),
-    Math.cos(profile.referenceEmissionDegrees * radians)) / disk(mu0, mu);
+  return diskFunctionGain({ family: 'lunar-lambert', weight }, { mu0, mu, phase: 0 },
+    { mu0: Math.cos(profile.referenceIncidenceDegrees * radians), mu: Math.cos(profile.referenceEmissionDegrees * radians), phase: 0 });
 }
 
 
 /** Correct each complete color footprint before exposure matching; withheld footprints cannot borrow another date. */
 export function composeCorrectedColor({groups,profile,width,height,sourceIds,photometryProfile,sampleColorBand}: ObservedColorContext & {photometryProfile:PhotometryProfile;sampleColorBand:(band:ColorBand,easting:number,northing:number)=>number|null}) {
+ const display=parseBandColorDisplay(profile.colorDisplay,profile.filters);
+ if(profile.gamma!==1||display.inputQuantity!=='radiance-factor'||display.displayRange[0]!==0||display.displayRange[1]!==1)
+  throw new TypeError('Photometrically corrected bands keep linear I/F through level matching and use one final sRGB display.');
  const photometry={...photometryProfile,observations:{} as Record<string,{correctedPixels:number;withheldPixels:number}>,correctedPixels:0,withheldPixels:0};
   // Keep corrected highlights until exposure matching; quantize only afterward.
   const rgb = new Float32Array(width * height * 3), missing = new Uint8Array(width * height).fill(1);
@@ -112,11 +116,11 @@ export function composeCorrectedColor({groups,profile,width,height,sourceIds,pho
         owners[index] = observationIndex + 1;
         pixels++;
         solidAngle += Math.cos(latitude);
-        // One fixed display transfer for every band/date. I/F=1 maps to white.
-        // Infrared/red, green/green, violet/blue is enhanced, not natural color.
+        // Keep floating I/F through level matching. Encoding happens only after
+        // this complete color footprint has been composed.
         for (let c = 0; c < 3; c++) {
           const value = samples[c].value * gains[c];
-          rgb[index * 3 + c] = 255 * Math.max(0, value) ** (1 / profile.gamma);
+          rgb[index * 3 + c] = value;
         }
       }
     }
@@ -124,7 +128,7 @@ export function composeCorrectedColor({groups,profile,width,height,sourceIds,pho
   }
   for (let i = 0; i < missing.length; i++) if (missing[i] === 2) missing[i] = 1;
   return { rgb, missing, owners, observationNames: ordered.map(([name]) => name), coverage, photometry,
-    sourceIds };
+    sourceIds,display,colorDisplay:bandColorEvidence(display) };
 }
 
 export function matchObservedColorLevels(color: Pick<ReturnType<typeof composeCorrectedColor>,"observationNames"|"owners"|"rgb">, monochrome: RgbObservation, { width, height, boundaryPixels, luminance: coefficients }: {width:number;height:number;boundaryPixels:number;luminance:readonly number[]}) {
@@ -141,19 +145,22 @@ export function matchObservedColorLevels(color: Pick<ReturnType<typeof composeCo
     // co-located valid observations; missing-data indicators cannot set levels.
     if ([i - boundaryPixels * width, i + boundaryPixels * width, y * width + (x + boundaryPixels) % width,
       y * width + (x + width - boundaryPixels) % width].every(j => color.owners[j] === owner)) continue;
-    const source = luminance(color.rgb, c), reference = luminance(monochrome.rgb, c);
+    const source = luminance(color.rgb, c);
+    // The base is already a delivered display image. Decode its screen code
+    // values for brightness matching; never decode the measured filter values.
+    const reference = coefficients.reduce((sum,weight,channel)=>sum+weight*srgbToLinear(monochrome.rgb[c+channel]/255),0);
     if (source > 0 && reference > 0) samples[owner - 1].push(reference / source);
   }
   const levels = color.observationNames.map((observation, i) => {
     const ratios = samples[i].sort((a, b) => a - b);
     const requestedGain = ratios.length ? ratios[Math.floor(ratios.length / 2)] : 1;
     return { observation, boundarySamples: ratios.length,
-      gain: Math.min(requestedGain, maxima[i] ? 255 / maxima[i] : 1) };
+      gain: Math.min(requestedGain, maxima[i] ? 1 / maxima[i] : 1) };
   });
   for (let i = 0; i < color.owners.length; i++) {
     if (!color.owners[i]) continue;
     const { gain } = levels[color.owners[i] - 1];
-    for (let c = 0; c < 3; c++) color.rgb[i * 3 + c] = Math.round(color.rgb[i * 3 + c] * gain);
+    for (let c = 0; c < 3; c++) color.rgb[i * 3 + c] *= gain;
   }
   return levels;
 }

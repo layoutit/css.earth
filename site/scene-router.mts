@@ -65,6 +65,7 @@ export function createSceneRouter({
   let destroyed = false;
   let nextGeneration = 0;
   let shellOwner: { shell: Shell | null } | null = null, pending: Request | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
+  let publishedBodyState = '';
   let centeredObjectId: string | null = null;
   let overview = Boolean(overviewScopeFromUrl(windowTarget.location?.href ?? 'https://example.test'));
   const worldContextOwner = persistentWorldContext;
@@ -79,7 +80,9 @@ export function createSceneRouter({
   windowTarget.addEventListener("pagehide", destroyActiveScene);
   windowTarget.addEventListener("pageshow", restoreCachedScene);
   if (navigation && windowTarget.location?.href) {
-    historyOwner = createNavigationHistory({ windowTarget, objects, capture: captureUrl, navigate, onError: report });
+    // Only a settled scene belongs to the entry that history names. An unfinished navigation
+    // has not committed its own entry, so snapshotting its scene would overwrite the entry it left.
+    historyOwner = createNavigationHistory({ windowTarget, objects, capture: () => pending ? null : captureUrl(), navigate, onError: report });
     unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
       selectPreparedFocus: id => worldContextMount?.selectPreparedFocus?.(id) ?? null,
       supports: id => navigation.supports(objectId, id), navigate, onError: report });
@@ -369,14 +372,15 @@ export function createSceneRouter({
       options = { ...options, overview: true };
     }
     const cancelledFlight = pending !== null && !pending.options.centerSelection && !options.centerSelection;
+    // Snapshot the departed view before cancelling: a superseded navigation records nothing.
+    const mode = options.history ?? 'push';
+    if (mode === 'pop') historyOwner?.remember();
+    else historyOwner?.checkpoint();
     if (pending) {
       const previous = pending;
       pending = null; previous.controller.abort(); previous.lifetime.destroy();
       if (active?.request === previous && sceneState !== 'ready') retire(active, null, { preserveShell: true, flush: false });
     }
-    const mode = options.history ?? 'push';
-    if (mode === 'pop') historyOwner?.remember();
-    else historyOwner?.checkpoint();
     worldContextMount?.suspendFocus?.();
     active?.viewUrl?.destroy();
     if (active) active.viewUrl = null;
@@ -431,6 +435,16 @@ export function createSceneRouter({
         if (restore) {
           if (request.options.history === 'pop' || request.url !== windowTarget.location.href) historyOwner?.commit(request.url, request.options);
           source.url = request.url;
+          // History within one object flies to its saved view, as history between objects does;
+          // it used to jump there in one frame. The exact saved state is still restored afterwards.
+          const savedWorld = request.options.history === 'pop' && !reducedMotionActive
+            ? navigation.savedTarget?.({ objectId: object.id, url: request.url, mount: source.mount }) : null;
+          if (savedWorld && navigation.focus) {
+            syncPlayback();
+            const flown = await request.lifetime.wait(navigation.focus({ objectId: object.id, mount: source.mount!,
+              signal: request.controller.signal, reducedMotion: reducedMotionActive, targetWorldCamera: savedWorld, timing: request.timing }));
+            if (flown.cancelled || pending !== request) return false;
+          }
         } else if (!datasetLink && !request.cancelledFlight && !request.options.preserveView && navigation.focus) {
           syncPlayback();
           const focused = await request.lifetime.wait(navigation.focus({ objectId: object.id,
@@ -492,6 +506,7 @@ export function createSceneRouter({
       pending = null; request.controller.abort(); request.lifetime.destroy();
       centeredObjectId = null;
       worldContextMount?.setNavigationInFlight?.(false);
+      shellOwner?.shell?.setNavigationInFlight?.(false);
       if (active === source && source) {
         source.shell?.setDatasetNotice?.(errorMessage(error));
         // The source still owns the last drawn camera when destination loading
@@ -572,32 +587,33 @@ export function createSceneRouter({
     } catch (error) { fail(session, error); }
   }
 
+  function setData(element: HTMLElement, key: string, value: string | null) {
+    if (value === null) { if (key in element.dataset) delete element.dataset[key]; }
+    else if (element.dataset[key] !== value) element.dataset[key] = value;
+  }
+
   function publishSceneState() {
-    worldContextMount?.setNavigationInFlight?.(Boolean(pending && pending.options.preserveView !== true));
+    const inFlight = Boolean(pending && pending.options.preserveView !== true);
+    worldContextMount?.setNavigationInFlight?.(inFlight);
+    shellOwner?.shell?.setNavigationInFlight?.(inFlight);
     const state = readSceneState();
     const root = documentTarget.documentElement;
     const body = documentTarget.body;
-    root.dataset.scenePresented = String(hasPresented);
-    body.classList.remove("loading", "ready", "paused", "error");
-    if (sceneState === "loading") {
-      root.dataset.ready = "loading";
-      body.classList.add("loading");
-      stage.ariaBusy = "true";
-    } else if (sceneState === "ready") {
-      root.dataset.ready = "true";
-      body.classList.add("ready");
-      if (scenePaused) body.classList.add("paused");
-      stage.ariaBusy = "false";
-    } else {
-      if (sceneState === "error") {
-        root.dataset.ready = "error";
-        body.classList.add("error");
-      } else delete root.dataset.ready;
-      stage.ariaBusy = "false";
+    // Scene state is republished at every navigation step. Only changes are written: removing
+    // and re-adding an unchanged body class restyled the whole document (2,745 elements).
+    setData(root, "scenePresented", String(hasPresented));
+    setData(root, "ready", sceneState === "loading" ? "loading" : sceneState === "ready" ? "true" : sceneState === "error" ? "error" : null);
+    const bodyState = `${sceneState}:${scenePaused}`;
+    if (bodyState !== publishedBodyState) {
+      body.classList.remove("loading", "ready", "paused", "error");
+      if (sceneState === "loading") body.classList.add("loading");
+      else if (sceneState === "ready") { body.classList.add("ready"); if (scenePaused) body.classList.add("paused"); }
+      else if (sceneState === "error") body.classList.add("error");
+      publishedBodyState = bodyState;
     }
-    if (sceneState === "loading" || sceneState === "ready") {
-      root.dataset.playing = String(sceneState === "ready" && !scenePaused);
-    } else delete root.dataset.playing;
+    const busy = sceneState === "loading" ? "true" : "false";
+    if (stage.ariaBusy !== busy) stage.ariaBusy = busy;
+    setData(root, "playing", sceneState === "loading" || sceneState === "ready" ? String(sceneState === "ready" && !scenePaused) : null);
     shellOwner?.shell?.setPlaybackState?.(readPlayback());
     if (DIAGNOSTICS_ENABLED) {
       Reflect.set(windowTarget, '__cssEarth', createSceneDiagnostics(windowTarget, objectId, readSceneState, readPlayback));

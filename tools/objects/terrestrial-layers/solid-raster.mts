@@ -1,6 +1,7 @@
 import type {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {RgbObservation} from './contracts.mts';
 import type {RadialState} from './solid-contract.mts';
+import { encodeBandColor } from '../color-transfer.mts';
 import {parseSolidRasterConfig,parseSurfaceSource} from './solid-source.mts';
 import {requireTerrainMesh} from './radial-terrain.mts';
 import {shape,text,number} from './source-records.mts';
@@ -34,10 +35,10 @@ import { prepareByteObservation } from './observed-image.mts';
 import { preparePds4Observation } from './observed-pds4.mts';
 import { prepareFitsObservation } from './observed-fits.mts';
 import { prepareControlledOrthographicMosaic } from './controlled-orthographic-mosaic.mts';
-import { prepareShapeCameraMosaic, prepareShapeCameraColor } from './shape-camera-mosaic.mts';
+import { prepareShapeCameraMosaic, prepareShapeCameraColor, resolveCameraPhotometry } from './shape-camera-mosaic.mts';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mts';
 import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mts';
-import { loadGeoObservationSurface } from './observed-geo-surface.mts';
+import { loadSurfaceObservation } from '../surface-observations/index.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';
 import { radialModelForLens } from './radial-models.mts';
 
@@ -195,7 +196,8 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     const { rgb, missing, grid } = recipe.format === 'controlled-shape-color'
       ? await prepareShapeCameraColor(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain)
       : recipe.format === 'controlled-shape-camera'
-      ? await prepareShapeCameraMosaic(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain)
+      ? await prepareShapeCameraMosaic(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain,
+        { photometry: await resolveCameraPhotometry(sourceDirectory, source.manifest, recipe) })
       : recipe.format === 'controlled-orthographic'
       ? await prepareControlledOrthographicMosaic(sourceDirectory, tiles, recipe, width, height)
       : await preparePdsByteMosaic(sourceDirectory, tiles, width, height);
@@ -205,7 +207,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   for (const recipe of config.raster.surfaceObservations ?? []) {
     const model = modelForLens(recipe.id), observationRadial = model?.radial ?? radial, observationConfig = model?.config ?? config;
     if (!observationRadial?.grid?.closestPoint) throw new Error('Georeferenced observations require source-preserving terrain.');
-    const observation = await loadGeoObservationSurface({ sourceDirectory, source, recipe, radial:{...observationRadial,grid:requireTerrainMesh(observationRadial.grid)}, config:{geometry:shape({radius:number,radiusKm:number,radialTerrain:shape({path:text,simplification:shape({method:text,maximumErrorMeters:number})})})(observationConfig.geometry),raster:config.raster} });
+    const observation = await loadSurfaceObservation({ sourceDirectory, source, recipe, radial:{...observationRadial,grid:requireTerrainMesh(observationRadial.grid)}, config:{geometry:shape({radius:number,radiusKm:number,radialTerrain:shape({path:text,simplification:shape({method:text,maximumErrorMeters:number})})})(observationConfig.geometry),raster:config.raster} });
     observationRadial.observationSurfaces ??= new Map();
     observationRadial.observationSurfaces.set(recipe.id, observation);
     const { rgb, missing } = observation.preview(width, height);
@@ -287,14 +289,13 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     if (!base) throw new Error(`Color observation base does not exist: ${recipe.monochromeBase}`);
     if (photometry && !('owners' in color)) throw new Error('Corrected color has no observation ownership.');
     const levels=recipe.photometry && 'owners' in color ? matchObservedColorLevels(color,base,{width,height,...recipe.photometry.levels}):null;
-    if(photometry && !color.rgb.every(value=>Number.isFinite(value)&&value>=0&&value<=255))throw new Error('Corrected observation exceeds the display range.');
-    const rgb = color.rgb instanceof Uint8Array ? color.rgb : Buffer.from(color.rgb);
+    const rgb = color.rgb instanceof Uint8Array ? color.rgb : encodeBandColor(color.rgb,color.missing,color.display);
     let monochromePixels = 0;
     for (let i = 0; i < color.missing.length; i++) if (color.missing[i] && !base.missing[i]) {
       rgb.set(base.rgb.subarray(i * 3, i * 3 + 3), i * 3); color.missing[i] = 0; monochromePixels++;
     }
     surfaces.push(await packSurface(recipe.id, rgb, color.missing, {
-      ...recipe.metadata, sourceIds: color.sourceIds, monochromePixels, observationCoverage: color.coverage,
+      ...recipe.metadata, sourceIds: color.sourceIds, monochromePixels, observationCoverage: color.coverage,colorDisplay:color.colorDisplay,
       ...(photometry?{photometry:'photometry' in color ? color.photometry : undefined,levels}:{}),
     }));
   }

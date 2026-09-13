@@ -30,6 +30,9 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     root.className = 'css-volume-projection';
     camera.className = 'css-volume-camera';
     scene.className = 'css-volume-scene';
+    // The camera turns this scene every frame. Without the hint Chrome re-rastered each slice
+    // layer whenever its projected scale moved: thousands of layers a second during a drag.
+    scene.style.willChange = 'transform';
     mesh.className = 'css-volume-mesh';
     root.style.opacity = '0';
     root.style.display = 'block';
@@ -59,6 +62,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   let previousPerspective = '', previousOrigin = '', previousTransform = '';
   let previousClipView = '';
   let previousOrientation: readonly number[] | null = null;
+  const rootVisible: (boolean | null)[] = roots.map(() => null), rootOpacity = roots.map(() => '');
   const publish = ({ world, viewport }: VolumeCameraPublication) => {
     if (destroyed) return;
     if (world.referenceFrame !== payload.frame.referenceFrame || world.epochJdTt !== payload.frame.epochJdTt) {
@@ -106,10 +110,14 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       const root = roots[index]!;
       const { weight, opticalGain } = strengths[index]!;
       total += weight;
-      root.style.visibility = weight > 0 ? 'visible' : 'hidden';
-      // A zero-weight axis stack leaves layout and compositing, not just paint.
-      root.style.display = weight > 0 ? 'block' : 'none';
-      root.style.opacity = total > 0 ? String(weight / total) : '0';
+      const visible = weight > 0, opacity = total > 0 ? String(weight / total) : '0';
+      if (rootVisible[index] !== visible) {
+        root.style.visibility = visible ? 'visible' : 'hidden';
+        // A zero-weight axis stack leaves layout and compositing, not just paint.
+        root.style.display = visible ? 'block' : 'none';
+        rootVisible[index] = visible;
+      }
+      if (rootOpacity[index] !== opacity) { root.style.opacity = opacity; rootOpacity[index] = opacity; }
       // Opacity belongs to atomic images, never the mesh (which flattens 3D).
       // n full copies plus a fraction f give T=(1-alpha)^n*(1-f*alpha).
       // Integer gains are exact; the fractional step linearly approximates alpha.

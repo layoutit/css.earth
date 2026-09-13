@@ -14,7 +14,10 @@ test('Lutetia preserves its source pins and each runtime preparation input has a
  const source=await createSourceManifest({planetId:'lutetia',planetName:'Lutetia',sourceRoot:root});await source.verify();
  const plan=await read('preparation/acquisition.json');
  for(const input of source.manifest.inputs)if(!['preparation/camera.json','observations/osiris-camera.json',
-   'preparation/n20100710t154135529id4df22-camera.json','observations/n20100710t154135529id4df22-camera.json'].includes(input.path))assert.ok(plan.operations.some(step=>step.path===input.path),`Missing acquisition path for ${input.path}`);
+   'preparation/n20100710t154135529id4df22-camera.json','observations/n20100710t154135529id4df22-camera.json',
+   'preparation/n20100710t154241240id4df22-camera.json','observations/n20100710t154241240id4df22-camera.json',
+   // Surface places are project-authored and committed, so they have nothing to restore.
+   'features/manifest.json','preparation/features.json','presentation/surface-map.json'].includes(input.path))assert.ok(plan.operations.some(step=>step.path===input.path),`Missing acquisition path for ${input.path}`);
 });
 
 test('Lutetia source axes, original indexed vertices and closed volume retain the released kilometer frame',async()=>{

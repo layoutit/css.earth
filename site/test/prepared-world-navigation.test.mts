@@ -51,7 +51,8 @@ function fixtureFactory() {
     mounted(): ObjectSceneLifecycle & { navigation: MockNavigation } { return { ...lifecycle, navigation: { ...navigation, frame: frames[1] } }; },
     tick(value: number) { time = value; const entries = [...callbacks.values()]; callbacks.clear(); for (const fn of entries) fn(time); },
     step(milliseconds = 1000 / 60) { this.tick(time + milliseconds); },
-    input() { const event = new Event('wheel'); Object.defineProperty(event, 'target', { value: { closest: () => true } }); documentTarget.dispatchEvent(event); },
+    input() { const event = new Event('pointerdown'); Object.defineProperty(event, 'target', { value: { closest: () => true } }); documentTarget.dispatchEvent(event); },
+    wheel() { const event = new Event('wheel', { cancelable: true }); Object.defineProperty(event, 'target', { value: { closest: () => true } }); documentTarget.dispatchEvent(event); return event; },
     get pending() { return callbacks.size; } };
 }
 function deferred<T = void>() {
@@ -105,6 +106,38 @@ test('a terminal extreme-range pose finishes without a tail of identical publica
   const terminal = f.paints.filter(world => JSON.stringify(world.pose) === JSON.stringify(target.pose));
   assert.equal(terminal.length, 1, 'one terminal publication, with no dead flight tail');
   assert.equal(f.pending, 0);
+});
+
+test('a long fly-to ends once its remaining approach no longer moves the body on screen', async () => {
+  const f = fixtureFactory(), frame = f.navigation.frame, optics = f.navigation.optics();
+  f.navigation.apply({ referenceFrame: 'world', epochJdTt: 1, pose: { positionM: [0, 0, 2.3e9], orientationXyzw: [0, 0, 0, 1] } });
+  f.paints.length = 0;
+  const target = createWorldSelectionTarget(f.navigation.capture(), frame, optics);
+  await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal }) });
+  assert.deepEqual(required(f.paints.at(-1)).pose, target.pose, 'The flight still ends on its exact target');
+  // Pixel oracle: how far each publication still draws the body from where it finally rests.
+  const shown = f.paints.map(world => presentWorldCamera(world, frame, optics)), final = required(shown.at(-1));
+  const offset = (view: typeof final) => view.silhouette && view.centerPixels && final.silhouette && final.centerPixels
+    ? Math.max(Math.abs(view.centerPixels[0] - final.centerPixels[0]), Math.abs(view.centerPixels[1] - final.centerPixels[1]),
+      Math.abs(view.silhouette.radialSemiAxis - final.silhouette.radialSemiAxis), Math.abs(view.silhouette.tangentialSemiAxis - final.silhouette.tangentialSemiAxis))
+    : Infinity;
+  let settled = shown.length - 1;
+  while (settled > 0 && offset(required(shown[settled - 1])) <= 0.25) settled--;
+  assert.ok(shown.length - 1 - settled <= 30, `${shown.length - 1 - settled} of ${shown.length} publications drew the body within a quarter pixel of its resting place`);
+});
+
+test('a short center selection slows into its target instead of stopping at full speed', async () => {
+  const f = fixtureFactory(), frame = f.navigation.frame, optics = f.navigation.optics();
+  f.navigation.apply({ referenceFrame: 'world', epochJdTt: 1, pose: { positionM: [0, 0, 2.3e9], orientationXyzw: [0, 0, 0, 1] } });
+  f.paints.length = 0;
+  const target = createWorldSelectionTarget(f.navigation.capture(), frame, optics);
+  await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation },
+    signal: f.controller.signal, targetWorldCamera: target, centerSelection: true }) });
+  assert.deepEqual(required(f.paints.at(-1)).pose, target.pose, 'The flight still ends on its exact target');
+  // Pixel oracle: how far the drawn body edge moves between publications.
+  const radii = f.paints.map(world => presentWorldCamera(world, frame, optics).silhouette?.tangentialSemiAxis ?? 0);
+  const steps = radii.slice(1).map((radius, index) => Math.abs(radius - required(radii[index])));
+  assert.ok(Math.max(...steps.slice(-5)) <= 5, `the last five publications moved the body edge by up to ${Math.max(...steps.slice(-5)).toFixed(1)} px`);
 });
 
 test('the exact final camera demand finishes before the old scene is handed off', async () => {
@@ -530,4 +563,43 @@ test('centering changes the focus at the same range and orientation, then focus 
   assert.ok(Math.abs(projection.distanceM / 2e8 - 1) < 1e-12);
   await drainFrames(f, { task: f.service.focus({ objectId: '1', mount, signal: f.controller.signal }) });
   assert.ok(range(mount.navigation.capture().pose, mount.navigation.frame.originM) < 2e6);
+});
+
+test('a wheel during a flight hurries the arrival instead of stopping it', async () => {
+  const normal = fixtureFactory(), hurried = fixtureFactory();
+  const fly = (f: ReturnType<typeof fixtureFactory>) => f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal });
+  const frames = async (f: ReturnType<typeof fixtureFactory>, task: Promise<void>) => {
+    let settled = false, failure: unknown = null, count = 0;
+    task.then(() => { settled = true; }, error => { settled = true; failure = error; });
+    while (count < 1000) { await nextTurn(); if (settled) break; f.step(); count++; }
+    if (failure) throw failure;
+    return count;
+  };
+  const normalTask = fly(normal), hurriedTask = fly(hurried);
+  for (const f of [normal, hurried]) { f.tick(0); f.tick(100); }
+  const wheel = hurried.wheel();
+  assert.equal(wheel.defaultPrevented, true, 'The flight keeps the wheel from zooming the camera mid-flight');
+  const normalFrames = await frames(normal, normalTask), hurriedFrames = await frames(hurried, hurriedTask);
+  assert.ok(hurriedFrames < normalFrames / 2, `A hurried flight arrives in under half the frames (${hurriedFrames} of ${normalFrames})`);
+  closePose(hurried.navigation.capture().pose, normal.navigation.capture().pose);
+  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(hurried.documentTarget, name).length, 0);
+});
+
+test('a wheel during a prepared navigation hurries it to the destination instead of abandoning it', async () => {
+  const run = async (hurried: boolean) => {
+    const f = fixtureFactory(), context: WorldCameraPose[] = [];
+    f.navigation.apply({ ...f.navigation.capture(), pose: { positionM: [0, 0, 2e8], orientationXyzw: [0, 0, 0, 1] } });
+    const task = f.start({ presentWorld: (world, _viewport, options) => { options?.commit?.(); context.push(world); } });
+    f.step(); f.step();
+    if (hurried) assert.equal(f.wheel().defaultPrevented, true, 'The navigation keeps the wheel from zooming the camera mid-flight');
+    const handoff = await drainFrames(f, { task });
+    required(handoff.mountOptions.onNavigationReady)(f.mounted().navigation);
+    await drainFrames(f, { task: handoff.afterMount({ ...lifecycle, navigation: f.navigation }, { signal: f.controller.signal }) });
+    assert.equal(f.pending, 0);
+    for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+    return { frames: context.length + f.paints.length, pose: f.navigation.capture().pose };
+  };
+  const normal = await run(false), hurried = await run(true);
+  assert.ok(hurried.frames < normal.frames / 2, `A hurried navigation arrives in under half the frames (${hurried.frames} of ${normal.frames})`);
+  closePose(hurried.pose, normal.pose);
 });

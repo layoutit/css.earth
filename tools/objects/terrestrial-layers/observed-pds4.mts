@@ -1,6 +1,7 @@
 import {parsePds4Policy,parseImageEntry} from './source-records.mts';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
+import { parseBandColorDisplay, bandColorByte, bandColorEvidence } from '../color-transfer.mts';
 
 export function validatePds4ObservationPolicy(value: unknown) {
   const p=parsePds4Policy(value);
@@ -11,6 +12,9 @@ export function validatePds4ObservationPolicy(value: unknown) {
       !Array.isArray(p.displayRange) || p.displayRange.length !== 2 || !p.displayRange.every(Number.isFinite) || !(p.displayRange[0] < p.displayRange[1])) {
     throw new TypeError('Invalid PDS4 color observation policy.');
   }
+  const display=parseBandColorDisplay(p.colorDisplay,p.wavelengthsNm.map(n=>`${n} nm`));
+  if(display.inputQuantity!=='derived-band-value'||display.displayRange.some((n,i)=>n!==p.displayRange[i]))
+    throw new TypeError('PDS4 enhanced-color policy must preserve the archive-derived values and declared display range.');
   return p;
 }
 
@@ -75,9 +79,12 @@ export function decodePds4Color(bytes: Buffer, xml: string, sourceEntry: unknown
 // clamp only within the outer half-cell and require a valid complete RGB footprint.
 export function mapPds4Color(source: ReturnType<typeof decodePds4Color>, value: unknown, width: number, height: number) {
   const policy=validatePds4ObservationPolicy(value);
+  const display=parseBandColorDisplay(policy.colorDisplay,policy.wavelengthsNm.map(n=>`${n} nm`));
+  if(display.inputQuantity!=='derived-band-value'||display.displayRange.some((n,i)=>n!==policy.displayRange[i]))
+    throw new Error('The archive color mosaic requires its documented derived band values and one common display range, not an I/F or natural-color claim.');
   if (![width, height].every(n => Number.isSafeInteger(n) && n > 0)) throw new Error('Invalid output dimensions.');
   const { grid, values, selected, valid } = source, rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
-  const scale = grid.radius * Math.PI / 180, [low, high] = policy.displayRange;
+  const scale = grid.radius * Math.PI / 180;
   const x0 = new Int32Array(width), x1 = new Int32Array(width), dx = new Float64Array(width);
   for (let x = 0; x < width; x++) {
     const lon = (((x + .5) * 360 / width - grid.centerLongitude + 180) % 360 + 360) % 360 - 180;
@@ -96,11 +103,11 @@ export function mapPds4Color(source: ReturnType<typeof decodePds4Color>, value: 
       for (let channel = 0; channel < 3; channel++) {
         const offset = selected[channel], u = dx[x];
         const value = (values[offset + a] * (1 - u) + values[offset + b] * u) * (1 - dy) + (values[offset + c] * (1 - u) + values[offset + d] * u) * dy;
-        rgb[i * 3 + channel] = Math.round(255 * Math.max(0, Math.min(1, (value - low) / (high - low))));
+        rgb[i * 3 + channel] = bandColorByte(value,display);
       }
     }
   }
-  return { rgb, missing, sourceMissingPixels: source.sourceMissingPixels, sourceGeoreference: grid };
+  return { rgb, missing, sourceMissingPixels: source.sourceMissingPixels, sourceGeoreference: grid,colorDisplay:bandColorEvidence(display) };
 }
 
 export async function preparePds4Observation(sourceDirectory: string, sourceEntry: unknown, value: unknown, width: number, height: number) {

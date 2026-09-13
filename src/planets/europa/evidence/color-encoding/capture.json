@@ -1,0 +1,413 @@
+{
+  "body": "europa",
+  "lens": "enhanced",
+  "baselineRef": "8cc1a2fae",
+  "baselineCommit": "8cc1a2faead111bd3535c0bed326180631b42f09",
+  "toolSha256": "9b436e502e37039985cf2f412556ca90d038edfb1538ced55cafa411a459e6a6",
+  "colorTransferSha256": "4fdacc08867ab12c5b4f4b5819210f52f044155a5ebcbbf912f0ff0d9d201fe5",
+  "recipeSha256": "9dce630a0df6ba25f2faebd41761a384240a3075f19fc3c34074e1af648ac590",
+  "runtimeSha256": "729be67b98c2fbf0b92361abbbd862d1675eb7426f3418bfc07a7304f5ec3ccb",
+  "geometrySha256": "9f296cbca28e5654d0df9c07c967922e8d4123a4e261878b151f244f41375392",
+  "geometryUnchanged": true,
+  "browser": "152.0.7977.84",
+  "channel": "chrome",
+  "purpose": "Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.",
+  "existingAssetChanges": [
+    {
+      "filename": "europa-enhanced.webp",
+      "beforeSha256": "ece705e5acee7f14bebf24ada58a62973a6bf92b4f1799a27e674aee4c889b40",
+      "afterSha256": "003af8c6437edbc9360590fcdabdc6093e42afbb40d4d3581280b2c78ed89cab",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "europa-enhanced@2x.webp",
+      "beforeSha256": "4b876dcda47989db898f4d9a8b87434f6e318baf43565fbafdcd04817ffd8042",
+      "afterSha256": "a1d399e34e5d34afb4909653f87b2e88d4c3391fa941d53719692a98a1b4bf60",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "europa-lens-enhanced.webp",
+      "beforeSha256": "43cd769a21ff3a01c63238687758c66bdf13817470dc481947c9718515688603",
+      "afterSha256": "a63aa6f1354bfc04c6147d9a0146bab661a0ab3ba97ae2933203a1c4bdf96c02",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    }
+  ],
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 2,
+    "rowText": "False color\nGalileo",
+    "bounds": {
+      "x": 20,
+      "y": 673.296875,
+      "width": 350,
+      "height": 20
+    },
+    "pageWidth": 390,
+    "pose": {
+      "schema": "cssearth-camera-pose@1",
+      "scene": "matrix3d(-1,0,0,0,0,0.637514645963,0.770438236449,0,0,0.770438236449,-0.637514645963,0,0,0,0,1)",
+      "skybox": "matrix3d(0.6282154,-0.59943122618,0.496011448885,0,-0.7138371,-0.190473690068,0.673911084011,0,-0.3094862,-0.777432792182,-0.547554870428,0,0,0,0,1)",
+      "sunView": "matrix3d(-1,0,0,0,0,0.983592704365,-0.180403414379,0,0,-0.180403414379,-0.983592704365,0,0,0,0,1)"
+    },
+    "stableDom": true,
+    "sha256": "679efc51a37b1da6ac9a499ab45314e3ad2655f2668ed4d21f5dbbe42c59c842",
+    "errors": []
+  },
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr1.png",
+          "sha256": "c8db27aaa88f3fba34a09d6c3bb3b786f2527ec0520403f21eafe55707ff723c",
+          "url": "http://127.0.0.1:4284/europa/?v=MEZAxu5GdEsrf0FCxzNAAAAAAAAAAAAAAAA_2z8Ygr7KPwAAAAAAAAAAAAEAAAAAAAAAAA#dataset=enhanced",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-1,0,0,0,0,0.637514645963,0.770438236449,0,0,0.770438236449,-0.637514645963,0,0,0,0,1)",
+            "skybox": "matrix3d(0.6282154,-0.59943122618,0.496011448885,0,-0.7138371,-0.190473690068,0.673911084011,0,-0.3094862,-0.777432792182,-0.547554870428,0,0,0,0,1)",
+            "sunView": "matrix3d(-1,0,0,0,0,0.983592704365,-0.180403414379,0,0,-0.180403414379,-0.983592704365,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "stars": true
+          },
+          "lens": {
+            "id": "enhanced",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 2,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 853,
+            "retainedLeaves": 707,
+            "directlyHiddenLeaves": 256
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.918375372691,0.030609235241,0.394524713487,0,0.284443088727,0.744180804236,0.604389824437,0,-0.27509780826,0.667276558351,-0.692143908855,0,0,0,0,1)",
+          "skybox": "matrix3d(0.790974458276,-0.538396579327,0.290668661652,0,-0.383865581432,-0.066734370605,0.920974223456,0,-0.476451809422,-0.840044895716,-0.25945719678,0,0,0,0,1)",
+          "sunView": "matrix3d(-0.918375372691,0.030609235241,-0.394524713487,0,0.041066584901,0.998992673703,-0.018087937755,0,0.393573640426,-0.032813299219,-0.918707285786,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "europa-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "europa-lighting-2x-row-31.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-31.webp",
+          "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637",
+          "bytes": 526556
+        },
+        {
+          "filename": "europa-lighting-2x-billboard.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-billboard.webp",
+          "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367",
+          "bytes": 115740
+        },
+        {
+          "filename": "europa-lighting-2x-row-27.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-27.webp",
+          "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8",
+          "bytes": 403282
+        },
+        {
+          "filename": "europa-poles-normal@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-poles-normal@2x.webp",
+          "sha256": "7e22840665ef366b82653d4455c55e113a84a963f4d36041969e4604d8a973a8",
+          "bytes": 132918
+        },
+        {
+          "filename": "europa-lighting-2x-row-28.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-28.webp",
+          "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e",
+          "bytes": 429004
+        },
+        {
+          "filename": "europa-lighting-2x-row-29.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-29.webp",
+          "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf",
+          "bytes": 456570
+        },
+        {
+          "filename": "europa-lens-normal.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lens-normal.webp",
+          "sha256": "f825c07231986c76e555af5b29eadc1b7a91e96c2cc0b55f01446a4c22b1fd65",
+          "bytes": 1024
+        },
+        {
+          "filename": "europa-lens-enhanced.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lens-enhanced.webp",
+          "sha256": "a63aa6f1354bfc04c6147d9a0146bab661a0ab3ba97ae2933203a1c4bdf96c02",
+          "bytes": 916
+        },
+        {
+          "filename": "europa-lens-geology.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lens-geology.webp",
+          "sha256": "697a5fbba5af0d0a2ea39cd3e0bc2ce3d82c4fd5176e7990a810713767d1558e",
+          "bytes": 470
+        },
+        {
+          "filename": "europa-lens-elevation.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lens-elevation.webp",
+          "sha256": "7f7eb1f866707be8ae0e57bfcbd9243f9f9b6438c7b33ca8e9f3b7cec345d904",
+          "bytes": 240
+        },
+        {
+          "filename": "europa-lens-infrared.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lens-infrared.webp",
+          "sha256": "74e0b9e6414fbb77b0a1cf3a9c5a9804e5dc430117cb6ce3e2b6d73074d4ad13",
+          "bytes": 712
+        },
+        {
+          "filename": "europa-normal@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-normal@2x.webp",
+          "sha256": "02d24726df09217cb9ee4403222c49b4454898f74924f1d035db51ab63de1395",
+          "bytes": 7179116
+        },
+        {
+          "filename": "europa-features.json",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-features.json",
+          "sha256": "d1354e460f8f51451224b448eee0dd1d20456edb33773912b094c041a417b6e8",
+          "bytes": 700906
+        },
+        {
+          "filename": "europa-poles-enhanced@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-poles-enhanced@2x.webp",
+          "sha256": "ac1f6fcc6023daabb208d8f491b2cb8c56a8d156707debdaeffac329e8a5520a",
+          "bytes": 131284
+        },
+        {
+          "filename": "europa-enhanced@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-enhanced@2x.webp",
+          "sha256": "a1d399e34e5d34afb4909653f87b2e88d4c3391fa941d53719692a98a1b4bf60",
+          "bytes": 6469160
+        },
+        {
+          "filename": "europa-lighting-2x-row-10.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-10.webp",
+          "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2",
+          "bytes": 177128
+        },
+        {
+          "filename": "europa-lighting-2x-row-09.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-09.webp",
+          "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3",
+          "bytes": 172632
+        },
+        {
+          "filename": "europa-lighting-2x-row-08.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-08.webp",
+          "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600",
+          "bytes": 163984
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr2.png",
+          "sha256": "93e6aa4759d9c5e989c83cb838b53a435590abe38784dd64848dd9877024bac9",
+          "url": "http://127.0.0.1:4284/europa/?v=MEZAxu5GdEsrf0FCxzNAAAAAAAAAAAAAAAA_2z8Ygr7KPwAAAAAAAAAAAAEAAAAAAAAAAA#dataset=enhanced",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-1,0,0,0,0,0.637514645963,0.770438236449,0,0,0.770438236449,-0.637514645963,0,0,0,0,1)",
+            "skybox": "matrix3d(0.6282154,-0.59943122618,0.496011448885,0,-0.7138371,-0.190473690068,0.673911084011,0,-0.3094862,-0.777432792182,-0.547554870428,0,0,0,0,1)",
+            "sunView": "matrix3d(-1,0,0,0,0,0.983592704365,-0.180403414379,0,0,-0.180403414379,-0.983592704365,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "stars": true
+          },
+          "lens": {
+            "id": "enhanced",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 2,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 853,
+            "retainedLeaves": 707,
+            "directlyHiddenLeaves": 256
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.918375372691,0.030609235241,0.394524713487,0,0.284443088727,0.744180804236,0.604389824437,0,-0.27509780826,0.667276558351,-0.692143908855,0,0,0,0,1)",
+          "skybox": "matrix3d(0.790974458276,-0.538396579327,0.290668661652,0,-0.383865581432,-0.066734370605,0.920974223456,0,-0.476451809422,-0.840044895716,-0.25945719678,0,0,0,0,1)",
+          "sunView": "matrix3d(-0.918375372691,0.030609235241,-0.394524713487,0,0.041066584901,0.998992673703,-0.018087937755,0,0.393573640426,-0.032813299219,-0.918707285786,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "europa-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "europa-lighting-2x-row-31.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-31.webp",
+          "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637",
+          "bytes": 526556
+        },
+        {
+          "filename": "europa-lighting-2x-billboard.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-billboard.webp",
+          "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367",
+          "bytes": 115740
+        },
+        {
+          "filename": "europa-poles-normal@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-poles-normal@2x.webp",
+          "sha256": "7e22840665ef366b82653d4455c55e113a84a963f4d36041969e4604d8a973a8",
+          "bytes": 132918
+        },
+        {
+          "filename": "europa-lighting-2x-row-27.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-27.webp",
+          "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8",
+          "bytes": 403282
+        },
+        {
+          "filename": "europa-lighting-2x-row-28.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-28.webp",
+          "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e",
+          "bytes": 429004
+        },
+        {
+          "filename": "europa-lighting-2x-row-29.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-29.webp",
+          "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf",
+          "bytes": 456570
+        },
+        {
+          "filename": "europa-lens-normal.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lens-normal.webp",
+          "sha256": "f825c07231986c76e555af5b29eadc1b7a91e96c2cc0b55f01446a4c22b1fd65",
+          "bytes": 1024
+        },
+        {
+          "filename": "europa-lens-enhanced.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lens-enhanced.webp",
+          "sha256": "a63aa6f1354bfc04c6147d9a0146bab661a0ab3ba97ae2933203a1c4bdf96c02",
+          "bytes": 916
+        },
+        {
+          "filename": "europa-lens-elevation.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lens-elevation.webp",
+          "sha256": "7f7eb1f866707be8ae0e57bfcbd9243f9f9b6438c7b33ca8e9f3b7cec345d904",
+          "bytes": 240
+        },
+        {
+          "filename": "europa-lens-geology.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lens-geology.webp",
+          "sha256": "697a5fbba5af0d0a2ea39cd3e0bc2ce3d82c4fd5176e7990a810713767d1558e",
+          "bytes": 470
+        },
+        {
+          "filename": "europa-lens-infrared.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lens-infrared.webp",
+          "sha256": "74e0b9e6414fbb77b0a1cf3a9c5a9804e5dc430117cb6ce3e2b6d73074d4ad13",
+          "bytes": 712
+        },
+        {
+          "filename": "europa-normal@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-normal@2x.webp",
+          "sha256": "02d24726df09217cb9ee4403222c49b4454898f74924f1d035db51ab63de1395",
+          "bytes": 7179116
+        },
+        {
+          "filename": "europa-features.json",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-features.json",
+          "sha256": "d1354e460f8f51451224b448eee0dd1d20456edb33773912b094c041a417b6e8",
+          "bytes": 700906
+        },
+        {
+          "filename": "europa-poles-enhanced@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-poles-enhanced@2x.webp",
+          "sha256": "ac1f6fcc6023daabb208d8f491b2cb8c56a8d156707debdaeffac329e8a5520a",
+          "bytes": 131284
+        },
+        {
+          "filename": "europa-enhanced@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-enhanced@2x.webp",
+          "sha256": "a1d399e34e5d34afb4909653f87b2e88d4c3391fa941d53719692a98a1b4bf60",
+          "bytes": 6469160
+        },
+        {
+          "filename": "europa-lighting-2x-row-08.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-08.webp",
+          "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600",
+          "bytes": 163984
+        },
+        {
+          "filename": "europa-lighting-2x-row-09.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-09.webp",
+          "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3",
+          "bytes": 172632
+        },
+        {
+          "filename": "europa-lighting-2x-row-10.webp",
+          "url": "http://127.0.0.1:4284/scenes/europa/europa-lighting-2x-row-10.webp",
+          "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2",
+          "bytes": 177128
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

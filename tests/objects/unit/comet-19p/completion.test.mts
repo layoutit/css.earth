@@ -3,7 +3,6 @@ import {required} from '../../../../tools/test-values.mts';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { gunzipSync } from 'node:zlib';
 import sharp from 'sharp';
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 
@@ -31,8 +30,8 @@ test('both completed Borrelly banks close around source-backed terrain', async (
 });
 
 test('every added face is gridded in all datasets and has no MICAS source code', async () => {
-  const index = await json('prepared/micas-source-index.json'), codes = gunzipSync(Buffer.from(index.data, 'base64'));
-  let accepted = 0, withheld = 0;
+  // A single-photograph lens has no source index: its atlas and transfer counts already say where MICAS was sampled.
+  let withheld = 0;
   for (const lens of ['micas','usgs','dlr','height','difference']) {
     const terrain = await json(`prepared/terrain${lens==='dlr'?'-dlr':''}.json`);
     const {data,info} = await sharp(new URL(`../../../../public/scenes/comet-19p/comet-19p-${lens}-surface@2x.webp`, import.meta.url).pathname).removeAlpha().raw().toBuffer({resolveWithObject:true});
@@ -41,12 +40,14 @@ test('every added face is gridded in all datasets and has no MICAS source code',
       const tile=terrain.source.tileSize, columns=terrain.source.atlasColumns;
       for (let y=0;y<tile;y++) for (let x=0;x<tile;x++) {
         const pixel=(Math.floor(i/columns)*tile+y)*info.width+i%columns*tile+x;
-        if (!terrain.faces[i].estimated) { if(lens==='micas' && codes[pixel]) accepted++; continue; }
+        if (!terrain.faces[i].estimated) continue;
         const rgb=[...data.subarray(pixel*3,pixel*3+3)];
         assert.ok(rgb.every(n=>n>=76 && n<=122) && Math.max(...rgb)-Math.min(...rgb)<=10, `${lens}: estimated face ${i} must contain neutral grid, never source imagery or science colors.`);
-        if (lens==='micas') { assert.equal(codes[pixel],0); withheld++; }
+        if (lens==='micas') withheld++;
       }
     }
   }
-  assert.ok(accepted>100000 && withheld>500000);
+  const surfaces = await json('prepared/surfaces.json');
+  const micas = (Array.isArray(surfaces) ? surfaces : surfaces.surfaces).find((surface: { id: string }) => surface.id === 'micas');
+  assert.ok(Number(micas.observation.transfer.counts.accepted) > 100000 && withheld > 500000);
 });

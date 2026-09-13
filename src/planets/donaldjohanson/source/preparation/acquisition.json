@@ -89,6 +89,24 @@
       ],
       "path": "features/DONALDJOHANSON_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DONALDJOHANSON_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/lor_0798443242_04596_00001_1x1_sci_03.fit",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/lor_0798443242_04596_00001_1x1_sci_03.xml",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.xml"
     }
   ]
 }

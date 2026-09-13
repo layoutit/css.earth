@@ -35,7 +35,7 @@ import { prepareRadialMaterials } from './radial-terrain.mts';
 import { loadRadialModels, combineRadialModels, radialTerrainForLens } from './radial-models.mts';
 import { validateRadialTableProfile } from './pds-radial-table.mts';
 import { validateFitsObservationPolicy } from './observed-fits.mts';
-import { validateGeoSurfaceRecipe } from './observed-geo-surface.mts';
+import { validateSurfaceObservation } from '../surface-observations/index.mts';
 import { validateFacetFieldRecipe } from './fits-facet-field.mts';
 
 /** A categorical grid is discrete units in a nearest-sampled GeoTIFF with its missing value kept apart from the unit codes;
@@ -71,7 +71,7 @@ export function parseTerrestrialProfile(input:unknown) {
     throw new TypeError('Invalid terrestrial surface preparation profile.');
   }
   validateTerrestrialRings(value.rings, value.geometry.radiusKm);
-  for (const recipe of value.raster.surfaceObservations ?? []) validateGeoSurfaceRecipe(recipe, radialTerrainForLens(value, recipe.id));
+  for (const recipe of value.raster.surfaceObservations ?? []) validateSurfaceObservation(recipe, radialTerrainForLens(value, recipe.id));
   if (value.raster.surfaceQuality !== undefined &&
       (!Number.isInteger(value.raster.surfaceQuality) || value.raster.surfaceQuality < 1 || value.raster.surfaceQuality > 100)) {
     throw new TypeError('Surface WebP quality must be an integer from 1 to 100.');

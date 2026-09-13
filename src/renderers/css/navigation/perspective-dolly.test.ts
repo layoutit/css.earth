@@ -155,10 +155,10 @@ it('draws the mesh only once it outgrows its proxy, and restores the same scene'
   dolly.setBodyCenter([0, 0, -1e7]);
   const far = dolly.publish(identity, 'rotateZ(0deg)');
   expect(hidden).toBe(true);
-  const firstTransform = element.style.transform;
+  expect(element.style.transform, 'A hidden scene draws nothing, so it is not transformed').toBeUndefined();
   dolly.setBodyCenter([0, 0, -2e7]);
   const further = dolly.publish(identity, 'rotateZ(0deg)');
-  expect(element.style.transform).not.toBe(firstTransform);
+  expect(element.style.transform, 'Hidden camera publication writes no scene transform').toBeUndefined();
   expect(further.projection.eyeFromScene[14]).toBe(-2e7);
   expect(far.projection.eyeFromScene[14]).toBe(-1e7);
   expect(visibilityWrites, 'Hidden camera publication does not churn visibility').toBe(1);
@@ -167,4 +167,5 @@ it('draws the mesh only once it outgrows its proxy, and restores the same scene'
   outside.setBodyCenter([0, 0, -1200]);
   expect(outside.publish(identity, 'rotateZ(0deg)').levelOfDetail!.stage).toBe('geometry');
   expect(hidden).toBe(false);
+  expect(element.style.transform, 'The shown scene carries the current pose').toMatch(/^translate3d\(/);
 });

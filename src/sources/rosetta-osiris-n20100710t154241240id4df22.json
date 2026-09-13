@@ -1,0 +1,33 @@
+{
+  "id": "rosetta-osiris-n20100710t154241240id4df22",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Lutetia · OSIRIS orange-filter photograph 2010-07-10T15:43:00.199",
+  "identifiers": [
+    {
+      "type": "pds3-product-id",
+      "value": "N20100710T154241240ID4DF22.IMG"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSINAC/RO-A-OSINAC-4-AST2-LUTETIA-STR-REFL-V1.0/DATA/IMG/N20100710T154241240ID4DF22.IMG",
+      "label": "Native PDS observation"
+    },
+    {
+      "role": "archive",
+      "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSINAC/RO-A-OSINAC-4-AST2-LUTETIA-STR-REFL-V1.0/DATA/IMG/N20100710T154241240ID4DF22.IMG",
+      "label": "ESA archive input"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSINAC/RO-A-OSINAC-4-AST2-LUTETIA-STR-REFL-V1.0/DATA/IMG/N20100710T154241240ID4DF22.IMG",
+      "checkedOn": "2026-09-13",
+      "locator": "Attached PDS3 label: PRODUCT_ID, START_TIME, TARGET_NAME, FILTER_NAME, I/F, sigma and quality arrays."
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

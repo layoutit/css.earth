@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "hasselmann-2016-hapke-1993",
+  "instrument": "Rosetta OSIRIS NAC",
+  "filter": "F82+F22, 649.2 nm",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "hapke",
+    "singleScatteringAlbedo": 0.238,
+    "hFunction": "hapke-1981",
+    "phaseFunction": {
+      "form": "henyey-greenstein",
+      "asymmetry": -0.271
+    },
+    "shadowHiding": {
+      "amplitude": 1.69,
+      "width": 0.047
+    },
+    "roughnessDegrees": 29.2
+  },
+  "fit": {
+    "phaseDegrees": [
+      0.15,
+      144.15
+    ],
+    "incidenceDegrees": [
+      0,
+      80
+    ],
+    "emissionDegrees": [
+      0,
+      80
+    ]
+  }
+}

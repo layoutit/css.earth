@@ -60,7 +60,90 @@
       }
     ],
     "observedColors": [],
-    "mosaics": []
+    "mosaics": [],
+    "surfaceObservations": [
+      {
+        "id": "lorri",
+        "format": "nh-lorri-camera",
+        "consumer": "lorri-observation",
+        "path": "observations/lor_0408626332_0x636_sci.fit",
+        "cameraPath": "observations/ca06-camera.json",
+        "startTime": "2019-01-01T05:26:54.116",
+        "filter": "PANCHROMATIC",
+        "allowLossy": false,
+        "transfer": {
+          "maximumSourceDistanceMeters": 250,
+          "maximumSeparationMeters": 180,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1
+        },
+        "displayPercentiles": [
+          1,
+          99.8
+        ],
+        "metadata": {
+          "label": "LORRI",
+          "falseColor": false,
+          "coverage": "New Horizons photograph from 1 January 2019 at 33 metres per native pixel. Original illumination retained. The grid marks unseen, grazing or rejected coverage."
+        }
+      },
+      {
+        "id": "mvic",
+        "format": "nh-mvic-camera",
+        "consumer": "mvic-observation",
+        "path": "observations/ca05_mvic_cube.fit",
+        "cameraPath": "observations/mvic-camera.json",
+        "startTime": "2019-01-01T05:12:55.280",
+        "filter": "NIR/RED/BLUE",
+        "allowLossy": false,
+        "transfer": {
+          "maximumSourceDistanceMeters": 250,
+          "maximumSeparationMeters": 600,
+          "maximumEmissionDegrees": 65,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 65,
+          "maximumEmissionDegrees": 65,
+          "maximumGain": 1
+        },
+        "displayPercentiles": [
+          1,
+          99.8
+        ],
+        "metadata": {
+          "label": "MVIC",
+          "falseColor": true,
+          "coverage": "New Horizons near-infrared, red and blue bands, registered and blur-matched by the mission team. Enhanced color at 340 m native resolution. Unseen and grazing surfaces remain gridded."
+        },
+        "colorDisplay": {
+          "kind": "band-composite",
+          "inputQuantity": "derived-band-value",
+          "bands": [
+            "NIR",
+            "RED",
+            "BLUE"
+          ],
+          "displayRange": [
+            0,
+            0.17
+          ],
+          "outputEncoding": "srgb"
+        },
+        "labelPath": "observations/ca05_mvic_cube.lblx"
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,
@@ -77,12 +160,12 @@
     "radius": 230,
     "radiusKm": 9.948,
     "camera": {
-      "initialScenePitchDegrees": -20,
-      "defaultControlYawDegrees": 135,
+      "initialScenePitchDegrees": 27.475878662587284,
+      "defaultControlYawDegrees": 122.28168102581337,
       "framingScale": 0.5105107661972121
     },
-    "mapUrl": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
-    "polesUrl": "/scenes/arrokoth/arrokoth-model-poles@2x.webp",
+    "mapUrl": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
+    "polesUrl": "/scenes/arrokoth/arrokoth-lorri-poles@2x.webp",
     "radialTerrain": {
       "path": "shape/arrokoth_porter_2024_v01.obj",
       "format": "wavefront-obj",
@@ -106,7 +189,7 @@
     "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim."
   },
   "presentation": {
-    "defaultLens": "albedo",
+    "defaultLens": "lorri",
     "pointColor": [
       160,
       160,

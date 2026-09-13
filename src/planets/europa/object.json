@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "6caf3cb69e4b27cc8fbec2d85a890ad8140d24ecc2e31caa64635cbbd9164c00"
+    "sha256": "1f5b4bcfe98983358a0dbbc0a752e6846d43f815a1160e7da3266e6c47aa2d2a"
   },
   "id": "europa",
   "properties": {
@@ -103,7 +103,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "be586369fca14d6a6ed74d3c15218f673842c58f40a3117c4b976c51b9159079"
+          "sha256": "9dce630a0df6ba25f2faebd41761a384240a3075f19fc3c34074e1af648ac590"
         },
         {
           "id": "geometry",
@@ -123,7 +123,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "adea0fe714df61db29809426fc78d414766723e35b1cca490aae48371373a85d"
+          "sha256": "95869f5400c626c6d3302c9466003ede4b3b6eba525f87d6de0e56e516814c81"
         },
         {
           "id": "solar-system",
@@ -162,7 +162,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "de0c4e83fe1e38f0643541466892587460135b0d6ff3b8f5f1de395b2ab69b5f"
+        "sha256": "56b5dbaa4ea9eda82f55bd29adc9c5110951af5d59697ba5bba0932ebebd0677"
       }
     },
     "catalog": {

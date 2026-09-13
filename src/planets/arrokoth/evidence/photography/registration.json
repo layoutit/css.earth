@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-arrokoth-registration-audit@1",
+  "meshSha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5",
+  "controlSha256": "ba4d45cb602d95a96e83a18f4fe3ec5d918f9f7fc3317397c953d0fc3aafa0cb",
+  "generator": {
+    "path": "tools/objects/arrokoth/qualify-photographs.mts",
+    "sha256": "fbe5dfc9df13864d873114956cb65f2cb3baa6a81bf86928cb9b539d77226641"
+  },
+  "elapsedSeconds": 1,
+  "method": "Frozen mesh attitude and pointing offsets; original TAN-SIP ray distortion. Along-normal ray-hit/miss limb residuals. No correction is fitted by this audit.",
+  "limits": {
+    "maximumHoldoutRmsPixels": 3,
+    "minimumMatchedHoldoutEdges": 100
+  },
+  "reports": [
+    {
+      "id": "ca05",
+      "path": "observations/lor_0408625591_0x630_sci.fit",
+      "imageSha256": "164bbbda8a7f43a18e75f3ed17922efa3217904e6885a470c6192d97b82447b9",
+      "midpointUtc": "2019-01-01T05:14:33.116",
+      "threshold": {
+        "threshold": 259.2335085635185,
+        "split": 269.350392639637,
+        "backgroundMedian": 4.3231682777404785,
+        "backgroundSigma": 50.98206805715561,
+        "bodyMean": 533.0193180916979
+      },
+      "fit": {
+        "candidateEdges": 394,
+        "matchedLitEdges": 227,
+        "unlitOrUnmatched": 167,
+        "rmsPixels": 1.6147059559702834,
+        "maximumPixels": 6.3046875
+      },
+      "holdout": {
+        "candidateEdges": 394,
+        "matchedLitEdges": 246,
+        "unlitOrUnmatched": 148,
+        "rmsPixels": 1.5829528886922093,
+        "maximumPixels": 5.3671875
+      }
+    },
+    {
+      "id": "ca06",
+      "path": "observations/lor_0408626332_0x636_sci.fit",
+      "imageSha256": "1fbb5124f417ea465db18cfdf5b7b8caee38cc30d8f1663b9939a648e27f0640",
+      "midpointUtc": "2019-01-01T05:26:54.116",
+      "threshold": {
+        "threshold": 250.58600057339666,
+        "split": 200.654235124588,
+        "backgroundMedian": 3.813429117202759,
+        "backgroundSigma": 49.35451429123878,
+        "bodyMean": 389.9746840237283
+      },
+      "fit": {
+        "candidateEdges": 500,
+        "matchedLitEdges": 245,
+        "unlitOrUnmatched": 255,
+        "rmsPixels": 2.5594197818404547,
+        "maximumPixels": 29.09375
+      },
+      "holdout": {
+        "candidateEdges": 500,
+        "matchedLitEdges": 243,
+        "unlitOrUnmatched": 257,
+        "rmsPixels": 2.855248829010907,
+        "maximumPixels": 28.53125
+      }
+    },
+    {
+      "id": "ca06-independent-exposure",
+      "path": "observations/lor_0408626333_0x636_sci.fit",
+      "imageSha256": "3d1385a024126791e1a1aa9350577aabecbd68f42f5c447603d75390a09d76ac",
+      "midpointUtc": "2019-01-01T05:26:55.116",
+      "threshold": {
+        "threshold": 250.5741053981781,
+        "split": 199.33919596672058,
+        "backgroundMedian": 4.90074348449707,
+        "backgroundSigma": 49.134672382736206,
+        "bodyMean": 387.85718658358246
+      },
+      "fit": {
+        "candidateEdges": 500,
+        "matchedLitEdges": 245,
+        "unlitOrUnmatched": 255,
+        "rmsPixels": 2.3759894877856342,
+        "maximumPixels": 13.671875
+      },
+      "holdout": {
+        "candidateEdges": 500,
+        "matchedLitEdges": 230,
+        "unlitOrUnmatched": 270,
+        "rmsPixels": 2.287063473418722,
+        "maximumPixels": 8.140625
+      }
+    }
+  ]
+}

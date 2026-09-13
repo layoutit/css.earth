@@ -64,7 +64,7 @@ export function matchImageFeatures(target:MatchRaster,referenceWarp:MatchRaster,
     }
   }
   const fit=matches.filter(m=>m.partition==='fit');
-  if(fit.length<6||matches.length-fit.length<6)throw new Error('Insufficient independent image feature controls.');
+  if(fit.length<6||matches.length-fit.length<6)throw new Error('Insufficient independent image feature controls.', {cause:{matches,excluded}});
   const offsetPixels=[0,1].map(i=>fit.reduce((sum,m)=>sum+m.sourcePixel[i]-m.seedPixel[i],0)/fit.length);
   return {offsetPixels,matches,excluded};
 }

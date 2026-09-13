@@ -1,0 +1,152 @@
+{
+  "schema": "cssearth-arrokoth-photography@1",
+  "mesh": "shape/arrokoth_porter_2024_v01.obj",
+  "references": [
+    "reference/porteretal2024b.pdf",
+    "observations/lor_0408625591_0x630_sci.lbl",
+    "observations/lor_0408626332_0x636_sci.lbl"
+  ],
+  "frames": [
+    {
+      "id": "ca05",
+      "image": "observations/lor_0408625591_0x630_sci.fit",
+      "output": "observations/ca05-camera.json",
+      "bodyToJ2000": [
+        [
+          -0.684916964906489,
+          0.24970548655627312,
+          0.6844968379525053
+        ],
+        [
+          -0.31515991460852455,
+          0.7454830964131253,
+          -0.5873067181518075
+        ],
+        [
+          -0.6569345320556919,
+          -0.6179822998646434,
+          -0.4318968599640141
+        ]
+      ],
+      "offsetPixels": [
+        5.544598766570655,
+        17.95718926550038
+      ],
+      "registration": {
+        "poleJ2000Degrees": [
+          319.37,
+          -25.588
+        ],
+        "phaseDegrees": 226.75,
+        "fit": {
+          "count": 225,
+          "rms": 1.613546595967108,
+          "median": 0.9951171875,
+          "p90": 2.57421875,
+          "max": 6.3046875
+        },
+        "holdout": {
+          "count": 246,
+          "rms": 1.5829528886922093,
+          "median": 0.8759765625,
+          "p90": 2.73828125,
+          "max": 5.3671875
+        },
+        "method": "Fit spin phase and two pointing offsets against the lit limb on the Porter2024 source mesh. Original range, WCS distortion and pole retained; alternating edge samples withheld.",
+        "limitations": "Relative image-to-shape registration for the encounter. Not a precision rotational ephemeris; fitted limb residuals do not measure unseen-shape accuracy."
+      }
+    },
+    {
+      "id": "ca06",
+      "image": "observations/lor_0408626332_0x636_sci.fit",
+      "output": "observations/ca06-camera.json",
+      "bodyToJ2000": [
+        [
+          -0.6628966050691721,
+          0.3033680435062134,
+          0.6844968379525053
+        ],
+        [
+          -0.25489415633345847,
+          0.7681795284181998,
+          -0.5873067181518075
+        ],
+        [
+          -0.7039865482058734,
+          -0.5637978736199741,
+          -0.4318968599640141
+        ]
+      ],
+      "offsetPixels": [
+        -3.3870936362495576,
+        48.76661025956006
+      ],
+      "registration": {
+        "poleJ2000Degrees": [
+          319.37,
+          -25.588
+        ],
+        "phaseDegrees": 231.31,
+        "fit": {
+          "count": 199,
+          "rms": 2.311138381689799,
+          "median": 1.091796875,
+          "p90": 2.64453125,
+          "max": 22.609375
+        },
+        "holdout": {
+          "count": 196,
+          "rms": 1.4996081816876101,
+          "median": 0.9248046875,
+          "p90": 2.48828125,
+          "max": 5.0234375
+        },
+        "method": "Fit spin phase and two pointing offsets against the lit limb on the Porter2024 source mesh. Original range, WCS distortion and pole retained; alternating edge samples withheld.",
+        "limitations": "Relative image-to-shape registration for the encounter. Not a precision rotational ephemeris; fitted limb residuals do not measure unseen-shape accuracy."
+      }
+    }
+  ],
+  "mvic": {
+    "image": "observations/ca05_mvic_cube.fit",
+    "referenceCamera": "observations/ca05-camera.json",
+    "output": "observations/mvic-camera.json",
+    "startTime": "2019-01-01T05:12:55.280",
+    "imageTransform": [
+      [
+        0.006650227510184024,
+        0.7327298220176817,
+        -174.2662785640968
+      ],
+      [
+        -0.7327298220176817,
+        0.006650227510184024,
+        511.2267366414239
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "references": [
+      "observations/ca05_mvic_cube.lblx",
+      "observations/mvic-overview.pdf",
+      "observations/lor_0408625591_0x630_sci.fit"
+    ],
+    "registration": {
+      "method": "Image-space similarity to the contemporaneous CA05 LORRI photograph; alternating limb samples withheld.",
+      "fit": {
+        "count": 319,
+        "rms": 1.186600760900199,
+        "maximum": 4.0448763552059575
+      },
+      "holdout": {
+        "count": 319,
+        "rms": 2.118355232663283,
+        "maximum": 4.975156373604866
+      },
+      "nativeUpsampling": 3,
+      "limitations": "340 m native pixels, resampled threefold by the provider. Slightly varying TDI viewing geometry is approximated by the registered CA05 camera; this is an enhanced-color encounter view."
+    }
+  }
+}
