@@ -197,3 +197,27 @@ the atlas transfer counts.
 | `display` | Where the range came from, the range and its units |
 | `areaCoverage` | The share of the displayed surface each frame covers, from equal-area samples |
 | `sourceIds` | Every consumed input, with its sha256 |
+
+## Evidence
+
+[`evidence/photograph-pipeline`](evidence/photograph-pipeline/) compares the
+prepared images that moving every photograph lens onto this contract changed
+with `main` at `3785f09de`:
+
+- [Six minimap sheets](evidence/photograph-pipeline/minimaps-01.webp) show each
+  changed 640 × 320 minimap on `main`, on the branch and as a Pixelmatch diff.
+  51 minimaps changed, one of them (Epimetheus false colour) only in its
+  encoding; 55 are byte-identical.
+- [The context sheet](evidence/photograph-pipeline/contexts.webp) does the same
+  for the 23 changed context images.
+- [`evidence.json`](evidence/photograph-pipeline/evidence.json) pins both inputs
+  and each diff by size and SHA-256 and records the compared and mismatched
+  pixels. `diffs/` keeps every diff at full size.
+- [`captures/`](evidence/photograph-pipeline/captures/) holds browser views of
+  ten lenses at 1440 × 1000 and DPR 2; its `report.json` records the browser,
+  revision, camera states and manifest hashes.
+
+`tools/compare-visual-evidence.mts` made each diff from the exact committed
+bytes, with threshold 0.1 and anti-aliasing included. A mismatch count only
+locates change. The sheets were inspected against `main` at native resolution,
+and the body READMEs record what that found.
