@@ -16,6 +16,8 @@ Open [Alignment](http://127.0.0.1:4331/alignment) or [Reconstruction](http://127
 
 The separate [archive catalogue](docs/archive-catalogue.md) browses MAST, IRSA and ESO candidates for all 110 Messier objects. It retains wide views and local detail fields without starting image processing or changing the cloud workspace.
 
+[Pleiades, Crab and Lagoon source candidates](docs/source-candidates.md) are ready for Alignment inspection: six spectral images and five papers per object. Publisher-only placements stay explicitly provisional; no candidate processing or new reconstruction is implied.
+
 For the compiler's complete clean-state setup, including the pinned NOX environment/model and an offline compile, use [Compile an emission nebula](docs/emission-compiler.md#reproduce-from-a-clean-checkout).
 
 - **Alignment:** inspect the full density field and registered image footprint. Adjust the saved fit, run automatic NOX removal, and compare Original / Without stars / Residual.

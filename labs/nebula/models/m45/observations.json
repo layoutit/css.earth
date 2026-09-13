@@ -1,0 +1,341 @@
+{
+  "schema": "cssearth-nebula-observation-recipe@1",
+  "id": "m45",
+  "referenceId": "noirlab-optical",
+  "frame": {
+    "width": 2048,
+    "height": 2048,
+    "fieldArcminutes": [
+      252,
+      252
+    ],
+    "centerIcrsDegrees": [
+      56.75,
+      24.1167
+    ],
+    "northUp": true
+  },
+  "images": [
+    {
+      "id": "noirlab-optical",
+      "label": "NOIRLab · optical B / V / I",
+      "url": "https://storage.noirlab.edu/media/archives/images/publicationtiff/noao-m45.tif",
+      "page": "https://noirlab.edu/public/images/noao-m45/",
+      "sha256": "473b92b49bee00f7a7028c80d9d63ea8f384ae80e46eb470558fecf93b255544",
+      "width": 4000,
+      "height": 2920,
+      "fieldArcminutes": [
+        68.676,
+        50.1264
+      ],
+      "centerIcrsDegrees": [
+        56.55435826,
+        24.11007308
+      ],
+      "northRightDegrees": 90.69909386,
+      "bands": "Optical · B 436 nm / V 537 nm / I 805 nm",
+      "credit": "NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
+      "termsUrl": "https://noirlab.edu/public/about/image-usage/",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          9700,
+          7080
+        ],
+        "referencePixel": [
+          4929.330811,
+          3330.368286
+        ],
+        "referenceValueDeg": [
+          56.55435826,
+          24.11007308
+        ],
+        "scaleDeg": [
+          -0.000118,
+          0.000118
+        ],
+        "rotationDeg": -90.69909386
+      },
+      "bytes": 25288332,
+      "bitDepth": 8,
+      "localCache": ".local/nebula-lab/intake/m45/noirlab-optical.tif",
+      "metadataNote": "Initial publisher/service WCS; independent held-out catalogue residuals are not yet established. Full acquired raster preserved. RGB display product, not calibrated surface brightness.",
+      "master": {
+        "url": "https://storage.noirlab.edu/media/archives/images/original/noao-m45.tif",
+        "width": 9700,
+        "height": 7080,
+        "sha256": "a7780281f9ef87ab815d1dbf93f6dd596a25d14f263d8d66fc6b82a17d758e91",
+        "hashStatus": "publisher-published; original not downloaded"
+      },
+      "processingVariant": "Publisher 4K TIFF, complete 9700×7080 master footprint. Embedded AVM reference grid retained."
+    },
+    {
+      "id": "spitzer-irac",
+      "label": "Spitzer · IRAC 3.6–8 µm",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09262/PIA09262.tif",
+      "page": "https://science.nasa.gov/photojournal/pink-pleiades/",
+      "sha256": "03ef667b77b49f79040e4e12b3d601efe34c02abcee0e5eb78464eeafaf63684",
+      "width": 2855,
+      "height": 2855,
+      "fieldArcminutes": [
+        58.06942166740006,
+        58.06942166740006
+      ],
+      "centerIcrsDegrees": [
+        56.73811172765586,
+        24.17058048200041
+      ],
+      "northRightDegrees": -101.756865555,
+      "bands": "Infrared · IRAC 3.6 / 4.5 / 5.8 / 8.0 µm",
+      "credit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
+      "termsUrl": "https://www.spitzer.caltech.edu/page/image-use-policy",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          2855,
+          2855
+        ],
+        "referencePixel": [
+          1427.5,
+          1427.5
+        ],
+        "referenceValueDeg": [
+          56.73811172765586,
+          24.17058048200041
+        ],
+        "scaleDeg": [
+          -0.00033899253746293086,
+          0.00033899253746293086
+        ],
+        "rotationDeg": 101.756865555
+      },
+      "bytes": 24453299,
+      "bitDepth": 8,
+      "localCache": ".local/nebula-lab/intake/m45/spitzer-irac.tif",
+      "metadataNote": "Initial publisher/service WCS; independent held-out catalogue residuals are not yet established. Full acquired raster preserved. RGB display product, not calibrated surface brightness.",
+      "master": {
+        "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09262/PIA09262.tif",
+        "width": 2855,
+        "height": 2855
+      },
+      "wcsSource": "https://www.astropix.org/image/spitzer/ssc2007-07b1",
+      "processingVariant": "Full NASA Photojournal TIFF PIA09262, matching Spitzer ssc2007-07b1 image-only footprint; no poster border."
+    },
+    {
+      "id": "spitzer-irac-mips",
+      "label": "Spitzer · IRAC + MIPS 4.5–24 µm",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09263/PIA09263.tif",
+      "page": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
+      "sha256": "16bc76835b046b48c6682bd169bd8f75cbcb1b49d5a45b78ba7f4e7c281d8c8e",
+      "width": 2855,
+      "height": 2855,
+      "fieldArcminutes": [
+        58.06942166740006,
+        58.06942166740006
+      ],
+      "centerIcrsDegrees": [
+        56.73811172765586,
+        24.17058048200041
+      ],
+      "northRightDegrees": -101.756865555,
+      "bands": "Infrared · IRAC 4.5 / 8.0 µm + MIPS 24 µm",
+      "credit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
+      "termsUrl": "https://www.spitzer.caltech.edu/page/image-use-policy",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          2855,
+          2855
+        ],
+        "referencePixel": [
+          1427.5,
+          1427.5
+        ],
+        "referenceValueDeg": [
+          56.73811172765586,
+          24.17058048200041
+        ],
+        "scaleDeg": [
+          -0.00033899253746293086,
+          0.00033899253746293086
+        ],
+        "rotationDeg": 101.756865555
+      },
+      "bytes": 24453299,
+      "bitDepth": 8,
+      "localCache": ".local/nebula-lab/intake/m45/spitzer-irac-mips.tif",
+      "metadataNote": "Initial publisher/service WCS; independent held-out catalogue residuals are not yet established. Full acquired raster preserved. RGB display product, not calibrated surface brightness.",
+      "master": {
+        "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09263/PIA09263.tif",
+        "width": 2855,
+        "height": 2855
+      },
+      "wcsSource": "https://www.astropix.org/image/spitzer/ssc2007-07a1",
+      "processingVariant": "Full NASA Photojournal TIFF PIA09263, matching Spitzer ssc2007-07a1 image-only footprint; no poster border."
+    },
+    {
+      "id": "wise-four-band",
+      "label": "WISE · 3.4–22 µm wide field",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia13/pia13121/PIA13121.tif",
+      "page": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/",
+      "sha256": "641b6b6298a9c04d752e05f4b6d8986a377be3139df3f3cf915bd23d7559076c",
+      "width": 4007,
+      "height": 3061,
+      "fieldArcminutes": [
+        182.98632880788097,
+        139.78566320961409
+      ],
+      "centerIcrsDegrees": [
+        56.477089,
+        24.170254
+      ],
+      "northRightDegrees": -180,
+      "bands": "Infrared · W1 3.4 / W2 4.6 / W3 12 / W4 22 µm",
+      "credit": "NASA/JPL-Caltech/UCLA",
+      "termsUrl": "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+      "wcs": {
+        "projection": "SIN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          4007,
+          3061
+        ],
+        "referencePixel": [
+          2004,
+          1531
+        ],
+        "referenceValueDeg": [
+          56.477089,
+          24.170254
+        ],
+        "scaleDeg": [
+          -0.000761111092288,
+          0.000761111092288
+        ],
+        "rotationDeg": 180
+      },
+      "bytes": 36796505,
+      "bitDepth": 8,
+      "localCache": ".local/nebula-lab/intake/m45/wise-four-band.tif",
+      "metadataNote": "Initial publisher/service WCS; independent held-out catalogue residuals are not yet established. Full acquired raster preserved. RGB display product, not calibrated surface brightness.",
+      "master": {
+        "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia13/pia13121/PIA13121.tif",
+        "width": 4007,
+        "height": 3061
+      },
+      "wcsSource": "https://www.astropix.org/image/wise/WISE2010-025",
+      "processingVariant": "Full NASA Photojournal TIFF PIA13121. Preserve publisher SIN projection and 180° rotation."
+    },
+    {
+      "id": "twomass-jhk",
+      "label": "2MASS · J / H / Ks context",
+      "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&wcs=%7B%22NAXIS%22%3A2%2C%22NAXIS1%22%3A4096%2C%22NAXIS2%22%3A4096%2C%22WCSAXES%22%3A2%2C%22CRPIX1%22%3A2048.5%2C%22CRPIX2%22%3A2048.5%2C%22CDELT1%22%3A-0.00087890625%2C%22CDELT2%22%3A0.00087890625%2C%22CUNIT1%22%3A%22deg%22%2C%22CUNIT2%22%3A%22deg%22%2C%22CTYPE1%22%3A%22RA---TAN%22%2C%22CTYPE2%22%3A%22DEC--TAN%22%2C%22CRVAL1%22%3A56.75%2C%22CRVAL2%22%3A24.1167%2C%22RADESYS%22%3A%22ICRS%22%7D&format=png",
+      "page": "https://alasky.cds.unistra.fr/2MASS/Color/properties",
+      "sha256": "b98192efc2a53be14598a6af8b5bbc06e1746d70b112f7cb29abaa868fa2a107",
+      "width": 4096,
+      "height": 4096,
+      "fieldArcminutes": [
+        216,
+        216
+      ],
+      "centerIcrsDegrees": [
+        56.75,
+        24.1167
+      ],
+      "northRightDegrees": 0,
+      "bands": "Near-infrared · J 1.235 / H 1.662 / Ks 2.159 µm",
+      "credit": "University of Massachusetts & IPAC/Caltech; HiPS: CDS/CNRS/Unistra",
+      "termsUrl": "https://irsa.ipac.caltech.edu/attribution.html",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          4096,
+          4096
+        ],
+        "referencePixel": [
+          2048.5,
+          2048.5
+        ],
+        "referenceValueDeg": [
+          56.75,
+          24.1167
+        ],
+        "scaleDeg": [
+          -0.00087890625,
+          0.00087890625
+        ],
+        "rotationDeg": 0
+      },
+      "bytes": 36023408,
+      "bitDepth": 8,
+      "localCache": ".local/nebula-lab/intake/m45/twomass-jhk.png",
+      "metadataNote": "Initial publisher/service WCS; independent held-out catalogue residuals are not yet established. Full acquired raster preserved. RGB display product, not calibrated surface brightness.",
+      "registrationMode": "field-stars",
+      "processingVariant": "Unchanged CDS hips2fits PNG service response, explicitly requested ICRS TAN grid. Survey color-HiPS reprojection, not native detector pixels.",
+      "wcsSource": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
+      "hipsTerms": "https://opendatacommons.org/licenses/odbl/1-0/"
+    },
+    {
+      "id": "iris-far-infrared",
+      "label": "IRAS / IRIS · 25 / 60 / 100 µm",
+      "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FIRIS%2Fcolor&wcs=%7B%22NAXIS%22%3A2%2C%22NAXIS1%22%3A1024%2C%22NAXIS2%22%3A1024%2C%22WCSAXES%22%3A2%2C%22CRPIX1%22%3A512.5%2C%22CRPIX2%22%3A512.5%2C%22CDELT1%22%3A-0.00390625%2C%22CDELT2%22%3A0.00390625%2C%22CUNIT1%22%3A%22deg%22%2C%22CUNIT2%22%3A%22deg%22%2C%22CTYPE1%22%3A%22RA---TAN%22%2C%22CTYPE2%22%3A%22DEC--TAN%22%2C%22CRVAL1%22%3A56.75%2C%22CRVAL2%22%3A24.1167%2C%22RADESYS%22%3A%22ICRS%22%7D&format=png",
+      "page": "https://alasky.cds.unistra.fr/IRISColor/properties",
+      "sha256": "a9e1a3b6a82048c8ab98a68f06bb69d0d2a624de43b3bbf3ff85c2c19a0879a0",
+      "width": 1024,
+      "height": 1024,
+      "fieldArcminutes": [
+        240,
+        240
+      ],
+      "centerIcrsDegrees": [
+        56.75,
+        24.1167
+      ],
+      "northRightDegrees": 0,
+      "bands": "Mid/far-infrared · 25 / 60 / 100 µm",
+      "credit": "IRAS/IPAC/NASA; IRIS: M.-A. Miville-Deschênes & G. Lagache; HiPS: CDS/CNRS/Unistra",
+      "termsUrl": "https://irsa.ipac.caltech.edu/attribution.html",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          1024,
+          1024
+        ],
+        "referencePixel": [
+          512.5,
+          512.5
+        ],
+        "referenceValueDeg": [
+          56.75,
+          24.1167
+        ],
+        "scaleDeg": [
+          -0.00390625,
+          0.00390625
+        ],
+        "rotationDeg": 0
+      },
+      "bytes": 777295,
+      "bitDepth": 8,
+      "localCache": ".local/nebula-lab/intake/m45/iris-far-infrared.png",
+      "metadataNote": "Initial publisher/service WCS; independent held-out catalogue residuals are not yet established. Full acquired raster preserved. RGB display product, not calibrated surface brightness.",
+      "registrationMode": "publisher-wcs",
+      "processingVariant": "Unchanged CDS hips2fits PNG service response, explicitly requested ICRS TAN grid. Survey color-HiPS reprojection, not native detector pixels.",
+      "wcsSource": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
+      "hipsTerms": "https://opendatacommons.org/licenses/odbl/1-0/"
+    }
+  ],
+  "nativeRemoval": {
+    "model": {
+      "path": ".local/open-star-removal/noxGeneratorColor.pb",
+      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
+    },
+    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+  },
+  "intakeStatus": "Original-image inspection only. Removal pins satisfy the existing recipe schema; no star removal, reconstruction or physical constraints have been run."
+}

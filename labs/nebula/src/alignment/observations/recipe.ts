@@ -1,7 +1,7 @@
 import type { SkyFrame, SkyRaster } from './registration.js';
 import type { NativeRemoval } from '../../reconstruction/emission-inference/native-source.js';
 import { validateImageWcs, type ImageWcs } from '../overlay-wcs.js';
-export interface ObservationSource extends SkyRaster { id: string; label: string; url: string; page: string; sha256: string; credit: string; bands: string; termsUrl: string }
+export interface ObservationSource extends SkyRaster { id: string; label: string; url: string; page: string; sha256: string; credit: string; bands: string; termsUrl: string; registrationMode?: 'field-stars' | 'publisher-wcs' }
 export interface ObservationRecipe { schema: 'cssearth-nebula-observation-recipe@1'; id: string; referenceId: string; frame: SkyFrame; images: ObservationSource[]; nativeRemoval: Omit<NativeRemoval, 'directory'> }
 const record = (value: unknown): Record<string, unknown> => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Expected observation record.');
@@ -27,12 +27,14 @@ export function readObservationRecipe(value: unknown): ObservationRecipe {
   const images = row.images.map((value): ObservationSource => {
     const image = record(value);
     const w = record(image.wcs);
-    if (w.projection !== 'TAN' || w.coordinateFrame !== 'ICRS') throw new TypeError('ICRS TAN metadata required.');
+    if ((w.projection !== 'TAN' && w.projection !== 'SIN') || w.coordinateFrame !== 'ICRS') throw new TypeError('ICRS TAN or ordinary SIN metadata required.');
+    if (image.registrationMode !== undefined && image.registrationMode !== 'field-stars' && image.registrationMode !== 'publisher-wcs') throw new TypeError('Unknown registration mode.');
     const wcs: ImageWcs = { projection: w.projection, coordinateFrame: w.coordinateFrame, referenceDimension: pair(w.referenceDimension),
       referencePixel: pair(w.referencePixel), referenceValueDeg: pair(w.referenceValueDeg), scaleDeg: pair(w.scaleDeg), rotationDeg: finite(w.rotationDeg) };
     validateImageWcs(wcs);
     return { ...sky(image), wcs, id: id(image.id), label: string(image.label), url: https(image.url), page: https(image.page), sha256: pin(image.sha256),
-      credit: string(image.credit), bands: string(image.bands), termsUrl: https(image.termsUrl), northRightDegrees: finite(image.northRightDegrees) };
+      credit: string(image.credit), bands: string(image.bands), termsUrl: https(image.termsUrl), northRightDegrees: finite(image.northRightDegrees),
+      ...(image.registrationMode === undefined ? {} : { registrationMode: image.registrationMode }) };
   });
   const referenceId = id(row.referenceId);
   if (new Set(images.map(image => image.id)).size !== images.length || !images.some(image => image.id === referenceId)) throw new TypeError('Observation ids/reference must be unique and present.');

@@ -1,0 +1,228 @@
+{
+  "schema": "cssearth-nebula-source-dossier@1",
+  "objectId": "m45",
+  "summary": "Six original-image candidates for the Pleiades reflection nebula: optical filaments, two Spitzer infrared composites, a wider WISE mosaic, 2MASS stellar context and coarse IRAS/IRIS far-infrared context. These display rasters and literature notes establish intake evidence, not recovered 3D dust density.",
+  "intakeDate": "2026-09-13",
+  "images": [
+    {
+      "id": "noirlab-optical",
+      "provider": "NSF NOIRLab",
+      "telescope": "WIYN 0.9 m / Mosaic I, Kitt Peak",
+      "wavelengths": "B 436 nm → blue; V 537 nm → green; I 805 nm → red.",
+      "coverage": "Full publisher 1.145° × 0.835° image; 9700 × 7080 astrometric reference grid. Acquired 4000 × 2920 TIFF preserves its edges.",
+      "quality": "Best selected optical filament detail. Original reference-grid sampling 0.4248 arcsec/pixel; acquired raster approximately 1.030 arcsec/pixel. Actual seeing/FWHM not supplied for this release.",
+      "epoch": "Observation dates not supplied. Release 2020-06-30; image-edit/metadata dates do not establish observation epoch.",
+      "masterUrl": "https://storage.noirlab.edu/media/archives/images/original/noao-m45.tif",
+      "notes": [
+        "RGB8 publication TIFF with a publisher display stretch; not calibrated B/V/I flux. Bright stars are saturated and have strong instrumental halos/spikes.",
+        "Publisher master is 9700 × 7080, listed as 191 MB; not acquired under the initial 100 MB-per-source cap. Publisher-published SHA-256 is retained separately from locally verified working bytes.",
+        "Embedded AVM supplies ICRS TAN, noncentral reference pixel and −90.69909386° rotation; north is right. Do not reset to a centered/north-up native raster."
+      ],
+      "metadataUrls": [
+        "https://noirlab.edu/public/images/noao-m45/",
+        "https://www.astropix.org/image/noirlab/noao-m45"
+      ]
+    },
+    {
+      "id": "spitzer-irac",
+      "provider": "NASA/JPL-Caltech; Spitzer Science Center",
+      "telescope": "Spitzer / IRAC, cryogenic mission",
+      "wavelengths": "IRAC nominal 3.6, 4.5, 5.8 and 8.0 µm; publisher maps these blue, green, orange and red, respectively.",
+      "coverage": "Complete image-only ssc2007-07b1 / PIA09262 2855 × 2855 raster, 58.070′ × 58.070′; central dust network, not the entire wide WISE cloud.",
+      "quality": "Fine filament comparison without MIPS 24 µm. Sampling 1.22037 arcsec/pixel; nominal IRAC mean PSF FWHM 1.66/1.72/1.88/1.98 arcsec by channel; final composite PSF not measured.",
+      "epoch": "Released 2007-04-12 (Spitzer) / 2007-04-16 (Photojournal); exposure dates/AOR list not provided with this outreach raster.",
+      "masterUrl": "https://www.spitzer.caltech.edu/uploaded_files/images/0001/0762/ssc2007-07b1.tif",
+      "notes": [
+        "Unchanged full-resolution RGB8 NASA TIFF. Its 24,453,075 decoded RGB bytes exactly match the downloaded AVM-bearing Spitzer original.",
+        "Representational color and nonlinear display stretch; the orange assignment mixes display channels, so RGB values are not independent calibrated measurements.",
+        "ICRS TAN AVM reference pixel is 1427.5,1427.5 with +101.756865555° rotation. Full footprint retained, including edge-cut stars."
+      ],
+      "metadataUrls": [
+        "https://www.astropix.org/image/spitzer/ssc2007-07b1",
+        "https://science.nasa.gov/photojournal/pink-pleiades/",
+        "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/5/"
+      ]
+    },
+    {
+      "id": "spitzer-irac-mips",
+      "provider": "NASA/JPL-Caltech; Spitzer Science Center",
+      "telescope": "Spitzer / IRAC and MIPS",
+      "wavelengths": "4.5 µm → blue; 8.0 µm → green; 24 µm → red. MIPS 24 band spans 20.8–26.1 µm (weighted wavelength 23.68 µm).",
+      "coverage": "Complete ssc2007-07a1 / PIA09263 2855 × 2855 raster, 58.070′ square; same footprint as IRAC-only candidate.",
+      "quality": "Strong warm-dust filament detail. Sampling 1.22037 arcsec/pixel; nominal IRAC 4.5/8.0 PSF FWHM 1.72/1.98 arcsec and MIPS 24 approximately 6 arcsec. Resampling does not give 24 µm IRAC resolution.",
+      "epoch": "Released April 2007; contributing AORs/exposure intervals not published with this raster.",
+      "masterUrl": "https://www.spitzer.caltech.edu/uploaded_files/images/0000/9750/ssc2007-07a1.tif",
+      "notes": [
+        "Unchanged full-resolution RGB8 NASA TIFF; exact decoded RGB equality with the AVM-bearing Spitzer original verified.",
+        "Different wavelengths weight grain emission/stellar light differently; a color change does not determine depth or density.",
+        "Same publisher TAN transform as the IRAC-only image. Registration begins with that published transform; this is not an independent stellar validation."
+      ],
+      "metadataUrls": [
+        "https://www.astropix.org/image/spitzer/ssc2007-07a1",
+        "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
+        "https://irsa.ipac.caltech.edu/data/SPITZER/docs/mips/mipsinstrumenthandbook/3/"
+      ]
+    },
+    {
+      "id": "wise-four-band",
+      "provider": "NASA/JPL-Caltech/UCLA",
+      "telescope": "WISE / four-channel infrared camera",
+      "wavelengths": "3.4 µm → blue; 4.6 µm → cyan; 12 µm → green; 22 µm → red.",
+      "coverage": "Full PIA13121 / WISE2010-025 mosaic, 4007 × 3061 TIFF; approximately 3.05° × 2.33° wide context.",
+      "quality": "Best selected mid-infrared wide-field cloud context. Reference sampling 2.740 arcsec/pixel; nominal W1/W2/W3/W4 FWHM 6.1/6.4/6.5/12.0 arcsec. Bright stellar artifacts remain.",
+      "epoch": "Mosaic of a few hundred frames from the first WISE survey; released 2010-07-16. Individual exposure timestamps unavailable in the outreach raster.",
+      "masterUrl": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia13/pia13121/PIA13121.tif",
+      "notes": [
+        "Unchanged full-resolution RGB8 TIFF; published representational-color composite, not four calibrated arrays.",
+        "Preserve publisher ICRS SIN projection and 180° rotation, including CRPIX 2004,1531. Approximating this as TAN changes the full footprint.",
+        "Dust extends past this image; full acquired footprint means the full published mosaic, not the full physical cloud."
+      ],
+      "metadataUrls": [
+        "https://science.nasa.gov/photojournal/seven-sisters-get-wise/",
+        "https://www.astropix.org/image/wise/WISE2010-025",
+        "https://irsa.ipac.caltech.edu/onlinehelp/finderchart/help.pdf"
+      ]
+    },
+    {
+      "id": "twomass-jhk",
+      "provider": "2MASS (UMass/IPAC/Caltech); color HiPS and projection by CDS/CNRS/Unistra",
+      "telescope": "2MASS / 1.3 m telescopes at Mt Hopkins and CTIO",
+      "wavelengths": "J 1.235 µm → blue; H 1.662 µm → green; Ks 2.159 µm → red.",
+      "coverage": "Complete requested 3.6° tangent-plane square about ICRS 56.75°, +24.1167°, returned as 4096 × 4096 RGBA8 PNG; all-sky survey cutout, not a single native exposure.",
+      "quality": "Stellar near-IR context; visually weak diffuse dust and prominent survey tile/sky-background seams. Delivered sampling 3.164 arcsec/pixel; HiPS maximum-order sampling approximately 0.805 arcsec/pixel is not telescope resolution.",
+      "epoch": "Underlying survey 1997 June–2001 February; HiPS release 2024-10-09. Per-pixel contributing exposure dates not retained in the PNG.",
+      "masterUrl": "https://irsa.ipac.caltech.edu/2MASS/",
+      "notes": [
+        "Original bytes of a CDS hips2fits service response; sky has been resampled from published color HiPS. Do not call this native detector resolution.",
+        "CDS applies square-root stretches per band and replaces green pixels above the red/blue mean with that mean; the image cannot supply independent J/H/Ks photometry.",
+        "Sky grid was explicitly supplied to the service: ICRS TAN, centered FITS CRPIX 2048.5, zero rotation, negative RA and positive Dec scale.",
+        "Source color HiPS is ODbL-1.0, DOI 10.26093/cds/aladin/bzc8-nw. Highest-native scientific atlas images are available through IRSA; no single master exists for this custom full footprint."
+      ],
+      "metadataUrls": [
+        "https://alasky.cds.unistra.fr/2MASS/Color/properties",
+        "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
+        "https://www.ipac.caltech.edu/2mass/overview/access.html"
+      ]
+    },
+    {
+      "id": "iris-far-infrared",
+      "provider": "IRAS/IRIS via IPAC/NASA; color HiPS and projection by CDS/CNRS/Unistra",
+      "telescope": "IRAS / Survey Array; IRIS reprocessing",
+      "wavelengths": "25 µm → blue; 60 µm → green; 100 µm → red.",
+      "coverage": "Complete requested 4° tangent-plane square centered on ICRS 56.75°, +24.1167°, returned as 1024 × 1024 RGBA8 PNG.",
+      "quality": "Coarse far-IR cloud/cirrus context; bright central colors visibly clip. Output sampling 14.0625 arcsec/pixel oversamples HiPS (51.516 arcsec/pixel) and IRIS beam (3.8/4.0/4.3 arcmin at 25/60/100 µm).",
+      "epoch": "IRAS observations 1983 January–November; IRIS publication 2005; color HiPS release 2019-05-05.",
+      "masterUrl": "https://irsa.ipac.caltech.edu/data/IRIS/",
+      "notes": [
+        "Original CDS hips2fits PNG response from a pre-stretched JPEG color HiPS; this is neither native FITS nor calibrated MJy/sr. The selected image cannot measure temperature or optical depth.",
+        "Diffuse cloud has too few corresponding point sources for a credible same-stars optical fit. Publisher/service WCS placement remains provisional and is not relabeled as stellar-verified.",
+        "CDS projects the Galactic HiPS into the explicitly requested ICRS TAN grid. A 4° display square does not establish association of every cirrus feature with M45.",
+        "Native IRIS per-band plates, masks and zero-level/calibration information must be acquired before physical use. IRSA dataset DOI 10.26131/IRSA94; color HiPS ODbL-1.0."
+      ],
+      "metadataUrls": [
+        "https://alasky.cds.unistra.fr/IRISColor/properties",
+        "https://irsa.ipac.caltech.edu/data/IRIS/overview.html",
+        "https://arxiv.org/abs/astro-ph/0412216"
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "id": "gibson-nordsieck-2003-i",
+      "title": "The Pleiades Reflection Nebula. I. Ultraviolet, Optical, and Far-Infrared Imaging Photometry",
+      "authors": "Steven J. Gibson; Kenneth H. Nordsieck",
+      "year": 2003,
+      "url": "https://doi.org/10.1086/374589",
+      "access": "Author-hosted full-resolution color preprint downloaded and text inspected; publisher/ADS direct access failed. Original WISP/Schmidt calibrated image arrays not acquired.",
+      "fullTextUrl": "http://physics.wku.edu/~gibson/offprints/gibson_2003_pleiades_phot_color.pdf",
+      "bibcode": "2003ApJ...589..347G",
+      "sections": "Abstract; §§2–3; interpretation in §5",
+      "constraints": [
+        "Observed: WISP measured scattered UV at 165 and 220 nm over a 5° × 1.7° field; Burrell Schmidt mapped that area at 440 nm. These are real diffuse-UV observations, not a reason to invent a GALEX image.",
+        "Published interpretation: scattering becomes more concentrated than far-infrared thermal emission, supporting foreground dust. Color also depends on illumination and the scattering phase function.",
+        "Qualification gap: the UV measurement required difficult stellar PSF subtraction; Pleiades polarimetry was not obtained. Paper figures and corrected photometry are not untouched native UV frames."
+      ],
+      "implementationStatus": "Literature intake only; no numerical constraint or physical operator implemented."
+    },
+    {
+      "id": "gibson-nordsieck-2003-ii",
+      "title": "The Pleiades Reflection Nebula. II. Simple Model Constraints on Dust Properties and Scattering Geometry",
+      "authors": "Steven J. Gibson; Kenneth H. Nordsieck",
+      "year": 2003,
+      "url": "https://doi.org/10.1086/374590",
+      "access": "Author-hosted full-resolution color preprint downloaded; abstract, model tables and §7 conclusions inspected. No model grids or source arrays imported.",
+      "fullTextUrl": "http://physics.wku.edu/~gibson/offprints/gibson_2003_pleiades_scat_color.pdf",
+      "bibcode": "2003ApJ...589..362G",
+      "sections": "Abstract; Table 3; §7 conclusions",
+      "constraints": [
+        "Published-model hypothesis: a widespread layer approximately 0.7 pc in front of the stars plus a closer layer in heavier nebulosity; some second-layer material may be within or behind the cluster.",
+        "The preferred UV scattering model uses dimensionless albedo a = 0.22 ± 0.07 and asymmetry g = 0.74 ± 0.06 below 260 nm. These values are conditional on the illumination, dust and thin-layer model; they are not direct voxel-density measurements.",
+        "Outlying nebulosity 1–2° from the core may have other illuminators and uncertain association. The authors warn that the Henyey–Greenstein angular form may bias large-angle scattering."
+      ],
+      "implementationStatus": "Literature intake only; do not initialize slabs, thicknesses or grain constants from this record automatically."
+    },
+    {
+      "id": "gibson-2007",
+      "title": "Multiscale Structure in Dust Reflection and Cold H I",
+      "authors": "Steven J. Gibson",
+      "year": 2007,
+      "url": "https://arxiv.org/abs/astro-ph/0703055v1",
+      "access": "Version-1 arXiv PDF downloaded and text inspected; full-resolution author counterpart identified. Numerical image arrays/power-spectrum samples not downloaded.",
+      "fullTextUrl": "https://arxiv.org/pdf/astro-ph/0703055",
+      "highResolutionUrl": "http://physics.wku.edu/~gibson/offprints/gibson_2007_sins_aspc.pdf",
+      "bibcode": "2007ASPC..365...59G",
+      "sections": "§§1–3; Figures 1–4",
+      "constraints": [
+        "Observed statistic: combined optical-scattering and cold-H I angular power spectra have an approximate slope of −2.8 over five decades of scale.",
+        "Useful later as a projected multiscale texture comparison over each dataset’s valid spatial frequencies; noise, resolution, edge apodization and stellar treatment differ between inputs.",
+        "A 2D power spectrum does not determine 3D density, depth, or an individual filament trajectory. Some H I can lie in the background; matching velocity and morphology are required for association."
+      ],
+      "implementationStatus": "Literature intake only; no power-law geometry or texture generator configured."
+    },
+    {
+      "id": "melis-2014",
+      "title": "A VLBI Resolution of the Pleiades Distance Controversy",
+      "authors": "Carl Melis; Mark J. Reid; Amy J. Mioduszewski; John R. Stauffer; Geoffrey C. Bower",
+      "year": 2014,
+      "url": "https://doi.org/10.1126/science.1256101",
+      "access": "arXiv v1 full text and supplementary material downloaded; main results and Table 1 inspected. Individual observing/visibility data not acquired.",
+      "fullTextUrl": "https://arxiv.org/pdf/1408.6544",
+      "bibcode": "2014Sci...345.1029M",
+      "sections": "Main-text distance result; Table 1",
+      "constraints": [
+        "Observed stellar distance: VLBI parallaxes of four stellar systems imply 136.2 ± 1.2 pc for the cluster, including allowance for cluster depth.",
+        "Useful as an independently measured stellar distance scale after selecting current membership/astrometry; it does not set the distance of every dust parcel.",
+        "Four radio-emitting systems do not supply a complete cluster star catalogue or recover the scattering cloud’s depth. Historical outreach distances are not substituted for the paper result."
+      ],
+      "implementationStatus": "Literature intake only; no star depths or cloud lengths derived."
+    },
+    {
+      "id": "miville-deschenes-lagache-2005",
+      "title": "IRIS: A New Generation of IRAS Maps",
+      "authors": "Marc-Antoine Miville-Deschênes; Guilaine Lagache",
+      "year": 2005,
+      "url": "https://doi.org/10.1086/427938",
+      "access": "arXiv v1 full text downloaded; Table 1 and reprocessing/data-access sections inspected. This intake includes rendered color HiPS, not calibrated IRIS FITS plates.",
+      "fullTextUrl": "https://arxiv.org/pdf/astro-ph/0412216",
+      "bibcode": "2005ApJS..157..302M",
+      "sections": "Table 1; §5.2; data products",
+      "constraints": [
+        "Published survey characterization: IRIS resolutions at 25, 60 and 100 µm are 3.8 ± 0.2, 4.0 ± 0.2 and 4.3 ± 0.2 arcmin; original ISSA/IRIS plates use 1.5 arcmin sampling.",
+        "IRIS reprocessing improves zodiacal subtraction, destriping and DIRBE-compatible calibration. Native calibrated surface brightness is in MJy/sr, but those units cannot be assigned to the selected color PNG.",
+        "A later dust-temperature/column-density fit would require the actual separate calibrated bands, masks, color corrections and matched beams. This display composite supplies context only."
+      ],
+      "implementationStatus": "Survey characterization only; no thermal SED or density inference implemented."
+    }
+  ],
+  "qualification": {
+    "starRemoval": "Not run or authorized by this intake.",
+    "reconstruction": "Not run; no volume, shell, depth, dust-scattering operator or thermal fit selected.",
+    "stellarRegistration": "Publisher/service transforms recorded. Independent held-out star residuals belong to preparation evidence, not this source dossier.",
+    "scope": "Local Nebula Lab Alignment only. No production body or main website promotion."
+  },
+  "gaps": [
+    "WISP 165/220 nm diffuse UV signal is real and documented, but native original rasters with verified WCS and reuse terms have not been acquired; no UV image is invented or substituted from a paper figure.",
+    "No calibrated spectral cubes, polarimetric map, absorption sightline catalogue or three-dimensional dust model has been qualified.",
+    "2MASS and IRIS are context references with conspicuous quality limits; morphology/density inference must not treat their RGB as calibrated flux."
+  ]
+}
