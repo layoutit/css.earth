@@ -48,6 +48,50 @@ const truth = camera([0, -60, 20], [1, -1, 0.3]);
 const image = render(truth);
 const frame = { width, height, planes: { IMAGE: image } };
 
+test('the edge budget retains every side of the body when it downsamples', () => {
+  const size = 100, values = new Float32Array(size * size);
+  for (let y = 20; y < 80; y++) for (let x = 20; x < 80; x++) values[y * size + x] = 1;
+  const square = { width: size, height: size, planes: { IMAGE: values } };
+  for (const budget of [140, 90]) {
+    const edges = observedLimb(square, 0.1, budget, 1);
+    assert.equal(edges.length, budget);
+    assert.equal(new Set(edges.map(p => `${p.x},${p.y}`)).size, budget);
+    for (const partition of ['fit', 'holdout']) {
+      const points = edges.filter(p => p.partition === partition);
+      assert.ok(points.some(p => p.y < 21), `${partition} retains the top edge`);
+      assert.ok(points.some(p => p.y > 78), `${partition} retains the bottom edge`);
+      assert.ok(points.some(p => p.x < 21), `${partition} retains the left edge`);
+      assert.ok(points.some(p => p.x > 78), `${partition} retains the right edge`);
+    }
+  }
+});
+
+test('fixed nonlinear detector distortion is retained during pointing refinement', () => {
+  // An analytically invertible quadratic shear, independent of the camera fitter.
+  // Its displacement varies across the limb, so a pointing shift cannot absorb it.
+  const shear = (y: number) => 0.0007 * (y - centre[1]) ** 2;
+  const pixelMapping = {
+    toPinhole: (x: number, y: number) => [x + shear(y), y],
+    fromPinhole: (x: number, y: number) => [x - shear(y), y],
+  };
+  const distorted = new Float32Array(image.length);
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const sample = x + shear(y), left = Math.floor(sample), fraction = sample - left;
+    if (left >= 0 && left + 1 < width) distorted[y * width + x] = (1 - fraction) * image[y * width + left] + fraction * image[y * width + left + 1];
+  }
+  const perturbed = rotateCamera(truth, [0.00015, 0, -0.0001]);
+  const mappedFrame = { width, height, planes: { IMAGE: distorted }, camera: perturbed, pixelMapping };
+  const result = refineCameraByLimb(mappedFrame, mesh, policy);
+  assert.ok(result.report.residuals.after.holdout.rmsPixels <= policy.maximumResidualPixels);
+  assert.equal(result.report.pixelCoordinates, 'native detector; fixed distortion applied before ray rotation');
+  for (const point of [[0, 0, 0], [0.2, 0, 0], [0, 0.15, 0.1], [-0.1, -0.1, -0.12]]) {
+    const a = project(truth.matrix, point), b = project(result.camera.matrix, point);
+    const expected = pixelMapping.fromPinhole(a[0], a[1]), actual = pixelMapping.fromPinhole(b[0], b[1]);
+    assert.ok(Math.hypot(actual[0] - expected[0], actual[1] - expected[1]) < 1, 'Recovered camera agrees at independent native-pixel controls.');
+  }
+  assert.throws(() => refineCameraByLimb({ ...mappedFrame, pixelMapping: undefined }, mesh, policy), /Limb refinement/);
+});
+
 test('a camera perturbed by hundreds of pixels is recovered from the lit limb to a fraction of a pixel', () => {
   const { threshold, split, bodyMean } = limbThreshold(image, () => true);
   assert.ok(threshold > 0 && threshold < 0.05 && split > threshold, `threshold ${threshold} below the class split ${split}`);

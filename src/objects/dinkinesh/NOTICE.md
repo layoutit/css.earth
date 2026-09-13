@@ -1,5 +1,16 @@
 # Sources and reuse
 
+The TEMPEST dataset retains `dinkinesh.stl` from Duncan Lyster's public
+repository at commit `7df4c88063ebe811cbdd25b97c19f85559607459`, in its original
+metre coordinates. The supplied [Modified MIT License](source/shape/TEMPEST-LICENSE.md)
+requires attribution to **Lyster, D., Howett, C., & Penn, J. (2025), TEMPEST:
+A Modular Thermophysical Model for Airless Bodies with Support for Surface
+Roughness and Non-Periodic Heating**, submitted to EPSC-DPS 2025.
+The file's exact upstream mission-model version is not established. We do not
+describe it as a NASA public-domain release or transfer that status to it.
+
+The separate Celestia dataset retains the following attribution:
+
 ItzImcool (2024), domi9 (2024–2025); Celestia contributors. CC-BY-4.0; retain ItzImcool and domi9 attribution and mark conversion/scaling.
 
 Original model: source/shape/dinkinesh.cmod and its adjacent SPDX license. Converted from Y-up to Z-up, centered and uniformly scaled; the original topology is retained before shared preparation simplifies it. https://creativecommons.org/licenses/by/4.0/
