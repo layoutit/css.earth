@@ -1,0 +1,667 @@
+{
+  "schema": "cssearth-charon-leisa-capture@1",
+  "capturedAt": "2026-09-13T16:14:13.146Z",
+  "mainBase": "6841d90fa296094c745771beb606793360e07d65",
+  "branch": "feat/charon-ice-chemistry",
+  "revisionBinding": "Uncommitted Charon changes above main; input and output hashes below identify the tested revision. Documentation-only edits do not invalidate these checks.",
+  "preview": {
+    "baseCommit": "ebd16155a5eb408b6a96a7eaf4c9620b8a0b8451",
+    "url": "http://127.0.0.1:53136/charon/",
+    "limitation": "The preview omits unavailable Helix/Cats Eye volume banks through the two patches below. Their restoration requires the absent NOX model. Main subsequently added Ryugu and Saturn-moon data and preparation changes; it did not change the application runtime used for these captures. This is not an unmodified whole-app build or full-suite pass.",
+    "patches": "diff --git a/site/application-world-context.mts b/site/application-world-context.mts\nindex 3cf6dd757..3abed1b00 100644\n--- a/site/application-world-context.mts\n+++ b/site/application-world-context.mts\n@@ -81,7 +81,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {\n     const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)\n       .map(([id, sprite]) => [id, { ...contextMarkerSprite(sprite),\n         minimumDiameterPixels: asteroidIds.includes(id) ? 2 : 2.4 }]));\n-    const volumeLenses = await Promise.all(Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'volume-lens-bank')\n+    const volumeLenses = await Promise.all(Object.values(descriptors).map(parseObjectDescriptor).filter(descriptor => descriptor.type === 'volume-lens-bank' && typeof assets[`../src/objects/${descriptor.id}/${descriptor.prepared.url}`] === 'string')\n       .map(async descriptor => {\n         const set = resourceSet(descriptor.id);\n         return { payload: await loadPreparedVolumeLenses(set.descriptor, set.transport),\ndiff --git a/site/components/PreparedFocusLenses.astro b/site/components/PreparedFocusLenses.astro\nindex bed55449a..47d580197 100644\n--- a/site/components/PreparedFocusLenses.astro\n+++ b/site/components/PreparedFocusLenses.astro\n@@ -10,7 +10,7 @@ const descriptors = import.meta.glob<Descriptor>('../../src/objects/*/object.jso\n const prepared = import.meta.glob<{ data: PreparedVolumeLensBank }>('../../src/objects/*/prepared/*.json', { eager: true, import: 'default' });\n const presentations = import.meta.glob<unknown>('../../src/objects/*/prepared/presentation.json', { eager: true, import: 'default' });\n const provenanceDocuments = import.meta.glob<unknown>('../../src/objects/*/prepared/provenance.json', { eager: true, import: 'default' });\n-const banks = Object.entries(descriptors).filter(([, descriptor]) => descriptor.type === 'volume-lens-bank').map(([path, descriptor]) => {\n+const banks = Object.entries(descriptors).filter(([path, descriptor]) => descriptor.type === 'volume-lens-bank' && prepared[path.replace(/object\\.json$/u, descriptor.prepared?.url ?? '')]?.data).map(([path, descriptor]) => {\n   const bank = prepared[path.replace(/object\\.json$/u, descriptor.prepared?.url ?? '')]?.data;\n   if (!bank || bank.id !== descriptor.id) throw new TypeError(`Prepared focus lenses unavailable: ${descriptor.id}.`);\n   const provenance = validateObjectProvenance(provenanceDocuments[path.replace(/object\\.json$/u, 'prepared/provenance.json')], bank.id);",
+    "files": [
+      {
+        "path": "src/planets/charon/prepared/runtime.refs.json",
+        "bytes": 690954,
+        "sha256": "ab8db2838f58a774b2f110571c25d61b001bfb73f33f6949b0c9e59889fc1152"
+      },
+      {
+        "path": "src/planets/charon/prepared/object.json",
+        "bytes": 691069,
+        "sha256": "75d57e6bb7404a5a53c2a6a232223e3f9d78b2eade42f47c53cb2434569c49fc"
+      },
+      {
+        "path": "src/planets/charon/prepared/features.json",
+        "bytes": 658,
+        "sha256": "1af0c6a7547d8ae0d95318c625b3d77fc52b17d34c9478de5fb00a04a2b7252e"
+      },
+      {
+        "path": "src/planets/charon/runtime-assets.json",
+        "bytes": 21273,
+        "sha256": "2508e9d783e8df311e9cfd6e989da2ce22b6bf0cd92ca45e3b09c5e06f2fda44"
+      },
+      {
+        "path": "src/planets/charon/prepared/minimaps.json",
+        "bytes": 469,
+        "sha256": "4d128e45393418e18c555259d215ed21e48ddd1b0f9bdca749dafa08e6881d6f"
+      },
+      {
+        "path": "src/renderers/css/styles/planet-surfaces.css",
+        "bytes": 84673,
+        "sha256": "9b1ecc9e4808bdfccdedc41f8de13a2c071559f9a58d67473b259169ccfc664e"
+      },
+      {
+        "path": "site/prepared-feature-index.json",
+        "bytes": 975,
+        "sha256": "7f110928a3004cf0b539ff296b37cb9f48f14e0008fb10117204e276494d9817"
+      },
+      {
+        "path": "site/prepared-sources.json",
+        "bytes": 9712394,
+        "sha256": "8f4e86e078e19a7bdddcffbed0bc25975c24bab486fe2eb6cbea816b9bf2f0d9"
+      },
+      {
+        "path": "site/prepared-machines.json",
+        "bytes": 1546420,
+        "sha256": "3254fa837834a7920f9ad9ffe969516b5d5323e0a5a6ff1ec09d9c33148b050f"
+      }
+    ]
+  },
+  "browser": {
+    "browser": "152.0.7977.84",
+    "reports": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "density": 1,
+        "id": "water-ice",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/charon/charon-water-ice@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/charon/charon-poles-water-ice@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/charon/?v=MEZAp0PgXBt8IUFCxzNAAAAAv53Dj0q7sME_2eYqV4z3j7-ww1mcl-3bAAEAAAAAAAAAAA#dataset=water-ice"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "density": 1,
+        "id": "ammonia",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/charon/charon-ammonia@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/charon/charon-poles-ammonia@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/charon/?v=MEZAp0PgXBt8IUFCxzNAAAAAv53Dj0q7sME_2eYqV4z3j7-ww1mcl-3bAAEAAAAAAAAAAA#dataset=ammonia"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "density": 1,
+        "id": "normal",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/charon/charon-normal@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/charon/charon-poles-normal@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/charon/?v=MEZAp0PgXBt8IUFCxzNAAAAAv53Dj0q7sME_2eYqV4z3j7-ww1mcl-3bAAEAAAAAAAAAAA"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "density": 2,
+        "id": "water-ice",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/charon/charon-water-ice@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/charon/charon-poles-water-ice@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/charon/?v=MEZAp0PgXBt8IUFCxzNAAAAAv53Dj0q7sME_2eYqV4z3j7-ww1mcl-3bAAEAAAAAAAAAAA#dataset=water-ice"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "density": 2,
+        "id": "ammonia",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/charon/charon-ammonia@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/charon/charon-poles-ammonia@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/charon/?v=MEZAp0PgXBt8IUFCxzNAAAAAv53Dj0q7sME_2eYqV4z3j7-ww1mcl-3bAAEAAAAAAAAAAA#dataset=ammonia"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "density": 2,
+        "id": "normal",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/charon/charon-normal@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/charon/charon-poles-normal@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/charon/?v=MEZAp0PgXBt8IUFCxzNAAAAAv53Dj0q7sME_2eYqV4z3j7-ww1mcl-3bAAEAAAAAAAAAAA"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "density": 1,
+        "id": "water-ice",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/charon/charon-water-ice@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/charon/charon-poles-water-ice@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/charon/?v=MEZApBcyPgVrw0FCxzNAAAAAv53Dj0q7sME_2eYqV4z3j7-ww1mcl-3bAAEAAAAAAAAAAA#dataset=water-ice"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "density": 1,
+        "id": "ammonia",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/charon/charon-ammonia@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/charon/charon-poles-ammonia@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/charon/?v=MEZApBcyPgVrw0FCxzNAAAAAv53Dj0q7sME_2eYqV4z3j7-ww1mcl-3bAAEAAAAAAAAAAA#dataset=ammonia"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "density": 1,
+        "id": "normal",
+        "texture": {
+          "band": "url(\"http://127.0.0.1:53136/scenes/charon/charon-normal@2x.webp\")",
+          "pole": "url(\"http://127.0.0.1:53136/scenes/charon/charon-poles-normal@2x.webp\")"
+        },
+        "leaves": 450,
+        "shadows": false,
+        "url": "http://127.0.0.1:53136/charon/?v=MEZApBcyPgVrw0FCxzNAAAAAv53Dj0q7sME_2eYqV4z3j7-ww1mcl-3bAAEAAAAAAAAAAA"
+      }
+    ],
+    "loaded": [
+      {
+        "filename": "charon-lens-ammonia.webp",
+        "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05",
+        "bytes": 178,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-lens-ammonia.webp"
+      },
+      {
+        "filename": "charon-lens-water-ice.webp",
+        "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05",
+        "bytes": 178,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-lens-water-ice.webp"
+      },
+      {
+        "filename": "charon-features.json",
+        "sha256": "f1c006b5e1fad0a948e192694dbe551815091d0c43c9c4debe065992175e4556",
+        "bytes": 76716,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-features.json"
+      },
+      {
+        "filename": "charon-poles-water-ice@2x.webp",
+        "sha256": "34c2dc40cbd87bbde52b552b10f97f4be7051e2c321bc68809317293eee6dce9",
+        "bytes": 103854,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-poles-water-ice@2x.webp"
+      },
+      {
+        "filename": "charon-water-ice@2x.webp",
+        "sha256": "f038a5e9d7bb8e24b4d80ee887e7590cc4df646d5b7c68b7c5eed124d82aff16",
+        "bytes": 1783736,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-water-ice@2x.webp"
+      },
+      {
+        "filename": "charon-ammonia@2x.webp",
+        "sha256": "52441cde913d84450456a24fbd613fe39b3122bc2d5118543ab403d86530ef40",
+        "bytes": 921744,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-ammonia@2x.webp"
+      },
+      {
+        "filename": "charon-poles-ammonia@2x.webp",
+        "sha256": "1c3c00a8145bcc9205ea12933bcd9728ec580be4efc8fc28f92aa9cb16b17661",
+        "bytes": 71400,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-poles-ammonia@2x.webp"
+      },
+      {
+        "filename": "charon-lens-ammonia.webp",
+        "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05",
+        "bytes": 178,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-lens-ammonia.webp"
+      },
+      {
+        "filename": "charon-lens-water-ice.webp",
+        "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05",
+        "bytes": 178,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-lens-water-ice.webp"
+      },
+      {
+        "filename": "charon-features.json",
+        "sha256": "f1c006b5e1fad0a948e192694dbe551815091d0c43c9c4debe065992175e4556",
+        "bytes": 76716,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-features.json"
+      },
+      {
+        "filename": "charon-poles-water-ice@2x.webp",
+        "sha256": "34c2dc40cbd87bbde52b552b10f97f4be7051e2c321bc68809317293eee6dce9",
+        "bytes": 103854,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-poles-water-ice@2x.webp"
+      },
+      {
+        "filename": "charon-water-ice@2x.webp",
+        "sha256": "f038a5e9d7bb8e24b4d80ee887e7590cc4df646d5b7c68b7c5eed124d82aff16",
+        "bytes": 1783736,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-water-ice@2x.webp"
+      },
+      {
+        "filename": "charon-ammonia@2x.webp",
+        "sha256": "52441cde913d84450456a24fbd613fe39b3122bc2d5118543ab403d86530ef40",
+        "bytes": 921744,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-ammonia@2x.webp"
+      },
+      {
+        "filename": "charon-poles-ammonia@2x.webp",
+        "sha256": "1c3c00a8145bcc9205ea12933bcd9728ec580be4efc8fc28f92aa9cb16b17661",
+        "bytes": 71400,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-poles-ammonia@2x.webp"
+      },
+      {
+        "filename": "charon-lens-water-ice.webp",
+        "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05",
+        "bytes": 178,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-lens-water-ice.webp"
+      },
+      {
+        "filename": "charon-lens-ammonia.webp",
+        "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05",
+        "bytes": 178,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-lens-ammonia.webp"
+      },
+      {
+        "filename": "charon-features.json",
+        "sha256": "f1c006b5e1fad0a948e192694dbe551815091d0c43c9c4debe065992175e4556",
+        "bytes": 76716,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-features.json"
+      },
+      {
+        "filename": "charon-poles-water-ice@2x.webp",
+        "sha256": "34c2dc40cbd87bbde52b552b10f97f4be7051e2c321bc68809317293eee6dce9",
+        "bytes": 103854,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-poles-water-ice@2x.webp"
+      },
+      {
+        "filename": "charon-water-ice@2x.webp",
+        "sha256": "f038a5e9d7bb8e24b4d80ee887e7590cc4df646d5b7c68b7c5eed124d82aff16",
+        "bytes": 1783736,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-water-ice@2x.webp"
+      },
+      {
+        "filename": "charon-ammonia@2x.webp",
+        "sha256": "52441cde913d84450456a24fbd613fe39b3122bc2d5118543ab403d86530ef40",
+        "bytes": 921744,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-ammonia@2x.webp"
+      },
+      {
+        "filename": "charon-poles-ammonia@2x.webp",
+        "sha256": "1c3c00a8145bcc9205ea12933bcd9728ec580be4efc8fc28f92aa9cb16b17661",
+        "bytes": 71400,
+        "url": "http://127.0.0.1:53136/scenes/charon/charon-poles-ammonia@2x.webp"
+      }
+    ],
+    "interactions": [
+      {
+        "organa": "89100000",
+        "mapU": "0.863611",
+        "mapV": "0.198333",
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.858572883948,-0.00274819317,-0.512684162408,0,-0.329171142382,0.769610598749,0.547125109382,0,0.393063559711,0.638507614463,-0.66167141717,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.155600606941,0.527285837762,-0.835318999287,0,0.723570963772,0.636515052784,0.267008491016,0,0.672482987529,-0.562865943669,-0.48057090843,0,0,0,0,1)",
+            "sunView": "matrix3d(0.844226921527,-0.082468100368,0.529603547374,0,-0.082468100368,0.956340417452,0.28037834861,0,-0.529603547374,-0.28037834861,0.800567338979,0,0,0,0,1)"
+          },
+          "pitch": 40.67783407999914,
+          "controlPitch": 40.67783407999914,
+          "controlYaw": -139.24612540414049,
+          "zoom": 1.8,
+          "distance": 796.0547620873676,
+          "distanceKilometers": 2097.4312427171512,
+          "distanceRadii": 3.4611076612494247,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 752.7272727927495,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -500,
+            "bottom": 500
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 376.3636363963748,
+          "bodyCenterKilometers": [
+            5.93515145443987e-7,
+            5.5256073819595746e-8,
+            -2097.4312427171512
+          ]
+        },
+        "shadowsToggled": [
+          true,
+          false
+        ],
+        "retainedLeaves": 450
+      }
+    ]
+  },
+  "displayPreparation": {
+    "nativeDataUnchanged": true,
+    "spatialPoolingUnchanged": true,
+    "numericSampling": "bilinear, all four neighbours must be valid",
+    "outputDimensionsPerDensity": [
+      [
+        2048,
+        1024
+      ],
+      [
+        4096,
+        2048
+      ]
+    ],
+    "retainedSurfaceLeaves": 450,
+    "diagnosticComparison": {
+      "sameView": true,
+      "variants": [
+        "current: source grid 720x360, 3x3 water / 6x6+3x3 ammonia averages, nearest display",
+        "finer: source grid 1440x720, single-pixel water / 3x3 ammonia, bilinear display"
+      ],
+      "interpretation": "Less averaging increased visible scan-pattern variation; no finer surface features were established. The final preparation preserves the original spectral pooling and only changes numeric display interpolation and packing size."
+    }
+  },
+  "inputs": [
+    {
+      "path": "src/planets/charon/object.json",
+      "bytes": 5277,
+      "sha256": "7a9e3c55d4151ad2d11bd813f89716404c0491d135b1b8342845cdfb6290b2e0"
+    },
+    {
+      "path": "src/planets/charon/source/manifest.json",
+      "bytes": 49334,
+      "sha256": "151a200928cab631a6d8432cc0914a3cb9b89e93ba9e8e441463529c01bebae8"
+    },
+    {
+      "path": "src/planets/charon/source/preparation/raster.json",
+      "bytes": 10478,
+      "sha256": "7725965ada011228099956849262ea2b6059787e578f6bf6c0b296883fa4dc64"
+    },
+    {
+      "path": "src/planets/charon/source/preparation/features.json",
+      "bytes": 1312,
+      "sha256": "06c6682fae014a5860652e8b45d46532dc0dcd5ce82db30e6109350bf11175ba"
+    },
+    {
+      "path": "src/planets/charon/source/presentation/minimap.json",
+      "bytes": 36,
+      "sha256": "a37bac73fe389c3d53ec16b60d032adbccea9cec413b8d866ae712b28164c0a9"
+    },
+    {
+      "path": "src/planets/charon/source/features/landmarks.json",
+      "bytes": 971,
+      "sha256": "c7ff1789d718ce710db089b5b2ff9c312c113bbe90d4de184f9c845549fc161d"
+    },
+    {
+      "path": "src/planets/charon/source/science/leisa/bands.json",
+      "bytes": 3115,
+      "sha256": "1887411040bae02b71058eea94422db5ba8800b03f5b4a2eb3eb314fe7a65384"
+    },
+    {
+      "path": "src/planets/charon/prepared/runtime.refs.json",
+      "bytes": 690954,
+      "sha256": "ab8db2838f58a774b2f110571c25d61b001bfb73f33f6949b0c9e59889fc1152"
+    },
+    {
+      "path": "src/planets/charon/runtime-assets.json",
+      "bytes": 21273,
+      "sha256": "2508e9d783e8df311e9cfd6e989da2ce22b6bf0cd92ca45e3b09c5e06f2fda44"
+    },
+    {
+      "path": "src/planets/charon/prepared/features.json",
+      "bytes": 658,
+      "sha256": "1af0c6a7547d8ae0d95318c625b3d77fc52b17d34c9478de5fb00a04a2b7252e"
+    },
+    {
+      "path": "src/planets/charon/prepared/minimaps.json",
+      "bytes": 469,
+      "sha256": "4d128e45393418e18c555259d215ed21e48ddd1b0f9bdca749dafa08e6881d6f"
+    },
+    {
+      "path": "src/renderers/css/styles/planet-surfaces.css",
+      "bytes": 84673,
+      "sha256": "9b1ecc9e4808bdfccdedc41f8de13a2c071559f9a58d67473b259169ccfc664e"
+    },
+    {
+      "path": "tools/objects/observation/spectral-band-maps.mts",
+      "bytes": 14556,
+      "sha256": "61b8f39be9c66dcedbcd79f067c14847f914e9d7bb84c7a50b13c3fb8e82dee3"
+    },
+    {
+      "path": "tools/objects/surface-features/landmarks.ts",
+      "bytes": 14656,
+      "sha256": "4b3264d909d509f1e5848a93451fd784033a178dda6c9a11fdebe98a57b3719f"
+    },
+    {
+      "path": "src/preparation/raster/validation.ts",
+      "bytes": 12088,
+      "sha256": "8b2579a6ee33eebe9d8c880371899d9f157af05506b7dcf450721dd7b4aca0e3"
+    },
+    {
+      "path": "tests/objects/browser/charon/ice-surfaces-browser.mts",
+      "bytes": 9528,
+      "sha256": "bec9cf61f2f64e059f2fbd35b66b79f03adddf986952f2c5ee5ebb7c36c92807"
+    }
+  ],
+  "captures": [
+    {
+      "path": "water-ice.png",
+      "claim": "Water band depth, desktop DPR 1",
+      "bytes": 818734,
+      "sha256": "9f4da7a115db7f890522cf463118877c6339119bbc6da60c644843e4923c0539"
+    },
+    {
+      "path": "ammonia.png",
+      "claim": "Ammonia ratio, desktop DPR 1",
+      "bytes": 725466,
+      "sha256": "aa250c0b9d72c2c6318b93de3177bc3597967bfd033a0ce25736dfcc16497c2f"
+    },
+    {
+      "path": "ammonia-dpr2.png",
+      "claim": "Same canonical texture bank at DPR 2",
+      "bytes": 1939483,
+      "sha256": "e9b78d3d3273af80317a3c36e2693cc03df8a8863b1949346e79d2913b4e06ae"
+    },
+    {
+      "path": "mobile.png",
+      "claim": "Mobile globe after dataset selection",
+      "bytes": 219084,
+      "sha256": "a35eb68b7cacd92d983ac762d870fa0a56797060e346c0dabdbc77d65d66e622"
+    },
+    {
+      "path": "mobile-selector.png",
+      "claim": "Mobile dataset selector, legend and map",
+      "bytes": 93062,
+      "sha256": "2957ab3dc9be96f4838d6fbba775aa6b0f936179ea6d4490b8eaa909b481aa90"
+    },
+    {
+      "path": "organa.png",
+      "claim": "Published informal landmark over the infrared enhancement",
+      "bytes": 806627,
+      "sha256": "4b1231b6ea3bf2269e975f8ad3bb0731cd3c01b9419bef1be64b72b993d9153b"
+    },
+    {
+      "path": "shadows.png",
+      "claim": "The same view with the optional shadow bank enabled",
+      "bytes": 679328,
+      "sha256": "5ca7b1c888e2986ef211c0688d9a9d27e4dbdd04fa12564eb79b5effbbc4aecd"
+    }
+  ],
+  "assets": {
+    "existingCount": 115,
+    "currentCount": 125,
+    "unchangedExisting": 114,
+    "changedExisting": [
+      {
+        "filename": "charon-features.json",
+        "beforeSha256": "9a9472803a3edc7f1d0251388c8c453b0dd91793d3db64af4a8cf8c69a7db08a",
+        "afterSha256": "f1c006b5e1fad0a948e192694dbe551815091d0c43c9c4debe065992175e4556"
+      }
+    ],
+    "added": [
+      {
+        "filename": "charon-ammonia.webp",
+        "bytes": 284676,
+        "sha256": "89f6181c3fbdfdaefe0895e64d17e92c86b425a7b1cde76354067456327a9492"
+      },
+      {
+        "filename": "charon-ammonia@2x.webp",
+        "bytes": 921744,
+        "sha256": "52441cde913d84450456a24fbd613fe39b3122bc2d5118543ab403d86530ef40"
+      },
+      {
+        "filename": "charon-lens-ammonia.webp",
+        "bytes": 178,
+        "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05"
+      },
+      {
+        "filename": "charon-lens-water-ice.webp",
+        "bytes": 178,
+        "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05"
+      },
+      {
+        "filename": "charon-poles-ammonia.webp",
+        "bytes": 27966,
+        "sha256": "d3933bc6c9417a9377e3edf1e3629ca664341bf2fe151741bc20d29b205b7d55"
+      },
+      {
+        "filename": "charon-poles-ammonia@2x.webp",
+        "bytes": 71400,
+        "sha256": "1c3c00a8145bcc9205ea12933bcd9728ec580be4efc8fc28f92aa9cb16b17661"
+      },
+      {
+        "filename": "charon-poles-water-ice.webp",
+        "bytes": 38118,
+        "sha256": "1df493f6d7863c23180a3eecccd40b7bbf1e2227ae50f32e79d17b6094025429"
+      },
+      {
+        "filename": "charon-poles-water-ice@2x.webp",
+        "bytes": 103854,
+        "sha256": "34c2dc40cbd87bbde52b552b10f97f4be7051e2c321bc68809317293eee6dce9"
+      },
+      {
+        "filename": "charon-water-ice.webp",
+        "bytes": 495484,
+        "sha256": "b85f81927fe554e93ecedc77c949661a54b6f36e08ff53c8e381e20b2cdb1de6"
+      },
+      {
+        "filename": "charon-water-ice@2x.webp",
+        "bytes": 1783736,
+        "sha256": "f038a5e9d7bb8e24b4d80ee887e7590cc4df646d5b7c68b7c5eed124d82aff16"
+      }
+    ],
+    "addedBytes": 3727334,
+    "sameTree": true,
+    "sameCamera": true,
+    "lighting": "All pre-existing surface and lighting asset hashes are unchanged."
+  },
+  "sourceRestoration": {
+    "record": "restoration.json",
+    "base": "ebd16155a5eb408b6a96a7eaf4c9620b8a0b8451",
+    "reuse": "Band recipe, spectral preparer, native pins and acquisition operation are unchanged since this empty-source restoration."
+  },
+  "checks": {
+    "completeBodyPreparation": {
+      "command": "node tools/objects/dist/prepare-authored.js charon --write",
+      "result": "pass",
+      "note": "Full bake completed after the display interpolation and size changes; all package outputs and receipts are from this run."
+    },
+    "nativeSpectraAndCharonFeatures": {
+      "command": "node --test tools/objects/observation/spectral-band-maps.test.mts tests/objects/unit/charon/features.test.mts",
+      "passed": 5
+    },
+    "referenceSphereLandmarks": {
+      "passed": 5,
+      "reuse": "The tested landmarks implementation and fixtures are unchanged."
+    },
+    "fractionalRasterPacking": {
+      "passed": 3,
+      "reuse": "The fractional packing validator and fixtures are unchanged; the final science surfaces use scale 0.32."
+    },
+    "strictTypes": "Preparation, tools and the scoped affected test/browser closure pass. Full typecheck passed its earlier stages, then stopped on the unrelated navigation-timing test.",
+    "charonPackage": {
+      "passed": 8,
+      "failed": 4
+    },
+    "provenance": {
+      "products": 15,
+      "sources": 13,
+      "unresolved": [],
+      "uncitedFacts": "Four unchanged legacy facts remain uncited."
+    },
+    "sourceSuite": {
+      "passed": 68,
+      "failed": 1,
+      "skipped": 1
+    },
+    "browser": "Desktop DPR 1 and 2 plus 390x844 mobile; actual loaded texture hashes, latitude/pole bindings, retained 450 leaves, drag, defaults, Shadows off/on/off, Organa search and exact minimap centre.",
+    "delivery": "125 assets freshly installed from immutable URLs, 0 reused, every byte count and SHA-256 verified."
+  },
+  "baselineLimits": [
+    {
+      "check": "Three shared runtime-package failure/cancellation fixtures",
+      "failure": "Missing HTMLElement in the Node fixture; reproduced using main runtime definition."
+    },
+    {
+      "check": "Shared runtime import closure",
+      "failure": "Five unchanged audit findings in orbit SVG, minimap SVG, world-context dynamic import and two stale ownership patterns; reproduced against main source."
+    },
+    {
+      "check": "Full typecheck",
+      "failure": "site/test/navigation-timing.test.mts:39,41: PerformanceEntry.detail is not declared."
+    },
+    {
+      "check": "Source suite",
+      "failure": "Moon authored-preparation receipt is stale; the Moon files are unchanged by this PR."
+    },
+    {
+      "check": "General browser conformance",
+      "failure": "Initial shell passes. The shared profile loader then expects .planet-lenses[aria-label=\"Datasets\"], while the current shell puts the label on its child nav. The focused browser capture above exercises the affected behavior."
+    },
+    {
+      "check": "Whole-app build and global feature-index restoration",
+      "failure": "The local NOX model and a matching Mathilde feature catalogue are absent. The preview has a verified feature catalogue and records its actual generated index above."
+    }
+  ],
+  "baselineComparison": "Failure reproductions use ebd16155a. Relevant application and fixture files are unchanged through current main 6841d90fa; only unrelated body/preparation additions landed."
+}

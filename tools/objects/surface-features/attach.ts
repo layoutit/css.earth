@@ -51,6 +51,7 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
   const context: SurfaceFeaturePreparationContext & { readonly surface?: ReturnType<typeof ellipsoidSurfaceCast> } = { objectId: descriptor.id, sourceDirectory, publicDirectory, outputDirectory,
     config: config.value, maxEntries: featuresRecipe.maxEntries, radiusKm: descriptor.recipe.shape.radiusKm, meshRadiusUnits,
     tree: definition.tree as Parameters<typeof prepareSurfaceFeatures>[0]['tree'], ...(hitMesh ? { hitMesh } : {}), ...(surface ? { surface: surface.cast } : {}),
+    ...(descriptor.recipe.shape.kind === 'sphere' ? { referenceSphere: true as const } : {}),
     declaredLensIds: descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)) };
   const features = await prepareSurfaceFeatures(context);
   return { definition: { ...definition, features: features.plan },

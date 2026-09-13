@@ -1,0 +1,864 @@
+{
+  "schema": "cssearth-spectral-band-evidence@1",
+  "recipe": {
+    "schema": "cssearth-spectral-band-maps@1",
+    "radiusKm": 606,
+    "width": 720,
+    "height": 360,
+    "maximumEmission": 70,
+    "maximumIncidence": 70,
+    "firstBand": 0,
+    "lastBand": 196,
+    "scans": [
+      {
+        "id": "0299175509_charon_cube",
+        "cube": "science/leisa/0299175509_charon_cube.fit",
+        "wavelengths": "science/leisa/0299175509_charon_wavelengths.fit",
+        "geometry": "science/leisa/0299175509_charon_geometry.fit",
+        "label": "science/leisa/0299175509_charon_cube.lblx",
+        "width": 640,
+        "height": 640,
+        "nativeResolutionKm": 5.01,
+        "mapBlocks": [
+          {
+            "id": "water-ice",
+            "method": "linear-band-depth",
+            "windows": [
+              {
+                "minimum": 1.76,
+                "maximum": 1.81,
+                "minimumChannels": 6
+              },
+              {
+                "minimum": 1.98,
+                "maximum": 2.025,
+                "minimumChannels": 5
+              },
+              {
+                "minimum": 2.24,
+                "maximum": 2.27,
+                "minimumChannels": 3
+              }
+            ],
+            "block": 3
+          },
+          {
+            "id": "ammonia",
+            "method": "continuum-ratio",
+            "windows": [
+              {
+                "minimum": 2.1,
+                "maximum": 2.17,
+                "minimumChannels": 8
+              },
+              {
+                "minimum": 2.2,
+                "maximum": 2.24,
+                "minimumChannels": 4
+              },
+              {
+                "minimum": 2.26,
+                "maximum": 2.29,
+                "minimumChannels": 3
+              }
+            ],
+            "block": 6
+          }
+        ]
+      },
+      {
+        "id": "0299171308_charon_cube",
+        "cube": "science/leisa/0299171308_charon_cube.fit",
+        "wavelengths": "science/leisa/0299171308_charon_wavelengths.fit",
+        "geometry": "science/leisa/0299171308_charon_geometry.fit",
+        "label": "science/leisa/0299171308_charon_cube.lblx",
+        "width": 320,
+        "height": 320,
+        "nativeResolutionKm": 8.56,
+        "mapBlocks": [
+          {
+            "id": "water-ice",
+            "method": "linear-band-depth",
+            "windows": [
+              {
+                "minimum": 1.76,
+                "maximum": 1.81,
+                "minimumChannels": 6
+              },
+              {
+                "minimum": 1.98,
+                "maximum": 2.025,
+                "minimumChannels": 5
+              },
+              {
+                "minimum": 2.24,
+                "maximum": 2.27,
+                "minimumChannels": 3
+              }
+            ],
+            "block": 3
+          },
+          {
+            "id": "ammonia",
+            "method": "continuum-ratio",
+            "windows": [
+              {
+                "minimum": 2.1,
+                "maximum": 2.17,
+                "minimumChannels": 8
+              },
+              {
+                "minimum": 2.2,
+                "maximum": 2.24,
+                "minimumChannels": 4
+              },
+              {
+                "minimum": 2.26,
+                "maximum": 2.29,
+                "minimumChannels": 3
+              }
+            ],
+            "block": 3
+          }
+        ]
+      }
+    ]
+  },
+  "scans": [
+    {
+      "id": "0299175509_charon_cube",
+      "inputs": [
+        {
+          "path": "science/leisa/0299175509_charon_cube.fit",
+          "bytes": 419434560,
+          "sha256": "c33dbdd082d6612ba41a5e8e7ce4fd76421334813558efe06f2c8a0d7b24f4b2"
+        },
+        {
+          "path": "science/leisa/0299175509_charon_wavelengths.fit",
+          "bytes": 419434560,
+          "sha256": "5f4ebc9cb6ecb9f67d685dceb5da948d30c547373f52b348717e1e0ed44134da"
+        },
+        {
+          "path": "science/leisa/0299175509_charon_geometry.fit",
+          "bytes": 8196480,
+          "sha256": "49b20130e431e988d004f5142d40d360b5b4a0d6dd65c8ffabb9f5e5e71554ff"
+        },
+        {
+          "path": "science/leisa/0299175509_charon_cube.lblx",
+          "bytes": 17729,
+          "sha256": "0edfb68a81bda916b72fe77e392db7f26fd2559a48829b904be9ac59cf85bf22"
+        }
+      ],
+      "quantities": [
+        {
+          "id": "water-ice",
+          "cells": 21254,
+          "anchors": [
+            {
+              "longitude": -52.031097412109375,
+              "latitude": 55.91551971435547,
+              "value": 0.622384125451171,
+              "score": 59.826945146401904,
+              "x": 213,
+              "y": 156,
+              "samples": 9
+            },
+            {
+              "longitude": -50.98321533203124,
+              "latitude": 56.12182617187499,
+              "value": 0.631052768148644,
+              "score": 59.030854356489684,
+              "x": 216,
+              "y": 156,
+              "samples": 9
+            },
+            {
+              "longitude": -52.40014648437499,
+              "latitude": 55.12987518310547,
+              "value": 0.6347214862267134,
+              "score": 59.68556864270293,
+              "x": 210,
+              "y": 159,
+              "samples": 9
+            },
+            {
+              "longitude": -51.368774414062486,
+              "latitude": 55.3372917175293,
+              "value": 0.6455376626291771,
+              "score": 58.8877202579182,
+              "x": 213,
+              "y": 159,
+              "samples": 9
+            },
+            {
+              "longitude": -50.335052490234375,
+              "latitude": 55.538780212402344,
+              "value": 0.6323788833328721,
+              "score": 58.12257176463665,
+              "x": 216,
+              "y": 159,
+              "samples": 9
+            },
+            {
+              "longitude": -49.298950195312486,
+              "latitude": 55.73436737060547,
+              "value": 0.6161790182151011,
+              "score": 57.3877991069098,
+              "x": 219,
+              "y": 159,
+              "samples": 9
+            },
+            {
+              "longitude": -48.26034545898439,
+              "latitude": 55.924076080322266,
+              "value": 0.6135367245074441,
+              "score": 56.678788069700765,
+              "x": 222,
+              "y": 159,
+              "samples": 9
+            },
+            {
+              "longitude": -47.21920776367186,
+              "latitude": 56.107933044433594,
+              "value": 0.6078780941486346,
+              "score": 55.99749935188726,
+              "x": 225,
+              "y": 159,
+              "samples": 9
+            },
+            {
+              "longitude": -46.17547607421874,
+              "latitude": 56.28594970703125,
+              "value": 0.6113309780379275,
+              "score": 55.340274358116446,
+              "x": 228,
+              "y": 159,
+              "samples": 9
+            },
+            {
+              "longitude": -51.75335693359375,
+              "latitude": 54.5562858581543,
+              "value": 0.5856747971397944,
+              "score": 58.76278477176886,
+              "x": 210,
+              "y": 162,
+              "samples": 9
+            },
+            {
+              "longitude": -50.73547363281253,
+              "latitude": 54.75901412963867,
+              "value": 0.6206193446511485,
+              "score": 57.99451553909586,
+              "x": 213,
+              "y": 162,
+              "samples": 9
+            },
+            {
+              "longitude": -49.71554565429688,
+              "latitude": 54.95591735839844,
+              "value": 0.6572557817687338,
+              "score": 57.25861537401589,
+              "x": 216,
+              "y": 162,
+              "samples": 9
+            },
+            {
+              "longitude": -48.6934814453125,
+              "latitude": 55.147029876708984,
+              "value": 0.677536866510926,
+              "score": 56.54927142787893,
+              "x": 219,
+              "y": 162,
+              "samples": 9
+            },
+            {
+              "longitude": -47.66921997070314,
+              "latitude": 55.332374572753906,
+              "value": 0.6399954368868641,
+              "score": 55.866786419235275,
+              "x": 222,
+              "y": 162,
+              "samples": 9
+            },
+            {
+              "longitude": -46.64270019531252,
+              "latitude": 55.511978149414055,
+              "value": 0.6036112169974809,
+              "score": 55.2104070727757,
+              "x": 225,
+              "y": 162,
+              "samples": 9
+            },
+            {
+              "longitude": -45.61389160156249,
+              "latitude": 55.685855865478516,
+              "value": 0.6153348440748747,
+              "score": 54.57726110612417,
+              "x": 228,
+              "y": 162,
+              "samples": 9
+            },
+            {
+              "longitude": -52.13720703124999,
+              "latitude": 53.778568267822266,
+              "value": 0.6379978519461601,
+              "score": 58.65186366166674,
+              "x": 207,
+              "y": 165,
+              "samples": 9
+            },
+            {
+              "longitude": -51.134216308593764,
+              "latitude": 53.98257446289063,
+              "value": 0.6105371606469412,
+              "score": 57.88321586398254,
+              "x": 210,
+              "y": 165,
+              "samples": 9
+            },
+            {
+              "longitude": -50.1294860839844,
+              "latitude": 54.18083190917969,
+              "value": 0.6221475833933283,
+              "score": 57.1439032328079,
+              "x": 213,
+              "y": 165,
+              "samples": 9
+            },
+            {
+              "longitude": -49.122955322265625,
+              "latitude": 54.37337493896485,
+              "value": 0.6454412164874144,
+              "score": 56.434722130838104,
+              "x": 216,
+              "y": 165,
+              "samples": 9
+            },
+            {
+              "longitude": -48.11453247070314,
+              "latitude": 54.56023406982422,
+              "value": 0.6683702111208232,
+              "score": 55.750481167531866,
+              "x": 219,
+              "y": 165,
+              "samples": 9
+            },
+            {
+              "longitude": -47.10418701171877,
+              "latitude": 54.74142837524415,
+              "value": 0.6366150750786829,
+              "score": 55.0931888400866,
+              "x": 222,
+              "y": 165,
+              "samples": 9
+            },
+            {
+              "longitude": -46.09182739257812,
+              "latitude": 54.916988372802734,
+              "value": 0.6115005818332779,
+              "score": 54.45859825757894,
+              "x": 225,
+              "y": 165,
+              "samples": 9
+            },
+            {
+              "longitude": -51.53155517578124,
+              "latitude": 53.209232330322266,
+              "value": 0.6317590270467277,
+              "score": 57.785902112197455,
+              "x": 207,
+              "y": 168,
+              "samples": 9
+            },
+            {
+              "longitude": -50.54110717773438,
+              "latitude": 53.40888214111328,
+              "value": 0.6144905829715563,
+              "score": 57.04491100568017,
+              "x": 210,
+              "y": 168,
+              "samples": 9
+            },
+            {
+              "longitude": -49.549163818359375,
+              "latitude": 53.60288619995117,
+              "value": 0.6227192910696338,
+              "score": 56.33354244007958,
+              "x": 213,
+              "y": 168,
+              "samples": 9
+            },
+            {
+              "longitude": -48.555664062499986,
+              "latitude": 53.79127502441406,
+              "value": 0.6294226850280842,
+              "score": 55.648122389570936,
+              "x": 216,
+              "y": 168,
+              "samples": 9
+            },
+            {
+              "longitude": -47.56048583984376,
+              "latitude": 53.97407913208008,
+              "value": 0.6361788533600834,
+              "score": 54.988266587841444,
+              "x": 219,
+              "y": 168,
+              "samples": 9
+            },
+            {
+              "longitude": -46.563598632812514,
+              "latitude": 54.151329040527344,
+              "value": 0.6384169664467636,
+              "score": 54.35373297256111,
+              "x": 222,
+              "y": 168,
+              "samples": 9
+            },
+            {
+              "longitude": -51.92782592773438,
+              "latitude": 52.43874740600587,
+              "value": 0.5853036757549406,
+              "score": 57.70327312215364,
+              "x": 204,
+              "y": 171,
+              "samples": 9
+            },
+            {
+              "longitude": -50.950805664062514,
+              "latitude": 52.639835357666016,
+              "value": 0.5811049726178867,
+              "score": 56.95903716773115,
+              "x": 207,
+              "y": 171,
+              "samples": 9
+            },
+            {
+              "longitude": -49.972564697265646,
+              "latitude": 52.835334777832024,
+              "value": 0.5822380489472643,
+              "score": 56.244511602003065,
+              "x": 210,
+              "y": 171,
+              "samples": 9
+            },
+            {
+              "longitude": -48.99304199218752,
+              "latitude": 53.02528381347656,
+              "value": 0.5920902993353496,
+              "score": 55.557980850310734,
+              "x": 213,
+              "y": 171,
+              "samples": 9
+            },
+            {
+              "longitude": -48.01217651367187,
+              "latitude": 53.209712982177734,
+              "value": 0.6448061318061756,
+              "score": 54.89614222796866,
+              "x": 216,
+              "y": 171,
+              "samples": 9
+            },
+            {
+              "longitude": -47.029846191406286,
+              "latitude": 53.3886604309082,
+              "value": 0.5874022556090289,
+              "score": 54.25984289139526,
+              "x": 219,
+              "y": 171,
+              "samples": 9
+            },
+            {
+              "longitude": -46.046020507812486,
+              "latitude": 53.56214904785156,
+              "value": 0.6343493623126127,
+              "score": 53.6466346908921,
+              "x": 222,
+              "y": 171,
+              "samples": 9
+            },
+            {
+              "longitude": -48.45974731445314,
+              "latitude": 52.448116302490234,
+              "value": 0.6043115739520776,
+              "score": 54.81688948437737,
+              "x": 213,
+              "y": 174,
+              "samples": 9
+            },
+            {
+              "longitude": -47.491119384765625,
+              "latitude": 52.62877655029297,
+              "value": 0.6473118981696431,
+              "score": 54.17789514682738,
+              "x": 216,
+              "y": 174,
+              "samples": 9
+            },
+            {
+              "longitude": -46.52124023437501,
+              "latitude": 52.804046630859375,
+              "value": 0.5965775403967017,
+              "score": 53.56254907053155,
+              "x": 219,
+              "y": 174,
+              "samples": 9
+            }
+          ]
+        },
+        {
+          "id": "ammonia",
+          "cells": 5232,
+          "anchors": [
+            {
+              "longitude": -52.21589284182518,
+              "latitude": 55.52233122127985,
+              "value": 0.8482931344883942,
+              "score": 239.0521958627292,
+              "x": 210,
+              "y": 156,
+              "samples": 36
+            },
+            {
+              "longitude": -50.13436238179277,
+              "latitude": 55.93007644442238,
+              "value": 0.839287534922539,
+              "score": 232.8068916147996,
+              "x": 216,
+              "y": 156,
+              "samples": 36
+            },
+            {
+              "longitude": -50.93526987864921,
+              "latitude": 54.37047408226712,
+              "value": 0.8554175779365131,
+              "score": 231.78355007611356,
+              "x": 210,
+              "y": 162,
+              "samples": 36
+            },
+            {
+              "longitude": -48.9088855861804,
+              "latitude": 54.75987772480854,
+              "value": 0.873339779912694,
+              "score": 225.9904635139585,
+              "x": 216,
+              "y": 162,
+              "samples": 36
+            },
+            {
+              "longitude": -46.87434644581198,
+              "latitude": 55.12637615870065,
+              "value": 0.7849366974948554,
+              "score": 220.62487970225862,
+              "x": 222,
+              "y": 162,
+              "samples": 36
+            },
+            {
+              "longitude": -51.73004794934642,
+              "latitude": 52.82371844342742,
+              "value": 0.82508685447476,
+              "score": 231.0039612222153,
+              "x": 204,
+              "y": 168,
+              "samples": 36
+            },
+            {
+              "longitude": -49.76142554852596,
+              "latitude": 53.21883391008725,
+              "value": 0.8668688937684178,
+              "score": 225.17853738243394,
+              "x": 210,
+              "y": 168,
+              "samples": 36
+            },
+            {
+              "longitude": -47.78708194623056,
+              "latitude": 53.59161730211458,
+              "value": 0.8783138250222036,
+              "score": 219.79050840671283,
+              "x": 216,
+              "y": 168,
+              "samples": 36
+            },
+            {
+              "longitude": -45.806444966528495,
+              "latitude": 53.94231660997765,
+              "value": 0.8323862227777994,
+              "score": 214.79270120730027,
+              "x": 222,
+              "y": 168,
+              "samples": 36
+            },
+            {
+              "longitude": -46.75705010599278,
+              "latitude": 52.4260521554414,
+              "value": 0.8020409413013282,
+              "score": 214.12506980444326,
+              "x": 216,
+              "y": 174,
+              "samples": 36
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0299171308_charon_cube",
+      "inputs": [
+        {
+          "path": "science/leisa/0299171308_charon_cube.fit",
+          "bytes": 104860800,
+          "sha256": "00ea97e6c828f535868a8864d3b592f49f7473aaf349ac4d28d0e9cd88d3190d"
+        },
+        {
+          "path": "science/leisa/0299171308_charon_wavelengths.fit",
+          "bytes": 104860800,
+          "sha256": "f517266558805c5bee41956d590065934c3120eb4f5be56ad00da3b300e69e17"
+        },
+        {
+          "path": "science/leisa/0299171308_charon_geometry.fit",
+          "bytes": 2053440,
+          "sha256": "b53c0815a430cff5fa7e541808a6105dcdcd7a40fe037b42246003c7d7971b74"
+        },
+        {
+          "path": "science/leisa/0299171308_charon_cube.lblx",
+          "bytes": 17730,
+          "sha256": "773847bb6f69bc71be633a8147e35b74c4cf16c25dbcc8f85d60f7c7def439c8"
+        }
+      ],
+      "quantities": [
+        {
+          "id": "water-ice",
+          "cells": 5702,
+          "anchors": [
+            {
+              "longitude": -50.95983886718752,
+              "latitude": 55.23821258544922,
+              "value": 0.6043407763619932,
+              "score": 195.91760632790601,
+              "x": 111,
+              "y": 96,
+              "samples": 9
+            },
+            {
+              "longitude": -48.957214355468764,
+              "latitude": 55.63513946533204,
+              "value": 0.6749310910611983,
+              "score": 192.32864682283406,
+              "x": 114,
+              "y": 96,
+              "samples": 9
+            },
+            {
+              "longitude": -46.937286376953125,
+              "latitude": 56.00691604614258,
+              "value": 0.6412690652807362,
+              "score": 188.97594237109442,
+              "x": 117,
+              "y": 96,
+              "samples": 9
+            },
+            {
+              "longitude": -51.88882446289062,
+              "latitude": 53.72344589233398,
+              "value": 0.6293602612676061,
+              "score": 195.6958636755193,
+              "x": 108,
+              "y": 99,
+              "samples": 9
+            },
+            {
+              "longitude": -49.94949340820314,
+              "latitude": 54.12984848022461,
+              "value": 0.6085733966310587,
+              "score": 192.07550719713623,
+              "x": 111,
+              "y": 99,
+              "samples": 9
+            },
+            {
+              "longitude": -47.99533081054689,
+              "latitude": 54.51182556152343,
+              "value": 0.6149288805787738,
+              "score": 188.6978204323532,
+              "x": 114,
+              "y": 99,
+              "samples": 9
+            },
+            {
+              "longitude": -46.02639770507812,
+              "latitude": 54.869388580322266,
+              "value": 0.650158473561669,
+              "score": 185.54146996896097,
+              "x": 117,
+              "y": 99,
+              "samples": 9
+            },
+            {
+              "longitude": -50.910339355468764,
+              "latitude": 52.629066467285156,
+              "value": 0.5670751529123303,
+              "score": 191.9234717104159,
+              "x": 108,
+              "y": 102,
+              "samples": 9
+            },
+            {
+              "longitude": -49.01489257812502,
+              "latitude": 53.02110290527343,
+              "value": 0.6066033212670703,
+              "score": 188.51488046254087,
+              "x": 111,
+              "y": 102,
+              "samples": 9
+            },
+            {
+              "longitude": -47.106750488281264,
+              "latitude": 53.38937759399414,
+              "value": 0.6112662936844334,
+              "score": 185.33165395513257,
+              "x": 114,
+              "y": 102,
+              "samples": 9
+            }
+          ]
+        },
+        {
+          "id": "ammonia",
+          "cells": 5702,
+          "anchors": [
+            {
+              "longitude": -50.95983886718752,
+              "latitude": 55.23821258544922,
+              "value": 0.8828615159759496,
+              "score": 195.91760632790601,
+              "x": 111,
+              "y": 96,
+              "samples": 9
+            },
+            {
+              "longitude": -48.957214355468764,
+              "latitude": 55.63513946533204,
+              "value": 0.8564563856791434,
+              "score": 192.32864682283406,
+              "x": 114,
+              "y": 96,
+              "samples": 9
+            },
+            {
+              "longitude": -46.937286376953125,
+              "latitude": 56.00691604614258,
+              "value": 0.8206177087020395,
+              "score": 188.97594237109442,
+              "x": 117,
+              "y": 96,
+              "samples": 9
+            },
+            {
+              "longitude": -51.88882446289062,
+              "latitude": 53.72344589233398,
+              "value": 0.830150701349286,
+              "score": 195.6958636755193,
+              "x": 108,
+              "y": 99,
+              "samples": 9
+            },
+            {
+              "longitude": -49.94949340820314,
+              "latitude": 54.12984848022461,
+              "value": 0.8567816437622396,
+              "score": 192.07550719713623,
+              "x": 111,
+              "y": 99,
+              "samples": 9
+            },
+            {
+              "longitude": -47.99533081054689,
+              "latitude": 54.51182556152343,
+              "value": 0.8790599606523188,
+              "score": 188.6978204323532,
+              "x": 114,
+              "y": 99,
+              "samples": 9
+            },
+            {
+              "longitude": -46.02639770507812,
+              "latitude": 54.869388580322266,
+              "value": 0.8451549888683647,
+              "score": 185.54146996896097,
+              "x": 117,
+              "y": 99,
+              "samples": 9
+            },
+            {
+              "longitude": -50.910339355468764,
+              "latitude": 52.629066467285156,
+              "value": 0.8375743952198496,
+              "score": 191.9234717104159,
+              "x": 108,
+              "y": 102,
+              "samples": 9
+            },
+            {
+              "longitude": -49.01489257812502,
+              "latitude": 53.02110290527343,
+              "value": 0.8842931992470237,
+              "score": 188.51488046254087,
+              "x": 111,
+              "y": 102,
+              "samples": 9
+            },
+            {
+              "longitude": -47.106750488281264,
+              "latitude": 53.38937759399414,
+              "value": 0.8371071066732478,
+              "score": 185.33165395513257,
+              "x": 114,
+              "y": 102,
+              "samples": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "id": "water-ice",
+      "validCells": 73329,
+      "areaFraction": 0.24340424077608533,
+      "byScan": [
+        {
+          "id": "0299175509_charon_cube",
+          "cells": 66407,
+          "areaFraction": 0.22655078087503283
+        },
+        {
+          "id": "0299171308_charon_cube",
+          "cells": 6922,
+          "areaFraction": 0.016853459901044806
+        }
+      ]
+    },
+    {
+      "id": "ammonia",
+      "validCells": 72606,
+      "areaFraction": 0.2426197400244377,
+      "byScan": [
+        {
+          "id": "0299175509_charon_cube",
+          "cells": 14438,
+          "areaFraction": 0.07772159610299546
+        },
+        {
+          "id": "0299171308_charon_cube",
+          "cells": 58168,
+          "areaFraction": 0.16489814392140453
+        }
+      ]
+    }
+  ]
+}

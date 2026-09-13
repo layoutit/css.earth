@@ -15,6 +15,7 @@ import {prepareProjectedCatalog} from './acquisition/projected-catalog.mts';
 import {prepareDskMesh,validateDskMeshRecipe} from './acquisition/dsk-mesh.mts';
 import {csvRow} from './acquisition/csv.mts';
 interface HriiFacets extends OperationBase {kind:'hrii-facets';path:string;recipePath:string;product:'fields'|'report';}
+interface SpectralBandMaps extends OperationBase {kind:'spectral-band-maps';path:string;recipePath:string;product:string;}
 interface DskMesh extends OperationBase {kind:'dsk-mesh';path:string;recipe:Record<string,unknown>;}
 interface OperationBase { groups:string[]; }
 interface Download extends OperationBase {kind:'download';path:string;url:string;headers?:Record<string,string>;encoding?:'gzip'|'pretty-json';expectedJsonFields?:Record<string,unknown>;}
@@ -27,16 +28,16 @@ interface Mosaic extends OperationBase {kind:'tile-mosaic';path:string;url:strin
 interface RequestCheck extends OperationBase {kind:'verify-request';url:string;form:Record<string,string>;fileSource?:string;expectedPath:string;selector:'trim'|'numeric-lines'|'before-marker';marker?:string;rowCount?:number;headers?:Record<string,string>;}
 interface JsonCheck extends OperationBase {kind:'verify-json';url:string;expectedPath:string;fields:Record<string,string>;}
 interface Catalog extends OperationBase {kind:'catalog-field';path:string;url:string;sha256:string;catalogRows:number;selectedCount:number;selection?:{model:'gnomonic';centerRaDegrees:number;centerDecDegrees:number;horizontalFovDegrees:number;aspectRatio:number};template:{schema:string;source:Record<string,unknown>;projection:Record<string,unknown>;presentation:Record<string,unknown>;starColumns?:string[]};}
-export type AcquisitionOperation=HriiFacets|DskMesh|Download|RequestDownload|JsonDocument|ZipMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|Catalog;
+export type AcquisitionOperation=SpectralBandMaps|HriiFacets|DskMesh|Download|RequestDownload|JsonDocument|ZipMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|Catalog;
 export interface AcquisitionPlan {schema:'cssearth-acquisition-plan@1';operations:AcquisitionOperation[];}
 export interface AcquisitionTransport { fetch(url:string,init?:RequestInit):Promise<Response>; }
 const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected acquisition object.');return value as Record<string,unknown>;};
 export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
  const plan=record(value);if(plan.schema!=='cssearth-acquisition-plan@1'||!Array.isArray(plan.operations)||!plan.operations.length)throw new TypeError('Invalid acquisition plan.');
- for(const value of plan.operations){const step=record(value);if(!['json-document','dsk-mesh','hrii-facets','satellite-catalog','zip-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
-  if(!['download','request-download','json-document','dsk-mesh','hrii-facets','zip-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','catalog-field'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
+ for(const value of plan.operations){const step=record(value);if(!['json-document','dsk-mesh','hrii-facets','spectral-band-maps','satellite-catalog','zip-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
+  if(!['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','zip-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','catalog-field'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
   for(const key of ['path','expectedPath','fileSource','recipePath','member'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}
-  if(['download','request-download','json-document','dsk-mesh','hrii-facets','zip-member','satellite-catalog','tile-mosaic','catalog-field'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
+  if(['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','zip-member','satellite-catalog','tile-mosaic','catalog-field'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
   if(step.kind==='zip-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.archiveSha256!=='string'||!/^[a-f0-9]{64}$/.test(step.archiveSha256)||!Number.isSafeInteger(step.archiveBytes)||Number(step.archiveBytes)<=0||typeof step.member!=='string'||!/^[A-Za-z0-9_./-]+$/.test(step.member)||step.member.startsWith('-')))throw new TypeError('Invalid ZIP member.');
   if(step.headers!==undefined){const headers=record(step.headers);if(Object.values(headers).some(value=>typeof value!=='string'))throw new TypeError('Acquisition headers must be text.');}
   if(step.kind==='request-download'||step.kind==='verify-request'){const form=record(step.form);if(Object.values(form).some(value=>typeof value!=='string'))throw new TypeError('Acquisition form values must be text.');}
@@ -47,6 +48,7 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
   if(step.kind==='request-download'&&step.replacements!==undefined){if(!Array.isArray(step.replacements))throw new TypeError('Response replacements must be an array.');for(const value of step.replacements){const replacement=record(value);if(typeof replacement.pattern!=='string'||typeof replacement.replacement!=='string'||replacement.flags!==undefined&&(typeof replacement.flags!=='string'||!/^[gimu]*$/.test(replacement.flags)))throw new TypeError('Invalid response text replacement.');new RegExp(replacement.pattern,replacement.flags as string|undefined);}}
   if(step.kind==='json-document')record(step.value);
   if(step.kind==='hrii-facets'&&(typeof step.recipePath!=='string'||!['fields','report'].includes(String(step.product))))throw new TypeError('Invalid HRII facet acquisition.');
+  if(step.kind==='spectral-band-maps'&&(typeof step.recipePath!=='string'||typeof step.product!=='string'||!/^[a-z][a-z0-9-]*$/.test(step.product)))throw new TypeError('Invalid spectral-band acquisition.');
   if(step.kind==='dsk-mesh')validateDskMeshRecipe(step.recipe);
   if(step.kind==='satellite-catalog'&&typeof step.recipePath!=='string')throw new TypeError('Satellite catalog recipe is missing.');
   if(step.kind==='verify-download'||step.kind==='catalog-field')if(typeof step.sha256!=='string'||!/^[a-f0-9]{64}$/.test(step.sha256))throw new TypeError('Acquisition integrity hash is missing.');
@@ -74,6 +76,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
  const publish=async(path:string,data:Uint8Array)=>{const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===path);if(!entry)throw new Error(`Undeclared acquisition target: ${path}.`);return publishPinnedSource({sourceRoot,entry,bytes:data});};
  // Attempt every step so one unreachable host does not hide the others; report all failures together.
  const hriiResults=new Map<string,Awaited<ReturnType<typeof import('./terrestrial-layers/hrii-facets.mts').prepareHriiFacets>>>();
+ const spectralResults=new Map<string,Awaited<ReturnType<typeof import('./observation/spectral-band-maps.mts').prepareSpectralBandMaps>>>();
  const failures:{step:(typeof selected)[number];error:unknown}[]=[];
  for(const step of selected){
   try{
@@ -105,6 +108,13 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    let result=hriiResults.get(step.recipePath);
    if(!result){const {prepareHriiFacets}=await import('./terrestrial-layers/hrii-facets.mts');result=await prepareHriiFacets(sourceRoot,step.recipePath);hriiResults.set(step.recipePath,result);}
    await publish(step.path,step.product==='fields'?result.bytes:new TextEncoder().encode(JSON.stringify(result.report,null,2)+'\n'));
+  }
+  else if(step.kind==='spectral-band-maps'){
+   let result=spectralResults.get(step.recipePath);
+   if(!result){const {prepareSpectralBandMaps}=await import('./observation/spectral-band-maps.mts');result=await prepareSpectralBandMaps(sourceRoot,step.recipePath);spectralResults.set(step.recipePath,result);}
+   const bytes=step.product==='report'?new TextEncoder().encode(JSON.stringify(result.report,null,2)+'\n'):result.products[step.product];
+   if(!bytes)throw new Error(`Unknown spectral band map ${step.product}.`);
+   await publish(step.path,bytes);
   }
   else if(step.kind==='dsk-mesh')await publish(step.path,await prepareDskMesh({sourceRoot,recipe:step.recipe}));
   else if(step.kind==='json-document')await publish(step.path,new TextEncoder().encode(JSON.stringify(step.value,null,2)+'\n'));

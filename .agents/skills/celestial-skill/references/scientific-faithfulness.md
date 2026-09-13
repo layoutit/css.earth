@@ -43,6 +43,24 @@ models and illustrations. In particular:
 Keep a view's essential qualification in its visible description. Verify the
 actual expanded lens panel, including lenses that have a minimap: a template
 conditional can leave accurate descriptions present only in alt text/tooltips.
+
+For spectral cubes, retain the observation, wavelength and geometry companions
+as one input set. Select channels by each pixel's calibrated wavelengths, reject
+archive special values, and pool spectra before forming ratios. Use the paper's
+actual estimator, including its continuum windows and averaging order; a band
+depth, a contrast ratio and a modeled abundance are different quantities. An
+independent reader should check native samples and the derived arithmetic.
+Preserve the native spatial resolution when choosing averaging and output size;
+resampled pixels do not become independent measurements. Register accepted
+footprints through the companion coordinates and leave gaps unavailable.
+
+Charon's `source/science/leisa/bands.json` is the worked LEISA example. Its
+`spectral-band-maps` acquisition operator produces numeric GeoTIFFs for the
+existing scientific-raster interpreter. A surface's fractional `resolutionScale`
+can keep coarse science out of photograph-sized atlases when the scaled packing
+dimensions remain integral. This changes image preparation, not the mesh.
+Check actual leaf backgrounds after selection: a changed sidebar, minimap or
+`data-lens` alone does not prove that the body changed its texture.
 Use concise, body-owned wording rather than a generic disclaimer on every lens.
 
 ## Shape scalars must refer to the displayed surface
