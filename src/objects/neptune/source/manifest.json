@@ -19,7 +19,7 @@
         "navigation"
       ],
       "expectedBytes": 789926,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "capture": {
         "attributions": [
           {
@@ -57,7 +57,7 @@
         "lenses"
       ],
       "expectedBytes": 1045440,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "capture": {
         "attributions": [
           {
@@ -95,7 +95,7 @@
         "lenses"
       ],
       "expectedBytes": 1045440,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "capture": {
         "attributions": [
           {
@@ -131,7 +131,7 @@
         "lenses"
       ],
       "expectedBytes": 1541,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -160,7 +160,7 @@
         "lenses"
       ],
       "expectedBytes": 338632,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -188,7 +188,7 @@
         "scene"
       ],
       "expectedBytes": 1191,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -213,7 +213,7 @@
         "moons"
       ],
       "expectedBytes": 1147,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -238,7 +238,7 @@
         "moons"
       ],
       "expectedBytes": 2756,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -289,7 +289,7 @@
         "temperature-pressure-profile"
       ],
       "expectedBytes": 8864,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -314,7 +314,7 @@
         "spectrum"
       ],
       "expectedBytes": 12113,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

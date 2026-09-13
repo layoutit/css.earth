@@ -9,7 +9,7 @@ import {fileURLToPath} from 'node:url';
 import {loadGeologySurface, createGeologySampler, categoryColorForValue, validateGeologyProfile,
   decodeGeologyAttributes, decodeGeologyPolygons} from './categorical-geology.mts';
 
-const root = fileURLToPath(new URL('../../../src/planets/', import.meta.url));
+const root = fileURLToPath(new URL('../../../src/objects/', import.meta.url));
 const rectangle = (west: number, south: number, east: number, north: number) => [[west, south], [east, south], [east, north], [west, north], [west, south]];
 const polygon = (category: number|null, rings: number[][][]) => ({category, rings, south: Math.min(...rings.flat().map(point => point[1])), north: Math.max(...rings.flat().map(point => point[1]))});
 const body = async (id: string) => {

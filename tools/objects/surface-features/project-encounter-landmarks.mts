@@ -142,7 +142,7 @@ export async function commitEncounterLandmarkOutputs(outputs: readonly { readonl
 
 export async function projectEncounterLandmarks(objectId: string, write = false) {
   if (!/^[a-z0-9-]+$/u.test(objectId)) throw new TypeError('Object id must be lowercase letters, digits and hyphens.');
-  const sourceDirectory = resolve(root, 'src/planets', objectId, 'source');
+  const sourceDirectory = resolve(root, 'src/objects', objectId, 'source');
   const configuration = parseConfiguration(JSON.parse(await readFile(resolve(sourceDirectory, 'features/image-registration.json'), 'utf8')), sourceDirectory);
   const inputs = await checkedInputs(configuration), get = (id: string) => { const value = inputs.get(id); if (!value) throw new TypeError(`Missing checked input ${id}.`); return value; };
   const cameraControl = record(JSON.parse(get(configuration.cameraControlId).toString('utf8')), 'encounter camera control');

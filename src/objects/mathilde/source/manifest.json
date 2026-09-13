@@ -444,7 +444,7 @@
       "origin": "Derived from the pinned Thomas image geometry and NEAR MSI calibration.",
       "credit": "P. C. Thomas and the NEAR MSI team; cssEarth camera conversion",
       "license": "Public mission scientific data and project-authored coordinate conversion.",
-      "acquisition": "node tools/objects/near-msi/prepare-cameras.mts src/planets/mathilde/source",
+      "acquisition": "node tools/objects/near-msi/prepare-cameras.mts src/objects/mathilde/source",
       "redistribution": "Derived camera coefficients with source attribution.",
       "consumers": [
         "near-msi"
@@ -462,7 +462,7 @@
       "origin": "Derived from the pinned Thomas image geometry and NEAR MSI calibration.",
       "credit": "P. C. Thomas and the NEAR MSI team; cssEarth camera conversion",
       "license": "Public mission scientific data and project-authored coordinate conversion.",
-      "acquisition": "node tools/objects/near-msi/prepare-cameras.mts src/planets/mathilde/source",
+      "acquisition": "node tools/objects/near-msi/prepare-cameras.mts src/objects/mathilde/source",
       "redistribution": "Derived camera coefficients with source attribution.",
       "consumers": [
         "near-msi"

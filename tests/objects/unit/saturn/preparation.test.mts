@@ -5,7 +5,7 @@ import {promisify} from 'node:util';
 import test from 'node:test';
 import {readPreparedFixture,projectRoot} from '../../fixtures.mts';
 import {parseSourceManifest,verifySources} from '../../../../tools/objects/dist/operations.js';
-const sourceRoot=new URL('../../../../src/planets/saturn/source/',import.meta.url).pathname;
+const sourceRoot=new URL('../../../../src/objects/saturn/source/',import.meta.url).pathname;
 const manifest=parseSourceManifest(JSON.parse(await readFile(sourceRoot+'manifest.json','utf8')),'saturn');
 test('prepares Saturn from a complete checked source closure',async()=>{
  assert.deepEqual(await verifySources({sourceRoot,manifest}),{inputCount:39,generatedIntermediateCount:1,documentCount:2,verifiedCount:42});
@@ -33,7 +33,7 @@ test('prepares the Saturn shell title from its owned source',async()=>{
  const {title}=await readPreparedFixture('saturn','content');
  assert.equal(title.label,'Saturn');
  assert.equal(title.sourceSha256,'746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c');
- const descriptor=JSON.parse(await readFile(new URL('../../../../src/planets/saturn/object.json',import.meta.url),'utf8'));
+ const descriptor=JSON.parse(await readFile(new URL('../../../../src/objects/saturn/object.json',import.meta.url),'utf8'));
  assert.match(descriptor.properties.recipe.sources.find((source: { id: string; })=>source.id==='title').sha256,/^[0-9a-f]{64}$/);
  assert.equal(title.sourceGenerator,'tools/prepare-planet-title-sources.mts');
  assert.doesNotMatch(title.path,/<text|font-family/i);

@@ -23,12 +23,12 @@ assert.equal(installation.installed,files.length);assert.equal(installation.reus
 const delivery={stage,files};
 const pins=new Map(delivery.files.map(a=>[a.filename,a]));
 const hash=(b: Uint8Array)=>createHash('sha256').update(b).digest('hex');
-const payload=await readFile(`src/planets/${id}/prepared/object.json`);
-const descriptor=shape({prepared:shape({sha256:text})})(JSON.parse(await readFile(`src/planets/${id}/object.json`,'utf8')));assert.equal(hash(payload),descriptor.prepared.sha256);
-const content=shape({lenses:shape({controls:array(shape({id:text,description:text}))})})(JSON.parse(await readFile(`src/planets/${id}/source/content/object.json`,'utf8')));
-const recipe=shape({geometry:shape({radiusKm:number,radius:number})})(JSON.parse(await readFile(`src/planets/${id}/source/preparation/terrestrial.json`,'utf8')));
+const payload=await readFile(`src/objects/${id}/prepared/object.json`);
+const descriptor=shape({prepared:shape({sha256:text})})(JSON.parse(await readFile(`src/objects/${id}/object.json`,'utf8')));assert.equal(hash(payload),descriptor.prepared.sha256);
+const content=shape({lenses:shape({controls:array(shape({id:text,description:text}))})})(JSON.parse(await readFile(`src/objects/${id}/source/content/object.json`,'utf8')));
+const recipe=shape({geometry:shape({radiusKm:number,radius:number})})(JSON.parse(await readFile(`src/objects/${id}/source/preparation/terrestrial.json`,'utf8')));
 const analytic: Record<string, ReturnType<typeof contactEllipsoidMesh>> = {};
-for (const lens of ['model','arecibo']) analytic[lens]=contactEllipsoidMesh(JSON.parse(await readFile(`src/planets/${id}/source/shape/${lens}.json`,'utf8')));
+for (const lens of ['model','arecibo']) analytic[lens]=contactEllipsoidMesh(JSON.parse(await readFile(`src/objects/${id}/source/shape/${lens}.json`,'utf8')));
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const reports: (Awaited<ReturnType<typeof capture>> & { freshSourceDirectory?: string; freshFilesServed?: string[] })[]=[];
 async function capture(base: string,dpr: number,{fresh=false}: { fresh?: boolean }={}){

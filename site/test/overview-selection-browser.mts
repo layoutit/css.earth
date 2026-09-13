@@ -9,7 +9,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { OBJECTS } from '../objects.mts';
-import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import context from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { overviewExitDistance } from '../overview-selection.mts';
 import { parseSharedView, savedWorldCamera } from '../../src/renderers/css/dist/navigation.js';
 

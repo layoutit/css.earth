@@ -7,12 +7,12 @@ import test from "node:test";
 const { sky: PREPARED_EARTH_STARFIELD } = requireRecord(await loadObjectTestDefinition('earth'));
 const { sky: PREPARED_JUPITER_STARFIELD } = requireRecord(await loadObjectTestDefinition('jupiter'));
 const { sky: PREPARED_MARS_STARFIELD } = requireRecord(await loadObjectTestDefinition('mars'));
-import PREPARED_MERCURY_STARFIELD from "../../src/planets/mercury/prepared/sky.json" with {type: "json"};
+import PREPARED_MERCURY_STARFIELD from "../../src/objects/mercury/prepared/sky.json" with {type: "json"};
 const { sky: PREPARED_NEPTUNE_STARFIELD } = requireRecord(await loadObjectTestDefinition('neptune'));
 const { sky: PREPARED_SATURN_STARFIELD } = requireRecord(await loadObjectTestDefinition('saturn'));
 const { sky: PREPARED_SUN_STARFIELD } = requireRecord(await loadObjectTestDefinition('sun'));
 const { sky: PREPARED_URANUS_STARFIELD } = requireRecord(await loadObjectTestDefinition('uranus'));
-import PREPARED_VENUS_STARFIELD from "../../src/planets/venus/prepared/sky.json" with {type: "json"};
+import PREPARED_VENUS_STARFIELD from "../../src/objects/venus/prepared/sky.json" with {type: "json"};
 import {
   CUBIC_SKY_CAMERA_PRESENTATION_STANDARD,
   CUBIC_SKY_FACE_IDS,

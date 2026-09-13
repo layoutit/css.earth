@@ -36,7 +36,7 @@
       "licenseEvidence": [
         "stars/ESO-IMAGE-LICENSE.md"
       ],
-      "acquisition": "Run node src/planets/ceres/tools/acquire.mjs to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
+      "acquisition": "Run node src/objects/ceres/tools/acquire.mjs to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"

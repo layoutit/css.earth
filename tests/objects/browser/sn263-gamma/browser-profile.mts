@@ -1,3 +1,3 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import objectControls from '../../../../src/planets/sn263-gamma/prepared/controls.json' with {type:'json'};
+import objectControls from '../../../../src/objects/sn263-gamma/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'sn263-gamma',controls:objectControls,audit:{preparedAssetPairs:[{one:'/scenes/sn263-gamma/sn263-gamma-directional-sun.webp',two:'/scenes/sn263-gamma/sn263-gamma-directional-sun@2x.webp'}],canonicalPreparedAssets:['/scenes/sn263-gamma/sn263-gamma-shape-surface@2x.webp'],retained:{lensIds:['shape'],speedClicks:5,allowedMountSelectors:[]}}});

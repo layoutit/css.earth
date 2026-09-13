@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { mountPlanetShell, type ShellOptions } from "../planet-shell-client.mts";
-import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import context from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import catalogueInput from '../../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
 import clustersInput from '../../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
 

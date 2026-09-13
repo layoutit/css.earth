@@ -16,7 +16,7 @@ const write = async (path: string, value: unknown) => {
 };
 
 async function addBody(root: string, id: string, classification: string, parent = 'sun') {
-  await write(resolve(root, `src/planets/${id}/object.json`), {
+  await write(resolve(root, `src/objects/${id}/object.json`), {
     schema: 'cssearth-object@1', id, type: 'test', properties: {
       catalog: { name: id, classification, systemName: 'Solar System', color: '#aaaaaa',
         distanceAu: 3, description: 'Synthetic catalogue test input.', context: {} },
@@ -26,7 +26,7 @@ async function addBody(root: string, id: string, classification: string, parent 
     id, classification, physical: { name: id, horizonsCode: null, meanRadiusKm: 1,
       gravitationalParameterKm3PerS2: 0, parent: id === 'sun' ? null : parent },
   });
-  await write(resolve(root, `src/planets/${id}/prepared/runtime.json`), prepareMarkerBindings({
+  await write(resolve(root, `src/objects/${id}/prepared/runtime.json`), prepareMarkerBindings({
     id, heliocentricView: { bodyMarker: { url: '/navigation/planet-markers.webp', index: 7, count: 12, size: 5 },
       systemMarkers: { url: '/navigation/planet-markers.webp', sun: { index: 0, count: 12, size: 5 }, bodies: {} } },
   }));
@@ -67,7 +67,7 @@ test('independent asteroid, moon and comet branches merge without changing exist
   await compile();
   assert.equal(git('status', '--porcelain'), '', 'Compilation must not write tracked shared files.');
   for (const [file, bytes] of before) assert.deepEqual(await readFile(resolve(root, file)), bytes, file);
-  assert.deepEqual((await readCatalog(resolve(root, 'src/planets'))).map(body => body.id),
+  assert.deepEqual((await readCatalog(resolve(root, 'src/objects'))).map(body => body.id),
     ['existing-body', 'new-asteroid', 'new-comet', 'new-moon', 'sun']);
   const compiled = await readFile(resolve(root, 'packages/astronomy/src/data/generated/bodies.ts'), 'utf8');
   for (const id of ['new-asteroid', 'new-moon', 'new-comet']) assert.ok(compiled.includes(JSON.stringify(id)));
@@ -77,12 +77,12 @@ test('an unfinished folder stays unpublished and a mismatched descriptor fails',
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-catalog-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   await addBody(root, 'sun', 'star');
-  const path = resolve(root, 'src/planets/planned/object.json');
+  const path = resolve(root, 'src/objects/planned/object.json');
   await write(path, { schema: 'cssearth-object@1', id: 'planned', properties: {} });
-  assert.deepEqual((await readCatalog(resolve(root, 'src/planets'))).map(body => body.id), ['sun']);
-  const descriptor = JSON.parse(await readFile(resolve(root, 'src/planets/sun/object.json'), 'utf8'));
+  assert.deepEqual((await readCatalog(resolve(root, 'src/objects'))).map(body => body.id), ['sun']);
+  const descriptor = JSON.parse(await readFile(resolve(root, 'src/objects/sun/object.json'), 'utf8'));
   await write(path, descriptor);
-  await assert.rejects(readCatalog(resolve(root, 'src/planets')), /identity differs/);
+  await assert.rejects(readCatalog(resolve(root, 'src/objects')), /identity differs/);
 });
 
 test('retained-record decoding accepts quoted body IDs and rejects executable source', () => {

@@ -11,7 +11,7 @@ import type { PreparedDepthOrder } from '../src/renderers/css/rendering/prepared
 import type { SurfacePoint, SurfaceTriangle } from '../src/renderers/css/navigation/prepared-surface-hit.ts';
 
 const runtimeRoot = fileURLToPath(new URL('../', import.meta.url));
-const mimasInput: unknown = JSON.parse(await readFile(join(runtimeRoot, 'src/planets/mimas/prepared/runtime.json'), 'utf8'));
+const mimasInput: unknown = JSON.parse(await readFile(join(runtimeRoot, 'src/objects/mimas/prepared/runtime.json'), 'utf8'));
 const mimasRuntime = requireObjectRuntimeDefinition(mimasInput);
 type Plane = readonly [number, number, number, number];
 type PlaneBranch = { plane: Plane; sign: -1 | 1 };

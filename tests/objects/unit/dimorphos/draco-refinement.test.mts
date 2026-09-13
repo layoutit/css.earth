@@ -17,7 +17,7 @@ import { parseSpiceCamera } from '../../../../tools/objects/terrestrial-layers/s
  * archive; perturbed by tens and hundreds of pixels it must come back to the
  * archive within a pixel using nothing but the image and the retained OBJ.
  */
-const root = resolve(import.meta.dirname, '../../../../src/planets/dimorphos/source');
+const root = resolve(import.meta.dirname, '../../../../src/objects/dimorphos/source');
 const config = JSON.parse((await readFile(resolve(root, 'preparation/terrestrial.json'))).toString('utf8'));
 const mosaic = config.raster.surfaceObservations.find((recipe: { id: string }) => recipe.id === 'draco');
 const cubeRecipe = { ...mosaic, ...mosaic.frames.find((frame: { id: string }) => frame.id === 't-minus-11s') };

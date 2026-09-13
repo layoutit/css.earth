@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { loadObjShape, createShapeSurfaceSampler } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { decodeFitsFacetField } from '../../../../tools/objects/terrestrial-layers/fits-facet-field.mts';
 
-const root = resolve(import.meta.dirname, '../../../../src/planets/didymos/source');
+const root = resolve(import.meta.dirname, '../../../../src/objects/didymos/source');
 const config = JSON.parse(await readFile(resolve(root, 'preparation/terrestrial.json'), 'utf8'));
 const lens = config.raster.scientific.find((lens: { id: string; }) => lens.id === 'albedo');
 const mesh = await loadObjShape(resolve(root, lens.path), lens.grid);

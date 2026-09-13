@@ -355,8 +355,8 @@ environment, download the URL pinned in `tomography.json`, then:
 ```sh
 python tools/objects/paged-ellipsoid/extract-tomography.py \
   /path/to/GLAD-M35.r0.1-n4c.nc \
-  src/planets/earth/source/interior/tomography.json \
-  src/planets/earth/source/interior/glad-m35-vsv-subset.f32.gz
+  src/objects/earth/source/interior/tomography.json \
+  src/objects/earth/source/interior/glad-m35-vsv-subset.f32.gz
 node tools/objects/dist/prepare-authored.js earth --write
 ```
 
