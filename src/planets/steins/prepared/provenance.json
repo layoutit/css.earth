@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "267af0bf6e897949d5cfc05e5b4d81af8b781e2bd608a84c33c7ceb639e6286e"
+    "sha256": "947e65b186ad75951ae984e0f24f14a654eacf3b641f7aac19d2d44a1f251429"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9a97fc999fe62325e65911156a1709fc7435950a3fc8e76188a3f6dea009083d",
+      "sha256": "7076a75a2b4d15399c344c439eb36de46e90deab43e1b2652242d8e045fdd27d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -119,11 +119,9 @@
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 64,
-                "maximumLogMad": 0.25,
                 "maximumGain": 1.35
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 100,
                 "maximumSeparationMeters": 450,
                 "maximumEmissionDegrees": 70,
                 "visibilityToleranceMeters": 0.5
@@ -138,8 +136,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99
+                  1.8,
+                  98.7
                 ]
               },
               "metadata": {
@@ -941,14 +939,14 @@
       "outputs": [
         {
           "url": "/scenes/steins/steins-osiris-thumbnail.webp",
-          "bytes": 1724,
-          "sha256": "6699409a8ea267e5f676fae8be24f53ec661bcbbfb2d3da7d799ec84248f29ea",
+          "bytes": 1672,
+          "sha256": "118b33b0b5ae52e2a5beaf35bfb7f08a74af35cbf1209132d304529b848bc208",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/steins/steins-osiris-surface@2x.webp",
-          "bytes": 283696,
-          "sha256": "833b6747495c825d89c7696be2581bae9fd7594d90b870e444c63a8806425c8b",
+          "bytes": 298938,
+          "sha256": "f288d6973feef9a9ec85fbca44a405f36ed203ba5e86505121d443dd84f56232",
           "verification": "bytes-verified"
         }
       ],
@@ -1056,8 +1054,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 8502,
-          "sha256": "fa7479ca6c5d2a6f8616c796238f80cb2249b1b98717594390817c36f6d8e724",
+          "bytes": 9876,
+          "sha256": "830dee0eac8f4e1585d1e771b58fc49f409df1384995639e81df3f35d926e655",
           "verification": "bytes-verified"
         }
       ]

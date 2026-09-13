@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2ea599c5df5ff16b329dc1d676b12e3c67216ced7fa57f40e8925efd2f0904bc"
+    "sha256": "ee98ff9a2f0a8c5282a1bb2f8a05d6dfa6eaa77da86d26ff7dae64d8c0893614"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3ae6c8f3bb506c1be7b5f25446fecf5aad7d56e8358d8f22837f92c859918105",
+      "sha256": "afe4b3ed0e0ea7327a112c12f712e11abbf4b34e8e5580758f0d726422fadf95",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -118,12 +118,10 @@
               "levelMatching": {
                 "samplesPerTriangle": 64,
                 "minimumPairs": 64,
-                "maximumLogMad": 0.15,
                 "maximumGain": 1.25,
                 "maximumAngleDegrees": 70
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 2,
                 "maximumSeparationMeters": 2,
                 "maximumEmissionDegrees": 80,
                 "visibilityToleranceMeters": 0.5,
@@ -139,8 +137,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99
+                  5.3,
+                  99.9
                 ]
               },
               "metadata": {
@@ -1530,14 +1528,14 @@
       "outputs": [
         {
           "url": "/scenes/dimorphos/dimorphos-draco-thumbnail.webp",
-          "bytes": 1910,
-          "sha256": "2e5952a3610e76eb6f997918d79a73cec6aa2446c2cc7a8ca1032bd67bca9215",
+          "bytes": 1936,
+          "sha256": "cc4caec31d0c28c1db1a63212e1f4b201fa58214be5eca067c91f7885fbc734a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-draco-surface@2x.webp",
-          "bytes": 1110486,
-          "sha256": "dc40dee8ac6176c0fb92dd22cc5de6ac72899102e652f78d4a367a980b09ac1a",
+          "bytes": 1210106,
+          "sha256": "dda008b7c07a177bdf891d7e401f6e9b2e639a332097dc36aad724362a2a5f11",
           "verification": "bytes-verified"
         }
       ],
@@ -1646,8 +1644,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/draco.webp",
-          "bytes": 17596,
-          "sha256": "dad9a65a245591bd24dd103c4a2a7a993e31fcc5baab95bbc7d8c4d17a8f2e75",
+          "bytes": 20016,
+          "sha256": "1f6f809de01bf2e3db60058d2dd7f232838851ccf9ee1dcc6b600c5380fc4b66",
           "verification": "bytes-verified"
         }
       ]

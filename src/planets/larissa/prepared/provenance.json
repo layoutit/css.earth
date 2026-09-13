@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "larissa",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d7c6e3fa2dcc0501c0b2136dce448d5f81d4123f3012dda63bc9186d7e6dae44"
+    "sha256": "3960060b0d79ac053525743998b7e64cdf0df1ac9ab585bae130e67270c0e0fc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6c80b6aff31f9535faaf9107d891ee9a0982ad52702081461db10dcdca16fab1",
+      "sha256": "fcedf91bc11c5771a4a0e6cf17f41bfee6215d19a6b2d7e429662fa8b0b07c74",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -78,11 +78,20 @@
             }
           ],
           "observedColors": [],
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "normal",
               "format": "controlled-shape-camera",
               "consumer": "voyager-clear-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+                "attribution": {
+                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/voyager/iss/"
+                }
+              },
               "frames": [
                 {
                   "id": "c1138148",
@@ -103,25 +112,25 @@
                   "backgroundMaximum": 0.0010378
                 }
               ],
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 75
+              },
               "photometry": {
+                "model": "lunar-lambert",
                 "weight": 0.5,
-                "maximumGain": 2.5,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 75,
                 "maximumEmissionDegrees": 75,
-                "displayMaximum": 0.06,
-                "gamma": 1,
-                "minimumLevel": 0.7,
-                "maximumLevel": 1.4,
-                "backgroundMaximum": 0.001
+                "maximumGain": 2.5
               },
-              "metadata": {
-                "label": "Monochrome",
-                "falseColor": false,
-                "coverage": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
-                "attribution": {
-                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
-                  "url": "https://pds-rings.seti.org/voyager/iss/"
-                }
+              "display": {
+                "displayRange": [
+                  0,
+                  0.0494
+                ]
               }
             }
           ]
@@ -387,7 +396,7 @@
       "sha256": "c22e8f6968eeab0519c238851542780f9a94b15ee1c7bbe6067fe1ce774deaeb",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -431,7 +440,7 @@
       "sha256": "c39ac58bbc5c4fe39c43adea9807a614b1510b63c886b0a3d90c7b4f75c9f26e",
       "bytes": 2002000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -468,7 +477,7 @@
       "sha256": "681845179a0c761d7b427d44095978c94b872d83e18de95e657a4e23dc8045ef",
       "bytes": 3285,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -495,7 +504,7 @@
       "sha256": "84300c826f6eb36f2a7191983704c3dff301fed4f080c0203b3af33ff1dfa156",
       "bytes": 5481,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -528,19 +537,19 @@
           "url": "/scenes/larissa/larissa-elevation-thumbnail.webp",
           "bytes": 5462,
           "sha256": "2370cb2b2eab1b5341bbfa27e1b38e34e0909163e93c0635844e673aadc7e42d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/larissa/larissa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/larissa/larissa-elevation-surface@2x.webp",
           "bytes": 157004,
           "sha256": "1bd870e8c77fa3a06102eff4bf3f17a190b1895e805c2b6abaea494330fced01",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -549,9 +558,9 @@
       "id": "normal",
       "label": "Monochrome",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
         "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed."
       ],
@@ -562,7 +571,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "c1138148",
@@ -572,15 +581,15 @@
       "outputs": [
         {
           "url": "/scenes/larissa/larissa-normal-thumbnail.webp",
-          "bytes": 2202,
-          "sha256": "cdbe83545e7daa4ddb24da1c42622a8009ae64d2dc759e22245952b623d76ea4",
-          "verification": "asset-manifest-pin"
+          "bytes": 2152,
+          "sha256": "3ff98cbfd1831a22f1c976f308ca59ec1d68b25c7b71938ef86e7c011a0a209c",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/larissa/larissa-normal-surface@2x.webp",
-          "bytes": 107768,
-          "sha256": "9d37a48719ea7e66fc0645d699ea31dcc2c2f332db3f8acf0b48a90dde2d0fe6",
-          "verification": "asset-manifest-pin"
+          "bytes": 108488,
+          "sha256": "5b20af29cb40d9465dddb0997ac8f771d851cc9f7f55c1a272fcd1bc243d36f2",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -614,7 +623,7 @@
       "id": "preview:normal",
       "label": "Monochrome preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -628,8 +637,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 6690,
-          "sha256": "329ea8c5f04a650498a40d5c8be896c121610121f76038b4272b3d0c1f1758ff",
+          "bytes": 8186,
+          "sha256": "dcc6c2cda4e3383e6f9395a2e8d991b77221b3376bf14749f078769253249f0f",
           "verification": "bytes-verified"
         }
       ]

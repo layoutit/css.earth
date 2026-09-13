@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4ae3b2c7edb785a4b83787299b069d9002b3c844b550f389a7539a3f9c4c3c77"
+    "sha256": "8bcc7a45366867d028694e5fa61844345e2bd1f10cac3d1a492522763e34a910"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "95d57fa2fc62f3d5d2b01a60187b03f5690db61d386886a252348cf850545191",
+      "sha256": "c1086762e7e1201473bf07265b308a5a26232e792878dd74060f011f3de51a8e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -126,12 +126,10 @@
               "selection": "recipe-order",
               "levelMatching": {
                 "minimumPairs": 64,
-                "maximumLogMad": 0.3,
                 "maximumGain": 1.5,
                 "samplesPerTriangle": 16
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 600,
                 "maximumSeparationFootprints": 4,
                 "visibilityToleranceMeters": 0.5,
                 "maximumEmissionDegrees": 75
@@ -147,7 +145,7 @@
               "display": {
                 "percentiles": [
                   0,
-                  99.5
+                  99
                 ]
               },
               "metadata": {
@@ -1133,14 +1131,14 @@
       "outputs": [
         {
           "url": "/scenes/mathilde/mathilde-near-msi-thumbnail.webp",
-          "bytes": 1990,
-          "sha256": "814378016dd54e763ed0a0621cbbec43f09de2c2327946d31ea380e410a5b94a",
+          "bytes": 1972,
+          "sha256": "58ac43c4ead4099f2cbca14de4112023b5bc40307afcfc6f3458c2695dad1d0b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mathilde/mathilde-near-msi-surface@2x.webp",
-          "bytes": 356024,
-          "sha256": "b005eeaa7ea7b358844f004c14c8bc07f7d28de7dd2bb24770b874885736b7d9",
+          "bytes": 320526,
+          "sha256": "b3573ebb20bfee429b15defe06447e40ff51e7bba276d93ad226e98e9dd9ed85",
           "verification": "bytes-verified"
         }
       ],
@@ -1248,8 +1246,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/near-msi.webp",
-          "bytes": 12498,
-          "sha256": "142e74730a054b0dc9aa015709492231820a8a77153fb73ba2f447b84ad71e74",
+          "bytes": 10098,
+          "sha256": "bc83b454af83dcf9083b006b96be5ba931687cfdff227a1f54bf7fbd7f6e56a7",
           "verification": "bytes-verified"
         }
       ]
