@@ -31,11 +31,6 @@
           "sha256": "cbf983d62634aa0013fe3ad5c04029c9c763e51aeebea78c453cd7217547c062"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "89d5b12d5d5039cdd219597310404743fd1ee9513763399a921eaa490b3df1fb"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2557d70c9d5c118945e60be8bd7a5d6e666fbb9f1d20d075a575deb2c3967058"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 12.265992818638155,
-      "description": "55P: Tempel–Tuttle supplies the dust that makes the Leonid meteor shower. Earth encounters these particles as it crosses the comet’s trail each November. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Parent comet of the Leonid meteor shower.",
       "systemName": "Solar System",
       "order": 56,
       "context": {

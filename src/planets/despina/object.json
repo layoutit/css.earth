@@ -31,11 +31,6 @@
           "sha256": "cccdd5cf405a75f9c3708dafd69756684c091094760a2bf7dd65e628e83c5f6b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "02c83b9887a63df9e8cfae55a514c636c845739bf868b06c7fa88d4de7980670"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2a4a996977ea810e4baa0dca819cedc798e9157a453022058fa826dd4de52b8b"
@@ -118,7 +113,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 30.07,
-      "description": "Explore Despina through its Voyager-derived shape model.",
+      "description": "Tiny, irregular moon inside Neptune's faint rings.",
       "systemName": "Solar System",
       "order": 108,
       "context": {

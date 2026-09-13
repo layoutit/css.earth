@@ -64,11 +64,6 @@
           "sha256": "6b0373017d5e93a0119786febb5a715b15ce756a92d2173c986fbe9c061aad1d"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "620101ee2e9a1bbcdf0dfe8c18e84ff128f71a2a9c275b216422ca9869601c64"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "71d2b626290472e974a925326f21cfbd3a7c2dfbf3b4ce7c3ec4b40bcc09ad67"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0255703303423154,
-      "description": "Explore Tulipa in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered in April 1926.",
       "systemName": "Solar System",
       "order": 403,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "8c1a0b1275c3e5bb97029d9381b08b24e0ae6362fc3dac4f49a70f71b142c5f6"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9abf1ac7775f0aa0fe8defa7ce7601e8426f4dc46f454b189f06f0892822516c"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "ae6565bba25e589334f4ced5780e8e259e7e9c1b3e08dc1c1df70e9fa0f906b1"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1448952145576423,
-      "description": "Explore Lucia in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in February 1882.",
       "systemName": "Solar System",
       "order": 382,
       "context": {

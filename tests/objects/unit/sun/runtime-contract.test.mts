@@ -13,6 +13,7 @@ import scene from "../../../../src/planets/sun/prepared/scene.json" with { type:
 import lenses from "../../../../src/planets/sun/prepared/lenses.json" with { type: "json" };
 import controls from "../../../../src/planets/sun/prepared/controls.json" with { type: "json" };
 import panel from "../../../../src/planets/sun/prepared/panel.json" with { type: "json" };
+import text from "../../../../src/planets/sun/prepared/text.json" with { type: "json" };
 import raster from "../../../../src/planets/sun/source/preparation/raster.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { validateRuntimeAssetManifest } from "../../../../src/platform/runtime-asset-closure.mts";
@@ -98,7 +99,7 @@ test("publishes the NASA facts with their citations and the four lens legends", 
   const byId = new Map(controls.lenses.controls.map(control => [control.id, control]));
   for (const control of lenses.controls) {
     const shell = required(byId.get(control.id));
-    assert.equal(typeof shell.description, "string");
+    assert.equal(typeof Object.getOwnPropertyDescriptor(text.datasets, control.id)?.value?.summary, "string");
     if (control.falseColor) assert.ok(shell.legend, `${control.id} declares a false-colour scale without a legend`);
     if (shell.legend?.kind === "scale") assert.ok((shell.legend.colors?.length ?? 0) === 64 && (shell.legend.labels?.length ?? 0) >= 2);
   }

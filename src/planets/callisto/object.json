@@ -116,11 +116,6 @@
           "sha256": "476b0270ae1e908854c1e8c60fd111917f0c83a1a90d8090d10289793e799a69"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "16b8f1755c7bea9e2fed633eaaaeaa367f0a57fcf8b25f9a941a39b6412c1016"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "de57dcd7de843dddfab06f175881491789e77ce0dc71e604f6168bab03b37d24"
@@ -165,7 +160,7 @@
       "classification": "satellite",
       "color": "#8b8177",
       "distanceAu": 5.2,
-      "description": "Explore Callisto in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s heavily cratered moon and its ancient surface.",
+      "description": "Jupiter's moon with the oldest, most heavily cratered surface known.",
       "systemName": "Solar System",
       "order": 429,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "ef57487fbd24e9a64aec235be9ee4cfa2b66426e078677550a4009c758310863"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a74cd3c7daf9904162700c04334dbf43b4c50309412ad82961df7633f3f22ff9"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "05c2f69a93ad53eccf7becc276106155b479bd7d5565ce8048124db00d53daa9"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.723129080316478,
-      "description": "Explore Eugenia in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid with 2 known moons, discovered in June 1857.",
       "systemName": "Solar System",
       "order": 156,
       "context": {

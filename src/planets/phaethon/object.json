@@ -64,11 +64,6 @@
           "sha256": "7733d9465c02e9c62b44be859a7f01f82db3c2dca0422808399a6bde9ff8a955"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9bca7ee0b03b86ce03dbc469d7fb276e04aadf7d7ba1ed511ceb7cefe24e6c48"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "4712d4d6d5f1a0bd52e1a913a8006c3263133447b573f21053a4948c296f7437"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.2714545674912625,
-      "description": "Explore Phaethon in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich near-Earth asteroid, discovered in October 1983.",
       "systemName": "Solar System",
       "order": 197,
       "context": {

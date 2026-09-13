@@ -52,7 +52,7 @@ export const parseEarthPlaces=shape({url:text,bytes:number,sha256:text,count:num
 const source=shape({url:text,label:text,checked:optional(text)});
 const fact=shape({id:text,label:text,value:text,source:optional(source)});
 export const parseEarthTitle=shape({label:text,sourceSha256:text,viewBox:text,width:number,height:number,path:text});
-export const parseEarthPanel=shape({introduction:text,facts:array(fact),moreFacts:array(fact)});
+export const parseEarthPanel=shape({facts:array(fact),moreFacts:array(fact)});
 export const parseEarthPageMetadata=shape({schema:text,dataset:text,qualification:text,credit:text,sourcePage:text,assetOrigin:text,
   rasterScale:number,poolSize:number,minimumZoom:number,decodedPageBytes:number,maximumDecodedBytes:number,maximumConcurrentLoads:number,
   targetCssPixels:number,roots:array(requireRecord),initialLayer:requireRecord,index:shape({maximumDirectories:number,maximumBytes:number,

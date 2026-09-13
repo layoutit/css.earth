@@ -31,11 +31,6 @@
           "sha256": "f26a4771d091079d5ad315d0a7e9b61d82c7a6574af7fd9ccd25e37e28db2f17"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "58d9be692f9d7a903280dbb6627f5af7b39a0eb81b05034e4e471c3aa976cba9"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "8aa2020a6ca6ab187ff3444e03b6e941f09132689639907dad1e6b3b55b80240"
@@ -123,7 +118,7 @@
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 44.266134719069306,
-      "description": "Varuna’s rapid rotation and changing brightness reveal an elongated world beyond Neptune. This smooth model follows a published light-curve fit; its absolute size remains approximate.",
+      "description": "Fast-spinning object beyond Neptune.",
       "systemName": "Solar System",
       "order": 9,
       "context": {

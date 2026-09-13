@@ -64,11 +64,6 @@
           "sha256": "2a30562b1149501e40b528f53fc3811850d7e29091a255d2b8ce62dee76c7ff8"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "538324377e3b462cdf1feffa78e65ba8431a2618524e76a6f9bb13e04a4de3fe"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "9683aa9f1b97cc4376c89364c2bb8961fd2bd6d7121084de69c4f06b436ad4b0"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.197053008241417,
-      "description": "Explore Menelaus in 3D with its published shape model and radial elevation.",
+      "description": "Dark Jupiter Trojan asteroid, discovered in June 1957.",
       "systemName": "Solar System",
       "order": 369,
       "context": {

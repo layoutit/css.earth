@@ -64,11 +64,6 @@
           "sha256": "88487d3dd7034c6186c28662a145f143a7f42be9cc410446ea2dd6ee01e51860"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a451427bb8957a1b893ed829d098829cfcaf2bfe932325a524ad166a632572f3"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "d97ee51830be5ddf5c6d9111061f5ac2090e9a421496daee2f9a8682c7d842de"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.422203726127018,
-      "description": "Explore Nysa in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in May 1857.",
       "systemName": "Solar System",
       "order": 179,
       "context": {

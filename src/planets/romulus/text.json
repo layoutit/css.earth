@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "romulus",
+  "card": {
+    "text": "Outer of the two small moons of the asteroid Sylvia.",
+    "sources": [
+      {
+        "catalogueId": "source-romulus-model-surface",
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+        "label": "Shape model",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Romulus is about 23 km across, and occultations show it is elongated.",
+    "sources": [
+      {
+        "catalogueId": "source-romulus-model-surface",
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+        "label": "Shape model",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Occultation shape approximation",
+      "detail": "Approximate shape",
+      "summary": "One published outline, about 2.7 times longer than wide, with equal depth assumed; other shapes also fit."
+    }
+  }
+}

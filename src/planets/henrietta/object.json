@@ -64,11 +64,6 @@
           "sha256": "d5f2ded7e346881102a7111834244ea1974b705cb0b87de2318e0f8747f3e05c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "7c565dfc5962cbd5a5c44c244eb30784d37d6cbc884f421dfecab492eec05ceb"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "5404db8a1ea0d828924295f4363cec359853179af82e1ecdb57a9c53ffc0b846"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.397844277767737,
-      "description": "Explore Henrietta in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich asteroid in the outer main belt, discovered in April 1882.",
       "systemName": "Solar System",
       "order": 323,
       "context": {

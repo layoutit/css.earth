@@ -64,11 +64,6 @@
           "sha256": "7178ae99d36824cbbe55d8acdeddefb238b45825b0f77262516b520546eac0b3"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0db7bdf41c5349d892e92164ff8f91943f9465e9d7023d83aa0a3c92720056de"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "4b287491a0f5e4298c9c639040570fb893c9e30c0754361073297fc0dde69ce1"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.453696095317234,
-      "description": "Explore Huberta in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich asteroid in the outer main belt, discovered in October 1886.",
       "systemName": "Solar System",
       "order": 342,
       "context": {

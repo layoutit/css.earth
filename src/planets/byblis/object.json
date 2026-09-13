@@ -64,11 +64,6 @@
           "sha256": "fb5011b7aebba13bc4b215cab36ee3064ca15b31779be647076080bcbf93ff0a"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "877ebe32746890080ebe9c766cdeb866f5bb966c0abc4b00be3bcd7d90a455ad"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "7e533bcfba83e8a09f3aa45dec00182300ec06d6bfe3f5b2d206c2fb18ca3540"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1628105645290394,
-      "description": "Explore Byblis in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in July 1879.",
       "systemName": "Solar System",
       "order": 310,
       "context": {

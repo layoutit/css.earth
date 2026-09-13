@@ -64,11 +64,6 @@
           "sha256": "952aeaf6925087176aa75478f32edbdf5223377ec4f3b7659da981241ccad06e"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "87a0c58de4d5f6ab369e340f28cc23993244741473fc64d25bdf26eb992aa5c0"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "e13eca4966a1ba17fa3584ba547edd35e08a7ea9ea30d45722b5867f0df1bbc6"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1819345699171295,
-      "description": "Explore 106 Dione in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in October 1868.",
       "systemName": "Solar System",
       "order": 261,
       "context": {

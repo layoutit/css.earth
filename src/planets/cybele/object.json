@@ -64,11 +64,6 @@
           "sha256": "82e4c917e4db22bb5ac6509139a244a2a7c74bb6968d0c02e52230b0a70c2ab3"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a38df3a9677cc0147fdb29921a9c1a0eb62fb28f2df008f59b47a91252777c7d"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "09f218acf80ec316379fda6b3c4db754c080240273bf164ab32de2ce6e1d5d79"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.407076943888485,
-      "description": "Explore Cybele in 3D with its published shape model and radial elevation.",
+      "description": "Dark asteroid in the outer main belt, discovered in March 1861.",
       "systemName": "Solar System",
       "order": 191,
       "context": {

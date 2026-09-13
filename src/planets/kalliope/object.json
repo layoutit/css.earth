@@ -64,11 +64,6 @@
           "sha256": "475673dc2ba749aa4cd771da24be87c4d92d937b97ab59cf60fa20428fe051d8"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "4fd1e5731b7cbcc171479db6eb395c7426d333b84d9dc3ebc94662a29a3dd8c4"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "48855c6cf420115012883d2c0bab3a1e44c0091bb68a85af8e83914590dced01"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.909387673184708,
-      "description": "Explore Kalliope in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Main-belt asteroid with a moon, discovered in November 1852.",
       "systemName": "Solar System",
       "order": 160,
       "context": {

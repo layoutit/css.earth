@@ -69,11 +69,6 @@
           "sha256": "e2a3d86cda4fd43a71f449be62b7d42b7d29cebd4689629e4fd278350348cc22"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "c667fe9234687b7be2fe9626025d79eb84a568064a6a253ce3a1aae36887e41f"
-        },
-        {
           "id": "rings",
           "path": "source/preparation/rings.json",
           "sha256": "177e3fdc36690fe70646f7b68a8375a8a5ac391402b07fbc11f4f4306a72f464"
@@ -227,7 +222,7 @@
       "classification": "planet",
       "color": "#5279bd",
       "distanceAu": 30.05,
-      "description": "Explore Neptune in 3D with cssEarth. Discover the distant blue ice giant, its turbulent atmosphere, faint rings, and orbiting moons.",
+      "description": "The most distant planet, an ice giant whipped by supersonic winds.",
       "systemName": "Solar System",
       "order": 452,
       "context": {

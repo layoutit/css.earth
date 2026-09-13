@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b3f2168353ab4564f45668893593bd2d026b9d200231e05cb0df6e9e310c9cd6"
+    "sha256": "517155d27b2bd9fb12474b0abade4233f56491e757cf4398d19b35bef3679f75"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -100,14 +100,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "600f7fa7918f799141a098e023a1af66d461e8b76c7bc3550f7b7dda25563f49",
+      "sha256": "0035714e4928d191b6ce8a10568c2c7e39752c40a6481c096b12cd26ad76044a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "dinkinesh",
         "displayName": "Dinkinesh",
         "panel": {
-          "introduction": "Dinkinesh was Lucy’s first asteroid encounter. Its equatorial ridge and trough accompany a remarkable moon: the contact binary Selam. JPL supplies the heliocentric orbit. The reconstruction has an illustrative meridian; its detailed geometry and unseen hemisphere are not measured terrain.",
           "facts": [
             {
               "id": "parent",
@@ -137,9 +136,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "detail": "Model",
-              "title": "Lucy encounter reconstruction",
-              "description": "Celestia contributors’ reconstruction inspired by Lucy images, uniformly scaled to the published 738 m volume-equivalent diameter. This is an authored approximation, not the mission photogrammetric shape model. The grid marks missing qualified surface imagery.",
               "thumbnail": "/scenes/dinkinesh/dinkinesh-shape-thumbnail.webp",
               "surface": "dinkinesh-shape-surface@2x.webp",
               "poles": "dinkinesh-shape-poles@2x.webp",
@@ -147,7 +143,8 @@
                 "id": "shape-model",
                 "path": "../manifest.json",
                 "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/dinkinesh.cmod"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -306,7 +303,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -315,8 +312,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "600f7fa7918f799141a098e023a1af66d461e8b76c7bc3550f7b7dda25563f49",
-      "bytes": 3579,
+      "sha256": "0035714e4928d191b6ce8a10568c2c7e39752c40a6481c096b12cd26ad76044a",
+      "bytes": 2922,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -435,9 +432,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Celestia contributors’ reconstruction inspired by Lucy images, uniformly scaled to the published 738 m volume-equivalent diameter. This is an authored approximation, not the mission photogrammetric shape model. The grid marks missing qualified surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -472,7 +467,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -484,8 +479,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5963,
-          "sha256": "04f061ec01c59fc291363b6ee05fc28203e9b4197e674413d5b2fedd9ddf3e74",
+          "bytes": 5654,
+          "sha256": "2d0d81aed7f6e6bab9ad5eaa8c688ff3848f48aa130042cb69060dd363c0e1f3",
           "verification": "bytes-verified"
         }
       ],

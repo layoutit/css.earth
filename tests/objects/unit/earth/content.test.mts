@@ -8,7 +8,7 @@ import { PREPARED_EARTH_LENSES } from "../../unit/earth/prepared-fixture.mts";
 import { PREPARED_EARTH_PANEL } from "../../unit/earth/prepared-fixture.mts";
 
 test("publishes evidence-backed Earth shell content", async () => {
-  assert.match(PREPARED_EARTH_PANEL.introduction, /third planet from the Sun/u);
+  assert.match(JSON.parse(await readFile(new URL("../../../../src/planets/earth/prepared/text.json", import.meta.url), "utf8")).introduction.text, /third planet from the Sun/u);
   const facts = new Map([...PREPARED_EARTH_PANEL.facts, ...PREPARED_EARTH_PANEL.moreFacts].map(fact => [fact.id, fact]));
   const review = shape({checked:text,references:array(shape({url:text,values:optional(dictionary(text))}))})(JSON.parse((await readFile(new URL("../../../../src/planets/earth/source/editorial/factsheet-review.json", import.meta.url))).toString('utf8')));
   assert.equal(required(facts.get("distance-from-sun")).value, required(review.references[0].values)["distance-from-sun"]);

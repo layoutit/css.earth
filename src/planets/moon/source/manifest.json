@@ -902,25 +902,6 @@
       }
     },
     {
-      "id": "moon-object-text",
-      "path": "content/text.json",
-      "expectedSha256": "4e8081a2f7be235992bf180675e30d21b1d6508a3eb557ee711f90df0274d1b5",
-      "expectedBytes": 3587,
-      "origin": "Repository-authored Moon reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared shell content with source provenance.",
-      "consumers": [
-        "panel",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
-    },
-    {
       "id": "moon-apollo-11-eva-traverse-path",
       "path": "features/traverses/APOLLO_11.ZIP",
       "expectedBytes": 116096,

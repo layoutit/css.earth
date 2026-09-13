@@ -300,25 +300,6 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
-    },
-    {
-      "id": "makemake-object-text",
-      "path": "content/text.json",
-      "expectedBytes": 1094,
-      "expectedSha256": "2956d3bea7962ad909343555e3e19f4eaf096af168d097578f8ac61fba515016",
-      "origin": "Repository-authored Makemake reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "panel",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
     }
   ],
   "documents": [

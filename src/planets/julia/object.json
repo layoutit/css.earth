@@ -64,11 +64,6 @@
           "sha256": "8c68ebcdaf826719bd711c5cc044ccd7817cd210ddb6eaf2bc70d614b35adaf6"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "95aa9298414ae071eb820d54cc93eaaabf391aca573264b7fa39b55611f01220"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "7c245041daf5999d8c38e8e336cd5edefebdcfabd54157c80f65b4edc81452d6"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.550930934639707,
-      "description": "Explore Julia in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in August 1866.",
       "systemName": "Solar System",
       "order": 164,
       "context": {

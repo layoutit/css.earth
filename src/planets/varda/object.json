@@ -31,11 +31,6 @@
           "sha256": "cbd0f0d92037fdba099ce40c9fbd59b4182dee9e3a51538a585d89b3c3e9485c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0186574a0d5a7497c09ad2eee5842da1242e168660ee566da2e960ea36472645"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "e05f04d6b0820cc6246d833df059237fb200b48ae0b86fb40c7863b2183d90fe"
@@ -123,7 +118,7 @@
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 45.619915704968584,
-      "description": "Varda is a distant binary-system primary whose outline was measured as it eclipsed a star. Its companion’s orbit helps orient this model, but Varda’s depth remains uncertain.",
+      "description": "Distant object with a moon, Ilmarë.",
       "systemName": "Solar System",
       "order": 8,
       "context": {

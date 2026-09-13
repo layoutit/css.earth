@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d1ee87bb79744f7b4d5dfa103bace8240056befa49beb380134f1e71bec58623"
+    "sha256": "52cf43f91d86520af0976c1ae050ef335cf3263ec41d2beb9ef61bb872e68dc9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -138,7 +138,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6b1e91afe3a792eda78ec69e4399a38b8a8cd57ff154d98fe0dc80ec9632c8e2",
+      "sha256": "4e3ad4af1ea918f7bc561610611e11041a59560af209e037485e71898bfdecef",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,7 +162,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Donaldjohanson is a contact-binary asteroid visited by Lucy in April 2025. Its two lobes meet at a broad neck. This archived model preserves the original scale: Lucy stereo images constrain about 40% of the surface, and the source authors reconstructed the unseen side. The grid marks unavailable surface imagery. Donaldjohanson tumbles, so its orientation and lighting here are illustrative.",
           "facts": [
             {
               "id": "radius",
@@ -199,9 +198,6 @@
             {
               "id": "llorri",
               "label": "L’LORRI observation",
-              "detail": "Spacecraft observation",
-              "description": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
-              "title": "L’LORRI encounter image",
               "thumbnail": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
               "surface": "donaldjohanson-llorri-surface@2x.webp",
               "poles": "donaldjohanson-llorri-surface@2x.webp",
@@ -209,13 +205,12 @@
                 "id": "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
                 "path": "../manifest.json"
               },
-              "summary": "Only part of the encounter-facing surface is imaged. Brightness retains original lighting; the grid marks rejected or unseen areas."
+              "notes": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
+              "noData": true
             },
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Published Lucy shape model",
-              "title": "Encounter shape model",
               "thumbnail": "/scenes/donaldjohanson/donaldjohanson-shape-thumbnail.webp",
               "surface": "donaldjohanson-shape-surface@2x.webp",
               "poles": "donaldjohanson-shape-surface@2x.webp",
@@ -224,8 +219,8 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Lucy shape model",
-              "summary": "Lucy's published encounter shape. The gray grid marks missing mapped imagery; lighting shows the model."
+              "notes": "Published Lucy shape model",
+              "noData": true
             }
           ]
         },
@@ -446,7 +441,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -455,8 +450,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6b1e91afe3a792eda78ec69e4399a38b8a8cd57ff154d98fe0dc80ec9632c8e2",
-      "bytes": 13437,
+      "sha256": "4e3ad4af1ea918f7bc561610611e11041a59560af209e037485e71898bfdecef",
+      "bytes": 12607,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -575,9 +570,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Published Lucy shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -613,9 +606,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction."
-      ],
+      "limitations": [],
       "lensIds": [
         "llorri"
       ],
@@ -652,7 +643,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -664,8 +655,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10760,
-          "sha256": "5a748f69effe2b2eab13953590ab56e2592b068399e684c5c3dca516c338b63d",
+          "bytes": 10350,
+          "sha256": "e48499506901dbd73477663429151d4c42da817991d808ecff1823bd8a481478",
           "verification": "bytes-verified"
         }
       ],

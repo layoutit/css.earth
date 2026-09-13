@@ -64,11 +64,6 @@
           "sha256": "5cdd7fde9d47aa4a781095b514af813e7057ffbe485ffdcaf2a63e5b863548f3"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "c440f1ca2135ee4c4b503c1a25f798591949426f0240351a9577519d5f1aa0f9"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "cbf6487d87ccb68b2af289997ec7419912b5234ac2c090e730eb6a23ef7ead54"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.564014163529194,
-      "description": "Explore Sophrosyne in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in September 1873.",
       "systemName": "Solar System",
       "order": 278,
       "context": {

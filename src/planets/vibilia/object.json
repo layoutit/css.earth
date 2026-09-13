@@ -64,11 +64,6 @@
           "sha256": "9ab0b52f68ec5d5d4124b9cb0aa9a9ff13e1c473e89b70fd08d9a76f6cd63ef7"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "239fe47360bb69cff765f7c1b502bdf8247716c10607c804b040ef26b9ec5ea8"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "b1e93dcdc580f081dc54919ef55c7ed1846d0e95657fb9116d3933902feab08f"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.654067519715369,
-      "description": "Explore Vibilia in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 3 June 1875.",
       "systemName": "Solar System",
       "order": 281,
       "context": {

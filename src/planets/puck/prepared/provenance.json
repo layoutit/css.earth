@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cf55ebabd8ee2c1d6ea9bbbfe00f8e22845df52d507ab88aea5e29702f77e584"
+    "sha256": "63161664dea752d63da81d3c0afbbe35dc15872a56aadae4992721d5e1c2879a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -141,14 +141,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9e0ee4df193a7d2e67d39ad24483135c4675478db52e78edeb1cbf147d3c2ce9",
+      "sha256": "33cc13defeaf3dbe010e75fbe43705851d5f3e2c1e1bcad3fafec4307d5d96ef",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "puck",
         "displayName": "Puck",
         "panel": {
-          "introduction": "Puck is the largest of Uranus’s small inner moons. Voyager 2 photographed its dark, cratered surface in 1986; most of this little world remains unseen.",
           "facts": [
             {
               "id": "radius",
@@ -188,9 +187,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Voyager 2 clear-filter image C2683716 registered to an approximate 81 km reference sphere. Illumination correction reduces photographed shading. Gray grid marks unseen or unreliable samples. Original detector sampling is about 4.77 km/pixel; the small image does not resolve fine terrain.",
-              "title": "Image C2683716",
-              "detail": "Voyager clear",
               "thumbnail": "/scenes/puck/puck-normal-thumbnail.webp",
               "surface": "puck-normal-surface@2x.webp",
               "poles": "puck-normal-poles@2x.webp",
@@ -199,7 +195,8 @@
                 "path": "../manifest.json",
                 "url": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-u-c2683716"
               },
-              "summary": "Each source pixel spans about 4.77 km, too coarse for fine terrain. The gray grid marks unseen or unreliable areas."
+              "notes": "Voyager 2 clear-filter image C2683716 registered to an approximate 81 km reference sphere. Illumination correction reduces photographed shading. Gray grid marks unseen or unreliable samples. Original detector sampling is about 4.77 km/pixel; the small image does not resolve fine terrain.",
+              "noData": true
             }
           ]
         },
@@ -398,7 +395,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -407,8 +404,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9e0ee4df193a7d2e67d39ad24483135c4675478db52e78edeb1cbf147d3c2ce9",
-      "bytes": 3209,
+      "sha256": "33cc13defeaf3dbe010e75fbe43705851d5f3e2c1e1bcad3fafec4307d5d96ef",
+      "bytes": 2842,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -423,9 +420,7 @@
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Voyager 2 clear-filter image C2683716 registered to an approximate 81 km reference sphere. Illumination correction reduces photographed shading. Gray grid marks unseen or unreliable samples. Original detector sampling is about 4.77 km/pixel; the small image does not resolve fine terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -462,7 +457,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -474,8 +469,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3465,
-          "sha256": "80ba449d7ee143115f1d1d6e4bb5ad8f8d22cda5dd698106652bbf7ab22d2d4a",
+          "bytes": 3294,
+          "sha256": "b38664bd432106d1741590fae2063560f9ba59ae3a3174e342b415262176e7ee",
           "verification": "bytes-verified"
         }
       ],

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "890b34f9dab742d18dd03a6af64fec51e37b8e33b7356387ab71aabe1e32017e"
+    "sha256": "60e42199757ea98889162e1b4270470faca48966d06c23bfde908abed8c6c108"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -150,14 +150,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0bdb9c3a1596191c9ce9d71c4edba0f55325cd69a6e194cfa163f1c92994ac31",
+      "sha256": "876b37013290bd6715b956930662023f85745505f8c6eb93bd11be338106bad7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "cerberus",
         "displayName": "Cerberus",
         "panel": {
-          "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Convex lightcurve model at an uncertain 1.2 km archive scale. The published thermal fit is poor and its size uncertainty is unconstrained. Grid marks unavailable imagery.",
-              "title": "Cerberus · DAMIT shape model 456",
               "thumbnail": "/scenes/cerberus/cerberus-shape-thumbnail.webp",
               "surface": "cerberus-shape-surface@2x.webp",
               "poles": "cerberus-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Convex lightcurve model at an uncertain 1.2 km archive scale. The published thermal fit is poor and its size uncertainty is unconstrained. Grid marks unavailable imagery.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 0.6 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Cerberus · radius relative to the 0.6 km reference sphere",
               "thumbnail": "/scenes/cerberus/cerberus-elevation-thumbnail.webp",
               "surface": "cerberus-elevation-surface@2x.webp",
               "poles": "cerberus-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/456",
                 "image": "/scenes/cerberus/cerberus-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 0.6 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -389,7 +385,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -398,8 +394,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0bdb9c3a1596191c9ce9d71c4edba0f55325cd69a6e194cfa163f1c92994ac31",
-      "bytes": 11145,
+      "sha256": "876b37013290bd6715b956930662023f85745505f8c6eb93bd11be338106bad7",
+      "bytes": 10806,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -414,9 +410,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 0.6 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -458,9 +452,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Convex lightcurve model at an uncertain 1.2 km archive scale. The published thermal fit is poor and its size uncertainty is unconstrained. Grid marks unavailable imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -495,7 +487,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -507,8 +499,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8055,
-          "sha256": "b173aa9d0dcc5383feade3c55509f93f30785955e2556f669b791ec733a2a056",
+          "bytes": 7959,
+          "sha256": "4a5ec2d082ed333c0b437d64c3411dfd981e3e6490453d443959e85e246fc651",
           "verification": "bytes-verified"
         }
       ],

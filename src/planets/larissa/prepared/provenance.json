@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d7c6e3fa2dcc0501c0b2136dce448d5f81d4123f3012dda63bc9186d7e6dae44"
+    "sha256": "d291ea4ccc623a52d9a9650512dca85812c97acaa5e60dc1c24a5c350def12fd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -184,14 +184,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "84300c826f6eb36f2a7191983704c3dff301fed4f080c0203b3af33ff1dfa156",
+      "sha256": "b2b595e255d26e7e8c372ff8e073f9f24e0a246427ec921cce4f3488ffbea6d1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "larissa",
         "displayName": "Larissa",
         "panel": {
-          "introduction": "Larissa is a small, irregular moon orbiting close to Neptune. Voyager 2 resolved a dark, cratered surface, but only a limited part of this distant world has been seen.",
           "facts": [
             {
               "id": "radius",
@@ -253,9 +252,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
-              "title": "Clear-filter mosaic",
-              "detail": "Voyager 2",
               "thumbnail": "/scenes/larissa/larissa-normal-thumbnail.webp",
               "surface": "larissa-normal-surface@2x.webp",
               "poles": "larissa-normal-surface@2x.webp",
@@ -264,14 +260,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/voyager/iss/"
               },
-              "summary": "Brightness is corrected for illumination. The gray grid marks the unseen side, withheld shadows and unreliable samples."
+              "notes": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radial height above a 96 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
-              "title": "Shape-derived radial height",
-              "detail": "Radial shape",
               "thumbnail": "/scenes/larissa/larissa-elevation-thumbnail.webp",
               "surface": "larissa-elevation-surface@2x.webp",
               "poles": "larissa-elevation-surface@2x.webp",
@@ -294,7 +288,8 @@
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
                 "image": "/scenes/larissa/larissa-elevation-legend.webp"
               },
-              "summary": "Height relative to a 96 km sphere, from a Voyager shape model. Unseen terrain is modeled; small features are uncertain."
+              "notes": "Radial height above a 96 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+              "noData": true
             }
           ]
         },
@@ -483,7 +478,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -492,8 +487,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "84300c826f6eb36f2a7191983704c3dff301fed4f080c0203b3af33ff1dfa156",
-      "bytes": 5481,
+      "sha256": "b2b595e255d26e7e8c372ff8e073f9f24e0a246427ec921cce4f3488ffbea6d1",
+      "bytes": 4889,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -508,9 +503,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radial height above a 96 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -552,9 +545,7 @@
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -591,7 +582,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -603,8 +594,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6616,
-          "sha256": "6ebc90cba7fe1185a3011feca50db5c3905abca8c9982738dea4b5e2380d2a8a",
+          "bytes": 6431,
+          "sha256": "fb04b00a3352e3fece417dca7451c9916ab9b58428c16336bec63c093ad0f2cf",
           "verification": "bytes-verified"
         }
       ],

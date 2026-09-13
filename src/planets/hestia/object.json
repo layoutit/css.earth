@@ -64,11 +64,6 @@
           "sha256": "505ea9a1d13ee9d343fd0bef403e25462f1b677db30e03318b94dd50ba97d6aa"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a75cd2f2c64889345e7621e8d5cf1011473c271469b81f21ff723c330d2dbc7b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "3a9fc711b6f0a269929cd3f63dc8aed090ccc3d00faba2fe4b0393cda3105ae8"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5255592116593393,
-      "description": "Explore Hestia in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered in August 1857.",
       "systemName": "Solar System",
       "order": 228,
       "context": {

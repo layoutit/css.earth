@@ -64,11 +64,6 @@
           "sha256": "1f4629bff97f269317862ba5e4eb42d2d4992e3bddf9b8afb518161d03e83b58"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "4927445420ae680b8cb75505842fffdd03901dca70d0b71fdc2db3a7af92aa9f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "a168609a3ef15cbe3f6bcec22259754cc5fccd0958f27ae4609b45ed8e6cc252"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.8618233448142756,
-      "description": "Explore Kriemhild in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in September 1884.",
       "systemName": "Solar System",
       "order": 332,
       "context": {

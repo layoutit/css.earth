@@ -64,11 +64,6 @@
           "sha256": "14efc8182f7d0596d59f53d12b4adc01c9587b78a9257cbcea5af23c959c1e3d"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "fc956cf74ff741bf5d6e67b3eb4c6f9e49d2eefd056a69ed798e15f4405e1a52"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "fd9452a670f450a6d0b6cbca61d29160e1a044dcb7af228a571663b0c79f2669"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.192543456333038,
-      "description": "Explore Kressmannia in 3D with its published shape model and documented physical size scale.",
+      "description": "Stony main-belt asteroid, discovered in March 1915.",
       "systemName": "Solar System",
       "order": 396,
       "context": {

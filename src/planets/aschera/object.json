@@ -64,11 +64,6 @@
           "sha256": "dd26aa20b953f43a6006be752bbb83944ece2363105662dfec78937734ea39fc"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "71462fd036fdb044dffedc04e5e03a49476ba2cbd2f8e11fcbc9a5db088c576e"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "bf632ac586a3e1a1cbcd1068fbb6b16105ee3097706f4701fc00b57477e733ca"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.610464215816688,
-      "description": "Explore Aschera in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in February 1880.",
       "systemName": "Solar System",
       "order": 318,
       "context": {

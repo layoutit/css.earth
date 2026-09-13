@@ -31,11 +31,6 @@
           "sha256": "b816f2ece78a9d294042d569838a8e7f67b384ab7a1b35535f8fc78bd7b005da"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0d2fa0c51786423cc6b0f0f4b1dcff47160739bc948922c395fd9a48790b209a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "a9b9f41eb2195fd644fcaf0769a3cb7c4729f459104deda22e095861e249c9de"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Thrymr, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Norse-group moon of Saturn with a long, uncertain rotation period.",
       "systemName": "Solar System",
       "order": 38,
       "context": {

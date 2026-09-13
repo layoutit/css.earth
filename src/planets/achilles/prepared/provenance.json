@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8a8515824c5f2f03fa9a01f0d69eca853836a93ee2733c20ad315a3a26764589"
+    "sha256": "4e6356cd7988d527c9b9137687fd7a9c09b43a4964b1719c7b9680ecbb5d806a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "48782a675a1fafee770a41a21bf22a61dc98bb290edab13e8d7d9bc12a3e6a25",
+      "sha256": "375a1914340732333219e4d8e653e1c29f425ff6f1d196c63c8494e2fa3e2872",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,7 +173,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Published lightcurve reconstruction, sized using a stellar occultation. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Occultation-constrained volume-equivalent diameter 131 ± 8 km. The convex model shows broad shape; rotational phase is illustrative.",
-              "title": "Light-curve shape model",
               "thumbnail": "/scenes/achilles/achilles-shape-thumbnail.webp",
               "surface": "achilles-shape-surface@2x.webp",
               "poles": "achilles-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Occultation-constrained volume-equivalent diameter 131 ± 8 km. The convex model shows broad shape; rotational phase is illustrative.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 65.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/achilles/achilles-elevation-thumbnail.webp",
               "surface": "achilles-elevation-surface@2x.webp",
               "poles": "achilles-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3934",
                 "image": "/scenes/achilles/achilles-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 65.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -370,10 +366,10 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "48782a675a1fafee770a41a21bf22a61dc98bb290edab13e8d7d9bc12a3e6a25",
+      "sha256": "375a1914340732333219e4d8e653e1c29f425ff6f1d196c63c8494e2fa3e2872",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -382,7 +378,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8541,
+      "bytes": 8209,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -397,9 +393,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 65.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -441,9 +435,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Occultation-constrained volume-equivalent diameter 131 ± 8 km. The convex model shows broad shape; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -478,7 +470,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -490,8 +482,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5713,
-          "sha256": "47f995f3449fb622004a8b732d718cdd501eff46d93a05e3a99dc5ac10499465",
+          "bytes": 5580,
+          "sha256": "d80456dcce17f6802fd51aed8c2155c6757c32b3b369ab4f745e8cd8eb4a7e85",
           "verification": "bytes-verified"
         }
       ],

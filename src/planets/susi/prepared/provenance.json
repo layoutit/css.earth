@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ee6c56a5326a34e653e5569bb270ea8ee0276c43dfd95c2c541b7eb320c60cc8"
+    "sha256": "1a49a3373caf453a73537d90fa985fa3c8d8ec8c123aef1b1f299bbd9485c30b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "05215f082f37427ba9097635774c7601eb0f8e70649350bf5f3dca0f513772c3",
+      "sha256": "abcbacb2f57734f5db3043fe8c9a526dff34e45a443382c1dba3ef7e428001ac",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,7 +173,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Coarse lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Infrared diameter 21.82 ± 1.4 km; the quoted error covers flux precision only, not shape or thermal-model assumptions. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
-              "title": "Light-curve shape model",
               "thumbnail": "/scenes/susi/susi-shape-thumbnail.webp",
               "surface": "susi-shape-surface@2x.webp",
               "poles": "susi-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Infrared diameter 21.82 ± 1.4 km; the quoted error covers flux precision only, not shape or thermal-model assumptions. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 10.91 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/susi/susi-elevation-thumbnail.webp",
               "surface": "susi-elevation-surface@2x.webp",
               "poles": "susi-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5856",
                 "image": "/scenes/susi/susi-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 10.91 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -370,10 +366,10 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "05215f082f37427ba9097635774c7601eb0f8e70649350bf5f3dca0f513772c3",
+      "sha256": "abcbacb2f57734f5db3043fe8c9a526dff34e45a443382c1dba3ef7e428001ac",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -382,7 +378,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 7657,
+      "bytes": 7310,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -397,9 +393,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 10.91 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -441,9 +435,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Infrared diameter 21.82 ± 1.4 km; the quoted error covers flux precision only, not shape or thermal-model assumptions. This coarse convex model has uncertain shape and pole; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -478,7 +470,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -490,8 +482,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4804,
-          "sha256": "da2abb8188883cd74916c8f0c37501ecb7fd13b2fa2cb0af4ed0e20fc597339a",
+          "bytes": 4656,
+          "sha256": "92fb39042846f6e2a25dcfc91b05302e04ca1a85d96819fd607b7aebeb127f81",
           "verification": "bytes-verified"
         }
       ],

@@ -64,11 +64,6 @@
           "sha256": "8e394548cd858faa4d5e17f25753059f2794569b3240203ff97e4bfd97a958b3"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "724b45ae8d02572595fcb3d9dca312bdbf6e9db83a1c8d171b2e9968dc22f808"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "299ebf490881b4158d989c397788e226e82f2fd56d537da9b5de32378dc108cf"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 0.8320332524916527,
-      "description": "Explore Ra-Shalom in 3D with its published radar shape model.",
+      "description": "Near-Earth asteroid whose orbit lies mostly inside Earth's.",
       "systemName": "Solar System",
       "order": 212,
       "context": {

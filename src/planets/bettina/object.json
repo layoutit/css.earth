@@ -64,11 +64,6 @@
           "sha256": "baa36bada76f6ad47fb9aa229030f3f08cd5deba94714d1918d1eb81a5c9e8be"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "29f2a4c209f6613aa4dd4f9185cca864cc866c081fff3a2a09cdce1da2eceefc"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "7f84311773f3d20d6a59195ebf72e0d054bef32dfbd7b7ae9d27253a2c2a6381"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1419813494769286,
-      "description": "Explore Bettina in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in September 1885.",
       "systemName": "Solar System",
       "order": 337,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "ecb02d81f5cefa09459d9ff1ad800c0ea0aa8593ecb310dada775c0295364dec"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "cc209347036e5b4b0fe0a3ea3224f9ea8bbf9825e3a0d51eb62f585a199df39b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "e8c234f3a04b61e2e8d9be8c599fa80fe6203b8b1c7dbcce4e87a771ce42642c"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7565883306989893,
-      "description": "Explore Johanna in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 5 November 1872.",
       "systemName": "Solar System",
       "order": 275,
       "context": {

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3b4f12245af5f15dd23bcb95c1c77b2a274d82be3616f36701e592275f610933"
+    "sha256": "6b1dfbd6cd06b902c589f79d8e5f39762d18af3edbe1f164d8d94af11f90517e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -161,7 +161,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c02c00c4643e0f2648ee09ffaeac963e75e5355cf7087d29742b86ea6d413d8b",
+      "sha256": "bcef00037520f3e08447965411ad97caeface47a343640b48b0eab30c739c518",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -185,7 +185,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Mathilde is a dark, slowly rotating asteroid scarred by enormous impact craters. NEAR photographed part of it during a brief flyby in 1997. This published visualization shape includes estimates for the unseen side and shadowed crater floors; those areas were not measured.",
           "facts": [
             {
               "id": "radius",
@@ -231,8 +230,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Stooke and Pfau’s partial NEAR photomosaic retains photographed shadows and processing seams; it is not calibrated albedo. Gray grid marks exterior map gaps identified by a conservative connected-fill heuristic. The published Stooke visualization shape includes modeled unseen areas and aesthetically modified shadowed crater floors. Shadows adds illustrative lighting: the spin pole and phase are unresolved.",
-              "title": "MSI partial mosaic",
               "thumbnail": "/scenes/mathilde/mathilde-normal-thumbnail.webp",
               "surface": "mathilde-normal-surface@2x.webp",
               "poles": "mathilde-normal-surface@2x.webp",
@@ -241,14 +238,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "NEAR MSI · partial photomosaic",
-              "summary": "Only part of the surface is photographed; shadows and seams remain. The unseen shape is modeled and image gaps are marked."
+              "notes": "Stooke and Pfau’s partial NEAR photomosaic retains photographed shadows and processing seams; it is not calibrated albedo. Gray grid marks exterior map gaps identified by a conservative connected-fill heuristic. The published Stooke visualization shape includes modeled unseen areas and aesthetically modified shadowed crater floors. Shadows adds illustrative lighting: the spin pole and phase are unresolved.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows Thomas model radius minus a 26.4 km reference sphere. Source samples carrying the unobserved 26.5 km placeholder are withheld before interpolation and shown as gray grid. This is radial height, not gravitational elevation. The displayed Stooke visualization shape separately includes modeled unseen areas and modified crater floors; it is not the measured elevation surface. Brightness adds cartographic relief; Shadows adds illustrative directional lighting.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/mathilde/mathilde-elevation-thumbnail.webp",
               "surface": "mathilde-elevation-surface@2x.webp",
               "poles": "mathilde-elevation-surface@2x.webp",
@@ -270,8 +265,8 @@
                 "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.xml",
                 "image": "/scenes/mathilde/mathilde-elevation-legend.webp"
               },
-              "detail": "Thomas measured-region radius",
-              "summary": "Height relative to a 26.4 km sphere, with unobserved values withheld. The display shape has modeled terrain."
+              "notes": "Color shows Thomas model radius minus a 26.4 km reference sphere. Source samples carrying the unobserved 26.5 km placeholder are withheld before interpolation and shown as gray grid. This is radial height, not gravitational elevation. The displayed Stooke visualization shape separately includes modeled unseen areas and modified crater floors; it is not the measured elevation surface. Brightness adds cartographic relief; Shadows adds illustrative directional lighting.",
+              "noData": true
             }
           ]
         },
@@ -576,7 +571,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -585,8 +580,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c02c00c4643e0f2648ee09ffaeac963e75e5355cf7087d29742b86ea6d413d8b",
-      "bytes": 10334,
+      "sha256": "bcef00037520f3e08447965411ad97caeface47a343640b48b0eab30c739c518",
+      "bytes": 9607,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -701,9 +696,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "Stooke and Pfau’s partial NEAR photomosaic retains photographed shadows and processing seams; it is not calibrated albedo. Gray grid marks exterior map gaps identified by a conservative connected-fill heuristic. The published Stooke visualization shape includes modeled unseen areas and aesthetically modified shadowed crater floors. Shadows adds illustrative lighting: the spin pole and phase are unresolved."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -753,9 +746,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows Thomas model radius minus a 26.4 km reference sphere. Source samples carrying the unobserved 26.5 km placeholder are withheld before interpolation and shown as gray grid. This is radial height, not gravitational elevation. The displayed Stooke visualization shape separately includes modeled unseen areas and modified crater floors; it is not the measured elevation surface. Brightness adds cartographic relief; Shadows adds illustrative directional lighting."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -797,7 +788,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -809,8 +800,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6750,
-          "sha256": "cdfeffbd229f1262b85af5002a846a4268b24e195ae16e1b3ba52344deaa3b60",
+          "bytes": 6460,
+          "sha256": "469aa6f247127dd1932038cb6c07bb37aea9b5597c20f21a5d03b36d9df6cf00",
           "verification": "bytes-verified"
         }
       ],

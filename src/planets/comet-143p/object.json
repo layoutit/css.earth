@@ -31,11 +31,6 @@
           "sha256": "a3214f85daec78b8fb1ee9cbf3daec003825bb94fef1a3911af69a499d187a8b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "83b1153bfe2b73279d3bf33516bf3c0b4c5342a514cae46ba541dc47860678ca"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "6a2350d1bd0aaef19473258d372a1eb77213cec1f6d67ddea3c478c30934acf0"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 4.744148140394379,
-      "description": "Explore 143P/Kowal–Mrkos through a shape approximation based on published lightcurve models.",
+      "description": "Modestly elongated comet that turns in about seventeen hours.",
       "systemName": "Solar System",
       "order": 74,
       "context": {

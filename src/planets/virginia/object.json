@@ -64,11 +64,6 @@
           "sha256": "4ef78f56fababbce1fa6040a8016fcad114de5b88377fe5d5bfcc589608e1056"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "7a695a97df8699ddf79c6e7a19b0975f07e2e65c58bc2ae2b9fd1ae065cbfc3c"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "f1f454e3e3c0111a1ecac4a23d889e534349ec510f1172267c3a0dc599f923fc"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.651502448166739,
-      "description": "Explore Virginia in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in October 1857.",
       "systemName": "Solar System",
       "order": 377,
       "context": {

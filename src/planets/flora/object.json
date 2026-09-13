@@ -64,11 +64,6 @@
           "sha256": "0eab28b1e08410b2f258ebbc9d0566613147ce8462afa66efde452b5513504d4"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d65869fe7b4adb8889f52da6658cb45de139122d93b54af8cc81b1bf802721a3"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "497ced03cceb223e79cbfdf87dec2b1eafe67ce6ad99546f6c94d4eee6f18be4"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.2016255700392366,
-      "description": "Explore Flora in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in October 1847.",
       "systemName": "Solar System",
       "order": 167,
       "context": {

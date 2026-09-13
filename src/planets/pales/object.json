@@ -64,11 +64,6 @@
           "sha256": "d05a725bc2c727207baf2071cb1000a1fec7080696af5491057dd182bdd19d72"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "5ccd4bf5033b3b56679e10e741fd381a24d2baef46f44b412280f170ba3cdbfb"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "613062ba922030da5ee97be3ce35ed0ed3a70c2cd685d5ac8d6a91ff53f632ab"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.097178213859086,
-      "description": "Explore Pales in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, found the same night as Doris in 1857.",
       "systemName": "Solar System",
       "order": 230,
       "context": {

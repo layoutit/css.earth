@@ -64,11 +64,6 @@
           "sha256": "90cb7e00c2c2fda158869f9690496ada6fe3bd4ce1c4dada737e361af8912149"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "4ad44603a8f76e0f0153f62785f6c0515c7be05c3c6203adc1027fe96583ce5d"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "eb979dbf7fc9aaf9fd8a0111b2d9ee11820a7a4b38a3795a4951005cf0773383"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.61497834334827,
-      "description": "Explore Zachia in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered on 9 August 1923.",
       "systemName": "Solar System",
       "order": 401,
       "context": {

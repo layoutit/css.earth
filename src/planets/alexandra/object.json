@@ -64,11 +64,6 @@
           "sha256": "801a058f7c26ab50c99316baf85a70417247b60b86e5039187f3afe99ebbc02a"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "ffd65d93e99938fbb12b27cfa376ea6a6eb544bd880cb0dd816909ab728757c8"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2e3c138c5fed48dcce0f2f34db7cc9396a4dcb6029c44e1a5a48798984f5b743"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7095146915447392,
-      "description": "Explore Alexandra in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 10 September 1858.",
       "systemName": "Solar System",
       "order": 232,
       "context": {

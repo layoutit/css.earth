@@ -64,11 +64,6 @@
           "sha256": "5854617cd7b35be62df944444ceb7141d169fcc4eb97c98084178481a60b8d8f"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9080fb3e29d803eaf3466cc362206991cc6c8fb981078d56e465bc80f5d53361"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "635323ab076f72857f994c4105b2e1161f791c87a43b9937f230f97164a6eabd"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.163095282258092,
-      "description": "Explore Palma in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in August 1893.",
       "systemName": "Solar System",
       "order": 193,
       "context": {

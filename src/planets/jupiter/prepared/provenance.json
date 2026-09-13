@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "221c441793523c1ac082ecfc32edc6000ef64b7137918049e42af55d2cdd15b5"
+    "sha256": "88a366096148352391ef7369bdeae048374053788497b0425c71c4a93a772018"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8d7c1c8656b30b7f3b1e6b03f222dfa231dffba6287f781fdc414ce72c18d35b",
+      "sha256": "11aef1fc85e8c0073b14a6fb4f023b528a4ec6ee31b6ee53f29e2090e36ef068",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -39,7 +39,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "The fifth planet from the Sun, Jupiter is the solar system's largest planet: a gas giant wrapped in colorful clouds and enormous storms.",
           "facts": [
             {
               "id": "distance-from-sun",
@@ -184,8 +183,6 @@
             {
               "id": "normal",
               "label": "Visible color",
-              "description": "Hubble visible-color map from 27 June 2019 with Juno-derived polar cloud structure and transferred visible color. Polar sources are not registered to the Hubble longitudes. This multi-source illustration does not depict one observation date or a geodetic polar map.",
-              "title": "WFC3 visible-color map",
               "thumbnail": "/scenes/jupiter/jupiter-lens-normal.webp",
               "surface": "/scenes/jupiter/jupiter-surface.webp",
               "poles": "/scenes/jupiter/jupiter-poles.webp",
@@ -194,14 +191,11 @@
                 "id": "normal",
                 "url": "https://science.nasa.gov/asset/hubble/jupiter-global-map-2019/"
               },
-              "detail": "Visible light",
-              "summary": "Cloud detail combines a 2019 global map with separate polar images. The poles are illustrative and not aligned to its longitudes."
+              "notes": "Hubble visible-color map from 27 June 2019 with Juno-derived polar cloud structure and transferred visible color. Polar sources are not registered to the Hubble longitudes. This multi-source illustration does not depict one observation date or a geodetic polar map."
             },
             {
               "id": "ultraviolet",
               "label": "Ultraviolet",
-              "description": "Hubble OPAL at 275 nm (F275W), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
-              "title": "OPAL F275W map",
               "thumbnail": "/scenes/jupiter/jupiter-lens-ultraviolet-thumbnail.webp",
               "surface": "/scenes/jupiter/jupiter-lens-ultraviolet.webp",
               "poles": "/scenes/jupiter/jupiter-lens-ultraviolet-poles.webp",
@@ -239,14 +233,12 @@
                 "id": "ultraviolet",
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
               },
-              "detail": "275 nm",
-              "summary": "False colors represent 275 nm reflectance measured in December 2025. The gray grid marks missing observations."
+              "notes": "Hubble OPAL at 275 nm (F275W), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
+              "noData": true
             },
             {
               "id": "methane",
               "label": "Methane",
-              "description": "Hubble OPAL at 889 nm (FQ889N), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
-              "title": "OPAL FQ889N map",
               "thumbnail": "/scenes/jupiter/jupiter-lens-methane-thumbnail.webp",
               "surface": "/scenes/jupiter/jupiter-lens-methane.webp",
               "poles": "/scenes/jupiter/jupiter-lens-methane-poles.webp",
@@ -284,8 +276,8 @@
                 "id": "methane",
                 "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
               },
-              "detail": "889 nm",
-              "summary": "False colors represent 889 nm reflectance measured in December 2025. The gray grid marks missing observations."
+              "notes": "Hubble OPAL at 889 nm (FQ889N), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
+              "noData": true
             }
           ]
         },
@@ -1224,10 +1216,10 @@
       "redistribution": "checked authored source with embedded provenance",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "8d7c1c8656b30b7f3b1e6b03f222dfa231dffba6287f781fdc414ce72c18d35b",
-      "bytes": 16163,
+      "sha256": "11aef1fc85e8c0073b14a6fb4f023b528a4ec6ee31b6ee53f29e2090e36ef068",
+      "bytes": 15410,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1346,9 +1338,7 @@
       "selector": "/lenses/0",
       "parents": [],
       "process": "Apply the declared observation, polar coverage and spectral display operation.",
-      "limitations": [
-        "Hubble visible-color map from 27 June 2019 with Juno-derived polar cloud structure and transferred visible color. Polar sources are not registered to the Hubble longitudes. This multi-source illustration does not depict one observation date or a geodetic polar map."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1407,9 +1397,7 @@
       "selector": "/lenses/1",
       "parents": [],
       "process": "Apply the declared observation, polar coverage and spectral display operation.",
-      "limitations": [
-        "Hubble OPAL at 275 nm (F275W), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail."
-      ],
+      "limitations": [],
       "lensIds": [
         "ultraviolet"
       ],
@@ -1464,9 +1452,7 @@
       "selector": "/lenses/2",
       "parents": [],
       "process": "Apply the declared observation, polar coverage and spectral display operation.",
-      "limitations": [
-        "Hubble OPAL at 889 nm (FQ889N), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail."
-      ],
+      "limitations": [],
       "lensIds": [
         "methane"
       ],
@@ -1520,7 +1506,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1532,8 +1518,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 10343,
-          "sha256": "a0efe2762bb0aafd75d7d8a844e68adf574864fce201eed6432c9b51e1a11105",
+          "bytes": 10189,
+          "sha256": "cb287a44b797eeafb0e16ce26e1994aec9792aae36016ea7c1e1e90a0de033bb",
           "verification": "bytes-verified"
         }
       ],

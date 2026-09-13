@@ -75,11 +75,6 @@
           "sha256": "edfaa3085f4bd342dd00fd01e992d98376f37e52e903b8cb6538406625b78056"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "863e9596f8962a994f190af0224af2bb17aab8a6b8da83299dde6e4c02b2f0b4"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "582eabadf35481b58ea0de864f551358690c7f97b8801a30eacaf37eee2c89aa"
@@ -146,7 +141,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 2.36,
-      "description": "Explore Vesta with Dawn imagery and its measured terrain, giant impact basins, and rocky surface.",
+      "description": "Second-largest body in the asteroid belt, after the dwarf planet Ceres.",
       "systemName": "Solar System",
       "order": 421,
       "context": {

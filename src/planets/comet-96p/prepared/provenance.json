@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "af4f226b258edbbea2a42a05668cd78c22229944b75b89f99b936d04e3a077d7"
+    "sha256": "20757d807db6b5f56ca54f198d3534a746ccaf67df709a998459470c813f2d12"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -141,14 +141,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4806516796422242b9607f4b4cd5501dcd20c3fefaec72b570770c102dd32f76",
+      "sha256": "0ed496c6a3cf1fffadbe2b8a21f0b2e395a2fa78b33a0843d8073ae74d616675",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-96p",
         "displayName": "Machholz 1",
         "panel": {
-          "introduction": "Machholz 1 repeatedly sweeps close to the Sun. SOHO and STEREO have watched its passages from different sides of Earth’s orbit.",
           "facts": [
             {
               "id": "diameter",
@@ -173,9 +172,6 @@
             {
               "id": "model",
               "label": "Illustrative nucleus",
-              "detail": "Celestia",
-              "title": "96P/Machholz 1",
-              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
               "thumbnail": "/scenes/comet-96p/comet-96p-model-thumbnail.webp",
               "surface": "comet-96p-model-surface@2x.webp",
               "poles": "comet-96p-model-poles@2x.webp",
@@ -195,7 +191,9 @@
                   "label": "Closest to Sun",
                   "value": "0.116 AU"
                 }
-              ]
+              ],
+              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "noData": true
             }
           ]
         },
@@ -294,7 +292,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -303,8 +301,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4806516796422242b9607f4b4cd5501dcd20c3fefaec72b570770c102dd32f76",
-      "bytes": 3318,
+      "sha256": "0ed496c6a3cf1fffadbe2b8a21f0b2e395a2fa78b33a0843d8073ae74d616675",
+      "bytes": 3118,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -319,9 +317,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -356,7 +352,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -368,8 +364,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6026,
-          "sha256": "37c77611e4379341fb144334a567ddf5b865383e82a1d0d3a20ad9215ff69080",
+          "bytes": 5879,
+          "sha256": "265caa8caa248746f7e5425a2cd2026b92a2215e7a622ca0c64d33e2c4a249cf",
           "verification": "bytes-verified"
         }
       ],

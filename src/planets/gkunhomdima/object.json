@@ -31,11 +31,6 @@
           "sha256": "ebdeedb8fa1b14f7024dd61a5e81eff9894978043b23f2ec704ff68aa81b8702"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0d7c6eb80e7cca31674779198754fb81ac332e50c159381f13d698065f95d615"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "a317a40e84d84fea8b5fbc05ad63413a838d900c3ad303fc8a3496ab21f49770"
@@ -123,7 +118,7 @@
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 74.45925441086162,
-      "description": "Explore its published shape and source constraints.",
+      "description": "Distant dwarf-planet candidate with a small moon.",
       "systemName": "Solar System",
       "order": 359,
       "context": {

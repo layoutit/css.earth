@@ -31,11 +31,6 @@
           "sha256": "556674b36f484a1c8a3fd7e0b5597dc6e36fb58418bcf9b64284fb9d386ad6c0"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9e0d2a5d98a99d27aae47981a651e7d2a4778d1afe60c3117ea153038e73b629"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "33dfc1cfd76a9eddde610928b1c755ff32a9a1bfaf5e244767726fb485cd3685"
@@ -123,7 +118,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 16.60224445563277,
-      "description": "Explore Bienor, a Centaur, with its observation-constrained shape.",
+      "description": "Elongated centaur orbiting among the giant planets.",
       "systemName": "Solar System",
       "order": 464,
       "context": {

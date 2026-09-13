@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "20ae12574e5f54e6db171823d44415572db537d8bb96dabbc98f79bef292b6d4"
+    "sha256": "23622195ec4c96bcb2cccccbdf19d77033c04f02ce117e7eed7408695178bbdc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -303,7 +303,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f2ae43e88009d924e46647e38caf07da251cea5e15cff65074cc163a2ff6dd4f",
+      "sha256": "c679469a83de4d8a33b4c057cf9803d058d9256b31949f8923dd7f194c31849f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -327,7 +327,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "At the center of our solar system, the Sun is a 4.5-billion-year-old yellow dwarf star. Its light and heat make life on Earth possible.",
           "facts": [
             {
               "id": "radius",
@@ -415,10 +414,6 @@
               "id": "photosphere",
               "label": "Photosphere",
               "shortLabel": "Continuum",
-              "description": "Colorized HMI continuum mosaic for Carrington Rotation 2311, 12 May–9 June 2026. It combines different observation dates; limb normalization and polar continuation are prepared display adjustments.",
-              "title": "HMI continuum mosaic CR2311",
-              "detail": "Continuum",
-              "summary": "Visible-light observations span May–June 2026. Color and brightness are adjusted; missing polar coverage is filled.",
               "thumbnail": "sun-lens-photosphere.webp",
               "surface": "sun-surface-photosphere.webp",
               "poles": "sun-poles-photosphere.webp",
@@ -426,16 +421,13 @@
                 "id": "sdo-hmi-continuum-cr2311-20260513"
               },
               "falseColor": false,
-              "qualification": "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation"
+              "qualification": "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation",
+              "notes": "Colorized HMI continuum mosaic for Carrington Rotation 2311, 12 May–9 June 2026. It combines different observation dates; limb normalization and polar continuation are prepared display adjustments."
             },
             {
               "id": "magnetic",
               "label": "Magnetic field",
               "shortLabel": "HMI Bᵣ",
-              "description": "False-color HMI radial magnetic field for Carrington Rotation 2311, 12 May–9 June 2026. A synoptic mosaic, not a simultaneous photograph; weak and strong fields use a nonlinear color scale.",
-              "title": "HMI radial magnetic field CR2311",
-              "detail": "Radial field",
-              "summary": "Colors show the radial field on a nonlinear scale. Measurements span May–June 2026 rather than a single instant.",
               "thumbnail": "sun-lens-magnetic.webp",
               "surface": "sun-surface-magnetic.webp",
               "poles": "sun-poles-magnetic.webp",
@@ -479,16 +471,13 @@
                 },
                 "meta": "G",
                 "sourceUrl": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html"
-              }
+              },
+              "notes": "False-color HMI radial magnetic field for Carrington Rotation 2311, 12 May–9 June 2026. A synoptic mosaic, not a simultaneous photograph; weak and strong fields use a nonlinear color scale."
             },
             {
               "id": "chromosphere",
               "label": "Chromosphere",
               "shortLabel": "304 Å",
-              "description": "False-color AIA 304 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026.",
-              "title": "AIA 304 Å synoptic map CR2311",
-              "detail": "304 Å",
-              "summary": "The 304 Å measurements span May–June 2026. Gaps use nearby latitudes; the separate outer image is from 27 May.",
               "thumbnail": "sun-lens-chromosphere.webp",
               "surface": "sun-surface-chromosphere.webp",
               "poles": "sun-poles-chromosphere.webp",
@@ -530,16 +519,13 @@
                 },
                 "meta": "304 Å",
                 "sourceUrl": "https://sdo.gsfc.nasa.gov/data/synoptic/"
-              }
+              },
+              "notes": "False-color AIA 304 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026."
             },
             {
               "id": "corona",
               "label": "Corona",
               "shortLabel": "171 Å",
-              "description": "False-color AIA 171 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026.",
-              "title": "AIA 171 Å synoptic map CR2311",
-              "detail": "171 Å",
-              "summary": "The 171 Å measurements span May–June 2026. Gaps use nearby latitudes; the separate outer image is from 27 May.",
               "thumbnail": "sun-lens-corona.webp",
               "surface": "sun-surface-corona.webp",
               "poles": "sun-poles-corona.webp",
@@ -581,7 +567,8 @@
                 },
                 "meta": "171 Å",
                 "sourceUrl": "https://sdo.gsfc.nasa.gov/data/synoptic/"
-              }
+              },
+              "notes": "False-color AIA 171 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026."
             }
           ]
         },
@@ -2172,8 +2159,8 @@
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
-      "sha256": "f2ae43e88009d924e46647e38caf07da251cea5e15cff65074cc163a2ff6dd4f",
-      "bytes": 12783,
+      "sha256": "c679469a83de4d8a33b4c057cf9803d058d9256b31949f8923dd7f194c31849f",
+      "bytes": 11727,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2189,8 +2176,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation",
-        "Colorized HMI continuum mosaic for Carrington Rotation 2311, 12 May–9 June 2026. It combines different observation dates; limb normalization and polar continuation are prepared display adjustments."
+        "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation"
       ],
       "lensIds": [
         "photosphere"
@@ -2308,8 +2294,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "False-colour NASA SDO/HMI CR2311 full-surface radial magnetic-field map",
-        "False-color HMI radial magnetic field for Carrington Rotation 2311, 12 May–9 June 2026. A synoptic mosaic, not a simultaneous photograph; weak and strong fields use a nonlinear color scale."
+        "False-colour NASA SDO/HMI CR2311 full-surface radial magnetic-field map"
       ],
       "lensIds": [
         "magnetic"
@@ -2423,8 +2408,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "NASA SDO AIA 304 angstrom CR2311 full-surface synoptic map",
-        "False-color AIA 304 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026."
+        "NASA SDO AIA 304 angstrom CR2311 full-surface synoptic map"
       ],
       "lensIds": [
         "chromosphere"
@@ -2541,8 +2525,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "NASA SDO AIA 171 angstrom CR2311 full-surface synoptic map",
-        "False-color AIA 171 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026."
+        "NASA SDO AIA 171 angstrom CR2311 full-surface synoptic map"
       ],
       "lensIds": [
         "corona"
@@ -2657,7 +2640,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -2669,8 +2652,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5363,
-          "sha256": "c0c5ace996e7ae33d5ef909f9aacecbe378cb39c1cc3e4f03bd7fb94b98f10f1",
+          "bytes": 5210,
+          "sha256": "7d3e649d7daf395b9d1e7fcb385031169b67c4ce6c84dbcce8cc6afeb31cda3b",
           "verification": "bytes-verified"
         }
       ],

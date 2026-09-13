@@ -59,11 +59,6 @@
           "sha256": "12c3da160fb915cf57f57e591ea5658b14d8e085a26b797ddb90862803855fa6"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "2956d3bea7962ad909343555e3e19f4eaf096af168d097578f8ac61fba515016"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "e4342c2a3283ebcc30277a4e82de574be31223624ad7f70ba89aaaa4acf6ce62"
@@ -152,7 +147,7 @@
       "classification": "dwarf-planet",
       "color": "#bfa48b",
       "distanceAu": 45.8,
-      "description": "Explore Makemake with an illustrative NASA surface texture and its distant orbit around the Sun.",
+      "description": "Distant, reddish dwarf planet with one small moon.",
       "systemName": "Solar System",
       "order": 461,
       "context": {

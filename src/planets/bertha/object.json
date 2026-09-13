@@ -64,11 +64,6 @@
           "sha256": "cfdb81f491fded4d62315b0ab51a019ba40913eb91134555d941f14f40900a85"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f7ce48f5d93484a6974f13e1a8872feb71422b1388702bd05b69624e7caebcfc"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0b1f995b16247f63ee62d763534940de75cca4f5a3a77e31196d868aaaa72758"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1939101574420405,
-      "description": "Explore Bertha in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 4 November 1875.",
       "systemName": "Solar System",
       "order": 381,
       "context": {

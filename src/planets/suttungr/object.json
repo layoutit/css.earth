@@ -31,11 +31,6 @@
           "sha256": "3b9d00fa2d9f97f1b2ba3fe1d4e52aa7804e5eb210282b043c17bccc02983fa4"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0b7bc1f45c6e32f419f2a195584bef6477615d1d65d7248fb5a78bdbe9004766"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "f08423024b51ca3bd540259f63a1d4ca0908fa60a343ea4bbfdbf367ea5c3919"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Suttungr, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Norse-group moon of Saturn whose brightness peaks two or three times per turn.",
       "systemName": "Solar System",
       "order": 34,
       "context": {

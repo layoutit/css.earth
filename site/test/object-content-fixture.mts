@@ -1,5 +1,5 @@
 import type { ObjectContentSource, TitleSource } from '../../tools/objects/content/types.ts';
-import { parse, object, array, dictionary, union, optional, literal, number, string, boolean } from '../../tools/objects/material-composition/data-schema.mts';
+import { parse, object, array, dictionary, union, optional, literal, number, string, boolean, json } from '../../tools/objects/material-composition/data-schema.mts';
 
 const title = object({ label: string, viewBox: string, path: string, source: string, sourceUrl: string,
   sourceSha256: string, xOrigin: string, sourceGenerator: string, width: number, height: number,
@@ -21,15 +21,15 @@ const legend = object({
     outputWidth: number, outputHeight: number,
   })),
 });
+// Reader text lives in the package's text.json, so the content recipe carries facts, dataset recipes and legends only.
 const content = object({
   schema: literal('cssearth-object-content@1'), version: literal(1), id: string, displayName: string, title,
-  panel: object({introduction: string, facts: array(fact), moreFacts: optional(array(fact))}),
+  panel: object({facts: array(fact), moreFacts: optional(array(fact)), schema: optional(string), planetId: optional(string), sources: optional(json)}),
   lenses: object({titleKey: literal('lenses'), defaultLens: string, labels: optional(dictionary(string)),
-    controls: array(object({id: string, label: string, description: string, title: string, thumbnail: string,
-      detail: optional(string), shortLabel: optional(string), summary: optional(string), filter: optional(string),
+    controls: array(object({id: string, label: string, thumbnail: string, shortLabel: optional(string), filter: optional(string),
       qualification: optional(string), surface: optional(string), poles: optional(string), material: optional(string),
       legendNote: optional(string), falseColor: optional(boolean), view: optional(literal('exterior', 'interior')),
-      legend: optional(legend), facts: optional(array(fact)), source,
+      notes: optional(string), noData: optional(boolean), legend: optional(legend), facts: optional(array(fact)), source,
     })),
   }),
   settings: object({titleKey: literal('settings'), controls: array(object({kind: literal('cycle', 'toggle'),

@@ -59,11 +59,6 @@
           "sha256": "bae4883e58250a946c99e11747303fc2c0305dd0554ba00891e4159b89069c62"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "95e3996f499d4d63f6557d22fef51d73dcc7aa2e84b0533986cee4e6e6bf06c3"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "074449421f0ffa141060f8a69bc8ab5c60abd681acdf62c3679b8e90852fbe25"
@@ -152,7 +147,7 @@
       "classification": "dwarf-planet",
       "color": "#ddd6cf",
       "distanceAu": 67.78,
-      "description": "Explore Eris with an illustrative NASA texture on its occultation-constrained spherical shape.",
+      "description": "Bright, icy dwarf planet far beyond Neptune.",
       "systemName": "Solar System",
       "order": 462,
       "context": {

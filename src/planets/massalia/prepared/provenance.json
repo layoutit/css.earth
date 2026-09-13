@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5f3576baf3111dc6108586aa30a88dac54bef7abae563c48262876293bd025c6"
+    "sha256": "5d1eb3dc614fc27e0a769db0dd22b190a4435ef6a546c03b66e731ec7c977083"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a4cdd3b617823da4c039753377dc8ee17850b2d7d6cf070128b99dc3d721bd2f",
+      "sha256": "77377d7b96821f3905f77bac039f95866348d20f50dad635a371921dbab82eb6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,7 +173,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Updated lightcurve reconstruction with an approximate size transferred from another published shape model. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Approximate 147 km diameter: the original thermophysical fit reports ±2 km, with additional uncertainty from using a different shape. The corrected 2026 pole and period are used; rotational phase is illustrative.",
-              "title": "Light-curve shape model",
               "thumbnail": "/scenes/massalia/massalia-shape-thumbnail.webp",
               "surface": "massalia-shape-surface@2x.webp",
               "poles": "massalia-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Approximate 147 km diameter: the original thermophysical fit reports ±2 km, with additional uncertainty from using a different shape. The corrected 2026 pole and period are used; rotational phase is illustrative.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 73.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/massalia/massalia-elevation-thumbnail.webp",
               "surface": "massalia-elevation-surface@2x.webp",
               "poles": "massalia-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16321",
                 "image": "/scenes/massalia/massalia-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 73.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -370,10 +366,10 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "a4cdd3b617823da4c039753377dc8ee17850b2d7d6cf070128b99dc3d721bd2f",
+      "sha256": "77377d7b96821f3905f77bac039f95866348d20f50dad635a371921dbab82eb6",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -382,7 +378,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 11409,
+      "bytes": 11042,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -397,9 +393,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 73.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -441,9 +435,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Approximate 147 km diameter: the original thermophysical fit reports ±2 km, with additional uncertainty from using a different shape. The corrected 2026 pole and period are used; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -478,7 +470,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -490,8 +482,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8501,
-          "sha256": "9efcfee04497096e4f6ab61d087e22eb72d7bf81238f6cae7b8dd793313018a6",
+          "bytes": 8333,
+          "sha256": "bc4c35add535223216857db14a18b06ee0ffb18f8a2cc1931f0d6eb7928fa51f",
           "verification": "bytes-verified"
         }
       ],

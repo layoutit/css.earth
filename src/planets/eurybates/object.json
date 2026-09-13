@@ -31,11 +31,6 @@
           "sha256": "bbeda93714d3f6036f85df24f14a2b8d44f6b3eb87af6232a4b7b497bbe7cba2"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f806c8b9cfdd40f5cdcc500bcdfd37d48d30383300c0e443d28e95d328538aaa"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "15e565b0cd1cd81993c2a7afb45d8e95f18d5be0aad2131febb381f0d2d97bcb"
@@ -123,7 +118,7 @@
       "classification": "asteroid",
       "color": "#a0a0a0",
       "distanceAu": 5.21783282489895,
-      "description": "Explore Eurybates, a Lucy target, through its observation-constrained approximate ellipsoid.",
+      "description": "Largest member of a family of Trojan asteroids.",
       "systemName": "Solar System",
       "order": 21,
       "context": {

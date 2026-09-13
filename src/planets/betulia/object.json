@@ -64,11 +64,6 @@
           "sha256": "b30acab924687a390907492616fc62e4e9638959c9a6a2401f632136d8bf9150"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "396b70ee5154b3ef1bd1ae63c3c6567d65546cbc6d36f99efe73ea4a54a1b6c7"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "951d061f9a266fbee1e3e9651e002e83dc4f32934d631c4316e7e7a7e8b226bc"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.1947263959034577,
-      "description": "Explore Betulia in 3D with its published shape model and radial elevation.",
+      "description": "Near-Earth asteroid mapped by Arecibo radar.",
       "systemName": "Solar System",
       "order": 181,
       "context": {

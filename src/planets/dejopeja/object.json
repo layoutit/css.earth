@@ -64,11 +64,6 @@
           "sha256": "b03942590a04461c6750f3b2a0ef024b0d8adbb2852a42cf8f51da24fb574340"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "aae6f5506f4e64e3d4438f62cf58dccb9daecd628a30d676891e5ce44c33b2c3"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "59f14f674a4e1560f47cf58ce6911e9269acf43e04dc7b090463163a843bfd07"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1906659584251518,
-      "description": "Explore Dejopeja in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in February 1878.",
       "systemName": "Solar System",
       "order": 304,
       "context": {

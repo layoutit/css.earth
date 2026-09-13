@@ -31,11 +31,6 @@
           "sha256": "d693a32f9ec8932c677425a885c4f7ac7b6858bf5493d0994922192a3aaaab8c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "22a8f092aa3c19b0a568b0cecd9e50d980def0723cf355ef729848118d56a242"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "3abf433dcfe68fb526a8d4e5b7ed5465889a960e440cd1b7703202fafa2506cf"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 78.55468108744893,
-      "description": "C/1973 E1: Kohoutek passed close to the Sun in late 1973. It is now travelling outward into the distant Solar System. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Comet that passed inside Mercury's orbit on its way out of the Solar System.",
       "systemName": "Solar System",
       "order": 63,
       "context": {

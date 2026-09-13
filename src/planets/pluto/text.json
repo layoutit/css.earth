@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "pluto",
+  "card": {
+    "text": "Dwarf planet with a vast, heart-shaped plain.",
+    "sources": [
+      {
+        "catalogueId": "source-pluto-editorial-nasa-pluto-json",
+        "url": "https://science.nasa.gov/wp-json/wp/v2/topic/107487",
+        "label": "Pluto · editorial nasa pluto json",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "New Horizons found mountains of water ice and glaciers of nitrogen ice on Pluto.",
+    "sources": [
+      {
+        "catalogueId": "source-pluto-editorial-nasa-pluto-json",
+        "url": "https://science.nasa.gov/wp-json/wp/v2/topic/107487",
+        "label": "Pluto · editorial nasa pluto json",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "surface": {
+      "title": "MVIC color mosaic",
+      "detail": "Color mosaic",
+      "summary": "Color images cover part of the surface, with detail varying by region."
+    },
+    "topography": {
+      "title": "Stereo elevation map",
+      "detail": "Stereo relief",
+      "summary": "Heights from −8 to +8 km, with shading to show slopes."
+    },
+    "monochrome": {
+      "title": "LORRI/MVIC mosaic",
+      "detail": "Photo mosaic",
+      "summary": "LORRI and MVIC images, with detail varying across the surface."
+    }
+  }
+}

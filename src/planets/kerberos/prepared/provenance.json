@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c38b69af247e1a8308163d55f4e9bfebf8f3e2ac67debdadb1a84d8b26558c98"
+    "sha256": "742bcd1434bbe2af163fb4b39798a796dd456483e05330e6b66ed2758fe76ff7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c8666c32b1c73e1c636f01936c3a28b71e346e0a4ccdf1c54f49b0dc92046847",
+      "sha256": "0fe1c80f4bd8af328eef91c59039c6e7244a8c579ac9d9f0c1365af4a6274847",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "kerberos",
         "displayName": "Kerberos",
         "panel": {
-          "introduction": "Kerberos is a tiny, elongated moon in the Pluto–Charon system. New Horizons glimpsed it in 2015, but its possible double-lobed shape and spin orientation remain uncertain.",
           "facts": [
             {
               "id": "radius",
@@ -161,9 +160,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "An approximate 14.5 × 8.2 × 7.2 km triaxial fit from New Horizons images and photometry (Porter, Verbiscer and Canup, 2025). A contact-binary shape remains possible and the pole is uncertain. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
-              "title": "Approximate shape model",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/kerberos/kerberos-model-thumbnail.webp",
               "surface": "kerberos-model-surface@2x.webp",
               "poles": "kerberos-model-poles@2x.webp",
@@ -172,7 +168,8 @@
                 "path": "../manifest.json",
                 "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
               },
-              "summary": "New Horizons shape estimate. A two-lobed form remains possible; the pole is uncertain. No imagery is mapped."
+              "notes": "An approximate 14.5 × 8.2 × 7.2 km triaxial fit from New Horizons images and photometry (Porter, Verbiscer and Canup, 2025). A contact-binary shape remains possible and the pole is uncertain. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+              "noData": true
             }
           ]
         },
@@ -316,7 +313,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -325,8 +322,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c8666c32b1c73e1c636f01936c3a28b71e346e0a4ccdf1c54f49b0dc92046847",
-      "bytes": 3811,
+      "sha256": "0fe1c80f4bd8af328eef91c59039c6e7244a8c579ac9d9f0c1365af4a6274847",
+      "bytes": 3418,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -341,9 +338,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "An approximate 14.5 × 8.2 × 7.2 km triaxial fit from New Horizons images and photometry (Porter, Verbiscer and Canup, 2025). A contact-binary shape remains possible and the pole is uncertain. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -383,7 +378,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -395,8 +390,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6541,
-          "sha256": "5119b1b8d23fff235252746a572d62fcaa5d576f1d88c2065a5675eb589cafaf",
+          "bytes": 6350,
+          "sha256": "8da17cbef68832d458401512b7fd3032cae4cda6ac034c55c5303250593f3808",
           "verification": "bytes-verified"
         }
       ],

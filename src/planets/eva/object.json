@@ -64,11 +64,6 @@
           "sha256": "286e9e56102332daa0e2147f3050cd12c07064a755580a6700d28f6064548cf3"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "bea2b210f42361a40e91b851268727e5e899716d7fbb11c367770cba767d5c99"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2945badeee63c90bcaf70aa984d1c037ca5167391936dcc6319cab8dafde698c"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6327474235794797,
-      "description": "Explore Eva in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered in July 1876.",
       "systemName": "Solar System",
       "order": 296,
       "context": {

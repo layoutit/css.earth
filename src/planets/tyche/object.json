@@ -64,11 +64,6 @@
           "sha256": "f5f67d6d3ec893e7bde3f7ae7549aa7f17a2240593458126b3b264fd6e0c3143"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "ffd2f351a0b14ef8a10a0e20a144c269e6d4ed5d87649bfb63c183e70fdfde37"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "140ffa72db2d5005920aa88875f2026036172e4baa98cef4af46f4c6d6d90264"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.61507505241983,
-      "description": "Explore Tyche in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in May 1886.",
       "systemName": "Solar System",
       "order": 341,
       "context": {

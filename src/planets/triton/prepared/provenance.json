@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ed427fb63ad51108b66ad0531708a40c982506a54915c5cb34c831d0deec4062"
+    "sha256": "7b88f981a22455308ef3f39a1633a502e666cd364831ec9fc20f24ec3c434044"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -198,7 +198,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2dea5b396bb43746389ae3169fb9d7ca4ae87b9e44704441719648bdb1dae773",
+      "sha256": "c24aae7747e4e49814c69fe6d0554a68124b8b49b1551474de68500ea4e21469",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -222,7 +222,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Neptune’s largest moon follows a retrograde orbit. Voyager revealed nitrogen frost, strange cantaloupe terrain and active geyser-like plumes.",
           "facts": [
             {
               "id": "radius",
@@ -298,8 +297,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Monochrome: Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
-              "title": "Clear-filter mosaic",
               "thumbnail": "triton-lens-normal.webp",
               "surface": "triton-normal.webp",
               "poles": "triton-poles-normal.webp",
@@ -308,14 +305,11 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.5066/P9MGH7FB"
               },
-              "detail": "Corrected Voyager mosaic",
-              "summary": "Each image is corrected using its capture geometry before joining the mosaic. Missing coverage and unreliable views stay empty."
+              "notes": "Monochrome: Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable."
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
-              "description": "Enhanced color: Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies.",
-              "title": "Enhanced-color map",
               "thumbnail": "triton-lens-enhanced.webp",
               "surface": "triton-enhanced.webp",
               "poles": "triton-poles-enhanced.webp",
@@ -324,8 +318,7 @@
                 "path": "../manifest.json",
                 "url": "https://www.lpi.usra.edu/icy_moons/neptune/triton/"
               },
-              "detail": "Corrected O/G/B color",
-              "summary": "Orange, green and blue bands form an enhanced-color view. Detail varies; the unlit northern region stays unavailable."
+              "notes": "Enhanced color: Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies."
             }
           ]
         },
@@ -633,10 +626,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "2dea5b396bb43746389ae3169fb9d7ca4ae87b9e44704441719648bdb1dae773",
-      "bytes": 7856,
+      "sha256": "c24aae7747e4e49814c69fe6d0554a68124b8b49b1551474de68500ea4e21469",
+      "bytes": 7219,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -751,9 +744,7 @@
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Monochrome: Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -809,9 +800,7 @@
       "selector": "/surfaces/1",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "Enhanced color: Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies."
-      ],
+      "limitations": [],
       "lensIds": [
         "enhanced"
       ],
@@ -1281,7 +1270,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1293,8 +1282,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4905,
-          "sha256": "c68d1bfa71b9f027c7efacd6cce3e099753ca8534bd6cf26e21cf241aa6ec3dc",
+          "bytes": 4744,
+          "sha256": "db3a706bf5b1d73a98402c5836cec0a303eb97e1a6954299b6496780b1206c75",
           "verification": "bytes-verified"
         }
       ],

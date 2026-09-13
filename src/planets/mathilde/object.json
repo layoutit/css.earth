@@ -70,11 +70,6 @@
           "sha256": "bcef00037520f3e08447965411ad97caeface47a343640b48b0eab30c739c518"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "e1a0c15ea4647e02e3b4cbc4f8e321e9f0b186cb4f33ce9256a0dcdd3dece87e"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "bc0ad4d85957a05b3adf7b2863eb9f96b8ee238a400544d3e1ecb235589200bd"
@@ -141,7 +136,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 2.647,
-      "description": "Explore Mathilde with NEAR imagery, measured partial elevation, and a published visualization shape.",
+      "description": "Dark, slowly spinning asteroid scarred by huge craters.",
       "systemName": "Solar System",
       "order": 132,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "1fe4f01c177c076d071d37cddd01670a5fcbf5beda1a9c82fc24da63b6f80a68"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "3f1fa70ee1b6ef5156c811aea86e578ea8a781cc6fe4907d5e92f86a546d638b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "52b884bc0ac145b9a062718795ef85812dc803418cd6db4932ba24ca253ae48d"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.766978586312942,
-      "description": "Explore Daphne in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid with a moon, discovered in May 1856.",
       "systemName": "Solar System",
       "order": 157,
       "context": {

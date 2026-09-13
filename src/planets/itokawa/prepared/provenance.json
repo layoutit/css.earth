@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ec189b1d6fea4f2fedddaa78c24a71ad36547f90198bcd82eb220583952b1b68"
+    "sha256": "815effe0e61b469e89cd80ab151dcf7c09ad4d81e1ffb04ff4b0f0d54acbc829"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -202,7 +202,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2e8fb3414b446234b87f4255bff80b19bdd473806e1037d35e9dc547b1ad2275",
+      "sha256": "a47d5e857e066ca69a53f889711cdc100a0607d960a0b98f93593c5a2b0c5010",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -226,7 +226,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Itokawa is a small, two-lobed asteroid visited by Hayabusa. The spacecraft returned samples to Earth in 2010. This view shows elevation derived from the measured shape.",
           "facts": [
             {
               "id": "radius",
@@ -258,9 +257,6 @@
             {
               "id": "amica",
               "label": "AMICA mosaic",
-              "detail": "Hayabusa observations",
-              "description": "Three Hayabusa AMICA v-band images from 24–29 September 2005 are registered with the archived Gaskell Cartesian backplanes. Grayscale shows flat-fielded detector brightness with approximate illumination correction and bounded overlap matching, not absolute albedo or natural color. The source images use lossy 8-bit compression; photographed shadows and some seams remain. The ordinary grid marks missing, grazing or geometrically rejected coverage.",
-              "title": "AMICA v-band mosaic",
               "thumbnail": "/scenes/itokawa/itokawa-amica-thumbnail.webp",
               "surface": "itokawa-amica-surface@2x.webp",
               "poles": "itokawa-amica-surface@2x.webp",
@@ -268,13 +264,12 @@
                 "id": "amica-sep24-path",
                 "path": "../manifest.json"
               },
-              "summary": "Brightness is corrected and matched across three images. Shadows and seams remain; the grid marks gaps and rejected coverage."
+              "notes": "Three Hayabusa AMICA v-band images from 24–29 September 2005 are registered with the archived Gaskell Cartesian backplanes. Grayscale shows flat-fielded detector brightness with approximate illumination correction and bounded overlap matching, not absolute albedo or natural color. The source images use lossy 8-bit compression; photographed shadows and some seams remain. The ordinary grid marks missing, grazing or geometrically rejected coverage.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows radius minus a 165 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/itokawa/itokawa-elevation-thumbnail.webp",
               "surface": "itokawa-elevation-surface@2x.webp",
               "poles": "itokawa-elevation-surface@2x.webp",
@@ -296,8 +291,7 @@
                 "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab",
                 "image": "/scenes/itokawa/itokawa-elevation-legend.webp"
               },
-              "detail": "Shape-derived height",
-              "summary": "Height relative to a 165 m sphere, from the shape model. Colors include the broad form; the outline is simplified."
+              "notes": "Color shows radius minus a 165 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces."
             }
           ]
         },
@@ -823,7 +817,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -832,8 +826,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2e8fb3414b446234b87f4255bff80b19bdd473806e1037d35e9dc547b1ad2275",
-      "bytes": 9583,
+      "sha256": "a47d5e857e066ca69a53f889711cdc100a0607d960a0b98f93593c5a2b0c5010",
+      "bytes": 8945,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -948,9 +942,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows radius minus a 165 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -992,9 +984,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Three Hayabusa AMICA v-band images from 24–29 September 2005 are registered with the archived Gaskell Cartesian backplanes. Grayscale shows flat-fielded detector brightness with approximate illumination correction and bounded overlap matching, not absolute albedo or natural color. The source images use lossy 8-bit compression; photographed shadows and some seams remain. The ordinary grid marks missing, grazing or geometrically rejected coverage."
-      ],
+      "limitations": [],
       "lensIds": [
         "amica"
       ],
@@ -1039,7 +1029,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1051,8 +1041,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6033,
-          "sha256": "7533d5efc9445d99f8f5b24e603e0d9f0e41462c486a0ce3e6652984768747e4",
+          "bytes": 5847,
+          "sha256": "15d8d2f126b6699dfc7ba9b90553e887988a028c559a1780973d7147832922a2",
           "verification": "bytes-verified"
         }
       ],

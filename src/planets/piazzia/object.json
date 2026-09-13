@@ -64,11 +64,6 @@
           "sha256": "8c94bb3bdd02ea1dcd05f3d3bd868c45cd8de6ba68246c6387e423d740816c0e"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "1c14eced4adfe21c3cb6772feaac7c3729ec696d8f058e2110de30f5e2ecc74a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "40b449598fcbd262b7b2904ea7057f4cf987718b674d6f0daaa5765f6ea6301b"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1710520001451843,
-      "description": "Explore Piazzia in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered on 12 August 1923.",
       "systemName": "Solar System",
       "order": 402,
       "context": {

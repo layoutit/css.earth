@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3b7c103abe61ea36a1f85268b98e847cbe066b57724c6fe42fa3b9ece40875f7"
+    "sha256": "99a39508e73b7f341ea596b99c3881aeea4db29a949238e0ce954269bc6e8164"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -635,7 +635,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ebccc20d6f7f238fad5aca33df03e2763cfa63eabee7ed6503a0c3da56330375",
+      "sha256": "7ab905836804b5f16347c9a1a05db64f3f059659506c38bd9f952679521406f5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -659,7 +659,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Earth's Moon records evidence of our solar system's history in the form of impact craters, cooled lava landforms, ancient ice deposits, and more.",
           "facts": [
             {
               "id": "distance-from-earth",
@@ -730,8 +729,6 @@
             {
               "id": "surface",
               "label": "Monochrome",
-              "description": "LROC WAC 643 nm photography, mapped from observations in 2009–2011. Crater shadows are part of the photographs; the Shadows control adds scene lighting. Gray grid marks missing data. Brightness is adjusted for display.",
-              "title": "LROC photographic mosaic",
               "thumbnail": "moon-lens-surface.webp",
               "surface": "moon-surface.webp",
               "poles": "moon-poles-surface.webp",
@@ -739,16 +736,14 @@
                 "id": "lroc-wac-global-032p",
                 "url": "https://data.lroc.im-ldi.com/lroc/view_rdr_product/WAC_GLOBAL_E000N1800_032P"
               },
-              "detail": "LROC mosaic",
-              "summary": "Monochrome photography from 2009–2011. Crater shadows remain in the images; gray grid marks missing observations.",
               "falseColor": false,
-              "qualification": "LROC WAC global morphologic mosaic v1.3, 32 pixels/degree, mapped to the 1,737.4 km lunar reference sphere."
+              "qualification": "LROC WAC global morphologic mosaic v1.3, 32 pixels/degree, mapped to the 1,737.4 km lunar reference sphere.",
+              "notes": "LROC WAC 643 nm photography, mapped from observations in 2009–2011. Crater shadows are part of the photographs; the Shadows control adds scene lighting. Gray grid marks missing data. Brightness is adjusted for display.",
+              "noData": true
             },
             {
               "id": "midnight-temperature",
               "label": "Midnight temperature",
-              "description": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009–2022. Colors span 80–140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond ±70°. This combines many nights; it is not a current temperature map.",
-              "title": "LRO Diviner GHRM: midnight temperature",
               "thumbnail": "moon-lens-midnight-temperature.webp",
               "surface": "moon-midnight-temperature.webp",
               "poles": "moon-poles-midnight-temperature.webp",
@@ -756,8 +751,6 @@
                 "id": "diviner-ghrm-tbol_m-compact",
                 "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.img"
               },
-              "detail": "Temperature",
-              "summary": "False-color temperature fitted to local midnight from 2009–2022 Diviner observations within ±70°. Gray grid marks unavailable data. This combines many nights, not current temperatures.",
               "legend": {
                 "kind": "scale",
                 "title": "Midnight temperature",
@@ -814,13 +807,13 @@
                 "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.xml"
               },
               "falseColor": true,
-              "qualification": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009–2022. Colors span 80–140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond ±70°. This combines many nights; it is not a current temperature map."
+              "qualification": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009–2022. Colors span 80–140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond ±70°. This combines many nights; it is not a current temperature map.",
+              "notes": "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009–2022. Colors span 80–140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond ±70°. This combines many nights; it is not a current temperature map.",
+              "noData": true
             },
             {
               "id": "heat-anomalies",
               "label": "Heat anomalies",
-              "description": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span −10 to +10 K. Observations cover 2009–2022 within ±70°; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
-              "title": "LRO Diviner GHRM: heat anomalies",
               "thumbnail": "moon-lens-heat-anomalies.webp",
               "surface": "moon-heat-anomalies.webp",
               "poles": "moon-poles-heat-anomalies.webp",
@@ -828,8 +821,6 @@
                 "id": "diviner-ghrm-tbol_anom-compact",
                 "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img"
               },
-              "detail": "Anomaly",
-              "summary": "False-color difference from a typical-soil thermal model at slope-adjusted midnight, 2009–2022, within ±70°. Blue is cooler and red warmer; gray grid is unavailable. Residual terrain effects remain. Warm colors do not establish geothermal activity.",
               "legend": {
                 "kind": "scale",
                 "title": "Observed minus modeled temperature",
@@ -886,13 +877,13 @@
                 "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.xml"
               },
               "falseColor": true,
-              "qualification": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span −10 to +10 K. Observations cover 2009–2022 within ±70°; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity."
+              "qualification": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span −10 to +10 K. Observations cover 2009–2022 within ±70°; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
+              "notes": "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span −10 to +10 K. Observations cover 2009–2022 within ±70°; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
+              "noData": true
             },
             {
               "id": "rock-abundance",
               "label": "Rock abundance",
-              "description": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009–2022 at slope-adjusted midnight. Colors span 0–2%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond ±70°. This estimates rock area, not individual boulder counts.",
-              "title": "LRO Diviner GHRM: rock abundance",
               "thumbnail": "moon-lens-rock-abundance.webp",
               "surface": "moon-rock-abundance.webp",
               "poles": "moon-poles-rock-abundance.webp",
@@ -900,8 +891,6 @@
                 "id": "diviner-ghrm-ra_sam-compact",
                 "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img"
               },
-              "detail": "Rock area",
-              "summary": "Modeled rock-area fraction from 2009–2022 Diviner observations at slope-adjusted midnight, within ±70°. Gray grid marks missing or physically invalid values. This estimates rock area, not individual boulder counts.",
               "legend": {
                 "kind": "scale",
                 "title": "Surface rock area",
@@ -948,13 +937,13 @@
                 "sourceUrl": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.xml"
               },
               "falseColor": true,
-              "qualification": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009–2022 at slope-adjusted midnight. Colors span 0–2%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond ±70°. This estimates rock area, not individual boulder counts."
+              "qualification": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009–2022 at slope-adjusted midnight. Colors span 0–2%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond ±70°. This estimates rock area, not individual boulder counts.",
+              "notes": "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009–2022 at slope-adjusted midnight. Colors span 0–2%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond ±70°. This estimates rock area, not individual boulder counts.",
+              "noData": true
             },
             {
               "id": "topography",
               "label": "Elevation",
-              "description": "Numeric LOLA elevation above a 1,737.4 km reference sphere. Colors represent −12 to +12 km; this gridded laser-altimetry product includes interpolation and does not displace the globe or represent current illumination.",
-              "title": "LOLA LDEM16 elevation model",
               "thumbnail": "moon-lens-topography.webp",
               "surface": "moon-topography.webp",
               "poles": "moon-poles-topography.webp",
@@ -962,8 +951,6 @@
                 "id": "lro-lola-ldem16-numeric",
                 "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img"
               },
-              "detail": "Numeric elevation",
-              "summary": "Colors show height above or below a 1,737.4 km sphere. Shading reveals slopes in the archived laser-altimeter measurements.",
               "legend": {
                 "kind": "scale",
                 "title": "Elevation above reference sphere",
@@ -1010,13 +997,12 @@
                 "sourceUrl": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
               },
               "falseColor": true,
-              "qualification": "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere"
+              "qualification": "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere",
+              "notes": "Numeric LOLA elevation above a 1,737.4 km reference sphere. Colors represent −12 to +12 km; this gridded laser-altimetry product includes interpolation and does not displace the globe or represent current illumination."
             },
             {
               "id": "crust",
               "label": "Crust",
-              "description": "Crustal thickness inferred from GRAIL gravity and lunar topography under assumed crust and mantle densities. This is an interior model shown with shaded relief, not a direct observation of the crust.",
-              "title": "Crustal-thickness model",
               "thumbnail": "moon-lens-crust.webp",
               "surface": "moon-crust.webp",
               "poles": "moon-poles-crust.webp",
@@ -1024,8 +1010,6 @@
                 "id": "nasa-grail-crustal-thickness",
                 "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg"
               },
-              "detail": "Thickness",
-              "summary": "Thickness is inferred from gravity and topography. The result depends on assumed rock densities, not direct underground imaging.",
               "legend": {
                 "kind": "scale",
                 "title": "Relative crustal thickness",
@@ -1364,13 +1348,12 @@
                 "sourceUrl": "https://svs.gsfc.nasa.gov/4014/"
               },
               "falseColor": true,
-              "qualification": "NASA GRAIL crustal-thickness map with shaded relief"
+              "qualification": "NASA GRAIL crustal-thickness map with shaded relief",
+              "notes": "Crustal thickness inferred from GRAIL gravity and lunar topography under assumed crust and mantle densities. This is an interior model shown with shaded relief, not a direct observation of the crust."
             },
             {
               "id": "silicate-signature",
               "label": "Silicate signature",
-              "description": "Diviner measures a thermal-infrared emissivity peak related to silicate composition. This 2021 map corrects viewing geometry and space weathering. Colors span 8.0–8.5 µm; values outside that range share endpoint colors. This is a composition proxy, not mineral abundance; residual topographic effects remain, especially above 50° latitude. Gray grid marks missing observations and latitudes beyond ±70°.",
-              "title": "Diviner Christiansen feature, 2009–2016",
               "thumbnail": "moon-lens-silicate-signature.webp",
               "surface": "moon-silicate-signature.webp",
               "poles": "moon-poles-silicate-signature.webp",
@@ -1378,7 +1361,6 @@
                 "id": "lro-diviner-christiansen-feature",
                 "url": "https://zenodo.org/records/4558194"
               },
-              "detail": "Composition proxy",
               "legend": {
                 "kind": "scale",
                 "title": "Christiansen-feature wavelength",
@@ -1425,13 +1407,13 @@
                 "sourceUrl": "https://zenodo.org/records/4558194"
               },
               "falseColor": true,
-              "qualification": "Diviner Christiansen-feature wavelength with improved viewing-geometry and space-weathering corrections; composition proxy within ±70° latitude"
+              "qualification": "Diviner Christiansen-feature wavelength with improved viewing-geometry and space-weathering corrections; composition proxy within ±70° latitude",
+              "notes": "Diviner measures a thermal-infrared emissivity peak related to silicate composition. This 2021 map corrects viewing geometry and space weathering. Colors span 8.0–8.5 µm; values outside that range share endpoint colors. This is a composition proxy, not mineral abundance; residual topographic effects remain, especially above 50° latitude. Gray grid marks missing observations and latitudes beyond ±70°.",
+              "noData": true
             },
             {
               "id": "geology",
               "label": "Geology",
-              "description": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale.",
-              "title": "USGS unified global geology (2020 v2)",
               "thumbnail": "moon-lens-geology.webp",
               "surface": "moon-geology.webp",
               "poles": "moon-poles-geology.webp",
@@ -1439,7 +1421,6 @@
                 "id": "usgs-moon-geologic-units-grid",
                 "url": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020"
               },
-              "detail": "Mapped units",
               "legend": {
                 "kind": "categories",
                 "title": "Geologic units",
@@ -1693,7 +1674,8 @@
                 "sourceUrl": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020"
               },
               "falseColor": true,
-              "qualification": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale."
+              "qualification": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale.",
+              "notes": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale."
             }
           ]
         },
@@ -2211,10 +2193,10 @@
       "redistribution": "Prepared shell content with source provenance.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "ebccc20d6f7f238fad5aca33df03e2763cfa63eabee7ed6503a0c3da56330375",
-      "bytes": 36485,
+      "sha256": "7ab905836804b5f16347c9a1a05db64f3f059659506c38bd9f952679521406f5",
+      "bytes": 34535,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2423,8 +2405,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "LROC WAC global morphologic mosaic v1.3, 32 pixels/degree, mapped to the 1,737.4 km lunar reference sphere.",
-        "LROC WAC 643 nm photography, mapped from observations in 2009–2011. Crater shadows are part of the photographs; the Shadows control adds scene lighting. Gray grid marks missing data. Brightness is adjusted for display."
+        "LROC WAC global morphologic mosaic v1.3, 32 pixels/degree, mapped to the 1,737.4 km lunar reference sphere."
       ],
       "lensIds": [
         "surface"
@@ -2480,7 +2461,6 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009–2022. Colors span 80–140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond ±70°. This combines many nights; it is not a current temperature map.",
         "False-color bolometric temperature fitted to local midnight from Diviner observations in 2009–2022. Colors span 80–140 K, with endpoint colors beyond that range. Gray grid marks missing data and latitudes beyond ±70°. This combines many nights; it is not a current temperature map."
       ],
       "lensIds": [
@@ -2537,7 +2517,6 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span −10 to +10 K. Observations cover 2009–2022 within ±70°; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity.",
         "False-color difference between Diviner bolometric temperature at slope-adjusted midnight and a model of typical lunar soil. Blue is cooler and red warmer than the model; colors span −10 to +10 K. Observations cover 2009–2022 within ±70°; gray grid marks unavailable data. Residual terrain effects remain, and warm colors do not establish geothermal activity."
       ],
       "lensIds": [
@@ -2594,7 +2573,6 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009–2022 at slope-adjusted midnight. Colors span 0–2%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond ±70°. This estimates rock area, not individual boulder counts.",
         "Surface area covered by rocks, inferred with a rock-and-soil thermal model from Diviner observations in 2009–2022 at slope-adjusted midnight. Colors span 0–2%; larger fractions share the brightest color. Gray grid marks missing or physically invalid values and latitudes beyond ±70°. This estimates rock area, not individual boulder counts."
       ],
       "lensIds": [
@@ -2651,8 +2629,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere",
-        "Numeric LOLA elevation above a 1,737.4 km reference sphere. Colors represent −12 to +12 km; this gridded laser-altimetry product includes interpolation and does not displace the globe or represent current illumination."
+        "LRO LOLA LDEM16 numeric elevation above a 1,737.4 km sphere"
       ],
       "lensIds": [
         "topography"
@@ -2708,8 +2685,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "NASA GRAIL crustal-thickness map with shaded relief",
-        "Crustal thickness inferred from GRAIL gravity and lunar topography under assumed crust and mantle densities. This is an interior model shown with shaded relief, not a direct observation of the crust."
+        "NASA GRAIL crustal-thickness map with shaded relief"
       ],
       "lensIds": [
         "crust"
@@ -2765,8 +2741,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Diviner Christiansen-feature wavelength with improved viewing-geometry and space-weathering corrections; composition proxy within ±70° latitude",
-        "Diviner measures a thermal-infrared emissivity peak related to silicate composition. This 2021 map corrects viewing geometry and space weathering. Colors span 8.0–8.5 µm; values outside that range share endpoint colors. This is a composition proxy, not mineral abundance; residual topographic effects remain, especially above 50° latitude. Gray grid marks missing observations and latitudes beyond ±70°."
+        "Diviner Christiansen-feature wavelength with improved viewing-geometry and space-weathering corrections; composition proxy within ±70° latitude"
       ],
       "lensIds": [
         "silicate-signature"
@@ -2822,7 +2797,6 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale.",
         "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale."
       ],
       "lensIds": [
@@ -3293,7 +3267,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -3305,8 +3279,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5806,
-          "sha256": "69a7e54cc3a25d0a14acfd3c76cfe88cd7afb3e83d2da265803ba0963a1241c2",
+          "bytes": 5643,
+          "sha256": "b018459780b93bdfcafc625dab2a2d7f58708958532f71909a65568677415c64",
           "verification": "bytes-verified"
         }
       ],

@@ -64,11 +64,6 @@
           "sha256": "dc1fc577d409d2f6f06ce5036bab7ae0c278a8e855fe966ad91e5718dbde2168"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "bf0066203c4bcf68ffc47a1d97a67c8b02bbce800fdb5cb8fb5e8cad23305bb8"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "9e2792a34c7d24fde10b4b211eb34b8993e28cf4eedd8aeb270decbf15312f5b"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0044325414876942,
-      "description": "Explore Penthesilea in 3D with its published shape model and radial elevation.",
+      "description": "Very dark main-belt asteroid, discovered in October 1887.",
       "systemName": "Solar System",
       "order": 347,
       "context": {

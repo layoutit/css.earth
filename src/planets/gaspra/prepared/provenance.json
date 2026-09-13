@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "gaspra",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ac7b877fbb3f64a106703e844966ed295356c7d6b71b279046ef2203ded93bc3"
+    "sha256": "6a58bc2de2707b36ac30ba7e2f80bbe368f7a8e23e616133ccb7f1a6c0c74d75"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -241,7 +241,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3609f1150269c46ced3e4175b8e19dfeb37b470f0d88e9a7e7a4666b755535cb",
+      "sha256": "89eace3af6e5324588de7c0db95fce55e61383596d34a77b2a9e7329c313fb08",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,7 +265,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Galileo photographed Gaspra in 1991, making it the first asteroid visited by a spacecraft.",
           "facts": [
             {
               "id": "radius",
@@ -311,8 +310,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Galileo’s highest-resolution pair, 107318313 and 107318326, mapped onto the Thomas shape. The source is high-pass filtered and retains photographed illumination; it is not calibrated albedo or natural color. Best original detail is approximately 55 m/pixel and varies greatly. The gray grid marks poor or missing coverage. Shadows adds approximate fixed-epoch Sun lighting.",
-              "title": "SSI monochrome mosaic",
               "thumbnail": "/scenes/gaspra/gaspra-normal-thumbnail.webp",
               "surface": "gaspra-normal-surface@2x.webp",
               "poles": "gaspra-normal-surface@2x.webp",
@@ -321,14 +318,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Galileo SSI",
-              "summary": "Photographed shadows and seams remain after mapping the images onto the shape. The gray grid marks poor or missing data."
+              "notes": "Galileo’s highest-resolution pair, 107318313 and 107318326, mapped onto the Thomas shape. The source is high-pass filtered and retains photographed illumination; it is not calibrated albedo or natural color. Best original detail is approximately 55 m/pixel and varies greatly. The gray grid marks poor or missing coverage. Shadows adds approximate fixed-epoch Sun lighting.",
+              "noData": true
             },
             {
               "id": "calibrated",
               "label": "SSI reflectance",
-              "description": "These Galileo close-ups cover opposite ends of Gaspra. They were taken through a clear filter and show the sunlight and shadows from the flyby. The grid marks areas without usable photographs.",
-              "title": "Calibrated Galileo photographs",
               "thumbnail": "/scenes/gaspra/gaspra-calibrated-thumbnail.webp",
               "surface": "gaspra-calibrated-surface@2x.webp",
               "poles": "gaspra-calibrated-surface@2x.webp",
@@ -337,8 +332,6 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Galileo SSI",
-              "summary": "These Galileo close-ups cover opposite ends of Gaspra. They were taken through a clear filter and show the sunlight and shadows from the flyby. The grid marks areas without usable photographs.",
               "facts": [
                 {
                   "id": "images",
@@ -350,13 +343,13 @@
                   "label": "Image scale",
                   "value": "54 m/pixel"
                 }
-              ]
+              ],
+              "notes": "These Galileo close-ups cover opposite ends of Gaspra. They were taken through a clear filter and show the sunlight and shadows from the flyby. The grid marks areas without usable photographs.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows the published shape radius minus a 6.1 km reference sphere, including Gaspra’s broad irregular shape. This is shape-derived height, not gravitational elevation or a photographic observation. Shape constraints vary with the flyby coverage; unseen regions are less certain. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/gaspra/gaspra-elevation-thumbnail.webp",
               "surface": "gaspra-elevation-surface@2x.webp",
               "poles": "gaspra-elevation-surface@2x.webp",
@@ -378,8 +371,7 @@
                 "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab",
                 "image": "/scenes/gaspra/gaspra-elevation-legend.webp"
               },
-              "detail": "PDS",
-              "summary": "Height relative to a 6.1 km sphere, including Gaspra's broad shape. The unseen side is less certain."
+              "notes": "Color shows the published shape radius minus a 6.1 km reference sphere, including Gaspra’s broad irregular shape. This is shape-derived height, not gravitational elevation or a photographic observation. Shape constraints vary with the flyby coverage; unseen regions are less certain. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting."
             }
           ]
         },
@@ -550,7 +542,7 @@
       "sha256": "7dc37fa0ab91303f1875b2e4293aa420727d67d9479d63fc1e9e680e26ec02e1",
       "bytes": 262080,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -606,7 +598,7 @@
       "sha256": "ec751b328485ad20e9625395d7634e7f75c7167c615357b03cb8c94d3d6590b0",
       "bytes": 527072,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -657,7 +649,7 @@
       "sha256": "5b6a64135b22c8431ec91f0b3cb8f2cb24e6509edcb2ad4df56bcabdfa07ccc6",
       "bytes": 2563200,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -694,7 +686,7 @@
       "sha256": "53ef20427179844ab1bfc6fcc66395ba78e949244cd2b614a482ddf6fe1a3301",
       "bytes": 9633,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -731,7 +723,7 @@
       "sha256": "0cb9e6bccee046cc5838760072410efc2d2a665b39cce142577db4699647bea6",
       "bytes": 1152,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -768,7 +760,7 @@
       "sha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee",
       "bytes": 8616,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -805,7 +797,7 @@
       "sha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652",
       "bytes": 9964,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -842,7 +834,7 @@
       "sha256": "ec66eee211c1b1f3de267375f976b01517365bacd7b22e4eb9842713c2e9541d",
       "bytes": 645120,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -879,7 +871,7 @@
       "sha256": "dd3e14be6e822c73bd3efbda58e5cb586b0654dfde8da58e9a19c0d306c2e792",
       "bytes": 10480,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -916,7 +908,7 @@
       "sha256": "d38c32fca409f5ceb2c51da96a9bc8fe58e3fcabe7168b52e23886fadcf71654",
       "bytes": 35828,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -953,7 +945,7 @@
       "sha256": "55be9710b892ce9a79464f42cf358bb2bc4e583231affa557e61a818b3ab6dc9",
       "bytes": 9120,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -992,7 +984,7 @@
       "sha256": "33c2768822732f79334f80fba161f86aacc27d3c70de3a4cce2315789b3d9f8e",
       "bytes": 2563200,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1029,7 +1021,7 @@
       "sha256": "cd2bf7b4bee1f6e2896082dfb78eabe574d62b6880d3fef2d8ec85dd3647c59b",
       "bytes": 9633,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1066,7 +1058,7 @@
       "sha256": "89e3fe56ef9eddb0e7a2bd1af0a8be0d0ca6ebf92b661fbdf070283e1b6cab00",
       "bytes": 645120,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1103,7 +1095,7 @@
       "sha256": "f411a08eb9d4a918e4f9feb6a5929366ffd51cee0654c5de3ccc61be184bf9f3",
       "bytes": 10480,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1148,7 +1140,7 @@
       "sha256": "6cf5b5780d9bcbab552bc7e8b5b7f83d31532b082c76d5d521f565024a4b050d",
       "bytes": 579,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1156,7 +1148,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1165,10 +1157,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3609f1150269c46ced3e4175b8e19dfeb37b470f0d88e9a7e7a4666b755535cb",
-      "bytes": 11333,
+      "sha256": "89eace3af6e5324588de7c0db95fce55e61383596d34a77b2a9e7329c313fb08",
+      "bytes": 10536,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1188,7 +1180,7 @@
       "sha256": "61c8b4787b3d0fdd7587690eac12243cdea76018599f898dc2e40c34429d7c78",
       "bytes": 1005,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1214,7 +1206,7 @@
       "sha256": "f4f3eb723f28d36a45690f0ff0a5be07b5ae42a4c52d36bc55506a03936a582f",
       "bytes": 125910,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1241,7 +1233,7 @@
       "sha256": "d7e2f54918ea9f280437edf5ebd10a617c6fd23307f04b1b9670f77b5df71a7d",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1268,7 +1260,7 @@
       "sha256": "2852ee8636662b09f0592a21b1fe443d68903803e5b8ba5a61eb29642f2f826c",
       "bytes": 925,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1281,9 +1273,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "Galileo’s highest-resolution pair, 107318313 and 107318326, mapped onto the Thomas shape. The source is high-pass filtered and retains photographed illumination; it is not calibrated albedo or natural color. Best original detail is approximately 55 m/pixel and varies greatly. The gray grid marks poor or missing coverage. Shadows adds approximate fixed-epoch Sun lighting."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1317,13 +1307,13 @@
           "url": "/scenes/gaspra/gaspra-normal-thumbnail.webp",
           "bytes": 2838,
           "sha256": "9d16c2204a5422ea2e49e280d8cce1a30fe927497a2ecda5636d8fc32f47fe21",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gaspra/gaspra-normal-surface@2x.webp",
           "bytes": 730366,
           "sha256": "a6b1a834966a7617971f77026a79091f603d0921bc14b5def2d179ed89dec175",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1335,9 +1325,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows the published shape radius minus a 6.1 km reference sphere, including Gaspra’s broad irregular shape. This is shape-derived height, not gravitational elevation or a photographic observation. Shape constraints vary with the flyby coverage; unseen regions are less certain. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1355,19 +1343,19 @@
           "url": "/scenes/gaspra/gaspra-elevation-thumbnail.webp",
           "bytes": 5142,
           "sha256": "9550dd773d53982d62217e1dc8ab4a917e79c9d97514c42d7778301cc499ceea",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gaspra/gaspra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gaspra/gaspra-elevation-surface@2x.webp",
           "bytes": 271424,
           "sha256": "6f5395308515087e9da6cd09c692fb85f8383973e59ed6589393823ef51c5a5c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1379,9 +1367,7 @@
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "These Galileo close-ups cover opposite ends of Gaspra. They were taken through a clear filter and show the sunlight and shadows from the flyby. The grid marks areas without usable photographs."
-      ],
+      "limitations": [],
       "lensIds": [
         "calibrated"
       ],
@@ -1413,13 +1399,13 @@
           "url": "/scenes/gaspra/gaspra-calibrated-thumbnail.webp",
           "bytes": 1904,
           "sha256": "d828f52f4ed0236ac12a5bf6ed313c3e034db1a54fbd35880b1f1195d6c72af4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
           "bytes": 241314,
           "sha256": "275b4e0fcf583e3f1b2c76cd6a8e95884024490ee7989a9f9debad5288ab5a85",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1430,7 +1416,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1442,8 +1428,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6806,
-          "sha256": "be3c52ab01acbf7dc33b8cf65ce85052f89cc7f69ad09576779d901b4930fa15",
+          "bytes": 6698,
+          "sha256": "f66a9ff9fbe48b2c0e989d2b7cd2e0788a941514d6e8117b105dc051d3323893",
           "verification": "bytes-verified"
         }
       ],
@@ -1479,7 +1465,7 @@
           "url": "/scenes/gaspra/gaspra-features.json",
           "bytes": 21659,
           "sha256": "4e01e935690ff39a4ca6a4517e7e70e7fafacf3a33bbb994bc53d1b7822cd4cc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -126,11 +126,6 @@
           "sha256": "e785f32c1c92fd76b190882b26294d7f77495ae099a61a9c08f7ed8f47c77337"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "c645fc7ae6391e7500d6d35870083c5d8f0e7e201d40f40c53351ce7e5ed3007"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "49d2308bd4d28ae21c042d35693552c2625a3ff310624a1cf4e55dae87669335"
@@ -175,7 +170,7 @@
       "classification": "satellite",
       "color": "#c6ac65",
       "distanceAu": 5.2,
-      "description": "Explore Io in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s volcanic moon and its orbit around Jupiter.",
+      "description": "The most volcanically active body in the solar system.",
       "systemName": "Solar System",
       "order": 426,
       "context": {

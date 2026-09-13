@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ida",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9aecce09675b1c36bdc1c6b733a456c2ef2f5f24fb6437c5687f365713081033"
+    "sha256": "845bcc0f5e2d60d89d0ed6c17dc2a2e827603cc3c73c4ea9da884c0fa66a4bb9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -241,7 +241,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6fd1aecbdc81935d450358f95b63085b15ff53c9799a860f68f32e7cc337f737",
+      "sha256": "e18ce2bd9cfb261a76356db3c65174fe7780f2e613b12be9eacbf168a622f6d9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -265,7 +265,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Galileo’s 1993 flyby revealed Ida’s cratered surface and its tiny moon Dactyl.",
           "facts": [
             {
               "id": "radius",
@@ -311,8 +310,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Thomas’s registered Galileo mosaic combines detailed images with a coarser background. Its high-pass processing reduces broad brightness differences but retains photographed shading and seams; it is not calibrated albedo. Source sampling varies greatly. Gray grid marks source-defined unprojectable surfaces. Shadows adds approximate fixed-epoch Sun lighting.",
-              "title": "SSI monochrome mosaic",
               "thumbnail": "/scenes/ida/ida-normal-thumbnail.webp",
               "surface": "ida-normal-surface@2x.webp",
               "poles": "ida-normal-surface@2x.webp",
@@ -321,14 +318,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Galileo SSI",
-              "summary": "Photographed shadows remain and detail varies across the mosaic. Brightness is not calibrated reflectance; the grid marks gaps."
+              "notes": "Thomas’s registered Galileo mosaic combines detailed images with a coarser background. Its high-pass processing reduces broad brightness differences but retains photographed shading and seams; it is not calibrated albedo. Source sampling varies greatly. Gray grid marks source-defined unprojectable surfaces. Shadows adds approximate fixed-epoch Sun lighting.",
+              "noData": true
             },
             {
               "id": "calibrated",
               "label": "SSI reflectance",
-              "description": "These two Galileo photographs show overlapping parts of Ida’s surface. Both were taken through a green filter. The original sunlight and shadows remain visible; the grid marks areas without usable photographs.",
-              "title": "Calibrated Galileo photographs",
               "thumbnail": "/scenes/ida/ida-calibrated-thumbnail.webp",
               "surface": "ida-calibrated-surface@2x.webp",
               "poles": "ida-calibrated-surface@2x.webp",
@@ -337,8 +332,6 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Galileo SSI",
-              "summary": "These two Galileo photographs show overlapping parts of Ida’s surface. Both were taken through a green filter. The original sunlight and shadows remain visible; the grid marks areas without usable photographs.",
               "facts": [
                 {
                   "id": "images",
@@ -350,13 +343,13 @@
                   "label": "Image scale",
                   "value": "111–170 m/pixel"
                 }
-              ]
+              ],
+              "notes": "These two Galileo photographs show overlapping parts of Ida’s surface. Both were taken through a green filter. The original sunlight and shadows remain visible; the grid marks areas without usable photographs.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows source radius minus a 16 km reference sphere, including Ida’s broad irregular shape. This is radial height, not gravitational elevation. Brightness adds cartographic relief derived from the 2° shape grid; the displayed silhouette is simplified. Shadows adds approximate fixed-epoch Sun lighting.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/ida/ida-elevation-thumbnail.webp",
               "surface": "ida-elevation-surface@2x.webp",
               "poles": "ida-elevation-surface@2x.webp",
@@ -378,8 +371,8 @@
                 "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab",
                 "image": "/scenes/ida/ida-elevation-legend.webp"
               },
-              "detail": "PDS",
-              "summary": "Height relative to a 16 km sphere, from the shape model. Colors include Ida's broad form; the outline is simplified."
+              "notes": "Color shows source radius minus a 16 km reference sphere, including Ida’s broad irregular shape. This is radial height, not gravitational elevation. Brightness adds cartographic relief derived from the 2° shape grid; the displayed silhouette is simplified. Shadows adds approximate fixed-epoch Sun lighting.",
+              "noData": true
             }
           ]
         },
@@ -548,7 +541,7 @@
       "sha256": "f54c5cb55c6b6577dcfa64befa50367c3d3a6e0e75be6c2405495678a09559d7",
       "bytes": 3179520,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -606,7 +599,7 @@
       "sha256": "44a3a6752ce6bd34a4796485144429dc3d7cd9d2c7a6409636348f30876c95df",
       "bytes": 527072,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -657,7 +650,7 @@
       "sha256": "172489ebbefee3c7c1a1630d7c72fc7269b7de5c38459eedc2450e5c2dbd0d8f",
       "bytes": 2563200,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -694,7 +687,7 @@
       "sha256": "16cf058e26018e77098c2c3aca9ee92a25a8eeb029eba04c942051773a25bfed",
       "bytes": 12912,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -731,7 +724,7 @@
       "sha256": "af8478f44f435e9e38c2cf82de05a910082aef34f730c503a9eb2236b4dc413a",
       "bytes": 4320,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -768,7 +761,7 @@
       "sha256": "7b95b9bb6272cce8d831ef8ac35f94d5dc2cd0413bba07de0bfda9d28587ba13",
       "bytes": 8830,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -805,7 +798,7 @@
       "sha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652",
       "bytes": 9964,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -842,7 +835,7 @@
       "sha256": "f80c9991b7ed9f81ebefddf71a0a37f53ee499b1658ba1bd909895f8d393bb16",
       "bytes": 645120,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -879,7 +872,7 @@
       "sha256": "35ea4cf95507fdf3d9c5de4f245c9494c69e6753bbb5168933993d6df3a51750",
       "bytes": 10480,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -916,7 +909,7 @@
       "sha256": "bb373b59c8fd72325d61167cf7af67f1e69d3dea7c8b8919ee9ba1b07cb7cb47",
       "bytes": 23270,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -953,7 +946,7 @@
       "sha256": "f2ff4a49703b6e1d9b8be59f866f149d5b5f9a926e239ee3a546215eb208f441",
       "bytes": 9760,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -992,7 +985,7 @@
       "sha256": "1ff454dd43d90c53bb0523dd258f7870e0d1f9cf2d5de41b6002fa6f2bd59886",
       "bytes": 2563200,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1029,7 +1022,7 @@
       "sha256": "9f768a86363250f11a288cf587e2813df7b8df7273d32b6bbc60196caaa461df",
       "bytes": 12909,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1066,7 +1059,7 @@
       "sha256": "b8c6440f6e2b96ab139e9093ed2a88b6a7e41d1ff3b531405b5f2880e942d4a1",
       "bytes": 645120,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1103,7 +1096,7 @@
       "sha256": "2899b9d445d1947dc0ab1b852cf80a32d0198e6c59531ea8c885e17a4799a82c",
       "bytes": 10480,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1142,7 +1135,7 @@
       "sha256": "99f9e82b31e460a3f94f445a20d08a71bcae183cfa2d8d1b8210b54afc17c722",
       "bytes": 589,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1150,7 +1143,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1159,10 +1152,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6fd1aecbdc81935d450358f95b63085b15ff53c9799a860f68f32e7cc337f737",
-      "bytes": 8659,
+      "sha256": "e18ce2bd9cfb261a76356db3c65174fe7780f2e613b12be9eacbf168a622f6d9",
+      "bytes": 7852,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1182,7 +1175,7 @@
       "sha256": "d96ef7584c4b486ea702c078aa810d462de615c754769927bc5f88907f928783",
       "bytes": 990,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1208,7 +1201,7 @@
       "sha256": "0e34dd48b84100fdcac5380daa1351d482d6a3aba6babdec989215eafaeedf3b",
       "bytes": 102286,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1235,7 +1228,7 @@
       "sha256": "09dd7bb976ffd672491c6a67a0a135b6cb78be58571ffe2926048a63426bd19b",
       "bytes": 150,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1262,7 +1255,7 @@
       "sha256": "5e082892cc749c1ed62f02f8982494cdc78926ed5b19aa4db2256dc787dcdcca",
       "bytes": 1458,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1275,9 +1268,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "Thomas’s registered Galileo mosaic combines detailed images with a coarser background. Its high-pass processing reduces broad brightness differences but retains photographed shading and seams; it is not calibrated albedo. Source sampling varies greatly. Gray grid marks source-defined unprojectable surfaces. Shadows adds approximate fixed-epoch Sun lighting."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1311,13 +1302,13 @@
           "url": "/scenes/ida/ida-normal-thumbnail.webp",
           "bytes": 3264,
           "sha256": "b895e1c40342f4cf5596adea903f2a73ac217a8c463707443d9e8ceabfaadfaf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ida/ida-normal-surface@2x.webp",
           "bytes": 1595416,
           "sha256": "875d7fcb87eb012dfe02bcf19b91c00b8c0593f793a16f8eff919e24ea81bf96",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1329,9 +1320,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows source radius minus a 16 km reference sphere, including Ida’s broad irregular shape. This is radial height, not gravitational elevation. Brightness adds cartographic relief derived from the 2° shape grid; the displayed silhouette is simplified. Shadows adds approximate fixed-epoch Sun lighting."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1349,19 +1338,19 @@
           "url": "/scenes/ida/ida-elevation-thumbnail.webp",
           "bytes": 5744,
           "sha256": "8599e109b2ab1d6e7e2311c0292eb7dbc229031eb7a0a76a8d0521f7d3181158",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ida/ida-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ida/ida-elevation-surface@2x.webp",
           "bytes": 327638,
           "sha256": "424be56e7d03996a3d92386268b158a50735c842bcf6817cd80d9266364a2736",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1373,9 +1362,7 @@
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "These two Galileo photographs show overlapping parts of Ida’s surface. Both were taken through a green filter. The original sunlight and shadows remain visible; the grid marks areas without usable photographs."
-      ],
+      "limitations": [],
       "lensIds": [
         "calibrated"
       ],
@@ -1407,13 +1394,13 @@
           "url": "/scenes/ida/ida-calibrated-thumbnail.webp",
           "bytes": 1818,
           "sha256": "9c00f26ecd53ada325d85569652390939652f0f3f48d484d5cce823e0d71569b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ida/ida-calibrated-surface@2x.webp",
           "bytes": 284340,
           "sha256": "44d892c3bd93890e84137da144dd0e16d2dd74f38aac76a2e3f4710da4dbe56f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1424,7 +1411,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1436,8 +1423,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4196,
-          "sha256": "768d6272fdda361c5541c59f2bcb52a5b619bfb5bb72619b3b24bb2d220a220a",
+          "bytes": 4096,
+          "sha256": "8ecb5df70dae24bdf41e3705e06e14d41ff0fd07d49224a00ffce055e12624ea",
           "verification": "bytes-verified"
         }
       ],
@@ -1473,7 +1460,7 @@
           "url": "/scenes/ida/ida-features.json",
           "bytes": 17376,
           "sha256": "a71ff26df77fdf1096320ada02799da0036618e7f67b2706b34f0b020d98b538",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

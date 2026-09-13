@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c4699c42227b4866eb1a0aad8a184041a45ffe20214e9fb06acba92c73fa0145"
+    "sha256": "797114d4950f227ac2cf7b0b3fc67b789b36cd6b8c3da8b40c7411cab61bee48"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -129,14 +129,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f5fd068fb26185a5962ccdd66d47f5d690068e13e67ee53563113e66ea3a2801",
+      "sha256": "8514d2b7599f63288f07ad7e4f5f587defa282096886b9e74ee4f414c2eef18c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "umbriel",
         "displayName": "Umbriel",
         "panel": {
-          "introduction": "Umbriel is a dark, heavily cratered moon of Uranus. Voyager 2 revealed an ancient surface and a striking bright ring at the crater Wunda.",
           "facts": [
             {
               "id": "radius",
@@ -211,9 +210,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
-              "title": "Monochrome mosaic",
-              "detail": "Corrected mosaic",
               "thumbnail": "umbriel-lens-normal.webp",
               "surface": "umbriel-normal.webp",
               "poles": "umbriel-poles-normal.webp",
@@ -222,7 +218,8 @@
                 "path": "../manifest.json",
                 "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
               },
-              "summary": "Illumination is corrected, but photographed terrain shadows and seams remain. The gray grid marks missing observations."
+              "notes": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
+              "noData": true
             }
           ]
         },
@@ -437,10 +434,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "f5fd068fb26185a5962ccdd66d47f5d690068e13e67ee53563113e66ea3a2801",
-      "bytes": 7897,
+      "sha256": "8514d2b7599f63288f07ad7e4f5f587defa282096886b9e74ee4f414c2eef18c",
+      "bytes": 7536,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -555,9 +552,7 @@
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1027,7 +1022,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1039,8 +1034,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5823,
-          "sha256": "64a1ea01b9ba0709d871e20726fd9446df0284f2d6e619026dac7dd9e00da1b3",
+          "bytes": 5668,
+          "sha256": "1f0362524e2169938cc80cb602bf026d751774f32d126a5bc130dcedd1daaef4",
           "verification": "bytes-verified"
         }
       ],

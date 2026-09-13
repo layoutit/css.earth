@@ -64,11 +64,6 @@
           "sha256": "afce9256efee908a8071b5ca8dd7fa707ba9ea4c5e55b45a607196d88bf7b7ac"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "22050c1b9a2cda3e31db33b485041c32ad8d888cf7fe91f2133188103caedd5f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "36389d6e35a559effa2ebf2eded163ce73b372fb5b1fa23f50ee878d0e1e4949"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.245645513766084,
-      "description": "Explore Geographos in 3D with its published radar shape model.",
+      "description": "Near-Earth asteroid about two and a half times as long as it is wide.",
       "systemName": "Solar System",
       "order": 204,
       "context": {

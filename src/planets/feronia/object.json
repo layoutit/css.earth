@@ -64,11 +64,6 @@
           "sha256": "d701d957ff184b7469f1bc1575fe392db6f0530c102be662b671ebeee02e0306"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "e6c1c8b74983a1fe3fe09bcd155741b3964b5b36b4bfb86073bdb8ea08e672f1"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "31cc5f8534fe2028dc0b07b8ce7322271eab5c8d035ff27503f9f9ebae4e816b"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.265860062248244,
-      "description": "Explore Feronia in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in May 1861.",
       "systemName": "Solar System",
       "order": 242,
       "context": {

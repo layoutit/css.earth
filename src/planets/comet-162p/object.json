@@ -31,11 +31,6 @@
           "sha256": "aefce7f25e640fb7def61e21e5c285298f09c4f764b00d06f3fac8d5139dc407"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "7ca742050201aca7ea963b489e00cafaf28d1b057dfc81245105059472076ed5"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "7990b8c45561dfda4766948bf789b0f25beef10e3682a5f709c5f3fbd4a3d775"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.091276774723207,
-      "description": "Explore 162P/Siding Spring through a shape approximation based on published lightcurve models.",
+      "description": "Large, elongated comet that turns once in about 33 hours.",
       "systemName": "Solar System",
       "order": 75,
       "context": {

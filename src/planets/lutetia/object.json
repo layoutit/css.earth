@@ -70,11 +70,6 @@
           "sha256": "752e82f216ab3ee72f9f72573809300769270c78fc7d277b55f9cdfbec9077e6"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "129ad2a311627bb980eb760213e7680343ea05773eccc086968bccb2c45706b4"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "66b61e0c640562a0355f525012460c85856f1710da801f2882a3439c0d6aaeed"
@@ -141,7 +136,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.435,
-      "description": "Explore Lutetia with its Rosetta shape model and source-derived elevation.",
+      "description": "Irregular asteroid that Rosetta flew past.",
       "systemName": "Solar System",
       "order": 133,
       "context": {

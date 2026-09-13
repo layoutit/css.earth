@@ -31,11 +31,6 @@
           "sha256": "2fc13006524d12d2dffbe4c628a238f62a0e0c21cf2cdf4211c26681e5206953"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "3cddbae9dbfc2ae02a0c2e231fc044ac63053391a9c583e7c9e81083ff841553"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "03e2c015ff4301279014265ba479247a51090d3c44300e9b54bd0c7107cba8fa"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Ijiraq, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Inuit-group moon of Saturn with a shallow light curve.",
       "systemName": "Solar System",
       "order": 33,
       "context": {

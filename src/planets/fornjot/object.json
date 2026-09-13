@@ -31,11 +31,6 @@
           "sha256": "cadbc43142ba39b0d28a62c5c14ee54260b5bc9bacc350ec8c0e6e4a56faab1b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "de5542525722aceb24d56bb569f60980ed5dc999c69e1161811fd258f8cbd7d0"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "ecb159757686a5acc6c73892157a61489ca8d53609b856b7929b9bc1cea45209"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Fornjot, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Norse-group moon of Saturn whose spin rate is still uncertain.",
       "systemName": "Solar System",
       "order": 42,
       "context": {

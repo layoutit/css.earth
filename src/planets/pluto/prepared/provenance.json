@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ebb75ac39498edc98cdfcd4929cbf3c16d9f3cee4e16b2ac571a47f807cf8529"
+    "sha256": "411c601aca47df99feea08d6856f4f4548fd95b06ef51a3e1ea3937a1dbee904"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -155,7 +155,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "924a299604725b552468ce335eb075a2d15b99c94c30082f2329ded994c6f599",
+      "sha256": "288adc5834256004a78b31fe4dda6ceb93e814085512326891d046846fdab977",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -181,7 +181,6 @@
         "panel": {
           "schema": "cssearth-prepared-panel@1",
           "planetId": "pluto",
-          "introduction": "Pluto is an icy dwarf planet in the Kuiper Belt. New Horizons revealed mountains, glaciers, and a heart-shaped plain during its 2015 flyby.",
           "facts": [
             {
               "id": "distance-from-sun",
@@ -302,8 +301,6 @@
             {
               "id": "surface",
               "label": "Visible color",
-              "description": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
-              "title": "MVIC color mosaic",
               "thumbnail": "pluto-lens-surface.webp",
               "surface": "pluto-surface.webp",
               "poles": "pluto-poles-surface.webp",
@@ -311,16 +308,14 @@
                 "id": "surface-pluto-color-mosaic-jpg",
                 "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/l/pluto_color_mapmosaic.jpg?crop=faces%2Cfocalpoint&fit=clip&h=2963&w=5926"
               },
-              "detail": "Color mosaic",
-              "summary": "Color observations cover only part of the surface, with detail varying by region. The gray grid marks missing imagery.",
               "falseColor": false,
-              "qualification": "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
+              "qualification": "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
+              "notes": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
+              "noData": true
             },
             {
               "id": "topography",
               "label": "Elevation",
-              "description": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
-              "title": "Stereo elevation map",
               "thumbnail": "pluto-lens-topography.webp",
               "surface": "pluto-topography.webp",
               "poles": "pluto-poles-topography.webp",
@@ -328,8 +323,6 @@
                 "id": "lenses-pluto-dem-tif",
                 "url": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
               },
-              "detail": "Stereo relief",
-              "summary": "Colors span heights from −8 to +8 km, with shading to reveal slopes. The gray grid marks areas without elevation data.",
               "legend": {
                 "kind": "scale",
                 "title": "Elevation",
@@ -366,13 +359,13 @@
                 "sourceUrl": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
               },
               "falseColor": true,
-              "qualification": "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data"
+              "qualification": "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+              "notes": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+              "noData": true
             },
             {
               "id": "monochrome",
               "label": "Monochrome",
-              "description": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
-              "title": "LORRI/MVIC mosaic",
               "thumbnail": "pluto-lens-monochrome.webp",
               "surface": "pluto-monochrome.webp",
               "poles": "pluto-poles-monochrome.webp",
@@ -380,10 +373,10 @@
                 "id": "lenses-pluto-monochrome-tif",
                 "url": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"
               },
-              "detail": "Photo mosaic",
-              "summary": "Images from LORRI and MVIC provide varying surface detail. The gray grid marks regions without imagery in this mosaic.",
               "falseColor": false,
-              "qualification": "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
+              "qualification": "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
+              "notes": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
+              "noData": true
             }
           ]
         },
@@ -673,10 +666,10 @@
       "redistribution": "Prepared shell content with source provenance.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "924a299604725b552468ce335eb075a2d15b99c94c30082f2329ded994c6f599",
-      "bytes": 11761,
+      "sha256": "288adc5834256004a78b31fe4dda6ceb93e814085512326891d046846fdab977",
+      "bytes": 11007,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -792,8 +785,7 @@
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
-        "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
-        "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
+        "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
       ],
       "lensIds": [
         "surface"
@@ -850,8 +842,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
-        "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data"
+        "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data"
       ],
       "lensIds": [
         "topography"
@@ -907,8 +898,7 @@
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
-        "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
-        "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
+        "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
       ],
       "lensIds": [
         "monochrome"
@@ -1379,7 +1369,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1391,8 +1381,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6098,
-          "sha256": "fd679cc7486dbfb2a2fe3fa03191134d10be2cf2c0fb29dde70c083ae88127b8",
+          "bytes": 5941,
+          "sha256": "a76ffb2d93f77c645130ddf786142ebe31af59f1b9fce81c52eb927b2b933439",
           "verification": "bytes-verified"
         }
       ],

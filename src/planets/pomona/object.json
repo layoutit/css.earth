@@ -64,11 +64,6 @@
           "sha256": "967a9d6d7fd3e1dceeaab7f9b8f90fa5858506b0ebce7395386ed6ab3b5c5f98"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f317d3615e653c3b9eac28f174185b7f01a762c04485e6d85321d8e27dc43d99"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "dbfc169cb398cacf06929f3a2cba1f491f3945f52c10d662cce5989dda2bd615"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.588787675965266,
-      "description": "Explore Pomona in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered on 26 October 1854.",
       "systemName": "Solar System",
       "order": 221,
       "context": {

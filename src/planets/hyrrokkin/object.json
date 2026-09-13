@@ -31,11 +31,6 @@
           "sha256": "ea85afc908334dc7eb329d13cb50e106a704840c51ece9cdc85df7ac22591f28"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "7f0bea4a85e50fde3e3255b7f175be1e6a5a0b159ed723a077cee5cb646dabe7"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "3a77455416b0bcf5def2cd574832ea1eccdbf79c99def71a6c4685d44f508404"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Hyrrokkin, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Norse-group moon of Saturn whose brightness peaks three times per turn.",
       "systemName": "Solar System",
       "order": 44,
       "context": {

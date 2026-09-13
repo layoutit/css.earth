@@ -64,11 +64,6 @@
           "sha256": "46de97e2376cd6f2540a1863ba2f70b79fbb983b692bccdfa8a2e18bc503f8f5"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "01bf4722d3c3dff400e9384e1809a67230923340decc5a8d940ad7f53bb56a68"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "73e70b369a5cea48d8d0d37c3279129eb04e685d5ab24c9ea094dd4dbbec5e77"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.0631100842717316,
-      "description": "Explore Castalia in 3D with its published shape model and radial elevation.",
+      "description": "Two-lobed near-Earth asteroid mapped by Arecibo radar.",
       "systemName": "Solar System",
       "order": 182,
       "context": {

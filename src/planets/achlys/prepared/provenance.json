@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "301d4ec9368187f1148c6e097d5c51105f27353e7bf70fa2552ec6279bc08263"
+    "sha256": "9b51882828da93f52ff29b353e4e293fa8d97e53ee8e64efa7c3fc62b472c9fe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c1043affbb22034edecd76c23db821518b48bb274db8f427fabc9f7e05a3b024",
+      "sha256": "b5b19221a52b4dc604a93b7dbb4e5ca6a334590f0d2d8a6089dfb348637fb613",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "achlys",
         "displayName": "Achlys",
         "panel": {
-          "introduction": "Formerly 2003 AZ84, Achlys is a plutino in Neptune’s 3: 2 orbital resonance. Its changing occultation silhouette supports a flattened, elongated model, while a grazing event hints at a local depression.",
           "facts": [
             {
               "id": "shape",
@@ -158,9 +157,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published Jacobi-ellipsoid interpretation, with semiaxes 470 ±20, 383 ±10 and 245 ±8 km. It assumes hydrostatic equilibrium and a 6.75-hour rotation; the smooth shape is inferred from occultations, not imaged terrain. Illustrative pole RA 0°, declination 90° and arbitrary meridian. The paper’s local projected-limb and opening angles do not provide a unique absolute surface attitude for this display. The grid marks unmapped terrain.",
-              "title": "Published Jacobi ellipsoid",
-              "detail": "Inferred shape · unmapped surface grid",
               "thumbnail": "/scenes/achlys/achlys-model-thumbnail.webp",
               "surface": "achlys-model-surface@2x.webp",
               "poles": "achlys-model-poles@2x.webp",
@@ -168,7 +164,9 @@
                 "id": "published-shape",
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/1705.10895"
-              }
+              },
+              "notes": "Published Jacobi-ellipsoid interpretation, with semiaxes 470 ±20, 383 ±10 and 245 ±8 km. It assumes hydrostatic equilibrium and a 6.75-hour rotation; the smooth shape is inferred from occultations, not imaged terrain. Illustrative pole RA 0°, declination 90° and arbitrary meridian. The paper’s local projected-limb and opening angles do not provide a unique absolute surface attitude for this display. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -309,7 +307,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -318,8 +316,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c1043affbb22034edecd76c23db821518b48bb274db8f427fabc9f7e05a3b024",
-      "bytes": 4114,
+      "sha256": "b5b19221a52b4dc604a93b7dbb4e5ca6a334590f0d2d8a6089dfb348637fb613",
+      "bytes": 3796,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -334,9 +332,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published Jacobi-ellipsoid interpretation, with semiaxes 470 ±20, 383 ±10 and 245 ±8 km. It assumes hydrostatic equilibrium and a 6.75-hour rotation; the smooth shape is inferred from occultations, not imaged terrain. Illustrative pole RA 0°, declination 90° and arbitrary meridian. The paper’s local projected-limb and opening angles do not provide a unique absolute surface attitude for this display. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -376,7 +372,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -388,8 +384,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5104,
-          "sha256": "6d88d1b7467d8abc52fd62ec44c78630cd2d1387c31208df9b9420b79d7cc72e",
+          "bytes": 4882,
+          "sha256": "8b759cecd28ad472901f0bad706238e768bade0eeb44937ca74e6573deb9c076",
           "verification": "bytes-verified"
         }
       ],

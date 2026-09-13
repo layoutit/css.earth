@@ -31,11 +31,6 @@
           "sha256": "3089943c6b9c518b89509353de537741b6c6e945312d08a5cb818cca67dc3c01"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a8e3f7a82340f9db789c0ce773f73d6e0b6b8bfe2a4df208913d70c4d91ccf2d"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "8bded5771487f6bde60492b524cf25b3f05b1b69cbe04977e62fc1e2aec89cb7"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Tarvos, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Gallic-group moon of Saturn with a precisely timed spin.",
       "systemName": "Solar System",
       "order": 32,
       "context": {

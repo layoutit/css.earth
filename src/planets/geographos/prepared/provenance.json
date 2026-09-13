@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6b2873e4af50ca5ee76e072b7ddc31017443eb1f5c69a7e2c0962ab53e5a20e1"
+    "sha256": "90f3e9408e382bea030b7de9ff61ceb1996e34b3e964058e86dc80071f0cbef5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6e602adc0754e2d55a7216070d8771fad4dd6d579f6986a34438ecc763b29f46",
+      "sha256": "afce9256efee908a8071b5ca8dd7fa707ba9ea4c5e55b45a607196d88bf7b7ac",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,7 +171,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Geographos is an elongated near-Earth asteroid reconstructed from Goldstone radar and optical light curves. Explore its original shape and radial heights. The grid marks unavailable surface imagery. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied.",
           "facts": [
             {
               "id": "radius",
@@ -203,8 +202,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "The shared grid marks unavailable surface imagery on this radar model. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/geographos/geographos-shape-thumbnail.webp",
               "surface": "geographos-shape-surface@2x.webp",
               "poles": "geographos-shape-surface@2x.webp",
@@ -213,14 +210,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Radar shape with north–south ambiguity. Local latitudes depend on the model; no surface imagery is mapped."
+              "notes": "The shared grid marks unavailable surface imagery on this radar model. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "False color shows radius at the nearest source-surface point minus a 1.284042 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 30 m is withheld. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/geographos/geographos-elevation-thumbnail.webp",
               "surface": "geographos-elevation-surface@2x.webp",
               "poles": "geographos-elevation-surface@2x.webp",
@@ -242,8 +237,7 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj",
                 "image": "/scenes/geographos/geographos-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Radar height relative to a 1.284 km sphere. North–south ambiguity leaves heights and latitudes uncertain."
+              "notes": "False color shows radius at the nearest source-surface point minus a 1.284042 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 30 m is withheld. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied."
             }
           ]
         },
@@ -365,7 +359,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -374,8 +368,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6e602adc0754e2d55a7216070d8771fad4dd6d579f6986a34438ecc763b29f46",
-      "bytes": 12853,
+      "sha256": "afce9256efee908a8071b5ca8dd7fa707ba9ea4c5e55b45a607196d88bf7b7ac",
+      "bytes": 11877,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -390,9 +384,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "False color shows radius at the nearest source-surface point minus a 1.284042 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 30 m is withheld. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -434,9 +426,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The shared grid marks unavailable surface imagery on this radar model. The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -471,7 +461,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -483,8 +473,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9226,
-          "sha256": "e5beec07ea07c7a3fdcfe06d13b8d5f9558c7f99d448fa1517cbdb63ad176ef9",
+          "bytes": 8677,
+          "sha256": "5b1642d79453556b799117080525e691a35ca2e6979a7301f18e4a52b1db592f",
           "verification": "bytes-verified"
         }
       ],

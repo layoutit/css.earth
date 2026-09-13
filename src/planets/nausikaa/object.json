@@ -64,11 +64,6 @@
           "sha256": "6056cea7971f3828e7cb107eca24506570cc158196bb13b9372c7290127f6bb2"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "2fd6cb3120ef0d9271d2923fc899c1f2713080570493547c3477c339184a66fd"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "306f37635b8aeaee1f7d16c87eba00eb89e1541397d2341cf00811f76497c0f4"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4032846232365372,
-      "description": "Explore Nausikaa in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered on 17 February 1879.",
       "systemName": "Solar System",
       "order": 176,
       "context": {

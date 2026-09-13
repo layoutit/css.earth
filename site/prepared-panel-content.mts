@@ -71,14 +71,6 @@ function lensControl(value: unknown): LensControl {
     facts: lens.facts === undefined ? undefined : facts(lens.facts), legend: legend(lens.legend, label) };
 }
 
-function datasetTexts(value: unknown): Readonly<Record<string, DatasetReaderText>> {
-  return Object.freeze(Object.fromEntries(Object.entries(object(value, 'dataset text')).map(([id, raw]) => {
-    const dataset = object(raw, `dataset text ${id}`);
-    return [id, { title: text(dataset.title, 'dataset title'), detail: optionalText(dataset.detail, 'dataset detail'),
-      summary: text(dataset.summary, 'dataset summary') }];
-  })));
-}
-
 export interface PanelControls {
   lenses?: Omit<NonNullable<Props['lenses']>, 'controls'> & { controls: LensControl[] };
   settings: Props['settings'];
@@ -95,13 +87,12 @@ export function withDatasetText(lenses: PanelControls['lenses'], datasets: Reado
 }
 
 /** Validate the fields the shared Astro panel renders, before assigning display types. */
-export function parsePreparedPanelContent(value: unknown): Pick<Props, 'objectId' | 'title' | 'introduction' | 'facts' | 'moreFacts' | 'charts' | 'galleries' | 'resources' | 'destinations' | 'features'> & { datasets: Readonly<Record<string, DatasetReaderText>> } {
+export function parsePreparedPanelContent(value: unknown): Pick<Props, 'objectId' | 'title' | 'facts' | 'moreFacts' | 'charts' | 'galleries' | 'resources' | 'destinations' | 'features'> {
   const content = object(value, 'panel content');
   if (content.schema !== 'cssearth-prepared-content@1') throw new TypeError('Prepared panel content schema is incompatible.');
   const destinations = content.destinations === undefined ? undefined : object(content.destinations, 'destinations');
   const features = content.features === undefined ? undefined : object(content.features, 'features');
-  return { objectId: text(content.objectId, 'object id'), title: planetTitle(content.title), introduction: text(content.introduction, 'introduction'),
-    datasets: datasetTexts(content.datasets),
+  return { objectId: text(content.objectId, 'object id'), title: planetTitle(content.title),
     facts: facts(content.facts), moreFacts: facts(content.moreFacts), charts: array(content.charts, 'charts').map(chart), galleries: array(content.galleries, 'galleries').map(gallery),
     resources: array(content.resources, 'source links').map(value => { const resource = object(value, 'source link'); return { label: text(resource.label, 'source label'), role: text(resource.role, 'source role'), description: text(resource.description, 'source description'), href: text(resource.href, 'source URL') }; }),
     destinations: destinations ? { searchLabel: text(destinations.searchLabel, 'destination search label'), description: text(destinations.description, 'destination description') } : undefined,

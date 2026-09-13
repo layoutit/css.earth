@@ -64,11 +64,6 @@
           "sha256": "c6f4340ac55a33b3787ab02bb38475f3beb65b3897368ae761d1c07aec0ac300"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "26bddb550be6f7adae6eafa27a4d9e873589943908edc39d471f6cd2c4e66878"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "349deb8353274135a57a9f6f7a3f3e3660a71a93254dd2668497e896163b69aa"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.357778522320458,
-      "description": "Explore Unitas in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in March 1891.",
       "systemName": "Solar System",
       "order": 356,
       "context": {

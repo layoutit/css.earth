@@ -64,11 +64,6 @@
           "sha256": "d08368c96081684a1f10b79b4f69e44977119a6ea1d045f90ac6c07ce2d28f16"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "738d73d6351b439ea4b150b0174e3e0d5525ed74ff1b29cadc1ada15ebfdb457"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "8928ef5c7e9e6545a2eb3a62b58429598831a6daf05a7dd88b8506dbc809f723"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.732268290476554,
-      "description": "Explore Lydia in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in April 1870.",
       "systemName": "Solar System",
       "order": 263,
       "context": {

@@ -718,25 +718,6 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
-    },
-    {
-      "id": "titania-object-text",
-      "path": "content/text.json",
-      "expectedBytes": 1579,
-      "expectedSha256": "5544ff43f082f023e69a0ea0640affd7f78410d98dd4615abafa6cf07ad3b2e6",
-      "origin": "Repository-authored Titania reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "panel",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
     }
   ],
   "generatedIntermediates": [],

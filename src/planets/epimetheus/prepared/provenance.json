@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3eef0d3e59d08c7f73b3b6d69ca8a05c63927bf5e30ab672fb7209682f463e05"
+    "sha256": "1704f9ad4143d1102e98ed344d809a0ff65bc5164de397aa0d92f01c80fd5a90"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -250,14 +250,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1a64f863e64d1313933f6f5e443de8f3160560b86841f3af34a1a84aa2b01650",
+      "sha256": "98d1566c2b7c42d13f44ce31394334d97f887fee91673466c1cd48b5903a8c03",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "epimetheus",
         "displayName": "Epimetheus",
         "panel": {
-          "introduction": "Epimetheus shares an orbit with the larger moon Janus. The pair exchanges inner and outer tracks about every four years. Cassini revealed a battered icy surface, including a flattened south pole and branching ridges.",
           "facts": [
             {
               "id": "radius",
@@ -333,9 +332,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-              "title": "ISS mosaic",
-              "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/epimetheus/epimetheus-normal-thumbnail.webp",
               "surface": "epimetheus-normal-surface@2x.webp",
               "poles": "epimetheus-normal-surface@2x.webp",
@@ -344,14 +340,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/"
               },
-              "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
+              "notes": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radial height above a 58.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-              "title": "Shape-derived radial height",
-              "detail": "Cassini shape · radial height",
               "thumbnail": "/scenes/epimetheus/epimetheus-elevation-thumbnail.webp",
               "surface": "epimetheus-elevation-surface@2x.webp",
               "poles": "epimetheus-elevation-surface@2x.webp",
@@ -374,7 +368,7 @@
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
                 "image": "/scenes/epimetheus/epimetheus-elevation-legend.webp"
               },
-              "summary": "Height relative to a 58.2 km sphere, from the Cassini shape model. Small craters are unresolved."
+              "notes": "Radial height above a 58.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
             }
           ]
         },
@@ -998,7 +992,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1007,8 +1001,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1a64f863e64d1313933f6f5e443de8f3160560b86841f3af34a1a84aa2b01650",
-      "bytes": 6036,
+      "sha256": "98d1566c2b7c42d13f44ce31394334d97f887fee91673466c1cd48b5903a8c03",
+      "bytes": 5364,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1023,9 +1017,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radial height above a 58.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1068,9 +1060,7 @@
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1115,7 +1105,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1127,8 +1117,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7809,
-          "sha256": "f8fb01276a8fd4eb8a7c5afc55e672b76e92435c66375bbd30487d22d3e12171",
+          "bytes": 7575,
+          "sha256": "c4df6bd962fa57b17c3db593ff3740a94c7897ea7a275e1d239c7ed1b9255706",
           "verification": "bytes-verified"
         }
       ],

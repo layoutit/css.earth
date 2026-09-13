@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "57a556f4a1755c7ed29c6d647671bef19d711f6b7763bf16dd3c7ff389e38b36"
+    "sha256": "c9de5b710b29f0d29817da371fb7d001a5558af4110315bb3866e8fc8f01ddb8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -150,14 +150,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a87cba09cde2fe5431647c8d351f75fabd9c5676b9f20be206afb26169d0d2db",
+      "sha256": "37cbc00073077be9366935e76bef3896fbb364aeb5a96f7559301a628391af45",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "eumelos",
         "displayName": "Eumelos",
         "panel": {
-          "introduction": "Jupiter Trojan in the L4 leading cloud. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Convex light-curve reconstruction with approximate thermal size: 37.696 km effective diameter (fit ±0.329 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
-              "title": "Eumelos · DAMIT 3920 convex shape",
               "thumbnail": "/scenes/eumelos/eumelos-shape-thumbnail.webp",
               "surface": "eumelos-shape-surface@2x.webp",
               "poles": "eumelos-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "DAMIT model"
+              "notes": "Convex light-curve reconstruction with approximate thermal size: 37.696 km effective diameter (fit ±0.329 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 18.848 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Eumelos · source-model radial height",
               "thumbnail": "/scenes/eumelos/eumelos-elevation-thumbnail.webp",
               "surface": "eumelos-elevation-surface@2x.webp",
               "poles": "eumelos-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3920",
                 "image": "/scenes/eumelos/eumelos-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 18.848 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -389,7 +385,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -398,8 +394,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a87cba09cde2fe5431647c8d351f75fabd9c5676b9f20be206afb26169d0d2db",
-      "bytes": 10104,
+      "sha256": "37cbc00073077be9366935e76bef3896fbb364aeb5a96f7559301a628391af45",
+      "bytes": 9779,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -414,9 +410,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 18.848 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -458,9 +452,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Convex light-curve reconstruction with approximate thermal size: 37.696 km effective diameter (fit ±0.329 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -495,7 +487,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -507,8 +499,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6949,
-          "sha256": "6aff930e00a357480f0517cd19c5048db5d8a6752ccd182c61e73875578ac2a8",
+          "bytes": 6813,
+          "sha256": "f6419a65919482d51fb4cafc9d58061f2d7e8fb2224867ddf9f5806797897e30",
           "verification": "bytes-verified"
         }
       ],

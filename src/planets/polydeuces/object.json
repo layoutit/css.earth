@@ -31,11 +31,6 @@
           "sha256": "bb19904969e73308c3f61323dbe584b6281616b10637f62f75ddea9234f45400"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "5cc339e46d7a9a9cecdfa1ad4a28d34e47857bfe341647417de1338ec3e30de6"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "23d5f1acedf85a02bfc4132cf21ebdb0e84f6bac62436de3748c9353515a70bd"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Polydeuces, a small moon of Saturn, through its measured shape.",
+      "description": "Tiny moon trailing Dione that wanders farther from its balance point than any known Trojan moon.",
       "systemName": "Solar System",
       "order": 89,
       "context": {

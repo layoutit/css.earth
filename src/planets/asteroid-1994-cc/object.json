@@ -64,11 +64,6 @@
           "sha256": "b41d07ea83e678cf4be23549cd08d9cce627c839222451854914a2cbe56f851a"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "05e91a20aedafea432d41ed4f85bf37b56384820fe39fbd385dc6a59d867e43f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "a2e51113f1869efd3af779bad7d2f12205ed5128091f0519a2fd0da1e91daa24"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.637667637945242,
-      "description": "Explore 1994 CC Alpha in 3D with its published shape model and radial elevation.",
+      "description": "Largest body in a triple near-Earth asteroid system.",
       "systemName": "Solar System",
       "order": 184,
       "context": {

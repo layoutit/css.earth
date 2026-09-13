@@ -64,11 +64,6 @@
           "sha256": "97b7ea2370a9829f5efd79d80b1f547fb20dbbcfa3d7d67a2881df42f22e1210"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "17c14e068c719ea2db770cbf7fb94ba41e9cd675c59359ba08212b4afc66447b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "9b1aa62ad989721067b48dd0f765da3b9205579d13a077984c41250580edc0ae"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.126562817910036,
-      "description": "Explore Elektra in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid with 3 known moons, discovered in February 1873.",
       "systemName": "Solar System",
       "order": 153,
       "context": {

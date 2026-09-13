@@ -64,11 +64,6 @@
           "sha256": "01f74bb0ddb7a4603967a619a78e05253873a41af909a0db3f7716e7bf2d24cf"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d4a720c65a18c723f383eaf17aedda63bf8e9956ee5fe93697bada0753c739c5"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "70ac558f93b9a6272e2cc2eadb6e3f85854c142588c0dcb97cea5d0ce40065df"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6540732054067564,
-      "description": "Explore 85 Io in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in September 1865.",
       "systemName": "Solar System",
       "order": 250,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "ed30bd329742b4d4214bbfa8f6ef7bf716b774ee3cb47c3c3ae90ef278ec5d79"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "912a0464de220d788d13994e3f7cd0a24d22c023c7c8a98a3f3993f0cf54daf7"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2122b0dc172ffa4c924606b3135b421088a7d063ace6c42874fedc73863aa677"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1183254802109865,
-      "description": "Explore Silesia in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in April 1886.",
       "systemName": "Solar System",
       "order": 340,
       "context": {

@@ -31,11 +31,6 @@
           "sha256": "3d21bd9a87b7b1f1da542a480d9f67c9acfe3a8733b30eb83de033946818d669"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "4820624d04cb771fa805051883882cb98dff5b1267b8168f6a3b492c532883cd"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "d4f8212a24a5d58a632d7285d1cf4da2d4501631049c40786401e18bd987672c"
@@ -128,7 +123,7 @@
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
-      "description": "Explore Pandora with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "description": "Potato-shaped moon just outside Saturn's F ring, which it tends to disrupt.",
       "systemName": "Solar System",
       "order": 434,
       "context": {

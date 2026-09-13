@@ -31,11 +31,6 @@
           "sha256": "e670dce0a8da16459316fbf0c5143b3e1baa957f53f1afb4eaae9edb109643ab"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "e4e215bb6db8959a265e99ac6fa06d05ab2e940dd9ad975e49031e62f5b234f4"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "eef739dba440696294a5641589706c0a9887c3d7f2b1c341eefcb71d8d2431c8"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Caliban, a moon of Uranus, through its lightcurve-constrained shape approximation.",
+      "description": "Outer moon of Uranus on a backward orbit, found in 1997.",
       "systemName": "Solar System",
       "order": 27,
       "context": {

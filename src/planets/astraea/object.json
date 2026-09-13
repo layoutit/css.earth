@@ -64,11 +64,6 @@
           "sha256": "444e62892aadc44b6eaa1c952ceff520edae93cbc34e296e0718da651df48d2b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "705e8348f8ec6e61a5a636c56bacd88e8df0143728379616cedfb8d746c240cb"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "35fa8c26f5709fdc1e3852e7f85dfe69364083dba42917b33a4c49b3a54c58a6"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.576775128493755,
-      "description": "Explore Astraea in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in December 1845.",
       "systemName": "Solar System",
       "order": 177,
       "context": {

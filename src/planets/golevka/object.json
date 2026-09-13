@@ -64,11 +64,6 @@
           "sha256": "75970961757ded21b2b0cc337da6a4bd8e92012ed610b4d4906b7526f5e3d2fb"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "6a92f63f78d11b36a5d7d964275cc48d38c91fb24bbebf2f27ef41f6c3c4b089"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "6ab677e3f18650ee26d72de3dbc1a88b4bf25121114ab0eaf5989b6a1719ce20"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4737870762656686,
-      "description": "Explore Golevka in 3D with its published radar shape model.",
+      "description": "Near-Earth asteroid with sharp edges and angular faces.",
       "systemName": "Solar System",
       "order": 208,
       "context": {

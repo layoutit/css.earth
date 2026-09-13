@@ -64,11 +64,6 @@
           "sha256": "8e1622b130f163967f776d495076c3ac2ec0b60dbb55ce7082867b996928d7d4"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "ffc03f4529e0e63360745069df8e19dcc9d04f2c159dd3b70b064143a25dcf10"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "6d1b57c549d8bda3b8732016dc91c17ceb4c871a5fdad2d66acd53465de9116b"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4015197093590164,
-      "description": "Explore Phocaea in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in April 1853.",
       "systemName": "Solar System",
       "order": 218,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "c004a989a406777764581e1131ac4abaeb072fd9df9b2e0161caf098e29d9ea2"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "561cd63991ecaf461af294ef5934dc686cbe28734568e1a3b3c944d0b1afef04"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "18b6b19ee33c6459b3975d622b2420cbb9c33addf7e2440d8f0c08738c9cccfa"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.127373029094909,
-      "description": "Explore China in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark main-belt asteroid, discovered in October 1957.",
       "systemName": "Solar System",
       "order": 405,
       "context": {

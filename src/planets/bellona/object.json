@@ -64,11 +64,6 @@
           "sha256": "f3600141501ea0b7ec731be1958d112b8a2a74bb7bb5479cab536825cbcd7247"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0cece4816831ff72df59e46b3c557fbc44689e3c215bde4f4b83e7b202a6ab0d"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "51f6889f263dfd737d7972c4e59f45f07fe4d674d1de5a6a139c40cdf2b72696"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.77802553680874,
-      "description": "Explore Bellona in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered on 1 March 1854 at Dusseldorf.",
       "systemName": "Solar System",
       "order": 220,
       "context": {

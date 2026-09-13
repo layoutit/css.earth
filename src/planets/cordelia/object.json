@@ -31,11 +31,6 @@
           "sha256": "fb22c52e7cc635d6c460d6bc8767517e8d5468c8f659aa5e0027634687c6d7df"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "1ff715f26ed94d6f8a37afb860c990a4632a7b514b7072996761d677f0915a16"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "c2c8670262bc822efdeed1f824c627585a2617381f386ed5337139f7e7971c85"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Cordelia, the inner shepherd of Uranus's epsilon ring.",
+      "description": "The closest known moon to Uranus, shepherding the epsilon ring's inner edge.",
       "systemName": "Solar System",
       "order": 95,
       "context": {

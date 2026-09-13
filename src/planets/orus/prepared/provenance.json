@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1cb4fd70579d4ff4c11f435c4328ef73d4ff955c1a8dba3150f6fcf7bc033b82"
+    "sha256": "6a6be47c507e23981ba80b28a909e004f8f004e86e318d351e7795044f945dc9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1aeb5e660b78a935c76eb8972abb8545db4e895333736c50142e030457838281",
+      "sha256": "681f17e6c28285db0fb362ffb3b6273de9fb4eaa7d004db092d0e3793c692374",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "orus",
         "displayName": "Orus",
         "panel": {
-          "introduction": "Orus is a dark Jupiter Trojan selected for Lucy's exploration of the leading swarm. This ellipsoid approximates the dimensions of the published light-curve and occultation model. The grid marks unmapped terrain.",
           "facts": [
             {
               "id": "shape",
@@ -152,9 +151,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. The original convex mesh and local concavities are not represented. Full approximation dimensions: 70.7 × 63 × 51.4 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
-              "title": "Convex-model ellipsoid approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/orus/orus-model-thumbnail.webp",
               "surface": "orus-model-surface@2x.webp",
               "poles": "orus-model-poles@2x.webp",
@@ -162,7 +158,8 @@
                 "id": "occultation-approximation",
                 "path": "../manifest.json",
                 "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -306,7 +303,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -315,8 +312,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1aeb5e660b78a935c76eb8972abb8545db4e895333736c50142e030457838281",
-      "bytes": 3790,
+      "sha256": "681f17e6c28285db0fb362ffb3b6273de9fb4eaa7d004db092d0e3793c692374",
+      "bytes": 3057,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -331,9 +328,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. The original convex mesh and local concavities are not represented. Full approximation dimensions: 70.7 × 63 × 51.4 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -373,7 +368,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -385,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4333,
-          "sha256": "6ba53e0c0086fd15fd31583672d68ab02c1bfbf4234a015c5b1fbea5f2507661",
+          "bytes": 4104,
+          "sha256": "e59e15353ee8c4f2ceafdd364288a0447946382b75508d75b6d5bfbc566d760c",
           "verification": "bytes-verified"
         }
       ],

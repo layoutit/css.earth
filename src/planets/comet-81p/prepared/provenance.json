@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "61db37fbb387f4fd1caf116894f0ad83446a63a0a2f56c1bae34bf39638c74c1"
+    "sha256": "f914b6b7da5aa8db818bdddba65da279e6a232d14cc5cf4042cda9339bab666d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -199,14 +199,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "54dd5e5150b7c8cd7792d9e38034486f1073561fe154dfe528793d1b32ed9ef0",
+      "sha256": "42746b8749f390905ec391e1fdb479656876cc37fa46417de959dafadfad3e36",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-81p",
         "displayName": "Wild 2",
         "panel": {
-          "introduction": "Stardust flew past Wild 2 in 2004 and returned samples of its dust to Earth. Its photographs reveal deep depressions, steep walls and ridges across the sunlit part of the nucleus.",
           "facts": [
             {
               "id": "scale",
@@ -237,9 +236,6 @@
             {
               "id": "model",
               "label": "Completed shape model",
-              "description": "Measured terrain covers about half the nucleus. The gray grid marks the fitted ellipsoid and joins used to complete the unseen side. Gray is a model material.",
-              "title": "Nucleus shape reconstruction",
-              "detail": "PDS",
               "thumbnail": "/scenes/comet-81p/comet-81p-model-thumbnail.webp",
               "surface": "comet-81p-model-surface@2x.webp",
               "poles": "comet-81p-model-poles@2x.webp",
@@ -259,14 +255,13 @@
                   "label": "Unseen side",
                   "value": "Fitted ellipsoid"
                 }
-              ]
+              ],
+              "notes": "Measured terrain covers about half the nucleus. The gray grid marks the fitted ellipsoid and joins used to complete the unseen side. Gray is a model material.",
+              "noData": true
             },
             {
               "id": "navcam",
               "label": "Stardust photographs",
-              "description": "Stardust photographs cover the measured side of Wild 2. Original shadows and some seams remain. Placement is approximate; the gray grid marks gaps.",
-              "title": "NavCam mosaic",
-              "detail": "NAVCAM",
               "thumbnail": "/scenes/comet-81p/comet-81p-navcam-thumbnail.webp",
               "surface": "comet-81p-navcam-surface@2x.webp",
               "poles": "comet-81p-navcam-poles@2x.webp",
@@ -287,7 +282,8 @@
                   "value": "14–25 m/pixel"
                 }
               ],
-              "summary": "Only the measured side is photographed. Original shadows and some seams remain; the gray grid marks gaps in the coverage."
+              "notes": "Stardust photographs cover the measured side of Wild 2. Original shadows and some seams remain. Placement is approximate; the gray grid marks gaps.",
+              "noData": true
             }
           ]
         },
@@ -865,7 +861,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -874,8 +870,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "54dd5e5150b7c8cd7792d9e38034486f1073561fe154dfe528793d1b32ed9ef0",
-      "bytes": 4471,
+      "sha256": "42746b8749f390905ec391e1fdb479656876cc37fa46417de959dafadfad3e36",
+      "bytes": 4024,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1082,9 +1078,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Measured terrain covers about half the nucleus. The gray grid marks the fitted ellipsoid and joins used to complete the unseen side. Gray is a model material."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -1125,9 +1119,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Stardust photographs cover the measured side of Wild 2. Original shadows and some seams remain. Placement is approximate; the gray grid marks gaps."
-      ],
+      "limitations": [],
       "lensIds": [
         "navcam"
       ],
@@ -1174,7 +1166,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1186,8 +1178,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4051,
-          "sha256": "2085178eb1d6077eacc058604f32941c6f1e1b74b39e50eb7f74183dee31e6ca",
+          "bytes": 3854,
+          "sha256": "1652457d09bf533831f9936a05bb2981899da8be2a1e84883051d90bcd897e39",
           "verification": "bytes-verified"
         }
       ],

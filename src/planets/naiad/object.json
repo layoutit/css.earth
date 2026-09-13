@@ -31,11 +31,6 @@
           "sha256": "01ee2acaf24df17c903e0165fd41fe1a8bcb702f17769e8bd2e66b44d1b829c9"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "79ff95128fcec878c190c3efe54b43d332c97d78989df2f78ba22a7be9951d38"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "a67c4662b8d9eb6dc6693700b15811dfb4392a35fffc990fe901a8c1e33cb7cf"
@@ -118,7 +113,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 30.07,
-      "description": "Explore Naiad through its Voyager-derived shape model.",
+      "description": "Potato-shaped moon of Neptune on a slowly decaying orbit.",
       "systemName": "Solar System",
       "order": 106,
       "context": {

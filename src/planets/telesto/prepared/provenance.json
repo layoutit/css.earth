@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "778ca22bb9d9f178d3ac4f372e239d51ee1b8f02a28318a75a5086501fe14c3b"
+    "sha256": "01af698ac41de8d97e6d3399ad4a03eec10603ad223a370ce48825f65925de0c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -243,14 +243,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2ec88af7f4bde799c53205880ca1d5899bf90ed37eab9fb2f56d6a0f27e20c6b",
+      "sha256": "f4c0676a958e7cf85442ad2359f4156bc2b598916592e6d264a45a7fddc45e6f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "telesto",
         "displayName": "Telesto",
         "panel": {
-          "introduction": "Telesto leads Tethys along its orbit around Saturn. Cassini’s close views revealed a small, irregular icy moon with smooth deposits that soften the outlines of its craters.",
           "facts": [
             {
               "id": "radius",
@@ -304,9 +303,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-              "title": "ISS mosaic",
-              "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/telesto/telesto-normal-thumbnail.webp",
               "surface": "telesto-normal-surface@2x.webp",
               "poles": "telesto-normal-surface@2x.webp",
@@ -315,14 +311,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/calibration.html"
               },
-              "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
+              "notes": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radial height above a 12.35 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-              "title": "Shape-derived radial height",
-              "detail": "Cassini shape · radial height",
               "thumbnail": "/scenes/telesto/telesto-elevation-thumbnail.webp",
               "surface": "telesto-elevation-surface@2x.webp",
               "poles": "telesto-elevation-surface@2x.webp",
@@ -345,7 +339,7 @@
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
                 "image": "/scenes/telesto/telesto-elevation-legend.webp"
               },
-              "summary": "Height relative to a 12.35 km sphere, from the Cassini shape model. Small craters are unresolved."
+              "notes": "Radial height above a 12.35 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
             }
           ]
         },
@@ -969,7 +963,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -978,8 +972,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2ec88af7f4bde799c53205880ca1d5899bf90ed37eab9fb2f56d6a0f27e20c6b",
-      "bytes": 5164,
+      "sha256": "f4c0676a958e7cf85442ad2359f4156bc2b598916592e6d264a45a7fddc45e6f",
+      "bytes": 4533,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -994,9 +988,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radial height above a 12.35 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1038,9 +1030,7 @@
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1085,7 +1075,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1097,8 +1087,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5418,
-          "sha256": "dd80fb5e2ab459b723e1e9a86df6b5d0e7e7cf3cc24c032344a55711b77f55c4",
+          "bytes": 5226,
+          "sha256": "0b297f8f0ef885fe9431c05240d0a93f39234d5cfbec140dcf42e88260e5b7aa",
           "verification": "bytes-verified"
         }
       ],

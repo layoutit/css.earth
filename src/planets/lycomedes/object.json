@@ -64,11 +64,6 @@
           "sha256": "4beca554cc2e9c4fc05bc50124ed9432c284d9b1623b91c36efcf587729456db"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "4fa8561de10e768d634eb6d096e8fcbe7c0810834e4b2bd32713ca37527036d1"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "7d1013dd3ef5ecc202d5395438ef2cde30e3216fd12fed71ecf007a4628e76ed"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.0677482891717345,
-      "description": "Explore Lycomedes in 3D with its published shape model and radial elevation.",
+      "description": "Jupiter Trojan asteroid, discovered on 26 September 1960.",
       "systemName": "Solar System",
       "order": 367,
       "context": {

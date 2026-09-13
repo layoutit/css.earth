@@ -64,11 +64,6 @@
           "sha256": "3fb80e8cb61b9c76ac79d249e7e0a059d86902e3ec7464d041e15b70bcc43a31"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "db7ac9d795b022d65e4d02c0f58d861b41f572db626ffb913176a93e1cb0ae4c"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "499f840558a33c4cd6c92b80f2ec3c415cc31c2d72445b129b3b708a09cb8d01"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4376754729416765,
-      "description": "Explore Peitho in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in March 1872.",
       "systemName": "Solar System",
       "order": 267,
       "context": {

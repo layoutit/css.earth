@@ -64,11 +64,6 @@
           "sha256": "aa679d09db9e4d34db77f90c804870d0620e5bf01ed21fcd1bab0585e0bf8458"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "06a88c6ce77ecf235d4d6ed8b54927b01167c8bfee0dff442186ab0eebb2c792"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "bfcafb0fffefe1d1dbd8aa083763248a0e33f414ca2f002616d0c2112eed6af3"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.2152610738212455,
-      "description": "Explore Educatio in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered in November 1978.",
       "systemName": "Solar System",
       "order": 412,
       "context": {

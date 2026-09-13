@@ -64,11 +64,6 @@
           "sha256": "df9bc1ca7bfddc8e43b6a49aebe574f199de4fcd91abad43436960341075d197"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "1d56314f700e53127f4c39ed07498ec98a7d47408a28a215a39c15a972245a75"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "5c0961c7b1a48993cfa7a13fa29928d0c8c0ec501aa1b848ed10aa269e1399b2"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.58851145680903,
-      "description": "Explore Irene in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in May 1851.",
       "systemName": "Solar System",
       "order": 178,
       "context": {

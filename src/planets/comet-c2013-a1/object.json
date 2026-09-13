@@ -31,11 +31,6 @@
           "sha256": "e4a590ae63a97cd2809ac0741e8e2484c86d2ace1a2ffa961ec92c190a8d5d31"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9c6c5a77a51c59c9a7eb224b54c537b8568f19d4f4c86ac8559b351d8dc1560a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "45ac4aba9e33aa2ed8d91492e1e8a26bfe4048b8ac800cd36dbece9d7ee49ce9"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 27.900222087262012,
-      "description": "C/2013 A1: This Siding Spring comet passed close to Mars in October 2014. It is a different object from the short-period comet 162P/Siding Spring. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Comet that passed close to Mars.",
       "systemName": "Solar System",
       "order": 67,
       "context": {

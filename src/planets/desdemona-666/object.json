@@ -64,11 +64,6 @@
           "sha256": "c6123cdf07cc23524ee8664923e0073a7d9c957e772761f6ba4b359a055ed6df"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "6dad9dea9bbc74fdfd31f76833ab26fd6d73075a3f970feee6689a14f3e1d17d"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "95bf54707f2f1b216ea4194a1f1755c27f40a7930a4b460e1b9731519b990d3a"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.594914886847624,
-      "description": "Explore 666 Desdemona in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in July 1908.",
       "systemName": "Solar System",
       "order": 200,
       "context": {

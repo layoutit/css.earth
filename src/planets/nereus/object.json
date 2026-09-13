@@ -64,11 +64,6 @@
           "sha256": "2605efe3b4c774e23218a0638d2709f6b4b46ce4f6485de023518a9df7633459"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "30bda90cef62abc91f876f2370e39369067d81a5416ff9b2b948e7595938f657"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "1456c44ad46731631c462aee24b0bef60bb935193a3abe8f8475920f1a3b515f"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.485139038607293,
-      "description": "Explore Nereus in 3D with its published radar shape model.",
+      "description": "Small, elongated near-Earth asteroid.",
       "systemName": "Solar System",
       "order": 207,
       "context": {

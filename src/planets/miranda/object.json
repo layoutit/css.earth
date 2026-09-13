@@ -51,11 +51,6 @@
           "sha256": "bd34d98d07f9b0c8c55e7df9c7f10d6cf35396cf14906f07523dcb54d704d777"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "24d5cc930d673ea148c1bebca296c4c825d459cef0ebb9ba700f00a54ae8897d"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "04e06de6bf0f3bc8c05fa0cb4573ec1e09fb0b63b417ec1f063006cef38f8807"
@@ -162,7 +157,7 @@
       "classification": "satellite",
       "color": "#aaa8a0",
       "distanceAu": 19.2,
-      "description": "Explore Miranda in 3D with cssEarth. Inspect Voyager imagery of Uranus’s small moon, its giant scarps, and its ridged coronae.",
+      "description": "Patchwork moon of Uranus with canyons far deeper than the Grand Canyon.",
       "systemName": "Solar System",
       "order": 447,
       "context": {

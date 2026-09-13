@@ -31,11 +31,6 @@
           "sha256": "9180df44c4cd8f609df5b01b07eab7c9b07d16397609e551127a0cd97b23198c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "dd5c177b62131b630400d2d08fe994a2396cd49d25ed44622ba3a23db583f391"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "585cd8872fd005db5d232a9afd61b9dcb6d05ed2c57c51ef9c7b040fb22e52d3"
@@ -123,7 +118,7 @@
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 29.392166722642536,
-      "description": "Huya is a trans-Neptunian world with a moon. Occultations and the satellite orbit constrain this oblate model of Huya itself; the grid marks its unmapped surface.",
+      "description": "Plutino with a moon, measured by stellar occultations.",
       "systemName": "Solar System",
       "order": 4,
       "context": {

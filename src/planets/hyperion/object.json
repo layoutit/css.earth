@@ -32,11 +32,6 @@
           "sha256": "622f902b9169a585d469788015a40520999997fb8392d90f1a215335050f9ebd"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "e15823b0c4f83146e41232f7776cf45b73d6b7eb4414af68876a9f2bad64d8d2"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "b61f1d4b7244be20c3806cc02d1fe18762460deb5573d51a3c59ae936f23bb83"
@@ -138,7 +133,7 @@
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
-      "description": "Explore Hyperion with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "description": "Sponge-like moon of Saturn that tumbles chaotically as it orbits.",
       "systemName": "Solar System",
       "order": 437,
       "context": {

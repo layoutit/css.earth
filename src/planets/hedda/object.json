@@ -64,11 +64,6 @@
           "sha256": "430c0199334666a47c60c48fe06295a5437a12192387f4a7c5542114d207c9f1"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0a1438733492ad9eef0e3619fd872634ca9eecaffdc5b88fb931b1ae90256940"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "7b6fa043831ecff2c222f2a34cb906ed811c9d8038e1e0286e9a15c15c35dc78"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.28374355631575,
-      "description": "Explore Hedda in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 17 October 1879.",
       "systemName": "Solar System",
       "order": 313,
       "context": {

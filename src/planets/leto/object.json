@@ -64,11 +64,6 @@
           "sha256": "ac63de49c5300102ce5eaa13cbc84a1b8ec3808b3d57bfc5d34ae5be2e446823"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "58f472e402ed648e11140256b85ce8957edfd838e12392064bff9be95dd4e7c4"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "988193a6e3baab0f0354e59ef1823ec050d5dc3ecd44378d7e054126e0f04334"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7855571261884413,
-      "description": "Explore Leto in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered on 29 April 1861.",
       "systemName": "Solar System",
       "order": 239,
       "context": {

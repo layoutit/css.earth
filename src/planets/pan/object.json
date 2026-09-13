@@ -31,11 +31,6 @@
           "sha256": "71b94b8fd1ed30e53019a3fef989d4a7a4e1bd76c1f71447a741bf93fc8c5c9c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "eed868f269099a021db6ddcb846946e3dae2e33af50573d0e8c2a97c1acf0f89"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "fd72bf3e88bc576f3cdd0625888e70e1ea151da306964fa23f98f4fa880a720e"
@@ -128,7 +123,7 @@
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
-      "description": "Explore Pan with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "description": "Saucer-shaped moon that keeps Saturn's Encke Gap open.",
       "systemName": "Solar System",
       "order": 431,
       "context": {

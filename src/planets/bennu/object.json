@@ -80,11 +80,6 @@
           "sha256": "d73caff18cac76959cc430a1ecfb578a70dba3bf72c4742f2678595ed38e65f4"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "000fa1509809311778ff94ba3c9a7d2d1441bacf002e8789c0b2d08813df4d93"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "9d0374bd644a31fb1a0727e516e2cc4df888814ba2250b9f5e4a24fc47174589"
@@ -151,7 +146,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 1.126,
-      "description": "Explore Bennu in 3D with cssEarth using mission-derived shape and surface data.",
+      "description": "Near-Earth asteroid that OSIRIS-REx sampled.",
       "systemName": "Solar System",
       "order": 123,
       "context": {

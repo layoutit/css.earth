@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "be64d1a4c5e94ab3fd707f91e84862748e48701d297e2c480f3fd84b3ea59821"
+    "sha256": "4138b1f41e35f13f0b0e46901bc3e1060b362a2ff6915a6530b04b39c2b61743"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -264,14 +264,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c13e034a49e79d266f0119e801e14459092addbe8c9578d7b2e0a876043be798",
+      "sha256": "f84cfd26deb390c00cf9ea6af9b65016528a31b155692ea82c59adac4513e1ee",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "charon",
         "displayName": "Charon",
         "panel": {
-          "introduction": "Pluto’s largest moon is a world of deep canyons and broad icy plains. Charon and Pluto keep the same faces turned toward one another.",
           "facts": [
             {
               "id": "radius",
@@ -349,8 +348,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain.",
-              "title": "Monochrome mosaic",
               "thumbnail": "charon-lens-normal.webp",
               "surface": "charon-normal.webp",
               "poles": "charon-poles-normal.webp",
@@ -359,14 +356,11 @@
                 "path": "../manifest.json",
                 "url": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_mosaic_300m"
               },
-              "detail": "Corrected mosaic",
-              "summary": "Lighting is corrected, but local photographed shadows remain. Detail varies; the unobserved south is left unavailable."
+              "notes": "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain."
             },
             {
               "id": "enhanced-color",
               "label": "Enhanced color",
-              "description": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
-              "title": "MVIC enhanced-color mosaic",
               "thumbnail": "charon-lens-enhanced-color.webp",
               "surface": "charon-enhanced-color.webp",
               "poles": "charon-poles-enhanced-color.webp",
@@ -375,13 +369,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx"
               },
-              "detail": "MVIC color bands"
+              "notes": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution.",
-              "title": "Stereo and shading terrain model",
               "thumbnail": "charon-lens-elevation.webp",
               "surface": "charon-elevation.webp",
               "poles": "charon-poles-elevation.webp",
@@ -390,7 +383,6 @@
                 "path": "../manifest.json",
                 "url": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m"
               },
-              "detail": "Shaded relief",
               "legend": {
                 "kind": "scale",
                 "title": "Elevation",
@@ -426,13 +418,12 @@
                   ]
                 }
               },
-              "summary": "Stereo and shading height relative to a 606 km sphere. Detail varies; the gray grid marks missing data."
+              "notes": "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution.",
+              "noData": true
             },
             {
               "id": "albedo",
               "label": "Bond albedo",
-              "description": "New Horizons photometric model estimating the fraction of sunlight reflected by Charon. Derived from LORRI brightness and scattering assumptions, not a direct bolometric measurement. Gray grid marks missing source cells and uncovered southern latitudes. Colors span 0.1–0.5; values beyond those limits use endpoint colors.",
-              "title": "New Horizons modeled Bond albedo",
               "thumbnail": "charon-lens-albedo.webp",
               "surface": "charon-albedo.webp",
               "poles": "charon-poles-albedo.webp",
@@ -441,7 +432,6 @@
                 "path": "../manifest.json",
                 "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx"
               },
-              "detail": "Photometric model",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -482,7 +472,9 @@
                     "≥0.5"
                   ]
                 }
-              }
+              },
+              "notes": "New Horizons photometric model estimating the fraction of sunlight reflected by Charon. Derived from LORRI brightness and scattering assumptions, not a direct bolometric measurement. Gray grid marks missing source cells and uncovered southern latitudes. Colors span 0.1–0.5; values beyond those limits use endpoint colors.",
+              "noData": true
             }
           ]
         },
@@ -899,10 +891,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "c13e034a49e79d266f0119e801e14459092addbe8c9578d7b2e0a876043be798",
-      "bytes": 13037,
+      "sha256": "f84cfd26deb390c00cf9ea6af9b65016528a31b155692ea82c59adac4513e1ee",
+      "bytes": 12318,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1017,9 +1009,7 @@
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1074,9 +1064,7 @@
       "selector": "/surfaces/1",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map."
-      ],
+      "limitations": [],
       "lensIds": [
         "enhanced-color"
       ],
@@ -1131,9 +1119,7 @@
       "selector": "/surfaces/2",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1187,9 +1173,7 @@
       "selector": "/surfaces/3",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "New Horizons photometric model estimating the fraction of sunlight reflected by Charon. Derived from LORRI brightness and scattering assumptions, not a direct bolometric measurement. Gray grid marks missing source cells and uncovered southern latitudes. Colors span 0.1–0.5; values beyond those limits use endpoint colors."
-      ],
+      "limitations": [],
       "lensIds": [
         "albedo"
       ],
@@ -1658,7 +1642,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1670,8 +1654,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6441,
-          "sha256": "03b0ee4e9efb40c25d58cf2de517b5a7e6057b8252d04eb25e2fff389dd5b984",
+          "bytes": 6288,
+          "sha256": "37f383875924e867dd79195dc4ef222c8154a8ce4bf48d45cd4cab74a2bb8312",
           "verification": "bytes-verified"
         }
       ],

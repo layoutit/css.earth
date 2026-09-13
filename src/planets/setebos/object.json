@@ -31,11 +31,6 @@
           "sha256": "c26829651a9f34cf4c2dce4a90ebe9d38b7f2bfcff51c6d1c1c0e8f7ac6bd0af"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f8b27e7741c2f00dc6122b7871ad1f91a2d241d77259763b01ae712a257f9be7"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "8cea7878af3dce84becad5e5c11550da25bb81847e2b884a875ade2f79d1f03f"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Setebos, a moon of Uranus, through its lightcurve-constrained shape approximation.",
+      "description": "Backward-orbiting outer moon of Uranus about 47 km across.",
       "systemName": "Solar System",
       "order": 30,
       "context": {

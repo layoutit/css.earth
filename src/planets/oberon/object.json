@@ -51,11 +51,6 @@
           "sha256": "31003eeda76a6bfb69d54e7cd6b14140d91d18097cc8c718961b374974e0705a"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "170447c79e51a910ef1eba3c3cf660a67062455c82066d3726c1de4a87d340cb"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "9a89c86955f0ba084f7902bedf0f405b12a0fe83a0f1248c8f959f75bd9bccb9"
@@ -152,7 +147,7 @@
       "classification": "satellite",
       "color": "#9f978e",
       "distanceAu": 19.2,
-      "description": "Explore Oberon in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.",
+      "description": "Uranus's second-largest moon, heavily cratered and about half ice, half rock.",
       "systemName": "Solar System",
       "order": 451,
       "context": {

@@ -31,11 +31,6 @@
           "sha256": "6e7791186fd2b549c142258b6537a1edc2d84c5a6bdc7a66f40b12df9d303428"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "8c694dabc6cda69416bc54579d06a86837a889f371083ace723b280e200530a4"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "eb5586a43abde8b5d6415b6c5f292859308f910014d1c2e225c41fe947180bca"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 2.9567815032538625,
-      "description": "Explore 209P/LINEAR through a shape approximation constrained by radar observations.",
+      "description": "Comet that releases very little gas for its size.",
       "systemName": "Solar System",
       "order": 72,
       "context": {

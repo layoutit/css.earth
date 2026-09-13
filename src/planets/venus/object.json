@@ -83,11 +83,6 @@
           "sha256": "952238549deb7b771d0ea5b6a652d4c36349a013d2e451a856bc62ddad388da7"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "12fa368682a0abd836b15a722f5b60bbcd10311dc2405fc11317d0656672e421"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "18687813c785d09be515f24431fe3f7ae9de81a76230490ca38618f06ca123aa"
@@ -176,7 +171,7 @@
       "classification": "planet",
       "color": "#d6aa69",
       "distanceAu": 0.72,
-      "description": "Explore Venus in 3D with cssEarth. Look beneath its clouds, discover its volcanic surface, and learn about the hottest planet in our solar system.",
+      "description": "The hottest planet, hidden beneath thick clouds.",
       "systemName": "Solar System",
       "order": 118,
       "context": {

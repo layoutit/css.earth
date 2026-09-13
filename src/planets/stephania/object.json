@@ -64,11 +64,6 @@
           "sha256": "fdc358cccd5ce2a0c51f8ebcfd6d1bc734f0a77dce9d5f74cfd391ec80b6e8be"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "28bfe15e804c370e6e978e763aac3bbac5d789ba81d4a350f6dad908aefe0ae8"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "31fbb6cd706b64e4897b3e49392dc0517f7f4386f08a5780ca5bd93c6ed1ec21"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.348271490890079,
-      "description": "Explore Stephania in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered in May 1881.",
       "systemName": "Solar System",
       "order": 321,
       "context": {

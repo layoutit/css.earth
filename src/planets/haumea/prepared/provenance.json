@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "42a8886f582bcdc394a15ae4b1e74827124e3f65d7173328205b34323790ff39"
+    "sha256": "bbfc352300850038af35c9807d0c37b279e946c595dc296482786932be9623e3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -49,7 +49,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2e2bdd7262085f7533eea21959a71dea038f22ce696a93f7ecb1394d4721ccec",
+      "sha256": "71afdd3236e654eb583867fe1425ac0ddd658fdbcc89b70cf9c53fea79bc074d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -59,7 +59,6 @@
           "label": "Haumea"
         },
         "panel": {
-          "introduction": "Haumea is a rapidly rotating, elongated dwarf planet with a narrow ring. Its surface is shown using NASA’s illustrative model texture; no spacecraft has mapped it.",
           "facts": [
             {
               "id": "dimensions",
@@ -125,8 +124,6 @@
             {
               "id": "illustration",
               "label": "Illustrative model",
-              "description": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
-              "title": "Surface illustration",
               "qualification": "Illustration; not an observed surface map.",
               "thumbnail": "illustration-thumbnail.webp",
               "surface": "surface.webp",
@@ -136,7 +133,7 @@
                 "path": "../manifest.json",
                 "url": "https://science.nasa.gov/resource/haumea-3d-model/"
               },
-              "summary": "The depicted terrain is imagined, not photographed. The real surface is unresolved, and the displayed coordinates are arbitrary."
+              "notes": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
             }
           ]
         },
@@ -225,7 +222,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -234,8 +231,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2e2bdd7262085f7533eea21959a71dea038f22ce696a93f7ecb1394d4721ccec",
-      "bytes": 3892,
+      "sha256": "71afdd3236e654eb583867fe1425ac0ddd658fdbcc89b70cf9c53fea79bc074d",
+      "bytes": 3505,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -251,8 +248,7 @@
       "parents": [],
       "process": "Extract the source model base color and project it onto the authored shape.",
       "limitations": [
-        "Illustration; not an observed surface map.",
-        "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
+        "Illustration; not an observed surface map."
       ],
       "lensIds": [
         "illustration"
@@ -295,7 +291,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -307,8 +303,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6496,
-          "sha256": "cd6d64517a24b59258887368d426df65bff2a83e9280494303e479e7b28df05c",
+          "bytes": 6313,
+          "sha256": "5428212e69dafe11be0a8f1c6112f62be5fdb98d49170ecb3b08d146506f4d63",
           "verification": "bytes-verified"
         }
       ],

@@ -64,11 +64,6 @@
           "sha256": "5565268bacf77df887cc7a74f785137ba251d5f252403c12a8ac657a7fa75eee"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "5e5f082776d000e14fb89f56333d0a69aa56ee7ceb13b17b8d36e47290374e3a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "e756704e6a5903ffd2b7dcebbb6c9fd811654afe9bdc08d93f5c4bd6ea900496"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6653201228884313,
-      "description": "Explore Klytia in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in April 1862.",
       "systemName": "Solar System",
       "order": 243,
       "context": {

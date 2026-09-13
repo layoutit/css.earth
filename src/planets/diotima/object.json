@@ -64,11 +64,6 @@
           "sha256": "c008aacd92cd793fdad83c28534aafb1b556d9bd3a035e7aff4712d023e6079c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "dea531ac3ed1d771c717779716e984170992c06ce05e026835958ee590ccc52d"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "edc6baeedf73b7e6eb00104674cdc61fd92bdbce779f0aa6b843203407d0cf00"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0693983225273733,
-      "description": "Explore Diotima in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in December 1896.",
       "systemName": "Solar System",
       "order": 174,
       "context": {

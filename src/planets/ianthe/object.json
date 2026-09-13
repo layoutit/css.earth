@@ -64,11 +64,6 @@
           "sha256": "0a5e089c3316c38b2c9ad7b610e4dd370be1f2ecb271cfae39406abdde23c9a3"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "c8ddceb74d13ea46ef2a9cda8a63c6625bdebf020929458f1f8946ecb3de8f11"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "008620673b9978f2d4c552f6076c8dcca50f554d88090a0494ff930e2a83bf36"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.687221327524466,
-      "description": "Explore Ianthe in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in April 1868.",
       "systemName": "Solar System",
       "order": 256,
       "context": {

@@ -31,11 +31,6 @@
           "sha256": "daf29d0e523c012e1cafc05bcfb9d4aee946e313ed945bf4f76d1eaae7a3ac24"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "468cf46540782a1d044017ddcda2d0f0b2b023726687ad6bca1e7abdc4da60d7"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "ac3d9c671712c2451e8815e04d3a425239aa0d73a161e2715680c47c04ff0447"
@@ -123,7 +118,7 @@
       "classification": "asteroid",
       "color": "#a0a0a0",
       "distanceAu": 1.9869,
-      "description": "Explore the primary of 2001 SN263 through its archived radar shape.",
+      "description": "Largest member of a triple asteroid system.",
       "systemName": "Solar System",
       "order": 15,
       "context": {

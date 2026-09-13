@@ -64,11 +64,6 @@
           "sha256": "af08f93176a1721ee76938e1faefd34df5c8576ed06dc4c4266683eb30321e6c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0288ff9e471a3597f2fd22b4698ca392de790b2fa2215f7ca2e3d4dc4f6618f0"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0ebc400845f8a921f2c47d2c58e5f3cee30683e280817dbdc0ed248572c99e01"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1389418599378245,
-      "description": "Explore Schaber in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark main-belt asteroid, discovered in October 1980.",
       "systemName": "Solar System",
       "order": 414,
       "context": {

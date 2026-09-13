@@ -1,26 +1,35 @@
-import { sourceArray, sourceDate, sourceId, sourceObject, sourcePath, sourceText, sourceUrl } from '../src/platform/source-catalog.mts';
+import { sourceArray, sourceDate, sourceDigest, sourceId, sourceObject, sourceText, sourceUrl } from '../src/platform/source-catalog.mts';
 
 /**
  * Reader text for one object: the card line, the introduction and each dataset's
- * title, chooser detail and summary. It lives in `source/content/text.json`, apart
- * from data recipes, so preparation, tests and review check the same words.
+ * title, chooser detail and summary, each with the sources a reviewer checks it
+ * against. Authors keep it in the package's `text.json`, outside the scientific
+ * source tree, so a wording change never touches recipes, pins or provenance.
+ * `pnpm prepare:text` checks every object, then publishes `prepared/text.json`.
  */
 export const OBJECT_TEXT_SCHEMA = 'cssearth-object-text@1';
+export const PREPARED_TEXT_SCHEMA = 'cssearth-prepared-text@1';
 
 export interface TextCitation {
-  readonly catalogueId: string; readonly url: string; readonly label: string; readonly checked: string;
-  readonly path?: string; readonly locator?: string;
-  /** A short excerpt a reviewer can find at the URL; numbers in the text may round from it. */
+  readonly catalogueId: string; readonly url: string; readonly label: string; readonly checked: string; readonly locator?: string;
+  /** A short excerpt a reviewer can find at the URL. */
   readonly quote?: string;
 }
 export interface CitedText { readonly text: string; readonly sources: readonly TextCitation[] }
 export interface ObjectTextDataset {
-  readonly title: string; readonly detail?: string; readonly summary: string; readonly sources?: readonly TextCitation[];
+  readonly title: string; readonly detail?: string; readonly summary: string;
+  /** Omitted when the dataset's prepared product already names the sources its summary describes. */
+  readonly sources?: readonly TextCitation[];
 }
 export interface ObjectText {
   readonly schema: typeof OBJECT_TEXT_SCHEMA; readonly objectId: string;
   readonly card: CitedText; readonly introduction: CitedText;
   readonly datasets: Readonly<Record<string, ObjectTextDataset>>;
+}
+export interface PreparedObjectText extends Omit<ObjectText, 'schema'> {
+  readonly schema: typeof PREPARED_TEXT_SCHEMA;
+  /** The authored `text.json` this copy was checked and published from. */
+  readonly sourceSha256: string;
 }
 
 export type TextSlot = 'card' | 'introduction' | 'title' | 'detail' | 'summary';
@@ -42,15 +51,12 @@ export const TEXT_BUDGETS: Readonly<Record<TextSlot, TextBudget>> = Object.freez
 });
 
 function citation(raw: unknown): TextCitation {
-  const value = sourceObject(raw, ['catalogueId', 'url', 'label', 'checked', 'path', 'locator', 'quote']);
-  const path = value.path === undefined ? undefined : sourcePath(value.path);
-  if (path !== undefined && !path.startsWith('source/')) throw new TypeError('Text evidence must be inside the body source directory.');
+  const value = sourceObject(raw, ['catalogueId', 'url', 'label', 'checked', 'locator', 'quote']);
   const quote = value.quote === undefined ? undefined : sourceText(value.quote);
   if (quote !== undefined && quote.length > 300) throw new TypeError('A text citation quote is limited to 300 characters.');
   return Object.freeze({
     catalogueId: sourceId(value.catalogueId), url: sourceUrl(value.url), label: sourceText(value.label),
     checked: sourceDate(value.checked, true),
-    ...(path === undefined ? {} : { path }),
     ...(value.locator === undefined ? {} : { locator: sourceText(value.locator) }),
     ...(quote === undefined ? {} : { quote }),
   });
@@ -73,20 +79,80 @@ function dataset(raw: unknown): ObjectTextDataset {
   });
 }
 
+function blocks(value: Record<string, unknown>, objectId: string) {
+  const datasets = Object.entries(sourceObject(value.datasets)).map(([lensId, raw]) => [sourceId(lensId), dataset(raw)] as const);
+  return {
+    objectId, card: cited(value.card, `${objectId} card`), introduction: cited(value.introduction, `${objectId} introduction`),
+    datasets: Object.freeze(Object.fromEntries(datasets)),
+  };
+}
+
+function identity(value: Record<string, unknown>, objectId: string | undefined, label: string) {
+  const id = sourceId(value.objectId);
+  if (objectId !== undefined && id !== objectId) throw new TypeError(`${label} belongs to ${id}, not ${objectId}.`);
+  return id;
+}
+
 export function parseObjectText(input: unknown, objectId?: string): ObjectText {
   const value = sourceObject(input, ['schema', 'objectId', 'card', 'introduction', 'datasets']);
   if (value.schema !== OBJECT_TEXT_SCHEMA) throw new TypeError('Unsupported object text schema.');
-  const id = sourceId(value.objectId);
-  if (objectId !== undefined && id !== objectId) throw new TypeError(`Object text belongs to ${id}, not ${objectId}.`);
-  const datasets = Object.entries(sourceObject(value.datasets)).map(([lensId, raw]) => [sourceId(lensId), dataset(raw)] as const);
-  return Object.freeze({
-    schema: OBJECT_TEXT_SCHEMA, objectId: id,
-    card: cited(value.card, `${id} card`), introduction: cited(value.introduction, `${id} introduction`),
-    datasets: Object.freeze(Object.fromEntries(datasets)),
-  });
+  return Object.freeze({ schema: OBJECT_TEXT_SCHEMA, ...blocks(value, identity(value, objectId, 'Object text')) });
 }
 
-export interface TextViolation { readonly objectId: string; readonly slot: string; readonly rule: string; readonly detail: string }
+export function parsePreparedText(input: unknown, objectId?: string): PreparedObjectText {
+  const value = sourceObject(input, ['schema', 'objectId', 'sourceSha256', 'card', 'introduction', 'datasets']);
+  if (value.schema !== PREPARED_TEXT_SCHEMA) throw new TypeError('Unsupported prepared text schema.');
+  const id = identity(value, objectId, 'Prepared text');
+  return Object.freeze({ schema: PREPARED_TEXT_SCHEMA, ...blocks(value, id), sourceSha256: sourceDigest(value.sourceSha256) });
+}
+
+export interface TextFinding { readonly objectId: string; readonly slot: string; readonly rule: string; readonly detail: string }
+
+export interface TextContext {
+  /** Registry name, used to recognise copies that only swap the object name. */
+  readonly name: string;
+  /** Dataset identities and chooser labels, in order. */
+  readonly lenses: readonly { readonly id: string; readonly label: string }[];
+  /** Source catalogue record ids a citation may name. */
+  readonly catalogue: ReadonlySet<string>;
+  /** Datasets whose prepared product names its inputs; their summaries may rely on those sources. */
+  readonly evidencedDatasets: ReadonlySet<string>;
+}
+
+/** What makes text unpublishable: a dataset without text, a block over its budget, or a claim without catalogued sources. */
+export function readerTextErrors(text: ObjectText, context: TextContext): TextFinding[] {
+  const errors: TextFinding[] = [];
+  const add = (slot: string, rule: string, detail: string) => errors.push({ objectId: text.objectId, slot, rule, detail });
+  const budget = (slot: string, kind: TextSlot, value: string) => {
+    const limit = TEXT_BUDGETS[kind];
+    if (value.length > limit.characters) add(slot, 'length', `${value.length} characters; the ${kind} budget is ${limit.characters}`);
+    if (limit.sentences === undefined) {
+      if (/[.!?]$/u.test(value)) add(slot, 'punctuation', 'labels end without a full stop');
+      return;
+    }
+    const count = sentences(value).length;
+    if (count > limit.sentences) add(slot, 'sentences', `${count} sentences; the ${kind} budget is ${limit.sentences}`);
+    if (!/[.!?]$/u.test(value)) add(slot, 'punctuation', 'ends without a full stop');
+  };
+  const cite = (slot: string, sources: readonly TextCitation[]) => {
+    for (const source of sources) if (!context.catalogue.has(source.catalogueId)) add(slot, 'citation', `${source.catalogueId} is not a source catalogue record`);
+  };
+  budget('card', 'card', text.card.text);
+  cite('card', text.card.sources);
+  budget('introduction', 'introduction', text.introduction.text);
+  cite('introduction', text.introduction.sources);
+  const lensIds = context.lenses.map(lens => lens.id);
+  for (const id of lensIds.filter(id => !text.datasets[id])) add(`datasets.${id}`, 'coverage', 'the dataset has no reader text');
+  for (const [id, dataset] of Object.entries(text.datasets)) {
+    if (!lensIds.includes(id)) add(`datasets.${id}`, 'coverage', 'no dataset has this id');
+    budget(`datasets.${id}.title`, 'title', dataset.title);
+    if (dataset.detail !== undefined) budget(`datasets.${id}.detail`, 'detail', dataset.detail);
+    budget(`datasets.${id}.summary`, 'summary', dataset.summary);
+    if (dataset.sources?.length) cite(`datasets.${id}`, dataset.sources);
+    else if (!context.evidencedDatasets.has(id)) add(`datasets.${id}`, 'citation', 'cite the sources this summary describes; its prepared product names none');
+  }
+  return errors;
+}
 
 /** Words that describe how the project works, not the object. */
 const PROCESS_WORDS: readonly RegExp[] = [
@@ -112,7 +178,7 @@ const DISPLAY_WORDS: readonly RegExp[] = [
   /\bradial heights?\b/iu, /\bdatasets?\b/iu, /\bDAMIT\b/u, /\bADAM\b/u, /\bworlds?\b/iu, /\blandscapes?\b/iu,
 ];
 
-/** Phrasing no shipped string may use, including shell and catalogue text. */
+/** Filler, process and hype phrasing, for reviewers of any shipped string. */
 export function phraseViolations(text: string): string[] {
   return [...PROCESS_WORDS, ...EMPTY_WORDS, ...HYPE_WORDS].flatMap(pattern => {
     const match = pattern.exec(text);
@@ -120,7 +186,7 @@ export function phraseViolations(text: string): string[] {
   });
 }
 
-const ABBREVIATION = /(?:\b(?:[A-Z]|St|Mt|Dr|Jr|Sr|No|vs|ca|approx|al|e\.g|i\.e|U\.S))\.$/u;
+const ABBREVIATION = /(?:\b(?:[A-Z]|St|Mt|Dr|Mr|Mrs|Ms|Jr|Sr|No|vs|ca|approx|al|e\.g|i\.e|U\.S))\.$/u;
 /** Sentences, keeping initials and common abbreviations inside their sentence. */
 export function sentences(text: string): string[] {
   const parts = text.split(/(?<=[.!?])\s+/u);
@@ -133,99 +199,39 @@ export function sentences(text: string): string[] {
   return result.filter(Boolean);
 }
 
-const NUMBER = /\d[\d,]*(?:\.\d+)?/gu;
-function numbers(text: string): { value: number; decimals: number; raw: string }[] {
-  const found: { value: number; decimals: number; raw: string }[] = [];
-  for (const match of text.matchAll(NUMBER)) {
-    const index = match.index, before = text[index - 1] ?? '', after = text[index + match[0].length] ?? '';
-    // Designations such as 67P, AZ84 or C/1995 O1 are names, not measurements.
-    if (/[\p{L}/]/u.test(before) || /\p{L}/u.test(after)) continue;
-    const raw = match[0].replace(/[,.]$/u, ''), normalized = raw.replaceAll(',', '');
-    const value = Number(normalized);
-    if (!Number.isFinite(value)) continue;
-    found.push({ value, decimals: normalized.includes('.') ? normalized.split('.')[1]!.length : 0, raw });
-  }
-  return found;
-}
-
-const APPROXIMATE = /\b(?:about|around|roughly|nearly|almost|approximately|some|over|more than|less than|under)\s*$/iu;
-/** A number in reader text must round from a value in the object's facts or cited evidence. */
-function unsupportedNumbers(text: string, evidence: readonly string[]): string[] {
-  const known = evidence.flatMap(numbers);
-  return numbers(text).filter(({ value, decimals, raw }) => {
-    if (decimals === 0 && value <= 10) return false;
-    const approximate = APPROXIMATE.test(text.slice(0, text.indexOf(raw)));
-    return !known.some(candidate => {
-      if (Number(candidate.value.toFixed(decimals)) === value) return true;
-      return approximate && Math.abs(candidate.value - value) <= Math.max(candidate.value, value) * 0.05;
-    });
-  }).map(({ raw }) => raw);
-}
-
-export interface TextContext {
-  /** Registry name, used to recognise copies that only swap the object name. */
-  readonly name: string;
-  /** Dataset identities and chooser labels from the content recipe, in order. */
-  readonly lenses: readonly { readonly id: string; readonly label: string }[];
-  /** Fact values and cited evidence that support numbers in the card and introduction. */
-  readonly evidence: readonly string[];
-}
-
-/** Every rule for one object's reader text. An empty list means it may be published. */
-export function objectTextViolations(text: ObjectText, context: TextContext): TextViolation[] {
-  const violations: TextViolation[] = [];
-  const add = (slot: string, rule: string, detail: string) => violations.push({ objectId: text.objectId, slot, rule, detail });
-  const budget = (slot: string, kind: TextSlot, value: string) => {
-    const limit = TEXT_BUDGETS[kind];
-    if (value.length > limit.characters) add(slot, 'length', `${value.length} characters; the ${kind} budget is ${limit.characters}`);
-    if (limit.sentences !== undefined) {
-      const count = sentences(value).length;
-      if (count > limit.sentences) add(slot, 'sentences', `${count} sentences; the ${kind} budget is ${limit.sentences}`);
-      if (!/[.!?]$/u.test(value)) add(slot, 'punctuation', 'ends without a full stop');
-    } else if (/[.!?]$/u.test(value)) add(slot, 'punctuation', 'a label ends without a full stop');
+/** Editorial checks for a reviewer to read. They flag likely filler and repetition but never block publication. */
+export function readerTextWarnings(text: ObjectText, context: TextContext): TextFinding[] {
+  const warnings: TextFinding[] = [];
+  const add = (slot: string, rule: string, detail: string) => warnings.push({ objectId: text.objectId, slot, rule, detail });
+  const values: [string, string][] = [['card', text.card.text], ['introduction', text.introduction.text],
+    ...Object.entries(text.datasets).flatMap(([id, dataset]): [string, string][] => [[`datasets.${id}.title`, dataset.title],
+      ...(dataset.detail === undefined ? [] : [[`datasets.${id}.detail`, dataset.detail] as [string, string]]), [`datasets.${id}.summary`, dataset.summary]])];
+  for (const [slot, value] of values) {
     for (const phrase of phraseViolations(value)) add(slot, 'phrasing', `“${phrase}”`);
     if (/\bgrid\b/iu.test(value)) add(slot, 'grid', 'the dataset legend explains the no-data grid');
-  };
-  budget('card', 'card', text.card.text);
-  budget('introduction', 'introduction', text.introduction.text);
+  }
   for (const slot of ['card', 'introduction'] as const) {
     for (const pattern of DISPLAY_WORDS) {
       const match = pattern.exec(text[slot].text);
       if (match) add(slot, 'about-the-object', `“${match[0]}” describes the display; say it in a dataset summary`);
     }
-    const quotes = [...text.card.sources, ...text.introduction.sources].flatMap(source => source.quote === undefined ? [] : [source.quote]);
-    for (const value of unsupportedNumbers(text[slot].text, [...context.evidence, ...quotes])) {
-      add(slot, 'evidence', `${value} is not in the object's facts or cited evidence`);
-    }
   }
-  const lensIds = context.lenses.map(lens => lens.id), authored = Object.keys(text.datasets);
-  for (const id of lensIds.filter(id => !authored.includes(id))) add(`datasets.${id}`, 'datasets', 'the dataset has no reader text');
-  for (const id of authored.filter(id => !lensIds.includes(id))) add(`datasets.${id}`, 'datasets', 'no dataset has this id');
   for (const lens of context.lenses) {
     const dataset = text.datasets[lens.id];
-    if (!dataset) continue;
-    budget(`datasets.${lens.id}.title`, 'title', dataset.title);
-    if (dataset.detail !== undefined) budget(`datasets.${lens.id}.detail`, 'detail', dataset.detail);
-    budget(`datasets.${lens.id}.summary`, 'summary', dataset.summary);
-    if (dataset.title.toLocaleLowerCase('en') === lens.label.toLocaleLowerCase('en')) {
-      add(`datasets.${lens.id}.title`, 'specific-title', 'the title repeats the chooser label');
-    }
+    if (dataset && dataset.title.toLocaleLowerCase('en') === lens.label.toLocaleLowerCase('en')) add(`datasets.${lens.id}.title`, 'specific-title', 'the title repeats the chooser label');
   }
   const seen = new Map<string, string>();
-  const slots: [string, string][] = [['card', text.card.text], ['introduction', text.introduction.text],
-    ...Object.entries(text.datasets).map(([id, value]): [string, string] => [`datasets.${id}.summary`, value.summary])];
-  for (const [slot, value] of slots) {
+  const prose: [string, string][] = [['card', text.card.text], ['introduction', text.introduction.text],
+    ...Object.entries(text.datasets).map(([id, dataset]): [string, string] => [`datasets.${id}.summary`, dataset.summary])];
+  for (const [slot, value] of prose) {
     for (const sentence of sentences(value)) {
-      const key = normalize(sentence, context.name);
-      const first = seen.get(key);
+      const key = normalize(sentence, context.name), first = seen.get(key);
       if (first !== undefined && first !== slot) add(slot, 'repetition', `repeats a sentence from ${first}`);
       else seen.set(key, slot);
     }
   }
-  if (normalize(text.introduction.text, context.name).includes(normalize(text.card.text, context.name))) {
-    add('introduction', 'repetition', 'contains the card line');
-  }
-  return violations;
+  if (normalize(text.introduction.text, context.name).includes(normalize(text.card.text, context.name))) add('introduction', 'repetition', 'contains the card line');
+  return warnings;
 }
 
 function normalize(value: string, name: string): string {
@@ -233,9 +239,43 @@ function normalize(value: string, name: string): string {
   return value.replace(new RegExp(escaped, 'giu'), '{name}').toLocaleLowerCase('en').replace(/[^\p{L}\p{N}{}]+/gu, ' ').trim();
 }
 
-/** Cards and introductions are the catalogue's words for each object, so no two objects share one. */
-export function catalogueTextViolations(entries: readonly { readonly text: ObjectText; readonly name: string }[]): TextViolation[] {
-  const violations: TextViolation[] = [];
+export interface TextBlock {
+  /** Where the words come from, such as `introduction`, `datasets.shape.summary` or `mission:cassini`. One source listed twice is one block. */
+  readonly source: string;
+  readonly text: string;
+}
+
+const SHARED_PHRASE_WORDS = 6;
+function phrases(value: string): Set<string> {
+  const words = value.toLocaleLowerCase('en').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(' ').filter(Boolean);
+  const found = new Set<string>();
+  for (let index = 0; index + SHARED_PHRASE_WORDS <= words.length; index++) found.add(words.slice(index, index + SHARED_PHRASE_WORDS).join(' '));
+  return found;
+}
+
+/**
+ * Text shown together should not say the same thing twice: no sentence and no
+ * six-word phrase in two blocks of one group, such as an introduction, a dataset
+ * summary and the mission cards beside it. Two blocks with identical words count.
+ */
+export function compositionWarnings(objectId: string, blocks: readonly TextBlock[]): TextFinding[] {
+  const unique = [...new Map(blocks.map(block => [block.source, block])).values()];
+  const warnings: TextFinding[] = [];
+  for (const [index, block] of unique.entries()) {
+    const own = phrases(block.text), sentencesOf = new Set(sentences(block.text).map(sentence => normalize(sentence, '')));
+    for (const other of unique.slice(index + 1)) {
+      const repeated = sentences(other.text).find(sentence => sentencesOf.has(normalize(sentence, '')));
+      if (repeated !== undefined) { warnings.push({ objectId, slot: other.source, rule: 'composition', detail: `repeats a sentence from ${block.source}` }); continue; }
+      const shared = [...phrases(other.text)].find(phrase => own.has(phrase));
+      if (shared !== undefined) warnings.push({ objectId, slot: other.source, rule: 'composition', detail: `shares “${shared}” with ${block.source}` });
+    }
+  }
+  return warnings;
+}
+
+/** Cards and introductions are the catalogue's words for each object, so two objects sharing one is worth a second look. */
+export function catalogueTextWarnings(entries: readonly { readonly text: ObjectText; readonly name: string }[]): TextFinding[] {
+  const warnings: TextFinding[] = [];
   for (const slot of ['card', 'introduction'] as const) {
     const groups = new Map<string, string[]>();
     for (const { text, name } of entries) {
@@ -245,9 +285,9 @@ export function catalogueTextViolations(entries: readonly { readonly text: Objec
     for (const ids of groups.values()) {
       if (ids.length < 2) continue;
       for (const objectId of ids) {
-        violations.push({ objectId, slot, rule: 'unique', detail: `shared with ${ids.filter(id => id !== objectId).slice(0, 3).join(', ')}${ids.length > 4 ? ` and ${ids.length - 4} more` : ''}` });
+        warnings.push({ objectId, slot, rule: 'unique', detail: `shared with ${ids.filter(id => id !== objectId).slice(0, 3).join(', ')}${ids.length > 4 ? ` and ${ids.length - 4} more` : ''}` });
       }
     }
   }
-  return violations;
+  return warnings;
 }

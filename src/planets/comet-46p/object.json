@@ -31,11 +31,6 @@
           "sha256": "07d25f6375f0531283d1094b729dd700e88615d5d861b8b0d30c01ba45dc3fc4"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "384db9bb4527814714e8fc2e873179281853c9c6d126e82aee989cc5f845f3e5"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "b896cedc3e9545ed4e0f2377a82f259fd15f1804cdc772e3411e4da2c5cd1ea4"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 5.038736344622292,
-      "description": "46P: Wirtanen was Rosetta’s planned destination before a launch delay changed the mission’s target to 67P. Its small nucleus returns to the inner Solar System roughly every five years. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Comet once chosen as Rosetta's target.",
       "systemName": "Solar System",
       "order": 55,
       "context": {

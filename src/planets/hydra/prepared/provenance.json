@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f6bc8a47ce6640444925e03dd5e01342481baea70e4f2d9b869219127be90cbb"
+    "sha256": "78e742606f34e3ff3a8406a798427b06de7b1cea7b1be9fc19907f788a36b07b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -108,14 +108,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e2505a65631f159607e19fb11daf7591d46a2561bf1c1d262389893df5df46bd",
+      "sha256": "d919a83c1326f92c7fc2bbc698665aa72a155f1c24dc4ff5c70f57656a62111f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "hydra",
         "displayName": "Hydra",
         "panel": {
-          "introduction": "Hydra is Pluto’s outermost known moon. Its bright, water-ice-rich surface was resolved by New Horizons in 2015. A large northern hollow gives the small body its uneven shape, and it spins about ninety times during one orbit around the Pluto–Charon system.",
           "facts": [
             {
               "id": "radius",
@@ -160,9 +159,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Porter’s New Horizons shape fit, including the large northern concavity. Only the northern hemisphere was imaged; southern shape is poorly constrained. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the measured model geometry.",
-              "title": "Porter shape reconstruction",
-              "detail": "New Horizons shape fit",
               "thumbnail": "/scenes/hydra/hydra-model-thumbnail.webp",
               "surface": "hydra-model-surface@2x.webp",
               "poles": "hydra-model-poles@2x.webp",
@@ -171,7 +167,8 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.6084/m9.figshare.12779975.v1"
               },
-              "summary": "New Horizons shape fit. Only the north was imaged; the southern shape is uncertain. No imagery is mapped."
+              "notes": "Porter’s New Horizons shape fit, including the large northern concavity. Only the northern hemisphere was imaged; southern shape is poorly constrained. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the measured model geometry.",
+              "noData": true
             }
           ]
         },
@@ -341,7 +338,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -350,8 +347,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e2505a65631f159607e19fb11daf7591d46a2561bf1c1d262389893df5df46bd",
-      "bytes": 3883,
+      "sha256": "d919a83c1326f92c7fc2bbc698665aa72a155f1c24dc4ff5c70f57656a62111f",
+      "bytes": 3398,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -366,9 +363,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Porter’s New Horizons shape fit, including the large northern concavity. Only the northern hemisphere was imaged; southern shape is poorly constrained. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the measured model geometry."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -408,7 +403,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -420,8 +415,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4961,
-          "sha256": "c0eef62408ba2b0788ad5faf48989dc43a8dc6228beb05e13ae77f5e8c5c8c6c",
+          "bytes": 4684,
+          "sha256": "4352d072db5f8c19318349958f3d9827003757d6c91cbae8b29cc6a680ee334c",
           "verification": "bytes-verified"
         }
       ],

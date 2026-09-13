@@ -64,11 +64,6 @@
           "sha256": "eda89b44cb0022ec052a0838f97d6ed9ff7c23fee51c376c506eff17e4a0d903"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0ad2b74afe229f6e630cba594c7f151cbe646b17bff8e99d91ae722671c23701"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "9d5e3d652193fa2f0cfaf60b8dba9df3b84ade83240ed1c7d7a147154dcf8627"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.128605699285775,
-      "description": "Explore Erato in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 14 September 1860.",
       "systemName": "Solar System",
       "order": 236,
       "context": {

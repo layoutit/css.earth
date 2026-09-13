@@ -64,11 +64,6 @@
           "sha256": "391654333daeac940692ce0a85c8f9406808ab6bcc33135fd72b40259deac8b5"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f88582bca178a965d5c0557b81fe309c688c82c4a8c956b90ae2b00f2e28cd96"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "925326f2e06577f7b8daa8f6085b853dd936b21a93deb06eb7c226fe7a9c44b4"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.221835773585211,
-      "description": "Explore Virtanen in 3D with its published shape model and documented physical size scale.",
+      "description": "Stony main-belt asteroid, discovered in February 1938.",
       "systemName": "Solar System",
       "order": 410,
       "context": {

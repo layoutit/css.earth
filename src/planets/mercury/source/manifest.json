@@ -720,26 +720,6 @@
       }
     },
     {
-      "id": "mercury-object-text",
-      "path": "content/text.json",
-      "expectedSha256": "955ae2abe59cd0f3fc87a558a93bebb519a5a8cc3dbf4d17b423301e1f592698",
-      "expectedBytes": 1833,
-      "origin": "Repository-authored Mercury reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared shell content with source provenance.",
-      "consumers": [
-        "panel",
-        "lenses",
-        "charts"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
-    },
-    {
       "id": "mercury-chart-assets",
       "path": "content/charts.json",
       "expectedSha256": "390a7527acc15ec81c5a89e79f637c2f6704c2ae9c12b9a24e79f494e49b12c4",

@@ -31,11 +31,6 @@
           "sha256": "0523dfd9d99add7cc6857c2fd50b927da83a7fd0002c493f601dbc0571931331"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "fee93ec397f163cae9302e71d5db65930693e6111af8d902bd30589a8938d200"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "11c35338b2b1d923b33040a5c51be6165b264afa751f36e91d11ae88df372014"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Rosalind, an inner moon of Uranus, through its measured shape.",
+      "description": "Inner moon of Uranus, named for a character in As You Like It.",
       "systemName": "Solar System",
       "order": 90,
       "context": {

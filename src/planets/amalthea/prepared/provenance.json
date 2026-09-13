@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "872fd6d1265bdddcf8cab5bf39e2aad2bf13b7b91cb2309659bf253aab410aa1"
+    "sha256": "c4a1875482157077197e11026c2f96f9a9765ed9c7d331aa45ffb0a0fdc81943"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -262,14 +262,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0ce5495fa7995818a8c3b27514b397a15cdccf86b153d2e3afe8f4d3e7c98243",
+      "sha256": "10a4b76d7c39032187256c5bcfeae8bd779364db61a8a7f35ea905483cd32064",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "amalthea",
         "displayName": "Amalthea",
         "panel": {
-          "introduction": "Amalthea is Jupiter’s largest inner moon, an elongated, reddish world with giant craters and bright patches. Dust escaping its low-gravity surface helps form Jupiter’s faint gossamer ring.",
           "facts": [
             {
               "id": "radius",
@@ -345,9 +344,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
-              "title": "SSI mosaic",
-              "detail": "Galileo",
               "thumbnail": "/scenes/amalthea/amalthea-normal-thumbnail.webp",
               "surface": "amalthea-normal-surface@2x.webp",
               "poles": "amalthea-normal-surface@2x.webp",
@@ -356,14 +352,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/galileo/ssi/"
               },
-              "summary": "Surface brightness is adjusted to reduce photographed shading. Detail varies; the gray grid marks missing or unreliable images."
+              "notes": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
-              "title": "Shape-derived radial height",
-              "detail": "Radial shape",
               "thumbnail": "/scenes/amalthea/amalthea-elevation-thumbnail.webp",
               "surface": "amalthea-elevation-surface@2x.webp",
               "poles": "amalthea-elevation-surface@2x.webp",
@@ -386,7 +380,8 @@
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
                 "image": "/scenes/amalthea/amalthea-elevation-legend.webp"
               },
-              "summary": "Height from a Voyager model, relative to an 83.5 km sphere. Unseen terrain and small features are uncertain."
+              "notes": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
+              "noData": true
             }
           ]
         },
@@ -1057,7 +1052,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1066,8 +1061,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0ce5495fa7995818a8c3b27514b397a15cdccf86b153d2e3afe8f4d3e7c98243",
-      "bytes": 5982,
+      "sha256": "10a4b76d7c39032187256c5bcfeae8bd779364db61a8a7f35ea905483cd32064",
+      "bytes": 5379,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1182,9 +1177,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1226,9 +1219,7 @@
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1273,7 +1264,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1285,8 +1276,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7365,
-          "sha256": "3624e6280c29c7d19419bbcdd3bc40f49422e07a3986bdcc12c7624c22ccebcd",
+          "bytes": 7155,
+          "sha256": "dc81e9a8df50615e6c105509b704416f136b54b40fd00e508565b97708bf8118",
           "verification": "bytes-verified"
         }
       ],

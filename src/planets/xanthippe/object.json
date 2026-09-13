@@ -64,11 +64,6 @@
           "sha256": "e713a381bf99e0eb054f4617883b6429e84a074257fabd144789c4f0e5c135ff"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "4bc1504263e112606972b37e7d8dae30a72b26a241e34567a3ecc984dd6b9a63"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0f78bc85761c41d26e99653f797d8498b4906aecdbeb5edcd23b22ce64dc6e12"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.732385125710907,
-      "description": "Explore Xanthippe in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 22 November 1875 at Pola.",
       "systemName": "Solar System",
       "order": 289,
       "context": {

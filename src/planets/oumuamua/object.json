@@ -31,11 +31,6 @@
           "sha256": "ab3025ba589c7f2b41920bfa57efe8eff657cefddbfb83a08981bd93e032d282"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "b3b2d173c838fd379e7917a9172b40ee0a24787e5cd86fc800c20001a3a0187b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "bfb2d5a3a5eb358a271c78a1f3652eeaff3bfcf771ae03b1354ccd4741f21c85"
@@ -123,7 +118,7 @@
       "classification": "interstellar",
       "color": "#aaaaaa",
       "distanceAu": 54.22423400905037,
-      "description": "The first confirmed interstellar visitor crossed the Solar System in 2017. Its changing brightness supports competing shape interpretations; this view shows one published disc-like fit, with size set by an assumed reflectivity.",
+      "description": "The first interstellar object seen passing through the Solar System.",
       "systemName": "Solar System",
       "order": 14,
       "context": {

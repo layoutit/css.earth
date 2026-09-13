@@ -31,11 +31,6 @@
           "sha256": "1c70ea4a8049e7dfd6091aac7409b1c880287323352b81d08619adccd8f87823"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "c3f61ca9771c94d04c606a97231503dff006314a2a86e7fda13061a2a81ca56f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2859dc97e4925a3b4a2b38808db636833b79c84dbd4b3d0be3069e090903fbf5"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Siarnaq, a moon of Saturn, through its source-constrained shape approximation.",
+      "description": "Largest of Saturn's Inuit-group moons, about 39 km across.",
       "systemName": "Solar System",
       "order": 84,
       "context": {

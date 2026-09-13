@@ -31,11 +31,6 @@
           "sha256": "314f109a931ada95d660f942c583c59f4d76c9cc3c945be5c769bdaff1711b27"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "11fe13f43a5b39c5da0fe1eddd98f8a5f3431d3ad12166602c31ce4014d6607e"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "941e3790bd99de1b2189739e5ccdbbd09c77573cf5afea29f61e06d8930b303f"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 4.525635799109316,
-      "description": "Explore 137P/Shoemaker–Levy 2 through a shape approximation based on published lightcurve models.",
+      "description": "Comet with a rounded nucleus that turns in about eight hours.",
       "systemName": "Solar System",
       "order": 73,
       "context": {
