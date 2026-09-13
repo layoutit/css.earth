@@ -566,23 +566,23 @@
     },
     {
       "path": "geometry/registration.json",
-      "expectedBytes": 6022,
-      "expectedSha256": "c1606a3e68511bbe29d439d69717dae2ba9bb44be17d4880f67ecb0ba89b49ae"
+      "expectedBytes": 5009,
+      "expectedSha256": "9efba0f9398944e897c63b6c752b6aaa08c26aca3cd29eec4c04d6cbc40950f2"
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3374,
-      "expectedSha256": "3caeb0af07e65861f83138a5e002100d0371ca968198b3319ee163e7b32a2e12"
+      "expectedBytes": 2894,
+      "expectedSha256": "30ed1baa076845b608626925b270b3690c9e2bce72d8b8e845644de5ce78519a"
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1329,
-      "expectedSha256": "f1de3b89c6cdbf5f4ecf2b1759196931af70e83e011ed6f02ca30786ce1afbd5"
+      "expectedBytes": 1306,
+      "expectedSha256": "c8f8c1f0ddeda70ce1fa4f296689d9273dc433f8a69925aa3666f1c3a7d22ea3"
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 7377,
-      "expectedSha256": "11dfd899e3e6ea6a7ec17a20c3daa83f1dded9eb805403c7ba2927a3459e7ff9"
+      "expectedBytes": 7149,
+      "expectedSha256": "c08beeb605f2a6377978a1b9364265e8d2eb7745d1f06e41fee5815104d6a720"
     },
     {
       "path": "presentation/minimap.json",
