@@ -26,7 +26,7 @@ test('lit shape on sky counts only lit shape pixels, and the archive quality mas
 });
 
 test("Ida's published camera photometry resolves against its model record and the publication it cites", async () => {
-  const sourceRoot = resolve(root, 'src/planets/ida/source');
+  const sourceRoot = resolve(root, 'src/objects/ida/source');
   const profile = requireRecord(JSON.parse(await readFile(resolve(sourceRoot, 'preparation/terrestrial.json'), 'utf8')));
   const lens = requireArray(requireRecord(profile.raster).surfaceObservations).map(value => requireRecord(value)).find(value => value.id === 'calibrated');
   const block = parseControlledCameraLens(lens).photometry;
