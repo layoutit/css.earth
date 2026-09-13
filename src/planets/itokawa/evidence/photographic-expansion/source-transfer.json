@@ -1,0 +1,45 @@
+{
+  "interpretation": "Every thirteenth valid archived Gaskell XYZ pixel compared with the full ver128q surface. Camera holdouts check internal backplane consistency, not independent absolute accuracy.",
+  "rows": [
+    {
+      "id": "2473604354",
+      "cubeSha256": "8388ce181b20156c072230ca9cdb34618e577c6894ee05d083055e7cca196a5c",
+      "nativeXyzSampleStride": 13,
+      "samples": 29053,
+      "meanMeters": 0.15357395939156773,
+      "p95Meters": 0.49808217619088896,
+      "maximumMeters": 2.217780587523865,
+      "camera": {
+        "matrix": [
+          [
+            4959.051885952151,
+            -7436.008763527797,
+            4578.783420210864,
+            2080.5933594976314
+          ],
+          [
+            -135.30466332863352,
+            -5355.724989452327,
+            -8494.090952099717,
+            2419.2013450418444
+          ],
+          [
+            -0.8427920031153585,
+            -0.475170683267189,
+            0.2528130954839843,
+            4.66113389466341
+          ]
+        ],
+        "positionKm": [
+          3.94453070733059,
+          2.1949065457389487,
+          -1.1619639990303796
+        ],
+        "fitPixels": 2106,
+        "holdoutPixels": 375607,
+        "maximumResidualPixels": 0.000027128092993644183,
+        "rmsResidualPixels": 0.000007942551994121738
+      }
+    }
+  ]
+}

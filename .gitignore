@@ -222,6 +222,16 @@ src/planets/*/source/**/*.bpc
 /src/planets/titan/source/science/b2-intake/topo_4PPD.cub
 /src/planets/titan/source/science/b2-intake/topo_4PPD_interp.cub
 
+# Nebula display volumes are restored from their pinned lab delivery recipes.
+/src/objects/m42/prepared/
+/src/objects/helix/prepared/
+/src/objects/m2-9/prepared/
+/src/objects/m42/.prepared-*/
+/src/objects/helix/.prepared-*/
+/src/objects/m2-9/.prepared-*/
+# Shared dataset cards and lineage are restored by prepare:nebulae / prepare:sources.
+/src/objects/*/prepared/presentation.json
+/src/objects/*/prepared/provenance.json
 # Binary kernels in shared SPICE kernel banks are restored by tools/spice/kernel-bank.mts; text kernels are committed.
 src/spice/**/*.bsp
 src/spice/**/*.bc

@@ -1,0 +1,228 @@
+{
+  "schema": "cssearth-slit-evidence@1",
+  "id": "helix-meaburn2005-oiii-core-ew",
+  "title": "Helix · [O III] 5007 Å · core E–W slit",
+  "citation": {
+    "label": "Meaburn et al. (2005), Fig. 9; §§2.2.2, 3.1",
+    "url": "https://arxiv.org/html/astro-ph/0504295",
+    "pdfUrl": "https://arxiv.org/pdf/astro-ph/0504295v1",
+    "sourceUrl": "https://arxiv.org/src/astro-ph/0504295v1",
+    "sourceArchiveSha256": "4c471ea58faac55baf59a24b6504e4ae49823d0b23c6985d322bc3b1f2dfef86",
+    "member": "fig9.eps",
+    "memberSha256": "66e7bc5ed0ab3a5edd26a0476333f790729f66b4cf29022ecf7727d159cf2ac2",
+    "figureSha256": "3efbf369a3901ca81664fe5ca91063c226a2712198bc2e2ee5d07cf67d5e8b64"
+  },
+  "figure": {
+    "width": 512,
+    "height": 775,
+    "cachePath": ".local/nebula-lab/kinematics/helix/meaburn2005-fig9.jpg",
+    "extraction": "Extract the unresampled JPEG ASCII85 stream from source archive fig9.eps using source-figure.ts. This is the original published raster, not a screenshot or fitted model.",
+    "pixelConvention": "Origin at top left, x right, y down; values are manually read centroid locations in the original 512 by 775 raster.",
+    "offsetCalibration": [
+      {
+        "pixel": 277,
+        "value": 0
+      },
+      {
+        "pixel": 376,
+        "value": 50
+      }
+    ],
+    "velocityCalibration": [
+      {
+        "pixel": 559,
+        "value": 0
+      },
+      {
+        "pixel": 719,
+        "value": -60
+      }
+    ],
+    "readoutUncertaintyPixels": 1.5,
+    "readoutNote": "Sparse manual digitization of visible centroid markers, not complete raw spectra. Readout precision is about ±0.8 arcsec and ±0.6 km/s, not a statistical measurement uncertainty. Published error bars vary and have not been transcribed; no chi-square or confidence interval is justified. Retain the whole published figure for visual checking."
+  },
+  "slit": {
+    "direction": "E–W through the central star; negative offsets east, positive west as mapped by Fig. 9",
+    "offsetUnit": "arcsec",
+    "velocityUnit": "km/s",
+    "velocityFrame": "heliocentric",
+    "positiveVelocity": "receding",
+    "lengthArcsec": 163,
+    "widthArcsec": 0.5,
+    "integrationSeconds": 1800,
+    "spatialBinArcsec": 1.591796875,
+    "instrumentalWidthKmS": 6,
+    "instrumentNote": "MES/AAT; 70 micrometre slit, equivalent spectral width 6 km/s; profiles co-added in blocks of 5 of 512 increments over 163 arcsec (§2.2.2). Compare fitted centroids only. Do not use 6 km/s as centroid error, or synthesize a line profile without instrumental and thermal broadening."
+  },
+  "systemic": {
+    "valueKmS": -27.1,
+    "uncertaintyKmS": 2,
+    "source": "Meaburn2005 §3.1, published systemic heliocentric velocity including systematic calibration uncertainty; subtracted once from every observed velocity. We do not rederive it from Table 1's internally inconsistent wavelength text."
+  },
+  "defaults": {
+    "radiusArcsec": 120,
+    "inclinationDegrees": 0,
+    "depthRatio": 1,
+    "expansionKmS": 12.5
+  },
+  "defaultEvidence": [
+    "120 arcsec is half the approximate 240 arcsec separation of the inner [O III] brightness peaks (§2.2.2); it is a projected scale, not a measured 3D radius.",
+    "12.5 ±1.0 km/s is the paper's inferred inner-shell radial expansion from the central 25 km/s splitting (§3.1); here it initializes the equatorial speed of an explicit homologous expansion hypothesis.",
+    "Depth ratio 1 and inclination 0 degrees define an authored spherical baseline. Neither is a measured inner-shell depth or inclination. The 37 degree bipolar-axis tilt elsewhere in the paper is not assigned to this shell."
+  ],
+  "limitations": [
+    "Only the inner-shell hypothesis is predicted. All sampled centroid branches remain visible, including faster components it cannot explain; no point is rejected to improve agreement.",
+    "The shell is optically thin, infinitesimally thin and centered on the slit origin. Velocity is radially outward and proportional to distance from its center. Neither homology nor front/back membership is determined by photographs.",
+    "This is an independent literature-scale hypothesis, not the joint image-derived shape cloud. The ESO images provide morphology and emissivity clues, not measured gas velocities; line-specific emissivity is not recovered from RGB colors.",
+    "Inclination is the shell polar-axis angle from the line of sight, tilted toward west within the slit plane. Equatorial radius is adjusted to retain the 120 arcsec projected extent along this slit; north–south extent is not constrained by this experiment.",
+    "2008 §2 corrects 2005 halo Figs. 3–5 slit zero points, not Fig. 9. Reference: https://academic.oup.com/mnras/article/384/2/497/1024027 . Do not apply that -26.1 km/s correction to this core slit.",
+    "Inclination cannot affect a sphere; depth and speed remain degenerate with one slit. RMS is a descriptive nearest-surface discrepancy, not a fitted likelihood or unique reconstruction."
+  ],
+  "textCrossCheck": {
+    "offsetArcsec": 0,
+    "velocitiesHeliocentricKmS": [
+      -60,
+      -42,
+      -17,
+      -4
+    ],
+    "source": "§2.2.2 lists these approximate central components in prose; retained separately as a cross-check, not added as duplicate measurements."
+  },
+  "samples": [
+    {
+      "id": "a1",
+      "pixelX": 195,
+      "pixelY": 558
+    },
+    {
+      "id": "a2",
+      "pixelX": 249,
+      "pixelY": 563
+    },
+    {
+      "id": "a3",
+      "pixelX": 263,
+      "pixelY": 568
+    },
+    {
+      "id": "a4",
+      "pixelX": 302,
+      "pixelY": 576
+    },
+    {
+      "id": "a5",
+      "pixelX": 335,
+      "pixelY": 578
+    },
+    {
+      "id": "a6",
+      "pixelX": 367,
+      "pixelY": 579
+    },
+    {
+      "id": "a7",
+      "pixelX": 399,
+      "pixelY": 581
+    },
+    {
+      "id": "a8",
+      "pixelX": 431,
+      "pixelY": 584
+    },
+    {
+      "id": "b1",
+      "pixelX": 145,
+      "pixelY": 593
+    },
+    {
+      "id": "b2",
+      "pixelX": 207,
+      "pixelY": 599
+    },
+    {
+      "id": "b3",
+      "pixelX": 269,
+      "pixelY": 606
+    },
+    {
+      "id": "b4",
+      "pixelX": 335,
+      "pixelY": 618
+    },
+    {
+      "id": "b5",
+      "pixelX": 399,
+      "pixelY": 618
+    },
+    {
+      "id": "b6",
+      "pixelX": 429,
+      "pixelY": 614
+    },
+    {
+      "id": "c1",
+      "pixelX": 148,
+      "pixelY": 662
+    },
+    {
+      "id": "c2",
+      "pixelX": 207,
+      "pixelY": 670
+    },
+    {
+      "id": "c3",
+      "pixelX": 270,
+      "pixelY": 675
+    },
+    {
+      "id": "c4",
+      "pixelX": 335,
+      "pixelY": 676
+    },
+    {
+      "id": "c5",
+      "pixelX": 399,
+      "pixelY": 671
+    },
+    {
+      "id": "c6",
+      "pixelX": 429,
+      "pixelY": 665
+    },
+    {
+      "id": "d1",
+      "pixelX": 148,
+      "pixelY": 714
+    },
+    {
+      "id": "d2",
+      "pixelX": 249,
+      "pixelY": 714
+    },
+    {
+      "id": "d3",
+      "pixelX": 270,
+      "pixelY": 727
+    },
+    {
+      "id": "d4",
+      "pixelX": 300,
+      "pixelY": 720
+    },
+    {
+      "id": "d5",
+      "pixelX": 340,
+      "pixelY": 690
+    },
+    {
+      "id": "d6",
+      "pixelX": 403,
+      "pixelY": 704
+    },
+    {
+      "id": "d7",
+      "pixelX": 433,
+      "pixelY": 711
+    }
+  ]
+}

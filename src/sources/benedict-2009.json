@@ -1,0 +1,32 @@
+{
+  "id": "benedict-2009",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Benedict et al. (2009) · planetary nebula distances",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/html/0909.4281",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/helix/README.md",
+      "revision": "ab1967ed45fe7ad670cc5eaa4e892789a04f01f3",
+      "sha256": "d5e7e9de2f786a4b7980739e5a428ec7fbfb7da6276a8e22f48673b9ddb71e3e",
+      "locator": "/"
+    }
+  ],
+  "publisher": "Benedict et al. (2009) · planetary nebula distances",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Benedict et al. (2009) · planetary nebula distances",
+      "scope": "Published source",
+      "evidence": "src/objects/helix/README.md#/"
+    }
+  ]
+}

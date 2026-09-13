@@ -1,0 +1,3227 @@
+{
+  "schema": "cssearth-messier-catalogue@1",
+  "coordinateFrame": "ICRS",
+  "coordinateEpoch": "J2000",
+  "interpretation": "A complete 110-identifier discovery inventory, enriched from a SIMBAD snapshot; not a homogeneous scientific sample. Angular axes are copied as reported, with heterogeneous apertures/wavelengths and nulls preserved. They are not image WCS, physical radii or guaranteed full-nebula bounds. No images or reconstructions are included.",
+  "sources": [
+    {
+      "id": "simbad-basic",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync?request=doQuery&lang=adql&format=json&query=SELECT+i.id+AS+messier_id%2Cb.main_id%2Cb.ra%2Cb.dec%2Cb.otype%2Cb.otype_txt%2Cb.galdim_majaxis%2Cb.galdim_minaxis%2Cb.coo_bibcode%2Cb.coo_qual%2Cb.galdim_bibcode%2Cb.galdim_wavelength+FROM+ident+AS+i+JOIN+basic+AS+b+ON+i.oidref%3Db.oid+WHERE+i.id+LIKE+%27M+%25%27+ORDER+BY+messier_id",
+      "endpoint": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync",
+      "query": "SELECT i.id AS messier_id,b.main_id,b.ra,b.dec,b.otype,b.otype_txt,b.galdim_majaxis,b.galdim_minaxis,b.coo_bibcode,b.coo_qual,b.galdim_bibcode,b.galdim_wavelength FROM ident AS i JOIN basic AS b ON i.oidref=b.oid WHERE i.id LIKE 'M %' ORDER BY messier_id",
+      "retrievedAt": "2026-09-12T22:11:07.292Z",
+      "sha256": "f4685f9d95e84fd570aa696a6edaaa309edb701c8db2d48ed6ffae8744686347",
+      "bytes": 15566,
+      "credit": "CDS SIMBAD, Strasbourg, France; Wenger et al. (2000), A&AS 143, 9.",
+      "reference": "https://doi.org/10.1051/aas:2000332",
+      "license": "ODbL-1.0",
+      "licenseStatement": "https://simbad.unistra.fr/simbad/",
+      "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/"
+    },
+    {
+      "id": "simbad-aliases",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync?request=doQuery&lang=adql&format=json&query=SELECT+m.id+AS+messier_id%2Ca.id+AS+alias+FROM+ident+AS+m+JOIN+ident+AS+a+ON+a.oidref%3Dm.oidref+WHERE+m.id+LIKE+%27M+%25%27+AND+%28a.id+LIKE+%27NGC+%25%27+OR+a.id+LIKE+%27IC+%25%27+OR+a.id+LIKE+%27NAME+%25%27+OR+a.id+LIKE+%27**+WNC+%25%27%29+ORDER+BY+messier_id",
+      "endpoint": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync",
+      "query": "SELECT m.id AS messier_id,a.id AS alias FROM ident AS m JOIN ident AS a ON a.oidref=m.oidref WHERE m.id LIKE 'M %' AND (a.id LIKE 'NGC %' OR a.id LIKE 'IC %' OR a.id LIKE 'NAME %' OR a.id LIKE '** WNC %') ORDER BY messier_id",
+      "retrievedAt": "2026-09-12T22:11:07.292Z",
+      "sha256": "92951426c735ca92f0bda8952f03db3388ef95c24d7bd198c29049547838328f",
+      "bytes": 4646,
+      "credit": "CDS SIMBAD, Strasbourg, France; Wenger et al. (2000), A&AS 143, 9.",
+      "reference": "https://doi.org/10.1051/aas:2000332",
+      "license": "ODbL-1.0",
+      "licenseStatement": "https://simbad.unistra.fr/simbad/",
+      "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/"
+    },
+    {
+      "id": "simbad-type-guide",
+      "url": "https://simbad.cds.unistra.fr/Pages/guide/otypes_desc.htx",
+      "credit": "CDS SIMBAD object-type hierarchy; broad UI categories retain each original sourceType.",
+      "retrievedAt": "2026-09-12T22:11:07.292Z"
+    },
+    {
+      "id": "merrifield-2016-m40",
+      "url": "https://arxiv.org/abs/1612.00834",
+      "credit": "Merrifield, Gray and Haran (2016), Gaia Shows That Messier 40 is Definitely Not a Binary Star.",
+      "retrievedAt": "2026-09-12T22:11:07.292Z"
+    },
+    {
+      "id": "odenkirchen-2002-m73",
+      "url": "https://arxiv.org/abs/astro-ph/0111601",
+      "credit": "Odenkirchen and Soubiran (2002), NGC 6994 — clearly not a physical stellar ensemble, A&A 383, 163.",
+      "retrievedAt": "2026-09-12T22:11:07.292Z"
+    },
+    {
+      "id": "nasa-m102",
+      "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-102/",
+      "credit": "NASA Hubble Messier catalogue: Messier 102 (The Spindle Galaxy); metadata reference only.",
+      "retrievedAt": "2026-09-12T22:11:07.292Z"
+    },
+    {
+      "id": "nasa-heasarc-messier",
+      "url": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+      "credit": "NASA/GSFC HEASARC Messier catalogue documentation; 109-entry historical convention excludes M102.",
+      "retrievedAt": "2026-09-12T22:11:07.292Z"
+    }
+  ],
+  "objects": [
+    {
+      "id": "m1",
+      "messier": 1,
+      "name": "Crab Nebula",
+      "aliases": [
+        "M 1",
+        "Crab Nebula",
+        "Crab",
+        "CRAB NEB",
+        "Taurus A",
+        "NGC 1952",
+        "Tau A"
+      ],
+      "type": "supernova-remnant",
+      "sourceType": "SNR",
+      "raDegrees": 83.6324,
+      "decDegrees": 22.0174,
+      "majorArcmin": 7,
+      "minorArcmin": 5,
+      "coordinateReference": {
+        "bibcode": "2022A&A...661A..38P",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "2014BASI...42...47G",
+        "wavelength": "R"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m2",
+      "messier": 2,
+      "name": "NGC 7089",
+      "aliases": [
+        "M 2",
+        "NGC 7089"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 323.36258333333336,
+      "decDegrees": -0.8232499999999998,
+      "majorArcmin": 12.9,
+      "minorArcmin": 12.9,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m3",
+      "messier": 3,
+      "name": "NGC 5272",
+      "aliases": [
+        "M 3",
+        "NGC 5272"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 205.5484166666666,
+      "decDegrees": 28.37727777777778,
+      "majorArcmin": 16.2,
+      "minorArcmin": 16.2,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m4",
+      "messier": 4,
+      "name": "NGC 6121",
+      "aliases": [
+        "M 4",
+        "NGC 6121"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 245.89675000000003,
+      "decDegrees": -26.525750000000002,
+      "majorArcmin": 26.3,
+      "minorArcmin": 26.3,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m5",
+      "messier": 5,
+      "name": "NGC 5904",
+      "aliases": [
+        "M 5",
+        "NGC 5904"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 229.63841666666673,
+      "decDegrees": 2.081027777777778,
+      "majorArcmin": 17.4,
+      "minorArcmin": 17.4,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m6",
+      "messier": 6,
+      "name": "Butterfly Cluster",
+      "aliases": [
+        "M 6",
+        "NGC 6405",
+        "Butterfly Cluster"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 265.06916666666666,
+      "decDegrees": -32.24194444444445,
+      "majorArcmin": 20,
+      "minorArcmin": 20,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2013A&A...560A..76M",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m7",
+      "messier": 7,
+      "name": "Ptolemy's Cluster",
+      "aliases": [
+        "M 7",
+        "NGC 6475",
+        "Ptolemy's Cluster"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 268.44708333333335,
+      "decDegrees": -34.84111111111112,
+      "majorArcmin": 100.1,
+      "minorArcmin": 100.1,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m8",
+      "messier": 8,
+      "name": "Lagoon",
+      "aliases": [
+        "M 8",
+        "Lagoon",
+        "Lagoon Nebula"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 270.90416666666664,
+      "decDegrees": -24.386666666666667,
+      "majorArcmin": null,
+      "minorArcmin": null,
+      "coordinateReference": {
+        "bibcode": null,
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": null,
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ],
+      "notes": "SIMBAD identifies an open-cluster entry associated with the named nebula. Its center and any reported axes must not be treated as the full surrounding nebular footprint."
+    },
+    {
+      "id": "m9",
+      "messier": 9,
+      "name": "NGC 6333",
+      "aliases": [
+        "M 9",
+        "NGC 6333"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 259.79908333333333,
+      "decDegrees": -18.51625,
+      "majorArcmin": 8.7,
+      "minorArcmin": 8.7,
+      "coordinateReference": {
+        "bibcode": "2002MNRAS.332..441F",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "2019MNRAS.489.3093S",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m10",
+      "messier": 10,
+      "name": "NGC 6254",
+      "aliases": [
+        "M 10",
+        "NGC 6254"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 254.28770833333337,
+      "decDegrees": -4.100305555555555,
+      "majorArcmin": 15.1,
+      "minorArcmin": 15.1,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m11",
+      "messier": 11,
+      "name": "Wild Duck Cluster",
+      "aliases": [
+        "M 11",
+        "NGC 6705",
+        "Wild Duck Cluster",
+        "Amas de l'Ecu de Sobieski"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 282.7658333333334,
+      "decDegrees": -6.271944444444443,
+      "majorArcmin": 8.9,
+      "minorArcmin": 8.9,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m12",
+      "messier": 12,
+      "name": "NGC 6218",
+      "aliases": [
+        "M 12",
+        "NGC 6218"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 251.80908333333338,
+      "decDegrees": -1.9485277777777774,
+      "majorArcmin": 14.5,
+      "minorArcmin": 14.5,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m13",
+      "messier": 13,
+      "name": "Hercules Globular Cluster",
+      "aliases": [
+        "M 13",
+        "Hercules Globular Cluster",
+        "NGC 6205"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 250.42347499999994,
+      "decDegrees": 36.46131944444445,
+      "majorArcmin": 33,
+      "minorArcmin": 33,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2019MNRAS.489.3093S",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m14",
+      "messier": 14,
+      "name": "NGC 6402",
+      "aliases": [
+        "M 14",
+        "NGC 6402"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 264.40062500000005,
+      "decDegrees": -3.245916666666667,
+      "majorArcmin": 13.5,
+      "minorArcmin": 13.5,
+      "coordinateReference": {
+        "bibcode": "2006MNRAS.365.1357D",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "2019MNRAS.489.3093S",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m15",
+      "messier": 15,
+      "name": "NGC 7078",
+      "aliases": [
+        "M 15",
+        "NGC 7078"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 322.49304166666667,
+      "decDegrees": 12.166999999999998,
+      "majorArcmin": 12.3,
+      "minorArcmin": 12.3,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m16",
+      "messier": 16,
+      "name": "Eagle Nebula",
+      "aliases": [
+        "M 16",
+        "Eagle Nebula",
+        "Star Queen",
+        "NGC 6611",
+        "IC 4703"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 274.688,
+      "decDegrees": -13.792,
+      "majorArcmin": 80,
+      "minorArcmin": 80,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2022A&A...664A..66M",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ],
+      "notes": "SIMBAD identifies an open-cluster entry associated with the named nebula. Its center and any reported axes must not be treated as the full surrounding nebular footprint."
+    },
+    {
+      "id": "m17",
+      "messier": 17,
+      "name": "Omega Nebula",
+      "aliases": [
+        "M 17",
+        "NGC 6618",
+        "Lobster Nebula",
+        "omega Nebula",
+        "Swan Nebula",
+        "Checkmark Nebula",
+        "NGC 6618 Horseshoe"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 275.1958333333333,
+      "decDegrees": -16.171666666666663,
+      "majorArcmin": 1.6333333,
+      "minorArcmin": 1.6333333,
+      "coordinateReference": {
+        "bibcode": "2009MNRAS.399.2146W",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2013A&A...560A..76M",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ],
+      "notes": "SIMBAD identifies an open-cluster entry associated with the named nebula. Its center and any reported axes must not be treated as the full surrounding nebular footprint."
+    },
+    {
+      "id": "m18",
+      "messier": 18,
+      "name": "NGC 6613",
+      "aliases": [
+        "M 18",
+        "NGC 6613"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 274.9875,
+      "decDegrees": -17.088333333333335,
+      "majorArcmin": 5,
+      "minorArcmin": 5,
+      "coordinateReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2013A&A...560A..76M",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m19",
+      "messier": 19,
+      "name": "NGC 6273",
+      "aliases": [
+        "M 19",
+        "NGC 6273"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 255.65704166666666,
+      "decDegrees": -26.267944444444442,
+      "majorArcmin": 9.6,
+      "minorArcmin": 9.6,
+      "coordinateReference": {
+        "bibcode": "2006MNRAS.365.1357D",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "2019MNRAS.489.3093S",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m20",
+      "messier": 20,
+      "name": "Trifid Nebula",
+      "aliases": [
+        "M 20",
+        "Trifid Nebula",
+        "NGC 6514"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 270.675,
+      "decDegrees": -22.971666666666664,
+      "majorArcmin": 28,
+      "minorArcmin": 28,
+      "coordinateReference": {
+        "bibcode": "2009MNRAS.399.2146W",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2013A&A...560A..76M",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ],
+      "notes": "SIMBAD identifies an open-cluster entry associated with the named nebula. Its center and any reported axes must not be treated as the full surrounding nebular footprint."
+    },
+    {
+      "id": "m21",
+      "messier": 21,
+      "name": "NGC 6531",
+      "aliases": [
+        "M 21",
+        "NGC 6531"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 271.0358333333333,
+      "decDegrees": -22.505,
+      "majorArcmin": 110,
+      "minorArcmin": 110,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2022A&A...664A..66M",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m22",
+      "messier": 22,
+      "name": "NGC 6656",
+      "aliases": [
+        "M 22",
+        "NGC 6656"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 279.09975000000003,
+      "decDegrees": -23.90475,
+      "majorArcmin": 24,
+      "minorArcmin": 24,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m23",
+      "messier": 23,
+      "name": "NGC 6494",
+      "aliases": [
+        "M 23",
+        "NGC 6494"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 269.2370833333333,
+      "decDegrees": -18.98694444444445,
+      "majorArcmin": 35,
+      "minorArcmin": 35,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m24",
+      "messier": 24,
+      "name": "Small Sgr Star Cloud",
+      "aliases": [
+        "M 24",
+        "Small Sgr Star Cloud",
+        "IC 4715"
+      ],
+      "type": "stellar-association",
+      "sourceType": "As*",
+      "raDegrees": 274.2,
+      "decDegrees": -18.55,
+      "majorArcmin": 120,
+      "minorArcmin": 60,
+      "coordinateReference": {
+        "bibcode": "2004yCat.7239....0C",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2004yCat.7239....0C",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m25",
+      "messier": 25,
+      "name": "IC 4725",
+      "aliases": [
+        "M 25",
+        "IC 4725"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 277.93708333333325,
+      "decDegrees": -19.113888888888887,
+      "majorArcmin": 31.3,
+      "minorArcmin": 31.3,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m26",
+      "messier": 26,
+      "name": "NGC 6694",
+      "aliases": [
+        "M 26",
+        "NGC 6694"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 281.31708333333336,
+      "decDegrees": -9.386111111111113,
+      "majorArcmin": 7.1,
+      "minorArcmin": 7.1,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m27",
+      "messier": 27,
+      "name": "Dumbbell Nebula",
+      "aliases": [
+        "M 27",
+        "NGC 6853",
+        "Diabolo Nebula",
+        "Dumbbell Nebula"
+      ],
+      "type": "planetary-nebula",
+      "sourceType": "PN",
+      "raDegrees": 299.90151327087,
+      "decDegrees": 22.721197794319995,
+      "majorArcmin": 6.7,
+      "minorArcmin": 6.7,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "1992ESOPN...1....1A",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m28",
+      "messier": 28,
+      "name": "NGC 6626",
+      "aliases": [
+        "M 28",
+        "NGC 6626"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 276.1370416666666,
+      "decDegrees": -24.869833333333332,
+      "majorArcmin": 11.2,
+      "minorArcmin": 11.2,
+      "coordinateReference": {
+        "bibcode": "2006MNRAS.365.1357D",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m29",
+      "messier": 29,
+      "name": "NGC 6913",
+      "aliases": [
+        "M 29",
+        "NGC 6913"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 305.94166666666666,
+      "decDegrees": 38.486666666666665,
+      "majorArcmin": 12.7,
+      "minorArcmin": 12.7,
+      "coordinateReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m30",
+      "messier": 30,
+      "name": "NGC 7099",
+      "aliases": [
+        "M 30",
+        "NGC 7099"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 325.0921666666667,
+      "decDegrees": -23.17986111111111,
+      "majorArcmin": 11,
+      "minorArcmin": 11,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m31",
+      "messier": 31,
+      "name": "Andromeda Galaxy",
+      "aliases": [
+        "M 31",
+        "Andromeda Galaxy",
+        "NGC 224",
+        "And Nebula",
+        "Andromeda Nebula",
+        "Andromeda"
+      ],
+      "type": "galaxy",
+      "sourceType": "AGN",
+      "raDegrees": 10.684708333333333,
+      "decDegrees": 41.268750000000004,
+      "majorArcmin": 199.53,
+      "minorArcmin": 70.79,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2003A&A...412...45P",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m32",
+      "messier": 32,
+      "name": "NGC 221",
+      "aliases": [
+        "M 32",
+        "NGC 221"
+      ],
+      "type": "galaxy",
+      "sourceType": "GiG",
+      "raDegrees": 10.67427,
+      "decDegrees": 40.86517,
+      "majorArcmin": 3.375,
+      "minorArcmin": 2.73375,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023A&A...675A..90P",
+        "wavelength": "N"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m33",
+      "messier": 33,
+      "name": "Triangulum Galaxy",
+      "aliases": [
+        "M 33",
+        "Triangulum Galaxy",
+        "Triangulum Pinwheel",
+        "NGC 598"
+      ],
+      "type": "galaxy",
+      "sourceType": "GiG",
+      "raDegrees": 23.46206906218,
+      "decDegrees": 30.660175111980003,
+      "majorArcmin": 60.26,
+      "minorArcmin": 35.48,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2003A&A...412...45P",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m34",
+      "messier": 34,
+      "name": "NGC 1039",
+      "aliases": [
+        "M 34",
+        "NGC 1039"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 40.53083333333333,
+      "decDegrees": 42.721944444444446,
+      "majorArcmin": 48.4,
+      "minorArcmin": 48.4,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m35",
+      "messier": 35,
+      "name": "NGC 2168",
+      "aliases": [
+        "M 35",
+        "NGC 2168"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 92.27208333333334,
+      "decDegrees": 24.336111111111105,
+      "majorArcmin": 38.3,
+      "minorArcmin": 38.3,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m36",
+      "messier": 36,
+      "name": "NGC 1960",
+      "aliases": [
+        "M 36",
+        "NGC 1960"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 84.08416666666666,
+      "decDegrees": 34.135,
+      "majorArcmin": 120,
+      "minorArcmin": 120,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2022A&A...664A..66M",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m37",
+      "messier": 37,
+      "name": "NGC 2099",
+      "aliases": [
+        "M 37",
+        "NGC 2099"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 88.07416666666667,
+      "decDegrees": 32.54499999999999,
+      "majorArcmin": 19.3,
+      "minorArcmin": 19.3,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m38",
+      "messier": 38,
+      "name": "NGC 1912",
+      "aliases": [
+        "M 38",
+        "NGC 1912"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 82.16708333333332,
+      "decDegrees": 35.823888888888895,
+      "majorArcmin": 19.6,
+      "minorArcmin": 19.6,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m39",
+      "messier": 39,
+      "name": "NGC 7092",
+      "aliases": [
+        "M 39",
+        "NGC 7092"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 322.88916666666654,
+      "decDegrees": 48.246944444444445,
+      "majorArcmin": 120.4,
+      "minorArcmin": 120.4,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m40",
+      "messier": 40,
+      "name": "Winnecke 4",
+      "aliases": [
+        "M 40",
+        "Winnecke 4"
+      ],
+      "type": "optical-double",
+      "sourceType": "?",
+      "raDegrees": 185.54999999999998,
+      "decDegrees": 58.083333333333336,
+      "majorArcmin": null,
+      "minorArcmin": null,
+      "coordinateReference": {
+        "bibcode": null,
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": null,
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide",
+        "merrifield-2016-m40"
+      ],
+      "notes": "Two unrelated stars, not a bound binary or nebula. Literature classification supplements SIMBAD sourceType=?; the returned nominal center has quality E."
+    },
+    {
+      "id": "m41",
+      "messier": 41,
+      "name": "NGC 2287",
+      "aliases": [
+        "M 41",
+        "NGC 2287"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 101.49916666666667,
+      "decDegrees": -20.716111111111108,
+      "majorArcmin": 39.8,
+      "minorArcmin": 39.8,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m42",
+      "messier": 42,
+      "name": "Orion Nebula",
+      "aliases": [
+        "M 42",
+        "Orion Nebula",
+        "NGC 1976",
+        "Great Orion Nebula",
+        "Ori Nebula"
+      ],
+      "type": "emission-nebula",
+      "sourceType": "HII",
+      "raDegrees": 83.8201,
+      "decDegrees": -5.3876,
+      "majorArcmin": 66,
+      "minorArcmin": 66,
+      "coordinateReference": {
+        "bibcode": "2022A&A...661A..38P",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m43",
+      "messier": 43,
+      "name": "Mairan's Nebula",
+      "aliases": [
+        "M 43",
+        "Mairan's Nebula",
+        "NGC 1982"
+      ],
+      "type": "emission-nebula",
+      "sourceType": "HII",
+      "raDegrees": 83.87916666666666,
+      "decDegrees": -5.27,
+      "majorArcmin": null,
+      "minorArcmin": null,
+      "coordinateReference": {
+        "bibcode": null,
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": null,
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m44",
+      "messier": 44,
+      "name": "Praesepe Cluster",
+      "aliases": [
+        "M 44",
+        "NGC 2632",
+        "Beehive",
+        "Praesepe",
+        "Praesepe Cluster"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 130.05416666666665,
+      "decDegrees": 19.62111111111111,
+      "majorArcmin": 118.2,
+      "minorArcmin": 118.2,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m45",
+      "messier": 45,
+      "name": "Pleiades",
+      "aliases": [
+        "M 45",
+        "Cl Melotte 22",
+        "Seven Sisters",
+        "Pleiades"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 56.600833333333334,
+      "decDegrees": 24.11388888888889,
+      "majorArcmin": 76.86,
+      "minorArcmin": 76.86,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2021MNRAS.504..356D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m46",
+      "messier": 46,
+      "name": "NGC 2437",
+      "aliases": [
+        "M 46",
+        "NGC 2437"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 115.44500000000002,
+      "decDegrees": -14.84388888888889,
+      "majorArcmin": 25.3,
+      "minorArcmin": 25.3,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m47",
+      "messier": 47,
+      "name": "NGC 2422",
+      "aliases": [
+        "M 47",
+        "NGC 2422"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 114.14708333333333,
+      "decDegrees": -14.488888888888885,
+      "majorArcmin": 31.1,
+      "minorArcmin": 31.1,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m48",
+      "messier": 48,
+      "name": "NGC 2548",
+      "aliases": [
+        "M 48",
+        "NGC 2548"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 123.41208333333333,
+      "decDegrees": -5.726111111111112,
+      "majorArcmin": 44.3,
+      "minorArcmin": 44.3,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m49",
+      "messier": 49,
+      "name": "NGC 4472",
+      "aliases": [
+        "M 49",
+        "NGC 4472"
+      ],
+      "type": "galaxy",
+      "sourceType": "Sy2",
+      "raDegrees": 187.4449,
+      "decDegrees": 8.0004,
+      "majorArcmin": 8.24445,
+      "minorArcmin": 6.84866,
+      "coordinateReference": {
+        "bibcode": "1997A&AS..122..235L",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m50",
+      "messier": 50,
+      "name": "NGC 2323",
+      "aliases": [
+        "M 50",
+        "NGC 2323"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 105.68416666666667,
+      "decDegrees": -8.365,
+      "majorArcmin": 31.6,
+      "minorArcmin": 31.6,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m51",
+      "messier": 51,
+      "name": "Whirlpool Galaxy",
+      "aliases": [
+        "M 51",
+        "Whirlpool",
+        "NGC 5194",
+        "Question Mark Galaxy",
+        "Whirlpool Galaxy"
+      ],
+      "type": "galaxy",
+      "sourceType": "Sy2",
+      "raDegrees": 202.469575,
+      "decDegrees": 47.19525833333333,
+      "majorArcmin": 9.04379,
+      "minorArcmin": 7.78399,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m52",
+      "messier": 52,
+      "name": "NGC 7654",
+      "aliases": [
+        "M 52",
+        "NGC 7654"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 351.195,
+      "decDegrees": 61.589999999999996,
+      "majorArcmin": 16,
+      "minorArcmin": 16,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m53",
+      "messier": 53,
+      "name": "NGC 5024",
+      "aliases": [
+        "M 53",
+        "NGC 5024"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 198.2302083333333,
+      "decDegrees": 18.168166666666668,
+      "majorArcmin": 12.6,
+      "minorArcmin": 12.6,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m54",
+      "messier": 54,
+      "name": "NGC 6715",
+      "aliases": [
+        "M 54",
+        "NGC 6715"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 283.763875,
+      "decDegrees": -30.47986111111111,
+      "majorArcmin": 9.1,
+      "minorArcmin": 9.1,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m55",
+      "messier": 55,
+      "name": "NGC 6809",
+      "aliases": [
+        "M 55",
+        "NGC 6809"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 294.9987916666667,
+      "decDegrees": -30.96475,
+      "majorArcmin": 19,
+      "minorArcmin": 19,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m56",
+      "messier": 56,
+      "name": "NGC 6779",
+      "aliases": [
+        "M 56",
+        "NGC 6779"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 289.14820833333334,
+      "decDegrees": 30.183472222222214,
+      "majorArcmin": 7.1,
+      "minorArcmin": 7.1,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m57",
+      "messier": 57,
+      "name": "Ring Nebula",
+      "aliases": [
+        "M 57",
+        "NGC 6720",
+        "Ring Nebula"
+      ],
+      "type": "planetary-nebula",
+      "sourceType": "PN",
+      "raDegrees": 283.39623652463,
+      "decDegrees": 33.029134246539996,
+      "majorArcmin": 1.153,
+      "minorArcmin": 1.153,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2008ApJ...689..194S",
+        "wavelength": "R"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m58",
+      "messier": 58,
+      "name": "NGC 4579",
+      "aliases": [
+        "M 58",
+        "NGC 4579"
+      ],
+      "type": "galaxy",
+      "sourceType": "Sy2",
+      "raDegrees": 189.43165612500002,
+      "decDegrees": 11.818090000000002,
+      "majorArcmin": 5.7078,
+      "minorArcmin": 4.50403,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m59",
+      "messier": 59,
+      "name": "NGC 4621",
+      "aliases": [
+        "M 59",
+        "NGC 4621"
+      ],
+      "type": "galaxy",
+      "sourceType": "GiG",
+      "raDegrees": 190.50940890631998,
+      "decDegrees": 11.64691930771,
+      "majorArcmin": 5.58133,
+      "minorArcmin": 3.79698,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m60",
+      "messier": 60,
+      "name": "NGC 4649",
+      "aliases": [
+        "M 60",
+        "NGC 4649"
+      ],
+      "type": "galaxy",
+      "sourceType": "GiC",
+      "raDegrees": 190.91654510497253,
+      "decDegrees": 11.552691159463055,
+      "majorArcmin": 6.43409,
+      "minorArcmin": 5.04754,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m61",
+      "messier": 61,
+      "name": "NGC 4303",
+      "aliases": [
+        "M 61",
+        "NGC 4303"
+      ],
+      "type": "galaxy",
+      "sourceType": "Sy2",
+      "raDegrees": 185.47886774286997,
+      "decDegrees": 4.47377704644,
+      "majorArcmin": 4.996,
+      "minorArcmin": 4.95603,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m62",
+      "messier": 62,
+      "name": "NGC 6266",
+      "aliases": [
+        "M 62",
+        "NGC 6266"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 255.30249999999995,
+      "decDegrees": -30.112361111111106,
+      "majorArcmin": 14.1,
+      "minorArcmin": 14.1,
+      "coordinateReference": {
+        "bibcode": "2006MNRAS.365.1357D",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m63",
+      "messier": 63,
+      "name": "Sunflower Galaxy",
+      "aliases": [
+        "M 63",
+        "Sunflower Galaxy",
+        "NGC 5055"
+      ],
+      "type": "galaxy",
+      "sourceType": "LIN",
+      "raDegrees": 198.95530912246997,
+      "decDegrees": 42.02936891003,
+      "majorArcmin": 13.18,
+      "minorArcmin": 7.94,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2003A&A...412...45P",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m64",
+      "messier": 64,
+      "name": "Evil Eye Galaxy",
+      "aliases": [
+        "M 64",
+        "Evil Eye Galaxy",
+        "NGC 4826",
+        "Black Eye Galaxy"
+      ],
+      "type": "galaxy",
+      "sourceType": "SyG",
+      "raDegrees": 194.18206666666663,
+      "decDegrees": 21.682658333333332,
+      "majorArcmin": 10.9934,
+      "minorArcmin": 6.22445,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m65",
+      "messier": 65,
+      "name": "NGC 3623",
+      "aliases": [
+        "M 65",
+        "NGC 3623"
+      ],
+      "type": "galaxy",
+      "sourceType": "GiP",
+      "raDegrees": 169.73295193949,
+      "decDegrees": 13.092305751019998,
+      "majorArcmin": 15.9663,
+      "minorArcmin": 4.5472,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m66",
+      "messier": 66,
+      "name": "NGC 3627",
+      "aliases": [
+        "M 66",
+        "NGC 3627"
+      ],
+      "type": "galaxy",
+      "sourceType": "AGN",
+      "raDegrees": 170.0626,
+      "decDegrees": 12.9915,
+      "majorArcmin": 11.4338,
+      "minorArcmin": 5.99247,
+      "coordinateReference": {
+        "bibcode": "1997A&AS..122..235L",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m67",
+      "messier": 67,
+      "name": "NGC 2682",
+      "aliases": [
+        "M 67",
+        "NGC 2682"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 132.84583333333333,
+      "decDegrees": 11.81388888888889,
+      "majorArcmin": 25,
+      "minorArcmin": 25,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2010A&A...516A...3K",
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m68",
+      "messier": 68,
+      "name": "NGC 4590",
+      "aliases": [
+        "M 68",
+        "NGC 4590"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 189.8665833333333,
+      "decDegrees": -26.74405555555555,
+      "majorArcmin": 12,
+      "minorArcmin": 12,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m69",
+      "messier": 69,
+      "name": "NGC 6637",
+      "aliases": [
+        "M 69",
+        "NGC 6637"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 277.84625,
+      "decDegrees": -32.34808333333334,
+      "majorArcmin": 7.1,
+      "minorArcmin": 7.1,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m70",
+      "messier": 70,
+      "name": "NGC 6681",
+      "aliases": [
+        "M 70",
+        "NGC 6681"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 280.80316666666664,
+      "decDegrees": -32.292111111111105,
+      "majorArcmin": 7.8,
+      "minorArcmin": 7.8,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m71",
+      "messier": 71,
+      "name": "NGC 6838",
+      "aliases": [
+        "M 71",
+        "NGC 6838"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 298.44370833333335,
+      "decDegrees": 18.779194444444443,
+      "majorArcmin": 7.2,
+      "minorArcmin": 7.2,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m72",
+      "messier": 72,
+      "name": "NGC 6981",
+      "aliases": [
+        "M 72",
+        "NGC 6981"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 313.36541666666665,
+      "decDegrees": -12.537305555555555,
+      "majorArcmin": 5.9,
+      "minorArcmin": 5.9,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m73",
+      "messier": 73,
+      "name": "NGC 6994",
+      "aliases": [
+        "M 73",
+        "NGC 6994"
+      ],
+      "type": "asterism",
+      "sourceType": "err",
+      "raDegrees": 314.75,
+      "decDegrees": -12.633333333333333,
+      "majorArcmin": null,
+      "minorArcmin": null,
+      "coordinateReference": {
+        "bibcode": null,
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": null,
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide",
+        "odenkirchen-2002-m73"
+      ],
+      "notes": "Chance alignment of unrelated field stars. Literature classification supplements SIMBAD sourceType=err; retain the Messier entry rather than deleting it as a failed lookup."
+    },
+    {
+      "id": "m74",
+      "messier": 74,
+      "name": "NGC 628",
+      "aliases": [
+        "M 74",
+        "NGC 628"
+      ],
+      "type": "galaxy",
+      "sourceType": "G",
+      "raDegrees": 24.173938015259996,
+      "decDegrees": 15.783640975640001,
+      "majorArcmin": 6.70395,
+      "minorArcmin": 6.653,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m75",
+      "messier": 75,
+      "name": "NGC 6864",
+      "aliases": [
+        "M 75",
+        "NGC 6864"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 301.52017083333334,
+      "decDegrees": -21.922261111111112,
+      "majorArcmin": 2.383,
+      "minorArcmin": 2.145,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "wavelength": "N"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m76",
+      "messier": 76,
+      "name": "Little Dumbbell Nebula",
+      "aliases": [
+        "M 76",
+        "NGC 650",
+        "NGC 651",
+        "Cork Nebula",
+        "Barbell Nebula",
+        "Little Dumbbell Nebula"
+      ],
+      "type": "planetary-nebula",
+      "sourceType": "PN",
+      "raDegrees": 25.58189905342,
+      "decDegrees": 51.57542638057,
+      "majorArcmin": 2.307,
+      "minorArcmin": 2.307,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2008ApJ...689..194S",
+        "wavelength": "R"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ],
+      "notes": "NGC 650 and NGC 651 are aliases of this single Messier entry; do not create two targets."
+    },
+    {
+      "id": "m77",
+      "messier": 77,
+      "name": "NGC 1068",
+      "aliases": [
+        "M 77",
+        "NGC 1068"
+      ],
+      "type": "galaxy",
+      "sourceType": "Sy2",
+      "raDegrees": 40.66962152891999,
+      "decDegrees": -0.01329435839,
+      "majorArcmin": 5.49952,
+      "minorArcmin": 5.08871,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m78",
+      "messier": 78,
+      "name": "NGC 2068",
+      "aliases": [
+        "M 78",
+        "NGC 2068"
+      ],
+      "type": "reflection-nebula",
+      "sourceType": "RNe",
+      "raDegrees": 86.69083333333333,
+      "decDegrees": 0.07916666666666666,
+      "majorArcmin": null,
+      "minorArcmin": null,
+      "coordinateReference": {
+        "bibcode": null,
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": null,
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m79",
+      "messier": 79,
+      "name": "NGC 1904",
+      "aliases": [
+        "M 79",
+        "NGC 1904"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 81.04412500000002,
+      "decDegrees": -24.52425,
+      "majorArcmin": 8.7,
+      "minorArcmin": 8.7,
+      "coordinateReference": {
+        "bibcode": "2006MNRAS.365.1357D",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m80",
+      "messier": 80,
+      "name": "NGC 6093",
+      "aliases": [
+        "M 80",
+        "NGC 6093"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 244.26004166666672,
+      "decDegrees": -22.976083333333328,
+      "majorArcmin": 8.9,
+      "minorArcmin": 8.9,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m81",
+      "messier": 81,
+      "name": "M 81*",
+      "aliases": [
+        "M 81",
+        "NGC 3031",
+        "M 81*",
+        "Bode's Galaxy"
+      ],
+      "type": "galaxy",
+      "sourceType": "Sy2",
+      "raDegrees": 148.88821939854,
+      "decDegrees": 69.06529514038,
+      "majorArcmin": 21.38,
+      "minorArcmin": 10.23,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2003A&A...412...45P",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m82",
+      "messier": 82,
+      "name": "UMa A",
+      "aliases": [
+        "M 82",
+        "NGC 3034",
+        "UMa A",
+        "Cigar Galaxy"
+      ],
+      "type": "galaxy",
+      "sourceType": "AGN",
+      "raDegrees": 148.96845833333333,
+      "decDegrees": 69.67970277777778,
+      "majorArcmin": null,
+      "minorArcmin": null,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": null,
+        "wavelength": null
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m83",
+      "messier": 83,
+      "name": "Southern Pinwheel Galaxy",
+      "aliases": [
+        "M 83",
+        "Southern Pinwheel Galaxy",
+        "NGC 5236"
+      ],
+      "type": "galaxy",
+      "sourceType": "SBG",
+      "raDegrees": 204.25383,
+      "decDegrees": -29.865761111111112,
+      "majorArcmin": 13.8,
+      "minorArcmin": 12.88,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2003A&A...412...45P",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m84",
+      "messier": 84,
+      "name": "NGC 4374",
+      "aliases": [
+        "M 84",
+        "NGC 4374"
+      ],
+      "type": "galaxy",
+      "sourceType": "Sy2",
+      "raDegrees": 186.2655972083333,
+      "decDegrees": 12.886983138888887,
+      "majorArcmin": 6.46,
+      "minorArcmin": 5.75,
+      "coordinateReference": {
+        "bibcode": "2009A&A...493..317L",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2003A&A...412...45P",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m85",
+      "messier": 85,
+      "name": "NGC 4382",
+      "aliases": [
+        "M 85",
+        "NGC 4382"
+      ],
+      "type": "galaxy",
+      "sourceType": "GiP",
+      "raDegrees": 186.35022083333328,
+      "decDegrees": 18.191080555555555,
+      "majorArcmin": 6.88674,
+      "minorArcmin": 5.17332,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m86",
+      "messier": 86,
+      "name": "FAUST V051",
+      "aliases": [
+        "M 86",
+        "NGC 4406",
+        "FAUST V051"
+      ],
+      "type": "galaxy",
+      "sourceType": "GiG",
+      "raDegrees": 186.54922499999998,
+      "decDegrees": 12.945969444444444,
+      "majorArcmin": 9.33669,
+      "minorArcmin": 6.60384,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m87",
+      "messier": 87,
+      "name": "Vir A",
+      "aliases": [
+        "M 87",
+        "Vir A",
+        "Virgo Galaxy",
+        "NGC 4486",
+        "Virgo A",
+        "M 87*",
+        "SMOKING GUN"
+      ],
+      "type": "galaxy",
+      "sourceType": "AGN",
+      "raDegrees": 187.70593076725,
+      "decDegrees": 12.391123246083334,
+      "majorArcmin": 6.29875,
+      "minorArcmin": 5.7262,
+      "coordinateReference": {
+        "bibcode": "2020A&A...644A.159C",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m88",
+      "messier": 88,
+      "name": "NGC 4501",
+      "aliases": [
+        "M 88",
+        "NGC 4501"
+      ],
+      "type": "galaxy",
+      "sourceType": "Sy2",
+      "raDegrees": 187.99646877602,
+      "decDegrees": 14.420319158839998,
+      "majorArcmin": 6.69443,
+      "minorArcmin": 3.45299,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m89",
+      "messier": 89,
+      "name": "NGC 4552",
+      "aliases": [
+        "M 89",
+        "NGC 4552"
+      ],
+      "type": "galaxy",
+      "sourceType": "Sy2",
+      "raDegrees": 188.9158638892917,
+      "decDegrees": 12.556341907138888,
+      "majorArcmin": 4.36363,
+      "minorArcmin": 3.91025,
+      "coordinateReference": {
+        "bibcode": "2020A&A...644A.159C",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m90",
+      "messier": 90,
+      "name": "NGC 4569",
+      "aliases": [
+        "M 90",
+        "NGC 4569"
+      ],
+      "type": "galaxy",
+      "sourceType": "Sy2",
+      "raDegrees": 189.20750409994997,
+      "decDegrees": 13.162923281399998,
+      "majorArcmin": 9.6021,
+      "minorArcmin": 3.93302,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m91",
+      "messier": 91,
+      "name": "NGC 4548",
+      "aliases": [
+        "M 91",
+        "NGC 4548"
+      ],
+      "type": "galaxy",
+      "sourceType": "LIN",
+      "raDegrees": 188.86018615054996,
+      "decDegrees": 14.496322314930001,
+      "majorArcmin": 5.24764,
+      "minorArcmin": 4.32091,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m92",
+      "messier": 92,
+      "name": "NGC 6341",
+      "aliases": [
+        "M 92",
+        "NGC 6341"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 259.2807916666667,
+      "decDegrees": 43.13594444444444,
+      "majorArcmin": 11.2,
+      "minorArcmin": 11.2,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m93",
+      "messier": 93,
+      "name": "NGC 2447",
+      "aliases": [
+        "M 93",
+        "NGC 2447"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 116.14083333333332,
+      "decDegrees": -23.853055555555557,
+      "majorArcmin": 24.2,
+      "minorArcmin": 24.2,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m94",
+      "messier": 94,
+      "name": "NGC 4736",
+      "aliases": [
+        "M 94",
+        "NGC 4736"
+      ],
+      "type": "galaxy",
+      "sourceType": "SyG",
+      "raDegrees": 192.72114082143,
+      "decDegrees": 41.12025024573,
+      "majorArcmin": 6.99078,
+      "minorArcmin": 5.86107,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m95",
+      "messier": 95,
+      "name": "NGC 3351",
+      "aliases": [
+        "M 95",
+        "NGC 3351"
+      ],
+      "type": "galaxy",
+      "sourceType": "GiP",
+      "raDegrees": 160.99054728575,
+      "decDegrees": 11.703694775369998,
+      "majorArcmin": 5.59651,
+      "minorArcmin": 5.00776,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m96",
+      "messier": 96,
+      "name": "NGC 3368",
+      "aliases": [
+        "M 96",
+        "NGC 3368"
+      ],
+      "type": "galaxy",
+      "sourceType": "GiP",
+      "raDegrees": 161.6906,
+      "decDegrees": 11.819938888888887,
+      "majorArcmin": 6.59388,
+      "minorArcmin": 4.93881,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m97",
+      "messier": 97,
+      "name": "Owl Nebula",
+      "aliases": [
+        "M 97",
+        "NGC 3587",
+        "Owl Nebula"
+      ],
+      "type": "planetary-nebula",
+      "sourceType": "PN",
+      "raDegrees": 168.69880122825,
+      "decDegrees": 55.01902300891,
+      "majorArcmin": 3.333,
+      "minorArcmin": 3.333,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2008ApJ...689..194S",
+        "wavelength": "R"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m98",
+      "messier": 98,
+      "name": "NGC 4192",
+      "aliases": [
+        "M 98",
+        "NGC 4192"
+      ],
+      "type": "galaxy",
+      "sourceType": "LIN",
+      "raDegrees": 183.45121278623998,
+      "decDegrees": 14.900542632,
+      "majorArcmin": 10.9447,
+      "minorArcmin": 2.86533,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m99",
+      "messier": 99,
+      "name": "Virgo Cluster Pinwheel",
+      "aliases": [
+        "M 99",
+        "Virgo Cluster Pinwheel",
+        "Coma Pinwheel",
+        "NGC 4254"
+      ],
+      "type": "galaxy",
+      "sourceType": "H2G",
+      "raDegrees": 184.7067708333333,
+      "decDegrees": 14.416488888888884,
+      "majorArcmin": 4.602,
+      "minorArcmin": 4.2817,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m100",
+      "messier": 100,
+      "name": "NGC 4321",
+      "aliases": [
+        "M 100",
+        "NGC 4321"
+      ],
+      "type": "galaxy",
+      "sourceType": "AGN",
+      "raDegrees": 185.72887499732997,
+      "decDegrees": 15.822304516100004,
+      "majorArcmin": 6.30534,
+      "minorArcmin": 5.29964,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m101",
+      "messier": 101,
+      "name": "Pinwheel",
+      "aliases": [
+        "M 101",
+        "NGC 5457",
+        "Pinwheel"
+      ],
+      "type": "galaxy",
+      "sourceType": "GiP",
+      "raDegrees": 210.80242916666668,
+      "decDegrees": 54.34875,
+      "majorArcmin": 21.88,
+      "minorArcmin": 20.89,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2003A&A...412...45P",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m102",
+      "messier": 102,
+      "name": "Spindle Galaxy",
+      "aliases": [
+        "M 102",
+        "NGC 5866",
+        "Spindle Galaxy"
+      ],
+      "type": "galaxy",
+      "sourceType": "SyG",
+      "raDegrees": 226.62317083333332,
+      "decDegrees": 55.76330833333333,
+      "majorArcmin": 6.31,
+      "minorArcmin": 2.69,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2003A&A...412...45P",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide",
+        "nasa-m102",
+        "nasa-heasarc-messier"
+      ],
+      "notes": "Adopts the current SIMBAD identification NGC 5866 and NASA Hubble M102 entry. Historical identity is disputed: the older HEASARC list omits M102 as a duplicate of M101. It remains a distinct inventory target here."
+    },
+    {
+      "id": "m103",
+      "messier": 103,
+      "name": "NGC 581",
+      "aliases": [
+        "M 103",
+        "NGC 581"
+      ],
+      "type": "open-cluster",
+      "sourceType": "OpC",
+      "raDegrees": 23.339166666666667,
+      "decDegrees": 60.65888888888889,
+      "majorArcmin": 7.4,
+      "minorArcmin": 7.4,
+      "coordinateReference": {
+        "bibcode": "2021A&A...647A..19T",
+        "quality": "E"
+      },
+      "extentReference": {
+        "bibcode": "2020A&A...633A..99C",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m104",
+      "messier": 104,
+      "name": "Sombrero Galaxy",
+      "aliases": [
+        "M 104",
+        "Sombrero Galaxy",
+        "NGC 4594",
+        "Sombrero"
+      ],
+      "type": "galaxy",
+      "sourceType": "LIN",
+      "raDegrees": 189.99763274591663,
+      "decDegrees": -11.623054494444448,
+      "majorArcmin": 8.51,
+      "minorArcmin": 5.01,
+      "coordinateReference": {
+        "bibcode": "2020A&A...644A.159C",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2003A&A...412...45P",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m105",
+      "messier": 105,
+      "name": "NGC 3379",
+      "aliases": [
+        "M 105",
+        "NGC 3379"
+      ],
+      "type": "galaxy",
+      "sourceType": "LIN",
+      "raDegrees": 161.95666666666665,
+      "decDegrees": 12.581630555555554,
+      "majorArcmin": 5.13,
+      "minorArcmin": 4.68,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2003A&A...412...45P",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m106",
+      "messier": 106,
+      "name": "NGC 4258",
+      "aliases": [
+        "M 106",
+        "NGC 4258"
+      ],
+      "type": "galaxy",
+      "sourceType": "Sy2",
+      "raDegrees": 184.7400833333333,
+      "decDegrees": 47.30371944444444,
+      "majorArcmin": 17.78,
+      "minorArcmin": 6.92,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2003A&A...412...45P",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m107",
+      "messier": 107,
+      "name": "NGC 6171",
+      "aliases": [
+        "M 107",
+        "NGC 6171"
+      ],
+      "type": "globular-cluster",
+      "sourceType": "GlC",
+      "raDegrees": 248.13275,
+      "decDegrees": -13.05377777777778,
+      "majorArcmin": 10,
+      "minorArcmin": 10,
+      "coordinateReference": {
+        "bibcode": "2010AJ....140.1830G",
+        "quality": "D"
+      },
+      "extentReference": {
+        "bibcode": "1989Sci...246.1066D",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m108",
+      "messier": 108,
+      "name": "NGC 3556",
+      "aliases": [
+        "M 108",
+        "NGC 3556"
+      ],
+      "type": "galaxy",
+      "sourceType": "AGN",
+      "raDegrees": 167.87902916666664,
+      "decDegrees": 55.67412222222222,
+      "majorArcmin": 14.5939,
+      "minorArcmin": 3.86883,
+      "coordinateReference": {
+        "bibcode": "2006AJ....131.1163S",
+        "quality": "C"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m109",
+      "messier": 109,
+      "name": "NGC 3992",
+      "aliases": [
+        "M 109",
+        "NGC 3992"
+      ],
+      "type": "galaxy",
+      "sourceType": "GiG",
+      "raDegrees": 179.39984644985,
+      "decDegrees": 53.37472391176001,
+      "majorArcmin": 8.2046,
+      "minorArcmin": 4.60934,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2023ApJS..269....3M",
+        "wavelength": "O"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    },
+    {
+      "id": "m110",
+      "messier": 110,
+      "name": "NGC 205",
+      "aliases": [
+        "M 110",
+        "NGC 205"
+      ],
+      "type": "galaxy",
+      "sourceType": "GiG",
+      "raDegrees": 10.09190514583,
+      "decDegrees": 41.68541867226,
+      "majorArcmin": 3.332,
+      "minorArcmin": 2.0991666,
+      "coordinateReference": {
+        "bibcode": "2020yCat.1350....0G",
+        "quality": "A"
+      },
+      "extentReference": {
+        "bibcode": "2023A&A...675A..90P",
+        "wavelength": "N"
+      },
+      "sourceIds": [
+        "simbad-basic",
+        "simbad-aliases",
+        "simbad-type-guide"
+      ]
+    }
+  ]
+}

@@ -12,11 +12,9 @@ import { createCloudStarControls } from './components/cloud-star-controls';
 import type { ImageLayer } from './viewer/overlay-variants';
 import { createRemovalStrengthStore, validateRemovalStrength } from './star-removal/removal-strength';
 import { createStarRemovalControls } from './components/star-removal-controls';
+import { supportsLabAlignment } from './utils/lab-workflows';
 
-export const labObjects = [
-  { id: 'lmc-clouds', name: 'LMC' },
-  { id: 'smc-particles', name: 'SMC' },
-] as const;
+export const labObjects = subjects.filter(item => !item.sourceSubjectId).map(item => ({ id: item.id, name: item.menuLabel ?? item.name }));
 export interface AlignmentState {
   images: { id: string; label: string }[]; imageId: string; layer: ImageLayer; layers: ImageLayer[];
   enabled: boolean; opacity: number; removalStrength: number;
@@ -85,6 +83,7 @@ let viewer: Viewer | null = null;
 let busy = false, disposed = false;
 let sourceSubject: string | null = null;
 let currentTab = 0;
+let emissionInspection: 'sources' | 'structure' | 'volume' = 'structure';
 let currentMode: 'photo' | 'density' = 'density';
 let activePose = 'front', alignmentState: AlignmentState | undefined;
 let originalOverlayState: LabShellState['originalOverlay'];
@@ -161,12 +160,21 @@ function objectId(id: string | null) {
 
 function publishShell() {
   options.onShellState({ objectId: objectId(sourceSubject), view: tabNames[currentTab]!, busy,
-    alignmentAvailable: Boolean(!sourceSubject || subjects.find(item => item.id === sourceSubject)?.density), pose: activePose, alignment: alignmentState,
+    alignmentAvailable: !sourceSubject || supportsLabAlignment(subjects.find(item => item.id === sourceSubject)), pose: activePose, alignment: alignmentState,
     originalOverlay: originalOverlayState });
 }
+function observationInspectionActive(id = sourceSubject) {
+  const item = subjects.find(value => value.id === id);
+  return Boolean(item?.observationAlignment && (currentTab === 0 ||
+    item.emissionExperiment?.observationStructures && emissionInspection !== 'volume'));
+}
 function selectTab(index: number, updateUrl = true): Promise<void> {
+  if (currentTab !== index) emissionInspection = 'structure';
   currentTab = index;
-  const switching = switchMode(index === 0 ? 'density' : 'photo');
+  const item = subjects.find(value => value.id === sourceSubject);
+  const switching = observationInspectionActive() ? Promise.resolve() :
+    item?.observationAlignment && index === 1 && (!viewer || element('viewer').dataset.subject !== sourceSubject) ? changeSubject(item.id, false) :
+    switchMode(index === 0 ? 'density' : 'photo');
   setBusy(busy);
   void refreshOverlayControls();
   if (updateUrl) {
@@ -180,7 +188,7 @@ function selectTab(index: number, updateUrl = true): Promise<void> {
 function setBusy(value: boolean) {
   busy = value; subject.disabled = value; controls.disabled = value;
   reconstruction.setBusy(value);
-  tabs.forEach((tab, index) => { tab.disabled = value || (index === 0 && Boolean(sourceSubject) && !subjects.find(item => item.id === sourceSubject)?.density); });
+  tabs.forEach((tab, index) => { tab.disabled = value || (index === 0 && Boolean(sourceSubject) && !supportsLabAlignment(subjects.find(item => item.id === sourceSubject))); });
   cloudControls.setBusy(value);
   const density = currentMode === 'density';
   const currentSubject = subjects.find(item => item.id === sourceSubject);
@@ -192,7 +200,8 @@ function setBusy(value: boolean) {
   element<HTMLButtonElement>('reference-view').disabled = value || (density ? densityMissing : !currentSubject?.referenceDistanceUnits);
   element<HTMLButtonElement>('fit-cloud').disabled = value || densityMissing;
   element('viewer').setAttribute('aria-busy', String(value));
-  element('viewer').inert = value;
+  element('viewer').inert = value || observationInspectionActive();
+  element('viewer').hidden = observationInspectionActive();
   refreshReconstructionImages();
   publishShell();
 }
@@ -428,7 +437,8 @@ function changeOverlayOpacity(percent: number) {
   void run(async () => { await viewer!.setOverlay(selectedOverlayId!, alignmentState?.enabled ?? false, percent / 100); renderSelectedOverlay(); });
 }
 async function changeSubject(id: string, updateUrl = true) {
-  if (!viewer || busy) return;
+  if (busy) return;
+  if (id !== sourceSubject) emissionInspection = 'structure';
   pendingSubject = id; reconstructionImageError = '';
   invalidateToneContexts();
   cloudControls.setContext(null);
@@ -437,9 +447,18 @@ async function changeSubject(id: string, updateUrl = true) {
   setBusy(true); status.hidden = false; status.textContent = 'Loading…'; delete status.dataset.error;
   void refreshOverlayControls();
   try {
-    await viewer.setSubject(id);
-    if (currentTab === 0 && !subjects.find(item => item.id === id)?.density) {
-      await viewer.setMode('photo'); selectTab(1);
+    const item = subjects.find(value => value.id === id);
+    if (!item) throw new TypeError('Unknown lab subject.');
+    if (observationInspectionActive(id)) {
+      updateSubject(id); status.hidden = true;
+    } else {
+      const nextMode = currentTab === 0 && item.density ? 'density' : 'photo';
+      if (!viewer) await mountViewer(id, nextMode);
+      else await viewer.setSubject(id, null, nextMode);
+      updateSubject(id);
+    }
+    if (currentTab === 0 && !supportsLabAlignment(item)) {
+      await viewer?.setMode('photo'); selectTab(1);
     }
     if (updateUrl) { const url = new URL(location.href); url.searchParams.set('subject', id);
       history.replaceState(history.state, '', url); }
@@ -474,6 +493,23 @@ async function switchMode(next: 'photo' | 'density'): Promise<void> {
   }
 }
 
+async function mountViewer(id: string, mode: 'density' | 'photo') {
+  viewer = await createNebulaLabViewer({ host: element('viewer'), subjectId: id, mode, onState(state) {
+    if (disposed || (pendingSubject && state.subjectId !== pendingSubject) ||
+        (!pendingSubject && observationInspectionActive() && state.subjectId !== sourceSubject)) return;
+    currentMode = state.mode;
+    originalOverlayState = state.originalOverlay;
+    subject.value = objectId(state.subjectId);
+    updateSubject(state.subjectId);
+    activePose = state.pose; cameraPose.value = state.pose; publishShell();
+    status.textContent = state.status ?? '';
+    status.hidden = element('viewer').dataset.ready === 'true' && !state.error;
+    delete status.dataset.error;
+    if (state.error) fail(state.error);
+  } });
+  if (disposed) viewer.destroy();
+}
+
 setBusy(true);
 const initialUrl = new URL(location.href);
 const initialTab = labView(initialUrl) === 'reconstruction' ? 1 : 0;
@@ -491,23 +527,12 @@ try {
     } catch (error) { reconstructionImageError = error instanceof Error ? error.message : String(error); }
   }
   const initialSubject = subjects.find(item => item.id === requestedSubject && (item.id.startsWith('lmc') || item.id.startsWith('smc') || item.sourceSubjectId === 'lmc-clouds')) ?? subjects.find(item => item.id === objectId(requestedSubject))!;
-  const mountTab = initialSubject.density ? initialTab : 1;
+  const mountTab = supportsLabAlignment(initialSubject) ? initialTab : 1;
   selectTab(mountTab);
-  viewer = await createNebulaLabViewer({ host: element('viewer'), subjectId: initialSubject.id,
-    mode: mountTab === 0 ? 'density' : 'photo', onState(state) {
-    if (disposed) return;
-    currentMode = state.mode;
-    originalOverlayState = state.originalOverlay;
-    subject.value = objectId(state.subjectId);
-    updateSubject(state.subjectId);
-    activePose = state.pose; cameraPose.value = state.pose; publishShell();
-    status.textContent = state.status ?? '';
-    status.hidden = element('viewer').dataset.ready === 'true' && !state.error;
-    delete status.dataset.error;
-    if (state.error) fail(state.error);
-  } });
-  if (disposed) viewer.destroy();
+  updateSubject(initialSubject.id);
+  if (observationInspectionActive()) { status.hidden = true; setBusy(false); void refreshOverlayControls(); }
   else {
+    await mountViewer(initialSubject.id, mountTab === 0 ? 'density' : 'photo');
     const desiredMode = currentTab === 0 ? 'density' : 'photo';
     if (desiredMode !== (currentMode as string) || desiredMode !== requestedMode) void switchMode(desiredMode);
     else { setBusy(false); void refreshOverlayControls(); }
@@ -523,8 +548,20 @@ function onHistoryChange() {
 }
 window.addEventListener('popstate', onHistoryChange);
 
+async function selectEmissionInspection(mode: 'sources' | 'structure' | 'volume') {
+  const item = subjects.find(value => value.id === sourceSubject);
+  if (!item?.emissionExperiment?.observationStructures || disposed) return;
+  if (mode === 'volume' && !item.emissionExperiment.directory) return;
+  emissionInspection = mode;
+  setBusy(busy);
+  if (mode !== 'volume' || busy) return;
+  if (!viewer || element('viewer').dataset.subject !== item.id) await changeSubject(item.id, false);
+  else await switchMode('photo');
+}
+
 function destroy() { if (!disposed) { disposed = true; window.removeEventListener('popstate', onHistoryChange); for (const controller of restoringImages.values()) controller.abort(); densityTone.destroy(); imageTone.destroy(); starRemoval.destroy(); reconstruction.destroy(); placementControls?.destroy(); cloudControls.destroy(); cloudDensityControls.destroy(); cloudStarControls.destroy(); viewer?.destroy(); } }
 return { destroy, selectView: (view: 'alignment' | 'reconstruction') => selectTab(view === 'alignment' ? 0 : 1), changeObject: changeSubject,
+  selectEmissionInspection,
   chooseImage: changeOverlayChoice, chooseLayer: changeOverlayLayer, setRemovalStrength: changeRemovalStrength,
   showImage: changeOverlayVisibility, setImageOpacity: changeOverlayOpacity,
   showOriginal: (enabled: boolean) => run(() => viewer!.setOriginalOverlay(enabled)),

@@ -63,3 +63,27 @@ test('a prepared photo map uses its map URL when source is a provenance record',
     assert.ok(data.every(value=>value>=253));
   } finally {await rm(root,{recursive:true,force:true});}
 });
+
+test('refresh one prepared observation minimap while retaining an unavailable unrelated map', async () => {
+  const objectDirectory = await mkdtemp(resolve(tmpdir(), 'cssearth-minimap-'));
+  const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve(objectDirectory, 'public');
+  try {
+    await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true }); await mkdir(publicDirectory);
+    await writeFile(resolve(outputDirectory, 'surfaces.json'), JSON.stringify({ surfaces: [
+      { id: 'camera', map: { url: '/scenes/test/camera-map.webp' } },
+      { id: 'retained', map: { url: '/scenes/test/not-installed.webp' } },
+    ] }));
+    const retained = { id: 'retained', path: 'minimaps/retained.webp', width: 24, height: 12 };
+    await writeFile(resolve(outputDirectory, 'minimaps.json'), JSON.stringify({ images: [
+      { id: 'camera', path: 'minimaps/camera.webp', width: 24, height: 12 }, retained,
+    ] }));
+    await writeFile(resolve(outputDirectory, retained.path), 'retained bytes');
+    await sharp({ create: { width: 80, height: 40, channels: 3, background: '#777777' } }).webp().toFile(resolve(publicDirectory, 'camera-map.webp'));
+    await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: ['camera'] });
+    const result = JSON.parse(await readFile(resolve(outputDirectory, 'minimaps.json'), 'utf8'));
+    assert.deepEqual(result.images[1], retained);
+    assert.equal(await readFile(resolve(outputDirectory, retained.path), 'utf8'), 'retained bytes');
+    assert.equal(result.images[0].width, 80);
+    await assert.rejects(prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: ['missing'] }), /existing photographic surfaces/);
+  } finally { await rm(objectDirectory, { recursive: true, force: true }); }
+});
