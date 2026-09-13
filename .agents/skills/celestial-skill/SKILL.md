@@ -91,10 +91,14 @@ silently validate a different checkout or accumulate servers on new ports.
 
 Inspect available pinned inputs before downloading alternatives. Before
 finalizing a new body's lenses or expanding its views, make a brief source
-survey beyond the first usable texture. Search the relevant mission archives,
-mapping repositories (such as PDS, USGS and LPI/USRA), and papers' linked data
-releases for better-resolution, registered or photometrically corrected imagery
-and useful complementary products, such as elevation, geology or composition.
+survey beyond the first usable texture. Use the
+[source directory](references/source-directory.md) to choose concrete archives
+for the target and product: mission images and geometry, mapped surfaces,
+radar or optical shape models, paper tables, and research-code inputs.
+Search those relevant sources for better-resolution, registered or
+photometrically corrected imagery and useful complementary products, such as
+elevation, geology or composition. The directory also gives the public Git-history
+route when a paper's input model is missing from a repository's current files.
 Follow promising citations to the actual release; a display-texture catalog or
 press-image search alone does not establish what datasets exist.
 
@@ -104,6 +108,10 @@ file inventory and linked methods for companion image-geometry tables,
 reconstructed pointing, control points, backplanes and detector-quality files.
 Compare their observation IDs and model frame with the image headers; headers
 may retain preliminary geometry superseded by the shape reconstruction.
+Read kernel comments before accepting a body frame: a mission-hosted file can
+retain placeholder pole coordinates or a pre-encounter rotation period. A
+trajectory correction does not also establish the shape's prime meridian or
+rotational phase. Keep these questions separate in the qualification evidence.
 Establish sample/line order, pixel origin, aspect ratio, flips and units, then
 inspect one native-pixel projection before fitting or baking. Follow the
 [source investigation sequence](references/registered-photographic-mosaics.md#inspect-the-release-before-reconstructing-geometry)

@@ -27,8 +27,14 @@ establish a three-dimensional surface or camera registration for that imagery.
 that a Selam shape model had not been derived at the time of their analysis.
 The later [Bierhaus et al. (2025)](https://doi.org/10.3847/PSJ/ae1968) paper
 describes Selam's morphology from the images and a revised model for Dinkinesh;
-the source check did not locate a downloadable Selam mesh and matched cameras.
-This is an unresolved release route, not a claim that photographs are absent.
+the initial source check did not locate a measured Selam mesh and matched cameras.
+A subsequent inspection recovered
+[`selam_two_lobes.stl` from TEMPEST's public history](https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/selam_two_lobes.stl):
+186,688 bytes, 506 distinct vertices and 1,004 triangles. Its SHA-256 is
+`ba4ce642df6624c84130b981c9edb1f0ad8da6d4aae4cd809bb54165e7666b84`.
+Inspection shows smooth lobe geometry; it does not establish recovered terrain
+or image registration. The file's existence corrects the acquisition account,
+but is not a reason to replace the present source-constrained ellipsoid envelope.
 The [Dinkinesh source check](../dinkinesh/README.md#lucy-photographic-source-check-13-september-2026)
 records the inspected archives and the L'LORRI geometric-header timing issue.
 No surface texture, inferred neck terrain, or new landmark placement was prepared.
