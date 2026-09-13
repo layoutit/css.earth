@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c9b689833df2f80fc5581128b8a6566f9e5dfab59aa6d6df585f2193154beb69"
+    "sha256": "48ae011fb9d265291923efbe729db0fb1f4528f1c5700e58d5a8718212824c15"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d2736c587b5f0974995256ad7cd93af2b3065d96ff70a4cc7f0e9d527671ad2a",
+      "sha256": "863508a7053be085da029310e2aa1acce2814bf9c19e5f80635fd2639092e7eb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -197,7 +197,7 @@
                 "maximumSourceDistanceMeters": 85
               },
               "display": {
-                "linear": [
+                "displayRange": [
                   0,
                   0.018
                 ]
