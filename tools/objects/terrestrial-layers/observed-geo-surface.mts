@@ -13,6 +13,7 @@ import { missingCoverageColor } from '../../../src/platform/prepare-missing-cove
 import { decodeAmicaGeo } from './amica-geo.mts';
 import { decodeOsirisReflectance, attachSourceGeometry } from './archived-camera.mts';
 import { decodeLlorri } from './llorri-geo.mts';
+import { decodeNewHorizonsLorri, decodeArrokothMvic } from './new-horizons-geo.mts';
 import { resolvePublishedPhotometry, validPublishedPhotometryShape, type ResolvedPhotometry } from './published-photometry.mts';
 import { decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT } from './pds4-geometry-cube.mts';
 import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, ABERRATIONS } from './spice-camera.mts';
@@ -22,7 +23,7 @@ import { refineCameraByLimb } from './limb-refinement.mts';
 
 const safePath = (path: unknown) => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.split(/[\\/]/).includes('..');
 const positive = (value: number) => Number.isFinite(value) && value > 0;
-const archivedCamera = (recipe: {format:string}) => ['osiris-camera', 'llorri-camera'].includes(recipe.format);
+const archivedCamera = (recipe: {format:string}) => ['osiris-camera', 'llorri-camera', 'nh-lorri-camera', 'nh-mvic-camera'].includes(recipe.format);
 const kernelCamera = (recipe: {format:string}) => recipe.format === SPICE_CAMERA_FORMAT;
 const cubeDeclaration = (recipe: Pick<GeoRecipe,'cube'>) => { if (!recipe.cube) throw new TypeError('Geometry cube recipes declare their planes and identity.'); return recipe.cube; };
 const spiceDeclaration = (recipe: Pick<GeoRecipe,'spice'>) => { if (!recipe.spice) throw new TypeError('SPICE camera recipes declare their kernels, bodies, instrument and pixel axes.'); return recipe.spice; };
@@ -58,6 +59,8 @@ export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown
   if (recipe.selection !== undefined || recipe.levelMatching !== undefined) throw new TypeError('Invalid source-bound observation selection.');
   const policy = recipe.transfer, published = 'referenceDegrees' in recipe.photometry ? recipe.photometry : null, photometry = 'referenceDegrees' in recipe.photometry ? null : recipe.photometry;
   const phase = photometry?.phaseCorrection;
+  if (recipe.format === 'nh-mvic-camera' ? !recipe.colorDisplay || recipe.colorDisplay.minimum !== 0 || !positive(recipe.colorDisplay.maximum) ||
+      photometry?.model !== 'retained-observation' || recipe.frames !== undefined : recipe.colorDisplay !== undefined) throw new TypeError('MVIC color requires one common linear display and retained illumination.');
   if (recipe.radiometry !== undefined && (recipe.format !== 'osiris-geo' || recipe.radiometry !== 'radiance-factor')) throw new TypeError('Invalid observation radiometry.');
   if (phase && (recipe.format !== 'osiris-geo' || recipe.radiometry !== 'radiance-factor' || phase.model !== 'hg-shadow-hiding' ||
       !Number.isFinite(phase.asymmetry) || Math.abs(phase.asymmetry) >= 1 || !positive(phase.amplitude) || !positive(phase.width) ||
@@ -89,7 +92,7 @@ export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown
       Number.isFinite(photometry.coefficient) && photometry.coefficient !== undefined && photometry.coefficient >= .5 && photometry.coefficient <= 1 &&
       Number.isFinite(photometry.phaseCoefficientPerDegree) && photometry.phaseCoefficientPerDegree !== undefined && photometry.phaseCoefficientPerDegree >= 0 && photometry.phaseCoefficientPerDegree <= .01) ||
     ((controlled || kernels) && photometry.model === 'retained-observation' && photometry.maximumGain === 1));
-  if (!['osiris-geo', 'amica-gaskell', 'osiris-camera', 'llorri-camera', PDS4_GEOMETRY_CUBE_FORMAT, SPICE_CAMERA_FORMAT].includes(recipe.format) || !/^[a-z][a-z0-9-]*$/.test(recipe.id) || !/^[a-z][a-z0-9-]*$/.test(recipe.consumer) ||
+  if (!['osiris-geo', 'amica-gaskell', 'osiris-camera', 'llorri-camera', 'nh-lorri-camera', 'nh-mvic-camera', PDS4_GEOMETRY_CUBE_FORMAT, SPICE_CAMERA_FORMAT].includes(recipe.format) || !/^[a-z][a-z0-9-]*$/.test(recipe.id) || !/^[a-z][a-z0-9-]*$/.test(recipe.consumer) ||
       !paths.every(safePath) || new Set(paths).size !== paths.length ||
       (amica ? recipe.qualityPath !== undefined || recipe.allowLossy !== true || recipe.filter !== 'V'
         : cube ? recipe.cube === undefined || recipe.qualityPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.allowLossy !== false
@@ -162,6 +165,8 @@ async function loadSingleGeoObservationSurface({ sourceDirectory, source, recipe
   };
   const frame: GeoObservationFrame = camera ? attachSourceGeometry(recipe.format === 'llorri-camera'
     ? decodeLlorri(await read(recipe.path), camera)
+    : recipe.format === 'nh-lorri-camera' ? decodeNewHorizonsLorri(await read(recipe.path), camera)
+    : recipe.format === 'nh-mvic-camera' ? decodeArrokothMvic(await read(recipe.path), camera)
     : refined(decodeOsirisReflectance(await read(recipe.path), camera, recipe.allowLossy)), radial.grid)
     : kernelCamera(recipe) ? attachSourceGeometry(refined(decodeSpiceCameraFrame(await read(recipe.path),
       await loadKernelSet(spiceDeclaration(recipe).kernelSet ? await kernelBankPaths(requireString(spiceDeclaration(recipe).kernelSet), spiceDeclaration(recipe).kernels)
@@ -195,7 +200,8 @@ export function prepareGeoFrameSurface({ frame, recipe:value, radial, config, en
     if (frame.quality ? frame.quality.flags[i] & 8 : frame.isLossyPixel ? frame.isLossyPixel(i) : frame.qualityReport?.outputMode === 'LOSSY') sourceCoverage.acceptedLossyPixels++;
   }
   corrected.sort((a, b) => a - b);
-  const [low, high] = recipe.displayPercentiles.map(p => corrected[Math.min(corrected.length - 1, Math.floor(corrected.length * p / 100))]);
+  const [low, high] = recipe.colorDisplay ? [recipe.colorDisplay.minimum,recipe.colorDisplay.maximum] : recipe.displayPercentiles.map(p => corrected[Math.min(corrected.length - 1, Math.floor(corrected.length * p / 100))]);
+  if (Boolean(frame.colorPlanes) !== Boolean(recipe.colorDisplay) || frame.colorPlanes?.length !== undefined && frame.colorPlanes.length !== 3) throw new Error('Color observation channels and common display must agree.');
   if (!(high > low)) throw new Error('GEO observation has no qualified display contrast.');
   const metersPerUnit = config.geometry.radiusKm * 1000 / config.geometry.radius;
   const eye = camera.positionKm.map(n => n * 1000), policy = { ...recipe.transfer, ...(legacy ? { photometry: legacy } : {}), ...(resolved ? { normalize: resolved.normalize } : {}) };
@@ -211,9 +217,9 @@ export function prepareGeoFrameSurface({ frame, recipe:value, radial, config, en
     limitations: legacy?.phaseCorrection
       ? 'Approximate single-scattering phase normalization; no Hapke roughness, multiple-scattering correction or cast-shadow recovery. Relative display brightness, not measured albedo.'
       : 'No phase correction, Hapke roughness correction or cast-shadow recovery. Relative display brightness, not measured albedo.' },
-    display: { percentiles: recipe.displayPercentiles, low, high, units: resolved ? resolved.units : recipe.format === 'amica-gaskell'
+    display: { ...(recipe.colorDisplay ? {channels:['NIR','RED','BLUE'],commonLinearScale:true} : {percentiles:recipe.displayPercentiles}), low, high, units: recipe.colorDisplay ? 'archived filter values; enhanced NIR / RED / BLUE color' : resolved ? resolved.units : recipe.format === 'amica-gaskell'
       ? 'relative flat-fielded detector brightness with approximate disk normalization; linear grayscale display'
-      : recipe.format === 'llorri-camera' ? 'relative DN/s with original illumination; linear grayscale display'
+      : ['llorri-camera','nh-lorri-camera'].includes(recipe.format) ? 'relative DN/s with original illumination; linear grayscale display'
       : recipe.format === 'osiris-camera' ? 'relative disk-normalized I/F; linear grayscale display'
       : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? `relative disk-normalized ${cubeDeclaration(recipe).quantity}; linear grayscale display`
       : kernelCamera(recipe) ? `relative ${legacy?.model === 'retained-observation' ? '' : 'disk-normalized '}${spiceDeclaration(recipe).image.quantity}${legacy?.model === 'retained-observation' ? ' with original illumination' : ''}; linear grayscale display`
@@ -235,7 +241,8 @@ export function prepareGeoFrameSurface({ frame, recipe:value, radial, config, en
     const ray = radial.grid.intersect(eye, delta.map(n => n / distance), distance + policy.visibilityToleranceMeters);
     if (!ray || Math.abs(ray.radius - distance) > policy.visibilityToleranceMeters) return missing('occluded');
     const gray = Math.round(Math.max(0, Math.min(1, (sampled.radiance - low) / (high - low))) * 255);
-    return { color: [gray, gray, gray], distanceMeters: hit.distanceMeters, separationMeters: sampled.separationMeters, gain: sampled.gain,
+    const color = sampled.color ? sampled.color.map(value => Math.round(Math.max(0,Math.min(1,(value-low)/(high-low)))*255)) : [gray,gray,gray];
+    return { color, distanceMeters: hit.distanceMeters, separationMeters: sampled.separationMeters, gain: sampled.gain,
       radiance: sampled.radiance, maximumEmissionDegrees: sampled.maximumEmissionDegrees, maximumIncidenceDegrees: sampled.maximumIncidenceDegrees };
   }
   const preview = (width: number, height: number) => previewGeoSurface(samplePoint, radial, config, width, height);

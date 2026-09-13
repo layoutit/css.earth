@@ -162,7 +162,10 @@ function cameraPose(page: Page, id: string): Promise<PoseState> {
     const runtime = Reflect.get(window, `__${id}`) as ObjectRuntime | undefined;
     if (!runtime) throw new Error(`${id}: camera runtime disappeared at ${location.pathname}`);
     const state = runtime.camera.state();
-    return { ...state, pose: state.pose };
+    // Projected silhouette diagnostics can settle by subpixel amounts without
+    // changing the camera. This check owns the released pose and zoom.
+    return { pose: state.pose, pitch: state.pitch, zoom: state.zoom,
+      controlPitch: state.controlPitch, controlYaw: state.controlYaw };
   }, id);
 }
 
