@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bc5d78fbcf406eccb24734b7a9f80fefb171caa757b38e07e6aeabdc2d970c74"
+    "sha256": "b7fdd5089985a23d6f83c5c0451be11158ffd1d5e1a0aae842d0dc40fcadd764"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fda2b1082ff2c42801a1c5c544d32a06b5a284e5fbad5ef0fb6ab33a50a344cc",
+      "sha256": "6eb6ddd56e0f9ef0af48e08763be23af2fb74d50c82440c9d3d1f0fcedf314dd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -599,40 +599,6 @@
               "consumer": "osiris-observation",
               "filter": "FFP-Vis_Orange",
               "allowLossy": true,
-              "transfer": {
-                "maximumSourceDistanceMeters": 50,
-                "maximumSeparationMeters": 20,
-                "maximumEmissionDegrees": 80,
-                "visibilityToleranceMeters": 0.5,
-                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must be within 20 m of the closest RMOC source point; the same point must be visible in the full RMOC mesh."
-              },
-              "photometry": {
-                "model": "lommel-seeliger",
-                "referenceIncidenceDegrees": 0,
-                "referenceEmissionDegrees": 0,
-                "maximumIncidenceDegrees": 80,
-                "maximumEmissionDegrees": 80,
-                "maximumGain": 3,
-                "phaseCorrection": {
-                  "model": "hg-shadow-hiding",
-                  "asymmetry": -0.37,
-                  "amplitude": 2.5,
-                  "width": 0.079,
-                  "referenceDegrees": 50,
-                  "minimumDegrees": 40,
-                  "maximumDegrees": 70,
-                  "maximumGain": 1.5
-                }
-              },
-              "displayPercentiles": [
-                1,
-                99
-              ],
-              "metadata": {
-                "label": "OSIRIS mosaic",
-                "falseColor": false,
-                "coverage": "Eight OSIRIS orange-filter photographs from August 2014 and October–November 2015. Unsupported surface patches retain the grid."
-              },
               "frames": [
                 {
                   "id": "aug05-1944",
@@ -683,6 +649,7 @@
                   "startTime": "2015-11-15T05:08:11.274"
                 }
               ],
+              "radiometry": "radiance-factor",
               "selection": "lowest-emission",
               "levelMatching": {
                 "samplesPerTriangle": 64,
@@ -691,7 +658,42 @@
                 "maximumGain": 1.35,
                 "maximumAngleDegrees": 65
               },
-              "radiometry": "radiance-factor"
+              "transfer": {
+                "maximumSourceDistanceMeters": 50,
+                "maximumSeparationMeters": 20,
+                "maximumEmissionDegrees": 80,
+                "visibilityToleranceMeters": 0.5,
+                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must be within 20 m of the closest RMOC source point; the same point must be visible in the full RMOC mesh."
+              },
+              "photometry": {
+                "model": "lommel-seeliger",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 80,
+                "maximumEmissionDegrees": 80,
+                "maximumGain": 3,
+                "phaseCorrection": {
+                  "model": "hg-shadow-hiding",
+                  "asymmetry": -0.37,
+                  "amplitude": 2.5,
+                  "width": 0.079,
+                  "referenceDegrees": 50,
+                  "minimumDegrees": 40,
+                  "maximumDegrees": 70,
+                  "maximumGain": 1.5
+                }
+              },
+              "display": {
+                "percentiles": [
+                  1,
+                  99
+                ]
+              },
+              "metadata": {
+                "label": "OSIRIS mosaic",
+                "falseColor": false,
+                "coverage": "Eight OSIRIS orange-filter photographs from August 2014 and October–November 2015. Unsupported surface patches retain the grid."
+              }
             }
           ]
         },

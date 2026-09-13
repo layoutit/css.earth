@@ -35,4 +35,4 @@ test('Mathilde arbitrary orientation does not produce a measured spin rate',asyn
  const a=await readAuthoredRotation(base,ref,2451545),b=await readAuthoredRotation(base,ref,2461286.5);
  assert.equal(a.spinRateRadPerDay,0);assert.deepEqual(a,b);
 });
-test('Mathilde has a closed published visualization mesh, retained raster leaves and prepared asset closure',()=>assertAsteroidPackage('mathilde',['normal','elevation'],26400));
+test('Mathilde has closed published visualization meshes, retained raster leaves and prepared asset closure',()=>assertAsteroidPackage('mathilde',['normal','near-msi','elevation'],26400));

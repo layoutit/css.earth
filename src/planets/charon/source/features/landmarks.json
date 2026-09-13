@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-surface-landmarks@1",
+  "source": "Grundy et al. (2016), supplementary methods, page 3",
+  "frame": "Charon planetocentric latitude and east-positive longitude; published New Horizons encounter coordinates.",
+  "entries": [
+    {
+      "id": "89100000",
+      "name": "Organa",
+      "kind": "point",
+      "type": "Informal crater name",
+      "position": {
+        "longitudeDeg": 310.9,
+        "latitudeDeg": 54.3
+      },
+      "minimumZoomShare": 0.15,
+      "description": "The ejecta around this roughly 5 km crater have a stronger ammonia-related absorption than nearby terrain.",
+      "qualification": "Informal mission name. LEISA resolves the ejecta region, not the crater itself.",
+      "reference": {
+        "title": "Surface compositions across Pluto and Charon, supplementary methods",
+        "url": "https://boulder.swri.edu/~buie/biblio/pub106.SOM.pdf",
+        "credit": "Grundy et al. · Science, 2016"
+      }
+    }
+  ]
+}

@@ -264,15 +264,15 @@
       "id": "usgs-gazetteer-ryugu-nomenclature-center-pts",
       "path": "features/RYUGU_nomenclature_center_pts.zip",
       "expectedBytes": 35497,
-      "expectedSha256": "68cea46d06151259e792a964297f7865838d2a9d66258fb63bb5f55a777bd44f",
+      "expectedSha256": "2f8750d2111c299eede63799d6898f5169717978b1c66546aeb7cb2a7d71898b",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RYUGU_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Ryugu on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Ryugu on 2026-09-13 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
+      "redistribution": "Committed public-domain snapshot with credit; retain the checked-in bytes because the live Gazetteer export is regenerated.",
       "consumers": [
         "features"
       ],
@@ -280,8 +280,161 @@
       "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
       "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/RYUGU/target",
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Catalogued once the shared source record cites this manifest revision."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ryugu-usgs-gazetteer-nomenclature-center-pts",
+            "role": "material",
+            "evidence": "https://planetarynames.wr.usgs.gov/Page/RYUGU/target"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ryugu-close-up",
+      "path": "maps/hyb2_onc_20181003_MSC_l3dm_v06.tif",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/03_HighResolution/hyb2_onc_20181003_MSC_l3dm_v06.tif",
+      "credit": "ISAS/JAXA; Hayabusa2 ONC team",
+      "license": "ISAS Open Data Policy (compatible with CC BY 4.0)",
+      "licenseEvidence": [
+        "https://www.isas.jaxa.jp/en/researchers/data-policy/"
+      ],
+      "acquisition": "Download the unmodified GeoTIFF using preparation/acquisition.json.",
+      "redistribution": "Retain ISAS/JAXA and team attribution; cssEarth resamples and stretches or false-colors the numeric data.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "close-up",
+      "label": "Equatorial close-up",
+      "falseColor": false,
+      "width": 10000,
+      "height": 1681,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 448
+      },
+      "coverage": "Images taken by Hayabusa2 during MASCOT deployment show boulders across Ryugu’s equatorial strip. The original sampling is about 28 cm per pixel; the display is coarser. Brightness includes the illumination when the photographs were taken. The grid marks gaps and the unobserved poles.",
+      "expectedBytes": 134493995,
+      "expectedSha256": "38901188a1aef23afef25e2938334564a03f2c9e2f08e3be3de9596855bc9453",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "hayabusa2",
+            "missionId": "hayabusa2",
+            "evidence": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa2-ryugu-close-up-jade2",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/03_HighResolution/hyb2_onc_20181003_MSC_l3dm_v06.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ryugu-thermal-inertia",
+      "path": "maps/Thermal_Inertia_Map.tif",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/07_Thermal_Inertia/Thermal_Inertia_Map.tif",
+      "credit": "ISAS/JAXA; Hayabusa2 TIR team; Shimaki et al. (2020)",
+      "license": "ISAS Open Data Policy (compatible with CC BY 4.0)",
+      "licenseEvidence": [
+        "https://www.isas.jaxa.jp/en/researchers/data-policy/"
+      ],
+      "acquisition": "Download the unmodified GeoTIFF using preparation/acquisition.json.",
+      "redistribution": "Retain ISAS/JAXA and team attribution; cssEarth resamples and stretches or false-colors the numeric data.",
+      "consumers": [
+        "thermal-inertia"
+      ],
+      "lensId": "thermal-inertia",
+      "label": "Thermal inertia",
+      "falseColor": true,
+      "width": 3600,
+      "height": 1800,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 448
+      },
+      "coverage": "False colors show how slowly the surface heats and cools, inferred from a thermal model fitted to Hayabusa2 observations. Higher values mean slower temperature changes. This is a thermal property, not a temperature map. The underlying observations sampled roughly 4.5 m per pixel; the finer map grid adds no measured detail. The grid marks missing values.",
+      "expectedBytes": 25931356,
+      "expectedSha256": "e8c7ca2229dbebd58d1b1d081ece321ac1a32f36db98665615173d7924edba25",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "hayabusa2",
+            "missionId": "hayabusa2",
+            "evidence": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa2-ryugu-thermal-inertia-jade2",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/07_Thermal_Inertia/Thermal_Inertia_Map.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ryugu-spectral-slope",
+      "path": "maps/b-x_Slope_Map.tif",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/06_b-x_slope/b-x_Slope_Map.tif",
+      "credit": "ISAS/JAXA; Hayabusa2 ONC team",
+      "license": "ISAS Open Data Policy (compatible with CC BY 4.0)",
+      "licenseEvidence": [
+        "https://www.isas.jaxa.jp/en/researchers/data-policy/"
+      ],
+      "acquisition": "Download the unmodified GeoTIFF using preparation/acquisition.json.",
+      "redistribution": "Retain ISAS/JAXA and team attribution; cssEarth resamples and stretches or false-colors the numeric data.",
+      "consumers": [
+        "spectral-slope"
+      ],
+      "lensId": "spectral-slope",
+      "label": "Spectral slope",
+      "falseColor": true,
+      "width": 3600,
+      "height": 1800,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 448
+      },
+      "coverage": "False colors show the change in reflectance from blue to near-infrared light (b–x bands). Positive values mean a redder spectrum; negative values mean bluer. This does not measure terrain slope or identify minerals. The source’s saturated ±1 endpoints are withheld, and the grid marks those pixels. Polar mapping artifacts remain.",
+      "expectedBytes": 25931356,
+      "expectedSha256": "1494e3ce2d1846238bf9325b598f8bbdd27cea528d73ed8463afb7e3d447f8ca",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "hayabusa2",
+            "missionId": "hayabusa2",
+            "evidence": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa2-ryugu-spectral-slope-jade2",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/06_b-x_slope/b-x_Slope_Map.tif"
+          }
+        ]
       }
     }
   ],
@@ -316,8 +469,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9404,
-      "expectedSha256": "c1cb474f7b85860defdf548e47326188ec2a48efa25bed3c1685c4a236ccb7ed",
+      "expectedBytes": 14092,
+      "expectedSha256": "9c61ad83073b03c5efa5b10ffa81653906a00e68c873d09ab683b27c27a0482f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -325,8 +478,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2530,
-      "expectedSha256": "94ed273d5be8c9ece286e9741c26a0a0505f38ab09f4157245aa7a86e1c102bb"
+      "expectedBytes": 3632,
+      "expectedSha256": "2ea589e3a4683f7fecc35b06874f71f495609d52e17dbbfcf22ae7a2dd0911bb"
     },
     {
       "path": "preparation/navigation.json",
@@ -340,8 +493,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3792,
-      "expectedSha256": "f1a08202ffdc302697a9833ece506c8d005545935b5d20173a96b624e66c0716"
+      "expectedBytes": 6526,
+      "expectedSha256": "236b312a46c8b994471e2445a38f10a3564fe63a607db0eaebb604c03b70f4f7"
     },
     {
       "path": "presentation/title-mark.json",
@@ -412,7 +565,7 @@
       "id": "ryugu-surface-features-source",
       "path": "features/manifest.json",
       "expectedBytes": 1303,
-      "expectedSha256": "240264bb8b1877af766883962890fe26305aa74ad6b516da2b5d8bb4c0e2d4c7",
+      "expectedSha256": "fa840f5eb14c5ba53888feb846b14ec3afb17136a7f744d01b4823cb6a012ca4",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -504,6 +657,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "reference/hyb2_onc_20181003_MSC_l3dm_v06.lblx",
+      "expectedBytes": 17208,
+      "expectedSha256": "98730c7e8f0eee92f290b0369c8adf2754b43601eff6e8ba6efb639da7878c32",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa2-ryugu-close-up-jade2",
+            "role": "reference",
+            "evidence": "Native PDS label for hyb2_onc_20181003_MSC_l3dm_v06: planetocentric east-longitude I/F map."
+          }
+        ]
       }
     }
   ]

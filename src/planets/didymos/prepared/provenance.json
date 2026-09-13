@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "82672d08b7fa6f8771583c1bcf3dc93ddb5f04293ebb4c2898b75388f9ef7867"
+    "sha256": "505b51540f78181fbaa6c50bebb5bc4fe5ab0dc6fbd734526657a93a7e448790"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ab78c796fba242f1e1b50cecf1a522b2a18169a44fdbd22744dd29d8a46bef6b",
+      "sha256": "1df8a290f9fdfcf55ac76c8c8f52a5b1973f5be3258316ce8d1821f2c1051a3d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -124,6 +124,22 @@
             {
               "id": "draco",
               "format": "pds4-geometry-cube",
+              "consumer": "draco-observation",
+              "filter": "unfiltered",
+              "frames": [
+                {
+                  "id": "t-minus-94s",
+                  "path": "observations/dart_0401929957_21942_01_geo.fits",
+                  "labelPath": "observations/dart_0401929957_21942_01_geo.xml",
+                  "startTime": "2022-09-26T23:12:49.930Z"
+                },
+                {
+                  "id": "t-minus-158s",
+                  "path": "observations/dart_0401929893_44487_01_geo.fits",
+                  "labelPath": "observations/dart_0401929893_44487_01_geo.xml",
+                  "startTime": "2022-09-26T23:11:46.381Z"
+                }
+              ],
               "cube": {
                 "collection": "urn:nasa:pds:dart:data_dracoddp",
                 "target": "65803 Didymos",
@@ -183,9 +199,14 @@
                   "interpretation": "Select Didymos from a cube containing body-centred intercepts for both asteroids. The 0.2–0.5 km interval brackets the full Didymos v003 source mesh and excludes all Dimorphos v004 radii; camera holdouts and source-mesh transfer are checked independently."
                 }
               },
-              "consumer": "draco-observation",
-              "filter": "unfiltered",
-              "allowLossy": false,
+              "selection": "recipe-order",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumLogMad": 0.15,
+                "maximumGain": 1.2,
+                "maximumAngleDegrees": 70
+              },
               "transfer": {
                 "maximumSourceDistanceMeters": 8,
                 "maximumSeparationMeters": 8,
@@ -201,36 +222,16 @@
                 "maximumEmissionDegrees": 80,
                 "maximumGain": 3
               },
-              "displayPercentiles": [
-                1,
-                99
-              ],
+              "display": {
+                "percentiles": [
+                  1,
+                  99
+                ]
+              },
               "metadata": {
                 "label": "DRACO mosaic",
                 "falseColor": false,
                 "coverage": "Two DRACO frames from 158 and 94 seconds before impact. The later partial frame supplies closer detail; the earlier frame supplies wider coverage. The unseen surface keeps the grid."
-              },
-              "frames": [
-                {
-                  "id": "t-minus-94s",
-                  "path": "observations/dart_0401929957_21942_01_geo.fits",
-                  "labelPath": "observations/dart_0401929957_21942_01_geo.xml",
-                  "startTime": "2022-09-26T23:12:49.930Z"
-                },
-                {
-                  "id": "t-minus-158s",
-                  "path": "observations/dart_0401929893_44487_01_geo.fits",
-                  "labelPath": "observations/dart_0401929893_44487_01_geo.xml",
-                  "startTime": "2022-09-26T23:11:46.381Z"
-                }
-              ],
-              "selection": "recipe-order",
-              "levelMatching": {
-                "samplesPerTriangle": 64,
-                "minimumPairs": 64,
-                "maximumLogMad": 0.15,
-                "maximumGain": 1.2,
-                "maximumAngleDegrees": 70
               }
             }
           ]

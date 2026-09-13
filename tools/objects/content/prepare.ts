@@ -1,12 +1,13 @@
 // Shared object-content preparation. Source JSON owns facts, labels, recipes,
 // and provenance; this module owns the derived shell payload.
-import { access, mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 import { PREPARED_SHELL_TITLES } from "../../../site/prepared-shell-titles.mjs";
 import { prepareLensLabels } from "../../../site/prepare-lens-labels.mts";
 import { SCIENTIFIC_CHART_TITLES } from "../../../site/scientific-chart-titles.mts";
 import { createPreparedTitleLayout } from "../../../src/platform/prepared-title.mts";
 import { prepareLenses } from "./lenses";
+import { lensBillboardColors } from "./billboard-colors.mts";
 import { parseFactsheet, verifyFactsheetSources } from '../../factsheet-sources.mts';
 import type {
   ContentPreparationContext,
@@ -253,30 +254,7 @@ async function deriveLensBillboardColors(
   lenses: PreparedObjectContent["lenses"],
   publicDirectory: string,
 ): Promise<PreparedObjectContent["lenses"]> {
-  const sharp = (await import("sharp")).default;
-  const defaultControl = lenses.controls.find((control) => control.id === lenses.defaultLens);
-  const colors = new Map<string, string>();
-  for (const control of lenses.controls) {
-    const controlId = typeof control.id === "string" ? control.id : "";
-    const candidate = control.view === "interior"
-      ? defaultControl?.surface2xUrl
-      : control.surface2xUrl;
-    if (typeof candidate !== "string") continue;
-    try {
-      const path = resolve(publicDirectory, basename(new URL(candidate, "https://cssearth.invalid").pathname));
-      // sharp's missing-file error does not carry Node's ENOENT code.
-      // Keep this optional probe's existing absence policy explicit.
-      await access(path);
-      const { channels } = await sharp(path)
-        .removeAlpha()
-        .stats();
-      // A one-channel grayscale map displays its value in all three channels.
-      const rgb = channels.length === 1 ? [channels[0], channels[0], channels[0]] : channels.slice(0, 3);
-      colors.set(controlId, `#${rgb.map(({ mean }) => Math.round(mean).toString(16).padStart(2, "0")).join("")}`);
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
-    }
-  }
+  const colors = await lensBillboardColors(lenses.controls, lenses.defaultLens, publicDirectory);
   return {
     ...lenses,
     controls: lenses.controls.map((control) => ({

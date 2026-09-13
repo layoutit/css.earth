@@ -271,6 +271,296 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "mathilde-near-msi-42826360-image",
+      "path": "observations/near-msi/m0042826360f0_2p_iof.fit",
+      "expectedBytes": 535680,
+      "expectedSha256": "c852aeb4858a579821e724419c4cdebfb895749423c039e54e75b72986a8de8d",
+      "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.fit",
+      "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
+      "license": "Public mission scientific data; retain source labels and attribution.",
+      "acquisition": "Pinned download through source/preparation/acquisition.json.",
+      "redistribution": "Source data and attributed display derivatives; see NOTICE.md.",
+      "consumers": [
+        "near-msi"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "near-msi-mathilde-42826360",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mathilde-near-msi-42826360-raw",
+      "path": "observations/near-msi/m0042826360f0_2p.fit",
+      "expectedBytes": 273600,
+      "expectedSha256": "c0c16f2c972f1a2b0b12acc2a22244a5ba054cf50768fb1bade203d62d04a29c",
+      "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826360f0_2p.fit",
+      "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
+      "license": "Public mission scientific data; retain source labels and attribution.",
+      "acquisition": "Pinned download through source/preparation/acquisition.json.",
+      "redistribution": "Source data and attributed display derivatives; see NOTICE.md.",
+      "consumers": [
+        "near-msi"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "near-msi-mathilde-42826360-raw",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826360f0_2p.xml"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mathilde-near-msi-42826360-label",
+      "path": "observations/near-msi/m0042826360f0_2p_iof.xml",
+      "expectedBytes": 15271,
+      "expectedSha256": "399ced8980cad90e87bb692aedeac32759d8a1ebea5c9ba4ece579d7d467d52d",
+      "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml",
+      "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
+      "license": "Public mission scientific data; retain source labels and attribution.",
+      "acquisition": "Pinned download through source/preparation/acquisition.json.",
+      "redistribution": "Source data and attributed display derivatives; see NOTICE.md.",
+      "consumers": [
+        "near-msi-camera"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "near-msi-mathilde-42826360",
+            "role": "reference",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mathilde-near-msi-42826370-image",
+      "path": "observations/near-msi/m0042826370f0_2p_iof.fit",
+      "expectedBytes": 535680,
+      "expectedSha256": "73850540b752c7e59a8762bad073f2fb62a75e03fdfb2adfeab1d2b724ce104a",
+      "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.fit",
+      "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
+      "license": "Public mission scientific data; retain source labels and attribution.",
+      "acquisition": "Pinned download through source/preparation/acquisition.json.",
+      "redistribution": "Source data and attributed display derivatives; see NOTICE.md.",
+      "consumers": [
+        "near-msi"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "near-msi-mathilde-42826370",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.xml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.xml"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mathilde-near-msi-42826370-raw",
+      "path": "observations/near-msi/m0042826370f0_2p.fit",
+      "expectedBytes": 273600,
+      "expectedSha256": "0b1ef1367efa7ba625ecac05370171c02e90fa384c584735f5b096f1307dfd96",
+      "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826370f0_2p.fit",
+      "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
+      "license": "Public mission scientific data; retain source labels and attribution.",
+      "acquisition": "Pinned download through source/preparation/acquisition.json.",
+      "redistribution": "Source data and attributed display derivatives; see NOTICE.md.",
+      "consumers": [
+        "near-msi"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "near-msi-mathilde-42826370-raw",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826370f0_2p.xml"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mathilde-near-msi-42826370-label",
+      "path": "observations/near-msi/m0042826370f0_2p_iof.xml",
+      "expectedBytes": 15269,
+      "expectedSha256": "ce4333af158ac7c3bcc7574ceadd69107e9e9f224b1b5ceb830e5fb0ed96c877",
+      "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.xml",
+      "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
+      "license": "Public mission scientific data; retain source labels and attribution.",
+      "acquisition": "Pinned download through source/preparation/acquisition.json.",
+      "redistribution": "Source data and attributed display derivatives; see NOTICE.md.",
+      "consumers": [
+        "near-msi-camera"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "near-msi-mathilde-42826370",
+            "role": "reference",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.xml"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mathilde-near-msi-42826360-camera",
+      "path": "observations/near-msi/42826360-camera.json",
+      "expectedBytes": 2983,
+      "expectedSha256": "cd88709012e3f654e43d82aa16e04f278e66126bb5e4705d64bb579426b2a975",
+      "origin": "Derived from the pinned Thomas image geometry and NEAR MSI calibration.",
+      "credit": "P. C. Thomas and the NEAR MSI team; cssEarth camera conversion",
+      "license": "Public mission scientific data and project-authored coordinate conversion.",
+      "acquisition": "node tools/objects/near-msi/prepare-cameras.mts src/planets/mathilde/source",
+      "redistribution": "Derived camera coefficients with source attribution.",
+      "consumers": [
+        "near-msi"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Reproducible camera matrix computed from the pinned Thomas image geometry, source calibration and native FITS identities; the closure retains their hashes."
+      }
+    },
+    {
+      "id": "mathilde-near-msi-42826370-camera",
+      "path": "observations/near-msi/42826370-camera.json",
+      "expectedBytes": 2973,
+      "expectedSha256": "0ab47e641783a78a25c11e8d4c5630d4aeae2adfecbd0ef0f88fc20f644d9a86",
+      "origin": "Derived from the pinned Thomas image geometry and NEAR MSI calibration.",
+      "credit": "P. C. Thomas and the NEAR MSI team; cssEarth camera conversion",
+      "license": "Public mission scientific data and project-authored coordinate conversion.",
+      "acquisition": "node tools/objects/near-msi/prepare-cameras.mts src/planets/mathilde/source",
+      "redistribution": "Derived camera coefficients with source attribution.",
+      "consumers": [
+        "near-msi"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Reproducible camera matrix computed from the pinned Thomas image geometry, source calibration and native FITS identities; the closure retains their hashes."
+      }
+    },
+    {
+      "path": "preparation/near-msi.json",
+      "expectedBytes": 1353,
+      "expectedSha256": "7a29c6b463d276b21286dda02890b8864d0011eff06722a05bec794aab69f30e",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Recipe selecting the NEAR frames, published calibration and inferred table pixel convention, qualified by held-out limb checks."
+      },
+      "id": "mathilde-near-msi-near-msi-json",
+      "consumers": [
+        "near-msi-camera"
+      ],
+      "origin": "Project-authored recipe",
+      "credit": "P. C. Thomas, P. Stooke, NASA/JHUAPL/NEAR MSI; cssEarth source selection",
+      "license": "Public mission scientific data; project-authored selection and coordinate conversion.",
+      "acquisition": "Checked-in recipe and metadata; numerical image table restored through acquisition.json.",
+      "redistribution": "Preserve scientific source attribution and model limitations."
+    },
+    {
+      "path": "reference/253mathimg.tab",
+      "expectedBytes": 1900,
+      "expectedSha256": "f0ad2894719b09efbcde47e27074fcdc68f3afddd7b852d920ea26d2e357b6b0",
+      "id": "mathilde-near-msi-253mathimg-tab",
+      "consumers": [
+        "near-msi-camera"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-thomas-mathilde-image-geometry",
+            "role": "method",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathimg.xml"
+          }
+        ]
+      },
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathimg.xml",
+      "credit": "P. C. Thomas, P. Stooke, NASA/JHUAPL/NEAR MSI; cssEarth source selection",
+      "license": "Public mission scientific data; project-authored selection and coordinate conversion.",
+      "acquisition": "Checked-in recipe and metadata; numerical image table restored through acquisition.json.",
+      "redistribution": "Preserve scientific source attribution and model limitations."
+    },
+    {
+      "path": "reference/253mathimg.xml",
+      "expectedBytes": 9040,
+      "expectedSha256": "a23e17406a9bdc3221cd5ac678432242ba13ea4fea03a98e5fb66afd61b12995",
+      "id": "mathilde-near-msi-253mathimg-xml",
+      "consumers": [
+        "near-msi-camera"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-thomas-mathilde-image-geometry",
+            "role": "method",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathimg.xml"
+          }
+        ]
+      },
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathimg.xml",
+      "credit": "P. C. Thomas, P. Stooke, NASA/JHUAPL/NEAR MSI; cssEarth source selection",
+      "license": "Public mission scientific data; project-authored selection and coordinate conversion.",
+      "acquisition": "Checked-in recipe and metadata; numerical image table restored through acquisition.json.",
+      "redistribution": "Preserve scientific source attribution and model limitations."
+    },
+    {
+      "path": "reference/stooke-253mathilde.xml",
+      "expectedBytes": 8533,
+      "expectedSha256": "1490838df80d8b5c21f985d459d13b7dacde9f7934044db6d696303c2297ab14",
+      "id": "mathilde-near-msi-stooke-253mathilde-xml",
+      "consumers": [
+        "near-msi-camera"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mathilde-mathilde-visualization-shape",
+            "role": "reference",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.xml"
+          }
+        ]
+      },
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.xml",
+      "credit": "P. C. Thomas, P. Stooke, NASA/JHUAPL/NEAR MSI; cssEarth source selection",
+      "license": "Public mission scientific data; project-authored selection and coordinate conversion.",
+      "acquisition": "Checked-in recipe and metadata; numerical image table restored through acquisition.json.",
+      "redistribution": "Preserve scientific source attribution and model limitations."
     }
   ],
   "generatedIntermediates": [
@@ -304,8 +594,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10334,
-      "expectedSha256": "c02c00c4643e0f2648ee09ffaeac963e75e5355cf7087d29742b86ea6d413d8b",
+      "expectedBytes": 11359,
+      "expectedSha256": "1b633ccaa351b139ccc038ebd20ebd2755c1d794667120d74486827c728fcba6",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -318,8 +608,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2794,
-      "expectedSha256": "202f59b24a7d90dcc1a6848640adc6123b5a9e3aa4b370d9fe6b733d2b4a4c58"
+      "expectedBytes": 4910,
+      "expectedSha256": "6fea76b92632f77cc09f5d08c435fa5bbcc5153bd96b1930b1cb9733ee82a4ce"
     },
     {
       "path": "preparation/navigation.json",
@@ -333,8 +623,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3784,
-      "expectedSha256": "0b727ee76829e037cb2480f9541d5e103965c98c2867e5dcb914133eba0cf453"
+      "expectedBytes": 6635,
+      "expectedSha256": "95d57fa2fc62f3d5d2b01a60187b03f5690db61d386886a252348cf850545191"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -355,16 +645,6 @@
       "path": "reference/253mathilde.xml",
       "expectedBytes": 5629,
       "expectedSha256": "8f3cc5c2ced16d91db6a07d2b547e91023e067e5def9314d477abf3f1b021b91"
-    },
-    {
-      "path": "reference/253mathimg.tab",
-      "expectedBytes": 1900,
-      "expectedSha256": "f0ad2894719b09efbcde47e27074fcdc68f3afddd7b852d920ea26d2e357b6b0"
-    },
-    {
-      "path": "reference/253mathimg.xml",
-      "expectedBytes": 9040,
-      "expectedSha256": "a23e17406a9bdc3221cd5ac678432242ba13ea4fea03a98e5fb66afd61b12995"
     },
     {
       "path": "reference/253mathm-legacy.lbl",
@@ -390,11 +670,6 @@
       "path": "reference/matcyl2.jpg",
       "expectedBytes": 625699,
       "expectedSha256": "962f006af83d8c7da373baea829b6e4c4bce843b2778c61fb58b2eb05caac4f5"
-    },
-    {
-      "path": "reference/stooke-253mathilde.xml",
-      "expectedBytes": 8533,
-      "expectedSha256": "1490838df80d8b5c21f985d459d13b7dacde9f7934044db6d696303c2297ab14"
     },
     {
       "path": "reference/stooke-bundle-description.txt",

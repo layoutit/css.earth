@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "347bdf076b1ae0b273b30b45d354aee26398115d3429d49ccace1310b24bfca8"
+    "sha256": "3362ad403b9178e4916d1b9032ecf3ecb23fa80085f66b612e2ed4bc0e06dd08"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d5e5d05263dd0939a3b4833749e3d606328f33cbbf8b1d77703b9b8b2903cf64",
+      "sha256": "20c6643655d5bf675a9cffc04514bd15f4413ab21854bac36efa14c0e419644e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -234,10 +234,6 @@
                 "maximumGain": 1,
                 "maximumIncidenceDegrees": 75,
                 "maximumEmissionDegrees": 75,
-                "displayMaximum": 0.8,
-                "gamma": 1,
-                "minimumLevel": 1,
-                "maximumLevel": 1,
                 "backgroundMaximum": 0.003
               },
               "metadata": {
@@ -254,20 +250,10 @@
                 "latitudeDegrees": 20.68,
                 "zoom": 1.1
               },
-              "colorDisplay": {
-                "kind": "band-composite",
-                "inputQuantity": "radiance-factor",
-                "bands": [
-                  "RED",
-                  "GRN",
-                  "BL1"
-                ],
-                "displayRange": [
-                  0,
-                  0.8
-                ],
-                "outputEncoding": "srgb"
-              }
+              "displayRange": [
+                0,
+                0.8
+              ]
             }
           ]
         },

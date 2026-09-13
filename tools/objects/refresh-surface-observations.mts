@@ -9,7 +9,8 @@ import { createSourceManifest } from '../../src/platform/source-manifest.mts';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
 import { loadRadialTerrain, prepareRadialMaterials } from './terrestrial-layers/radial-terrain.mts';
-import { prepareSolidRasters } from './terrestrial-layers/solid-raster.mts';
+import { prepareSolidRasters, prepareSolidSurfacePoles } from './terrestrial-layers/solid-raster.mts';
+import { lensBillboardColors } from './content/billboard-colors.mts';
 import { retainedPhotographicAtlas } from './refresh-terrain-photographs.mts';
 import { prepareSurfaceMinimaps } from '../prepare-surface-minimaps.mts';
 import { prepareObjectProvenance } from './provenance.mts';
@@ -56,6 +57,8 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   await mkdir(stage, { recursive: true });
   const rasterConfig = { ...config, raster: { ...config.raster, observations: [], scientific: [], shapeViews: [], mosaics: [], observedColors: [], surfaceObservations: selected } };
   const surfaces = await prepareSolidRasters({ config: rasterConfig, sourceDirectory, source, radial, publicDirectory: stage, outputDirectory: stage });
+  // Like the full preparer's material step, record each surface's billboard colour before the radial materials add its shadow surface.
+  await prepareSolidSurfacePoles({ surfaces, publicDirectory: stage, config: rasterConfig });
   await prepareRadialMaterials({ radial, surfaces, config: { ...rasterConfig, geometry: { ...config.geometry, radialTerrain: { thumbnail: terrain.thumbnail } } }, source, sourceDirectory, publicDirectory: stage, outputDirectory: stage,
     sunDirection: requireBodyFixedSunDirection(id), snapshotEntries: [] });
   const replacements = new Map(surfaces.map(surface => [surface.id, surface]));
@@ -89,7 +92,7 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   const nextInventory = { ...inventory, assets: assets.map(asset => changed.get(requireString(asset.filename)) ?? asset) };
   for (const path of [resolve(objectDirectory, 'runtime-assets.json'), resolve(outputDirectory, 'runtime-assets.json')]) await writeFile(path, JSON.stringify(nextInventory, null, 2) + '\n');
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
-  await refreshObservationDescriptions(id, lensIds);
+  await refreshObservationDescriptions(id, lensIds, new Map(surfaces.map(surface => [surface.id, requireString(surface.billboardColor)])));
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
   if (hash(await readFile(resolve(outputDirectory, 'scene.refs.json'))) !== hash(originals.get('scene.refs.json')!)) throw new Error('Observation refresh changed the scene.');
   const report = { id, lensIds, seconds: (performance.now() - started) / 1000, maxRssMiB: process.resourceUsage().maxRSS / 1024,
@@ -100,32 +103,42 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   return report;
 }
 
-/** Refresh source-owned lens descriptions without rebaking any images. */
-export async function refreshObservationDescriptions(id: string, lensIds: readonly string[]) {
+/** Refresh source-owned lens descriptions and the refreshed lenses' billboard colours without rebaking any images. */
+export async function refreshObservationDescriptions(id: string, lensIds: readonly string[], surfaceColors: ReadonlyMap<string, string> = new Map()) {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Invalid object id.');
-  const objectDirectory = resolve('src/planets', id), outputDirectory = resolve(objectDirectory, 'prepared');
+  const objectDirectory = resolve('src/planets', id), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const descriptor = await json(resolve(objectDirectory, 'object.json'));
   const references = records(requireRecord(requireRecord(descriptor.properties).recipe).sources);
   // The source-owned description explains the selected observations. Keep the
   // existing prepared controls, feature catalogue and all other shell content.
   const contentPath = references.find(reference => reference.id === 'content');
+  const descriptions = new Map<string, { description: string; summary: string | undefined }>();
   if (contentPath) {
     const bytes = await readFile(resolve(objectDirectory, requireString(contentPath.path)));
     if (hash(bytes) !== contentPath.sha256) throw new Error('Source content changed from its descriptor pin.');
     const content = requireRecord(JSON.parse(bytes.toString('utf8')));
-    const authored = records(requireRecord(content.lenses).controls);
-    const descriptions = new Map(authored.filter(lens => lensIds.includes(requireString(lens.id))).map(lens => [requireString(lens.id), {
-      description: requireString(lens.description), summary: lens.summary === undefined ? undefined : requireString(lens.summary),
-    }]));
-    const update = (controls: unknown) => records(controls).map(control => descriptions.has(requireString(control.id)) ? { ...control, ...descriptions.get(requireString(control.id)) } : control);
-    for (const name of ['lenses.json', 'controls.json', 'runtime.json']) {
-      const path = resolve(outputDirectory, name), document = await json(path);
-      const lenses = name === 'lenses.json' ? document : requireRecord(name === 'controls.json' ? document.lenses : requireRecord(document.controls).lenses);
-      lenses.controls = update(lenses.controls);
-      await save(path, document);
-    }
-    await repinObjectJson(id);
+    for (const lens of records(requireRecord(content.lenses).controls)) if (lensIds.includes(requireString(lens.id)))
+      descriptions.set(requireString(lens.id), { description: requireString(lens.description), summary: lens.summary === undefined ? undefined : requireString(lens.summary) });
   }
+  // As in the full preparer, only the lens catalogue carries control colours. Recolour each control whose image was refreshed, including an interior view of a refreshed default lens; runtime variants take the surface billboard colour.
+  const lenses = await json(resolve(outputDirectory, 'lenses.json')), defaultLens = requireString(lenses.defaultLens);
+  const controlColors = await lensBillboardColors(records(lenses.controls), defaultLens, publicDirectory);
+  const update = (controls: unknown, colored: boolean) => records(controls).map(control => {
+    const lensId = requireString(control.id), refreshed = lensIds.includes(lensId);
+    const recolored = colored && (refreshed || (control.view === 'interior' && lensIds.includes(defaultLens)));
+    return refreshed || recolored ? { ...control, ...descriptions.get(lensId), ...(recolored ? { billboardColor: controlColors.get(lensId) } : {}) } : control;
+  });
+  for (const name of ['lenses.json', 'controls.json', 'runtime.json']) {
+    const path = resolve(outputDirectory, name), document = await json(path);
+    const target = name === 'lenses.json' ? document : requireRecord(name === 'controls.json' ? document.lenses : requireRecord(document.controls).lenses);
+    target.controls = update(target.controls, name === 'lenses.json');
+    if (name === 'runtime.json') document.variants = records(document.variants).map(variant => {
+      const color = surfaceColors.get(requireString(requireRecord(variant.when).lensId));
+      return color === undefined ? variant : { ...variant, writes: records(variant.writes).map(write => write.name === `--${id}-billboard-color` ? { ...write, value: color } : write) };
+    });
+    await save(path, document);
+  }
+  await repinObjectJson(id);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

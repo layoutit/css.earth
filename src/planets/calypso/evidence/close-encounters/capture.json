@@ -1,0 +1,310 @@
+{
+  "body": "calypso",
+  "lens": "false-color",
+  "changedLenses": [
+    "normal",
+    "false-color"
+  ],
+  "baselineRef": "ebd16155a",
+  "baselineCommit": "ebd16155a5eb408b6a96a7eaf4c9620b8a0b8451",
+  "toolSha256": "081445ea5799e64c2262afdc27d74ee2447ecdeaa16aa37edffb910a7e837ea0",
+  "colorTransferSha256": "8776127478231f2ad63baa212ad499c80a6442c9899f18c0c1a934e84aef0b0b",
+  "recipeSha256": "3181380f74ce8ac97d7e2ddae0db47faa7944d8edc951fdfb209ff4af25ae041",
+  "runtimeSha256": "0d0d4fee9f8cfe3303aa02907e0867ba441f4d41cfe0b8e978adb4de69b50a69",
+  "geometrySha256": "15980c5398619c38c1488cb26389b4564a6d1a582d05d40590fe40bcf7c35586",
+  "surfaceTrianglesSha256": "7956485a87ef2f53a90913378c69f3a30bf3ee407596f9f2cbb1314f46879deb",
+  "geometryUnchanged": true,
+  "browser": "152.0.7977.84",
+  "channel": "chrome",
+  "purpose": "Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.",
+  "existingAssetChanges": [
+    {
+      "filename": "calypso-normal-shadow@2x.webp",
+      "beforeSha256": "510d1cef243503cdc0456d8a205c044cf820452ed0d2db3eb1646890c4e11d10",
+      "afterSha256": "2d5f17548451728527176b1eade8f5743dd26637696983e4cc6adac6031d6b97",
+      "reason": "An explicitly declared dataset was re-prepared; its source evidence qualifies this change."
+    },
+    {
+      "filename": "calypso-normal-surface@2x.webp",
+      "beforeSha256": "5d1d34c6bd523502a87fa6328c1228c02114053db460891f26d56f1f7962143c",
+      "afterSha256": "e9af8bc7f11247955a65565b550739c243632e15d1380e2b105f9b82cea45181",
+      "reason": "An explicitly declared dataset was re-prepared; its source evidence qualifies this change."
+    },
+    {
+      "filename": "calypso-normal-thumbnail.webp",
+      "beforeSha256": "0b53742a67b2b73e35ffb7d30586c1724d4239bdd95257ce7b33238da9c84d1b",
+      "afterSha256": "091d933d954d558a170e996b9a985be787b30057a9a971f21371e5443e6bd90d",
+      "reason": "An explicitly declared dataset was re-prepared; its source evidence qualifies this change."
+    }
+  ],
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 2,
+    "rowText": "False color\nCassini",
+    "bounds": {
+      "x": 20,
+      "y": 695.6875,
+      "width": 350,
+      "height": 20
+    },
+    "pageWidth": 390,
+    "pose": {
+      "schema": "cssearth-camera-pose@1",
+      "scene": "matrix3d(-0.998467419185,-0.016338929082,-0.052875818876,0,0,0.95542560883,-0.295231952864,0,0.055342685382,-0.294779486038,-0.953961341872,0,0,0,0,1)",
+      "skybox": "matrix3d(-0.993233948738,0.034285240759,0.110953427323,0,-0.106547019511,0.111009107286,-0.988091408317,0,-0.046193787185,-0.993227747515,-0.106605078043,0,0,0,0,1)",
+      "sunView": "matrix3d(0.999964757217,0.000021697574,-0.008395466239,0,0,0.999996660353,0.002584430859,0,0.008395494277,-0.002584339777,0.999961417688,0,0,0,0,1)"
+    },
+    "stableDom": true,
+    "sha256": "84717cf6620af3fa0603408d89f8e843f4cafb655d0a756d65c077e740d86b83",
+    "errors": []
+  },
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr1.png",
+          "sha256": "875db03151e8aba5a6a4255b630430c7c40659dc117f9c6eec128f8c4489d37f",
+          "url": "http://127.0.0.1:4284/calypso/?v=MEZAVB8osq1LkEFCxzNAAAAAv3DtWwKH7Im_wxoGtKaJtz-cB1YfbDnTAAA#dataset=false-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.998467419185,-0.016338929082,-0.052875818876,0,0,0.95542560883,-0.295231952864,0,0.055342685382,-0.294779486038,-0.953961341872,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.993233948738,0.034285240759,0.110953427323,0,-0.106547019511,0.111009107286,-0.988091408317,0,-0.046193787185,-0.993227747515,-0.106605078043,0,0,0,0,1)",
+            "sunView": "matrix3d(0.999964757217,0.000021697574,-0.008395466239,0,0,0.999996660353,0.002584430859,0,0.008395494277,-0.002584339777,0.999961417688,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "false-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 612,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.937328583383,0.006588134344,0.348384447499,0,-0.145721148832,0.900780178018,-0.409097076099,0,-0.316512991134,-0.434225364731,-0.843366977696,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.869437173717,0.080709031392,0.487406268841,0,-0.491074542396,-0.033188713797,-0.87048505073,0,-0.054079632622,-0.996184939553,0.068489609536,0,0,0,0,1)",
+          "sunView": "matrix3d(0.921654561354,-0.029344625874,0.386900197038,0,-0.031628754861,0.98813587728,0.150290085827,0,-0.386720171961,-0.150752714616,0.909791804554,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "calypso-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "calypso-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "calypso-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
+          "filename": "calypso-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-normal-surface@2x.webp",
+          "sha256": "e9af8bc7f11247955a65565b550739c243632e15d1380e2b105f9b82cea45181",
+          "bytes": 398940
+        },
+        {
+          "filename": "calypso-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-normal-thumbnail.webp",
+          "sha256": "091d933d954d558a170e996b9a985be787b30057a9a971f21371e5443e6bd90d",
+          "bytes": 3732
+        },
+        {
+          "filename": "calypso-false-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-false-color-thumbnail.webp",
+          "sha256": "9cc119d87b127dfd6c066e2b4d5f0698b90bf80cf86f6040371f21873a5eff95",
+          "bytes": 3252
+        },
+        {
+          "filename": "calypso-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-elevation-thumbnail.webp",
+          "sha256": "9a19e832557eb1210fbd2a7fedcc497619df800503a70a5e8b6cc5fa54c7a2fa",
+          "bytes": 5342
+        },
+        {
+          "filename": "calypso-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
+          "filename": "calypso-false-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-false-color-surface@2x.webp",
+          "sha256": "4a491cf98cb71e15f83df8be32c25e411fffba6c24ed45598b218854cb4411b2",
+          "bytes": 325124
+        },
+        {
+          "filename": "calypso-false-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-false-color-shadow@2x.webp",
+          "sha256": "5a54a4fbbaa4a49ddd6da85b9da4fdb7b295abbb201bd32120d0b698fbb09235",
+          "bytes": 208238
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr2.png",
+          "sha256": "e4f22fe616350050cd8cc122a25419f5291eb62511d60b75e436cc82c5743c55",
+          "url": "http://127.0.0.1:4284/calypso/?v=MEZAVB8osq1LkEFCxzNAAAAAv3DtWwKH7Im_wxoGtKaJtz-cB1YfbDnTAAA#dataset=false-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.998467419185,-0.016338929082,-0.052875818876,0,0,0.95542560883,-0.295231952864,0,0.055342685382,-0.294779486038,-0.953961341872,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.993233948738,0.034285240759,0.110953427323,0,-0.106547019511,0.111009107286,-0.988091408317,0,-0.046193787185,-0.993227747515,-0.106605078043,0,0,0,0,1)",
+            "sunView": "matrix3d(0.999964757217,0.000021697574,-0.008395466239,0,0,0.999996660353,0.002584430859,0,0.008395494277,-0.002584339777,0.999961417688,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "false-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 612,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.937328583383,0.006588134344,0.348384447499,0,-0.145721148832,0.900780178018,-0.409097076099,0,-0.316512991134,-0.434225364731,-0.843366977696,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.869437173717,0.080709031392,0.487406268841,0,-0.491074542396,-0.033188713797,-0.87048505073,0,-0.054079632622,-0.996184939553,0.068489609536,0,0,0,0,1)",
+          "sunView": "matrix3d(0.921654561354,-0.029344625874,0.386900197038,0,-0.031628754861,0.98813587728,0.150290085827,0,-0.386720171961,-0.150752714616,0.909791804554,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "calypso-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "calypso-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
+          "filename": "calypso-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "calypso-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-normal-surface@2x.webp",
+          "sha256": "e9af8bc7f11247955a65565b550739c243632e15d1380e2b105f9b82cea45181",
+          "bytes": 398940
+        },
+        {
+          "filename": "calypso-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-normal-thumbnail.webp",
+          "sha256": "091d933d954d558a170e996b9a985be787b30057a9a971f21371e5443e6bd90d",
+          "bytes": 3732
+        },
+        {
+          "filename": "calypso-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-elevation-thumbnail.webp",
+          "sha256": "9a19e832557eb1210fbd2a7fedcc497619df800503a70a5e8b6cc5fa54c7a2fa",
+          "bytes": 5342
+        },
+        {
+          "filename": "calypso-false-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-false-color-thumbnail.webp",
+          "sha256": "9cc119d87b127dfd6c066e2b4d5f0698b90bf80cf86f6040371f21873a5eff95",
+          "bytes": 3252
+        },
+        {
+          "filename": "calypso-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
+          "filename": "calypso-false-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-false-color-surface@2x.webp",
+          "sha256": "4a491cf98cb71e15f83df8be32c25e411fffba6c24ed45598b218854cb4411b2",
+          "bytes": 325124
+        },
+        {
+          "filename": "calypso-false-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/calypso/calypso-false-color-shadow@2x.webp",
+          "sha256": "5a54a4fbbaa4a49ddd6da85b9da4fdb7b295abbb201bd32120d0b698fbb09235",
+          "bytes": 208238
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

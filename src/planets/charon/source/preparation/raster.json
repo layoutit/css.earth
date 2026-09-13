@@ -82,21 +82,7 @@
           "displayRange": [
             0,
             0.6
-          ],
-          "colorDisplay": {
-            "kind": "band-composite",
-            "inputQuantity": "derived-band-value",
-            "bands": [
-              "870 nm",
-              "625 nm",
-              "475 nm"
-            ],
-            "displayRange": [
-              0,
-              0.6
-            ],
-            "outputEncoding": "srgb"
-          }
+          ]
         },
         "metadata": {
           "description": "Near-infrared, red and blue observations highlight surface differences. Gray grid marks missing color coverage; detail varies across the map.",
@@ -211,6 +197,108 @@
           "wrapLongitude": true
         },
         "textureScale": 0.25
+      }
+    },
+    {
+      "id": "water-ice",
+      "output": "charon-{id}{suffix}.webp",
+      "thumbnail": "charon-lens-{id}.webp",
+      "source": "science/leisa/water-ice.tif",
+      "falseColor": true,
+      "resolutionScale": 0.32,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "water-ice",
+        "label": "Water ice",
+        "format": "geotiff",
+        "path": "science/leisa/water-ice.tif",
+        "consumer": "leisa-ice",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "minimum": 0.45,
+        "maximum": 0.75,
+        "colors": [
+          "#263f6b",
+          "#358eac",
+          "#a8d9c5",
+          "#fff0b0"
+        ],
+        "labels": [
+          "45",
+          "60",
+          "75"
+        ],
+        "units": "% band depth",
+        "description": "Water ice absorbs strongly near 2.0 \u00b5m across Charon\u2019s observed terrain. Colors show the depth of that absorption, which also depends on ice grain size. Grid: no usable spectrum.",
+        "title": "Water-ice absorption",
+        "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+        "grid": {
+          "width": 720,
+          "height": 360,
+          "noData": -9999,
+          "origin": [
+            -1903805.1480754146,
+            951902.5740377073
+          ],
+          "resolution": [
+            5288.347633542819,
+            -5288.347633542819
+          ],
+          "referenceRadiusMeters": 606000,
+          "centerLongitude": 0,
+          "wrapLongitude": true
+        }
+      }
+    },
+    {
+      "id": "ammonia",
+      "output": "charon-{id}{suffix}.webp",
+      "thumbnail": "charon-lens-{id}.webp",
+      "source": "science/leisa/ammonia.tif",
+      "falseColor": true,
+      "resolutionScale": 0.32,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "ammonia",
+        "label": "Ammonia",
+        "format": "geotiff",
+        "path": "science/leisa/ammonia.tif",
+        "consumer": "leisa-ice",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "minimum": 0.75,
+        "maximum": 0.95,
+        "colors": [
+          "#263648",
+          "#46696a",
+          "#70b38a",
+          "#e5f4ab"
+        ],
+        "labels": [
+          "0.75",
+          "0.85",
+          "0.95"
+        ],
+        "units": "continuum / absorption band",
+        "description": "A weak 2.2 \u00b5m absorption is associated with ammonia-bearing material, including ejecta around Organa crater. Colors show infrared contrast averaged over roughly 12 km; fine variations include instrument noise. Grid: no usable spectrum.",
+        "title": "Ammonia-related absorption",
+        "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+        "grid": {
+          "width": 720,
+          "height": 360,
+          "noData": -9999,
+          "origin": [
+            -1903805.1480754146,
+            951902.5740377073
+          ],
+          "resolution": [
+            5288.347633542819,
+            -5288.347633542819
+          ],
+          "referenceRadiusMeters": 606000,
+          "centerLongitude": 0,
+          "wrapLongitude": true
+        }
       }
     }
   ],

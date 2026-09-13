@@ -72,39 +72,6 @@
         "consumer": "osiris-observation",
         "filter": "FFP-Vis_Orange",
         "allowLossy": true,
-        "transfer": {
-          "maximumSourceDistanceMeters": 1200,
-          "maximumSeparationMeters": 600,
-          "maximumEmissionDegrees": 70,
-          "visibilityToleranceMeters": 0.5
-        },
-        "photometry": {
-          "model": "photometry/hasselmann-2016-hapke-1993.json",
-          "referenceDegrees": {
-            "incidence": 35,
-            "emission": 0,
-            "phase": 35
-          },
-          "limits": {
-            "maximumIncidenceDegrees": 70,
-            "maximumEmissionDegrees": 70,
-            "phaseDegrees": [
-              25,
-              55
-            ],
-            "minimumGain": 0.4,
-            "maximumGain": 2.5
-          }
-        },
-        "displayPercentiles": [
-          1,
-          99
-        ],
-        "metadata": {
-          "label": "OSIRIS",
-          "coverage": "Three Rosetta orange-filter photographs show Lutetia’s craters and ridges, including a closer view at 15:43 UTC. Each uses the published shape and a separately checked camera. Published photometric normalization reduces broad shading; the grid marks gaps.",
-          "falseColor": false
-        },
         "frames": [
           {
             "id": "approach",
@@ -131,6 +98,41 @@
           "minimumPairs": 64,
           "maximumLogMad": 0.25,
           "maximumGain": 1.35
+        },
+        "transfer": {
+          "maximumSourceDistanceMeters": 1200,
+          "maximumSeparationMeters": 600,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "photometry/hasselmann-2016-hapke-1993.json",
+          "referenceDegrees": {
+            "incidence": 35,
+            "emission": 0,
+            "phase": 35
+          },
+          "limits": {
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "phaseDegrees": [
+              25,
+              55
+            ],
+            "minimumGain": 0.4,
+            "maximumGain": 2.5
+          }
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ]
+        },
+        "metadata": {
+          "label": "OSIRIS",
+          "coverage": "Three Rosetta orange-filter photographs show Lutetia’s craters and ridges, including a closer view at 15:43 UTC. Each uses the published shape and a separately checked camera. Published photometric normalization reduces broad shading; the grid marks gaps.",
+          "falseColor": false
         }
       }
     ]
