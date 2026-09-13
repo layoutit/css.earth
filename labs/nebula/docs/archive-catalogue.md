@@ -1,5 +1,7 @@
 # Archive image catalogue
 
+The **Papers** tab adds the [object bibliography](paper-catalogue.md): SIMBAD-linked references, abstracts, topic/year filters and publisher/ADS links for all 110 objects. Its acquisition and cache are independent of image discovery.
+
 [/catalogue?object=m42](http://127.0.0.1:4331/catalogue?object=m42) browses the **110 Messier objects** with small sky-survey thumbnails, apparent sizes and MAST, IRSA and ESO image candidates. **Largest on sky first** is the default order; Messier number and name are also available. Sizes use arcseconds (60″ = 1′); unknown sizes sort last. Search and object-type filters narrow the list, and arrow keys move between objects.
 
 **Survey images** is the default: DSS2 optical, WISE infrared and 2MASS near infrared appear as real, centered colour mosaics. All three use the selected object's ICRS center, north up, the same tangent projection and a common field with 25% margin around the reference major diameter. Unknown size uses a labeled 1° field; fields are bounded to 0.03–20°. **View image** opens a 2048px JPEG inside the lab, with loading, failure and retry states. Output pixels do not increase the survey's native resolution. No FITS download or reconstruction starts when browsing.

@@ -4,6 +4,7 @@ import { archiveProviders, readArchiveQuery, readMessierCatalogue, readMessierIn
 import { imageSuitability, inventoryStorage } from './selection';
 import { imageLinks } from './image-links';
 import { SurveyGallery } from './survey-gallery';
+import { PapersView } from './papers/papers-view';
 import { imageRank, rankImages, type ImageOrder } from './image-ranking';
 import { readMessierPresentation } from './presentation';
 import { arcseconds, CatalogueThumbnail, displayObjectType, ObjectBrowser, objectExtent, orderObjects, type ObjectAppearance, type ObjectSort } from './object-browser';
@@ -43,6 +44,9 @@ function wavelength(image: ArchiveImage) {
 function angle(degrees: number | null) {
   if (degrees === null) return 'Unreported';
   return degrees >= 1 ? `${degrees.toFixed(2)}°` : `${(degrees * 60).toFixed(2)}′`;
+}
+function readImageMode(): 'surveys' | 'archives' | 'papers' {
+  const value = new URL(location.href).searchParams.get('view'); return value === 'papers' || value === 'archives' ? value : 'surveys';
 }
 function readObjectId() { return new URL(location.href).searchParams.get('object') ?? 'm42'; }
 function textError(value: unknown) { return value instanceof Error ? value.message : 'Catalogue unavailable.'; }
@@ -105,7 +109,10 @@ export function CatalogueView() {
   const [selectedId, setSelectedId] = useState(readObjectId), [objectSearch, setObjectSearch] = useState(''), [objectType, setObjectType] = useState('all');
   const [provider, setProvider] = useState<ArchiveProvider | 'all'>('all'), [band, setBand] = useState<Band>('all');
   const [imageRole, setImageRole] = useState<ImageRole | 'all'>('all');
-  const [imageMode, setImageMode] = useState<'surveys' | 'archives'>('surveys');
+  const [imageMode, setImageMode] = useState(readImageMode), [catalogueHash, setCatalogueHash] = useState('');
+  function chooseImageMode(mode: 'surveys' | 'archives' | 'papers') {
+    setImageMode(mode); const url = new URL(location.href); if (mode === 'surveys') url.searchParams.delete('view'); else url.searchParams.set('view', mode); history.replaceState(history.state, '', url);
+  }
   const [imageOrder, setImageOrder] = useState<ImageOrder>('best');
   const [resolution, setResolution] = useState('all'), [productSearch, setProductSearch] = useState('');
   const [reload, setReload] = useState(0), [loading, setLoading] = useState(true), [error, setError] = useState('');
@@ -123,7 +130,7 @@ export function CatalogueView() {
     return () => controller.abort();
   }, [reload]);
   useEffect(() => {
-    const onHistory = () => setSelectedId(readObjectId()); window.addEventListener('popstate', onHistory);
+    const onHistory = () => { setSelectedId(readObjectId()); setImageMode(readImageMode()); }; window.addEventListener('popstate', onHistory);
     return () => window.removeEventListener('popstate', onHistory);
   }, []);
   useEffect(() => {
@@ -145,7 +152,7 @@ export function CatalogueView() {
       if (controller.signal.aborted) return;
       const [objects, snapshot] = requests;
       if (objects.status === 'rejected') { setError(textError(objects.reason)); return; }
-      setCatalogue(objects.value.data);
+      setCatalogue(objects.value.data); setCatalogueHash(objects.value.hash);
       if (snapshot.status === 'rejected') { setInventory(previous => previous?.catalogueSha256 === objects.value.hash ? previous : null); setError(textError(snapshot.reason)); return; }
       if (snapshot.value && snapshot.value.catalogueSha256 !== objects.value.hash) {
         setInventory(null); setError('Archive snapshot belongs to an earlier object catalogue. Rebuild the inventory.'); return;
@@ -214,10 +221,11 @@ export function CatalogueView() {
         {!selected && !loading && catalogue && <p className="catalogue-empty" role="status">Choose a Messier object from the catalogue.</p>}
         {selected && <>
           <div className="catalogue-image-modes" role="group" aria-label="Image collection">
-            <button type="button" aria-pressed={imageMode === 'surveys'} onClick={() => setImageMode('surveys')}>Survey images</button>
-            <button type="button" aria-pressed={imageMode === 'archives'} onClick={() => setImageMode('archives')}>Archive records</button>
+            <button type="button" aria-pressed={imageMode === 'surveys'} onClick={() => chooseImageMode('surveys')}>Survey images</button>
+            <button type="button" aria-pressed={imageMode === 'archives'} onClick={() => chooseImageMode('archives')}>Archive records</button>
+            <button type="button" aria-pressed={imageMode === 'papers'} onClick={() => chooseImageMode('papers')}>Papers</button>
           </div>
-          {imageMode === 'surveys' ? <div className="catalogue-candidates"><SurveyGallery key={selected.id} object={selected} majorArcsec={objectExtent(selected, appearances.get(selected.id)).majorArcsec} /></div> : <>
+          {imageMode === 'surveys' ? <div className="catalogue-candidates"><SurveyGallery key={selected.id} object={selected} majorArcsec={objectExtent(selected, appearances.get(selected.id)).majorArcsec} /></div> : imageMode === 'papers' ? <PapersView key={selected.id} object={selected} catalogueSha256={catalogueHash} localFile={localFile} /> : <>
           <div className="catalogue-filters">
             <div className="catalogue-archive-filters" role="group" aria-label="Filter archive">
               <button type="button" aria-pressed={provider === 'all'} onClick={() => setProvider('all')}>All archives</button>
