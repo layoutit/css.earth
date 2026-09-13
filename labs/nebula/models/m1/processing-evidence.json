@@ -317,5 +317,10 @@
       "Epoch, foreground extinction, scattering and relativistic transport remain unresolved",
       "Source restoration was exercised with local caches; no cold-clone validation claim"
     ]
+  },
+  "materialReassessment": {
+    "status": "failed material qualification",
+    "evidence": "material-trial.json",
+    "interpretation": "The earlier inspected result has a finite neutral volume but still repeats XY image color through depth. Its earlier front-fit scores and preserved geometry do not establish coherent 3D material. The live historical bake remains available; no replacement was accepted."
   }
 }

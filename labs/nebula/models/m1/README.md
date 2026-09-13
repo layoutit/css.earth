@@ -1,5 +1,13 @@
 # Crab Nebula — measured ejecta and a separate pulsar wind
 
+**Material quality remains blocked.** The live bake has finite 3D density but
+repeats photographic color through depth. The replacement material path removes
+that operation, yet the [bounded trials](material-trial.json) lose front detail
+or produce colored beads. None was promoted. Passing image-fit scores and unit
+tests do not override this failed visual gate. The next model step is connected
+filament/ridge support, followed by the depth-aware RGB fit; adding more isolated
+Gaussian blobs or restoring XY projection is not an accepted correction.
+
 The local model uses **416,573 released SITELLE emission samples**, a published
 Chandra torus interpretation, two finite jet approximations, and a compact light
 at the pulsar's observed sky position. All six selected spectral images remain

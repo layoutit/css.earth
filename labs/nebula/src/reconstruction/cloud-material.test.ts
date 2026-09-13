@@ -139,3 +139,22 @@ test('whole-cloud tone also reaches uncovered and black-image neutral material',
     assert.equal(rgba[p * 4 + 3], source.pixels[p * 4 + 3]);
   }
 });
+
+test('prepared 3D component mixtures preserve their intensity and valid black material without changing alpha', async t => {
+  const directory = await temporary(t), source = await fixture();
+  for (const [preserveMaterialIntensity, value] of [[false, 127.5], [true, 127.5], [true, 0]] as const) {
+    const outputDirectory = resolve(directory, `${preserveMaterialIntensity}-${value}`);
+    const result = await recolorCloudSlices({ slices: source.slices, loadResource: async () => source.bytes,
+      outputDirectory, encoding: { format: 'png' }, preserveMaterialIntensity,
+      sampleImageRgb(_x, _y, _z, out) { out[0] = out[2] = value; out[1] = 0; return true; } });
+    for (const quad of result.slices.quads) {
+      const rgba = await sharp(await readFile(resolve(outputDirectory, quad.texturePath))).ensureAlpha().raw().toBuffer();
+      for (let pixel = 0; pixel < 6; pixel++) {
+        assert.equal(rgba[pixel * 4 + 3], source.pixels[pixel * 4 + 3]);
+        if (pixel > 0) assert.deepEqual([...rgba.subarray(pixel * 4, pixel * 4 + 3)],
+          value === 0 ? [0, 0, 0] : preserveMaterialIntensity ? [128, 0, 128] : [255, 0, 255]);
+      }
+    }
+    assert.deepEqual(result.slices.quads.map(shape), source.slices.quads.map(shape));
+  }
+});

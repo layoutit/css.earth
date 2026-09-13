@@ -19,6 +19,8 @@ import { jointRecord } from '../joint-fit/model';
 import { sampledBakeProgress } from './progress';
 import { registerComponentBanks } from './layout';
 import { fitSampledEmission, type EmissionFitResult } from './emission-fit';
+import { prepareSampledMaterial } from './material';
+import { fitSampledMaterialColors } from './material-fit';
 
 async function readSourcePin(root: string, pin: CompilerPin): Promise<Buffer> {
   if (!/^(labs\/nebula\/(models|src)\/|\.local\/nebula-lab\/)/.test(pin.path) || /[\\?#\s]/.test(pin.path) ||
@@ -159,15 +161,28 @@ export async function compileSampledNebula(root: string, request: CompilerReques
     const group = groups.get(key) ?? []; group.push(image); groups.set(key, group);
   }
   const neutral = await bakeCompiler({ root, outputDirectory: `${directory}/scene-neutral`, id, fieldIdentity, boundsArcsec: field.bounds,
-    skyBoundsArcsec: skyBounds, sampleEmission: neutralField.sampleEmission, lenses: [{ id: 'neutral-material', label: 'Neutral components', sampleRgb(_x, _y, rgb) { rgb.fill(255); return true; } }],
+    skyBoundsArcsec: skyBounds, sampleEmission: neutralField.sampleEmission, lenses: [{ id: 'neutral-material', label: 'Neutral components', sampleMaterial(_x, _y, _z, rgb) { rgb.fill(255); return true; } }],
     stars: stars.map(({ materials: _materials, ...star }) => star), signal,
     progress: p => progress(`Neutral components · ${p.message}`, .3 + .08 * sampledBakeProgress(p)) });
-  const lenses: CompilerBakeResult['lenses'] = []; let groupIndex = 0;
+  const lenses: CompilerBakeResult['lenses'] = [], materialReceipts: { material: ReturnType<typeof prepareSampledMaterial>['receipt'];
+    fit?: ReturnType<typeof fitSampledMaterialColors>['receipt'] }[] = []; let groupIndex = 0;
+  let referenceMaterial: ReturnType<typeof prepareSampledMaterial>['sampleMaterial'] | undefined;
   for (const images of groups.values()) {
     const mixture = fitsBySource.get(images[0]!.id)?.field ?? prepared.field(sampled.lensComponents[images[0]!.id]!);
+    const materials = images.map(image => {
+      progress(`Assigning ${image.label} colors to finite 3D emitters…`, .38 + .5 * groupIndex / groups.size);
+      const fit = fitsBySource.get(image.id);
+      const fittedMaterial = fit ? fitSampledMaterialColors(fits.values, sampled, prepared, image, sampled.lensComponents[image.id]!,
+        { ...fit.receipt, diffuse: fit.diffuse }, signal) : undefined;
+      const material = prepareSampledMaterial(fits.values, sampled, prepared, image, sampled.lensComponents[image.id]!,
+        fit ? { ...fit.receipt, diffuse: fit.diffuse, colors: fittedMaterial?.colors } : undefined, signal);
+      materialReceipts.push({ material: material.receipt, ...(fittedMaterial ? { fit: fittedMaterial.receipt } : {}) });
+      if (image.id === reference.id) referenceMaterial = material.sampleMaterial;
+      return { id: image.id, label: image.label, sampleMaterial: material.sampleMaterial };
+    });
     const bank = await bakeCompiler({ root, outputDirectory: `${directory}/scene-${groupIndex}`, id, fieldIdentity,
       boundsArcsec: field.bounds, skyBoundsArcsec: skyBounds, sampleEmission: mixture.sampleEmission,
-      lenses: images.map(image => ({ id: image.id, label: image.label, sampleRgb: image.sampleRgb })), signal,
+      lenses: materials, signal,
       progress: p => progress(`${images.map(i => i.label).join(' / ')} · ${p.message}`, .4 + .5 * (groupIndex + sampledBakeProgress(p)) / groups.size) });
     lenses.push(...bank.lenses.map(lens => ({ ...lens, alphaSha256: bank.alphaSha256 }))); groupIndex++;
   }
@@ -182,12 +197,14 @@ export async function compileSampledNebula(root: string, request: CompilerReques
     sources.push({ id: image.id, label: image.label, credit: image.credit, page: image.page, width: original.width, height: original.height,
       boundsArcsec: skyBounds, original: await save(`source-${image.id}.png`, original.bytes), starless: await save(`starless-${image.id}.png`, starless.bytes) });
   }
-  const comparison = await sampledPanels(referenceFit?.field ?? prepared.field(sampled.lensComponents[reference.id]!), reference, skyBounds);
+  if (!referenceMaterial) throw new Error('Reference 3D material was not prepared.');
+  const comparison = await sampledPanels(referenceFit?.field ?? prepared.field(sampled.lensComponents[reference.id]!), reference, skyBounds, referenceMaterial);
   const sampledPrior = { recipe: await save('sampled-recipe.json', sampledBytes), evidence: await save('physical-evidence.json', evidenceBytes), source: inputPins[2],
     emissionComponents: sampled.lensComponents, coordinateEvidence: prepared.evidence, emissionFit: sampled.emissionFit, emissionFits };
   const method = await save('method.json', Buffer.from(JSON.stringify({ version: COMPILER_VERSION, implementation, extraImplementation, inputPins,
     recipe, recipeSha256: geometrySha(recipeBytes), request, sampledPrior, pipeline,
-    materials: 'Qualified spatial points and independent analytic wind retain one fixed coordinate frame. An optional regularized fit changes only ejecta amplitude and coefficients of finite 3D diffuse atoms fixed before image fitting. Each selected lens fits its own observed display signal; photographs supply registered chromaticity. No photo is extruded or used to move samples. Diffuse depths remain an authored prior.',
+    materials: { method: 'finite-emitter-chromaticity@1', qualification: 'requires-front-and-side-visual-acceptance', receipts: materialReceipts,
+      interpretation: 'Registered colors attach to source points before finite XYZ splatting, and to complete finite wind/diffuse components before emission mixing. The painter only samples this 3D material; it cannot repeat an XY image down the cloud. Physical supports, alpha and stars remain unchanged. Color attribution and diffuse depths remain conditional.' },
     stars: 'Observed reference residual positions with deterministic conditional support depths; not measured membership. The named pulsar uses a separately pinned position and authored angular display size, without simulated time variability.',
     metrics: 'Image-space display-luminance disagreement including normalized source chromaticity. Optional fit receipts retain before/after and withheld-pixel results. This is not calibrated radiance or evidence of true depth; outreach stretch, coverage and epochs remain distinct.',
     limitations: ['SITELLE depth depends on the cited expansion law and sky registration.', 'Spectral epochs differ; no false common epoch is applied.',
