@@ -19,11 +19,6 @@ import clusterCatalog from '../src/objects/galaxy-clusters/prepared/catalogue.js
 import clusterPresentation from '../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
 
-const nebulaParts = Object.values(import.meta.glob('../src/objects/*/source/nebula.json', { eager: true, import: 'default' })).map(parsePreparedNebulaCatalog);
-const nebulaCatalog = parsePreparedNebulaCatalog({ schema: 'cssearth-nebula-catalog@1', frame: galaxyCatalog.frame,
-  sources: [...new Map(nebulaParts.flatMap(part => part.sources).map(source => [source.id, source])).values()],
-  objects: nebulaParts.flatMap(part => part.objects) });
-
 const annotationOpacities = Object.fromEntries(OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
 const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
 const hiddenOrbitIds = OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id);
@@ -33,10 +28,15 @@ const annotationPriorities = Object.fromEntries(OBJECTS.map(object =>
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
   loadShells(): Promise<{ payload: Awaited<ReturnType<typeof loadPreparedCssSurfaceShell>>; resolveResource(path: string): string }[]>;
+  nebulaSources: ReturnType<typeof parsePreparedNebulaCatalog>['sources'];
 };
 let universePromise: Promise<ApplicationUniverse> | null = null;
 function loadApplicationUniverse(): Promise<ApplicationUniverse> {
   universePromise ??= (async () => {
+    const nebulaParts = Object.values(import.meta.glob('../src/objects/*/source/nebula.json', { eager: true, import: 'default' })).map(parsePreparedNebulaCatalog);
+    const nebulaCatalog = parsePreparedNebulaCatalog({ schema: 'cssearth-nebula-catalog@1', frame: galaxyCatalog.frame,
+      sources: [...new Map(nebulaParts.flatMap(part => part.sources).map(source => [source.id, source])).values()],
+      objects: nebulaParts.flatMap(part => part.objects) });
     const descriptors = import.meta.glob('../src/objects/*/object.json', { import: 'default', eager: true });
     // The individual-star binary bank is a preparation input, never an application asset.
     const assets = import.meta.glob(['../src/objects/*/prepared/**/*.{json,png,webp,bin}',
@@ -98,7 +98,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const markerPool = 'context-markers';
     const markerEntries = [...new Set(Object.values(sprites).map(sprite => sprite.url))]
       .map((url, index) => ({ key: `${markerPool}:${index}`, url, pool: markerPool }));
-    return { ...universe, loadShells, assets: {
+    return { ...universe, loadShells, nebulaSources: nebulaCatalog.sources, assets: {
       entries: [...universe.assets.entries, ...markerEntries],
       pools: [...universe.assets.pools, { id: markerPool, retention: 'mount', capacity: markerEntries.length,
         concurrency: 4, reuse: false, decoding: 'async' }],
@@ -130,7 +130,7 @@ export function createApplicationWorldContext() {
         const layer = prepared.mount(stage, { presentationHost, requestPublication: () => refreshWorld(), onSelectGalaxy: object => { void contextNavigation?.select(object); } });
         pendingLayer = layer;
         contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
-          sources: [...galaxyCatalog.sources, ...clusterCatalog.sources, ...nebulaCatalog.sources], windowTarget });
+          sources: [...galaxyCatalog.sources, ...clusterCatalog.sources, ...prepared.nebulaSources], windowTarget });
         layer.setHiddenOrbits(hiddenOrbitIds);
         const framePlanner = prepared.createFramePlanner();
         pendingPlanner = framePlanner;
