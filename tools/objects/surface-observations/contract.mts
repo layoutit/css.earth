@@ -54,6 +54,8 @@ export interface PixelGeometry {
   /** Distance from the camera to the pixel's surface point, in metres. */
   rangeMeters(index: number): number;
   incidence(index: number): number; emission(index: number): number; phase(index: number): number | undefined;
+  /** Whether the pixel's surface point lies in a cast shadow, when the geometry can trace a ray toward the Sun. */
+  shadowed?(index: number): boolean;
   report: Record<string, unknown>;
 }
 
@@ -62,11 +64,12 @@ export interface ObservationPhotometry {
   gain(incidence: number, emission: number, phase: number | undefined): number | null;
   report: Record<string, unknown>;
   units?: string;
+  /** Whether displayed brightness keeps the acquisition illumination. A normalizing model cannot invert a cast shadow, so its lens withholds shadowed pixels. */
+  retainsIllumination: boolean;
 }
 
 /** Transfer limits after validation. Separation is either a fixed distance or a multiple of the contributors' measured footprint. */
 export interface TransferLimits {
-  maximumSourceDistanceMeters: number;
   maximumSeparationMeters?: number;
   maximumSeparationFootprints?: number;
   visibilityToleranceMeters: number;
@@ -82,12 +85,10 @@ export interface ObservationFrame {
   id: string; startTime: string; filter: string; positionKm: readonly number[];
   cameraKind: CameraKind; geometrySource: PixelGeometry['source'] | 'registered-posts';
   nominalPixelScaleMeters?: number;
-  /** Sample at a point in metres. The allowance widens the separation limit for a displayed point that lies off the source surface. */
-  sample(point: readonly number[], allowanceMeters?: number): FootprintSample;
+  /** Sample at a source-surface point in metres. */
+  sample(point: readonly number[]): FootprintSample;
   /** Whether the frame's camera sees a source-surface point without obstruction. */
   visible(point: readonly number[]): boolean;
-  /** The display range of this frame's own qualified pixels, when its route displays by pixel percentiles. */
-  pixelRange?: { low: number; high: number };
   /** Measured footprint: nadir-equivalent ground size of one pixel, from the camera's pixel angle and each pixel's range. */
   footprint: FrameFootprint;
   report: Record<string, unknown>;
@@ -98,16 +99,15 @@ export interface FrameFootprint { pixelAngleMicroradians: number; nadirMedianMet
 /** What a route decides once for all its frames. */
 export interface SurfacePolicy {
   format: string;
-  maximumSourceDistanceMeters: number;
-  /** Check the displayed point's own footprint before the closest source point. */
-  precheckDisplayPoint: boolean;
   selection: 'single' | 'lowest-emission' | 'recipe-order' | 'finest-resolution';
-  levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumLogMad: number; maximumGain: number; samplesPerTriangle?: number };
+  levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumGain: number; samplesPerTriangle?: number };
   samplesPerTriangle: number;
-  display: { range: 'reference-pixels' | 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay };
+  display: { range: 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay };
   photometry: Record<string, unknown>;
   limits: Record<string, unknown>;
   limitations?: string;
+  /** Evidence the format measured once for the whole lens, such as filter camera registration. */
+  registration?: Record<string, unknown>;
 }
 
 export interface LoadContext { sourceDirectory: string; source: SourceAccess; radial: RadialSurface; config: SurfaceConfig; entries: readonly SourceInput[] }

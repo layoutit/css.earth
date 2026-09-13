@@ -230,7 +230,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1217,
-      "expectedSha256": "451e9d28897e2d4c77ff9826c21211b06d902e1c11bfba9c8d219d55c1e1f687"
+      "expectedSha256": "33274e76d60e4fb02c8131709584383a9047998933e2cf64e4fa55086f0c6dd4"
     },
     {
       "path": "preparation/rotation.json",
@@ -239,8 +239,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3668,
-      "expectedSha256": "3cd19d9fa8a72de4f03de9eb8aa44185f86c61408f78d2e878e6a9ff0276f6d7"
+      "expectedBytes": 3893,
+      "expectedSha256": "88ed72b63e85e5c747d4ac17569b989e02c254288f06de2c9f2d4cf7b14629dd"
     },
     {
       "path": "presentation/minimap.json",
@@ -302,8 +302,8 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 126671,
-      "expectedSha256": "9de80fc3e93b6d47117ed00505995211e4bc12a1e857d569e34231b9ab812ebd"
+      "expectedBytes": 120686,
+      "expectedSha256": "ff3cd581759f775b743bfc85028df48b59084156ab9ba47be743747101e18e0a"
     }
   ]
 }

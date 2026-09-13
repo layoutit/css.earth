@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6208bc17c185a45ea9a51a59559c66a7eb22edb943274d25f4929e5ed8111629"
+    "sha256": "7e912ab80fe746952cf0a1b160b8ea116dd8302c3def06cbaeec1700b20ee0aa"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9698cc5bb01abe58e959de591abb3638897525714df844b3c354a69ed452f073",
+      "sha256": "3485dda4743917fd5bb1dd690461767e3cff893da603819a60dc8ecf118e94b9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -432,7 +432,6 @@
                 "maximumControls": 1500
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 5310,
                 "maximumSeparationFootprints": 2,
                 "maximumEmissionDegrees": 75,
                 "visibilityToleranceMeters": 0.5,
@@ -448,8 +447,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99
+                  1.2,
+                  99.4
                 ]
               },
               "metadata": {
@@ -2160,14 +2159,14 @@
       "outputs": [
         {
           "url": "/scenes/tethys/tethys-iss-thumbnail.webp",
-          "bytes": 2414,
-          "sha256": "a30716a92c09b324ca9350289899e66807db9330d78b0ac206568e57c9c5edf5",
+          "bytes": 2362,
+          "sha256": "91b8a05c6ddccde302670dcfcdbd943a8fc8dcdf17c665dbced602ff608f8b36",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-iss-surface@2x.webp",
-          "bytes": 1372560,
-          "sha256": "dca5b01921fff23b218f13e3d2e087a2b141250aedc02131424645fb3bc90f2e",
+          "bytes": 1229446,
+          "sha256": "2817bba8f6cd902ba36826dd06a05a9aee7e03644978bc9a9e6464b522691b6c",
           "verification": "bytes-verified"
         }
       ],
@@ -2347,8 +2346,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/iss.webp",
-          "bytes": 22440,
-          "sha256": "81ad74453f479474425316a223e0c2fa493b973ef1142d23fbb6b0507196fc00",
+          "bytes": 21284,
+          "sha256": "0cf9f3d90ccf0b2fa4cc6c959c4bf3e32c74060f2392bf3d6cc4449fa0490d08",
           "verification": "bytes-verified"
         }
       ]

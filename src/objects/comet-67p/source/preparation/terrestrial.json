@@ -636,12 +636,10 @@
         "levelMatching": {
           "samplesPerTriangle": 64,
           "minimumPairs": 128,
-          "maximumLogMad": 0.25,
           "maximumGain": 1.35,
           "maximumAngleDegrees": 65
         },
         "transfer": {
-          "maximumSourceDistanceMeters": 50,
           "maximumSeparationMeters": 20,
           "maximumEmissionDegrees": 80,
           "visibilityToleranceMeters": 0.5,
@@ -667,8 +665,8 @@
         },
         "display": {
           "percentiles": [
-            1,
-            99
+            1.9,
+            99.3
           ]
         },
         "metadata": {

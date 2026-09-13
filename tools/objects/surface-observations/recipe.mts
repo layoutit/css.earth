@@ -12,10 +12,14 @@ import { MAXIMUM_SEPARATION_FOOTPRINTS } from './limits.mts';
 /** Keys every lens has, and the two a mosaic adds. */
 export const LENS_KEYS = ['id', 'format', 'consumer', 'metadata', 'frames', 'transfer', 'photometry', 'display'] as const;
 export const MOSAIC_KEYS = ['selection', 'levelMatching'] as const;
+/** A lens may name where the camera looks when the lens opens. */
+export const OPTIONAL_LENS_KEYS = ['focus'] as const;
 
 export const safePath = (path: unknown): path is string => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.includes('\\') && !path.split('/').includes('..');
 export const positive = (value: number | undefined): value is number => value !== undefined && Number.isFinite(value) && value > 0;
 const identifier = /^[a-z][a-z0-9-]*$/;
+/** A frame keeps its archive product id, such as Cassini n1506184171_1 or a Galileo SSI image number. */
+const frameIdentifier = /^[a-z0-9][a-z0-9_-]*$/;
 
 /** Refuse keys a format does not declare, and require the ones it must have. */
 export function checkKeys(value: unknown, required: readonly string[], allowed: readonly string[], context: string) {
@@ -30,7 +34,7 @@ export type LensDisplay = ReturnType<typeof parseDisplay>;
 
 export interface LensEnvelope {
   id: string; consumer: string; metadata: { label?: string; coverage?: string }; frames: readonly { id: string }[]; selection?: string;
-  levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumLogMad: number; maximumGain: number; samplesPerTriangle?: number };
+  levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumGain: number; samplesPerTriangle?: number };
   display: LensDisplay;
 }
 
@@ -48,14 +52,14 @@ export interface EnvelopeRules {
 export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[], rules: EnvelopeRules, context: string) {
   const { frames, levelMatching: levels, display } = recipe, mosaic = frames.length > 1;
   checkKeys(display, [], ['percentiles', 'displayRange'], `${context} display`);
-  if (levels) checkKeys(levels, ['minimumPairs', 'maximumLogMad', 'maximumGain'], ['maximumAngleDegrees', 'samplesPerTriangle'], `${context} level matching`);
+  if (levels) checkKeys(levels, ['minimumPairs', 'maximumGain'], ['maximumAngleDegrees', 'samplesPerTriangle'], `${context} level matching`);
   const range = display.percentiles ?? display.displayRange, kind = display.percentiles ? 'percentiles' : 'displayRange';
   if (!identifier.test(recipe.id) || !identifier.test(recipe.consumer) || !recipe.metadata?.label || !recipe.metadata?.coverage ||
-      frames.length < 1 || frames.length > rules.maximumFrames || frames.some(frame => !identifier.test(frame.id)) || new Set(frames.map(frame => frame.id)).size !== frames.length ||
+      frames.length < 1 || frames.length > rules.maximumFrames || frames.some(frame => !frameIdentifier.test(frame.id)) || new Set(frames.map(frame => frame.id)).size !== frames.length ||
       !paths.every(safePath) || new Set(paths).size !== paths.length ||
       mosaic !== (recipe.selection !== undefined) || mosaic !== (levels !== undefined) || (recipe.selection !== undefined && !rules.selections.includes(recipe.selection)) ||
       (levels !== undefined && (!Number.isInteger(levels.minimumPairs) || levels.minimumPairs < 64 || levels.minimumPairs > 10000 ||
-        !positive(levels.maximumLogMad) || levels.maximumLogMad > .3 || !(levels.maximumGain >= 1 && levels.maximumGain <= rules.maximumLevelGain) ||
+        !(levels.maximumGain >= 1 && levels.maximumGain <= rules.maximumLevelGain) ||
         (levels.samplesPerTriangle === undefined ? rules.samplesPerTriangle === 'required'
           : !Number.isInteger(levels.samplesPerTriangle) || levels.samplesPerTriangle < 4 || levels.samplesPerTriangle > 64) ||
         (levels.maximumAngleDegrees !== undefined && (!positive(levels.maximumAngleDegrees) || levels.maximumAngleDegrees >= 90)))) ||
@@ -64,13 +68,12 @@ export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[],
       (kind === 'percentiles' && (range[0] < 0 || range[1] > 100))) throw new TypeError(`Invalid source-bound ${context}.`);
 }
 
-/** Transfer limits for a camera lens: source distance within the mesh error, one form of contributor separation, visibility within a metre
- * and emission below the horizon. */
-export function validateTransfer(transfer: { maximumSourceDistanceMeters: number; maximumSeparationMeters?: number; maximumSeparationFootprints?: number; visibilityToleranceMeters: number; maximumEmissionDegrees: number },
+/** Transfer limits for a camera lens on source-preserving terrain: one form of contributor separation, visibility within a metre and
+ * emission below the horizon. */
+export function validateTransfer(transfer: { maximumSeparationMeters?: number; maximumSeparationFootprints?: number; visibilityToleranceMeters: number; maximumEmissionDegrees: number },
   geometry: { simplification?: { method?: string; maximumErrorMeters: number } } | undefined, context: string) {
-  checkKeys(transfer, ['maximumSourceDistanceMeters', 'visibilityToleranceMeters', 'maximumEmissionDegrees'], ['maximumSeparationMeters', 'maximumSeparationFootprints', 'interpretation'], `${context} transfer`);
+  checkKeys(transfer, ['visibilityToleranceMeters', 'maximumEmissionDegrees'], ['maximumSeparationMeters', 'maximumSeparationFootprints', 'interpretation'], `${context} transfer`);
   if (geometry?.simplification?.method !== 'source-meshoptimizer' ||
-      !positive(transfer.maximumSourceDistanceMeters) || transfer.maximumSourceDistanceMeters > geometry.simplification.maximumErrorMeters ||
       !(transfer.maximumSeparationFootprints === undefined ? positive(transfer.maximumSeparationMeters)
         : transfer.maximumSeparationMeters === undefined && positive(transfer.maximumSeparationFootprints) && transfer.maximumSeparationFootprints <= MAXIMUM_SEPARATION_FOOTPRINTS) ||
       !positive(transfer.visibilityToleranceMeters) || transfer.visibilityToleranceMeters > 1 ||

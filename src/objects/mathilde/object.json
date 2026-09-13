@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "49b507d6bf5411348e18fe30672b8a23bc78faa64c3d20378a052541dadd4343"
+    "sha256": "2ce1e5ccccf2c1abe5e5645e7907212fc410dd8d6271e75c2ab870d3a2e904ce"
   },
   "id": "mathilde",
   "properties": {
@@ -62,7 +62,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "95d57fa2fc62f3d5d2b01a60187b03f5690db61d386886a252348cf850545191"
+          "sha256": "c1086762e7e1201473bf07265b308a5a26232e792878dd74060f011f3de51a8e"
         },
         {
           "id": "rotation",
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c72b1d4ec9092fb5c9dd6ea6f81c117888e149eea9d6e4829bbd2d88bc13baad"
+        "sha256": "ac5e944b52cb8b9bd4f7e3d336d4fabec01315345de2be8c33278650421a6d09"
       }
     },
     "catalog": {

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "48ae011fb9d265291923efbe729db0fb1f4528f1c5700e58d5a8718212824c15"
+    "sha256": "8eb96d892d3ef292cb37f0d9fd5566039587dac179a9db76b74dc2811ef70d61"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "863508a7053be085da029310e2aa1acce2814bf9c19e5f80635fd2639092e7eb",
+      "sha256": "099ce21b0846794fceedae19d3dba123c90e6830374564383449b4bf394f2a1f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -193,13 +193,10 @@
                 ]
               },
               "maximumCoordinateErrorMeters": 0.000001,
-              "transfer": {
-                "maximumSourceDistanceMeters": 85
-              },
               "display": {
-                "displayRange": [
+                "percentiles": [
                   0,
-                  0.018
+                  100
                 ]
               },
               "metadata": {
@@ -1361,14 +1358,14 @@
       "outputs": [
         {
           "url": "/scenes/comet-19p/comet-19p-micas-thumbnail.webp",
-          "bytes": 1068,
-          "sha256": "0bb3e78b42695632c669bc7029fed00ca923d874971ffe662293b93d202eb120",
+          "bytes": 1082,
+          "sha256": "82d4fefa81fd9b00ddd95522b87f76e1c7ff3ab39c733e0dfd61843cd71d2388",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-micas-surface@2x.webp",
-          "bytes": 138054,
-          "sha256": "de05a96041fa15b33f56bdb382b53b0252b9fefd711fd649ac0c07a8f3a673c2",
+          "bytes": 144762,
+          "sha256": "152b158d9540d2f44e930fc87527683d545d2de9cf76f1bb30559c14d7f4ec8e",
           "verification": "bytes-verified"
         }
       ],

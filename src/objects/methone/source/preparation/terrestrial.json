@@ -16,11 +16,20 @@
     "observations": [],
     "scientific": [],
     "observedColors": [],
-    "mosaics": [
+    "surfaceObservations": [
       {
         "id": "normal",
         "format": "controlled-shape-camera",
         "consumer": "cassini-frames",
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Cassini calibrated clear-filter observation projected onto the measured ellipsoid. Bounded illumination correction preserves the real darker leading-side oval; grid marks unavailable or unstable samples. Native detail is about 27 m/pixel, not an HD terrain survey.",
+          "attribution": {
+            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/cassini/iss/"
+          }
+        },
         "frames": [
           {
             "id": "n1716192103_1",
@@ -37,28 +46,29 @@
               650.8201198506287
             ],
             "pixelAngleMicroradians": 5.989697719921734,
-            "coverageInsetPixels": 3
+            "coverageInsetPixels": 3,
+            "backgroundMaximum": 0.012
           }
         ],
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 72
+        },
         "photometry": {
+          "model": "lunar-lambert",
           "weight": 0.5,
-          "maximumGain": 2.5,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
           "maximumIncidenceDegrees": 75,
           "maximumEmissionDegrees": 72,
-          "displayMaximum": 0.65,
-          "gamma": 1,
-          "minimumLevel": 1,
-          "maximumLevel": 1,
-          "backgroundMaximum": 0.012
+          "maximumGain": 2.5
         },
-        "metadata": {
-          "label": "Monochrome",
-          "falseColor": false,
-          "coverage": "Cassini calibrated clear-filter observation projected onto the measured ellipsoid. Bounded illumination correction preserves the real darker leading-side oval; grid marks unavailable or unstable samples. Native detail is about 27 m/pixel, not an HD terrain survey.",
-          "attribution": {
-            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
-            "url": "https://pds-rings.seti.org/cassini/iss/"
-          }
+        "display": {
+          "displayRange": [
+            0,
+            0.505
+          ]
         }
       }
     ]

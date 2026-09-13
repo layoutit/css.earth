@@ -185,11 +185,9 @@
         "levelMatching": {
           "samplesPerTriangle": 64,
           "minimumPairs": 64,
-          "maximumLogMad": 0.3,
           "maximumGain": 1.5
         },
         "transfer": {
-          "maximumSourceDistanceMeters": 90,
           "maximumSeparationMeters": 200,
           "maximumEmissionDegrees": 75,
           "visibilityToleranceMeters": 0.5
@@ -200,8 +198,8 @@
         },
         "display": {
           "percentiles": [
-            1,
-            99.5
+            1.7,
+            99.4
           ]
         },
         "metadata": {
@@ -255,11 +253,9 @@
         "levelMatching": {
           "samplesPerTriangle": 32,
           "minimumPairs": 64,
-          "maximumLogMad": 0.3,
           "maximumGain": 3
         },
         "transfer": {
-          "maximumSourceDistanceMeters": 90,
           "maximumSeparationMeters": 200,
           "maximumEmissionDegrees": 75,
           "visibilityToleranceMeters": 0.5
@@ -270,8 +266,8 @@
         },
         "display": {
           "percentiles": [
-            1,
-            99.5
+            1.2,
+            99.4
           ]
         },
         "metadata": {

@@ -589,8 +589,8 @@
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit",
       "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
       "license": "Public mission scientific data; retain attribution and source notices.",
-      "expectedBytes": 82228,
-      "expectedSha256": "13b575ec0accebfad5989e3da1f2053896a83e935db19dc9ed73026be96c606e",
+      "expectedBytes": 81982,
+      "expectedSha256": "80f7026d8a229c3dd26719ab0fc7ff926276959deea98c4edcbe1e7f9fc570d5",
       "consumers": [
         "navigation"
       ],
@@ -628,7 +628,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1296,
-      "expectedSha256": "b9c0defb9f9f4ed54068af189d7476f17972267493bdca8a64d4bf604ae8ca39"
+      "expectedSha256": "7563e9e8c7ee415a0260131e9f831014f3c103ccebb1000c1f5ac0e16b9a05df"
     },
     {
       "path": "preparation/rotation.json",
@@ -637,8 +637,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6365,
-      "expectedSha256": "049d96dfb0f099dc69e5af33cb81859fc7e8541e95d3d2f677e8dc94aeb3e065"
+      "expectedBytes": 6684,
+      "expectedSha256": "83f4bd75a42a1babad4a919dd981957c16b3f67c2e26433f0d9e30ea01c35d51"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

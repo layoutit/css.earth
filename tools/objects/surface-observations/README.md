@@ -19,9 +19,9 @@ new route.
 | --- | --- | --- |
 | Decode | `formats/*.mts`, with the readers in `../terrestrial-layers/` | Reads the product, checks its identity against the recipe and applies the archive's own quality verdict to each pixel. |
 | Camera | `cameras.mts` | Projects surface points to detector pixels and casts rays back. A camera is fitted to archive backplanes, read from an archived closure, derived from SPICE kernels or taken from a registered control network. A limb refinement can rotate a SPICE or OSIRIS reflectance camera onto the mesh's lit limb. |
-| Pixel geometry | `geometry.mts` | Gives each pixel a surface point, a range and its incidence, emission and phase angles. They come from the archive's backplanes, or from the camera's rays cast onto the full source mesh. Hits on faces the source marks as unconstrained are withheld. |
-| Photometry | `photometry.mts` | One gain function per lens: a published model record, a historical disk function or the photograph's own shading. |
-| Footprint | `footprint.mts` | Interpolates the four pixels around a projected point. Each pixel must have geometry, pass quality, face the camera within the emission limit, lie on the sampled surface patch and admit a gain. |
+| Pixel geometry | `geometry.mts` | Gives each pixel a surface point, a range and its incidence, emission and phase angles. They come from the archive's backplanes, or from the camera's rays cast onto the full source mesh with interpolated vertex normals; a ray-cast pixel also knows whether terrain shadows it. Hits on faces the source marks as unconstrained are withheld. |
+| Photometry | `photometry.mts` | One gain function per lens: a published model record, a disk function such as Lunar-Lambert, or the photograph's own shading. |
+| Footprint | `footprint.mts` | Interpolates the four pixels around a projected point. A pixel contributes only if it has geometry, passes quality, faces the camera within the emission limit, lies on the sampled surface patch, is lit when the photometry normalizes illumination and admits a gain. Each contributor is normalized before interpolation, and the point needs contributors carrying at least half of the bilinear weight. |
 | Surface transfer | `surface.mts` | Finds the closest source point for each displayed point and checks that the camera sees it. Then it selects a frame, matches levels between frames, sets the display range, measures area coverage and renders the flat preview. |
 | Report | `surface.mts` | Writes the same report for every format. |
 
@@ -39,6 +39,8 @@ new route.
 | `nh-mvic-camera` | `formats/geo.mts` | Archived closure through a fitted image transform; three registered filters shown as colour | Source-mesh rays |
 | `spice-camera` | `formats/geo.mts` | SPICE kernels | Source-mesh rays |
 | `encounter-fits` | `formats/encounter.mts` | Registered control network | Source-mesh rays |
+| `controlled-shape-camera` | `formats/controlled-camera.mts` | A published control network (Thomas or Stooke shape releases) or the Galileo SSI image catalog | Source-mesh rays |
+| `controlled-shape-color` | `formats/controlled-camera.mts` | The same cameras for three sequential filters, measured again against reference images | Source-mesh rays |
 | `isis2-orthographic` | `formats/orthographic.mts` | None: every pixel names a DEM post | Registered DEM posts |
 
 The [implementation map](../../../.agents/skills/celestial-skill/references/implementation-map.md#choose-a-photograph-route)
@@ -60,17 +62,22 @@ misspelt field fails instead of being ignored.
   "id": "osiris", "format": "osiris-geo", "consumer": "osiris-observation",
   "filter": "...", "allowLossy": false,
   "frames": [{ "id": "...", "path": "...", "qualityPath": "...", "startTime": "..." }],
-  "selection": "lowest-emission", "levelMatching": { "minimumPairs": 128, "maximumLogMad": 0.25, "maximumGain": 1.35, "samplesPerTriangle": 64 },
+  "selection": "lowest-emission", "levelMatching": { "samplesPerTriangle": 64, "minimumPairs": 128, "maximumGain": 1.35, "maximumAngleDegrees": 65 },
   "transfer": { "...": "see Transfer limits" }, "photometry": { "...": "..." },
-  "display": { "percentiles": [1, 99.5] },
-  "metadata": { "label": "OSIRIS", "coverage": "..." }
+  "display": { "percentiles": [1.9, 99.3] },
+  "metadata": { "label": "OSIRIS", "coverage": "..." },
+  "focus": { "...": "optional: where the camera looks when the lens opens" }
 }
 ```
 
-- `frames` lists the photographs, one to eight. A lens with more than one frame
-  also names its `selection` and `levelMatching`; a single frame names neither.
-- `display` is either `percentiles` of the qualified values or one authored
-  `displayRange`.
+- `frames` lists the photographs. The format caps their number: one for an
+  orthophoto, eight for encounter frames, sixteen for controlled cameras, and
+  each geo schema its own. A lens with more than one frame also names its
+  `selection` and `levelMatching`; a single frame names neither.
+- A frame `id` is the archive's product id, such as `n1506184171_1` or a Galileo
+  SSI image number. Lens and consumer ids are lower-case words joined by hyphens.
+- `display` is either `percentiles` of the displayed surface samples or one
+  authored `displayRange`.
 - `recipe.mts` checks the shared shape. Each adapter declares the rest:
 
 | Format | Each frame adds | The lens adds |
@@ -84,7 +91,9 @@ misspelt field fails instead of being ignored.
 | `nh-mvic-camera` | `startTime`, `cameraPath`, `labelPath` | `filter`; one frame with retained illumination, `metadata.falseColor` and a `displayRange` from 0 for all three bands |
 | `spice-camera` | `startTime`, and `labelPath` for a VICAR image | `filter`, `spice`, optional `refinement` |
 | `encounter-fits` | `labelPath`, `controlPath` | nothing |
-| `isis2-orthographic` | `coordinatePaths` | `grid`, `maximumCoordinateErrorMeters`; one frame, a `transfer` with only `maximumSourceDistanceMeters`, no `photometry` |
+| `controlled-shape-camera` | `labelPath`, and either every control-network camera field or a `cameraCatalog`; optional `encoding`, `backgroundMaximum`, `backgroundOffset`, `coverageInsetPixels`, `quality` | `photometry`: a published model, `lunar-lambert` with its `weight`, or `retained-observation`; `percentiles` or a `displayRange` from 0 |
+| `controlled-shape-color` | The same, for each band of a band set | `bands` (the red, green and blue filters), `frames` as band sets, optional `registration`; `metadata.falseColor` and a `displayRange` from 0 |
+| `isis2-orthographic` | `coordinatePaths` | `grid`, `maximumCoordinateErrorMeters`; one frame, no `transfer` and no `photometry` |
 
 ## Adding an archive product
 
@@ -103,30 +112,54 @@ When a product needs a new kind of camera or geometry, extend `cameras.mts` or
 
 ## Route policy
 
-Three choices still differ by format, and each lens report records them:
+Every format follows the same transfer, display and level rules. Each lens
+report records them.
 
-- **Display point check.** Archive-backplane and camera-closure formats also
-  sample the displayed point before the closest source point, so a photograph
-  must cover both.
-- **Display range.** Those formats take the display percentiles from the first
-  frame's qualified pixels. Encounter frames take them from samples on the
-  displayed surface. An orthophoto uses its authored range. The MVIC colour cube
-  shows its three bands on one authored range: its format names the bands and
-  their data-number quantity, which the decoder checks against the native label.
-  Floating samples receive the [shared IEC sRGB transfer](../color-transfer.mts)
-  once, after surface transfer, and the report records the band policy. Encoding
-  does not qualify natural color.
+- **Transfer.** Each displayed point samples its closest point on the source
+  mesh. There is no separate check of the displayed point and no limit on its
+  distance from the source mesh: meshoptimizer's error is an estimate, and the
+  measured deviation exceeded it on Atlas (287 m against 200 m), Janus (2,043 m
+  against 1,300 m), comet 81P and Donaldjohanson, so such a limit made holes.
+  Faces that only complete an open source surface are withheld as
+  `estimated-geometry`, and an exact tie between source points as
+  `ambiguous-source-point`.
+- **Display range.** A lens shows either `percentiles` of its displayed surface
+  samples or one authored `displayRange`. A controlled-camera monochrome lens
+  uses a range from zero to the 99.5th percentile its samples measured in
+  preparation, so a uniformly bright body is not stretched between its own
+  darkest and brightest samples. A colour lens shows its three bands on one
+  authored `displayRange`: the MVIC cube's format names the bands and their data-number
+  quantity, which the decoder checks against the native label, and a controlled
+  colour lens checks each filter and its I/F units in the native labels. Floating
+  samples receive the [shared IEC sRGB transfer](../color-transfer.mts) once,
+  after surface transfer, and the report records the band policy. Encoding does
+  not qualify natural color.
 - **Selection.** A mosaic picks the lowest emission, the first frame in recipe
-  order, or the finest pixel scale.
+  order, or the finest pixel scale. Each displayed point keeps the one photograph
+  it came from.
+- **Level matching.** Frames are compared on equal-area samples
+  (`samplesPerTriangle`). A pair of frames counts when it shares `minimumPairs`
+  samples and its median log ratio is known to 0.07, that is
+  √(π/2) × 1.4826 × MAD / √n ≤ 0.07. With `maximumAngleDegrees`, only samples both
+  frames see within that incidence and emission angle count. Frames joined by
+  counted pairs share one fit anchored on their group's first frame; a frame no
+  counted pair reaches keeps its own level. Every fitted gain must stay within
+  the lens's `maximumGain`, which the format caps: 1.5 for geo formats, 3 for
+  encounter frames and 16 for controlled cameras, whose raw detector frames
+  through different filters and exposures measure up to 10.3 from their
+  reference.
+- **Controlled-camera registration.** A frame is refused when its stated camera
+  places more than a quarter of its lit source shape, within the lens's incidence
+  limit, on the photograph's edge-connected sky. Across the first 136 controlled
+  frames, registered frames placed at most 13% there and the two misregistered
+  frames 36% and 99.8%. The frame report records the share.
 
 ## Transfer limits
 
 ```json
-"transfer": { "maximumSourceDistanceMeters": 90, "maximumSeparationMeters": 200, "visibilityToleranceMeters": 0.5, "maximumEmissionDegrees": 75 }
+"transfer": { "maximumSeparationFootprints": 2, "visibilityToleranceMeters": 0.5, "maximumEmissionDegrees": 75 }
 ```
 
-- **Source distance** is how far a displayed point may lie from the source mesh.
-  It may not exceed the mesh's simplification error.
 - **Separation** is how far each interpolated pixel's surface point may lie from
   the sampled point. A larger distance means the pixels straddle a limb or a
   neck. Give either `maximumSeparationMeters`, a fixed distance, or
@@ -136,6 +169,9 @@ Three choices still differ by format, and each lens report records them:
   viewing angle.
 - **Visibility tolerance** is how closely the camera's ray must reach the source
   point, at most 1 m. **Emission** must stay below 90°.
+
+A lens on source-mesh rays needs terrain simplified with `source-meshoptimizer`,
+so the source mesh the rays hit is the one the display mesh preserves.
 
 The loader measures each frame's pixel angle and nadir footprint. The report
 lists the authored limits beside the limits the frames support (`limits.derived`).
@@ -153,10 +189,35 @@ the atlas transfer counts.
 | Field | Content |
 | --- | --- |
 | `format`, `camera` | The recipe format, and the reference frame's camera kind and position |
-| `frames` | Each frame's identity, camera, pixel geometry, quality report, pixel counts, measured footprint and any registration or refinement |
+| `frames` | Each frame's identity, camera, pixel geometry, quality report, pixel counts, measured footprint and any registration or refinement; a controlled camera adds its lit-shape-on-sky share |
 | `limits` | The authored transfer limits and the derived limits with their rule |
 | `photometry` | The model or disk function, its formula and limits |
-| `selection`, `levelMatching` | How frames were chosen, and the fitted level gains for a mosaic |
+| `selection`, `levelMatching` | How frames were chosen, and for a mosaic the fitted gains, every pair's samples, spread and precision, and any unconnected groups |
+| `registration` | For a controlled colour lens, each band camera measured against its reference image |
 | `display` | Where the range came from, the range and its units |
 | `areaCoverage` | The share of the displayed surface each frame covers, from equal-area samples |
 | `sourceIds` | Every consumed input, with its sha256 |
+
+## Evidence
+
+[`evidence/photograph-pipeline`](evidence/photograph-pipeline/) compares the
+prepared images that moving every photograph lens onto this contract changed
+with `main` at `3785f09de`:
+
+- [Six minimap sheets](evidence/photograph-pipeline/minimaps-01.webp) show each
+  changed 640 × 320 minimap on `main`, on the branch and as a Pixelmatch diff.
+  51 minimaps changed, one of them (Epimetheus false colour) only in its
+  encoding; 55 are byte-identical.
+- [The context sheet](evidence/photograph-pipeline/contexts.webp) does the same
+  for the 23 changed context images.
+- [`evidence.json`](evidence/photograph-pipeline/evidence.json) pins both inputs
+  and each diff by size and SHA-256 and records the compared and mismatched
+  pixels. `diffs/` keeps every diff at full size.
+- [`captures/`](evidence/photograph-pipeline/captures/) holds browser views of
+  ten lenses at 1440 × 1000 and DPR 2; its `report.json` records the browser,
+  revision, camera states and manifest hashes.
+
+`tools/compare-visual-evidence.mts` made each diff from the exact committed
+bytes, with threshold 0.1 and anti-aliasing included. A mismatch count only
+locates change. The sheets were inspected against `main` at native resolution,
+and the body READMEs record what that found.

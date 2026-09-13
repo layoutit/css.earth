@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9aecce09675b1c36bdc1c6b733a456c2ef2f5f24fb6437c5687f365713081033"
+    "sha256": "4c9ba3169e306af6a7baee03fdc5476112af4bc7ce096cf477c49805b0713734"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "049d96dfb0f099dc69e5af33cb81859fc7e8541e95d3d2f677e8dc94aeb3e065",
+      "sha256": "83f4bd75a42a1babad4a919dd981957c16b3f67c2e26433f0d9e30ea01c35d51",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -94,11 +94,15 @@
           ],
           "observedColors": [],
           "surfaceQuality": 90,
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "calibrated",
               "format": "controlled-shape-camera",
               "consumer": "galileo-calibrated",
+              "metadata": {
+                "label": "SSI reflectance",
+                "coverage": "Two Galileo green-filter photographs cover Ida from different approach positions. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels."
+              },
               "frames": [
                 {
                   "id": "202561278",
@@ -151,6 +155,18 @@
                   "coverageInsetPixels": 5
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumGain": 1.1,
+                "maximumAngleDegrees": 70
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 65
+              },
               "photometry": {
                 "model": "photometry/helfenstein-1996-hapke.json",
                 "referenceDegrees": {
@@ -167,15 +183,13 @@
                   ],
                   "minimumGain": 0.4,
                   "maximumGain": 4
-                },
-                "displayMaximum": 0.12,
-                "gamma": 2.2,
-                "minimumLevel": 1,
-                "maximumLevel": 1
+                }
               },
-              "metadata": {
-                "label": "SSI reflectance",
-                "coverage": "Two Galileo green-filter photographs cover Ida from different approach positions. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels."
+              "display": {
+                "displayRange": [
+                  0,
+                  0.0931
+                ]
               }
             }
           ]
@@ -210,14 +224,12 @@
               "metersPerUnit": 1000,
               "expectedRecords": 16471
             },
-            "latitudeSegments": 90,
-            "longitudeSegments": 180,
             "faceBudget": 800,
             "tileSize": 128,
             "atlasColumns": 16,
             "primitive": "u",
             "simplification": {
-              "method": "meshoptimizer",
+              "method": "source-meshoptimizer",
               "targetFaces": 800,
               "maximumErrorMeters": 600,
               "regularize": true
@@ -1315,8 +1327,8 @@
         },
         {
           "url": "/scenes/ida/ida-normal-surface@2x.webp",
-          "bytes": 1595416,
-          "sha256": "875d7fcb87eb012dfe02bcf19b91c00b8c0593f793a16f8eff919e24ea81bf96",
+          "bytes": 1561006,
+          "sha256": "445853d7ae6c5ac3b075738b95fcbbc05a892e959bc8204936260e9f61b38048",
           "verification": "bytes-verified"
         }
       ],
@@ -1359,8 +1371,8 @@
         },
         {
           "url": "/scenes/ida/ida-elevation-surface@2x.webp",
-          "bytes": 327638,
-          "sha256": "424be56e7d03996a3d92386268b158a50735c842bcf6817cd80d9266364a2736",
+          "bytes": 331480,
+          "sha256": "e33a040f19472ad35260f68af3d3d0c6336ed01455301065a669b16589340575",
           "verification": "bytes-verified"
         }
       ],
@@ -1370,9 +1382,9 @@
       "id": "calibrated",
       "label": "SSI reflectance",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
         "These two Galileo photographs show overlapping parts of Ida’s surface. Both were taken through a green filter. The original sunlight and shadows remain visible; the grid marks areas without usable photographs."
       ],
@@ -1383,7 +1395,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "ida-0202561278rcal_gre-fit",
@@ -1405,14 +1417,14 @@
       "outputs": [
         {
           "url": "/scenes/ida/ida-calibrated-thumbnail.webp",
-          "bytes": 1818,
-          "sha256": "9c00f26ecd53ada325d85569652390939652f0f3f48d484d5cce823e0d71569b",
+          "bytes": 1156,
+          "sha256": "1782da3ff4f69b9b17d476a9604e40ea26c01b7160c01647b44d48987cff3232",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ida/ida-calibrated-surface@2x.webp",
-          "bytes": 284340,
-          "sha256": "44d892c3bd93890e84137da144dd0e16d2dd74f38aac76a2e3f4710da4dbe56f",
+          "bytes": 293052,
+          "sha256": "13feb7808bfadb00b90dda82ac2fc71e927684e464409327a7a8a72c32509f21",
           "verification": "bytes-verified"
         }
       ],
@@ -1471,8 +1483,8 @@
       "outputs": [
         {
           "url": "/scenes/ida/ida-features.json",
-          "bytes": 17376,
-          "sha256": "a71ff26df77fdf1096320ada02799da0036618e7f67b2706b34f0b020d98b538",
+          "bytes": 17370,
+          "sha256": "2996001953751838c138203b90f7130dd5c3235c391675c046978c90656c0472",
           "verification": "bytes-verified"
         }
       ],
@@ -1506,7 +1518,7 @@
       "id": "preview:calibrated",
       "label": "SSI reflectance preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -1520,8 +1532,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/calibrated.webp",
-          "bytes": 6900,
-          "sha256": "936b2f57fdcb6d26070a57f907d3b7756fc48ed388c7e93c71352c080a6190f2",
+          "bytes": 8604,
+          "sha256": "239dbd855ea24039ffcd02cdcebd3bf09999ef686c4138a785db8051734c7210",
           "verification": "bytes-verified"
         }
       ]

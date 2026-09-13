@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "polydeuces",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2a9922c22623759b230448ecfd10e7d924794c2e83ae94e4a28cc110b7a91686"
+    "sha256": "94298279edfb383d58eeee0447a48b91d87cd7317c9c381f3a107f452c5ebaa9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a31131344012812cd5d5daf52621c631acbedde8fd111811207729b011116e11",
+      "sha256": "f035a065b8da2b2fdf04d65fc11feec44275431da03f325adce75af35785d866",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -34,11 +34,15 @@
           "observations": [],
           "scientific": [],
           "observedColors": [],
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "normal",
               "format": "controlled-shape-camera",
               "consumer": "cassini-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "coverage": "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions."
+              },
               "frames": [
                 {
                   "id": "n1527002576",
@@ -59,19 +63,25 @@
                   "coverageInsetPixels": 1
                 }
               ],
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 55
+              },
               "photometry": {
+                "model": "lunar-lambert",
                 "weight": 1,
-                "maximumGain": 2,
-                "displayMaximum": 0.7,
-                "gamma": 2.2,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 55,
                 "maximumEmissionDegrees": 55,
-                "minimumLevel": 1,
-                "maximumLevel": 1
+                "maximumGain": 2
               },
-              "metadata": {
-                "label": "Monochrome",
-                "coverage": "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions."
+              "display": {
+                "displayRange": [
+                  0,
+                  0.658
+                ]
               }
             }
           ]
@@ -308,7 +318,7 @@
       "sha256": "30e586a1594776e581f559be522b2a93643753ad2c5a909350e723f1cd7396c1",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -360,7 +370,7 @@
       "sha256": "e97f2e076e4d3e41d9197c51ad4c52ad08f18165d2185404440a5e30914e5555",
       "bytes": 3858,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -402,7 +412,7 @@
       "sha256": "529125f91d71589dda0a4ae68991fc1dace4448dd3bf768bcb13015d19fd053b",
       "bytes": 59703,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -422,7 +432,7 @@
       "sha256": "f1d7ece683cb3cfccf8b51cf05521e4bf4cf955049f09fb395f60161b83534bb",
       "bytes": 3659,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -432,9 +442,9 @@
       "id": "normal",
       "label": "Monochrome",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
         "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions."
       ],
@@ -445,7 +455,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "cassini-n1527002576",
@@ -455,15 +465,15 @@
       "outputs": [
         {
           "url": "/scenes/polydeuces/polydeuces-normal-thumbnail.webp",
-          "bytes": 1240,
-          "sha256": "4da59854667e11fbd32419149309e6af1a3295717cf9452cfb5e90ee06f85bef",
-          "verification": "asset-manifest-pin"
+          "bytes": 1894,
+          "sha256": "2e28d19ecd32824054c6bce9b053f96b9c7ab77d29856fc555ae483583ab747c",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polydeuces/polydeuces-normal-surface@2x.webp",
-          "bytes": 65250,
-          "sha256": "83e435f20b47d081d9c815623e430602cae06189f0fcc5899603a99e414186c7",
-          "verification": "asset-manifest-pin"
+          "bytes": 66582,
+          "sha256": "52eb9cab48c7892a0077b321f8cb650fb1779e7ff1105c221d592802eb626460",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -497,7 +507,7 @@
       "id": "preview:normal",
       "label": "Monochrome preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -511,8 +521,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 3976,
-          "sha256": "637949da9222e33d449cde48ff9c2bd65eb9e45bcb0767caec62d1a818537365",
+          "bytes": 3792,
+          "sha256": "78b3a149148e893269778d70379817dfb43671c978a22569cc70d2b9c250b6ec",
           "verification": "bytes-verified"
         }
       ]

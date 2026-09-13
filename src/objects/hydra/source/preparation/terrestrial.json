@@ -47,7 +47,6 @@
           }
         ],
         "transfer": {
-          "maximumSourceDistanceMeters": 500,
           "maximumSeparationFootprints": 1.5,
           "maximumEmissionDegrees": 70,
           "visibilityToleranceMeters": 0.5
@@ -62,8 +61,8 @@
         },
         "display": {
           "percentiles": [
-            1,
-            99.8
+            1.7,
+            100
           ]
         },
         "metadata": {

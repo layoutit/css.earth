@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2cb0c3746dbb8f7c33e62271705941f020ec39011d7e851f6e5e252d5a88468e"
+    "sha256": "bb9de7819e5f59e38c6e8b18619f2a8db2e5b1b1a4f5e7fab1618783fa47167a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e99b87c68a7c72b9bd9a714b19b7237e47ec5be76d5cbc8c80aab5af0a65e7ae",
+      "sha256": "4d78797270717daf290e77258d20eacddb7733b7e6498c25e39a0b6f0ad7c228",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -78,11 +78,20 @@
             }
           ],
           "observedColors": [],
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "normal",
               "format": "controlled-shape-camera",
               "consumer": "voyager-clear-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+                "attribution": {
+                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/voyager/iss/"
+                }
+              },
               "frames": [
                 {
                   "id": "c1137317",
@@ -121,118 +130,38 @@
                   "backgroundMaximum": 0.0051891
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumGain": 1.05,
+                "maximumAngleDegrees": 70
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 75
+              },
               "photometry": {
+                "model": "lunar-lambert",
                 "weight": 0.5,
-                "maximumGain": 2.5,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 75,
                 "maximumEmissionDegrees": 75,
-                "displayMaximum": 0.05,
-                "gamma": 1,
-                "minimumLevel": 0.7,
-                "maximumLevel": 1.4,
-                "backgroundMaximum": 0.001
+                "maximumGain": 2.5
               },
-              "metadata": {
-                "label": "Monochrome",
-                "falseColor": false,
-                "coverage": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
-                "attribution": {
-                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
-                  "url": "https://pds-rings.seti.org/voyager/iss/"
-                }
+              "display": {
+                "displayRange": [
+                  0,
+                  0.0587
+                ]
               }
             },
             {
               "id": "filter-color",
               "format": "controlled-shape-color",
               "consumer": "voyager-color-frames",
-              "channels": [
-                {
-                  "channel": "red",
-                  "filter": "GREEN",
-                  "frames": [
-                    {
-                      "id": "c1137350",
-                      "observerLatitude": -27.148,
-                      "observerWestLongitude": 99.3,
-                      "sunLatitude": -23.66,
-                      "sunWestLongitude": 122.857,
-                      "rangeKm": 830648.272,
-                      "northAzimuthDegrees": 12.96074677895093,
-                      "center": [
-                        392.7015186610059,
-                        375.5350675293314
-                      ],
-                      "path": "observations/C1137350_GEOMED.IMG",
-                      "labelPath": "observations/C1137350_GEOMED.LBL",
-                      "pixelAngleMicroradians": 7.841764329210524,
-                      "backgroundOffset": -0.0037,
-                      "backgroundMaximum": 0.00622692,
-                      "coverageInsetPixels": 9,
-                      "allowFiniteSigned": true
-                    }
-                  ]
-                },
-                {
-                  "channel": "green",
-                  "filter": "BLUE",
-                  "frames": [
-                    {
-                      "id": "c1137339",
-                      "observerLatitude": -27.05,
-                      "observerWestLongitude": 97.385,
-                      "sunLatitude": -23.66,
-                      "sunWestLongitude": 120.904,
-                      "rangeKm": 843163.326,
-                      "northAzimuthDegrees": 12.960728432154356,
-                      "center": [
-                        466.5813375784345,
-                        591.0689911870909
-                      ],
-                      "path": "observations/C1137339_GEOMED.IMG",
-                      "labelPath": "observations/C1137339_GEOMED.LBL",
-                      "pixelAngleMicroradians": 7.841764329210524,
-                      "backgroundOffset": -0.0011,
-                      "backgroundMaximum": 0.0048925800000000005,
-                      "coverageInsetPixels": 9,
-                      "allowFiniteSigned": true
-                    }
-                  ]
-                },
-                {
-                  "channel": "blue",
-                  "filter": "VIOLET",
-                  "frames": [
-                    {
-                      "id": "c1137328",
-                      "observerLatitude": -26.955,
-                      "observerWestLongitude": 95.465,
-                      "sunLatitude": -23.66,
-                      "sunWestLongitude": 118.937,
-                      "rangeKm": 855785.645,
-                      "northAzimuthDegrees": 13.455111379559261,
-                      "center": [
-                        473.69993148676184,
-                        499.6632419233105
-                      ],
-                      "path": "observations/C1137328_GEOMED.IMG",
-                      "labelPath": "observations/C1137328_GEOMED.LBL",
-                      "pixelAngleMicroradians": 7.841764329210524,
-                      "backgroundOffset": -0.0017000000000000001,
-                      "backgroundMaximum": 0.00533736,
-                      "coverageInsetPixels": 9,
-                      "allowFiniteSigned": true
-                    }
-                  ]
-                }
-              ],
-              "photometry": {
-                "weight": 0.5,
-                "maximumGain": 2.5,
-                "maximumIncidenceDegrees": 60,
-                "maximumEmissionDegrees": 60,
-                "backgroundMaximum": 0.001
-              },
               "metadata": {
                 "label": "False color",
                 "falseColor": true,
@@ -242,15 +171,110 @@
                   "url": "https://pds-rings.seti.org/voyager/iss/"
                 }
               },
+              "bands": [
+                {
+                  "channel": "red",
+                  "filter": "GREEN"
+                },
+                {
+                  "channel": "green",
+                  "filter": "BLUE"
+                },
+                {
+                  "channel": "blue",
+                  "filter": "VIOLET"
+                }
+              ],
+              "frames": [
+                {
+                  "id": "set-1",
+                  "red": {
+                    "id": "c1137350",
+                    "observerLatitude": -27.148,
+                    "observerWestLongitude": 99.3,
+                    "sunLatitude": -23.66,
+                    "sunWestLongitude": 122.857,
+                    "rangeKm": 830648.272,
+                    "northAzimuthDegrees": 12.96074677895093,
+                    "center": [
+                      392.7015186610059,
+                      375.5350675293314
+                    ],
+                    "path": "observations/C1137350_GEOMED.IMG",
+                    "labelPath": "observations/C1137350_GEOMED.LBL",
+                    "pixelAngleMicroradians": 7.841764329210524,
+                    "backgroundOffset": -0.0037,
+                    "backgroundMaximum": 0.00622692,
+                    "coverageInsetPixels": 9,
+                    "allowFiniteSigned": true
+                  },
+                  "green": {
+                    "id": "c1137339",
+                    "observerLatitude": -27.05,
+                    "observerWestLongitude": 97.385,
+                    "sunLatitude": -23.66,
+                    "sunWestLongitude": 120.904,
+                    "rangeKm": 843163.326,
+                    "northAzimuthDegrees": 12.960728432154356,
+                    "center": [
+                      466.5813375784345,
+                      591.0689911870909
+                    ],
+                    "path": "observations/C1137339_GEOMED.IMG",
+                    "labelPath": "observations/C1137339_GEOMED.LBL",
+                    "pixelAngleMicroradians": 7.841764329210524,
+                    "backgroundOffset": -0.0011,
+                    "backgroundMaximum": 0.0048925800000000005,
+                    "coverageInsetPixels": 9,
+                    "allowFiniteSigned": true
+                  },
+                  "blue": {
+                    "id": "c1137328",
+                    "observerLatitude": -26.955,
+                    "observerWestLongitude": 95.465,
+                    "sunLatitude": -23.66,
+                    "sunWestLongitude": 118.937,
+                    "rangeKm": 855785.645,
+                    "northAzimuthDegrees": 13.455111379559261,
+                    "center": [
+                      473.69993148676184,
+                      499.6632419233105
+                    ],
+                    "path": "observations/C1137328_GEOMED.IMG",
+                    "labelPath": "observations/C1137328_GEOMED.LBL",
+                    "pixelAngleMicroradians": 7.841764329210524,
+                    "backgroundOffset": -0.0017000000000000001,
+                    "backgroundMaximum": 0.00533736,
+                    "coverageInsetPixels": 9,
+                    "allowFiniteSigned": true
+                  }
+                }
+              ],
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 60
+              },
+              "photometry": {
+                "model": "lunar-lambert",
+                "weight": 0.5,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 60,
+                "maximumEmissionDegrees": 60,
+                "maximumGain": 2.5
+              },
+              "display": {
+                "displayRange": [
+                  0,
+                  0.1
+                ]
+              },
               "focus": {
                 "longitudeDegrees": 261,
                 "latitudeDegrees": -27,
                 "zoom": 1.1
-              },
-              "displayRange": [
-                0,
-                0.1
-              ]
+              }
             }
           ]
         },
@@ -1118,9 +1142,9 @@
       "id": "normal",
       "label": "Monochrome",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
         "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed. Fine grain is largely source-image noise and must not be interpreted as resolved terrain."
       ],
@@ -1131,7 +1155,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "c1137317",
@@ -1143,14 +1167,14 @@
       "outputs": [
         {
           "url": "/scenes/proteus/proteus-normal-thumbnail.webp",
-          "bytes": 3420,
-          "sha256": "93c16a2ac7a30062c0f44c64d611f8cf86afe248e3a3128314fa3c36bb282015",
+          "bytes": 2308,
+          "sha256": "be0839dea4f0307484810e2c35e55fa305200b68165004fba74913f91f6d455a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
-          "bytes": 426212,
-          "sha256": "3569954d7533c338ad73a0a25f737e54278b3b05aeeb3235842e23908f656153",
+          "bytes": 374926,
+          "sha256": "d09885ebc88d3c251c70e095352fbec59b3894bec1501ff835cfd5380e571a97",
           "verification": "bytes-verified"
         }
       ],
@@ -1160,9 +1184,9 @@
       "id": "filter-color",
       "label": "False color",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/1",
+      "selector": "/raster/surfaceObservations/1",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
         "Voyager green, blue and violet filters are displayed as red, green and blue. Only their common reliable interior is mapped; the gray grid marks unknown samples. Blur and registration uncertainty limit interpretation to broad patterns at roughly 40 km or coarser near the image centre. Small colored details can be image noise or registration error. This is not true color or a calibrated albedo map."
       ],
@@ -1173,7 +1197,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "c1137350-color",
@@ -1187,14 +1211,14 @@
       "outputs": [
         {
           "url": "/scenes/proteus/proteus-filter-color-thumbnail.webp",
-          "bytes": 2664,
-          "sha256": "fff84f5716cd883019faf6ea3639b0341dcebf54ebfbe3321c737b3c28013c4f",
+          "bytes": 2998,
+          "sha256": "215b8373ab113e90c21b1feafa903e3e2578898f33084f555d6c7b47aca73cbd",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/proteus/proteus-filter-color-surface@2x.webp",
-          "bytes": 190164,
-          "sha256": "165fb921fb9de96e9b82b15659e4342d0832bb31dfd6f5f4e50a3fc24a09e160",
+          "bytes": 172904,
+          "sha256": "013d96f4e39db21cefbd47204beeff466160573d66228e0207fc06d1bc8843a5",
           "verification": "bytes-verified"
         }
       ],
@@ -1229,7 +1253,7 @@
       "id": "preview:normal",
       "label": "Monochrome preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -1243,8 +1267,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 22918,
-          "sha256": "bdedc167a33d261e3c4bf62daad7d4ef33051e885b356eba76423a73111f0db5",
+          "bytes": 22414,
+          "sha256": "0c46236aa6741417f9f068699b205f94842393941becea324f3024b8671a5903",
           "verification": "bytes-verified"
         }
       ]
@@ -1253,7 +1277,7 @@
       "id": "preview:filter-color",
       "label": "False color preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/1",
+      "selector": "/raster/surfaceObservations/1",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -1267,8 +1291,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 6622,
-          "sha256": "c31166a6461d4712d20cda1d8572db74d11a9789a446322e6a41d3b4af4aa3c1",
+          "bytes": 6716,
+          "sha256": "5b733852c439afdb0c424a8377fb8dfbe24ef4dd71ce3ae33334cc6b5059e211",
           "verification": "bytes-verified"
         }
       ]

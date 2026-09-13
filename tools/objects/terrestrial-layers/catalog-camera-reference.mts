@@ -13,10 +13,10 @@ if (!sourceArg || !outputArg || (process.argv.length < 4 || process.argv.length 
 const source=resolve(sourceArg);
 const input=requireRecord(JSON.parse(await readFile(resolve(source,'preparation/terrestrial.json'),'utf8')));
 const config=parseRadialLoaderConfig(input),raster=requireRecord(input.raster);
-const mosaics=requireArray(raster.mosaics).map(value=>requireRecord(value)),observations=requireArray(raster.observations).map(value=>requireRecord(value));
+const lenses=requireArray(raster.surfaceObservations).map(value=>requireRecord(value)),observations=requireArray(raster.observations).map(value=>requireRecord(value));
 const sourceManifest=await createSourceManifest({planetId:config.namespace,planetName:config.displayName ?? config.namespace,sourceRoot:source});
 await sourceManifest.verify();
-const frames=requireArray(requireRecord(mosaics.find(lens=>lens.id==='calibrated')).frames).map(value=>requireRecord(value));
+const frames=requireArray(requireRecord(lenses.find(lens=>lens.id==='calibrated')).frames).map(value=>requireRecord(value));
 const selected=frameId===undefined?frames[0]:frames.find(frame=>frame.id===frameId);
 if(!selected)throw new Error('Unknown registered observation frame.');
 const frame=await resolveCatalogCamera(source,selected);
