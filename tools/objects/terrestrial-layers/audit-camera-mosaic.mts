@@ -11,7 +11,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import {loadRadialTerrain} from './radial-terrain.mts';
-import {prepareShapeCameraMosaic} from './shape-camera-mosaic.mts';
+import {prepareShapeCameraMosaic,resolveCameraPhotometry} from './shape-camera-mosaic.mts';
 import {sampleTrianglePoints} from './observation-mosaic.mts';
 const [sourceArg,outputArg]=process.argv.slice(2);
 if(!sourceArg||!outputArg)throw new Error('Usage: audit-camera-mosaic.mts SOURCE OUT');
@@ -22,6 +22,7 @@ await source.verify();await mkdir(output,{recursive:true});
 const authored=config.raster.mosaics?.find(r=>r.format==='controlled-shape-camera');
 if(!authored)throw new Error('A controlled-camera mosaic is required.');
 const recipe={...authored,...parseCameraMosaic(authored)};
+const photometry=await resolveCameraPhotometry(sourceDirectory,source.manifest,authored);
 if(recipe.frames.length<2)throw new Error('A controlled-camera mosaic requires at least two frames.');
 const radial=await loadRadialTerrain({sourceDirectory,source,config}),entries=await source.validateGroup(recipe.consumer);
 if(!radial)throw new Error('A controlled-camera mosaic audit requires the prepared radial mesh.');
@@ -40,7 +41,7 @@ const report={schema:'cssearth-camera-mosaic-audit@1',object:config.namespace,wi
   recipeSha256:sha(await readFile(resolve(sourceDirectory,'preparation/terrestrial.json'))),runs};
 for(const [name,frames] of [['before',[recipe.frames[0]]],['after',recipe.frames]] as const){
   const paths=new Set(frames.flatMap(f=>[f.path,f.labelPath,...Object.entries(f.cameraCatalog??{}).filter(([k])=>k==='path'||k.endsWith('Path')).map(([,v])=>v),...Object.entries(f.quality??{}).filter(([k])=>k.endsWith('Path')).map(([,v])=>v)]));
-  const map=await prepareShapeCameraMosaic(sourceDirectory,entries.filter(e=>paths.has(e.path)),{...recipe,frames},width,height,config.geometry.radialTerrain,{retainContributions:true});
+  const map=await prepareShapeCameraMosaic(sourceDirectory,entries.filter(e=>paths.has(e.path)),{...recipe,frames},width,height,config.geometry.radialTerrain,{retainContributions:true,photometry});
   const contributions=map.contributions;
   if(!contributions)throw new Error('Mosaic audit did not retain source contributions.');
   let maximumWeightSumError=0;

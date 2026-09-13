@@ -15,7 +15,9 @@ export async function readOracleFixture(name: string) {
   const fixture = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'tests/oracles', name), 'utf8')));
   if (fixture.schema !== 'cssearth-oracle-fixture@1') throw new Error(`${name} is not an oracle fixture.`);
   const inputs = requireArray(fixture.inputs).map(entry => { const e = requireRecord(entry); return { path: requireString(e.path), sha256: requireString(e.sha256), bytes: requireFiniteNumber(e.bytes) }; });
-  return { name, oracle: requireString(fixture.oracle), generatedBy: requireString(fixture.generatedBy), tool: requireRecord(fixture.tool), inputs, cases: requireRecord(fixture.cases) };
+  // References outside the repository, such as another project's test data, are pinned by a commit in the URL and their bytes.
+  const references = requireArray(fixture.references ?? []).map(entry => { const e = requireRecord(entry); return { url: requireString(e.url), sha256: requireString(e.sha256), bytes: requireFiniteNumber(e.bytes) }; });
+  return { name, oracle: requireString(fixture.oracle), generatedBy: requireString(fixture.generatedBy), tool: requireRecord(fixture.tool), inputs, references, cases: requireRecord(fixture.cases) };
 }
 
 /** The pinned requirement versions, `name==version`, keyed by lower-case distribution name. */
@@ -37,3 +39,11 @@ export async function assertPinnedInputs(inputs: readonly { path: string; sha256
 }
 
 export const sampleList = (value: unknown): OracleSample[] => requireArray(value).map(sample => { const s = requireRecord(sample); return { index: requireFiniteNumber(s.index), value: requireFiniteNumber(s.value) }; });
+
+/** A reference is pinned when its URL names a 40-hexadecimal commit and its sha256 and size are recorded. */
+export function assertPinnedReferences(references: readonly { url: string; sha256: string; bytes: number }[]) {
+  for (const reference of references) {
+    if (!/^https:\/\/(raw\.githubusercontent\.com\/[^/]+\/[^/]+\/[0-9a-f]{40}\/|github\.com\/[^/]+\/[^/]+\/blob\/[0-9a-f]{40}\/)/u.test(reference.url)) throw new Error(`Oracle reference is not pinned to a commit: ${reference.url}`);
+    if (!/^[0-9a-f]{64}$/u.test(reference.sha256) || !(reference.bytes > 0)) throw new Error(`Oracle reference lacks its sha256 or size: ${reference.url}`);
+  }
+}

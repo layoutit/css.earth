@@ -1,4 +1,6 @@
 import type {GeoFrame,GeoSample,DiskPhotometry,PhasePhotometry} from './contracts.mts';
+import { diskGain as diskFunctionGain, minnaertExponent, NORMAL_GEOMETRY } from '../../photometry/disk.mts';
+import { phaseGain as phaseFunctionGain } from '../../photometry/phase.mts';
 // Preparation-only decoder and measured camera for the corrected OSIRIS GEO
 // product. No image coordinates, ray tracing or source geometry enter runtime.
 export const GEO_SHAPE_MODEL = 'cg-dlr_spg-shap7-v1.0_4Mfacets.ver';
@@ -118,7 +120,7 @@ export function lommelSeeligerGain(incidence: number, emission: number, policy: 
       incidence > policy.maximumIncidenceDegrees * Math.PI / 180 || emission > policy.maximumEmissionDegrees * Math.PI / 180) return null;
   const mu0 = Math.cos(incidence), mu = Math.cos(emission);
   if (!(mu0 > 0) || !(mu > 0)) return null;
-  const gain = (mu0 + mu) / (2 * mu0); // D(0,0)=1 / D(i,e).
+  const gain = diskFunctionGain({ family: 'lommel-seeliger' }, { mu0, mu, phase: 0 }, NORMAL_GEOMETRY);
   return gain <= policy.maximumGain ? gain : null;
 }
 
@@ -129,9 +131,10 @@ export function diskGain(incidence: number, emission: number, policy: DiskPhotom
   if (policy.model !== 'minnaert') return lommelSeeligerGain(incidence, emission, policy);
   if (phase === undefined || ! [incidence, emission, phase].every(Number.isFinite) || incidence < 0 || emission < 0 || phase < 0 || phase > Math.PI ||
       incidence > policy.maximumIncidenceDegrees * Math.PI/180 || emission > policy.maximumEmissionDegrees * Math.PI/180) return null;
-  const k = (policy.coefficient??NaN) + (policy.phaseCoefficientPerDegree ?? 0) * phase * 180/Math.PI;
+  const model = { family: 'minnaert' as const, coefficient: policy.coefficient ?? NaN, coefficientPerDegree: policy.phaseCoefficientPerDegree ?? 0 };
+  const k = minnaertExponent(model, phase);
   if (!(k >= .5 && k <= 1)) return null;
-  const gain = 1/(Math.cos(incidence)**k * Math.cos(emission)**(k-1));
+  const gain = diskFunctionGain(model, { mu0: Math.cos(incidence), mu: Math.cos(emission), phase }, NORMAL_GEOMETRY);
   return gain > 0 && gain <= policy.maximumGain ? gain : null;
 }
 
@@ -153,12 +156,7 @@ export function osirisRadianceFactorScale(history: string) {
 export function phaseGain(phase: number | undefined, policy?: PhasePhotometry) {
   if (!policy) return 1;
   if (phase === undefined || !Number.isFinite(phase) || phase < policy.minimumDegrees * Math.PI / 180 || phase > policy.maximumDegrees * Math.PI / 180) return null;
-  const scattering = (angle: number) => {
-    const g = policy.asymmetry;
-    return (1 + policy.amplitude / (1 + Math.tan(angle / 2) / policy.width)) *
-      (1 - g * g) / (1 + 2 * g * Math.cos(angle) + g * g) ** 1.5;
-  };
-  const gain = scattering(policy.referenceDegrees * Math.PI / 180) / scattering(phase);
+  const gain = phaseFunctionGain({ family: 'hg-shadow-hiding', asymmetry: policy.asymmetry, amplitude: policy.amplitude, width: policy.width }, phase, policy.referenceDegrees * Math.PI / 180);
   return Number.isFinite(gain) && gain >= 1 / policy.maximumGain && gain <= policy.maximumGain ? gain : null;
 }
 
@@ -224,7 +222,7 @@ export function fitCamera(points: readonly number[][], pixels: readonly number[]
   return { matrix, positionKm };
 }
 
-export function sampleGeo(frame: GeoFrame, matrix: readonly number[][], pointKm: readonly number[], { maximumSeparationMeters, maximumEmissionDegrees, photometry }: {maximumSeparationMeters:number;maximumEmissionDegrees:number;photometry?:DiskPhotometry}): GeoSample {
+export function sampleGeo(frame: GeoFrame, matrix: readonly number[][], pointKm: readonly number[], { maximumSeparationMeters, maximumEmissionDegrees, photometry, normalize }: {maximumSeparationMeters:number;maximumEmissionDegrees:number;photometry?:DiskPhotometry;normalize?:(incidence:number,emission:number,phase:number|undefined)=>number|null}): GeoSample {
   const [x, y, depth] = frame.projectPoint ? frame.projectPoint(pointKm) : project(matrix, pointKm), { width, height, planes } = frame;
   if (!(depth > 0) || !Number.isFinite(x + y) || x < 0 || y < 0 || x >= width - 1 || y >= height - 1) return { reason: 'outside' };
   const ix = Math.floor(x), iy = Math.floor(y), tx = x - ix, ty = y - iy;
@@ -240,7 +238,8 @@ export function sampleGeo(frame: GeoFrame, matrix: readonly number[][], pointKm:
   const separationMeters = Math.max(...ids.map(i => Math.hypot(...frame.xyz(i).map((n, j) => n - pointKm[j])) * 1000));
   if (separationMeters > maximumSeparationMeters) return { reason: 'geometry-mismatch', separationMeters };
   const weights = [(1 - tx) * (1 - ty), tx * (1 - ty), (1 - tx) * ty, tx * ty];
-  const gains = ids.map(i => photometry ? observationGain(planes.INCIDENCE_ANGLE_IMAGE[i], planes.EMISSION_ANGLE_IMAGE[i], photometry, planes.PHASE_ANGLE_IMAGE?.[i]) : 1);
+  const gains = ids.map(i => normalize ? normalize(planes.INCIDENCE_ANGLE_IMAGE[i], planes.EMISSION_ANGLE_IMAGE[i], planes.PHASE_ANGLE_IMAGE?.[i])
+    : photometry ? observationGain(planes.INCIDENCE_ANGLE_IMAGE[i], planes.EMISSION_ANGLE_IMAGE[i], photometry, planes.PHASE_ANGLE_IMAGE?.[i]) : 1);
   if (!gains.every((gain): gain is number => gain !== null)) return { reason: 'photometry' };
   return { radiance: ids.reduce((sum, id, i) => sum + planes.IMAGE[id] * weights[i] * gains[i], 0) * (frame.radianceFactor?.factor ?? 1), separationMeters,
     maximumIncidenceDegrees: Math.max(...ids.map(i => planes.INCIDENCE_ANGLE_IMAGE[i])) * 180 / Math.PI,

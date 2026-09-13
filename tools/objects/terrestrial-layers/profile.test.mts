@@ -115,6 +115,30 @@ test('SPICE camera recipes declare their kernels, bodies, instrument and pixel a
  assert.throws(() => parseTerrestrialProfile(cubeRefined), /limb refinement/);
 });
 
+test('a published photometric model block is accepted on the observation seam and the encounter route, and malformed blocks are refused', async () => {
+ const published = { model: 'photometry/example-hapke.json', referenceDegrees: { incidence: 30, emission: 0, phase: 30 },
+  limits: { maximumIncidenceDegrees: 80, maximumEmissionDegrees: 70, phaseDegrees: [1, 70], minimumGain: 0.2, maximumGain: 5 } };
+ for (const body of ['dimorphos', 'comet-81p']) {
+  const profile = await read(body), legacy = structuredClone(profile.raster.surfaceObservations[0].photometry);
+  profile.raster.surfaceObservations[0].photometry = structuredClone(published);
+  assert.doesNotThrow(() => parseTerrestrialProfile(profile), body);
+  for (const alter of [
+   (p: unknown) => fixtureRecord(p, 'referenceDegrees')['phase'] = 45,
+   (p: unknown) => fixtureRecord(p, 'limits')['maximumEmissionDegrees'] = 89,
+   (p: unknown) => fixtureRecord(p)['model'] = 'photometry/../elsewhere.json',
+   (p: unknown) => fixtureRecord(p, 'limits')['phaseDegrees'] = [40, 70],
+   (p: unknown) => fixtureRecord(p, 'limits')['minimumGain'] = 0,
+   (p: unknown) => fixtureRecord(p)['maximumGain'] = 3,
+  ]) {
+   const changed = structuredClone(profile); alter(changed.raster.surfaceObservations[0].photometry);
+   assert.throws(() => parseTerrestrialProfile(changed), /source-bound|photometr/i, `${body} accepted a malformed published block`);
+  }
+  // A historical block may not smuggle in a reference geometry either.
+  const mixed = structuredClone(profile); mixed.raster.surfaceObservations[0].photometry = { ...legacy, referenceDegrees: published.referenceDegrees };
+  assert.throws(() => parseTerrestrialProfile(mixed), /source-bound|photometr/i, `${body} accepted a mixed block`);
+ }
+});
+
 test('a cube declaration belongs only to the geometry-cube format', async () => {
  const profile = await read('comet-67p');
  profile.raster.surfaceObservations[0].cube = { collection: 'urn:x', target: 'x', observingSystem: [], quantity: 'x', planes: { image: 'a', x: 'b', y: 'c', z: 'd', incidence: 'e', emission: 'f', phase: 'g' } };

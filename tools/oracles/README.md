@@ -16,6 +16,7 @@ are older standalone audits; the groups below are fixture oracles.
 | astropy | `llorri-geo.mts`: the Lucy L'LORRI HDUs and the TAN-SIP distortion through `astropy.wcs` (Donaldjohanson) | `fits/llorri.py` | `llorri-geo.oracle.test.mts` |
 | astropy | `encounter-fits.mts`: Deep Impact ITS (Tempel 1), Stardust NAVCAM (Wild 2) and MRI (Hartley 2) planes, identity and accept or reject counts | `fits/encounter.py` | `encounter-fits.oracle.test.mts` |
 | pvl, numpy | `isis2-qube.mts`: the Deep Space 1 MICAS orthographic image and DEM component cubes and their special pixels (Borrelly) | `isis2/borrelly-micas.py` | `isis2-qube.oracle.test.mts` |
+| USGS ISIS 10.0.0_LTS unit-test truth files | `tools/photometry/`: Hapke with shadow hiding, Hapke (1984) roughness and both ISIS phase functions, and the Lunar-Lambert, Minnaert and Lommel-Seeliger disk functions | `isis/photometric-truth.py` | `tools/photometry/isis.oracle.test.mts` |
 
 Scripts are under `tools/oracles/`, fixtures under `tests/oracles/` with the
 same group and name, and the comparing tests beside the code they check (under
@@ -24,10 +25,13 @@ same group and name, and the comparing tests beside the code they check (under
 ## Rules
 
 - A fixture is evidence. It records the oracle and interpreter versions and the
-  sha256 of every input it read. `tools/oracle-fixtures.test.mts`, part of
+  sha256 of every input it read. An input from outside the repository, such as
+  another project's test data, is a reference: its URL names a commit, and the
+  fixture records its sha256 and size. `tools/oracle-fixtures.test.mts`, part of
   `pnpm test:platform`, refuses a fixture whose tool versions differ from
-  `requirements.txt` or whose inputs are not the bodies' manifest pins; it needs
-  neither Python nor restored sources.
+  `requirements.txt`, whose inputs are not the bodies' manifest pins, or whose
+  references are not pinned to a commit. It needs neither Python nor restored
+  sources.
 - Comparing tests read the committed fixture and the same pinned inputs the
   pipeline reads. They run without Python.
 - An oracle reads the archive with its own reader. It may read a recipe's declared
@@ -57,6 +61,8 @@ pnpm oracles:run fits/llorri spice/dart-draco
 ```
 
 The inputs must be restored first (`node tools/objects/dist/operations.js acquire <id>`).
+`isis/photometric-truth` reads no body input; it downloads the ISIS truth files
+at the pinned commit, so it needs network access.
 
 ## Known reader quirks
 
@@ -66,10 +72,15 @@ The inputs must be restored first (`node tools/objects/dist/operations.js acquir
 - pvl parses PDS3 dates into datetimes; the oracles write them back as label text.
 - pdr cannot read PDS4 array planes stored at byte offsets in one FITS file;
   pds4_tools can.
+- ISIS's photometric unit tests print some parameter sets twice, once set by
+  keyword and once by setter; the ISIS oracle keeps each case once.
+- ISIS returns 0 at exactly 90° incidence or emission. Converting degrees as
+  angle × π / 180, in that order, keeps 90° exactly π/2 in the comparing test.
 
 ## Next oracles
 
 - USGS ALE and usgscsm for instrument pixel models and distortion: ALE builds only
   inside conda and has no DART driver, so it arrives with the first Cassini ISS
   lens and a pinned conda environment file.
-- ISIS `photomet` for the photometric normalization step.
+- ISIS `photomet` on cubes, for normalization grids beyond the unit-test
+  geometries. It needs an ISIS install through conda.

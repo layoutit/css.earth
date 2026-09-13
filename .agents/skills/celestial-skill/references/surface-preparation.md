@@ -41,14 +41,18 @@ When baked illumination needs correction, try the following in preparation:
    metadata plus [Horizons vectors](https://ssd-api.jpl.nasa.gov/doc/horizons.html)
    transformed using the source's [PCK model](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/pck.html)
    are one supported route; disclose ephemeris differences.
-2. Apply an appropriate photometric model to calibrated linear radiance/I/F
-   before compositing and display encoding. [ISIS photomet](https://isis.astrogeology.usgs.gov/9.0.0/Application/presentation/Tabbed/photomet/photomet.html)
-   describes reference-geometry normalization. Choose a model suitable for the
-   source calibration and acquisition geometry. Record the reference angles and
-   omitted phase/scattering/terrain terms; qualify empirical settings on sample
-   observations and label the approximation rather than implying measured albedo.
-   Withhold unreliable **source samples** using acquisition incidence/emission
-   and bounded gain, updating coverage. This does not restrict runtime views.
+2. Apply a photometric model to calibrated linear radiance/I/F before
+   compositing and display encoding. Prefer a published model fitted to the same
+   instrument and filter: transcribe it into a `source/photometry/<id>.json`
+   record, cite its publication with a `method` binding whose locator names the
+   table, and name it from the recipe with a reference geometry and limits (see
+   `tools/photometry/README.md`). [ISIS photomet](https://isis.astrogeology.usgs.gov/9.0.0/Application/presentation/Tabbed/photomet/photomet.html)
+   describes the same reference-geometry normalization. Record filter and
+   fitted-range mismatches. Without a published parameter set, a route's
+   historical empirical form remains; label it an approximation. Neither implies
+   measured albedo. Withhold unreliable **source samples** using acquisition
+   incidence, emission, phase and bounded gain, updating coverage. This does not
+   restrict runtime views.
 3. Where exposure steps remain, try one robust bounded brightness multiplier per
    coherent observation from co-located valid imagery near boundaries. Apply the
    same gain to RGB to preserve ratios, cap it to avoid clipping, and exclude
