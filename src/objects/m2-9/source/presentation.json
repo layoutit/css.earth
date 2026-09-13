@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "m2-9",
+  "name": "Twin Jet Nebula",
+  "defaultLens": "hst-optical",
+  "bank": {
+    "path": "src/objects/m2-9/prepared/lenses.json",
+    "sha256": "b29c84b6040183f1867e20a85835754a46efec602c8d268c112d28043668e2c9",
+    "bytes": 219826
+  },
+  "recipes": [
+    {
+      "id": "symmetry",
+      "path": "labs/nebula/models/m2-9/experiment.json",
+      "sha256": "e0e30629eb3e52409257b0bc8ee16143d14edfcd2aeaddc74704d6b898cdd68c",
+      "bytes": 2015
+    },
+    {
+      "id": "delivery",
+      "path": "src/objects/m2-9/source/delivery.json",
+      "sha256": "b4c999b140798a2e00b20d61f62d9e1c0eca1273d178b7230cbba7c8667f279d",
+      "bytes": 1156
+    }
+  ],
+  "sharedInputs": [
+    "image-frame"
+  ],
+  "lenses": [
+    {
+      "id": "hst-optical",
+      "label": "Hubble · optical",
+      "title": "The Twin Jet Nebula in visible light",
+      "description": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted 650pc model distance is uncertain; published expansion distance 1300±200pc would double this physical size. The accepted baseline contains no stellar catalogue. The reference image shows the photograph before star removal and symmetry reconstruction.",
+      "summary": "Visible-light outreach photograph; axial-symmetry depth model.",
+      "detail": "788 × 438 px",
+      "facts": [
+        {
+          "id": "source-pixels",
+          "label": "Accepted crop",
+          "value": "788 × 438 pixels"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "58.0350 × 32.2766 arcsec"
+        },
+        {
+          "id": "distance",
+          "label": "Adopted distance",
+          "value": "650 pc; published alternative 1300 ± 200 pc"
+        }
+      ],
+      "input": "hst-optical",
+      "preview": {
+        "path": ".local/nebula-lab/research/wenger/m2-9-original.jpg",
+        "sha256": "29b1575bff3bb8dbbe8cb9934ef214676c98d49fcf488df488576e3723049e71",
+        "bytes": 172547,
+        "url": "https://apod.nasa.gov/apod/image/0402/m2-9_hst_big.jpg",
+        "crop": {
+          "left": 6,
+          "top": 6,
+          "width": 788,
+          "height": 438
+        }
+      }
+    }
+  ]
+}

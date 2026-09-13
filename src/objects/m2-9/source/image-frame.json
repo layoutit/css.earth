@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-source-image-frame@1",
+  "objectId": "m2-9",
+  "retrievedAt": "2026-09-13",
+  "interpretation": "Published angular astrometry transferred between two editions of the same 1997 HST photograph. The application distance is an explicitly adopted literature value; neither this transfer nor the accepted symmetry reconstruction measures depth or gas density.",
+  "publisherImage": {
+    "id": "opo9738a",
+    "pageUrl": "https://esahubble.org/images/opo9738a/",
+    "url": "https://esahubble.org/media/archives/images/original/opo9738a.tif",
+    "sha256": "19461467d05e71c491c432527a9ba0edd8d240ea45bda4077cbbf75f9b570f6e",
+    "bytes": 4715326,
+    "width": 2769,
+    "height": 1540,
+    "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
+    "license": "CC-BY-4.0",
+    "licenseEvidence": "Embedded xmpRights:UsageTerms in the pinned TIFF",
+    "licenseUrl": "https://esahubble.org/copyright/",
+    "releaseDate": "1997-12-17"
+  },
+  "wcs": {
+    "projection": "TAN",
+    "coordinateFrame": "ICRS",
+    "equinox": "J2000",
+    "referenceDimension": [2769, 1540],
+    "referencePixel": [1384, 770],
+    "referenceValueDeg": [256.407962101, -10.1425459988],
+    "scaleDeg": [-0.00000582190011481, 0.00000582190011481],
+    "rotationDeg": 113.59999999999998,
+    "publisherQuality": "Full",
+    "absoluteUncertaintyArcsec": null,
+    "orientationDescription": "North is 113.6 degrees left of vertical in the displayed image. Preserve AVM/FITS pixel and rotation conventions when converting downward raster coordinates."
+  },
+  "angularFrameArcsec": [58.03502910447201, 32.27661423650664],
+  "acceptedImage": {
+    "url": "https://apod.nasa.gov/apod/image/0402/m2-9_hst_big.jpg",
+    "pageUrl": "https://apod.nasa.gov/apod/ap040201.html",
+    "sha256": "29b1575bff3bb8dbbe8cb9934ef214676c98d49fcf488df488576e3723049e71",
+    "width": 800,
+    "height": 525,
+    "crop": { "left": 6, "top": 6, "width": 788, "height": 438 },
+    "cropDescription": "The existing accepted lab recipe removes the white border and caption. It does not use the full 800x525 captioned image as the angular field."
+  },
+  "imageTransfer": {
+    "classification": "derived approximate registration between published editions",
+    "nativePerAcceptedPixel": [3.513959390862944, 3.5159817351598175],
+    "formula": "For zero-based top-left pixel centers: nativeX=(acceptedX-6+0.5)*2769/788-0.5; nativeY=(acceptedY-6+0.5)*1540/438-0.5. Convert those native raster positions to the WCS pixel convention before projecting.",
+    "verification": {
+      "samePhotographVisuallyConfirmed": true,
+      "comparison": "Full pinned TIFF resampled to 788x438 versus the accepted APOD crop; no additional rotation, translation or crop fitted.",
+      "rgbPearsonCorrelation": 0.9787627617597067,
+      "isolatedStarChecks": 2,
+      "maximumCentroidDifferenceInAcceptedPixels": 0.556,
+      "limitations": "Different resampling and JPEG noise remain. This is not an independent astrometric plate solution or a measurement of the publisher WCS uncertainty."
+    }
+  },
+  "distance": {
+    "adoptedParsecs": 650,
+    "classification": "published-model adopted distance",
+    "uncertaintyParsecs": null,
+    "sourceId": "sanchez-contreras-2024",
+    "reason": "The 2024 ALMA study explicitly adopts 650 pc for consistency with earlier core studies and discusses the distance uncertainty. This choice is a documented model convention, not a new or definitive distance measurement.",
+    "alternatives": [
+      {
+        "parsecs": 1300,
+        "plusMinusParsecs": 200,
+        "classification": "published expansion-distance estimate",
+        "sourceId": "corradi-2011",
+        "limitation": "Depends on the interpretation of dusty-blob proper motions and kinematics. Its quoted 0.8 pc total nebular size must not be substituted for this photograph's smaller inner-lobe field."
+      }
+    ]
+  },
+  "references": [
+    {
+      "id": "sanchez-contreras-2024",
+      "title": "Uncovering the structure and kinematics of the ionized core of M 2-9 with ALMA",
+      "authors": "Sánchez Contreras et al.",
+      "publication": "A&A 692, A151 (2024)",
+      "url": "https://arxiv.org/html/2411.03825v1",
+      "sha256": "47fdfa2b606d326fad313386626a80c3a1d22075ed32b8a41db73307e6bc1f99",
+      "bytes": 589208,
+      "contentType": "text/html",
+      "evidenceLocation": "Section 2, distance paragraph; Table 3 adopted distance",
+      "scope": "The modeled ionized core is approximately 130 au across, much smaller than the full HST lobes. Its detailed geometry is not transferred to this reconstruction."
+    },
+    {
+      "id": "corradi-2011",
+      "title": "The evolution of M 2-9 from 2000 to 2010",
+      "authors": "Corradi, Balick and Santander-García",
+      "publication": "A&A 529, A43 (2011)",
+      "url": "https://arxiv.org/abs/1102.5634",
+      "doi": "https://doi.org/10.1051/0004-6361/201016361",
+      "sha256": "a2ce236067a2d27953c9bbf74d4701d74fdf9abd2945d3af759e2e3f1dbbf58e",
+      "bytes": 45010,
+      "contentType": "text/html",
+      "evidenceLocation": "Author abstract, dusty-blob proper-motion distance"
+    }
+  ],
+  "excludedMetadata": [
+    {
+      "url": "https://science.nasa.gov/asset/hubble/supersonic-exhaust-from-nebula-m2-9/",
+      "reason": "The page identifies M2-9 but displays incompatible object coordinates (10h19m32.2s, -60d13m30s). Use the pinned ESA image's own AVM instead."
+    }
+  ],
+  "limitations": [
+    "This is the angular field of the accepted inner-lobe photograph, not the full faint nebula or remote polar blobs.",
+    "The existing zero-inclination symmetry prior and inferred depth remain authored reconstruction assumptions.",
+    "Angular astrometry does not establish a 3D stellar-membership catalogue; no synthetic star positions are added."
+  ]
+}

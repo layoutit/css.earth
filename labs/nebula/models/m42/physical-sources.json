@@ -1,0 +1,308 @@
+{
+  "schema": "cssearth-nebula-physical-sources@1",
+  "subjectId": "m42",
+  "verifiedDate": "2026-09-12",
+  "purpose": "Pinned observational inputs for future physical-model comparison. No geometry or renderer consumes this manifest yet.",
+  "muse": {
+    "publisher": "Leibniz Institute for Astrophysics Potsdam / MUSE team",
+    "sourcePage": "https://data.aip.de/projects/musescience.html",
+    "datasetDoi": "https://doi.org/10.17876/data/2023_3",
+    "paperDoi": "https://doi.org/10.1051/0004-6361/201526529",
+    "paperArxiv": "https://arxiv.org/abs/1507.00006",
+    "coverage": {
+      "region": "Central Huygens region; does not cover the complete M42 nebula or image field.",
+      "dimensionsPixels": [
+        1766,
+        1476
+      ],
+      "samplingArcseconds": [
+        0.2,
+        0.2
+      ],
+      "nominalFieldArcminutes": [
+        5.886666666666668,
+        4.92
+      ],
+      "rasterCenterRaDecDegrees": [
+        83.82091140929592,
+        -5.395392892485401
+      ],
+      "cornersRaDecDegrees": [
+        [
+          83.87019126312889,
+          -5.436387604316139
+        ],
+        [
+          83.77163695038557,
+          -5.436394149994776
+        ],
+        [
+          83.77163815741102,
+          -5.354394165001855
+        ],
+        [
+          83.87017914764033,
+          -5.354387718636986
+        ]
+      ],
+      "celestialFrameQualification": "The individual map headers do not declare RADESYS or EQUINOX. Numeric corners above interpret their declared equatorial TAN WCS without an additional epoch or frame conversion."
+    },
+    "commonWcsHeader": {
+      "CTYPE1": "RA---TAN",
+      "CTYPE2": "DEC--TAN",
+      "CUNIT1": "deg",
+      "CUNIT2": "deg",
+      "CRVAL1": 83.780566,
+      "CRVAL2": -5.396172,
+      "CRPIX1": 1606.5,
+      "CRPIX2": 724.5,
+      "CD1_1": -5.55555555555556e-05,
+      "CD1_2": 0.0,
+      "CD2_1": 0.0,
+      "CD2_2": 5.55555555555556e-05
+    },
+    "commonWcsQualification": "Present in six of the seven files. Do not silently attach this WCS to the Halpha flux map, whose header has none.",
+    "files": [
+      {
+        "id": "emhalpha_velos",
+        "quantity": "Halpha centroid velocity",
+        "url": "https://s3.data.aip.de:9000/data.aip.de/musesc/orion/orion_m42/emhalpha_velos.fits",
+        "sha256": "554a18418be0ba26e7a83bf1bb3fc1e605fdd1d3ca45090e2f70c49cabb50f3f",
+        "bytes": 20856960,
+        "localPath": ".local/nebula-lab/research/orion/emhalpha_velos.fits",
+        "status": "downloaded-and-inspected; not integrated",
+        "fits": {
+          "dimensions": [
+            1766,
+            1476
+          ],
+          "bitpix": -64,
+          "headerUnit": "km/s",
+          "celestialWcsPresent": true,
+          "velocityFrame": "barycentric; publisher description, absent from FITS header",
+          "errorOrVarianceHdus": 0,
+          "qualityMaskHdus": 0
+        },
+        "qualifications": [
+          "Line centroid only; not a resolved multicomponent spectrum.",
+          "Exact zeros and large velocity extrema require a documented validity policy. Finite values alone do not establish validity.",
+          "No per-pixel uncertainty supplied in these map files. Do not assign invented errors or convert velocity directly to depth."
+        ]
+      },
+      {
+        "id": "emnii6584_velos",
+        "quantity": "[N II] 6584 centroid velocity",
+        "url": "https://s3.data.aip.de:9000/data.aip.de/musesc/orion/orion_m42/emnii6584_velos.fits",
+        "sha256": "8037894024fa8a07762abddb2f2eff719a240701c4c6a2034b9a657f492032c3",
+        "bytes": 20856960,
+        "localPath": ".local/nebula-lab/research/orion/emnii6584_velos.fits",
+        "status": "downloaded-and-inspected; not integrated",
+        "fits": {
+          "dimensions": [
+            1766,
+            1476
+          ],
+          "bitpix": -64,
+          "headerUnit": "km/s",
+          "celestialWcsPresent": true,
+          "velocityFrame": "barycentric; publisher convention, absent from FITS header",
+          "errorOrVarianceHdus": 0,
+          "qualityMaskHdus": 0
+        },
+        "qualifications": [
+          "Line centroid only; not a resolved multicomponent spectrum.",
+          "Exact zeros and large velocity extrema require a documented validity policy. Finite values alone do not establish validity.",
+          "No per-pixel uncertainty supplied in these map files. Do not assign invented errors or convert velocity directly to depth."
+        ]
+      },
+      {
+        "id": "emsii6731_velos",
+        "quantity": "[S II] 6731 centroid velocity",
+        "url": "https://s3.data.aip.de:9000/data.aip.de/musesc/orion/orion_m42/emsii6731_velos.fits",
+        "sha256": "bfa22ba0300604be4b641567959f8ae69f9902c287a6baf10313c61852880477",
+        "bytes": 20856960,
+        "localPath": ".local/nebula-lab/research/orion/emsii6731_velos.fits",
+        "status": "downloaded-and-inspected; not integrated",
+        "fits": {
+          "dimensions": [
+            1766,
+            1476
+          ],
+          "bitpix": -64,
+          "headerUnit": "km/s",
+          "celestialWcsPresent": true,
+          "velocityFrame": "barycentric; publisher convention, absent from FITS header",
+          "errorOrVarianceHdus": 0,
+          "qualityMaskHdus": 0
+        },
+        "qualifications": [
+          "Line centroid only; not a resolved multicomponent spectrum.",
+          "Exact zeros and large velocity extrema require a documented validity policy. Finite values alone do not establish validity.",
+          "No per-pixel uncertainty supplied in these map files. Do not assign invented errors or convert velocity directly to depth."
+        ]
+      },
+      {
+        "id": "den_sii_output",
+        "quantity": "[S II] electron density",
+        "url": "https://s3.data.aip.de:9000/data.aip.de/musesc/orion/orion_m42/den_sii_output.fits",
+        "sha256": "bdf503987ff26e3f0b96cd158eff46d6148c657dfd221e13139ffa51c95aa3e8",
+        "bytes": 10431360,
+        "localPath": ".local/nebula-lab/research/orion/den_sii_output.fits",
+        "status": "downloaded-and-inspected; not integrated",
+        "fits": {
+          "dimensions": [
+            1766,
+            1476
+          ],
+          "bitpix": -32,
+          "headerUnit": null,
+          "celestialWcsPresent": true,
+          "velocityFrame": null,
+          "errorOrVarianceHdus": 0,
+          "qualityMaskHdus": 0
+        },
+        "qualifications": [
+          "BUNIT is absent; recover physical units and diagnostic assumptions from the paper before quantitative use.",
+          "49145 values are negative, including -1000; the array also has large positive extrema. Do not ingest as an unfiltered density prior.",
+          "A projected line-ratio electron-density diagnostic is not a measured three-dimensional gas density."
+        ]
+      },
+      {
+        "id": "c_Halpha_Hbeta",
+        "quantity": "c(Hbeta) extinction coefficient",
+        "url": "https://s3.data.aip.de:9000/data.aip.de/musesc/orion/orion_m42/c_Halpha_Hbeta.fits",
+        "sha256": "3b939017c1e64442368c0e0ccfed9eb94e85e5d26e5215e433b8a628f2f2d2b7",
+        "bytes": 20856960,
+        "localPath": ".local/nebula-lab/research/orion/c_Halpha_Hbeta.fits",
+        "status": "downloaded-and-inspected; not integrated",
+        "fits": {
+          "dimensions": [
+            1766,
+            1476
+          ],
+          "bitpix": -64,
+          "headerUnit": null,
+          "celestialWcsPresent": true,
+          "velocityFrame": null,
+          "errorOrVarianceHdus": 0,
+          "qualityMaskHdus": 0
+        },
+        "qualifications": [
+          "Publisher identifies the dimensionless c(Hbeta) coefficient derived from Halpha/Hbeta; BUNIT is absent.",
+          "Four non-finite values; no uncertainty or validity-mask extension.",
+          "Column extinction does not uniquely locate absorbing material along the sightline."
+        ]
+      },
+      {
+        "id": "emhalpha_flux",
+        "quantity": "Halpha flux",
+        "url": "https://s3.data.aip.de:9000/data.aip.de/musesc/orion/orion_m42/emhalpha_flux.fits",
+        "sha256": "fb6659c6369ce2308032cd864b8f32bef5397087a6f4dfde1eaedfbe07389151",
+        "bytes": 20856960,
+        "localPath": ".local/nebula-lab/research/orion/emhalpha_flux.fits",
+        "status": "downloaded-and-inspected; not integrated",
+        "fits": {
+          "dimensions": [
+            1766,
+            1476
+          ],
+          "bitpix": -64,
+          "headerUnit": "FLAM",
+          "celestialWcsPresent": false,
+          "velocityFrame": null,
+          "errorOrVarianceHdus": 0,
+          "qualityMaskHdus": 0
+        },
+        "qualifications": [
+          "This file has no celestial WCS. Matching raster dimensions do not independently prove registration to the other maps.",
+          "The literal FLAM unit does not establish the physical scale factor; resolve it from the paper or source reduction before photometric use.",
+          "No uncertainty or validity-mask extension."
+        ]
+      },
+      {
+        "id": "emoiii5007_fluxcorr",
+        "quantity": "Dereddened [O III] 5007 flux",
+        "url": "https://s3.data.aip.de:9000/data.aip.de/musesc/orion/orion_m42/emoiii5007_fluxcorr.fits",
+        "sha256": "3a1e93f8090aa76681ba12245377d53713ff65300e51e32ee9c31e102635f77e",
+        "bytes": 20856960,
+        "localPath": ".local/nebula-lab/research/orion/emoiii5007_fluxcorr.fits",
+        "status": "downloaded-and-inspected; not integrated",
+        "fits": {
+          "dimensions": [
+            1766,
+            1476
+          ],
+          "bitpix": -64,
+          "headerUnit": null,
+          "celestialWcsPresent": true,
+          "velocityFrame": null,
+          "errorOrVarianceHdus": 0,
+          "qualityMaskHdus": 0
+        },
+        "qualifications": [
+          "BUNIT is absent; physical normalization must be recovered before quantitative use.",
+          "36462 non-finite values; no uncertainty or validity-mask extension.",
+          "Keep the publisher extinction correction distinct from raw observed flux."
+        ]
+      }
+    ]
+  },
+  "sofia": {
+    "publisher": "CDS / Higgins et al. (2021), SOFIA upGREAT",
+    "datasetDoi": "https://doi.org/10.26093/cds/vizier.36520077",
+    "sourcePage": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/652/A77",
+    "readmeUrl": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/652/A77/ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/652/A77/fits/sofia_orion_a.fits",
+    "status": "header inspected; full cube not imported",
+    "fullFileBytes": 3632011200,
+    "headerSample": {
+      "urlRange": "bytes=0-17279",
+      "httpStatus": 206,
+      "bytes": 17280,
+      "sha256": "32d4ff56d528fbf29f08ea042a7b93507c420f1ce352cf58b5b84701db6b2856",
+      "localPath": ".local/nebula-lab/research/orion/sofia_orion_a.header.bin",
+      "qualification": "This hash identifies only the downloaded header sample, not the complete FITS cube."
+    },
+    "fits": {
+      "dimensions": [
+        1151,
+        1520,
+        519
+      ],
+      "skyProjection": "RA---GLS / DEC--GLS",
+      "equinox": 2000,
+      "coordinateReferenceDegrees": [
+        83.865292,
+        -5.376028
+      ],
+      "referencePixel": [
+        453.0604345731,
+        575.5151559017,
+        235
+      ],
+      "spatialCdeltDegrees": [
+        -0.0009791666479648,
+        0.0009791666479648
+      ],
+      "velocityAxis": "VRAD",
+      "velocityFrame": "LSRK",
+      "velocityStepMps": 300.0000119209,
+      "brightnessUnit": "K (Tmb)",
+      "beamFwhmArcseconds": [
+        17.9999987933484,
+        17.9999987933484
+      ],
+      "bitpix": 32,
+      "blankInteger": 2147483647,
+      "bscale": 8.419748098731e-08,
+      "bzero": 99.71166992188
+    },
+    "qualifications": [
+      "The released data span about 1.15 square degrees in Orion A, including M42, M43 and NGC1977; the bounding raster is larger than the valid observed footprint.",
+      "The released cube has an 18 arcsecond beam. The paper also discusses finer native instrumental resolution; do not conflate these.",
+      "Apply the integer BLANK value before BSCALE/BZERO. Full voxel validity and noise have not been inspected.",
+      "Velocity is in LSRK, whereas the MUSE map convention is barycentric. Frame reconciliation must be explicit.",
+      "GLS sky coordinates and position-position-velocity samples require their own validated offline decoding. Velocity is not a spatial depth axis."
+    ]
+  }
+}

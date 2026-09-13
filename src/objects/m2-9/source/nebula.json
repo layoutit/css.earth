@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-nebula-catalog@1",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "sources": [
+    {
+      "id": "hst-opo9738a",
+      "url": "https://esahubble.org/media/archives/images/original/opo9738a.tif",
+      "sha256": "19461467d05e71c491c432527a9ba0edd8d240ea45bda4077cbbf75f9b570f6e",
+      "bytes": 4715326,
+      "citation": "NASA/ESA Hubble 1997 image opo9738a; AVM sky astrometry"
+    },
+    {
+      "id": "sanchez-contreras-2024",
+      "url": "https://arxiv.org/html/2411.03825v1",
+      "sha256": "47fdfa2b606d326fad313386626a80c3a1d22075ed32b8a41db73307e6bc1f99",
+      "bytes": 589208,
+      "citation": "S\u00e1nchez Contreras et al. A&A 692, A151 (2024)"
+    },
+    {
+      "id": "corradi-2011",
+      "url": "https://arxiv.org/abs/1102.5634",
+      "sha256": "a2ce236067a2d27953c9bbf74d4701d74fdf9abd2945d3af759e2e3f1dbbf58e",
+      "bytes": 45010,
+      "citation": "Corradi, Balick and Santander-Garc\u00eda A&A 529, A43 (2011)"
+    }
+  ],
+  "objects": [
+    {
+      "id": "m2-9",
+      "kind": "nebula",
+      "name": "Twin Jet Nebula",
+      "aliases": [
+        "M2\u20139",
+        "PN M2-9"
+      ],
+      "positionM": [
+        -4.639854198945162e+18,
+        -1.9190526609290568e+19,
+        -3.531975474921166e+18
+      ],
+      "skyPosition": {
+        "raDeg": 256.407962101,
+        "decDeg": -10.1425459988,
+        "sourceRef": "hst-opo9738a"
+      },
+      "distance": {
+        "valuePc": 650,
+        "sourceRef": "sanchez-contreras-2024",
+        "method": "Adopted model distance, not a parallax. Published expansion alternative:1300\u00b1200pc."
+      },
+      "classification": {
+        "name": "Bipolar nebula",
+        "basis": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted650pc model distance is uncertain; published expansion distance1300\u00b1200pc would double this physical size. The accepted baseline contains no stellar catalogue.",
+        "sourceRef": "hst-opo9738a"
+      },
+      "status": "confirmed",
+      "detailedObjectId": "m2-9"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "hubble-opo9738a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Twin Jet Nebula · Hubble opo9738a",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "opo9738a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/opo9738a/",
+      "label": "Published source"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/m2-9/source/image-frame.json",
+      "revision": "ab1967ed45fe7ad670cc5eaa4e892789a04f01f3",
+      "sha256": "03b7bfa303f1776503301524fa6b24a57df4fd23d91dfbba9d355acbab4d8a14",
+      "locator": "/publisherImage"
+    }
+  ],
+  "publisher": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
+      "scope": "Published source",
+      "evidence": "src/objects/m2-9/source/image-frame.json#/publisherImage"
+    }
+  ]
+}

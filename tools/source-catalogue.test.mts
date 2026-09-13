@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, mkdtemp, mkdir, copyFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { promisify } from 'node:util';
@@ -17,9 +17,20 @@ import { compileSourceUsage, parseSourceUsage, sourceDatasetViews } from '../src
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
 import { prepareMachines, explorationCompilerClosure } from './prepare-machines.mts';
 import { refreshSourceRecord } from './source-authoring-templates.mts';
+import { prepareVolumeProvenance } from './prepare-volume-provenance.mts';
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path,'utf8'));
 const prepared = parsePreparedSources(await read('site/prepared-sources.json'));
 const exploration = parsePreparedExploration(await read('site/prepared-machines.json'),prepared.sources);
+// Preview originals are bounded pinned image inputs; the source graph never needs a baked volume bank.
+const volumePreviewInputs = async () => {
+  const ids = new Set(prepared.usage.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus=')).map(dataset => dataset.objectId));
+  const paths = new Set<string>();
+  for (const id of ids) {
+    const presentation = sourceObject(await read(`src/objects/${id}/source/presentation.json`));
+    for (const lens of sourceArray(presentation.lenses, sourceObject)) paths.add(sourceText(sourceObject(lens.preview).path));
+  }
+  return [...paths];
+};
 const sourceFixture = (id: string) => ({
   id, title: `Synthetic source ${id}`, kind: 'publication', identityLevel: 'work',
   identifiers: [{type: 'test', value: id}],
@@ -93,10 +104,11 @@ const objectInput = async (id: string) => {
   const lenses = controls.lenses === null ? [] : sourceArray(sourceObject(controls.lenses).controls, raw => {
     const lens=sourceObject(raw);return {id:sourceText(lens.id),label:sourceText(lens.label)};
   });
-  return {id,name:object.name,route:object.route,controls:lenses,provenance:validateObjectProvenance(await read(`src/planets/${id}/prepared/provenance.json`))};
+  return {id,name:object.name,route:object.route,base:`src/planets/${id}`,controls:lenses,provenance:validateObjectProvenance(await read(`src/planets/${id}/prepared/provenance.json`))};
 };
 test('source uses conserve all product dependencies, include models, and never convert metadata into observations', async () => {
   const objects = await Promise.all(OBJECTS.map(object=>objectInput(object.id)));
+  objects.push(...await prepareVolumeProvenance());
   const metadata=prepared.usage.edges.filter(edge=>edge.consumerKind!=='object-product');
   assert.deepEqual(compileSourceUsage(objects,prepared.sources,metadata),prepared.usage);
   assert.equal(metadata.filter(edge=>edge.kind==='shared-context').length,4);
@@ -165,7 +177,7 @@ test('both catalogues prepare deterministically from the same input closure befo
   assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/planets/earth/source/editorial/factsheet-review.json'));
   assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/planets/abundantia/source/reference/damit-model.json'));
   assert.deepEqual(sourceDatasetViews(prepared.usage, 'damit-models'), [], 'factsheet metadata is not a shape or imagery contribution');
-  for (const output of result.outputs) assert.equal(output.text,await readFile(output.path,'utf8'),output.path);
+  for (const output of result.outputs) assert.deepEqual(typeof output.text === 'string' ? Buffer.from(output.text) : output.text,await readFile(output.path),output.path);
   assert.equal(result.prepared.sourceCatalogSha256,result.preparedSources.catalogSha256);
   assert.deepEqual(result.prepared.closure,result.preparedSources.closure);
   const bad=structuredClone(await read('site/prepared-sources.json'));sourceObject(bad).catalogSha256='0'.repeat(64);
@@ -175,20 +187,21 @@ test('both catalogues prepare deterministically from the same input closure befo
   const corruptedBinding=corrupted.sources.find(source=>source.sourceBinding?.kind==='catalogued')?.sourceBinding;
   assert.ok(corruptedBinding?.kind==='catalogued');
   Object.assign(corruptedBinding,{references:[{catalogueId:'missing',role:'material',evidence:'Bad binding'}]});
-  const before=await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8')));
+  const before=await Promise.all(result.outputs.map(output=>readFile(output.path)));
   await assert.rejects(prepareMachines({provenance:new Map([['mercury',corrupted]])}),/Unknown canonical source/);
-  assert.deepEqual(await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8'))),before);
+  assert.deepEqual(await Promise.all(result.outputs.map(output=>readFile(output.path))),before);
 });
 
 test('changed fact evidence and stale displayed facts leave both published catalogues intact', async t => {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-citation-publication-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const outputs = ['site/prepared-sources.json', 'site/prepared-machines.json'];
-  // Only the compiler's declared inputs are needed; no body assets or downloads.
+  // Declared metadata and bounded preview inputs suffice; no baked body/volume assets or downloads.
   const records = new Set((await promisify(execFile)('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { maxBuffer: 16 * 1024 * 1024 })).stdout.split('\0'));
-  assert.deepEqual(Object.keys(prepared.closure).filter(path => !records.has(path) && path !== 'site/prepared-object-catalog.mts'), [],
-    'Sources must not depend on ignored downloads; the object catalogue is generated');
-  for (const path of [...Object.keys(prepared.closure), ...outputs]) {
+  const generated = new Set(['site/prepared-object-catalog.mts', ...(await prepareVolumeProvenance()).flatMap(volume => volume.outputs.map(output => relative(process.cwd(), output.path)))]);
+  assert.deepEqual(Object.keys(prepared.closure).filter(path => !records.has(path) && !generated.has(path)), [],
+    'Sources may regenerate declared metadata outputs, but must not depend on ignored downloads or baked assets');
+  for (const path of [...Object.keys(prepared.closure), ...outputs, ...await volumePreviewInputs()]) {
     const target = join(root, path);
     await mkdir(join(target, '..'), { recursive: true });
     await copyFile(path, target);
@@ -201,11 +214,20 @@ test('changed fact evidence and stale displayed facts leave both published catal
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
   await writeFile(evidencePath, evidence);
   const contentPath = join(root, 'src/planets/abundantia/prepared/content.json');
-  const content = sourceObject(await read(contentPath));
+  const originalContent = await readFile(contentPath, 'utf8'), content = sourceObject(JSON.parse(originalContent));
   sourceObject(sourceArray(content.facts, sourceObject)[0]).value = '99 km';
   await writeFile(contentPath, JSON.stringify(content));
   await assert.rejects(prepareMachines({ root }), /Stale factsheet for abundantia/);
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
+  await writeFile(contentPath, originalContent);
+  const rebuilt = await prepareMachines({ root });
+  const focusDatasets = rebuilt.preparedSources.usage.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus='));
+  assert.equal(focusDatasets.length, 9, 'Every LMC and nebula lens retains a source destination without its optional volume assets.');
+  assert.deepEqual(focusDatasets, rebuilt.prepared.graph.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus=')));
+  for (const id of new Set(focusDatasets.map(dataset => dataset.objectId))) {
+    await assert.rejects(readFile(join(root, `src/objects/${id}/prepared/lenses.json`)), { code: 'ENOENT' });
+    assert.ok(rebuilt.preparedSources.inventory.some(entry => entry.ownerPath === `src/objects/${id}/source/manifest.json` && entry.used));
+  }
 });
 
 test('missing cited evidence restores without body assets and leaves catalogues atomic on a bad download', async t => {
@@ -226,7 +248,7 @@ test('missing cited evidence restores without body assets and leaves catalogues 
     return;
   }
   const paths = new Set([...Object.keys(prepared.closure), ...explorationCompilerClosure,
-    ...outputs, `${source}/preparation/acquisition.json`]);
+    ...outputs, `${source}/preparation/acquisition.json`, ...await volumePreviewInputs()]);
   paths.delete(paper);
   for (const path of paths) {
     const target = join(root, path);

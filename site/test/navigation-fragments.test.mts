@@ -20,6 +20,8 @@ class IntentElement extends EventTarget {
 }
 class IntentAnchor extends IntentElement {
   origin: string; pathname: string;
+  preparedFocus = false;
+  hasAttribute(name: string) { return name === 'data-prepared-focus-id' && this.preparedFocus; }
   constructor(pathname: string, origin: string) { super(); this.anchor = this; this.pathname = pathname; this.origin = origin; }
 }
 function fixtureWindow() {
@@ -113,6 +115,9 @@ test('hover, focus and world hover prefetch registry routes after a dwell; a pre
     fire('pointerover', target); flush();
   }
   assert.deepEqual(requested, ['venus', 'ceres', 'venus'], 'The current body, foreign and unregistered routes are ignored');
+  const nebula = new IntentAnchor('/ceres/', 'https://example.test'); nebula.preparedFocus = true;
+  fire('pointerdown', nebula);
+  assert.deepEqual(requested, ['venus', 'ceres', 'venus'], 'A prepared focus never fetches its fallback body card.');
   const host = new IntentElement();
   host.hovered = { dataset: { objectNavigate: 'ceres' } };
   fire('objecthoverchange', host); flush();
