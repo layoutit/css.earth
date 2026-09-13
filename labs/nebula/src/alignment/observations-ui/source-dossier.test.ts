@@ -21,10 +21,11 @@ test('every new candidate has a source dossier and primary-paper context', async
   }
 });
 
-test('curation hides weak sources and refuses unverified comparison images', async () => {
+test('curation preserves useful publisher-registered comparisons without upgrading their evidence', async () => {
   const expected: Record<string, string[]> = {
     m45: ['noirlab-optical', 'spitzer-irac', 'spitzer-irac-mips', 'wise-four-band'],
-    m1: ['hubble-optical'], m8: ['eso-optical', 'eso-vista', 'spitzer-mid-infrared'],
+    m1: ['hubble-optical', 'webb-infrared', 'webb-components', 'spitzer-infrared', 'vla-radio', 'chandra-xray'],
+    m8: ['eso-optical', 'eso-vista', 'spitzer-mid-infrared'],
   };
   for (const [id, ids] of Object.entries(expected)) {
     const dossier = readSourceDossier(JSON.parse(await readFile(`labs/nebula/models/${id}/source-dossier.json`, 'utf8')));
@@ -35,14 +36,13 @@ test('curation hides weak sources and refuses unverified comparison images', asy
         layers: { original: { path: `test/${image.id}.png`, width: image.width, height: image.height } },
         imageToFrame: [1, 0, 0, 1, 0, 0], registration: publisherRegistration('Test source') })) });
     // Real astrometry is exercised by browser-source-candidates; this boundary check needs no ignored images.
-    for (const image of data.images) if (ids.length > 1 && ids.includes(image.id)) image.registration.status = 'verified';
+    data.images[0]!.registration.status = 'verified';
     const selected = selectObservationCandidates(data, dossier.selection);
     assert.deepEqual(selected.images.map(image => image.id), ids);
-    if (ids.length > 1) {
-      const broken = structuredClone(data);
-      broken.images.find(image => image.id === ids[1])!.registration.status = 'publisher';
-      assert.throws(() => selectObservationCandidates(broken, dossier.selection), /no verified alignment/);
-    } else assert.equal(selected.images[0]!.registration.status, 'publisher', 'A single reference must not become verified by curation.');
+    for (const image of selected.images) assert.strictEqual(image, data.images.find(source => source.id === image.id), 'Selection must preserve the source, transform and evidence.');
+    assert.equal(selected.images[1]!.registration.status, 'publisher');
+    const missing = { ...data, images: data.images.filter(image => image.id !== ids[1]) };
+    assert.throws(() => selectObservationCandidates(missing, dossier.selection), /not prepared/);
     assert.equal(data.images.length, 6, 'Excluded source records remain available.');
   }
 });
