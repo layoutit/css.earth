@@ -4,7 +4,7 @@ import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
-const sourceRoot=new URL('../../../../src/planets/tethys/source/',import.meta.url).pathname;
+const sourceRoot=new URL('../../../../src/objects/tethys/source/',import.meta.url).pathname;
 test('Tethys B2 scalar coordinates retain independent source values and exact missing cells',async()=>{
  const config=JSON.parse((await readFile(sourceRoot+'preparation/terrestrial.json')).toString('utf8'));
  const receipt=JSON.parse((await readFile(sourceRoot+'validation/b2-scalar-anchors.json')).toString('utf8'));

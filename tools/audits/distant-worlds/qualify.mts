@@ -16,7 +16,7 @@ function requirePreparedPage(value:unknown){const page=requireRecord(value,'Prep
 function requireTerrain(value:unknown){const terrain=requireRecord(value,'Prepared terrain'),source=requireRecord(terrain.source,'Prepared terrain source');return {primitive:requireString(source.primitive,'Prepared terrain primitive'),faces:requireArray(terrain.faces,'Prepared terrain faces'),simplification:requireRecord(terrain.simplification,'Prepared terrain simplification')};}
 const results:Array<Record<string,unknown>>=[];
 for(const id of ids){
- const root=`src/planets/${id}`,record=OBJECTS.find(object=>object.id===id),body=bodies.find(candidate=>candidate.id===id);
+ const root=`src/objects/${id}`,record=OBJECTS.find(object=>object.id===id),body=bodies.find(candidate=>candidate.id===id);
  assert.ok(record);assert.ok(body);assert.equal(record.classification,requireString(requireRecord(body,'Distant-world selection').classification,'Distant-world classification'));
  const closure=await validatePlanetData(record);
  const descriptor=requireDescriptor(await read(`${root}/object.json`)),runtime=parsePreparedObjectRuntime(await read(`${root}/prepared/runtime.json`));

@@ -12,7 +12,7 @@ def write(path, data):
 
 for body in bodies:
     identifier = body['id']
-    path = ROOT / f'src/planets/{identifier}/object.json'
+    path = ROOT / f'src/objects/{identifier}/object.json'
     descriptor = json.loads(path.read_text())
     name = body['name'] + {'mani': ' (2002 MS4)', 'achlys': ' (2003 AZ84)'}.get(identifier, '')
     descriptor['properties'].setdefault('catalog', dict(name=name, classification=body['classification'],

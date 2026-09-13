@@ -21,7 +21,7 @@ const record = (value: unknown, label: string): Record<string, unknown> => { if 
 
 export async function refreshObjectFeatures(id: string): Promise<{ count: number | null }> {
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid object id.');
-  const objectDirectory = resolve('src/planets', id), sourceDirectory = resolve(objectDirectory, 'source'), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
+  const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source'), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')) as unknown);
   if (!descriptor.recipe.features) return { count: null };
   const entries = await Promise.all(descriptor.recipe.sources.map(reference => verifiedSource(objectDirectory, reference)));

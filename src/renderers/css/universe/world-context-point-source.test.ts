@@ -56,7 +56,7 @@ test('point source uses the prepared star photometry, nearest atlas color, and s
 });
 
 test('the prepared Sun glare strengthens the five-AU view and recedes smoothly without changing its physical disc', async () => {
-  const source = JSON.parse(await readFile(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url), 'utf8'));
+  const source = JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8'));
   const solarPlan = parsePreparedWorldContext(source), au = 149597870700;
   const sample = (distanceAu: number, context = solarPlan) => worldContextPointAppearance(context, field,
     { ...world(distanceAu * au), epochJdTt: context.frame.epochJdTt }, { ...viewport, focalPixels: 1280 * Math.sqrt(3) / 2 }, { selectedDetail: true })!;

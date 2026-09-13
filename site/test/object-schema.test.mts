@@ -119,7 +119,7 @@ test("keeps one open-ended object registry with unique ids and routes", () => {
 async function authoredFixture(context: TestContext) {
   const root = await mkdtemp(resolve(tmpdir(), "cssearth-discovery-"));
   context.after(() => rm(root, { recursive: true, force: true }));
-  const directory = resolve(root, "src/planets/fixture");
+  const directory = resolve(root, "src/objects/fixture");
   await mkdir(directory, { recursive: true });
   await writeFile(resolve(directory, "object.json"), JSON.stringify(authoredObjectFixture("fixture")));
   return root;

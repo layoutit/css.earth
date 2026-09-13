@@ -3,8 +3,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
-import runtimeDefinition from "../../../../src/planets/charon/prepared/runtime.json" with { type: "json" };
-import descriptor from "../../../../src/planets/charon/prepared/features.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/charon/prepared/runtime.json" with { type: "json" };
+import descriptor from "../../../../src/objects/charon/prepared/features.json" with { type: "json" };
 import { parsePreparedSurfaceFeatureCatalog } from "../../../../src/renderers/css/dist/index.js";
 
 const plan = runtimeDefinition.features;

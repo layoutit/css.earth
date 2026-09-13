@@ -36,7 +36,7 @@ for (const [index, descriptor] of descriptors.entries()) {
   const name: keyof typeof refs = additions.has(descriptor.planetId) ? 'companions' : 'main';
   const previous = banks[name][descriptor.planetId];
   assert.ok(previous, descriptor.planetId);
-  assert.deepEqual(descriptor, JSON.parse(original(refs[name], `src/planets/${descriptor.planetId}/source/preparation/navigation.json`).toString('utf8')));
+  assert.deepEqual(descriptor, JSON.parse(original(refs[name], `src/objects/${descriptor.planetId}/source/preparation/navigation.json`).toString('utf8')));
   markers[descriptor.planetId] = { ...previous, index, count: descriptors.length };
   if (previous.context) {
     const path = 'public' + previous.context.url, bytes = original(refs[name], path);

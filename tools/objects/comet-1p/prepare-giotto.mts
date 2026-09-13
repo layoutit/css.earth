@@ -149,7 +149,7 @@ export async function prepareGiottoProjection(sourceDirectory: string) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   assert.deepEqual(process.argv.slice(2), ['--write'], 'Usage: node tools/objects/comet-1p/prepare-giotto.mts --write');
-  const source = resolve('src/planets/comet-1p/source'), result = await prepareGiottoProjection(source);
+  const source = resolve('src/objects/comet-1p/source'), result = await prepareGiottoProjection(source);
   await mkdir(resolve(source, 'material'), { recursive:true });
   await writeFile(resolve(source, 'material/giotto.png'), result.png);
   await writeFile(resolve(source, 'reference/giotto-validity.bin'), result.validity);

@@ -41,7 +41,7 @@ interface WorldReport {
 }
 const origin = process.argv[2] ?? process.env.CSSEARTH_TEST_ORIGIN ?? 'http://localhost:4210';
 const output = process.env.CSSEARTH_WORLD_BROWSER_OUTPUT ?? '.local/all-object-world-browser';
-const context = parsePreparedWorldContext(JSON.parse(await readFile('src/planets/sun/prepared/world-context.json', 'utf8')));
+const context = parsePreparedWorldContext(JSON.parse(await readFile('src/objects/sun/prepared/world-context.json', 'utf8')));
 const points = [context.focus, ...context.bodies];
 function requireFrames(objects: readonly ObjectEntry[]) {
   assert.ok(objects.length, 'The current registry must be exercised.');
@@ -58,12 +58,12 @@ function requireFrames(objects: readonly ObjectEntry[]) {
 requireFrames(OBJECTS);
 assert.throws(() => requireFrames(OBJECTS.map((object, index) => index ? object : { ...object, worldFrame: null })), /registry world frame is required/);
 const controls = Object.fromEntries(await Promise.all(OBJECTS.map(async ({ id }) => [id,
-  parse(JSON.parse(await readFile(`src/planets/${id}/prepared/controls.json`, 'utf8')), schemaObject({ lenses: optional(schemaObject({ controls: array(schemaObject({ id: string })), defaultLens: string })) }), `${id} controls`)] as const)));
+  parse(JSON.parse(await readFile(`src/objects/${id}/prepared/controls.json`, 'utf8')), schemaObject({ lenses: optional(schemaObject({ controls: array(schemaObject({ id: string })), defaultLens: string })) }), `${id} controls`)] as const)));
 // Keep only each object's small expectation record; loading every retained
 // runtime concurrently exhausts Node's heap with a large open-ended registry.
 const presentations: Record<string, Pick<ExpectedObject, "materialTracks" | "assetUrls">> = {};
 for (const { id } of OBJECTS) {
-  const definition = parse(JSON.parse(await readFile(`src/planets/${id}/prepared/runtime.json`, 'utf8')), schemaObject({ materials: array(schemaObject({ id: string })), assets: schemaObject({ entries: array(schemaObject({ key: string, url: string })) }) }), `${id} runtime expectations`);
+  const definition = parse(JSON.parse(await readFile(`src/objects/${id}/prepared/runtime.json`, 'utf8')), schemaObject({ materials: array(schemaObject({ id: string })), assets: schemaObject({ entries: array(schemaObject({ key: string, url: string })) }) }), `${id} runtime expectations`);
   presentations[id] = { materialTracks: definition.materials.map(track => track.id),
     assetUrls: Object.fromEntries(definition.assets.entries.map(entry => [entry.key, entry.url])) };
 }

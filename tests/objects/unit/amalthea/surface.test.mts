@@ -6,7 +6,7 @@ import {resolve} from 'node:path';
 import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 
 test('Amalthea keeps the published west-positive radius samples in metres', async () => {
-  const source = resolve(import.meta.dirname, '../../../../src/planets/amalthea/source');
+  const source = resolve(import.meta.dirname, '../../../../src/objects/amalthea/source');
   const config = JSON.parse((await readFile(resolve(source, 'preparation/terrestrial.json'))).toString('utf8'));
   const profile = config.geometry.radialTerrain;
   const mesh = await loadPdsRadiusTable(resolve(source, profile.path), profile.grid);
