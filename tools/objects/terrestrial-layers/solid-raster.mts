@@ -34,8 +34,6 @@ import { preparePdsRgbObservation } from './observed-pds-rgb.mts';
 import { prepareByteObservation } from './observed-image.mts';
 import { preparePds4Observation } from './observed-pds4.mts';
 import { prepareFitsObservation } from './observed-fits.mts';
-import { prepareControlledOrthographicMosaic } from './controlled-orthographic-mosaic.mts';
-import { prepareShapeCameraMosaic, prepareShapeCameraColor, resolveCameraPhotometry } from './shape-camera-mosaic.mts';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mts';
 import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mts';
 import { loadSurfaceObservation } from '../surface-observations/index.mts';
@@ -189,20 +187,6 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     surfaces.push(await packSurface(view.id, rgb, missingImagery, { label: view.label,
       appearance: 'Shared no-imagery grid over source geometry; not observed surface color or albedo.',
       source: { id: entry.id, sha256: entry.expectedSha256 } }));
-  }
-  for (const recipe of config.raster.mosaics ?? []) {
-    const tiles = await source.validateGroup(recipe.consumer);
-    if (recipe.photometry?.consumer) await source.validateGroup(recipe.photometry.consumer);
-    const { rgb, missing, grid } = recipe.format === 'controlled-shape-color'
-      ? await prepareShapeCameraColor(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain)
-      : recipe.format === 'controlled-shape-camera'
-      ? await prepareShapeCameraMosaic(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain,
-        { photometry: await resolveCameraPhotometry(sourceDirectory, source.manifest, recipe) })
-      : recipe.format === 'controlled-orthographic'
-      ? await prepareControlledOrthographicMosaic(sourceDirectory, tiles, recipe, width, height)
-      : await preparePdsByteMosaic(sourceDirectory, tiles, width, height);
-    surfaces.push(await packSurface(recipe.id, rgb, missing, { ...recipe.metadata,
-      sourceIds: tiles.map(tile => tile.id), sourceGrid: grid }));
   }
   for (const recipe of config.raster.surfaceObservations ?? []) {
     const model = modelForLens(recipe.id), observationRadial = model?.radial ?? radial, observationConfig = model?.config ?? config;

@@ -5,6 +5,8 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
 import { loadImageDem } from '../../../../tools/objects/terrestrial-layers/image-dem.mts';
+import { parseRadialLoaderConfig } from '../../../../tools/objects/terrestrial-layers/radial-source.mts';
+import { loadRadialTerrain } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { loadSurfaceObservation } from '../../../../tools/objects/surface-observations/index.mts';
 import { loadImageDemScience } from '../../../../tools/objects/terrestrial-layers/image-dem-science.mts';
 
@@ -17,12 +19,15 @@ const mesh = await loadImageDem(resolve(root, profile.path), profile.grid);
 test('MICAS original XYZ cubes register every reviewed USGS terrain post independently', async () => {
   await source.verify();
   const recipe = config.raster.surfaceObservations[0];
-  const surface = await loadSurfaceObservation({ sourceDirectory: root, source, recipe, radial: { grid: mesh, faces: [] }, config });
+  // The display faces preparation simplifies from this DEM; their samples set the display range.
+  const radial = await loadRadialTerrain({ config: parseRadialLoaderConfig(config), sourceDirectory: root, source });
+  if (!radial) throw new Error('Borrelly has no radial terrain.');
+  const surface = await loadSurfaceObservation({ sourceDirectory: root, source, recipe, radial: { grid: mesh, faces: radial.faces }, config });
   const registration = fixtureRecord(surface.report, 'frames', 0, 'registration');
   assert.equal(registration.coordinatePixels, 62879);
   assert.ok(Number(registration.maximumCoordinateErrorMeters) < .000001);
   const changed = structuredClone(recipe); changed.grid.pixelToSource[1] += 16;
-  await assert.rejects(loadSurfaceObservation({ sourceDirectory: root, source, recipe: changed, radial: { grid: mesh, faces: [] }, config }), /registration/);
+  await assert.rejects(loadSurfaceObservation({ sourceDirectory: root, source, recipe: changed, radial: { grid: mesh, faces: radial.faces }, config }), /registration/);
   const ratio = config.geometry.radius / (config.geometry.radiusKm * 1000);
   let accepted = 0;
   for (let i = 0; i < mesh.positions.length; i += 53) {
