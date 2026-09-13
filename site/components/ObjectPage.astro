@@ -5,10 +5,12 @@ import PreparedObjectPanel from './PreparedObjectPanel.astro';
 import { loadObjectPageData } from '../object-page-data.mts';
 import { objectPageStyles } from '../object-page-contract.mts';
 import shellCss from '../planet-shell.css?inline';
+import { loadPreparedSceneMarkup } from '../../tools/serialize-prepared-scene.mts';
 
 interface Props { objectId: string; navigation?: boolean; }
 const { objectId, navigation = false } = Astro.props;
 const preparedPage = await loadObjectPageData(objectId);
+const scene = navigation ? undefined : await loadPreparedSceneMarkup(objectId);
 const contentFiles = import.meta.glob('../../src/planets/*/prepared/content.json', { import: 'default' });
 const descriptors = import.meta.glob('../../src/planets/*/object.json', { import: 'default' });
 // ?inline processes CSS assets without importing every object's rules into the
@@ -20,7 +22,7 @@ const styles = await Promise.all(objectPageStyles(descriptor)
   .map(async path => ({ path, css: path === 'site/planet-shell.css' ? shellCss : await cssFiles[`../../${path}`]() })));
 ---
 
-<PlanetLayout objectId={objectId} navigation={navigation}>
+<PlanetLayout objectId={objectId} navigation={navigation} scene={scene}>
   <Fragment slot="planet-head">
     {styles.map(({ path, css }) => <style is:inline data-object-style={path} set:html={css} />)}
     {!navigation && <PreparedObjectHead preparedAssets={preparedPage.assets} />}

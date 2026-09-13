@@ -296,42 +296,19 @@ function createInformationTabsController(drawer: HTMLElement, lifetime: SceneLif
   return createTabsController(drawer.querySelector<HTMLElement>('.planet-information-panel'), lifetime, requestedGroup);
 }
 
-/** Shared tablist behaviour: selection, roving tabindex and arrow keys. */
+/** Programmatic selection for camera/dataset navigation. The browser owns
+ * pointer selection, keyboard focus and panel visibility. */
 export function createTabsController(card: HTMLElement | null, lifetime: SceneLifetime, requestedGroup?: string) {
-  const group = (item: HTMLElement) => item.dataset.informationGroup ?? 'detail';
-  const tabs = [...(card?.querySelectorAll<HTMLElement>('[data-information-tab]:not([hidden])') ?? [])]
-    .filter(tab => requestedGroup === undefined || group(tab) === requestedGroup);
-  const panels = [...(card?.querySelectorAll<HTMLElement>('[data-information-panel]') ?? [])];
-  const events = new AbortController();
-  lifetime.onDispose(() => events.abort());
-  const select = (tab: HTMLElement, focus = false) => {
-    for (const item of tabs.filter(item => group(item) === group(tab))) {
-      const active = item === tab;
-      item.setAttribute('aria-selected', String(active));
-      item.tabIndex = active ? 0 : -1;
-    }
-    for (const panel of panels.filter(panel => group(panel) === group(tab))) {
-      panel.hidden = panel.dataset.informationPanel !== tab.dataset.informationTab;
-    }
-    if (focus) tab.focus();
-  };
-  for (const tab of tabs) {
-    tab.addEventListener('click', () => select(tab), { signal: events.signal });
-    tab.addEventListener('keydown', event => {
-      const siblings = tabs.filter(item => group(item) === group(tab) && !item.hidden);
-      const index = siblings.indexOf(tab);
-      const next = event.key === 'Home' ? 0 : event.key === 'End' ? siblings.length - 1
-        : event.key === 'ArrowRight' ? (index + 1) % siblings.length
-        : event.key === 'ArrowLeft' ? (index - 1 + siblings.length) % siblings.length : null;
-      if (next === null) return;
-      event.preventDefault();
-      select(siblings[next], true);
-    }, { signal: events.signal });
-  }
+  const tabs = [...(card?.querySelectorAll<HTMLInputElement>('[data-information-tab]:not([hidden])') ?? [])]
+    .filter(tab => requestedGroup === undefined || (tab.dataset.informationGroup ?? 'detail') === requestedGroup);
+  let disposed = false;
+  const destroy = () => { disposed = true; };
+  lifetime.onDispose(destroy);
   return { show(id: string) {
+    if (disposed) return;
     const tab = tabs.find(tab => tab.dataset.informationTab === id);
-    if (tab) select(tab);
-  }, destroy() { events.abort(); } };
+    if (tab) { tab.checked = true; tab.dispatchEvent(new Event('change', { bubbles: true })); }
+  }, destroy };
 }
 
 function createLensBrowserController(drawer: HTMLElement, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
@@ -829,6 +806,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     render(false);
   }, { signal: events.signal });
   browser.addEventListener("keydown", (event) => {
+    if ((event.key === 'ArrowDown' || event.key === 'ArrowUp') &&
+        event.target instanceof windowTarget.HTMLInputElement && event.target.hasAttribute('data-information-tab')) return;
     const controls = [...browser.querySelectorAll<HTMLElement>("summary, a, button")].filter(visibleControl);
     const index = controls.findIndex(control => control === documentTarget.activeElement);
     if (event.key === "Escape") { render(false); search.focus(); }
@@ -1005,7 +984,7 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
   const handle = documentTarget.querySelector(".planet-sheet-handle");
   const search = documentTarget.querySelector(".planet-sidebar-search");
   if (!(sheet instanceof windowTarget.HTMLElement) ||
-      !(handle instanceof windowTarget.HTMLButtonElement) ||
+      !(handle instanceof windowTarget.HTMLInputElement) ||
       !(search instanceof windowTarget.HTMLInputElement)) {
     throw new Error("Planet shell sheet is incomplete.");
   }
@@ -1016,7 +995,7 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
   const events = new AbortController();
   const { signal } = events;
   lifetime.onDispose(() => events.abort());
-  let state: SheetState = "peek";
+  let state: SheetState = handle.checked ? "full" : "peek";
   // Search opens the whole sheet; leaving search returns to the earlier height.
   let searchReturn: SheetState | null = null;
   let gesture: SheetGesture | null = null;
@@ -1054,7 +1033,7 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     if (next !== "full") sheet.scrollTop = 0;
     state = next;
     body.dataset.sheet = next;
-    handle.ariaExpanded = String(next !== "peek");
+    handle.checked = next !== "peek";
     sheet.classList.remove("is-dragging");
     if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
     snapFrame = windowTarget.requestAnimationFrame(() => {
@@ -1070,7 +1049,7 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     }
     return false;
   };
-  const ownsGesture = (target: EventTarget | null) => target instanceof windowTarget.Element &&
+  const ownsGesture = (target: EventTarget | null) => target !== handle && target instanceof windowTarget.Element &&
     target.closest("input, select, textarea, [data-surface-minimap]") !== null;
 
   sheet.addEventListener("pointerdown", (event) => {
@@ -1145,10 +1124,10 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     event.stopPropagation();
   }, { capture: true, signal });
 
-  handle.addEventListener("click", () => {
+  handle.addEventListener("change", () => {
     if (!mobile.matches) return;
     searchReturn = null;
-    settle(state === "peek" ? "half" : state === "half" ? "full" : "peek");
+    settle(handle.checked ? "full" : "peek");
   }, { signal });
   handle.addEventListener("keydown", (event) => {
     const step = event.key === "ArrowUp" ? 1 : event.key === "ArrowDown" ? -1 : 0;
@@ -1205,7 +1184,6 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
   lifetime.onDispose(() => body.style.removeProperty("--sheet-keyboard"));
 
   body.dataset.sheet = state;
-  handle.ariaExpanded = "false";
   return Object.freeze({
     // A choice from search reveals its card over the scene.
     showSelection() {
@@ -1220,7 +1198,6 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
       sheet.style.removeProperty("transform");
       sheet.style.removeProperty("--sheet-snap-duration");
       delete body.dataset.sheet;
-      handle.ariaExpanded = "false";
     },
   });
 }

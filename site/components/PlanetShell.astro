@@ -17,6 +17,7 @@ import PlanetCard from './PlanetCard.astro';
 import PlanetCardHeader from './PlanetCardHeader.astro';
 import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
 import PlanetFactsheet from './PlanetFactsheet.astro';
+import InformationTabs from './InformationTabs.astro';
 import PlanetAccordion from './PlanetAccordion.astro';
 import PlanetNavigationMarker from './PlanetNavigationMarker.astro';
 import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
@@ -243,7 +244,7 @@ const searchCategories = ([
     </div>
   </section>
   <div class="planet-drawer-content" id={`${objectId}-information`}>
-    <button class="planet-sheet-handle" type="button" aria-label="Resize information sheet" aria-expanded="false"></button>
+    <input class="planet-sheet-handle" type="checkbox" aria-label="Expand information sheet" aria-controls={`${objectId}-information`} />
     <nav
       id={`${objectId}-object-browser`}
       class="planet-object-browser maps-object-results"
@@ -258,18 +259,13 @@ const searchCategories = ([
           </div>
           <p class="planet-introduction" data-focus-aliases hidden></p>
         </section>
-        <div class="planet-card-tabs" role="tablist" aria-label="Object information">
-          {['dataset', 'factsheet'].map((id, index) => <button type="button" role="tab"
-            id={`prepared-focus-${id}-tab`} data-information-tab={id} data-information-group="prepared-focus"
-            aria-controls={`prepared-focus-${id}-content`} aria-selected={index === 0 ? 'true' : 'false'}
-            tabindex={index === 0 ? 0 : -1}>{id === 'dataset' ? 'Datasets' : 'Factsheet'}</button>)}
-        </div>
+        <InformationTabs idPrefix="prepared-focus" group="prepared-focus" tabs={[{id: 'dataset', label: 'Datasets'}, {id: 'factsheet', label: 'Factsheet'}]} />
         <div class="planet-card-tabpanel" id="prepared-focus-dataset-content" data-information-panel="dataset"
-          data-information-group="prepared-focus" role="tabpanel" aria-labelledby="prepared-focus-dataset-tab" tabindex="0">
+          data-information-group="prepared-focus" role="region" aria-label="Datasets">
           <PreparedFocusLenses />
         </div>
         <div class="planet-card-tabpanel" id="prepared-focus-factsheet-content" data-information-panel="factsheet"
-          data-information-group="prepared-focus" role="tabpanel" aria-labelledby="prepared-focus-factsheet-tab" tabindex="0" hidden>
+          data-information-group="prepared-focus" role="region" aria-label="Factsheet">
           <div class="planet-factsheet-body"><div class="planet-facts"><ul class="planet-primary-facts">
             {[['distance', 'Distance from Sun'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
               <li><span class="planet-fact-label">{label}</span><span class="planet-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}

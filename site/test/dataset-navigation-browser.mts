@@ -46,7 +46,7 @@ async function state() {
     camera: new URL(location.href).searchParams.get('v'),
     transform: [...document.querySelectorAll('.planet-stage .polycss-camera > .polycss-scene')].map(node => getComputedStyle(node).transform),
     lens: document.querySelector<HTMLButtonElement>('button[name="lens"][aria-pressed="true"]')?.value,
-    tab: document.querySelector('[aria-label="Object information"] [aria-selected="true"]')?.textContent?.trim() }));
+    tab: document.querySelector<HTMLInputElement>('[aria-label="Object information"] input:checked')?.labels?.[0]?.textContent?.trim() }));
 }
 async function noOverflow(target: Page) {
   assert.equal(await target.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
@@ -73,23 +73,23 @@ try {
   assert.equal(selected.hash, '#dataset=thermal');
   assert.deepEqual(selected.transform, before.transform, 'Dataset selection retains the camera');
   assert.equal(await stage?.evaluate(node => node.isConnected), true);
-  await page.getByRole('tab', { name: 'Factsheet', exact: true }).click();
+  await page.getByRole('radio', { name: 'Factsheet', exact: true }).press('Space');
   assert.equal(await rail.isVisible(), false);
-  await page.getByRole('tab', { name: 'Datasets', exact: true }).click();
+  await page.getByRole('radio', { name: 'Datasets', exact: true }).press('Space');
   assert.equal(await rail.isVisible(), true);
   await page.screenshot({ path: resolve(output, 'mars-dataset-context.png') });
   await page.reload(); await ready('mars', 'thermal');
   assert.equal(await active().locator('[data-mission="odyssey"]').isVisible(), true);
   cases.push({ name: 'dataset context, keyboard selection, retained camera, tabs and reload', before, selected });
 
-  await page.getByRole('tablist', { name: 'Object information', exact: true }).getByRole('tab', { name: 'Moons', exact: true }).click();
+  await page.getByRole('radiogroup', { name: 'Object information', exact: true }).getByRole('radio', { name: 'Moons', exact: true }).press('Space');
   assert.equal(await rail.isVisible(), false);
   const moons = page.locator('#mars-moons-content');
   assert.deepEqual(await moons.locator('[data-object-id]').evaluateAll(links => links.map(link => link.getAttribute('data-object-id'))), ['phobos', 'deimos']);
   await moons.locator('[data-object-id="phobos"]').click();
   await ready('phobos');
   await page.goBack(); await ready('mars', 'thermal');
-  await page.getByRole('tab', { name: 'Datasets', exact: true }).click();
+  await page.getByRole('radio', { name: 'Datasets', exact: true }).press('Space');
   assert.equal(await active().locator('[data-mission="odyssey"]').isVisible(), true);
   cases.push({ name: 'Moons navigation selects the body and Back restores dataset context' });
 

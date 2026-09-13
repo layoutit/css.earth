@@ -106,6 +106,9 @@
     "expect": "fail",
     "reason": "needs a production build; starts astro preview itself"
   },
+  "progressive-enhancement-browser.mts": {
+    "expect": "pass"
+  },
   "prepared-world-navigation-browser.mts": {
     "expect": "fail",
     "reason": "no visible Venus marker in the Mercury vault"

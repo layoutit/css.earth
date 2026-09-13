@@ -318,64 +318,32 @@ test("Motion cannot enable Speed before the shared runtime is ready or after it 
   shell.destroy();
 });
 
-test('overview and detail tabs keep independent selections and keyboard focus across camera zoom', () => {
+test('camera zoom preserves native information selections and focus without installing tab listeners', () => {
   const f = fixture(), information = f.selectors.element('.planet-information-panel');
-  const datasetTab = new Element(), factsTab = new Element(), dataset = new Element(), facts = new Element();
-  datasetTab.dataset.informationTab = 'dataset'; factsTab.dataset.informationTab = 'factsheet';
-  dataset.dataset.informationPanel = 'dataset'; facts.dataset.informationPanel = 'factsheet';
-  const overviewTabs = ['moons', 'factsheet', 'spectrum'].map(id => {
-    const tab = new Element();
-    tab.dataset = { informationGroup: 'overview', informationTab: id };
-    tab.focus = () => { f.documentTarget.activeElement = tab; };
-    return tab;
-  });
-  const overviewPanels = overviewTabs.map(tab => {
-    const panel = new Element();
-    panel.dataset = { informationGroup: 'overview', informationPanel: tab.dataset.informationTab };
-    return panel;
-  });
-  information.selectors.set('[data-information-tab]:not([hidden])', [...overviewTabs, datasetTab, factsTab]);
-  information.selectors.set('[data-information-panel]', [...overviewPanels, dataset, facts]);
-  const shell = f.mount(), listeners: CameraNotifications = new Set(), search = f.selectors.element('.planet-sidebar-search');
+  const factsTab = new Element(), spectrumTab = new Element();
+  factsTab.dataset.informationTab = 'factsheet';
+  spectrumTab.dataset = { informationGroup: 'overview', informationTab: 'spectrum' };
+  information.selectors.set('[data-information-tab]:not([hidden])', [factsTab, spectrumTab]);
+  const shell = f.mount(), listeners: CameraNotifications = new Set();
   const children = information.children;
   let world = worldAt(10000);
   shell.setCamera(shellCamera(() => world, listeners));
-  assert.equal(information.dataset.cardView, 'detail');
-  factsTab.dispatchEvent(new Event('click'));
-  overviewTabs[1].dispatchEvent(new Event('click'));
-  assert.deepEqual(overviewPanels.map(panel => panel.hidden), [true, false, true]);
-  const key = (value: string) => {
-    const event = new Event('keydown', { cancelable: true });
-    Object.defineProperty(event, 'key', { value });
-    required(f.documentTarget.activeElement).dispatchEvent(event);
-    assert.equal(event.defaultPrevented, true);
-  };
-  overviewTabs[1].focus();
-  key('ArrowRight');
-  assert.equal(f.documentTarget.activeElement, overviewTabs[2]);
-  assert.deepEqual(overviewPanels.map(panel => panel.hidden), [true, true, false]);
-  key('ArrowRight');
-  assert.equal(f.documentTarget.activeElement, overviewTabs[0], 'Arrow keys wrap within the overview');
-  key('End');
-  assert.equal(f.documentTarget.activeElement, overviewTabs[2]);
-  search.value = 'my search';
+  // These properties are set by the browser's radio interaction, covered in
+  // progressive-enhancement-browser.mts with application scripts disabled.
+  factsTab.checked = true; spectrumTab.checked = true;
+  f.documentTarget.activeElement = spectrumTab;
   for (const [range, view] of [[1e8, 'overview'], [10000, 'detail']] as const) {
     world = worldAt(range);
     for (const callback of listeners) callback(world);
     assert.equal(information.dataset.cardView, view);
-    assert.equal(information.children, children, 'Both views stay mounted');
-    assert.equal(facts.hidden, false); assert.equal(dataset.hidden, true);
-    assert.equal(factsTab.getAttribute('aria-selected'), 'true');
-    assert.deepEqual(overviewPanels.map(panel => panel.hidden), [true, true, false]);
-    assert.equal(overviewTabs[2].getAttribute('aria-selected'), 'true');
-    assert.equal(search.value, 'my search');
+    assert.equal(information.children, children);
+    assert.equal(factsTab.checked, true);
+    assert.equal(spectrumTab.checked, true);
+    assert.equal(f.documentTarget.activeElement, spectrumTab);
   }
-  overviewTabs[1].hidden = true;
-  overviewTabs[0].focus(); key('ArrowRight');
-  assert.equal(f.documentTarget.activeElement, overviewTabs[2], 'Tabs hidden after mount are skipped by the shared keyboard control');
+  assert.equal(factsTab.listeners.size + spectrumTab.listeners.size, 0);
   shell.destroy();
   assert.equal(listeners.size, 0);
-  assert.ok([...overviewTabs, datasetTab, factsTab].every(tab => tab.listeners.size === 0));
 });
 
 test('destination card stays fixed across flight poses and camera handoff, then follows manual zoom', () => {

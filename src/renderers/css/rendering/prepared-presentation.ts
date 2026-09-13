@@ -120,7 +120,7 @@ function writeStyle(element: HTMLElement, name: string, value: string) {
 // callbacks enter this builder. The ordered records are final prepared DOM.
 export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('./physical-projection.js').PhysicalProjection, progressiveActivation = false) {
   const { nodes, roots } = preparedTree ? preparedTree.claim(definition.tree, stage.ownerDocument, context.own)
-    : buildPreparedTree(definition.tree, stage.ownerDocument, context.own);
+    : buildPreparedTree(definition.tree, stage.ownerDocument, context.own, stage);
   const cameraElement = nodes[definition.tree.camera], sceneElement = nodes[definition.tree.scene];
   const owned = () => roots.some(root => root.parentNode === stage);
   const stageBindings = new Map<string, PreparedWrite>();
