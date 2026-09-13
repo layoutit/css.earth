@@ -1,0 +1,13 @@
+{
+  "id": "source-new-horizons-pluto-pck-v010",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "New Horizons Pluto-system planetary constants kernel nh_pcnh_010.tpc",
+  "identifiers": [{"type": "PDS product", "value": "NH-J/P/SS-SPICE-6-V1.0/nh_pcnh_010.tpc"}],
+  "version": "010",
+  "publisher": "NASA Planetary Data System / Southwest Research Institute",
+  "links": [{"role": "archive", "url": "https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/pck/nh_pcnh_010.tpc", "label": "Mission planetary constants and update history"}],
+  "evidence": [{"url": "https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/pck/nh_pcnh_010.tpc", "checkedOn": "2026-09-13", "locator": "PRODUCT_ID; PRODUCT_CREATION_TIME (2024-03-12); active BODY902 and BODY903 constants; 2021 update and version-010 history"}],
+  "relations": [],
+  "statements": []
+}

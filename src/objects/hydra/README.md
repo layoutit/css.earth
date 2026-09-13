@@ -2,61 +2,56 @@
 
 ## Sources
 
-[Simon Porter’s 2021 model](https://doi.org/10.6084/m9.figshare.12779975.v1), CC BY 4.0, supplies the octantoid shape fit to New Horizons LORRI images. Its unchanged STL uses one kilometre per source unit and spans 51.989 × 36.499 × 29.276 km. The Shape view uses a grid because no registered photographic pixels are selected.
+**Draft experiment; photographic release is deferred.** The PDS camera/orientation products have been recovered, but the exact released STL-to-PCK frame binding remains unverified. The experimental Monochrome view is not a qualified surface. All selected photographs, labels and orientation kernels are now retrieved; the remaining issue is measured registration, not archive access.
 
-## Evidence
+The **Monochrome** lens uses the native, calibrated New Horizons LORRI product
+[`LOR_0299165548_0X630_SCI`](https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165548_0x630_sci.fit), acquired on 14 July 2015. It is panchromatic calibrated DN, displayed as a monochrome photograph; it is not a color or albedo map. The photograph keeps its original illumination. A global 1st–99.8th-percentile stretch makes its recorded DN/sec legible without photometric normalization.
 
-The shared STL loader retains the released topology, then `source-meshoptimizer` reduces 52,488 source faces to 800 native PolyCSS `u` triangles, within the requested geometry budget.  The 500 m simplifier setting yielded an estimated 192.873 m error. Source and prepared meshes are closed, outward wound, single-component genus-zero surfaces. Independent radial intersections in 2,000 Fibonacci equal-area directions give 99.305 m mean, 237.621 m 95th percentile and 850.840 m maximum sampled error, with no missing intersections. These are display approximation errors; the setting, estimate and sampled maximum are not an exhaustive source-distance bound or a measurement uncertainty.
+Geometry is Simon Porter’s [2021 released Hydra model](https://doi.org/10.6084/m9.figshare.12779975.v1), CC BY 4.0: the unchanged 26,246-vertex, 52,488-triangle STL. One source unit is one kilometre; its XYZ extent is 51.989 × 36.499 × 29.276 km.
 
-Browser interaction, DPR checks and visual acceptance are separate qualification steps, recorded separately from these source checks.
-
-[Source test definitions](../../../tests/objects/unit/hydra/source.test.mts).
-
-## Known problems
-
-The release is an octantoid shape fit to New Horizons LORRI images, not a global terrain survey. The northern polar depression is supported by the imaged shape and shadows. Only the northern hemisphere was effectively observed; the southern surface and short axis are poorly constrained. Fitting and interpolation do not make those regions measured terrain.
-
-The grid marks missing visible-light imagery; it is not surface color, albedo or crater texture. No image-to-mesh photometry is inferred.
-
-Model XYZ is retained, with longitude `atan2(y,x)` and latitude `asin(z/r)`. The mesh download does not include its fitted rotational phase, prime-meridian epoch or per-observation camera solution. A numerical pole from another fit cannot establish this release’s cartographic registration. The application’s physical orientation is therefore an explicitly approximate presentation, not a recovered absolute mesh attitude. Hydra rotates nonsynchronously; a synchronous Pluto-facing orientation would be incorrect.
-
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
-
-<a id="hydra-sources-and-interpretation"></a>
-<a id="dataset-survey"></a>
-<a id="preparation-and-restoration"></a>
-
-<details>
-<summary>Methods and source notes</summary>
-
-**Dataset survey**
-
-Inspected 2026-09-08, including primary archives and research releases beyond press imagery:
-
-2026-09-12 follow-up: rechecked the pinned native LORRI label and the
-[published shape-fitting method](https://www.hou.usra.edu/meetings/plutosystem2019/pdf/7038.pdf).
-The label's inertial geometry does not supply an attitude for the released 2021
-STL. Earlier fitted shapes and poles are different solutions; they cannot be
-transferred to this mesh without a registration check. Photographic mapping
-remains unqualified.
+The camera uses the PDS New Horizons [`nh_pcnh_010.tpc`](https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/pck/nh_pcnh_010.tpc) (2024-03-12). Its active values are the restored V008-derived Hydra pole, RA 68.9°, Dec 4.7°, and prime meridian 57.0724592° + 837.760665740° per TDB day past J2000. The V009 alternatives are in comments because the release explicitly says they need further checking; they are not used.
 
 | Candidate | Disposition |
 | --- | --- |
-| [Porter 2021 Figshare shape](https://doi.org/10.6084/m9.figshare.12779975.v1) | **Included.** Public, attributed mesh preserves the large northern concavity. Original STL and the release’s complete metadata/license response are pinned. The release supplies no texture, validity map or fitted attitude file. |
-| [Porter et al. 2025 analysis](https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf) | **Unresolved newer shape.** Revised fit reports 54.0 × 37.4 × 26.7 km and a 36.1 km volume-equivalent diameter. The talk and [abstract](https://www.hou.usra.edu/meetings/plutosystem2025/pdf/7035.pdf) were checked; no linked machine-readable mesh or fitted attitude was located. The 2021 vertices are not relabeled as this newer model. |
-| [PDS LORRI calibrated Pluto encounter](https://pds-rings.seti.org/holdings/volumes/NHxxLO_xxxx/NHPELO_2001/) | **Unresolved surface mapping.** The archive index identifies the actual H_LORRI_BEST sequence. Pinned label `LOR_0299165548_0X630_SCI` describes a lossless 1024 × 1024 image at 2015-07-14 07:40:29.706 UTC, 229,298.16 km range and 33.9° phase. It provides inertial vectors, but subsolar/subspacecraft longitude/latitude and body-pole clock angle are explicitly `N/A`. Pixel values are calibrated DN; absolute calibration adds conversion factors without converting the pixels to I/F. Applying per-observation photometry without the missing mesh attitude would invent the normal/Sun relationship. No such correction or global wrapping is claimed. |
-| [PDS derived MVIC/LEISA composition products](https://doi.org/10.26007/mc7j-ef52) | **Excluded as surface lenses; useful composition context.** The actual overview is pinned. H_COLOR_BEST MVIC bands are aligned to each other in image space at native resolution, retain DN units and unmatched PSFs, and have limb artifacts. They are not an independently registered global color map. Hydra’s finest LEISA scan is 14.7 km/pixel; the small-moon cubes explicitly omit geometry products. They support integrated near-infrared composition, not a mapped mineral layer. |
-| [PDS geology/geophysics release](https://pdssbn.astro.umd.edu/holdings/nh-p_psa-lorri_mvic-5-geophys-v1.0/dataset.shtml) | **Excluded for Hydra.** The actual release’s global mosaics, topography and bond-albedo products cover Pluto and Charon. No Hydra map was substituted from those bodies. |
-| [Weaver et al. 2016](https://arxiv.org/abs/1604.05366) | **Included for encounter context and spin.** Its best Hydra LORRI observation is about 1.14 km/native pixel. The early 65 × 45 × 25 km ellipsoid and associated pole fit are superseded for displayed geometry by the released 2021 mesh. A deconvolved press composite is not a source of recovered global albedo. |
-| [NASA water-ice result](https://www.nasa.gov/general/plutos-icy-moon-hydra/) | **Included as editorial composition context.** The measured water-ice spectral signature supports the description of Hydra’s surface; it does not supply a spatially registered composition texture. |
-| SBMT, USGS and LPI | SBMT documentation lists Nix/Hydra models; the directly accessible, clearly licensed Porter release above was selected. No more suitable registered Hydra global map or publicly downloadable 2025 replacement mesh was located. This is the survey outcome, not evidence that further mission-team products do not exist. |
+| Porter 2021 mesh | **Included.** The released fit, including the northern concavity, supplies the fixed source geometry for this lens. |
+| PDS LORRI best exposure | **Diagnostic only.** The native observation is restored and projected experimentally; publication awaits controlled image-to-mesh registration. |
+| PDS MVIC color sequence | **Not used as color.** It needs qualified cross-band and image-to-mesh registration. |
+| PDS MVIC/LEISA composition products | **Context only.** They do not supply a registered composition map for this mesh. |
+| Porter et al. 2025 model work | **Not substituted.** No downloadable updated mesh or camera solution was found for the 2021 STL. |
 
-**Preparation and restoration**
+## Evidence
 
-The source manifest pins the original mesh, constant no-data material, metadata, font, star input and generated portrait. Small authored inputs and the portrait are checked in. `source/preparation/acquisition.json` restores the pinned external mesh, font and starfield. `node tools/objects/dist/operations.js acquire hydra --verify-only` verifies closure; `node tools/objects/dist/prepare-authored.js hydra --write` runs shared preparation. Runtime delivery requires a separate installation result.
+The source mesh remains fixed. Its existing source-versus-display check retains 800 prepared PolyCSS triangles with 99.305 m mean, 237.621 m 95th-percentile, and 850.840 m maximum sampled radial error across 2,000 equal-area directions. Those checks concern display simplification, not measurement uncertainty.
 
-Hydra has one **Shape model** view. Geometry comes from [Simon Porter’s released 2021 model](https://doi.org/10.6084/m9.figshare.12779975.v1), under CC BY 4.0. The original compressed ASCII STL is preserved. Its 26,246 vertices and 52,488 triangles span 51.989 × 36.499 × 29.276 km in XYZ. One source unit is one kilometre; the source axes are neither rotated nor recentered. The signed source volume is 24,898.4197787 km³, equivalent to a sphere of radius 18.1145573 km. The exact bounds, scale and volume formula are recorded in `source/measurements.json`.
+The retained PDS FITS WCS/TAN-SIP camera, active PCK pose at target emission time, source range, and original STL XYZ axes were fixed. The only fitted values were two detector translations, [−12.875, −1.5] pixels. The fixed 27-point spatial limb holdout is 1.212 px RMS; its 22 still-lit points alone are 0.793 px RMS. Both populations are retained in the report. The independent `LOR_0299165545_0X630_SCI` exposure, taken 3 seconds earlier and never used for fitting, has 2.559 px RMS across all 51 selected points, and 1.581 px RMS for its 26 lit matches. See [registration evidence](evidence/photography/registration.json) and [the source-bound recipe](source/preparation/photography.json).
 
-No reliable mesh-registered surface texels are selected. The source material is a 64 × 32 constant RGB raster with all channels 160. The shared no-data recipe marks every sample unavailable before painting cssEarth’s neutral grid. This is a coverage indicator, not Hydra’s color or albedo. The same interpretation feeds the surface atlas, thumbnail, minimap and context portrait. Flood and Shadows remain available. There is no baked photographic illumination to invert in this view, and no invented crater texture or elevation dataset.
+The additional `LOR_0299165692_0X630_SCI` exposure at 07:42:53.831 provides a separate interior repeatability check. A relative [−0.5, −1.25] pixel translation fitted in two diagonal regions predicts the two withheld regions with correlations 0.996 and 0.996; their independently optimal shifts differ by 0.25 native target pixels. However, the body-fixed observer direction changes by only 0.451°. This near-repeat can verify detector alignment but cannot independently establish mesh depth or resolve an uncertain model frame. It is not sufficient photographic qualification.
+
+![Native target, aligned target and mesh-transferred reference; fit and holdout regions](evidence/photography/best-separate-view-interior-transfer.png)
+
+A wider-angle test uses `LOR_0299155705_0X636_SCI`, changing the observer direction by 22.995°. Its 308 common samples give held raw correlations of 0.720 and 0.650; removing regional brightness planes reduces those to −0.136 and 0.372. The held regions prefer shifts 2.016 and 4.257 native pixels apart from the fitted translation, with one optimum at the search boundary. This contradicts using the near-repeat result as proof of mesh registration.
+
+![Wider-angle Hydra comparison, retained as contrary evidence](evidence/photography/best-wide-view-interior-transfer.png)
+
+Only contributions within 500 m of the fixed display mesh and 1.5 source footprints are accepted; incidence and emission are each limited to 70°. Gray marks unobserved or rejected coverage. It is not dark terrain, color, or albedo.
+
+The serial body preparation completed and the experimental view was inspected and rotated in the local browser. All 31 existing delivered assets remain byte-identical; the photographic view adds three images. The updated Nix/Hydra source checks pass (four tests), as do the camera tools’ TypeScript check and source-catalogue refresh. The source cameras, input pins and evidence were regenerated together; the camera matrices did not change. These checks do not qualify registration. DPR, mobile and publication validation were not completed because the source-frame gate remains unresolved.
+
+The [browser preview](evidence/photography/browser-preview.png) was captured on 13 September 2026 from the draft with the experimental-placement caption visible, using [this saved view](http://127.0.0.1:4284/hydra/?v=MAZAVkEQWhzcCEFCxzNAAAAAv5EXwL9J1TM_teYamlQVf7_Ia-K2E1ZPAAA). It shows the existing mesh and photographic assets with registration still unqualified. The later caption-only update changes neither camera matrices nor image data; the numerical checks above remain applicable.
+
+## Known problems
+
+The PDS image header’s body-fixed convenience fields are unavailable, but that does not mean PDS lacks orientation: the separately released PCK supplies it. The selected PCK and Porter 2021 fit have strong source-frame evidence—the PCK cites the same 2021 dimensions and pole fit, and the frozen-pose independent silhouette agrees—but neither release explicitly declares that STL XYZ/longitude zero is the `IAU_HYDRA` frame. The limb and near-repeat interior checks establish image agreement but do not independently constrain the model frame. They do not qualify the photographic lens or recover an absolute prime meridian or a phase at another epoch.
+
+Hydra’s northern hemisphere is the well-observed part of the released fit; southern radii and the short axis remain poorly constrained. The lens has one LORRI view. It does not establish global coverage, a photometric correction, natural color, or scientific surface units.
+
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
+
+<details>
+<summary>Method and source details</summary>
+
+`SPCSCET` is the spacecraft mid-exposure TDB receive time. The camera remains at that receive time; the target orientation uses `SPCSCET − light time`, following the apparent `LT+S` convention of the archived New Horizons geometry. The selected image’s light time is 0.764856 s. The two detector translations were bounded to 32 pixels; no shape vertex, PCK pole/phase, range, or camera-model parameter was fitted. Alternating 12-row crop blocks reserve the selected-image holdout.
+
+The PCK comments identify the active Hydra values as V008-derived after moving V009 values to comments. They also reproduce Porter et al. (2021) Table 2’s 52.0 × 36.5 × 29.3 km dimensions and flyby pole. Porter’s release describes a joint forward fit of shape and pole from LORRI WCS/timing and New Horizons SPICE geometry. Those sources justify the tested frame inference; their omission of an explicit STL-to-IAU axis declaration remains the stated limit.
 
 </details>

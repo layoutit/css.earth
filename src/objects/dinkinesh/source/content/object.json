@@ -4,7 +4,7 @@
   "id": "dinkinesh",
   "displayName": "Dinkinesh",
   "panel": {
-    "introduction": "Dinkinesh was Lucy’s first asteroid encounter. Its equatorial ridge and trough accompany a remarkable moon: the contact binary Selam. JPL supplies the heliocentric orbit. The reconstruction has an illustrative meridian; its detailed geometry and unseen hemisphere are not measured terrain.",
+    "introduction": "Dinkinesh was Lucy’s first asteroid encounter. Its equatorial ridge and trough accompany the contact-binary moon Selam. The TEMPEST dataset shows a recovered numerical shape; the earlier Celestia reconstruction remains available for comparison.",
     "facts": [
       {
         "id": "parent",
@@ -19,21 +19,45 @@
       {
         "id": "shape",
         "label": "Shape evidence",
-        "value": "Authored reconstruction"
+        "value": "Recovered numerical model",
+        "source": {
+          "catalogueId": "tempest-dinkinesh-7df4c88",
+          "url": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl",
+          "label": "Dinkinesh shape distributed with TEMPEST",
+          "checked": "2026-09-13",
+          "path": "source/shape/tempest-dinkinesh.stl",
+          "locator": "Pinned historical STL: 635 vertices, 1266 triangles; exact upstream mission model version not identified"
+        }
       }
     ],
     "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "tempest-shape",
     "labels": {
-      "shape": "Shape"
+      "shape": "Celestia model",
+      "tempest-shape": "TEMPEST shape"
     },
     "controls": [
       {
+        "id": "tempest-shape",
+        "label": "TEMPEST shape",
+        "detail": "Model",
+        "title": "Dinkinesh model used by TEMPEST",
+        "description": "Numerical Dinkinesh shape distributed with the TEMPEST thermal model: 635 vertices and 1,266 triangles, retained at their published metre scale. The linked study describes a Lucy stereo-derived model with estimated unseen terrain. This recovered file does not identify its upstream mission-model version or observed/fill boundary. The grid marks missing qualified photography; it does not mark measured terrain.",
+        "thumbnail": "/scenes/dinkinesh/dinkinesh-tempest-shape-thumbnail.webp",
+        "surface": "dinkinesh-tempest-shape-surface@2x.webp",
+        "poles": "dinkinesh-tempest-shape-poles@2x.webp",
+        "source": {
+          "id": "tempest-dinkinesh-model",
+          "path": "../manifest.json",
+          "url": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl"
+        }
+      },
+      {
         "id": "shape",
-        "label": "Shape",
+        "label": "Celestia model",
         "detail": "Model",
         "title": "Lucy encounter reconstruction",
         "description": "Celestia contributors’ reconstruction inspired by Lucy images, uniformly scaled to the published 738 m volume-equivalent diameter. This is an authored approximation, not the mission photogrammetric shape model. The grid marks missing qualified surface imagery.",
@@ -67,6 +91,18 @@
   },
   "charts": [],
   "resources": [
+    {
+      "label": "TEMPEST source model",
+      "description": "Pinned public mesh and source-code history",
+      "href": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl",
+      "role": "observations"
+    },
+    {
+      "label": "Lyster, Howett & Penn (2025)",
+      "description": "TEMPEST thermal-model methods and required attribution",
+      "href": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-546.html",
+      "role": "facts"
+    },
     {
       "label": "Levison et al. (2024)",
       "description": "Lucy discovery, ridge and contact-binary satellite",

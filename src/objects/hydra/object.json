@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "71421b1e078a50a3b4c2e13e5931fdd7c8178d6d86bd16a8b2d0b08c53325b01"
+          "sha256": "5e4d6692114eb03f0372077daf6ef5fe159f1a400f94f243077bcfe7940cb3b1"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e2505a65631f159607e19fb11daf7591d46a2561bf1c1d262389893df5df46bd"
+          "sha256": "3ba91b4728f2fbf1f406a863056303ba09deed7a431ce8bec702f0a2134a2cdc"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "419d74ee876297a2d5b4fbefb0c2c0688d58e1366fb0014555917cccc26277d5"
+          "sha256": "14a9cd8f266aaa436e706be9a0f58fc240f478e158d47764a099774ffa1b1cf2"
         },
         {
           "id": "rotation",
@@ -61,6 +61,11 @@
           "source": "terrestrial",
           "projection": "equirectangular",
           "lenses": [
+            {
+              "id": "monochrome",
+              "source": "content",
+              "material": "lighting"
+            },
             {
               "id": "model",
               "source": "content",
@@ -110,7 +115,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ae78afc1b0f19453911f0267173bb8f2f58ec68380ea715f837be74ebd570f65"
+        "sha256": "970bd39094789d58a57c4c4e976fdb4e0ebd75077e08e329fd361b0d641b9793"
       }
     },
     "catalog": {
@@ -129,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "cac35b056ed76490f3bd93de509a27313550c6e4505958eb01977b53d47d49fd"
+    "sha256": "ecfa6f8f6fd48d5aec50d20aae16eb060e7ec33325a747191d6f973531077f88"
   }
 }

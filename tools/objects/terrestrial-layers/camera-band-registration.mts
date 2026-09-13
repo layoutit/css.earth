@@ -52,8 +52,9 @@ function ncc(a:number[],b:number[]){const ma=a.reduce((s,n)=>s+n,0)/a.length,mb=
 interface Patch {pixel:number[];point:number[];normal:number[];points:number[][];values:number[];partition:'fit'|'holdout'}
 
 /** Register each target against the reference: fit its detector centre and roll, or with `checkOnly` measure the authored camera. */
-export function registerCameraBands<F extends RegistrationFrame>({mesh,camera,reference,targets,checkOnly}:{mesh:RegistrationMesh;camera:(frame:unknown)=>RegistrationCamera;
-  reference:RegistrationSource<F>;targets:readonly (RegistrationSource<F>&{filter:string})[];checkOnly:boolean}){
+export function registerCameraBands<F extends RegistrationFrame>({mesh,camera,reference,targets,checkOnly,searchRadiusPixels=S.searchRadiusPixels}:{mesh:RegistrationMesh;camera:(frame:unknown)=>RegistrationCamera;
+  reference:RegistrationSource<F>;targets:readonly (RegistrationSource<F>&{filter:string})[];checkOnly:boolean;searchRadiusPixels?:number}){
+ if(!Number.isInteger(searchRadiusPixels)||searchRadiusPixels<1||searchRadiusPixels>64)throw new Error('Feature registration search radius must be an integer from 1 to 64 pixels.');
  const ref=reference.image,referenceCamera=camera(reference.frame),referenceDetail=detail(ref);
  const bbox=box(ref),radius=S.patchRadiusPixels,step=Math.max(2*radius+2,Math.round(Math.sqrt((bbox.x1-bbox.x0)*(bbox.y1-bbox.y0)/180)));
  const patches:Patch[]=[];
@@ -79,7 +80,7 @@ export function registerCameraBands<F extends RegistrationFrame>({mesh,camera,re
   const frame=target.frame,image=target.image,projector=camera(frame),targetDetail=detail(image);
   const center=frame.center,northAzimuthDegrees=frame.northAzimuthDegrees;
   if(!center||center.length!==2||!center.every(Number.isFinite)||typeof northAzimuthDegrees!=='number'||!Number.isFinite(northAzimuthDegrees))throw new Error('A controlled detector centre and north azimuth are required');
-  const origin=[0,0],search=S.searchRadiusPixels;
+  const origin=[0,0],search=searchRadiusPixels;
   const controls=[];
   for(const patch of patches){
    const toward=projector.position.map((n,i)=>n-patch.point[i]),length=Math.hypot(...toward);
@@ -111,5 +112,5 @@ export function registerCameraBands<F extends RegistrationFrame>({mesh,camera,re
   reports.push({filter:target.filter,id:frame.id,accepted:holdout.count>=C.minimumHoldoutControls&&holdout.rmsPixels<=C.maximumHoldoutRmsPixels&&holdout.maximumPixels<=C.maximumHoldoutResidualPixels,
    seedCamera:frame,correctedCamera:corrected,fit:stats('fit'),holdout,reference:{id:reference.frame.id,sha256:reference.sha256},targetSha256:target.sha256,controls:residuals});
  }
- return {patchGridStepPixels:step,patches:patches.length,reports};
+ return {patchGridStepPixels:step,patches:patches.length,searchRadiusPixels,reports};
 }

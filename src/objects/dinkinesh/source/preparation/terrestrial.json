@@ -18,6 +18,11 @@
     "observedColors": [],
     "shapeViews": [
       {
+        "id": "tempest-shape",
+        "label": "TEMPEST shape",
+        "consumer": "tempest-shape"
+      },
+      {
         "id": "shape",
         "label": "Shape",
         "consumer": "shape"
@@ -43,33 +48,55 @@
       "defaultControlYawDegrees": -45,
       "framingScale": 0.75
     },
-    "mapUrl": "/scenes/dinkinesh/dinkinesh-shape-surface@2x.webp",
-    "polesUrl": "/scenes/dinkinesh/dinkinesh-shape-poles@2x.webp",
+    "mapUrl": "/scenes/dinkinesh/dinkinesh-tempest-shape-surface@2x.webp",
+    "polesUrl": "/scenes/dinkinesh/dinkinesh-tempest-shape-poles@2x.webp",
     "radialTerrain": {
-      "path": "shape/model.obj",
-      "format": "wavefront-obj",
+      "path": "shape/tempest-dinkinesh.stl",
+      "format": "stl",
       "grid": {
         "metersPerUnit": 1,
-        "expectedVertices": 51101,
-        "expectedFaces": 101512
+        "expectedVertices": 635,
+        "expectedFaces": 1266
       },
-      "faceBudget": 1200,
+      "faceBudget": 1266,
       "tileSize": 64,
       "atlasColumns": 16,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",
-        "targetFaces": 1200,
-        "maximumErrorMeters": 12,
+        "targetFaces": 1266,
+        "maximumErrorMeters": 0.01,
         "regularize": false
       }
-    }
+    },
+    "radialTerrainAlternatives": [
+      {
+        "lensId": "shape",
+        "path": "shape/model.obj",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1,
+          "expectedVertices": 51101,
+          "expectedFaces": 101512
+        },
+        "faceBudget": 1200,
+        "tileSize": 64,
+        "atlasColumns": 16,
+        "primitive": "u",
+        "simplification": {
+          "method": "source-meshoptimizer",
+          "targetFaces": 1200,
+          "maximumErrorMeters": 12,
+          "regularize": false
+        }
+      }
+    ]
   },
   "celestial": {
-    "sunSource": "Celestia contributors’ reconstruction inspired by Lucy images, uniformly scaled to the published 738 m volume-equivalent diameter. This is an authored approximation, not the mission photogrammetric shape model. The grid marks missing qualified surface imagery. JPL supplies the heliocentric orbit. The reconstruction has an illustrative meridian; its detailed geometry and unseen hemisphere are not measured terrain."
+    "sunSource": "Numerical Dinkinesh shape distributed with the TEMPEST thermal model: 635 vertices and 1,266 triangles, retained at their published metre scale. The linked study describes a Lucy stereo-derived model with estimated unseen terrain. This recovered file does not identify its upstream mission-model version or observed/fill boundary. The grid marks missing qualified photography; it does not mark measured terrain. JPL supplies the heliocentric orbit; the mesh view has no propagated spin epoch."
   },
   "presentation": {
-    "defaultLens": "shape",
+    "defaultLens": "tempest-shape",
     "pointColor": [
       160,
       160,

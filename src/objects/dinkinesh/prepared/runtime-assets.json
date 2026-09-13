@@ -14,7 +14,7 @@
     {
       "filename": "dinkinesh-features.json",
       "bytes": 3841,
-      "sha256": "84e40473b2eab763c6d106605167680b3b02aa9a50bcf13a17139e36bcb3bae7"
+      "sha256": "5d760d17fb3cddb25203c267c8f3204cb0ae4afab999d2a618ccd08e84a3febe"
     },
     {
       "filename": "dinkinesh-lighting.webp",
@@ -160,6 +160,21 @@
       "filename": "dinkinesh-system-point.webp",
       "bytes": 96,
       "sha256": "d0ae999b83dcb1983f478efc04e5912bf1872146c4b98919111992eb90ed7caf"
+    },
+    {
+      "filename": "dinkinesh-tempest-shape-shadow@2x.webp",
+      "bytes": 72516,
+      "sha256": "409416affb0e3a6660cc7800b948bb02627c81284bf87eaff4a5efac5f7c2187"
+    },
+    {
+      "filename": "dinkinesh-tempest-shape-surface@2x.webp",
+      "bytes": 96138,
+      "sha256": "0666a03d38bb752031a5f167eb9a7ec8c5bbba80c84089622c523702a45bf2de"
+    },
+    {
+      "filename": "dinkinesh-tempest-shape-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
     }
   ]
 }
