@@ -22,7 +22,7 @@ test('a lens refuses keys its format does not declare and a second display', () 
     ['lens key', lens => { fixtureRecord(lens)['displayPercentiles'] = [1, 99]; }],
     ['frame key', lens => { fixtureRecord(lens, 'frames', 0)['exposure'] = 1; }],
     ['transfer key', lens => { fixtureRecord(lens, 'transfer')['maximumSeparation'] = 1; }],
-    ['second display', lens => { const display = fixtureRecord(lens, 'display'); display[display.percentiles ? 'linear' : 'percentiles'] = [1, 99]; }],
+    ['second display', lens => { const display = fixtureRecord(lens, 'display'); display[display.percentiles ? 'displayRange' : 'percentiles'] = [1, 99]; }],
   ];
   for (const { id, profile } of authored) profile.raster.surfaceObservations.forEach((_, index) => {
     for (const [name, change] of changes) {

@@ -72,8 +72,16 @@ export function decodeNewHorizonsLorri(bytes: Buffer, value: unknown) {
 
 /** Provider-registered, PSF-matched CA05 MVIC cube: BLUE, RED, NIR, CH4.
  * The archive resamples 340 m native pixels threefold; that adds no resolution.
- * Keep a common linear display scale across NIR / RED / BLUE. */
-export function decodeArrokothMvic(bytes: Buffer, value: unknown) {
+ * Keep derived band values floating until the shared display boundary. */
+export function decodeArrokothMvic(bytes: Buffer, value: unknown, label: string) {
+  const bins=[...label.matchAll(/<sp:Bin_Wavelength>([\s\S]*?)<\/sp:Bin_Wavelength>/g)].map(match=>({
+    sequence:Number(match[1].match(/<sp:bin_sequence_number>([^<]+)</)?.[1]),
+    filter:match[1].match(/<sp:filter_name>([^<]+)</)?.[1].trim(),
+    wavelength:Number(match[1].match(/<sp:center_wavelength unit="nm">([^<]+)</)?.[1])
+  }));
+  if(!label.includes('<file_name>ca05_mvic_cube.fit</file_name>') || !/<unit>\s*data number\s*<\/unit>/.test(label) ||
+      bins.length!==4 || bins.some((bin,i)=>bin.sequence!==i+1 || bin.filter!==['Blue','Red','NIR','CH4'][i] || bin.wavelength!==[475,620,877.5,885][i]))
+    throw new Error('MVIC color requires its native band order, wavelengths and data-number units.');
   const camera = shape({...archivedCameraFields,...dimensions,imageSha256:text,startTime:text,
     imageTransform:array(array(number)),referenceCamera:shape(sipCameraFields)})(value);
   const {header:h,dataOffset} = readFitsHeader(bytes);

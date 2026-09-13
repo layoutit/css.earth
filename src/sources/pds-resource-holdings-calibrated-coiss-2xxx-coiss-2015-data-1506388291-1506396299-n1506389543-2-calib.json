@@ -1,0 +1,28 @@
+{
+  "id": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389543-2-calib",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Cassini ISS hyperion · N1506389543_2_CALIB · CLEAR",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389543_2_CALIB"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389543_2_CALIB.LBL",
+      "label": "Calibrated image label"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389543_2_CALIB.LBL",
+      "checkedOn": "2026-09-13",
+      "locator": "PRODUCT_ID 1_N1506389543.118; FILTER_NAME; CISSCAL 4.0beta DESCRIPTION, I/F units"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -10,6 +10,7 @@
  */
 import type { RadialSurface, SourceAccess, SurfaceConfig } from '../terrestrial-layers/contracts.mts';
 import type { SourceInput } from '../../../src/platform/source-manifest.mts';
+import type { BandColorDisplay } from '../color-transfer.mts';
 
 /** A decoded photograph: calibrated values and the archive's own verdict on each pixel. */
 export interface ObservationImage {
@@ -103,7 +104,7 @@ export interface SurfacePolicy {
   selection: 'single' | 'lowest-emission' | 'recipe-order' | 'finest-resolution';
   levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumLogMad: number; maximumGain: number; samplesPerTriangle?: number };
   samplesPerTriangle: number;
-  display: { range: 'reference-pixels' | 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; channels?: readonly string[] };
+  display: { range: 'reference-pixels' | 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay };
   photometry: Record<string, unknown>;
   limits: Record<string, unknown>;
   limitations?: string;

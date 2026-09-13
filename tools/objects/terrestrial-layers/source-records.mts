@@ -34,7 +34,7 @@ export const parsePdsImagePolicy = shape({schema:text,format:text,sampling:text,
 export const parseIsis3Grid = shape({...dimensions,allowMissingLongitudeBounds:optional(boolean),longitudeRange:array(number),
   targetName:text,centerLongitude:number,referenceRadiusMeters:number,polarRadiusMeters:number,origin:array(number),resolutionMeters:number});
 export const parseScalarGridProfile = shape({...dimensions,member:text,pixelsPerDegree:number,noData:number,validRange:array(number)});
-export const parsePds4Policy = shape({kind:text,labelPath:text,lidvid:text,bands:array(number),wavelengthsNm:array(number),displayRange:array(number)});
+export const parsePds4Policy = shape({kind:text,labelPath:text,lidvid:text,bands:array(number),wavelengthsNm:array(number),displayRange:array(number),colorDisplay:optional(requireRecord)});
 export const parseFitsPolicy = shape({bitpix:number,longitudeDirection:text,rowOrder:text,centerLongitude:number,noData:number,displayRange:array(number)});
 export const parseEncounterPolicy = shape({...dimensions,instrument:text,startTime:text,filter:text,target:text,residualPolicy:optional(text),detectorBorderPixels:optional(number)});
 export const meshDimensions = {metersPerUnit:number,expectedVertices:number,expectedFaces:number};
@@ -122,7 +122,7 @@ export const qualityMaskFields = {format:text,path:text,sampling:text,grid:parse
 export const parseQualityMask = shape(qualityMaskFields);
 export const parseQualitySource = shape({format:optional(text),sampling:optional(text),qualityMasks:optional(array(parseQualityMask)),additionalGrids:optional(array(requireRecord))});
 export const parseColorSourceProfile = shape({sampleFormat:number,sampleBytes:number,noData:nullable(number),referenceRadiusMeters:number,centerLongitude:number,
-  standardParallel:number,specialValueMagnitude:optional(number),filters:array(text),gamma:number});
+  standardParallel:number,specialValueMagnitude:optional(number),filters:array(text),gamma:number,colorDisplay:optional(requireRecord)});
 export const parseColorEntry = shape({...dimensions,path:text,id:text,observation:text,wavelengthMicrometers:number,filter:text});
 export const parseDemScience = shape({quantity:text,units:optional(text),relief:optional(requireRecord),comparison:optional(shape({path:text,grid:requireRecord,heightOffsetMeters:number})),
   surfaceSampling:optional(shape({maximumDistanceMeters:number})),valueTransform:optional(parseTransform)});
@@ -173,7 +173,7 @@ export const cameraPhotometry: Decoder<ReturnType<typeof legacyCameraPhotometry>
 };
 export const parseCameraMosaic = shape({frames:array(parseCameraFrame),photometry:cameraPhotometry});
 export const parseCameraColor = shape({channels:array(shape({filter:text,channel:text,frames:array(parseCameraFrame)})),photometry:cameraPhotometry,
- frames:optional(array(parseCameraFrame)),metadata:shape({falseColor:boolean})});
+ frames:optional(array(parseCameraFrame)),metadata:shape({falseColor:boolean}),colorDisplay:optional(requireRecord)});
 
 export const levelMatchingFields = {maximumAngleDegrees:optional(number),minimumPairs:number,maximumLogMad:number,maximumGain:number,samplesPerTriangle:optional(number)};
 export const parseLevelMatching = shape(levelMatchingFields);

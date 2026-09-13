@@ -56,6 +56,13 @@ absolute diff with matched coordinates/framing. Otherwise show the source and
 result with the comparison's limits; do not fabricate a native oracle or claim
 pixel parity between unrelated views. Mark unbound comparisons `INVALID`.
 
+Choose the reference and the defect the comparison could reveal before running
+Pixelmatch. It is not mandatory for every visual change: different datasets
+(such as Monochrome and filter color) are not fidelity references for each other,
+and A/A repeats prove only capture stability. Follow the
+[comparison decision rule and threshold](../../../../docs/provenance/CONTRACT.md#say-what-the-checks-prove);
+use inspected images and source/registration checks when no matched reference exists.
+
 ## Measure mesh changes
 
 Measure an early usable mesh before expensive presentation expansion, and repeat

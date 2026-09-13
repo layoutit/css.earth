@@ -9,7 +9,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { createSurfaceInterpreter, parseInterpreterRecipe, type InterpreterRecipe } from './objects/observation/interpret.mts';
+import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from './objects/observation/interpret.mts';
 // One interpreter per object so the sidebar map previews a science surface through the decoder that packed it.
 const interpreters = new Map<string, ReturnType<typeof createSurfaceInterpreter>>();
 function interpretFor(objectDirectory: string, objectId: string, recipe: InterpreterRecipe, photographs = false) {
@@ -71,7 +71,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
       const recipe = requireRecord(rasterInput);
       const width = requireFiniteNumber(recipe.width), height = requireFiniteNumber(recipe.height);
       const parsed = parseInterpreterRecipe(recipe);
-      const subset = selected ? { ...parsed, surfaces: parsed.surfaces.filter(s => selected.has(s.id)) } : parsed;
+      const subset = selected ? selectSurfaceDependencies(parsed, [...selected]) : parsed;
       const { data, channels } = await (await interpretFor(objectDirectory, basename(objectDirectory), subset, Boolean(selected)))({ id: surface.id, source: surface.source, science: interpretation }, width, height, 1);
       pipeline = sharp(data, { raw: { width, height, channels } }).resize(minimapResize(nearest));
     } else pipeline = sharp(input).resize(minimapResize(nearest));
