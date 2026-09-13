@@ -172,5 +172,35 @@
       "Aggregate source suite reports an existing stale Moon factsheet preparation on both revisions",
       "Full browser conformance stops in shared recenter, mobile camera invariance and wheel-distance checks; focused dataset checks pass"
     ]
-  }
+  },
+  "images": [
+    {
+      "caption": "Methane-rich ice",
+      "url": "https://github.com/user-attachments/assets/54c807d2-b86f-431e-a91a-3ef70c9a5a02",
+      "sha256": "ad5d23e0d3c2010c01088c6049348096a79c4282730df832039c1065081dabe9",
+      "bytes": 872027,
+      "meaning": "Inspected application capture; camera poses differ across views. No matched-image comparison is claimed."
+    },
+    {
+      "caption": "Nitrogen-rich ice",
+      "url": "https://github.com/user-attachments/assets/5697e504-b262-4762-a99c-2a254cfd1ed7",
+      "sha256": "ee80b51a0eff08f75928f628cae295427cf1697666fe695ece357e990a33f701",
+      "bytes": 873272,
+      "meaning": "Inspected application capture; camera poses differ across views. No matched-image comparison is claimed."
+    },
+    {
+      "caption": "Water ice",
+      "url": "https://github.com/user-attachments/assets/06119886-5bfb-4277-9e00-a39a466acb52",
+      "sha256": "e29f4c98f9bf923a039a847354a4e9e36b12ab2705923343b135223c0276cdb4",
+      "bytes": 801976,
+      "meaning": "Inspected application capture; camera poses differ across views. No matched-image comparison is claimed."
+    },
+    {
+      "caption": "Mobile nitrogen ice",
+      "url": "https://github.com/user-attachments/assets/e5bd90e2-0134-4758-8886-e8aac40f2d33",
+      "sha256": "d3d77602ae1293f917be976384a99aa2fac36435a9de7b827c86421f6e44df6c",
+      "bytes": 175786,
+      "meaning": "Inspected application capture; camera poses differ across views. No matched-image comparison is claimed."
+    }
+  ]
 }
