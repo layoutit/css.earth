@@ -1,0 +1,413 @@
+{
+  "body": "charon",
+  "lens": "enhanced-color",
+  "baselineRef": "8cc1a2fae",
+  "baselineCommit": "8cc1a2faead111bd3535c0bed326180631b42f09",
+  "toolSha256": "89775171909802da8bad5ada20f2e21bc8880b632541920f3d31aea1ee1f7aea",
+  "colorTransferSha256": "4fdacc08867ab12c5b4f4b5819210f52f044155a5ebcbbf912f0ff0d9d201fe5",
+  "recipeSha256": "db771a239cafdf37098efda566af021ad20ab781baed4c726bc081196d79b87d",
+  "runtimeSha256": "db857e4d15a9f0681c6d095e998f5767cd38470a9defff7f844ee0d6bf04700c",
+  "geometrySha256": "2a6b062af21b10200ea15835c4e9fa341e6b79cd51c0826aca9e812a875c7b5e",
+  "geometryUnchanged": true,
+  "browser": "152.0.7977.84",
+  "channel": "chrome",
+  "purpose": "Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.",
+  "existingAssetChanges": [
+    {
+      "filename": "charon-enhanced-color.webp",
+      "beforeSha256": "cdefcdceb3a5f1d5d3e4609d6269d3c6fe2446e82667d15553e7d09652e260c3",
+      "afterSha256": "3d8bae625694b85de3207e0ad74cf49ff296d7b3c590ba19198fe42c1a4617f4",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "charon-enhanced-color@2x.webp",
+      "beforeSha256": "82003b2cbc0c2214724151d94f21d918111b62f9e7272bffe49d6c13a4136a1d",
+      "afterSha256": "df7ddc1ede1e7e69ac35d24acfe1e37601096d71a4f9c069459780c8557de620",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "charon-lens-enhanced-color.webp",
+      "beforeSha256": "9ca1d349e646addbd201bb469bb275b45f97da108f750656615a5a7d3c5a9dda",
+      "afterSha256": "e3b8942645f8510b65b42822732b735f2318c8223d21ede0fde8a3b563cd08f0",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "charon-poles-enhanced-color.webp",
+      "beforeSha256": "bedc02a581389059c633f7151e43c338fce343bfa741938346d36d85b7d04272",
+      "afterSha256": "ec91937f2398ce61111f265e5a653b3607874d2321486ef9411b52bc4114e914",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "charon-poles-enhanced-color@2x.webp",
+      "beforeSha256": "b793b330d6dfd9c5301c5c6524b0f1ac4e9901ac041ac1d198723aa74ace4b4f",
+      "afterSha256": "ca059654e408d48831ed254cff5224c6a99bf49971f843522936148777e67d4f",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    }
+  ],
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 2,
+    "rowText": "False color\nNew Horizons",
+    "bounds": {
+      "x": 20,
+      "y": 673.296875,
+      "width": 350,
+      "height": 20
+    },
+    "pageWidth": 390,
+    "pose": {
+      "schema": "cssearth-camera-pose@1",
+      "scene": "matrix3d(-0.989734827134,-0.105993302857,0.095866530694,0,0,0.670789531886,0.741647762696,0,-0.142915961172,0.734034620206,-0.663903761385,0,0,0,0,1)",
+      "skybox": "matrix3d(-0.673013709684,0.54854480629,-0.496135945307,0,0.678597143356,0.724775952916,-0.119187337474,0,0.294207836674,-0.41689118451,-0.860025189285,0,0,0,0,1)",
+      "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+    },
+    "stableDom": true,
+    "sha256": "79381033e367877ce9e555938176f6a8115dec3e65116b9b69e5c066cb4aa7de",
+    "errors": []
+  },
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr1.png",
+          "sha256": "0255fa65d52b13a1a56dc8d6dd4f7716a0611af5a0eae62a217685041a345e4f",
+          "url": "http://127.0.0.1:4284/charon/?v=MEZAsc5qJUtMSkFCxzNAAAAAv53Dj0q7sME_2eYqV4z3j7-ww1mcl-3bAAEAAAAAAAAAAA#dataset=enhanced-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.989734827134,-0.105993302857,0.095866530694,0,0,0.670789531886,0.741647762696,0,-0.142915961172,0.734034620206,-0.663903761385,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.673013709684,0.54854480629,-0.496135945307,0,0.678597143356,0.724775952916,-0.119187337474,0,0.294207836674,-0.41689118451,-0.860025189285,0,0,0,0,1)",
+            "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "stars": true
+          },
+          "lens": {
+            "id": "enhanced-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 2,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 739,
+            "retainedLeaves": 707,
+            "directlyHiddenLeaves": 256
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.867882001239,-0.060298493146,0.493097276052,0,0.272066016507,0.772814288077,0.573356920955,0,-0.415645178713,0.631761163628,-0.65430644009,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.830607645146,0.489447080492,-0.265579045444,0,0.553999716629,0.678051917893,-0.483042230996,0,-0.056347239403,-0.548349338039,-0.834348745532,0,0,0,0,1)",
+          "sunView": "matrix3d(0.918375372691,-0.030609235241,0.394524713487,0,-0.030609235241,0.988521536785,0.147946767558,0,-0.394524713487,-0.147946767558,0.906896909476,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "charon-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "charon-lighting-2x-row-31.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-31.webp",
+          "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637",
+          "bytes": 526556
+        },
+        {
+          "filename": "charon-lighting-2x-billboard.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-billboard.webp",
+          "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367",
+          "bytes": 115740
+        },
+        {
+          "filename": "charon-lighting-2x-row-27.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-27.webp",
+          "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8",
+          "bytes": 403282
+        },
+        {
+          "filename": "charon-poles-normal@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-poles-normal@2x.webp",
+          "sha256": "92933b9ff45c544a8242faa4a984cfb7fa9549a88a278ec041d6a29f7a59c810",
+          "bytes": 117244
+        },
+        {
+          "filename": "charon-lighting-2x-row-28.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-28.webp",
+          "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e",
+          "bytes": 429004
+        },
+        {
+          "filename": "charon-lighting-2x-row-29.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-29.webp",
+          "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf",
+          "bytes": 456570
+        },
+        {
+          "filename": "charon-lens-normal.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lens-normal.webp",
+          "sha256": "4d879b196a8a41ec92fb6607d02e8a9e70a8b788ce349566ef869fea164526d8",
+          "bytes": 918
+        },
+        {
+          "filename": "charon-lens-enhanced-color.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lens-enhanced-color.webp",
+          "sha256": "e3b8942645f8510b65b42822732b735f2318c8223d21ede0fde8a3b563cd08f0",
+          "bytes": 380
+        },
+        {
+          "filename": "charon-lens-elevation.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lens-elevation.webp",
+          "sha256": "c3464c3a2b828b0d9b29a1813fe263b99075860a656e22d6d6d8c09bbbf70fa9",
+          "bytes": 168
+        },
+        {
+          "filename": "charon-lens-albedo.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lens-albedo.webp",
+          "sha256": "ec6d5dbec3849608cee76f972d0bd894037504eeed1abb2cf7da99a1c6631c32",
+          "bytes": 1154
+        },
+        {
+          "filename": "charon-normal@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-normal@2x.webp",
+          "sha256": "63257c2d55bbd2aaec3720e7d3ce56cf1a2d84fa51625d4d9c51d3f65bf4a136",
+          "bytes": 5759254
+        },
+        {
+          "filename": "charon-features.json",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-features.json",
+          "sha256": "9a9472803a3edc7f1d0251388c8c453b0dd91793d3db64af4a8cf8c69a7db08a",
+          "bytes": 77138
+        },
+        {
+          "filename": "charon-poles-enhanced-color@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-poles-enhanced-color@2x.webp",
+          "sha256": "ca059654e408d48831ed254cff5224c6a99bf49971f843522936148777e67d4f",
+          "bytes": 120610
+        },
+        {
+          "filename": "charon-enhanced-color@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-enhanced-color@2x.webp",
+          "sha256": "df7ddc1ede1e7e69ac35d24acfe1e37601096d71a4f9c069459780c8557de620",
+          "bytes": 1589082
+        },
+        {
+          "filename": "charon-lighting-2x-row-08.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-08.webp",
+          "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600",
+          "bytes": 163984
+        },
+        {
+          "filename": "charon-lighting-2x-row-07.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-07.webp",
+          "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632",
+          "bytes": 153142
+        },
+        {
+          "filename": "charon-lighting-2x-row-06.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-06.webp",
+          "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c",
+          "bytes": 143228
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr2.png",
+          "sha256": "987606461cdcf67b6864377f4801849cd1b8be4633c7ce661737e3f5747aca1e",
+          "url": "http://127.0.0.1:4284/charon/?v=MEZAsc5qJUtMSkFCxzNAAAAAv53Dj0q7sME_2eYqV4z3j7-ww1mcl-3bAAEAAAAAAAAAAA#dataset=enhanced-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.989734827134,-0.105993302857,0.095866530694,0,0,0.670789531886,0.741647762696,0,-0.142915961172,0.734034620206,-0.663903761385,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.673013709684,0.54854480629,-0.496135945307,0,0.678597143356,0.724775952916,-0.119187337474,0,0.294207836674,-0.41689118451,-0.860025189285,0,0,0,0,1)",
+            "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "stars": true
+          },
+          "lens": {
+            "id": "enhanced-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 2,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 739,
+            "retainedLeaves": 707,
+            "directlyHiddenLeaves": 256
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.867882001239,-0.060298493146,0.493097276052,0,0.272066016507,0.772814288077,0.573356920955,0,-0.415645178713,0.631761163628,-0.65430644009,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.830607645146,0.489447080492,-0.265579045444,0,0.553999716629,0.678051917893,-0.483042230996,0,-0.056347239403,-0.548349338039,-0.834348745532,0,0,0,0,1)",
+          "sunView": "matrix3d(0.918375372691,-0.030609235241,0.394524713487,0,-0.030609235241,0.988521536785,0.147946767558,0,-0.394524713487,-0.147946767558,0.906896909476,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "charon-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "charon-lighting-2x-row-31.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-31.webp",
+          "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637",
+          "bytes": 526556
+        },
+        {
+          "filename": "charon-lighting-2x-billboard.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-billboard.webp",
+          "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367",
+          "bytes": 115740
+        },
+        {
+          "filename": "charon-poles-normal@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-poles-normal@2x.webp",
+          "sha256": "92933b9ff45c544a8242faa4a984cfb7fa9549a88a278ec041d6a29f7a59c810",
+          "bytes": 117244
+        },
+        {
+          "filename": "charon-lighting-2x-row-27.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-27.webp",
+          "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8",
+          "bytes": 403282
+        },
+        {
+          "filename": "charon-lighting-2x-row-28.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-28.webp",
+          "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e",
+          "bytes": 429004
+        },
+        {
+          "filename": "charon-lighting-2x-row-29.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-29.webp",
+          "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf",
+          "bytes": 456570
+        },
+        {
+          "filename": "charon-lens-normal.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lens-normal.webp",
+          "sha256": "4d879b196a8a41ec92fb6607d02e8a9e70a8b788ce349566ef869fea164526d8",
+          "bytes": 918
+        },
+        {
+          "filename": "charon-lens-enhanced-color.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lens-enhanced-color.webp",
+          "sha256": "e3b8942645f8510b65b42822732b735f2318c8223d21ede0fde8a3b563cd08f0",
+          "bytes": 380
+        },
+        {
+          "filename": "charon-lens-elevation.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lens-elevation.webp",
+          "sha256": "c3464c3a2b828b0d9b29a1813fe263b99075860a656e22d6d6d8c09bbbf70fa9",
+          "bytes": 168
+        },
+        {
+          "filename": "charon-lens-albedo.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lens-albedo.webp",
+          "sha256": "ec6d5dbec3849608cee76f972d0bd894037504eeed1abb2cf7da99a1c6631c32",
+          "bytes": 1154
+        },
+        {
+          "filename": "charon-normal@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-normal@2x.webp",
+          "sha256": "63257c2d55bbd2aaec3720e7d3ce56cf1a2d84fa51625d4d9c51d3f65bf4a136",
+          "bytes": 5759254
+        },
+        {
+          "filename": "charon-features.json",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-features.json",
+          "sha256": "9a9472803a3edc7f1d0251388c8c453b0dd91793d3db64af4a8cf8c69a7db08a",
+          "bytes": 77138
+        },
+        {
+          "filename": "charon-enhanced-color@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-enhanced-color@2x.webp",
+          "sha256": "df7ddc1ede1e7e69ac35d24acfe1e37601096d71a4f9c069459780c8557de620",
+          "bytes": 1589082
+        },
+        {
+          "filename": "charon-poles-enhanced-color@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-poles-enhanced-color@2x.webp",
+          "sha256": "ca059654e408d48831ed254cff5224c6a99bf49971f843522936148777e67d4f",
+          "bytes": 120610
+        },
+        {
+          "filename": "charon-lighting-2x-row-07.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-07.webp",
+          "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632",
+          "bytes": 153142
+        },
+        {
+          "filename": "charon-lighting-2x-row-06.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-06.webp",
+          "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c",
+          "bytes": 143228
+        },
+        {
+          "filename": "charon-lighting-2x-row-08.webp",
+          "url": "http://127.0.0.1:4284/scenes/charon/charon-lighting-2x-row-08.webp",
+          "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600",
+          "bytes": 163984
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

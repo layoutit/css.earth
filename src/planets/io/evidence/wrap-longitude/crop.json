@@ -1,0 +1,30 @@
+{
+  "image": "io-normal@2x.webp",
+  "decoder": "sharp 0.35.3",
+  "crop": {
+    "left": 4063,
+    "top": 1248,
+    "width": 192,
+    "height": 192
+  },
+  "band": 3,
+  "meridianColumn": 4159,
+  "meridianColumnInCrop": 96,
+  "before": {
+    "revision": "main f23cccce0 published file; bytes match the inventory pin on main",
+    "bytes": 1777218,
+    "sha256": "8ad1fcb7cd1be3683f5ac873072719684ef3b60d11731af3c01084da5b82f01f"
+  },
+  "current": {
+    "revision": "fix/raster-wrap-columns: the commit that adds this record",
+    "bytes": 1776680,
+    "sha256": "29f79bd355cce033a23a9e5a447a0d3fa74eb1987459d710121768eee66344b1"
+  },
+  "note": "Decoded image crops, not browser captures; decoding is deterministic, so no repeat capture applies.",
+  "differences": {
+    "meridianColumn": 96,
+    "meridianLargestDifference": 36,
+    "otherColumnsLargestDifference": 7,
+    "otherColumnsDifferingBy8OrMore": 0
+  }
+}

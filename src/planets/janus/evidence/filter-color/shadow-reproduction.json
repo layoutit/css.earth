@@ -1,0 +1,36 @@
+{
+  "baseline": "52d5d4815",
+  "method": "Current unchanged main preparer, main terrestrial recipes, byte-pinned original native inputs. Extra filter inputs and content present in the branch do not participate in the two original surfaces.",
+  "reports": [
+    {
+      "body": "janus",
+      "file": "janus-normal-shadow@2x.webp",
+      "mainRecipeSha256": "e7a31d49a472ee2f1863e2cd91f17e0014a2eae07cddaab272a67128551a5425",
+      "mainRegeneratedSha256": "04610988fc3d2a313668022c7bc7c7729c3964be15d511650e337ed536397b5d",
+      "colorBranchSha256": "04610988fc3d2a313668022c7bc7c7729c3964be15d511650e337ed536397b5d",
+      "exactMatch": true,
+      "previous": {
+        "filename": "janus-normal-shadow@2x.webp",
+        "bytes": 261074,
+        "sha256": "0330c65a5eb6c3edb92d5afaef9cabef788707a22980dca3c47cae37c6f12ed8"
+      },
+      "previousUrl": "https://earth-assets.lowpoly.cc/runtime-assets/0330c65a5eb6c3edb92d5afaef9cabef788707a22980dca3c47cae37c6f12ed8/janus-normal-shadow@2x.webp",
+      "regeneratedUrl": "https://earth-assets.lowpoly.cc/runtime-assets/04610988fc3d2a313668022c7bc7c7729c3964be15d511650e337ed536397b5d/janus-normal-shadow@2x.webp"
+    },
+    {
+      "body": "janus",
+      "file": "janus-elevation-shadow@2x.webp",
+      "mainRecipeSha256": "e7a31d49a472ee2f1863e2cd91f17e0014a2eae07cddaab272a67128551a5425",
+      "mainRegeneratedSha256": "85e1579ffd4b15c65ae974a8ffdf6932c2bfceff3ea269d17c5270e52e4bd5ca",
+      "colorBranchSha256": "85e1579ffd4b15c65ae974a8ffdf6932c2bfceff3ea269d17c5270e52e4bd5ca",
+      "exactMatch": true,
+      "previous": {
+        "filename": "janus-elevation-shadow@2x.webp",
+        "bytes": 328304,
+        "sha256": "544539198c7b3d427f9d6e2d10c9f8cb80c467f6ff1b5534052cd731136cfa93"
+      },
+      "previousUrl": "https://earth-assets.lowpoly.cc/runtime-assets/544539198c7b3d427f9d6e2d10c9f8cb80c467f6ff1b5534052cd731136cfa93/janus-elevation-shadow@2x.webp",
+      "regeneratedUrl": "https://earth-assets.lowpoly.cc/runtime-assets/85e1579ffd4b15c65ae974a8ffdf6932c2bfceff3ea269d17c5270e52e4bd5ca/janus-elevation-shadow@2x.webp"
+    }
+  ]
+}

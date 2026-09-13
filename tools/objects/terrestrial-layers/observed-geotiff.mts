@@ -1,6 +1,6 @@
 import { isArray } from '../../../src/platform/is-array.mts';
 import type {PixelValidityPolicy,RasterResult} from './contracts.mts';
-import {parseGeoImageEntry,parseDimensions,parseRgbBandPolicy,parseFloatObservationPolicy,parseMaskedObservationPolicy,parseIsisObservationPolicy,numericRasterBands,number} from './source-records.mts';
+import {parseGeoImageEntry,parseDimensions,parseRgbBandPolicy,parseFloatObservationPolicy,parseMaskedObservationPolicy,parseIsisObservationPolicy,numericRasterBands,number,requireWrappedLongitudeSpan} from './source-records.mts';
 import sharp from 'sharp';
 import {fromFile} from 'geotiff';
 import {sampleColorBand, loadScienceSurface} from './scientific-raster.mts';
@@ -95,7 +95,8 @@ export function observationPixelMissing(rgb: readonly number[],longitude: number
 /** Map canonical output centres through the actual projected source grid.
  * Bilinear interpolation requires every nonzero-weight native contributor;
  * nearest sampling retains the containing source pixel-area value and mask.
- * Neither policy stretches the source extent or fills missing observations. */
+ * Neither policy stretches the source extent or fills missing observations. A source declared
+ * to wrap longitude interpolates across its edge meridian instead of leaving that column missing. */
 export function resampleGeoreferencedObservation(source: RasterResult, sourceEntry: unknown, value: unknown, {origin, resolution}: {origin:number[];resolution:number[]}, width: number, height: number) {
   const entry=parseGeoImageEntry(sourceEntry),policy=parseMaskedObservationPolicy(value);
   const {data, info} = source, channels = info.channels;
@@ -109,6 +110,9 @@ export function resampleGeoreferencedObservation(source: RasterResult, sourceEnt
     throw new TypeError('Georeferenced observation requires finite source pixel-area geometry.');
   }
   const radiansToMeters = radius * Math.PI / 180;
+  const wrap = policy.wrapLongitude === true;
+  if (wrap) requireWrappedLongitudeSpan(info.width, resolution[0], radiansToMeters);
+  const column = (x: number) => wrap ? (x % info.width + info.width) % info.width : x;
   const valid = new Uint8Array(info.width * info.height), pixel = [0,0,0];
   let withheldSyntheticPixels = 0;
   for (let y = 0; y < info.height; y++) for (let x = 0; x < info.width; x++) {
@@ -140,8 +144,8 @@ export function resampleGeoreferencedObservation(source: RasterResult, sourceEnt
       const sx = sourceX[x];
       if (nearest) {
         const areaX = stable(sx + .5);
-        if (areaX < 0 || areaX >= info.width) continue;
-        const cell = Math.floor(areaY) * info.width + Math.floor(areaX);
+        if (!wrap && (areaX < 0 || areaX >= info.width)) continue;
+        const cell = Math.floor(areaY) * info.width + column(Math.floor(areaX));
         if (!valid[cell]) continue;
         const index = y * width + x, offset = cell * channels;
         rgb[index * 3] = data[offset];
@@ -150,13 +154,13 @@ export function resampleGeoreferencedObservation(source: RasterResult, sourceEnt
         missing[index] = 0;
         continue;
       }
-      if (sx < 0 || sx > info.width - 1) continue;
+      if (!wrap && (sx < 0 || sx > info.width - 1)) continue;
       const x0 = Math.floor(sx), fx = sx - x0, index = y * width + x;
       let red = 0, green = 0, blue = 0, supported = true;
       for (let dy = 0; dy < 2 && supported; dy++) for (let dx = 0; dx < 2; dx++) {
         const weight = (dx ? fx : 1 - fx) * (dy ? fy : 1 - fy);
         if (weight === 0) continue;
-        const cell = (y0 + dy) * info.width + x0 + dx;
+        const cell = (y0 + dy) * info.width + column(x0 + dx);
         if (!valid[cell]) { supported = false; break; }
         const offset = cell * channels;
         red += data[offset] * weight;

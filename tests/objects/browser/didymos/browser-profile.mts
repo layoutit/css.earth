@@ -20,6 +20,7 @@ export const browserProfile=createObjectBrowserProfile({id:'didymos',controls,au
   "retained": {
     "lensIds": [
       "shape",
+      "draco",
       "elevation",
       "albedo"
     ],

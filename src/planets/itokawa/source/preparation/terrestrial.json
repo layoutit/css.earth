@@ -91,10 +91,17 @@
         ],
         "metadata": {
           "label": "AMICA mosaic",
-          "coverage": "Three Hayabusa AMICA v-band images from 24–29 September 2005 are registered with the archived Gaskell Cartesian backplanes. Grayscale shows flat-fielded detector brightness with approximate illumination correction and bounded overlap matching, not absolute albedo or natural color. The source images use lossy 8-bit compression; photographed shadows and some seams remain. The ordinary grid marks missing, grazing or geometrically rejected coverage.",
+          "coverage": "Eight Hayabusa AMICA v-band photographs from September and October 2005, including closer views from north and south of the equator. Registered through the archived Gaskell Cartesian backplanes. Brightness is approximately normalized and matched across overlaps; photographed shadows remain. The grid marks unsupported surface coverage.",
           "falseColor": false
         },
         "frames": [
+          {
+            "id": "amica-2481672682",
+            "path": "observations/st_2481672682_v_ddr.img.gz",
+            "labelPath": "observations/st_2481672682_v_ddr.lbl",
+            "originalPath": "observations/st_2481672682_v.fit",
+            "startTime": "2005-10-22T13:00:19"
+          },
           {
             "id": "sep24",
             "path": "observations/st_2402987304_v_ddr.img.gz",
@@ -115,6 +122,34 @@
             "labelPath": "observations/st_2417589964_v_ddr.lbl",
             "originalPath": "observations/st_2417589964_v.fit",
             "startTime": "2005-09-29T08:45:09"
+          },
+          {
+            "id": "amica-2480981469",
+            "path": "observations/st_2480981469_v_ddr.img.gz",
+            "labelPath": "observations/st_2480981469_v_ddr.lbl",
+            "originalPath": "observations/st_2480981469_v.fit",
+            "startTime": "2005-10-22T07:00:19"
+          },
+          {
+            "id": "amica-2492513077",
+            "path": "observations/st_2492513077_v_ddr.img.gz",
+            "labelPath": "observations/st_2492513077_v_ddr.lbl",
+            "originalPath": "observations/st_2492513077_v.fit",
+            "startTime": "2005-10-26T11:01:16"
+          },
+          {
+            "id": "amica-2495230070",
+            "path": "observations/st_2495230070_v_ddr.img.gz",
+            "labelPath": "observations/st_2495230070_v_ddr.lbl",
+            "originalPath": "observations/st_2495230070_v.fit",
+            "startTime": "2005-10-27T10:36:18"
+          },
+          {
+            "id": "amica-2473604354",
+            "path": "observations/st_2473604354_v_ddr.img.gz",
+            "labelPath": "observations/st_2473604354_v_ddr.lbl",
+            "originalPath": "observations/st_2473604354_v.fit",
+            "startTime": "2005-10-19T14:53:17"
           }
         ],
         "selection": "lowest-emission",

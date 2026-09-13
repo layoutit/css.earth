@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a22357ab62ae10bb726d09025376af603c4d9d2ee582043f604d5350c5a0d6db"
+    "sha256": "74ac614da0454b96e5cf027064a9789d764d31b22bb85ae221914638cdbde95a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9d5a1b93583f30ac2384bde0c234e7beebf2a55a95a3fd2b8238e467801bc4e4",
+      "sha256": "314eabd1f022d1740f6174fcc3f367a97386826ecec60eeb98f6e4327bf7267d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -78,7 +78,90 @@
             }
           ],
           "observedColors": [],
-          "mosaics": []
+          "mosaics": [],
+          "surfaceObservations": [
+            {
+              "id": "lorri",
+              "format": "nh-lorri-camera",
+              "consumer": "lorri-observation",
+              "path": "observations/lor_0408626332_0x636_sci.fit",
+              "cameraPath": "observations/ca06-camera.json",
+              "startTime": "2019-01-01T05:26:54.116",
+              "filter": "PANCHROMATIC",
+              "allowLossy": false,
+              "transfer": {
+                "maximumSourceDistanceMeters": 250,
+                "maximumSeparationMeters": 180,
+                "maximumEmissionDegrees": 70,
+                "visibilityToleranceMeters": 0.5
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1
+              },
+              "displayPercentiles": [
+                1,
+                99.8
+              ],
+              "metadata": {
+                "label": "LORRI",
+                "falseColor": false,
+                "coverage": "New Horizons photograph from 1 January 2019 at 33 metres per native pixel. Original illumination retained. The grid marks unseen, grazing or rejected coverage."
+              }
+            },
+            {
+              "id": "mvic",
+              "format": "nh-mvic-camera",
+              "consumer": "mvic-observation",
+              "path": "observations/ca05_mvic_cube.fit",
+              "cameraPath": "observations/mvic-camera.json",
+              "startTime": "2019-01-01T05:12:55.280",
+              "filter": "NIR/RED/BLUE",
+              "allowLossy": false,
+              "transfer": {
+                "maximumSourceDistanceMeters": 250,
+                "maximumSeparationMeters": 600,
+                "maximumEmissionDegrees": 65,
+                "visibilityToleranceMeters": 0.5
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 65,
+                "maximumEmissionDegrees": 65,
+                "maximumGain": 1
+              },
+              "displayPercentiles": [
+                1,
+                99.8
+              ],
+              "metadata": {
+                "label": "MVIC",
+                "falseColor": true,
+                "coverage": "New Horizons near-infrared, red and blue bands, registered and blur-matched by the mission team. Enhanced color at 340 m native resolution. Unseen and grazing surfaces remain gridded."
+              },
+              "colorDisplay": {
+                "kind": "band-composite",
+                "inputQuantity": "derived-band-value",
+                "bands": [
+                  "NIR",
+                  "RED",
+                  "BLUE"
+                ],
+                "displayRange": [
+                  0,
+                  0.17
+                ],
+                "outputEncoding": "srgb"
+              },
+              "labelPath": "observations/ca05_mvic_cube.lblx"
+            }
+          ]
         },
         "lighting": {
           "frameSize": 512,
@@ -95,12 +178,12 @@
           "radius": 230,
           "radiusKm": 9.948,
           "camera": {
-            "initialScenePitchDegrees": -20,
-            "defaultControlYawDegrees": 135,
+            "initialScenePitchDegrees": 27.475878662587284,
+            "defaultControlYawDegrees": 122.28168102581337,
             "framingScale": 0.5105107661972121
           },
-          "mapUrl": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
-          "polesUrl": "/scenes/arrokoth/arrokoth-model-poles@2x.webp",
+          "mapUrl": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
+          "polesUrl": "/scenes/arrokoth/arrokoth-lorri-poles@2x.webp",
           "radialTerrain": {
             "path": "shape/arrokoth_porter_2024_v01.obj",
             "format": "wavefront-obj",
@@ -124,7 +207,7 @@
           "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim."
         },
         "presentation": {
-          "defaultLens": "albedo",
+          "defaultLens": "lorri",
           "pointColor": [
             160,
             160,
@@ -137,29 +220,24 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ab8dcf2f950402c597b09a937a84ace1057dce7ced99726e1035f473eac81fca",
+      "sha256": "90263d6e9e853754148bf4691a53ff9ca94e77729e84fe7376f5ac40bce98571",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "arrokoth",
         "displayName": "Arrokoth",
         "panel": {
-          "introduction": "New Horizons photographed Arrokoth during its 2019 flyby. The opening view shows the spacecraft-derived albedo model on the imaged hemisphere. The unseen northern surface is modeled.",
+          "introduction": "New Horizons photographed Arrokoth on 1 January 2019. Its two lobes, Wenu and Weeyo, meet at a bright neck. The photograph covers the encounter-facing surface; the grid marks areas it does not show.",
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "New Horizons model"
-            },
-            {
               "id": "dimensions",
-              "label": "Model extents",
-              "value": "34.5456 × 19.8382 × 13.8223 km"
+              "label": "Size",
+              "value": "34.5 × 19.8 × 13.8 km"
             },
             {
               "id": "rotation",
               "label": "Rotation",
-              "value": "About 15.9 hours; display phase is illustrative"
+              "value": "About 15.9 hours"
             },
             {
               "id": "class",
@@ -182,12 +260,47 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "albedo",
+          "defaultLens": "lorri",
           "labels": {
             "model": "Shape model",
-            "albedo": "Modeled albedo"
+            "albedo": "Modeled albedo",
+            "lorri": "LORRI",
+            "mvic": "False color"
           },
           "controls": [
+            {
+              "id": "lorri",
+              "label": "LORRI",
+              "title": "New Horizons close approach",
+              "detail": "Photograph · 33 m/pixel",
+              "description": "Taken 6,628 km from Arrokoth. Bright patches and the neck are visible in the original grayscale exposure. The photographed lighting is retained; unseen and grazing surfaces remain gridded.",
+              "thumbnail": "/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
+              "surface": "arrokoth-lorri-surface@2x.webp",
+              "poles": "arrokoth-lorri-poles@2x.webp",
+              "falseColor": false,
+              "source": {
+                "id": "lorri-ca06",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.lbl"
+              }
+            },
+            {
+              "id": "mvic",
+              "label": "False color",
+              "title": "New Horizons false color",
+              "detail": "New Horizons",
+              "falseColor": true,
+              "description": "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is false color, not a human-visible reconstruction, at 340 metres per native pixel; the grid marks unsupported coverage.",
+              "thumbnail": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
+              "surface": "arrokoth-mvic-surface@2x.webp",
+              "poles": "arrokoth-mvic-poles@2x.webp",
+              "source": {
+                "id": "mvic-ca05",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.26007/fv5e-eh92"
+              },
+              "summary": "Near-infrared, red and blue bands show spectral differences at 340 metres per native pixel. This is false color; the grid marks unsupported coverage."
+            },
             {
               "id": "albedo",
               "label": "Modeled albedo",
@@ -223,7 +336,7 @@
               "label": "Shape model",
               "description": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain.",
               "title": "Published New Horizons shape",
-              "detail": "Source shape · unmapped surface grid",
+              "detail": "Unmapped grid",
               "thumbnail": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
               "surface": "arrokoth-model-surface@2x.webp",
               "poles": "arrokoth-model-poles@2x.webp",
@@ -452,6 +565,148 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "lorri-ca06",
+      "path": "observations/lor_0408626332_0x636_sci.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.fit",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "acquisition": "Restored from the pinned native archive URL in preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-kem1-lorri-v6",
+            "role": "material",
+            "evidence": "Native PDS label identifies the image and calibrated archive release."
+          }
+        ]
+      },
+      "redistribution": "Retain the original source attribution and notices with published derivatives.",
+      "sha256": "1fbb5124f417ea465db18cfdf5b7b8caee38cc30d8f1663b9939a648e27f0640",
+      "bytes": 10532160,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/lor_0408626332_0x636_sci.fit",
+        "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ca06-registered-camera",
+      "path": "observations/ca06-camera.json",
+      "origin": "Derived from the pinned New Horizons WCS and source mesh registration.",
+      "credit": "cssEarth; NASA / JHUAPL / SwRI; Porter (2024)",
+      "license": "MIT for authored registration; original source notices retained.",
+      "acquisition": "node tools/objects/arrokoth/prepare-photographic-cameras.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Camera calculated from the original TAN-SIP WCS, inertial vectors and fitted mesh attitude; inputs are bound by hashes."
+      },
+      "redistribution": "Retain the original source attribution and notices with published derivatives.",
+      "sha256": "5992738be4a7607b8ed2ccfe60643c7aab465f046cd674972c27efa2b426a263",
+      "bytes": 3104,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mvic-ca05",
+      "path": "observations/ca05_mvic_cube.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.fit",
+      "credit": "Grundy et al.; NASA / JHUAPL / SwRI; New Horizons science team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain source attribution and enhanced-color qualifications.",
+      "acquisition": "Restored by preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-arrokoth-mvic-ca05",
+            "role": "material",
+            "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
+          }
+        ]
+      },
+      "sha256": "37d71a90bd10c2a7812af0b350db1e6cb770c1c3f0e0a26e35a67547efef640e",
+      "bytes": 2882880,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/ca05_mvic_cube.fit",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mvic-camera",
+      "path": "observations/mvic-camera.json",
+      "origin": "Source-bound image registration",
+      "credit": "cssEarth; New Horizons science team",
+      "license": "MIT; retain upstream source attribution.",
+      "redistribution": "Retain source attribution and enhanced-color qualifications.",
+      "acquisition": "node tools/objects/arrokoth/prepare-photographic-cameras.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Camera transferred from the qualified CA05 LORRI image through the fitted MVIC similarity; native inputs and source mesh are hash bound."
+      },
+      "sha256": "8b4f7ef786172c6d928ab7bf3145e1876c6264d916609f4ed3f40235fdccede1",
+      "bytes": 5767,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mvic-label",
+      "path": "observations/ca05_mvic_cube.lblx",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx",
+      "credit": "Grundy et al.; NASA / JHUAPL / SwRI; New Horizons science team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain source attribution and enhanced-color qualifications.",
+      "acquisition": "Restored by preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-arrokoth-mvic-ca05",
+            "role": "reference",
+            "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
+          }
+        ]
+      },
+      "sha256": "46565f1d4ecee1a836351365700d8acc01e150ebcece4ec69b39536fd1af36e5",
+      "bytes": 18710,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/ca05_mvic_cube.lblx",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx"
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -464,8 +719,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ab8dcf2f950402c597b09a937a84ace1057dce7ced99726e1035f473eac81fca",
-      "bytes": 5463,
+      "sha256": "90263d6e9e853754148bf4691a53ff9ca94e77729e84fe7376f5ac40bce98571",
+      "bytes": 7113,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -563,6 +818,87 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "lorri",
+      "label": "LORRI",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Taken 6,628 km from Arrokoth. Bright patches and the neck are visible in the original grayscale exposure. The photographed lighting is retained; unseen and grazing surfaces remain gridded."
+      ],
+      "lensIds": [
+        "lorri"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "lorri-ca06",
+        "ca06-registered-camera",
+        "published-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
+          "bytes": 1372,
+          "sha256": "a384095b589f6084b5ab530d2c963f418f3500c4041e3794406eff5a724c2076",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
+          "bytes": 903156,
+          "sha256": "4022dde474771158d08d13d78c503b573dade60d66216549fe0e4571b37d0c34",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "mvic",
+      "label": "False color",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/1",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is false color, not a human-visible reconstruction, at 340 metres per native pixel; the grid marks unsupported coverage."
+      ],
+      "lensIds": [
+        "mvic"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "mvic-ca05",
+        "mvic-camera",
+        "mvic-label",
+        "published-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
+          "bytes": 2036,
+          "sha256": "cc041d2351ead311fb0283ee6863ca393bc6f58fdce47b1e73fa6ec30ee0dff2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/arrokoth/arrokoth-mvic-surface@2x.webp",
+          "bytes": 254052,
+          "sha256": "d7c807ca1763f467c01e0bde7e3e8e9b601af45b661898cae0ed03a688c8be8b",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -580,8 +916,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5569,
-          "sha256": "4cb1e377f07bd87a0137195132cf4aaa445c927e649060cd9ed33948f022e00a",
+          "bytes": 5467,
+          "sha256": "f49d87ad13a8df6a476a30f44efbb82876e26f649372244b5aa6bd760bd878b1",
           "verification": "bytes-verified"
         }
       ],
@@ -607,6 +943,54 @@
           "url": "object:prepared/minimaps/model.webp",
           "bytes": 2958,
           "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:lorri",
+      "label": "LORRI preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "lorri"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/lorri.webp",
+          "bytes": 24562,
+          "sha256": "807cd3931f067b74a975309e69559d2c2b526ab21768ed92b92a9b1b391237b7",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:mvic",
+      "label": "False color preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "mvic"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/mvic.webp",
+          "bytes": 5928,
+          "sha256": "7bc2dbea824ad18ca778120b0ee7cd8d010a7ee490eb8dfd4e99a7bd4fdafd15",
           "verification": "bytes-verified"
         }
       ]

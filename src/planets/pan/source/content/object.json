@@ -4,7 +4,7 @@
   "id": "pan",
   "displayName": "Pan",
   "panel": {
-    "introduction": "Pan orbits inside the Encke Gap of Saturn’s A ring. Its gravity helps keep the gap open. Cassini revealed a small icy body surrounded by a broad equatorial ridge.",
+    "introduction": "Pan orbits inside the Encke Gap of Saturn\u2019s A ring. Its gravity helps keep the gap open. Cassini revealed a small icy body surrounded by a broad equatorial ridge.",
     "facts": [
       {
         "id": "radius",
@@ -45,7 +45,7 @@
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "Mark Showalter · 1990"
+        "value": "Mark Showalter \u00b7 1990"
       }
     ],
     "moreFacts": []
@@ -55,7 +55,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "filter-color": "False color"
     },
     "controls": [
       {
@@ -63,7 +64,7 @@
         "label": "Monochrome",
         "description": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
         "title": "ISS mosaic",
-        "detail": "Cassini · corrected mosaic",
+        "detail": "Cassini \u00b7 corrected mosaic",
         "thumbnail": "/scenes/pan/pan-normal-thumbnail.webp",
         "surface": "pan-normal-surface@2x.webp",
         "poles": "pan-normal-poles@2x.webp",
@@ -73,6 +74,22 @@
           "url": "https://pds-rings.seti.org/cassini/iss/access.html"
         },
         "summary": "Photographs are mapped onto the measured shape. Shadows and unreliable samples are withheld; the gray grid marks gaps."
+      },
+      {
+        "id": "filter-color",
+        "label": "False color",
+        "description": "Cassini IR1, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
+        "title": "Cassini false color",
+        "detail": "Cassini",
+        "thumbnail": "/scenes/pan/pan-filter-color-thumbnail.webp",
+        "surface": "pan-filter-color-surface@2x.webp",
+        "poles": "pan-filter-color-surface@2x.webp",
+        "source": {
+          "id": "n1867606339",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/"
+        },
+        "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
       },
       {
         "id": "elevation",

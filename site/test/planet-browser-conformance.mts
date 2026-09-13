@@ -1,6 +1,6 @@
 import { required } from '../../tools/test-values.mts';
 import { parsePreparedObjectRuntime } from '../../src/renderers/css/dist/index.js';
-import { shape, array, text, number } from '../../tools/objects/terrestrial-layers/source-records.mts';
+import { shape, array, text, number, optional } from '../../tools/objects/terrestrial-layers/source-records.mts';
 import type { PreparedSurfaceHit } from '../../src/renderers/css/navigation/prepared-surface-hit.js';
 type SceneState = Awaited<ReturnType<typeof sceneState>>;
 type LensRace = NonNullable<BrowserProfileAudit['lensRace']>;
@@ -401,10 +401,10 @@ async function proveLensReacquire(browser: Browser, planet: ObjectEntry, profile
     await profile.selectLens(page, race.winnerId);
     await assertLensConsistency(page, planet, profile, race.winnerId);
     const reacquired = observed(profile.selectLens(page, race.slowId));
-    await page.waitForFunction(() => {
-      const root = document.querySelector(".planet-lenses");
+    await page.waitForFunction(id => {
+      const root = document.getElementById(`${id}-lenses`);
       return root?.getAttribute("aria-busy") === "true" || root?.classList.contains("is-loading");
-    });
+    }, planet.id);
     await releaseDecodeGate(page);
     await Promise.all([first, reacquired]);
     await assertLensConsistency(page, planet, profile, race.slowId);
@@ -462,7 +462,7 @@ async function proveLensDestroy(browser: Browser, planet: ObjectEntry, profile: 
     assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
       stage.hasAttribute("data-lens") || stage.hasAttribute("data-view")), false,
     `${planet.id}: destroyed lens work must not publish presentation state`);
-    assert.equal(await page.locator(".planet-lenses").evaluate((root) =>
+    assert.equal(await page.locator(`#${planet.id}-lenses`).evaluate((root) =>
       root.classList.contains("is-loading")), false,
     `${planet.id}: destroy must clear lens loading state`);
     assert.equal(await page.locator('button[name="lens"]').evaluateAll((buttons) =>
@@ -961,10 +961,10 @@ async function exerciseRetainedInteractions(page: Page, planet: ObjectEntry, pro
   const lensIds = profile.objectControls.lenses?.controls.length ? required(retained.lensIds) : [];
   for (const id of lensIds) {
     await page.locator(`button[name="lens"][value="${id}"]`).evaluate((button) => window.__cssearthTest.htmlElement(button).click());
-    await page.waitForFunction(() => {
-      const root = document.querySelector(".planet-lenses");
+    await page.waitForFunction(id => {
+      const root = document.getElementById(`${id}-lenses`);
       return root?.getAttribute("aria-busy") !== "true" && !root?.classList.contains("is-loading");
-    });
+    }, planet.id);
     await assertLensConsistency(page, planet, profile, id);
   }
   if (lensIds.length) {
@@ -1212,7 +1212,8 @@ async function proveSharedPreparedSky(page: Page, requestedPaths:ReadonlySet<str
   const descriptor = JSON.parse(await readFile(resolve(root, 'object.json'), 'utf8'));
   const bytes = await readFile(resolve(root, descriptor.prepared.url));
   assert.equal(createHash('sha256').update(bytes).digest('hex'), descriptor.prepared.sha256);
-  const payload = shape({sky:shape({faces:array(shape({id:text,texturePath:text}))}),resources:array(shape({path:text,bytes:number,sha256:text}))})(JSON.parse(bytes.toString('utf8')).data);
+  const faceSchema = shape({id:text,texturePath:text});
+  const payload = shape({sky:shape({faces:array(faceSchema),nearFaces:optional(array(faceSchema))}),resources:array(shape({path:text,bytes:number,sha256:text}))})(JSON.parse(bytes.toString('utf8')).data);
   assert.equal(await page.locator('.prepared-universe').count(), 1);
   assert.equal(await page.locator('.prepared-celestial-sky').count(), 1);
   const rendered = await page.locator('.prepared-celestial-sky [data-sky-face]').evaluateAll(nodes => nodes.map(node => ({
@@ -1221,9 +1222,12 @@ async function proveSharedPreparedSky(page: Page, requestedPaths:ReadonlySet<str
   assert.deepEqual(rendered.map(face => face.id), payload.sky.faces.map(face => face.id));
   const receipt = [];
   for (const face of payload.sky.faces) {
-    const resource = payload.resources.find(resource => resource.path === face.texturePath);
-    assert.ok(resource, `Prepared sky face ${face.id} requires a pinned resource`);
     const path = new URL(required(rendered.find(value => value.id === face.id)).url).pathname;
+    const candidates = [face, ...(payload.sky.nearFaces ?? []).filter(near => near.id === face.id)];
+    const selected = candidates.find(candidate => path.endsWith(`/${candidate.texturePath}`));
+    assert.ok(selected, `Shared sky ${face.id} must use its prepared near or distant face`);
+    const resource = payload.resources.find(resource => resource.path === selected.texturePath);
+    assert.ok(resource, `Prepared sky face ${face.id} requires a pinned resource`);
     assert.ok(requestedPaths.has(path), `Shared sky must request ${face.id}`);
     const response = responses.get(path);
     assert.ok(response?.ok(), `Shared sky must load ${face.id}`);

@@ -133,7 +133,7 @@ the decoder named by the recipe. Ordinary images use Sharp; PDS, FITS, ISIS and
 GeoTIFF observations use format-specific readers that check the expected grid
 and encoding. [Acquisition tools](../tools/objects/acquisition/) handle
 instrument-specific calibration and geometry. The
-[observation preparer](../tools/objects/terrestrial-layers/observed-geo-surface.mts)
+[surface-observation pipeline](../tools/objects/surface-observations/README.md)
 also fits and validates cameras and applies photometric corrections.
 
 [loadScienceSurface](../tools/objects/terrestrial-layers/scientific-raster.mts)
@@ -163,7 +163,7 @@ atlas coordinates locate the baked tile that the CSS surface will display.
 | --- | --- |
 | Geographic or projected map | [scienceMapPoint](../tools/objects/terrestrial-layers/scientific-raster.mts) applies the declared projection; grid origin, spacing and pixel-center rules locate the sample. [Solid-body reprojection](../src/platform/prepare-solid-body-surface.mts) handles the display surface and poles. |
 | Mesh with released UVs | [obj-uv-fits.mjs](../tools/objects/terrestrial-layers/obj-uv-fits.mts) keeps each face corner's original texture index, including seams. It transfers a prepared point to the closest original triangle within the recipe's distance limit. |
-| Registered photograph | [observed-geo-surface.mjs](../tools/objects/terrestrial-layers/observed-geo-surface.mts) uses source geometry, camera validation and visibility checks. [observation-mosaic.mjs](../tools/objects/terrestrial-layers/observation-mosaic.mts) selects among qualified observations. |
+| Registered photograph | The [surface-observation pipeline](../tools/objects/surface-observations/README.md) projects the point through the photograph's camera and checks source geometry, footprint continuity and visibility. [levels.mts](../tools/objects/surface-observations/levels.mts) selects among qualified frames. |
 
 For released OBJ UVs, the matched triangle supplies three barycentric weights:
 fractions describing the point's position within that triangle. The sampler
@@ -188,6 +188,13 @@ atlas addresses.
 
 Longitude direction, latitude convention, physical scale, pole and meridian
 belong to the source recipe. A generic image resize cannot establish them.
+
+A global map's west and east edges meet at one meridian. When a georeferenced
+source spans 360° of longitude, to within one of its pixels, its recipe declares
+`wrapLongitude: true`, and interpolation reads across that meridian. Without the
+declaration, a target pixel whose footprint crosses the edge counts as missing
+and receives the gray coverage grid. That drew a one-pixel line at 180° on Io's
+8K maps. Preparation rejects the declaration for a source that does not span 360°.
 
 ![Gaspra detector image beside a reprojected mosaic, with four matching patches marked](images/gaspra-registration.png)
 
@@ -249,9 +256,9 @@ declares a seam outset, preparation writes two corrections instead:
 result at saved Venus radar views. It renders each view over a black and then a
 white backdrop to find pixels that let the backdrop through, and it compares the
 brightness profile across each seam with parallel lines inside both leaves.
-These corrections do not change breaks in the prepared imagery itself, such as
-the darker columns on either side of 0° in the Venus radar atlas or the
-one-pixel column at 180° in Io’s 8K bands.
+These corrections do not change breaks in the source imagery itself, such as
+the one-pixel border columns at the edges of the Venus radar, Mars and Ceres
+source maps.
 
 [solid-raster.mjs](../tools/objects/terrestrial-layers/solid-raster.mts) writes
 WebP assets and records their dimensions, sizes and hashes. Normalized maps stay
@@ -287,6 +294,23 @@ operation consumes inputs or emits products, and retain its original check resul
 under the [evidence rules](provenance/CONTRACT.md#save-enough-evidence-to-check-the-result).
 
 ## Refresh photographs without rebuilding geometry
+
+Existing single-model spacecraft observation lenses can refresh through the same
+surface-observation and triangle-atlas preparers used by a full preparation:
+
+```sh
+node --experimental-strip-types tools/objects/refresh-surface-observations.mts itokawa amica
+node --experimental-strip-types tools/objects/refresh-surface-observations.mts lutetia osiris
+```
+
+Pin the recipe and source inputs first. This command checks the retained atlas's
+layout and transform matrices, prepares only the selected lenses, and updates
+their photographs, thumbnails, minimaps, source indices and delivery pins.
+Geometry, other lenses and starfields remain retained. Provenance uses the
+existing `recovered` basis because this is a partial refresh. The run's timings,
+source recipe hash and changed asset list are kept in ignored
+`output/surface-observation-refresh/<body>/refresh.json`. Alternative models or
+source-lighting changes require full preparation. Run one body at a time.
 
 For a `density-before-pack` raster with separate pole sprites, a surface may set
 `resolutionScale` to a positive integer. It multiplies that photograph's map

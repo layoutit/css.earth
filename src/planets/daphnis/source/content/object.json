@@ -4,7 +4,7 @@
   "id": "daphnis",
   "displayName": "Daphnis",
   "panel": {
-    "introduction": "Daphnis travels inside the Keeler Gap in Saturn’s A ring. This tiny moon raises waves along the gap’s edges, while Cassini’s close views reveal ridges and a coating of fine material. The displayed 2026 orbit extrapolates a 2005–2018 fit; Horizons has no ephemeris at this date. Its orientation uses an arbitrary display phase, not a measured attitude.",
+    "introduction": "Daphnis travels inside the Keeler Gap in Saturn\u2019s A ring. This tiny moon raises waves along the gap\u2019s edges, while Cassini\u2019s close views reveal ridges and a coating of fine material. The displayed 2026 orbit extrapolates a 2005\u20132018 fit; Horizons has no ephemeris at this date. Its orientation uses an arbitrary display phase, not a measured attitude.",
     "facts": [
       {
         "id": "radius",
@@ -42,7 +42,7 @@
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "Cassini imaging team · 2005"
+        "value": "Cassini imaging team \u00b7 2005"
       }
     ],
     "moreFacts": []
@@ -52,7 +52,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "filter-color": "False color"
     },
     "controls": [
       {
@@ -60,7 +61,7 @@
         "label": "Monochrome",
         "description": "Cassini clear-filter observations with fine detail from a green-filter image, projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
         "title": "ISS mosaic",
-        "detail": "Cassini · corrected mosaic",
+        "detail": "Cassini \u00b7 corrected mosaic",
         "thumbnail": "/scenes/daphnis/daphnis-normal-thumbnail.webp",
         "surface": "daphnis-normal-surface@2x.webp",
         "poles": "daphnis-normal-surface@2x.webp",
@@ -72,11 +73,27 @@
         "summary": "Green-filter detail is combined with clear-filter images. Brightness matching reduces shading; the gray grid marks gaps."
       },
       {
+        "id": "filter-color",
+        "label": "False color",
+        "description": "Cassini RED, GRN, BL1 filters displayed as red, green and blue; observed illumination and common coverage only.",
+        "title": "Cassini false color",
+        "detail": "Cassini",
+        "thumbnail": "/scenes/daphnis/daphnis-filter-color-thumbnail.webp",
+        "surface": "daphnis-filter-color-surface@2x.webp",
+        "poles": "daphnis-filter-color-surface@2x.webp",
+        "source": {
+          "id": "n1656999219",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/"
+        },
+        "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
+      },
+      {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radial height above a 3.8 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+        "description": "Radial height above a 3.8 km reference sphere from the Cassini shape model. Includes the moon\u2019s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
         "title": "Shape-derived radial height",
-        "detail": "Cassini shape · radial height",
+        "detail": "Cassini shape \u00b7 radial height",
         "thumbnail": "/scenes/daphnis/daphnis-elevation-thumbnail.webp",
         "surface": "daphnis-elevation-surface@2x.webp",
         "poles": "daphnis-elevation-surface@2x.webp",

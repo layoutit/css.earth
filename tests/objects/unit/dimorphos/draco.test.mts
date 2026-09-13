@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodePds4GeometryCube } from '../../../../tools/objects/terrestrial-layers/pds4-geometry-cube.mts';
-import { calibrateGeoCamera } from '../../../../tools/objects/terrestrial-layers/observed-geo-surface.mts';
+import { fitBackplaneCamera } from '../../../../tools/objects/surface-observations/cameras.mts';
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/planets/dimorphos/source');
@@ -32,7 +32,7 @@ test('the pinned DRACO cube decodes through the declared planes to the archived 
 });
 
 test('a pinhole camera recovered from the archived intercepts explains every held-out pixel', () => {
-  const camera = calibrateGeoCamera(cube);
+  const camera = fitBackplaneCamera(cube);
   assert.ok(camera.fitPixels >= 700 && camera.holdoutPixels > 120000, `${camera.fitPixels} fit / ${camera.holdoutPixels} holdout`);
   assert.ok(camera.maximumResidualPixels < 0.001, `maximum residual ${camera.maximumResidualPixels} px`);
   assert.ok(camera.rmsResidualPixels < 0.0001);
@@ -51,3 +51,24 @@ test('the 0.243 m intercepts lie on the retained 0.972 m OBJ within the recipe t
   assert.ok(sampled > 2000);
   assert.ok(maximum < 0.5, `maximum transfer distance ${maximum} m`);
 });
+
+for (const entry of recipe.frames.filter((entry: { id: string }) => entry.id !== 't-minus-11s')) {
+  test(`${entry.id}: the closer frame keeps its archived camera, native footprint and mesh correspondence`, async () => {
+    const observed = decodePds4GeometryCube(await readFile(resolve(root, entry.path)), await readFile(resolve(root, entry.labelPath), 'utf8'),
+      { fileName: entry.path.split('/').at(-1), cube: recipe.cube, filter: recipe.filter });
+    assert.equal(observed.startTime, entry.startTime);
+    assert.equal(observed.qualityReport.saturatedPixels, 0);
+    const camera = fitBackplaneCamera(observed);
+    assert.ok(camera.fitPixels > 1300 && camera.holdoutPixels > 240000);
+    assert.ok(camera.maximumResidualPixels < 0.0003);
+    const footprint = observed.qualityReport.nadirPixelFootprintMeters;
+    assert.ok(footprint && Math.abs(footprint - Number(observed.header.PSCRNG) * Number(observed.header.PXMRAD) * 1e-3) < 0.005);
+    const mesh = await loadObjShape(resolve(root, config.geometry.radialTerrain.path), config.geometry.radialTerrain.grid);
+    let sampled = 0;
+    for (let i = 0; i < observed.width * observed.height; i += 53) if (observed.valid(i)) {
+      const hit = mesh.closestPoint(observed.xyz(i).map(n => n * 1000), recipe.transfer.maximumSourceDistanceMeters);
+      assert.ok(hit && hit.distanceMeters < 0.5, `pixel ${i} misses the retained source surface`); sampled++;
+    }
+    assert.ok(sampled > 4500);
+  });
+}

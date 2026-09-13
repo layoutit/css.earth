@@ -39,7 +39,8 @@
           "centerLongitude": 180,
           "channels": "monochrome",
           "zeroValidity": "any-channel",
-          "resampling": "source-georeferenced-bilinear"
+          "resampling": "source-georeferenced-bilinear",
+          "wrapLongitude": true
         },
         "reportComposition": true,
         "nativePhotographicSampling": {
@@ -68,7 +69,8 @@
             110,
             150
           ],
-          "resampling": "source-georeferenced-bilinear"
+          "resampling": "source-georeferenced-bilinear",
+          "wrapLongitude": true
         },
         "monochromeBase": "normal",
         "reportComposition": true,

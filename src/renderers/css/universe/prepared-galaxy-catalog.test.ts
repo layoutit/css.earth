@@ -92,3 +92,29 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   runtime.destroy(); expect(document.defaultView.frames.size).toBe(0); expect(host.children).toEqual([before]);
   expect(picking.pick(0, -15)).toBeNull();
 });
+
+test('only labels that show or are still fading out follow the camera', () => {
+  const payload = read('local-group/prepared/catalogue.json'), clusters = read('galaxy-clusters/prepared/catalogue.json');
+  const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
+  const runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement, before: before as unknown as HTMLElement, payload, clusters });
+  const viewport = { focalPixels: 600, principalOffsetPixels: [0,0] as const, widthPixels: 800, heightPixels: 600 };
+  const observer = (x: number) => ({ referenceFrame: payload.frame.referenceFrame, epochJdTt: payload.frame.epochJdTt,
+    pose: { positionM: [x, 0, 1e23] as const, orientationXyzw: [0,0,0,1] as const } });
+  const root = runtime.root as unknown as Element, labels = Object.values(runtime.inspect().labels) as unknown as Element[];
+  const ids = (list: Element[]) => list.map(label => label.dataset.galaxyLabel);
+  const transforms = () => labels.map(label => label.style.transform);
+  runtime.publish(observer(0), viewport, 1); document.defaultView.advance(300);
+  const shown = labels.filter(label => Number(label.style.opacity) > 0);
+  expect(shown.length).toBe(Number(root.dataset.visibleLabels));
+  expect(root.children.filter(node => node.dataset.galaxyMarker && node.style.transform).length).toBeGreaterThan(shown.length);
+  expect(ids(labels.filter(label => label.style.transform))).toEqual(ids(shown));
+  // Covering the screen hides every label. Labels still fading out keep following their galaxies.
+  const cover = [{ left: -400, right: 400, top: -300, bottom: 300 }], previous = transforms();
+  runtime.publish(observer(1e21), viewport, 1, cover);
+  const fading = transforms();
+  expect(ids(labels.filter((_, index) => fading[index] !== previous[index]))).toEqual(ids(shown));
+  document.defaultView.advance(900);
+  runtime.publish(observer(2e21), viewport, 1, cover);
+  expect(transforms()).toEqual(fading);
+  runtime.destroy();
+});

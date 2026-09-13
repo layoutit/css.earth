@@ -59,7 +59,7 @@
         "id": "llorri",
         "label": "L’LORRI observation",
         "detail": "Spacecraft observation",
-        "description": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
+        "description": "Two Lucy L’LORRI photographs from 20 April 2025, registered to the source shape through the original cameras, published landmarks and image overlap. The closer photograph supplies detail; the approach photograph fills additional coverage. Grayscale retains photographed illumination and matched relative detector brightness, not measured albedo. The ordinary grid marks unseen, grazing or rejected areas, including the source model’s unobserved reconstruction.",
         "title": "L’LORRI encounter image",
         "thumbnail": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
         "surface": "donaldjohanson-llorri-surface@2x.webp",
@@ -68,7 +68,7 @@
           "id": "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
           "path": "../manifest.json"
         },
-        "summary": "Only part of the encounter-facing surface is imaged. Brightness retains original lighting; the grid marks rejected or unseen areas."
+        "summary": "Two Lucy photographs cover part of the encounter-facing surface. Brightness retains original lighting; the grid marks rejected or unseen areas."
       },
       {
         "id": "shape",

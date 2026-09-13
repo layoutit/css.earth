@@ -25,6 +25,7 @@ import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
 import { observationRaster, parseObservationLens, loadNativeObservationPoleSampler } from './raster.mts';
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
+import { encodeBandColor } from '../color-transfer.mts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
 export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown>; nativeSourcePoles?: boolean }[]; readonly emission?: RasterRecipe['emission']; }
@@ -39,8 +40,23 @@ export function parseInterpreterRecipe(value: unknown): InterpreterRecipe {
   const input = parse(value, object({ surfaces: array(object({ id: string, source: string, science: optional(plainRecord), nativeSourcePoles: optional((value): value is boolean => typeof value === 'boolean') })), emission: optional(emissionSchema) }), 'raster recipe');
   return { surfaces: input.surfaces, ...(input.emission ? { emission: input.emission } : {}) };
 }
+/** Include declared decode dependencies without adding them to the surfaces a partial run packs. */
+export function selectSurfaceDependencies(recipe: InterpreterRecipe, ids: readonly string[]): InterpreterRecipe {
+  const dependencies = new Map<string, InterpreterRecipe['surfaces'][number]>();
+  function include(id: string, ancestors = new Set<string>()) {
+    if (ancestors.has(id)) throw new TypeError(`Circular photographic base: ${id}`);
+    if (dependencies.has(id)) return;
+    const surface = recipe.surfaces.find(candidate => candidate.id === id);
+    if (!surface) throw new TypeError(`Missing photographic surface or base: ${id}`);
+    const baseId = surface.science?.monochromeBase;
+    if (baseId !== undefined) include(requireString(baseId), new Set([...ancestors, id]));
+    dependencies.set(id, surface);
+  }
+  ids.forEach(id => include(id));
+  return { ...recipe, surfaces: [...dependencies.values()] };
+}
 type Surface = Parameters<ObservationInterpretation>[0];
-interface Rgb { rgb: Uint8Array; missing: Uint8Array; }
+interface Rgb { rgb: Uint8Array; missing: Uint8Array; report?: Record<string, unknown>; }
 const rgb3 = (rgb: Uint8Array, missing: Uint8Array | null, width: number, height: number, nearest: boolean): InterpretedSurface =>
   ({ data: missing ? paintMissingCoverage(rgb, { width, height, channels: 3 }, missing) : rgb, channels: 3, nearest });
 
@@ -111,7 +127,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           const base = await observation({ id: baseSurface.id, source: baseSurface.source, science: baseSurface.science }, width, height);
           for (let i = 0; i < decoded.missing.length; i++) if (decoded.missing[i] && !base.missing[i]) { decoded.rgb.set(base.rgb.subarray(i * 3, i * 3 + 3), i * 3); decoded.missing[i] = 0; }
         }
-        return { rgb: decoded.rgb, missing: decoded.missing };
+        return { rgb: decoded.rgb, missing: decoded.missing, ...('colorDisplay' in decoded ? {report:{colorDisplay:decoded.colorDisplay,sourceGeoreference:decoded.sourceGeoreference}} : {}) };
       })();
       observations.set(key, pending);
     }
@@ -170,10 +186,10 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           ...(plan.nativeSourcePoles ? { nativePhotograph: await loadNativeObservationPoleSampler(resolve(sourceDirectory, surface.source), plan) } : {}) };
       }
       case 'terrestrial-observation': {
-        const { rgb, missing } = await observation(surface, width, height);
+        const { rgb, missing, report } = await observation(surface, width, height);
         const resampling = requireRecord(surface.science.validity).resampling;
         const plan = parseSolidObservation({ id: surface.id, ...surface.science });
-        const interpreted = rgb3(rgb, missing, width, height, resampling === 'source-georeferenced-nearest');
+        const interpreted = {...rgb3(rgb, missing, width, height, resampling === 'source-georeferenced-nearest'),...(report?{report}:{})};
         if (plan.nativePhotographicSampling && interpreted.nearest) {
           throw new TypeError(`${objectId}/${surface.id}: native photographic polar sampling does not apply to nearest-sampled data.`);
         }
@@ -218,11 +234,12 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         if (!baseSurface?.science) throw new TypeError(`${objectId}/${surface.id}: colour base ${plan.monochromeBase} is not a science surface.`);
         const base = await observation({ id: baseSurface.id, source: baseSurface.source, science: baseSurface.science }, width, height);
         if (photometry && !('owners' in color)) throw new Error('Corrected color has no observation ownership.');
-        if (photometryRecipe && 'owners' in color) matchObservedColorLevels(color, base, { width, height, ...photometryRecipe.levels });
-        if (photometry && !color.rgb.every(value => Number.isFinite(value) && value >= 0 && value <= 255)) throw new Error('Corrected observation exceeds the display range.');
-        const rgb = color.rgb instanceof Uint8Array ? color.rgb : Buffer.from(color.rgb);
+        const levels = photometryRecipe && 'owners' in color ? matchObservedColorLevels(color, base, { width, height, ...photometryRecipe.levels }) : undefined;
+        const rgb = color.rgb instanceof Uint8Array ? color.rgb : encodeBandColor(color.rgb,color.missing,color.display);
         for (let i = 0; i < color.missing.length; i++) if (color.missing[i] && !base.missing[i]) { rgb.set(base.rgb.subarray(i * 3, i * 3 + 3), i * 3); color.missing[i] = 0; }
-        return rgb3(rgb, color.missing, width, height, false);
+        return {...rgb3(rgb, color.missing, width, height, false),report:{colorDisplay:color.colorDisplay,sourceIds:color.sourceIds,
+          ...('photometry' in color ? {photometry:color.photometry} : {}),...(levels?{levelMatching:levels}:{}),
+          monochromeBase:plan.monochromeBase,monochromeMeaning:'Existing display brightness and missing-color fallback; no inferred surface color.'}};
       }
       case 'glb-base-color': {
         const model = requireString(surface.science.model);

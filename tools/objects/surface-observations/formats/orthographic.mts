@@ -1,0 +1,78 @@
+/** A registered orthophoto on an image-plane DEM. Every image pixel names one released terrain post, so no camera is needed. */
+import type { ObservationFrame, SurfaceObservationFormat } from '../contract.mts';
+import { parseOrthographicRecipe, parseSurfaceGeometry, decodeProfile } from '../../terrestrial-layers/source-records.mts';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { decodeIsis2Qube } from '../../terrestrial-layers/isis2-qube.mts';
+
+const safePath = (p: unknown) => typeof p === 'string' && p.length > 0 && !p.startsWith('/') && !p.includes('\\') && !p.split('/').includes('..');
+
+function validateOrthographicRecipe(value: unknown, sourceGeometry: unknown) {
+  const recipe = decodeProfile(parseOrthographicRecipe, value, 'Invalid source-registered orthographic observation.'), geometry = parseSurfaceGeometry(sourceGeometry);
+  if (recipe.format !== 'isis2-orthographic' || !safePath(recipe.path) ||
+      !Array.isArray(recipe.coordinatePaths) || recipe.coordinatePaths.length !== 3 || !recipe.coordinatePaths.every(safePath) ||
+      new Set([recipe.path, ...recipe.coordinatePaths]).size !== 4 ||
+      !/^[a-z][a-z0-9-]*$/.test(recipe.id) || !/^[a-z][a-z0-9-]*$/.test(recipe.consumer) ||
+      geometry?.format !== 'image-plane-dem' || geometry.sourceTopology !== 'open' ||
+      !Number.isFinite(recipe.maximumCoordinateErrorMeters) || recipe.maximumCoordinateErrorMeters <= 0 ||
+      !Number.isFinite(recipe.maximumSourceDistanceMeters) || recipe.maximumSourceDistanceMeters <= 0 ||
+      recipe.maximumSourceDistanceMeters > geometry.simplification.maximumErrorMeters ||
+      !Array.isArray(recipe.grid?.pixelToSource) || recipe.grid.pixelToSource.length !== 4 || !recipe.grid.pixelToSource.every(Number.isFinite) ||
+      recipe.grid.pixelToSource[0] <= 0 || recipe.grid.pixelToSource[2] >= 0 ||
+      !Array.isArray(recipe.displayRange) || recipe.displayRange.length !== 2 || !recipe.displayRange.every(Number.isFinite) ||
+      recipe.displayRange[1] <= recipe.displayRange[0] || !recipe.metadata?.label || !recipe.metadata?.coverage) {
+    throw new TypeError('Invalid source-registered orthographic observation.');
+  }
+}
+
+export const orthographicFormat: SurfaceObservationFormat = {
+  validate: validateOrthographicRecipe,
+  paths: value => { const recipe = parseOrthographicRecipe(value); return [recipe.path, ...recipe.coordinatePaths]; },
+  async load(value, { sourceDirectory, radial, config }) {
+    const recipe = parseOrthographicRecipe(value), mesh = radial.grid;
+    const rasters = await Promise.all([recipe.path, ...recipe.coordinatePaths].map(async path => decodeIsis2Qube(await readFile(resolve(sourceDirectory, path)), recipe.grid)));
+    const [photo, x, y, z] = rasters;
+    if (!mesh.imageGrid) throw new Error('Orthographic source mesh lacks its image grid.');
+    const [sx, x0, sy, y0] = recipe.grid.pixelToSource, [low, high] = recipe.displayRange;
+    let coordinatePixels = 0, maximumCoordinateErrorMeters = 0;
+    const sourcePoints = new Map(mesh.positions.map((point, i) => [point.slice(0, 2).join(','), i]));
+    const seen = new Set();
+    for (let i = 0; i < photo.data.length; i++) {
+      if (rasters.some(raster => raster.valid[i] !== photo.valid[i])) throw new Error('Orthographic observation masks disagree.');
+      if (!photo.valid[i]) continue;
+      const sourceId = sourcePoints.get([x.data[i], y.data[i]].join(','));
+      const point = sourceId === undefined ? undefined : mesh.positions[sourceId];
+      if (!point || seen.has(sourceId)) throw new Error('Orthographic coordinates do not identify unique source posts.');
+      const error = Math.max(Math.abs(x.data[i] - (i % photo.width * sx + x0)),
+        Math.abs(y.data[i] - (Math.floor(i / photo.width) * sy + y0)),
+        Math.abs(z.data[i] + mesh.imageGrid.zOffsetMeters - point[2]));
+      if (error > recipe.maximumCoordinateErrorMeters) throw new Error('Orthographic image registration exceeds source precision.');
+      seen.add(sourceId); coordinatePixels++; maximumCoordinateErrorMeters = Math.max(maximumCoordinateErrorMeters, error);
+    }
+    if (seen.size !== mesh.positions.length) throw new Error('Orthographic XYZ does not cover every released source post.');
+    const positionKm = [0, 0, 3556], camera = { kind: 'orthographic-registration', positionKm, pixelToSource: recipe.grid.pixelToSource };
+    const frame: ObservationFrame = { id: recipe.id, startTime: '', filter: '', positionKm, cameraKind: 'orthographic-registration', geometrySource: 'registered-posts',
+      footprint: { pixelAngleMicroradians: NaN, nadirMedianMeters: Math.abs(sx), nadirMinimumMeters: Math.abs(sx), sampledPixels: coordinatePixels },
+      sample: point => {
+        const px = (point[0] - x0) / sx, py = (point[1] - y0) / sy;
+        const ix = Math.floor(px), iy = Math.floor(py), tx = px - ix, ty = py - iy;
+        if (ix < 0 || iy < 0 || ix + 1 >= photo.width || iy + 1 >= photo.height) return { reason: 'outside-detector' };
+        const ids = [iy * photo.width + ix, iy * photo.width + ix + 1, (iy + 1) * photo.width + ix, (iy + 1) * photo.width + ix + 1];
+        if (ids.some(i => !photo.valid[i])) return { reason: 'no-geometry' };
+        const [a, b, c, d] = ids.map(i => photo.data[i]);
+        return { radiance: a * (1 - tx) * (1 - ty) + b * tx * (1 - ty) + c * (1 - tx) * ty + d * tx * ty, gain: 1,
+          separationMeters: maximumCoordinateErrorMeters, maximumEmissionDegrees: NaN, maximumIncidenceDegrees: NaN };
+      },
+      // The DEM is a height field seen from its own image plane; every registered post is visible to the orthophoto.
+      visible: () => true,
+      report: { id: recipe.id, path: recipe.path, camera, geometry: { source: 'registered-posts' },
+        registration: { coordinatePixels, maximumCoordinateErrorMeters, completeSourcePostBijection: true,
+          method: 'Every XYZ pixel identifies one released terrain post; every terrain post is accounted for.' } } };
+    return { frames: [frame], exceeded: [], policy: { format: recipe.format, maximumSourceDistanceMeters: recipe.maximumSourceDistanceMeters, precheckDisplayPoint: false,
+      selection: 'single', samplesPerTriangle: 8, display: { range: 'authored', low, high, units: 'Mission orthophoto brightness; original illumination retained. No albedo interpretation.' },
+      photometry: { model: 'retained-observation', maximumGain: 1 },
+      limits: { maximumSourceDistanceMeters: recipe.maximumSourceDistanceMeters, maximumCoordinateErrorMeters: recipe.maximumCoordinateErrorMeters,
+        derived: { maximumSourceDistanceMeters: config.geometry.radialTerrain.simplification.maximumErrorMeters } },
+      limitations: 'Orthophoto from the rescued mission website, independently registered to the reviewed DEM. Radiometric calibration is not requalified.' } };
+  },
+};

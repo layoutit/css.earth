@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { validatePds4ObservationPolicy, readPds4ColorLabel, decodePds4Color, mapPds4Color } from './observed-pds4.mts';
+import {linearToSrgb} from '../color-transfer.mts';
 
 // This test reads only the small pinned label, never an ignored image.
 const label = readFileSync(new URL('../../../src/planets/charon/source/observations/nh_charon_color_mosaic.lblx', import.meta.url), 'utf8');
@@ -11,7 +12,8 @@ const small = label.replace('<elements>1904</elements>', '<elements>2</elements>
   .replace('>-1904000<', '>-2<').replace('>952000<', '>1<');
 const policy = { kind: 'pds4-float-rgb', labelPath: 'observations/nh_charon_color_mosaic.lblx',
   lidvid: 'urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0',
-  bands: [2, 3, 4], wavelengthsNm: [870, 625, 475], displayRange: [0, 100] };
+  bands: [2, 3, 4], wavelengthsNm: [870, 625, 475], displayRange: [0, 100],
+  colorDisplay:{kind:'band-composite',inputQuantity:'derived-band-value',bands:['870 nm','625 nm','475 nm'],displayRange:[0,100],outputEncoding:'srgb'} };
 const entry = { path: 'observations/nh_charon_color_mosaic.img', width: 4, height: 2, projection: { referenceRadiusMeters: radius } };
 const bytes = () => {
   const b = Buffer.alloc(4 * 2 * 4 * 4);
@@ -33,7 +35,7 @@ test('little-endian BSQ channels and north-up east-positive longitudes map witho
   assert.deepEqual(source.selected, [8, 16, 24]);
   assert.equal(source.values[10], 22);
   const result = mapPds4Color(source, policy, 4, 2);
-  const expected = [2, 3, 0, 1, 6, 7, 4, 5].flatMap(i => [20 + i, 30 + i, 40 + i].map(v => Math.round(255 * v / 100)));
+  const expected = [2, 3, 0, 1, 6, 7, 4, 5].flatMap(i => [20 + i, 30 + i, 40 + i].map(v => Math.round(255 * linearToSrgb(v / 100))));
   assert.deepEqual([...result.rgb], expected);
   assert.equal(result.missing.reduce((a, b) => a + b), 0);
 });
@@ -56,7 +58,7 @@ test('negative observations remain valid and unused-band missing values do not e
 test('rounded extent retains the source metric origin instead of assigning an exact 360-degree array roll', () => {
   const shifted = small.replace('>-2<', '>-2.1<');
   const result = mapPds4Color(decodePds4Color(bytes(), shifted, entry, policy), policy, 4, 2);
-  assert.deepEqual([...result.rgb.subarray(0, 3)], [22.1, 32.1, 42.1].map(v => Math.round(v * 255 / 100)));
+  assert.deepEqual([...result.rgb.subarray(0, 3)], [22.1, 32.1, 42.1].map(v => Math.round(255 * linearToSrgb(v / 100))));
   const expanded = mapPds4Color(decodePds4Color(bytes(), small, entry, policy), policy, 16, 8);
   assert.equal(expanded.missing.reduce((a, b) => a + b), 0);
 });
