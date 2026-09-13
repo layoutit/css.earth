@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "16f29ad045a9daad78b50bfb8924b510becb8deecea9214e1993ac73b3049d04"
+    "sha256": "d756aaa9b4130f87300320bffd521b0056bb9c63fde3304930de579b21d9bc78"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0b5159d18a5b10f03cde7eb24006b822f718e1b84bb35a496167e25466fbbef9",
+      "sha256": "1c9077ace0b62716386b164ff8be071ef0bd04d4f17973e7d397f6168ca203f4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -208,7 +208,7 @@
               },
               "transfer": {
                 "maximumSeparationMeters": 8,
-                "maximumEmissionDegrees": 80,
+                "maximumEmissionDegrees": 65,
                 "visibilityToleranceMeters": 0.5,
                 "interpretation": "Every interpolation contributor must match the full Didymos v003 mesh within 8 m and pass visibility. These acceptance limits match the retained mesh preparation budget; they do not estimate scientific accuracy."
               },
@@ -216,13 +216,13 @@
                 "model": "lommel-seeliger",
                 "referenceIncidenceDegrees": 0,
                 "referenceEmissionDegrees": 0,
-                "maximumIncidenceDegrees": 80,
-                "maximumEmissionDegrees": 80,
+                "maximumIncidenceDegrees": 65,
+                "maximumEmissionDegrees": 65,
                 "maximumGain": 3
               },
               "display": {
                 "percentiles": [
-                  21.9,
+                  1.1,
                   99.9
                 ]
               },
@@ -1140,14 +1140,14 @@
       "outputs": [
         {
           "url": "/scenes/didymos/didymos-draco-thumbnail.webp",
-          "bytes": 2082,
-          "sha256": "cb25f7704126fff548578b0e537fedb227b28ff02027e9a55ad7f091c59ea055",
+          "bytes": 1990,
+          "sha256": "7b1e3111b0359471b762f8a3dbd43de43ee1e72dc0f4c65a9a1cc256524241c1",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/didymos/didymos-draco-surface@2x.webp",
-          "bytes": 443402,
-          "sha256": "ab79c291687498bbc82dbb916cafea88df598f9ac8b7898221000fe26c2a253a",
+          "bytes": 294862,
+          "sha256": "6aed92cba1296c3c4ec147f385cc89197eca0850e7ed84bcdae399d2db0e9a44",
           "verification": "bytes-verified"
         }
       ],
@@ -1255,8 +1255,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/draco.webp",
-          "bytes": 18964,
-          "sha256": "2b1169ba98c85466ad1eb815e05f63c45f274df1fd0e3e10660588976da423a0",
+          "bytes": 6342,
+          "sha256": "cff43fee6181bd3f429eced7c3fb96af13d0466b064e29e82b1fa8b4d478ff36",
           "verification": "bytes-verified"
         }
       ]
