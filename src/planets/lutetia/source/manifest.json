@@ -465,6 +465,66 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "lutetia-n20100710t154241240id4df22-img",
+      "path": "observations/n20100710t154241240id4df22.img",
+      "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSINAC/RO-A-OSINAC-4-AST2-LUTETIA-STR-REFL-V1.0/DATA/IMG/N20100710T154241240ID4DF22.IMG",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 37776384,
+      "expectedSha256": "b1c6c6ecf86cd733290f2eebd972d6b227d235e5f5552bb3a1e42f3d9f496481",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "rosetta-osiris-n20100710t154241240id4df22",
+            "role": "material",
+            "evidence": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSINAC/RO-A-OSINAC-4-AST2-LUTETIA-STR-REFL-V1.0/DATA/IMG/N20100710T154241240ID4DF22.IMG"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lutetia-n20100710t154241240id4df22-profile",
+      "path": "preparation/n20100710t154241240id4df22-camera.json",
+      "origin": "Authored source-bound camera profile",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 1305,
+      "expectedSha256": "f02475659a396f1543440155fec7a7caaf53966b2348b090cc18e0751c78a66c",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera solution for the source image; the file records the camera parameters and the image it registers."
+      }
+    },
+    {
+      "id": "lutetia-n20100710t154241240id4df22-camera",
+      "path": "observations/n20100710t154241240id4df22-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 5140,
+      "expectedSha256": "b6e70f70299f772905d3063b891fd8110c00799d54476ed66d068dd39dbefa3a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Camera computed from the exact native image, released kernels and pinned source shape. Two disjoint image windows fit a translation; two withheld windows check it."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -497,8 +557,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10209,
-      "expectedSha256": "bd587a259341019b545870b8ec95df98192d86003d5dee82bac00122471b0ce1",
+      "expectedBytes": 10397,
+      "expectedSha256": "d97ddca4352caf06640098c91ac12f053ff853d0996588b49dc517f10263ebb6",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -506,8 +566,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3449,
-      "expectedSha256": "f03f7ccd651d3ffe6b1d088ace35a0928f0908ca1fe43d4f57e19c7ffcb6944d"
+      "expectedBytes": 3784,
+      "expectedSha256": "f51b72478274bf4abd6f4e5166ae027471e349c1add33798abbe439afb581dc2"
     },
     {
       "path": "preparation/navigation.json",
@@ -521,8 +581,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5048,
-      "expectedSha256": "5577685d91ad3a171e6547043d68155c3d0a23fef60358b53ed85c54d6991607"
+      "expectedBytes": 5376,
+      "expectedSha256": "fb8e49e445e369436520e32c66ee29a12642451322d5fc97ab15eacad0e74cad"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

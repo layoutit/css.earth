@@ -1,0 +1,41 @@
+.kinematics-panel { box-sizing: border-box; width: 100%; padding: 8px 0; color: var(--text, #dbe0e5); }
+.kinematics-workspace { position: absolute; inset: 0 340px 0 0; box-sizing: border-box; z-index: 4; padding: 30px; overflow: auto; color: var(--text, #dbe0e5); background: #101216; }
+.kinematics-workspace > header { margin-bottom: 24px; }
+.kinematics-workspace h2 { margin: 0; font-size: 16px; font-weight: 500; }
+.workspace-content:has(.kinematics-workspace) .observation-structures-workspace { visibility: hidden; pointer-events: none; }
+.kinematics-panel header { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 24px; }
+.kinematics-panel h2 { margin: 0 0 6px; font-size: 13px; font-weight: 550; }
+.kinematics-panel h3 { margin: 0 0 20px; font-size: 13px; font-weight: 550; }
+.kinematics-panel header p { margin: 0; font-size: 12px; opacity: .65; }
+.kinematics-status { font-size: 11px; opacity: .65; white-space: nowrap; }
+.kinematics-layout { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 30px; }
+.kinematics-controls { padding: 0; }
+.kinematics-slider { display: grid; grid-template-columns: 74px minmax(35px, 1fr) 57px; align-items: center; margin-bottom: 16px; gap: 7px; font-size: 11px; }
+.kinematics-slider input { grid-column: 2; grid-row: 1; width: 100%; min-width: 0; margin: 0; accent-color: #79becb; }
+.kinematics-slider output { grid-column: 3; grid-row: 1; text-align: right; font-variant-numeric: tabular-nums; color: #aad8e1; }
+.kinematics-small { font-size: 11px; line-height: 1.6; opacity: .7; margin: 12px 0; }
+.kinematics-panel button { border: 1px solid var(--divider, #343941); border-radius: 4px; padding: 6px 10px; background: transparent; color: inherit; font: inherit; font-size: 11px; cursor: pointer; }
+.kinematics-panel button:hover { background: #ffffff0a; }
+.kinematics-workspace button { border: 1px solid var(--divider, #343941); border-radius: 4px; padding: 6px 10px; background: transparent; color: inherit; font: inherit; font-size: 11px; cursor: pointer; }
+.kinematics-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; font-size: 11px; margin: 0 0 8px; }
+.kinematics-observed-key { color: #edc18d; }
+.kinematics-model-key { color: #79cddd; }
+.kinematics-chart { width: 100%; display: block; overflow: visible; }
+.kinematics-chart text { fill: #a6adb8; font: 11px system-ui, sans-serif; }
+.kinematics-chart .kinematics-axis { fill: #c3cad4; font-size: 12px; }
+.kinematics-grid { stroke: #ffffff0c; stroke-width: 1; }
+.kinematics-zero { stroke: #ccd5df; stroke-opacity: .35; stroke-dasharray: 4 4; }
+.kinematics-systemic { fill: #bdc7d4; opacity: .055; }
+.kinematics-model { fill: none; stroke: #79cddd; stroke-width: 1.8; }
+.kinematics-observed { fill: #edc18d; stroke: #181c23; stroke-width: .8; }
+.kinematics-boundary { border-top: 1px solid var(--divider, #343941); padding-top: 14px; font-size: 12px; line-height: 1.6; color: #c3cbd5; }
+.kinematics-evidence { margin-top: 22px; border-top: 1px solid var(--divider, #343941); padding-top: 16px; font-size: 12px; line-height: 1.65; }
+.kinematics-evidence summary { cursor: pointer; }
+.kinematics-evidence a { color: #aad8e1; }
+.kinematics-evidence ul { padding-left: 22px; }
+.kinematics-evidence li { margin: 10px 0; }
+.kinematics-evidence figure { margin: 16px 0; }
+.kinematics-evidence img { max-width: 100%; height: auto; background: white; }
+.kinematics-evidence figcaption { max-width: 560px; margin-top: 8px; opacity: .7; }
+.kinematics-error { color: #e8a3a3; font-size: 12px; }
+@media (max-width: 950px) { .kinematics-workspace { padding: 16px; } }

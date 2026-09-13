@@ -1,0 +1,156 @@
+{
+  "schema": "cssearth-nebula-observation-recipe@1",
+  "id": "helix",
+  "referenceId": "eso-wfi",
+  "frame": {
+    "width": 1024,
+    "height": 1024,
+    "fieldArcminutes": [
+      60,
+      60
+    ],
+    "centerIcrsDegrees": [
+      337.4107083333334,
+      -20.83717222222222
+    ],
+    "northUp": true
+  },
+  "images": [
+    {
+      "id": "eso-vista",
+      "label": "ESO VISTA · infrared",
+      "url": "https://cdn.eso.org/images/original/eso1205a.tif",
+      "page": "https://www.eso.org/public/images/eso1205a/",
+      "sha256": "8b08b35b5d71f6d4ddfb8e010cb58eb702656d865a485f259617d65524c1d337",
+      "width": 6592,
+      "height": 6592,
+      "fieldArcminutes": [
+        37.51,
+        37.51
+      ],
+      "centerIcrsDegrees": [
+        337.41087500000003,
+        -20.83722222222222
+      ],
+      "northRightDegrees": 0,
+      "bands": "Near-infrared · Y / J / K",
+      "credit": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "termsUrl": "https://www.eso.org/public/outreach/copyright/",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          1280,
+          1280
+        ],
+        "referencePixel": [
+          642.837959404,
+          645.228279754
+        ],
+        "referenceValueDeg": [
+          337.410856,
+          -20.837221
+        ],
+        "scaleDeg": [
+          -0.00048842354,
+          0.00048842354
+        ],
+        "rotationDeg": -0.04872475159
+      },
+      "metadataNote": "The publisher position describes this AVM reference pixel, not the raster centre. Exact embedded AVM TAN WCS controls registration."
+    },
+    {
+      "id": "eso-wfi",
+      "label": "ESO WFI · optical detail",
+      "url": "https://cdn.eso.org/images/original/eso0907a.tif",
+      "page": "https://www.eso.org/public/images/eso0907a/",
+      "sha256": "057c8dacfe1686cc6cd464768996369c68d23e32844a5059107aba03bcf38769",
+      "width": 7059,
+      "height": 6535,
+      "fieldArcminutes": [
+        28.02,
+        25.94
+      ],
+      "centerIcrsDegrees": [
+        337.4107083333334,
+        -20.83717222222222
+      ],
+      "northRightDegrees": -0.1,
+      "bands": "Optical · B / V / R",
+      "credit": "ESO",
+      "termsUrl": "https://www.eso.org/public/outreach/copyright/",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          7059,
+          6535
+        ],
+        "referencePixel": [
+          3523.97483069,
+          3085.49033593
+        ],
+        "referenceValueDeg": [
+          337.410689,
+          -20.837171
+        ],
+        "scaleDeg": [
+          -0.00006615929,
+          0.00006615929
+        ],
+        "rotationDeg": 0.12510794634
+      },
+      "metadataNote": "The publisher position describes this AVM reference pixel, not the raster centre. Exact embedded AVM TAN WCS controls registration."
+    },
+    {
+      "id": "eso-wide",
+      "label": "ESO · wider field",
+      "url": "https://cdn.eso.org/images/original/helix.tif",
+      "page": "https://www.eso.org/public/images/helix/",
+      "sha256": "9736dd85dd142f7b3be7c320235518211e2614380c76e793e24a62706f9584d2",
+      "width": 6850,
+      "height": 4759,
+      "fieldArcminutes": [
+        48.82,
+        33.92
+      ],
+      "centerIcrsDegrees": [
+        337.4105416666667,
+        -20.837030555555554
+      ],
+      "northRightDegrees": 0,
+      "bands": "ESO 3.6 m · filters not listed",
+      "credit": "ESO",
+      "termsUrl": "https://www.eso.org/public/outreach/copyright/",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          6850,
+          4759
+        ],
+        "referencePixel": [
+          3490.93308883,
+          2488.91361565
+        ],
+        "referenceValueDeg": [
+          337.410536,
+          -20.83703
+        ],
+        "scaleDeg": [
+          -0.00011879534,
+          0.00011879534
+        ],
+        "rotationDeg": 0.0244538471
+      },
+      "metadataNote": "The publisher position describes this AVM reference pixel, not the raster centre. Exact embedded AVM TAN WCS controls registration."
+    }
+  ],
+  "nativeRemoval": {
+    "model": {
+      "path": ".local/open-star-removal/noxGeneratorColor.pb",
+      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
+    },
+    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+  }
+}

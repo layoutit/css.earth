@@ -22,6 +22,7 @@ import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/proj
 import type { WorldPlannerSource } from './world-context-planner-client.js';
 import type { WorldContextPublication } from './world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context-planner-client.js';
+import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 // Galaxy files download from this fraction of the volume's fade-start distance:
@@ -39,7 +40,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
   imageLayers?: readonly { payload: PreparedCssImageLayers; resolveResource(path: string): string }[];
   volumeLenses?: readonly Parameters<typeof createPreparedVolumeLenses>[0][];
-  catalog?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number;
+  catalog?: { payload: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
     clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 }) {
   const plan = parsePreparedWorldContext(context), payload = validatePreparedCssVolume(volume);
@@ -137,6 +138,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       let galaxyCatalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
       const imageBanks: ReturnType<typeof mountPreparedCssImageLayers>[] = [];
       let prefetchGalaxy = (_distanceM: number) => {};
+      const prefetchAbort = new AbortController();
       const lensBanks: ReturnType<ReturnType<typeof createPreparedVolumeLenses>['mount']>[] = [];
       const publishedBankOpacity = imageLayers.map(() => NaN), publishedLensOpacity = volumeLenses.map(() => NaN);
       const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
@@ -167,6 +169,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const destroy = () => {
         if (destroyed) return;
         destroyed = true;
+        prefetchAbort.abort();
         volumeLayer?.destroy(); skyLayer?.destroy(); spatial?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy();
         for (const shell of shellLayers) shell.destroy();
         for (const bank of imageBanks) bank.destroy(); galaxyCatalog?.destroy();
@@ -188,7 +191,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           galaxyPrefetched = true;
           const target = document.defaultView;
           if (typeof target?.fetch !== 'function') return;
-          for (const url of galaxyUrls) target.fetch(url, { priority: 'low' }).then(response => response.arrayBuffer()).catch(() => {});
+          void prefetchPreparedResources(galaxyUrls, target.fetch.bind(target), prefetchAbort.signal);
         };
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         // Picking and navigation stay on the detail stage's input owner. Billboards
@@ -196,7 +199,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         spatial = mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationPriorities, annotationOpacities, opacityClock });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), opacityClock });
-        if (catalog) galaxyCatalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: catalog.payload, clusters: catalog.clusters?.payload, onSelect: onSelectGalaxy, pickingHost: stage });
+        if (catalog) galaxyCatalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: catalog.payload, clusters: catalog.clusters?.payload, nebulae: catalog.nebulae, onSelect: onSelectGalaxy, pickingHost: stage });
         return Object.freeze({ root, roots: Object.freeze([root, spatial.root]), destroy, opacityClock,
           /** Mount an optional prepared shell after startup, the first time it is enabled. */
           addShell(shell: { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }) {
@@ -296,7 +299,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             }
             for (const [index, bank] of lensBanks.entries()) {
               const { frame, radiusUnits, visibility } = lensFraming[index]!;
-              const opacity = volumeOpacity * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
+              const contextOpacity = volumeLenses[index]!.payload.contextVisibility === 'independent' ? 1 : volumeOpacity;
+              const opacity = contextOpacity * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
               if (opacity !== publishedLensOpacity[index]) {
                 bank.root.style.opacity = String(opacity);
                 bank.root.style.display = opacity > 0 ? 'block' : 'none';

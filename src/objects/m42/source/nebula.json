@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-nebula-catalog@1",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "sources": [
+    {
+      "id": "menten-2007",
+      "url": "https://arxiv.org/abs/0709.0485",
+      "sha256": "447ec1061810cc788c725524dbe0248f78625aacba52337a6c6ff85bd22fa906",
+      "bytes": 179159,
+      "citation": "Menten et al. (2007), The distance to the Orion Nebula"
+    },
+    {
+      "id": "m42-registered-images",
+      "url": "https://cdn.eso.org/images/publicationtiff/eso1723a.tif",
+      "sha256": "40e9fb5a91c90c0b5a5b6ba31507d6cc65259e1216a5057f88d210ccb15d16aa",
+      "bytes": 21268752,
+      "citation": "ESO ESO \u00b7 optical image and publisher astrometry; registration retained in the observation recipe"
+    }
+  ],
+  "objects": [
+    {
+      "id": "m42",
+      "kind": "nebula",
+      "name": "Orion Nebula",
+      "aliases": [
+        "M42",
+        "NGC 1976"
+      ],
+      "positionM": [
+        1.376371289202817e+18,
+        1.2643306187615361e+19,
+        -1.202290873620898e+18
+      ],
+      "skyPosition": {
+        "raDeg": 83.78715182853901,
+        "decDeg": -5.400382551151912,
+        "sourceRef": "m42-registered-images"
+      },
+      "distance": {
+        "valuePc": 414,
+        "minusPc": 7,
+        "plusPc": 7,
+        "sourceRef": "menten-2007",
+        "method": "Adopted published trigonometric parallax; not a fitted image scale."
+      },
+      "classification": {
+        "name": "H II region",
+        "basis": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances.",
+        "sourceRef": "m42-registered-images"
+      },
+      "status": "confirmed",
+      "detailedObjectId": "m42"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "sanchez-contreras-2024",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Uncovering the structure and kinematics of the ionized core of M 2-9 with ALMA",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/html/2411.03825v1",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/m2-9/source/image-frame.json",
+      "revision": "ab1967ed45fe7ad670cc5eaa4e892789a04f01f3",
+      "sha256": "03b7bfa303f1776503301524fa6b24a57df4fd23d91dfbba9d355acbab4d8a14",
+      "locator": "/references"
+    }
+  ],
+  "publisher": "Uncovering the structure and kinematics of the ionized core of M 2-9 with ALMA",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Uncovering the structure and kinematics of the ionized core of M 2-9 with ALMA",
+      "scope": "Published source",
+      "evidence": "src/objects/m2-9/source/image-frame.json#/references"
+    }
+  ]
+}

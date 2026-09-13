@@ -1,0 +1,42 @@
+{
+  "id": "eso-eso1006a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Orion Nebula · ESO eso1006a",
+  "identifiers": [
+    {
+      "type": "ESO image",
+      "value": "eso1006a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1006a/",
+      "label": "Published source"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.eso.org/public/outreach/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m42/observations.json",
+      "revision": "ab1967ed45fe7ad670cc5eaa4e892789a04f01f3",
+      "sha256": "be4195e2e45f37f977436584e9a94967d090d8a1c5f95328ae97730f71bb9df4",
+      "locator": "/images/1"
+    }
+  ],
+  "publisher": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m42/observations.json#/images/1"
+    }
+  ]
+}

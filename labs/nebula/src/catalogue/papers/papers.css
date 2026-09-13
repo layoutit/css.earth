@@ -1,0 +1,21 @@
+.catalogue-papers { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+.catalogue-paper-toolbar { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; margin: 8px 0; }
+.catalogue-paper-toolbar .catalogue-field { flex: 1; min-width: 145px; }
+.catalogue-paper-toolbar .catalogue-field:first-child { flex: 2; }
+.catalogue-paper-toolbar .catalogue-paper-year { flex: 0 1 100px; min-width: 85px; }
+.catalogue-paper-toolbar > button { font-size: 11px; padding: 8px 12px; }
+.catalogue-paper-status { color: var(--text-secondary); font-size: 12px; margin: 12px 0 6px; }
+.catalogue-paper-status[role="alert"] { color: #f0a49e; }
+.catalogue-paper-note { color: var(--text-muted); font-size: 10px; margin: 4px 0 10px; }
+.catalogue-paper-results { min-height: 0; flex: 1; overflow: auto; padding-bottom: 20px; }
+.catalogue-paper { border-top: 1px solid var(--divider); padding: 17px 3px; }
+.catalogue-paper h3 { font-size: 14px; font-weight: 500; line-height: 1.5; margin: 0 0 7px; }
+.catalogue-paper h3 a { text-decoration: none; }
+.catalogue-paper h3 a:hover { text-decoration: underline; }
+.catalogue-paper-meta { display: flex; flex-wrap: wrap; gap: 12px; color: var(--text-muted); font-size: 10px; }
+.catalogue-paper-match { color: #b8d1b8; }
+.catalogue-paper-tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 8px 0; }
+.catalogue-paper-tags span { background: #25272a; padding: 3px 6px; border-radius: 4px; font-size: 10px; color: var(--text-secondary); }
+.catalogue-paper .catalogue-product-links { align-items: center; font-size: 11px; gap: 8px 16px; }
+.catalogue-paper .catalogue-product-links button { padding: 4px 8px; font-size: 11px; }
+.catalogue-paper-abstract { font-size: 12px; color: var(--text-secondary); line-height: 1.7; max-width: 100ch; white-space: pre-wrap; overflow-wrap: anywhere; }

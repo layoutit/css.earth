@@ -31,6 +31,8 @@ export interface MasterVolumeOptions {
   provenance: unknown;
   /** Retain identical physical quads across material variants. */
   cropTransparent?: boolean;
+  /** Interactive signed fields can cancel completely. Only applies when no delivery banks are requested. */
+  allowEmpty?: boolean;
   onProgress?: (progress: MasterSliceProgress) => void;
 }
 const axes: Axis[] = ['x', 'y', 'z'];
@@ -179,6 +181,10 @@ export async function bakeMasterVolumeSlices(options: MasterVolumeOptions): Prom
         sha256: sha256(bytes), bytes: bytes.length, alphaCoverage: nonzero / (width * height) });
       report(options.onProgress, { phase: 'master', axis, sliceIndex: index, completed: masters.quads.length, total, width });
     }
+  }
+  if (options.allowEmpty && options.deliveryBanks.length === 0 && masters.quads.every(quad => quad.alphaCoverage === 0)) {
+    await manifest(options.masterDirectory, masters);
+    return { masters, banks: [] };
   }
   nonempty(masters);
   await manifest(options.masterDirectory, masters);

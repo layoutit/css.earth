@@ -1,0 +1,152 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "lmc",
+  "name": "Large Magellanic Cloud",
+  "defaultLens": "vista-infrared",
+  "bank": {
+    "path": "src/objects/lmc/prepared/lenses.json",
+    "sha256": "90d4b0b89b18056dbc6f1b07823c71556c1d3e3b51addd75703c590714b89f43",
+    "bytes": 1498886
+  },
+  "recipes": [
+    {
+      "id": "recipe-1",
+      "path": "src/objects/lmc/source/lenses.json",
+      "sha256": "fbfc0cb34daba7b894046d4c81c3c0be0d9ab80ac357be66d0daa3d053cb651d",
+      "bytes": 2192
+    },
+    {
+      "id": "recipe-2",
+      "path": "labs/nebula/models/lmc/bake.json",
+      "sha256": "6946cf57f16e33531ceb50ef34aac765ff4031260221671808f9ea0ae1e08b35",
+      "bytes": 4086
+    },
+    {
+      "id": "recipe-3",
+      "path": "labs/nebula/models/lmc/full-density/source/volume.json",
+      "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c",
+      "bytes": 1370
+    },
+    {
+      "id": "recipe-4",
+      "path": "src/objects/lmc/source/lenses/vista-infrared/provenance.json",
+      "sha256": "44efcafb094af409cdc3ed702309de752e1170ef960c3087630c060366377d84",
+      "bytes": 14008
+    },
+    {
+      "id": "recipe-5",
+      "path": "src/objects/lmc/source/lenses/horalek-widefield/provenance.json",
+      "sha256": "37cd89af9448904d90de3a3ade6a3236ff8760b3bd94fdf5135cd9dc5184ab21",
+      "bytes": 14017
+    },
+    {
+      "id": "recipe-6",
+      "path": "src/objects/lmc/source/lenses/wise-wide-infrared/provenance.json",
+      "sha256": "49911f66301558825c972abfadbcf30c527e7a87e10646e05cbb5eb833b048e7",
+      "bytes": 13094
+    }
+  ],
+  "sharedInputs": [
+    "density-prior",
+    "catalogue-stars",
+    "sky-registration"
+  ],
+  "lenses": [
+    {
+      "id": "vista-infrared",
+      "label": "ESO VISTA",
+      "title": "LMC in near infrared",
+      "description": "Near-infrared colors from ESO’s VISTA survey, painted onto the shared simulated LMC density cloud. Depth follows a stellar-density simulation, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D color fitting.",
+      "summary": "Near-infrared · Y / J / Ks",
+      "detail": "8954 × 10000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Near-infrared · Y / J / Ks"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "8954 × 10000"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Simulated stellar-density prior"
+        }
+      ],
+      "input": "vista-infrared",
+      "preview": {
+        "path": ".local/nebula-presentation/lmc-vista-infrared.jpg",
+        "sha256": "c26c476daad651ff342856aad837b5408caec62a46f1637381089ff15a0465ab",
+        "bytes": 641609,
+        "url": "https://cdn.eso.org/images/screen/eso1914a.jpg"
+      }
+    },
+    {
+      "id": "horalek-widefield",
+      "label": "Horálek optical",
+      "title": "Petr Horálek’s visible-light LMC",
+      "description": "Visible-light colors from Petr Horálek’s NOIRLab wide-field image, painted onto the shared simulated LMC density cloud. Depth follows a stellar-density simulation, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D color fitting.",
+      "summary": "Visible-light photograph",
+      "detail": "6582 × 4388 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Visible-light photograph"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "6582 × 4388"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Simulated stellar-density prior"
+        }
+      ],
+      "input": "horalek-widefield",
+      "preview": {
+        "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
+        "sha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
+        "bytes": 8507407,
+        "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2547a.jpg"
+      }
+    },
+    {
+      "id": "wise-wide-infrared",
+      "label": "NASA WISE",
+      "title": "LMC in WISE infrared",
+      "description": "Infrared colors from NASA/IPAC WISE survey data, painted onto the shared simulated LMC density cloud. Depth follows a stellar-density simulation, not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D color fitting.",
+      "summary": "Infrared display color · W4 / W2 / W1",
+      "detail": "6000 × 6000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Infrared display color · W4 / W2 / W1"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "6000 × 6000"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Simulated stellar-density prior"
+        }
+      ],
+      "input": "wise-wide-infrared",
+      "preview": {
+        "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+        "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
+        "bytes": 1942085,
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg"
+      }
+    }
+  ]
+}
