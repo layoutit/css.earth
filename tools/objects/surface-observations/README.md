@@ -40,7 +40,6 @@ new route.
 | `spice-camera` | `formats/geo.mts` | SPICE kernels | Source-mesh rays |
 | `encounter-fits` | `formats/encounter.mts` | Registered control network | Source-mesh rays |
 | `isis2-orthographic` | `formats/orthographic.mts` | None: every pixel names a DEM post | Registered DEM posts |
-| `published-image-projection` | `formats/published-image.mts` | Explicitly approximate orthographic placement | Source-mesh rays under that assumption |
 
 The [implementation map](../../../.agents/skills/celestial-skill/references/implementation-map.md#choose-a-photograph-route)
 says which format fits what an archive ships.
@@ -86,17 +85,6 @@ misspelt field fails instead of being ignored.
 | `spice-camera` | `startTime`, and `labelPath` for a VICAR image | `filter`, `spice`, optional `refinement` |
 | `encounter-fits` | `labelPath`, `controlPath` | nothing |
 | `isis2-orthographic` | `coordinatePaths` | `grid`, `maximumCoordinateErrorMeters`; one frame, a `transfer` with only `maximumSourceDistanceMeters`, no `photometry` |
-| `published-image-projection` | `projection`: pinned image/shape hashes, crop, assumed basis, scale, centre, mask and limitations | One frame; original RGB range 0–255, retained illumination |
-
-The published-image format is for an explicitly accepted approximate display,
-such as [Toutatis](../../../src/planets/toutatis/source/reference/chang-e-2-method.md).
-Its report always marks registration unqualified. It cannot substitute for a
-measured camera, add geographic landmarks or establish source accuracy from a
-limb match. A null spacecraft position and a separate viewing direction keep
-the orthographic ray plane from becoming a fictitious camera observation.
-The selector and description must identify approximate placement; the grid
-marks excluded terrain. RGB values retain the publisher's display encoding
-instead of passing through the scientific-band color transfer again.
 
 ## Adding an archive product
 

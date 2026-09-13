@@ -104,36 +104,6 @@
           }
         ]
       }
-    },
-    {
-      "id": "chang-e-2-jiang-figure-1",
-      "path": "chang-e-2/jiang-2015-figure-1.jpg",
-      "expectedBytes": 240400,
-      "expectedSha256": "0d26efacddb0f7e0cc07f2feeeaef0dcc7d1815093dba63c533ef554abef5aed",
-      "origin": "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fsrep16029/MediaObjects/41598_2015_Article_BFsrep16029_Fig1_HTML.jpg",
-      "credit": "Y. Jiang, J. Ji, J. Huang, S. Marchi, Y. Li and W.-H. Ip (2015); Chang’e-2; Scientific Reports 5, 16029, Figure 1c.",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "reference/CHANG-E-2-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore the pinned published JPEG with source/preparation/acquisition.json.",
-      "redistribution": "Cropped and approximately projected under CC BY 4.0, with attribution and the changes identified.",
-      "consumers": [
-        "chang-e-2"
-      ],
-      "lensId": "chang-e-2",
-      "coverage": "One visible side of Toutatis. This is an approximate projection of the published figure, not a calibrated camera product.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jiang-2015-toutatis-boulders",
-            "role": "material",
-            "evidence": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4629198/#f1"
-          }
-        ]
-      },
-      "displayCredit": "Y. Jiang et al. (2015) · Chang’e-2"
     }
   ],
   "generatedIntermediates": [
@@ -166,8 +136,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9480,
-      "expectedSha256": "66e8ba0fb01fee49ea4815979663c7517856078909b175fd00a99326465daa3a",
+      "expectedBytes": 8440,
+      "expectedSha256": "c4b8a1028284c0ee6670046313beb027dbdf49f6c0626c09110c1aa4d9a4f220",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -175,8 +145,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1095,
-      "expectedSha256": "a22e520e263f8b3e1b77dcc070862e52d0ccfdd0faa47eb80f9d0638c248fd16"
+      "expectedBytes": 782,
+      "expectedSha256": "b9571c2d2620e59a4bdc91a95a9941197192d8dc87a82e067ad404ae48012829"
     },
     {
       "path": "preparation/navigation.json",
@@ -190,8 +160,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 8023,
-      "expectedSha256": "4e38f58d39e41df5deff1237bed6cd9ad01f3a1bfce46cf17d567992952a2480"
+      "expectedBytes": 2105,
+      "expectedSha256": "6c32e54d541c090334da48beb4b1e8bd0cd0a476b1cc67ed700325ca8ab1ba0b"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -240,26 +210,6 @@
       "expectedBytes": 5876,
       "expectedSha256": "280a10bae7683be9dd246ccc3bbf70bae3bbc0087c5d2ed9cfe11ab24a260951",
       "purpose": "Pinned JPL SBDB physical record retaining the NEOWISE geometric albedo value, uncertainty and reference for factsheet interpretation."
-    },
-    {
-      "path": "reference/CHANG-E-2-IMAGE-LICENSE.md",
-      "expectedBytes": 1199,
-      "expectedSha256": "6e123472bd947a1b3a48be4e5e19a0af39174f07366bd34fb2bcfa7d4e7def02",
-      "purpose": "Image reuse terms and attribution",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Authored account of this package’s image reuse and projection method; original publications are linked in the document."
-      }
-    },
-    {
-      "path": "reference/chang-e-2-method.md",
-      "expectedBytes": 4706,
-      "expectedSha256": "76e6117ce4337e2e9b13c9e35f694c5289699f8e4666d8d9e0356dd8634e1858",
-      "purpose": "Approximate projection assumptions, evidence and limits",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Authored account of this package’s image reuse and projection method; original publications are linked in the document."
-      }
     }
   ]
 }
