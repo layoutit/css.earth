@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bcb5380921061224d111dfc0a1fda353f1429aa2dca6394a24306053f39b1528"
+    "sha256": "c2168f493dae9eaf0fc53c7341f14a6fc23420c772174ab89cc6dbf5df9789fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -446,7 +446,7 @@
       "credit": "NASA / JHUAPL / SwRI; Simon Porter; cssEarth pointing refinement",
       "license": "MIT for authored preparation; original source notices retained.",
       "redistribution": "Retain original source attribution and the registration limitations.",
-      "acquisition": "node tools/objects/new-horizons/prepare-photographic-cameras.mts src/planets/nix/source/preparation/photography.json",
+      "acquisition": "node tools/objects/new-horizons/prepare-photographic-cameras.mts src/objects/nix/source/preparation/photography.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Experimental camera from pinned PDS pole/phase, source mesh and native WCS, with two fitted detector translations. Separate views and withheld interior regions measure limitations; the camera remains unqualified for photographic publication."

@@ -306,7 +306,7 @@
       "credit": "NASA / JHUAPL / SwRI; Simon Porter; cssEarth pointing refinement",
       "license": "MIT for authored preparation; original source notices retained.",
       "redistribution": "Retain original source attribution and the registration limitations.",
-      "acquisition": "node tools/objects/new-horizons/prepare-photographic-cameras.mts src/planets/nix/source/preparation/photography.json",
+      "acquisition": "node tools/objects/new-horizons/prepare-photographic-cameras.mts src/objects/nix/source/preparation/photography.json",
       "consumers": [
         "lorri-observation"
       ],
