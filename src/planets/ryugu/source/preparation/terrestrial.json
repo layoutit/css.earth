@@ -48,6 +48,30 @@
           "samplesPerAxis": 2,
           "quality": 95
         }
+      },
+      {
+        "id": "close-up",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "sampleBytes": 8,
+          "coordinates": "degrees",
+          "noData": -1,
+          "centerLongitude": 0,
+          "resolutionDegrees": 0.036,
+          "origin": [
+            0,
+            28.6462
+          ],
+          "displayRange": [
+            0,
+            0.035
+          ],
+          "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
       }
     ],
     "scientific": [
@@ -96,6 +120,96 @@
           "method": "closest-source-point",
           "maximumDistanceMeters": 16
         }
+      },
+      {
+        "id": "thermal-inertia",
+        "label": "Thermal inertia",
+        "consumer": "thermal-inertia",
+        "path": "maps/Thermal_Inertia_Map.tif",
+        "format": "geotiff",
+        "grid": {
+          "width": 3600,
+          "height": 1800,
+          "noData": -9999,
+          "coordinates": "degrees",
+          "referenceRadiusMeters": 448,
+          "centerLongitude": 0,
+          "origin": [
+            0,
+            90
+          ],
+          "resolution": [
+            0.1,
+            -0.1
+          ]
+        },
+        "sampling": "nearest",
+        "minimum": 0,
+        "maximum": 400,
+        "colors": [
+          "#18234b",
+          "#236d98",
+          "#59b59e",
+          "#d6d879",
+          "#f19a46",
+          "#b92b35"
+        ]
+      },
+      {
+        "id": "spectral-slope",
+        "label": "Spectral slope",
+        "consumer": "spectral-slope",
+        "path": "maps/b-x_Slope_Map.tif",
+        "format": "geotiff",
+        "grid": {
+          "width": 3600,
+          "height": 1800,
+          "noData": -9999,
+          "coordinates": "degrees",
+          "referenceRadiusMeters": 448,
+          "centerLongitude": 0,
+          "origin": [
+            0,
+            90
+          ],
+          "resolution": [
+            0.1,
+            -0.1
+          ]
+        },
+        "sampling": "nearest",
+        "minimum": -0.148,
+        "maximum": 0.148,
+        "colors": [
+          "#00204c",
+          "#6c6b6b",
+          "#ffea46"
+        ],
+        "qualityMasks": [
+          {
+            "path": "maps/b-x_Slope_Map.tif",
+            "format": "geotiff",
+            "grid": {
+              "width": 3600,
+              "height": 1800,
+              "noData": -9999,
+              "coordinates": "degrees",
+              "referenceRadiusMeters": 448,
+              "centerLongitude": 0,
+              "origin": [
+                0,
+                90
+              ],
+              "resolution": [
+                0.1,
+                -0.1
+              ]
+            },
+            "sampling": "nearest",
+            "minimum": -0.999999,
+            "maximum": 0.999999
+          }
+        ]
       }
     ],
     "observedColors": [],

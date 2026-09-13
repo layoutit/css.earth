@@ -2,6 +2,21 @@
   "schema": "cssryugu-runtime-assets@1",
   "assets": [
     {
+      "filename": "ryugu-close-up-shadow@2x.webp",
+      "bytes": 688894,
+      "sha256": "097971cd9ad650fdffe5964a0e5bcb9f6f07fad933894785d7ec0bc14a364ed9"
+    },
+    {
+      "filename": "ryugu-close-up-surface@2x.webp",
+      "bytes": 1697736,
+      "sha256": "9cb9fe1f827c2bebbb9d7aa107703eb51952d6c1ce9ccb492c70e5992310f952"
+    },
+    {
+      "filename": "ryugu-close-up-thumbnail.webp",
+      "bytes": 1914,
+      "sha256": "477e8371d5e5a4efd096606f8e4230cb062bcdae4a00bd7d785a0189708bcab3"
+    },
+    {
       "filename": "ryugu-directional-sun.webp",
       "bytes": 4798,
       "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
@@ -49,7 +64,7 @@
     {
       "filename": "ryugu-features.json",
       "bytes": 19037,
-      "sha256": "8c407dd77e488e1f433c87b9ad8b0a63e97d0a9704927ea2cf9bd80cf948adbc"
+      "sha256": "319496b54c4be250996b275606daf810d2f0368e034f3ea48a2db73249679c3a"
     },
     {
       "filename": "ryugu-lighting.webp",
@@ -70,6 +85,26 @@
       "filename": "ryugu-normal-thumbnail.webp",
       "bytes": 3246,
       "sha256": "8d3fd455c4117bc51b2cc022229b7544f80d41b26d311db27752d52f2894d1e5"
+    },
+    {
+      "filename": "ryugu-spectral-slope-legend.webp",
+      "bytes": 190,
+      "sha256": "9095128dd6be1407b5a1fca35279e0eeba2d36cc5449efa91c8d3a63cebc00be"
+    },
+    {
+      "filename": "ryugu-spectral-slope-shadow@2x.webp",
+      "bytes": 1407654,
+      "sha256": "02f893b666159b67fa41043b5e1cc67a152cf2d49b18e7d7e06e8bd366dc561d"
+    },
+    {
+      "filename": "ryugu-spectral-slope-surface@2x.webp",
+      "bytes": 3706304,
+      "sha256": "bb80694074dcb4069d14f906ec14043e2344574f4b6175d8ab9bb22f5715968c"
+    },
+    {
+      "filename": "ryugu-spectral-slope-thumbnail.webp",
+      "bytes": 6918,
+      "sha256": "12a16bb29cf271a6eb30286a125514162c0ff58c8f8baca0fddb0ec675f27e91"
     },
     {
       "filename": "ryugu-starfield-back-standard.webp",
@@ -195,6 +230,26 @@
       "filename": "ryugu-system-point.webp",
       "bytes": 96,
       "sha256": "e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659"
+    },
+    {
+      "filename": "ryugu-thermal-inertia-legend.webp",
+      "bytes": 266,
+      "sha256": "8aacc5d3e9a207839d3c0689fd98ad74502229e5f29ce47ef6f163210bb2842c"
+    },
+    {
+      "filename": "ryugu-thermal-inertia-shadow@2x.webp",
+      "bytes": 1616266,
+      "sha256": "0802764b00ceddb2e0c4abc77a996d9a5ffda873c9762c6bf381ff63ec7605ec"
+    },
+    {
+      "filename": "ryugu-thermal-inertia-surface@2x.webp",
+      "bytes": 3326302,
+      "sha256": "60eb713656125ab408815a48a277f771062d30fe16cf54507b0569ae0be2006f"
+    },
+    {
+      "filename": "ryugu-thermal-inertia-thumbnail.webp",
+      "bytes": 8612,
+      "sha256": "145375d4f777d49cc4cf87d6baff11dea2eaad35676e49fe5ec8730e20d3bb2f"
     }
   ]
 }

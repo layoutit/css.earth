@@ -81,6 +81,22 @@
         "summary": "Only part of the surface is photographed; shadows and seams remain. The unseen shape is modeled and image gaps are marked."
       },
       {
+        "id": "near-msi",
+        "label": "NEAR close-ups",
+        "description": "Two NEAR MSI broadband photographs from 27 June 1997, calibrated to I/F and registered to the published visualization shape using reconstructed flyby geometry and checked limb alignment. Photographed shadows, scattered light and detector noise remain. The raw companion images identify missing and saturated pixels; the archive quality index remains unresolved. Grid marks unavailable imagery.",
+        "title": "NEAR MSI close-ups",
+        "thumbnail": "/scenes/mathilde/mathilde-near-msi-thumbnail.webp",
+        "surface": "mathilde-near-msi-surface@2x.webp",
+        "poles": "mathilde-near-msi-surface@2x.webp",
+        "source": {
+          "id": "mathilde-near-msi-42826360-image",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "detail": "NEAR MSI · 1997 flyby",
+        "summary": "Calibrated photographs retain their original illumination. Unseen areas stay on the grid."
+      },
+      {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows Thomas model radius minus a 26.4 km reference sphere. Source samples carrying the unobserved 26.5 km placeholder are withheld before interpolation and shown as gray grid. This is radial height, not gravitational elevation. The displayed Stooke visualization shape separately includes modeled unseen areas and modified crater floors; it is not the measured elevation surface. Brightness adds cartographic relief; Shadows adds illustrative directional lighting.",
