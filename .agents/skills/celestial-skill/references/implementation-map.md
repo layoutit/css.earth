@@ -182,6 +182,17 @@ because lowest-emission selection cannot separate them. The
 [Dimorphos README](../../../../src/planets/dimorphos/README.md) records the
 measured residuals, transfer distances and the archive's pixel-scale unit slip.
 
+A cube can contain intercepts for multiple bodies in their respective local
+frames. Its optional `cube.geometrySelection` declares a native geometry plane,
+its exact label unit, an inclusive interval and its interpretation. Selection
+applies before camera fitting and to every interpolation contributor; it never
+uses brightness. Didymos uses the archived radius plane to separate its
+0.2–0.5 km intercepts from Dimorphos. Tests bracket both complete source meshes,
+require camera holdouts and check the selected points against Didymos's mesh.
+The DART label lists only the companion's DSK, so Didymos separately binds
+`SHAPREF1` and documents that archive inconsistency. Do not interpret a label's
+single DSK entry as proof that every pixel belongs to that shape.
+
 Archives that ship images with SPICE kernels and no geometry at all use
 `format: "spice-camera"`: the recipe's `spice` block names the kernel set (pinned
 inputs of the observation's consumer group, in metakernel order), the observer

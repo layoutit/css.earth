@@ -5,6 +5,7 @@
 | View or property | Source and interpretation |
 | --- | --- |
 | Shape | [DART Didymos v003](https://doi.org/10.26007/bm57-x327), [Daly et al. 2023 bundle](https://doi.org/10.26007/96fn-p578): `didymos_g_9309mm_spc_obj_0000n00000_v003.obj`. The 9.309 m mesh derives from DRACO/LUKE images; source accuracy is approximately 14 m. |
+| DRACO mosaic | Two calibrated [DART geometry products](https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/), acquired at 23:11:46.381 and 23:12:49.930 UTC on 26 September 2022. The earlier image contains the whole silhouette; the closer image shows only part of Didymos. Qualified photography covers about 14% of the displayed mesh. Unobserved surface retains the grid. |
 | Relative albedo | The same SPC facet field: modeled relative brightness, not a photograph or geometric albedo. Positive finite sigma qualifies 58.2072% of source area. Other facets remain gaps; eligible values use a linear 0.75–1.4 display. |
 | Elevation | Shape radius minus 365 m, false color over −120 to +90 m; not gravitational height. |
 
@@ -14,7 +15,37 @@ The retained source checks cover closed 800-face geometry, independent facet/cen
 
 [Source test definitions](../../../tests/objects/unit/didymos/source.test.mts).
 
+The two DRACO cameras are recovered from the selected target's archived XYZ/pixel
+pairs. Their maximum disjoint holdout residuals are below 0.00001 source pixels.
+The 307 and 104 sampled intercepts transfer to the retained 9.309 m source OBJ
+within 5.00 and 1.08 m respectively, inside the existing 8 m limit. These checks
+establish internal camera consistency and transfer between the released meshes;
+they do not improve the source's scientific accuracy. The [DRACO tests](../../../tests/objects/unit/didymos/draco.test.mts)
+also require the unfiltered, mixed-body camera fit to fail.
+
+The preparation trial uses 64 deterministic samples per triangle on the unchanged
+800-face mesh: 13.96% area-weighted coverage, with 3.72% of total mesh area supplied
+by the closer frame. The remaining photographic area comes from the wider frame.
+An overlap fit raises the wider frame's display brightness by 7.06%, within the
+20% authored limit. This follows approximate Lommel–Seeliger disk normalization
+at nearly identical phase angles; it is a display adjustment, not recovered albedo.
+
 ## Known problems
+
+Both native geometry cubes contain Didymos and Dimorphos intercepts in their
+respective body-centred frames. The recipe selects the native `radius` plane
+between 0.2 and 0.5 km before fitting; tests show that this interval encloses
+every vertex of the Didymos source mesh and excludes every Dimorphos vertex.
+The labels list only the Dimorphos DSK although the FITS `SHAPREF1` card names
+the Didymos v003 1.165 m model. That card is pinned, and the selected intercepts
+are independently checked against the Didymos OBJ. The label's DSK entry alone
+does not identify the primary's surface.
+
+Photographic coverage is limited to two nearby viewing directions. Pixels above
+80° incidence or emission, missing interpolation contributors, and failed mesh
+or visibility checks remain gaps. Boulder shadows stay in the images. The coarse
+display mesh cannot reproduce every photographed boulder, and the mosaic is not
+a post-impact reconstruction. Shadows default off.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Didymos (retrieved 2026-09-12, public domain as USGS-produced data; the export ships no FGDC record, so the pin cites the USGS Copyrights and Credits statement) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (no projection file or metadata: the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries.
 
@@ -55,7 +86,7 @@ Each triangle uses the shared native PolyCSS `u` primitive with 128 px raster si
 | [DART final Didymos v003 OBJ series](https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/) | Included. Direct original mesh, source labels and SIS; the 9.309 m release is adequate for the selected display budget. Higher nominal-resolution versions share the source accuracy/coverage limitations. |
 | [Didymos relative-albedo facet table](https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml) | Included. The original FITS table names the exact selected OBJ. Its zero-based facet IDs match all 49,152 triangles; latitude, east longitude and radius reproduce their Cartesian centroids to 0.0001132 m maximum residual. The source field is sampled by the closest full-source triangle in 3D within the existing 8 m transfer bound. No albedo is interpolated across invalid facets. |
 | [Derived topography, slope, gravity and tilt products](https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/document/dart_shapemodel_sis.pdf) | Deferred. These are scientifically distinct, but gravity/topography depend on uniform-density assumptions and the rotation model, and share the facet-table decoding requirement. The current Elevation lens explicitly uses a reference sphere instead. |
-| [DRACO calibrated image archive](https://pdssbn.astro.umd.edu/data_sb/missions/dart/index.shtml) and LUKE inputs linked by the shape archive | Excluded as a runtime photographic lens in this package. Calibrated camera images have partial coverage and acquisition lighting and are not a global registered map. The shape-coordinate PDF retains useful actual-image references. No unsupported RGB composition or terrain fill is authored. |
+| [DRACO calibrated image archive](https://pdssbn.astro.umd.edu/data_sb/missions/dart/index.shtml) and LUKE inputs linked by the shape archive | Two DRACO geometry cubes are included as a registered, partial-coverage mosaic. The native radius plane separates the two bodies before camera fitting; the later partial image takes precedence where it qualifies. LUKE photography remains deferred because its own camera registration has not been qualified here. No RGB composition or terrain fill is authored. |
 | [NAIF DART global DSK](https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/dsk/) | Excluded duplicate geometry transport. The directly released OBJ already supplies the original indexed shape at an appropriate resolution without a DSK conversion dependency. |
 | [Mission PCK15](https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/pck/didymos_system_15.tpc) | Pinned comparison reference; not substituted for the shape-specific pole or radius. It also documents the distinction between Dimorphos's pre-impact rotation and the post-impact dynamic frame. |
 
