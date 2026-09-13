@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "3dc2bfc728294c70a985f1c4cb4001e78d7410cfd6fb3ad5148cb19a0288a970"
+    "sha256": "70346f9f6455dfefbb12b0b142236315739c77898addd353306072e20aa89403"
   },
   "id": "ceres",
   "properties": {
@@ -98,7 +98,7 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "14b59d20daf3a3e310e02b2f1900669d883673097b3f998b3dbb6ae8f50044b8"
+          "sha256": "edd5083f25d1901a65ee6c87ed877ca8c42bcfed38a0698d1cc2b76a50424c26"
         },
         {
           "id": "celestial",
@@ -152,7 +152,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d888c73f8021959029600e381ffd3627ab1b2cea727e833a2ca49ac285981b89"
+        "sha256": "01c6038eaa3c64b7285f9a3e78e906938779133e923485472018e320b6f2e7a5"
       }
     },
     "catalog": {

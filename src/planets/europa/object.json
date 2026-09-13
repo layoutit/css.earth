@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d6bffd729fa6af29de31602ccd0197f256f2a5d07305e94a346c289d25b802c8"
+    "sha256": "32bb1fb8fe4b80eebb4069c80a96f528e95d63bb2e03621335fa83def4b2f0fe"
   },
   "id": "europa",
   "properties": {
@@ -108,7 +108,7 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "1c8d1f924668e426140e4dd85c45720bc57175a39f4553e80550c250893233a9"
+          "sha256": "4f1777df630ee20c73507fbd3f7be61f302421a46fcb7755841904193bde4812"
         },
         {
           "id": "celestial",
@@ -162,7 +162,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8d57f8b02a0d365d70db718a36c7be00632fa2768f9ce29e55bb92f06ff9ba10"
+        "sha256": "07a7b8974ebd89b6d39b22095fe9f510f2218eccb63f56287c62e97d97ccda52"
       }
     },
     "catalog": {

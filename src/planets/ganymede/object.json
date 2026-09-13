@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "4ecdb19b3f6c02e7cd855d7e97268829a623d847e1dcbe08f7d3333646597225"
+    "sha256": "4db4da8497e039a71b9f2ba3c822612a0ad6e7289d872ddca2fbac966a15d4a3"
   },
   "id": "ganymede",
   "properties": {
@@ -103,7 +103,7 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "e3e09cbf346968af40544a4e99c9e418181ebdf17797b5bf1364f2c9127841e5"
+          "sha256": "e8ba45ad028229c1c1c4cedbf7b21895f3d1367bcb3e675c5620c075f5295929"
         },
         {
           "id": "celestial",
@@ -157,7 +157,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "62ba6fcbc1623ba678f3ebc4c0ad208c234f6e9b39075185a078ec87fc332683"
+        "sha256": "a104245f51b9c3351cfe432bfe4a9a63a289007cc4d046ba34a33a76802333b1"
       }
     },
     "catalog": {

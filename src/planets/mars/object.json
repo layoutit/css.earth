@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "77c1dd745494f151526564ddfd1047b05dd6d449eb860912068130339bee268d"
+    "sha256": "eda53cc26b753ba22e7eeea4fda3b1207f78763ca2316674819a0dd0c8b8b8cb"
   },
   "id": "mars",
   "properties": {
@@ -64,7 +64,7 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "0b4912be6e0df1f6d390b4c9bc43d161b1f1a3857570d0b1967e8bf0747e5b52"
+          "sha256": "fea22162e7f8f75850be273b1231f8e8a14abaa24cf133eec89b23c0107b6613"
         },
         {
           "id": "celestial",
@@ -163,7 +163,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e14ed2de4621cb5ddaf77e9fe5f6269656ba5c6e282fcbcddd60247f53b08f25"
+        "sha256": "db9d7f7a8c698a93da7c1b1d17e169b5f2ccc05af2a82bd6176b21f21ee1de8c"
       }
     },
     "catalog": {

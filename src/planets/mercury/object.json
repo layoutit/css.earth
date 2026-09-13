@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "55509f3d7d6367da6baec0fc4a6f312444dd66adf3157adc0d0c940ef0f8d0e5"
+    "sha256": "265c3867d7e2c31c621f9c8cea69e2729f9716a336e722485c181c9b3bfaf4ef"
   },
   "id": "mercury",
   "properties": {
@@ -64,7 +64,7 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "1d6a3cc572ba22e7d45a7b6649ad6c961e3366dbdccda7d23082ade9427aff45"
+          "sha256": "8dcaca0096ccdcb05152db1e5d262cd48911ea22fb5765181ad8ed67759be345"
         },
         {
           "id": "celestial",
@@ -169,7 +169,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4d3c592a0a6e0528d2e164a80a2732fd45110638fa45ffa5642f32bc1570953c"
+        "sha256": "1890b7fcb1061ded09af412fad6dc31ca65b8b722c59bc03b50941cb8bd3c3fd"
       }
     },
     "catalog": {
