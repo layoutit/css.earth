@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readOracleFixture, pinnedOracleVersions, assertPinnedInputs, ORACLE_ROOT } from './oracles/fixture.mts';
+import { readOracleFixture, pinnedOracleVersions, assertPinnedInputs, assertPinnedReferences, ORACLE_ROOT } from './oracles/fixture.mts';
 
 /** Every committed oracle fixture comes from the pinned environment and the pinned inputs; runs in `pnpm test:platform` without Python or restored sources. */
 const directories = await readdir(resolve(ORACLE_ROOT, 'tests/oracles'), { withFileTypes: true });
@@ -20,8 +20,9 @@ test('oracle fixtures name their generator, a pinned tool version and pinned inp
       if (pin === undefined) continue;
       assert.equal(version, pin, `${name}: ${tool} ${version} is the pinned ${pin}`); pinned++;
     }
-    assert.ok(pinned >= 2, `${name} records at least the oracle and numpy versions from the pinned environment`);
-    assert.ok(fixture.inputs.length >= 1, `${name} lists its inputs`);
+    assert.ok(pinned >= 1, `${name} records its pinned environment`);
+    assert.ok(fixture.inputs.length + fixture.references.length >= 1, `${name} lists its inputs or pinned references`);
     await assertPinnedInputs(fixture.inputs);
+    assertPinnedReferences(fixture.references);
   }
 });

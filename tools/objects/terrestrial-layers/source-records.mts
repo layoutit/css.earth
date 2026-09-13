@@ -153,8 +153,19 @@ export const cameraFrameFields = {id:text,path:text,labelPath:text,encoding:opti
   quality:optional(shape({imageId:text,target:text,startTime:text,filter:text,rawPath:text,rawLabelPath:text,badDataPath:text,badDataLabelPath:text}))};
 export const parseCameraFrame = shape(cameraFrameFields);
 export const parseCameraShape = shape({format:text,path:text,grid:requireRecord});
-export const cameraPhotometry = shape({model:optional(text),weight:number,maximumGain:number,displayMaximum:number,gamma:number,minimumLevel:number,maximumLevel:number,
+const legacyCameraPhotometry = shape({model:optional(text),weight:number,maximumGain:number,displayMaximum:number,gamma:number,minimumLevel:number,maximumLevel:number,
  maximumIncidenceDegrees:number,maximumEmissionDegrees:number,backgroundMaximum:optional(number)});
+const publishedCameraPhotometry = shape({model:text,referenceDegrees:shape({incidence:number,emission:number,phase:number}),
+ limits:shape({maximumIncidenceDegrees:number,maximumEmissionDegrees:number,phaseDegrees:array(number),minimumGain:number,maximumGain:number}),
+ displayMaximum:number,gamma:number,minimumLevel:number,maximumLevel:number,backgroundMaximum:optional(number)});
+const PUBLISHED_CAMERA_KEYS = ['model','referenceDegrees','limits','displayMaximum','gamma','minimumLevel','maximumLevel','backgroundMaximum'];
+/** A camera mosaic names a published model record with its display settings, or keeps the historical Lunar-Lambert block; never a mix. */
+export const cameraPhotometry: Decoder<ReturnType<typeof legacyCameraPhotometry> | ReturnType<typeof publishedCameraPhotometry>> = value => {
+ const record = requireRecord(value), published = typeof record.model === 'string' && record.model.startsWith('photometry/');
+ if (published && Object.keys(record).some(key => !PUBLISHED_CAMERA_KEYS.includes(key))) throw new TypeError('A published camera photometry block names only its model, reference geometry, limits and display settings.');
+ if (!published && ('referenceDegrees' in record || 'limits' in record)) throw new TypeError('Only a published photometric model declares a reference geometry and limits.');
+ return published ? publishedCameraPhotometry(value) : legacyCameraPhotometry(value);
+};
 export const parseCameraMosaic = shape({frames:array(parseCameraFrame),photometry:cameraPhotometry});
 export const parseCameraColor = shape({channels:array(shape({filter:text,channel:text,frames:array(parseCameraFrame)})),photometry:cameraPhotometry,
  frames:optional(array(parseCameraFrame)),metadata:shape({falseColor:boolean})});
@@ -164,8 +175,18 @@ export const parseLevelMatching = shape(levelMatchingFields);
 export const surfaceTransfer = shape({maximumSourceDistanceMeters:number,maximumSeparationMeters:number,visibilityToleranceMeters:number,maximumEmissionDegrees:number});
 export const parseSurfaceGeometry = shape({format:optional(text),sourceTopology:optional(text),simplification:shape({method:optional(text),maximumErrorMeters:number})});
 export const surfaceIdentityFields = {id:text,format:text,consumer:text,metadata:shape({label:text,coverage:text})};
+export const parsePublishedPhotometry = shape({model:text,referenceDegrees:shape({incidence:number,emission:number,phase:number}),
+ limits:shape({maximumIncidenceDegrees:number,maximumEmissionDegrees:number,phaseDegrees:array(number),minimumGain:number,maximumGain:number})});
+const PUBLISHED_PHOTOMETRY_KEYS = ['model','referenceDegrees','limits'];
+/** A photometry block names either a published model record under photometry/ or one of a route's historical forms, never a mix. */
+export const publishedOr = <T,>(legacy: Decoder<T>): Decoder<T | ReturnType<typeof parsePublishedPhotometry>> => value => {
+  const record = requireRecord(value), published = typeof record.model === 'string' && record.model.startsWith('photometry/');
+  if (published && Object.keys(record).some(key => !PUBLISHED_PHOTOMETRY_KEYS.includes(key))) throw new TypeError('A published photometry block names only its model, reference geometry and limits.');
+  if (!published && ('referenceDegrees' in record || 'limits' in record)) throw new TypeError('Only a published photometric model declares a reference geometry and limits.');
+  return published ? parsePublishedPhotometry(value) : legacy(value);
+};
 export const parseEncounterRecipe = shape({...surfaceIdentityFields,frames:array(shape({id:text,path:text,labelPath:text,controlPath:text})),
- transfer:surfaceTransfer,photometry:shape({model:text,maximumGain:number}),selection:text,displayPercentiles:array(number),levelMatching:optional(parseLevelMatching)});
+ transfer:surfaceTransfer,photometry:publishedOr(shape({model:text,maximumGain:number})),selection:text,displayPercentiles:array(number),levelMatching:optional(parseLevelMatching)});
 export const parseEncounterSourceControl = shape({observation:parseEncounterPolicy,camera:parseEncounterControl,registration:parseEncounterRegistration});
 export const parseOrthographicRecipe = shape({...surfaceIdentityFields,path:text,coordinatePaths:array(text),maximumCoordinateErrorMeters:number,maximumSourceDistanceMeters:number,
  grid:shape({...dimensions,pixelToSource:array(number)}),displayRange:array(number)});
@@ -197,8 +218,8 @@ export type SpiceCameraDeclaration = ReturnType<typeof parseSpiceCamera>;
 export const parseLimbRefinement = shape({method:text,maximumCorrectionDegrees:number,maximumResidualPixels:number,minimumControls:number,threshold:optional(number),searchPixels:optional(number),maximumControls:optional(number),minimumSharpness:optional(number)});
 export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),cube:optional(parseGeometryCube),spice:optional(parseSpiceCamera),refinement:optional(parseLimbRefinement),
  frames:optional(array(shape({id:text,...geoFramePathFields}))),selection:optional(text),levelMatching:optional(parseLevelMatching),
- transfer:surfaceTransfer,photometry:shape({model:text,phaseCorrection:optional(parsePhasePhotometry),coefficient:optional(number),phaseCoefficientPerDegree:optional(number),
- referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,maximumGain:number}),displayPercentiles:array(number)});
+ transfer:surfaceTransfer,photometry:publishedOr(shape({model:text,phaseCorrection:optional(parsePhasePhotometry),coefficient:optional(number),phaseCoefficientPerDegree:optional(number),
+ referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,maximumGain:number})),displayPercentiles:array(number)});
 export const parseGeoCameraClosure = shape({...archivedCameraFields,meshSha256:text,provenance:array(shape({path:text,sha256:text}))});
 
 /** Only fields used to interpret science values; source-specific readers own their grids. */

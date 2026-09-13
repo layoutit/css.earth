@@ -521,8 +521,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4867,
-      "expectedSha256": "0e289d02429797207c6067110d1ca4e4390b75cb29ebac48bee9c57ce0703425"
+      "expectedBytes": 5016,
+      "expectedSha256": "21fc9b4e46a4a2caa6c842873d3b5e525332efd91aa0c730203088e82eb2cfb2"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -625,6 +625,23 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "photometry/hasselmann-2016-hapke-1993.json",
+      "expectedBytes": 663,
+      "expectedSha256": "c2e60730c7d6c0b9bc8b5a688d8d5dfeed8fe948bb240141da3c8ecf9037f718",
+      "purpose": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-icarus-2015-11-023",
+            "role": "method",
+            "evidence": "Hasselmann et al. (2016) fit the Hapke (1993) model to NAC F82+F22 images of the Baetica and Etruria regions. Table 5 prints the parameters with uncertainties. Table 1 gives the 0.15-144.15 degree phase range, and the analysis removed facets beyond 80 degrees incidence or emission.",
+            "locator": "Table 5, Hapke (1993) column; Table 1, NAC F82+F22 row"
+          }
+        ]
       }
     }
   ]

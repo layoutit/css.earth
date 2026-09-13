@@ -1,6 +1,7 @@
 import type {ObservationGeometry,PhotometryProfile,ObservedColorContext,ColorBand,RgbObservation} from './contracts.mts';
 import {shape,text,array as sourceArray,number} from './source-records.mts';
 import {requireRecord} from '../../source-values.mts';
+import { diskGain as diskFunctionGain } from '../../photometry/disk.mts';
 const numberArray=sourceArray(number);
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -58,9 +59,8 @@ export function colorPhotometricGain(normal: readonly number[], geometry: Observ
       mu0 < Math.cos(profile.maximumIncidenceDegrees * radians) ||
       mu < Math.cos(profile.maximumEmissionDegrees * radians)) return null;
   // ISIS Lunar-Lambert: weight 0 is Lambert, weight 1 is Lommel-Seeliger.
-  const disk = (incidence: number, emission: number) => (1 - weight) * incidence + 2 * weight * incidence / (incidence + emission);
-  return disk(Math.cos(profile.referenceIncidenceDegrees * radians),
-    Math.cos(profile.referenceEmissionDegrees * radians)) / disk(mu0, mu);
+  return diskFunctionGain({ family: 'lunar-lambert', weight }, { mu0, mu, phase: 0 },
+    { mu0: Math.cos(profile.referenceIncidenceDegrees * radians), mu: Math.cos(profile.referenceEmissionDegrees * radians), phase: 0 });
 }
 
 

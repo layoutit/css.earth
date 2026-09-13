@@ -637,8 +637,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6081,
-      "expectedSha256": "ad066349ab00928c5446417c2064a88f2a61a62172e094319b1cf101b2ef587b"
+      "expectedBytes": 6365,
+      "expectedSha256": "049d96dfb0f099dc69e5af33cb81859fc7e8541e95d3d2f677e8dc94aeb3e065"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -747,6 +747,23 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "photometry/helfenstein-1996-hapke.json",
+      "expectedBytes": 589,
+      "expectedSha256": "99f9e82b31e460a3f94f445a20d08a71bcae183cfa2d8d1b8210b54afc17c722",
+      "purpose": "Published Hapke photometric model of Ida at 0.55 um, used to normalize the Galileo photograph mosaic.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1006-icar-1996-0036",
+            "role": "method",
+            "evidence": "Helfenstein et al. (1996) give the single-scattering albedo, opposition width and amplitude, asymmetry factor and roughness at 0.55 um, fitted to Galileo images at 19.5-109.8 degrees phase combined with near-opposition Earth-based data.",
+            "locator": "Abstract"
+          }
+        ]
       }
     }
   ]
