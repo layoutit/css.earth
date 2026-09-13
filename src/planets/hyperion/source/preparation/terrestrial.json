@@ -662,22 +662,6 @@
                 -144.44871944628045
               ],
               "pixelAngleMicroradians": 5.9896977199
-            },
-            {
-              "id": "n1506389543",
-              "path": "observations/N1506389543_2_CALIB.IMG",
-              "labelPath": "observations/N1506389543_2_CALIB.LBL",
-              "observerLatitude": 10.98,
-              "observerWestLongitude": 201.75,
-              "sunLatitude": 11.11,
-              "sunWestLongitude": 253.65,
-              "rangeKm": 27394.5,
-              "northAzimuthDegrees": 329.6167016809599,
-              "center": [
-                -50.79753533680443,
-                -8.696277046463115
-              ],
-              "pixelAngleMicroradians": 5.9896977199
             }
           ],
           "checks": [
@@ -685,7 +669,6 @@
               "reference": "n1506388174",
               "targets": [
                 "n1506388518",
-                "n1506389543",
                 "n1506388324",
                 "n1506388291",
                 "n1506388236",
@@ -730,14 +713,6 @@
                 "n1506389328",
                 "n1506389295",
                 "n1506389240"
-              ]
-            },
-            {
-              "reference": "n1506389543",
-              "targets": [
-                "n1506389683",
-                "n1506389650",
-                "n1506389595"
               ]
             }
           ]
