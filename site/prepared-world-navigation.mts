@@ -83,6 +83,16 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         bodyRadiusM: systemRadius ?? frame.bodyRadiusM,
       }, optics);
     },
+    /** The world camera a URL's saved view names on the mounted object, or null without one.
+     * An invalid view, or one from another prepared date, restores and reports as before, without a flight. */
+    savedTarget({ objectId, url, mount }: { objectId: string; url: string; mount?: ShellCamera | null }) {
+      const owner = mount?.navigation, frame = frames.get(objectId), query = new URL(url).searchParams;
+      if (!owner || !frame || query.getAll('v').length !== 1) return null;
+      try {
+        const saved = parseSharedView(`v=${query.get('v')}`);
+        return saved ? savedWorldCamera(saved, frame, owner.optics()) : null;
+      } catch { return null; }
+    },
     async focus({ objectId, mount, signal, reducedMotion = false, targetWorldCamera = null, targetFocusPositionM = null, centerSelection = false, timing = { mark() {} } }: FocusRequest) {
       const owner = mount?.navigation, frame = frames.get(objectId);
       if (!owner || !frame) throw new TypeError('Object focus requires its mounted prepared camera.');

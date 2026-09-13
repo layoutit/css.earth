@@ -37,7 +37,7 @@ type MockMedia = EventTarget & {matches: boolean};
 type MockHistory = {readonly state: Record<string, unknown>; replaceState(state: Record<string, unknown>, unused: string, url: string | URL | null): void; pushState(state: Record<string, unknown>, unused: string, url: string | URL | null): void; back(): void; forward(): void};
 type MockWindow = EventTarget & {readonly location: URL; history: MockHistory; matchMedia(): MockMedia; performance: Pick<Performance, 'now'>; setTimeout(callback: () => void, delay?: number): ReturnType<typeof setTimeout> | number; clearTimeout(id: ReturnType<typeof setTimeout> | number | undefined): void; requestAnimationFrame(callback: FrameRequestCallback): number; cancelAnimationFrame(handle: number): void};
 type Harness = { router: ReturnType<typeof createSceneRouter>; windowTarget: MockWindow; documentTarget: MockDocument; media: MockMedia; mounts: MockMount[]; shells: MockShell[]; renders: Set<MockMount>; errors: unknown[]; writes: string[]; entries: { state: Record<string, unknown>; url: string }[]; preparations: MockRequest[]; disposedContent: string[]; maxRendered(): number };
-type HarnessOptions = { prepare?: MockPrepare; focus?: MockFocus; centerTarget?: MockTarget; systemTarget?: MockTarget; overviewTarget?: MockTarget; initialUrl?: string | null; factoryGate?: Deferred | null; contentGate?: Deferred | null; persistentWorldContext?: MockWorldContext | null; withSun?: boolean; worldFrames?: Record<string, PreparedWorldCameraFrame> | null; datasets?: boolean; datasetGate?: Deferred | null };
+type HarnessOptions = { prepare?: MockPrepare; focus?: MockFocus; centerTarget?: MockTarget; systemTarget?: MockTarget; overviewTarget?: MockTarget; savedTarget?: MockTarget; initialUrl?: string | null; factoryGate?: Deferred | null; contentGate?: Deferred | null; persistentWorldContext?: MockWorldContext | null; withSun?: boolean; worldFrames?: Record<string, PreparedWorldCameraFrame> | null; datasets?: boolean; datasetGate?: Deferred | null };
 
 // A navigation lets the sidebar swap render in its own frame (a timer, then a
 // zero-delay timer in the harness), so one flush spans three timer turns.
@@ -50,7 +50,7 @@ function deferred(): Deferred {
 const saved = (distance: number): SharedView => ({ camera: { distanceKilometers: distance,
   pose: { schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } },
   playback: { times: [1234], speed: 1, motionRequested: false } });
-function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget, overviewTarget, initialUrl = null, factoryGate = null, contentGate = null, persistentWorldContext = null, withSun = false, worldFrames = null, datasets = false, datasetGate = null }: HarnessOptions = {}): Harness {
+function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget, overviewTarget, savedTarget, initialUrl = null, factoryGate = null, contentGate = null, persistentWorldContext = null, withSun = false, worldFrames = null, datasets = false, datasetGate = null }: HarnessOptions = {}): Harness {
   const documentTarget: MockDocument = Object.assign(new EventTarget(), { hidden: false, documentElement: { dataset: {} }, body: { classList: { add() {}, remove() {} } } });
   const media: MockMedia = Object.assign(new EventTarget(), {matches: false});
   const windowTarget = new EventTarget() as MockWindow;
@@ -179,7 +179,7 @@ function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget
       return { id: object.id, name: object.name, apply() { assert.equal(signal.aborted, false); }, dispose() { disposedContent.push(object.id); } };
     },
     navigation: {
-      focus, centerTarget, systemTarget, overviewTarget,
+      focus, centerTarget, systemTarget, overviewTarget, savedTarget,
       supports: (from: string, to: string) => from !== 'earth' && to !== 'earth',
       prepare(options: MockRequest) { preparations.push(options); return prepare(options); },
     } as unknown as RouterOptions['navigation'],
@@ -233,6 +233,25 @@ test('same-owner Back and Forward restore the exact saved camera before its prep
   assert.equal(h.mounts.length, 1);
   assert.deepEqual([...h.errors, ...context.errors], []);
   h.router.destroy();
+});
+
+test('history within one object flies to the saved view, then restores it exactly', async () => {
+  const flights: unknown[] = [];
+  const h = harness({ savedTarget: ({ url }) => ({ view: new URL(url).searchParams.get('v') }),
+    focus: async ({ targetWorldCamera }) => { flights.push(targetWorldCamera); } });
+  await h.router.settled;
+  const link = (distance: number) => `https://example.test/mercury/?${formatSharedView(saved(distance))}`;
+  await h.router.navigate('mercury', { url: link(30000) });
+  await h.router.navigate('mercury', { url: link(70000) });
+  flights.length = 0;
+  h.windowTarget.history.back(); await h.router.settled;
+  assert.deepEqual(flights, [{ view: new URLSearchParams(formatSharedView(saved(30000))).get('v') }], 'Back flies to the saved view once');
+  assert.equal(h.mounts[0].value.camera.distanceKilometers, 30000, 'and then restores it exactly');
+  h.windowTarget.history.forward(); await h.router.settled;
+  assert.equal(flights.length, 2);
+  assert.equal(h.mounts[0].value.camera.distanceKilometers, 70000);
+  assert.equal(h.mounts.length, 1);
+  assert.deepEqual(h.errors, []); h.router.destroy();
 });
 
 test('ordinary planet selection clears the departed catalogue focus in both the requested URL and mounted camera', async () => {

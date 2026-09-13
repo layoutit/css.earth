@@ -432,6 +432,16 @@ export function createSceneRouter({
         if (restore) {
           if (request.options.history === 'pop' || request.url !== windowTarget.location.href) historyOwner?.commit(request.url, request.options);
           source.url = request.url;
+          // History within one object flies to its saved view, as history between objects does;
+          // it used to jump there in one frame. The exact saved state is still restored afterwards.
+          const savedWorld = request.options.history === 'pop' && !reducedMotionActive
+            ? navigation.savedTarget?.({ objectId: object.id, url: request.url, mount: source.mount }) : null;
+          if (savedWorld && navigation.focus) {
+            syncPlayback();
+            const flown = await request.lifetime.wait(navigation.focus({ objectId: object.id, mount: source.mount!,
+              signal: request.controller.signal, reducedMotion: reducedMotionActive, targetWorldCamera: savedWorld, timing: request.timing }));
+            if (flown.cancelled || pending !== request) return false;
+          }
         } else if (!datasetLink && !request.cancelledFlight && !request.options.preserveView && navigation.focus) {
           syncPlayback();
           const focused = await request.lifetime.wait(navigation.focus({ objectId: object.id,
