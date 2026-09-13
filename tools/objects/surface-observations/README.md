@@ -34,6 +34,7 @@ new route.
 | `pds4-geometry-cube` | `formats/geo.mts` | Fitted to the backplanes | Archive backplanes |
 | `osiris-camera` | `formats/geo.mts` | Archived closure | Source-mesh rays |
 | `llorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
+| `near-msi-camera` | `formats/geo.mts` | Thomas reconstructed Mathilde image table, with a checked limb refinement | Source-mesh rays |
 | `nh-lorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
 | `nh-mvic-camera` | `formats/geo.mts` | Archived closure through a fitted image transform; three registered filters shown as colour | Source-mesh rays |
 | `spice-camera` | `formats/geo.mts` | SPICE kernels | Source-mesh rays |
@@ -42,6 +43,14 @@ new route.
 
 The [implementation map](../../../.agents/skills/celestial-skill/references/implementation-map.md#choose-a-photograph-route)
 says which format fits what an archive ships.
+
+NEAR MSI uses the calibrated I/F frame and its original raw detector frame.
+The raw frame identifies missing telemetry and saturation independently of
+brightness. The archive's unresolved quality index remains a reported
+limitation. [Mathilde's recipe](../../../src/planets/mathilde/source/preparation/near-msi.json)
+binds the reconstructed image table and calibration; reproduce its cameras with
+`node tools/objects/near-msi/prepare-cameras.mts`. Preliminary FITS pointing is
+not interchangeable with the geometry used to construct the shape model.
 
 ## Adding an archive product
 

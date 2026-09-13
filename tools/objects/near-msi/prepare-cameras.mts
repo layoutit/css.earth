@@ -1,0 +1,28 @@
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { createHash } from 'node:crypto';
+import { array, number, shape, text } from '../terrestrial-layers/source-records.mts';
+import { mathildeImageCamera, decodeNearMsi } from '../terrestrial-layers/near-msi.mts';
+
+const source = resolve(process.argv[2] ?? 'src/planets/mathilde/source');
+const profilePath = 'preparation/near-msi.json';
+const profile = shape({ mesh: text, imageGeometry: text, references: array(text), frames: array(shape({
+  met: number, filter: text, image: text, raw: text, label: text, output: text,
+})) })(JSON.parse(await readFile(resolve(source, profilePath), 'utf8')));
+const bytes = (path: string) => readFile(resolve(source, path));
+const digest = async (path: string) => createHash('sha256').update(await bytes(path)).digest('hex');
+const table = (await bytes(profile.imageGeometry)).toString('utf8');
+for (const frame of profile.frames) {
+  const label = (await bytes(frame.label)).toString('utf8');
+  const startTime = /<start_date_time>([^<]+)<\/start_date_time>/.exec(label)?.[1];
+  if (!startTime || !Number.isFinite(Date.parse(startTime)) || !label.includes(`<file_name>${frame.image.split('/').at(-1)}</file_name>`)) throw new Error('NEAR MSI label does not identify the selected observation.');
+  const identity = { met: frame.met, filter: frame.filter, startTime,
+    imageSha256: await digest(frame.image), rawSha256: await digest(frame.raw) };
+  decodeNearMsi(await bytes(frame.image), await bytes(frame.raw), identity);
+  const paths = [profile.mesh, profilePath, profile.imageGeometry, frame.image, frame.raw, frame.label, ...profile.references];
+  const provenance = [];
+  for (const path of paths) provenance.push({ path, sha256: await digest(path) });
+  const closure = { ...mathildeImageCamera(table, frame.met), ...identity, meshSha256: await digest(profile.mesh), provenance };
+  await writeFile(resolve(source, frame.output), JSON.stringify(closure, null, 2) + '\n');
+  console.log(frame.output);
+}

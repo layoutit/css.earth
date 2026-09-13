@@ -1,0 +1,160 @@
+{
+  "baseRevision": "ebf7c8456aab3af05bf451e4dd2eede757e6dfac",
+  "changes": "NEAR MSI preparation, Mathilde alternative mesh and three-lens package in this commit.",
+  "browser": "152.0.7977.84",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "dpr": 1,
+  "manifestHash": "87fe180b3530dbe74a552cfe2cf355e8615adcdf0c27895607d73ddade065242",
+  "errors": [],
+  "defaultShadows": false,
+  "retainedAfterDragAndLighting": true,
+  "heroCamera": {
+    "pose": {
+      "schema": "cssearth-camera-pose@1",
+      "scene": "matrix3d(1,0,0,0,0,0.028431307748,-0.99959574866,0,0,0.99959574866,0.028431307748,0,0,0,0,1)",
+      "skybox": "matrix3d(-0.5053162,0.862585357694,0.024534347806,0,-0.7917266,-0.452121858415,-0.410797581169,0,-0.3432555,-0.227007157282,0.911396322835,0,0,0,0,1)",
+      "sunView": "matrix3d(1,0,0,0,0,-0.396679902135,0.917957000759,0,0,-0.917957000759,-0.396679902135,0,0,0,0,1)"
+    },
+    "pitch": 210,
+    "controlPitch": 210,
+    "controlYaw": 0,
+    "zoom": 1.1,
+    "distance": 1268.1121899895134,
+    "distanceKilometers": 145.55722528575282,
+    "distanceRadii": 5.513531260823971,
+    "levelOfDetail": {
+      "stage": "geometry",
+      "silhouetteDiameter": 459.9999999834965,
+      "billboardOpacity": 0,
+      "markerOpacity": 0,
+      "proxyOpacity": 0
+    },
+    "focal": 1247.08,
+    "principalOffset": [
+      0,
+      0
+    ],
+    "visibleRect": {
+      "left": -720,
+      "right": 720,
+      "top": -500,
+      "bottom": 500
+    },
+    "offAxisDegrees": 0,
+    "silhouetteRadius": 229.99999999174824
+  },
+  "mobileViewport": {
+    "width": 390,
+    "height": 844
+  },
+  "dpr2Selection": {
+    "desired": {
+      "lensId": "near-msi",
+      "shadows": false,
+      "orbit": true
+    },
+    "committed": {
+      "lensId": "near-msi",
+      "shadows": false,
+      "orbit": true
+    },
+    "plan": {
+      "required": [
+        "surface:near-msi",
+        "poles:near-msi",
+        "lighting"
+      ],
+      "prewarm": [],
+      "materials": {},
+      "pressedLenses": [
+        "near-msi"
+      ]
+    },
+    "pending": false,
+    "loadingMaterial": false,
+    "ready": true,
+    "error": null,
+    "viewRevision": 8
+  },
+  "registration": {
+    "frame": "msi-42826360",
+    "camera": {
+      "kind": "archived-closure",
+      "schema": "cssearth-archived-camera@1",
+      "rayMatrix": [
+        [
+          -0.00007049623507041079,
+          0.00010951790595257212,
+          -0.026733138177647303
+        ],
+        [
+          0.00006451837973612278,
+          0.00011901417124077991,
+          0.04486660708110924
+        ],
+        [
+          0.000007963524483809708,
+          0.00000527386441072305,
+          -0.9993414365646628
+        ]
+      ],
+      "matrix": [
+        [
+          -7679.702724371424,
+          7043.814128402545,
+          521.6781531019259,
+          422054.7132105009
+        ],
+        [
+          4177.976985148184,
+          4553.642121100734,
+          92.6770695176973,
+          130436.13302222342
+        ],
+        [
+          -0.03914919877395423,
+          0.08016166893665828,
+          -0.9960127745509327,
+          1209.7299154859106
+        ]
+      ],
+      "positionKm": [
+        47.80805311423569,
+        -97.03051132019738,
+        1204.8842860749608
+      ],
+      "sunDirection": [
+        -0.99799476555892,
+        -0.06069031312736042,
+        -0.017975923049993122
+      ]
+    },
+    "display": {
+      "range": "reference-pixels",
+      "percentiles": [
+        0,
+        99.5
+      ],
+      "low": -0.000057929712056647986,
+      "high": 0.004490645136684179,
+      "units": "relative I/F with original illumination; linear grayscale display",
+      "referenceFrame": "msi-42826360"
+    },
+    "shape": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720",
+    "image": "c852aeb4858a579821e724419c4cdebfb895749423c039e54e75b72986a8de8d",
+    "view": "Source camera and native grid; complete composition flipped and aspect-corrected only for display"
+  },
+  "images": {
+    "registration.webp": {
+      "bytes": 56520,
+      "sha256": "f5348e344ab03dc866d604fbcf605aa36ea85a1adf1cf60813869437ca8cf932"
+    },
+    "view.webp": {
+      "bytes": 97616,
+      "sha256": "7364365244c11e686bbb3d65a88dc5f9b7bc45a8121590aa85c3e76301c379f5"
+    }
+  }
+}

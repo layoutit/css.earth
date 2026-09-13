@@ -1,0 +1,110 @@
+{
+  "schema": "cssearth-archived-camera@1",
+  "matrix": [
+    [
+      -7702.243266334132,
+      7021.200926772655,
+      479.50753666899186,
+      394405.0950000003
+    ],
+    [
+      4165.122854237263,
+      4550.9766529817025,
+      443.4710217029182,
+      317085.80977777776
+    ],
+    [
+      0.019887136135938375,
+      0.1358234607697763,
+      -0.9905334367505378,
+      1211.69
+    ]
+  ],
+  "rayMatrix": [
+    [
+      -0.00007088749327354438,
+      0.00010893311937319946,
+      0.014454428224503806
+    ],
+    [
+      0.00006415871662830255,
+      0.00011824275078981446,
+      0.08399698443391149
+    ],
+    [
+      0.000007374319160693476,
+      0.000018400698776701995,
+      -0.9977490360549979
+    ]
+  ],
+  "positionKm": [
+    -24.09704398455517,
+    -164.57592918013026,
+    1200.2194599762593
+  ],
+  "sunDirection": [
+    -0.99799476555892,
+    -0.06069031312736042,
+    -0.017975923049993122
+  ],
+  "geometry": {
+    "imageMet": 42826370,
+    "latitude": 82.11,
+    "longitudeWest": 98.33,
+    "solarLatitude": -1.03,
+    "solarLongitudeWest": 176.52,
+    "rangeKm": 1211.69,
+    "northAzimuth": 145.93,
+    "centreSample": 325.5,
+    "centreLine": 441.6
+  },
+  "detector": {
+    "focalLengthMm": 166.85,
+    "pitchMm": [
+      0.016,
+      0.027
+    ],
+    "tableLineToDetector": 0.5925925925925926,
+    "convention": "Thomas image centres in square samples; north azimuth in row-down coordinates; FITS file order."
+  },
+  "met": 42826370,
+  "filter": "0",
+  "startTime": "1997-06-27T12:56:02.506Z",
+  "imageSha256": "73850540b752c7e59a8762bad073f2fb62a75e03fdfb2adfeab1d2b724ce104a",
+  "rawSha256": "0b1ef1367efa7ba625ecac05370171c02e90fa384c584735f5b096f1307dfd96",
+  "meshSha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720",
+  "provenance": [
+    {
+      "path": "shape/stooke-253mathilde.tab",
+      "sha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720"
+    },
+    {
+      "path": "preparation/near-msi.json",
+      "sha256": "7a29c6b463d276b21286dda02890b8864d0011eff06722a05bec794aab69f30e"
+    },
+    {
+      "path": "reference/253mathimg.tab",
+      "sha256": "f0ad2894719b09efbcde47e27074fcdc68f3afddd7b852d920ea26d2e357b6b0"
+    },
+    {
+      "path": "observations/near-msi/m0042826370f0_2p_iof.fit",
+      "sha256": "73850540b752c7e59a8762bad073f2fb62a75e03fdfb2adfeab1d2b724ce104a"
+    },
+    {
+      "path": "observations/near-msi/m0042826370f0_2p.fit",
+      "sha256": "0b1ef1367efa7ba625ecac05370171c02e90fa384c584735f5b096f1307dfd96"
+    },
+    {
+      "path": "observations/near-msi/m0042826370f0_2p_iof.xml",
+      "sha256": "ce4333af158ac7c3bcc7574ceadd69107e9e9f224b1b5ceb830e5fb0ed96c877"
+    },
+    {
+      "path": "reference/253mathimg.xml",
+      "sha256": "a23e17406a9bdc3221cd5ac678432242ba13ea4fea03a98e5fb66afd61b12995"
+    },
+    {
+      "path": "reference/stooke-253mathilde.xml",
+      "sha256": "1490838df80d8b5c21f985d459d13b7dacde9f7934044db6d696303c2297ab14"
+    }
+  ]
+}
