@@ -34,10 +34,29 @@ The [Shadows-on view](evidence/dinkinesh-shadows-true.png) was also inspected. T
 
 ### Lucy photographic source check, 13 September 2026
 
-The photographic upgrade is unresolved at source-model acquisition. The current
-Celestia reconstruction is not the model used to register Lucy observations.
-Its illustrative meridian and different dimensions prevent treating archived
-camera geometry as a qualified mapping onto this surface.
+An initial archive survey missed a downloadable mesh in the public history of
+the TEMPEST thermal-model repository. The photographic upgrade now has a
+numerical source candidate; its frame and image registration remain unqualified.
+The current Celestia reconstruction is still the displayed model. Its
+illustrative meridian and different dimensions prevent treating archived camera
+geometry as a qualified mapping onto that surface.
+
+- [TEMPEST's `dinkinesh.stl` at commit `7df4c88`](https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl)
+  was retrieved and parsed: 237,239 bytes, 635 distinct vertices, 1,266 triangles,
+  no zero-area faces, and two incident triangles per edge. Its SHA-256 is
+  `3c38e04484e42a90e8b284302111325f0519a61ab22772f73d541e2715e11622`.
+  The repository documents SI units. Interpreting coordinates as metres gives
+  extents of 840.493 × 888.591 × 718.490 m and a signed-volume equivalent
+  diameter of 737.508 m, without rescaling. The file was removed from the current
+  tree in a June 2026 cleanup; the public commit still contains its numeric data.
+- [Lyster et al. (2025)](https://doi.org/10.5194/epsc-dps2025-546)
+  describe reducing the mission photogrammetric model to 1,266 facets for
+  TEMPEST/TESBY. The author repository and matching facet count support that
+  source association, but do not independently establish the exact upstream
+  model version, prime meridian, observed/fill partition or camera solution.
+  [Jackson et al. (2025)](https://doi.org/10.3847/PSJ/ade23c) independently
+  describe a vertex-and-triangle model, version 2.02, reduced from 126,627 to
+  5,186 facets. That is a separate derivative, not the retrieved STL.
 
 - [Bierhaus et al. (2025), Sections 2.2 and 3.1](https://doi.org/10.3847/PSJ/ae1968)
   describe an improved mission model and co-registered images in SBMT. The model
@@ -64,10 +83,33 @@ camera geometry as a qualified mapping onto this surface.
   `lcy_230815_240201_240101_dinkinesh_reconstruction_final_v2.bsp`.
   A future reader must verify the selected product version and its geometry;
   the existence of TAN-SIP header fields alone is not a camera qualification.
+- The public [`dinkinesh_v10.tpc`](https://naif.jpl.nasa.gov/pub/naif/LUCY/kernels/pck/dinkinesh_v10.tpc)
+  explicitly uses a placeholder pole and retains the pre-encounter 52.67-hour
+  period. It is unsuitable for orienting this mesh. Jackson et al.'s published
+  ecliptic pole (95.53°, −87.05°) and 3.737-hour period do not supply the recovered
+  STL's rotational phase or prove that it uses the same prime meridian.
 
-Resume with the released mesh, its body-frame and observed/model-filled coverage
-definitions, and the matching reconstructed cameras or control network. Inspect
-a native-pixel image/model projection with independent holdouts before baking.
+The native-pixel diagnostic used
+[`lor_0752129617_03613_00001_1x1_sci_03.fit`](https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/lor_0752129617_03613_00001_1x1_sci_03.fit)
+and its [label](https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/lor_0752129617_03613_00001_1x1_sci_03.xml),
+the recovered STL and the corrected trajectory. The 10,526,400-byte FITS has
+SHA-256 `d2c86f7ed98c4f026c5cd52ed4d4dc7eed54d66b1a4ba95af171ccaaba9373d9`.
+It resolves Dinkinesh's relief and part of Selam. The corrected trajectory
+substantially changes the projected position relative to the old header vector,
+but does not align the model automatically.
+
+Exploratory phase and limb-pointing trials did not qualify a photographic
+surface. An outline-fit candidate passed a limited limb residual check while
+its visible relief disagreed with the photograph. That check used the existing
+pinhole limb helper, not a distortion-aware native-pixel fit; its residual is
+not a photographic accuracy measurement. Both the body orientation and
+independent internal-feature agreement remain unresolved. This diagnostic
+does not replace the existing product evidence or justify a texture bake.
+
+Continue by establishing the retrieved candidate's upstream attribution,
+body-frame and observed/model-filled coverage, and the matching reconstructed
+cameras or control network. Inspect a native-pixel image/model projection with
+independent holdouts before baking.
 No photographic surface, new geometry, or new landmark registration was
 prepared by this check; the existing browser evidence concerns the
 approximation only.
