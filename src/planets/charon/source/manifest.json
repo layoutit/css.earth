@@ -318,8 +318,8 @@
     {
       "id": "charon-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1004,
-      "expectedSha256": "bccf79b8dd338107720151a034eb60cd27a3b16c52c0f22182a24d71cf9b8251",
+      "expectedBytes": 1239,
+      "expectedSha256": "e2aa1821dc8e0ff93d4e38ef94455827eaba0c5d64c5d8c7ea2084587f270925",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -336,8 +336,8 @@
     {
       "id": "charon-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1181,
-      "expectedSha256": "d9e55e0f63f006dc9335f335a8895d189db0b6c77ca7e67bd93a8a3af767234b",
+      "expectedBytes": 1312,
+      "expectedSha256": "06c6682fae014a5860652e8b45d46532dc0dcd5ce82db30e6109350bf11175ba",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -447,8 +447,8 @@
     {
       "id": "charon-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 7163,
-      "expectedSha256": "28145e97a968ed401664dd0f7132e21a66e61f65b4260ca75d9c6479fb761001",
+      "expectedBytes": 10478,
+      "expectedSha256": "7725965ada011228099956849262ea2b6059787e578f6bf6c0b296883fa4dc64",
       "origin": "Repository-authored Charon raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -541,8 +541,8 @@
     {
       "id": "charon-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2030,
-      "expectedSha256": "04535fa6cc3feaf1fad37c65c23e3ffe52bbc0c67dd4989f65d155d5beb76d14",
+      "expectedBytes": 5239,
+      "expectedSha256": "72b0d3e469914419e0456453cb78a33c1aeef558f0d3529f7dd8ccf00c029bca",
       "origin": "Repository-authored Charon acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -560,8 +560,8 @@
     {
       "id": "charon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 13230,
-      "expectedSha256": "6d0efbb6ad1999da95abbbcfab5a381c4dc1d0d7df6c5091170db48eddcc8c53",
+      "expectedBytes": 17364,
+      "expectedSha256": "598566c1aba93a9a76397911794fb9a818ce470c7cdce48f3a4edb88489d511e",
       "origin": "Repository-authored Charon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -575,6 +575,470 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet, view descriptions and legends."
       }
+    },
+    {
+      "id": "0299175509_charon_cube-cube",
+      "path": "science/leisa/0299175509_charon_cube.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-p_psa-leisa_mvic-5-comp-v1.0/data/spec/0299175509_charon_cube.fit",
+      "catalog": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Restore the pinned native product through preparation/acquisition.json.",
+      "redistribution": "Retain mission, archive and product identifiers.",
+      "consumers": [
+        "leisa-ice"
+      ],
+      "expectedBytes": 419434560,
+      "expectedSha256": "c33dbdd082d6612ba41a5e8e7ce4fd76421334813558efe06f2c8a0d7b24f4b2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299175509",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx#cube"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx"
+          }
+        ]
+      }
+    },
+    {
+      "id": "0299175509_charon_cube-wavelengths",
+      "path": "science/leisa/0299175509_charon_wavelengths.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-p_psa-leisa_mvic-5-comp-v1.0/data/spec/0299175509_charon_wavelengths.fit",
+      "catalog": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Restore the pinned native product through preparation/acquisition.json.",
+      "redistribution": "Retain mission, archive and product identifiers.",
+      "consumers": [
+        "leisa-ice"
+      ],
+      "expectedBytes": 419434560,
+      "expectedSha256": "5f4ebc9cb6ecb9f67d685dceb5da948d30c547373f52b348717e1e0ed44134da",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299175509",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx#wavelengths"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx"
+          }
+        ]
+      }
+    },
+    {
+      "id": "0299175509_charon_cube-geometry",
+      "path": "science/leisa/0299175509_charon_geometry.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-p_psa-leisa_mvic-5-comp-v1.0/data/spec/0299175509_charon_geometry.fit",
+      "catalog": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Restore the pinned native product through preparation/acquisition.json.",
+      "redistribution": "Retain mission, archive and product identifiers.",
+      "consumers": [
+        "leisa-ice"
+      ],
+      "expectedBytes": 8196480,
+      "expectedSha256": "49b20130e431e988d004f5142d40d360b5b4a0d6dd65c8ffabb9f5e5e71554ff",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299175509",
+            "role": "reference",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx#geometry"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx"
+          }
+        ]
+      }
+    },
+    {
+      "id": "0299175509_charon_cube-label",
+      "path": "science/leisa/0299175509_charon_cube.lblx",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+      "catalog": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Restore the pinned native product through preparation/acquisition.json.",
+      "redistribution": "Retain mission, archive and product identifiers.",
+      "consumers": [
+        "leisa-ice"
+      ],
+      "expectedBytes": 17729,
+      "expectedSha256": "0edfb68a81bda916b72fe77e392db7f26fd2559a48829b904be9ac59cf85bf22",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299175509",
+            "role": "method",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx#label"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx"
+          }
+        ]
+      }
+    },
+    {
+      "id": "0299171308_charon_cube-cube",
+      "path": "science/leisa/0299171308_charon_cube.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.fit",
+      "catalog": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Restore the pinned native product through preparation/acquisition.json.",
+      "redistribution": "Retain mission, archive and product identifiers.",
+      "consumers": [
+        "leisa-ice"
+      ],
+      "expectedBytes": 104860800,
+      "expectedSha256": "00ea97e6c828f535868a8864d3b592f49f7473aaf349ac4d28d0e9cd88d3190d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299171308",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx#cube"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx"
+          }
+        ]
+      }
+    },
+    {
+      "id": "0299171308_charon_cube-wavelengths",
+      "path": "science/leisa/0299171308_charon_wavelengths.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_wavelengths.fit",
+      "catalog": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Restore the pinned native product through preparation/acquisition.json.",
+      "redistribution": "Retain mission, archive and product identifiers.",
+      "consumers": [
+        "leisa-ice"
+      ],
+      "expectedBytes": 104860800,
+      "expectedSha256": "f517266558805c5bee41956d590065934c3120eb4f5be56ad00da3b300e69e17",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299171308",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx#wavelengths"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx"
+          }
+        ]
+      }
+    },
+    {
+      "id": "0299171308_charon_cube-geometry",
+      "path": "science/leisa/0299171308_charon_geometry.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_geometry.fit",
+      "catalog": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Restore the pinned native product through preparation/acquisition.json.",
+      "redistribution": "Retain mission, archive and product identifiers.",
+      "consumers": [
+        "leisa-ice"
+      ],
+      "expectedBytes": 2053440,
+      "expectedSha256": "b53c0815a430cff5fa7e541808a6105dcdcd7a40fe037b42246003c7d7971b74",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299171308",
+            "role": "reference",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx#geometry"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx"
+          }
+        ]
+      }
+    },
+    {
+      "id": "0299171308_charon_cube-label",
+      "path": "science/leisa/0299171308_charon_cube.lblx",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx",
+      "catalog": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons team; NASA PDS Small Bodies Node",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Restore the pinned native product through preparation/acquisition.json.",
+      "redistribution": "Retain mission, archive and product identifiers.",
+      "consumers": [
+        "leisa-ice"
+      ],
+      "expectedBytes": 17730,
+      "expectedSha256": "773847bb6f69bc71be633a8147e35b74c4cf16c25dbcc8f85d60f7c7def439c8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299171308",
+            "role": "method",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx#label"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx"
+          }
+        ]
+      }
+    },
+    {
+      "id": "charon-leisa-water-ice",
+      "path": "science/leisa/water-ice.tif",
+      "origin": "Project preparation from the pinned New Horizons LEISA spectra",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons team; cssEarth band-map preparation",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Reproduce from science/leisa/bands.json with the spectral-band-maps acquisition operation.",
+      "redistribution": "Retain source and method credits.",
+      "consumers": [
+        "leisa-ice"
+      ],
+      "expectedBytes": 1037800,
+      "expectedSha256": "d5e97dc34ed6bbb93a9ec148f7a38efb92a7b580cc044ae365a9976a14810a91",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299175509",
+            "role": "material",
+            "evidence": "science/leisa/preparation.json"
+          },
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299171308",
+            "role": "material",
+            "evidence": "science/leisa/preparation.json"
+          },
+          {
+            "catalogueId": "grundy-2016-pluto-charon-compositions",
+            "role": "method",
+            "evidence": "Supplement page 3: continuum and absorption windows, Organa 310.9 E / 54.3 N; Fig. S6 spatial comparison."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "science/leisa/preparation.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "charon-leisa-ammonia",
+      "path": "science/leisa/ammonia.tif",
+      "origin": "Project preparation from the pinned New Horizons LEISA spectra",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons team; cssEarth band-map preparation",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Reproduce from science/leisa/bands.json with the spectral-band-maps acquisition operation.",
+      "redistribution": "Retain source and method credits.",
+      "consumers": [
+        "leisa-ice"
+      ],
+      "expectedBytes": 1037800,
+      "expectedSha256": "863ce7313592e1370c4e4c86837e1bcc56d05beb0443aee085b5ea1a531d6657",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299175509",
+            "role": "material",
+            "evidence": "science/leisa/preparation.json"
+          },
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299171308",
+            "role": "material",
+            "evidence": "science/leisa/preparation.json"
+          },
+          {
+            "catalogueId": "grundy-2016-pluto-charon-compositions",
+            "role": "method",
+            "evidence": "Supplement page 3: continuum and absorption windows, Organa 310.9 E / 54.3 N; Fig. S6 spatial comparison."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "science/leisa/preparation.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "charon-leisa-bands",
+      "path": "science/leisa/bands.json",
+      "expectedBytes": 3115,
+      "expectedSha256": "1887411040bae02b71058eea94422db5ba8800b03f5b4a2eb3eb314fe7a65384",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored spectral windows, averaging, geometry limits and output grid."
+      },
+      "consumers": [
+        "leisa-ice"
+      ],
+      "origin": "Project-authored spectral windows and quality policy; Grundy et al. (2016) supplies the ammonia estimator.",
+      "credit": "cssEarth; Grundy et al. (2016)",
+      "license": "MIT for authored recipe.",
+      "redistribution": "Retain attribution for the published spectral method.",
+      "acquisition": "Checked-in preparation policy."
+    },
+    {
+      "id": "charon-leisa-method",
+      "path": "science/leisa/grundy-2016-supplement.pdf",
+      "origin": "https://boulder.swri.edu/~buie/biblio/pub106.SOM.pdf",
+      "credit": "W. M. Grundy and coauthors; Science / AAAS, 2016",
+      "license": "Original publication, retained as a scientific reference; not relicensed.",
+      "redistribution": "The paper is not a runtime asset. Retain original publication notices.",
+      "acquisition": "Pinned author-hosted supplementary material.",
+      "consumers": [
+        "leisa-ice"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "grundy-2016-pluto-charon-compositions",
+            "role": "method",
+            "evidence": "Supplement page 3: continuum and absorption windows, Organa 310.9 E / 54.3 N; Fig. S6 spatial comparison."
+          }
+        ]
+      },
+      "expectedBytes": 2820762,
+      "expectedSha256": "6607dd35232b08be79db3006b7610a728785f9309fb0f0437461c1de223099b7"
+    },
+    {
+      "id": "charon-organa-landmark",
+      "path": "features/landmarks.json",
+      "origin": "Transcribed from Grundy et al. (2016), supplementary page 3.",
+      "credit": "Grundy et al. (2016); cssEarth transcription",
+      "license": "MIT for the authored coordinate record; cite the original study.",
+      "redistribution": "Retain the scientific citation and informal-name qualification.",
+      "acquisition": "Checked-in transcription of the published coordinate.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "grundy-2016-pluto-charon-compositions",
+            "role": "method",
+            "evidence": "Supplement page 3: continuum and absorption windows, Organa 310.9 E / 54.3 N; Fig. S6 spatial comparison."
+          }
+        ]
+      },
+      "expectedBytes": 971,
+      "expectedSha256": "c7ff1789d718ce710db089b5b2ff9c312c113bbe90d4de184f9c845549fc161d"
     }
   ],
   "documents": [
@@ -585,8 +1049,8 @@
     },
     {
       "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "expectedBytes": 36,
+      "expectedSha256": "a37bac73fe389c3d53ec16b60d032adbccea9cec413b8d866ae712b28164c0a9"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
@@ -677,6 +1141,16 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "id": "charon-leisa-preparation",
+      "path": "science/leisa/preparation.json",
+      "expectedBytes": 25961,
+      "expectedSha256": "ae64af36af753c1240e41d9ebe95dd2ee8a242c809ecd8580adfece059bd3ada",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Computed source byte identities, coverage and numerical anchors from the spectral-band preparation."
       }
     }
   ],
