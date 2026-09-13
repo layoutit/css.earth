@@ -19,6 +19,9 @@ import { readDescriptorDefinition, requireDescriptorAdapterSource } from './prep
 const runtimePath = "src/platform/object-runtime.mts";
 const registryPath = "site/objects.mts";
 const approvedSharedData = new Set(["src/objects/sun/prepared/world-context.json"]);
+// Registered objects own packages; context folders beside them (galaxies, nebulae, the heliosphere) are application data.
+const objectPackageIds: ReadonlySet<string> = new Set(OBJECTS.map(object => object.id));
+const objectPackage = (file: string) => file.startsWith('src/objects/') && objectPackageIds.has(file.split('/')[2] ?? '');
 // These are the application's common shell entry points. Their dependencies are
 // discovered from the real Astro AST, including template expressions and scripts.
 const shellEntries = ["site/layouts/PlanetLayout.astro", "site/components/PlanetShell.astro"];
@@ -732,7 +735,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       requireContextFrame(context, 'sun');
       return;
     }
-    if (file.startsWith("../") || file.startsWith("src/objects/")) {
+    if (file.startsWith("../") || objectPackage(file)) {
       sharedViolations.push({ file, line: 1, reason: "Shared runtime imports an object package" });
       return;
     }
@@ -752,7 +755,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
         continue;
       }
       try {
-        const target = await resolveRuntimeSource(imported, path, { root, source });
+        const target = await resolveRuntimeSource(imported, path, { root, source, objectIds: objectPackageIds });
         if (!target) throw new Error(`Unclosed shared runtime import ${imported}`);
         sharedEdges.get(path)!.add(target);
         await sharedVisit(target, shellContent, facts.serverImports?.includes(imported) ?? false);
@@ -862,7 +865,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     async function visit(path: string): Promise<void> {
       if (visited.has(path)) return;
       visited.add(path);
-      const file = relative(root, path), isObject = file.startsWith("src/objects/");
+      const file = relative(root, path), isObject = objectPackage(file);
       if (!isObject && sharedClosure.has(path)) return;
       if (isObject && !file.startsWith(`src/objects/${object.id}/`)) {
         violations.push({ file, line: 1, reason: "Object runtime imports another object package" });
