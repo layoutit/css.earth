@@ -5,8 +5,8 @@
   "defaultLens": "hst-optical",
   "bank": {
     "path": "src/objects/m2-9/prepared/lenses.json",
-    "sha256": "b29c84b6040183f1867e20a85835754a46efec602c8d268c112d28043668e2c9",
-    "bytes": 219826
+    "sha256": "cc741c7c0e673aac20d3ca881c48ff2cd7a57591c84d279343eaaa14270bbb76",
+    "bytes": 222752
   },
   "recipes": [
     {
@@ -18,36 +18,37 @@
     {
       "id": "delivery",
       "path": "src/objects/m2-9/source/delivery.json",
-      "sha256": "b4c999b140798a2e00b20d61f62d9e1c0eca1273d178b7230cbba7c8667f279d",
-      "bytes": 1156
+      "sha256": "ad7fb2969976729b63f4b23fbbb2b3988dc0e5d4a1a7231d0efd4d0e7b4a7f01",
+      "bytes": 1318
     }
   ],
   "sharedInputs": [
-    "image-frame"
+    "image-frame",
+    "stellar-field"
   ],
   "lenses": [
     {
       "id": "hst-optical",
-      "label": "Hubble · optical",
+      "label": "Hubble \u00b7 optical",
       "title": "The Twin Jet Nebula in visible light",
-      "description": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted 650pc model distance is uncertain; published expansion distance 1300±200pc would double this physical size. The accepted baseline contains no stellar catalogue. The reference image shows the photograph before star removal and symmetry reconstruction.",
+      "description": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted 650pc model distance is uncertain; published expansion distance 1300\u00b1200pc would double this physical size. The accepted baseline contains no stellar catalogue. The reference image shows the photograph before star removal and symmetry reconstruction. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
       "summary": "Visible-light outreach photograph; axial-symmetry depth model.",
-      "detail": "788 × 438 px",
+      "detail": "788 \u00d7 438 px",
       "facts": [
         {
           "id": "source-pixels",
           "label": "Accepted crop",
-          "value": "788 × 438 pixels"
+          "value": "788 \u00d7 438 pixels"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "58.0350 × 32.2766 arcsec"
+          "value": "58.0350 \u00d7 32.2766 arcsec"
         },
         {
           "id": "distance",
           "label": "Adopted distance",
-          "value": "650 pc; published alternative 1300 ± 200 pc"
+          "value": "650 pc; published alternative 1300 \u00b1 200 pc"
         }
       ],
       "input": "hst-optical",

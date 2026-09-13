@@ -1,0 +1,35 @@
+{
+  "id": "tiwari-2020-east",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Studying the effects and cause of the massive star formation in Messier 8 East",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202038886",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m8/physical-sources.json",
+      "revision": "9d0a453d4c82637ebc54277f97281e0c8426e85b",
+      "sha256": "5f26cfd85b557e6e2c0734d0339d088e5cc9c25b0638c2ada5720b1e392f13d0",
+      "locator": "/papers/6"
+    }
+  ],
+  "publisher": "M. Tiwari et al.",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "M. Tiwari et al.",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m8/physical-sources.json#/papers/6"
+    }
+  ],
+  "creators": [
+    "M. Tiwari et al."
+  ]
+}

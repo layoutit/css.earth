@@ -1,0 +1,331 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "noirlab-optical",
+      "path": ".local/nebula-lab/observations/m45-processing/sources/noirlab-optical.tif",
+      "origin": "https://noirlab.edu/public/images/noao-m45/",
+      "sourceUrl": "https://noirlab.edu/public/images/noao-m45/",
+      "title": "Pleiades \u00b7 NOIRLab \u00b7 optical B / V / I",
+      "credit": "NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
+      "displayCredit": "NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
+      "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
+      "expectedSha256": "473b92b49bee00f7a7028c80d9d63ea8f384ae80e46eb470558fecf93b255544",
+      "expectedBytes": 25288332,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-noao-m45",
+            "role": "material",
+            "evidence": "labs/nebula/models/m45/processing-observations.json#/images/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "noirlab-optical",
+      "license": "Provider terms: https://noirlab.edu/public/about/image-usage/. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "WIYN",
+            "evidence": "https://noirlab.edu/public/images/noao-m45/",
+            "reason": "The published image identifies WIYN, which is not yet represented in the shared machine catalogue."
+          }
+        ]
+      }
+    },
+    {
+      "id": "spitzer-irac",
+      "path": ".local/nebula-lab/observations/m45-processing/sources/spitzer-irac.tif",
+      "origin": "https://science.nasa.gov/photojournal/pink-pleiades/",
+      "sourceUrl": "https://science.nasa.gov/photojournal/pink-pleiades/",
+      "title": "Pleiades \u00b7 Spitzer \u00b7 IRAC 3.6\u20138 \u00b5m",
+      "credit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
+      "displayCredit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
+      "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
+      "expectedSha256": "03ef667b77b49f79040e4e12b3d601efe34c02abcee0e5eb78464eeafaf63684",
+      "expectedBytes": 24453299,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-pia09262",
+            "role": "material",
+            "evidence": "labs/nebula/models/m45/processing-observations.json#/images/1"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "spitzer-irac",
+      "license": "Provider terms: https://www.spitzer.caltech.edu/page/image-use-policy. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "spitzer",
+            "evidence": "https://science.nasa.gov/photojournal/pink-pleiades/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "spitzer-irac-mips",
+      "path": ".local/nebula-lab/observations/m45-processing/sources/spitzer-irac-mips.tif",
+      "origin": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
+      "sourceUrl": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
+      "title": "Pleiades \u00b7 Spitzer \u00b7 IRAC + MIPS 4.5\u201324 \u00b5m",
+      "credit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
+      "displayCredit": "NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
+      "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
+      "expectedSha256": "16bc76835b046b48c6682bd169bd8f75cbcb1b49d5a45b78ba7f4e7c281d8c8e",
+      "expectedBytes": 24453299,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-pia09263",
+            "role": "material",
+            "evidence": "labs/nebula/models/m45/processing-observations.json#/images/2"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "spitzer-irac-mips",
+      "license": "Provider terms: https://www.spitzer.caltech.edu/page/image-use-policy. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "spitzer",
+            "evidence": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wise-four-band",
+      "path": ".local/nebula-lab/observations/m45-processing/sources/wise-four-band.tif",
+      "origin": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/",
+      "sourceUrl": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/",
+      "title": "Pleiades \u00b7 WISE \u00b7 3.4\u201322 \u00b5m wide field",
+      "credit": "NASA/JPL-Caltech/UCLA",
+      "displayCredit": "NASA/JPL-Caltech/UCLA",
+      "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
+      "expectedSha256": "641b6b6298a9c04d752e05f4b6d8986a377be3139df3f3cf915bd23d7559076c",
+      "expectedBytes": 36796505,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-pia13121",
+            "role": "material",
+            "evidence": "labs/nebula/models/m45/processing-observations.json#/images/3"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "wise-four-band",
+      "license": "Provider terms: https://www.jpl.nasa.gov/jpl-image-use-policy/. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "wise",
+            "evidence": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "niittee-widefield",
+      "path": ".local/nebula-lab/observations/m45-optical-composite/sources/niittee-widefield.tif",
+      "origin": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
+      "title": "Pleiades \u00b7 T\u00f5rva / Niittee \u00b7 wide optical",
+      "credit": "Taavi Niittee / T\u00f5rva Astronomy Club",
+      "displayCredit": "Taavi Niittee / T\u00f5rva Astronomy Club",
+      "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
+      "expectedSha256": "96c04d4db1cd317544bd616fe41ce337f32aa1dac2fcd69702419f29c426e5aa",
+      "expectedBytes": 16654428,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "niittee-plejades",
+            "role": "material",
+            "evidence": "labs/nebula/models/m45/optical-composite-observations.json#/images/1"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "optical-composite",
+      "license": "Provider terms: https://creativecommons.org/licenses/by/4.0/. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Taavi Niittee / T\u00f5rva Astronomy Club",
+            "evidence": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
+            "reason": "This photographer's observing equipment is not represented in the shared machine catalogue."
+          }
+        ]
+      }
+    },
+    {
+      "id": "physical-evidence",
+      "path": "labs/nebula/models/m45/physical-evidence.json",
+      "origin": "https://doi.org/10.1086/374590",
+      "sourceUrl": "https://doi.org/10.1086/374590",
+      "title": "Pleiades physical evidence and authored limits",
+      "credit": "Published structural studies; authored display assumptions",
+      "acquisition": "Checked-in evidence ledger. This pin identifies the metadata record; cited publications and native scientific arrays retain their own identities.",
+      "expectedSha256": "73ec8317dbd6e75b0e39184b2196011495a4ddf0e88571cc1719ec871d9385c4",
+      "expectedBytes": 15400,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibson-nordsieck-2003-ii",
+            "role": "method",
+            "evidence": "labs/nebula/models/m45/physical-evidence.json#/sources/1"
+          },
+          {
+            "catalogueId": "ritchey-2006",
+            "role": "method",
+            "evidence": "labs/nebula/models/m45/physical-evidence.json#/sources/5"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "observed-stars",
+      "path": "labs/nebula/models/m45/stellar-catalogue.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/239",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/239",
+      "title": "Pleiades field stars \u00b7 Hipparcos and Tycho-2",
+      "credit": "ESA (1997); H\u00f8g et al. (2000); CDS/VizieR",
+      "acquisition": "Checked-in normalized stellar catalogue from the two pinned CDS cone queries, preserving native astrometry and photometry. Johnson transformations and display-star selection are documented in the stellar source receipt.",
+      "expectedSha256": "725466bded167e153b071941c63584313bc73503db6a61ed9aa57649a0ce6ac7",
+      "expectedBytes": 1654998,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hipparcos-esa-1997",
+            "role": "material",
+            "evidence": "labs/nebula/models/m45/stellar-sources.json#/sources/0"
+          },
+          {
+            "catalogueId": "tycho2-hog-2000",
+            "role": "material",
+            "evidence": "labs/nebula/models/m45/stellar-sources.json#/sources/1"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "distance",
+      "path": "src/objects/m45/source/delivery.json",
+      "origin": "https://arxiv.org/pdf/1408.6544",
+      "sourceUrl": "https://arxiv.org/pdf/1408.6544",
+      "title": "Pleiades adopted world placement",
+      "credit": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
+      "acquisition": "Checked-in delivery record. The pin identifies our placement metadata, not downloaded paper bytes; the adopted value and uncertainty are explained in the body README.",
+      "expectedSha256": "b81e2f7af2bc765bc624ebce322e44457c2efd7272cd734c625551fbf9a8a34d",
+      "expectedBytes": 2449,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "melis-2014",
+            "role": "reference",
+            "evidence": "src/objects/m45/source/delivery.json#/sky/distancePc"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "stellar-field",
+      "path": "src/objects/m45/source/stellar-field.json",
+      "origin": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "sourceUrl": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "title": "Pleiades surrounding Gaia DR3 stellar field",
+      "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
+      "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
+      "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
+      "expectedSha256": "b23d82f9fb1132b7c01aa2d95795fd92a4136268f78ebf61b40963c48e1c7fbe",
+      "expectedBytes": 332226,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gavo",
+            "role": "material",
+            "evidence": "src/objects/m45/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "bailer-jones-2021-distances",
+            "role": "method",
+            "evidence": "src/objects/m45/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "cardiel-2021-rgb",
+            "role": "method",
+            "evidence": "src/objects/m45/source/stellar-field.json#/provenance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements."
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-1",
+      "path": "src/objects/m45/source/delivery.json",
+      "expectedSha256": "b81e2f7af2bc765bc624ebce322e44457c2efd7272cd734c625551fbf9a8a34d",
+      "expectedBytes": 2449,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/m45/source/nebula.json",
+      "expectedSha256": "ae3c66fd2b9301983bcdce63db4c575a5399fa8c84a2db332f656b700aeece7c",
+      "expectedBytes": 2077,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/m45/source/presentation.json",
+      "expectedSha256": "0a2f80fe398bfb9fba686ce2538d48e2c8f54215e928818e24223a47163bd255",
+      "expectedBytes": 10515,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/m45/source/request.json",
+      "expectedSha256": "3bb422960ec26a91969880747c14aabea9044b84b138436ffdf5edec32e2c82d",
+      "expectedBytes": 354,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

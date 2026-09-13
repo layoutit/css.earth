@@ -1,0 +1,35 @@
+{
+  "id": "arias-2006-hourglass",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The infrared Hourglass cluster in M8",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1111/j.1365-2966.2005.09829.x",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m8/physical-sources.json",
+      "revision": "9d0a453d4c82637ebc54277f97281e0c8426e85b",
+      "sha256": "5f26cfd85b557e6e2c0734d0339d088e5cc9c25b0638c2ada5720b1e392f13d0",
+      "locator": "/papers/0"
+    }
+  ],
+  "publisher": "J. I. Arias, R. H. Barbá, J. Maíz Apellániz, N. I. Morrell, M. Rubio",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "J. I. Arias, R. H. Barbá, J. Maíz Apellániz, N. I. Morrell, M. Rubio",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m8/physical-sources.json#/papers/0"
+    }
+  ],
+  "creators": [
+    "J. I. Arias, R. H. Barbá, J. Maíz Apellániz, N. I. Morrell, M. Rubio"
+  ]
+}

@@ -41,5 +41,9 @@
   "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances.",
   "defaultLens": "eso-optical",
   "framingRadiusUnits": 2400,
-  "acceptedLabResult": "a5bdb41f1919160d14010649395451a4b89314ca291b1fa796454ecfb1d63887"
+  "acceptedLabResult": "a5bdb41f1919160d14010649395451a4b89314ca291b1fa796454ecfb1d63887",
+  "fieldStars": {
+    "path": "src/objects/m42/source/stellar-field.json",
+    "sha256": "32ee5f15a5b589caed768a568b67afd648dda116da31881f0ffcd47e7353a3fa"
+  }
 }

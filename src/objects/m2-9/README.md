@@ -1,6 +1,6 @@
 # Twin Jet Nebula · M2–9
 
-The existing axial-symmetry reconstruction of the 1997 Hubble image supplies 144 slices and one optical lens. Its four manually masked image points are not a measured star catalogue; no replacement stars are fabricated. Symmetry supplies illustrative depth, not measured gas density or inclination.
+The existing axial-symmetry reconstruction of the 1997 Hubble image supplies 144 slices and one optical lens. Its four manually masked image points are not used as a star catalogue. The app adds an independently catalogued surrounding field, described below. Symmetry supplies illustrative depth, not measured gas density or inclination.
 
 The [NASA APOD original](https://apod.nasa.gov/apod/ap040201.html) and [ESA/Hubble edition](https://esahubble.org/images/opo9738a/) are the same photograph. Credit: Bruce Balick, Vincent Icke, Garrelt Mellema and NASA/ESA. The ESA TIFF embeds CC-BY-4.0. The [frame record](source/image-frame.json) retains hashes, AVM and cross-edition registration evidence. The existing 788×438 crop removes the caption/frame; its field is 58.0350″×32.2766″, north 113.6° left of vertical. The 144×80 working grid introduces less than 0.11% aspect difference, retained rather than modifying the accepted reconstruction.
 
@@ -11,3 +11,9 @@ See the [symmetry method](../../../labs/nebula/models/m2-9/README.md) and [share
 Known visual limit: faint planar background residue remains in the accepted lab reconstruction and is visible from some oblique views.
 
 The shared dataset cards use the [source manifest](source/manifest.json) and [presentation record](source/presentation.json). Preparation generates the standard source-to-product provenance and small local image previews. These previews show the published photograph before star removal; source pixel counts describe image sampling, not telescope resolution. Preparing the cards checks their inputs and the installed volume identity, but does not rerun or scientifically validate the reconstruction.
+
+## Current surrounding stars
+
+The 14 September 2026 app delivery adds 7 shared lights from the pinned [stellar field](source/stellar-field.json): 7 Gaia DR3 rows inside a 10 pc sphere, selected at G < 14. The [shared method](../../../docs/nebulae/stellar-fields.md) records proper-motion propagation, Bailer-Jones distance uncertainty, photometric display scaling, radial fading and the 1,500-point budget. Stars are independent of the image footprint and are not confirmed nebula members.
+
+The verified cloud replay is `m2-9-inferred`. Resource hashes and source-card bindings passed with the new catalogue; cloud geometry and spectral images are unchanged by this starfield replacement. No new clean-cache native-processing claim is made.
