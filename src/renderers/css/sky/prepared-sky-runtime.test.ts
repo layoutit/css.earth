@@ -116,7 +116,7 @@ test.each([
 ])('shared universe crossfades NASA with the independently graded completed volume (sky=$withSky, profile=$withBrightness)', ({ withSky, withBrightness }) => {
   vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
   const base = new URL('../../../', import.meta.url);
-  const context = JSON.parse(readFileSync(new URL('planets/sun/prepared/world-context.json', base), 'utf8'));
+  const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
   const brightness = context.volume.brightnessProfile;
   if (!withBrightness) delete context.volume.brightnessProfile;
   const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
@@ -206,7 +206,7 @@ test.each([
 test('shared universe preserves nearby independent nebulae at zero Milky Way opacity while culling their unresolved banks', () => {
   vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
   const base = new URL('../../../', import.meta.url), parsecM = 3.085677581491367e16;
-  const context = JSON.parse(readFileSync(new URL('planets/sun/prepared/world-context.json', base), 'utf8'));
+  const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
   const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
   const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
     originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 50 * parsecM],

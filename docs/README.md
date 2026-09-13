@@ -1,9 +1,9 @@
 # Documentation
 
 For a body's sources, processing, evidence and known problems, read its
-`src/planets/<id>/README.md`. Examples: [Earth](../src/planets/earth/README.md),
-[Sun](../src/planets/sun/README.md), [Rhea](../src/planets/rhea/README.md) and
-[67P](../src/planets/comet-67p/README.md).
+`src/objects/<id>/README.md`. Examples: [Earth](../src/objects/earth/README.md),
+[Sun](../src/objects/sun/README.md), [Rhea](../src/objects/rhea/README.md) and
+[67P](../src/objects/comet-67p/README.md).
 
 ## Guides
 
@@ -27,7 +27,7 @@ For a body's sources, processing, evidence and known problems, read its
 | TypeScript owners, JavaScript exceptions and checks | [TypeScript ownership](architecture/typescript-ownership.md) |
 | Page titles, descriptions and search indexing | [SEO](seo.md) |
 
-For contribution steps, use the [body contributor guide](../src/planets/README.md).
+For contribution steps, use the [body contributor guide](../src/objects/README.md).
 [AGENTS.md](../AGENTS.md) sets application rules; the
 [celestial skill](../.agents/skills/celestial-skill/SKILL.md) points agents to the
 same workflow and implementation.

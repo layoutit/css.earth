@@ -20,7 +20,7 @@ describe('astronomy source decoding', () => {
     expect(parseSceneManifest(manifest)).toEqual(manifest);
     const malformed = { ...objectValue(manifest), records: {} };
     expect(() => parseSceneManifest(malformed)).toThrow(/records.*array/);
-    const path = new URL('../../../../src/planets/romulus/source/validation/epoch-state.json', import.meta.url);
+    const path = new URL('../../../../src/objects/romulus/source/validation/epoch-state.json', import.meta.url);
     const body: unknown = JSON.parse(readFileSync(path, 'utf8'));
     expect(parseBodyEpochRecord(body)).toEqual(body);
     expect(() => parseBodyEpochRecord({ ...objectValue(body), positionKm: [1, '2', 3] })).toThrow(/positionKm.*finite/);

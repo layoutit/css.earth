@@ -18,7 +18,7 @@ const read = async (path: string): Promise<unknown> => JSON.parse(await readFile
 test('every registered dataset has a specific authored title, independent of category and source-link availability', async () => {
   for (const { id } of OBJECTS) {
     const titles = new Set();
-    const root = `../../src/planets/${id}/`;
+    const root = `../../src/objects/${id}/`;
     const [rawDescriptor, rawPrepared, rawProvenance] = await Promise.all([
       read(root + 'object.json'), read(root + 'prepared/controls.json'), read(root + 'prepared/provenance.json'),
     ]);

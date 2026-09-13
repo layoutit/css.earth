@@ -54,8 +54,8 @@ export async function prepareObjectControls({ root = projectRoot, objectIds = OB
     objectIds.every(id => OBJECTS.some(object => object.id === id)), "Select unique objects from OBJECTS");
   const results = [];
   for (const id of objectIds) {
-    const recipePath = resolve(root, `src/planets/${id}/site/control-content.source.mjs`);
-    const outputPath = resolve(root, `src/planets/${id}/site/control-content.mjs`);
+    const recipePath = resolve(root, `src/objects/${id}/site/control-content.source.mjs`);
+    const outputPath = resolve(root, `src/objects/${id}/site/control-content.mjs`);
     const recipe = await readFile(recipePath, "utf8");
     const recipeUrl = pathToFileURL(recipePath);
     recipeUrl.searchParams.set("source", sha256(recipe));

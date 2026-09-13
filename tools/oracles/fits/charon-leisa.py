@@ -14,7 +14,7 @@ from astropy.io import fits
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fixture import ROOT, write
 
-source = ROOT / 'src/planets/charon/source'
+source = ROOT / 'src/objects/charon/source'
 recipe = json.loads((source / 'science/leisa/bands.json').read_text())
 inputs, products = [source / 'science/leisa/bands.json'], []
 

@@ -124,7 +124,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const requested = process.argv.slice(2);
   for (const { id } of OBJECTS) {
     if (requested.length && !requested.includes(id)) continue;
-    const objectDirectory = resolve(projectRoot, 'src/planets', id);
+    const objectDirectory = resolve(projectRoot, 'src/objects', id);
     const images = await prepareSurfaceMinimaps({ objectDirectory,
       publicDirectory: resolve(projectRoot, 'public/scenes', id), outputDirectory: resolve(objectDirectory, 'prepared') });
     console.log(`${id}: ${images.length} prepared minimaps`);

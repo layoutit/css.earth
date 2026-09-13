@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { OBJECTS } from '../objects.mts';
-import contextInput from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import contextInput from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { bodyCardViewAtCamera } from '../overview-context.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';

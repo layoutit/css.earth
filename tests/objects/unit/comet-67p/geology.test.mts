@@ -6,7 +6,7 @@ import {gunzipSync} from 'node:zlib';
 import sharp from 'sharp';
 import {decodeVtkCategories} from '../../../../tools/objects/terrestrial-layers/vtk-categories.mts';
 import {decodeSbmtPaths, decodeSbmtLocations} from '../../../../tools/objects/terrestrial-layers/sbmt-symbols.mts';
-const root = new URL('../../../../', import.meta.url), body = new URL('src/planets/comet-67p/',root);
+const root = new URL('../../../../', import.meta.url), body = new URL('src/objects/comet-67p/',root);
 const read = (path: string|URL) => readFile(new URL(path,body),'utf8'), json = async (path: string) => JSON.parse(await read(path));
 const config = await json('source/preparation/terrestrial.json');
 const regions = config.raster.scientific.find((l: { id: string; })=>l.id==='regions'), geology = config.raster.scientific.find((l: { id: string; })=>l.id==='geology');

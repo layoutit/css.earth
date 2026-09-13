@@ -4,7 +4,7 @@ import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { gunzipSync } from 'node:zlib';
-const prepared = new URL('../../../../src/planets/comet-67p/prepared/', import.meta.url);
+const prepared = new URL('../../../../src/objects/comet-67p/prepared/', import.meta.url);
 const json = async (file: string|URL) => JSON.parse((await readFile(new URL(file, prepared))).toString('utf8'));
 
 test('67P mosaic source attribution is lossless, hash-bound, and absent from the runtime transport', async () => {

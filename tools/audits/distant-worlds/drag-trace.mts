@@ -65,7 +65,7 @@ try {
   await page.waitForLoadState('networkidle');
   await Promise.all(responseTasks);
   assert.deepEqual(loadFailures,[],'Every selected response body must be retained for provenance');
-  const expectedTransport=hash(await readFile(`src/planets/${id}/prepared/object.json`));
+  const expectedTransport=hash(await readFile(`src/objects/${id}/prepared/object.json`));
   assert.ok(loaded.some(record=>record.sha256===expectedTransport),'Exact current prepared-object bytes were loaded');
   await page.waitForTimeout(1000);
   const initial = await page.evaluate(id => {
@@ -131,13 +131,13 @@ try {
   const sequences = new Map<string, Set<string>>();
   for (const reporter of pipeline) { const key = `${reporter.frameSource}:${reporter.frameSequence}`, states=sequences.get(key)??new Set<string>();states.add(reporter.state);sequences.set(key, states); }
   const compressed = gzipSync(text, { level: 9 });
-  const pinPaths = ['prepared/object.json', 'prepared/runtime.json', 'runtime-assets.json', 'prepared/terrain.json'].map(path => `src/planets/${id}/${path}`);
+  const pinPaths = ['prepared/object.json', 'prepared/runtime.json', 'runtime-assets.json', 'prepared/terrain.json'].map(path => `src/objects/${id}/${path}`);
   const prepared: Record<string, {bytes: number; sha256: string}> = {};
   for (const path of pinPaths) { const bytes = await readFile(path); prepared[path] = { bytes: bytes.length, sha256: hash(bytes) }; }
   const report = { schema: 'cssearth-comet-drag-trace@1', capturedAt: new Date().toISOString(),
     codeRevision: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     worktreeDiffSha256: hash(execFileSync('git', ['diff', 'HEAD', '--', 'tools', 'site', 'packages',
-      'src/platform', 'src/renderers', `src/planets/${id}/source`, `tests/objects/browser/${id}`], { maxBuffer: 32 * 1024 * 1024 })),
+      'src/platform', 'src/renderers', `src/objects/${id}/source`, `tests/objects/browser/${id}`], { maxBuffer: 32 * 1024 * 1024 })),
     build: process.env.CSSEARTH_AUDIT_BUILD ?? 'production', diagnosticsAvailable: initial.diagnosticsAvailable, route: page.url(), browser: browser.version(), headless: true,
     viewport, dpr, hardware: process.platform === 'darwin' ? execFileSync('sysctl', ['-n', 'hw.model', 'hw.memsize', 'machdep.cpu.brand_string'], { encoding: 'utf8' }).trim().split('\n') : process.arch,
     gpu, workload: { cycles: 3, stepsPerLeg: 60, x: .6, startY: .485, upperY: .283, lowerY: .582, shadows: false, wheels: 0, ...(lensId ? { lensId } : {}) },

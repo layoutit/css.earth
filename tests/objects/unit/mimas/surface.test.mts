@@ -10,8 +10,8 @@ import {loadObjShape, parseObjShape} from '../../../../tools/objects/terrestrial
 import {simplifyRadialShape} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root = new URL('../../../../', import.meta.url);
 test('Mimas source simplification stays closed, preserves source positions and agrees with the independent radius product', async () => {
-  const config = JSON.parse((await readFile(new URL('src/planets/mimas/source/preparation/terrestrial.json', root))).toString('utf8'));
-  const sourceRoot = new URL('src/planets/mimas/source/', root).pathname;
+  const config = JSON.parse((await readFile(new URL('src/objects/mimas/source/preparation/terrestrial.json', root))).toString('utf8'));
+  const sourceRoot = new URL('src/objects/mimas/source/', root).pathname;
   const profile = config.geometry.radialTerrain;
   const source = await loadObjShape(`${sourceRoot}/${profile.path}`, profile.grid);
   const elevation = await loadScienceSurface(sourceRoot, config.raster.scientific[0]);
@@ -43,8 +43,8 @@ test('Mimas source simplification stays closed, preserves source positions and a
 });
 
 test('Mimas elevation uses PDS radius units, east-positive geography and exact raster bounds', async () => {
-  const config = JSON.parse((await readFile(new URL('src/planets/mimas/source/preparation/terrestrial.json', root))).toString('utf8'));
-  const sourceRoot = new URL('src/planets/mimas/source/', root).pathname;
+  const config = JSON.parse((await readFile(new URL('src/objects/mimas/source/preparation/terrestrial.json', root))).toString('utf8'));
+  const sourceRoot = new URL('src/objects/mimas/source/', root).pathname;
   const elevation = await loadScienceSurface(sourceRoot, config.raster.scientific[0]);
   const file = await fromFile(`${sourceRoot}/observations/mimas_radius_g.tif`);
   try {
@@ -64,7 +64,7 @@ test('Mimas elevation uses PDS radius units, east-positive geography and exact r
 
 test('Mimas maps preserve source geography through the shared atlas resampling', async () => {
   const width=8192,height=4096;
-  const source = await sharp(new URL('src/planets/mimas/source/observations/PIA17214_unlabeled.png',root).pathname)
+  const source = await sharp(new URL('src/objects/mimas/source/observations/PIA17214_unlabeled.png',root).pathname)
     .toColourspace('srgb').resize(width,height,{fit:'fill',kernel:'lanczos3'}).raw().toBuffer({resolveWithObject:true});
   const prepared = await observation('mimas', 'normal', width, height);
   assert.deepEqual([prepared.info.width,prepared.info.height],[width,height]);
@@ -81,7 +81,7 @@ test('Mimas maps preserve source geography through the shared atlas resampling',
     assert.equal(prepared.data[(y*width+x)*3],0);black++;
   }
   assert.ok(black>0,'Reference must include photographed black pixels');
-  const colorSource = await sharp(new URL('src/planets/mimas/source/observations/PIA18437.jpg',root).pathname)
+  const colorSource = await sharp(new URL('src/objects/mimas/source/observations/PIA18437.jpg',root).pathname)
     .resize(width,height,{fit:'fill',kernel:'lanczos3'}).toColourspace('srgb').raw().toBuffer();
   const colorMap = (await observation('mimas', 'enhanced', width, height)).data;
   // The LPI companion has a 0 E left edge, so the color map must not be rolled.

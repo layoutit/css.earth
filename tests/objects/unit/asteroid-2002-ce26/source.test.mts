@@ -7,7 +7,7 @@ import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireRadialTestConfig,requireRotation,requireShadowsContent} from '../radial-fixture.mts';
 import {requireFiniteNumber,requireRecord} from '../../../../tools/source-values.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/asteroid-2002-ce26/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/asteroid-2002-ce26/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('2002 CE26 Primary retains original source pins and acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'asteroid-2002-ce26',planetName:'2002 CE26 Primary',sourceRoot:root});await source.verify();
