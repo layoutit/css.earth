@@ -19,6 +19,20 @@ The shared missing-imagery grid covers the surface. The body uses the existing g
 
 The two lobes touch at one point. Equal density defines the model origin; this is not a measured center of mass or a recovered neck mesh. Neither the contributed Celestia texture nor the earlier uncontrolled camera fit is used.
 
+### Photographic source check, 13 September 2026
+
+Lucy images resolve both lobes, but the present ellipsoid envelope does not
+establish a three-dimensional surface or camera registration for that imagery.
+[Jackson et al. (2025)](https://doi.org/10.3847/PSJ/ade23c) explicitly reported
+that a Selam shape model had not been derived at the time of their analysis.
+The later [Bierhaus et al. (2025)](https://doi.org/10.3847/PSJ/ae1968) paper
+describes Selam's morphology from the images and a revised model for Dinkinesh;
+the source check did not locate a downloadable Selam mesh and matched cameras.
+This is an unresolved release route, not a claim that photographs are absent.
+The [Dinkinesh source check](../dinkinesh/README.md#lucy-photographic-source-check-13-september-2026)
+records the inspected archives and the L'LORRI geometric-header timing issue.
+No surface texture, inferred neck terrain, or new landmark placement was prepared.
+
 ## Orbital placement
 
 [Source parameters](source/orbit/published-parameters.json) separate published constraints from assumptions. The illustration places zero mean anomaly at JD 2461286.5 TT (3 September 2026), rather than extrapolating an uncertain encounter phase. A dashed orbit and circular selected marker distinguish this approximation. No uncertainty region, confidence interval or exact current phase is claimed. The fixed-epoch loader rejects other epochs.

@@ -32,6 +32,46 @@ The [Shadows-on view](evidence/dinkinesh-shadows-true.png) was also inspected. T
 
 ## Known problems
 
+### Lucy photographic source check, 13 September 2026
+
+The photographic upgrade is unresolved at source-model acquisition. The current
+Celestia reconstruction is not the model used to register Lucy observations.
+Its illustrative meridian and different dimensions prevent treating archived
+camera geometry as a qualified mapping onto this surface.
+
+- [Bierhaus et al. (2025), Sections 2.2 and 3.1](https://doi.org/10.3847/PSJ/ae1968)
+  describe an improved mission model and co-registered images in SBMT. The model
+  has 910 × 870 × 716 m extents, a 738 m equivalent diameter, and a median
+  stereo-intersection error of 1.7 m on reconstructed terrain. The paper refers
+  the full model description to Preusker et al. (2026, in preparation); those
+  measurements do not supply mesh connectivity or per-image registration.
+- The [2024 shape-method abstract](https://doi.org/10.5194/epsc2024-963)
+  describes stereo reconstruction plus limb measurements and a prospective
+  monochrome basemap/albedo release. The abstract does not provide those files.
+  The accessible supplementary item for [Levison et al. (2024)](https://doi.org/10.1038/s41586-024-07378-0)
+  is a peer-review PDF, not a mesh or camera/control-point bundle.
+- The PDS catalogue query returned 21 Dinkinesh-related target, instrument and
+  SPICE entries, with no separate shape collection. Both the
+  [archived Lucy DSK directory](https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/)
+  and the [current mission directory](https://naif.jpl.nasa.gov/pub/naif/LUCY/kernels/dsk/)
+  listed only Donaldjohanson's DSK. The SBMT Dinkinesh data endpoint requested
+  authentication. These are bounded access findings, not evidence that no
+  scientific model exists or will be released.
+- [Native L'LORRI observations](https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/SUPPORT/dataset.shtml)
+  are available. Their [archive timing note](https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri:data_dinkinesh_partially_processed-v1.0/SUPPORT/NOTES/liens.txt)
+  explains an SPK/SCLK timing mismatch affecting geometric headers near closest
+  approach and identifies the corrected
+  `lcy_230815_240201_240101_dinkinesh_reconstruction_final_v2.bsp`.
+  A future reader must verify the selected product version and its geometry;
+  the existence of TAN-SIP header fields alone is not a camera qualification.
+
+Resume with the released mesh, its body-frame and observed/model-filled coverage
+definitions, and the matching reconstructed cameras or control network. Inspect
+a native-pixel image/model projection with independent holdouts before baking.
+No photographic surface, new geometry, or new landmark registration was
+prepared by this check; the existing browser evidence concerns the
+approximation only.
+
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Dinkinesh (retrieved 2026-09-12, public domain as USGS-produced data; the export ships no FGDC record, so the pin cites the USGS Copyrights and Credits statement) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (no projection file or metadata: the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. Names the Gazetteer has not positioned (centre 0°, 0° with an empty extent) are not placed and are tallied in the prepared descriptor.
 
 Named features run of 2026-09-12 (this version): the catalogue labels 4 IAU names on the hit mesh (1 DO without a published centre); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band, and a headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page, selected every lens and pinned Bella Dorsum from the sidebar search with no console errors or failed requests.
