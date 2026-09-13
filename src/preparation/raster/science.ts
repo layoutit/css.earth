@@ -4,6 +4,8 @@
 export interface InterpretedPlate { readonly data: Uint8Array; readonly size: number; readonly lossless: boolean; }
 export interface InterpretedSurface {
     readonly data: Uint8Array; readonly channels: 1 | 2 | 3 | 4; readonly nearest: boolean;
+    /** Decoder-owned interpretation evidence, retained with the prepared surface. */
+    readonly report?: Readonly<Record<string, unknown>>;
     /** Optional direct source sampler for the polar sprite only. The packed latitude bands stay exactly as prepared. */
     readonly nativePhotograph?: {
         readonly sample: (longitudeDegrees: number, latitudeDegrees: number, color: number[]) => boolean;

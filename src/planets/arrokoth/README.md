@@ -15,7 +15,18 @@ part of the encounter-facing surface; the grid marks unseen, grazing or rejected
 coverage. The unseen northern shape remains a model estimate. Sources checked
 2026-09-12.
 
+The MVIC display keeps the archive-derived band values floating through the
+shared footprint and surface transfer. One common 0–0.17 range assigns NIR, red
+and blue to linear display channels, followed by the [shared IEC sRGB
+transfer](../../../docs/color-preparation.md). The original PDS label now enters
+the consumed source closure and validates band order, wavelengths and data-number
+units. This fixes screen encoding; it does not reconstruct natural color.
+
 ## Evidence
+
+The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+
+[Displayed surface](evidence/color-encoding/color-dpr1.png) · [DPR 2](evidence/color-encoding/color-dpr2.png) · [Shadows](evidence/color-encoding/oblique-shadows-dpr1.png) · [Mobile](evidence/color-encoding/mobile.png). The native MVIC label and independent Astropy sample/camera checks still apply: the cube, camera and shape are unchanged; the final display encoding changed.
 
 The [registration audit](evidence/photography/registration.json) binds its source
 images, control file and source mesh by hash. It evaluates frozen cameras: it does

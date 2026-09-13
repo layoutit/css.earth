@@ -1,0 +1,176 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "eso-optical",
+      "path": ".local/nebula-lab/observations/m42/sources/eso-optical.tif",
+      "origin": "https://www.eso.org/public/images/eso1723a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1723a/",
+      "title": "Orion · eso1723a",
+      "credit": "ESO/G. Beccari",
+      "displayCredit": "ESO/G. Beccari",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "expectedSha256": "40e9fb5a91c90c0b5a5b6ba31507d6cc65259e1216a5057f88d210ccb15d16aa",
+      "expectedBytes": 21268752,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1723a",
+            "role": "material",
+            "evidence": "labs/nebula/models/m42/observations.json#/images/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "eso-optical",
+      "license": "ESO public-image terms; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vst",
+            "evidence": "https://www.eso.org/public/images/eso1723a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-vista",
+      "path": ".local/nebula-lab/observations/m42/sources/eso-vista.tif",
+      "origin": "https://www.eso.org/public/images/eso1006a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1006a/",
+      "title": "Orion · eso1006a",
+      "credit": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "displayCredit": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "expectedSha256": "dc9e99249432e0960357c47d8bf30adadf5d8c86574380c99a40d73e8d24a265",
+      "expectedBytes": 21022810,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1006a",
+            "role": "material",
+            "evidence": "labs/nebula/models/m42/observations.json#/images/1"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "eso-vista",
+      "license": "ESO public-image terms; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vista",
+            "evidence": "https://www.eso.org/public/images/eso1006a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "physical-evidence",
+      "path": "labs/nebula/models/m42/physical-evidence.json",
+      "origin": "https://doi.org/10.1086/175123",
+      "sourceUrl": "https://doi.org/10.1086/175123",
+      "title": "Orion physical-evidence ledger",
+      "credit": "Published Orion structure studies; authored extrapolation",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
+      "expectedSha256": "4a86d6d830b7753fe2af9c1ba30f35ebc4526095bb605939f66fba765d17a8cc",
+      "expectedBytes": 13110,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "wen-odell-1995",
+            "role": "method",
+            "evidence": "labs/nebula/models/m42/physical-evidence.json: /sources/1"
+          },
+          {
+            "catalogueId": "henney-2005",
+            "role": "method",
+            "evidence": "labs/nebula/models/m42/physical-evidence.json: /sources/2"
+          },
+          {
+            "catalogueId": "odell-2009",
+            "role": "method",
+            "evidence": "labs/nebula/models/m42/physical-evidence.json: /sources/3"
+          },
+          {
+            "catalogueId": "odell-abel-2025",
+            "role": "method",
+            "evidence": "labs/nebula/models/m42/physical-evidence.json: /sources/4"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "distance",
+      "path": "src/objects/m42/source/delivery.json",
+      "origin": "https://arxiv.org/abs/0709.0485",
+      "sourceUrl": "https://arxiv.org/abs/0709.0485",
+      "title": "Orion adopted world placement",
+      "credit": "Menten et al. (2007); cssEarth placement",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
+      "expectedSha256": "b4e3da0a6639f432b4ef877d6920b73a6acd699f07421612d617ff7120059254",
+      "expectedBytes": 1727,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "menten-2007",
+            "role": "reference",
+            "evidence": "src/objects/m42/source/delivery.json: sky.distancePc = 414; adopted world placement"
+          }
+        ]
+      },
+      "dependencies": []
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-1",
+      "path": "src/objects/m42/source/delivery.json",
+      "expectedSha256": "b4e3da0a6639f432b4ef877d6920b73a6acd699f07421612d617ff7120059254",
+      "expectedBytes": 1727,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/m42/source/nebula.json",
+      "expectedSha256": "6a3350fcab98cf621caff1384fc228be55d1d8113e73a694ee2837c134f307a7",
+      "expectedBytes": 1898,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/m42/source/presentation.json",
+      "expectedSha256": "e1ade739ba75dc71641c14714d0d70c5dd1d930f68e3e5b0be8edd7cbf072605",
+      "expectedBytes": 4399,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/m42/source/request.json",
+      "expectedSha256": "06fa668d847469d5c1e982be1e1a9e1da8fbc674f9d1a3b15249706010579f3b",
+      "expectedBytes": 724,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

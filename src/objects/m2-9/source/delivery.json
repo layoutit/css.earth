@@ -1,0 +1,30 @@
+{
+  "schema": "cssearth-nebula-delivery@1",
+  "id": "m2-9",
+  "method": "axial-symmetry",
+  "request": {
+    "path": "labs/nebula/models/m2-9/experiment.json",
+    "sha256": "e0e30629eb3e52409257b0bc8ee16143d14edfcd2aeaddc74704d6b898cdd68c"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/m2-9/source/image-frame.json",
+      "sha256": "03b7bfa303f1776503301524fa6b24a57df4fd23d91dfbba9d355acbab4d8a14"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      256.407962101,
+      -10.1425459988
+    ],
+    "distancePc": 650,
+    "imageRotationDegrees": 113.59999999999998,
+    "arcsecPerUnit": 5.803502910447201
+  },
+  "sourceUrl": "https://esahubble.org/images/opo9738a/",
+  "description": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted 650pc model distance is uncertain; published expansion distance 1300\u00b1200pc would double this physical size. The accepted baseline contains no stellar catalogue.",
+  "defaultLens": "hst-optical",
+  "framingRadiusUnits": 5,
+  "acceptedLabResult": "m2-9-inferred",
+  "symmetryDirectory": ".local/nebula-lab/planetary/m2-9-inferred"
+}

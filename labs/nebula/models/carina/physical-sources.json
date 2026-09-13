@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-nebula-physical-sources@1",
+  "subjectId": "carina",
+  "verifiedDate": "2026-09-12",
+  "status": "research inputs; no physical fit or geometry integration",
+  "sources": [
+    {
+      "id": "damiani-2016-optical-lines",
+      "publisher": "CDS / Damiani et al. 2016",
+      "paperUrl": "https://doi.org/10.1051/0004-6361/201628169",
+      "fullTextUrl": "https://arxiv.org/html/1604.01208",
+      "catalogueUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/591/A74",
+      "file": {
+        "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/591/A74/table1.dat",
+        "sha256": "c85efedd4a186b22ab187590be9e66378357e778ebb79f522ed75257adafdcf9",
+        "bytes": 244212,
+        "localPath": ".local/nebula-lab/research/carina/table1.dat"
+      },
+      "readme": {
+        "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/591/A74/ReadMe",
+        "bytes": 9799,
+        "sha256": "f5d8dedfcaa6954f2826fed92c2f4c3e0724e3698fac79ad94e238e6f8e4e132"
+      },
+      "status": "downloaded; fixed-width coordinates and missing fields inspected; not integrated",
+      "format": "CDS fixed-width table; field specification is in the pinned ReadMe",
+      "rows": 866,
+      "uniqueSkyCoordinates": 666,
+      "setupCounts": {
+        "sky_HR15N": 185,
+        "sky_HR14": 114,
+        "star_HR15N": 567
+      },
+      "coverage": {
+        "frameLabel": "RA/Dec J2000 from table definition; no additional epoch/frame transformation applied",
+        "boundsDegrees": {
+          "ra": [
+            160.7687,
+            161.4724
+          ],
+          "dec": [
+            -59.89189,
+            -59.49431
+          ]
+        },
+        "approximateBoundingExtentArcminutes": [
+          21.32,
+          23.85
+        ],
+        "qualification": "Sparse central pointings. Bounding rectangle is not a filled measurement footprint; repeated coordinates/setup observations are not independent sky coverage."
+      },
+      "measurement": {
+        "lines": [
+          "Halpha",
+          "[N II] 6584",
+          "He I 6678",
+          "[S II] 6717",
+          "[S II] 6731"
+        ],
+        "components": [
+          "blue",
+          "red"
+        ],
+        "velocityFrame": "heliocentric",
+        "velocityUnit": "km/s",
+        "gaussianWidthUnit": "km/s",
+        "instrumentalWidthIncludedKms": 7,
+        "normalizationUnitAsPublished": "km/s/min",
+        "velocityUncertaintyColumns": false,
+        "missingFits": "blank numeric fields"
+      },
+      "availableSamplesByLine": {
+        "haBlue": 865,
+        "haRed": 865,
+        "niiBlue": 297,
+        "niiRed": 297,
+        "sii6717Blue": 621,
+        "sii6717Red": 621
+      },
+      "qualifications": [
+        "Published fitted components, not raw spectra or measured spatial depths.",
+        "Gaussian width is not a centroid uncertainty. Do not use it as a fabricated error bar or silently subtract instrumental width.",
+        "Keep fibre/setup identity and missing fields. Sky and stellar fibres have different contamination concerns.",
+        "Published normalization is not calibrated broadband luminosity; do not use it as outreach-image photometric calibration.",
+        "No automatic registration or physical-fit acceptance was performed."
+      ]
+    },
+    {
+      "id": "mopra-co-dr4",
+      "publisher": "CSIRO / Mopra Southern Galactic Plane CO Survey",
+      "catalogueUrl": "https://data.csiro.au/collection/csiro:60463",
+      "datasetDoi": "https://doi.org/10.25919/9Z4P-MJ92",
+      "relatedCarinaPaper": "https://arxiv.org/html/1511.07513",
+      "status": "public collection identified; no cube retrieved or header verified",
+      "qualification": "Carina/Gum31 was DR2; inspect the selected DR4 tile/reduction and exact footprint before adopting. Galactic position-position-velocity data are not a 3D density volume."
+    },
+    {
+      "id": "herschel-carina",
+      "publisher": "Preibisch et al. / ESA Herschel",
+      "sourcePage": "https://www.usm.uni-muenchen.de/people/preibisch/carina-herschel.html",
+      "paperUrl": "https://arxiv.org/abs/1204.0627",
+      "status": "author project and published coverage inspected; no FITS map retrieved",
+      "reportedFootprintDegrees": [
+        2.3,
+        2.3
+      ],
+      "bandsMicrometers": [
+        70,
+        160,
+        250,
+        350,
+        500
+      ],
+      "qualification": "Thermal dust emission/column-temperature modeling. Obtain exact archive products and masks; do not interpret the RGB preview as a calibrated density map."
+    }
+  ]
+}

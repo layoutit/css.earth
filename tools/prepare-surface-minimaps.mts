@@ -9,7 +9,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { createSurfaceInterpreter, parseInterpreterRecipe, type InterpreterRecipe } from './objects/observation/interpret.mts';
+import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from './objects/observation/interpret.mts';
 // One interpreter per object so the sidebar map previews a science surface through the decoder that packed it.
 const interpreters = new Map<string, ReturnType<typeof createSurfaceInterpreter>>();
 function interpretFor(objectDirectory: string, objectId: string, recipe: InterpreterRecipe, photographs = false) {
@@ -46,11 +46,11 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   const sourceLenses=requireArray(rasterInput?.lenses ?? []).map(value=>shape({id:text})(value));
   const surfaces = new Map(sourceSurfaces.map(surface => [surface.id, surface] as const));
   const selected = photographs ? new Set(photographs) : null;
-  if (selected && (!selected.size || selected.size !== photographs!.length || [...selected].some(id => !surfaces.has(id))))
-    throw new TypeError('Choose existing photographic raster surfaces for minimap refresh.');
   // Raster-lane surfaces with a scientific interpretation preview through the same decoders the lane packs with.
   const science = new Map(requireArray(rasterInput?.surfaces ?? []).flatMap(value => { const record = requireRecord(value); return isRecord(record.science) ? [[requireString(record.id), record.science] as const] : []; }));
-  for (const surface of requireArray(prepared?.surfaces ?? []).map(parsePreviewSurface)) if (surface.map && !selected?.has(surface.id)) surfaces.set(surface.id, surface);
+  for (const surface of requireArray(prepared?.surfaces ?? []).map(parsePreviewSurface)) if (surface.map && (!selected || !surfaces.has(surface.id))) surfaces.set(surface.id, surface);
+  if (selected && (!selected.size || selected.size !== photographs!.length || [...selected].some(id => !surfaces.has(id))))
+    throw new TypeError('Choose existing photographic surfaces for minimap refresh.');
   const framingValue=await optionalJson(resolve(objectDirectory, 'source/presentation/minimap.json'));
   const framing=framingValue && parseMinimapFraming(framingValue);
   const images = [];
@@ -71,7 +71,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
       const recipe = requireRecord(rasterInput);
       const width = requireFiniteNumber(recipe.width), height = requireFiniteNumber(recipe.height);
       const parsed = parseInterpreterRecipe(recipe);
-      const subset = selected ? { ...parsed, surfaces: parsed.surfaces.filter(s => selected.has(s.id)) } : parsed;
+      const subset = selected ? selectSurfaceDependencies(parsed, [...selected]) : parsed;
       const { data, channels } = await (await interpretFor(objectDirectory, basename(objectDirectory), subset, Boolean(selected)))({ id: surface.id, source: surface.source, science: interpretation }, width, height, 1);
       pipeline = sharp(data, { raw: { width, height, channels } }).resize(minimapResize(nearest));
     } else pipeline = sharp(input).resize(minimapResize(nearest));

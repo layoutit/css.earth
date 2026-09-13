@@ -1,0 +1,2495 @@
+{
+  "schema": "cssearth-messier-presentation@1",
+  "notes": "DSS2 recognition cutouts; preview field is authored framing, independent of source object extent. The original SIMBAD catalogue and archive-query identity are unchanged.",
+  "objects": [
+    {
+      "objectId": "m1",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.16333333333333333&projection=TAN&coordsys=icrs&ra=83.6324&dec=22.0174&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 588,
+        "sha256": "2d6d2af49eab3638e98d45181307bb445dc2d03da5bcfd1c87a318f2c02af595",
+        "bytes": 10679,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m1.jpg"
+      },
+      "facts": {
+        "constellation": "TAU",
+        "visualMagnitude": 8.4,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m2",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.301&projection=TAN&coordsys=icrs&ra=323.36258333333336&dec=-0.8232499999999998&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1083.6,
+        "sha256": "7dee9f9fcb7c7a2afe9b9713f07f3b3b189b10577693978d93c82ca82f041eb8",
+        "bytes": 11376,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m2.jpg"
+      },
+      "facts": {
+        "constellation": "AQR",
+        "visualMagnitude": 6.5,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m3",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.378&projection=TAN&coordsys=icrs&ra=205.5484166666666&dec=28.37727777777778&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1360.8,
+        "sha256": "7d4dab7b860f47f02d5e29b19d72a23718ca540d7b53214c767a9b35ef1dac6c",
+        "bytes": 8989,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m3.jpg"
+      },
+      "facts": {
+        "constellation": "CVN",
+        "visualMagnitude": 6.4,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m4",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.6136666666666666&projection=TAN&coordsys=icrs&ra=245.89675000000003&dec=-26.525750000000002&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2209.2,
+        "sha256": "11de666095087d187c0fd375ac0cd75e5ec940e0a81a8cbef3757021308e03a2",
+        "bytes": 12024,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m4.jpg"
+      },
+      "facts": {
+        "constellation": "SCO",
+        "visualMagnitude": 5.9,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m5",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.40599999999999997&projection=TAN&coordsys=icrs&ra=229.63841666666673&dec=2.081027777777778&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1461.6,
+        "sha256": "8e9c29f9270b1a7f62dafd27c2e777a5cf1bdc55927fee874affff8d08ed518b",
+        "bytes": 10310,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m5.jpg"
+      },
+      "facts": {
+        "constellation": "SER",
+        "visualMagnitude": 5.8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m6",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.35&projection=TAN&coordsys=icrs&ra=265.06916666666666&dec=-32.24194444444445&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1260,
+        "sha256": "acd074f672d3f5d1cca2aeb7f02dd262c656e1312bb53c2055dd11552fbdc75a",
+        "bytes": 11265,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m6.jpg"
+      },
+      "extent": {
+        "majorArcsec": 900,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "SCO",
+        "visualMagnitude": 4.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m7",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=1.8666666666666667&projection=TAN&coordsys=icrs&ra=268.44708333333335&dec=-34.84111111111112&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 6720,
+        "sha256": "bcf4b664c4bc694d6db9cd8fad825bfe49fed931f3b519c35e7e3b930f9fd73f",
+        "bytes": 13154,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m7.jpg"
+      },
+      "extent": {
+        "majorArcsec": 4800,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "SCO",
+        "visualMagnitude": 3.3,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m8",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=2.0999999999999996&projection=TAN&coordsys=icrs&ra=270.90416666666664&dec=-24.386666666666667&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 7559.999999999999,
+        "sha256": "4ea5f98b582346e279ef91782c16bac0470b0bed38aa900fae167a7870c0d153",
+        "bytes": 9003,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m8.jpg"
+      },
+      "extent": {
+        "majorArcsec": 5400,
+        "minorArcsec": 2400,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical nebula extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound. Display type follows the same HEASARC DI (diffuse-nebula) row; the discovery identity remains the associated SIMBAD cluster."
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 5.8,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      },
+      "displayType": "diffuse-nebula"
+    },
+    {
+      "objectId": "m9",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.20299999999999999&projection=TAN&coordsys=icrs&ra=259.79908333333333&dec=-18.51625&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 730.8,
+        "sha256": "d332f9b4f9d787617f27194e9d1834b938a7b27a77ccfa79696c68e4515084c9",
+        "bytes": 15373,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m9.jpg"
+      },
+      "facts": {
+        "constellation": "OPH",
+        "visualMagnitude": 7.9,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m10",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.3523333333333333&projection=TAN&coordsys=icrs&ra=254.28770833333337&dec=-4.100305555555555&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1268.3999999999999,
+        "sha256": "95fc58358cac78b3cdfb680a12abc4ec276bef87677c4bb699bdd958d24b78bb",
+        "bytes": 11165,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m10.jpg"
+      },
+      "facts": {
+        "constellation": "OPH",
+        "visualMagnitude": 6.6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m11",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.32666666666666666&projection=TAN&coordsys=icrs&ra=282.7658333333334&dec=-6.271944444444443&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1176,
+        "sha256": "821bc60a2a27ea0f8a8a8eecfc32a38ea6edfbc65edb533a83b64847109cfded",
+        "bytes": 22069,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m11.jpg"
+      },
+      "extent": {
+        "majorArcsec": 840,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "SCT",
+        "visualMagnitude": 5.8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m12",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.3383333333333333&projection=TAN&coordsys=icrs&ra=251.80908333333338&dec=-1.9485277777777774&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1218,
+        "sha256": "3d1f08bcfb357486b4040d9a608c76dccce2caf2e0d743a59af8863fdfa1b2f5",
+        "bytes": 13113,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m12.jpg"
+      },
+      "facts": {
+        "constellation": "OPH",
+        "visualMagnitude": 6.6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m13",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.77&projection=TAN&coordsys=icrs&ra=250.42347499999994&dec=36.46131944444445&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2772,
+        "sha256": "36a631914725f4ea7cbc5789bf8eaf238956b727d8802ae60eaef47367a967f8",
+        "bytes": 6152,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m13.jpg"
+      },
+      "facts": {
+        "constellation": "HER",
+        "visualMagnitude": 5.9,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m14",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.315&projection=TAN&coordsys=icrs&ra=264.40062500000005&dec=-3.245916666666667&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1134,
+        "sha256": "b1ec1e1fae7b09d09bbe408cc5d555f18a70caad7fff47675919fdb64ba97cc9",
+        "bytes": 12052,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m14.jpg"
+      },
+      "facts": {
+        "constellation": "OPH",
+        "visualMagnitude": 7.6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m15",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.28700000000000003&projection=TAN&coordsys=icrs&ra=322.49304166666667&dec=12.166999999999998&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1033.2,
+        "sha256": "04d811a69069d6552ea73391a9754c55ad5ee01ea1cc64e16780e0740326fa6d",
+        "bytes": 12652,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m15.jpg"
+      },
+      "facts": {
+        "constellation": "PEG",
+        "visualMagnitude": 6.4,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m16",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=2.1&projection=TAN&coordsys=icrs&ra=274.688&dec=-13.792&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 7560,
+        "sha256": "c92b1e46839f533650bc21650df611ba4ac2f2057c10f4563ad92d1f8aad744a",
+        "bytes": 8181,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m16.jpg"
+      },
+      "extent": {
+        "majorArcsec": 5400,
+        "minorArcsec": null,
+        "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/20",
+        "label": "Sharpless H II-region maximum diameter",
+        "notes": "Sh 2-49, Sharpless (1959), maximum angular diameter 90 arcmin for the broad Eagle H II region. Not the 7 arcmin associated open cluster, and not a circular boundary or image footprint. Display type follows the Sharpless H II-region classification; the discovery identity remains the associated SIMBAD cluster."
+      },
+      "facts": {
+        "constellation": "SER",
+        "visualMagnitude": 6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      },
+      "displayType": "emission-nebula"
+    },
+    {
+      "objectId": "m17",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=1.0733333333333333&projection=TAN&coordsys=icrs&ra=275.1958333333333&dec=-16.171666666666663&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 3863.9999999999995,
+        "sha256": "392dee1756fc2589dd734a776fe15a0d31da5efd0dda5dc58cd86e4a17404f38",
+        "bytes": 11421,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m17.jpg"
+      },
+      "extent": {
+        "majorArcsec": 2760,
+        "minorArcsec": 2220,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical nebula extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound. Display type follows the same HEASARC DI (diffuse-nebula) row; the discovery identity remains the associated SIMBAD cluster."
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 7,
+        "magnitudeUncertaintyFlag": "*",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      },
+      "displayType": "diffuse-nebula"
+    },
+    {
+      "objectId": "m18",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.21&projection=TAN&coordsys=icrs&ra=274.9875&dec=-17.088333333333335&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 756,
+        "sha256": "731de017b4719f9b5c057ad5faa6c6078d9e817cbd3f91634ed2ae3141831662",
+        "bytes": 13744,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m18.jpg"
+      },
+      "extent": {
+        "majorArcsec": 540,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 6.9,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m19",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.224&projection=TAN&coordsys=icrs&ra=255.65704166666666&dec=-26.267944444444442&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 806.4,
+        "sha256": "664d07260e437bb82484ad39c347251cdd018981b2e191b4c78202476406e4ac",
+        "bytes": 17202,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m19.jpg"
+      },
+      "facts": {
+        "constellation": "OPH",
+        "visualMagnitude": 7.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m20",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.6766666666666666&projection=TAN&coordsys=icrs&ra=270.675&dec=-22.971666666666664&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2436,
+        "sha256": "ecc0143f73189f2823e6a7762f72f2f3c48a58d461dd00def6f17ab7e6e039c5",
+        "bytes": 12922,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m20.jpg"
+      },
+      "extent": {
+        "majorArcsec": 1740,
+        "minorArcsec": 1620,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical nebula extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound. Display type follows the same HEASARC DI (diffuse-nebula) row; the discovery identity remains the associated SIMBAD cluster."
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 8.5,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      },
+      "displayType": "diffuse-nebula"
+    },
+    {
+      "objectId": "m21",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.30333333333333334&projection=TAN&coordsys=icrs&ra=271.0358333333333&dec=-22.505&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1092,
+        "sha256": "5a9181d25e33b42d914c51c23df7c7bde0a2efebf0e0c06f075fb8c5bb974e6b",
+        "bytes": 14713,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m21.jpg"
+      },
+      "extent": {
+        "majorArcsec": 780,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 5.9,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m22",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.5599999999999999&projection=TAN&coordsys=icrs&ra=279.09975000000003&dec=-23.90475&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2015.9999999999998,
+        "sha256": "831aa18d959d4d170db82f56cc00f8a2162f9df1fe227c6b6fd69b12004ceec6",
+        "bytes": 17978,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m22.jpg"
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 5.1,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m23",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.63&projection=TAN&coordsys=icrs&ra=269.2370833333333&dec=-18.98694444444445&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2268,
+        "sha256": "7df39185997a989e0fe9f2a32188228f13a2fdd4257100e1995340b45bdd00bc",
+        "bytes": 11768,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m23.jpg"
+      },
+      "extent": {
+        "majorArcsec": 1620,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 5.5,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m24",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=2.8&projection=TAN&coordsys=icrs&ra=274.2&dec=-18.55&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 10080,
+        "sha256": "0d34bebe10d9712466711e5eac2605f287e31cfbcc2c636cb2c7260a81bf484a",
+        "bytes": 8318,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m24.jpg"
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 4.5,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m25",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.7466666666666667&projection=TAN&coordsys=icrs&ra=277.93708333333325&dec=-19.113888888888887&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2688,
+        "sha256": "4ee9449ebc980886e849a8c9c1806491e20e5e3d0a462def0d96b78b6818b80a",
+        "bytes": 10832,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m25.jpg"
+      },
+      "extent": {
+        "majorArcsec": 1920,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 4.6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m26",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.35&projection=TAN&coordsys=icrs&ra=281.31708333333336&dec=-9.386111111111113&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1260,
+        "sha256": "aab3cca9a3bb79dc55659f7867b08cc3be75109149641742f18a0af6dcaba3b0",
+        "bytes": 15350,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m26.jpg"
+      },
+      "extent": {
+        "majorArcsec": 900,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "SCT",
+        "visualMagnitude": 8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m27",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.15633333333333332&projection=TAN&coordsys=icrs&ra=299.90151327087&dec=22.721197794319995&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 562.8,
+        "sha256": "7216643ab6c529752f96beb3e68c1902cf514d9980ce1794329410bb7fa66de6",
+        "bytes": 12537,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m27.jpg"
+      },
+      "facts": {
+        "constellation": "VUL",
+        "visualMagnitude": 8.1,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m28",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.2613333333333333&projection=TAN&coordsys=icrs&ra=276.1370416666666&dec=-24.869833333333332&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 940.8,
+        "sha256": "be2bd05c79b77719b05c6341944bd39e7e506a1a93e8a6aee3fb3a4b16d6f53a",
+        "bytes": 19210,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m28.jpg"
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 6.9,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m29",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.16333333333333333&projection=TAN&coordsys=icrs&ra=305.94166666666666&dec=38.486666666666665&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 588,
+        "sha256": "9c8d767e55b56366d4f7adc57aa893c7df1bd96ac5ba9c2ad1a735753ca8cde0",
+        "bytes": 11265,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m29.jpg"
+      },
+      "extent": {
+        "majorArcsec": 420,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "CYG",
+        "visualMagnitude": 6.6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m30",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.25666666666666665&projection=TAN&coordsys=icrs&ra=325.0921666666667&dec=-23.17986111111111&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 923.9999999999999,
+        "sha256": "dec4b3a145f524160f000a59ae4dd60f6952357af26df044cf350fc2753b9775",
+        "bytes": 10854,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m30.jpg"
+      },
+      "facts": {
+        "constellation": "CAP",
+        "visualMagnitude": 7.5,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m31",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=4.6556999999999995&projection=TAN&coordsys=icrs&ra=10.684708333333333&dec=41.268750000000004&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 16760.519999999997,
+        "sha256": "2206d91095863c83f35f849d1e3510362672f50c396f57a2b6f34a1056a55d69",
+        "bytes": 5426,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m31.jpg"
+      },
+      "facts": {
+        "constellation": "AND",
+        "visualMagnitude": 3.4,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m32",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.07875&projection=TAN&coordsys=icrs&ra=10.67427&dec=40.86517&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 283.5,
+        "sha256": "650bbf4cde1571d55623a6469e0a5780d0da7cac78e1c7b3439830a3200d31c7",
+        "bytes": 8796,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m32.jpg"
+      },
+      "facts": {
+        "constellation": "AND",
+        "visualMagnitude": 8.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m33",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=1.4060666666666664&projection=TAN&coordsys=icrs&ra=23.46206906218&dec=30.660175111980003&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 5061.839999999999,
+        "sha256": "1bb895f0ac50076003a9bad4cadbbbd6695e1eb8187ec5c5b027f61250c89ae7",
+        "bytes": 5499,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m33.jpg"
+      },
+      "facts": {
+        "constellation": "TRI",
+        "visualMagnitude": 5.7,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m34",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.8166666666666667&projection=TAN&coordsys=icrs&ra=40.53083333333333&dec=42.721944444444446&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2940,
+        "sha256": "21723f07f956fe33754f9a1259580d76085d60a3b86de7702cd335c00a5f54db",
+        "bytes": 7935,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m34.jpg"
+      },
+      "extent": {
+        "majorArcsec": 2100,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "PER",
+        "visualMagnitude": 5.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m35",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.6533333333333333&projection=TAN&coordsys=icrs&ra=92.27208333333334&dec=24.336111111111105&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2352,
+        "sha256": "6a009039739a7462b5599afbf1007ad8ae3d5d7ef10a07c55d701e139cb07e49",
+        "bytes": 12376,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m35.jpg"
+      },
+      "extent": {
+        "majorArcsec": 1680,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "GEM",
+        "visualMagnitude": 5.1,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m36",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.27999999999999997&projection=TAN&coordsys=icrs&ra=84.08416666666666&dec=34.135&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1007.9999999999999,
+        "sha256": "9533cd4dffa7fd40bf95ff6099f4387eeda0a94711ab23800f19b4af55b9efd6",
+        "bytes": 13362,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m36.jpg"
+      },
+      "extent": {
+        "majorArcsec": 720,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "AUR",
+        "visualMagnitude": 6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m37",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.5599999999999999&projection=TAN&coordsys=icrs&ra=88.07416666666667&dec=32.54499999999999&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2015.9999999999998,
+        "sha256": "8405fabe8c0ff9f5b530df2bf0055c0de8cb1fdf089524c948e7c3815eaf775b",
+        "bytes": 13544,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m37.jpg"
+      },
+      "extent": {
+        "majorArcsec": 1440,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "AUR",
+        "visualMagnitude": 5.6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m38",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.49&projection=TAN&coordsys=icrs&ra=82.16708333333332&dec=35.823888888888895&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1764,
+        "sha256": "862e49e6aebbb5d750954d1d50b4a723bd2f1e50ca860083646813edcc978cb6",
+        "bytes": 12270,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m38.jpg"
+      },
+      "extent": {
+        "majorArcsec": 1260,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "AUR",
+        "visualMagnitude": 6.4,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m39",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.7466666666666667&projection=TAN&coordsys=icrs&ra=322.88916666666654&dec=48.246944444444445&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2688,
+        "sha256": "359df7e4a3885e838c7dade5c39667e718fa3813506e4e20d79f60acf56b7f08",
+        "bytes": 8711,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m39.jpg"
+      },
+      "extent": {
+        "majorArcsec": 1920,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "CYG",
+        "visualMagnitude": 4.6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m40",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.05&projection=TAN&coordsys=icrs&ra=185.54999999999998&dec=58.083333333333336&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 180,
+        "sha256": "8da1cc2b0727d06587112a89365eb918555bfa7dcc9b611c4291a41745487e1c",
+        "bytes": 5340,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m40.jpg"
+      },
+      "extent": {
+        "majorArcsec": 50,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Optical pair separation",
+        "notes": "HEASARC notes: Winnecke 4, a double star of 50 arcsec separation. This is projected separation of unrelated stars, not nebula size."
+      },
+      "facts": {
+        "constellation": "UMA",
+        "visualMagnitude": 8,
+        "magnitudeUncertaintyFlag": "*",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m41",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.8866666666666667&projection=TAN&coordsys=icrs&ra=101.49916666666667&dec=-20.716111111111108&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 3192,
+        "sha256": "d139b002edccec0aca80f1747d5c7ebff1be4970c1bd27e06c991560073a88ab",
+        "bytes": 9212,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m41.jpg"
+      },
+      "extent": {
+        "majorArcsec": 2280,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "CMA",
+        "visualMagnitude": 4.5,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m42",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=1.54&projection=TAN&coordsys=icrs&ra=83.8201&dec=-5.3876&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 5544,
+        "sha256": "c3799151043d1e6c0ff338573eb4c949a6c0f7bb99a0d47b43a51d5ff01d06da",
+        "bytes": 8184,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m42.jpg"
+      },
+      "facts": {
+        "constellation": "ORI",
+        "visualMagnitude": 4,
+        "magnitudeUncertaintyFlag": "*",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m43",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.4666666666666667&projection=TAN&coordsys=icrs&ra=83.87916666666666&dec=-5.27&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1680,
+        "sha256": "30be71efe0bf7a60663d2d2cafb1edb3ccc32b1f6481981b26421fa9c092e857",
+        "bytes": 7636,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m43.jpg"
+      },
+      "extent": {
+        "majorArcsec": 1200,
+        "minorArcsec": 900,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical nebula extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "ORI",
+        "visualMagnitude": 9,
+        "magnitudeUncertaintyFlag": "*",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m44",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=2.2166666666666663&projection=TAN&coordsys=icrs&ra=130.05416666666665&dec=19.62111111111111&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 7979.999999999999,
+        "sha256": "748390f6a4a55d7d2cb17c5ba64f9d3be69270c58b3e4cbe6bebcc4fa35b9048",
+        "bytes": 5506,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m44.jpg"
+      },
+      "extent": {
+        "majorArcsec": 5700,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "CNC",
+        "visualMagnitude": 3.1,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m45",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=2.566666666666667&projection=TAN&coordsys=icrs&ra=56.600833333333334&dec=24.11388888888889&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 9240,
+        "sha256": "afad6aafd3c526f79d27f776ac68f738077282745cc5424ac70d8bcce77f1dc1",
+        "bytes": 6945,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m45.jpg"
+      },
+      "extent": {
+        "majorArcsec": 6600,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "TAU",
+        "visualMagnitude": 1.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m46",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.63&projection=TAN&coordsys=icrs&ra=115.44500000000002&dec=-14.84388888888889&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2268,
+        "sha256": "ca6acfef34dd7ef3a325c6203b9720808adcac241922ef13d8d3f5ccb12181e6",
+        "bytes": 14784,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m46.jpg"
+      },
+      "extent": {
+        "majorArcsec": 1620,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "PUP",
+        "visualMagnitude": 6.1,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m47",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.7&projection=TAN&coordsys=icrs&ra=114.14708333333333&dec=-14.488888888888885&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2520,
+        "sha256": "26ba291ac4b8600cc7c170675648c2602a56e4dcc217faec819ede4c08ad2274",
+        "bytes": 10500,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m47.jpg"
+      },
+      "extent": {
+        "majorArcsec": 1800,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "PUP",
+        "visualMagnitude": 4.4,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m48",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=1.26&projection=TAN&coordsys=icrs&ra=123.41208333333333&dec=-5.726111111111112&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 4536,
+        "sha256": "5dffa698e0127cf2c7829a63252ff0239125c91072248cc8261757329114eac7",
+        "bytes": 8820,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m48.jpg"
+      },
+      "extent": {
+        "majorArcsec": 3240,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "HYA",
+        "visualMagnitude": 5.8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m49",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.1923705&projection=TAN&coordsys=icrs&ra=187.4449&dec=8.0004&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 692.5338,
+        "sha256": "2ca0cf573d04e9e9eaa29a5a6fa618d3cf83c6ba21f1ea93cea669af41e91f0d",
+        "bytes": 6386,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m49.jpg"
+      },
+      "facts": {
+        "constellation": "VIR",
+        "visualMagnitude": 8.4,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m50",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.37333333333333335&projection=TAN&coordsys=icrs&ra=105.68416666666667&dec=-8.365&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1344,
+        "sha256": "2efed6d363864a96f05ce3404aab283d0b8e2014e79fa8f1b6e56417bc61d231",
+        "bytes": 11131,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m50.jpg"
+      },
+      "extent": {
+        "majorArcsec": 960,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "MON",
+        "visualMagnitude": 5.9,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m51",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.21102176666666664&projection=TAN&coordsys=icrs&ra=202.469575&dec=47.19525833333333&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 759.6783599999999,
+        "sha256": "a6e710d0e0c0270a2f408ccc3d23c1c3a61aa436853a6f9ec6a6abc6241bd7cb",
+        "bytes": 7526,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m51.jpg"
+      },
+      "facts": {
+        "constellation": "CVN",
+        "visualMagnitude": 8.1,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m52",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.30333333333333334&projection=TAN&coordsys=icrs&ra=351.195&dec=61.589999999999996&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1092,
+        "sha256": "f6b40ddf96abed8d9d9a03b68a37baae962cb9ac6f25a595dbecda2b275fb251",
+        "bytes": 15975,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m52.jpg"
+      },
+      "extent": {
+        "majorArcsec": 780,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "CAS",
+        "visualMagnitude": 6.9,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m53",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.294&projection=TAN&coordsys=icrs&ra=198.2302083333333&dec=18.168166666666668&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1058.3999999999999,
+        "sha256": "42c06f5e73d616cacbd9084478e6887cb193ef981a9efe7161b3284b46ad9910",
+        "bytes": 10266,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m53.jpg"
+      },
+      "facts": {
+        "constellation": "COM",
+        "visualMagnitude": 7.7,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m54",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.21233333333333332&projection=TAN&coordsys=icrs&ra=283.763875&dec=-30.47986111111111&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 764.4,
+        "sha256": "436fba911c02bf94366b58c528c29a29b3f8e68877354eea9d43533428db584c",
+        "bytes": 14667,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m54.jpg"
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 7.7,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m55",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.44333333333333336&projection=TAN&coordsys=icrs&ra=294.9987916666667&dec=-30.96475&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1596,
+        "sha256": "6e01dc120a6528b1a9fa1232f2177bd0c7ac4da8805605115b8ee24ee7a14447",
+        "bytes": 10609,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m55.jpg"
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 7,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m56",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.16566666666666666&projection=TAN&coordsys=icrs&ra=289.14820833333334&dec=30.183472222222214&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 596.4,
+        "sha256": "f59fa991500ee4224471acf1811df53c79ab7f5908429a4e1360d4827f296011",
+        "bytes": 15711,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m56.jpg"
+      },
+      "facts": {
+        "constellation": "LYR",
+        "visualMagnitude": 8.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m57",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.05&projection=TAN&coordsys=icrs&ra=283.39623652463&dec=33.029134246539996&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 180,
+        "sha256": "9eb65c0a578ff9b9c75453e34a36362cacd47670bf37d15bb3b5ec33665890b7",
+        "bytes": 7705,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m57.jpg"
+      },
+      "facts": {
+        "constellation": "LYR",
+        "visualMagnitude": 9,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m58",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.133182&projection=TAN&coordsys=icrs&ra=189.43165612500002&dec=11.818090000000002&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 479.45519999999993,
+        "sha256": "cb47fc8edc5f53d891f4697c1950d99fbbe97844c21bd06c974e621b92fa0386",
+        "bytes": 6136,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m58.jpg"
+      },
+      "facts": {
+        "constellation": "VIR",
+        "visualMagnitude": 9.8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m59",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.13023103333333333&projection=TAN&coordsys=icrs&ra=190.50940890631998&dec=11.64691930771&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 468.83172,
+        "sha256": "ed256afbc967834e2e6bb9814e8e06fb2dcbcf11325ca3a3c421e2da0ac370fb",
+        "bytes": 6411,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m59.jpg"
+      },
+      "facts": {
+        "constellation": "VIR",
+        "visualMagnitude": 9.8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m60",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.15012876666666666&projection=TAN&coordsys=icrs&ra=190.91654510497253&dec=11.552691159463055&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 540.46356,
+        "sha256": "d5a0cb9fcbd98ca39a60482bccdeb569ab196812e698fd384d75c1a2cf7a4d39",
+        "bytes": 6763,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m60.jpg"
+      },
+      "facts": {
+        "constellation": "VIR",
+        "visualMagnitude": 8.8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m61",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.11657333333333335&projection=TAN&coordsys=icrs&ra=185.47886774286997&dec=4.47377704644&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 419.66400000000004,
+        "sha256": "795ef7d4c0a8ab688a23682ccb83d0e019b60fdf45c83ed1d28248bd4c96670d",
+        "bytes": 7659,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m61.jpg"
+      },
+      "facts": {
+        "constellation": "VIR",
+        "visualMagnitude": 9.7,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m62",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.32899999999999996&projection=TAN&coordsys=icrs&ra=255.30249999999995&dec=-30.112361111111106&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1184.3999999999999,
+        "sha256": "393921f2c068ac9eea7377a87ced403cbecaece97c38fd2bfdb7695a552e05c1",
+        "bytes": 15427,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m62.jpg"
+      },
+      "facts": {
+        "constellation": "OPH",
+        "visualMagnitude": 6.6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m63",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.3075333333333333&projection=TAN&coordsys=icrs&ra=198.95530912246997&dec=42.02936891003&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1107.12,
+        "sha256": "b558034a3c17827b4edff66991f1226b200765cebdb39f17b4fa656b8741d78d",
+        "bytes": 6494,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m63.jpg"
+      },
+      "facts": {
+        "constellation": "CVN",
+        "visualMagnitude": 8.6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m64",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.2565126666666666&projection=TAN&coordsys=icrs&ra=194.18206666666663&dec=21.682658333333332&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 923.4455999999998,
+        "sha256": "b879ebb0ca40a64fe4da1501842d5706e56b18d690d94128c9710b8c0c2a5eae",
+        "bytes": 5893,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m64.jpg"
+      },
+      "facts": {
+        "constellation": "COM",
+        "visualMagnitude": 8.5,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m65",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.372547&projection=TAN&coordsys=icrs&ra=169.73295193949&dec=13.092305751019998&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1341.1692,
+        "sha256": "cd4e7f9630776a919aeb0f736b1cc78058fd9f4aa9db708ba4d0538dc57b79c3",
+        "bytes": 5465,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m65.jpg"
+      },
+      "facts": {
+        "constellation": "LEO",
+        "visualMagnitude": 9.3,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m66",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.2667886666666666&projection=TAN&coordsys=icrs&ra=170.0626&dec=12.9915&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 960.4391999999999,
+        "sha256": "afbfb0d0756342d17878ef61cbc9ed19889204678a143bca01b9bd1a52c9eea3",
+        "bytes": 6213,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m66.jpg"
+      },
+      "facts": {
+        "constellation": "LEO",
+        "visualMagnitude": 9,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m67",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.7&projection=TAN&coordsys=icrs&ra=132.84583333333333&dec=11.81388888888889&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 2520,
+        "sha256": "0b879bd6c760994df5cae986beb4274cb5dd762f9233373f0db35a60d2146015",
+        "bytes": 6285,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m67.jpg"
+      },
+      "extent": {
+        "majorArcsec": 1800,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "CNC",
+        "visualMagnitude": 6.9,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m68",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.27999999999999997&projection=TAN&coordsys=icrs&ra=189.8665833333333&dec=-26.74405555555555&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1007.9999999999999,
+        "sha256": "d0a0d12e740632111c407e3f63638087e176e5d5b50686f56dff6c78228a6808",
+        "bytes": 10263,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m68.jpg"
+      },
+      "facts": {
+        "constellation": "HYA",
+        "visualMagnitude": 8.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m69",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.16566666666666666&projection=TAN&coordsys=icrs&ra=277.84625&dec=-32.34808333333334&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 596.4,
+        "sha256": "a7c8b2d9e3353df4e2b5fc4527863eda67320ce16fcfef23e3b8c4c1079fbd02",
+        "bytes": 17964,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m69.jpg"
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 7.7,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m70",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.18199999999999997&projection=TAN&coordsys=icrs&ra=280.80316666666664&dec=-32.292111111111105&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 655.1999999999999,
+        "sha256": "3272ced0735dc2102b3a16b96ed8d84006f1fc78c3769c6a5bca0f3e7afe2b0b",
+        "bytes": 14645,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m70.jpg"
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 8.1,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m71",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.16799999999999998&projection=TAN&coordsys=icrs&ra=298.44370833333335&dec=18.779194444444443&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 604.8,
+        "sha256": "e396e3dabb4ed2020968dde60d73e98d469bc11792e98ef35b8447aa6e26efdd",
+        "bytes": 19840,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m71.jpg"
+      },
+      "facts": {
+        "constellation": "SGE",
+        "visualMagnitude": 8.3,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m72",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.13766666666666666&projection=TAN&coordsys=icrs&ra=313.36541666666665&dec=-12.537305555555555&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 495.59999999999997,
+        "sha256": "23281f8a263baac95d72e1da638a860107ffcccf8c44c6e847f0787f92c107a4",
+        "bytes": 11140,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m72.jpg"
+      },
+      "facts": {
+        "constellation": "AQR",
+        "visualMagnitude": 9.4,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m73",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.4666666666666667&projection=TAN&coordsys=icrs&ra=314.75&dec=-12.633333333333333&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1680,
+        "sha256": "288807751b75893ce22a945eb7b2ac76fc49983c49bf21049d33fc746b4ffba7",
+        "bytes": 6771,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m73.jpg"
+      },
+      "facts": {
+        "constellation": "AQR",
+        "visualMagnitude": null,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m74",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.15642549999999997&projection=TAN&coordsys=icrs&ra=24.173938015259996&dec=15.783640975640001&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 563.1317999999999,
+        "sha256": "1c1c157f682f4a54bf8295728368b2aa6a73ecfd1a092480aba5e5b7f0a69155",
+        "bytes": 8015,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m74.jpg"
+      },
+      "facts": {
+        "constellation": "PSC",
+        "visualMagnitude": 9.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m75",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.055603333333333324&projection=TAN&coordsys=icrs&ra=301.52017083333334&dec=-21.922261111111112&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 200.17199999999997,
+        "sha256": "45be4ad105c8b225a2eb426d4888354526a12b962f31eef56a4aa9ed76d6ea35",
+        "bytes": 11283,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m75.jpg"
+      },
+      "facts": {
+        "constellation": "SGR",
+        "visualMagnitude": 8.6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m76",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.053829999999999996&projection=TAN&coordsys=icrs&ra=25.58189905342&dec=51.57542638057&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 193.78799999999998,
+        "sha256": "7153bcd98a142e96fa1ef8c32ab180c0f8c2dc96444b83ae1d73ce54bf695b89",
+        "bytes": 8733,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m76.jpg"
+      },
+      "facts": {
+        "constellation": "PER",
+        "visualMagnitude": 11.5,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m77",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.12832213333333334&projection=TAN&coordsys=icrs&ra=40.66962152891999&dec=-0.01329435839&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 461.95968,
+        "sha256": "ffe219b78b18d21f529e039f0ec4f7cc1688a1b4ae098711c6b23edc19c5d9a1",
+        "bytes": 7407,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m77.jpg"
+      },
+      "facts": {
+        "constellation": "CET",
+        "visualMagnitude": 8.8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m78",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.18666666666666668&projection=TAN&coordsys=icrs&ra=86.69083333333333&dec=0.07916666666666666&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 672,
+        "sha256": "5f600b24bafd73b692b47257697a3f965d980d949dc96e6cb66949e085038452",
+        "bytes": 7415,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m78.jpg"
+      },
+      "extent": {
+        "majorArcsec": 480,
+        "minorArcsec": 360,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical nebula extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "ORI",
+        "visualMagnitude": 8,
+        "magnitudeUncertaintyFlag": "*",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m79",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.20299999999999999&projection=TAN&coordsys=icrs&ra=81.04412500000002&dec=-24.52425&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 730.8,
+        "sha256": "1aff9a37ab02e32372803154331cf109b004d7e9a5d9a7b114ec653f85fef6ad",
+        "bytes": 9987,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m79.jpg"
+      },
+      "facts": {
+        "constellation": "LEP",
+        "visualMagnitude": 8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m80",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.20766666666666664&projection=TAN&coordsys=icrs&ra=244.26004166666672&dec=-22.976083333333328&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 747.5999999999999,
+        "sha256": "bff1563eb6e2e0aa800fb9da37a5d4e07e8f92249bb386b82cf0425f951599b5",
+        "bytes": 11662,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m80.jpg"
+      },
+      "facts": {
+        "constellation": "SCO",
+        "visualMagnitude": 7.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m81",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.4988666666666666&projection=TAN&coordsys=icrs&ra=148.88821939854&dec=69.06529514038&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1795.9199999999998,
+        "sha256": "4aedaa830d1d3eafcdc054ea0eec9c25cc0d67f98aa16e0661990c45f8c9edae",
+        "bytes": 6336,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m81.jpg"
+      },
+      "facts": {
+        "constellation": "UMA",
+        "visualMagnitude": 6.8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m82",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.25666666666666665&projection=TAN&coordsys=icrs&ra=148.96845833333333&dec=69.67970277777778&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 923.9999999999999,
+        "sha256": "be23b8a027934e20ce2b0b6d119f959395230870a653f762a323324ea946179a",
+        "bytes": 6268,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m82.jpg"
+      },
+      "extent": {
+        "majorArcsec": 660,
+        "minorArcsec": 300,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "UMA",
+        "visualMagnitude": 8.4,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m83",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.32199999999999995&projection=TAN&coordsys=icrs&ra=204.25383&dec=-29.865761111111112&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1159.1999999999998,
+        "sha256": "f73e489eded23cc727cbe60f4449e335aa5027f41c2bfcc352e67857f9e243c5",
+        "bytes": 9909,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m83.jpg"
+      },
+      "facts": {
+        "constellation": "HYA",
+        "visualMagnitude": 7.6,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m84",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.15073333333333333&projection=TAN&coordsys=icrs&ra=186.2655972083333&dec=12.886983138888887&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 542.64,
+        "sha256": "10d0289ce7f17de8b5934782dabce64c80fa7edd18791d7bab95d7a4e3d6a121",
+        "bytes": 6607,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m84.jpg"
+      },
+      "facts": {
+        "constellation": "VIR",
+        "visualMagnitude": 9.3,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m85",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.1606906&projection=TAN&coordsys=icrs&ra=186.35022083333328&dec=18.191080555555555&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 578.4861599999999,
+        "sha256": "a629bd6b8804907f2c0a595fa7fa530d2dc994fcf7a07e480adc27ae2788fd81",
+        "bytes": 6706,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m85.jpg"
+      },
+      "facts": {
+        "constellation": "COM",
+        "visualMagnitude": 9.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m86",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.2178561&projection=TAN&coordsys=icrs&ra=186.54922499999998&dec=12.945969444444444&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 784.28196,
+        "sha256": "9066e4984b0bfda44eed58dea09806028000b32e500b47f24f4934ad9594588b",
+        "bytes": 5952,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m86.jpg"
+      },
+      "facts": {
+        "constellation": "VIR",
+        "visualMagnitude": 9.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m87",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.14697083333333333&projection=TAN&coordsys=icrs&ra=187.70593076725&dec=12.391123246083334&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 529.095,
+        "sha256": "2f4833c9ee1b1b52da7550b2332d9c0803c1e89a1f6885418cfb97ac4ebcbdc1",
+        "bytes": 6580,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m87.jpg"
+      },
+      "facts": {
+        "constellation": "VIR",
+        "visualMagnitude": 8.6,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m88",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.15620336666666665&projection=TAN&coordsys=icrs&ra=187.99646877602&dec=14.420319158839998&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 562.3321199999999,
+        "sha256": "0e4cc77b1d5f057291cdc6a9e9cc81c773ff907ac73a1529ea0e27a5973bd939",
+        "bytes": 6311,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m88.jpg"
+      },
+      "facts": {
+        "constellation": "COM",
+        "visualMagnitude": 9.5,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m89",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.10181803333333332&projection=TAN&coordsys=icrs&ra=188.9158638892917&dec=12.556341907138888&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 366.54491999999993,
+        "sha256": "69f51c2be3062a9f0793ec3bc337d4011eb15d7c43b3774f7b37997121b2aa61",
+        "bytes": 6319,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m89.jpg"
+      },
+      "facts": {
+        "constellation": "VIR",
+        "visualMagnitude": 9.8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m90",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.22404899999999997&projection=TAN&coordsys=icrs&ra=189.20750409994997&dec=13.162923281399998&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 806.5763999999999,
+        "sha256": "92645d5d8db55b4e2877de259b9a8912622efa30d53df030996e053bcd311b89",
+        "bytes": 6284,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m90.jpg"
+      },
+      "facts": {
+        "constellation": "VIR",
+        "visualMagnitude": 9.5,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m91",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.12244493333333331&projection=TAN&coordsys=icrs&ra=188.86018615054996&dec=14.496322314930001&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 440.80175999999994,
+        "sha256": "735086dc8af2830a44b36782dbc8787a63442949a1bdb080a120f6644f54472d",
+        "bytes": 6552,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m91.jpg"
+      },
+      "facts": {
+        "constellation": "COM",
+        "visualMagnitude": 10.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m92",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.2613333333333333&projection=TAN&coordsys=icrs&ra=259.2807916666667&dec=43.13594444444444&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 940.8,
+        "sha256": "719f768fb5fa22ce9bb76ab2df4a36a07171f133260fac436ea23b60dbcbde45",
+        "bytes": 12345,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m92.jpg"
+      },
+      "facts": {
+        "constellation": "HER",
+        "visualMagnitude": 6.5,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m93",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.5133333333333333&projection=TAN&coordsys=icrs&ra=116.14083333333332&dec=-23.853055555555557&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1847.9999999999998,
+        "sha256": "a72976f7a2fc1cbed9bf0d6e40ca1e2e45d3a8dd64b0b5ecdebb2c86c5fab17d",
+        "bytes": 14428,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m93.jpg"
+      },
+      "extent": {
+        "majorArcsec": 1320,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "PUP",
+        "visualMagnitude": 6.2,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m94",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.1631182&projection=TAN&coordsys=icrs&ra=192.72114082143&dec=41.12025024573&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 587.22552,
+        "sha256": "f5c48fd0ceede0ad42aa198fcaa24b336609187809d8dbdd845e4d9c90308065",
+        "bytes": 6815,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m94.jpg"
+      },
+      "facts": {
+        "constellation": "CVN",
+        "visualMagnitude": 8.1,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m95",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.13058523333333336&projection=TAN&coordsys=icrs&ra=160.99054728575&dec=11.703694775369998&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 470.10684000000003,
+        "sha256": "4cbfca2cca2b96ebc31d9010d8d45f23027c982c9a549fe93a513b7456843b1f",
+        "bytes": 6825,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m95.jpg"
+      },
+      "facts": {
+        "constellation": "LEO",
+        "visualMagnitude": 9.7,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m96",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.15385720000000003&projection=TAN&coordsys=icrs&ra=161.6906&dec=11.819938888888887&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 553.88592,
+        "sha256": "c2e4f10c187d9482715a3fe6ee52956e9c44263281bb86dc320c24b43ad5d724",
+        "bytes": 6596,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m96.jpg"
+      },
+      "facts": {
+        "constellation": "LEO",
+        "visualMagnitude": 9.2,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m97",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.07776999999999999&projection=TAN&coordsys=icrs&ra=168.69880122825&dec=55.01902300891&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 279.972,
+        "sha256": "64ef7648a90f1abe6411162f883c4c03a532d99def3f5dc3f8eb5b7b07dbcc51",
+        "bytes": 7102,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m97.jpg"
+      },
+      "facts": {
+        "constellation": "UMA",
+        "visualMagnitude": 11.2,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m98",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.2553763333333333&projection=TAN&coordsys=icrs&ra=183.45121278623998&dec=14.900542632&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 919.3547999999998,
+        "sha256": "ee61eaab806d5747ce20603251e87e8b81ce642eed5e9def8c665cbf1f0aacb2",
+        "bytes": 5641,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m98.jpg"
+      },
+      "facts": {
+        "constellation": "COM",
+        "visualMagnitude": 10.1,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m99",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.10737999999999999&projection=TAN&coordsys=icrs&ra=184.7067708333333&dec=14.416488888888884&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 386.568,
+        "sha256": "0b137aacc14045ca7d1498a22166a6edcdd7622f4bb6088c29c1f6a94ce8a5a1",
+        "bytes": 7484,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m99.jpg"
+      },
+      "facts": {
+        "constellation": "COM",
+        "visualMagnitude": 9.8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m100",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.1471246&projection=TAN&coordsys=icrs&ra=185.72887499732997&dec=15.822304516100004&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 529.64856,
+        "sha256": "4dcceda1390416f88ef983e791c5498592fdc02ff6a8496401c3ef115c5d3687",
+        "bytes": 7135,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m100.jpg"
+      },
+      "facts": {
+        "constellation": "COM",
+        "visualMagnitude": 9.4,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m101",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.5105333333333333&projection=TAN&coordsys=icrs&ra=210.80242916666668&dec=54.34875&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1837.9199999999998,
+        "sha256": "ef00452828380cc2de8f26fc32dfaa9441236bef1b417764b14d839c9b5fba0a",
+        "bytes": 6720,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m101.jpg"
+      },
+      "facts": {
+        "constellation": "UMA",
+        "visualMagnitude": 7.7,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m102",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.14723333333333333&projection=TAN&coordsys=icrs&ra=226.62317083333332&dec=55.76330833333333&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 530.04,
+        "sha256": "aec6f30cb0992216b1c9b2852ed3213679f27d19b17401e3dce45c7985e6191e",
+        "bytes": 6300,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m102.jpg"
+      }
+    },
+    {
+      "objectId": "m103",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.13999999999999999&projection=TAN&coordsys=icrs&ra=23.339166666666667&dec=60.65888888888889&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 503.99999999999994,
+        "sha256": "5d753f91ec5d92c77b5a89db051f095c7869a8db6c20c0fa68790d1278676d68",
+        "bytes": 14042,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m103.jpg"
+      },
+      "extent": {
+        "majorArcsec": 360,
+        "minorArcsec": null,
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+        "label": "Historical visible object extent",
+        "notes": "HEASARC Messier table, mainly Sky Catalog 2000.0 (1985). Approximate historical apparent extent; not the SIMBAD membership extent, image footprint or a modern isophotal bound."
+      },
+      "facts": {
+        "constellation": "CAS",
+        "visualMagnitude": 7.4,
+        "magnitudeUncertaintyFlag": ":",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m104",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.19856666666666664&projection=TAN&coordsys=icrs&ra=189.99763274591663&dec=-11.623054494444448&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 714.8399999999999,
+        "sha256": "e61295060c8adbcb37ccdfc484bdf2b89957d54982289a324a6ee38f0ef4c696",
+        "bytes": 7521,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m104.jpg"
+      },
+      "facts": {
+        "constellation": "VIR",
+        "visualMagnitude": 8.3,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m105",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.1197&projection=TAN&coordsys=icrs&ra=161.95666666666665&dec=12.581630555555554&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 430.92,
+        "sha256": "9ae1684799c2b5e36db94299698b92a1edc11767b07519e0bf901532da8ab1da",
+        "bytes": 6274,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m105.jpg"
+      },
+      "facts": {
+        "constellation": "LEO",
+        "visualMagnitude": 9.3,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m106",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.4148666666666667&projection=TAN&coordsys=icrs&ra=184.7400833333333&dec=47.30371944444444&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1493.5200000000002,
+        "sha256": "8314dcfae412c6926d447e2ccb35c365f1d9452dcb11f0da75c2483e8bb2c495",
+        "bytes": 6053,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m106.jpg"
+      },
+      "facts": {
+        "constellation": "CVN",
+        "visualMagnitude": 8.3,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m107",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.23333333333333334&projection=TAN&coordsys=icrs&ra=248.13275&dec=-13.05377777777778&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 840,
+        "sha256": "bcf1a45bd1655b052e716bd519b9798c7c751d49ddd6075eb317415e27b2889d",
+        "bytes": 12173,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m107.jpg"
+      },
+      "facts": {
+        "constellation": "OPH",
+        "visualMagnitude": 8.1,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m108",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.3405243333333333&projection=TAN&coordsys=icrs&ra=167.87902916666664&dec=55.67412222222222&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 1225.8876,
+        "sha256": "aaf19a9a852ef7183d54cd5d96e2118641a3a4ae0f908da6bdd4983435eed15d",
+        "bytes": 6362,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m108.jpg"
+      },
+      "facts": {
+        "constellation": "UMA",
+        "visualMagnitude": 10,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m109",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.19144066666666665&projection=TAN&coordsys=icrs&ra=179.39984644985&dec=53.37472391176001&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 689.1863999999999,
+        "sha256": "9a8b4a19c21c3c668ee9c99ec71dec69d03786382683a1d1b6fdd15286f6bb27",
+        "bytes": 6035,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m109.jpg"
+      },
+      "facts": {
+        "constellation": "UMA",
+        "visualMagnitude": 9.8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    },
+    {
+      "objectId": "m110",
+      "thumbnail": {
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=192&height=192&fov=0.07774666666666666&projection=TAN&coordsys=icrs&ra=10.09190514583&dec=41.68541867226&rotation_angle=0&format=jpg",
+        "sourceUrl": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+        "credit": "Digitized Sky Survey — STScI/NASA; colour composition and HiPS by CDS.",
+        "fieldArcsec": 279.888,
+        "sha256": "d14f0e3c439e98a993f245d9b3aba03b924659f6f816b259027f1326ac3fa0af",
+        "bytes": 9151,
+        "width": 192,
+        "height": 192,
+        "localPath": ".local/nebula-lab/catalogue/messier/thumbnails/m110.jpg"
+      },
+      "facts": {
+        "constellation": "AND",
+        "visualMagnitude": 8,
+        "magnitudeUncertaintyFlag": "",
+        "sourceUrl": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "dss2-colour",
+      "file": "dss2-properties.txt",
+      "url": "https://alasky.cds.unistra.fr/DSS/DSSColor/properties",
+      "credit": "Digitized Sky Survey — STScI/NASA. Colour composition and HiPS by CDS; CNRS/Unistra.",
+      "license": "HiPS: ODbL-1.0; underlying plates retain the individual copyright provisions linked below.",
+      "licenseUrl": "https://archive.stsci.edu/dss/copyright.html",
+      "reference": "https://doi.org/10.26093/cds/aladin/ht9n-7r",
+      "path": "labs/nebula/models/messier/presentation-sources/dss2-properties.txt",
+      "sha256": "464c6de690685769187e1e99d87c425b6d4a0273096436c4e53e3e5b1071ccd8",
+      "bytes": 4281,
+      "retrievedAt": "2026-09-12T23:18:45.221Z"
+    },
+    {
+      "id": "heasarc-messier",
+      "file": "facts.xml",
+      "url": "https://heasarc.gsfc.nasa.gov/xamin/vo/tap/sync?REQUEST=doQuery&LANG=ADQL&QUERY=SELECT+name%2Cdimension%2Cobject_type%2Cnotes%2Cconstell%2Cvmag%2Cvmag_uncert+FROM+messier",
+      "credit": "NASA/GSFC HEASARC Messier table, compiled primarily from Hirshfeld and Sinnott (1985), Sky Catalog 2000.0, Volume 2, Table III.",
+      "reference": "https://heasarc.gsfc.nasa.gov/W3Browse/general-catalog/messier.html",
+      "notes": "Historical table has 109 rows and omits M102. Supplement only; never replaces the complete 110-identifier SIMBAD discovery catalogue. Approximate apparent V magnitudes retain flags: colon=approximate, asterisk=original rounded whole number.",
+      "path": "labs/nebula/models/messier/presentation-sources/facts.xml",
+      "sha256": "146841d3c32b8d74756c879f8415d68d7381e1a95d7cfb236180bffef1a94689",
+      "bytes": 8130,
+      "retrievedAt": "2026-09-12T23:18:45.222Z"
+    },
+    {
+      "id": "sharpless-1959-sh2-49",
+      "file": "sharpless.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=VII%2F20%2Fcatalog&Sh2=49",
+      "credit": "Sharpless (1959), A Catalogue of H II Regions, ApJS 4,257; CDS VizieR VII/20.",
+      "reference": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/20",
+      "notes": "Sh 2-49 maximum H II-region diameter90arcmin. Does not assert that this irregular region is circular. ICRS thumbnail centers remain unchanged from the original catalogue; no B1900 coordinates are imported.",
+      "identificationUrl": "https://nitarp.ipac.caltech.edu/system/media_files/binaries/253/original/SCHARPfinal.pdf?1685574226=",
+      "path": "labs/nebula/models/messier/presentation-sources/sharpless.tsv",
+      "sha256": "177f20e0c32c36e300584f190713b13e33eaf1564f749bb8ba7f86218e8c2cfb",
+      "bytes": 2703,
+      "retrievedAt": "2026-09-12T23:18:45.222Z"
+    }
+  ],
+  "method": {
+    "serviceUrl": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
+    "survey": "CDS/P/DSS2/color",
+    "width": 192,
+    "height": 192,
+    "coordinateFrame": "ICRS",
+    "projection": "TAN",
+    "rotationDegrees": 0,
+    "framing": "Square field = 1.4×the documented major extent, minimum180arcsec; unknownextentuses1200arcsec×1.4. Preview framing is authored, not measured object size.",
+    "interpretation": "DSS2 red and blue photographic surveys, with synthetic green as their mean. Recognition JPEGs are not calibrated photometry, reconstruction sources, full native survey data, or image registration evidence. Local files are ignored; every JPEG is pinned by SHA256 and decoded dimensions.",
+    "acknowledgment": "This work made use of hips2fits, a service provided by CDS. Full survey acknowledgment is retained in presentation-sources/dss2-properties.txt.",
+    "extents": "Supplementary historical visible extents for open clusters and missing catalogue axes; nebulae M8/M17/M20 use HEASARC diffuse-nebula rows. M16 uses the broader Sharpless H II-region diameter. M40 is labeled optical-pair separation. M73 remains unknown. Other targets retain their original SIMBAD axes. These heterogeneous measures are useful for browsing, not a common isophotal aperture or guaranteed full emission extent."
+  }
+}

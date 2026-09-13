@@ -31,6 +31,17 @@ Feature notes: 2 of the labelled names carry a caption note, the lead summary of
 
 The same-filter survey also tested green images 0202558300 and 0202559400. Their useful projected patches did not establish four spatial checks at the retained tolerance. They are not included. Close clear-filter photographs were identified in the archive inventory but are not mixed into the green-filter reflectance view.
 
+The September 2026 follow-up inspected clear-filter images 0202561700,
+0202561745, 0202561800, 0202561945, 0202562300 and 0202562339. The first has
+too little terrain in its detector footprint for the four separated checks.
+The other five were tested against the Thomas mosaic using the existing
+DoG/ZNCC verifier. Every candidate failed at least one check: correlations below
+0.7, displacement above four pixels, or both. For example, image 0202562300
+correlated at 0.949 but displaced the checked patch by (4, 2) pixels; image
+0202562339 displaced it by (−1, 13). No local camera correction or larger
+acceptance limit was applied. These photographs remain excluded; finer source
+pixels alone do not qualify their projection onto this model.
+
 The Thomas mosaic is processed monochrome, with photographed shadows, local stretches and seams. Its exactly-zero gaps remain a grid. A conflicting PDS4 display-direction label is overridden by the north-up registration evidence below. Elevation is radius minus 16 km, not gravitational height.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

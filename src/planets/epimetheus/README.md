@@ -2,6 +2,8 @@
 
 ## Sources
 
+**False color** adds three original Cassini ISS NAC filter observations displayed as RGB (IR3 / GRN / UV3), calibrated by CISSCAL 4.0beta into linear I/F. This is false color. Each frame uses its own measured camera row in the [Thomas 2018 epimetheus document](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/epimetheus_document.pdf), registered to the matching original plate model.
+
 - **Monochrome:** 5 Cassini ISS narrow-angle, clear-filter frames calibrated to I/F by CISSCAL and distributed by the PDS Ring-Moon Systems Node.
 
 - **Elevation:** radial height of the released shape above a 58.2 km reference sphere, with a shared shaded-relief palette.
@@ -10,11 +12,21 @@
 
 ## Evidence
 
+The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/filter-color/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+
+**False color:** A small northern footprint resolves craters within the three-filter intersection. Most of the body has no common color coverage. The [browser record](evidence/filter-color/capture.json) pins the loaded image responses, camera, settings and inspected views at DPR 1 and 2. The existing Monochrome images, body leaves and picking triangles are unchanged; the selected false-color assets use the revised display encoding. Dragging, Shadows and the mobile selector passed without page errors or replaced scene DOM. Scientific qualification comes from the original camera/shape release and the registration evidence described here; these screenshots document the mounted result.
+
+[False color](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Oblique with Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). These captures were refreshed on 2026-09-13 after integrating main at `0636327ba`. The record pins the tested recipe, runtime, display transfer and loaded image bytes, and compares retained geometry with `8cc1a2fae`.
+
 - The exact frames, archive URLs and byte pins are in [source/manifest.json](source/manifest.json). [source/preparation/terrestrial.json](source/preparation/terrestrial.json) retains each measured camera solution from the shape release's [source/shape/epimetheus_document.pdf](source/shape/epimetheus_document.pdf).
 
 - Dimensions, floating-point encoding and record lengths are checked before reading.
 
 ## Known problems
+
+The existing Monochrome and Elevation shadow atlases changed slightly when rebuilt. A separate preparation of the unchanged main-branch recipe produces these new files byte for byte: this is prior prepared-output drift, not a color-lens effect. [Pinned comparison and reproduction](evidence/filter-color/shadow-reproduction.json). Unshaded maps and textures retain their previous bytes.
+
+**False color:** Three filters were acquired sequentially, and are not a simultaneous true-color photograph or a composition map. Source shadows and phase-dependent brightness remain. The common footprint is smaller than Monochrome coverage; gray grid marks gaps. Small color fringes can remain at sharp relief because the shape and camera solutions have finite accuracy. The close 2017 sequence covers a northern region; most of the moon has no common color coverage.
 
 - **Elevation:** This is a shape-derived scientific visualization, not local altitude above a geoid or a high-resolution crater DEM.
 
@@ -25,6 +37,26 @@
 - **Rotation:** Its secular IAU/PCK rotation terms provide an explicitly approximate fixed-epoch display orientation; periodic libration terms and the precise Cassini binary rotation kernel are omitted.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+
+
+## False color preparation
+
+<details>
+<summary>Source products, processing and qualification</summary>
+
+| RGB channel | Filter | Observation | Mid-time (UTC) | Approx. m/pixel at centre |
+| --- | --- | --- | --- | ---: |
+| red | IR3 | n1866365919 | 2017-02-21T09:50:45.553 | 87 |
+| green | GRN | n1866366139 | 2017-02-21T09:54:26.022 | 67 |
+| blue | UV3 | n1866365809 | 2017-02-21T09:48:55.154 | 99 |
+
+Original floating-point IMG products and detached labels are pinned in [the input manifest](source/manifest.json). All three products are unbinned FULL resolution, use lossless spacecraft compression and report zero missing lines. The [recipe](source/preparation/terrestrial.json) records the zero-based detector centres, west-positive observer and solar longitudes, and 2003.44 mm / 12 μm Cassini NAC focal scale. Camera rays and occlusion are evaluated on the original shape; the existing simplified display mesh is retained.
+
+Only common, visible three-filter samples are colored. The maximum incidence and emission angles are 75° to avoid the most foreshortened limb and terminator; detector coverage is inset by two source pixels. The existing edge-connected 0.003 I/F background exclusion retains interior dark patches. This signal-based background rule is an approximate coverage mask, not a detector-quality flag.
+
+The observed I/F samples remain floating point through registration and overlap composition. One common range, 0–0.8 I/F, maps them to linear display channels, followed by the [shared IEC sRGB output transfer](../../../docs/color-preparation.md). Clipping and 8-bit quantization happen only at that final boundary. No per-band brightness equalization, clear-filter sharpening or single-band photometric model changes their ratios. No colorimetric transform has been applied; even visible-filter RGB is labelled false color. Prepared source illumination and the app's Shadows control remain separate.
+
+</details>
 
 ## Methods and source notes
 
@@ -65,7 +97,6 @@ The astronomy package already owns the moon's Saturn-relative orbital elements. 
 
 - **Not added as duplicate lenses:** individual clear-filter photographs of the same terrain. They contribute to one Monochrome map.
 
-- **Unresolved for a separate lens:** UV/visible/IR filtered observations exist, but no registered, qualified global color/composition map was located in this pass. The selected package does not claim that only two datasets exist.
 
 - **Facts:** [NASA Epimetheus](https://science.nasa.gov/saturn/moons/epimetheus/) and [JPL physical parameters](https://ssd.jpl.nasa.gov/sats/phys_par/). No substantial atmosphere or cutaway is claimed.
 
