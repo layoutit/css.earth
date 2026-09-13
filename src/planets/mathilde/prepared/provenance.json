@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "mathilde",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3b4f12245af5f15dd23bcb95c1c77b2a274d82be3616f36701e592275f610933"
+    "sha256": "4ae3b2c7edb785a4b83787299b069d9002b3c844b550f389a7539a3f9c4c3c77"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0b727ee76829e037cb2480f9541d5e103965c98c2867e5dcb914133eba0cf453",
+      "sha256": "95d57fa2fc62f3d5d2b01a60187b03f5690db61d386886a252348cf850545191",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -92,7 +92,70 @@
             }
           ],
           "observedColors": [],
-          "surfaceQuality": 90
+          "surfaceQuality": 90,
+          "surfaceObservations": [
+            {
+              "id": "near-msi",
+              "format": "near-msi-camera",
+              "consumer": "near-msi",
+              "frames": [
+                {
+                  "id": "msi-42826360",
+                  "path": "observations/near-msi/m0042826360f0_2p_iof.fit",
+                  "originalPath": "observations/near-msi/m0042826360f0_2p.fit",
+                  "cameraPath": "observations/near-msi/42826360-camera.json",
+                  "startTime": "1997-06-27T12:55:52.496Z"
+                },
+                {
+                  "id": "msi-42826370",
+                  "path": "observations/near-msi/m0042826370f0_2p_iof.fit",
+                  "originalPath": "observations/near-msi/m0042826370f0_2p.fit",
+                  "cameraPath": "observations/near-msi/42826370-camera.json",
+                  "startTime": "1997-06-27T12:56:02.506Z"
+                }
+              ],
+              "filter": "0",
+              "refinement": {
+                "method": "mesh-limb",
+                "maximumCorrectionDegrees": 0.5,
+                "maximumResidualPixels": 2,
+                "minimumControls": 16,
+                "searchPixels": 16,
+                "maximumControls": 1000
+              },
+              "selection": "recipe-order",
+              "levelMatching": {
+                "minimumPairs": 64,
+                "maximumLogMad": 0.3,
+                "maximumGain": 1.5,
+                "samplesPerTriangle": 16
+              },
+              "transfer": {
+                "maximumSourceDistanceMeters": 600,
+                "maximumSeparationFootprints": 4,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 75
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 89,
+                "maximumEmissionDegrees": 75,
+                "maximumGain": 1
+              },
+              "display": {
+                "percentiles": [
+                  0,
+                  99.5
+                ]
+              },
+              "metadata": {
+                "label": "NEAR close-ups",
+                "coverage": "Two calibrated broadband images from the 1997 flyby. Original shadows and detector artifacts remain. Grid marks unavailable image coverage; the visualization shape includes modeled crater floors and unseen areas."
+              }
+            }
+          ]
         },
         "lighting": {
           "frameSize": 512,
@@ -141,7 +204,31 @@
               "maximumErrorMeters": 600,
               "regularize": true
             }
-          }
+          },
+          "radialTerrainAlternatives": [
+            {
+              "lensId": "near-msi",
+              "path": "shape/stooke-253mathilde.tab",
+              "format": "pds-radius-table",
+              "grid": {
+                "stepDegrees": 5,
+                "longitudeDirection": "east-positive",
+                "metersPerUnit": 1000,
+                "expectedVertices": 2522,
+                "expectedFaces": 5040
+              },
+              "faceBudget": 800,
+              "tileSize": 128,
+              "atlasColumns": 16,
+              "primitive": "u",
+              "simplification": {
+                "method": "source-meshoptimizer",
+                "targetFaces": 800,
+                "maximumErrorMeters": 600,
+                "regularize": true
+              }
+            }
+          ]
         },
         "celestial": {
           "sunSource": "Illustrative directional lighting in the published Mathilde mapping frame; source spin pole and phase are unknown",
@@ -161,7 +248,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c02c00c4643e0f2648ee09ffaeac963e75e5355cf7087d29742b86ea6d413d8b",
+      "sha256": "1b633ccaa351b139ccc038ebd20ebd2755c1d794667120d74486827c728fcba6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -243,6 +330,22 @@
               "falseColor": false,
               "detail": "NEAR MSI · partial photomosaic",
               "summary": "Only part of the surface is photographed; shadows and seams remain. The unseen shape is modeled and image gaps are marked."
+            },
+            {
+              "id": "near-msi",
+              "label": "NEAR close-ups",
+              "description": "Two NEAR MSI broadband photographs from 27 June 1997, calibrated to I/F and registered to the published visualization shape using reconstructed flyby geometry and checked limb alignment. Photographed shadows, scattered light and detector noise remain. The raw companion images identify missing and saturated pixels; the archive quality index remains unresolved. Grid marks unavailable imagery.",
+              "title": "NEAR MSI close-ups",
+              "thumbnail": "/scenes/mathilde/mathilde-near-msi-thumbnail.webp",
+              "surface": "mathilde-near-msi-surface@2x.webp",
+              "poles": "mathilde-near-msi-surface@2x.webp",
+              "source": {
+                "id": "mathilde-near-msi-42826360-image",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "NEAR MSI · 1997 flyby",
+              "summary": "Calibrated photographs retain their original illumination. Unseen areas stay on the grid."
             },
             {
               "id": "elevation",
@@ -442,7 +545,7 @@
       "sha256": "67437ac67da5fa50723b657d472191131d7cebe7d62358270e5c03c1bb98181e",
       "bytes": 330486,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -499,7 +602,7 @@
       "sha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -557,7 +660,7 @@
       "sha256": "0b4acb5a2bc47697b9bb4d7c1e2a6a42e330bda3b241c10da2376c2a19ebae66",
       "bytes": 236192,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -573,6 +676,214 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "mathilde-near-msi-42826360-image",
+      "path": "observations/near-msi/m0042826360f0_2p_iof.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.fit",
+      "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
+      "license": "Public mission scientific data; retain source labels and attribution.",
+      "acquisition": "Pinned download through source/preparation/acquisition.json.",
+      "redistribution": "Source data and attributed display derivatives; see NOTICE.md.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "near-msi-mathilde-42826360",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml",
+            "missionId": "near-shoemaker"
+          }
+        ]
+      },
+      "sha256": "c852aeb4858a579821e724419c4cdebfb895749423c039e54e75b72986a8de8d",
+      "bytes": 535680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/near-msi/m0042826360f0_2p_iof.fit",
+        "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.fit",
+        "headers": {
+          "User-Agent": "curl/8.7.1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mathilde-near-msi-42826360-raw",
+      "path": "observations/near-msi/m0042826360f0_2p.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826360f0_2p.fit",
+      "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
+      "license": "Public mission scientific data; retain source labels and attribution.",
+      "acquisition": "Pinned download through source/preparation/acquisition.json.",
+      "redistribution": "Source data and attributed display derivatives; see NOTICE.md.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "near-msi-mathilde-42826360-raw",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826360f0_2p.xml"
+          }
+        ]
+      },
+      "sha256": "c0c16f2c972f1a2b0b12acc2a22244a5ba054cf50768fb1bade203d62d04a29c",
+      "bytes": 273600,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/near-msi/m0042826360f0_2p.fit",
+        "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826360f0_2p.fit",
+        "headers": {
+          "User-Agent": "curl/8.7.1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mathilde-near-msi-42826360-camera",
+      "path": "observations/near-msi/42826360-camera.json",
+      "origin": "Derived from the pinned Thomas image geometry and NEAR MSI calibration.",
+      "credit": "P. C. Thomas and the NEAR MSI team; cssEarth camera conversion",
+      "license": "Public mission scientific data and project-authored coordinate conversion.",
+      "acquisition": "node tools/objects/near-msi/prepare-cameras.mts src/planets/mathilde/source",
+      "redistribution": "Derived camera coefficients with source attribution.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Reproducible camera matrix computed from the pinned Thomas image geometry, source calibration and native FITS identities; the closure retains their hashes."
+      },
+      "sha256": "cd88709012e3f654e43d82aa16e04f278e66126bb5e4705d64bb579426b2a975",
+      "bytes": 2983,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mathilde-near-msi-42826370-image",
+      "path": "observations/near-msi/m0042826370f0_2p_iof.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.fit",
+      "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
+      "license": "Public mission scientific data; retain source labels and attribution.",
+      "acquisition": "Pinned download through source/preparation/acquisition.json.",
+      "redistribution": "Source data and attributed display derivatives; see NOTICE.md.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "near-msi-mathilde-42826370",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.xml"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.xml",
+            "missionId": "near-shoemaker"
+          }
+        ]
+      },
+      "sha256": "73850540b752c7e59a8762bad073f2fb62a75e03fdfb2adfeab1d2b724ce104a",
+      "bytes": 535680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/near-msi/m0042826370f0_2p_iof.fit",
+        "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.fit",
+        "headers": {
+          "User-Agent": "curl/8.7.1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mathilde-near-msi-42826370-raw",
+      "path": "observations/near-msi/m0042826370f0_2p.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826370f0_2p.fit",
+      "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
+      "license": "Public mission scientific data; retain source labels and attribution.",
+      "acquisition": "Pinned download through source/preparation/acquisition.json.",
+      "redistribution": "Source data and attributed display derivatives; see NOTICE.md.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "near-msi-mathilde-42826370-raw",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826370f0_2p.xml"
+          }
+        ]
+      },
+      "sha256": "0b1ef1367efa7ba625ecac05370171c02e90fa384c584735f5b096f1307dfd96",
+      "bytes": 273600,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/near-msi/m0042826370f0_2p.fit",
+        "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826370f0_2p.fit",
+        "headers": {
+          "User-Agent": "curl/8.7.1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mathilde-near-msi-42826370-camera",
+      "path": "observations/near-msi/42826370-camera.json",
+      "origin": "Derived from the pinned Thomas image geometry and NEAR MSI calibration.",
+      "credit": "P. C. Thomas and the NEAR MSI team; cssEarth camera conversion",
+      "license": "Public mission scientific data and project-authored coordinate conversion.",
+      "acquisition": "node tools/objects/near-msi/prepare-cameras.mts src/planets/mathilde/source",
+      "redistribution": "Derived camera coefficients with source attribution.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Reproducible camera matrix computed from the pinned Thomas image geometry, source calibration and native FITS identities; the closure retains their hashes."
+      },
+      "sha256": "0ab47e641783a78a25c11e8d4c5630d4aeae2adfecbd0ef0f88fc20f644d9a86",
+      "bytes": 2973,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -585,10 +896,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c02c00c4643e0f2648ee09ffaeac963e75e5355cf7087d29742b86ea6d413d8b",
-      "bytes": 10334,
+      "sha256": "1b633ccaa351b139ccc038ebd20ebd2755c1d794667120d74486827c728fcba6",
+      "bytes": 11359,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -608,7 +919,7 @@
       "sha256": "708bbfc4219549d9db2276503c78fc69e9e74a1bd0347fca41f6d6b8294bf7be",
       "bytes": 1014,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -634,7 +945,7 @@
       "sha256": "d042bf056ae40cd5a3f0c846412ba7a42c48b0bb1aa9893473b267b80be47bc2",
       "bytes": 97468,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -661,7 +972,7 @@
       "sha256": "9f339dacb4f64327dfbf20a49e53eac2a9f087196735fa43369648c80e992155",
       "bytes": 155,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -688,7 +999,7 @@
       "sha256": "629eac8dad7dee858c26675c39fbbcab4841af2ca6a7f166c804400fce516a7d",
       "bytes": 2440,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -735,13 +1046,13 @@
           "url": "/scenes/mathilde/mathilde-normal-thumbnail.webp",
           "bytes": 3222,
           "sha256": "70fdcc159376b4f0d82ffe49e0436ca7553c913d9aa285f32dc12df825cf7bf7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mathilde/mathilde-normal-surface@2x.webp",
           "bytes": 717042,
           "sha256": "2188b2e86e1b3ca0b4e8c5044aa01eb45e5fc1e9cafc99eb31dc2cca5aed181f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -774,19 +1085,63 @@
           "url": "/scenes/mathilde/mathilde-elevation-thumbnail.webp",
           "bytes": 6858,
           "sha256": "933f66de7271aead1403e2bbefd7be5fb7202c2d629bfe5739727778bcdf4160",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mathilde/mathilde-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/mathilde/mathilde-elevation-surface@2x.webp",
           "bytes": 517788,
           "sha256": "5e4bf08d0e4630afc04f3e88f23f370d3ccc53c9fdb4bfcb4874b15ba7719332",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "near-msi",
+      "label": "NEAR close-ups",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Two NEAR MSI broadband photographs from 27 June 1997, calibrated to I/F and registered to the published visualization shape using reconstructed flyby geometry and checked limb alignment. Photographed shadows, scattered light and detector noise remain. The raw companion images identify missing and saturated pixels; the archive quality index remains unresolved. Grid marks unavailable imagery."
+      ],
+      "lensIds": [
+        "near-msi"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "mathilde-near-msi-42826360-image",
+        "mathilde-near-msi-42826360-raw",
+        "mathilde-near-msi-42826360-camera",
+        "mathilde-near-msi-42826370-image",
+        "mathilde-near-msi-42826370-raw",
+        "mathilde-near-msi-42826370-camera",
+        "mathilde-visualization-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/mathilde/mathilde-near-msi-thumbnail.webp",
+          "bytes": 1990,
+          "sha256": "814378016dd54e763ed0a0621cbbec43f09de2c2327946d31ea380e410a5b94a",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/mathilde/mathilde-near-msi-surface@2x.webp",
+          "bytes": 356024,
+          "sha256": "b005eeaa7ea7b358844f004c14c8bc07f7d28de7dd2bb24770b874885736b7d9",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -844,9 +1199,9 @@
       "outputs": [
         {
           "url": "/scenes/mathilde/mathilde-features.json",
-          "bytes": 16822,
-          "sha256": "b30f117b12fc1976f11969d29d55ede5ff03a0fc98b165ce43446da0d4c866b8",
-          "verification": "asset-manifest-pin"
+          "bytes": 16823,
+          "sha256": "b9cdc077f2008a2a44f5dc977138380aea69d6c5bfdb3eac400501bd89d68aaa",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -871,6 +1226,30 @@
           "url": "object:prepared/minimaps/normal.webp",
           "bytes": 15302,
           "sha256": "cbc7dbd3977dbd8feb044e13ec49a2b2d7eefd30af96ea577b4a64f13cd821cb",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:near-msi",
+      "label": "NEAR close-ups preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "near-msi"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/near-msi.webp",
+          "bytes": 12498,
+          "sha256": "142e74730a054b0dc9aa015709492231820a8a77153fb73ba2f447b84ad71e74",
           "verification": "bytes-verified"
         }
       ]

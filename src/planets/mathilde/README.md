@@ -7,9 +7,44 @@
 | Visible shape | [Stooke 5° visualization model](https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.xml): 2016 model migrated to PDS4 in 2025. Smoothed unseen areas and modified shadowed crater floors are aesthetic modeling. |
 | Elevation | [Thomas 3° radii](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.xml), minus 26.4 km; false-color scale −11 to +10 km. The [legacy label](https://sbnarchive.psi.edu/pds3/near/NEAR_A_5_COLLECTED_MODELS_V1_0/data/msi/253mathilde.lbl) identifies 26.5 km as missing, never measured height. |
 | Monochrome | [Stooke/Pfau photomosaic](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg), partial NEAR MSI observations from 27 June 1997. Processed visualization, not calibrated albedo or natural color. |
+| NEAR close-ups | Two native calibrated broadband MSI photographs, MET 42826360 and 42826370, from 27 June 1997. [PDS image metadata](https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml), paired raw detector frames and [Thomas reconstructed image geometry](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathimg.xml). Partial observations with original illumination, not recovered albedo. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/MATHILDE/target) Mathilde centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
+
+The **NEAR close-ups** lens uses the shared observation pipeline and an 800-face
+simplification of the Stooke shape in its native frame. Its two 537 × 244 detector
+frames qualify over an estimated **14.2% of that display mesh’s area**, sampled at
+16 points per triangle. This is selected close-up coverage, not a coverage increase
+over Monochrome. Both lighting atlases together are 570,322 bytes. Original
+photograph shadows remain when the application’s Shadows setting is off.
+
+Camera corrections are 0.039° and 0.068°. Disjoint limb holdouts retain 31/32 and
+74/76 controls, with RMS residuals of 1.24 and 1.69 native pixels; maximum residuals
+are 3.98 and 4.64 pixels. These validate silhouette alignment, not interior terrain
+accuracy. The [prepared report](prepared/surfaces.json) records cameras, source
+hashes, masking, overlap gains and area sampling. Decoder tests check native FITS
+signed storage, raw/calibrated identity and rejection of missing, saturated or
+invalid samples while retaining finite negative radiance.
+
+[Source projection](evidence/near-msi/registration.webp) ·
+[Mounted view](evidence/near-msi/view.webp) ·
+[Capture identity and interaction results](evidence/near-msi/capture.json).
+Headless Chrome on the existing server verified drag, lighting, mobile framing
+and DPR 2 with retained triangle identity and Shadows off by default. The three
+lenses and both closed 800-face model banks pass the focused package checks;
+all 39 runtime files match their local inventory. Preparation TypeScript passes.
+The shared recipe and profile checks pass after integrating the observation
+recipe migration from `2f2752abb` (#175), which also fixes the previously recorded
+Dimorphos cube/SPICE test failures. Full application and aggregate browser suites
+were not run.
+
+The full Mathilde preparation was replayed after that migration. All 39 runtime
+assets (9,361,957 bytes), both native camera files, surface reports, lens controls
+and prepared scene match the previous PR outputs exactly. The existing captures
+therefore remain evidence for those pixels and geometry. A fresh browser run is
+not claimed: the local application is missing the Helix prepared lens bank newly
+required by `main`.
 
 The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
 
@@ -17,13 +52,26 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | --- | --- | --- |
 | normal | 3600 × 1800 | 0.69 → 1.06 MB |
 
-Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mathilde/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
+The existing Monochrome and Elevation atlases remain 2048 × 6400 pixels on their
+800-face display mesh. Their geometry and photographic sampling are retained
+from [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mathilde/prepared).
+The new lens adds a second prepared model; only the selected model is visible.
+Sampling details and output hashes are in [the surface metadata](prepared/surfaces.json).
 
 The retained notes report a successful 35-asset bake, eight downloads restored, a verified 35-file source closure and three focused source tests. Original report paths are `output/asteroids-optical/mathilde/delivery.json` and `source-restoration.json`; those reports are not checked in. The generic body test, browser checks, fresh runtime installation and aggregate checks were still pending in that record.
 
 [Source test definitions](../../../tests/objects/unit/mathilde/source.test.mts).
 
 ## Known problems
+
+NEAR close-ups have substantial gaps, including areas photographed too obliquely
+or not supported by the image-to-shape checks. Stooke aesthetically modified
+shadowed crater floors and unseen areas, so limb alignment cannot prove interior
+crater registration. Native shadows, noise, readout smear and scattered light
+remain. PDS warns that the archive quality index is not fully understood:
+`20000000` stays unresolved, not a good-quality verdict. There is no authoritative
+per-pixel quality plane. The view exposes those native-image limitations rather
+than reproducing the extensively processed Stooke map.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Mathilde (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.
 
@@ -61,11 +109,42 @@ JPL Horizons physical header, retrieved 2026-09-07 and pinned in `source/referen
 | Stooke four 25 m/pixel morphographic quadrangles | Excluded as a separate lens | Same photomosaic in a different projection; 4 of 14 possible sheets reflect partial coverage. They add no independent scientific view and do not repair source resolution or missing terrain. |
 | Stooke shaded-relief drawings | Excluded | Drawn visualization, not measured elevation. The valid Thomas numerical radii support a better-defined scientific lens. |
 | [Weirich, Palmer & Domingue 2019 SPC model](https://www.hou.usra.edu/meetings/lpsc2019/pdf/2681.pdf) and [PSI object page](https://spc.psi.edu/index.php/2019/03/) | Unresolved for reusable source release | Paper describes a later model from 120 NEAR images and only one illumination angle; 6 m grid spacing oversamples imagery no better than 148 m/pixel. It acknowledges remaining image/model differences. The paper and linked object page expose no downloadable model release or redistribution terms; the access page concerns licensed SPC software. This is not evidence that the model does not exist. No contact or acquisition requiring submission was made. |
-| Original NEAR MSI flyby images and geometry list | Reference candidate; no new composite | Potential input for a later photometric/geometry reconstruction. Existing registered source supplies useful imagery, while one encounter illumination cannot recover deep shadows or the unseen hemisphere. |
+| Original NEAR MSI flyby images and geometry list | Two broadband frames included as NEAR close-ups | Thomas’s reconstructed table supports a checked camera; paired raw frames establish detector validity. No recovery of deep shadows, albedo or unseen terrain. |
 
 The survey follows the source papers to actual PDS data rather than treating press images as map products. The journal article [Thomas et al. 1999, *Mathilde: Size, Shape, and Geology*](https://doi.org/10.1006/icar.1999.6121) explains the arbitrary frame and minimum/nominal/maximum hidden-volume interpretations. Copyrighted paper PDFs used for local research are not package inputs.
 
 **Preparation and qualification**
+
+The [NEAR camera recipe](source/preparation/near-msi.json) selects two observations
+and the already-archived `253mathimg.tab`. That table’s reconstructed geometry
+supersedes preliminary FITS pointing. [Murchie et al. (1999), section 4.1](https://doi.org/10.1006/icar.1999.6118)
+supplies a 166.85 mm focal length and 16 × 27 µm pixels. We interpret the table
+centres as square-pixel coordinates, convert lines by 16/27, and interpret north
+azimuth clockwise in row-down coordinates. The table-to-detector convention is
+an inference, checked by native image projection and the withheld limb residuals
+above. FITS pixels stay in file order; display flips affect only a complete
+diagnostic image and its overlay together.
+
+`node tools/objects/near-msi/prepare-cameras.mts` reproduces the camera inputs.
+It uses the shared PDS4 label reader for the native filename and acquisition time.
+The lens follows the common surface-observation recipe with `display.percentiles`;
+the format requires raw companions and camera refinement, retains the photograph's
+illumination and rejects compressed frames in its decoder.
+`node tools/objects/near-msi/capture-registration.mts` reproduces the source
+projection after preparation; the browser capture is
+`node tests/objects/browser/asteroid-photographic-coverage.mts mathilde after`.
+The shared `near-msi-camera` adapter binds them to the native Stooke mesh, refines
+pointing with the existing limb fitter, checks source-mesh ray visibility, and
+transfers supported samples to its 800-face alternative. Monochrome and Elevation
+retain their old raster-based mesh. No geometry or camera is derived at runtime.
+
+Raw DN uses the FITS BZERO offset: 0 marks missing telemetry and 4095 marks
+saturation. Both selected raw frames have zero pixels of either kind. Nonfinite
+and PDS unknown/not-applicable calibrated values are rejected; finite negative
+I/F remains eligible. A relative overlap gain of 0.9142 for the second frame uses
+735 matched samples; it is a display adjustment, not photometric calibration.
+Selection follows authored frame order, never brightness. Unavailable samples
+stay on the shared grid.
 
 Authored recipes live under `source/preparation/`. Shared preparation owns source parsing, validity reconstruction, mesh simplification, texture sampling, lighting, context snapshots, titles and minimaps. Runtime consumes retained native PolyCSS `u` triangles with 128 px raster cells.
 
@@ -81,6 +160,6 @@ The Stooke JPEG supplies no authoritative alpha or numeric missing-data mask. It
 
 Thomas selected mapping axes parallel to J2000, an equator parallel to Earth's, and an arbitrary prime meridian because the spin pole was not solved. `source/preparation/rotation.json` uses the existing **display-orientation** contract, has no measured spin rate, and makes no phase claim. The source geometry table gives the encounter Sun at latitude −1.03°, west longitude 176.52°, but the mosaic retains that photographed illumination. The shared Shadows control adds **illustrative** directional lighting, not an accurately timed Mathilde Sun solution. Flood lighting remains available. Camera rotation never changes the source geometry or selected asset bank.
 
-The body-local full bake completed successfully. Its runtime inventory contains 35 raster assets totaling 8,409,146 bytes, excluding JSON and common shell transfer. Each native triangle atlas is 2,048 × 6,400 pixels (800 cells of 128 × 128 px); uncompressed RGBA storage is 52,428,800 bytes per atlas, a calculation rather than measured GPU residency. Package file/runtime-asset/source closure passes. All eight authored downloads (five input assets plus three ignored reference companions) were restored into an empty input tree and the complete 35-file source closure verified; package documents and the generated context were supplied as checked-in companions. Three focused numerical/rotation source tests pass. The generic body test awaits integrated Sun/world-context finalization, and browser, fresh runtime installation, aggregate gates and remote persistence remain not established by these source checks. See `output/asteroids-optical/mathilde/delivery.json` and `source-restoration.json` for evidence.
+The historical two-lens bake completed successfully. Its runtime inventory contained 35 raster assets totaling 8,409,146 bytes, excluding JSON and common shell transfer. Each native triangle atlas is 2,048 × 6,400 pixels (800 cells of 128 × 128 px); uncompressed RGBA storage is 52,428,800 bytes per atlas, a calculation rather than measured GPU residency. Package file/runtime-asset/source closure passes. All eight authored downloads (five input assets plus three ignored reference companions) were restored into an empty input tree and the complete 35-file source closure verified; package documents and the generated context were supplied as checked-in companions. Three focused numerical/rotation source tests pass. The generic body test awaits integrated Sun/world-context finalization, and browser, fresh runtime installation, aggregate gates and remote persistence remain not established by these source checks. See `output/asteroids-optical/mathilde/delivery.json` and `source-restoration.json` for evidence.
 
 </details>
