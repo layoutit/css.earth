@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "55d2a1924973f538b9f872725dd70cbb7806605068c0ceb6996a732051a37c19"
+    "sha256": "e4a5c62bc7d448e620bc770f3023fbeb7d507d0a62ef49313ae890139d6c8859"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "225013e36cc91344ab073adacebd8272136484e2b7db4973368f883c9bcc6ed9",
+      "sha256": "302776f3802e991ae11e64ae5f3032cbeff14411ea44a3f2b38cd7a4acb8e364",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -185,11 +185,9 @@
               "levelMatching": {
                 "samplesPerTriangle": 32,
                 "minimumPairs": 64,
-                "maximumLogMad": 0.3,
                 "maximumGain": 1.5
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 20,
                 "maximumSeparationMeters": 50,
                 "maximumEmissionDegrees": 75,
                 "visibilityToleranceMeters": 0.5
@@ -200,8 +198,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99.5
+                  0.9,
+                  99.3
                 ]
               },
               "metadata": {
@@ -6123,14 +6121,14 @@
       "outputs": [
         {
           "url": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
-          "bytes": 1024,
-          "sha256": "43a91452476aec6954c268cb26ba3d17b2e2eae12e7175267be4225e3d917bed",
+          "bytes": 1032,
+          "sha256": "b91854478634ca6d48503495a3662f8b0113f66a1dc71411d7ca6af8eaaf4720",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-103p/comet-103p-mri-surface@2x.webp",
-          "bytes": 292400,
-          "sha256": "274e35d4e697da3c1d5f794fb50ccda159dcbdaed91f02fbf77a392ffb589c59",
+          "bytes": 267282,
+          "sha256": "1af70e805ab48fa88113f4f2591688ffaa00ec76ea6944a36ed8735537c62095",
           "verification": "bytes-verified"
         }
       ],
@@ -6235,8 +6233,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/mri.webp",
-          "bytes": 17430,
-          "sha256": "e624f688c1ae192cb218d452bc63443bc5a0c7d7eecf8851ee45f8315fab6b0d",
+          "bytes": 16278,
+          "sha256": "0bb42f146df815108e679cdc516c1f9e2e9a926990b04bfece9ac94e07d3dfc9",
           "verification": "bytes-verified"
         }
       ]

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ea921421b2abdec999196c5cbb0e4acfc02b4d23b3a2a7a47af8dcc0c64981ab"
+    "sha256": "fcdfd362dfc44c5784b1481a902a3f7c2427ff2c45e55e7ad3a981857aef024c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "961f6522c767d52946ff5bf75a838859b43503620d30145453c9c502e10d5b01",
+      "sha256": "df110cb56dbba619ac22f174338b27039aa870341dd883b04f6e1ff32eee77e0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -149,11 +149,9 @@
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
-                "maximumLogMad": 0.25,
                 "maximumGain": 1.35
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 6,
                 "maximumSeparationMeters": 5,
                 "maximumEmissionDegrees": 70,
                 "visibilityToleranceMeters": 0.05,
@@ -169,8 +167,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99
+                  0.9,
+                  98.8
                 ]
               },
               "metadata": {
@@ -1606,14 +1604,14 @@
       "outputs": [
         {
           "url": "/scenes/itokawa/itokawa-amica-thumbnail.webp",
-          "bytes": 1346,
-          "sha256": "e71281dd08de5d7b180163fa42386a7e355a4e0499128721e3c3caf7e823306d",
+          "bytes": 1302,
+          "sha256": "201c0a2c3a03736b451e6831e45834f097753d339c00e926f1b2cdbb91f586ff",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/itokawa/itokawa-amica-surface@2x.webp",
-          "bytes": 1841252,
-          "sha256": "ab470b01b7e246ec503e01adbf37a5902a508c825e7c824087aec8632d212adc",
+          "bytes": 2090908,
+          "sha256": "19db8f2d7dc8f1c40720d839ae1f65f91ae95d890f0c8a5479e626b948fe1e77",
           "verification": "bytes-verified"
         }
       ],
@@ -1697,8 +1695,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/amica.webp",
-          "bytes": 48930,
-          "sha256": "c4bef8180ffe6ea140f426e85232512dc8f2a08fb6a0b27c832b1acf964615b6",
+          "bytes": 52294,
+          "sha256": "7a11f64a6f18e3e346054c3a44a6a7b90f17dbb04f49c920d021ddda68cd4bf0",
           "verification": "bytes-verified"
         }
       ]

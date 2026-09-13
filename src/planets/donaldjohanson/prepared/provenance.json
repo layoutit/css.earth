@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f8b5afc589ff67fd9e72fbc5d8014adcc2aaa2eccdeef7e58fe3fb4eb32de935"
+    "sha256": "0f9a985319a58fe4e03df415147c57fbdb9480d4d33a9c354857841517994ee9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e09b9bd0cb4d23ffeafa89be1f626d8cb4ab8855a93454b4b445f72bf1768b6a",
+      "sha256": "477002ef2153e9fe519e0f8926d037fa2b232037cfa5c705007fe04162f2de1d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,12 +65,10 @@
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 128,
-                "maximumLogMad": 0.25,
                 "maximumGain": 1.5,
                 "maximumAngleDegrees": 60
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 56,
                 "maximumSeparationMeters": 30,
                 "maximumEmissionDegrees": 70,
                 "visibilityToleranceMeters": 0.5
@@ -85,8 +83,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99
+                  1.4,
+                  98.8
                 ]
               },
               "metadata": {
@@ -709,14 +707,14 @@
       "outputs": [
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
-          "bytes": 1380,
-          "sha256": "658e0d5f48f4f33932012526c2f1687bd7f33f8302095ff79c519b289b5067de",
+          "bytes": 1376,
+          "sha256": "f0645a69bb7abc23377bfa641a5a0efa5a0746601ca08f4d161ff73bd1dd484b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
-          "bytes": 686116,
-          "sha256": "be9059df07c37f955eda071b92027bb69beefd44b88ccbd6f9b1abc544226792",
+          "bytes": 678120,
+          "sha256": "1bc7651e929605dfa7d596f48a393d2f7dd5ae43ace4442c640018ea2d1d963f",
           "verification": "bytes-verified"
         }
       ],
@@ -824,8 +822,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/llorri.webp",
-          "bytes": 20606,
-          "sha256": "01c24f4166d5d3a8e77767f4bf94cf54fa784642e8357afe475e0ef25842c126",
+          "bytes": 21142,
+          "sha256": "03a840948fc2675c1b09b7dde52ed2d51df8c3b34d0ad4fbb10d16f65e0e5012",
           "verification": "bytes-verified"
         }
       ]

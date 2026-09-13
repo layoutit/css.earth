@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3362ad403b9178e4916d1b9032ecf3ecb23fa80085f66b612e2ed4bc0e06dd08"
+    "sha256": "f87e7775f7e0689c243f16c6b02b190451184272ccc3f9ed8389ce44d662259e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "20c6643655d5bf675a9cffc04514bd15f4413ab21854bac36efa14c0e419644e",
+      "sha256": "48c8488fcabae9a9c2e557f274f9d4b8ce3fbf888160ac3aecf4217e6302cab5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -77,11 +77,20 @@
             }
           ],
           "observedColors": [],
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "normal",
               "format": "controlled-shape-camera",
               "consumer": "cassini-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Cassini clear-filter observations with fine detail from a green-filter image, projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+                "attribution": {
+                  "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/cassini/iss/"
+                }
+              },
               "frames": [
                 {
                   "id": "n1656997950_1",
@@ -97,7 +106,8 @@
                     121.1,
                     186.5
                   ],
-                  "pixelAngleMicroradians": 5.989697719921734
+                  "pixelAngleMicroradians": 5.989697719921734,
+                  "backgroundMaximum": 0.003
                 },
                 {
                   "id": "n1656998640_1",
@@ -113,7 +123,8 @@
                     142.8,
                     121.5
                   ],
-                  "pixelAngleMicroradians": 5.989697719921734
+                  "pixelAngleMicroradians": 5.989697719921734,
+                  "backgroundMaximum": 0.003
                 },
                 {
                   "id": "n1863267232_1",
@@ -129,113 +140,42 @@
                     672.6,
                     768
                   ],
-                  "pixelAngleMicroradians": 5.989697719921734
+                  "pixelAngleMicroradians": 5.989697719921734,
+                  "backgroundMaximum": 0.003
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumGain": 1.1,
+                "maximumAngleDegrees": 70
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 78
+              },
               "photometry": {
+                "model": "lunar-lambert",
                 "weight": 0.5,
-                "maximumGain": 2.5,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 80,
                 "maximumEmissionDegrees": 78,
-                "displayMaximum": 0.6,
-                "gamma": 1,
-                "minimumLevel": 0.7,
-                "maximumLevel": 1.4,
-                "backgroundMaximum": 0.003
+                "maximumGain": 2.5
               },
-              "metadata": {
-                "label": "Monochrome",
-                "falseColor": false,
-                "coverage": "Cassini clear-filter observations with fine detail from a green-filter image, projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-                "attribution": {
-                  "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
-                  "url": "https://pds-rings.seti.org/cassini/iss/"
-                }
+              "display": {
+                "displayRange": [
+                  0,
+                  0.528
+                ]
               }
             },
             {
               "id": "filter-color",
               "format": "controlled-shape-color",
               "consumer": "cassini-color-frames",
-              "channels": [
-                {
-                  "channel": "red",
-                  "filter": "RED",
-                  "frames": [
-                    {
-                      "id": "n1656999219",
-                      "path": "observations/N1656999219_1_CALIB.IMG",
-                      "labelPath": "observations/N1656999219_1_CALIB.LBL",
-                      "observerLatitude": 20.4,
-                      "observerWestLongitude": 113.94,
-                      "sunLatitude": 4.97,
-                      "sunWestLongitude": 63.64,
-                      "rangeKm": 72779.3,
-                      "northAzimuthDegrees": 21.53,
-                      "center": [
-                        148.6,
-                        67
-                      ],
-                      "pixelAngleMicroradians": 5.989697719850105,
-                      "coverageInsetPixels": 2
-                    }
-                  ]
-                },
-                {
-                  "channel": "green",
-                  "filter": "GRN",
-                  "frames": [
-                    {
-                      "id": "n1656999274",
-                      "path": "observations/N1656999274_1_CALIB.IMG",
-                      "labelPath": "observations/N1656999274_1_CALIB.LBL",
-                      "observerLatitude": 20.68,
-                      "observerWestLongitude": 113.98,
-                      "sunLatitude": 4.97,
-                      "sunWestLongitude": 64.03,
-                      "rangeKm": 72728.8,
-                      "northAzimuthDegrees": 21.51,
-                      "center": [
-                        145.9,
-                        62.3
-                      ],
-                      "pixelAngleMicroradians": 5.989697719850105,
-                      "coverageInsetPixels": 2
-                    }
-                  ]
-                },
-                {
-                  "channel": "blue",
-                  "filter": "BL1",
-                  "frames": [
-                    {
-                      "id": "n1656999330",
-                      "path": "observations/N1656999330_1_CALIB.IMG",
-                      "labelPath": "observations/N1656999330_1_CALIB.LBL",
-                      "observerLatitude": 20.95,
-                      "observerWestLongitude": 114.03,
-                      "sunLatitude": 4.97,
-                      "sunWestLongitude": 64.41,
-                      "rangeKm": 72682,
-                      "northAzimuthDegrees": 21.49,
-                      "center": [
-                        144.2,
-                        58.1
-                      ],
-                      "pixelAngleMicroradians": 5.989697719850105,
-                      "coverageInsetPixels": 2
-                    }
-                  ]
-                }
-              ],
-              "photometry": {
-                "model": "observed",
-                "weight": 0.5,
-                "maximumGain": 1,
-                "maximumIncidenceDegrees": 75,
-                "maximumEmissionDegrees": 75,
-                "backgroundMaximum": 0.003
-              },
               "metadata": {
                 "label": "False color",
                 "falseColor": true,
@@ -245,15 +185,103 @@
                   "url": "https://pds-rings.seti.org/cassini/iss/"
                 }
               },
+              "bands": [
+                {
+                  "channel": "red",
+                  "filter": "RED"
+                },
+                {
+                  "channel": "green",
+                  "filter": "GRN"
+                },
+                {
+                  "channel": "blue",
+                  "filter": "BL1"
+                }
+              ],
+              "frames": [
+                {
+                  "id": "set-1",
+                  "red": {
+                    "id": "n1656999219",
+                    "path": "observations/N1656999219_1_CALIB.IMG",
+                    "labelPath": "observations/N1656999219_1_CALIB.LBL",
+                    "observerLatitude": 20.4,
+                    "observerWestLongitude": 113.94,
+                    "sunLatitude": 4.97,
+                    "sunWestLongitude": 63.64,
+                    "rangeKm": 72779.3,
+                    "northAzimuthDegrees": 21.53,
+                    "center": [
+                      148.6,
+                      67
+                    ],
+                    "pixelAngleMicroradians": 5.989697719850105,
+                    "coverageInsetPixels": 2,
+                    "backgroundMaximum": 0.003
+                  },
+                  "green": {
+                    "id": "n1656999274",
+                    "path": "observations/N1656999274_1_CALIB.IMG",
+                    "labelPath": "observations/N1656999274_1_CALIB.LBL",
+                    "observerLatitude": 20.68,
+                    "observerWestLongitude": 113.98,
+                    "sunLatitude": 4.97,
+                    "sunWestLongitude": 64.03,
+                    "rangeKm": 72728.8,
+                    "northAzimuthDegrees": 21.51,
+                    "center": [
+                      145.9,
+                      62.3
+                    ],
+                    "pixelAngleMicroradians": 5.989697719850105,
+                    "coverageInsetPixels": 2,
+                    "backgroundMaximum": 0.003
+                  },
+                  "blue": {
+                    "id": "n1656999330",
+                    "path": "observations/N1656999330_1_CALIB.IMG",
+                    "labelPath": "observations/N1656999330_1_CALIB.LBL",
+                    "observerLatitude": 20.95,
+                    "observerWestLongitude": 114.03,
+                    "sunLatitude": 4.97,
+                    "sunWestLongitude": 64.41,
+                    "rangeKm": 72682,
+                    "northAzimuthDegrees": 21.49,
+                    "center": [
+                      144.2,
+                      58.1
+                    ],
+                    "pixelAngleMicroradians": 5.989697719850105,
+                    "coverageInsetPixels": 2,
+                    "backgroundMaximum": 0.003
+                  }
+                }
+              ],
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 75
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 75,
+                "maximumEmissionDegrees": 75,
+                "maximumGain": 1
+              },
+              "display": {
+                "displayRange": [
+                  0,
+                  0.8
+                ]
+              },
               "focus": {
                 "longitudeDegrees": 246.01999999999998,
                 "latitudeDegrees": 20.68,
                 "zoom": 1.1
-              },
-              "displayRange": [
-                0,
-                0.8
-              ]
+              }
             }
           ]
         },
@@ -1226,9 +1254,9 @@
       "id": "normal",
       "label": "Monochrome",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
         "Cassini clear-filter observations with fine detail from a green-filter image, projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed."
       ],
@@ -1239,7 +1267,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "n1656997950_1",
@@ -1253,14 +1281,14 @@
       "outputs": [
         {
           "url": "/scenes/daphnis/daphnis-normal-thumbnail.webp",
-          "bytes": 2328,
-          "sha256": "526f75327b04f745b9e6e56f4eb13494d34c5fb6fe06d6b167c8d3ecbf504b65",
+          "bytes": 1632,
+          "sha256": "ccb21269ba469c77071d78832bb8f113dd68f91ee45890b9b41637feb776ac38",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphnis/daphnis-normal-surface@2x.webp",
-          "bytes": 181544,
-          "sha256": "0a951ef3f3e1a2a3b85c3aa5302e4ba064de02204d130a7ab3e810acc37d4099",
+          "bytes": 190648,
+          "sha256": "f8b64793a200f81a88d19658a0ae16c486c7087112280ea5aabd6c21511605cb",
           "verification": "bytes-verified"
         }
       ],
@@ -1270,9 +1298,9 @@
       "id": "filter-color",
       "label": "False color",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/1",
+      "selector": "/raster/surfaceObservations/1",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
         "Cassini RED, GRN, BL1 filters displayed as red, green and blue; observed illumination and common coverage only."
       ],
@@ -1283,7 +1311,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "n1656999219",
@@ -1297,14 +1325,14 @@
       "outputs": [
         {
           "url": "/scenes/daphnis/daphnis-filter-color-thumbnail.webp",
-          "bytes": 2566,
-          "sha256": "c3c1a9844c7b1d000e4ff504d4da6b1d288d8e5cb20d3216b97f3ee79883654c",
+          "bytes": 1926,
+          "sha256": "f947f37b7e5009453c9650d27063955be3c79bdc62a0edbe137a457de49ebc10",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphnis/daphnis-filter-color-surface@2x.webp",
-          "bytes": 182240,
-          "sha256": "3c3866822ece15c5089dd5dfb335e5a3540976b067f82b9f897353cbdb3bdec0",
+          "bytes": 170796,
+          "sha256": "b47fc0ddadaaed1a8a98304f98533aed374038ccf635ff5736e4fe33be0f5636",
           "verification": "bytes-verified"
         }
       ],
@@ -1339,7 +1367,7 @@
       "id": "preview:normal",
       "label": "Monochrome preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -1353,8 +1381,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 5902,
-          "sha256": "860fd8fced3d713e05acce11059453bf8462ce095ff76209d642fcff9c9a2376",
+          "bytes": 8094,
+          "sha256": "b93cfa770c931d17aff424e176e6094a3ac0d015ef554f2161d26b170086bf3a",
           "verification": "bytes-verified"
         }
       ]
@@ -1363,7 +1391,7 @@
       "id": "preview:filter-color",
       "label": "False color preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/1",
+      "selector": "/raster/surfaceObservations/1",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -1377,8 +1405,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 5204,
-          "sha256": "cd271f76cdca3bc5c4b54474ec622acdf729aade10a3f8c41e807845c16a8671",
+          "bytes": 5434,
+          "sha256": "7236ca6955bdd4cc6d5dcf12dcbee1393c001d8c8f23d3b9c7c8a2c8351c1b4f",
           "verification": "bytes-verified"
         }
       ]

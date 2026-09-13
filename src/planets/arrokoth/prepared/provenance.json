@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8b1ac38c5b5e444c821abe83531bb8eddedec3cd705fb62ce7cd8d40dacca229"
+    "sha256": "9752c56ac9f562643511adc4b395b3f431ac655289b1e4da3d276f082a52f517"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2ec5c5caa9da307035e752d52f47013f5a5b5d4da5094782322708f0d885f70c",
+      "sha256": "906188010b6526c0f881940f6068f4fdd3b21f8aa1afc983963e603b58d87c76",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -94,7 +94,6 @@
                 }
               ],
               "transfer": {
-                "maximumSourceDistanceMeters": 250,
                 "maximumSeparationMeters": 180,
                 "maximumEmissionDegrees": 70,
                 "visibilityToleranceMeters": 0.5
@@ -109,7 +108,7 @@
               },
               "display": {
                 "percentiles": [
-                  1,
+                  0.9,
                   99.8
                 ]
               },
@@ -134,7 +133,6 @@
                 }
               ],
               "transfer": {
-                "maximumSourceDistanceMeters": 250,
                 "maximumSeparationMeters": 600,
                 "maximumEmissionDegrees": 65,
                 "visibilityToleranceMeters": 0.5
@@ -842,14 +840,14 @@
       "outputs": [
         {
           "url": "/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
-          "bytes": 1372,
-          "sha256": "a384095b589f6084b5ab530d2c963f418f3500c4041e3794406eff5a724c2076",
+          "bytes": 1386,
+          "sha256": "d052723fc643287d472bb5ec0dcbd29558471d9131cc7122b45ae53d2ef70c4f",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
-          "bytes": 903156,
-          "sha256": "4022dde474771158d08d13d78c503b573dade60d66216549fe0e4571b37d0c34",
+          "bytes": 908086,
+          "sha256": "ce0dca27dbf24653f3a33e64ed1aad2b25a03ed1149b2a80ca8131cc6c0e3a59",
           "verification": "bytes-verified"
         }
       ],
@@ -883,14 +881,14 @@
       "outputs": [
         {
           "url": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
-          "bytes": 2036,
-          "sha256": "cc041d2351ead311fb0283ee6863ca393bc6f58fdce47b1e73fa6ec30ee0dff2",
+          "bytes": 2038,
+          "sha256": "03f778e5b96988e4240e80e7bb181649ff9d989909d2d9903c193e33c547c7e5",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-mvic-surface@2x.webp",
-          "bytes": 254052,
-          "sha256": "d7c807ca1763f467c01e0bde7e3e8e9b601af45b661898cae0ed03a688c8be8b",
+          "bytes": 237202,
+          "sha256": "7ab316c1be6db0bae750bb6ae543397a3b033e19cf601fdc142cc45048338767",
           "verification": "bytes-verified"
         }
       ],
@@ -963,8 +961,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/lorri.webp",
-          "bytes": 24562,
-          "sha256": "807cd3931f067b74a975309e69559d2c2b526ab21768ed92b92a9b1b391237b7",
+          "bytes": 24706,
+          "sha256": "4f3dd062ae84147d51277a720ffb733f22c0e6c12a7eb9cb47204e3261d23286",
           "verification": "bytes-verified"
         }
       ]
@@ -987,8 +985,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/mvic.webp",
-          "bytes": 5928,
-          "sha256": "7bc2dbea824ad18ca778120b0ee7cd8d010a7ee490eb8dfd4e99a7bd4fdafd15",
+          "bytes": 5890,
+          "sha256": "2b440e9c8eabf263e8de1fc651405776caa3c99bcb20aae4b62d3eb9f1fa1f66",
           "verification": "bytes-verified"
         }
       ]

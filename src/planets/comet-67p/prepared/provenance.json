@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7fdd5089985a23d6f83c5c0451be11158ffd1d5e1a0aae842d0dc40fcadd764"
+    "sha256": "545764c96d46be3f8c6c4686438116fadfdaa711034ee07f881b5d540dd8733d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6eb6ddd56e0f9ef0af48e08763be23af2fb74d50c82440c9d3d1f0fcedf314dd",
+      "sha256": "20ee615d1747723469e7a23e322f357269993df6407aac376438b46e00f73760",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -654,12 +654,10 @@
               "levelMatching": {
                 "samplesPerTriangle": 64,
                 "minimumPairs": 128,
-                "maximumLogMad": 0.25,
                 "maximumGain": 1.35,
                 "maximumAngleDegrees": 65
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 50,
                 "maximumSeparationMeters": 20,
                 "maximumEmissionDegrees": 80,
                 "visibilityToleranceMeters": 0.5,
@@ -685,8 +683,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99
+                  1.9,
+                  99.3
                 ]
               },
               "metadata": {
@@ -3465,14 +3463,14 @@
       "outputs": [
         {
           "url": "/scenes/comet-67p/comet-67p-osiris-thumbnail.webp",
-          "bytes": 1806,
-          "sha256": "594555977560fec0eb414cec884b8720ae8abb1d57e1abacacb565616a6394f5",
+          "bytes": 1776,
+          "sha256": "eb5e3d05fa30a7c0af74d6c4692195455872ca0bca63a1a3574df22a6ed8f344",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-67p/comet-67p-osiris-surface@2x.webp",
-          "bytes": 1576412,
-          "sha256": "b7872713ac183adf5c6314ef3df6de6156c4cfe1d81bcef1c40afc982f3d02ab",
+          "bytes": 1696040,
+          "sha256": "949d26b8279f7a7011a7a2a86d771c9cd519d593fbfc41ea22254c33ec6d5f44",
           "verification": "bytes-verified"
         }
       ],
@@ -3555,8 +3553,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 58968,
-          "sha256": "e8296bd0129bd58d97beb3e52370cd00aacd60b2a81a9a2e5615745c2eabdecd",
+          "bytes": 60610,
+          "sha256": "b26307e2cc285052061c7faca59925fc016024202cdb137dbd5e96632ae97326",
           "verification": "bytes-verified"
         }
       ]
