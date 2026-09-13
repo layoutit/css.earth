@@ -1,0 +1,175 @@
+{
+  "schema": "cssspice-cassini-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "cassini-cas00172-tsc",
+      "path": "sclk/cas00172.tsc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/sclk/cas00172.tsc",
+      "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 18954,
+      "expectedSha256": "9aebd8d2783d06c12c33d2c5794a04a7bcde26c95efd4fee974acd9b356442f8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-cassini-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/cassini/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "cassini-cas-v43-tf",
+      "path": "fk/cas_v43.tf",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/fk/cas_v43.tf",
+      "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 196583,
+      "expectedSha256": "09b1f6f27a74d3cc64b28ef91fcea02bed78fe63c93035b8434a6b67e5224b5a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-cassini-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/cassini/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "cassini-cas-iss-v10-ti",
+      "path": "ik/cas_iss_v10.ti",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti",
+      "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 31060,
+      "expectedSha256": "518c50a1c837f525e10ee71a97c9971ba419850ac05fcaa2df99cf3cddda5c68",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-cassini-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/cassini/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "cassini-naif0012-tls",
+      "path": "lsk/naif0012.tls",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls",
+      "credit": "NASA/JPL NAIF",
+      "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 5257,
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "naif-leapseconds-0012",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/cassini/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "cassini-pck00011-tpc",
+      "path": "pck/pck00011.tpc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+      "credit": "NASA/JPL NAIF",
+      "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "naif-pck00011",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/cassini/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "cassini-150828r-scpse-15066-15116-bsp",
+      "path": "spk/150828R_SCPSE_15066_15116.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/spk/150828R_SCPSE_15066_15116.bsp",
+      "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 4238336,
+      "expectedSha256": "36421eede2de316c42b27f933586b6c686b0a01180da09238e7dcef65164ec69",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-cassini-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/cassini/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "cassini-15098-15103ra-bc",
+      "path": "ck/15098_15103ra.bc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ck/15098_15103ra.bc",
+      "credit": "NASA/JPL NAIF; Cassini project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Cassini project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire cassini; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 6916096,
+      "expectedSha256": "e3f3d590afd96104493e6c7cd5f5d139cb06068163f0460b8a195523588de7fb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-cassini-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/cassini/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": []
+}

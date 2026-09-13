@@ -17,6 +17,7 @@ import { resolvePublishedPhotometry, validPublishedPhotometryShape, type Resolve
 import { decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT } from './pds4-geometry-cube.mts';
 import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, ABERRATIONS } from './spice-camera.mts';
 import { loadKernelSet } from '../../spice/kernel-set.mts';
+import { kernelBankPaths } from '../../spice/kernel-bank.mts';
 import { refineCameraByLimb } from './limb-refinement.mts';
 
 const safePath = (path: unknown) => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.split(/[\\/]/).includes('..');
@@ -28,7 +29,8 @@ const spiceDeclaration = (recipe: Pick<GeoRecipe,'spice'>) => { if (!recipe.spic
 const framePaths = (recipe: Pick<GeoRecipe,"format"|"path"|"labelPath"|"originalPath"|"flatPath"|"cameraPath"|"qualityPath"|"spice">): string[] => ( recipe.format === 'amica-gaskell'
   ? [recipe.path, recipe.labelPath, recipe.originalPath, recipe.flatPath]
   : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? [recipe.path, recipe.labelPath]
-  : kernelCamera(recipe) ? [recipe.path, ...spiceDeclaration(recipe).kernels]
+  // Kernels from a shared bank are pinned by the bank's manifest, not the body's; a VICAR frame brings its PDS3 label.
+  : kernelCamera(recipe) ? [recipe.path, ...(spiceDeclaration(recipe).image.format === 'vicar-pds3' ? [recipe.labelPath] : []), ...(spiceDeclaration(recipe).kernelSet ? [] : spiceDeclaration(recipe).kernels)]
   : archivedCamera(recipe) ? [recipe.path, recipe.cameraPath] : [recipe.path, recipe.qualityPath]).map(path=>requireString(path,'source-bound observation path'));
 export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown) {
   const format=requireRecord(value).format;
@@ -66,7 +68,11 @@ export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown
   const spice = recipe.spice;
   if (kernels !== (spice !== undefined)) throw new TypeError('Only SPICE camera recipes declare a spice block.');
   if (spice && (spice.kernels.length < 2 || spice.kernels.length > 32 || !Number.isInteger(spice.observer) || !Number.isInteger(spice.target) || spice.observer === spice.target ||
-      !Number.isInteger(spice.instrument) || !Number.isInteger(spice.clock.spacecraft) || !spice.clock.header || !spice.bodyFrame || !ABERRATIONS.includes(spice.aberration as typeof ABERRATIONS[number]) ||
+      !Number.isInteger(spice.instrument) || !Number.isInteger(spice.clock.spacecraft) ||
+      !(spice.clock.header ? spice.clock.start === undefined && spice.clock.stop === undefined : spice.clock.start && spice.clock.stop) ||
+      (spice.kernelSet !== undefined && !/^[a-z][a-z0-9-]*$/u.test(spice.kernelSet)) ||
+      (spice.image.format !== undefined && !['fits', 'vicar-pds3'].includes(spice.image.format)) ||
+      ((spice.image.format === 'vicar-pds3') !== (spice.clock.start !== undefined) || (spice.image.format === 'vicar-pds3' && !safePath(recipe.labelPath))) || !spice.bodyFrame || !ABERRATIONS.includes(spice.aberration as typeof ABERRATIONS[number]) ||
       spice.pixels.focalLength.unit !== 'mm' || !['micrometre', 'mm'].includes(spice.pixels.pixelPitch.unit) || ![0, 1].includes(spice.pixels.origin) ||
       !['X', '-X', 'Y', '-Y', 'Z', '-Z'].includes(spice.pixels.column) || !['X', '-X', 'Y', '-Y', 'Z', '-Z'].includes(spice.pixels.row) || spice.pixels.column.replace('-', '') === spice.pixels.row.replace('-', '') ||
       (spice.image.plane !== undefined && (!Number.isInteger(spice.image.plane) || spice.image.plane < 1)) || !spice.image.quantity)) throw new TypeError('Invalid SPICE camera declaration.');
@@ -87,7 +93,7 @@ export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown
       !paths.every(safePath) || new Set(paths).size !== paths.length ||
       (amica ? recipe.qualityPath !== undefined || recipe.allowLossy !== true || recipe.filter !== 'V'
         : cube ? recipe.cube === undefined || recipe.qualityPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.allowLossy !== false
-        : kernels ? recipe.qualityPath !== undefined || recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.cameraPath !== undefined || recipe.allowLossy !== false
+        : kernels ? recipe.qualityPath !== undefined || (recipe.labelPath !== undefined) !== (recipe.spice?.image.format === 'vicar-pds3') || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.cameraPath !== undefined || recipe.allowLossy !== false
         : recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined) ||
       (!cube && recipe.cube !== undefined) ||
       (controlled ? recipe.qualityPath !== undefined : recipe.cameraPath !== undefined) ||
@@ -95,7 +101,8 @@ export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown
       typeof recipe.metadata?.label !== 'string' || !recipe.metadata?.coverage ||
       !geometry || geometry.simplification?.method !== 'source-meshoptimizer' ||
       !positive(policy?.maximumSourceDistanceMeters) || policy.maximumSourceDistanceMeters > geometry.simplification.maximumErrorMeters ||
-      !positive(policy?.maximumSeparationMeters) || policy.maximumSeparationMeters > (controlled ? 600 : 50) ||
+      // Kernel cameras photograph bodies at any resolution, so their contributor separation is bounded by the displayed mesh's error, as source distance is.
+      !positive(policy?.maximumSeparationMeters) || policy.maximumSeparationMeters > (controlled ? 600 : kernels ? geometry.simplification.maximumErrorMeters : 50) ||
       !positive(policy?.visibilityToleranceMeters) || policy.visibilityToleranceMeters > 1 ||
       !positive(policy?.maximumEmissionDegrees) || policy.maximumEmissionDegrees >= 90 ||
       (published ? !validPublishedPhotometryShape(published, policy.maximumEmissionDegrees) :
@@ -157,7 +164,9 @@ async function loadSingleGeoObservationSurface({ sourceDirectory, source, recipe
     ? decodeLlorri(await read(recipe.path), camera)
     : refined(decodeOsirisReflectance(await read(recipe.path), camera, recipe.allowLossy)), radial.grid)
     : kernelCamera(recipe) ? attachSourceGeometry(refined(decodeSpiceCameraFrame(await read(recipe.path),
-      await loadKernelSet(spiceDeclaration(recipe).kernels.map(path => resolve(sourceDirectory, path))), spiceDeclaration(recipe), recipe.filter)), radial.grid)
+      await loadKernelSet(spiceDeclaration(recipe).kernelSet ? await kernelBankPaths(requireString(spiceDeclaration(recipe).kernelSet), spiceDeclaration(recipe).kernels)
+        : spiceDeclaration(recipe).kernels.map(path => resolve(sourceDirectory, path))), spiceDeclaration(recipe), recipe.filter,
+      spiceDeclaration(recipe).image.format === 'vicar-pds3' ? (await read(requireString(recipe.labelPath))).toString('latin1') : undefined)), radial.grid)
     : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? decodePds4GeometryCube(await read(recipe.path), (await read(recipe.labelPath)).toString('utf8'),
       { fileName: basename(requireString(recipe.path)), cube: cubeDeclaration(recipe), filter: recipe.filter })
     : recipe.format === 'amica-gaskell' ? decodeAmicaGeo(await read(recipe.path),
