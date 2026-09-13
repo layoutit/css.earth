@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e8caca3a8b8d5fc393571e494c931d25270f9530e81218b1a00dd018b31d55d8"
+    "sha256": "6222aaabcc7aec6f0320acd0db4f8204f7a4022f66fece87c3399c95c99571e8"
   },
   "id": "venus",
   "properties": {
@@ -65,7 +65,7 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "61c40dc622e8b519b170a2f529f4a0af92cc80d6c60cb02802b4a5f6cf97fd50"
+          "sha256": "a8670184e1bb986d33b06efb75f643fe6581d1c14a388c4e2f405e2b75421f04"
         },
         {
           "id": "celestial",
@@ -163,7 +163,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "10e6ca534c1d42391d6750d61767875e3c946ce0452295be6ed0d05800a1d28f"
+        "sha256": "51ef65cd3936bf7b80079c30b1d38cf300cd35a9c17498b70e914be6cf9a79b1"
       }
     },
     "catalog": {
