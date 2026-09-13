@@ -150,13 +150,325 @@
         "kind": "local",
         "reason": "Project-authored grid marking unavailable surface imagery."
       }
+    },
+    {
+      "id": "lorri-ca05",
+      "path": "observations/lor_0408625591_0x630_sci.fit",
+      "consumers": [
+        "photography-reference"
+      ],
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408625591_0x630_sci.fit",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "acquisition": "Restored from the pinned native archive URL in preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-kem1-lorri-v6",
+            "role": "material",
+            "evidence": "Native PDS label identifies the image and calibrated archive release."
+          }
+        ]
+      },
+      "expectedBytes": 10535040,
+      "expectedSha256": "164bbbda8a7f43a18e75f3ed17922efa3217904e6885a470c6192d97b82447b9",
+      "redistribution": "Retain the original source attribution and notices with published derivatives."
+    },
+    {
+      "id": "lorri-ca05-label",
+      "path": "observations/lor_0408625591_0x630_sci.lbl",
+      "consumers": [
+        "photography-reference"
+      ],
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408625591_0x630_sci.lbl",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "acquisition": "Restored from the pinned native archive URL in preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-kem1-lorri-v6",
+            "role": "reference",
+            "evidence": "Native PDS label identifies the image and calibrated archive release."
+          }
+        ]
+      },
+      "expectedBytes": 44000,
+      "expectedSha256": "50ff4ab807e32a2190b4b32c11e4c45d2fee4a0d42127ed649a03306df59c6e6",
+      "redistribution": "Retain the original source attribution and notices with published derivatives."
+    },
+    {
+      "id": "lorri-ca06",
+      "path": "observations/lor_0408626332_0x636_sci.fit",
+      "consumers": [
+        "lorri-observation"
+      ],
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.fit",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "acquisition": "Restored from the pinned native archive URL in preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-kem1-lorri-v6",
+            "role": "material",
+            "evidence": "Native PDS label identifies the image and calibrated archive release."
+          }
+        ]
+      },
+      "expectedBytes": 10532160,
+      "expectedSha256": "1fbb5124f417ea465db18cfdf5b7b8caee38cc30d8f1663b9939a648e27f0640",
+      "redistribution": "Retain the original source attribution and notices with published derivatives."
+    },
+    {
+      "id": "lorri-ca06-label",
+      "path": "observations/lor_0408626332_0x636_sci.lbl",
+      "consumers": [
+        "photography-reference"
+      ],
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.lbl",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "acquisition": "Restored from the pinned native archive URL in preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-kem1-lorri-v6",
+            "role": "reference",
+            "evidence": "Native PDS label identifies the image and calibrated archive release."
+          }
+        ]
+      },
+      "expectedBytes": 44000,
+      "expectedSha256": "4a48b38a489c772a5eea1098abcd9efbb0402aac3424c017adbd1001a156d082",
+      "redistribution": "Retain the original source attribution and notices with published derivatives."
+    },
+    {
+      "id": "ca05-registered-camera",
+      "path": "observations/ca05-camera.json",
+      "consumers": [
+        "photography-reference"
+      ],
+      "origin": "Derived from the pinned New Horizons WCS and source mesh registration.",
+      "credit": "cssEarth; NASA / JHUAPL / SwRI; Porter (2024)",
+      "license": "MIT for authored registration; original source notices retained.",
+      "acquisition": "node tools/objects/arrokoth/prepare-photographic-cameras.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Camera calculated from the original TAN-SIP WCS, inertial vectors and fitted mesh attitude; inputs are bound by hashes."
+      },
+      "expectedBytes": 3096,
+      "expectedSha256": "e09c96c5b6e7228713c8d56c94acbe67e95d01095a6037e1ad5889d0a09546cb",
+      "redistribution": "Retain the original source attribution and notices with published derivatives."
+    },
+    {
+      "id": "ca06-registered-camera",
+      "path": "observations/ca06-camera.json",
+      "consumers": [
+        "lorri-observation"
+      ],
+      "origin": "Derived from the pinned New Horizons WCS and source mesh registration.",
+      "credit": "cssEarth; NASA / JHUAPL / SwRI; Porter (2024)",
+      "license": "MIT for authored registration; original source notices retained.",
+      "acquisition": "node tools/objects/arrokoth/prepare-photographic-cameras.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Camera calculated from the original TAN-SIP WCS, inertial vectors and fitted mesh attitude; inputs are bound by hashes."
+      },
+      "expectedBytes": 3104,
+      "expectedSha256": "5992738be4a7607b8ed2ccfe60643c7aab465f046cd674972c27efa2b426a263",
+      "redistribution": "Retain the original source attribution and notices with published derivatives."
+    },
+    {
+      "id": "photography-registration",
+      "path": "preparation/photography.json",
+      "consumers": [
+        "photography-reference"
+      ],
+      "origin": "Project-authored mesh registration.",
+      "credit": "cssEarth",
+      "license": "MIT",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Fitted body attitude and image offsets with disjoint limb residuals for the Porter2024 shape."
+      },
+      "expectedBytes": 4505,
+      "expectedSha256": "ba4d45cb602d95a96e83a18f4fe3ec5d918f9f7fc3317397c953d0fc3aafa0cb",
+      "redistribution": "Retain the original source attribution and notices with published derivatives.",
+      "acquisition": "Pinned local source input retained with the body package."
+    },
+    {
+      "id": "photography-shape-paper",
+      "path": "reference/porteretal2024b.pdf",
+      "consumers": [
+        "photography-reference"
+      ],
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/porteretal2024b.pdf",
+      "credit": "Porter et al. (2024)",
+      "license": "Original publication retained for scientific method reference; not relicensed.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-arrokoth-published-shape",
+            "role": "method",
+            "evidence": "Bundled model paper; revised pole and source mesh frame in Table 2."
+          }
+        ]
+      },
+      "expectedBytes": 657187,
+      "expectedSha256": "e6fdeb2acd50283c3a75efe971c389f27cc09e4e31704a74a2b6eb76fb980aa0",
+      "redistribution": "Retain the original source attribution and notices with published derivatives.",
+      "acquisition": "Pinned local source input retained with the body package."
+    },
+    {
+      "id": "mvic-ca05",
+      "path": "observations/ca05_mvic_cube.fit",
+      "consumers": [
+        "mvic-observation"
+      ],
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.fit",
+      "credit": "Grundy et al.; NASA / JHUAPL / SwRI; New Horizons science team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain source attribution and enhanced-color qualifications.",
+      "acquisition": "Restored by preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-arrokoth-mvic-ca05",
+            "role": "material",
+            "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
+          }
+        ]
+      },
+      "expectedBytes": 2882880,
+      "expectedSha256": "37d71a90bd10c2a7812af0b350db1e6cb770c1c3f0e0a26e35a67547efef640e"
+    },
+    {
+      "id": "mvic-label",
+      "path": "observations/ca05_mvic_cube.lblx",
+      "consumers": [
+        "photography-reference"
+      ],
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx",
+      "credit": "Grundy et al.; NASA / JHUAPL / SwRI; New Horizons science team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain source attribution and enhanced-color qualifications.",
+      "acquisition": "Restored by preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-arrokoth-mvic-ca05",
+            "role": "reference",
+            "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
+          }
+        ]
+      },
+      "expectedBytes": 18710,
+      "expectedSha256": "46565f1d4ecee1a836351365700d8acc01e150ebcece4ec69b39536fd1af36e5"
+    },
+    {
+      "id": "mvic-method",
+      "path": "observations/mvic-overview.pdf",
+      "consumers": [
+        "photography-reference"
+      ],
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/overview.pdf",
+      "credit": "Grundy et al.; NASA / JHUAPL / SwRI; New Horizons science team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain source attribution and enhanced-color qualifications.",
+      "acquisition": "Restored by preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-arrokoth-mvic-ca05",
+            "role": "method",
+            "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
+          }
+        ]
+      },
+      "expectedBytes": 170651,
+      "expectedSha256": "1735825bf49c291c9119ea90565bb1090ff160ab5f8b58e416a658333a550097"
+    },
+    {
+      "id": "mvic-camera",
+      "path": "observations/mvic-camera.json",
+      "consumers": [
+        "mvic-observation"
+      ],
+      "origin": "Source-bound image registration",
+      "credit": "cssEarth; New Horizons science team",
+      "license": "MIT; retain upstream source attribution.",
+      "redistribution": "Retain source attribution and enhanced-color qualifications.",
+      "acquisition": "node tools/objects/arrokoth/prepare-photographic-cameras.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Camera transferred from the qualified CA05 LORRI image through the fitted MVIC similarity; native inputs and source mesh are hash bound."
+      },
+      "expectedBytes": 5767,
+      "expectedSha256": "8b4f7ef786172c6d928ab7bf3145e1876c6264d916609f4ed3f40235fdccede1"
+    },
+    {
+      "id": "lorri-independent-fit",
+      "path": "observations/lor_0408626333_0x636_sci.fit",
+      "consumers": [
+        "photography-validation"
+      ],
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626333_0x636_sci.fit",
+      "credit": "NASA / JHUAPL / SwRI; New Horizons science team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain original source attribution and notices.",
+      "acquisition": "Restored by preparation/acquisition.json; reserved for the independent exposure check.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-kem1-lorri-v6",
+            "role": "reference",
+            "evidence": "An adjacent exposure reserved for the frozen camera prediction; native label identifies the product."
+          }
+        ]
+      },
+      "expectedBytes": 10532160,
+      "expectedSha256": "3d1385a024126791e1a1aa9350577aabecbd68f42f5c447603d75390a09d76ac"
+    },
+    {
+      "id": "lorri-independent-lbl",
+      "path": "observations/lor_0408626333_0x636_sci.lbl",
+      "consumers": [
+        "photography-validation"
+      ],
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626333_0x636_sci.lbl",
+      "credit": "NASA / JHUAPL / SwRI; New Horizons science team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain original source attribution and notices.",
+      "acquisition": "Restored by preparation/acquisition.json; reserved for the independent exposure check.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-kem1-lorri-v6",
+            "role": "reference",
+            "evidence": "An adjacent exposure reserved for the frozen camera prediction; native label identifies the product."
+          }
+        ]
+      },
+      "expectedBytes": 44000,
+      "expectedSha256": "3e7cc8cec31aa90305ca1b91fe96ffae85f42038a472b6401fac02c6b7e59f73"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5463,
-      "expectedSha256": "ab8dcf2f950402c597b09a937a84ace1057dce7ced99726e1035f473eac81fca",
+      "expectedBytes": 6915,
+      "expectedSha256": "f04f29310a16838dd3288d0c8bfd0e7fbae43ab37d5ecf407107bc137456f092",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -164,13 +476,13 @@
     },
     {
       "path": "measurements.json",
-      "expectedBytes": 2001,
-      "expectedSha256": "9bd7ceb62f67aaf3eabf87c013b7ec89b8a38bbccb191866917d9b5d62de83c6"
+      "expectedBytes": 2053,
+      "expectedSha256": "c75b116ae470369f0be7756a4b713b98adf2dbcf5e0775dedad04aa9314ba3f2"
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2519,
-      "expectedSha256": "2b21df83f7c97380152f0f298693912336f38cc1bf67adfa31b2e4816f654285"
+      "expectedBytes": 5050,
+      "expectedSha256": "3f800af539eaddd54e5fb0db02b9873a4b94afe8cd0a9f15c6ec964dc4bee07e"
     },
     {
       "path": "preparation/navigation.json",
@@ -184,8 +496,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3517,
-      "expectedSha256": "9d5a1b93583f30ac2384bde0c234e7beebf2a55a95a3fd2b8238e467801bc4e4"
+      "expectedBytes": 6005,
+      "expectedSha256": "df26536cdfe20b8ee284ba00e45c154f203682904bec2ea6e6be09851f64e1b6"
     },
     {
       "path": "presentation/minimap.json",
@@ -221,11 +533,6 @@
       "path": "reference/overview.txt",
       "expectedBytes": 952,
       "expectedSha256": "d52fbfac22fd740459d80a541be02753d3e82ca274fe90d7ec5eace2c4f5f0bd"
-    },
-    {
-      "path": "reference/porteretal2024b.pdf",
-      "expectedBytes": 657187,
-      "expectedSha256": "e6fdeb2acd50283c3a75efe971c389f27cc09e4e31704a74a2b6eb76fb980aa0"
     },
     {
       "path": "science/albedo_arrokoth4_fp36h2_masked1.lblx",

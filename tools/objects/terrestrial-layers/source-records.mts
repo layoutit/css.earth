@@ -210,6 +210,7 @@ export const parsePhasePhotometry = shape({model:text,asymmetry:number,amplitude
  * their label identifiers, the archive identity and DSK to bind, and optional FITS header expectations. */
 export const parseGeometryCube = shape({collection:text,target:text,observingSystem:array(text),shapeKernel:optional(text),quantity:text,
   planes:shape({image:text,x:text,y:text,z:text,incidence:text,emission:text,phase:text,pixelScale:optional(array(text))}),
+  geometrySelection:optional(shape({plane:text,unit:text,minimum:number,maximum:number,interpretation:text})),
   header:optional(dictionary(text)),headerTime:optional(text),headerPlaneNames:optional(shape({prefix:text,names:dictionary(text)}))});
 export type GeometryCubeDeclaration = ReturnType<typeof parseGeometryCube>;
 /** A camera derived from SPICE kernels for an image without archived geometry: the kernel set in load order, the SPK ids and
@@ -222,7 +223,7 @@ export const parseSpiceCamera = shape({kernels:array(text),kernelSet:optional(te
 export type SpiceCameraDeclaration = ReturnType<typeof parseSpiceCamera>;
 /** Pointing refinement of an archived or kernel camera against the retained mesh's lit limb, with its evidence budget. */
 export const parseLimbRefinement = shape({method:text,maximumCorrectionDegrees:number,maximumResidualPixels:number,minimumControls:number,threshold:optional(number),searchPixels:optional(number),maximumControls:optional(number),minimumSharpness:optional(number)});
-export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),cube:optional(parseGeometryCube),spice:optional(parseSpiceCamera),refinement:optional(parseLimbRefinement),
+export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),colorDisplay:optional(shape({minimum:number,maximum:number})),cube:optional(parseGeometryCube),spice:optional(parseSpiceCamera),refinement:optional(parseLimbRefinement),
  frames:optional(array(shape({id:text,...geoFramePathFields}))),selection:optional(text),levelMatching:optional(parseLevelMatching),
  transfer:surfaceTransfer,photometry:publishedOr(shape({model:text,phaseCorrection:optional(parsePhasePhotometry),coefficient:optional(number),phaseCoefficientPerDegree:optional(number),
  referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,maximumGain:number})),displayPercentiles:array(number)});

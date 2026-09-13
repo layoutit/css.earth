@@ -33,6 +33,13 @@ Model XYZ is retained, with longitude `atan2(y,x)` and latitude `asin(z/r)`. The
 
 Inspected 2026-09-08, including primary archives and research releases beyond press imagery:
 
+2026-09-12 follow-up: rechecked the pinned native LORRI label and the
+[published shape-fitting method](https://www.hou.usra.edu/meetings/plutosystem2019/pdf/7038.pdf).
+The label's inertial geometry does not supply an attitude for the released 2021
+STL. Earlier fitted shapes and poles are different solutions; they cannot be
+transferred to this mesh without a registration check. Photographic mapping
+remains unqualified.
+
 | Candidate | Disposition |
 | --- | --- |
 | [Porter 2021 Figshare shape](https://doi.org/10.6084/m9.figshare.12779975.v1) | **Included.** Public, attributed mesh preserves the large northern concavity. Original STL and the release’s complete metadata/license response are pinned. The release supplies no texture, validity map or fitted attitude file. |

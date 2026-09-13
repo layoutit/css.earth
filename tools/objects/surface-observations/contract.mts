@@ -14,6 +14,8 @@ import type { SourceInput } from '../../../src/platform/source-manifest.mts';
 /** A decoded photograph: calibrated values and the archive's own verdict on each pixel. */
 export interface ObservationImage {
   width: number; height: number; values: ArrayLike<number>;
+  /** Registered filter planes shown together as colour: interpolated like the values and displayed on one common linear scale. */
+  colorValues?: readonly ArrayLike<number>[];
   /** Why the detector or the archive's quality data disqualify a pixel, or null. Geometry and photometry are judged later. */
   reject(index: number): string | null;
   /** Whether a qualified pixel was lossily compressed; counted in the report only. */
@@ -72,7 +74,7 @@ export interface TransferLimits {
 
 export type FootprintSample =
   { reason: string; separationMeters?: number; radiance?: never; gain?: never; maximumEmissionDegrees?: never; maximumIncidenceDegrees?: never } |
-  { reason?: undefined; radiance: number; gain: number; separationMeters: number; maximumEmissionDegrees: number; maximumIncidenceDegrees: number };
+  { reason?: undefined; radiance: number; color?: number[]; gain: number; separationMeters: number; maximumEmissionDegrees: number; maximumIncidenceDegrees: number };
 
 /** One qualified photograph, ready for the shared surface transfer. */
 export interface ObservationFrame {
@@ -101,7 +103,7 @@ export interface SurfacePolicy {
   selection: 'single' | 'lowest-emission' | 'recipe-order' | 'finest-resolution';
   levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumLogMad: number; maximumGain: number; samplesPerTriangle?: number };
   samplesPerTriangle: number;
-  display: { range: 'reference-pixels' | 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string };
+  display: { range: 'reference-pixels' | 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; channels?: readonly string[] };
   photometry: Record<string, unknown>;
   limits: Record<string, unknown>;
   limitations?: string;

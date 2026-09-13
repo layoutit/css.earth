@@ -1,0 +1,380 @@
+{
+  "checkedOn": "2026-09-12",
+  "qualificationRevision": "8ad36c375792d65fef9a9879abe4310eccf5c0df",
+  "qualificationRevisionCorrection": "Corrected an erroneous manually supplied CSSEARTH_TEST_REVISION label using the recorded Git merge performed before this run. The capture helper now reads Git directly.",
+  "qualificationBrowser": "152.0.7977.84",
+  "qualification": [
+    {
+      "id": "didymos",
+      "mode": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dpr": 1,
+      "lenses": [
+        "shape",
+        "draco",
+        "elevation",
+        "albedo"
+      ],
+      "clickedFeature": "16265",
+      "photographs": [
+        "/scenes/didymos/didymos-draco-shadow@2x.webp",
+        "/scenes/didymos/didymos-draco-surface@2x.webp",
+        "/scenes/didymos/didymos-draco-thumbnail.webp"
+      ],
+      "state": {
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.707106781187,-0.098822178182,-0.700167249376,0,0,0.990186019998,-0.139755664649,0,0.707106781187,0.098822178182,0.700167249376,0,0,0,0,1)",
+            "skybox": "matrix3d(0.898986004537,0.06120980494,0.43367897316,0,-0.401836267958,0.509144285238,0.761117294758,0,-0.174217393013,-0.858501774751,0.4823099276,0,0,0,0,1)",
+            "sunView": "matrix3d(0.258819045103,0.789061071557,-0.557131337519,0,0,0.576784803093,0.816896132272,0,0.965925826289,-0.211428276903,0.149282891966,0,0,0,0,1)"
+          },
+          "pitch": 100,
+          "controlPitch": 100,
+          "controlYaw": 45,
+          "zoom": 2.2275,
+          "distance": 657.3897919439045,
+          "distanceKilometers": 1.0432490176501092,
+          "distanceRadii": 2.858216486712628,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 931.5000098235932,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -500,
+            "bottom": 500
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 465.7500049117966
+        },
+        "features": {
+          "loaded": true,
+          "count": 2,
+          "visible": 2,
+          "eligible": 2,
+          "enabled": true,
+          "playing": false,
+          "frames": 60,
+          "error": null,
+          "zoomGate": true,
+          "outlinePieces": 0,
+          "flying": false,
+          "hovered": null,
+          "pinned": null
+        },
+        "retained": true,
+        "density": 2
+      },
+      "errors": [],
+      "lighting": [
+        "73a75283bf1e031ef929f63387cdc3503e91c838c4c24b9d8c472485d7e329ae",
+        "0653b39f8a5f3416bc84f2591caa64f4dca94bff3739d560e5f82555d44f5e3d"
+      ]
+    },
+    {
+      "id": "didymos",
+      "mode": "dpr2",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dpr": 2,
+      "lenses": [
+        "shape",
+        "draco",
+        "elevation",
+        "albedo"
+      ],
+      "clickedFeature": null,
+      "photographs": [
+        "/scenes/didymos/didymos-draco-shadow@2x.webp",
+        "/scenes/didymos/didymos-draco-surface@2x.webp",
+        "/scenes/didymos/didymos-draco-thumbnail.webp"
+      ],
+      "state": {
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.707106781187,-0.098822178182,-0.700167249376,0,0,0.990186019998,-0.139755664649,0,0.707106781187,0.098822178182,0.700167249376,0,0,0,0,1)",
+            "skybox": "matrix3d(0.898986004537,0.06120980494,0.43367897316,0,-0.401836267958,0.509144285238,0.761117294758,0,-0.174217393013,-0.858501774751,0.4823099276,0,0,0,0,1)",
+            "sunView": "matrix3d(0.258819045103,0.789061071557,-0.557131337519,0,0,0.576784803093,0.816896132272,0,0.965925826289,-0.211428276903,0.149282891966,0,0,0,0,1)"
+          },
+          "pitch": 100,
+          "controlPitch": 100,
+          "controlYaw": 45,
+          "zoom": 2.2275,
+          "distance": 657.3897919439045,
+          "distanceKilometers": 1.0432490176501092,
+          "distanceRadii": 2.858216486712628,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 931.5000098235932,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -500,
+            "bottom": 500
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 465.7500049117966
+        },
+        "features": {
+          "loaded": true,
+          "count": 2,
+          "visible": 2,
+          "eligible": 2,
+          "enabled": true,
+          "playing": false,
+          "frames": 25,
+          "error": null,
+          "zoomGate": true,
+          "outlinePieces": 0,
+          "flying": false,
+          "hovered": null,
+          "pinned": null
+        },
+        "retained": true,
+        "density": 2
+      },
+      "errors": [],
+      "lighting": [
+        "a4f41a9a4dbbad35d3fdd1ee673f2fbbff00b088ed8d2f45e272cee18b517f91",
+        "5056f92a49d7a21b73063103c17b97134a06d82606e91c35e9bc2e2e4a209769"
+      ]
+    },
+    {
+      "id": "didymos",
+      "mode": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dpr": 1,
+      "lenses": [
+        "shape",
+        "draco",
+        "elevation",
+        "albedo"
+      ],
+      "clickedFeature": null,
+      "photographs": [
+        "/scenes/didymos/didymos-draco-shadow@2x.webp",
+        "/scenes/didymos/didymos-draco-surface@2x.webp",
+        "/scenes/didymos/didymos-draco-thumbnail.webp"
+      ],
+      "state": {
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.707106781187,-0.098822178182,-0.700167249376,0,0,0.990186019998,-0.139755664649,0,0.707106781187,0.098822178182,0.700167249376,0,0,0,0,1)",
+            "skybox": "matrix3d(0.898986004537,0.06120980494,0.43367897316,0,-0.401836267958,0.509144285238,0.761117294758,0,-0.174217393013,-0.858501774751,0.4823099276,0,0,0,0,1)",
+            "sunView": "matrix3d(0.258819045103,0.789061071557,-0.557131337519,0,0,0.576784803093,0.816896132272,0,0.965925826289,-0.211428276903,0.149282891966,0,0,0,0,1)"
+          },
+          "pitch": 100,
+          "controlPitch": 100,
+          "controlYaw": 45,
+          "zoom": 1.0725,
+          "distance": 415.81253678336776,
+          "distanceKilometers": 0.6598764170692576,
+          "distanceRadii": 1.8078805947102947,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 448.49999310906884,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 337.75,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -195,
+            "right": 195,
+            "top": -422,
+            "bottom": 422
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 224.24999655453442
+        },
+        "features": {
+          "loaded": true,
+          "count": 2,
+          "visible": 0,
+          "eligible": 0,
+          "enabled": true,
+          "playing": false,
+          "frames": 24,
+          "error": null,
+          "zoomGate": true,
+          "outlinePieces": 0,
+          "flying": false,
+          "hovered": null,
+          "pinned": null
+        },
+        "retained": true,
+        "density": 2
+      },
+      "errors": [],
+      "lighting": [
+        "b0de2e6dbeaf8927fa9da041537c84f2de9760621a5016c0f18f530faf9eb5c8",
+        "4e358361f252ef17ebfb7fea07ef8b589bb5320d1bb7128955d864e2b230eae8"
+      ]
+    }
+  ],
+  "finalCaptures": {
+    "revision": "1cd30a98c844cae8f91248cb3ebec2931aeed3c9",
+    "changes": "DART display labels and visible brightness/coverage summaries refreshed after browser qualification; imagery and camera unchanged.",
+    "browser": "152.0.7977.84",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "dpr": 1,
+    "shadows": false,
+    "motion": false,
+    "files": [
+      {
+        "path": "draco-mosaic-overview.webp",
+        "sha256": "19b6a9e744e3d4cf2bde58eee88194cf097997a747c6f9ac5b1952b7c852d9ef",
+        "capture": {
+          "id": "didymos",
+          "zoom": 1.35,
+          "url": "http://127.0.0.1:4278/didymos/?v=MMY_-nQq3BVi1kFCxzNAAAAAv7CRVnoMTWU_2G57ue5WLb-bc0dPhO-eAAA#dataset=draco",
+          "camera": {
+            "pose": {
+              "schema": "cssearth-camera-pose@1",
+              "scene": "matrix3d(0.707106781187,-0.098822178182,-0.700167249376,0,0,0.990186019998,-0.139755664649,0,0.707106781187,0.098822178182,0.700167249376,0,0,0,0,1)",
+              "skybox": "matrix3d(0.898986004537,0.06120980494,0.43367897316,0,-0.401836267958,0.509144285238,0.761117294758,0,-0.174217393013,-0.858501774751,0.4823099276,0,0,0,0,1)",
+              "sunView": "matrix3d(0.258819045103,0.789061071557,-0.557131337519,0,0,0.576784803093,0.816896132272,0,0.965925826289,-0.211428276903,0.149282891966,0,0,0,0,1)"
+            },
+            "pitch": 100,
+            "controlPitch": 100,
+            "controlYaw": 45,
+            "zoom": 1.35,
+            "distance": 1041.8440354525028,
+            "distanceKilometers": 1.6533611866963631,
+            "distanceRadii": 4.529756675880447,
+            "levelOfDetail": {
+              "stage": "geometry",
+              "silhouetteDiameter": 564.5454575292765,
+              "billboardOpacity": 0,
+              "markerOpacity": 0,
+              "proxyOpacity": 0
+            },
+            "focal": 1247.08,
+            "principalOffset": [
+              0,
+              0
+            ],
+            "visibleRect": {
+              "left": -720,
+              "right": 720,
+              "top": -500,
+              "bottom": 500
+            },
+            "offAxisDegrees": 0,
+            "silhouetteRadius": 282.27272876463826
+          }
+        }
+      },
+      {
+        "path": "draco-mosaic-close.webp",
+        "sha256": "fedf3af37c6cdc9df4d51802e2fe12c41516d93c041bf0946f6e716407104359",
+        "capture": {
+          "id": "didymos",
+          "zoom": 2.2275,
+          "url": "http://127.0.0.1:4278/didymos/?v=MMY_8LEl4cZC9EFCxzNAAAAAv7CRVnoMTWU_2G57ue5WLb-bc0dPhO-eAAA#dataset=draco",
+          "camera": {
+            "pose": {
+              "schema": "cssearth-camera-pose@1",
+              "scene": "matrix3d(0.707106781187,-0.098822178182,-0.700167249376,0,0,0.990186019998,-0.139755664649,0,0.707106781187,0.098822178182,0.700167249376,0,0,0,0,1)",
+              "skybox": "matrix3d(0.898986004537,0.06120980494,0.43367897316,0,-0.401836267958,0.509144285238,0.761117294758,0,-0.174217393013,-0.858501774751,0.4823099276,0,0,0,0,1)",
+              "sunView": "matrix3d(0.258819045103,0.789061071557,-0.557131337519,0,0,0.576784803093,0.816896132272,0,0.965925826289,-0.211428276903,0.149282891966,0,0,0,0,1)"
+            },
+            "pitch": 100,
+            "controlPitch": 100,
+            "controlYaw": 45,
+            "zoom": 2.2275,
+            "distance": 657.3897919439045,
+            "distanceKilometers": 1.0432490176501092,
+            "distanceRadii": 2.858216486712628,
+            "levelOfDetail": {
+              "stage": "geometry",
+              "silhouetteDiameter": 931.5000098235932,
+              "billboardOpacity": 0,
+              "markerOpacity": 0,
+              "proxyOpacity": 0
+            },
+            "focal": 1247.08,
+            "principalOffset": [
+              0,
+              0
+            ],
+            "visibleRect": {
+              "left": -720,
+              "right": 720,
+              "top": -500,
+              "bottom": 500
+            },
+            "offAxisDegrees": 0,
+            "silhouetteRadius": 465.7500049117966
+          }
+        }
+      }
+    ]
+  },
+  "freshInstallation": {
+    "installed": 90,
+    "reused": 0,
+    "scope": "Both DART bodies; 90 downloaded, zero reused; the focused browser check served these downloaded files.",
+    "bodyInventory": {
+      "previousBytes": 8125898,
+      "currentBytes": 8963982,
+      "changed": [
+        {
+          "filename": "didymos-draco-shadow@2x.webp",
+          "bytes": 314794
+        },
+        {
+          "filename": "didymos-draco-surface@2x.webp",
+          "bytes": 521240
+        },
+        {
+          "filename": "didymos-draco-thumbnail.webp",
+          "bytes": 2050
+        }
+      ],
+      "unchanged": 40
+    }
+  },
+  "limits": [
+    "Focused browser proof, not the aggregate conformance suite. The unchanged common harness counts a hidden volume-lens panel and rejects 2 panels instead of 1.",
+    "Aggregate source tests: 66/67 passed. The Moon authored-preparation content pin is stale, with its files and factsheet checker identical to main; both DART factsheets pass.",
+    "The prior Dimorphos DRACO assets on main returned HTTP 404. The retained historical screenshot has different framing; no matched before/after pixel difference or quantified sharpness result is claimed.",
+    "Photographic coverage remains partial, cast shadows remain, and the initial shared camera can face the unobserved side."
+  ]
+}

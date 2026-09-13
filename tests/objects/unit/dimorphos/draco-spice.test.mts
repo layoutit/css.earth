@@ -7,12 +7,12 @@ import { loadSurfaceObservation, validateSurfaceObservation } from '../../../../
 import { fitBackplaneCamera } from '../../../../tools/objects/surface-observations/cameras.mts';
 import { fixtureRecord } from '../../../../tools/test-values.mts';
 import { decodeSpiceCameraFrame } from '../../../../tools/objects/terrestrial-layers/spice-camera.mts';
-import { parseSpiceCamera } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 import { project } from '../../../../tools/objects/terrestrial-layers/osiris-geo.mts';
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { requireTerrainMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { loadKernelSet } from '../../../../tools/spice/kernel-set.mts';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
+import { parseSpiceCamera } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 
 /**
  * The DRACO cube carries the archive's own SPICE intercepts for every pixel.
@@ -24,7 +24,8 @@ import { createSourceManifest } from '../../../../src/platform/source-manifest.m
  */
 const root = resolve(import.meta.dirname, '../../../../src/planets/dimorphos/source');
 const config = JSON.parse((await readFile(resolve(root, 'preparation/terrestrial.json'))).toString('utf8'));
-const cubeRecipe = config.raster.surfaceObservations.find((recipe: { id: string }) => recipe.id === 'draco');
+const mosaic = config.raster.surfaceObservations.find((recipe: { id: string }) => recipe.id === 'draco');
+const cubeRecipe = { ...mosaic, ...mosaic.frames.find((frame: { id: string }) => frame.id === 't-minus-11s') };
 const name = 'dart_0401930040_12262_01_geo.fits';
 const kernels = ['lsk/naif0012.tls', 'pck/pck00010.tpc', 'pck/didymos_system_15.tpc', 'fk/dart_009.tf', 'fk/didymos_system_007.tf', 'ik/dart_draco_003.ti', 'sclk/dart_sclk_0204.tsc',
   'spk/de430.bsp', 'spk/didymos_barycenter_s205_v01.bsp', 'spk/didymos_system_s542_v01.bsp', 'spk/dart_struct_v04.bsp', 'spk/dart_2022_231_2022_269_rec_v03.bsp',
@@ -33,16 +34,16 @@ const kernels = ['lsk/naif0012.tls', 'pck/pck00010.tpc', 'pck/didymos_system_15.
 const recipe = {
   id: 'draco-spice', format: 'spice-camera', consumer: 'draco-spice', path: cubeRecipe.path, startTime: cubeRecipe.startTime, filter: cubeRecipe.filter, allowLossy: false,
   metadata: { label: 'DRACO image (SPICE camera)', coverage: cubeRecipe.metadata.coverage },
-  spice: parseSpiceCamera({ kernels, observer: -135, target: 120065803, bodyFrame: 'DIMORPHOS_FIXED', instrument: -135102, clock: { header: 'ACQTMSOC', spacecraft: -135 }, aberration: 'LT+S',
+  spice: { kernels, observer: -135, target: 120065803, bodyFrame: 'DIMORPHOS_FIXED', instrument: -135102, clock: { header: 'ACQTMSOC', spacecraft: -135 }, aberration: 'LT+S',
     pixels: { focalLength: { key: 'FOCAL_LENGTH', unit: 'mm' }, pixelPitch: { key: 'PIXEL_SIZE', unit: 'micrometre' }, center: 'DETECTOR_CENTER', boresight: 'BORESIGHT',
       samples: 'PIXEL_SAMPLES', lines: 'PIXEL_LINES', frame: 'FOV_FRAME', origin: 0, column: '-X', row: '-Y' },
-    image: { quantity: 'I/F', plane: 1, header: { MISSION: 'DART', INSTRUME: 'DRACO', SRCFILE: 'dart_0401930040_12262_01.fits', SCLKNAME: 'dart_sclk_0204.tsc' }, missingValueKeys: ['MISPXVAL', 'PXOUTWIN'], saturationKey: 'SATPXVAL' } }),
+    image: { quantity: 'I/F', plane: 1, header: { MISSION: 'DART', INSTRUME: 'DRACO', SRCFILE: 'dart_0401930040_12262_01.fits', SCLKNAME: 'dart_sclk_0204.tsc' }, missingValueKeys: ['MISPXVAL', 'PXOUTWIN'], saturationKey: 'SATPXVAL' } },
   transfer: cubeRecipe.transfer, photometry: cubeRecipe.photometry, displayPercentiles: cubeRecipe.displayPercentiles,
 };
 const bytes = await readFile(resolve(root, recipe.path));
 const cube = decodePds4GeometryCube(bytes, await readFile(resolve(root, cubeRecipe.labelPath), 'utf8'), { fileName: name, cube: cubeRecipe.cube, filter: cubeRecipe.filter });
 const set = await loadKernelSet(kernels.map(path => resolve(root, path)));
-const frame = decodeSpiceCameraFrame(bytes, set, recipe.spice, recipe.filter);
+const frame = decodeSpiceCameraFrame(bytes, set, parseSpiceCamera(recipe.spice), recipe.filter);
 const camera = frame.camera, report = frame.qualityReport;
 
 test('the spacecraft clock, leap seconds and kernel chain reproduce the archived exposure epoch and range', t => {
