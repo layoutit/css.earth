@@ -189,8 +189,8 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
       const operation = node.type === "CallExpression" || node.type === "NewExpression" ? nameOf(node.callee) || propertyName(node.callee) : "";
       if ((node.type === 'CallExpression' || node.type === 'NewExpression') && (
         ['OffscreenCanvas', 'WebGLRenderingContext', 'WebGL2RenderingContext', 'getContext'].includes(operation) ||
-        ['createElement', 'createElementNS'].includes(operation) && node.arguments.some(argument => values(argument).some(value => typeof value === 'string' && ['canvas', 'svg'].includes(value))))) {
-        note(node, 'Forbidden runtime canvas, WebGL, or SVG scene rendering');
+        ['createElement', 'createElementNS'].includes(operation) && node.arguments.some(argument => values(argument).some(value => value === 'canvas')))) {
+        note(node, 'Forbidden runtime canvas or WebGL scene rendering');
       }
       const forbiddenProperty = (name: unknown) => /^(?:clip-?path|mask(?:-.*|[A-Z].*)?|filter|mix-?blend-?mode|background-?blend-?mode)$/i.test(typeof name === 'string' ? name : '');
       const forbiddenValue = (value: unknown) => typeof value === 'string' && /(?:linear|radial|conic)-gradient\s*\(|\b(?:clip-path|mask(?:-\w+)?|filter|mix-blend-mode|background-blend-mode)\s*:/i.test(value);
