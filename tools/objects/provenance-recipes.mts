@@ -1,4 +1,4 @@
-import {record, records, maybeRecord, text, texts, optionalText, numbers, namedRecords, textValues, provenanceManifest} from './provenance-records.mts';
+import {record, records, maybeRecord, text, texts, optionalText, namedRecords, textValues, provenanceManifest} from './provenance-records.mts';
 import type {ProductBinding, ProvenanceGap, ProvenanceRecipeSource, GeographicProvenance} from './provenance-records.mts';
 // Dependency bindings for the shared preparers. These follow acquisition paths
 // and recipe operations, never factsheet links, publisher names, or UI credits.
@@ -50,31 +50,34 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
   };
   const raster = recipe('raster'), terrestrial = recipe('terrestrial');
   if (raster?.schema === 'cssearth-raster-recipe@1') {
-    const name = (template: unknown, density: number, key?: string) => prefix + text(template).replaceAll('{id}', key ?? '')
-      .replaceAll('{suffix}', density === 2 ? '@2x' : '').replaceAll('{density}', String(density));
+    const name = (template: unknown, key?: string) => prefix + text(template).replaceAll('{id}', key ?? '');
     namedRecords(raster.surfaces).forEach((plan, index) => {
       // A science block names its pinned inputs (continuum frames, off-limb context images) beside the surface source.
       // A continuum mosaic names its frames under the science block; its `source` is their directory, not an input.
       const frames = Array.isArray(maybeRecord(maybeRecord(plan.science)?.synoptic)?.mapFiles);
       const used = [...(frames ? [] : [text(plan.source)]), ...paths(plan.coverage), ...paths(plan.science)];
-      const outputUrls = [...numbers(raster.densities).map(d => name(plan.output, d, plan.id)), name(plan.thumbnail, 1, plan.id)];
-      if (!raster.polesCombined) outputUrls.push(...numbers(raster.densities).map(d => name(raster.polesOutput, d, plan.id)));
+      const outputUrls = [name(plan.output, plan.id), name(plan.thumbnail, plan.id)];
+      if (!raster.polesCombined) outputUrls.push(name(raster.polesOutput, plan.id));
       const emission = maybeRecord(raster.emission);
-      if (emission) outputUrls.push(...numbers(raster.densities).flatMap(d => [name(emission.offLimbOutput, d, plan.id), name(emission.limbOutput, d, plan.id)]));
+      if (emission) outputUrls.push(name(emission.offLimbOutput, plan.id), name(emission.limbOutput, plan.id));
       const synoptic = maybeRecord(maybeRecord(plan.science)?.synoptic);
-      add(plan.id, 'raster', `/surfaces/${index}`, used, 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
+      const nativePoles = plan.nativeSourcePoles || maybeRecord(plan.science)?.nativePhotographicSampling;
+      add(plan.id, 'raster', `/surfaces/${index}`, used, nativePoles
+        ? 'Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.'
+        : 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
         urls: outputUrls, interpretation: { falseColor: plan.falseColor,
+          ...(nativePoles ? { polarSampling: 'original-photograph-footprint' } : {}),
           ...(surface(plan.id)?.coverageCompletion ? { coverageCompletion: surface(plan.id)?.coverageCompletion } : {}),
           ...(synoptic ? { synoptic: { kind: synoptic.kind, ...(synoptic.fits ? { fits: synoptic.fits } : {}), ...(maybeRecord(synoptic.continuum) ? { observationInterval: synoptic.continuum } : {}) } } : {}) },
       });
     });
     if (raster.polesCombined) add('surface-poles', 'raster', '/polesOutput', [], 'Assemble polar tiles from the interpreted surface maps.', {
-      parents: namedRecords(raster.surfaces).map(plan => plan.id), urls: numbers(raster.densities).map(d => name(raster.polesOutput, d)), lensIds: [],
+      parents: namedRecords(raster.surfaces).map(plan => plan.id), urls: [name(raster.polesOutput)], lensIds: [],
     });
     if (raster.interior) {
       const plan = record(raster.interior);
       add('interior', 'raster', '/interior', [text(plan.source), text(plan.surface)], 'Prepare a schematic core and outer shell from the structural source; pack the cutaway textures.', {
-        urls: [...numbers(raster.densities).flatMap(d => ['outerOutput', 'outerPolesOutput', 'coreOutput', 'corePolesOutput', 'sectionOutput'].map(key => name(plan[key], d))), name(plan.thumbnail, 1)],
+        urls: [...['outerOutput', 'outerPolesOutput', 'coreOutput', 'corePolesOutput', 'sectionOutput'].map(key => name(plan[key])), name(plan.thumbnail)],
         interpretation: { kind: 'schematic-interior', observedInteriorImagery: false },
       });
     }
@@ -85,7 +88,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       });
     }
     if (raster.atmosphere) add('atmosphere', 'raster', '/atmosphere', paths(raster.atmosphere), 'Prepare the declared atmospheric material and observation layers.', {
-      urls: numbers(raster.densities).flatMap(d => ['materialOutput', 'observationOutput', 'lightingOutput'].map(key => name(record(raster.atmosphere)[key], d))), lensIds: [],
+      urls: ['materialOutput', 'observationOutput', 'lightingOutput'].map(key => name(record(raster.atmosphere)[key])), lensIds: [],
     });
   } else if (terrestrial?.kind === 'solid-observation-body') {
     const plans = record(terrestrial.raster), geometry = record(terrestrial.geometry);
@@ -93,8 +96,11 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       // This is the same lensId/consumer join used by prepareSolidRasters.
       const observation = manifest.inputs.filter(input => input.consumers.includes('surfaces') && input.lensId === plan.id);
       add(plan.id, 'terrestrial', `/raster/observations/${index}`, observation.map(input => input.path),
-        'Apply the source-defined validity and registration policy, then prepare the projected observation texture.', {
-          parents: plan.monochromeBase ? [text(plan.monochromeBase)] : [], interpretation: { validity: plan.validity },
+        plan.nativePhotographicSampling
+          ? 'Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.'
+          : 'Apply the source-defined validity and registration policy, then prepare the projected observation texture.', {
+          parents: plan.monochromeBase ? [text(plan.monochromeBase)] : [], interpretation: { validity: plan.validity,
+            ...(plan.nativePhotographicSampling ? {nativePhotographicSampling:plan.nativePhotographicSampling} : {}) },
         });
     });
     for (const kind of ['scientific', 'mosaics', 'observedColors', 'shapeViews', 'surfaceObservations']) {
@@ -162,7 +168,9 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
           ? 'Decode signed terrain heights and coordinate axes, interpolate elevations, apply the authored palette and cartographic relief, and prepare the globe, minimap and unshaded legend.'
           : maybeRecord(map.scientific)?.kind === 'black-marble-radiance'
             ? 'Decode pinned annual snow-free radiance, average native cells by spherical area before applying logarithmic false color, and prepare the globe, poles, minimap, thumbnail and legend. Preserve missing coverage separately from valid zero radiance.'
-          : 'Prepare the global reference map and its declared cloud composite.',
+          : map.nativePhotographicSampling
+            ? 'Sample the original photographic grids at each retained atlas footprint, apply the declared display transfer and cloud composite, and encode the existing texture layout.'
+            : 'Prepare the global reference map and its declared cloud composite.',
         maybeRecord(map.scientific)?.kind === 'gebco-elevation' ? {
           interpretation: { kind: 'modeled-elevation', units: 'm', datum: 'mean sea level',
             grid: record(map.scientific).grid, palette: record(map.scientific).palette, relief: record(map.scientific).relief },
@@ -223,8 +231,9 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
     const directory = text(features.directory);
     const traces = maybeRecord(features.traces);
     add('features', 'features', '', [`${directory}/manifest.json`, ...(features.archive === null ? [] : [`${directory}/${text(features.archive)}`]), text(features.surfaceMap), ...(typeof features.notes === 'string' ? [`${directory}/${features.notes}`] : []), ...(maybeRecord(features.sites) ? [`${directory}/${text(maybeRecord(features.sites)!.document)}`, ...(Array.isArray(maybeRecord(features.sites)!.inputs) ? (maybeRecord(features.sites)!.inputs as unknown[]).map(item => `${directory}/${text(item)}`) : [])] : []),
+        ...(maybeRecord(features.landmarks) ? [`${directory}/${text(maybeRecord(features.landmarks)!.document)}`, ...paths(maybeRecord(features.landmarks)!.inputs)] : []),
         ...(traces ? [`${text(traces.directory)}/manifest.json`, `${text(traces.directory)}/${text(traces.archive)}`] : [])],
-      'Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.', {
+      features.landmarks ? 'Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.' : 'Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.', {
         label: 'Named features', urls: [prefix + text(features.output)], lensIds: [],
         interpretation: { kind: 'nomenclature-centre-points', mapLeftEdgeLongitudeDeg: features.mapLeftEdgeLongitudeDeg, excludedTypeCodes: features.excludedTypeCodes },
       });

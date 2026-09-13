@@ -14,6 +14,8 @@ The controlled-camera holdouts reached maximum residuals of 0.00000842/0.0000087
 
 [Source test definitions](../../../tests/objects/unit/itokawa/source.test.mts).
 
+- **Reader oracle, 2026-09-12:** `tools/oracles/pds3/amica-ddr.py` reads the pinned DDR cube `st_2402987304_v_ddr.img.gz`, its detector FITS and the V flat with pvl, numpy and astropy. `tools/objects/terrestrial-layers/amica-geo.oracle.test.mts` requires the geometry planes to match exactly, angles within 10⁻⁴° after conversion; the DDR image band to equal the vertically reversed detector DN; and the image to equal DN over flat over exposure at 64 sampled pixels.
+
 ## Known problems
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Itokawa (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (this export ships no projection file, so the metadata datum is recorded and the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The frame was confirmed on Mimas and Phobos, where Herschel and Stickney fall at local minima of the shape radius.

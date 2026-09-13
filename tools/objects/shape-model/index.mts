@@ -62,7 +62,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const {map,source:modelSource}=modelRasters, textures:Record<string,string>=modelRasters.textures;
   if (lens) {
     await writeJson(outputDirectory, 'assets', { surfaces: { [lens.id]: {
-      url: textures.surface, url2x: textures.surface, polesUrl: textures.poles, polesUrl2x: textures.poles,
+      url: textures.surface, polesUrl: textures.poles,
     } } });
     const input = source.manifest.inputs.find(input => input.id === lens.source.id);
     if(!input)throw new TypeError(`Source manifest lacks shape texture ${lens.source.id}`);

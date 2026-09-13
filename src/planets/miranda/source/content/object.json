@@ -85,8 +85,8 @@
         "title": "Monochrome mosaic",
         "detail": "Corrected mosaic",
         "thumbnail": "miranda-lens-normal.webp",
-        "surface": "miranda-normal.webp",
-        "poles": "miranda-poles-normal.webp",
+        "surface": "miranda-normal@2x.webp",
+        "poles": "miranda-poles-normal@2x.webp",
         "source": {
           "id": "schenk-2020-miranda-normal",
           "path": "../manifest.json",
@@ -101,8 +101,8 @@
         "title": "Stereo and shading terrain model",
         "detail": "Shaded relief",
         "thumbnail": "miranda-lens-elevation.webp",
-        "surface": "miranda-elevation.webp",
-        "poles": "miranda-poles-elevation.webp",
+        "surface": "miranda-elevation@2x.webp",
+        "poles": "miranda-poles-elevation@2x.webp",
         "source": {
           "id": "schenk-2020-miranda-elevation",
           "path": "../manifest.json",
@@ -153,8 +153,8 @@
         "title": "Geologic map",
         "summary": "Historical interpreted units; degree-scale registration limits. Gray grid: unmapped or conflicting units.",
         "thumbnail": "miranda-lens-geology.webp",
-        "surface": "miranda-geology.webp",
-        "poles": "miranda-poles-geology.webp",
+        "surface": "miranda-geology@2x.webp",
+        "poles": "miranda-poles-geology@2x.webp",
         "falseColor": true,
         "source": {
           "id": "geology-2026-categories",

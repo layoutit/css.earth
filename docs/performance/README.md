@@ -11,6 +11,5 @@ name the recorder and trace identifiers instead.
 | [Opacity dirty publication](opacity-dirty-publication.md) | Writing only changed opacity values |
 | [Point-frame publication](point-frame-publication.md) | Point-field frames during flights and galaxy round trips |
 | [Prepared orbit strokes](prepared-orbit-strokes.md) | Orbit stroke batches and their level-of-detail chords |
-| [Prepared texture levels](prepared-texture-levels.md) | Startup decode once every prepared layer levels by silhouette |
 | [Retained layout boundaries](retained-layout-boundaries.md) | Style containment that keeps invalidation local |
 | [World-context delta publication](world-context-delta-publication.md) | Publishing only changed world-context bodies |

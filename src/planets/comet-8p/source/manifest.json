@@ -174,6 +174,84 @@
         "kind": "local",
         "reason": "Project-authored neutral display material for the Arecibo shape model."
       }
+    },
+    {
+      "id": "comet-8p-features-landmarks",
+      "path": "features/landmarks.json",
+      "expectedBytes": 2066,
+      "expectedSha256": "8c9a1e0d2803bed6d99a69492b943693ff5b5fecf9bf17b25654c17d1fb647ad",
+      "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1911-04897",
+            "role": "material",
+            "evidence": "src/planets/comet-8p/source/features/landmarks.json: per-place coordinates, descriptions and publication references; checked 2026-09-12."
+          }
+        ]
+      }
+    },
+    {
+      "id": "comet-8p-features-manifest",
+      "path": "features/manifest.json",
+      "expectedBytes": 1010,
+      "expectedSha256": "4ec0506d8e02b4fcc8fd5bb42bfb9584c0ac9c0ca2b703b268d335bd92a1a22e",
+      "origin": "Byte pins and source qualifications for the surface-place compilation.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte pins and source qualifications for the surface-place compilation."
+      }
+    },
+    {
+      "id": "comet-8p-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 780,
+      "expectedSha256": "aa1ae823d931b7340cc3151355b2daa2170e235093c5aea59df20023d92a8db4",
+      "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned selection of surface-place source records, datasets and label policy."
+      }
+    },
+    {
+      "id": "comet-8p-presentation-surface-map",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 155,
+      "expectedSha256": "c44248203014bbbaacb4b926763a747f4dc0fce5536d672bbeef191671ba4bac",
+      "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
+      }
     }
   ],
   "generatedIntermediates": [

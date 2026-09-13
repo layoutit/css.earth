@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/pales/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'pales',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/pales/pales-directional-sun.webp",
-      "two": "/scenes/pales/pales-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/pales/pales-shape-surface@2x.webp"
+    "/scenes/pales/pales-shape-surface@2x.webp",
+    "/scenes/pales/pales-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

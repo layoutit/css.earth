@@ -1,10 +1,10 @@
 import type { Exposure, ExposureOptions, ExposureKnobs, StarPresentation } from "@cssearth/engine";
 import type { Vector3 } from './types.js';
-export interface CubicSkyFace {id:string;url:string;url2x:string;highContrastUrl:string;highContrastUrl2x:string;}
+export interface CubicSkyFace {id:string;url:string;highContrastUrl:string;}
 export interface PreparedRetainedStar extends StarPresentation {color:Vector3;direction:Vector3;magnitude:number;name?:string|null;band:string;transform:string;}
 export interface PreparedCatalogueStars {exposure:ExposureOptions & {maxRadiusPx:number};retained:readonly PreparedRetainedStar[];retainedRadiusShareOfHalfSide:number;limitingMagnitude:number;count:number;photographicCount:number;retainedCount:number;bands:readonly unknown[];coexistence:string;}
 export interface CubicSkyPlan {faces:readonly CubicSkyFace[];cameraPitchResponse:number;cameraZoomResponse:number;presentationPitchOffsetDegrees:number;presentationYawOffsetDegrees:number;sceneRegistration?:string;cameraContract?:string|{source:string;sourcePath:string;rotationResponse:number;zoomResponse:number;horizontalFovDegrees:number;focalLengthOverViewportWidth:number;qualification:string};projection?:{cssPerspective:string;horizontalFovDegrees:number;focalLengthOverViewportWidth?:number};catalogueStars?:PreparedCatalogueStars;sun?:{localDirection:Vector3;initialViewDirection:Vector3};}
-export interface CubicSkyMountOptions {host:HTMLElement;plan:CubicSkyPlan;imageDensity:number;objectId:string;requireSun?:boolean;renderContent?:boolean;}
+export interface CubicSkyMountOptions {host:HTMLElement;plan:CubicSkyPlan;objectId:string;requireSun?:boolean;renderContent?:boolean;}
 export type RetainedCubicSky = ReturnType<typeof mountRetainedCubicSky>;
 const exposureKnob = (key:string): key is keyof ExposureKnobs => key in EXPOSURE_KNOBS;
 import { createExposure, exposureLimits, screenFactor, starPresentation, EXPOSURE_KNOBS, POINT_MIN_RADIUS_PX } from "@cssearth/engine";
@@ -12,13 +12,11 @@ import { createExposure, exposureLimits, screenFactor, starPresentation, EXPOSUR
 export function mountRetainedCubicSky({
   host,
   plan,
-  imageDensity,
   objectId,
   requireSun = true,
   renderContent = true,
 }: CubicSkyMountOptions) {
-  if (!(host instanceof HTMLElement) || ![1, 2].includes(imageDensity) ||
-      !/^[a-z][a-z0-9-]*$/u.test(objectId)) {
+  if (!(host instanceof HTMLElement) || !/^[a-z][a-z0-9-]*$/u.test(objectId)) {
     throw new TypeError("Retained cubic sky mount arguments are invalid.");
   }
   const root = document.createElement("div");
@@ -42,17 +40,13 @@ export function mountRetainedCubicSky({
     element.className =
       `planet-cubic-sky-face planet-cubic-sky-${face.id} ` +
       `${objectId}-skybox-face ${objectId}-skybox-${face.id}`;
-    const selectedUrl = imageDensity === 2 ? face.url2x : face.url;
-    const selectedHighContrastUrl = imageDensity === 2
-      ? face.highContrastUrl2x
-      : face.highContrastUrl;
     element.style.setProperty(
       "--planet-cubic-sky-standard-image",
-      `url("${selectedUrl}")`,
+      `url("${face.url}")`,
     );
     element.style.setProperty(
       "--planet-cubic-sky-high-contrast-image",
-      `url("${selectedHighContrastUrl}")`,
+      `url("${face.highContrastUrl}")`,
     );
     orientation.appendChild(element);
   }

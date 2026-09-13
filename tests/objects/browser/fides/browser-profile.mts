@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/fides/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'fides',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/fides/fides-directional-sun.webp",
-      "two": "/scenes/fides/fides-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/fides/fides-shape-surface@2x.webp"
+    "/scenes/fides/fides-shape-surface@2x.webp",
+    "/scenes/fides/fides-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

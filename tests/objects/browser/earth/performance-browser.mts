@@ -97,8 +97,6 @@ return new Promise<MotionSample[]>((resolve) => {
       retainedLeafCount: requiredDiagnostics(window.__earth).dom.retainedLeafCount,
       retainedImageCount:
         requiredDiagnostics(window.__earth).renderStats.textureStats.retainedInteractiveImageCount,
-      selectedPreparedDensity:
-        requiredDiagnostics(window.__earth).renderStats.textureStats.selectedPreparedDensity,
       runningAnimationCount: document.getAnimations()
         .filter(({ playState }) => playState === "running").length,
       longTasks: window.__earthLongTasks,
@@ -214,10 +212,6 @@ return (requiredInput(document.querySelector('input[name="motion"]')).checked &&
   };
   // Preserve the measured report before any budget assertion.
   console.log(JSON.stringify(report, null, 2));
-  assert.equal(
-    report.selectedPreparedDensity,
-    CANONICAL_PREPARED_IMAGE_DENSITY,
-  );
   assert.equal(report.retainedLeafCount,
     PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount);
   const startupRetainedImageCount =

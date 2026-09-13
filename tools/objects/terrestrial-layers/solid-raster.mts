@@ -34,11 +34,12 @@ import { prepareByteObservation } from './observed-image.mts';
 import { preparePds4Observation } from './observed-pds4.mts';
 import { prepareFitsObservation } from './observed-fits.mts';
 import { prepareControlledOrthographicMosaic } from './controlled-orthographic-mosaic.mts';
-import { prepareShapeCameraMosaic, prepareShapeCameraColor } from './shape-camera-mosaic.mts';
+import { prepareShapeCameraMosaic, prepareShapeCameraColor, resolveCameraPhotometry } from './shape-camera-mosaic.mts';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mts';
 import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mts';
 import { loadGeoObservationSurface } from './observed-geo-surface.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';
+import { radialModelForLens } from './radial-models.mts';
 
 export function createRasterEmitter(publicDirectory:string, publicBase:string) {
   return async (filename:string, pipeline:Sharp, encoding:WebpOptions = { lossless: true, effort: 4 }) => {
@@ -144,10 +145,12 @@ export function lensTextureGrid(lens:TextureGridLens, raster:SolidRasterGrid) {
 }
 
 /** Surface composition is source-dependent; the projection/packing is shared. */
-export async function prepareSolidRasters({ sourceDirectory, publicDirectory, outputDirectory, config:input, source, radial }: {sourceDirectory:string;publicDirectory:string;outputDirectory:string;config:unknown;source:Awaited<ReturnType<typeof createSourceManifest>>;radial?:RadialState|null}) {
+interface RasterRadialModel { lensIds: string[]; radial: RadialState; config: {geometry: unknown}; }
+export async function prepareSolidRasters({ sourceDirectory, publicDirectory, outputDirectory, config:input, source, radial, radialModels }: {sourceDirectory:string;publicDirectory:string;outputDirectory:string;config:unknown;source:Awaited<ReturnType<typeof createSourceManifest>>;radial?:RadialState|null;radialModels?:readonly RasterRadialModel[]}) {
   const config=parseSolidRasterConfig(input);
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   const { width, height, bandCount, gutter } = config.raster;
+  const modelForLens = (lensId: string) => radialModels?.length ? radialModelForLens(radialModels, lensId) : null;
   const emit = createRasterEmitter(publicDirectory, config.publicBase), surfaces: SolidSurface[] = [], observations = new Map<string,ObservationRaster>();
   const entries = config.raster.observations.length ? (await source.validateGroup('surfaces')).map(parseSurfaceSource) : [];
   if (entries.length !== config.raster.observations.length ||
@@ -192,7 +195,8 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     const { rgb, missing, grid } = recipe.format === 'controlled-shape-color'
       ? await prepareShapeCameraColor(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain)
       : recipe.format === 'controlled-shape-camera'
-      ? await prepareShapeCameraMosaic(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain)
+      ? await prepareShapeCameraMosaic(sourceDirectory, tiles, recipe, width, height, config.geometry?.radialTerrain,
+        { photometry: await resolveCameraPhotometry(sourceDirectory, source.manifest, recipe) })
       : recipe.format === 'controlled-orthographic'
       ? await prepareControlledOrthographicMosaic(sourceDirectory, tiles, recipe, width, height)
       : await preparePdsByteMosaic(sourceDirectory, tiles, width, height);
@@ -200,14 +204,15 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       sourceIds: tiles.map(tile => tile.id), sourceGrid: grid }));
   }
   for (const recipe of config.raster.surfaceObservations ?? []) {
-    if (!radial?.grid?.closestPoint) throw new Error('Georeferenced observations require source-preserving terrain.');
-    const observation = await loadGeoObservationSurface({ sourceDirectory, source, recipe, radial:{...radial,grid:requireTerrainMesh(radial.grid)}, config:{geometry:shape({radius:number,radiusKm:number,radialTerrain:shape({path:text,simplification:shape({method:text,maximumErrorMeters:number})})})(config.geometry),raster:config.raster} });
-    radial.observationSurfaces ??= new Map();
-    radial.observationSurfaces.set(recipe.id, observation);
+    const model = modelForLens(recipe.id), observationRadial = model?.radial ?? radial, observationConfig = model?.config ?? config;
+    if (!observationRadial?.grid?.closestPoint) throw new Error('Georeferenced observations require source-preserving terrain.');
+    const observation = await loadGeoObservationSurface({ sourceDirectory, source, recipe, radial:{...observationRadial,grid:requireTerrainMesh(observationRadial.grid)}, config:{geometry:shape({radius:number,radiusKm:number,radialTerrain:shape({path:text,simplification:shape({method:text,maximumErrorMeters:number})})})(observationConfig.geometry),raster:config.raster} });
+    observationRadial.observationSurfaces ??= new Map();
+    observationRadial.observationSurfaces.set(recipe.id, observation);
     const { rgb, missing } = observation.preview(width, height);
     const surface = await packSurface(recipe.id, rgb, missing, { ...recipe.metadata, observation: observation.report });
     const eye = observation.report.camera.positionKm;
-    const snapshot = await renderRadialSnapshot({ faces: radial.faces, sampleSurface: observation.samplePoint, size: 96,
+    const snapshot = await renderRadialSnapshot({ faces: observationRadial.faces, sampleSurface: observation.samplePoint, size: 96,
       longitudeDegrees: Math.atan2(eye[1], eye[0]) * 180 / Math.PI,
       latitudeDegrees: Math.atan2(eye[2], Math.hypot(eye[0], eye[1])) * 180 / Math.PI, ambient: .4, diffuse: .6 });
     surface.thumbnail = await emit(`${config.namespace}-${recipe.id}-thumbnail.webp`, sharp(snapshot).resize(48, 48)
@@ -215,6 +220,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     surfaces.push(surface);
   }
   for (const lens of config.raster.scientific ?? []) {
+    const model = modelForLens(lens.id), scienceRadial = model?.radial ?? radial, scienceConfig = model?.config ?? config;
     await source.validateGroup(lens.consumer);
     for(const mask of lens.qualityMasks??[])if(!source.manifest.inputs.some(input=>input.path===mask.path&&input.consumers.includes(lens.consumer)))
       throw new Error(`Scientific quality mask ${mask.path} lacks a pinned source in ${lens.consumer}.`);
@@ -229,7 +235,9 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       return {id: input.id, sha256: input.expectedSha256, width: requireRecord(input).width, height: requireRecord(input).height};
     });
     const renderedMeshPath = lens.format === 'vtk-cell-categories' ? requireString(lens.surfaceSampling?.renderedMeshPath) : ['facet-scalars', 'obj-uv-fits'].includes(lens.format) ? lens.meshPath : lens.path;
-    if (lens.surfaceSampling && (!radial?.grid?.closestPoint || (lens.format !== 'pds3-scalar-map' && renderedMeshPath !== config.geometry?.radialTerrain?.path))) {
+    const terrain = lens.surfaceSampling ? requireRecord(scienceConfig.geometry).radialTerrain : undefined;
+    const terrainPath = terrain === undefined ? undefined : requireString(requireRecord(terrain).path);
+    if (lens.surfaceSampling && (!scienceRadial?.grid?.closestPoint || (lens.format !== 'pds3-scalar-map' && renderedMeshPath !== terrainPath))) {
       throw new Error('Source-surface science requires the actual rendered source mesh.');
     }
     if (lens.format === 'pds3-scalar-map') {
@@ -249,11 +257,11 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       if (lens.format === 'image-plane-dem') await source.validatePath(path);
     }
     // Reuse the already loaded geometry BVH, especially for large OLA meshes.
-    const raster = await loadScienceSurface(sourceDirectory, lens, lens.surfaceSampling && radial ? requireTerrainMesh(radial.grid) : undefined);
+    const raster = await loadScienceSurface(sourceDirectory, lens, lens.surfaceSampling && scienceRadial ? requireTerrainMesh(scienceRadial.grid) : undefined);
     if (lens.surfaceSampling) {
-      if (!radial) throw new Error('Source-surface science requires retained terrain.');
-      radial.scientificSurfaces ??= new Map();
-      radial.scientificSurfaces.set(lens.id, raster);
+      if (!scienceRadial) throw new Error('Source-surface science requires retained terrain.');
+      scienceRadial.scientificSurfaces ??= new Map();
+      scienceRadial.scientificSurfaces.set(lens.id, raster);
     }
     const grid = lensTextureGrid(lens, config.raster);
     const preview = scientificPreviewGrid(lens, { ...config.raster, ...grid });

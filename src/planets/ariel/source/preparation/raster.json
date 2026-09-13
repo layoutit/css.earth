@@ -7,14 +7,10 @@
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "ariel-poles-{id}{suffix}.webp",
+  "polesOutput": "ariel-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "cssariel-prepared-assets@1"
   },
@@ -25,7 +21,7 @@
   "surfaces": [
     {
       "id": "normal",
-      "output": "ariel-{id}{suffix}.webp",
+      "output": "ariel-{id}@2x.webp",
       "thumbnail": "ariel-lens-{id}.webp",
       "source": "observations/aumap-cyl-180180.cub.gz",
       "falseColor": false,
@@ -57,12 +53,16 @@
             0,
             3000
           ]
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     },
     {
       "id": "elevation",
-      "output": "ariel-{id}{suffix}.webp",
+      "output": "ariel-{id}@2x.webp",
       "thumbnail": "ariel-lens-{id}.webp",
       "source": "science/audem-ZTL-cyl-180180.cub.gz",
       "falseColor": true,
@@ -128,8 +128,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "ariel-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "ariel-lighting-{density}x-billboard.webp",
+    "rowOutput": "ariel-lighting-2x-row-{row}.webp",
+    "billboardOutput": "ariel-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

@@ -50,7 +50,7 @@ export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory,
     const observations=parsePolarPreview(rawObservations);
     const width = observations.dimensions.width * 2, height = observations.dimensions.height * 2;
     const layout = { width, height, bands: latitudeRasterBands(observations.packing.latitudeBoundsDegrees, height), gutter: observations.packing.gutter * 2 };
-    for (const lens of observations.lenses) yield { id: lens.id, raster: await packed(lens.files.surface2x, layout) };
+    for (const lens of observations.lenses) yield { id: lens.id, raster: await packed(lens.files.surface, layout) };
   }
   if (rawObservations?.schema === 'cssearth-observed-surfaces@1') {
     const observations=parseObservedPreview(rawObservations);

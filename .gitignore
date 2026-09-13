@@ -41,6 +41,10 @@ src/planets/europa/source/photometry/*.lbl
 src/planets/*/source/**/*.ttf
 src/planets/*/source/**/*.webp
 src/planets/*/source/**/*.zip
+# Binary SPICE kernels are restored through each body's acquisition plan; text kernels stay beside the body.
+src/planets/*/source/**/*.bsp
+src/planets/*/source/**/*.bc
+src/planets/*/source/**/*.bds
 
 # Accepted Saturn source-of-truth inputs without a direct acquisition URL.
 !src/planets/saturn/source/cassini-pia21611.jpg
@@ -217,3 +221,7 @@ src/planets/*/source/**/*.bpc
 /src/planets/tethys/source/science/b2-intake/tethysshapeassessment.pdf
 /src/planets/titan/source/science/b2-intake/topo_4PPD.cub
 /src/planets/titan/source/science/b2-intake/topo_4PPD_interp.cub
+
+# Binary kernels in shared SPICE kernel banks are restored by tools/spice/kernel-bank.mts; text kernels are committed.
+src/spice/**/*.bsp
+src/spice/**/*.bc

@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "deimos",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "001060de212147edd454ff7d325ce83e0ef7ba888d546fc4ab8c9adf91717790"
+    "sha256": "6d52d35022823235d4744699d8ee2fb130012b097e4454f9e5197ef0101b47ff"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c55768b273de837e73cfbd6c0845dafd8ffaf1ff859d51b14ae9be82d0a4f3db",
+      "sha256": "b014c49a47cd0b550c2118f7770021d4516ce7d49311226de8b7071255018efe",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -38,6 +38,10 @@
                 "kind": "image-monochrome-no-data",
                 "noData": null,
                 "centerLongitude": 0
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           ],
@@ -615,7 +619,7 @@
       "sha256": "90ff4ac7f23ece9255774cf72f9ed9ca5be861d9f2aa136977fc2d460141ad6d",
       "bytes": 4948381,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -660,7 +664,7 @@
       "sha256": "1572a49fa5dbe08eaf6f340ecd5c92f0cfcc41ceaae4c232b6a5d30bde53a68b",
       "bytes": 3530934,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -698,7 +702,7 @@
       "sha256": "ddb6fdcca05fab3ce471999ded12b0f532d28274ad983e261d85e5d1f8a4c4f1",
       "bytes": 26366556,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -725,7 +729,7 @@
       "sha256": "47f2a22a4fb4108758d921f49bcea52756c31515e4473657b7e5005b63d231f7",
       "bytes": 11990,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -745,7 +749,7 @@
       "sha256": "189ecc12549ac04c847cc2e2bf7b060e64a18dc01ad39a13f3ae0579335711e9",
       "bytes": 1004,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -771,7 +775,7 @@
       "sha256": "9c81729a25ba60d24b34174d9d578d13f164894dbd88821124cd57dbe57f067c",
       "bytes": 42393,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -798,7 +802,7 @@
       "sha256": "8faeb7e748cac8fda155b3cc657fe7d6b8e176f9a81d12a5ff978c6ae649fffc",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -825,7 +829,7 @@
       "sha256": "3381847add3b9ca15bce9d5d487792cab0ecd270708ab7348e5290ee8917aa7e",
       "bytes": 1478,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -837,7 +841,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask."
       ],
@@ -852,6 +856,10 @@
           "kind": "image-monochrome-no-data",
           "noData": null,
           "centerLongitude": 0
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -863,13 +871,13 @@
           "url": "/scenes/deimos/deimos-normal-thumbnail.webp",
           "bytes": 2700,
           "sha256": "402211c01217e09af3ead77b049d3e31c74bafb46f76a108e938c9e50b6d8f5f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-normal-surface@2x.webp",
-          "bytes": 1669392,
-          "sha256": "6ad790e385e9701c2d39de34c5c577b8fc69f5210b0413006901651d8f46e033",
-          "verification": "bytes-verified"
+          "bytes": 1611872,
+          "sha256": "64882bfe4920d016dd5c918b1d727a03a0d0e0f08ddbc5b6d2becd5864419123",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -902,19 +910,19 @@
           "url": "/scenes/deimos/deimos-elevation-thumbnail.webp",
           "bytes": 4836,
           "sha256": "baaaf4e3351c480ff7eb6a291d751e5fb682446536367e95eb554a0ac9ad8b38",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-elevation-surface@2x.webp",
           "bytes": 785732,
           "sha256": "613db32f3dc4761d77932d1466ebd808e9dd7c82e7ac329e4aa7cf569961a4f5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -947,19 +955,19 @@
           "url": "/scenes/deimos/deimos-albedo-thumbnail.webp",
           "bytes": 666,
           "sha256": "63b57ea31454100e8ebe65c595d0551fa5dd65f48850d009270afd9ef5a23ffd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-albedo-legend.webp",
           "bytes": 192,
           "sha256": "84c28272b31f82773de272bfd6760dd36f6633203510f00fd80df0defb229c44",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-albedo-surface@2x.webp",
           "bytes": 1809984,
           "sha256": "4f0f6883ed631ad3366c5f506a191e0f2b13e58a3f157f51ff12e8fae366c550",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -992,19 +1000,19 @@
           "url": "/scenes/deimos/deimos-slope-thumbnail.webp",
           "bytes": 790,
           "sha256": "a593fd3f599edf0a54948423a53816e8c77596f063b19cb5f73190071826d331",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-slope-legend.webp",
           "bytes": 232,
           "sha256": "280a1b9142a95b4915e78f4dad454eb491ea0e9fbb6ffb6c721dd6fbf4b3b987",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/deimos/deimos-slope-surface@2x.webp",
           "bytes": 2377332,
           "sha256": "489d9c879f4b96f744ee80f4f1ee87ad8454f52c09dff3e3982ee3b94dad3b27",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1063,8 +1071,8 @@
         {
           "url": "/scenes/deimos/deimos-features.json",
           "bytes": 3217,
-          "sha256": "fb10c6f199ce9d415a293d9a8f396881af6589236dc7d61b944e0819685dba60",
-          "verification": "bytes-verified"
+          "sha256": "426174a29b531f9c5776dc1c78cd1fc6e456a4d64f379f154bc9f013d653587c",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

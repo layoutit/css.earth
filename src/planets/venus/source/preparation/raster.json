@@ -7,14 +7,10 @@
   "height": 512,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "venus-poles-{id}{suffix}.webp",
+  "polesOutput": "venus-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "cssvenus-prepared-assets@1"
   },
@@ -27,45 +23,40 @@
       "id": "clouds",
       "source": "surface/venus-clouds.jpg",
       "falseColor": false,
-      "output": "venus-{id}{suffix}.webp",
+      "output": "venus-{id}@2x.webp",
       "thumbnail": "venus-lens-{id}.webp",
       "exposure": [
         1.4,
         2.2,
         0.9
-      ]
+      ],
+      "nativeSourcePoles": true
     },
     {
       "id": "radar",
       "source": "surface/venus-magellan-color-wms.png",
       "falseColor": true,
-      "output": "venus-{id}{suffix}.webp",
+      "output": "venus-{id}@2x.webp",
       "thumbnail": "venus-lens-{id}.webp",
       "exposure": [
         1.4,
         2.2,
         0.9
       ],
-      "sharpen": [
-        0.45,
-        0.65
-      ]
+      "sharpen": 0.65
     },
     {
       "id": "elevation",
       "source": "surface/venus-magellan-topography-wms.png",
       "falseColor": true,
-      "output": "venus-{id}{suffix}.webp",
+      "output": "venus-{id}@2x.webp",
       "thumbnail": "venus-lens-{id}.webp",
       "exposure": [
         1.4,
         2.2,
         0.9
       ],
-      "sharpen": [
-        0.45,
-        0.65
-      ]
+      "sharpen": 0.65
     }
   ],
   "atmosphere": {
@@ -92,8 +83,8 @@
       -0.18,
       0.08
     ],
-    "materialOutput": "venus-material{suffix}.webp",
-    "observationOutput": "venus-observation-material{suffix}.webp",
-    "lightingOutput": "venus-lighting{suffix}.webp"
+    "materialOutput": "venus-material@2x.webp",
+    "observationOutput": "venus-observation-material@2x.webp",
+    "lightingOutput": "venus-lighting@2x.webp"
   }
 }

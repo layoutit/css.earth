@@ -114,7 +114,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
         resources = createPreparedResidency({ ...resourceConfiguration, createImage() { return new ControlledImage(definition, jobs); } });
         return resources;
       },
-      mountSky(skyOptions) { events.push(`sky:${skyOptions.imageDensity}`); const root = f.document.createElement("div") as unknown as HTMLDivElement; return { root, cube: root, orientation: root, starGroup: null, retainedStarCount: 0, catalogueStars: null, setStarExposure: () => null, starExposure: () => null, faceCount: 0, setOrientation() {}, destroy() { events.push("remove:sky"); } } satisfies Sky; },
+      mountSky() { events.push("sky"); const root = f.document.createElement("div") as unknown as HTMLDivElement; return { root, cube: root, orientation: root, starGroup: null, retainedStarCount: 0, catalogueStars: null, setStarExposure: () => null, starExposure: () => null, faceCount: 0, setOrientation() {}, destroy() { events.push("remove:sky"); } } satisfies Sky; },
       mountSun() { events.push("sun"); const root = f.document.createElement("s") as unknown as HTMLElement; return { root, setViewDirection: () => ({ classification: "behind-camera", visible: false, centerNdc: null }), state: () => ({ classification: "behind-camera", visible: false, centerNdc: null }), destroy() { events.push("remove:sun"); } } satisfies Sun; },
       createOrbit(orbitConfiguration) {
         orbitArguments = orbitConfiguration; orbitConfiguration.onPublish?.(publication);
@@ -146,7 +146,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
 test("one mount owns the actual prepared tree, startup, celestial layers, readiness and playback", async t => {
   const h = harness(); t.after(h.restore); h.runtime.resume(); h.runtime.pause(); await h.complete();
   assert.equal(h.native.playState, "paused"); assert.equal(h.native.currentTime, 0);
-  assert.ok(h.events.includes("sky:2")); assert.equal(h.events.at(-1), "ready");
+  assert.ok(h.events.includes("sky")); assert.equal(h.events.at(-1), "ready");
   // The harness records two typed celestial layer roots in addition to the prepared presentation tree.
   assert.equal(h.created.length, moonDefinition.tree.nodes.length + 2);
   assert.equal(h.selection().stats().commits, 1);

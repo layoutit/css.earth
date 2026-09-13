@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/unitas/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'unitas',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/unitas/unitas-directional-sun.webp",
-      "two": "/scenes/unitas/unitas-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/unitas/unitas-shape-surface@2x.webp"
+    "/scenes/unitas/unitas-shape-surface@2x.webp",
+    "/scenes/unitas/unitas-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

@@ -37,7 +37,7 @@
     80
   ],
   "surface": {
-    "url": "/scenes/jupiter/jupiter-surface.webp",
+    "url": "/scenes/jupiter/jupiter-surface@2x.webp",
     "width": 2048,
     "height": 1024,
     "gutter": 16,
@@ -50,7 +50,7 @@
     "polarOverlap": 0.02
   },
   "polar": {
-    "url": "/scenes/jupiter/jupiter-poles.webp",
+    "url": "/scenes/jupiter/jupiter-poles@2x.webp",
     "tileSize": 256,
     "boundaryLatitudeDegrees": 80,
     "overlayLatitudeDegrees": 64,

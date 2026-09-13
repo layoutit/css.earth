@@ -6,14 +6,13 @@ import type {PagedAssetConfiguration, SurfaceAssetsConfiguration, SurfaceMapInpu
 import type {Cutaway} from './contracts.mts';
 import type {InteriorSource} from './scene-contract.mts';
 import type {createAtmospherePreparation} from './atmosphere.mts';
-import type {createPagedSurfaceRaster} from './surface-raster.mts';
-import type {preparePagedEllipsoidScene} from './scene.mts';
+import type {createPagedSurfaceRaster, NativePhotographicCloudComposite, PagedSurfaceRasterPlan} from './surface-raster.mts';
 import {readJsonSource, requireFiniteNumber, requireString} from '../../source-values.mts';
 import {parseInteriorSource, parseMapFocusBindings} from './source-contract.mts';
 type AtmospherePreparation = ReturnType<typeof createAtmospherePreparation>;
 type AtmosphereModel = Awaited<ReturnType<AtmospherePreparation['readAtmosphereModel']>>;
 type Tomography = Awaited<ReturnType<typeof readMantleTomography>>;
-interface SphereAssetInput extends RasterInfo {data: Buffer; density: number; canonical?: boolean; outputRoot?: string; name: string; bandCount: number; polarCapBandSpan?: number; projectiveSurface?: boolean; longitudeOffsetDegrees: number; webp?: WebpOptions; cutaway?: Cutaway;}
+interface SphereAssetInput extends RasterInfo {data: Buffer; density: number; canonical?: boolean; outputRoot?: string; name: string; bandCount: number; polarCapBandSpan?: number; projectiveSurface?: boolean; longitudeOffsetDegrees: number; webp?: WebpOptions; cutaway?: Cutaway; nativePhotographicClouds?: NativePhotographicCloudComposite; nativePhotographicSampling?: boolean; nativePhotographicDisplayGamma?: number;}
 interface MaterialFrameInput {size: number; scenePitchDegrees: number; role: string; atmosphereModel: AtmosphereModel; shadowless?: boolean; phaseFrame?: number;}
 import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -28,13 +27,21 @@ import { readMantleTomography, tomographyLegend } from "./tomography.mts";
 import { applyDisplayGamma } from "./display-tone.mts";
 
 
-export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all' }: {config: PagedAssetConfiguration; sourceDirectory: string; publicDirectory: string; surfaceRasterPlan: ReturnType<typeof preparePagedEllipsoidScene>['surfaceRasterPlan']; atmosphere: AtmospherePreparation; atmosphereModel: AtmosphereModel; raster: ReturnType<typeof createPagedSurfaceRaster>; mode?: string}) {
+export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all', surfaceMapNames }: {config: PagedAssetConfiguration; sourceDirectory: string; publicDirectory: string; surfaceRasterPlan: PagedSurfaceRasterPlan; atmosphere?: AtmospherePreparation; atmosphereModel?: AtmosphereModel; raster: ReturnType<typeof createPagedSurfaceRaster>; mode?: string; surfaceMapNames?: readonly string[]}) {
 const { bakeSurfaceRaster, surfacePageUrls } = raster;
-const { MATERIAL_FRAMES_PER_SHARD, MATERIAL_TILE_SIZE, prepareAtmosphereMaterialFrame } = atmosphere;
-const ATMOSPHERE_MODEL = atmosphereModel;
+const requireMaterialPreparation=()=>{
+  if(!atmosphere||!atmosphereModel)throw new Error('Paged ellipsoid material preparation requires an atmosphere model.');
+  return {atmosphere,atmosphereModel};
+};
 const PUBLIC_ROOT = publicDirectory;
 const surfaceOutputRoot = publicDirectory;
 const surfaceQuality = config.surface.quality;
+const surfaceMaps = surfaceMapNames
+  ? config.surface.maps.filter(map => surfaceMapNames.includes(map.name))
+  : config.surface.maps;
+if (surfaceMapNames && surfaceMaps.length !== new Set(surfaceMapNames).size) {
+  throw new Error('Paged ellipsoid preparation requested an unknown surface map.');
+}
 const source = (path: string) => resolve(sourceDirectory,path);
 const produced = new Set<string>();
 const output = (path: string) => { produced.add(`${config.publicBase}${path}`); return resolve(publicDirectory,path); };
@@ -44,14 +51,18 @@ if (mode === 'interior') {
   return { assets: [...produced].sort() };
 }
 if (mode === 'shadowless') {
-  for (const density of [1, 2]) await prepareShadowlessMaterial(MATERIAL_TILE_SIZE * density, density === 2 ? '@2x' : '');
+  const {atmosphere}=requireMaterialPreparation();
+  await prepareShadowlessMaterial(atmosphere.MATERIAL_TILE_SIZE * 2);
   return { assets: [...produced].sort() };
 }
 if (mode !== 'materials') {
   const inputs = new Map<string, string | Buffer>();
-  const bindings = parseMapFocusBindings(await readJsonSource(source('content/lens-bindings.json')));
-  const focusByMap = new Map(bindings.controls.map(lens => [lens.surfacePagePrefix, lens.focus]));
-  for (const map of config.surface.maps) {
+  const focusByMap = new Map<string, {longitude?: number} | undefined>();
+  if (mode !== 'maps') {
+    const bindings = parseMapFocusBindings(await readJsonSource(source('content/lens-bindings.json')));
+    for (const lens of bindings.controls) if(lens.surfacePagePrefix) focusByMap.set(lens.surfacePagePrefix,lens.focus);
+  }
+  for (const map of surfaceMaps) {
     let input: string | Buffer = source(map.path);
     if (map.scientific) {
       if (map.scientific.kind === "coraltemp-anomaly") {
@@ -71,15 +82,15 @@ if (mode !== 'materials') {
       } else throw new TypeError("Unknown scientific surface source");
     }
     inputs.set(map.name, input);
-    if (mode !== 'thumbnails') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,displayGamma:map.displayGamma,kernel:map.scientific?"nearest":undefined,webp:map.webp});
+    if (mode !== 'thumbnails') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,displayGamma:map.displayGamma,nativePhotographicSampling:map.nativePhotographicSampling,kernel:map.scientific?"nearest":undefined,webp:map.webp});
   }
   if (mode === 'thumbnails') await prepareInteriorAssets({ exterior: false, thumbnailsOnly: true });
   else if (mode !== 'maps') await prepareInteriorAssets();
-  for (const map of config.surface.maps) {
+  if (mode !== 'maps') for (const map of surfaceMaps) {
     let input = inputs.get(map.name);
     if (!input) throw new Error(`Prepared map input is missing: ${map.name}`);
     if (map.compositeClouds || map.displayGamma !== undefined) {
-      const preview = await preparePagedSurfaceMap({ config: { ...config, surface: { ...config.surface, width: 2048, height: 1024 } }, sourceDirectory, map });
+      const preview = await preparePagedSurfaceMap({ config: { ...config, surface: { ...config.surface, width: 2048, height: 1024 } }, sourceDirectory, map: { ...map, nativePhotographicSampling: false } });
       input = await sharp(preview.data, { raw: preview.info }).png().toBuffer();
     }
     await prepareLensThumbnail(input,map.thumbnail,focusByMap.get(map.name)?.longitude ?? null,map.thumbnailRegion);
@@ -88,11 +99,14 @@ if (mode !== 'materials') {
 if (mode !== 'surfaces' && mode !== 'thumbnails' && mode !== 'maps') await prepareMaterialBanks();
 return { assets: [...produced].sort() };
 async function prepareMap(input: string | Buffer, name: string, {
-  compositeClouds = false, displayGamma, kernel = "lanczos3", webp = {},
-}: {compositeClouds?: boolean; displayGamma?: number; kernel?: ResizeKernel; webp?: WebpOptions} = {}) {
-  const { data: preparedData, info } = await preparePagedSurfaceMap({
-    config, sourceDirectory, map: { path: input, compositeClouds, displayGamma }, kernel,
+  compositeClouds = false, displayGamma, nativePhotographicSampling = false, kernel = "lanczos3", webp = {},
+}: {compositeClouds?: boolean; displayGamma?: number; nativePhotographicSampling?: boolean; kernel?: ResizeKernel; webp?: WebpOptions} = {}) {
+  const prepared = await preparePagedSurfaceMap({
+    config, sourceDirectory, map: { path: input, compositeClouds, displayGamma, nativePhotographicSampling }, kernel,
   });
+  const { data: preparedData, info } = prepared;
+  const nativePhotographicClouds = 'nativePhotographicClouds' in prepared
+    ? prepared.nativePhotographicClouds : undefined;
   const { width, height } = info;
   await writeSphereAssets({
     data: preparedData,
@@ -107,6 +121,9 @@ async function prepareMap(input: string | Buffer, name: string, {
     polarCapBandSpan: 1,
     projectiveSurface: true,
     longitudeOffsetDegrees: 0,
+    nativePhotographicSampling,
+    nativePhotographicClouds,
+    nativePhotographicDisplayGamma: displayGamma,
     webp: { quality: surfaceQuality, smartSubsample: true, ...webp },
   });
 }
@@ -115,12 +132,14 @@ async function prepareMap(input: string | Buffer, name: string, {
 async function writeSphereAssets({ data, width, height, channels, density,
   canonical = false, outputRoot = PUBLIC_ROOT, name, bandCount,
   polarCapBandSpan = 1, projectiveSurface = false,
-  longitudeOffsetDegrees, webp, cutaway }: SphereAssetInput) {
-  const suffix = canonical ? "" : density === 2 ? "@2x" : "";
+  longitudeOffsetDegrees, webp, cutaway, nativePhotographicClouds,
+  nativePhotographicSampling = false, nativePhotographicDisplayGamma = 1 }: SphereAssetInput) {
+  // Canonical surface maps are paged at the atlas density; other sphere assets carry two texels per layout pixel.
+  const suffix = canonical ? "" : "@2x";
   let surfaceData = data;
   let surfaceWidth = width;
   let surfaceHeight = height;
-  if (projectiveSurface) {
+  if (projectiveSurface && !nativePhotographicSampling) {
     surfaceWidth = 2048 * density;
     surfaceHeight = 1024 * density;
     if (surfaceWidth !== width || surfaceHeight !== height) {
@@ -135,7 +154,7 @@ async function writeSphereAssets({ data, width, height, channels, density,
     for (const [page, url] of urls.entries()) {
       const raster = bakeSurfaceRaster(surfaceData, {
         width: surfaceWidth, height: surfaceHeight, channels,
-      }, surfaceRasterPlan.cells, surfaceWidth / 1024, page);
+      }, surfaceRasterPlan.cells, density * 2, page, nativePhotographicClouds, nativePhotographicDisplayGamma);
       await sharp(raster.data, { raw: raster })
         .webp({ ...webp, alphaQuality: 100 })
         .toFile(output(basename(url)));
@@ -155,7 +174,7 @@ async function writeSphereAssets({ data, width, height, channels, density,
     boundaryLatitudeRadians: Math.PI / 2 -
       Math.PI / bandCount * polarCapBandSpan,
     longitudeOffsetRadians: longitudeOffsetDegrees * Math.PI / 180,
-  });
+  }, nativePhotographicClouds, nativePhotographicDisplayGamma);
   if (cutaway) cutInteriorPoles(poles, polarTileSize, cutaway);
   await sharp(poles, { raw: {
       width: polarTileSize * 4,
@@ -184,7 +203,8 @@ function orientLatitudeBands(data: Buffer, { width, height, channels }: RasterIn
   return output;
 }
 
-function preparePolarAtlas(data: Uint8Array, { width, height, channels, tileSize, boundaryLatitudeRadians, longitudeOffsetRadians }: RasterInfo & {tileSize: number; boundaryLatitudeRadians: number; longitudeOffsetRadians: number}) {
+function preparePolarAtlas(data: Uint8Array, { width, height, channels, tileSize, boundaryLatitudeRadians, longitudeOffsetRadians }: RasterInfo & {tileSize: number; boundaryLatitudeRadians: number; longitudeOffsetRadians: number},
+  nativeClouds?: NativePhotographicCloudComposite, nativeDisplayGamma = 1) {
   const output = Buffer.alloc(tileSize * 4 * tileSize * 4);
   const supersampling = 2;
   const sampleCount = supersampling ** 2;
@@ -215,7 +235,7 @@ function preparePolarAtlas(data: Uint8Array, { width, height, channels, tileSize
             longitude = ((longitude % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
             const sourceX = longitude / (Math.PI * 2) * width - 0.5;
             const sourceY = (Math.PI / 2 - latitude) / Math.PI * height - 0.5;
-            const rgba = sampleBilinear(data, { width, height, channels }, sourceX, sourceY);
+            const rgba = sampleBilinear(data, { width, height, channels }, sourceX, sourceY, nativeClouds, false, nativeDisplayGamma);
             const alpha = rgba[3] / 255;
             for (let channel = 0; channel < 3; channel += 1) premultiplied[channel] += rgba[channel] * alpha;
             alphaTotal += alpha;
@@ -232,7 +252,8 @@ function preparePolarAtlas(data: Uint8Array, { width, height, channels, tileSize
   return output;
 }
 
-function sampleBilinear(data: Uint8Array, { width, height, channels }: RasterInfo, x: number, y: number) {
+function sampleBilinear(data: Uint8Array, { width, height, channels }: RasterInfo, x: number, y: number,
+  nativeClouds?: NativePhotographicCloudComposite, preservePrecision = false, nativeDisplayGamma = 1) {
   const x0 = Math.floor(x);
   const y0 = Math.max(0, Math.min(height - 1, Math.floor(y)));
   const x1 = x0 + 1;
@@ -248,12 +269,26 @@ function sampleBilinear(data: Uint8Array, { width, height, channels }: RasterInf
     if (channel >= channels) continue;
     const top = sample(x0, y0, channel) * (1 - tx) + sample(x1, y0, channel) * tx;
     const bottom = sample(x0, y1, channel) * (1 - tx) + sample(x1, y1, channel) * tx;
-    rgba[channel] = Math.round(top * (1 - ty) + bottom * ty);
+    const sampled = top * (1 - ty) + bottom * ty;
+    const adjusted = nativeDisplayGamma === 1 ? sampled : Math.round(255 * (Math.round(sampled) / 255) ** (1 / nativeDisplayGamma));
+    rgba[channel] = nativeClouds || preservePrecision ? adjusted : Math.round(adjusted);
+  }
+  if (nativeClouds) {
+    const cloudX = (x + .5) / width * nativeClouds.width - .5;
+    const cloudY = (y + .5) / height * nativeClouds.height - .5;
+    const cloud = sampleBilinear(nativeClouds.data, nativeClouds, cloudX, cloudY, undefined, true);
+    const luminance = cloud[0] * .2126 + cloud[1] * .7152 + cloud[2] * .0722;
+    const alpha = Math.max(0, Math.min(nativeClouds.maximumAlpha,
+      (luminance - nativeClouds.threshold) / 255 * nativeClouds.scale));
+    for (let channel = 0; channel < 3; channel += 1) rgba[channel] =
+      rgba[channel] * (1 - alpha) + nativeClouds.color[channel] * alpha;
   }
   return rgba;
 }
 
 async function prepareMaterialBanks() {
+  const {atmosphere,atmosphereModel}=requireMaterialPreparation();
+  const {MATERIAL_FRAMES_PER_SHARD,MATERIAL_TILE_SIZE}=atmosphere;
   const frameCount = config.material.frameCount;
   const columns = Math.sqrt(MATERIAL_FRAMES_PER_SHARD);
   const rows = columns;
@@ -262,58 +297,55 @@ async function prepareMaterialBanks() {
     throw new Error("Paged ellipsoid material shards require a square frame layout.");
   }
   const defaultFrame = Math.round((65 - 40) / 65 * (frameCount - 1));
+  // Material frames carry two texels per layout pixel.
+  const size = MATERIAL_TILE_SIZE * 2;
+  const gutter = 4;
+  const stride = size + gutter * 2;
   for (const role of ["lighting", "atmosphere"]) {
-    for (const density of [1, 2]) {
-      const suffix = density === 2 ? "@2x" : "";
-      const size = MATERIAL_TILE_SIZE * density;
-      const gutter = 2 * density;
-      const stride = size + gutter * 2;
-      const defaultRgba = renderMaterialFrame({
-        size,
-        scenePitchDegrees: 40,
-        role,
-        atmosphereModel: ATMOSPHERE_MODEL,
-      });
-      await sharp(defaultRgba, {
-        raw: { width: size, height: size, channels: 4 },
+    const defaultRgba = renderMaterialFrame({
+      size,
+      scenePitchDegrees: 40,
+      role,
+      atmosphereModel,
+    });
+    await sharp(defaultRgba, {
+      raw: { width: size, height: size, channels: 4 },
+    }).webp({ lossless: true }).toFile(output(
+      `${config.namespace}-${role}-default@2x.webp`,
+    ));
+    if (role === "lighting") {
+      await prepareShadowlessMaterial(size);
+    }
+    for (let shardIndex = 0; shardIndex < shardCount; shardIndex += 1) {
+      const shardWidth = stride * columns;
+      const shardHeight = stride * rows;
+      const shard = Buffer.alloc(shardWidth * shardHeight * 4);
+      for (let frameOffset = 0;
+        frameOffset < MATERIAL_FRAMES_PER_SHARD;
+        frameOffset += 1) {
+        const frameIndex = shardIndex * MATERIAL_FRAMES_PER_SHARD +
+          frameOffset;
+        const columnIndex = frameOffset % columns;
+        const tileRowIndex = Math.floor(frameOffset / columns);
+        const scenePitchDegrees = 65 - frameIndex /
+          (frameCount - 1) * 65;
+        const frame = renderMaterialFrame({
+          size,
+          scenePitchDegrees,
+          phaseFrame: frameIndex,
+          role,
+          atmosphereModel,
+        });
+        blitRgba(frame, size, size, shard, shardWidth, shardHeight, {
+          left: columnIndex * stride + gutter,
+          top: tileRowIndex * stride + gutter,
+        });
+      }
+      await sharp(shard, {
+        raw: { width: shardWidth, height: shardHeight, channels: 4 },
       }).webp({ lossless: true }).toFile(output(
-        `${config.namespace}-${role}-default${suffix}.webp`,
+        `${config.namespace}-${role}-row-${String(shardIndex).padStart(2, "0")}@2x.webp`,
       ));
-      if (role === "lighting") {
-        await prepareShadowlessMaterial(size, suffix);
-      }
-      for (let shardIndex = 0; shardIndex < shardCount; shardIndex += 1) {
-        const shardWidth = stride * columns;
-        const shardHeight = stride * rows;
-        const shard = Buffer.alloc(shardWidth * shardHeight * 4);
-        for (let frameOffset = 0;
-          frameOffset < MATERIAL_FRAMES_PER_SHARD;
-          frameOffset += 1) {
-          const frameIndex = shardIndex * MATERIAL_FRAMES_PER_SHARD +
-            frameOffset;
-          const columnIndex = frameOffset % columns;
-          const tileRowIndex = Math.floor(frameOffset / columns);
-          const scenePitchDegrees = 65 - frameIndex /
-            (frameCount - 1) * 65;
-          const frame = renderMaterialFrame({
-            size,
-            scenePitchDegrees,
-            phaseFrame: frameIndex,
-            role,
-            atmosphereModel: ATMOSPHERE_MODEL,
-          });
-          blitRgba(frame, size, size, shard, shardWidth, shardHeight, {
-            left: columnIndex * stride + gutter,
-            top: tileRowIndex * stride + gutter,
-          });
-        }
-        await sharp(shard, {
-          raw: { width: shardWidth, height: shardHeight, channels: 4 },
-        }).webp({ lossless: true }).toFile(output(
-          `${config.namespace}-${role}-row-${String(shardIndex).padStart(2, "0")}` +
-          `${suffix}.webp`,
-        ));
-      }
     }
   }
   if (defaultFrame < 0 || defaultFrame >= frameCount) {
@@ -321,11 +353,12 @@ async function prepareMaterialBanks() {
   }
 }
 
-async function prepareShadowlessMaterial(size: number, suffix: string) {
+async function prepareShadowlessMaterial(size: number) {
+  const {atmosphereModel}=requireMaterialPreparation();
   const pixels = renderMaterialFrame({size, scenePitchDegrees: 40, role: 'lighting',
-    atmosphereModel: ATMOSPHERE_MODEL, shadowless: true});
+    atmosphereModel, shadowless: true});
   await sharp(pixels, {raw: {width: size, height: size, channels: 4}})
-    .webp({lossless: true}).toFile(output(`${config.namespace}-lighting-shadowless${suffix}.webp`));
+    .webp({lossless: true}).toFile(output(`${config.namespace}-lighting-shadowless@2x.webp`));
 }
 
 function renderMaterialFrame({
@@ -337,7 +370,7 @@ function renderMaterialFrame({
   phaseFrame,
 }: MaterialFrameInput) {
   if (role === "atmosphere") {
-    return prepareAtmosphereMaterialFrame({ size, frame: phaseFrame, model: atmosphereModel }).data;
+    return requireMaterialPreparation().atmosphere.prepareAtmosphereMaterialFrame({ size, frame: phaseFrame, model: atmosphereModel }).data;
   }
   const radius = size * config.material.discRadius;
   const center = (size - 1) / 2;
@@ -521,36 +554,32 @@ async function prepareInteriorAssets({ exterior = true, thumbnailsOnly = false }
   for (const bank of [{ name: 'interior', tomography: null }, ...(tomography ? [{ name: 'tomography', tomography }] : [])]) {
   const tomography = bank.tomography;
   if (!thumbnailsOnly) {
+  // Interior rasters carry two texels per layout pixel.
   for (const layer of interior.layers.slice(1)) {
     if (tomography && layer.id !== 'mantle' && !tomography.recipe.schematicColors?.[layer.id]) continue;
-    for (const density of [1, 2]) {
-      const width = 1024 * density;
-      const height = 512 * density;
-      const data = renderInteriorShell(width, height, hexRgb(tomography?.recipe.schematicColors?.[layer.id] ?? layer.color), layer.id === 'mantle' ? tomography : null);
-      await writeSphereAssets({
-        data,
-        width,
-        height,
-        channels: 3,
-        density,
-        name: `${config.namespace}-${bank.name}-${layer.id}`,
-        bandCount: 8,
-        longitudeOffsetDegrees: 0,
-        webp: layer.id === 'mantle' && tomography ? tomography.recipe.webp : { lossless: true },
-        cutaway: interior.presentation?.cutThroughCenter || layer.innerRadiusKm > 0 ? config.geometry.interiorCutaway : undefined,
-      });
-    }
+    const width = 1024 * 2;
+    const height = 512 * 2;
+    const data = renderInteriorShell(width, height, hexRgb(tomography?.recipe.schematicColors?.[layer.id] ?? layer.color), layer.id === 'mantle' ? tomography : null);
+    await writeSphereAssets({
+      data,
+      width,
+      height,
+      channels: 3,
+      density: 2,
+      name: `${config.namespace}-${bank.name}-${layer.id}`,
+      bandCount: 8,
+      longitudeOffsetDegrees: 0,
+      webp: layer.id === 'mantle' && tomography ? tomography.recipe.webp : { lossless: true },
+      cutaway: interior.presentation?.cutThroughCenter || layer.innerRadiusKm > 0 ? config.geometry.interiorCutaway : undefined,
+    });
   }
-  for (const density of [1, 2]) {
-    const faceSize = 512 * density;
-    const section = renderInteriorSection(interior, faceSize, tomography);
-    const suffix = density === 2 ? "@2x" : "";
-    await sharp(section, {
-      raw: { width: faceSize * 2, height: faceSize, channels: 4 },
-    }).webp(tomography ? { ...tomography.recipe.webp, alphaQuality: 100 } : { lossless: true }).toFile(output(
-      `${config.namespace}-${bank.name}-section${suffix}.webp`,
-    ));
-  }
+  const faceSize = 512 * 2;
+  const section = renderInteriorSection(interior, faceSize, tomography);
+  await sharp(section, {
+    raw: { width: faceSize * 2, height: faceSize, channels: 4 },
+  }).webp(tomography ? { ...tomography.recipe.webp, alphaQuality: 100 } : { lossless: true }).toFile(output(
+    `${config.namespace}-${bank.name}-section@2x.webp`,
+  ));
   }
   const thumbnail = renderInteriorThumbnail(interior, 96, tomography);
   await sharp(thumbnail, {
@@ -562,43 +591,43 @@ async function prepareInteriorAssets({ exterior = true, thumbnailsOnly = false }
 }
 
 async function prepareInteriorOuterPoles() {
-  for (const density of [1, 2]) {
-    const width = 2048 * density;
-    const height = 1024 * density;
-    const { data: base, info } = await sharp(
-      source(config.surface.maps[0].path),
-    ).resize(width, height, { fit: "fill" })
-      .removeAlpha()
-      .raw()
-      .toBuffer({ resolveWithObject: true });
-    applyDisplayGamma(base, config.surface.maps[0].displayGamma);
-    const clouded = await prepareCloudComposite(base, {
-      width,
-      height,
-      channels: info.channels,
-      config,
-      sourceDirectory,
-    });
-    const lit = prepareObjectLightingMap({
-      data: clouded,
-      width,
-      height,
-      channels: info.channels,
-    });
-    for (const [suffix, data] of [["", clouded], ["-lit", lit]] as const) await writeSphereAssets({
-      data,
-      width,
-      height,
-      channels: info.channels,
-      density,
-      name: `${config.namespace}-interior-outer${suffix}`,
-      projectiveSurface: true,
-      bandCount: 16,
-      longitudeOffsetDegrees: 0,
-      webp: { quality: 88, smartSubsample: true },
-      cutaway: config.geometry.interiorCutaway,
-    });
-  }
+  // The outer interior surface carries two texels per layout pixel.
+  const density = 2;
+  const width = 2048 * density;
+  const height = 1024 * density;
+  const { data: base, info } = await sharp(
+    source(config.surface.maps[0].path),
+  ).resize(width, height, { fit: "fill" })
+    .removeAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  applyDisplayGamma(base, config.surface.maps[0].displayGamma);
+  const clouded = await prepareCloudComposite(base, {
+    width,
+    height,
+    channels: info.channels,
+    config,
+    sourceDirectory,
+  });
+  const lit = prepareObjectLightingMap({
+    data: clouded,
+    width,
+    height,
+    channels: info.channels,
+  });
+  for (const [suffix, data] of [["", clouded], ["-lit", lit]] as const) await writeSphereAssets({
+    data,
+    width,
+    height,
+    channels: info.channels,
+    density,
+    name: `${config.namespace}-interior-outer${suffix}`,
+    projectiveSurface: true,
+    bandCount: 16,
+    longitudeOffsetDegrees: 0,
+    webp: { quality: 88, smartSubsample: true },
+    cutaway: config.geometry.interiorCutaway,
+  });
 }
 
 function prepareObjectLightingMap({ data, width, height, channels }: RasterInfo & {data: Buffer}) {
@@ -796,7 +825,33 @@ export async function preparePagedSurfaceMap({ config, sourceDirectory, map, ker
   const height = config.surface.height;
   if (map.scientific?.kind === "gebco-elevation") return prepareElevationMap({ sourceDirectory, map: {path: requireString(map.path), scientific: map.scientific}, width, height });
   if (map.scientific?.kind === "black-marble-radiance") return prepareNightLightsMap({ sourceDirectory, map: {path: requireString(map.path), scientific: map.scientific}, width, height });
-  const { data, info } = await sharp(Buffer.isBuffer(map.path) ? map.path : resolve(sourceDirectory, map.path))
+  const input = sharp(Buffer.isBuffer(map.path) ? map.path : resolve(sourceDirectory, map.path));
+  if (map.nativePhotographicSampling) {
+    const { data, info } = await input.removeAlpha().raw().toBuffer({ resolveWithObject: true });
+    if (map.scientific || info.channels !== 3 || info.width !== info.height * 2 || info.width < width || info.height < height) {
+      throw new Error("Native photographic sampling requires a complete RGB source grid at least as large as the canonical map.");
+    }
+    const nativeDisplayGamma = map.displayGamma ?? 1;
+    if (!Number.isFinite(nativeDisplayGamma) || nativeDisplayGamma < 1 || nativeDisplayGamma > 2) {
+      throw new TypeError('Display gamma must be a finite number between 1 and 2.');
+    }
+    let nativePhotographicClouds: NativePhotographicCloudComposite | undefined;
+    if (map.compositeClouds) {
+      const clouds = await sharp(resolve(sourceDirectory, config.surface.clouds.path))
+        .removeAlpha()
+        .raw()
+        .toBuffer({ resolveWithObject: true });
+      const cloudChannels = clouds.info.channels;
+      if (cloudChannels !== 3 || clouds.info.width !== clouds.info.height * 2 ||
+          clouds.info.width < width || clouds.info.height < height) {
+        throw new Error("Native photographic cloud sampling requires a complete RGB source grid at least as large as the canonical map.");
+      }
+      nativePhotographicClouds = { data: clouds.data, width: clouds.info.width, height: clouds.info.height,
+        channels: cloudChannels, ...config.surface.clouds };
+    }
+    return { data, info, nativePhotographicClouds };
+  }
+  const { data, info } = await input
     .resize(width, height, { fit: "fill", kernel })
     .removeAlpha()
     .raw()

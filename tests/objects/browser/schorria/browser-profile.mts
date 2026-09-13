@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/schorria/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'schorria',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/schorria/schorria-directional-sun.webp",
-      "two": "/scenes/schorria/schorria-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/schorria/schorria-shape-surface@2x.webp"
+    "/scenes/schorria/schorria-shape-surface@2x.webp",
+    "/scenes/schorria/schorria-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

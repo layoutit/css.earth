@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-surface-landmarks@1",
+  "source": "Thomas et al. (2013), Figures 3 and 7",
+  "frame": "Farnham & Thomas (2013) PDS Hartley 2 body-fixed planetocentric frame: east-positive longitude, with positive latitude toward the smaller lobe. Figure 3 uses the same E-longitude/latitude map.",
+  "entries": [
+    {
+      "id": "81000000",
+      "name": "Variegated waist",
+      "kind": "region",
+      "type": "Mapped terrain",
+      "position": {
+        "longitudeDeg": 30,
+        "latitudeDeg": 55
+      },
+      "minimumZoomShare": 0.2,
+      "description": "A smooth waist with repeatable fine-scale markings joins the two lobes.",
+      "qualification": "Approximate panel centre at 55° N, 30° E. We estimate placement uncertainty at ±3°.",
+      "reference": {
+        "title": "Thomas et al. (2013), Figure 7a: waist stereo view",
+        "url": "https://ntrs.nasa.gov/api/citations/20140009994/downloads/20140009994.pdf",
+        "credit": "Thomas et al., 2013"
+      }
+    },
+    {
+      "id": "81000001",
+      "name": "Large-lobe smooth patch",
+      "kind": "region",
+      "type": "Mapped terrain",
+      "position": {
+        "longitudeDeg": 31,
+        "latitudeDeg": -53
+      },
+      "minimumZoomShare": 0.25,
+      "description": "A darker, smoother area lies among small brighter mounds on the larger southern lobe.",
+      "qualification": "Approximate panel centre at 53° S, 31° E. We estimate placement uncertainty at ±3°.",
+      "reference": {
+        "title": "Thomas et al. (2013), Figure 7b: large-lobe stereo view",
+        "url": "https://ntrs.nasa.gov/api/citations/20140009994/downloads/20140009994.pdf",
+        "credit": "Thomas et al., 2013"
+      }
+    },
+    {
+      "id": "81000002",
+      "name": "Elongate smooth area",
+      "kind": "region",
+      "type": "Mapped terrain",
+      "position": {
+        "longitudeDeg": 350,
+        "latitudeDeg": -50
+      },
+      "minimumZoomShare": 0.25,
+      "description": "An elongate dark smooth area lies on the larger lobe.",
+      "qualification": "Representative point read from the map at 50° S, 350° E. We estimate placement uncertainty at ±12°.",
+      "reference": {
+        "title": "Thomas et al. (2013), Figure 3a and section 5.2: mapped smooth area",
+        "url": "https://ntrs.nasa.gov/api/citations/20140009994/downloads/20140009994.pdf",
+        "credit": "Thomas et al., 2013"
+      }
+    }
+  ]
+}

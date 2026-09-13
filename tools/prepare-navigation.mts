@@ -136,12 +136,10 @@ async function markerPresentations(descriptors: readonly ObjectMarkerDescriptor[
   const entries = [];
   for (const descriptor of descriptors) {
     const id = descriptor.planetId;
-    for (const density of [1, 2]) {
-      const image = await metadata(`body-${id}${density === 2 ? '@2x' : ''}.webp`);
-      if (image.width !== markerTileSize * density || image.height !== markerTileSize * density) throw new TypeError(`Invalid marker dimensions: ${id}.`);
-    }
+    const image = await metadata(`body-${id}@2x.webp`);
+    if (image.width !== markerTileSize * 2 || image.height !== markerTileSize * 2) throw new TypeError(`Invalid marker dimensions: ${id}.`);
     const context = parents.has(id) || descriptor.context ? await metadata(`${id}-context.webp`) : null;
-    entries.push([id, { url: `/navigation/body-${id}.webp`, url2x: `/navigation/body-${id}@2x.webp`, url2xPixels: markerTileSize * 2, index: 0, count: 1,
+    entries.push([id, { url: `/navigation/body-${id}@2x.webp`, pixels: markerTileSize * 2, index: 0, count: 1,
       presentation: descriptor.presentation, ...(context ? { context: { url: `/navigation/${id}-context.webp`, pixels: context.width } } : {}) }]);
   }
   return Object.fromEntries(entries);
@@ -229,20 +227,21 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
 export async function prepareBodyMarkers({ projectRoot, outputRoot, descriptors }: MarkerRenderOptions) {
   if (!descriptors.length) throw new TypeError('Markers require at least one descriptor.');
   await mkdir(outputRoot, { recursive: true });
-  for (const density of [1, 2]) {
-    const tileSize = markerTileSize * density;
-    for (const descriptor of descriptors) {
-      const sourcePath = descriptor.owner === 'object'
-        ? resolve(projectRoot, 'src/planets', descriptor.planetId, 'source', descriptor.source.path)
-        : resolve(projectRoot, 'src/navigation/source', descriptor.source.path);
-      const tile = await renderMarker(descriptor, { sourcePath, tileSize });
-      await sharp(tile).webp({ lossless: true, effort: 6 }).toFile(resolve(outputRoot, `body-${descriptor.planetId}${density === 2 ? '@2x' : ''}.webp`));
-    }
+  // 16 CSS pixel markers, prepared at two texels per CSS pixel.
+  const tileSize = markerTileSize * 2;
+  for (const descriptor of descriptors) {
+    const sourcePath = descriptor.owner === 'object'
+      ? resolve(projectRoot, 'src/planets', descriptor.planetId, 'source', descriptor.source.path)
+      : resolve(projectRoot, 'src/navigation/source', descriptor.source.path);
+    const tile = await renderMarker(descriptor, { sourcePath, tileSize });
+    await sharp(tile).webp({ lossless: true, effort: 6 }).toFile(resolve(outputRoot, `body-${descriptor.planetId}@2x.webp`));
   }
 }
 
 export async function renderNavigation({ projectRoot, outputRoot, descriptors }: MarkerRenderOptions) {
   const navigationSourceRoot = resolve(projectRoot, "src/navigation/source");
+  // Navigation images are prepared at two texels per CSS pixel.
+  const density = 2;
   await prepareSunIndicator({ projectRoot, outputRoot });
 
   await prepareBodyMarkers({ projectRoot, outputRoot, descriptors });
@@ -252,7 +251,7 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
     NAVIGATION_SUN_SOURCE,
     sunSourcePath,
   );
-  for (const density of [1, 2]) {
+  {
     const tileSize = 48 * density;
     const sunSize = 28 * density;
     const sunMask = Buffer.from(
@@ -279,7 +278,7 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
       .toBuffer();
     const outputPath = resolve(
       outputRoot,
-      `sun-marker${density === 2 ? "@2x" : ""}.webp`,
+      "sun-marker@2x.webp",
     );
     await sharp({
       create: {
@@ -305,7 +304,7 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
   );
   const blackHoleLuminance: readonly [number, number, number] = [0.2126, 0.7152, 0.0722];
   const luminanceRow = (scale: number): [number, number, number] => [blackHoleLuminance[0] * scale, blackHoleLuminance[1] * scale, blackHoleLuminance[2] * scale];
-  for (const density of [1, 2]) {
+  {
     const tileSize = 48 * density;
     const blackHoleBase = sharp(blackHoleSource)
       .extract({ left: 112, top: 112, width: 800, height: 800 })
@@ -334,7 +333,7 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
     ]);
     const outputPath = resolve(
       outputRoot,
-      `blackhole-marker${density === 2 ? "@2x" : ""}.png`,
+      "blackhole-marker@2x.png",
     );
     await sharp(blackHoleRgb, {
       raw: {
@@ -358,7 +357,7 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
     NAVIGATION_SUPERNOVA_SOURCE,
     resolve(navigationSourceRoot, NAVIGATION_SUPERNOVA_SOURCE.path),
   );
-  for (const density of [1, 2]) {
+  {
     const tileSize = 48 * density;
     const markSize = 30 * density;
     const supernovaBase = sharp(supernovaSource)
@@ -410,7 +409,7 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
       .toBuffer();
     const outputPath = resolve(
       outputRoot,
-      `supernova-marker${density === 2 ? "@2x" : ""}.png`,
+      "supernova-marker@2x.png",
     );
     await sharp({
       create: {
@@ -440,7 +439,7 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
       source,
       resolve(navigationSourceRoot, source.path),
     );
-    for (const density of [1, 2]) {
+    {
       const tileSize = 48 * density;
       const markSize = 26 * density;
       const actionMask = await sharp(sourceBytes)
@@ -470,7 +469,7 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
         .toBuffer();
       const outputPath = resolve(
         outputRoot,
-        `body-${id}${density === 2 ? "@2x" : ""}.webp`,
+        `body-${id}@2x.webp`,
       );
       await sharp({
         create: {

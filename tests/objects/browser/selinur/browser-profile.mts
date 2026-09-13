@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/selinur/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'selinur',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/selinur/selinur-directional-sun.webp",
-      "two": "/scenes/selinur/selinur-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/selinur/selinur-shape-surface@2x.webp"
+    "/scenes/selinur/selinur-shape-surface@2x.webp",
+    "/scenes/selinur/selinur-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

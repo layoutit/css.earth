@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/badenia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'badenia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/badenia/badenia-directional-sun.webp",
-      "two": "/scenes/badenia/badenia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/badenia/badenia-shape-surface@2x.webp"
+    "/scenes/badenia/badenia-shape-surface@2x.webp",
+    "/scenes/badenia/badenia-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

@@ -6,11 +6,25 @@
 
 - The [full Cartesian plate model](https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.lbl) is selected: 8,761 vertices and 17,518 zero-indexed plates in meters.
 
+- **Stardust photographs:** four calibrated NAVCAM frames, N2073, N2075, N2077 and N2079, from the 2 January 2004 encounter. The [photography method](source/reference/encounter-photography.md) explains camera registration, accepted coverage and original shadows.
+
+- **Mayo, Left Foot and Right Foot:** mission-team names and terrain descriptions from [Brownlee et al. (2004), Fig. 2](https://doi.org/10.1126/science.1097899). NASA's [PIA06285 photograph and diagram](https://science.nasa.gov/photojournal/wild-2-close-look/) supply the image callouts. These are approximate places within depressions, with no surveyed centres or boundaries.
+
 ## Evidence
+
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
 
 - The radial projection preserves observed-versus-estimated classification at all 17,518 source plate centers; this finite check is not an exhaustive subpixel boundary proof.
 
 - The previous 996-leaf open-surface qualification is historical; current source-fit, browser and drag evidence is recorded in [the completion record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/WILD2-COMPLETION.md).
+
+- The named-feature diagram is registered to the photograph with three fit and three withheld interior controls. The photograph-to-N2073 match uses 35 fit and 36 withheld patches; withheld error is 0.76 native pixels RMS, 3.03 maximum. [Measured controls](source/features/control-measurements.json) and [recomputed placements](source/features/evidence/image-landmarks.json) retain both partitions and their residuals.
+
+- Each place intersects an observed face of the full PDS mesh before attachment to the existing 992-triangle display. The labels add no new mesh, photograph or dataset.
+
+- The [terrain-place browser record](evidence/terrain-places/browser.json) covers all three search flights at 1440 × 900 and 390 × 844 on main `e986b9280` plus this change. Inspected [desktop](evidence/terrain-places/desktop.png) and [mobile viewport](evidence/terrain-places/mobile.png) captures show qualified captions on the photographs. Both matching datasets retain the labels; Shadows stay Off and all 992 leaves survive selection. Sixteen focused tests, preparation build/typecheck, coordinate reproduction and both changed bodies' provenance pass. Aggregate source preparation is blocked by unchanged Earth, Moon and Mars recipe pins on that main revision; full browser conformance was not rerun.
+
+- **Reader oracle, 2026-09-12:** `tools/oracles/fits/encounter.py` reads the pinned NAVCAM product `n2075we02_rr.fit` with astropy. `tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts` requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, flagged and non-finite pixels to agree.
 
 ## Known problems
 
@@ -21,6 +35,10 @@
 - The [catalogue](https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/catalog/dataset.cat) reports roughly half-nucleus observation coverage, 50 m horizontal resolution and 6 m vertical precision. Those values describe the observed source terrain, not the inferred side or this reduced display.
 
 - Phase is arbitrary and fixed, not a current orientation.
+
+- Image registration does not remove the camera model's uncertainty. Moving each anchor 15 native pixels in 16 directions changes the source intercept by up to 275 m for Mayo, 272 m for Left Foot and 353 m for Right Foot. This is a sampled sensitivity check, not a statistical error bound. The UI calls each location approximate.
+
+- Hemenway and Rahe remain withheld because placement is more sensitive. Shoemaker Basin and Walker project onto the estimated side at their published callouts, so they receive no label.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
@@ -47,8 +65,19 @@ Reference radius is the geometric mean of the catalogue's fitted ellipsoid semi-
 
 ## Source survey
 
-The [Stardust mission archive](https://pdssbn.astro.umd.edu/data_sb/missions/stardust/index.shtml) provides raw and calibrated NAVCAM v3.0 imagery, dust measurements, SPICE and the v2.1 shape model. Calibrated frames have their own cameras and illumination; no registered global albedo map or photographic texture lens is asserted. The full Cartesian and planetocentric tables are equivalent source products, not separate views. The observed-only Cartesian table remains pinned for direct source-comparison tests.
+The [Stardust mission archive](https://pdssbn.astro.umd.edu/data_sb/missions/stardust/index.shtml) provides raw and calibrated NAVCAM v3.0 imagery, dust measurements, SPICE and the v2.1 shape model. The photographic lens combines four frames on accepted observed terrain; it is neither global coverage nor an albedo map. The full Cartesian and planetocentric tables are equivalent source products, not separate views. The observed-only Cartesian table remains pinned for direct source-comparison tests.
 
 The original tables, common ESO panorama and Inter font are restorable from exact URL/hash pins. Context imagery is reproducibly prepared from the same completed, reduced mesh. Source labels and catalogue retain their original bytes.
+
+</details>
+
+<details>
+<summary>Reproducing the named places</summary>
+
+The two pinned NASA JPEGs are NASA-served presentation renditions, not native detector products. Manual diagram controls use interior ridges and depression rims. Image matching uses a fixed grid and checkerboard fit/holdout partition; weak and ambiguous patches are rejected by correlation before fitting. A reflected similarity accounts for the detector's upward-increasing rows. The resulting pixels pass through the existing N2073 source camera and the original PDS mesh.
+
+The [image-registration recipe](source/features/image-registration.json) pins every consumed image, camera and shape input. Run `node tools/objects/surface-features/project-encounter-landmarks.mts comet-81p` to compare regenerated coordinates and residuals; add `--write` only when intentionally updating them. Feature preparation then checks that the unchanged display has a surface within 55 m of each source point. That display tolerance is separate from image-placement uncertainty.
+
+Brownlee's dimensions describe each feature's extent: Mayo is roughly 1.2 km across; Left Foot's northern lobe is about 650 m wide and 140 m deep; Right Foot is roughly 1 km across, with a southeast cliff exceeding 150 m. These are not circular region boundaries. The labels use the shared point treatment.
 
 </details>

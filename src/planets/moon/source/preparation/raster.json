@@ -1,20 +1,16 @@
 {
   "schema": "cssearth-raster-recipe@1",
   "publicBase": "/scenes/moon/",
-  "sourceWidth": 2048,
-  "sourceHeight": 1024,
+  "sourceWidth": 11520,
+  "sourceHeight": 5760,
   "width": 2048,
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "moon-poles-{id}{suffix}.webp",
+  "polesOutput": "moon-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "cssmoon-prepared-assets@1"
   },
@@ -25,26 +21,27 @@
   "surfaces": [
     {
       "id": "surface",
-      "source": "surface/lroc-color-2k.jpg",
+      "source": "surface/WAC_GLOBAL_E000N1800_032P.IMG",
       "falseColor": false,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
-        "presentation": {
-          "model": "prepared-neutral-lunar-reflectance-presentation",
-          "saturation": 0.35,
-          "linearGain": 0.9,
-          "linearOffset": -78,
-          "sharpenSigma": 0.65,
-          "qualification": "Prepared tonal presentation preserves the LROC surface structure; brightness and saturation are display choices, not calibrated albedo."
-        }
-      }
+        "kind": "pds-float-map",
+        "productId": "WAC_GLOBAL_E000N1800_032P",
+        "productVersion": "v1.3",
+        "wavelengthNanometers": 643,
+        "gain": 4,
+        "gamma": 2.2,
+        "referenceRadiusMeters": 1737400,
+        "outputLongitudeOrigin": 180
+      },
+      "resolutionScale": 2
     },
     {
       "id": "midnight-temperature",
       "source": "science/diviner-ghrm/tbol_m-compact.tif",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "scientific": {
@@ -92,7 +89,7 @@
       "id": "heat-anomalies",
       "source": "science/diviner-ghrm/tbol_anom-compact.tif",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "scientific": {
@@ -140,7 +137,7 @@
       "id": "rock-abundance",
       "source": "science/diviner-ghrm/ra_sam-compact.tif",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "scientific": {
@@ -186,7 +183,7 @@
       "id": "topography",
       "source": "science/ldem_16.img",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "scientific": {
@@ -242,14 +239,14 @@
       "id": "crust",
       "source": "lenses/grail-crustal-thickness-print.jpg",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp"
     },
     {
       "id": "silicate-signature",
       "source": "science/diviner-cf-2021-georeferenced.tif",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "scientific": {
@@ -288,7 +285,7 @@
       "id": "geology",
       "source": "geology/moon-geologic-units.tif",
       "falseColor": true,
-      "output": "moon-{id}{suffix}.webp",
+      "output": "moon-{id}@2x.webp",
       "thumbnail": "moon-lens-{id}.webp",
       "science": {
         "scientific": {
@@ -577,8 +574,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "moon-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "moon-lighting-{density}x-billboard.webp",
+    "rowOutput": "moon-lighting-2x-row-{row}.webp",
+    "billboardOutput": "moon-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

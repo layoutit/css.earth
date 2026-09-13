@@ -29,6 +29,11 @@
               "material": "lighting"
             },
             {
+              "id": "draco",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "elevation",
               "source": "content",
               "material": "lighting"
@@ -57,7 +62,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "449e777a60b31fbeaa21b6608cd284db06059b1650fc94ef356612372659774d"
+          "sha256": "ab78c796fba242f1e1b50cecf1a522b2a18169a44fdbd22744dd29d8a46bef6b"
         },
         {
           "id": "rotation",
@@ -67,7 +72,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "fa54f4213898bfbaaa4c3d83235897b5c4170eb9fc5e8893138acee69cc2a132"
+          "sha256": "839a445fa202da60a7754a1086f2d9429b95b3e92321139d814288d094af3447"
         },
         {
           "id": "title",
@@ -82,12 +87,12 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "7c2fbab90a7f6a4c7d9ca47c1e4ec317b704c1d76082d3199acc535f1bc5384f"
+          "sha256": "c707be7cfed7cee7453b78b4e99e5a40ac76e2e35f4621b08e99924e5483bc02"
         },
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "b3c56f1a50f0d51cc5e7ddae5a1d10e76fff2be08c76ffdafc28d22b91b9abfe"
+          "sha256": "9b08a7c1432b04421a7146cf83df73007d0a812d8d12cbb5dba8346d88152414"
         }
       ],
       "features": {
@@ -128,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5217f105d1b5c1a37a95477d7b7278277dd24e082c6048b44d4b98b4bb96f4cb"
+        "sha256": "b5716a4bcb1fafbf0d36d036dcdee3fc54c75d1f974e4cda90aa24046c7b11be"
       }
     },
     "catalog": {
@@ -149,6 +154,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d77d3ac0e5692a028dca8b4b92925dfdc21b8bbb44c235703bb773dbdda82430"
+    "sha256": "1c5de86da8577b3fcd621a6cdd9ca41bb97696f1c0fe97db7b17552d8e928fde"
   }
 }

@@ -253,8 +253,8 @@
     {
       "id": "umbriel-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1646,
-      "expectedSha256": "31481c1a6bcba32d86352e14f5cd13e0fd8d7388f0acbe13e2b509a7616eb2f9",
+      "expectedBytes": 1568,
+      "expectedSha256": "c7de04d2b59cd31c630f5eda0d531f0bf645204253747e5c24a0646ff5326fb4",
       "origin": "Repository-authored Umbriel solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -274,8 +274,8 @@
     {
       "id": "umbriel-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2906,
-      "expectedSha256": "3ba6f4dc54dabd229baf8edb23ca7dddeb1826f8885a3eea112bbd48daa56959",
+      "expectedBytes": 2951,
+      "expectedSha256": "5129aedfe357f03b64d401208926271f6a39e710d0a416d334fca0e82f308a80",
       "origin": "Repository-authored Umbriel raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -293,8 +293,8 @@
     {
       "id": "umbriel-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1421,
-      "expectedSha256": "34cdf4e5cdad51bc33dac936369e4784a2c3c5298449fcb53d9d968ca12ed256",
+      "expectedBytes": 1606,
+      "expectedSha256": "8f09760a76d080642fb125add62228ab605ac3a16447776d44d032354cb1e467",
       "origin": "Repository-authored Umbriel geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -387,8 +387,8 @@
     {
       "id": "umbriel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7897,
-      "expectedSha256": "f5fd068fb26185a5962ccdd66d47f5d690068e13e67ee53563113e66ea3a2801",
+      "expectedBytes": 7903,
+      "expectedSha256": "b9dea6664d94368e74f978b5508b5cc27730ca681bee0d936ee6f449e97d8998",
       "origin": "Repository-authored Umbriel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

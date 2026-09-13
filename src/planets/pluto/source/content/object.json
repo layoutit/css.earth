@@ -147,8 +147,8 @@
         "description": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
         "title": "MVIC color mosaic",
         "thumbnail": "pluto-lens-surface.webp",
-        "surface": "pluto-surface.webp",
-        "poles": "pluto-poles-surface.webp",
+        "surface": "pluto-surface@2x.webp",
+        "poles": "pluto-poles-surface@2x.webp",
         "source": {
           "id": "surface-pluto-color-mosaic-jpg",
           "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/l/pluto_color_mapmosaic.jpg?crop=faces%2Cfocalpoint&fit=clip&h=2963&w=5926"
@@ -164,8 +164,8 @@
         "description": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
         "title": "Stereo elevation map",
         "thumbnail": "pluto-lens-topography.webp",
-        "surface": "pluto-topography.webp",
-        "poles": "pluto-poles-topography.webp",
+        "surface": "pluto-topography@2x.webp",
+        "poles": "pluto-poles-topography@2x.webp",
         "source": {
           "id": "lenses-pluto-dem-tif",
           "url": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
@@ -216,8 +216,8 @@
         "description": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
         "title": "LORRI/MVIC mosaic",
         "thumbnail": "pluto-lens-monochrome.webp",
-        "surface": "pluto-monochrome.webp",
-        "poles": "pluto-poles-monochrome.webp",
+        "surface": "pluto-monochrome@2x.webp",
+        "poles": "pluto-poles-monochrome@2x.webp",
         "source": {
           "id": "lenses-pluto-monochrome-tif",
           "url": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"

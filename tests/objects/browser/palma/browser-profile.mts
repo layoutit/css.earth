@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/palma/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'palma',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/palma/palma-directional-sun.webp",
-      "two": "/scenes/palma/palma-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/palma/palma-shape-surface@2x.webp"
+    "/scenes/palma/palma-shape-surface@2x.webp",
+    "/scenes/palma/palma-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

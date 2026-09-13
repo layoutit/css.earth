@@ -7,14 +7,10 @@
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "oberon-poles-{id}{suffix}.webp",
+  "polesOutput": "oberon-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "cssoberon-prepared-assets@1"
   },
@@ -25,7 +21,7 @@
   "surfaces": [
     {
       "id": "normal",
-      "output": "oberon-{id}{suffix}.webp",
+      "output": "oberon-{id}@2x.webp",
       "thumbnail": "oberon-lens-{id}.webp",
       "source": "observations/oumap-cyl-180180.cub.gz",
       "falseColor": false,
@@ -57,6 +53,10 @@
             0,
             2100
           ]
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     }
@@ -68,8 +68,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "oberon-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "oberon-lighting-{density}x-billboard.webp",
+    "rowOutput": "oberon-lighting-2x-row-{row}.webp",
+    "billboardOutput": "oberon-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

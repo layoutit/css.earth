@@ -85,8 +85,8 @@
         "description": "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain.",
         "title": "Monochrome mosaic",
         "thumbnail": "charon-lens-normal.webp",
-        "surface": "charon-normal.webp",
-        "poles": "charon-poles-normal.webp",
+        "surface": "charon-normal@2x.webp",
+        "poles": "charon-poles-normal@2x.webp",
         "source": {
           "id": "new-horizons-charon-monochrome",
           "path": "../manifest.json",
@@ -101,8 +101,8 @@
         "description": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
         "title": "MVIC enhanced-color mosaic",
         "thumbnail": "charon-lens-enhanced-color.webp",
-        "surface": "charon-enhanced-color.webp",
-        "poles": "charon-poles-enhanced-color.webp",
+        "surface": "charon-enhanced-color@2x.webp",
+        "poles": "charon-poles-enhanced-color@2x.webp",
         "source": {
           "id": "new-horizons-charon-mvic-color",
           "path": "../manifest.json",
@@ -116,8 +116,8 @@
         "description": "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution.",
         "title": "Stereo and shading terrain model",
         "thumbnail": "charon-lens-elevation.webp",
-        "surface": "charon-elevation.webp",
-        "poles": "charon-poles-elevation.webp",
+        "surface": "charon-elevation@2x.webp",
+        "poles": "charon-poles-elevation@2x.webp",
         "source": {
           "id": "new-horizons-charon-dem",
           "path": "../manifest.json",
@@ -167,8 +167,8 @@
         "description": "New Horizons photometric model estimating the fraction of sunlight reflected by Charon. Derived from LORRI brightness and scattering assumptions, not a direct bolometric measurement. Gray grid marks missing source cells and uncovered southern latitudes. Colors span 0.1–0.5; values beyond those limits use endpoint colors.",
         "title": "New Horizons modeled Bond albedo",
         "thumbnail": "charon-lens-albedo.webp",
-        "surface": "charon-albedo.webp",
-        "poles": "charon-poles-albedo.webp",
+        "surface": "charon-albedo@2x.webp",
+        "poles": "charon-poles-albedo@2x.webp",
         "source": {
           "id": "new-horizons-charon-bond-albedo-grid",
           "path": "../manifest.json",

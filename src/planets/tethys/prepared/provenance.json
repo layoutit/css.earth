@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9b0099c04bf07ab48ab91a22db525fd490e96a2b053c018027d2558966324c1d"
+    "sha256": "36a2ab443ae073b3c728a03113af7474bf3b4de8f7b80dee7f8b15142e1fb353"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "f4d04962a504d275f2ba499b2a1c0443ed94338b39e209faab99860dc7224d17"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3360f3d907f96d0acfd84eec99f81a9d58846752ab5cb257c57496b081ea30ab",
+      "sha256": "8bedb79bd92dd495ec4443730cc597ca1a4d2f63fc0b8cdd8549ff9eeb793d4e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -41,6 +41,10 @@
                 "noData": 0,
                 "centerLongitude": 0,
                 "resolutionMeters": 292.50627432643
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -49,6 +53,10 @@
                 "kind": "image-rgb-no-data",
                 "noData": null,
                 "centerLongitude": 180
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -351,6 +359,99 @@
               "label": "Shape",
               "consumer": "shape"
             }
+          ],
+          "surfaceObservations": [
+            {
+              "id": "iss",
+              "format": "spice-camera",
+              "consumer": "iss-observation",
+              "filter": "CL1,CL2",
+              "allowLossy": false,
+              "path": "observations/N1807429484_1_CALIB.IMG",
+              "labelPath": "observations/N1807429484_1_CALIB.LBL",
+              "startTime": "2015-04-11T06:43:09.748Z",
+              "spice": {
+                "kernelSet": "cassini",
+                "kernels": [
+                  "lsk/naif0012.tls",
+                  "pck/pck00011.tpc",
+                  "sclk/cas00172.tsc",
+                  "fk/cas_v43.tf",
+                  "ik/cas_iss_v10.ti",
+                  "spk/150828R_SCPSE_15066_15116.bsp",
+                  "ck/15098_15103ra.bc"
+                ],
+                "observer": -82,
+                "target": 603,
+                "bodyFrame": "IAU_TETHYS",
+                "instrument": -82360,
+                "clock": {
+                  "start": "SPACECRAFT_CLOCK_START_COUNT",
+                  "stop": "SPACECRAFT_CLOCK_STOP_COUNT",
+                  "spacecraft": -82
+                },
+                "aberration": "LT+S",
+                "pixels": {
+                  "focalLength": {
+                    "key": "FOCAL_LENGTH",
+                    "unit": "mm"
+                  },
+                  "pixelPitch": {
+                    "key": "PIXEL_SIZE",
+                    "unit": "micrometre"
+                  },
+                  "center": "CCD_CENTER",
+                  "boresight": "BORESIGHT",
+                  "samples": "PIXEL_SAMPLES",
+                  "lines": "PIXEL_LINES",
+                  "frame": "FOV_FRAME",
+                  "origin": 1,
+                  "column": "-X",
+                  "row": "-Y"
+                },
+                "image": {
+                  "format": "vicar-pds3",
+                  "quantity": "I/F",
+                  "header": {
+                    "INSTRUMENT_ID": "ISSNA",
+                    "TARGET_NAME": "TETHYS",
+                    "INSTRUMENT_MODE_ID": "FULL"
+                  }
+                }
+              },
+              "refinement": {
+                "method": "mesh-limb",
+                "maximumCorrectionDegrees": 0.2,
+                "maximumResidualPixels": 2.5,
+                "minimumControls": 48,
+                "searchPixels": 400,
+                "maximumControls": 1500
+              },
+              "transfer": {
+                "maximumSourceDistanceMeters": 5310,
+                "maximumSeparationMeters": 3000,
+                "maximumEmissionDegrees": 80,
+                "visibilityToleranceMeters": 0.5,
+                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must lie within 3 km of the closest source-mesh point, about two 1.1 km pixel footprints, which also withholds strongly foreshortened surface; that point must lie within 5.31 km of the displayed mesh, its simplification error, and be visible from the refined camera in the full mesh."
+              },
+              "photometry": {
+                "model": "lommel-seeliger",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 80,
+                "maximumEmissionDegrees": 80,
+                "maximumGain": 3
+              },
+              "displayPercentiles": [
+                1,
+                99
+              ],
+              "metadata": {
+                "label": "ISS photograph",
+                "falseColor": false,
+                "coverage": "One Cassini ISS narrow-angle photograph from 190,000 km on 11 April 2015, projected through a camera derived from Cassini SPICE kernels and refined to the shape model's limb. Unphotographed or shadowed surface retains the grid."
+              }
+            }
           ]
         },
         "lighting": {
@@ -410,7 +511,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6dd38ece1b2146204fe804d3aa7fce4560eabae5d714d4390d0f5ec4bd456d43",
+      "sha256": "dbed13ca8d267ceb71a322bb1aeef42fe7524c33b1370d786b39541735e107ba",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -505,6 +606,7 @@
           "labels": {
             "normal": "Monochrome",
             "enhanced": "Enhanced color",
+            "iss": "ISS photograph",
             "elevation": "Elevation",
             "relative-albedo": "Relative albedo",
             "shape": "Shape",
@@ -539,6 +641,40 @@
                 "path": "../manifest.json"
               },
               "summary": "Infrared, green and ultraviolet bands reveal colors beyond human vision. Detail varies; photographed shadows and seams remain."
+            },
+            {
+              "id": "iss",
+              "label": "ISS photograph",
+              "description": "One Cassini narrow-angle photograph from 11 April 2015, projected onto the shape model through a camera derived from Cassini's SPICE kernels and refined to the limb. Grid marks surface the camera did not see or that lay in shadow. Brightness is disk-normalized with an empirical Lommel-Seeliger law; it is not measured albedo.",
+              "title": "Cassini ISS narrow-angle image",
+              "thumbnail": "/scenes/tethys/tethys-iss-thumbnail.webp",
+              "surface": "tethys-iss-surface@2x.webp",
+              "poles": "tethys-iss-poles@2x.webp",
+              "source": {
+                "id": "n1807429484",
+                "path": "../manifest.json",
+                "url": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484"
+              },
+              "falseColor": false,
+              "detail": "ISS · Cassini",
+              "facts": [
+                {
+                  "id": "observed",
+                  "label": "Observed",
+                  "value": "11 April 2015, 06:43 UTC"
+                },
+                {
+                  "id": "footprint",
+                  "label": "Pixel footprint",
+                  "value": "1.1 km from 190,000 km"
+                },
+                {
+                  "id": "filter",
+                  "label": "Camera filter",
+                  "value": "CL1 and CL2 · clear"
+                }
+              ],
+              "summary": "One Cassini photograph from 190,000 km, projected onto the shape model. Grid marks unphotographed or shadowed surface."
             },
             {
               "id": "elevation",
@@ -855,7 +991,7 @@
           "refresh"
         ],
         "path": "observations/Tethys_Cassini_mosaic_global_293m.tif",
-        "url": "https://planetarymaps.usgs.gov/mosaic/Tethys_Cassini_mosaic_global_293m.tif"
+        "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Tethys_Cassini_mosaic_global_293m.tif"
       },
       "verificationOperations": []
     },
@@ -1429,6 +1565,104 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "n1807429484",
+      "path": "observations/N1807429484_1_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "acquisition": "Download the pinned CISSCAL-calibrated I/F image and its PDS3 label from the PDS RMS archive.",
+      "width": 1024,
+      "height": 1024,
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-n1807429484",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@7f457e1b401738a0688a6f6c8bf44f55b2f5cae5#/inputs/44"
+          }
+        ]
+      },
+      "sha256": "35fddf10a0f669e60677b9b9f5668d1a6d9bf9d8ee86ca91055eead5964526f7",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/N1807429484_1_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1807429484-label",
+      "path": "observations/N1807429484_1_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "acquisition": "Download the pinned CISSCAL-calibrated I/F image and its PDS3 label from the PDS RMS archive.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-n1807429484-label",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@7f457e1b401738a0688a6f6c8bf44f55b2f5cae5#/inputs/45"
+          }
+        ]
+      },
+      "sha256": "7ea4077893d9524e32ec252ba0633605a59770293ea0c2e86e0ad2cd06f991c3",
+      "bytes": 3845,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/N1807429484_1_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -1441,8 +1675,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6dd38ece1b2146204fe804d3aa7fce4560eabae5d714d4390d0f5ec4bd456d43",
-      "bytes": 15841,
+      "sha256": "dbed13ca8d267ceb71a322bb1aeef42fe7524c33b1370d786b39541735e107ba",
+      "bytes": 17339,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1556,7 +1790,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       ],
@@ -1574,6 +1808,10 @@
           "noData": 0,
           "centerLongitude": 0,
           "resolutionMeters": 292.50627432643
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -1589,8 +1827,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-normal-surface@2x.webp",
-          "bytes": 7399756,
-          "sha256": "b21714368e32da7f99379635334762c1e02f381169f4e9ddccafd98b660c4ea7",
+          "bytes": 9768182,
+          "sha256": "ea182dc596c5b516c9f1af31ed07206b753342a9ad12b6f83ebd7b61d976eeca",
           "verification": "bytes-verified"
         }
       ],
@@ -1602,7 +1840,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       ],
@@ -1617,6 +1855,10 @@
           "kind": "image-rgb-no-data",
           "noData": null,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -1632,8 +1874,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-enhanced-surface@2x.webp",
-          "bytes": 9546302,
-          "sha256": "b4e5386fecaeebd62c6ecd8e20887f9b012963e8e05598065cc5043633743bfc",
+          "bytes": 13065564,
+          "sha256": "97bb188f33dfb333c7ac99427bd3833f7659bf679aa8ba8a51a50c65715a6808",
           "verification": "bytes-verified"
         }
       ],
@@ -1886,6 +2128,46 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "iss",
+      "label": "ISS photograph",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "One Cassini narrow-angle photograph from 11 April 2015, projected onto the shape model through a camera derived from Cassini's SPICE kernels and refined to the limb. Grid marks surface the camera did not see or that lay in shadow. Brightness is disk-normalized with an empirical Lommel-Seeliger law; it is not measured albedo."
+      ],
+      "lensIds": [
+        "iss"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "n1807429484",
+        "n1807429484-label",
+        "cassini-spc-2025-tethys-q128-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/tethys/tethys-iss-thumbnail.webp",
+          "bytes": 2428,
+          "sha256": "51f90432165d1f7fe5cfbc6002c2260dae43f15799c0ef8f3ec7b9fd0b3d0b18",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/tethys/tethys-iss-surface@2x.webp",
+          "bytes": 1806630,
+          "sha256": "a854ec7dd06d3cd27a87d5e84bb2891d465baa2efbed71a0a52eea8ebe569787",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -1938,8 +2220,8 @@
       "outputs": [
         {
           "url": "/scenes/tethys/tethys-features.json",
-          "bytes": 59132,
-          "sha256": "1eacfdd63703b57f33523347f461834eabb264ceb21496f9b7ca54a85e7a068d",
+          "bytes": 59142,
+          "sha256": "7d89f5ef4468721f31efa6b421ac16ba68a31f19946526c579df390bde445184",
           "verification": "bytes-verified"
         }
       ],
@@ -2037,6 +2319,30 @@
           "url": "object:prepared/minimaps/shape.webp",
           "bytes": 3072,
           "sha256": "a9cb6cc97276626a14edcd279353d31529dcc61182f6fda4b87a655af951eae7",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:iss",
+      "label": "ISS photograph preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "iss"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/iss.webp",
+          "bytes": 21560,
+          "sha256": "1d58a6dd850e29cb3f794736c1d4b69b5b0ad12f995f2542a4b6c42f68b0b11c",
           "verification": "bytes-verified"
         }
       ]

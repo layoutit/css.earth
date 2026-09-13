@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "09431285c29a7ae7299719d9fbe67cc24155b227b8caf01c6302345133fa6663"
+    "sha256": "138777fd5950e0e466deec35d06301d3596cf42e90ff3a9a0166d0bdac6d9a9d"
   },
   "id": "uranus",
   "properties": {
@@ -62,12 +62,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e6934925bc2eded248d70f7baf6f06ad63068458489191bb76e886a804404197"
+          "sha256": "af6f4c21662fc6202d39598b08bceb4b915cc3fd7a25cf2b60b95dda6ec357fc"
         },
         {
           "id": "rings",
           "path": "source/preparation/rings.json",
-          "sha256": "4c25382df279a628ca23b6c16f78ad5410cad74f191fab9098a1b04b17e55145"
+          "sha256": "2a05938e6550b875adfb12193ad3de615f68df0d80fa5859c8c1f195a7282438"
         },
         {
           "id": "navigation",
@@ -82,17 +82,17 @@
         {
           "id": "observations",
           "path": "source/preparation/observations.json",
-          "sha256": "7460b922b37079359b23c2b321b1abb739270f83e18fefc34b9832b01ec9021e"
+          "sha256": "59c593be26a9df64768d9be608cf066df3a00cd7a9166606fca4fc10000b9cd1"
         },
         {
           "id": "materials",
           "path": "source/preparation/materials.json",
-          "sha256": "7da0fe026b0769397aa3c5c23f170892e29ff544dfcea4966cb966b72b2f6982"
+          "sha256": "fe78f70a24df4d847615474394b4ba8156f54c478b14c3de8f0dcd325423ee35"
         },
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "8ac51ff107b0f06444661f53134c4c001c59b08bb99357100b9ce6d67cd8f759"
+          "sha256": "26237d46a1dafec81d3f78688a90c0935ab595701feda2db8ceb088a09c25975"
         },
         {
           "id": "presentation",
@@ -210,7 +210,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d0b8847913ee0205bc5cbaeb90c2433aeefe0232b6b59d2891331d5788a3ec81"
+        "sha256": "ce1b7d413ed289c96d3b1ae00bd741ce62e3a066d999946181efa710e1a02fec"
       }
     },
     "catalog": {

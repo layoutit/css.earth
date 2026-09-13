@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/clementina/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'clementina',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/clementina/clementina-directional-sun.webp",
-      "two": "/scenes/clementina/clementina-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/clementina/clementina-shape-surface@2x.webp"
+    "/scenes/clementina/clementina-shape-surface@2x.webp",
+    "/scenes/clementina/clementina-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

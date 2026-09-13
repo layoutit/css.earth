@@ -10,6 +10,10 @@ an Earth alias and declares `/earth/` as canonical. Query parameters and shared
 camera fragments do not change metadata. The sitemap contains one canonical
 URL per registered object, and `/robots.txt` advertises it.
 
+Bodies without a committed capture advertise the default Earth capture, so a
+share preview never points at a missing file. `pnpm prepare:social --object=<id>`
+adds a body's own capture and the page then advertises it.
+
 Social previews are plain screenshots of each actual CSS scene, with the
 application controls hidden and the scene centered. They have no added text,
 branding, or artwork. The checked-in JPEGs are served directly from

@@ -554,6 +554,84 @@
         "kind": "local",
         "reason": "Project-measured camera registration controls for hv10110413_5004008_001_d050."
       }
+    },
+    {
+      "id": "comet-103p-features-landmarks",
+      "path": "features/landmarks.json",
+      "expectedBytes": 2425,
+      "expectedSha256": "67e1bb8851ba0548f50dcb6ee03d6d0c2b4e580c376f291c3b0033bf41d9a2ff",
+      "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-icarus-2012-05-034",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/features/landmarks.json: per-place coordinates, descriptions and publication references; checked 2026-09-12."
+          }
+        ]
+      }
+    },
+    {
+      "id": "comet-103p-features-manifest",
+      "path": "features/manifest.json",
+      "expectedBytes": 984,
+      "expectedSha256": "48162a5fe51c8dc08cf1fdac819ab97cad9126704fcd27e064a5eccdecd9488d",
+      "origin": "Byte pins and source qualifications for the surface-place compilation.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte pins and source qualifications for the surface-place compilation."
+      }
+    },
+    {
+      "id": "comet-103p-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 816,
+      "expectedSha256": "cc55131be459b1b5a46be89e88c5f09a09d8ecfa665a6c5efb1a1b32faab4f51",
+      "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned selection of surface-place source records, datasets and label policy."
+      }
+    },
+    {
+      "id": "comet-103p-presentation-surface-map",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 157,
+      "expectedSha256": "e31a107a6ef7a5ecbebdfada3e1131d2dcbf41716520d9822792db5718ba0a3c",
+      "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
+      }
     }
   ],
   "generatedIntermediates": [

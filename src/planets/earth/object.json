@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f1f3f3c672142df7ebffa593b410f77514bb66e841b9bea30a8a347b6d4fdd74"
+    "sha256": "59ee7626b0d03bbacffe48c2b54bfd692c85c27ef821a98cb1342207997c1234"
   },
   "id": "earth",
   "properties": {
@@ -27,7 +27,7 @@
         {
           "id": "paged-ellipsoid",
           "path": "source/preparation/paged-ellipsoid.json",
-          "sha256": "3644c336b0dab1d58934826b3195bf01858c537463f0b3d477ed7606869a0e7f"
+          "sha256": "b762907dea0c0f73938fb52b860e4e57196ad5f170dd1624f3d5df4a5f42e653"
         },
         {
           "id": "celestial",
@@ -62,7 +62,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "fa50032aeddf5cc08467deab029c40cab14ce15bbd04d297cb6f0bb40239fc3a"
+          "sha256": "f4d94911db9dfdafac3494c157d5406e6928dd4fb0abda3e3baa5e4ec68cb3fd"
         },
         {
           "id": "mantle-tomography",
@@ -183,7 +183,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c652135cc04dd4d3289cfa8f998ac36ed5a497b53491e0a9d74745bd2f74a393"
+        "sha256": "77b200f96af5c4d8833f26e483a1ecc5fb6ea1216e2650cf6b8880f200b3847a"
       }
     },
     "catalog": {

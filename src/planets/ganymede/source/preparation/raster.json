@@ -7,14 +7,10 @@
   "height": 2048,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "ganymede-poles-{id}{suffix}.webp",
+  "polesOutput": "ganymede-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "cssganymede-prepared-assets@1"
   },
@@ -25,7 +21,7 @@
   "surfaces": [
     {
       "id": "normal",
-      "output": "ganymede-{id}{suffix}.webp",
+      "output": "ganymede-{id}@2x.webp",
       "thumbnail": "ganymede-lens-{id}.webp",
       "source": "ganymede-mono.tif",
       "falseColor": false,
@@ -39,14 +35,19 @@
           "centerLongitude": 180,
           "channels": "monochrome",
           "zeroValidity": "any-channel",
-          "resampling": "source-georeferenced-bilinear"
+          "resampling": "source-georeferenced-bilinear",
+          "wrapLongitude": true
         },
-        "reportComposition": true
+        "reportComposition": true,
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
       }
     },
     {
       "id": "enhanced",
-      "output": "ganymede-{id}{suffix}.webp",
+      "output": "ganymede-{id}@2x.webp",
       "thumbnail": "ganymede-lens-{id}.webp",
       "source": "ganymede-color.tif",
       "falseColor": false,
@@ -64,15 +65,20 @@
             110,
             150
           ],
-          "resampling": "source-georeferenced-bilinear"
+          "resampling": "source-georeferenced-bilinear",
+          "wrapLongitude": true
         },
         "monochromeBase": "normal",
-        "reportComposition": true
+        "reportComposition": true,
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
       }
     },
     {
       "id": "geology",
-      "output": "ganymede-{id}{suffix}.webp",
+      "output": "ganymede-{id}@2x.webp",
       "thumbnail": "ganymede-lens-{id}.webp",
       "source": "science/geology-sim3237/GeologyUnits.shp",
       "falseColor": true,
@@ -240,7 +246,7 @@
     },
     {
       "id": "oxygen-signature",
-      "output": "ganymede-{id}{suffix}.webp",
+      "output": "ganymede-{id}@2x.webp",
       "thumbnail": "ganymede-lens-{id}.webp",
       "source": "muse/ganymede/577.3nm_band-night-1.tif",
       "falseColor": true,
@@ -338,8 +344,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "ganymede-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "ganymede-lighting-{density}x-billboard.webp",
+    "rowOutput": "ganymede-lighting-2x-row-{row}.webp",
+    "billboardOutput": "ganymede-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

@@ -15,6 +15,15 @@
 
 ## Evidence
 
+The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
+
+| View | Original grid | Both lighting images, before → current |
+| --- | --- | --- |
+| normal | 11520 × 5760 | 6.66 → 9.69 MB |
+| enhanced | 12015 × 6008 | 15.34 → 20.46 MB |
+
+Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/rhea/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
+
 Existing reports; no body tests were rerun for this documentation edit.
 
 - **Shape:** the mesh was closed and connected. The largest distance between the
@@ -159,10 +168,10 @@ to 764 km. Keep that physical value separate from the 764.1 km monochrome projec
 
 The very tenuous exosphere does not justify a visible halo; proposed rings are not rendered.
 
-Map preparation uses the shared 8192 × 4096 intermediate layout and 1024-pixel pole products.
-The final source-mesh scene samples these maps into prepared per-triangle atlases. Prepared
-surface/pole atlases use WebP quality 90 with lossless alpha; intermediate maps remain
-lossless.
+Map preparation retains the shared 8192 × 4096 latitude-band layout and 1024-pixel pole products.
+The normal and enhanced photographic atlases sample their pinned original grids directly with a
+2 × 2 footprint into the fixed per-triangle layout and use WebP quality 95. Latitude bands,
+scientific products and their lossless inputs retain their existing preparation and encoding.
 
 Native observations are downsampled, and larger textures would not increase the terrain model's
 detail.

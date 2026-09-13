@@ -12,11 +12,13 @@ import sharp from 'sharp';
 import { createSurfaceInterpreter, parseInterpreterRecipe, type InterpreterRecipe } from './objects/observation/interpret.mts';
 // One interpreter per object so the sidebar map previews a science surface through the decoder that packed it.
 const interpreters = new Map<string, ReturnType<typeof createSurfaceInterpreter>>();
-function interpretFor(objectDirectory: string, objectId: string, recipe: InterpreterRecipe) {
-  let pending = interpreters.get(objectDirectory);
+function interpretFor(objectDirectory: string, objectId: string, recipe: InterpreterRecipe, photographs = false) {
+  const key = `${objectDirectory}:${photographs ? recipe.surfaces.map(s => s.id).join(',') : 'complete'}`;
+  let pending = interpreters.get(key);
   if (!pending) {
-    pending = createSurfaceInterpreter({ objectId, displayName: objectId, sourceDirectory: resolve(objectDirectory, 'source'), recipe });
-    interpreters.set(objectDirectory, pending);
+    pending = createSurfaceInterpreter({ objectId, displayName: objectId, sourceDirectory: resolve(objectDirectory, 'source'), recipe,
+      sourceVerification: photographs ? 'photographs' : 'complete' });
+    interpreters.set(key, pending);
   }
   return pending;
 }
@@ -37,15 +39,18 @@ const minimapResize = (nearest:boolean):ResizeOptions => ({ width: 640, withoutE
   ...(nearest ? { kernel: 'nearest' } : {}) });
 
 // A dedicated sidebar asset: never transport a globe-resolution map for a minimap.
-export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory }:SurfacePreviewDirectories) {
+export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs }:SurfacePreviewDirectories & { photographs?: readonly string[] }) {
   const prepared = await optionalJson(resolve(outputDirectory, 'surfaces.json'));
   const rasterInput = await optionalJson(resolve(objectDirectory, 'source/preparation/raster.json'));
   const sourceSurfaces=requireArray(rasterInput?.surfaces ?? []).map(parsePreviewSurface);
   const sourceLenses=requireArray(rasterInput?.lenses ?? []).map(value=>shape({id:text})(value));
   const surfaces = new Map(sourceSurfaces.map(surface => [surface.id, surface] as const));
+  const selected = photographs ? new Set(photographs) : null;
+  if (selected && (!selected.size || selected.size !== photographs!.length || [...selected].some(id => !surfaces.has(id))))
+    throw new TypeError('Choose existing photographic raster surfaces for minimap refresh.');
   // Raster-lane surfaces with a scientific interpretation preview through the same decoders the lane packs with.
   const science = new Map(requireArray(rasterInput?.surfaces ?? []).flatMap(value => { const record = requireRecord(value); return isRecord(record.science) ? [[requireString(record.id), record.science] as const] : []; }));
-  for (const surface of requireArray(prepared?.surfaces ?? []).map(parsePreviewSurface)) if (surface.map) surfaces.set(surface.id, surface);
+  for (const surface of requireArray(prepared?.surfaces ?? []).map(parsePreviewSurface)) if (surface.map && !selected?.has(surface.id)) surfaces.set(surface.id, surface);
   const framingValue=await optionalJson(resolve(objectDirectory, 'source/presentation/minimap.json'));
   const framing=framingValue && parseMinimapFraming(framingValue);
   const images = [];
@@ -53,7 +58,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   if (!isArray(excluded) || excluded.some(id => typeof id !== 'string' ||
       !surfaces.has(id) && !sourceLenses.some(lens => lens.id === id))) throw new Error('Invalid excluded minimap lenses');
   for (const surface of surfaces.values()) {
-    if (excluded.includes(surface.id)) continue;
+    if (excluded.includes(surface.id) || selected && !selected.has(surface.id)) continue;
     const input = surface.map ? resolve(publicDirectory, requireString(surface.map.url.split('/').at(-1)))
       : typeof surface.source === 'string' ? resolve(objectDirectory, 'source', surface.source) : null;
     if (!input) continue;
@@ -65,7 +70,9 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     if (interpretation && typeof surface.source === 'string') {
       const recipe = requireRecord(rasterInput);
       const width = requireFiniteNumber(recipe.width), height = requireFiniteNumber(recipe.height);
-      const { data, channels } = await (await interpretFor(objectDirectory, basename(objectDirectory), parseInterpreterRecipe(recipe)))({ id: surface.id, source: surface.source, science: interpretation }, width, height, 1);
+      const parsed = parseInterpreterRecipe(recipe);
+      const subset = selected ? { ...parsed, surfaces: parsed.surfaces.filter(s => selected.has(s.id)) } : parsed;
+      const { data, channels } = await (await interpretFor(objectDirectory, basename(objectDirectory), subset, Boolean(selected)))({ id: surface.id, source: surface.source, science: interpretation }, width, height, 1);
       pipeline = sharp(data, { raw: { width, height, channels } }).resize(minimapResize(nearest));
     } else pipeline = sharp(input).resize(minimapResize(nearest));
     if (framing?.centerLongitudeDegrees !== undefined) {
@@ -85,7 +92,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     images.push({ id: surface.id, path, width: result.width, height: result.height,
       ...(surface.attribution ? { attribution: surface.attribution } : {}) });
   }
-  for await (const preview of recipeSurfacePreviews({ objectDirectory, publicDirectory, outputDirectory })) {
+  if (!selected) for await (const preview of recipeSurfacePreviews({ objectDirectory, publicDirectory, outputDirectory })) {
     if (images.some(image => image.id === preview.id)) continue;
     const path = `minimaps/${preview.id}.webp`;
     await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
@@ -101,9 +108,15 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     optionalJson(resolve(objectDirectory, 'source/content/lens-bindings.json')),
   ]);
   const shell=controls?.lenses ? parsePreviewControls(controls.lenses).controls : [];
-  assertSurfacePreviewCoverage(shell.filter(lens => !excluded.includes(lens.id)), images,
+  assertSurfacePreviewCoverage(shell.filter(lens => !excluded.includes(lens.id) && (!selected || selected.has(lens.id))), images,
     [...(lenses ? parsePreviewControls(lenses).controls : []), ...(bindings ? parsePreviewControls(bindings).controls : [])]);
-  await writeFile(resolve(outputDirectory, 'minimaps.json'), JSON.stringify({ images }) + '\n');
+  if (selected) {
+    const existing = await optionalJson(resolve(outputDirectory, 'minimaps.json'));
+    const previous = requireArray(existing?.images).map(value => ({ ...requireRecord(value), ...shape({ id: text, path: text, width: number, height: number })(value) }));
+    if (images.some(image => !previous.some(item => item.id === image.id))) throw new TypeError('Photographic refresh cannot add a minimap.');
+    const replacements = new Map(images.map(image => [image.id, image]));
+    await writeFile(resolve(outputDirectory, 'minimaps.json'), JSON.stringify({ images: previous.map(image => replacements.get(image.id) ?? image) }) + '\n');
+  } else await writeFile(resolve(outputDirectory, 'minimaps.json'), JSON.stringify({ images }) + '\n');
   return images;
 }
 

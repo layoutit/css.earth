@@ -169,8 +169,8 @@
         "description": "Hubble visible-color map from 27 June 2019 with Juno-derived polar cloud structure and transferred visible color. Polar sources are not registered to the Hubble longitudes. This multi-source illustration does not depict one observation date or a geodetic polar map.",
         "title": "WFC3 visible-color map",
         "thumbnail": "/scenes/jupiter/jupiter-lens-normal.webp",
-        "surface": "/scenes/jupiter/jupiter-surface.webp",
-        "poles": "/scenes/jupiter/jupiter-poles.webp",
+        "surface": "/scenes/jupiter/jupiter-surface@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-poles@2x.webp",
         "falseColor": false,
         "source": {
           "id": "normal",
@@ -185,8 +185,8 @@
         "description": "Hubble OPAL at 275 nm (F275W), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
         "title": "OPAL F275W map",
         "thumbnail": "/scenes/jupiter/jupiter-lens-ultraviolet-thumbnail.webp",
-        "surface": "/scenes/jupiter/jupiter-lens-ultraviolet.webp",
-        "poles": "/scenes/jupiter/jupiter-lens-ultraviolet-poles.webp",
+        "surface": "/scenes/jupiter/jupiter-lens-ultraviolet@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-lens-ultraviolet-poles@2x.webp",
         "falseColor": true,
         "legend": {
           "kind": "scale",
@@ -230,8 +230,8 @@
         "description": "Hubble OPAL at 889 nm (FQ889N), 11 December 2025, shown in false color. Gray grid marks unavailable coverage; polar-connected zero fill is masked before interpolation. Dark interior samples are retained. No Juno imagery supplies spectral detail.",
         "title": "OPAL FQ889N map",
         "thumbnail": "/scenes/jupiter/jupiter-lens-methane-thumbnail.webp",
-        "surface": "/scenes/jupiter/jupiter-lens-methane.webp",
-        "poles": "/scenes/jupiter/jupiter-lens-methane-poles.webp",
+        "surface": "/scenes/jupiter/jupiter-lens-methane@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-lens-methane-poles@2x.webp",
         "falseColor": true,
         "legend": {
           "kind": "scale",

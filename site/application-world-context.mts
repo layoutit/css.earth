@@ -4,7 +4,7 @@ import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-o
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { mountSpaceMinimap } from './minimap/minimap.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
-import { createPreparedUniverse, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
+import { createPreparedUniverse, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_CONTEXT_URL } from './world-context-plan.mts';
 import { contextMarkerSprite, contextAnnotationOpacity } from '../src/navigation/marker-presentation.mts';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
@@ -32,7 +32,9 @@ let universePromise: Promise<ApplicationUniverse> | null = null;
 function loadApplicationUniverse(): Promise<ApplicationUniverse> {
   universePromise ??= (async () => {
     const descriptors = import.meta.glob('../src/objects/*/object.json', { import: 'default', eager: true });
-    const assets = import.meta.glob('../src/objects/*/prepared/**/*.{json,png,webp,bin}', {
+    // The individual-star binary bank is a preparation input, never an application asset.
+    const assets = import.meta.glob(['../src/objects/*/prepared/**/*.{json,png,webp,bin}',
+      '!../src/objects/stellar-neighbourhood/prepared/*.bin'], {
       query: '?url', import: 'default', eager: true,
     });
     const resourceSet = (objectId: string) => {
@@ -50,9 +52,9 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
         } } };
     };
     const volumeSet = resourceSet(applicationContext.volume.objectId), starSet = resourceSet(applicationContext.stars.objectId);
-    const [volume, stars] = await Promise.all([
+    const [volume, pointAppearance] = await Promise.all([
       loadPreparedCssVolume(volumeSet.descriptor, volumeSet.transport),
-      loadPreparedCssPointField(starSet.descriptor, starSet.transport),
+      loadPreparedPointAppearance(starSet.descriptor, starSet.transport),
     ]);
     // Surface shells (the heliosphere) are optional and off by default. Their
     // payload, validation and atlas load the first time one is enabled.
@@ -79,18 +81,14 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
         return { payload: await loadPreparedVolumeLenses(set.descriptor, set.transport),
           resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
       }));
-    // The planner worker reads its own copies of the context and stars: a
-    // structured clone of both cost the main thread ~150 ms at startup.
-    const starBase = `../src/objects/${applicationContext.stars.objectId}/`;
-    const plannerSource = { contextUrl: APPLICATION_WORLD_CONTEXT_URL, stars: { descriptor: starSet.descriptor,
-      files: Object.fromEntries(Object.entries(assets).filter(([key]) => key.startsWith(starBase))
-        .map(([key, url]) => [key.slice(starBase.length), String(url)])) } };
-    const universe = createPreparedUniverse({ context: applicationContext, volume, stars, sprites, imageLayers, volumeLenses, annotationPriorities, annotationOpacities, plannerSource,
+    // The world worker reads its own prepared context; background stars are already baked.
+    const plannerSource = { contextUrl: APPLICATION_WORLD_CONTEXT_URL };
+    const universe = createPreparedUniverse({ context: applicationContext, volume, pointAppearance, sprites, imageLayers, volumeLenses, annotationPriorities, annotationOpacities, plannerSource,
       catalog: { payload: galaxyCatalog, fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM,
         fullDistanceM: galaxyPresentation.fullDistanceM,
         clusters: { payload: clusterCatalog, fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } },
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
-      resolveStarResource: path => starSet.resolve(`prepared/${path}`) });
+      resolvePointResource: path => starSet.resolve(`prepared/${path}`) });
     const markerPool = 'context-markers';
     const markerEntries = [...new Set(Object.values(sprites).map(sprite => sprite.url))]
       .map((url, index) => ({ key: `${markerPool}:${index}`, url, pool: markerPool }));
@@ -151,10 +149,11 @@ export function createApplicationWorldContext() {
           }
           if (staged) staged.consumed = true;
           layer.publish(world, viewport, { heliosphere: heliosphereEnabled }, frame);
-          // The decorative minimap follows a drag at half rate; release publishes it.
-          if (!rotating || (minimapFrame++ & 1) === 0) minimap.publish(world, viewport);
+          // The decorative minimap follows a drag at half rate and holds still
+          // through a fly-to; release and arrival publish it once.
+          if (!flying && (!rotating || (minimapFrame++ & 1) === 0)) minimap.publish(world, viewport);
         };
-        let rotating = false, minimapFrame = 0;
+        let rotating = false, flying = false, minimapFrame = 0;
         const frameQueue = createWorldFrameQueue(async request => {
           const snapshot = layer.captureFrame(request.world, request.viewport);
           const frame = await framePlanner.plan(snapshot.view);
@@ -186,6 +185,12 @@ export function createApplicationWorldContext() {
         const diagnostics = DIAGNOSTICS_ENABLED ? createWorldContextDiagnostics(layer, frameQueue, presentationHost !== stage) : null;
         if (diagnostics) Reflect.set(target, '__cssEarthUniverse', diagnostics);
         return { ...layer, viewport, publish,
+          setNavigationInFlight(active: boolean) {
+            layer.setNavigationInFlight(active);
+            if (flying === active) return;
+            flying = active;
+            if (!active && !destroyed && publication) minimap.publish(publication.world, publication.viewport);
+          },
           connectNavigation: contextNavigation.connect,
           suspendFocus: contextNavigation.suspend, restoreFocus: contextNavigation.restore,
           present(world: WorldCameraPose, viewport: WorldCameraViewport, { signal, commit = () => {} }: { signal: AbortSignal; commit?: () => void }) {

@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/aemilia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'aemilia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/aemilia/aemilia-directional-sun.webp",
-      "two": "/scenes/aemilia/aemilia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/aemilia/aemilia-shape-surface@2x.webp"
+    "/scenes/aemilia/aemilia-shape-surface@2x.webp",
+    "/scenes/aemilia/aemilia-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

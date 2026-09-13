@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/huberta/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'huberta',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/huberta/huberta-directional-sun.webp",
-      "two": "/scenes/huberta/huberta-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/huberta/huberta-shape-surface@2x.webp"
+    "/scenes/huberta/huberta-shape-surface@2x.webp",
+    "/scenes/huberta/huberta-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

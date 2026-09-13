@@ -160,7 +160,7 @@ try {
   report.trace = { frames: trace.length, maximumDetailedRoots: trace.reduce((maximum, sample) => Math.max(maximum, sample.roots), 0) };
   report.completedAt = new Date().toISOString();
   report.status = 'passed';
-  console.log(`ALL_OBJECT_WORLD_BROWSER_PASSED: ${OBJECTS.length} native flights; Earth/Jupiter refocus; Earth/Saturn galaxy round trips; one retained universe.`);
+  console.log(`ALL_OBJECT_WORLD_BROWSER_PASSED: ${walk.length} native flights; Earth/Jupiter refocus; Earth/Saturn galaxy round trips; one retained universe.`);
 } catch (error) {
   report.status = 'failed'; report.failure = { message: error instanceof Error ? error.message : String(error), stack: error instanceof Error ? error.stack : undefined };
   if (page) {
@@ -338,7 +338,7 @@ async function orbitProjection() {
     for (const { point } of Object.values(probe.expected)) {
       if (!point.orbit) continue;
       const vertices = point.orbit.verticesM.map(project);
-      for (const node of window.__cssearthTest.required(window.__cssearthTest.universe().inspect().bodies.find(body => body.id === point.id), `orbit ${point.id}`).orbit) {
+      for (const node of window.__cssearthTest.required(window.__cssearthTest.universe().inspect().bodies.find(body => body.id === point.id), `orbit ${point.id}`).orbit as HTMLElement[]) {
         if (getComputedStyle(node).visibility === 'hidden' || !(Number(node.style.opacity) > 0)) continue;
         const m = new DOMMatrix(node.style.transform), p = [m.e, m.f], q = [m.e + m.a, m.f + m.b];
         let nearest = Infinity;

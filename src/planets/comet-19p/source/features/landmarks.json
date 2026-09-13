@@ -1,0 +1,99 @@
+{
+  "schema": "cssearth-surface-landmarks@1",
+  "source": "Britt et al. (2004) Fig. 4 registered through its unannotated Fig. 1 to the pinned MICAS XYZ cubes.",
+  "frame": "USGS local image-plane XYZ metres; the preparation display frame applies its documented -2200 m Z translation.",
+  "entries": [
+    {
+      "id": "84000000",
+      "name": "Upper Mottled Terrain",
+      "kind": "region",
+      "type": "Mapped terrain",
+      "position": {
+        "pointMeters": [
+          1160,
+          1832,
+          -613.672607
+        ],
+        "maximumDistanceMeters": 85
+      },
+      "normal": "surface",
+      "minimumZoomShare": 0.2,
+      "description": "Mottled terrain covers much of this end of the nucleus. It may be older surface material altered by sublimation.",
+      "qualification": "Approximate location from Deep Space 1’s published terrain map.",
+      "reference": {
+        "title": "The morphology and surface processes of Comet 19/P Borrelly",
+        "url": "https://doi.org/10.1016/j.icarus.2003.09.004",
+        "credit": "Britt et al. (2004); NASA/JPL/MICAS; USGS"
+      }
+    },
+    {
+      "id": "84000001",
+      "name": "Central Mesas",
+      "kind": "region",
+      "type": "Mapped terrain",
+      "position": {
+        "pointMeters": [
+          408,
+          328,
+          -606.76355
+        ],
+        "maximumDistanceMeters": 85
+      },
+      "normal": "surface",
+      "minimumZoomShare": 0.25,
+      "description": "Flat-topped mesas rise above the surrounding smooth terrain. Their slopes may expose volatile-rich material.",
+      "qualification": "Approximate location from Deep Space 1’s published terrain map.",
+      "reference": {
+        "title": "The morphology and surface processes of Comet 19/P Borrelly",
+        "url": "https://doi.org/10.1016/j.icarus.2003.09.004",
+        "credit": "Britt et al. (2004); NASA/JPL/MICAS; USGS"
+      }
+    },
+    {
+      "id": "84000002",
+      "name": "Central Smooth Terrain",
+      "kind": "region",
+      "type": "Mapped terrain",
+      "position": {
+        "pointMeters": [
+          -888,
+          -760,
+          -319.278809
+        ],
+        "maximumDistanceMeters": 85
+      },
+      "normal": "surface",
+      "minimumZoomShare": 0.2,
+      "description": "Smooth terrain lies below the central mesas and may collect debris falling from them.",
+      "qualification": "Approximate location from Deep Space 1’s published terrain map.",
+      "reference": {
+        "title": "The morphology and surface processes of Comet 19/P Borrelly",
+        "url": "https://doi.org/10.1016/j.icarus.2003.09.004",
+        "credit": "Britt et al. (2004); NASA/JPL/MICAS; USGS"
+      }
+    },
+    {
+      "id": "84000003",
+      "name": "Lower Mottled Terrain",
+      "kind": "region",
+      "type": "Mapped terrain",
+      "position": {
+        "pointMeters": [
+          -1576,
+          -1944,
+          649.931641
+        ],
+        "maximumDistanceMeters": 85
+      },
+      "normal": "surface",
+      "minimumZoomShare": 0.2,
+      "description": "Mottled terrain covers much of the smaller lobe. Sublimation and collapse may have helped produce its rough texture.",
+      "qualification": "Approximate location from Deep Space 1’s published terrain map.",
+      "reference": {
+        "title": "The morphology and surface processes of Comet 19/P Borrelly",
+        "url": "https://doi.org/10.1016/j.icarus.2003.09.004",
+        "credit": "Britt et al. (2004); NASA/JPL/MICAS; USGS"
+      }
+    }
+  ]
+}

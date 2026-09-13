@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3d6b809fb63180c3c0b4ed86b9928564f1f16808e38a9b95eb11a7e52c69b13b"
+    "sha256": "5169fad81085481473bc7220b511014c1b41533e6a5b5ddd37f9feec976797f2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "f4d04962a504d275f2ba499b2a1c0443ed94338b39e209faab99860dc7224d17"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "3eb4e17877104e779460cba8e6d6d683ec607300175e455a03442ff34225c372",
+      "sha256": "0a3553bb55dae755a71dc870cb54e3f3c86df842bf97d982db145f1c26cab559",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "sourceWidth": 4096,
@@ -24,14 +24,11 @@
         "height": 1024,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "source-packed",
+        "unpackedResizeBeforePack": true,
         "polarProjection": "angular-nearest",
         "polesCombined": true,
-        "polesOutput": "mercury-poles{suffix}.webp",
+        "polesOutput": "mercury-poles@2x.webp",
         "publicBase": "/scenes/mercury/",
         "surfaceMetadata": {
           "schema": "cssmercury-prepared-assets@1",
@@ -52,7 +49,7 @@
             "id": "normal",
             "source": "maps/mercury-bdr-global.png",
             "falseColor": false,
-            "output": "mercury-surface-{id}{suffix}.jpg",
+            "output": "mercury-surface-{id}@2x.jpg",
             "encoding": {
               "format": "jpeg",
               "encoder": "libjpeg",
@@ -66,7 +63,7 @@
             "id": "enhanced",
             "source": "maps/mercury-enhanced-global.png",
             "falseColor": true,
-            "output": "mercury-surface-{id}{suffix}.jpg",
+            "output": "mercury-surface-{id}@2x.jpg",
             "encoding": {
               "format": "jpeg",
               "encoder": "libjpeg",
@@ -88,7 +85,7 @@
             "id": "topography",
             "source": "maps/mercury-topography-global.png",
             "falseColor": true,
-            "output": "mercury-surface-{id}{suffix}.jpg",
+            "output": "mercury-surface-{id}@2x.jpg",
             "encoding": {
               "format": "jpeg",
               "encoder": "libjpeg",
@@ -106,8 +103,8 @@
           "defaultFrame": 230,
           "billboardFrameSize": 24,
           "billboardColumns": 16,
-          "rowOutput": "mercury-lighting-{density}x-row-{row}.webp",
-          "billboardOutput": "mercury-lighting-{density}x-billboard.webp",
+          "rowOutput": "mercury-lighting-2x-row-{row}.webp",
+          "billboardOutput": "mercury-lighting-2x-billboard.webp",
           "minimumLightViewZ": -1,
           "maximumLightViewZ": 1,
           "frameCount": 256,
@@ -167,24 +164,24 @@
           "poleTile": 256,
           "sectionWidth": 2048,
           "sectionHeight": 2048,
-          "outerOutput": "mercury-interior-outer{suffix}.webp",
-          "outerPolesOutput": "mercury-interior-outer-poles{suffix}.webp",
-          "coreOutput": "mercury-interior-core{suffix}.webp",
-          "corePolesOutput": "mercury-interior-core-poles{suffix}.webp",
-          "sectionOutput": "mercury-interior-section{suffix}.webp",
+          "outerOutput": "mercury-interior-outer@2x.webp",
+          "outerPolesOutput": "mercury-interior-outer-poles@2x.webp",
+          "coreOutput": "mercury-interior-core@2x.webp",
+          "corePolesOutput": "mercury-interior-core-poles@2x.webp",
+          "sectionOutput": "mercury-interior-section@2x.webp",
           "thumbnail": "mercury-lens-interior.webp",
           "metadata": {
             "schema": "cssmercury-prepared-interior-assets@2"
           },
-          "outerUnlitOutput": "mercury-interior-outer-unlit{suffix}.webp",
-          "outerUnlitPolesOutput": "mercury-interior-outer-unlit-poles{suffix}.webp"
+          "outerUnlitOutput": "mercury-interior-outer-unlit@2x.webp",
+          "outerUnlitPolesOutput": "mercury-interior-outer-unlit-poles@2x.webp"
         }
       }
     },
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4786a8cb8ed870bea24c6128736c5a42488b068365e20a9b30a01c729b45446f",
+      "sha256": "5a043a916f0cd7a8eebb048b363c045dafc123f86f0be98f55f8b78d0998ecb7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -343,12 +340,12 @@
               "description": "MESSENGER at 750 nm",
               "title": "MDIS Global Basemap BDR",
               "thumbnail": "mercury-lens-normal.webp",
-              "surface": "mercury-surface-normal.jpg",
+              "surface": "mercury-surface-normal@2x.jpg",
               "source": {
                 "id": "messenger-bdr",
                 "url": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
               },
-              "poles": "mercury-poles.webp",
+              "poles": "mercury-poles@2x.webp",
               "falseColor": false,
               "filter": "MESSENGER MDIS BDR global 750 nm monochrome basemap",
               "view": "exterior",
@@ -361,12 +358,12 @@
               "description": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color Missing polar regions use reconstructed color from nearby enhanced imagery with BDR and topographic detail; these are not observed enhanced-color coverage.",
               "title": "MDIS Enhanced Color Mosaic",
               "thumbnail": "mercury-lens-enhanced.webp",
-              "surface": "mercury-surface-enhanced.jpg",
+              "surface": "mercury-surface-enhanced@2x.jpg",
               "source": {
                 "id": "messenger-enhanced",
                 "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m"
               },
-              "poles": "mercury-poles.webp",
+              "poles": "mercury-poles@2x.webp",
               "falseColor": true,
               "filter": "NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion",
               "view": "exterior",
@@ -401,12 +398,12 @@
               "description": "MESSENGER shaded relief",
               "title": "MDIS Color Shaded Relief",
               "thumbnail": "mercury-lens-topography.webp",
-              "surface": "mercury-surface-topography.jpg",
+              "surface": "mercury-surface-topography@2x.jpg",
               "source": {
                 "id": "messenger-topography",
                 "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"
               },
-              "poles": "mercury-poles.webp",
+              "poles": "mercury-poles@2x.webp",
               "legend": {
                 "kind": "scale",
                 "title": "Elevation",
@@ -449,13 +446,13 @@
               "description": "Interior structure",
               "title": "Interior structure model",
               "thumbnail": "mercury-lens-interior.webp",
-              "surface": "mercury-interior-section.webp",
+              "surface": "mercury-interior-section@2x.webp",
               "source": {
                 "id": "mercury-structure",
                 "path": "../interior/mercury-structure.json",
                 "url": "https://science.nasa.gov/mercury/facts/"
               },
-              "poles": "mercury-interior-core-poles.webp",
+              "poles": "mercury-interior-core-poles@2x.webp",
               "legend": {
                 "kind": "categories",
                 "title": "Structure",
@@ -1049,8 +1046,8 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
       },
-      "sha256": "4786a8cb8ed870bea24c6128736c5a42488b068365e20a9b30a01c729b45446f",
-      "bytes": 17101,
+      "sha256": "5a043a916f0cd7a8eebb048b363c045dafc123f86f0be98f55f8b78d0998ecb7",
+      "bytes": 17125,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1304,12 +1301,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/mercury/mercury-surface-normal.jpg",
-          "bytes": 979194,
-          "sha256": "554cf655249d292bf79b6299ed78323692140d82f35382c1a4c07dac5f47b657",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/mercury/mercury-surface-normal@2x.jpg",
           "bytes": 4041840,
           "sha256": "0b459a7576c464d771a3742be2c4fdf91802d062c8cffb14816c41049b577942",
@@ -1317,8 +1308,8 @@
         },
         {
           "url": "/scenes/mercury/mercury-lens-normal.webp",
-          "bytes": 272,
-          "sha256": "2e2e420daae8e402a2c22009774c7640c6e1d4fa7991f4c41e9f96fd43751942",
+          "bytes": 280,
+          "sha256": "12cd76ff9ec246fe2039d0138668942404536eb851159c7a40f565b9098c6d4a",
           "verification": "bytes-verified"
         }
       ],
@@ -1363,12 +1354,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/mercury/mercury-surface-enhanced.jpg",
-          "bytes": 1384173,
-          "sha256": "a0210d6d314bcbb20b146b0e54b6b395b1ccd2524e78496ba4d8713dc511d715",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/mercury/mercury-surface-enhanced@2x.jpg",
           "bytes": 5273708,
           "sha256": "c12d266c18b09285fa29c400f9921a702a7fcefd5f609080bd3c40552c52ceca",
@@ -1376,8 +1361,8 @@
         },
         {
           "url": "/scenes/mercury/mercury-lens-enhanced.webp",
-          "bytes": 596,
-          "sha256": "0a2b0e3a1e728b541ed6de7d6f18119b46041d180a4ddb766f4a3e9ae548a0a0",
+          "bytes": 590,
+          "sha256": "e96069879e0ce65af82bccf4a4a36e8f283df2769d57a4eade454907673a75e1",
           "verification": "bytes-verified"
         }
       ],
@@ -1407,12 +1392,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/mercury/mercury-surface-topography.jpg",
-          "bytes": 1228558,
-          "sha256": "1384b4b8fc7f3f9469f449aad0b15b11ee350ed19e875aee6a0093f83219f19e",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/mercury/mercury-surface-topography@2x.jpg",
           "bytes": 3804655,
           "sha256": "0e3f45a7b1e82261293081876896749ea230d7bbf639148d91c74ced21854ef7",
@@ -1420,8 +1399,8 @@
         },
         {
           "url": "/scenes/mercury/mercury-lens-topography.webp",
-          "bytes": 584,
-          "sha256": "b705833e18b99fc7e72c78afed219d391bfd060ba6ef7229b619e97c987e0810",
+          "bytes": 590,
+          "sha256": "3baf9e8f93dd652fd70182d63be3cd2a9be578d8c8cea78f21eb7773f023fa06",
           "verification": "bytes-verified"
         }
       ],
@@ -1445,12 +1424,6 @@
       ],
       "inputs": [],
       "outputs": [
-        {
-          "url": "/scenes/mercury/mercury-poles.webp",
-          "bytes": 157910,
-          "sha256": "f2b43c6166dd8bf8fae9098d7dc29f369520e7b7bf64a39df180347eeb6b73b2",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/mercury/mercury-poles@2x.webp",
           "bytes": 526156,
@@ -1485,36 +1458,6 @@
         "usgs-messenger-bdr-global-z3"
       ],
       "outputs": [
-        {
-          "url": "/scenes/mercury/mercury-interior-outer.webp",
-          "bytes": 706126,
-          "sha256": "89711dca4dc3a88ee2fb790025b1d77fc46f685898ffa18ea81cdc24fb5ef399",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-interior-outer-poles.webp",
-          "bytes": 36768,
-          "sha256": "71565ebf60a186ea54c16875afcddb43d3c2694d1533465eed2f584aead192e2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-interior-core.webp",
-          "bytes": 207480,
-          "sha256": "453049bd5de5cf386fa4f0b09e74399caf82ea8190cca5fb30c4379828d2caeb",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-interior-core-poles.webp",
-          "bytes": 21586,
-          "sha256": "386ece1aff2b0489451838ec85c7aa0869b4126a2ab61da77c8d6e1148f0e944",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-interior-section.webp",
-          "bytes": 1277364,
-          "sha256": "ff22172574000613338588eb63cb4ad68a045b9ec59d614c3c30bb5a0969a772",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/mercury/mercury-interior-outer@2x.webp",
           "bytes": 2817906,
@@ -1573,204 +1516,6 @@
         "openspace-globe-lighting-excerpt"
       ],
       "outputs": [
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-billboard.webp",
-          "bytes": 40826,
-          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-00.webp",
-          "bytes": 14922,
-          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-01.webp",
-          "bytes": 27532,
-          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-02.webp",
-          "bytes": 34558,
-          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-03.webp",
-          "bytes": 40648,
-          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-04.webp",
-          "bytes": 45092,
-          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-05.webp",
-          "bytes": 49044,
-          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-06.webp",
-          "bytes": 52968,
-          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-07.webp",
-          "bytes": 56198,
-          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-08.webp",
-          "bytes": 59392,
-          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-09.webp",
-          "bytes": 61906,
-          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-10.webp",
-          "bytes": 62672,
-          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-11.webp",
-          "bytes": 61062,
-          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-12.webp",
-          "bytes": 59454,
-          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-13.webp",
-          "bytes": 52762,
-          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-14.webp",
-          "bytes": 42196,
-          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-15.webp",
-          "bytes": 23242,
-          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-16.webp",
-          "bytes": 28714,
-          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-17.webp",
-          "bytes": 52870,
-          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-18.webp",
-          "bytes": 65644,
-          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-19.webp",
-          "bytes": 76630,
-          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-20.webp",
-          "bytes": 85368,
-          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-21.webp",
-          "bytes": 93744,
-          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-22.webp",
-          "bytes": 99970,
-          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-23.webp",
-          "bytes": 107422,
-          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-24.webp",
-          "bytes": 112788,
-          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-25.webp",
-          "bytes": 122328,
-          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-26.webp",
-          "bytes": 130124,
-          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-27.webp",
-          "bytes": 137048,
-          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-28.webp",
-          "bytes": 148122,
-          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-29.webp",
-          "bytes": 157328,
-          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-30.webp",
-          "bytes": 167218,
-          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mercury/mercury-lighting-1x-row-31.webp",
-          "bytes": 182238,
-          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/mercury/mercury-lighting-2x-billboard.webp",
           "bytes": 115740,

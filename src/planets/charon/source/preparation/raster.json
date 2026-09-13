@@ -7,14 +7,10 @@
   "height": 3200,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "charon-poles-{id}{suffix}.webp",
+  "polesOutput": "charon-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "csscharon-prepared-assets@1"
   },
@@ -25,7 +21,7 @@
   "surfaces": [
     {
       "id": "normal",
-      "output": "charon-{id}{suffix}.webp",
+      "output": "charon-{id}@2x.webp",
       "thumbnail": "charon-lens-{id}.webp",
       "source": "observations/charon-mosaic.tif",
       "falseColor": false,
@@ -48,12 +44,16 @@
             255
           ],
           "specialValueMagnitude": 256
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     },
     {
       "id": "enhanced-color",
-      "output": "charon-{id}{suffix}.webp",
+      "output": "charon-{id}@2x.webp",
       "thumbnail": "charon-lens-{id}.webp",
       "source": "observations/nh_charon_color_mosaic.img",
       "falseColor": false,
@@ -88,7 +88,7 @@
     },
     {
       "id": "elevation",
-      "output": "charon-{id}{suffix}.webp",
+      "output": "charon-{id}@2x.webp",
       "thumbnail": "charon-lens-{id}.webp",
       "source": "science/charon-dem.tif",
       "falseColor": true,
@@ -142,7 +142,7 @@
     },
     {
       "id": "albedo",
-      "output": "charon-{id}{suffix}.webp",
+      "output": "charon-{id}@2x.webp",
       "thumbnail": "charon-lens-{id}.webp",
       "source": "science/nh-charon-bond-georeferenced.tif",
       "falseColor": true,
@@ -203,8 +203,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "charon-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "charon-lighting-{density}x-billboard.webp",
+    "rowOutput": "charon-lighting-2x-row-{row}.webp",
+    "billboardOutput": "charon-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

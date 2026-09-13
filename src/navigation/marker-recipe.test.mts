@@ -84,7 +84,7 @@ test("resolved parent sprites retain native source density and the existing phys
     assert.ok(metadata.width >= 512, "Resolved imagery must not come from the 32px UI atlas");
   }
   const moon = PREPARED_NAVIGATION_MARKERS.enceladus;
-  assert.deepEqual(contextMarkerSprite(moon), {url:moon.url2x,index:moon.index,count:moon.count,size:moon.presentation.size});
+  assert.deepEqual(contextMarkerSprite(moon), {url:moon.url,index:moon.index,count:moon.count,size:moon.presentation.size});
 });
 
 test("prepared flood shading has a bright centre, a darker limb and no terminator", async (context) => {

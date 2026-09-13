@@ -848,7 +848,8 @@
       "acquisition": "Restore original bytes from the pinned URL and verify SHA-256.",
       "redistribution": "Retain authors, dataset DOI and CC BY 4.0 attribution.",
       "consumers": [
-        "surface-geology"
+        "surface-geology",
+        "features"
       ],
       "projection": {
         "type": "cartesian-triangle-cells",
@@ -1249,6 +1250,84 @@
           }
         ]
       }
+    },
+    {
+      "id": "comet-67p-features-landmarks",
+      "path": "features/landmarks.json",
+      "expectedBytes": 15859,
+      "expectedSha256": "4693cc2a4dd667061aa42acf8851e687ca1fb2679841072fd0b0a42f58cca5da",
+      "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-pss-2018-05-019",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/features/landmarks.json: per-place coordinates, descriptions and publication references; checked 2026-09-12."
+          }
+        ]
+      }
+    },
+    {
+      "id": "comet-67p-features-manifest",
+      "path": "features/manifest.json",
+      "expectedBytes": 1075,
+      "expectedSha256": "fee7f80d11b9ddb05f0bb2e050276eb7c78c14b67e44f34be31bfdc0de8e47ab",
+      "origin": "Byte pins and source qualifications for the surface-place compilation.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte pins and source qualifications for the surface-place compilation."
+      }
+    },
+    {
+      "id": "comet-67p-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1060,
+      "expectedSha256": "716410e7330a882ec5da8e68c7a4030065e4ab0137e32cfd0caada91eac7fc80",
+      "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned selection of surface-place source records, datasets and label policy."
+      }
+    },
+    {
+      "id": "comet-67p-presentation-surface-map",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 156,
+      "expectedSha256": "2c4d670c40f6c544aba99082892839f03047ee3fec94d3a7dfdc0d0aa332ed09",
+      "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -1530,60 +1609,6 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared landing-sites source record cites this document."
-      }
-    },
-    {
-      "id": "comet-67p-preparation-features",
-      "path": "preparation/features.json",
-      "expectedBytes": 948,
-      "expectedSha256": "0a26bba76f0207db9d6c171eeb79fda2e45dfd44e61625418d07f734da865b05",
-      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored preparation parameters",
-      "acquisition": "Authored beside the other preparation recipes.",
-      "redistribution": "Repository-authored parameters; no imagery",
-      "consumers": [
-        "features"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored preparation parameters."
-      }
-    },
-    {
-      "id": "comet-67p-surface-features-source",
-      "path": "features/manifest.json",
-      "expectedBytes": 935,
-      "expectedSha256": "4a54a2dd7164ecdfb85203bf63c2ebffc71016369ece87c87a73a80cbe776c73",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
-      "consumers": [
-        "features"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
-      }
-    },
-    {
-      "id": "comet-67p-surface-map-frame",
-      "path": "presentation/surface-map.json",
-      "expectedBytes": 156,
-      "expectedSha256": "2c4d670c40f6c544aba99082892839f03047ee3fec94d3a7dfdc0d0aa332ed09",
-      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation parameters",
-      "acquisition": "Authored from the shared mesh convention.",
-      "redistribution": "Repository-authored parameters; no imagery",
-      "consumers": [
-        "features"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored map frame."
       }
     }
   ]

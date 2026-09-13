@@ -6,14 +6,11 @@
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "source-packed",
+  "unpackedResizeBeforePack": true,
   "polarProjection": "angular-nearest",
   "polesCombined": true,
-  "polesOutput": "mercury-poles{suffix}.webp",
+  "polesOutput": "mercury-poles@2x.webp",
   "publicBase": "/scenes/mercury/",
   "surfaceMetadata": {
     "schema": "cssmercury-prepared-assets@1",
@@ -34,7 +31,7 @@
       "id": "normal",
       "source": "maps/mercury-bdr-global.png",
       "falseColor": false,
-      "output": "mercury-surface-{id}{suffix}.jpg",
+      "output": "mercury-surface-{id}@2x.jpg",
       "encoding": {
         "format": "jpeg",
         "encoder": "libjpeg",
@@ -48,7 +45,7 @@
       "id": "enhanced",
       "source": "maps/mercury-enhanced-global.png",
       "falseColor": true,
-      "output": "mercury-surface-{id}{suffix}.jpg",
+      "output": "mercury-surface-{id}@2x.jpg",
       "encoding": {
         "format": "jpeg",
         "encoder": "libjpeg",
@@ -70,7 +67,7 @@
       "id": "topography",
       "source": "maps/mercury-topography-global.png",
       "falseColor": true,
-      "output": "mercury-surface-{id}{suffix}.jpg",
+      "output": "mercury-surface-{id}@2x.jpg",
       "encoding": {
         "format": "jpeg",
         "encoder": "libjpeg",
@@ -88,8 +85,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "mercury-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "mercury-lighting-{density}x-billboard.webp",
+    "rowOutput": "mercury-lighting-2x-row-{row}.webp",
+    "billboardOutput": "mercury-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,
@@ -149,16 +146,16 @@
     "poleTile": 256,
     "sectionWidth": 2048,
     "sectionHeight": 2048,
-    "outerOutput": "mercury-interior-outer{suffix}.webp",
-    "outerPolesOutput": "mercury-interior-outer-poles{suffix}.webp",
-    "coreOutput": "mercury-interior-core{suffix}.webp",
-    "corePolesOutput": "mercury-interior-core-poles{suffix}.webp",
-    "sectionOutput": "mercury-interior-section{suffix}.webp",
+    "outerOutput": "mercury-interior-outer@2x.webp",
+    "outerPolesOutput": "mercury-interior-outer-poles@2x.webp",
+    "coreOutput": "mercury-interior-core@2x.webp",
+    "corePolesOutput": "mercury-interior-core-poles@2x.webp",
+    "sectionOutput": "mercury-interior-section@2x.webp",
     "thumbnail": "mercury-lens-interior.webp",
     "metadata": {
       "schema": "cssmercury-prepared-interior-assets@2"
     },
-    "outerUnlitOutput": "mercury-interior-outer-unlit{suffix}.webp",
-    "outerUnlitPolesOutput": "mercury-interior-outer-unlit-poles{suffix}.webp"
+    "outerUnlitOutput": "mercury-interior-outer-unlit@2x.webp",
+    "outerUnlitPolesOutput": "mercury-interior-outer-unlit-poles@2x.webp"
   }
 }

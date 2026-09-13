@@ -1,7 +1,6 @@
 import { browserProfileLensIds, createObjectBrowserProfile } from '../../../../site/test/object-browser-profile.mts';
 import objectControls from '../../../../src/planets/setebos/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'setebos',controls:objectControls,audit:{
-  preparedAssetPairs:[{one:'/scenes/setebos/setebos-directional-sun.webp',two:'/scenes/setebos/setebos-directional-sun@2x.webp'}],
-  canonicalPreparedAssets:['/scenes/setebos/setebos-model-surface@2x.webp','/scenes/setebos/setebos-lighting.webp'],
+  canonicalPreparedAssets:['/scenes/setebos/setebos-model-surface@2x.webp','/scenes/setebos/setebos-lighting.webp','/scenes/setebos/setebos-directional-sun@2x.webp'],
   retained:{lensIds:browserProfileLensIds(objectControls),speedClicks:5,allowedMountSelectors:[]},
 }});

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "609574492701d140ac2a9093f851a1da7150cf91c81df0327c490f8c237a8c1a"
+    "sha256": "4654f970503a1ac40b7ed91c562bdd91e24cba154d1b6fcbb1e43a26b99dcdea"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "f4d04962a504d275f2ba499b2a1c0443ed94338b39e209faab99860dc7224d17"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "b937065debfbcd62352c9e6b5189f1febe5fffb604d3a94fc96821d964aa2d77",
+      "sha256": "d9f7d9854284d36267962ed967c628d1ba311f5e491e73f36b362b2e2d6dc2c1",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/io/",
@@ -25,14 +25,10 @@
         "height": 1024,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
-        "polesOutput": "io-poles-{id}{suffix}.webp",
+        "polesOutput": "io-poles-{id}@2x.webp",
         "surfaceMetadata": {
           "schema": "cssio-prepared-assets@1"
         },
@@ -43,7 +39,7 @@
         "surfaces": [
           {
             "id": "normal",
-            "output": "io-{id}{suffix}.webp",
+            "output": "io-{id}@2x.webp",
             "thumbnail": "io-lens-{id}.webp",
             "source": "io-global-1km.tif",
             "falseColor": false,
@@ -59,19 +55,25 @@
                 "zeroValidity": "all-channels",
                 "colorSpace": "srgb",
                 "resolutionMeters": 1000,
-                "resampling": "source-georeferenced-bilinear"
+                "resampling": "source-georeferenced-bilinear",
+                "wrapLongitude": true
               },
               "projection": {
                 "longitudeDegrees": [
                   0,
                   360
                 ]
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
-            }
+            },
+            "resolutionScale": 2
           },
           {
             "id": "enhanced",
-            "output": "io-{id}{suffix}.webp",
+            "output": "io-{id}@2x.webp",
             "thumbnail": "io-lens-{id}.webp",
             "source": "io-color-1km.tif",
             "falseColor": false,
@@ -88,7 +90,8 @@
                 "colorSpace": "srgb",
                 "resolutionMeters": 1000,
                 "withholdLatitudeDegrees": 85,
-                "resampling": "source-georeferenced-bilinear"
+                "resampling": "source-georeferenced-bilinear",
+                "wrapLongitude": true
               },
               "monochromeBase": "normal",
               "projection": {
@@ -100,12 +103,17 @@
               "metadata": {
                 "withheldColorLatitudeDegrees": 85,
                 "sourceProcessing": "USGS Lunar-Lambert L=0.7, seam matching and color-ratio merge; no additional photometric normalization."
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
-            }
+            },
+            "resolutionScale": 2
           },
           {
             "id": "geology",
-            "output": "io-{id}{suffix}.webp",
+            "output": "io-{id}@2x.webp",
             "thumbnail": "io-lens-{id}.webp",
             "source": "science/geology-sim3168/Io_GeoUnits.shp",
             "falseColor": true,
@@ -221,7 +229,7 @@
           },
           {
             "id": "spectral-slope",
-            "output": "io-{id}{suffix}.webp",
+            "output": "io-{id}@2x.webp",
             "thumbnail": "io-lens-{id}.webp",
             "source": "muse/io/485nm_slope-night-1.tif",
             "falseColor": true,
@@ -312,7 +320,7 @@
           },
           {
             "id": "visible-absorption",
-            "output": "io-{id}{suffix}.webp",
+            "output": "io-{id}@2x.webp",
             "thumbnail": "io-lens-{id}.webp",
             "source": "muse/io/560nm_band-night-1.tif",
             "falseColor": true,
@@ -409,8 +417,8 @@
           "defaultFrame": 230,
           "billboardFrameSize": 24,
           "billboardColumns": 16,
-          "rowOutput": "io-lighting-{density}x-row-{row}.webp",
-          "billboardOutput": "io-lighting-{density}x-billboard.webp",
+          "rowOutput": "io-lighting-2x-row-{row}.webp",
+          "billboardOutput": "io-lighting-2x-billboard.webp",
           "minimumLightViewZ": -1,
           "maximumLightViewZ": 1,
           "frameCount": 256,
@@ -448,7 +456,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "633b7683b64c3b503cdd339edb27922cbeb62894ebb3873e4bc98cf32c52308e",
+      "sha256": "d0a8429f4d8df23984d82dad5ef754571db4ebcf59bdabbaa0db20bb3e67fa36",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -563,8 +571,8 @@
               "description": "USGS Voyager/Galileo mosaic on a 1 km grid; original detail varies from about 1 to 10 km per pixel. Gray grid marks documented no-data and its resampled boundary. Photographed terrain shading remains; globe lighting is approximate.",
               "title": "Global image mosaic",
               "thumbnail": "io-lens-normal.webp",
-              "surface": "io-normal.webp",
-              "poles": "io-poles-normal.webp",
+              "surface": "io-normal@2x.webp",
+              "poles": "io-poles-normal@2x.webp",
               "source": {
                 "id": "usgs-normal-global-1km",
                 "path": "../manifest.json"
@@ -578,8 +586,8 @@
               "description": "USGS enhanced-color mosaic: near-infrared, green and violet color ratios combined with observed monochrome detail. USGS corrected broad limb darkening and matched image seams. Source color detail varies from 1.3 to 21 km per pixel. Interpolated polar color is withheld; observed monochrome remains where available. Gray grid marks missing imagery. Acquisition shading, seams and changes between mission dates can remain; globe lighting is approximate.",
               "title": "False-color mosaic",
               "thumbnail": "io-lens-enhanced.webp",
-              "surface": "io-enhanced.webp",
-              "poles": "io-poles-enhanced.webp",
+              "surface": "io-enhanced@2x.webp",
+              "poles": "io-poles-enhanced@2x.webp",
               "source": {
                 "id": "usgs-enhanced-global-1km",
                 "path": "../manifest.json"
@@ -594,8 +602,8 @@
               "description": "Fourteen base geologic units mapped from Voyager and Galileo observations. Colors distinguish interpreted plains, lava flows, patera floors and mountains. The separate diffuse-deposit overlay and structural linework are not shown. Gray grid marks unmapped or conflicting polygons; this view adds no measured relief.",
               "title": "Global geologic map",
               "thumbnail": "io-lens-geology.webp",
-              "surface": "io-geology.webp",
-              "poles": "io-poles-geology.webp",
+              "surface": "io-geology@2x.webp",
+              "poles": "io-poles-geology@2x.webp",
               "falseColor": true,
               "source": {
                 "id": "usgs-sim3168-geologic-units",
@@ -710,8 +718,8 @@
               "title": "Sulfur-sensitive visible spectral slope",
               "summary": "Sulfur-sensitive slope from 2° samples with approximate registration. Gray grid marks missing or withheld data; joins between nights remain. Values do not measure sulfur abundance.",
               "thumbnail": "io-lens-spectral-slope.webp",
-              "surface": "io-spectral-slope.webp",
-              "poles": "io-poles-spectral-slope.webp",
+              "surface": "io-spectral-slope@2x.webp",
+              "poles": "io-poles-spectral-slope@2x.webp",
               "source": {
                 "id": "io-muse-spectral-slope-night-1",
                 "path": "../manifest.json",
@@ -767,8 +775,8 @@
               "title": "Continuum-relative visible absorption",
               "summary": "A broad 520–660 nm absorption feature with uncertain chemical attribution. These 2° samples have approximate registration. Gray grid marks missing or withheld data; joins between nights remain.",
               "thumbnail": "io-lens-visible-absorption.webp",
-              "surface": "io-visible-absorption.webp",
-              "poles": "io-poles-visible-absorption.webp",
+              "surface": "io-visible-absorption@2x.webp",
+              "poles": "io-poles-visible-absorption@2x.webp",
               "source": {
                 "id": "io-muse-visible-absorption-night-1",
                 "path": "../manifest.json",
@@ -897,7 +905,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "2a5947114e6ef23f9571f4f2052403e38a54222fc4dfaa83f5dc63804b4db2b8",
+      "sha256": "773f25e55fd348ab4193cabd51fbada8b6a52d6092586ac65116debe011cfbcf",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -908,7 +916,7 @@
           "metadata": "metadata_nomenclature_points_IO.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
+        "mapLeftEdgeLongitudeDeg": 0,
         "output": "io-features.json",
         "publicBase": "/scenes/io/",
         "target": {
@@ -1594,8 +1602,8 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet, view descriptions and legends."
       },
-      "sha256": "633b7683b64c3b503cdd339edb27922cbeb62894ebb3873e4bc98cf32c52308e",
-      "bytes": 15662,
+      "sha256": "d0a8429f4d8df23984d82dad5ef754571db4ebcf59bdabbaa0db20bb3e67fa36",
+      "bytes": 15692,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1715,7 +1723,7 @@
       "recipe": "raster",
       "selector": "/surfaces/0",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "USGS Voyager/Galileo mosaic on a 1 km grid; original detail varies from about 1 to 10 km per pixel. Gray grid marks documented no-data and its resampled boundary. Photographed terrain shading remains; globe lighting is approximate."
       ],
@@ -1726,40 +1734,29 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "usgs-normal-global-1km"
       ],
       "outputs": [
         {
-          "url": "/scenes/io/io-normal.webp",
-          "bytes": 253510,
-          "sha256": "7c5648f5e4db1ed0f9acb765a4fb0302d58890a2a1b045aa9768e542317b3762",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/io/io-normal@2x.webp",
-          "bytes": 635896,
-          "sha256": "0f6a8c10ef75250f87bf08fffed57bee0ee0e1055b58cca5705b7b324e457fb4",
+          "bytes": 1776680,
+          "sha256": "29f79bd355cce033a23a9e5a447a0d3fa74eb1987459d710121768eee66344b1",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-lens-normal.webp",
-          "bytes": 928,
-          "sha256": "f09a024f569f1ee3b5240342358db9e23e019a653fe750d89f7a108272c2cc45",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-poles-normal.webp",
-          "bytes": 29006,
-          "sha256": "5f3184ef12867e22c4336e2bf86b848aee2ece796a83a9fa48223b8ad93f6a56",
+          "bytes": 926,
+          "sha256": "c38754025da59739d88955de31c1e477cc9bda6a2a0d98936df6642dc022183e",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-poles-normal@2x.webp",
-          "bytes": 89416,
-          "sha256": "41411e94a5046ffc96863199e6873d31fa3c07859f9f4d48a7d38eabf981b1a7",
+          "bytes": 89306,
+          "sha256": "e4d9323401e1186a200c0f1c0b6b160d57bca606ba6a442032b71952b2a7ab03",
           "verification": "bytes-verified"
         }
       ],
@@ -1771,7 +1768,7 @@
       "recipe": "raster",
       "selector": "/surfaces/1",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "USGS enhanced-color mosaic: near-infrared, green and violet color ratios combined with observed monochrome detail. USGS corrected broad limb darkening and matched image seams. Source color detail varies from 1.3 to 21 km per pixel. Interpolated polar color is withheld; observed monochrome remains where available. Gray grid marks missing imagery. Acquisition shading, seams and changes between mission dates can remain; globe lighting is approximate."
       ],
@@ -1782,40 +1779,29 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "usgs-enhanced-global-1km"
       ],
       "outputs": [
         {
-          "url": "/scenes/io/io-enhanced.webp",
-          "bytes": 288330,
-          "sha256": "f3a7342ef71db0968cd68ff5c0735ec1035ec2b4bde2f1e5480dd02fb1df9f6d",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/io/io-enhanced@2x.webp",
-          "bytes": 751536,
-          "sha256": "a7b7bf538ffaa876e506db60cbee92cbba10f729daacd4e531d22538aadbfcbf",
+          "bytes": 1681394,
+          "sha256": "cf392c0b06cd1b110c13838059f53fa437a86a6f0ecbe3b2ca8a4242de19ca78",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-lens-enhanced.webp",
-          "bytes": 1400,
-          "sha256": "4ff8de71d29e1bbd748540bd02716fb3f4ee45d2441d64948e97ec81bb685b2b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-poles-enhanced.webp",
-          "bytes": 66960,
-          "sha256": "7758b89090f0ed47e047a8d7ad898c1375b274217fc9bb97ad5357607fb13b76",
+          "bytes": 1384,
+          "sha256": "3607ed19a3bb055d2f6a2bb07cff01651346ddbdaf52a3a1fe282ee91f9fe1f6",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-poles-enhanced@2x.webp",
-          "bytes": 182192,
-          "sha256": "ec9389c5b85100c176be962389a5cc02c5dc2d4550340fef79b6133b15f21870",
+          "bytes": 178146,
+          "sha256": "9ea60bcc52dec910fc5c1713f72a862a5e2d61f2386963a05ca8c04f7d5a27fe",
           "verification": "bytes-verified"
         }
       ],
@@ -1847,12 +1833,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/io/io-geology.webp",
-          "bytes": 65914,
-          "sha256": "dbeb61f4c9329959e3f8bf36a87742d4af1c294e8a242b8ed6f57c422ecf269c",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/io/io-geology@2x.webp",
           "bytes": 200696,
           "sha256": "1bfc6c35f2e1322770fcccd37365c7105572800160e89ccf336aef39f357332b",
@@ -1862,12 +1842,6 @@
           "url": "/scenes/io/io-lens-geology.webp",
           "bytes": 1038,
           "sha256": "2e90be97d004e83dbcbfa2fbda362add374ed387428d673a5041677e1f1e5dd3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-poles-geology.webp",
-          "bytes": 5794,
-          "sha256": "fd105ffead9b1d0420ac9756cd76837d48ef87dfd5004f1155d10eb8e913d74e",
           "verification": "bytes-verified"
         },
         {
@@ -1905,12 +1879,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/io/io-spectral-slope.webp",
-          "bytes": 45138,
-          "sha256": "5f553cded2cfda085c873714dc2850a106e941e555aad10fac39a8ac9520a0d1",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/io/io-spectral-slope@2x.webp",
           "bytes": 65922,
           "sha256": "14781d3b6d73ef7d12e5edd6e89a392e9727462b243173dd0e7cfd858228816b",
@@ -1920,12 +1888,6 @@
           "url": "/scenes/io/io-lens-spectral-slope.webp",
           "bytes": 458,
           "sha256": "8edf3d59d430cd9bbb26517ea998aa1e801ef36194082ad4024a43bbc2080652",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-poles-spectral-slope.webp",
-          "bytes": 4204,
-          "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
           "verification": "bytes-verified"
         },
         {
@@ -1963,12 +1925,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/io/io-visible-absorption.webp",
-          "bytes": 43540,
-          "sha256": "0ff713e7c9d2b37750e646c50f59cfbf27d74c1337f2403fcfc5d0653ec87eca",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/io/io-visible-absorption@2x.webp",
           "bytes": 64832,
           "sha256": "afc85dfd82e6a4c50842ede5774b2d2ede5409555fad1870172cd82e59ca70b9",
@@ -1978,12 +1934,6 @@
           "url": "/scenes/io/io-lens-visible-absorption.webp",
           "bytes": 458,
           "sha256": "353b0f2075073d896acfb62fd5f6d441e83213756741a61f0fcd58beb811c7d3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-poles-visible-absorption.webp",
-          "bytes": 4204,
-          "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
           "verification": "bytes-verified"
         },
         {
@@ -2012,204 +1962,6 @@
       },
       "inputs": [],
       "outputs": [
-        {
-          "url": "/scenes/io/io-lighting-1x-billboard.webp",
-          "bytes": 40826,
-          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-00.webp",
-          "bytes": 14922,
-          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-01.webp",
-          "bytes": 27532,
-          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-02.webp",
-          "bytes": 34558,
-          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-03.webp",
-          "bytes": 40648,
-          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-04.webp",
-          "bytes": 45092,
-          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-05.webp",
-          "bytes": 49044,
-          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-06.webp",
-          "bytes": 52968,
-          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-07.webp",
-          "bytes": 56198,
-          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-08.webp",
-          "bytes": 59392,
-          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-09.webp",
-          "bytes": 61906,
-          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-10.webp",
-          "bytes": 62672,
-          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-11.webp",
-          "bytes": 61062,
-          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-12.webp",
-          "bytes": 59454,
-          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-13.webp",
-          "bytes": 52762,
-          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-14.webp",
-          "bytes": 42196,
-          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-15.webp",
-          "bytes": 23242,
-          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-16.webp",
-          "bytes": 28714,
-          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-17.webp",
-          "bytes": 52870,
-          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-18.webp",
-          "bytes": 65644,
-          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-19.webp",
-          "bytes": 76630,
-          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-20.webp",
-          "bytes": 85368,
-          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-21.webp",
-          "bytes": 93744,
-          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-22.webp",
-          "bytes": 99970,
-          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-23.webp",
-          "bytes": 107422,
-          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-24.webp",
-          "bytes": 112788,
-          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-25.webp",
-          "bytes": 122328,
-          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-26.webp",
-          "bytes": 130124,
-          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-27.webp",
-          "bytes": 137048,
-          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-28.webp",
-          "bytes": 148122,
-          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-29.webp",
-          "bytes": 157328,
-          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-30.webp",
-          "bytes": 167218,
-          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/io/io-lighting-1x-row-31.webp",
-          "bytes": 182238,
-          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/io/io-lighting-2x-billboard.webp",
           "bytes": 115740,
@@ -2450,7 +2202,7 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
+        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -2464,8 +2216,8 @@
       "outputs": [
         {
           "url": "/scenes/io/io-features.json",
-          "bytes": 745914,
-          "sha256": "63f11b9ecb262c21517eb9c319ec6091add993e1e0bded57cb4d99aa9d036210",
+          "bytes": 746562,
+          "sha256": "c3277f1908675a532a5f612a7a67e3390a978931c207c84c07cc60ac33dbd258",
           "verification": "bytes-verified"
         }
       ],

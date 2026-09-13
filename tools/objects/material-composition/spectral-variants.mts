@@ -1,6 +1,6 @@
 import {parse} from './data-schema.mts';
 import {spectralRecipe, type SpectralRecipe} from './spectral-recipe.mts';
-import type {Channels, OutputInfo} from 'sharp';
+import type {Channels, OutputInfo, Sharp} from 'sharp';
 type SpectralLens = SpectralRecipe['lenses'][number];
 type ColorPalette = readonly (readonly number[])[];
 interface RawImage {data: Buffer; info: {width: number; height: number; channels: Channels}}
@@ -40,8 +40,8 @@ const stagingRoot = stagingDirectory;
 
 const bodyWidth = config.parameters.bodyWidth;
 const bodyHeight = config.parameters.bodyHeight;
-const body2xWidth = config.parameters.body2xWidth;
-const body2xHeight = config.parameters.body2xHeight;
+const preparedSurfaceWidth = config.parameters.surfaceWidth;
+const preparedSurfaceHeight = config.parameters.surfaceHeight;
 const latitudeBandCount = config.parameters.latitudeBandCount;
 const detailBlurSigma = config.parameters.detailBlurSigma;
 const detailGain = config.parameters.detailGain;
@@ -61,8 +61,6 @@ const lensPlans = config.lenses;
 const normalAssets = Object.freeze({
   surface: resolve(stagingRoot, config.files.surface),
   poles: resolve(publicRoot, config.files.poles),
-  rings: resolve(publicRoot, config.files.rings),
-  rings2x: resolve(publicRoot, config.files.rings2x),
   materials: Object.freeze(Object.fromEntries(materialModes.map((mode) => {
     const variantId = materialVariantId("normal", mode);
     return [mode, resolve(
@@ -95,33 +93,22 @@ const descriptor = {...config.descriptor,controls:config.controlOrder.map(id=>{c
 
 
 async function prepareLens(plan: SpectralLens) {
-  const surfacePath = resolve(publicRoot, `${config.namespace}-surface-${plan.id}.webp`);
-  const surface2xPath = resolve(publicRoot, `${config.namespace}-surface-${plan.id}@2x.webp`);
+  const surfacePath = resolve(publicRoot, `${config.namespace}-surface-${plan.id}@2x.webp`);
   const preparedSurface = plan.operation === "morphology-response"
     ? await prepareThermalSurface(plan)
     : await prepareScalarSurface(plan);
   const bodyData = preparedSurface.data;
-  await Promise.all([
-    writeProjectiveSurface(
-      preparedSurface,
-      body2xWidth / 2,
-      body2xHeight / 2,
-      surfacePath,
-    ),
-    writeProjectiveSurface(
-      preparedSurface,
-      body2xWidth,
-      body2xHeight,
-      surface2xPath,
-    ),
+  // Lens thumbnails keep their accepted source: the packed surface at half the prepared size, encoded in memory only.
+  const [, thumbnailSource] = await Promise.all([
+    packedProjectiveSurface(preparedSurface, preparedSurfaceWidth, preparedSurfaceHeight).then(image => image.toFile(surfacePath)),
+    packedProjectiveSurface(preparedSurface, preparedSurfaceWidth / 2, preparedSurfaceHeight / 2).then(image => image.toBuffer()),
   ]);
 
   const body = { data: bodyData, info: preparedSurface.info };
   const polesPath = resolve(publicRoot, `${config.namespace}-poles-${plan.id}.webp`);
   await preparePolarAtlas(body, plan, polesPath);
 
-  const ringPath = resolve(publicRoot, `${config.namespace}-rings-${plan.id}.webp`);
-  const ring2xPath = resolve(publicRoot, `${config.namespace}-rings-${plan.id}@2x.webp`);
+  const ringPath = resolve(publicRoot, `${config.namespace}-rings-${plan.id}@2x.webp`);
 
 
   const materialPaths = Object.freeze(Object.fromEntries(materialModes.map(
@@ -152,13 +139,11 @@ async function prepareLens(plan: SpectralLens) {
     ),
   ]));
   const thumbnailPath = resolve(publicRoot, `${config.namespace}-lens-${plan.id}.webp`);
-  await prepareThumbnail(surfacePath, thumbnailPath);
+  await prepareThumbnail(thumbnailSource, thumbnailPath);
   const assets = await Promise.all([
     surfacePath,
-    surface2xPath,
     polesPath,
     ringPath,
-    ring2xPath,
     ...materialModes.flatMap((mode) => [
       materialPaths[mode].exterior,
       materialPaths[mode].interior,
@@ -173,11 +158,9 @@ async function prepareLens(plan: SpectralLens) {
     filter: plan.filter,
     wavelength: plan.wavelength,
     thumbnailUrl: `${config.publicPrefix}${config.namespace}-lens-${plan.id}.webp`,
-    surfaceUrl: `${config.publicPrefix}${config.namespace}-surface-${plan.id}.webp`,
-    surface2xUrl: `${config.publicPrefix}${config.namespace}-surface-${plan.id}@2x.webp`,
+    surfaceUrl: `${config.publicPrefix}${config.namespace}-surface-${plan.id}@2x.webp`,
     polesUrl: `${config.publicPrefix}${config.namespace}-poles-${plan.id}.webp`,
-    ringUrl: `${config.publicPrefix}${config.namespace}-rings-${plan.id}.webp`,
-    ring2xUrl: `${config.publicPrefix}${config.namespace}-rings-${plan.id}@2x.webp`,
+    ringUrl: `${config.publicPrefix}${config.namespace}-rings-${plan.id}@2x.webp`,
     materialVariant: plan.id,
     materialPreparationFile: `${config.namespace}-orbit-material-${plan.id}.webp`,
     interiorMaterialPreparationFile:
@@ -203,24 +186,22 @@ async function prepareLens(plan: SpectralLens) {
     sourceUrls: Object.freeze('sourceUrls' in plan ? plan.sourceUrls : []),
     assetSha256: Object.freeze({
       surface: digest(assets[0]),
-      surface2x: digest(assets[1]),
-      poles: digest(assets[2]),
-      rings: digest(assets[3]),
-      rings2x: digest(assets[4]),
-      material: digest(assets[5]),
-      interiorMaterial: digest(assets[6]),
-      materialNoShadows: digest(assets[7]),
-      interiorMaterialNoShadows: digest(assets[8]),
-      materialRingless: digest(assets[9]),
-      interiorMaterialRingless: digest(assets[10]),
-      materialRinglessNoShadows: digest(assets[11]),
-      interiorMaterialRinglessNoShadows: digest(assets[12]),
-      thumbnail: digest(assets[13]),
+      poles: digest(assets[1]),
+      rings: digest(assets[2]),
+      material: digest(assets[3]),
+      interiorMaterial: digest(assets[4]),
+      materialNoShadows: digest(assets[5]),
+      interiorMaterialNoShadows: digest(assets[6]),
+      materialRingless: digest(assets[7]),
+      interiorMaterialRingless: digest(assets[8]),
+      materialRinglessNoShadows: digest(assets[9]),
+      interiorMaterialRinglessNoShadows: digest(assets[10]),
+      thumbnail: digest(assets[11]),
     }),
   });
 }
 
-async function writeProjectiveSurface(source: RawImage, width: number, height: number, outputPath: string) {
+async function packedProjectiveSurface(source: RawImage, width: number, height: number): Promise<Sharp> {
   const resized = await sharp(source.data, { raw: source.info })
     .resize(width, height, { kernel: sharp.kernel.lanczos3 })
     .raw()
@@ -232,13 +213,12 @@ async function writeProjectiveSurface(source: RawImage, width: number, height: n
     bandCount: latitudeBandCount,
     gutter: height / latitudeBandCount / 4,
   });
-  await sharp(packed.data, { raw: {
+  return sharp(packed.data, { raw: {
     width: packed.packedWidth,
     height: packed.packedHeight,
     channels: resized.info.channels,
   } })
-    .webp({ lossless: true, effort: 6 })
-    .toFile(outputPath);
+    .webp({ lossless: true, effort: 6 });
 }
 
 async function prepareScalarSurface(plan: Extract<SpectralLens,{operation:'scalar-map'}>) {
@@ -461,14 +441,14 @@ async function prepareMaterial(inputPath: string, outputPath: string, plan: Spec
     .toFile(outputPath);
 }
 
-async function prepareThumbnail(inputPath: string, outputPath: string) {
-  const metadata = await sharp(inputPath).metadata();
+async function prepareThumbnail(input: string | Buffer, outputPath: string) {
+  const metadata = await sharp(input).metadata();
   if (metadata.width === undefined || metadata.height === undefined) throw new Error('Spectral thumbnail dimensions are missing.');
   const width = Math.min(metadata.width, Math.round(metadata.width * 0.34));
   const height = Math.min(metadata.height, Math.round(metadata.height * 0.28));
   const left = Math.round((metadata.width - width) * 0.5);
   const top = Math.round((metadata.height - height) * 0.46);
-  await sharp(inputPath).extract({ left, top, width, height })
+  await sharp(input).extract({ left, top, width, height })
     .resize(112, 64, { fit: "cover", kernel: sharp.kernel.lanczos3 })
     .webp({ quality: 92, effort: 6 }).toFile(outputPath);
 }

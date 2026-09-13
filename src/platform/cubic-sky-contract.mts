@@ -7,7 +7,7 @@ export interface PreparedCubicSkyPlan extends CubicSkyPlan {
   projection?: NonNullable<CubicSkyPlan["projection"]> & { axis: string; runtimeProjection: boolean };
   sun?: NonNullable<CubicSkyPlan["sun"]> & { schema: string; billboard: boolean; bakedIntoStarfield: boolean; runtimeRasterization: boolean };
 }
-export const PREPARED_CUBIC_SKY_SCHEMA = "cssearth-prepared-cubic-sky@2";
+export const PREPARED_CUBIC_SKY_SCHEMA = "cssearth-prepared-cubic-sky@3";
 export const PREPARED_CUBIC_SKY_SUN_SCHEMA =
   "cssearth-prepared-sun-cubemap-bake@1";
 
@@ -170,13 +170,8 @@ export function validatePreparedCubicSky(input: unknown, { requireSun = true } =
       plan.runtimeRasterization !== false ||
       plan.orientation !== "camera-rotation-only-no-translation-or-parallax" ||
       JSON.stringify(faceIds) !== JSON.stringify(CUBIC_SKY_FACE_IDS) ||
-      plan.faces.some(({
-        url,
-        url2x,
-        highContrastUrl,
-        highContrastUrl2x,
-      }) => [url, url2x, highContrastUrl, highContrastUrl2x]
-        .some((value) => typeof value !== "string")) ||
+      plan.faces.some(({ url, highContrastUrl }) =>
+        [url, highContrastUrl].some((value) => typeof value !== "string")) ||
       !Number.isFinite(plan.cameraPitchResponse) ||
       !Number.isFinite(plan.cameraZoomResponse) ||
       !Number.isFinite(plan.presentationPitchOffsetDegrees) ||

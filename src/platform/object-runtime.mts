@@ -21,7 +21,6 @@ import type { WorldCameraPose, WorldCameraViewport } from "../renderers/css/navi
 export type ObjectRuntimeServices = typeof nativeServices;
 import { mountPreparedMapPages } from "./prepared-map/city-pages.mts";
 import { createPreparedDestinations } from "./prepared-destinations.mts";
-import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../site/runtime-policy.mts";
 import { createSceneLifetime } from "@cssearth/engine";
 import { waitForSceneDocument, waitForScenePaint } from "../renderers/css/dist/scene-native-waits.js";
 import { createPreparedResidency } from "./prepared-residency.mts";
@@ -82,7 +81,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     }
     lifetime.onDispose(() => resources.destroy());
     const context = Object.freeze({
-      density: CANONICAL_PREPARED_IMAGE_DENSITY,
       resources: resources.resources,
       own(disposer: () => void) {
         const errors = lifetime.onDispose(disposer);
@@ -219,19 +217,19 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Presentation owns its roots immediately during construction, including
       // partial construction failures. Shared celestial layers join afterwards.
       const cubicSky = environment.mountSky({ host: stage, plan: definition.sky,
-        imageDensity: context.density, objectId: definition.id, requireSun: false });
+        objectId: definition.id, requireSun: false });
       context.own(() => cubicSky.destroy());
       // A heliocentric view renders the Sun as real geometry beneath the body
       // (its own perspective root before the camera root) with the orbit and
       // marker overlay; otherwise the Sun is the directional billboard.
       heliocentric = definition.heliocentricView == null ? null : environment.mountHeliocentric({ host: stage,
         before: mounted!.cameraElement, plan: definition.heliocentricView.plan, objectId: definition.id,
-        sunImageUrl: context.density === 2 ? definition.sun!.asset.url2x : definition.sun!.asset.url,
+        sunImageUrl: definition.sun!.asset.url,
         markerSprite: definition.heliocentricView.bodyMarker, systemMarkers: definition.heliocentricView.systemMarkers ?? null,
         labels: definition.heliocentricView.labels ?? null });
       if (heliocentric) context.own(() => heliocentric!.destroy());
       const directionalSun = definition.sun == null || heliocentric ? null : environment.mountSun({ host: stage, plan: definition.sun,
-        imageDensity: context.density, objectId: definition.id, before: mounted!.cameraElement });
+        objectId: definition.id, before: mounted!.cameraElement });
       if (directionalSun) context.own(() => directionalSun.destroy());
       for (const animation of stage.getAnimations({ subtree: true })) {
         const initialTime = animation.constructor?.name === "CSSAnimation" ? 0 : undefined;
@@ -307,9 +305,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         lenses: Object.freeze({ state: lensState, select: selectLens }),
         options, settings: Object.freeze({ state: settings() }), features,
         renderStats: Object.freeze({
-          selectedPreparedDensity: context.density, visibleAssetsDecodedBeforeMount: startupDecodedAssets,
+          visibleAssetsDecodedBeforeMount: startupDecodedAssets,
           textureStats: Object.freeze({
-            selectedPreparedDensity: context.density,
             get retainedInteractiveImageCount() { return resources.stats().images.entries.filter(entry => entry.ready).length; },
             get pendingInteractiveImageCount() { return resources.stats().images.entries.filter(entry => !entry.ready).length; },
           }),

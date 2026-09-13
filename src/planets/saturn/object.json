@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ed5df198023ac3935f25ca9b0480c6fe32a628645b4ded4eb072159923fd6726"
+    "sha256": "1c258f52ca5693a11fcf0a41e3fa345e408d9bac85b8ced9507342e4bd8309c3"
   },
   "id": "saturn",
   "properties": {
@@ -26,7 +26,7 @@
         {
           "id": "rings",
           "path": "source/preparation/rings.json",
-          "sha256": "581819f574dc232122019d0c199ac5e64d5a715a89a12643782cc6d80f56e5f7"
+          "sha256": "73801b7388681864d554d7df98257acd6e293dca540897c2d27827b77b66f54b"
         },
         {
           "id": "navigation",
@@ -41,17 +41,17 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e6227563c894bd830f1825779a3295d1056b29c8bfb9c2bd324773177c3bf4fd"
+          "sha256": "73d15d4e335b1b5781762b39a85803fd906caf619ce459979928cd3396209d5f"
         },
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "1917a7427018f30692a34d1204575b8bf762dfbe8f45f2f9f7cf5b3c0b880acf"
+          "sha256": "ac439de8f7054aff012ffe478ac179434ca883fd2d148ca16aa41767350b8135"
         },
         {
           "id": "surface",
           "path": "source/preparation/surface.json",
-          "sha256": "174aaeebbc2c1aa6075903414eace181cf37974dd0eccf1106d62e5ae4dce0e8"
+          "sha256": "6a10d54977f7dbdd4fcfc5c438ec885a4e3dee62eff6a559bdabe5f416310fc5"
         },
         {
           "id": "materials",
@@ -61,7 +61,7 @@
         {
           "id": "radial-motion",
           "path": "source/preparation/radial-motion.json",
-          "sha256": "cc0c35fab54fba274693e1cd87762c56ed98763010daa21e3b17d62d992a51df"
+          "sha256": "35f8bd8d1787f32eb49ed1b8196cb8565078e9854804f4539fc676a01fb67dde"
         },
         {
           "id": "presentation",
@@ -177,7 +177,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f9d21d62a2cb8f277e23aa62e34aace2c1fb0b6791c46025f613a8d7ef774be5"
+        "sha256": "d6b52c7ed3193c5639521908eadf87692818e49bed4c072eb9bb49fd23d76477"
       }
     },
     "catalog": {

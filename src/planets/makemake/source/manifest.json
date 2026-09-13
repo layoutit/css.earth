@@ -133,8 +133,8 @@
     {
       "id": "makemake-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1594,
-      "expectedSha256": "e4342c2a3283ebcc30277a4e82de574be31223624ad7f70ba89aaaa4acf6ce62",
+      "expectedBytes": 1514,
+      "expectedSha256": "816fdaf469c53235b56cf7ae4f2bfb8baae25b6d03e33e80bd26c6aa8784415b",
       "origin": "Repository-authored Makemake solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -154,8 +154,8 @@
     {
       "id": "makemake-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2424,
-      "expectedSha256": "bf0191a3d8efd4c827f1f8a5e726edaaf8396e85eb2f69023f26b143e897aa72",
+      "expectedBytes": 2363,
+      "expectedSha256": "618144b98287c746eca0d74a04c61f0c931d4719820d4feb2e0a22f855d34819",
       "origin": "Repository-authored Makemake raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -173,8 +173,8 @@
     {
       "id": "makemake-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1438,
-      "expectedSha256": "89d4c49e42232c5213721a4dc01b721b7242c8d411b1b3b15b953a602f1557ad",
+      "expectedBytes": 1623,
+      "expectedSha256": "d1bf0267bb4623382b8bc72c60144249d7c4468c157586b56cfad7a824517094",
       "origin": "Repository-authored Makemake geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -285,8 +285,8 @@
     {
       "id": "makemake-object-content",
       "path": "content/object.json",
-      "expectedBytes": 9490,
-      "expectedSha256": "be647520d78e5ad638e813468ffb925e90e135a728a812403df14402ceba3305",
+      "expectedBytes": 9496,
+      "expectedSha256": "cb632199267dd6f6c15db04eefa3aac526378b29458297cec358caab711f1691",
       "origin": "Repository-authored Makemake object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

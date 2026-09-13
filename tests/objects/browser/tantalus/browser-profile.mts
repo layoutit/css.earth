@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/tantalus/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'tantalus',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/tantalus/tantalus-directional-sun.webp",
-      "two": "/scenes/tantalus/tantalus-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/tantalus/tantalus-shape-surface@2x.webp"
+    "/scenes/tantalus/tantalus-shape-surface@2x.webp",
+    "/scenes/tantalus/tantalus-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

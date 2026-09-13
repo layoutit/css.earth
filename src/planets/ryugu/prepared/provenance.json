@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "ryugu",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a30c8dbf76465044f3952fd109f7685dc1bf554a8c782ad4fe0628bef8eeb63"
+    "sha256": "a1488281345bd2eea04185bcfe6dfac8baa6fdcee6cbb578b8c5c7b7c57d10a1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "eea10abc78d58897604f11365abfec6a05e637ca3a1c79702f3fe0096dc0c8fc",
+      "sha256": "f1a08202ffdc302697a9833ece506c8d005545935b5d20173a96b624e66c0716",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -49,6 +49,10 @@
                   0.035
                 ],
                 "specialValueMagnitude": 1e+30
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -57,6 +61,10 @@
                 "kind": "image-rgb-no-data",
                 "noData": 0,
                 "centerLongitude": 180
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           ],
@@ -467,7 +475,7 @@
       "sha256": "b01f45512c7028865cc656712d8982f837a29bcbea07df6460f4d7acd0c1c969",
       "bytes": 12965947,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -520,7 +528,7 @@
       "sha256": "da62f1d56deab22343b301d7972a1a8a14867c1714c626411617698a78e32595",
       "bytes": 3150352,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -568,7 +576,7 @@
       "sha256": "984780a02a343e13873e76030b56dd9f34fbb476baf983f52af6ac12b4741974",
       "bytes": 9557231,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "zip-member",
         "groups": [
@@ -599,7 +607,7 @@
       "sha256": "c1cb474f7b85860defdf548e47326188ec2a48efa25bed3c1685c4a236ccb7ed",
       "bytes": 9404,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -621,7 +629,7 @@
       "sha256": "240264bb8b1877af766883962890fe26305aa74ad6b516da2b5d8bb4c0e2d4c7",
       "bytes": 1303,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -647,7 +655,7 @@
       "sha256": "68cea46d06151259e792a964297f7865838d2a9d66258fb63bb5f55a777bd44f",
       "bytes": 35497,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -676,7 +684,7 @@
       "sha256": "d9f3627a502321ef4f782957a1826b28f3c3a29ad332c048c63b1453bb47d09d",
       "bytes": 152,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -703,7 +711,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -728,7 +736,7 @@
       "sha256": "8e7cb7fc9b9912414263cb5bb6095f0693ec4a671c8f7ece0f787627f5e0b641",
       "bytes": 1789,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -740,7 +748,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles."
       ],
@@ -767,6 +775,10 @@
             0.035
           ],
           "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -778,13 +790,13 @@
           "url": "/scenes/ryugu/ryugu-normal-thumbnail.webp",
           "bytes": 3246,
           "sha256": "8d3fd455c4117bc51b2cc022229b7544f80d41b26d311db27752d52f2894d1e5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
-          "bytes": 719664,
-          "sha256": "79502ba6edea06184a5e384b869861b7d82326155179c16dc36fb0699e4ffb52",
-          "verification": "bytes-verified"
+          "bytes": 999636,
+          "sha256": "2effc8de14b5cc13dfe1a9900d2ed70fed4b9161de0b48e4794ff551b19738bf",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -795,7 +807,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain."
       ],
@@ -810,6 +822,10 @@
           "kind": "image-rgb-no-data",
           "noData": 0,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -821,13 +837,13 @@
           "url": "/scenes/ryugu/ryugu-enhanced-thumbnail.webp",
           "bytes": 6194,
           "sha256": "1438099ab967c8e2ae9687620752424bce56ff9b8f830bfa190ee2ee84c75247",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ryugu/ryugu-enhanced-surface@2x.webp",
-          "bytes": 2916650,
-          "sha256": "0b9ea2d81e0ab8a1b9104f833f4af9dedf5e26296bf02ae9472249ba6dfcbf23",
-          "verification": "bytes-verified"
+          "bytes": 4173682,
+          "sha256": "56aaf58de7e5c04b418695892e88cac9e5bac7662216502067b97613f3096cd6",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -859,19 +875,19 @@
           "url": "/scenes/ryugu/ryugu-elevation-thumbnail.webp",
           "bytes": 8348,
           "sha256": "b8e016ee261c5d3c576c84802d7d06eb4245d9c1e8c91a84de9df9dca1ca7676",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ryugu/ryugu-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ryugu/ryugu-elevation-surface@2x.webp",
           "bytes": 1295984,
           "sha256": "1ee247140b3f768061042fbaf4ede07849181451c6a29892f32e9aeb827f753f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -930,9 +946,9 @@
       "outputs": [
         {
           "url": "/scenes/ryugu/ryugu-features.json",
-          "bytes": 19032,
-          "sha256": "59cb1cd8f4b036a5b52931306cba4690d8c431a535c4691a3adfe10829e36fd9",
-          "verification": "bytes-verified"
+          "bytes": 19037,
+          "sha256": "8c407dd77e488e1f433c87b9ad8b0a63e97d0a9704927ea2cf9bd80cf948adbc",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

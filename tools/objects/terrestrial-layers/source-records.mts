@@ -65,7 +65,12 @@ export const parseFloatObservationPolicy = shape({kind:text,coordinates:optional
   noData:nullable(number),resolutionDegrees:optional(number),resolutionMeters:optional(number),origin:array(number),
   specialValueMagnitude:optional(number),displayRange:array(number),wrapLongitude:optional(boolean)});
 export const parseMaskedObservationPolicy = shape({...pixelValidityFields,centerLongitude:number,resampling:optional(text),
-  resolutionMeters:optional(number),channels:optional(text),colorSpace:optional(text)});
+  resolutionMeters:optional(number),channels:optional(text),colorSpace:optional(text),wrapLongitude:optional(boolean)});
+/** A source declared to wrap must cover 360° of longitude to within one of its own pixels. */
+export function requireWrappedLongitudeSpan(width: number, resolution: number, unitsPerDegree: number) {
+  const span = width * resolution / unitsPerDegree;
+  if (!(Math.abs(span - 360) <= 360 / width)) throw new TypeError(`A wrapped longitude source must span 360°, not ${span}°.`);
+}
 export const parseIsisObservationPolicy = shape({grid:parseIsis3Grid,displayRange:array(number)});
 export type NumericRaster = Uint8Array | Uint16Array | Uint32Array | Int8Array | Int16Array | Int32Array | Float32Array | Float64Array;
 export function numericRaster(value: unknown): NumericRaster {
@@ -153,8 +158,19 @@ export const cameraFrameFields = {id:text,path:text,labelPath:text,encoding:opti
   quality:optional(shape({imageId:text,target:text,startTime:text,filter:text,rawPath:text,rawLabelPath:text,badDataPath:text,badDataLabelPath:text}))};
 export const parseCameraFrame = shape(cameraFrameFields);
 export const parseCameraShape = shape({format:text,path:text,grid:requireRecord});
-export const cameraPhotometry = shape({model:optional(text),weight:number,maximumGain:number,displayMaximum:number,gamma:number,minimumLevel:number,maximumLevel:number,
+const legacyCameraPhotometry = shape({model:optional(text),weight:number,maximumGain:number,displayMaximum:number,gamma:number,minimumLevel:number,maximumLevel:number,
  maximumIncidenceDegrees:number,maximumEmissionDegrees:number,backgroundMaximum:optional(number)});
+const publishedCameraPhotometry = shape({model:text,referenceDegrees:shape({incidence:number,emission:number,phase:number}),
+ limits:shape({maximumIncidenceDegrees:number,maximumEmissionDegrees:number,phaseDegrees:array(number),minimumGain:number,maximumGain:number}),
+ displayMaximum:number,gamma:number,minimumLevel:number,maximumLevel:number,backgroundMaximum:optional(number)});
+const PUBLISHED_CAMERA_KEYS = ['model','referenceDegrees','limits','displayMaximum','gamma','minimumLevel','maximumLevel','backgroundMaximum'];
+/** A camera mosaic names a published model record with its display settings, or keeps the historical Lunar-Lambert block; never a mix. */
+export const cameraPhotometry: Decoder<ReturnType<typeof legacyCameraPhotometry> | ReturnType<typeof publishedCameraPhotometry>> = value => {
+ const record = requireRecord(value), published = typeof record.model === 'string' && record.model.startsWith('photometry/');
+ if (published && Object.keys(record).some(key => !PUBLISHED_CAMERA_KEYS.includes(key))) throw new TypeError('A published camera photometry block names only its model, reference geometry, limits and display settings.');
+ if (!published && ('referenceDegrees' in record || 'limits' in record)) throw new TypeError('Only a published photometric model declares a reference geometry and limits.');
+ return published ? publishedCameraPhotometry(value) : legacyCameraPhotometry(value);
+};
 export const parseCameraMosaic = shape({frames:array(parseCameraFrame),photometry:cameraPhotometry});
 export const parseCameraColor = shape({channels:array(shape({filter:text,channel:text,frames:array(parseCameraFrame)})),photometry:cameraPhotometry,
  frames:optional(array(parseCameraFrame)),metadata:shape({falseColor:boolean})});
@@ -164,8 +180,18 @@ export const parseLevelMatching = shape(levelMatchingFields);
 export const surfaceTransfer = shape({maximumSourceDistanceMeters:number,maximumSeparationMeters:number,visibilityToleranceMeters:number,maximumEmissionDegrees:number});
 export const parseSurfaceGeometry = shape({format:optional(text),sourceTopology:optional(text),simplification:shape({method:optional(text),maximumErrorMeters:number})});
 export const surfaceIdentityFields = {id:text,format:text,consumer:text,metadata:shape({label:text,coverage:text})};
+export const parsePublishedPhotometry = shape({model:text,referenceDegrees:shape({incidence:number,emission:number,phase:number}),
+ limits:shape({maximumIncidenceDegrees:number,maximumEmissionDegrees:number,phaseDegrees:array(number),minimumGain:number,maximumGain:number})});
+const PUBLISHED_PHOTOMETRY_KEYS = ['model','referenceDegrees','limits'];
+/** A photometry block names either a published model record under photometry/ or one of a route's historical forms, never a mix. */
+export const publishedOr = <T,>(legacy: Decoder<T>): Decoder<T | ReturnType<typeof parsePublishedPhotometry>> => value => {
+  const record = requireRecord(value), published = typeof record.model === 'string' && record.model.startsWith('photometry/');
+  if (published && Object.keys(record).some(key => !PUBLISHED_PHOTOMETRY_KEYS.includes(key))) throw new TypeError('A published photometry block names only its model, reference geometry and limits.');
+  if (!published && ('referenceDegrees' in record || 'limits' in record)) throw new TypeError('Only a published photometric model declares a reference geometry and limits.');
+  return published ? parsePublishedPhotometry(value) : legacy(value);
+};
 export const parseEncounterRecipe = shape({...surfaceIdentityFields,frames:array(shape({id:text,path:text,labelPath:text,controlPath:text})),
- transfer:surfaceTransfer,photometry:shape({model:text,maximumGain:number}),selection:text,displayPercentiles:array(number),levelMatching:optional(parseLevelMatching)});
+ transfer:surfaceTransfer,photometry:publishedOr(shape({model:text,maximumGain:number})),selection:text,displayPercentiles:array(number),levelMatching:optional(parseLevelMatching)});
 export const parseEncounterSourceControl = shape({observation:parseEncounterPolicy,camera:parseEncounterControl,registration:parseEncounterRegistration});
 export const parseOrthographicRecipe = shape({...surfaceIdentityFields,path:text,coordinatePaths:array(text),maximumCoordinateErrorMeters:number,maximumSourceDistanceMeters:number,
  grid:shape({...dimensions,pixelToSource:array(number)}),displayRange:array(number)});
@@ -179,10 +205,27 @@ export const parseControlledMetadata = shape({IsisCube:shape({BandBin:shape({Fil
 
 export const geoFramePathFields = {path:optional(text),qualityPath:optional(text),labelPath:optional(text),originalPath:optional(text),flatPath:optional(text),cameraPath:optional(text),startTime:optional(text)};
 export const parsePhasePhotometry = shape({model:text,asymmetry:number,amplitude:number,width:number,minimumDegrees:number,maximumDegrees:number,referenceDegrees:number,maximumGain:number});
-export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),
+/** A PDS4 product whose Array_2D_Image planes carry an image with its geometric backplanes. The recipe names the planes by
+ * their label identifiers, the archive identity and DSK to bind, and optional FITS header expectations. */
+export const parseGeometryCube = shape({collection:text,target:text,observingSystem:array(text),shapeKernel:optional(text),quantity:text,
+  planes:shape({image:text,x:text,y:text,z:text,incidence:text,emission:text,phase:text,pixelScale:optional(array(text))}),
+  geometrySelection:optional(shape({plane:text,unit:text,minimum:number,maximum:number,interpretation:text})),
+  header:optional(dictionary(text)),headerTime:optional(text),headerPlaneNames:optional(shape({prefix:text,names:dictionary(text)}))});
+export type GeometryCubeDeclaration = ReturnType<typeof parseGeometryCube>;
+/** A camera derived from SPICE kernels for an image without archived geometry: the kernel set in load order, the SPK ids and
+ * body-fixed frame, the instrument whose kernel variables define the pixel model, how the exposure epoch is read from the
+ * image header, the aberration correction, the instrument-frame axes stored columns and rows follow, and how the image is read. */
+export const parseSpiceCamera = shape({kernels:array(text),kernelSet:optional(text),observer:number,target:number,bodyFrame:text,instrument:number,
+  clock:shape({header:optional(text),start:optional(text),stop:optional(text),spacecraft:number}),aberration:text,
+  pixels:shape({focalLength:shape({key:text,unit:text}),pixelPitch:shape({key:text,unit:text}),center:text,boresight:text,samples:text,lines:text,frame:text,origin:number,column:text,row:text}),
+  image:shape({format:optional(text),quantity:text,plane:optional(number),header:optional(dictionary(text)),missingValueKeys:optional(array(text)),saturationKey:optional(text)})});
+export type SpiceCameraDeclaration = ReturnType<typeof parseSpiceCamera>;
+/** Pointing refinement of an archived or kernel camera against the retained mesh's lit limb, with its evidence budget. */
+export const parseLimbRefinement = shape({method:text,maximumCorrectionDegrees:number,maximumResidualPixels:number,minimumControls:number,threshold:optional(number),searchPixels:optional(number),maximumControls:optional(number),minimumSharpness:optional(number)});
+export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),cube:optional(parseGeometryCube),spice:optional(parseSpiceCamera),refinement:optional(parseLimbRefinement),
  frames:optional(array(shape({id:text,...geoFramePathFields}))),selection:optional(text),levelMatching:optional(parseLevelMatching),
- transfer:surfaceTransfer,photometry:shape({model:text,phaseCorrection:optional(parsePhasePhotometry),coefficient:optional(number),phaseCoefficientPerDegree:optional(number),
- referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,maximumGain:number}),displayPercentiles:array(number)});
+ transfer:surfaceTransfer,photometry:publishedOr(shape({model:text,phaseCorrection:optional(parsePhasePhotometry),coefficient:optional(number),phaseCoefficientPerDegree:optional(number),
+ referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,maximumGain:number})),displayPercentiles:array(number)});
 export const parseGeoCameraClosure = shape({...archivedCameraFields,meshSha256:text,provenance:array(shape({path:text,sha256:text}))});
 
 /** Only fields used to interpret science values; source-specific readers own their grids. */

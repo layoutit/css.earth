@@ -30,17 +30,16 @@ and stops at the first failure. It takes about forty minutes on a laptop; the
 the ones your change touches. Choose checks by what changed, and say in the PR
 which ones you ran and which you did not.
 
+Reference implementations live under `tools/oracles/` with their own pinned
+Python environment (`pnpm oracles:setup`); their fixtures under `tests/oracles/`
+are committed evidence, and the comparing tests run without Python. See
+[tools/oracles/README.md](tools/oracles/README.md) before adding or regenerating
+one. When an archive product has no reader, route or kernel bank yet, open an
+issue from the archive-product template instead of writing a reader for one body.
+
 **Standing limit: GitHub Actions does not run on this repository.** Jobs complete
 as a failure with no steps recorded, so no branch has CI evidence and every check
 must be run locally. Cite this section in a PR instead of explaining it again.
-
-**Standing limit: source closure fails until the large inputs are restored.** A
-checkout carries the pinned source records but not the large files they pin, such
-as the shared star panorama, the title font and the mission science cubes. So
-`tests/objects/source-closure.test.mts` fails once per body, and
-`pnpm test:preparation` fails with it. `pnpm prepare:checkout` restores them.
-Where an input cannot be restored, name the body and the input and cite this
-section instead of explaining the failure again.
 
 ## Where things live
 

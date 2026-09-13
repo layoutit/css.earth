@@ -9,14 +9,18 @@ export interface DirectionalSunPresentation {
 import type { Vector3 } from "../renderers/css/solar-system/types.ts";
 export interface PreparedDirectionalSunPlan {
   schema: string; billboard: boolean; bakedIntoStarfield: boolean; runtimeRasterization: boolean;
-  asset: { sourcePixels: string; url: string; url2x: string; width?: number; height?: number; density1: { width: number; height?: number } };
+  asset: { sourcePixels: string; url: string; width: number; height: number };
   localDirection: Vector3; referenceViewDirection: Vector3;
   appearance: { analyticRadialFit: { coreRadiusPixels: number } };
   projection: { focalX: number; apparentViewportWidthShare: number; centerDistanceOverFar: number; halfExtentOverCenter: number; halfExtentOverFar: number; fixedAngularSize: boolean; runtimeGeometry: boolean };
   distanceScaling: { schema: string; model: string; nominalSolarRadiusKilometers: number; astronomicalUnitKilometers: number; observerDistanceModel: string; meanHeliocentricDistanceAu: number; observerDistanceKilometers: number; angularDiameterDegrees: number; physicalDiskViewportWidthShare: number; spriteOpaqueCoreDiameterShare: number; googleEarthMarsSpriteViewportWidthShare: number; physicalToGoogleEarthMarsSpriteScale: number };
 }
 export const PREPARED_DIRECTIONAL_SUN_SCHEMA =
-  "cssearth-prepared-directional-sun@3";
+  "cssearth-prepared-directional-sun@4";
+
+// CSS pixels of the Sun sprite, and the unit of its fitted radial profile (the
+// native 128 by 128 texture). The prepared image has two texels per CSS pixel.
+export const DIRECTIONAL_SUN_SPRITE_PIXELS = 128;
 
 export const DIRECTIONAL_SUN_DISTANCE_STANDARD = Object.freeze({
   schema: "cssearth-directional-sun-distance-standard@2",
@@ -95,11 +99,10 @@ export const DIRECTIONAL_SUN_PRESENTATION_STANDARD = Object.freeze({
 
 export function validateDirectionalSunPlan(input: unknown): PreparedDirectionalSunPlan {
   const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === "object" && !Array.isArray(value);
-  const optionalFinite = (value: unknown): boolean => value === undefined || typeof value === "number" && Number.isFinite(value);
-  if (!record(input) || !record(input.asset) || !record(input.asset.density1) || !record(input.appearance) || !record(input.appearance.analyticRadialFit) ||
-      !record(input.projection) || !record(input.distanceScaling) || typeof input.asset.density1.width !== "number" ||
+  if (!record(input) || !record(input.asset) || !record(input.appearance) || !record(input.appearance.analyticRadialFit) ||
+      !record(input.projection) || !record(input.distanceScaling) ||
       typeof input.appearance.analyticRadialFit.coreRadiusPixels !== "number" ||
-      ![input.asset.width, input.asset.height, input.asset.density1.height].every(optionalFinite)) throw new TypeError("Prepared directional Sun is incompatible.");
+      input.asset.width !== DIRECTIONAL_SUN_SPRITE_PIXELS * 2 || input.asset.height !== input.asset.width) throw new TypeError("Prepared directional Sun is incompatible.");
   // Candidate view only: every required value is checked by the shape and
   // dimensional invariants before this boundary returns the original plan.
   const plan = input as unknown as PreparedDirectionalSunPlan;
@@ -116,7 +119,7 @@ export function validateDirectionalSunPlan(input: unknown): PreparedDirectionalS
     Math.tan(expectedAngularRadius);
   const expectedCoreDiameterShare =
     plan?.appearance?.analyticRadialFit?.coreRadiusPixels * 2 /
-      plan?.asset?.density1?.width;
+      DIRECTIONAL_SUN_SPRITE_PIXELS;
   const expectedSpriteShare = expectedPhysicalDiskShare /
     expectedCoreDiameterShare;
   const expectedHalfExtentOverCenter = expectedSpriteShare /
@@ -128,7 +131,6 @@ export function validateDirectionalSunPlan(input: unknown): PreparedDirectionalS
       plan.runtimeRasterization !== false ||
       plan.asset?.sourcePixels !== "repository-authored-clean-room-raster" ||
       typeof plan.asset.url !== "string" ||
-      typeof plan.asset.url2x !== "string" ||
       !unitDirection(plan.localDirection) ||
       !unitDirection(plan.referenceViewDirection) ||
       !Number.isFinite(plan.projection?.focalX) ||

@@ -7,14 +7,10 @@
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "pluto-poles-{id}{suffix}.webp",
+  "polesOutput": "pluto-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "csspluto-prepared-assets@1"
   },
@@ -27,20 +23,21 @@
       "id": "surface",
       "source": "surface/pluto-color-mosaic.jpg",
       "falseColor": false,
-      "output": "pluto-{id}{suffix}.webp",
+      "output": "pluto-{id}@2x.webp",
       "thumbnail": "pluto-lens-{id}.webp",
       "science": {
         "coverage": {
           "kind": "black-fill",
           "southConnected": true
         }
-      }
+      },
+      "nativeSourcePoles": true
     },
     {
       "id": "topography",
       "source": "lenses/pluto-dem.tif",
       "falseColor": true,
-      "output": "pluto-{id}{suffix}.webp",
+      "output": "pluto-{id}@2x.webp",
       "thumbnail": "pluto-lens-{id}.webp",
       "science": {
         "elevation": {
@@ -79,14 +76,15 @@
       "id": "monochrome",
       "source": "lenses/pluto-monochrome.tif",
       "falseColor": false,
-      "output": "pluto-{id}{suffix}.webp",
+      "output": "pluto-{id}@2x.webp",
       "thumbnail": "pluto-lens-{id}.webp",
       "science": {
         "coverage": {
           "kind": "black-fill",
           "southConnected": false
         }
-      }
+      },
+      "nativeSourcePoles": true
     }
   ],
   "lighting": {
@@ -96,8 +94,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "pluto-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "pluto-lighting-{density}x-billboard.webp",
+    "rowOutput": "pluto-lighting-2x-row-{row}.webp",
+    "billboardOutput": "pluto-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

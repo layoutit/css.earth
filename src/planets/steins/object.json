@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "b27b00426b011fe74703012dbff3f867b8d76e6ae21ddaeb60714e89d9d1f8da"
+    "sha256": "313b1c476f01b280d2f4952eb98de13568e0d64a62d2e6204d1559e862aeb265"
   },
   "id": "steins",
   "properties": {
@@ -62,7 +62,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "a42cb22b0187eaf5886b9c829c60459d839be631d04a7ec19f784f5ff30ccb9d"
+          "sha256": "e42ba397654f9b00e06f66c015bda8728b5cfc5120c2bc69bac9708e52b9f909"
         },
         {
           "id": "rotation",
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8b4a50aed533f1a7caf55a86131bd5b0f55b21f0574ab356f387be54d8cdf7e7"
+        "sha256": "81e9fce29438aed98cddf052efc32985b375b997c5dbfe7f92bb40382d4f04a0"
       }
     },
     "catalog": {

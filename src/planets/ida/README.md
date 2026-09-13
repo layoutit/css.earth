@@ -4,12 +4,20 @@
 
 | View or property | Source and interpretation |
 | --- | --- |
-| SSI reflectance | Galileo green-filter [0202561278](source/observations/0202561278rcal_gre.xml) and [0202560500](source/observations/0202560500rcal_gre.xml), 28 August 1993, 111–170 m/pixel. Original I/F and acquisition illumination; fixed display stretch, no fitted gain. |
+| SSI reflectance | Galileo green-filter [0202561278](source/observations/0202561278rcal_gre.xml) and [0202560500](source/observations/0202560500rcal_gre.xml), 28 August 1993, 111–170 m/pixel. I/F normalized to 25° incidence and phase with a published Hapke model; fixed display stretch, no fitted gain. |
 | Monochrome and shape | [Thomas PDS release](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/), [Thomas et al. 1996](https://doi.org/10.1006/icar.1996.0033). The processed mosaic has broader coverage and finer contributing imagery than the I/F pair. |
 | Elevation | Shape radius minus 16 km, false color from −13 to +16 km; not gravitational height. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/IDA/target) Ida centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
+
+The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
+
+| View | Original grid | Both lighting images, before → current |
+| --- | --- | --- |
+| normal | 2520 × 1260 | 1.80 → 2.71 MB |
+
+Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/ida/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
 
 [The 9 September 2026 mosaic report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/README.md) records 107 focused tests, 60 browser conformance cases, DPR 1/2 production checks and fresh remote installation for the four-body change. [Validation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/validation.json) identifies tested commit `8ded7a5` and base `1fb76e4`; these are historical results.
 
@@ -95,6 +103,6 @@ The SSI reflectance view now combines green-filter images **0202561278** and **0
 
 The checked Thomas PDS4 release supplies the shape and registered Galileo SSI mosaic: [data directory](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/). The original study is Thomas et al., *The Shape of Ida*, Icarus 120 (1996), [doi:10.1006/icar.1996.0033](https://doi.org/10.1006/icar.1996.0033). `source/manifest.json` pins each byte sequence; the original labels and image list are preserved beside the inputs.
 
-Galileo brightness keeps its original acquisition illumination and a common 0–0.12 I/F, gamma-2.2 display transfer. There is no fitted photometric gain. Coarser qualified samples are laid down first, with the finer image replacing the interior and blending at the existing incidence/emission and detector boundaries. Run the contribution audit below to retain the actual weights for both sources.
+Galileo brightness is normalized to 25° incidence, 0° emission and 25° phase with the Hapke model of [Helfenstein et al. (1996)](https://doi.org/10.1006/icar.1996.0036): single-scattering albedo 0.22, Henyey–Greenstein asymmetry −0.33, shadow-hiding amplitude 1.5 and width 0.020, and roughness 18°, fitted at 0.55 µm to Galileo images at 19.5–109.8° phase. [The model record](source/photometry/helfenstein-1996-hapke.json) transcribes the abstract; Hasselmann et al. (2016, Table 7) list the amplitude as 1.53. The photographs are green-filter frames at about 23° and 26° phase. Incidence and emission stay limited to 65°, and gains to 0.4–4; no sample needed withholding. Over 50,785 overlap samples the normalized frames agree to a median ratio of 1.0015, so no level gain is fitted. A common 0–0.12 I/F, gamma-2.2 display transfer follows. Coarser qualified samples are laid down first, with the finer image replacing the interior and blending at the existing incidence/emission and detector boundaries. Run the contribution audit below to retain the actual weights for both sources.
 
 </details>

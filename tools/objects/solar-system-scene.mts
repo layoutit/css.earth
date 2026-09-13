@@ -14,7 +14,7 @@ import { prepareAstrometricSkySceneRegistration } from "../../src/platform/astro
 import { prepareHeliocentricView } from "../../src/platform/prepare-heliocentric-view.mts";
 import { preparePlanetarySystem } from "../../src/platform/prepare-planetary-system.mts";
 import { prepareSunReferenceViewDirection } from "../../src/platform/prepare-sun-view-direction.mts";
-import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from "../../src/platform/directional-sun-contract.mts";
+import { DIRECTIONAL_SUN_PRESENTATION_STANDARD, DIRECTIONAL_SUN_SPRITE_PIXELS } from "../../src/platform/directional-sun-contract.mts";
 import {
   ASTRONOMICAL_UNIT_KILOMETERS, SOLAR_GEOMETRY_EPOCH_JD_TT,
   SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection,
@@ -111,7 +111,7 @@ export async function prepareSolarSystemScene({
     kilometersPerUnit: bodyRadiusKilometers / bodyRadiusUnits, astronomy });
   const heliocentricView = prepareHeliocentricView({ bodyId, presentationFrame: frame,
     bodyRadiusUnits, bodyRadiusKilometers,
-    sunSprite: { imagePixels: sun?.asset?.density1?.width,
+    sunSprite: { imagePixels: DIRECTIONAL_SUN_SPRITE_PIXELS,
       opaqueCoreDiameterShare: sun?.distanceScaling?.spriteOpaqueCoreDiameterShare }, system });
   return Object.freeze({
     camera, systemTransform: frame.cssTransform,

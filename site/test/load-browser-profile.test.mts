@@ -19,10 +19,10 @@ function profile(withLenses = false) {
     id: "fixture", inputSelector: ".fixture-input",
     waitForRuntime: noop, pause: noop, camera: noop, setCamera: noop,
     bounds: noop, stable: noop, runtimePresent: noop, retainedImages: noop,
-    selectedDensity: noop, retainedReport: noop,
+    retainedReport: noop,
     ...(withLenses ? { selectLens: noop, lens: noop, visibleLens: noop, pressedLens: noop } : {}),
     audit: {
-      preparedAssetPairs: [{ one: "/scenes/fixture/a", two: "/scenes/fixture/a2" }],
+      canonicalPreparedAssets: ["/scenes/fixture/a"],
       ...(withLenses ? { lensRace: { defaultId: "normal", slowId: "alternate", winnerId: "normal",
         slowAsset: "/scenes/fixture/alternate", preReadyDisabled: true } } : {}),
       retained: { allowedMountSelectors: [], ...(withLenses ? { lensIds: ["normal", "alternate"], speedClicks: 5 } : {}) },

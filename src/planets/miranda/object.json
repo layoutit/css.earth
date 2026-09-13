@@ -28,12 +28,12 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "d1bd89ca8b1d8eaaa941debddd1f70715812a94320a1761da07f6c65cbc7e47f"
+          "sha256": "ed8921475faa6a21ab175ee3da47badac12258f796514d627ecdd1d554a952d1"
         },
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "6918aff045563afa496224f1ba904381a582e90ae1bb5689eb938893b943cb61"
+          "sha256": "e23f4276ff5e665b5e4fb813619fe09a97f39c45aa0eb8fdf204c8e24d1bbf13"
         },
         {
           "id": "celestial",
@@ -48,12 +48,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3e7037e99ecaf6f185da6abb191cef8c435048e3229bf49331eba12f2908164c"
+          "sha256": "4ed71c0ff91ed9c771aa3c444c5ee1a0a7e421fdfa3e34cb702c7d25885f3e99"
         },
         {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
-          "sha256": "04e06de6bf0f3bc8c05fa0cb4573ec1e09fb0b63b417ec1f063006cef38f8807"
+          "sha256": "a628181beb99c9a1ee4ac0a0fe5a526be195580fd91a4744f4482932b4c50414"
         },
         {
           "id": "title",
@@ -149,7 +149,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f88f6308cec870c0cb47cb6baeb325162d812227518f032b8e11723687cbc545"
+        "sha256": "178727995bcff82cfca273dd1cbe325c144ed842ac11d113abea27c3bb7d2102"
       }
     },
     "catalog": {
@@ -168,6 +168,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "cbff31928487c1917056c2bcb63d7dac03589f6f14cb84c2a4999d7b8af77359"
+    "sha256": "056e3cd7ef59dbeebfa39320ee1eb5e6572440ed35216c0f20afc22a75f31e5d"
   }
 }

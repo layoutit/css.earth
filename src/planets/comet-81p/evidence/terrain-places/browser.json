@@ -1,0 +1,290 @@
+{
+  "date": "2026-09-12",
+  "testedBase": "e986b92804c786669a30c2bcc104b820e8fa6e3c",
+  "workingTree": "Seven terrain places, the preparation helpers and the opt-in surface normal change recorded by the pins below; runtime renderer and shell match testedBase.",
+  "implementation": [
+    {
+      "path": "tools/objects/surface-features/image-controls.mts",
+      "bytes": 10225,
+      "sha256": "9c6e88c2e6aa948511070dafca4b9f0c088c33ad9f2cc5fa7942ab791cb45a7b"
+    },
+    {
+      "path": "tools/objects/surface-features/project-encounter-landmarks.mts",
+      "bytes": 15647,
+      "sha256": "6df649af63b8b3dbcbbf8dc91e508a9c0ca0d4dc506c7191cfd26664a657e844"
+    },
+    {
+      "path": "tools/objects/surface-features/project-orthophoto-landmarks.mts",
+      "bytes": 11874,
+      "sha256": "b78fe51359ac6fba158c0695e5495b7e9a793d7923c140a651b725a420e5477a"
+    },
+    {
+      "path": "tools/objects/surface-features/landmarks.ts",
+      "bytes": 14206,
+      "sha256": "25550574a86c042b29b37abbe4d896f366b470e145c343e69d5b1de6363681f9"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src/planets/comet-81p/object.json",
+      "bytes": 4112,
+      "sha256": "272d9f167904f6d89c97f055dd7781e26894faaa5e25ca8c6a906c5c44180b04"
+    },
+    {
+      "path": "src/planets/comet-81p/source/manifest.json",
+      "bytes": 34612,
+      "sha256": "ed573d5b7a6e657adcae2680dfe6481f194f00a75476a6398ccc601cd400e179"
+    },
+    {
+      "path": "src/planets/comet-81p/runtime-assets.json",
+      "bytes": 6155,
+      "sha256": "34924b56ae6467a72d70d7a7e8778cdfb7efce8ac6562dc2fbc77ac6a4c4e7ff"
+    }
+  ],
+  "servedFeature": {
+    "path": "public/scenes/comet-81p/comet-81p-features.json",
+    "bytes": 4415,
+    "sha256": "1a953df931967f383bbeb978cf8b39fdae7c95425f109edb468c0fc55ee9b7e2"
+  },
+  "remoteFeature": {
+    "url": "https://earth-assets.lowpoly.cc/runtime-assets/1a953df931967f383bbeb978cf8b39fdae7c95425f109edb468c0fc55ee9b7e2/comet-81p-features.json",
+    "status": 200,
+    "bytes": 4415,
+    "sha256": "1a953df931967f383bbeb978cf8b39fdae7c95425f109edb468c0fc55ee9b7e2"
+  },
+  "surfaceAssets": "79 pre-existing assets across both changed bodies have the same hashes as the base inventories. Only the two feature JSONs are new.",
+  "browser": {
+    "version": "153.0.8010.12",
+    "method": "Playwright CLI in Chrome for Testing. Search each place and await the existing flight; inspect captions and image placement. At a mobile viewport, return the information sheet to peek before capture. Verify Shadows Off and retained first leaf plus leaf count after every selection. Desktop dataset switching checks Borrelly MICAS-only labels and Wild labels on both matching datasets.",
+    "cases": [
+      {
+        "id": "comet-81p",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "dpr": 1,
+        "lens": "navcam",
+        "flights": [
+          {
+            "name": "Mayo",
+            "caption": "Mayo\nMission-named depression · size unpublished\n\nA roughly 1.2 km depression with a scalloped rim and a comparatively flat floor. Approximate location transferred from Stardust’s named-feature image.\n\nStardust science team · NASA/JPL-Caltech",
+            "shadows": false,
+            "retainedLeaves": 992,
+            "url": "http://127.0.0.1:53136/comet-81p/?v=MMZAItd3i1XW5UFCxzNAAAAAP8Y6Gn4LiWAAAAAAAAAAAAAAAAAAAAAAAAA#dataset=navcam",
+            "tooltipBox": {
+              "x": 580.010009765625,
+              "y": 269.02001953125,
+              "width": 280,
+              "height": 160
+            }
+          },
+          {
+            "name": "Right Foot",
+            "caption": "Right Foot\nMission-named depression · size unpublished\n\nA roughly 1 km depression, deeper and less flat than Left Foot. Its southeast rim exposes more than 150 m of cliff. Approximate location transferred from Stardust’s named-feature image.\n\nStardust science team · NASA/JPL-Caltech",
+            "shadows": false,
+            "retainedLeaves": 992,
+            "url": "http://127.0.0.1:53136/comet-81p/?v=MMZAItd3i1XW5UFCxzNAAAAAP8Y6Gn4LiWAAAAAAAAAAAAAAAAAAAAAAAAA#dataset=navcam",
+            "tooltipBox": {
+              "x": 580,
+              "y": 252.94000244140625,
+              "width": 280,
+              "height": 176
+            }
+          },
+          {
+            "name": "Left Foot",
+            "caption": "Left Foot\nMission-named depression · size unpublished\n\nA double depression with flat floors and steep cliffs. Its northern lobe is about 650 m wide and 140 m deep. Approximate location transferred from Stardust’s named-feature image.\n\nStardust science team · NASA/JPL-Caltech",
+            "shadows": false,
+            "retainedLeaves": 992,
+            "url": "http://127.0.0.1:53136/comet-81p/?v=MMZAItd3i1XW5UFCxzNAAAAAP8Y6Gn4LiWAAAAAAAAAAAAAAAAAAAAAAAAA#dataset=navcam",
+            "tooltipBox": {
+              "x": 579.97998046875,
+              "y": 253,
+              "width": 280,
+              "height": 176
+            }
+          }
+        ],
+        "alternate": "model"
+      },
+      {
+        "id": "comet-81p",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "dpr": 1,
+        "lens": "navcam",
+        "flights": [
+          {
+            "name": "Mayo",
+            "caption": "Mayo\nMission-named depression · size unpublished\n\nA roughly 1.2 km depression with a scalloped rim and a comparatively flat floor. Approximate location transferred from Stardust’s named-feature image.\n\nStardust science team · NASA/JPL-Caltech",
+            "shadows": false,
+            "retainedLeaves": 992,
+            "url": "http://127.0.0.1:53136/comet-81p/?v=QAa-aOllAgxJuz5RZvvfO2RawCBFTeN2UqVBQsczQAAAAL_TyeE9bVwbP6vqAqKm4eQ_4b-ivYsX_wAA#dataset=navcam",
+            "tooltipBox": {
+              "x": 55,
+              "y": 241,
+              "width": 280,
+              "height": 160
+            }
+          },
+          {
+            "name": "Right Foot",
+            "caption": "Right Foot\nMission-named depression · size unpublished\n\nA roughly 1 km depression, deeper and less flat than Left Foot. Its southeast rim exposes more than 150 m of cliff. Approximate location transferred from Stardust’s named-feature image.\n\nStardust science team · NASA/JPL-Caltech",
+            "shadows": false,
+            "retainedLeaves": 992,
+            "url": "http://127.0.0.1:53136/comet-81p/?v=QMa-dyjVBR64Ur42xPD1wo9dwCBFTeNdkL5BQsczQAAAAL-9bs966sxyv7Lx3y8J46o_0LGxyZUy8AAA#dataset=navcam",
+            "tooltipBox": {
+              "x": 55,
+              "y": 225,
+              "width": 280,
+              "height": 176
+            }
+          },
+          {
+            "name": "Left Foot",
+            "caption": "Left Foot\nMission-named depression · size unpublished\n\nA double depression with flat floors and steep cliffs. Its northern lobe is about 650 m wide and 140 m deep. Approximate location transferred from Stardust’s named-feature image.\n\nStardust science team · NASA/JPL-Caltech",
+            "shadows": false,
+            "retainedLeaves": 992,
+            "url": "http://127.0.0.1:53136/comet-81p/?v=QMa-dQmHbItDlj5QkutP3ztlwCBFTeTLfaFBQsczQAAAAD-sdnJTmSJrP-CV0zlqR4c_0c7vibTPjAAA#dataset=navcam",
+            "tooltipBox": {
+              "x": 55,
+              "y": 225,
+              "width": 280,
+              "height": 176
+            }
+          }
+        ],
+        "alternate": "model"
+      }
+    ],
+    "pageErrors": [],
+    "captures": [
+      {
+        "image": "desktop.png",
+        "bytes": 572422,
+        "sha256": "49ac6db2131acb2f2cd73b8920faed6ed5983bb251555c72c157c1688cb7bb73",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "dpr": 1,
+        "lens": "navcam",
+        "selectedPlace": "Left Foot",
+        "shadows": false,
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.583820892823,0.102927005885,-0.805331730757,0,0.372159419521,0.847652310171,0.378130833871,0,0.721561176593,-0.520472470475,0.456571873764,0,0,0,0,1)",
+            "skybox": "matrix3d(0.478635397875,0.173782655731,-0.860643756823,0,0.877654199897,-0.122741917807,0.463311311634,0,-0.025121597539,-0.97710484,-0.211269694988,0,0,0,0,1)",
+            "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+          },
+          "pitch": 61.61538461538461,
+          "controlPitch": 61.61538461538461,
+          "controlYaw": 0,
+          "zoom": 1.2396521768846933,
+          "distance": 1130.2405693935589,
+          "distanceKilometers": 9.420833903816966,
+          "distanceRadii": 4.914089432145908,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 518.4000012426899,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -450,
+            "bottom": 450
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 259.20000062134494,
+          "bodyCenterKilometers": [
+            2.895130592150963e-8,
+            -5.050900199421449e-9,
+            -9.420833903816966
+          ]
+        },
+        "sheet": "sidebar"
+      },
+      {
+        "image": "mobile.png",
+        "bytes": 187727,
+        "sha256": "4a11935dad6346400ad8bf63a8e81f52a2c862bd9b23f373843d430b9c91f1d4",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "dpr": 1,
+        "lens": "navcam",
+        "selectedPlace": "Left Foot",
+        "shadows": false,
+        "camera": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.583820887761,0.102927005047,-0.805331734533,0,0.372159422783,0.847652309926,0.37813083121,0,0.721561179006,-0.520472471039,0.456571869306,0,0,0,0,1)",
+            "skybox": "matrix3d(0.478635392529,0.173782654979,-0.860643759948,0,0.877654202747,-0.122741918523,0.463311306046,0,-0.025121599858,-0.977104840044,-0.211269694509,0,0,0,0,1)",
+            "sunView": "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)"
+          },
+          "pitch": 61.61538461538461,
+          "controlPitch": 61.61538461538461,
+          "controlYaw": 0,
+          "zoom": 0.3916841374557338,
+          "distance": 976.0190848585792,
+          "distanceKilometers": 8.135359793660326,
+          "distanceRadii": 4.243561238515562,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 163.7951847542159,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 337.75,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -195,
+            "right": 195,
+            "top": -422,
+            "bottom": 422
+          },
+          "offAxisDegrees": 0,
+          "silhouetteRadius": 81.89759237710796,
+          "bodyCenterKilometers": [
+            -3.206312885595253e-8,
+            -9.984810958485468e-9,
+            -8.135359793660326
+          ]
+        },
+        "sheet": "peek"
+      }
+    ]
+  },
+  "checks": {
+    "imageRegistrationAndEncounterTests": 10,
+    "landmarkPreparationTests": 4,
+    "changedBodyFeatureTests": 2,
+    "preparationBuild": "passed",
+    "preparationTypecheck": "passed",
+    "coordinateReproduction": "Both generators compare exactly with the checked-in landmark coordinates and residual evidence.",
+    "targetedProvenance": "Both bodies pass with no unresolved inputs.",
+    "aggregateSources": "On base 3efdf2c9, 66 passed and 1 skipped for the absent 1998 ML14 paper. On current main e986b9280, pnpm test:sources stops before tests because Earth, Moon and Mars acquisition recipes changed in be99ac479 without updating object.json recipe pins. These files are untouched by this change."
+  },
+  "limits": [
+    "This checks the two changed comet packages, not all-body browser conformance.",
+    "390 × 844 is a desktop Chrome viewport check, not physical-mobile performance or touch-device qualification.",
+    "Registered places are approximate point callouts. Fit residuals and sampled sensitivity do not establish geological boundaries or absolute location accuracy."
+  ]
+}

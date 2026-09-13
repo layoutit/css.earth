@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/nuwa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'nuwa',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/nuwa/nuwa-directional-sun.webp",
-      "two": "/scenes/nuwa/nuwa-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/nuwa/nuwa-shape-surface@2x.webp"
+    "/scenes/nuwa/nuwa-shape-surface@2x.webp",
+    "/scenes/nuwa/nuwa-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

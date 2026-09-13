@@ -167,32 +167,10 @@
       "rowOutput": "uranus-orbit-material-normal-row-{row}.webp",
       "fixed": [
         {
-          "density": 1,
-          "shadowless": false,
-          "size": 512,
-          "filename": "uranus-fixed-material-normal.webp",
-          "encoding": {
-            "quality": 94,
-            "alphaQuality": 100,
-            "smartSubsample": true
-          }
-        },
-        {
           "density": 2,
           "shadowless": false,
           "size": 1024,
           "filename": "uranus-fixed-material-normal@2x.webp",
-          "encoding": {
-            "quality": 94,
-            "alphaQuality": 100,
-            "smartSubsample": true
-          }
-        },
-        {
-          "density": 1,
-          "shadowless": true,
-          "size": 512,
-          "filename": "uranus-fixed-material-normal-shadowless.webp",
           "encoding": {
             "quality": 94,
             "alphaQuality": 100,
@@ -228,32 +206,10 @@
       "rowOutput": "uranus-orbit-material-methane-row-{row}.webp",
       "fixed": [
         {
-          "density": 1,
-          "shadowless": false,
-          "size": 512,
-          "filename": "uranus-fixed-material-methane.webp",
-          "encoding": {
-            "quality": 94,
-            "alphaQuality": 100,
-            "smartSubsample": true
-          }
-        },
-        {
           "density": 2,
           "shadowless": false,
           "size": 1024,
           "filename": "uranus-fixed-material-methane@2x.webp",
-          "encoding": {
-            "quality": 94,
-            "alphaQuality": 100,
-            "smartSubsample": true
-          }
-        },
-        {
-          "density": 1,
-          "shadowless": true,
-          "size": 512,
-          "filename": "uranus-fixed-material-methane-shadowless.webp",
           "encoding": {
             "quality": 94,
             "alphaQuality": 100,
@@ -289,32 +245,10 @@
       "rowOutput": "uranus-orbit-material-near-infrared-row-{row}.webp",
       "fixed": [
         {
-          "density": 1,
-          "shadowless": false,
-          "size": 512,
-          "filename": "uranus-fixed-material-near-infrared.webp",
-          "encoding": {
-            "quality": 94,
-            "alphaQuality": 100,
-            "smartSubsample": true
-          }
-        },
-        {
           "density": 2,
           "shadowless": false,
           "size": 1024,
           "filename": "uranus-fixed-material-near-infrared@2x.webp",
-          "encoding": {
-            "quality": 94,
-            "alphaQuality": 100,
-            "smartSubsample": true
-          }
-        },
-        {
-          "density": 1,
-          "shadowless": true,
-          "size": 512,
-          "filename": "uranus-fixed-material-near-infrared-shadowless.webp",
           "encoding": {
             "quality": 94,
             "alphaQuality": 100,

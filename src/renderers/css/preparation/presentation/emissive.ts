@@ -2,12 +2,12 @@
 // (scene/index.ts body-container layout) with the composite node conventions (composite.ts).
 // An emissive body has no material track, no Shadows toggle and no directional Sun; its off-limb context and
 // limb plate are silhouette-fitted roots beside the camera, exactly as the retired static presentation mounted them.
-import { canonicalPreparedAsset, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
+import { preparedAssetAddress, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant } from '../../rendering/prepared-presentation.js';
 import type { PresentationInputs, PresentationDraft } from './types.js';
 import type { PresentationAdapters } from './adapters.js';
-import { DEFAULT_TEXTURE_LEVELS, preparePreparedTextureLevels } from '../../../../platform/prepared-texture-levels.mts';
+import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.js';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const LAYERS = ['surface', 'poles', 'corona', 'limb'] as const;
 
@@ -17,22 +17,16 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   const material = plan.material as unknown as { model?: string; offLimbContext?: { logicalSize: number }; limbMaterial?: { logicalSize: number } };
   if (material.model !== 'emissive' || !assets.emission) throw new TypeError('Emissive presentation needs the prepared emission material and plates.');
   if (input.sun !== null && input.sun !== undefined) throw new TypeError('An emissive body carries no directional Sun.');
-  // Every plate of an unlit body is written at both prepared densities over one
-  // layout, so the shared selection swaps the pair by projected silhouette.
-  const profile = input.textureLevels === null ? null : input.textureLevels ?? DEFAULT_TEXTURE_LEVELS;
-  const levels = profile ? preparePreparedTextureLevels(profile, assets.surfaceDimensions?.width,
-    lenses.controls.flatMap(lens => LAYERS.map(layer => ({ key: `${layer}:${lens.id}`, pool: 'material',
-      one: lens[`${layer}Url` as 'surfaceUrl'], two: lens[`${layer}2xUrl` as 'surface2xUrl'],
-      width: assets.surfaceDimensions?.width })))) : null;
-  const initialResource = (key: string) => levels?.initialResource(key) ?? key;
-  const entries = levels ? levels.entries : lenses.controls.flatMap(lens => LAYERS.map(layer => ({ key: `${layer}:${lens.id}`,
-    url: canonicalPreparedAsset(lens[`${layer}Url` as 'surfaceUrl'], lens[`${layer}2xUrl` as 'surface2xUrl']), pool: 'material' })));
+  const entries = lenses.controls.flatMap(lens => LAYERS.map(layer => ({ key: `${layer}:${lens.id}`,
+    url: preparedAssetAddress(lens[`${layer}Url` as 'surfaceUrl']), pool: 'material' })));
   const required = (id: string) => LAYERS.map(layer => `${layer}:${id}`);
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.leaves.map(leaf => leaf.style)) });
   // Same camera/scene/system/body nodes as composite.ts: the shared orbit writes the perspective and dolly.
   const camera = b.element('div', 'polycss-camera planet-render-root');
   const scene = b.element('div', 'polycss-scene', `transform:${plan.camera.defaultTransform}`, { 'aria-hidden': 'true', 'data-polycss-lighting': 'baked' });
   const system = b.mesh(`${ns}-system`, `transform:${plan.systemTransform}`), body = b.mesh(`${ns}-body`, '', { style: '' });
+  const seamOutset = plan.body.seamRepair?.outset;
+  if (seamOutset) system.style.setProperty(seamOutset.property, seamOutsetInitialValue(seamOutset, plan.camera.logicalBodyDiameter));
   b.append(null, camera); b.append(camera, scene); b.append(scene, system); b.append(system, body);
   for (const leaf of plan.body.leaves) b.append(body, b.leaf(leaf));
   // Off-limb context (stationary observed plate behind the sphere) and limb plate (rim over the leaves):
@@ -50,14 +44,15 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   ], materials: [] }));
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun: null,
     assets: { entries, pools: [preparedResourcePool('material', entries, { retention: 'selection', capacity: 8, concurrency: 8 })],
-      startup: required(lenses.defaultLens).map(initialResource) },
-    tree, variants, ...(levels ? { textureLevels: levels.textureLevels } : {}), materials: [],
+      startup: required(lenses.defaultLens) },
+    tree, variants, materials: [],
     viewBindings: [
       ...[corona, limb].map(node => ({ kind: 'silhouette-fit' as const, target: index(node), minimumRadius: POINT_MIN_RADIUS_PX, unitScale: 2 / plan.camera.logicalBodyDiameter })),
       { kind: 'view-attribute', target: -1, property: 'data-lod', source: 'level-of-detail-stage', precision: null },
       ...([['data-polycss-camera-rot-x', 'scene-pitch', 2], ['data-polycss-camera-rot-y', 'control-yaw', null],
         ['data-polycss-camera-zoom', 'zoom', null], [`data-${ns}-camera-matrix`, 'scene-matrix', null]] as const)
         .map(([property, source, precision]) => ({ kind: 'view-attribute' as const, target: index(camera), property, source, precision })),
+      ...(seamOutset ? [seamOutsetBinding(seamOutset, index(system))] : []),
     ],
     animations: [],
   };

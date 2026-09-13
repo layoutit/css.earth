@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-surface-features-source@1",
+  "source": "Thomas et al. (2013), Figures 3 and 7",
+  "snapshotDate": "2026-09-12",
+  "sourcePage": "https://ntrs.nasa.gov/api/citations/20140009994/downloads/20140009994.pdf",
+  "license": "Repository-authored factual compilation; cited source data retain their own terms",
+  "licenseEvidence": "https://ntrs.nasa.gov/api/citations/20140009994/downloads/20140009994.pdf",
+  "qualification": "Farnham & Thomas (2013) PDS Hartley 2 body-fixed planetocentric frame: east-positive longitude, with positive latitude toward the smaller lobe. Figure 3 uses the same E-longitude/latitude map. Each caption identifies its source and placement limits. No official centre or boundary is claimed.",
+  "inputs": [
+    {
+      "path": "landmarks.json",
+      "origin": "Project compilation from the individually cited sources",
+      "bytes": 2425,
+      "sha256": "67e1bb8851ba0548f50dcb6ee03d6d0c2b4e580c376f291c3b0033bf41d9a2ff"
+    }
+  ]
+}

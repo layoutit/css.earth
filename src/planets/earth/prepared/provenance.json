@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8b6942417113fe9620f3f094212885933aa95f04c23d03e1d5182ae66308f784"
+    "sha256": "802ab542a41a6999f0d8a71fb537ccfcc3dd42b922c50d7afb05e0fe638e1226"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "f4d04962a504d275f2ba499b2a1c0443ed94338b39e209faab99860dc7224d17"
   },
   "recipes": [
     {
       "id": "paged-ellipsoid",
       "path": "source/preparation/paged-ellipsoid.json",
-      "sha256": "3644c336b0dab1d58934826b3195bf01858c537463f0b3d477ed7606869a0e7f",
+      "sha256": "b762907dea0c0f73938fb52b860e4e57196ad5f170dd1624f3d5df4a5f42e653",
       "parameters": {
         "schema": "cssearth-paged-ellipsoid@1",
         "namespace": "earth",
@@ -137,7 +137,8 @@
               "name": "earth-surface",
               "compositeClouds": false,
               "thumbnail": "earth-lens-normal.webp",
-              "displayGamma": 1.25
+              "displayGamma": 1.25,
+              "nativePhotographicSampling": true
             },
             {
               "path": "blue-marble-july.jpg",
@@ -150,7 +151,8 @@
                 "spanDegrees": 50
               },
               "primarySource": "blue-marble-clouds.tif",
-              "displayGamma": 1.25
+              "displayGamma": 1.25,
+              "nativePhotographicSampling": true
             },
             {
               "path": "science/gebco-2026/latitude-00.dods.gz",
@@ -2884,7 +2886,7 @@
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/0",
       "parents": [],
-      "process": "Prepare the global reference map and its declared cloud composite.",
+      "process": "Sample the original photographic grids at each retained atlas footprint, apply the declared display transfer and cloud composite, and encode the existing texture layout.",
       "limitations": [
         "NASA Blue Marble Next Generation July 2004, cloud-free global surface mosaic"
       ],
@@ -2906,50 +2908,50 @@
         },
         {
           "url": "/scenes/earth/earth-surface.webp",
-          "bytes": 251916,
-          "sha256": "c5f9a3fb57dc7ce90133e6a63922f190b7a1241c06242612dd996a27befe7124",
+          "bytes": 373038,
+          "sha256": "688f79e35702cafff851fb93a31bb0f44e990adacf4dce054f398223e3af6c37",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-poles.webp",
-          "bytes": 56774,
-          "sha256": "25b137750ac78502a0870e0d9b5aee01eaf7cb85c6df45386710f2c5a980ccc0",
+          "bytes": 63828,
+          "sha256": "4e008228ae97f8395cb08b87bf27dd18062b0fef55e134891bd1e27ea66dd059",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-1.webp",
-          "bytes": 187304,
-          "sha256": "14942a13622781df6fdf13ed797896ba897d68c38eac271a20e2b6fae27e0d50",
+          "bytes": 245396,
+          "sha256": "1a9f994418c5b8ff8c1b65e99e5cfbe42763c8a231e3f70b3bd61106f01ab3c9",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-2.webp",
-          "bytes": 297660,
-          "sha256": "6e77364e05383933ce32aaa5f708af082755d7e4618732f164428c94a21848c2",
+          "bytes": 371544,
+          "sha256": "0eaf3c20f766fb9714dbcd1758e4d6477c3f7a2c414b521c84e5c1f2c8079e78",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-3.webp",
-          "bytes": 616908,
-          "sha256": "739fb661dd8416c8b60e40c5c686da4054275c1aace0c9fa65664024cf8bf5e3",
+          "bytes": 822220,
+          "sha256": "4d7971337f14b17347c2d12c3e12e77d72a2cc2f370da7ce6844a830dd036b06",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-4.webp",
-          "bytes": 740818,
-          "sha256": "5a75d7e26ae2019b20a3e44d1537bf51bac54d1a9748142217a722314b4361da",
+          "bytes": 1100580,
+          "sha256": "5ed2fe5d6df5432e448be0632aa49047c813f7ce0d6786799dc5756441c9e12c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-5.webp",
-          "bytes": 467874,
-          "sha256": "a6fc77d088a203f776e32fe5e4291e529bef5f47b13be07be9d18f68259707c9",
+          "bytes": 683174,
+          "sha256": "1292f31dc7e982034bc2ce404efc44b5023302a4fb264c355284b7fa7cfb9514",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-surface-page-6.webp",
-          "bytes": 76224,
-          "sha256": "8b1209d7014db4dc9b9d85ce6e6d33400e287df3b85b3d805173ae10d7a6a973",
+          "bytes": 118358,
+          "sha256": "e3b1a53692df7f82284659308924e44f12b33a2f264360b35b84acfe85df8bff",
           "verification": "bytes-verified"
         }
       ],
@@ -2961,7 +2963,7 @@
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/1",
       "parents": [],
-      "process": "Prepare the global reference map and its declared cloud composite.",
+      "process": "Sample the original photographic grids at each retained atlas footprint, apply the declared display transfer and cloud composite, and encode the existing texture layout.",
       "limitations": [
         "Archival NASA Blue Marble cloud composite over July 2004 surface imagery; not live weather"
       ],
@@ -2984,50 +2986,50 @@
         },
         {
           "url": "/scenes/earth/earth-clouds.webp",
-          "bytes": 330800,
-          "sha256": "d2f46871624bcbac960020c00064bfca5ed8679da0bba0d757494a3d1d58d627",
+          "bytes": 418704,
+          "sha256": "680a003e9b9fd7cacdaf48b6ff89b6f5da71b38e9dac1872b89821939fec476b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-poles.webp",
-          "bytes": 80010,
-          "sha256": "eb39b0a9879f5a3b902f14c1f70251ef35e6b626b7bc080ec923c767b039b384",
+          "bytes": 84560,
+          "sha256": "96b1a5681a71a4dda1212d51ca23a4fd551895b6d0e85bde5538f2ee8db87afb",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-1.webp",
-          "bytes": 731792,
-          "sha256": "98d7a725dcb7c45645e6596068237d0057c087d78adf7b2dfb7f0de2f2866332",
+          "bytes": 807746,
+          "sha256": "e5b9cbe23944581b4486522e557b5b80895e61acb65f473304af78b8f6e27012",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-2.webp",
-          "bytes": 1637988,
-          "sha256": "a42ca276e92d26bf393c61aef7f85362024e02024d9e62db891c9a10158fbd35",
+          "bytes": 1722816,
+          "sha256": "0c234fc40ed2c2e74081d64cc6bd5b4d36070822c33caabf30d747e421035055",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-3.webp",
-          "bytes": 1668812,
-          "sha256": "b37154c1090db660e6189f7ec713368a9a2b23ad4033e6c4f0cc4013a5d5a0a7",
+          "bytes": 1823764,
+          "sha256": "8daaa65052c0bd4873be7ea56cc4f8387d58939195e23a9684b58903cb8756ca",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-4.webp",
-          "bytes": 1205924,
-          "sha256": "d4beca65e44652182b2015c3676b49a8abaca78d565647e5bcc3ad9e3aad1ce1",
+          "bytes": 1426102,
+          "sha256": "8326e8957d07b405e56f5621aa5858d1ba7b453ff6a9d96aa61a4df3a6e783e7",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-5.webp",
-          "bytes": 604754,
-          "sha256": "bdd8b5aaa7b5114d56b32d87627cdd03edaf12326d13ca096ac2036c9773b7c3",
+          "bytes": 749248,
+          "sha256": "9ea4bf9033e43529d0b05690d6277b0d7c291fc9b199d603c82b591f59220fee",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-clouds-page-6.webp",
-          "bytes": 87328,
-          "sha256": "9a3a6097609e25233462cd05e8731198f71fd3423628e7d0eddd1050f6cd09c9",
+          "bytes": 109840,
+          "sha256": "04511284eee1152a94d8f9f819a3bef8df983b083c71abde746e9f98c0773e46",
           "verification": "bytes-verified"
         }
       ],

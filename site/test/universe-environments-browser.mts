@@ -44,11 +44,13 @@ try {
     Object.fromEntries(OBJECTS.map(object => [object.id, object.worldFrame] as const)));
   snapshots.initial = await read(page);
   assert.equal(Number(snapshots.initial.shell.shellOpacity), 0, 'shell is hidden inside the Solar System');
-  assert.equal(snapshots.initial.shellFaces, shell.data.faces.length);
   assert.equal(snapshots.initial.volumeLeaves, volume.data.stacks.flatMap(stack => stack.leaves).length);
   assert.equal(snapshots.initial.volumeImages, snapshots.initial.volumeLeaves * 3);
   assert.ok(snapshots.initial.volumeCopiesValid, 'each prepared slab owns three identical retained image planes');
-  assert.equal(snapshots.initial.skyFaces, 6, 'the NASA sky must be mounted in the actual shared view');
+  // The baked neighbourhood stars layer over the photograph, so a face carries
+  // more than one node; the cube itself is still six faces.
+  assert.deepEqual(snapshots.initial.skyFaceNames, ['nx', 'ny', 'nz', 'px', 'py', 'pz'], 'the NASA sky must be mounted in the actual shared view');
+  assert.equal(snapshots.initial.skyFaces % 6, 0, 'every sky layer mounts all six faces');
   assert.equal(snapshots.initial.skyVisibility, 'visible');
   assert.equal(snapshots.initial.skyOpacity, 1, 'the nearby background is opaque');
   assert.equal(snapshots.initial.volumeOpacity, 0, 'the nearby view must not composite bright volume haze');
@@ -68,6 +70,10 @@ try {
   snapshots.heliosphere = await read(page);
   assert.equal(Number(snapshots.heliosphere.shell.shellOpacity), 1);
   assert.ok(Number(snapshots.heliosphere.shell.shellVisibleFaces) > 0);
+  // Every prepared face is mounted once the shell is on; the runtime may carry
+  // more than one node per face, so this is a floor, not an internal count.
+  assert.ok(snapshots.heliosphere.shellFaces >= shell.data.faces.length,
+    `mounted ${snapshots.heliosphere.shellFaces} shell faces for ${shell.data.faces.length} prepared faces`);
   await page.screenshot({ path: resolve(output, 'heliosphere.png') });
   await drag(page, 170, 120);
   snapshots.heliosphereRotated = await read(page);
@@ -75,7 +81,9 @@ try {
   await page.screenshot({ path: resolve(output, 'heliosphere-rotated.png') });
   await page.locator('.planet-settings-action').click();
   await page.locator('.planet-settings label').filter({ hasText: 'Heliosphere' }).click();
-  assert.equal(Number((await read(page)).shell.shellOpacity), 0, 'disabling the shell updates a stationary camera');
+  // The setting reaches the shell on the next presented frame, not in the click.
+  await page.waitForFunction(() => Number((document.querySelector('.prepared-surface-shell') as HTMLElement | null)?.dataset.shellOpacity ?? 0) === 0,
+    null, { timeout: 10000 }).catch(() => { throw new Error('disabling the shell must update a stationary camera'); });
   await page.locator('.planet-settings label').filter({ hasText: 'Heliosphere' }).click();
   await page.locator('.planet-settings-action').click();
   await scrollTo(page, shell.data.visibility.hiddenBeyondM * 1.01 / 1000);
@@ -174,12 +182,15 @@ async function read(page: Page) {
     camera: window.__cssearthTest.object().camera.state(),
     world: window.__cssearthTest.object().camera.captureWorldCamera(window.__cssearthTest.required(window.__environmentFrames[window.__cssearthTest.scene().activeObjectId], 'current world frame')),
     roots: document.querySelectorAll('.polycss-camera').length,
-    shell: { ...window.__cssearthTest.html('.prepared-surface-shell').dataset },
+    // The shell mounts when it is enabled and in range; absent reads as off.
+    shell: { shellOpacity: '0', shellVisibleFaces: '0', ...(document.querySelector('.prepared-surface-shell') as HTMLElement | null)?.dataset },
     shellFaces: document.querySelectorAll('[data-shell-face]').length,
-    shellTransform: window.__cssearthTest.html('.prepared-surface-shell-scene').style.transform,
-    volumeLeaves: document.querySelectorAll('.css-volume-mesh > s:nth-child(3n + 1)').length,
-    volumeImages: document.querySelectorAll('.css-volume-mesh > s').length,
-    volumeCopiesValid: [...document.querySelectorAll('.css-volume-mesh')].every(mesh => {
+    shellTransform: (document.querySelector('.prepared-surface-shell-scene') as HTMLElement | null)?.style.transform ?? null,
+    // The galaxy image-layer banks mount their own volume meshes, so these
+    // counts belong to the prepared density volume alone.
+    volumeLeaves: document.querySelectorAll('.prepared-volume-image .css-volume-mesh > s:nth-child(3n + 1)').length,
+    volumeImages: document.querySelectorAll('.prepared-volume-image .css-volume-mesh > s').length,
+    volumeCopiesValid: [...document.querySelectorAll('.prepared-volume-image .css-volume-mesh')].every(mesh => {
       const images = [...mesh.children].map(node => { if (!(node instanceof HTMLElement)) throw new Error('Volume image must be HTML.'); return node; });
       return images.length % 3 === 0 && images.every((node, index) => {
         const copy = index % 3, original = images[index - copy], alpha = Number(node.style.opacity);
@@ -189,12 +200,15 @@ async function read(page: Page) {
       });
     }),
     volumeTransform: [...document.querySelectorAll<HTMLElement>('.css-volume-scene')].map(node => node.style.transform).join('|'),
-    volumeMatrices: [...document.querySelectorAll<HTMLElement>('.css-volume-scene')].map(node => Array.from(new DOMMatrix(node.style.transform).toFloat64Array())),
+    // The galaxy image-layer banks mount their own volume scenes; only the
+    // prepared density volume follows the observer at the scene scale below.
+    volumeMatrices: [...document.querySelectorAll<HTMLElement>('.prepared-volume-image .css-volume-scene')].map(node => Array.from(new DOMMatrix(node.style.transform).toFloat64Array())),
     volumeOpacity: Number(window.__cssearthTest.html('.prepared-volume-context').dataset.volumeOpacity),
     volumeCompositeOpacity: Number(getComputedStyle(window.__cssearthTest.element('.prepared-volume-context')).opacity),
     volumeBrightness: Number(window.__cssearthTest.html('.prepared-volume-image').dataset.volumeBrightness),
     volumeImageOpacity: Number(getComputedStyle(window.__cssearthTest.element('.prepared-volume-image')).opacity),
     skyFaces: document.querySelectorAll('[data-sky-face]').length,
+    skyFaceNames: [...new Set([...document.querySelectorAll('[data-sky-face]')].map(face => face.getAttribute('data-sky-face')))].sort(),
     skyOpacity: Number(getComputedStyle(window.__cssearthTest.element('.prepared-celestial-sky')).opacity),
     skyVisibility: getComputedStyle(window.__cssearthTest.element('.prepared-celestial-sky')).visibility,
     skyTransform: window.__cssearthTest.html('.prepared-celestial-sky-scene').style.transform,

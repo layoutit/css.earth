@@ -3,8 +3,7 @@ import objectControls from '../../../../src/planets/deimos/prepared/controls.jso
 
 export const browserProfile = createObjectBrowserProfile({ id: 'deimos', controls: objectControls,
   audit: {
-    preparedAssetPairs: [{ one: '/scenes/deimos/deimos-directional-sun.webp', two: '/scenes/deimos/deimos-directional-sun@2x.webp' }],
-    canonicalPreparedAssets: ['/scenes/deimos/deimos-normal-surface@2x.webp', '/scenes/deimos/deimos-lighting.webp'],
+    canonicalPreparedAssets: ['/scenes/deimos/deimos-normal-surface@2x.webp', '/scenes/deimos/deimos-lighting.webp', '/scenes/deimos/deimos-directional-sun@2x.webp'],
     lensRace: { defaultId: 'normal', slowId: 'elevation', winnerId: 'normal',
       slowAsset: '/scenes/deimos/deimos-elevation-surface@2x.webp', preReadyDisabled: true },
     retained: { lensIds: browserProfileLensIds(objectControls), speedClicks: 5, allowedMountSelectors: [] },

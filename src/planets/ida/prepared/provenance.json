@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b8efb0e455932f9ebb9a157626fa5436dbc723042287e9f940d52d8763e4062a"
+    "sha256": "9aecce09675b1c36bdc1c6b733a456c2ef2f5f24fb6437c5687f365713081033"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "f4d04962a504d275f2ba499b2a1c0443ed94338b39e209faab99860dc7224d17"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0951113d2fde4f212face8867951d7f1a6d805e26f25581a9a33157a945d160c",
+      "sha256": "049d96dfb0f099dc69e5af33cb81859fc7e8541e95d3d2f677e8dc94aeb3e065",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -44,6 +44,10 @@
                   255
                 ],
                 "bitpix": 8
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           ],
@@ -148,13 +152,24 @@
                 }
               ],
               "photometry": {
-                "model": "observed",
-                "weight": 1,
-                "maximumGain": 1,
+                "model": "photometry/helfenstein-1996-hapke.json",
+                "referenceDegrees": {
+                  "incidence": 25,
+                  "emission": 0,
+                  "phase": 25
+                },
+                "limits": {
+                  "maximumIncidenceDegrees": 65,
+                  "maximumEmissionDegrees": 65,
+                  "phaseDegrees": [
+                    20,
+                    30
+                  ],
+                  "minimumGain": 0.4,
+                  "maximumGain": 4
+                },
                 "displayMaximum": 0.12,
                 "gamma": 2.2,
-                "maximumIncidenceDegrees": 65,
-                "maximumEmissionDegrees": 65,
                 "minimumLevel": 1,
                 "maximumLevel": 1
               },
@@ -1104,6 +1119,34 @@
       "verificationOperations": []
     },
     {
+      "path": "photometry/helfenstein-1996-hapke.json",
+      "purpose": "Published Hapke photometric model of Ida at 0.55 um, used to normalize the Galileo photograph mosaic.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1006-icar-1996-0036",
+            "role": "method",
+            "evidence": "Helfenstein et al. (1996) give the single-scattering albedo, opposition width and amplitude, asymmetry factor and roughness at 0.55 um, fitted to Galileo images at 19.5-109.8 degrees phase combined with near-opposition Earth-based data.",
+            "locator": "Abstract"
+          }
+        ]
+      },
+      "id": "source-document:photometry/helfenstein-1996-hapke.json",
+      "kind": "source-document",
+      "origin": "object:source/photometry/helfenstein-1996-hapke.json",
+      "title": "Published Hapke photometric model of Ida at 0.55 um, used to normalize the Galileo photograph mosaic.",
+      "credit": "Credit not recorded in source manifest.",
+      "acquisition": "Acquisition not recorded in source manifest.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "99f9e82b31e460a3f94f445a20d08a71bcae183cfa2d8d1b8210b54afc17c722",
+      "bytes": 589,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -1231,7 +1274,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Thomas’s registered Galileo mosaic combines detailed images with a coarser background. Its high-pass processing reduces broad brightness differences but retains photographed shading and seams; it is not calibrated albedo. Source sampling varies greatly. Gray grid marks source-defined unprojectable surfaces. Shadows adds approximate fixed-epoch Sun lighting."
       ],
@@ -1253,6 +1296,10 @@
             255
           ],
           "bitpix": 8
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -1268,8 +1315,8 @@
         },
         {
           "url": "/scenes/ida/ida-normal-surface@2x.webp",
-          "bytes": 1050172,
-          "sha256": "d1f446ce067526b98d3bed50aca3f5ee68fcce6b52733c133a11426ea596abe2",
+          "bytes": 1595416,
+          "sha256": "875d7fcb87eb012dfe02bcf19b91c00b8c0593f793a16f8eff919e24ea81bf96",
           "verification": "bytes-verified"
         }
       ],
@@ -1352,19 +1399,20 @@
         "ida-0202560500rcal_gre-xml",
         "ida-i0500-fit",
         "ida-i0500-lbl",
+        "source-document:photometry/helfenstein-1996-hapke.json",
         "ida-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/ida/ida-calibrated-thumbnail.webp",
-          "bytes": 1880,
-          "sha256": "cf9fafd617363f81d1061a653b1ae4f45e1ef52e4f4402b4d36415d0ed000002",
+          "bytes": 1818,
+          "sha256": "9c00f26ecd53ada325d85569652390939652f0f3f48d484d5cce823e0d71569b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ida/ida-calibrated-surface@2x.webp",
-          "bytes": 284728,
-          "sha256": "57da5425aca952a853ecd56d2a8cb47d59052f20c2192876f3dfa8a1531404f5",
+          "bytes": 284340,
+          "sha256": "44d892c3bd93890e84137da144dd0e16d2dd74f38aac76a2e3f4710da4dbe56f",
           "verification": "bytes-verified"
         }
       ],
@@ -1423,8 +1471,8 @@
       "outputs": [
         {
           "url": "/scenes/ida/ida-features.json",
-          "bytes": 17369,
-          "sha256": "91f934a96f50ee278f185425fc0f139cd07f33d5361a8920341e238774f74711",
+          "bytes": 17376,
+          "sha256": "a71ff26df77fdf1096320ada02799da0036618e7f67b2706b34f0b020d98b538",
           "verification": "bytes-verified"
         }
       ],
@@ -1472,8 +1520,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/calibrated.webp",
-          "bytes": 6858,
-          "sha256": "73c75c7067058b9a8acbed6174bf347ece399c2231af899bc51ed011418e4103",
+          "bytes": 6900,
+          "sha256": "936b2f57fdcb6d26070a57f907d3b7756fc48ed388c7e93c71352c080a6190f2",
           "verification": "bytes-verified"
         }
       ]

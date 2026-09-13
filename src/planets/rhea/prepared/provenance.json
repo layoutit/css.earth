@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f516ce539972eb9369862a1674fb3a3a8272c866c8dc0a2ea1aa88e47cfcd669"
+    "sha256": "d0630650562f6b43e8c34bc2dc3970862662e7bb9c60628b231ceb4744932fc9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "f4d04962a504d275f2ba499b2a1c0443ed94338b39e209faab99860dc7224d17"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e519d1d09e231870e01487791f1a12b2afd6ec7ad8bbb53efa9f19742da38948",
+      "sha256": "6fdcc2d7f584623cf160621e9bbdae5bc15e5ef4926126c99d6e60453ffbfa57",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -41,6 +41,10 @@
                 "noData": 0,
                 "centerLongitude": 180,
                 "resolutionMeters": 416.75190045277
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -49,6 +53,10 @@
                 "kind": "image-rgb-no-data",
                 "noData": null,
                 "centerLongitude": 180
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -59,7 +67,8 @@
                 "centerLongitude": 0,
                 "channels": "rgb",
                 "zeroValidity": "all-channels",
-                "resampling": "source-georeferenced-nearest"
+                "resampling": "source-georeferenced-nearest",
+                "wrapLongitude": true
               },
               "textureScale": 0.125,
               "focus": {
@@ -739,7 +748,7 @@
           "refresh"
         ],
         "path": "observations/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
-        "url": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif"
+        "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif"
       },
       "verificationOperations": []
     },
@@ -1198,7 +1207,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "USGS 2012 Cassini/Voyager mosaic, about 417 m per source pixel, downsampled to 8192 × 4096. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       ],
@@ -1216,6 +1225,10 @@
           "noData": 0,
           "centerLongitude": 180,
           "resolutionMeters": 416.75190045277
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -1231,8 +1244,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-normal-surface@2x.webp",
-          "bytes": 4933780,
-          "sha256": "c1cc0f7903fd00bc594395360d93c61911dcf39e5cb3ef99dda6486afd67c04b",
+          "bytes": 6734102,
+          "sha256": "f619f250042f2b95d18f980f2342509b1debb88889bcc6f0d914cc64c89fbfdf",
           "verification": "bytes-verified"
         }
       ],
@@ -1244,7 +1257,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Published 2014 enhanced-color composite, about 400 m per source pixel, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Real hemisphere differences, residual photographed shading and source seams remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       ],
@@ -1259,6 +1272,10 @@
           "kind": "image-rgb-no-data",
           "noData": null,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -1274,8 +1291,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-enhanced-surface@2x.webp",
-          "bytes": 11123304,
-          "sha256": "4cdc64493a3659fab0412cafe3fc46627792b49b9b1225f5a8be8b12972144f1",
+          "bytes": 13970660,
+          "sha256": "a92c6969c988fb9f0ace46318a10946410382463c9ca31c5b4873e5d0a96e73f",
           "verification": "bytes-verified"
         }
       ],
@@ -1304,7 +1321,8 @@
           "centerLongitude": 0,
           "channels": "rgb",
           "zeroValidity": "all-channels",
-          "resampling": "source-georeferenced-nearest"
+          "resampling": "source-georeferenced-nearest",
+          "wrapLongitude": true
         }
       },
       "inputs": [
@@ -1558,8 +1576,8 @@
       "outputs": [
         {
           "url": "/scenes/rhea/rhea-features.json",
-          "bytes": 208075,
-          "sha256": "4dd9c879a4238ca17071233b238fc57c2fb915853c07e0792bae6d6f160ca054",
+          "bytes": 208080,
+          "sha256": "5c96cba5c41ad06a111d918e6e3ff98922c34497e4f2184b7621ce810ab900e3",
           "verification": "bytes-verified"
         }
       ],

@@ -25,8 +25,6 @@ try {
       assert.equal(new URL(page.url()).pathname, object.route);
       assert.equal(await page.locator(".planet-stage").count(), 1);
       assert.equal(await page.locator(".polycss-camera").count(), 1);
-      const scaleIds = await page.locator(".scale-planet").evaluateAll((items) => items.map((item) => item.dataset.planetId));
-      assert.deepEqual(scaleIds, OBJECTS.filter(({ classification }) => classification === "planet").map(({ id }) => id));
       reports.push({ width, id: object.id, mountedScenes: 1 });
     }
     await page.close();

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "4973f3cdb2e68bc9fd28d62e2ec83108bed88369756444f4dcd214b2567bb9ec"
+    "sha256": "42f175135bd3f84c5c0a389ba9b50631f299b577ffe61b892953266f5010db67"
   },
   "id": "ida",
   "properties": {
@@ -62,7 +62,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "0951113d2fde4f212face8867951d7f1a6d805e26f25581a9a33157a945d160c"
+          "sha256": "049d96dfb0f099dc69e5af33cb81859fc7e8541e95d3d2f677e8dc94aeb3e065"
         },
         {
           "id": "rotation",
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7f8dcec14a10fa356ca6c958d7b5caeb1a497c2794e7fc8c6ed5d1991bd02dc5"
+        "sha256": "1174a738d0b7140ab8d45f869d0becccb79b1a31e2666987605b71cbb032b971"
       }
     },
     "catalog": {

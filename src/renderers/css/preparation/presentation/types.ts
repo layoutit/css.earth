@@ -8,43 +8,38 @@ import type { PreparedAssets } from '../../rendering/prepared-residency.js';
 import type { PreparedTree, PreparedVariant, PreparedViewBinding } from '../../rendering/prepared-presentation.js';
 import type { PreparedMaterialTrack, PreparedMaterialAddress, PreparedMaterialRotation } from '../../rendering/prepared-material.js';
 import type { HeliocentricViewPlan } from '../../../../platform/heliocentric-view.mts';
-import type { PreparedTextureLevels } from '../../rendering/prepared-texture-levels.js';
-import type { TextureLevelProfile } from '../../../../platform/prepared-texture-levels.mts';
+import type { PreparedSeamOutset } from '../scene/seam-outset.js';
+type SeamRepair = { outset?: PreparedSeamOutset };
 type PreparedMarkers = Awaited<ReturnType<typeof import('../../../../../tools/objects/solar-system-markers.mts').prepareSolarSystemMarkerStrip>>['plan'];
 
 export interface Lens {
   id: string; view?: string; billboardColor: string;
-  surfaceUrl: string; surface2xUrl?: string; polesUrl: string; poles2xUrl?: string;
-  materialUrl: string; material2xUrl?: string;
+  surfaceUrl: string; polesUrl: string; materialUrl: string;
   /** Emissive bodies: the stationary off-limb context and the limb plate of this lens. */
-  coronaUrl?: string; corona2xUrl?: string; limbUrl?: string; limb2xUrl?: string;
+  coronaUrl?: string; limbUrl?: string;
 }
 export interface Lenses { defaultLens: string; controls: Lens[]; }
 export interface AtlasAddress { frameIndex: number; rowIndex: number; url: string; backgroundPosition: string; backgroundSize: string; }
 export interface Billboard { schema: string; url: string; columns: number; rowCount: number; frameCount: number; presentations: AtlasAddress[]; }
 export interface Bank { billboard: Billboard; presentations: AtlasAddress[]; rows: {url: string}[];
   transport: {framesPerRow: number; maximumRetainedRowCount: number; defaultFrame: number; initialWarmRows: number[]}; }
-/** The silhouette rule and its default belong to the shared platform builder,
- * so the in-renderer compiler and the object tools level layers by one rule. */
-export type { TextureLevelProfile };
-export { DEFAULT_TEXTURE_LEVELS } from '../../../../platform/prepared-texture-levels.mts';
 export interface RasterAssets {
   surfaceDimensions: { width: number; height: number };
-  poles: { url: string; url2x?: string };
-  lighting: { banks: Record<string, Bank>; frameCount: number; minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number };
+  poles: { url: string };
+  lighting: { bank: Bank; frameCount: number; minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number };
   interior: Record<string, string>;
   /** An unlit body's plate sizes; present instead of a lighting bank. */
   emission?: { offLimbContext: { logicalSize: number }; limbMaterial: { logicalSize: number } };
 }
 export interface CompositeMaterial {
-  lightingUrl: string; lighting2xUrl?: string; backgroundSize: string; backgroundPositions: string[];
+  lightingUrl: string; backgroundSize: string; backgroundPositions: string[];
   defaultFrame: number; minimumLightViewZ: number; maximumLightViewZ: number; frameCount: number;
   directionalFrameCount: number; baseLightAzimuthDegrees: number; frameColumns: number; frameRows: number;
 }
 export interface Scene {
   camera: CameraPlan & {defaultTransform: string}; systemTransform: string; bodyTransform: string;
   starfield: CubicSkyPlan & {catalogueStars: {exposure: {fovDegrees: number}}};
-  bodyLeaves: PreparedLeaf[]; body: {leaves: PreparedLeaf[]};
+  bodyLeaves: PreparedLeaf[]; body: {leaves: PreparedLeaf[]; seamRepair?: SeamRepair}; preparedSurface?: {seamRepair?: SeamRepair};
   interior: {bodyTransform: string; outerBodyLeaves: PreparedLeaf[]; coreLeaves: PreparedLeaf[]; sectionLeaves: PreparedLeaf[];
     presentationOrbit: {durationMilliseconds: number; millisecondsPerControlDegree: number; keyframes: Keyframe[]}};
   material: CompositeMaterial; heliocentricView: HeliocentricViewPlan;
@@ -62,13 +57,11 @@ export interface PresentationDraft {
   assets: PreparedAssets; tree: PreparedTree; variants: PreparedVariant[]; materials: SourceMaterialTrack[];
   resourceOrder?: 'materials-first'; heliocentricView?: ObjectRuntimeDefinition['heliocentricView'];
   viewBindings: PreparedViewBinding[]; animations: ObjectRuntimeDefinition['animations'];
-  textureLevels?: PreparedTextureLevels;
 }
 export interface PresentationInputs {
   namespace: string; mode: 'row-bank-cutaway' | 'composite' | 'emissive';
   scene: Scene; assets: RasterAssets; lenses: Lenses; sun: DirectionalSunPlan | null;
   markers?: PreparedMarkers; solarSource: SolarSource; controls: ObjectControls;
-  textureLevels?: TextureLevelProfile | null;
   /** Authored surface targets (positive-east degrees) a lens selects; composite only. */
   lensFocus?: Record<string, { longitudeDegrees: number; latitudeDegrees: number; zoom: number }>;
 }

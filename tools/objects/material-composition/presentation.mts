@@ -12,7 +12,7 @@ import type {PreparedNode} from '../../prepared-node-tree.mts';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
 import { prepareAtlasRows } from './atlas-rows.mts';
 
-import { canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
+import { preparedAssetAddress, preparedSunResources, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
 import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from "../../../src/platform/prepared-ellipsoid-projection.mts";
 import { prepareCssomDeclarationReads } from "../../prepared-cssom.mts";
@@ -38,14 +38,14 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
   const exteriorLenses = lenses.controls.filter(lens => lens.view !== "interior"), normal = exteriorLenses.find(lens => lens.id === lenses.defaultLens);
   if (!normal) throw new Error('Layered presentation has no default exterior lens.');
   const lensAssets = (lens:ReturnType<typeof parseLayeredLenses>['controls'][number]) => [
-    { key: `surface:${lens.id}`, url: canonicalPreparedAsset(requireString(lens.surfaceUrl), lens.surface2xUrl) },
+    { key: `surface:${lens.id}`, url: preparedAssetAddress(requireString(lens.surfaceUrl)) },
     { key: `poles:${lens.id}`, url: requireString(lens.polesUrl) },
-    { key: `rings:${lens.id}`, url: canonicalPreparedAsset(requireString(lens.ringUrl), lens.ring2xUrl) },
+    { key: `rings:${lens.id}`, url: preparedAssetAddress(requireString(lens.ringUrl)) },
     ...(lens.id !== lenses.defaultLens && views.assets.outerPoles[lens.id]
-      ? [{ key: `outer-poles:${lens.id}`, url: canonicalPreparedAsset(views.assets.outerPoles[lens.id]) }] : []),
+      ? [{ key: `outer-poles:${lens.id}`, url: preparedAssetAddress(views.assets.outerPoles[lens.id].url) }] : []),
   ];
-  const interior = [...Object.entries(views.interiorLenses.normal.assets).map(([name, asset]) => ({ key: `interior:${name}`, url: canonicalPreparedAsset(asset), pool: "interior" })),
-    { key: "interior:outer-poles", url: canonicalPreparedAsset(views.assets.outerPoles.normal), pool: "interior" }];
+  const interior = [...Object.entries(views.interiorLenses.normal.assets).map(([name, asset]) => ({ key: `interior:${name}`, url: preparedAssetAddress(asset.url), pool: "interior" })),
+    { key: "interior:outer-poles", url: preparedAssetAddress(views.assets.outerPoles.normal.url), pool: "interior" }];
   const rowBanks = new Map<string,Awaited<ReturnType<typeof prepareAtlasRows>> & {pool:string}>();
   for (const [pool, atlas, prefix] of [["exterior-material", exteriorAtlas, "exterior"], ["interior-material", interiorAtlas, "interior-material"]] as const) {
     for (const [name, variant] of Object.entries(atlas.variants)) {
@@ -59,7 +59,7 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     ...preparedSunResources(sun, "warm"),
     { key: "weather", url: `/scenes/${namespace}/${namespace}-weather.webp`, pool: "warm" },
     { key: "ring-shadow", url: `/scenes/${namespace}/${namespace}-ring-shadow.webp`, pool: "warm" },
-    ...plan.ringMotionPlates.map((plate, index) => ({ key: `ring-motion:${index}`, url: canonicalPreparedAsset(plate.textureUrl, plate.texture2xUrl), pool: "warm" })),
+    ...plan.ringMotionPlates.map((plate, index) => ({ key: `ring-motion:${index}`, url: preparedAssetAddress(plate.textureUrl), pool: "warm" })),
     ...interior,
     ...exteriorLenses.flatMap(lens => lensAssets(lens).map(entry => ({ ...entry, pool: lens.id === lenses.defaultLens ? "warm" : "lenses" }))),
     ...[...rowBanks.values()].flatMap(({ entries, pool }) => entries.map(entry => ({ ...entry, pool }))),

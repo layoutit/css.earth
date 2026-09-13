@@ -3,8 +3,7 @@ import objectControls from '../../../../src/planets/daphnis/prepared/controls.js
 
 export const browserProfile = createObjectBrowserProfile({ id: 'daphnis', controls: objectControls,
   audit: {
-    preparedAssetPairs: [{ one: '/scenes/daphnis/daphnis-directional-sun.webp', two: '/scenes/daphnis/daphnis-directional-sun@2x.webp' }],
-    canonicalPreparedAssets: ['/scenes/daphnis/daphnis-normal-surface@2x.webp', '/scenes/daphnis/daphnis-lighting.webp'],
+    canonicalPreparedAssets: ['/scenes/daphnis/daphnis-normal-surface@2x.webp', '/scenes/daphnis/daphnis-lighting.webp', '/scenes/daphnis/daphnis-directional-sun@2x.webp'],
     lensRace: { defaultId: 'normal', slowId: 'elevation', winnerId: 'normal',
       slowAsset: '/scenes/daphnis/daphnis-elevation-surface@2x.webp', preReadyDisabled: true },
     retained: { lensIds: browserProfileLensIds(objectControls), speedClicks: 5, allowedMountSelectors: [] },

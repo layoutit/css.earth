@@ -8,9 +8,7 @@ export const browserProfile = createObjectBrowserProfile({
     canonicalPreparedAssets: Object.freeze([
       ...PREPARED_EARTH_SCENE.body.assets.surface.urls,
       "/scenes/earth/earth-surface-poles.webp",
-    ]),
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({ one: "/scenes/earth/earth-directional-sun.webp", two: "/scenes/earth/earth-directional-sun@2x.webp" }),
+      "/scenes/earth/earth-directional-sun@2x.webp",
     ]),
     lensRace: Object.freeze({
       defaultId: "normal",

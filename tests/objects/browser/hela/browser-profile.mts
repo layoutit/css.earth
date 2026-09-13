@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/hela/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'hela',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/hela/hela-directional-sun.webp",
-      "two": "/scenes/hela/hela-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/hela/hela-shape-surface@2x.webp"
+    "/scenes/hela/hela-shape-surface@2x.webp",
+    "/scenes/hela/hela-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

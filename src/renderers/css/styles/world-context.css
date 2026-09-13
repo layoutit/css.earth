@@ -1,15 +1,9 @@
 /* Shared presentation for the retained, anonymous point and orbit leaves. */
-.prepared-point-field-stars s,
 .prepared-world-context s:not([data-context-body]) {
   position: absolute;
   left: 50%;
   top: 50%;
   transform-origin: 0 0;
-}
-
-.prepared-point-field-stars s {
-  background-repeat: no-repeat;
-  text-decoration: none;
 }
 
 .prepared-world-context s:not([data-context-body]) {

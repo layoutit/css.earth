@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7b46d868e5fbc6de181e7acee2912ef08d66acde2e3672918e9f3f9a74f72bc0"
+    "sha256": "8f3bb875536d51325fee13bb0c52c0a453c8194f0f79d055b3e9b1e223547175"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
@@ -302,7 +302,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d0ec3bbfd36638a1f8cadda2f7544ae52cceed8dc2b0f1e33f7fe041aac31e8c",
+      "sha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -493,6 +493,12 @@
             "role": "stars",
             "description": "Milky Way panorama",
             "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "Thomas et al.",
+            "role": "terrain",
+            "description": "Tempel 1 mapped smooth regions, Figure 2b (2013)",
+            "href": "https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf"
           }
         ],
         "provenance": {
@@ -507,6 +513,57 @@
             "path": "../reference/dataset.cat",
             "credit": "Farnham & Thomas (2013)"
           }
+        }
+      }
+    },
+    {
+      "id": "features",
+      "path": "source/preparation/features.json",
+      "sha256": "d028de321807bb901a0e1eb871b7218b973aaa7ad8782ca9245c38c6a433919a",
+      "parameters": {
+        "schema": "cssearth-surface-features@1",
+        "directory": "features",
+        "archive": null,
+        "members": null,
+        "surfaceMap": "presentation/surface-map.json",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "output": "comet-9p-features.json",
+        "publicBase": "/scenes/comet-9p/",
+        "target": {
+          "className": "comet-9p-body"
+        },
+        "lensIds": [
+          "model",
+          "constraints",
+          "deep-impact",
+          "next"
+        ],
+        "kinds": {
+          "point": [
+            "AA",
+            "IM"
+          ],
+          "linear": [
+            "RU"
+          ],
+          "region": [
+            "RE"
+          ]
+        },
+        "excludedTypeCodes": {},
+        "labelPolicy": {
+          "minimumZoomShare": 0,
+          "minimumDiameterPixels": 40,
+          "alwaysVisibleCount": 0,
+          "maximumVisible": 20,
+          "limbCosine": 0.12
+        },
+        "outline": {
+          "pieces": 32
+        },
+        "landmarks": {
+          "document": "landmarks.json",
+          "inputs": []
         }
       }
     }
@@ -1999,8 +2056,79 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d0ec3bbfd36638a1f8cadda2f7544ae52cceed8dc2b0f1e33f7fe041aac31e8c",
-      "bytes": 7026,
+      "sha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02",
+      "bytes": 7259,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-9p-features-manifest",
+      "path": "features/manifest.json",
+      "origin": "Byte pins and source qualifications for the surface-place compilation.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte pins and source qualifications for the surface-place compilation."
+      },
+      "sha256": "76d286a5de111ba36b41fac8bb1224585fac07f10c7347403537279b680731a9",
+      "bytes": 1016,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-9p-presentation-surface-map",
+      "path": "presentation/surface-map.json",
+      "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
+      },
+      "sha256": "2aa34bfdd57c0f7f4d720f78982c0a141634cb0c2b2f2a5e1700836c7a2c2301",
+      "bytes": 155,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "comet-9p-features-landmarks",
+      "path": "features/landmarks.json",
+      "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-tempel1-shape-2012",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/features/landmarks.json: per-place coordinates, descriptions and publication references; checked 2026-09-12."
+          },
+          {
+            "catalogueId": "thomas-2013-tempel1-geology",
+            "role": "reference",
+            "evidence": "src/planets/comet-9p/source/features/landmarks.json: Fig. 2b axis calibration and interior controls for S1–S4; checked 2026-09-12."
+          }
+        ]
+      },
+      "sha256": "8a6244de19eeb4a33ad6b434a325817b658f51ab238e7dc05525d11577024f40",
+      "bytes": 4939,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2230,9 +2358,41 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4998,
-          "sha256": "0e66f92d604960aede002fb3783012915630029d09a2fe9b895645c7046cf148",
+          "bytes": 5302,
+          "sha256": "2948069fc217849fa65f78f2f220dfa5117853e6418a552c55036eba99e22db1",
           "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "features",
+      "label": "Named features",
+      "recipe": "features",
+      "selector": "",
+      "parents": [],
+      "process": "Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "features"
+      ],
+      "interpretation": {
+        "kind": "nomenclature-centre-points",
+        "mapLeftEdgeLongitudeDeg": 0,
+        "excludedTypeCodes": {}
+      },
+      "inputs": [
+        "comet-9p-features-manifest",
+        "comet-9p-presentation-surface-map",
+        "comet-9p-features-landmarks"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-9p/comet-9p-features.json",
+          "bytes": 6342,
+          "sha256": "c1778069ed0ee9b77c4f0afcc7eac8de7479af3827d86f80ff72484b3957573e",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

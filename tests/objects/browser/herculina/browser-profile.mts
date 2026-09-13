@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/herculina/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'herculina',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/herculina/herculina-directional-sun.webp",
-      "two": "/scenes/herculina/herculina-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/herculina/herculina-shape-surface@2x.webp"
+    "/scenes/herculina/herculina-shape-surface@2x.webp",
+    "/scenes/herculina/herculina-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

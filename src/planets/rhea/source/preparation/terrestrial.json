@@ -23,6 +23,10 @@
           "noData": 0,
           "centerLongitude": 180,
           "resolutionMeters": 416.75190045277
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       {
@@ -31,6 +35,10 @@
           "kind": "image-rgb-no-data",
           "noData": null,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       {
@@ -41,7 +49,8 @@
           "centerLongitude": 0,
           "channels": "rgb",
           "zeroValidity": "all-channels",
-          "resampling": "source-georeferenced-nearest"
+          "resampling": "source-georeferenced-nearest",
+          "wrapLongitude": true
         },
         "textureScale": 0.125,
         "focus": {
@@ -180,7 +189,7 @@
           "width": 360,
           "height": 180,
           "centerLongitude": 0,
-          "referenceRadiusMeters": 764000.0,
+          "referenceRadiusMeters": 764000,
           "noData": -9999,
           "origin": [
             -2400176.787342602,

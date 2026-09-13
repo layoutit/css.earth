@@ -15,10 +15,7 @@ async function preparedFixture() {
   const envelope = record(JSON.parse(await readFile(new URL('../../../planets/venus/prepared/object.json', import.meta.url), 'utf8')), 'prepared Venus fixture');
   const source = requireObjectRuntimeDefinition(await inlineSharedFromBanks(fileURLToPath(new URL('../../../../', import.meta.url)), envelope.data));
   // Retain the real tree and selections while keeping image decoding in its browser gate.
-  // Prepared layer levels name the resources those selections paint, so a payload
-  // that paints none declares none either.
-  const { textureLevels: _unpainted, ...unlevelled } = source;
-  const data = { ...unlevelled, assets: { ...source.assets, startup: [] }, materials: [],
+  const data = { ...source, assets: { ...source.assets, startup: [] }, materials: [],
     variants: source.variants.map(variant => ({ ...variant, required: [], materials: [],
       writes: variant.writes.map(write => write.kind === 'texture' ? { ...write, resource: null } : write) })) };
   const payload = { ...envelope, data: { ...data,

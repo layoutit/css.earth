@@ -3,7 +3,7 @@ import type {RingMotionPoint} from './radial-motion.mts';
 interface PixelImage {data:Uint8Array;info:{width:number;height:number;channels:number};}
 interface RetainedLeaf {style:string;tag?:string;className?:string;projectiveTextureLayer?:ReturnType<typeof prepareProjectiveTextureLayer>;}
 interface PointGroup {population:string;durationSeconds:number;expansionGroupIndex?:number;points:RingMotionPoint[];}
-interface AtlasPresentation {assetUrl?:string;asset2xUrl?:string;frameIndex?:number;rowIndex?:number;backgroundPosition?:string;backgroundSize?:string;}
+interface AtlasPresentation {assetUrl?:string;frameIndex?:number;rowIndex?:number;backgroundPosition?:string;backgroundSize?:string;}
 interface AtlasVariant {runtimeAtlas:AtlasPresentation;defaultPresentation?:AtlasPresentation;rows:readonly AtlasPresentation[];presentations:readonly AtlasPresentation[];}
 interface AtlasPlanMetadata {model:string;defaultVariant?:string;defaultPreparedFrame:number;defaultPreparedRow:number;initialWarmRows:readonly number[];
   maximumRetainedAtlasCount:number;initialDecodedWorkingSetBytes:number;maximumDecodedWorkingSetBytes:number;fullAtlasDecodedRgbaBytes:number;}
@@ -12,7 +12,7 @@ import type {Polygon,Vec3,Vec2,PolyTextureImageSource,ComputeTextureAtlasPlanOpt
 import type {SilhouetteOptions,Vector3} from './ellipsoid.mts';
 type Pole='north'|'south';
 interface LayeredPolygon extends Polygon {textureImageSource:PolyTextureImageSource;latitudeIndex?:number;longitudeIndex?:number;lightingFaceIndex?:number;polarCap?:Pole;polarRole?:string;}
-interface SurfaceAsset {url:string;url2x:string;width:number;height:number;}
+interface SurfaceAsset {url:string;width:number;height:number;}
 interface ShellOptions {radiusScale:number;surface:SurfaceAsset;poles:SurfaceAsset;cutaway:boolean;}
 interface RingRaster {ringData:Uint8Array|null;foregroundRingData:Uint8Array|null;ringTextureWidth:number;maximumLightingFactor:number;}
 interface FixedMaterialOptions extends RingRaster {objectLight:ReadonlyVector3;objectView:ReadonlyVector3;scenePitchDegrees:number;systemObliquityDegrees:number;
@@ -113,7 +113,6 @@ const interiorMaterialPreparationPath = (variantId:string) => resolve(
 );
 const PLANET_WEATHER_TEXTURE_URL = config.parameters.planetWeatherTextureUrl;
 const RING_TEXTURE_URL = config.parameters.ringTextureUrl;
-const RING_TEXTURE_2X_URL = config.parameters.ringTexture_2xUrl;
 const RING_SHADOW_TEXTURE_URL = config.parameters.ringShadowTextureUrl;
 const RING_SHADOW_DIRECT_TRANSMISSION =
   parse(PREPARED_RING_SOURCE.shadowModel[config.fields.bodyOnRings],object({directTransmission:number}),'body-on-rings transmission').directTransmission;
@@ -384,7 +383,6 @@ const interiorAtmosphereShardTexturePath = (assetUrl:string, suffix:string) =>
   publicTexturePath(interiorAtmosphereShardTextureUrl(assetUrl, suffix));
 const PLANET_WEATHER_TEXTURE_PATH = resolve(publicDirectory, config.files.weather);
 const PLANET_WEATHER_SOURCE_PATH = resolve(sourceDirectory, config.sources.weather);
-const RING_TEXTURE_PATH = resolve(publicDirectory, config.files.rings);
 
 function spherePoint(latitude:number, longitude:number) { return ellipsoidPoint(latitude, longitude, { equatorialRadius: EQUATORIAL_RADIUS, polarRadius: POLAR_RADIUS }); }
 
@@ -688,7 +686,7 @@ function textureStyle(polygon:LayeredPolygon, index:number, seamEdges?:ComputeTe
 function canonicalRingTextureStyle() {
   const leaf = textureStyle(createRingPlane(), 0);
   const source = `background-image:url(${RING_TEXTURE_URL})`;
-  const canonical = `background-image:url(\"${RING_TEXTURE_2X_URL}\")`;
+  const canonical = `background-image:url(\"${RING_TEXTURE_URL}\")`;
   if (!leaf.style.includes(source)) {
     throw new Error("Prepared Ellipsoid ring texture style is incompatible.");
   }
@@ -767,7 +765,7 @@ function canonicalRingMotionPlateStyle(plate:RadialPreparation['ringPlates'][num
     plate.displayRadius,
   ), index + 2), plate);
   const source = `background-image:url(${plate.textureUrl})`;
-  const canonical = `background-image:url(\"${plate.texture2xUrl}\")`;
+  const canonical = `background-image:url(\"${plate.textureUrl}\")`;
   if (!leaf.style.includes(source)) {
     throw new Error(`Prepared Ellipsoid ${plate.population} plate is incompatible.`);
   }
@@ -790,12 +788,12 @@ function preparedCanonicalTextureStyle(
   polygon:LayeredPolygon,
   index:number,
   {
-    url2x,
+    url,
     presentationWidth,
     presentationHeight,
     backfaceVisible = false,
     sharedTexture = false,
-  }: {url2x:string;presentationWidth:number;presentationHeight:number;backfaceVisible?:boolean;sharedTexture?:boolean},
+  }: {url:string;presentationWidth:number;presentationHeight:number;backfaceVisible?:boolean;sharedTexture?:boolean},
 ) {
   const plan = computeTextureAtlasPlanPublic(polygon, index, {
     ...PLAN_OPTIONS,
@@ -825,7 +823,7 @@ function preparedCanonicalTextureStyle(
       preparedAtlasDimensions(fitted.leafWidth, fitted.leafHeight) +
       (sharedTexture
         ? ""
-        : `;background-image:url(\"${url2x}\")`) +
+        : `;background-image:url(\"${url}\")`) +
       `;background-position:${backgroundPosition}` +
       (sharedTexture ? "" : `;background-size:${backgroundSize}`) +
       (backfaceVisible ? ";backface-visibility:visible" : ""),
@@ -963,7 +961,7 @@ function prepareInteriorShell(options:ShellOptions) {
         ? { className: `${config.namespace}-interior-pole ${config.namespace}-interior-pole-${polygon.polarCap}` }
         : {}),
       ...preparedCanonicalTextureStyle(polygon, index, {
-        url2x: polygon.polarCap ? options.poles.url2x : options.surface.url2x,
+        url: polygon.polarCap ? options.poles.url : options.surface.url,
         presentationWidth: polygon.polarCap ? 256 : 64,
         presentationHeight: polygon.polarCap ? 256 : 64,
         sharedTexture: !polygon.polarCap,
@@ -1018,7 +1016,7 @@ function prepareInteriorSectionLeaves() {
       tag: "s",
       className: config.labels.label002,
       ...preparedCanonicalTextureStyle(polygon, index, {
-        url2x: requireViews().assets.section.url2x,
+        url: requireViews().assets.section.url,
         presentationWidth: 256,
         presentationHeight: 512,
         backfaceVisible: true,
@@ -1057,7 +1055,7 @@ function prepareCutawayOuterPolarLeaves() {
         createCutawayOuterPolarCapPolygon(pole, asset),
         index,
         {
-          url2x: asset.url2x,
+          url: asset.url,
           presentationWidth: 256,
           presentationHeight: 256,
         },
@@ -1941,12 +1939,12 @@ async function prepareNormalMaterialMasters() {
     .removeAlpha()
     .jpeg({ quality: 96, chromaSubsampling: "4:4:4" })
     .toFile(PLANET_BODY_SURFACE_TEXTURE_PATH);
-  const { data: ringData, info: ringInfo } = await sharp(RING_TEXTURE_PATH)
+  const { data: ringData, info: ringInfo } = await sharp(preparedInputs.ringFieldImage)
     .ensureAlpha()
     .raw()
     .toBuffer({ resolveWithObject: true });
   const { data: filteredRingShadowData, info: filteredRingShadowInfo } =
-    await sharp(RING_TEXTURE_PATH)
+    await sharp(preparedInputs.ringFieldImage)
       .ensureAlpha()
       .blur(RING_SHADOW_FOOTPRINT_BLUR_SIGMA)
       .raw()
@@ -3886,9 +3884,6 @@ function runtimeBodyBand(band:{visualRotationSeconds:number;leaves:readonly Reta
 function runtimePreparedPresentation(presentation:AtlasPresentation) {
   return {
     ...(presentation.assetUrl ? { assetUrl: presentation.assetUrl } : {}),
-    ...(presentation.asset2xUrl
-      ? { asset2xUrl: presentation.asset2xUrl }
-      : {}),
     ...(presentation.frameIndex === undefined
       ? {}
       : { frameIndex: presentation.frameIndex }),
@@ -4020,7 +4015,6 @@ function createRuntimeScenePlan(source:typeof scene) {
       compositeMode: 'compositeMode' in plate ? requireString(plate.compositeMode) : undefined,
       durationSeconds: plate.durationSeconds,
       textureUrl: plate.textureUrl,
-      texture2xUrl: plate.texture2xUrl,
       leaf: runtimeLeaf(plate.leaf),
     })),
     ringMotionExpansionPlates: source.ringMotionExpansionPlates.map((plate) => ({

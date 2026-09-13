@@ -2,6 +2,11 @@
 
 Tuttle compares two smooth inferred nucleus shapes: Hubble light-curve proportions scaled by Spitzer, and a separate Arecibo radar model.
 
+The Hubble · Spitzer view has two labels for its **model anatomy**: Large lobe
+and Small lobe. They mark the analytic contact-sphere model only.
+Their Cartesian positions use its equal-density centroid and arbitrary meridian;
+they are not observed terrain, named geography or Arecibo labels.
+
 ## Sources
 
 | Model or quantity | Source |
@@ -12,13 +17,18 @@ Tuttle compares two smooth inferred nucleus shapes: Hubble light-curve proportio
 
 ## Evidence
 
-The recorded independent checks compare Spitzer viewing angles with the paper and test the osculating position against JPL vectors. [Raw responses](source/reference/) are retained. No dated browser-run report is cited.
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
+
+The recorded independent checks compare Spitzer viewing angles with the paper and test the osculating position against JPL vectors. [Raw responses](source/reference/) are retained. Those earlier checks have no cited browser report.
+
+For the surface-place addition on base `53b262bd`, browser checks on 2026-09-12 covered both lobe searches and camera arrivals. Switching to Arecibo hides these labels; searching for one there selects the matching Hubble · Spitzer model. Shadows stayed Off. The runtime parser accepted both entries and a fresh download matched the published catalog's byte count and SHA-256. Surface assets are unchanged.
 
 ## Known problems
 
 - Both shapes are inferred from limited observations; neither supplies resolved terrain or a surface photograph.
 - The default pole has uncertainty and an arbitrary rotation phase. The radar comparison uses an illustrative alignment.
 - Equal-density origins are assumptions. Gray material is not albedo, and mesh-reduction estimates are not continuous error bounds.
+- The contact point is omitted: the shared camera approach would hide it behind the nearer lobe, making its label misleading.
 - The conic omits perturbations and outgassing; its ±30-day comparison is not a long-term ephemeris.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)

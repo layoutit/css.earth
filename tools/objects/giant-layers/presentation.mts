@@ -11,7 +11,6 @@ import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional
 import type {PreparedProjectiveTextureLeaf} from '../../../src/renderers/css/rendering/prepared-projective-texture-leaf.ts';
 import {createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform} from '@layoutit/polycss';
 import {preparedSunResources,preparedResourcePool} from '../../../src/platform/prepared-object-assets.mts';
-import {DEFAULT_TEXTURE_LEVELS,preparePreparedTextureLevels} from '../../../src/platform/prepared-texture-levels.mts';
 import {PREPARED_PRESENTATION_SCHEMA} from '../../../src/platform/prepared-presentation-contract.mts';
 import {prepareCssomDeclarationReads} from '../../prepared-cssom.mts';
 import {createPreparedNodeTree} from '../../prepared-node-tree.mts';
@@ -41,45 +40,17 @@ export async function prepareLayeredSurfacePresentation({config:input,geometryCo
       [resources.fixedRole]:url(prefix,highest(material.fixed.filter(product=>!product.shadowless)).filename),[resources.shadowlessRole]:url(prefix,highest(material.fixed.filter(product=>product.shadowless)).filename)};
   };
   const staticRoles=['surface','poles',resources.fixedRole,resources.shadowlessRole],staticKeys=(id:string)=>staticRoles.map(role=>`${role}:${id}`);
-  // The observation recipe writes an observed layer at one density or two. Its
-  // density-1 product is the one the runtime mounts, and the texels that product
-  // carries around 360 degrees is the width the level threshold reads: the last
-  // resize that applies before packing, from the product, else from the lens,
-  // else the decoded source itself.
-  const LEVELLED_ROLES=['surface','poles'] as const;
-  const observed=(id:string,role:typeof LEVELLED_ROLES[number])=>{
-    const lens=observationConfig.lenses.find(lens=>lens.id===id);
-    if(!lens)throw new TypeError(`Missing lens preparation ${id}`);
-    const products=lens.products.filter(product=>product.kind===role);
-    const two=products.find(product=>product.filename.includes('@2x'))??products[0];
-    const one=products.find(product=>!product.filename.includes('@2x'))??two;
-    if(!one||!two)throw new TypeError(`Prepared lens product is missing: ${id} ${role}.`);
-    const resize=(transforms:readonly{kind:string;width?:number}[]|undefined)=>
-      [...(transforms??[])].reverse().find(transform=>transform.kind==='resize')?.width;
-    const decoded=lens.decode.kind==='fits'?lens.decode.width:lens.decode.crop?.width;
-    const width=resize(one.transforms)??resize(lens.transforms)??decoded;
-    return {one:url(prefix,one.filename),two:url(prefix,two.filename),width};
-  };
-  const surfaceWidth=observed(defaultId,'surface').width;
-  const levels=config.textureLevels===null?null:preparePreparedTextureLevels(config.textureLevels??DEFAULT_TEXTURE_LEVELS,surfaceWidth,
-    lensIds.flatMap(id=>LEVELLED_ROLES.map(role=>({key:`${role}:${id}`,pool:resources.staticPool,...observed(id,role),width:surfaceWidth}))));
-  const initialResource=(key:string)=>levels?.initialResource(key)??key;
   const celestial=[...preparedSunResources(sun,resources.celestialPool),...config.planes.map(plane=>({key:plane.assetKey,url:plane.assetUrl,pool:resources.celestialPool}))];
   const rowCount=bank.frames/bank.columns,rowUrl=(id:string,row:number)=>{const lens=materialConfig.lenses.find(lens=>lens.id===id);if(!lens)throw new TypeError(`Missing material lens ${id}`);return url(prefix,lens.rowOutput.replace('{row}',String(row).padStart(2,'0')));};
-  const materialRoles=(id:string)=>Object.entries(surface(id)).filter(([role])=>!(LEVELLED_ROLES as readonly string[]).includes(role));
-  const entries=[...celestial,...(levels?levels.entries:[]),...lensIds.flatMap(id=>[
-    ...(levels?materialRoles(id):Object.entries(surface(id))).map(([role,url])=>({key:`${role}:${id}`,url,pool:resources.staticPool})),
-    ...Array.from({length:rowCount},(_,row)=>({key:`${resources.rowKey}:${id}:${row}`,url:rowUrl(id,row),pool:resources.rowPool}))])];
-  const initialUrl=(role:string)=>{
-    const entry=entries.find(entry=>entry.key===initialResource(`${role}:${defaultId}`));
-    if(!entry)throw new TypeError(`Missing initial prepared resource: ${role}.`);
-    return entry.url;
-  };
+  const entries=[...celestial,...lensIds.flatMap(id=>[...Object.entries(surface(id)).map(([role,url])=>({key:`${role}:${id}`,url,pool:resources.staticPool})),...Array.from({length:rowCount},(_,row)=>({key:`${resources.rowKey}:${id}:${row}`,url:rowUrl(id,row),pool:resources.rowPool}))])];
   const meshTransform=authoredTransform(config.meshTransform),systemTransform=authoredTransform(config.systemTransform);
   if(materialStyle.projection==='fixed-span'&&!geometryConfig.materialPlane)throw new TypeError('Fixed-span plane is missing.');
   const materialPlane=geometryConfig.materialPlane;
+  // The retained leaf keeps the material's layout size; its image may carry more texels.
+  const fixedMaterial=materialConfig.lenses[0].fixed.find(product=>!product.shadowless);
+  if(!fixedMaterial)throw new TypeError('Material plane needs a fixed material product.');
   const materialLeaf=materialStyle.projection==='fixed-span'&&materialPlane?prepareFixedSpanMaterialPlane(materialPlane,quantizedScenePitch(cameraPlan)):
-    rasterEllipsoidMaterial(materialConfig.raster,{size:materialConfig.lenses[0].fixed[0].size,state:materialConfig.fixedState,geometryOnly:true,textureUrl:url(prefix,materialConfig.lenses[0].fixed[0].filename)}).leaf;
+    rasterEllipsoidMaterial(materialConfig.raster,{size:fixedMaterial.size/fixedMaterial.density,state:materialConfig.fixedState,geometryOnly:true,textureUrl:url(prefix,fixedMaterial.filename)}).leaf;
   if(!materialLeaf)throw new TypeError('Material plane geometry is missing.');
   const styleReads=geometry.bodyBands.flatMap(band=>band.leaves).map(leaf=>leaf.style);
   if(config.readPlaneCssom)styleReads.push(...Object.values(geometry.planes).map(leaf=>leaf.style),materialLeaf.style);
@@ -107,7 +78,7 @@ export async function prepareLayeredSurfacePresentation({config:input,geometryCo
     const polar=band.leaves.some(leaf=>leaf.className?.includes(carrier.polarFragment)),duration=band.visualRotationSeconds??carrier.rotationSeconds,key=carrier.groupByDuration?`${polar}:${duration}`:(polar?'polar':'body');
     if(!carriers.has(key)){
       const body=mesh(polar?carrier.polarClass:carrier.bodyClass,`${meshTransform};animation-duration:${duration}s`);
-      if(carrier.initializeTextures)for(const role of LEVELLED_ROLES)body.style.setProperty(`--${config.namespace}-${role}-image`,`url(${initialUrl(role)})`);
+      if(carrier.initializeTextures)for(const role of['surface','poles'])body.style.setProperty(`--${config.namespace}-${role}-image`,`url(${normal[role]})`);
       carriers.set(key,body);b.append(system,body);
     }
     for(const leaf of band.leaves)b.append(carriers.get(key)??null,b.leaf(leaf));
@@ -121,6 +92,6 @@ export async function prepareLayeredSurfacePresentation({config:input,geometryCo
   const track:MaterialSourceTrack={id:'lighting',target:index(leaf),frame:{source:'reference-sun-z',minimum:0,maximum:2,count:bank.frames,baseFrame:defaultFrame,remap:null},banks,demand:{capacity:materialStyle.capacity,defaultFrame},rotation:{kind:'planar',source:'view-sun',reference:'initial',baseDegrees:0,zeroAtPole:false,width:bank.presentationSize,height:bank.presentationSize,polePolicy:'azimuth'},frameAttribute:null,modeAttribute:null,quoted:materialStyle.quoted};
   const targets=carrier.textureTarget==='carriers'?[...carriers.values()].map(index):[-1];
   const variants=lensIds.flatMap(id=>[false,true].flatMap(shadows=>[false,true].map(rings=>({when:{lensId:id,shadows,rings},required:staticKeys(id),writes:[...targets.flatMap(target=>['surface','poles'].map(role=>({kind:'texture',target,name:`--${config.namespace}-${role}-image`,resource:`${role}:${id}`,quoted:materialStyle.quoted}))),{kind:'attribute',target:-1,name:'data-lens',value:id},{kind:'class',target:-1,name:`${config.namespace}-hide-rings`,value:!rings},{kind:'class',target:-1,name:`${config.namespace}-hide-shadows`,value:!shadows}],materials:[{track:'lighting',bank:id,mode:shadows?'default-pose':'fixed',enabled:true,rotationEnabled:shadows,frameOverride:null,clearWhenHidden:false,fixedMode:resources.shadowlessRole}]}))));
-  const result={schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,assets:{entries,pools:resources.pools.map(pool=>preparedResourcePool(pool.id,entries,pool.options)),startup:[...celestial.map(entry=>entry.key),...staticKeys(defaultId).map(initialResource),...initialRows.map(row=>`${resources.rowKey}:${defaultId}:${row}`)]},tree,variants,...(levels?{textureLevels:levels.textureLevels}:{}),materials:[track],viewBindings:[{kind:'counter-rotation',target:index(counter),systemTransform:materialStyle.counterSystemTransform?system.style.transform:null}],animations:[]};
+  const result={schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,assets:{entries,pools:resources.pools.map(pool=>preparedResourcePool(pool.id,entries,pool.options)),startup:[...celestial.map(entry=>entry.key),...staticKeys(defaultId),...initialRows.map(row=>`${resources.rowKey}:${defaultId}:${row}`)]},tree,variants,materials:[track],viewBindings:[{kind:'counter-rotation',target:index(counter),systemTransform:materialStyle.counterSystemTransform?system.style.transform:null}],animations:[]};
   return{...result,materials:prepareMaterialTracks(result),variants:variants.map(variant=>({...variant,materials:variant.materials.map(material=>({...material,mode:material.mode==='default-pose'?'frames':material.mode}))}))};
 }

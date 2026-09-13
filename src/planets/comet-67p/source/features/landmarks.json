@@ -1,0 +1,461 @@
+{
+  "schema": "cssearth-surface-landmarks@1",
+  "source": "Thomas et al. (2018), SHAP7 regional units",
+  "frame": "SHAP7 body-fixed Cartesian metres; same Cheops frame as MTP019. Display axes are read from presentation/surface-map.json.",
+  "vtk": {
+    "path": "geology/shap7-regions.vtk",
+    "bytes": 6309622,
+    "sha256": "9af9fbedcdc04046786a1c3cb614938245f39cacba69639ba1847fa50fb1e963",
+    "grid": {
+      "metersPerUnit": 1000,
+      "expectedVertices": 62471,
+      "expectedFaces": 124938,
+      "field": "Region"
+    },
+    "maximumDistanceMeters": 100
+  },
+  "entries": [
+    {
+      "id": "80000000",
+      "name": "Atum",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 0
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Rough high ground with fractures and boulders.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000001",
+      "name": "Khonsu",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 1
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Broken terrain interspersed with smoother deposits.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000002",
+      "name": "Apis",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 2
+      },
+      "minimumZoomShare": 0.25,
+      "description": "A comparatively flat face beside Imhotep.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000003",
+      "name": "Imhotep",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 3
+      },
+      "minimumZoomShare": 0.15,
+      "description": "A broad depression with a smooth floor.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000004",
+      "name": "Anubis",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 4
+      },
+      "minimumZoomShare": 0.25,
+      "description": "A smooth surface adjoining rougher Atum.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000005",
+      "name": "Bes",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 5
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Layered plateaus separated by scarps.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000006",
+      "name": "Seth",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 6
+      },
+      "minimumZoomShare": 0.15,
+      "description": "Pitted terrain with evidence of cometary activity.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000007",
+      "name": "Geb",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 7
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Fractured cliffs descending toward the neck.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000008",
+      "name": "Hapi",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 8
+      },
+      "minimumZoomShare": 0.15,
+      "description": "The smooth, dusty northern neck.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000009",
+      "name": "Anuket",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 9
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Rocklike terrain with smaller knobs and roughness.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000010",
+      "name": "Sobek",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 10
+      },
+      "minimumZoomShare": 0.25,
+      "description": "The rough, boulder-covered southern neck.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000011",
+      "name": "Ash",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 11
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Dust deposits blanket an uneven substrate.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000012",
+      "name": "Khepry",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 12
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Fractured terrain with deposits in depressions.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000013",
+      "name": "Aten",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 13
+      },
+      "minimumZoomShare": 0.25,
+      "description": "An elongated depression containing rubble and boulders.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000014",
+      "name": "Babi",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 14
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Dusty terrain bordered by cliffs and ridges.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000015",
+      "name": "Neith",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 15
+      },
+      "minimumZoomShare": 0.25,
+      "description": "A rough cliff between Wosret and Sobek.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000016",
+      "name": "Maftet",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 16
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Curved depressions with debris at their margins.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000017",
+      "name": "Serqet",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 17
+      },
+      "minimumZoomShare": 0.25,
+      "description": "A sharp transition between cliff and dusty plain.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000018",
+      "name": "Nut",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 18
+      },
+      "minimumZoomShare": 0.25,
+      "description": "A shallow depression next to Serqet.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000019",
+      "name": "Anhur",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 19
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Rough southern terrain with ridges and cliffs.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000020",
+      "name": "Wosret",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 20
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Southern terrain with pits and fractures.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000021",
+      "name": "Ma’at",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 21
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Dust-covered terrain interrupted by active pits.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000022",
+      "name": "Hatmehit",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 22
+      },
+      "minimumZoomShare": 0.15,
+      "description": "A circular depression with a smooth interior.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000023",
+      "name": "Bastet",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 23
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Rough consolidated terrain with little dust cover.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000024",
+      "name": "Hathor",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 24
+      },
+      "minimumZoomShare": 0.15,
+      "description": "The tall, fractured cliff above Hapi.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    },
+    {
+      "id": "80000025",
+      "name": "Aker",
+      "kind": "region",
+      "type": "Rosetta region",
+      "position": {
+        "regionId": 25
+      },
+      "minimumZoomShare": 0.25,
+      "description": "Relatively smooth consolidated terrain with linear markings.",
+      "qualification": "Representative location within the mapped region.",
+      "reference": {
+        "title": "Thomas et al. (2018), Regional unit definition on the SHAP7 model, Table 1",
+        "url": "https://doi.org/10.1016/j.pss.2018.05.019",
+        "credit": "Rosetta region · Thomas et al., 2018"
+      }
+    }
+  ]
+}

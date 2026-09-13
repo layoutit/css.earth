@@ -11,9 +11,19 @@
 
 ## Evidence
 
+The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
+
+| View | Original grid | Both lighting images, before → current |
+| --- | --- | --- |
+| normal | 3600 × 1800 | 0.57 → 0.84 MB |
+
+Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/steins/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
+
 [The 9 September 2026 mosaic report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/README.md) records 107 focused tests, 60 browser conformance cases, DPR 1/2 production checks and fresh remote installation for the four-body change. [Validation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/validation.json) identifies tested commit `8ded7a5` and base `1fb76e4`; these are historical results.
 
 The broader preparation suite was not green (1,666/1,957 passed); global platform and shell audits were stopped. A later overview/navigation change was outside the tested implementation.
+
+- **Reader oracle, 2026-09-12:** `tools/oracles/pds3/osiris-reflectance.py` reads the pinned WAC reflectance product `w20080905t183606461id4df17.img` with pvl and numpy. `tools/objects/terrestrial-layers/archived-camera.oracle.test.mts` requires the decoder to reproduce 48 sampled I/F values exactly and the accept or reject decision for 48 sampled quality flags.
 
 ## Known problems
 

@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "eros",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "be422b0fdefe1456e3403b723f8513f41db9e8c297c99bff2a3e6f5de3fe61a7"
+    "sha256": "28c973d5742ae6b45370fa196288d30b7798e55e05e4800b6c2fca768c2b9847"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cb49e648ed0f8dd7258e22991e522cdc61b8d953a07048e27cae875c8ad21bdc",
+      "sha256": "0632d7d5fc200365ac4b1e683410d466b9c254b5e7173f521dccf3c64c1cf1fc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -47,6 +47,10 @@
                   0.4
                 ],
                 "specialValueMagnitude": 1e+30
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             },
             {
@@ -65,6 +69,10 @@
                   0.4
                 ],
                 "specialValueMagnitude": 1e+30
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           ],
@@ -473,7 +481,7 @@
       "sha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
       "bytes": 228242957,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "zip-member",
         "groups": [
@@ -529,7 +537,7 @@
       "sha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458",
       "bytes": 16897935,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -585,7 +593,7 @@
       "sha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b",
       "bytes": 228242957,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "zip-member",
         "groups": [
@@ -616,7 +624,7 @@
       "sha256": "a74d3889fef4ca98093d5171922fed1b973e2e0cec643dc3bf2293bb580ace5a",
       "bytes": 8676,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -636,7 +644,7 @@
       "sha256": "ceb31a5e361d2d38e47a902c773d9da9d28c03d7f881d35340eecde2d92740c7",
       "bytes": 995,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -662,7 +670,7 @@
       "sha256": "6c42a16f2ee32aea95f5a4bd753d8723b9ec75c68470f8f3c5f8d5de2ad5f9cb",
       "bytes": 144223,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -689,7 +697,7 @@
       "sha256": "60ada4ee5030f75a1b46489f3ea38c55251306c400a700886db709e16e6f447e",
       "bytes": 151,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -716,7 +724,7 @@
       "sha256": "00a18eafb133828c3a67250ae9b89e4c1b98cedbeebc4a33e2ebbf55d44163e0",
       "bytes": 1269,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -741,7 +749,7 @@
       "sha256": "e91a00f6e8313ec4c2dfbe9841584f47c5299479d7c66c03f16a5bdf511f6ab9",
       "bytes": 1771,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -753,7 +761,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain."
       ],
@@ -778,6 +786,10 @@
             0.4
           ],
           "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -789,13 +801,13 @@
           "url": "/scenes/eros/eros-normal-thumbnail.webp",
           "bytes": 3270,
           "sha256": "77accf9615eaf183f69f407eb84a1a7f49732eceda53e953d1655b05898408d6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eros/eros-normal-surface@2x.webp",
-          "bytes": 2693140,
-          "sha256": "62a13d42ba65f6d9058d3b907c62a2aaade7fcb202963c6789412448c1bc25f1",
-          "verification": "bytes-verified"
+          "bytes": 3749508,
+          "sha256": "89bf8f7305a3a51835dcc1d312dd4d24804bf9d04d838896fbfe9f676e4285b1",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -806,7 +818,7 @@
       "recipe": "terrestrial",
       "selector": "/raster/observations/1",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
       "limitations": [
         "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid."
       ],
@@ -831,6 +843,10 @@
             0.4
           ],
           "specialValueMagnitude": 1e+30
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "inputs": [
@@ -842,13 +858,13 @@
           "url": "/scenes/eros/eros-infrared-thumbnail.webp",
           "bytes": 3388,
           "sha256": "ff552f2688e6ed2444b8c3d0f11971cd6c4b08b8f29ccc0b979468474c8c1bbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eros/eros-infrared-surface@2x.webp",
-          "bytes": 4196638,
-          "sha256": "81a72e39736dd03315608e461010a856e9e69d1fcc684fa22bb0efe6a523be0a",
-          "verification": "bytes-verified"
+          "bytes": 5190968,
+          "sha256": "90da7b2f956bd6fbf590487389080b93269dabf526feb5a797e6f7fdf1b0e859",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -880,19 +896,19 @@
           "url": "/scenes/eros/eros-elevation-thumbnail.webp",
           "bytes": 5950,
           "sha256": "c539675bb3866856c490255573e9e4c46533f3080a8b533686f53f7f75caf57b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eros/eros-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eros/eros-elevation-surface@2x.webp",
           "bytes": 922744,
           "sha256": "deb0f2ed973f54fc0aaf840e703a65d4e6e5e0fee0e62400adcc8d8a9009e329",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -951,9 +967,9 @@
       "outputs": [
         {
           "url": "/scenes/eros/eros-features.json",
-          "bytes": 30626,
-          "sha256": "298f72d697521f6f4491365b25e89505c392c16e6e7306c90c7acc521c57295b",
-          "verification": "bytes-verified"
+          "bytes": 30631,
+          "sha256": "d1e44142941619effde97f03cb71670e8491f93f1c9e5eee4a50b25c637d694a",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

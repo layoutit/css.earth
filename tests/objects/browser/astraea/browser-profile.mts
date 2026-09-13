@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/astraea/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'astraea',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/astraea/astraea-directional-sun.webp",
-      "two": "/scenes/astraea/astraea-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/astraea/astraea-shape-surface@2x.webp"
+    "/scenes/astraea/astraea-shape-surface@2x.webp",
+    "/scenes/astraea/astraea-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

@@ -68,14 +68,11 @@ export function validateCubicSkySunOracle<T extends CubicSkySunOracle>(oracle: T
 export async function prepareCubicSkySunPixels({
   sourcePath,
   oracle,
-  density,
-}: { sourcePath: string; oracle: CubicSkySunOracle; density: number }) {
+}: { sourcePath: string; oracle: CubicSkySunOracle }) {
   validateCubicSkySunOracle(oracle);
-  if (![1, 2].includes(density)) {
-    throw new TypeError("Cubic-sky Sun density must be 1 or 2.");
-  }
   const standard = CUBIC_SKY_STANDARD.sun;
-  const size = standard.logicalSize * density;
+  // Baked into the prepared faces at two texels per logical pixel.
+  const size = standard.logicalSize * 2;
   const source = await sharp(sourcePath).resize(size, size, {
     fit: "fill",
     kernel: sharp.kernel.lanczos3,

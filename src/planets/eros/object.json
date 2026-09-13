@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "38d0d973a4f18a88755f5fbfaad3a143bf5d6ae7d77a9c56b0b7255331d0b8f6"
+    "sha256": "01f5a980278bb6ff48ed8943449cc3ca0ec075c1db365ede1660e130dda937ac"
   },
   "id": "eros",
   "properties": {
@@ -62,7 +62,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "cb49e648ed0f8dd7258e22991e522cdc61b8d953a07048e27cae875c8ad21bdc"
+          "sha256": "0632d7d5fc200365ac4b1e683410d466b9c254b5e7173f521dccf3c64c1cf1fc"
         },
         {
           "id": "rotation",
@@ -133,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "23a0b16ecb18be2aefb67a38894f36e9963871df58dc72ccfcf91c84d9d932ec"
+        "sha256": "5390efdd91a0e35fa32b03ebcacf7f1ff3f5892e35fdf61eb9525abf0c85a4a4"
       }
     },
     "catalog": {

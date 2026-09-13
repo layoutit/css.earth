@@ -10,7 +10,7 @@ import {textureTintFactors} from '@layoutit/polycss';
 import {parseRadialLayerRecipe} from '../giant-layers/index.mts';
 import {sampleRadialProfile,rasterObservedRadialField} from '../giant-layers/rings.mts';
 import {verifyObservationSources} from '../giant-layers/observations.mts';
-import {cropTransparentRgba,responsiveTransparentCrop} from './rgba.mts';
+import {cropTransparentRgba,preparedTransparentCrop} from './rgba.mts';
 import {normalizeVector,rotateX as rotateVectorX,rotateZ as rotateVectorZ} from './ellipsoid.mts';
 /** Observed radial-profile sampling, seeded density tracers and ellipsoid penumbra. */
 export async function prepareRadialMotionAndShadow({sourceDirectory,publicDirectory,config: input,radialRecipe: radialInput}: {sourceDirectory: string; publicDirectory: string; config: unknown; radialRecipe: unknown}) {
@@ -65,14 +65,17 @@ const RING_SOLAR_CHANNEL_FACTORS=[ringSolarTint.r/ringSolarMaximum,ringSolarTint
 const RING_SOLAR_WHITE=RING_SOLAR_CHANNEL_FACTORS.map(factor=>applyLinearTint(255,factor));
 const mainRingMotionGroups=MAIN_RING_MOTION_BANDS.map(prepareMainRingMotionGroup);
 const plates=mainRingMotionGroups.filter(group=>MAIN_RING_RASTERIZED_BANDS.includes(group.population.replace('main-ring-',''))).map(prepareMainRingMotionPlate);
-const raw=rasterObservedRadialField(layer,layer.size,layer.readability.minimumPixels[1],profile);
+// Shadow and material preparation sample the ring field at its layout size, with its own readability floor.
+const raw=rasterObservedRadialField(layer,layer.size,config.parameters.layoutRingMinimumPixels,profile);
+// Material preparation decodes that field from its lossless encoding.
+const ringFieldImage=await sharp(raw,{raw:{width:layer.size,height:layer.size,channels:4}}).webp(layer.encoding).toBuffer();
 const shadow=createBodyShadowOverlay(RING_SHADOW_TEXTURE_SIZE);
 const feathered=await featherBodyShadowOverlay({shadowRgba:shadow.rgba,shadowTextureSize:RING_SHADOW_TEXTURE_SIZE,ringRgba:raw,ringTextureSize:layer.size});
 const cropped=cropTransparentRgba({rgba:feathered,width:RING_SHADOW_TEXTURE_SIZE,height:RING_SHADOW_TEXTURE_SIZE,gutter:RING_SHADOW_TRANSPARENT_GUTTER});
-await Promise.all([writePreparedRgbaWebp(cropped.rgba,cropped.bounds.width,resolve(publicRoot,config.shadow.filename),cropped.bounds.height),...plates.flatMap(plate=>[writePreparedRgbaWebp(plate.rgba,plate.textureWidth,plate.outputPath,plate.textureHeight),writePreparedRgbaWebp(plate.rgba2x,plate.texture2xWidth,plate.output2xPath,plate.texture2xHeight)])]);
+await Promise.all([writePreparedRgbaWebp(cropped.rgba,cropped.bounds.width,resolve(publicRoot,config.shadow.filename),cropped.bounds.height),...plates.map(plate=>writePreparedRgbaWebp(plate.rgba,plate.pixelWidth,plate.outputPath,plate.pixelHeight))]);
 const bodyOnRings={...shadowModel,directTransmission:BODY_SHADOW_RING_DIRECT_TRANSMISSION,shadowedPixelCount:shadow.shadowedPixelCount,meanCoverage:shadow.meanCoverage,denseAlphaRamp:[BODY_SHADOW_DENSE_ALPHA_START,BODY_SHADOW_DENSE_ALPHA_END],edgeFeather:{...shadowModel.edgeFeather,sigmaTexturePixels:BODY_SHADOW_EDGE_FEATHER_SIGMA,ringSupportAlpha:BODY_SHADOW_RING_SUPPORT_ALPHA}};
-const ringSource={pointCount:MAIN_RING_MOTION_BANDS.reduce((count,band)=>count+band.count,0),textureSize:layer.size,texture2xSize:layer.size*2,shadowTextureSourceSize:RING_SHADOW_TEXTURE_SIZE,shadowTextureBounds:cropped.bounds,shadowTextureTransparentGutter:RING_SHADOW_TRANSPARENT_GUTTER,planeVisualOrbitSeconds:visualOrbitSeconds(F_RING_OUTER_KM),[config.fields.gravitationalParameter]:BODY_GM_KM3_PER_S2,shadowModel:{...config.shadowModel,worldLightDirection:STATIC_WORLD_LIGHT_DIRECTION,objectLightDirection:STATIC_OBJECT_LIGHT_DIRECTION,systemTiltDegrees:BODY_OBLIQUITY_DEGREES,systemNodeDegrees:STATIC_SYSTEM_NODE_DEGREES,meshRotationDegrees:STATIC_MESH_ROTATION_DEGREES,[config.fields.bodyOnRings]:bodyOnRings}};
-return {ringSource,ringPlates:plates.map(plate=>plate.metadata),ringGroups:[]};
+const ringSource={pointCount:MAIN_RING_MOTION_BANDS.reduce((count,band)=>count+band.count,0),textureSize:layer.size,shadowTextureSourceSize:RING_SHADOW_TEXTURE_SIZE,shadowTextureBounds:cropped.bounds,shadowTextureTransparentGutter:RING_SHADOW_TRANSPARENT_GUTTER,planeVisualOrbitSeconds:visualOrbitSeconds(F_RING_OUTER_KM),[config.fields.gravitationalParameter]:BODY_GM_KM3_PER_S2,shadowModel:{...config.shadowModel,worldLightDirection:STATIC_WORLD_LIGHT_DIRECTION,objectLightDirection:STATIC_OBJECT_LIGHT_DIRECTION,systemTiltDegrees:BODY_OBLIQUITY_DEGREES,systemNodeDegrees:STATIC_SYSTEM_NODE_DEGREES,meshRotationDegrees:STATIC_MESH_ROTATION_DEGREES,[config.fields.bodyOnRings]:bodyOnRings}};
+return {ringSource,ringFieldImage,ringPlates:plates.map(plate=>plate.metadata),ringGroups:[]};
 function createBodyShadowOverlay(textureSize: number) {
   const center = (textureSize - 1) / 2;
   const sampleOffsets = config.shadow.sampleOffsets;
@@ -266,8 +269,7 @@ function prepareMainRingMotionGroup(band: RadialMotionRecipe['parameters']['main
 
 function prepareMainRingMotionPlate(group: ReturnType<typeof prepareMainRingMotionGroup>) {
   const id = group.population.replace("main-ring-", "");
-  const filename = `${config.namespace}-ring-motion-${id}.webp`;
-  const filename2x = `${config.namespace}-ring-motion-${id}@2x.webp`;
+  const filename = `${config.namespace}-ring-motion-${id}@2x.webp`;
   const displayRadius = DISPLAY_EQUATORIAL_RADIUS *
     group.sourceBoundsKm[1] / BODY_EQUATORIAL_RADIUS_KM;
   const outerDisplayRadius = DISPLAY_EQUATORIAL_RADIUS *
@@ -275,46 +277,26 @@ function prepareMainRingMotionPlate(group: ReturnType<typeof prepareMainRingMoti
   const textureSize = Math.ceil(
     MAIN_RING_MOTION_TEXTURE_SIZE * displayRadius / outerDisplayRadius / 64,
   ) * 64;
-  const texture2xSize = textureSize * 2;
-  const uncroppedRgba = renderMainRingMotionPlate(
-    group,
-    textureSize,
-    displayRadius,
-  );
-  const uncroppedRgba2x = renderMainRingMotionPlate(
-    group,
-    texture2xSize,
-    displayRadius,
-  );
-  const crop = responsiveTransparentCrop({
-    rgba: uncroppedRgba,
-    rgba2x: uncroppedRgba2x,
+  // The leaf keeps its layout-size crop; the prepared plate carries two texels per layout pixel.
+  const crop = preparedTransparentCrop({
+    layout: renderMainRingMotionPlate(group, textureSize, displayRadius),
+    prepared: renderMainRingMotionPlate(group, textureSize * 2, displayRadius),
     textureSize,
     gutter: MAIN_RING_MOTION_TRANSPARENT_GUTTER,
   });
   return {
     outputPath: resolve(publicRoot, filename),
-    output2xPath: resolve(publicRoot, filename2x),
     rgba: crop.rgba,
-    rgba2x: crop.rgba2x,
-    textureSize,
-    texture2xSize,
-    textureWidth: crop.bounds.width,
-    textureHeight: crop.bounds.height,
-    texture2xWidth: crop.bounds2x.width,
-    texture2xHeight: crop.bounds2x.height,
+    pixelWidth: crop.preparedBounds.width,
+    pixelHeight: crop.preparedBounds.height,
     metadata: {
       population: group.population,
       pointCount: group.points.length,
       durationSeconds: group.durationSeconds,
       textureUrl: `${config.publicPrefix}${filename}`,
-      texture2xUrl: `${config.publicPrefix}${filename2x}`,
       textureSize,
-      texture2xSize,
       textureWidth: crop.bounds.width,
       textureHeight: crop.bounds.height,
-      texture2xWidth: crop.bounds2x.width,
-      texture2xHeight: crop.bounds2x.height,
       textureCropBounds: crop.bounds,
       textureTransparentGutter: MAIN_RING_MOTION_TRANSPARENT_GUTTER,
       displayRadius: Number(displayRadius.toFixed(6)),

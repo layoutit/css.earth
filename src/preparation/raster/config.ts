@@ -16,8 +16,13 @@ export interface SurfaceRasterRecipe {
     output: string;
     encoding?: SurfaceEncoding;
     thumbnail: string;
-    sharpen?: number[];
+    /** Offline surface resolution relative to the shared layout; does not change geometry or lighting. */
+    resolutionScale?: number;
+    /** Sharpening sigma applied after resampling the source to the prepared map size. */
+    sharpen?: number;
     exposure?: number[];
+    /** Opt in to sampling the pinned source image directly for pole sprites. The delivered latitude bands stay unchanged. */
+    nativeSourcePoles?: boolean;
     coverage?: {
         normal: string;
         topography: string;
@@ -101,12 +106,15 @@ export interface RasterRecipe {
     publicBase: string;
     sourceWidth: number;
     sourceHeight: number;
+    /** Layout size of the packed map; every prepared raster carries two texels per layout pixel. */
     width: number;
     height: number;
     latitudeBands: number;
     polarTile: number;
-    densities: number[];
     resample: 'source-packed' | 'density-before-pack';
+    /** Source-packed maps normally pack first, then resize. This opt-in resizes the accepted source map before
+     * packing so the resampler never reads across stored latitude-strip gutters. */
+    unpackedResizeBeforePack?: boolean;
     polarProjection: 'angular-nearest' | 'orthographic-bilinear';
     surfaces: SurfaceRasterRecipe[];
     polesOutput: string;

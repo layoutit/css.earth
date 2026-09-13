@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/mars/mars-surface-normal.webp",
+      "url": "/scenes/mars/mars-surface-normal@2x.webp",
       "width": 2048,
       "height": 1536
     },
     "surfaceLatitudeHeight": 1024,
     "packedBandGutter": 16,
     "poles": {
-      "url": "/scenes/mars/mars-poles-normal.webp",
+      "url": "/scenes/mars/mars-poles-normal@2x.webp",
       "width": 512,
       "height": 256
     },
@@ -29,11 +29,18 @@
     "layerElevation": 50,
     "seamBleed": 0,
     "interiorSeamBleed": 8,
-    "overlap": 0.005,
+    "overlap": 0.0078125,
+    "seamOutset": {
+      "targetPixels": 0.5,
+      "stepRatio": 1.4142135623730951,
+      "hysteresis": 0.1,
+      "firstDiameter": 16,
+      "lastDiameter": 32768
+    },
     "fitToSource": false,
     "rasterScale": 4,
     "rasterGutter": 16.0,
-    "rasterOverscan": 0,
+    "rasterOverscan": 0.5,
     "positionVariables": false,
     "projectivePoles": false,
     "lightColor": "#ffffff",

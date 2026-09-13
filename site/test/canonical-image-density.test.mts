@@ -49,7 +49,6 @@ test("every object mounts one canonical high-density image bank", async () => {
 test("the shared shell does not choose image assets by device DPR", async () => {
   const shellFiles = [
     "planet-navigation-marker.css",
-    "planetary-scale.css",
     "planet-shell.css",
   ];
   const sources = await Promise.all(shellFiles.map(async (fileName) => ({

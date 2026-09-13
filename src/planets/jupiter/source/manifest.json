@@ -633,8 +633,8 @@
     {
       "id": "jupiter-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 7835,
-      "expectedSha256": "b5ea81c832e4c4c6fa6656453a535d3b5bbc1fe3019e6d1d8d3cebb32ec2adb5",
+      "expectedBytes": 7736,
+      "expectedSha256": "da04db873283bed16457e2f458aed5ed95f35b2bc3b698b1c09e8b63e973b4a4",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -669,8 +669,8 @@
     {
       "id": "jupiter-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 16163,
-      "expectedSha256": "8d7c1c8656b30b7f3b1e6b03f222dfa231dffba6287f781fdc414ce72c18d35b",
+      "expectedBytes": 16181,
+      "expectedSha256": "73879c3bb6963d75aeae76a7cbc37a2ff8f4674f44e2ad35d81f7b5c1fb9f870",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -748,8 +748,8 @@
     {
       "id": "jupiter-authored-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1787,
-      "expectedSha256": "ee719f5c65cbba9ad69de931cbc96f6a79820e6a559fd21e220e8bd89ccb11a3",
+      "expectedBytes": 1793,
+      "expectedSha256": "0cd1d09ef3678ac830766bc98d51953788e7c18d2c76cd30c829b90ec8105ecf",
       "origin": "Checked oblate tessellation and retained texture presentation conventions",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -784,8 +784,8 @@
     {
       "id": "jupiter-authored-observations",
       "path": "preparation/observations.json",
-      "expectedBytes": 9094,
-      "expectedSha256": "d8a911e3846681784e60075353af9b8763044210fc75846087c50c41c6733894",
+      "expectedBytes": 8668,
+      "expectedSha256": "0774018986ca4fc1666154fba6b363f5af7e876603c5b5613756a1fb8579e4fe",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and NASA/ESA Hubble, NASA Juno source authorities identified in the recipe",
       "license": "Project-authored specification; referenced observations retain their source terms",

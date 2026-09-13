@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/venus/venus-clouds.webp",
+      "url": "/scenes/venus/venus-clouds@2x.webp",
       "width": 1024,
       "height": 768
     },
     "surfaceLatitudeHeight": 512,
     "packedBandGutter": 8,
     "poles": {
-      "url": "/scenes/venus/venus-poles-clouds.webp",
+      "url": "/scenes/venus/venus-poles-clouds@2x.webp",
       "width": 512,
       "height": 256
     },
@@ -29,11 +29,18 @@
     "layerElevation": 50,
     "seamBleed": 0,
     "interiorSeamBleed": 8,
-    "overlap": 0.008,
+    "overlap": 0.015625,
+    "seamOutset": {
+      "targetPixels": 0.5,
+      "stepRatio": 1.4142135623730951,
+      "hysteresis": 0.1,
+      "firstDiameter": 16,
+      "lastDiameter": 32768
+    },
     "fitToSource": false,
     "rasterScale": 2,
     "rasterGutter": 8.0,
-    "rasterOverscan": 0,
+    "rasterOverscan": 0.5,
     "positionVariables": false,
     "projectivePoles": false,
     "lightColor": "#fff1df",

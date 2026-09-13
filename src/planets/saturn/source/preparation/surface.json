@@ -28,8 +28,8 @@
   "parameters": {
     "bodyWidth": 2880,
     "bodyHeight": 1440,
-    "body2xWidth": 4096,
-    "body2xHeight": 2048,
+    "surfaceWidth": 4096,
+    "surfaceHeight": 2048,
     "latitudeBandCount": 16,
     "detailBlurSigma": 3,
     "detailGain": 3,
@@ -234,8 +234,7 @@
         "thumbnailUrl": "/scenes/saturn/saturn-lens-normal.webp",
         "surfaceUrl": "/scenes/saturn/saturn-surface-body.jpg",
         "polesUrl": "/scenes/saturn/saturn-poles.webp",
-        "ringUrl": "/scenes/saturn/saturn-rings.webp",
-        "ring2xUrl": "/scenes/saturn/saturn-rings@2x.webp",
+        "ringUrl": "/scenes/saturn/saturn-rings@2x.webp",
         "materialUrl": "/scenes/saturn/saturn-orbit-material.webp",
         "qualification": "visible-color reference"
       },
@@ -276,8 +275,6 @@
   "files": {
     "surface": "saturn-surface.jpg",
     "poles": "saturn-poles.webp",
-    "rings": "saturn-rings.webp",
-    "rings2x": "saturn-rings@2x.webp",
     "orbitMaterial": "saturn-orbit-material.webp",
     "interiorAtmosphere": "saturn-interior-atmosphere.webp",
     "normalThumbnail": "saturn-lens-normal.webp"

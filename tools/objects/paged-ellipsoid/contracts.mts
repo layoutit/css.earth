@@ -19,7 +19,7 @@ export interface AnomalyPalette {minimum: number; maximum: number; palette: read
 export interface CoraltempRecipe extends EnsoRecipe, AnomalyPalette {filename: string;}
 export interface SurfaceBankPlan {
   body: {assets: {surface: {url: string; urls: readonly string[]}}};
-  interior: {outerAssets: {surface: {one: string; two: string; oneUrls: readonly string[]; twoUrls: readonly string[]}; litSurface: {urls: readonly string[]}}};
+  interior: {outerAssets: {surface: {url: string; urls: readonly string[]}; litSurface: {urls: readonly string[]}}};
 }
 export interface SurfaceBankLenses {defaultLens: string; controls: readonly {id: string; surfaceBankId?: string; view?: string; surfaceUrls?: readonly string[]; surfaceUrl?: string}[];}
 export interface MurTile {row: number; col: number; url: string; actualTime: string | null; actualLayer: string | null; empty: boolean; bytes: number; sha256: string;}

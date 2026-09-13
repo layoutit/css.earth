@@ -7,14 +7,10 @@
   "height": 2048,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "titan-poles-{id}{suffix}.webp",
+  "polesOutput": "titan-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "csstitan-prepared-assets@1"
   },
@@ -25,7 +21,7 @@
   "surfaces": [
     {
       "id": "normal",
-      "output": "titan-{id}{suffix}.webp",
+      "output": "titan-{id}@2x.webp",
       "thumbnail": "titan-lens-{id}.webp",
       "source": "observations/titan-iss-2026.png",
       "falseColor": false,
@@ -37,12 +33,16 @@
           "kind": "image-monochrome-no-data",
           "noData": 0,
           "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     },
     {
       "id": "radar",
-      "output": "titan-{id}{suffix}.webp",
+      "output": "titan-{id}@2x.webp",
       "thumbnail": "titan-lens-{id}.webp",
       "source": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
       "falseColor": false,
@@ -67,7 +67,7 @@
     },
     {
       "id": "topography",
-      "output": "titan-{id}{suffix}.webp",
+      "output": "titan-{id}@2x.webp",
       "thumbnail": "titan-lens-{id}.webp",
       "source": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
       "falseColor": true,
@@ -145,7 +145,7 @@
     },
     {
       "id": "interpolated",
-      "output": "titan-{id}{suffix}.webp",
+      "output": "titan-{id}@2x.webp",
       "thumbnail": "titan-lens-{id}.webp",
       "source": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
       "falseColor": true,
@@ -223,7 +223,7 @@
     },
     {
       "id": "coverage-distance",
-      "output": "titan-{id}{suffix}.webp",
+      "output": "titan-{id}@2x.webp",
       "thumbnail": "titan-lens-{id}.webp",
       "source": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
       "falseColor": true,
@@ -301,7 +301,7 @@
     },
     {
       "id": "geology",
-      "output": "titan-{id}{suffix}.webp",
+      "output": "titan-{id}@2x.webp",
       "thumbnail": "titan-lens-{id}.webp",
       "source": "geology/titan-geologic-units.tif",
       "falseColor": true,
@@ -386,8 +386,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "titan-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "titan-lighting-{density}x-billboard.webp",
+    "rowOutput": "titan-lighting-2x-row-{row}.webp",
+    "billboardOutput": "titan-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

@@ -359,8 +359,8 @@
     {
       "id": "pluto-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "ef3df7c9ba745d79d866f20f01f5b311e2ae492af013dbf03519d24e40e2a640",
-      "expectedBytes": 1574,
+      "expectedSha256": "a30a202c763564094e070aa5541b41d2e25358d5b1a8b6349f33b88178580c08",
+      "expectedBytes": 1500,
       "origin": "Repository-authored physical scene recipe; mean radius 1188.3 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40°) carried over from the retired static-surface geometry",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -380,8 +380,8 @@
     {
       "id": "pluto-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "181b7135d2c028eeda0c57a6970798f1dc5f3244241e8f226ef7339e40af96ac",
-      "expectedBytes": 3368,
+      "expectedSha256": "ba165806632d82096fcf5de4d36bd496ca8618a3f9b5c96be0cd64806382924e",
+      "expectedBytes": 3363,
       "origin": "Repository-authored Pluto raster preparation recipe (generic sphere lane) carrying the science interpretation blocks of the retired static recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -399,8 +399,8 @@
     {
       "id": "pluto-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedSha256": "35ad4db7a77e961ead346fa0223d45c78974fdcae2a4f3176f858e852d0207ef",
-      "expectedBytes": 1420,
+      "expectedSha256": "c47d90754003634cfdb94a3f5a00fc375dcb060cc577e1b25e746e35b92b5b75",
+      "expectedBytes": 1605,
       "origin": "Repository-authored Pluto CSS geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -493,8 +493,8 @@
     {
       "id": "pluto-object-content",
       "path": "content/object.json",
-      "expectedSha256": "924a299604725b552468ce335eb075a2d15b99c94c30082f2329ded994c6f599",
-      "expectedBytes": 11761,
+      "expectedSha256": "d22b2f39463aa0533722764cd07192d3e12124400df6c43ee3a570391ed1aaaf",
+      "expectedBytes": 11779,
       "origin": "Repository-authored Pluto panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

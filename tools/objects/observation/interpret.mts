@@ -22,16 +22,21 @@ import { validateCategoricalGrid } from '../terrestrial-layers/index.mts';
 import { parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry } from '../terrestrial-layers/solid-source.mts';
 import { shape, text } from '../terrestrial-layers/source-records.mts';
 import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
-import { observationRaster, parseObservationLens } from './raster.mts';
+import { observationRaster, parseObservationLens, loadNativeObservationPoleSampler } from './raster.mts';
+import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
+import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
-export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown> }[]; readonly emission?: RasterRecipe['emission']; }
-interface Options { readonly objectId: string; readonly displayName: string; readonly sourceDirectory: string; readonly recipe: InterpreterRecipe; }
+export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown>; nativeSourcePoles?: boolean }[]; readonly emission?: RasterRecipe['emission']; }
+interface Options { readonly objectId: string; readonly displayName: string; readonly sourceDirectory: string; readonly recipe: InterpreterRecipe;
+  /** A photographic refresh checks its source files and each decoder's dependent groups; a full prepare verifies the whole package. */
+  readonly sourceVerification?: 'complete' | 'photographs'; }
+
 const plainRecord = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
 const emissionSchema = object({ offLimbSize: number, limbSize: number, bodyDiameter: number, offLimbOutput: string, limbOutput: string, metadata: plainRecord });
 /** Validate a raw raster recipe down to the facts the interpreter needs; the lane validates the rest when it packs. */
 export function parseInterpreterRecipe(value: unknown): InterpreterRecipe {
-  const input = parse(value, object({ surfaces: array(object({ id: string, source: string, science: optional(plainRecord) })), emission: optional(emissionSchema) }), 'raster recipe');
+  const input = parse(value, object({ surfaces: array(object({ id: string, source: string, science: optional(plainRecord), nativeSourcePoles: optional((value): value is boolean => typeof value === 'boolean') })), emission: optional(emissionSchema) }), 'raster recipe');
   return { surfaces: input.surfaces, ...(input.emission ? { emission: input.emission } : {}) };
 }
 type Surface = Parameters<ObservationInterpretation>[0];
@@ -67,12 +72,25 @@ export function parseSynopticRecipe(value: unknown): SynopticRecipe {
 /** Build the lane's `interpret` adapter once per prepared object: `science.synoptic` selects the solar decoders,
  * `science.kind` the terrestrial, shape-model or static decoders. Decoded grids are cached per surface so the two
  * prepared densities decode each source once. */
-export async function createSurfaceInterpreter({ objectId, displayName, sourceDirectory, recipe }: Options): Promise<ObservationInterpretation> {
+export async function createSurfaceInterpreter({ objectId, displayName, sourceDirectory, recipe, sourceVerification = 'complete' }: Options): Promise<ObservationInterpretation> {
   const solar = recipe.emission ? createSolarSynopticInterpreter({ sourceDirectory, emission: recipe.emission }) : null;
-  const manifest = createSourceManifest({ planetId: objectId, planetName: displayName, sourceRoot: sourceDirectory }).then(async source => { await source.verify(); return source; });
+  const manifest = createSourceManifest({ planetId: objectId, planetName: displayName, sourceRoot: sourceDirectory }).then(async source => {
+    if (sourceVerification === 'complete') await source.verify();
+    else for (const surface of recipe.surfaces) {
+      const kind = surface.science?.kind ?? 'static-observation';
+      if (!['static-observation', 'pds-float-map', 'terrestrial-observation', 'terrestrial-observed-color'].includes(String(kind)) ||
+          surface.science?.scientific || surface.science?.elevation || surface.science?.synoptic)
+        throw new TypeError('A photographic refresh cannot reprepare scientific, modeled or emissive views.');
+      await source.validatePath(surface.source);
+    }
+    return source;
+  });
+  // Surface-only runs must surface a pin failure even when a plain image needs no interpreter callback.
+  await manifest;
   const surfaces = new Map(recipe.surfaces.map(surface => [surface.id, surface]));
   const observations = new Map<string, Promise<Rgb>>();
   const science = new Map<string, ReturnType<typeof loadScienceSurface>>();
+  const nativePhotographs = new Map<string, Promise<NativePhotograph>>();
 
   /** Terrestrial observation at one density; the monochrome base is filled from the same-density base decode. */
   const observation = (surface: Surface, width: number, height: number): Promise<Rgb> => {
@@ -99,6 +117,32 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
     }
     return pending;
   };
+  /** Direct pole sampling is an explicit photographic opt-in. It shares the pinned source and validity record
+   * with the delivered bands, but never substitutes an approximate map or another lens. */
+  const nativePhotograph = (surface: Surface, plan: ReturnType<typeof parseSolidObservation>): Promise<NativePhotograph> => {
+    const cached = nativePhotographs.get(surface.id);
+    if (cached) return cached;
+    const pending = (async (): Promise<NativePhotograph> => {
+        const source = await manifest;
+        const input = source.manifest.inputs.find(entry => entry.id === surface.science.input);
+        if (!input || (input as { lensId?: unknown }).lensId !== surface.id || input.path !== surface.source) {
+          throw new TypeError(`${objectId}/${surface.id}: native photographic sampling needs its pinned observation.`);
+        }
+        const primary = await loadNativePhotograph(sourceDirectory, input, plan.validity);
+        if (!plan.monochromeBase) return primary;
+        const baseSurface = surfaces.get(plan.monochromeBase);
+        if (!baseSurface?.science || typeof baseSurface.science.kind !== 'string' || baseSurface.science.kind !== 'terrestrial-observation') {
+          throw new TypeError(`${objectId}/${surface.id}: monochrome base ${plan.monochromeBase} is not a terrestrial observation.`);
+        }
+        const basePlan = parseSolidObservation({ id: baseSurface.id, ...baseSurface.science });
+        const base: NativePhotograph = await nativePhotograph({ id: baseSurface.id, source: baseSurface.source, science: baseSurface.science }, basePlan);
+        return { width: primary.width, height: primary.height, sample(longitudeDegrees: number, latitudeDegrees: number, color: number[]) {
+          return primary.sample(longitudeDegrees, latitudeDegrees, color) || base.sample(longitudeDegrees, latitudeDegrees, color);
+        } };
+      })();
+    nativePhotographs.set(surface.id, pending);
+    return pending;
+  };
 
   return async (surface, width, height, density = 1) => {
     if (surface.science.synoptic !== undefined) {
@@ -107,20 +151,35 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
       return { data, channels: info.channels, nearest: false, plates };
     }
     const kind = typeof surface.science.kind === 'string' ? surface.science.kind : 'static-observation';
+    if (surface.nativeSourcePoles && kind !== 'static-observation') throw new TypeError(`${objectId}/${surface.id}: native source poles currently require a static photographic observation.`);
     switch (kind) {
+      case 'pds-float-map': {
+        const profile = parsePdsFloatProfile(surface.science);
+        await (await manifest).validatePath(surface.source);
+        const { rgb, missing } = await preparePdsFloatMap(resolve(sourceDirectory, surface.source), profile, width, height);
+        return rgb3(rgb, missing, width, height, false);
+      }
       case 'static-observation': {
         // Unchanged: the Moon/Pluto path (coverage grid, signed DEM, tonal presentation, GHRM science).
         const { kind: _kind, ...fields } = surface.science;
-        const plan = parseObservationLens({ id: surface.id, input: surface.source, ...fields });
+        const plan = parseObservationLens({ id: surface.id, input: surface.source, ...fields, ...(surface.nativeSourcePoles ? { nativeSourcePoles: true } : {}) });
         const { data, info } = await observationRaster({ input: resolve(sourceDirectory, surface.source), plan, width, height });
         if (![1, 2, 3, 4].includes(info.channels)) throw new TypeError(`Interpreted surface ${surface.id} has ${info.channels} channels.`);
         const scientific = plan.scientific;
-        return { data, channels: info.channels as 1 | 2 | 3 | 4, nearest: scientific?.displaySampling === 'nearest' || Array.isArray(scientific?.categories) };
+        return { data, channels: info.channels as 1 | 2 | 3 | 4, nearest: scientific?.displaySampling === 'nearest' || Array.isArray(scientific?.categories),
+          ...(plan.nativeSourcePoles ? { nativePhotograph: await loadNativeObservationPoleSampler(resolve(sourceDirectory, surface.source), plan) } : {}) };
       }
       case 'terrestrial-observation': {
         const { rgb, missing } = await observation(surface, width, height);
         const resampling = requireRecord(surface.science.validity).resampling;
-        return rgb3(rgb, missing, width, height, resampling === 'source-georeferenced-nearest');
+        const plan = parseSolidObservation({ id: surface.id, ...surface.science });
+        const interpreted = rgb3(rgb, missing, width, height, resampling === 'source-georeferenced-nearest');
+        if (plan.nativePhotographicSampling && interpreted.nearest) {
+          throw new TypeError(`${objectId}/${surface.id}: native photographic polar sampling does not apply to nearest-sampled data.`);
+        }
+        return plan.nativePhotographicSampling
+          ? { ...interpreted, nativePhotograph: await nativePhotograph(surface, plan) }
+          : interpreted;
       }
       case 'terrestrial-scientific': {
         const { kind: _kind, ...lens } = surface.science;

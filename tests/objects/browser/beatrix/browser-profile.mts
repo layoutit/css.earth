@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/beatrix/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'beatrix',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/beatrix/beatrix-directional-sun.webp",
-      "two": "/scenes/beatrix/beatrix-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/beatrix/beatrix-shape-surface@2x.webp"
+    "/scenes/beatrix/beatrix-shape-surface@2x.webp",
+    "/scenes/beatrix/beatrix-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

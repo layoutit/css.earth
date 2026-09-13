@@ -11,6 +11,6 @@ export const parseVisualView = shape({planet:text,name:text,lens:nullable(text),
   file:text,sha256:text,disc:nullable(disc)});
 export const parseMercuryBaseline = shape({mercury:shape({planet:text,views:array(parseVisualView),
   runtime:shape({cameraCount:number,bodyLeafCount:number,materialLeafCount:number,skyboxFaceCount:number,
-    canvasCount:number,sceneSvgCount:number,stageElementCount:number,selectedPreparedDensity:nullable(number),
+    canvasCount:number,sceneSvgCount:number,stageElementCount:number,
     stableDomIdentity:boolean,loadedPreparedAssetUrls:array(text)}),
   maximumCompositorLayer:shape({width:number,height:number,area:number}),externalRequests:array(text),browserProblems:array(text)})});

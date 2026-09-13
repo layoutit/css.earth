@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/byblis/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'byblis',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/byblis/byblis-directional-sun.webp",
-      "two": "/scenes/byblis/byblis-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/byblis/byblis-shape-surface@2x.webp"
+    "/scenes/byblis/byblis-shape-surface@2x.webp",
+    "/scenes/byblis/byblis-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

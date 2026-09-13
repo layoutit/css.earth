@@ -5,6 +5,7 @@ import type { PreparedDirectionalSunPlan } from "../../src/platform/directional-
 import type { PreparedAssets, PreparedResourceEntry } from "../../src/renderers/css/rendering/prepared-residency.ts";
 import type { PreparedResourcePoolOptions } from "../../src/renderers/css/rendering/prepared-object-assets.ts";
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from "../../src/platform/cubic-sky-contract.mts";
+import { DIRECTIONAL_SUN_SPRITE_PIXELS } from "../../src/platform/directional-sun-contract.mts";
 import { loadAstronomyPackage } from "../../src/platform/astronomy-package.mts";
 import { prepareCatalogueStars } from "../../src/platform/prepare-catalogue-stars.mts";
 import { prepareEclipticPresentationFrame } from "../../src/platform/solar-presentation-frame.mts";
@@ -73,7 +74,7 @@ export async function prepareFocusedHeliocentricPresentation({
     kilometersPerUnit: bodyRadiusKilometers / bodyRadiusUnits });
   const plan = prepareHeliocentricView({ bodyId: id, presentationFrame: frame,
     bodyRadiusUnits, bodyRadiusKilometers,
-    sunSprite: { imagePixels: sun.asset?.density1?.width,
+    sunSprite: { imagePixels: DIRECTIONAL_SUN_SPRITE_PIXELS,
       opaqueCoreDiameterShare: sun.distanceScaling?.spriteOpaqueCoreDiameterShare }, system });
   const catalogue = await prepareCatalogueStars({ fovDegrees: skyFieldOfView(sky) });
   const horizontalFovDegrees = skyFieldOfView(sky);

@@ -7,14 +7,10 @@
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "titania-poles-{id}{suffix}.webp",
+  "polesOutput": "titania-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "csstitania-prepared-assets@1"
   },
@@ -25,7 +21,7 @@
   "surfaces": [
     {
       "id": "normal",
-      "output": "titania-{id}{suffix}.webp",
+      "output": "titania-{id}@2x.webp",
       "thumbnail": "titania-lens-{id}.webp",
       "source": "observations/tumap-cyl-180180.cub.gz",
       "falseColor": false,
@@ -57,12 +53,16 @@
             0,
             3000
           ]
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     },
     {
       "id": "elevation",
-      "output": "titania-{id}{suffix}.webp",
+      "output": "titania-{id}@2x.webp",
       "thumbnail": "titania-lens-{id}.webp",
       "source": "science/tudem-ZL-180180.cub.gz",
       "falseColor": true,
@@ -122,7 +122,7 @@
     },
     {
       "id": "geology",
-      "output": "titania-{id}{suffix}.webp",
+      "output": "titania-{id}@2x.webp",
       "thumbnail": "titania-lens-{id}.webp",
       "source": "science/geology-2026/categories.tif",
       "falseColor": true,
@@ -223,8 +223,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "titania-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "titania-lighting-{density}x-billboard.webp",
+    "rowOutput": "titania-lighting-2x-row-{row}.webp",
+    "billboardOutput": "titania-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

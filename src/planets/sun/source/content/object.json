@@ -114,8 +114,8 @@
         "detail": "Continuum",
         "summary": "Visible-light observations span May–June 2026. Color and brightness are adjusted; missing polar coverage is filled.",
         "thumbnail": "sun-lens-photosphere.webp",
-        "surface": "sun-surface-photosphere.webp",
-        "poles": "sun-poles-photosphere.webp",
+        "surface": "sun-surface-photosphere@2x.webp",
+        "poles": "sun-poles-photosphere@2x.webp",
         "source": {
           "id": "sdo-hmi-continuum-cr2311-20260513"
         },
@@ -131,8 +131,8 @@
         "detail": "Radial field",
         "summary": "Colors show the radial field on a nonlinear scale. Measurements span May–June 2026 rather than a single instant.",
         "thumbnail": "sun-lens-magnetic.webp",
-        "surface": "sun-surface-magnetic.webp",
-        "poles": "sun-poles-magnetic.webp",
+        "surface": "sun-surface-magnetic@2x.webp",
+        "poles": "sun-poles-magnetic@2x.webp",
         "source": {
           "id": "jsoc-hmi-cr2311-radial-field-synoptic-map",
           "url": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html"
@@ -184,8 +184,8 @@
         "detail": "304 Å",
         "summary": "The 304 Å measurements span May–June 2026. Gaps use nearby latitudes; the separate outer image is from 27 May.",
         "thumbnail": "sun-lens-chromosphere.webp",
-        "surface": "sun-surface-chromosphere.webp",
-        "poles": "sun-poles-chromosphere.webp",
+        "surface": "sun-surface-chromosphere@2x.webp",
+        "poles": "sun-poles-chromosphere@2x.webp",
         "source": {
           "id": "sdo-aia-304-cr2311-synoptic-map",
           "url": "https://sdo.gsfc.nasa.gov/data/synoptic/"
@@ -235,8 +235,8 @@
         "detail": "171 Å",
         "summary": "The 171 Å measurements span May–June 2026. Gaps use nearby latitudes; the separate outer image is from 27 May.",
         "thumbnail": "sun-lens-corona.webp",
-        "surface": "sun-surface-corona.webp",
-        "poles": "sun-poles-corona.webp",
+        "surface": "sun-surface-corona@2x.webp",
+        "poles": "sun-poles-corona@2x.webp",
         "source": {
           "id": "sdo-aia-171-cr2311-synoptic-map",
           "url": "https://sdo.gsfc.nasa.gov/data/synoptic/"

@@ -7,14 +7,10 @@
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
-  "polesOutput": "makemake-poles-{id}{suffix}.webp",
+  "polesOutput": "makemake-poles-{id}@2x.webp",
   "surfaceMetadata": {
     "schema": "cssmakemake-prepared-assets@1"
   },
@@ -25,7 +21,7 @@
   "surfaces": [
     {
       "id": "illustration",
-      "output": "makemake-{id}{suffix}.webp",
+      "output": "makemake-{id}@2x.webp",
       "thumbnail": "makemake-lens-{id}.webp",
       "source": "nasa-makemake.glb",
       "falseColor": false,
@@ -50,8 +46,8 @@
     "defaultFrame": 230,
     "billboardFrameSize": 24,
     "billboardColumns": 16,
-    "rowOutput": "makemake-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "makemake-lighting-{density}x-billboard.webp",
+    "rowOutput": "makemake-lighting-2x-row-{row}.webp",
+    "billboardOutput": "makemake-lighting-2x-billboard.webp",
     "minimumLightViewZ": -1,
     "maximumLightViewZ": 1,
     "frameCount": 256,

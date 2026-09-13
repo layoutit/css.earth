@@ -1256,6 +1256,89 @@
         "kind": "local",
         "reason": "Repository-owned image registration controls and preparation recipe; the measured source photographs retain separate material bindings."
       }
+    },
+    {
+      "id": "comet-9p-features-landmarks",
+      "path": "features/landmarks.json",
+      "expectedBytes": 4939,
+      "expectedSha256": "8a6244de19eeb4a33ad6b434a325817b658f51ab238e7dc05525d11577024f40",
+      "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-tempel1-shape-2012",
+            "role": "material",
+            "evidence": "src/planets/comet-9p/source/features/landmarks.json: per-place coordinates, descriptions and publication references; checked 2026-09-12."
+          },
+          {
+            "catalogueId": "thomas-2013-tempel1-geology",
+            "role": "reference",
+            "evidence": "src/planets/comet-9p/source/features/landmarks.json: Fig. 2b axis calibration and interior controls for S1–S4; checked 2026-09-12."
+          }
+        ]
+      }
+    },
+    {
+      "id": "comet-9p-features-manifest",
+      "path": "features/manifest.json",
+      "expectedBytes": 1016,
+      "expectedSha256": "76d286a5de111ba36b41fac8bb1224585fac07f10c7347403537279b680731a9",
+      "origin": "Byte pins and source qualifications for the surface-place compilation.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte pins and source qualifications for the surface-place compilation."
+      }
+    },
+    {
+      "id": "comet-9p-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 830,
+      "expectedSha256": "d028de321807bb901a0e1eb871b7218b973aaa7ad8782ca9245c38c6a433919a",
+      "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned selection of surface-place source records, datasets and label policy."
+      }
+    },
+    {
+      "id": "comet-9p-presentation-surface-map",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 155,
+      "expectedSha256": "2aa34bfdd57c0f7f4d720f78982c0a141634cb0c2b2f2a5e1700836c7a2c2301",
+      "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -1294,8 +1377,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7026,
-      "expectedSha256": "d0ec3bbfd36638a1f8cadda2f7544ae52cceed8dc2b0f1e33f7fe041aac31e8c",
+      "expectedBytes": 7259,
+      "expectedSha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."

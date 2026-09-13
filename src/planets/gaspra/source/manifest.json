@@ -583,8 +583,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6005,
-      "expectedSha256": "29b08ae5e797e176eaad614198d514adc6e4a2bc658598a359d4cb2a7314d0ed"
+      "expectedBytes": 6395,
+      "expectedSha256": "75f6e4ea95ad4548fd765debe62109ccdd84ee0f1ad1ef892884b1f44b013858"
     },
     {
       "path": "presentation/title-mark.json",
@@ -721,6 +721,29 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "photometry/helfenstein-1994-hapke.json",
+      "expectedBytes": 579,
+      "expectedSha256": "6cf5b5780d9bcbab552bc7e8b5b7f83d31532b082c76d5d521f565024a4b050d",
+      "purpose": "Published Hapke photometric model of Gaspra, used to normalize the Galileo photograph mosaic.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1006-icar-1994-1005",
+            "role": "method",
+            "evidence": "Helfenstein et al. (1994) give the single-scattering albedo 0.36, opposition amplitude 1.63 and roughness 29 degrees, fitted to Earth-based photometry at 2-25 degrees phase and Galileo data at 33-51 degrees phase.",
+            "locator": "Abstract"
+          },
+          {
+            "catalogueId": "doi-10-1016-j-icarus-2015-11-023",
+            "role": "reference",
+            "evidence": "Hasselmann et al. (2016) tabulate the Helfenstein et al. (1994) Gaspra solution, including the opposition width 0.06, asymmetry factor -0.18 and 560 nm wavelength that the abstract does not state.",
+            "locator": "Table 7, row printed as (941) Gaspra"
+          }
+        ]
       }
     }
   ]

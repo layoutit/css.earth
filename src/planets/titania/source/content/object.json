@@ -85,8 +85,8 @@
         "title": "Monochrome mosaic",
         "detail": "Corrected mosaic",
         "thumbnail": "titania-lens-normal.webp",
-        "surface": "titania-normal.webp",
-        "poles": "titania-poles-normal.webp",
+        "surface": "titania-normal@2x.webp",
+        "poles": "titania-poles-normal@2x.webp",
         "source": {
           "id": "schenk-2020-titania-normal",
           "path": "../manifest.json",
@@ -101,8 +101,8 @@
         "title": "Stereo and limb terrain model",
         "detail": "Stereo shaded relief",
         "thumbnail": "titania-lens-elevation.webp",
-        "surface": "titania-elevation.webp",
-        "poles": "titania-poles-elevation.webp",
+        "surface": "titania-elevation@2x.webp",
+        "poles": "titania-poles-elevation@2x.webp",
         "source": {
           "id": "schenk-2020-titania-elevation",
           "path": "../manifest.json",
@@ -153,8 +153,8 @@
         "title": "Geologic map",
         "summary": "Historical interpreted units; reconstructed registration. Gray grid: unmapped or conflicting units.",
         "thumbnail": "titania-lens-geology.webp",
-        "surface": "titania-geology.webp",
-        "poles": "titania-poles-geology.webp",
+        "surface": "titania-geology@2x.webp",
+        "poles": "titania-poles-geology@2x.webp",
         "falseColor": true,
         "source": {
           "id": "geology-2026-categories",

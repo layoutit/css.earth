@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/asteroid-2001-qw16/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'asteroid-2001-qw16',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-directional-sun.webp",
-      "two": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-shape-surface@2x.webp"
+    "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-shape-surface@2x.webp",
+    "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

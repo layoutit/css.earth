@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/miranda/miranda-normal.webp",
+      "url": "/scenes/miranda/miranda-normal@2x.webp",
       "width": 3200,
       "height": 2400
     },
     "surfaceLatitudeHeight": 1600,
     "packedBandGutter": 25,
     "poles": {
-      "url": "/scenes/miranda/miranda-poles-normal.webp",
+      "url": "/scenes/miranda/miranda-poles-normal@2x.webp",
       "width": 512,
       "height": 256
     },
@@ -30,10 +30,17 @@
     "seamBleed": 0,
     "interiorSeamBleed": 8,
     "overlap": 0.005,
+    "seamOutset": {
+      "targetPixels": 0.5,
+      "stepRatio": 1.4142135623730951,
+      "hysteresis": 0.1,
+      "firstDiameter": 16,
+      "lastDiameter": 32768
+    },
     "fitToSource": false,
     "rasterScale": 4,
     "rasterGutter": 25,
-    "rasterOverscan": 0,
+    "rasterOverscan": 0.5,
     "positionVariables": false,
     "projectivePoles": false,
     "lightColor": "#ffffff",

@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/harmonia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'harmonia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/harmonia/harmonia-directional-sun.webp",
-      "two": "/scenes/harmonia/harmonia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/harmonia/harmonia-shape-surface@2x.webp"
+    "/scenes/harmonia/harmonia-shape-surface@2x.webp",
+    "/scenes/harmonia/harmonia-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

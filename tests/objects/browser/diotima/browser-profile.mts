@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/diotima/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'diotima',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/diotima/diotima-directional-sun.webp",
-      "two": "/scenes/diotima/diotima-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/diotima/diotima-shape-surface@2x.webp"
+    "/scenes/diotima/diotima-shape-surface@2x.webp",
+    "/scenes/diotima/diotima-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

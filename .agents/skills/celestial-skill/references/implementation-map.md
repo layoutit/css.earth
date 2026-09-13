@@ -101,6 +101,12 @@ instead of editing a shared list or atlas position.
   the shared `tools/objects/terrestrial-layers/` path for native image geometry,
   photometric correction, compositing and gaps. Reuse the capability with the
   target body's inputs and conventions.
+- **Photometric normalization:** `tools/photometry/` evaluates published
+  photometric models, including Hapke with macroscopic roughness, for the
+  observation seam, encounter and shape-camera routes. Lutetia's
+  `source/photometry/` record and its manifest binding are the worked example;
+  `tools/photometry/isis.oracle.test.mts` holds the library to the values ISIS
+  prints.
 - **Elevation relief:** Ceres's `source/preparation/terrestrial.json` supplies
   its height datum, validity limits and cartographic lighting to
   `tools/objects/terrestrial-layers/scientific-raster.mts`. These values and gap
@@ -138,6 +144,33 @@ These examples identify implementations to inspect, not universal visual or
 scientific templates. See [qualification](qualification.md) for source and
 browser comparisons relevant to the actual feature.
 
+## Choose a photograph route
+
+Start from what the archive ships beside the image. Each row gives the recipe
+format, a body that uses it, what the body owner writes, and the oracle that
+checks the reader. When nothing fits, open the
+[archive-product issue template](../../../../.github/ISSUE_TEMPLATE/archive-product.md)
+instead of writing a reader for one body.
+
+| The archive ships | Recipe format | Example | The body owner writes | Reader oracle |
+| --- | --- | --- | --- | --- |
+| A PDS4 cube with per-pixel geometry planes | `pds4-geometry-cube` | Dimorphos `draco` | The `cube` block naming the label planes, transfer limits, photometry | `pds4-geometry-cube.oracle.test.mts` |
+| OSIRIS level-5 geometry companions | `osiris-geo` | 67P `osiris` | Frame pins, quality policy, transfer limits, photometry, level matching | `osiris-geo.oracle.test.mts` |
+| OSIRIS level-4 reflectance with a solved camera | `osiris-camera` | Lutetia and Steins `osiris` | Camera JSON, optional limb refinement, photometry | `archived-camera.oracle.test.mts` |
+| AMICA Gaskell DDR cubes | `amica-gaskell` | Itokawa `amica` | Image, label, original and flat-field pins | `amica-geo.oracle.test.mts` |
+| L'LORRI images with TAN-SIP distortion | `llorri-camera` | Donaldjohanson `llorri` | Camera pins | `llorri-geo.oracle.test.mts` |
+| Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tools/spice/oracle.test.mts` |
+| Encounter FITS frames with a control network | `encounter-fits` | Wild 2 `navcam`, Tempel 1, Hartley 2 | Frame, label and control pins, level matching | `encounter-fits.oracle.test.mts` |
+| Catalog cameras for a shape model | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame catalog pins and display settings | None yet |
+| Three filters, one catalog camera each | `controlled-shape-color` | Proteus `filter-color` | Filters and frames; no published model | None yet |
+| ISIS2 orthographic image cubes | `isis2-orthographic` | Borrelly `micas` | Cube pins; no Sun geometry, so no photometry | `isis2-qube.oracle.test.mts` |
+
+Routes with Sun geometry accept a published photometric model record (see
+`tools/photometry/README.md`), and [photometric models](photometric-models.md)
+lists which bodies have one. Kernels that serve several bodies of one mission
+live in a kernel bank under `src/spice/<mission>/`: add, restore and verify them
+with `node tools/spice/kernel-bank.mts`, and name the bank with `spice.kernelSet`.
+
 ## Registered photographic mosaics
 
 For photographs with per-pixel surface geometry, read
@@ -161,6 +194,104 @@ bits are instrument-specific; source identity, geometry qualification and
 provenance are transferable requirements. 67P's distances, angles, sample counts,
 photometric model and gain limits are evidence for that dataset, not defaults.
 
+Archives that ship an image with its geometric backplanes as one PDS4 cube use
+the same seam through `format: "pds4-geometry-cube"`: the recipe's `cube` block
+names the label planes that carry the image, the X/Y/Z intercepts and the
+angles, the collection, target, observing system and DSK to bind, and optional
+FITS header expectations. `tools/objects/terrestrial-layers/pds4-geometry-cube.mts`
+validates all of it against the label (offsets, units, special constants) and
+the header, converts units, and recovers nothing else; the camera comes from the
+shared fit above. Dimorphos's DART DRACO view
+(`src/planets/dimorphos/source/preparation/terrestrial.json`) is the first
+instance; a second archive needs a recipe, not a decoder. Frames that share one
+viewing direction use `selection: "recipe-order"`, finest footprint first,
+because lowest-emission selection cannot separate them. The
+[Dimorphos README](../../../../src/planets/dimorphos/README.md) records the
+measured residuals, transfer distances and the archive's pixel-scale unit slip.
+
+A cube can contain intercepts for multiple bodies in their respective local
+frames. Its optional `cube.geometrySelection` declares a native geometry plane,
+its exact label unit, an inclusive interval and its interpretation. Selection
+applies before camera fitting and to every interpolation contributor; it never
+uses brightness. Didymos uses the archived radius plane to separate its
+0.2–0.5 km intercepts from Dimorphos. Tests bracket both complete source meshes,
+require camera holdouts and check the selected points against Didymos's mesh.
+The DART label lists only the companion's DSK, so Didymos separately binds
+`SHAPREF1` and documents that archive inconsistency. Do not interpret a label's
+single DSK entry as proof that every pixel belongs to that shape.
+
+Archives that ship images with SPICE kernels and no geometry at all use
+`format: "spice-camera"`: the recipe's `spice` block names the kernel set (pinned
+inputs of the observation's consumer group, in metakernel order), the observer
+and target SPK ids, the body-fixed frame, the instrument whose `INS<id>_*`
+variables define the pixel model, the header card that carries the exposure's
+spacecraft clock, the aberration correction (`LT+S`, `LT` or `NONE`), the
+instrument-frame axes that stored columns and rows follow, and how the image
+plane and its flag values are read. `tools/spice/` is the strict-TypeScript
+kernel subset (DAF, SPK types 1, 2, 3, 5, 8, 9 and 13, CK types 1 to 3, text
+kernels, leap seconds, SCLK, PCK pole models, frame classes 2 to 6, light time
+and stellar aberration) and `tools/spice/camera.mts` assembles the camera;
+`tools/objects/terrestrial-layers/spice-camera.mts` turns it into the same
+`cssearth-archived-camera@1` closure the OSIRIS and L'LORRI routes feed to
+`attachSourceGeometry`, so per-pixel geometry comes from the retained mesh. The
+route is validated end to end against Dimorphos's DRACO backplanes in
+`tests/objects/unit/dimorphos/draco-spice.test.mts` (0.5 px against the
+archive's own intercepts, the constant offset explained by kernel versions).
+Tethys's Cassini ISS lens is the first lens on this route. It reads its kernels
+from the shared Cassini bank, decodes a VICAR image, and evaluates the camera at
+mid-exposure from the clock counts in the PDS3 label (`image.format:
+"vicar-pds3"`, `clock.start` and `clock.stop`). `IAU_<body>` frames resolve
+without a frame kernel, as they do in SPICE. Kernel cameras bound the separation of
+bilinear image contributors by the displayed mesh's simplification error rather
+than 50 m, so frames with kilometre-scale pixels can transfer.
+
+Archived and kernel pointing carries the archive's error: a fraction of a pixel
+for a solution tuned to the images, tens of pixels for a reconstructed C-kernel.
+A `spice-camera` or `osiris-camera` recipe may declare `refinement: { method:
+"mesh-limb", maximumCorrectionDegrees, maximumResidualPixels, minimumControls,
+searchPixels?, maximumControls?, minimumSharpness?, threshold? }` and
+`tools/objects/terrestrial-layers/limb-refinement.mts` then fits one rotation of
+the camera to the lit limb of the retained mesh before geometry is derived:
+edges are the sub-pixel coverage crossings of the body against background
+connected to space, sharp enough not to be terminator; each edge is matched to
+the mesh limb along its normal; terminator edges are recognised because the
+limb they reach faces away from the Sun; the match window grows until the
+count plateaus; a damped least-squares fit with a robust cut follows; and the
+holdout half of the edges must land within the declared residual budget, with
+the correction below its bound, or preparation refuses the frame. The report
+(correction, residuals before and after, matched fractions) lands in the lens
+metadata. Range, focal length and Sun direction are never changed.
+`tests/objects/unit/dimorphos/draco-refinement.test.mts` measures it against the
+DRACO backplanes: the kernel camera stays within 0.6 px of the archive, and
+cameras pushed 30 and 150 px away return to 0.24 and 0.55 px.
+
+The PDS3 routes (OSIRIS GEO, AMICA) stay instrument decoders behind the same
+seam, decided 2026-09-12 after a code review: their archives do not declare
+plane units or semantics the way a PDS4 label does, and about half of each
+decoder is instrument policy (quality-bit polarity and HISTORY radiometry for
+OSIRIS; gzip band reversal and the paired flat for AMICA), so a declaration
+would restate constants while turning validity policy into data. Revisit only
+if a third attached-label, pointer-addressed PDS3 geometry archive appears.
+
+## Oracles
+
+The pipeline derives nothing from an oracle; an oracle recomputes what the
+pipeline computed so a test can compare. `tools/oracles/` holds them with a
+pinned Python environment (`pnpm oracles:setup`, `tools/oracles/requirements.txt`),
+and each writes a fixture under `tests/oracles/` that names its versions and the
+sha256 of every input. Every archive reader on the observation seam has one:
+SpiceyPy for `tools/spice/` (a microsecond in time, a millimetre in position, a
+nanoradian in rotation); pds4_tools for the PDS4 geometry cube; pvl and numpy for
+the OSIRIS geometry, OSIRIS reflectance, AMICA and ISIS2 readers; astropy for
+the L'LORRI reader and its TAN-SIP distortion and for the three encounter FITS
+layouts. Comparing tests sit beside each reader, and `tools/oracle-fixtures.test.mts`
+refuses a fixture from an unpinned environment or unpinned inputs. A new reader
+or geometry route brings its oracle; regenerate a fixture only when its tool or
+inputs change, and say so in the PR. ALE and usgscsm (pixel models and
+distortion) need conda and arrive with the first Cassini ISS lens. ISIS's
+photometric models are checked against the truth files of their unit tests,
+which need no ISIS install. See `tools/oracles/README.md`.
+
 ## Commands and test routing
 
 Read `package.json` for the selected checkout. The commands below have distinct
@@ -173,6 +304,7 @@ purposes; run those needed for the task, not every preparation step by default.
 | Restore missing source pins and verify existing bytes | `node tools/objects/dist/operations.js acquire <id>` |
 | Verify source closure without acquiring | `node tools/objects/dist/operations.js acquire <id> --verify-only` |
 | Prepare selected objects through the cache and shared steps | `pnpm prepare:planets -- --object=<id>` |
+| Create the oracle environment and regenerate oracle fixtures | `pnpm oracles:setup`, then `pnpm oracles:run [group/name ...]` |
 | Invoke authored preparation directly | `node tools/objects/dist/prepare-authored.js <id> --write` |
 | Restore sources before root preparation | `pnpm prepare:checkout` |
 | Build the site and assemble declared runtime files | `pnpm build` |

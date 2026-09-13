@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "52d3400c5caf0e33df780cd70fda1dc161e0e7e2dbc7385aa1e8cf469d63ec1b"
+    "sha256": "82947f75369e5ebfa5f64ed034e3cc61aae527bf9cf8e50cf15885d665331b27"
   },
   "id": "neptune",
   "properties": {
@@ -66,12 +66,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ba93aa673b78a0117f0841a1e1391d74c4080d904653ee59f802e243d57a3794"
+          "sha256": "e464b04a6a48cd68e22223eebd80fbbcfaf6973a2e85f6bfffba9a647fc6df17"
         },
         {
           "id": "rings",
           "path": "source/preparation/rings.json",
-          "sha256": "177e3fdc36690fe70646f7b68a8375a8a5ac391402b07fbc11f4f4306a72f464"
+          "sha256": "991552fe0901c13139c41336a7e6f3d01e367b18656fdfe8fd2efc7be1b7327e"
         },
         {
           "id": "navigation",
@@ -86,7 +86,7 @@
         {
           "id": "observations",
           "path": "source/preparation/observations.json",
-          "sha256": "67711c6f0e6aa548d94ca2a434a40ab10dea79da9d40965eba74654987e51a6c"
+          "sha256": "49bfceb1682fb4a1e576db36017f33ff7967653537c141605ad4cb9465591f9f"
         },
         {
           "id": "materials",
@@ -96,7 +96,7 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "19eb613445e8d64c7f745b29667d43e268ce85116b4891951dae88e881a3e2c1"
+          "sha256": "0d7e5561314dcb4eaff09f30b34d2632ea84de05e24658719fad6618b3f5e733"
         },
         {
           "id": "presentation",
@@ -214,7 +214,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "90c22b5736eb517b28122522c563989049e9c1630bf353ed47e2d3e3f009799c"
+        "sha256": "52e88091224f6129b61f9b842897d0a02ecb382ea94b19ae6514472afd92fb5b"
       }
     },
     "catalog": {

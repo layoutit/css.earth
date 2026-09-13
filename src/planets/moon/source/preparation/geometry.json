@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/moon/moon-surface.webp",
+      "url": "/scenes/moon/moon-surface@2x.webp",
       "width": 2048,
       "height": 1536
     },
     "surfaceLatitudeHeight": 1024,
     "packedBandGutter": 16,
     "poles": {
-      "url": "/scenes/moon/moon-poles-surface.webp",
+      "url": "/scenes/moon/moon-poles-surface@2x.webp",
       "width": 512,
       "height": 256
     },

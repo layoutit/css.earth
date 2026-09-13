@@ -2,6 +2,7 @@ import { array, choice, direction, fail, finite, integer, numbers, positive, rec
 import type { CubicSkyPlan } from '../solar-system/cubic-sky-runtime.js';
 import type { DirectionalSunPlan } from '../solar-system/directional-sun-runtime.js';
 import type { ExposureOptions } from '@cssearth/engine';
+import { DIRECTIONAL_SUN_SPRITE_PIXELS } from '../../../platform/directional-sun-contract.mts';
 
 export function requireExposure(value: unknown): asserts value is ExposureOptions {
   const exposure = record(value, 'star exposure');
@@ -13,13 +14,13 @@ export function requireExposure(value: unknown): asserts value is ExposureOption
 }
 export function requireSky(value: unknown): asserts value is CubicSkyPlan {
   const sky = record(value, 'sky');
-  if (sky.schema !== 'cssearth-prepared-cubic-sky@2' || sky.standard !== 'cssearth-cubic-sky-standard@2' ||
+  if (sky.schema !== 'cssearth-prepared-cubic-sky@3' || sky.standard !== 'cssearth-cubic-sky-standard@2' ||
       sky.runtimeRasterization !== false || sky.orientation !== 'camera-rotation-only-no-translation-or-parallax') fail('retained cubic sky is incompatible');
   const faces = array(sky.faces, 'sky faces'), ids = ['front', 'right', 'back', 'left', 'top', 'bottom'];
   if (faces.length !== ids.length) fail('cubic sky requires six faces');
   faces.forEach((input, index) => {
     const face = record(input, 'sky face'); if (face.id !== ids[index]) fail('cube faces must retain their order');
-    for (const name of ['url', 'url2x', 'highContrastUrl', 'highContrastUrl2x']) text(face[name], `face ${name}`);
+    for (const name of ['url', 'highContrastUrl']) text(face[name], `face ${name}`);
   });
   for (const name of ['cameraPitchResponse', 'cameraZoomResponse', 'presentationPitchOffsetDegrees', 'presentationYawOffsetDegrees']) finite(sky[name], `sky ${name}`);
   if (sky.sceneRegistration !== undefined || sky.cameraContract === 'scene-locked-unbounded-accumulated-matrix3d') matrixText(sky.sceneRegistration, 'scene registration');
@@ -67,18 +68,18 @@ export function matrixText(value: unknown, label: string): void {
 export function requireSun(value: unknown): asserts value is DirectionalSunPlan {
   const sun = record(value, 'directional Sun'), asset = record(sun.asset, 'Sun asset'), projection = record(sun.projection, 'Sun projection');
   const distance = record(sun.distanceScaling, 'Sun distance'), appearance = record(sun.appearance, 'Sun appearance');
-  const radialFit = record(appearance.analyticRadialFit, 'Sun radial fit'), density = record(asset.density1, 'Sun density');
-  if (sun.schema !== 'cssearth-prepared-directional-sun@3' || sun.billboard !== true || sun.bakedIntoStarfield !== false || sun.runtimeRasterization !== false ||
+  const radialFit = record(appearance.analyticRadialFit, 'Sun radial fit');
+  if (sun.schema !== 'cssearth-prepared-directional-sun@4' || sun.billboard !== true || sun.bakedIntoStarfield !== false || sun.runtimeRasterization !== false ||
       asset.sourcePixels !== 'repository-authored-clean-room-raster' || projection.fixedAngularSize !== true || projection.runtimeGeometry !== false ||
       distance.schema !== 'cssearth-directional-sun-distance-standard@2' || distance.model !== 'iau-nominal-photospheric-disc-at-mean-heliocentric-distance' ||
       distance.nominalSolarRadiusKilometers !== 695700 || distance.astronomicalUnitKilometers !== 149597870.7 ||
       distance.observerDistanceModel !== 'object-catalog-mean-heliocentric-distance') fail('directional Sun is incompatible');
-  text(asset.url, 'Sun URL'); text(asset.url2x, 'Sun 2x URL');
+  text(asset.url, 'Sun URL');
   direction(sun.localDirection, 'Sun local direction'); direction(sun.referenceViewDirection, 'Sun reference direction');
   const focal = positive(projection.focalX, 'Sun focal'), center = positive(projection.centerDistanceOverFar, 'Sun center distance');
   const observer = positive(distance.meanHeliocentricDistanceAu, 'Sun mean distance') * 149597870.7;
   const radius = Math.atan(695700 / observer), disk = focal * Math.tan(radius);
-  const core = positive(radialFit.coreRadiusPixels, 'Sun core radius') * 2 / positive(density.width, 'Sun image width');
+  const core = positive(radialFit.coreRadiusPixels, 'Sun core radius') * 2 / DIRECTIONAL_SUN_SPRITE_PIXELS;
   const sprite = disk / core, extent = sprite / focal;
   const same = (actual: unknown, expected: number, label: string) => {
     const n = positive(actual, label);

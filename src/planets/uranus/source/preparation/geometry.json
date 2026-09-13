@@ -10,7 +10,7 @@
   "latitudeSegments": 24,
   "longitudeSegments": 48,
   "surface": {
-    "url": "/scenes/uranus/uranus-surface-normal.webp",
+    "url": "/scenes/uranus/uranus-surface-normal@2x.webp",
     "width": 1920,
     "height": 960,
     "gutter": 10,
@@ -22,7 +22,7 @@
     "color": "#a7dce2"
   },
   "polar": {
-    "url": "/scenes/uranus/uranus-poles-normal.webp",
+    "url": "/scenes/uranus/uranus-poles-normal@2x.webp",
     "tileSize": 128,
     "separateInnerTiles": false,
     "fitToTile": true,
@@ -49,7 +49,7 @@
       "id": "rings",
       "radius": 955.6711921436676,
       "z": 0,
-      "url": "/scenes/uranus/uranus-rings.webp",
+      "url": "/scenes/uranus/uranus-rings@2x.webp",
       "size": 1200,
       "fitToSize": true,
       "color": "#839297"
@@ -58,7 +58,7 @@
       "id": "ring-shadow",
       "radius": 955.6711921436676,
       "z": 0.12,
-      "url": "/scenes/uranus/uranus-ring-shadow-plane.webp",
+      "url": "/scenes/uranus/uranus-ring-shadow-plane@2x.webp",
       "size": 1200,
       "fitToSize": true,
       "color": "#020608",

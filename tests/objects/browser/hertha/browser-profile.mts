@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/hertha/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'hertha',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/hertha/hertha-directional-sun.webp",
-      "two": "/scenes/hertha/hertha-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/hertha/hertha-shape-surface@2x.webp"
+    "/scenes/hertha/hertha-shape-surface@2x.webp",
+    "/scenes/hertha/hertha-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

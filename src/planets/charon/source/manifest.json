@@ -426,8 +426,8 @@
     {
       "id": "charon-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1635,
-      "expectedSha256": "8e90df9d43e45bba8920f56f5137d0e822819e2db80fe21671455d80f5e54350",
+      "expectedBytes": 1559,
+      "expectedSha256": "19ae51bddecdeaa7ae5bf07f777b752d86a327a8c0873c571ebd30930119603f",
       "origin": "Repository-authored Charon solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -447,8 +447,8 @@
     {
       "id": "charon-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 7051,
-      "expectedSha256": "88b98d77c72aeca435ff56ad1922ef1bca54f7aa727024fb3a87d2da80dd7eca",
+      "expectedBytes": 7081,
+      "expectedSha256": "faab09cb35dcd0750457fd655291c5ecfd9ffbd291bd9d5bc096718e7cbdbbcb",
       "origin": "Repository-authored Charon raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -466,8 +466,8 @@
     {
       "id": "charon-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1414,
-      "expectedSha256": "d27e407a837e0a9509cddfafefb27f6c5a2cd4dd24da744871f80b87b33dc93d",
+      "expectedBytes": 1596,
+      "expectedSha256": "c6e36a0012bdef3b9392a258158639f9a98d336079be2d22e90f1320c37b98d9",
       "origin": "Repository-authored Charon geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -560,8 +560,8 @@
     {
       "id": "charon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 13037,
-      "expectedSha256": "c13e034a49e79d266f0119e801e14459092addbe8c9578d7b2e0a876043be798",
+      "expectedBytes": 13061,
+      "expectedSha256": "f7c787ea07b71955dc9badee4fb246293e1620d70628aeb31ff214384eb0db95",
       "origin": "Repository-authored Charon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

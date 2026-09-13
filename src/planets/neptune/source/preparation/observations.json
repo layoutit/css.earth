@@ -64,20 +64,6 @@
       "products": [
         {
           "kind": "surface",
-          "filename": "neptune-surface-normal.webp",
-          "transforms": [],
-          "packing": {
-            "bandCount": 20,
-            "gutter": 18
-          },
-          "encoding": {
-            "quality": 92,
-            "smartSubsample": true,
-            "effort": 6
-          }
-        },
-        {
-          "kind": "surface",
           "filename": "neptune-surface-normal@2x.webp",
           "transforms": [
             {
@@ -232,20 +218,6 @@
       "products": [
         {
           "kind": "surface",
-          "filename": "neptune-surface-methane.webp",
-          "transforms": [],
-          "packing": {
-            "bandCount": 20,
-            "gutter": 18
-          },
-          "encoding": {
-            "quality": 92,
-            "smartSubsample": true,
-            "effort": 6
-          }
-        },
-        {
-          "kind": "surface",
           "filename": "neptune-surface-methane@2x.webp",
           "transforms": [
             {
@@ -389,20 +361,6 @@
         }
       },
       "products": [
-        {
-          "kind": "surface",
-          "filename": "neptune-surface-near-infrared.webp",
-          "transforms": [],
-          "packing": {
-            "bandCount": 20,
-            "gutter": 18
-          },
-          "encoding": {
-            "quality": 92,
-            "smartSubsample": true,
-            "effort": 6
-          }
-        },
         {
           "kind": "surface",
           "filename": "neptune-surface-near-infrared@2x.webp",

@@ -85,18 +85,14 @@
         "shortLabel": "RGB",
         "measurement": "Hubble WFC3 visible-color global map",
         "thumbnailUrl": "/scenes/jupiter/jupiter-lens-normal.webp",
-        "surfaceUrl": "/scenes/jupiter/jupiter-surface.webp",
-        "surface2xUrl": "/scenes/jupiter/jupiter-surface@2x.webp",
-        "polesUrl": "/scenes/jupiter/jupiter-poles.webp",
-        "poles2xUrl": "/scenes/jupiter/jupiter-poles@2x.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-surface@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-poles@2x.webp",
         "falseColor": false,
         "qualification": "NASA/ESA Hubble WFC3 395, 502, and 631 nm visible-color map"
       },
       "files": {
-        "surface": "jupiter-surface.webp",
-        "surface2x": "jupiter-surface@2x.webp",
-        "poles": "jupiter-poles.webp",
-        "poles2x": "jupiter-poles@2x.webp",
+        "surface": "jupiter-surface@2x.webp",
+        "poles": "jupiter-poles@2x.webp",
         "thumbnail": "jupiter-lens-normal.webp"
       },
       "coverage": {
@@ -200,10 +196,8 @@
       "qualification": "F275W single-band Hubble OPAL observation, 11 December 2025; declared false color. Gray grid marks unavailable polar-connected zero fill; no Juno structure or spectral extrapolation. Dark interior samples remain observations.",
       "operation": "scalar-observed-gaps",
       "files": {
-        "surface": "jupiter-lens-ultraviolet.webp",
-        "surface2x": "jupiter-lens-ultraviolet@2x.webp",
-        "poles": "jupiter-lens-ultraviolet-poles.webp",
-        "poles2x": "jupiter-lens-ultraviolet-poles@2x.webp",
+        "surface": "jupiter-lens-ultraviolet@2x.webp",
+        "poles": "jupiter-lens-ultraviolet-poles@2x.webp",
         "thumbnail": "jupiter-lens-ultraviolet-thumbnail.webp"
       },
       "scalar": {
@@ -253,10 +247,8 @@
       "qualification": "FQ889N single-band Hubble OPAL observation, 11 December 2025; declared false color. Gray grid marks unavailable polar-connected zero fill; no Juno structure or spectral extrapolation. Dark interior samples remain observations.",
       "operation": "scalar-observed-gaps",
       "files": {
-        "surface": "jupiter-lens-methane.webp",
-        "surface2x": "jupiter-lens-methane@2x.webp",
-        "poles": "jupiter-lens-methane-poles.webp",
-        "poles2x": "jupiter-lens-methane-poles@2x.webp",
+        "surface": "jupiter-lens-methane@2x.webp",
+        "poles": "jupiter-lens-methane-poles@2x.webp",
         "thumbnail": "jupiter-lens-methane-thumbnail.webp"
       },
       "scalar": {

@@ -96,8 +96,8 @@
         "description": "USGS 2026 controlled mosaic. Infrared reveals surface features through the haze. Image brightness is display-stretched; source haze, clouds, variable resolution and seams remain. Gray grid marks missing observations. Added globe lighting is approximate.",
         "title": "Controlled infrared mosaic",
         "thumbnail": "titan-lens-normal.webp",
-        "surface": "titan-normal.webp",
-        "poles": "titan-poles-normal.webp",
+        "surface": "titan-normal@2x.webp",
+        "poles": "titan-poles-normal@2x.webp",
         "source": {
           "id": "usgs-cassini-iss-2026-938nm",
           "path": "../manifest.json"
@@ -110,8 +110,8 @@
         "description": "Cassini RADAR Team mosaic through T126. Brightness shows radar backscatter, not visible color or elevation. Gray grid marks missing measurements. The 1.4 km archive grid is prepared at 1.98 km per equatorial texel; native observation resolution varies. Shared globe Shadows remain an approximate visualization.",
         "title": "RADAR global mosaic through T126",
         "thumbnail": "titan-lens-radar.webp",
-        "surface": "titan-radar.webp",
-        "poles": "titan-poles-radar.webp",
+        "surface": "titan-radar@2x.webp",
+        "poles": "titan-poles-radar@2x.webp",
         "source": {
           "id": "cassini-radar-midr",
           "path": "../manifest.json"
@@ -124,8 +124,8 @@
         "description": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
         "title": "GTDR measured heights",
         "thumbnail": "titan-lens-topography.webp",
-        "surface": "titan-topography.webp",
-        "poles": "titan-poles-topography.webp",
+        "surface": "titan-topography@2x.webp",
+        "poles": "titan-poles-topography@2x.webp",
         "source": {
           "id": "cassini-gtdr-2019-gtfed00n090_t126_v01",
           "path": "../manifest.json"
@@ -182,8 +182,8 @@
         "description": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
         "title": "GTDR interpolated topography",
         "thumbnail": "titan-lens-interpolated.webp",
-        "surface": "titan-interpolated.webp",
-        "poles": "titan-poles-interpolated.webp",
+        "surface": "titan-interpolated@2x.webp",
+        "poles": "titan-poles-interpolated@2x.webp",
         "source": {
           "id": "cassini-gtdr-2019-gtied00n090_t126_v01",
           "path": "../manifest.json"
@@ -240,8 +240,8 @@
         "description": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
         "title": "GTDR distance to measurements",
         "thumbnail": "titan-lens-coverage-distance.webp",
-        "surface": "titan-coverage-distance.webp",
-        "poles": "titan-poles-coverage-distance.webp",
+        "surface": "titan-coverage-distance@2x.webp",
+        "poles": "titan-poles-coverage-distance@2x.webp",
         "source": {
           "id": "cassini-gtdr-2019-gtded00n090_t126_v01",
           "path": "../manifest.json"
@@ -299,8 +299,8 @@
         "summary": "Explore Titan’s dunes, plains, highlands and lake basins in the global Cassini interpretation.",
         "title": "Cassini global geomorphology · Lopes et al. (2020)",
         "thumbnail": "titan-lens-geology.webp",
-        "surface": "titan-geology.webp",
-        "poles": "titan-poles-geology.webp",
+        "surface": "titan-geology@2x.webp",
+        "poles": "titan-poles-geology@2x.webp",
         "source": {
           "id": "titan-global-geomorphology-grid",
           "path": "../manifest.json",

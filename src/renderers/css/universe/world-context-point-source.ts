@@ -5,8 +5,8 @@ import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
 import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
-import { pointPhotometry } from '../stars/prepared-point-field-runtime.js';
-import type { PreparedCssPointField } from '../stars/types.js';
+import { pointPhotometry } from '../stars/point-field-projection.js';
+import type { PreparedPointAppearance } from '../stars/types.js';
 import type { PreparedWorldContext } from './prepared-world-context.js';
 
 export interface PointSourcePublication {
@@ -53,8 +53,8 @@ export function worldContextPointSourceGain(distanceM: number, plan: PreparedWor
     brightness: 1 + (enhancement.brightnessMultiplier - 1) * weight });
 }
 
-/** One focus point uses the star field's prepared photometry and PSF atlas. */
-export function worldContextPointAppearance(plan: PreparedWorldContext, field: PreparedCssPointField,
+/** One focus point uses prepared photometry and the PSF atlas, without catalogue rows. */
+export function worldContextPointAppearance(plan: PreparedWorldContext, field: PreparedPointAppearance,
   world: WorldCameraPose, viewport: WorldCameraViewport, publication: PointSourcePublication = {}): WorldContextPointAppearance | null {
   const source = plan.focus.pointSource;
   if (!source || world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt) return null;
@@ -80,7 +80,7 @@ export function worldContextPointAppearance(plan: PreparedWorldContext, field: P
 
 /** Retained single-node renderer. It consumes the checked point atlas; it creates no image or geometry. */
 export function mountWorldContextPointSource({ host, before, plan, field, resolveResource, pickingHost = host }: {
-  host: HTMLElement; before: Element; plan: PreparedWorldContext; field: PreparedCssPointField; resolveResource(path: string): string; pickingHost?: HTMLElement;
+  host: HTMLElement; before: Element; plan: PreparedWorldContext; field: PreparedPointAppearance; resolveResource(path: string): string; pickingHost?: HTMLElement;
 }) {
   if (!plan.focus.pointSource) return null;
   const element = host.ownerDocument.createElement('s');
@@ -117,7 +117,7 @@ export function mountWorldContextPointSource({ host, before, plan, field, resolv
   });
 }
 
-function nearestAtlasColor(color: string, palette: PreparedCssPointField['atlas']['colors']): number {
+function nearestAtlasColor(color: string, palette: PreparedPointAppearance['atlas']['colors']): number {
   const red = Number.parseInt(color.slice(1, 3), 16), green = Number.parseInt(color.slice(3, 5), 16), blue = Number.parseInt(color.slice(5, 7), 16);
   let closest = 0, error = Infinity;
   for (let index = 0; index < palette.length; index++) { const sample = palette[index]!, distance = (sample[0] - red) ** 2 + (sample[1] - green) ** 2 + (sample[2] - blue) ** 2; if (distance < error) { error = distance; closest = index; } }

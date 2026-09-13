@@ -27,11 +27,40 @@ observations; sharing a body does not require sharing one mesh. Prefer the
 matching published model over forcing imagery onto an incompatible shape.
 Use existing prepared-model selection while keeping one active object scene,
 only the selected model visible, and the shared renderer, camera and shell.
+Bind observation preparation to that selected model as well: camera validation,
+surface sampling, visibility, thumbnails and evidence must use the same mesh
+as the dataset's triangle atlas. Prefer archived per-pixel geometry products
+(the [registered mosaic guidance](references/registered-photographic-mosaics.md)
+and the geometry-cube route in the [implementation map](references/implementation-map.md#registered-photographic-mosaics))
+over pointing files whose pixel conventions the archive does not state.
 A restriction on renderer changes does not by itself freeze prepared geometry;
 respect any explicit geometry or topology restriction in the task's scope.
 Explain meaningful model differences beside the dataset and qualify registration,
 coverage and picking against the selected mesh. The [implementation map](references/implementation-map.md)
 locates the existing support for alternative models.
+
+Surface places also belong to a source frame. Use `source/preparation/features.json`
+and its pinned `landmarks` document for mission-defined regions, paper coordinates,
+or explicitly inferred model anatomy. Keep mission names distinct from IAU names.
+Derive region anchors from the released map and check them against the unchanged
+display mesh; a label point does not establish a region centre, size or boundary.
+For alternative meshes, select the matching prepared `surfaceHit.lensRanges`
+entry and expose those places only on that dataset. A shared body name does not
+make coordinates transferable between models. Keep approximate placement visible
+in the caption. Unresolved photograph-to-shape registration cannot establish a
+terrain landmark; neither can a camera direction alone.
+
+Check label discovery with no place selected: selection bypasses the zoom gate.
+Inspect whole-body framing, a closer view and rotation on a sparse asteroid,
+comet and small moon. Physical size alone does not require a separate label
+rule: the shared camera expresses zoom relative to the body. The shared feature
+preparer gives sparse catalogues a count floor of 200 when assigning discovery
+tiers, so two names are not stretched from minimum to maximum zoom. Explicit
+mission-landmark tiers remain authored choices; broad regions should appear
+while the whole body is still visible. Keep the existing screen-size, limb,
+overlap and label-cap checks, and verify the smallest named features still need
+enough screen space. Do not use a successful search-and-fly-to as proof that
+places can be discovered by looking at the body.
 
 ## Scope for existing moon upgrades
 
@@ -166,12 +195,18 @@ Read the applicable preparation guidance **before** processing those assets:
 | Source or issue | Preparation decision |
 | --- | --- |
 | Photographed shading or mosaic seams | [Photographic observations](references/surface-preparation.md#photographic-observations): corrected source or justified per-observation normalization, then bounded level matching where useful. Preserve shared lighting controls. |
+| Soft photographic textures | [Photographic observations](references/surface-preparation.md#photographic-observations): trace intermediate resizes, sample registered originals at the delivered footprint, and separate sampling gains from encoding quality. |
 | Multiple photographs registered to a surface | [Registered photographic mosaics](references/registered-photographic-mosaics.md): camera holdouts, quality and visibility checks, deterministic selection, overlap levels, provenance and area coverage. |
 | Elevation or another measured scalar | [Scientific maps](references/surface-preparation.md#scientific-maps): datum, palette, readable relief and a truthful legend. |
 | Incomplete coverage | [Coverage](references/surface-preparation.md#coverage): source validity before interpolation; mark real gaps without erasing observed dark terrain. |
 | Irregular terrain or a triangle-mesh budget | [Irregular meshes](references/irregular-meshes.md): choose a representable source shape, simplify before baking, and use PolyCSS native raster triangles. |
 | Unresolved appearance, rings or atmosphere | [Shape and optional layers](references/surface-preparation.md#shape-and-optional-layers): evidence determines the presentation and supported capabilities. |
 | UV banding, edge artifacts or detached lighting | [Registration](references/surface-preparation.md#registration): distinguish source projection, geometry and overlay fit. |
+
+For a photographic resolution refresh on the existing raster lane, use the
+[partial photographic preparer](../../../docs/surface-preparation.md#refresh-photographs-without-rebuilding-geometry).
+Keep geometry and lighting fixed, prepare one body at a time, and compare actual
+close-ups and image delivery size before accepting the larger texture.
 
 Generate the assets actually consumed by each selected view—surface and pole
 atlases, thumbnails, minimaps, markers and legends where applicable—from the
@@ -247,6 +282,17 @@ all-body preparation or test suites by default for one body. Reuse passing evide
 until relevant changes or unresolved failures invalidate it.
 Keep project-required checks; do not add a new dashboard, gate framework,
 Burnlist or exhaustive test matrix to implement an ordinary body.
+
+A body PR is finished when its branch turns the change on end to end. It holds:
+
+- the recipe, source pins, acquisition operations and catalogued bindings;
+- the prepared outputs the recipe produces;
+- the body README's account of sources, processing, results and known problems;
+- any published photometric model as a cited record, used inside its fitted range.
+
+Do not open a mergeable PR with code that nothing uses yet. When an archive
+product needs a reader, route or kernel bank that does not exist, open the
+archive-product issue template instead of writing one for a single body.
 
 Update the body README with source choices, processing, results and known
 problems. Update affected credits and reports in the same change. Keep common

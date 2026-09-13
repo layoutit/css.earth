@@ -6,10 +6,6 @@
     {
       "kind": "annular-field",
       "size": 1024,
-      "densities": [
-        1,
-        2
-      ],
       "outerRadius": 62933,
       "mapping": {
         "kind": "linear",
@@ -165,7 +161,7 @@
           ]
         }
       ],
-      "output": "neptune-rings{suffix}.webp",
+      "output": "neptune-rings@2x.webp",
       "qualification": "PDS radial ring positions with the accepted schematic opacity, width emphasis and fixed arc presentation."
     }
   ]

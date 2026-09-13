@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/agenor/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'agenor',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/agenor/agenor-directional-sun.webp",
-      "two": "/scenes/agenor/agenor-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/agenor/agenor-shape-surface@2x.webp"
+    "/scenes/agenor/agenor-shape-surface@2x.webp",
+    "/scenes/agenor/agenor-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

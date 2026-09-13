@@ -83,8 +83,8 @@
         "title": "Surface illustration",
         "qualification": "Illustration; not an observed surface map.",
         "thumbnail": "eris-lens-illustration.webp",
-        "surface": "eris-illustration.webp",
-        "poles": "eris-poles-illustration.webp",
+        "surface": "eris-illustration@2x.webp",
+        "poles": "eris-poles-illustration@2x.webp",
         "source": {
           "id": "nasa-vtad-eris-model",
           "path": "../manifest.json",

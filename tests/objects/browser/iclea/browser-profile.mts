@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/iclea/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'iclea',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/iclea/iclea-directional-sun.webp",
-      "two": "/scenes/iclea/iclea-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/iclea/iclea-shape-surface@2x.webp"
+    "/scenes/iclea/iclea-shape-surface@2x.webp",
+    "/scenes/iclea/iclea-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

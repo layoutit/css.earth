@@ -4,12 +4,20 @@
 
 | View or property | Source and interpretation |
 | --- | --- |
-| SSI reflectance | Galileo clear-filter [107318326](source/observations/107318326rcal_clr.xml) and [107318313](source/observations/107318313rcal_clr.xml), 29 October 1991, about 54 m/pixel. Original I/F and acquisition illumination; fixed display stretch, no fitted gain. |
+| SSI reflectance | Galileo clear-filter [107318326](source/observations/107318326rcal_clr.xml) and [107318313](source/observations/107318313rcal_clr.xml), 29 October 1991, about 54 m/pixel. I/F normalized to 50° incidence and phase with a published Hapke model; fixed display stretch, no fitted gain. |
 | Monochrome and shape | [Thomas PDS release](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/). The processed high-pass mosaic adds mapped coverage; it is not calibrated albedo. |
 | Elevation | Thomas shape radius minus 6.1 km, false color from −2 to +5 km; not gravitational height. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/GASPRA/target) Gaspra centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
+
+The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
+
+| View | Original grid | Both lighting images, before → current |
+| --- | --- | --- |
+| normal | 720 × 360 | 0.76 → 1.23 MB |
+
+Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/gaspra/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
 
 [The 9 September 2026 mosaic report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/README.md) records 107 focused tests, 60 browser conformance cases, DPR 1/2 production checks and fresh remote installation for the four-body change. [Validation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/validation.json) identifies tested commit `8ded7a5` and base `1fb76e4`; these are historical results.
 
@@ -85,7 +93,7 @@ Gaspra uses the published Thomas optical shape and registered Galileo SSI high-p
 
 Elevation colors encode radius minus the 6.1 km reference sphere, using a -2 to +5 km palette. They include the body's overall irregular shape and do not represent height above a gravitational equipotential. Cartographic relief is computed from the source field. Both views retain the shared Shadows control; directional lighting is a prepared diffuse approximation at the shared world epoch and cannot remove photographed shadows or model all terrain self-occlusion.
 
-Both included photographs retain original illumination and the same fixed calibrated display transfer. No relative gain is fitted. The existing coarse-to-fine projection blends only near its geometric and detector boundaries. Run the contribution audit below to retain the actual weights for both sources.
+Both photographs are normalized to 50° incidence, 0° emission and 50° phase with the Hapke model of [Helfenstein et al. (1994)](https://doi.org/10.1006/icar.1994.1005). The abstract gives single-scattering albedo 0.36, shadow-hiding amplitude 1.63 and roughness 29°; the compilation of Hasselmann et al. (2016, Table 7) adds width 0.06 and Henyey–Greenstein asymmetry −0.18. [The model record](source/photometry/helfenstein-1994-hapke.json) cites both. The fit combined Earth-based photometry at 2–25° phase with Galileo data at 33–51°. The clear-filter frames lie at about 51° phase, so the 48–54° phase limit extrapolates the model by up to 3°, and the tabulated 0.56 µm fit is narrower than the clear filter's band. Incidence and emission stay limited to 65°, and gains to 0.4–4; no sample needed withholding. Over 2,540 overlap samples the normalized frames agree to a median ratio of 0.987, so no level gain is fitted. The same fixed calibrated display transfer follows. The existing coarse-to-fine projection blends only near its geometric and detector boundaries. Run the contribution audit below to retain the actual weights for both sources.
 
 Clear-filter image 107315039 was also downloaded and tested. Its useful detector footprint did not establish four separate registration checks at the retained tolerance, so it is excluded. Earlier lower-resolution clear images are listed in the archive inventory but do not replace the complementary close-up pair.
 

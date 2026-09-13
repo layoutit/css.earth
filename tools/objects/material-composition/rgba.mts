@@ -72,19 +72,21 @@ export function cropTransparentRgba({ rgba, width, height, gutter }: {rgba: Buff
   });
 }
 
-export function responsiveTransparentCrop({
-  rgba,
-  rgba2x,
+/** Crop a prepared plate (two texels per layout pixel) to the visible bounds of its layout-size and
+ * prepared renderings, expanded by the transparent gutter; the leaf keeps that layout crop. */
+export function preparedTransparentCrop({
+  layout,
+  prepared,
   textureSize,
   gutter,
-}: {rgba: Buffer; rgba2x: Buffer; textureSize: number; gutter: number}) {
+}: {layout: Buffer; prepared: Buffer; textureSize: number; gutter: number}) {
   const visible = nonTransparentRgbaBounds({
-    rgba,
+    rgba: layout,
     width: textureSize,
     height: textureSize,
   });
   const visible2x = nonTransparentRgbaBounds({
-    rgba: rgba2x,
+    rgba: prepared,
     width: textureSize * 2,
     height: textureSize * 2,
   });
@@ -109,7 +111,7 @@ export function responsiveTransparentCrop({
     height: textureSize,
     gutter,
   });
-  const bounds2x = Object.freeze({
+  const preparedBounds = Object.freeze({
     x: bounds.x * 2,
     y: bounds.y * 2,
     width: bounds.width * 2,
@@ -117,12 +119,11 @@ export function responsiveTransparentCrop({
   });
   return Object.freeze({
     bounds,
-    bounds2x,
-    rgba: extractRgbaBounds({ rgba, width: textureSize, bounds }),
-    rgba2x: extractRgbaBounds({
-      rgba: rgba2x,
+    preparedBounds,
+    rgba: extractRgbaBounds({
+      rgba: prepared,
       width: textureSize * 2,
-      bounds: bounds2x,
+      bounds: preparedBounds,
     }),
   });
 }

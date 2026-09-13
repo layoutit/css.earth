@@ -13,6 +13,124 @@
     "poleSize": 512,
     "reportMissingPixels": true,
     "observations": [],
+    "surfaceObservations": [
+      {
+        "id": "draco",
+        "format": "pds4-geometry-cube",
+        "cube": {
+          "collection": "urn:nasa:pds:dart:data_dracoddp",
+          "target": "(65803) Didymos I (Dimorphos)",
+          "observingSystem": [
+            "DART:Host",
+            "DRACO:Instrument"
+          ],
+          "shapeKernel": "dimorphos_g_00243mm_spc_0000n00000_v004.bds",
+          "quantity": "I/F",
+          "planes": {
+            "image": "ioverf",
+            "x": "xcoord",
+            "y": "ycoord",
+            "z": "zcoord",
+            "incidence": "incidence",
+            "emission": "emission",
+            "phase": "phase",
+            "pixelScale": [
+              "horizpixscale",
+              "vertpixscale"
+            ]
+          },
+          "header": {
+            "MISSION": "DART",
+            "INSTRUME": "DRACO",
+            "TARGET": "(65803) Didymos I (Dimorphos)",
+            "BADIMAGE": "FALSE",
+            "IOVERF": "PERFORM",
+            "RADIANCE": "PERFORM",
+            "CALIB": "ON",
+            "BINNING": "ON",
+            "MISPXVAL": "1E10",
+            "PXOUTWIN": "-1E10",
+            "SATPXVAL": "1E09",
+            "GEOINVAL": "-999",
+            "SHAPREF2": "dimorphos_g_0243mm_spc_obj_0000n00000_v004.obj"
+          },
+          "headerTime": "ACQ_UTC",
+          "headerPlaneNames": {
+            "prefix": "PLANE",
+            "names": {
+              "ioverf": "Pixel value",
+              "xcoord": "X coordinate of pixel center",
+              "ycoord": "Y coordinate of pixel center",
+              "zcoord": "Z coordinate of pixel center",
+              "incidence": "Solar incidence angle",
+              "emission": "Emission angle",
+              "phase": "Solar phase angle"
+            }
+          }
+        },
+        "consumer": "draco-observation",
+        "filter": "unfiltered",
+        "allowLossy": false,
+        "transfer": {
+          "maximumSourceDistanceMeters": 2,
+          "maximumSeparationMeters": 2,
+          "maximumEmissionDegrees": 80,
+          "visibilityToleranceMeters": 0.5,
+          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must lie within 2 m of the closest 0.972 m OBJ source point, and that point must be visible from the recovered camera in the full OBJ mesh."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3
+        },
+        "displayPercentiles": [
+          1,
+          99
+        ],
+        "metadata": {
+          "label": "DRACO mosaic",
+          "falseColor": false,
+          "coverage": "Four DRACO frames from 11 to 1.8 seconds before impact. Closer qualified footprints take precedence; the unseen surface keeps the grid."
+        },
+        "frames": [
+          {
+            "id": "t-minus-1-8s",
+            "path": "observations/dart_0401930049_43695_01_geo.fits",
+            "labelPath": "observations/dart_0401930049_43695_01_geo.xml",
+            "startTime": "2022-09-26T23:14:22.365Z"
+          },
+          {
+            "id": "t-minus-4-7s",
+            "path": "observations/dart_0401930046_49265_01_geo.fits",
+            "labelPath": "observations/dart_0401930046_49265_01_geo.xml",
+            "startTime": "2022-09-26T23:14:19.477Z"
+          },
+          {
+            "id": "t-minus-6-6s",
+            "path": "observations/dart_0401930045_02979_01_geo.fits",
+            "labelPath": "observations/dart_0401930045_02979_01_geo.xml",
+            "startTime": "2022-09-26T23:14:17.551Z"
+          },
+          {
+            "id": "t-minus-11s",
+            "path": "observations/dart_0401930040_12262_01_geo.fits",
+            "labelPath": "observations/dart_0401930040_12262_01_geo.xml",
+            "startTime": "2022-09-26T23:14:12.737Z"
+          }
+        ],
+        "selection": "recipe-order",
+        "levelMatching": {
+          "samplesPerTriangle": 64,
+          "minimumPairs": 64,
+          "maximumLogMad": 0.15,
+          "maximumGain": 1.25,
+          "maximumAngleDegrees": 70
+        }
+      }
+    ],
     "scientific": [
       {
         "id": "elevation",

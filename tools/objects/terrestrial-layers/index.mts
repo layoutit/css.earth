@@ -32,7 +32,7 @@ import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-pr
 import { prepareSolidRasters, prepareSolidMaterial, scientificPreviewGrid, lensTextureGrid } from './solid-raster.mts';
 import { prepareSolidScene, prepareSolidPresentation } from './solid-scene.mts';
 import { prepareRadialMaterials } from './radial-terrain.mts';
-import { loadRadialModels, combineRadialModels } from './radial-models.mts';
+import { loadRadialModels, combineRadialModels, radialTerrainForLens } from './radial-models.mts';
 import { validateRadialTableProfile } from './pds-radial-table.mts';
 import { validateFitsObservationPolicy } from './observed-fits.mts';
 import { validateGeoSurfaceRecipe } from './observed-geo-surface.mts';
@@ -71,7 +71,7 @@ export function parseTerrestrialProfile(input:unknown) {
     throw new TypeError('Invalid terrestrial surface preparation profile.');
   }
   validateTerrestrialRings(value.rings, value.geometry.radiusKm);
-  for (const recipe of value.raster.surfaceObservations ?? []) validateGeoSurfaceRecipe(recipe, value.geometry.radialTerrain);
+  for (const recipe of value.raster.surfaceObservations ?? []) validateGeoSurfaceRecipe(recipe, radialTerrainForLens(value, recipe.id));
   if (value.raster.surfaceQuality !== undefined &&
       (!Number.isInteger(value.raster.surfaceQuality) || value.raster.surfaceQuality < 1 || value.raster.surfaceQuality > 100)) {
     throw new TypeError('Surface WebP quality must be an integer from 1 to 100.');
@@ -86,11 +86,14 @@ export function parseTerrestrialProfile(input:unknown) {
         !value.geometry.radialTerrain?.path) throw new TypeError('Shape views require a pinned mesh and a source consumer.');
   }
   for (const lens of value.raster.scientific ?? []) {
+    const terrain = radialTerrainForLens(value, lens.id);
+    const terrainRecord = terrain === undefined ? undefined : requireRecord(terrain);
+    const terrainSimplification = terrainRecord?.simplification === undefined ? undefined : requireRecord(terrainRecord.simplification);
     validateScienceQualityMasks(lens);
     scientificPreviewGrid(lens, value.raster);
     if (![undefined, 'nearest'].includes(lens.displaySampling)) throw new TypeError('Scientific display sampling must preserve cells with nearest or use the existing default.');
     if (lens.format === 'geologic-shapefile') {validateGeologyProfile(lens); continue;}
-    if (lens.format === 'vtk-cell-categories') {validateVtkCategories(lens, value.geometry.radialTerrain); continue;}
+    if (lens.format === 'vtk-cell-categories') {validateVtkCategories(lens, terrain); continue;}
     validateCategoricalGrid(lens);
     const facetTable = lens.format === 'facet-scalars';
     const meshGrid = ['image-plane-dem', 'stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format);
@@ -130,16 +133,16 @@ export function parseTerrestrialProfile(input:unknown) {
       validateFacetFieldRecipe(lens.facetField);
       if (!meshGrid || !lens.surfaceSampling) throw new TypeError('Facet fields require source-surface sampling.');
     }
-    if (facetTable) validateFacetScalarProfile(lens, value.geometry.radialTerrain);
-    else if (lens.format === 'pds3-scalar-map') validateScalarMapProfile(lens, value.geometry.radialTerrain);
-    else if (lens.format === 'obj-uv-fits') validateObjUvFits(lens, value.geometry.radialTerrain);
+    if (facetTable) validateFacetScalarProfile(lens, terrain);
+    else if (lens.format === 'pds3-scalar-map') validateScalarMapProfile(lens, terrain);
+    else if (lens.format === 'obj-uv-fits') validateObjUvFits(lens, terrain);
     else if (lens.surfaceSampling !== undefined && (!meshGrid || lens.surfaceSampling?.method !== 'closest-source-point' ||
         !Number.isFinite(lens.surfaceSampling.maximumDistanceMeters) || !(lens.surfaceSampling.maximumDistanceMeters > 0) ||
-        lens.path !== value.geometry.radialTerrain?.path ||
-        lens.format !== value.geometry.radialTerrain?.format ||
-        JSON.stringify(lens.grid) !== JSON.stringify(value.geometry.radialTerrain?.grid) ||
-        value.geometry.radialTerrain?.simplification?.method !== 'source-meshoptimizer' ||
-        lens.surfaceSampling.maximumDistanceMeters > value.geometry.radialTerrain.simplification.maximumErrorMeters)) {
+        lens.path !== terrainRecord?.path ||
+        lens.format !== terrainRecord?.format ||
+        JSON.stringify(lens.grid) !== JSON.stringify(terrainRecord?.grid) ||
+        terrainSimplification?.method !== 'source-meshoptimizer' ||
+        lens.surfaceSampling.maximumDistanceMeters > requireFiniteNumber(terrainSimplification.maximumErrorMeters))) {
       throw new TypeError('Source surface sampling must match the retained mesh and its simplification-distance bound.');
     }
   }
@@ -303,7 +306,7 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
   const context = { sourceDirectory, publicDirectory, outputDirectory, config, source };
   const models = await loadRadialModels(context);
   const radial = models[0]?.radial ?? null;
-  const surfaces = await prepareSolidRasters({ ...context, radial });
+  const surfaces = await prepareSolidRasters({ ...context, radial, radialModels: models });
   const raster = await prepareSolidMaterial({ ...context, surfaces });
   if (radial) {
     for (const model of models) {
@@ -319,8 +322,7 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
     await writeFile(resolve(outputDirectory, 'material.json'), JSON.stringify(raster) + '\n');
   }
   const assets = { surfaces: Object.fromEntries(raster.surfaces.map(surface => [surface.id, {
-    url: surface.surface.url, url2x: surface.surface.url,
-    polesUrl: surface.polesUrl, polesUrl2x: surface.polesUrl,
+    url: surface.surface.url, polesUrl: surface.polesUrl,
   }])) };
   await writeFile(resolve(outputDirectory, 'assets.json'), `${JSON.stringify(assets)}\n`);
   const content = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });

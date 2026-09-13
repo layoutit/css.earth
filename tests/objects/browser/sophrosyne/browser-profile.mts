@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/sophrosyne/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'sophrosyne',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/sophrosyne/sophrosyne-directional-sun.webp",
-      "two": "/scenes/sophrosyne/sophrosyne-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/sophrosyne/sophrosyne-shape-surface@2x.webp"
+    "/scenes/sophrosyne/sophrosyne-shape-surface@2x.webp",
+    "/scenes/sophrosyne/sophrosyne-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

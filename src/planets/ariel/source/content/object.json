@@ -84,8 +84,8 @@
         "title": "Monochrome mosaic",
         "detail": "Corrected mosaic",
         "thumbnail": "ariel-lens-normal.webp",
-        "surface": "ariel-normal.webp",
-        "poles": "ariel-poles-normal.webp",
+        "surface": "ariel-normal@2x.webp",
+        "poles": "ariel-poles-normal@2x.webp",
         "source": {
           "id": "schenk-2020-ariel-normal",
           "path": "../manifest.json",
@@ -100,8 +100,8 @@
         "title": "Stereo, shading and limb terrain model",
         "detail": "Shaded relief",
         "thumbnail": "ariel-lens-elevation.webp",
-        "surface": "ariel-elevation.webp",
-        "poles": "ariel-poles-elevation.webp",
+        "surface": "ariel-elevation@2x.webp",
+        "poles": "ariel-poles-elevation@2x.webp",
         "source": {
           "id": "schenk-2020-ariel-elevation",
           "path": "../manifest.json",

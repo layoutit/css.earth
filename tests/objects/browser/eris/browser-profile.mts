@@ -5,11 +5,11 @@ const objectControls = await readPreparedFixture("eris", "controls");
 export const browserProfile = createObjectBrowserProfile({
   id: "eris", controls: objectControls,
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({ one: "/scenes/eris/eris-illustration.webp", two: "/scenes/eris/eris-illustration@2x.webp" }),
-      Object.freeze({ one: "/scenes/eris/eris-poles-illustration.webp", two: "/scenes/eris/eris-poles-illustration@2x.webp" }),
-      Object.freeze({ one: "/scenes/eris/eris-starfield-front.webp", two: "/scenes/eris/eris-starfield-front@2x.webp" }),
-      Object.freeze({ one: "/scenes/eris/eris-directional-sun.webp", two: "/scenes/eris/eris-directional-sun@2x.webp" }),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/eris/eris-illustration@2x.webp",
+      "/scenes/eris/eris-poles-illustration@2x.webp",
+      "/scenes/eris/eris-starfield-front@2x.webp",
+      "/scenes/eris/eris-directional-sun@2x.webp",
     ]),
     retained: Object.freeze({
       lensIds: Object.freeze(["illustration"]),

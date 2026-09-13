@@ -14,6 +14,7 @@ import PREPARED_VENUS_SKY_SUN from "../../src/planets/venus/prepared/sun.json" w
 import {
   DIRECTIONAL_SUN_DISTANCE_STANDARD,
   DIRECTIONAL_SUN_PRESENTATION_STANDARD,
+  DIRECTIONAL_SUN_SPRITE_PIXELS,
   validateDirectionalSunPlan,
   validateDirectionalSunPresentationStandard,
 } from "./directional-sun-contract.mts";
@@ -51,9 +52,8 @@ test("all eight planet packages publish the same independent Sun contract", () =
     assert.equal(plan.runtimeRasterization, false, planetId);
     assert.equal(requireRecord(plan.asset).googlePixelsRedistributed, false, planetId);
     assert.match(plan.asset.url,
-      new RegExp(`^/scenes/${planetId}/${planetId}-directional-sun\\.webp$`, "u"));
-    assert.match(plan.asset.url2x,
       new RegExp(`^/scenes/${planetId}/${planetId}-directional-sun@2x\\.webp$`, "u"));
+    assert.equal(plan.asset.width, DIRECTIONAL_SUN_SPRITE_PIXELS * 2, planetId);
   }
 });
 
@@ -71,7 +71,7 @@ test("prepares the physical solar disc from IAU radius and mean distance", () =>
     const physicalDiskShare = focalX * Math.tan(angularRadius);
     const coreDiameterShare =
       plan.appearance.analyticRadialFit.coreRadiusPixels * 2 /
-        plan.asset.density1.width;
+        DIRECTIONAL_SUN_SPRITE_PIXELS;
     const expectedSpriteShare = physicalDiskShare / coreDiameterShare;
     assert.equal(plan.distanceScaling.meanHeliocentricDistanceAu,
       meanDistance, planetId);

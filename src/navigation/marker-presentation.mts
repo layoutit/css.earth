@@ -3,7 +3,7 @@ export interface MarkerPresentation {
   ringColorShare?: number; ringOutlineOpacity?: number; ringOutlineOffset?: number;
   scale?: Partial<Omit<MarkerPresentation, "scale">>;
 }
-export interface PreparedNavigationMarker { url: string; url2x: string; url2xPixels?: number; presentation: MarkerPresentation; index: number; count: number; context?: { url: string; pixels?: number }; }
+export interface PreparedNavigationMarker { url: string; pixels: number; presentation: MarkerPresentation; index: number; count: number; context?: { url: string; pixels?: number }; }
 // Shared shell presentation; values come only from each object's marker recipe.
 const fields = new Set(["size", "ringAngle", "ringExtra", "ringHeight", "ringOpacity", "ringColorShare", "ringOutlineOpacity", "ringOutlineOffset"]);
 export function validateMarkerPresentation(input: unknown, partial?: false): MarkerPresentation;
@@ -39,7 +39,7 @@ export function markerStyle(marker: PreparedNavigationMarker, { color, scale = 1
   return {
     ringed,
     style: `color:${color}`,
-    innerStyle: `width:${size}px;height:${size}px;background-image:url("${marker.url2x}");background-position:${position} center;background-size:${marker.count * 100}% 100%`,
+    innerStyle: `width:${size}px;height:${size}px;background-image:url("${marker.url}");background-position:${position} center;background-size:${marker.count * 100}% 100%`,
     ringStyle: ringed ? [
       `width:${size + (p.ringExtra ?? Number.NaN) * scale}px`,
       `height:${(p.ringHeight ?? Number.NaN) * scale}px`,
@@ -54,15 +54,14 @@ export function markerStyle(marker: PreparedNavigationMarker, { color, scale = 1
 
 // Resolved context uses its prepared native-density image. Layout size is still
 // the same physical proxy basis used by the world camera; DPR never selects it.
-// Most markers are drawn a few pixels wide: they show the prepared @2x tile,
-// two texels per CSS pixel, and switch to the large context image only when
-// drawn wider than that tile can resolve. Neither image is resized at runtime.
+// Most markers are drawn a few pixels wide: they show the prepared tile, two
+// texels per CSS pixel, and switch to the large context image only when drawn
+// wider than that tile can resolve. Neither image is resized at runtime.
 export function contextMarkerSprite(marker: PreparedNavigationMarker) {
-  const tile = { url: marker.url2x, index: marker.index, count: marker.count, size: marker.presentation.size };
+  const tile = { url: marker.url, index: marker.index, count: marker.count, size: marker.presentation.size };
   if (!marker.context) return tile;
   const detail = { url: marker.context.url, index: 0, count: 1 };
-  if (!(marker.url2xPixels && marker.url2xPixels > 0)) return { ...detail, size: marker.presentation.size };
-  return { ...tile, detail: { ...detail, fromDiameterPixels: marker.url2xPixels / 2 } };
+  return { ...tile, detail: { ...detail, fromDiameterPixels: marker.pixels / 2 } };
 }
 
 // Existing scene annotation weights, supplied once from the object registry.

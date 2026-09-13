@@ -15,6 +15,14 @@ Mars shows Viking visible imagery, MOLA relief and THEMIS infrared observations 
 
 ## Evidence
 
+Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
+
+| View | Both prepared levels, before → current |
+| --- | --- |
+| normal | 608.1 → 681.8 kB |
+
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mars/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+
 The lane change was verified with the package, source-closure and browser conformance checks listed in the pull request that made it. No dated oracle report is cited for the new lane; the source and acquisition records identify every input.
 
 ## Known problems
@@ -29,6 +37,7 @@ Feature notes: 644 of the labelled names carry a caption note, the lead summary 
 - The MOLA and THEMIS lens mosaics were re-stitched from the OpenSpace tile server on 2026-09-11 with the pinned tile recipe because the server no longer reproduced the bytes pinned earlier; the source manifest pins the refreshed mosaics.
 - The atmosphere is a display approximation from OpenSpace scattering parameters; it is not an epoch-specific observation. The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
 - The camera and background sky do not represent an observer at a stated epoch.
+- The first column of the Viking MDIM 2.1 color source map is nearly black (mean brightness 4 against about 100). A thin dark line can show along 180° E at close zoom.
 - Phobos and Deimos are standalone bodies with their own packages; this package keeps only the pinned OpenSpace kernel record.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
@@ -43,8 +52,10 @@ the USGS Viking MDIM product and the JPL physical parameters pinned in
 `source/editorial/factsheet-review.json`: 3,396.19 km equatorial and
 3,376.20 km polar. The prepared mesh uses 230 units at the equator and
 228.646218 units at the poles (the same ratio), 16 latitude bands and 32
-longitude segments, the shared 50-pixel tile and the Mercury seam overlap of
-0.005. The retained mesh is authored 145° around its spin axis; the 25.19°
+longitude segments, the shared 50-pixel tile and the shared
+[seam treatment](../../../docs/surface-preparation.md#reduce-geometry-and-bake-the-atlas):
+a half-texel raster overscan and a stepped outset. The retained mesh is
+authored 145° around its spin axis; the 25.19°
 axial tilt and the 1.02595676-day sidereal rotation are recorded with the
 body for the presentation, while the world frame, pole and prime meridian at
 the shared epoch come from the IAU/WGCCRE rotation model in the astronomy

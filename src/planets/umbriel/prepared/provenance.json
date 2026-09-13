@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "92427747344a5a4ec1af631ed0d45f02fde2103d9a0afa920dd4413cc40efc14"
+    "sha256": "04525d17f6eb4f20b754f05b82baa6d5a7a43e3c2642dc2fc2c8106a04443db3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "f4d04962a504d275f2ba499b2a1c0443ed94338b39e209faab99860dc7224d17"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "3ba6f4dc54dabd229baf8edb23ca7dddeb1826f8885a3eea112bbd48daa56959",
+      "sha256": "5129aedfe357f03b64d401208926271f6a39e710d0a416d334fca0e82f308a80",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/umbriel/",
@@ -25,14 +25,10 @@
         "height": 1024,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
-        "polesOutput": "umbriel-poles-{id}{suffix}.webp",
+        "polesOutput": "umbriel-poles-{id}@2x.webp",
         "surfaceMetadata": {
           "schema": "cssumbriel-prepared-assets@1"
         },
@@ -43,7 +39,7 @@
         "surfaces": [
           {
             "id": "normal",
-            "output": "umbriel-{id}{suffix}.webp",
+            "output": "umbriel-{id}@2x.webp",
             "thumbnail": "umbriel-lens-{id}.webp",
             "source": "observations/uumap-cyl-180180.cub.gz",
             "falseColor": false,
@@ -75,6 +71,10 @@
                   0,
                   1950
                 ]
+              },
+              "nativePhotographicSampling": {
+                "samplesPerAxis": 2,
+                "quality": 95
               }
             }
           }
@@ -86,8 +86,8 @@
           "defaultFrame": 230,
           "billboardFrameSize": 24,
           "billboardColumns": 16,
-          "rowOutput": "umbriel-lighting-{density}x-row-{row}.webp",
-          "billboardOutput": "umbriel-lighting-{density}x-billboard.webp",
+          "rowOutput": "umbriel-lighting-2x-row-{row}.webp",
+          "billboardOutput": "umbriel-lighting-2x-billboard.webp",
           "minimumLightViewZ": -1,
           "maximumLightViewZ": 1,
           "frameCount": 256,
@@ -125,7 +125,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f5fd068fb26185a5962ccdd66d47f5d690068e13e67ee53563113e66ea3a2801",
+      "sha256": "b9dea6664d94368e74f978b5508b5cc27730ca681bee0d936ee6f449e97d8998",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -211,8 +211,8 @@
               "title": "Monochrome mosaic",
               "detail": "Corrected mosaic",
               "thumbnail": "umbriel-lens-normal.webp",
-              "surface": "umbriel-normal.webp",
-              "poles": "umbriel-poles-normal.webp",
+              "surface": "umbriel-normal@2x.webp",
+              "poles": "umbriel-poles-normal@2x.webp",
               "source": {
                 "id": "schenk-2020-umbriel-normal",
                 "path": "../manifest.json",
@@ -435,8 +435,8 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet, view descriptions and legends."
       },
-      "sha256": "f5fd068fb26185a5962ccdd66d47f5d690068e13e67ee53563113e66ea3a2801",
-      "bytes": 7897,
+      "sha256": "b9dea6664d94368e74f978b5508b5cc27730ca681bee0d936ee6f449e97d8998",
+      "bytes": 7903,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -550,7 +550,7 @@
       "recipe": "raster",
       "selector": "/surfaces/0",
       "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
         "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo."
       ],
@@ -561,18 +561,13 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": false,
+        "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
         "schenk-2020-umbriel-normal"
       ],
       "outputs": [
-        {
-          "url": "/scenes/umbriel/umbriel-normal.webp",
-          "bytes": 86862,
-          "sha256": "d130421c60f9362c02a62663911f6d6a33f632429b53ac33fc3d9078966e0bda",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/umbriel/umbriel-normal@2x.webp",
           "bytes": 195144,
@@ -586,15 +581,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/umbriel/umbriel-poles-normal.webp",
-          "bytes": 21188,
-          "sha256": "7cbcf7b5b69d628d097ae0b4bf205d4c0d62572737659db8c0bfaed9b224c9d2",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/umbriel/umbriel-poles-normal@2x.webp",
-          "bytes": 53300,
-          "sha256": "ed802e4992f6d6955c9c6d9edb101793435b0e3b7c87e5a9f489f008e611da70",
+          "bytes": 60180,
+          "sha256": "547035ff47c7a4095eebc352f38d66b9e23c7b55c48f1365a9c9a75aa84b1c4a",
           "verification": "bytes-verified"
         }
       ],
@@ -617,204 +606,6 @@
       },
       "inputs": [],
       "outputs": [
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-billboard.webp",
-          "bytes": 40826,
-          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-00.webp",
-          "bytes": 14922,
-          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-01.webp",
-          "bytes": 27532,
-          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-02.webp",
-          "bytes": 34558,
-          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-03.webp",
-          "bytes": 40648,
-          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-04.webp",
-          "bytes": 45092,
-          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-05.webp",
-          "bytes": 49044,
-          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-06.webp",
-          "bytes": 52968,
-          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-07.webp",
-          "bytes": 56198,
-          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-08.webp",
-          "bytes": 59392,
-          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-09.webp",
-          "bytes": 61906,
-          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-10.webp",
-          "bytes": 62672,
-          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-11.webp",
-          "bytes": 61062,
-          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-12.webp",
-          "bytes": 59454,
-          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-13.webp",
-          "bytes": 52762,
-          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-14.webp",
-          "bytes": 42196,
-          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-15.webp",
-          "bytes": 23242,
-          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-16.webp",
-          "bytes": 28714,
-          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-17.webp",
-          "bytes": 52870,
-          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-18.webp",
-          "bytes": 65644,
-          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-19.webp",
-          "bytes": 76630,
-          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-20.webp",
-          "bytes": 85368,
-          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-21.webp",
-          "bytes": 93744,
-          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-22.webp",
-          "bytes": 99970,
-          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-23.webp",
-          "bytes": 107422,
-          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-24.webp",
-          "bytes": 112788,
-          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-25.webp",
-          "bytes": 122328,
-          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-26.webp",
-          "bytes": 130124,
-          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-27.webp",
-          "bytes": 137048,
-          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-28.webp",
-          "bytes": 148122,
-          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-29.webp",
-          "bytes": 157328,
-          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-30.webp",
-          "bytes": 167218,
-          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/umbriel/umbriel-lighting-1x-row-31.webp",
-          "bytes": 182238,
-          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/umbriel/umbriel-lighting-2x-billboard.webp",
           "bytes": 115740,
@@ -1069,8 +860,8 @@
       "outputs": [
         {
           "url": "/scenes/umbriel/umbriel-features.json",
-          "bytes": 10383,
-          "sha256": "1191400f6ed40374570614396c9993800cdd97c615b920a7705d1810eacea86e",
+          "bytes": 10388,
+          "sha256": "a06a2315e00d7edc663bc1af56e5e4e063a3f26e271879cdf84184018d8c800c",
           "verification": "bytes-verified"
         }
       ],
