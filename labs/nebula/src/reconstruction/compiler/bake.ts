@@ -12,6 +12,7 @@ import { validatePreparedCssVolume } from '../../../../../src/renderers/css/volu
 import { recolorCloudSlices } from '../cloud-material.js';
 import { bakeMasterVolumeSlices } from '../master-slices.js';
 import { compilerSlabMaterial } from './material.js';
+import { prepareCompilerStarSprites } from './star-sprites.js';
 import { COMPILER_LONGEST_AXIS_SLICES, readCompilerBakeResult, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial } from './bake-types.js';
 import type { EmissionBounds, EmissionVector3, SkyBounds } from './field-types.js';
 
@@ -171,11 +172,12 @@ export async function bakeCompiler(options: BakeCompilerOptions): Promise<Compil
     pins.set(bank.id, await pin(root, relative(root, containedPath(bank.directory, 'volume.json')), volume));
   }
   options.progress?.({ phase: 'compile', completed: banks.length, total: banks.length, message: 'Prepared final cloud and materials' });
+  const starSprites = await prepareCompilerStarSprites(root, outputDirectory, stars);
   return readCompilerBakeResult({ schema: 'cssearth-compiler-bake@1', id: options.id, fieldIdentity: options.fieldIdentity, frame,
     boundsArcsec: structuredClone(boundsArcsec), skyBoundsArcsec: structuredClone(skyBoundsArcsec),
     spanArcsec: Math.max(skyBoundsArcsec.max[0] - skyBoundsArcsec.min[0], skyBoundsArcsec.max[1] - skyBoundsArcsec.min[1]),
     sourceImage: { width: 512, height: 512 }, coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin,
       earthView: 'observer-at-negative-z-looking-away' }, neutral: pins.get('neutral'), alphaSha256: neutralAlpha,
     lenses: painted.map(item => ({ id: item.input.id, label: item.input.label, volume: pins.get(item.input.id), coverage: item.coverage })),
-    stars, sampling: { sliceCounts, imageWidth: IMAGE_WIDTH, samplesPerSlab: DEPTH_SAMPLES } });
+    stars, ...starSprites, sampling: { sliceCounts, imageWidth: IMAGE_WIDTH, samplesPerSlab: DEPTH_SAMPLES } });
 }

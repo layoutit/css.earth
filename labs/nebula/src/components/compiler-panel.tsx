@@ -168,7 +168,7 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
       <button type="button" aria-pressed={presentation.mode === 'textured'} onClick={() => updatePresentation({ ...presentation, mode: 'textured' })}>Textured</button>
     </div>
     <div className="compiler-toggles">
-      <label className="observation-check"><input type="checkbox" checked={presentation.stars} onChange={event => updatePresentation({ ...presentation, stars: event.target.checked })} />Stars</label>
+      <label className="observation-check" title="Prepared stellar overlay. Catalogue sources use optical brightness and colors across all image lenses; depths may be inferred."><input type="checkbox" checked={presentation.stars} onChange={event => updatePresentation({ ...presentation, stars: event.target.checked })} />Stars</label>
       <label className="observation-check"><input type="checkbox" checked={presentation.original} onChange={event => updatePresentation({ ...presentation, original: event.target.checked })} />Original</label>
     </div>
     <div className="compiler-camera-actions">

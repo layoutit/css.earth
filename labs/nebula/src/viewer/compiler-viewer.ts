@@ -42,13 +42,14 @@ export async function createCompilerViewer({ host, result: input, resolvePath = 
   root.dataset.visible = 'false'; root.dataset.material = 'neutral'; root.dataset.lens = '';
   Object.assign(root.style, { position: 'absolute', inset: '0', pointerEvents: 'none', overflow: 'visible' });
   let disposed = false, committed = false;
-  let neutral: LoadedBank | undefined;
+  let neutral: LoadedBank | undefined, starAtlasUrl: string | undefined;
   try {
     neutral = await loadBank(result.neutral, resolvePath, loadingSignal());
     assertCompilerBankIdentity(neutral.payload, result);
+    if (result.starSprites) starAtlasUrl = await loadStarAtlas(result, resolvePath, loadingSignal());
     signal?.throwIfAborted();
     if (pendingMounts.get(host) !== token) throw new DOMException('A newer compiler scene replaced this load.', 'AbortError');
-  } catch (error) { if (neutral) release(neutral); throw error; }
+  } catch (error) { if (neutral) release(neutral); if (starAtlasUrl) URL.revokeObjectURL(starAtlasUrl); throw error; }
   const end = host.ownerDocument.createElement('span'); end.hidden = true; root.append(end);
   const mounted = mountPreparedCssVolume({ host: root, before: end, payload: neutral.payload,
     resolveResource: path => requiredTexture(neutral, path) });
@@ -61,7 +62,7 @@ export async function createCompilerViewer({ host, result: input, resolvePath = 
     return stack.leaves.map((leaf, leafIndex) => ({ nodes: nodes.slice(leafIndex * 3, leafIndex * 3 + 3),
       neutral: requiredTexture(neutral, leaf.texturePath) }));
   });
-  const stars = mountStars(root, result);
+  const stars = mountStars(root, result, starAtlasUrl);
   let framing: ShapeCloudFraming = { zoom: 1, panX: 0, panY: 0 }, yaw = 0, pitch = 0;
   let materialRequest = 0, activeLens: { id: string; bank: LoadedBank } | null = null;
   const presentationSize = fieldOfViewArcsec ?? result.spanArcsec;
@@ -124,12 +125,12 @@ export async function createCompilerViewer({ host, result: input, resolvePath = 
     },
     destroy() {
       if (disposed) return; disposed = true; materialRequest++; lifetime.abort(); observer.disconnect(); stars.destroy(); mounted.destroy(); root.remove();
-      release(neutral); if (activeLens) release(activeLens.bank);
+      release(neutral); if (activeLens) release(activeLens.bank); if (starAtlasUrl) URL.revokeObjectURL(starAtlasUrl);
       if (pendingMounts.get(host) === token) pendingMounts.delete(host);
     } };
 }
 
-function mountStars(host: HTMLElement, result: CompilerBakeResult) {
+function mountStars(host: HTMLElement, result: CompilerBakeResult, atlasUrl?: string) {
   const root = host.ownerDocument.createElement('div'); root.dataset.compilerStars = String(result.stars.length);
   root.style.cssText = 'position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2'; host.append(root);
   const nodes = result.stars.map(star => {
@@ -138,6 +139,21 @@ function mountStars(host: HTMLElement, result: CompilerBakeResult) {
     node.style.cssText = `position:absolute;left:50%;top:50%;display:block;border-radius:50%;background:${color};opacity:${star.alpha};visibility:hidden;text-decoration:none`;
     root.append(node); return node;
   });
+  function applyAppearance(index: number, lens: string | null) {
+    const appearance = compilerStarAppearance(result.stars[index]!, lens), node = nodes[index]!, sprites = result.starSprites;
+    if (sprites && atlasUrl) {
+      const entry = sprites.entries[appearance.rgb.join(',')]!;
+      node.style.borderRadius = '0'; node.style.backgroundColor = 'transparent';
+      node.style.backgroundImage = `url("${atlasUrl}")`; node.style.backgroundRepeat = 'no-repeat';
+      node.style.backgroundSize = `${sprites.width / sprites.tileSize * 100}% ${sprites.height / sprites.tileSize * 100}%`;
+      node.style.backgroundPosition = `${sprites.width === sprites.tileSize ? 0 : entry.x / (sprites.width - sprites.tileSize) * 100}% ${sprites.height === sprites.tileSize ? 0 : entry.y / (sprites.height - sprites.tileSize) * 100}%`;
+      node.style.opacity = String(appearance.alpha * sprites.alphaScale);
+    } else {
+      node.style.backgroundColor = `rgb(${appearance.rgb[0]} ${appearance.rgb[1]} ${appearance.rgb[2]})`;
+      node.style.opacity = String(appearance.alpha);
+    }
+  }
+  result.stars.forEach((_star, index) => applyAppearance(index, null));
   let visible = true, destroyed = false, lensId: string | null = null;
   root.dataset.photometryLens = 'reference';
   return { publish(publication: ReturnType<typeof shapeCloudOrthographicCamera>['publication']) {
@@ -151,7 +167,7 @@ function mountStars(host: HTMLElement, result: CompilerBakeResult) {
     result.stars.forEach((star, index) => {
       const point = projectPreparedPoint(star.positionUnits, local.positionUnits, rotation, focal, ox, oy), node = nodes[index]!;
       const appearance = compilerStarAppearance(star, lensId);
-      const diameter = appearance.diameterUnits === undefined ? appearance.widthPx! : appearance.diameterUnits * focal / point.depth;
+      const diameter = (appearance.diameterUnits === undefined ? appearance.widthPx! : appearance.diameterUnits * focal / point.depth) * (result.starSprites?.diameterScale ?? 1);
       const shown = visible && appearance.alpha > 0 && point.depth > 0 && Math.abs(point.x) < halfWidth + diameter && Math.abs(point.y) < halfHeight + diameter;
       node.style.visibility = shown ? '' : 'hidden'; if (shown) {
         count++; node.style.width = node.style.height = `${diameter}px`;
@@ -161,11 +177,7 @@ function mountStars(host: HTMLElement, result: CompilerBakeResult) {
     root.dataset.visibleStars = String(count);
   }, setLens(value: string | null) {
     lensId = value; root.dataset.photometryLens = value ?? 'reference';
-    result.stars.forEach((star, index) => {
-      const appearance = compilerStarAppearance(star, lensId), node = nodes[index]!;
-      node.style.backgroundColor = `rgb(${appearance.rgb[0]} ${appearance.rgb[1]} ${appearance.rgb[2]})`;
-      node.style.opacity = String(appearance.alpha);
-    });
+    result.stars.forEach((_star, index) => applyAppearance(index, lensId));
   }, setVisible(value: boolean) { visible = value; root.style.display = value ? 'block' : 'none'; root.dataset.visibleStars = value ? root.dataset.visibleStars ?? '0' : '0'; },
   destroy() { destroyed = true; root.remove(); } };
 }
@@ -196,6 +208,15 @@ async function loadBank(reference: CompilerPin, resolvePath: (path: string) => s
   }));
   const failed = settled.find(item => item.status === 'rejected'); if (failed?.status === 'rejected') { release({ urls }); throw failed.reason; }
   return { payload, textures, urls };
+}
+async function loadStarAtlas(result: CompilerBakeResult, resolvePath: (path: string) => string, signal?: AbortSignal) {
+  const sprites = result.starSprites!;
+  const bytes = await readPinned(sprites.atlas, resolvePath, signal), blob = new Blob([bytes], { type: 'image/png' });
+  const image = await createImageBitmap(blob);
+  try {
+    if (image.width !== sprites.width || image.height !== sprites.height) throw new Error('Compiler stellar atlas dimensions changed.');
+  } finally { image.close(); }
+  signal?.throwIfAborted(); return URL.createObjectURL(blob);
 }
 async function readPinned(reference: CompilerPin, resolvePath: (path: string) => string, signal?: AbortSignal): Promise<ArrayBuffer> {
   if (!reference || !relativePath(reference.path) || !/^[a-f0-9]{64}$/.test(reference.sha256)) throw new TypeError('Compiler resource pin is invalid.');

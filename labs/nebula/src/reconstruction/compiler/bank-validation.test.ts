@@ -28,6 +28,15 @@ test('standard RGB lenses still require exact neutral alpha when no component pi
   assert.throws(() => assertCompilerBankIdentity(volume(spectralAlpha), result), /alpha support/);
 });
 
+test('a stellar-only result retains the explicitly pinned cloud identity and rejects unrelated banks', () => {
+  const retained = { ...result, id: 'new-stellar-result', volumeId: result.id };
+  assert.doesNotThrow(() => assertCompilerBankIdentity(volume(), retained));
+  assert.throws(() => assertCompilerBankIdentity(volume(), { ...retained, volumeId: 'unrelated' }), /different result/);
+  const { volumeId: _id, ...unqualified } = retained;
+  assert.throws(() => assertCompilerBankIdentity(volume(), unqualified), /different result/);
+  assert.throws(() => assertCompilerBankIdentity(volume(spectralAlpha), retained), /alpha support/);
+});
+
 test('sampled spectral alpha must equal its explicit pin, not merely be different from neutral', () => {
   assert.doesNotThrow(() => assertCompilerLensGeometry(volume(), volume(spectralAlpha), result, { alphaSha256: spectralAlpha }));
   assert.throws(() => assertCompilerLensGeometry(volume(), volume(), result, { alphaSha256: spectralAlpha }), /alpha support/);

@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-nebula-source-dossier@1",
   "objectId": "m45",
-  "summary": "4 selected Alignment images; Six original-image candidates for the Pleiades reflection nebula: optical filaments, two Spitzer infrared composites, a wider WISE mosaic, 2MASS stellar context and coarse IRAS/IRIS far-infrared context. These display rasters and literature notes establish intake evidence, not recovered 3D dust density.",
+  "summary": "Seven selected Alignment candidates: four separated original sources, two widefield historical comparisons, and the newly star-registered Niittee optical field. Additional archived 2MASS/IRIS records remain preserved. No new source is a recovered dust-density model.",
   "intakeDate": "2026-09-13",
   "images": [
     {
@@ -177,6 +177,28 @@
         "Initial geometry uses 6 (Usama) or 9 (Andreo) bright stellar correspondences in the narrow NOIRLab overlap. Full-field distortion is not validated."
       ],
       "alignmentSelection": "selected"
+    },
+    {
+      "id": "niittee-widefield",
+      "provider": "Taavi Niittee / Tõrva Astronomy Club; original self-published image via Wikimedia Commons",
+      "telescope": "Sharpstar 61EDPH III with focal reducer; ZWO ASI071MC Pro; Optolong L-Pro 2-inch filter",
+      "wavelengths": "Optical · broadband color camera with Optolong L-Pro light-pollution filter",
+      "coverage": "Measured relative footprint approximately 264.79′ × 172.08′ (4.41° × 2.87°). Covers a much larger reflection-dust field than NOIRLab but not the full 4.2° square or all physical cirrus.",
+      "quality": "8000 × 5199 full published processed JPEG, RGB8, 4:4:4; nominal 1.986″ per published pixel. Camera sensor is 4944 × 3284; drizzle/interpolation is not specified, so delivered sampling is not measured angular resolution.",
+      "epoch": "Observed 4 January 2024 in Tõrva, Estonia; 60 × 240 s + 47 × 120 s exposures, about 5.57 h. Uploaded 5 November 2025.",
+      "masterUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/Plejades.jpg",
+      "metadataUrls": [
+        "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
+        "https://i.cmoscool.com/zwo-website/manuals/20240821/asicamera/ASI071MC_Pro_Manual_CN_V1.0.pdf",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "notes": [
+        "Copyright holder publishes under CC BY 4.0; attribution and identification of later changes required.",
+        "No native FITS, calibrated flux, PSF, or publisher WCS supplied; display stretch and filter alter colors.",
+        "Relative same-star alignment uses native-raster high-pass detection; held-out errors apply to the common central NOIRLab footprint. Outer distortion and absolute catalogue astrometry are not independently validated.",
+        "Alignment-only candidate; processing recipe and completed cloud remain unchanged."
+      ],
+      "alignmentSelection": "selected"
     }
   ],
   "papers": [
@@ -303,8 +325,9 @@
       "spitzer-irac-mips",
       "wise-four-band",
       "iau-usama-widefield",
-      "andreo-widefield"
+      "andreo-widefield",
+      "niittee-widefield"
     ],
-    "reason": "Optical filaments and infrared dust structure with passing relative star registration. 2MASS is mainly stellar context; IRIS is coarse cirrus context without verified registration. Two wider optical originals are visible for comparison at provisional star-seeded placements; they are not processed inputs."
+    "reason": "Preserve the four completed processing sources and compare wider optical footprints. Niittee supplies registered optical outer dust; Usama and Andreo remain preliminary comparisons. New source import does not imply star removal or reconstruction."
   }
 }

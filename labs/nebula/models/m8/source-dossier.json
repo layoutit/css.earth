@@ -76,7 +76,7 @@
       "wavelengths": "[O III] 502 nm (blue), H-alpha 656 nm (green), [N II] 658 nm (red), y 547 nm (luminance).",
       "coverage": "Local detail · 3.189′ × 4.020′ around the central Hourglass/Herschel 36 region; complete publisher 4782 × 6028 raster.",
       "quality": "Full original outreach TIFF, 8-bit channels. Sampling ≈0.04001″/pixel; this is not a measured PSF or instrumental resolution.",
-      "epoch": "2018-02-12 to 2018-02-18, explicitly stated in image caption. Release: 2018-04-19.",
+      "epoch": "WFC3 observations 12–18 February 2018; released 19 April 2018. Dates explicitly stated by the ESA/Hubble image page.",
       "masterUrl": "https://esahubble.org/media/archives/images/original/heic1808a.tif",
       "notes": [
         "A small central footprint, not a full Lagoon map. Surrounding blank space must remain unsupported.",
@@ -328,5 +328,77 @@
     "compiler": "compiler.json",
     "evidence": "processing-evidence.json",
     "historicalNote": "Original intake and legacy hashes above retain their historical meaning; current processing and full-text qualification live in these separate records."
+  },
+  "centralOpticalFollowup": {
+    "date": "2026-09-13",
+    "status": "registration-blocked-no-new-source-promotion",
+    "sourceId": "hst-optical",
+    "sourcePage": "https://esahubble.org/images/heic1808a/",
+    "opticalBands": "[O III] 502 nm, y 547 nm, H-alpha 656 nm, [N II] 658 nm; all optical, with different filter assignments from the ESO widefield.",
+    "footprintArcminutes": [
+      3.188944816166088,
+      4.019857664543952
+    ],
+    "intendedUse": "Registered local Hourglass/Herschel 36 emission detail, combined by footprint and supported spatial structures with the ESO widefield. Never replace the whole cloud or copy the patch through its entire depth.",
+    "attempts": [
+      {
+        "path": "output/m8-center-research/hst-eso-native.json",
+        "sha256": "1ad0cf244258ada062094f284e0f0747c7ccdb85a02dd4aa395b64ae7ccda47a",
+        "reference": "Existing 4000 × 2679 ESO optical",
+        "sourceDiscoveryMaximum": 6028,
+        "referenceDiscoveryMaximum": 4000,
+        "maximumStars": 20000,
+        "matchedStars": 0,
+        "pass": false,
+        "error": "Error: Registration impasse: only 0 independently matched stars (need 45)."
+      },
+      {
+        "path": "output/m8-center-research/hst-eso-master.json",
+        "sha256": "b61443597b3eb8f1c0a3a99d6ba85ea6be6f2dc6096299a0082618449eff7b5b",
+        "reference": "Full-size 23569 × 15784 ESO JPEG; local native 2000² inspection crop",
+        "sourceDiscoveryMaximum": 512,
+        "referenceDiscoveryMaximum": 1024,
+        "maximumStars": 20000,
+        "matchedStars": 9,
+        "pass": false,
+        "error": "Error: Registration impasse: only 9 independently matched stars (need 45)."
+      }
+    ],
+    "officialFullOpticalMaster": {
+      "path": ".local/nebula-lab/intake/m8/eso0936a-full.jpg",
+      "sha256": "f9a2778cbeebee9bc6ae34a3ef18a4db3cd6a92c6b21455d7873e50f5d524918",
+      "bytes": 88856053,
+      "width": 23569,
+      "height": 15784,
+      "url": "https://cdn.eso.org/images/large/eso0936a.jpg",
+      "page": "https://www.eso.org/public/images/eso0936a/",
+      "interpretation": "Full published compressed JPEG at 23569 × 15784; not the lossless 697.9 MB TIFF. Same B/V/R/H-alpha optical product as existing context. Its bright central display is washed out even at full resolution, so higher pixel count alone does not recover the HST line-contrast view."
+    },
+    "visualInspection": {
+      "path": "output/m8-center-research/eso-central-native.png",
+      "sha256": "696c84fb2186c609ae230de9dfca6c104b4ed5ba8d3b166f7c907ee6eb54e942",
+      "cropNativePixels": {
+        "left": 11301,
+        "top": 10558,
+        "width": 2000,
+        "height": 2000
+      }
+    },
+    "conclusion": "Retain HST as an excluded, provisional candidate. Sparse common stars and incompatible PSFs/stretches defeat the current bounded matcher. Need qualified optical astrometric catalogue or an intermediate image before an accepted multiscale composite; do not weaken the 45-match/spatial-holdout gate.",
+    "unchanged": [
+      {
+        "path": "labs/nebula/models/m8/alignment-candidates.json",
+        "sha256": "6f6d4424e43755e725af2934194d01a91890a89a05841bbf0a790b33a5859e41"
+      },
+      {
+        "path": "labs/nebula/models/m8/processing-observations.json",
+        "sha256": "12963ecaa7f630cd9562e74eb9d85e8cd03f0385784ed92fc69033a59e556db5"
+      },
+      {
+        "path": "labs/nebula/models/m8/compiler.json",
+        "sha256": "3a233959d89665b2bf15c3f2ca16b740bedcb62c78a248f62350613bf242817f"
+      }
+    ],
+    "processing": "No star removal, volume baking or running-server mutation."
   }
 }
