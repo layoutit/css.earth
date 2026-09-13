@@ -16,8 +16,8 @@ const files=await runtimeAssets(process.cwd(),['comet-67p']),stage=await mkdtemp
 const installation=await installRuntimeAssets(files.map(asset=>({...asset,file:resolve(stage,asset.filename)})));
 assert.equal(installation.installed,files.length);assert.equal(installation.reused,0);
 const pins=new Map(files.map(a=>[a.filename,a])),hash=(b: Uint8Array)=>createHash('sha256').update(b).digest('hex');
-const payload=await readFile('src/planets/comet-67p/prepared/object.json');
-const descriptor=shape({prepared:shape({sha256:text})})(JSON.parse(await readFile('src/planets/comet-67p/object.json','utf8')));
+const payload=await readFile('src/objects/comet-67p/prepared/object.json');
+const descriptor=shape({prepared:shape({sha256:text})})(JSON.parse(await readFile('src/objects/comet-67p/object.json','utf8')));
 assert.equal(hash(payload),descriptor.prepared.sha256);
 // Reuse the same UI operations as the interactive CLI inspection.
 const browser=await chromium.launch({channel:'chrome',headless:true}),reports: (Awaited<ReturnType<typeof capture>>[number] & { fresh: boolean })[]=[],served: string[]=[];

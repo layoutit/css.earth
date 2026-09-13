@@ -6,11 +6,11 @@ import test from "node:test";
 const PREPARED_EARTH_SKY_SUN = validateDirectionalSunPlan(requireRecord(await loadObjectTestDefinition('earth')).sun);
 const PREPARED_JUPITER_SKY_SUN = validateDirectionalSunPlan(requireRecord(await loadObjectTestDefinition('jupiter')).sun);
 const PREPARED_MARS_SKY_SUN = validateDirectionalSunPlan(requireRecord(await loadObjectTestDefinition('mars')).sun);
-import PREPARED_MERCURY_SKY_SUN from "../../src/planets/mercury/prepared/sun.json" with {type: "json"};
+import PREPARED_MERCURY_SKY_SUN from "../../src/objects/mercury/prepared/sun.json" with {type: "json"};
 const PREPARED_NEPTUNE_SKY_SUN = validateDirectionalSunPlan(requireRecord(await loadObjectTestDefinition('neptune')).sun);
 const PREPARED_SATURN_SKY_SUN = validateDirectionalSunPlan(requireRecord(await loadObjectTestDefinition('saturn')).sun);
 const PREPARED_URANUS_SKY_SUN = validateDirectionalSunPlan(requireRecord(await loadObjectTestDefinition('uranus')).sun);
-import PREPARED_VENUS_SKY_SUN from "../../src/planets/venus/prepared/sun.json" with {type: "json"};
+import PREPARED_VENUS_SKY_SUN from "../../src/objects/venus/prepared/sun.json" with {type: "json"};
 import {
   DIRECTIONAL_SUN_DISTANCE_STANDARD,
   DIRECTIONAL_SUN_PRESENTATION_STANDARD,

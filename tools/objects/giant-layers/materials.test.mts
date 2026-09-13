@@ -4,7 +4,7 @@ import test from 'node:test';
 import {readFile}from'node:fs/promises';
 import {parseEllipsoidMaterialRecipe,rasterEllipsoidMaterial,writeMaterialAtlasTile}from'./materials.mts';
 test('ellipsoid material rejects unsupported physical, shading and residency input',async()=>{
- const config=JSON.parse(await readFile(new URL('../../../src/planets/uranus/source/preparation/materials.json',import.meta.url),'utf8'));
+ const config=JSON.parse(await readFile(new URL('../../../src/objects/uranus/source/preparation/materials.json',import.meta.url),'utf8'));
  for(const change of[
  (c: unknown)=>fixtureRecord(c,'raster','shape').polarRadius=NaN,
  (c: unknown)=>Object.assign(fixtureRecord(c,'raster','light','operations',0),{kind:'script'}),
@@ -16,7 +16,7 @@ test('ellipsoid material rejects unsupported physical, shading and residency inp
 ]){const copy=structuredClone(config);change(copy);assert.throws(()=>parseEllipsoidMaterialRecipe(copy));}
 });
 test('an unregistered ellipsoid retains transparent exterior and source-lit material',async()=>{
- const config=parseEllipsoidMaterialRecipe(JSON.parse(await readFile(new URL('../../../src/planets/neptune/source/preparation/materials.json',import.meta.url),'utf8')));
+ const config=parseEllipsoidMaterialRecipe(JSON.parse(await readFile(new URL('../../../src/objects/neptune/source/preparation/materials.json',import.meta.url),'utf8')));
  Object.assign(config.raster,{shape:{equatorialRadius:100,polarRadius:80,arithmetic:'reciprocal',rootSelection:'positive'}});
  const frame=rasterEllipsoidMaterial(config.raster,{size:32,state:{scenePitchDegrees:20,systemObliquityDegrees:10},palette:{atmosphere:[100,160,210]},textureUrl:'/hypothetical/material.webp'});
  assert.equal(frame.rgba[3],0);assert.ok(frame.rgba.some((value,index)=>index%4===3&&value>0));assert.match(required(frame.leaf).style,/hypothetical\/material.webp/);

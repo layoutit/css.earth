@@ -8,7 +8,7 @@ import {createIndexedShape} from '../terrestrial-layers/obj-shape.mts';
 import {deriveVegaCamera} from './encounter-camera.mts';
 import {prepareEncounters,decodeVegaImage,createVegaSampler,fitDisplayGain,selectVegaCandidate} from './prepare-encounters.mts';
 
-const source=resolve('src/planets/comet-1p/source');
+const source=resolve('src/objects/comet-1p/source');
 
 test('Vega cameras recover the published longitude anchor and independent header geometry',async()=>{
   const first=await deriveVegaCamera(source,'1986-03-09T07:19:58Z');

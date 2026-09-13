@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/aemilia/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/aemilia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'aemilia',controls,audit:{
   "preparedAssetPairs": [
     {

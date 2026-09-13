@@ -6,7 +6,7 @@ import { parseCitySource, parseWmtsRelease, parsePreparationRecipe, parsePlacesC
   parseOverlayConfig, parseOverlayPin, parseOverlayData, parseRuntimePages, parseGeographicScene,
   parseBlockReference, parseWorldCoverSource, numericSource } from './source-records.mts';
 
-const earth = new URL('../../../src/planets/earth/', import.meta.url);
+const earth = new URL('../../../src/objects/earth/', import.meta.url);
 async function json(path: string): Promise<unknown> { return JSON.parse(await readFile(new URL(path, earth), 'utf8')); }
 
 test('geographic source contracts decode the accepted recipes and prepared metadata without dropping provenance', async () => {

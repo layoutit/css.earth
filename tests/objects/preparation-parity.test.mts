@@ -11,7 +11,7 @@ const parseAssets=shape({assets:array(shape({filename:text,bytes:number,sha256:t
 for (const id of ['mercury', 'venus']) {
   test(`${id} retains every accepted image and chart byte`, async () => {
     const baseline = parseAssets(JSON.parse(await readFile(new URL(`./compatibility/${id}-assets.json`, import.meta.url), 'utf8')));
-    const manifest = parseAssets(JSON.parse(await readFile(resolve(projectRoot, 'src/planets', id, 'runtime-assets.json'), 'utf8')));
+    const manifest = parseAssets(JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, 'runtime-assets.json'), 'utf8')));
     const acceptedNames=new Set(baseline.assets.map(asset=>asset.filename));
     assert.deepEqual(manifest.assets.filter(asset=>acceptedNames.has(asset.filename)).toSorted((a, b) => a.filename.localeCompare(b.filename)),
       baseline.assets.toSorted((a, b) => a.filename.localeCompare(b.filename)));
@@ -23,7 +23,7 @@ for (const id of ['mercury', 'venus']) {
     }
   });
   test(`${id} is authored entirely as data and uses the shared prepared runtime`, async () => {
-    const directory = resolve(projectRoot, 'src/planets', id);
+    const directory = resolve(projectRoot, 'src/objects', id);
     const visit = async (path: string):Promise<void> => {
       for (const entry of await readdir(path, {withFileTypes: true})) {
         if (entry.name.startsWith('.')) continue;

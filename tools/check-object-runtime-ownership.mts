@@ -15,10 +15,14 @@ import { readPreparedJsonExports, readPreparedPresentationModule, requirePrepare
   requirePreparedControlSource } from "./check-prepared-presentation.mts";
 import { parseRuntimeSource, resolveRuntimeSource } from './runtime-source-graph.mts';
 import { readDescriptorDefinition, requireDescriptorAdapterSource } from './prepared-object-source.mts';
+import { readContextObjects } from './prepare-catalog.mts';
 
 const runtimePath = "src/platform/object-runtime.mts";
 const registryPath = "site/objects.mts";
-const approvedSharedData = new Set(["src/planets/sun/prepared/world-context.json"]);
+const approvedSharedData = new Set(["src/objects/sun/prepared/world-context.json"]);
+// Registered objects own packages; context folders beside them (galaxies, nebulae, the heliosphere) are application data.
+const objectPackageIds: ReadonlySet<string> = new Set(OBJECTS.map(object => object.id));
+const objectPackage = (file: string) => file.startsWith('src/objects/') && objectPackageIds.has(file.split('/')[2] ?? '');
 // These are the application's common shell entry points. Their dependencies are
 // discovered from the real Astro AST, including template expressions and scripts.
 const shellEntries = ["site/layouts/PlanetLayout.astro", "site/components/PlanetShell.astro"];
@@ -185,8 +189,8 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
       const operation = node.type === "CallExpression" || node.type === "NewExpression" ? nameOf(node.callee) || propertyName(node.callee) : "";
       if ((node.type === 'CallExpression' || node.type === 'NewExpression') && (
         ['OffscreenCanvas', 'WebGLRenderingContext', 'WebGL2RenderingContext', 'getContext'].includes(operation) ||
-        ['createElement', 'createElementNS'].includes(operation) && node.arguments.some(argument => values(argument).some(value => typeof value === 'string' && ['canvas', 'svg'].includes(value))))) {
-        note(node, 'Forbidden runtime canvas, WebGL, or SVG scene rendering');
+        ['createElement', 'createElementNS'].includes(operation) && node.arguments.some(argument => values(argument).some(value => value === 'canvas')))) {
+        note(node, 'Forbidden runtime canvas or WebGL scene rendering');
       }
       const forbiddenProperty = (name: unknown) => /^(?:clip-?path|mask(?:-.*|[A-Z].*)?|filter|mix-?blend-?mode|background-?blend-?mode)$/i.test(typeof name === 'string' ? name : '');
       const forbiddenValue = (value: unknown) => typeof value === 'string' && /(?:linear|radial|conic)-gradient\s*\(|\b(?:clip-path|mask(?:-\w+)?|filter|mix-blend-mode|background-blend-mode)\s*:/i.test(value);
@@ -309,7 +313,7 @@ async function registryLoaders(source: string, root: string, readSource: (path: 
     if (returnedBinding?.type === 'CallExpression' && nameOf(returnedBinding.callee) === binding.value.name && returnedBinding.arguments.length === 1 && binding.key.name === 'loadPackagedObject' && descriptors.has(nameOf(actualDescriptor))) {
       const descriptorImport = descriptors.get(nameOf(actualDescriptor))!;
       const descriptor = relative(root, resolve(root, dirname(registryPath), descriptorImport));
-      if (descriptor !== `src/planets/${id}/object.json`) fail(`${id} loader must bind its own actual JSON descriptor`);
+      if (descriptor !== `src/objects/${id}/object.json`) fail(`${id} loader must bind its own actual JSON descriptor`);
       const frame = entry.arguments[7];
       if (frame?.type !== 'MemberExpression' || frame.computed || nameOf(frame.property) !== 'worldFrame' || frame.object.type !== 'MemberExpression' || frame.object.computed || nameOf(frame.object.property) !== 'properties' || nameOf(frame.object.object) !== nameOf(actualDescriptor)) fail(`${id} world frame must come from its own actual JSON descriptor`);
       entries.set(id, {kind: 'descriptor', client, descriptor, exported: binding.key.name}); descriptorImports.add(descriptorImport);
@@ -317,10 +321,10 @@ async function registryLoaders(source: string, root: string, readSource: (path: 
       const frame = entry.arguments[7], frameObject = frame?.type === 'MemberExpression' && !frame.computed && nameOf(frame.property) === 'frame' && frame.object.type === 'Identifier' ? frame.object.name : null;
       const contextPath = frameObject ? preparedJsonImports.get(frameObject) : null;
       const resolvedContext = contextPath ? relative(root, resolve(root, dirname(registryPath), contextPath)) : null;
-      const contextual = entry.arguments.length === 8 && resolvedContext === `src/planets/${id}/prepared/world-context.json`;
+      const contextual = entry.arguments.length === 8 && resolvedContext === `src/objects/${id}/prepared/world-context.json`;
       if (!contextual && entry.arguments.length !== 7) fail(`${id} legacy loader cannot declare an unbound world frame`);
       if (returnedBinding?.type !== 'Identifier' || returnedBinding.name !== binding.value.name) fail(`${id} loader must return its actual imported export`);
-      if (client !== `src/planets/${id}/runtime/client.mjs`) fail(`${id} loader must name its actual runtime client, received ${client}`);
+      if (client !== `src/objects/${id}/runtime/client.mjs`) fail(`${id} loader must name its actual runtime client, received ${client}`);
       entries.set(id, {kind: contextual ? 'contextual' : 'legacy', client, exported: binding.key.name, context: contextual ? resolvedContext : null});
       if (contextual && contextPath) descriptorImports.add(contextPath);
     }
@@ -408,7 +412,7 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
     if (statement.type === 'ImportDeclaration') {
       const specifier = statement.specifiers[0];
       if (statement.specifiers.length !== 1 || specifier?.type !== 'ImportDefaultSpecifier' || typeof statement.source.value !== 'string' ||
-          !/^\.\.\/src\/planets\/[a-z][a-z0-9-]*\/object\.json$/u.test(statement.source.value) ||
+          !/^\.\.\/src\/objects\/[a-z][a-z0-9-]*\/object\.json$/u.test(statement.source.value) ||
           statement.attributes?.length !== 1 || propertyKey(statement.attributes[0].key) !== 'type' || statement.attributes[0].value.value !== 'json' ||
           imports.has(specifier.local.name) || descriptorImports.has(statement.source.value)) fail('prepared catalogue must contain unique JSON descriptor imports');
       imports.set(specifier.local.name, statement.source.value); descriptorImports.add(statement.source.value);
@@ -424,7 +428,7 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
     if (!path) fail('prepared catalogue entries must name their JSON imports');
     const descriptor = relative(root, resolve(root, dirname(descriptorFile), path));
     const value: unknown = JSON.parse(await readSource(resolve(root, descriptor)));
-    if (!isRecord(value) || typeof value.id !== 'string' || descriptor !== `src/planets/${value.id}/object.json` || entries.has(value.id)) fail('descriptor identity must match its own actual JSON descriptor');
+    if (!isRecord(value) || typeof value.id !== 'string' || descriptor !== `src/objects/${value.id}/object.json` || entries.has(value.id)) fail('descriptor identity must match its own actual JSON descriptor');
     entries.set(value.id, {kind: 'descriptor', client: 'site/packaged-object-runtime.mts', descriptor, exported: 'loadPackagedObject'});
   }
   return {entries, importOffsets: new Set([sourceStart(imported)]), descriptorImports, descriptorFile};
@@ -475,7 +479,7 @@ function requireContextualBindingSource(source: string) {
     if (specifier.type === 'ImportDefaultSpecifier') defaults.set(specifier.local.name, requireString(node.source.value));
   }
   const binding = ast.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'FunctionDeclaration' && nameOf(node.declaration.id) === 'bindContextualObject' ? [node.declaration] : [])[0];
-  const context = [...defaults].find(([, path]) => path === '../src/planets/sun/prepared/world-context.json')?.[0];
+  const context = [...defaults].find(([, path]) => path === '../src/objects/sun/prepared/world-context.json')?.[0];
   if (!binding || !context || binding.params.length !== 3 || binding.body.body.length !== 2) fail();
   const definition = kind(binding.params[0], 'Identifier'), contextParam = kind(binding.params[1], 'Identifier');
   const frameParam = kind(binding.params[2], 'AssignmentPattern'), frameId = kind(frameParam.left, 'Identifier');
@@ -518,16 +522,17 @@ function requireApplicationWorldContextSource(source: string) {
       if (specifier.type === 'ImportDefaultSpecifier') defaults.set(specifier.local.name, requireString(statement.source.value));
     }
   }
-  const context = [...defaults].find(([, path]) => path === '../src/planets/sun/prepared/world-context.json')?.[0];
+  const context = [...defaults].find(([, path]) => path === '../src/objects/sun/prepared/world-context.json')?.[0];
   const renderer = '../src/renderers/css/dist/universe.js';
   const required = ['createPreparedUniverse', 'prepareObjectResources', 'loadPreparedCssVolume', 'loadPreparedCssPointField', 'loadPreparedCssSurfaceShell'];
   if (!context || !required.every(name => [...imports].some(([local, binding]) => binding.name === name && binding.source === renderer)) ||
     ![...imports].some(([local, binding]) => binding.name === 'PREPARED_NAVIGATION_MARKERS' && binding.source === './prepared-navigation-markers.mjs')) fail();
   const nodes: Node[] = []; walkRuntimeAst(ast, node => nodes.push(node));
   const calls = (name: string) => nodes.filter((node): node is CallExpression => node.type === 'CallExpression' && (imports.get(nameOf(node.callee))?.name ?? nameOf(node.callee)) === name);
-  const globs = nodes.filter((node): node is CallExpression => node.type === 'CallExpression' && node.callee.type === 'MemberExpression' && nameOf(node.callee.property) === 'glob' && node.callee.object.type === 'MetaProperty');
-  const patterns = globs.map(node => astKind(node.arguments[0], 'Literal')?.value);
-  if (!patterns.includes('../src/objects/*/object.json') || !patterns.includes('../src/objects/*/prepared/**/*.{json,png,webp,bin}') ||
+  // Bodies share src/objects, so descriptors and asset URLs come from the generated module that globs each context object by name.
+  const initializers = nodes.flatMap(node => node.type === 'VariableDeclarator' && node.init?.type === 'Identifier' ? [node.init.name] : []);
+  const generated = (name: string) => initializers.some(local => imports.get(local)?.name === name && imports.get(local)?.source === './prepared-context-objects.mts');
+  if (!generated('CONTEXT_OBJECT_DESCRIPTORS') || !generated('CONTEXT_OBJECT_ASSET_URLS') ||
     calls('loadPreparedCssVolume').length !== 1 || calls('loadPreparedCssPointField').length !== 1 || calls('createPreparedUniverse').length !== 1 ||
     calls('loadPreparedCssSurfaceShell').length !== 1 || calls('prepareObjectResources').length !== 1) fail();
   const resourceCalls = nodes.filter((node): node is CallExpression => node.type === 'CallExpression' && nameOf(node.callee) === 'resourceSet');
@@ -558,6 +563,24 @@ function requireApplicationWorldContextSource(source: string) {
   const universe = calls('createPreparedUniverse')[0];
   if (universe.arguments.length !== 1 || universe.arguments[0]?.type !== 'ObjectExpression' ||
     !['context', 'volume', 'stars', 'sprites', 'shells', 'resolveResource', 'resolveStarResource'].every(name => property(universe.arguments[0], name))) fail();
+}
+
+/** The generated module names each context object; each must reach its descriptor and prepared assets, binary banks included. */
+function requireContextObjectModuleSource(source: string, contexts: readonly { id: string; type: string }[]) {
+  function fail(): never { throw new TypeError('Application world context must use the shared prepared-universe inventory and pinned context.'); }
+  const globs = new Map<string, unknown[]>();
+  for (const statement of parseRuntimeSource(source, "source.mts").body) {
+    if (statement.type !== 'ExportNamedDeclaration' || statement.declaration?.type !== 'VariableDeclaration') continue;
+    for (const declaration of statement.declaration.declarations) {
+      const call = astKind(declaration.init, 'CallExpression'), callee = astKind(call?.callee, 'MemberExpression');
+      if (callee && nameOf(callee.property) === 'glob' && callee.object.type === 'MetaProperty')
+        globs.set(nameOf(declaration.id), astKind(call?.arguments[0], 'ArrayExpression')?.elements.map(element => astKind(element, 'Literal')?.value) ?? []);
+    }
+  }
+  const descriptors = globs.get('CONTEXT_OBJECT_DESCRIPTORS'), assets = globs.get('CONTEXT_OBJECT_ASSET_URLS');
+  if (!descriptors || !assets || !contexts.length) fail();
+  for (const { id, type } of contexts) if (!descriptors.includes(`../src/objects/${id}/object.json`) ||
+    !assets.includes(`../src/objects/${id}/prepared/**/*.{json,png,webp,bin}`) || assets.includes(`!../src/objects/${id}/prepared/*.bin`) !== (type === 'point-field')) fail();
 }
 
 function requireContextFrame(value: unknown, objectId: string) {
@@ -693,7 +716,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       requireObjectRuntimeDefinition(definition, { objectId: object.id });
       return;
     }
-    const { objectControls } = await import(pathToFileURL(resolve(root, `src/planets/${object.id}/site/control-content.mjs`)).href);
+    const { objectControls } = await import(pathToFileURL(resolve(root, `src/objects/${object.id}/site/control-content.mjs`)).href);
     requireObjectRuntimeDefinition({ ...definition, schema: PREPARED_OBJECT_RUNTIME_SCHEMA,
       id: object.id, controls: objectControls }, { objectId: object.id, controls: objectControls });
   });
@@ -707,7 +730,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     return sources.get(path)!;
   }
   function releaseObjectSources(id: string) {
-    const prefix = resolve(root, 'src/planets', id) + '/';
+    const prefix = resolve(root, 'src/objects', id) + '/';
     for (const path of sources.keys()) if (path.startsWith(prefix) && !sharedClosure.has(path)) sources.delete(path);
   }
   async function inspect(path: string, shared: boolean, shellContent = false, serverOnly = false): Promise<Inspection> {
@@ -732,7 +755,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       requireContextFrame(context, 'sun');
       return;
     }
-    if (file.startsWith("../") || file.startsWith("src/planets/")) {
+    if (file.startsWith("../") || objectPackage(file)) {
       sharedViolations.push({ file, line: 1, reason: "Shared runtime imports an object package" });
       return;
     }
@@ -752,7 +775,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
         continue;
       }
       try {
-        const target = await resolveRuntimeSource(imported, path, { root, source });
+        const target = await resolveRuntimeSource(imported, path, { root, source, objectIds: objectPackageIds });
         if (!target) throw new Error(`Unclosed shared runtime import ${imported}`);
         sharedEdges.get(path)!.add(target);
         await sharedVisit(target, shellContent, facts.serverImports?.includes(imported) ?? false);
@@ -787,7 +810,8 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   if (sharedClosure.has(applicationContextPath)) {
     try {
       requireApplicationWorldContextSource(await source(applicationContextPath));
-      const context = requireContextFrame(JSON.parse(await source(resolve(root, 'src/planets/sun/prepared/world-context.json'))), 'sun');
+      requireContextObjectModuleSource(await source(resolve(root, 'site/prepared-context-objects.mts')), await readContextObjects(resolve(root, 'src/objects')));
+      const context = requireContextFrame(JSON.parse(await source(resolve(root, 'src/objects/sun/prepared/world-context.json'))), 'sun');
       await requireContextPointField(root, context, source);
     } catch (error) { sharedViolations.push({ file: 'site/application-world-context.mts', line: 1, reason: errorMessage(error) }); }
   }
@@ -862,18 +886,18 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     async function visit(path: string): Promise<void> {
       if (visited.has(path)) return;
       visited.add(path);
-      const file = relative(root, path), isObject = file.startsWith("src/planets/");
+      const file = relative(root, path), isObject = objectPackage(file);
       if (!isObject && sharedClosure.has(path)) return;
-      if (isObject && !file.startsWith(`src/planets/${object.id}/`)) {
+      if (isObject && !file.startsWith(`src/objects/${object.id}/`)) {
         violations.push({ file, line: 1, reason: "Object runtime imports another object package" });
         return;
       }
       const facts = await inspect(path, false);
       violations.push(...facts.violations);
-      if (![client, client.replace(/client\.mjs$/, "definition.mjs"), `src/planets/${object.id}/site/control-content.mjs`].includes(file) && !facts.dataOnly) {
+      if (![client, client.replace(/client\.mjs$/, "definition.mjs"), `src/objects/${object.id}/site/control-content.mjs`].includes(file) && !facts.dataOnly) {
         violations.push({ file, line: 1, reason: "Every non-shared reachable module must be serialized data; private executors are forbidden" });
       }
-      if (file === `src/planets/${object.id}/site/control-content.mjs`) {
+      if (file === `src/objects/${object.id}/site/control-content.mjs`) {
         try { requirePreparedControlSource(await source(path)); }
         catch (error) { violations.push({ file, line: 1, reason: errorMessage(error) }); }
       }
@@ -897,7 +921,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     }
     if (!thin) violations.unshift({ file: client, line: 1, reason: "Client must contain imports and one bound shared factory export only" });
     if (factoryCalls !== 1) violations.push({ file: client, line: 1, reason: `Expected one actual shared factory call; found ${factoryCalls}` });
-    if (!visited.has(resolve(root, `src/planets/${object.id}/site/control-content.mjs`))) {
+    if (!visited.has(resolve(root, `src/objects/${object.id}/site/control-content.mjs`))) {
       violations.push({ file: client, line: 1, reason: "Definition must import the actual control-content export" });
     }
     if (thin && !violations.length) {

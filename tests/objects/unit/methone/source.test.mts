@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {controlledShapeCamera, decodeCalibratedCamera} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
-const root=new URL('../../../../src/planets/methone/source/',import.meta.url);
+const root=new URL('../../../../src/objects/methone/source/',import.meta.url);
 
 test('Methone shape preserves the published semi-axes in physical metres',async()=>{
  const config=JSON.parse((await readFile(new URL('preparation/terrestrial.json',root))).toString('utf8'));

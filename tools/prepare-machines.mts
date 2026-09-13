@@ -94,7 +94,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
   const objects: SourceUsageObject[] = [];
   const factsheets = { facts: 0, cited: 0, uncited: [] as { objectId: string; factId: string }[] };
   for (const object of OBJECTS) {
-    const base = `src/planets/${object.id}`;
+    const base = `src/objects/${object.id}`;
     const descriptor = explorationRecord(await json(`${base}/object.json`));
     const manifest = explorationRecord(await json(`${base}/source/manifest.json`));
     const recipe = explorationRecord(explorationRecord(descriptor.properties).recipe);

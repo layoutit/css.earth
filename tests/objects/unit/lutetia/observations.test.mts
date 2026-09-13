@@ -5,7 +5,7 @@ import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {decodeOsirisReflectance} from '../../../../tools/objects/terrestrial-layers/archived-camera.mts';
 import {project,diskGain} from '../../../../tools/objects/terrestrial-layers/osiris-geo.mts';
-const root='src/planets/lutetia/source/';
+const root='src/objects/lutetia/source/';
 const camera=JSON.parse((await readFile(root+'observations/osiris-camera.json')).toString('utf8'));
 const bytes=await readFile(root+'observations/n20100710t154047674id4df22.img');
 

@@ -182,7 +182,9 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   }
   for (const view of config.raster.shapeViews ?? []) {
     const entries = await source.validateGroup(view.consumer);
-    const entry = entries.find(input => input.path === config.geometry?.radialTerrain?.path);
+    const modelConfig = modelForLens(view.id)?.config ?? config;
+    const terrain = requireRecord(requireRecord(modelConfig.geometry).radialTerrain);
+    const entry = entries.find(input => input.path === terrain.path);
     if (!entry) throw new Error('Shape display is not bound to the rendered source mesh.');
     const rgb = Buffer.alloc(width * height * 3);
     const missingImagery = new Uint8Array(width * height).fill(1);

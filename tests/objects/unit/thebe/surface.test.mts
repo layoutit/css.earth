@@ -6,7 +6,7 @@ import {resolve} from 'node:path';
 import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 
 test('Thebe keeps the published west-positive radius samples in metres', async () => {
-  const source = resolve(import.meta.dirname, '../../../../src/planets/thebe/source');
+  const source = resolve(import.meta.dirname, '../../../../src/objects/thebe/source');
   const config = JSON.parse((await readFile(resolve(source, 'preparation/terrestrial.json'))).toString('utf8'));
   const profile = config.geometry.radialTerrain;
   const mesh = await loadPdsRadiusTable(resolve(source, profile.path), profile.grid);
@@ -19,7 +19,7 @@ test('Thebe keeps the published west-positive radius samples in metres', async (
 
 // The Jan 2000 image is independently described as north-down in Denk et al.
 test('Thebe original Galileo raster orientation follows SSI azimuth convention', async () => {
-  const source = resolve(import.meta.dirname, '../../../../src/planets/thebe/source');
+  const source = resolve(import.meta.dirname, '../../../../src/objects/thebe/source');
   const config = JSON.parse((await readFile(resolve(source, 'preparation/terrestrial.json'))).toString('utf8'));
   const frame = config.raster.mosaics[0].frames.find((frame: { id: string; }) => frame.id === 'c0532888400');
   const label = await readFile(resolve(source, frame.labelPath), 'utf8');
@@ -29,7 +29,7 @@ test('Thebe original Galileo raster orientation follows SSI azimuth convention',
 });
 
 test('Thebe source Sun/observer vectors reproduce archived phase angles', async () => {
-  const source = resolve(import.meta.dirname, '../../../../src/planets/thebe/source');
+  const source = resolve(import.meta.dirname, '../../../../src/objects/thebe/source');
   const config = JSON.parse((await readFile(resolve(source, 'preparation/terrestrial.json'))).toString('utf8'));
   const vector = (lat: number, west: number) => { const a=lat*Math.PI/180,l=-west*Math.PI/180; return [Math.cos(a)*Math.cos(l),Math.cos(a)*Math.sin(l),Math.sin(a)]; };
   for (const frame of config.raster.mosaics[0].frames) {
