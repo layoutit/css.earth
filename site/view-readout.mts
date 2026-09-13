@@ -184,6 +184,8 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
       if (timer !== null) windowTarget.clearTimeout(timer);
       if (frame !== null) windowTarget.cancelAnimationFrame(frame);
       timer = frame = null;
+      // The departure's distance and coordinates go stale as soon as the camera moves.
+      coordinates.hidden = true; scale.hidden = true; write(altitude, '—');
     },
     destroy() {
       disposed = true; unsubscribe?.(); events.abort();
