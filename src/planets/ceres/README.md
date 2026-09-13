@@ -66,6 +66,7 @@ Feature notes: 31 of the labelled names carry a caption note, the lead summary o
 - **Elevation:** The publisher describes approximately 98% surface coverage and interpolation in permanently shadowed polar areas, but supplies no validity mask separating interpolation from stereo samples. To avoid showing that fill as observed terrain, the lens withholds both caps at |latitude| ≥60°. This is our conservative display boundary, not the source's observation boundary.
 
 - **Lighting:** The optional Shadows setting adds approximate directional illumination of the spherical model. With Shadows off, a fixed curvature overlay gives the globe depth. Neither mode reconstructs unlit albedo or physically relights the photographed crater shadows.
+- The last two columns of the PIA19977 enhanced-color source map are brighter than their neighbours (mean brightness 173 and 193 against about 135). A thin light line can show along 0° at close zoom.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
