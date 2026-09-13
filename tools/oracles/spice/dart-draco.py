@@ -13,7 +13,7 @@ import numpy as np
 import spiceypy as spice
 
 root = Path(__file__).resolve().parents[3]
-source = root / 'src/planets/dimorphos/source'
+source = root / 'src/objects/dimorphos/source'
 manifest = json.loads((source / 'manifest.json').read_text())
 kernels = [entry['path'] for entry in manifest['inputs'] if entry['path'].startswith('spice/')]
 order = ['lsk/', 'pck/pck00010', 'pck/didymos', 'fk/dart', 'fk/didymos', 'ik/', 'sclk/', 'spk/de430', 'spk/didymos_barycenter', 'spk/didymos_system', 'spk/dart_struct',

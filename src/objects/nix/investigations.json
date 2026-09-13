@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "nix",
+  "entries": [
+    {
+      "id": "lorri-lens",
+      "subject": "LORRI photograph as a photographic lens",
+      "status": "deferred",
+      "finding": "A draft fitted only two detector translations, [+16.875, +0.5] pixels, with the PDS camera, PCK pose and released mesh fixed. Reversing the transfer, its two held regions preferred shifts 1.414 and 5.099 pixels away, and the released mesh-to-kernel frame binding is unverified.",
+      "revisitWhen": "The mesh-to-kernel frame binding is verified and the registration passes interior holdouts in both transfer directions.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e426e79dae22144acf179dee2b388575592b6667/src/planets/nix/README.md",
+        "https://github.com/layoutit/css.earth/pull/184"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e426e79dae22144acf179dee2b388575592b6667",
+          "pr": 184
+        }
+      ]
+    },
+    {
+      "id": "mvic-colour",
+      "subject": "MVIC colour sequence as a colour lens",
+      "status": "unresolved",
+      "finding": "The MVIC colour sequence records real band differences, including Nix’s red region, but it has no qualified cross-band and image-to-mesh registration.",
+      "revisitWhen": "Cross-band and image-to-mesh registration qualify for this mesh.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/e426e79dae22144acf179dee2b388575592b6667/src/planets/nix/README.md",
+        "https://github.com/layoutit/css.earth/pull/184"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "e426e79dae22144acf179dee2b388575592b6667",
+          "pr": 184
+        }
+      ]
+    }
+  ]
+}

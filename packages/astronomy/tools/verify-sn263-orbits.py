@@ -49,7 +49,7 @@ def verify():
     normals = []
     maximum = 0.0
     for body in ['sn263-beta', 'sn263-gamma']:
-        root = ROOT / 'src/planets' / body
+        root = ROOT / 'src/objects' / body
         parameters = json.loads((root / 'source/orbit/published-parameters.json').read_text())
         record = json.loads((root / 'source/validation/epoch-state.json').read_text())
         for epoch, expected in [(parameters['epochJd'], record['validation']['sourceEpochState']),

@@ -127,13 +127,13 @@ return document.documentElement.dataset.ready === 'true' &&
   const sequences = new Map<string, Set<string | undefined>>();
   for (const e of pipeline) { const r = e.args.frame_reporter, k = `${r.frame_source}:${r.frame_sequence}`; const states = sequences.get(k) ?? new Set<string | undefined>(); states.add(r.state); sequences.set(k, states); }
   const compressed = gzipSync(text, { level: 9 });
-  const pinPaths = ['prepared/object.json', 'prepared/runtime.json', 'runtime-assets.json', 'prepared/terrain.json'].map(path => `src/planets/${id}/${path}`);
+  const pinPaths = ['prepared/object.json', 'prepared/runtime.json', 'runtime-assets.json', 'prepared/terrain.json'].map(path => `src/objects/${id}/${path}`);
   const prepared: Record<string, { bytes: number; sha256: string }> = {};
   for (const path of pinPaths) { const b = await readFile(path); prepared[path] = { bytes: b.length, sha256: hash(b) }; }
   const report = { schema: 'cssearth-comet-drag-trace@1', capturedAt: new Date().toISOString(),
     codeRevision: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     worktreeDiffSha256: hash(execFileSync('git', ['diff', 'HEAD', '--', 'tools', 'site', 'packages',
-      'src/platform', 'src/renderers', `src/planets/${id}/source`, `tests/objects/browser/${id}`], { maxBuffer: 32 * 1024 * 1024 })),
+      'src/platform', 'src/renderers', `src/objects/${id}/source`, `tests/objects/browser/${id}`], { maxBuffer: 32 * 1024 * 1024 })),
     build: initial.diagnosticsAvailable ? 'development' : 'production', route: page.url(), browser: browser.version(), headless: true,
     viewport, dpr, hardware: process.platform === 'darwin' ? execFileSync('sysctl', ['-n', 'hw.model', 'hw.memsize', 'machdep.cpu.brand_string'], { encoding: 'utf8' }).trim().split('\n') : process.arch,
     gpu, workload: { cycles: 3, stepsPerLeg: 60, x: .6, startY: .485, upperY: .283, lowerY: .582, shadows: true, wheels: 0, ...(lensId ? { lensId } : {}) },

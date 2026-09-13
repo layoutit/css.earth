@@ -64,7 +64,7 @@ def stats(entries):
 
 def summarize(label, entries):
     docs = {p:v for p,v in entries.items() if p.startswith('docs/')}
-    source_html = {p:v for p,v in entries.items() if re.match(r'src/planets/[^/]+/source/', p)
+    source_html = {p:v for p,v in entries.items() if re.match(r'src/objects/[^/]+/source/', p)
                    and Path(p).suffix.lower() in ('.html', '.htm')}
     html_blobs = collections.defaultdict(list)
     for path, entry in source_html.items():
@@ -82,7 +82,7 @@ def summarize(label, entries):
         ext = '.tar.gz' if p.endswith('.tar.gz') else Path(p).suffix.lower()
         extensions[ext][p] = v
         duplicates[v['oid']].append(p)
-    selected = {p for p in entries if re.fullmatch(r'src/planets/[^/]+/(object|source/manifest|prepared/provenance)\.json', p)}
+    selected = {p for p in entries if re.fullmatch(r'src/objects/[^/]+/(object|source/manifest|prepared/provenance)\.json', p)}
     selected.update(p for p,v in docs.items() if Path(p).suffix in ('.md','.json') and v['bytes'] < 6_000_000)
     registry = next((path for path in ('site/objects.mts', 'site/objects.mjs') if path in entries), None)
     if registry is None:
@@ -94,7 +94,7 @@ def summarize(label, entries):
         registry_basis = 'descriptor properties.catalog'
         registry_ids = []
         for path, raw in content.items():
-            match = re.fullmatch(r'src/planets/([^/]+)/object\.json', path)
+            match = re.fullmatch(r'src/objects/([^/]+)/object\.json', path)
             if not match:
                 continue
             descriptor = json.loads(raw)
@@ -107,13 +107,13 @@ def summarize(label, entries):
         registry_ids.sort()
     else:
         registry_basis = 'legacy static descriptor imports'
-        registry_ids = sorted(set(re.findall(r'\.\./src/planets/([^/]+)/object\.json', registry_source)))
+        registry_ids = sorted(set(re.findall(r'\.\./src/objects/([^/]+)/object\.json', registry_source)))
     if not registry_ids:
         raise RuntimeError(f'No registered bodies found in {label}; update registry discovery before using this inventory')
     # Read the selected Git snapshot, never execute its JavaScript or use local assets.
     manifests = [p for p in content if p.endswith('/source/manifest.json')]
     required = ['README.md','NOTICE.md','source/manifest.json','object.json','prepared/provenance.json','runtime-assets.json']
-    missing = {suffix:[i for i in registry_ids if f'src/planets/{i}/{suffix}' not in entries] for suffix in required}
+    missing = {suffix:[i for i in registry_ids if f'src/objects/{i}/{suffix}' not in entries] for suffix in required}
     source_counts, rights_counts, bases = collections.Counter(), collections.Counter(), collections.Counter()
     invalid_json = []
     for p in manifests:
@@ -167,7 +167,7 @@ def summarize(label, entries):
         'docJsonTopLevelKeys':dict(doc_json_keys.most_common(30)),
         'docsWithLocalReferences':len(local_refs),'localReferenceExamples':local_refs[:25],
         'invalidDocJson':invalid_json,
-        'bodyEntryPoints':{suffix:sum(f'src/planets/{i}/{suffix}' in entries for i in registry_ids) for suffix in ('README.md','EVIDENCE.md')},
+        'bodyEntryPoints':{suffix:sum(f'src/objects/{i}/{suffix}' in entries for i in registry_ids) for suffix in ('README.md','EVIDENCE.md')},
     }
 
 started = datetime.datetime.now(datetime.timezone.utc).isoformat()

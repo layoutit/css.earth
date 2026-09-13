@@ -6,7 +6,7 @@ import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 
-const root = new URL('../../../../src/planets/comet-19p/', import.meta.url);
+const root = new URL('../../../../src/objects/comet-19p/', import.meta.url);
 const json = async (path: string|URL) => JSON.parse((await readFile(new URL(path, root))).toString('utf8'));
 
 test('both completed Borrelly banks close around source-backed terrain', async () => {

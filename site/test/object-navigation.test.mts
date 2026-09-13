@@ -47,12 +47,12 @@ test("prepared marker addresses and presentation follow packages", async () => {
 test("an unknown object loads its own marker; missing packages fail without fallback", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "cssearth-owned-marker-"));
   context.after(() => rm(root, { recursive: true, force: true }));
-  const dir = resolve(root, "src/planets/new-body/source/preparation");
+  const dir = resolve(root, "src/objects/new-body/source/preparation");
   await mkdir(dir, { recursive: true });
   const source = (await loadMarkerDescriptors())[0];
   const fixture = { ...source, planetId: "new-body", presentation: { size: 8 } };
   await writeFile(resolve(dir, "navigation.json"), JSON.stringify(fixture));
-  await writeFile(resolve(root, "src/planets/new-body/object.json"), JSON.stringify(authoredObjectFixture("new-body")));
+  await writeFile(resolve(root, "src/objects/new-body/object.json"), JSON.stringify(authoredObjectFixture("new-body")));
   assert.deepEqual(await loadMarkerDescriptors({ projectRoot: root, planets: [{ id: "new-body", classification: "planet" }] }), [fixture]);
   await rm(resolve(dir, "navigation.json"));
   await assert.rejects(loadMarkerDescriptors({ projectRoot: root, planets: [{ id: "new-body", classification: "planet" }] }), /ENOENT/);

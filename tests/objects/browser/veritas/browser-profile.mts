@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/veritas/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/veritas/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'veritas',controls,audit:{
   "preparedAssetPairs": [
     {

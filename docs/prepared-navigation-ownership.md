@@ -82,7 +82,7 @@ Parabolic and inconsistent elements are rejected. The drawing extent encloses
 at least 600 au and the epoch position; it is a display window, not a physical
 boundary or an accuracy claim over that interval. Body source notes must state
 the element epoch, frame and limits of the osculating two-body approximation.
-See [ʻOumuamua](../src/planets/oumuamua/README.md) for independent Horizons
+See [ʻOumuamua](../src/objects/oumuamua/README.md) for independent Horizons
 comparisons and the interpretation used for its model.
 
 ## Verification

@@ -164,7 +164,7 @@ test("companion parent rings reproduce the retained primary state, including its
   const mu = astronomy.BODIES.sun.gravitationalParameterKm3PerS2;
   const companions: readonly BodyId[] = ["hiiaka", "menoetius", "romulus"];
   for (const id of companions) {
-    const receiptInput: unknown = JSON.parse(await readFile(new URL(`../planets/${id}/source/validation/epoch-state.json`, import.meta.url), "utf8"));
+    const receiptInput: unknown = JSON.parse(await readFile(new URL(`../objects/${id}/source/validation/epoch-state.json`, import.meta.url), "utf8"));
     const receipt = requireRecord(receiptInput);
     const state = receipt.parentHeliocentricState;
     assert.ok(state, `${id}: a source-pinned primary state must exist`);

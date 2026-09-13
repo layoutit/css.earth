@@ -94,7 +94,7 @@ test("ellipsoid material rotation requires its immutable prepared system transfo
 });
 
 for (const target of ["camera", "scene"] as const) test(`an existing prepared native animation cannot target the ${target}`, async () => {
-  const { default: mercury } = await import("../../src/planets/mercury/prepared/runtime.json", {with: {type: "json"}});
+  const { default: mercury } = await import("../../src/objects/mercury/prepared/runtime.json", {with: {type: "json"}});
   const definition = structuredClone(mercury);
   requireObjectRuntimeDefinition(definition);
   const animation = definition.animations.find(entry => entry.id === "mercury-interior-presentation-orbit");

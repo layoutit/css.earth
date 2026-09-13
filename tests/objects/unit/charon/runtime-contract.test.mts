@@ -4,11 +4,11 @@
 import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../src/planets/charon/prepared/runtime.json" with { type: "json" };
-import assets from "../../../../src/planets/charon/prepared/assets.json" with { type: "json" };
-import scene from "../../../../src/planets/charon/prepared/scene.json" with { type: "json" };
-import lenses from "../../../../src/planets/charon/prepared/lenses.json" with { type: "json" };
-import controls from "../../../../src/planets/charon/prepared/controls.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/charon/prepared/runtime.json" with { type: "json" };
+import assets from "../../../../src/objects/charon/prepared/assets.json" with { type: "json" };
+import scene from "../../../../src/objects/charon/prepared/scene.json" with { type: "json" };
+import lenses from "../../../../src/objects/charon/prepared/lenses.json" with { type: "json" };
+import controls from "../../../../src/objects/charon/prepared/controls.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";

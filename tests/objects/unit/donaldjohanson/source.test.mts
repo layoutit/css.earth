@@ -9,7 +9,7 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {readAuthoredRotation} from '../../../../tools/objects/authored-rotation.mts';
 import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/donaldjohanson/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/donaldjohanson/source');
 const read=async (path: string)=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Donaldjohanson retains original source pins and DSK acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'donaldjohanson',planetName:'Donaldjohanson',sourceRoot:root});await source.verify();
