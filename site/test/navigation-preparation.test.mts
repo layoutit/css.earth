@@ -115,16 +115,16 @@ for (const failure of ["object source", "late utility source", "publication", "r
   test(`failed ${failure} preserves accepted files or recoverable backups outside public`, async (context) => {
     const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-failure-"));
     context.after(() => rm(root, { recursive: true, force: true }));
-    for (const path of ["src/planets/new-body/source/preparation", "src/planets/sun", "src/navigation/source", "site", "public/navigation"]) {
+    for (const path of ["src/objects/new-body/source/preparation", "src/objects/sun", "src/navigation/source", "site", "public/navigation"]) {
       await mkdir(resolve(root, path), { recursive: true });
     }
-    await copyFile(resolve(projectRoot, "src/planets/sun/swatch.json"), resolve(root, "src/planets/sun/swatch.json"));
+    await copyFile(resolve(projectRoot, "src/objects/sun/swatch.json"), resolve(root, "src/objects/sun/swatch.json"));
     const original = (await loadMarkerDescriptors())[0];
     const descriptor = { ...original, planetId: "new-body", source: { ...original.source, path: "source.jpg" } };
-    await writeFile(resolve(root, "src/planets/new-body/source/preparation/navigation.json"), JSON.stringify(descriptor));
-    await writeFile(resolve(root, "src/planets/new-body/object.json"), JSON.stringify(authoredObjectFixture("new-body")));
-    const sourcePath = resolve(root, "src/planets/new-body/source/source.jpg");
-    await copyFile(resolve(projectRoot, "src/planets", original.planetId, "source", original.source.path), sourcePath);
+    await writeFile(resolve(root, "src/objects/new-body/source/preparation/navigation.json"), JSON.stringify(descriptor));
+    await writeFile(resolve(root, "src/objects/new-body/object.json"), JSON.stringify(authoredObjectFixture("new-body")));
+    const sourcePath = resolve(root, "src/objects/new-body/source/source.jpg");
+    await copyFile(resolve(projectRoot, "src/objects", original.planetId, "source", original.source.path), sourcePath);
     if (failure === "object source") await writeFile(sourcePath, "corrupt object source");
     for (const filename of await readdir(resolve(projectRoot, "src/navigation/source"))) {
       if (failure === "late utility source" && filename === "share-mark.svg") {

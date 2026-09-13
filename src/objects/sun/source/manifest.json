@@ -1332,7 +1332,7 @@
         "https://github.com/astronexus/HYG-Database",
         "https://creativecommons.org/licenses/by-sa/4.0/"
       ],
-      "acquisition": "node src/planets/sun/tools/acquire.mjs --refresh re-identifies the checked deterministic HYG v4.1 field subset for Sun",
+      "acquisition": "node src/objects/sun/tools/acquire.mjs --refresh re-identifies the checked deterministic HYG v4.1 field subset for Sun",
       "redistribution": "permitted under CC-BY-SA-4.0 with attribution and share-alike",
       "consumers": [
         "starfield"

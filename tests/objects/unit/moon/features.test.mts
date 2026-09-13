@@ -5,8 +5,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
-import runtimeDefinition from "../../../../src/planets/moon/prepared/runtime.json" with { type: "json" };
-import descriptor from "../../../../src/planets/moon/prepared/features.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/moon/prepared/runtime.json" with { type: "json" };
+import descriptor from "../../../../src/objects/moon/prepared/features.json" with { type: "json" };
 import { parsePreparedSurfaceFeatureCatalog } from "../../../../src/renderers/css/dist/index.js";
 
 const plan = runtimeDefinition.features;

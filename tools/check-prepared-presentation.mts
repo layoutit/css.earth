@@ -138,7 +138,7 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
       !reference || reference.format !== PREPARED_CSS_OBJECT_FORMAT || (typeof reference.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(reference.sha256)) || typeof reference.url !== 'string') {
     throw new TypeError('Authored descriptor identity or source references are invalid.');
   }
-  const directory = resolve(root, `src/planets/${objectId}`);
+  const directory = resolve(root, `src/objects/${objectId}`);
   for (const value of requireArray(recipe.sources)) {
     const source = requireRecord(value, 'Authored source');
     if (!source || typeof source.path !== 'string' || (typeof source.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(source.sha256))) throw new TypeError('Authored source reference is invalid.');
@@ -176,7 +176,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
   const entries = [];
   for (const object of objects) {
     try {
-      const prefix = resolve(root, `src/planets/${object.id}`);
+      const prefix = resolve(root, `src/objects/${object.id}`);
       const descriptorPath = `${prefix}/object.json`;
       let descriptor = null;
       try { descriptor = requireRecord(JSON.parse(await readText(descriptorPath)), 'Object descriptor'); }

@@ -27,12 +27,12 @@ locates other preparation families. Earth selects among offline atlas levels
 according to projected CSS size, independently of DPR; dataset selection remains
 manual. These texture levels are separate from its retired geographic paging.
 The [texture-level implementation and measurements](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-prepared-texture-levels.md)
-record that change; [Earth's README](../src/planets/earth/README.md) describes the
+record that change; [Earth's README](../src/objects/earth/README.md) describes the
 current datasets and retained source history. A row-bank cutaway body can declare
 the same kind of levels in its presentation recipe. Its density 1 and 2 surface
 maps become two levels, chosen by the same texels-per-CSS-pixel rule
 ([surface texture levels](../src/renderers/css/preparation/presentation/surface-texture-levels.ts)).
-[Mercury's README](../src/planets/mercury/README.md) records its thresholds.
+[Mercury's README](../src/objects/mercury/README.md) records its thresholds.
 
 ## Decode the source before choosing its display
 
@@ -90,15 +90,15 @@ across 35 bodies were captured in Chromium at DPR 1 with Shadows on and off
 (102 captures), then inspected for visible texture, coverage and lighting.
 There were no script errors in those captures. Some unchanged scientific-view
 thumbnails were unavailable in the local checkout; this was not a full catalogue
-delivery or browser-conformance pass. [Earth's close-zoom limitation](../src/planets/earth/README.md#known-problems)
+delivery or browser-conformance pass. [Earth's close-zoom limitation](../src/objects/earth/README.md#known-problems)
 occurred with both the previous and new photographic bytes.
 
-The [Enceladus comparison](../src/planets/enceladus/evidence/native-source-sampling.png)
+The [Enceladus comparison](../src/objects/enceladus/evidence/native-source-sampling.png)
 separates source sampling from WebP quality at an identical camera position.
-[Dione's enhanced-color capture](../src/planets/dione/evidence/native-source-enhanced.png)
+[Dione's enhanced-color capture](../src/objects/dione/evidence/native-source-enhanced.png)
 shows a complete product view. These examples demonstrate the prepared result;
 they do not establish new observational resolution or remove the sources' seams.
-The [Enceladus Pixelmatch evidence](../src/planets/enceladus/README.md#evidence)
+The [Enceladus Pixelmatch evidence](../src/objects/enceladus/README.md#evidence)
 adds fresh matched crops on the `e0487eff5` / `c13f3643b` merge: Pixelmatch diffs
 at threshold 0.1, an independent repeat, byte pins and reproduction commands.
 Anti-aliasing is included. The repeat has zero mismatches; most photographic
@@ -177,7 +177,7 @@ y = (flipV ? 1 − v : v) × height − 0.5
 ```
 
 The reader clamps these pixel coordinates to the image edges. `flipV` is explicit
-because file row order can differ from texture-coordinate order. [Arrokoth](../src/planets/arrokoth/README.md)
+because file row order can differ from texture-coordinate order. [Arrokoth](../src/objects/arrokoth/README.md)
 is a worked example with independent PNG/FITS anchors. Adjacent triangles can
 tie for the closest point at a seam; a distance bound alone does not prove which
 triangle supplies the correct texel.
@@ -201,7 +201,7 @@ and receives the gray coverage grid. That drew a one-pixel line at 180° on Io's
 Gaspra registration example: detector image at left, published mosaic reprojected
 through the archived camera at right. Compare the marked landmarks; the display
 stretches differ. Both use related observations, so this is a registration check.
-[Gaspra's README](../src/planets/gaspra/README.md) records the source, residuals and limits.
+[Gaspra's README](../src/objects/gaspra/README.md) records the source, residuals and limits.
 
 ## Reduce geometry and bake the atlas
 

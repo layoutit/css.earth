@@ -17,7 +17,7 @@ try{
   const context=await browser.newContext({viewport:{width:1440,height:900}}),page=await context.newPage(),errors: string[]=[];
   page.on('pageerror',e=>errors.push(e.message));
   try{
-   const payload=await readFile(`src/planets/${id}/prepared/object.json`),definition=requireObjectRuntimeDefinition(await loadObjectTestDefinition(id));
+   const payload=await readFile(`src/objects/${id}/prepared/object.json`),definition=requireObjectRuntimeDefinition(await loadObjectTestDefinition(id));
    await page.goto(`${origin}/${id}/`,{waitUntil:'networkidle'});
    await page.waitForFunction(id=>document.documentElement.dataset.ready==='true'&&document.querySelector<HTMLElement>('.planet-stage')?.dataset.objectId===id,id);
    const shadows=page.locator('input[name="shadows"]');assert.equal(await shadows.isChecked(),false,`${id}: Shadows must start off`);

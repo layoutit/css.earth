@@ -100,11 +100,11 @@ test('source files reject mismatched IDs, duplicate provider identities and stal
 });
 const objectInput = async (id: string) => {
   const object = OBJECTS.find(object => object.id === id)!;
-  const page = sourceObject(await read(`src/planets/${id}/prepared/page.json`)), controls = sourceObject(page.controls);
+  const page = sourceObject(await read(`src/objects/${id}/prepared/page.json`)), controls = sourceObject(page.controls);
   const lenses = controls.lenses === null ? [] : sourceArray(sourceObject(controls.lenses).controls, raw => {
     const lens=sourceObject(raw);return {id:sourceText(lens.id),label:sourceText(lens.label)};
   });
-  return {id,name:object.name,route:object.route,base:`src/planets/${id}`,controls:lenses,provenance:validateObjectProvenance(await read(`src/planets/${id}/prepared/provenance.json`))};
+  return {id,name:object.name,route:object.route,base:`src/objects/${id}`,controls:lenses,provenance:validateObjectProvenance(await read(`src/objects/${id}/prepared/provenance.json`))};
 };
 test('source uses conserve all product dependencies, include models, and never convert metadata into observations', async () => {
   const objects = await Promise.all(OBJECTS.map(object=>objectInput(object.id)));
@@ -120,12 +120,12 @@ test('source uses conserve all product dependencies, include models, and never c
   assert.ok(prepared.usage.bySource['hyg-v44'].length===1);
   assert.ok(prepared.usage.edges.some(edge=>edge.objectId==='adrastea' && edge.kind==='method' && edge.lensIds.length));
   assert.ok(prepared.usage.edges.some(edge=>edge.objectId==='mercury' && edge.lensIds.includes('interior')));
-  const sourceIds=['bdr','enhanced','topography'].map(term => prepared.inventory.find(row=>row.ownerPath==='src/planets/mercury/source/manifest.json' && row.localId.includes(term) && row.binding.kind==='catalogued')!.binding);
+  const sourceIds=['bdr','enhanced','topography'].map(term => prepared.inventory.find(row=>row.ownerPath==='src/objects/mercury/source/manifest.json' && row.localId.includes(term) && row.binding.kind==='catalogued')!.binding);
   assert.equal(new Set(sourceIds.map(binding=>JSON.stringify(binding))).size,3);
   for (const source of prepared.catalog.records) assert.equal(new Set(sourceDatasetViews(prepared.usage,source.id).map(view=>view.href)).size,sourceDatasetViews(prepared.usage,source.id).length);
 });
 test('new unresolved inputs, unknown bindings, stale lenses and inconsistent usage indexes fail', async () => {
-  const path='src/planets/earth/source/manifest.json', manifest=sourceObject(await read(path));
+  const path='src/objects/earth/source/manifest.json', manifest=sourceObject(await read(path));
   const input=sourceArray(manifest.inputs,sourceObject)[0];
   input.sourceBinding={kind:'unresolved',label:'Unknown input',evidence:'No provider record',reason:'Identity has not been established'};
   assert.throws(()=>sourceInventory(manifest,path,prepared.sources,new Set()),/Unresolved source/);
@@ -148,8 +148,8 @@ test('shared published identities combine usage without combining local input re
   assert.notEqual(prepared.sources.hyg.id, prepared.sources['hyg-v44'].id, 'a work and its release remain distinct');
 });
 test('refreshing document pins retains bindings and native source metadata', async () => {
-  const path = 'src/planets/salacia/source/manifest.json', manifest = sourceObject(await read(path));
-  const document = sourceObject(await read('src/planets/salacia/prepared/provenance.json'));
+  const path = 'src/objects/salacia/source/manifest.json', manifest = sourceObject(await read(path));
+  const document = sourceObject(await read('src/objects/salacia/prepared/provenance.json'));
   const used = new Set(sourceArray(document.sources, sourceObject).map(source => sourceText(source.path)));
   const before = sourceInventory(manifest, path, prepared.sources, used);
   const documents = sourceArray(manifest.documents, sourceObject);
@@ -174,8 +174,8 @@ test('both catalogues prepare deterministically from the same input closure befo
   assert.equal(result.factsheets.facts, result.factsheets.cited + result.factsheets.uncited.length);
   assert.ok(facts.some(edge => edge.objectId === 'earth' && edge.consumerId === 'earth/radius'));
   assert.ok(facts.some(edge => edge.objectId === 'abundantia' && edge.citationUrl?.includes('/4625')));
-  assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/planets/earth/source/editorial/factsheet-review.json'));
-  assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/planets/abundantia/source/reference/damit-model.json'));
+  assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/objects/earth/source/editorial/factsheet-review.json'));
+  assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/objects/abundantia/source/reference/damit-model.json'));
   assert.deepEqual(sourceDatasetViews(prepared.usage, 'damit-models'), [], 'factsheet metadata is not a shape or imagery contribution');
   for (const output of result.outputs) assert.deepEqual(typeof output.text === 'string' ? Buffer.from(output.text) : output.text,await readFile(output.path),output.path);
   assert.equal(result.prepared.sourceCatalogSha256,result.preparedSources.catalogSha256);
@@ -207,13 +207,13 @@ test('changed fact evidence and stale displayed facts leave both published catal
     await copyFile(path, target);
   }
   const before = await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8')));
-  const evidencePath = join(root, 'src/planets/abundantia/source/reference/calibration.json');
+  const evidencePath = join(root, 'src/objects/abundantia/source/reference/calibration.json');
   const evidence = await readFile(evidencePath, 'utf8');
   await writeFile(evidencePath, evidence.replace('42.18', '52.18'));
   await assert.rejects(prepareMachines({ root }), /fact evidence pin differs/);
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
   await writeFile(evidencePath, evidence);
-  const contentPath = join(root, 'src/planets/abundantia/prepared/content.json');
+  const contentPath = join(root, 'src/objects/abundantia/prepared/content.json');
   const originalContent = await readFile(contentPath, 'utf8'), content = sourceObject(JSON.parse(originalContent));
   sourceObject(sourceArray(content.facts, sourceObject)[0]).value = '99 km';
   await writeFile(contentPath, JSON.stringify(content));
@@ -234,7 +234,7 @@ test('missing cited evidence restores without body assets and leaves catalogues 
   const root = await mkdtemp(join(tmpdir(), 'cssearth-citation-restoration-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const outputs = ['site/prepared-sources.json', 'site/prepared-machines.json'];
-  const source = 'src/planets/asteroid-1998-ml14/source';
+  const source = 'src/objects/asteroid-1998-ml14/source';
   const paper = `${source}/reference/warner-2014.pdf`;
   // The cited paper is a pinned download, so no checkout tracks it. Restoring
   // it needs the provider, which this suite must not depend on; a checkout
@@ -281,8 +281,8 @@ test('numerical extraction uses current package records and preserves reviewed s
   const root = await mkdtemp(join(tmpdir(), 'cssearth-source-authoring-'));
   try {
     const script = 'tools/objects/source-authoring/distant-worlds/author.py';
-    const source = 'src/planets/salacia/source';
-    const files = [script, 'src/planets/salacia/object.json', ...[
+    const source = 'src/objects/salacia/source';
+    const files = [script, 'src/objects/salacia/object.json', ...[
       'manifest.json','content/object.json','preparation/terrestrial.json','preparation/acquisition.json','material/neutral.png',
     ].map(path => `${source}/${path}`)];
     for (const path of files) {
@@ -310,7 +310,7 @@ test('numerical extraction uses current package records and preserves reviewed s
     }
     assert.deepEqual(after.documents,before.documents);
     assert.deepEqual(after.generatedIntermediates,before.generatedIntermediates);
-    const descriptor = sourceObject(await read(join(root,'src/planets/salacia/object.json')));
-    assert.deepEqual(sourceObject(descriptor.properties).catalog,sourceObject(sourceObject(await read('src/planets/salacia/object.json')).properties).catalog);
+    const descriptor = sourceObject(await read(join(root,'src/objects/salacia/object.json')));
+    assert.deepEqual(sourceObject(descriptor.properties).catalog,sourceObject(sourceObject(await read('src/objects/salacia/object.json')).properties).catalog);
   } finally { await rm(root,{recursive:true,force:true}); }
 });

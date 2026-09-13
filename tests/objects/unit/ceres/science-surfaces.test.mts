@@ -8,7 +8,7 @@ import { parseInterpreterRecipe } from "../../../../tools/objects/observation/in
 import { colorForValue, loadScienceSurface, paintScienceSurface, terrainBrightness as shadeTerrain } from "../../../../tools/objects/terrestrial-layers/scientific-raster.mts";
 import type { SourceScalar } from "../../../../tools/objects/terrestrial-layers/contracts.mts";
 
-const root = resolve(import.meta.dirname, "../../../.."), sourceRoot = resolve(root, "src/planets/ceres/source");
+const root = resolve(import.meta.dirname, "../../../.."), sourceRoot = resolve(root, "src/objects/ceres/source");
 const recipe = parseInterpreterRecipe(JSON.parse(await readFile(resolve(sourceRoot, "preparation/raster.json"), "utf8")));
 /** The raster lane's `terrestrial-scientific` science blocks, validated down to the palette and relief facts this test reads. */
 const parsePalette = shape({ id: text, minimum: number, maximum: number, colors: array(text), relief: shape({ referenceRadiusMeters: number, lightDirection: array(number), ambient: number }) });

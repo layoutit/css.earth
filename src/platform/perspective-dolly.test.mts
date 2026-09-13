@@ -14,7 +14,7 @@ import { projectHeliocentricView } from "./heliocentric-view.mts";
 import { requireHeliocentricPlan } from "../renderers/css/dist/testing.js";
 import type { PerspectiveHeliocentric } from "./perspective-dolly.mts";
 import type { HeliocentricViewPlan, HeliocentricProjectionInput } from "./heliocentric-view.mts";
-import PREPARED_MERCURY_SCENE from "../../src/planets/mercury/prepared/scene.json" with {type: "json"};
+import PREPARED_MERCURY_SCENE from "../../src/objects/mercury/prepared/scene.json" with {type: "json"};
 
 const mercuryHeliocentric = PREPARED_MERCURY_SCENE.heliocentricView;
 requireHeliocentricPlan(mercuryHeliocentric);

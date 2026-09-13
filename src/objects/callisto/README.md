@@ -72,7 +72,7 @@ The derived 1,440 × 720 PixelIsArea RGBA GeoTIFF uses 0–360° east longitude,
 
 Reproduce the small checked-in source derivative with Python 3, numpy, Pillow and rasterio:
 
-`python3 src/planets/callisto/source/preparation/prepare-galileo-color.py`
+`python3 src/objects/callisto/source/preparation/prepare-galileo-color.py`
 
 The script checks the original and registration hashes before writing, and emits `source/validation/galileo-color-conversion-proof.json` with the source, recipe, generator, TIFF and raw RGBA hashes, grid, validity count and spherical coverage. Use `--output-directory /tmp/callisto-reproduction` for an isolated comparison. The raw RGBA/grid identity is portable; exact compressed TIFF bytes also depend on the recorded GDAL/codec versions. Checked-in source files permit a normal body bake without installing Python or regenerating this derivative.
 

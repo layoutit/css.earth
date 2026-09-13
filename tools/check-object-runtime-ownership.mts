@@ -18,7 +18,7 @@ import { readDescriptorDefinition, requireDescriptorAdapterSource } from './prep
 
 const runtimePath = "src/platform/object-runtime.mts";
 const registryPath = "site/objects.mts";
-const approvedSharedData = new Set(["src/planets/sun/prepared/world-context.json"]);
+const approvedSharedData = new Set(["src/objects/sun/prepared/world-context.json"]);
 // These are the application's common shell entry points. Their dependencies are
 // discovered from the real Astro AST, including template expressions and scripts.
 const shellEntries = ["site/layouts/PlanetLayout.astro", "site/components/PlanetShell.astro"];
@@ -309,7 +309,7 @@ async function registryLoaders(source: string, root: string, readSource: (path: 
     if (returnedBinding?.type === 'CallExpression' && nameOf(returnedBinding.callee) === binding.value.name && returnedBinding.arguments.length === 1 && binding.key.name === 'loadPackagedObject' && descriptors.has(nameOf(actualDescriptor))) {
       const descriptorImport = descriptors.get(nameOf(actualDescriptor))!;
       const descriptor = relative(root, resolve(root, dirname(registryPath), descriptorImport));
-      if (descriptor !== `src/planets/${id}/object.json`) fail(`${id} loader must bind its own actual JSON descriptor`);
+      if (descriptor !== `src/objects/${id}/object.json`) fail(`${id} loader must bind its own actual JSON descriptor`);
       const frame = entry.arguments[7];
       if (frame?.type !== 'MemberExpression' || frame.computed || nameOf(frame.property) !== 'worldFrame' || frame.object.type !== 'MemberExpression' || frame.object.computed || nameOf(frame.object.property) !== 'properties' || nameOf(frame.object.object) !== nameOf(actualDescriptor)) fail(`${id} world frame must come from its own actual JSON descriptor`);
       entries.set(id, {kind: 'descriptor', client, descriptor, exported: binding.key.name}); descriptorImports.add(descriptorImport);
@@ -317,10 +317,10 @@ async function registryLoaders(source: string, root: string, readSource: (path: 
       const frame = entry.arguments[7], frameObject = frame?.type === 'MemberExpression' && !frame.computed && nameOf(frame.property) === 'frame' && frame.object.type === 'Identifier' ? frame.object.name : null;
       const contextPath = frameObject ? preparedJsonImports.get(frameObject) : null;
       const resolvedContext = contextPath ? relative(root, resolve(root, dirname(registryPath), contextPath)) : null;
-      const contextual = entry.arguments.length === 8 && resolvedContext === `src/planets/${id}/prepared/world-context.json`;
+      const contextual = entry.arguments.length === 8 && resolvedContext === `src/objects/${id}/prepared/world-context.json`;
       if (!contextual && entry.arguments.length !== 7) fail(`${id} legacy loader cannot declare an unbound world frame`);
       if (returnedBinding?.type !== 'Identifier' || returnedBinding.name !== binding.value.name) fail(`${id} loader must return its actual imported export`);
-      if (client !== `src/planets/${id}/runtime/client.mjs`) fail(`${id} loader must name its actual runtime client, received ${client}`);
+      if (client !== `src/objects/${id}/runtime/client.mjs`) fail(`${id} loader must name its actual runtime client, received ${client}`);
       entries.set(id, {kind: contextual ? 'contextual' : 'legacy', client, exported: binding.key.name, context: contextual ? resolvedContext : null});
       if (contextual && contextPath) descriptorImports.add(contextPath);
     }
@@ -424,7 +424,7 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
     if (!path) fail('prepared catalogue entries must name their JSON imports');
     const descriptor = relative(root, resolve(root, dirname(descriptorFile), path));
     const value: unknown = JSON.parse(await readSource(resolve(root, descriptor)));
-    if (!isRecord(value) || typeof value.id !== 'string' || descriptor !== `src/planets/${value.id}/object.json` || entries.has(value.id)) fail('descriptor identity must match its own actual JSON descriptor');
+    if (!isRecord(value) || typeof value.id !== 'string' || descriptor !== `src/objects/${value.id}/object.json` || entries.has(value.id)) fail('descriptor identity must match its own actual JSON descriptor');
     entries.set(value.id, {kind: 'descriptor', client: 'site/packaged-object-runtime.mts', descriptor, exported: 'loadPackagedObject'});
   }
   return {entries, importOffsets: new Set([sourceStart(imported)]), descriptorImports, descriptorFile};
@@ -475,7 +475,7 @@ function requireContextualBindingSource(source: string) {
     if (specifier.type === 'ImportDefaultSpecifier') defaults.set(specifier.local.name, requireString(node.source.value));
   }
   const binding = ast.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'FunctionDeclaration' && nameOf(node.declaration.id) === 'bindContextualObject' ? [node.declaration] : [])[0];
-  const context = [...defaults].find(([, path]) => path === '../src/planets/sun/prepared/world-context.json')?.[0];
+  const context = [...defaults].find(([, path]) => path === '../src/objects/sun/prepared/world-context.json')?.[0];
   if (!binding || !context || binding.params.length !== 3 || binding.body.body.length !== 2) fail();
   const definition = kind(binding.params[0], 'Identifier'), contextParam = kind(binding.params[1], 'Identifier');
   const frameParam = kind(binding.params[2], 'AssignmentPattern'), frameId = kind(frameParam.left, 'Identifier');
@@ -518,7 +518,7 @@ function requireApplicationWorldContextSource(source: string) {
       if (specifier.type === 'ImportDefaultSpecifier') defaults.set(specifier.local.name, requireString(statement.source.value));
     }
   }
-  const context = [...defaults].find(([, path]) => path === '../src/planets/sun/prepared/world-context.json')?.[0];
+  const context = [...defaults].find(([, path]) => path === '../src/objects/sun/prepared/world-context.json')?.[0];
   const renderer = '../src/renderers/css/dist/universe.js';
   const required = ['createPreparedUniverse', 'prepareObjectResources', 'loadPreparedCssVolume', 'loadPreparedCssPointField', 'loadPreparedCssSurfaceShell'];
   if (!context || !required.every(name => [...imports].some(([local, binding]) => binding.name === name && binding.source === renderer)) ||
@@ -693,7 +693,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       requireObjectRuntimeDefinition(definition, { objectId: object.id });
       return;
     }
-    const { objectControls } = await import(pathToFileURL(resolve(root, `src/planets/${object.id}/site/control-content.mjs`)).href);
+    const { objectControls } = await import(pathToFileURL(resolve(root, `src/objects/${object.id}/site/control-content.mjs`)).href);
     requireObjectRuntimeDefinition({ ...definition, schema: PREPARED_OBJECT_RUNTIME_SCHEMA,
       id: object.id, controls: objectControls }, { objectId: object.id, controls: objectControls });
   });
@@ -707,7 +707,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     return sources.get(path)!;
   }
   function releaseObjectSources(id: string) {
-    const prefix = resolve(root, 'src/planets', id) + '/';
+    const prefix = resolve(root, 'src/objects', id) + '/';
     for (const path of sources.keys()) if (path.startsWith(prefix) && !sharedClosure.has(path)) sources.delete(path);
   }
   async function inspect(path: string, shared: boolean, shellContent = false, serverOnly = false): Promise<Inspection> {
@@ -732,7 +732,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       requireContextFrame(context, 'sun');
       return;
     }
-    if (file.startsWith("../") || file.startsWith("src/planets/")) {
+    if (file.startsWith("../") || file.startsWith("src/objects/")) {
       sharedViolations.push({ file, line: 1, reason: "Shared runtime imports an object package" });
       return;
     }
@@ -787,7 +787,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   if (sharedClosure.has(applicationContextPath)) {
     try {
       requireApplicationWorldContextSource(await source(applicationContextPath));
-      const context = requireContextFrame(JSON.parse(await source(resolve(root, 'src/planets/sun/prepared/world-context.json'))), 'sun');
+      const context = requireContextFrame(JSON.parse(await source(resolve(root, 'src/objects/sun/prepared/world-context.json'))), 'sun');
       await requireContextPointField(root, context, source);
     } catch (error) { sharedViolations.push({ file: 'site/application-world-context.mts', line: 1, reason: errorMessage(error) }); }
   }
@@ -862,18 +862,18 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     async function visit(path: string): Promise<void> {
       if (visited.has(path)) return;
       visited.add(path);
-      const file = relative(root, path), isObject = file.startsWith("src/planets/");
+      const file = relative(root, path), isObject = file.startsWith("src/objects/");
       if (!isObject && sharedClosure.has(path)) return;
-      if (isObject && !file.startsWith(`src/planets/${object.id}/`)) {
+      if (isObject && !file.startsWith(`src/objects/${object.id}/`)) {
         violations.push({ file, line: 1, reason: "Object runtime imports another object package" });
         return;
       }
       const facts = await inspect(path, false);
       violations.push(...facts.violations);
-      if (![client, client.replace(/client\.mjs$/, "definition.mjs"), `src/planets/${object.id}/site/control-content.mjs`].includes(file) && !facts.dataOnly) {
+      if (![client, client.replace(/client\.mjs$/, "definition.mjs"), `src/objects/${object.id}/site/control-content.mjs`].includes(file) && !facts.dataOnly) {
         violations.push({ file, line: 1, reason: "Every non-shared reachable module must be serialized data; private executors are forbidden" });
       }
-      if (file === `src/planets/${object.id}/site/control-content.mjs`) {
+      if (file === `src/objects/${object.id}/site/control-content.mjs`) {
         try { requirePreparedControlSource(await source(path)); }
         catch (error) { violations.push({ file, line: 1, reason: errorMessage(error) }); }
       }
@@ -897,7 +897,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     }
     if (!thin) violations.unshift({ file: client, line: 1, reason: "Client must contain imports and one bound shared factory export only" });
     if (factoryCalls !== 1) violations.push({ file: client, line: 1, reason: `Expected one actual shared factory call; found ${factoryCalls}` });
-    if (!visited.has(resolve(root, `src/planets/${object.id}/site/control-content.mjs`))) {
+    if (!visited.has(resolve(root, `src/objects/${object.id}/site/control-content.mjs`))) {
       violations.push({ file: client, line: 1, reason: "Definition must import the actual control-content export" });
     }
     if (thin && !violations.length) {

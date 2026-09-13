@@ -1,6 +1,6 @@
 # Adding and maintaining a celestial body
 
-Every detailed body is an authored data package under `src/planets/<id>/`.
+Every detailed body is an authored data package under `src/objects/<id>/`.
 The directory name also covers the Sun, moons, dwarf planets, asteroids and
 comets. `OBJECTS` in `site/objects.mts` remains the only rendered-body registry.
 Navigation selects one active scene; it does not embed child scenes.
@@ -19,7 +19,7 @@ using the existing files.
 ## Package layout
 
 ```text
-src/planets/<id>/
+src/objects/<id>/
   README.md                    sources, processing, evidence and known problems
   NOTICE.md, LICENSE*          attribution and applicable terms
   object.json                  catalogue entry, recipe and prepared transport reference

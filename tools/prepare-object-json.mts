@@ -36,14 +36,14 @@ export async function writeObjectJson(id:string, definitionValue:unknown, option
   if (!OBJECTS.some(object => object.id === id) || definition.id !== id || definition.schema !== 'cssearth-object-runtime@4') {
     throw new TypeError('Prepared object identity does not match the application registry.');
   }
-  const descriptorPath = resolve(root, 'src/planets', id, 'object.json');
+  const descriptorPath = resolve(root, 'src/objects', id, 'object.json');
   const originalDescriptor = requireRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));
   let descriptor = parseObjectDescriptor(originalDescriptor);
   if (descriptor.schema !== 'cssearth-object@1' || descriptor.id !== id || typeof descriptor.type !== 'string') {
     throw new TypeError('Prepared object descriptor identity is invalid.');
   }
   const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./objects/dist/prepare-world-navigation.js');
-  const objectDirectory = resolve(root, 'src/planets', id);
+  const objectDirectory = resolve(root, 'src/objects', id);
   definition = prepareMarkerBindings(definition);
   const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot: root });
   definition = requireObjectRuntimeDefinition(preparedNavigation.definition);
@@ -57,7 +57,7 @@ export async function writeObjectJson(id:string, definitionValue:unknown, option
 
 /** Sync the shared twins and banks, transport the referenced runtime, and pin descriptor and page to it. */
 async function pinPreparedObject(id: string, originalDescriptor: Record<string, unknown>, properties: Record<string, unknown>, root: string) {
-  const objectDirectory = resolve(root, 'src/planets', id), preparedDirectory = resolve(objectDirectory, 'prepared');
+  const objectDirectory = resolve(root, 'src/objects', id), preparedDirectory = resolve(objectDirectory, 'prepared');
   await mkdir(preparedDirectory, { recursive: true });
   await syncPreparedShared(root, preparedDirectory);
   const definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8')));
@@ -79,7 +79,7 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
 
 /** Re-pin an already prepared object to its shared-bank transport without preparing anything. */
 export async function repinObjectJson(id: string, projectRoot = root) {
-  const descriptorPath = resolve(projectRoot, 'src/planets', id, 'object.json');
+  const descriptorPath = resolve(projectRoot, 'src/objects', id, 'object.json');
   const originalDescriptor = requireRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));
   const before = JSON.stringify(originalDescriptor.prepared);
   const pin = await pinPreparedObject(id, originalDescriptor, {}, projectRoot);
@@ -92,7 +92,7 @@ export async function updateObjectJsonForPresentation(target:string|URL, present
   const match = file.split(sep).join('/').match(/\/src\/planets\/([a-z][a-z0-9-]*)\/runtime\/preparedPresentation\.mjs$/);
   if (!match) return null;
   const id = match[1];
-  try { await access(resolve(root, 'src/planets', id, 'object.json')); }
+  try { await access(resolve(root, 'src/objects', id, 'object.json')); }
   catch (error) { if (hasErrorCode(error,'ENOENT')) return null; throw error; }
   return writeObjectJson(id, { ...requireRecord(presentation), schema: 'cssearth-object-runtime@4', id, controls });
 }
@@ -101,11 +101,11 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
   const results = [];
   for (const object of OBJECTS) {
     if (ids && !ids.includes(object.id)) continue;
-    try { await access(resolve(root, 'src/planets', object.id, 'object.json')); }
+    try { await access(resolve(root, 'src/objects', object.id, 'object.json')); }
     catch (error) { if (hasErrorCode(error,'ENOENT') && !ids) continue; throw error; }
     const runtimeDefinition:unknown = await authoredObject(object.id, root)
-      ? JSON.parse(await readFile(resolve(root, 'src/planets', object.id, 'prepared/runtime.json'), 'utf8'))
-      : requireRecord(await import(pathToFileURL(resolve(root, `src/planets/${object.id}/runtime/definition.mjs`)).href)).runtimeDefinition;
+      ? JSON.parse(await readFile(resolve(root, 'src/objects', object.id, 'prepared/runtime.json'), 'utf8'))
+      : requireRecord(await import(pathToFileURL(resolve(root, `src/objects/${object.id}/runtime/definition.mjs`)).href)).runtimeDefinition;
     results.push(await writeObjectJson(object.id, runtimeDefinition, options));
   }
   if (ids && results.length !== new Set(ids).size) throw new TypeError('A requested object has no registered JSON descriptor.');
@@ -113,7 +113,7 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
   // previous radius and make an otherwise valid destination fail at handoff.
   const { prepareSpatialContext } = await import('./objects/dist/prepare-spatial-context.js');
   for (const object of OBJECTS) {
-    const directory = resolve(root, 'src/planets', object.id);
+    const directory = resolve(root, 'src/objects', object.id);
     const descriptor = parseObjectDescriptor(await readFile(resolve(directory, 'object.json'), 'utf8'));
     const recipe=descriptor.properties.recipe;
     if(!isRecord(recipe)||!Array.isArray(recipe.sources))continue;

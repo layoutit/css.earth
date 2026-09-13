@@ -1,7 +1,7 @@
 import { expect, test, vi } from 'vitest';
 import { createCameraViewport } from './camera-viewport.js';
 import { createPerspectiveDolly } from './perspective-dolly.js';
-import scene from '../../../planets/mercury/prepared/scene.json';
+import scene from '../../../objects/mercury/prepared/scene.json';
 
 test('prepared FOVs retain independent measurements across switches and resize together', () => {
   let width = 1000, reads = 0, resize!: () => void, refresh!: FrameRequestCallback;

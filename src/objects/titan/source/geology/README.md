@@ -29,7 +29,7 @@ records but are not used as scene imagery.
 
 Reproduce from this directory’s pinned originals:
 
-    python tools/objects/acquisition/geology-grid.py src/planets/titan/source/geology/prepare-grid.json
+    python tools/objects/acquisition/geology-grid.py src/objects/titan/source/geology/prepare-grid.json
 
 Use the scientific Python versions in tools/objects/acquisition/requirements-mapped-science.txt.
 The original downloadable files and exact SHA-256 hashes are in release-files.json;

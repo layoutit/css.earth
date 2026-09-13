@@ -61,7 +61,7 @@ finite values.
 With NumPy and Rasterio available, from the repository root:
 
 ```sh
-python3 tools/objects/acquisition/enceladus-vims-spectral.py src/planets/enceladus/source/vims-chemistry/prepare.json
+python3 tools/objects/acquisition/enceladus-vims-spectral.py src/objects/enceladus/source/vims-chemistry/prepare.json
 ```
 
 The source manifest pins original and derived bytes. The ordinary scientific

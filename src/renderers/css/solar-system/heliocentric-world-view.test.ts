@@ -1,8 +1,8 @@
 import { required } from '../../../../tools/test-values.mts';
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
-import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
-import venusDefinition from "../../../../src/planets/venus/prepared/runtime.json" with {type: "json"};
+import runtimeDefinition from "../../../../src/objects/mercury/prepared/runtime.json" with {type: "json"};
+import venusDefinition from "../../../../src/objects/venus/prepared/runtime.json" with {type: "json"};
 import { projectHeliocentricView } from './heliocentric-view.js';
 
 const plan = runtimeDefinition.heliocentricView.plan;

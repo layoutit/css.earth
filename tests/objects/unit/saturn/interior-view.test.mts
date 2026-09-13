@@ -8,7 +8,7 @@ import { readPreparedFixture } from "../../fixtures.mts";
 const PREPARED_PRESENTATION = await readPreparedFixture('saturn', 'runtime');
 const PREPARED_SATURN_SCENE = await readPreparedFixture('saturn', 'scene');
 const PREPARED_SATURN_VIEWS = await readPreparedFixture('saturn', 'views');
-const runtimeAssets = JSON.parse(await readFile(new URL("../../../../src/planets/saturn/runtime-assets.json", import.meta.url), "utf8"));
+const runtimeAssets = JSON.parse(await readFile(new URL("../../../../src/objects/saturn/runtime-assets.json", import.meta.url), "utf8"));
 
 test("publishes a prepared retained Saturn interior view", () => {
   assert.equal(PREPARED_SATURN_VIEWS.schema, "csssaturn-prepared-views@1");
@@ -100,10 +100,10 @@ test("publishes a prepared retained Saturn interior view", () => {
 
 test("ships lossless DPR assets and keeps view switching declarative", async () => {
   const [client, styles, preparer, manifestText] = await Promise.all([
-    readFile(new URL("../../../../src/planets/saturn/prepared/runtime.json", import.meta.url), "utf8"),
+    readFile(new URL("../../../../src/objects/saturn/prepared/runtime.json", import.meta.url), "utf8"),
     readFile(new URL("../../../../src/renderers/css/styles/saturn-surfaces.css", import.meta.url), "utf8"),
     readFile(new URL("../../../../tools/objects/cutaway/materials.mts", import.meta.url), "utf8"),
-    readFile(new URL("../../../../src/planets/saturn/source/interior/manifest.json", import.meta.url), "utf8"),
+    readFile(new URL("../../../../src/objects/saturn/source/interior/manifest.json", import.meta.url), "utf8"),
   ]);
   const manifest = JSON.parse(manifestText);
   assert.equal(manifest.schema, "csssaturn-interior-sources@1");

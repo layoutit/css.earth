@@ -38,7 +38,7 @@ Mathilde illustrates this failure mode: the already-pinned Thomas release's
 from preliminary NEAR FITS pointing. The `near-msi-camera` recipe uses that table;
 its conversion from square-pixel table lines to rectangular detector rows is an
 explicit inference checked against withheld limb points. Read
-[Mathilde's source method](../../../../src/planets/mathilde/README.md) for the
+[Mathilde's source method](../../../../src/objects/mathilde/README.md) for the
 exact inputs and limits. Its raw companions support missing-telemetry and
 saturation checks, while the archive's unresolved quality index stays unresolved.
 These are NEAR-specific facts, not default conventions for other instruments.

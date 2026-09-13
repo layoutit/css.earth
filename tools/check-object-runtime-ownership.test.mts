@@ -22,7 +22,7 @@ const requirePresent = <T,>(value: T | undefined | null, label: string): T => {
   return value;
 };
 
-const root = "/ownership-fixture", prefix = "src/planets/moon/runtime/";
+const root = "/ownership-fixture", prefix = "src/objects/moon/runtime/";
 const client = prefix + "client.mjs", definitionPath = prefix + "definition.mjs";
 const binding = `import { createObjectRuntime as bind } from '../../../platform/object-runtime.mts';
 import { runtimeDefinition as definition } from './definition.mjs';
@@ -40,7 +40,7 @@ const prepared = `export const PREPARED_PRESENTATION = Object.freeze(${JSON.stri
 const registrySource = `import { defineObject, defineObjects } from './object-schema.mts';
 export const OBJECTS = defineObjects([
   object("moon", "Moon", "satellite", "#aaa7a0", 1, "Moon fixture", async () => {
-    const { mountMoonClient } = await import("../src/planets/moon/runtime/client.mjs");
+    const { mountMoonClient } = await import("../src/objects/moon/runtime/client.mjs");
     return mountMoonClient;
   }),
 ]);
@@ -52,7 +52,7 @@ function object(id, name, classification, color, distanceAu, description, loadSc
   });
 }
 `;
-const sunContext = await readFile(new URL("../src/planets/sun/prepared/world-context.json", import.meta.url), "utf8");
+const sunContext = await readFile(new URL("../src/objects/sun/prepared/world-context.json", import.meta.url), "utf8");
 const objectSchema = await readFile(new URL("../site/object-schema.mts", import.meta.url), "utf8");
 const isArray = await readFile(new URL("../src/platform/is-array.mts", import.meta.url), "utf8");
 const browserTypes = await readFile(new URL("../site/browser-types.mts", import.meta.url), "utf8");
@@ -63,9 +63,9 @@ function fixture(extra: SourceOverlay = {}, definitionTail = ""): AuditOptions {
     "site/objects.mts": registrySource, "site/object-schema.mts": objectSchema, "site/browser-types.mts": browserTypes, "src/platform/is-array.mts": isArray,
     "site/layouts/PlanetLayout.astro": "<main><slot /></main>",
     "site/components/PlanetShell.astro": "<aside><slot /></aside>",
-    "src/planets/sun/prepared/world-context.json": sunContext,
+    "src/objects/sun/prepared/world-context.json": sunContext,
     [prefix + "preparedPresentation.mjs"]: prepared,
-    "src/planets/moon/site/control-content.mjs": `export const objectControls = ${JSON.stringify(objectControls)};`,
+    "src/objects/moon/site/control-content.mjs": `export const objectControls = ${JSON.stringify(objectControls)};`,
     "src/platform/prepared-schema.mts": `export const PREPARED_OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@3";`,
     "src/platform/object-runtime.mts": shared, ...extra };
   return { root, objects: [{ id: "moon" }],
@@ -149,7 +149,7 @@ test("shared owners reject private packages, fixed asset namespaces, v1 hooks an
   for (const [source, expected] of cases) await assert.rejects(auditObjectRuntimeOwnership(fixture({ "src/platform/object-runtime.mts": source })), expected);
 });
 test("object controls cannot hide an executor behind label projection", async () => {
-  const controlsPath = "src/planets/moon/site/control-content.mjs";
+  const controlsPath = "src/objects/moon/site/control-content.mjs";
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ [controlsPath]:
     `export const objectControls = ${JSON.stringify(objectControls)};\nconst action = node => node.style.transform = 'none';` })), /static prepared content/);
 });
@@ -173,7 +173,7 @@ interface Props { title: string }
     [{ "site/shared-client.mjs": "import { createPolyCamera } from '@layoutit/polycss'; createPolyCamera({});" }, /native camera factory site; found 2/],
     [{ [shell]: files[shell].replace("{label}", "{object.id === 'moon' ? label : ''}") }, /PlanetShell.astro.*object-ID dispatch/],
     [{ [shell]: files[shell].replace("import '../shared-client.mjs';", "import('../shared-client.mjs');") }, /PlanetShell.astro.*Dynamic runtime imports/],
-    [{ [helper]: "export { data } from '../src/planets/moon/site/generated.mjs';" }, /Shared runtime imports an object package/],
+    [{ [helper]: "export { data } from '../src/objects/moon/site/generated.mjs';" }, /Shared runtime imports an object package/],
     [{ [shell]: "<script>const broken = ;</script>" }, /Invalid runtime source/],
   ];
   for (const [changed, expected] of shellMutations) await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files, ...changed })), expected);
@@ -232,7 +232,7 @@ test("a content validation failure cannot be labeled migrated", async () => {
 
 test("the actual Moon registry import must point to the audited client and return its bound export", async () => {
   for (const source of [
-    registrySource.replace("../src/planets/moon/runtime/client.mjs", "../src/planets/moon/site/private-loader.mjs"),
+    registrySource.replace("../src/objects/moon/runtime/client.mjs", "../src/objects/moon/site/private-loader.mjs"),
     registrySource.replace("return mountMoonClient;", "return () => mountMoonClient();"),
     registrySource.replace("return mountMoonClient;", "mountMoonClient(); return mountMoonClient;"),
     registrySource.replace("    loadScene,", "    loadScene: () => loadScene(),"),
@@ -255,7 +255,7 @@ test("the actual OBJECTS registry has only normalized packages and one shared so
   assert.ok(report.entries.every(entry => entry.factoryCalls === 1 && entry.owners.length === 0 && entry.orphanExecutors.length === 0));
   assert.ok(report.sharedClosure.includes("site/components/PlanetShell.astro"));
   assert.ok(report.sharedClosure.includes("site/prepared-shell-titles.mjs"));
-  assert.ok(!report.sharedClosure.includes("src/planets/uranus/site/preparedLensControls.mjs"));
+  assert.ok(!report.sharedClosure.includes("src/objects/uranus/site/preparedLensControls.mjs"));
 });
 
 test('literal metadata defaults do not hide loader ownership, executable defaults are rejected', async () => {
@@ -286,10 +286,10 @@ test('descriptor loaders prove the actual JSON transport and typed source build 
   assert.equal(report.complete, true);
   assert.equal(report.cameraFactorySites.length, 1, 'one native camera factory in the selected renderer assembly');
   for (const entry of report.entries) {
-    assert.equal(requirePresent(entry.entry, `${entry.id} entry`).file, `src/planets/${entry.id}/object.json`);
+    assert.equal(requirePresent(entry.entry, `${entry.id} entry`).file, `src/objects/${entry.id}/object.json`);
     assert.equal(entry.factoryCalls, 1);
     const presentation = requirePresent(entry.presentation, `${entry.id} presentation`);
-    assert.equal(presentation.file, `src/planets/${entry.id}/prepared/object.json`);
+    assert.equal(presentation.file, `src/objects/${entry.id}/prepared/object.json`);
     assert.match(JSON.stringify(entry.closure), new RegExp(presentation.file));
   }
   for (const file of ['src/renderers/css/index.ts', 'src/renderers/css/runtime/object-runtime.ts',
@@ -308,25 +308,25 @@ test('authored descriptors do not inspect deleted private runtime modules', asyn
 });
 
 test('authored JSON transport rejects mismatched bytes, controls, source pins and physical frames', async () => {
-  const file = 'src/planets/mercury/object.json', descriptor = JSON.parse(await readFile(file, 'utf8'));
+  const file = 'src/objects/mercury/object.json', descriptor = JSON.parse(await readFile(file, 'utf8'));
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, id: 'venus' }) }), /descriptor identity/);
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, url: '../venus/prepared/object.json' } }) }), /owning object prepared directory/);
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, url: 'prepared/../prepared/object.json' } }) }), /owning object prepared directory/);
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, sha256: '0'.repeat(64) } }) }), /SHA-256/);
-  const runtimePath = 'src/planets/mercury/prepared/runtime.json';
+  const runtimePath = 'src/objects/mercury/prepared/runtime.json';
   const runtime = JSON.parse(await readFile(runtimePath, 'utf8'));
   runtime.camera.defaultZoom += .1;
   await assert.rejects(descriptorOverlay({ [runtimePath]: JSON.stringify(runtime) }), /differ from the checked authored runtime/);
-  const sourcePath = 'src/planets/mercury/source/content/object.json';
+  const sourcePath = 'src/objects/mercury/source/content/object.json';
   await assert.rejects(descriptorOverlay({ [sourcePath]: `${await readFile(sourcePath, 'utf8')} ` }), /source digest drifted/);
-  const payloadPath = 'src/planets/mercury/prepared/object.json', payload = JSON.parse(await readFile(payloadPath, 'utf8'));
+  const payloadPath = 'src/objects/mercury/prepared/object.json', payload = JSON.parse(await readFile(payloadPath, 'utf8'));
   runtime.controls.lenses.controls[0].id = '';
   payload.data = runtime;
   const bytes = JSON.stringify(payload);
   descriptor.prepared.sha256 = createHash('sha256').update(bytes).digest('hex');
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify(descriptor), [payloadPath]: bytes,
     [runtimePath]: JSON.stringify(runtime) }), /control|lens/i);
-  const scenePath = 'src/planets/mercury/prepared/scene.json', scene = JSON.parse(await readFile(scenePath, 'utf8'));
+  const scenePath = 'src/objects/mercury/prepared/scene.json', scene = JSON.parse(await readFile(scenePath, 'utf8'));
   scene.worldFrame.bodyRadiusM += 1;
   await assert.rejects(descriptorOverlay({ [scenePath]: JSON.stringify(scene) }), /physical frame/);
 });
@@ -353,7 +353,7 @@ test('descriptor binding cannot bypass the shared factory or redirect the prepar
     await assert.rejects(descriptorOverlay({ [file]: changed }), /forward its prepared transport|Contextual binding/);
   }
   const catalogPath = 'site/prepared-object-catalog.mts', catalog = await readFile(catalogPath, 'utf8');
-  const wrongDescriptor = catalog.replace('../src/planets/mercury/object.json', '../src/planets/venus/object.json');
+  const wrongDescriptor = catalog.replace('../src/objects/mercury/object.json', '../src/objects/venus/object.json');
   assert.notEqual(wrongDescriptor, catalog, 'Descriptor mutation must change the actual import');
   await assert.rejects(descriptorOverlay({ [catalogPath]: wrongDescriptor }), /unique JSON descriptor imports/);
   const helperPath = 'site/object-catalog.mts', helper = await readFile(helperPath, 'utf8');
@@ -467,13 +467,13 @@ test('the generated catalogue is checked as data without executing source overla
     await assert.rejects(descriptorOverlay({ [file]: changed }), /prepared catalogue/);
   }
   assert.equal(Reflect.get(globalThis, payload), undefined);
-  const descriptor = 'src/planets/mercury/object.json';
+  const descriptor = 'src/objects/mercury/object.json';
   const value = JSON.parse(await readFile(descriptor, 'utf8'));
   await assert.rejects(descriptorOverlay({ [descriptor]: JSON.stringify({ ...value, id: 'other-body' }) }), /own actual JSON descriptor/);
 });
 
 test('descriptor context binding pins both prepared contexts to the shared factories and physical references', async () => {
-  const contextFile = 'src/planets/sun/prepared/world-context.json';
+  const contextFile = 'src/objects/sun/prepared/world-context.json';
   const packagedFile = 'site/packaged-object-runtime.mts', applicationFile = 'site/application-world-context.mts', starsDescriptorFile = 'src/objects/stellar-neighbourhood/object.json';
   const starsPayloadFile = 'src/objects/stellar-neighbourhood/prepared/stars.json';
   const [contextText, packaged, application, starDescriptorText, starsPayloadText] = await Promise.all([

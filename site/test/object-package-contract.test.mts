@@ -48,10 +48,10 @@ test("derives the complete owned file contract from planet identity", () => {
   const planet = implemented[0];
   const paths = objectPackagePaths(planet, "/project", true);
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/planets/${planet.id}/prepared/content.json`,
+    `/project/src/objects/${planet.id}/prepared/content.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/planets/${planet.id}/prepared/runtime.refs.json`,
+    `/project/src/objects/${planet.id}/prepared/runtime.refs.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
     `/project/site/pages/[id].astro`,
@@ -60,10 +60,10 @@ test("derives the complete owned file contract from planet identity", () => {
     `/project/tests/objects/browser/${planet.id}/browser-profile.mts`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/planets/${planet.id}/object.json`,
+    `/project/src/objects/${planet.id}/object.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/planets/${planet.id}/source/manifest.json`,
+    `/project/src/objects/${planet.id}/source/manifest.json`,
   ));
   assert.ok(paths.requiredFiles.every((file) => !file.includes('/data/planets/')));
   assert.ok(paths.requiredFiles.every(file => !/src\/planets\/[^/]+\/(?:tools|test|site|runtime)\//u.test(file)));
@@ -72,7 +72,7 @@ test("derives the complete owned file contract from planet identity", () => {
 test("requires every registered object package file", async () => {
   for (const planet of implemented) {
     await validateObjectPackageFiles(planet);
-    const controls = SourceEvidence.parse(JSON.parse(await readFile(new URL(`../../src/planets/${planet.id}/prepared/controls.json`, import.meta.url), 'utf8')));
+    const controls = SourceEvidence.parse(JSON.parse(await readFile(new URL(`../../src/objects/${planet.id}/prepared/controls.json`, import.meta.url), 'utf8')));
     assert.ok(controls.child('lenses').rows('controls').length > 0, `${planet.id}: the displayed surface needs an identified dataset`);
   }
   await assert.rejects(

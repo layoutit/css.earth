@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import sharp from 'sharp';
-const root = new URL('../../../../src/planets/bianca/source/', import.meta.url);
+const root = new URL('../../../../src/objects/bianca/source/', import.meta.url);
 const read = async (path: string|URL) => JSON.parse((await readFile(new URL(path, root))).toString('utf8'));
 
 test('Bianca retains the published axes without confusing projected and volume radii', async () => {

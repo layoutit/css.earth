@@ -8,7 +8,7 @@ import { prepareObservedSurfaces } from './observations.mts';
 const projectRoot=fileURLToPath(new URL('../../../',import.meta.url));
 export async function assertObservationPreparationParity(id: string) {
   if(!/^[a-z][a-z0-9-]*$/u.test(id))throw new TypeError('Unsafe object identity.');
-  const directory=resolve(projectRoot,'src/planets',id);
+  const directory=resolve(projectRoot,'src/objects',id);
   const config: unknown=JSON.parse(await readFile(resolve(directory,'source/preparation/observations.json'),'utf8'));
   const manifest=parse(JSON.parse(await readFile(resolve(directory,'runtime-assets.json'),'utf8')), runtimeAssetManifest, 'runtime asset manifest');
   const result=await prepareObservedSurfaces({sourceDirectory:resolve(directory,'source'),config,write:false});

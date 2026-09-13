@@ -18,7 +18,7 @@ for (const record of sources.filter(record => !selected.size || selected.has(rec
   const bodyId = record.id, acquisition = record.acquisition?.sceneSatellite;
   if (!acquisition) throw new TypeError(`Missing source-state acquisition: ${bodyId}.`);
   const { parent: centerBodyId, target, center } = acquisition;
-  const bodyRoot = resolve(root, 'src/planets', bodyId);
+  const bodyRoot = resolve(root, 'src/objects', bodyId);
   const state = await loadBodyEpochEphemeris({ bodyRoot, bodyId, centerBodyId, target, center, epochJdTt });
   // Keep detailed validation receipts in the object source package.
   const provenance: Record<string, unknown> = { ...state.provenance };
