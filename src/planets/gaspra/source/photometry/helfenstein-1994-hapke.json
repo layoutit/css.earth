@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "helfenstein-1994-hapke",
+  "instrument": "Galileo SSI, combined with Earth-based telescopic photometry",
+  "filter": "0.56 µm",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "hapke",
+    "singleScatteringAlbedo": 0.36,
+    "hFunction": "hapke-1981",
+    "phaseFunction": {
+      "form": "henyey-greenstein",
+      "asymmetry": -0.18
+    },
+    "shadowHiding": {
+      "amplitude": 1.63,
+      "width": 0.06
+    },
+    "roughnessDegrees": 29
+  },
+  "fit": {
+    "phaseDegrees": [
+      2,
+      51
+    ]
+  }
+}

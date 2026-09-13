@@ -86,6 +86,10 @@ angle among each candidate's interpolation contributors, favoring less
 foreshortening. Brightness does not choose the winner. Different resolution or
 source uncertainty may justify a different criterion; retain its rationale.
 
+Level gains that follow phase angle rather than exposure mean a phase function
+is missing. Normalize with the body's published photometric model first (see
+`tools/photometry/README.md`), then fit only what remains.
+
 When residual exposure steps warrant level matching, sample the same surface
 locations in each observation after photometric correction. Robust median
 log-ratios and their dispersion can constrain one relative display gain per
