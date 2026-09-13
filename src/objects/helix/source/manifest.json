@@ -139,8 +139,8 @@
       "title": "Helix adopted world placement",
       "credit": "Benedict et al. (2009); cssEarth placement",
       "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
-      "expectedSha256": "67cfca0cb284dbfc9a2b365dd34ad7b6b0da2fc7d4cf40b2f6c13c6a62eb4f7d",
-      "expectedBytes": 1718,
+      "expectedSha256": "cf8a4a8675cd1aa5b6fcdf254aa1950db47384f6964a328e181e6d5fa3c15a9f",
+      "expectedBytes": 1875,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -162,8 +162,8 @@
       "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
       "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
       "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
-      "expectedSha256": "f7cc8d1533503cc709a20deb7ea759604d6384ae61b00cb769e5bd7160f28e08",
-      "expectedBytes": 2976849,
+      "expectedSha256": "5dca1a7a9abf3aab176e5c6677134ee647cc2c5e0278b3234cc76d43c5fc8dd2",
+      "expectedBytes": 3009127,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -192,8 +192,8 @@
     {
       "id": "document-1",
       "path": "src/objects/helix/source/delivery.json",
-      "expectedSha256": "67cfca0cb284dbfc9a2b365dd34ad7b6b0da2fc7d4cf40b2f6c13c6a62eb4f7d",
-      "expectedBytes": 1718,
+      "expectedSha256": "cf8a4a8675cd1aa5b6fcdf254aa1950db47384f6964a328e181e6d5fa3c15a9f",
+      "expectedBytes": 1875,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -212,7 +212,7 @@
     {
       "id": "document-3",
       "path": "src/objects/helix/source/presentation.json",
-      "expectedSha256": "067f02529aeecdc95bc51e109af9f6c93e68b0e83234159db04a7e3e4b7807f4",
+      "expectedSha256": "ed4d729eaea6c5e460142cdff30c1fbb4a8f08dc8254e3506ca731a240625070",
       "expectedBytes": 6168,
       "sourceBinding": {
         "kind": "local",

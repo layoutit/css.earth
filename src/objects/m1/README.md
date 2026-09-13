@@ -26,7 +26,7 @@ The [lab assessment](../../../labs/nebula/models/m1/README.md) records native re
 
 The [delivery recipe](source/delivery.json) and [request](source/request.json) define replay; its generated receipt identifies the actual result. The [presentation record](source/presentation.json) binds source previews and descriptions. Follow the [shared app preparation guide](../../../docs/nebulae/README.md) for app checks; earlier lab checks alone do not qualify this integration.
 
-The 13 September 2026 integration prepared result `3fac3e884fb50266769d927b5e8832eb374a7dc3d93d49d28807f010d45677cf`, with six lenses, 351 shared lights and 568 nonempty slices per lens. The final star atlas contains the complete set of spectral colors; the earlier assembly failure is corrected at that owner. This reproduced result is distinct from historical `88f361d1…`; successful preparation does not clear the recorded material-fidelity problem or establish a clean-cache NOX replay.
+The 13 September 2026 integration prepared result `3fac3e884fb50266769d927b5e8832eb374a7dc3d93d49d28807f010d45677cf`, with six lenses, 351 shared lights and 542 nonempty slices plus 26 distant-view images per lens. The final star atlas contains the complete set of spectral colors; the earlier assembly failure is corrected at that owner. This reproduced result is distinct from historical `88f361d1…`; successful preparation does not clear the recorded material-fidelity problem or establish a clean-cache NOX replay.
 
 ## Known problems
 

@@ -13,10 +13,47 @@
     "limitingMagnitude": 16,
     "fadeMagnitude": 1.5,
     "maximumStars": 1500,
-    "retainIds": [],
+    "retainIds": [
+      "eso-wfi-971",
+      "eso-wfi-1427",
+      "eso-wfi-1696",
+      "eso-wfi-1522",
+      "eso-wfi-1768",
+      "eso-wfi-786",
+      "eso-wfi-1030",
+      "eso-wfi-902",
+      "eso-wfi-811",
+      "eso-wfi-970",
+      "eso-wfi-943",
+      "eso-wfi-960",
+      "eso-wfi-1390",
+      "eso-wfi-1223",
+      "eso-wfi-794",
+      "eso-wfi-1140",
+      "eso-wfi-810",
+      "eso-wfi-858",
+      "eso-wfi-702",
+      "eso-wfi-885",
+      "eso-wfi-1195",
+      "eso-wfi-1134",
+      "eso-wfi-1508",
+      "eso-wfi-800",
+      "eso-wfi-705",
+      "eso-wfi-1934",
+      "eso-wfi-668",
+      "eso-wfi-783",
+      "eso-vista-12992",
+      "eso-vista-13414",
+      "eso-vista-11915",
+      "eso-vista-17840",
+      "eso-vista-10069",
+      "eso-wide-785"
+    ],
     "referenceMagnitude": 10,
     "referenceDiameterPx": 0.05,
-    "referenceFocalPixels": 1000
+    "referenceFocalPixels": 1000,
+    "retainedMatchArcsec": 10,
+    "retainedAppearance": "anchor"
   },
   "stars": [
     {
@@ -99443,6 +99480,844 @@
     "brightestMagnitude": 5.0129914,
     "faintestMagnitude": 15.999634,
     "selection": "Authored spherical neighbourhood with radial taper. RUWE<1.4 and parallax/error>5; physical sphere filtered before brightness-ordered TOP 8000. Distance medians and 16/84 percentiles retained; no cluster membership inferred.",
-    "retainedSources": null
+    "retainedSources": "Thirty-four observed stellar image cores (28 WFI, five VISTA, one wider optical), including the central star, anchor residual halos. Canonical source-image photometry remains visible across lenses. Their compiler emission-column depths remain conditional visual placements, not matched Gaia distances. The surrounding Gaia catalogue retains its independent Bailer-Jones medians.",
+    "imageAnchors": {
+      "schema": "cssearth-nebula-image-anchor-receipt@1",
+      "inputSourceResult": {
+        "id": "26c8c2b43cd55398b8ee3489e66ae8944a867f52b8cfa5a72f0af3d4361b9597",
+        "path": ".local/nebula-lab/compiler/26c8c2b43cd55398b8ee3489e66ae8944a867f52b8cfa5a72f0af3d4361b9597/result.json",
+        "sha256": "1e7d6b1c11b4d30ed469bca4fb871e74a27f8f98cb40dd803f23e4380ac57ce0",
+        "bytes": 374895
+      },
+      "referenceImage": {
+        "id": "eso-wfi",
+        "page": "https://www.eso.org/public/images/eso0907a/",
+        "url": "https://cdn.eso.org/images/original/eso0907a.tif",
+        "sha256": "057c8dacfe1686cc6cd464768996369c68d23e32844a5059107aba03bcf38769",
+        "credit": "ESO",
+        "bands": "Optical · B / V / R",
+        "registration": {
+          "path": "labs/nebula/models/helix/observations.json",
+          "sha256": "94c86a73e965bf38c4df792047cdbeb2321cccecb2bfd3a4d0340b84c4af38ea"
+        }
+      },
+      "catalogueAcquisition": {
+        "sourceUrl": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+        "endpoint": "https://dc.zah.uni-heidelberg.de/tap/sync",
+        "query": "SELECT TOP 12000 source_id,ra,dec,pmra,pmdec,phot_g_mean_mag,phot_bp_mean_mag,phot_rp_mean_mag,ruwe,parallax,parallax_error,r_med_geo,r_lo_geo,r_hi_geo FROM gedr3dist.litewithdist WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',337.4107083333334,-20.83717222222222,0.5)) AND phot_g_mean_mag<17 ORDER BY phot_g_mean_mag,source_id",
+        "cache": "output/helix-core-diagnosis/gaia-cone.csv",
+        "sha256": "086bef1a5be5875fca38731745b48e52afb04043f3a443b433b1693dc669fa2c",
+        "bytes": 100214,
+        "rows": 589,
+        "truncated": false,
+        "retrievedAt": "2026-09-13T22:36:24.828Z",
+        "credit": "ESA/Gaia/DPAC; Bailer-Jones et al. (2021); GAVO",
+        "license": "CC-BY-4.0"
+      },
+      "selection": {
+        "referenceApertureRanks": 40,
+        "maximumMatchArcsec": 6,
+        "onePeakPerGaiaSource": true,
+        "retainedCount": 34,
+        "retainedMatchArcsec": 10,
+        "minimumReferenceAlphaTimesDiameterSquared": 24.967841847169367,
+        "referenceWfiCount": 28,
+        "coverageExtensionCount": 6,
+        "extensionMaximumGaiaMatchArcsec": 10,
+        "retainedAppearance": "anchor"
+      },
+      "matches": [
+        {
+          "imageId": "eso-wfi-971",
+          "gaiaSourceId": "6628966431474772224",
+          "referenceApertureRank": 1,
+          "observedOffsetArcsec": [
+            -831.7260279546597,
+            230.29294352278555
+          ],
+          "matchArcsec": 0.9368497802214659,
+          "gMag": 13.143507,
+          "distancePc": 1103.5002,
+          "distanceLowerPc": 1087.3832,
+          "distanceUpperPc": 1119.894,
+          "ruwe": 1.0049298
+        },
+        {
+          "imageId": "eso-wfi-1427",
+          "gaiaSourceId": "6629160529636610432",
+          "referenceApertureRank": 2,
+          "observedOffsetArcsec": [
+            -594.7278319051414,
+            773.0406770285801
+          ],
+          "matchArcsec": 1.2673181173102301,
+          "gMag": 11.447903,
+          "distancePc": 398.96127,
+          "distanceLowerPc": 395.55264,
+          "distanceUpperPc": 403.01706,
+          "ruwe": 1.0711669
+        },
+        {
+          "imageId": "eso-wfi-1696",
+          "gaiaSourceId": "6629069201451951616",
+          "referenceApertureRank": 4,
+          "observedOffsetArcsec": [
+            571.2343810715693,
+            613.7478084502436
+          ],
+          "matchArcsec": 4.080613467295685,
+          "gMag": 11.000467,
+          "distancePc": 573.5729,
+          "distanceLowerPc": 567.67285,
+          "distanceUpperPc": 579.3975,
+          "ruwe": 1.0183445
+        },
+        {
+          "imageId": "eso-wfi-1522",
+          "gaiaSourceId": "6629062604382167808",
+          "referenceApertureRank": 5,
+          "observedOffsetArcsec": [
+            547.9812390691317,
+            69.82474330501054
+          ],
+          "matchArcsec": 4.434230266620799,
+          "gMag": 10.992377,
+          "distancePc": 339.15466,
+          "distanceLowerPc": 337.63452,
+          "distanceUpperPc": 341.17886,
+          "ruwe": 0.96684635
+        },
+        {
+          "imageId": "eso-wfi-1768",
+          "gaiaSourceId": "6628872217071995008",
+          "referenceApertureRank": 6,
+          "observedOffsetArcsec": [
+            -111.37782662230165,
+            -380.32586902798676
+          ],
+          "matchArcsec": 1.4869216171969628,
+          "gMag": 13.662327,
+          "distancePc": 1240.6165,
+          "distanceLowerPc": 1193.6217,
+          "distanceUpperPc": 1287.3315,
+          "ruwe": 1.862814
+        },
+        {
+          "imageId": "eso-wfi-786",
+          "gaiaSourceId": "6629053426037128576",
+          "referenceApertureRank": 7,
+          "observedOffsetArcsec": [
+            738.9637715221987,
+            -434.6666420320526
+          ],
+          "matchArcsec": 1.2493077030578223,
+          "gMag": 14.023632,
+          "distancePc": 598.14966,
+          "distanceLowerPc": 590.793,
+          "distanceUpperPc": 605.362,
+          "ruwe": 1.1864089
+        },
+        {
+          "imageId": "eso-wfi-1030",
+          "gaiaSourceId": "6629065555024771840",
+          "referenceApertureRank": 9,
+          "observedOffsetArcsec": [
+            578.2640729406305,
+            99.38779877361708
+          ],
+          "matchArcsec": 1.766455002851088,
+          "gMag": 14.028439,
+          "distancePc": 600.252,
+          "distanceLowerPc": 594.2544,
+          "distanceUpperPc": 606.71454,
+          "ruwe": 0.9644288
+        },
+        {
+          "imageId": "eso-wfi-902",
+          "gaiaSourceId": "6629053361612501888",
+          "referenceApertureRank": 11,
+          "observedOffsetArcsec": [
+            684.8747143384923,
+            -444.2618086540073
+          ],
+          "matchArcsec": 1.4197707998435805,
+          "gMag": 14.198855,
+          "distancePc": 1016.05255,
+          "distanceLowerPc": 991.82776,
+          "distanceUpperPc": 1036.5051,
+          "ruwe": 1.2292795
+        },
+        {
+          "imageId": "eso-wfi-811",
+          "gaiaSourceId": "6628868300061819136",
+          "referenceApertureRank": 13,
+          "observedOffsetArcsec": [
+            -435.3131066112197,
+            -557.0237714323808
+          ],
+          "matchArcsec": 1.4080008824764827,
+          "gMag": 14.090182,
+          "distancePc": 1119.4878,
+          "distanceLowerPc": 1098.7454,
+          "distanceUpperPc": 1140.0426,
+          "ruwe": 1.0218828
+        },
+        {
+          "imageId": "eso-wfi-970",
+          "gaiaSourceId": "6629066040356005248",
+          "referenceApertureRank": 14,
+          "observedOffsetArcsec": [
+            623.1863356174568,
+            263.5066466831483
+          ],
+          "matchArcsec": 1.5665883326661731,
+          "gMag": 13.940679,
+          "distancePc": 751.37463,
+          "distanceLowerPc": 741.9333,
+          "distanceUpperPc": 761.6699,
+          "ruwe": 0.9664109
+        },
+        {
+          "imageId": "eso-wfi-943",
+          "gaiaSourceId": "6628970520283639936",
+          "referenceApertureRank": 15,
+          "observedOffsetArcsec": [
+            -532.5079000923129,
+            421.9767355568597
+          ],
+          "matchArcsec": 3.486376969681017,
+          "gMag": 13.892357,
+          "distancePc": 483.54333,
+          "distanceLowerPc": 472.07315,
+          "distanceUpperPc": 495.6012,
+          "ruwe": 2.8992517
+        },
+        {
+          "imageId": "eso-wfi-960",
+          "gaiaSourceId": "6629062741821121152",
+          "referenceApertureRank": 19,
+          "observedOffsetArcsec": [
+            488.53314086067337,
+            141.724938608929
+          ],
+          "matchArcsec": 1.3525737471092785,
+          "gMag": 14.250226,
+          "distancePc": 905.4213,
+          "distanceLowerPc": 877.7484,
+          "distanceUpperPc": 946.1485,
+          "ruwe": 2.5389383
+        },
+        {
+          "imageId": "eso-wfi-1390",
+          "gaiaSourceId": "6629062776180859008",
+          "referenceApertureRank": 20,
+          "observedOffsetArcsec": [
+            453.2995893126391,
+            165.4474296623015
+          ],
+          "matchArcsec": 1.2661536769485622,
+          "gMag": 14.02985,
+          "distancePc": 338.4594,
+          "distanceLowerPc": 336.68204,
+          "distanceUpperPc": 340.32303,
+          "ruwe": 1.066773
+        },
+        {
+          "imageId": "eso-wfi-1223",
+          "gaiaSourceId": "6628871873474613888",
+          "referenceApertureRank": 21,
+          "observedOffsetArcsec": [
+            -518.7531150574916,
+            -48.24434227484558
+          ],
+          "matchArcsec": 4.967799270163244,
+          "gMag": 12.672563,
+          "distancePc": 589.91785,
+          "distanceLowerPc": 584.9335,
+          "distanceUpperPc": 593.643,
+          "ruwe": 1.0245476
+        },
+        {
+          "imageId": "eso-wfi-794",
+          "gaiaSourceId": "6629054632922821120",
+          "referenceApertureRank": 22,
+          "observedOffsetArcsec": [
+            637.2382171080832,
+            -467.4816198192621
+          ],
+          "matchArcsec": 0.26690439016015316,
+          "gMag": 14.4426155,
+          "distancePc": 983.7881,
+          "distanceLowerPc": 961.0069,
+          "distanceUpperPc": 997.9893,
+          "ruwe": 0.94078773
+        },
+        {
+          "imageId": "eso-wfi-1140",
+          "gaiaSourceId": "6629059610790034432",
+          "referenceApertureRank": 24,
+          "observedOffsetArcsec": [
+            735.8835009229475,
+            17.43663756399512
+          ],
+          "matchArcsec": 2.0534437826608993,
+          "gMag": 13.061006,
+          "distancePc": 425.23914,
+          "distanceLowerPc": 422.585,
+          "distanceUpperPc": 427.96378,
+          "ruwe": 0.8571268
+        },
+        {
+          "imageId": "eso-wfi-810",
+          "gaiaSourceId": "6628868952896829184",
+          "referenceApertureRank": 25,
+          "observedOffsetArcsec": [
+            -189.73004241294532,
+            -507.18798404556077
+          ],
+          "matchArcsec": 2.360345335810667,
+          "gMag": 14.583852,
+          "distancePc": 525.1016,
+          "distanceLowerPc": 518.24225,
+          "distanceUpperPc": 532.08624,
+          "ruwe": 1.1451892
+        },
+        {
+          "imageId": "eso-wfi-858",
+          "gaiaSourceId": "6629066933709203584",
+          "referenceApertureRank": 26,
+          "observedOffsetArcsec": [
+            825.6708938622415,
+            300.3204849243645
+          ],
+          "matchArcsec": 0.45998565844063505,
+          "gMag": 14.441987,
+          "distancePc": 798.6359,
+          "distanceLowerPc": 786.1728,
+          "distanceUpperPc": 809.7976,
+          "ruwe": 1.0443523
+        },
+        {
+          "imageId": "eso-wfi-702",
+          "gaiaSourceId": "6629081364799334528",
+          "referenceApertureRank": 27,
+          "observedOffsetArcsec": [
+            613.8275274824354,
+            810.2059454194537
+          ],
+          "matchArcsec": 1.7570055668307272,
+          "gMag": 14.469392,
+          "distancePc": 3028.0945,
+          "distanceLowerPc": 2833.8345,
+          "distanceUpperPc": 3277.7556,
+          "ruwe": 1.0121714
+        },
+        {
+          "imageId": "eso-wfi-885",
+          "gaiaSourceId": "6628970412908814592",
+          "referenceApertureRank": 28,
+          "observedOffsetArcsec": [
+            -449.93883298513646,
+            469.06612972982725
+          ],
+          "matchArcsec": 1.5060074554639453,
+          "gMag": 14.481202,
+          "distancePc": 741.04535,
+          "distanceLowerPc": 730.28174,
+          "distanceUpperPc": 751.1018,
+          "ruwe": 0.9520579
+        },
+        {
+          "imageId": "eso-wfi-1195",
+          "gaiaSourceId": "6629079475013723776",
+          "referenceApertureRank": 30,
+          "observedOffsetArcsec": [
+            612.609739114716,
+            633.5718308068587
+          ],
+          "matchArcsec": 3.2172232625548394,
+          "gMag": 13.096889,
+          "distancePc": 1235.7357,
+          "distanceLowerPc": 1213.0209,
+          "distanceUpperPc": 1258.5209,
+          "ruwe": 0.9810637
+        },
+        {
+          "imageId": "eso-wfi-1134",
+          "gaiaSourceId": "6628969931872478848",
+          "referenceApertureRank": 31,
+          "observedOffsetArcsec": [
+            -487.2262460283669,
+            261.9565795117265
+          ],
+          "matchArcsec": 1.4780252454935126,
+          "gMag": 13.316341,
+          "distancePc": 972.1849,
+          "distanceLowerPc": 956.31995,
+          "distanceUpperPc": 988.30304,
+          "ruwe": 1.3383071
+        },
+        {
+          "imageId": "eso-wfi-1508",
+          "gaiaSourceId": "6628874205642084224",
+          "referenceApertureRank": 32,
+          "observedOffsetArcsec": [
+            -0.40922790782411766,
+            0.01133638148753846
+          ],
+          "matchArcsec": 0.1336260946947958,
+          "gMag": 13.458613,
+          "distancePc": 198.64069,
+          "distanceLowerPc": 196.87788,
+          "distanceUpperPc": 200.19948,
+          "ruwe": 0.9538586
+        },
+        {
+          "imageId": "eso-wfi-800",
+          "gaiaSourceId": "6629068509962622976",
+          "referenceApertureRank": 33,
+          "observedOffsetArcsec": [
+            101.57446770640837,
+            602.5008302731595
+          ],
+          "matchArcsec": 1.1728825720115228,
+          "gMag": 14.581863,
+          "distancePc": 3117.2083,
+          "distanceLowerPc": 2922.648,
+          "distanceUpperPc": 3334.974,
+          "ruwe": 1.1060711
+        },
+        {
+          "imageId": "eso-wfi-705",
+          "gaiaSourceId": "6628871976553828864",
+          "referenceApertureRank": 35,
+          "observedOffsetArcsec": [
+            -579.8387091482577,
+            -25.71602670653479
+          ],
+          "matchArcsec": 1.9591982168237263,
+          "gMag": 14.484181,
+          "distancePc": 483.74796,
+          "distanceLowerPc": 478.82956,
+          "distanceUpperPc": 490.12897,
+          "ruwe": 1.0763856
+        },
+        {
+          "imageId": "eso-wfi-1934",
+          "gaiaSourceId": "6628871942194090368",
+          "referenceApertureRank": 36,
+          "observedOffsetArcsec": [
+            -619.3748585051408,
+            -0.7143502152306951
+          ],
+          "matchArcsec": 3.8542787882583585,
+          "gMag": 10.58162,
+          "distancePc": 231.46916,
+          "distanceLowerPc": 230.37164,
+          "distanceUpperPc": 232.58498,
+          "ruwe": 1.3132492
+        },
+        {
+          "imageId": "eso-wfi-668",
+          "gaiaSourceId": "6629079543733200640",
+          "referenceApertureRank": 38,
+          "observedOffsetArcsec": [
+            650.6499444994002,
+            641.0722865003746
+          ],
+          "matchArcsec": 1.6917078231709353,
+          "gMag": 15.202421,
+          "distancePc": 775.5508,
+          "distanceLowerPc": 722.21246,
+          "distanceUpperPc": 847.3319,
+          "ruwe": 4.6993947
+        },
+        {
+          "imageId": "eso-wfi-783",
+          "gaiaSourceId": "6628970829521285632",
+          "referenceApertureRank": 39,
+          "observedOffsetArcsec": [
+            -487.7368422192398,
+            520.3962854759953
+          ],
+          "matchArcsec": 2.203636070067868,
+          "gMag": 14.760468,
+          "distancePc": 1292.7303,
+          "distanceLowerPc": 1246.3802,
+          "distanceUpperPc": 1339.5459,
+          "ruwe": 0.990331
+        },
+        {
+          "imageId": "eso-vista-12992",
+          "sourceImageId": "eso-vista",
+          "gaiaSourceId": "6629085552392497536",
+          "matchArcsec": 3.5609165231362208,
+          "gMag": 11.324063,
+          "distancePc": 486.13522,
+          "distanceLowerPc": 481.5452,
+          "distanceUpperPc": 490.8698,
+          "ruwe": 0.94701236,
+          "observedOffsetArcsec": [
+            857.4659094175876,
+            1081.7998572176537
+          ],
+          "nativePixel": [
+            5820.2987851467,
+            104.31032243276285
+          ],
+          "componentId": "component-43",
+          "componentOffsetArcsec": 2.5774953146582114,
+          "unionRank": 551,
+          "detectedIn": [
+            "eso-vista"
+          ],
+          "anchorPhotometry": {
+            "rgb": [
+              255,
+              210,
+              152
+            ],
+            "alpha": 0.7450980392156863,
+            "diameterArcsec": 7.236450161412134,
+            "originalPeakDisplay": 1,
+            "residualDisplayEnergyRgb": [
+              25.35294117647059,
+              20.909803921568614,
+              15.188235294117655
+            ],
+            "aperturePixels": 64
+          },
+          "qualification": "Gaia positional correspondence supports stellar identity; positive registered-image aperture light supplies this visual anchor. Component offset and Gaia offset are distinct."
+        },
+        {
+          "imageId": "eso-vista-13414",
+          "sourceImageId": "eso-vista",
+          "gaiaSourceId": "6629081742756165504",
+          "matchArcsec": 5.737836392570908,
+          "gMag": 16.272995,
+          "distancePc": 625.52026,
+          "distanceLowerPc": 570.3869,
+          "distanceUpperPc": 684.49066,
+          "ruwe": 1.437755,
+          "observedOffsetArcsec": [
+            385.85235923917065,
+            942.1164302887648
+          ],
+          "nativePixel": [
+            4440.505319148936,
+            515.5906748670212
+          ],
+          "componentId": "component-140",
+          "componentOffsetArcsec": 3.0423545604262867,
+          "unionRank": 245,
+          "detectedIn": [
+            "eso-vista",
+            "eso-wide"
+          ],
+          "anchorPhotometry": {
+            "rgb": [
+              255,
+              157,
+              96
+            ],
+            "alpha": 0.6588235294117647,
+            "diameterArcsec": 7.221610523387561,
+            "originalPeakDisplay": 1,
+            "residualDisplayEnergyRgb": [
+              26.117647058823547,
+              15.862745098039223,
+              9.294117647058822
+            ],
+            "aperturePixels": 69
+          },
+          "qualification": "Gaia positional correspondence supports stellar identity; positive registered-image aperture light supplies this visual anchor. Component offset and Gaia offset are distinct."
+        },
+        {
+          "imageId": "eso-vista-11915",
+          "sourceImageId": "eso-vista",
+          "gaiaSourceId": "6629163858236086144",
+          "matchArcsec": 3.836123202181092,
+          "gMag": 11.35339,
+          "distancePc": 751.3751,
+          "distanceLowerPc": 736.3038,
+          "distanceUpperPc": 762.2767,
+          "ruwe": 1.0628457,
+          "observedOffsetArcsec": [
+            91.31823545898543,
+            1007.3304534496363
+          ],
+          "nativePixel": [
+            3578.1684999999998,
+            326.0014375
+          ],
+          "componentId": "component-10",
+          "componentOffsetArcsec": 3.7839475955267563,
+          "unionRank": 478,
+          "detectedIn": [
+            "eso-vista"
+          ],
+          "anchorPhotometry": {
+            "rgb": [
+              255,
+              134,
+              73
+            ],
+            "alpha": 0.5490196078431373,
+            "diameterArcsec": 8.708576393173834,
+            "originalPeakDisplay": 1,
+            "residualDisplayEnergyRgb": [
+              27.054901960784285,
+              14.30980392156862,
+              7.752941176470582
+            ],
+            "aperturePixels": 100
+          },
+          "qualification": "Gaia positional correspondence supports stellar identity; positive registered-image aperture light supplies this visual anchor. Component offset and Gaia offset are distinct."
+        },
+        {
+          "imageId": "eso-vista-17840",
+          "sourceImageId": "eso-vista",
+          "gaiaSourceId": "6629162041465101056",
+          "matchArcsec": 8.076562960165514,
+          "gMag": 11.074153,
+          "distancePc": 342.0005,
+          "distanceLowerPc": 336.84857,
+          "distanceUpperPc": 346.97943,
+          "ruwe": 1.8658557,
+          "observedOffsetArcsec": [
+            -523.3851305293421,
+            1035.0576073125048
+          ],
+          "nativePixel": [
+            1778.8827489837397,
+            247.69982215447155
+          ],
+          "componentId": "component-6",
+          "componentOffsetArcsec": 1.7518369386183699,
+          "unionRank": 1098,
+          "detectedIn": [
+            "eso-vista"
+          ],
+          "anchorPhotometry": {
+            "rgb": [
+              255,
+              117,
+              56
+            ],
+            "alpha": 0.47058823529411764,
+            "diameterArcsec": 7.318258287733219,
+            "originalPeakDisplay": 1,
+            "residualDisplayEnergyRgb": [
+              16.3764705882353,
+              7.568627450980392,
+              3.6313725490196083
+            ],
+            "aperturePixels": 51
+          },
+          "qualification": "Gaia positional correspondence supports stellar identity; positive registered-image aperture light supplies this visual anchor. Component offset and Gaia offset are distinct."
+        },
+        {
+          "imageId": "eso-vista-10069",
+          "sourceImageId": "eso-vista",
+          "gaiaSourceId": null,
+          "matchArcsec": null,
+          "gMag": null,
+          "distancePc": null,
+          "distanceLowerPc": null,
+          "distanceUpperPc": null,
+          "ruwe": null,
+          "observedOffsetArcsec": [
+            -809.0538444904594,
+            1113.1721471342823
+          ],
+          "nativePixel": [
+            942.4414017131243,
+            20.29008783391405
+          ],
+          "componentId": "component-109",
+          "componentOffsetArcsec": 8.43084890152776,
+          "unionRank": 373,
+          "detectedIn": [
+            "eso-vista"
+          ],
+          "anchorPhotometry": {
+            "rgb": [
+              255,
+              207,
+              128
+            ],
+            "alpha": 0.5882352941176471,
+            "diameterArcsec": 8.940075996005774,
+            "originalPeakDisplay": 1,
+            "residualDisplayEnergyRgb": [
+              30.54901960784311,
+              24.819607843137227,
+              15.396078431372539
+            ],
+            "aperturePixels": 104
+          },
+          "nearestCatalogueCandidate": {
+            "sourceId": "6629167848260882432",
+            "offsetArcsec": 16.36783443419781,
+            "gMag": 16.909294
+          },
+          "qualification": "Retained from an independently detected compact VISTA residual with positive original and residual aperture light, not from the broad fitted component. No close Gaia counterpart asserted; native peak lies20.29pixels inside the source top edge."
+        },
+        {
+          "imageId": "eso-wide-785",
+          "sourceImageId": "eso-wide",
+          "gaiaSourceId": "6628853795957421568",
+          "matchArcsec": 9.81108559022112,
+          "gMag": 11.699823,
+          "distancePc": 1679.8231,
+          "distanceLowerPc": 1639.2362,
+          "distanceUpperPc": 1729.2877,
+          "ruwe": 0.9703576,
+          "observedOffsetArcsec": [
+            -1101.3608093555285,
+            -740.1189305543197
+          ],
+          "nativePixel": [
+            926.8659402768071,
+            3998.5199225862652
+          ],
+          "componentId": "component-197",
+          "componentOffsetArcsec": 5.775244678673268,
+          "unionRank": 182,
+          "detectedIn": [
+            "eso-wide"
+          ],
+          "anchorPhotometry": {
+            "rgb": [
+              253,
+              255,
+              203
+            ],
+            "alpha": 0.8980392156862745,
+            "diameterArcsec": 7.777478373828277,
+            "originalPeakDisplay": 1,
+            "residualDisplayEnergyRgb": [
+              24.588235294117645,
+              24.188235294117643,
+              19.701960784313727
+            ],
+            "aperturePixels": 70
+          },
+          "qualification": "Gaia positional correspondence supports stellar identity; positive registered-image aperture light supplies this visual anchor. Component offset and Gaia offset are distinct."
+        }
+      ],
+      "interpretation": "Twenty-eight original WFI Gaia-corresponding cores plus six positively measured VISTA/wider-optical compact cores anchor inspected stellar residual halos. The extension follows source coverage and observed positions; it does not place stars on arbitrary fitted knots. One display anchor is kept per inspected stellar halo.",
+      "limitations": [
+        "The reference image and Gaia J2016 astrometry have differing epochs; the authored 6 arcsec matching tolerance also accommodates broad/saturated residual peaks. These are positional correspondences, not a formal association probability or membership classification.",
+        "Twenty-six matched distance medians lie outside the 50 pc surrounding sphere; four counterparts have RUWE >= 1.4. The catalogue matches support stellar identity but do not validate the retained conditional depths.",
+        "Matched Bailer-Jones medians and lower/upper quantiles are recorded for comparison only. The visual anchors keep the compiler emission-column depth prior so their cores remain with existing stellar residual halos while orbiting; these are not the stars’ measured 3D positions.",
+        "The central reference peak eso-wfi-1508 matches Gaia 6628874205642084224 at 0.134 arcsec. Its G=13.458613 was excluded by the broad-field brightness budget despite being inside the source sphere. No adopted nebula distance or gas geometry is changed.",
+        "The six coverage-extension points are selected by observed compact-source evidence. The broad component109 is not treated as a star: its separate VISTA residual peak eso-vista-10069 supplies the anchor, with no close Gaia identity claimed. The component6 Gaia counterpart is a close/blended pair; one source-image core is retained.",
+        "Canonical source-image colors and aperture light are carried across lenses for retained visual anchors. An anchor visible with the WFI lens outside WFI coverage is explicitly sourced to VISTA or the wider optical image, not measured WFI light."
+      ],
+      "coverageExtension": {
+        "method": "registered-residual-union@1",
+        "configuration": {
+          "sourceIds": [
+            "eso-wfi",
+            "eso-vista",
+            "eso-wide"
+          ],
+          "mergeRadiusArcsec": 3
+        },
+        "candidateBudget": 2000,
+        "reason": "The six inspected stellar halos lie beyond WFI coverage. Exact observed core eso-vista-17840 ranks1098 in the registered union; the app still retains only34 image anchors within its1500-total point budget.",
+        "recipe": {
+          "path": "labs/nebula/models/helix/compiler.json",
+          "sha256": "ce2aa4f55bc2569784b50cae163ecc98502fc3f76add6c07b0a4fd64b6a3ff85"
+        },
+        "observations": {
+          "path": ".local/nebula-lab/observations/helix/observations.json",
+          "sha256": "f6d3c610c168dd2fe11aeb9c5e1a6a1682d83956c8f6594f2b98c5cb521ebd36"
+        },
+        "model": {
+          "path": ".local/nebula-lab/compiler/26c8c2b43cd55398b8ee3489e66ae8944a867f52b8cfa5a72f0af3d4361b9597/field.json",
+          "sha256": "288838de2f4815825390884c5582a74d20059cc32e5db5bef86525c7024dbc62"
+        },
+        "implementation": [
+          {
+            "path": "labs/nebula/src/reconstruction/compiler/stars.ts",
+            "sha256": "1b800e7cb6d4615530975a3ebef58efef3d803559f1ad8f97b693c0a2088ca45"
+          },
+          {
+            "path": "labs/nebula/src/reconstruction/compiler/star-union.ts",
+            "sha256": "10cd9b68c6c237df00978ff1de9dc21346dd4bfe953d42761ec314d07c8dbb9a"
+          },
+          {
+            "path": "labs/nebula/src/reconstruction/compiler/images.ts",
+            "sha256": "18eeebb30a09f2699947f90b383dd48d7199ad5c54b3dfcf9b24607c338000a9"
+          }
+        ],
+        "inspection": {
+          "path": "output/helix-core-diagnosis/union-stars-2000.json",
+          "sha256": "4334af0867a904ce3b36afe02bdc2b9c1bdf52b21b7bde737df697bc53a2b1de",
+          "bytes": 2411038
+        },
+        "sources": [
+          {
+            "id": "eso-vista",
+            "page": "https://www.eso.org/public/images/eso1205a/",
+            "url": "https://cdn.eso.org/images/original/eso1205a.tif",
+            "sha256": "8b08b35b5d71f6d4ddfb8e010cb58eb702656d865a485f259617d65524c1d337",
+            "credit": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
+            "bands": "Near-infrared · Y / J / K",
+            "original": {
+              "path": ".local/nebula-lab/observations/helix/eso-vista/original.png",
+              "width": 2048,
+              "height": 2048,
+              "sha256": "d1f914f440eebeef21e0236997be6b42360541bfd14a0161b4aa1f773e77a051"
+            },
+            "residual": {
+              "path": ".local/nebula-lab/observations/helix/eso-vista/stars.png",
+              "width": 2048,
+              "height": 2048,
+              "sha256": "22575abeeeb241af1549c906b9f1a96fc52b3ef27c65b16aac1486a9ccf6ce1c"
+            },
+            "imageToFrame": [
+              0.0971827647572442,
+              0.00015636650628879714,
+              -0.00013545615052825213,
+              0.09713065070607191,
+              190.28281605528716,
+              193.2462113338005
+            ]
+          },
+          {
+            "id": "eso-wide",
+            "page": "https://www.eso.org/public/images/helix/",
+            "url": "https://cdn.eso.org/images/original/helix.tif",
+            "sha256": "9736dd85dd142f7b3be7c320235518211e2614380c76e793e24a62706f9584d2",
+            "credit": "ESO",
+            "bands": "ESO 3.6 m · filters not listed",
+            "original": {
+              "path": ".local/nebula-lab/observations/helix/eso-wide/original.png",
+              "width": 2048,
+              "height": 1423,
+              "sha256": "1b81425003e1c76891067c8c600a077a058f5cae959038adf51025fede48f70b"
+            },
+            "residual": {
+              "path": ".local/nebula-lab/observations/helix/eso-wide/stars.png",
+              "width": 2048,
+              "height": 1423,
+              "sha256": "9aa9dcb71389c2f4e8cc75333144941e48b6018a192b787c997d5d9d2f4f3471"
+            },
+            "imageToFrame": [
+              0.12218025293999737,
+              0.00009672327649811602,
+              -0.0001402964303504322,
+              0.12228177754456346,
+              86.04029949731812,
+              233.4869448325229
+            ]
+          }
+        ],
+        "interpretation": "Core coordinates come from independently detected source residual peaks, never arbitrary fitted-component centers. Their conditional depths use the existing emission-column sampler. Canonical anchor appearance remains visible across image lenses, including absent WFI coverage; it is not a WFI measurement."
+      }
+    }
   }
 }

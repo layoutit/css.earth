@@ -236,8 +236,8 @@
       "title": "Pleiades adopted world placement",
       "credit": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
       "acquisition": "Checked-in delivery record. The pin identifies our placement metadata, not downloaded paper bytes; the adopted value and uncertainty are explained in the body README.",
-      "expectedSha256": "b81e2f7af2bc765bc624ebce322e44457c2efd7272cd734c625551fbf9a8a34d",
-      "expectedBytes": 2449,
+      "expectedSha256": "e9f0e5a1926122394b64321e50ca117b37f4aacc856fd393331c6583f24a923f",
+      "expectedBytes": 2519,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -289,8 +289,8 @@
     {
       "id": "document-1",
       "path": "src/objects/m45/source/delivery.json",
-      "expectedSha256": "b81e2f7af2bc765bc624ebce322e44457c2efd7272cd734c625551fbf9a8a34d",
-      "expectedBytes": 2449,
+      "expectedSha256": "e9f0e5a1926122394b64321e50ca117b37f4aacc856fd393331c6583f24a923f",
+      "expectedBytes": 2519,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -309,7 +309,7 @@
     {
       "id": "document-3",
       "path": "src/objects/m45/source/presentation.json",
-      "expectedSha256": "0a2f80fe398bfb9fba686ce2538d48e2c8f54215e928818e24223a47163bd255",
+      "expectedSha256": "15695f470ae9390ec443557069d4fff5c5fbd63b33cb30c1e287b0551ed6f101",
       "expectedBytes": 10515,
       "sourceBinding": {
         "kind": "local",

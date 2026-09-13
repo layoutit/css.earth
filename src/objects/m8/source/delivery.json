@@ -9,7 +9,7 @@
   "inputPins": [
     {
       "path": "labs/nebula/models/m8/compiler.json",
-      "sha256": "4532a02e811169574bb6a8ef90bb192bbb64f8ca85d213c1f51d0dd0efccb337"
+      "sha256": "2eccce756cf2d5448dabcadefefd2dd7aa5ed04821a540d1e3aea53045b94524"
     },
     {
       "path": "labs/nebula/models/m8/depth-model.json",
@@ -38,7 +38,7 @@
     "arcsecPerUnit": 1
   },
   "sourceUrl": "https://www.eso.org/public/images/eso0936a/",
-  "description": "Relative display emission on one authored coherent front, with locally paper-guided topology. Foreground extinction, separate molecular clouds and unknown front/back distances are not reconstructed. Shared RGB lenses and image-detected compact lights retain one geometry; no gas velocity is converted to depth.",
+  "description": "Relative display emission on one authored coherent front, with locally paper-guided topology. Foreground extinction, separate molecular clouds and unknown front/back distances are not reconstructed. Shared RGB lenses retain one geometry; surrounding stars use Gaia astrometry and estimated distances independently of source-image boundaries. No gas velocity is converted to depth.",
   "defaultLens": "eso-optical",
   "framingRadiusUnits": 3414.784262,
   "acceptedLabResult": "1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864",

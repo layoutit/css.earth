@@ -108,8 +108,8 @@
     {
       "id": "document-1",
       "path": "src/objects/m2-9/source/delivery.json",
-      "expectedSha256": "ad7fb2969976729b63f4b23fbbb2b3988dc0e5d4a1a7231d0efd4d0e7b4a7f01",
-      "expectedBytes": 1318,
+      "expectedSha256": "e737db3770654a8d820445967a6c886a30374f4a9aeb334389f894a01c08d12e",
+      "expectedBytes": 1382,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -138,7 +138,7 @@
     {
       "id": "document-4",
       "path": "src/objects/m2-9/source/presentation.json",
-      "expectedSha256": "5574eb652b44c7607bc314e6ad5f1a073ef368b447a3ee2816c1ffd8b515c90e",
+      "expectedSha256": "e621cb9db0d3f5725059184575168a97e43a702c2418ebf0333e64147fc2081e",
       "expectedBytes": 2490,
       "sourceBinding": {
         "kind": "local",
