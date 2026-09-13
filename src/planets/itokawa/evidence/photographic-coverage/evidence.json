@@ -1,0 +1,1855 @@
+{
+  "baseRevision": "0ff39d3bcc3f51ecbcbf802f9059379a746183ea",
+  "workingChanges": "This photographic-coverage change, before commit. Body source and runtime manifests below identify the prepared inputs and delivered bytes.",
+  "beforeRevision": "d4330c6c1944c828b9abb767f3b0d2b0fccd5888",
+  "captureCommand": "node tests/objects/browser/asteroid-photographic-coverage.mts itokawa after",
+  "captureImplementationSha256": "32b947028b269527f102123a279ea24eb34d2a6d4c3a019b9c8fb62a2060e8de",
+  "sourceManifestSha256": "208c544a49f5834c9f7006cf3c3f79d12871377a4ff6377909f8b168a7b14fce",
+  "recipeSha256": "9964c3be4834ef6c43ef117ec7fa039eb24beae5dd98d1989d9f1c72dd3a1349",
+  "comparison": {
+    "pixelmatch": "7.2.0",
+    "threshold": 0.1,
+    "includeAA": false,
+    "width": 1440,
+    "height": 1000,
+    "mismatchedPixels": 303866,
+    "comparedPixels": 1440000,
+    "inputSha256": [
+      "1d131748bd92e80d99c30fa55de9ddf7c20bdf40d4dbfb9a721618e835418528",
+      "d376b3a92905b307d91c802533e3c3fc06d9967da6b95fa3336733ed1eb05009"
+    ],
+    "diffSha256": "ef5f54c58f9fd99aa0677c5a115e7b4805b2cc71d6963baa9f1392d130d10cc9",
+    "masks": "none",
+    "interpretation": "Changed pixels locate differences; they do not measure image quality or scientific accuracy."
+  },
+  "stability": {
+    "pixelmatch": "7.2.0",
+    "threshold": 0.1,
+    "includeAA": false,
+    "width": 1440,
+    "height": 1000,
+    "mismatchedPixels": 0,
+    "comparedPixels": 1440000,
+    "inputSha256": [
+      "70f81d138eda71b745c954a0d540530b10b9db6f93565d60901dab25b4867eed",
+      "70f81d138eda71b745c954a0d540530b10b9db6f93565d60901dab25b4867eed"
+    ],
+    "diffSha256": "957a3d3df7a2319891c71dd731eb2db2aeda1d79924f83e1b52612d9377b6a8a",
+    "masks": "none",
+    "interpretation": "Changed pixels locate differences; they do not measure image quality or scientific accuracy.",
+    "retainedInputSha256": [
+      "d376b3a92905b307d91c802533e3c3fc06d9967da6b95fa3336733ed1eb05009",
+      "d376b3a92905b307d91c802533e3c3fc06d9967da6b95fa3336733ed1eb05009"
+    ]
+  },
+  "stabilityRetainedInputs": [
+    "repeat-1.webp",
+    "repeat-2.webp"
+  ],
+  "browser": [
+    {
+      "id": "itokawa",
+      "phase": "before",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dpr": 1,
+      "browser": "152.0.7977.84",
+      "manifestHash": "aaa77266407407d0b4e96e79aec3362254f735a2e7f9e4970ed8f53194545e8d",
+      "runtimeManifest": {
+        "schema": "cssitokawa-runtime-assets@1",
+        "assets": [
+          {
+            "filename": "itokawa-amica-shadow@2x.webp",
+            "bytes": 416504,
+            "sha256": "ce29e2ca93f6ce3fa0e6da79ff5e2502136419dd0c99b6d745ab1f8feb55fbeb"
+          },
+          {
+            "filename": "itokawa-amica-surface@2x.webp",
+            "bytes": 991332,
+            "sha256": "699a1909293935949bf52d38d856e17700d5d6f54da82b95d0b47dd780bc823c"
+          },
+          {
+            "filename": "itokawa-amica-thumbnail.webp",
+            "bytes": 1328,
+            "sha256": "d98cd125395540779f36d78dcfc157d25ac8abcabc5ba019242fbd127ae574f5"
+          },
+          {
+            "filename": "itokawa-directional-sun.webp",
+            "bytes": 4798,
+            "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+          },
+          {
+            "filename": "itokawa-directional-sun@2x.webp",
+            "bytes": 12530,
+            "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+          },
+          {
+            "filename": "itokawa-elevation-legend.webp",
+            "bytes": 298,
+            "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+          },
+          {
+            "filename": "itokawa-elevation-shadow@2x.webp",
+            "bytes": 856040,
+            "sha256": "e7fe5b25124f84c90a9783049a2cf6a2ce852c921452926c2478f82964977fb8"
+          },
+          {
+            "filename": "itokawa-elevation-surface@2x.webp",
+            "bytes": 918790,
+            "sha256": "c9f9fec5995292bdf489d6da4ad09adf804424458c279f24c2302fa5b8d7f6af"
+          },
+          {
+            "filename": "itokawa-elevation-thumbnail.webp",
+            "bytes": 5648,
+            "sha256": "add0ac1961a98fc08b94692da8b36925015b44c5ac32eb54bcf384f8de9d5fb0"
+          },
+          {
+            "filename": "itokawa-features.json",
+            "bytes": 12072,
+            "sha256": "7a9b5acc16b6c2e3c72f097b7d53b7bebcda54602e0d8dfbe13ded0f32e8fbd5"
+          },
+          {
+            "filename": "itokawa-lighting.webp",
+            "bytes": 1050836,
+            "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+          },
+          {
+            "filename": "itokawa-starfield-back-standard.webp",
+            "bytes": 53856,
+            "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9"
+          },
+          {
+            "filename": "itokawa-starfield-back-standard@2x.webp",
+            "bytes": 171294,
+            "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0"
+          },
+          {
+            "filename": "itokawa-starfield-back.webp",
+            "bytes": 210188,
+            "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7"
+          },
+          {
+            "filename": "itokawa-starfield-back@2x.webp",
+            "bytes": 598648,
+            "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf"
+          },
+          {
+            "filename": "itokawa-starfield-bottom-standard.webp",
+            "bytes": 63946,
+            "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90"
+          },
+          {
+            "filename": "itokawa-starfield-bottom-standard@2x.webp",
+            "bytes": 200212,
+            "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687"
+          },
+          {
+            "filename": "itokawa-starfield-bottom.webp",
+            "bytes": 232844,
+            "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8"
+          },
+          {
+            "filename": "itokawa-starfield-bottom@2x.webp",
+            "bytes": 690706,
+            "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a"
+          },
+          {
+            "filename": "itokawa-starfield-front-standard.webp",
+            "bytes": 67226,
+            "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d"
+          },
+          {
+            "filename": "itokawa-starfield-front-standard@2x.webp",
+            "bytes": 208208,
+            "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d"
+          },
+          {
+            "filename": "itokawa-starfield-front.webp",
+            "bytes": 251588,
+            "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28"
+          },
+          {
+            "filename": "itokawa-starfield-front@2x.webp",
+            "bytes": 687190,
+            "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d"
+          },
+          {
+            "filename": "itokawa-starfield-left-standard.webp",
+            "bytes": 31200,
+            "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828"
+          },
+          {
+            "filename": "itokawa-starfield-left-standard@2x.webp",
+            "bytes": 112118,
+            "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa"
+          },
+          {
+            "filename": "itokawa-starfield-left.webp",
+            "bytes": 142736,
+            "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650"
+          },
+          {
+            "filename": "itokawa-starfield-left@2x.webp",
+            "bytes": 413462,
+            "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9"
+          },
+          {
+            "filename": "itokawa-starfield-right-standard.webp",
+            "bytes": 23676,
+            "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8"
+          },
+          {
+            "filename": "itokawa-starfield-right-standard@2x.webp",
+            "bytes": 83896,
+            "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79"
+          },
+          {
+            "filename": "itokawa-starfield-right.webp",
+            "bytes": 116010,
+            "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa"
+          },
+          {
+            "filename": "itokawa-starfield-right@2x.webp",
+            "bytes": 312496,
+            "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85"
+          },
+          {
+            "filename": "itokawa-starfield-top-standard.webp",
+            "bytes": 64674,
+            "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738"
+          },
+          {
+            "filename": "itokawa-starfield-top-standard@2x.webp",
+            "bytes": 202204,
+            "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3"
+          },
+          {
+            "filename": "itokawa-starfield-top.webp",
+            "bytes": 235140,
+            "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310"
+          },
+          {
+            "filename": "itokawa-starfield-top@2x.webp",
+            "bytes": 682934,
+            "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4"
+          },
+          {
+            "filename": "itokawa-system-point.webp",
+            "bytes": 96,
+            "sha256": "e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659"
+          }
+        ]
+      },
+      "reports": [
+        {
+          "yaw": 0,
+          "camera": {
+            "pose": {
+              "schema": "cssearth-camera-pose@1",
+              "scene": "matrix3d(1,0,0,0,0,0.990186019998,-0.139755664649,0,0,0.139755664649,0.990186019998,0,0,0,0,1)",
+              "skybox": "matrix3d(0.1763579,-0.137565134361,-0.97466584432,0,0.9031015,0.416486516765,0.10462564401,0,0.3915424,-0.898673836393,0.197685945221,0,0,0,0,1)",
+              "sunView": "matrix3d(1,0,0,0,0,0.838350004476,0.545132341725,0,0,-0.545132341725,0.838350004476,0,0,0,0,1)"
+            },
+            "pitch": 100,
+            "controlPitch": 100,
+            "controlYaw": 0,
+            "zoom": 1.7,
+            "distance": 839.0725059390504,
+            "distanceKilometers": 0.6019433194780144,
+            "distanceRadii": 3.6481413301697843,
+            "levelOfDetail": {
+              "stage": "geometry",
+              "silhouetteDiameter": 710.9090907655126,
+              "billboardOpacity": 0,
+              "markerOpacity": 0,
+              "proxyOpacity": 0
+            },
+            "focal": 1247.08,
+            "principalOffset": [
+              0,
+              0
+            ],
+            "visibleRect": {
+              "left": -720,
+              "right": 720,
+              "top": -500,
+              "bottom": 500
+            },
+            "offAxisDegrees": 0,
+            "silhouetteRadius": 355.4545453827563
+          }
+        },
+        {
+          "yaw": 90,
+          "camera": {
+            "pose": {
+              "schema": "cssearth-camera-pose@1",
+              "scene": "matrix3d(0,-0.139755664649,-0.990186019998,0,0,0.990186019998,-0.139755664649,0,1,0,0,0,0,0,0,1)",
+              "skybox": "matrix3d(-0.984326,-0.024647015531,-0.174627127096,0,0.1618052,0.267659773117,-0.949830082931,0,0.0701511,-0.96319811835,-0.259476504003,0,0,0,0,1)",
+              "sunView": "matrix3d(0,-0.545132341725,0.838350004476,0,0,0.838350004476,0.545132341725,0,-1,0,0,0,0,0,0,1)"
+            },
+            "pitch": 100,
+            "controlPitch": 100,
+            "controlYaw": 90,
+            "zoom": 1.7,
+            "distance": 839.0725059390504,
+            "distanceKilometers": 0.6019433194780144,
+            "distanceRadii": 3.6481413301697843,
+            "levelOfDetail": {
+              "stage": "geometry",
+              "silhouetteDiameter": 710.9090894969307,
+              "billboardOpacity": 0,
+              "markerOpacity": 0,
+              "proxyOpacity": 0
+            },
+            "focal": 1247.08,
+            "principalOffset": [
+              0,
+              0
+            ],
+            "visibleRect": {
+              "left": -720,
+              "right": 720,
+              "top": -500,
+              "bottom": 500
+            },
+            "offAxisDegrees": 0,
+            "silhouetteRadius": 355.45454474846537
+          }
+        },
+        {
+          "yaw": 180,
+          "camera": {
+            "pose": {
+              "schema": "cssearth-camera-pose@1",
+              "scene": "matrix3d(-1,0,0,0,0,0.990186019998,-0.139755664649,0,0,-0.139755664649,-0.990186019998,0,0,0,0,1)",
+              "skybox": "matrix3d(-0.1763579,0.137565134361,0.97466584432,0,-0.9031015,0.371260130226,-0.215808849995,0,-0.3915424,-0.918281863606,0.058760668206,0,0,0,0,1)",
+              "sunView": "matrix3d(-1,0,0,0,0,0.838350004476,0.545132341725,0,0,0.545132341725,-0.838350004476,0,0,0,0,1)"
+            },
+            "pitch": 100,
+            "controlPitch": 100,
+            "controlYaw": 180,
+            "zoom": 1.7,
+            "distance": 839.0725059390504,
+            "distanceKilometers": 0.6019433194780144,
+            "distanceRadii": 3.6481413301697843,
+            "levelOfDetail": {
+              "stage": "geometry",
+              "silhouetteDiameter": 710.9090920264338,
+              "billboardOpacity": 0,
+              "markerOpacity": 0,
+              "proxyOpacity": 0
+            },
+            "focal": 1247.08,
+            "principalOffset": [
+              0,
+              0
+            ],
+            "visibleRect": {
+              "left": -720,
+              "right": 720,
+              "top": -500,
+              "bottom": 500
+            },
+            "offAxisDegrees": 0,
+            "silhouetteRadius": 355.4545460132169
+          }
+        },
+        {
+          "yaw": 270,
+          "camera": {
+            "pose": {
+              "schema": "cssearth-camera-pose@1",
+              "scene": "matrix3d(0,0.139755664649,0.990186019998,0,0,0.990186019998,-0.139755664649,0,-1,0,0,0,0,0,0,1)",
+              "skybox": "matrix3d(0.984326,0.024647015531,0.174627127096,0,-0.1618052,0.520086873873,0.838646876946,0,-0.0701511,-0.853757581649,0.51592311743,0,0,0,0,1)",
+              "sunView": "matrix3d(0,0.545132341725,-0.838350004476,0,0,0.838350004476,0.545132341725,0,1,0,0,0,0,0,0,1)"
+            },
+            "pitch": 100,
+            "controlPitch": 100,
+            "controlYaw": 270,
+            "zoom": 1.7,
+            "distance": 839.0725059390504,
+            "distanceKilometers": 0.6019433194780144,
+            "distanceRadii": 3.6481413301697843,
+            "levelOfDetail": {
+              "stage": "geometry",
+              "silhouetteDiameter": 710.9090862459859,
+              "billboardOpacity": 0,
+              "markerOpacity": 0,
+              "proxyOpacity": 0
+            },
+            "focal": 1247.08,
+            "principalOffset": [
+              0,
+              0
+            ],
+            "visibleRect": {
+              "left": -720,
+              "right": 720,
+              "top": -500,
+              "bottom": 500
+            },
+            "offAxisDegrees": 0,
+            "silhouetteRadius": 355.45454312299296
+          }
+        }
+      ],
+      "errors": [],
+      "selection": {
+        "desired": {
+          "lensId": "amica",
+          "shadows": false,
+          "orbit": true
+        },
+        "committed": {
+          "lensId": "amica",
+          "shadows": false,
+          "orbit": true
+        },
+        "plan": {
+          "required": [
+            "surface:amica",
+            "poles:amica",
+            "lighting"
+          ],
+          "prewarm": [],
+          "materials": {},
+          "pressedLenses": [
+            "amica"
+          ]
+        },
+        "pending": false,
+        "loadingMaterial": false,
+        "ready": true,
+        "error": null,
+        "viewRevision": 9
+      }
+    },
+    {
+      "id": "itokawa",
+      "phase": "after",
+      "overrides": {},
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "dpr": 1,
+      "browser": "152.0.7977.84",
+      "manifestHash": "ce29fc42e65a6d44517332570402318caa0980fd90328b7dea91dea2d958da1a",
+      "runtimeManifest": {
+        "schema": "cssitokawa-runtime-assets@1",
+        "assets": [
+          {
+            "filename": "itokawa-amica-shadow@2x.webp",
+            "bytes": 669748,
+            "sha256": "6e8917a27da8da33ccc68d519363797a7b51f42f8901baab292a2846dd0dd39d"
+          },
+          {
+            "filename": "itokawa-amica-surface@2x.webp",
+            "bytes": 1721278,
+            "sha256": "fc7408fa06ff6244f66af94d0d4076c9c016a2d682575ea4e1816523821e3d5c"
+          },
+          {
+            "filename": "itokawa-amica-thumbnail.webp",
+            "bytes": 1336,
+            "sha256": "c996c1465dc80578dbf351b0f2f79c7d3b6ca539f06ba0be3559812f7ed75f0b"
+          },
+          {
+            "filename": "itokawa-directional-sun.webp",
+            "bytes": 4798,
+            "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+          },
+          {
+            "filename": "itokawa-directional-sun@2x.webp",
+            "bytes": 12530,
+            "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+          },
+          {
+            "filename": "itokawa-elevation-legend.webp",
+            "bytes": 298,
+            "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+          },
+          {
+            "filename": "itokawa-elevation-shadow@2x.webp",
+            "bytes": 856040,
+            "sha256": "e7fe5b25124f84c90a9783049a2cf6a2ce852c921452926c2478f82964977fb8"
+          },
+          {
+            "filename": "itokawa-elevation-surface@2x.webp",
+            "bytes": 918790,
+            "sha256": "c9f9fec5995292bdf489d6da4ad09adf804424458c279f24c2302fa5b8d7f6af"
+          },
+          {
+            "filename": "itokawa-elevation-thumbnail.webp",
+            "bytes": 5648,
+            "sha256": "add0ac1961a98fc08b94692da8b36925015b44c5ac32eb54bcf384f8de9d5fb0"
+          },
+          {
+            "filename": "itokawa-features.json",
+            "bytes": 12072,
+            "sha256": "7a9b5acc16b6c2e3c72f097b7d53b7bebcda54602e0d8dfbe13ded0f32e8fbd5"
+          },
+          {
+            "filename": "itokawa-lighting.webp",
+            "bytes": 1050836,
+            "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+          },
+          {
+            "filename": "itokawa-starfield-back-standard.webp",
+            "bytes": 53856,
+            "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9"
+          },
+          {
+            "filename": "itokawa-starfield-back-standard@2x.webp",
+            "bytes": 171294,
+            "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0"
+          },
+          {
+            "filename": "itokawa-starfield-back.webp",
+            "bytes": 210188,
+            "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7"
+          },
+          {
+            "filename": "itokawa-starfield-back@2x.webp",
+            "bytes": 598648,
+            "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf"
+          },
+          {
+            "filename": "itokawa-starfield-bottom-standard.webp",
+            "bytes": 63946,
+            "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90"
+          },
+          {
+            "filename": "itokawa-starfield-bottom-standard@2x.webp",
+            "bytes": 200212,
+            "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687"
+          },
+          {
+            "filename": "itokawa-starfield-bottom.webp",
+            "bytes": 232844,
+            "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8"
+          },
+          {
+            "filename": "itokawa-starfield-bottom@2x.webp",
+            "bytes": 690706,
+            "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a"
+          },
+          {
+            "filename": "itokawa-starfield-front-standard.webp",
+            "bytes": 67226,
+            "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d"
+          },
+          {
+            "filename": "itokawa-starfield-front-standard@2x.webp",
+            "bytes": 208208,
+            "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d"
+          },
+          {
+            "filename": "itokawa-starfield-front.webp",
+            "bytes": 251588,
+            "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28"
+          },
+          {
+            "filename": "itokawa-starfield-front@2x.webp",
+            "bytes": 687190,
+            "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d"
+          },
+          {
+            "filename": "itokawa-starfield-left-standard.webp",
+            "bytes": 31200,
+            "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828"
+          },
+          {
+            "filename": "itokawa-starfield-left-standard@2x.webp",
+            "bytes": 112118,
+            "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa"
+          },
+          {
+            "filename": "itokawa-starfield-left.webp",
+            "bytes": 142736,
+            "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650"
+          },
+          {
+            "filename": "itokawa-starfield-left@2x.webp",
+            "bytes": 413462,
+            "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9"
+          },
+          {
+            "filename": "itokawa-starfield-right-standard.webp",
+            "bytes": 23676,
+            "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8"
+          },
+          {
+            "filename": "itokawa-starfield-right-standard@2x.webp",
+            "bytes": 83896,
+            "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79"
+          },
+          {
+            "filename": "itokawa-starfield-right.webp",
+            "bytes": 116010,
+            "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa"
+          },
+          {
+            "filename": "itokawa-starfield-right@2x.webp",
+            "bytes": 312496,
+            "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85"
+          },
+          {
+            "filename": "itokawa-starfield-top-standard.webp",
+            "bytes": 64674,
+            "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738"
+          },
+          {
+            "filename": "itokawa-starfield-top-standard@2x.webp",
+            "bytes": 202204,
+            "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3"
+          },
+          {
+            "filename": "itokawa-starfield-top.webp",
+            "bytes": 235140,
+            "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310"
+          },
+          {
+            "filename": "itokawa-starfield-top@2x.webp",
+            "bytes": 682934,
+            "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4"
+          },
+          {
+            "filename": "itokawa-system-point.webp",
+            "bytes": 96,
+            "sha256": "e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659"
+          }
+        ]
+      },
+      "reports": [
+        {
+          "yaw": 0,
+          "camera": {
+            "pose": {
+              "schema": "cssearth-camera-pose@1",
+              "scene": "matrix3d(1,0,0,0,0,0.990186019998,-0.139755664649,0,0,0.139755664649,0.990186019998,0,0,0,0,1)",
+              "skybox": "matrix3d(0.1763579,-0.137565134361,-0.97466584432,0,0.9031015,0.416486516765,0.10462564401,0,0.3915424,-0.898673836393,0.197685945221,0,0,0,0,1)",
+              "sunView": "matrix3d(1,0,0,0,0,0.838350004476,0.545132341725,0,0,-0.545132341725,0.838350004476,0,0,0,0,1)"
+            },
+            "pitch": 100,
+            "controlPitch": 100,
+            "controlYaw": 0,
+            "zoom": 1.7,
+            "distance": 839.0725059390504,
+            "distanceKilometers": 0.6019433194780144,
+            "distanceRadii": 3.6481413301697843,
+            "levelOfDetail": {
+              "stage": "geometry",
+              "silhouetteDiameter": 710.9090907655126,
+              "billboardOpacity": 0,
+              "markerOpacity": 0,
+              "proxyOpacity": 0
+            },
+            "focal": 1247.08,
+            "principalOffset": [
+              0,
+              0
+            ],
+            "visibleRect": {
+              "left": -720,
+              "right": 720,
+              "top": -500,
+              "bottom": 500
+            },
+            "offAxisDegrees": 0,
+            "silhouetteRadius": 355.4545453827563
+          }
+        },
+        {
+          "yaw": 90,
+          "camera": {
+            "pose": {
+              "schema": "cssearth-camera-pose@1",
+              "scene": "matrix3d(0,-0.139755664649,-0.990186019998,0,0,0.990186019998,-0.139755664649,0,1,0,0,0,0,0,0,1)",
+              "skybox": "matrix3d(-0.984326,-0.024647015531,-0.174627127096,0,0.1618052,0.267659773117,-0.949830082931,0,0.0701511,-0.96319811835,-0.259476504003,0,0,0,0,1)",
+              "sunView": "matrix3d(0,-0.545132341725,0.838350004476,0,0,0.838350004476,0.545132341725,0,-1,0,0,0,0,0,0,1)"
+            },
+            "pitch": 100,
+            "controlPitch": 100,
+            "controlYaw": 90,
+            "zoom": 1.7,
+            "distance": 839.0725059390504,
+            "distanceKilometers": 0.6019433194780144,
+            "distanceRadii": 3.6481413301697843,
+            "levelOfDetail": {
+              "stage": "geometry",
+              "silhouetteDiameter": 710.9090894969307,
+              "billboardOpacity": 0,
+              "markerOpacity": 0,
+              "proxyOpacity": 0
+            },
+            "focal": 1247.08,
+            "principalOffset": [
+              0,
+              0
+            ],
+            "visibleRect": {
+              "left": -720,
+              "right": 720,
+              "top": -500,
+              "bottom": 500
+            },
+            "offAxisDegrees": 0,
+            "silhouetteRadius": 355.45454474846537
+          }
+        },
+        {
+          "yaw": 180,
+          "camera": {
+            "pose": {
+              "schema": "cssearth-camera-pose@1",
+              "scene": "matrix3d(-1,0,0,0,0,0.990186019998,-0.139755664649,0,0,-0.139755664649,-0.990186019998,0,0,0,0,1)",
+              "skybox": "matrix3d(-0.1763579,0.137565134361,0.97466584432,0,-0.9031015,0.371260130226,-0.215808849995,0,-0.3915424,-0.918281863606,0.058760668206,0,0,0,0,1)",
+              "sunView": "matrix3d(-1,0,0,0,0,0.838350004476,0.545132341725,0,0,0.545132341725,-0.838350004476,0,0,0,0,1)"
+            },
+            "pitch": 100,
+            "controlPitch": 100,
+            "controlYaw": 180,
+            "zoom": 1.7,
+            "distance": 839.0725059390504,
+            "distanceKilometers": 0.6019433194780144,
+            "distanceRadii": 3.6481413301697843,
+            "levelOfDetail": {
+              "stage": "geometry",
+              "silhouetteDiameter": 710.9090920264338,
+              "billboardOpacity": 0,
+              "markerOpacity": 0,
+              "proxyOpacity": 0
+            },
+            "focal": 1247.08,
+            "principalOffset": [
+              0,
+              0
+            ],
+            "visibleRect": {
+              "left": -720,
+              "right": 720,
+              "top": -500,
+              "bottom": 500
+            },
+            "offAxisDegrees": 0,
+            "silhouetteRadius": 355.4545460132169
+          }
+        },
+        {
+          "yaw": 270,
+          "camera": {
+            "pose": {
+              "schema": "cssearth-camera-pose@1",
+              "scene": "matrix3d(0,0.139755664649,0.990186019998,0,0,0.990186019998,-0.139755664649,0,-1,0,0,0,0,0,0,1)",
+              "skybox": "matrix3d(0.984326,0.024647015531,0.174627127096,0,-0.1618052,0.520086873873,0.838646876946,0,-0.0701511,-0.853757581649,0.51592311743,0,0,0,0,1)",
+              "sunView": "matrix3d(0,0.545132341725,-0.838350004476,0,0,0.838350004476,0.545132341725,0,1,0,0,0,0,0,0,1)"
+            },
+            "pitch": 100,
+            "controlPitch": 100,
+            "controlYaw": 270,
+            "zoom": 1.7,
+            "distance": 839.0725059390504,
+            "distanceKilometers": 0.6019433194780144,
+            "distanceRadii": 3.6481413301697843,
+            "levelOfDetail": {
+              "stage": "geometry",
+              "silhouetteDiameter": 710.9090862459859,
+              "billboardOpacity": 0,
+              "markerOpacity": 0,
+              "proxyOpacity": 0
+            },
+            "focal": 1247.08,
+            "principalOffset": [
+              0,
+              0
+            ],
+            "visibleRect": {
+              "left": -720,
+              "right": 720,
+              "top": -500,
+              "bottom": 500
+            },
+            "offAxisDegrees": 0,
+            "silhouetteRadius": 355.45454312299296
+          }
+        }
+      ],
+      "errors": [],
+      "interaction": {
+        "defaultShadows": false,
+        "retainedAfterDragAndLighting": true,
+        "cameraAfterDrag": {
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.938930818253,0.017961524024,-0.343636875479,0,-0.030239949944,0.999080122913,-0.030404825736,0,0.342774654783,0.038939589821,0.938610272895,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.171814137491,-0.035161594032,-0.984501573199,0,0.89138379234,0.419932901367,-0.17056129818,0,0.419421854853,-0.906873676047,-0.040807983512,0,0,0,0,1)",
+            "sunView": "matrix3d(0.938930818253,0.017961524024,0.343636875479,0,-0.172269530887,0.889017513506,0.424229972311,0,-0.297879383748,-0.457520758364,0.837820164716,0,0,0,0,1)"
+          },
+          "pitch": 94.07755713794961,
+          "controlPitch": 94.07755713794961,
+          "controlYaw": 20.136305730971177,
+          "zoom": 1.7,
+          "distance": 839.0725059390504,
+          "distanceKilometers": 0.6019433194780144,
+          "distanceRadii": 3.6481413301697843,
+          "levelOfDetail": {
+            "stage": "geometry",
+            "silhouetteDiameter": 710.9090836658494,
+            "billboardOpacity": 0,
+            "markerOpacity": 0,
+            "proxyOpacity": 0
+          },
+          "focal": 1247.08,
+          "principalOffset": [
+            0,
+            0
+          ],
+          "visibleRect": {
+            "left": -720,
+            "right": 720,
+            "top": -500,
+            "bottom": 500
+          },
+          "offAxisDegrees": 0.0000012074182697257333,
+          "silhouetteRadius": 355.4545418329247
+        },
+        "dpr2Selection": {
+          "desired": {
+            "lensId": "amica",
+            "shadows": false,
+            "orbit": true
+          },
+          "committed": {
+            "lensId": "amica",
+            "shadows": false,
+            "orbit": true
+          },
+          "plan": {
+            "required": [
+              "surface:amica",
+              "poles:amica",
+              "lighting"
+            ],
+            "prewarm": [],
+            "materials": {},
+            "pressedLenses": [
+              "amica"
+            ]
+          },
+          "pending": false,
+          "loadingMaterial": false,
+          "ready": true,
+          "error": null,
+          "viewRevision": 6
+        }
+      },
+      "selection": {
+        "desired": {
+          "lensId": "amica",
+          "shadows": false,
+          "orbit": true
+        },
+        "committed": {
+          "lensId": "amica",
+          "shadows": false,
+          "orbit": true
+        },
+        "plan": {
+          "required": [
+            "surface:amica",
+            "poles:amica",
+            "lighting"
+          ],
+          "prewarm": [],
+          "materials": {},
+          "pressedLenses": [
+            "amica"
+          ]
+        },
+        "pending": false,
+        "loadingMaterial": false,
+        "ready": true,
+        "error": null,
+        "viewRevision": 25
+      }
+    }
+  ],
+  "measurements": [
+    {
+      "name": "before",
+      "frames": [
+        "sep24",
+        "sep26",
+        "sep29"
+      ],
+      "samplesPerTriangle": 64,
+      "triangles": 794,
+      "meshSha256": "a8c0e65b9d4549d8273f24389ddb1d42c380208b23cd25d3487d740cf24b642b",
+      "areaCoverage": 0.6188210801457934,
+      "frameAreaFractions": {
+        "sep24": 0.2269896569029518,
+        "sep29": 0.26895391985792794,
+        "sep26": 0.12287750338487942
+      },
+      "counts": {
+        "no-qualified-observation": 17510,
+        "accepted": 33306
+      },
+      "display": {
+        "percentiles": [
+          1,
+          99
+        ],
+        "low": 1235.442510643752,
+        "high": 1835.6428628472777,
+        "units": "relative flat-fielded detector brightness with approximate disk normalization; linear grayscale display",
+        "referenceFrame": "sep24"
+      },
+      "levelMatching": {
+        "samplesPerTriangle": 24,
+        "minimumPairs": 128,
+        "maximumLogMad": 0.25,
+        "maximumGain": 1.35,
+        "gains": [
+          1,
+          1.0068464316753007,
+          0.941577417281295
+        ],
+        "pairs": [
+          {
+            "a": 0,
+            "b": 1,
+            "samples": 566,
+            "medianLogRatio": 0.006823101288026514,
+            "logMad": 0.04752295736078034,
+            "accepted": true,
+            "residualLogRatio": 0
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "accepted": false
+          },
+          {
+            "a": 1,
+            "b": 2,
+            "samples": 139,
+            "medianLogRatio": -0.06702180795781996,
+            "logMad": 0.04480810109615595,
+            "accepted": true,
+            "residualLogRatio": 6.938893903907228e-18
+          }
+        ],
+        "referenceIndex": 0,
+        "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo.",
+        "sampledPoints": 19056
+      }
+    },
+    {
+      "name": "candidate",
+      "frames": [
+        "amica-2481672682",
+        "sep24",
+        "sep26",
+        "sep29",
+        "amica-2480981469",
+        "amica-2492513077",
+        "amica-2495230070"
+      ],
+      "samplesPerTriangle": 64,
+      "triangles": 794,
+      "meshSha256": "a8c0e65b9d4549d8273f24389ddb1d42c380208b23cd25d3487d740cf24b642b",
+      "areaCoverage": 0.7266462398275171,
+      "frameAreaFractions": {
+        "amica-2481672682": 0.10564336830111387,
+        "amica-2492513077": 0.06080194785461966,
+        "amica-2495230070": 0.058423340744970485,
+        "amica-2480981469": 0.13293689038401207,
+        "sep24": 0.09346486612995986,
+        "sep29": 0.1846263368027627,
+        "sep26": 0.09074948961005871
+      },
+      "counts": {
+        "no-qualified-observation": 12114,
+        "accepted": 38702
+      },
+      "display": {
+        "percentiles": [
+          1,
+          99
+        ],
+        "low": 269.99906409655375,
+        "high": 1848.1529427073046,
+        "units": "relative flat-fielded detector brightness with approximate disk normalization; linear grayscale display",
+        "referenceFrame": "amica-2481672682"
+      },
+      "levelMatching": {
+        "samplesPerTriangle": 24,
+        "minimumPairs": 128,
+        "maximumLogMad": 0.25,
+        "maximumGain": 1.35,
+        "gains": [
+          1,
+          0.9517910162523906,
+          0.9588359795892194,
+          0.8966792520243538,
+          1.020535503796367,
+          1.0009555274673014,
+          0.7515333700825768
+        ],
+        "pairs": [
+          {
+            "a": 0,
+            "b": 1,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "accepted": false
+          },
+          {
+            "a": 0,
+            "b": 2,
+            "samples": 4,
+            "medianLogRatio": 0.09590449747755676,
+            "logMad": 0.3916670518978536,
+            "accepted": false
+          },
+          {
+            "a": 0,
+            "b": 3,
+            "samples": 3744,
+            "medianLogRatio": -0.10905705943796867,
+            "logMad": 0.06735822421070731,
+            "accepted": true,
+            "residualLogRatio": 2.220446049250313e-16
+          },
+          {
+            "a": 0,
+            "b": 4,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "accepted": false
+          },
+          {
+            "a": 0,
+            "b": 5,
+            "samples": 82,
+            "medianLogRatio": -0.00921155294342321,
+            "logMad": 0.09299648396506398,
+            "accepted": false
+          },
+          {
+            "a": 0,
+            "b": 6,
+            "samples": 4,
+            "medianLogRatio": -0.30347228109733426,
+            "logMad": 0.08679132510941134,
+            "accepted": false
+          },
+          {
+            "a": 1,
+            "b": 2,
+            "samples": 566,
+            "medianLogRatio": 0.006823101288026514,
+            "logMad": 0.04752295736078034,
+            "accepted": true,
+            "residualLogRatio": -0.0005514362640878234
+          },
+          {
+            "a": 1,
+            "b": 3,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "accepted": false
+          },
+          {
+            "a": 1,
+            "b": 4,
+            "samples": 2838,
+            "medianLogRatio": 0.056036308403747695,
+            "logMad": 0.07611409604046405,
+            "accepted": true,
+            "residualLogRatio": -0.013700973880387032
+          },
+          {
+            "a": 1,
+            "b": 5,
+            "samples": 855,
+            "medianLogRatio": 0.024989571717897948,
+            "logMad": 0.07796690537241802,
+            "accepted": true,
+            "residualLogRatio": -0.025375288555898105
+          },
+          {
+            "a": 1,
+            "b": 6,
+            "samples": 2307,
+            "medianLogRatio": -0.22108269419851623,
+            "logMad": 0.0490354007711159,
+            "accepted": true,
+            "residualLogRatio": 0.01514718291001671
+          },
+          {
+            "a": 2,
+            "b": 3,
+            "samples": 139,
+            "medianLogRatio": -0.06702180795781996,
+            "logMad": 0.04480810109615595,
+            "accepted": true,
+            "residualLogRatio": -7.91033905045424e-16
+          },
+          {
+            "a": 2,
+            "b": 4,
+            "samples": 1584,
+            "medianLogRatio": 0.06154067881661867,
+            "logMad": 0.08114606192193213,
+            "accepted": true,
+            "residualLogRatio": -0.0008220659154017165
+          },
+          {
+            "a": 2,
+            "b": 5,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "accepted": false
+          },
+          {
+            "a": 2,
+            "b": 6,
+            "samples": 6,
+            "medianLogRatio": -0.2800804992348159,
+            "logMad": 0.07073417183304515,
+            "accepted": false
+          },
+          {
+            "a": 3,
+            "b": 4,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "accepted": false
+          },
+          {
+            "a": 3,
+            "b": 5,
+            "samples": 19,
+            "medianLogRatio": -0.03965244332576367,
+            "logMad": 0.06138374106465017,
+            "accepted": false
+          },
+          {
+            "a": 3,
+            "b": 6,
+            "samples": 0,
+            "medianLogRatio": null,
+            "logMad": null,
+            "accepted": false
+          },
+          {
+            "a": 4,
+            "b": 5,
+            "samples": 36,
+            "medianLogRatio": -0.13463645702992746,
+            "logMad": 0.07906507243899843,
+            "accepted": false
+          },
+          {
+            "a": 4,
+            "b": 6,
+            "samples": 831,
+            "medianLogRatio": -0.34691432218354024,
+            "logMad": 0.11690442438088622,
+            "accepted": true,
+            "residualLogRatio": -0.04094716279087257
+          },
+          {
+            "a": 5,
+            "b": 6,
+            "samples": 1633,
+            "medianLogRatio": -0.2955174420692831,
+            "logMad": 0.045159994154361394,
+            "accepted": true,
+            "residualLogRatio": -0.008922704686954108
+          }
+        ],
+        "referenceIndex": 0,
+        "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo.",
+        "sampledPoints": 19056
+      }
+    }
+  ],
+  "geometry": {
+    "camera": {
+      "unchanged": true,
+      "sha256": "0fa97056a0b62b13056c982897c91a16d4fe2e383a30ba7b6331a1bd8d71363d"
+    },
+    "tree": {
+      "unchanged": true,
+      "sha256": "6be6f6438ac5f35b29a5470e30b4e2e5903f0643eeef29377baadfee982f3de0"
+    },
+    "surfaceHit": {
+      "unchanged": true,
+      "sha256": "50695f2298b5d5822e7e00b0c1e751858548837412ea2e70628d6a78df04d1da"
+    }
+  },
+  "sourceRestoration": {
+    "id": "itokawa",
+    "inputs": [
+      {
+        "id": "amica-2480981469-geometry",
+        "path": "observations/st_2480981469_v_ddr.img.gz",
+        "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.img.gz",
+        "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+        "license": "PDS scientific archive; retain dataset attribution and original notices.",
+        "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+        "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+        "consumers": [
+          "amica-observation"
+        ],
+        "expectedBytes": 28891943,
+        "expectedSha256": "6258068a9de0722b72255e9e727c25f770a8e90748de6bda6bb25f3ad0a956d0",
+        "sourceBinding": {
+          "kind": "catalogued",
+          "references": [
+            {
+              "catalogueId": "hayabusa-amica-2480981469-geometry",
+              "role": "material",
+              "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.img.gz"
+            }
+          ]
+        },
+        "observationDate": "2005-10-22T07:00:19",
+        "productId": "20051022_ST_2480981469_V_DDR_IMG"
+      },
+      {
+        "id": "amica-2480981469-label",
+        "path": "observations/st_2480981469_v_ddr.lbl",
+        "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.lbl",
+        "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+        "license": "PDS scientific archive; retain dataset attribution and original notices.",
+        "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+        "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+        "consumers": [
+          "amica-observation"
+        ],
+        "expectedBytes": 6640,
+        "expectedSha256": "953e823514e2fa1ade56cc353fac7265ec3fd5080049763db3bd2df93b3db9d4",
+        "sourceBinding": {
+          "kind": "catalogued",
+          "references": [
+            {
+              "catalogueId": "hayabusa-amica-2480981469-geometry",
+              "role": "material",
+              "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.lbl"
+            }
+          ]
+        },
+        "observationDate": "2005-10-22T07:00:19",
+        "productId": "20051022_ST_2480981469_V_DDR_IMG"
+      },
+      {
+        "id": "amica-2480981469-detector",
+        "path": "observations/st_2480981469_v.fit",
+        "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051022/st_2480981469_v.fit",
+        "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+        "license": "PDS scientific archive; retain dataset attribution and original notices.",
+        "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+        "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+        "consumers": [
+          "amica-observation"
+        ],
+        "expectedBytes": 1056960,
+        "expectedSha256": "52117052336333442c52754a242cadc45939b98288cf3b63f698d8fc31b6e938",
+        "sourceBinding": {
+          "kind": "catalogued",
+          "references": [
+            {
+              "catalogueId": "hayabusa-amica-2480981469-detector",
+              "role": "material",
+              "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051022/st_2480981469_v.fit"
+            }
+          ]
+        },
+        "observationDate": "2005-10-22T07:00:19"
+      },
+      {
+        "id": "amica-2481672682-geometry",
+        "path": "observations/st_2481672682_v_ddr.img.gz",
+        "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2481672682_v_ddr.img.gz",
+        "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+        "license": "PDS scientific archive; retain dataset attribution and original notices.",
+        "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+        "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+        "consumers": [
+          "amica-observation"
+        ],
+        "expectedBytes": 25666359,
+        "expectedSha256": "7b59b7616c5bb5973e4f7137d1b9325c421708ab7315e15f2a738fcbe6a0a928",
+        "sourceBinding": {
+          "kind": "catalogued",
+          "references": [
+            {
+              "catalogueId": "hayabusa-amica-2481672682-geometry",
+              "role": "material",
+              "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2481672682_v_ddr.img.gz"
+            }
+          ]
+        },
+        "observationDate": "2005-10-22T13:00:19",
+        "productId": "20051022_ST_2481672682_V_DDR_IMG"
+      },
+      {
+        "id": "amica-2481672682-label",
+        "path": "observations/st_2481672682_v_ddr.lbl",
+        "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2481672682_v_ddr.lbl",
+        "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+        "license": "PDS scientific archive; retain dataset attribution and original notices.",
+        "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+        "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+        "consumers": [
+          "amica-observation"
+        ],
+        "expectedBytes": 6640,
+        "expectedSha256": "c6a4671ee695d5a451c51c7a728cae8728c7f1acc767f3bdddfa6b5efaec6b09",
+        "sourceBinding": {
+          "kind": "catalogued",
+          "references": [
+            {
+              "catalogueId": "hayabusa-amica-2481672682-geometry",
+              "role": "material",
+              "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2481672682_v_ddr.lbl"
+            }
+          ]
+        },
+        "observationDate": "2005-10-22T13:00:19",
+        "productId": "20051022_ST_2481672682_V_DDR_IMG"
+      },
+      {
+        "id": "amica-2481672682-detector",
+        "path": "observations/st_2481672682_v.fit",
+        "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051022/st_2481672682_v.fit",
+        "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+        "license": "PDS scientific archive; retain dataset attribution and original notices.",
+        "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+        "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+        "consumers": [
+          "amica-observation"
+        ],
+        "expectedBytes": 1056960,
+        "expectedSha256": "d1ff54eb9a55159f1dc655d4a7e4f68af83dff777ad503c8e1045dcd2a9905a8",
+        "sourceBinding": {
+          "kind": "catalogued",
+          "references": [
+            {
+              "catalogueId": "hayabusa-amica-2481672682-detector",
+              "role": "material",
+              "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051022/st_2481672682_v.fit"
+            }
+          ]
+        },
+        "observationDate": "2005-10-22T13:00:19"
+      },
+      {
+        "id": "amica-2492513077-geometry",
+        "path": "observations/st_2492513077_v_ddr.img.gz",
+        "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2492513077_v_ddr.img.gz",
+        "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+        "license": "PDS scientific archive; retain dataset attribution and original notices.",
+        "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+        "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+        "consumers": [
+          "amica-observation"
+        ],
+        "expectedBytes": 17052744,
+        "expectedSha256": "d3684ac52b7acf53502a0bb2c09e77450824825bc0c48f4fd4fff58035f51132",
+        "sourceBinding": {
+          "kind": "catalogued",
+          "references": [
+            {
+              "catalogueId": "hayabusa-amica-2492513077-geometry",
+              "role": "material",
+              "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2492513077_v_ddr.img.gz"
+            }
+          ]
+        },
+        "observationDate": "2005-10-26T11:01:16",
+        "productId": "20051026_ST_2492513077_V_DDR_IMG"
+      },
+      {
+        "id": "amica-2492513077-label",
+        "path": "observations/st_2492513077_v_ddr.lbl",
+        "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2492513077_v_ddr.lbl",
+        "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+        "license": "PDS scientific archive; retain dataset attribution and original notices.",
+        "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+        "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+        "consumers": [
+          "amica-observation"
+        ],
+        "expectedBytes": 6640,
+        "expectedSha256": "8cd89d023e484cbada0ece6173e256efe5235ea634e0fc7445c8ca6a9b2dfdb0",
+        "sourceBinding": {
+          "kind": "catalogued",
+          "references": [
+            {
+              "catalogueId": "hayabusa-amica-2492513077-geometry",
+              "role": "material",
+              "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2492513077_v_ddr.lbl"
+            }
+          ]
+        },
+        "observationDate": "2005-10-26T11:01:16",
+        "productId": "20051026_ST_2492513077_V_DDR_IMG"
+      },
+      {
+        "id": "amica-2492513077-detector",
+        "path": "observations/st_2492513077_v.fit",
+        "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051026/st_2492513077_v.fit",
+        "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+        "license": "PDS scientific archive; retain dataset attribution and original notices.",
+        "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+        "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+        "consumers": [
+          "amica-observation"
+        ],
+        "expectedBytes": 1056960,
+        "expectedSha256": "dd3cf6042057d50e87b50d09c58563e252cafce34dcebc2130ecdd3f30e837b9",
+        "sourceBinding": {
+          "kind": "catalogued",
+          "references": [
+            {
+              "catalogueId": "hayabusa-amica-2492513077-detector",
+              "role": "material",
+              "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051026/st_2492513077_v.fit"
+            }
+          ]
+        },
+        "observationDate": "2005-10-26T11:01:16"
+      },
+      {
+        "id": "amica-2495230070-geometry",
+        "path": "observations/st_2495230070_v_ddr.img.gz",
+        "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2495230070_v_ddr.img.gz",
+        "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+        "license": "PDS scientific archive; retain dataset attribution and original notices.",
+        "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+        "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+        "consumers": [
+          "amica-observation"
+        ],
+        "expectedBytes": 31131915,
+        "expectedSha256": "bbf8c65b2bc7094208a11f65542098e20046dbc9bebda5b5a74cdd6aaf3740b6",
+        "sourceBinding": {
+          "kind": "catalogued",
+          "references": [
+            {
+              "catalogueId": "hayabusa-amica-2495230070-geometry",
+              "role": "material",
+              "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2495230070_v_ddr.img.gz"
+            }
+          ]
+        },
+        "observationDate": "2005-10-27T10:36:18",
+        "productId": "20051027_ST_2495230070_V_DDR_IMG"
+      },
+      {
+        "id": "amica-2495230070-label",
+        "path": "observations/st_2495230070_v_ddr.lbl",
+        "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2495230070_v_ddr.lbl",
+        "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+        "license": "PDS scientific archive; retain dataset attribution and original notices.",
+        "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+        "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+        "consumers": [
+          "amica-observation"
+        ],
+        "expectedBytes": 6640,
+        "expectedSha256": "a9f15d06923aee52bcd48c3deaa8e48413c17906515068f85f3080e92c6fbd8c",
+        "sourceBinding": {
+          "kind": "catalogued",
+          "references": [
+            {
+              "catalogueId": "hayabusa-amica-2495230070-geometry",
+              "role": "material",
+              "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2495230070_v_ddr.lbl"
+            }
+          ]
+        },
+        "observationDate": "2005-10-27T10:36:18",
+        "productId": "20051027_ST_2495230070_V_DDR_IMG"
+      },
+      {
+        "id": "amica-2495230070-detector",
+        "path": "observations/st_2495230070_v.fit",
+        "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051027/st_2495230070_v.fit",
+        "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+        "license": "PDS scientific archive; retain dataset attribution and original notices.",
+        "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+        "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+        "consumers": [
+          "amica-observation"
+        ],
+        "expectedBytes": 1056960,
+        "expectedSha256": "7fcfe4069083c86611724dc92b8f14776b617db0032b4e1c88057321474daeb6",
+        "sourceBinding": {
+          "kind": "catalogued",
+          "references": [
+            {
+              "catalogueId": "hayabusa-amica-2495230070-detector",
+              "role": "material",
+              "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051027/st_2495230070_v.fit"
+            }
+          ]
+        },
+        "observationDate": "2005-10-27T10:36:18"
+      }
+    ],
+    "verification": {
+      "inputCount": 12,
+      "generatedIntermediateCount": 0,
+      "documentCount": 0,
+      "verifiedCount": 12
+    }
+  },
+  "remoteInstallation": {
+    "allAssets": {
+      "installed": 75,
+      "reused": 0
+    },
+    "bodyAssets": [
+      {
+        "filename": "itokawa-amica-shadow@2x.webp",
+        "bytes": 669748,
+        "sha256": "6e8917a27da8da33ccc68d519363797a7b51f42f8901baab292a2846dd0dd39d",
+        "id": "itokawa",
+        "key": "runtime-assets/6e8917a27da8da33ccc68d519363797a7b51f42f8901baab292a2846dd0dd39d/itokawa-amica-shadow@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/6e8917a27da8da33ccc68d519363797a7b51f42f8901baab292a2846dd0dd39d/itokawa-amica-shadow@2x.webp"
+      },
+      {
+        "filename": "itokawa-amica-surface@2x.webp",
+        "bytes": 1721278,
+        "sha256": "fc7408fa06ff6244f66af94d0d4076c9c016a2d682575ea4e1816523821e3d5c",
+        "id": "itokawa",
+        "key": "runtime-assets/fc7408fa06ff6244f66af94d0d4076c9c016a2d682575ea4e1816523821e3d5c/itokawa-amica-surface@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/fc7408fa06ff6244f66af94d0d4076c9c016a2d682575ea4e1816523821e3d5c/itokawa-amica-surface@2x.webp"
+      },
+      {
+        "filename": "itokawa-amica-thumbnail.webp",
+        "bytes": 1336,
+        "sha256": "c996c1465dc80578dbf351b0f2f79c7d3b6ca539f06ba0be3559812f7ed75f0b",
+        "id": "itokawa",
+        "key": "runtime-assets/c996c1465dc80578dbf351b0f2f79c7d3b6ca539f06ba0be3559812f7ed75f0b/itokawa-amica-thumbnail.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/c996c1465dc80578dbf351b0f2f79c7d3b6ca539f06ba0be3559812f7ed75f0b/itokawa-amica-thumbnail.webp"
+      },
+      {
+        "filename": "itokawa-directional-sun.webp",
+        "bytes": 4798,
+        "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce",
+        "id": "itokawa",
+        "key": "runtime-assets/b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce/itokawa-directional-sun.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce/itokawa-directional-sun.webp"
+      },
+      {
+        "filename": "itokawa-directional-sun@2x.webp",
+        "bytes": 12530,
+        "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+        "id": "itokawa",
+        "key": "runtime-assets/3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940/itokawa-directional-sun@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940/itokawa-directional-sun@2x.webp"
+      },
+      {
+        "filename": "itokawa-elevation-legend.webp",
+        "bytes": 298,
+        "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+        "id": "itokawa",
+        "key": "runtime-assets/fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9/itokawa-elevation-legend.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9/itokawa-elevation-legend.webp"
+      },
+      {
+        "filename": "itokawa-elevation-shadow@2x.webp",
+        "bytes": 856040,
+        "sha256": "e7fe5b25124f84c90a9783049a2cf6a2ce852c921452926c2478f82964977fb8",
+        "id": "itokawa",
+        "key": "runtime-assets/e7fe5b25124f84c90a9783049a2cf6a2ce852c921452926c2478f82964977fb8/itokawa-elevation-shadow@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/e7fe5b25124f84c90a9783049a2cf6a2ce852c921452926c2478f82964977fb8/itokawa-elevation-shadow@2x.webp"
+      },
+      {
+        "filename": "itokawa-elevation-surface@2x.webp",
+        "bytes": 918790,
+        "sha256": "c9f9fec5995292bdf489d6da4ad09adf804424458c279f24c2302fa5b8d7f6af",
+        "id": "itokawa",
+        "key": "runtime-assets/c9f9fec5995292bdf489d6da4ad09adf804424458c279f24c2302fa5b8d7f6af/itokawa-elevation-surface@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/c9f9fec5995292bdf489d6da4ad09adf804424458c279f24c2302fa5b8d7f6af/itokawa-elevation-surface@2x.webp"
+      },
+      {
+        "filename": "itokawa-elevation-thumbnail.webp",
+        "bytes": 5648,
+        "sha256": "add0ac1961a98fc08b94692da8b36925015b44c5ac32eb54bcf384f8de9d5fb0",
+        "id": "itokawa",
+        "key": "runtime-assets/add0ac1961a98fc08b94692da8b36925015b44c5ac32eb54bcf384f8de9d5fb0/itokawa-elevation-thumbnail.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/add0ac1961a98fc08b94692da8b36925015b44c5ac32eb54bcf384f8de9d5fb0/itokawa-elevation-thumbnail.webp"
+      },
+      {
+        "filename": "itokawa-features.json",
+        "bytes": 12072,
+        "sha256": "7a9b5acc16b6c2e3c72f097b7d53b7bebcda54602e0d8dfbe13ded0f32e8fbd5",
+        "id": "itokawa",
+        "key": "runtime-assets/7a9b5acc16b6c2e3c72f097b7d53b7bebcda54602e0d8dfbe13ded0f32e8fbd5/itokawa-features.json",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/7a9b5acc16b6c2e3c72f097b7d53b7bebcda54602e0d8dfbe13ded0f32e8fbd5/itokawa-features.json"
+      },
+      {
+        "filename": "itokawa-lighting.webp",
+        "bytes": 1050836,
+        "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+        "id": "itokawa",
+        "key": "runtime-assets/20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76/itokawa-lighting.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76/itokawa-lighting.webp"
+      },
+      {
+        "filename": "itokawa-starfield-back-standard.webp",
+        "bytes": 53856,
+        "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9",
+        "id": "itokawa",
+        "key": "runtime-assets/187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9/itokawa-starfield-back-standard.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9/itokawa-starfield-back-standard.webp"
+      },
+      {
+        "filename": "itokawa-starfield-back-standard@2x.webp",
+        "bytes": 171294,
+        "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0",
+        "id": "itokawa",
+        "key": "runtime-assets/d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0/itokawa-starfield-back-standard@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0/itokawa-starfield-back-standard@2x.webp"
+      },
+      {
+        "filename": "itokawa-starfield-back.webp",
+        "bytes": 210188,
+        "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7",
+        "id": "itokawa",
+        "key": "runtime-assets/3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7/itokawa-starfield-back.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7/itokawa-starfield-back.webp"
+      },
+      {
+        "filename": "itokawa-starfield-back@2x.webp",
+        "bytes": 598648,
+        "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf",
+        "id": "itokawa",
+        "key": "runtime-assets/4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf/itokawa-starfield-back@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf/itokawa-starfield-back@2x.webp"
+      },
+      {
+        "filename": "itokawa-starfield-bottom-standard.webp",
+        "bytes": 63946,
+        "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90",
+        "id": "itokawa",
+        "key": "runtime-assets/9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90/itokawa-starfield-bottom-standard.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90/itokawa-starfield-bottom-standard.webp"
+      },
+      {
+        "filename": "itokawa-starfield-bottom-standard@2x.webp",
+        "bytes": 200212,
+        "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687",
+        "id": "itokawa",
+        "key": "runtime-assets/9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687/itokawa-starfield-bottom-standard@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687/itokawa-starfield-bottom-standard@2x.webp"
+      },
+      {
+        "filename": "itokawa-starfield-bottom.webp",
+        "bytes": 232844,
+        "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8",
+        "id": "itokawa",
+        "key": "runtime-assets/26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8/itokawa-starfield-bottom.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8/itokawa-starfield-bottom.webp"
+      },
+      {
+        "filename": "itokawa-starfield-bottom@2x.webp",
+        "bytes": 690706,
+        "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a",
+        "id": "itokawa",
+        "key": "runtime-assets/3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a/itokawa-starfield-bottom@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a/itokawa-starfield-bottom@2x.webp"
+      },
+      {
+        "filename": "itokawa-starfield-front-standard.webp",
+        "bytes": 67226,
+        "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d",
+        "id": "itokawa",
+        "key": "runtime-assets/9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d/itokawa-starfield-front-standard.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d/itokawa-starfield-front-standard.webp"
+      },
+      {
+        "filename": "itokawa-starfield-front-standard@2x.webp",
+        "bytes": 208208,
+        "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d",
+        "id": "itokawa",
+        "key": "runtime-assets/c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d/itokawa-starfield-front-standard@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d/itokawa-starfield-front-standard@2x.webp"
+      },
+      {
+        "filename": "itokawa-starfield-front.webp",
+        "bytes": 251588,
+        "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28",
+        "id": "itokawa",
+        "key": "runtime-assets/908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28/itokawa-starfield-front.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28/itokawa-starfield-front.webp"
+      },
+      {
+        "filename": "itokawa-starfield-front@2x.webp",
+        "bytes": 687190,
+        "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d",
+        "id": "itokawa",
+        "key": "runtime-assets/efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d/itokawa-starfield-front@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d/itokawa-starfield-front@2x.webp"
+      },
+      {
+        "filename": "itokawa-starfield-left-standard.webp",
+        "bytes": 31200,
+        "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828",
+        "id": "itokawa",
+        "key": "runtime-assets/992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828/itokawa-starfield-left-standard.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828/itokawa-starfield-left-standard.webp"
+      },
+      {
+        "filename": "itokawa-starfield-left-standard@2x.webp",
+        "bytes": 112118,
+        "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa",
+        "id": "itokawa",
+        "key": "runtime-assets/b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa/itokawa-starfield-left-standard@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa/itokawa-starfield-left-standard@2x.webp"
+      },
+      {
+        "filename": "itokawa-starfield-left.webp",
+        "bytes": 142736,
+        "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650",
+        "id": "itokawa",
+        "key": "runtime-assets/a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650/itokawa-starfield-left.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650/itokawa-starfield-left.webp"
+      },
+      {
+        "filename": "itokawa-starfield-left@2x.webp",
+        "bytes": 413462,
+        "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9",
+        "id": "itokawa",
+        "key": "runtime-assets/3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9/itokawa-starfield-left@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9/itokawa-starfield-left@2x.webp"
+      },
+      {
+        "filename": "itokawa-starfield-right-standard.webp",
+        "bytes": 23676,
+        "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8",
+        "id": "itokawa",
+        "key": "runtime-assets/67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8/itokawa-starfield-right-standard.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8/itokawa-starfield-right-standard.webp"
+      },
+      {
+        "filename": "itokawa-starfield-right-standard@2x.webp",
+        "bytes": 83896,
+        "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79",
+        "id": "itokawa",
+        "key": "runtime-assets/62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79/itokawa-starfield-right-standard@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79/itokawa-starfield-right-standard@2x.webp"
+      },
+      {
+        "filename": "itokawa-starfield-right.webp",
+        "bytes": 116010,
+        "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa",
+        "id": "itokawa",
+        "key": "runtime-assets/db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa/itokawa-starfield-right.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa/itokawa-starfield-right.webp"
+      },
+      {
+        "filename": "itokawa-starfield-right@2x.webp",
+        "bytes": 312496,
+        "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85",
+        "id": "itokawa",
+        "key": "runtime-assets/2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85/itokawa-starfield-right@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85/itokawa-starfield-right@2x.webp"
+      },
+      {
+        "filename": "itokawa-starfield-top-standard.webp",
+        "bytes": 64674,
+        "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738",
+        "id": "itokawa",
+        "key": "runtime-assets/05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738/itokawa-starfield-top-standard.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738/itokawa-starfield-top-standard.webp"
+      },
+      {
+        "filename": "itokawa-starfield-top-standard@2x.webp",
+        "bytes": 202204,
+        "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3",
+        "id": "itokawa",
+        "key": "runtime-assets/f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3/itokawa-starfield-top-standard@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3/itokawa-starfield-top-standard@2x.webp"
+      },
+      {
+        "filename": "itokawa-starfield-top.webp",
+        "bytes": 235140,
+        "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310",
+        "id": "itokawa",
+        "key": "runtime-assets/f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310/itokawa-starfield-top.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310/itokawa-starfield-top.webp"
+      },
+      {
+        "filename": "itokawa-starfield-top@2x.webp",
+        "bytes": 682934,
+        "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4",
+        "id": "itokawa",
+        "key": "runtime-assets/1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4/itokawa-starfield-top@2x.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4/itokawa-starfield-top@2x.webp"
+      },
+      {
+        "filename": "itokawa-system-point.webp",
+        "bytes": 96,
+        "sha256": "e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659",
+        "id": "itokawa",
+        "key": "runtime-assets/e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659/itokawa-system-point.webp",
+        "url": "https://earth-assets.lowpoly.cc/runtime-assets/e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659/itokawa-system-point.webp"
+      }
+    ]
+  },
+  "checks": {
+    "focusedSourceTests": {
+      "passed": 19,
+      "failed": 0
+    },
+    "sourceCatalogueTests": {
+      "passed": 9,
+      "failed": 0,
+      "skipped": 1,
+      "skip": "Existing asteroid-1998-ml14 Warner PDF is not restored locally."
+    },
+    "packageClosure": {
+      "assets": 36,
+      "inputs": 31
+    },
+    "typecheck": "Strict TypeScript check of the changed capture and Lutetia source-test roots, with their imported closure.",
+    "scope": "Focused checks only; the full repository suites were not run."
+  },
+  "additionalImages": [
+    {
+      "path": "dpr2.webp",
+      "bytes": 1287838,
+      "sha256": "f864a3a5f359575d3f854d8de304525f854bbf57cbc2cb49184f677ddfa8b8f4"
+    },
+    {
+      "path": "mobile.webp",
+      "bytes": 122626,
+      "sha256": "0bf778f751be105eb48b646d0e5e1d6e56f14840d9e8542e2579567c2393ee18"
+    },
+    {
+      "path": "shadows.webp",
+      "bytes": 351018,
+      "sha256": "2a859540e0f23a0cc758d0d3a9edfc35810e1fe3d9d9db91a38ce15d536f9851"
+    }
+  ]
+}

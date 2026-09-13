@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 import { spawn } from 'node:child_process';
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { createServer, request as httpRequest } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { tmpdir } from 'node:os';
@@ -160,5 +160,94 @@ test('legacy manual job records cannot block the automatic NOX job namespace', a
     await jobs.start({ requestId: id, request }); await jobs.idle();
     assert.equal((await jobs.get(id)).status, 'completed');
     assert.equal(await readFile(join(legacy, `${id}.json`), 'utf8'), '{invalid legacy request');
+  } finally { await jobs.shutdown(); await rm(root, { recursive: true, force: true }); }
+});
+
+test('opt-in preview history crosses 512 real jobs while retaining active, recent and preferred receipts and all artifacts', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'nebula-preview-history-'));
+  interface PreviewRequest { imageId: string; action: 'apply'; quality: 'draft' | 'detailed'; variant: number; hold?: boolean }
+  const parseRequest = (value: unknown): PreviewRequest => {
+    if (!value || typeof value !== 'object' || !('imageId' in value) || typeof value.imageId !== 'string' ||
+        !('action' in value) || value.action !== 'apply' || !('quality' in value) || (value.quality !== 'draft' && value.quality !== 'detailed') ||
+        !('variant' in value) || typeof value.variant !== 'number' || !Number.isInteger(value.variant) ||
+        ('hold' in value && typeof value.hold !== 'boolean')) throw new TypeError('Invalid preview request.');
+    return { imageId: value.imageId, action: value.action, quality: value.quality, variant: value.variant,
+      ...('hold' in value && typeof value.hold === 'boolean' ? { hold: value.hold } : {}) };
+  };
+  let calls = 0, release: (() => void) | undefined;
+  const options = { namespace: 'history-fixture', parseRequest,
+    history: { maxRecords: 16, retainPerImage: 2, preferred: (value: PreviewRequest) => value.quality === 'detailed' },
+    sample: async (value: PreviewRequest, signal: AbortSignal) => {
+      calls++;
+      if (value.hold) await new Promise<void>((done, reject) => {
+        release = done; signal.addEventListener('abort', () => reject(new Error('Stopped')), { once: true });
+      });
+      const path = join(root, `artifact-${value.variant}.json`);
+      await writeFile(path, JSON.stringify(value)); return { path };
+    },
+    validateResult: async (value: unknown) => {
+      if (!value || typeof value !== 'object' || !('path' in value) || typeof value.path !== 'string') throw new TypeError('Missing prepared artifact.');
+      parseRequest(JSON.parse(await readFile(value.path, 'utf8')));
+    } };
+  const jobs = createStarRemovalJobs(root, options), directory = join(root, '.local/nebula-lab/history-fixture-jobs');
+  const requests: { requestId: string; request: PreviewRequest }[] = [];
+  const completed = async (variant: number, quality: PreviewRequest['quality'], imageId = 'main') => {
+    const input = { requestId: randomUUID(), request: { imageId, action: 'apply' as const, quality, variant } };
+    requests.push(input); await jobs.start(input); await jobs.idle();
+    assert.equal((await jobs.get(input.requestId)).status, 'completed'); return input;
+  };
+  try {
+    const olderDetailed = await completed(0, 'detailed'), preferred = await completed(1, 'detailed');
+    const otherImage = await completed(2, 'detailed', 'other');
+    for (let index = 3; index < 528; index++) await completed(index, 'draft');
+    let resident = (await readdir(directory)).filter(name => name.endsWith('.json'));
+    assert.equal(resident.length, 16);
+    assert.ok(resident.includes(`${preferred.requestId}.json`) && resident.includes(`${otherImage.requestId}.json`));
+    assert.ok(resident.includes(`${olderDetailed.requestId}.json`), 'Old detailed receipts are preferred over obsolete draft receipts.');
+    assert.ok((await readdir(join(directory, 'archive'))).length > 500);
+    const archived = requests[3]!;
+    assert.ok(!resident.includes(`${archived.requestId}.json`));
+    assert.deepEqual(JSON.parse(await readFile(join(root, 'artifact-3.json'), 'utf8')), archived.request, 'Archiving a receipt never deletes its artifact.');
+    const beforeRetry = calls;
+    assert.equal((await jobs.get(archived.requestId)).status, 'completed');
+    assert.equal((await jobs.start(archived)).status, 'completed'); assert.equal(calls, beforeRetry, 'Archived retry is idempotent.');
+    await assert.rejects(jobs.start({ ...archived, request: { ...archived.request, variant: 999 } }), /different Apply inputs/);
+    const active = { requestId: randomUUID(), request: { imageId: 'main', action: 'apply' as const, quality: 'draft' as const, variant: 600, hold: true } };
+    await jobs.start(active); await until(async () => release, value => Boolean(value));
+    let newestId = '';
+    for (let index = 601; index < 607; index++) {
+      newestId = randomUUID(); await jobs.start({ requestId: newestId, request: { imageId: 'main', action: 'apply', quality: 'draft', variant: index } });
+      await until(() => jobs.get(newestId), job => job.status === 'completed');
+    }
+    resident = (await readdir(directory)).filter(name => name.endsWith('.json'));
+    assert.equal(resident.length, 16); assert.ok(resident.includes(`${active.requestId}.json`));
+    assert.ok(resident.includes(`${newestId}.json`) && resident.includes(`${preferred.requestId}.json`) && resident.includes(`${otherImage.requestId}.json`));
+    release!(); await jobs.idle(); await jobs.shutdown();
+    const restarted = createStarRemovalJobs(root, options);
+    try {
+      assert.equal((await restarted.get(archived.requestId)).status, 'completed');
+      assert.equal((await restarted.get(newestId)).status, 'completed');
+      await rm(join(root, 'artifact-3.json'));
+      assert.equal((await restarted.get(archived.requestId)).status, 'failed');
+      assert.equal((await restarted.start(archived)).status, 'failed');
+      const saved = JSON.parse(await readFile(join(directory, 'archive', `${archived.requestId}.json`), 'utf8'));
+      assert.equal(saved.status, 'failed'); assert.equal(saved.result, undefined);
+      assert.ok(!(await readdir(directory)).includes(`${archived.requestId}.json`), 'Reading an archive must not regrow resident history.');
+    } finally { await restarted.shutdown(); }
+  } finally { release?.(); await jobs.shutdown(); await rm(root, { recursive: true, force: true }); }
+});
+
+test('default processing history remains non-archiving at its existing limit', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'nebula-history-default-')), directory = join(root, '.local/nebula-lab/star-removal-nox-jobs');
+  await mkdir(directory, { recursive: true });
+  const ids = Array.from({ length: 512 }, () => randomUUID());
+  await Promise.all(ids.map(id => writeFile(join(directory, `${id}.json`), JSON.stringify({ schema: 'cssearth-star-removal-job@1', id,
+    imageId: request.imageId, request, status: 'completed', createdAt: '2026-01-01T00:00:00Z', updatedAt: '2026-01-01T00:00:00Z', result: { saved: true } }))));
+  let calls = 0;
+  const jobs = createStarRemovalJobs(root, { parseRequest: parseRemovalRequest, sample: async () => { calls++; return {}; }, validateResult: async () => {} });
+  try {
+    await assert.rejects(jobs.start({ requestId: randomUUID(), request }), /history is full/);
+    assert.equal((await jobs.get(ids[0])).status, 'completed'); assert.equal(calls, 0);
+    assert.equal((await readdir(directory)).length, 512); assert.ok(!(await readdir(directory)).includes('archive'));
   } finally { await jobs.shutdown(); await rm(root, { recursive: true, force: true }); }
 });

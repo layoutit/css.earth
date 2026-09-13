@@ -1,6 +1,7 @@
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-residency.js';
 import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
+import { parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { mountSpaceMinimap } from './minimap/minimap.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
@@ -27,10 +28,15 @@ const annotationPriorities = Object.fromEntries(OBJECTS.map(object =>
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
   loadShells(): Promise<{ payload: Awaited<ReturnType<typeof loadPreparedCssSurfaceShell>>; resolveResource(path: string): string }[]>;
+  nebulaSources: ReturnType<typeof parsePreparedNebulaCatalog>['sources'];
 };
 let universePromise: Promise<ApplicationUniverse> | null = null;
 function loadApplicationUniverse(): Promise<ApplicationUniverse> {
   universePromise ??= (async () => {
+    const nebulaParts = Object.values(import.meta.glob('../src/objects/*/source/nebula.json', { eager: true, import: 'default' })).map(parsePreparedNebulaCatalog);
+    const nebulaCatalog = parsePreparedNebulaCatalog({ schema: 'cssearth-nebula-catalog@1', frame: galaxyCatalog.frame,
+      sources: [...new Map(nebulaParts.flatMap(part => part.sources).map(source => [source.id, source])).values()],
+      objects: nebulaParts.flatMap(part => part.objects) });
     const descriptors = import.meta.glob('../src/objects/*/object.json', { import: 'default', eager: true });
     // The individual-star binary bank is a preparation input, never an application asset.
     const assets = import.meta.glob(['../src/objects/*/prepared/**/*.{json,png,webp,bin}',
@@ -84,7 +90,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // The world worker reads its own prepared context; background stars are already baked.
     const plannerSource = { contextUrl: APPLICATION_WORLD_CONTEXT_URL };
     const universe = createPreparedUniverse({ context: applicationContext, volume, pointAppearance, sprites, imageLayers, volumeLenses, annotationPriorities, annotationOpacities, plannerSource,
-      catalog: { payload: galaxyCatalog, fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM,
+      catalog: { payload: galaxyCatalog, nebulae: nebulaCatalog, fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM,
         fullDistanceM: galaxyPresentation.fullDistanceM,
         clusters: { payload: clusterCatalog, fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } },
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
@@ -92,7 +98,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const markerPool = 'context-markers';
     const markerEntries = [...new Set(Object.values(sprites).map(sprite => sprite.url))]
       .map((url, index) => ({ key: `${markerPool}:${index}`, url, pool: markerPool }));
-    return { ...universe, loadShells, assets: {
+    return { ...universe, loadShells, nebulaSources: nebulaCatalog.sources, assets: {
       entries: [...universe.assets.entries, ...markerEntries],
       pools: [...universe.assets.pools, { id: markerPool, retention: 'mount', capacity: markerEntries.length,
         concurrency: 4, reuse: false, decoding: 'async' }],
@@ -124,7 +130,7 @@ export function createApplicationWorldContext() {
         const layer = prepared.mount(stage, { presentationHost, requestPublication: () => refreshWorld(), onSelectGalaxy: object => { void contextNavigation?.select(object); } });
         pendingLayer = layer;
         contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
-          sources: [...galaxyCatalog.sources, ...clusterCatalog.sources], windowTarget });
+          sources: [...galaxyCatalog.sources, ...clusterCatalog.sources, ...prepared.nebulaSources], windowTarget });
         layer.setHiddenOrbits(hiddenOrbitIds);
         const framePlanner = prepared.createFramePlanner();
         pendingPlanner = framePlanner;
@@ -193,6 +199,10 @@ export function createApplicationWorldContext() {
           },
           connectNavigation: contextNavigation.connect,
           suspendFocus: contextNavigation.suspend, restoreFocus: contextNavigation.restore,
+          selectPreparedFocus(id: string) {
+            const object = layer.resolveGalaxy(id);
+            return object ? contextNavigation.select(object) : null;
+          },
           present(world: WorldCameraPose, viewport: WorldCameraViewport, { signal, commit = () => {} }: { signal: AbortSignal; commit?: () => void }) {
             return frameQueue.presentAndWait({ world, viewport, commit,
               current: () => !destroyed, fail() {} }, signal);

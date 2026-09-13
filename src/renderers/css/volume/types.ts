@@ -30,6 +30,21 @@ export interface PreparedVolumeStack {
   readonly leaves: readonly PreparedVolumeLeaf[];
 }
 
+/** Offline projections of the same cloud, with its saved optical presentation. */
+export interface PreparedVolumeImpostors {
+  readonly schema: 'cssearth-volume-impostors@1';
+  readonly radiusUnits: number;
+  readonly fullBelowDiameterPixels: number;
+  readonly volumeAboveDiameterPixels: number;
+  readonly views: readonly {
+    readonly id: string;
+    readonly back: VolumeVector;
+    readonly right: VolumeVector;
+    readonly down: VolumeVector;
+    readonly texturePath: string;
+  }[];
+}
+
 export interface PreparedCssVolume {
   readonly schema: 'cssearth-css-volume@1';
   readonly id: string;
@@ -40,6 +55,7 @@ export interface PreparedCssVolume {
   readonly provenance: unknown;
   readonly approximation: unknown;
   readonly sky?: PreparedCssSky;
+  readonly impostors?: PreparedVolumeImpostors;
 }
 
 export interface VolumeCameraPublication {

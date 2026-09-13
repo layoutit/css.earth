@@ -115,6 +115,7 @@ export function bindNavigationIntent({ documentTarget, windowTarget, objects, fr
   const linked = (event: Event) => {
     const anchor = event.target instanceof windowTarget.Element ? event.target.closest('a[href]') : null;
     if (!(anchor instanceof windowTarget.HTMLAnchorElement) || anchor.origin !== windowTarget.location.origin) return null;
+    if (anchor.hasAttribute('data-prepared-focus-id')) return null;
     return routes.get(anchor.pathname) ?? null;
   };
   const options = { capture: true, passive: true, signal: events.signal };

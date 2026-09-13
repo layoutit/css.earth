@@ -1,0 +1,137 @@
+{
+  "body": "hyperion",
+  "sourceRoot": "..",
+  "shape": {
+    "path": "shape/hyperion_30k_plt.tab",
+    "format": "pds-plate-model",
+    "grid": {
+      "metersPerUnit": 1000,
+      "expectedVertices": 14636,
+      "expectedFaces": 29268,
+      "indexBase": 0
+    },
+    "latitudeSegments": 24,
+    "longitudeSegments": 40,
+    "faceBudget": 2000,
+    "tileSize": 128,
+    "atlasColumns": 16,
+    "simplification": {
+      "targetFaces": 1200,
+      "maximumErrorMeters": 3000
+    }
+  },
+  "referenceFrame": {
+    "id": "n1506388174",
+    "path": "observations/N1506388174_2_CALIB.IMG",
+    "labelPath": "observations/N1506388174_2_CALIB.LBL",
+    "observerLatitude": 11.11,
+    "observerWestLongitude": 200.35,
+    "sunLatitude": 11.11,
+    "sunWestLongitude": 252.51,
+    "rangeKm": 35121.2,
+    "northAzimuthDegrees": 329.49,
+    "center": [
+      304.2,
+      704.6
+    ],
+    "pixelAngleMicroradians": 5.9896977199
+  },
+  "color": {
+    "id": "filter-color",
+    "format": "controlled-shape-color",
+    "consumer": "cassini-color-frames",
+    "channels": [
+      {
+        "channel": "red",
+        "filter": "IR3",
+        "frames": [
+          {
+            "id": "n1506388668",
+            "path": "observations/N1506388668_2_CALIB.IMG",
+            "labelPath": "observations/N1506388668_2_CALIB.LBL",
+            "observerLatitude": 11.070683229813666,
+            "observerWestLongitude": 200.84372670807454,
+            "sunLatitude": 11.11,
+            "sunWestLongitude": 252.92577639751553,
+            "rangeKm": 32332.8850931677,
+            "northAzimuthDegrees": 329.4822462392758,
+            "center": [
+              792.4786696287061,
+              691.6788143082762
+            ],
+            "pixelAngleMicroradians": 5.9896977199,
+            "coverageInsetPixels": 3
+          }
+        ]
+      },
+      {
+        "channel": "green",
+        "filter": "IR1",
+        "frames": [
+          {
+            "id": "n1506388635",
+            "path": "observations/N1506388635_2_CALIB.IMG",
+            "labelPath": "observations/N1506388635_2_CALIB.LBL",
+            "observerLatitude": 11.072732919254658,
+            "observerWestLongitude": 200.80990683229814,
+            "sunLatitude": 11.11,
+            "sunWestLongitude": 252.89810559006213,
+            "rangeKm": 32519.14037267081,
+            "northAzimuthDegrees": 329.4910415666191,
+            "center": [
+              792.8871649059492,
+              690.4025771092948
+            ],
+            "pixelAngleMicroradians": 5.9896977199,
+            "coverageInsetPixels": 3
+          }
+        ]
+      },
+      {
+        "channel": "blue",
+        "filter": "UV3",
+        "frames": [
+          {
+            "id": "n1506388580",
+            "path": "observations/N1506388580_2_CALIB.IMG",
+            "labelPath": "observations/N1506388580_2_CALIB.LBL",
+            "observerLatitude": 11.076149068322982,
+            "observerWestLongitude": 200.7535403726708,
+            "sunLatitude": 11.11,
+            "sunWestLongitude": 252.85198757763976,
+            "rangeKm": 32829.56583850932,
+            "northAzimuthDegrees": 329.50170797175787,
+            "center": [
+              793.8980869955841,
+              692.6212786245933
+            ],
+            "pixelAngleMicroradians": 5.9896977199,
+            "coverageInsetPixels": 3
+          }
+        ]
+      }
+    ],
+    "photometry": {
+      "model": "observed",
+      "weight": 0.5,
+      "maximumGain": 1,
+      "maximumIncidenceDegrees": 75,
+      "maximumEmissionDegrees": 75,
+      "displayMaximum": 0.5,
+      "gamma": 1,
+      "minimumLevel": 1,
+      "maximumLevel": 1,
+      "backgroundMaximum": 0.003
+    },
+    "metadata": {
+      "label": "Filter color",
+      "falseColor": true,
+      "coverage": "UNQUALIFIED CAMERA SEEDS; do not publish.",
+      "attribution": {
+        "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+        "url": "https://pds-rings.seti.org/cassini/iss/"
+      }
+    }
+  },
+  "controlFrameNote": "Frozen filtered cameras checked against a different clear exposure; do not refit."
+}

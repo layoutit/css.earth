@@ -2,9 +2,17 @@
 
 This is the repeatable workflow for bringing observed images into the lab, separating compact light, and coloring a spatial model. Source-specific settings belong in recipes, never in algorithm branches. The accepted LMC workflow is executable with `pnpm lab:nebula:bake`; [baking.md](docs/baking.md) defines the clean-start command, stage inputs and reproducibility boundary.
 
-**Current stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Preview** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the Alignment density cloud; it does not recover measured gas depth.
+Use [Nebula Compiler Process Guidelines](docs/nebula-compiler-guidelines.md) before adding physical constraints. It defines method eligibility, reusable combinations, primary-source intake, actual coverage/uncertainty checks and the evidence-ledger-to-recipe-to-result record. Measurements, published models and authored depth choices remain distinct; shells, fronts, filaments, cavities and dust require different forward observables. [Orion's ledger](models/m42/physical-evidence.json) is the first compact intake example, not an independent acceptance of its 3D geometry.
 
-## Order of operations
+**Without an existing density model:** the separate [planetary-nebula experiment](docs/planetary-nebulae.md) fits a plausible emission field from an image plus symmetry assumptions before baking. Its M2–9 recipe is not a replacement for the fixed LMC density workflow described below.
+
+**Choose the method from the evidence:** `density` uses an independent spatial prior; `symmetry` declares an axis/inclination; `inference` preserves image evidence and compares conditional geometry. All methods share the lab shell and source-registration/separation utilities. Helix now uses the [emission compiler](docs/emission-compiler.md) for its main cloud; projected shape editing and joint molecular-wall comparisons remain diagnostics. Observation colors and shapes can differ by wavelength even when field stars align correctly.
+
+**Current inference stage:** **Nebula → Compile nebula** runs the authorized pipeline from pinned observations to one prepared cloud. Independent per-image normalization forms a combined relative-luminosity target with explicit coverage. A bounded positive multiscale fit supplies projected emission; an optional velocity-conditioned scaffold and an explicitly uncertain halo supply its depth. Near/far allocation and thickness remain assumptions. Every image lens repaints the same geometry and alpha, and compact lights use observed sky positions with conditional field depths. None of these products is calibrated gas density or confirmed stellar membership. The [compiler guide](docs/emission-compiler.md) records setup, controls, replay and limits; visual acceptance remains open.
+
+**Current density stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Preview** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the Alignment density cloud; it does not recover measured gas depth.
+
+## Density method: order of operations
 
 ```text
 Pinned original + source metadata
@@ -30,7 +38,7 @@ Star detections → verified image registration → full-density overlay
                  Same geometry/alpha → rotation review
 ```
 
-Image import and registration do not themselves authorize separation or a volume bake. An explicit user instruction for named candidates or a processing-button click authorizes that operation; do not request the same approval again. Never skip alignment because an image looks approximately right.
+Image import and registration do not themselves authorize separation or a volume bake. An explicit user instruction for named candidates or a processing-button click authorizes that operation; do not request the same approval again. A full **Compile nebula** authorizes its configured source and fit stages together, while preserving their validation. Never skip alignment because an image looks approximately right.
 
 ## 1. Acquire and preserve the observation
 
@@ -95,6 +103,26 @@ In **Reconstruction**, choose a completed source and press **Preview**. The sour
 - Verify the actual output against Alignment: every quad, every alpha byte, source/frame hashes, same stars across materials, and source switching at a retained camera. Keep the existing density source and saved browser placements untouched.
 
 Original-image inspection uses up to 2048px within four million pixels. The cloud has simulated stellar density and modeled display colors/depths, not measured gas geometry. Rotation artifacts of the inherited density bank remain a separate rendering concern.
+
+## Shape-cloud inference preview
+
+The [shape-cloud workbench](docs/nebula-compiler.md#shape-cloud-comparison) remains a separate diagnostic for editable shape hypotheses. The compiler's main **Nebula** view does not require these manual edits. In the diagnostic, start with **Structure** to compare source and model in grayscale, inspect edges, and reveal missing/excess signal with shared display levels. **Compare / Overlay / Textured** show the registered photograph beside, behind or painted onto the same cloud. Earth view preserves registration and linked framing. Unlock rotation and drag either 3D pane to rotate both; the source remains a flat plane. The corner axes identify image X/Y and the original direction toward Earth.
+
+- Detected contours initialize the components automatically. Nearby duplicate brightness boundaries share one shell; distinct projected-center groups remain selectable. No hidden photo-column normalization makes the model match the image.
+- In **Shapes**, the visible **Detector** has Sensitivity (25–400%, default 100%), Min. size (minimum ellipse radius, 2–40% of the shorter image side; default 7%), and Max. shapes (1–32, default 12). Slide to update the structures and cloud directly: a bounded draft during dragging and full refinement after release. No Detect/Apply step or view switch. The retained viewer keeps its camera; source-scoped settings and server-owned jobs survive refresh. Reuse the existing starless raster, never another NOX run. Every geometry has its own saved shape edits. Sensitivity lowers contrast/edge thresholds; it cannot establish whether faint light belongs to the nebula. See the [actual Helix fitting trial](docs/helix-fitting-trial.md) before extending this detector.
+- Hover a guide for its component/weight and click to select it. **All / Group / Selected** scopes expose weight, thickness, softness, depth, position, size, rotation and enable controls; exposure is global. **Solo** isolates a component; **Reset to detected** restores the automatic initialization.
+- Each term is a 3D emission field, currently a shell, ring or filled ellipsoid. **Add / Subtract** and weight compose `max(0, sum(added emission) - sum(subtracted emission))`. Symbolic `S1`, `S2`, … terms select/highlight the same guides; the formula and sliders edit the same settings. A partial subtraction dims a cavity instead of forcing it empty. These are authored 3D hypotheses; the 2D guides are their projected evidence, not a separate volume model.
+- Rings also expose **Arc length / Arc angle**: a clockwise image-local sector with soft ends in the actual 3D emission. A complete 360° ring preserves previous behavior. **Fit** selects an optional checked-in source-pinned hypothesis, such as [Helix · tuned](models/helix/README.md#saved-coarse-fit--2026-09-12); its edits are separate from automatic drafts and reset to that saved recipe. Selecting a saved fit does not rerun detection or star removal.
+- Shape edits save the draft and automatically update the cloud. Dragging requests a throttled coarse pass; release, keyboard completion or an idle pause requests detail. Only the newest pending settings wait behind the active pass. Both qualities evaluate the same field, bounds, registration and exposure. Modes, camera movement and component selection do not process anything. The current scene stays visible until the next bank finishes decoding; refresh reconnects to server-owned work.
+- Neutral and textured outputs share all geometry and every decoded alpha byte. Painting uses the pinned working source and its exact pixel projection; uncovered/black pixels retain neutral material. Source, structure, geometry, settings and implementation identities bind results and drafts to their evidence.
+- **Structure** uses the complete working source raster and the actual baked neutral Z projection placed back into that frame. Relative display luminance, equally smoothed gradient magnitude, and signed residual are prepared offline. One global least-squares brightness factor removes overall amplitude from this diagnostic only; it never changes the field, alpha or texture. The same source-derived white point and Levels gain apply to both sides. White residual means missing light, black means excess, midgray means agreement. Background and residual stars remain evidence, not automatic nebular membership. This view stays Earth-facing with linked pan/zoom; returning to 3D restores its previous pose. Channel and Levels changes only select prepared images.
+- Sample the complete finite emission support with comparable physical slab spacing across XYZ; keep the full photograph registration separate from these tight baking bounds. Empty image margins must not reduce the number of useful side slices. A changed preparation version refreshes the saved recipe without discarding its settings or hiding the previous completed scene.
+
+This preview models relative emission, not measured gas density. Depth and wall shape are authored assumptions; unsupported arcs, asymmetries and outer emission still need better hypotheses. The photo texture must not conceal a poor neutral fit.
+
+## Multiband evidence and kinematic constraints
+
+The [multimodal inspector](docs/multimodal-workflow.md) combines registered, independently normalized broad/ridge/compact evidence while retaining each source's footprint and attribution. Single-band features survive; compatible repeated support is an additional display, not a membership test. The [joint fit](docs/joint-fit.md) connects projected ridge skeletons to the broader HCO+ catalogue, compares two coarse molecular-wall surfaces and prepares neutral XYZ volumes with withheld-velocity residuals. The inner [O III] slit remains separate. These are conditional shape hypotheses, not a recovered density field; see [research and dataset leads](docs/multimodal-research.md).
 
 ## Selected LMC inputs
 

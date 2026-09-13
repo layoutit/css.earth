@@ -1,5 +1,10 @@
 ---
-import type { Props } from '../planet-shell-types';
+import type { Props as ShellProps } from '../planet-shell-types';
+interface Props {
+  objectId: string;
+  lenses?: Pick<NonNullable<ShellProps['lenses']>, 'controls' | 'defaultLens'>;
+  provenance?: ShellProps['provenance'];
+}
 import { datasetContext } from '../dataset-context.mts';
 import { EXPLORATION, referenceUrl } from '../exploration-catalog.mts';
 import { SOURCE_CATALOGUE, SOURCES } from '../sources-catalog.mts';
@@ -49,7 +54,7 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
   return bands.every(Boolean) && new Set(bands).size === bands.length;
 };
 ---
-<template data-prepared-detail="dataset-context">
+<template data-prepared-detail="dataset-context" data-context-object={objectId}>
   {contexts.map(context => {
     const credited = contributors(context);
     const tabbed = credited.length > 1 && distinctBands(credited);
@@ -61,13 +66,13 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
         {tabbed && <div class="planet-card-tabs" role="tablist" aria-label="Credited machines">
           {group.map((entry, index) => <button type="button" role="tab"
             id={`${objectId}-${context.lens.id}-${entry.id}-tab`}
-            data-information-group={`context-${context.lens.id}`} data-information-tab={entry.id}
+            data-information-group={`context-${objectId}-${context.lens.id}`} data-information-tab={entry.id}
             aria-controls={`${objectId}-${context.lens.id}-${entry.id}-panel`}
             aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? 0 : -1}>{entry.band}</button>)}
         </div>}
         {group.map((entry, index) => <div class="planet-card-tabpanel"
           id={tabbed ? `${objectId}-${context.lens.id}-${entry.id}-panel` : undefined}
-          data-information-group={tabbed ? `context-${context.lens.id}` : undefined}
+          data-information-group={tabbed ? `context-${objectId}-${context.lens.id}` : undefined}
           data-information-panel={tabbed ? entry.id : undefined}
           role={tabbed ? 'tabpanel' : undefined}
           aria-labelledby={tabbed ? `${objectId}-${context.lens.id}-${entry.id}-tab` : undefined}

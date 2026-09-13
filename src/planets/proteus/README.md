@@ -4,11 +4,15 @@
 
 - **[Voyager archive](https://pds-rings.seti.org/voyager/iss/):** **Monochrome:** clear-filter frames C1137317 and C1138920.
 
-- **Filter color:** original green C1137350, blue C1137339 and violet C1137328 shown as red, green and blue, with one independently registered camera per band.
+- **False color:** original green C1137350, blue C1137339 and violet C1137328 shown as red, green and blue, with one independently registered camera per band.
 
 - **Elevation:** Stooke `n8proteus.tab`, radial height relative to 208 km, displayed from −35 to +25 km.
 
 ## Evidence
+
+The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/filter-color/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+
+[Displayed surface](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). This display repair does not promote the existing coarse registration to feature-controlled photographic terrain.
 
 - **Color registration:** Nominal held-out RMS errors are violet 1.18, blue 1.34 and green 1.64 corrected pixels.
 
@@ -20,7 +24,7 @@
 
 - This is a coarse filter-color observation, not true color or a calibrated albedo map. Only the common reliable interior is mapped; roughly 40 km or coarser near the image centre is a conservative interpretation scale.
 
-- **Faithfulness status:** The Monochrome and Filter color lenses retain broad observed brightness, but their outline/inter-band checks do not provide independent cartographic feature control. They are coarse observations, not feature-registered photographic surfaces.
+- **Faithfulness status:** The Monochrome and False color lenses retain broad observed brightness, but their outline/inter-band checks do not provide independent cartographic feature control. They are coarse observations, not feature-registered photographic surfaces.
 
 - Unseen shape is modelled, not measured local topography. The authored six-pixel envelope is conservative working uncertainty, not a confidence interval or absolute ground truth.
 
@@ -67,7 +71,7 @@ Each color frame is the original 1,000×1,000 signed HALF GEOMED product. FICOR7
 
 `source/geometry/color-registration.json` records a translation fit to the full 5,040-triangle source outline, with OPUS observer/Sun directions and range and SEDR CK/PCK roll fixed. Alternating 45-degree sunlit sectors fit the centre; the intervening sectors are withheld. Four additional ±2-pixel initializations change the fitted centres by less than 0.35 pixel; the largest held-out discrepancy across those runs is 4.6 pixels. A nine-pixel Manhattan inset guarantees at least 6.36 pixels of Euclidean separation from known invalid boundaries. No new fit is adopted for the noisy closest clear frame.
 
-Independent sky samples are retained in `source/geometry/color-background.json`: medians −0.0017, −0.0011 and −0.0037 I/F for violet, blue and green, respectively. Subtract each measured offset, use its own three-MAD-sigma sky threshold, and require all three band masks and complete bilinear contributors to be valid. A common display ceiling of 0.10 I/F and gamma 1 follows bounded lunar-Lambert normalization (weight 0.5, gain at most 2.5, incidence/emission at most 60°). Channel gains remain exactly 1; this does not white-balance, histogram-match or pan-sharpen the observations.
+Independent sky samples are retained in `source/geometry/color-background.json`: medians −0.0017, −0.0011 and −0.0037 I/F for violet, blue and green, respectively. Subtract each measured offset, use its own three-MAD-sigma sky threshold, and require all three band masks and complete bilinear contributors to be valid. A common display range of 0–0.10 I/F maps floating samples to linear display channels, followed by the [shared IEC sRGB output transfer](../../../docs/color-preparation.md). This display follows bounded lunar-Lambert normalization (weight 0.5, gain at most 2.5, incidence/emission at most 60°). Channel gains remain exactly 1; this does not white-balance, histogram-match or pan-sharpen the observations.
 
 The reproducible source check is `python source/preparation/register-voyager-color.py source` from this package with numpy, spiceypy and Node available. It verifies source hashes and compares the retained registration receipt without changing images. `--write` regenerates only that receipt; the source manifest must then be repinned deliberately.
 

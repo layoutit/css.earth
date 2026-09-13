@@ -71,7 +71,21 @@
             "GREEN",
             "VIOLET"
           ],
-          "gamma": 2.2
+          "gamma": 1,
+          "colorDisplay": {
+            "kind": "band-composite",
+            "inputQuantity": "radiance-factor",
+            "bands": [
+              "IR-7560",
+              "GREEN",
+              "VIOLET"
+            ],
+            "displayRange": [
+              0,
+              1
+            ],
+            "outputEncoding": "srgb"
+          }
         },
         "metadata": {
           "label": "Enhanced color",
@@ -138,7 +152,7 @@
         "consumer": "agenor-elevation",
         "sampling": "bilinear",
         "displaySampling": "nearest",
-        "description": "Agenor Linea · relative height",
+        "description": "Agenor Linea \u00b7 relative height",
         "title": "Released relative heights of Agenor Linea; independent local stereo datum, not elevation above a global reference sphere.",
         "sourceUrl": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
         "minimum": -700,
@@ -150,8 +164,8 @@
           "#9b4f32"
         ],
         "labels": [
-          "−700",
-          "−200",
+          "\u2212700",
+          "\u2212200",
           "300"
         ],
         "units": "m",

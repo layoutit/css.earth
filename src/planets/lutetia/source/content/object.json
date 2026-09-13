@@ -68,7 +68,7 @@
         "id": "osiris",
         "label": "OSIRIS",
         "detail": "OSIRIS",
-        "description": "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs.",
+        "description": "Three Rosetta close-ups show Lutetia’s craters and ridges during the 2010 flyby, at 68–88 metres per pixel. Brightness is normalized with a published photometric model; shadows and seams remain. The grid marks areas without usable photographs.",
         "title": "OSIRIS photographs",
         "thumbnail": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
         "surface": "lutetia-osiris-surface@2x.webp",
@@ -77,17 +77,17 @@
           "id": "lutetia-observations-n20100710t154047674id4df22-img",
           "path": "../manifest.json"
         },
-        "summary": "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs.",
+        "summary": "Three Rosetta close-ups show Lutetia’s craters and ridges during the 2010 flyby, at 68–88 metres per pixel. Brightness is normalized with a published photometric model; shadows and seams remain. The grid marks areas without usable photographs.",
         "facts": [
           {
             "id": "images",
             "label": "Images",
-            "value": "2"
+            "value": "3"
           },
           {
             "id": "image-scale",
             "label": "Image scale",
-            "value": "78–88 m/pixel"
+            "value": "68–88 m/pixel"
           }
         ]
       },

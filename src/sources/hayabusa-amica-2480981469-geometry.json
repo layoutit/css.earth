@@ -1,0 +1,33 @@
+{
+  "id": "hayabusa-amica-2480981469-geometry",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Itokawa · AMICA controlled geometry 2005-10-22T07:00:19",
+  "identifiers": [
+    {
+      "type": "pds3-product-id",
+      "value": "20051022_ST_2480981469_V_DDR_IMG"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.lbl",
+      "label": "Native source"
+    },
+    {
+      "role": "archive",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.img.gz",
+      "label": "Archive input"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.lbl",
+      "checkedOn": "2026-09-13",
+      "locator": "PRODUCT_ID, DATA_SET_ID, START_TIME and geometric backplane definition"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
