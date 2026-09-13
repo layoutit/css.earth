@@ -59,12 +59,12 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "7a4423487c819fb73f49c38002be3f8176ed9bd4d2d38e60d0f4ac629aeb7de8"
+          "sha256": "1e534a086cc25eda94c198029f853a46fa4082493b8072ebac7eb9b1d29c3513"
         },
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "ff0a6b9d79f9a9b6faab6fee8f76780eff7314a01331def76be2a599f2dc5c7b"
+          "sha256": "0b4912be6e0df1f6d390b4c9bc43d161b1f1a3857570d0b1967e8bf0747e5b52"
         },
         {
           "id": "celestial",
@@ -79,12 +79,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c241a9187643b00a8530d30b509ac5dd67067b1fc089131ecb1fddd0caa8ed7a"
+          "sha256": "12ad89fd4bd208c929d2046cb63ab2a8f0ebc049f93e46396ed207e017d71dfe"
         },
         {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
-          "sha256": "dc5bf43aad04eb5e7e60cde51fcb3ac3fa3040a589e8fe4012ff35e079f756ed"
+          "sha256": "18635d3d4ea81937b8a61144487d51cc7b0748fa9ca910d06a08f5fc13521391"
         },
         {
           "id": "charts",
@@ -171,7 +171,7 @@
       "classification": "planet",
       "color": "#a95e47",
       "distanceAu": 1.52,
-      "description": "Explore Mars in 3D with cssEarth. Discover the red planet\u2019s volcanoes, deep canyons, polar ice, and thin atmosphere in an interactive explorer.",
+      "description": "Explore Mars in 3D with cssEarth. Discover the red planet’s volcanoes, deep canyons, polar ice, and thin atmosphere in an interactive explorer.",
       "systemName": "Solar System",
       "order": 121,
       "context": {

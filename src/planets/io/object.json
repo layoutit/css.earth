@@ -103,12 +103,12 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "eea8a761f448acd288b104e90f63055bdb1a53a3def123ec2a6109cfbf0d50ee"
+          "sha256": "10238d3088998fd92c29c2d7b41ff57392090e99e57620e75e6231fd4a950fbd"
         },
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "7edfa226f8fdf6d490553e3e1e67866282d9cb28b4de2b72e68fa8dc690b7e02"
+          "sha256": "e20eb1618de51350f118d402904d05d9dd9bc7a9e0ee9b01a725a87e3d731043"
         },
         {
           "id": "celestial",
@@ -123,12 +123,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "633b7683b64c3b503cdd339edb27922cbeb62894ebb3873e4bc98cf32c52308e"
+          "sha256": "d0a8429f4d8df23984d82dad5ef754571db4ebcf59bdabbaa0db20bb3e67fa36"
         },
         {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
-          "sha256": "49d2308bd4d28ae21c042d35693552c2625a3ff310624a1cf4e55dae87669335"
+          "sha256": "5075bd97b106724c1fc9a90ed46a7c2068cce09f77e0963f65fa4a4877cbce07"
         },
         {
           "id": "title",

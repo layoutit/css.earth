@@ -350,8 +350,8 @@
     {
       "id": "ceres-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1573,
-      "expectedSha256": "6ef42f0d2bef147f371835eaf317501d5ee173c41f0b1d70dc366a452e40eab1",
+      "expectedBytes": 1499,
+      "expectedSha256": "b694b0087e10636c553e72d51adb447d1d2e69e67e940b022a07f7c20eee482a",
       "origin": "Repository-authored Ceres solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -371,8 +371,8 @@
     {
       "id": "ceres-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 4546,
-      "expectedSha256": "13ff29595f573384132dfc5b75978de019f15085d501aac457c3df1df3794744",
+      "expectedBytes": 4475,
+      "expectedSha256": "5c18096c5e845c8dac90b9bd191d2d511502973e1e1aae83b149723636a04d30",
       "origin": "Repository-authored Ceres raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -390,8 +390,8 @@
     {
       "id": "ceres-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1409,
-      "expectedSha256": "4a156cf21e19c8594398f95bb3e68ca13016655599a3ac9d7351820f477c1abc",
+      "expectedBytes": 1415,
+      "expectedSha256": "14b59d20daf3a3e310e02b2f1900669d883673097b3f998b3dbb6ae8f50044b8",
       "origin": "Repository-authored Ceres geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -484,8 +484,8 @@
     {
       "id": "ceres-object-content",
       "path": "content/object.json",
-      "expectedBytes": 10474,
-      "expectedSha256": "465f5536a8561d2c66a0e1cafa0afdca64b6f51f458043e500cb6c115c8d8ea9",
+      "expectedBytes": 10492,
+      "expectedSha256": "3ac305cfc0adbd35ea52100c93ca9d97c76c361170dcaa58b57d57334e171e96",
       "origin": "Repository-authored Ceres object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

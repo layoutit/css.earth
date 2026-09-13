@@ -497,8 +497,8 @@
     {
       "id": "callisto-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1623,
-      "expectedSha256": "de57dcd7de843dddfab06f175881491789e77ce0dc71e604f6168bab03b37d24",
+      "expectedBytes": 1543,
+      "expectedSha256": "5cbeae8ba1228ee8cd273767e031664bcff5b78213b7e6bec7252019206ef48f",
       "origin": "Repository-authored Callisto solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -518,8 +518,8 @@
     {
       "id": "callisto-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 3873,
-      "expectedSha256": "78ad29379b71276396f26f6b1acbebb77db0ceda04005140c8c790c7e0db9163",
+      "expectedBytes": 3802,
+      "expectedSha256": "73b0b9fa774e507559ee0311a43c15ce49623f4810d648f86530139af3d36e39",
       "origin": "Repository-authored Callisto raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -537,8 +537,8 @@
     {
       "id": "callisto-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1429,
-      "expectedSha256": "8b641c41ec4eccc4f45e16315ff86aaa663c4ba3a2db934d6846c3e0da55b878",
+      "expectedBytes": 1435,
+      "expectedSha256": "019d3c17bda5e6cbdd73824c7a5ec500f9b0a8beeef82fd7708583089d70f206",
       "origin": "Repository-authored Callisto geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -631,8 +631,8 @@
     {
       "id": "callisto-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12032,
-      "expectedSha256": "738d0e5ba469fc6423d8e5c4dce18a31bb9fcd8267f93b8fcfdb3945fa111195",
+      "expectedBytes": 12050,
+      "expectedSha256": "c4a5886606a70605ea25407a8e6ea408da388afa124c0e9a018e6082a2878ddf",
       "origin": "Repository-authored Callisto object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
