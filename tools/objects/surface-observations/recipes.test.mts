@@ -32,3 +32,21 @@ test('a lens refuses keys its format does not declare and a second display', () 
     }
   });
 });
+
+test('NEAR MSI requires raw detector companions and bounded camera refinement without configurable compression or photometric correction', () => {
+  const mathilde = authored.find(body => body.id === 'mathilde');
+  assert.ok(mathilde);
+  const index = mathilde.profile.raster.surfaceObservations.findIndex(lens => fixtureRecord(lens).format === 'near-msi-camera');
+  assert.ok(index >= 0);
+  for (const alter of [
+    (lens: unknown) => { delete fixtureRecord(lens, 'frames', 0).originalPath; },
+    (lens: unknown) => { delete fixtureRecord(lens, 'frames', 0).cameraPath; },
+    (lens: unknown) => { delete fixtureRecord(lens).refinement; },
+    (lens: unknown) => { fixtureRecord(lens).allowLossy = true; },
+    (lens: unknown) => { fixtureRecord(lens, 'photometry').model = 'lommel-seeliger'; },
+  ]) {
+    const changed = structuredClone(mathilde.profile);
+    alter(changed.raster.surfaceObservations[index]);
+    assert.throws(() => parseTerrestrialProfile(changed), /source-bound/);
+  }
+});

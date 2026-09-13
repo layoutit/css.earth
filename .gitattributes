@@ -107,5 +107,11 @@ src/planets/comet-1p/evidence/encounters/*.log -whitespace
 src/planets/arrokoth/source/observations/*.lbl -text -whitespace
 src/planets/arrokoth/source/observations/*.lblx -text -whitespace
 
+# Preserve HRI-IR native calibration tables and fixed-width archive labels.
+src/planets/comet-103p/source/science/hrii/*.lbl -text -whitespace
+src/planets/comet-103p/source/science/hrii/*.tab -text -whitespace
+src/planets/comet-9p/source/science/hrii/*.lbl -text -whitespace
+src/planets/comet-9p/source/science/hrii/*.tab -text -whitespace
+
 # Preserve the original AMICA fixed-width, CRLF archive labels.
 src/planets/itokawa/source/observations/*.lbl -text -whitespace

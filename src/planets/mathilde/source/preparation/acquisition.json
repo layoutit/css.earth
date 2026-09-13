@@ -101,6 +101,78 @@
       ],
       "path": "features/MATHILDE_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MATHILDE_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/near-msi/m0042826360f0_2p_iof.fit",
+      "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.fit",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/near-msi/m0042826360f0_2p.fit",
+      "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826360f0_2p.fit",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/near-msi/m0042826360f0_2p_iof.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/near-msi/m0042826370f0_2p_iof.fit",
+      "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.fit",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/near-msi/m0042826370f0_2p.fit",
+      "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826370f0_2p.fit",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/near-msi/m0042826370f0_2p_iof.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.xml",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
     }
   ]
 }

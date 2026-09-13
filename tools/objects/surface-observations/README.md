@@ -34,6 +34,7 @@ new route.
 | `pds4-geometry-cube` | `formats/geo.mts` | Fitted to the backplanes | Archive backplanes |
 | `osiris-camera` | `formats/geo.mts` | Archived closure | Source-mesh rays |
 | `llorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
+| `near-msi-camera` | `formats/geo.mts` | Reconstructed image table and bounded limb refinement | Source-mesh rays; paired raw detector validity |
 | `nh-lorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
 | `nh-mvic-camera` | `formats/geo.mts` | Archived closure through a fitted image transform; three registered filters shown as colour | Source-mesh rays |
 | `spice-camera` | `formats/geo.mts` | SPICE kernels | Source-mesh rays |
@@ -42,6 +43,11 @@ new route.
 
 The [implementation map](../../../.agents/skills/celestial-skill/references/implementation-map.md#choose-a-photograph-route)
 says which format fits what an archive ships.
+
+The NEAR MSI adapter retains calibrated I/F with its original illumination.
+Mathilde's [source method](../../../src/planets/mathilde/README.md) records the
+reconstructed image table, inferred detector conventions, raw-data checks and
+limits of silhouette registration on the visualization shape.
 
 ## Recipes
 
@@ -74,6 +80,7 @@ misspelt field fails instead of being ignored.
 | `pds4-geometry-cube` | `startTime`, `labelPath` | `filter`, `cube` |
 | `osiris-camera` | `startTime`, `cameraPath` | `filter`, `allowLossy`, optional `refinement` |
 | `llorri-camera`, `nh-lorri-camera` | `startTime`, `cameraPath` | `filter` |
+| `near-msi-camera` | `startTime`, `cameraPath`, `originalPath` | `filter`, required `refinement`; retained illumination, uncompressed calibrated/raw FITS pairs |
 | `nh-mvic-camera` | `startTime`, `cameraPath`, `labelPath` | `filter`; one frame with retained illumination, `metadata.falseColor` and a `displayRange` from 0 for all three bands |
 | `spice-camera` | `startTime`, and `labelPath` for a VICAR image | `filter`, `spice`, optional `refinement` |
 | `encounter-fits` | `labelPath`, `controlPath` | nothing |

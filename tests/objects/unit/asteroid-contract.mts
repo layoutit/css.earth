@@ -19,10 +19,28 @@ export async function assertAsteroidPackage(id:string, expectedLenses:readonly s
  assert.equal(nodes.filter(node=>typeof node.className==='string'&&node.className.includes('polycss-camera')).length,1);
  const faces=arrayAt(terrain,'faces','terrain faces').map((face,index)=>requireRecord(face,`terrain face ${index}`));
  const triangles=arrayAt(recordAt(runtime,'surfaceHit','runtime surface hit'),'triangles','runtime surface triangles');
- assert.equal(triangles.length,faces.length);
+ const ranges=runtime.surfaceHit && recordAt(runtime,'surfaceHit','runtime surface hit').lensRanges;
+ const modelRanges = ranges === undefined ? [{start:0,count:faces.length}] : [...new Map(requireArray(ranges,'surface lens ranges').map(value=>{
+  const range=requireRecord(value,'surface lens range'),start=requireFiniteNumber(range.start),count=requireFiniteNumber(range.count);
+  assert.ok(Number.isInteger(start)&&start>=0&&Number.isInteger(count)&&count>0&&count<=800);
+  assert.ok(expectedLenses.includes(requireString(range.lensId)));
+  return [`${start}:${count}`,{start,count}] as const;
+ })).values()].sort((a,b)=>a.start-b.start);
+ assert.deepEqual(modelRanges[0],{start:0,count:faces.length});
+ let total=0;for(const range of modelRanges){assert.equal(range.start,total);total+=range.count;}assert.equal(triangles.length,total);
  assert.ok(faces.length<=800);
  const leaves=arrayAt(scene,'bodyLeaves','scene body leaves').map((leaf,index)=>requireRecord(leaf,`scene body leaf ${index}`));
- assert.equal(leaves.length,faces.length);
+ assert.equal(leaves.length,triangles.length);
+ for(const leaf of leaves){assert.equal(leaf.tag,'u');assert.equal(recordAt(leaf,'attributes','scene leaf attributes')['data-polycss-texture-leaf-sizing'],'raster');}
+ for(const range of modelRanges.slice(1)){
+  const points:number[][]=[],ids:number[]=[],keys=new Map<string,number>();
+  for(const triangle of triangles.slice(range.start,range.start+range.count))for(const vertex of requireArray(triangle,'alternate model triangle')){
+   // Surface-hit coordinates swap source x/y, reversing handedness.
+   const hit=vector(vertex,'alternate model vertex'),point=[hit[1],hit[0],hit[2]],key=point.join(',');
+   if(!keys.has(key)){keys.set(key,points.length);points.push(point);}ids.push(keys.get(key)!);
+  }
+  const closed=validateClosedMesh(ids,points);assert.equal(closed.components,1);assert.equal(closed.eulerCharacteristic,2);
+ }
  const positions:number[][]=[],lookup=new Map<string,number>(),indices:number[]=[];
  for(const[index,face]of faces.entries()){
   const leaf=leaves[index];assert.equal(leaf.tag,'u');assert.equal(recordAt(leaf,'attributes','scene leaf attributes')['data-polycss-texture-leaf-sizing'],'raster');

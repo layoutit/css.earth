@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "94f75fe55f49974ef9998d5fa8c04efca8a54d47687b1188fde3854ccc06cbc8"
+    "sha256": "5583238752926aa5080c753d144cd072fc015a49bdd2298df16f0a52db4b305e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4b4822785ae0925fce2407ce9c73ca97f97ad17383c46fdac3ed591cc88fac5b",
+      "sha256": "fb6590ebe40d8b41f98ec6460aae24e6d6157496da491735a31d746c0d0f4600",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -59,7 +59,89 @@
               }
             }
           ],
-          "scientific": [],
+          "scientific": [
+            {
+              "id": "temperature",
+              "label": "Color temperature",
+              "consumer": "hrii-spectra",
+              "path": "science/hrii/fields.csv.gz",
+              "format": "facet-scalars",
+              "meshPath": "shape/tempel1_2012_plan.tab",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 16022,
+                "expectedFaces": 32040
+              },
+              "table": {
+                "format": "facet-csv-gzip",
+                "field": "Color temperature",
+                "units": "K",
+                "expectedRows": 32040,
+                "maximumCentroidErrorMeters": 0.001
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 90
+              },
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "minimum": 280,
+              "maximum": 380,
+              "colors": [
+                "#172c68",
+                "#2a8cba",
+                "#73c7bd",
+                "#f1dc77",
+                "#ec853e",
+                "#af2341"
+              ],
+              "focus": {
+                "longitudeDegrees": 271.282,
+                "latitudeDegrees": -43.132,
+                "zoom": 1.1
+              }
+            },
+            {
+              "id": "spectral-slope",
+              "label": "Infrared slope",
+              "consumer": "hrii-spectra",
+              "path": "science/hrii/fields.csv.gz",
+              "format": "facet-scalars",
+              "meshPath": "shape/tempel1_2012_plan.tab",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 16022,
+                "expectedFaces": 32040
+              },
+              "table": {
+                "format": "facet-csv-gzip",
+                "field": "Continuum slope",
+                "units": "%/100nm",
+                "expectedRows": 32040,
+                "maximumCentroidErrorMeters": 0.001
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 90
+              },
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "minimum": -1,
+              "maximum": 6,
+              "colors": [
+                "#263264",
+                "#459cb1",
+                "#b7d1a2",
+                "#f0cd75",
+                "#ba653f"
+              ],
+              "focus": {
+                "longitudeDegrees": 271.282,
+                "latitudeDegrees": -43.132,
+                "zoom": 1.1
+              }
+            }
+          ],
           "observedColors": [],
           "mosaics": [],
           "surfaceObservations": [
@@ -306,7 +388,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02",
+      "sha256": "a201c29e1e7aabb838f3c06a9b790c68dce95add97d5c00120114f3e5f425f46",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -340,7 +422,9 @@
             "model": "Shape model",
             "constraints": "Source constraints",
             "deep-impact": "Deep Impact · 2005",
-            "next": "Stardust-NExT · 2011"
+            "next": "Stardust-NExT · 2011",
+            "temperature": "Color temperature",
+            "spectral-slope": "Infrared slope"
           },
           "controls": [
             {
@@ -452,6 +536,100 @@
                 }
               ],
               "summary": "These images show the surface six years after the 2005 encounter. Lighting differs between visits; the grid marks gaps."
+            },
+            {
+              "id": "temperature",
+              "label": "Color temperature",
+              "title": "Deep Impact infrared color temperature",
+              "detail": "HRI-IR",
+              "description": "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps.",
+              "summary": "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps.",
+              "thumbnail": "/scenes/comet-9p/comet-9p-temperature-thumbnail.webp",
+              "surface": "comet-9p-temperature-surface@2x.webp",
+              "poles": "comet-9p-temperature-poles@2x.webp",
+              "source": {
+                "id": "hrii-fields",
+                "path": "../manifest.json",
+                "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+              },
+              "facts": [
+                {
+                  "id": "observed",
+                  "label": "Observed",
+                  "value": "4 Jul 2005"
+                },
+                {
+                  "id": "band",
+                  "label": "Thermal fit",
+                  "value": "3.1–4.4 µm"
+                },
+                {
+                  "id": "sampling",
+                  "label": "Image sampling",
+                  "value": "150–168 m/pixel"
+                }
+              ],
+              "legend": {
+                "kind": "scale",
+                "title": "Color temperature",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "280",
+                  "330",
+                  "380"
+                ],
+                "meta": "K",
+                "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml",
+                "image": "/scenes/comet-9p/comet-9p-temperature-legend.webp"
+              }
+            },
+            {
+              "id": "spectral-slope",
+              "label": "Infrared slope",
+              "title": "Deep Impact infrared continuum",
+              "detail": "HRI-IR",
+              "description": "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals.",
+              "summary": "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals.",
+              "thumbnail": "/scenes/comet-9p/comet-9p-spectral-slope-thumbnail.webp",
+              "surface": "comet-9p-spectral-slope-surface@2x.webp",
+              "poles": "comet-9p-spectral-slope-poles@2x.webp",
+              "source": {
+                "id": "hrii-fields",
+                "path": "../manifest.json",
+                "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+              },
+              "facts": [
+                {
+                  "id": "observed",
+                  "label": "Observed",
+                  "value": "4 Jul 2005"
+                },
+                {
+                  "id": "band",
+                  "label": "Wavelengths",
+                  "value": "1.5–2.2 µm"
+                },
+                {
+                  "id": "sampling",
+                  "label": "Image sampling",
+                  "value": "150–168 m/pixel"
+                }
+              ],
+              "legend": {
+                "kind": "scale",
+                "title": "Infrared slope",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-1",
+                  "2.5",
+                  "6"
+                ],
+                "meta": "%/100nm",
+                "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml",
+                "image": "/scenes/comet-9p/comet-9p-spectral-slope-legend.webp"
+              }
             }
           ]
         },
@@ -503,6 +681,12 @@
             "role": "terrain",
             "description": "Tempel 1 mapped smooth regions, Figure 2b (2013)",
             "href": "https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf"
+          },
+          {
+            "label": "HRI-IR",
+            "role": "surface",
+            "description": "Calibrated infrared spectra and thermal fitting method",
+            "href": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
           }
         ],
         "provenance": {
@@ -706,6 +890,3115 @@
       },
       "sha256": "4d5d83e2c82109d4747de00e22df1ef50f862f85a66330ed7c5ce4d8873221dd",
       "bytes": 7711,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-fields",
+      "path": "science/hrii/fields.csv.gz",
+      "origin": "object:source/science/hrii/fields.csv.gz",
+      "credit": "cssEarth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
+      "license": "MIT; underlying PDS scientific data",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Reproduce with the hrii-facets acquisition operator and the pinned scan recipe.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record or derived facet table; native spectra retain their separate source identities."
+      },
+      "sha256": "fe10f264153ae3c3ee76b53e640331e9515bf080ba8249962c68c051a0456ea2",
+      "bytes": 565733,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "hrii-facets",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/fields.csv.gz",
+        "recipePath": "science/hrii/scan.json",
+        "product": "fields"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-001-r-fit",
+      "path": "science/hrii/hi05070405_9000036_001_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_001_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "28df49131bc824ea4803d97f0ee0135a4b3c95da9732cc0c733a3ee7173ba1e1",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_001_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_001_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-001-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_001_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_001_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "ea6fcd7f916474bf29759db4d0df2a8e252aeea783c24755f7f51b986f74c3d1",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_001_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_001_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-002-r-fit",
+      "path": "science/hrii/hi05070405_9000036_002_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_002_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "9d4cd416bba953c98b04856caced1479e5bf9c5bab9d332fd7f6a4e51a25232a",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_002_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_002_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-002-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_002_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_002_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "a8c8ae985b97b58c09d465542e87255549d27a20584ca6d789d932baee9a2b66",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_002_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_002_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-003-r-fit",
+      "path": "science/hrii/hi05070405_9000036_003_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_003_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "2a740848fcacf6bc951e4833ea4e9015370ec68003d6442ff86a5231bc161d60",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_003_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_003_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-003-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_003_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_003_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "68a296d1fa40736dde6ab09bf0eba420f222b84eb2a1c10814ccacfc5060e769",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_003_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_003_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-004-r-fit",
+      "path": "science/hrii/hi05070405_9000036_004_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_004_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "bb05ed63735f10a023f1e1bfdf92764105da4c20622481bd99334d719033ca81",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_004_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_004_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-004-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_004_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_004_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "1f017f22d63da8e2a7299c4e3de0cd53f2ed6008c754c583087b3de351db24b5",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_004_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_004_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-005-r-fit",
+      "path": "science/hrii/hi05070405_9000036_005_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_005_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "1443939a4a1f59a380a1c3d4e6ee15581447ca97f8de415671cf4bf0cadf733d",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_005_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_005_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-005-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_005_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_005_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "d8a769e505321ce4379669dd5eb78737474b8d0b954b494fa9554311012970d0",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_005_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_005_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-006-r-fit",
+      "path": "science/hrii/hi05070405_9000036_006_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_006_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "643139d382cfc42cd6625683f1fd9184a0f6478ff4425605efc40b0e51a0907c",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_006_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_006_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-006-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_006_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_006_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "0ce4863c390c2c68cf32d9788cc39e19c690ae34914ffee6f8161034c6bba09b",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_006_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_006_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-007-r-fit",
+      "path": "science/hrii/hi05070405_9000036_007_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_007_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "59d633ffa95d2ff53f14c21512f3cdb5f9ee4601ffa4ce4544faf27c9ef42fa7",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_007_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_007_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-007-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_007_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_007_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "4bf8414bb0f7cfa04c81a52b0976db0c04eef8289cdc9edd89f678f4654ce3ed",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_007_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_007_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-008-r-fit",
+      "path": "science/hrii/hi05070405_9000036_008_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_008_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "a8c5ea9e198abd4042351a06b60e9aae8bd6cb2edb52144f5e4ead3e566e07f1",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_008_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_008_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-008-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_008_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_008_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "a9cf2848a85899ab34e48e6e361eb78db238cb9dede82aa8ca3af9a1e7bb7893",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_008_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_008_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-009-r-fit",
+      "path": "science/hrii/hi05070405_9000036_009_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_009_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "0cb578453dc799c1c6e6acf392290d094e26d954c25ac08d77b92eff729f311d",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_009_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_009_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-009-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_009_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_009_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "fa2a56e657c7c23c8c1bf45d93736b0d69a5059039abcc13c048604ef7723ad0",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_009_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_009_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-010-r-fit",
+      "path": "science/hrii/hi05070405_9000036_010_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_010_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "c07b33e824b95591701c38627c2f6b4c86308b38ab00fd88a992dd767b2f2818",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_010_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_010_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-010-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_010_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_010_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "00bf581c09575007de2accdc13cc072bdccb0ef387dadcbd2ce74c03ab76e876",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_010_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_010_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-011-r-fit",
+      "path": "science/hrii/hi05070405_9000036_011_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_011_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "e5b315ac7ef057102639f4e5c4e3444ab1b1c55b62b8d2bd10295101a8c1457a",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_011_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_011_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-011-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_011_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_011_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "bf539e36246a766fe3668e89fbc435f8dc990dd2d83ed3a41090cb3506101ecb",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_011_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_011_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-012-r-fit",
+      "path": "science/hrii/hi05070405_9000036_012_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_012_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "1ca59eaa5ea58e425f79b4319d65108f949fa735085bb1f026bd495971435a62",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_012_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_012_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-012-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_012_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_012_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "d26dab66dea53106dfd41bd18418bb50529c8122989404bc6b04843548047ff0",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_012_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_012_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-013-r-fit",
+      "path": "science/hrii/hi05070405_9000036_013_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_013_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "56fd379b566219f8df405ed4e59193df0f94c0d54052665c9d14dfe5b099cd15",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_013_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_013_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-013-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_013_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_013_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "808bef2983226067996ff06250f32f3ee784bba788ffa45cb517892c4682ebd4",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_013_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_013_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-014-r-fit",
+      "path": "science/hrii/hi05070405_9000036_014_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_014_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "b7d4de67854e64d7adc5e1460038dbb9654276c5962619f7c5786a1b5afffef9",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_014_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_014_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-014-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_014_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_014_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "42beea09a622f9efe2152404327ca195d87e01e00ee2f2efee8d5f49eb1bc17e",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_014_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_014_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-015-r-fit",
+      "path": "science/hrii/hi05070405_9000036_015_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_015_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "bfddeddabec13ea47cd78c5a26fcf05d2732b8cd2b651f8803c6816aba3f0266",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_015_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_015_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-015-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_015_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_015_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "9c510a84302c8b48ee74b937ccdc0df25b6d663600371fe984da878b64626ca1",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_015_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_015_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-016-r-fit",
+      "path": "science/hrii/hi05070405_9000036_016_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_016_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "4811101b70ee3014bb74e898f6bbf41b9479b8d193fbe81fa5bae324f93d34aa",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_016_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_016_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-016-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_016_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_016_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "c7f6ea4a1fd0739da49d7827601d50720c9137e9f00fa273c184f6a797564eba",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_016_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_016_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-017-r-fit",
+      "path": "science/hrii/hi05070405_9000036_017_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_017_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "b411dec6bb4229d341adbc93a546afda1ba8bdc41adac73b9b7941a16b2cc96a",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_017_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_017_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-017-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_017_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_017_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "61eac2a3cf9c5ace96f2f07899767d721fd8ae63b0234e634d845397081697e3",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_017_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_017_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-018-r-fit",
+      "path": "science/hrii/hi05070405_9000036_018_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_018_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "7490ce73b2360f412307e2d623fe709f9969a39afb49dc948e8ea788903f9c60",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_018_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_018_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-018-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_018_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_018_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "ea81653e8d884947708e0e338a8cf42b19c40a5234ccf704409dd82e46fe8d2a",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_018_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_018_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-019-r-fit",
+      "path": "science/hrii/hi05070405_9000036_019_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_019_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "1abda541eecf93a2ec2e1622546050c19ed7999416c56b630532801e2dca2d59",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_019_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_019_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-019-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_019_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_019_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "6555b453ae4be2dbba7c414d816b1bbbcb48dd5a5803ecc6e8acd734220a3918",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_019_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_019_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-020-r-fit",
+      "path": "science/hrii/hi05070405_9000036_020_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_020_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "2052ba93a81c04aef722c6236cc1e051010eba08d5e8a56053a3e946c38f66d6",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_020_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_020_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-020-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_020_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_020_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "b8a13e20e756e8724e14c85851f1b133410216289eedfc9ad20fdf7d39d51d2b",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_020_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_020_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-021-r-fit",
+      "path": "science/hrii/hi05070405_9000036_021_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_021_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "e00d1421120d62d607b8dd82259a9c048679d167a1f82659e21cbd7a6d33c544",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_021_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_021_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-021-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_021_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_021_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "c5c16549d5aeaf3f8aa5b60459efe9e94aa7eb15b7b8102840b1e46e71b9f1f6",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_021_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_021_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-022-r-fit",
+      "path": "science/hrii/hi05070405_9000036_022_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_022_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "09b50efcda07b41023b657cb245be6f257994ea500cac9cab959d472c075d981",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_022_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_022_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-022-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_022_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_022_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "3ddbd8e7969aa28ada584b3ed9971c2feeabf8869247b20a25528b6aee6eaf3e",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_022_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_022_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-023-r-fit",
+      "path": "science/hrii/hi05070405_9000036_023_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_023_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "a1a784d89d26278bb1050b7de2202f237f2b4e078e24008e833ad266c6c91a55",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_023_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_023_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-023-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_023_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_023_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "a2ce2400650cde4aa640f240e36a2078fb275a9ad5e86044acb1da5faf2f8676",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_023_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_023_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-024-r-fit",
+      "path": "science/hrii/hi05070405_9000036_024_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_024_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "beaa0a2de1c31f1a2deec3373c2a87fc26f7e7d6280203b01ff93f1efc682dcd",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_024_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_024_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-024-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_024_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_024_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "3510a7e21cf254abd815455a60cbd389e5d6629716ae9d002f8165b307b7de92",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_024_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_024_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-025-r-fit",
+      "path": "science/hrii/hi05070405_9000036_025_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_025_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "602e055ffd8976dc37952aae93b4b0b582a9f3fbfcf0507f73f9a1c87979626c",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_025_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_025_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-025-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_025_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_025_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "f21f9a9384d7f36015440231a46ca482aeb16649a0889c4f30856dcd2cc6508e",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_025_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_025_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-026-r-fit",
+      "path": "science/hrii/hi05070405_9000036_026_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_026_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "8afa208030207aeae7f3f61bca0be7f47ae36a908ff3111ae989ff02c6e428f8",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_026_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_026_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-026-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_026_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_026_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "babb3ae5eb52acc9802ab9e6820e3b396fbc71170a8eb2e4f57543c0ddd00b17",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_026_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_026_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-027-r-fit",
+      "path": "science/hrii/hi05070405_9000036_027_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_027_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "966b459375ba4561e940e7ed18dea05ab457b06efb8019f975e6e6f6e83ece3b",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_027_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_027_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-027-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_027_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_027_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "8e922e9c39ce6c3f21cdcafa217ccc8d7116a356242dd23c4437d11c4edb69fc",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_027_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_027_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-028-r-fit",
+      "path": "science/hrii/hi05070405_9000036_028_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_028_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "1c2e31d07bfbf88e313f1d6a534e533f697f18b55b4660afba2f72204280bf4f",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_028_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_028_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-028-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_028_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_028_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "dfea58184130acf13cfe211f7d26b20795ee8eba3f77a000048e4b3b1e06b770",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_028_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_028_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-029-r-fit",
+      "path": "science/hrii/hi05070405_9000036_029_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_029_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "4bc3a97693304ddcc4b7edb9da833e02e39b21843e12b57f8adc617913cf4e07",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_029_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_029_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-029-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_029_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_029_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "b7c2e7e9fdbc6a495a9232caa305a1b0632662d41958d80f0924ac9e8cb1e67a",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_029_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_029_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-030-r-fit",
+      "path": "science/hrii/hi05070405_9000036_030_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_030_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "b86d4aac2b92c5804ebaebc5d90b3c6698894136d3b70c5fb5800a0f866cd19f",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_030_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_030_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-030-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_030_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_030_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "6292124422b6b47e8fcf12f2a254e4d270a2d6b4a3dd5a27e45a53a499e51770",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_030_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_030_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-031-r-fit",
+      "path": "science/hrii/hi05070405_9000036_031_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_031_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "02deb6c499e84700dd1e1c77c38feecfbbdfbd90a7e14f2f250eee8ab3646eef",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_031_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_031_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-031-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_031_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_031_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "11ffb87bc63bbdeaef915c0cbef9fbd3be66012382b9ea2f35aefe2e477a1c45",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_031_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_031_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-032-r-fit",
+      "path": "science/hrii/hi05070405_9000036_032_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_032_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "b7e21b1fd24bf926bef0e46616761a4bae27cac6a3c163bbdb5fa095d8be4bfe",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_032_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_032_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-032-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_032_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_032_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "2acde8fb5b895a968f2da67753bdb6892a973dd3c59e7eb35d99ff3fd1ca8a41",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_032_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_032_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-033-r-fit",
+      "path": "science/hrii/hi05070405_9000036_033_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_033_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "4c48e0f0bf1bff4e38d26680709c93a437594c386625c621d33dd81731238df3",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_033_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_033_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-033-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_033_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_033_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "ce7cb7d726bcce2e753e7f6703eb4f12adfb46ae1190ea5ffed3ed706803c2e3",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_033_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_033_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-034-r-fit",
+      "path": "science/hrii/hi05070405_9000036_034_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_034_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "8167ec571fd6cf65d42198ec09983856488306ea2236ef9866f00118407718ac",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_034_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_034_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-034-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_034_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_034_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "2b34f018504bcbb88a82e2fa9f73d680669de8c7491014192139e9c5e5c6f96a",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_034_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_034_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-035-r-fit",
+      "path": "science/hrii/hi05070405_9000036_035_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_035_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "02497cceab09226946ce5dc745c88e3a7e4ee921014857cd773324f6921780b4",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_035_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_035_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-035-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_035_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_035_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "855bf80f0631b9d1530bc78d0777b88da0431e157c140022c863006f8979f87d",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_035_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_035_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-036-r-fit",
+      "path": "science/hrii/hi05070405_9000036_036_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_036_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "cecbc26dc5486d5782e082368a21b03e19073a4df4151a680d0287639f3b5b4b",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_036_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_036_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-036-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_036_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_036_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "10684631374a62773ad0ca2fd4d30c0d555c2afc8d220533f84d7a9904bb34ed",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_036_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_036_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-037-r-fit",
+      "path": "science/hrii/hi05070405_9000036_037_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_037_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "2fac139ca71437fbcac991601f09bf5d2b872052a54370c63584c3a3de4a662b",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_037_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_037_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-037-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_037_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_037_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "2bc50be0ae5e01fd1dd4224efd13bac97028b3316384f87a57821e2667b2a83b",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_037_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_037_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-038-r-fit",
+      "path": "science/hrii/hi05070405_9000036_038_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_038_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "7cf38394e06daaf3f9697d3c5a40edbba6bb2620a9226e9f8f131e4d4dcfee1b",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_038_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_038_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-038-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_038_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_038_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "2ba43c599ad3941f0a4a7d5b7444547194ef713077d6900d2f956ae30867921a",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_038_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_038_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-039-r-fit",
+      "path": "science/hrii/hi05070405_9000036_039_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_039_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "2848cc8c90da78824dd3b366fb363c9a6e6117f95c2552fed19eed5105855910",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_039_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_039_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-039-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_039_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_039_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "d79cb1a0059929a3a608e1e85ef01d4b436233f26c6bacac55fd6f74aee9df92",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_039_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_039_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-040-r-fit",
+      "path": "science/hrii/hi05070405_9000036_040_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_040_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "d9db939c0ef82072c5fffbceb4fa25a9f73c8e3a55e8f5108e26e4b1dc0ceedd",
+      "bytes": 2306880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_040_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_040_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hi05070405-9000036-040-r-lbl",
+      "path": "science/hrii/hi05070405_9000036_040_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_040_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "f6b1ce1c0d9d7a17e014dc696a77342bdd69ef2469b88f437909e350ac2c44c5",
+      "bytes": 35680,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hi05070405_9000036_040_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_040_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hriir-020601-2-0-lbl",
+      "path": "science/hrii/hriir_020601_2_0.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/calib/sunspec/hriir_020601_2_0.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "aa1ac9161cc5e0a006ad9e5cbc0b5083cfca8e7c45c24d368e8b4e07f6cc81a9",
+      "bytes": 4880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hriir_020601_2_0.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/calib/sunspec/hriir_020601_2_0.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hriir-020601-2-0-tab",
+      "path": "science/hrii/hriir_020601_2_0.tab",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/calib/sunspec/hriir_020601_2_0.tab",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hrii-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "8eab0a393b884c15567f3e8b634d4ec2c3e40658f006732c75c6d85aa6230d8a",
+      "bytes": 108168,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hriir_020601_2_0.tab",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/calib/sunspec/hriir_020601_2_0.tab"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hv05070405-9000844-001-r-fit",
+      "path": "science/hrii/hv05070405_9000844_001_r.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/data/rad/2005/185/hv05070405_9000844_001_r.fit",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hri-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "62449ca95557872405544fae40cec5b7adc972dc1be27940e400b36b3588e109",
+      "bytes": 2436480,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hv05070405_9000844_001_r.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/data/rad/2005/185/hv05070405_9000844_001_r.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-hv05070405-9000844-001-r-lbl",
+      "path": "science/hrii/hv05070405_9000844_001_r.lbl",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/data/rad/2005/185/hv05070405_9000844_001_r.lbl",
+      "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "deep-impact-tempel1-hri-v3",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/dataset.shtml"
+          }
+        ]
+      },
+      "sha256": "9336862b2ea27f993a3f6708b80555f8e1099789161eaadc806844b6a4f0cafc",
+      "bytes": 32880,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/hv05070405_9000844_001_r.lbl",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/data/rad/2005/185/hv05070405_9000844_001_r.lbl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-preparation-json",
+      "path": "science/hrii/preparation.json",
+      "origin": "object:source/science/hrii/preparation.json",
+      "credit": "cssEarth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
+      "license": "MIT; underlying PDS scientific data",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Reproduce with the hrii-facets acquisition operator and the pinned scan recipe.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record or derived facet table; native spectra retain their separate source identities."
+      },
+      "sha256": "cc27bff93bc7487e80b424317840e30de983cd7a25db658ff72fe2c7308eec86",
+      "bytes": 5227,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "hrii-facets",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/hrii/preparation.json",
+        "recipePath": "science/hrii/scan.json",
+        "product": "report"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hrii-scan-json",
+      "path": "science/hrii/scan.json",
+      "origin": "object:source/science/hrii/scan.json",
+      "credit": "cssEarth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
+      "license": "MIT; underlying PDS scientific data",
+      "licenseEvidence": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Checked-in source selection and measured terrain correspondences.",
+      "redistribution": "Retain mission, archive and method attribution.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record or derived facet table; native spectra retain their separate source identities."
+      },
+      "sha256": "00386f1605d85c75af635bcf27bbcf5acf8aa972a9738223a2e505697ec02951",
+      "bytes": 23675,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2060,8 +5353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02",
-      "bytes": 7259,
+      "sha256": "a201c29e1e7aabb838f3c06a9b790c68dce95add97d5c00120114f3e5f425f46",
+      "bytes": 11443,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2227,6 +5520,268 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "temperature",
+      "label": "Color temperature",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "False colors show the temperature fitted to infrared emission. Warm patches within each pixel dominate this measurement. Placement on the shape is approximate; the grid marks gaps."
+      ],
+      "lensIds": [
+        "temperature"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "hrii-fields",
+        "pds-shape",
+        "hrii-hi05070405-9000036-001-r-fit",
+        "hrii-hi05070405-9000036-001-r-lbl",
+        "hrii-hi05070405-9000036-002-r-fit",
+        "hrii-hi05070405-9000036-002-r-lbl",
+        "hrii-hi05070405-9000036-003-r-fit",
+        "hrii-hi05070405-9000036-003-r-lbl",
+        "hrii-hi05070405-9000036-004-r-fit",
+        "hrii-hi05070405-9000036-004-r-lbl",
+        "hrii-hi05070405-9000036-005-r-fit",
+        "hrii-hi05070405-9000036-005-r-lbl",
+        "hrii-hi05070405-9000036-006-r-fit",
+        "hrii-hi05070405-9000036-006-r-lbl",
+        "hrii-hi05070405-9000036-007-r-fit",
+        "hrii-hi05070405-9000036-007-r-lbl",
+        "hrii-hi05070405-9000036-008-r-fit",
+        "hrii-hi05070405-9000036-008-r-lbl",
+        "hrii-hi05070405-9000036-009-r-fit",
+        "hrii-hi05070405-9000036-009-r-lbl",
+        "hrii-hi05070405-9000036-010-r-fit",
+        "hrii-hi05070405-9000036-010-r-lbl",
+        "hrii-hi05070405-9000036-011-r-fit",
+        "hrii-hi05070405-9000036-011-r-lbl",
+        "hrii-hi05070405-9000036-012-r-fit",
+        "hrii-hi05070405-9000036-012-r-lbl",
+        "hrii-hi05070405-9000036-013-r-fit",
+        "hrii-hi05070405-9000036-013-r-lbl",
+        "hrii-hi05070405-9000036-014-r-fit",
+        "hrii-hi05070405-9000036-014-r-lbl",
+        "hrii-hi05070405-9000036-015-r-fit",
+        "hrii-hi05070405-9000036-015-r-lbl",
+        "hrii-hi05070405-9000036-016-r-fit",
+        "hrii-hi05070405-9000036-016-r-lbl",
+        "hrii-hi05070405-9000036-017-r-fit",
+        "hrii-hi05070405-9000036-017-r-lbl",
+        "hrii-hi05070405-9000036-018-r-fit",
+        "hrii-hi05070405-9000036-018-r-lbl",
+        "hrii-hi05070405-9000036-019-r-fit",
+        "hrii-hi05070405-9000036-019-r-lbl",
+        "hrii-hi05070405-9000036-020-r-fit",
+        "hrii-hi05070405-9000036-020-r-lbl",
+        "hrii-hi05070405-9000036-021-r-fit",
+        "hrii-hi05070405-9000036-021-r-lbl",
+        "hrii-hi05070405-9000036-022-r-fit",
+        "hrii-hi05070405-9000036-022-r-lbl",
+        "hrii-hi05070405-9000036-023-r-fit",
+        "hrii-hi05070405-9000036-023-r-lbl",
+        "hrii-hi05070405-9000036-024-r-fit",
+        "hrii-hi05070405-9000036-024-r-lbl",
+        "hrii-hi05070405-9000036-025-r-fit",
+        "hrii-hi05070405-9000036-025-r-lbl",
+        "hrii-hi05070405-9000036-026-r-fit",
+        "hrii-hi05070405-9000036-026-r-lbl",
+        "hrii-hi05070405-9000036-027-r-fit",
+        "hrii-hi05070405-9000036-027-r-lbl",
+        "hrii-hi05070405-9000036-028-r-fit",
+        "hrii-hi05070405-9000036-028-r-lbl",
+        "hrii-hi05070405-9000036-029-r-fit",
+        "hrii-hi05070405-9000036-029-r-lbl",
+        "hrii-hi05070405-9000036-030-r-fit",
+        "hrii-hi05070405-9000036-030-r-lbl",
+        "hrii-hi05070405-9000036-031-r-fit",
+        "hrii-hi05070405-9000036-031-r-lbl",
+        "hrii-hi05070405-9000036-032-r-fit",
+        "hrii-hi05070405-9000036-032-r-lbl",
+        "hrii-hi05070405-9000036-033-r-fit",
+        "hrii-hi05070405-9000036-033-r-lbl",
+        "hrii-hi05070405-9000036-034-r-fit",
+        "hrii-hi05070405-9000036-034-r-lbl",
+        "hrii-hi05070405-9000036-035-r-fit",
+        "hrii-hi05070405-9000036-035-r-lbl",
+        "hrii-hi05070405-9000036-036-r-fit",
+        "hrii-hi05070405-9000036-036-r-lbl",
+        "hrii-hi05070405-9000036-037-r-fit",
+        "hrii-hi05070405-9000036-037-r-lbl",
+        "hrii-hi05070405-9000036-038-r-fit",
+        "hrii-hi05070405-9000036-038-r-lbl",
+        "hrii-hi05070405-9000036-039-r-fit",
+        "hrii-hi05070405-9000036-039-r-lbl",
+        "hrii-hi05070405-9000036-040-r-fit",
+        "hrii-hi05070405-9000036-040-r-lbl",
+        "hrii-hriir-020601-2-0-lbl",
+        "hrii-hriir-020601-2-0-tab",
+        "hrii-hv05070405-9000844-001-r-fit",
+        "hrii-hv05070405-9000844-001-r-lbl",
+        "hrii-preparation-json",
+        "hrii-scan-json"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-9p/comet-9p-temperature-thumbnail.webp",
+          "bytes": 346,
+          "sha256": "eddff7912dc42648f8c6769f86f49878571b28880fb611215097d86f9848be68",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-9p/comet-9p-temperature-legend.webp",
+          "bytes": 256,
+          "sha256": "fed1fff6e42a0d0432207516c339c0340ab3d15d3b6267a3d00e104de110dd37",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-9p/comet-9p-temperature-surface@2x.webp",
+          "bytes": 364910,
+          "sha256": "f0bbff270c044ed4a30a070b0e84c3005c3f525a5ff03e8ff35bb81e54150121",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "spectral-slope",
+      "label": "Infrared slope",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "False colors show how quickly reflected sunlight becomes brighter toward longer infrared wavelengths. Higher values mean a redder spectrum. Placement on the shape is approximate; the grid marks gaps. This does not measure terrain slope or identify minerals."
+      ],
+      "lensIds": [
+        "spectral-slope"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "hrii-fields",
+        "pds-shape",
+        "hrii-hi05070405-9000036-001-r-fit",
+        "hrii-hi05070405-9000036-001-r-lbl",
+        "hrii-hi05070405-9000036-002-r-fit",
+        "hrii-hi05070405-9000036-002-r-lbl",
+        "hrii-hi05070405-9000036-003-r-fit",
+        "hrii-hi05070405-9000036-003-r-lbl",
+        "hrii-hi05070405-9000036-004-r-fit",
+        "hrii-hi05070405-9000036-004-r-lbl",
+        "hrii-hi05070405-9000036-005-r-fit",
+        "hrii-hi05070405-9000036-005-r-lbl",
+        "hrii-hi05070405-9000036-006-r-fit",
+        "hrii-hi05070405-9000036-006-r-lbl",
+        "hrii-hi05070405-9000036-007-r-fit",
+        "hrii-hi05070405-9000036-007-r-lbl",
+        "hrii-hi05070405-9000036-008-r-fit",
+        "hrii-hi05070405-9000036-008-r-lbl",
+        "hrii-hi05070405-9000036-009-r-fit",
+        "hrii-hi05070405-9000036-009-r-lbl",
+        "hrii-hi05070405-9000036-010-r-fit",
+        "hrii-hi05070405-9000036-010-r-lbl",
+        "hrii-hi05070405-9000036-011-r-fit",
+        "hrii-hi05070405-9000036-011-r-lbl",
+        "hrii-hi05070405-9000036-012-r-fit",
+        "hrii-hi05070405-9000036-012-r-lbl",
+        "hrii-hi05070405-9000036-013-r-fit",
+        "hrii-hi05070405-9000036-013-r-lbl",
+        "hrii-hi05070405-9000036-014-r-fit",
+        "hrii-hi05070405-9000036-014-r-lbl",
+        "hrii-hi05070405-9000036-015-r-fit",
+        "hrii-hi05070405-9000036-015-r-lbl",
+        "hrii-hi05070405-9000036-016-r-fit",
+        "hrii-hi05070405-9000036-016-r-lbl",
+        "hrii-hi05070405-9000036-017-r-fit",
+        "hrii-hi05070405-9000036-017-r-lbl",
+        "hrii-hi05070405-9000036-018-r-fit",
+        "hrii-hi05070405-9000036-018-r-lbl",
+        "hrii-hi05070405-9000036-019-r-fit",
+        "hrii-hi05070405-9000036-019-r-lbl",
+        "hrii-hi05070405-9000036-020-r-fit",
+        "hrii-hi05070405-9000036-020-r-lbl",
+        "hrii-hi05070405-9000036-021-r-fit",
+        "hrii-hi05070405-9000036-021-r-lbl",
+        "hrii-hi05070405-9000036-022-r-fit",
+        "hrii-hi05070405-9000036-022-r-lbl",
+        "hrii-hi05070405-9000036-023-r-fit",
+        "hrii-hi05070405-9000036-023-r-lbl",
+        "hrii-hi05070405-9000036-024-r-fit",
+        "hrii-hi05070405-9000036-024-r-lbl",
+        "hrii-hi05070405-9000036-025-r-fit",
+        "hrii-hi05070405-9000036-025-r-lbl",
+        "hrii-hi05070405-9000036-026-r-fit",
+        "hrii-hi05070405-9000036-026-r-lbl",
+        "hrii-hi05070405-9000036-027-r-fit",
+        "hrii-hi05070405-9000036-027-r-lbl",
+        "hrii-hi05070405-9000036-028-r-fit",
+        "hrii-hi05070405-9000036-028-r-lbl",
+        "hrii-hi05070405-9000036-029-r-fit",
+        "hrii-hi05070405-9000036-029-r-lbl",
+        "hrii-hi05070405-9000036-030-r-fit",
+        "hrii-hi05070405-9000036-030-r-lbl",
+        "hrii-hi05070405-9000036-031-r-fit",
+        "hrii-hi05070405-9000036-031-r-lbl",
+        "hrii-hi05070405-9000036-032-r-fit",
+        "hrii-hi05070405-9000036-032-r-lbl",
+        "hrii-hi05070405-9000036-033-r-fit",
+        "hrii-hi05070405-9000036-033-r-lbl",
+        "hrii-hi05070405-9000036-034-r-fit",
+        "hrii-hi05070405-9000036-034-r-lbl",
+        "hrii-hi05070405-9000036-035-r-fit",
+        "hrii-hi05070405-9000036-035-r-lbl",
+        "hrii-hi05070405-9000036-036-r-fit",
+        "hrii-hi05070405-9000036-036-r-lbl",
+        "hrii-hi05070405-9000036-037-r-fit",
+        "hrii-hi05070405-9000036-037-r-lbl",
+        "hrii-hi05070405-9000036-038-r-fit",
+        "hrii-hi05070405-9000036-038-r-lbl",
+        "hrii-hi05070405-9000036-039-r-fit",
+        "hrii-hi05070405-9000036-039-r-lbl",
+        "hrii-hi05070405-9000036-040-r-fit",
+        "hrii-hi05070405-9000036-040-r-lbl",
+        "hrii-hriir-020601-2-0-lbl",
+        "hrii-hriir-020601-2-0-tab",
+        "hrii-hv05070405-9000844-001-r-fit",
+        "hrii-hv05070405-9000844-001-r-lbl",
+        "hrii-preparation-json",
+        "hrii-scan-json"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-9p/comet-9p-spectral-slope-thumbnail.webp",
+          "bytes": 346,
+          "sha256": "eddff7912dc42648f8c6769f86f49878571b28880fb611215097d86f9848be68",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-9p/comet-9p-spectral-slope-legend.webp",
+          "bytes": 216,
+          "sha256": "75f78a9fb427025d52d42a20babc213536b0ca7078732ebf02a6259bef773e21",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-9p/comet-9p-spectral-slope-surface@2x.webp",
+          "bytes": 365060,
+          "sha256": "5b2ee61ebeae0ccb11df9e8306b96b9595a847ef1a2c1db683ae3e24ca4f9d7e",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "deep-impact",
       "label": "Deep Impact · 2005",
       "recipe": "terrestrial",
@@ -2362,8 +5917,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5302,
-          "sha256": "2948069fc217849fa65f78f2f220dfa5117853e6418a552c55036eba99e22db1",
+          "bytes": 5512,
+          "sha256": "56b3b2db7d62694bea75b26d96c0fd74e227e3550afe133816de5eb907d303c1",
           "verification": "bytes-verified"
         }
       ],
@@ -2469,6 +6024,54 @@
           "url": "object:prepared/minimaps/next.webp",
           "bytes": 19554,
           "sha256": "3081b480818487c3a15c58c12528ede23b170f4c874cc38063ffb180450741f3",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:temperature",
+      "label": "Color temperature preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "temperature"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/temperature.webp",
+          "bytes": 4056,
+          "sha256": "a98cb99e0c2c80405983f3008a339801e55357cf2d872fc565bca785593cf5c5",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:spectral-slope",
+      "label": "Infrared slope preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "spectral-slope"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/spectral-slope.webp",
+          "bytes": 4130,
+          "sha256": "09373cbd6063f6a558d38d9e35985053227b0b4475603b7dbd44d405e46e9863",
           "verification": "bytes-verified"
         }
       ]
