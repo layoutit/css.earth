@@ -19,7 +19,7 @@ const validity = shape({kind:text,resampling:optional(text),noData:optional(null
   specialValueMagnitude:optional(number),coordinates:optional(text),channels:optional(text),zeroValidity:optional(text),
   withholdLatitudeDegrees:optional(number),withholdLongitudeDegrees:optional(array(number))});
 const observedColor = shape({id:text,consumer:text,monochromeBase:text,
-  profile:shape({referenceRadiusMeters:number,gamma:number,filters:array(text),noData:number,specialValueMagnitude:number}),
+  profile:shape({referenceRadiusMeters:number,filters:array(text),noData:number,specialValueMagnitude:number}),
   photometry:optional(shape({profile:shape({model:text,radiusKm:number,phaseNormalization:boolean,observationWeights:dictionary(number),
     referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number}),
     levels:shape({boundaryPixels:number,luminance:array(number)}),vectors:shape({sun:text,observer:text})}))});

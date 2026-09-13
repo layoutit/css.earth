@@ -238,3 +238,6 @@ src/spice/**/*.bc
 
 # Original Pluto LEISA maps, restored from pinned published Zenodo downloads.
 /src/planets/pluto/source/science/leisa/*.fits
+
+# Restored from the pinned author-hosted method paper, not redistributed in Git.
+/src/planets/charon/source/science/leisa/grundy-2016-supplement.pdf

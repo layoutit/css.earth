@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lutetia",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f67bb95e9efe3907f5cc074c5a8d9747685371a2790650c9ad3d1a654cd48e73"
+    "sha256": "d072bd1412c188530d1b9481bab6edf95487a3be1cf73a7c663800f5c0450792"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ddd9c2556b0a97a935313ea1679dfa9119ef4810edf7741343973b9eb88af53a",
+      "sha256": "fb8e49e445e369436520e32c66ee29a12642451322d5fc97ab15eacad0e74cad",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,39 +90,6 @@
               "consumer": "osiris-observation",
               "filter": "FFP-Vis_Orange",
               "allowLossy": true,
-              "transfer": {
-                "maximumSourceDistanceMeters": 1200,
-                "maximumSeparationMeters": 600,
-                "maximumEmissionDegrees": 70,
-                "visibilityToleranceMeters": 0.5
-              },
-              "photometry": {
-                "model": "photometry/hasselmann-2016-hapke-1993.json",
-                "referenceDegrees": {
-                  "incidence": 35,
-                  "emission": 0,
-                  "phase": 35
-                },
-                "limits": {
-                  "maximumIncidenceDegrees": 70,
-                  "maximumEmissionDegrees": 70,
-                  "phaseDegrees": [
-                    25,
-                    55
-                  ],
-                  "minimumGain": 0.4,
-                  "maximumGain": 2.5
-                }
-              },
-              "displayPercentiles": [
-                1,
-                99
-              ],
-              "metadata": {
-                "label": "OSIRIS",
-                "coverage": "Three Rosetta orange-filter photographs show Lutetia’s craters and ridges, including a closer view at 15:43 UTC. Each uses the published shape and a separately checked camera. Published photometric normalization reduces broad shading; the grid marks gaps.",
-                "falseColor": false
-              },
               "frames": [
                 {
                   "id": "approach",
@@ -149,6 +116,41 @@
                 "minimumPairs": 64,
                 "maximumLogMad": 0.25,
                 "maximumGain": 1.35
+              },
+              "transfer": {
+                "maximumSourceDistanceMeters": 1200,
+                "maximumSeparationMeters": 600,
+                "maximumEmissionDegrees": 70,
+                "visibilityToleranceMeters": 0.5
+              },
+              "photometry": {
+                "model": "photometry/hasselmann-2016-hapke-1993.json",
+                "referenceDegrees": {
+                  "incidence": 35,
+                  "emission": 0,
+                  "phase": 35
+                },
+                "limits": {
+                  "maximumIncidenceDegrees": 70,
+                  "maximumEmissionDegrees": 70,
+                  "phaseDegrees": [
+                    25,
+                    55
+                  ],
+                  "minimumGain": 0.4,
+                  "maximumGain": 2.5
+                }
+              },
+              "display": {
+                "percentiles": [
+                  1,
+                  99
+                ]
+              },
+              "metadata": {
+                "label": "OSIRIS",
+                "coverage": "Three Rosetta orange-filter photographs show Lutetia’s craters and ridges, including a closer view at 15:43 UTC. Each uses the published shape and a separately checked camera. Published photometric normalization reduces broad shading; the grid marks gaps.",
+                "falseColor": false
               }
             }
           ]
@@ -520,7 +522,7 @@
       "sha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52",
       "bytes": 2954640,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -530,34 +532,6 @@
         "path": "shape/lutetia_025k_cart.wrl",
         "url": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl"
       },
-      "verificationOperations": []
-    },
-    {
-      "path": "photometry/hasselmann-2016-hapke-1993.json",
-      "purpose": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "doi-10-1016-j-icarus-2015-11-023",
-            "role": "method",
-            "evidence": "Hasselmann et al. (2016) fit the Hapke (1993) model to NAC F82+F22 images of the Baetica and Etruria regions. Table 5 prints the parameters with uncertainties. Table 1 gives the 0.15-144.15 degree phase range, and the analysis removed facets beyond 80 degrees incidence or emission.",
-            "locator": "Table 5, Hapke (1993) column; Table 1, NAC F82+F22 row"
-          }
-        ]
-      },
-      "id": "source-document:photometry/hasselmann-2016-hapke-1993.json",
-      "kind": "source-document",
-      "origin": "object:source/photometry/hasselmann-2016-hapke-1993.json",
-      "title": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
-      "credit": "Credit not recorded in source manifest.",
-      "acquisition": "Acquisition not recorded in source manifest.",
-      "upstreamLineage": "not-recorded",
-      "sha256": "c2e60730c7d6c0b9bc8b5a688d8d5dfeed8fe948bb240141da3c8ecf9037f718",
-      "bytes": 663,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -582,7 +556,7 @@
       "sha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd",
       "bytes": 37775872,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -610,7 +584,7 @@
       "sha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac",
       "bytes": 5070,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -636,7 +610,7 @@
       "sha256": "b9435d017f9469503f099f224ca86567b6722ff877aa27d3a178a857e23b43b1",
       "bytes": 37775872,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -667,7 +641,7 @@
       "sha256": "619648154d976db683f43838d45668a140e9fac3ee508335eaf53076f2866fde",
       "bytes": 5104,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -693,7 +667,7 @@
       "sha256": "b1c6c6ecf86cd733290f2eebd972d6b227d235e5f5552bb3a1e42f3d9f496481",
       "bytes": 37776384,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -721,7 +695,35 @@
       "sha256": "b6e70f70299f772905d3063b891fd8110c00799d54476ed66d068dd39dbefa3a",
       "bytes": 5140,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "photometry/hasselmann-2016-hapke-1993.json",
+      "purpose": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-icarus-2015-11-023",
+            "role": "method",
+            "evidence": "Hasselmann et al. (2016) fit the Hapke (1993) model to NAC F82+F22 images of the Baetica and Etruria regions. Table 5 prints the parameters with uncertainties. Table 1 gives the 0.15-144.15 degree phase range, and the analysis removed facets beyond 80 degrees incidence or emission.",
+            "locator": "Table 5, Hapke (1993) column; Table 1, NAC F82+F22 row"
+          }
+        ]
+      },
+      "id": "source-document:photometry/hasselmann-2016-hapke-1993.json",
+      "kind": "source-document",
+      "origin": "object:source/photometry/hasselmann-2016-hapke-1993.json",
+      "title": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
+      "credit": "Credit not recorded in source manifest.",
+      "acquisition": "Acquisition not recorded in source manifest.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "c2e60730c7d6c0b9bc8b5a688d8d5dfeed8fe948bb240141da3c8ecf9037f718",
+      "bytes": 663,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -741,7 +743,7 @@
       "sha256": "d97ddca4352caf06640098c91ac12f053ff853d0996588b49dc517f10263ebb6",
       "bytes": 10397,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -761,7 +763,7 @@
       "sha256": "4c8dd8e79922736361cfec1d91ef62c077141e96d6a5930abfc0589971e7f58b",
       "bytes": 1010,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -787,7 +789,7 @@
       "sha256": "5feb1d89610b0dcc1be87d6f4d80d604e723c1be4ec310262951de0581a4fbf7",
       "bytes": 134132,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -814,7 +816,7 @@
       "sha256": "f508382e29ce3a5c5f70723acc78f74488ac01491c005469b370bb423c97386d",
       "bytes": 154,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -841,7 +843,7 @@
       "sha256": "92372088c940f9dddf30480811a68ac518a0704a943de78c4bd622c8e8e87cc9",
       "bytes": 1335,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -874,19 +876,19 @@
           "url": "/scenes/lutetia/lutetia-elevation-thumbnail.webp",
           "bytes": 6322,
           "sha256": "28eadc457171bd3c6386469daa3fe910a13dd8318598c50868392df0d4114a30",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lutetia/lutetia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lutetia/lutetia-elevation-surface@2x.webp",
           "bytes": 375170,
           "sha256": "7d7960dce265687aaba2acf3897e4cb20f9f87e9bf21c289490817286ce78534",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -918,13 +920,13 @@
           "url": "/scenes/lutetia/lutetia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lutetia/lutetia-shape-surface@2x.webp",
           "bytes": 220590,
           "sha256": "1080889eaa3f187ed7029f70483458f9b9cec4b3bbe392c20ea09b56ddc4b4fe",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -949,13 +951,13 @@
         "kind": "surfaceObservations"
       },
       "inputs": [
-        "source-document:photometry/hasselmann-2016-hapke-1993.json",
         "lutetia-observations-n20100710t154047674id4df22-img",
         "lutetia-observations-osiris-camera-json",
         "lutetia-n20100710t154135529id4df22-img",
         "lutetia-n20100710t154135529id4df22-camera",
         "lutetia-n20100710t154241240id4df22-img",
         "lutetia-n20100710t154241240id4df22-camera",
+        "source-document:photometry/hasselmann-2016-hapke-1993.json",
         "lutetia-shape"
       ],
       "outputs": [
@@ -963,13 +965,13 @@
           "url": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
           "bytes": 2292,
           "sha256": "59f563ae84cd7b0d87594451a7b1859afd596d3a98083c64efb1cf3940828871",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
           "bytes": 918122,
           "sha256": "2014d72a996af4d0c8810c8d8d3b04e4822c7f9b38f708b65ec8ad82cef8a605",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1029,7 +1031,7 @@
           "url": "/scenes/lutetia/lutetia-features.json",
           "bytes": 77450,
           "sha256": "8dd8ba48ba244f14817761051a4354dc19b36dd348afacd912bfbedf0a451eaa",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

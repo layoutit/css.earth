@@ -237,7 +237,7 @@ test('spacecraft photographs bind their image, registration, and source-shape de
       assert.ok(product, id + '/' + observation.id);
       const sourceIds = new Set(productSourceIds(document, product.id));
       const paths = new Set(document.sources.filter(source => sourceIds.has(source.id)).map(source => source.path));
-      const frames = observation.frames === undefined ? [observation] : requireArray(observation.frames, `${id} observation frames`).map(frame => requireEntry(frame, `${id} observation frame`));
+      const frames = requireArray(observation.frames, `${id} observation frames`).map(frame => requireEntry(frame, `${id} observation frame`));
       for (const frame of frames) {
         for (const key of ['path', 'labelPath', 'controlPath', 'cameraPath', 'originalPath']) {
           if (typeof frame[key] === 'string') assert.ok(paths.has(frame[key]), id + ': ' + frame[key]);
