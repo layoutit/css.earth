@@ -144,6 +144,33 @@ These examples identify implementations to inspect, not universal visual or
 scientific templates. See [qualification](qualification.md) for source and
 browser comparisons relevant to the actual feature.
 
+## Choose a photograph route
+
+Start from what the archive ships beside the image. Each row gives the recipe
+format, a body that uses it, what the body owner writes, and the oracle that
+checks the reader. When nothing fits, open the
+[archive-product issue template](../../../../.github/ISSUE_TEMPLATE/archive-product.md)
+instead of writing a reader for one body.
+
+| The archive ships | Recipe format | Example | The body owner writes | Reader oracle |
+| --- | --- | --- | --- | --- |
+| A PDS4 cube with per-pixel geometry planes | `pds4-geometry-cube` | Dimorphos `draco` | The `cube` block naming the label planes, transfer limits, photometry | `pds4-geometry-cube.oracle.test.mts` |
+| OSIRIS level-5 geometry companions | `osiris-geo` | 67P `osiris` | Frame pins, quality policy, transfer limits, photometry, level matching | `osiris-geo.oracle.test.mts` |
+| OSIRIS level-4 reflectance with a solved camera | `osiris-camera` | Lutetia and Steins `osiris` | Camera JSON, optional limb refinement, photometry | `archived-camera.oracle.test.mts` |
+| AMICA Gaskell DDR cubes | `amica-gaskell` | Itokawa `amica` | Image, label, original and flat-field pins | `amica-geo.oracle.test.mts` |
+| L'LORRI images with TAN-SIP distortion | `llorri-camera` | Donaldjohanson `llorri` | Camera pins | `llorri-geo.oracle.test.mts` |
+| Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tools/spice/oracle.test.mts` |
+| Encounter FITS frames with a control network | `encounter-fits` | Wild 2 `navcam`, Tempel 1, Hartley 2 | Frame, label and control pins, level matching | `encounter-fits.oracle.test.mts` |
+| Catalog cameras for a shape model | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame catalog pins and display settings | None yet |
+| Three filters, one catalog camera each | `controlled-shape-color` | Proteus `filter-color` | Filters and frames; no published model | None yet |
+| ISIS2 orthographic image cubes | `isis2-orthographic` | Borrelly `micas` | Cube pins; no Sun geometry, so no photometry | `isis2-qube.oracle.test.mts` |
+
+Routes with Sun geometry accept a published photometric model record (see
+`tools/photometry/README.md`), and [photometric models](photometric-models.md)
+lists which bodies have one. Kernels that serve several bodies of one mission
+live in a kernel bank under `src/spice/<mission>/`: add, restore and verify them
+with `node tools/spice/kernel-bank.mts`, and name the bank with `spice.kernelSet`.
+
 ## Registered photographic mosaics
 
 For photographs with per-pixel surface geometry, read
@@ -198,8 +225,12 @@ and stellar aberration) and `tools/spice/camera.mts` assembles the camera;
 `attachSourceGeometry`, so per-pixel geometry comes from the retained mesh. The
 route is validated end to end against Dimorphos's DRACO backplanes in
 `tests/objects/unit/dimorphos/draco-spice.test.mts` (0.5 px against the
-archive's own intercepts, the constant offset explained by kernel versions); no
-lens uses it yet, so a body that adopts it needs a rendered inspection.
+archive's own intercepts, the constant offset explained by kernel versions).
+Tethys's Cassini ISS lens is the first lens on this route. It reads its kernels
+from the shared Cassini bank, decodes a VICAR image, and evaluates the camera at
+mid-exposure from the clock counts in the PDS3 label (`image.format:
+"vicar-pds3"`, `clock.start` and `clock.stop`). `IAU_<body>` frames resolve
+without a frame kernel, as they do in SPICE.
 
 Archived and kernel pointing carries the archive's error: a fraction of a pixel
 for a solution tuned to the images, tens of pixels for a reconstructed C-kernel.

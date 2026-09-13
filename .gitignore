@@ -221,3 +221,7 @@ src/planets/*/source/**/*.bpc
 /src/planets/tethys/source/science/b2-intake/tethysshapeassessment.pdf
 /src/planets/titan/source/science/b2-intake/topo_4PPD.cub
 /src/planets/titan/source/science/b2-intake/topo_4PPD_interp.cub
+
+# Binary kernels in shared SPICE kernel banks are restored by tools/spice/kernel-bank.mts; text kernels are committed.
+src/spice/**/*.bsp
+src/spice/**/*.bc
