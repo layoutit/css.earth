@@ -43,12 +43,49 @@ new route.
 The [implementation map](../../../.agents/skills/celestial-skill/references/implementation-map.md#choose-a-photograph-route)
 says which format fits what an archive ships.
 
+## Recipes
+
+Every lens has the same shape. A format adds only its frame inputs and its own
+blocks, and validation refuses any key the format does not declare, so a
+misspelt field fails instead of being ignored.
+
+```json
+{
+  "id": "osiris", "format": "osiris-geo", "consumer": "osiris-observation",
+  "filter": "...", "allowLossy": false,
+  "frames": [{ "id": "...", "path": "...", "qualityPath": "...", "startTime": "..." }],
+  "selection": "lowest-emission", "levelMatching": { "minimumPairs": 128, "maximumLogMad": 0.25, "maximumGain": 1.35, "samplesPerTriangle": 64 },
+  "transfer": { "...": "see Transfer limits" }, "photometry": { "...": "..." },
+  "display": { "percentiles": [1, 99.5] },
+  "metadata": { "label": "OSIRIS", "coverage": "..." }
+}
+```
+
+- `frames` lists the photographs, one to eight. A lens with more than one frame
+  also names its `selection` and `levelMatching`; a single frame names neither.
+- `display` is either `percentiles` of the qualified values or one authored
+  `linear` range.
+- `recipe.mts` checks the shared shape. Each adapter declares the rest:
+
+| Format | Each frame adds | The lens adds |
+| --- | --- | --- |
+| `osiris-geo` | `startTime`, `qualityPath` | `filter`, `allowLossy`, optional `radiometry` |
+| `amica-gaskell` | `startTime`, `labelPath`, `originalPath` | `filter` (`V`) and the shared `flatPath` |
+| `pds4-geometry-cube` | `startTime`, `labelPath` | `filter`, `cube` |
+| `osiris-camera` | `startTime`, `cameraPath` | `filter`, `allowLossy`, optional `refinement` |
+| `llorri-camera`, `nh-lorri-camera` | `startTime`, `cameraPath` | `filter` |
+| `nh-mvic-camera` | `startTime`, `cameraPath` | `filter`; one frame with retained illumination and a `linear` display from 0 |
+| `spice-camera` | `startTime`, and `labelPath` for a VICAR image | `filter`, `spice`, optional `refinement` |
+| `encounter-fits` | `labelPath`, `controlPath` | nothing |
+| `isis2-orthographic` | `coordinatePaths` | `grid`, `maximumCoordinateErrorMeters`; one frame, a `transfer` with only `maximumSourceDistanceMeters`, no `photometry` |
+
 ## Adding an archive product
 
 Write an adapter that implements `SurfaceObservationFormat` from `contract.mts`
 and register it in `index.mts`. The adapter:
 
-1. validates its recipe and names every pinned path the lens consumes;
+1. declares what its frames and lens add to the shared recipe, checks them with
+   `recipe.mts` and names every pinned path the lens consumes;
 2. decodes each frame into an `ObservationImage`;
 3. builds an `ObservationCamera` and a `PixelGeometry`, usually with
    `matrixCamera` or `fittedCamera` and `castSourceRays` or `archiveBackplanes`;

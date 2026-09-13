@@ -81,6 +81,13 @@
             "controlPath": "photography/hri/hv10110413_5004008_001_d050.json"
           }
         ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 32,
+          "minimumPairs": 64,
+          "maximumLogMad": 0.3,
+          "maximumGain": 1.5
+        },
         "transfer": {
           "maximumSourceDistanceMeters": 20,
           "maximumSeparationMeters": 50,
@@ -91,17 +98,12 @@
           "model": "observed",
           "maximumGain": 1
         },
-        "selection": "finest-resolution",
-        "levelMatching": {
-          "samplesPerTriangle": 32,
-          "minimumPairs": 64,
-          "maximumLogMad": 0.3,
-          "maximumGain": 1.5
+        "display": {
+          "percentiles": [
+            1,
+            99.5
+          ]
         },
-        "displayPercentiles": [
-          1,
-          99.5
-        ],
         "metadata": {
           "label": "EPOXI photographs",
           "coverage": "MRI and restored HRI photographs from the EPOXI flyby are combined on the nucleus. HRI supplies finer image sampling, with MRI extending the coverage. Original shadows remain; the gray grid marks gaps or poorly constrained shape."

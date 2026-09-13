@@ -180,7 +180,6 @@ export const parseLevelMatching = shape(levelMatchingFields);
 /** Contributor separation is either a fixed distance or a multiple of each sample's measured pixel footprint. */
 export const surfaceTransfer = shape({maximumSourceDistanceMeters:number,maximumSeparationMeters:optional(number),maximumSeparationFootprints:optional(number),visibilityToleranceMeters:number,maximumEmissionDegrees:number,interpretation:optional(text)});
 export const parseSurfaceGeometry = shape({format:optional(text),sourceTopology:optional(text),simplification:shape({method:optional(text),maximumErrorMeters:number})});
-export const surfaceIdentityFields = {id:text,format:text,consumer:text,metadata:shape({label:text,coverage:text})};
 export const parsePublishedPhotometry = shape({model:text,referenceDegrees:shape({incidence:number,emission:number,phase:number}),
  limits:shape({maximumIncidenceDegrees:number,maximumEmissionDegrees:number,phaseDegrees:array(number),minimumGain:number,maximumGain:number})});
 const PUBLISHED_PHOTOMETRY_KEYS = ['model','referenceDegrees','limits'];
@@ -191,11 +190,7 @@ export const publishedOr = <T,>(legacy: Decoder<T>): Decoder<T | ReturnType<type
   if (!published && ('referenceDegrees' in record || 'limits' in record)) throw new TypeError('Only a published photometric model declares a reference geometry and limits.');
   return published ? parsePublishedPhotometry(value) : legacy(value);
 };
-export const parseEncounterRecipe = shape({...surfaceIdentityFields,frames:array(shape({id:text,path:text,labelPath:text,controlPath:text})),
- transfer:surfaceTransfer,photometry:publishedOr(shape({model:text,maximumGain:number})),selection:text,displayPercentiles:array(number),levelMatching:optional(parseLevelMatching)});
 export const parseEncounterSourceControl = shape({observation:parseEncounterPolicy,camera:parseEncounterControl,registration:parseEncounterRegistration});
-export const parseOrthographicRecipe = shape({...surfaceIdentityFields,path:text,coordinatePaths:array(text),maximumCoordinateErrorMeters:number,maximumSourceDistanceMeters:number,
- grid:shape({...dimensions,pixelToSource:array(number)}),displayRange:array(number)});
 
 export const parseControlledMosaic = shape({directory:text,imageIds:array(text),filter:text,photometry:shape({radiusKm:number,gamma:number,displayMaximum:number,
  weight:number,maximumGain:number,phaseNormalization:boolean,matchStride:number,minimumLevel:number,maximumLevel:number,
@@ -204,7 +199,6 @@ export const parseControlledMosaic = shape({directory:text,imageIds:array(text),
 export const parseControlledMetadata = shape({IsisCube:shape({BandBin:shape({FilterName:text}),Mapping:shape({PixelResolution:shape({value:number}),
  CenterLongitude:number,CenterLatitude:number,MaximumLatitude:number,MinimumLatitude:number,MaximumLongitude:number,MinimumLongitude:number})}),Table_BodyRotation:shape({CkTableStartTime:number})});
 
-export const geoFramePathFields = {path:optional(text),qualityPath:optional(text),labelPath:optional(text),originalPath:optional(text),flatPath:optional(text),cameraPath:optional(text),startTime:optional(text)};
 export const parsePhasePhotometry = shape({model:text,asymmetry:number,amplitude:number,width:number,minimumDegrees:number,maximumDegrees:number,referenceDegrees:number,maximumGain:number});
 /** A PDS4 product whose Array_2D_Image planes carry an image with its geometric backplanes. The recipe names the planes by
  * their label identifiers, the archive identity and DSK to bind, and optional FITS header expectations. */
@@ -223,10 +217,6 @@ export const parseSpiceCamera = shape({kernels:array(text),kernelSet:optional(te
 export type SpiceCameraDeclaration = ReturnType<typeof parseSpiceCamera>;
 /** Pointing refinement of an archived or kernel camera against the retained mesh's lit limb, with its evidence budget. */
 export const parseLimbRefinement = shape({method:text,maximumCorrectionDegrees:number,maximumResidualPixels:number,minimumControls:number,threshold:optional(number),searchPixels:optional(number),maximumControls:optional(number),minimumSharpness:optional(number)});
-export const parseGeoRecipe = shape({...surfaceIdentityFields,...geoFramePathFields,filter:text,allowLossy:boolean,radiometry:optional(text),colorDisplay:optional(shape({minimum:number,maximum:number})),cube:optional(parseGeometryCube),spice:optional(parseSpiceCamera),refinement:optional(parseLimbRefinement),
- frames:optional(array(shape({id:text,...geoFramePathFields}))),selection:optional(text),levelMatching:optional(parseLevelMatching),
- transfer:surfaceTransfer,photometry:publishedOr(shape({model:text,phaseCorrection:optional(parsePhasePhotometry),coefficient:optional(number),phaseCoefficientPerDegree:optional(number),
- referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,maximumGain:number})),displayPercentiles:array(number)});
 export const parseGeoCameraClosure = shape({...archivedCameraFields,meshSha256:text,provenance:array(shape({path:text,sha256:text}))});
 
 /** Only fields used to interpret science values; source-specific readers own their grids. */
