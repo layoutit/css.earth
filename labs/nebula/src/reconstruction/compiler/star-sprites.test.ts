@@ -5,7 +5,7 @@ import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import sharp from 'sharp';
 import { COMPILER_STAR_PROFILE_PATH, prepareCompilerStarSprites } from './star-sprites.js';
-import { validCompilerStarSprites, type PreparedCompilerStar } from './bake-types.js';
+import { validCompilerStarSprites, type CompilerStarSprites, type PreparedCompilerStar } from './bake-types.js';
 
 const stars: PreparedCompilerStar[] = [
   { id: 'bright', positionUnits: [1, 2, 3], rgb: [255, 220, 180], diameterUnits: 3, alpha: .7,
@@ -24,7 +24,8 @@ test('real prepared site profile replaces disks with a soft core/halo and conser
   const { data, info } = await sharp(await readFile(join(root, sprites.atlas.path))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   assert.equal(info.width, sprites.width); assert.equal(info.height, sprites.height);
   for (const star of stars) for (const appearance of [star, ...Object.values(star.materials ?? {})]) {
-    const tile = sprites.entries[appearance.rgb.join(',')]!, sums = [0, 0, 0]; let alphaSum = 0, intermediate = 0;
+    const tile: CompilerStarSprites['entries'][string] = sprites.entries[appearance.rgb.join(',')]!;
+    const sums = [0, 0, 0]; let alphaSum = 0, intermediate = 0;
     for (let y = 0; y < sprites.tileSize; y++) for (let x = 0; x < sprites.tileSize; x++) {
       const at = ((tile.y + y) * info.width + tile.x + x) * 4, alpha = data[at + 3]! / 255;
       alphaSum += alpha; if (alpha > 0 && alpha < 1) intermediate++;
@@ -33,13 +34,13 @@ test('real prepared site profile replaces disks with a soft core/halo and conser
     assert.ok(intermediate > sprites.tileSize ** 2 / 3, 'PSF must have a substantial smooth profile, not a binary disk.');
     const size = appearance.diameterUnits! * sprites.diameterScale;
     for (let c = 0; c < 3; c++) {
-      const flux = sums[c]! / sprites.tileSize ** 2 * size ** 2 * appearance.alpha * sprites.alphaScale;
+      const flux: number = sums[c]! / sprites.tileSize ** 2 * size ** 2 * appearance.alpha * sprites.alphaScale;
       const originalDiskFlux = appearance.rgb[c]! / 255 * Math.PI * appearance.diameterUnits! ** 2 / 4 * appearance.alpha;
       assert.ok(Math.abs(flux - originalDiskFlux) < 1e-10, 'Decoded sprite must preserve the prior observed channel light.');
     }
     assert.ok(Math.abs(alphaSum / sprites.tileSize ** 2 - Math.PI / 4) > .1,
       'Removing offline extent compensation must fail this same light-preservation assertion.');
-    const at = (y: number, x: number) => data[((tile.y + y) * info.width + tile.x + x) * 4 + 3]!;
+    const at = (y: number, x: number): number => data[((tile.y + y) * info.width + tile.x + x) * 4 + 3]!;
     assert.equal(at(0, 0), 0); assert.ok(at(16, 16) > 250); assert.ok(at(16, 24) > 0 && at(16, 24) < 40);
   }
 });

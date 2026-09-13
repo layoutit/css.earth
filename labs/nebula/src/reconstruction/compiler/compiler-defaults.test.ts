@@ -31,3 +31,13 @@ test('invalid authored controls, weights and source IDs are rejected', () => {
     assert.throws(() => readCompilerRecipe({ ...source, sourceWeights }), /source weights/);
   assert.throws(() => compilerSourceWeights(readCompilerRecipe(source), ['optical'], [3]), /valid compiler weights/);
 });
+
+test('the saved emission window is explicit, validated and unavailable for sampled volumes', () => {
+  const emissionWindow = { sourceId: 'optical', featherArcsec: 90 };
+  assert.deepEqual(readCompilerRecipe({ ...source, emissionWindow }).emissionWindow, emissionWindow);
+  assert.equal(readCompilerRecipe(source).emissionWindow, undefined);
+  for (const invalid of [null, { sourceId: '../optical', featherArcsec: 90 }, { sourceId: 'optical', featherArcsec: -1 },
+    { sourceId: 'optical', featherArcsec: NaN }, { ...emissionWindow, invented: true }])
+    assert.throws(() => readCompilerRecipe({ ...source, emissionWindow: invalid }), /emission window/);
+  assert.throws(() => readCompilerRecipe({ ...source, emissionWindow, sampledRecipe: 'labs/nebula/models/example/sampled.json' }), /emission-field route/);
+});

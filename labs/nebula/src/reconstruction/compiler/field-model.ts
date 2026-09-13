@@ -1,6 +1,7 @@
 import { jointRecord } from '../joint-fit/model';
 import { readCompilerControls } from './model';
 import type { EmissionComponent, EmissionFieldModel } from './field-types';
+import { readEmissionWindow } from './emission-window';
 const triple = (v: unknown): v is [number, number, number] => Array.isArray(v) && v.length === 3 && v.every(Number.isFinite);
 function component(v: unknown): v is EmissionComponent {
   return jointRecord(v) && typeof v.id === 'string' && typeof v.basisId === 'string' && triple(v.center) && triple(v.sigma) && v.sigma.every(n => n > 0) &&
@@ -16,6 +17,7 @@ export function readRetainedEmissionField(v: unknown): EmissionFieldModel {
   const maximum = v.bounds.max;
   if (v.bounds.min.some((n, i) => n >= maximum[i]!)) throw new TypeError('Invalid retained emission bounds.');
   return { schema: v.schema, identity: v.identity, controls: readCompilerControls(v.controls), bounds: { min: v.bounds.min, max: v.bounds.max },
+    ...(v.emissionWindow === undefined ? {} : { emissionWindow: readEmissionWindow(v.emissionWindow) }),
     components: v.components, skyBounds: { min: [v.bounds.min[0], v.bounds.min[1]], max: [v.bounds.max[0], v.bounds.max[1]] }, scaffold: null,
     assumptions: { kernel: 'retained source components', projectionUnits: 'arcseconds', depth: 'retained authored field', halo: 'retained source',
       haloRadiusArcsec: 1, equalNearFarSplit: true, velocityUncoveredComponents: 0 } };

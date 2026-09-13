@@ -1,15 +1,29 @@
 # Lagoon · M8
 
+## Current optical extent · 2026-09-13
+
+The active recipe limits cloud emission to the registered **ESO optical footprint**, with a 90″ inward feather. The same saved selection applies to the fitted target, actual XYZ field, every lens and later recompiles. Source images and their original coverage remain complete. This is an authored display extent, not a measured boundary of the Lagoon.
+
+Default-recipe result: `1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864`. It supersedes the historical cloud results below.
+
+- The refit has 442 finite supports, 650 shared compact lights and three lenses. Every lens uses the same new alpha field; the refitted interior is not byte-identical to the previous cloud.
+- Independent registered-image coverage checked against 128 × 128 × 32 XYZ field samples found **zero emitting samples outside** the optical image. Removing only the saved window from this same field restores 45,683 emitting outside samples. All 48,372 positive interior samples remain inside the footprint.
+- Native NOX and extracted structures were reused. Compilation completed in 74.3 seconds; a second command verified and restored the same completed result.
+- The fresh browser check passed all three lenses, orbit, stars/original toggles and refresh without processing requests or JavaScript errors. Optical front, oblique and both side axes were inspected. See [the pinned numerical/browser evidence](optical-window-evidence.json), [front capture](evidence/optical-window-earth.png) and [side capture](evidence/optical-window-west-side.png).
+- The selection removes the unwanted outer cloud. Fine filaments remain smoothed; side views still expose a thin curved layer and slice/grid banding. None of these 442 fitted supports reaches the recipe's local paper-guidance threshold, so their depth remains authored. This is a local research preview, not a new production promotion or a recovered physical volume.
+
+## Earlier processing
+
 The later [faint-signal and VISTA-footprint trial](faint-tuning.md) improves the prepared target, but central Spitzer resolution/material artifacts remain unresolved. Its separate recipe has not replaced the active cloud.
 
-The current local presentation is `9542641c627154f767d8fe5f745d0fb3693397b25e4f7ea78e17cbb7f9bf98fd`: only the 650 star profiles change from solid disks to the main application's prepared soft core/halo. The cloud, star positions and every per-lens color, relative light and angular size input remain exactly those of `5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8`. Sprite extent compensates the profile's decoded alpha integral. This is still a residual-derived overlay, not a new external stellar catalogue. [Presentation evidence](stellar-profile-evidence.json) records the output and browser checks.
+The preceding local presentation was `9542641c627154f767d8fe5f745d0fb3693397b25e4f7ea78e17cbb7f9bf98fd`: only the 650 star profiles changed from solid disks to the main application's prepared soft core/halo. Its cloud, star positions and every per-lens color, relative light and angular size input remained exactly those of `5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8`. Sprite extent compensates the profile's decoded alpha integral. This remains a residual-derived overlay, not a new external stellar catalogue. [Presentation evidence](stellar-profile-evidence.json) records that historical output and browser checks.
 
 
 The selected optical, near-infrared and mid-infrared images now have verified native star separation and a completed shared 3D cloud. The geometry uses a paper-guided local PDR interpretation with explicitly authored depth across the wider field. It is relative display emission, not recovered gas or dust density.
 
-## Current processing · 2026-09-13
+## Previous processing · 2026-09-13
 
-Current local result: `5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8`.
+Historical result: `5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8`.
 
 - Three full native lenses: ESO optical (4000 × 2679), VISTA (4000 × 2202), and [Spitzer IRAC/MIPS](https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula) (1757 × 1417). Their unchanged source footprints share a north-up 129′ frame.
 - Held-out relative star RMS: VISTA 0.758″ and Spitzer approximately 1.00″, across all four common-footprint quadrants. Absolute sky calibration still relies on publisher astrometry.

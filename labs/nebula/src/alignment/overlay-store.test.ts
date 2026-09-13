@@ -62,11 +62,12 @@ test('corrected alignment replaces an untouched old default without erasing manu
 });
 
 test('historical catalogue locations keep saved alignment after model folders move', () => {
-  const storage = { getItem: () => JSON.stringify({ schema: 'cssearth-nebula-overlay-state@1', catalogues: [
+  const storage = new MemoryStorage();
+  storage.setItem(KEY, JSON.stringify({ schema: 'cssearth-nebula-overlay-state@1', catalogues: [
     ['labs/nebula/models/lmc-candidates/overlays.json', [{ id: 'vista-infrared', enabled: true, opacity: .7,
       placement: defaultOverlayPlacement(), basis: 'saved-basis' }]],
-  ] }) };
-  const sessions = readOverlaySessions(storage as Storage);
+  ] }));
+  const sessions = readOverlaySessions(storage);
   assert.equal(sessions.get('labs/nebula/models/lmc/candidates/overlays.json')?.[0]?.id, 'vista-infrared');
   assert.equal(sessions.get('labs/nebula/models/lmc/candidates/overlays.json')?.[0]?.basis, 'saved-basis');
 });

@@ -1,5 +1,6 @@
 /** Neutral source-independent smooth finite field; all image lenses use this exact geometry. */
 import type { EmissionBounds, EmissionComponent, EmissionFieldModel, EmissionVector3 } from './field-types.js';
+import { createEmissionWindowSampler } from './emission-window.js';
 
 export const EMISSION_KERNEL_CUTOFF = 4;
 /** Bounded angular-depth slope, not a measured distance or a recovered viewing angle. */
@@ -65,6 +66,7 @@ export function samplePreparedEmissionComponent(c: PreparedEmissionComponent, x:
   return c.gain * sampledKernelSquared(u * u) * sampledKernelSquared(v * v) * sampledKernelSquared(dz * dz);
 }
 export function createEmissionField(model: EmissionFieldModel) {
+  const windowWeight = createEmissionWindowSampler(model.emissionWindow);
   const components = model.components.map((component, sourceIndex) => ({ ...prepareEmissionComponent(component), sourceIndex })).filter(c => c.gain > 0);
   const bounds: EmissionBounds = { min: [Infinity, Infinity, Infinity], max: [-Infinity, -Infinity, -Infinity] };
   for (const component of components) for (let a = 0; a < 3; a++) { bounds.min[a] = Math.min(bounds.min[a], component.bounds.min[a]); bounds.max[a] = Math.max(bounds.max[a], component.bounds.max[a]); }
@@ -93,7 +95,7 @@ export function createEmissionField(model: EmissionFieldModel) {
         value += samplePreparedEmissionComponent(components[members[at]], x, y, z);
       }
     }
-    out[0] = out[1] = out[2] = value;
+    out[0] = out[1] = out[2] = value * windowWeight(x, y);
   };
   /** Attach immutable component colors to this same spatial index; color cannot add support. */
   const createMaterialSampler = (colors: readonly { rgb: EmissionVector3; covered: boolean }[]) => {
@@ -103,6 +105,8 @@ export function createEmissionField(model: EmissionFieldModel) {
     const attached = colors.map(color => ({ rgb: [...color.rgb] as EmissionVector3, covered: color.covered }));
     return (x: number, y: number, z: number, out: EmissionVector3): boolean => {
       out[0] = out[1] = out[2] = 0;
+      // The same scalar multiplies every emitter, so it cancels from interior RGB ratios.
+      if (!(windowWeight(x, y) > 0)) return false;
       if (!(x >= bounds.min[0] && y >= bounds.min[1] && z >= bounds.min[2] && x < bounds.max[0] && y < bounds.max[1] && z < bounds.max[2])) return false;
       const cx = Math.min(dimensions[0] - 1, Math.floor((x - bounds.min[0]) / cell)),
         cy = Math.min(dimensions[1] - 1, Math.floor((y - bounds.min[1]) / cell)),

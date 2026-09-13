@@ -23,7 +23,7 @@ test('every new candidate has a source dossier and primary-paper context', async
 
 test('curation preserves useful publisher-registered comparisons without upgrading their evidence', async () => {
   const expected: Record<string, string[]> = {
-    m45: ['noirlab-optical', 'spitzer-irac', 'spitzer-irac-mips', 'wise-four-band', 'iau-usama-widefield', 'andreo-widefield'],
+    m45: ['noirlab-optical', 'spitzer-irac', 'spitzer-irac-mips', 'wise-four-band', 'iau-usama-widefield', 'andreo-widefield', 'niittee-widefield'],
     m1: ['hubble-optical', 'webb-infrared', 'webb-components', 'spitzer-infrared', 'vla-radio', 'chandra-xray'],
     m8: ['eso-optical', 'eso-vista', 'spitzer-mid-infrared'],
   };

@@ -103,7 +103,7 @@ test('decoded FITS point splats preserve all positive extent and normalized mass
   close(prepared.ejecta.reduce((a, b) => a + b, 0) / prepared.evidence.normalization, 1 + 2 + 3, 2e-6);
   assert.ok(prepared.ejecta.every(Number.isFinite)); assert.ok(prepared.ejecta.every(n => n >= 0));
   const out: EmissionVector3 = [0, 0, 0], field = prepared.field({ ejecta: 1, pwn: 0 });
-  for (const point of [[18, -11, -4], [0, 4, 24], [10, -5, 8]] as const) { field.sampleEmission(...point, out); assert.ok(out[0] > 0); }
+  for (const [x, y, z] of [[18, -11, -4], [0, 4, 24], [10, -5, 8]] as const) { field.sampleEmission(x, y, z, out); assert.ok(out[0] > 0); }
 });
 
 test('two clouds on one sightline keep their empty intervening depth instead of photo extrusion', () => {

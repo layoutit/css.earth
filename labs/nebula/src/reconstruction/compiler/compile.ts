@@ -25,6 +25,7 @@ import { readCompilerResult, type CompilerResult } from './result';
 import type { CompilerPin } from './bake-types';
 import { compileSampledNebula } from '../sampled-prior/compile';
 import { assertCompilerBankIdentity, assertCompilerLensGeometry } from './bank-validation';
+import { readEmissionWindow } from './emission-window';
 export async function validateCompilerResult(root: string, value: unknown) {
   const result = readCompilerResult(value);
   if (result.scene.starSprites) {
@@ -67,6 +68,8 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
   compilerSourceWeights(recipe, plannedObservations.images.map(source => source.id), request.evidence.weights);
   if (recipe.starCatalogue?.sourceIds.some(id => !plannedObservations.images.some(source => source.id === id)))
     throw new TypeError('Compiler star catalogue references an unavailable image.');
+  if (recipe.emissionWindow && !plannedObservations.images.some(source => source.id === recipe.emissionWindow!.sourceId))
+    throw new TypeError('Compiler emission window references an unavailable image.');
   const pipeline = await restoreCompilerInputs(root, recipe, signal, progress);
   if (recipe.sampledRecipe) return compileSampledNebula(root, request, recipe, pipeline, signal, progress);
   const observations = readObservations(JSON.parse(await readFile(resolve(root, recipe.observationCatalogue), 'utf8')));
@@ -90,7 +93,12 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
   if (observedStarsBytes && geometrySha(observedStarsBytes) !== recipe.observedStars!.sha256) throw new TypeError('Observed stellar source changed.');
   const sourceData = await loadCompilerImages(root, recipe.observationCatalogue, request, center);
   const source = sourceData.images.find(s => s.id === recipe.defaultSourceId); if (!source) throw new TypeError('Default compiler lens is unavailable.');
-  const target = compilerTarget(inputs, weights, tangentOffsetWestNorth(observations.frame.centerIcrsDegrees, center), recipe.targetControls);
+  const windowSource = recipe.emissionWindow && sourceData.images.find(image => image.id === recipe.emissionWindow!.sourceId);
+  const emissionWindow = windowSource ? readEmissionWindow({ ...recipe.emissionWindow,
+    polygonArcsec: [[0, 0], [windowSource.nativeWidth, 0], [windowSource.nativeWidth, windowSource.nativeHeight], [0, windowSource.nativeHeight]]
+      .map(([x, y]) => windowSource.pixelToSky(x!, y!)),
+    interpretation: 'User-selected display extent from a registered image footprint, feathered inward through all model depths. Source observations remain complete; this is not a measured nebular boundary.' }) : undefined;
+  const target = compilerTarget(inputs, weights, tangentOffsetWestNorth(observations.frame.centerIcrsDegrees, center), recipe.targetControls, emissionWindow);
   const owners = (await readdir(resolve(root, 'labs/nebula/src/reconstruction/compiler'))).filter(name => name.endsWith('.ts') && !name.endsWith('.test.ts')).sort();
   const implementation = await Promise.all(owners.map(async name => ({ name, sha256: geometrySha(await readFile(resolve(root, 'labs/nebula/src/reconstruction/compiler', name))) })));
   const id = geometrySha(JSON.stringify({ version: COMPILER_VERSION, implementation, recipe: geometrySha(recipeBytes), input: inputs.identity,
