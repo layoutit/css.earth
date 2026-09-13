@@ -97,7 +97,7 @@
       {
         "id": "filter-color",
         "label": "Filter color",
-        "description": "Cassini IR3, IR1 and UV3 filters displayed as red, green and blue. Cameras are fitted to controlled clear-frame features; only common coverage is shown.",
+        "description": "Five Cassini pointings in IR3, IR1 and UV3, displayed as red, green and blue. Cameras use measured registration in the published shape frame; complete three-filter footprints are combined.",
         "title": "Cassini filter color",
         "detail": "Cassini",
         "thumbnail": "/scenes/hyperion/hyperion-filter-color-thumbnail.webp",
@@ -108,7 +108,7 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/"
         },
-        "summary": "False color from separately registered filters. Gray grid marks missing common coverage; photographed shadows remain."
+        "summary": "False color from five registered Cassini pointings. Gray grid marks missing common coverage; photographed shadows remain."
       },
       {
         "id": "elevation",

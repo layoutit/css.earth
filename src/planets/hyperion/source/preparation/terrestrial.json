@@ -317,6 +317,74 @@
                 ],
                 "pixelAngleMicroradians": 5.9896977199,
                 "coverageInsetPixels": 3
+              },
+              {
+                "id": "n1506388668",
+                "path": "observations/N1506388668_2_CALIB.IMG",
+                "labelPath": "observations/N1506388668_2_CALIB.LBL",
+                "observerLatitude": 11.070683229813666,
+                "observerWestLongitude": 200.84372670807454,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 252.92577639751553,
+                "rangeKm": 32332.8850931677,
+                "northAzimuthDegrees": 329.4822462392758,
+                "center": [
+                  792.4786696287061,
+                  691.6788143082762
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              },
+              {
+                "id": "n1506388990",
+                "path": "observations/N1506388990_2_CALIB.IMG",
+                "labelPath": "observations/N1506388990_2_CALIB.LBL",
+                "observerLatitude": 11.042248520710059,
+                "observerWestLongitude": 201.1708875739645,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 253.19426035502957,
+                "rangeKm": 30515.53195266272,
+                "northAzimuthDegrees": 329.5234947450581,
+                "center": [
+                  953.4934464258838,
+                  345.8224467220334
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              },
+              {
+                "id": "n1506389328",
+                "path": "observations/N1506389328_2_CALIB.IMG",
+                "labelPath": "observations/N1506389328_2_CALIB.LBL",
+                "observerLatitude": 11.003561643835617,
+                "observerWestLongitude": 201.52027397260275,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 253.47328767123287,
+                "rangeKm": 28607.924657534248,
+                "northAzimuthDegrees": 329.5634989082285,
+                "center": [
+                  789.7293377933214,
+                  -161.29403024713716
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              },
+              {
+                "id": "n1506389683",
+                "path": "observations/N1506389683_2_CALIB.IMG",
+                "labelPath": "observations/N1506389683_2_CALIB.LBL",
+                "observerLatitude": 10.9632,
+                "observerWestLongitude": 201.904,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 253.76760000000002,
+                "rangeKm": 26604.48,
+                "northAzimuthDegrees": 329.62087494941414,
+                "center": [
+                  -48.916573617256965,
+                  -12.833810239141867
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
               }
             ]
           },
@@ -337,6 +405,74 @@
                 "center": [
                   301.8959746449202,
                   700.3018234666115
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              },
+              {
+                "id": "n1506388635",
+                "path": "observations/N1506388635_2_CALIB.IMG",
+                "labelPath": "observations/N1506388635_2_CALIB.LBL",
+                "observerLatitude": 11.072732919254658,
+                "observerWestLongitude": 200.80990683229814,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 252.89810559006213,
+                "rangeKm": 32519.14037267081,
+                "northAzimuthDegrees": 329.4910415666191,
+                "center": [
+                  792.8871649059492,
+                  690.4025771092948
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              },
+              {
+                "id": "n1506388957",
+                "path": "observations/N1506388957_2_CALIB.IMG",
+                "labelPath": "observations/N1506388957_2_CALIB.LBL",
+                "observerLatitude": 11.046153846153846,
+                "observerWestLongitude": 201.1376923076923,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 253.16692307692307,
+                "rangeKm": 30701.776923076923,
+                "northAzimuthDegrees": 329.5175649204647,
+                "center": [
+                  953.3992610943161,
+                  344.4253813097221
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              },
+              {
+                "id": "n1506389295",
+                "path": "observations/N1506389295_2_CALIB.IMG",
+                "labelPath": "observations/N1506389295_2_CALIB.LBL",
+                "observerLatitude": 11.00717808219178,
+                "observerWestLongitude": 201.48501369863015,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 253.44616438356164,
+                "rangeKm": 28794.171232876713,
+                "northAzimuthDegrees": 329.56516603175646,
+                "center": [
+                  789.922718547025,
+                  -162.18577605059454
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              },
+              {
+                "id": "n1506389650",
+                "path": "observations/N1506389650_2_CALIB.IMG",
+                "labelPath": "observations/N1506389650_2_CALIB.LBL",
+                "observerLatitude": 10.96716,
+                "observerWestLongitude": 201.8677,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 253.73988,
+                "rangeKm": 26790.699,
+                "northAzimuthDegrees": 329.62725323434876,
+                "center": [
+                  -47.595707411770555,
+                  -15.19937115345824
                 ],
                 "pixelAngleMicroradians": 5.9896977199,
                 "coverageInsetPixels": 3
@@ -363,6 +499,74 @@
                 ],
                 "pixelAngleMicroradians": 5.9896977199,
                 "coverageInsetPixels": 3
+              },
+              {
+                "id": "n1506388580",
+                "path": "observations/N1506388580_2_CALIB.IMG",
+                "labelPath": "observations/N1506388580_2_CALIB.LBL",
+                "observerLatitude": 11.076149068322982,
+                "observerWestLongitude": 200.7535403726708,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 252.85198757763976,
+                "rangeKm": 32829.56583850932,
+                "northAzimuthDegrees": 329.50170797175787,
+                "center": [
+                  793.8980869955841,
+                  692.6212786245933
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              },
+              {
+                "id": "n1506388902",
+                "path": "observations/N1506388902_2_CALIB.IMG",
+                "labelPath": "observations/N1506388902_2_CALIB.LBL",
+                "observerLatitude": 11.052662721893492,
+                "observerWestLongitude": 201.08236686390535,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 253.12136094674557,
+                "rangeKm": 31012.18520710059,
+                "northAzimuthDegrees": 329.509412067782,
+                "center": [
+                  955.1279771558324,
+                  346.848101519506
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              },
+              {
+                "id": "n1506389240",
+                "path": "observations/N1506389240_2_CALIB.IMG",
+                "labelPath": "observations/N1506389240_2_CALIB.LBL",
+                "observerLatitude": 11.013205479452054,
+                "observerWestLongitude": 201.42624657534247,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 253.4009589041096,
+                "rangeKm": 29104.58219178082,
+                "northAzimuthDegrees": 329.58629748423454,
+                "center": [
+                  791.1168477646188,
+                  -160.6113827963068
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              },
+              {
+                "id": "n1506389595",
+                "path": "observations/N1506389595_2_CALIB.IMG",
+                "labelPath": "observations/N1506389595_2_CALIB.LBL",
+                "observerLatitude": 10.97376,
+                "observerWestLongitude": 201.8072,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 253.69368,
+                "rangeKm": 27101.064,
+                "northAzimuthDegrees": 329.6456926830586,
+                "center": [
+                  -45.627052678994886,
+                  -12.182220178612205
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
               }
             ]
           }
@@ -382,7 +586,7 @@
         "metadata": {
           "label": "Filter color",
           "falseColor": true,
-          "coverage": "Cassini IR3, IR1 and UV3 filters displayed as red, green and blue. Cameras are fitted to controlled clear-frame features; only common coverage is shown.",
+          "coverage": "Five Cassini pointings in IR3, IR1 and UV3, displayed as red, green and blue. Cameras use measured registration in the published shape frame; complete three-filter footprints are combined.",
           "attribution": {
             "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
             "url": "https://pds-rings.seti.org/cassini/iss/"
