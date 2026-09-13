@@ -1,5 +1,7 @@
 import { readCompilerRecipe, readCompilerRequest } from '../reconstruction/compiler/model';
 import { readCompilerResult, type CompilerResult } from '../reconstruction/compiler/result';
+import { sampledOwnerPins } from '../reconstruction/sampled-prior/ownership';
+import { readSampledRecipe, verifySampledEvidence } from '../reconstruction/sampled-prior/model';
 
 interface Pin { path: string; sha256: string }
 interface Published { recipePath: string; result: Pin; inputs: Pin[] }
@@ -37,7 +39,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   const recipeBytes = inputs.find(([path]) => path === recipePath)![1];
   const recipe = readCompilerRecipe(JSON.parse(new TextDecoder().decode(recipeBytes)));
   const required = [recipe.observationRecipe, recipe.observationCatalogue, recipe.structureRecipe, recipe.structureCatalogue,
-    ...(recipe.jointRecipe ? [recipe.jointRecipe] : []), ...(recipe.depthRecipe ? [recipe.depthRecipe] : [])];
+    ...(recipe.jointRecipe ? [recipe.jointRecipe] : []), ...(recipe.depthRecipe ? [recipe.depthRecipe] : []), ...(recipe.sampledRecipe ? [recipe.sampledRecipe] : [])];
   if (required.some(path => !inputs.some(([candidate]) => candidate === path))) throw new Error('Prepared nebula receipt does not pin every configured source.');
   let depthInputs: { recipe: Pin; evidence: Pin } | undefined;
   if (recipe.depthRecipe) {
@@ -59,6 +61,15 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   const method: unknown = JSON.parse(new TextDecoder().decode(await checkedBytes(result.method, fetchLocal)));
   if (!record(method) || method.recipeSha256 !== publication.inputs.find(source => source.path === recipePath)!.sha256 || !Array.isArray(method.implementation))
     throw new Error('Prepared nebula method does not match its current recipe.');
+  if (recipe.sampledRecipe) {
+    for (const owner of sampledOwnerPins(method, recipe.sampledRecipe)) if (!publication.inputs.some(input => input.path === owner.path && input.sha256 === owner.sha256))
+      throw new Error('Prepared spatial model is missing a source or implementation pin.');
+    const sampled = readSampledRecipe(JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.sampledRecipe)![1])));
+    if (sampled.id !== recipe.id || !publication.inputs.some(p => p.path === sampled.source.path && p.sha256 === sampled.source.sha256) ||
+        !publication.inputs.some(p => p.path === sampled.evidence.path && p.sha256 === sampled.evidence.sha256))
+      throw new Error('Prepared spatial model uses different qualified sources.');
+    verifySampledEvidence(sampled, JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === sampled.evidence.path)![1])));
+  }
   if (depthInputs) {
     if (!record(method.physicalDepth)) throw new Error('Prepared nebula method omits the configured depth sources.');
     const recipeSnapshot = pin(method.physicalDepth.recipe), evidenceSnapshot = pin(method.physicalDepth.evidence);

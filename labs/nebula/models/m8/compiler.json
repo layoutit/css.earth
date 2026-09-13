@@ -1,12 +1,27 @@
 {
   "schema": "cssearth-nebula-compiler@1",
   "id": "m8",
-  "label": "Lagoon \u00b7 M8",
-  "observationRecipe": "labs/nebula/models/m8/observations.json",
-  "observationCatalogue": ".local/nebula-lab/observations/m8/observations.json",
-  "structureRecipe": "labs/nebula/models/m8/observation-structures.json",
-  "structureCatalogue": ".local/nebula-lab/observations/m8/structures/catalogue.json",
+  "label": "Lagoon · M8",
+  "observationRecipe": "labs/nebula/models/m8/processing-observations.json",
+  "observationCatalogue": ".local/nebula-lab/observations/m8-processed/observations.json",
+  "structureRecipe": "labs/nebula/models/m8/processing-structures.json",
+  "structureCatalogue": ".local/nebula-lab/observations/m8-processed/structures/catalogue.json",
   "defaultSourceId": "eso-optical",
   "maximumStars": 650,
-  "interpretation": "Experimental relative display-emission fit to registered optical and near-infrared outreach composites. This is not calibrated luminosity, gas density, or a measured 3D reconstruction. Depth has a declared unconstrained diffuse prior; no planetary expansion or Helix velocity scaffold is transferred. Shared geometry is painted by separate source lenses. Compact lights retain observed image positions but have illustrative sampled depths and unconfirmed membership."
+  "starCatalogue": {
+    "sourceIds": ["eso-optical", "eso-vista"],
+    "mergeRadiusArcsec": 3
+  },
+  "interpretation": "Relative display emission on one authored coherent front, with locally paper-guided topology. Foreground extinction, separate molecular clouds and unknown front/back distances are not reconstructed. Shared RGB lenses and image-detected compact lights retain one geometry; no gas velocity is converted to depth.",
+  "depthRecipe": "labs/nebula/models/m8/depth-model.json",
+  "defaultControls": {
+    "detail": 0.9,
+    "faint": 0.15,
+    "depth": 1
+  },
+  "sourceWeights": {
+    "eso-optical": 1,
+    "eso-vista": 0.15,
+    "spitzer-mid-infrared": 0.8
+  }
 }

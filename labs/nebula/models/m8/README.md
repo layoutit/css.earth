@@ -1,10 +1,43 @@
 # Lagoon · M8
 
+The selected optical, near-infrared and mid-infrared images now have verified native star separation and a completed shared 3D cloud. The geometry uses a paper-guided local PDR interpretation with explicitly authored depth across the wider field. It is relative display emission, not recovered gas or dust density.
+
+## Current processing · 2026-09-13
+
+Current local result: `5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8`.
+
+- Three full native lenses: ESO optical (4000 × 2679), VISTA (4000 × 2202), and [Spitzer IRAC/MIPS](https://www.spitzer.caltech.edu/image/sig11-012-into-the-depths-of-the-lagoon-nebula) (1757 × 1417). Their unchanged source footprints share a north-up 129′ frame.
+- Held-out relative star RMS: VISTA 0.758″ and Spitzer approximately 1.00″, across all four common-footprint quadrants. Absolute sky calibration still relies on publisher astrometry.
+- Native NOX completed for all three. The two exact ESO results were reused; Spitzer ran 20 native tiles. Every original RGB value equals diffuse plus residual, and residual masks and artifact hashes pass.
+- The final bounded bake has 444 finite emission supports and 650 shared compact lights. Three lens banks preserve the exact geometry and all 51,852,357 compared decoded alpha values.
+- Compact lights now join actual optical and VISTA residual detections in registered sky coordinates: 461 optical anchors and 189 VISTA anchors. Matches within the explicit 3″ tolerance keep the optical position. Each lens retains its measured aperture light; missing residual or coverage emits zero. A source-relative 99th-percentile energy scale affects selection only, preserving the 650-light budget without treating differently stretched RGB images as calibrated flux.
+- Saved Detail/Faint emission/Depth settings are 90%/15%/1×. Optical/VISTA/Spitzer fit weights are 1/0.15/0.8. These authored reliability choices reduce the influence of VISTA's crowded residual texture; all three full source footprints and lenses remain intact.
+- Relative projected RMSE is 0.02828 against a zero-emission baseline of 0.21470; missing signal is 7.84% and excess is 9.26%. These describe the normalized display target, not physical accuracy. Changing source weights changes the target, so earlier error scores are not matched comparisons.
+- Real Chromium inspection of the current result passed direct load, all three lenses, retained orbit pose, both side axes, star/original toggles and refresh, with zero processing requests or JavaScript errors. The original three-bake geometry budget is complete; the later missing-star correction used two bounded rounds without changing the cloud fit.
+
+[Processing evidence](processing-evidence.json) binds the result and native checks. [Physical sources](physical-sources.json) pin seven complete primary-paper PDFs and retain 37 published molecular velocity pointings, with missing errors and corrected telescope positions explicit. [Method and source assessment](physical-structure.md) explains why the local PDR interpretation was selected.
+
+The earlier per-lens alpha integration result `4a4fb45ad70327ae842a07780ee3865b4548ddd136d7a36b0bbec60e2a0e4482` was byte-equivalent to inspected result `60cf5ab024377e2de9e4e36e1416d4fb1481011339a1a8b65739d8ee28150bf1`. The subsequent star corrections also preserve all 3,464 cloud bank resources (13,161,734 bytes), numerical field, geometry, alpha, source panels and metrics. The original front/oblique/side receipt and screenshots remain unchanged in `output/m8-reconstruction/browser-final/`; their cloud assessment still applies. Stellar selection and aperture ownership changed, so current star evidence comes from the fresh `output/nebula-processing/m8-stars-union-browser/` inspection, not those historical captures.
+
+The missing-interior-star investigation found two preparation causes. A 6,000 sharp-peak cutoff discarded broad bright residual sources before aperture ranking; removing it raised central-region selection from 68 to 117 lights. An optical-only catalogue still omitted bright VISTA sources. The registered union raises that same region to 158 lights, with 131 positive optical and 145 positive VISTA appearances. Of the 100 brightest independently measured VISTA core residual maxima, 83 now have a selected point within 3″, versus 10 before the union. This is a coverage diagnostic, not a stellar identification or completeness estimate. Native optical/VISTA crops and exact detector positions verify the two highlighted infrared restorations. The 15 targeted tests pass; removing the early-cutoff fix, union, deduplication or exposure normalization causes its corresponding regression to fail.
+
+## Known problems
+
+The literature constrains only small local regions: 3 of 444 supports meet the recipe's local paper-guidance threshold; the other 441 are authored. One surface cannot reproduce the distinct absorbing foreground veil, overlapping molecular layers or scattering. Gas velocities are not converted to depth. HST detail fields remain unverified and excluded; the zero-filled central Herschel field remains excluded.
+
+The VISTA source retains crowded-field texture and broad stellar halos after NOX. Compact nebular knots can enter the residual. Narrow HH features are below this wide-field bake's useful detail. Spitzer and VISTA cover less sky than the optical source; uncovered cloud texels retain neutral material, and missing coverage does not mean absent material. Compact lights have observed projected positions and conditional model depths, not measured membership or distance.
+
+The 650-light budget selects from 76,178 merged residual candidates, so faint and some bright sources remain omitted; 17 of the diagnostic VISTA top 100 remain unmatched within 3″. Saturated or broad halos can produce several residual maxima outside that tolerance. One previously selected broad optical peak is replaced in the budget by nearby measured VISTA maxima 6.23″ and 8.10″ away; these are not qualified separate stellar identities or a repaired stellar centroid. No broad mask, invented infrared membership, astrometric shift or photometric boost conceals that limitation. Spitzer supplies per-lens light but is not a detection source.
+
+Visual quality remains limited: peripheral residual blobs persist, the oblique/side views expose a thin curved layer with visible slice/grid banding, and the infrared color-to-neutral footprint boundaries are sharp. The broad fit smooths fine native filaments and knots. These are recorded failures of visual fidelity, despite passing preparation and interaction checks. A clean-cache NOX replay and quantitative axis-handoff continuity check were not run.
+
+The earlier two-source recipes and native caches remain available unchanged. Current processing uses [processing-observations.json](processing-observations.json), [processing-structures.json](processing-structures.json), [depth-model.json](depth-model.json), and the updated [compiler.json](compiler.json). The complete six-candidate catalogue remains separate in [alignment-candidates.json](alignment-candidates.json).
+
 Current Alignment selection: **ESO optical, ESO VISTA and Spitzer**. These retain the existing passing relative-star transforms (held-out RMS ≈0.76″ and 1.00″). Hubble close-ups remain documented but hidden until their small core fields can be independently matched. Herschel is hidden: its paired FITS array is zero-filled across a 6′ patch around both the Hubble and Spitzer central coordinates. This is missing support, not absence of nebular material.
 
 Asymmetric H II region and star-forming nebula.
 
-## Sources
+## Original two-source batch · 2026-09-12
 
 This first comparison batch pins the official ESO **Publication TIFF 4K** variants, downloaded unchanged on 2026-09-12. These retain each master image’s full footprint; no local resizing or cropping was used. Native star removal runs on the selected TIFF’s actual pixel grid. Larger publisher masters remain available for a later quality comparison.
 
@@ -28,7 +61,7 @@ ESO imagery is distributed under [CC BY 4.0 with the full credit retained](https
 - `compiler.json` configures the generic relative-emission compiler. No Helix joint-fit recipe or planetary expansion prior is reused.
 - Images and all derived outputs live in the ignored local cache. The checked-in recipes restore the pinned sources. Alignment must pass held-out field-star checks before native removal/reconstruction.
 
-## Interpretation and current evidence
+## Historical source qualification
 
 The optical mosaic is wider than the VISTA strip. Missing infrared support at the northern/southern optical margins is no-data, not absent gas. The VISTA caption gives J/H/Ks; its filter table and AVM incorrectly identify H as H-alpha. The recipe documents the discrepancy rather than treating this as infrared H-alpha.
 
@@ -40,7 +73,7 @@ See [the completed batch assessment and current failures](../inference-candidate
 
 ## Separate alignment intake · 2026-09-13
 
-[alignment-candidates.json](alignment-candidates.json) defines the isolated `m8-alignment` source set. It preserves the two ESO source pins above and adds four spectral views. The original `observations.json`, `compiler.json` and accepted processing caches remain unchanged. This intake authorizes source inspection and alignment only.
+[alignment-candidates.json](alignment-candidates.json) defines the isolated `m8-alignment` source set. It preserves the two ESO source pins above and adds four spectral views. At that intake, the original `observations.json`, `compiler.json` and accepted processing caches were unchanged. The current processing section above supersedes the intake-only status for the three selected sources.
 
 | Candidate | Native downloaded grid | Complete source footprint | Role |
 |---|---|---|---|

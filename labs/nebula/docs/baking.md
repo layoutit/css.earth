@@ -2,6 +2,22 @@
 
 Requires **Node 22, pnpm 10.33.0 and Python 3.9–3.12** with `venv`/`pip`, plus internet access and free disk space for the native images, Python environment and results. The pinned TensorFlow release needs a wheel for your OS/CPU. The [clean-install verification](clean-install-verification.md) records the platform actually tested; it is not a claim that every platform produces identical bytes.
 
+## Prepare the processing environment
+
+From the repository root in a clean checkout, this complete setup prepares the prerequisites for `prepare-observations` and `compile-nebula`. For a new environment, `python3` on `PATH` must be Python 3.9–3.12 with `venv` and `pip` available.
+
+```sh
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm build:packages
+node --experimental-strip-types labs/nebula/src/run.ts prepare-processing-environment
+```
+
+The environment command reads the canonical Python/package and NOX model pins from `models/lmc/bake.json`, creates or verifies `.local/open-star-removal/venv`, and downloads only a missing model. Success requires **`ENVIRONMENT_READY pinned Python packages and NOX model`** followed by **`NOX_MODEL_VERIFIED`** with its SHA-256. A ready environment is reused without reinstalling packages; an altered model fails while preserving its existing bytes. This command prepares no object images, density fields or baked assets.
+
+Use `--python=/absolute/path/to/venv/bin/python` to verify an existing environment without modifying its packages. The same pinned model is still required. The environment-only command was verified against the existing macOS environment on 2026-09-13; this check is not a new clean-cache installation test.
+
+## Rebuild the saved LMC batch
+
 From a new temporary clone, run this complete sequence. It targets the PR branch while the change awaits merge:
 
 ```sh

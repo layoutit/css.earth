@@ -1,6 +1,6 @@
 {
   "objectId": "m1",
-  "summary": "Six selected Alignment images; these Crab Nebula views compare optical line emission, near/mid-infrared components, radio synchrotron and the X-ray pulsar wind on a shared sky frame. Different epochs, passbands and resolutions produce real morphological differences; alignment must not erase expansion or force different emission mechanisms into agreement.",
+  "summary": "Six registered spectral views compare optical ejecta, infrared dust/lines/synchrotron, radio emission and the inner X-ray pulsar wind. Their fixed 3D components are selected from qualified SITELLE samples and a published torus interpretation. Registration preserves source epochs and distinct emission mechanisms.",
   "images": [
     {
       "id": "hubble-optical",
@@ -13,7 +13,7 @@
       "masterUrl": "https://esahubble.org/media/archives/images/original/heic0515a.tif",
       "notes": [
         "Eight-field observation interval is documented in Dubner et al. §V: https://arxiv.org/html/1704.02968v1",
-        "Publisher AVM has a full TAN solution attributed to NASA/Hubble. Field-star residuals must establish independent registration quality."
+        "Publisher sky anchor corroborated by 52 automatic Webb stellar identities; no independent absolute catalogue calibration. Full native NOX is prepared."
       ],
       "alignmentSelection": "selected"
     },
@@ -30,7 +30,8 @@
         "Program 1714 and imaging epochs: https://arxiv.org/html/2406.00172v1",
         "AVM quality is Position, not Full: complete numerical WCS is supplied, but publisher accuracy remains provisional.",
         "Master grid is 10509 × 9151; preserve its AVM reference pixels when using the 4000 × 3483 derivative.",
-        "Publisher PAH/silicate band labels are not evidence of pure PAH or silicate emission."
+        "Publisher PAH/silicate band labels are not evidence of pure PAH or silicate emission.",
+        "52 automatic compact stellar identities pass unchanged held-out gates at 0.135 arcsec RMS. Full native NOX is prepared; original AVM metadata remains preserved."
       ],
       "alignmentSelection": "selected"
     },
@@ -39,13 +40,13 @@
       "provider": "ESA/Webb",
       "telescope": "James Webb / NIRCam + MIRI",
       "wavelengths": "Derived infrared components · 4.8 / 18 / 21 µm",
-      "coverage": "Main remnant, 5.33′ × 4.62′; tight crop. No faint northern-jet coverage.",
+      "coverage": "Main remnant, approximately 5.47′ × 4.75′ after explicit stellar scale calibration; original AVM states 5.33′ × 4.62′. Tight crop; no faint northern-jet coverage.",
       "quality": "Derived component display: synchrotron blue, sulfur green, dust magenta. Shares Webb observations with the infrared composite; not independent evidence or a dust-density map.",
       "epoch": "Same program: NIRCam 2022-10-31; MIRI 2023-02-24. Released 2024-06-17.",
       "masterUrl": "https://esawebb.org/media/archives/images/original/weic2417a.tif",
       "notes": [
-        "Full TAN AVM retained; component subtraction makes field-star matching unsuitable as a required registration test.",
-        "Component isolation depends on subtraction and PSF matching: https://arxiv.org/html/2406.00172v1"
+        "Component isolation depends on subtraction and PSF matching: https://arxiv.org/html/2406.00172v1",
+        "70 visually inspected native stellar identities pass at 0.152 arcsec held-out RMS after a separately pinned +2.67 percent scale calibration. Original AVM remains unchanged. Compact component emission is preserved with zero stellar residual."
       ],
       "alignmentSelection": "selected"
     },
@@ -61,7 +62,8 @@
       "notes": [
         "Selected ESA/Hubble release omits instrument/filter tags. MIPS and 24 µm come from the linked CXC companion TIFF AVM, not a measured spectrum: https://chandra.harvard.edu/photo/2017/crab/more.html",
         "Treat line emission, synchrotron and dust as possible contributors; infrared brightness alone is not dust mass.",
-        "Full TAN publisher WCS retained without fitting the nebular structure."
+        "Full TAN publisher WCS retained without fitting the nebular structure.",
+        "Same 5290-square publisher grid transferred through the optical Hubble 2017 bridge: 129 inspected bridge stars, 0.146 arcsec held-out RMS. This band has zero independent star matches. Native emission is preserved."
       ],
       "alignmentSelection": "selected"
     },
@@ -77,7 +79,8 @@
       "notes": [
         "Parent map combines S-band data with an expanded, spectrally scaled older template; an additional high-pass version exists: https://arxiv.org/html/1704.02968v1",
         "Not a flux-calibrated TIFF. Do not interpret a narrow display pixel or missing smooth emission as instrumental resolution or physical absence.",
-        "Full TAN publisher WCS retained; radio wisps must not be forced onto optical features."
+        "Full TAN publisher WCS retained; radio wisps must not be forced onto optical features.",
+        "Same publisher grid transferred through the 129-star optical bridge. Radio knots are never classified as field stars; native emission is preserved with zero residual. Interband publisher calibration remains a limitation."
       ],
       "alignmentSelection": "selected"
     },
@@ -94,7 +97,8 @@
         "Epoch range and ACIS attribution: https://chandra.harvard.edu/photo/2017/crab/",
         "CXC AVM central wavelength 0.8267 nm is a representative display tag, not an energy-band definition.",
         "The companion paper’s near-contemporaneous 2012 exposure must not be substituted for the release stack epoch.",
-        "Full TAN publisher WCS retained; compact torus morphology is not a field-star registration reference."
+        "Full TAN publisher WCS retained; compact torus morphology is not a field-star registration reference.",
+        "Same publisher grid transferred through the 129-star optical bridge. The torus and jets remain native nonstellar emission with zero residual; the 3D Chandra lens uses a separate inner-wind component."
       ],
       "alignmentSelection": "selected"
     }
@@ -125,7 +129,7 @@
       "title": "Martin, Milisavljevic & Drissen — 3D mapping of the Crab Nebula with SITELLE – I. Deconvolution and kinematic reconstruction",
       "url": "https://doi.org/10.1093/mnras/staa4046",
       "year": 2021,
-      "access": "Open journal article; author manuscript at https://arxiv.org/abs/2101.02709. No spectral cube acquired for this Alignment intake.",
+      "access": "Open paper and full author PDF acquired. The released 416,573-point flux and paired velocity arrays, deep image, notebook and repository licence were downloaded, hashed and inspected; the original full spectral cube was not acquired.",
       "constraints": [
         "Hα, [N II] and [S II] Doppler components constrain emitting gas. Depth follows an assumed expansion relation, not image brightness.",
         "Uniform global expansion is a model approximation; the ejecta envelope is not adequately represented by a simple ellipsoid."
@@ -151,6 +155,54 @@
         "Line-of-sight distance depends on expansion and assumed distance; source selection and flux thresholds affect the displayed structure.",
         "The faint northern ejecta jet is different from the inner X-ray pulsar jet and is not fully covered by the selected tight optical/Webb mosaics."
       ]
+    },
+    {
+      "title": "Ng & Romani — Fitting Pulsar Wind Tori",
+      "url": "https://arxiv.org/abs/astro-ph/0310155",
+      "year": 2004,
+      "access": "Full author PDF acquired and Table 1 visually inspected.",
+      "constraints": [
+        "Selected inner and outer torus radii 15.60 and 41.33 arcsec; axis inclinations 61.3 and 63.03 degrees, PA 124.0 and 126.31 degrees east of north.",
+        "Gaussian widths were fixed in the published fits. Our finite jet extents and component brightnesses remain authored; relativistic beaming is not solved."
+      ]
+    },
+    {
+      "title": "Ng & Romani — Fitting Pulsar Wind Tori II",
+      "url": "https://arxiv.org/abs/0710.4168",
+      "year": 2008,
+      "access": "Full author PDF acquired; systematic uncertainty context inspected.",
+      "constraints": [
+        "Small formal torus-fit errors do not capture every geometry or emissivity uncertainty. The selected baseline remains the coherent 2004 inner/outer pair."
+      ]
+    },
+    {
+      "title": "Weisskopf et al. — Unraveling the Geometry of the Crab Nebula Inner Ring",
+      "url": "https://arxiv.org/abs/1109.2868",
+      "year": 2012,
+      "access": "Full author PDF acquired; Tables 1–3 visually inspected.",
+      "constraints": [
+        "Alternative offset ring: peak radius 13.25±0.26 arcsec and axial offset 1.04±0.13 arcsec. This interpretation is retained separately, not averaged into the chosen torus pair.",
+        "An observed ellipse and its offset do not establish a unique three-dimensional flow."
+      ]
+    },
+    {
+      "title": "Kaplan et al. — A Precise Proper Motion for the Crab Pulsar",
+      "url": "https://arxiv.org/abs/0801.1142",
+      "year": 2008,
+      "access": "Full author PDF acquired; ICRS position and reference-frame caveats inspected.",
+      "constraints": [
+        "Use actual pulsar astrometry, not an image brightness centroid or a radio pointing centre. The rendered compact light retains its catalogue sky position; internal depth is authored."
+      ]
+    },
+    {
+      "title": "Lin et al. — The Radio Parallax of the Crab Pulsar",
+      "url": "https://arxiv.org/abs/2306.01617",
+      "year": 2023,
+      "access": "Full author PDF acquired; VLBI observing setup and astrometric results inspected.",
+      "constraints": [
+        "VLBI parallax 0.53±0.06 mas corresponds to 1.90 +0.22/−0.18 kpc, consistent with the selected original 2 kpc ejecta conversion.",
+        "Paper pointing centres are not measured astrometric source positions."
+      ]
     }
   ],
   "selection": {
@@ -163,6 +215,6 @@
       "vla-radio",
       "chandra-xray"
     ],
-    "reason": "All six spectral views remain available for inspection in the publisher sky frame. Stellar matching has not independently verified their registration; radio, X-ray and derived component maps need suitable astrometric evidence rather than matching optical emission features."
+    "reason": "All six original spectral views remain available. Optical/Webb images have direct stellar registration, with an explicit calibrated prior for the component map. Spitzer, radio and X-rays inherit the documented publisher grid through a verified optical bridge; their compact emission is preserved and never used as fake stellar matches."
   }
 }

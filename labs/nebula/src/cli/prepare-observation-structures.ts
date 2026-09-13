@@ -15,11 +15,11 @@ await mkdir(directory, { recursive: true });
 const implementation = await Promise.all(['cli/prepare-observation-structures.ts', 'reconstruction/emission-inference/observation-structure-source.ts',
   'reconstruction/emission-inference/structure-inspection.ts', 'reconstruction/emission-inference/structure-atlas.ts',
   'reconstruction/emission-inference/structure-map.ts', 'reconstruction/structure-wavelets.ts',
-  'reconstruction/emission-inference/native-source.ts', 'alignment/observations/registration.ts'].map(async path =>
+  'reconstruction/emission-inference/native-source.ts', 'reconstruction/emission-inference/native-preserved.ts', 'alignment/observations/registration-transfer.ts', 'alignment/observations/recipe.ts', 'alignment/observations/registration.ts'].map(async path =>
   ({ path: `labs/nebula/src/${path}`, sha256: sha(await readFile(`labs/nebula/src/${path}`)) })));
 const images = [], started = performance.now();
 for (const image of inputs.observations.images) {
-  console.log(`OBSERVATION_STRUCTURE_SOURCE ${image.id}; cached native NOX only`);
+  console.log(`OBSERVATION_STRUCTURE_SOURCE ${image.id}; cached native ${image.source.stellarTreatment === 'preserve' ? 'preserved map' : 'NOX'} only`);
   const input = await loadObservationDiffuse(inputs.recipe, image, config.workingWidth);
   const analysisIdentity = { recipeSha256: sha(recipeBytes), observationRecipeSha256: inputs.observationRecipeSha256,
     catalogueSha256: inputs.catalogueSha256, sourceSha256: input.source.sha256, nativeDiffuseSha256: input.native.diffuseSha256,
@@ -36,7 +36,7 @@ for (const image of inputs.observations.images) {
     workingImageToFrame: workingRasterToFrame(image.imageToFrame, input.source.width, input.source.height, input.width, input.height),
     source: { ...input.source, path: input.sourcePath, nativeRemoval: input.native },
     analysisIdentity, analysisSha256,
-    warnings: ['NOX left some bright stellar cores/halos; compact nebular knots may also enter the stellar residual.',
+    warnings: [input.source.stellarTreatment === 'preserve' ? 'Star removal is not applicable: compact structural emission and any foreground stars remain; residual is identically zero.' : 'NOX left some bright stellar cores/halos; compact nebular knots may also enter the stellar residual.',
       'These are projected display-image candidates, not a nebular density field, measured emission-line flux, or recovered 3D shapes.',
       'Region masks from different scales overlap; selecting a candidate does not assign shared depth or physical membership.',
       'The full downloaded frame is retained. Coverage remains limited to the original observation.'] };

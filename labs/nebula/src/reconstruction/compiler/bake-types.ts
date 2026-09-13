@@ -8,6 +8,8 @@ export interface CompilerLensVolume {
   id: string;
   label: string;
   volume: CompilerPin;
+  /** Explicit emission support for a physical component mixture; RGB-only lenses use the scene alpha. */
+  alphaSha256?: string;
   coverage: { positiveAlphaTexels: number; recoloredTexels: number; outsideImageTexels: number };
 }
 export interface CompilerStarMaterial { rgb: [number, number, number]; diameterUnits: number; alpha: number }
@@ -115,6 +117,7 @@ export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
     if (!record(item)) throw new TypeError('Invalid compiler lens volume.');
     const coverage = item.coverage;
     if (!safeId(item.id) || lensIds.has(item.id) || typeof item.label !== 'string' || !item.label.trim() || !pin(item.volume) || !record(coverage) ||
+        (item.alphaSha256 !== undefined && (typeof item.alphaSha256 !== 'string' || !/^[a-f0-9]{64}$/.test(item.alphaSha256))) ||
         !['positiveAlphaTexels', 'recoloredTexels', 'outsideImageTexels'].every(k => Number.isInteger(coverage[k]) && Number(coverage[k]) >= 0))
       throw new TypeError('Invalid compiler lens volume.');
     lensIds.add(item.id);

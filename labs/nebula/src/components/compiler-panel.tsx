@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { adjustedMatrix, imageCorners, readObservations, savedObservationFit, unchanged, type Observations } from '../alignment/observations-ui/model';
 import { readStructureCatalogue, type StructureCatalogue } from '../alignment/observations-ui/structures-model';
 import { readFusionSettings } from '../reconstruction/evidence-fusion/jobs-model';
-import { defaultCompilerControls, readCompilerControls, type CompilerControls, type CompilerRequest } from '../reconstruction/compiler/model';
+import { defaultCompilerControls, compilerControlsForRecipe, readCompilerRecipe, readCompilerControls, type CompilerControls, type CompilerRequest } from '../reconstruction/compiler/model';
 import { localFile } from '../viewer/viewer';
 import { earthCloudView, type CloudView } from './shape-cloud-stage';
 import { CompilerStage } from './compiler-stage';
@@ -38,10 +38,15 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
   const [catalogue, setCatalogue] = useState<StructureCatalogue | null>(null), [observations, setObservations] = useState<Observations | null>(null);
   const [inputsReady, setInputsReady] = useState(false);
   const [host, setHost] = useState<Element | null>(null), [sourceStatus, setSourceStatus] = useState('');
-  const [controls, setControls] = useState<CompilerControls>(() => {
+  const [initialControls] = useState<CompilerControls | null>(() => {
     try { return readCompilerControls(JSON.parse(localStorage.getItem(`${storageKey}:controls`) ?? 'null')); }
-    catch { return { ...defaultCompilerControls }; }
+    catch { return null; }
   });
+  const controlsChosen = useRef(initialControls !== null);
+  const [controls, setControls] = useState<CompilerControls>(initialControls ?? { ...defaultCompilerControls });
+  const [fixedGeometry, setFixedGeometry] = useState<boolean | null>(null);
+  const [configuredWeights, setConfiguredWeights] = useState<Record<string, number>>({});
+  const [recipeError, setRecipeError] = useState('');
   const [presentation, setPresentation] = useState(() => savedPresentation(`${storageKey}:view`));
   const [storageError, setStorageError] = useState('');
   useEffect(() => { setHost(document.querySelector('.workspace-content')); }, []);
@@ -52,15 +57,25 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
       if (!response.ok) throw new Error(`Prepared source metadata unavailable (${response.status}).`);
       return response.json();
     }
-    void Promise.allSettled([load(cataloguePath).then(readStructureCatalogue), observationManifest ? load(observationManifest).then(readObservations) : Promise.resolve(null)]).then(([structures, manifest]) => {
+    void Promise.allSettled([load(cataloguePath).then(readStructureCatalogue), observationManifest ? load(observationManifest).then(readObservations) : Promise.resolve(null),
+      load(recipePath).then(readCompilerRecipe)]).then(([structures, manifest, configured]) => {
       if (controller.signal.aborted) return;
+      if (configured.status === 'rejected') {
+        setRecipeError(configured.reason instanceof Error ? configured.reason.message : 'Compiler recipe unavailable.');
+        return;
+      }
+      const sampled = Boolean(configured.value.sampledRecipe);
+      setFixedGeometry(sampled);
+      // Sampled geometry has no editable fit controls. Preserve saved fit controls for the standard operator.
+      if (sampled || !controlsChosen.current) setControls(compilerControlsForRecipe(configured.value));
+      setConfiguredWeights(configured.value.sourceWeights ?? {});
       if (structures.status === 'fulfilled') setCatalogue(structures.value);
       if (manifest.status === 'fulfilled') setObservations(manifest.value);
       if (structures.status === 'rejected' && manifest.status === 'rejected') setSourceStatus('Compile restores missing prepared sources.');
       setInputsReady(true);
     });
     return () => controller.abort();
-  }, [cataloguePath, observationManifest]);
+  }, [cataloguePath, observationManifest, recipePath]);
   const registration = useMemo(() => {
     if (catalogue) return { frame: catalogue.frame, images: catalogue.images.map(image => ({ id: image.id, imageToFrame: image.imageToFrame,
       source: { width: image.nativeWidth, height: image.nativeHeight, sha256: image.sourceSha256 } })) };
@@ -84,22 +99,29 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
       const key = `nebula:joint-evidence:1:${cataloguePath}:${JSON.stringify(catalogue.images.map(image => [image.id, image.sourceSha256, image.mapSha256, matrices[image.id]]))}`;
       try {
         const value = readFusionSettings(JSON.parse(localStorage.getItem(key) ?? 'null'));
-        if (value.weights.length === catalogue.images.length) return { sensitivity: value.sensitivity, weights: value.weights };
+        if (value.weights.length === catalogue.images.length) {
+          // The untouched diagnostic defaults do not override a sampled model's component weights.
+          if (fixedGeometry && value.sensitivity === 1 && value.weights.every(weight => weight === 1)) return { sensitivity: 1, weights: [] };
+          return { sensitivity: value.sensitivity, weights: value.weights };
+        }
       } catch { /* Missing diagnostic edits leave the server's source defaults intact. */ }
     }
     return { sensitivity: 1, weights: [] };
-  }, [catalogue, cataloguePath, matrices]);
+  }, [catalogue, cataloguePath, matrices, fixedGeometry]);
   const request = useMemo<CompilerRequest>(() => ({ action: 'apply', imageId: 'compiler', recipePath, cataloguePath, imageToFrame: matrices,
     evidence, controls }), [recipePath, cataloguePath, matrices, evidence, controls]);
   const hasInspectionEdits = Boolean(registration?.images.some(image => {
     const actual = matrices[image.id]; return actual?.some((value, index) => Math.abs(value - image.imageToFrame[index]!) > 1e-10);
-  })) || evidence.sensitivity !== 1 || evidence.weights.some(weight => weight !== 1);
+  })) || evidence.sensitivity !== 1 || evidence.weights.some((weight, index) =>
+    weight !== (configuredWeights[catalogue?.images[index]?.id ?? ''] ?? 1));
   const state = useCompiler(request, storageKey, inputsReady, hasInspectionEdits ? undefined : publishedPath), { result } = state;
   const inspectionFrame: CompilerInspectionFrame | undefined = result?.inspectionBoundsArcsec
     ? { boundsArcsec: result.inspectionBoundsArcsec, paddingPixels: 18 } : liveInspectionFrame;
   const source = result?.sources.find(item => item.id === (presentation.lensId ?? result.defaultSourceId)) ?? result?.sources[0];
-  const message = state.error || state.storageError || storageError || state.status;
+  const message = recipeError || state.error || state.storageError || storageError || state.status;
   function updateControls(value: CompilerControls) {
+    if (fixedGeometry !== false) return;
+    controlsChosen.current = true;
     const checked = readCompilerControls(value); setControls(checked);
     try { localStorage.setItem(`${storageKey}:controls`, JSON.stringify(checked)); setStorageError(''); }
     catch { setStorageError('Session only · controls are not saved'); }
@@ -110,9 +132,10 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
     catch { setStorageError('Session only · view is not saved'); }
   }, [storageKey]);
   const onView = useCallback((view: CloudView) => updatePresentation({ ...presentation, view }), [presentation, updatePresentation]);
-  const error = Boolean(state.error || state.storageError || storageError);
+  const error = Boolean(recipeError || state.error || state.storageError || storageError);
   return <fieldset className="compiler-controls" data-result-id={result?.id ?? ''} data-job-id={state.job?.id ?? ''}
-    data-job-status={state.job?.status ?? ''} data-busy={state.busy}>
+    data-job-status={state.job?.status ?? ''} data-busy={state.busy}
+    data-compiler-operator={fixedGeometry === null ? 'loading' : fixedGeometry ? 'sampled-prior' : 'emission-fit'}>
     <legend>Nebula compiler</legend>
     <div className="compiler-actions">
       <button type="button" className="compiler-primary" disabled={state.busy} onClick={state.error ? state.retry : state.compile}>
@@ -124,7 +147,8 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
       <progress aria-label="Nebula compilation progress" hidden={!state.busy} max={state.job?.progress?.total || 1}
         value={state.job?.progress ? state.job.progress.current : undefined} />
     </div>
-    {result && <CompilerPipeline result={result} busy={state.busy} />}
+    {result && <CompilerPipeline result={result} busy={state.busy} fixedGeometry={fixedGeometry === true} />}
+    {fixedGeometry === false && <>
     <CompilerSlider id="compiler-detail" label="Detail" value={controls.detail} min={0} max={1} step={.05} display={`${Math.round(controls.detail * 100)}%`}
       title="Retain more prepared small-scale image structure in the inferred cloud." onChange={detail => updateControls({ ...controls, detail })} />
     <CompilerSlider id="compiler-faint" label="Faint emission" value={controls.faint} min={0} max={1} step={.05} display={`${Math.round(controls.faint * 100)}%`}
@@ -132,6 +156,8 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
     <CompilerSlider id="compiler-depth" label="Depth" value={controls.depth} min={.5} max={2} step={.05} display={`${controls.depth.toFixed(2)}×`}
       title="Scale the inferred line-of-sight extent. This remains a model assumption." onChange={depth => updateControls({ ...controls, depth })} />
     <p className="compiler-auto-note" title={sourceStatus || 'After the first completed compile, changes update automatically. Processing survives refresh.'}>{result ? 'Controls update automatically' : 'Prepared sources restored on compile'}</p>
+    </>}
+    {fixedGeometry && <p className="compiler-auto-note" title="Depth and component weights are fixed by the qualified model. Detail, faint-emission and depth refits are unavailable.">Fixed reconstructed geometry</p>}
     <label className="field-label" htmlFor="compiler-lens">Lens</label>
     <select id="compiler-lens" value={source?.id ?? ''} disabled={!result} onChange={event => updatePresentation({ ...presentation, lensId: event.target.value })}>
       {!result && <option value="">Available after compilation</option>}
