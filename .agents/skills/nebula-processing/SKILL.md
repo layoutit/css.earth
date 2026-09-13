@@ -33,6 +33,7 @@ The app supports density-based LMC/SMC work, the M2–9 symmetry experiment and 
 - Keep executable method/parameter choices in a separate recipe. Pin its ledger, selected method/evidence IDs and every authored setting. Shared TypeScript owns validation and algorithms; object data owns all target-specific values. Changing evidence must change the affected fit identity.
 - Register constraints to the common image frame. Small core maps cannot constrain an entire complex; label unsupported regions and do not infer depth from image intensity or directly from velocity. Retain competing literature interpretations and explicit tracer-to-model mappings.
 - Released XYZ tables also require qualification: inspect units, array ordering, observer side and the original WCS/velocity products before accepting a transform. Use the sampled-volume operator for qualified spatial points; keep analytic wind/jet terms and per-tracer component weights explicit. Different spectral tracers need not share the same emission alpha, even when their spatial frame is identical.
+- A measured component may leave real image emission unexplained. Inspect the residual rather than treating the spatial table as a complete object. When supported, preserve its samples and fit a separate bounded 3D diffuse prior; record inferred depths, per-tracer coefficients and withheld-image checks. Compare projected brightness using the actual normalized material color. Mixed RGB residuals do not uniquely identify synchrotron, gas or dust.
 
 ## 3. Register before baking
 
