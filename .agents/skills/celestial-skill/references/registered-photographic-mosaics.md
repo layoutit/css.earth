@@ -67,6 +67,9 @@ a fixed `pixelMapping` between detector and pinhole coordinates; Lucy diagnostic
 use the existing TAN-SIP forward/inverse mapping. Limb agreement alone does not
 establish rotational phase or internal terrain registration. Test the proposed
 orientation against another viewing angle and identifiable surface features.
+When limiting edge controls, sample the entire detected boundary. Check that
+both fit and holdout points cover its extent; a count alone can conceal a
+truncated limb and produce a misleading pass.
 
 Record each observation's pinned bytes, calibration level, units, filter,
 acquisition time, pixel conventions, body frame and geometry's shape-model
