@@ -19,7 +19,7 @@ interface FlightCheckpoint {world: WorldCamera; elapsedS: number; time?: number;
 interface FlightPace {speed: number;}
 interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera) => void; stopWhen?: (elapsedS: number) => boolean; pace?: FlightPace;}
 
-import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
+import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
 import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, CLASSIFICATION_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
@@ -377,6 +377,7 @@ export function animateWorldFlight({ owner, from, flight, anchors, signal, reduc
       if (finished) return;
       try {
         if (started === null) started = time;
+        const previousClockS = clockS;
         if (clockTime === null) clockS = (time - started) / 1000;
         else clockS += (time - clockTime) / 1000 * pace.speed;
         clockTime = time;
@@ -386,6 +387,7 @@ export function animateWorldFlight({ owner, from, flight, anchors, signal, reduc
         const previousElapsed = elapsedS;
         elapsedS = reducedMotion ? requestedElapsedS
           : advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample);
+        if (!reducedMotion) elapsedS = easeArrivalInto(flight, previousElapsed, elapsedS, clockS - previousClockS, sample);
         // The curve approaches its terminal pose exponentially. At extreme range ratios it
         // reaches that pose before its duration cap; otherwise its last second or so moves the
         // view by under a pixel. Finish once the rest is invisible instead of publishing that
@@ -423,6 +425,25 @@ function worldSample(flight: Flight, from: WorldCamera, elapsedS: number, sample
   sampleSelectionFlightInto(flight, elapsedS, sample);
   return { referenceFrame: from.referenceFrame, epochJdTt: from.epochJdTt,
     pose: { positionM: [...sample.positionM], orientationXyzw: [...sample.orientationXyzw] } };
+}
+// A flight held back by the clearance cap would meet its target at full speed and stop dead. The
+// progress still to go may shrink at most at the arrival ease rate of flight-clock time, so the
+// camera slows into place. Flights on schedule already slow more gently near their end.
+function easeArrivalInto(flight: Flight, fromElapsedS: number, toElapsedS: number, clockStepS: number, out: FlightSample) {
+  const at = (elapsedS: number) => sampleSelectionFlightInto(flight, elapsedS, out).progress;
+  if (toElapsedS <= fromElapsedS) return toElapsedS;
+  const from = at(fromElapsedS);
+  const limit = from + (1 - Math.exp(-FLIGHT_ARRIVAL_EASE_RATE * Math.max(0, clockStepS))) * (1 - from);
+  if (at(toElapsedS) <= limit) return toElapsedS;
+  let low = fromElapsedS, high = toElapsedS;
+  for (let iteration = 0; iteration < 32; iteration++) {
+    const middle = (low + high) / 2;
+    if (at(middle) <= limit) low = middle; else high = middle;
+  }
+  // Rounding at the very end can leave no representable progress under the limit. Holding back
+  // there would stall the flight, and no visible motion is left to ease.
+  if (!(at(low) > from) && clockStepS > 0) { at(toElapsedS); return toElapsedS; }
+  return low;
 }
 // The rest of a flight is invisible once the camera is within the arrival tolerance of its final
 // pose: that fraction of its depth to the nearest anchor surface, and that many radians of turn.
