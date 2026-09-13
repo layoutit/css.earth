@@ -1742,10 +1742,11 @@ async function proveBreakpointCrossings(page: Page, planet: ObjectEntry, profile
       `${planet.id}: 820px mobile mode must preserve camera state`);
     assert.equal(await page.locator(profile.inputSelector).evaluate((node) =>
       getComputedStyle(node).touchAction), MOBILE_TOUCH_ACTION,
-    `${planet.id}: 820px must enable vertical page flow`);
+    `${planet.id}: 820px must preserve scene touch gestures`);
     await wheel(page, profile.inputSelector, -240);
-    assert.deepEqual(await profile.camera(page), expected,
-      `${planet.id}: 820px mobile mode must keep wheel disabled`);
+    assert.ok((await profile.camera(page)).zoom > expected.zoom,
+      `${planet.id}: 820px mobile mode must preserve wheel zoom`);
+    await profile.setCamera(page, expected);
 
     await page.setViewportSize({ width: 864, height: 901 });
     await waitFrames(page);
@@ -1755,7 +1756,7 @@ async function proveBreakpointCrossings(page: Page, planet: ObjectEntry, profile
       `${planet.id}: portrait mobile mode must preserve camera state`);
     assert.equal(await page.locator(profile.inputSelector).evaluate((node) =>
       getComputedStyle(node).touchAction), MOBILE_TOUCH_ACTION,
-    `${planet.id}: portrait viewport must preserve vertical page flow`);
+    `${planet.id}: portrait viewport must preserve scene touch gestures`);
 
     await page.setViewportSize({ width: 821, height: 720 });
     await waitFrames(page);
@@ -1763,9 +1764,9 @@ async function proveBreakpointCrossings(page: Page, planet: ObjectEntry, profile
       `${planet.id}: 821x720 must not overflow horizontally`);
     assert.deepEqual(await profile.camera(page), expected,
       `${planet.id}: 821px landscape desktop mode must preserve camera state`);
-    assert.notEqual(await page.locator(profile.inputSelector).evaluate((node) =>
-      getComputedStyle(node).touchAction), MOBILE_TOUCH_ACTION,
-    `${planet.id}: 821px landscape must restore desktop touch policy`);
+    assert.equal(await page.locator(profile.inputSelector).evaluate((node) =>
+      (node as HTMLElement).style.touchAction), "",
+    `${planet.id}: 821px landscape must remove the mobile touch override`);
     await wheel(page, profile.inputSelector, -240);
     assert.ok((await profile.camera(page)).zoom > expected.zoom,
       `${planet.id}: 821px landscape desktop mode must restore wheel zoom`);
@@ -1792,7 +1793,7 @@ async function proveMobile(browser: Browser, planet: ObjectEntry, profile: Objec
     assertSceneStructure(state, planet.id);
     assert.equal(await page.locator(profile.inputSelector).evaluate((node) =>
       getComputedStyle(node).touchAction), MOBILE_TOUCH_ACTION,
-    `${planet.id}: narrow screens must preserve vertical page flow`);
+    `${planet.id}: narrow screens must preserve scene touch gestures`);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 390,
       `${planet.id}: narrow screens must not overflow horizontally`);
 
@@ -1804,8 +1805,8 @@ async function proveMobile(browser: Browser, planet: ObjectEntry, profile: Objec
     });
     await wheel(page, profile.inputSelector, -240);
     const afterWheel = await profile.camera(page);
-    assert.equal(afterWheel.zoom, current.zoom,
-      `${planet.id}: narrow screens must not claim wheel zoom`);
+    assert.ok(afterWheel.zoom > current.zoom,
+      `${planet.id}: narrow screens must preserve wheel zoom`);
     assert.equal(await profile.stable(page), true,
       `${planet.id}: mobile input policy must preserve retained nodes`);
     assertEvidence(evidence, planet.id);

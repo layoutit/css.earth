@@ -1,5 +1,11 @@
 # Registered photographic mosaics
 
+The shared `camera-band-registration.mts` matcher accepts a bounded
+`searchRadiusPixels` (1–64; default 9) when an independently justified pointing
+seed is farther away. This changes the search window only. Preserve its
+correlation, disjoint holdout and residual requirements; a larger search does
+not qualify a camera. Recheck from the fitted camera with the normal window.
+
 Use this when preparing several observations onto a known surface, especially
 an irregular mesh. Reuse already-controlled maps when suitable; this is not a
 requirement to fit a camera for an existing global mosaic. The
@@ -60,6 +66,16 @@ to the actual selected model. Report coverage on different meshes separately;
 compare before/after percentages only on a common, justified surface basis.
 
 ## Bind observations and validate cameras
+
+Apply detector distortion inside both the fit and its holdout ray checks, not
+only when drawing the final overlay. The shared limb-refinement helper accepts
+a fixed `pixelMapping` between detector and pinhole coordinates; Lucy diagnostics
+use the existing TAN-SIP forward/inverse mapping. Limb agreement alone does not
+establish rotational phase or internal terrain registration. Test the proposed
+orientation against another viewing angle and identifiable surface features.
+When limiting edge controls, sample the entire detected boundary. Check that
+both fit and holdout points cover its extent; a count alone can conceal a
+truncated limb and produce a misleading pass.
 
 Record each observation's pinned bytes, calibration level, units, filter,
 acquisition time, pixel conventions, body frame and geometry's shape-model
