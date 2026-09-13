@@ -107,7 +107,6 @@
           "maximumGain": 1.5
         },
         "transfer": {
-          "maximumSourceDistanceMeters": 90,
           "maximumSeparationMeters": 200,
           "maximumEmissionDegrees": 75,
           "visibilityToleranceMeters": 0.5
@@ -177,7 +176,6 @@
           "maximumGain": 3
         },
         "transfer": {
-          "maximumSourceDistanceMeters": 90,
           "maximumSeparationMeters": 200,
           "maximumEmissionDegrees": 75,
           "visibilityToleranceMeters": 0.5

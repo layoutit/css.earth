@@ -181,7 +181,7 @@ export const parseCameraColor = shape({channels:array(shape({filter:text,channel
 export const levelMatchingFields = {maximumAngleDegrees:optional(number),minimumPairs:number,maximumLogMad:number,maximumGain:number,samplesPerTriangle:optional(number)};
 export const parseLevelMatching = shape(levelMatchingFields);
 /** Contributor separation is either a fixed distance or a multiple of each sample's measured pixel footprint. */
-export const surfaceTransfer = shape({maximumSourceDistanceMeters:number,maximumSeparationMeters:optional(number),maximumSeparationFootprints:optional(number),visibilityToleranceMeters:number,maximumEmissionDegrees:number,interpretation:optional(text)});
+export const surfaceTransfer = shape({maximumSeparationMeters:optional(number),maximumSeparationFootprints:optional(number),visibilityToleranceMeters:number,maximumEmissionDegrees:number,interpretation:optional(text)});
 export const parseSurfaceGeometry = shape({format:optional(text),sourceTopology:optional(text),simplification:shape({method:optional(text),maximumErrorMeters:number})});
 export const parsePublishedPhotometry = shape({model:text,referenceDegrees:shape({incidence:number,emission:number,phase:number}),
  limits:shape({maximumIncidenceDegrees:number,maximumEmissionDegrees:number,phaseDegrees:array(number),minimumGain:number,maximumGain:number})});

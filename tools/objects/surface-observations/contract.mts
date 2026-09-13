@@ -70,7 +70,6 @@ export interface ObservationPhotometry {
 
 /** Transfer limits after validation. Separation is either a fixed distance or a multiple of the contributors' measured footprint. */
 export interface TransferLimits {
-  maximumSourceDistanceMeters: number;
   maximumSeparationMeters?: number;
   maximumSeparationFootprints?: number;
   visibilityToleranceMeters: number;
@@ -86,8 +85,8 @@ export interface ObservationFrame {
   id: string; startTime: string; filter: string; positionKm: readonly number[];
   cameraKind: CameraKind; geometrySource: PixelGeometry['source'] | 'registered-posts';
   nominalPixelScaleMeters?: number;
-  /** Sample at a point in metres. The allowance widens the separation limit for a displayed point that lies off the source surface. */
-  sample(point: readonly number[], allowanceMeters?: number): FootprintSample;
+  /** Sample at a source-surface point in metres. */
+  sample(point: readonly number[]): FootprintSample;
   /** Whether the frame's camera sees a source-surface point without obstruction. */
   visible(point: readonly number[]): boolean;
   /** The display range of this frame's own qualified pixels, when its route displays by pixel percentiles. */
@@ -102,9 +101,6 @@ export interface FrameFootprint { pixelAngleMicroradians: number; nadirMedianMet
 /** What a route decides once for all its frames. */
 export interface SurfacePolicy {
   format: string;
-  maximumSourceDistanceMeters: number;
-  /** Check the displayed point's own footprint before the closest source point. */
-  precheckDisplayPoint: boolean;
   selection: 'single' | 'lowest-emission' | 'recipe-order' | 'finest-resolution';
   levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumLogMad: number; maximumGain: number; samplesPerTriangle?: number };
   samplesPerTriangle: number;

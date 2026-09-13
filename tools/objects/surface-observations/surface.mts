@@ -27,15 +27,13 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
   const mesh = radial.grid, metersPerUnit = config.geometry.radiusKm * 1000 / config.geometry.radius;
   const missing = (point: readonly number[], reason: string): Missing => ({ reason, color: missingCoverageColor(Math.atan2(point[1], point[0]) * 180 / Math.PI,
     Math.atan2(point[2], Math.hypot(point[0], point[1])) * 180 / Math.PI, 180 / config.raster.height) });
-  // One closest source point per displayed point serves every frame; each frame then checks its own footprint and visibility.
+  // One closest source point per displayed point serves every frame; each frame then checks its own footprint and visibility. The display
+  // mesh simplifies this source mesh, so the closest point lies on the displayed point's own surface; only an exact tie between distinct
+  // surface points leaves it undecided.
   const sampleAll = (displayPoint: readonly number[]) => {
-    const point = displayPoint.map(n => n * metersPerUnit);
-    const early = policy.precheckDisplayPoint ? frames.map(frame => frame.sample(point, policy.maximumSourceDistanceMeters)) : undefined;
-    const hit = early?.every(sample => sample.reason !== undefined) ? null : mesh.closestPoint(point, policy.maximumSourceDistanceMeters);
-    const values = frames.map((frame, i): Missing | Accepted => {
-      const precheck = early?.[i];
-      if (precheck && precheck.reason !== undefined) return missing(point, precheck.reason);
-      if (!hit) return missing(point, 'source-distance');
+    const point = displayPoint.map(n => n * metersPerUnit), hit = mesh.closestPoint(point);
+    const values = frames.map((frame): Missing | Accepted => {
+      if (!hit) return missing(point, 'ambiguous-source-point');
       if (!qualifiedFace(mesh, hit.faceId)) return missing(point, 'unconstrained-source-shape');
       const sample = frame.sample(hit.point);
       if (sample.reason !== undefined) return missing(point, sample.reason);
