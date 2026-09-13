@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-nebula-catalog@1",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "sources": [
+    {
+      "id": "benedict-2009",
+      "url": "https://arxiv.org/abs/0909.4281",
+      "sha256": "c637678c81c9e29ceb7605d47e21e33caf0313475fc94c46f9d89a910e6fd946",
+      "bytes": 604488,
+      "citation": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei"
+    },
+    {
+      "id": "helix-registered-images",
+      "url": "https://cdn.eso.org/images/original/eso0907a.tif",
+      "sha256": "057c8dacfe1686cc6cd464768996369c68d23e32844a5059107aba03bcf38769",
+      "bytes": 86609426,
+      "citation": "ESO ESO WFI \u00b7 optical detail image and publisher astrometry; registration retained in the observation recipe"
+    }
+  ],
+  "objects": [
+    {
+      "id": "helix",
+      "kind": "nebula",
+      "name": "Helix Nebula",
+      "aliases": [
+        "NGC 7293"
+      ],
+      "positionM": [
+        5.751249036753817e+18,
+        -2.3927528799145057e+18,
+        -2.370852303562094e+18
+      ],
+      "skyPosition": {
+        "raDeg": 337.4107083333334,
+        "decDeg": -20.83717222222222,
+        "sourceRef": "helix-registered-images"
+      },
+      "distance": {
+        "valuePc": 216,
+        "minusPc": 12,
+        "plusPc": 14,
+        "sourceRef": "benedict-2009",
+        "method": "Adopted published trigonometric parallax; not a fitted image scale."
+      },
+      "classification": {
+        "name": "Planetary nebula",
+        "basis": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and the front/back assignment remain conditional. Compact lights have observed image positions, with illustrative field depths.",
+        "sourceRef": "helix-registered-images"
+      },
+      "status": "confirmed",
+      "detailedObjectId": "helix"
+    }
+  ]
+}

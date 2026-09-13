@@ -1,0 +1,32 @@
+{
+  "id": "corradi-2011",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The evolution of M 2-9 from 2000 to 2010",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1102.5634",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/m2-9/source/image-frame.json",
+      "revision": "ab1967ed45fe7ad670cc5eaa4e892789a04f01f3",
+      "sha256": "03b7bfa303f1776503301524fa6b24a57df4fd23d91dfbba9d355acbab4d8a14",
+      "locator": "/references"
+    }
+  ],
+  "publisher": "The evolution of M 2-9 from 2000 to 2010",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "The evolution of M 2-9 from 2000 to 2010",
+      "scope": "Published source",
+      "evidence": "src/objects/m2-9/source/image-frame.json#/references"
+    }
+  ]
+}
