@@ -27,6 +27,7 @@ export function sampleFootprint({ image, camera, geometry, photometry }: Footpri
   const gains = ids.map(i => photometry.gain(geometry.incidence(i), geometry.emission(i), geometry.phase(i)));
   if (!gains.every((gain): gain is number => gain !== null)) return { reason: 'photometry' };
   return { radiance: ids.reduce((sum, id, i) => sum + image.values[id] * weights[i] * gains[i], 0) * (image.radianceFactor?.factor ?? 1), separationMeters,
+    ...(image.colorValues ? { color: image.colorValues.map(plane => ids.reduce((sum, id, i) => sum + plane[id] * weights[i] * gains[i], 0)) } : {}),
     gain: Math.max(...gains), maximumEmissionDegrees: Math.max(...ids.map(i => geometry.emission(i))) * 180 / Math.PI,
     maximumIncidenceDegrees: Math.max(...ids.map(i => geometry.incidence(i))) * 180 / Math.PI };
 }

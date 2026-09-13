@@ -34,7 +34,7 @@ export interface PhotometryProfile {radiusKm:number;maximumIncidenceDegrees:numb
 export interface ObservedColorContext {groups:ReadonlyMap<string,ColorBand[]>;profile:ObservedColorProfile;width:number;height:number;sourceIds?:string[]}
 export interface PhasePhotometry {model:string;asymmetry:number;amplitude:number;width:number;minimumDegrees:number;maximumDegrees:number;referenceDegrees:number;maximumGain:number}
 export interface DiskPhotometry {phaseCorrection?:PhasePhotometry;model?:string;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;maximumGain:number;coefficient?:number;phaseCoefficientPerDegree?:number}
-export interface GeoFrame {radianceFactor?:{factor:number;solarDistanceAu:number;solarFlux:number};width:number;height:number;planes:Record<string,ArrayLike<number>>;xyz(index:number):number[];valid(index:number):boolean;
+export interface GeoFrame {colorPlanes?:readonly ArrayLike<number>[];radianceFactor?:{factor:number;solarDistanceAu:number;solarFlux:number};width:number;height:number;planes:Record<string,ArrayLike<number>>;xyz(index:number):number[];valid(index:number):boolean;
   acceptPixel?(index:number):boolean;projectPoint?(point:readonly number[]):number[];quality?:{flags:ArrayLike<number>;allowLossy:boolean}}
 export interface SipCamera {matrix:number[][];sip:{referencePixel:number[];a:number[][];b:number[][];offsetPixels:number[]}}
 
