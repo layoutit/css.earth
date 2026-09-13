@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "be64d1a4c5e94ab3fd707f91e84862748e48701d297e2c480f3fd84b3ea59821"
+    "sha256": "1511902ac4e6d3b472d2dc5659316008019308d3da2ea89416b074eceec7765f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "2f83ffda8775a8ad59e8a506e179f4b2ef96ed6f337ef567dc7b54b6aac74562",
+      "sha256": "db771a239cafdf37098efda566af021ad20ab781baed4c726bc081196d79b87d",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/charon/",
@@ -78,7 +78,7 @@
             "output": "charon-{id}{suffix}.webp",
             "thumbnail": "charon-lens-{id}.webp",
             "source": "observations/nh_charon_color_mosaic.img",
-            "falseColor": false,
+            "falseColor": true,
             "science": {
               "kind": "terrestrial-observation",
               "input": "new-horizons-charon-mvic-color",
@@ -100,7 +100,21 @@
                 "displayRange": [
                   0,
                   0.6
-                ]
+                ],
+                "colorDisplay": {
+                  "kind": "band-composite",
+                  "inputQuantity": "derived-band-value",
+                  "bands": [
+                    "870 nm",
+                    "625 nm",
+                    "475 nm"
+                  ],
+                  "displayRange": [
+                    0,
+                    0.6
+                  ],
+                  "outputEncoding": "srgb"
+                }
               },
               "metadata": {
                 "description": "Near-infrared, red and blue observations highlight surface differences. Gray grid marks missing color coverage; detail varies across the map.",
@@ -264,7 +278,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c13e034a49e79d266f0119e801e14459092addbe8c9578d7b2e0a876043be798",
+      "sha256": "6d0efbb6ad1999da95abbbcfab5a381c4dc1d0d7df6c5091170db48eddcc8c53",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -342,7 +356,7 @@
           "labels": {
             "normal": "Monochrome",
             "elevation": "Elevation",
-            "enhanced-color": "Enhanced color",
+            "enhanced-color": "False color",
             "albedo": "Bond albedo"
           },
           "controls": [
@@ -364,9 +378,9 @@
             },
             {
               "id": "enhanced-color",
-              "label": "Enhanced color",
+              "label": "False color",
               "description": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
-              "title": "MVIC enhanced-color mosaic",
+              "title": "MVIC false-color mosaic",
               "thumbnail": "charon-lens-enhanced-color.webp",
               "surface": "charon-enhanced-color.webp",
               "poles": "charon-poles-enhanced-color.webp",
@@ -375,7 +389,9 @@
                 "path": "../manifest.json",
                 "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx"
               },
-              "detail": "MVIC color bands"
+              "detail": "New Horizons",
+              "summary": "Near-infrared, red and blue bands show spectral differences, sharpened with panchromatic detail. This is false color; the gray grid marks missing coverage.",
+              "falseColor": true
             },
             {
               "id": "elevation",
@@ -901,8 +917,8 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet, view descriptions and legends."
       },
-      "sha256": "c13e034a49e79d266f0119e801e14459092addbe8c9578d7b2e0a876043be798",
-      "bytes": 13037,
+      "sha256": "6d0efbb6ad1999da95abbbcfab5a381c4dc1d0d7df6c5091170db48eddcc8c53",
+      "bytes": 13230,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1069,7 +1085,7 @@
     },
     {
       "id": "enhanced-color",
-      "label": "Enhanced color",
+      "label": "False color",
       "recipe": "raster",
       "selector": "/surfaces/1",
       "parents": [],
@@ -1084,7 +1100,7 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": true
       },
       "inputs": [
         "new-horizons-charon-mvic-color",
@@ -1093,32 +1109,32 @@
       "outputs": [
         {
           "url": "/scenes/charon/charon-enhanced-color.webp",
-          "bytes": 790962,
-          "sha256": "cdefcdceb3a5f1d5d3e4609d6269d3c6fe2446e82667d15553e7d09652e260c3",
+          "bytes": 552444,
+          "sha256": "3d8bae625694b85de3207e0ad74cf49ff296d7b3c590ba19198fe42c1a4617f4",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-enhanced-color@2x.webp",
-          "bytes": 2126726,
-          "sha256": "82003b2cbc0c2214724151d94f21d918111b62f9e7272bffe49d6c13a4136a1d",
+          "bytes": 1589082,
+          "sha256": "df7ddc1ede1e7e69ac35d24acfe1e37601096d71a4f9c069459780c8557de620",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-lens-enhanced-color.webp",
-          "bytes": 304,
-          "sha256": "9ca1d349e646addbd201bb469bb275b45f97da108f750656615a5a7d3c5a9dda",
+          "bytes": 380,
+          "sha256": "e3b8942645f8510b65b42822732b735f2318c8223d21ede0fde8a3b563cd08f0",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-poles-enhanced-color.webp",
-          "bytes": 48126,
-          "sha256": "bedc02a581389059c633f7151e43c338fce343bfa741938346d36d85b7d04272",
+          "bytes": 46738,
+          "sha256": "ec91937f2398ce61111f265e5a653b3607874d2321486ef9411b52bc4114e914",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/charon/charon-poles-enhanced-color@2x.webp",
-          "bytes": 123278,
-          "sha256": "b793b330d6dfd9c5301c5c6524b0f1ac4e9901ac041ac1d198723aa74ace4b4f",
+          "bytes": 120610,
+          "sha256": "ca059654e408d48831ed254cff5224c6a99bf49971f843522936148777e67d4f",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1738,7 +1754,7 @@
     },
     {
       "id": "preview:enhanced-color",
-      "label": "Enhanced color preview",
+      "label": "False color preview",
       "recipe": "raster",
       "selector": "/surfaces/1",
       "recipeDependencies": [
@@ -1754,8 +1770,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/enhanced-color.webp",
-          "bytes": 21678,
-          "sha256": "1afe5b337fbc92ab51b75b07caf0e9cc669a6a07c8230f67c6f99233f47d79a4",
+          "bytes": 17426,
+          "sha256": "1cc9bac89bb7d2ba0f39573f4486e64143c4669d64ff823de09805089009252d",
           "verification": "bytes-verified"
         }
       ]

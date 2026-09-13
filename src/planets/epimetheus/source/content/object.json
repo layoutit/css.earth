@@ -50,14 +50,14 @@
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "Richard Walker · 1966; identified separately in 1978"
+        "value": "Richard Walker \u00b7 1966; identified separately in 1978"
       }
     ],
     "moreFacts": [
       {
         "id": "density",
         "label": "Mean density",
-        "value": "0.64 ± 0.04 g/cm³",
+        "value": "0.64 \u00b1 0.04 g/cm\u00b3",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
           "label": "NASA/JPL reference",
@@ -74,7 +74,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "filter-color": "False color"
     },
     "controls": [
       {
@@ -82,7 +83,7 @@
         "label": "Monochrome",
         "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
         "title": "ISS mosaic",
-        "detail": "Cassini · corrected mosaic",
+        "detail": "Cassini \u00b7 corrected mosaic",
         "thumbnail": "/scenes/epimetheus/epimetheus-normal-thumbnail.webp",
         "surface": "epimetheus-normal-surface@2x.webp",
         "poles": "epimetheus-normal-surface@2x.webp",
@@ -94,11 +95,27 @@
         "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
       },
       {
+        "id": "filter-color",
+        "label": "False color",
+        "description": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
+        "title": "Cassini false color",
+        "detail": "Cassini",
+        "thumbnail": "/scenes/epimetheus/epimetheus-filter-color-thumbnail.webp",
+        "surface": "epimetheus-filter-color-surface@2x.webp",
+        "poles": "epimetheus-filter-color-surface@2x.webp",
+        "source": {
+          "id": "n1866365919",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/"
+        },
+        "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
+      },
+      {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radial height above a 58.2 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+        "description": "Radial height above a 58.2 km reference sphere from the Cassini shape model. Includes the moon\u2019s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
         "title": "Shape-derived radial height",
-        "detail": "Cassini shape · radial height",
+        "detail": "Cassini shape \u00b7 radial height",
         "thumbnail": "/scenes/epimetheus/epimetheus-elevation-thumbnail.webp",
         "surface": "epimetheus-elevation-surface@2x.webp",
         "poles": "epimetheus-elevation-surface@2x.webp",

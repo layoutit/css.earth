@@ -24,6 +24,7 @@ import { archiveBackplanes, castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
 import { deriveLimits, MAXIMUM_SEPARATION_FOOTPRINTS } from '../limits.mts';
+import { parseBandColorDisplay } from '../../color-transfer.mts';
 
 type GeoRecipe = ReturnType<typeof parseGeoRecipe>;
 export const GEO_FORMATS = ['osiris-geo', 'amica-gaskell', 'osiris-camera', 'llorri-camera', 'nh-lorri-camera', 'nh-mvic-camera', PDS4_GEOMETRY_CUBE_FORMAT, SPICE_CAMERA_FORMAT];
@@ -38,7 +39,7 @@ const framePaths = (recipe: Pick<GeoRecipe, 'format' | 'path' | 'labelPath' | 'o
   : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? [recipe.path, recipe.labelPath]
   // Kernels from a shared bank are pinned by the bank's manifest, not the body's; a VICAR frame brings its PDS3 label.
   : kernelCamera(recipe) ? [recipe.path, ...(spiceDeclaration(recipe).image.format === 'vicar-pds3' ? [recipe.labelPath] : []), ...(spiceDeclaration(recipe).kernelSet ? [] : spiceDeclaration(recipe).kernels)]
-  : archivedCamera(recipe) ? [recipe.path, recipe.cameraPath] : [recipe.path, recipe.qualityPath]).map(path => requireString(path, 'source-bound observation path'));
+  : archivedCamera(recipe) ? [recipe.path, recipe.cameraPath, ...(recipe.format === 'nh-mvic-camera' ? [recipe.labelPath] : [])] : [recipe.path, recipe.qualityPath]).map(path => requireString(path, 'source-bound observation path'));
 /** One recipe per frame: a mosaic's frame entries override the shared recipe. */
 const frameRecipes = (recipe: GeoRecipe) => recipe.frames === undefined ? [{ id: recipe.id, recipe }]
   : recipe.frames.map(frame => ({ id: frame.id, recipe: parseGeoRecipe({ ...recipe, ...frame, id: recipe.id, frames: undefined, selection: undefined, levelMatching: undefined }) }));
@@ -66,8 +67,11 @@ function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
   if (recipe.selection !== undefined || recipe.levelMatching !== undefined) throw new TypeError('Invalid source-bound observation selection.');
   const policy = recipe.transfer, published = 'referenceDegrees' in recipe.photometry ? recipe.photometry : null, photometry = 'referenceDegrees' in recipe.photometry ? null : recipe.photometry;
   const phase = photometry?.phaseCorrection;
-  if (recipe.format === 'nh-mvic-camera' ? !recipe.colorDisplay || recipe.colorDisplay.minimum !== 0 || !positive(recipe.colorDisplay.maximum) ||
-      photometry?.model !== 'retained-observation' || recipe.frames !== undefined : recipe.colorDisplay !== undefined) throw new TypeError('MVIC color requires one common linear display and retained illumination.');
+  if (recipe.format === 'nh-mvic-camera') {
+    const display = parseBandColorDisplay(recipe.colorDisplay,['NIR','RED','BLUE']);
+    if (display.inputQuantity !== 'derived-band-value' || display.displayRange[0] !== 0 || recipe.metadata.falseColor !== true ||
+        photometry?.model !== 'retained-observation' || recipe.frames !== undefined) throw new TypeError('MVIC color requires source-derived bands, false color and retained illumination.');
+  } else if (recipe.colorDisplay !== undefined) throw new TypeError('Only a registered color product declares a band display.');
   if (recipe.radiometry !== undefined && (recipe.format !== 'osiris-geo' || recipe.radiometry !== 'radiance-factor')) throw new TypeError('Invalid observation radiometry.');
   if (phase && (recipe.format !== 'osiris-geo' || recipe.radiometry !== 'radiance-factor' || phase.model !== 'hg-shadow-hiding' ||
       !Number.isFinite(phase.asymmetry) || Math.abs(phase.asymmetry) >= 1 || !positive(phase.amplitude) || !positive(phase.width) ||
@@ -104,7 +108,7 @@ function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
       (amica ? recipe.qualityPath !== undefined || recipe.allowLossy !== true || recipe.filter !== 'V'
         : cube ? recipe.cube === undefined || recipe.qualityPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.allowLossy !== false
         : kernels ? recipe.qualityPath !== undefined || (recipe.labelPath !== undefined) !== (recipe.spice?.image.format === 'vicar-pds3') || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.cameraPath !== undefined || recipe.allowLossy !== false
-        : recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined) ||
+        : (recipe.format === 'nh-mvic-camera' ? !safePath(recipe.labelPath) : recipe.labelPath !== undefined) || recipe.originalPath !== undefined || recipe.flatPath !== undefined) ||
       (!cube && recipe.cube !== undefined) ||
       (controlled ? recipe.qualityPath !== undefined : recipe.cameraPath !== undefined) ||
       !recipe.startTime || !recipe.filter || typeof recipe.allowLossy !== 'boolean' ||
@@ -176,7 +180,7 @@ async function loadGeoFrame(recipe: GeoRecipe, id: string, { sourceDirectory, so
     return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera, decoded));
   }
   if (recipe.format === 'nh-mvic-camera') {
-    const decoded = decodeArrokothMvic(await read(recipe.path), closure);
+    const decoded = decodeArrokothMvic(await read(recipe.path), closure, (await read(recipe.labelPath)).toString('utf8'));
     return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera, decoded), decoded.colorPlanes);
   }
   if (recipe.format === 'osiris-camera') {
@@ -230,10 +234,11 @@ export const geoFormat: SurfaceObservationFormat = {
       frames.push(await loadGeoFrame(frame.recipe, frame.id, { ...context, entries: context.entries.filter(entry => paths.includes(entry.path)) }, photometry));
     }
     const { report: limits, exceeded } = deriveLimits(recipe.transfer, frames, context.config.geometry.radialTerrain.simplification.maximumErrorMeters);
+    const colorDisplay = recipe.colorDisplay === undefined ? undefined : parseBandColorDisplay(recipe.colorDisplay,['NIR','RED','BLUE']);
     const policy: SurfacePolicy = { format: recipe.format, maximumSourceDistanceMeters: recipe.transfer.maximumSourceDistanceMeters, precheckDisplayPoint: true,
       selection: recipe.frames === undefined ? 'single' : recipe.selection === 'recipe-order' ? 'recipe-order' : 'lowest-emission',
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
-      display: recipe.colorDisplay ? { range: 'authored', low: recipe.colorDisplay.minimum, high: recipe.colorDisplay.maximum, units: 'archived filter values; enhanced NIR / RED / BLUE color', channels: ['NIR', 'RED', 'BLUE'] }
+      display: colorDisplay ? { range: 'authored', low: colorDisplay.displayRange[0], high: colorDisplay.displayRange[1], units: 'archive-derived data numbers; enhanced NIR / RED / BLUE color', colorDisplay }
         : { range: 'reference-pixels', percentiles: recipe.displayPercentiles, units: displayUnits(recipe, photometry) }, photometry: photometry.report, limits };
     return { frames, policy, exceeded };
   },

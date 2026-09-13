@@ -1,0 +1,27 @@
+{
+  "baseline": "8cc1a2fae",
+  "method": "Fetched immutable runtime URLs over HTTPS and verified byte counts and SHA-256 against the current runtime inventory.",
+  "assets": [
+    {
+      "filename": "europa-enhanced.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/003af8c6437edbc9360590fcdabdc6093e42afbb40d4d3581280b2c78ed89cab/europa-enhanced.webp",
+      "bytes": 2319192,
+      "sha256": "003af8c6437edbc9360590fcdabdc6093e42afbb40d4d3581280b2c78ed89cab",
+      "verified": true
+    },
+    {
+      "filename": "europa-enhanced@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a1d399e34e5d34afb4909653f87b2e88d4c3391fa941d53719692a98a1b4bf60/europa-enhanced@2x.webp",
+      "bytes": 6469160,
+      "sha256": "a1d399e34e5d34afb4909653f87b2e88d4c3391fa941d53719692a98a1b4bf60",
+      "verified": true
+    },
+    {
+      "filename": "europa-lens-enhanced.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a63aa6f1354bfc04c6147d9a0146bab661a0ab3ba97ae2933203a1c4bdf96c02/europa-lens-enhanced.webp",
+      "bytes": 916,
+      "sha256": "a63aa6f1354bfc04c6147d9a0146bab661a0ab3ba97ae2933203a1c4bdf96c02",
+      "verified": true
+    }
+  ]
+}

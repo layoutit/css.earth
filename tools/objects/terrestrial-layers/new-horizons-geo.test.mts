@@ -36,7 +36,11 @@ test('three pinned New Horizons products match independent Astropy pixels and HD
       for(let i=0;i<decoded.width*decoded.height;i++)if(decoded.acceptPixel(i))accepted++;
       assert.equal(accepted,image.acceptedPixels,'Every detector quality decision matches Astropy');
     }else{
-      const frame=decodeArrokothMvic(bytes,await read('observations/mvic-camera.json'));
+      const label=await readFile(new URL('observations/ca05_mvic_cube.lblx',source),'utf8');
+      const camera=await read('observations/mvic-camera.json');
+      const frame=decodeArrokothMvic(bytes,camera,label);
+      assert.throws(()=>decodeArrokothMvic(bytes,camera,label.replace('<unit>data number</unit>','<unit>I/F</unit>')),/native band/);
+      assert.throws(()=>decodeArrokothMvic(bytes,camera,label.replace('<sp:filter_name>NIR</sp:filter_name>','<sp:filter_name>Green</sp:filter_name>')),/native band/);
       assert.deepEqual(image.planes[0].shape,[4,300,300]);
       const bands=[frame.colorPlanes[2],frame.colorPlanes[1],frame.colorPlanes[0]];
       for(const p of image.planes[0].samples){const band=Math.floor(p.index/90000);if(band<3){assert.equal(bands[band][p.index%90000],p.value);samples++;}}

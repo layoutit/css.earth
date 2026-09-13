@@ -2,6 +2,14 @@
 
 ## Sources
 
+**False color** adds three original Cassini ISS NAC filter observations displayed as RGB (IR1 / GRN / UV3), calibrated by CISSCAL 4.0beta into linear I/F. This is false color. Each frame uses its own measured camera row in the [Thomas 2018 pan document](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/pan_document.pdf), registered to the matching original plate model.
+
+The shared [source-backed color preparation](../../../docs/color-preparation.md)
+keeps measured bands floating through sampling and composition. A common
+0–0.8 I/F range maps them to linear display channels, followed by IEC sRGB
+encoding and final 8-bit quantization. This replaces direct linear byte mapping;
+it does not reconstruct natural color.
+
 The surface uses the [Thomas, Joseph and Ansty Saturn small-moon shape release](https://doi.org/10.26033/ewy3-jy61), archived by the NASA PDS Small Bodies Node. The original `pan_30k_plt.tab` contains 13,736 vertices and 27,468 triangular plates in kilometers. Its companion XML and per-body PDF are retained. The source frame has +X toward Saturn, +Y opposite orbital motion and +Z along the positive rotation axis. The source describes likely radial uncertainties of 0.2–0.3 km, with portions of the leading side least certain; small crater morphology is not reliably resolved by the model.
 
 **Monochrome** uses five original Cassini ISS NAC calibrated I/F frames from March 7, 2017. They are restored from the [PDS Ring-Moon Systems Node](https://pds-rings.seti.org/cassini/iss/access.html) and retain the CISSCAL 4.0beta labels. Inputs: `N1867604669`, `N1867604117`, `N1867602962`, `N1867606181`, `N1867606742`.
@@ -10,9 +18,17 @@ The surface uses the [Thomas, Joseph and Ansty Saturn small-moon shape release](
 
 ## Evidence
 
+The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/filter-color/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+
+**False color:** The sunlit ridge and small southern patches carry color; most of the photographed underside remains unavailable after the illumination and common-coverage cuts. The [browser record](evidence/filter-color/capture.json) pins the loaded image responses, camera, settings and inspected views at DPR 1 and 2. The existing Monochrome images, body leaves and picking triangles are unchanged; the selected false-color assets use the revised display encoding. Dragging, Shadows and the mobile selector passed without page errors or replaced scene DOM. Scientific qualification comes from the original camera/shape release and the registration evidence described here; these screenshots document the mounted result.
+
+[False color](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Oblique with Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). These captures were refreshed on 2026-09-13 after integrating main at `0636327ba`. The record pins the tested recipe, runtime, display transfer and loaded image bytes, and compares retained geometry with `8cc1a2fae`.
+
 Geometry is simplified from the source connectivity with the shared meshoptimizer preparer before texture baking. The prepared mesh has 800 native PolyCSS triangle leaves, within the 2,000-leaf ceiling, with a 200 m simplifier error setting. That setting is an algorithmic allowance, not a bound on source scientific uncertainty. No ellipsoid is substituted for the equatorial ridge. A 2,592-direction radial sample (5° grid offset from poles and seam) compared the prepared mesh with the source: mean error 62 m, 95th percentile 136 m, maximum sampled error 249 m. These samples are not an exhaustive maximum error bound.
 
 ## Known problems
+
+**False color:** Three filters were acquired sequentially, and are not a simultaneous true-color photograph or a composition map. Source shadows and phase-dependent brightness remain. The common footprint is smaller than Monochrome coverage; gray grid marks gaps. Small color fringes can remain at sharp relief because the shape and camera solutions have finite accuracy. This sequence covers part of the southern face and ridge; ring shadows and unobserved terrain remain gaps.
 
 Lunar-Lambert normalization and limited brightness matching reduce acquisition shading; they do not recover cast shadows or calibrated albedo. The edge-connected I/F≤0.003 sky mask can withhold very dark limb pixels. Unobserved regions remain a grid; source resolution varies.
 
@@ -35,14 +51,13 @@ Each image is projected onto the released shape using its own sub-spacecraft and
 
 The calibrated VICAR header controls binary raster addressing. The archived detached labels retain a stale image pointer and do not account for the binary header record; reading that pointer alone would shift the image by one row. The original files remain unchanged.
 
-Both lenses retain the generic Shadows control. The native triangle atlases contain source texture and prepared directional illumination tied to the body frame. Minimap and thumbnail images are prepared separately from the same interpreted data; the context image uses the actual shape silhouette and full-phase relief shading.
+All lenses retain the generic Shadows control. The native triangle atlases contain source texture and prepared directional illumination tied to the body frame. Minimap and thumbnail images are prepared separately from the same interpreted data; the context image uses the actual shape silhouette and full-phase relief shading.
 
 **Dataset survey**
 
 - **Included:** original PDS ISS calibrated frames plus the model release's registered viewing geometry. The 2017 closest-flyby images provide the strongest available detail in the qualified footprint.
 - **Included:** PDS plate model, supplying both real geometry and the complementary radial-height view.
 - **Excluded as duplicate imagery:** NASA press portraits ([Pan overview](https://science.nasa.gov/saturn/moons/pan/)) reuse the Cassini observations; directly calibrated frames preserve their original coordinates and numerical pixels.
-- **Deferred:** filtered Cassini UV/green/infrared frames are present in the PDS archive, including the 2017 encounter. They require independently registered multiband coverage and color qualification, and are not mislabeled as a ready global color map.
 - **Not selected:** the USGS/DLR standard Cassini global-mosaic series does not supply a downloadable registered Pan map in the inspected release. Papers on these small moons provide regional geological and compositional interpretation; no corresponding global scalar raster was identified for this package. This is a bounded survey, not a claim that no further data exists.
 
 **Orientation, content and credits**

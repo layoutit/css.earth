@@ -42,7 +42,7 @@
       "model": "Shape model",
       "albedo": "Modeled albedo",
       "lorri": "LORRI",
-      "mvic": "MVIC"
+      "mvic": "False color"
     },
     "controls": [
       {
@@ -63,11 +63,11 @@
       },
       {
         "id": "mvic",
-        "label": "MVIC",
-        "title": "New Horizons enhanced color",
-        "detail": "NIR / red / blue · 340 m/pixel",
+        "label": "False color",
+        "title": "New Horizons false color",
+        "detail": "New Horizons",
         "falseColor": true,
-        "description": "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is enhanced color at 340 metres per native pixel; the grid marks unsupported coverage.",
+        "description": "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is false color, not a human-visible reconstruction, at 340 metres per native pixel; the grid marks unsupported coverage.",
         "thumbnail": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
         "surface": "arrokoth-mvic-surface@2x.webp",
         "poles": "arrokoth-mvic-poles@2x.webp",
@@ -75,7 +75,8 @@
           "id": "mvic-ca05",
           "path": "../manifest.json",
           "url": "https://doi.org/10.26007/fv5e-eh92"
-        }
+        },
+        "summary": "Near-infrared, red and blue bands show spectral differences at 340 metres per native pixel. This is false color; the grid marks unsupported coverage."
       },
       {
         "id": "albedo",
