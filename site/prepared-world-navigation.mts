@@ -15,9 +15,11 @@ export interface WorldHandoff {mountOptions: Partial<MountOptions>; afterMount(m
 interface FocusRequest {objectId: string; mount: ShellCamera; signal: AbortSignal; reducedMotion?: boolean; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; timing?: Timing;}
 interface PrepareRequest {fromId: string; toId: string; fromMount: ShellCamera | null; toFactory: SceneFactory | Promise<SceneFactory>; signal: AbortSignal; reducedMotion?: boolean; url?: string | URL | null; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; preserveView?: boolean; presentWorld?: ((world: WorldCamera, optics: Optics, options: { signal: AbortSignal; commit?: () => void }) => Promise<boolean> | void) | null; cameraViewport?: Parameters<NonNullable<SceneFactory['navigation']>['prepare']>[0]['cameraViewport']; timing?: Timing;}
 interface FlightCheckpoint {world: WorldCamera; elapsedS: number; time?: number;}
-interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera) => void; stopWhen?: (elapsedS: number) => boolean;}
+/** Shared by every segment of one navigation, so a wheel keeps hurrying it across the handoff. */
+interface FlightPace {speed: number;}
+interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera) => void; stopWhen?: (elapsedS: number) => boolean; pace?: FlightPace;}
 
-import { CENTER_SELECTION_DURATION_SECONDS } from './runtime-policy.mts';
+import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
 import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, CLASSIFICATION_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
@@ -154,13 +156,22 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       const cancel = () => controller.abort(signal.reason ?? cancelled());
       signal.addEventListener('abort', cancel, { once: true });
       if (signal.aborted) cancel();
-      const events = ['pointerdown', 'wheel', 'keydown'];
+      const events = ['pointerdown', 'keydown'];
       const interrupt = (event: Event) => {
         if (!isFlightInput(event)) return;
         const error = cancelled(); error.preserveView = true;
         controller.abort(error);
       };
+      // A wheel hurries this navigation instead of abandoning it far from the destination.
+      // The navigation listens before its flights do, so it owns the wheel for every segment.
+      const pace: FlightPace = { speed: 1 };
+      const hurry = (event: Event) => {
+        if (!isFlightInput(event)) return;
+        event.preventDefault(); event.stopPropagation();
+        pace.speed = FLIGHT_WHEEL_SPEEDUP;
+      };
       for (const event of events) documentTarget.addEventListener(event, interrupt, { capture: true });
+      documentTarget.addEventListener('wheel', hurry, { capture: true, passive: false });
       let prepared: PreparedLease | undefined, released = false;
       let rejectInterruption!: (reason: unknown) => void;
       const release = () => { if (prepared && !released) { released = true; prepared.destroy(); } };
@@ -173,6 +184,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         signal.removeEventListener('abort', cancel);
         controller.signal.removeEventListener('abort', abort);
         for (const event of events) documentTarget.removeEventListener(event, interrupt, { capture: true });
+        documentTarget.removeEventListener('wheel', hurry, { capture: true });
       }
       let bankReady = false;
       const preparation = Promise.resolve(toFactory).then(factory => {
@@ -199,7 +211,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         // soon as it is ready and the source is coarse, or hold before the
         // destination proxy would grow into a detailed view.
         const departure: Promise<FlightCheckpoint> = departureOwner && !reducedMotion
-          ? animateWorldFlight({ owner: departureOwner, from, flight, anchors, signal: controller.signal,
+          ? animateWorldFlight({ owner: departureOwner, from, flight, anchors, signal: controller.signal, pace,
             endElapsedS: approachLimitS,
             stopWhen: elapsed => bankReady && elapsed >= handoffTimeS,
             windowTarget, documentTarget, onPaint })
@@ -223,7 +235,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
               // worker's publication, instead of racing two camera owners.
               return presentWorld(world, optics, { signal: activationSignal,
                 commit: () => incomingOwner?.apply(world) });
-            } }, from, flight, anchors, signal: controller.signal,
+            } }, from, flight, anchors, signal: controller.signal, pace,
             startElapsedS: checkpoint.elapsedS, startTime: checkpoint.time ?? null,
             // The approach holds only until the incoming detail is fully active.
             limitElapsedS: () => detailReady || incomingOwner?.detailActivated?.() ? flight.durationS : Math.max(checkpoint.elapsedS, approachLimitS),
@@ -250,7 +262,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
                 await continuation;
               } else if (checkpoint.elapsedS < flight.durationS) {
                 mount.navigation.apply(checkpoint.world);
-                await animateWorldFlight({ owner: mount.navigation, from, flight, anchors, signal: controller.signal,
+                await animateWorldFlight({ owner: mount.navigation, from, flight, anchors, signal: controller.signal, pace,
                   startElapsedS: checkpoint.elapsedS, windowTarget, documentTarget, onPaint });
               } else mount.navigation.apply(checkpoint.world);
               lastCamera = mount.navigation.capture(); lastOptics = mount.navigation.optics();
@@ -331,17 +343,20 @@ function detailHandoffTime(flight: Flight, from: WorldCamera, frame: WorldFrame,
 
 export function animateWorldFlight({ owner, from, flight, anchors, signal, reducedMotion = false,
   startElapsedS = 0, endElapsedS = flight.durationS, startTime = null, limitElapsedS = () => endElapsedS,
-  windowTarget, documentTarget, onPaint = () => {}, stopWhen = () => false }: WorldFlightRequest): Promise<FlightCheckpoint> {
+  windowTarget, documentTarget, onPaint = () => {}, stopWhen = () => false, pace = { speed: 1 } }: WorldFlightRequest): Promise<FlightCheckpoint> {
   return new Promise<FlightCheckpoint>((resolve, reject) => {
     let frameId: number | null = null, started = startTime, finished = false, elapsedS = startElapsedS, publishedElapsed: number | null = null;
+    // Flight time runs on its own clock, so a wheel can hurry the arrival without a jump.
+    let clockS = 0, clockTime: number | null = null;
     const sample = createSelectionFlightSample();
-    const events = ['pointerdown', 'wheel', 'keydown'];
+    const events = ['pointerdown', 'keydown'];
     function finish(error: unknown, result?: FlightCheckpoint) {
       if (finished) return;
       finished = true;
       if (frameId !== null) windowTarget.cancelAnimationFrame(frameId);
       signal.removeEventListener('abort', abort);
       for (const event of events) documentTarget.removeEventListener(event, interrupt, { capture: true });
+      documentTarget.removeEventListener('wheel', hurry, { capture: true });
       if (error || !result) reject(error); else resolve(result);
     }
     function abort() { finish(cancellationReason(signal)); }
@@ -350,14 +365,24 @@ export function animateWorldFlight({ owner, from, flight, anchors, signal, reduc
       const error = cancelled(); error.preserveView = true;
       finish(error);
     }
+    // A wheel asks to get there, not to stop. The flight speeds up and swallows the
+    // wheel, so zoom starts from the arrival framing instead of fighting the flight.
+    function hurry(event: Event) {
+      if (!isFlightInput(event)) return;
+      event.preventDefault(); event.stopPropagation();
+      pace.speed = FLIGHT_WHEEL_SPEEDUP;
+    }
     function paint(time: number) {
       frameId = null;
       if (finished) return;
       try {
         if (started === null) started = time;
+        if (clockTime === null) clockS = (time - started) / 1000;
+        else clockS += (time - clockTime) / 1000 * pace.speed;
+        clockTime = time;
         const permittedEndS = reducedMotion ? endElapsedS : limitElapsedS();
         const requestedElapsedS = reducedMotion ? endElapsedS
-          : Math.min(endElapsedS, permittedEndS, startElapsedS + (time - started) / 1000);
+          : Math.min(endElapsedS, permittedEndS, startElapsedS + clockS);
         const previousElapsed = elapsedS;
         elapsedS = reducedMotion ? requestedElapsedS
           : advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample);
@@ -389,6 +414,7 @@ export function animateWorldFlight({ owner, from, flight, anchors, signal, reduc
     signal.addEventListener('abort', abort, { once: true });
     if (signal.aborted) { abort(); return; }
     for (const event of events) documentTarget.addEventListener(event, interrupt, { capture: true });
+    documentTarget.addEventListener('wheel', hurry, { capture: true, passive: false });
     frameId = windowTarget.requestAnimationFrame(paint);
   });
 }
