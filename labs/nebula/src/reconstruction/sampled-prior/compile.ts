@@ -7,6 +7,7 @@ import { readCompilerResult, type CompilerResult } from '../compiler/result';
 import { validateCompilerResult } from '../compiler/compile';
 import { loadCompilerImages, compilerImagePanel } from '../compiler/images';
 import { bakeCompiler } from '../compiler/bake';
+import { COMPILER_STAR_PROFILE_PATH } from '../compiler/star-sprites';
 import { readCompilerBakeResult, type CompilerBakeResult, type CompilerPin } from '../compiler/bake-types';
 import type { SkyBounds } from '../compiler/field-types';
 import { decodeFits, float32LittleEndian } from '../getsf-fits';
@@ -103,6 +104,7 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   const inputPins = [{ path: recipe.sampledRecipe, sha256: geometrySha(sampledBytes) }, sampled.evidence,
     { path: sampled.source.path, sha256: sampled.source.sha256 }];
   const id = geometrySha(JSON.stringify({ version: COMPILER_VERSION, implementation, extraImplementation, inputPins,
+    starProfile: geometrySha(await readFile(resolve(root, COMPILER_STAR_PROFILE_PATH))),
     recipeSha256: geometrySha(recipeBytes), request, sourceLayers: sourceData.images.map(image => [image.id, image.matrix, image.original.sha256, image.diffuse.sha256, image.stars.sha256]) }));
   const directory = `.local/nebula-lab/compiler/${id}`;
   try {

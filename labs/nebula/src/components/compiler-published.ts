@@ -29,17 +29,19 @@ async function checkedBytes(source: Pin, fetchLocal: FetchLocal): Promise<Uint8A
   if (hash !== source.sha256) throw new Error('Prepared nebula sources changed. Compile again.');
   return bytes;
 }
-/** A CLI result is inspectable only while its configured inputs retain their saved hashes. */
+/** Inspect immutable outputs against current scientific inputs; code pins document the historical producer. */
 export async function loadPublishedCompiler(path: string, recipePath: string, fetchLocal: FetchLocal, expected?: CompilerRequest): Promise<CompilerResult | null> {
   const response = await fetchLocal(path);
   if (response.status === 404) return null;
   if (!response.ok) throw new Error('Prepared nebula receipt is unavailable.');
   const publication = readPublishedCompiler(await response.json(), recipePath);
-  const inputs = await Promise.all(publication.inputs.map(async source => [source.path, await checkedBytes(source, fetchLocal)] as const));
+  // Preparing code can evolve while a saved cloud remains inspectable. Never replace its recorded producer hashes.
+  const inputs = await Promise.all(publication.inputs.filter(source => !source.path.startsWith('labs/nebula/src/'))
+    .map(async source => [source.path, await checkedBytes(source, fetchLocal)] as const));
   const recipeBytes = inputs.find(([path]) => path === recipePath)![1];
   const recipe = readCompilerRecipe(JSON.parse(new TextDecoder().decode(recipeBytes)));
   const required = [recipe.observationRecipe, recipe.observationCatalogue, recipe.structureRecipe, recipe.structureCatalogue,
-    ...(recipe.jointRecipe ? [recipe.jointRecipe] : []), ...(recipe.depthRecipe ? [recipe.depthRecipe] : []), ...(recipe.sampledRecipe ? [recipe.sampledRecipe] : [])];
+    ...(recipe.observedStars ? [recipe.observedStars.path] : []), ...(recipe.jointRecipe ? [recipe.jointRecipe] : []), ...(recipe.depthRecipe ? [recipe.depthRecipe] : []), ...(recipe.sampledRecipe ? [recipe.sampledRecipe] : [])];
   if (required.some(path => !inputs.some(([candidate]) => candidate === path))) throw new Error('Prepared nebula receipt does not pin every configured source.');
   let depthInputs: { recipe: Pin; evidence: Pin } | undefined;
   if (recipe.depthRecipe) {
@@ -61,6 +63,10 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   const method: unknown = JSON.parse(new TextDecoder().decode(await checkedBytes(result.method, fetchLocal)));
   if (!record(method) || method.recipeSha256 !== publication.inputs.find(source => source.path === recipePath)!.sha256 || !Array.isArray(method.implementation))
     throw new Error('Prepared nebula method does not match its current recipe.');
+  if (recipe.observedStars && (!record(method.observedStars) || !record(method.observedStars.source) ||
+      method.observedStars.source.path !== recipe.observedStars.path || method.observedStars.source.sha256 !== recipe.observedStars.sha256 ||
+      !publication.inputs.some(input => input.path === recipe.observedStars!.path && input.sha256 === recipe.observedStars!.sha256)))
+    throw new Error('Prepared stellar catalogue differs from its configured source.');
   if (recipe.sampledRecipe) {
     for (const owner of sampledOwnerPins(method, recipe.sampledRecipe)) if (!publication.inputs.some(input => input.path === owner.path && input.sha256 === owner.sha256))
       throw new Error('Prepared spatial model is missing a source or implementation pin.');

@@ -1,6 +1,19 @@
 # Pleiades (M45): source evidence and 3D experiment
 
-Current Alignment selection: **NOIRLab optical, both Spitzer composites and WISE**. All four pass the existing relative-star checks. 2MASS is hidden because it mainly supplies stellar context; IRIS is hidden because its coarse beam and unverified placement offer little usable nebular structure here. All six original records remain preserved.
+## Catalogue stars and wider optical comparison · 13 September 2026
+
+The current local stellar update is `29c367b2d0e32f5c5b9cb965c612d485a264a9266fbbbaeeef9090c18ca8dfef`. It retains every cloud bank, alpha byte, geometry and fitting input from `a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8`. It does not replace the cloud material with the rejected material experiments.
+
+The checked-in [stellar catalogue](stellar-catalogue.json) contains 2,105 Hipparcos/Tycho-2 records. The 450 brightest in-frame entries replace residual-only detections, using apparent Johnson V, measured/approximately transformed B−V and exact TAN sky projection. These optical reference lights stay the same across infrared lenses. Their line-of-sight placement remains illustrative; no membership or physical distance is invented. The [source receipt](stellar-sources.json) pins bounded CDS cones and the reproducible strict TypeScript acquisition owner; a cold download reproduced the catalogue exactly. [Stellar evidence](stellar-evidence.json) records the retained-cloud and native-centroid checks.
+
+All seven large optical cores lacked corresponding previous points: nearest old lights were 87–230 native pixels away. Six catalogue directions meet their broad-core centroids within 0.39–2.22 pixels; Alcyone differs by 6.22 pixels within a large asymmetric saturated footprint. **The old cloud still contains unremoved bright cores/halos.** Catalogue placement does not repair native separation or establish exact stellar colors from clipped RGB.
+
+Stellar presentation reuses the main application's prepared soft core/halo profile. Offline integration of its decoded alpha compensates sprite extent, retaining each point's relative RGB light. These are display profiles, not physical stellar radii. Chromium verified all four lenses, unchanged reference lights across lenses, orbit, toggles and reload without processing requests or JavaScript errors. The affected 39 tests and strict lab TypeScript check passed.
+
+The new Tõrva/Niittee optical candidate is selectable in Alignment, covering 4.41° × 2.87°. Its 295 matches include 99 held-out stars at 0.450″ RMS. It has not been star-removed or baked; the NOIRLab lens in Reconstruction still has its original short footprint. Earlier current-result sections below describe the retained cloud and historical star preparations.
+
+
+Current Alignment selection: **NOIRLab optical, both Spitzer composites, WISE, and three wider optical comparisons**. The original four sources and the new Niittee optical field pass relative-star registration; Usama and Andreo remain provisional. 2MASS and IRIS are hidden because they offer little usable nebular structure here. All nine original records remain preserved.
 
 Six original image records remain pinned. The four selected sources now have
 complete native NOX separation and structure maps. A separate
@@ -224,3 +237,24 @@ ran during either volume bake or replay.
 Two wider optical originals are now available in Alignment: Mohamed Usama/IAU OAE (CC BY 4.0; preliminary 7.43° × 4.93° footprint) and Rogelio Bernal Andreo (CC BY-NC-ND 3.0; preliminary 4.86° × 3.46°). They show outer dust beyond the existing 1.14° × 0.84° NOIRLab crop. Their small bright-star seeds initialize comparison only; neither passed independent faint-star registration or establishes the outer-field distortion. [The intake receipt](widefield-intake.json) pins both originals and coordinate evidence. Andreo is retained for local unchanged comparison because derivative redistribution is restricted. The four-source processing recipe and completed model are unchanged.
 
 The full intake reuses the original four sources' completed native diffuse and residual layers through a signed processing-recipe reference. Reuse checks original bytes, native dimensions, NOX model and script signatures, and native artifact receipts, then keeps the intake's verified placement. The mixed-intake browser regression opened both layers for all four sources, left both wider candidates' removal views disabled, and issued no processing requests.
+
+## Wider registered optical candidate
+
+[Taavi Niittee / Tõrva Astronomy Club](https://commons.wikimedia.org/wiki/File:Plejades.jpg)
+now supplies a 4.41° × 2.87° optical field in Alignment under CC BY 4.0.
+Its 8000 × 5199 RGB8 JPEG is the full published processed image (16.65 MB),
+not 8000-pixel detector sampling: the listed camera has a 4944 × 3284 sensor,
+and its stacking/resampling history is not supplied. The image uses an Optolong
+L-Pro filter and a display stretch; it is not calibrated broadband flux.
+
+The unchanged registration gates pass 295 matched stars, with 99 held out,
+0.450″ RMS and all four quadrants of the common NOIRLab footprint. Discovery
+uses the native source raster and a denser bounded catalogue; no manually
+inspected identities were invented. Absolute coordinates inherit NOIRLab's
+publisher astrometry, and distortion beyond the central overlap remains untested.
+
+The larger field includes much more reflection dust, but does not cover the
+entire 4.2° square or prove that all visible cirrus belongs to M45. This remains
+an **Alignment-only candidate**: no new star removal or cloud bake ran. The
+four completed sources' native diffuse/residual layers were reused. Exact
+source and replay evidence is recorded in [the intake receipt](widefield-intake.json).

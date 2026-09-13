@@ -1,13 +1,13 @@
 import type { PreparedCssVolume } from '../../../../../src/renderers/css/volume/types';
 import type { CompilerBakeResult, CompilerLensVolume } from './bake-types';
 
-type BankIdentity = Pick<CompilerBakeResult, 'id' | 'frame' | 'fieldIdentity' | 'alphaSha256'>;
+type BankIdentity = Pick<CompilerBakeResult, 'id' | 'volumeId' | 'frame' | 'fieldIdentity' | 'alphaSha256'>;
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 
 /** The neutral bank and ordinary RGB lenses retain the scene's original alpha contract. */
 export function assertCompilerBankIdentity(payload: PreparedCssVolume, result: BankIdentity) {
   const provenance = payload.provenance;
-  if (payload.id !== `compiler-${result.id}` || JSON.stringify(payload.frame) !== JSON.stringify(result.frame) ||
+  if (payload.id !== `compiler-${result.volumeId ?? result.id}` || JSON.stringify(payload.frame) !== JSON.stringify(result.frame) ||
       !record(provenance) || provenance.alphaSha256 !== result.alphaSha256 || provenance.fieldIdentity !== result.fieldIdentity)
     throw new TypeError('Prepared compiler volume belongs to a different result or alpha support.');
 }

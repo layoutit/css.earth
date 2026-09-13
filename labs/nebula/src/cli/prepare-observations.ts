@@ -39,7 +39,8 @@ for (const source of recipe.images) {
   const metadata = await sharp(bytes).metadata();
   if (metadata.width !== source.width || metadata.height !== source.height) throw new Error(`${source.id}: native dimensions differ.`);
   const stars = source.registrationTransfer || source.registrationMode === 'publisher-wcs' ? [] : source.registrationMode === 'compact-stars'
-    ? await detectCompactStars(bytes, [source.width, source.height], source.compactStarChannel, 500) : await detectStars(bytes, [source.width, source.height]);
+    ? await detectCompactStars(bytes, [source.width, source.height], source.compactStarChannel, 500)
+    : await detectStars(bytes, [source.width, source.height], source.registrationDetection?.sourceMaximum, source.registrationDetection?.maximumStars);
   const publisherInitial = publisherTransform(source, recipe.frame);
   const initial = await calibratedInitialTransform(source, recipe.images.find(image => image.id === recipe.referenceId)!, recipe.frame, publisherInitial);
   console.log(`OBSERVATION_STARS ${source.id} ${stars.length}`);
@@ -49,9 +50,10 @@ const reference = sources.find(row => row.source.id === recipe.referenceId)!;
 const aligned: Array<typeof sources[number] & { imageToFrame: typeof reference.initial;
   registration: RegistrationEvidence }> = [];
 const expandedStars = new Map<string, Awaited<ReturnType<typeof detectStars>>>();
-const expand = async (row: typeof sources[number]) => {
-  let stars = expandedStars.get(row.source.id);
-  if (!stars) { stars = await detectStars(row.bytes, [row.source.width, row.source.height], 2048, 12000); expandedStars.set(row.source.id, stars); }
+const expand = async (row: typeof sources[number], workingMaximum = 2048, maximumStars = 12000) => {
+  const key = `${row.source.id}:${workingMaximum}:${maximumStars}`;
+  let stars = expandedStars.get(key);
+  if (!stars) { stars = await detectStars(row.bytes, [row.source.width, row.source.height], workingMaximum, maximumStars); expandedStars.set(key, stars); }
   return stars;
 };
 for (const row of sources) {
@@ -66,14 +68,16 @@ for (const row of sources) {
     result.evidence.interpretation = 'Explicit native stellar identities established by model-assisted search and visual inspection. Held-out residuals evaluate only the affine fit conditional on those identities; discovery is not a blind test. Absolute astrometry remains publisher metadata.';
     attempts.push({ matchedStarCatalogue: row.source.matchedStarCatalogue, astrometricCalibration: row.source.astrometricCalibration, publisherInitial: row.publisherInitial, calibratedInitial: row.initial, pass: result.pass });
   }
-  for (const maximumStars of row.source.matchedStarCatalogue || publisherOnly ? [] : compact ? [250, 500] : [6000, 12000]) {
+  const detection = row.source.registrationDetection;
+  for (const maximumStars of row.source.matchedStarCatalogue || publisherOnly ? [] : compact ? [250, 500] : detection ? [detection.maximumStars] : [6000, 12000]) {
     try {
       const pool = compact ? await Promise.all([row, reference].map(r => r.source.registrationMode === 'compact-stars' ? r.stars.slice(0, maximumStars) : detectCompactStars(r.bytes, [r.source.width, r.source.height], r.source.compactStarChannel, maximumStars)))
+        : detection ? [row.stars, await expand(reference, detection.referenceMaximum, detection.maximumStars)]
         : maximumStars === 6000 ? [row.stars, reference.stars] : [await expand(row), await expand(reference)];
       const pairs = (compact ? matchCompactStars : matchStars)(pool[0]!, pool[1]!, row.initial, reference.initial);
       result = verifyRegistration(pairs, row.source, recipe.frame, row.initial,
         { width: reference.source.width, height: reference.source.height, imageToFrame: reference.initial });
-      attempts.push({ maximumStars, sourceStars: pool[0]!.length, referenceStars: pool[1]!.length, pass: result.pass, evidence: { ...result.evidence, matches: undefined } });
+      attempts.push({ maximumStars, ...(detection ? { detection } : {}), sourceStars: pool[0]!.length, referenceStars: pool[1]!.length, pass: result.pass, evidence: { ...result.evidence, matches: undefined } });
       if (result.pass) break;
     } catch (error) { attempts.push({ maximumStars, pass: false, error: error instanceof Error ? error.message : String(error) }); }
     console.log(`OBSERVATION_ALIGNMENT_RETRY ${row.source.id}; pool=${maximumStars}; residual gates unchanged`);

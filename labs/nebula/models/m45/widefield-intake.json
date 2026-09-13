@@ -2,7 +2,7 @@
   "schema": "cssearth-nebula-widefield-intake@1",
   "objectId": "m45",
   "acquiredAt": "2026-09-13",
-  "scope": "Two wider optical Alignment comparisons only. Existing processing and physical inputs are unchanged.",
+  "scope": "Three wider optical Alignment comparisons. Niittee is relatively star-registered; Usama/Andreo remain preliminary. Existing processing and physical inputs are unchanged.",
   "images": [
     {
       "id": "iau-usama-widefield",
@@ -277,6 +277,77 @@
         "path": "output/m45-widefield/andreo-widefield-full-footprint.png",
         "sha256": "f776d10f6619e9efa81ec86f47235b9eb9767b6d1b58a61c078cf74b8bcd21d1"
       }
+    },
+    {
+      "id": "niittee-widefield",
+      "source": {
+        "path": ".local/nebula-lab/intake/m45/widefield/niittee-pleiades.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Plejades.jpg",
+        "sha256": "96c04d4db1cd317544bd616fe41ce337f32aa1dac2fcd69702419f29c426e5aa",
+        "width": 8000,
+        "height": 5199,
+        "bytes": 16654428
+      },
+      "license": "CC BY 4.0",
+      "rightsEvidence": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
+      "nativeDetectorDimensions": [
+        4944,
+        3284
+      ],
+      "publishedRasterDimensions": [
+        8000,
+        5199
+      ],
+      "resolutionInterpretation": "Full published processed raster; exact stacking/resampling history is unavailable. 8000-pixel width is not independent detector sampling.",
+      "fieldArcminutes": [
+        264.79361625291585,
+        172.0827513623637
+      ],
+      "astrometryOrigin": "authored-bright-star-seed-not-publisher",
+      "registration": {
+        "status": "verified-relative-common-footprint",
+        "discovery": "11 bright-star seed; native positive high-pass detection and reciprocal neighbour matching; affine RANSAC and held-out validation",
+        "matchedStars": 296,
+        "heldOutStars": 99,
+        "spatialQuadrants": 4,
+        "rmsFramePixels": 0.0783626703898703,
+        "rmsArcseconds": 0.5785369024877143,
+        "maximumFramePixels": 0.3575504922064494,
+        "imageToFrame": [
+          0.26171724042206806,
+          -0.062474151140331335,
+          0.06285305252312894,
+          0.26147485425000094,
+          -125.23001041111979,
+          611.163717693123
+        ],
+        "evidencePath": "output/m45-source-research/niittee-registration-native.json",
+        "evidenceSha256": "96c487c4f97d4f8720a9933bc4242ac459a866bebd418b73fe6f9fd17b9e7d15",
+        "preparationReplay": {
+          "path": ".local/nebula-lab/observations/m45/niittee-widefield-registration.json",
+          "sha256": "3d4787df1d6199a91d5f8b2a9670e50e22325046691ea34073a148a614af109e",
+          "pass": true,
+          "matchedStars": 295,
+          "heldOutStars": 99,
+          "rmsArcseconds": 0.45019122426297753,
+          "spatialQuadrants": 4,
+          "imageToFrame": [
+            0.26171456762343626,
+            -0.06246873499264166,
+            0.0628482377151275,
+            0.2614828559312675,
+            -125.20579335712671,
+            611.121338555477
+          ],
+          "discovery": {
+            "sourceMaximum": 8000,
+            "referenceMaximum": 4000,
+            "maximumStars": 20000
+          }
+        }
+      },
+      "processing": "Alignment only. Existing four-source processing recipe and completed native separations are unchanged; no NOX or volume bake.",
+      "coverageLimit": "Relative registration is verified in the central NOIRLab overlap. Neither the outer native footprint nor all physical cirrus has independent astrometric/association qualification."
     }
   ],
   "validation": {
@@ -507,6 +578,78 @@
           ]
         }
       ]
+    }
+  },
+  "niitteeValidation": {
+    "checkedAt": "2026-09-13",
+    "scope": "Alignment candidate only; no star removal or volume baking",
+    "recipe": {
+      "path": "labs/nebula/models/m45/observations.json",
+      "sha256": "1a90116f1977f7a76b123db79c3567c128b5d63a91b7ac59d5b05ead1b280057"
+    },
+    "catalog": {
+      "path": ".local/nebula-lab/observations/m45/observations.json",
+      "sha256": "b542d2db51c80fb9d65d4e216fe0ef1966f0ff0c62188ab8de74b79d549a4789"
+    },
+    "registration": {
+      "path": ".local/nebula-lab/observations/m45/niittee-widefield-registration.json",
+      "sha256": "3d4787df1d6199a91d5f8b2a9670e50e22325046691ea34073a148a614af109e"
+    },
+    "preparationLog": {
+      "path": "output/m45-source-research/alignment.log",
+      "sha256": "f1f13d5b5b059352a0c5542855861f350b3adf3b1d8c28966adeaee0c2d51e94"
+    },
+    "positiveSignals": [
+      "NEBULA_ALIGNMENT_READY",
+      "NEBULA_OBSERVATIONS_COMPLETE; nativeRemoval=false",
+      "NEBULA_OBSERVATION_REUSED for all four prior separated sources"
+    ],
+    "preservedSources": [
+      {
+        "id": "noirlab-optical",
+        "sourceUnchanged": true,
+        "placementUnchanged": true,
+        "originalPreviewSha256": "81a76dac30a6f4efe124a50752d0a20d88f6f13c9628135db5134486f80f1ceb",
+        "diffusePreviewSha256": "7d9ea4e15e17a2267503a3ef890b04774b835df86b72289b121dcf86494cd141",
+        "residualPreviewSha256": "23bb3f023f10c16118626e2696b0bd9b0e531028bd3741c8f6a5c4d8075a0fff"
+      },
+      {
+        "id": "spitzer-irac",
+        "sourceUnchanged": true,
+        "placementUnchanged": true,
+        "originalPreviewSha256": "205f1cb9aab7b1ef9ded6277b6cb94469f2406c41d8f1346c89c28891fb60958",
+        "diffusePreviewSha256": "1460c7eccc2af400b24919745e3ea4ed5f7c33c1560b9df91094c5aed8b0341c",
+        "residualPreviewSha256": "82166da06a1660364d8d58ed03b4ccd9844b7d1faf329d7de1b1531c1cd32f48"
+      },
+      {
+        "id": "spitzer-irac-mips",
+        "sourceUnchanged": true,
+        "placementUnchanged": true,
+        "originalPreviewSha256": "eff413b38a2c4c9dc68b7f0b73b48beb795d0bb69798a6aa56e848de5d48113b",
+        "diffusePreviewSha256": "600a3c343fc2e99927fb9188ac7cefa8c66be9e2fe90c7973c87c70d1a237cd4",
+        "residualPreviewSha256": "749e01d22254ea5ca826dbcc7db2a55d7cae50d1c6eb6988298bef5b2ca6addb"
+      },
+      {
+        "id": "wise-four-band",
+        "sourceUnchanged": true,
+        "placementUnchanged": true,
+        "originalPreviewSha256": "963b8177aec1af35a548a160e7dad4212009ac782222d403c9a6c8f27b60ba6a",
+        "diffusePreviewSha256": "a5569ca80256bb9e8973afb0af09cbfbd21f4c7896d4b75e073a8056cfd68aa3",
+        "residualPreviewSha256": "db41e79c3177eb41dd6df8cd965bbc48ae4b4b9c8de76db8ac984b21607a9183"
+      }
+    ],
+    "checks": {
+      "targetedTests": 10,
+      "log": "output/m45-source-research/tests.log",
+      "sha256": "618d43e7499d53f648f0ec5b4526a7ed335dfbc36a376aef53ac7a926c59a2d8"
+    },
+    "processingRecipeUnchanged": true,
+    "usamaBridge": {
+      "reference": "niittee-widefield",
+      "pass": false,
+      "matchedStars": 0,
+      "receipt": "output/m45-source-research/usama-bridge.json",
+      "interpretation": "Bounded native high-pass matcher still lacks reliable reciprocal neighbouring patterns at this larger angular sampling. Existing provisional source remains unchanged."
     }
   }
 }

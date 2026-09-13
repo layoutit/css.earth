@@ -4,6 +4,7 @@ import { validateImageWcs, type ImageWcs } from '../overlay-wcs.js';
 export interface ObservationSource extends SkyRaster {
   id: string; label: string; url: string; page: string; sha256: string; credit: string; bands: string; termsUrl: string;
   registrationMode?: 'field-stars' | 'compact-stars' | 'publisher-wcs';
+  registrationDetection?: { sourceMaximum: number; referenceMaximum: number; maximumStars: number };
   compactStarChannel?: 'minimum-rgb' | 'maximum-rgb';
   processingRole?: 'registration-reference';
   stellarTreatment?: 'preserve';
@@ -60,6 +61,17 @@ export function readObservationRecipe(value: unknown): ObservationRecipe {
     if (image.processingRole !== undefined && image.processingRole !== 'registration-reference') throw new TypeError('Unknown observation processing role.');
     if (image.stellarTreatment !== undefined && image.stellarTreatment !== 'preserve') throw new TypeError('Unknown stellar treatment.');
     if (image.coordinateOrigin !== undefined && image.coordinateOrigin !== 'authored-bright-star-seed') throw new TypeError('Unknown coordinate origin.');
+    let registrationDetection: ObservationSource['registrationDetection'];
+    if (image.registrationDetection !== undefined) {
+      const settings = record(image.registrationDetection);
+      const bounded = (value: unknown, maximum: number) => {
+        const n = finite(value);
+        if (!Number.isInteger(n) || n < 64 || n > maximum) throw new TypeError('Registration detection setting outside its bounded range.');
+        return n;
+      };
+      if (image.registrationMode && image.registrationMode !== 'field-stars' || image.matchedStarCatalogue || image.registrationTransfer) throw new TypeError('Registration detection settings require direct field-star discovery.');
+      registrationDetection = { sourceMaximum: bounded(settings.sourceMaximum, 16384), referenceMaximum: bounded(settings.referenceMaximum, 16384), maximumStars: bounded(settings.maximumStars, 20000) };
+    }
     let matchedStarCatalogue: ObservationSource['matchedStarCatalogue'];
     if (image.matchedStarCatalogue !== undefined) {
       const catalogue = record(image.matchedStarCatalogue), path = string(catalogue.path);
@@ -78,6 +90,7 @@ export function readObservationRecipe(value: unknown): ObservationRecipe {
     return { ...sky(image), wcs, id: id(image.id), label: string(image.label), url: https(image.url), page: https(image.page), sha256: pin(image.sha256),
       credit: string(image.credit), bands: string(image.bands), termsUrl: https(image.termsUrl), northRightDegrees: finite(image.northRightDegrees),
       ...(image.registrationMode === undefined ? {} : { registrationMode: image.registrationMode }),
+      ...(registrationDetection === undefined ? {} : { registrationDetection }),
       ...(image.compactStarChannel === undefined ? {} : { compactStarChannel: image.compactStarChannel }),
       ...(image.processingRole === undefined ? {} : { processingRole: image.processingRole }),
       ...(image.stellarTreatment === undefined ? {} : { stellarTreatment: image.stellarTreatment }),

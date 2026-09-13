@@ -67,6 +67,7 @@ for (const candidate of selected) {
       const resultPin = await pin(`.local/nebula-lab/compiler/${result.id}/result.json`);
       const inputPaths = [candidate.compilerRecipe, recipe.observationRecipe, recipe.observationCatalogue, recipe.structureRecipe, recipe.structureCatalogue];
       if (recipe.jointRecipe) inputPaths.push(recipe.jointRecipe);
+      if (recipe.observedStars) inputPaths.push(recipe.observedStars.path);
       const depth = recipe.depthRecipe ? await loadDepthModel(root, recipe.depthRecipe, recipe.id) : undefined;
       if (depth) inputPaths.push(depth.recipePath, depth.recipe.evidence.path);
       const method: unknown = JSON.parse(await readFile(result.method.path, 'utf8'));

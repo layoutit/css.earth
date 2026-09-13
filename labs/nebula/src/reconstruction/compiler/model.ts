@@ -1,15 +1,17 @@
+import { readCompilerTargetControls, type CompilerTargetControls } from './target';
 import type { Matrix } from '../../alignment/observations-ui/model';
 import { jointPath, jointRecord } from '../joint-fit/model';
 export const COMPILER_VERSION = 'registered-emission-compiler@1';
 export interface CompilerControls { detail: number; faint: number; depth: number }
 export interface CompilerStarCatalogue { sourceIds: string[]; mergeRadiusArcsec: number }
+export interface ObservedStarCataloguePin { path: string; sha256: string }
 export const defaultCompilerControls: CompilerControls = { detail: .65, faint: .35, depth: 1 };
 export interface CompilerRequest { action: 'apply'; imageId: 'compiler'; recipePath: string; cataloguePath: string;
   imageToFrame: Record<string, Matrix>; evidence: { sensitivity: number; weights: number[] }; controls: CompilerControls }
 export interface CompilerRecipe { schema: 'cssearth-nebula-compiler@1'; id: string; label: string; observationRecipe: string;
   observationCatalogue: string; structureRecipe: string; structureCatalogue: string; jointRecipe?: string; depthRecipe?: string; sampledRecipe?: string;
   defaultSourceId: string; maximumStars: number; interpretation: string;
-  defaultControls?: CompilerControls; sourceWeights?: Record<string, number>; starCatalogue?: CompilerStarCatalogue }
+  defaultControls?: CompilerControls; sourceWeights?: Record<string, number>; starCatalogue?: CompilerStarCatalogue; observedStars?: ObservedStarCataloguePin; targetControls?: CompilerTargetControls }
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const range = (v: unknown, low: number, high: number): v is number => finite(v) && v >= low && v <= high;
 export function readCompilerControls(v: unknown): CompilerControls {
@@ -34,8 +36,11 @@ export function readCompilerRecipe(v: unknown): CompilerRecipe {
       (v.jointRecipe !== undefined && !jointPath(v.jointRecipe)) || (v.depthRecipe !== undefined && (!jointPath(v.depthRecipe) || !v.depthRecipe.startsWith('labs/nebula/models/'))) ||
       (v.sampledRecipe !== undefined && (!jointPath(v.sampledRecipe) || !v.sampledRecipe.startsWith('labs/nebula/models/'))) ||
       [v.jointRecipe, v.depthRecipe, v.sampledRecipe].filter(value => value !== undefined).length > 1 || typeof v.defaultSourceId !== 'string' || !range(v.maximumStars, 0, 2000) || !Number.isInteger(v.maximumStars) || typeof v.interpretation !== 'string') throw new TypeError('Invalid compiler recipe.');
+  const targetControls = v.targetControls === undefined ? undefined : readCompilerTargetControls(v.targetControls);
   const controls = v.defaultControls === undefined ? undefined : readCompilerControls(v.defaultControls);
   const starCatalogue = v.starCatalogue === undefined ? undefined : readCompilerStarCatalogue(v.starCatalogue);
+  const observedStars = v.observedStars === undefined ? undefined : readObservedStarCataloguePin(v.observedStars);
+  if (observedStars && (starCatalogue || v.sampledRecipe)) throw new TypeError('Choose one supported stellar catalogue route.');
   if (starCatalogue && (starCatalogue.sourceIds[0] !== v.defaultSourceId || v.sampledRecipe !== undefined))
     throw new TypeError('Compiler star catalogue must start with the reference source and use the emission-field route.');
   let sourceWeights: Record<string, number> | undefined;
@@ -48,7 +53,12 @@ export function readCompilerRecipe(v: unknown): CompilerRecipe {
   return { schema: v.schema, id: v.id, label: v.label, observationRecipe: v.observationRecipe, observationCatalogue: v.observationCatalogue,
     structureRecipe: v.structureRecipe, structureCatalogue: v.structureCatalogue, jointRecipe: v.jointRecipe, ...(v.depthRecipe ? { depthRecipe: v.depthRecipe } : {}), ...(v.sampledRecipe ? { sampledRecipe: v.sampledRecipe } : {}), defaultSourceId: v.defaultSourceId,
     maximumStars: v.maximumStars, interpretation: v.interpretation,
-    ...(controls ? { defaultControls: controls } : {}), ...(sourceWeights ? { sourceWeights } : {}), ...(starCatalogue ? { starCatalogue } : {}) };
+    ...(controls ? { defaultControls: controls } : {}), ...(sourceWeights ? { sourceWeights } : {}), ...(starCatalogue ? { starCatalogue } : {}), ...(observedStars ? { observedStars } : {}), ...(targetControls ? { targetControls } : {}) };
+}
+export function readObservedStarCataloguePin(value: unknown): ObservedStarCataloguePin {
+  if (!jointRecord(value) || !jointPath(value.path) || !value.path.startsWith('labs/nebula/models/') ||
+      typeof value.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.sha256)) throw new TypeError('Invalid observed stellar catalogue pin.');
+  return { path: value.path, sha256: value.sha256 };
 }
 export function readCompilerStarCatalogue(v: unknown): CompilerStarCatalogue {
   if (!jointRecord(v) || !Array.isArray(v.sourceIds) || v.sourceIds.length < 2 || v.sourceIds.length > 8 ||

@@ -1,5 +1,10 @@
 # Lagoon · M8
 
+The later [faint-signal and VISTA-footprint trial](faint-tuning.md) improves the prepared target, but central Spitzer resolution/material artifacts remain unresolved. Its separate recipe has not replaced the active cloud.
+
+The current local presentation is `9542641c627154f767d8fe5f745d0fb3693397b25e4f7ea78e17cbb7f9bf98fd`: only the 650 star profiles change from solid disks to the main application's prepared soft core/halo. The cloud, star positions and every per-lens color, relative light and angular size input remain exactly those of `5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8`. Sprite extent compensates the profile's decoded alpha integral. This is still a residual-derived overlay, not a new external stellar catalogue. [Presentation evidence](stellar-profile-evidence.json) records the output and browser checks.
+
+
 The selected optical, near-infrared and mid-infrared images now have verified native star separation and a completed shared 3D cloud. The geometry uses a paper-guided local PDR interpretation with explicitly authored depth across the wider field. It is relative display emission, not recovered gas or dust density.
 
 ## Current processing · 2026-09-13
@@ -103,3 +108,24 @@ The dossier links five primary papers and records whether the abstract, full tex
 - [Singh et al. (2026)](https://doi.org/10.3847/1538-4357/ae563a): whole-nebula LVM line diagnostics and a [27-map figure set](https://doi.org/10.5281/zenodo.19165622). Preserve fibre positions, masks, inverse variances and line thresholds before qualifying numerical data; plotted figures are not native line-map inputs.
 
 The intake's six byte pins and decoded dimensions were checked with the strict observation reader. This is source qualification only: no star removal, NOX, compiler, reconstruction or bake was run for these additions.
+
+## Central optical detail follow-up
+
+The [Hubble 2018 optical view](https://esahubble.org/images/heic1808a/) is the
+best existing local-detail candidate: [O III], y, Hα and [N II], observed
+12–18 February 2018. Its 3.19′ × 4.02′ footprint covers the Hourglass/Herschel 36
+region, not the complete Lagoon. Its line-color assignment differs from the
+ESO B/V/R/Hα widefield; a later composite must retain that distinction.
+
+Two bounded registration attempts remain below the unchanged 45-match gate:
+zero against the 4K ESO image, and nine against a localized, scale-matched crop
+of the full 23,569 × 15,784 ESO JPEG. The full official JPEG was downloaded and
+inspected, but its bright center remains washed out. More pixels alone cannot
+recover Hubble's central contrast. [Exact evidence](source-dossier.json) records
+both failures, the downloaded master, inspected crop and unchanged recipe hashes.
+
+Hubble remains excluded from the selected processing set. The next useful step
+is a qualified optical catalogue or intermediate astrometric image, followed by
+a local multi-resolution material contribution attached to supported 3D
+structures. Neither a whole-cloud Hubble texture nor repeating its patch through
+the full depth is an acceptable composite. No new NOX processing or bake ran.
