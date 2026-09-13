@@ -61,6 +61,11 @@ The linked reports identify their tested sources, prepared files and limitations
   Waiting for application readiness and rebuilding the renderer did not resolve
   it. The cause is not established; native-source preparation does not fix this
   runtime behavior. Whole-globe display passed the focused visual check.
+- **Minimaps, observed 12 September 2026:** the current recipe makes the same
+  minimap for the normal and cloud lenses. Native photographic sampling hands
+  the preview the unprocessed Blue Marble grid, without the cloud composite or
+  the 1.25 display gamma. The committed normal and cloud minimaps come from the
+  earlier recipe, so they do not reproduce from this one.
 
 Named features: Earth has no IAU nomenclature, so its labels come from Natural Earth 1:10m vectors (public domain, retrieved 2026-09-12) pinned under `source/features/`: populated places ranked by population, geographic region points and areas, marine areas and river centrelines. Places are unsized points; regions and seas trace their bounding box; rivers trace their centreline. Anchors are cast onto the rendered ellipsoid through the paged lane's own surface sampler (`tools/objects/surface-features/ellipsoid.ts`), and the runtime parser checks every anchor against the ellipsoid band recorded in the plan. Natural Earth's names, ranks and geometry are its editors' choices, not an official gazetteer.
 
