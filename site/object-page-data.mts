@@ -11,7 +11,7 @@ import type { SharedReference } from '../src/platform/prepared-shared.mts';
 /** Server/build-only metadata read. Scene trees remain separate runtime assets. */
 export async function readPreparedObjectBytes(id: string, root = process.cwd()) {
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid object page identity.');
-  const directory = resolve(root, 'src/planets', id);
+  const directory = resolve(root, 'src/objects', id);
   const descriptor = parseObjectDescriptor(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')));
   if (descriptor.id !== id || descriptor.prepared?.url !== 'prepared/object.json') {
     throw new TypeError(`${id}: invalid prepared page reference.`);
@@ -25,7 +25,7 @@ export async function readPreparedObjectBytes(id: string, root = process.cwd()) 
 
 export async function loadObjectPageData(id: string, root = process.cwd()) {
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid object page identity.');
-  const directory = resolve(root, 'src/planets', id);
+  const directory = resolve(root, 'src/objects', id);
   const descriptor = parseObjectDescriptor(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')));
   const page = descriptor.properties.page;
   const reference = record(page) && record(page.metadata) ? page.metadata : null;

@@ -10,26 +10,26 @@ The original output has 5,050 vertices; duplicate seams and poles are welded to 
 
 | Destination | Celestia mesh | Approximate catalog diameter, km |
 | --- | --- | --- |
-| [17P Holmes](../src/planets/comet-17p/README.md) | asteroid.cms | 3.42 |
-| [21P Giacobini–Zinner](../src/planets/comet-21p/README.md) | asteroid.cms | 2 |
-| [26P Grigg–Skjellerup](../src/planets/comet-26p/README.md) | asteroid.cms | 2.6 |
-| [29P Schwassmann–Wachmann 1](../src/planets/comet-29p/README.md) | asteroid.cms | 60.4 |
-| [46P Wirtanen](../src/planets/comet-46p/README.md) | asteroid.cms | 1.2 |
-| [55P Tempel–Tuttle](../src/planets/comet-55p/README.md) | asteroid.cms | 3.6 |
-| [96P Machholz 1](../src/planets/comet-96p/README.md) | asteroid.cms | 6.4 |
-| [109P Swift–Tuttle](../src/planets/comet-109p/README.md) | asteroid.cms | 23.6 |
-| [167P CINEOS](../src/planets/comet-167p/README.md) | asteroid.cms | 66.17 |
-| [153P Ikeya–Zhang](../src/planets/comet-153p/README.md) | asteroid.cms | 5.09 |
-| [C/1983 H1 IRAS–Araki–Alcock](../src/planets/comet-c1983-h1/README.md) | asteroid.cms | 9.2 |
-| [C/1956 R1 Arend–Roland](../src/planets/comet-c1956-r1/README.md) | asteroid.cms | 3.16 |
-| [C/1973 E1 Kohoutek](../src/planets/comet-c1973-e1/README.md) | asteroid.cms | 4.2 |
-| [C/1995 O1 Hale–Bopp](../src/planets/comet-c1995-o1/README.md) | asteroid.cms | 60 |
-| [C/1996 B2 Hyakutake](../src/planets/comet-c1996-b2/README.md) | asteroid.cms | 4.2 |
-| [C/2006 P1 McNaught](../src/planets/comet-c2006-p1/README.md) | asteroid.cms | 3.16 |
-| [C/2013 A1 Siding Spring 2013](../src/planets/comet-c2013-a1/README.md) | asteroid.cms | 0.55 |
-| [C/2014 UN271 Bernardinelli–Bernstein](../src/planets/comet-c2014-un271/README.md) | roughsphere.cms | 137 |
-| [C/2020 F3 NEOWISE](../src/planets/comet-c2020-f3/README.md) | asteroid.cms | 5 |
-| [C/2023 A3 Tsuchinshan–ATLAS](../src/planets/comet-c2023-a3/README.md) | asteroid.cms | 11.8 |
+| [17P Holmes](../src/objects/comet-17p/README.md) | asteroid.cms | 3.42 |
+| [21P Giacobini–Zinner](../src/objects/comet-21p/README.md) | asteroid.cms | 2 |
+| [26P Grigg–Skjellerup](../src/objects/comet-26p/README.md) | asteroid.cms | 2.6 |
+| [29P Schwassmann–Wachmann 1](../src/objects/comet-29p/README.md) | asteroid.cms | 60.4 |
+| [46P Wirtanen](../src/objects/comet-46p/README.md) | asteroid.cms | 1.2 |
+| [55P Tempel–Tuttle](../src/objects/comet-55p/README.md) | asteroid.cms | 3.6 |
+| [96P Machholz 1](../src/objects/comet-96p/README.md) | asteroid.cms | 6.4 |
+| [109P Swift–Tuttle](../src/objects/comet-109p/README.md) | asteroid.cms | 23.6 |
+| [167P CINEOS](../src/objects/comet-167p/README.md) | asteroid.cms | 66.17 |
+| [153P Ikeya–Zhang](../src/objects/comet-153p/README.md) | asteroid.cms | 5.09 |
+| [C/1983 H1 IRAS–Araki–Alcock](../src/objects/comet-c1983-h1/README.md) | asteroid.cms | 9.2 |
+| [C/1956 R1 Arend–Roland](../src/objects/comet-c1956-r1/README.md) | asteroid.cms | 3.16 |
+| [C/1973 E1 Kohoutek](../src/objects/comet-c1973-e1/README.md) | asteroid.cms | 4.2 |
+| [C/1995 O1 Hale–Bopp](../src/objects/comet-c1995-o1/README.md) | asteroid.cms | 60 |
+| [C/1996 B2 Hyakutake](../src/objects/comet-c1996-b2/README.md) | asteroid.cms | 4.2 |
+| [C/2006 P1 McNaught](../src/objects/comet-c2006-p1/README.md) | asteroid.cms | 3.16 |
+| [C/2013 A1 Siding Spring 2013](../src/objects/comet-c2013-a1/README.md) | asteroid.cms | 0.55 |
+| [C/2014 UN271 Bernardinelli–Bernstein](../src/objects/comet-c2014-un271/README.md) | roughsphere.cms | 137 |
+| [C/2020 F3 NEOWISE](../src/objects/comet-c2020-f3/README.md) | asteroid.cms | 5 |
+| [C/2023 A3 Tsuchinshan–ATLAS](../src/objects/comet-c2023-a3/README.md) | asteroid.cms | 11.8 |
 
 The catalog is pinned to [CelestiaContent 1993a082e](https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc). GPL-2.0-or-later notices accompany the catalog, original generator and exported geometry. Stock rock textures, assumed spin, tails and coma are not imported. The dataset explanation distinguishes the illustrative shape and estimated size from the measured models elsewhere in the explorer. The factsheet has two facts and a short introduction.
 

@@ -10,7 +10,7 @@ const baseFont=fontkit.openSync(PLANET_TITLE_RECIPE.checkedFontPath);
 if(!('getVariation' in baseFont))throw new TypeError('Title source requires one font face.');
 const font=baseFont.getVariation({wght:PLANET_TITLE_RECIPE.weight,opsz:PLANET_TITLE_RECIPE.opticalSize});
 for(const c of await readIntake()){
- const p=resolve('src/planets',c.id),s=resolve(p,'source'),rawConfig=await read(resolve(s,'preparation/terrestrial.json'));
+ const p=resolve('src/objects',c.id),s=resolve(p,'source'),rawConfig=await read(resolve(s,'preparation/terrestrial.json'));
  const geometry=requireRecord(rawConfig.geometry),config={...rawConfig,displayName:requireString(rawConfig.displayName),namespace:requireString(rawConfig.namespace),geometry:{...geometry,radius:requireFiniteNumber(geometry.radius),radiusKm:requireFiniteNumber(geometry.radiusKm)}};
  c.name=config.displayName;
  await write(resolve(s,'presentation/title-mark.json'),{schema:'cssearth-title-source@1',...createPlanetTitleSource(c.name,font)});

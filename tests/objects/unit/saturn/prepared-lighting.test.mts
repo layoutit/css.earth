@@ -10,8 +10,8 @@ import { OBJECTS } from '../../../../site/objects.mts';
 const [scene, runtime] = await Promise.all([readPreparedFixture('saturn','scene'),readPreparedFixture('saturn','runtime')]);
 const root = new URL('../../../../', import.meta.url);
 const readJson = async (path: string|URL) => JSON.parse(await readFile(new URL(path, root), 'utf8'));
-const manifest = await readJson('src/planets/saturn/runtime-assets.json');
-const geometry = await readJson('src/planets/saturn/source/preparation/geometry.json');
+const manifest = await readJson('src/objects/saturn/runtime-assets.json');
+const geometry = await readJson('src/objects/saturn/source/preparation/geometry.json');
 const exterior = required(runtime.materials.find((track: { id: string; }) => track.id === 'exterior'));
 async function verifiedAsset(url: string) {
   const pin = array(shape({filename:text,bytes:number,sha256:text}))(manifest.assets).find(asset => url === `/scenes/saturn/${asset.filename}`);

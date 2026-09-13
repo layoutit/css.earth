@@ -12,7 +12,7 @@ const lens = { path: 'science/AL01_GLB_M006_M006_V01.TAB', labelPath: 'science/a
   minimum: 0, maximum: 1, sourceValidRange: [0, 1], sampling: 'nearest',
   surfaceSampling: { method: 'unique-radial-map', maximumDistanceMeters: .2,
     ambiguityReference: { path: 'science/reference.wrl', format: 'vrml-mesh', grid: { metersPerUnit: 1, expectedVertices: 6, expectedFaces: 8 } } } };
-const label = await readFile(new URL('../../../src/planets/comet-67p/source/science/al01_glb_m006_m006_v01.lbl', import.meta.url), 'utf8');
+const label = await readFile(new URL('../../../src/objects/comet-67p/source/science/al01_glb_m006_m006_v01.lbl', import.meta.url), 'utf8');
 const records = Buffer.from(Array.from({ length: 259200 }, (_, i) => [90 - Math.floor(i / 720) * .5, i % 720 * .5, .2]
   .map(n => n.toFixed(4).padStart(9)).join(',') + '\r\n').join(''));
 const withValue = (bytes: Buffer<ArrayBuffer>, row: number, value: number) => bytes.write(value.toFixed(4).padStart(9), row * 31 + 20, 'ascii');

@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fixture import ROOT, samples, write
 warnings.simplefilter('ignore')
 
-path = ROOT / 'src/planets/donaldjohanson/source/observations/lor_0798443290_04598_00035_1x1_sci_03.fit'
+path = ROOT / 'src/objects/donaldjohanson/source/observations/lor_0798443290_04598_00035_1x1_sci_03.fit'
 hdus = fits.open(str(path)); header = hdus[0].header
 planes = {f'hdu{i}': {'name': hdu.name, 'shape': list(hdu.data.shape), 'dtype': str(hdu.data.dtype), 'samples': samples(hdu.data, 98 + i, 48)} for i, hdu in enumerate(hdus)}
 w = WCS(header)

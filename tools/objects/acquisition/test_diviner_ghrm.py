@@ -30,7 +30,7 @@ class GhrmTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'exceed'):
             m.encode(np.array([400.0]),np.array([True]),.01,0)
     def test_label_rejects_shifted_coordinates_or_wrong_numeric_type(self):
-        label=Path('src/planets/moon/source/science/diviner-ghrm/dghrm_tbol_m_70s70n_img.xml')
+        label=Path('src/objects/moon/source/science/diviner-ghrm/dghrm_tbol_m_70s70n_img.xml')
         m.validate_label(label,'dghrm_tbol_m_70s70n_img')
         for original,replacement in [('>360</cart:east_bounding_coordinate>','>180</cart:east_bounding_coordinate>'),('IEEE754LSBSingle','SignedLSB2'),('>NaN<','>-9999<')]:
             with tempfile.TemporaryDirectory() as d:

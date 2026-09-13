@@ -5,7 +5,7 @@ import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/melpomene/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/melpomene/source');
 const read=createSourceFixtureReader(root);
 test('Melpomene retains original source pins and acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'melpomene',planetName:'Melpomene',sourceRoot:root});await source.verify();

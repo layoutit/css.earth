@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hydra",
+  "displayName": "Hydra",
+  "panel": {
+    "introduction": "Hydra is Pluto’s outermost known moon. Its bright, water-ice-rich surface was resolved by New Horizons in 2015. A large northern hollow gives the small body its uneven shape, and it spins about ninety times during one orbit around the Pluto–Charon system.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Volume-equivalent radius",
+        "value": "18.1 km (released shape model)"
+      },
+      {
+        "id": "dimensions",
+        "label": "Model dimensions",
+        "value": "52.0 × 36.5 × 29.3 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Pluto–Charon",
+        "value": "About 38.2 days"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from system barycenter",
+        "value": "About 64,738 km"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "About 10.3 hours (not synchronous)"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Hubble Space Telescope · 2005"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "monochrome",
+    "labels": {
+      "model": "Shape model",
+      "monochrome": "Monochrome"
+    },
+    "controls": [
+      {
+        "id": "monochrome",
+        "label": "Monochrome",
+        "description": "Experimental image placement; registration is not yet qualified. New Horizons LORRI photograph from 14 July 2015, at about 1.14 km/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map.",
+        "title": "New Horizons surface photograph",
+        "detail": "1.14 km/pixel",
+        "thumbnail": "/scenes/hydra/hydra-monochrome-thumbnail.webp",
+        "surface": "hydra-monochrome-surface@2x.webp",
+        "poles": "hydra-monochrome-poles@2x.webp",
+        "source": {
+          "id": "lorri-best",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165548_0x630_sci.lbl"
+        },
+        "summary": "Experimental placement; registration unverified. LORRI · 14 July 2015 · 1.14 km/pixel. Acquisition lighting retained; grid marks missing coverage."
+      },
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data.",
+        "title": "Porter shape reconstruction",
+        "detail": "Shape",
+        "thumbnail": "/scenes/hydra/hydra-model-thumbnail.webp",
+        "surface": "hydra-model-surface@2x.webp",
+        "poles": "hydra-model-poles@2x.webp",
+        "source": {
+          "id": "porter-hydra-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.6084/m9.figshare.12779975.v1"
+        },
+        "summary": "Published shape reconstruction."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Hydra overview",
+      "href": "https://science.nasa.gov/dwarf-planets/pluto/moons/hydra/"
+    },
+    {
+      "label": "Porter (2021)",
+      "role": "surface",
+      "description": "New Horizons shape model",
+      "href": "https://doi.org/10.6084/m9.figshare.12779975.v1"
+    },
+    {
+      "label": "NASA/PDS",
+      "role": "observations",
+      "description": "New Horizons LORRI and MVIC archive",
+      "href": "https://pds-rings.seti.org/newhorizons/"
+    },
+    {
+      "label": "NASA/PDS",
+      "role": "composition",
+      "description": "Calibrated LEISA spectral products",
+      "href": "https://doi.org/10.26007/mc7j-ef52"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/hydra/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Porter (2021); Weaver et al. (2016); JPL"
+    }
+  }
+}

@@ -6,7 +6,7 @@ import {readFile} from 'node:fs/promises';
 import sharp from 'sharp';
 import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const source=new URL('../../../../src/planets/belinda/source/',import.meta.url);
+const source=new URL('../../../../src/objects/belinda/source/',import.meta.url);
 const j=async (p: string|URL)=>JSON.parse((await readFile(new URL(p,source))).toString('utf8'));
 
 test('Belinda preserves the published prolate axes and volume scale',async()=>{

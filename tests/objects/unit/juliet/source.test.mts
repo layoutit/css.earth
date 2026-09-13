@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { readObservation } from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
-const root = new URL('../../../../src/planets/juliet/source/', import.meta.url);
+const root = new URL('../../../../src/objects/juliet/source/', import.meta.url);
 
 test('Juliet source preserves the published prolate semiaxes in metres', async () => {
   // Karkoschka2001 Table IV adopts A=75, B=37 km; the second B is an assumption.

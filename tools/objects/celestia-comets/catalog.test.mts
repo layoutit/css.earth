@@ -18,7 +18,7 @@ test('pinned upstream files and inventory retain their identities and license',(
 
 test('packages use the native Celestia mesh, with only physical scaling',()=>{
  for(const c of candidates){
-  const root=`src/planets/${c.id}/source/`,model=JSON.parse(readFileSync(root+'shape/model.json', 'utf8'));
+  const root=`src/objects/${c.id}/source/`,model=JSON.parse(readFileSync(root+'shape/model.json', 'utf8'));
   assert.equal(model.catalogRadiusKm,c.radiusKm);assert.equal(model.source,c.mesh);assert.equal(model.illustrative,true);
   const native=readFileSync(new URL(`meshes/${c.mesh.replace('.cms','')}.obj`,sourceRoot),'utf8');
   const expected=native.split('\n').map(line=>line.startsWith('v ')?'v '+line.slice(2).split(' ').map(Number).map(v=>v*(c.radiusKm*1000)).join(' '):line).join('\n');

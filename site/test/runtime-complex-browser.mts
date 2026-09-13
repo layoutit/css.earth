@@ -13,7 +13,7 @@ import { parsePreparedObjectRuntime } from '../../src/renderers/css/dist/index.j
 import type { ObjectRuntimeDefinition } from '../../src/renderers/css/runtime/object-runtime-types.ts';
 import { required } from './navigation-test-values.mts';
 // Prepared runtimes are generated, ignored files: read them when the suite runs rather than at typecheck.
-const [rawNeptune, rawSaturn] = await Promise.all(["neptune", "saturn"].map(id => readJsonSource(new URL(`../../src/planets/${id}/prepared/runtime.json`, import.meta.url))));
+const [rawNeptune, rawSaturn] = await Promise.all(["neptune", "saturn"].map(id => readJsonSource(new URL(`../../src/objects/${id}/prepared/runtime.json`, import.meta.url))));
 const NEPTUNE = parsePreparedObjectRuntime(rawNeptune), SATURN = parsePreparedObjectRuntime(rawSaturn);
 interface DecodeRule { fragment: string; mode: 'hold' | 'fail'; released: boolean; }
 interface DecodeProbe { gate: DecodeRule | null; pending: { path: string; resolve(): void; rule: DecodeRule }[];
@@ -33,8 +33,8 @@ for (const file of ["site/scene-router.mts", "site/packaged-object-runtime.mts",
   "src/renderers/css/dist/index.js", "src/renderers/css/dist/testing.js",
   "src/renderers/css/runtime/object-runtime.ts", "src/renderers/css/rendering/object-selection-runtime.ts",
   "src/renderers/css/rendering/prepared-presentation.ts", "src/renderers/css/rendering/prepared-material.ts",
-  ...["saturn", "neptune"].flatMap(id => [`src/planets/${id}/object.json`,
-    `src/planets/${id}/prepared/object.json`, `src/planets/${id}/prepared/runtime.json`])]) {
+  ...["saturn", "neptune"].flatMap(id => [`src/objects/${id}/object.json`,
+    `src/objects/${id}/prepared/object.json`, `src/objects/${id}/prepared/runtime.json`])]) {
   report.source[file] = createHash("sha256").update(await readFile(file)).digest("hex");
 }
 const browser = await chromium.launch({ channel: "chrome", headless: true });

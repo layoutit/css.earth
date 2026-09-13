@@ -8,7 +8,7 @@ import { loadBodyEpochEphemeris, evaluatePublishedOrbit } from '../../../../pack
 
 for (const [id, parent, a, periodHours, eccentricity] of [['dactyl', 'ida', 82.3, .96534 * 24, .15], ['selam', 'dinkinesh', 3.11, 52.67, 0]] as const) {
   test(`${id}: declared approximate state preserves period, separation, orbital pole and phase qualification`, async () => {
-    const bodyRoot = resolve('src/planets', id), epochJdTt = 2461286.5;
+    const bodyRoot = resolve('src/objects', id), epochJdTt = 2461286.5;
     const parameters = JSON.parse(await readFile(resolve(bodyRoot, 'source/orbit/published-parameters.json'), 'utf8'));
     const state = await loadBodyEpochEphemeris({ bodyRoot, bodyId: id, centerBodyId: parent, target:null,center:null,epochJdTt });
     assert.equal(fixtureRecord(state.provenance).placement, 'approximate');

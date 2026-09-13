@@ -6,7 +6,7 @@ import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/ida/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/ida/source');
 const read=async (path: string)=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 
 test('Ida source closure retains original mission bytes, labels and restoration inputs',async()=>{

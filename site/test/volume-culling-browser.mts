@@ -14,7 +14,7 @@ const origin=process.argv[2]??process.env.CSSEARTH_TEST_ORIGIN??'http://localhos
 const saved='/sun/?v=MIJDwTb3-eIizz_FaIxzgM8VP-L9-KiW65M_uwcnPmtsNAABAAAAAAAAAAA';
 const output=resolve('.local/milky-way-integration/volume-culling');
 const volume=validatePreparedCssVolume(requireRecord(JSON.parse(await readFile('src/objects/milky-way/prepared/volume.json','utf8'))).data);
-const context=parsePreparedWorldContext(JSON.parse(await readFile('src/planets/sun/prepared/world-context.json','utf8')));
+const context=parsePreparedWorldContext(JSON.parse(await readFile('src/objects/sun/prepared/world-context.json','utf8')));
 const clip={x:370,y:100,width:1040,height:760};
 const report:{url:string;clip:typeof clip;cases:unknown[];errors:string[];result?:"PASS"}={url:new URL(saved,origin).href,clip,cases:[],errors:[]};
 await mkdir(output,{recursive:true});

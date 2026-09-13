@@ -19,7 +19,7 @@ const evidenceRoot = resolve(process.argv[2] ??
   "output/playwright/venus-google-sun-proper-sweep-20260901-v6");
 const frameDirectory = process.argv[3] ?? "google/frames";
 const sourcePath = resolve(
-  "src/planets/venus/source/stars/eso0932a.tif",
+  "src/objects/venus/source/stars/eso0932a.tif",
 );
 const SAMPLE_WIDTH = 48;
 const SAMPLE_HEIGHT = 30;

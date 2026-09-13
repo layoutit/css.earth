@@ -19,7 +19,7 @@ const json = (path: string, value: unknown): Promise<void> => writeFile(path, JS
 async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-restore-'));
   t.after(() => rm(root, { recursive: true, force: true }));
-  for (const dir of ['tools/objects/dist', 'site', `src/planets/${id}/source/preparation`, `src/planets/${id}/prepared`, `public/scenes/${id}`]) {
+  for (const dir of ['tools/objects/dist', 'site', `src/objects/${id}/source/preparation`, `src/objects/${id}/prepared`, `public/scenes/${id}`]) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
   await copyFile(resolve(project, 'tools/restore-source-inputs.mts'), resolve(root, 'tools/restore-source-inputs.mts'));
@@ -29,7 +29,7 @@ async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   await symlink(resolve(project, 'src/platform'), resolve(root, 'src/platform'));
   await symlink(resolve(project, 'node_modules'), resolve(root, 'node_modules'));
   await writeFile(resolve(root, 'site/objects.mts'), `export const OBJECTS = [{id:'${id}',name:'${id}'}];`);
-  await json(resolve(root, `src/planets/${id}/object.json`), { id });
+  await json(resolve(root, `src/objects/${id}/object.json`), { id });
   return root;
 }
 async function run(root: string, args: readonly string[]): Promise<void> {
@@ -54,7 +54,7 @@ test('every registered body has its package files and tracked or restorable sour
         if (typeof path !== 'string') throw new TypeError('Fixture access must receive a string path.');
         assert.ok(tracked.has(relative(project, path)), path);
       } });
-    const source = `src/planets/${id}/source`;
+    const source = `src/objects/${id}/source`;
     const inputs: unknown[] = await Promise.all(['manifest.json', 'preparation/acquisition.json']
       .map(async path => JSON.parse(await readFile(resolve(project, source, path), 'utf8'))));
     const manifest = requireRecord(inputs[0]), plan = parseAcquisitionPlan(inputs[1]);
@@ -73,7 +73,7 @@ test('every registered body has its package files and tracked or restorable sour
 });
 
 test('checkout restores a missing compressed observation without refreshing existing inputs', async t => {
-  const root = await fixture(t), source = resolve(root, 'src/planets/titan/source');
+  const root = await fixture(t), source = resolve(root, 'src/objects/titan/source');
   const existing = Buffer.from('existing infrared'), radar = Buffer.from('pinned compressed radar');
   const requests: (string | undefined)[] = [];
   const server = createServer((req, res) => { requests.push(req.url); res.end(radar); });
@@ -109,10 +109,10 @@ test('checkout restores a missing compressed observation without refreshing exis
 });
 
 test('Earth restores a missing MUR mosaic before verification and preserves existing files', async t => {
-  const root = await fixture(t, 'earth'), source = resolve(root, 'src/planets/earth/source');
+  const root = await fixture(t, 'earth'), source = resolve(root, 'src/objects/earth/source');
   const mosaic = Buffer.from('pinned mosaic'), archive = Buffer.from('pinned archive');
   const restore = resolve(root, 'tools/objects/paged-ellipsoid/mur-imagery.mts');
-  for (const dir of ['src/planets/earth/source/science', 'tools/objects/paged-ellipsoid', 'tools/objects/geographic-pages/operations']) {
+  for (const dir of ['src/objects/earth/source/science', 'tools/objects/paged-ellipsoid', 'tools/objects/geographic-pages/operations']) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
   await writeFile(restore, `
@@ -141,7 +141,7 @@ test('Earth restores a missing MUR mosaic before verification and preserves exis
 });
 
 test('manifest refresh keeps runtime and shell images but excludes preparation maps', async t => {
-  const root = await fixture(t), prepared = resolve(root, 'src/planets/titan/prepared');
+  const root = await fixture(t), prepared = resolve(root, 'src/objects/titan/prepared');
   const url = (name: string): string => `/scenes/titan/${name}.webp`;
   for (const name of ['surface', 'thumbnail', 'chart', 'source-map']) {
     await writeFile(resolve(root, `public/scenes/titan/${name}.webp`), name);
@@ -151,7 +151,7 @@ test('manifest refresh keeps runtime and shell images but excludes preparation m
   await json(resolve(prepared, 'content.json'), { charts: [{ src: url('chart') }] });
   await json(resolve(prepared, 'surfaces.json'), { intermediateMap: url('source-map') });
   await run(root, ['tools/objects/dist/operations.js', 'manifest', 'titan']);
-  const manifestInput: unknown = JSON.parse(await readFile(resolve(root, 'src/planets/titan/runtime-assets.json'), 'utf8'));
+  const manifestInput: unknown = JSON.parse(await readFile(resolve(root, 'src/objects/titan/runtime-assets.json'), 'utf8'));
   const manifest = requireRecord(manifestInput);
   assert.deepEqual(requireArray(manifest.assets).map(asset => requireString(requireRecord(asset).filename)), ['chart.webp', 'surface.webp', 'thumbnail.webp']);
   assert.equal(await readFile(resolve(root, 'public/scenes/titan/source-map.webp'), 'utf8'), 'source-map');
