@@ -95,8 +95,8 @@ test('color pointings extend coverage as complete triplets and retain an earlier
       }
       channels.push({channel,filter:channel,frames});
     }
-    const base={channels,photometry:{model:'observed',weight:.5,maximumGain:1,maximumIncidenceDegrees:75,maximumEmissionDegrees:75,displayMaximum:1,gamma:1,minimumLevel:1,maximumLevel:1},metadata:{falseColor:true},
-      colorDisplay:{kind:'band-composite',inputQuantity:'radiance-factor',bands:['red','green','blue'],displayRange:[0,1],outputEncoding:'srgb'}};
+    const base={id:'filter-color',format:'controlled-shape-color',consumer:'camera-color',channels,photometry:{model:'observed',weight:.5,maximumGain:1,maximumIncidenceDegrees:75,maximumEmissionDegrees:75},metadata:{falseColor:true},
+      displayRange:[0,1]};
     const prepare=(selected:typeof channels)=>prepareShapeCameraColor(root,selected.flatMap(c=>c.frames.flatMap(f=>[{path:f.path,width:32,height:32},{path:f.labelPath}])),{...base,channels:selected},96,48,shape);
     const first=await prepare(channels.map(c=>({...c,frames:[c.frames[0]]}))),second=await prepare(channels.map(c=>({...c,frames:[c.frames[1]]}))),merged=await prepare(channels);
     let retained=0,extended=0,overlap=0;
@@ -118,5 +118,7 @@ test('color pointings extend coverage as complete triplets and retain an earlier
     }
     assert.ok(retained>0&&extended>0&&overlap>0,'Fixture exercises old coverage, new coverage and overlap');
     await assert.rejects(prepare(channels.map((c,i)=>i?c:{...c,frames:[c.frames[0]]})),/equally sized camera sets/);
+    // A colour recipe declares one range; any other colour setting is refused rather than ignored.
+    for(const extra of [{colorDisplay:{}},{whiteBalance:'auto'},{gains:[1,1,2]}])await assert.rejects(prepareShapeCameraColor(root,[],{...base,...extra},96,48,shape),/unknown/);
   }finally{await rm(root,{recursive:true,force:true});}
 });

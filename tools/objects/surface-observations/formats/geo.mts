@@ -21,7 +21,7 @@ import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, ABERRATIONS } from '../../
 import { refineCameraByLimb } from '../../terrestrial-layers/limb-refinement.mts';
 import { loadKernelSet } from '../../../spice/kernel-set.mts';
 import { kernelBankPaths } from '../../../spice/kernel-bank.mts';
-import { parseBandColorDisplay, type BandColorDisplay } from '../../color-transfer.mts';
+import { bandColorDisplay, type BandColorDisplay } from '../../color-transfer.mts';
 import { fittedCamera, matrixCamera } from '../cameras.mts';
 import { archiveBackplanes, castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
@@ -268,7 +268,7 @@ export const geoFormat: SurfaceObservationFormat = {
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
       // A colour product's floating bands are encoded once, after surface transfer, on the shared band display.
       display: range && color ? { range: 'authored', low: range[0], high: range[1], units: color.units,
-          colorDisplay: parseBandColorDisplay({ kind: 'band-composite', inputQuantity: color.inputQuantity, bands: color.bands, displayRange: range, outputEncoding: 'srgb' }, color.bands) }
+          colorDisplay: bandColorDisplay(color.bands, color.inputQuantity, range) }
         : { range: 'reference-pixels', percentiles: recipe.display.percentiles ?? [], units: displayUnits(recipe, photometry) }, photometry: photometry.report, limits };
     return { frames, policy, exceeded };
   },
