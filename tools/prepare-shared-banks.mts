@@ -19,7 +19,7 @@ export async function syncSharedBanks(ids?: readonly string[], root = projectRoo
   const referenced = new Set<string>();
   let twins = 0, banks = 0;
   for (const id of chosen) {
-    const result = await syncPreparedShared(root, resolve(root, 'src/planets', id, 'prepared'));
+    const result = await syncPreparedShared(root, resolve(root, 'src/objects', id, 'prepared'));
     twins += result.twins; banks += result.banks;
     for (const key of result.references) referenced.add(key);
   }
@@ -33,7 +33,7 @@ export async function restoreSharedBanks(ids?: readonly string[], root = project
   let written = 0, reused = 0;
   const chosen = chooseIds(ids);
   for (const id of chosen) {
-    const result = await restorePreparedShared(root, resolve(root, 'src/planets', id, 'prepared'));
+    const result = await restorePreparedShared(root, resolve(root, 'src/objects', id, 'prepared'));
     written += result.written; reused += result.reused;
   }
   return { objects: chosen.length, written, reused };

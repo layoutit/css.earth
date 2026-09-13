@@ -46,7 +46,7 @@ try{
   const cdp=await context.newCDPSession(page);await cdp.send('Network.enable',{maxTotalBufferSize:268435456,maxResourceBufferSize:134217728});
   context.on('response',r=>{const task=(async()=>{await r.finished();const url=r.url(),path=new URL(url).pathname;if(r.status()>=400)errors.push(`${r.status()} ${url}`);const bytes=/\/object\.[^/]+\.json$|\/scenes\//.test(path)?await r.body():null;loaded.push({url,status:r.status(),...(await r.request().sizes()),...(bytes?{sha256:hash(bytes)}:{})});})();task.catch(()=>{});pending.push(task);});
   try{
-   const payload=await readFile(`src/planets/${id}/prepared/object.json`),content=shape({lenses:shape({controls:array(shape({description:text}))})})(JSON.parse(await readFile(`src/planets/${id}/source/content/object.json`,'utf8')));
+   const payload=await readFile(`src/objects/${id}/prepared/object.json`),content=shape({lenses:shape({controls:array(shape({description:text}))})})(JSON.parse(await readFile(`src/objects/${id}/source/content/object.json`,'utf8')));
    await page.goto(`${base}/${id}/`,{waitUntil:'networkidle'});
    await page.waitForFunction(id=>document.documentElement.dataset.ready==='true'&&document.querySelector<HTMLElement>('.planet-stage')?.dataset.objectId===id,id);
    await Promise.all(pending);const cold=loaded.slice();assert.ok(cold.some(r=>r.sha256===hash(payload)),'Actual transported prepared JSON must match the local payload');

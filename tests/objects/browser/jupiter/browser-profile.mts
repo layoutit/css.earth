@@ -1,5 +1,5 @@
 import { createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mts";
-import objectControls from "../../../../src/planets/jupiter/prepared/controls.json" with { type: "json" };
+import objectControls from "../../../../src/objects/jupiter/prepared/controls.json" with { type: "json" };
 
 export const browserProfile = createObjectBrowserProfile({
   id: "jupiter", controls: objectControls,

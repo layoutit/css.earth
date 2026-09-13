@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "dinkinesh",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Dinkinesh",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "features",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "a947a9fe3f37ae64b5cafd2fa765e9fc3c427aab48398db61b3dfc5d827a4708"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "5c18d03676a357f07020f1c29522988582011e3d92a885be3cce8e78acab51a2"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "e22fa67c086c632aa0cb23c657fcd3a2b99775d2219d032554023fb44803e5e5"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "73748cb959d3efeceab3faa1816710fbf3d904dd53f549fcb0250875498e312e"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "1c6908b145e225204d8ef35dc466d9c0b202669f20ef6d75294713ad73ac0367"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "b2c56e934ae3152b4188c7755e84101dee3e8ea2a346f4c8a740ce650ff464a5"
+        },
+        {
+          "id": "features",
+          "path": "source/preparation/features.json",
+          "sha256": "84049817cdcc133b9a5144f3580170a394994aa3462b109424c1b8f30d604c1b"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 0.369
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "tempest-shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "features": {
+        "source": "features",
+        "maxEntries": 2000
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/dinkinesh-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7bb2cd4d7efd015060e4f8637f8d48ab949dacef36c5d2653529740a12c822f1"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -282231298529.8608,
+        114639206353.66275,
+        58561722532.6488
+      ],
+      "presentationToReference": [
+        -0.9101391966298745,
+        -8.673617379884035e-19,
+        -0.4143025980583832,
+        0.38011520198722476,
+        0.3977771559319137,
+        -0.8350363868939659,
+        0.16480010915086646,
+        -0.9174820620691818,
+        -0.3620325811375883
+      ],
+      "orbitUpReference": [
+        8.673617379884035e-19,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1.6043478260869566,
+      "bodyRadiusM": 369
+    },
+    "catalog": {
+      "name": "Dinkinesh",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#a0a0a0",
+      "distanceAu": 2.073581431805674,
+      "description": "Dinkinesh was Lucy’s first asteroid encounter. Its equatorial ridge and trough accompany a remarkable moon: the contact binary Selam.",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "19f79ec1fc606878f52cdf4018c1d023fb1f80c2cd39c61f2701f66046704f03"
+  }
+}

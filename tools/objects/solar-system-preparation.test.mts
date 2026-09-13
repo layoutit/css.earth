@@ -30,12 +30,12 @@ type PhaseAtlas = NonNullable<Parameters<typeof prepareSolarSystemPresentation>[
 type PreparedAssets = { lighting: { banks: Record<string, { billboard: Omit<PhaseAtlas, 'minimumLightViewZ' | 'maximumLightViewZ' | 'baseLightAzimuthDegrees'> }>;
   minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number; presentationFrameSize: number } };
 type PreparedStrip = Awaited<ReturnType<typeof prepareSolarSystemMarkerStrip>>['plan'];
-const prepared = async <T,>(id: string, file: string) => requireRecord(await readJsonSource(new URL(`../../src/planets/${id}/prepared/${file}`, import.meta.url))) as T;
+const prepared = async <T,>(id: string, file: string) => requireRecord(await readJsonSource(new URL(`../../src/objects/${id}/prepared/${file}`, import.meta.url))) as T;
 const [mercuryScene, mercurySky, mercurySun, mercuryAssets, mercuryStrip, venusScene, venusSky] = await Promise.all([
   prepared<PreparedScene>('mercury', 'scene.json'), prepared<SceneConfig['starfield']>('mercury', 'sky.json'), prepared<PreparedSun>('mercury', 'sun.json'),
   prepared<PreparedAssets>('mercury', 'assets.json'), prepared<PreparedStrip>('mercury', 'markers.json'),
   prepared<PreparedScene>('venus', 'scene.json'), prepared<SceneConfig['starfield']>('venus', 'sky.json')]);
-const mercuryPresentation = requireObjectRuntimeDefinition(await readJsonSource(new URL('../../src/planets/mercury/prepared/runtime.json', import.meta.url)));
+const mercuryPresentation = requireObjectRuntimeDefinition(await readJsonSource(new URL('../../src/objects/mercury/prepared/runtime.json', import.meta.url)));
 const mercuryView = required(mercuryPresentation.heliocentricView, 'Mercury heliocentric view');
 
 const mercuryConfig: Parameters<typeof prepareSolarSystemScene>[0] = { bodyId: "mercury", bodyRadiusUnits: 230, bodyRadiusKilometers: 2439.7,
@@ -113,9 +113,9 @@ function assertPreparedProjectiveMappings(input: unknown, scene: unknown) {
 
 test("registered descriptors publish the generated physical frames and exact payload identities", async () => {
   for (const [id, scene] of [["mercury", mercuryScene], ["venus", venusScene]] as const) {
-    const descriptor = JSON.parse(await readFile(new URL(`../../src/planets/${id}/object.json`, import.meta.url), "utf8"));
+    const descriptor = JSON.parse(await readFile(new URL(`../../src/objects/${id}/object.json`, import.meta.url), "utf8"));
     assert.deepEqual(descriptor.properties.worldFrame, scene.worldFrame);
-    const payload = await readFile(new URL(`../../src/planets/${id}/${descriptor.prepared.url}`, import.meta.url));
+    const payload = await readFile(new URL(`../../src/objects/${id}/${descriptor.prepared.url}`, import.meta.url));
     assert.equal(createHash("sha256").update(payload).digest("hex"), descriptor.prepared.sha256);
   }
 });
@@ -234,7 +234,7 @@ test("Venus physical frame resolves real astronomy positions with a 6051.84km bo
   assert.ok(earthOffsetKm.every(Number.isFinite));
   // Haumea's retained satellite solution supplies its primary centre. The
   // analytic dwarf-planet orbit is a different solution, so read the source.
-  const haumeaRoot = new URL('../../src/planets/hiiaka/source/', import.meta.url);
+  const haumeaRoot = new URL('../../src/objects/hiiaka/source/', import.meta.url);
   const haumeaManifest = JSON.parse(await readFile(new URL('manifest.json', haumeaRoot), 'utf8'));
   const haumeaPin = required(array(shape({path:text,expectedBytes:number,expectedSha256:text}))(haumeaManifest.documents).find(entry => entry.path === 'orbit/haumea-epoch.txt'));
   const haumeaBytes = await readFile(new URL(haumeaPin.path, haumeaRoot));

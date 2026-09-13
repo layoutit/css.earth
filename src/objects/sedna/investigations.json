@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "sedna",
+  "entries": [
+    {
+      "id": "herschel-diameter",
+      "subject": "Herschel effective diameter",
+      "status": "included",
+      "finding": "Herschel’s effective primary diameter sets the size. Rotational photometry is insufficient to select unique three-dimensional axes.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/sedna/README.md#L35"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    },
+    {
+      "id": "jwst-spectroscopy",
+      "subject": "JWST spectroscopy as surface data",
+      "status": "excluded",
+      "finding": "[JWST spectroscopy](https://doi.org/10.1016/j.icarus.2024.116017) constrains integrated composition but supplies no registered terrain or albedo map.",
+      "revisitWhen": "A registered terrain or albedo map of Sedna is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/sedna/README.md#L36",
+        "https://doi.org/10.1016/j.icarus.2024.116017"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { browserProfileLensIds, createObjectBrowserProfile } from '../../../../site/test/object-browser-profile.mts';
-import objectControls from '../../../../src/planets/braille/prepared/controls.json' with {type:'json'};
+import objectControls from '../../../../src/objects/braille/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'braille',controls:objectControls,audit:{
   preparedAssetPairs:[{one:'/scenes/braille/braille-directional-sun.webp',two:'/scenes/braille/braille-directional-sun@2x.webp'}],
   canonicalPreparedAssets:['/scenes/braille/braille-model-surface@2x.webp','/scenes/braille/braille-lighting.webp'],

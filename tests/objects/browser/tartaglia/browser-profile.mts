@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/tartaglia/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/tartaglia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'tartaglia',controls,audit:{
   "preparedAssetPairs": [
     {

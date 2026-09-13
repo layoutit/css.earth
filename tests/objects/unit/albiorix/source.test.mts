@@ -6,7 +6,7 @@ import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { simplifyRadialShape, validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root = new URL('../../../../src/planets/albiorix/source/', import.meta.url);
+const root = new URL('../../../../src/objects/albiorix/source/', import.meta.url);
 const read = async (path:string):Promise<unknown> => JSON.parse(await readFile(new URL(path, root), 'utf8'));
 
 test('Albiorix preserves the selected lower-limit elongation and explicit volume scale', async () => {

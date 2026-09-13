@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';
 import {loadCameraShape,controlledShapeCamera,decodeCalibratedCamera} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 import {registerCameraBands} from '../../../../tools/objects/terrestrial-layers/camera-band-registration.mts';
-const source=resolve(import.meta.dirname,'../../../../src/planets/hyperion/source');
+const source=resolve(import.meta.dirname,'../../../../src/objects/hyperion/source');
 const json=async (path: string)=>JSON.parse(await readFile(resolve(source,path),'utf8'));
 
 test('Hyperion close observation retains native calibrated detector layout and independent numeric samples',async()=>{

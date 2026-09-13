@@ -6,7 +6,7 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireRadialTestConfig,requireRotation} from '../radial-fixture.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/eunomia/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/eunomia/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Eunomia retains original source pins and acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'eunomia',planetName:'Eunomia',sourceRoot:root});await source.verify();

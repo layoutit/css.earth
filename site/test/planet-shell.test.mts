@@ -240,7 +240,7 @@ test("shared router cancels a pending adapter before publication", async () => {
 test("keeps implemented routes backed by object-owned files", async () => {
   for (const planet of OBJECTS) {
     await validateObjectPackageFiles(planet);
-    await access(new URL(`../../src/planets/${planet.id}/prepared/object.json`, import.meta.url));
+    await access(new URL(`../../src/objects/${planet.id}/prepared/object.json`, import.meta.url));
   }
 });
 
@@ -279,7 +279,7 @@ test("keeps source-backed chart data in canonical order with Reflectance first",
   }
 
   const mercury = requireRecord(JSON.parse(await readFile(
-    new URL("../../src/planets/mercury/prepared/content.json", import.meta.url),
+    new URL("../../src/objects/mercury/prepared/content.json", import.meta.url),
     "utf8",
   )), "Mercury content");
   assert.doesNotMatch(JSON.stringify(mercury.charts), /temperature-pressure|mercury-no-atmosphere-profile/u);

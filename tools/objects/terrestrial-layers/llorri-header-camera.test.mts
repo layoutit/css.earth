@@ -9,7 +9,7 @@ import { llorriHeaderCamera } from './llorri-header-camera.mts';
 import { bindSipCamera } from './llorri-geo.mts';
 
 test('FITS camera and shared SPICE reproduce the independent Astropy projection anchors', async () => {
-  const root = resolve('src/planets/donaldjohanson/source');
+  const root = resolve('src/objects/donaldjohanson/source');
   const profile = requireRecord(JSON.parse(await readFile(resolve(root, 'preparation/camera.json'), 'utf8')));
   const reference = requireRecord(JSON.parse(await readFile(resolve(root, 'observations/llorri-camera.json'), 'utf8')));
   const bytes = await readFile(resolve(root, requireString(profile.image)));

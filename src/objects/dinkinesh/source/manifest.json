@@ -1,0 +1,360 @@
+{
+  "schema": "cssdinkinesh-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/dinkinesh/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/dinkinesh/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shape-model",
+      "path": "shape/model.obj",
+      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/dinkinesh.cmod",
+      "credit": "ItzImcool (2024), domi9 (2024–2025); Celestia contributors",
+      "license": "CC-BY-4.0; retain ItzImcool and domi9 attribution and mark conversion/scaling.",
+      "acquisition": "Reproduce with cmod.py from the pinned original; uniform scale to published volume-equivalent diameter.",
+      "redistribution": "CC-BY-4.0; retain ItzImcool and domi9 attribution and mark conversion/scaling.",
+      "consumers": [
+        "terrain",
+        "shape"
+      ],
+      "coverage": "Celestia contributors’ reconstruction inspired by Lucy images, uniformly scaled to the published 738 m volume-equivalent diameter. This is an authored approximation, not the mission photogrammetric shape model. The grid marks missing qualified surface imagery.",
+      "expectedBytes": 8490675,
+      "expectedSha256": "fb25e4125e5743c6d8599986dc966acefa775c69e5ae30bed840ed90eb2fd04c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dinkinesh-shape-model",
+            "role": "method",
+            "evidence": "src/planets/dinkinesh/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "usgs-gazetteer-dinkinesh-nomenclature-center-pts",
+      "path": "features/DINKINESH_nomenclature_center_pts.zip",
+      "expectedBytes": 14569,
+      "expectedSha256": "b3e19298f41ce5d9f908fa37fe10621817ecb9a8c78b09096879296060a2c2c4",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DINKINESH_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Pinned the 2026-09-13 Gazetteer export after the missing 2026-09-12 ZIP had been replaced upstream. The small snapshot is retained in Git for reproducibility.",
+      "redistribution": "Committed public-domain snapshot with credit; byte identity includes the export archive metadata.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Dinkinesh centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DINKINESH/target",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "tempest-dinkinesh-model",
+      "path": "shape/tempest-dinkinesh.stl",
+      "origin": "https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl",
+      "expectedBytes": 237239,
+      "expectedSha256": "3c38e04484e42a90e8b284302111325f0519a61ab22772f73d541e2715e11622",
+      "credit": "Duncan Lyster; Lyster, D., Howett, C., & Penn, J. (2025), TEMPEST",
+      "license": "Modified MIT License (Attribution Required)",
+      "licenseEvidence": [
+        "shape/TEMPEST-LICENSE.md"
+      ],
+      "acquisition": "Restore exact bytes from the pinned public Git commit through preparation/acquisition.json.",
+      "redistribution": "Retain the supplied license and credit Lyster, Howett & Penn (2025) in the publicly released derivative.",
+      "consumers": [
+        "terrain",
+        "tempest-shape"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "tempest-dinkinesh-7df4c88",
+            "role": "method",
+            "evidence": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl"
+          }
+        ]
+      },
+      "coverage": "Numerical Dinkinesh shape distributed with the TEMPEST thermal model: 635 vertices and 1,266 triangles, retained at their published metre scale. The linked study describes a Lucy stereo-derived model with estimated unseen terrain. This recovered file does not identify its upstream mission-model version or observed/fill boundary. The grid marks missing qualified photography; it does not mark measured terrain."
+    },
+    {
+      "id": "tempest-license",
+      "path": "shape/TEMPEST-LICENSE.md",
+      "origin": "https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/LICENSE.md",
+      "expectedBytes": 1476,
+      "expectedSha256": "830ce983cfcfa1dd44466f708c3eeb92ba0eb80f7bc695aefebc243d55d277b8",
+      "credit": "Duncan Lyster; Lyster, D., Howett, C., & Penn, J. (2025), TEMPEST",
+      "license": "Modified MIT License (Attribution Required)",
+      "licenseEvidence": [
+        "shape/TEMPEST-LICENSE.md"
+      ],
+      "acquisition": "Restore exact bytes from the pinned public Git commit through preparation/acquisition.json.",
+      "redistribution": "Retain the supplied license and credit Lyster, Howett & Penn (2025) in the publicly released derivative.",
+      "consumers": [
+        "tempest-shape"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "tempest-dinkinesh-7df4c88",
+            "role": "method",
+            "evidence": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/dinkinesh.cmod",
+      "credit": "ItzImcool (2024), domi9 (2024–2025); Celestia contributors",
+      "license": "CC-BY-4.0; retain ItzImcool and domi9 attribution and mark conversion/scaling.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "shape-model"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "expectedBytes": 79614,
+      "expectedSha256": "80929b5278033a88b438526bc687778e7aec31426271cb790b41e4374b9f8db3"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 5691,
+      "expectedSha256": "5c18d03676a357f07020f1c29522988582011e3d92a885be3cce8e78acab51a2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet and view descriptions."
+      }
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 1647,
+      "expectedSha256": "a6c5f409213feb2721bdeb2976e59d581a41a6dae75661ad9e0227b9a61b4b5a"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1344,
+      "expectedSha256": "1c6908b145e225204d8ef35dc466d9c0b202669f20ef6d75294713ad73ac0367"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1325,
+      "expectedSha256": "73748cb959d3efeceab3faa1816710fbf3d904dd53f549fcb0250875498e312e"
+    },
+    {
+      "path": "preparation/photometry.json",
+      "expectedBytes": 525,
+      "expectedSha256": "3ed3215366cced5b6c8fa1037b57c685f2cd2273fa38f5fbe1badb9ca7a41657"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 502,
+      "expectedSha256": "b2c56e934ae3152b4188c7755e84101dee3e8ea2a346f4c8a740ce650ff464a5"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3062,
+      "expectedSha256": "a947a9fe3f37ae64b5cafd2fa765e9fc3c427aab48398db61b3dfc5d827a4708"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4063,
+      "expectedSha256": "e22fa67c086c632aa0cb23c657fcd3a2b99775d2219d032554023fb44803e5e5"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 7356,
+      "expectedSha256": "925cc736f8282bc8cc2421fd56c09c27f3324321be3ff130142d5c3bac7894e5"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "expectedBytes": 6646,
+      "expectedSha256": "19c8fd9edfab12112470d412503de057e6ba3cbdbe82f3c23a439c0b9c9159bc"
+    },
+    {
+      "path": "shape/dinkinesh.cmod",
+      "expectedBytes": 2855080,
+      "expectedSha256": "8dc8a6d9fc9f4138cfc44f896ca7732fdfdd9d44b10d6fb49fd43f80fa2e1b2f"
+    },
+    {
+      "path": "shape/dinkinesh.cmod.license",
+      "expectedBytes": 115,
+      "expectedSha256": "bc9088a82989ceb3f12e46f66426e6b699273c095fbc68783c766f47a648b39b"
+    },
+    {
+      "path": "shape/model.json",
+      "expectedBytes": 2376,
+      "expectedSha256": "9f397effcb9d94423f96b7a55dbde9e5e16d828f9db06c8ae65ffdbe2193d1d1"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 144978,
+      "expectedSha256": "ee93fb75aa3deb721d06c1b3338697e6669f584af06f855b9d0d0bbdbdeb4439"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "id": "dinkinesh-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1319,
+      "expectedSha256": "031d0052c8559b803bccaa617d03b0885da1fc88a8b5ee85a9c9a4fb84fa8320",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "dinkinesh-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1071,
+      "expectedSha256": "84049817cdcc133b9a5144f3580170a394994aa3462b109424c1b8f30d604c1b",
+      "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "dinkinesh-surface-map-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 156,
+      "expectedSha256": "c14cbd72f51a57ba5b63df50709eb050dc4259a334c985a2768c5e819aa07ed7",
+      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation parameters",
+      "acquisition": "Authored from the shared mesh convention.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "dinkinesh-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 478,
+      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts dinkinesh: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    }
+  ]
+}
