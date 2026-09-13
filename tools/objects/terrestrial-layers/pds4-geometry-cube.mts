@@ -1,3 +1,4 @@
+import { pds4Blocks, pds4Elements, pds4Field } from '../pds-labels.mts';
 import { readFitsHeader } from '../observation/fits.mts';
 import type { GeometryCubeDeclaration } from './source-records.mts';
 
@@ -27,17 +28,8 @@ const DATA_TYPES: Record<string, { bytes: number; read: (buffer: Buffer, offset:
   IEEE754MSBDouble: { bytes: 8, read: (buffer, offset) => buffer.readDoubleBE(offset) }, IEEE754LSBDouble: { bytes: 8, read: (buffer, offset) => buffer.readDoubleLE(offset) },
 };
 
-const escapeName = (name: string) => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-/** Exactly one text element with this name inside the fragment; attributes are allowed. */
-export function labelField(xml: string, name: string) {
-  const hits = [...xml.matchAll(new RegExp(`<${escapeName(name)}(?:\\s[^>]*)?>([^<]*)</${escapeName(name)}>`, 'g'))];
-  if (hits.length !== 1) throw new Error(`Expected one PDS4 label field: ${name}`);
-  return hits[0][1].trim();
-}
-export const labelBlocks = (xml: string, name: string) =>
-  [...xml.matchAll(new RegExp(`<${escapeName(name)}(?:\\s[^>]*)?>([\\s\\S]*?)</${escapeName(name)}>`, 'g'))].map(match => match[1]);
 function labelNumber(xml: string, name: string) {
-  const text = labelField(xml, name), value = Number(text);
+  const text = pds4Field(xml, name), value = Number(text);
   if (!text || !Number.isFinite(value)) throw new Error(`Invalid PDS4 numeric field: ${name}`);
   return value;
 }
@@ -48,18 +40,18 @@ interface LabelPlane { id: string; index: number; offset: number; width: number;
 
 /** Every Array_2D_Image the label declares, in label order. Line-major planes only. */
 function labelPlanes(xml: string): LabelPlane[] {
-  return labelBlocks(xml, 'Array_2D_Image').map((block, index) => {
-    const id = labelField(block, 'local_identifier');
-    const axes = labelBlocks(block, 'Axis_Array').map(axis => ({ name: labelField(axis, 'axis_name'), elements: labelNumber(axis, 'elements'), sequence: labelNumber(axis, 'sequence_number') }));
-    if (labelField(block, 'axes') !== '2' || labelField(block, 'axis_index_order') !== 'Last Index Fastest' || axes.length !== 2 ||
+  return pds4Blocks(xml, 'Array_2D_Image').map((block, index) => {
+    const id = pds4Field(block, 'local_identifier');
+    const axes = pds4Blocks(block, 'Axis_Array').map(axis => ({ name: pds4Field(axis, 'axis_name'), elements: labelNumber(axis, 'elements'), sequence: labelNumber(axis, 'sequence_number') }));
+    if (pds4Field(block, 'axes') !== '2' || pds4Field(block, 'axis_index_order') !== 'Last Index Fastest' || axes.length !== 2 ||
         axes[0].name !== 'Line' || axes[0].sequence !== 1 || axes[1].name !== 'Sample' || axes[1].sequence !== 2 ||
         !axes.every(axis => Number.isInteger(axis.elements) && axis.elements >= 2 && axis.elements <= 8192)) throw new Error(`Unsupported geometry cube plane axes: ${id}`);
-    const elements = labelBlocks(block, 'Element_Array');
+    const elements = pds4Blocks(block, 'Element_Array');
     if (elements.length !== 1) throw new Error(`Geometry cube plane ${id} lacks its element definition.`);
-    const dataType = labelField(elements[0], 'data_type');
+    const dataType = pds4Field(elements[0], 'data_type');
     if (!DATA_TYPES[dataType]) throw new Error(`Unsupported geometry cube data type ${dataType} for ${id}.`);
-    const unit = /<unit>/.test(elements[0]) ? labelField(elements[0], 'unit') : null;
-    const sections = labelBlocks(block, 'Special_Constants');
+    const unit = /<unit>/.test(elements[0]) ? pds4Field(elements[0], 'unit') : null;
+    const sections = pds4Blocks(block, 'Special_Constants');
     if (sections.length > 1) throw new Error(`Geometry cube plane ${id} repeats its special constants.`);
     const constants: Record<string, number> = {};
     for (const match of sections[0]?.matchAll(/<([a-z_]+)>([^<]+)<\/([a-z_]+)>/g) ?? []) {
@@ -87,20 +79,20 @@ export interface GeometryCubeOptions { fileName: string; cube: GeometryCubeDecla
 export function decodePds4GeometryCube(bytes: Buffer, xml: string, { fileName, cube, filter }: GeometryCubeOptions) {
   if (!/^[A-Za-z0-9_.-]+\.[A-Za-z0-9]+$/u.test(fileName)) throw new Error('Unsupported geometry cube file name.');
   const lid = `${cube.collection}:${fileName.slice(0, fileName.lastIndexOf('.'))}`;
-  if (labelField(xml, 'logical_identifier') !== lid || labelField(xml, 'product_class') !== 'Product_Observational' || labelField(xml, 'file_name') !== fileName) {
+  if (pds4Field(xml, 'logical_identifier') !== lid || pds4Field(xml, 'product_class') !== 'Product_Observational' || pds4Field(xml, 'file_name') !== fileName) {
     throw new Error('Geometry cube label does not identify this product.');
   }
-  const targets = labelBlocks(xml, 'Target_Identification'), components = labelBlocks(xml, 'Observing_System_Component');
-  if (targets.length !== 1 || labelField(targets[0], 'name') !== cube.target ||
-      components.map(block => `${labelField(block, 'name')}:${labelField(block, 'type')}`).join(',') !== cube.observingSystem.join(',')) {
+  const targets = pds4Blocks(xml, 'Target_Identification'), components = pds4Blocks(xml, 'Observing_System_Component');
+  if (targets.length !== 1 || pds4Field(targets[0], 'name') !== cube.target ||
+      components.map(block => `${pds4Field(block, 'name')}:${pds4Field(block, 'type')}`).join(',') !== cube.observingSystem.join(',')) {
     throw new Error('Geometry cube label names another target or observing system.');
   }
-  const startTime = labelField(xml, 'start_date_time');
+  const startTime = pds4Field(xml, 'start_date_time');
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/u.test(startTime) || Number.isNaN(Date.parse(startTime))) throw new Error('Invalid geometry cube acquisition time.');
   // A filter is bound when the label states one; an unfiltered camera must say so in the recipe.
-  const filters = [...xml.matchAll(/<img:filter_name>([^<]*)<\/img:filter_name>/g)].map(match => match[1].trim());
+  const filters = pds4Elements(xml, 'img:filter_name').map(element => element.content.trim());
   if (filters.length ? filters.length !== 1 || filters[0] !== filter : filter !== 'unfiltered') throw new Error('Geometry cube filter differs from the recipe.');
-  const kernels = [...xml.matchAll(/<geom:spice_kernel_file_name>([^<]+)<\/geom:spice_kernel_file_name>/g)].map(match => match[1].trim());
+  const kernels = pds4Elements(xml, 'geom:spice_kernel_file_name').map(element => element.content.trim());
   const shapeKernels = kernels.filter(kernel => kernel.endsWith('.bds'));
   if (shapeKernels.length !== 1 || (cube.shapeKernel !== undefined && shapeKernels[0] !== cube.shapeKernel)) throw new Error('Geometry cube label must name the declared DSK shape kernel.');
 
@@ -116,9 +108,9 @@ export function decodePds4GeometryCube(bytes: Buffer, xml: string, { fileName, c
   const width = roles.image.width, height = roles.image.height, count = width * height;
   if (ROLES.some(name => roles[name].width !== width || roles[name].height !== height)) throw new Error('Geometry cube planes differ in size.');
 
-  const headers = labelBlocks(xml, 'Header'), { header, dataOffset } = readFitsHeader(bytes);
+  const headers = pds4Blocks(xml, 'Header'), { header, dataOffset } = readFitsHeader(bytes);
   if (headers.length !== 1 || labelNumber(headers[0], 'offset') !== 0 || labelNumber(headers[0], 'object_length') !== dataOffset ||
-      !labelField(headers[0], 'parsing_standard_id').startsWith('FITS')) throw new Error('Geometry cube header disagrees with its label.');
+      !pds4Field(headers[0], 'parsing_standard_id').startsWith('FITS')) throw new Error('Geometry cube header disagrees with its label.');
   if (header.SIMPLE !== true || (header.BSCALE ?? 1) !== 1 || (header.BZERO ?? 0) !== 0 || header.NAXIS1 !== width || header.NAXIS2 !== height ||
       (header.NAXIS === 3 && header.NAXIS3 !== planes.length)) throw new Error('Unsupported geometry cube layout.');
   const ordered = [...planes].sort((a, b) => a.offset - b.offset);

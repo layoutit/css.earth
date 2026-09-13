@@ -33,11 +33,15 @@ not a universal calibration for other bodies.
 
 ## Keep measured values until the display boundary
 
-The shared [color transfer](../tools/objects/color-transfer.mts) accepts explicit
-band-composite policies. They bind the actual ordered bands, input quantity, one
-common display range and sRGB output encoding. It rejects missing policies,
-natural-color declarations, independent channel gains and automatic white balance.
-Already encoded image bytes cannot be sent through the floating-band encoder.
+The shared [color transfer](../tools/objects/color-transfer.mts) builds one
+band-composite display per product. The route names the actual ordered bands and
+their quantity from what it reads, checked against native labels where the product
+has them, and the recipe declares only the common `displayRange`. Each route
+refuses any other key, so a recipe has no place for natural-color claims,
+independent channel gains or automatic white balance. Photometrically matched
+color is compared with its monochrome base in display-linear light, so that method
+fixes its range at 0 to 1. Already encoded image bytes cannot be sent through the
+floating-band encoder.
 
 The common range assigns normalized measurements to **linear display channels**.
 This assignment is a scientific visualization, not an instrument-to-eye transform.

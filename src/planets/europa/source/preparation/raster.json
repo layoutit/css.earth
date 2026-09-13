@@ -70,22 +70,7 @@
             "IR-7560",
             "GREEN",
             "VIOLET"
-          ],
-          "gamma": 1,
-          "colorDisplay": {
-            "kind": "band-composite",
-            "inputQuantity": "radiance-factor",
-            "bands": [
-              "IR-7560",
-              "GREEN",
-              "VIOLET"
-            ],
-            "displayRange": [
-              0,
-              1
-            ],
-            "outputEncoding": "srgb"
-          }
+          ]
         },
         "metadata": {
           "label": "Enhanced color",

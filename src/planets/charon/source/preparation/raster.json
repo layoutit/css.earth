@@ -82,21 +82,7 @@
           "displayRange": [
             0,
             0.6
-          ],
-          "colorDisplay": {
-            "kind": "band-composite",
-            "inputQuantity": "derived-band-value",
-            "bands": [
-              "870 nm",
-              "625 nm",
-              "475 nm"
-            ],
-            "displayRange": [
-              0,
-              0.6
-            ],
-            "outputEncoding": "srgb"
-          }
+          ]
         },
         "metadata": {
           "description": "Near-infrared, red and blue observations highlight surface differences. Gray grid marks missing color coverage; detail varies across the map.",
