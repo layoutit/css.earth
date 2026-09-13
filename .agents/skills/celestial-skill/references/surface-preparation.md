@@ -79,6 +79,14 @@ detail into color bands, or silently change independent lenses into a composite.
 
 ## Scientific maps
 
+Numeric GeoTIFFs may use geographic degrees rather than projected metres.
+Read the native GeoKeys, origin, pixel area convention and NoData before choosing
+`grid.coordinates: "degrees"`; the numeric reader verifies angular units, the
+reference sphere and prime meridian. Do not multiply an already angular grid by
+the radius. A declared NoData value may never occur in the raster; inspect the
+actual value distribution and producer legend before treating extrema as gaps.
+Keep any conservative exclusion explicit in the recipe and dataset description.
+
 Choose labels by meaning through the shared lens vocabulary: Elevation,
 Enhanced color, Thermal infrared, Cross section where those concepts apply.
 Instrument, wavelength, datum, enhancement and caveats belong in descriptions.
