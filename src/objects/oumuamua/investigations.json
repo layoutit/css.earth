@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "oumuamua",
+  "entries": [
+    {
+      "id": "disc-shape",
+      "subject": "Mashchenko DISC shape solution",
+      "status": "included",
+      "finding": "Mashchenko’s DISC solution uses the paper’s stated geometric albedo 0.1. The CIGAR alternative remains viable; a familiar artist impression is not measured geometry.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/oumuamua/README.md#L36"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    },
+    {
+      "id": "artist-impressions",
+      "subject": "Artist impressions as surface textures",
+      "status": "excluded",
+      "finding": "NASA and ESO artist impressions are not surface data: telescopes measured only unresolved light.",
+      "revisitWhen": "Resolved imaging of the object exists.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/oumuamua/README.md#L37"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    },
+    {
+      "id": "horizons-trajectory",
+      "subject": "Horizons fixed-epoch trajectory for position",
+      "status": "included",
+      "finding": "The fixed-epoch Horizons heliocentric osculating trajectory and independent vectors set the position. The open conic is not a simulation of non-gravitational acceleration or a reconstruction of the object’s unknown origin.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/oumuamua/README.md#L38"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    }
+  ]
+}
