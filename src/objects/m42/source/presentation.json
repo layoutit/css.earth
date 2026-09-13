@@ -5,15 +5,15 @@
   "defaultLens": "eso-optical",
   "bank": {
     "path": "src/objects/m42/prepared/lenses.json",
-    "sha256": "bb9dce10a66ca9e4acdcfcdaf97a236b50f3568a9fc61a57abb23d8ed3ac0b96",
-    "bytes": 2875897
+    "sha256": "23b85f4673a573cc2ac0b3b553817375dce86c20ba99b32e6a927b446ba1c064",
+    "bytes": 3609590
   },
   "recipes": [
     {
       "id": "recipe-1",
       "path": "src/objects/m42/source/delivery.json",
-      "sha256": "b4e3da0a6639f432b4ef877d6920b73a6acd699f07421612d617ff7120059254",
-      "bytes": 1727
+      "sha256": "6ccc6e360bc0c6fd931dd9061631490fdae07ee31c46d0d872dc9e06044d4a14",
+      "bytes": 1888
     },
     {
       "id": "recipe-2",
@@ -56,31 +56,32 @@
     "eso-optical",
     "eso-vista",
     "physical-evidence",
-    "distance"
+    "distance",
+    "stellar-field"
   ],
   "lenses": [
     {
       "id": "eso-optical",
-      "label": "ESO · optical",
+      "label": "ESO \u00b7 optical",
       "title": "Orion in visible light",
-      "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances. The reference image shows the photograph before star removal and 3D color fitting.",
-      "summary": "Optical · i / H-alpha / r / G",
-      "detail": "4000 × 3106 px",
+      "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Optical \u00b7 i / H-alpha / r / G",
+      "detail": "4000 \u00d7 3106 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Optical · i / H-alpha / r / G"
+          "value": "Optical \u00b7 i / H-alpha / r / G"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "4000 × 3106"
+          "value": "4000 \u00d7 3106"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "59.95 × 46.56 arcmin"
+          "value": "59.95 \u00d7 46.56 arcmin"
         }
       ],
       "input": "eso-optical",
@@ -93,26 +94,26 @@
     },
     {
       "id": "eso-vista",
-      "label": "ESO VISTA · infrared",
+      "label": "ESO VISTA \u00b7 infrared",
       "title": "Orion in near infrared",
-      "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances. The reference image shows the photograph before star removal and 3D color fitting.",
-      "summary": "Near-infrared · K / J / Z",
-      "detail": "3252 × 4000 px",
+      "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Near-infrared \u00b7 K / J / Z",
+      "detail": "3252 \u00d7 4000 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Near-infrared · K / J / Z"
+          "value": "Near-infrared \u00b7 K / J / Z"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "3252 × 4000"
+          "value": "3252 \u00d7 4000"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "71.84 × 88.35 arcmin"
+          "value": "71.84 \u00d7 88.35 arcmin"
         }
       ],
       "input": "eso-vista",

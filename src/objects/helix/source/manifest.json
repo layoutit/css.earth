@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/observations/helix/sources/eso-vista.tif",
       "origin": "https://www.eso.org/public/images/eso1205a/",
       "sourceUrl": "https://www.eso.org/public/images/eso1205a/",
-      "title": "Helix · eso1205a",
+      "title": "Helix \u00b7 eso1205a",
       "credit": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
       "displayCredit": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -41,7 +41,7 @@
       "path": ".local/nebula-lab/observations/helix/sources/eso-wfi.tif",
       "origin": "https://www.eso.org/public/images/eso0907a/",
       "sourceUrl": "https://www.eso.org/public/images/eso0907a/",
-      "title": "Helix · eso0907a",
+      "title": "Helix \u00b7 eso0907a",
       "credit": "ESO",
       "displayCredit": "ESO",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -75,7 +75,7 @@
       "path": ".local/nebula-lab/observations/helix/sources/eso-wide.tif",
       "origin": "https://www.eso.org/public/images/helix/",
       "sourceUrl": "https://www.eso.org/public/images/helix/",
-      "title": "Helix · helix",
+      "title": "Helix \u00b7 helix",
       "credit": "ESO",
       "displayCredit": "ESO",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -109,7 +109,7 @@
       "path": ".local/nebula-lab/kinematics/helix/hco/table1.dat",
       "origin": "https://doi.org/10.26093/cds/vizier.17780016",
       "sourceUrl": "https://doi.org/10.26093/cds/vizier.17780016",
-      "title": "Helix HCO+ J=1–0 component fits",
+      "title": "Helix HCO+ J=1\u20130 component fits",
       "credit": "Zeigler, Zack, Woolf & Ziurys (2013); CDS/VizieR",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
       "expectedSha256": "61804353d393ced6650b31424591877a6481f9f01696031b2dabfb5d0cf0acaf",
@@ -139,8 +139,8 @@
       "title": "Helix adopted world placement",
       "credit": "Benedict et al. (2009); cssEarth placement",
       "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
-      "expectedSha256": "7946d16e15b9fc00f837211e439f3d20bb9956a68a6b86ceecb25d7cc03ad38c",
-      "expectedBytes": 1555,
+      "expectedSha256": "67cfca0cb284dbfc9a2b365dd34ad7b6b0da2fc7d4cf40b2f6c13c6a62eb4f7d",
+      "expectedBytes": 1718,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -152,14 +152,48 @@
         ]
       },
       "dependencies": []
+    },
+    {
+      "id": "stellar-field",
+      "path": "src/objects/helix/source/stellar-field.json",
+      "origin": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "sourceUrl": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "title": "Helix Nebula surrounding Gaia DR3 stellar field",
+      "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
+      "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
+      "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
+      "expectedSha256": "f7cc8d1533503cc709a20deb7ea759604d6384ae61b00cb769e5bd7160f28e08",
+      "expectedBytes": 2976849,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gavo",
+            "role": "material",
+            "evidence": "src/objects/helix/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "bailer-jones-2021-distances",
+            "role": "method",
+            "evidence": "src/objects/helix/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "cardiel-2021-rgb",
+            "role": "method",
+            "evidence": "src/objects/helix/source/stellar-field.json#/provenance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements."
     }
   ],
   "documents": [
     {
       "id": "document-1",
       "path": "src/objects/helix/source/delivery.json",
-      "expectedSha256": "7946d16e15b9fc00f837211e439f3d20bb9956a68a6b86ceecb25d7cc03ad38c",
-      "expectedBytes": 1555,
+      "expectedSha256": "67cfca0cb284dbfc9a2b365dd34ad7b6b0da2fc7d4cf40b2f6c13c6a62eb4f7d",
+      "expectedBytes": 1718,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -178,8 +212,8 @@
     {
       "id": "document-3",
       "path": "src/objects/helix/source/presentation.json",
-      "expectedSha256": "69e3fb4546b5a1820dcd61a8e0332bccfa3afc503e659d6e35ac2a1937e12d24",
-      "expectedBytes": 5631,
+      "expectedSha256": "067f02529aeecdc95bc51e109af9f6c93e68b0e83234159db04a7e3e4b7807f4",
+      "expectedBytes": 6168,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."

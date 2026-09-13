@@ -6,8 +6,8 @@ import type { CompilerProgress, CompilerStep } from '../compiler/prerequisites';
 import { readCompilerResult, type CompilerResult } from '../compiler/result';
 import { validateCompilerResult } from '../compiler/compile';
 import { loadCompilerImages, compilerImagePanel } from '../compiler/images';
-import { bakeCompiler } from '../compiler/bake';
-import { COMPILER_STAR_PROFILE_PATH } from '../compiler/star-sprites';
+import { bakeCompiler, type CompilerStarInput } from '../compiler/bake';
+import { COMPILER_STAR_PROFILE_PATH, prepareCompilerStarSprites } from '../compiler/star-sprites';
 import { readCompilerBakeResult, type CompilerBakeResult, type CompilerPin } from '../compiler/bake-types';
 import type { SkyBounds } from '../compiler/field-types';
 import { decodeFits, float32LittleEndian } from '../getsf-fits';
@@ -22,6 +22,23 @@ import { registerComponentBanks } from './layout';
 import { fitSampledEmission, type EmissionFitResult } from './emission-fit';
 import { prepareSampledMaterial } from './material';
 import { fitSampledMaterialColors } from './material-fit';
+
+/** Spectral appearances belong to the final scene, so its atlas must include their complete palette. */
+export async function prepareSampledSceneStars(root: string, outputDirectory: string,
+  registered: CompilerBakeResult, sourceStars: readonly CompilerStarInput[]): Promise<CompilerBakeResult> {
+  const byId = new Map(sourceStars.map(star => [star.id, star]));
+  if (byId.size !== sourceStars.length || byId.size !== registered.stars.length)
+    throw new TypeError('Sampled spectral stars differ from the retained catalogue.');
+  const stars = registered.stars.map(star => {
+    const source = byId.get(star.id);
+    if (!source) throw new TypeError('Sampled spectral star identity is missing.');
+    return { ...star, ...(source.materials ? { materials: structuredClone(source.materials) } : {}) };
+  });
+  // The neutral atlas intentionally covers only neutral star colors. Keep that artifact immutable.
+  const { starSprites: _neutralSprites, ...cloud } = registered;
+  const scene = readCompilerBakeResult({ ...cloud, stars });
+  return readCompilerBakeResult({ ...scene, ...await prepareCompilerStarSprites(root, outputDirectory, scene.stars) });
+}
 
 async function readSourcePin(root: string, pin: CompilerPin): Promise<Buffer> {
   if (!/^(labs\/nebula\/(models|src)\/|\.local\/nebula-lab\/)/.test(pin.path) || /[\\?#\s]/.test(pin.path) ||
@@ -190,8 +207,9 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   }
   progress('Registering spectral pixels on the retained union geometry…', .91);
   const registered = await registerComponentBanks(root, `${directory}/registered`, neutral, lenses, signal);
-  const scene = readCompilerBakeResult({ ...registered, lenses: sourceData.images.map(image => registered.lenses.find(lens => lens.id === image.id)!),
-    stars: neutral.stars.map((star, index) => ({ ...star, materials: stars[index]!.materials })) });
+  const scene = await prepareSampledSceneStars(root, `${directory}/star-materials`, {
+    ...registered, lenses: sourceData.images.map(image => registered.lenses.find(lens => lens.id === image.id)!),
+  }, stars);
   pipeline.push({ id: 'bake', label: 'Bake component-aware spectral volumes', state: 'complete', seconds: (performance.now() - started) / 1000 });
   const sources: CompilerResult['sources'] = [];
   for (const image of sourceData.images) {

@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/research/wenger/m2-9-original.jpg",
       "origin": "https://apod.nasa.gov/apod/ap040201.html",
       "sourceUrl": "https://apod.nasa.gov/apod/ap040201.html",
-      "title": "Twin Jet Nebula · accepted APOD edition",
+      "title": "Twin Jet Nebula \u00b7 accepted APOD edition",
       "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
       "displayCredit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -42,7 +42,7 @@
       "path": "src/objects/m2-9/source/image-frame.json",
       "origin": "https://arxiv.org/html/2411.03825v1",
       "sourceUrl": "https://arxiv.org/html/2411.03825v1",
-      "title": "M2–9 angular frame and adopted distance",
+      "title": "M2\u20139 angular frame and adopted distance",
       "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
       "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
       "expectedSha256": "03b7bfa303f1776503301524fa6b24a57df4fd23d91dfbba9d355acbab4d8a14",
@@ -68,14 +68,48 @@
         ]
       },
       "dependencies": []
+    },
+    {
+      "id": "stellar-field",
+      "path": "src/objects/m2-9/source/stellar-field.json",
+      "origin": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "sourceUrl": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "title": "Twin Jet Nebula surrounding Gaia DR3 stellar field",
+      "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
+      "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
+      "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
+      "expectedSha256": "d2d7d05e3147c312d8c2741a72aea5864a19daee2ef8caee3414ce6ed0b2425c",
+      "expectedBytes": 19733,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gavo",
+            "role": "material",
+            "evidence": "src/objects/m2-9/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "bailer-jones-2021-distances",
+            "role": "method",
+            "evidence": "src/objects/m2-9/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "cardiel-2021-rgb",
+            "role": "method",
+            "evidence": "src/objects/m2-9/source/stellar-field.json#/provenance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements."
     }
   ],
   "documents": [
     {
       "id": "document-1",
       "path": "src/objects/m2-9/source/delivery.json",
-      "expectedSha256": "b4c999b140798a2e00b20d61f62d9e1c0eca1273d178b7230cbba7c8667f279d",
-      "expectedBytes": 1156,
+      "expectedSha256": "ad7fb2969976729b63f4b23fbbb2b3988dc0e5d4a1a7231d0efd4d0e7b4a7f01",
+      "expectedBytes": 1318,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -104,8 +138,8 @@
     {
       "id": "document-4",
       "path": "src/objects/m2-9/source/presentation.json",
-      "expectedSha256": "881664089c3242281f6989a014efa070ed10dd9d5f30ee7c0fbb8e14d21f187c",
-      "expectedBytes": 2297,
+      "expectedSha256": "5574eb652b44c7607bc314e6ad5f1a073ef368b447a3ee2816c1ffd8b515c90e",
+      "expectedBytes": 2490,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."

@@ -1,17 +1,18 @@
 /** One reproducible optical-material experiment on an explicitly pinned existing cloud. */
 import { readFile, readdir, mkdir, writeFile, rename } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { geometrySha, readGeometryPin } from '../geometry/registered-source';
 import { jointRecord, jointPath } from '../joint-fit/model';
 import { readCompilerRecipe, readCompilerRequest } from './model';
 import { validateCompilerResult } from './compile';
-import { readCompilerResult } from './result';
+import { readCompilerResult, type CompilerResult } from './result';
 import { readRetainedEmissionField } from './field-model';
 import { createEmissionField } from './field';
 import { createEmissionMaterial } from './component-material';
 import { loadCompilerImages, compilerImagePanel } from './images';
 import { createOpticalComposite } from './optical-composite';
 import { prepareRetainedMaterialBank } from './retained-material-bank';
+import { restoreOpticalCompositeSources } from './optical-composite-inputs';
 import type { CompilerPin } from './bake-types';
 
 function sourcePin(v: unknown): CompilerPin {
@@ -36,11 +37,36 @@ export function readOpticalCompositeRecipe(v: unknown) {
     featherArcsec: v.featherArcsec, lowFrequencyArcsec: v.lowFrequencyArcsec, interpretation: v.interpretation };
 }
 
+interface SuppliedCompositeBase { result: CompilerResult; neutralSlices: CompilerPin; sourceInputs: CompilerPin[]; signal: AbortSignal }
+
+/** Standalone research replay continues to use the historical recipe's explicit cloud/slice pins. */
 export async function prepareOpticalComposite(root: string, recipePath: string, previewOnly = false,
   progress: (message: string) => void = () => {}) {
+  const { result: _result, ...prepared } = await prepareComposite(root, recipePath, previewOnly, progress);
+  return prepared;
+}
+
+/** Add the same component-bound material to a freshly compiled cloud, without publishing it to the lab. */
+export async function prepareOpticalCompositeForResult(root: string, recipePath: string, value: CompilerResult,
+  options: { signal?: AbortSignal; progress?: (message: string) => void } = {}): Promise<CompilerResult> {
+  const signal = options.signal ?? new AbortController().signal, progress = options.progress ?? (() => {});
+  signal.throwIfAborted();
+  const result = await validateCompilerResult(root, value);
+  const recipe = readOpticalCompositeRecipe(JSON.parse(await readFile(resolve(root, modelPath(recipePath)), 'utf8')));
+  const neutralPath = `${dirname(result.scene.neutral.path)}/volume-slices.json`;
+  const neutralSlices = sourcePin({ path: neutralPath, sha256: geometrySha(await readFile(resolve(root, neutralPath))) });
+  const sourceInputs = await restoreOpticalCompositeSources(root, recipe, signal, progress);
+  const prepared = await prepareComposite(root, recipePath, false, progress, { result, neutralSlices, sourceInputs, signal });
+  if (!prepared.result) throw new Error('Composite preparation produced no compiler result.');
+  return prepared.result;
+}
+
+async function prepareComposite(root: string, recipePath: string, previewOnly: boolean,
+  progress: (message: string) => void, supplied?: SuppliedCompositeBase) {
   const started = performance.now();
   const recipeBytes = await readFile(resolve(root, modelPath(recipePath))), recipe = readOpticalCompositeRecipe(JSON.parse(recipeBytes.toString()));
-  const base = await validateCompilerResult(root, JSON.parse((await readGeometryPin(root, recipe.baseResult)).toString()));
+  const base = supplied?.result ?? await validateCompilerResult(root, JSON.parse((await readGeometryPin(root, recipe.baseResult)).toString()));
+  const neutralSlices = supplied?.neutralSlices ?? recipe.neutralSlices;
   if (base.sources.some(s => s.id === recipe.id)) throw new TypeError('Composite identity already exists in the retained cloud.');
   const previous: unknown = JSON.parse((await readGeometryPin(root, base.method)).toString());
   if (!jointRecord(previous)) throw new TypeError('Missing original cloud method.');
@@ -69,11 +95,26 @@ export async function prepareOpticalComposite(root: string, recipePath: string, 
   const ownerPath = 'labs/nebula/src/reconstruction/compiler';
   const implementation = await Promise.all((await readdir(resolve(root, ownerPath))).filter(name => name.endsWith('.ts') && !name.endsWith('.test.ts')).sort()
     .map(async name => ({ name, sha256: geometrySha(await readFile(resolve(root, ownerPath, name))) })));
-  const inputs = await Promise.all([...new Set([...inputPaths, ...sourcePins.map(pin => pin.path), ...implementation.map(owner => `${ownerPath}/${owner.name}`)])]
+  const inputs = await Promise.all([...new Set([...inputPaths, ...sourcePins.map(pin => pin.path),
+    ...(supplied?.sourceInputs.map(pin => pin.path) ?? []), ...(supplied ? [neutralSlices.path] : []),
+    ...implementation.map(owner => `${ownerPath}/${owner.name}`)])]
     .map(async path => ({ path, sha256: geometrySha(await readFile(resolve(root, path))) })));
-  const id = geometrySha(JSON.stringify({ recipe: geometrySha(recipeBytes), base: recipe.baseResult, inputs, fit: composite.metadata }));
+  if (supplied?.sourceInputs.some(pin => !inputs.some(input => input.path === pin.path && input.sha256 === pin.sha256)))
+    throw new Error('Composite source inputs changed during preparation.');
+  const baseBytes = Buffer.from(JSON.stringify(base));
+  const id = geometrySha(JSON.stringify({ recipe: geometrySha(recipeBytes),
+    base: supplied ? { id: base.id, sha256: geometrySha(baseBytes), neutralSlices } : recipe.baseResult, inputs, fit: composite.metadata }));
   const directory = `.local/nebula-lab/compiler/${id}`; await mkdir(resolve(root, directory), { recursive: true });
+  if (supplied) {
+    try {
+      const cached = await validateCompilerResult(root, JSON.parse(await readFile(resolve(root, directory, 'result.json'), 'utf8')));
+      if (cached.id !== id) throw new TypeError('Cached composite result identity differs.');
+      progress('Prepared optical composite restored.');
+      return { id, directory, fit: composite.metadata, publication: undefined, result: cached };
+    } catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error; }
+  }
   const save = async (name: string, bytes: Uint8Array) => { const path = `${directory}/${name}`;
+    supplied?.signal.throwIfAborted();
     await writeFile(resolve(root, `${path}.pending`), bytes); await rename(resolve(root, `${path}.pending`), resolve(root, path));
     return { path, sha256: geometrySha(bytes) }; };
   progress(`Optical detail fusion: ${recipe.lowFrequencyArcsec} arcsec Gaussian scale; ${recipe.featherArcsec} arcsec edge feather; wide-field colour retained.`);
@@ -82,22 +123,28 @@ export async function prepareOpticalComposite(root: string, recipePath: string, 
   const originalPin = await save('optical-composite-original.png', original.bytes), starlessPin = await save('optical-composite-starless.png', starless.bytes);
   await save('optical-composite.json', Buffer.from(JSON.stringify({ recipe, fit: composite.metadata, sourcePins, nativeGrids: data.images.map(image =>
     ({ id: image.id, width: image.diffuse.width, height: image.diffuse.height })), original: originalPin, starless: starlessPin }, null, 2)));
-  if (previewOnly) return { id, directory, fit: composite.metadata, publication: undefined };
+  if (previewOnly) return { id, directory, fit: composite.metadata, publication: undefined, result: undefined };
   if (composite.metadata.status !== 'fitted' && composite.metadata.status !== 'detail-fusion') throw new Error('Optical composition failed; inspect the prepared images before any 3D bake.');
   const fieldModel = readRetainedEmissionField(JSON.parse((await readGeometryPin(root, base.model)).toString()));
   if (fieldModel.identity !== base.scene.fieldIdentity) throw new TypeError('Retained cloud field identity differs.');
   const field = createEmissionField(fieldModel), material = createEmissionMaterial(fieldModel, image, field);
   const lens = await prepareRetainedMaterialBank({ root, outputDirectory: `${directory}/optical-composite`, scene: base.scene,
-    neutralSlicesPin: recipe.neutralSlices, sampleEmission: field.sampleEmission, lens: { id: recipe.id, label: recipe.label, sampleMaterial: material.sampleMaterial },
-    onProgress: value => { if (value.completed % 100 === 0 || value.completed === value.total) progress(`Optical material: ${value.completed}/${value.total} retained slabs`); } });
+    neutralSlicesPin: neutralSlices, sampleEmission: field.sampleEmission, lens: { id: recipe.id, label: recipe.label, sampleMaterial: material.sampleMaterial },
+    onProgress: value => { supplied?.signal.throwIfAborted(); if (value.completed % 100 === 0 || value.completed === value.total) progress(`Optical material: ${value.completed}/${value.total} retained slabs`); } });
   const physicalDepth = { ...depth, recipe: await save('depth-recipe.json', await readGeometryPin(root, sourcePin(depth.recipe))),
     evidence: await save('physical-evidence.json', await readGeometryPin(root, sourcePin(depth.evidence))) };
   const method = await save('method.json', Buffer.from(JSON.stringify({ ...previous, implementation, physicalDepth,
     opticalComposite: { recipe: { path: recipePath, sha256: geometrySha(recipeBytes) }, sourcePins, fit: composite.metadata, material: material.receipt,
-      retainedResult: recipe.baseResult, interpretation: recipe.interpretation },
+      retainedResult: supplied ? await save('base-result.json', baseBytes) : recipe.baseResult,
+      ...(supplied ? { neutralSlices, inputs, baseSelection: 'supplied-compiler-result; historical recipe cloud pins are inspection provenance only' } : {}),
+      interpretation: recipe.interpretation },
     execution: 'Existing cloud and stars retained; only one optical component-bound material prepared. Historical material limitations remain.' }, null, 2)));
-  const stars = base.scene.stars.map(star => ({ ...star, ...(star.materials ? { materials: { ...star.materials,
-    [recipe.id]: { ...star.materials[recipe.detailSourceId]!, rgb: [...star.materials[recipe.detailSourceId]!.rgb] } } } : {}) }));
+  const stars = base.scene.stars.map(star => {
+    if (!star.materials) return star;
+    const material = star.materials[recipe.detailSourceId];
+    if (!material) throw new TypeError('Retained stars do not carry the composite detail-source material.');
+    return { ...star, materials: { ...star.materials, [recipe.id]: { ...material, rgb: [...material.rgb] } } };
+  });
   const result = readCompilerResult({ ...base, id, method,
     pipeline: [...base.pipeline, { id: 'optical-composite', label: 'Blend optical sources · retain cloud', state: 'complete', seconds: (performance.now() - started) / 1000 }],
     scene: { ...base.scene, id, volumeId: base.scene.volumeId ?? base.id,
@@ -105,7 +152,8 @@ export async function prepareOpticalComposite(root: string, recipePath: string, 
       page: wide.page, width: original.width, height: original.height, boundsArcsec: base.scene.skyBoundsArcsec, original: originalPin, starless: starlessPin }] });
   await validateCompilerResult(root, result);
   const resultPin = await save('result.json', Buffer.from(JSON.stringify(result)));
+  if (supplied) return { id, directory, fit: composite.metadata, publication: undefined, result };
   const publication = { schema: 'cssearth-nebula-compiler-published@1', recipePath: recipe.compilerRecipe, result: resultPin, inputs };
   await save('publication.json', Buffer.from(JSON.stringify(publication, null, 2)));
-  return { id, directory, fit: composite.metadata, publication };
+  return { id, directory, fit: composite.metadata, publication, result };
 }
