@@ -19,6 +19,7 @@ const focus = controlName === 'focusLens';
           <button
             class="planet-observation-control planet-thumbnail-leading"
             type="button"
+            disabled
             name={controlName}
             data-focus-lens={focus ? true : undefined}
             value={lens.id}
@@ -57,6 +58,7 @@ const focus = controlName === 'focusLens';
           >
             <img
               class="planet-lens-texture"
+              src={lens.texture.url}
               data-surface-preview-src={lens.texture.url}
               width={lens.texture.width}
               height={lens.texture.height}

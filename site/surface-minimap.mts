@@ -11,9 +11,9 @@ import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mts
 
 export function loadSurfacePreview(map: HTMLElement) {
   const image = map.querySelector<HTMLImageElement>('[data-surface-preview-src]');
-  if (!image || image.hasAttribute('src')) return;
+  if (!image) return;
   if (!image.dataset.surfacePreviewSrc) return;
-  image.src = image.dataset.surfacePreviewSrc;
+  if (!image.hasAttribute('src')) image.src = image.dataset.surfacePreviewSrc;
   map.style.setProperty('--surface-preview-image', `url(${JSON.stringify(image.dataset.surfacePreviewSrc)})`);
 }
 
@@ -30,7 +30,13 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
   const pointers = new Map<number, { x: number; y: number }>();
   let pinchDistance: number | null = null;
   let visibleMaps: HTMLElement[] = [];
-  const active = (map: HTMLElement) => map.isConnected && !documentTarget.hidden && !map.closest('[hidden], details:not([open])');
+  const tabs = new Map(maps.map(map => {
+    const panel = map.closest<HTMLElement>('[data-information-panel]');
+    const input = panel?.id ? documentTarget.getElementById(panel.id.replace(/-content$/, '-tab')) : null;
+    return [map, input instanceof windowTarget.HTMLInputElement ? input : null] as const;
+  }));
+  const active = (map: HTMLElement) => map.isConnected && !documentTarget.hidden &&
+    !map.closest('[hidden], details:not([open])') && (tabs.get(map)?.checked ?? true);
 
   function context(map: HTMLElement) {
     if (!camera?.navigation || !active(map) || !elements.get(map)!.config) return null;
@@ -186,6 +192,7 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
     syncVisibility();
   }, { signal: events.signal });
   documentTarget.addEventListener('visibilitychange', syncVisibility, { signal: events.signal });
+  drawer.addEventListener('change', syncVisibility, { signal: events.signal });
   syncVisibility();
   return {
     setPlaybackState(state: PlaybackState) { playing = state.allowed; schedule(); },

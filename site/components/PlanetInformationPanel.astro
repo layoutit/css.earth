@@ -10,6 +10,7 @@ import PlanetMoonList from "./PlanetMoonList.astro";
 import { prepareBodyMoons } from "../prepare-body-moons.mts";
 import DatasetContextPanels from "./DatasetContextPanels.astro";
 import DatasetLenses from "./DatasetLenses.astro";
+import InformationTabs from './InformationTabs.astro';
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], provenance, lenses, destinations } = Astro.props;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
 const moons = prepareBodyMoons(objectId);
@@ -27,19 +28,10 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
       <PlanetCardHeader heading={false} {title} {introduction}>
           <PlanetBreadcrumbs {objectId} />
       </PlanetCardHeader>
-      <div class="planet-card-tabs" role="tablist" aria-label="Object information">
-        <button type="button" role="tab" id={`${objectId}-dataset-tab`} data-information-tab="dataset"
-          aria-controls={`${objectId}-dataset-content`} aria-selected="true" tabindex="0">
-          Datasets
-        </button>
-        <button type="button" role="tab" id={`${objectId}-factsheet-tab`} data-information-tab="factsheet"
-          aria-controls={`${objectId}-factsheet-content`} aria-selected="false" tabindex="-1">Factsheet</button>
-        <button type="button" role="tab" id={`${objectId}-moons-tab`} data-information-tab="moons"
-          aria-controls={`${objectId}-moons-content`} aria-selected="false" tabindex="-1">Moons</button>
-      </div>
+      <InformationTabs idPrefix={objectId} />
       <p data-dataset-notice role="status" aria-live="polite" hidden></p>
       <div class="planet-card-tabpanel planet-dataset-content" id={`${objectId}-dataset-content`} data-information-panel="dataset"
-        role="tabpanel" aria-labelledby={`${objectId}-dataset-tab`} tabindex="0">
+        role="region" aria-label="Datasets">
       {defaultChart && <details
         id={`${objectId}-charts`}
         class="planet-chart-switcher"
@@ -133,12 +125,12 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
       ))}
       </div>
       <div class="planet-card-tabpanel" id={`${objectId}-factsheet-content`} data-information-panel="factsheet"
-        role="tabpanel" aria-labelledby={`${objectId}-factsheet-tab`} tabindex="0" hidden>
+        role="region" aria-label="Factsheet">
         <PlanetFactsheet id={objectId} {facts} {moreFacts} embedded />
       </div>
       <DatasetContextPanels {...Astro.props} />
       <div class="planet-card-tabpanel" id={`${objectId}-moons-content`} data-information-panel="moons"
-        role="tabpanel" aria-labelledby={`${objectId}-moons-tab`} tabindex="0" hidden>
+        role="region" aria-label="Moons">
         <PlanetMoonList {moons} />
       </div>
     </PlanetCard>

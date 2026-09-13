@@ -1,6 +1,5 @@
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser-types.mts';
-import { createTabsController } from './planet-shell-client.mts';
 
 /** Only reveal prepared content; dataset attribution stays out of the runtime. */
 export function createDatasetContextController(drawer: HTMLElement, documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
@@ -24,9 +23,6 @@ export function createDatasetContextController(drawer: HTMLElement, documentTarg
   const toggleNode = documentTarget.querySelector('.planet-machine-toggle');
   const toggle = toggleNode && toggleNode instanceof windowTarget.HTMLButtonElement ? toggleNode : null;
   rail.replaceChildren(...hosts.map(owner => owner.region));
-  // A lens credited by several machines collapses into one tabbed card, which
-  // uses the shell's own tablist behaviour rather than a second implementation.
-  const tabs = createTabsController(rail, lifetime);
   const desktop = windowTarget.matchMedia('(min-width: 821px) and (orientation: landscape)');
   const place = () => (desktop.matches ? dock : drawer).append(rail);
   const hide = (node: HTMLElement, hidden: boolean) => { if (node.hidden !== hidden) node.hidden = hidden; };
@@ -35,7 +31,7 @@ export function createDatasetContextController(drawer: HTMLElement, documentTarg
     for (const { host, region, contexts } of hosts) {
       const owner = host === card ? card : focusCard;
       const active = !host.closest('[hidden]') && owner?.ariaBusy !== 'true' && owner?.dataset.cardView !== 'overview'
-        && owner?.querySelector<HTMLElement>('[data-information-panel="dataset"]')?.hidden === false;
+        && Boolean(owner?.querySelector('[data-information-tab="dataset"]:checked'));
       const lens = host.querySelector<HTMLButtonElement>('button:is([name="lens"], [name="focusLens"])[aria-pressed="true"]')?.value;
       hide(region, !active);
       for (const context of contexts) hide(context, context.dataset.datasetContext !== lens);
@@ -49,6 +45,7 @@ export function createDatasetContextController(drawer: HTMLElement, documentTarg
     }
   };
   const events = new AbortController();
+  drawer.addEventListener('change', render, { signal: events.signal });
   // A pressed toggle dismisses the card; otherwise it shows it, taking the slot back from Settings.
   // Capture reads the pressed state before the shell closes Settings and re-renders this card.
   toggle?.addEventListener('click', () => {
@@ -63,7 +60,6 @@ export function createDatasetContextController(drawer: HTMLElement, documentTarg
   place();
   render();
   const destroy = () => {
-    tabs.destroy();
     events.abort();
     observer.disconnect();
     desktop.removeEventListener('change', place);

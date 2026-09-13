@@ -33,6 +33,7 @@ import { solarSystemFocus, watchOverviewSelection } from './overview-selection.m
 import { overviewScopeFromUrl } from './navigation-scope.mts';
 import { createNavigationTiming } from './navigation-timing.mts';
 import { isFocusDatasetUrl, readDatasetUrl, withDataset } from './dataset-url.mts';
+import { retainInitialScene } from './initial-scene.mts';
 
 
 export function createSceneRouter({
@@ -62,6 +63,7 @@ export function createSceneRouter({
   let sceneError: unknown = null;
   let sceneState: SceneState = "loading";
   let hasPresented = false;
+  const initialScene = retainInitialScene(stage);
   let destroyed = false;
   let nextGeneration = 0;
   let shellOwner: { shell: Shell | null } | null = null, pending: Request | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
@@ -300,6 +302,7 @@ export function createSceneRouter({
         syncDatasetUrl(session);
       }));
       hasPresented = true;
+      initialScene?.commit();
       if (pending === request) pending = null;
       setOverview(Boolean(overviewScopeFromUrl(session.url ?? windowTarget.location?.href ?? 'https://example.test')));
       syncPlayback();
@@ -601,7 +604,7 @@ export function createSceneRouter({
     const body = documentTarget.body;
     // Scene state is republished at every navigation step. Only changes are written: removing
     // and re-adding an unchanged body class restyled the whole document (2,745 elements).
-    setData(root, "scenePresented", String(hasPresented));
+    setData(root, "scenePresented", String(hasPresented || initialScene?.available === true));
     setData(root, "ready", sceneState === "loading" ? "loading" : sceneState === "ready" ? "true" : sceneState === "error" ? "error" : null);
     const bodyState = `${sceneState}:${scenePaused}`;
     if (bodyState !== publishedBodyState) {
@@ -746,6 +749,10 @@ export function createSceneRouter({
     if (active !== session) return;
     try { retire(session, error instanceof Error ? error : new Error(String(error))); }
     catch (failure) { report(failure); }
+    if (initialScene?.available) {
+      destroyWorldContext();
+      initialScene.restore();
+    }
     report(error);
   }
   function destroyActiveScene() {

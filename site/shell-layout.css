@@ -721,13 +721,16 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     touch-action: pan-x;
     will-change: transform;
   }
-  body[data-sheet="half"] .planet-sidebar {
-    transform: translate3d(0, calc(var(--sheet-height) - var(--sheet-half)), 0);
-  }
+  .planet-sidebar:has(:where(.planet-sheet-handle:checked)),
   body[data-sheet="full"] .planet-sidebar {
     transform: none;
     overflow-y: auto;
     touch-action: pan-y;
+  }
+  body[data-sheet="half"] .planet-sidebar {
+    transform: translate3d(0, calc(var(--sheet-height) - var(--sheet-half)), 0);
+    overflow: hidden;
+    touch-action: pan-x;
   }
   .planet-sidebar.is-dragging { transition: none; }
   .planet-sidebar .planet-card { border-radius: 0; }
