@@ -8,7 +8,7 @@ import { loadRadialTerrain, requireTerrainMesh } from '../../../tools/objects/te
 import { loadSurfaceObservation } from '../../../tools/objects/surface-observations/index.mts';
 
 export async function loadLens(body: string, lensId: string, change: (recipe: Record<string, unknown>) => void = () => {}) {
-  const sourceDirectory = resolve('src/planets', body, 'source');
+  const sourceDirectory = resolve('src/objects', body, 'source');
   const file = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/terrestrial.json'), 'utf8'));
   const recipe = requireArray(requireRecord(requireRecord(file).raster).surfaceObservations).map(value => requireRecord(value)).find(lens => lens.id === lensId);
   if (!recipe) throw new Error(`${body} has no ${lensId} lens.`);
