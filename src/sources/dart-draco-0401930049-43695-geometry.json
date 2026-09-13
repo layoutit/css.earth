@@ -1,0 +1,61 @@
+{
+  "id": "dart-draco-0401930049-43695-geometry",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Dimorphos · DRACO 2022-09-26T23:14:22.365Z geometry product",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dart:data_dracoddp:dart_0401930049_43695_01_geo::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930049_43695_01_geo.xml",
+      "label": "Native PDS4 label"
+    },
+    {
+      "role": "original",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930049_43695_01_geo.fits",
+      "label": "Calibrated image and geometry"
+    }
+  ],
+  "creators": [
+    "Carolyn M. Ernst",
+    "R. Terik Daly",
+    "Olivier S. Barnouin",
+    "Ray Espiritu",
+    "Dany Waller"
+  ],
+  "publisher": "NASA Planetary Data System, Small Bodies Node",
+  "publicationDate": "2023-11-06",
+  "evidence": [
+    {
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930049_43695_01_geo.xml",
+      "checkedOn": "2026-09-12",
+      "locator": "Identification_Area and Observation_Area/Time_Coordinates"
+    }
+  ],
+  "relations": [
+    {
+      "kind": "part-of",
+      "catalogueId": "source-dimorphos-draco-geometry-collection",
+      "evidence": "PDS4 collection membership (collection_data_dracoddp.csv)."
+    }
+  ],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ernst, C., Daly, T., Barnouin, O., Espiritu, R. and Waller, D. (2023), DART Spacecraft Bundle, Calibrated Images with Geometric Backplanes, NASA PDS, DOI 10.26007/QAAN-F992.",
+      "scope": "The calibrated I/F frame and its geometric backplanes.",
+      "evidence": "Collection citation in the PDS registry record."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA public scientific data; retain the dataset citation and source notices.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "PDS Small Bodies Node data policy."
+    }
+  ]
+}

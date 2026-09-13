@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c3d42e8f34f6328521759c40087837750452a298e7634ab7949d9bdd3bb4cd4d"
+    "sha256": "6f8aecd46f6eff09c426914506c393a05f750c1d9c6f7a823c9855a8ce4d5192"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "449e777a60b31fbeaa21b6608cd284db06059b1650fc94ef356612372659774d",
+      "sha256": "ab78c796fba242f1e1b50cecf1a522b2a18169a44fdbd22744dd29d8a46bef6b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -119,6 +119,120 @@
               "label": "Shape",
               "consumer": "shape"
             }
+          ],
+          "surfaceObservations": [
+            {
+              "id": "draco",
+              "format": "pds4-geometry-cube",
+              "cube": {
+                "collection": "urn:nasa:pds:dart:data_dracoddp",
+                "target": "65803 Didymos",
+                "observingSystem": [
+                  "DART:Host",
+                  "DRACO:Instrument"
+                ],
+                "shapeKernel": "dimorphos_g_00243mm_spc_0000n00000_v004.bds",
+                "quantity": "I/F",
+                "planes": {
+                  "image": "ioverf",
+                  "x": "xcoord",
+                  "y": "ycoord",
+                  "z": "zcoord",
+                  "incidence": "incidence",
+                  "emission": "emission",
+                  "phase": "phase",
+                  "pixelScale": [
+                    "horizpixscale",
+                    "vertpixscale"
+                  ]
+                },
+                "header": {
+                  "MISSION": "DART",
+                  "INSTRUME": "DRACO",
+                  "TARGET": "65803 Didymos",
+                  "BADIMAGE": "FALSE",
+                  "IOVERF": "PERFORM",
+                  "RADIANCE": "PERFORM",
+                  "CALIB": "ON",
+                  "BINNING": "ON",
+                  "MISPXVAL": "1E10",
+                  "PXOUTWIN": "-1E10",
+                  "SATPXVAL": "1E09",
+                  "GEOINVAL": "-999",
+                  "SHAPREF2": "dimorphos_g_0243mm_spc_obj_0000n00000_v004.obj",
+                  "SHAPREF1": "didymos_g_1165mm_spc_obj_0000n00000_v003.obj"
+                },
+                "headerTime": "ACQ_UTC",
+                "headerPlaneNames": {
+                  "prefix": "PLANE",
+                  "names": {
+                    "ioverf": "Pixel value",
+                    "xcoord": "X coordinate of pixel center",
+                    "ycoord": "Y coordinate of pixel center",
+                    "zcoord": "Z coordinate of pixel center",
+                    "incidence": "Solar incidence angle",
+                    "emission": "Emission angle",
+                    "phase": "Solar phase angle"
+                  }
+                },
+                "geometrySelection": {
+                  "plane": "radius",
+                  "unit": "km",
+                  "minimum": 0.2,
+                  "maximum": 0.5,
+                  "interpretation": "Select Didymos from a cube containing body-centred intercepts for both asteroids. The 0.2–0.5 km interval brackets the full Didymos v003 source mesh and excludes all Dimorphos v004 radii; camera holdouts and source-mesh transfer are checked independently."
+                }
+              },
+              "consumer": "draco-observation",
+              "filter": "unfiltered",
+              "allowLossy": false,
+              "transfer": {
+                "maximumSourceDistanceMeters": 8,
+                "maximumSeparationMeters": 8,
+                "maximumEmissionDegrees": 80,
+                "visibilityToleranceMeters": 0.5,
+                "interpretation": "Every interpolation contributor must match the full Didymos v003 mesh within 8 m and pass visibility. These acceptance limits match the retained mesh preparation budget; they do not estimate scientific accuracy."
+              },
+              "photometry": {
+                "model": "lommel-seeliger",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 80,
+                "maximumEmissionDegrees": 80,
+                "maximumGain": 3
+              },
+              "displayPercentiles": [
+                1,
+                99
+              ],
+              "metadata": {
+                "label": "DRACO mosaic",
+                "falseColor": false,
+                "coverage": "Two DRACO frames from 158 and 94 seconds before impact. The later partial frame supplies closer detail; the earlier frame supplies wider coverage. The unseen surface keeps the grid."
+              },
+              "frames": [
+                {
+                  "id": "t-minus-94s",
+                  "path": "observations/dart_0401929957_21942_01_geo.fits",
+                  "labelPath": "observations/dart_0401929957_21942_01_geo.xml",
+                  "startTime": "2022-09-26T23:12:49.930Z"
+                },
+                {
+                  "id": "t-minus-158s",
+                  "path": "observations/dart_0401929893_44487_01_geo.fits",
+                  "labelPath": "observations/dart_0401929893_44487_01_geo.xml",
+                  "startTime": "2022-09-26T23:11:46.381Z"
+                }
+              ],
+              "selection": "recipe-order",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumLogMad": 0.15,
+                "maximumGain": 1.2,
+                "maximumAngleDegrees": 70
+              }
+            }
           ]
         },
         "lighting": {
@@ -180,7 +294,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fa54f4213898bfbaaa4c3d83235897b5c4170eb9fc5e8893138acee69cc2a132",
+      "sha256": "25d4d32198d3ecf5b90229e3e919ed48451a020fe477651eef0ed8e69ce0c401",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -231,6 +345,40 @@
               "falseColor": false,
               "detail": "Published shape",
               "summary": "An image-based shape model. Smooth regions lack image coverage; no surface photograph is mapped."
+            },
+            {
+              "id": "draco",
+              "label": "DRACO mosaic",
+              "description": "Two DRACO frames from 158 and 94 seconds before impact. The later partial frame supplies closer detail; the earlier frame supplies wider coverage. The unseen surface keeps the grid. Each image is registered through its archived geometry and checked against the source shape. Brightness is approximately disk-normalized and matched over shared surface patches; shadows remain in the photographs. This is not measured albedo or a post-impact surface.",
+              "title": "DART approach photographs",
+              "thumbnail": "/scenes/didymos/didymos-draco-thumbnail.webp",
+              "surface": "didymos-draco-surface@2x.webp",
+              "poles": "didymos-draco-poles@2x.webp",
+              "source": {
+                "id": "draco-0401929957-21942-geo",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/"
+              },
+              "falseColor": false,
+              "detail": "DRACO · DART",
+              "facts": [
+                {
+                  "id": "observed",
+                  "label": "Observed",
+                  "value": "26 September 2022, 23:11:46–23:12:49 UTC"
+                },
+                {
+                  "id": "frames",
+                  "label": "Source photographs",
+                  "value": "2"
+                },
+                {
+                  "id": "filter",
+                  "label": "Camera filter",
+                  "value": "None · panchromatic"
+                }
+              ],
+              "summary": "Two DRACO frames from 158 and 94 seconds before impact. The later partial frame supplies closer detail; the earlier frame supplies wider coverage. The unseen surface keeps the grid."
             },
             {
               "id": "elevation",
@@ -377,7 +525,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "b3c56f1a50f0d51cc5e7ddae5a1d10e76fff2be08c76ffdafc28d22b91b9abfe",
+      "sha256": "9b08a7c1432b04421a7146cf83df73007d0a812d8d12cbb5dba8346d88152414",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -396,6 +544,7 @@
         },
         "lensIds": [
           "shape",
+          "draco",
           "elevation",
           "albedo"
         ],
@@ -554,6 +703,162 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "draco-0401929957-21942-geo",
+      "path": "observations/dart_0401929957_21942_01_geo.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401929957_21942_01_geo.fits",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401929957_21942_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "observationDate": "2022-09-26T23:12:49.930Z",
+      "width": 1024,
+      "height": 1024,
+      "interpretation": "Calibrated I/F with mixed-body intercepts. The radius plane separates Didymos from Dimorphos before camera fitting. SHAPREF1 identifies the Didymos v003 1.165 m OBJ; the label lists only the companion Dimorphos DSK.",
+      "coverage": "One approach observation acquired 2022-09-26T23:12:49.930Z; valid coverage is bounded by the native readout window and qualified surface geometry.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401929957-21942-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401929957_21942_01_geo.xml: Identification_Area and the labelled File_Area_Observational."
+          }
+        ]
+      },
+      "sha256": "e3a24cd1589987b2454f95dbb7c557e1fe2eb2b0e9c04a378d6768091b69750e",
+      "bytes": 67132800,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/dart_0401929957_21942_01_geo.fits",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401929957_21942_01_geo.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "draco-0401929957-21942-label",
+      "path": "observations/dart_0401929957_21942_01_geo.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401929957_21942_01_geo.xml",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401929957_21942_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "observationDate": "2022-09-26T23:12:49.930Z",
+      "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401929957-21942-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401929957_21942_01_geo.xml: Identification_Area and the labelled product metadata."
+          }
+        ]
+      },
+      "coverage": "One approach observation acquired 2022-09-26T23:12:49.930Z; valid coverage is bounded by the native readout window and qualified surface geometry.",
+      "sha256": "4d4847a207f5e14975431949b8d500ade608c0bb0612bac54f1f3deed91cc5aa",
+      "bytes": 40054,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/dart_0401929957_21942_01_geo.xml",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401929957_21942_01_geo.xml"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "draco-0401929893-44487-geo",
+      "path": "observations/dart_0401929893_44487_01_geo.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401929893_44487_01_geo.fits",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401929893_44487_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "observationDate": "2022-09-26T23:11:46.381Z",
+      "width": 1024,
+      "height": 1024,
+      "interpretation": "Calibrated I/F with mixed-body intercepts. The radius plane separates Didymos from Dimorphos before camera fitting. SHAPREF1 identifies the Didymos v003 1.165 m OBJ; the label lists only the companion Dimorphos DSK.",
+      "coverage": "One approach observation acquired 2022-09-26T23:11:46.381Z; valid coverage is bounded by the native readout window and qualified surface geometry.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401929893-44487-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401929893_44487_01_geo.xml: Identification_Area and the labelled File_Area_Observational."
+          }
+        ]
+      },
+      "sha256": "3290224e1f16b41abe2999763a8416c781d41657c81b02b749571f953dfdd04f",
+      "bytes": 67132800,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/dart_0401929893_44487_01_geo.fits",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401929893_44487_01_geo.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "draco-0401929893-44487-label",
+      "path": "observations/dart_0401929893_44487_01_geo.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401929893_44487_01_geo.xml",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401929893_44487_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "observationDate": "2022-09-26T23:11:46.381Z",
+      "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401929893-44487-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401929893_44487_01_geo.xml: Identification_Area and the labelled product metadata."
+          }
+        ]
+      },
+      "coverage": "One approach observation acquired 2022-09-26T23:11:46.381Z; valid coverage is bounded by the native readout window and qualified surface geometry.",
+      "sha256": "ab5b4d3eea17bd6ac8e0f03024cfbd5145b23545a2434c0577a207a07ff9e9bc",
+      "bytes": 40053,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/dart_0401929893_44487_01_geo.xml",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401929893_44487_01_geo.xml"
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -566,8 +871,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fa54f4213898bfbaaa4c3d83235897b5c4170eb9fc5e8893138acee69cc2a132",
-      "bytes": 11172,
+      "sha256": "25d4d32198d3ecf5b90229e3e919ed48451a020fe477651eef0ed8e69ce0c401",
+      "bytes": 12843,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -808,6 +1113,48 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "draco",
+      "label": "DRACO mosaic",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Two DRACO frames from 158 and 94 seconds before impact. The later partial frame supplies closer detail; the earlier frame supplies wider coverage. The unseen surface keeps the grid. Each image is registered through its archived geometry and checked against the source shape. Brightness is approximately disk-normalized and matched over shared surface patches; shadows remain in the photographs. This is not measured albedo or a post-impact surface."
+      ],
+      "lensIds": [
+        "draco"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "draco-0401929957-21942-geo",
+        "draco-0401929957-21942-label",
+        "draco-0401929893-44487-geo",
+        "draco-0401929893-44487-label",
+        "didymos-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/didymos/didymos-draco-thumbnail.webp",
+          "bytes": 2050,
+          "sha256": "fe974867ff0f38dc94de7e57d80a61ca9c1b7db854bca9c82dd88d57c687fc22",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/didymos/didymos-draco-surface@2x.webp",
+          "bytes": 521240,
+          "sha256": "74b891edca2161463002d97ea0666b1824855d3211ff62bd88baa18cf3e9b9a4",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -887,6 +1234,30 @@
           "url": "object:prepared/minimaps/shape.webp",
           "bytes": 2964,
           "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:draco",
+      "label": "DRACO mosaic preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "draco"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/draco.webp",
+          "bytes": 9804,
+          "sha256": "476162bcaa59b1ab19b5c491fdcf98afed3ff87b77b291feffc7c3073a4bbcf5",
           "verification": "bytes-verified"
         }
       ]
