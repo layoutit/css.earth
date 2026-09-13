@@ -4,6 +4,7 @@ import { mountPreparedCssSky, preparedSkyCameraTransform } from './prepared-sky-
 import { validatePreparedCssSky } from './validation.js';
 import type { PreparedCssSky } from './types.js';
 import type { PreparedCssVolume } from '../volume/types.js';
+import type { PreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
 import { worldRotationCss } from '../navigation/world-camera-math.js';
@@ -200,6 +201,65 @@ test.each([
   }
   expect(document.count).toBe(count); expect(root.children).toEqual(originalNodes);
   mounted.destroy(); expect(stage.children).toEqual([detail]); expect(document.defaultView.pending.size).toBe(0);
+});
+
+test('shared universe preserves nearby independent nebulae at zero Milky Way opacity while culling their unresolved banks', () => {
+  vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
+  const base = new URL('../../../', import.meta.url), parsecM = 3.085677581491367e16;
+  const context = JSON.parse(readFileSync(new URL('planets/sun/prepared/world-context.json', base), 'utf8'));
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
+    originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 50 * parsecM],
+    localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: .1 * parsecM,
+    boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
+  const nebula: PreparedCssVolume = { schema: 'cssearth-css-volume@1', id: 'nearby-nebula', frame, anchors: [],
+    stacks: (['x', 'y', 'z'] as const).map(axis => ({ axis, leaves: [{ id: `${axis}-0`, centerUnits: [0, 0, 0],
+      texturePath: `${axis}.webp`, widthPx: 1, heightPx: 1,
+      style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
+        backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
+    resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, sha256: 'a'.repeat(64), bytes: 1, width: 1, height: 1 })),
+    provenance: {}, approximation: {} };
+  const bank: PreparedVolumeLenses = { schema: 'cssearth-volume-lenses@1', id: 'nearby-nebula', defaultLens: 'optical',
+    framingRadiusUnits: 1, contextVisibility: 'independent', lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
+      description: 'Prepared nearby nebula', sourceUrl: 'https://example.org/nebula', volume: nebula,
+      brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } }] };
+  const { contextVisibility: _independent, ...galacticBank } = bank;
+  const document = new FakeDocument(), stage = document.createElement();
+  const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
+    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
+    volumeLenses: [bank, { ...galacticBank, id: 'galactic-default' }].map(payload => ({ payload,
+      resolveResource: (path: string) => `/nebula/${payload.id}/${path}` })) }).mount(stage as unknown as HTMLElement);
+  try {
+    const root = mounted.root as unknown as FakeElement;
+    const milkyWay = root.children.find(node => node.className === 'prepared-volume-context')!;
+    const independent = root.children.find(node => node.dataset.volumeLensObject === bank.id)!;
+    const galactic = root.children.find(node => node.dataset.volumeLensObject === 'galactic-default')!;
+    const cloud = independent.children.find(node => node.className === 'prepared-volume-lens-cloud')!;
+    const axes = cloud.children.filter(node => node.className === 'css-volume-projection');
+    const count = document.count, retained = [...root.children];
+    expect(axes).toHaveLength(3);
+    // A 0.1 pc radius spans 30 px at 2 pc and 1.25 px at 48 pc, using the default visibility thresholds.
+    for (const [distancePc, visible] of [[52, true], [98, false], [52, true]] as const) {
+      const camera: WorldCameraPose = { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
+        pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
+          orientationXyzw: [0, 0, 0, 1] } };
+      mounted.publish(camera, viewport);
+      expect(milkyWay.dataset.volumeOpacity).toBe('0');
+      expect(milkyWay.style.display).toBe('none');
+      expect(galactic.style.opacity).toBe('0');
+      expect(galactic.style.display).toBe('none');
+      expect(independent.style.opacity).toBe(visible ? '1' : '0');
+      expect(independent.style.display).toBe(visible ? 'block' : 'none');
+      if (visible) {
+        expect(Number(independent.dataset.cloudOpacity)).toBeGreaterThan(0);
+        expect(axes.some(axis => axis.style.visibility === 'visible' && Number(axis.style.opacity) > 0)).toBe(true);
+      }
+      expect(root.children).toEqual(retained);
+      expect(document.count).toBe(count);
+    }
+  } finally { mounted.destroy(); }
+  expect(stage.children).toEqual([]);
+  expect(document.defaultView.pending.size).toBe(0);
 });
 
 /** Ordinary source-over through the actual DOM opacity levels. */
