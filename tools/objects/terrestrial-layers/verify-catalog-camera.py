@@ -19,7 +19,7 @@ if Path(a.profile).is_absolute() or '..' in Path(a.profile).parts:raise ValueErr
 config=json.loads((a.source/'preparation/terrestrial.json').read_text());profile=json.loads((a.source/a.profile).read_text());frames=config['raster']['mosaics'][0]['frames']
 frame=next(f for f in frames if f['id']==a.frame) if a.frame else frames[0]
 reference=a.output/'reference.f32'
-subprocess.run(['node',str(Path(__file__).with_name('catalog-camera-reference.mjs')),str(a.source),str(reference),frame['id']],check=True)
+subprocess.run(['node',str(Path(__file__).with_name('catalog-camera-reference.mts')),str(a.source),str(reference),frame['id']],check=True)
 r=np.fromfile(reference,'<f4').reshape(800,800).astype(float);original=fits.getdata(a.source/frame['path']).astype(float)
 # Source special values are not radiance. This is correlation preprocessing,
 # never a modification to retained observations or their production eligibility.

@@ -4,11 +4,63 @@
 
 | View or property | Source and interpretation |
 | --- | --- |
-| OSIRIS reflectance | NAC orange-filter images `N20100710T154047674ID4DF22` and `N20100710T154135529ID4DF22`, 10 July 2010 at 15:41:06.632 and 15:41:54.488 UTC; 88/78 m per pixel. Resampled I/F with separate sigma, quality and camera records. |
+| OSIRIS reflectance | Three NAC orange-filter close-ups from 10 July 2010, 15:41:06.632–15:43:00.199 UTC, at approximately 88, 78 and 68 m per pixel. [ESA's original STR-REFL products](https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSINAC/RO-A-OSINAC-4-AST2-LUTETIA-STR-REFL-V1.0/DATA/IMG/) supply resampled I/F with separate sigma, quality and camera records. |
 | Shape and Elevation | [Jorda et al. PDS release](https://doi.org/10.26007/aajh-r451), `lutetia_025k_cart.wrl`. Elevation is radius minus 49 km, false color from −16 to +16 km, not gravitational height. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/LUTETIA/target) Lutetia centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
+
+[Before](evidence/photographic-coverage/before.webp) ·
+[After](evidence/photographic-coverage/after.webp) ·
+[Pixelmatch diff](evidence/photographic-coverage/diff.webp) ·
+[Measured evidence](evidence/photographic-coverage/evidence.json)
+
+The matched Chrome 152 captures use 1440×1000, DPR 1, OSIRIS, motion paused
+and Shadows off. Before is `d4330c6c1`; after is `0ff39d3bc` plus this change,
+with exact input/output pins in the evidence. Camera, retained tree and hit mesh
+are byte-equivalent. Pixelmatch 7.2.0 at threshold 0.1 reports 29,007 changed
+pixels out of 1,440,000; independent unchanged captures differ by zero pixels.
+The visible detail change is modest and localized; changed-pixel counts do not
+measure scientific accuracy or sharpness.
+
+The 19 focused source/photometry checks and nine source catalogue checks pass;
+one catalogue test is skipped for an unrelated missing reference PDF. Package
+closure verifies 39 delivered files, and the new image restores from ESA into
+an empty directory with exact byte/hash agreement. The existing default camera
+also reproduces its original hash after the helper-path repair. Headless checks
+cover four poses, DPR 1/2, mobile, lighting and retained-DOM dragging; Shadows
+defaults off. Strict TypeScript checking of the changed capture/test roots
+passes. Full repository suites were not run. Inspected screenshots include
+[DPR 2](evidence/photographic-coverage/dpr2.webp),
+[mobile](evidence/photographic-coverage/mobile.webp) and
+[directional lighting](evidence/photographic-coverage/shadows.webp).
+
+The September 2026 expansion adds `N20100710T154241240ID4DF22`. It supplies
+the selected photograph over **8.19% of the display mesh**, mainly replacing
+coarser views. Area-weighted coverage on the same 64 stratified samples per
+triangle changes from **29.51% to 29.66%**. This is primarily a detail upgrade;
+it does not establish global photographic coverage. The 800 display faces,
+source mesh and transfer limits are unchanged.
+
+The original camera reproduces the archived boresight within 0.00000368° and
+surface-intercept point within 0.01069 pixels. Registration uses the existing
+two-fit/two-holdout image/model correlation method. This later photograph needs
+a larger search window, ±256 pixels instead of ±128, to find its translation
+of [−36, +183.5] pixels. The withheld residual is 8.14 pixels and all four
+correlations exceed 0.70; the 12-pixel residual limit is unchanged. This large
+pointing adjustment registers the photograph to the selected source shape,
+not to independent absolute ground truth. No roll, scale or local warp is fitted.
+
+The same published Hasselmann Hapke model handles the new 50.91° phase angle.
+The selected phase interval becomes 25–55°, inside the paper's fitted
+0.15–144.15° range. Incidence/emission limits, gain limits and quality flags
+remain unchanged. Overlap display gains are 1, 0.9851 and 0.9688.
+The adjacent 15:43:06.482 candidate is excluded: its northeast holdout
+correlation is 0.6949, below the unchanged 0.70 acceptance limit.
+
+Camera preparation also repairs two stale `.mjs` helper paths left by the
+TypeScript migration. The selected image, profile, camera and their byte pins
+are in [the source manifest](source/manifest.json).
 
 [The 9 September 2026 mosaic report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/README.md) records 107 focused tests, 60 browser conformance cases, DPR 1/2 production checks and fresh remote installation for the four-body change. [Validation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/validation.json) identifies tested commit `8ded7a5` and base `1fb76e4`; these are historical results.
 
@@ -22,9 +74,9 @@ Feature notes: 2 of the labelled names carry a caption note, the lead summary of
 
 The shape joins detailed northern OSIRIS reconstruction to coarser lightcurve/outline modeling; the published join discontinuity and local defects remain. Photographic coverage is partial and gaps remain a grid.
 
-`N20100710T154047674ID4DF22` explicitly records skipped in-field and out-of-field stray-light correction despite its STR-REFL collection name. The regional Hapke model and 0.98497 relative display gain do not recover global albedo or cast shadows.
+`N20100710T154047674ID4DF22` explicitly records skipped in-field and out-of-field stray-light correction despite its STR-REFL collection name. The regional Hapke model and bounded relative display gains do not recover global albedo or cast shadows.
 
-The 15:43:54 candidate failed image/model registration; the 15:45:28 candidate failed the independent archived-intercept check. Neither is included. The two-image selection supersedes the earlier single-image account below.
+The 15:43:54 candidate failed image/model registration; the 15:45:28 candidate failed the independent archived-intercept check. Neither is included. The dated one- and two-image accounts below describe earlier versions; the three-image expansion is reported above.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
