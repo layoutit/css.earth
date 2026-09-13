@@ -103,7 +103,7 @@ instead of editing a shared list or atlas position.
   target body's inputs and conventions.
 - **Photometric normalization:** `tools/photometry/` evaluates published
   photometric models, including Hapke with macroscopic roughness, for the
-  observation seam, encounter and shape-camera routes. Lutetia's
+  surface-observation and shape-camera routes. Lutetia's
   `source/photometry/` record and its manifest binding are the worked example;
   `tools/photometry/isis.oracle.test.mts` holds the library to the values ISIS
   prints.
@@ -182,11 +182,11 @@ for availability; this reference does not establish merge or deployment status.
 | Capability | Owner relative to the repository |
 | --- | --- |
 | Observation pins, quality policy, photometry and transfer limits | `src/planets/comet-67p/source/preparation/terrestrial.json` and `acquisition.json` in the same directory |
-| OSIRIS decoding, companion identity, projective fit and footprint sampling | `tools/objects/terrestrial-layers/osiris-geo.mts` |
-| Disjoint camera validation, source-mesh correspondence and visibility | `tools/objects/terrestrial-layers/observed-geo-surface.mts` |
-| Deterministic surface samples, bounded overlap gains and observation selection | `tools/objects/terrestrial-layers/observation-mosaic.mts` |
+| OSIRIS decoding, companion identity and quality flags | `tools/objects/terrestrial-layers/osiris-geo.mts` |
+| Projective fit with a disjoint holdout, footprint sampling, source-mesh correspondence and visibility | `tools/objects/surface-observations/`, described in its [README](../../../../tools/objects/surface-observations/README.md) |
+| Deterministic surface samples, bounded overlap gains and observation selection | `tools/objects/surface-observations/levels.mts` |
 | Atlas baking and lossless observation-index output | `tools/objects/terrestrial-layers/radial-terrain.mts` |
-| Selection/level regressions and prepared provenance checks | `tools/objects/terrestrial-layers/observation-mosaic.test.mts`, `tests/objects/unit/comet-67p/mosaic.test.mts` |
+| Selection/level regressions and prepared provenance checks | `tools/objects/surface-observations/levels.test.mts`, `tests/objects/unit/comet-67p/mosaic.test.mts` |
 | Worked method, limitations and measured evidence | [67P source and evidence account](../../../../src/planets/comet-67p/README.md) |
 
 Inspect the actual recipe/schema before reuse. The OSIRIS decoder and quality
@@ -195,7 +195,7 @@ provenance are transferable requirements. 67P's distances, angles, sample counts
 photometric model and gain limits are evidence for that dataset, not defaults.
 
 Archives that ship an image with its geometric backplanes as one PDS4 cube use
-the same seam through `format: "pds4-geometry-cube"`: the recipe's `cube` block
+the same pipeline through `format: "pds4-geometry-cube"`: the recipe's `cube` block
 names the label planes that carry the image, the X/Y/Z intercepts and the
 angles, the collection, target, observing system and DSK to bind, and optional
 FITS header expectations. `tools/objects/terrestrial-layers/pds4-geometry-cube.mts`
@@ -221,8 +221,8 @@ kernel subset (DAF, SPK types 1, 2, 3, 5, 8, 9 and 13, CK types 1 to 3, text
 kernels, leap seconds, SCLK, PCK pole models, frame classes 2 to 6, light time
 and stellar aberration) and `tools/spice/camera.mts` assembles the camera;
 `tools/objects/terrestrial-layers/spice-camera.mts` turns it into the same
-`cssearth-archived-camera@1` closure the OSIRIS and L'LORRI routes feed to
-`attachSourceGeometry`, so per-pixel geometry comes from the retained mesh. The
+`cssearth-archived-camera@1` closure the OSIRIS and L'LORRI formats use, and
+`castSourceRays` derives per-pixel geometry from the full source mesh. The
 route is validated end to end against Dimorphos's DRACO backplanes in
 `tests/objects/unit/dimorphos/draco-spice.test.mts` (0.5 px against the
 archive's own intercepts, the constant offset explained by kernel versions).
@@ -255,7 +255,7 @@ DRACO backplanes: the kernel camera stays within 0.6 px of the archive, and
 cameras pushed 30 and 150 px away return to 0.24 and 0.55 px.
 
 The PDS3 routes (OSIRIS GEO, AMICA) stay instrument decoders behind the same
-seam, decided 2026-09-12 after a code review: their archives do not declare
+pipeline, decided 2026-09-12 after a code review: their archives do not declare
 plane units or semantics the way a PDS4 label does, and about half of each
 decoder is instrument policy (quality-bit polarity and HISTORY radiometry for
 OSIRIS; gzip band reversal and the paired flat for AMICA), so a declaration
@@ -268,7 +268,7 @@ The pipeline derives nothing from an oracle; an oracle recomputes what the
 pipeline computed so a test can compare. `tools/oracles/` holds them with a
 pinned Python environment (`pnpm oracles:setup`, `tools/oracles/requirements.txt`),
 and each writes a fixture under `tests/oracles/` that names its versions and the
-sha256 of every input. Every archive reader on the observation seam has one:
+sha256 of every input. Every archive reader in the surface-observation pipeline has one:
 SpiceyPy for `tools/spice/` (a microsecond in time, a millimetre in position, a
 nanoradian in rotation); pds4_tools for the PDS4 geometry cube; pvl and numpy for
 the OSIRIS geometry, OSIRIS reflectance, AMICA and ISIS2 readers; astropy for
