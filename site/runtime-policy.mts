@@ -13,6 +13,11 @@ export const CENTER_SELECTION_DURATION_SECONDS = 0.35;
 // A wheel during a fly-to hurries the arrival by this factor instead of stopping the flight
 // where it is, which stranded distant bodies such as comets millions of kilometres away.
 export const FLIGHT_WHEEL_SPEEDUP = 6;
+// A fly-to finishes once the rest of it is invisible: the camera is within this fraction of its depth
+// to the nearest body surface from its final position, and within this many radians of its final
+// orientation, about 0.1 px at a 1,000 px focal length. Flights used to spend their last second or
+// so closer than that while the page still reported loading.
+export const FLIGHT_ARRIVAL_TOLERANCE = 1e-4;
 // The traced reference response is one interval of travel per 100 delta units,
 // so a multiplier of 1 puts a device on that reference. A trackpad reports the
 // scroll distance a wheel notch stands for, in the same delta units, and needs
