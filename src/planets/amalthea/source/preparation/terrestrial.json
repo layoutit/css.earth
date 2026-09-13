@@ -150,14 +150,14 @@
             "pixelAngleMicroradians": 10.15,
             "backgroundOffset": 0.023529411764705882,
             "backgroundMaximum": 0.011764705882352941,
-            "coverageInsetPixels": 5
+            "coverageInsetPixels": 10
           }
         ],
         "selection": "finest-resolution",
         "levelMatching": {
           "samplesPerTriangle": 64,
           "minimumPairs": 64,
-          "maximumGain": 9.15,
+          "maximumGain": 9.1,
           "maximumAngleDegrees": 70
         },
         "transfer": {
@@ -177,7 +177,7 @@
         "display": {
           "displayRange": [
             0,
-            0.139
+            0.133
           ]
         }
       }
