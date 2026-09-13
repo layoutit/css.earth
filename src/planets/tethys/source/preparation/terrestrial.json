@@ -341,6 +341,99 @@
         "label": "Shape",
         "consumer": "shape"
       }
+    ],
+    "surfaceObservations": [
+      {
+        "id": "iss",
+        "format": "spice-camera",
+        "consumer": "iss-observation",
+        "filter": "CL1,CL2",
+        "allowLossy": false,
+        "path": "observations/N1807429484_1_CALIB.IMG",
+        "labelPath": "observations/N1807429484_1_CALIB.LBL",
+        "startTime": "2015-04-11T06:43:09.748Z",
+        "spice": {
+          "kernelSet": "cassini",
+          "kernels": [
+            "lsk/naif0012.tls",
+            "pck/pck00011.tpc",
+            "sclk/cas00172.tsc",
+            "fk/cas_v43.tf",
+            "ik/cas_iss_v10.ti",
+            "spk/150828R_SCPSE_15066_15116.bsp",
+            "ck/15098_15103ra.bc"
+          ],
+          "observer": -82,
+          "target": 603,
+          "bodyFrame": "IAU_TETHYS",
+          "instrument": -82360,
+          "clock": {
+            "start": "SPACECRAFT_CLOCK_START_COUNT",
+            "stop": "SPACECRAFT_CLOCK_STOP_COUNT",
+            "spacecraft": -82
+          },
+          "aberration": "LT+S",
+          "pixels": {
+            "focalLength": {
+              "key": "FOCAL_LENGTH",
+              "unit": "mm"
+            },
+            "pixelPitch": {
+              "key": "PIXEL_SIZE",
+              "unit": "micrometre"
+            },
+            "center": "CCD_CENTER",
+            "boresight": "BORESIGHT",
+            "samples": "PIXEL_SAMPLES",
+            "lines": "PIXEL_LINES",
+            "frame": "FOV_FRAME",
+            "origin": 1,
+            "column": "-X",
+            "row": "-Y"
+          },
+          "image": {
+            "format": "vicar-pds3",
+            "quantity": "I/F",
+            "header": {
+              "INSTRUMENT_ID": "ISSNA",
+              "TARGET_NAME": "TETHYS",
+              "INSTRUMENT_MODE_ID": "FULL"
+            }
+          }
+        },
+        "refinement": {
+          "method": "mesh-limb",
+          "maximumCorrectionDegrees": 0.2,
+          "maximumResidualPixels": 2.5,
+          "minimumControls": 48,
+          "searchPixels": 400,
+          "maximumControls": 1500
+        },
+        "transfer": {
+          "maximumSourceDistanceMeters": 5000,
+          "maximumSeparationMeters": 3000,
+          "maximumEmissionDegrees": 80,
+          "visibilityToleranceMeters": 50,
+          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must lie within 5 km of the closest source-mesh point, and that point must be visible from the refined camera in the full mesh."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3
+        },
+        "displayPercentiles": [
+          1,
+          99
+        ],
+        "metadata": {
+          "label": "ISS photograph",
+          "falseColor": false,
+          "coverage": "One Cassini ISS narrow-angle photograph from 190,000 km on 11 April 2015, projected through a camera derived from Cassini SPICE kernels and refined to the shape model's limb. Unphotographed or shadowed surface retains the grid."
+        }
+      }
     ]
   },
   "lighting": {
