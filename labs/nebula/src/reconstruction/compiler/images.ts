@@ -13,6 +13,8 @@ export interface CompilerImage { id: string; label: string; credit: string; page
   nativeWidth: number; nativeHeight: number; original: CompilerRaster; diffuse: CompilerRaster; stars: CompilerRaster;
   sampleRgb(x: number, y: number, out: [number, number, number]): boolean;
   sampleOriginal(x: number, y: number, out: [number, number, number]): boolean;
+  sampleLowRgb?(x: number, y: number, out: [number, number, number]): boolean;
+  sampleLowOriginal?(x: number, y: number, out: [number, number, number]): boolean;
   pixelToSky(x: number, y: number): [number, number] }
 async function raster(root: string, v: unknown): Promise<CompilerRaster> {
   if (!jointRecord(v) || typeof v.path !== 'string' || typeof v.sha256 !== 'string' || typeof v.width !== 'number' || typeof v.height !== 'number') throw new TypeError('Missing pinned source layer.');
@@ -31,7 +33,9 @@ function sampleRaster(layer: CompilerRaster, x: number, y: number, out: [number,
   }
   return true;
 }
-export async function loadCompilerImages(root: string, path: string, request: CompilerRequest, center: [number, number]) {
+export async function loadCompilerImages(root: string, path: string, request: CompilerRequest, center: [number, number], native = false, lowFrequencyArcsec?: number) {
+  if (lowFrequencyArcsec !== undefined && (!native || !Number.isFinite(lowFrequencyArcsec) || lowFrequencyArcsec < 1 || lowFrequencyArcsec > 3600))
+    throw new TypeError('Low-frequency optical sampling requires a bounded native angular scale.');
   const raw: unknown = JSON.parse(await readFile(resolve(root, path), 'utf8')), observations = readObservations(raw);
   if (!jointRecord(raw) || !Array.isArray(raw.images)) throw new TypeError('Missing observation layers.');
   const offset = tangentOffsetWestNorth(observations.frame.centerIcrsDegrees, center), f = observations.frame;
@@ -39,7 +43,25 @@ export async function loadCompilerImages(root: string, path: string, request: Co
   for (const image of observations.images) {
     const row = raw.images.find((r: unknown) => jointRecord(r) && r.id === image.id);
     if (!jointRecord(row) || !jointRecord(row.layers)) throw new TypeError('Missing source pixels.');
-    const layers = row.layers;
+    let layers: Record<string, unknown> = row.layers;
+    if (native) {
+      const removal = row.removal, source = row.source;
+      if (!jointRecord(source) || !jointRecord(removal) || !jointRecord(removal.settings) || typeof removal.settings.directory !== 'string' ||
+          typeof removal.receiptSha256 !== 'string' || image.registration.status === 'publisher') throw new TypeError('Native composite requires verified registration and completed NOX.');
+      const directory = removal.settings.directory;
+      const receipt: unknown = JSON.parse((await readGeometryPin(root, { path: `${directory}/result.json`, sha256: removal.receiptSha256 })).toString());
+      if (!jointRecord(receipt) || receipt.schema !== 'cssearth-nox-output@1' || receipt.sourceSha256 !== removal.sourceSha256 ||
+          !jointRecord(receipt.artifactSha256) || !jointRecord(receipt.applied) || !jointRecord(receipt.applied.verification) ||
+          receipt.applied.verification.coverageComplete !== true || receipt.applied.verification.maximumReconstructionErrorCodeValues !== 0)
+        throw new TypeError('Native composite NOX accounting is incomplete.');
+      const dimensions = { width: image.source.width, height: image.source.height };
+      if (JSON.stringify(receipt.nativeDimensions) !== JSON.stringify([dimensions.width, dimensions.height]) ||
+          receipt.artifactSha256['diffuse.png'] !== removal.diffuseSha256 || receipt.artifactSha256['stars.png'] !== removal.residualSha256)
+        throw new TypeError('Native composite source grid or separation pins differ.');
+      layers = { original: { ...dimensions, path: source.path, sha256: source.sha256 },
+        diffuse: { ...dimensions, path: `${directory}/diffuse.png`, sha256: removal.diffuseSha256 },
+        stars: { ...dimensions, path: `${directory}/stars.png`, sha256: removal.residualSha256 } };
+    }
     const [original, diffuse, stars] = await Promise.all(['original', 'diffuse', 'stars'].map(name => raster(root, layers[name])));
     const matrix = request.imageToFrame[image.id] ?? image.imageToFrame, inverse = invertAffine(matrix);
     const sample = (layer: CompilerRaster) => (x: number, y: number, out: [number, number, number]) => {
@@ -47,9 +69,14 @@ export async function loadCompilerImages(root: string, path: string, request: Co
       const native = applyAffine(inverse, frame);
       return sampleRaster(layer, native[0] * layer.width / image.source.width, native[1] * layer.height / image.source.height, out);
     };
+    const pixelArcsec = Math.sqrt(Math.abs(matrix[0] * matrix[3] - matrix[1] * matrix[2]) * f.fieldArcminutes[0] * 60 / f.width * f.fieldArcminutes[1] * 60 / f.height);
+    const low = async (layer: CompilerRaster) => ({ ...layer, data: await sharp(layer.data, { raw: { width: layer.width, height: layer.height, channels: 3 } })
+      .blur(Math.max(.3, Math.min(1000, lowFrequencyArcsec! / pixelArcsec))).raw().toBuffer() });
+    const lowLayers = lowFrequencyArcsec === undefined ? undefined : await Promise.all([low(diffuse!), low(original!)]);
     images.push({ id: image.id, label: image.label, credit: image.source.credit, page: image.source.page, matrix,
       nativeWidth: image.source.width, nativeHeight: image.source.height, original: original!, diffuse: diffuse!, stars: stars!,
-      sampleRgb: sample(diffuse!), sampleOriginal: sample(original!), pixelToSky(x, y) {
+      sampleRgb: sample(diffuse!), sampleOriginal: sample(original!),
+      ...(lowLayers ? { sampleLowRgb: sample(lowLayers[0]!), sampleLowOriginal: sample(lowLayers[1]!) } : {}), pixelToSky(x, y) {
         const p = applyAffine(matrix, [x, y]); return [(p[0] - f.width / 2) * f.fieldArcminutes[0] * 60 / f.width + offset[0],
           (f.height / 2 - p[1]) * f.fieldArcminutes[1] * 60 / f.height + offset[1]];
       } });

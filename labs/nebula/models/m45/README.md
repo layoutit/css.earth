@@ -1,5 +1,11 @@
 # Pleiades (M45): source evidence and 3D experiment
 
+## Wider optical composite · 13 September 2026
+
+Reconstruction now has an additional **Optical composite · NOIRLab + Niittee** research lens. Niittee's registered optical footprint covers 99.84% of the current model's projected emission, compared with 60.14% for NOIRLab alone. Native NOX and an image composite are prepared; the old cloud and catalogue stars are retained. [Method, exact result, source credits, rejected trials and replay limits](optical-composite-notes.md).
+
+The composed image preserves the wide surrounding dust and adds central NOIRLab luminance detail without a broad rectangular seam. The existing 3D material averages colour per component, so it cannot retain all that fine image detail. Its softness and thin edge-on appearance remain unresolved. This is a local comparison, not an accepted production reconstruction. Earlier Alignment-only status below is historical and is superseded by this section.
+
 ## Catalogue stars and wider optical comparison · 13 September 2026
 
 The current local stellar update is `29c367b2d0e32f5c5b9cb965c612d485a264a9266fbbbaeeef9090c18ca8dfef`. It retains every cloud bank, alpha byte, geometry and fitting input from `a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8`. It does not replace the cloud material with the rejected material experiments.

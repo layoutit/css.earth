@@ -4,32 +4,12 @@ import { resolve } from 'node:path';
 import { geometrySha, readGeometryPin } from '../geometry/registered-source';
 import { jointRecord } from '../joint-fit/model';
 import { readObservations } from '../../alignment/observations-ui/model';
-import { readCompilerRecipe, readCompilerRequest, readCompilerControls } from './model';
+import { readCompilerRecipe, readCompilerRequest } from './model';
 import { prepareCatalogueStars } from './catalogue-stars';
 import { COMPILER_STAR_PROFILE_PATH, prepareCompilerStarSprites } from './star-sprites';
 import { validateCompilerResult } from './compile';
 import { readCompilerResult } from './result';
-import type { EmissionComponent, EmissionFieldModel } from './field-types';
-
-const triple = (v: unknown): v is [number, number, number] => Array.isArray(v) && v.length === 3 && v.every(Number.isFinite);
-function component(v: unknown): v is EmissionComponent {
-  return jointRecord(v) && typeof v.id === 'string' && typeof v.basisId === 'string' && triple(v.center) && triple(v.sigma) && v.sigma.every(n => n > 0) &&
-    typeof v.angleRadians === 'number' && Number.isFinite(v.angleRadians) && typeof v.projectedWeight === 'number' && Number.isFinite(v.projectedWeight) && v.projectedWeight >= 0 &&
-    ['scaffold-near', 'scaffold-far', 'halo-near', 'halo-far', 'halo-diffuse', 'evidence-surface'].includes(String(v.depthAssignment)) && typeof v.velocityCovered === 'boolean' &&
-    (v.depthGradient === undefined || Array.isArray(v.depthGradient) && v.depthGradient.length === 2 && v.depthGradient.every(n => Number.isFinite(n) && Math.abs(n) <= 100));
-}
-function spatialModel(v: unknown): EmissionFieldModel {
-  if (!jointRecord(v) || v.schema !== 'cssearth-conditional-emission-field@1' || typeof v.identity !== 'string' ||
-      !jointRecord(v.bounds) || !triple(v.bounds.min) || !triple(v.bounds.max) ||
-      !Array.isArray(v.components) || v.components.length > 10000 || !v.components.every(component)) throw new TypeError('Invalid retained stellar depth field.');
-  const maximum = v.bounds.max;
-  if (v.bounds.min.some((n, i) => n >= maximum[i]!)) throw new TypeError('Invalid retained stellar bounds.');
-  // Only spatial components are consumed; the immutable original model retains its complete provenance.
-  return { schema: v.schema, identity: v.identity, controls: readCompilerControls(v.controls), bounds: { min: v.bounds.min, max: v.bounds.max },
-    components: v.components, skyBounds: { min: [v.bounds.min[0], v.bounds.min[1]], max: [v.bounds.max[0], v.bounds.max[1]] }, scaffold: null,
-    assumptions: { kernel: 'retained source components', projectionUnits: 'arcseconds', depth: 'retained authored field', halo: 'retained source',
-      haloRadiusArcsec: 1, equalNearFarSplit: true, velocityUncoveredComponents: 0 } };
-}
+import { readRetainedEmissionField } from './field-model';
 
 export async function refreshCompilerStars(root: string, recipePath: string, previousResultPath: string) {
   const started = performance.now();
@@ -51,7 +31,7 @@ export async function refreshCompilerStars(root: string, recipePath: string, pre
       JSON.stringify(retainedDepth.centerIcrsDegrees) !== JSON.stringify(observations.frame.centerIcrsDegrees)) throw new TypeError('Stellar refresh cannot change the retained cloud sky frame.');
   const sourceBytes = recipe.observedStars ? await readFile(resolve(root, recipe.observedStars.path)) : undefined;
   if (sourceBytes && geometrySha(sourceBytes) !== recipe.observedStars!.sha256) throw new TypeError('Observed stellar source changed.');
-  const model = spatialModel(JSON.parse((await readGeometryPin(root, base.model)).toString()));
+  const model = readRetainedEmissionField(JSON.parse((await readGeometryPin(root, base.model)).toString()));
   const origin = base.scene.coordinates.localOriginArcsec;
   const prepared = sourceBytes ? prepareCatalogueStars(JSON.parse(sourceBytes.toString()), model, observations.frame.centerIcrsDegrees, recipe.maximumStars, base.sources.map(source => source.id)) :
     { stars: base.scene.stars.map(({ positionUnits, ...star }) => ({ ...star, positionArcsec: [positionUnits[0] + origin[0], positionUnits[1] + origin[1], positionUnits[2] + origin[2]] as [number, number, number] })),
