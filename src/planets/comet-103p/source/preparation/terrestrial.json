@@ -41,7 +41,89 @@
         }
       }
     ],
-    "scientific": [],
+    "scientific": [
+      {
+        "id": "temperature",
+        "label": "Color temperature",
+        "consumer": "hrii-spectra",
+        "path": "science/hrii/fields.csv.gz",
+        "format": "facet-scalars",
+        "meshPath": "shape/hartley2_2012_plan.tab",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 16022,
+          "expectedFaces": 32040
+        },
+        "table": {
+          "format": "facet-csv-gzip",
+          "field": "Color temperature",
+          "units": "K",
+          "expectedRows": 32040,
+          "maximumCentroidErrorMeters": 0.001
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 20
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": 280,
+        "maximum": 380,
+        "colors": [
+          "#172c68",
+          "#2a8cba",
+          "#73c7bd",
+          "#f1dc77",
+          "#ec853e",
+          "#af2341"
+        ],
+        "focus": {
+          "longitudeDegrees": 335.76,
+          "latitudeDegrees": -61.358,
+          "zoom": 0.8
+        }
+      },
+      {
+        "id": "spectral-slope",
+        "label": "Infrared slope",
+        "consumer": "hrii-spectra",
+        "path": "science/hrii/fields.csv.gz",
+        "format": "facet-scalars",
+        "meshPath": "shape/hartley2_2012_plan.tab",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 16022,
+          "expectedFaces": 32040
+        },
+        "table": {
+          "format": "facet-csv-gzip",
+          "field": "Continuum slope",
+          "units": "%/100nm",
+          "expectedRows": 32040,
+          "maximumCentroidErrorMeters": 0.001
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 20
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": -1,
+        "maximum": 6,
+        "colors": [
+          "#263264",
+          "#459cb1",
+          "#b7d1a2",
+          "#f0cd75",
+          "#ba653f"
+        ],
+        "focus": {
+          "longitudeDegrees": 335.76,
+          "latitudeDegrees": -61.358,
+          "zoom": 0.8
+        }
+      }
+    ],
     "observedColors": [],
     "mosaics": [],
     "surfaceObservations": [
