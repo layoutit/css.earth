@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import test from 'node:test';
 import { loadPublishedCompiler, readPublishedCompiler } from './compiler-published';
 import type { CompilerResult } from '../reconstruction/compiler/result';
+import { readCompilerRequest } from '../reconstruction/compiler/model';
 
 const digest = (value: string) => createHash('sha256').update(value).digest('hex');
 const recipePath = 'labs/nebula/models/example/compiler.json';
@@ -87,6 +88,17 @@ test('legacy and fully pinned depth receipts both restore without processing', a
     const fixture = completedFixture({ depth });
     assert.equal((await loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal))?.id, fixture.result.id);
   }
+});
+
+test('a current publication can replace a saved result only for the same controls, evidence and registration', async () => {
+  const fixture = completedFixture();
+  const expected = readCompilerRequest({ action: 'apply', imageId: 'compiler', recipePath, cataloguePath: recipe.structureCatalogue,
+    controls: fixture.result.controls, evidence: { sensitivity: 1, weights: [] }, imageToFrame: {} });
+  assert.equal((await loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal, expected))?.id, fixture.result.id);
+  for (const changed of [{ ...expected, controls: { ...expected.controls, faint: .8 } },
+    { ...expected, evidence: { sensitivity: 2, weights: [] } }, { ...expected, evidence: { sensitivity: 1, weights: [.5] } },
+    { ...expected, imageToFrame: { optical: [1, 0, 0, 1, 30, 40] } }])
+    assert.equal(await loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal, readCompilerRequest(changed)), null);
 });
 
 test('publication cannot omit its configured depth recipe or declared evidence ledger', async () => {

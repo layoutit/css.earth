@@ -6,6 +6,11 @@ at the pulsar's observed sky position. All six selected spectral images remain
 available. These are conditional emission geometries, not recovered gas/dust
 density or six interchangeable measurements of one material.
 
+The diffuse-emission extension preserves those samples and adds an image-fitted
+interior proxy. Hubble, both Webb views, Spitzer and VLA fit separate amplitudes;
+Chandra keeps the original inner-wind geometry and strengths. The measured
+filaments and all 351 compact lights retain their positions.
+
 ## Registered observations
 
 | Source | Relative registration | Native treatment |
@@ -95,8 +100,8 @@ The sampled ejecta and analytic wind occupy the same angular frame. Each lens
 weights those fixed components by tracer: Chandra uses the inner wind, while
 optical filaments primarily use ejecta. The neutral view shows their union.
 This does not force X-ray brightness across the outer optical cloud. There is
-no separate extended radio synchrotron volume, relativistic beaming, time
-variation, dust absorption/scattering, or calibrated radiative transfer. Warm
+no physically calibrated extended radio synchrotron volume, relativistic beaming,
+time variation, dust absorption/scattering, or calibrated radiative transfer. Warm
 JWST dust components trace filament cores; presentation colours do not measure
 mass, opacity or density. Epochs remain distinct rather than rescaling evolving
 filaments and wisps to coincide.
@@ -123,7 +128,45 @@ dark captures did not establish a permanently disappearing volume. Keeping URL
 image decoders alive regressed decoding under load, so the working closeable
 bitmap validation remains. No exposure or geometry workaround was applied.
 
-The displayed Hubble comparison also misses about 68% of target light because the released line
-samples and selected inner wind do not model the complete diffuse continuum.
-Neither passing browser interactions nor this unfitted comparison validates the
-physical reconstruction.
+## Fitting the missing interior light
+
+The original measured-sample operator only painted existing support. Its missing
+light diagnostic did not change reconstruction, so the diffuse interior remained
+empty. The optional [sampled emission fit](../../docs/sampled-volumes.md) now fits
+one filament brightness gain plus nonnegative coefficients on a fixed set of
+finite 3D Gaussian atoms. It leaves the source point table, qualified transform,
+base ejecta/wind grids, tori, jets and star catalogue unchanged.
+
+The initial authored envelope has semi-axes 185″/135″/135″, follows the selected
+outer-torus axis, and is centered on the pulsar. Atoms have 20″ sigma and 36″
+spacing; only complete kernels within the existing physical field are eligible.
+This produces 143 fixed spatial atoms. Fitting uses 128² samples, 150 iterations,
+regularization 0.015 and explicit coefficient limits. Every seventh image pixel
+is withheld; its residual evaluates interpolation, not recovered physical depth.
+
+[Temim et al. §6.1](https://arxiv.org/pdf/2406.00172v1) describe a SE–NW
+synchrotron nebula approximately 7.6′ × 5.5′, extending through gaps beyond the
+dense filament cage. This exceeds our current image/field coverage. Their §3
+also distinguishes continuum, dust and emission-line tracers. Consequently the
+new component is **inferred diffuse emission / a continuum proxy**; mixed RGB
+residuals do not uniquely identify synchrotron. The 3D envelope and depth are
+authored approximations, not the paper's measured dimensions or a new velocity
+reconstruction. [Dubner et al.](https://arxiv.org/pdf/1704.02968v1) further show
+that radio, optical/IR and the smaller X-ray nebula differ; their fitted emission
+maps must remain separate.
+
+The comparison now includes normalized material chromaticity in its projected
+luminance. Earlier white-opacity diagnostic scores remain historical and are
+not directly comparable. Current before/after comparisons use identical image
+coverage, observer, color treatment and normalization. See the versioned
+[processing evidence](processing-evidence.json) for actual results and visual
+limits. A better front projection alone does not establish a correct 3D object.
+
+The completed first fit reduces missing Hubble display light from 72.5% to 22.2%
+and Webb infrared from 71.2% to about 19.3%; excess light is approximately 7% in
+both. All five fitted lenses improve withheld-pixel error. Fitting takes 12.75 s
+with prepared inputs; the complete six-lens bake took 509.72 s. Fifty-one focused
+tests and strict lab TypeScript pass. Byte comparisons preserve both base grids,
+all 351 light records, physical bounds/sampling and every raw Chandra slab.
+The inferred glow remains broad from oblique views, and faint RGBA8 contours and
+the existing CSS painting delays remain visible limitations.

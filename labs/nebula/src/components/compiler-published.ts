@@ -1,4 +1,4 @@
-import { readCompilerRecipe, readCompilerRequest } from '../reconstruction/compiler/model';
+import { readCompilerRecipe, readCompilerRequest, type CompilerRequest } from '../reconstruction/compiler/model';
 import { readCompilerResult, type CompilerResult } from '../reconstruction/compiler/result';
 import { sampledOwnerPins } from '../reconstruction/sampled-prior/ownership';
 import { readSampledRecipe, verifySampledEvidence } from '../reconstruction/sampled-prior/model';
@@ -30,7 +30,7 @@ async function checkedBytes(source: Pin, fetchLocal: FetchLocal): Promise<Uint8A
   return bytes;
 }
 /** A CLI result is inspectable only while its configured inputs retain their saved hashes. */
-export async function loadPublishedCompiler(path: string, recipePath: string, fetchLocal: FetchLocal): Promise<CompilerResult | null> {
+export async function loadPublishedCompiler(path: string, recipePath: string, fetchLocal: FetchLocal, expected?: CompilerRequest): Promise<CompilerResult | null> {
   const response = await fetchLocal(path);
   if (response.status === 404) return null;
   if (!response.ok) throw new Error('Prepared nebula receipt is unavailable.');
@@ -81,6 +81,17 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   const request = readCompilerRequest(method.request);
   if (request.recipePath !== recipePath || request.cataloguePath !== recipe.structureCatalogue || JSON.stringify(request.controls) !== JSON.stringify(result.controls))
     throw new Error('Prepared nebula method belongs to different inputs or controls.');
+  if (expected) {
+    const desired = readCompilerRequest(expected);
+    if (desired.recipePath !== request.recipePath || desired.cataloguePath !== request.cataloguePath ||
+      JSON.stringify(desired.controls) !== JSON.stringify(request.controls) || JSON.stringify(desired.evidence) !== JSON.stringify(request.evidence)) return null;
+    const observations: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.observationCatalogue)![1]));
+    for (const [id, matrix] of Object.entries(desired.imageToFrame)) {
+      const image: unknown = record(observations) && Array.isArray(observations.images) ? observations.images.find((row: unknown) => record(row) && row.id === id) : undefined;
+      const original: unknown = request.imageToFrame[id] ?? (record(image) ? image.imageToFrame : undefined);
+      if (!Array.isArray(original) || original.length !== matrix.length || matrix.some((n, i) => n !== original[i])) return null;
+    }
+  }
   for (const implementation of method.implementation) {
     if (!record(implementation) || typeof implementation.name !== 'string' || !/^[a-z0-9-]+\.ts$/.test(implementation.name) ||
         !publication.inputs.some(input => input.path === `labs/nebula/src/reconstruction/compiler/${implementation.name}` && input.sha256 === implementation.sha256))

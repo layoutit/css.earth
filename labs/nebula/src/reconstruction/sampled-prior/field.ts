@@ -100,10 +100,11 @@ export function prepareSampledField(values: Float32Array, recipe: SampledRecipe,
     const c = data[base + plane]! * (1 - u) + data[base + plane + 1]! * u, d = data[base + plane + nx]! * (1 - u) + data[base + plane + nx + 1]! * u;
     return ((1 - v) * a + v * b) * (1 - w) + ((1 - v) * c + v * d) * w;
   }
-  const field = (weights: ComponentWeights, depth = 1): SpatialField => ({
+  const field = (weights: ComponentWeights, depth = 1, diffuse?: Float32Array): SpatialField => ({
     bounds: { min: [bounds.min[0], bounds.min[1], bounds.min[2] * depth], max: [bounds.max[0], bounds.max[1], bounds.max[2] * depth] },
     sampleEmission(x, y, z, out) {
-      const value = (weights.ejecta * sample(ejecta, x, y, z / depth) + weights.pwn * sample(pwn, x, y, z / depth)) / depth;
+      const value = (weights.ejecta * sample(ejecta, x, y, z / depth) + weights.pwn * sample(pwn, x, y, z / depth) +
+        (diffuse ? sample(diffuse, x, y, z / depth) : 0)) / depth;
       out[0] = value; out[1] = value; out[2] = value;
     },
   });
@@ -112,3 +113,4 @@ export function prepareSampledField(values: Float32Array, recipe: SampledRecipe,
       kernelSigmaArcsec: sigma * pitch, fluxExponent: recipe.grid.weightExponent, peakOpticalDepth: recipe.grid.peakOpticalDepth, normalization,
       interpretation: 'Positive line-flux points in the explicitly qualified spatial frame. Finite smoothing and display normalization are authored. PWN terms are separate published geometric fits or authored supports.' } };
 }
+export type PreparedSampledField = ReturnType<typeof prepareSampledField>;

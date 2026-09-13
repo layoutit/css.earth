@@ -138,7 +138,10 @@ export function useCompiler(request: CompilerRequest, storageKey: string, inputs
             if (JSON.stringify(prepared.controls) !== JSON.stringify(ledger.completed.request.controls)) throw new Error('Saved cloud controls changed.');
             accepted = ledger.completed.signature; setResult(prepared); setStatus('Nebula ready');
           }
-        } else if (published.current) {
+        }
+        // A validated CLI bake may supersede a historical completed job for these same settings.
+        // Keep the job pointer/history and never interrupt active work or enqueue a replacement bake here.
+        if (published.current) {
           while (!ready.current && !stopped) await pause();
           if (stopped || !published.current) return;
           const prepared = await loadPublishedCompiler(published.current, desired.current.recipePath,
@@ -149,7 +152,7 @@ export function useCompiler(request: CompilerRequest, storageKey: string, inputs
                 return new Response(module.default);
               }
               return fetch(localFile(path), { cache: 'no-store', signal: controller.signal });
-            });
+            }, ledger.completed ? desired.current : undefined);
           if (!stopped && published.current && prepared && (ledger.active || ledger.paused || JSON.stringify(prepared.controls) === JSON.stringify(desired.current.controls))) {
             publishedBaseline = true; accepted = signature({ ...desired.current, controls: prepared.controls }); setResult(prepared);
             setStatus(ledger.paused ? 'Previous prepared nebula · compile paused' : 'Prepared nebula ready');
