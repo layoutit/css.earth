@@ -76,6 +76,15 @@ Choose labels by meaning through the shared lens vocabulary: Elevation,
 Enhanced color, Thermal infrared, Cross section where those concepts apply.
 Instrument, wavelength, datum, enhancement and caveats belong in descriptions.
 
+For multi-extension FITS scalar maps, select and check the named quantity,
+units and fit version explicitly; image dimensions alone cannot distinguish
+fractions, errors and temperature. The shared `fits-image-map.mts` reader
+accepts an explicit full-world map domain. Missing WCS requires a cited map
+reference and orientation check. Inspect finite initialization values as well
+as NaN: Pluto LEISA's uncomputed cells retain a complete parameter tuple.
+Keep inferred missing-data signatures and authored uncertainty cutoffs visible
+in the body's method notes; neither is a provider confidence mask.
+
 For elevation, color encodes height while hillshade can make terrain readable.
 Prefer suitable sourced shaded relief or derive relief from the body's real
 elevation model. Use its datum, radius, longitude/latitude convention and
