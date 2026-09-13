@@ -74,7 +74,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "false-color": "False color"
     },
     "controls": [
       {
@@ -92,6 +93,22 @@
           "url": "https://pds-rings.seti.org/cassini/iss/calibration.html"
         },
         "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
+      },
+      {
+        "id": "false-color",
+        "label": "False color",
+        "description": "Six calibrated Cassini IR3, IR1 and UV3 images cover two neighboring close-encounter views. Infrared and ultraviolet are displayed as RGB; this is false color, not natural color or measured albedo. Only registered three-filter overlap contributes; cast shadows remain.",
+        "title": "Cassini false color",
+        "detail": "Cassini",
+        "thumbnail": "/scenes/helene/helene-false-color-thumbnail.webp",
+        "surface": "helene-false-color-surface@2x.webp",
+        "poles": "helene-false-color-surface@2x.webp",
+        "source": {
+          "id": "n1687120587_1",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/"
+        },
+        "summary": "Infrared and ultraviolet reveal differences in reflected light across the photographed gullies. This scientific color display retains observed shadows and gaps."
       },
       {
         "id": "elevation",
