@@ -12,7 +12,7 @@ import pvl
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fixture import ROOT, samples, write, find, label_text
 
-source = ROOT / 'src/planets/comet-67p/source/observations'
+source = ROOT / 'src/objects/comet-67p/source/observations'
 geo, quality = source / 'n20140805t194314611id50f22.IMG', source / 'n20140805t194314611id40f22.IMG'
 DTYPES = {'PC_REAL': '<f4', 'LSB_INTEGER': '<i4', 'LSB_UNSIGNED_INTEGER': 'u1'}
 

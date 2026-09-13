@@ -22,7 +22,7 @@ const near = (actual: number, expected: number, tolerance = 1e-7) => assert.ok(M
   `Expected ${expected}, received ${actual}`);
 
 for (const fixture of fixtures.cases) test(`${fixture.id}: full-source regression coordinates keep height on the corresponding surface`, async () => {
-  const root = new URL(`../../../src/planets/${fixture.id}/source/`, import.meta.url);
+  const root = new URL(`../../../src/objects/${fixture.id}/source/`, import.meta.url);
   const [config, manifest] = await Promise.all(['preparation/terrestrial.json', 'manifest.json'].map(async path => JSON.parse(await readFile(new URL(path, root), 'utf8'))));
   const entry = required(requireArray(manifest.inputs).map(value=>fixtureRecord(value)).find(input => input.path === fixture.sourcePath));
   assert.equal(entry.expectedSha256, fixture.sourceSha256, 'A new source release requires independent fixture revalidation');

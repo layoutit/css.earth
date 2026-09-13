@@ -16,7 +16,7 @@ test('celestial preparation reproduces the source-anchored Mercury and Venus con
   const scratch = await mkdtemp(join(tmpdir(), 'cssearth-celestial-'));
   try {
     for (const id of ['mercury', 'venus']) {
-      const sourceDirectory = resolve(root, 'src/planets', id, 'source');
+      const sourceDirectory = resolve(root, 'src/objects', id, 'source');
       const config = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/celestial.json'), 'utf8')) as unknown;
       const outputDirectory = resolve(scratch, id), publicDirectory = resolve(scratch, 'public', id);
       const actual = await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config });

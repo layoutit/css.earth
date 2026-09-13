@@ -4,11 +4,11 @@
 import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../src/planets/ariel/prepared/runtime.json" with { type: "json" };
-import assets from "../../../../src/planets/ariel/prepared/assets.json" with { type: "json" };
-import scene from "../../../../src/planets/ariel/prepared/scene.json" with { type: "json" };
-import lenses from "../../../../src/planets/ariel/prepared/lenses.json" with { type: "json" };
-import controls from "../../../../src/planets/ariel/prepared/controls.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/ariel/prepared/runtime.json" with { type: "json" };
+import assets from "../../../../src/objects/ariel/prepared/assets.json" with { type: "json" };
+import scene from "../../../../src/objects/ariel/prepared/scene.json" with { type: "json" };
+import lenses from "../../../../src/objects/ariel/prepared/lenses.json" with { type: "json" };
+import controls from "../../../../src/objects/ariel/prepared/controls.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";

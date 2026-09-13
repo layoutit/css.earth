@@ -1,5 +1,5 @@
 import { afterEach, expect, test, vi } from 'vitest';
-import preparedSky from '../../../planets/mercury/prepared/sky.json';
+import preparedSky from '../../../objects/mercury/prepared/sky.json';
 import { mountRetainedCubicSky } from './cubic-sky-runtime.js';
 import type { CubicSkyPlan } from './cubic-sky-runtime.js';
 

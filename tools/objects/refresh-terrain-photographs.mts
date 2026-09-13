@@ -46,7 +46,7 @@ export function retainedPhotographicAtlas(scene:Record<string,unknown>):Photogra
 
 async function refreshContext(id:string,ids:readonly string[]) {
   if(!/^[a-z][a-z0-9-]*$/.test(id) || !ids.length || new Set(ids).size!==ids.length)throw new TypeError('Choose one body and distinct existing photograph ids.');
-  const objectDirectory=resolve('src/planets',id),sourceDirectory=resolve(objectDirectory,'source'),outputDirectory=resolve(objectDirectory,'prepared');
+  const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),outputDirectory=resolve(objectDirectory,'prepared');
   const stage=resolve('output/terrain-photographs',id),publicDirectory=resolve('public/scenes',id);
   const descriptor=await json(resolve(objectDirectory,'object.json')),recipe=await json(resolve(sourceDirectory,'preparation/terrestrial.json'));
   const source=await json(resolve(sourceDirectory,'manifest.json')),sceneBytes=await readFile(resolve(outputDirectory,'scene.refs.json'));

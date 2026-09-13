@@ -5,7 +5,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/deimos/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/deimos/source');
 test('deimos published mesh preserves axes, units, seam and polar samples',async()=>{
  const config=JSON.parse((await readFile(resolve(root,'preparation/terrestrial.json'))).toString('utf8')),p=config.geometry.radialTerrain;
  const mesh=await loadObjShape(resolve(root,p.path),p.grid);

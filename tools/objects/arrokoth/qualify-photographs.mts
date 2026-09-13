@@ -7,7 +7,7 @@ import {readFitsHeader} from '../observation/fits.mts';
 import {observedLimb,limbThreshold,type LimbEdgePoint} from '../terrestrial-layers/limb-refinement.mts';
 import {array,number,shape,text} from '../terrestrial-layers/source-records.mts';
 
-const root=resolve('src/planets/arrokoth/source'),read=async(path:string)=>JSON.parse(await readFile(resolve(root,path),'utf8'));
+const root=resolve('src/objects/arrokoth/source'),read=async(path:string)=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 const profile=shape({mesh:text,frames:array(shape({id:text,image:text,output:text,bodyToJ2000:array(array(number)),offsetPixels:array(number)}))})(await read('preparation/photography.json'));
 const mesh=await loadObjShape(resolve(root,profile.mesh),{metersPerUnit:1000,expectedVertices:20484,expectedFaces:40960});
 const dot=(a:readonly number[],b:readonly number[])=>a.reduce((s,n,i)=>s+n*b[i],0);

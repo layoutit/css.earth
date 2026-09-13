@@ -88,15 +88,15 @@ export function parseInvestigationLedger(value: unknown, objectId: string): Inve
   return { schema: INVESTIGATION_LEDGER_SCHEMA, objectId, entries };
 }
 
-/** Every ledger under src/planets, in object order. A ledger belongs to an object package that has a descriptor. */
+/** Every ledger under src/objects, in object order. A ledger belongs to an object package that has a descriptor. */
 export async function readInvestigationLedgers(root: string) {
-  const planets = resolve(root, 'src/planets'), ledgers: InvestigationLedger[] = [];
-  const directories = (await readdir(planets, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort();
+  const objects = resolve(root, 'src/objects'), ledgers: InvestigationLedger[] = [];
+  const directories = (await readdir(objects, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort();
   for (const objectId of directories) {
     let text: string;
-    try { text = await readFile(resolve(planets, objectId, INVESTIGATION_LEDGER_FILE), 'utf8'); }
+    try { text = await readFile(resolve(objects, objectId, INVESTIGATION_LEDGER_FILE), 'utf8'); }
     catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
-    await access(resolve(planets, objectId, 'object.json'));
+    await access(resolve(objects, objectId, 'object.json'));
     ledgers.push(parseInvestigationLedger(JSON.parse(text), objectId));
   }
   return ledgers;

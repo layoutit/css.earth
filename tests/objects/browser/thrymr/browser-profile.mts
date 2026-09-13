@@ -1,5 +1,5 @@
 import { browserProfileLensIds, createObjectBrowserProfile } from '../../../../site/test/object-browser-profile.mts';
-import objectControls from '../../../../src/planets/thrymr/prepared/controls.json' with {type:'json'};
+import objectControls from '../../../../src/objects/thrymr/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'thrymr',controls:objectControls,audit:{
   preparedAssetPairs:[{one:'/scenes/thrymr/thrymr-directional-sun.webp',two:'/scenes/thrymr/thrymr-directional-sun@2x.webp'}],
   canonicalPreparedAssets:['/scenes/thrymr/thrymr-model-surface@2x.webp','/scenes/thrymr/thrymr-lighting.webp'],

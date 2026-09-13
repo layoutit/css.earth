@@ -4,11 +4,11 @@
 import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../src/planets/titan/prepared/runtime.json" with { type: "json" };
-import assets from "../../../../src/planets/titan/prepared/assets.json" with { type: "json" };
-import scene from "../../../../src/planets/titan/prepared/scene.json" with { type: "json" };
-import lenses from "../../../../src/planets/titan/prepared/lenses.json" with { type: "json" };
-import controls from "../../../../src/planets/titan/prepared/controls.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/titan/prepared/runtime.json" with { type: "json" };
+import assets from "../../../../src/objects/titan/prepared/assets.json" with { type: "json" };
+import scene from "../../../../src/objects/titan/prepared/scene.json" with { type: "json" };
+import lenses from "../../../../src/objects/titan/prepared/lenses.json" with { type: "json" };
+import controls from "../../../../src/objects/titan/prepared/controls.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";

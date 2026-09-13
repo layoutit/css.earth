@@ -14,7 +14,7 @@ type CoverageRun = { dpr: number; views: { region: string; sourceWindow: string;
 const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
 const output = new URL("../../../../output/playwright/published-coverage/", import.meta.url);
 await mkdir(output, { recursive: true });
-const snapshot = await readPublishedCoverage(new URL('../../../../src/planets/earth/source/city/published-coverage.json.gz',import.meta.url));
+const snapshot = await readPublishedCoverage(new URL('../../../../src/objects/earth/source/city/published-coverage.json.gz',import.meta.url));
 // Sample source windows across every integrated region. These are geographic
 // addresses chosen offline, independent of the place catalogue or search UI.
 assert.ok(snapshot, "Published coverage receipt is required");

@@ -55,7 +55,7 @@ export async function listPreparationFiles(root: string, directory: string): Pro
 }
 
 export async function preparationFileSets(root: string, id: string) {
-  const declaration = `src/planets/${id}/preparation.json`;
+  const declaration = `src/objects/${id}/preparation.json`;
   let recipe;
   try { recipe = requireRecord(JSON.parse(await readFile(resolve(root, declaration), "utf8"))); }
   catch (error) { if (hasErrorCode(error, "ENOENT")) return []; throw error; }
@@ -85,7 +85,7 @@ export async function preparationFileSets(root: string, id: string) {
 
 export async function objectPreparationFiles(root: string, id: string): Promise<PreparationFileSet> {
   assert.ok(OBJECTS.some(object => object.id === id), "Preparation object must belong to OBJECTS");
-  const base = `src/planets/${id}`;
+  const base = `src/objects/${id}`;
   if (await authoredObject(id, root)) {
     const descriptor = `${base}/object.json`;
     const directories = ['tools/objects', 'src/preparation', 'src/renderers/css/preparation', 'packages/objects/src'];

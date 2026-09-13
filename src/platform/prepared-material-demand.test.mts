@@ -6,7 +6,7 @@ import test from "node:test";
 import { OBJECTS } from "../../site/objects.mts";
 import { preparedMaterialAddress, preparedMaterialFrame, preparedMaterialState } from '../renderers/css/dist/testing.js';
 import { resolvePreparedMaterialDemand } from '../renderers/css/dist/testing.js';
-import materialSource from '../planets/jupiter/source/preparation/materials.json' with {type:'json'};
+import materialSource from '../objects/jupiter/source/preparation/materials.json' with {type:'json'};
 import {prepareNormalizedDiscAddresses} from '../../tools/objects/giant-layers/normalized-disc-presentation.mts';
 const lighting=prepareNormalizedDiscAddresses(parsePhotometricDiscRecipe(materialSource));
 

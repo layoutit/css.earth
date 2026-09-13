@@ -11,18 +11,18 @@ import { cityCoverageRoots, planCityCoverage } from "../../../../tools/objects/g
 import { expectedGlobalCityFace, validateGlobalCityFaceReceipt } from "../../../../tools/objects/geographic-pages/operations/global-face-receipts.mts";
 import { PREPARED_EARTH_SCENE } from "./prepared-fixture.mts";
 
-const publishedCoveragePath=new URL("../../../../src/planets/earth/source/city/published-coverage.json.gz",import.meta.url);
+const publishedCoveragePath=new URL("../../../../src/objects/earth/source/city/published-coverage.json.gz",import.meta.url);
 const snapshot = required(await readPublishedCoverage(publishedCoveragePath));
 const fixture = await readCityFixture();
 
 test("published coverage is pinned and matches the reproducible source-window plans", async () => {
   const bytes = await readFile(publishedCoveragePath);
-  const manifest = shape({documents:array(shape({path:text,expectedBytes:number,expectedSha256:text}))})(JSON.parse((await readFile(new URL("../../../../src/planets/earth/source/manifest.json", import.meta.url))).toString('utf8')));
+  const manifest = shape({documents:array(shape({path:text,expectedBytes:number,expectedSha256:text}))})(JSON.parse((await readFile(new URL("../../../../src/objects/earth/source/manifest.json", import.meta.url))).toString('utf8')));
   const pin = required(manifest.documents.find(entry => entry.path === "city/published-coverage.json.gz"));
   assert.equal(bytes.length, pin.expectedBytes);
   assert.equal(createHash("sha256").update(bytes).digest("hex"), pin.expectedSha256);
-  const source = parseCitySource(JSON.parse((await readFile(new URL("../../../../src/planets/earth/source/city/manifest.json", import.meta.url))).toString('utf8')));
-  const { pin: catalog, entries } = await readWorldCoverCatalog({directory:new URL("../../../../src/planets/earth/source/city/",import.meta.url)});
+  const source = parseCitySource(JSON.parse((await readFile(new URL("../../../../src/objects/earth/source/city/manifest.json", import.meta.url))).toString('utf8')));
+  const { pin: catalog, entries } = await readWorldCoverCatalog({directory:new URL("../../../../src/objects/earth/source/city/",import.meta.url)});
   const expected = new Map(cityCoverageRoots().map(face => {
     const value = expectedGlobalCityFace(face, [...planCityCoverage(PREPARED_EARTH_SCENE, entries, [face])]);
     return [value.face.key, value] as const;

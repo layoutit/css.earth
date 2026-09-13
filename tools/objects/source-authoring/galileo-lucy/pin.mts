@@ -8,7 +8,7 @@ const read = async (p: string): Promise<unknown> => JSON.parse(await readFile(p,
 const write = async (p: string, value: unknown) => writeFile(p, JSON.stringify(value, null, 2) + '\n');
 const pin = (bytes: Uint8Array) => ({ expectedBytes: bytes.length, expectedSha256: createHash('sha256').update(bytes).digest('hex') });
 for (const { id } of bodies) {
-  const p = resolve('src/planets', id), s = resolve(p, 'source'), manifest = parseAuthoringManifest(await read(resolve(s, 'manifest.json')));
+  const p = resolve('src/objects', id), s = resolve(p, 'source'), manifest = parseAuthoringManifest(await read(resolve(s, 'manifest.json')));
   const exclude = new Set(['manifest.json', ...manifest.inputs.map(x => x.path), ...manifest.generatedIntermediates.map(x => x.path)]);
   const documents: { path: string; expectedBytes: number; expectedSha256: string }[] = [];
   async function walk(dir: string, prefix = '') {

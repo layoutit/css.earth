@@ -12,9 +12,9 @@ planet-specific branch. No cssEarth scene capture is used by the markers.
 | Mercury | https://science.nasa.gov/wp-content/uploads/2023/11/mercury-messenger-globe-pia15162.jpg | `5ea3d3b713fce74f6b45faa182023210ada11ae62b8b51183a5fc134e7ce1304` |
 | Venus | https://science.nasa.gov/wp-content/uploads/2023/05/688-venus-1200-jpg.webp | `59ff56b81de18402302f1e397384bd1d7fecff906d04ef229a64462fe516f42a` |
 | Earth | https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001016/GSFC_20171208_Archive_e001016~large.jpg | `48ccd32ef57d182662999905841109095d66d68d69e27dba7decc6e134a811a0` |
-| Mars | Adapter-owned NASA/ESA Hubble source at `src/planets/mars/source/presentation/navigation-marker.jpg` | `f55dad386a7d45e2758c0dc1d520c40dc6f2aaa517f08451facba738e121b8cb` |
-| Jupiter | Adapter-owned NASA/ESA/STScI Hubble source at `src/planets/jupiter/source/presentation/navigation-marker.png` | `50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe` |
-| Saturn | Adapter-owned OpenSpace surface at `src/planets/saturn/source/saturn-surface-original.jpg` | `5976d520c16f7c91a7415bdaeb1a050373a706c07adae29b38b8b5110d88acc0` |
+| Mars | Adapter-owned NASA/ESA Hubble source at `src/objects/mars/source/presentation/navigation-marker.jpg` | `f55dad386a7d45e2758c0dc1d520c40dc6f2aaa517f08451facba738e121b8cb` |
+| Jupiter | Adapter-owned NASA/ESA/STScI Hubble source at `src/objects/jupiter/source/presentation/navigation-marker.png` | `50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe` |
+| Saturn | Adapter-owned OpenSpace surface at `src/objects/saturn/source/saturn-surface-original.jpg` | `5976d520c16f7c91a7415bdaeb1a050373a706c07adae29b38b8b5110d88acc0` |
 | Uranus | https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg | `3dcc83114f1a25caa1ae1a1436830fffaa15a3e429666dbf4c68bcf035e8932b` |
 | Neptune | https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/i/a/0/PIA01492-1.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg | `3cf960937217cb53d52f67d0c30d53c694cfbafc2ac8ca137c6539eb12a2a312` |
 
@@ -64,7 +64,7 @@ The Sun's scene indicator is a project-authored rounded heptagonal outline.
 `prepareSunIndicator` in `tools/prepare-navigation.mts` rasterizes the numerical
 path to `public/navigation/sun-indicator-heptagon.png` at a fixed 80px resolution for a
 20px UI box. Its stroke uses the authored soft-yellow `display.hex` accent in
-`src/planets/sun/swatch.json`, matching the navigation label. The independent
+`src/objects/sun/swatch.json`, matching the navigation label. The independent
 spectral swatch remains recorded there with its ASTM E490-00, CIE 1931, and sRGB
 provenance.
 The PNG includes a 2px center dot so the navigation landmark remains visible

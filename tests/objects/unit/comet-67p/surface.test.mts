@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root = resolve(import.meta.dirname, '../../../../src/planets/comet-67p');
+const root = resolve(import.meta.dirname, '../../../../src/objects/comet-67p');
 const json = async (path: string) => JSON.parse((await readFile(resolve(root, path))).toString('utf8'));
 
 test('67P retains original Cheops XYZ positions and a closed non-radial surface', async () => {

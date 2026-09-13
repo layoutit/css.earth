@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/mithra/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/mithra/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'mithra',controls,audit:{
   "preparedAssetPairs": [
     {
