@@ -17,6 +17,14 @@
 
 ## Evidence
 
+![Dimorphos DRACO mosaic and named landmarks](evidence/draco-mosaic-close.webp)
+
+The [12 September 2026 browser and installation evidence](evidence/draco-mosaic-browser.json) records desktop, DPR 2 and mobile runs: dataset switching, retained drag, close zoom, both lighting states and a click on a named feature. All 12 existing names/sites are enabled on DRACO. Shadows start off. The [overview](evidence/draco-mosaic-overview.webp) and [mobile view](evidence/draco-mosaic-mobile.webp) show the same photographic interpretation. The check served separately downloaded, hash-verified runtime files. Dimorphos's inventory grows from 13.592 to 14.064 MB; only the DRACO surface, shadow and thumbnail change, with the other 44 assets unchanged. These totals exclude the shared app and scene JSON.
+
+The [mosaic sampling record](evidence/draco-mosaic-sampling.json) retains camera, overlap and area results with the recipe hash. The single-frame camera/oracle evidence below still describes the retained 11-second frame. The latest SPICE cross-check reports 128,424 modeled pixels and 359 accepted samples after the shared frame update in PR #166; its acceptance bounds still pass. The earlier kernel counts below describe the previous run.
+
+The [historical single-frame capture](evidence/draco-lens-dpr1.webp) was inspected alongside the close-up. It uses different framing and is not a matched comparison. The previous DRACO asset URLs on main returned HTTP 404, so no matched pixel diff or quantified sharpness gain is claimed. The new runtime assets have been published and all 90 assets across the two DART bodies downloaded with no reuse.
+
 - **DRACO camera:** a pinhole camera fitted to 716 archived pixel-to-surface pairs (every 179th on-body pixel) projects the other 127,575 on-body pixels with a maximum residual of 0.00015 px and an RMS of 0.00003 px. Its recovered range, 70.39 km, agrees with the header's 70.41 km. This proves the archive's geometry is projective and that the decoder reads it in the archive's pixel convention; it does not add absolute accuracy beyond the DART SPICE solution.
 
 - **DRACO model transfer:** the archived intercepts lie on the 0.243 m DSK; the package renders the 0.972 m OBJ. For 2,419 sampled on-body pixels the closest OBJ point is 0.057 m away on average and 0.41 m at most, within the recipe's 2 m bound. Adjacent intercepts at the nadir pixel are 0.348 m apart, the header range times its 4.95 µrad IFOV.

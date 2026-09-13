@@ -10,7 +10,7 @@ import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-s
 import { requireTerrainMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { loadKernelSet } from '../../../../tools/spice/kernel-set.mts';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
-import { shape, number, text } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
+import { shape, number, text, parseSpiceCamera } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 
 /**
  * The DRACO cube carries the archive's own SPICE intercepts for every pixel.
@@ -41,7 +41,7 @@ const recipe = {
 const bytes = await readFile(resolve(root, recipe.path));
 const cube = decodePds4GeometryCube(bytes, await readFile(resolve(root, cubeRecipe.labelPath), 'utf8'), { fileName: name, cube: cubeRecipe.cube, filter: cubeRecipe.filter });
 const set = await loadKernelSet(kernels.map(path => resolve(root, path)));
-const frame = decodeSpiceCameraFrame(bytes, set, recipe.spice, recipe.filter);
+const frame = decodeSpiceCameraFrame(bytes, set, parseSpiceCamera(recipe.spice), recipe.filter);
 const camera = frame.camera, report = frame.qualityReport;
 
 test('the spacecraft clock, leap seconds and kernel chain reproduce the archived exposure epoch and range', t => {
