@@ -1,0 +1,249 @@
+{
+  "body": "epimetheus",
+  "lens": "filter-color",
+  "baselineRef": "52d5d4815",
+  "baselineCommit": "52d5d48155b62c62cc35052f4d82800d4d12c208",
+  "toolSha256": "655c8fed7f29c8f3359bec7b2b9ea985112790a42321106d01485537892f7039",
+  "recipeSha256": "a4646a4b8bc471e68961dddc61a7c3ff28e0bfba823cf6500a889a290fe16a4b",
+  "runtimeSha256": "24fcb823b31b7397d5e8d5bb768c7331dcc8598832b8f335ecca42f7c954f288",
+  "geometrySha256": "cbaecf84063e4c7aeed85bb641451c85116d933efd16bfdffe69419498cc1bc9",
+  "surfaceTrianglesSha256": "730e6a79031f392de024944f214fcdd3e1c1b84dff17aec8e6597e14d9d2d0d6",
+  "geometryUnchanged": true,
+  "browser": "148.0.7778.96",
+  "existingAssetChanges": [
+    {
+      "filename": "epimetheus-elevation-shadow@2x.webp",
+      "previousSha256": "95ee956bb635958579bc8db9486b02161c472db0fae957de28964ca420f83362",
+      "currentSha256": "db3f3f76f660510bdd5be1863dd30d57c2e1d69bdfbe112804c0a849c085c166",
+      "baselineRegeneratedSha256": "db3f3f76f660510bdd5be1863dd30d57c2e1d69bdfbe112804c0a849c085c166",
+      "bytes": 304344
+    },
+    {
+      "filename": "epimetheus-normal-shadow@2x.webp",
+      "previousSha256": "8f8c76055156fb6d632fd662323c7b77ffdf2a591cc4636bb6f57a03dbe8c588",
+      "currentSha256": "fc3264c8f9a4a96d59a5e6f3e948600309d379706e0a9dbe9e283573935f10ca",
+      "baselineRegeneratedSha256": "fc3264c8f9a4a96d59a5e6f3e948600309d379706e0a9dbe9e283573935f10ca",
+      "bytes": 370248
+    }
+  ],
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 2,
+    "rowText": "Filter color\nCassini",
+    "bounds": {
+      "x": 20,
+      "y": 718.078125,
+      "width": 350,
+      "height": 20
+    },
+    "pageWidth": 390,
+    "pose": {
+      "schema": "cssearth-camera-pose@1",
+      "scene": "matrix3d(0.846471295165,-0.420321416244,-0.326827559285,0,0,0.6138363422,-0.789433306236,0,0.532434358829,0.668232633176,0.519594843601,0,0,0,0,1)",
+      "skybox": "matrix3d(0.742893200166,-0.528454470267,-0.410908124202,0,0.614171611617,0.782240784157,0.104366918669,0,0.266275890231,-0.329901590405,0.905683113206,0,0,0,0,1)",
+      "sunView": "matrix3d(0.926041139891,-0.360392969139,0.11209243964,0,0,0.29699452091,0.954879183221,0,-0.377422584419,-0.884257407288,0.275029144685,0,0,0,0,1)"
+    },
+    "stableDom": true,
+    "sha256": "204870624be35ac2aa421055e22f23ca21f0d2654cd9683ac7abaf7f071da3a2",
+    "errors": []
+  },
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr1.png",
+          "sha256": "a35207126a4a288bf722e0075f516b70e59c1d2b897e34a4201aa5948db9d74e",
+          "url": "http://127.0.0.1:4284/epimetheus/?v=MMZAe1ydBht_30FCxzNAAAAAv9sFdtlyeiQ_z9tim5bdPL-_Kqsqv1uiAAA#dataset=filter-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.846471295165,-0.420321416244,-0.326827559285,0,0,0.6138363422,-0.789433306236,0,0.532434358829,0.668232633176,0.519594843601,0,0,0,0,1)",
+            "skybox": "matrix3d(0.742893200166,-0.528454470267,-0.410908124202,0,0.614171611617,0.782240784157,0.104366918669,0,0.266275890231,-0.329901590405,0.905683113206,0,0,0,0,1)",
+            "sunView": "matrix3d(0.926041139891,-0.360392969139,0.11209243964,0,0,0.29699452091,0.954879183221,0,-0.377422584419,-0.884257407288,0.275029144685,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "filter-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 732,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.66130255909,-0.489759692272,-0.568167553779,0,-0.330240009957,0.489996338466,-0.806749728301,0,0.67351351966,0.721137318488,0.162297586919,0,0,0,0,1)",
+          "skybox": "matrix3d(0.536316996797,-0.60592054653,-0.587557904187,0,0.581271619224,0.769903287009,-0.263385838581,0,0.611953626064,-0.200272439467,0.765116670942,0,0,0,0,1)",
+          "sunView": "matrix3d(0.817261492513,-0.401185336906,0.413683427643,0,-0.385814211331,0.152314191661,0.909916359537,0,-0.428054958142,-0.903244547435,-0.030302480748,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "epimetheus-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/epimetheus/epimetheus-normal-surface@2x.webp",
+          "sha256": "3c580e07ba1b12aa4ea2ad9f530efd41a50add41888ef8eef37f919a5b416ae7",
+          "bytes": 854942
+        },
+        {
+          "filename": "epimetheus-filter-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/epimetheus/epimetheus-filter-color-surface@2x.webp",
+          "sha256": "f8368000b2a30fdfb6acfb9b242c18fefcdc7692c5bcbc871d48e818f7d64dda",
+          "bytes": 291398
+        },
+        {
+          "filename": "epimetheus-filter-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/epimetheus/epimetheus-filter-color-shadow@2x.webp",
+          "sha256": "fb827610da1501c53e30f4c3494d89e4b17a4ec146416a973875a2cbe440ea9a",
+          "bytes": 207964
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr2.png",
+          "sha256": "c1dcdc8135767c073380334aa82d5aa6cd64c035ebe0182a1a86ff3ae762523e",
+          "url": "http://127.0.0.1:4284/epimetheus/?v=MMZAe1ydBht_30FCxzNAAAAAv9sFdtlyeiQ_z9tim5bdPL-_Kqsqv1uiAAA#dataset=filter-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.846471295165,-0.420321416244,-0.326827559285,0,0,0.6138363422,-0.789433306236,0,0.532434358829,0.668232633176,0.519594843601,0,0,0,0,1)",
+            "skybox": "matrix3d(0.742893200166,-0.528454470267,-0.410908124202,0,0.614171611617,0.782240784157,0.104366918669,0,0.266275890231,-0.329901590405,0.905683113206,0,0,0,0,1)",
+            "sunView": "matrix3d(0.926041139891,-0.360392969139,0.11209243964,0,0,0.29699452091,0.954879183221,0,-0.377422584419,-0.884257407288,0.275029144685,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "filter-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 732,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.66130255909,-0.489759692272,-0.568167553779,0,-0.330240009957,0.489996338466,-0.806749728301,0,0.67351351966,0.721137318488,0.162297586919,0,0,0,0,1)",
+          "skybox": "matrix3d(0.536316996797,-0.60592054653,-0.587557904187,0,0.581271619224,0.769903287009,-0.263385838581,0,0.611953626064,-0.200272439467,0.765116670942,0,0,0,0,1)",
+          "sunView": "matrix3d(0.817261492513,-0.401185336906,0.413683427643,0,-0.385814211331,0.152314191661,0.909916359537,0,-0.428054958142,-0.903244547435,-0.030302480748,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "epimetheus-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/epimetheus/epimetheus-normal-surface@2x.webp",
+          "sha256": "3c580e07ba1b12aa4ea2ad9f530efd41a50add41888ef8eef37f919a5b416ae7",
+          "bytes": 854942
+        },
+        {
+          "filename": "epimetheus-filter-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/epimetheus/epimetheus-filter-color-surface@2x.webp",
+          "sha256": "f8368000b2a30fdfb6acfb9b242c18fefcdc7692c5bcbc871d48e818f7d64dda",
+          "bytes": 291398
+        },
+        {
+          "filename": "epimetheus-filter-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/epimetheus/epimetheus-filter-color-shadow@2x.webp",
+          "sha256": "fb827610da1501c53e30f4c3494d89e4b17a4ec146416a973875a2cbe440ea9a",
+          "bytes": 207964
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "acquisitionRevision": "78feb6ad9",
+  "purpose": "Inspected mounted color views, loaded source-asset identity, unchanged geometry and interaction checks. Scientific acceptance uses the source and registration evidence.",
+  "images": [
+    {
+      "file": "color-dpr1.png",
+      "bytes": 96703,
+      "sha256": "a35207126a4a288bf722e0075f516b70e59c1d2b897e34a4201aa5948db9d74e"
+    },
+    {
+      "file": "color-dpr2.png",
+      "bytes": 283409,
+      "sha256": "c1dcdc8135767c073380334aa82d5aa6cd64c035ebe0182a1a86ff3ae762523e"
+    },
+    {
+      "file": "mobile.png",
+      "bytes": 408512,
+      "sha256": "204870624be35ac2aa421055e22f23ca21f0d2654cd9683ac7abaf7f071da3a2"
+    },
+    {
+      "file": "oblique-shadows-dpr1.png",
+      "bytes": 185064,
+      "sha256": "df1130cfe08400498c35c32bdb513149b76c23978fe9ab61082a7f850be48dca"
+    },
+    {
+      "file": "oblique-shadows-dpr2.png",
+      "bytes": 503110,
+      "sha256": "031fdf9b82c34771621bfba76cca11025ef49d69ee9273232e7ba001c7a91b6c"
+    },
+    {
+      "file": "product.png",
+      "bytes": 461755,
+      "sha256": "a65681f3a8b76a5c52326dd6496e48bb75722dc740956e96b9b31b31c956075d"
+    }
+  ]
+}

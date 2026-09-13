@@ -1,0 +1,234 @@
+{
+  "body": "pandora",
+  "lens": "filter-color",
+  "baselineRef": "52d5d4815",
+  "baselineCommit": "52d5d48155b62c62cc35052f4d82800d4d12c208",
+  "toolSha256": "655c8fed7f29c8f3359bec7b2b9ea985112790a42321106d01485537892f7039",
+  "recipeSha256": "8130c4f1b2256d9c49d8798d84fa4a25294f0bca5acae87c1e4c01dbffc638ef",
+  "runtimeSha256": "dc306c72cc66873924950003ddc1254c63a6604fb36c902b5882f9c8570f1c1a",
+  "geometrySha256": "cc8fa3f080c7ab38968ab208781ebfbf0dbc364535ba82004ae5c76f9781869e",
+  "surfaceTrianglesSha256": "ea003554fb4ec9bc9c898ebd79318dc4c4c77e8bb68f75130a0adbfdbc8ecefa",
+  "geometryUnchanged": true,
+  "browser": "148.0.7778.96",
+  "existingAssetChanges": [],
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 2,
+    "rowText": "Filter color\nCassini",
+    "bounds": {
+      "x": 20,
+      "y": 695.6875,
+      "width": 350,
+      "height": 20
+    },
+    "pageWidth": 390,
+    "pose": {
+      "schema": "cssearth-camera-pose@1",
+      "scene": "matrix3d(-0.81525774148,0.420821030143,0.397824679408,0,0,0.686972651953,-0.726683270392,0,-0.579098277459,-0.592434161792,-0.56005977269,0,0,0,0,1)",
+      "skybox": "matrix3d(-0.7042821516,0.515887080914,0.487695713557,0,-0.651338982519,-0.196296196297,-0.732956489078,0,-0.282389977751,-0.833863394566,0.474265290685,0,0,0,0,1)",
+      "sunView": "matrix3d(0.948168312641,-0.043899017223,0.314721666223,0,0,0.990411628051,0.138147772411,0,-0.317768549267,-0.130987340262,0.939076922189,0,0,0,0,1)"
+    },
+    "stableDom": true,
+    "sha256": "86a9bf6c5147ccfb743d71428a15016636adc98beb069e08c7dc1c9a5d073480",
+    "errors": []
+  },
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr1.png",
+          "sha256": "e883eedbeb22821232c7677cdb3072a60b10ec87edc8ba5c0c0761f1ed6a417f",
+          "url": "http://127.0.0.1:4284/pandora/?v=MEZAcxZhOQtEF0FCxzNAAAAAP77H9qFK_ly_2B8wTsswJr_R3UXI_OaHAAA#dataset=filter-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.81525774148,0.420821030143,0.397824679408,0,0,0.686972651953,-0.726683270392,0,-0.579098277459,-0.592434161792,-0.56005977269,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.7042821516,0.515887080914,0.487695713557,0,-0.651338982519,-0.196296196297,-0.732956489078,0,-0.282389977751,-0.833863394566,0.474265290685,0,0,0,0,1)",
+            "sunView": "matrix3d(0.948168312641,-0.043899017223,0.314721666223,0,0,0.990411628051,0.138147772411,0,-0.317768549267,-0.130987340262,0.939076922189,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "filter-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 652,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.604641974416,0.499801942792,0.620166188014,0,-0.307722216555,0.571576820745,-0.760662195344,0,-0.73465306112,-0.650767205664,-0.191799175752,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.470178280813,0.603676032459,0.643822623417,0,-0.881334653222,-0.282544572811,-0.378705261539,0,-0.046706702335,-0.745482166284,0.664886945268,0,0,0,0,1)",
+          "sunView": "matrix3d(0.747952667646,-0.118979884096,0.653001220628,0,-0.084818452837,0.958604708237,0.271813986772,0,-0.65831044122,-0.258690549744,0.706899259056,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "pandora-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/pandora/pandora-normal-surface@2x.webp",
+          "sha256": "419c225dd5e01f7447317618da98e82b648419a9e6d3f5b186acdeb5076e5338",
+          "bytes": 426842
+        },
+        {
+          "filename": "pandora-filter-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/pandora/pandora-filter-color-surface@2x.webp",
+          "sha256": "7a1ba147a2849fa54147f2b22a9ec11a471e5509017420f8b4c9ed1393839f9b",
+          "bytes": 309922
+        },
+        {
+          "filename": "pandora-filter-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/pandora/pandora-filter-color-shadow@2x.webp",
+          "sha256": "7ef0905f9edff1fcad8bd6c73c730de344272f60ded3288e9ce279523ec86a10",
+          "bytes": 200762
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr2.png",
+          "sha256": "5759a5c726380c3a793457cc8f726180843e14b391ce59ff6d67815fc80a1cd3",
+          "url": "http://127.0.0.1:4284/pandora/?v=MEZAcxZhOQtEF0FCxzNAAAAAP77H9qFK_ly_2B8wTsswJr_R3UXI_OaHAAA#dataset=filter-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.81525774148,0.420821030143,0.397824679408,0,0,0.686972651953,-0.726683270392,0,-0.579098277459,-0.592434161792,-0.56005977269,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.7042821516,0.515887080914,0.487695713557,0,-0.651338982519,-0.196296196297,-0.732956489078,0,-0.282389977751,-0.833863394566,0.474265290685,0,0,0,0,1)",
+            "sunView": "matrix3d(0.948168312641,-0.043899017223,0.314721666223,0,0,0.990411628051,0.138147772411,0,-0.317768549267,-0.130987340262,0.939076922189,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "filter-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 652,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.604641974416,0.499801942792,0.620166188014,0,-0.307722216555,0.571576820745,-0.760662195344,0,-0.73465306112,-0.650767205664,-0.191799175752,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.470178280813,0.603676032459,0.643822623417,0,-0.881334653222,-0.282544572811,-0.378705261539,0,-0.046706702335,-0.745482166284,0.664886945268,0,0,0,0,1)",
+          "sunView": "matrix3d(0.747952667646,-0.118979884096,0.653001220628,0,-0.084818452837,0.958604708237,0.271813986772,0,-0.65831044122,-0.258690549744,0.706899259056,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "pandora-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/pandora/pandora-normal-surface@2x.webp",
+          "sha256": "419c225dd5e01f7447317618da98e82b648419a9e6d3f5b186acdeb5076e5338",
+          "bytes": 426842
+        },
+        {
+          "filename": "pandora-filter-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/pandora/pandora-filter-color-surface@2x.webp",
+          "sha256": "7a1ba147a2849fa54147f2b22a9ec11a471e5509017420f8b4c9ed1393839f9b",
+          "bytes": 309922
+        },
+        {
+          "filename": "pandora-filter-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/pandora/pandora-filter-color-shadow@2x.webp",
+          "sha256": "7ef0905f9edff1fcad8bd6c73c730de344272f60ded3288e9ce279523ec86a10",
+          "bytes": 200762
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "acquisitionRevision": "78feb6ad9",
+  "purpose": "Inspected mounted color views, loaded source-asset identity, unchanged geometry and interaction checks. Scientific acceptance uses the source and registration evidence.",
+  "images": [
+    {
+      "file": "color-dpr1.png",
+      "bytes": 145636,
+      "sha256": "e883eedbeb22821232c7677cdb3072a60b10ec87edc8ba5c0c0761f1ed6a417f"
+    },
+    {
+      "file": "color-dpr2.png",
+      "bytes": 421470,
+      "sha256": "5759a5c726380c3a793457cc8f726180843e14b391ce59ff6d67815fc80a1cd3"
+    },
+    {
+      "file": "mobile.png",
+      "bytes": 413654,
+      "sha256": "86a9bf6c5147ccfb743d71428a15016636adc98beb069e08c7dc1c9a5d073480"
+    },
+    {
+      "file": "oblique-shadows-dpr1.png",
+      "bytes": 141549,
+      "sha256": "dd4640be31ecb47d83c8accd200372b8b075b20a086d47e9df3b1aa3d099af82"
+    },
+    {
+      "file": "oblique-shadows-dpr2.png",
+      "bytes": 372613,
+      "sha256": "39bdf3fa4ca4bb0a7f2e3019f3878daa2a8f967d46203f58a32bb60a5f890bb8"
+    },
+    {
+      "file": "product.png",
+      "bytes": 348613,
+      "sha256": "c7d9986168719e150eb4da47f5cdfde8baf999ba90d20fdc31fe868d37bf9a5e"
+    }
+  ]
+}

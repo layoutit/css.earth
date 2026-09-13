@@ -1,0 +1,234 @@
+{
+  "body": "prometheus",
+  "lens": "filter-color",
+  "baselineRef": "52d5d4815",
+  "baselineCommit": "52d5d48155b62c62cc35052f4d82800d4d12c208",
+  "toolSha256": "655c8fed7f29c8f3359bec7b2b9ea985112790a42321106d01485537892f7039",
+  "recipeSha256": "6fc44edd2066441e24b75d66858d277f31fc7e678bf52b6f7252dca016678528",
+  "runtimeSha256": "df49f3296ec3b8a4a3f722ed7b4659e9d4a4b2931a913ccb62becac23971b673",
+  "geometrySha256": "34d04c4ecb53af4a36d91a450641ef2969e43527d1099688113ca40e1e16905f",
+  "surfaceTrianglesSha256": "0a97ea17cf1cc6b9708f0649f692f275284a69d437b3d6ac42429322d96ac262",
+  "geometryUnchanged": true,
+  "browser": "148.0.7778.96",
+  "existingAssetChanges": [],
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 2,
+    "rowText": "Filter color\nCassini",
+    "bounds": {
+      "x": 20,
+      "y": 718.078125,
+      "width": 350,
+      "height": 20
+    },
+    "pageWidth": 390,
+    "pose": {
+      "schema": "cssearth-camera-pose@1",
+      "scene": "matrix3d(0.594907336897,0.090099483699,-0.798728579395,0,0,0.993697752539,0.112092714303,0,0.803794289919,-0.066684778152,0.591158083644,0,0,0,0,1)",
+      "skybox": "matrix3d(0.448636150919,0.100178877187,-0.888082028623,0,0.819966904873,0.349131092228,0.453609484149,0,0.355499118338,-0.931703561056,0.074489539355,0,0,0,0,1)",
+      "sunView": "matrix3d(0.967190222431,0.033453921423,0.251841038703,0,0,0.991292180194,-0.131680725567,0,-0.254053288964,0.127360310251,0.958768104256,0,0,0,0,1)"
+    },
+    "stableDom": true,
+    "sha256": "4a347c99652874334c37393dd2dcfbec07bb8e93ab71b7b07b8cdc7eb76bb25c",
+    "errors": []
+  },
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr1.png",
+          "sha256": "ef36b4450336cdb6ee18273bd175079ecc2c628654fa5ab00a52f042fd213a2f",
+          "url": "http://127.0.0.1:4284/prometheus/?v=MMZAdEND5iweCUFCxzNAAAAAP6mqdD684wA_3MIEP4DDjj-Z3rJB4D2PAAA#dataset=filter-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.594907336897,0.090099483699,-0.798728579395,0,0,0.993697752539,0.112092714303,0,0.803794289919,-0.066684778152,0.591158083644,0,0,0,0,1)",
+            "skybox": "matrix3d(0.448636150919,0.100178877187,-0.888082028623,0,0.819966904873,0.349131092228,0.453609484149,0,0.355499118338,-0.931703561056,0.074489539355,0,0,0,0,1)",
+            "sunView": "matrix3d(0.967190222431,0.033453921423,0.251841038703,0,0,0.991292180194,-0.131680725567,0,-0.254053288964,0.127360310251,0.958768104256,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "filter-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 732,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.228472207009,-0.04731369001,-0.972400054176,0,0.013807017729,0.998875384187,-0.045357834241,0,0.973452524208,-0.003062940294,0.228868524508,0,0,0,0,1)",
+          "skybox": "matrix3d(0.05857968559,-0.046092297312,-0.997218037078,0,0.921310927894,0.387135100861,0.036227014521,0,0.384388332942,-0.92087010558,0.065143675402,0,0,0,0,1)",
+          "sunView": "matrix3d(0.7878621684,-0.033794098838,0.614923704607,0,0.02160860499,0.999395407066,0.027237630711,0,-0.615472397265,-0.008171855362,0.788116075832,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "prometheus-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-normal-surface@2x.webp",
+          "sha256": "2d8c06486e474b10e3040e63c810c51b06dd9e8a0e3e79949a6867c812686af6",
+          "bytes": 475502
+        },
+        {
+          "filename": "prometheus-filter-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-filter-color-surface@2x.webp",
+          "sha256": "c9009c69ffec9bdf0153f0bbec6095c72fe865288fb35adf05b780f5f5fe0152",
+          "bytes": 416390
+        },
+        {
+          "filename": "prometheus-filter-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-filter-color-shadow@2x.webp",
+          "sha256": "be2f7a47c24dc975a27a9bd633fb8030a2560491d7bd4e640bdf47ef172a6ed2",
+          "bytes": 271090
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr2.png",
+          "sha256": "2521f84ad8c610c6c1900fe2dd9deebffb4284d83ce9494d18f9dda6dd1e8e25",
+          "url": "http://127.0.0.1:4284/prometheus/?v=MMZAdEND5iweCUFCxzNAAAAAP6mqdD684wA_3MIEP4DDjj-Z3rJB4D2PAAA#dataset=filter-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.594907336897,0.090099483699,-0.798728579395,0,0,0.993697752539,0.112092714303,0,0.803794289919,-0.066684778152,0.591158083644,0,0,0,0,1)",
+            "skybox": "matrix3d(0.448636150919,0.100178877187,-0.888082028623,0,0.819966904873,0.349131092228,0.453609484149,0,0.355499118338,-0.931703561056,0.074489539355,0,0,0,0,1)",
+            "sunView": "matrix3d(0.967190222431,0.033453921423,0.251841038703,0,0,0.991292180194,-0.131680725567,0,-0.254053288964,0.127360310251,0.958768104256,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "filter-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 732,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.228472207009,-0.04731369001,-0.972400054176,0,0.013807017729,0.998875384187,-0.045357834241,0,0.973452524208,-0.003062940294,0.228868524508,0,0,0,0,1)",
+          "skybox": "matrix3d(0.05857968559,-0.046092297312,-0.997218037078,0,0.921310927894,0.387135100861,0.036227014521,0,0.384388332942,-0.92087010558,0.065143675402,0,0,0,0,1)",
+          "sunView": "matrix3d(0.7878621684,-0.033794098838,0.614923704607,0,0.02160860499,0.999395407066,0.027237630711,0,-0.615472397265,-0.008171855362,0.788116075832,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "prometheus-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-normal-surface@2x.webp",
+          "sha256": "2d8c06486e474b10e3040e63c810c51b06dd9e8a0e3e79949a6867c812686af6",
+          "bytes": 475502
+        },
+        {
+          "filename": "prometheus-filter-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-filter-color-surface@2x.webp",
+          "sha256": "c9009c69ffec9bdf0153f0bbec6095c72fe865288fb35adf05b780f5f5fe0152",
+          "bytes": 416390
+        },
+        {
+          "filename": "prometheus-filter-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-filter-color-shadow@2x.webp",
+          "sha256": "be2f7a47c24dc975a27a9bd633fb8030a2560491d7bd4e640bdf47ef172a6ed2",
+          "bytes": 271090
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "acquisitionRevision": "78feb6ad9",
+  "purpose": "Inspected mounted color views, loaded source-asset identity, unchanged geometry and interaction checks. Scientific acceptance uses the source and registration evidence.",
+  "images": [
+    {
+      "file": "color-dpr1.png",
+      "bytes": 274328,
+      "sha256": "ef36b4450336cdb6ee18273bd175079ecc2c628654fa5ab00a52f042fd213a2f"
+    },
+    {
+      "file": "color-dpr2.png",
+      "bytes": 792758,
+      "sha256": "2521f84ad8c610c6c1900fe2dd9deebffb4284d83ce9494d18f9dda6dd1e8e25"
+    },
+    {
+      "file": "mobile.png",
+      "bytes": 462635,
+      "sha256": "4a347c99652874334c37393dd2dcfbec07bb8e93ab71b7b07b8cdc7eb76bb25c"
+    },
+    {
+      "file": "oblique-shadows-dpr1.png",
+      "bytes": 237221,
+      "sha256": "490dcbc3963a386586073cd32a5212d888dc657f133da7b63e0ec540da055f42"
+    },
+    {
+      "file": "oblique-shadows-dpr2.png",
+      "bytes": 638399,
+      "sha256": "88d6295a554ecaee9640f666bf9511d2b592ca9823d0ac91043ea3431939f419"
+    },
+    {
+      "file": "product.png",
+      "bytes": 538021,
+      "sha256": "6383884fe93eca288bfe0c522bf84e828afbebb544a8a8d21212af984608917f"
+    }
+  ]
+}

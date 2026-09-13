@@ -12,6 +12,10 @@ The surface uses the [Thomas, Joseph and Ansty Saturn small-moon shape release](
 
 ## Evidence
 
+**Filter color:** The northern face and ridge retain broad color coverage, with small fringes along some relief edges. The [browser record](evidence/filter-color/capture.json) pins the loaded image responses, camera, settings and inspected views at DPR 1 and 2. The original unshaded image bytes, body leaves and picking triangles are unchanged. Dragging, Shadows and the mobile selector passed without page errors or replaced scene DOM. Scientific qualification comes from the original camera/shape release and the registration evidence described here; these screenshots document the mounted result.
+
+[Filter color](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Oblique with Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). Captures correspond to the implementation and source inputs at `78feb6ad9`; the record retains its acquisition-tool and prepared-file hashes.
+
 Geometry is simplified from the source connectivity with the shared meshoptimizer preparer before texture baking. The prepared mesh has 800 native PolyCSS triangle leaves, within the 2,000-leaf ceiling, with a 200 m simplifier error setting. That setting is an algorithmic allowance, not a bound on source scientific uncertainty. No ellipsoid is substituted for the equatorial ridge. A 2,592-direction radial sample (5° grid offset from poles and seam) compared the prepared mesh with the source: mean error 61 m, 95th percentile 157 m, maximum sampled error 392 m. These samples are not an exhaustive maximum error bound.
 
 ## Known problems

@@ -1,0 +1,29 @@
+{
+  "method": "Restored newly published immutable runtime assets over HTTPS, verified size and SHA-256 against the delivery inventory.",
+  "assets": [
+    {
+      "id": "pan",
+      "filename": "pan-filter-color-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/0037669e4cb5a6b0231b22db66e59d730f5c47bc387b1d593544a9673586fa3f/pan-filter-color-shadow@2x.webp",
+      "bytes": 297626,
+      "sha256": "0037669e4cb5a6b0231b22db66e59d730f5c47bc387b1d593544a9673586fa3f",
+      "verified": true
+    },
+    {
+      "id": "pan",
+      "filename": "pan-filter-color-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4f7dd785b35ddcd58d0909801b5d82207e6b77224d43bbeacfb1349012c45eb9/pan-filter-color-surface@2x.webp",
+      "bytes": 387998,
+      "sha256": "4f7dd785b35ddcd58d0909801b5d82207e6b77224d43bbeacfb1349012c45eb9",
+      "verified": true
+    },
+    {
+      "id": "pan",
+      "filename": "pan-filter-color-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9e91f4f53942e4718f4ba4d9ad62ef4aa6b180b3824cb731e3ebdceb3649e4a2/pan-filter-color-thumbnail.webp",
+      "bytes": 2372,
+      "sha256": "9e91f4f53942e4718f4ba4d9ad62ef4aa6b180b3824cb731e3ebdceb3649e4a2",
+      "verified": true
+    }
+  ]
+}

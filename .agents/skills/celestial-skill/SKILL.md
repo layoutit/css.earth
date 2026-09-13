@@ -234,6 +234,9 @@ them as limitations of the observations.
 Check a few independent numerical anchors for changed scientific quantities or
 positions. Source closure and self-consistent prepared files cannot detect a
 shared wrong interpretation; attractive screenshots cannot validate it either.
+Choose a meaningful reference before using Pixelmatch; it is not a mandatory
+check for every new view. Different datasets and A/A repeats cannot qualify a
+new surface. Follow the [comparison decision rule](../../../docs/provenance/CONTRACT.md#say-what-the-checks-prove).
 For a reported defect, start with the user's actual camera, lens and settings;
 an ambient tab URL alone may not identify the body shown in a screenshot.
 
