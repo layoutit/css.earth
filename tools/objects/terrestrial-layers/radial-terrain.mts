@@ -405,8 +405,9 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
       ({ data: map, info } = await sharp(resolve(publicDirectory, requireString(surface.map.url.split('/').at(-1))))
         .ensureAlpha().raw().toBuffer({ resolveWithObject: true }));
     }
-    const observedFrames = observation && requireRecord(observation.report).frames;
-    const frames = observedFrames ? requireArray(observedFrames).map(value => {const frame=requireRecord(value);return {...frame,id:requireString(frame.id)};}) : null;
+    const observedFrames = observation && requireArray(requireRecord(observation.report).frames);
+    // Only a mosaic needs a source index; a single photograph's coverage mask already names its one source.
+    const frames = observedFrames && observedFrames.length > 1 ? observedFrames.map(value => {const frame=requireRecord(value);return {...frame,id:requireString(frame.id)};}) : null;
     const sampleSources = frames && Buffer.alloc(width * height);
     const observationTransfer: ObservationTransfer | undefined = observation && { interiorTexels: 0, counts: {}, maximumSourceDistanceMeters: 0,
       maximumPixelSeparationMeters: 0, maximumPhotometricGain: 0,

@@ -12,7 +12,10 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
-import { decodeOsirisGeo, fitCamera, project, sampleGeo } from '../terrestrial-layers/osiris-geo.mts';
+import { decodeOsirisGeo, fitCamera, project } from '../terrestrial-layers/osiris-geo.mts';
+import { sampleFootprint } from '../surface-observations/footprint.mts';
+import { archiveBackplanes } from '../surface-observations/geometry.mts';
+import type { FootprintSample } from '../surface-observations/contract.mts';
 import { loadPinned } from '../comet-1p/inspect-giotto.mts';
 import { loadRadialTerrain, requireTerrainMesh } from '../terrestrial-layers/radial-terrain.mts';
 import { closestTrianglePoint } from '../terrestrial-layers/obj-shape.mts';
@@ -78,6 +81,8 @@ async function main() {
   if (radial.faces.length !== 1000) throw new Error('67P must retain exactly 1000 native u leaves.');
   const metersPerUnit = config.geometry.radiusKm * 1000 / config.geometry.radius;
   const eye = camera.positionKm.map(n => n * 1000);
+  const footprint = { image: { width: frame.width, height: frame.height, values: frame.planes.IMAGE, reject: () => null, startTime: frame.startTime, filter: frame.filter, report: {} },
+    camera: { project: (point: readonly number[]) => project(camera.matrix, point.map(n => n / 1000)) }, geometry: archiveBackplanes(frame, { positionMeters: eye }), photometry: { gain: () => 1 } };
   const rgb = Buffer.alloc(radial.width * radial.height * 3), coverage = Buffer.alloc(rgb.length);
   const counts:Record<string,number> = {}, distances:number[] = [], separations:number[] = [];
   let interiorTexels = 0;
@@ -92,12 +97,12 @@ async function main() {
       const ap = sub(raw, a), u = (dot(ap, ab) * bb - dot(ap, ac) * abac) / denominator;
       const v = (dot(ap, ac) * aa - dot(ap, ab) * abac) / denominator, interior = u >= 0 && v >= 0 && u + v <= 1;
       const point = closestTrianglePoint(raw, a, ab, ac).point.map(n => n * metersPerUnit);
-      let sampled = sampleGeo(frame, camera.matrix, point.map(n => n / 1000),
+      let sampled: FootprintSample = sampleFootprint(footprint, point,
         { ...policy, maximumSeparationMeters: policy.maximumSourceDistanceMeters + policy.maximumSeparationMeters });
       let hit:ReturnType<typeof grid.closestPoint> = null;
       if (!sampled.reason) {
         hit = grid.closestPoint(point, policy.maximumSourceDistanceMeters);
-        sampled = hit ? sampleGeo(frame, camera.matrix, hit.point.map(n => n / 1000), policy) : { reason: 'source-distance' };
+        sampled = hit ? sampleFootprint(footprint, hit.point, policy) : { reason: 'source-distance' };
         if (!sampled.reason && hit) {
           const direction = sub(hit.point, eye), distance = Math.hypot(...direction);
           const ray = grid.intersect(eye, direction.map(n => n / distance), distance + policy.visibilityToleranceMeters);
