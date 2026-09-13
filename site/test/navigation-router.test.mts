@@ -472,6 +472,25 @@ test('history back restores the departed exact view after target handoff without
   assert.deepEqual(h.errors, []); h.router.destroy();
 });
 
+test('history forward during an unfinished back returns to the departed body and its view', async () => {
+  const arrivals: Deferred[] = [];
+  const h = harness({ prepare: async () => ({ afterMount: () => { const arrival = deferred(); arrivals.push(arrival); return arrival.promise; } }) });
+  await h.router.settled;
+  const selected = h.router.navigate('venus'); await flush();
+  required(arrivals.at(-1)).resolve(); assert.equal(await selected, true);
+  required(h.mounts.at(-1)).value = saved(87654);
+  h.windowTarget.history.back(); await flush();
+  assert.equal(required(h.mounts.at(-1)).id, 'mercury');
+  assert.equal(h.router.state().ready, false, 'The back flight is still arriving');
+  h.windowTarget.history.forward(); await flush();
+  assert.equal(required(h.mounts.at(-1)).id, 'venus', 'Forward leaves the unfinished restoration');
+  required(arrivals.at(-1)).resolve(); await h.router.settled;
+  assert.equal(h.router.state().activeObjectId, 'venus');
+  assert.equal(h.windowTarget.location.pathname, '/venus/');
+  assert.equal(required(h.mounts.at(-1)).value.camera.distanceKilometers, 87654);
+  assert.deepEqual(h.errors, []); h.router.destroy();
+});
+
 test('saved-view anchors preserve query and hash across objects and on the already selected object', async () => {
   const h = harness(); await h.router.settled;
   const click = (distance: number) => {

@@ -80,7 +80,9 @@ export function createSceneRouter({
   windowTarget.addEventListener("pagehide", destroyActiveScene);
   windowTarget.addEventListener("pageshow", restoreCachedScene);
   if (navigation && windowTarget.location?.href) {
-    historyOwner = createNavigationHistory({ windowTarget, objects, capture: captureUrl, navigate, onError: report });
+    // Only a settled scene belongs to the entry that history names. An unfinished navigation
+    // has not committed its own entry, so snapshotting its scene would overwrite the entry it left.
+    historyOwner = createNavigationHistory({ windowTarget, objects, capture: () => pending ? null : captureUrl(), navigate, onError: report });
     unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
       supports: id => navigation.supports(objectId, id), navigate, onError: report });
   }
@@ -369,14 +371,15 @@ export function createSceneRouter({
       options = { ...options, overview: true };
     }
     const cancelledFlight = pending !== null && !pending.options.centerSelection && !options.centerSelection;
+    // Snapshot the departed view before cancelling: a superseded navigation records nothing.
+    const mode = options.history ?? 'push';
+    if (mode === 'pop') historyOwner?.remember();
+    else historyOwner?.checkpoint();
     if (pending) {
       const previous = pending;
       pending = null; previous.controller.abort(); previous.lifetime.destroy();
       if (active?.request === previous && sceneState !== 'ready') retire(active, null, { preserveShell: true, flush: false });
     }
-    const mode = options.history ?? 'push';
-    if (mode === 'pop') historyOwner?.remember();
-    else historyOwner?.checkpoint();
     worldContextMount?.suspendFocus?.();
     active?.viewUrl?.destroy();
     if (active) active.viewUrl = null;
