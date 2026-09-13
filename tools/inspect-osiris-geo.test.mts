@@ -135,3 +135,17 @@ test('surface sampling rejects occlusion boundaries and grazing geometry without
   assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).reason, 'no-geometry');
   assert.equal(sampleGeo(frame, matrix, [2, 0, 0], policy).reason, 'outside');
 });
+
+test('registered filter colors share interpolation and geometry rejection with grayscale', () => {
+  const native = decodeOsirisGeo(fixture());
+  const frame = { ...native, colorPlanes: [[0, 0, 0, 0], [0, 2, 4, 6], [8, 8, 8, 8]] };
+  const matrix = [[1, 0, 0, .5], [0, 1, 0, .5], [0, 0, 1, 1]];
+  const policy = { maximumSeparationMeters: 20, maximumEmissionDegrees: 80 };
+  const sampled = sampleGeo(frame, matrix, [0, 0, 0], policy);
+  assert.equal(sampled.reason, undefined);
+  assert.deepEqual(sampled.reason ? undefined : sampled.color, [0, 3, 8]);
+  native.planes.COORDINATE_Z_IMAGE[3] = .1;
+  assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).reason, 'geometry-mismatch');
+  native.planes.COORDINATE_Z_IMAGE[3] = 0;
+  assert.equal(sampleGeo({ ...frame, acceptPixel: i => i !== 3 }, matrix, [0, 0, 0], policy).reason, 'quality');
+});

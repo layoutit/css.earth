@@ -4,22 +4,17 @@
   "id": "arrokoth",
   "displayName": "Arrokoth",
   "panel": {
-    "introduction": "New Horizons photographed Arrokoth during its 2019 flyby. The opening view shows the spacecraft-derived albedo model on the imaged hemisphere. The unseen northern surface is modeled.",
+    "introduction": "New Horizons photographed Arrokoth on 1 January 2019. Its two lobes, Wenu and Weeyo, meet at a bright neck. The photograph covers the encounter-facing surface; the grid marks areas it does not show.",
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "New Horizons model"
-      },
-      {
         "id": "dimensions",
-        "label": "Model extents",
-        "value": "34.5456 × 19.8382 × 13.8223 km"
+        "label": "Size",
+        "value": "34.5 × 19.8 × 13.8 km"
       },
       {
         "id": "rotation",
         "label": "Rotation",
-        "value": "About 15.9 hours; display phase is illustrative"
+        "value": "About 15.9 hours"
       },
       {
         "id": "class",
@@ -42,12 +37,46 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "albedo",
+    "defaultLens": "lorri",
     "labels": {
       "model": "Shape model",
-      "albedo": "Modeled albedo"
+      "albedo": "Modeled albedo",
+      "lorri": "LORRI",
+      "mvic": "MVIC"
     },
     "controls": [
+      {
+        "id": "lorri",
+        "label": "LORRI",
+        "title": "New Horizons close approach",
+        "detail": "Photograph · 33 m/pixel",
+        "description": "Taken 6,628 km from Arrokoth. Bright patches and the neck are visible in the original grayscale exposure. The photographed lighting is retained; unseen and grazing surfaces remain gridded.",
+        "thumbnail": "/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
+        "surface": "arrokoth-lorri-surface@2x.webp",
+        "poles": "arrokoth-lorri-poles@2x.webp",
+        "falseColor": false,
+        "source": {
+          "id": "lorri-ca06",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.lbl"
+        }
+      },
+      {
+        "id": "mvic",
+        "label": "MVIC",
+        "title": "New Horizons enhanced color",
+        "detail": "NIR / red / blue · 340 m/pixel",
+        "falseColor": true,
+        "description": "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is enhanced color at 340 metres per native pixel; the grid marks unsupported coverage.",
+        "thumbnail": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
+        "surface": "arrokoth-mvic-surface@2x.webp",
+        "poles": "arrokoth-mvic-poles@2x.webp",
+        "source": {
+          "id": "mvic-ca05",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.26007/fv5e-eh92"
+        }
+      },
       {
         "id": "albedo",
         "label": "Modeled albedo",
@@ -83,7 +112,7 @@
         "label": "Shape model",
         "description": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain.",
         "title": "Published New Horizons shape",
-        "detail": "Source shape · unmapped surface grid",
+        "detail": "Unmapped grid",
         "thumbnail": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
         "surface": "arrokoth-model-surface@2x.webp",
         "poles": "arrokoth-model-poles@2x.webp",

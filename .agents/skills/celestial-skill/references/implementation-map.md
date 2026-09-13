@@ -159,6 +159,8 @@ instead of writing a reader for one body.
 | OSIRIS level-4 reflectance with a solved camera | `osiris-camera` | Lutetia and Steins `osiris` | Camera JSON, optional limb refinement, photometry | `archived-camera.oracle.test.mts` |
 | AMICA Gaskell DDR cubes | `amica-gaskell` | Itokawa `amica` | Image, label, original and flat-field pins | `amica-geo.oracle.test.mts` |
 | L'LORRI images with TAN-SIP distortion | `llorri-camera` | Donaldjohanson `llorri` | Camera pins | `llorri-geo.oracle.test.mts` |
+| New Horizons LORRI calibrated FITS, uncertainty and quality HDUs | `nh-lorri-camera` | Arrokoth `lorri` | Camera pins with a qualified attitude for the exact mesh; native TAN-SIP WCS | `new-horizons-geo.test.mts` (Astropy pixels and WCS) |
+| Arrokoth CA05 registered four-band MVIC cube | `nh-mvic-camera` | Arrokoth `mvic` | Image-space registration to its contemporaneous LORRI camera; one common linear NIR / RED / BLUE scale | `new-horizons-geo.test.mts` (Astropy pixels) |
 | Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tools/spice/oracle.test.mts` |
 | Encounter FITS frames with a control network | `encounter-fits` | Wild 2 `navcam`, Tempel 1, Hartley 2 | Frame, label and control pins, level matching | `encounter-fits.oracle.test.mts` |
 | Catalog cameras for a shape model | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame catalog pins and display settings | None yet |
