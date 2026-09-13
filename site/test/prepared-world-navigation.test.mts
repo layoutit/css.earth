@@ -108,6 +108,24 @@ test('a terminal extreme-range pose finishes without a tail of identical publica
   assert.equal(f.pending, 0);
 });
 
+test('a long fly-to ends once its remaining approach no longer moves the body on screen', async () => {
+  const f = fixtureFactory(), frame = f.navigation.frame, optics = f.navigation.optics();
+  f.navigation.apply({ referenceFrame: 'world', epochJdTt: 1, pose: { positionM: [0, 0, 2.3e9], orientationXyzw: [0, 0, 0, 1] } });
+  f.paints.length = 0;
+  const target = createWorldSelectionTarget(f.navigation.capture(), frame, optics);
+  await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal }) });
+  assert.deepEqual(required(f.paints.at(-1)).pose, target.pose, 'The flight still ends on its exact target');
+  // Pixel oracle: how far each publication still draws the body from where it finally rests.
+  const shown = f.paints.map(world => presentWorldCamera(world, frame, optics)), final = required(shown.at(-1));
+  const offset = (view: typeof final) => view.silhouette && view.centerPixels && final.silhouette && final.centerPixels
+    ? Math.max(Math.abs(view.centerPixels[0] - final.centerPixels[0]), Math.abs(view.centerPixels[1] - final.centerPixels[1]),
+      Math.abs(view.silhouette.radialSemiAxis - final.silhouette.radialSemiAxis), Math.abs(view.silhouette.tangentialSemiAxis - final.silhouette.tangentialSemiAxis))
+    : Infinity;
+  let settled = shown.length - 1;
+  while (settled > 0 && offset(required(shown[settled - 1])) <= 0.25) settled--;
+  assert.ok(shown.length - 1 - settled <= 30, `${shown.length - 1 - settled} of ${shown.length} publications drew the body within a quarter pixel of its resting place`);
+});
+
 test('the exact final camera demand finishes before the old scene is handed off', async () => {
   const f = fixtureFactory(), viewReady = deferred();
   let readView: (() => ObjectPreparationView) | undefined, finalView: ObjectPreparationView | undefined;
