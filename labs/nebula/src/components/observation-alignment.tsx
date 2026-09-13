@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { localFile } from '../viewer/viewer';
+import { ObservationSources } from './observation-sources';
 import { adjustedMatrix, imageCorners, observationFitStorageKey, savedObservationFit, readAdjustment, readObservations, transform, unchanged,
   type Adjustment, type LayerId, type Observation, type Observations } from '../alignment/observations-ui/model';
 
@@ -7,7 +8,7 @@ type Camera = { x: number; y: number; zoom: number };
 const layers = [{ id: 'original', label: 'Original', symbol: '▧' }, { id: 'diffuse', label: 'Without stars', symbol: '☁' }, { id: 'stars', label: 'Residual', symbol: '✧' }] as const;
 
 /** Common astrometric canvas. Inspection never launches image processing. */
-export function ObservationAlignment({ manifestPath, onOpenCompiler }: { manifestPath: string; onOpenCompiler?(): void }) {
+export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler }: { manifestPath: string; dossierPath?: string; onOpenCompiler?(): void }) {
   const [data, setData] = useState<Observations | null>(null), [error, setError] = useState('');
   const [selected, setSelected] = useState('');
   const [layer, setLayer] = useState<LayerId>('original');
@@ -44,15 +45,15 @@ export function ObservationAlignment({ manifestPath, onOpenCompiler }: { manifes
     const observer = new ResizeObserver(([entry]) => { if (entry) setExtent({ width: entry.contentRect.width, height: entry.contentRect.height }); });
     observer.observe(element); return () => observer.disconnect();
   }, []);
-  function fitImages() {
+  function fitImages(onlySelected = false) {
     if (!data) return;
-    const corners = data.images.flatMap(image => imageCorners(image, adjustedMatrix(image, data.frame, fits[image.id] ?? unchanged)));
+    const corners = data.images.filter(image => !onlySelected || image.id === selected).flatMap(image => imageCorners(image, adjustedMatrix(image, data.frame, fits[image.id] ?? unchanged)));
     const xs = corners.map(p => p[0]), ys = corners.map(p => p[1]);
     const left = Math.min(...xs), top = Math.min(...ys), width = Math.max(...xs) - left, height = Math.max(...ys) - top;
     const zoom = Math.min((extent.width - 36) / width, (extent.height - 36) / height);
     setCamera({ zoom, x: extent.width / 2 - (left + width / 2) * zoom, y: extent.height / 2 - (top + height / 2) * zoom });
   }
-  useEffect(() => { if (data && extent.width > 40 && extent.height > 40 && !initialFit.current) { fitImages(); initialFit.current = true; } }, [data, extent]);
+  useEffect(() => { if (data && extent.width > 40 && extent.height > 40 && !initialFit.current) { fitImages(true); initialFit.current = true; } }, [data, extent]);
   useEffect(() => {
     const element = viewport.current; if (!element) return;
     const wheel = (event: WheelEvent) => {
@@ -89,7 +90,7 @@ export function ObservationAlignment({ manifestPath, onOpenCompiler }: { manifes
   const fitted = fit.x !== 0 || fit.y !== 0 || fit.rotation !== 0 || fit.scale !== 1;
   return <section className="observation-alignment" aria-label="Observation alignment">
     <div ref={viewport} className="observation-sky" aria-label="Aligned sky images" tabIndex={0} onPointerDown={pointerDown} onPointerMove={pointerMove}
-      onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }} onDoubleClick={fitImages}
+      onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }} onDoubleClick={() => fitImages()}
       onKeyDown={event => { if (event.key === 'Home' || event.key === '0') { event.preventDefault(); fitImages(); } }}>
       <div className="observation-frame" data-frame-width={data?.frame.width} data-frame-height={data?.frame.height}
         style={{ transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})` }}>
@@ -117,7 +118,8 @@ export function ObservationAlignment({ manifestPath, onOpenCompiler }: { manifes
     </div>
     <aside className="floating-panel observation-camera" aria-label="Alignment camera">
       <fieldset disabled={!data}><legend>Sky alignment</legend>
-        <div className="camera-actions"><button type="button" onClick={fitImages} title="Fit every full image edge in the common north-up sky frame.">Earth view · fit all</button></div>
+        <div className="camera-actions"><button type="button" onClick={() => fitImages()} title="Fit every full image edge in the common north-up sky frame.">Earth view · fit all</button>
+          <button type="button" onClick={() => fitImages(true)} title="Fit this image at its true sky orientation; switching images retains this camera.">Fit image</button></div>
         <p className="interaction-hint">Drag to pan · scroll to zoom</p>
         <p className="interaction-hint" title="Images share one celestial coordinate frame. This is not a 3D depth model.">{data?.frame.fieldArcminutes.join(' × ')}′ sky frame</p>
       </fieldset>
@@ -156,6 +158,7 @@ export function ObservationAlignment({ manifestPath, onOpenCompiler }: { manifes
           <p className="overlay-detail" title="Full-resolution star extraction runs offline. These buttons only inspect completed outputs.">{image.layers.diffuse && image.layers.stars ? 'Native star removal prepared' : 'Star removal not prepared'}</p>
           <div className="placement-actions"><button className="text-button" type="button" disabled={loading} onClick={() => setReload(value => value + 1)} title="Read newly completed star-removal layers without moving the camera or changing the alignment.">{loading ? 'Reloading…' : 'Reload prepared layers'}</button>
           <a className="overlay-detail" href={image.source.page} target="_blank" rel="noreferrer" title={image.source.credit}>Source & credit ↗</a></div>
+          {dossierPath && <ObservationSources path={dossierPath} image={image} />}
         </>}
         {(storageError || missingLayer.length > 0) && <p className="overlay-detail" role="status">{storageError || `Not prepared: ${missingLayer.map(item => item.label).join(', ')}`}</p>}
         {Object.values(imageErrors).map(message => <p className="overlay-detail" role="alert" key={message}>{message}</p>)}

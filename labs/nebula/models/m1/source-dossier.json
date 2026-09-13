@@ -1,0 +1,150 @@
+{
+  "objectId": "m1",
+  "summary": "Six Crab Nebula views compare optical line emission, near/mid-infrared components, radio synchrotron and the X-ray pulsar wind on a shared sky frame. Different epochs, passbands and resolutions produce real morphological differences; alignment must not erase expansion or force different emission mechanisms into agreement.",
+  "images": [
+    {
+      "id": "hubble-optical",
+      "provider": "ESA/Hubble",
+      "telescope": "Hubble / WFPC2",
+      "wavelengths": "Optical · [O III] 502 nm / [O I] 631 nm / [S II] 673 nm",
+      "coverage": "Main optical remnant, 6.41′ square; the faint northern ejecta jet is outside this tight presentation footprint.",
+      "quality": "Detailed emission-line mosaic; RGB intensity mixes species, ionization and display stretch. Final composite PSF is not specified.",
+      "epoch": "1999 October–2002 January WFPC2 mosaic; released 2005-12-01.",
+      "masterUrl": "https://esahubble.org/media/archives/images/original/heic0515a.tif",
+      "notes": [
+        "Eight-field observation interval is documented in Dubner et al. §V: https://arxiv.org/html/1704.02968v1",
+        "Publisher AVM has a full TAN solution attributed to NASA/Hubble. Field-star residuals must establish independent registration quality."
+      ]
+    },
+    {
+      "id": "webb-infrared",
+      "provider": "ESA/Webb",
+      "telescope": "James Webb / NIRCam + MIRI",
+      "wavelengths": "Near/mid-infrared · 1.62 / 4.8 / 5.6 / 11.3 / 18 / 21 µm",
+      "coverage": "Main remnant, 5.47′ × 4.76′; tight common mosaic crop, with emission approaching the edges. No faint northern-jet coverage.",
+      "quality": "Official 4000-pixel publication TIFF, preserving the full master footprint. Broad filters mix synchrotron, lines and dust; not a calibrated spectral cube.",
+      "epoch": "NIRCam 2022-10-31; MIRI imaging 2023-02-24. Released 2023-10-30.",
+      "masterUrl": "https://esawebb.org/media/archives/images/original/weic2326a.tif",
+      "notes": [
+        "Program 1714 and imaging epochs: https://arxiv.org/html/2406.00172v1",
+        "AVM quality is Position, not Full: complete numerical WCS is supplied, but publisher accuracy remains provisional.",
+        "Master grid is 10509 × 9151; preserve its AVM reference pixels when using the 4000 × 3483 derivative.",
+        "Publisher PAH/silicate band labels are not evidence of pure PAH or silicate emission."
+      ]
+    },
+    {
+      "id": "webb-components",
+      "provider": "ESA/Webb",
+      "telescope": "James Webb / NIRCam + MIRI",
+      "wavelengths": "Derived infrared components · 4.8 / 18 / 21 µm",
+      "coverage": "Main remnant, 5.33′ × 4.62′; tight crop. No faint northern-jet coverage.",
+      "quality": "Derived component display: synchrotron blue, sulfur green, dust magenta. Shares Webb observations with the infrared composite; not independent evidence or a dust-density map.",
+      "epoch": "Same program: NIRCam 2022-10-31; MIRI 2023-02-24. Released 2024-06-17.",
+      "masterUrl": "https://esawebb.org/media/archives/images/original/weic2417a.tif",
+      "notes": [
+        "Full TAN AVM retained; component subtraction makes field-star matching unsuitable as a required registration test.",
+        "Component isolation depends on subtraction and PSF matching: https://arxiv.org/html/2406.00172v1"
+      ]
+    },
+    {
+      "id": "spitzer-infrared",
+      "provider": "ESA/Hubble · JPL/Caltech",
+      "telescope": "Spitzer / MIPS (companion release attribution)",
+      "wavelengths": "Mid-infrared · 24 µm (companion CXC metadata)",
+      "coverage": "8.83′ square presentation field around the main remnant; diffuse infrared filaments are broad at this resolution.",
+      "quality": "Single-band false-color display, strongly oversampled; final PSF and noise map are not supplied. No photometry or upper limits from black pixels.",
+      "epoch": "Observation date unspecified in the selected release; released 2017-05-15.",
+      "masterUrl": "https://esahubble.org/media/archives/images/original/potw1720c.tif",
+      "notes": [
+        "Selected ESA/Hubble release omits instrument/filter tags. MIPS and 24 µm come from the linked CXC companion TIFF AVM, not a measured spectrum: https://chandra.harvard.edu/photo/2017/crab/more.html",
+        "Treat line emission, synchrotron and dust as possible contributors; infrared brightness alone is not dust mass.",
+        "Full TAN publisher WCS retained without fitting the nebular structure."
+      ]
+    },
+    {
+      "id": "vla-radio",
+      "provider": "ESA/Hubble · NRAO",
+      "telescope": "Karl G. Jansky Very Large Array",
+      "wavelengths": "Radio · S band, approximately 3 GHz / 10 cm",
+      "coverage": "8.83′ square field containing the extended radio remnant. Fine radio filaments and diffuse synchrotron occupy a larger region than bright X-rays.",
+      "quality": "Genuine interferometric radio map rendered in red. Published parent map beam is 0.93″ × 0.80″; which large-scale weighting this outreach rendering uses is unspecified.",
+      "epoch": "VLA 2012-11-26 and 2012-11-27; historical 5 GHz template supplies large scales. Released 2017-05-15.",
+      "masterUrl": "https://esahubble.org/media/archives/images/original/potw1720b.tif",
+      "notes": [
+        "Parent map combines S-band data with an expanded, spectrally scaled older template; an additional high-pass version exists: https://arxiv.org/html/1704.02968v1",
+        "Not a flux-calibrated TIFF. Do not interpret a narrow display pixel or missing smooth emission as instrumental resolution or physical absence.",
+        "Full TAN publisher WCS retained; radio wisps must not be forced onto optical features."
+      ]
+    },
+    {
+      "id": "chandra-xray",
+      "provider": "ESA/Hubble · CXC",
+      "telescope": "Chandra / ACIS (companion release attribution)",
+      "wavelengths": "X-ray · ACIS; exact selected display passband unspecified",
+      "coverage": "8.83′ square field; detected X-ray pulsar-wind emission is intrinsically concentrated on the inner torus and jets, not the full optical ejecta envelope.",
+      "quality": "Single-band false-color display. Final stacked PSF, exposure map and band limits are absent from the selected image metadata; not a temperature or density map.",
+      "epoch": "Companion CXC release lists 48 pointings, March 2000–November 2013; exact selected stack membership unspecified. Released 2017-05-15.",
+      "masterUrl": "https://esahubble.org/media/archives/images/original/potw1720f.tif",
+      "notes": [
+        "Epoch range and ACIS attribution: https://chandra.harvard.edu/photo/2017/crab/",
+        "CXC AVM central wavelength 0.8267 nm is a representative display tag, not an energy-band definition.",
+        "The companion paper’s near-contemporaneous 2012 exposure must not be substituted for the release stack epoch.",
+        "Full TAN publisher WCS retained; compact torus morphology is not a field-star registration reference."
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "title": "Dubner et al. — Morphological properties of the Crab Nebula: a detailed multiwavelength study",
+      "url": "https://arxiv.org/abs/1704.02968",
+      "year": 2017,
+      "access": "Open author manuscript and HTML; observational setup and parent maps are described. Quantitative work needs calibrated data, not the outreach TIFFs.",
+      "constraints": [
+        "Radio and optical/X-ray wisps need not coincide, even near the same epoch. Register sky coordinates rather than emission peaks.",
+        "VLA large-scale structure includes a transformed older template; separate that processing from current observations."
+      ]
+    },
+    {
+      "title": "Temim et al. — Dissecting the Crab Nebula with JWST",
+      "url": "https://arxiv.org/abs/2406.00172",
+      "year": 2024,
+      "access": "Open paper; program 1714 data at https://doi.org/10.17909/6264-w578.",
+      "constraints": [
+        "NIRCam scientific pixel grids are 0.031″ and 0.063″; MIRI grid is 0.11″. These differ from delivered display sampling and resolution.",
+        "Adopted PSF FWHM varies from 0.055″ at 1.62 µm to 0.674″ at 21 µm; match PSFs before comparing fine features.",
+        "Two MIRI spectroscopy fields do not measure abundances everywhere. Component subtraction assumptions constrain dust interpretation."
+      ]
+    },
+    {
+      "title": "Martin, Milisavljevic & Drissen — 3D mapping of the Crab Nebula with SITELLE – I. Deconvolution and kinematic reconstruction",
+      "url": "https://doi.org/10.1093/mnras/staa4046",
+      "year": 2021,
+      "access": "Open journal article; author manuscript at https://arxiv.org/abs/2101.02709. No spectral cube acquired for this Alignment intake.",
+      "constraints": [
+        "Hα, [N II] and [S II] Doppler components constrain emitting gas. Depth follows an assumed expansion relation, not image brightness.",
+        "Uniform global expansion is a model approximation; the ejecta envelope is not adequately represented by a simple ellipsoid."
+      ]
+    },
+    {
+      "title": "Martin et al. — The non-uniform expansion of the Crab Nebula",
+      "url": "https://doi.org/10.1093/mnras/staf1597",
+      "year": 2025,
+      "access": "Open author manuscript: https://arxiv.org/abs/2502.19632. CFHT images at 2007, 2016 and 2019 underpin the motion measurements.",
+      "constraints": [
+        "Spatially varying proper motions and acceleration invalidate a single affine expansion correction for all filaments.",
+        "Use field stars or qualified publisher WCS for astrometry; preserve epoch differences as physical information."
+      ]
+    },
+    {
+      "title": "Ding et al. — 3D Kinematic Reconstruction of the Crab Nebula That Includes the Northern Ejecta Jet",
+      "url": "https://arxiv.org/abs/2606.26231",
+      "year": 2026,
+      "access": "Open author manuscript and HTML; CFHT/SITELLE programs 20BC02 and 22BD14. Data cubes were not acquired here.",
+      "constraints": [
+        "2020 and 2022 spectral observations add [O III] and other tracers; red-line-only coverage misses much of the northern jet.",
+        "Line-of-sight distance depends on expansion and assumed distance; source selection and flux thresholds affect the displayed structure.",
+        "The faint northern ejecta jet is different from the inner X-ray pulsar jet and is not fully covered by the selected tight optical/Webb mosaics."
+      ]
+    }
+  ]
+}

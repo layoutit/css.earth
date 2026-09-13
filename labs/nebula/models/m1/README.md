@@ -1,0 +1,55 @@
+# Crab Nebula — Alignment intake
+
+Six publisher images cover optical emission lines, near/mid-infrared emission,
+radio synchrotron, and the X-ray pulsar wind. They are comparison observations,
+not six interchangeable measurements of one material or one epoch.
+
+| Record | Purpose |
+| --- | --- |
+| [observations.json](observations.json) | Exact source pins, native dimensions, publisher WCS, shared sky frame, and registration mode. |
+| [source-dossier.json](source-dossier.json) | Reader-facing coverage, epochs, wavelength and resolution caveats, and five primary research papers. |
+| [intake-evidence.json](intake-evidence.json) | Native TIFF receipts, verbatim AVM fields, calculated display sampling, credits, terms, master links, and rejected alternate metadata. |
+
+The native TIFFs and extracted metadata are cached under the ignored local M1
+intake directory. Each `localCache` entry identifies the acquired file. The
+largest selected file is 30.7 MB; the Webb infrared comparison uses the official
+4K publication variant and links the 10509 × 9151 master. No local resizing or
+cropping changed the acquired TIFFs.
+
+The common frame is north-up, 9.1 arcminutes square. The Hubble optical mosaic is
+the relative field-star reference. The Webb infrared composite requests the same
+independent star check, but its publisher labels the AVM quality **Position**.
+The Webb component map, Spitzer, VLA and Chandra retain **publisher WCS only**:
+their nonstellar structures must not be treated as field stars or forced onto
+the optical filaments. A supplied coordinate solution is not an independent
+accuracy measurement.
+
+The ESA/Hubble 2017 single-band releases were selected after their CXC alternate
+TIFFs exposed inconsistent astrometry: a near-corner reference pixel and about
+half the official companion field size. Both native pins are retained in the
+evidence record. No guessed correction or morphology fit was applied. The
+accepted releases have centred TAN metadata matching their publisher pages;
+independent absolute accuracy remains unmeasured.
+
+Crab expansion is physical. Dates in the dossier describe observations when
+known, with release dates stated separately. The VLA map incorporates a historical
+large-scale template; Chandra's companion release spans many pointings; the two
+Webb views reuse the same observing program. A single affine transform cannot
+remove spatially varying expansion or fast wisp evolution. The tight optical
+and Webb mosaics do not cover the whole faint northern ejecta jet, which is
+distinct from the central X-ray pulsar jet.
+
+All selected files are 8-bit RGB presentation images. Their WCS-derived pixel
+sampling is not resolution, their RGB values are not calibrated fluxes, and
+black background is not an exposure or detection-limit map. The linked papers
+identify calibrated archival data and the assumptions required for further
+physical inference. Unknown passband, epoch, PSF and stack-membership details
+remain explicitly unknown.
+
+Intake validation checks all six downloaded byte counts, SHA-256 pins, native
+dimensions, required recipe fields, dossier coverage and WCS dimensions. Visual
+inspection confirmed the stated broad versus compact coverage. Alignment
+preparation and browser inspection are performed by the shared lab workflow;
+this intake does not claim their results. The recipe's inherited `nativeRemoval`
+pins satisfy the existing schema only: no star removal, reconstruction or baking
+was run for this intake.

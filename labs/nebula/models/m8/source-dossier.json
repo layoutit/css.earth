@@ -1,0 +1,302 @@
+{
+  "schema": "cssearth-nebula-source-dossier@1",
+  "objectId": "m8",
+  "summary": "Six separate Lagoon alignment candidates spanning optical, near-, mid- and far-infrared. Two Hubble images cover only the central detail; the Herschel context has incomplete survey support. This packet records source facts and literature, not accepted registration or processed nebulae.",
+  "status": "alignment-intake-only",
+  "inspectedOn": "2026-09-13",
+  "acquisitionNote": "Existing ESO files reused unchanged from the 2026-09-12 cache; four new source images and supporting metadata downloaded 2026-09-13.",
+  "observationRecipe": "alignment-candidates.json",
+  "legacyPreserved": {
+    "observationsSha256": "1d614c4efbeeae252d5e4043b4d19bc5d0d00d7065246a19a03c94b3e4ad630d",
+    "compilerSha256": "ac535cb1f5db423408fd8139c5d30c9c0ff983d6f0aad2415c1b3b7419efc6c5"
+  },
+  "images": [
+    {
+      "id": "eso-optical",
+      "provider": "ESO",
+      "telescope": "MPG/ESO 2.2-metre telescope · Wide Field Imager (WFI)",
+      "wavelengths": "B 456 nm; V 539 nm; R 651 nm; H-alpha filter 658 nm (publisher central wavelengths).",
+      "coverage": "Full-field context · 93.49′ × 62.61′; unchanged complete 4000 × 2679 Publication TIFF grid.",
+      "quality": "Official outreach mosaic. Sampling ≈1.402″/pixel on this TIFF; seeing/PSF not provided. Full master has finer pixels but is not the selected raster.",
+      "epoch": "Observation dates not given in selected AVM/image page. Release: 2009-09-28.",
+      "masterUrl": "https://cdn.eso.org/images/original/eso0936a.tif",
+      "notes": [
+        "Broadband and narrowband colour composite; displayed RGB values have no common calibrated flux scale.",
+        "Publisher AVM reference grid is 7856 × 5261 with an off-centre reference pixel; preserve it instead of substituting TIFF dimensions.",
+        "No independent registration or physical depth is established by this intake."
+      ],
+      "native": {
+        "path": ".local/nebula-lab/observations/m8/sources/eso-optical.tif",
+        "bytes": 18672974,
+        "sha256": "a0a2b4e1b926592642c1ee550925ca3d770d5d63522e37e39f058b27172d0c22",
+        "width": 4000,
+        "height": 2679,
+        "bitDepth": 8,
+        "channels": 3
+      },
+      "rights": "CC BY 4.0; retain ESO credit.",
+      "footprintScope": "full-field",
+      "astrometrySource": "Embedded AVM in pinned TIFF",
+      "observationEpoch": null
+    },
+    {
+      "id": "eso-vista",
+      "provider": "ESO/VVV",
+      "telescope": "VISTA · VIRCAM",
+      "wavelengths": "J / H / Ks near-infrared filters per publisher caption; exact central wavelengths absent from selected record.",
+      "coverage": "Full-field strip · 71.81′ × 39.54′; unchanged complete 4000 × 2202 Publication TIFF grid, rotated 29.5°.",
+      "quality": "Official outreach colour image. Sampling ≈1.077″/pixel; delivered PSF/seeing unknown.",
+      "epoch": "Observation dates not given in selected AVM/image page. Release: 2011-01-05.",
+      "masterUrl": "https://cdn.eso.org/images/original/eso1101d.tif",
+      "notes": [
+        "The caption says J/H/Ks; the AVM/table incorrectly calls one band H-alpha. Preserve the discrepancy and do not interpret it as infrared H-alpha.",
+        "The northern/southern optical margins extend beyond this strip; lack of coverage is not absent gas.",
+        "The AVM reference grid is 12630 × 6954. No independent registration is claimed."
+      ],
+      "native": {
+        "path": ".local/nebula-lab/observations/m8/sources/eso-vista.tif",
+        "bytes": 29816152,
+        "sha256": "906a2960105ac9344be261ba524c3e221f5bfdce3ab2efe33c022773cd7db3e9",
+        "width": 4000,
+        "height": 2202,
+        "bitDepth": 8,
+        "channels": 3
+      },
+      "rights": "CC BY 4.0; retain ESO/VVV and Cambridge Astronomical Survey Unit acknowledgment.",
+      "footprintScope": "full-field-strip",
+      "astrometrySource": "Embedded AVM in pinned TIFF",
+      "observationEpoch": null
+    },
+    {
+      "id": "hst-optical",
+      "provider": "ESA/Hubble",
+      "telescope": "Hubble Space Telescope · WFC3",
+      "wavelengths": "[O III] 502 nm (blue), H-alpha 656 nm (green), [N II] 658 nm (red), y 547 nm (luminance).",
+      "coverage": "Local detail · 3.189′ × 4.020′ around the central Hourglass/Herschel 36 region; complete publisher 4782 × 6028 raster.",
+      "quality": "Full original outreach TIFF, 8-bit channels. Sampling ≈0.04001″/pixel; this is not a measured PSF or instrumental resolution.",
+      "epoch": "2018-02-12 to 2018-02-18, explicitly stated in image caption. Release: 2018-04-19.",
+      "masterUrl": "https://esahubble.org/media/archives/images/original/heic1808a.tif",
+      "notes": [
+        "A small central footprint, not a full Lagoon map. Surrounding blank space must remain unsupported.",
+        "Emission-line colours are a display mapping, not separate calibrated line maps.",
+        "Embedded AVM retained exactly; publisher quality Full is metadata completeness, not our astrometric validation."
+      ],
+      "native": {
+        "path": ".local/nebula-lab/intake/m8/heic1808a.tif",
+        "bytes": 57485000,
+        "sha256": "fa079be18e9db40874e8379a5be9f1fe0e6f52036758a987643447114728e076",
+        "width": 4782,
+        "height": 6028,
+        "bitDepth": 8,
+        "channels": 3
+      },
+      "rights": "CC BY 4.0; credit NASA, ESA, STScI.",
+      "footprintScope": "local-detail",
+      "astrometrySource": "Embedded AVM in pinned original TIFF",
+      "observationEpoch": {
+        "start": "2018-02-12",
+        "end": "2018-02-18",
+        "source": "https://esahubble.org/images/heic1808a/"
+      }
+    },
+    {
+      "id": "hst-infrared",
+      "provider": "ESA/Hubble",
+      "telescope": "Hubble Space Telescope · WFC3",
+      "wavelengths": "J 1.25 µm (cyan); H 1.60 µm (orange).",
+      "coverage": "Local detail · 3.192′ × 4.024′ central field; complete publisher 4782 × 6028 raster.",
+      "quality": "Full original outreach TIFF, 8-bit channels. Sampling ≈0.04005″/pixel; the resampled grid does not establish the infrared PSF.",
+      "epoch": "Observation dates not stated on this image record; not copied from optical sibling. Release: 2018-04-19.",
+      "masterUrl": "https://esahubble.org/media/archives/images/original/heic1808b.tif",
+      "notes": [
+        "Its AVM scale and reference pixel differ slightly from the optical sibling and are preserved independently.",
+        "Visible infrared stars include background objects; shared position or brightness does not establish membership or depth.",
+        "Full native footprint retained; astrometry unverified."
+      ],
+      "native": {
+        "path": ".local/nebula-lab/intake/m8/heic1808b.tif",
+        "bytes": 51243264,
+        "sha256": "ac04dc5bf0acc39e8a476fb97e445557996db551fceabf670dd21708662cf545",
+        "width": 4782,
+        "height": 6028,
+        "bitDepth": 8,
+        "channels": 3
+      },
+      "rights": "CC BY 4.0; credit NASA, ESA, STScI.",
+      "footprintScope": "local-detail",
+      "astrometrySource": "Embedded AVM in pinned original TIFF",
+      "observationEpoch": null
+    },
+    {
+      "id": "spitzer-mid-infrared",
+      "provider": "NASA/JPL-Caltech · Spitzer; metadata mirrored by IPAC AstroPix",
+      "telescope": "Spitzer Space Telescope · IRAC and MIPS",
+      "wavelengths": "IRAC 3.6, 4.5, 5.8, 8.0 µm; MIPS 24 µm. Caption maps 3.6–4.5 blue, 4.5–8 green, 24 red.",
+      "coverage": "Central-field context · 35.726′ × 28.813′; full 1757 × 1417 master TIFF.",
+      "quality": "Official stretched composite, ≈1.220″/pixel. Different IRAC/MIPS PSFs are not measured here or homogenized; pixel spacing is not beam resolution.",
+      "epoch": "AVM: IRAC starts 2005-09-16T14:19; MIPS starts 2005-09-27T08:05. Display release: 2011-09-14.",
+      "masterUrl": "https://www.spitzer.caltech.edu/system/avm_images/binaries/4757/original/sig11-012.tif?1603796898",
+      "notes": [
+        "The caption mentions IRAC alone, while the colour table and AVM correctly identify MIPS at 24 µm.",
+        "The TIFF lacks spatial AVM. Exact ICRS TAN WCS and per-band start times come from IPAC AstroPix sig11-012; its matching source ID/native dimensions and publisher link are retained.",
+        "No star-match check or quantitative dust-temperature/flux inference is claimed."
+      ],
+      "native": {
+        "path": ".local/nebula-lab/intake/m8/sig11-012.tif",
+        "bytes": 5591662,
+        "sha256": "94ab668c21880706ae4fa6e401f8a7237f440cdcf4bcf3f93b45c0794c21ff34",
+        "width": 1757,
+        "height": 1417,
+        "bitDepth": 8,
+        "channels": 3
+      },
+      "rights": "Spitzer public image-use policy allows reuse with NASA/JPL-Caltech credit; no endorsement.",
+      "footprintScope": "central-field",
+      "astrometrySource": "https://www.astropix.org/image/spitzer/sig11-012",
+      "astrometryReceipt": {
+        "path": ".local/nebula-lab/intake/m8/spitzer-astropix.html",
+        "bytes": 31706,
+        "sha256": "2f7ead519d32fb3b12a85d7edf6031b3dea68e8c9dbb9cb60ee3a2f92c40818e"
+      },
+      "observationEpoch": {
+        "iracStart": "2005-09-16T14:19",
+        "mipsStart": "2005-09-27T08:05",
+        "timezone": "Not stated in source AVM",
+        "source": "https://www.astropix.org/image/spitzer/sig11-012"
+      }
+    },
+    {
+      "id": "herschel-pacs160",
+      "provider": "ESA Herschel Science Archive / ESA HiPS; CDS cutout service",
+      "telescope": "Herschel Space Observatory · PACS",
+      "wavelengths": "160 µm nominal band; HiPS metadata wavelength bounds 125–210 µm.",
+      "coverage": "Wide context with partial observed support · complete 2000 × 2000 TAN query raster, 2° horizontal field. All margins and mosaic boundaries retained.",
+      "quality": "Normalized display HiPS, ≈3.6004″/pixel at tangent point. Visible seams and clipping; 320,814 FITS samples are non-finite and 1,309,632 are finite zero. These statistics are not a science validity mask.",
+      "epoch": "Individual M8 observation epochs unresolved. HiPS release: 2019-07-31; whole-survey epoch bounds are not assigned to this field.",
+      "masterUrl": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=ESAVO%2FP%2FHERSCHEL%2FPACS160norm&width=2000&height=2000&projection=TAN&fov=2&coordsys=icrs&ra=270.76531645904527&dec=-24.30622861770443&format=fits",
+      "notes": [
+        "Provider normalizes public level-2.5 observations before HiPS generation; neither JPEG nor normalized FITS is calibrated surface brightness.",
+        "Exact TAN/ICRS WCS comes from the paired FITS request. The JPEG has no embedded WCS. No cross-format pixel/astrometric verification is claimed.",
+        "Published Hi-GAL coverage does not include all of M8 (Kahle et al. 2024 §2.4). Missing or zero-filled areas cannot constrain the nebula.",
+        "Herschel publishing-policy URL is preserved from FITS/properties; its current page returned HTTP 451 during intake, so no Creative Commons licence is inferred."
+      ],
+      "native": {
+        "path": ".local/nebula-lab/intake/m8/herschel-pacs160.jpg",
+        "bytes": 182823,
+        "sha256": "f1f0e689f58b473aae81a3e9616ae773f2ca7bcf48fe80ef1f02b9a83b5a96e8",
+        "width": 2000,
+        "height": 2000,
+        "bitDepth": 8,
+        "channels": 3
+      },
+      "rights": "ESA/HSA copyright and provider-specified Herschel publishing policy; terms-page content not retrieved.",
+      "footprintScope": "wide-context-partial-data",
+      "astrometrySource": "Matching-query FITS header (pinned below)",
+      "supportingFits": {
+        "path": ".local/nebula-lab/intake/m8/herschel-pacs160.fits",
+        "bytes": 32005440,
+        "sha256": "a291df806ec8d89ab1f927432e3b61b3ba7f25f6051ea5a0ff23677ea58ebf2a",
+        "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=ESAVO%2FP%2FHERSCHEL%2FPACS160norm&width=2000&height=2000&projection=TAN&fov=2&coordsys=icrs&ra=270.76531645904527&dec=-24.30622861770443&format=fits",
+        "bitpix": -64,
+        "arrayDimensions": [
+          2000,
+          2000
+        ],
+        "finiteSamples": 3679186,
+        "nonFiniteSamples": 320814,
+        "zeroSamples": 1309632
+      },
+      "hips": {
+        "id": "ESAVO/P/HERSCHEL/PACS160norm",
+        "path": ".local/nebula-lab/intake/m8/herschel-properties.txt",
+        "bytes": 2331,
+        "sha256": "9d780b555285ef58664fe653a1bdf4d4c7896a40024fe829745edde7b9327edc",
+        "url": "https://alasky.cds.unistra.fr/ESAC/ESAVO_P_HERSCHEL_PACS160norm/properties",
+        "nativeHierarchy": "HEALPix order 8, 512-pixel tiles; bilinear sampling, mean overlay, median hierarchy.",
+        "sourceArchiveUrl": "https://archives.esac.esa.int/hsa/whsa/"
+      },
+      "observationEpoch": null
+    }
+  ],
+  "papers": [
+    {
+      "id": "arias-2006-hourglass",
+      "title": "The infrared Hourglass cluster in M8",
+      "authors": "J. I. Arias, R. H. Barbá, J. Maíz Apellániz, N. I. Morrell, M. Rubio",
+      "year": 2006,
+      "url": "https://doi.org/10.1111/j.1365-2966.2005.09829.x",
+      "access": "Open author preprint; abstract and bibliographic record inspected, scientific arrays not downloaded.",
+      "fullTextUrl": "https://arxiv.org/abs/astro-ph/0506552v2",
+      "constraints": [
+        "Local Hourglass study: Las Campanas JHKs imaging, archival HST morphology and ESO longslit spectra; relevant to the Hubble detail footprints.",
+        "Reports a 1.25 kpc distance estimate for early-type stars and identifies jets/bow shocks/HH features. These are local results, not a measured whole-cloud volume.",
+        "Photometry and longslit evidence require original footprint, selection and uncertainty qualification before numerical reuse."
+      ]
+    },
+    {
+      "id": "barba-2007-geysers",
+      "title": "Geysers in the Lagoon: new Herbig-Haro objects in M8",
+      "authors": "Rodolfo H. Barbá and Julia I. Arias",
+      "year": 2007,
+      "url": "https://doi.org/10.1051/0004-6361:20066081",
+      "access": "Open author preprint; abstract and bibliographic record inspected, source images/spectra not downloaded.",
+      "fullTextUrl": "https://arxiv.org/abs/0706.2378v1",
+      "constraints": [
+        "La Silla wide-field H-alpha and [S II] narrowband images trace projected shock/outflow structures and five newly reported HH objects.",
+        "Useful for optical feature identification and follow-up around candidate driving stars; projected morphology alone is not a 3D flow or velocity field.",
+        "Image masks, exact fields and line calibration need inspection before treating figures as data."
+      ]
+    },
+    {
+      "id": "wright-2019-kinematics",
+      "title": "The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
+      "authors": "Nicholas J. Wright et al.",
+      "year": 2019,
+      "url": "https://doi.org/10.1093/mnras/stz870",
+      "access": "Open author preprint; abstract/bibliography inspected, stellar table not imported.",
+      "fullTextUrl": "https://arxiv.org/abs/1903.12176v1",
+      "constraints": [
+        "Approximately 900 selected NGC 6530 members combine Gaia proper motions with Gaia-ESO radial velocities.",
+        "Reported anisotropic expansion is strongest in declination, with little right-ascension expansion; a simple spherical expansion law is inappropriate.",
+        "Stellar kinematics do not measure the line-of-sight gas density or assign membership to every image star."
+      ]
+    },
+    {
+      "id": "kahle-2024-clumps",
+      "title": "The effects of stellar feedback on molecular clumps in the Lagoon Nebula (M8)",
+      "authors": "K. Angelique Kahle et al.",
+      "year": 2024,
+      "url": "https://doi.org/10.1051/0004-6361/202349009",
+      "access": "Open full text inspected: observations, archival-data coverage and interpretation limits; spectra/photometry not downloaded.",
+      "fullTextUrl": "https://arxiv.org/html/2404.07920v2",
+      "constraints": [
+        "37 clump pointings: APEX 210–280 GHz and IRAM 30m 70–117 GHz; observed beams span roughly 21–35 arcseconds, with three telescope pointing pairs offset by up to 1 arcminute.",
+        "IR-to-submillimetre SEDs supplement spectroscopy. Hi-GAL incompletely covers M8; AKARI supplies missing bands at coarser beams.",
+        "Foreground infrared emission can coincide with molecular clumps without tracing them. Derived temperatures/masses depend on SED assumptions; use source-specific masks and pointings before any future model.",
+        "The paper adopts 1325 pc from prior work; this is not a new distance measurement or a depth field."
+      ]
+    },
+    {
+      "id": "singh-2026-lvm",
+      "title": "SDSS-V LVM: A spatially resolved study of the physical conditions and the chemical abundance discrepancy in the Lagoon Nebula (M 8)",
+      "authors": "Amrita Singh et al.",
+      "year": 2026,
+      "url": "https://doi.org/10.3847/1538-4357/ae563a",
+      "access": "Open full-text observations/data-reduction and map descriptions inspected. Figure-set repository identified; numerical lvmSFrame data not downloaded or qualified.",
+      "fullTextUrl": "https://arxiv.org/html/2603.22382v1",
+      "figureSetUrl": "https://doi.org/10.5281/zenodo.19165622",
+      "constraints": [
+        "Whole-nebula optical IFS: 10 tiles, about 1.1 square degrees, 35.3-arcsecond fibre diameter at 37-arcsecond pitch. Observed 2023-08-22 through 2023-10-19, with supplemental 2024-07-02 exposures.",
+        "Line atlas includes H-alpha/H-beta, [O III], [N II], [S II], O II recombination lines, extinction, temperature and density diagnostics. The authors adopt 1.25 kpc for physical sampling.",
+        "Original row-stacked FITS provide FLUX, IVAR, MASK, WAVE and SLITMAP sky positions. Preserve dead-fibre/bright-star masks, line S/N selection and extinction correction.",
+        "The 27-map figure set is plotted evidence, not a calibrated image/WCS intake. No figure digitization or inference of line-of-sight depth is authorized here."
+      ]
+    }
+  ],
+  "evidencePolicy": [
+    "Native byte hashes and dimensions have been checked; WCS values were read from publisher AVM or FITS.",
+    "Angular sampling is the selected raster grid spacing, never a substitute for measured PSF/beam resolution.",
+    "Publisher astrometry is provisional. No stellar registration, star removal, reconstruction, compilation or bake was performed for this intake.",
+    "Source image differences include tracers, coverage, epoch, PSF and display stretch. They do not by themselves establish density, membership or physical depth."
+  ]
+}

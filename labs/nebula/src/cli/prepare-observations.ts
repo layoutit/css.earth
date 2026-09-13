@@ -4,7 +4,7 @@ import { resolve, relative } from 'node:path';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { readObservationRecipe } from '../alignment/observations/recipe.js';
-import { detectStars, publisherTransform, matchStars, verifyRegistration, applyAffine, invertAffine } from '../alignment/observations/registration.js';
+import { detectStars, publisherTransform, publisherRegistration, matchStars, verifyRegistration, applyAffine, invertAffine } from '../alignment/observations/registration.js';
 import { nativeStarless } from '../reconstruction/emission-inference/native-source.js';
 
 const [recipePath, mode, extra] = process.argv.slice(2);
@@ -32,7 +32,7 @@ for (const source of recipe.images) {
   if (sha(bytes) !== source.sha256) throw new Error(`${source.id}: native source pin differs.`);
   const metadata = await sharp(bytes).metadata();
   if (metadata.width !== source.width || metadata.height !== source.height) throw new Error(`${source.id}: native dimensions differ.`);
-  const stars = await detectStars(bytes, [source.width, source.height]);
+  const stars = source.registrationMode === 'publisher-wcs' ? [] : await detectStars(bytes, [source.width, source.height]);
   const initial = publisherTransform(source, recipe.frame);
   console.log(`OBSERVATION_STARS ${source.id} ${stars.length}`);
   sources.push({ source, bytes, stars, initial });
@@ -50,7 +50,8 @@ for (const row of sources) {
   if (row === reference) continue;
   let result: ReturnType<typeof verifyRegistration> | undefined;
   const attempts: unknown[] = [];
-  for (const maximumStars of [6000, 12000]) {
+  const publisherOnly = row.source.registrationMode === 'publisher-wcs' || reference.source.registrationMode === 'publisher-wcs';
+  for (const maximumStars of publisherOnly ? [] : [6000, 12000]) {
     try {
       const pool = maximumStars === 6000 ? [row.stars, reference.stars] : [await expand(row), await expand(reference)];
       const pairs = matchStars(pool[0]!, pool[1]!, row.initial, reference.initial);
@@ -61,8 +62,10 @@ for (const row of sources) {
     } catch (error) { attempts.push({ maximumStars, pass: false, error: error instanceof Error ? error.message : String(error) }); }
     console.log(`OBSERVATION_ALIGNMENT_RETRY ${row.source.id}; pool=${maximumStars}; residual gates unchanged`);
   }
+  if (!result) result = { pass: false, matrix: row.initial, evidence: publisherRegistration(publisherOnly
+    ? 'Publisher WCS only. This band is not configured for stellar registration; diffuse knots must not be treated as stars.'
+    : 'Publisher WCS only. Neither bounded star pool passed registration; see the registration receipt for failed attempts.') };
   await json(resolve(directory, `${row.source.id}-registration.json`), { ...result, attempts, sourceSha256: row.source.sha256, referenceSha256: reference.source.sha256, recipeSha256: sha(recipeBytes) });
-  if (!result) throw new Error(`${row.source.id}: neither bounded star pool supplied a verified registration. No native removal performed.`);
   console.log(`OBSERVATION_ALIGNMENT ${row.source.id} ${JSON.stringify({ ...result.evidence, matches: undefined })}`);
   // Failed relative fits remain inspectable at the original publisher placement.
   // They never become inputs to star removal or reconstruction.
@@ -121,7 +124,7 @@ const publish = () => json(resolve(directory, 'observations.json'), { schema: 'c
     limits: 'Relative observation alignment, not measured 3D structure. RGB composites have different bands and stretches; no common photometric calibration is implied.' } });
 await publish();
 console.log(`NEBULA_ALIGNMENT_READY ${directory}/observations.json`);
-if (!verified) throw new Error('Held-out star registration failed. Publisher-only image previews are available; no native removal performed.');
+if (!verified && mode !== '--alignment-only') throw new Error('Held-out star registration failed. Publisher-only image previews are available; no native removal performed.');
 for (const image of images) {
   const row = aligned.find(item => item.source.id === image.id)!, source = row.source;
   if (mode !== '--alignment-only' && !image.layers.diffuse) {

@@ -2,6 +2,8 @@
 
 Local development tooling, separate from the production website. Current objects: LMC/SMC, M2–9/Helix, and the six configured [irregular nebula experiments](models/inference-candidates/README.md). Keep cleanup and UI work within this lab unless a task explicitly requires a shared dependency or another location.
 
+[Pleiades/Crab/Lagoon source intake](docs/source-candidates.md) adds Alignment candidates only. Keep Lagoon's expanded candidate catalogue separate from its existing compiler inputs. Source dossiers carry spectral/epoch/coverage limits and primary papers; publisher-only WCS never counts as a passed star-registration gate.
+
 ## Usage
 
 From the repository root: `pnpm install --frozen-lockfile --ignore-scripts`, `pnpm build:packages`, then `pnpm lab:nebula`. Startup recreates missing neutral density textures and inspection/reference images from pinned sources, downloading missing originals without running extraction or reconstruction. `pnpm lab:nebula:bake` rebuilds the three accepted LMC lenses from their saved recipe; `pnpm lab:nebula:verify` validates the completed native, reconstruction and delivery artifacts without processing; see [docs/baking.md](docs/baking.md). The default server is `http://127.0.0.1:4331`.
