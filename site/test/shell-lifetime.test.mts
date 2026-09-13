@@ -49,6 +49,7 @@ class Element extends EventTarget {
   requireSelector(selector: string): Element { return required(this.querySelector(selector)); }
   setAttribute(key: string, value: string) { this.attributes.set(key, value); }
   getAttribute(key: string) { return this.attributes.get(key) ?? null; }
+  hasAttribute(key: string) { return this.attributes.has(key); }
   removeAttribute(key: string) { this.attributes.delete(key); }
   override addEventListener(...[type, listener, options]: Parameters<EventTarget['addEventListener']>) {
     super.addEventListener(type, listener, options);
@@ -61,6 +62,7 @@ class FixtureDocument extends Element {
 }
 interface VisibilityObserver { observed: globalThis.Element[]; disconnected: boolean; options?: IntersectionObserverInit; observe(node: globalThis.Element): void; disconnect(): void; }
 class FixtureWindow extends Element {
+  location = new URL('http://localhost/earth/');
   Event = Event;
   CustomEvent = CustomEvent;
   HTMLElement = Element; HTMLButtonElement = Element; HTMLInputElement = Element; HTMLSelectElement = Element; HTMLDetailsElement = Element; HTMLLIElement = Element;

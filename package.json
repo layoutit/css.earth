@@ -142,7 +142,8 @@
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",
-    "@layoutit/polycss": "0.2.11"
+    "@layoutit/polycss": "0.2.11",
+    "linkedom": "^0.18.13"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

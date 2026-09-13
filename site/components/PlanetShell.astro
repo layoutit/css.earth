@@ -25,6 +25,7 @@ import overviewFacts from '../source/overview-facts.json';
 import planetarySystems from '../source/planetary-systems.json';
 import { temperatureColor } from '../../src/preparation/stars/color.ts';
 import featureIndex from '../prepared-feature-index.json' with { type: 'json' };
+import { SEARCH_QUERY_LIMIT } from '../object-search.mts';
 
 declare const __CSSEARTH_VERSION__: string;
 
@@ -65,6 +66,7 @@ const sources = sceneSources(resources);
 const sourceGroups = sceneSourceGroups(sources);
 const hasResources = sources.length > 0;
 const searchPlaceholder = 'Search celestial objects...';
+const searchFormId = `${objectId}-search`;
 // Each pill types the plural classification query the search already understands.
 const searchCategories = ([
   ['planet', 'public'], ['satellite', 'moon_stars'], ['comet', 'motion_blur'], ['asteroid', 'grain'],
@@ -81,17 +83,21 @@ const searchCategories = ([
   </div>
   <div class="planet-search-toolbar">
     <ExplorerRail objectId={objectId} />
-    <div class="planet-sidebar-search-card" role="search" aria-label="Object search" data-search-prompt={searchPlaceholder}>
+    <form id={searchFormId} class="planet-sidebar-search-card" role="search" aria-label="Object search"
+      action={activeObject?.route} method="get" data-search-object={objectId} data-search-prompt={searchPlaceholder}>
+      {['v', 'overview', 'focus', 'focusLens', 'dataset'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
       <input
         class="planet-sidebar-search"
         type="search"
+        name="q"
+        maxlength={SEARCH_QUERY_LIMIT}
         placeholder={searchPlaceholder}
         aria-label={searchPlaceholder}
         autocomplete="off"
       />
       <button
         class="planet-sidebar-view-all"
-        type="button"
+        type="submit"
         aria-controls={`${objectId}-object-browser`}
         aria-label="Search"
         title="Search"
@@ -100,15 +106,15 @@ const searchCategories = ([
           <MaterialSymbol name="search" />
         </span>
       </button>
-      <button class="planet-sidebar-search-clear" type="button" aria-label="Clear search" title="Clear search">
+      <a class="planet-sidebar-search-clear" href={activeObject?.route} aria-label="Clear search" title="Clear search">
         <MaterialSymbol name="close" />
-      </button>
-    </div>
+      </a>
+    </form>
   </div>
   <div class="planet-search-categories" role="group" aria-label="Browse by type">
     {searchCategories.map(category => <button
       class="planet-search-category"
-      type="button"
+      type="submit" form={searchFormId} name="browse" value={category.label}
       data-search-query={category.label}
       data-search-classification={category.classification}
       aria-pressed="false"
@@ -309,16 +315,16 @@ const searchCategories = ([
           introduction="The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.">
           <PlanetBreadcrumbs scope="solar-system" />
         </PlanetCardHeader>
-        <PlanetObjectResults activeObjectId={objectId} />
+        <PlanetObjectResults activeObjectId={objectId} formId={searchFormId} />
       </PlanetCard>
       <section class="planet-feature-results" aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
         <p class="planet-feature-hint planet-destination-hint" role="status"></p>
         <ul class="planet-destination-list">
           {Array.from({ length: 8 }, () => <li hidden>
-            <button class="planet-destination-result" type="button">
+            <a class="planet-destination-result">
               <span class="planet-destination-result-name"></span>
               <span class="planet-destination-result-context"></span>
-            </button>
+            </a>
           </li>)}
         </ul>
       </section>

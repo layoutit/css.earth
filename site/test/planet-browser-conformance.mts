@@ -825,7 +825,7 @@ async function proveSurfaceFeatures(browser: Browser, planet: ObjectEntry, profi
     assert.ok(pinned.visible >= 1 && pinned.outlinePieces > 0, `${planet.id}: the selected feature keeps its label and outline`);
     // The sidebar search lists named features and selecting a row flies to it.
     await page.locator(".planet-sidebar-search").fill(target.text);
-    const row = page.locator(".planet-feature-results li:not([hidden]) button").first();
+    const row = page.locator(".planet-feature-results li:not([hidden]) a").first();
     await row.waitFor({ timeout: 10000 });
     assert.ok((await row.innerText()).includes(target.text), `${planet.id}: the search lists the named feature`);
     await row.click();
