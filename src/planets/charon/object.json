@@ -28,7 +28,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "28145e97a968ed401664dd0f7132e21a66e61f65b4260ca75d9c6479fb761001"
+          "sha256": "7725965ada011228099956849262ea2b6059787e578f6bf6c0b296883fa4dc64"
         },
         {
           "id": "geometry",
@@ -48,7 +48,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "6d0efbb6ad1999da95abbbcfab5a381c4dc1d0d7df6c5091170db48eddcc8c53"
+          "sha256": "598566c1aba93a9a76397911794fb9a818ce470c7cdce48f3a4edb88489d511e"
         },
         {
           "id": "solar-system",
@@ -68,12 +68,12 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "04535fa6cc3feaf1fad37c65c23e3ffe52bbc0c67dd4989f65d155d5beb76d14"
+          "sha256": "72b0d3e469914419e0456453cb78a33c1aeef558f0d3529f7dd8ccf00c029bca"
         },
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "d9e55e0f63f006dc9335f335a8895d189db0b6c77ca7e67bd93a8a3af767234b"
+          "sha256": "06c6682fae014a5860652e8b45d46532dc0dcd5ce82db30e6109350bf11175ba"
         }
       ],
       "shape": {
@@ -103,6 +103,16 @@
             },
             {
               "id": "albedo",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "water-ice",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ammonia",
               "source": "content",
               "material": "lighting"
             }
@@ -154,7 +164,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f7ea950f3184fb0d33440207050d4056b9ac78d1d1e30a2ef6d363c131d5617f"
+        "sha256": "7849b09c158dce754939b8d4ffe95a8170fad66ed002d6e49caeedf92f8bcf98"
       }
     },
     "catalog": {
@@ -173,6 +183,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2b4f1165a57c40cdef2314f98782def005c51b943daa61804804b55602b8dca1"
+    "sha256": "75d57e6bb7404a5a53c2a6a232223e3f9d78b2eade42f47c53cb2434569c49fc"
   }
 }

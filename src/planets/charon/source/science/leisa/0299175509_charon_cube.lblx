@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1L00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/geom/v1/PDS4_GEOM_1L00_1970.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/sp/v1/PDS4_SP_1L00_1311.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:geom="http://pds.nasa.gov/pds4/geom/v1"
+    xmlns:sp="http://pds.nasa.gov/pds4/sp/v1"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1L00.xsd
+    http://pds.nasa.gov/pds4/geom/v1        http://pds.nasa.gov/pds4/geom/v1/PDS4_GEOM_1L00_1970.xsd
+    http://pds.nasa.gov/pds4/sp/v1          http://pds.nasa.gov/pds4/sp/v1/PDS4_SP_1L00_1311.xsd">
+    
+    <Identification_Area>
+        <logical_identifier>urn:nasa:pds:nh_derived:plutosystem_composition:0299175509_charon_cube</logical_identifier>
+        <version_id>1.0</version_id>
+        <title>Spectral Cube of (134340) Pluto I (Charon) from New Horizons LEISA Observation C_LEISA_HIRES</title>
+        <information_model_version>1.21.0.0</information_model_version>
+        <product_class>Product_Observational</product_class>
+        
+        <Alias_List>
+            <Alias>
+                <alternate_id>NH-P/PSA-LEISA/MVIC-5-COMP-V1.0:0299175509_CHARON_CUBE.FIT</alternate_id>
+                <comment>PDS3 product identifier for image cube</comment>
+            </Alias>
+        </Alias_List>
+        
+        <Modification_History>
+            <Modification_Detail>
+                <modification_date>2025-05-04</modification_date>
+                <version_id>1.0</version_id>
+                <description>
+                    ACR: Minimal effort migration from PDS3
+                </description>
+            </Modification_Detail>
+        </Modification_History>
+    </Identification_Area>
+    
+    <Observation_Area>
+        <Time_Coordinates>
+            <start_date_time>2015-07-14T10:26:30.876Z</start_date_time>
+            <stop_date_time>2015-07-14T10:37:40.876Z</stop_date_time>
+        </Time_Coordinates>
+        
+        <Primary_Result_Summary>
+            <purpose>Science</purpose>
+            <processing_level>Derived</processing_level>
+            <Science_Facets>
+                <discipline_name>Spectroscopy</discipline_name>
+                <facet1>Spectral Cube</facet1>
+            </Science_Facets>
+        </Primary_Result_Summary>
+        
+        <Investigation_Area>
+            <name>New Horizons</name>
+            <type>Mission</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:investigation:mission.new_horizons</lid_reference>
+                <reference_type>data_to_investigation</reference_type>
+            </Internal_Reference>
+        </Investigation_Area>
+
+        <Observing_System>
+            <Observing_System_Component>
+                <name>New Horizons</name>
+                <type>Host</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.nh</lid_reference>
+                    <reference_type>is_instrument_host</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+            <Observing_System_Component>
+                <name>Linear Etalon Imaging Spectral Array</name>
+                <type>Instrument</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument:nh.leisa</lid_reference>
+                    <reference_type>is_instrument</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+        </Observing_System>
+
+        <Target_Identification>
+            <name>(134340) Pluto I (Charon)</name>
+            <type>Satellite</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:target:satellite.134340_pluto.charon</lid_reference>
+                <reference_type>data_to_target</reference_type>
+            </Internal_Reference>
+        </Target_Identification>
+        
+        <Discipline_Area>
+            <sp:Spectral_Characteristics>
+                <Local_Internal_Reference>
+                    <local_identifier_reference>SpectralCube</local_identifier_reference>
+                    <local_reference_type>spectral_characteristics_to_array_object</local_reference_type>
+                </Local_Internal_Reference>
+                <sp:spectrum_format>3D</sp:spectrum_format>
+                <sp:spectral_bin_type>wavelength</sp:spectral_bin_type>
+                <sp:Field_of_View>
+                    <sp:description>
+                        The FOV corresponding to the 256x256 pixel detector is 15.9x15.9 mrad. LEISA scans
+                        across the scene to build up a spectral cube
+                    </sp:description>
+                    <sp:Rectangular_FOV>
+                        <sp:width_angle unit="mrad">15.9</sp:width_angle>
+                        <sp:length_angle unit="mrad">15.9</sp:length_angle>
+                    </sp:Rectangular_FOV>
+                </sp:Field_of_View>
+                <sp:Bin_Description>
+                    <sp:bin_profile_description>
+                        Bin centers are provided in the "wavelengths" file for each plane of the data cube.
+                        These values compensate for the spectral smile (see overview document).
+                        Bin widths are not specified.
+                    </sp:bin_profile_description>
+                    <sp:Spectral_Lookup>
+                        <sp:Bin_Center_Lookup>
+                            <Local_Internal_Reference>
+                                <local_identifier_reference>Wavelengths</local_identifier_reference>
+                                <local_reference_type>spectral_characteristics_to_bin_center_values</local_reference_type>
+                            </Local_Internal_Reference>
+                        </sp:Bin_Center_Lookup>
+                        <sp:Bin_Width_Constant>
+                            <sp:bin_width_wavelength unit="nm" xsi:nil="true" nilReason="missing"/>
+                        </sp:Bin_Width_Constant>
+                    </sp:Spectral_Lookup>
+                </sp:Bin_Description>
+            </sp:Spectral_Characteristics>
+            
+            <geom:Geometry>
+                <geom:Geometry_Orbiter>
+                    <geom:geometry_reference_time_utc>2015-07-14T10:32:06Z</geom:geometry_reference_time_utc>
+                    <geom:Distances>
+                        <geom:Distances_Specific>
+                            <geom:spacecraft_target_center_distance unit="km">80651</geom:spacecraft_target_center_distance>
+                        </geom:Distances_Specific>
+                    </geom:Distances>
+                    <geom:Surface_Geometry>
+                        <geom:Surface_Geometry_Specific>
+                            <geom:subspacecraft_latitude unit="deg">27.17</geom:subspacecraft_latitude>
+                            <geom:subspacecraft_longitude unit="deg">346.38</geom:subspacecraft_longitude>
+                        </geom:Surface_Geometry_Specific>
+                    </geom:Surface_Geometry>
+                </geom:Geometry_Orbiter>
+            </geom:Geometry>
+            
+        </Discipline_Area>
+    </Observation_Area>
+    
+    <Reference_List>
+        <Internal_Reference>
+            <lidvid_reference>urn:nasa:pds:nh_derived:plutosystem_composition:overview::1.0</lidvid_reference>
+            <reference_type>data_to_document</reference_type>
+            <comment>
+                The overview document for this collection provides details of and references for the 
+                production of each of the products in the collection.
+            </comment>
+        </Internal_Reference>
+    </Reference_List>
+    
+    <File_Area_Observational>
+        <File>
+            <file_name>0299175509_charon_cube.fit</file_name>
+            <comment>
+                This file contains only the spectral cube array with a minimal FITS header.
+                
+                Note that no display orientation information was supplied in any of the labels
+                of the PDS3 files comprising this product. Since they were all produced by the
+                ISIS3 software, the orientation is presumably the same in all cases.
+            </comment>
+        </File>
+        
+        <Header>
+            <offset unit="byte">0</offset>
+            <object_length unit="byte">2880</object_length>
+            <parsing_standard_id>FITS 3.0</parsing_standard_id>
+        </Header>
+        
+        <Array_3D_Spectrum>
+            <local_identifier>SpectralCube</local_identifier>
+            <offset unit="byte">2880</offset>
+            <axes>3</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <description>
+                Note that the PDS3 label included a series of hexidecimal codes
+                to represent the various Special_Constants. The bit strings varied
+                only by a single bit, and the bit string listed as being the 
+                "CORE_VALID_MINIMUM" was a NaN encoding, which is nonsensical.
+                A sample file was inspected, and only a single flag value was
+                discovered. This value is indicated below as a general-purpose
+                "missing" flag.
+            </description>
+            <Element_Array>
+                <data_type>IEEE754LSBSingle</data_type>
+                <unit>W/m**2/sr/μm</unit>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Band</axis_name>
+                <elements>256</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>640</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>640</elements>
+                <sequence_number>3</sequence_number>
+            </Axis_Array>
+            <Special_Constants>
+                <missing_constant>0xFF7FFFFF</missing_constant>
+            </Special_Constants>
+        </Array_3D_Spectrum>
+    </File_Area_Observational>
+    
+    <File_Area_Observational_Supplemental>
+        <File>
+            <file_name>0299175509_charon_wavelengths.fit</file_name>
+            <comment>
+                This product contains wavelength information for an image cube of          
+                Charon, derived from data from the New Horizons Linear Etalon               
+                Imaging Spectral Array (LEISA) instrument. The filename contains           
+                the starting MET for this observation.
+            </comment>
+        </File>
+        
+        <Header>
+            <offset unit="byte">0</offset>
+            <object_length unit="byte">2880</object_length>
+            <parsing_standard_id>FITS 3.0</parsing_standard_id>
+        </Header>
+        
+        <Array_3D_Spectrum>
+            <local_identifier>Wavelengths</local_identifier>
+            <offset unit="byte">2880</offset>
+            <axes>3</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <description>
+                Note that the PDS3 label included a series of hexidecimal codes
+                to represent the various Special_Constants. The bit strings varied
+                only by a single bit, and the bit string listed as being the 
+                "CORE_VALID_MINIMUM" was a NaN encoding, which is nonsensical.
+                A sample file was inspected, and only a single flag value was
+                discovered. This value is indicated below as a general-purpose
+                "missing" flag.
+            </description>
+            <Element_Array>
+                <data_type>IEEE754LSBSingle</data_type>
+                <unit>micron</unit>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Band</axis_name>
+                <elements>256</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>640</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>640</elements>
+                <sequence_number>3</sequence_number>
+            </Axis_Array>
+            <Special_Constants>
+                <missing_constant>0xFF7FFFFF</missing_constant>
+            </Special_Constants>
+        </Array_3D_Spectrum>
+    </File_Area_Observational_Supplemental>
+    
+    <File_Area_Observational_Supplemental>
+        <File>
+            <file_name>0299175509_charon_geometry.fit</file_name>
+            <comment>
+                This product contains geometry information for an image cube of            
+                Charon, derived from data from the New Horizons Linear Etalon               
+                Imaging Spectral Array (LEISA) instrument. The filename contains           
+                the starting MET for this observation.                                     
+            </comment>
+        </File>
+        
+        <Header>
+            <offset unit="byte">0</offset>
+            <object_length unit="byte">2880</object_length>
+            <parsing_standard_id>FITS 3.0</parsing_standard_id>
+        </Header>
+        
+        <Array_2D>
+            <local_identifier>PhaseAngle</local_identifier>
+            <offset unit="byte">2880</offset>
+            <axes>2</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <Element_Array>
+                <data_type>IEEE754MSBSingle</data_type>
+                <unit>deg</unit>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>640</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>640</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+        </Array_2D>
+        
+        <Array_2D>
+            <local_identifier>EmissionAngle</local_identifier>
+            <offset unit="byte">1641280</offset>
+            <axes>2</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <Element_Array>
+                <data_type>IEEE754MSBSingle</data_type>
+                <unit>deg</unit>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>640</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>640</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+        </Array_2D>
+        
+        <Array_2D>
+            <local_identifier>IncidenceAngle</local_identifier>
+            <offset unit="byte">3279680</offset>
+            <axes>2</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <Element_Array>
+                <data_type>IEEE754MSBSingle</data_type>
+                <unit>deg</unit>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>640</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>640</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+        </Array_2D>
+        
+        <Array_2D>
+            <local_identifier>Latitude</local_identifier>
+            <offset unit="byte">4918080</offset>
+            <axes>2</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <Element_Array>
+                <data_type>IEEE754MSBSingle</data_type>
+                <unit>deg</unit>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>640</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>640</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+        </Array_2D>
+        
+        <Array_2D>
+            <local_identifier>Longitude</local_identifier>
+            <offset unit="byte">6556480</offset>
+            <axes>2</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <Element_Array>
+                <data_type>IEEE754MSBSingle</data_type>
+                <unit>deg</unit>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>640</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>640</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+        </Array_2D>
+        
+    </File_Area_Observational_Supplemental>
+    
+</Product_Observational>
