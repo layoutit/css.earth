@@ -137,12 +137,42 @@ async function prepare(id:string,explicitMagnitudeLimit:number|null) {
   const [ra,dec]=s.centerIcrsDegrees, distance=s.distancePc;
   if(typeof ra!=='number' || typeof dec!=='number' || ra<0 || ra>=360 || Math.abs(dec)>90) throw new Error('Invalid ICRS source direction.');
   let previousRadius:number|null=null,previousMagnitude:number|null=null;
+  let previousRetainIds:string[]|null=null,previousRetainedMatch:number|undefined;
+  let previousRetainedAppearance:'anchor'|'lens'|undefined;
+  let previousRetainedSources:string|null|undefined,previousImageAnchors:object|undefined;
   try {
     const previous:unknown=JSON.parse(await readFile(`src/objects/${id}/source/stellar-field.json`,'utf8'));
     if(!previous || typeof previous!=='object' || !('schema' in previous) || previous.schema!=='cssearth-gaia-nebula-field@1' || !('id' in previous) || previous.id!==id || !('selection' in previous)) throw new Error('Invalid existing stellar-field identity.');
     const selection=previous.selection;
     if(!selection || typeof selection!=='object' || !('outerRadiusPc' in selection) || typeof selection.outerRadiusPc!=='number' || !Number.isFinite(selection.outerRadiusPc) || selection.outerRadiusPc<=0 || !('limitingMagnitude' in selection) || typeof selection.limitingMagnitude!=='number' || !Number.isFinite(selection.limitingMagnitude) || selection.limitingMagnitude<5 || selection.limitingMagnitude>20) throw new Error('Invalid existing stellar-field selection.');
     previousRadius=selection.outerRadiusPc;previousMagnitude=selection.limitingMagnitude;
+    if(!('retainIds' in selection) || !Array.isArray(selection.retainIds) ||
+      !selection.retainIds.every((id):id is string=>typeof id==='string'&&id.trim().length>0) ||
+      new Set(selection.retainIds).size!==selection.retainIds.length || selection.retainIds.length>2000)
+      throw new Error('Invalid existing retained stellar identities.');
+    previousRetainIds=selection.retainIds;
+    if('retainedMatchArcsec' in selection) {
+      if(typeof selection.retainedMatchArcsec!=='number' || !Number.isFinite(selection.retainedMatchArcsec) ||
+        selection.retainedMatchArcsec<0 || selection.retainedMatchArcsec>648000) throw new Error('Invalid existing retained-star match radius.');
+      previousRetainedMatch=selection.retainedMatchArcsec;
+    }
+    if('retainedAppearance' in selection) {
+      if(selection.retainedAppearance!=='anchor' && selection.retainedAppearance!=='lens') throw new Error('Invalid existing retained-star appearance.');
+      previousRetainedAppearance=selection.retainedAppearance;
+    }
+    if('provenance' in previous) {
+      const provenance=previous.provenance;
+      if(!provenance || typeof provenance!=='object' || Array.isArray(provenance)) throw new Error('Invalid existing stellar provenance.');
+      if('retainedSources' in provenance) {
+        if(provenance.retainedSources!==null && typeof provenance.retainedSources!=='string') throw new Error('Invalid retained-star provenance.');
+        previousRetainedSources=provenance.retainedSources;
+      }
+      if('imageAnchors' in provenance) {
+        const anchors=provenance.imageAnchors;
+        if(!anchors || typeof anchors!=='object' || Array.isArray(anchors)) throw new Error('Invalid image-anchor provenance.');
+        previousImageAnchors=anchors;
+      }
+    }
   } catch(error){if(!absent(error))throw error;}
   const radius=radiusOverride??previousRadius??Math.min(200,Math.max(50,10*raw.framingRadiusUnits*distance*Math.PI/648000));
   const magnitudeLimit=explicitMagnitudeLimit??previousMagnitude??16;
@@ -182,8 +212,9 @@ async function prepare(id:string,explicitMagnitudeLimit:number|null) {
   const field={schema:'cssearth-gaia-nebula-field@1',id,coordinateEpochJulianYear:2016,
     selection:{centerIcrsDegrees:[ra,dec],distancePc:distance,outerRadiusPc:radius,featherStartPc:radius*.65,
       limitingMagnitude:magnitudeLimit,fadeMagnitude:1.5,maximumStars:1500,
-      retainIds:id==='m1'?['crab-pulsar']:id==='m45'?['HIP 17702','HIP 17847','HIP 17499','HIP 17573','HIP 17608','HIP 17531','HIP 17851','HIP 17579']:[],
-      ...(id==='m1'||id==='m45'?{retainedMatchArcsec:3}:{}),
+      retainIds:previousRetainIds??(id==='m1'?['crab-pulsar']:id==='m45'?['HIP 17702','HIP 17847','HIP 17499','HIP 17573','HIP 17608','HIP 17531','HIP 17851','HIP 17579']:[]),
+      ...(previousRetainedMatch!==undefined?{retainedMatchArcsec:previousRetainedMatch}:id==='m1'||id==='m45'?{retainedMatchArcsec:3}:{}),
+      ...(previousRetainedAppearance===undefined?{}:{retainedAppearance:previousRetainedAppearance}),
       referenceMagnitude:10,referenceDiameterPx:.05,referenceFocalPixels:1000},stars,
     provenance:{catalogue:'Gaia DR3 astrometry/photometry + Bailer-Jones et al.2021 EDR3 geometric distances',
       sourceUrl:'https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist',
@@ -195,7 +226,8 @@ async function prepare(id:string,explicitMagnitudeLimit:number|null) {
       plannerReference:'https://dc.g-vo.org/tap/examples#tricking-the-query-planner',
       brightestMagnitude:stars[0]!.photGMeanMag,faintestMagnitude:stars.at(-1)!.photGMeanMag,
       selection:twoStage?'Authored spherical neighbourhood with radial taper. RUWE<1.4 and parallax/error>5; qualified Gaia cone query without archive sorting, then exact source-id Bailer-Jones lookups, local physical-sphere filtering and brightness sorting. Reaching the 50000-candidate cap is an error, so published inputs preserve the complete query selection. Distance medians and 16/84 percentiles retained; no cluster membership inferred.':'Authored spherical neighbourhood with radial taper. RUWE<1.4 and parallax/error>5; physical sphere filtered before brightness-ordered TOP 8000. Distance medians and 16/84 percentiles retained; no cluster membership inferred.',
-      retainedSources:id==='m45'?'Eight explicitly named major HIP stars retained from the existing scene because Gaia may omit saturated bright sources. Their existing depths remain inferred; they are not Bailer-Jones catalogue distances.':id==='m1'?'The explicitly named Crab pulsar retains its prior scene placement; surrounding Gaia field rows use Bailer-Jones median distances.':null}};
+      ...(previousImageAnchors===undefined?{}:{imageAnchors:previousImageAnchors}),
+      retainedSources:previousRetainedSources!==undefined?previousRetainedSources:id==='m45'?'Eight explicitly named major HIP stars retained from the existing scene because Gaia may omit saturated bright sources. Their existing depths remain inferred; they are not Bailer-Jones catalogue distances.':id==='m1'?'The explicitly named Crab pulsar retains its prior scene placement; surrounding Gaia field rows use Bailer-Jones median distances.':null}};
   const path=`src/objects/${id}/source/stellar-field.json`, text=JSON.stringify(field,null,2)+'\n';await writeFile(path,text);
   console.log(JSON.stringify({id,stars:stars.length,radiusPc:radius,queryRows:lines.length,truncated:twoStage?truncated:lines.length===limit,path,sha256:sha(text)}));
 }

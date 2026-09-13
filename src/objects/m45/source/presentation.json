@@ -178,15 +178,15 @@
   ],
   "bank": {
     "path": "src/objects/m45/prepared/lenses.json",
-    "sha256": "d27b5b2d3da99ba735410f60e27e6e59ceb70e6c18d8c54d2df265498437460a",
-    "bytes": 6710388
+    "sha256": "844be731793f240dd647c658a2728fecc29e692bb69fe96784823392d1864ee7",
+    "bytes": 6710738
   },
   "recipes": [
     {
       "id": "recipe-1",
       "path": "src/objects/m45/source/delivery.json",
-      "sha256": "b81e2f7af2bc765bc624ebce322e44457c2efd7272cd734c625551fbf9a8a34d",
-      "bytes": 2449
+      "sha256": "e9f0e5a1926122394b64321e50ca117b37f4aacc856fd393331c6583f24a923f",
+      "bytes": 2519
     },
     {
       "id": "recipe-2",

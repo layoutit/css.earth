@@ -46,7 +46,7 @@
     "arcsecPerUnit": 1
   },
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
-  "description": "Authored warped finite display-emission surface inspired by localized scattering/absorption topology. Multiple overlapping dust layers, grain scattering, illumination, extinction and true stellar distances are unsupported. No physical diagnostic or calibrated luminosity is fitted; all four lenses share geometry/alpha/stars.",
+  "description": "Authored warped finite display-emission surface inspired by localized scattering and absorption topology. Five lenses share geometry and the stellar field. Multiple dust layers, scattering, illumination and extinction are not recovered. Named Hipparcos stars retain conditional model depths; surrounding Gaia sources use parallax-informed distances. Display colors are not calibrated luminosity.",
   "defaultLens": "optical-composite",
   "framingRadiusUnits": 5359.621926,
   "acceptedLabResult": "4510c5bb3a8890c4fb6eaf9a3534b87e7079a4dbc50a1076a36bec78e251f9e7",

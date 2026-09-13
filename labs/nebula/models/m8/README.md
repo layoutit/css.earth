@@ -1,10 +1,16 @@
 # Lagoon · M8
 
-## Current optical extent · 2026-09-13
+## Image-edge taper · 2026-09-14
 
-The active recipe limits cloud emission to the registered **ESO optical footprint**, with a 90″ inward feather. The same saved selection applies to the fitted target, actual XYZ field, every lens and later recompiles. Source images and their original coverage remain complete. This is an authored display extent, not a measured boundary of the Lagoon.
+The current recipe uses the existing offline source-edge controls to soften faint image-footprint boundaries before fitting. ESO optical has a 450″ inward source taper and a 450″ common display-window feather; VISTA and Spitzer each have a 240″ source taper. Source weights, background subtraction, Detail/Faint/Depth controls and the depth prior are unchanged. Source images and no-data coverage remain complete. These are authored display choices, not measured nebular boundaries.
 
-Default-recipe result: `1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864`. It supersedes the historical cloud results below.
+The actual-source target comparison retains **99.917%** of the summed signal in the 692 pixels at or above 75% of the previous peak. The outer 90″ strip retains **3.819%**, and total target signal decreases **2.127%**. Coverage and target bounds are unchanged. Nineteen focused tests pass, including recipe-driven counterfactuals that remove source tapers or restore the narrow historical window. [Pinned target evidence](edge-taper-evidence.json) distinguishes this preparation check from the new bake and application visual gate; target agreement does not establish 3D visual quality.
+
+## Previous optical extent · 2026-09-13
+
+The preceding recipe limited cloud emission to the registered **ESO optical footprint**, with a 90″ inward feather. The saved selection applied to the fitted target, actual XYZ field and every lens. Original source coverage remained complete. This was an authored display extent, not a measured boundary of the Lagoon.
+
+Historical result: `1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864`. It superseded the earlier cloud results below.
 
 - The refit has 442 finite supports, 650 shared compact lights and three lenses. Every lens uses the same new alpha field; the refitted interior is not byte-identical to the previous cloud.
 - Independent registered-image coverage checked against 128 × 128 × 32 XYZ field samples found **zero emitting samples outside** the optical image. Removing only the saved window from this same field restores 45,683 emitting outside samples. All 48,372 positive interior samples remain inside the footprint.
@@ -143,3 +149,8 @@ is a qualified optical catalogue or intermediate astrometric image, followed by
 a local multi-resolution material contribution attached to supported 3D
 structures. Neither a whole-cloud Hubble texture nor repeating its patch through
 the full depth is an acceptable composite. No new NOX processing or bake ran.
+
+The subsequent app bake produced `7545a7a3af301ef4cc288c84e4343262add505c4db1f8bff8d1c836a7ad8c3e6`.
+All three lenses were inspected from front and oblique directions in the shared
+world: the faint image boundaries now fade softly, with no browser/HTTP errors.
+See the [current app record](../../../../src/objects/m8/README.md).

@@ -20,7 +20,7 @@ The [selected observations](../../../labs/nebula/models/m8/processing-observatio
 
 The [lab source-and-result account](../../../labs/nebula/models/m8/README.md) and [processing evidence](../../../labs/nebula/models/m8/processing-evidence.json) record registration, native separation and the measured shortcomings of each pinned result. The [delivery recipe](source/delivery.json) and [request](source/request.json) preserve the selected processing controls; the generated receipt identifies the actual replay. The [presentation record](source/presentation.json) binds source previews and cards. Follow the [shared preparation guide](../../../docs/nebulae/README.md) for app verification.
 
-The 13 September 2026 integration prepared result `dd7eedffd90f02c018b4940b38517d7e3233b5dfef1a9a1d4f5be8d72b2452e5`, with three lenses, 650 shared lights and 645 nonempty slices per lens. This is the new compiled delivery, distinct from the historical `1a5712d6…` assessment. Source-card validation checked all three bindings and the installed bank identity; it does not establish a new visual acceptance or a clean-cache NOX replay.
+The 13 September 2026 integration prepared result `dd7eedffd90f02c018b4940b38517d7e3233b5dfef1a9a1d4f5be8d72b2452e5`, with three lenses, 650 shared lights and 619 nonempty slices plus 26 distant-view images per lens. This is the new compiled delivery, distinct from the historical `1a5712d6…` assessment. Source-card validation checked all three bindings and the installed bank identity; it does not establish a new visual acceptance or a clean-cache NOX replay.
 
 ## Known problems
 
@@ -34,4 +34,15 @@ Hubble's central optical and near-infrared images remain excluded because their 
 
 The 14 September 2026 app delivery adds 226 shared lights from the pinned [stellar field](source/stellar-field.json): 226 Gaia DR3 rows inside a 60 pc sphere, selected at G < 12. The [shared method](../../../docs/nebulae/stellar-fields.md) records proper-motion propagation, Bailer-Jones distance uncertainty, photometric display scaling, radial fading and the 1,500-point budget. Stars are independent of the image footprint and are not confirmed nebula members.
 
-The verified cloud replay is `dd7eedffd90f02c018b4940b38517d7e3233b5dfef1a9a1d4f5be8d72b2452e5`. Resource hashes and source-card bindings passed with the new catalogue; cloud geometry and spectral images are unchanged by this starfield replacement. No new clean-cache native-processing claim is made.
+The current cloud replay is `7545a7a3af301ef4cc288c84e4343262add505c4db1f8bff8d1c836a7ad8c3e6`, with 711 cloud slices and 26 distant-view images per lens. Resource hashes and source-card bindings passed with the new catalogue; the starfield itself remains independent of the separate faint-edge adjustment below. No new clean-cache native-processing claim is made.
+
+## Faint image edges
+
+The saved compiler now feathers the optical display boundary over 450″ and tapers
+VISTA/Spitzer input edges over 240″ before fitting the shared emission field.
+This replaces the earlier 90″ window. The input target retains 99.917% of the
+bright-core signal and 3.819% of the old outermost-strip signal; these figures
+measure the target, not screen brightness. Native images, physical placement,
+source weights and central background settings remain unchanged. The saved
+[edge evidence](../../../labs/nebula/models/m8/edge-taper-evidence.json) distinguishes
+those numerical checks from the final app inspection.

@@ -45,6 +45,8 @@ function parseField(input: unknown) {
   }
   if (!Array.isArray(selection.retainIds)) throw new TypeError('Catalogue field needs explicit retained identities.');
   const retainIds = selection.retainIds.map(text);
+  const retainedAppearance = selection.retainedAppearance ?? 'lens';
+  if (retainedAppearance !== 'lens' && retainedAppearance !== 'anchor') throw new TypeError('Invalid retained star appearance policy.');
   if (new Set(retainIds).size !== retainIds.length || retainIds.length > maximumStars) throw new TypeError('Invalid retained catalogue identities or budget.');
   if (!Array.isArray(value.stars)) throw new TypeError('Catalogue field requires source rows.');
   const ids = new Set<string>();
@@ -59,7 +61,7 @@ function parseField(input: unknown) {
       bpRp: nullable(s.bpRp), parallaxMas: number(s.parallaxMas), parallaxErrorMas: positive(s.parallaxErrorMas), ruwe: positive(s.ruwe) };
   });
   return { id: text(value.id), coordinateEpochJulianYear: number(value.coordinateEpochJulianYear), stars,
-    selection: { centerIcrsDegrees, distancePc, outerRadiusPc, featherStartPc, maximumStars, retainedMatchArcsec, retainIds,
+    selection: { centerIcrsDegrees, distancePc, outerRadiusPc, featherStartPc, maximumStars, retainedMatchArcsec, retainIds, retainedAppearance,
       limitingMagnitude: number(selection.limitingMagnitude), fadeMagnitude: positive(selection.fadeMagnitude),
       referenceMagnitude: number(selection.referenceMagnitude), referenceDiameterPx: positive(selection.referenceDiameterPx),
       referenceFocalPixels: positive(selection.referenceFocalPixels) } };
@@ -124,13 +126,20 @@ function color(bpRp: number | null): { colorCss: string; fallback: boolean } {
 
 /** Replaces image-derived fields with pinned 3D catalogue points; keeps only explicit named identities. */
 export async function prepareNebulaCatalogueField(root: string, pin: { path: string; sha256: string },
-  inputFrame: DensityVolumeFrame, existing: readonly PreparedCataloguePoint[]) {
+  inputFrame: DensityVolumeFrame, existing: readonly PreparedCataloguePoint[], anchorPoints?: readonly PreparedCataloguePoint[]) {
   const { input, field } = await readPinned(root, pin), frame = parseDensityVolumeFrame(inputFrame), s = field.selection;
   if (frame.referenceFrame !== 'sun-icrf') throw new TypeError('Gaia catalogue fields require the Sun ICRF reference frame.');
+  if (s.retainedAppearance === 'anchor' && !anchorPoints) throw new TypeError('Retained anchor photometry requires its source points.');
+  const anchors = new Map((anchorPoints ? validatePreparedCataloguePoints({frame,points:anchorPoints}).points : []).map(point => [point.id,point]));
   const selected = s.retainIds.map(id => {
     const matches = existing.filter(point => point.id === id);
     if (matches.length !== 1) throw new TypeError(`Retained catalogue identity must occur exactly once: ${id}`);
-    return matches[0]!;
+    const point = matches[0]!;
+    if (s.retainedAppearance !== 'anchor') return point;
+    const anchor = anchors.get(id);
+    if (!anchor || anchor.positionUnits.some((value,axis) => value !== point.positionUnits[axis]))
+      throw new TypeError(`Retained anchor must preserve the source geometry: ${id}`);
+    return anchor;
   });
   const retained = validatePreparedCataloguePoints({ frame, points: selected }).points;
   const rotation = worldRotationFromQuaternion(frame.localToReferenceXyzw), inverse = transposeWorldRotation(rotation);
@@ -177,6 +186,7 @@ export async function prepareNebulaCatalogueField(root: string, pin: { path: str
     astrometry: 'ICRS directions propagated by tangent-vector Gaia pmra (mu_alpha*cos(dec)) and pmdec in Julian years; null components are zero. Distance held at the Bailer-Jones geometric posterior median; no radial velocity or perspective acceleration. Gaia TCB epoch approximated in TT Julian years.',
     distance: 'Bailer-Jones et al. 2021 EDR3 geometric posterior medians, not cluster membership. Original lower/upper posterior quantiles remain in the pinned source; uncertainties do not become fabricated depth scatter.',
     retainedDepth: 'Explicit retained points keep their pre-existing physical positions and depth provenance; no Gaia distance is assigned to them. Angular matches suppress duplicate field rows only.',
+    retainedAppearance: s.retainedAppearance === 'anchor' ? 'Retained cores use their detecting source aperture photometry in every lens, including where a selected image has no coverage. Positions remain fixed; colors are source display colors, not measurements in the selected spectral band.' : 'Retained sources preserve the selected lens material.',
     coverage: 'Authored sphere and smoothstep outer feather in three physical dimensions; independent of nebula image bounds. Brightness budget includes retained points.',
     photometry: 'Measured Gaia G controls display area via diameter proportional to 10^(-0.2*(G-referenceMagnitude)); physical display footprint calibrated at source distance and reference focal length. These are display footprints, not stellar diameters. Faint-end opacity uses a separate smoothstep taper.',
     color: { source: 'https://arxiv.org/abs/2107.08734', method: 'Cardiel et al. 2021 Table 1 RGB polynomial; relative fluxes normalized to maximum then sRGB encoded for CSS display.',
