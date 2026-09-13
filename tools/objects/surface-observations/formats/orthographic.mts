@@ -10,21 +10,18 @@ import { decodeIsis2Qube } from '../../terrestrial-layers/isis2-qube.mts';
 const CONTEXT = 'orthographic observation';
 const parseOrthographicLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text }),
   frames: array(shape({ id: text, path: text, coordinatePaths: array(text) })), grid: shape({ ...dimensions, pixelToSource: array(number) }),
-  maximumCoordinateErrorMeters: number, transfer: shape({ maximumSourceDistanceMeters: number }), display: parseDisplay });
+  maximumCoordinateErrorMeters: number, display: parseDisplay });
 const lensPaths = (recipe: ReturnType<typeof parseOrthographicLens>) => recipe.frames.flatMap(frame => [frame.path, ...frame.coordinatePaths]);
 
 function validateOrthographicRecipe(value: unknown, sourceGeometry: unknown) {
-  checkKeys(value, ['id', 'format', 'consumer', 'metadata', 'frames', 'grid', 'maximumCoordinateErrorMeters', 'transfer', 'display'], [...OPTIONAL_LENS_KEYS], CONTEXT);
+  checkKeys(value, ['id', 'format', 'consumer', 'metadata', 'frames', 'grid', 'maximumCoordinateErrorMeters', 'display'], [...OPTIONAL_LENS_KEYS], CONTEXT);
   for (const frame of requireArray(requireRecord(value).frames)) checkKeys(frame, ['id', 'path', 'coordinatePaths'], [], `${CONTEXT} frame`);
-  checkKeys(requireRecord(value).transfer, ['maximumSourceDistanceMeters'], [], `${CONTEXT} transfer`);
   const recipe = decodeProfile(parseOrthographicLens, value, 'Invalid source-registered orthographic observation.'), geometry = parseSurfaceGeometry(sourceGeometry);
   // An orthophoto is one registered image with its three coordinate cubes; it has no mosaic selection.
-  validateEnvelope(recipe, lensPaths(recipe), { selections: [], displays: ['displayRange'], maximumFrames: 1, maximumLevelGain: 1, samplesPerTriangle: 'optional' }, CONTEXT);
+  validateEnvelope(recipe, lensPaths(recipe), { selections: [], displays: ['displayRange'], maximumFrames: 1, maximumLogMad: .3, maximumLevelGain: 1, samplesPerTriangle: 'optional' }, CONTEXT);
   if (recipe.format !== 'isis2-orthographic' || recipe.frames[0].coordinatePaths.length !== 3 ||
       geometry?.format !== 'image-plane-dem' || geometry.sourceTopology !== 'open' ||
       !Number.isFinite(recipe.maximumCoordinateErrorMeters) || recipe.maximumCoordinateErrorMeters <= 0 ||
-      !Number.isFinite(recipe.transfer.maximumSourceDistanceMeters) || recipe.transfer.maximumSourceDistanceMeters <= 0 ||
-      recipe.transfer.maximumSourceDistanceMeters > geometry.simplification.maximumErrorMeters ||
       !Array.isArray(recipe.grid?.pixelToSource) || recipe.grid.pixelToSource.length !== 4 || !recipe.grid.pixelToSource.every(Number.isFinite) ||
       recipe.grid.pixelToSource[0] <= 0 || recipe.grid.pixelToSource[2] >= 0) {
     throw new TypeError('Invalid source-registered orthographic observation.');
@@ -34,7 +31,7 @@ function validateOrthographicRecipe(value: unknown, sourceGeometry: unknown) {
 export const orthographicFormat: SurfaceObservationFormat = {
   validate: validateOrthographicRecipe,
   paths: value => lensPaths(parseOrthographicLens(value)),
-  async load(value, { sourceDirectory, radial, config }) {
+  async load(value, { sourceDirectory, radial }) {
     const recipe = parseOrthographicLens(value), frameRecipe = recipe.frames[0], mesh = radial.grid;
     const rasters = await Promise.all([frameRecipe.path, ...frameRecipe.coordinatePaths].map(async path => decodeIsis2Qube(await readFile(resolve(sourceDirectory, path)), recipe.grid)));
     const [photo, x, y, z] = rasters;
@@ -74,11 +71,10 @@ export const orthographicFormat: SurfaceObservationFormat = {
       report: { id: frameRecipe.id, path: frameRecipe.path, camera, geometry: { source: 'registered-posts' },
         registration: { coordinatePixels, maximumCoordinateErrorMeters, completeSourcePostBijection: true,
           method: 'Every XYZ pixel identifies one released terrain post; every terrain post is accounted for.' } } };
-    return { frames: [frame], exceeded: [], policy: { format: recipe.format, maximumSourceDistanceMeters: recipe.transfer.maximumSourceDistanceMeters, precheckDisplayPoint: false,
+    return { frames: [frame], exceeded: [], policy: { format: recipe.format,
       selection: 'single', samplesPerTriangle: 8, display: { range: 'authored', low, high, units: 'Mission orthophoto brightness; original illumination retained. No albedo interpretation.' },
       photometry: { model: 'retained-observation', maximumGain: 1 },
-      limits: { maximumSourceDistanceMeters: recipe.transfer.maximumSourceDistanceMeters, maximumCoordinateErrorMeters: recipe.maximumCoordinateErrorMeters,
-        derived: { maximumSourceDistanceMeters: config.geometry.radialTerrain.simplification.maximumErrorMeters } },
+      limits: { maximumCoordinateErrorMeters: recipe.maximumCoordinateErrorMeters },
       limitations: 'Orthophoto from the rescued mission website, independently registered to the reviewed DEM. Radiometric calibration is not requalified.' } };
   },
 };

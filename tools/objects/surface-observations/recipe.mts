@@ -42,6 +42,8 @@ export interface EnvelopeRules {
   displays: readonly ('percentiles' | 'displayRange')[];
   maximumFrames: number;
   maximumLevelGain: number;
+  /** The widest robust spread of an accepted overlap's log ratios. */
+  maximumLogMad: number;
   samplesPerTriangle: 'required' | 'optional';
 }
 
@@ -57,7 +59,7 @@ export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[],
       !paths.every(safePath) || new Set(paths).size !== paths.length ||
       mosaic !== (recipe.selection !== undefined) || mosaic !== (levels !== undefined) || (recipe.selection !== undefined && !rules.selections.includes(recipe.selection)) ||
       (levels !== undefined && (!Number.isInteger(levels.minimumPairs) || levels.minimumPairs < 64 || levels.minimumPairs > 10000 ||
-        !positive(levels.maximumLogMad) || levels.maximumLogMad > .3 || !(levels.maximumGain >= 1 && levels.maximumGain <= rules.maximumLevelGain) ||
+        !positive(levels.maximumLogMad) || levels.maximumLogMad > rules.maximumLogMad || !(levels.maximumGain >= 1 && levels.maximumGain <= rules.maximumLevelGain) ||
         (levels.samplesPerTriangle === undefined ? rules.samplesPerTriangle === 'required'
           : !Number.isInteger(levels.samplesPerTriangle) || levels.samplesPerTriangle < 4 || levels.samplesPerTriangle > 64) ||
         (levels.maximumAngleDegrees !== undefined && (!positive(levels.maximumAngleDegrees) || levels.maximumAngleDegrees >= 90)))) ||
@@ -66,13 +68,12 @@ export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[],
       (kind === 'percentiles' && (range[0] < 0 || range[1] > 100))) throw new TypeError(`Invalid source-bound ${context}.`);
 }
 
-/** Transfer limits for a camera lens: source distance within the mesh error, one form of contributor separation, visibility within a metre
- * and emission below the horizon. */
-export function validateTransfer(transfer: { maximumSourceDistanceMeters: number; maximumSeparationMeters?: number; maximumSeparationFootprints?: number; visibilityToleranceMeters: number; maximumEmissionDegrees: number },
+/** Transfer limits for a camera lens on source-preserving terrain: one form of contributor separation, visibility within a metre and
+ * emission below the horizon. */
+export function validateTransfer(transfer: { maximumSeparationMeters?: number; maximumSeparationFootprints?: number; visibilityToleranceMeters: number; maximumEmissionDegrees: number },
   geometry: { simplification?: { method?: string; maximumErrorMeters: number } } | undefined, context: string) {
-  checkKeys(transfer, ['maximumSourceDistanceMeters', 'visibilityToleranceMeters', 'maximumEmissionDegrees'], ['maximumSeparationMeters', 'maximumSeparationFootprints', 'interpretation'], `${context} transfer`);
+  checkKeys(transfer, ['visibilityToleranceMeters', 'maximumEmissionDegrees'], ['maximumSeparationMeters', 'maximumSeparationFootprints', 'interpretation'], `${context} transfer`);
   if (geometry?.simplification?.method !== 'source-meshoptimizer' ||
-      !positive(transfer.maximumSourceDistanceMeters) || transfer.maximumSourceDistanceMeters > geometry.simplification.maximumErrorMeters ||
       !(transfer.maximumSeparationFootprints === undefined ? positive(transfer.maximumSeparationMeters)
         : transfer.maximumSeparationMeters === undefined && positive(transfer.maximumSeparationFootprints) && transfer.maximumSeparationFootprints <= MAXIMUM_SEPARATION_FOOTPRINTS) ||
       !positive(transfer.visibilityToleranceMeters) || transfer.visibilityToleranceMeters > 1 ||

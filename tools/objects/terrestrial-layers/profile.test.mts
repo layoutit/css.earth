@@ -39,17 +39,14 @@ test('georeferenced photographs bind quality, physical distances and bounded dis
  }
 });
 
-test('an alternative model owns its observation mesh, transfer limit, and sampler state', async () => {
+test('an alternative model owns its observation mesh and sampler state', async () => {
   const profile = await read('comet-67p');
   const alternative = structuredClone(profile.geometry.radialTerrain);
-  alternative.simplification.maximumErrorMeters = 60;
   profile.geometry.radialTerrainAlternatives = [{ ...alternative, lensId: 'osiris' }];
-  // The OSIRIS transfer limit now exceeds the default mesh bound (50 m) and
-  // stays within its own model's bound; the other 50 m lenses are untouched.
-  profile.raster.surfaceObservations.find((recipe: {id: string}) => recipe.id === 'osiris').transfer.maximumSourceDistanceMeters = 55;
-  assert.doesNotThrow(() => parseTerrestrialProfile(profile), 'OSIRIS transfer limit belongs to its declared alternative mesh');
-  profile.geometry.radialTerrainAlternatives[0].simplification.maximumErrorMeters = 49;
-  assert.throws(() => parseTerrestrialProfile(profile), /source-bound/, 'the alternative mesh enforces the transfer limit');
+  assert.doesNotThrow(() => parseTerrestrialProfile(profile), 'OSIRIS samples its declared alternative mesh');
+  // The OSIRIS lens validates against its own model, which must preserve the source mesh like the default.
+  delete profile.geometry.radialTerrainAlternatives[0].simplification.method;
+  assert.throws(() => parseTerrestrialProfile(profile), /source-bound/, 'the alternative mesh must preserve its source');
 
   const observation = { samplePoint() { return null; } };
   const base: {observationSurfaces?: Map<string, typeof observation>} = {};
