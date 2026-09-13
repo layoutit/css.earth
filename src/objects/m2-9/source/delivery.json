@@ -22,7 +22,7 @@
     "arcsecPerUnit": 5.803502910447201
   },
   "sourceUrl": "https://esahubble.org/images/opo9738a/",
-  "description": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted 650pc model distance is uncertain; published expansion distance 1300\u00b1200pc would double this physical size. The accepted baseline contains no stellar catalogue.",
+  "description": "Axially symmetric, image-conditioned Hubble emission model; single-image depth and inclination remain unmeasured. Adopted 650 pc model distance is uncertain; the published expansion distance of 1300\u00b1200 pc would double this physical size. The image baseline supplies no stellar catalogue; an independent Gaia field supplies the surrounding stars.",
   "defaultLens": "hst-optical",
   "framingRadiusUnits": 5,
   "acceptedLabResult": "m2-9-inferred",

@@ -1,8 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import type { EvidenceInputs, EvidenceSource } from '../evidence-fusion/model';
 import { compilerTarget, readCompilerTargetControls } from './target';
 import { createEmissionWindowSampler, type EmissionWindow } from './emission-window';
+import { readCompilerRecipe } from './model';
 function inputs(width = 100, height = 100): EvidenceInputs {
   const length = width * height;
   const plane = () => ({ signal: new Float32Array(length), coverage: new Uint8Array(length), noiseSigma: 1 });
@@ -45,6 +47,37 @@ test('angular footprint reliability suppresses a source edge while retaining int
   assert.equal(after.coverage[0], 0);
   assert.equal(after.target[0], 0);
   assert.deepEqual(after.bounds, before.bounds);
+});
+test('the saved Lagoon recipe fades every source boundary and the common outer window while retaining interior light', async () => {
+  const recipe = readCompilerRecipe(JSON.parse(await readFile('labs/nebula/models/m8/compiler.json', 'utf8')));
+  const ids = Object.keys(recipe.sourceWeights ?? {}), input = inputs(128, 128);
+  assert.ok(ids.length > 0);
+  input.grid.arcsecondsPerPixel = 60; input.grid.fieldArcminutes = [128, 128];
+  for (let y = 16; y < 112; y++) for (let x = 16; x < 112; x++) pixel(input, x, y,
+    (x < 20 || x >= 60 && x < 68) && y >= 50 && y < 80 ? 200 : 0);
+  input.sources = ids.map(id => ({ ...structuredClone(input.sources[0]!), id }));
+  const original = structuredClone(input), edge = 60 * 128 + 16, center = 60 * 128 + 64;
+  const sourceEdges = (controls: typeof recipe.targetControls) => {
+    for (let index = 0; index < ids.length; index++) {
+      const weights = ids.map((_id, i) => i === index ? 1 : 0), before = compilerTarget(input, weights);
+      const after = compilerTarget(input, weights, [0, 0], controls);
+      assert.ok(after.target[edge]! < before.target[edge]! * .08, `${ids[index]} retains a hard source boundary`);
+      assert.equal(after.target[center], before.target[center]);
+      assert.deepEqual(after.coverage, before.coverage);
+    }
+  };
+  sourceEdges(recipe.targetControls);
+  assert.throws(() => sourceEdges(undefined), /hard source boundary/, 'Removing the saved controls must fail the boundary check.');
+  assert.ok(recipe.emissionWindow);
+  const outerEdge = (featherArcsec: number) => {
+    const sample = createEmissionWindowSampler({ sourceId: recipe.emissionWindow!.sourceId, featherArcsec,
+      polygonArcsec: [[-3000, -3000], [3000, -3000], [3000, 3000], [-3000, 3000]], interpretation: 'Configured outer-fade test.' });
+    assert.equal(sample(-3000, 0), 0); assert.equal(sample(0, 0), 1);
+    assert.ok(sample(-2910, 0) < .15, 'The old 90 arcsecond outer strip must fade gradually.');
+  };
+  outerEdge(recipe.emissionWindow.featherArcsec);
+  assert.throws(() => outerEdge(90), /fade gradually/, 'Restoring the narrow historical feather must fail.');
+  assert.deepEqual(input, original);
 });
 test('target controls reject unknown sources, malformed values and unsupported switches', () => {
   for (const v of [{ sources: { observed: { backgroundSpread: -1, edgeTaperArcsec: 0 } } },

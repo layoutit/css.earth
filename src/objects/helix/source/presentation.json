@@ -5,15 +5,15 @@
   "defaultLens": "eso-wfi",
   "bank": {
     "path": "src/objects/helix/prepared/lenses.json",
-    "sha256": "60f1a0053b12adf61d1ce4a225e723ff586f6ac32a3225ffa82d93f0be3d22cc",
-    "bytes": 3185043
+    "sha256": "ec721e6c151bdc4ec26b1ca042ffb92797c6e4049aa1de4c61f1183da6e14989",
+    "bytes": 3182247
   },
   "recipes": [
     {
       "id": "recipe-1",
       "path": "src/objects/helix/source/delivery.json",
-      "sha256": "67cfca0cb284dbfc9a2b365dd34ad7b6b0da2fc7d4cf40b2f6c13c6a62eb4f7d",
-      "bytes": 1718
+      "sha256": "cf8a4a8675cd1aa5b6fcdf254aa1950db47384f6964a328e181e6d5fa3c15a9f",
+      "bytes": 1875
     },
     {
       "id": "recipe-2",
@@ -24,8 +24,8 @@
     {
       "id": "recipe-3",
       "path": "labs/nebula/models/helix/compiler.json",
-      "sha256": "6589cf8db6deb4f418e8b9d33fbc1cdd9e7fe248fb3d7e1af49afd34c57adac2",
-      "bytes": 1035
+      "sha256": "ce2aa4f55bc2569784b50cae163ecc98502fc3f76add6c07b0a4fd64b6a3ff85",
+      "bytes": 1329
     },
     {
       "id": "recipe-4",

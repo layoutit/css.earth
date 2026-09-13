@@ -106,7 +106,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
   let fieldStars: Awaited<ReturnType<typeof prepareNebulaCatalogueField>>['receipt'] | undefined;
   try {
     const add = async (id: string,label: string,sourceUrl: string,volumePath: string,volumeSha: string,
-      frame: ReturnType<typeof embedNebulaFrame>,stars: PreparedVolumeLens['stars']) => {
+      frame: ReturnType<typeof embedNebulaFrame>,stars: PreparedVolumeLens['stars'],anchorPoints?: PreparedVolumeLens['stars']['points']) => {
       const raw = record(JSON.parse((await pinned(root,{path:volumePath,sha256:volumeSha})).toString()));
       const volume = validatePreparedCssVolume(raw.data ?? raw);
       for (const resource of volume.resources) {
@@ -120,7 +120,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
         writeResource:(path,bytes)=>put(local(staging,path),bytes),
       });
       if (recipe.fieldStars) {
-        const field = await prepareNebulaCatalogueField(root,recipe.fieldStars,frame,stars.points);
+        const field = await prepareNebulaCatalogueField(root,recipe.fieldStars,frame,stars.points,anchorPoints);
         if (field.receipt.id !== recipe.id) throw new TypeError('Catalogue field and nebula delivery identities differ.');
         stars = {frame,points:field.points}; fieldStars = field.receipt;
       }
@@ -139,6 +139,9 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
         { progress: message => console.log(`${recipe.id} ${message}`) });
       sourceResult = result.id;
       const frame = embedNebulaFrame(result.scene.frame,recipe.sky,result.scene.coordinates.localOriginArcsec);
+      const anchorPoints = result.scene.stars.map(star => ({id:star.id,positionUnits:reflectNebulaPoint(star.positionUnits),
+        colorCss:`#${star.rgb.map(n=>n.toString(16).padStart(2,'0')).join('')}`,opacity:star.alpha,sizePx:star.widthPx??1,
+        ...(star.diameterUnits === undefined?{}:{diameterUnits:star.diameterUnits})}));
       for (const lens of result.scene.lenses) {
         const source = result.sources.find(source => source.id === lens.id)!;
         const points = result.scene.stars.map(star => {
@@ -147,7 +150,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
             colorCss:`#${material.rgb.map(n=>n.toString(16).padStart(2,'0')).join('')}`,
             opacity:material.alpha,sizePx:star.widthPx??1,...(material.diameterUnits === undefined?{}:{diameterUnits:material.diameterUnits}) };
         });
-        await add(lens.id,lens.label,source.page,lens.volume.path,lens.volume.sha256,frame,{frame,points});
+        await add(lens.id,lens.label,source.page,lens.volume.path,lens.volume.sha256,frame,{frame,points},anchorPoints);
       }
     } else {
       if (!recipe.symmetryDirectory) throw new TypeError('Missing symmetry output owner.');

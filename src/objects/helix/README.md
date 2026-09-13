@@ -14,4 +14,14 @@ The shared dataset cards use the [source manifest](source/manifest.json) and [pr
 
 The 14 September 2026 app delivery adds 1,500 shared lights from the pinned [stellar field](source/stellar-field.json): 6,627 Gaia DR3 rows inside a 50 pc sphere, selected at G < 16. The [shared method](../../../docs/nebulae/stellar-fields.md) records proper-motion propagation, Bailer-Jones distance uncertainty, photometric display scaling, radial fading and the 1,500-point budget. Stars are independent of the image footprint and are not confirmed nebula members.
 
-The verified cloud replay is `26c8c2b43cd55398b8ee3489e66ae8944a867f52b8cfa5a72f0af3d4361b9597`. Resource hashes and source-card bindings passed with the new catalogue; cloud geometry and spectral images are unchanged by this starfield replacement. No new clean-cache native-processing claim is made.
+The current cloud replay is `2794e4cc5c3a11f4fb19c7290d75b721362c9f4fdce8686ba58fdbc22caba292`. Its source-union selection supersedes the WFI-only `26c8c2b4…` star set. Resource hashes and source-card bindings passed with the new catalogue; cloud geometry and spectral images are unchanged by this starfield replacement. No new clean-cache native-processing claim is made.
+
+The current set reserves 34 points for bright cores in the registered WFI/VISTA/wide-image union, including the central star, and uses the remaining 1,466 points for the
+surrounding field. Selection, duplicate suppression and matching evidence are in
+the stellar-field provenance. The wider-source cores remain visible even in a lens without image coverage.
+One edge detection has compact VISTA photometry but no close Gaia match.
+These cores stay at their conditional
+halo depths; most matched stars are actually behind the adopted Helix distance.
+Residual stellar halos remain a cloud-material limitation. The shared field test
+proves that the bright cores survive the budget and remain fixed across lenses;
+it does not turn their illustrative placements into catalogue distances.

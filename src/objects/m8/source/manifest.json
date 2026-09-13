@@ -144,8 +144,8 @@
       "title": "Lagoon Nebula adopted world placement",
       "credit": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2",
       "acquisition": "Checked-in delivery record. The pin identifies our placement metadata, not downloaded paper bytes; the adopted value and uncertainty are explained in the body README.",
-      "expectedSha256": "07b4220fda024998a0cf3ddad62bf873322c4640c7c843372df1ce454e2aa243",
-      "expectedBytes": 1932,
+      "expectedSha256": "db90282e9c680d25b0e9bbbcab022832c7575dac33eb26bf0cfe38d352a66b04",
+      "expectedBytes": 2002,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -197,8 +197,8 @@
     {
       "id": "document-1",
       "path": "src/objects/m8/source/delivery.json",
-      "expectedSha256": "07b4220fda024998a0cf3ddad62bf873322c4640c7c843372df1ce454e2aa243",
-      "expectedBytes": 1932,
+      "expectedSha256": "db90282e9c680d25b0e9bbbcab022832c7575dac33eb26bf0cfe38d352a66b04",
+      "expectedBytes": 2002,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -217,7 +217,7 @@
     {
       "id": "document-3",
       "path": "src/objects/m8/source/presentation.json",
-      "expectedSha256": "7e05c3b20d9d5798d1e79a2b7bbc78244a4a6074e157f042f53fa5e55214e780",
+      "expectedSha256": "55aa9596fba13fee518bf561870b524620068dee3e70d83a36d267d81d06d730",
       "expectedBytes": 6673,
       "sourceBinding": {
         "kind": "local",

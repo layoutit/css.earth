@@ -111,15 +111,15 @@
   ],
   "bank": {
     "path": "src/objects/m8/prepared/lenses.json",
-    "sha256": "a2508c927c95ebc87ef3ccd2335e790dd0b2b07c70dce60849549584c0339455",
-    "bytes": 2942060
+    "sha256": "3bdbd0a131791ba83048ded4a997bd89c8d529a03bba449a880d453729432588",
+    "bytes": 3326216
   },
   "recipes": [
     {
       "id": "recipe-1",
       "path": "src/objects/m8/source/delivery.json",
-      "sha256": "07b4220fda024998a0cf3ddad62bf873322c4640c7c843372df1ce454e2aa243",
-      "bytes": 1932
+      "sha256": "db90282e9c680d25b0e9bbbcab022832c7575dac33eb26bf0cfe38d352a66b04",
+      "bytes": 2002
     },
     {
       "id": "recipe-2",
@@ -130,8 +130,8 @@
     {
       "id": "recipe-3",
       "path": "labs/nebula/models/m8/compiler.json",
-      "sha256": "4532a02e811169574bb6a8ef90bb192bbb64f8ca85d213c1f51d0dd0efccb337",
-      "bytes": 1232
+      "sha256": "2eccce756cf2d5448dabcadefefd2dd7aa5ed04821a540d1e3aea53045b94524",
+      "bytes": 1511
     },
     {
       "id": "recipe-4",

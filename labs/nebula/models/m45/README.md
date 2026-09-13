@@ -4,7 +4,7 @@
 
 Reconstruction now has an additional **Optical composite · NOIRLab + Niittee** research lens. Niittee's registered optical footprint covers 99.84% of the current model's projected emission, compared with 60.14% for NOIRLab alone. Native NOX and an image composite are prepared; the old cloud and catalogue stars are retained. [Method, exact result, source credits, rejected trials and replay limits](optical-composite-notes.md).
 
-The composed image preserves the wide surrounding dust and adds central NOIRLab luminance detail without a broad rectangular seam. The existing 3D material averages colour per component, so it cannot retain all that fine image detail. Its softness and thin edge-on appearance remain unresolved. This is a local comparison, not an accepted production reconstruction. Earlier Alignment-only status below is historical and is superseded by this section.
+The composed image preserves the wide surrounding dust and adds central NOIRLab luminance detail without a broad rectangular seam. The existing 3D material averages colour per component, so it cannot retain all that fine image detail. Its softness and thin edge-on appearance remain unresolved. The shared app now has a reproducible delivery recipe for this comparison; mounting it does not establish a recovered dust-density model or remove those visual limits. [App source record](../../../../src/objects/m45/README.md). Earlier Alignment-only status below is historical and is superseded by this section.
 
 ## Catalogue stars and wider optical comparison · 13 September 2026
 

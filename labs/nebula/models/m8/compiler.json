@@ -7,7 +7,7 @@
   "structureRecipe": "labs/nebula/models/m8/processing-structures.json",
   "structureCatalogue": ".local/nebula-lab/observations/m8-processed/structures/catalogue.json",
   "defaultSourceId": "eso-optical",
-  "emissionWindow": { "sourceId": "eso-optical", "featherArcsec": 90 },
+  "emissionWindow": { "sourceId": "eso-optical", "featherArcsec": 450 },
   "maximumStars": 650,
   "starCatalogue": {
     "sourceIds": ["eso-optical", "eso-vista"],
@@ -24,5 +24,12 @@
     "eso-optical": 1,
     "eso-vista": 0.15,
     "spitzer-mid-infrared": 0.8
+  },
+  "targetControls": {
+    "sources": {
+      "eso-optical": { "backgroundSpread": 1.5, "edgeTaperArcsec": 450 },
+      "eso-vista": { "backgroundSpread": 1.5, "edgeTaperArcsec": 240 },
+      "spitzer-mid-infrared": { "backgroundSpread": 1.5, "edgeTaperArcsec": 240 }
+    }
   }
 }
