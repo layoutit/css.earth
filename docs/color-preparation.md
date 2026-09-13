@@ -68,11 +68,14 @@ provides the full 473-package disposition and its earlier reviewed revision;
 this color repair does not promote its unresolved registration cases:
 
 - `controlled-shape-color`: Pan, Atlas, Daphnis, Prometheus, Pandora, Janus,
-  Epimetheus, Hyperion and Proteus. The cameras now produce floating samples for
-  color composition, rather than pre-quantized monochrome images. Native labels
-  must agree with the selected filters and calibrated reflectance units. All
-  complete triplets share one overlap weight. The existing monochrome route
-  remains separate.
+  Epimetheus, Hyperion and Proteus, through the
+  [shared surface-observation pipeline](../tools/objects/surface-observations/README.md).
+  Each band set names its red, green and blue photographs, and native labels
+  must agree with the selected filters and calibrated reflectance units. A point
+  is colored only where all three bands qualify, and it keeps the one band set
+  the lens selects. Level matching scales the three bands by one gain, so their
+  measured ratios stay. The bands remain floating through the shared footprint,
+  photometry and surface transfer; the same encoder finishes them.
 - `terrestrial-observed-color`: Europa's Galileo I/F bands. Photometry and
   common brightness matching run before the final encoding. The already prepared
   monochrome base is decoded only as a display reference for that matching;

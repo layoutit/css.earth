@@ -52,3 +52,21 @@ test('NEAR MSI requires raw detector companions and bounded camera refinement wi
     assert.throws(() => parseTerrestrialProfile(changed), /source-bound/);
   }
 });
+
+test('a controlled camera names a published model or a disk function, never a mix, and filter colour refuses a single-filter model', () => {
+  const ida = authored.find(body => body.id === 'ida'), proteus = authored.find(body => body.id === 'proteus');
+  assert.ok(ida && proteus);
+  const calibrated = ida.profile.raster.surfaceObservations.findIndex(lens => fixtureRecord(lens).id === 'calibrated');
+  const color = proteus.profile.raster.surfaceObservations.findIndex(lens => fixtureRecord(lens).id === 'filter-color');
+  assert.ok(calibrated >= 0 && color >= 0);
+  const published = structuredClone(fixtureRecord(ida.profile.raster.surfaceObservations[calibrated], 'photometry'));
+  const refused: [string, typeof ida, number, (lens: unknown) => void][] = [
+    ['mixed photometry block', ida, calibrated, lens => { fixtureRecord(lens, 'photometry')['weight'] = 0.5; }],
+    ['published emission limit beyond the transfer limit', ida, calibrated, lens => { fixtureRecord(lens, 'photometry', 'limits')['maximumEmissionDegrees'] = 89; }],
+    ['single-filter model on filter colour', proteus, color, lens => { fixtureRecord(lens)['photometry'] = structuredClone(published); }],
+  ];
+  for (const [name, body, index, change] of refused) {
+    const changed = structuredClone(body.profile); change(changed.raster.surfaceObservations[index]);
+    assert.throws(() => parseTerrestrialProfile(changed), /source-bound/, `${body.id} accepted a ${name}`);
+  }
+});

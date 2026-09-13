@@ -51,7 +51,7 @@ Uncorrected SEDR absolute pointing is insufficient to locate this tiny disc prec
 
 ## Illumination and coverage
 
-The shared controlled-shape-camera recipe applies a bounded 50/50 Lommel-Seeliger/Lambert normalization to calibrated I/F. The display maximum of 0.065 is a visualization scale, not a measured maximum reflectance.
+The shared controlled-shape-camera recipe applies a bounded 50/50 Lommel-Seeliger/Lambert normalization to calibrated I/F. The display range of 0–0.0594 I/F, the 99.5th percentile of displayed samples, is a visualization scale, not a measured maximum reflectance.
 
 Sky offset and robust noise were measured in a local empty image rectangle. Only edge-connected low-signal sky is masked, so isolated dark terrain is not automatically erased. A two-pixel boundary inset accounts for pointing/shape uncertainty. Samples beyond 75° incidence, 70° emission, or 2.5× correction gain are withheld. There is no cross-observation level matching because this dataset uses one frame.
 
