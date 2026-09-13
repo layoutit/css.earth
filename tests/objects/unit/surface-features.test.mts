@@ -9,7 +9,7 @@ import { mapDirection } from "../../../site/surface-minimap-math.mts";
 // Every body that declares a prepared feature catalogue must ship it pinned, anchored on its
 // mesh through its own map axes and edge, and validated by the runtime parser. Bodies without
 // the capability are simply absent here; no body is allowed a broken one.
-const roots = new URL("../../../src/planets/", import.meta.url);
+const roots = new URL("../../../src/objects/", import.meta.url);
 const bodies: string[] = [];
 for (const entry of await readdir(roots, { withFileTypes: true })) {
   if (!entry.isDirectory()) continue;

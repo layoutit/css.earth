@@ -8,8 +8,8 @@ import type { SharedBank, SharedBankKind, SharedExtractionRule, SharedReference 
 
 /** Bank owners: the Sun package holds solar-system point photometry and labels; the Milky Way holds the star catalogue. */
 export const SHARED_BANK_DIRECTORIES: Readonly<Record<SharedBankKind, string>> = Object.freeze({
-  'planet-points': 'src/planets/sun/prepared/shared/planet-points',
-  'heliocentric-labels': 'src/planets/sun/prepared/shared/heliocentric-labels',
+  'planet-points': 'src/objects/sun/prepared/shared/planet-points',
+  'heliocentric-labels': 'src/objects/sun/prepared/shared/heliocentric-labels',
   'catalogue-stars': 'src/objects/milky-way/prepared/shared/catalogue-stars',
 });
 export const sha256Text = (text: string | Uint8Array): string => createHash('sha256').update(text).digest('hex');

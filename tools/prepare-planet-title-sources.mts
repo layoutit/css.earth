@@ -25,7 +25,7 @@ export async function preparePlanetTitleSources({
     const extension = authored ? "json" : "mjs";
     const destination = resolve(
       projectRoot,
-      `src/planets/${planet.id}/source/presentation/title-mark.${extension}`,
+      `src/objects/${planet.id}/source/presentation/title-mark.${extension}`,
     );
     await writeFile(destination, authored
       ? `${JSON.stringify({ schema: "cssearth-title-source@1", ...source }, null, 2)}\n`
@@ -47,7 +47,7 @@ export async function preparePlanetTitleSources({
   for (const planet of OBJECTS) {
     let label = planet.name;
     try {
-      const content = requireRecord(JSON.parse(await readFile(resolve(projectRoot, `src/planets/${planet.id}/source/content/object.json`), 'utf8')));
+      const content = requireRecord(JSON.parse(await readFile(resolve(projectRoot, `src/objects/${planet.id}/source/content/object.json`), 'utf8')));
       label = requireString(content.displayName, `${planet.id} display name`);
     } catch (error) {
       if (!hasErrorCode(error, 'ENOENT')) throw error;

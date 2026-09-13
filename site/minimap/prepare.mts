@@ -4,7 +4,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { eclipticJ2000ToIcrf } from '@cssearth/astronomy';
 import { OBJECTS } from '../objects.mts';
-import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import context from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import starDescriptor from '../../src/objects/stellar-neighbourhood/object.json' with { type: 'json' };
 import { loadPreparedCssPointField } from '../../src/renderers/css/dist/index.js';
 import volume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };

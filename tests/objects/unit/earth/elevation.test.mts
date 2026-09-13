@@ -10,7 +10,7 @@ import { gzipSync } from 'node:zlib';
 import sharp from 'sharp';
 import { decodeElevationDods, readElevationGrid, elevationColor, prepareElevationMap } from '../../../../tools/objects/paged-ellipsoid/elevation.mts';
 
-const sourceDirectory = resolve('src/planets/earth/source');
+const sourceDirectory = resolve('src/objects/earth/source');
 const selectedMap=required(config.surface.maps.find(map=>map.name==='earth-topography'));
 assert.ok(selectedMap.scientific?.kind==='gebco-elevation');
 const map={...selectedMap,scientific:selectedMap.scientific};
@@ -91,7 +91,7 @@ test('numeric source interpretation also produces the shipped sidebar map and un
   const raster = await prepareElevationMap({ sourceDirectory, map, width: config.surface.width, height: config.surface.height });
   const minimap = await sharp(raster.data, { raw: raster.info }).resize({ width: 640, withoutEnlargement: true })
     .webp({ quality: 90, alphaQuality: 100, effort: 4, smartSubsample: true }).toBuffer();
-  assert.deepEqual(minimap, await readFile('src/planets/earth/prepared/minimaps/topography.webp'));
+  assert.deepEqual(minimap, await readFile('src/objects/earth/prepared/minimaps/topography.webp'));
   const { data, info } = await sharp('public/scenes/earth/earth-topography-legend.png').raw().toBuffer({ resolveWithObject: true });
   for (const x of [0, 100, 310, 500, 619]) {
     const meters = -10000 + 20000 * x / (info.width - 1);

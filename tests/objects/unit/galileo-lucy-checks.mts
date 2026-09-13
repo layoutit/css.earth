@@ -11,7 +11,7 @@ import { preparePlanetarySystem } from '../../../src/platform/prepare-planetary-
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mts';
 
 export function checkGalileoLucy(id: Parameters<typeof preparePlanetarySystem>[0]["bodyId"]) {
-  const sourceDirectory = resolve('src/planets', id, 'source');
+  const sourceDirectory = resolve('src/objects', id, 'source');
   const read = async (path: string) => JSON.parse((await readFile(resolve(sourceDirectory, path))).toString('utf8'));
   test(`${id}: source closure and representation are consistent`, async () => {
     const source = await createSourceManifest({ planetId: id, planetName: id, sourceRoot: sourceDirectory });
@@ -43,7 +43,7 @@ export function checkGalileoLucy(id: Parameters<typeof preparePlanetarySystem>[0
     const parent = required(system.bodies.find(body => body.id === (id === 'dactyl' ? 'ida' : 'dinkinesh')));
     assert(parent.pointPresentation.samples.every(Number.isFinite));
     assert.equal(parent.illumination.geometricAlbedo, id === 'dactyl' ? .262 : .27);
-    const world = JSON.parse((await readFile('src/planets/sun/prepared/world-context.json')).toString('utf8'));
+    const world = JSON.parse((await readFile('src/objects/sun/prepared/world-context.json')).toString('utf8'));
     const context = world.bodies.find((body: { id: string; }) => body.id === id);
     assert.equal(context.placement, 'approximate');
     assert.equal(context.orbit.centerBodyId, parent.id);

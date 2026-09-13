@@ -27,7 +27,7 @@ const validation = (state: Awaited<ReturnType<typeof loadBodyEpochEphemeris>>): 
 
 test('retained companion states preserve primary centers, solution gravity and independent composition', async () => {
   for (const identity of identities) {
-    const bodyRoot = resolve(projectRoot, 'src/planets', identity.bodyId);
+    const bodyRoot = resolve(projectRoot, 'src/objects', identity.bodyId);
     const state = await loadBodyEpochEphemeris({ bodyRoot, epochJdTt, ...identity });
     const radius = Math.hypot(...state.positionKm);
     assert.ok(radius > identity.radiusRange[0] && radius < identity.radiusRange[1]);
@@ -44,8 +44,8 @@ test('source closure rejects wrong scale, gravity, frames, altered bytes and fal
   const bodyRoot = await mkdtemp(resolve(tmpdir(), 'cssearth-companion-epoch-'));
   t.after(() => rm(bodyRoot, { recursive: true, force: true }));
   await mkdir(resolve(bodyRoot, 'source/validation'), { recursive: true });
-  await cp(resolve(projectRoot, 'src/planets/menoetius/source/orbit'), resolve(bodyRoot, 'source/orbit'), { recursive: true });
-  await cp(resolve(projectRoot, 'src/planets/menoetius/source/validation/epoch-state.json'), resolve(bodyRoot, 'source/validation/epoch-state.json'));
+  await cp(resolve(projectRoot, 'src/objects/menoetius/source/orbit'), resolve(bodyRoot, 'source/orbit'), { recursive: true });
+  await cp(resolve(projectRoot, 'src/objects/menoetius/source/validation/epoch-state.json'), resolve(bodyRoot, 'source/validation/epoch-state.json'));
   const recordPath = resolve(bodyRoot, 'source/validation/epoch-state.json');
   const original = requireRecord(JSON.parse(await readFile(recordPath, 'utf8')), 'Menoetius epoch receipt');
   const load = () => loadBodyEpochEphemeris({ bodyRoot, epochJdTt, ...identity });
@@ -73,7 +73,7 @@ test('source closure rejects wrong scale, gravity, frames, altered bytes and fal
 });
 
 test('Squannit uses its published longitude, retrograde plane and quadratic drift with an analytic velocity', async () => {
-  const bodyRoot = resolve(projectRoot, 'src/planets/squannit');
+  const bodyRoot = resolve(projectRoot, 'src/objects/squannit');
   const parameters = parsePublishedParameters(JSON.parse(await readFile(resolve(bodyRoot, 'source/orbit/published-parameters.json'), 'utf8')));
   const state = await loadBodyEpochEphemeris({ bodyRoot, bodyId: 'squannit', centerBodyId: 'moshup', target: null, center: null, epochJdTt });
   assert.ok(Math.abs(Math.hypot(...state.positionKm) - 2.548) < 1e-12, 'published radar separation in km');
@@ -105,7 +105,7 @@ test('Squannit uses its published longitude, retrograde plane and quadratic drif
 
 test('Romulus retains its actual source projection disagreements and numbered-parent vector', async t => {
   const options = { bodyId: 'romulus', centerBodyId: 'sylvia', target: null, center: null, epochJdTt };
-  const state = await loadBodyEpochEphemeris({ ...options, bodyRoot: resolve(projectRoot, 'src/planets/romulus') });
+  const state = await loadBodyEpochEphemeris({ ...options, bodyRoot: resolve(projectRoot, 'src/objects/romulus') });
   assert.ok(Math.abs(Math.hypot(...state.positionKm) - 1340.6) < 1e-9);
   assert.equal(parent(state).provenance.target, 87);
   assert.equal(requireRecord(parent(state).provenance, 'Romulus parent provenance').targetKind, 'numbered-asteroid');
@@ -116,9 +116,9 @@ test('Romulus retains its actual source projection disagreements and numbered-pa
   const bodyRoot = await mkdtemp(resolve(tmpdir(), 'cssearth-published-epoch-'));
   t.after(() => rm(bodyRoot, { recursive: true, force: true }));
   await mkdir(resolve(bodyRoot, 'source/validation'), { recursive: true });
-  await cp(resolve(projectRoot, 'src/planets/romulus/source/orbit'), resolve(bodyRoot, 'source/orbit'), { recursive: true });
+  await cp(resolve(projectRoot, 'src/objects/romulus/source/orbit'), resolve(bodyRoot, 'source/orbit'), { recursive: true });
   const recordPath = resolve(bodyRoot, 'source/validation/epoch-state.json');
-  const original = requireRecord(JSON.parse(await readFile(resolve(projectRoot, 'src/planets/romulus/source/validation/epoch-state.json'), 'utf8')), 'Romulus epoch receipt');
+  const original = requireRecord(JSON.parse(await readFile(resolve(projectRoot, 'src/objects/romulus/source/validation/epoch-state.json'), 'utf8')), 'Romulus epoch receipt');
   for (const [change, error] of [
     [(r: Record<string, unknown>) => { recordAt(r, 'validation').maxDifferenceMas = 9.85; }, /projection limits/u],
     [(r: Record<string, unknown>) => { recordAt(r, 'validation').scientificPrecisionQualified = true; }, /projection limits/u],
@@ -134,7 +134,7 @@ test('Romulus retains its actual source projection disagreements and numbered-pa
 
 test('SN263 source snapshots retain the outer/inner identities and the independent epoch anchors', async () => {
   const roots = ['sn263-beta', 'sn263-gamma'].map(bodyId => ({
-    bodyId, centerBodyId: 'asteroid-2001-sn263', bodyRoot: resolve(projectRoot, 'src/planets', bodyId), target: null, center: null, epochJdTt,
+    bodyId, centerBodyId: 'asteroid-2001-sn263', bodyRoot: resolve(projectRoot, 'src/objects', bodyId), target: null, center: null, epochJdTt,
   }));
   const states: Awaited<ReturnType<typeof loadBodyEpochEphemeris>>[] = [];
   for (const options of roots) {

@@ -110,7 +110,7 @@ test('small shell attribution records match the checked scientific provenance', 
 
 test('every shared route retains its object sources and the actual environment credits', async () => {
   for (const object of OBJECTS) {
-    const content = SourceEvidence.parse(JSON.parse(await readFile(new URL(`../../src/planets/${object.id}/prepared/content.json`, import.meta.url), 'utf8')));
+    const content = SourceEvidence.parse(JSON.parse(await readFile(new URL(`../../src/objects/${object.id}/prepared/content.json`, import.meta.url), 'utf8')));
     const resources = content.rows('resources').map(source => ({ label: source.text('label'), href: source.text('href'), role: source.text('role'), description: source.text('description') }));
     const sources = sceneSources(resources), byLabel = new Map(sources.map(source => [source.label, source]));
     for (const source of sources) assert.ok(source.role?.trim(), `${object.id}: ${source.label} needs an attribution category`);

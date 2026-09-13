@@ -4,7 +4,7 @@ import {required} from '../../../../tools/test-values.mts';
 import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeSource from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
+import runtimeSource from "../../../../src/objects/mercury/prepared/runtime.json" with {type: "json"};
 import { preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 const pool = (f:Awaited<ReturnType<typeof preparedSelectionFixture>>) => required(f.residency.stats().pools.find((pool: { id: string; }) => pool.id === "lenses"));
 
