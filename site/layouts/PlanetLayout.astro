@@ -56,9 +56,11 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     <ObjectSwatchStyles />
   </head>
   <body data-object-shell={objectRecord.id}>
+    <!--search-shell:start-->
     <div class="planet-ui-layer">
       <slot name="planet-ui" />
     </div>
+    <!--search-shell:end-->
     <div class="planet-viewport">
       <div class="planet-world-stage">
         <main

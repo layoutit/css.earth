@@ -229,6 +229,7 @@
 .planet-sidebar[data-has-destinations] .planet-sidebar-search::-webkit-search-cancel-button { display: none; }
 .planet-destination-result {
   display: grid;
+  text-decoration: none;
   gap: 3px;
   width: 100%;
   min-height: 58px;
