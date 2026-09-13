@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodePds4GeometryCube } from '../../../../tools/objects/terrestrial-layers/pds4-geometry-cube.mts';
-import { calibrateGeoCamera } from '../../../../tools/objects/terrestrial-layers/observed-geo-surface.mts';
+import { fitBackplaneCamera } from '../../../../tools/objects/surface-observations/cameras.mts';
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/planets/dimorphos/source');
@@ -32,7 +32,7 @@ test('the pinned DRACO cube decodes through the declared planes to the archived 
 });
 
 test('a pinhole camera recovered from the archived intercepts explains every held-out pixel', () => {
-  const camera = calibrateGeoCamera(cube);
+  const camera = fitBackplaneCamera(cube);
   assert.ok(camera.fitPixels >= 700 && camera.holdoutPixels > 120000, `${camera.fitPixels} fit / ${camera.holdoutPixels} holdout`);
   assert.ok(camera.maximumResidualPixels < 0.001, `maximum residual ${camera.maximumResidualPixels} px`);
   assert.ok(camera.rmsResidualPixels < 0.0001);
