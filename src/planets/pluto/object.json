@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d907153fae033d038f5b4f3d8814d4fe3dc7eddf617424297b9d883cce7662bb"
+    "sha256": "75b5a9906bfd07b78ec9f62ffe2618fc1ff5100622eb5bedb9669a8d040f3e30"
   },
   "id": "pluto",
   "properties": {
@@ -31,7 +31,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "7521e019234efcf9286f841c3dbe382389efe580b2a00d1ab8d882a9185ab776"
+          "sha256": "d42cb9dde57e8d5fe359499f88e0db03db4d8e0c2d72072ed25d4e6da37e2faf"
         },
         {
           "id": "geometry",
@@ -51,7 +51,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "288adc5834256004a78b31fe4dda6ceb93e814085512326891d046846fdab977"
+          "sha256": "bcb4d6769eb2a27bf8ca40629f95f408200aaa4d70ef7627ae534adae50c5fec"
         },
         {
           "id": "solar-system",
@@ -66,7 +66,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "5e0ef5f318b20f4a662c4b17783f9bb073df019dde58d3c3171d7fb4fa30aba1"
+          "sha256": "f1e6c908348cb7912c6bb2b450fed902f3ee096a46520674b4f8bd8fbe3b489b"
         },
         {
           "id": "navigation",
@@ -76,7 +76,7 @@
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "22e358610fede5e6683bc1351b4edc990afc988074298b3ebbcd10b14f73c10c"
+          "sha256": "e3b8d6d6c9d3132108b3505292c74a6a41a3af95f0c65503d06d99840ca6d2b3"
         }
       ],
       "shape": {
@@ -101,6 +101,21 @@
             },
             {
               "id": "monochrome",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "methane-ice",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "nitrogen-ice",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "water-ice",
               "source": "content",
               "material": "lighting"
             }
@@ -152,7 +167,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "17ed0c01e13da3534f0e90950a6a8886b4dc29cf354192ab0f280cbbd380b8c2"
+        "sha256": "8c72c07106bf69b87ed436199e89cde67ec165fb19de65145c94a7c2376bd8dc"
       }
     },
     "catalog": {

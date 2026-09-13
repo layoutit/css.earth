@@ -34,7 +34,9 @@ lists those.
 ## Publish and check
 
 `pnpm prepare:text` checks every body, then writes `prepared/text.json` and the
-card into `object.json`. If any body fails, it writes nothing.
+card into `object.json`. If any body fails, it writes nothing. A changed card
+changes `object.json`, which the sources catalogue pins, so run
+`pnpm prepare:sources` afterwards.
 `pnpm prepare:text -- --check` verifies without writing.
 
 These errors block publication:

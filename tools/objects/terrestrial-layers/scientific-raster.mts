@@ -17,6 +17,7 @@ import { loadPdsScalarGrid } from './pds-scalar-grid.mts';
 import { loadPdsRadialTable } from './pds-radial-table.mts';
 import { loadShapeScalarGrid } from './obj-shape.mts';
 import { loadObjUvFits } from './obj-uv-fits.mts';
+import { loadFitsImageMap } from './fits-image-map.mts';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
 export function colorForValue(value: number, recipe: SciencePalette) {
@@ -87,9 +88,9 @@ export function scienceMapPoint(longitude: number, latitude: number, grid: Scien
 export function validateScienceQualityMasks(value: unknown) {
   const lens=decodeProfile(parseQualitySource,value,"Scientific quality masks require bounded numeric nearest-neighbor grids and nearest source sampling.");
   if(lens.qualityMasks===undefined)return;
-  if(!['isis3','geotiff'].includes(lens.format ?? '')||lens.sampling!=='nearest'||lens.additionalGrids||
+  if(!['isis3','geotiff','fits-image-map'].includes(lens.format ?? '')||lens.sampling!=='nearest'||lens.additionalGrids||
       !isArray(lens.qualityMasks)||!lens.qualityMasks.length||lens.qualityMasks.some(mask=>
-        !['isis3','geotiff'].includes(mask.format)||mask.sampling!=='nearest'||mask.qualityMasks||mask.additionalGrids||mask.valueTransform||
+        !['isis3','geotiff','fits-image-map'].includes(mask.format)||mask.sampling!=='nearest'||mask.qualityMasks||mask.additionalGrids||mask.valueTransform||
         typeof mask.path!=='string'||!mask.path||mask.path.startsWith('/')||mask.path.split('/').includes('..')||
         !mask.grid||![mask.grid.width,mask.grid.height].every(n=>Number.isSafeInteger(n)&&n>0)||
         !Number.isFinite(mask.minimum)&&!Number.isFinite(mask.maximum)||
@@ -142,6 +143,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
     } };
   }
   if (lens.format === 'pds3-float-map') return loadPdsFloatMap(root, lens);
+  if (lens.format === 'fits-image-map') return loadFitsImageMap(root, lens);
   if (lens.format === 'isis3') {
     const grid = parseScienceGrid(lens.grid);
     const {data, origin, resolution} = await loadIsis3Raster(resolve(root, lens.path), grid);

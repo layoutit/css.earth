@@ -219,6 +219,186 @@
         "qualification": "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
         "notes": "Monochrome: USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset",
         "noData": true
+      },
+      {
+        "id": "methane-ice",
+        "label": "Methane ice",
+        "thumbnail": "pluto-lens-methane-ice.webp",
+        "surface": "pluto-methane-ice.webp",
+        "poles": "pluto-poles-methane-ice.webp",
+        "source": {
+          "id": "pluto-leisa-ice-fractions",
+          "url": "https://zenodo.org/records/18825240"
+        },
+        "falseColor": true,
+        "qualification": "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
+        "legend": {
+          "kind": "scale",
+          "title": "Estimated surface fraction",
+          "labels": [
+            "0",
+            "50",
+            "100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0",
+              "50",
+              "100"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://zenodo.org/records/18825240"
+        },
+        "notes": "Methane ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
+        "noData": true
+      },
+      {
+        "id": "nitrogen-ice",
+        "label": "Nitrogen ice",
+        "thumbnail": "pluto-lens-nitrogen-ice.webp",
+        "surface": "pluto-nitrogen-ice.webp",
+        "poles": "pluto-poles-nitrogen-ice.webp",
+        "source": {
+          "id": "pluto-leisa-ice-fractions",
+          "url": "https://zenodo.org/records/18825240"
+        },
+        "falseColor": true,
+        "qualification": "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
+        "legend": {
+          "kind": "scale",
+          "title": "Estimated surface fraction",
+          "labels": [
+            "0",
+            "50",
+            "100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0",
+              "50",
+              "100"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://zenodo.org/records/18825240"
+        },
+        "notes": "Nitrogen ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
+        "noData": true
+      },
+      {
+        "id": "water-ice",
+        "label": "Water ice",
+        "thumbnail": "pluto-lens-water-ice.webp",
+        "surface": "pluto-water-ice.webp",
+        "poles": "pluto-poles-water-ice.webp",
+        "source": {
+          "id": "pluto-leisa-ice-fractions",
+          "url": "https://zenodo.org/records/18825240"
+        },
+        "falseColor": true,
+        "qualification": "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
+        "legend": {
+          "kind": "scale",
+          "title": "Estimated surface fraction",
+          "labels": [
+            "0",
+            "50",
+            "100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0",
+              "50",
+              "100"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://zenodo.org/records/18825240"
+        },
+        "notes": "Water ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
+        "noData": true
       }
     ]
   },
@@ -264,6 +444,12 @@
       "role": "maps",
       "description": "Mosaic and elevation",
       "href": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
+    },
+    {
+      "label": "LEISA",
+      "role": "composition",
+      "description": "Published ice maps and paper",
+      "href": "https://zenodo.org/records/18825240"
     },
     {
       "label": "JPL",

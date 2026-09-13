@@ -3,14 +3,16 @@ import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodePds4GeometryCube } from '../../../../tools/objects/terrestrial-layers/pds4-geometry-cube.mts';
-import { calibrateGeoCamera, loadGeoObservationSurface, validateGeoSurfaceRecipe } from '../../../../tools/objects/terrestrial-layers/observed-geo-surface.mts';
+import { loadSurfaceObservation, validateSurfaceObservation } from '../../../../tools/objects/surface-observations/index.mts';
+import { fitBackplaneCamera } from '../../../../tools/objects/surface-observations/cameras.mts';
+import { fixtureRecord } from '../../../../tools/test-values.mts';
 import { decodeSpiceCameraFrame } from '../../../../tools/objects/terrestrial-layers/spice-camera.mts';
 import { project } from '../../../../tools/objects/terrestrial-layers/osiris-geo.mts';
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { requireTerrainMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { loadKernelSet } from '../../../../tools/spice/kernel-set.mts';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
-import { shape, number, text, parseSpiceCamera } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
+import { parseSpiceCamera } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 
 /**
  * The DRACO cube carries the archive's own SPICE intercepts for every pixel.
@@ -45,7 +47,7 @@ const frame = decodeSpiceCameraFrame(bytes, set, parseSpiceCamera(recipe.spice),
 const camera = frame.camera, report = frame.qualityReport;
 
 test('the spacecraft clock, leap seconds and kernel chain reproduce the archived exposure epoch and range', t => {
-  validateGeoSurfaceRecipe(recipe, config.geometry.radialTerrain);
+  validateSurfaceObservation(recipe, config.geometry.radialTerrain);
   assert.equal(report.exposure.clock, '0401930040:07327');
   assert.ok(Math.abs(report.exposure.et - Number(cube.header.ACQTM_ET)) < 1e-6, `ET ${report.exposure.et} vs header ${cube.header.ACQTM_ET}`);
   assert.equal(frame.startTime, recipe.startTime);
@@ -81,7 +83,7 @@ test('the kernel-derived camera projects every archived intercept back to its pi
   assert.ok(Math.hypot(meanX, meanY) < 0.75, `mean offset (${meanX.toFixed(3)}, ${meanY.toFixed(3)}) px`);
   assert.ok(centred < 0.05, `residual about the mean offset ${centred.toFixed(4)} px`);
   // The camera fitted to the archived intercepts and the kernel camera stand within 50 m of each other.
-  const fitted = calibrateGeoCamera(cube);
+  const fitted = fitBackplaneCamera(cube);
   const separationMeters = Math.hypot(...camera.positionKm.map((v, k) => v - fitted.positionKm[k])) * 1000;
   assert.ok(separationMeters < 50, `camera positions differ by ${separationMeters.toFixed(1)} m`);
   t.diagnostic(`${count} intercepts: rms ${rms.toFixed(3)} px, mean offset (${meanX.toFixed(3)}, ${meanY.toFixed(3)}) px, ${centred.toFixed(4)} px about it; kernel camera ${separationMeters.toFixed(1)} m from the fitted camera`);
@@ -116,15 +118,14 @@ test('the kernel Sun direction agrees with JPL Horizons; the archived phase plan
 test('the seam derives per-pixel geometry on the retained OBJ from the kernel camera within the transfer bound', async t => {
   const source = await createSourceManifest({ planetId: 'dimorphos', planetName: 'Dimorphos', sourceRoot: root });
   const grid = requireTerrainMesh(await loadObjShape(resolve(root, config.geometry.radialTerrain.path), config.geometry.radialTerrain.grid));
-  const observation = await loadGeoObservationSurface({ sourceDirectory: root, source, recipe, radial: { grid, faces: [] },
+  const observation = await loadSurfaceObservation({ sourceDirectory: root, source, recipe, radial: { grid, faces: [] },
     config: { geometry: { radius: config.geometry.radius, radiusKm: config.geometry.radiusKm, radialTerrain: config.geometry.radialTerrain }, raster: config.raster } });
-  const prepared = shape({quality:shape({modeledGeometryPixels:number}),display:shape({units:text}),
-    sourceCoverage:shape({geometryPixels:number,acceptedPixels:number})})(observation.report);
-  assert.equal(prepared.quality?.modeledGeometryPixels !== undefined && prepared.quality.modeledGeometryPixels > 100000, true, JSON.stringify(prepared.quality?.modeledGeometryPixels));
-  assert.equal(prepared.display.units, 'relative disk-normalized I/F; linear grayscale display');
+  const prepared = observation.report, geometry = fixtureRecord(prepared, 'frames', 0, 'geometry'), coverage = fixtureRecord(prepared, 'frames', 0, 'pixels');
+  assert.ok(Number(geometry.geometryPixels) > 100000, JSON.stringify(geometry));
+  assert.equal(fixtureRecord(prepared, 'display').units, 'relative disk-normalized I/F; linear grayscale display');
   // 128,423 modeled on-body pixels against 128,291 archived; the Lommel-Seeliger limits reject the terminator side.
-  assert.ok(Math.abs(prepared.sourceCoverage.geometryPixels - cube.qualityReport.geometryPixels) < 0.005 * cube.qualityReport.geometryPixels, JSON.stringify(prepared.sourceCoverage));
-  assert.ok(prepared.sourceCoverage.acceptedPixels > 70000, JSON.stringify(prepared.sourceCoverage));
+  assert.ok(Math.abs(Number(coverage.geometryPixels) - cube.qualityReport.geometryPixels) < 0.005 * cube.qualityReport.geometryPixels, JSON.stringify(coverage));
+  assert.ok(Number(coverage.acceptedPixels) > 70000, JSON.stringify(coverage));
   // Modeled intercepts on the 0.972 m OBJ against the archived 0.243 m DSK intercepts: a sampled surface point seen by both.
   let sampled = 0, maximum = 0, sum = 0;
   for (let i = 0; i < cube.width * cube.height; i += 211) if (cube.valid(i)) {
@@ -135,7 +136,7 @@ test('the seam derives per-pixel geometry on the retained OBJ from the kernel ca
   assert.ok(sampled > 300, `${sampled} sampled archived intercepts qualified`);
   assert.ok(maximum <= recipe.transfer.maximumSeparationMeters, `separation up to ${maximum.toFixed(3)} m`);
   assert.ok(sum / sampled < 0.5, `mean separation ${(sum / sampled).toFixed(3)} m`);
-  t.diagnostic(`${JSON.stringify(prepared.sourceCoverage)}; ${sampled} archived intercepts sampled, separation mean ${(sum / sampled).toFixed(3)} m, maximum ${maximum.toFixed(3)} m`);
+  t.diagnostic(`${JSON.stringify(coverage)}; ${sampled} archived intercepts sampled, separation mean ${(sum / sampled).toFixed(3)} m, maximum ${maximum.toFixed(3)} m`);
   // Incidence from OBJ facet normals with the kernel Sun sits below the archived incidence plane by the same offset as the phase plane;
   // the facet-scale spread is the 0.972 m OBJ against the 0.243 m DSK.
   const dot = (a: readonly number[], b: readonly number[]) => a.reduce((s, v, k) => s + v * b[k], 0), unit = (v: number[]) => { const n = Math.hypot(...v); return v.map(x => x / n); };

@@ -2,8 +2,8 @@ import { fixtureRecord } from '../../test-values.mts';
 import { required } from '../../test-values.mts';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { fitObservationLevels, selectObservation, sampleTrianglePoints } from './observation-mosaic.mts';
-import { validateGeoSurfaceRecipe, loadGeoObservationSurface } from './observed-geo-surface.mts';
+import { fitObservationLevels, selectObservation, sampleTrianglePoints } from './levels.mts';
+import { validateSurfaceObservation, loadSurfaceObservation } from './index.mts';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
@@ -34,12 +34,12 @@ test('robust overlap fit recovers connected source scales despite missing pairs 
 test('archived-camera mosaics bind a separate camera to each image', async () => {
   const config = JSON.parse(await readFile(new URL('../../../src/planets/steins/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
   const recipe = config.raster.surfaceObservations[0], shape = config.geometry.radialTerrain;
-  validateGeoSurfaceRecipe(recipe, shape);
+  validateSurfaceObservation(recipe, shape);
   for (const alter of [(r: unknown) => fixtureRecord(r,"frames",1)["cameraPath"] = fixtureRecord(r,"frames",0)["cameraPath"],
     (r: unknown) => delete fixtureRecord(r,"frames",1)["cameraPath"], (r: unknown) => fixtureRecord(r)["cameraPath"] = fixtureRecord(r,"frames",0)["cameraPath"],
 (r: unknown) => fixtureRecord(r,"frames",0)["cameraPath"] = '../unbound.json', (r: unknown) => fixtureRecord(r,"photometry")["maximumGain"] = 1.1]) {
     const changed = structuredClone(recipe); alter(changed);
-    assert.throws(() => validateGeoSurfaceRecipe(changed, shape), /source-bound/);
+    assert.throws(() => validateSurfaceObservation(changed, shape), /source-bound/);
   }
 });
 
@@ -49,7 +49,7 @@ test('each archived-camera mosaic frame verifies its original source closure bef
   const source = await createSourceManifest({ planetId: 'steins', planetName: 'Steins', sourceRoot: sourceDirectory });
   const drift = new Error('Original camera kernel bytes changed');
   let checked = false;
-  await assert.rejects(loadGeoObservationSurface({ sourceDirectory, config,
+  await assert.rejects(loadSurfaceObservation({ sourceDirectory, config,
     recipe: config.raster.surfaceObservations[0], radial: {
       get grid(): never { throw new Error('Geometry must not be read before source verification'); },
       get faces(): never { throw new Error('Faces must not be read before source verification'); },
@@ -83,10 +83,10 @@ test('overlap points stay inside their own triangle and include both shape lobes
 test('the authored mosaic binds distinct images and rejects ambiguous frame policies', async () => {
   const config = JSON.parse(await readFile(new URL('../../../src/planets/comet-67p/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
   const recipe = config.raster.surfaceObservations[0], shape = config.geometry.radialTerrain;
-  validateGeoSurfaceRecipe(recipe, shape);
+  validateSurfaceObservation(recipe, shape);
   for (const alter of [(r: unknown) => fixtureRecord(r,"frames",1)["id"] = fixtureRecord(r,"frames",0)["id"], (r: unknown) => fixtureRecord(r,"frames",1)["qualityPath"] = fixtureRecord(r,"frames",0)["qualityPath"],
 (r: unknown) => fixtureRecord(r,"frames",0)["filter"] = 'unbound', (r: unknown) => fixtureRecord(r,"frames",0)["path"] = '../outside.IMG', (r: unknown) => fixtureRecord(r)["selection"] = 'brightest',
 (r: unknown) => fixtureRecord(r,"levelMatching")["maximumGain"] = 3, (r: unknown) => fixtureRecord(r)["frames"] = [], (r: unknown) => fixtureRecord(r)["path"] = fixtureRecord(r,"frames",0)["path"]]) {
-    const changed = structuredClone(recipe); alter(changed); assert.throws(() => validateGeoSurfaceRecipe(changed, shape), /source-bound/);
+    const changed = structuredClone(recipe); alter(changed); assert.throws(() => validateSurfaceObservation(changed, shape), /source-bound/);
   }
 });

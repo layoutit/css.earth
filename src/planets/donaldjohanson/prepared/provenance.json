@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "donaldjohanson",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "52cf43f91d86520af0976c1ae050ef335cf3263ec41d2beb9ef61bb872e68dc9"
@@ -379,7 +379,7 @@
       "sha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7",
       "bytes": 11193210,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -405,7 +405,7 @@
       "sha256": "74d897d04b791320f1acd63ab93726936bdea402d7f188201d3942af6f472557",
       "bytes": 10526400,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -433,7 +433,7 @@
       "sha256": "7acf747416aebcf252585d62d36b43aa98b299d308de5c7e1bb8fdf1b84e60ac",
       "bytes": 9023,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -453,7 +453,7 @@
       "sha256": "4e3ad4af1ea918f7bc561610611e11041a59560af209e037485e71898bfdecef",
       "bytes": 12607,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -475,7 +475,7 @@
       "sha256": "b5ca18dfacbff53035e64239d9e9fc2753a54a5e7cd2ade76b27a44bb25fcb92",
       "bytes": 1339,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -501,7 +501,7 @@
       "sha256": "1f516df5c1da65c45e435aa1a377998814561eec05c9823e1d5ddc715a97d5d9",
       "bytes": 30329,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -530,7 +530,7 @@
       "sha256": "4b235e29f861125fdab3b736f8d727c782bb449da1df0f9df73dfbe4c536bf6a",
       "bytes": 161,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -557,7 +557,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -588,13 +588,13 @@
           "url": "/scenes/donaldjohanson/donaldjohanson-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp",
           "bytes": 205278,
           "sha256": "fdab40973f952fad5e32ed40a551d22a998f19da6ad9cc84c86638b353694a99",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -626,13 +626,13 @@
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
           "bytes": 1404,
           "sha256": "04819d89aada26cfc41338c4eda34be652c50440eb5e78d3ca8d7ae68d3f185f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
           "bytes": 588884,
           "sha256": "1e6511e38006f9be67994da3cab08c4313b115757349ebe91904a96eaf8ca4c9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -692,7 +692,7 @@
           "url": "/scenes/donaldjohanson/donaldjohanson-features.json",
           "bytes": 7930,
           "sha256": "ff7f6eebc5b85ac5912badd40fd4970bec98d95b2b5952ff99701344c4274692",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
