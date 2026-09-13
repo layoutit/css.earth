@@ -411,17 +411,17 @@
         },
         "transfer": {
           "maximumSourceDistanceMeters": 5310,
-          "maximumSeparationMeters": 3000,
-          "maximumEmissionDegrees": 80,
+          "maximumSeparationFootprints": 2,
+          "maximumEmissionDegrees": 75,
           "visibilityToleranceMeters": 0.5,
-          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must lie within 3 km of the closest source-mesh point, about two 1.1 km pixel footprints, which also withholds strongly foreshortened surface; that point must lie within 5.31 km of the displayed mesh, its simplification error, and be visible from the refined camera in the full mesh."
+          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must lie within two diagonal pixel footprints of the closest source-mesh point; a footprint is the pixel's range times the camera's pixel angle, stretched by the emission angle, about 1.6 km across the diagonal at nadir from 190,000 km. Emission is limited to 75°, where a pixel stretches nearly four times along the surface. The closest point must lie within 5.31 km of the displayed mesh, its simplification error, and be visible from the refined camera in the full mesh."
         },
         "photometry": {
           "model": "lommel-seeliger",
           "referenceIncidenceDegrees": 0,
           "referenceEmissionDegrees": 0,
           "maximumIncidenceDegrees": 80,
-          "maximumEmissionDegrees": 80,
+          "maximumEmissionDegrees": 75,
           "maximumGain": 3
         },
         "displayPercentiles": [

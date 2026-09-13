@@ -1,0 +1,64 @@
+{
+  "id": "pluto-leisa-composition-2026",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "New surface composition and temperature maps of Pluto from New Horizons LEISA data",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.18825240"
+    }
+  ],
+  "version": "10.5281/zenodo.18825240",
+  "creators": [
+    "A. E. Drozdov",
+    "N. V. Emelyanov"
+  ],
+  "publisher": "Zenodo",
+  "publicationDate": "2026-03-02",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/18825240",
+      "label": "Published maps"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1016/j.icarus.2026.117031",
+      "label": "Methods paper"
+    },
+    {
+      "role": "rights",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "label": "CC BY 4.0"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/api/records/18825240",
+      "checkedOn": "2026-09-13",
+      "locator": "metadata.title, metadata.creators, metadata.doi, metadata.publication_date, metadata.license and files"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "A. E. Drozdov and N. V. Emelyanov, using New Horizons NASA/JHUAPL/SwRI LEISA observations.",
+      "scope": "Released FITS maps",
+      "evidence": "https://zenodo.org/records/18825240"
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0 applies to the released data. The manuscript has separate terms.",
+      "scope": "Released FITS maps",
+      "evidence": "https://zenodo.org/api/records/18825240#/metadata/license"
+    },
+    {
+      "kind": "limitation",
+      "text": "Model-derived fractions depend on optical constants and fitting assumptions. Formal errors do not include every calibration and model uncertainty.",
+      "scope": "Composition maps",
+      "evidence": "https://arxiv.org/html/2603.21860v1#S3"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import type { ObservationSample, ObservationLevelPolicy, PreparedTriangle } from './contracts.mts';
+import type { ObservationSample, ObservationLevelPolicy, PreparedTriangle } from '../terrestrial-layers/contracts.mts';
 export interface OverlapPair {a:number;b:number;samples:number;medianLogRatio:number|null;logMad:number|null;accepted:boolean;residualLogRatio?:number}
 // Preparation-only overlap calibration and source selection. No samples or
 // camera solutions are constructed by the retained runtime.
@@ -61,7 +61,7 @@ export function fitObservationLevels(samples: ObservationSample[][], policy: Obs
 
 /** Prefer the least foreshortened qualified image. Stable source order breaks
  * exact ties; brightness never controls validity or the winning observation. */
-export function selectObservation(samples: ObservationSample[]) {
+export function selectObservation(samples: readonly ObservationSample[]) {
   let index = -1;
   for (let i = 0; i < samples.length; i++) if (!samples[i].reason && Number.isFinite(samples[i].maximumEmissionDegrees) &&
       (index < 0 || (samples[i].maximumEmissionDegrees ?? Infinity) < (samples[index].maximumEmissionDegrees ?? Infinity))) index = i;

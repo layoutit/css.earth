@@ -36,8 +36,6 @@ export interface PhasePhotometry {model:string;asymmetry:number;amplitude:number
 export interface DiskPhotometry {phaseCorrection?:PhasePhotometry;model?:string;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;maximumGain:number;coefficient?:number;phaseCoefficientPerDegree?:number}
 export interface GeoFrame {colorPlanes?:readonly ArrayLike<number>[];radianceFactor?:{factor:number;solarDistanceAu:number;solarFlux:number};width:number;height:number;planes:Record<string,ArrayLike<number>>;xyz(index:number):number[];valid(index:number):boolean;
   acceptPixel?(index:number):boolean;projectPoint?(point:readonly number[]):number[];quality?:{flags:ArrayLike<number>;allowLossy:boolean}}
-export type GeoSample = {reason:string;separationMeters?:number;radiance?:never;gain?:never;maximumEmissionDegrees?:never;maximumIncidenceDegrees?:never} |
-  {reason?:undefined;separationMeters:number;radiance:number;color?:number[];gain:number;maximumEmissionDegrees:number;maximumIncidenceDegrees?:number};
 export interface SipCamera {matrix:number[][];sip:{referencePixel:number[];a:number[][];b:number[][];offsetPixels:number[]}}
 
 export interface ObservationSample {maximumIncidenceDegrees?:number;reason?:string; radiance?:number; maximumEmissionDegrees?:number}
@@ -49,5 +47,3 @@ export interface SurfaceOptions {sourceDirectory:string;source:SourceAccess;reci
 export type SurfaceColorSample = {reason:string;color:number[];radiance?:never;maximumEmissionDegrees?:never;maximumIncidenceDegrees?:never} |
   {reason?:undefined;color:number[];radiance:number;maximumIncidenceDegrees?:number;distanceMeters?:number;separationMeters?:number;gain?:number;maximumEmissionDegrees?:number;frameId?:string;frameIndex?:number};
 
-export interface GeoObservationFrame extends GeoFrame {camera?:{matrix:number[][];positionKm:number[]};startTime?:string;filter?:string;
- quality?:{flags:ArrayLike<number>;allowLossy:boolean;report?:Record<string,unknown>};qualityReport?:Record<string,unknown>;isLossyPixel?(index:number):boolean}
