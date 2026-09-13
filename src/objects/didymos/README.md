@@ -46,8 +46,12 @@ are independently checked against the Didymos OBJ. The label's DSK entry alone
 does not identify the primary's surface.
 
 Photographic coverage is limited to two nearby viewing directions. Pixels above
-80° incidence or emission, missing interpolation contributors, and failed mesh
-or visibility checks remain gaps. Boulder shadows stay in the images. The coarse
+65° incidence or emission, missing interpolation contributors, and failed mesh
+or visibility checks remain gaps. Frame t-minus-158s darkens beyond 60° of incidence
+(median 0.036 at 40–50°, 0.030 at 50–60°, 0.023 at 60–65° and 0.016 above 75°); shown up to 80°, it drew a black
+checkerboard band along the south of the map. At 65° the band and its dark fragments are gone, and area coverage is
+10.8% (22.6% at 80°; 14.0% on main, whose former 8 m source-distance limit withheld most of the band).
+Display percentiles 1.1–99.9 of the displayed samples reproduce main's displayed range. Boulder shadows stay in the images. The coarse
 display mesh cannot reproduce every photographed boulder, and the mosaic is not
 a post-impact reconstruction. Shadows default off.
 
