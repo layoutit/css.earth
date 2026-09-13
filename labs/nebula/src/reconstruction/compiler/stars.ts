@@ -76,12 +76,33 @@ export function compilerStarLensPoints(reference: CompilerImage, lens: CompilerI
     return [(x * d - y * c) / determinant, (y * a - x * b) / determinant];
   });
 }
+/** Keep every bounded residual maximum until measured aperture light selects the catalogue. */
+export async function detectCompilerStarCandidates(image: CompilerImage) {
+  const workingMaximum = 2048, maximumCandidates = Math.min(image.stars.width * image.stars.height, workingMaximum ** 2);
+  const bytes = await sharp(image.stars.data, { raw: { width: image.stars.width, height: image.stars.height, channels: 3 } }).png().toBuffer();
+  // The registration detector's default sharp-peak quota can discard broad bright
+  // stars before photometry, especially against a nebular background. Its threshold
+  // and maxima stay unchanged; this pixel-count bound includes every possible peak.
+  return detectStars(bytes, [image.nativeWidth, image.nativeHeight], workingMaximum, maximumCandidates);
+}
+/** One deterministic conditional depth operator for both reference and union catalogues. */
+export function createCompilerStarDepthSampler(model: EmissionFieldModel) {
+  const field = createEmissionField(model), count = 128, dz = (field.bounds.max[2] - field.bounds.min[2]) / count;
+  const samples = new Float64Array(count), light: [number, number, number] = [0, 0, 0];
+  return (id: string, x: number, y: number): number | null => {
+    if (x < field.bounds.min[0] || x > field.bounds.max[0] || y < field.bounds.min[1] || y > field.bounds.max[1]) return null;
+    let total = 0;
+    for (let k = 0; k < count; k++) { field.sampleEmission(x, y, field.bounds.min[2] + (k + .5) * dz, light); samples[k] = light[0]; total += light[0]; }
+    if (!(total > 0)) return null;
+    const chosen = fraction(id) * total; let cumulative = 0, slot = count - 1;
+    for (let k = 0; k < count; k++) { cumulative += samples[k]!; if (cumulative >= chosen) { slot = k; break; } }
+    return field.bounds.min[2] + (slot + .5) * dz;
+  };
+}
 /** Observed xy/relative light; conditional z follows the fitted emission column, never image-layer index. */
 export async function compilerStars(image: CompilerImage, model: EmissionFieldModel, maximum: number, lenses: readonly CompilerImage[] = [image]): Promise<CompilerStarInput[]> {
   if (!maximum) return [];
-  const bytes = await sharp(image.stars.data, { raw: { width: image.stars.width, height: image.stars.height, channels: 3 } }).png().toBuffer();
-  const detected = await detectStars(bytes, [image.nativeWidth, image.nativeHeight]), field = createEmissionField(model), output: CompilerStarInput[] = [];
-  const count = 128, dz = (field.bounds.max[2] - field.bounds.min[2]) / count, samples = new Float64Array(count), light: [number, number, number] = [0, 0, 0];
+  const detected = await detectCompilerStarCandidates(image), depth = createCompilerStarDepthSampler(model), output: CompilerStarInput[] = [];
   const nativePoints = detected.map(star => star.point), photometer = createCompilerStarPhotometer(image, nativePoints);
   if (lenses.length < 1 || lenses.length > 8 || new Set(lenses.map(lens => lens.id)).size !== lenses.length)
     throw new TypeError('Compiler star lenses must have unique configured identities.');
@@ -95,15 +116,10 @@ export async function compilerStars(image: CompilerImage, model: EmissionFieldMo
   }).sort((a, b) => b.energy - a.energy || a.index - b.index);
   for (const { star, index, measured } of ranked) {
     if (output.length >= maximum) break;
-    const [x, y] = image.pixelToSky(...star.point); let total = 0;
-    if (x < field.bounds.min[0] || x > field.bounds.max[0] || y < field.bounds.min[1] || y > field.bounds.max[1]) continue;
-    for (let k = 0; k < count; k++) { field.sampleEmission(x, y, field.bounds.min[2] + (k + .5) * dz, light); samples[k] = light[0]; total += light[0]; }
     // These are observed field lights with illustrative conditional depths,
     // not confirmed members selected by the nebula's projected brightness.
-    if (!(total > 0)) continue;
-    const id = `${image.id}-${index}`, chosen = fraction(id) * total; let cumulative = 0, slot = count - 1;
-    for (let k = 0; k < count; k++) { cumulative += samples[k]!; if (cumulative >= chosen) { slot = k; break; } }
-    const z = field.bounds.min[2] + (slot + .5) * dz;
+    const [x, y] = image.pixelToSky(...star.point), id = `${image.id}-${index}`, z = depth(id, x, y);
+    if (z === null) continue;
     const materials: Record<string, CompilerStarMaterial> = {};
     for (const lens of lensPhotometers) {
       const light = lens.id === image.id ? measured : lens.photometer.measure(index);

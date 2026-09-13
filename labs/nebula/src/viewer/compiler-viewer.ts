@@ -6,6 +6,7 @@ import type { PreparedCssVolume } from '../../../../src/renderers/css/volume/typ
 import { validatePreparedCssVolume } from '../../../../src/renderers/css/volume/validation';
 import { compilerStarAppearance, readCompilerBakeResult, type CompilerBakeResult, type CompilerPin } from '../reconstruction/compiler/bake-types';
 import { compilerInspectionCamera, type CompilerInspectionFrame } from './compiler-framing';
+import { assertCompilerBankIdentity, assertCompilerLensGeometry } from '../reconstruction/compiler/bank-validation';
 import { shapeCloudOrthographicCamera, type ShapeCloudFraming } from './shape-cloud-camera';
 import '../../../../src/renderers/css/styles/volume.css';
 
@@ -44,10 +45,10 @@ export async function createCompilerViewer({ host, result: input, resolvePath = 
   let neutral: LoadedBank | undefined;
   try {
     neutral = await loadBank(result.neutral, resolvePath, loadingSignal());
-    assertIdentity(neutral.payload, result);
+    assertCompilerBankIdentity(neutral.payload, result);
     signal?.throwIfAborted();
     if (pendingMounts.get(host) !== token) throw new DOMException('A newer compiler scene replaced this load.', 'AbortError');
-  } catch (error) { if (neutral) release(neutral.urls); throw error; }
+  } catch (error) { if (neutral) release(neutral); throw error; }
   const end = host.ownerDocument.createElement('span'); end.hidden = true; root.append(end);
   const mounted = mountPreparedCssVolume({ host: root, before: end, payload: neutral.payload,
     resolveResource: path => requiredTexture(neutral, path) });
@@ -99,12 +100,13 @@ export async function createCompilerViewer({ host, result: input, resolvePath = 
       if (activeLens?.id !== lens.id) {
         root.dataset.materialLoading = lens.id;
         const loaded = await loadBank(lens.volume, resolvePath, loadingSignal());
-        if (disposed || request !== materialRequest) { release(loaded.urls); return; }
-        assertSharedGeometry(neutral.payload, loaded.payload, result);
+        if (disposed || request !== materialRequest) { release(loaded); return; }
+        try { assertCompilerLensGeometry(neutral.payload, loaded.payload, result, lens); }
+        catch (error) { release(loaded); throw error; }
         const previous = activeLens; activeLens = { id: lens.id, bank: loaded };
         applyBank(leaves, loaded);
         root.dataset.material = 'textured'; root.dataset.lens = lens.id; delete root.dataset.materialLoading;
-        if (previous) release(previous.bank.urls);
+        if (previous) release(previous.bank);
       } else {
         applyBank(leaves, activeLens.bank); root.dataset.material = 'textured'; root.dataset.lens = lens.id;
       }
@@ -122,7 +124,7 @@ export async function createCompilerViewer({ host, result: input, resolvePath = 
     },
     destroy() {
       if (disposed) return; disposed = true; materialRequest++; lifetime.abort(); observer.disconnect(); stars.destroy(); mounted.destroy(); root.remove();
-      release(neutral.urls); if (activeLens) release(activeLens.bank.urls);
+      release(neutral); if (activeLens) release(activeLens.bank);
       if (pendingMounts.get(host) === token) pendingMounts.delete(host);
     } };
 }
@@ -182,12 +184,17 @@ async function loadBank(reference: CompilerPin, resolvePath: (path: string) => s
     while (queue.length) {
       const resource = queue.shift()!, content = await readPinned({ path: `${directory}${resource.path}`, sha256: resource.sha256 }, resolvePath, signal);
       if (content.byteLength !== resource.bytes) throw new Error(`Compiler texture byte length differs: ${resource.path}`);
-      const url = URL.createObjectURL(new Blob([content])); urls.push(url); const image = new Image(); image.src = url; await image.decode();
-      if (image.naturalWidth !== resource.width || image.naturalHeight !== resource.height) throw new Error(`Compiler texture dimensions differ: ${resource.path}`);
+      const blob = new Blob([content]), url = URL.createObjectURL(blob); urls.push(url);
+      let image: ImageBitmap;
+      try { image = await createImageBitmap(blob); }
+      catch (error) { throw new Error(`Compiler texture cannot be decoded: ${resource.path} (${resource.width}×${resource.height}).`, { cause: error }); }
+      try {
+        if (image.width !== resource.width || image.height !== resource.height) throw new Error(`Compiler texture dimensions differ: ${resource.path}`);
+      } finally { image.close(); }
       textures.set(resource.path, url);
     }
   }));
-  const failed = settled.find(item => item.status === 'rejected'); if (failed?.status === 'rejected') { release(urls); throw failed.reason; }
+  const failed = settled.find(item => item.status === 'rejected'); if (failed?.status === 'rejected') { release({ urls }); throw failed.reason; }
   return { payload, textures, urls };
 }
 async function readPinned(reference: CompilerPin, resolvePath: (path: string) => string, signal?: AbortSignal): Promise<ArrayBuffer> {
@@ -197,27 +204,9 @@ async function readPinned(reference: CompilerPin, resolvePath: (path: string) =>
     .map(value => value.toString(16).padStart(2, '0')).join('');
   if (digest !== reference.sha256) throw new Error(`Compiler resource SHA-256 differs: ${reference.path}`); return bytes;
 }
-function assertIdentity(payload: PreparedCssVolume, result: CompilerBakeResult) {
-  const provenance = record(payload.provenance);
-  if (payload.id !== `compiler-${result.id}` || JSON.stringify(payload.frame) !== JSON.stringify(result.frame) ||
-      !provenance || provenance.alphaSha256 !== result.alphaSha256 || provenance.fieldIdentity !== result.fieldIdentity)
-    throw new TypeError('Prepared compiler volume belongs to a different result or alpha support.');
-}
-function assertSharedGeometry(neutral: PreparedCssVolume, textured: PreparedCssVolume, result: CompilerBakeResult) {
-  assertIdentity(textured, result);
-  for (const axis of ['x', 'y', 'z'] as const) {
-    const first = neutral.stacks.find(stack => stack.axis === axis)!, second = textured.stacks.find(stack => stack.axis === axis)!;
-    if (first.leaves.length !== second.leaves.length) throw new Error('Compiler materials have different slice counts.');
-    for (let i = 0; i < first.leaves.length; i++) {
-      const a = first.leaves[i]!, b = second.leaves[i]!;
-      if (a.id !== b.id || a.widthPx !== b.widthPx || a.heightPx !== b.heightPx || JSON.stringify(a.centerUnits) !== JSON.stringify(b.centerUnits) ||
-          JSON.stringify(a.boundsCssPixels) !== JSON.stringify(b.boundsCssPixels) || (Object.keys(a.style) as (keyof typeof a.style)[]).some(key => a.style[key] !== b.style[key]))
-        throw new Error('Compiler materials do not share prepared geometry.');
-    }
-  }
-}
 function requiredTexture(bank: LoadedBank, path: string) { const value = bank.textures.get(path); if (!value) throw new Error(`Compiler texture was not decoded: ${path}`); return value; }
-function record(value: unknown): Record<string, unknown> | null { return value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : null; }
-function release(urls: string[]) { for (const url of urls) URL.revokeObjectURL(url); urls.length = 0; }
+function release(bank: Pick<LoadedBank, 'urls'>) {
+  for (const url of bank.urls) URL.revokeObjectURL(url); bank.urls.length = 0;
+}
 function relativePath(path: string) { return typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.split('/').includes('..') && !/[\\\u0000-\u0020]/.test(path); }
 function localPath(path: string): string { return `/@fs${__NEBULA_REPO_ROOT__.replace(/\/$/, '')}/${path}`; }

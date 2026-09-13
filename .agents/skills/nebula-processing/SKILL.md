@@ -32,6 +32,7 @@ The app supports density-based LMC/SMC work, the M2–9 symmetry experiment and 
 - Write `models/<object>/physical-evidence.json`: source IDs plus evidence IDs classified `observed`, `published-model` or `authored`, with units, footprint, uncertainty when supplied and limitations. Use Orion's ledger as a record example, not its geometry as a template for other objects.
 - Keep executable method/parameter choices in a separate recipe. Pin its ledger, selected method/evidence IDs and every authored setting. Shared TypeScript owns validation and algorithms; object data owns all target-specific values. Changing evidence must change the affected fit identity.
 - Register constraints to the common image frame. Small core maps cannot constrain an entire complex; label unsupported regions and do not infer depth from image intensity or directly from velocity. Retain competing literature interpretations and explicit tracer-to-model mappings.
+- Released XYZ tables also require qualification: inspect units, array ordering, observer side and the original WCS/velocity products before accepting a transform. Use the sampled-volume operator for qualified spatial points; keep analytic wind/jet terms and per-tracer component weights explicit. Different spectral tracers need not share the same emission alpha, even when their spatial frame is identical.
 
 ## 3. Register before baking
 
@@ -49,6 +50,7 @@ Importing and aligning a candidate does not authorize processing. A user instruc
 - Use the Alignment sidebar's **Quick preview** for native crops when direction/removal quality is uncertain; then **Remove stars** for the full source.
 - NOX runs locally on overlapping tiles. Non-RGB8 sources receive a separate full-size RGB8 working image; keep the higher-depth original unchanged and record the conversion.
 - Inspect **Original / Without stars / Residual**, particularly saturated stars, halos, crowded fields and compact nebular knots. Automatic removal is not a membership catalogue or measurement of the hidden cloud.
+- Do not feed a nonstellar X-ray/radio wind map through optical star removal. An explicit preservation treatment keeps structural compact emission and emits a zero extracted residual, with its status recorded. A publisher's shared grid may transfer astrometry through a star-verified companion; label that transfer separately from independent stars in the nonstellar band.
 - Require completed native diffuse/residual/mask products, source/model/code pins and exact native accounting: original = diffuse + residual. Check real artifacts, not just process exit status.
 - Refresh reconnects to server-owned work. Cancel stops it explicitly. Never restart a server merely to refresh UI while processing.
 - The strength slider blends completed preview products; it does not change detection. Reconstruction consumes the complete native diffuse output, not this display blend, browser WebP or a second removal pass.

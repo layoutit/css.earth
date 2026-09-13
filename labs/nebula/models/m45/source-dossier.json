@@ -130,6 +130,53 @@
         "https://arxiv.org/abs/astro-ph/0412216"
       ],
       "alignmentSelection": "excluded-pending-review"
+    },
+    {
+      "id": "iau-usama-widefield",
+      "provider": "IAU OAE / Mohamed Usama",
+      "telescope": "Ground-based astrophotography; acquisition instrument/filter response not provided with this publisher file",
+      "wavelengths": "Broadband optical RGB display; exact filter passbands and calibrated photometry unavailable.",
+      "coverage": "Full 3365 × 2234 raster, preliminary star-seeded 445.8′ × 296.0′ tangent field. Much broader than NOIRLab 68.676′ × 50.126′. No claim that a finite image contains all physical cirrus.",
+      "quality": "Broad outer reflection/cirrus field covers the current 4.2° view; central stellar bloom and JPEG-derived compression remain.",
+      "epoch": "Acquired October 2021, Sinai/Egypt; released 2022-12-15.",
+      "masterUrl": "https://iauarchive.eso.org/static/archives/images/original/ann22042ab.tif",
+      "metadataUrls": [
+        "https://iauarchive.eso.org/public/images/detail/ann22042ab/",
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.5281/zenodo.7425589"
+      ],
+      "notes": [
+        "CC BY 4.0; credit Mohamed Usama/IAU OAE.",
+        "No publisher WCS. Authored initial TAN placement from a small set of bright-star constellation correspondences to the pinned NOIRLab image. Independent faint-star registration has not passed. Full native raster preserved.",
+        "Original XMP explicitly records CC BY 4.0 and upstream JPEG conversion; camera and complete processing history unavailable.",
+        "No dedicated Hα contribution is documented for this exact file; absence of a documented processing history is not proof of a pure calibrated optical passband.",
+        "Initial geometry uses 6 (Usama) or 9 (Andreo) bright stellar correspondences in the narrow NOIRLab overlap. Full-field distortion is not validated."
+      ],
+      "alignmentSelection": "selected"
+    },
+    {
+      "id": "andreo-widefield",
+      "provider": "Rogelio Bernal Andreo / Deep Sky Colors; hosted by NASA APOD",
+      "telescope": "Ground-based astrophotography; acquisition instrument/filter response not provided with this publisher file",
+      "wavelengths": "Broadband optical RGB display; exact filter passbands and calibrated photometry unavailable.",
+      "coverage": "Full 2200 × 1567 raster, preliminary star-seeded 291.6′ × 207.7′ tangent field. Much broader than NOIRLab 68.676′ × 50.126′. No claim that a finite image contains all physical cirrus.",
+      "quality": "Independent deep outer-dust morphology comparison; JPEG display and strong stretch, not calibrated flux.",
+      "epoch": "APOD released 2009-10-14; linked photographer file names 2009-09-17, exposure dates not independently qualified.",
+      "masterUrl": "https://apod.nasa.gov/apod/image/0910/pleiades_andreo_big.jpg",
+      "metadataUrls": [
+        "https://apod.nasa.gov/apod/ap091014.html",
+        "https://www.deepskycolors.com/creativecommons-required-attribution-line/",
+        "https://www.deepskycolors.com/accolades/",
+        "https://creativecommons.org/licenses/by-nc-nd/3.0/"
+      ],
+      "notes": [
+        "CC BY-NC-ND 3.0; credit Rogelio Bernal Andreo (Deep Sky Colors).",
+        "No publisher WCS. Authored initial TAN placement from a small set of bright-star constellation correspondences to the pinned NOIRLab image. Independent faint-star registration has not passed. Full native raster preserved.",
+        "Photographer explicitly restricts redistribution to noncommercial, no derivatives. Kept for local original-image comparison; not eligible for an unrestricted derivative bake.",
+        "No dedicated Hα contribution is documented for this exact file; absence of a documented processing history is not proof of a pure calibrated optical passband.",
+        "Initial geometry uses 6 (Usama) or 9 (Andreo) bright stellar correspondences in the narrow NOIRLab overlap. Full-field distortion is not validated."
+      ],
+      "alignmentSelection": "selected"
     }
   ],
   "papers": [
@@ -165,7 +212,7 @@
         "The preferred UV scattering model uses dimensionless albedo a = 0.22 ± 0.07 and asymmetry g = 0.74 ± 0.06 below 260 nm. These values are conditional on the illumination, dust and thin-layer model; they are not direct voxel-density measurements.",
         "Outlying nebulosity 1–2° from the core may have other illuminators and uncertain association. The authors warn that the Henyey–Greenstein angular form may bias large-angle scattering."
       ],
-      "implementationStatus": "Literature intake only; do not initialize slabs, thicknesses or grain constants from this record automatically."
+      "implementationStatus": "The physical-evidence ledger now scopes a qualitative west/east ordering for an authored single-surface comparison. No published layer separation, thickness or grain constant is used as a fitted physical parameter; overlapping scattering layers remain unsupported."
     },
     {
       "id": "gibson-2007",
@@ -218,13 +265,30 @@
         "A later dust-temperature/column-density fit would require the actual separate calibrated bands, masks, color corrections and matched beams. This display composite supplies context only."
       ],
       "implementationStatus": "Survey characterization only; no thermal SED or density inference implemented."
+    },
+    {
+      "id": "ritchey-2006",
+      "title": "The Nature of Interstellar Gas toward the Pleiades Revealed in Absorption Lines",
+      "authors": "A. M. Ritchey; M. Martinez; K. Pan; S. R. Federman; D. L. Lambert",
+      "year": 2006,
+      "url": "https://doi.org/10.1086/506585",
+      "access": "Discovered in the local SIMBAD-linked M45 paper catalogue; complete arXiv PDF downloaded and relevant sections/tables read. Original spectral arrays not acquired.",
+      "fullTextUrl": "https://arxiv.org/pdf/astro-ph/0606644",
+      "bibcode": "2006ApJ...649..788R",
+      "sections": "Sections 2, 4.1, 4.3 and 6; Tables 1, 6 and 7",
+      "constraints": [
+        "Observed: 20 member-star sightlines in January 2002, spectral resolution about 1.7 km/s, with molecular components around +7 and +9.5 km/s LSR. These are pencil beams, not a continuous depth map.",
+        "Published-model diagnostic: typical diffuse gas density around 50 cm^-3 for molecular fraction 0.07, conditional on steady-state chemistry. Time-dependent CH+ formation and tracer stratification remain limitations.",
+        "The HD23512 direction marks a distinct molecular-cloud sightline. Its coordinates scope an authored local deformation, but neither its velocity nor reddening sets a recovered cloud depth or boundary."
+      ],
+      "implementationStatus": "Qualified literature evidence in physical-evidence.json; no velocity/density fit. Only the published sky anchor scopes a clearly authored single-surface hypothesis."
     }
   ],
   "qualification": {
-    "starRemoval": "Not run or authorized by this intake.",
-    "reconstruction": "Not run; no volume, shell, depth, dust-scattering operator or thermal fit selected.",
-    "stellarRegistration": "Publisher/service transforms recorded. Independent held-out star residuals belong to preparation evidence, not this source dossier.",
-    "scope": "Local Nebula Lab Alignment only. No production body or main website promotion."
+    "starRemoval": "Four selected sources completed native NOX under later explicit authorization; processing-evidence.json pins exact accounting and remaining saturated-core limitations. Archived 2MASS/IRIS were not processed.",
+    "reconstruction": "Four-lens authored single-surface display model compiled and inspected; README records exact result IDs. Visual and physical acceptance withheld; scattering and thermal fitting remain unsupported.",
+    "stellarRegistration": "The four processing sources pass held-out relative-star checks. The two wider optical candidates have authored bright-star seeds only and remain unverified; outer-field distortion and absolute sky calibration are unresolved.",
+    "scope": "Local Nebula Lab only. No production body or main website promotion."
   },
   "gaps": [
     "WISP 165/220 nm diffuse UV signal is real and documented, but native original rasters with verified WCS and reuse terms have not been acquired; no UV image is invented or substituted from a paper figure.",
@@ -237,8 +301,10 @@
       "noirlab-optical",
       "spitzer-irac",
       "spitzer-irac-mips",
-      "wise-four-band"
+      "wise-four-band",
+      "iau-usama-widefield",
+      "andreo-widefield"
     ],
-    "reason": "Optical filaments and infrared dust structure with passing relative star registration. 2MASS is mainly stellar context; IRIS is coarse cirrus context without verified registration."
+    "reason": "Optical filaments and infrared dust structure with passing relative star registration. 2MASS is mainly stellar context; IRIS is coarse cirrus context without verified registration. Two wider optical originals are visible for comparison at provisional star-seeded placements; they are not processed inputs."
   }
 }

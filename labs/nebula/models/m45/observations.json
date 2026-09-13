@@ -328,6 +328,106 @@
       "processingVariant": "Unchanged CDS hips2fits PNG service response, explicitly requested ICRS TAN grid. Survey color-HiPS reprojection, not native detector pixels.",
       "wcsSource": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
       "hipsTerms": "https://opendatacommons.org/licenses/odbl/1-0/"
+    },
+    {
+      "id": "iau-usama-widefield",
+      "label": "IAU / Usama · wide optical · unverified",
+      "url": "https://iauarchive.eso.org/static/archives/images/original/ann22042ab.tif",
+      "page": "https://iauarchive.eso.org/public/images/detail/ann22042ab/",
+      "sha256": "7df5986e086ea3f332ae1f8d07b56c7de5ec1c1a34d0309a000cf4a43ed77bd9",
+      "width": 3365,
+      "height": 2234,
+      "bytes": 13318250,
+      "bitDepth": 8,
+      "fieldArcminutes": [
+        445.84518402283305,
+        295.99350404368766
+      ],
+      "centerIcrsDegrees": [
+        56.89908378293359,
+        24.20643701451347
+      ],
+      "northRightDegrees": -89.221658513961,
+      "bands": "Optical · stretched broadband RGB display; exact passbands not published",
+      "credit": "Mohamed Usama/IAU OAE",
+      "termsUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          3365,
+          2234
+        ],
+        "referencePixel": [
+          1724.5028014682432,
+          1178.5182076061737
+        ],
+        "referenceValueDeg": [
+          56.75,
+          24.1167
+        ],
+        "scaleDeg": [
+          -0.002208247568216112,
+          0.002208247568216112
+        ],
+        "rotationDeg": 89.221658513961
+      },
+      "registrationMode": "field-stars",
+      "localCache": ".local/nebula-lab/intake/m45/widefield/iau-usama.tif",
+      "metadataNote": "No publisher WCS. Authored initial TAN placement from a small set of bright-star constellation correspondences to the pinned NOIRLab image. Independent faint-star registration has not passed. Full native raster preserved.",
+      "processingVariant": "Full publisher TIFF, previously JPEG-compressed upstream.",
+      "license": "CC BY 4.0",
+      "coordinateOrigin": "authored-bright-star-seed"
+    },
+    {
+      "id": "andreo-widefield",
+      "label": "Andreo · wide optical · unverified",
+      "url": "https://apod.nasa.gov/apod/image/0910/pleiades_andreo_big.jpg",
+      "page": "https://apod.nasa.gov/apod/ap091014.html",
+      "sha256": "be7518ac9f74e4ac31aef6704511190c4ca6eb87d5e32800fe56feed27a94d68",
+      "width": 2200,
+      "height": 1567,
+      "bytes": 1607314,
+      "bitDepth": 8,
+      "fieldArcminutes": [
+        291.5765341897445,
+        207.68201321605892
+      ],
+      "centerIcrsDegrees": [
+        57.0714757263529,
+        24.091687566967988
+      ],
+      "northRightDegrees": 13.999150606491504,
+      "bands": "Optical · stretched broadband RGB display; exact passbands not published",
+      "credit": "Rogelio Bernal Andreo (Deep Sky Colors)",
+      "termsUrl": "https://www.deepskycolors.com/creativecommons-required-attribution-line/",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          2200,
+          1567
+        ],
+        "referencePixel": [
+          1232.116032496135,
+          762.6997268192995
+        ],
+        "referenceValueDeg": [
+          56.75,
+          24.1167
+        ],
+        "scaleDeg": [
+          -0.0022089131378010946,
+          0.0022089131378010946
+        ],
+        "rotationDeg": -13.999150606491504
+      },
+      "registrationMode": "field-stars",
+      "localCache": ".local/nebula-lab/intake/m45/widefield/andreo-pleiades.jpg",
+      "metadataNote": "No publisher WCS. Authored initial TAN placement from a small set of bright-star constellation correspondences to the pinned NOIRLab image. Independent faint-star registration has not passed. Full native raster preserved.",
+      "processingVariant": "Full APOD-hosted photographer JPEG; local unchanged comparison only. Redistribution restricted to noncommercial/no derivatives.",
+      "license": "CC BY-NC-ND 3.0",
+      "coordinateOrigin": "authored-bright-star-seed"
     }
   ],
   "nativeRemoval": {
@@ -337,5 +437,11 @@
     },
     "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
   },
-  "intakeStatus": "Original-image inspection only. Removal pins satisfy the existing recipe schema; no star removal, reconstruction or physical constraints have been run."
+  "intakeStatus": "Original-image inspection only. Removal pins satisfy the existing recipe schema; no star removal, reconstruction or physical constraints have been run.",
+  "nativeSeparationCache": {
+    "recipe": {
+      "path": "labs/nebula/models/m45/processing-observations.json",
+      "sha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705"
+    }
+  }
 }

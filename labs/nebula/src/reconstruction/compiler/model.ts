@@ -2,12 +2,14 @@ import type { Matrix } from '../../alignment/observations-ui/model';
 import { jointPath, jointRecord } from '../joint-fit/model';
 export const COMPILER_VERSION = 'registered-emission-compiler@1';
 export interface CompilerControls { detail: number; faint: number; depth: number }
+export interface CompilerStarCatalogue { sourceIds: string[]; mergeRadiusArcsec: number }
 export const defaultCompilerControls: CompilerControls = { detail: .65, faint: .35, depth: 1 };
 export interface CompilerRequest { action: 'apply'; imageId: 'compiler'; recipePath: string; cataloguePath: string;
   imageToFrame: Record<string, Matrix>; evidence: { sensitivity: number; weights: number[] }; controls: CompilerControls }
 export interface CompilerRecipe { schema: 'cssearth-nebula-compiler@1'; id: string; label: string; observationRecipe: string;
-  observationCatalogue: string; structureRecipe: string; structureCatalogue: string; jointRecipe?: string; depthRecipe?: string;
-  defaultSourceId: string; maximumStars: number; interpretation: string }
+  observationCatalogue: string; structureRecipe: string; structureCatalogue: string; jointRecipe?: string; depthRecipe?: string; sampledRecipe?: string;
+  defaultSourceId: string; maximumStars: number; interpretation: string;
+  defaultControls?: CompilerControls; sourceWeights?: Record<string, number>; starCatalogue?: CompilerStarCatalogue }
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const range = (v: unknown, low: number, high: number): v is number => finite(v) && v >= low && v <= high;
 export function readCompilerControls(v: unknown): CompilerControls {
@@ -30,8 +32,41 @@ export function readCompilerRecipe(v: unknown): CompilerRecipe {
   if (!jointRecord(v) || v.schema !== 'cssearth-nebula-compiler@1' || typeof v.id !== 'string' || !/^[a-z0-9-]+$/.test(v.id) || typeof v.label !== 'string' ||
       !jointPath(v.observationRecipe) || !jointPath(v.observationCatalogue) || !jointPath(v.structureRecipe) || !jointPath(v.structureCatalogue) ||
       (v.jointRecipe !== undefined && !jointPath(v.jointRecipe)) || (v.depthRecipe !== undefined && (!jointPath(v.depthRecipe) || !v.depthRecipe.startsWith('labs/nebula/models/'))) ||
-      (v.jointRecipe !== undefined && v.depthRecipe !== undefined) || typeof v.defaultSourceId !== 'string' || !range(v.maximumStars, 0, 2000) || !Number.isInteger(v.maximumStars) || typeof v.interpretation !== 'string') throw new TypeError('Invalid compiler recipe.');
+      (v.sampledRecipe !== undefined && (!jointPath(v.sampledRecipe) || !v.sampledRecipe.startsWith('labs/nebula/models/'))) ||
+      [v.jointRecipe, v.depthRecipe, v.sampledRecipe].filter(value => value !== undefined).length > 1 || typeof v.defaultSourceId !== 'string' || !range(v.maximumStars, 0, 2000) || !Number.isInteger(v.maximumStars) || typeof v.interpretation !== 'string') throw new TypeError('Invalid compiler recipe.');
+  const controls = v.defaultControls === undefined ? undefined : readCompilerControls(v.defaultControls);
+  const starCatalogue = v.starCatalogue === undefined ? undefined : readCompilerStarCatalogue(v.starCatalogue);
+  if (starCatalogue && (starCatalogue.sourceIds[0] !== v.defaultSourceId || v.sampledRecipe !== undefined))
+    throw new TypeError('Compiler star catalogue must start with the reference source and use the emission-field route.');
+  let sourceWeights: Record<string, number> | undefined;
+  if (v.sourceWeights !== undefined) {
+    if (!jointRecord(v.sourceWeights) || !Object.keys(v.sourceWeights).length || Object.keys(v.sourceWeights).length > 8 ||
+        Object.entries(v.sourceWeights).some(([id, weight]) => !/^[a-z0-9][a-z0-9-]*$/.test(id) || !range(weight, 0, 2)))
+      throw new TypeError('Invalid compiler source weights.');
+    sourceWeights = Object.fromEntries(Object.entries(v.sourceWeights).map(([id, weight]) => [id, Number(weight)]));
+  }
   return { schema: v.schema, id: v.id, label: v.label, observationRecipe: v.observationRecipe, observationCatalogue: v.observationCatalogue,
-    structureRecipe: v.structureRecipe, structureCatalogue: v.structureCatalogue, jointRecipe: v.jointRecipe, ...(v.depthRecipe ? { depthRecipe: v.depthRecipe } : {}), defaultSourceId: v.defaultSourceId,
-    maximumStars: v.maximumStars, interpretation: v.interpretation };
+    structureRecipe: v.structureRecipe, structureCatalogue: v.structureCatalogue, jointRecipe: v.jointRecipe, ...(v.depthRecipe ? { depthRecipe: v.depthRecipe } : {}), ...(v.sampledRecipe ? { sampledRecipe: v.sampledRecipe } : {}), defaultSourceId: v.defaultSourceId,
+    maximumStars: v.maximumStars, interpretation: v.interpretation,
+    ...(controls ? { defaultControls: controls } : {}), ...(sourceWeights ? { sourceWeights } : {}), ...(starCatalogue ? { starCatalogue } : {}) };
+}
+export function readCompilerStarCatalogue(v: unknown): CompilerStarCatalogue {
+  if (!jointRecord(v) || !Array.isArray(v.sourceIds) || v.sourceIds.length < 2 || v.sourceIds.length > 8 ||
+      v.sourceIds.some(id => typeof id !== 'string' || !/^[a-z0-9][a-z0-9-]*$/.test(id)) || new Set(v.sourceIds).size !== v.sourceIds.length ||
+      !range(v.mergeRadiusArcsec, .01, 60)) throw new TypeError('Invalid compiler star catalogue.');
+  return { sourceIds: v.sourceIds.map(String), mergeRadiusArcsec: v.mergeRadiusArcsec };
+}
+/** Callers omit controls only when they have no saved or explicit user choice. */
+export function compilerControlsForRecipe(recipe: CompilerRecipe, requested?: CompilerControls): CompilerControls {
+  return readCompilerControls(requested ?? recipe.defaultControls ?? defaultCompilerControls);
+}
+/** IDs prevent catalogue reordering from transferring a source's authored weight to another lens. */
+export function compilerSourceWeights(recipe: CompilerRecipe, sourceIds: string[], requested: number[] = []): number[] {
+  if (!sourceIds.length || new Set(sourceIds).size !== sourceIds.length ||
+      Object.keys(recipe.sourceWeights ?? {}).some(id => !sourceIds.includes(id)))
+    throw new TypeError('Compiler source weights reference an unavailable image.');
+  const weights = requested.length ? [...requested] : sourceIds.map(id => recipe.sourceWeights?.[id] ?? 1);
+  if (weights.length !== sourceIds.length || weights.some(weight => !range(weight, 0, 2)) || !weights.some(weight => weight > 0))
+    throw new TypeError('Enable at least one source image with valid compiler weights.');
+  return weights;
 }

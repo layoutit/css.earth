@@ -1,0 +1,396 @@
+{
+  "schema": "cssearth-nebula-physical-evidence@1",
+  "subjectId": "m1",
+  "asOf": "2026-09-13",
+  "status": "source-qualified conditional reconstruction; not measured density or independent physical validation",
+  "parameterClasses": {
+    "observed": "measured observable or metadata",
+    "published-model": "conditional literature inference",
+    "authored": "our transport or display choice"
+  },
+  "coordinateRule": "Common tangent frame: x west, y north, z away from Earth; PA is east of north; each epoch retained.",
+  "sources": [
+    {
+      "id": "ng-romani-2004",
+      "title": "Fitting Pulsar Wind Tori",
+      "url": "https://arxiv.org/pdf/astro-ph/0310155v1",
+      "locator": "Table 1 and Section II; table visually checked",
+      "access": "full PDF downloaded; cited portions inspected",
+      "sha256": "4420e4012121738a8f9b767e2da7037192afa46f4ad59f2eff72f5687fd2398c"
+    },
+    {
+      "id": "ng-romani-2008",
+      "title": "Fitting Pulsar Wind Tori II",
+      "url": "https://arxiv.org/pdf/0710.4168v1",
+      "locator": "Systematic uncertainty context",
+      "access": "full PDF downloaded; cited portions inspected",
+      "sha256": "cc7a2dc03cebc3d65866d08ec80baafd07d4aedf5a515bffbbee3236b384ed55"
+    },
+    {
+      "id": "weisskopf-2012",
+      "title": "Unraveling the Geometry of the Crab Nebula Inner Ring",
+      "url": "https://arxiv.org/pdf/1109.2868v1",
+      "locator": "Tables 1-3 and Section 4; tables visually checked",
+      "access": "full PDF downloaded; cited portions inspected",
+      "sha256": "1eb68ed6ea615c958bee48368dc8b2b3eb4071276fa44fd2917896213f7e9a4d"
+    },
+    {
+      "id": "kaplan-2008",
+      "title": "A Precise Proper Motion for the Crab Pulsar",
+      "url": "https://arxiv.org/pdf/0801.1142v1",
+      "locator": "Section 2.4 ICRS position and reference-frame caveats",
+      "access": "full PDF downloaded; cited portions inspected",
+      "sha256": "eb9e0f699b532d308bd1faf01d68a13aac29f4e6391291cf47370fec6a211517"
+    },
+    {
+      "id": "martin-2021",
+      "title": "3D mapping of the Crab Nebula with SITELLE I",
+      "url": "https://arxiv.org/pdf/2101.02709v1",
+      "locator": "Sections 2-4, released dataset and notebook",
+      "access": "full PDF downloaded; cited portions inspected",
+      "sha256": "11e28a7280788f67f2d61bc5aa82626c68793af7b779e734239cd5feb4f0fef9"
+    },
+    {
+      "id": "temim-2024",
+      "title": "Dissecting the Crab Nebula with JWST",
+      "url": "https://arxiv.org/pdf/2406.00172v1",
+      "locator": "Sections 2-6, Table 1, dust/synchrotron maps",
+      "access": "full PDF downloaded; cited portions inspected",
+      "sha256": "98d35024ef07749125d16e7c07cbd82b2c131151c8a831f4f8cf020114614eb8"
+    },
+    {
+      "id": "dubner-2017",
+      "title": "Morphological properties of the Crab Nebula",
+      "url": "https://arxiv.org/pdf/1704.02968v1",
+      "locator": "Sections 2-5, radio beam and observation epochs",
+      "access": "full PDF downloaded; cited portions inspected",
+      "sha256": "032f8b0f2c085898b21498752fc7dcdbd09a69197eaebffa6c67f77bdeb32801"
+    },
+    {
+      "id": "ding-2026",
+      "title": "3D Kinematic Reconstruction including the Northern Ejecta Jet",
+      "url": "https://arxiv.org/pdf/2606.26231v1",
+      "locator": "Sections 2-4; newer arrays not acquired",
+      "access": "full PDF downloaded; cited portions inspected",
+      "sha256": "c507168b85427945d74ccf2cd7111a5620d289c473ce1bad4fdb58d43b2df665"
+    },
+    {
+      "id": "martin-2025",
+      "title": "The Non-Uniform Expansion of the Crab Nebula",
+      "url": "https://arxiv.org/pdf/2502.19632v1",
+      "locator": "Abstract and proper-motion limits",
+      "access": "full PDF downloaded; cited portions inspected",
+      "sha256": "90cb4798149062ef7118d7c75ef55aa4ab7b580c5dce837459fc9ffd103fa340"
+    },
+    {
+      "id": "lin-2023",
+      "title": "The Radio Parallax of the Crab Pulsar",
+      "url": "https://arxiv.org/pdf/2306.01617v1",
+      "locator": "Sections 2,4,5; pointing centres are not astrometric measurement positions",
+      "access": "full PDF downloaded; cited portions inspected",
+      "sha256": "1f00dfcb4cfa1d6002f2262cbd958f883029c2ec642fad77eb42c96d010b1a4e"
+    },
+    {
+      "id": "sitelle-2016-released-points",
+      "url": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
+      "manifest": "physical-sources.json"
+    },
+    {
+      "id": "simbad-gaia-crab-pulsar",
+      "url": "https://simbad.harvard.edu/simbad/sim-basic?Ident=Crab+Pulsar&submit=SIMBAD+search",
+      "manifest": "physical-sources.json"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "sitelle-observation",
+      "classification": "observed",
+      "sourceIds": [
+        "martin-2021"
+      ],
+      "quantity": "2016 November 22,25,26 SN3 spectroscopy",
+      "value": {
+        "fieldArcmin": [
+          11,
+          11
+        ],
+        "nativeSamplingArcsec": 0.32,
+        "seeingFwhmArcsec": 1.17,
+        "seeingUncertaintyArcsec": 0.04,
+        "effectiveResolvingPower": 8870,
+        "effectiveResolvingPowerUncertainty": 20,
+        "tracers": [
+          "Halpha",
+          "NII6548",
+          "NII6583",
+          "SII6716",
+          "SII6731"
+        ]
+      },
+      "unit": "units named in keys",
+      "scope": "Main line-emitting remnant; faint northern OIII ejecta jet poorly traced",
+      "limitations": "Released 416573-row table contains flux-selected components, no per-row errors or spectral-frame metadata; not gas density."
+    },
+    {
+      "id": "homologous-depth",
+      "classification": "published-model",
+      "sourceIds": [
+        "martin-2021"
+      ],
+      "quantity": "depth conditional on linear expansion",
+      "value": {
+        "expansionPerYear": 0.00116,
+        "uncertaintyPerYear": 0.000015,
+        "adoptedDistancePc": 2000
+      },
+      "unit": "units named in keys",
+      "scope": "SITELLE line-emitting ejecta only",
+      "limitations": "Velocity is not observed depth. We retain the authors linear-expansion interpretation; global acceleration and nonhomology remain."
+    },
+    {
+      "id": "nonuniform-expansion",
+      "classification": "observed",
+      "sourceIds": [
+        "martin-2025"
+      ],
+      "quantity": "proper-motion sample and mean convergence date",
+      "value": {
+        "vectors": 19974,
+        "maximumUncertaintyMasPerYear": 10,
+        "observationYears": [
+          2007,
+          2016,
+          2019
+        ],
+        "convergenceYear": 1105.5,
+        "uncertaintyYears": 0.5
+      },
+      "unit": "units named in keys",
+      "scope": "Most bright filaments; weakest acceleration toward east/west bays",
+      "limitations": "Convergence date differs from explosion1054. Do not rescale all multi-epoch images to force filaments together."
+    },
+    {
+      "id": "northern-ejecta-jet",
+      "classification": "observed",
+      "sourceIds": [
+        "ding-2026"
+      ],
+      "quantity": "newer multispectral SITELLE coverage",
+      "value": {
+        "filters": [
+          "SN1",
+          "SN2",
+          "C2",
+          "SN3"
+        ],
+        "epochs": [
+          "2020-10-13",
+          "2020-11-14",
+          "2020-11-17",
+          "2022-12-27"
+        ],
+        "nativeSamplingArcsec": 0.32
+      },
+      "unit": "units named in keys",
+      "scope": "Includes faint northern OIII ejecta jet, distinct from central relativistic X-ray jets",
+      "limitations": "New arrays not acquired; do not invent the jet outside selected RGB footprints or extrapolate older red-line table to it."
+    },
+    {
+      "id": "torus-pair",
+      "classification": "published-model",
+      "sourceIds": [
+        "ng-romani-2004"
+      ],
+      "quantity": "Gaussian-cross-section torus fits",
+      "value": {
+        "inner": {
+          "axisPaEastOfNorthDeg": 124,
+          "axisInclinationFromObserverDeg": 61.3,
+          "radiusArcsec": 15.6,
+          "sigmaArcsec": 3,
+          "beta": 0.49
+        },
+        "outer": {
+          "axisPaEastOfNorthDeg": 126.31,
+          "axisInclinationFromObserverDeg": 63.03,
+          "radiusArcsec": 41.33,
+          "sigmaArcsec": 5.9,
+          "beta": 0.55
+        }
+      },
+      "unit": "units named in keys",
+      "scope": "Inner pulsar wind, Chandra fit; outer and inner fitted separately",
+      "uncertainty": {
+        "innerPaDeg": 0.1,
+        "innerInclinationDeg": 0.1,
+        "innerRadiusArcsec": 0.03,
+        "outerPaDeg": 0.03,
+        "outerInclinationDeg": 0.02,
+        "outerRadiusArcsec": [
+          0.03,
+          0.02
+        ]
+      },
+      "limitations": "Sigmas fixed by authors. Statistical errors do not include all model errors. Selected baseline; no calibrated synchrotron transfer or evolution model."
+    },
+    {
+      "id": "offset-ring-alternative",
+      "classification": "published-model",
+      "sourceIds": [
+        "weisskopf-2012"
+      ],
+      "quantity": "offset circular-ring alternative",
+      "value": {
+        "peakRadiusArcsec": 13.25,
+        "axisPaEastOfNorthDeg": 298.4,
+        "axisInclinationFromObserverDeg": 119.1,
+        "axialOffsetArcsec": 1.04
+      },
+      "unit": "units named in keys",
+      "uncertainty": {
+        "peakRadiusArcsec": 0.26,
+        "axisPaDeg": 1.1,
+        "inclinationDeg": 1,
+        "axialOffsetArcsec": 0.13
+      },
+      "scope": "LETG/HRC-S ObsIDs758/759, 2000 January31/February2; ~40arcsec core",
+      "limitations": "Alternative to selected torus pair, not averaged into it. Peak and inner-edge radii differ. Nonunique deprojection; observed ellipse offset does not determine a unique flow."
+    },
+    {
+      "id": "dust-components",
+      "classification": "published-model",
+      "sourceIds": [
+        "temim-2024"
+      ],
+      "quantity": "warm dust and synchrotron separation",
+      "value": {
+        "warmDustApproxK": 55,
+        "componentBandsMicrometers": [
+          4.8,
+          18,
+          21
+        ],
+        "nircamEpoch": "2022-10-31",
+        "miriEpoch": "2023-02-24"
+      },
+      "unit": "units named in keys",
+      "scope": "Main JWST mosaic; spectra at two small filament pointings only",
+      "limitations": "Warm dust favors dense filament cores and multiple synchrotron bays. Outreach magenta is not dust density, opacity, or independent mass. NIRCam astrometry tied toGaiaDR2; component views reuse same photons."
+    },
+    {
+      "id": "radio-source",
+      "classification": "observed",
+      "sourceIds": [
+        "dubner-2017"
+      ],
+      "quantity": "radio imaging beam",
+      "value": {
+        "frequencyGhz": 3,
+        "beamFwhmArcsec": [
+          0.93,
+          0.8
+        ],
+        "beamPaDeg": 76.3,
+        "noiseMjyPerBeam": 0.03
+      },
+      "unit": "units named in keys",
+      "scope": "2012 VLA main remnant map with expanded older large-scale template",
+      "limitations": "PublisherRGB is display signal. Fine radio filaments and knots are nonstellar; preserve them. Beam is not .10015arcsec RGB sampling."
+    },
+    {
+      "id": "pulsar-position",
+      "classification": "observed",
+      "sourceIds": [
+        "simbad-gaia-crab-pulsar"
+      ],
+      "quantity": "ICRS astrometry",
+      "value": {
+        "raDeg": 83.63311445609,
+        "decDeg": 22.01448713834,
+        "epochJulianYear": 2000,
+        "muRaCosDecMasPerYear": -11.513,
+        "muDecMasPerYear": 2.302,
+        "gMagnitude": 16.52713
+      },
+      "unit": "units named in keys",
+      "scope": "GaiaDR3 3403818172572314624; SIMBAD propagated J2000 ICRS position",
+      "limitations": "Catalogue angular position only. No relative line-of-sight position inside ejecta; model z=0 and rendered point size are authored."
+    },
+    {
+      "id": "pulsar-distance",
+      "classification": "observed",
+      "sourceIds": [
+        "lin-2023"
+      ],
+      "quantity": "VLBI astrometry",
+      "value": {
+        "parallaxMas": 0.53,
+        "distanceKpc": 1.9,
+        "properMotionMasPerYear": [
+          -11.34,
+          2.65
+        ]
+      },
+      "unit": "units named in keys",
+      "uncertainty": {
+        "parallaxMas": 0.06,
+        "distanceKpc": [
+          0.18,
+          0.22
+        ],
+        "properMotionMasPerYear": [
+          0.06,
+          0.14
+        ]
+      },
+      "scope": "Four EVN epochs2015-2017; differential calibrator astrometry",
+      "limitations": "Selected ejecta conversion retains original2kpc conditional model for reproducibility; modern measurement is compatible. Do not confuse paper pointing centres with measured pulsar positions."
+    },
+    {
+      "id": "grid-to-sky-registration",
+      "classification": "authored",
+      "sourceIds": [
+        "sitelle-2016-released-points"
+      ],
+      "quantity": "native-grid transport",
+      "value": {
+        "rawXyPitch": 0.002579207,
+        "nativeZeroBasedOrigin": [
+          1090.7429742598981,
+          1032.0617300834501
+        ],
+        "nativePixelDirection": [
+          "right",
+          "up"
+        ],
+        "velocityPerRawZ": -1116.0011622611532,
+        "maximumRegionalShiftNativePixels": 1
+      },
+      "unit": "units named in keys",
+      "scope": "Full released point table compared with its own deep-frame emission, then deep-frame stars to Hubble",
+      "limitations": "Original table omits units/origin. Same-observation line/deep matching is internal dataset coordinate qualification, not independent astrometry. Conservatively~.4arcsec combined local uncertainty; fixed raw-grid scale, no morphology correction across epochs."
+    },
+    {
+      "id": "presentation-support",
+      "classification": "authored",
+      "sourceIds": [],
+      "quantity": "sampling and component display",
+      "value": {
+        "gridLongestAxis": 256,
+        "blurSigmaCells": 0.5,
+        "weightExponent": 0.5,
+        "pulsarDepthArcsec": 0,
+        "jetSigmaArcsec": 4,
+        "peakOpticalDepth": 1.5
+      },
+      "unit": "units named in keys",
+      "scope": "Local rotating visualization; positive emissivity only",
+      "limitations": "Smoothing, relative component weights, finite jet lengths, pulsar radius/alpha, and field-star depths are display assumptions. At approximately1.4arcsec grid spacing, sigma0.5cell has about1.65arcsec FWHM, coarser than SITELLE seeing1.17±0.04arcsec. The initial128cell/sigma1 prototype was replaced before completed visual qualification. Absorption/scattering, relativistic beaming, and time evolution are not solved."
+    }
+  ],
+  "implementationContract": [
+    "Separate ejecta, synchrotron wind, and central pulsar; radio/X-ray compact features are not field stars.",
+    "Retain six observation lenses; shared physical components are weighted per tracer, with independent neutral union.",
+    "No reconstructed extension where data are missing; no astrophysical density or optical-depth claim."
+  ]
+}

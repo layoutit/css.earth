@@ -4,10 +4,11 @@ export type LayerId = 'original' | 'diffuse' | 'stars';
 export type ImageLayer = { path: string; width: number; height: number };
 export interface Observation {
   id: string; label: string;
-  source: { width: number; height: number; url: string; sha256: string; credit: string; page: string };
+  source: { width: number; height: number; url: string; sha256: string; credit: string; page: string; stellarTreatment?: 'preserve'; coordinateOrigin?: 'authored-bright-star-seed' };
   layers: { original: ImageLayer; diffuse?: ImageLayer; stars?: ImageLayer };
   imageToFrame: Matrix;
-  registration: { status: 'verified' | 'publisher'; matchedStars: number; rmsPixels: number; maxResidualPixels: number;
+  registration: { status: 'verified' | 'publisher' | 'transferred'; matchedStars: number; rmsPixels: number; maxResidualPixels: number;
+    referenceId?: string; bridgeMatchedStars?: number;
     matches: { source: Point; frame: Point; heldOut: boolean }[] };
 }
 export interface Observations {
@@ -36,17 +37,21 @@ export function readObservations(value: unknown): Observations {
     if (!record(image) || !string(image.id) || ids.has(image.id) || !string(image.label) || !record(image.source) || !record(image.layers) || !matrix(image.imageToFrame) || !record(image.registration)) throw new Error('Invalid observation.');
     ids.add(image.id); const s = image.source, r = image.registration;
     if (!positive(s.width) || !positive(s.height) || !string(s.url) || !s.url.startsWith('https://') || !string(s.page) || !s.page.startsWith('https://') || !string(s.sha256) || !/^[a-f0-9]{64}$/.test(s.sha256) || !string(s.credit)) throw new Error('Invalid observation source.');
-    if (!['verified', 'publisher'].includes(String(r.status)) || !finite(r.matchedStars) || r.matchedStars < 0 || !finite(r.rmsPixels) || r.rmsPixels < 0 || !finite(r.maxResidualPixels) || r.maxResidualPixels < 0 || (r.matches !== undefined && !Array.isArray(r.matches))) throw new Error('Invalid registration evidence.');
+    if (!['verified', 'publisher', 'transferred'].includes(String(r.status)) || !finite(r.matchedStars) || r.matchedStars < 0 || !finite(r.rmsPixels) || r.rmsPixels < 0 || !finite(r.maxResidualPixels) || r.maxResidualPixels < 0 || (r.matches !== undefined && !Array.isArray(r.matches))) throw new Error('Invalid registration evidence.');
+    if (s.stellarTreatment !== undefined && s.stellarTreatment !== 'preserve') throw new Error('Invalid stellar treatment.');
+    if (s.coordinateOrigin !== undefined && s.coordinateOrigin !== 'authored-bright-star-seed') throw new Error('Invalid coordinate origin.');
+    if (r.status === 'transferred' && (!string(r.referenceId) || !finite(r.bridgeMatchedStars) || r.bridgeMatchedStars < 45 || r.matchedStars !== 0 || !Array.isArray(r.matches) || r.matches.length !== 0)) throw new Error('Transferred registration requires honest bridge evidence.');
     const matches = (Array.isArray(r.matches) ? r.matches : []).map((match: unknown) => {
       if (!record(match) || !point(match.source) || !point(match.frame) || (match.heldOut !== undefined && typeof match.heldOut !== 'boolean')) throw new Error('Invalid registration star.');
       return { source: match.source, frame: match.frame, heldOut: match.heldOut === true };
     });
     return { id: image.id, label: image.label,
-      source: { width: s.width, height: s.height, url: s.url, page: s.page, sha256: s.sha256, credit: s.credit },
+      source: { width: s.width, height: s.height, url: s.url, page: s.page, sha256: s.sha256, credit: s.credit, ...(s.stellarTreatment === 'preserve' ? { stellarTreatment: 'preserve' } : {}), ...(s.coordinateOrigin === 'authored-bright-star-seed' ? { coordinateOrigin: 'authored-bright-star-seed' } : {}) },
       imageToFrame: image.imageToFrame, layers: { original: layer(image.layers.original),
         ...(image.layers.diffuse === undefined ? {} : { diffuse: layer(image.layers.diffuse) }),
         ...(image.layers.stars === undefined ? {} : { stars: layer(image.layers.stars) }) },
-      registration: { status: r.status === 'verified' ? 'verified' : 'publisher', matchedStars: r.matchedStars, rmsPixels: r.rmsPixels, maxResidualPixels: r.maxResidualPixels, matches } };
+      registration: { status: r.status === 'verified' ? 'verified' : r.status === 'transferred' ? 'transferred' : 'publisher', matchedStars: r.matchedStars, rmsPixels: r.rmsPixels, maxResidualPixels: r.maxResidualPixels, matches,
+        ...(string(r.referenceId) ? { referenceId: r.referenceId } : {}), ...(finite(r.bridgeMatchedStars) ? { bridgeMatchedStars: r.bridgeMatchedStars } : {}) } };
   });
   return { id: value.id, frame: { width: f.width, height: f.height, fieldArcminutes: f.fieldArcminutes, centerIcrsDegrees: f.centerIcrsDegrees, northUp: true }, images };
 }

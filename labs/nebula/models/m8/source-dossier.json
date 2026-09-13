@@ -313,5 +313,20 @@
       "spitzer-mid-infrared"
     ],
     "reason": "Full-nebula optical and complementary near/mid-infrared structure with passing relative field-star checks. Hubble close-ups remain unverified; the Herschel map is zero-filled over the central Lagoon region."
+  },
+  "processingFollowup": {
+    "date": "2026-09-13",
+    "observationRecipe": "processing-observations.json",
+    "sourceIds": [
+      "eso-optical",
+      "eso-vista",
+      "spitzer-mid-infrared"
+    ],
+    "physicalEvidence": "physical-evidence.json",
+    "physicalSources": "physical-sources.json",
+    "depthRecipe": "depth-model.json",
+    "compiler": "compiler.json",
+    "evidence": "processing-evidence.json",
+    "historicalNote": "Original intake and legacy hashes above retain their historical meaning; current processing and full-text qualification live in these separate records."
   }
 }
