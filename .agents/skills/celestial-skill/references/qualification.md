@@ -30,7 +30,7 @@ wording. A renderer-wide change warrants broader regression work than a source
 thumbnail change. Add performance traces when observed cost or changed runtime
 behavior justifies them; missing features do not need invented test scenarios.
 
-Use the [body commands](../../../../src/planets/README.md) for the selected package.
+Use the [body commands](../../../../src/objects/README.md) for the selected package.
 Follow the contract's [PR check rules](../../../../docs/provenance/CONTRACT.md#pull-requests)
 for reuse, broader checks and unrelated failures. Inspect runner arguments before
 launching a suite: `pnpm test:planets` runs every body, and `pnpm test:preparation`

@@ -3,7 +3,7 @@
 No camera fit or pixel correction. All four image patches are checks, withheld
 from the published camera solution. Uses the existing bounded DoG/ZNCC method.
 Requires numpy, scipy, astropy, Pillow, and Node; downloads nothing.
-Usage: python verify-catalog-camera.py src/planets/ida/source OUTPUT_DIRECTORY
+Usage: python verify-catalog-camera.py src/objects/ida/source OUTPUT_DIRECTORY
 """
 from pathlib import Path
 import argparse,hashlib,json,subprocess

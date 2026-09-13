@@ -42,7 +42,7 @@ const heliocentricKm = (id: string): number[] => {
 
 test('primary-specific companion sources define one global parent origin and conic at the scene epoch', async () => {
   for (const id of ['hiiaka', 'menoetius', 'romulus'] as const) {
-    const source = requireEpochState(JSON.parse(await readFile(new URL(`../src/planets/${id}/source/validation/epoch-state.json`, import.meta.url), 'utf8')), `${id} epoch state`);
+    const source = requireEpochState(JSON.parse(await readFile(new URL(`../src/objects/${id}/source/validation/epoch-state.json`, import.meta.url), 'utf8')), `${id} epoch state`);
     const parent = source.centerBodyId, primary = source.parentHeliocentricState;
     assert.deepEqual(requireSnapshot(geometry.BODY_HELIOCENTRIC_STATES[parent], `${parent} heliocentric state`).positionKm, primary.positionKm);
     assert.deepEqual(requireSnapshot(geometry.BODY_HELIOCENTRIC_STATES[parent], `${parent} heliocentric state`).velocityKmPerDay, primary.velocityKmPerDay);
@@ -115,7 +115,7 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
   const { refreshSolidSceneEpoch } = await import('./objects/terrestrial-layers/solid-scene.mts');
   const { restoreDepthSource } = await import('./prepared-depth-partitions.mts');
   const { prepareEclipticPresentationFrame } = await import('../src/platform/solar-presentation-frame.mts');
-  const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../src/planets/mimas/${name}`, import.meta.url), 'utf8'));
+  const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
   const config = parseSolidPreparationSource(await read('source/preparation/terrestrial.json'));
   const scene = parseSolidReplayScene(await read('prepared/scene.json')),
     definition = restoreDepthSource(requireObjectRuntimeDefinition(await read('prepared/runtime.json')));
@@ -142,7 +142,7 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
 test('epoch refresh restores a compiled surface before updating its physical frame', async () => {
   const { refreshSolidSceneEpoch } = await import('./objects/terrestrial-layers/solid-scene.mts');
   const { restoreDepthSource } = await import('./prepared-depth-partitions.mts');
-  const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../src/planets/mimas/${name}`, import.meta.url), 'utf8'));
+  const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
   const config = parseSolidPreparationSource(await read('source/preparation/terrestrial.json')),
     scene = parseSolidReplayScene(await read('prepared/scene.json'));
   const definition = requireObjectRuntimeDefinition(await read('prepared/runtime.json'));

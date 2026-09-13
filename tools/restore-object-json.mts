@@ -18,7 +18,7 @@ export async function restoreObjectJson(ids = OBJECTS.map(({ id }) => id), root 
   }
   let written = 0;
   for (const id of ids) {
-    const directory = resolve(root, 'src/planets', id);
+    const directory = resolve(root, 'src/objects', id);
     const descriptor = requireRecord(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')));
     const reference = requireRecord(descriptor.prepared);
     if (descriptor.id !== id || reference?.url !== 'prepared/object.json' ||

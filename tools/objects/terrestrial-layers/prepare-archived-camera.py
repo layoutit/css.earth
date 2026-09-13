@@ -1,7 +1,7 @@
 """Reproduce preparation-only OSIRIS or L'LORRI cameras from pinned archives.
 
 Requires numpy, scipy, astropy and spiceypy. No ephemerides are fetched here.
-Usage: python prepare-archived-camera.py src/planets/<id>/source
+Usage: python prepare-archived-camera.py src/objects/<id>/source
 """
 from pathlib import Path
 import argparse, hashlib, json, re, subprocess, tempfile

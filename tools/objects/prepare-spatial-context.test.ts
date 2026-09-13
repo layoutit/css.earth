@@ -11,7 +11,7 @@ import { readCatalog } from '../prepare-catalog.mts';
 import { prepareSpatialContext } from './prepare-spatial-context.js';
 
 const root = process.cwd();
-const sourcePath = resolve(root, 'src/planets/sun/source/navigation/universe.json');
+const sourcePath = resolve(root, 'src/objects/sun/source/navigation/universe.json');
 const solarGeometryPath = resolve(root, 'src/platform/solar-geometry.mts');
 const contextEntries = (await readCatalog()).filter(body => body.context && body.id !== 'sun')
   .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
@@ -20,7 +20,7 @@ const contextEntries = (await readCatalog()).filter(body => body.context && body
 test('migrated world-frame radii override astronomy only at the same position and epoch', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'cssearth-spatial-context-'));
   try {
-    const descriptor = JSON.parse(await readFile(resolve(root, 'src/planets/mercury/object.json'), 'utf8')) as Record<string, unknown>;
+    const descriptor = JSON.parse(await readFile(resolve(root, 'src/objects/mercury/object.json'), 'utf8')) as Record<string, unknown>;
     const properties = descriptor.properties as Record<string, unknown>;
     const frame = properties.worldFrame as Record<string, unknown>;
     const customRadiusM = 2_439_701;
@@ -52,7 +52,7 @@ test('frame comparison allows distant roundoff but rejects shifted positions, ep
       source.bodies = [{ id, name: id, color: '#aaaaaa' }];
       const authored = resolve(directory, 'source.json');
       await writeFile(authored, JSON.stringify(source));
-      const descriptor = JSON.parse(await readFile(resolve(root, `src/planets/${id}/object.json`), 'utf8'));
+      const descriptor = JSON.parse(await readFile(resolve(root, `src/objects/${id}/object.json`), 'utf8'));
       const frame = descriptor.properties.worldFrame;
       const objectDirectory = resolve(directory, id);
       await mkdir(objectDirectory);
@@ -91,7 +91,7 @@ test('authored context inventory extends beyond package and navigation registrie
     source.bodies = [{ id: 'new-object', name: 'New object', color: '#aabbcc' }];
     const authored = resolve(directory, 'source.json');
     await writeFile(authored, JSON.stringify(source));
-    const descriptor = JSON.parse(await readFile(resolve(root, 'src/planets/mercury/object.json'), 'utf8'));
+    const descriptor = JSON.parse(await readFile(resolve(root, 'src/objects/mercury/object.json'), 'utf8'));
     descriptor.id = 'new-object'; descriptor.properties.worldFrame.bodyRadiusM = 1234567;
     await mkdir(resolve(directory, 'new-object'));
     await writeFile(resolve(directory, 'new-object/object.json'), JSON.stringify(descriptor));
@@ -133,7 +133,7 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     }
     const sourcePrimaries = new Map<string, number[]>();
     for (const id of SCENE_SATELLITE_IDS) {
-      const record = JSON.parse(await readFile(resolve(root, `src/planets/${id}/source/validation/epoch-state.json`), 'utf8'));
+      const record = JSON.parse(await readFile(resolve(root, `src/objects/${id}/source/validation/epoch-state.json`), 'utf8'));
       sourcePositions.set(id, record.positionKm);
       if (record.parentHeliocentricState) sourcePrimaries.set(record.centerBodyId, record.parentHeliocentricState.positionKm);
     }

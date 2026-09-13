@@ -7,7 +7,7 @@ import test from "node:test";
 import {readPreparedFixture} from '../../fixtures.mts';
 const PREPARED_SATURN_PANEL=await readPreparedFixture('saturn','content');
 const PREPARED_SATURN_TITLE=PREPARED_SATURN_PANEL.title;
-const moonCatalog=JSON.parse(await readFile(new URL('../../../../src/planets/saturn/source/moons/saturn-moons.json',import.meta.url),'utf8'));
+const moonCatalog=JSON.parse(await readFile(new URL('../../../../src/objects/saturn/source/moons/saturn-moons.json',import.meta.url),'utf8'));
 
 test("publishes the prepared Saturn shell content", () => {
   assert.equal(PREPARED_SATURN_TITLE.label, "Saturn");

@@ -9,7 +9,7 @@ import {fromFile} from 'geotiff';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {prepareMaskedObservation} from '../../../../tools/objects/terrestrial-layers/observed-geotiff.mts';
 import {parseInterpreterRecipe} from '../../../../tools/objects/observation/interpret.mts';
-const root=new URL('../../../../src/planets/callisto/source/',import.meta.url);
+const root=new URL('../../../../src/objects/callisto/source/',import.meta.url);
 const json=async (path: string|URL)=>JSON.parse(await readFile(new URL(path,root),'utf8'));
 const hash=(b: string|NodeJS.ArrayBufferView<ArrayBufferLike>|Buffer<ArrayBufferLike>)=>createHash('sha256').update(b).digest('hex');
 const recipe=await json('preparation/galileo-color-conversion.json');

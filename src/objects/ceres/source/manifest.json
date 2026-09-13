@@ -1,0 +1,555 @@
+{
+  "schema": "cssceres-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "usgs-dawn-fc-global-140m",
+      "path": "ceres-fc-global.png",
+      "expectedBytes": 9750062,
+      "expectedSha256": "44de5317d0989d3e1b05feaf970c21c36f51b193c0972dc19bb678ecd8e89c7c",
+      "origin": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public scientific imagery with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Retrieve exact published bytes; pinned 2026-09-05. Source changes require review, not automatic refresh.",
+      "redistribution": "Original binary is reacquired locally and ignored by Git; derived textures retain the source credit.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 4096,
+      "height": 2048,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Dawn FC2 body-fixed orthorectified global mosaic. The PDS bundle-block adjustment uses Dawn orbit/attitude and the high-resolution Ceres shape model for ray intersections; the Kait-anchored longitude system is shared with the Dawn shape/topography work. Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting; the extreme south pole and other source gaps remain missing.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ceres-usgs-dawn-fc-global-140m",
+            "role": "material",
+            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-dawn-fc-pia19977",
+      "path": "PIA19977.jpg",
+      "expectedBytes": 1033656,
+      "expectedSha256": "e974d7e46e9feff4f6910ada38eeffc8ae65b057d576c4bd9d12d710c323a116",
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public scientific imagery with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Retrieve exact published bytes; pinned 2026-09-05. Source changes require review, not automatic refresh.",
+      "redistribution": "Original binary is reacquired locally and ignored by Git; derived textures retain the source credit.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 3078,
+      "height": 1537,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Dawn FC2 map-projected false-color image from the PIA19977 release. Its 920/750/440 nm assignments are retained as a separate mapped interpretation; it is not calibrated monochrome. The PDS mosaic family uses the Dawn body-fixed cartographic control, while this public composite retains its source epoch and gaps. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ceres-nasa-dawn-fc-pia19977",
+            "role": "material",
+            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Run node src/objects/ceres/tools/acquire.mjs to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Pinned shared shell title font.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dawn-elevation",
+      "path": "science/ceres-hamo-dtm.tif",
+      "expectedBytes": 466647217,
+      "expectedSha256": "81da73151b4353c03d7ca18fa85972d1cb9c8530b3c5496df9ade7cb75af1915",
+      "origin": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif",
+      "credit": "DLR / Dawn Team / USGS",
+      "license": "Public NASA PDS / USGS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m"
+      ],
+      "acquisition": "Retrieve the pinned original product, 2026-09-06. No source substitution or automatic hash refresh.",
+      "redistribution": "Original binary is reacquired locally and excluded from Git; derived maps retain attribution.",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "format": "geotiff",
+      "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ceres-dawn-elevation",
+            "role": "material",
+            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ceres-surface-minimap-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "f200fc2fab0d64481e1bfa2338f8716d47f3bb54986e536c0e181bd50e027047",
+      "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation metadata",
+      "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
+      "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
+      "consumers": [
+        "lenses",
+        "presentation",
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored texture axes and CSS surface selector."
+      }
+    },
+    {
+      "id": "usgs-gazetteer-ceres-nomenclature-center-pts",
+      "path": "features/CERES_nomenclature_center_pts.zip",
+      "expectedBytes": 427515,
+      "expectedSha256": "a2a803fd75989fc9e3fa562fca48845a2b48de040f30c18e96c5127208b94f61",
+      "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CERES_nomenclature_center_pts.zip",
+      "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "licenseEvidence": [
+        "features/manifest.json"
+      ],
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Ceres on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg/.prj members and the FGDC metadata record.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "consumers": [
+        "features"
+      ],
+      "title": "Gazetteer of Planetary Nomenclature: Ceres centre points",
+      "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
+      "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/CERES/target",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ceres-usgs-gazetteer-nomenclature-center-pts",
+            "role": "material",
+            "evidence": "src/planets/ceres/source/features/manifest.json@01bd7bd566517f8b80cc21bd138e7f5901bca24e#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ceres-surface-features-source",
+      "path": "features/manifest.json",
+      "expectedBytes": 1000,
+      "expectedSha256": "14d0e2248ba34ad2c7d7f89e04a416d7fe081b4eb8b96f186d5bdc39aa32bbb0",
+      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored factual metadata",
+      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "redistribution": "Repository-authored metadata; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored source pin for the nomenclature archive."
+      }
+    },
+    {
+      "id": "ceres-preparation-features",
+      "path": "preparation/features.json",
+      "expectedBytes": 1152,
+      "expectedSha256": "ff88ecfc748ec421f40500362a9c4621e1ef7ba2197233ca57a8fea4b5d2079b",
+      "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored preparation parameters",
+      "acquisition": "Authored beside the other preparation recipes.",
+      "redistribution": "Repository-authored parameters; no imagery",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation parameters."
+      }
+    },
+    {
+      "id": "hyg-registration-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 100844,
+      "expectedSha256": "2fe5171f1a8ba5081b963443ba67a122f9c8e471087d3bc736266212117e41c2",
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
+      ],
+      "acquisition": "checked prepared registration field from HYG v4.1",
+      "redistribution": "CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "starfield"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ceres-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3555,
+      "expectedSha256": "2c3e48c89492b374466d01b25d39c3d6dc45317a1b8543a42b20963df60c4c08",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "deterministically generated Ceres title path from the repository-pinned Inter font",
+      "redistribution": "generated outline under the Inter license",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ceres-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 1573,
+      "expectedSha256": "6ef42f0d2bef147f371835eaf317501d5ee173c41f0b1d70dc366a452e40eab1",
+      "origin": "Repository-authored Ceres solar-system recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored camera scale and marker layout using the cited solar-system geometry."
+      }
+    },
+    {
+      "id": "ceres-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 4546,
+      "expectedSha256": "13ff29595f573384132dfc5b75978de019f15085d501aac457c3df1df3794744",
+      "origin": "Repository-authored Ceres raster recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored image sampling, science painting, packing and lighting-bank settings."
+      }
+    },
+    {
+      "id": "ceres-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1588,
+      "expectedSha256": "28b3e7ad324e5939cd4c5c23b3a07549c083c2899ba7638aba186c55e0bede56",
+      "origin": "Repository-authored Ceres geometry recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
+      }
+    },
+    {
+      "id": "ceres-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 222,
+      "expectedSha256": "7382a069ad44040eb34fe2ae29f0cafc6ce1478c2a8847d92296a613cc388584",
+      "origin": "Repository-authored Ceres celestial recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored sky, Sun and marker preparation settings."
+      }
+    },
+    {
+      "id": "ceres-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 101,
+      "expectedSha256": "44904697b9cb89cf76767293d969a51cce48ff0b698041e897ec3829a17ae89a",
+      "origin": "Repository-authored Ceres presentation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "presentation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition and supported views."
+      }
+    },
+    {
+      "id": "ceres-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 897,
+      "expectedSha256": "a47655aefe82e5b07960ed532403171543890b56b27ba3a8992756aa0b1de98a",
+      "origin": "Repository-authored Ceres navigation recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "navigation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored marker, caption and camera settings."
+      }
+    },
+    {
+      "id": "ceres-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1639,
+      "expectedSha256": "19dc30473b1f818b604a3e5b6d8dcc39681523042db06f381b47192c796411a2",
+      "origin": "Repository-authored Ceres acquisition recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored requests and extraction steps for restoring source files."
+      }
+    },
+    {
+      "id": "ceres-object-content",
+      "path": "content/object.json",
+      "expectedBytes": 10474,
+      "expectedSha256": "465f5536a8561d2c66a0e1cafa0afdca64b6f51f458043e500cb6c115c8d8ea9",
+      "origin": "Repository-authored Ceres object recipe",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside the inputs.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "wms-capabilities.xml",
+      "expectedBytes": 6483,
+      "expectedSha256": "33c538aca7929dc2bdf589300a34bbc02a696671fd052a9a9c76647a389d499f",
+      "purpose": "USGS WMS 1.1.1 capabilities snapshot: Ceres_FC_global layer, projection, credit, and source resolution. Retrieved 2026-09-05."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96",
+      "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe",
+      "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 825,
+      "expectedSha256": "97da5328e7dec76d7b926f8085f0e59f249a2b6cdee4032e4897b4532eb6e7a8"
+    },
+    {
+      "id": "ceres-surface-feature-notes",
+      "path": "features/notes.json",
+      "expectedBytes": 14783,
+      "expectedSha256": "c26913d880d637c2d2abb0e581ce257ed3531f2080b504bacc16c219bd0108b2",
+      "origin": "Repository-pinned English Wikipedia lead summaries for 31 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
+      "credit": "Wikipedia contributors; Wikidata contributors",
+      "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by-sa/4.0/",
+        "https://en.wikipedia.org/wiki/Wikipedia:Copyrights",
+        "https://www.wikidata.org/wiki/Wikidata:Licensing"
+      ],
+      "acquisition": "node tools/prepare-feature-notes.mts ceres: each summary from the Wikipedia REST page-summary API, trimmed to whole sentences within 320 characters, with the article URL and revision id.",
+      "redistribution": "Short attributed summaries with article links; share-alike applies to the note text.",
+      "consumers": [
+        "features"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { createObjectBrowserProfile } from '../../../../site/test/object-browser-profile.mts';
-import objectControls from '../../../../src/planets/comet-8p/prepared/controls.json' with { type: 'json' };
+import objectControls from '../../../../src/objects/comet-8p/prepared/controls.json' with { type: 'json' };
 
 export const browserProfile = createObjectBrowserProfile({ id: 'comet-8p', controls: objectControls,
   audit: {

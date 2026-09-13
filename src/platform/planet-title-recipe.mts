@@ -8,7 +8,7 @@ export const PLANET_TITLE_RECIPE = Object.freeze({
   sourceSha256:
     "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
   checkedFontPath:
-    "src/planets/earth/source/presentation/InterVariable.ttf",
+    "src/objects/earth/source/presentation/InterVariable.ttf",
   weight: 500,
   opticalSize: 28,
   fontSize: 28,

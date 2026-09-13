@@ -7,7 +7,7 @@ import { fitBackplaneCamera } from '../../../../tools/objects/surface-observatio
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { parseGeoLens } from '../../../../tools/objects/surface-observations/formats/geo.mts';
 
-const root = resolve(import.meta.dirname, '../../../../src/planets/didymos/source');
+const root = resolve(import.meta.dirname, '../../../../src/objects/didymos/source');
 const config = JSON.parse(await readFile(resolve(root, 'preparation/terrestrial.json'), 'utf8'));
 const recipe = parseGeoLens(config.raster.surfaceObservations.find((entry: { id: string }) => entry.id === 'draco'));
 const declaration = recipe.cube;

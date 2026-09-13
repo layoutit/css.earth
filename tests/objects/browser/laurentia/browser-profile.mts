@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/laurentia/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/laurentia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'laurentia',controls,audit:{
   "preparedAssetPairs": [
     {

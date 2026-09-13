@@ -157,7 +157,7 @@ async function stageMercuryBand({lens,config,sourceDirectory,manifest,stage,publ
 export async function refreshSpherePhotographs(id:string,lensId:string) {
   if(!/^[a-z][a-z0-9-]*$/.test(id)||!/^[a-z][a-z0-9-]*$/.test(lensId)) throw new TypeError('Use one body id and one lens id.');
   sharp.cache(false);sharp.concurrency(1);
-  const objectDirectory=resolve('src/planets',id),sourceDirectory=resolve(objectDirectory,'source'),publicDirectory=resolve('public/scenes',id),stage=resolve('output/sphere-photographs',id,lensId);
+  const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),publicDirectory=resolve('public/scenes',id),stage=resolve('output/sphere-photographs',id,lensId);
   const [sourceManifest,rasterRecipe,descriptor,scene]=await Promise.all([json(resolve(sourceDirectory,'manifest.json')),json(resolve(sourceDirectory,'preparation/raster.json')),json(resolve(objectDirectory,'object.json')),readFile(resolve(objectDirectory,'prepared/scene.refs.json'))]);
   const config=recipe(rasterRecipe),lens=config.surfaces.filter(surface=>surface.id===lensId);
   if(lens.length!==1) throw new Error(`Unknown raster lens: ${id}/${lensId}.`);

@@ -9,7 +9,7 @@ import type { PathLike } from 'node:fs';
 const read=async (p: PathLike|FileHandle)=>JSON.parse(await readFile(p,'utf8'));
 export function testCatalogNucleus(id: string){
  test(`${id}: retained mesh preserves the native source shape and closed topology`,async()=>{
-  const root=resolve('src/planets',id),excerpt=await readFile(`${root}/source/reference/celestia.ssc`,'utf8');
+  const root=resolve('src/objects',id),excerpt=await readFile(`${root}/source/reference/celestia.ssc`,'utf8');
   const catalogRadiusM=Number(required(excerpt.match(/^\s*Radius\s+([\d.]+)/m))[1])*1000;
   const model=await read(`${root}/source/shape/model.json`),radiusM=model.volumeEquivalentRadiusKm*1000;
   const sourceObj=await readFile(`${root}/source/shape/model.obj`,'utf8');
@@ -35,13 +35,13 @@ export function testCatalogNucleus(id: string){
   assert.ok(maxErrorM<catalogRadiusM*.001,`Reduced vertices remain on the exported source mesh (maximum nearest-source-vertex distance ${maxErrorM} m).`);
  });
  test(`${id}: full gridded coverage, one dataset, Shadows and Orbit off`,async()=>{
-  const root=resolve('src/planets',id),config=await read(`${root}/source/preparation/terrestrial.json`),surfaces=await read(`${root}/prepared/surfaces.json`),content=await read(`${root}/source/content/object.json`);
+  const root=resolve('src/objects',id),config=await read(`${root}/source/preparation/terrestrial.json`),surfaces=await read(`${root}/prepared/surfaces.json`),content=await read(`${root}/source/content/object.json`);
   assert.equal(surfaces.surfaces.length,1);const s=surfaces.surfaces[0];assert.equal(s.missingPixels,config.raster.width*config.raster.height);assert.match(s.appearance,/no-imagery grid/);assert.equal(s.layout.faceCount,800);
   assert.equal(config.geometry.radialTerrain.sourceLighting.uniformFlood,true);
   for(const name of ['shadows','orbit'])assert.equal(content.settings.controls.find((c: { name: string; })=>c.name===name).checked,false);
  });
  test(`${id}: source closure and fixed illustrative attitude`,async()=>{
-  const root=resolve('src/planets',id),descriptor=await read(`${root}/object.json`),ref=descriptor.properties.recipe.sources.find((r: { id: string; })=>r.id==='rotation');
+  const root=resolve('src/objects',id),descriptor=await read(`${root}/object.json`),ref=descriptor.properties.recipe.sources.find((r: { id: string; })=>r.id==='rotation');
   const source=await createSourceManifest({planetId:id,planetName:id,sourceRoot:`${root}/source`});await source.verify();
   const a=await readAuthoredRotation(root,ref,2461286.5),b=await readAuthoredRotation(root,ref,2462286.5);assert.deepEqual(a,b);assert.equal(a.spinRateRadPerDay,0);
  });

@@ -5,6 +5,6 @@ import { requireRecord } from './source-values.mts';
 /** Exercise the same final prepared definition that the browser authenticates: the
  * transport's shared-bank references inlined, exactly as the decoder does before validation. */
 export async function loadObjectTestDefinition(id: string, root = process.cwd()): Promise<unknown> {
-  const payload = requireRecord(JSON.parse(await readFile(resolve(root, 'src/planets', id, 'prepared/object.json'), 'utf8')), 'Prepared object test fixture');
+  const payload = requireRecord(JSON.parse(await readFile(resolve(root, 'src/objects', id, 'prepared/object.json'), 'utf8')), 'Prepared object test fixture');
   return inlineSharedFromBanks(root, payload.data);
 }

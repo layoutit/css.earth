@@ -15,7 +15,7 @@ const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const reports: Record<string, unknown>[] = [];
 try {
   for (const [from, to] of [['mercury', 'venus'], ['venus', 'mercury']] as const) {
-    const definition = flightDefinition(JSON.parse(await readFile(`src/planets/${to}/prepared/object.json`, 'utf8')));
+    const definition = flightDefinition(JSON.parse(await readFile(`src/objects/${to}/prepared/object.json`, 'utf8')));
     const proxyLimit = definition.camera.levelOfDetail.billboardFadeStartDiscPixels;
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
     page.setDefaultTimeout(30000);

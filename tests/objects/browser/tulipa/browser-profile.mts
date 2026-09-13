@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/tulipa/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/tulipa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'tulipa',controls,audit:{
   "preparedAssetPairs": [
     {

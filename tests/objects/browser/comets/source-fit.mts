@@ -21,7 +21,7 @@ await mkdir(output, { recursive: true });
 const reports = [];
 const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 for (const { id } of selected) {
-  const root = resolve('src/planets', id);
+  const root = resolve('src/objects', id);
   const profileFields = { path: text, format: text, grid: requireRecord };
   const config = shape({ presentation: shape({ defaultLens: text }), geometry: shape({ radiusKm: number, radius: number,
     radialTerrain: shape(profileFields), radialTerrainAlternatives: optional(array(shape({ ...profileFields, lensId: text }))) }) })(JSON.parse(await readFile(resolve(root, 'source/preparation/terrestrial.json'), 'utf8')));
