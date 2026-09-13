@@ -58,6 +58,8 @@ Importing and aligning a candidate does not authorize processing. A user instruc
 
 ## 5. Process the volume explicitly
 
+**Mandatory for every new acceptance:** attach observed colors to finite 3D structures before compositing. Sampling the same image XY at every Z is a rejected baseline, even with a valid density cloud. Keep a failing counterfactual test for that path and inspect front, oblique and both side axes. Do not recover lost front detail by reinstating photographic extrusion; missing fine structure requires a supported spatial/emission model. Projection-only historical density/symmetry comparisons remain inspectable but are not newly qualified 3D materials. Preserve fixed-density alpha when changing its material method; explicitly distinguish a new inferred-emission fit from that workflow.
+
 Choose the configured method first. The numbered procedure below is the **fixed-density material workflow**. For image/physical-evidence inference, use `docs/emission-compiler.md` and the process guidelines: compile the selected support hypothesis, fit emission, then paint the same geometry with each lens. For symmetry use `docs/planetary-nebulae.md`. A full user-authorized Compile includes configured source stages; do not add repeated acceptance clicks. New unsupported physical operators remain research work until implemented and tested.
 
 1. Open `/reconstruction`, choose the completed starless source, and press **Preview**. Selecting a candidate alone must not start a bake.
