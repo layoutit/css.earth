@@ -64,11 +64,6 @@
           "sha256": "e44e4b17c9cb82f4b721f77db1f46583f3c7fc8679cdcc138ca71150a5a87a5f"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "416eebd977773c15740df99f6853bbe113bcb44bcb53cba342d49241962dd8ec"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "782e059ae7eac3e418b3e2009f02fcab42d5bf0f11453391e4a4535c2cd3f9e2"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.119472040064257,
-      "description": "Explore Lachesis in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in April 1872.",
       "systemName": "Solar System",
       "order": 269,
       "context": {

@@ -300,25 +300,6 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
-    },
-    {
-      "id": "eris-object-text",
-      "path": "content/text.json",
-      "expectedBytes": 1085,
-      "expectedSha256": "95e3996f499d4d63f6557d22fef51d73dcc7aa2e84b0533986cee4e6e6bf06c3",
-      "origin": "Repository-authored Eris reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "panel",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
     }
   ],
   "documents": [

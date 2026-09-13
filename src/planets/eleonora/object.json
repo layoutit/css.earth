@@ -64,11 +64,6 @@
           "sha256": "20c5af3156cbe514d334246f7b58df2e91d1e023e925e19d59264126f5a4102f"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "edfc027b1bd399779bc26c7ebd577501193264b99860b81c77c915541aa6c828"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "6162cc4ddd695e0aa235577e8d740535d4c0fc38436d84a4d7c1b1d58e8f4c27"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.800786090344624,
-      "description": "Explore Eleonora in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in January 1893.",
       "systemName": "Solar System",
       "order": 158,
       "context": {

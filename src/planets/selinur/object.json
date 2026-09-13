@@ -64,11 +64,6 @@
           "sha256": "7f8766516e9050762bf4009894957c0015e509db42c6ed6f98abb1abeddae68a"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "56d68f4a9aaecb3e10960d95b3028e7c8bbacac13ab3885d27191fae533f4f84"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "02f720fffdc07942154e0df3dbf7fa1dd217c9d6a37b42900a97cb4577fb4b2e"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6116658234603194,
-      "description": "Explore Selinur in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered in January 1903.",
       "systemName": "Solar System",
       "order": 390,
       "context": {

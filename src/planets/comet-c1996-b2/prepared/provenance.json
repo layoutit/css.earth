@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a7f0c514c9d957ff908a402291179f7d3de80e7514bc0b334320fcc1e98343e"
+    "sha256": "01ba7bfa3c43e591e633e779a403ca7d8093564760f737e4268442fae80b527c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -141,14 +141,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "271dfc489c7b0ad34135e8ae6efec6f288377aa2b4236e875886d4077eb92542",
+      "sha256": "bca3a04b300e92a97bd941b6478504fb5c3e276192ceef2f051ee9938c8223a3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-c1996-b2",
         "displayName": "Hyakutake",
         "panel": {
-          "introduction": "Hyakutake passed just 0.10 AU from Earth in March 1996. Its close approach made it a striking sight despite its much smaller nucleus than Hale–Bopp’s.",
           "facts": [
             {
               "id": "diameter",
@@ -173,9 +172,6 @@
             {
               "id": "model",
               "label": "Illustrative nucleus",
-              "detail": "Celestia",
-              "title": "C/1996 B2 Hyakutake",
-              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
               "thumbnail": "/scenes/comet-c1996-b2/comet-c1996-b2-model-thumbnail.webp",
               "surface": "comet-c1996-b2-model-surface@2x.webp",
               "poles": "comet-c1996-b2-model-poles@2x.webp",
@@ -195,7 +191,9 @@
                   "label": "Closest to Sun",
                   "value": "0.24 AU"
                 }
-              ]
+              ],
+              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "noData": true
             }
           ]
         },
@@ -294,7 +292,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -303,8 +301,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "271dfc489c7b0ad34135e8ae6efec6f288377aa2b4236e875886d4077eb92542",
-      "bytes": 3282,
+      "sha256": "bca3a04b300e92a97bd941b6478504fb5c3e276192ceef2f051ee9938c8223a3",
+      "bytes": 3052,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -319,9 +317,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -356,7 +352,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -368,8 +364,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6286,
-          "sha256": "d47d0004be57e2dc8ba0ddbabf7b1c70fcf0d8638ed7f0ec42ec1fe9ca9693e3",
+          "bytes": 6114,
+          "sha256": "b9a6ae7d41544e58e4d1547dedaacd54bc0bfb325059f6453d297adbbb1699f0",
           "verification": "bytes-verified"
         }
       ],

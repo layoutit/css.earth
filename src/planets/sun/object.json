@@ -53,11 +53,6 @@
           "sha256": "c679469a83de4d8a33b4c057cf9803d058d9256b31949f8923dd7f194c31849f"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "6c124b101b6e983fa12b862dc94db5cc7287a96a85bb77d0a56515c47bc26499"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "b364b77492858f86894ce47a0a90d8e4fc8c0e4583efc4f63ecb963207abae8e"
@@ -164,7 +159,7 @@
       "classification": "star",
       "color": "#f5a623",
       "distanceAu": 0,
-      "description": "Explore the Sun in 3D with cssEarth. Discover our nearest star, its glowing atmosphere, and the science behind the center of the solar system.",
+      "description": "Our star, a 4.5-billion-year-old yellow dwarf.",
       "systemName": "Solar System",
       "order": 116
     }

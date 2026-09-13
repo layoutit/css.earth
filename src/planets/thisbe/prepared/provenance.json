@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e26663bd8d4887a0d46d09d6337113624b9ba12402ebef7968dbe9abee4225ae"
+    "sha256": "5f9e9af9607bde7228086a6de98ad32a06f35002877756d93309d102a3689dd2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c54fcb3596221f809c93ba81be80e97ca647abf58ede677f50b257ed5c05426b",
+      "sha256": "8f20eb44f1a5e8f374d782ecedd397fa04725ccdca18226d98c88325cc9a57e8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,7 +169,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Thisbe is a main-belt asteroid. Explore its calibrated nonconvex reconstruction from DAMIT, version 2021-11-12. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -201,8 +200,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Calibrated DAMIT shape",
-              "title": "DAMIT model 5926",
               "thumbnail": "/scenes/thisbe/thisbe-shape-thumbnail.webp",
               "surface": "thisbe-shape-surface@2x.webp",
               "poles": "thisbe-shape-surface@2x.webp",
@@ -211,14 +208,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
+              "notes": "Calibrated DAMIT shape",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/thisbe/thisbe-elevation-thumbnail.webp",
               "surface": "thisbe-elevation-surface@2x.webp",
               "poles": "thisbe-elevation-surface@2x.webp",
@@ -240,8 +235,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5926",
                 "image": "/scenes/thisbe/thisbe-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -353,7 +347,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -362,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c54fcb3596221f809c93ba81be80e97ca647abf58ede677f50b257ed5c05426b",
-      "bytes": 7518,
+      "sha256": "8f20eb44f1a5e8f374d782ecedd397fa04725ccdca18226d98c88325cc9a57e8",
+      "bytes": 6940,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -378,9 +372,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -422,9 +414,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Calibrated DAMIT shape"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -459,7 +449,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -471,8 +461,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4948,
-          "sha256": "123903b1f492cf4c2b58d02f88d523451b6e13e5e2652da43e0c9e40d4a00ed6",
+          "bytes": 4775,
+          "sha256": "b689c114cdc260153ba166daa71bd917eadd0d5c2d5612e72b44f0909e28bf1f",
           "verification": "bytes-verified"
         }
       ],

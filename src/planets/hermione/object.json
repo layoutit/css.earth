@@ -64,11 +64,6 @@
           "sha256": "23441dcd4817c8f45deee18f7c9fafe0dc2cb25880ddb62246819d195b362b10"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "edfff6977726b3f9c5055076e83b43bef8c13bcfb3adc5886727a813d09fa5ef"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "fbc0325116adc588cde97fc49ab3dc46e39d6e364f612e4039c211ab2cc906ca"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.458050151729624,
-      "description": "Explore Hermione in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich asteroid in the outer main belt with a moon, discovered in May 1872.",
       "systemName": "Solar System",
       "order": 173,
       "context": {

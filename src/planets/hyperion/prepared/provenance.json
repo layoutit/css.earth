@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "866332df32c83811f59a1b89579785c8167f0457be71f5802b33feeffa30b76f"
+    "sha256": "f1277b0300f5505de39908b28edca148d4e21197f4f418a8e921502ba933b146"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -370,14 +370,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "70f7fe8bbcfbde8c9e9e76396bf998a216a52eb4ac5f092d4cf4fb91c1fad360",
+      "sha256": "622f902b9169a585d469788015a40520999997fb8392d90f1a215335050f9ebd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "hyperion",
         "displayName": "Hyperion",
         "panel": {
-          "introduction": "Hyperion is Saturn’s sponge-like, chaotically tumbling moon. Deep craters cover a porous, irregular body whose dark crater floors contrast with brighter icy walls. The displayed orientation and lighting are illustrative; its chaotic tumbling is not simulated.",
           "facts": [
             {
               "id": "radius",
@@ -453,9 +452,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked.",
-              "title": "ISS calibrated mosaic",
-              "detail": "Cassini clear-filter mosaic",
               "thumbnail": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
               "surface": "hyperion-normal-surface@2x.webp",
               "poles": "hyperion-normal-poles@2x.webp",
@@ -464,14 +460,11 @@
                 "path": "../manifest.json",
                 "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
               },
-              "summary": "Twelve Cassini frames, including a regional ~100 m/pixel close view. Shape and registration limit detail; shadows and marked gaps remain."
+              "notes": "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked."
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side.",
-              "title": "Shape-derived radial height",
-              "detail": "Shape-derived radial height",
               "thumbnail": "/scenes/hyperion/hyperion-elevation-thumbnail.webp",
               "surface": "hyperion-elevation-surface@2x.webp",
               "poles": "hyperion-elevation-poles@2x.webp",
@@ -494,7 +487,7 @@
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
                 "image": "/scenes/hyperion/hyperion-elevation-legend.webp"
               },
-              "summary": "Cassini-model height relative to a 135 km sphere. Shape errors reach 6 km on the less-observed side."
+              "notes": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side."
             }
           ]
         },
@@ -1871,7 +1864,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1880,8 +1873,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "70f7fe8bbcfbde8c9e9e76396bf998a216a52eb4ac5f092d4cf4fb91c1fad360",
-      "bytes": 6196,
+      "sha256": "622f902b9169a585d469788015a40520999997fb8392d90f1a215335050f9ebd",
+      "bytes": 5428,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2000,9 +1993,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -2044,9 +2035,7 @@
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -2105,7 +2094,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -2117,8 +2106,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6532,
-          "sha256": "a2723a063d5a73f09c09af1b594c7f5f7465803585fe66fe11d3914e700a5f1b",
+          "bytes": 6253,
+          "sha256": "3d0e2a2bb64c1eb66f02111c6a05161e70be3d21bc5dc8e85dfe770324dc312d",
           "verification": "bytes-verified"
         }
       ],

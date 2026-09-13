@@ -29,11 +29,6 @@
           "sha256": "42746b8749f390905ec391e1fdb479656876cc37fa46417de959dafadfad3e36"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "911f641605d582f3a86f62aa8fdcc38f60c866dfca21225126ceaacecc6025c1"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "dd2089177325a29b83f4f03e154956200305192b9423ba033ce4ae9cf328027b"
@@ -135,7 +130,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.45,
-      "description": "Explore Wild 2's observed Stardust terrain, preserving its real coverage gaps.",
+      "description": "Comet whose dust Stardust brought back to Earth.",
       "systemName": "Solar System",
       "order": 79,
       "context": {

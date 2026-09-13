@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2a1c8df6c75ff5c68a963050abab4ba7d73febe87ca9c4db5e4ba260131f622a"
+    "sha256": "739c0511cc4532b8da882ede4a62554d379c781b5c83fa252a8535911dac8140"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fe03c0f2466070c6fdba921c222961e3c86e7253e755192f084e399936627ed9",
+      "sha256": "1fe4f01c177c076d071d37cddd01670a5fcbf5beda1a9c82fc24da63b6f80a68",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -167,7 +167,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Daphne is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape. Explore its published shape and radial heights. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -199,8 +198,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "VLT/SPHERE shape model",
-              "title": "SPHERE shape reconstruction",
               "thumbnail": "/scenes/daphne/daphne-shape-thumbnail.webp",
               "surface": "daphne-shape-surface@2x.webp",
               "poles": "daphne-shape-surface@2x.webp",
@@ -209,14 +206,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape made from VLT/SPHERE observations. Gray grid: no surface imagery; lighting shows the model's form."
+              "notes": "VLT/SPHERE shape model",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/daphne/daphne-elevation-thumbnail.webp",
               "surface": "daphne-elevation-surface@2x.webp",
               "poles": "daphne-elevation-surface@2x.webp",
@@ -238,8 +233,7 @@
                 "sourceUrl": "https://observations.lam.fr/astero/3Dshape/41_Daphne_mpcd.obj",
                 "image": "/scenes/daphne/daphne-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -364,7 +358,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -373,8 +367,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fe03c0f2466070c6fdba921c222961e3c86e7253e755192f084e399936627ed9",
-      "bytes": 8222,
+      "sha256": "1fe4f01c177c076d071d37cddd01670a5fcbf5beda1a9c82fc24da63b6f80a68",
+      "bytes": 7523,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -389,9 +383,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -433,9 +425,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "VLT/SPHERE shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -470,7 +460,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -482,8 +472,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5629,
-          "sha256": "a5c198e6cb0c0f09e9511bf403498173dd74b3c07b84c74f28388d33c8a89dbe",
+          "bytes": 5357,
+          "sha256": "47a1495997b63782b8a575f772fe29402748bc58449a142de2344ce424289a15",
           "verification": "bytes-verified"
         }
       ],

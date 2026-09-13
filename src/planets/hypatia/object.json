@@ -64,11 +64,6 @@
           "sha256": "caeda03eb32263f267e1be58dcca40aaa085bb1806d6c0d2d7524255095695f7"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "fb4fb4cdf86447f3a638ac81bbf3500ab9935e60f05fe3cd3b0fcf75bd4fd027"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "8330292d350830fc896b5b6ce9bd824fbd2cf52dc3fb2fe1de90d093b8a639ba"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.905035805480087,
-      "description": "Explore Hypatia in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in July 1884.",
       "systemName": "Solar System",
       "order": 330,
       "context": {

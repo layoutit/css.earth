@@ -64,11 +64,6 @@
           "sha256": "8bec2735b9427a9bb31b6ce90c66022e930e6636d07ca7fb45bdc2781b8d40b9"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "33f3095b7c7c316ac57e2c0d0dc5fa2b609d8e2edf99b7308a73781a74cb2986"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "e65c72567e8f0216a8ba7c7ba5acc881ee89caadc4c18690af078900d81b1a31"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.011699855683851,
-      "description": "Explore Eos in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in January 1882.",
       "systemName": "Solar System",
       "order": 322,
       "context": {

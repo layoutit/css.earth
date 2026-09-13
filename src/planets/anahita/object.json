@@ -64,11 +64,6 @@
           "sha256": "cdb57ef733f2548008d00982c0a5b9c25ecb99a43d0d5431563d1306af1c41ee"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d979aa0d76a70739990543d6d09eccbe732061bd2cd76dd83dbd712218d80aa3"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "b1043f6d92e7c5e9d6f27f7dfafe91f74f9c0d2f155055955afeb6538d36ea04"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.1978820172913154,
-      "description": "Explore Anahita in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in October 1887.",
       "systemName": "Solar System",
       "order": 346,
       "context": {

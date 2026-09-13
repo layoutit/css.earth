@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "lutetia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eb4f76f545e1f3ce275e50aa251d79f0c877843abc3018f50447b5ffef01d4d7"
+    "sha256": "eb5184b57cb451cd77d2cde748d0d9b84e5fade9c84fbfb37ea129b876de829c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -206,7 +206,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bd587a259341019b545870b8ec95df98192d86003d5dee82bac00122471b0ce1",
+      "sha256": "752e82f216ab3ee72f9f72573809300769270c78fc7d277b55f9cdfbec9077e6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -230,7 +230,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Rosetta photographed Lutetia in 2010. Craters and ridges cover this irregular, roughly 100 km asteroid.",
           "facts": [
             {
               "id": "radius",
@@ -276,9 +275,6 @@
             {
               "id": "osiris",
               "label": "OSIRIS",
-              "detail": "OSIRIS",
-              "description": "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs.",
-              "title": "OSIRIS photographs",
               "thumbnail": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
               "surface": "lutetia-osiris-surface@2x.webp",
               "poles": "lutetia-osiris-surface@2x.webp",
@@ -286,7 +282,6 @@
                 "id": "lutetia-observations-n20100710t154047674id4df22-img",
                 "path": "../manifest.json"
               },
-              "summary": "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs.",
               "facts": [
                 {
                   "id": "images",
@@ -298,13 +293,13 @@
                   "label": "Image scale",
                   "value": "78–88 m/pixel"
                 }
-              ]
+              ],
+              "notes": "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs.",
+              "noData": true
             },
             {
               "id": "shape",
               "label": "Shape",
-              "description": "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo.",
-              "title": "OSIRIS shape reconstruction",
               "thumbnail": "/scenes/lutetia/lutetia-shape-thumbnail.webp",
               "surface": "lutetia-shape-surface@2x.webp",
               "poles": "lutetia-shape-surface@2x.webp",
@@ -313,14 +308,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "PDS",
-              "summary": "Rosetta shape detail in the north, coarser estimates elsewhere. Source seams remain; no imagery is mapped."
+              "notes": "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/lutetia/lutetia-elevation-thumbnail.webp",
               "surface": "lutetia-elevation-surface@2x.webp",
               "poles": "lutetia-elevation-surface@2x.webp",
@@ -342,8 +335,7 @@
                 "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.lbl",
                 "image": "/scenes/lutetia/lutetia-elevation-legend.webp"
               },
-              "detail": "PDS",
-              "summary": "Height relative to a 49 km sphere. Rosetta resolved the north; the far side is coarser, with source defects."
+              "notes": "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments."
             }
           ]
         },
@@ -514,7 +506,7 @@
       "sha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52",
       "bytes": 2954640,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -550,7 +542,7 @@
       "sha256": "c2e60730c7d6c0b9bc8b5a688d8d5dfeed8fe948bb240141da3c8ecf9037f718",
       "bytes": 663,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -576,7 +568,7 @@
       "sha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd",
       "bytes": 37775872,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -604,7 +596,7 @@
       "sha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac",
       "bytes": 5070,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -630,7 +622,7 @@
       "sha256": "b9435d017f9469503f099f224ca86567b6722ff877aa27d3a178a857e23b43b1",
       "bytes": 37775872,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -661,7 +653,7 @@
       "sha256": "619648154d976db683f43838d45668a140e9fac3ee508335eaf53076f2866fde",
       "bytes": 5104,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -669,7 +661,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -678,10 +670,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bd587a259341019b545870b8ec95df98192d86003d5dee82bac00122471b0ce1",
-      "bytes": 10209,
+      "sha256": "752e82f216ab3ee72f9f72573809300769270c78fc7d277b55f9cdfbec9077e6",
+      "bytes": 9463,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -701,7 +693,7 @@
       "sha256": "4c8dd8e79922736361cfec1d91ef62c077141e96d6a5930abfc0589971e7f58b",
       "bytes": 1010,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -727,7 +719,7 @@
       "sha256": "5feb1d89610b0dcc1be87d6f4d80d604e723c1be4ec310262951de0581a4fbf7",
       "bytes": 134132,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -754,7 +746,7 @@
       "sha256": "f508382e29ce3a5c5f70723acc78f74488ac01491c005469b370bb423c97386d",
       "bytes": 154,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -781,7 +773,7 @@
       "sha256": "92372088c940f9dddf30480811a68ac518a0704a943de78c4bd622c8e8e87cc9",
       "bytes": 1335,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -794,9 +786,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -814,19 +804,19 @@
           "url": "/scenes/lutetia/lutetia-elevation-thumbnail.webp",
           "bytes": 6322,
           "sha256": "28eadc457171bd3c6386469daa3fe910a13dd8318598c50868392df0d4114a30",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-elevation-surface@2x.webp",
           "bytes": 375170,
           "sha256": "7d7960dce265687aaba2acf3897e4cb20f9f87e9bf21c289490817286ce78534",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -838,9 +828,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -858,13 +846,13 @@
           "url": "/scenes/lutetia/lutetia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-shape-surface@2x.webp",
           "bytes": 220590,
           "sha256": "1080889eaa3f187ed7029f70483458f9b9cec4b3bbe392c20ea09b56ddc4b4fe",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -876,9 +864,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs."
-      ],
+      "limitations": [],
       "lensIds": [
         "osiris"
       ],
@@ -901,13 +887,13 @@
           "url": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
           "bytes": 2314,
           "sha256": "637b78528a0d6ebffac7944547b792f0818cc8b7ec3bd4b6ef885b40cbf8ac5e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
           "bytes": 850332,
           "sha256": "5d4fd590832d55b01bce90ce35909a4de45e1aa0e8171f0ca02b93ab1e486ca8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -918,7 +904,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -930,8 +916,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5760,
-          "sha256": "03216ef6b419a1f47b60ca8bbeeb55f108d508e3b0e1077a27bd062717ac2a16",
+          "bytes": 5639,
+          "sha256": "0f31802e0e7ebbe63bb5a979befdf41a9ec34f3b03845ef9c365d13db742e623",
           "verification": "bytes-verified"
         }
       ],
@@ -967,7 +953,7 @@
           "url": "/scenes/lutetia/lutetia-features.json",
           "bytes": 77450,
           "sha256": "8dd8ba48ba244f14817761051a4354dc19b36dd348afacd912bfbedf0a451eaa",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

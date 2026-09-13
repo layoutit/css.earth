@@ -64,11 +64,6 @@
           "sha256": "8bac264ecd64afe625459a9957de940f522d6c0264963088ba2105e344d5b143"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "1c8b40e577f52bbb207fb127d3a9eb69400e3d64616911f04c5e3ed1e5b6abff"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "bf617222c07b1ddd97300eaac140525f8e480ef724f76f136a93e51b8d4f5577"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.281571123923134,
-      "description": "Explore Ajax in 3D with its published shape model and radial elevation.",
+      "description": "Dark Jupiter Trojan asteroid, discovered in August 1936.",
       "systemName": "Solar System",
       "order": 363,
       "context": {

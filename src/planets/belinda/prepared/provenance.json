@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "66c90f70f57ed943d5543ed059633ce75b2eda9056ee70f6db14fa317e3e5bfe"
+    "sha256": "3d1f54aceedf63a7f7a7a180c301562541485cdbfef990cc1be86acc6171b9d9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3907c8c5b61134e66686ab988fd8e6f4753c1714eb65e42ff91047727f41f58d",
+      "sha256": "8c270021450796947c718f89f11800d625fe22793622c2b8f1abb79b19e972cb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "belinda",
         "displayName": "Belinda",
         "panel": {
-          "introduction": "Belinda is an elongated inner moon of Uranus, discovered in Voyager 2 images in 1986. Its changing brightness supports a shape about twice as long as it is wide. It travels around Uranus in roughly fifteen hours.",
           "facts": [
             {
               "id": "radius",
@@ -161,9 +160,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "A prolate ellipsoid fitted to Voyager measurements and Hubble photometry. Its long axis is twice the short axis; the equal short axes are a source assumption. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the approximate shape.",
-              "title": "Approximate shape model",
-              "detail": "Measured shape",
               "thumbnail": "/scenes/belinda/belinda-model-thumbnail.webp",
               "surface": "belinda-model-surface@2x.webp",
               "poles": "belinda-model-poles@2x.webp",
@@ -172,7 +168,8 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.1006/icar.2001.6596"
               },
-              "summary": "Shape estimated from Voyager and Hubble observations. Two axes are assumed equal; gray grid: no imagery."
+              "notes": "A prolate ellipsoid fitted to Voyager measurements and Hubble photometry. Its long axis is twice the short axis; the equal short axes are a source assumption. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the approximate shape.",
+              "noData": true
             }
           ]
         },
@@ -324,7 +321,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -333,8 +330,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3907c8c5b61134e66686ab988fd8e6f4753c1714eb65e42ff91047727f41f58d",
-      "bytes": 3821,
+      "sha256": "8c270021450796947c718f89f11800d625fe22793622c2b8f1abb79b19e972cb",
+      "bytes": 3396,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -349,9 +346,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "A prolate ellipsoid fitted to Voyager measurements and Hubble photometry. Its long axis is twice the short axis; the equal short axes are a source assumption. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the approximate shape."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -391,7 +386,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -403,8 +398,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5995,
-          "sha256": "bb7c7ee3cd23438b071a61222e7be3b18d05cc0a22172356fce3c9487fa22023",
+          "bytes": 5765,
+          "sha256": "e84b18f0badc8b7a07b47ed974c17a2c094596862c326dc083f65d85cb78c08d",
           "verification": "bytes-verified"
         }
       ],

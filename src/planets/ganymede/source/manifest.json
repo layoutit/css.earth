@@ -902,25 +902,6 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
-    },
-    {
-      "id": "ganymede-object-text",
-      "path": "content/text.json",
-      "expectedBytes": 2159,
-      "expectedSha256": "e3623722ee6f9cc7868c4fb4dbffc2d15548d145c88ab9d629d5deb465078dba",
-      "origin": "Repository-authored Ganymede reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "panel",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
     }
   ],
   "generatedIntermediates": [],

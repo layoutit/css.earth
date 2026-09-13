@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2a9922c22623759b230448ecfd10e7d924794c2e83ae94e4a28cc110b7a91686"
+    "sha256": "140e8a42f8c260b57748b0a5ef53c12ee7796a09efd1b38a9546b934fc20c2c3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -134,14 +134,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f1d7ece683cb3cfccf8b51cf05521e4bf4cf955049f09fb395f60161b83534bb",
+      "sha256": "bb19904969e73308c3f61323dbe584b6281616b10637f62f75ddea9234f45400",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "polydeuces",
         "displayName": "Polydeuces",
         "panel": {
-          "introduction": "Polydeuces shares Dione’s orbit around Saturn, wandering around its trailing Lagrange region. Cassini measured this small moon’s elongated outline.",
           "facts": [
             {
               "id": "radius",
@@ -186,9 +185,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions.",
-              "title": "ISS CL1/IR1 image",
-              "detail": "Near infrared · coarse coverage",
               "thumbnail": "/scenes/polydeuces/polydeuces-normal-thumbnail.webp",
               "surface": "polydeuces-normal-surface@2x.webp",
               "poles": "polydeuces-normal-poles@2x.webp",
@@ -197,7 +193,8 @@
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/1912.09192"
               },
-              "summary": "Only about 9 × 7 source pixels resolve the moon. Brightness is approximate; the gray grid marks unobserved surface."
+              "notes": "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions.",
+              "noData": true
             }
           ]
         },
@@ -410,7 +407,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -419,8 +416,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f1d7ece683cb3cfccf8b51cf05521e4bf4cf955049f09fb395f60161b83534bb",
-      "bytes": 3659,
+      "sha256": "bb19904969e73308c3f61323dbe584b6281616b10637f62f75ddea9234f45400",
+      "bytes": 3271,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -435,9 +432,7 @@
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini CL1/IR1 near-infrared image: about 9 × 7 native pixels across. Only the reliable interior is mapped; the gray grid marks unobserved coverage. Approximate lighting normalization preserves coarse brightness, not fine terrain or calibrated albedo. Shape is an ellipsoid fitted to measured dimensions."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -474,7 +469,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -486,8 +481,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7568,
-          "sha256": "78aa44325211c6317b93d2bebde3f2a3956e4e0be99a2490df7db960db355302",
+          "bytes": 7399,
+          "sha256": "09fc77c686a40c62e9b0b9aa19cdfb9cd5d2d4588c5891948dbdf32e0d5d12a2",
           "verification": "bytes-verified"
         }
       ],

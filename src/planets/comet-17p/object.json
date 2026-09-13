@@ -31,11 +31,6 @@
           "sha256": "0d6225a2b2aae891ac6338b0a975ffc229e46da8390ad54505365f24836d0cba"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "c5143c2a0fc1b0928739b006d82c9873e2183de35192f837af9aa3b1b7b707a7"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "506ceb4c1adb4ff289dd5e6695e355ff2fe42f7c8ab29af645161eb11648bd6a"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.840891878074923,
-      "description": "17P: Holmes became about a million times brighter during its 2007 outburst. The expanding dust cloud was enormous compared with the small nucleus that released it. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Comet that grew about a million times brighter in one outburst.",
       "systemName": "Solar System",
       "order": 51,
       "context": {

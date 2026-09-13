@@ -75,11 +75,6 @@
           "sha256": "5630463a2e329b08951995123361970234d9f8a0f8186d32c2f5e3bf5a442395"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "ceb5780cf2cc45468e889ef7f68eade44d691c38aa748b2ba70f303a23b9abbf"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "ef3720e2653d747e7c9fc93919ce3fa4128cbcdb3ecc739f78ec9ca9d642499d"
@@ -146,7 +141,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.363,
-      "description": "Explore Steins with a Rosetta photomosaic, its irregular shape and mapped elevation.",
+      "description": "Diamond-shaped asteroid that Rosetta flew past.",
       "systemName": "Solar System",
       "order": 134,
       "context": {

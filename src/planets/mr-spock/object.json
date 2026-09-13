@@ -64,11 +64,6 @@
           "sha256": "96516b2f5ae0ae8ae420ac6a22957cb907f31a6539fb420f8d80ed785c913005"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "2cfcde85f2252a12e37828b6b15396f320feaba102835a985b233c13efe61a4a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "cba4e3237857232bb15bf798e09d34249b7cac8fd1f41d49bbf17bf0c20544a0"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0107561956481725,
-      "description": "Explore Mr. Spock in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered in August 1971.",
       "systemName": "Solar System",
       "order": 411,
       "context": {

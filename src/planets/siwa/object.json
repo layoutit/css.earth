@@ -64,11 +64,6 @@
           "sha256": "45f99d078307cbba569d3adba6cf36697ed69e9e4ab462359b394bf9aa30bac8"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "001ce3f70d9551e238dc6631a82848ba4b2575156b5fbb27e7c3f32ca28be82a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "5df581930073a98529cd51a54d4e131e404cc5b61660f6d3bf5301b61d1db530"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.72994935329283,
-      "description": "Explore Siwa in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered on 13 October 1874 at Pola.",
       "systemName": "Solar System",
       "order": 280,
       "context": {

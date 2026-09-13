@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "tethys",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "36a2ab443ae073b3c728a03113af7474bf3b4de8f7b80dee7f8b15142e1fb353"
+    "sha256": "ccd52c15dfee37088120e1f9667f8ae2bd98a836a109086af88d0bf15474d759"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -511,7 +511,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dbed13ca8d267ceb71a322bb1aeef42fe7524c33b1370d786b39541735e107ba",
+      "sha256": "adda5c50d0f8b79493a536b3be4c9f7b8ea5d82d1a1883fd18a1125193633b18",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -535,7 +535,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "An icy moon of Saturn marked by the enormous Odysseus crater and Ithaca Chasma, a vast canyon crossing its surface. The shape view reveals a simplified Cassini SPC model. Relative albedo shows the model’s brightness variation; elevation uses its own stated reference sphere.",
           "facts": [
             {
               "id": "radius",
@@ -617,8 +616,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
-              "title": "Global image mosaic",
               "thumbnail": "/scenes/tethys/tethys-normal-thumbnail.webp",
               "surface": "tethys-normal-surface@2x.webp",
               "poles": "tethys-normal-poles@2x.webp",
@@ -626,13 +623,12 @@
                 "id": "cassini-iss-2012-tethys",
                 "path": "../manifest.json"
               },
-              "summary": "Source pixels span 293 m in the 2012 mosaic. Shadows and uneven detail remain; the gray grid marks missing observations."
+              "notes": "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+              "noData": true
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
-              "description": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
-              "title": "Enhanced-color composite",
               "thumbnail": "/scenes/tethys/tethys-enhanced-thumbnail.webp",
               "surface": "tethys-enhanced-surface@2x.webp",
               "poles": "tethys-enhanced-poles@2x.webp",
@@ -640,13 +636,11 @@
                 "id": "cassini-iss-2014-tethys-color",
                 "path": "../manifest.json"
               },
-              "summary": "Infrared, green and ultraviolet bands reveal colors beyond human vision. Detail varies; photographed shadows and seams remain."
+              "notes": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
             },
             {
               "id": "iss",
               "label": "ISS photograph",
-              "description": "One Cassini narrow-angle photograph from 11 April 2015, projected onto the shape model through a camera derived from Cassini's SPICE kernels and refined to the limb. Grid marks surface the camera did not see or that lay in shadow. Brightness is disk-normalized with an empirical Lommel-Seeliger law; it is not measured albedo.",
-              "title": "Cassini ISS narrow-angle image",
               "thumbnail": "/scenes/tethys/tethys-iss-thumbnail.webp",
               "surface": "tethys-iss-surface@2x.webp",
               "poles": "tethys-iss-poles@2x.webp",
@@ -656,7 +650,6 @@
                 "url": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484"
               },
               "falseColor": false,
-              "detail": "ISS · Cassini",
               "facts": [
                 {
                   "id": "observed",
@@ -674,13 +667,12 @@
                   "value": "CL1 and CL2 · clear"
                 }
               ],
-              "summary": "One Cassini photograph from 190,000 km, projected onto the shape model. Grid marks unphotographed or shadowed surface."
+              "notes": "One Cassini narrow-angle photograph from 11 April 2015, projected onto the shape model through a camera derived from Cassini's SPICE kernels and refined to the limb. Grid marks surface the camera did not see or that lay in shadow. Brightness is disk-normalized with an empirical Lommel-Seeliger law; it is not measured albedo.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
-              "title": "SPC terrain model",
               "thumbnail": "/scenes/tethys/tethys-elevation-thumbnail.webp",
               "surface": "tethys-elevation-surface@2x.webp",
               "poles": "tethys-elevation-poles@2x.webp",
@@ -701,13 +693,13 @@
                 "meta": "km",
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
                 "image": "/scenes/tethys/tethys-elevation-legend.webp"
-              }
+              },
+              "notes": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
+              "noData": true
             },
             {
               "id": "relative-albedo",
               "label": "Relative albedo",
-              "description": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
-              "title": "SPC relative brightness model",
               "thumbnail": "/scenes/tethys/tethys-relative-albedo-thumbnail.webp",
               "surface": "tethys-relative-albedo-surface@2x.webp",
               "poles": "tethys-relative-albedo-poles@2x.webp",
@@ -728,27 +720,26 @@
                 "meta": "relative to mean ≈ 1",
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
                 "image": "/scenes/tethys/tethys-relative-albedo-legend.webp"
-              }
+              },
+              "notes": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+              "noData": true
             },
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
-              "title": "SPC shape model",
               "thumbnail": "/scenes/tethys/tethys-shape-thumbnail.webp",
               "surface": "tethys-shape-surface@2x.webp",
               "poles": "tethys-shape-poles@2x.webp",
               "source": {
                 "id": "cassini-spc-2025-tethys-q128-shape",
                 "path": "../manifest.json"
-              }
+              },
+              "notes": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+              "noData": true
             },
             {
               "id": "infrared",
               "label": "Infrared",
-              "description": "Seven Cassini VIMS observations from 2007–2015. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.65 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps.",
-              "summary": "Cassini false color: red 2.02, green 1.59, blue 1.28 µm. Coverage is partial; gray grid marks gaps. Illumination and archive filtering remain in these uncorrected measurements.",
-              "title": "Cassini VIMS regional spectra · 2007–2015",
               "thumbnail": "/scenes/tethys/tethys-infrared-thumbnail.webp",
               "surface": "tethys-infrared-surface@2x.webp",
               "poles": "tethys-infrared-poles@2x.webp",
@@ -757,15 +748,13 @@
                 "path": "../manifest.json",
                 "url": "https://vims.univ-nantes.fr/cube/1719616836_1"
               },
-              "detail": "Partial VIMS",
-              "falseColor": true
+              "falseColor": true,
+              "notes": "Seven Cassini VIMS observations from 2007–2015. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.65 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps.",
+              "noData": true
             },
             {
               "id": "ice-absorption",
               "label": "Ice absorption",
-              "description": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using nine Cassini VIMS observations from 2007–2015. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0.55–0.75; original numerical values are retained. Gray grid marks unsupported areas and scan gaps.",
-              "summary": "Near-2.02 µm water-ice absorption in partial Cassini coverage. Gray grid marks gaps. Viewing angle, grain size, noise and archive filtering affect these uncorrected values; they do not measure ice abundance.",
-              "title": "Cassini VIMS regional water-ice absorption · 2007–2015",
               "thumbnail": "/scenes/tethys/tethys-ice-absorption-thumbnail.webp",
               "surface": "tethys-ice-absorption-surface@2x.webp",
               "poles": "tethys-ice-absorption-poles@2x.webp",
@@ -774,7 +763,6 @@
                 "path": "../manifest.json",
                 "url": "https://vims.univ-nantes.fr/cube/1719616836_1"
               },
-              "detail": "Partial VIMS",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -789,7 +777,9 @@
                 "meta": "band-depth fraction",
                 "sourceUrl": "https://vims.univ-nantes.fr/cube/1719616836_1",
                 "image": "/scenes/tethys/tethys-ice-absorption-legend.webp"
-              }
+              },
+              "notes": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using nine Cassini VIMS observations from 2007–2015. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0.55–0.75; original numerical values are retained. Gray grid marks unsupported areas and scan gaps.",
+              "noData": true
             }
           ]
         },
@@ -984,7 +974,7 @@
       "sha256": "40723c3ebfaaa52a657827b37309bc84234811db1cf26a21d086e26aba2b3640",
       "bytes": 66401923,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1023,7 +1013,7 @@
       "sha256": "afa8fe486779512d843e645bcb56d088bd9f948553e0b4d26bc25d5d40c20759",
       "bytes": 17694840,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1086,7 +1076,7 @@
       "sha256": "aa3c249de2432699157638dae11c6f5c5e22c3dda94dd803af8666269f1a3da4",
       "bytes": 10809057,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1147,7 +1137,7 @@
       "sha256": "620881bff247aa48f0f98e05d06cbccad6a3e43133794f0621ffb0aa1cb4d7bc",
       "bytes": 117380,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1201,7 +1191,7 @@
       "sha256": "02b967b03598630765ec61545a7886ee8f4abda45fdae500f5af03358ebf5546",
       "bytes": 6044029,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1263,7 +1253,7 @@
       "sha256": "2770434e4d2473c4febac01cd206ffecde17170f05a082942cd3b841a5724453",
       "bytes": 790789,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1325,7 +1315,7 @@
       "sha256": "2f301f3a334665829a2d8dae8342273f2bc77c6ceac1aa88dbc5ed243e869c74",
       "bytes": 790789,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1382,7 +1372,7 @@
       "sha256": "57e0a23ea94acc47b3eb1d2d62d108a90f4d1a345b38b9b800abf19ebb16b73f",
       "bytes": 6044029,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1439,7 +1429,7 @@
       "sha256": "0047f9474973b09588f5aec6c549d6bc2dd4c70cd06600fab8d3a579aa03c610",
       "bytes": 790789,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1496,7 +1486,7 @@
       "sha256": "f2d4bcf46ea64f2d389e530567a7518da40841d34f88bd68384fafb991ea4808",
       "bytes": 790789,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1560,7 +1550,7 @@
       "sha256": "d55c543360d7612d68271dea75721766cf484c560c4f4d4f34cae1d813864d6a",
       "bytes": 126710,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1602,7 +1592,7 @@
       "sha256": "35fddf10a0f669e60677b9b9f5668d1a6d9bf9d8ee86ca91055eead5964526f7",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1650,7 +1640,7 @@
       "sha256": "7ea4077893d9524e32ec252ba0633605a59770293ea0c2e86e0ad2cd06f991c3",
       "bytes": 3845,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1666,7 +1656,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1675,10 +1665,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dbed13ca8d267ceb71a322bb1aeef42fe7524c33b1370d786b39541735e107ba",
-      "bytes": 17339,
+      "sha256": "adda5c50d0f8b79493a536b3be4c9f7b8ea5d82d1a1883fd18a1125193633b18",
+      "bytes": 15788,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1698,7 +1688,7 @@
       "sha256": "00870b543185b5e886cc0e1737d6eebfa786378dc2e434392ba7fe9fd1b99957",
       "bytes": 1005,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1724,7 +1714,7 @@
       "sha256": "5592104993c28326db51e3438ad90e98327ab66dbd7ba979f7264561856c9eac",
       "bytes": 176019,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1751,7 +1741,7 @@
       "sha256": "6c2b8a9f7f7b9959adc5b77ec09fd2b22daa182f043bb119bc362e3cc6b2cbd3",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1778,7 +1768,7 @@
       "sha256": "c4d4c76caec33ebcbfedf4c5f93aff7b16596b22d2cc0cc5d43cc6bfd4f22ff0",
       "bytes": 3263,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1791,9 +1781,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1823,13 +1811,13 @@
           "url": "/scenes/tethys/tethys-normal-thumbnail.webp",
           "bytes": 3346,
           "sha256": "88d6c15ac8f7f5fc8a32a9e36ab91f5434b9d10e4401f06c1d6faa7c5a294444",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tethys/tethys-normal-surface@2x.webp",
           "bytes": 9768182,
           "sha256": "ea182dc596c5b516c9f1af31ed07206b753342a9ad12b6f83ebd7b61d976eeca",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1841,9 +1829,7 @@
       "selector": "/raster/observations/1",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
-      ],
+      "limitations": [],
       "lensIds": [
         "enhanced"
       ],
@@ -1870,13 +1856,13 @@
           "url": "/scenes/tethys/tethys-enhanced-thumbnail.webp",
           "bytes": 5928,
           "sha256": "2d561a1f874e82ce11a81f420051e4f0194d4ef23326b6697c66d39c8cbe3ebf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tethys/tethys-enhanced-surface@2x.webp",
           "bytes": 13065564,
           "sha256": "97bb188f33dfb333c7ac99427bd3833f7659bf679aa8ba8a51a50c65715a6808",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1888,9 +1874,7 @@
       "selector": "/raster/observations/2",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Seven Cassini VIMS observations from 2007–2015. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.65 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps."
-      ],
+      "limitations": [],
       "lensIds": [
         "infrared"
       ],
@@ -1930,13 +1914,13 @@
           "url": "/scenes/tethys/tethys-infrared-thumbnail.webp",
           "bytes": 3104,
           "sha256": "9c52a691651e90f2195e6fd5c0722c7420aa87951bc2bc7ecd3b48501a0e52e3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tethys/tethys-infrared-surface@2x.webp",
           "bytes": 58586,
           "sha256": "01d161f1def6fca518f4a37db8f18b5891816de11f38c6f517f60ca3aeafeca0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1948,9 +1932,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1975,19 +1957,19 @@
           "url": "/scenes/tethys/tethys-elevation-thumbnail.webp",
           "bytes": 7234,
           "sha256": "8521ccff8607bb1fc3c363cfbfb52ec18652c05c44223b75715b67a286b03eca",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tethys/tethys-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tethys/tethys-elevation-surface@2x.webp",
           "bytes": 3480644,
           "sha256": "708bf83ed3773a589e2f91fa7f80261f29ae686b1b2d5e53bc40b7975e7b3861",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1999,9 +1981,7 @@
       "selector": "/raster/scientific/1",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps."
-      ],
+      "limitations": [],
       "lensIds": [
         "relative-albedo"
       ],
@@ -2026,19 +2006,19 @@
           "url": "/scenes/tethys/tethys-relative-albedo-thumbnail.webp",
           "bytes": 3410,
           "sha256": "293a567b012557e16ed3d24425f3cc28c09369218b8a36805ecf057f66a13d0c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tethys/tethys-relative-albedo-legend.webp",
           "bytes": 276,
           "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tethys/tethys-relative-albedo-surface@2x.webp",
           "bytes": 19324646,
           "sha256": "9cee634e4a9620ac3df5749aac90d2293085c64035a56f9184319444f99720f0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2050,9 +2030,7 @@
       "selector": "/raster/scientific/2",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using nine Cassini VIMS observations from 2007–2015. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0.55–0.75; original numerical values are retained. Gray grid marks unsupported areas and scan gaps."
-      ],
+      "limitations": [],
       "lensIds": [
         "ice-absorption"
       ],
@@ -2072,19 +2050,19 @@
           "url": "/scenes/tethys/tethys-ice-absorption-thumbnail.webp",
           "bytes": 1572,
           "sha256": "bf86ebcd9abad0f0a7a668ea0620f76b72108ecdffd5f7ee903c09c90b0564c1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tethys/tethys-ice-absorption-legend.webp",
           "bytes": 146,
           "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tethys/tethys-ice-absorption-surface@2x.webp",
           "bytes": 67856,
           "sha256": "34597960ea92a99a696e95558b82ffd7fd38d6db40bbe95b7f232ac3436e309b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2096,9 +2074,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -2116,13 +2092,13 @@
           "url": "/scenes/tethys/tethys-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tethys/tethys-shape-surface@2x.webp",
           "bytes": 464516,
           "sha256": "dcaecb1a58a830b5900dd46f9ac1d3529f3fb78ef623e48e2ff65e402b024d67",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2134,9 +2110,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "One Cassini narrow-angle photograph from 11 April 2015, projected onto the shape model through a camera derived from Cassini's SPICE kernels and refined to the limb. Grid marks surface the camera did not see or that lay in shadow. Brightness is disk-normalized with an empirical Lommel-Seeliger law; it is not measured albedo."
-      ],
+      "limitations": [],
       "lensIds": [
         "iss"
       ],
@@ -2156,13 +2130,13 @@
           "url": "/scenes/tethys/tethys-iss-thumbnail.webp",
           "bytes": 2428,
           "sha256": "51f90432165d1f7fe5cfbc6002c2260dae43f15799c0ef8f3ec7b9fd0b3d0b18",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tethys/tethys-iss-surface@2x.webp",
           "bytes": 1806630,
           "sha256": "a854ec7dd06d3cd27a87d5e84bb2891d465baa2efbed71a0a52eea8ebe569787",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2173,7 +2147,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -2185,8 +2159,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6256,
-          "sha256": "b5b9bc02aa7b5ba23b880e7ee049466894a40c0f15817a801a8c5f7a99494904",
+          "bytes": 5962,
+          "sha256": "90c65ccf291f561d55d87243d205b622070ae990df433d0704230c6a89580247",
           "verification": "bytes-verified"
         }
       ],
@@ -2222,7 +2196,7 @@
           "url": "/scenes/tethys/tethys-features.json",
           "bytes": 59142,
           "sha256": "7d89f5ef4468721f31efa6b421ac16ba68a31f19946526c579df390bde445184",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

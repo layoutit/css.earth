@@ -64,11 +64,6 @@
           "sha256": "bda133f928abe69bac38535b23dc920b2d4acb9d327d5af000517cffa88f7349"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "b149d16750d0712f0c9559c5c5d436d4c900346bfdc55ad52b42c76027da8a3e"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "82e3fcda5b5365028a0d6a61b192a31926882ed7831e2f3ea04f326dcfe9d2d7"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.2256949669977946,
-      "description": "Explore Gerda in 3D with its published shape model and radial elevation.",
+      "description": "Stony asteroid in the outer main belt, discovered in July 1872.",
       "systemName": "Solar System",
       "order": 270,
       "context": {

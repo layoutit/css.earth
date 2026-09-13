@@ -64,11 +64,6 @@
           "sha256": "0940453572dd07cd5f10270f2dca713c7183afd9b39c2c68a378ff8ca7f8c09c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "e5cdb37ebf8800c141be77f163625ef9dcd9284a0d4ce6466928616f4f162fdb"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "5c80b69034b508461fbf4cd0a921d7705d16d6f76c9e0320ddbfc01f525ee428"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.198966960927357,
-      "description": "Explore Pyrrhus in 3D with its published shape model and radial elevation.",
+      "description": "Jupiter Trojan asteroid, discovered in January 1989.",
       "systemName": "Solar System",
       "order": 365,
       "context": {

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "37b9421e21147c5dd26382313f2ff7d3ee5043f72d64d35e79ab5b339b6e09b2"
+    "sha256": "88a940f58960e58b03eb39b1636ef4e8f26cbcbdf459bfadea1d7cb6e173b10b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -149,14 +149,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c01601a3aaec430729f83b6ceadcac9a6f0acbf5ddba72ce35984e8c5721263f",
+      "sha256": "baa36bada76f6ad47fb9aa229030f3f08cd5deba94714d1918d1eb81a5c9e8be",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "bettina",
         "displayName": "Bettina",
         "panel": {
-          "introduction": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -220,8 +219,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 110 ± 5 km volume-equivalent diameter. Only one resolved AO observation constrains this reconstruction. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "DAMIT 1850 shape model",
               "thumbnail": "/scenes/bettina/bettina-shape-thumbnail.webp",
               "surface": "bettina-shape-surface@2x.webp",
               "poles": "bettina-shape-surface@2x.webp",
@@ -230,13 +227,11 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape"
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 55 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "DAMIT 1850 radial height",
               "thumbnail": "/scenes/bettina/bettina-elevation-thumbnail.webp",
               "surface": "bettina-elevation-surface@2x.webp",
               "poles": "bettina-elevation-surface@2x.webp",
@@ -258,7 +253,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1850",
                 "image": "/scenes/bettina/bettina-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 55 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -388,7 +383,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -397,8 +392,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c01601a3aaec430729f83b6ceadcac9a6f0acbf5ddba72ce35984e8c5721263f",
-      "bytes": 10233,
+      "sha256": "baa36bada76f6ad47fb9aa229030f3f08cd5deba94714d1918d1eb81a5c9e8be",
+      "bytes": 9661,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -413,9 +408,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 55 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -457,9 +450,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 110 ± 5 km volume-equivalent diameter. Only one resolved AO observation constrains this reconstruction. The grid marks unavailable imagery; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -494,7 +485,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -506,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7155,
-          "sha256": "e96a76fb4d16ddf789a229d506f530b4017f1ab977ca92cf31afc25f7e4cc4a2",
+          "bytes": 7020,
+          "sha256": "5b41f0740503f52a7104f7f9926ec07d29d38832cb76582f5b67f04c63cd812c",
           "verification": "bytes-verified"
         }
       ],

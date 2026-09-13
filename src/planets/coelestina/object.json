@@ -64,11 +64,6 @@
           "sha256": "dd8a8efd8029f34a794d6353bc4df01b2aec3d350ba713d32109c5cc2eedab78"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "30071bde1d7d311b23a9b2c6980ee990751d56ea1c39365bb268ea5798418478"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "9cfffbc003584cd09affd8b4a914c4f0aae002ff0e2a560d807b9bf74f05c8ca"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7617393088127553,
-      "description": "Explore Coelestina in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in June 1884.",
       "systemName": "Solar System",
       "order": 329,
       "context": {

@@ -51,11 +51,6 @@
           "sha256": "c30b3306843a145214368fafa7309683aed023533725cb36e3d495169dcf303c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "7aa4244809efa1fce3fa1c1d98b5e56f0355174be277982d99db9fc71bf3caa8"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "82662c36ca137110566273a4e0da22eb53f7a01e368dea3fa86495749d8a959c"
@@ -167,7 +162,7 @@
       "classification": "satellite",
       "color": "#9a8f7a",
       "distanceAu": 9.58,
-      "description": "Explore Iapetus in 3D with cssEarth. Inspect Cassini imagery of Saturn’s two-toned moon and its equatorial ridge.",
+      "description": "Two-toned moon of Saturn, dark as coal on one side and bright on the other.",
       "systemName": "Solar System",
       "order": 444,
       "context": {

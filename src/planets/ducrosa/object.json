@@ -64,11 +64,6 @@
           "sha256": "5fdc7671baddabd7bf7c320236f09a476c36b4641713d905d6040111489a6a9e"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "46b89c95e73e5df08c95d1809ced51d096052d693b934e52c198ed231b4b6652"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "aea463dcf4a99985e6c9f98e34b36561dbb92f184ce4eaf0152815ae29c9c742"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1255060299245687,
-      "description": "Explore Ducrosa in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered in March 1895.",
       "systemName": "Solar System",
       "order": 385,
       "context": {

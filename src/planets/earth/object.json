@@ -40,11 +40,6 @@
           "sha256": "38ff89966c0093260afef6a4d67a3953287ffacb3a78d9d651136453d6364805"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9ad78ba7518b687dae12a597ee89e74e4bd8ffc01f5266f3482c2bc86e62e974"
-        },
-        {
           "id": "lens-bindings",
           "path": "source/content/lens-bindings.json",
           "sha256": "56897b899d614f9a36c5eb834123eb7188b374ea008774d0cf80c8cad8dd1f0a"
@@ -196,7 +191,7 @@
       "classification": "planet",
       "color": "#5b82a7",
       "distanceAu": 1,
-      "description": "Explore Earth in 3D with cssEarth. Orbit our home planet, discover its surface and atmosphere, and browse scientific facts in your browser.",
+      "description": "Our home planet, the only place known to host life.",
       "systemName": "Solar System",
       "order": 119,
       "context": {

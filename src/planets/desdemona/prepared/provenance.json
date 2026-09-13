@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ceeffd6783a88c25c0defe0768d34f6d7b4f07e7ba4ae161d9bf1b93c426b88c"
+    "sha256": "96f7a4a3b47dc6ab33a7a73329a2d8c36510bc5d5e213a1e9a9d910da918a9f1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ffc98a48a8863d9f585db1ca44782a18b855d16e7a4bf483005100ab9ca7e0dc",
+      "sha256": "044f397b9b2bfcd3d9aa0f66fe089a8d55b5bd2087102c1c62ff0e452b51638c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "desdemona",
         "displayName": "Desdemona",
         "panel": {
-          "introduction": "Desdemona is an elongated member of Uranus’s tightly packed inner moon system, discovered in Voyager 2 images in 1986.",
           "facts": [
             {
               "id": "radius",
@@ -156,9 +155,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published 90 × 54 × 54 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
-              "title": "Approximate shape model",
-              "detail": "Measured shape",
               "thumbnail": "/scenes/desdemona/desdemona-model-thumbnail.webp",
               "surface": "desdemona-model-surface@2x.webp",
               "poles": "desdemona-model-poles@2x.webp",
@@ -167,7 +163,8 @@
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/2401.04634"
               },
-              "summary": "A 90 × 54 × 54 km shape estimate. Two axes are assumed equal; gray grid: no imagery, not observed terrain."
+              "notes": "Published 90 × 54 × 54 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+              "noData": true
             }
           ]
         },
@@ -311,7 +308,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -320,8 +317,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ffc98a48a8863d9f585db1ca44782a18b855d16e7a4bf483005100ab9ca7e0dc",
-      "bytes": 3381,
+      "sha256": "044f397b9b2bfcd3d9aa0f66fe089a8d55b5bd2087102c1c62ff0e452b51638c",
+      "bytes": 3044,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -336,9 +333,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published 90 × 54 × 54 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -378,7 +373,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -390,8 +385,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7925,
-          "sha256": "847c9a58e4d8a3c3777352a9381a63e17c8c5061f580b6e23e2729544a52f462",
+          "bytes": 7787,
+          "sha256": "3d3086d14446c87d5e83f094adefbfa043010eb7321bd442e7aeb4ecd15c26ce",
           "verification": "bytes-verified"
         }
       ],

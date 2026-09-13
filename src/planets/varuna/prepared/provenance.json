@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d7e477ca88bf992f5242e834e83dc889ae0d3f33c631a8234ab465f8ceb20442"
+    "sha256": "ea44ca08634234260dd1f1aa03fdf62cce583bfb6f9bb3f158f0560eac33ed21"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "394fbb52e62703f2f9a24065cfc5b9dccff9b4ecc4ba3c39f43f6fbfe46f90fa",
+      "sha256": "f26a4771d091079d5ad315d0a7e9b61d82c7a6574af7fd9ccd25e37e28db2f17",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "varuna",
         "displayName": "Varuna",
         "panel": {
-          "introduction": "Varuna’s rapid rotation and changing brightness reveal an elongated world beyond Neptune. This smooth model follows a published light-curve fit; its absolute size remains approximate.",
           "facts": [
             {
               "id": "shape",
@@ -158,9 +157,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Illustrative scale model of the published Jacobi fit: b/a=0.60, c/b=0.72, scaled to the paper’s adopted approximate 700 km volume-equivalent diameter. These smooth axes are inferred, not resolved terrain. Uses one published pole interpretation, ecliptic longitude 53° ±10° and latitude −64° ±6°, converted with the J2000 mean obliquity for display. The antipodal pole is also allowed; equinox and meridian are display conventions, not a qualified absolute attitude. The grid marks unmapped terrain.",
-              "title": "Published light-curve ellipsoid",
-              "detail": "Inferred shape · unmapped surface grid",
               "thumbnail": "/scenes/varuna/varuna-model-thumbnail.webp",
               "surface": "varuna-model-surface@2x.webp",
               "poles": "varuna-model-poles@2x.webp",
@@ -168,7 +164,9 @@
                 "id": "published-shape",
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/1909.04698"
-              }
+              },
+              "notes": "Illustrative scale model of the published Jacobi fit: b/a=0.60, c/b=0.72, scaled to the paper’s adopted approximate 700 km volume-equivalent diameter. These smooth axes are inferred, not resolved terrain. Uses one published pole interpretation, ecliptic longitude 53° ±10° and latitude −64° ±6°, converted with the J2000 mean obliquity for display. The antipodal pole is also allowed; equinox and meridian are display conventions, not a qualified absolute attitude. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -303,7 +301,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -312,8 +310,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "394fbb52e62703f2f9a24065cfc5b9dccff9b4ecc4ba3c39f43f6fbfe46f90fa",
-      "bytes": 3935,
+      "sha256": "f26a4771d091079d5ad315d0a7e9b61d82c7a6574af7fd9ccd25e37e28db2f17",
+      "bytes": 3631,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -328,9 +326,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Illustrative scale model of the published Jacobi fit: b/a=0.60, c/b=0.72, scaled to the paper’s adopted approximate 700 km volume-equivalent diameter. These smooth axes are inferred, not resolved terrain. Uses one published pole interpretation, ecliptic longitude 53° ±10° and latitude −64° ±6°, converted with the J2000 mean obliquity for display. The antipodal pole is also allowed; equinox and meridian are display conventions, not a qualified absolute attitude. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -370,7 +366,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -382,8 +378,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5662,
-          "sha256": "31298fe6475e1e3724dbd5a46684f35f26122917db81e8d5cc858a4a481b3dd0",
+          "bytes": 5459,
+          "sha256": "e4306162ae3a90487fe71d4f96dbf6537dd5fecc5d4aac998b7d488fb788ce4a",
           "verification": "bytes-verified"
         }
       ],

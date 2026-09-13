@@ -64,11 +64,6 @@
           "sha256": "b12356b7d558eec344744dcb4f9e7150ab755ecd858032cdb83bf1788df0da51"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "02dfadb67d2d7019ea4b84390e0ee3c63f2f7b2487553962e2577c0e259455cd"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0f274c3e1fd24012b04af9bee325c94799e541d92b71277c705008cbb848199a"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.750433032034634,
-      "description": "Explore Nemesis in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 25 November 1872.",
       "systemName": "Solar System",
       "order": 159,
       "context": {

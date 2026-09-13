@@ -548,15 +548,6 @@
       }
     },
     {
-      "path": "content/text.json",
-      "expectedBytes": 1549,
-      "expectedSha256": "93cae6b1be8d8532bef5f91e97678af3664b0f803b9de9e34a754ad1b5134bef",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
-    },
-    {
       "path": "geometry/c1137317-opus.json",
       "expectedBytes": 11743,
       "expectedSha256": "d3d1a5645feab5ac03bc94cc3bdb1e1890da0d417211c1b19bde01c150b5014f"

@@ -64,11 +64,6 @@
           "sha256": "effbd50a00ba119a11c558e3036753b08afe51494856917f7bcc1b9f122ea4a4"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d6c0af8c1b99f53edd29762dcea901d66e87896be6c842c86bcffb35947bada3"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "7b2f8c02e21b5c93feb52ddc14392df1c67927036091486cf68965e57b35f94a"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.769411416140799,
-      "description": "Explore Pallas in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Heavily cratered asteroid, one of the largest in the main belt.",
       "systemName": "Solar System",
       "order": 139,
       "context": {

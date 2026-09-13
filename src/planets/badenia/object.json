@@ -64,11 +64,6 @@
           "sha256": "81a21fb12b24d214335f869c0a59d8694a050705054ec565aaf457d712411771"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0a8b0d7dd27092afe84208e7f7d9c47f85a288e7acd218ecf5e88e24b930a35f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "6c5c86600dc6faa4ce611129e0bb9af968d8b3cf5298367b6eeb35ccaa36a94b"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.13175476216037,
-      "description": "Explore Badenia in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in August 1892.",
       "systemName": "Solar System",
       "order": 384,
       "context": {

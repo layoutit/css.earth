@@ -31,11 +31,6 @@
           "sha256": "712afa116b015312e8456727dfcb79b1fe120850a7aacdef167465b29b507917"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "c4ebc10737bd89a685be71cac8b691359d566c4d2bfac83d1459f9e80d7c2dec"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "6544c713b5fe31a6cd599b4c8395b36d4c64ac29e1b7dc79ba7414033927f3e6"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Sycorax, a moon of Uranus, through its lightcurve-constrained shape approximation.",
+      "description": "Largest of Uranus's outer moons, orbiting backward.",
       "systemName": "Solar System",
       "order": 28,
       "context": {

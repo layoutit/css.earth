@@ -64,11 +64,6 @@
           "sha256": "fb5441bc70bbf11485d157f45b23d92214d61ef9063b90bffa373c33f5ee9ad4"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "18fa3a9707decedce1963cba5ab77d3aa40173d3f43a59ef9eb7747dc85dcf1e"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "5910c0dffa2f44e1fe8d38f58530218a97334cacbacc14c59c1e2eef1b1c6334"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.126208058670846,
-      "description": "Explore Loreley in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 9 August 1876 at Clinton.",
       "systemName": "Solar System",
       "order": 297,
       "context": {

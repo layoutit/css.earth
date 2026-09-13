@@ -64,11 +64,6 @@
           "sha256": "56c199e123d5c8b4a6a681cc0c17f39b3aff5dfa4784fde20e72efd3bafe646b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "1ac18e3d8132a2150f9f06501441c604f1f1cbcd3aaa851fc87cca4ca5e7419a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2f00008a93f35d469776c495511b51037f7674d7eaa39c18c5f83b00aef20796"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0905910748647547,
-      "description": "Explore Hekate in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in July 1868.",
       "systemName": "Solar System",
       "order": 196,
       "context": {

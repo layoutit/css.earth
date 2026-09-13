@@ -64,11 +64,6 @@
           "sha256": "9ba4f2a2826bdee0020b128e876eb0b70ea41a6006b7d9d7e8decec5622b62a2"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f25e6eeddb37fd56a0d2412da5c9d711c5208a22859235d1d2c48e2279a479e4"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "54dcff8a48002f208a6f83926316efa6014c61b98b9f6038ed80ddd00485e72f"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.379742056440902,
-      "description": "Explore Thyra in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in August 1871.",
       "systemName": "Solar System",
       "order": 265,
       "context": {

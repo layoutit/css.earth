@@ -64,11 +64,6 @@
           "sha256": "223d85724b5c6da81a0049bfef0b8b84dc97252c9b1590fd6f1f94ff610b7b51"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "c73510b5a14a4500b7e5e26b0e5eecc49a45da774d12da7c94febfec910fa792"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "f270fc5d6e436057c343874af084feab8742ed00f4ba5a353bd9089b004b7c80"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.162046843719569,
-      "description": "Explore Euphrosyne in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid with a moon, discovered in September 1854.",
       "systemName": "Solar System",
       "order": 147,
       "context": {

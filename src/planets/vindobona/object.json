@@ -64,11 +64,6 @@
           "sha256": "97b4731242d9cff00733f3df70a0197f0b3f200e95e6b059c06ce463c33be4a6"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "296a1adf23f9aa3a0abbd8d4ede22594513df5bc1e2017d9e710b3777fd2c929"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "9e2fdd9ccb6613ea0c08fe5567321d11e3d9855b2bb789e1df714b68f9e55a2b"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.918785954300875,
-      "description": "Explore Vindobona in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered in September 1882.",
       "systemName": "Solar System",
       "order": 327,
       "context": {

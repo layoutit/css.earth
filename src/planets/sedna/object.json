@@ -31,11 +31,6 @@
           "sha256": "75d3723fb99d29f1986d277ddd8cdda81099263518cb8daa2c02b8af6e2a3128"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "47f273486f200788ee2f6ab9b59bc00b42e2b1ca2cfef90ffc56610605bdeb32"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "ce2163bf12412b80836edbea45288bae50a9c28ddd01eed2b1630750f76fa54e"
@@ -123,7 +118,7 @@
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 82.85697523892613,
-      "description": "Sedna follows an exceptionally distant, elongated orbit beyond the planetary region. This grid-covered illustration conveys its thermal size estimate; its actual shape and surface terrain remain unresolved.",
+      "description": "Distant object on one of the most stretched orbits known.",
       "systemName": "Solar System",
       "order": 13,
       "context": {

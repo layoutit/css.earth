@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5a656a3dec5274abf938495db1cff303037253ee861bef2cd2803cdd2630ed56"
+    "sha256": "da89f5190ac567236b8968621d25225b76f21a4dd17ce35c6974d0877fca7f3e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "310a09e6ccaf021e88272c4fafdb3c865e085dfc20f739f7573f60fd8ee99670",
+      "sha256": "40c7d1615000a0b0cd23bcccd01f426d841ade12ed0f1c49e13c5c618cacc8e0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -167,7 +167,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Moshup is the primary of the near-Earth binary asteroid formerly designated 1999 KW4. Its radar reconstruction has a pronounced equatorial ridge. Explore its original shape and radial heights. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -199,8 +198,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Published radar shape model",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/moshup/moshup-shape-thumbnail.webp",
               "surface": "moshup-shape-surface@2x.webp",
               "poles": "moshup-shape-surface@2x.webp",
@@ -209,14 +206,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape from radar observations. The gray grid marks missing optical imagery; lighting shows the model."
+              "notes": "Published radar shape model",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/moshup/moshup-elevation-thumbnail.webp",
               "surface": "moshup-elevation-surface@2x.webp",
               "poles": "moshup-elevation-surface@2x.webp",
@@ -238,8 +233,7 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj",
                 "image": "/scenes/moshup/moshup-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -367,7 +361,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -376,8 +370,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "310a09e6ccaf021e88272c4fafdb3c865e085dfc20f739f7573f60fd8ee99670",
-      "bytes": 8235,
+      "sha256": "40c7d1615000a0b0cd23bcccd01f426d841ade12ed0f1c49e13c5c618cacc8e0",
+      "bytes": 7567,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -392,9 +386,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -436,9 +428,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Published radar shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -473,7 +463,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -485,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5652,
-          "sha256": "61c8d5a38c3613f9b2d7fe6dc4f3f01b1c344d94ff8c5bd04968b6797e4d925f",
+          "bytes": 5398,
+          "sha256": "ff0ef07ec6aadf0d25ca3aebb3b1fda3ec38df7b41e3617cea078af60959eb08",
           "verification": "bytes-verified"
         }
       ],

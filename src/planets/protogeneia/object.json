@@ -64,11 +64,6 @@
           "sha256": "2e2a394b0bc95aa05bd635cbbcd1e5cdaee9fcbae345fb3b03e3d87a1e8c636c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "77a7c6935f5a1f5065b8d66432c41b4a92d7b8742ec28410023c00e435d1e673"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "211219a68d5cdbec319c853374ca4b0bd98489cb20c08e24e4689b88bf58e5df"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.13636157165271,
-      "description": "Explore Protogeneia in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in July 1875.",
       "systemName": "Solar System",
       "order": 283,
       "context": {

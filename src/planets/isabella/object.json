@@ -64,11 +64,6 @@
           "sha256": "14d075b51ac91a1afc15fc13663fe216eaab6ed2038e9128e5757d85041cfe0b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "b3f7dd43ceb584be90f4aa72100c20d54cfee9613cced66984ea5b19df88dd28"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "44553bc16e22db8a32f307cf95a9d8b04dcf2a391903d6da4f270eebb1949667"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7224299951412174,
-      "description": "Explore Isabella in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 12 November 1879.",
       "systemName": "Solar System",
       "order": 315,
       "context": {

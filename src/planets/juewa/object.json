@@ -64,11 +64,6 @@
           "sha256": "b1621e715d448af8cdeb277851e34939cbf2e666e793a81f31f15a27d459c98f"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "bc962f6dd04457c30d3ac89bd4c90b01c5609320174e60381142f743db9d5d5e"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "48d29ec9302e418b25a709c0917edc6b5ae3fd4bd28c726ee2cf9f4e25494607"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7861445733475856,
-      "description": "Explore Juewa in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark main-belt asteroid, discovered on 10 October 1874.",
       "systemName": "Solar System",
       "order": 380,
       "context": {

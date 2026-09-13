@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1ae4ba704f6bd252417b59436255c59bde17559df06afede1957aee33acab08f"
+    "sha256": "5fcaebcfbc526943787f97a12971abddf7395329e8d3c0c3e24158a1001aa6f0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5543b265ba0ec4f7e90fa874aeee45e4634462d54f6db9698fc9bf8476b196aa",
+      "sha256": "bcf2db2488dbe56cee2b06684bb03abf060283e4636bd1b72ed7ce659513c03c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "juliet",
         "displayName": "Juliet",
         "panel": {
-          "introduction": "Juliet is an elongated inner moon of Uranus, discovered by Voyager 2. Its long axis is modeled as pointing toward the planet.",
           "facts": [
             {
               "id": "radius",
@@ -161,9 +160,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "A published 150 × 74 × 74 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager resolves only a few pixels across Juliet, so the gray grid marks missing mapped surface coverage; it is not photographed terrain.",
-              "title": "Approximate shape model",
-              "detail": "Published shape",
               "thumbnail": "/scenes/juliet/juliet-model-thumbnail.webp",
               "surface": "juliet-model-surface@2x.webp",
               "poles": "juliet-model-poles@2x.webp",
@@ -172,7 +168,8 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.1006/icar.2001.6596"
               },
-              "summary": "A 150 × 74 × 74 km shape estimate from Voyager. Two axes are assumed equal; gray grid: no surface imagery."
+              "notes": "A published 150 × 74 × 74 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager resolves only a few pixels across Juliet, so the gray grid marks missing mapped surface coverage; it is not photographed terrain.",
+              "noData": true
             }
           ]
         },
@@ -322,7 +319,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -331,8 +328,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5543b265ba0ec4f7e90fa874aeee45e4634462d54f6db9698fc9bf8476b196aa",
-      "bytes": 3698,
+      "sha256": "bcf2db2488dbe56cee2b06684bb03abf060283e4636bd1b72ed7ce659513c03c",
+      "bytes": 3355,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -347,9 +344,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "A published 150 × 74 × 74 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager resolves only a few pixels across Juliet, so the gray grid marks missing mapped surface coverage; it is not photographed terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -389,7 +384,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -401,8 +396,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4142,
-          "sha256": "88ca42f448942638bbd82050d165fe84fe692b164c1d9261d9b1f71954c7b224",
+          "bytes": 3999,
+          "sha256": "17b78f76d7e8ae4cb921a64a16131b46a2ef5c9ab95470a7b7e741ccbe5a0e60",
           "verification": "bytes-verified"
         }
       ],

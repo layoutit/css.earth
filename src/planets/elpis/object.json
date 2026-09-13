@@ -64,11 +64,6 @@
           "sha256": "90d85ba5290c690d7ed942b86310b5a508f985e565bad6ac8751b5868dbf1103"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "db02faa1567aa14e7097724f0496c0cca1f716375e52ecc582a0c5c32f759005"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "802e53be6be57085ec7ed4b5995943e90902daa956a539b0898af81ae8a49d67"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7131621894421545,
-      "description": "Explore Elpis in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 12 September 1860.",
       "systemName": "Solar System",
       "order": 235,
       "context": {

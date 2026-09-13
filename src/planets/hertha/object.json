@@ -64,11 +64,6 @@
           "sha256": "be627c205a01767d30fc5cea6c2b3bcaf039031ba01de7302559954f628e7616"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "1cbbf4d341683226be4b06d08792e5203a296ed76490d5644e20532e958ff371"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "f437ed5020e38fb57e79fe28e984aec5edbb0755ca53067962e61162945188ae"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4274112698544013,
-      "description": "Explore Hertha in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in February 1874.",
       "systemName": "Solar System",
       "order": 257,
       "context": {

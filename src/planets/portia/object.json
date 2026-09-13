@@ -31,11 +31,6 @@
           "sha256": "786430c1966ea97ae27f7ebb1bc50f5d038f4070436ceaab1ae12bcdd2c6f99c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f5e18a9e34b09404a971dfe50df7e4411db64909f6b876dc977e510829d6c6d5"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "5c11f93e1792a4316cc06e413ea066aadcb022709c994677c3f301cffe046a48"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Portia through its published prolate shape model.",
+      "description": "One of the largest of Uranus's small inner moons, circling in about 12 hours.",
       "systemName": "Solar System",
       "order": 98,
       "context": {

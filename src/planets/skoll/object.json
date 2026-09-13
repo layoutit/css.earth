@@ -31,11 +31,6 @@
           "sha256": "6270eb7678c65a0d02be9a599b3858b56ea3908d5526a84c4dac70507e44660b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d74f469f9ce341228788f93ba9a48e29b614d7293937f06a5076a753c0fe7d4e"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "4a7a26d9541995cce58e59dfd00261425c825bdff756017256d5538f73b8717d"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Skoll, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Norse-group moon of Saturn whose Cassini light curves disagree.",
       "systemName": "Solar System",
       "order": 46,
       "context": {

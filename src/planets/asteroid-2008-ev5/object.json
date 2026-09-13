@@ -64,11 +64,6 @@
           "sha256": "4fe1d3481268c1778682eae5d7e84a6575ba7d521d49463bedb938cdd40fa51e"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "c97d8bccc1239de5ea0d0030a0a8f86c622e0cabc6976d251ef150cc1b999ac7"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "a39471283797d4e8ce2c3179483546cc818766539e9b8893d4c1b1374fb5668a"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 0.9597570834058771,
-      "description": "Explore 2008 EV5 in 3D with its published radar shape model.",
+      "description": "Small near-Earth asteroid with an equatorial ridge broken by a large hollow.",
       "systemName": "Solar System",
       "order": 211,
       "context": {

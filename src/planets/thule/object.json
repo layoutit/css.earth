@@ -64,11 +64,6 @@
           "sha256": "8196b518f7954f0aed0e8a24af55bd57a965ed34db155822eb27c29a33127c0e"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "727fd1cdc815e9be85182d1a95dc25f17e741acd97eec27b169747c6c893da5b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "e76cd8700f4f124790e36a13a7fe8bfff2658e4b4ed8af6cf9ebbc803618256c"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 4.270063067184944,
-      "description": "Explore Thule in 3D with its published shape model and radial elevation.",
+      "description": "Dark asteroid in the outer main belt, discovered in October 1888.",
       "systemName": "Solar System",
       "order": 194,
       "context": {

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8f3bb875536d51325fee13bb0c52c0a453c8194f0f79d055b3e9b1e223547175"
+    "sha256": "08435b5cca620e3b13a04e042e1c66d0386483d18d8cb7fb7353aa8bb9994891"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -302,14 +302,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02",
+      "sha256": "4ed75dd1418482eb3da8e249803c3116ec909c6616daa7d03df8fb3f6ac71845",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-9p",
         "displayName": "Tempel 1",
         "panel": {
-          "introduction": "Deep Impact struck Tempel 1 in 2005; Stardust returned in 2011. Explore the two encounters separately, alongside the shape model built from both visits.",
           "facts": [
             {
               "id": "diameter",
@@ -342,9 +341,6 @@
             {
               "id": "constraints",
               "label": "Source constraints",
-              "description": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
-              "title": "Shape-constraint map",
-              "detail": "PDS",
               "thumbnail": "/scenes/comet-9p/comet-9p-constraints-thumbnail.webp",
               "surface": "comet-9p-constraints-surface@2x.webp",
               "poles": "comet-9p-constraints-poles@2x.webp",
@@ -364,14 +360,13 @@
                   "label": "Blue",
                   "value": "Limb outlines"
                 }
-              ]
+              ],
+              "notes": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
+              "noData": true
             },
             {
               "id": "model",
               "label": "Shape model",
-              "description": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
-              "title": "Nucleus shape reconstruction",
-              "detail": "PDS",
               "thumbnail": "/scenes/comet-9p/comet-9p-model-thumbnail.webp",
               "surface": "comet-9p-model-surface@2x.webp",
               "poles": "comet-9p-model-poles@2x.webp",
@@ -391,14 +386,13 @@
                   "label": "Shape observations",
                   "value": "2005 and 2011"
                 }
-              ]
+              ],
+              "notes": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
+              "noData": true
             },
             {
               "id": "deep-impact",
               "label": "Deep Impact · 2005",
-              "description": "Eight images follow Deep Impact’s approach in 2005. The closest views reveal finer ridges and depressions within the earlier photographs. Original shadows remain; the grid marks gaps or uncertain shape.",
-              "title": "ITS mosaic",
-              "detail": "ITS",
               "thumbnail": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
               "surface": "comet-9p-deep-impact-surface@2x.webp",
               "poles": "comet-9p-deep-impact-poles@2x.webp",
@@ -419,14 +413,12 @@
                   "value": "3–34 m/pixel"
                 }
               ],
-              "summary": "Eight approach images show the surface before impact. Close-ups add detail in smaller patches. Original shadows remain; the grid marks gaps or uncertain shape."
+              "notes": "Eight images follow Deep Impact’s approach in 2005. The closest views reveal finer ridges and depressions within the earlier photographs. Original shadows remain; the grid marks gaps or uncertain shape.",
+              "noData": true
             },
             {
               "id": "next",
               "label": "Stardust-NExT · 2011",
-              "description": "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps.",
-              "title": "Encounter image mosaic",
-              "detail": "NAVCAM",
               "thumbnail": "/scenes/comet-9p/comet-9p-next-thumbnail.webp",
               "surface": "comet-9p-next-surface@2x.webp",
               "poles": "comet-9p-next-poles@2x.webp",
@@ -447,7 +439,8 @@
                   "value": "12–42 m/pixel"
                 }
               ],
-              "summary": "These images show the surface six years after the 2005 encounter. Lighting differs between visits; the grid marks gaps."
+              "notes": "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps.",
+              "noData": true
             }
           ]
         },
@@ -2047,7 +2040,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -2056,8 +2049,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02",
-      "bytes": 7259,
+      "sha256": "4ed75dd1418482eb3da8e249803c3116ec909c6616daa7d03df8fb3f6ac71845",
+      "bytes": 6564,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2143,9 +2136,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -2186,9 +2177,7 @@
       "selector": "/raster/observations/1",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions."
-      ],
+      "limitations": [],
       "lensIds": [
         "constraints"
       ],
@@ -2229,9 +2218,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Eight images follow Deep Impact’s approach in 2005. The closest views reveal finer ridges and depressions within the earlier photographs. Original shadows remain; the grid marks gaps or uncertain shape."
-      ],
+      "limitations": [],
       "lensIds": [
         "deep-impact"
       ],
@@ -2291,9 +2278,7 @@
       "selector": "/raster/surfaceObservations/1",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps."
-      ],
+      "limitations": [],
       "lensIds": [
         "next"
       ],
@@ -2346,7 +2331,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -2358,8 +2343,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5302,
-          "sha256": "2948069fc217849fa65f78f2f220dfa5117853e6418a552c55036eba99e22db1",
+          "bytes": 5132,
+          "sha256": "da85a04d5c5974323175add8a56b08fa14a185e088ae5db68a335738249b7c30",
           "verification": "bytes-verified"
         }
       ],

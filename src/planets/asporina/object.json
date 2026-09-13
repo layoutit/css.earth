@@ -64,11 +64,6 @@
           "sha256": "0c10d516fe6654fc511b3e585c1ed91aab81179acad028fad0d6ca795aba10da"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "ef89e0cef2d19f245a30226432751b3ff435ebef3504568340a6e1642a146a47"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "20700b700f32266854085dcdeb8f6f4b168624f2f9275fe9276a51dd0db77c33"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6955752258853334,
-      "description": "Explore Asporina in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in March 1885.",
       "systemName": "Solar System",
       "order": 334,
       "context": {

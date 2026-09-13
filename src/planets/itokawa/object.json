@@ -70,11 +70,6 @@
           "sha256": "a47d5e857e066ca69a53f889711cdc100a0607d960a0b98f93593c5a2b0c5010"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a1ec0d52bb496e4704ee3f1a743d20f06992013bbcba68287e422bb11acc593b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "1007450a9cd24da50a2dd8d0d122f48380defb5ff91a2a5b862c1a98b5b7c3f4"
@@ -141,7 +136,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 1.323,
-      "description": "Explore Itokawa in 3D with cssEarth using mission-derived shape and surface data.",
+      "description": "Small near-Earth asteroid that Hayabusa sampled.",
       "systemName": "Solar System",
       "order": 124,
       "context": {

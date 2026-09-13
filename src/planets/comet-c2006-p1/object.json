@@ -31,11 +31,6 @@
           "sha256": "6c3a989efcb310a35c1be5c161539745e132cfd71731acd119517b5e34188b4e"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "ee4631924cd2b3d1b8298ca40dccb505a9643f24a9473cf1cc8426e23128c9c8"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2242983d6bbdd1b7e430bd83a7013d906d0b349cf103b2691c59c11f57a9dd94"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 40.6783719290027,
-      "description": "C/2006 P1: McNaught became exceptionally bright during its January 2007 passage around the Sun. JPL lists it among history’s great comets. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Listed by JPL among history's great comets.",
       "systemName": "Solar System",
       "order": 66,
       "context": {

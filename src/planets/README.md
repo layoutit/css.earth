@@ -23,9 +23,10 @@ src/planets/<id>/
   README.md                    sources, processing, evidence and known problems
   NOTICE.md, LICENSE*          attribution and applicable terms
   object.json                  catalogue entry, recipe and prepared transport reference
+  text.json                    card line, introduction and dataset text, with their sources
   source/manifest.json         exact inputs, documents and intermediate pins
   source/preparation/          acquisition and capability configuration
-  source/content/              body-owned editorial content and controls
+  source/content/              body-owned facts, dataset recipes and controls
   source/                      original inputs, labels and necessary source notes
   prepared/                    generated content, geometry and lineage records
   prepared/page.json           generated page assets and controls

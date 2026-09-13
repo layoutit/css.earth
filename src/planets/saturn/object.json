@@ -44,11 +44,6 @@
           "sha256": "d7102e88052d1dedf97d58e635bee339c917f10ee1925bf929261c8798f126f4"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "1a71beb51f0ae190254e92949f293b1cd02bb5475ae09a9e0d74a826f9bca76d"
-        },
-        {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
           "sha256": "1917a7427018f30692a34d1204575b8bf762dfbe8f45f2f9f7cf5b3c0b880acf"
@@ -190,7 +185,7 @@
       "classification": "planet",
       "color": "#d2b68c",
       "distanceAu": 9.58,
-      "description": "Explore Saturn in 3D with cssEarth. Orbit its spectacular rings, discover its moons, and browse scientific facts about this gas giant.",
+      "description": "Ringed gas giant, sixth planet from the Sun.",
       "systemName": "Solar System",
       "order": 430,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "f639cb3f771719e971e863609d1b3b84fff1b24c4cc820d74a088356f9f21792"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "591307747b360aac2f966fc66e50323b0b0f291d37573f406d73c3353df61c7f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "95428852a63053bf1758e0db5bd2e8cb7fb266788d5f429520c4225a6e7b9a9e"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7604931019999346,
-      "description": "Explore Scylla in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered on 8 November 1875.",
       "systemName": "Solar System",
       "order": 288,
       "context": {

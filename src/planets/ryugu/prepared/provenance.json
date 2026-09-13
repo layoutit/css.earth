@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a1488281345bd2eea04185bcfe6dfac8baa6fdcee6cbb578b8c5c7b7c57d10a1"
+    "sha256": "68eb23ee347660bc2fe5168943bf401c59171a78b4200669f5d1ad1ebf915323"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -177,7 +177,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c1cb474f7b85860defdf548e47326188ec2a48efa25bed3c1685c4a236ccb7ed",
+      "sha256": "65d192f4ac6eceb259985291afcca2f5000d053ef7284d75c84cf431bbfb05c2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -201,7 +201,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Ryugu is a dark asteroid with a broad equatorial ridge. Hayabusa2 mapped its boulders and craters and returned samples to Earth in 2020.",
           "facts": [
             {
               "id": "radius",
@@ -247,8 +246,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles.",
-              "title": "ONC 548.9 nm reflectance map",
               "thumbnail": "/scenes/ryugu/ryugu-normal-thumbnail.webp",
               "surface": "ryugu-normal-surface@2x.webp",
               "poles": "ryugu-normal-surface@2x.webp",
@@ -257,14 +254,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "ONC v-band · corrected reflectance",
-              "summary": "Corrected reflectance at 548.9 nm is stretched for display. The July 2018 observations leave the poles unobserved."
+              "notes": "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles.",
+              "noData": true
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
-              "description": "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain.",
-              "title": "ONC false-color composite",
               "thumbnail": "/scenes/ryugu/ryugu-enhanced-thumbnail.webp",
               "surface": "ryugu-enhanced-surface@2x.webp",
               "poles": "ryugu-enhanced-surface@2x.webp",
@@ -273,14 +268,11 @@
                 "path": "../manifest.json"
               },
               "falseColor": true,
-              "detail": "Controlled ONC color mosaic",
-              "summary": "False colors show differences between images. Brightness matching changes the mosaic values; they are not measured reflectance."
+              "notes": "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain."
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows radius minus a 448 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/ryugu/ryugu-elevation-thumbnail.webp",
               "surface": "ryugu-elevation-surface@2x.webp",
               "poles": "ryugu-elevation-surface@2x.webp",
@@ -302,8 +294,7 @@
                 "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
                 "image": "/scenes/ryugu/ryugu-elevation-legend.webp"
               },
-              "detail": "Shape-derived height",
-              "summary": "Height relative to a 448 m sphere, from the shape model. Colors include Ryugu's broad form; the outline is simplified."
+              "notes": "Color shows radius minus a 448 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces."
             }
           ]
         },
@@ -595,7 +586,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -604,8 +595,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c1cb474f7b85860defdf548e47326188ec2a48efa25bed3c1685c4a236ccb7ed",
-      "bytes": 9404,
+      "sha256": "65d192f4ac6eceb259985291afcca2f5000d053ef7284d75c84cf431bbfb05c2",
+      "bytes": 8531,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -749,9 +740,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -808,9 +797,7 @@
       "selector": "/raster/observations/1",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain."
-      ],
+      "limitations": [],
       "lensIds": [
         "enhanced"
       ],
@@ -855,9 +842,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows radius minus a 448 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -898,7 +883,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -910,8 +895,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4919,
-          "sha256": "1be71a476ed21b94c4b07c47f913cb06d176675c47267e9c5c769253f18399bc",
+          "bytes": 4765,
+          "sha256": "49924846f759db26dc183169cc331b20cce9fc3b0d74e50bcd7dd2217d9958bb",
           "verification": "bytes-verified"
         }
       ],

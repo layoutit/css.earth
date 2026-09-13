@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "91a497db2f047965f9448ee1c7b90d4d00af0742e590fc30b2e8599d8d45f0b3"
+    "sha256": "d7d3470e48a019f10df43de23e497cbea766a15603f5a6e249fcd0dbf86cdb9e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -149,14 +149,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ef04a679a0890cf6a20e8ca4b9e69d6fa39b4fd0d14bf842c5f30ca6b8da7103",
+      "sha256": "04b8b824cd8fefa8dcb1255de715f67ea4bf1a4e8d01d51bf86ce8dbc0a489c7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "lamberta",
         "displayName": "Lamberta",
         "panel": {
-          "introduction": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -220,8 +219,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 141 ±2 km. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "DAMIT 5914 shape model",
               "thumbnail": "/scenes/lamberta/lamberta-shape-thumbnail.webp",
               "surface": "lamberta-shape-surface@2x.webp",
               "poles": "lamberta-shape-surface@2x.webp",
@@ -230,13 +227,11 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape"
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 70.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "DAMIT 5914 radial height",
               "thumbnail": "/scenes/lamberta/lamberta-elevation-thumbnail.webp",
               "surface": "lamberta-elevation-surface@2x.webp",
               "poles": "lamberta-elevation-surface@2x.webp",
@@ -258,7 +253,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5914",
                 "image": "/scenes/lamberta/lamberta-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 70.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -388,7 +383,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -397,8 +392,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ef04a679a0890cf6a20e8ca4b9e69d6fa39b4fd0d14bf842c5f30ca6b8da7103",
-      "bytes": 11479,
+      "sha256": "04b8b824cd8fefa8dcb1255de715f67ea4bf1a4e8d01d51bf86ce8dbc0a489c7",
+      "bytes": 10975,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -413,9 +408,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 70.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -457,9 +450,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 141 ±2 km. The grid marks unavailable imagery; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -494,7 +485,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -506,8 +497,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8445,
-          "sha256": "bf94345c4d5157870a81631b4a0718127cac92083569129e86a9a9bcf2c1b9a6",
+          "bytes": 8320,
+          "sha256": "a6cd14a5b6b9381484a8fb044235ca239702c2a7841c04959dd901b75b182cb1",
           "verification": "bytes-verified"
         }
       ],

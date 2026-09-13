@@ -64,11 +64,6 @@
           "sha256": "e788422cd74d900b88f81ed74882281e0d3da854ac09dc8f242d6fbb6cd7b3cd"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "99774f710d7fc25b18b3109ff4a430b7d483365a4525fc95217434a2b479355e"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "aaefa823a932c6d15b5a7cd89df8c594dd9191db5220a1a86581958ab0ce5b51"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5919374543282623,
-      "description": "Explore Abundantia in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in November 1875.",
       "systemName": "Solar System",
       "order": 287,
       "context": {

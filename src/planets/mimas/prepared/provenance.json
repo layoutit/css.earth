@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3b0fdaa7fcba6486c08852d8c3b51689978e8d8fb307c7f99b931541db78c5a3"
+    "sha256": "abd0d1854302d4f7f418e74e449754aaa06c52b28c4fd1ca00b33708d1a22807"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -168,14 +168,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3c9f0a9edf4e6350a50076036fe14aa055b3e92329fca3fc276285c79fb0c312",
+      "sha256": "337740c77a94892688e3493e2b63541895c91f50be25cd9b359ece27c869aedb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "mimas",
         "displayName": "Mimas",
         "panel": {
-          "introduction": "A small, icy moon of Saturn dominated by Herschel crater, a giant impact scar spanning roughly a third of its diameter.",
           "facts": [
             {
               "id": "radius",
@@ -252,8 +251,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini 2017 monochrome mosaic at 216 m per source pixel. Photographed shadows and variable resolution remain; Directional Shadows add approximate lighting. The surface follows a simplified version of the released 2025 shape model.",
-              "title": "Monochrome mosaic",
               "thumbnail": "/scenes/mimas/mimas-normal-thumbnail.webp",
               "surface": "mimas-normal-surface@2x.webp",
               "poles": "mimas-normal-poles@2x.webp",
@@ -261,13 +258,11 @@
                 "id": "cassini-iss-2017-mimas",
                 "path": "../manifest.json"
               },
-              "summary": "Source pixels span 216 m in the 2017 mosaic. Photographed shadows remain; the displayed shape is a simplified model."
+              "notes": "Cassini 2017 monochrome mosaic at 216 m per source pixel. Photographed shadows and variable resolution remain; Directional Shadows add approximate lighting. The surface follows a simplified version of the released 2025 shape model."
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
-              "description": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors exceed human vision. Source resolution varies; seams and residual photographed shading remain. The surface follows a simplified version of the released 2025 shape model.",
-              "title": "Enhanced-color composite",
               "thumbnail": "/scenes/mimas/mimas-enhanced-thumbnail.webp",
               "surface": "mimas-enhanced-surface@2x.webp",
               "poles": "mimas-enhanced-poles@2x.webp",
@@ -275,13 +270,11 @@
                 "id": "cassini-iss-2014-mimas-color",
                 "path": "../manifest.json"
               },
-              "summary": "Infrared, green and ultraviolet bands reveal colors beyond human vision. Detail varies; photographed shading and seams remain."
+              "notes": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors exceed human vision. Source resolution varies; seams and residual photographed shading remain. The surface follows a simplified version of the released 2025 shape model."
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows radial height above the PDS 198.2 km reference sphere, including Mimas’s broad oval shape. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate directional lighting. Cassini SPC terrain model, 2025 release, about 560 m grid spacing. Gray grid marks areas outside the supplied raster; no terrain is invented. The surface follows a simplified version of the released 2025 shape model.",
-              "title": "SPC terrain model",
               "thumbnail": "/scenes/mimas/mimas-elevation-thumbnail.webp",
               "surface": "mimas-elevation-surface@2x.webp",
               "poles": "mimas-elevation-poles@2x.webp",
@@ -303,7 +296,8 @@
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichmimasshape.html",
                 "image": "/scenes/mimas/mimas-elevation-legend.webp"
               },
-              "summary": "Height relative to a 198.2 km sphere, from Cassini's shape model. It includes Mimas's oval shape; gray grid: no data."
+              "notes": "Color shows radial height above the PDS 198.2 km reference sphere, including Mimas’s broad oval shape. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate directional lighting. Cassini SPC terrain model, 2025 release, about 560 m grid spacing. Gray grid marks areas outside the supplied raster; no terrain is invented. The surface follows a simplified version of the released 2025 shape model.",
+              "noData": true
             }
           ]
         },
@@ -715,7 +709,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -724,8 +718,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3c9f0a9edf4e6350a50076036fe14aa055b3e92329fca3fc276285c79fb0c312",
-      "bytes": 10979,
+      "sha256": "337740c77a94892688e3493e2b63541895c91f50be25cd9b359ece27c869aedb",
+      "bytes": 10293,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -840,9 +834,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "Cassini 2017 monochrome mosaic at 216 m per source pixel. Photographed shadows and variable resolution remain; Directional Shadows add approximate lighting. The surface follows a simplified version of the released 2025 shape model."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -887,9 +879,7 @@
       "selector": "/raster/observations/1",
       "parents": [],
       "process": "Sample the original published photographic grid over each retained atlas texel footprint, apply the existing illumination and encode the atlas; retain the separate map previews.",
-      "limitations": [
-        "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors exceed human vision. Source resolution varies; seams and residual photographed shading remain. The surface follows a simplified version of the released 2025 shape model."
-      ],
+      "limitations": [],
       "lensIds": [
         "enhanced"
       ],
@@ -934,9 +924,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Color shows radial height above the PDS 198.2 km reference sphere, including Mimas’s broad oval shape. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate directional lighting. Cassini SPC terrain model, 2025 release, about 560 m grid spacing. Gray grid marks areas outside the supplied raster; no terrain is invented. The surface follows a simplified version of the released 2025 shape model."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -979,7 +967,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -991,8 +979,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6550,
-          "sha256": "1b700706b47439293268218022a1a0e1800491514ca6717ee55b52d5c7294d09",
+          "bytes": 6413,
+          "sha256": "e2ec746a6054fe372346a85ee32471d1b367008db8b94f030623142292aa41fa",
           "verification": "bytes-verified"
         }
       ],

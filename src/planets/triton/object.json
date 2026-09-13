@@ -51,11 +51,6 @@
           "sha256": "c24aae7747e4e49814c69fe6d0554a68124b8b49b1551474de68500ea4e21469"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "19fc1e0a279de3dd511035a9ecd07e1ce0a91407ae4082c5c3d4aadbb3d2f0c5"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "85b0b1aa6b199010892e6ec43a2d0d76ef78c2a85b1deedbef0804f489bbf866"
@@ -157,7 +152,7 @@
       "classification": "satellite",
       "color": "#b8afa5",
       "distanceAu": 30.07,
-      "description": "Explore Neptune’s retrograde moon through Voyager monochrome and enhanced-color imagery.",
+      "description": "Large moon that orbits Neptune backward, likely a captured Kuiper Belt object.",
       "systemName": "Solar System",
       "order": 453,
       "context": {

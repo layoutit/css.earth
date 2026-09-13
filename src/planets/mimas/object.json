@@ -32,11 +32,6 @@
           "sha256": "337740c77a94892688e3493e2b63541895c91f50be25cd9b359ece27c869aedb"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "6f315f5324ccd5019bd7862d3d625708b68d508bba8e73850ed7676a3cd0585e"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0a3a20c115b49280f396bb2ec4e1ff688211dc993d4729a806e90e961c8367f9"
@@ -138,7 +133,7 @@
       "classification": "satellite",
       "color": "#aeaba5",
       "distanceAu": 9.58,
-      "description": "Explore Mimas in 3D with cssEarth. Inspect Cassini imagery of Saturn’s cratered moon and its giant Herschel impact basin.",
+      "description": "Small, cratered moon of Saturn with a crater a third its own width.",
       "systemName": "Solar System",
       "order": 438,
       "context": {

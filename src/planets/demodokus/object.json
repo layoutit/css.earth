@@ -64,11 +64,6 @@
           "sha256": "9c57966d334bc00d6a5eb81ce753b3925ad5d2872ee9334551da6ac1a1ddf7f3"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "8c4f5bcf16a6a21ba6cb752224570300aa5c5ee932c21d493001ad4d71afef08"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "3dc41d3c311d7c00dc029db09373b259cedb337fcd716c327cf665fcd82f7bb5"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.199474785432278,
-      "description": "Explore Demodokus in 3D with its published shape model and radial elevation.",
+      "description": "Jupiter Trojan asteroid, discovered on 24 September 1960.",
       "systemName": "Solar System",
       "order": 368,
       "context": {

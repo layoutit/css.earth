@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8881b57c5e88ecf44925d94e768ec2c91404255f776190fd893698156500138e"
+    "sha256": "6317e934654c807e3f7ecaa8f5294d02ac4937390f50f23c2256337231b6f339"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3a50b3c8d37da24915f6a03ea993cd1ac8409d6542a6bb0ca5297e08a196baa8",
+      "sha256": "3752cf435c7ca30dcdecf2b61cb45321cdfc23cf5dd0e21c5795797e393c5d55",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -171,7 +171,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "1996 HW1 is a contact-binary near-Earth asteroid reconstructed from Arecibo radar and optical lightcurves. Explore its original shape and radial heights. The grid marks unavailable surface imagery. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied.",
           "facts": [
             {
               "id": "radius",
@@ -203,8 +202,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "The shared grid marks unavailable surface imagery on this radar model. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-thumbnail.webp",
               "surface": "asteroid-1996-hw1-shape-surface@2x.webp",
               "poles": "asteroid-1996-hw1-shape-surface@2x.webp",
@@ -213,13 +210,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape"
+              "notes": "The shared grid marks unavailable surface imagery on this radar model. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "False color shows radius at the nearest source-surface point minus a 1.01 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 26 m is withheld. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied.",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-thumbnail.webp",
               "surface": "asteroid-1996-hw1-elevation-surface@2x.webp",
               "poles": "asteroid-1996-hw1-elevation-surface@2x.webp",
@@ -241,7 +237,7 @@
                 "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/1996hw1.obj",
                 "image": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "False color shows radius at the nearest source-surface point minus a 1.01 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 26 m is withheld. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied."
             }
           ]
         },
@@ -363,7 +359,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -372,8 +368,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3a50b3c8d37da24915f6a03ea993cd1ac8409d6542a6bb0ca5297e08a196baa8",
-      "bytes": 9550,
+      "sha256": "3752cf435c7ca30dcdecf2b61cb45321cdfc23cf5dd0e21c5795797e393c5d55",
+      "bytes": 8895,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -388,9 +384,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "False color shows radius at the nearest source-surface point minus a 1.01 km reference sphere. It includes global shape, not gravitational height or independent measured topography. Correspondence farther than 26 m is withheld. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -432,9 +426,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The shared grid marks unavailable surface imagery on this radar model. The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied. Lighting uses the published pole and arbitrary display phase."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -469,7 +461,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -481,8 +473,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6230,
-          "sha256": "4e31a5104628d4a69984f16112a30537ebe9df73a4e69276540642d237f01b2b",
+          "bytes": 5741,
+          "sha256": "0a6f0134edf2e5205651a28dc556c3c6f20fa1cd5f9cd354b82c162b1ac8251b",
           "verification": "bytes-verified"
         }
       ],

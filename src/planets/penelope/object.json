@@ -64,11 +64,6 @@
           "sha256": "1c76bd3d1d6b43bf3eef388a4bbe3b3f16d6575876ca18fe853991e195d73616"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "606fac1d382d97c62b05ae917c1f1679b0196108a4a3458cd17311df59996fb0"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "c3cc7a8d2ac12b84c09512462ac0e994dfa72ea8d498146bebef8ee361cd7f5a"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6780911879337896,
-      "description": "Explore Penelope in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered on 7 August 1879.",
       "systemName": "Solar System",
       "order": 186,
       "context": {

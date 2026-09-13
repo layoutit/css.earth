@@ -499,25 +499,6 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
-    },
-    {
-      "id": "ceres-object-text",
-      "path": "content/text.json",
-      "expectedBytes": 1604,
-      "expectedSha256": "50dd79ff101c2685a59a926609b84f2b232975393a350771b8f388c54758d46f",
-      "origin": "Repository-authored Ceres reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "panel",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
     }
   ],
   "generatedIntermediates": [],

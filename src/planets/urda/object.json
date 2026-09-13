@@ -64,11 +64,6 @@
           "sha256": "300d4a7de4cdc6048cb15508a291a0cb5df6d7ba6ed3a22d36ffdf90d705c8a2"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d1704d17609ea7d80202adba2df44b0d7a6860c1d0bc204aafd79442f09e2ca7"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "6888f95854a950c9a746980564e3d762790ba22e81a1da875d19a50de46762fe"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.853052645325009,
-      "description": "Explore Urda in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in August 1876.",
       "systemName": "Solar System",
       "order": 299,
       "context": {

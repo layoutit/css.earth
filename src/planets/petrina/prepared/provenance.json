@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cb3e10d7bc449077b4b8d6d02a27a69ce07311c465e7830673e1b2b20589b8a6"
+    "sha256": "03b6b98b86805d7cddb744987005eeadec1c6d744bac2d59fcc14200e57e118c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9654b07f7a6b69a5f5af8f67904581b2afb76c80c0d74e8141de8140895483b0",
+      "sha256": "1e9a7718c4a95cb1208a7ec46a078eda1810b0e092659c53bbf26679c0519bd3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -173,7 +173,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Published lightcurve reconstruction, scaled using a thermophysical size estimate. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Thermophysical volume-equivalent diameter 44.2 ± 1 km. The displayed pole differs by 1° from the fitted model family; rotational phase is illustrative.",
-              "title": "Light-curve shape model",
               "thumbnail": "/scenes/petrina/petrina-shape-thumbnail.webp",
               "surface": "petrina-shape-surface@2x.webp",
               "poles": "petrina-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "notes": "Thermophysical volume-equivalent diameter 44.2 ± 1 km. The displayed pole differs by 1° from the fitted model family; rotational phase is illustrative.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 22.1 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Shape-derived elevations",
               "thumbnail": "/scenes/petrina/petrina-elevation-thumbnail.webp",
               "surface": "petrina-elevation-surface@2x.webp",
               "poles": "petrina-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1152",
                 "image": "/scenes/petrina/petrina-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 22.1 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -370,10 +366,10 @@
     },
     {
       "path": "content/object.json",
-      "sha256": "9654b07f7a6b69a5f5af8f67904581b2afb76c80c0d74e8141de8140895483b0",
+      "sha256": "1e9a7718c4a95cb1208a7ec46a078eda1810b0e092659c53bbf26679c0519bd3",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -382,7 +378,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8894,
+      "bytes": 8552,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -397,9 +393,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 22.1 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -441,9 +435,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Thermophysical volume-equivalent diameter 44.2 ± 1 km. The displayed pole differs by 1° from the fitted model family; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -478,7 +470,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -490,8 +482,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6059,
-          "sha256": "c9f6fbf7be8beba0e65b471ed5d156370393d1b4daa5e22455a580e778d874a1",
+          "bytes": 5916,
+          "sha256": "321fe5d8b84b067624524ed43c8d7b2b867ee41a76e5feeafd6bd33e882d1d86",
           "verification": "bytes-verified"
         }
       ],

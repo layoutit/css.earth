@@ -64,11 +64,6 @@
           "sha256": "40c7d1615000a0b0cd23bcccd01f426d841ade12ed0f1c49e13c5c618cacc8e0"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "57b8261497c1322c6215458daa601371e615f9f7fe769e8844722e8ae701f8d8"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "10532b2aad9833f701c6c80dd87b1a159210dae297976eb79ccce7fd9400cbba"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 0.642389793312345,
-      "description": "Explore Moshup in 3D with its published shape model and radial elevation.",
+      "description": "Near-Earth asteroid with a moon, Squannit, and a sharp equatorial ridge.",
       "systemName": "Solar System",
       "order": 190,
       "context": {

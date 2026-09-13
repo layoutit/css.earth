@@ -64,11 +64,6 @@
           "sha256": "5910a4c8087f6f0a4e6bb9fa9205de62ba5ab20c8b8f57a534d51c296514e098"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "c4f4f1e52953b84a151cfa67bba5daacf184ce244c1054a66968ecfaaa0a860b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "865db63ba67d8f8ee4bfd143b3294d84730e456ecd9385db10e9c180fb837d4f"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.0774720987446262,
-      "description": "Explore Bacchus in 3D with its published radar shape model.",
+      "description": "Near-Earth asteroid with a deep central dent.",
       "systemName": "Solar System",
       "order": 205,
       "context": {

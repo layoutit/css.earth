@@ -31,11 +31,6 @@
           "sha256": "f7353db800e1e80f21236045a9a73b48260e6a0c6b102e9681bf7f9307ffe6db"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "61a992a4560913ad73fa8e5c0bc01716b4549777b15566b0d69ba75e9abd5091"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2826f97803f357d288e4e3ae972c17a28102176f8a1a5616a36a2efa6b17d0c4"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Albiorix, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Largest of Saturn's Gallic-group moons, about 29 km across.",
       "systemName": "Solar System",
       "order": 49,
       "context": {

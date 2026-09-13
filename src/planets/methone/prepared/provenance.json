@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e6d56caf806e1306aba2130dfd274bafc283a447adcd9c70dce5f64575ac68b3"
+    "sha256": "7607014a45433e17f5b46fad8a4f3c935138e8a43ebf807c808b3b6fff27db1b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -139,14 +139,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "327c9bf6bad91a83fdf0f4990a277da0658416e0a3f43ab16f83e0a8e60ce756",
+      "sha256": "c9b689e7f8de5c562311873486b849fd8d3ebc3ab381ad16b05ee0e449eea59a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "methone",
         "displayName": "Methone",
         "panel": {
-          "introduction": "Methone is a tiny, egg-shaped moon between Mimas and Enceladus. Cassini found an exceptionally smooth surface with a darker oval on its leading side.",
           "facts": [
             {
               "id": "radius",
@@ -186,9 +185,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts.",
-              "title": "ISS clear-filter image",
-              "detail": "Cassini ISS",
               "thumbnail": "/scenes/methone/methone-normal-thumbnail.webp",
               "surface": "methone-normal-surface@2x.webp",
               "poles": "methone-normal-poles@2x.webp",
@@ -197,7 +193,8 @@
                 "path": "../manifest.json",
                 "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1716192103"
               },
-              "summary": "The darker oval is visible at about 27 m per source pixel. Gaps are marked; tiny isolated spots may be detector noise."
+              "notes": "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts.",
+              "noData": true
             }
           ]
         },
@@ -402,7 +399,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -411,8 +408,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "327c9bf6bad91a83fdf0f4990a277da0658416e0a3f43ab16f83e0a8e60ce756",
-      "bytes": 3486,
+      "sha256": "c9b689e7f8de5c562311873486b849fd8d3ebc3ab381ad16b05ee0e449eea59a",
+      "bytes": 3114,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -427,9 +424,7 @@
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -466,7 +461,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -478,8 +473,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5731,
-          "sha256": "471cdd2cafd33c5ca743c70b65c1faa6b2199a5878aeff04e1fdb37eff39a743",
+          "bytes": 5564,
+          "sha256": "a94d946f80ff9ed21d1dd4c5ab88eca41bf593897cbd15768b4b58c76302ed0f",
           "verification": "bytes-verified"
         }
       ],

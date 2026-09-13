@@ -64,11 +64,6 @@
           "sha256": "191fdcd4751ea4d8b13279ae5820a44b7a0d89d5925eebd4239c171c695cf246"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "91fe67bb4598e829dd793b8c9c9afaae6d912687865bbc085aaf433da8e8a89b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0fe072012e71d025b805ca76459e07c363cfed3cd37ad7716406242e49194b68"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.761609095120294,
-      "description": "Explore Menippe in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in June 1878.",
       "systemName": "Solar System",
       "order": 306,
       "context": {

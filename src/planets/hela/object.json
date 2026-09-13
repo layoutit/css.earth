@@ -64,11 +64,6 @@
           "sha256": "16f87a18a118d05be00441eb621466349fd3a2015efe0e0249c7033ac70f8c41"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "6374a4569446b8780096802d3dfe49e583d866fdd38ebad11139101e768ab873"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "a07a902a4148802269e8f3cedeed34e18ee193dd8ea08bccc3a2c3d8c1790008"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.615426166061675,
-      "description": "Explore Hela, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.",
+      "description": "Stony Mars-crossing asteroid, discovered in June 1910.",
       "systemName": "Solar System",
       "order": 467,
       "context": {

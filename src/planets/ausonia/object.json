@@ -64,11 +64,6 @@
           "sha256": "3a27f01957c0b035004b0b3b28457ae1b1b64dab6bdf88abc348b03c8efd8e41"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "2ba10800f0c3fc55a86557114a69f153b013ec154ae6ee465a6dcdcde709f57f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "607b8b1b3c65019f9a306f5b13e57714bb6c363895317efdb545f63cb41ad4db"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.39418991368127,
-      "description": "Explore Ausonia in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in February 1861.",
       "systemName": "Solar System",
       "order": 237,
       "context": {

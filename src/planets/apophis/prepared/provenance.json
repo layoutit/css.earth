@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd3108982dde82868013f8bdbef3091ae96821173ef48b278fa77615b727ad7f"
+    "sha256": "c821b9a9cf404603071eeaa0361d4b7385e67f69d2d30f478bdba2c120d211e6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -143,7 +143,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6ffb96ea98ef0c0265fbaaf2c5fb676ddf6fc84dfc1652a919dbd7653c6cf3cc",
+      "sha256": "2fba0a94604dfba048c2fc7ebc1c9b291c6f180f353b8b67dfdb1607e71be4f9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -167,7 +167,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Apophis is a near-Earth asteroid with a preliminary radar reconstruction. This view uses the published Model B at its original scale. Explore its original shape and radial heights. The grid marks unavailable surface imagery. The weak 2012–2013 radar data admit multiple shapes; the 2026 PDS release preserves the 2018 Model B rather than a new reconstruction. Apophis tumbles: the archived precession and rotation periods are 27.45 and 265.7 hours. This view uses a fixed illustrative frame, without propagating its tumbling attitude. No optical surface map is supplied.",
           "facts": [
             {
               "id": "radius",
@@ -204,8 +203,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Published radar shape model",
-              "title": "Radar shape model",
               "thumbnail": "/scenes/apophis/apophis-shape-thumbnail.webp",
               "surface": "apophis-shape-surface@2x.webp",
               "poles": "apophis-shape-surface@2x.webp",
@@ -214,14 +211,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape from radar observations. The gray grid marks missing optical imagery; lighting shows the model."
+              "notes": "Published radar shape model",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/apophis/apophis-elevation-thumbnail.webp",
               "surface": "apophis-elevation-surface@2x.webp",
               "poles": "apophis-elevation-surface@2x.webp",
@@ -243,8 +238,7 @@
                 "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-apophis.jpl.radar.shape_model_v1.0/data/apophis_v233s7.obj",
                 "image": "/scenes/apophis/apophis-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -356,7 +350,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -365,8 +359,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6ffb96ea98ef0c0265fbaaf2c5fb676ddf6fc84dfc1652a919dbd7653c6cf3cc",
-      "bytes": 8853,
+      "sha256": "2fba0a94604dfba048c2fc7ebc1c9b291c6f180f353b8b67dfdb1607e71be4f9",
+      "bytes": 7849,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -381,9 +375,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -425,9 +417,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Published radar shape model"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -462,7 +452,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -474,8 +464,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6156,
-          "sha256": "65f97970941f507c41ba9b5bebd969d94820af79d2b59c3c6a68778f893d7519",
+          "bytes": 5566,
+          "sha256": "160176d2f8adf8af39e55787794db8724b2629db066965c26ce9e0898d1ae0e9",
           "verification": "bytes-verified"
         }
       ],

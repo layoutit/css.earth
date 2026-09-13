@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "93ac725a9bac25beb5acddf9ba8216ccd336101eea3fa1e039a3609ec1a9d0ba"
+    "sha256": "d99d0ddc6b514702f43dfde64581e8df5e4bd0efb12b6102f4283054e8464bf7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -238,14 +238,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bfb74fc036e91acf1ca0894d2281704db8adea50a4e20b8ff2a36c7ba7c0afe9",
+      "sha256": "e87de47f2175046a0175b045d682d5ece2102f63d7ddee33e056e1e253c9411c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "atlas",
         "displayName": "Atlas",
         "panel": {
-          "introduction": "Atlas travels just outside Saturn’s A ring. Its rounded central body and wide equatorial ridge give it a striking saucer shape. Cassini’s closest flyby in 2017 revealed the ridge in detail.",
           "facts": [
             {
               "id": "radius",
@@ -316,9 +315,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
-              "title": "ISS mosaic",
-              "detail": "Cassini · corrected mosaic",
               "thumbnail": "/scenes/atlas/atlas-normal-thumbnail.webp",
               "surface": "atlas-normal-surface@2x.webp",
               "poles": "atlas-normal-poles@2x.webp",
@@ -327,14 +323,12 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/access.html"
               },
-              "summary": "Photographs are mapped onto the measured shape. Shadows and unreliable samples are withheld; the gray grid marks gaps."
+              "notes": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radial height above a 15.1 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region.",
-              "title": "Shape-derived radial height",
-              "detail": "Shaded relief",
               "thumbnail": "/scenes/atlas/atlas-elevation-thumbnail.webp",
               "surface": "atlas-elevation-surface@2x.webp",
               "poles": "atlas-elevation-poles@2x.webp",
@@ -357,7 +351,7 @@
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
                 "image": "/scenes/atlas/atlas-elevation-legend.webp"
               },
-              "summary": "Height relative to a 15.1 km sphere, from the Cassini shape model. Accuracy varies by region."
+              "notes": "Radial height above a 15.1 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region."
             }
           ]
         },
@@ -956,7 +950,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -965,8 +959,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bfb74fc036e91acf1ca0894d2281704db8adea50a4e20b8ff2a36c7ba7c0afe9",
-      "bytes": 5710,
+      "sha256": "e87de47f2175046a0175b045d682d5ece2102f63d7ddee33e056e1e253c9411c",
+      "bytes": 5085,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -981,9 +975,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radial height above a 15.1 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1025,9 +1017,7 @@
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -1072,7 +1062,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1084,8 +1074,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5088,
-          "sha256": "77cce696f07f98b11bb2d39eaf59f1668de995dad9e3aa1e513f1fd215217244",
+          "bytes": 4877,
+          "sha256": "4b78721950f7a1bc463ce114c4f33bcfbeb06a0063e20c2783805fd05ae23b20",
           "verification": "bytes-verified"
         }
       ],

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8c8f65baedafbb411fdd841b274c23fe7f3f1b8ea5fa0071bf425fd7ed8d9de8"
+    "sha256": "0f330a7ad1b34c40db16355068d068c18503552dd40accc96c525e5a9024f711"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -150,14 +150,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1b46a8450f5b25d391d5e3739ac1bbfcb292d2915f45f5b05b97b84630c45b1e",
+      "sha256": "142e6c49ac7b635260d2a13d8a0bb31099ec454fdca4fb0bd349502a48be78a6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "diomedes",
         "displayName": "Diomedes",
         "panel": {
-          "introduction": "Jupiter Trojan in the L4 leading cloud. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -221,8 +220,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Convex light-curve model fitted to a stellar occultation: 118.8 ± 0.6 km volume-equivalent diameter. Grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Diomedes · DAMIT 4215 convex shape",
               "thumbnail": "/scenes/diomedes/diomedes-shape-thumbnail.webp",
               "surface": "diomedes-shape-surface@2x.webp",
               "poles": "diomedes-shape-surface@2x.webp",
@@ -231,13 +228,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "DAMIT model"
+              "notes": "Convex light-curve model fitted to a stellar occultation: 118.8 ± 0.6 km volume-equivalent diameter. Grid marks unavailable imagery; rotational phase is illustrative.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Radius on the shape model minus a 59.4 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Diomedes · source-model radial height",
               "thumbnail": "/scenes/diomedes/diomedes-elevation-thumbnail.webp",
               "surface": "diomedes-elevation-surface@2x.webp",
               "poles": "diomedes-elevation-surface@2x.webp",
@@ -259,7 +255,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4215",
                 "image": "/scenes/diomedes/diomedes-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height"
+              "notes": "Radius on the shape model minus a 59.4 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
             }
           ]
         },
@@ -389,7 +385,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -398,8 +394,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1b46a8450f5b25d391d5e3739ac1bbfcb292d2915f45f5b05b97b84630c45b1e",
-      "bytes": 11439,
+      "sha256": "142e6c49ac7b635260d2a13d8a0bb31099ec454fdca4fb0bd349502a48be78a6",
+      "bytes": 11112,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -414,9 +410,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Radius on the shape model minus a 59.4 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -458,9 +452,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Convex light-curve model fitted to a stellar occultation: 118.8 ± 0.6 km volume-equivalent diameter. Grid marks unavailable imagery; rotational phase is illustrative."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -495,7 +487,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -507,8 +499,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8404,
-          "sha256": "a0098474895e9b8ebaf1035f0ed06d75acda0a1fc8ea0e74bb0beb4323a83dcf",
+          "bytes": 8268,
+          "sha256": "0c79dbb4c4abe824eb69f04cc0d96c536a0b138ffca045e4644b1b7af1a3d88a",
           "verification": "bytes-verified"
         }
       ],

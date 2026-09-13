@@ -82,8 +82,8 @@ test("every object forwards its object-owned legend through the shared shell", a
     }
     const controls = prepareObjectContent(parseObjectContentFixture(source));
     const legends = (lenses: unknown) => lenses == null ? [] : requireArray(requireRecord(lenses).controls).map(value => {
-      const { id, title, description, legend, summary } = requireRecord(value);
-      return { id, title, description, legend, summary };
+      const { id, legend } = requireRecord(value);
+      return { id, legend };
     });
     const objectControls = requireRecord(requireRecord(loaded.object.data).controls);
     assert.deepEqual(

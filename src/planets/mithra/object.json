@@ -64,11 +64,6 @@
           "sha256": "733f2c9eac551360e1cded43dfbff9c8f7af30d38790cf09a2b1121853a1dde5"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9534e7788c35abe1759f26f35e2fbd730b4d5aa7341695d958f4e90ac616252c"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0ed90568bbff11ecb7e0ecf771400c05d75bacf123b7078b8c9bb82a0cee5451"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.2052023543749892,
-      "description": "Explore Mithra in 3D with its published radar shape model.",
+      "description": "Strongly two-lobed near-Earth asteroid.",
       "systemName": "Solar System",
       "order": 206,
       "context": {

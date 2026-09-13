@@ -64,11 +64,6 @@
           "sha256": "a2e6bed064bdbd11ede22f99a5a2358a33105ebe5ed499812bbe350d1b2ac147"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "ba6aa9291588fe7565d6e011384f9fbb27c519306228cb84774b0a8e6ba2cc62"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "73097466b857202a171aaa114ecf4815d17e9c1a17dd40c66db73d77c21d297b"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.0059143954320515,
-      "description": "Explore YORP in 3D with its published radar shape model.",
+      "description": "Tiny near-Earth asteroid whose spin is speeding up.",
       "systemName": "Solar System",
       "order": 209,
       "context": {

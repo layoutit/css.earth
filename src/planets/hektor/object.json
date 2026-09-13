@@ -64,11 +64,6 @@
           "sha256": "eb023ad457a6b77c3def25c45133c4d216f08f334b55eb8dbb67e966597311db"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "6409000902616bf34ecd299c8bed4d2a673feb35de41d4daa4311fdeb6fe7c8c"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "f6a666d029e2ae3ceb02676306ea59c7271d0a26e109ebb1980509e93a344740"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.27706210284509,
-      "description": "Explore Hektor in 3D with its published shape model and radial elevation.",
+      "description": "Very dark Jupiter Trojan asteroid with a moon, discovered in February 1907.",
       "systemName": "Solar System",
       "order": 195,
       "context": {

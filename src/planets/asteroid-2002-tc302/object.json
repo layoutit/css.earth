@@ -31,11 +31,6 @@
           "sha256": "8d179332695a941351acef4e5dd9ae8b0dcadb1e58558e2b0c72a02eb7593469"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "8ef3118bf00901c4a70aca8dd8ca48510a7be3a0aa331079dc31d3666679f709"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "97f940a8a12e587996aca419e332f39de35e448b8c5fc38bb7e3d17d1a4aff5f"
@@ -123,7 +118,7 @@
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 42.69638663728584,
-      "description": "2002 TC302 has a flattened outline measured during a stellar occultation. Its displayed depth is assumed; newer thermal analysis suggests a possible companion, which is not part of this primary-body model.",
+      "description": "Large trans-Neptunian object with a flattened outline.",
       "systemName": "Solar System",
       "order": 2,
       "context": {

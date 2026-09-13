@@ -54,11 +54,6 @@
           "sha256": "7ab905836804b5f16347c9a1a05db64f3f059659506c38bd9f952679521406f5"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "4e8081a2f7be235992bf180675e30d21b1d6508a3eb557ee711f90df0274d1b5"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "118b64ae531350d309ff002299cdc2aed9fa42691d0614bcde65ea71cda423cd"
@@ -190,7 +185,7 @@
       "classification": "satellite",
       "color": "#aaa7a0",
       "distanceAu": 1,
-      "description": "Explore the Moon in 3D with cssEarth. Discover impact craters, ancient lava plains, and the history of Earth’s natural satellite.",
+      "description": "Earth's only natural satellite, always turning the same face toward us.",
       "systemName": "Solar System",
       "order": 120,
       "context": {

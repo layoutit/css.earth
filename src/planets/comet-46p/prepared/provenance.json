@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "12eea4d4ac821fd6925d35ec39ee6ce8e8ca0745614e72fac9bd77201a1eef0e"
+    "sha256": "1c31719741558f6147fd2a6f1f1d0330c8fb859ceb48e8455e667ec4654645d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -141,14 +141,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a57f1ccb4f7fa572f6968c9babcefc4cd9a3a73ae332eb4de6ac7ee531819d36",
+      "sha256": "07d25f6375f0531283d1094b729dd700e88615d5d861b8b0d30c01ba45dc3fc4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-46p",
         "displayName": "Wirtanen",
         "panel": {
-          "introduction": "Wirtanen was Rosetta’s planned destination before a launch delay changed the mission’s target to 67P. Its small nucleus returns to the inner Solar System roughly every five years.",
           "facts": [
             {
               "id": "diameter",
@@ -173,9 +172,6 @@
             {
               "id": "model",
               "label": "Illustrative nucleus",
-              "detail": "Celestia",
-              "title": "46P/Wirtanen",
-              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
               "thumbnail": "/scenes/comet-46p/comet-46p-model-thumbnail.webp",
               "surface": "comet-46p-model-surface@2x.webp",
               "poles": "comet-46p-model-poles@2x.webp",
@@ -195,7 +191,9 @@
                   "label": "Closest to Sun",
                   "value": "1.06 AU"
                 }
-              ]
+              ],
+              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "noData": true
             }
           ]
         },
@@ -294,7 +292,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -303,8 +301,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a57f1ccb4f7fa572f6968c9babcefc4cd9a3a73ae332eb4de6ac7ee531819d36",
-      "bytes": 3412,
+      "sha256": "07d25f6375f0531283d1094b729dd700e88615d5d861b8b0d30c01ba45dc3fc4",
+      "bytes": 3160,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -319,9 +317,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -356,7 +352,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -368,8 +364,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5884,
-          "sha256": "108d130106df598aaef596544bd7542225205fe058d9a1c4ab36021728b3750f",
+          "bytes": 5683,
+          "sha256": "c4b29208a4d47176a4243920a8ee1e3ff7f914522744dbf3a8df8506dc78cc66",
           "verification": "bytes-verified"
         }
       ],

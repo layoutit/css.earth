@@ -64,11 +64,6 @@
           "sha256": "a02c5b01df9adc357fcffc1207c2a7f0ba9ce14f1c51ba9d08b03055e92f19fd"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "446105ca978ae599a37c32d05e9f7185fcc2f1080d39155591d79f051f8a7117"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0aa5b8933d6a2ba0b9ceec60dc1f9fc9803103004c812cc9cc8145d9fcd5df44"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.8630871303717667,
-      "description": "Explore Ivar, a near-Earth asteroid, through its published shape model.",
+      "description": "Stony near-Earth asteroid, discovered in September 1929.",
       "systemName": "Solar System",
       "order": 125,
       "context": {

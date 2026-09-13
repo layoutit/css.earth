@@ -31,11 +31,6 @@
           "sha256": "0ed496c6a3cf1fffadbe2b8a21f0b2e395a2fa78b33a0843d8073ae74d616675"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "7b710fd2a0e79d8218113ad8d93e13afb8345cc772ce315dee18b130f30b032e"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "e01a59621a30017ac56806f7ac4e86b7ee38db670d9559259e1bf3e4a379a9b6"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 5.448413475057264,
-      "description": "96P: Machholz 1 repeatedly sweeps close to the Sun. SOHO and STEREO have watched its passages from different sides of Earth’s orbit. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Comet that swings closer to the Sun than Mercury does.",
       "systemName": "Solar System",
       "order": 57,
       "context": {

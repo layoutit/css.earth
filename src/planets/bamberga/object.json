@@ -64,11 +64,6 @@
           "sha256": "37744e8e99ca460aa240f5e81203679676bfd13a04fdf2c8ee3c589d429fe4e9"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "985dd4d48e90162bd9e9c90f177ff1a3b2dde03363ab200f00c09bce32571011"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "5311b1fda211c53ad65cc7e3bc45fe34e549e21c6be1f1039e0c147e764a203a"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6826000516908586,
-      "description": "Explore Bamberga in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in February 1892.",
       "systemName": "Solar System",
       "order": 148,
       "context": {

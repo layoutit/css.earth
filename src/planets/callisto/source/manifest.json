@@ -646,25 +646,6 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
-    },
-    {
-      "id": "callisto-object-text",
-      "path": "content/text.json",
-      "expectedBytes": 1949,
-      "expectedSha256": "16b8f1755c7bea9e2fed633eaaaeaa367f0a57fcf8b25f9a941a39b6412c1016",
-      "origin": "Repository-authored Callisto reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "panel",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
     }
   ],
   "generatedIntermediates": [],

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3afe5a93df13f7f5c1338c96d424c309ba876fb661263b625a8d8053a872f59c"
+    "sha256": "4dd005b0a852de67c9b295767046834ce0b92fff31fccdf4781128f480fa2da0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6b61126f25a3257199a18d2b19201d15783a2daed331f9a65e73956d4d4f4dee",
+      "sha256": "d30ccc2a324837fd75bcb01848512dbd4487a70430f6a4bb75b926f797cc9daa",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,7 +169,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Angelina is a main-belt asteroid. Explore its calibrated convex reconstruction from DAMIT, version 2011-02-11. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -201,8 +200,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Calibrated DAMIT shape",
-              "title": "DAMIT model 289",
               "thumbnail": "/scenes/angelina/angelina-shape-thumbnail.webp",
               "surface": "angelina-shape-surface@2x.webp",
               "poles": "angelina-shape-surface@2x.webp",
@@ -211,14 +208,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
+              "notes": "Calibrated DAMIT shape",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/angelina/angelina-elevation-thumbnail.webp",
               "surface": "angelina-elevation-surface@2x.webp",
               "poles": "angelina-elevation-surface@2x.webp",
@@ -240,8 +235,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/289",
                 "image": "/scenes/angelina/angelina-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -353,7 +347,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -362,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6b61126f25a3257199a18d2b19201d15783a2daed331f9a65e73956d4d4f4dee",
-      "bytes": 8718,
+      "sha256": "d30ccc2a324837fd75bcb01848512dbd4487a70430f6a4bb75b926f797cc9daa",
+      "bytes": 8142,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -378,9 +372,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -422,9 +414,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Calibrated DAMIT shape"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -459,7 +449,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -471,8 +461,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6126,
-          "sha256": "45ae44bc51c551c6f4c5b5398d829b20fcbb7102356c5fada3e60340b9cd376b",
+          "bytes": 5954,
+          "sha256": "a827d52eb9db069a7eaffa2e225613d047aa88b8cefd301dd810729882c0d4ef",
           "verification": "bytes-verified"
         }
       ],

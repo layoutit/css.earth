@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1dc5d53ffaec33166231ae333042753f78bf07bc423e6292428d88bed719fc86"
+    "sha256": "874a170c5947561c1b9d797c3009df2ea2285cb6974731ec38ebd05bd793f83a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -396,14 +396,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7d6a42940651ce580bffa72001fa8240c3edc1ffe2323ab33868d7845335e4f5",
+      "sha256": "ab211aaf254a80048dff5a5520b48aee0c6ae3e923ae2809e36ca9e8d80195ef",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-19p",
         "displayName": "Borrelly",
         "panel": {
-          "introduction": "Deep Space 1 flew past Borrelly in September 2001. Its images revealed an elongated nucleus with smooth terrain, rough slopes and a narrow waist. The grid marks an estimated shape where terrain was not measured.",
           "facts": [
             {
               "id": "length",
@@ -432,9 +431,6 @@
             {
               "id": "micas",
               "label": "MICAS",
-              "detail": "Encounter photograph",
-              "description": "The mission team’s orthophoto laid onto USGS terrain, keeping the lighting seen by Deep Space 1. The grid covers missing imagery and the estimated far side.",
-              "title": "Encounter photograph",
               "thumbnail": "/scenes/comet-19p/comet-19p-micas-thumbnail.webp",
               "surface": "comet-19p-micas-surface@2x.webp",
               "poles": "comet-19p-micas-poles@2x.webp",
@@ -454,14 +450,13 @@
                   "label": "Source",
                   "value": "MICAS orthophoto"
                 }
-              ]
+              ],
+              "notes": "The mission team’s orthophoto laid onto USGS terrain, keeping the lighting seen by Deep Space 1. The grid covers missing imagery and the estimated far side.",
+              "noData": true
             },
             {
               "id": "usgs",
               "label": "USGS",
-              "detail": "Stereo terrain",
-              "description": "Terrain reconstructed from overlapping MICAS images, with manual stereo checks. Gray shows measured terrain; the grid fills the far side with an estimated shape.",
-              "title": "USGS stereo terrain",
               "thumbnail": "/scenes/comet-19p/comet-19p-usgs-thumbnail.webp",
               "surface": "comet-19p-usgs-surface@2x.webp",
               "poles": "comet-19p-usgs-poles@2x.webp",
@@ -481,14 +476,13 @@
                   "label": "Source",
                   "value": "Stereo + manual editing"
                 }
-              ]
+              ],
+              "notes": "Terrain reconstructed from overlapping MICAS images, with manual stereo checks. Gray shows measured terrain; the grid fills the far side with an estimated shape.",
+              "noData": true
             },
             {
               "id": "dlr",
               "label": "DLR",
-              "detail": "Stereo terrain",
-              "description": "An independent reconstruction of the encounter images, aligned with USGS at the same scale. The grid marks gaps and the estimated far side.",
-              "title": "DLR stereo terrain",
               "thumbnail": "/scenes/comet-19p/comet-19p-dlr-thumbnail.webp",
               "surface": "comet-19p-dlr-surface@2x.webp",
               "poles": "comet-19p-dlr-poles@2x.webp",
@@ -508,14 +502,13 @@
                   "label": "Source",
                   "value": "Stereo image matching"
                 }
-              ]
+              ],
+              "notes": "An independent reconstruction of the encounter images, aligned with USGS at the same scale. The grid marks gaps and the estimated far side.",
+              "noData": true
             },
             {
               "id": "height",
               "label": "Height",
-              "detail": "Above the image plane",
-              "description": "Height toward the spacecraft from the source’s reference plane. This is not distance from the comet’s centre. Turn Shadows off to read the scale.",
-              "title": "Above the image plane",
               "thumbnail": "/scenes/comet-19p/comet-19p-height-thumbnail.webp",
               "surface": "comet-19p-height-surface@2x.webp",
               "poles": "comet-19p-height-poles@2x.webp",
@@ -549,14 +542,12 @@
                 "meta": "km · false color",
                 "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/",
                 "image": "/scenes/comet-19p/comet-19p-height-legend.webp"
-              }
+              },
+              "notes": "Height toward the spacecraft from the source’s reference plane. This is not distance from the comet’s centre. Turn Shadows off to read the scale."
             },
             {
               "id": "difference",
               "label": "Difference",
-              "detail": "USGS minus DLR",
-              "description": "USGS height minus DLR height after alignment. Colors show model disagreement, not change over time; gray marks missing overlap. Turn Shadows off to read the scale.",
-              "title": "USGS minus DLR",
               "thumbnail": "/scenes/comet-19p/comet-19p-difference-thumbnail.webp",
               "surface": "comet-19p-difference-surface@2x.webp",
               "poles": "comet-19p-difference-poles@2x.webp",
@@ -590,7 +581,8 @@
                 "meta": "km · false color",
                 "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/",
                 "image": "/scenes/comet-19p/comet-19p-difference-legend.webp"
-              }
+              },
+              "notes": "USGS height minus DLR height after alignment. Colors show model disagreement, not change over time; gray marks missing overlap. Turn Shadows off to read the scale."
             }
           ]
         },
@@ -1010,7 +1002,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1019,8 +1011,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7d6a42940651ce580bffa72001fa8240c3edc1ffe2323ab33868d7845335e4f5",
-      "bytes": 8285,
+      "sha256": "ab211aaf254a80048dff5a5520b48aee0c6ae3e923ae2809e36ca9e8d80195ef",
+      "bytes": 7662,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1155,9 +1147,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Terrain reconstructed from overlapping MICAS images, with manual stereo checks. Gray shows measured terrain; the grid fills the far side with an estimated shape."
-      ],
+      "limitations": [],
       "lensIds": [
         "usgs"
       ],
@@ -1198,9 +1188,7 @@
       "selector": "/raster/observations/1",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "An independent reconstruction of the encounter images, aligned with USGS at the same scale. The grid marks gaps and the estimated far side."
-      ],
+      "limitations": [],
       "lensIds": [
         "dlr"
       ],
@@ -1241,9 +1229,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Height toward the spacecraft from the source’s reference plane. This is not distance from the comet’s centre. Turn Shadows off to read the scale."
-      ],
+      "limitations": [],
       "lensIds": [
         "height"
       ],
@@ -1285,9 +1271,7 @@
       "selector": "/raster/scientific/1",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "USGS height minus DLR height after alignment. Colors show model disagreement, not change over time; gray marks missing overlap. Turn Shadows off to read the scale."
-      ],
+      "limitations": [],
       "lensIds": [
         "difference"
       ],
@@ -1330,9 +1314,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The mission team’s orthophoto laid onto USGS terrain, keeping the lighting seen by Deep Space 1. The grid covers missing imagery and the estimated far side."
-      ],
+      "limitations": [],
       "lensIds": [
         "micas"
       ],
@@ -1371,7 +1353,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1383,8 +1365,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5073,
-          "sha256": "54d50b2c8cd4ea670d165646605a26df45219813c6ce81a10ffa66aedde4f414",
+          "bytes": 4844,
+          "sha256": "fa5163127e46a926ec616e135e470ee93dd5563a12110eb1d0c9b8d4872aac08",
           "verification": "bytes-verified"
         }
       ],

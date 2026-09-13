@@ -64,11 +64,6 @@
           "sha256": "b3185ad29a88e44830d8ca17a20504fa5f885545edf470fd892460a30ccfd7ad"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "ef4d92e325310272e5929e4f8c2b196d17392cfb079f080745818eaa30e28b68"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "6d20b090e8f431d65e96d762c4b1d987fa5185423cc52266cadf08b0d003cb36"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.194929996448645,
-      "description": "Explore Augusta in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in March 1886.",
       "systemName": "Solar System",
       "order": 339,
       "context": {

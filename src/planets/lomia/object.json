@@ -64,11 +64,6 @@
           "sha256": "52eb05acaeb2ad495ec426be83d24c48397375d1cd79c0dde287c2da577b8f75"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "23ac2c50dfefda8d7ec93fb165ffdaac7479cfc0392dbb60fc0df9bcbc6b1850"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0ce14495525daf2617846dd50df76dc419ac6061f22070bb5d730a7eccd99596"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.9917431003179766,
-      "description": "Explore Lomia in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered in September 1871.",
       "systemName": "Solar System",
       "order": 266,
       "context": {

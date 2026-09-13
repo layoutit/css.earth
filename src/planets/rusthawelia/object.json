@@ -64,11 +64,6 @@
           "sha256": "db95f331df2fea4cdc32c3567dac553605f90883504337a6a04fe452e49e988d"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d2e9f635943e9c392e3f69a1be65808f99565d34fadbc0b651d140ae1435e2e1"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "ec296b096c95ef20521ae537b884753791dd2357271c741eaa37bf832d8c4df4"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.173103931458051,
-      "description": "Explore Rusthawelia in 3D with its published shape model and documented physical size scale.",
+      "description": "Very dark main-belt asteroid, discovered in October 1930.",
       "systemName": "Solar System",
       "order": 407,
       "context": {

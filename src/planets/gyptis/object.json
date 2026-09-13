@@ -64,11 +64,6 @@
           "sha256": "40533dd23db46b32b0e87f2b56f30492b922ac86b6b1cb7d572e5de063d692eb"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "8a987df9ff4ce70ce455a504ae92ec9ebda5261252e4c3e3ce461001506300ee"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "8eb9e9e20b865dfdc6e051860f892fb4a8bf2ca34203c2fc94ec384e810acf77"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7713762475315957,
-      "description": "Explore Gyptis in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in March 1899.",
       "systemName": "Solar System",
       "order": 386,
       "context": {

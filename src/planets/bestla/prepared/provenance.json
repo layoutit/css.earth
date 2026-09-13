@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cca8bbcb0e586093d083b3d50599bbe768861179512aefa644b98d0ed44c3538"
+    "sha256": "f6f29b7d43e12d90a2641ccdc79a1fb219aa6d86bdd12c6600ddcee2f56b724b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "80087e4cee737ba39d13a7cc4c28c290c9890c7bde07dee53f4a18c42b421fcf",
+      "sha256": "7400f914c0e35798db91c3f938046fa84bbb5e4e638344b2ca6c871884bcbf4c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "bestla",
         "displayName": "Bestla",
         "panel": {
-          "introduction": "A published pole constraint places Bestla’s spin axis near ecliptic south. The displayed southward axis is representative and its rotational phase is arbitrary. Its elongation comes from photometry; depth is assumed. The grid marks unmapped terrain.",
           "facts": [
             {
               "id": "diameter",
@@ -168,9 +167,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Approximate ellipsoid adopting minimum equatorial ratio 1.47:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. The display axis represents a measured southward pole constraint; its exact direction and phase are unknown. The grid marks unmapped terrain.",
-              "title": "Light-curve shape approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/bestla/bestla-model-thumbnail.webp",
               "surface": "bestla-model-surface@2x.webp",
               "poles": "bestla-model-poles@2x.webp",
@@ -178,7 +174,9 @@
                 "id": "lightcurve-approximation",
                 "path": "../manifest.json",
                 "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
-              }
+              },
+              "notes": "Approximate ellipsoid adopting minimum equatorial ratio 1.47:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. The display axis represents a measured southward pole constraint; its exact direction and phase are unknown. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -324,7 +322,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -333,8 +331,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "80087e4cee737ba39d13a7cc4c28c290c9890c7bde07dee53f4a18c42b421fcf",
-      "bytes": 3766,
+      "sha256": "7400f914c0e35798db91c3f938046fa84bbb5e4e638344b2ca6c871884bcbf4c",
+      "bytes": 3418,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -349,9 +347,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Approximate ellipsoid adopting minimum equatorial ratio 1.47:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. The display axis represents a measured southward pole constraint; its exact direction and phase are unknown. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -391,7 +387,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -403,8 +399,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5749,
-          "sha256": "1dfea8995ab7c16af6b0028c17f3d365f41f69eaa2641bad2d6fae576406d6b3",
+          "bytes": 5480,
+          "sha256": "d9de1e1b8425bcf20eebe34cb30150433fb9bf8789d7017ad068b034d8a8eba1",
           "verification": "bytes-verified"
         }
       ],

@@ -64,11 +64,6 @@
           "sha256": "fc273900154689ea70bbd7fb8d412078b22456f2427dfb61065ab497dec5862b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "dbf8c3a13e20f6726bb2dc19f73b23d5c4ad65ed966da50702443081454edfae"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "fee04333f25c96d11501c1bca37b7f66ae6a5c010656e2350fcba9e8d0bb4a7e"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.057028354640983,
-      "description": "Explore Interamnia in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in October 1910.",
       "systemName": "Solar System",
       "order": 143,
       "context": {

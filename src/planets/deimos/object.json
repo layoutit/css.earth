@@ -32,11 +32,6 @@
           "sha256": "1d10743ae4d301dca84ab06f839eef4a435739c01e7b9a2fa8f92f540bfe20d9"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9d84efa61af0855d31a8bf54ed782703c0f950d3c447be086a008b93b5765982"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "29154db7230989da9f3c1812aeba6af41d11804894d26405d834c8e981282ca6"
@@ -143,7 +138,7 @@
       "classification": "satellite",
       "color": "#99948e",
       "distanceAu": 1.52,
-      "description": "Explore Deimos in 3D with cssEarth. Inspect mapped spacecraft imagery, elevation and the measured irregular shape of Mars’s moon.",
+      "description": "The smaller, outer moon of Mars, smoothed by a thick layer of dust.",
       "systemName": "Solar System",
       "order": 423,
       "context": {

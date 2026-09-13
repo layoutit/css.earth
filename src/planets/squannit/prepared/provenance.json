@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "65635bf88aaa7c1354e998546141c71688806faab96e82a6b7d5d71071f83c46"
+    "sha256": "fb0f9bd479cc783d6877d3041f89ca87c0d3e0ede9134a36adb31dcd2dd01d69"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -109,14 +109,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "763ca719bce5b9a3a29dfc98be2fc44aa464f895b99c743cc3bd491a6f2bf735",
+      "sha256": "6d0d54c55943e07c7cb7598d3b99d0d4d07e1bdfeddd1801d99bea6321c88752",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "squannit",
         "displayName": "Squannit",
         "panel": {
-          "introduction": "Squannit is Moshup’s companion, formerly 1999 KW4 Beta. This is the original JPL radar-derived shape model. Radar constrains its broad figure, while visible-light terrain and current rotational phase remain unmapped. The grid marks unmapped terrain. Later mutual-event photometry favors roughly 1.3 times the original radar model’s linear scale. This view retains the original 2006 mesh dimensions. Its orbit is approximate context from a published model extrapolated beyond the 2000–2019 observations.",
           "facts": [
             {
               "id": "parent",
@@ -162,9 +161,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "JPL radar shape model of 1999 KW 4 Beta, with finite resolution and uneven radar coverage. The original mesh is retained before simplification. Display phase is arbitrary; libration is not reproduced. The grid marks unmapped visible-light terrain. Later mutual-event photometry favors roughly 1.3 times the original radar model’s linear scale. This view retains the original 2006 mesh dimensions.",
-              "title": "Radar shape model",
-              "detail": "Radar shape",
               "thumbnail": "/scenes/squannit/squannit-model-thumbnail.webp",
               "surface": "squannit-model-surface@2x.webp",
               "poles": "squannit-model-poles@2x.webp",
@@ -172,7 +168,9 @@
                 "id": "radar-shape",
                 "path": "../manifest.json",
                 "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj"
-              }
+              },
+              "notes": "JPL radar shape model of 1999 KW 4 Beta, with finite resolution and uneven radar coverage. The original mesh is retained before simplification. Display phase is arbitrary; libration is not reproduced. The grid marks unmapped visible-light terrain. Later mutual-event photometry favors roughly 1.3 times the original radar model’s linear scale. This view retains the original 2006 mesh dimensions.",
+              "noData": true
             }
           ]
         },
@@ -324,7 +322,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -333,8 +331,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "763ca719bce5b9a3a29dfc98be2fc44aa464f895b99c743cc3bd491a6f2bf735",
-      "bytes": 4228,
+      "sha256": "6d0d54c55943e07c7cb7598d3b99d0d4d07e1bdfeddd1801d99bea6321c88752",
+      "bytes": 3643,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -349,9 +347,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "JPL radar shape model of 1999 KW 4 Beta, with finite resolution and uneven radar coverage. The original mesh is retained before simplification. Display phase is arbitrary; libration is not reproduced. The grid marks unmapped visible-light terrain. Later mutual-event photometry favors roughly 1.3 times the original radar model’s linear scale. This view retains the original 2006 mesh dimensions."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -391,7 +387,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -403,8 +399,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6953,
-          "sha256": "fd3fa252615443c8bcada7a513f3e8c8d4cb3d67cab4831b7eb165fcecf08d77",
+          "bytes": 6427,
+          "sha256": "a672d9e040c901a7ce5195431c6558fd4f7779ee729885816252401a11a539a5",
           "verification": "bytes-verified"
         }
       ],

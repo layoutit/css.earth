@@ -64,11 +64,6 @@
           "sha256": "cdd823c3185ba01b9d16b8cc0250b261d74dac86c5160c82f00eb944ce43984f"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "547d5ee91808b5be0cfd57f36529f7cf3ae8e90d1d4b0aba205f3eeacf88319a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "53e98f8c3ceffc253823dbe6aca2cb2a958a832ae5739c21a431ac9f3451f68a"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1591870349744293,
-      "description": "Explore Aurora in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in September 1867.",
       "systemName": "Solar System",
       "order": 192,
       "context": {

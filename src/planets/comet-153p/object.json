@@ -31,11 +31,6 @@
           "sha256": "e6e85791e52086ef79cecd76f651872617a3ea2ac4396ea78f282a70fc7eed04"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "3d82eb1fde3b1d4d8a727854e3f08067b54dffa5212e8423a458ddd44fbe8083"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "8f0dde797341ff948c9ca3a054c9fe0af2e22d16a006ef9bdfbfb293dcf9d201"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 42.26044339943092,
-      "description": "153P: Ikeya–Zhang brightened the skies in 2002. Its journey around the Sun takes centuries, unlike the frequent returns of comets such as Encke. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Naked-eye comet that returns only after centuries.",
       "systemName": "Solar System",
       "order": 60,
       "context": {

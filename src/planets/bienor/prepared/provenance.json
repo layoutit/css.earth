@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6b9a2aea23b676c4d79e6685ba2378de676e2b4481b54e95d46986c2d97c833b"
+    "sha256": "0c4c29c4b6b989f3b8cfecc0573105b6219b1dfaa88b1f8115babb8757b7d288"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9f48ab046d7d21de029e53ca464af350c2e5659d2d6bfd9b4bc3399369bb58f6",
+      "sha256": "556674b36f484a1c8a3fd7e0b5597dc6e36fb58418bcf9b64284fb9d386ad6c0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "bienor",
         "displayName": "Bienor",
         "panel": {
-          "introduction": "Bienor is an elongated Centaur. Its smooth shape is constrained by stellar occultations and long-term photometry, while the grid marks its unmapped surface. The ellipsoid is a useful global approximation; unresolved shape, albedo or a companion may explain its asymmetric light curve.",
           "facts": [
             {
               "id": "shape",
@@ -152,9 +151,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Smooth triaxial ellipsoid fitted to stellar-occultation chords and rotational light curves, with semiaxes 127 ± 5, 55 ± 4 and 45 ± 4 km (Rizos et al. 2024). This is the study's global reference shape, not resolved terrain. It cannot explain all observed light-curve asymmetry; the paper also explores albedo, irregular-shape and satellite alternatives without uniquely resolving them. Full approximation dimensions: 254 × 110 × 90 km. The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary. The grid marks unmapped terrain.",
-              "title": "Occultation shape approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/bienor/bienor-model-thumbnail.webp",
               "surface": "bienor-model-surface@2x.webp",
               "poles": "bienor-model-poles@2x.webp",
@@ -162,7 +158,9 @@
                 "id": "occultation-approximation",
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.1051/0004-6361/202450833"
-              }
+              },
+              "notes": "Smooth triaxial ellipsoid fitted to stellar-occultation chords and rotational light curves, with semiaxes 127 ± 5, 55 ± 4 and 45 ± 4 km (Rizos et al. 2024). This is the study's global reference shape, not resolved terrain. It cannot explain all observed light-curve asymmetry; the paper also explores albedo, irregular-shape and satellite alternatives without uniquely resolving them. Full approximation dimensions: 254 × 110 × 90 km. The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -300,7 +298,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -309,8 +307,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9f48ab046d7d21de029e53ca464af350c2e5659d2d6bfd9b4bc3399369bb58f6",
-      "bytes": 4007,
+      "sha256": "556674b36f484a1c8a3fd7e0b5597dc6e36fb58418bcf9b64284fb9d386ad6c0",
+      "bytes": 3626,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -325,9 +323,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Smooth triaxial ellipsoid fitted to stellar-occultation chords and rotational light curves, with semiaxes 127 ± 5, 55 ± 4 and 45 ± 4 km (Rizos et al. 2024). This is the study's global reference shape, not resolved terrain. It cannot explain all observed light-curve asymmetry; the paper also explores albedo, irregular-shape and satellite alternatives without uniquely resolving them. Full approximation dimensions: 254 × 110 × 90 km. The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -367,7 +363,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -379,8 +375,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5047,
-          "sha256": "a54c4d7e0ecf99a3d2ac4e26d2c02b5f6688a52893734def146ab153c0779b11",
+          "bytes": 4745,
+          "sha256": "8adec434e1765c633c973145f2bd3264bc1dda015a044d7bb163da0e1b404106",
           "verification": "bytes-verified"
         }
       ],

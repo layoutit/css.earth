@@ -31,11 +31,6 @@
           "sha256": "59a01391db54a403555eef2411f571576f4b0ab8919f22bd7497752af48b298c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0d7c039c48339cd093bcecb30af336dfb61531eca0edb12bc1a60a194bd34b74"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0b0078c6527fa6d74ecebe9980104c0d7cac75f762be5f0e8832835b0c73a1ca"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Bianca, an inner moon of Uranus, through its measured shape.",
+      "description": "Small inner moon of Uranus, named for Kate's sister in The Taming of the Shrew.",
       "systemName": "Solar System",
       "order": 93,
       "context": {

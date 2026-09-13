@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a22357ab62ae10bb726d09025376af603c4d9d2ee582043f604d5350c5a0d6db"
+    "sha256": "82337bb59575cf33cfd3b8cab4e021f32233b0acc6d630d3749269dea8ee0957"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -137,14 +137,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ab8dcf2f950402c597b09a937a84ace1057dce7ced99726e1035f473eac81fca",
+      "sha256": "a1404a0d397d901176a0331abd62376e3bf41332efa266c90cb1087f85f71d9a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "arrokoth",
         "displayName": "Arrokoth",
         "panel": {
-          "introduction": "New Horizons photographed Arrokoth during its 2019 flyby. The opening view shows the spacecraft-derived albedo model on the imaged hemisphere. The unseen northern surface is modeled.",
           "facts": [
             {
               "id": "shape",
@@ -191,9 +190,6 @@
             {
               "id": "albedo",
               "label": "Modeled albedo",
-              "description": "Fitted from 30 New Horizons approach observations on 31 December 2018 and 1 January 2019. Grayscale shows the released albedo values. Uniform areas are unconstrained model fill; the archive supplies no coverage mask. This is a fitted surface model, not a global photograph.",
-              "title": "New Horizons LORRI albedo model",
-              "detail": "LORRI · model",
               "thumbnail": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
               "surface": "arrokoth-albedo-surface@2x.webp",
               "poles": "arrokoth-albedo-poles@2x.webp",
@@ -216,14 +212,12 @@
                 "width": 256,
                 "height": 16
               },
-              "falseColor": true
+              "falseColor": true,
+              "notes": "Fitted from 30 New Horizons approach observations on 31 December 2018 and 1 January 2019. Grayscale shows the released albedo values. Uniform areas are unconstrained model fill; the archive supplies no coverage mask. This is a fitted surface model, not a global photograph."
             },
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain.",
-              "title": "Published New Horizons shape",
-              "detail": "Source shape · unmapped surface grid",
               "thumbnail": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
               "surface": "arrokoth-model-surface@2x.webp",
               "poles": "arrokoth-model-poles@2x.webp",
@@ -231,7 +225,9 @@
                 "id": "published-shape",
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.26007/97r3-1e19"
-              }
+              },
+              "notes": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -455,7 +451,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -464,8 +460,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ab8dcf2f950402c597b09a937a84ace1057dce7ced99726e1035f473eac81fca",
-      "bytes": 5463,
+      "sha256": "a1404a0d397d901176a0331abd62376e3bf41332efa266c90cb1087f85f71d9a",
+      "bytes": 5073,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -480,9 +476,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -523,9 +517,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Fitted from 30 New Horizons approach observations on 31 December 2018 and 1 January 2019. Grayscale shows the released albedo values. Uniform areas are unconstrained model fill; the archive supplies no coverage mask. This is a fitted surface model, not a global photograph."
-      ],
+      "limitations": [],
       "lensIds": [
         "albedo"
       ],
@@ -568,7 +560,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -580,8 +572,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5569,
-          "sha256": "4cb1e377f07bd87a0137195132cf4aaa445c927e649060cd9ed33948f022e00a",
+          "bytes": 5369,
+          "sha256": "a7db6af603a0773d4709df3010fafb98114a7d6301ea32876b10f6d6778d7842",
           "verification": "bytes-verified"
         }
       ],

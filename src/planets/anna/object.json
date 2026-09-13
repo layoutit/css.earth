@@ -64,11 +64,6 @@
           "sha256": "8233574774936cf666baaa3d3377442d10410877957fa559e8454d5c5807d718"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d0858d1404f7e6296f124603393405b891f36a0589bfb43c57b1194feded8c59"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "c8c27627a01a322cba4dbc6533e02560975957870350a396737fd7eb6464b95b"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.420854512785924,
-      "description": "Explore Anna in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in February 1887.",
       "systemName": "Solar System",
       "order": 345,
       "context": {

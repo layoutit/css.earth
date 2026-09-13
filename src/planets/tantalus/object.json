@@ -64,11 +64,6 @@
           "sha256": "e30f2a6d1220ec4303a64e200d9af78c54665a9daac5fce3c1f6d199d484adbb"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "3c299e7855dc527f3449d220f6887de75273598eba99f097b94b0e248e3bfc2a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "4dd20827aa12ece92f8e586e98172300429a134e1011a116525effb82bf1e012"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.2900615327857758,
-      "description": "Explore Tantalus, a near-Earth asteroid, through its published shape model.",
+      "description": "Near-Earth asteroid that spins once every 2.4 hours.",
       "systemName": "Solar System",
       "order": 128,
       "context": {

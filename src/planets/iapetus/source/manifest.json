@@ -819,25 +819,6 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
-    },
-    {
-      "id": "iapetus-object-text",
-      "path": "content/text.json",
-      "expectedBytes": 1958,
-      "expectedSha256": "7aa4244809efa1fce3fa1c1d98b5e56f0355174be277982d99db9fc71bf3caa8",
-      "origin": "Repository-authored Iapetus reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "panel",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
     }
   ],
   "documents": [

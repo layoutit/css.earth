@@ -64,11 +64,6 @@
           "sha256": "e5e9554393afdc4f4b4cafe31df5a5b096b6552ce5f48555dd22b0d7a99edbc6"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "1dbd07627783213a6308b7d471af85e6c78a3a915eee98b2358060a77f2b7bda"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "089704c7ae8a98ae7a537a0876316e66e7e3398b9551749c3a1b15edfabca0a5"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.2965637786549675,
-      "description": "Explore Sappho in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in May 1864.",
       "systemName": "Solar System",
       "order": 180,
       "context": {

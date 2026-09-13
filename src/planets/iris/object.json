@@ -64,11 +64,6 @@
           "sha256": "0b1f109f443cd92f8ca412aa61b2890edf31115544b97cac06583d8505ae9ae6"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "dc5057342f6d2e79d06c08ffe8cb561e98076cc4d5ca7c977289065b11fa2a89"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "f56a7cad85a49b3b5c4693edf6168c73af50825442122ab0313e2bf8727f1f90"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3855680410669247,
-      "description": "Explore Iris in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in August 1847.",
       "systemName": "Solar System",
       "order": 154,
       "context": {

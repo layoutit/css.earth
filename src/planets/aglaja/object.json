@@ -64,11 +64,6 @@
           "sha256": "e6fe1376082c6877b508c2f0288eba02ac518e16449d6c861bd4586c7264fd1d"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "ad3bdfe0bef7cda8c9ec35333334bfe0775896223b1eabbe7e58bedb70f172ed"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0b717ebc98acebabfdcae319223790e7628478f43b9984533980ae86ce9208a8"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.878732649484092,
-      "description": "Explore Aglaja in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 15 September 1857.",
       "systemName": "Solar System",
       "order": 229,
       "context": {

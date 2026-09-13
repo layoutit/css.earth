@@ -64,11 +64,6 @@
           "sha256": "7a5a2330d878b6297c466b3a954053ff68ff34bc5fd20035efee9e93d3a30e6b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "8e005d74237366439a4a78622a300235bc4163403efa9d3d818e76361e958cfd"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "8ba89b352586091a054c33cc94241832dad1fc94f831bd679fcf246152c71e88"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.153358490702003,
-      "description": "Explore Hopi in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered in June 1980.",
       "systemName": "Solar System",
       "order": 413,
       "context": {

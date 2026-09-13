@@ -64,11 +64,6 @@
           "sha256": "2001c5127d302b2c4c2c628b222ca263aeb722106de95e7ff5bf6f5d29548069"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a3874da793777ade14c1afa3ecf66e37b49a9fe73060c50f63d7650095d78306"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "c70dbafc4c6a245ff30068f68c53a25f9e3de614d6fc81b702b56308f84329a1"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.365562509475688,
-      "description": "Explore Urania in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in July 1854.",
       "systemName": "Solar System",
       "order": 166,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "2cfe9a4a7fab47c559df0dc8040cfd19003adfff0365c385b011b146ea2252d0"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "e832bdda07a11bd55d3054cad27bb2be47a854a18bd4896eede40d575951f8c6"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "6275c7d262189962702596015755c47158facdc1b3b333bd0bbc26648dbdb636"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7199394547827493,
-      "description": "Explore Lucina in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 8 June 1875.",
       "systemName": "Solar System",
       "order": 282,
       "context": {

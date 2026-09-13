@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dfc561627461243e48040cc5deeaf629ed8ca3598da6af3bbdc0d24fc62d0c21"
+    "sha256": "01f226bac702316901a67584ea861e2b5d9b84b2a7ec13641968537c79187cdf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "69dc6c66b862d22d405b35595b1f37017b56e387c489e4cab53d1ee9454f5761",
+      "sha256": "3effa4f2b1857fee30138a2700ea9faf1d1e6ac7ed8aa2c929eb854fcf0f8471",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "hiiaka",
         "displayName": "Hiʻiaka",
         "panel": {
-          "introduction": "Hiʻiaka is Haumea’s largest moon. Stellar occultations and photometry constrain this published triaxial model. It illustrates the inferred bulk shape; the display pole and meridian are not a measured current attitude. The grid marks unmapped terrain.",
           "facts": [
             {
               "id": "parent",
@@ -163,9 +162,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Published occultation/photometric model with semiaxes 240±40, 180±30 and 143±7 km. The axes are inferred together under homogeneous surface brightness. Display orientation is illustrative. The grid marks unmapped terrain.",
-              "title": "Occultation shape approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/hiiaka/hiiaka-model-thumbnail.webp",
               "surface": "hiiaka-model-surface@2x.webp",
               "poles": "hiiaka-model-poles@2x.webp",
@@ -173,7 +169,8 @@
                 "id": "occultation-approximation",
                 "path": "../manifest.json",
                 "url": "https://www.nature.com/articles/s41467-025-65749-1"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -317,7 +314,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -326,8 +323,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "69dc6c66b862d22d405b35595b1f37017b56e387c489e4cab53d1ee9454f5761",
-      "bytes": 3771,
+      "sha256": "3effa4f2b1857fee30138a2700ea9faf1d1e6ac7ed8aa2c929eb854fcf0f8471",
+      "bytes": 3176,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -342,9 +339,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Published occultation/photometric model with semiaxes 240±40, 180±30 and 143±7 km. The axes are inferred together under homogeneous surface brightness. Display orientation is illustrative. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -384,7 +379,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -396,8 +391,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5500,
-          "sha256": "54a60829dfb098556fd90e1a16f2fbf46a2b7ee294bb82f5eca4e7fbd8306771",
+          "bytes": 5229,
+          "sha256": "1d36a72abfd08ce739427f6879a335869cfa8874e4cc5f0e3e52e9e62badd3ef",
           "verification": "bytes-verified"
         }
       ],

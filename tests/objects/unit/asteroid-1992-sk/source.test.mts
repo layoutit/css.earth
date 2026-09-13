@@ -45,6 +45,7 @@ test('1992 SK qualifies the historical model and starts with Shadows off',async(
  const shadows=content.settings.controls.find(c=>c.name==='shadows'),distance=content.panel.facts.find(f=>f.id==='distance-from-sun');assert.ok(shadows);assert.ok(distance);
  assert.equal(shadows.checked,false);
  assert.equal(distance.label,'Solar semimajor axis');
- assert.match(content.panel.introduction,/later/i);assert.match(content.panel.introduction,/arbitrary phase|arbitrary display phase/);
+ const summaries=Object.values(requireRecord(requireRecord(await read('../text.json')).datasets)).map(dataset=>requireString(requireRecord(dataset).summary)).join(' ');
+ assert.match(summaries,/later/i);assert.match(summaries,/arbitrary spin phase/);
  assert.ok(!JSON.stringify(content).includes('49 km'));
 });

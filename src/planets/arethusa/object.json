@@ -64,11 +64,6 @@
           "sha256": "0f520fa23540c3b27792aa3ae1745ceaa365af38b2d4a1c40a6e8351aaac3554"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "462f91a1f1f5eff4b02a58dcffacdfed66c9be73cc3978955ea343e571543676"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "96d6d2d3495b6b777828bbdbff1a6e6b27f23bd8b63ffcfce7f903b5d6f9c4c8"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.064764963618251,
-      "description": "Explore Arethusa in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in November 1867.",
       "systemName": "Solar System",
       "order": 254,
       "context": {

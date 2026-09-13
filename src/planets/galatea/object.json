@@ -31,11 +31,6 @@
           "sha256": "ea1fb45d04bed5653622004876c3b6803b93d740eabfcefe5bdfbbd04704ee60"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "bebbb122e412415cef2d5cc5613729dca300cdbad528dadf185274d2f001ba12"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "9d1fc2d22e26c33d29bb25b689dd91d0854f940074600fd74970669e68ecf2e7"
@@ -118,7 +113,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 30.07,
-      "description": "Explore Galatea through its Voyager-derived shape model.",
+      "description": "Small moon whose gravity disturbs Neptune's rings.",
       "systemName": "Solar System",
       "order": 109,
       "context": {

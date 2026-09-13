@@ -75,11 +75,6 @@
           "sha256": "e18ce2bd9cfb261a76356db3c65174fe7780f2e613b12be9eacbf168a622f6d9"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0df6613e453dab84b2d9a28284b82b5b20812c823cd6bd5d898691a9ed40e957"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "9d069652a17dc41f374dce86b05979f8b4914c343742dee33bc3e0cdf370faa9"
@@ -146,7 +141,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 2.861,
-      "description": "Explore Ida in 3D with cssEarth using archived spacecraft imagery and source-backed shape data.",
+      "description": "Asteroid with a tiny moon, Dactyl.",
       "systemName": "Solar System",
       "order": 130,
       "context": {

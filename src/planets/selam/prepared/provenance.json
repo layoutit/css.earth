@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "409118ecc870fdb0beb7994dffe75805068e01115ba33aef54a1ec12d44800f2"
+    "sha256": "c171903d6e7b0f6f4fc1a3e63d8f05601af22fbed44175a231d079b79bf0446f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -100,14 +100,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8ed02b573b2a405fa64a0db58dc7ccaae1a630caae4f847a29903837892c4354",
+      "sha256": "44e867b0d91807c84cb17403ae3021fd72f23c3ce4c8083e28563b7257f203fa",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "selam",
         "displayName": "Selam",
         "panel": {
-          "introduction": "Selam is the first contact-binary moon discovered around an asteroid. Lucy revealed its two touching lobes while passing Dinkinesh in November 2023. Approximate orbital placement. The 3.11 km separation and 52.67-hour period are measured; circular equatorial motion and synchronous orientation are approximations. The present orbital phase is illustrative.",
           "facts": [
             {
               "id": "parent",
@@ -137,9 +136,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "detail": "Lucy",
-              "title": "Measured two-lobe envelope",
-              "description": "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation.",
               "thumbnail": "/scenes/selam/selam-shape-thumbnail.webp",
               "surface": "selam-shape-surface@2x.webp",
               "poles": "selam-shape-poles@2x.webp",
@@ -243,7 +239,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -252,8 +248,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8ed02b573b2a405fa64a0db58dc7ccaae1a630caae4f847a29903837892c4354",
-      "bytes": 3229,
+      "sha256": "44e867b0d91807c84cb17403ae3021fd72f23c3ce4c8083e28563b7257f203fa",
+      "bytes": 2485,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -268,9 +264,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation."
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -305,7 +299,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -317,8 +311,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5362,
-          "sha256": "7c47cbc4877ad9ff590e2b7f58e03c6c3196dadf7cc2dbb3ac5bdd1dad9f5bd9",
+          "bytes": 4988,
+          "sha256": "a089681e3d009fe7000616bc3e68c733fb16d2c59268ca1ed9cef37c61116af1",
           "verification": "bytes-verified"
         }
       ],

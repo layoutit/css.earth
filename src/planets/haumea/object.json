@@ -47,11 +47,6 @@
           "sha256": "71afdd3236e654eb583867fe1425ac0ddd658fdbcc89b70cf9c53fea79bc074d"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "20529b7f2aeaf0410b62bfdc13587b85c6465ff555f3b6fe23beab94e339d38c"
-        },
-        {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
           "sha256": "1ac9085d300170054a4c12d31a61f9ec80f38b887f8336f989f2a4b4498bf865"
@@ -133,7 +128,7 @@
       "classification": "dwarf-planet",
       "color": "#cccccc",
       "distanceAu": 43.1,
-      "description": "Explore Haumea’s measured elongated shape and narrow ring, with an illustrative NASA surface texture.",
+      "description": "Rapidly spinning, elongated dwarf planet with a ring.",
       "systemName": "Solar System",
       "order": 460,
       "context": {

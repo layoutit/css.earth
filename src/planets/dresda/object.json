@@ -64,11 +64,6 @@
           "sha256": "755e78b74c1107b7b4a79ffd776b57868264b4c6140f7bd86c3571fba9abe211"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "4fc93285987b910a4369cd8e87ffdf8febe9e94ecaa8973a0b0ea70b91d87bb4"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "98fdee07256acc7c67004e499fbe5da39c3d7c6b489970eff9393d1d76eca484"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.884592869415074,
-      "description": "Explore Dresda in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in November 1886.",
       "systemName": "Solar System",
       "order": 343,
       "context": {

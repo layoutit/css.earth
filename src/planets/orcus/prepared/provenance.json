@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8bf9d48acf82c97dafd80032e4b943b0b74eaa7f3fe108303ae86eb0e06c1dad"
+    "sha256": "16a51ad1c8ec7ccc93e22e2ab88132df00634f4e22f29ded646699785fc5c244"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "adac5d3afa9d6e4bf69fb72c14a3a090be3d0f70bae376e38907e17faaeee1ba",
+      "sha256": "edb192a8c495b152fc72020d504273a74fa96edeb822827f2200e33e9509f2bd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "orcus",
         "displayName": "Orcus",
         "panel": {
-          "introduction": "Orcus is a large resonant world beyond Neptune, partnered with the substantial moon Vanth. The displayed size belongs to Orcus alone; its smooth shape and grid surface are illustrative.",
           "facts": [
             {
               "id": "shape",
@@ -158,9 +157,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Size-constrained spherical illustration at Orcus’s primary-only thermal diameter, 910 +50/−40 km. ALMA separated the binary components but did not resolve Orcus’s terrain or measure three shape axes. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed. The grid marks unmapped terrain.",
-              "title": "Published size model; shape unresolved",
-              "detail": "Inferred shape · unmapped surface grid",
               "thumbnail": "/scenes/orcus/orcus-model-thumbnail.webp",
               "surface": "orcus-model-surface@2x.webp",
               "poles": "orcus-model-poles@2x.webp",
@@ -168,7 +164,9 @@
                 "id": "published-shape",
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/1801.07221"
-              }
+              },
+              "notes": "Size-constrained spherical illustration at Orcus’s primary-only thermal diameter, 910 +50/−40 km. ALMA separated the binary components but did not resolve Orcus’s terrain or measure three shape axes. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed. The grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -328,7 +326,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -337,8 +335,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "adac5d3afa9d6e4bf69fb72c14a3a090be3d0f70bae376e38907e17faaeee1ba",
-      "bytes": 4122,
+      "sha256": "edb192a8c495b152fc72020d504273a74fa96edeb822827f2200e33e9509f2bd",
+      "bytes": 3811,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -353,9 +351,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Size-constrained spherical illustration at Orcus’s primary-only thermal diameter, 910 +50/−40 km. ALMA separated the binary components but did not resolve Orcus’s terrain or measure three shape axes. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -395,7 +391,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -407,8 +403,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5317,
-          "sha256": "52eee176af22242ab8098f4685d1c5d13d219ff00dd0d9e14745afd7a95af63e",
+          "bytes": 5114,
+          "sha256": "b4404b54f555e4f08c579eb79421e77fe227ed028a123096a7acdbd361ccad83",
           "verification": "bytes-verified"
         }
       ],

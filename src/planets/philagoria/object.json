@@ -64,11 +64,6 @@
           "sha256": "21c3eeec5d1425bde992b95ac48465a33598495c980684f1c32428faf6fc9108"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "8ded5e3585fc3c9d58698ef77462dc8aba41760282092e2d5396b5de3d826716"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "75fae03001ae6dfe1e2f1368baeeb3ce86128d0f681fe9ccfc29974897086412"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0476100267473623,
-      "description": "Explore Philagoria in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in April 1888.",
       "systemName": "Solar System",
       "order": 349,
       "context": {

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "62c3cbdcc3c7502ae61a41e5774d6ffc5be5100d84a446e60aab8404e1861947"
+    "sha256": "892b7400c345b22a156e511bf93dee8e2ef3f48412a11a588cf32cb44005a98e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -141,14 +141,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c116bb3dc84ba4c52e1876b8f1ef283c0f6b60c83248527f79cb176e44d312bc",
+      "sha256": "f25f3a77dbdad24f25bcb3639bcd91deae1e8d5e243478898d4c8bee1f8b2fad",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-c2014-un271",
         "displayName": "Bernardinelli–Bernstein",
         "panel": {
-          "introduction": "Bernardinelli–Bernstein has an exceptionally large nucleus. ALMA detected carbon monoxide escaping while the comet was still more than 16 AU from the Sun.",
           "facts": [
             {
               "id": "diameter",
@@ -173,9 +172,6 @@
             {
               "id": "model",
               "label": "Illustrative nucleus",
-              "detail": "Celestia",
-              "title": "C/2014 UN271 Bernardinelli–Bernstein",
-              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
               "thumbnail": "/scenes/comet-c2014-un271/comet-c2014-un271-model-thumbnail.webp",
               "surface": "comet-c2014-un271-model-surface@2x.webp",
               "poles": "comet-c2014-un271-model-poles@2x.webp",
@@ -195,7 +191,9 @@
                   "label": "Closest to Sun",
                   "value": "11 AU"
                 }
-              ]
+              ],
+              "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "noData": true
             }
           ]
         },
@@ -294,7 +292,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -303,8 +301,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c116bb3dc84ba4c52e1876b8f1ef283c0f6b60c83248527f79cb176e44d312bc",
-      "bytes": 3424,
+      "sha256": "f25f3a77dbdad24f25bcb3639bcd91deae1e8d5e243478898d4c8bee1f8b2fad",
+      "bytes": 3173,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -319,9 +317,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -356,7 +352,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -368,8 +364,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 12267,
-          "sha256": "3c8eded8f14c54e92026bab17548e9b78d213b89d20d613857b59421af105de2",
+          "bytes": 12093,
+          "sha256": "b667ed7b6b4eba0e3a93eec0350aec788cd316cbc01eaaad5170689927a54b4a",
           "verification": "bytes-verified"
         }
       ],

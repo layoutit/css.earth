@@ -64,11 +64,6 @@
           "sha256": "0d886d0eb366b40bd097587462a9d9e7140b631731016e5cb420af8ed356bd48"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "bb1606773fbc5a4c5e65d4082a1072fb2b6e063b93908c92b2411bca280318c8"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "4cf784b3caa30972cf716eed2355c30607e0fd814ef101da73525c102c0d2846"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5988578205374266,
-      "description": "Explore Melete in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered in September 1857.",
       "systemName": "Solar System",
       "order": 234,
       "context": {

@@ -1,6 +1,7 @@
 ---
 import PlanetShell from "./PlanetShell.astro";
 import { validateObjectProvenance } from "../../src/platform/object-provenance.mts";
+import { parsePreparedText } from '../object-text.mts';
 import { parsePreparedPanelContent, parsePanelControls, withDatasetText } from '../prepared-panel-content.mts';
 interface Props { navigation?: boolean; preparedContent: unknown; preparedControls: unknown; }
 const { preparedContent, preparedControls } = Astro.props;
@@ -16,9 +17,11 @@ const imageFiles = import.meta.glob<string>(
 );
 const minimapFiles = import.meta.glob("../../src/planets/*/source/presentation/surface-map.json", { import: "default" });
 const provenanceFiles = import.meta.glob("../../src/planets/*/prepared/provenance.json", { import: "default" });
+const textFiles = import.meta.glob("../../src/planets/*/prepared/text.json", { import: "default" });
 const objectRoot = `../../src/planets/${content.objectId}`;
 const provenanceData = await provenanceFiles[`${objectRoot}/prepared/provenance.json`]?.();
 const provenance = provenanceData === undefined ? undefined : validateObjectProvenance(provenanceData, content.objectId);
+const text = parsePreparedText(await textFiles[`${objectRoot}/prepared/text.json`]?.(), content.objectId);
 const minimap = await minimapFiles[`${objectRoot}/source/presentation/surface-map.json`]?.();
 const previews = await previewFiles[`${objectRoot}/prepared/minimaps.json`]?.();
 const lenses = withDatasetText(controls.lenses && {
@@ -29,14 +32,14 @@ const lenses = withDatasetText(controls.lenses && {
     const url = await imageFiles[`${objectRoot}/prepared/${preview.path}`]();
     return { ...lens, texture: { url, width: preview.width, height: preview.height, minimap, attribution: preview.attribution } };
   })),
-}, content.datasets);
+}, text.datasets);
 ---
 
 <PlanetShell
   navigation={Astro.props.navigation}
   objectId={content.objectId}
   title={content.title}
-  introduction={content.introduction}
+  introduction={text.introduction.text}
   facts={content.facts}
   moreFacts={content.moreFacts}
   charts={content.charts}

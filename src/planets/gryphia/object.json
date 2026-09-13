@@ -64,11 +64,6 @@
           "sha256": "3b13c87e678ad54ac8b8d7b3349ea1db62cb3098a962f965dbb280cbcd1c4ed9"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9d42ae61926a35235eea22c82b8ced6f0ae37f03366b9b3c8f6985e0be97926f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "eaa138f451f14e20229ecfbca2fdfe537f712ab26ef54f3d34828397a3d83227"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.1987067011231507,
-      "description": "Explore Gryphia in 3D with its published shape model and documented physical size scale.",
+      "description": "Slowly tumbling main-belt asteroid.",
       "systemName": "Solar System",
       "order": 389,
       "context": {

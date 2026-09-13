@@ -31,11 +31,6 @@
           "sha256": "25da2bfaa45f705b780cb2eed66bd714a1ecd011320da95b5c38179bcff8b6e9"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9e1e62b35932681785ee0373a69af1f0b7c69d37d05025c135225b950bd2037a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "883ca3633b43f1b3da1af6a162fadc1b6d1558d8f8fe74fc81e316c5593571f6"
@@ -123,7 +118,7 @@
       "classification": "asteroid",
       "color": "#a0a0a0",
       "distanceAu": 5.206163281913244,
-      "description": "Explore Patroclus, a Lucy target, through its observation-constrained approximate ellipsoid.",
+      "description": "Binary Jupiter Trojan paired with Menoetius.",
       "systemName": "Solar System",
       "order": 22,
       "context": {

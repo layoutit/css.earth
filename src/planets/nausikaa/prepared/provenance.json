@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8929c3f1c8a37f6e8dffc4d8f4f27058e06bcf76c3b8db7c012efdad687fa585"
+    "sha256": "cfc318539066c5f9f573c544382deb23f74d6e249a8388a40e83aee88cfa9d41"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -145,7 +145,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cc5aadc5d3874196f299c6be00cc73acb3df7ea1b4357239dde12a581661a2e6",
+      "sha256": "6056cea7971f3828e7cb107eca24506570cc158196bb13b9372c7290127f6bb2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -169,7 +169,6 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Nausikaa is a main-belt asteroid. Explore its calibrated convex reconstruction from DAMIT, version 2018-02-19. The grid marks unavailable surface imagery.",
           "facts": [
             {
               "id": "radius",
@@ -201,8 +200,6 @@
             {
               "id": "shape",
               "label": "Shape",
-              "description": "Calibrated DAMIT shape",
-              "title": "DAMIT model 1864",
               "thumbnail": "/scenes/nausikaa/nausikaa-shape-thumbnail.webp",
               "surface": "nausikaa-shape-surface@2x.webp",
               "poles": "nausikaa-shape-surface@2x.webp",
@@ -211,14 +208,12 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape",
-              "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
+              "notes": "Calibrated DAMIT shape",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Source shape · radial height",
-              "title": "Shape-derived radial height",
               "thumbnail": "/scenes/nausikaa/nausikaa-elevation-thumbnail.webp",
               "surface": "nausikaa-elevation-surface@2x.webp",
               "poles": "nausikaa-elevation-surface@2x.webp",
@@ -240,8 +235,7 @@
                 "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1864",
                 "image": "/scenes/nausikaa/nausikaa-elevation-legend.webp"
               },
-              "detail": "Shape-derived radial height",
-              "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+              "notes": "Source shape · radial height"
             }
           ]
         },
@@ -353,7 +347,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -362,8 +356,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cc5aadc5d3874196f299c6be00cc73acb3df7ea1b4357239dde12a581661a2e6",
-      "bytes": 9849,
+      "sha256": "6056cea7971f3828e7cb107eca24506570cc158196bb13b9372c7290127f6bb2",
+      "bytes": 9272,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -378,9 +372,7 @@
       "selector": "/raster/scientific/0",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Source shape · radial height"
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -422,9 +414,7 @@
       "selector": "/raster/shapeViews/0",
       "parents": [],
       "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Calibrated DAMIT shape"
-      ],
+      "limitations": [],
       "lensIds": [
         "shape"
       ],
@@ -459,7 +449,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -471,8 +461,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7255,
-          "sha256": "60a7ae2d56474a0395312589f55fe988317f99bb7b0fde940d4b230e7b4794f0",
+          "bytes": 7083,
+          "sha256": "4a7926ed4e0b8ffd5c3145ce3ef95cde3c20448e7e55a17b59aeb1cf8c0b2873",
           "verification": "bytes-verified"
         }
       ],

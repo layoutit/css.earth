@@ -64,11 +64,6 @@
           "sha256": "a8c8ab32bafe93a1e2609fcf742ac90f40260b9cdcea1e033d30cc08c37d36af"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d4d4d0ae501f7de61d3be601057c277042d8012dc9aef6f7b9aa2ec82352fc1b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "6c99d01c7df4918820275d4d1d3642ce8070b45c24c3f4a2ac71beb511dd76de"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6688807426668064,
-      "description": "Explore Klotho in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in February 1868.",
       "systemName": "Solar System",
       "order": 255,
       "context": {

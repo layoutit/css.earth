@@ -64,11 +64,6 @@
           "sha256": "04b8b824cd8fefa8dcb1255de715f67ea4bf1a4e8d01d51bf86ce8dbc0a489c7"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "09c3aca5f81f7b9141dc4a9f26354d62c4340823ddfadb4c2f1a8f0b6d6cc8ee"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "cf87b6daf2c95596ced1c0a96cf786acae2ab767efbb02c93d3ef2e929d020e2"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7320569169080615,
-      "description": "Explore Lamberta in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in April 1878.",
       "systemName": "Solar System",
       "order": 305,
       "context": {

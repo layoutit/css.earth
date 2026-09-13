@@ -64,11 +64,6 @@
           "sha256": "43eea8117b6d92c894cd4e70b8817ce26aa8077265049ecdcca97f88eb94fe93"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "7dfec33faa2a2ca4b6a4ee48c2bc3b164d4a34c42c74d171338e5039b3a688c5"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "91cc0ea4163c01c1a31124cf34453531c5dfe8577469cad35206e785a0d14882"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.701015744250632,
-      "description": "Explore Hera in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in September 1868.",
       "systemName": "Solar System",
       "order": 258,
       "context": {

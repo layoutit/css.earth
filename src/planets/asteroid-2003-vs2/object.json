@@ -31,11 +31,6 @@
           "sha256": "a5c151a45266cfcd046b5f00ced4fc2e4b608f8546ab830ce3e7fa467a14a61d"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "12b1ab329a9b7d317185952a3f43e03543d1f8fff56e7041ac872b9b37c98a0c"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "5df4697e235e0e749459f5d0401fc86817520e0235e5d8c994963611fbbbeb4d"
@@ -123,7 +118,7 @@
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 36.97977310285473,
-      "description": "2003 VS2 is an elongated world beyond Neptune. A multi-site occultation and rotational brightness measurements support this smooth triaxial shape.",
+      "description": "Elongated plutino that turns in about 7.4 hours.",
       "systemName": "Solar System",
       "order": 3,
       "context": {

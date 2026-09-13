@@ -533,15 +533,6 @@
       }
     },
     {
-      "path": "content/text.json",
-      "expectedBytes": 1352,
-      "expectedSha256": "20ad9ca746edd652e0b486070b2d924c735648acfa8bb5434eafd33307e657f4",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
-    },
-    {
       "path": "observations/cas_iss_v10.ti",
       "expectedBytes": 31060,
       "expectedSha256": "518c50a1c837f525e10ee71a97c9971ba419850ac05fcaa2df99cf3cddda5c68"

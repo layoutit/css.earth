@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "478fb94fd96ebf87389b541cdae562fe7ff8e4884a9016c4fe8d6d39dd8f9b02"
+    "sha256": "59766cccc3732fc9b791919d808b4f04f0c6878a9f5bcff339a61d98075586b3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -217,14 +217,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d7bf6c23227922ed76a45502ab32a0145a2d57f72229f64397579e62cf9fdb08",
+      "sha256": "0649f58ed5e3940f634d8716d5224a9641de4c1865c083e6a5c63e9fabf15d1b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "metis",
         "displayName": "Metis",
         "panel": {
-          "introduction": "Metis is Jupiter’s innermost moon, a small elongated world embedded in the main ring. Dust knocked from its surface helps replenish that faint ring. Synchronous rotation is assumed; its actual rotation period is unknown.",
           "facts": [
             {
               "id": "radius",
@@ -306,9 +305,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo.",
-              "title": "SSI mosaic",
-              "detail": "Galileo SSI",
               "thumbnail": "/scenes/metis/metis-normal-thumbnail.webp",
               "surface": "metis-normal-surface@2x.webp",
               "poles": "metis-normal-surface@2x.webp",
@@ -317,7 +313,8 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/galileo/"
               },
-              "summary": "The finest source pixels span about 3 km; other views are coarser. Brightness is adjusted; the gray grid marks unreliable data."
+              "notes": "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo.",
+              "noData": true
             }
           ]
         },
@@ -919,7 +916,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -928,8 +925,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d7bf6c23227922ed76a45502ab32a0145a2d57f72229f64397579e62cf9fdb08",
-      "bytes": 4972,
+      "sha256": "0649f58ed5e3940f634d8716d5224a9641de4c1865c083e6a5c63e9fabf15d1b",
+      "bytes": 4530,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -944,9 +941,7 @@
       "selector": "/raster/mosaics/0",
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -991,7 +986,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1003,8 +998,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5776,
-          "sha256": "fca6ab5a5b2e37afa706ff2424a536277990c8c84d34f647ef01159d24e9f894",
+          "bytes": 5536,
+          "sha256": "07343bfd08d73830bae6333d3dcdeeb82495ec21d11ad153dd365e17fb13b6b0",
           "verification": "bytes-verified"
         }
       ],

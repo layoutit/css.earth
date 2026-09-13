@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43a85da499b16151af70dbb890ee0e6108ca2cc7a85067e8d4b6cb85a2be04a8"
+    "sha256": "3da4f37708f18edf54eec7ff89fa1f049c4ab637e6176ebad16572a98286118b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3f6f9d4ea316aa9923e2dabf6b9e341bad0ab939d640e3f9bc86cc129b7f83e5",
+      "sha256": "6175e7afe46cb5dadef2c63f29c77108393d55c63b44348296c3be045b2929e9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "himalia",
         "displayName": "Himalia",
         "panel": {
-          "introduction": "Himalia is Jupiter’s largest irregular moon. This approximate ellipsoid uses Cassini’s observed elongation with assumed equal short axes and orientation. The grid marks unmapped terrain.",
           "facts": [
             {
               "id": "radius",
@@ -152,9 +151,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Approximate elongated shape using Cassini’s observed 1.25:1 outline and JPL’s size estimate. Equal short axes and the viewing orientation are assumed. The gray grid marks unmapped terrain.",
-              "title": "Outline approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/himalia/himalia-model-thumbnail.webp",
               "surface": "himalia-model-surface@2x.webp",
               "poles": "himalia-model-poles@2x.webp",
@@ -162,7 +158,9 @@
                 "id": "size-approximation",
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.1126/science.1079462"
-              }
+              },
+              "notes": "Approximate elongated shape using Cassini’s observed 1.25:1 outline and JPL’s size estimate. Equal short axes and the viewing orientation are assumed. The gray grid marks unmapped terrain.",
+              "noData": true
             }
           ]
         },
@@ -308,7 +306,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -317,8 +315,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3f6f9d4ea316aa9923e2dabf6b9e341bad0ab939d640e3f9bc86cc129b7f83e5",
-      "bytes": 3100,
+      "sha256": "6175e7afe46cb5dadef2c63f29c77108393d55c63b44348296c3be045b2929e9",
+      "bytes": 2823,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -333,9 +331,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Approximate elongated shape using Cassini’s observed 1.25:1 outline and JPL’s size estimate. Equal short axes and the viewing orientation are assumed. The gray grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -375,7 +371,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -387,8 +383,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5321,
-          "sha256": "505c20642b0e4c8e1b7c594addf6d5dccf9d099da902084030c4c9bbb99805bc",
+          "bytes": 5113,
+          "sha256": "4674a1028b1c52a669a184d038a0e5e1e733f0d713e09aec4a03806ab0069294",
           "verification": "bytes-verified"
         }
       ],

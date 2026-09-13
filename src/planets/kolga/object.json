@@ -64,11 +64,6 @@
           "sha256": "33e5b024d3b872cf19f701e424032aab761909da9655c12b5f69ad5309b44e3c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "fd262b1a0e54b82a818fe8df01bfad252efc17ac9ec6c4bda37633763280f3aa"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "189263950cf8ad64587932c5d5abf35bd8dffd61fdb8fd6a134d15756851eed8"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.8959502139804503,
-      "description": "Explore Kolga in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in September 1878.",
       "systemName": "Solar System",
       "order": 307,
       "context": {

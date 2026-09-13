@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a24c8144e79b4720c4ac3a09fde5f4cb8ef2702ea1e3c17f95d283856086ce6c"
+    "sha256": "fa605c362d7551e0d98c49288b7254d34d1a990827a3b1a6f22351b73d109ecd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "20154a03836d82b659602bf6145095cd47c4bd35ee59cf657cd61f5209172335",
+      "sha256": "3486664c672b7e7d0230e7fca54097a510c28147bab1655c4120c8546bc5a03a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "aegaeon",
         "displayName": "Aegaeon",
         "panel": {
-          "introduction": "Aegaeon is a tiny, elongated moon embedded in Saturn’s G-ring arc. Cassini images measured its outline; impacts on the moon can supply dust to the arc.",
           "facts": [
             {
               "id": "radius",
@@ -162,9 +161,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
-              "title": "Approximate shape model",
-              "detail": "Measured shape",
               "thumbnail": "/scenes/aegaeon/aegaeon-model-thumbnail.webp",
               "surface": "aegaeon-model-surface@2x.webp",
               "poles": "aegaeon-model-poles@2x.webp",
@@ -173,7 +169,8 @@
                 "path": "../manifest.json",
                 "url": "https://arxiv.org/abs/1912.09192"
               },
-              "summary": "Shape based on Cassini's measured dimensions. Gray grid: no imagery; the model does not resolve local terrain."
+              "notes": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
+              "noData": true
             }
           ]
         },
@@ -317,7 +314,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -326,8 +323,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "20154a03836d82b659602bf6145095cd47c4bd35ee59cf657cd61f5209172335",
-      "bytes": 3477,
+      "sha256": "3486664c672b7e7d0230e7fca54097a510c28147bab1655c4120c8546bc5a03a",
+      "bytes": 3105,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -342,9 +339,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -384,7 +379,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -396,8 +391,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6703,
-          "sha256": "43d956bb3ad85b9abda20b2ea3fecef0674f8e7975b8b5bcaf544c92216c701f",
+          "bytes": 6532,
+          "sha256": "a3a862bac2cd786c3f1e822f6f6f2c92084c3864a60539c8280e737d0b1e989b",
           "verification": "bytes-verified"
         }
       ],

@@ -626,15 +626,6 @@
       }
     },
     {
-      "path": "content/text.json",
-      "expectedBytes": 1136,
-      "expectedSha256": "646d92df70599a007d3878d4bd01a1f6b9c96cc1d9a3c63740d4035ce7ad2628",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
-    },
-    {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",

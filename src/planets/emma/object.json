@@ -64,11 +64,6 @@
           "sha256": "68f07ce3b681ae3a0605ba7dd03efe0b96545c217c2c2dc245a46fd51ff5367a"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "ca7ebdb64e264e8fd448010a28cc9679d4a084568f150c3288860c6119b76362"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "623e810a99c6f748081ed8b7c87d104e9c606bba6c70ccb03388a6db943ee8ec"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0505638561088526,
-      "description": "Explore Emma in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid with a moon, discovered in February 1889.",
       "systemName": "Solar System",
       "order": 352,
       "context": {

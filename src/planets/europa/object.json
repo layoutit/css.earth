@@ -126,11 +126,6 @@
           "sha256": "7322aeef0ed2b3bb8fb2a0bbe2f94c0d86ff6544ffdcbf9dfe63421ec3e9974f"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d9fa5270f5cc4db5f14d688ab89a99bfc7a43b4117b988e5f6586225fdad1256"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "4f6d21e75d3b88a7cccf2b984c2cee8778ad8f388159444859324ca477b10df6"
@@ -175,7 +170,7 @@
       "classification": "satellite",
       "color": "#b5b3a9",
       "distanceAu": 5.2,
-      "description": "Explore Europa in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s fractured icy moon and its orbit around Jupiter.",
+      "description": "Icy moon of Jupiter whose ocean may hold twice the water of Earth's oceans.",
       "systemName": "Solar System",
       "order": 427,
       "context": {

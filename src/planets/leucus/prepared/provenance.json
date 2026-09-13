@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1cd8a8f3db5a012978f2854f46059cbb87e74e09e78e1af1eb3a686cff60cf57"
+    "sha256": "afd210335bf19c60f63fbc1ba4d4f37786a2485deff731539c543428bd597c40"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -110,14 +110,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7c2b3b7523728a8c4fe2e9ad3d7d0b60978a3a5bfa42a679d438bbfa25085d3d",
+      "sha256": "c22432bb0c8b0fef54a36945a01afed2237456b55e8be6ebc026087503bd5a87",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "leucus",
         "displayName": "Leucus",
         "panel": {
-          "introduction": "Leucus is an elongated Jupiter Trojan with an unusually slow rotation. This ellipsoid approximates the dimensions of the published light-curve and occultation model; its irregular outline is unresolved here. The grid marks unmapped terrain.",
           "facts": [
             {
               "id": "shape",
@@ -152,9 +151,6 @@
             {
               "id": "model",
               "label": "Shape model",
-              "description": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. It does not reproduce the original irregular convex mesh or occultation silhouettes. Full approximation dimensions: 60.8 × 39.1 × 27.8 km. Published prograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
-              "title": "Convex-model ellipsoid approximation",
-              "detail": "Approximate shape",
               "thumbnail": "/scenes/leucus/leucus-model-thumbnail.webp",
               "surface": "leucus-model-surface@2x.webp",
               "poles": "leucus-model-poles@2x.webp",
@@ -162,7 +158,8 @@
                 "id": "occultation-approximation",
                 "path": "../manifest.json",
                 "url": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf"
-              }
+              },
+              "noData": true
             }
           ]
         },
@@ -306,7 +303,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -315,8 +312,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7c2b3b7523728a8c4fe2e9ad3d7d0b60978a3a5bfa42a679d438bbfa25085d3d",
-      "bytes": 3734,
+      "sha256": "c22432bb0c8b0fef54a36945a01afed2237456b55e8be6ebc026087503bd5a87",
+      "bytes": 2955,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -331,9 +328,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. It does not reproduce the original irregular convex mesh or occultation silhouettes. Full approximation dimensions: 60.8 × 39.1 × 27.8 km. Published prograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -373,7 +368,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -385,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5223,
-          "sha256": "518d31dd92ea6ea5f714d6181160b4dfabc94bdcf7f0b0019696572e51c8cc3e",
+          "bytes": 4965,
+          "sha256": "2e202c155e5ecd65fbd8a49da9709cb9a3dc81417bf1a4a4135ac6c907bdc791",
           "verification": "bytes-verified"
         }
       ],

@@ -31,11 +31,6 @@
           "sha256": "8c270021450796947c718f89f11800d625fe22793622c2b8f1abb79b19e972cb"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "221f335f31df9f7dbda25adc362fa46d24e4162ec0d379deec6b318b29c1b8f9"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "446cb45a014feb7a2eb2eba6dba993aa665f2de39a60b7dcce4d6a34848ef884"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Belinda through its published prolate shape model.",
+      "description": "Elongated inner moon of Uranus, about twice as long as it is wide.",
       "systemName": "Solar System",
       "order": 96,
       "context": {

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6d217b6aebb3265032255a53d425dfa13b88162baf11ba9e77cec7e8588d86c9"
+    "sha256": "c4f5377353f1cfafab25cb12878afe178f2655c0a23a97a3c0f4bab3aab22644"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -189,14 +189,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f353330cd8626bf91a855035e348c881104be918e8faab51889937b3036c9194",
+      "sha256": "905f3658fa3abf655a1640e164d4e05889586cb782a4f912990ed2f7bb9ac690",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "ariel",
         "displayName": "Ariel",
         "panel": {
-          "introduction": "Ariel is an icy moon crossed by long fault valleys and troughs. Voyager 2 revealed a landscape of cratered plains, deep canyons, and smoother terrain reshaped by past geologic activity.",
           "facts": [
             {
               "id": "radius",
@@ -272,9 +271,6 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map.",
-              "title": "Monochrome mosaic",
-              "detail": "Corrected mosaic",
               "thumbnail": "ariel-lens-normal.webp",
               "surface": "ariel-normal.webp",
               "poles": "ariel-poles-normal.webp",
@@ -283,14 +279,12 @@
                 "path": "../manifest.json",
                 "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
               },
-              "summary": "Brightness correction reduces broad shading, while local shadows and seams remain. The gray grid marks missing observations."
+              "notes": "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map.",
+              "noData": true
             },
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution.",
-              "title": "Stereo, shading and limb terrain model",
-              "detail": "Shaded relief",
               "thumbnail": "ariel-lens-elevation.webp",
               "surface": "ariel-elevation.webp",
               "poles": "ariel-poles-elevation.webp",
@@ -334,7 +328,8 @@
                   ]
                 }
               },
-              "summary": "Height from stereo images, shading and limb measurements. Detail varies; the gray grid marks missing elevation data."
+              "notes": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution.",
+              "noData": true
             }
           ]
         },
@@ -621,10 +616,10 @@
       "redistribution": "Prepared package configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "f353330cd8626bf91a855035e348c881104be918e8faab51889937b3036c9194",
-      "bytes": 8184,
+      "sha256": "905f3658fa3abf655a1640e164d4e05889586cb782a4f912990ed2f7bb9ac690",
+      "bytes": 7555,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -739,9 +734,7 @@
       "selector": "/surfaces/0",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
-      "limitations": [
-        "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map."
-      ],
+      "limitations": [],
       "lensIds": [
         "normal"
       ],
@@ -796,9 +789,7 @@
       "selector": "/surfaces/1",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution."
-      ],
+      "limitations": [],
       "lensIds": [
         "elevation"
       ],
@@ -1267,7 +1258,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1279,8 +1270,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4467,
-          "sha256": "3660e460990e7c9fda06befa9260214b97e6528c9f09614656a8599be3383ca7",
+          "bytes": 4264,
+          "sha256": "39932ed5883d84716b2c4175a7ff4097dd0583a6c94bca39de4c1c16c55aecd9",
           "verification": "bytes-verified"
         }
       ],

@@ -31,11 +31,6 @@
           "sha256": "a99c8d5baee5c95a68a805dd41012e21f53e943badc47b7f9cb74c5170a47e9f"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "07d481a910445f53b6e5ffb44f40238d8e76774a7713a48a1788af8b170329c8"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "eccb9023d4ff1b71d80fec844755939d8d00481a081e923492231e74d7977b47"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Mundilfari, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Norse-group moon of Saturn measured in a single nine-hour Cassini sequence.",
       "systemName": "Solar System",
       "order": 35,
       "context": {

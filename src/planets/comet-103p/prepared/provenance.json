@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "88976d55e86a1edd1ae72836fa759fb7d7966018c3486955acf0d709841d47cf"
+    "sha256": "c3ea1e0a862c11cc37590ee2b57b97634f668e92cc2061c6e335d25b5594cc7e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "06aff71c57b984b73f4e6f779ef2bedbd6bf384ffdbd03149b3ade2c7c5fd4c4"
   },
   "recipes": [
     {
@@ -216,14 +216,13 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ab3111e15c3a0d169e02fe1916b617c101579078480fbf1ad4ceb2da250c8551",
+      "sha256": "b02dfd7c64e4d211be2673bc480f56626d32bfcd386294120f6206192028ae89",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-103p",
         "displayName": "Hartley 2",
         "panel": {
-          "introduction": "EPOXI passed Hartley 2 in 2010. A smooth waist joins its two rough lobes, while jets carry gas, dust and icy particles away from the nucleus.",
           "facts": [
             {
               "id": "diameter",
@@ -255,9 +254,6 @@
             {
               "id": "constraints",
               "label": "Source constraints",
-              "description": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
-              "title": "Shape-constraint map",
-              "detail": "PDS",
               "thumbnail": "/scenes/comet-103p/comet-103p-constraints-thumbnail.webp",
               "surface": "comet-103p-constraints-surface@2x.webp",
               "poles": "comet-103p-constraints-poles@2x.webp",
@@ -277,14 +273,13 @@
                   "label": "Blue",
                   "value": "Limb outlines"
                 }
-              ]
+              ],
+              "notes": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
+              "noData": true
             },
             {
               "id": "model",
               "label": "Shape model",
-              "description": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
-              "title": "Nucleus shape reconstruction",
-              "detail": "PDS",
               "thumbnail": "/scenes/comet-103p/comet-103p-model-thumbnail.webp",
               "surface": "comet-103p-model-surface@2x.webp",
               "poles": "comet-103p-model-poles@2x.webp",
@@ -304,14 +299,13 @@
                   "label": "Shape observations",
                   "value": "4 November 2010"
                 }
-              ]
+              ],
+              "notes": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
+              "noData": true
             },
             {
               "id": "mri",
               "label": "EPOXI photographs",
-              "description": "EPOXI photographed Hartley’s smooth waist and rough lobes during its 2010 flyby. This mosaic combines MRI views with HRI images restored by the mission team. Original shadows and some restoration grain remain; the grid marks gaps or uncertain shape.",
-              "title": "EPOXI mosaic",
-              "detail": "EPOXI",
               "thumbnail": "/scenes/comet-103p/comet-103p-mri-thumbnail.webp",
               "surface": "comet-103p-mri-surface@2x.webp",
               "poles": "comet-103p-mri-poles@2x.webp",
@@ -332,7 +326,8 @@
                   "value": "3.9–8 m/pixel"
                 }
               ],
-              "summary": "MRI views and restored HRI close-ups show the smooth waist and rough lobes. The photographs retain their shadows; the grid marks gaps or uncertain shape."
+              "notes": "EPOXI photographed Hartley’s smooth waist and rough lobes during its 2010 flyby. This mosaic combines MRI views with HRI images restored by the mission team. Original shadows and some restoration grain remain; the grid marks gaps or uncertain shape.",
+              "noData": true
             }
           ]
         },
@@ -1064,7 +1059,7 @@
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
@@ -1073,8 +1068,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ab3111e15c3a0d169e02fe1916b617c101579078480fbf1ad4ceb2da250c8551",
-      "bytes": 5822,
+      "sha256": "b02dfd7c64e4d211be2673bc480f56626d32bfcd386294120f6206192028ae89",
+      "bytes": 5335,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1155,9 +1150,7 @@
       "selector": "/raster/observations/0",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints."
-      ],
+      "limitations": [],
       "lensIds": [
         "model"
       ],
@@ -1198,9 +1191,7 @@
       "selector": "/raster/observations/1",
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
-      "limitations": [
-        "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions."
-      ],
+      "limitations": [],
       "lensIds": [
         "constraints"
       ],
@@ -1241,9 +1232,7 @@
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "EPOXI photographed Hartley’s smooth waist and rough lobes during its 2010 flyby. This mosaic combines MRI views with HRI images restored by the mission team. Original shadows and some restoration grain remain; the grid marks gaps or uncertain shape."
-      ],
+      "limitations": [],
       "lensIds": [
         "mri"
       ],
@@ -1293,7 +1282,7 @@
       "recipe": "content",
       "selector": "",
       "parents": [],
-      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1305,8 +1294,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5613,
-          "sha256": "dd81b1ac6a1e742df996a2b11249c939e69ba35d9b19f6723c4301ac5dde7313",
+          "bytes": 5454,
+          "sha256": "7ec0f383707a69cc7b06a950c87c6d9ba8ab7376667ec48669f535eb331593f9",
           "verification": "bytes-verified"
         }
       ],

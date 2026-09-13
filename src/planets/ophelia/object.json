@@ -31,11 +31,6 @@
           "sha256": "25ba3537894384ddd30404780f5a37fe9ac81cc17a63e9383f90c121ea2a19e1"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "076a79449af4e44b49d34077025f0eed814dd861ce31fa51e415bf31d7b79b53"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "eb0b1708d1877de774aad04486d671e92119af218a42dd542fd7c87f44622f3e"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Ophelia, the outer shepherd of Uranus's epsilon ring.",
+      "description": "Outer shepherd of Uranus's bright epsilon ring.",
       "systemName": "Solar System",
       "order": 94,
       "context": {

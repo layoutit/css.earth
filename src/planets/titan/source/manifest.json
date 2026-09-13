@@ -2024,25 +2024,6 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
-    },
-    {
-      "id": "titan-object-text",
-      "path": "content/text.json",
-      "expectedBytes": 2783,
-      "expectedSha256": "2bc21c5a1c794a64bd71753809c5836cf5766a06b0e602ca4e65c2d6a7a1ea9b",
-      "origin": "Repository-authored Titan reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "panel",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
     }
   ],
   "generatedIntermediates": [],
