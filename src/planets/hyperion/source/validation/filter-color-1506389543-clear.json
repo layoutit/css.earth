@@ -1,0 +1,550 @@
+{
+  "body": "hyperion",
+  "mode": "feature-fit",
+  "recipeSha256": "77f5f98b82ba62804592336d70f86189434f1001e2f1d1c3d37bd7a55f0147d0",
+  "referenceCamera": {
+    "id": "n1506388174",
+    "path": "observations/N1506388174_2_CALIB.IMG",
+    "labelPath": "observations/N1506388174_2_CALIB.LBL",
+    "observerLatitude": 11.11,
+    "observerWestLongitude": 200.35,
+    "sunLatitude": 11.11,
+    "sunWestLongitude": 252.51,
+    "rangeKm": 35121.2,
+    "northAzimuthDegrees": 329.49,
+    "center": [
+      304.2,
+      704.6
+    ],
+    "pixelAngleMicroradians": 5.9896977199
+  },
+  "implementationSha256": "bc99c9c2db422577828e9ba8b0c3d49ac1e49b27f8b2a88ec7d249d774214489",
+  "mesh": {
+    "path": "shape/hyperion_30k_plt.tab",
+    "sha256": "cf90156a297d3078375583a99c2367bfe265bc5175710772e173544a25c37002"
+  },
+  "settings": {
+    "patchRadiusPixels": 13,
+    "patchSampleStepPixels": 2,
+    "patchGridStepPixels": 69,
+    "searchRadiusPixels": 9,
+    "detailBoxWidthsPixels": [
+      5,
+      31
+    ],
+    "maximumEmissionDegrees": 65,
+    "maximumReferenceIncidenceDegrees": 75,
+    "minimumValidSignal": 0.002,
+    "minimumDetailVariance": 0.000001,
+    "minimumConvolutionMarginPixels": 16,
+    "maximumSourceMeshVisibilityResidualMeters": 1
+  },
+  "method": "Rigid detector translation and roll fitted to interior image features through the published source mesh; disjoint checkerboard patches held out. A 5-pixel minus31-pixel box-mean image isolates detail for correlation only; original I/F stays unchanged. Fixed source range, focal scale, body and solar directions.",
+  "criteria": {
+    "minimumCorrelation": 0.9,
+    "minimumSeparatedPeakMargin": 0.01,
+    "minimumPeakCurvature": 0.002,
+    "minimumFitControls": 6,
+    "minimumHoldoutControls": 6,
+    "maximumHoldoutRmsPixels": 1,
+    "maximumHoldoutResidualPixels": 2
+  },
+  "reports": [
+    {
+      "filter": "CL2",
+      "id": "n1506389543",
+      "accepted": true,
+      "seedCamera": {
+        "id": "n1506389543",
+        "path": "observations/N1506389543_2_CALIB.IMG",
+        "labelPath": "observations/N1506389543_2_CALIB.LBL",
+        "observerLatitude": 10.98,
+        "observerWestLongitude": 201.75,
+        "sunLatitude": 11.11,
+        "sunWestLongitude": 253.65,
+        "rangeKm": 27394.5,
+        "northAzimuthDegrees": 329.56,
+        "center": [
+          -56.5,
+          -8.1
+        ],
+        "pixelAngleMicroradians": 5.9896977199
+      },
+      "correctedCamera": {
+        "id": "n1506389543",
+        "path": "observations/N1506389543_2_CALIB.IMG",
+        "labelPath": "observations/N1506389543_2_CALIB.LBL",
+        "observerLatitude": 10.98,
+        "observerWestLongitude": 201.75,
+        "sunLatitude": 11.11,
+        "sunWestLongitude": 253.65,
+        "rangeKm": 27394.5,
+        "northAzimuthDegrees": 329.6167016809599,
+        "center": [
+          -50.79753533680443,
+          -8.696277046463115
+        ],
+        "pixelAngleMicroradians": 5.9896977199
+      },
+      "fit": {
+        "count": 9,
+        "rmsPixels": 1.5158772615811038,
+        "maximumPixels": 3.036624903180964
+      },
+      "holdout": {
+        "count": 8,
+        "rmsPixels": 0.9969003641968732,
+        "maximumPixels": 1.9627669819398723
+      },
+      "reference": {
+        "id": "n1506388174",
+        "sha256": "b255f7921c6a03784e0de245bca7b36477058ad6d4b57f3e82ff5c7121c83002"
+      },
+      "targetSha256": "a61fdaa3c60e0f2517036bf7c29626bc165db8eac8f8cfc11f8c8034d371bfc1",
+      "controls": [
+        {
+          "partition": "fit",
+          "referencePixel": [
+            358,
+            794
+          ],
+          "pointMeters": [
+            -107101.01573510095,
+            39508.66314983368,
+            120.75823549553752
+          ],
+          "predictedPixel": [
+            26.299895423866587,
+            96.67584683213892
+          ],
+          "measuredPixel": [
+            33.7593004588461,
+            95.76958158387485
+          ],
+          "offset": [
+            7.45940503497951,
+            -0.9062652482640682
+          ],
+          "correlation": 0.9170598247633902,
+          "residualPixels": 1.9014895789535218
+        },
+        {
+          "partition": "holdout",
+          "referencePixel": [
+            427,
+            794
+          ],
+          "pointMeters": [
+            -113680.71266068518,
+            28654.112722447142,
+            -6894.207881064154
+          ],
+          "predictedPixel": [
+            114.94310955324582,
+            96.29485103008528
+          ],
+          "measuredPixel": [
+            120.08155851891624,
+            95.44147508066658
+          ],
+          "offset": [
+            5.138448965670416,
+            -0.853375949418702
+          ],
+          "correlation": 0.9540862679846467,
+          "residualPixels": 0.6278967629325259
+        },
+        {
+          "partition": "fit",
+          "referencePixel": [
+            496,
+            794
+          ],
+          "pointMeters": [
+            -118223.60458073765,
+            17043.166033562273,
+            -14337.769218697213
+          ],
+          "predictedPixel": [
+            203.31626109354465,
+            96.10437854123697
+          ],
+          "measuredPixel": [
+            207.64524496763002,
+            95.97459145942243
+          ],
+          "offset": [
+            4.328983874085379,
+            -0.12978708181453627
+          ],
+          "correlation": 0.9560387958490867,
+          "residualPixels": 1.2873770639806448
+        },
+        {
+          "partition": "holdout",
+          "referencePixel": [
+            565,
+            794
+          ],
+          "pointMeters": [
+            -121582.50015328825,
+            4990.670957811177,
+            -22031.64475567732
+          ],
+          "predictedPixel": [
+            291.52810962290863,
+            96.02471132915059
+          ],
+          "measuredPixel": [
+            296.2963826353567,
+            96.41778759513362
+          ],
+          "offset": [
+            4.768273012448059,
+            0.393076265983029
+          ],
+          "correlation": 0.9107343382110624,
+          "residualPixels": 1.0519158801303792
+        },
+        {
+          "partition": "fit",
+          "referencePixel": [
+            634,
+            794
+          ],
+          "pointMeters": [
+            -121255.59828579798,
+            -8436.919296633452,
+            -30505.098579037935
+          ],
+          "predictedPixel": [
+            379.24083730127086,
+            96.2898528469192
+          ],
+          "measuredPixel": [
+            383.0095543956868,
+            97.10911037200401
+          ],
+          "offset": [
+            3.7687170944159556,
+            0.8192575250848081
+          ],
+          "correlation": 0.981360488995363,
+          "residualPixels": 2.0781483996480077
+        },
+        {
+          "partition": "holdout",
+          "referencePixel": [
+            703,
+            794
+          ],
+          "pointMeters": [
+            -122296.59815287217,
+            -21359.26773286611,
+            -38692.446921999566
+          ],
+          "predictedPixel": [
+            467.12673373231905,
+            96.42704816800664
+          ],
+          "measuredPixel": [
+            471.93458460700083,
+            96.73719144088359
+          ],
+          "offset": [
+            4.807850874681773,
+            0.3101432728769625
+          ],
+          "correlation": 0.9319762390891345,
+          "residualPixels": 0.8810801325742875
+        },
+        {
+          "partition": "holdout",
+          "referencePixel": [
+            358,
+            863
+          ],
+          "pointMeters": [
+            -103051.62978068739,
+            45842.314438959584,
+            -12899.979197409935
+          ],
+          "predictedPixel": [
+            26.12892204321109,
+            185.55698205536112
+          ],
+          "measuredPixel": [
+            33.6002833196349,
+            185.13488504395158
+          ],
+          "offset": [
+            7.471361276423806,
+            -0.4220970114095456
+          ],
+          "correlation": 0.9527614819808377,
+          "residualPixels": 1.9627669819398723
+        },
+        {
+          "partition": "fit",
+          "referencePixel": [
+            427,
+            863
+          ],
+          "pointMeters": [
+            -110168.81679744646,
+            35185.44550808892,
+            -19802.28529346641
+          ],
+          "predictedPixel": [
+            114.84049057546781,
+            185.12602846196708
+          ],
+          "measuredPixel": [
+            120.42366570191984,
+            184.37199613717127
+          ],
+          "offset": [
+            5.583175126452039,
+            -0.7540323247958195
+          ],
+          "correlation": 0.9759023435310943,
+          "residualPixels": 0.3350556540467458
+        },
+        {
+          "partition": "holdout",
+          "referencePixel": [
+            496,
+            863
+          ],
+          "pointMeters": [
+            -114791.77603138983,
+            23603.19003239833,
+            -27230.209880423732
+          ],
+          "predictedPixel": [
+            203.22236800427896,
+            184.92637071349154
+          ],
+          "measuredPixel": [
+            208.32760697874713,
+            184.56737499713537
+          ],
+          "offset": [
+            5.105238974468153,
+            -0.35899571635615835
+          ],
+          "correlation": 0.9642220385968792,
+          "residualPixels": 0.4065489742259558
+        },
+        {
+          "partition": "fit",
+          "referencePixel": [
+            565,
+            863
+          ],
+          "pointMeters": [
+            -119357.82945062965,
+            11998.911982830614,
+            -34670.701371659525
+          ],
+          "predictedPixel": [
+            291.5931823290276,
+            184.73202691121287
+          ],
+          "measuredPixel": [
+            296.58530065901425,
+            184.22652279481008
+          ],
+          "offset": [
+            4.992118329986604,
+            -0.5055041164027894
+          ],
+          "correlation": 0.9773901200970869,
+          "residualPixels": 0.5779608943880155
+        },
+        {
+          "partition": "holdout",
+          "referencePixel": [
+            634,
+            863
+          ],
+          "pointMeters": [
+            -121019.86496145278,
+            -687.4946375526488,
+            -42726.14113858063
+          ],
+          "predictedPixel": [
+            379.5714731393666,
+            184.8070875352088
+          ],
+          "measuredPixel": [
+            384.5502943047066,
+            184.81393702405754
+          ],
+          "offset": [
+            4.978821165339997,
+            0.006849488848731964
+          ],
+          "correlation": 0.9882558570674963,
+          "residualPixels": 0.5595104225718642
+        },
+        {
+          "partition": "fit",
+          "referencePixel": [
+            703,
+            863
+          ],
+          "pointMeters": [
+            -121602.04566132277,
+            -13779.70681354776,
+            -51012.40799282119
+          ],
+          "predictedPixel": [
+            467.39627780596004,
+            184.9823152207188
+          ],
+          "measuredPixel": [
+            472.05618387587907,
+            185.15480325039113
+          ],
+          "offset": [
+            4.659906069919014,
+            0.17248802967233604
+          ],
+          "correlation": 0.9802581654462066,
+          "residualPixels": 0.8872860939063401
+        },
+        {
+          "partition": "fit",
+          "referencePixel": [
+            358,
+            932
+          ],
+          "pointMeters": [
+            -97734.40323852003,
+            51708.150491558015,
+            -26190.928459418006
+          ],
+          "predictedPixel": [
+            25.792337805725325,
+            274.55002338501475
+          ],
+          "measuredPixel": [
+            34.25144110069765,
+            274.07215877772654
+          ],
+          "offset": [
+            8.459103294972321,
+            -0.4778646072882167
+          ],
+          "correlation": 0.908053147383781,
+          "residualPixels": 3.036624903180964
+        },
+        {
+          "partition": "holdout",
+          "referencePixel": [
+            427,
+            932
+          ],
+          "pointMeters": [
+            -106601.9620912373,
+            41697.95939794555,
+            -32724.393278641626
+          ],
+          "predictedPixel": [
+            114.73073789083759,
+            273.9585128509971
+          ],
+          "measuredPixel": [
+            120.84461982346171,
+            272.8611974459949
+          ],
+          "offset": [
+            6.113881932624119,
+            -1.0973154050022353
+          ],
+          "correlation": 0.984936368033504,
+          "residualPixels": 0.9624723624978553
+        },
+        {
+          "partition": "fit",
+          "referencePixel": [
+            496,
+            932
+          ],
+          "pointMeters": [
+            -113333.35347623378,
+            30897.36330603808,
+            -39707.80600995105
+          ],
+          "predictedPixel": [
+            203.389755181336,
+            273.5632814370234
+          ],
+          "measuredPixel": [
+            208.65999927278042,
+            272.5434546116558
+          ],
+          "offset": [
+            5.270244091444437,
+            -1.0198268253676295
+          ],
+          "correlation": 0.9880444044167895,
+          "residualPixels": 0.6976689750703217
+        },
+        {
+          "partition": "holdout",
+          "referencePixel": [
+            565,
+            932
+          ],
+          "pointMeters": [
+            -118602.21601377055,
+            19554.082534393296,
+            -47000.245096731
+          ],
+          "predictedPixel": [
+            291.85389692606475,
+            273.30253609817055
+          ],
+          "measuredPixel": [
+            296.63646162984094,
+            273.1220181448587
+          ],
+          "offset": [
+            4.782564703776178,
+            -0.18051795331184356
+          ],
+          "correlation": 0.9769092058022512,
+          "residualPixels": 0.6451804940649153
+        },
+        {
+          "partition": "fit",
+          "referencePixel": [
+            634,
+            932
+          ],
+          "pointMeters": [
+            -121272.6070359461,
+            7243.647457776591,
+            -54843.606439527124
+          ],
+          "predictedPixel": [
+            379.96753313572486,
+            273.2808227068825
+          ],
+          "measuredPixel": [
+            385.04788101313306,
+            273.28923768148127
+          ],
+          "offset": [
+            5.080347877408201,
+            0.008414974598811617
+          ],
+          "correlation": 0.9870675727310397,
+          "residualPixels": 0.38450130602022986
+        }
+      ]
+    }
+  ]
+}

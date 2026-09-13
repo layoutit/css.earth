@@ -3,6 +3,11 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {decodeCalibratedCamera,controlledShapeCamera,insetCoverage} from './shape-camera-mosaic.mts';
 import {parsePdsPlateShape} from './obj-shape.mts';
+import {mkdtemp,writeFile,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {prepareShapeCameraColor} from './shape-camera-mosaic.mts';
+import {parseCameraFrame} from './source-records.mts';
 
 test('calibrated VICAR skips binary telemetry and honors source byte order',()=>{
   for(const endian of ['RIEEE','IEEE']){
@@ -69,4 +74,41 @@ test('coverage uncertainty insets known gaps while retaining dark valid interior
   assert.equal(image.data[5*width+7],Math.fround(.00001));
   assert.equal(image.missing[2*width+5],1); // Raster edge receives the same margin.
   assert.throws(()=>insetCoverage(image,-1),/inset/);
+});
+
+test('color pointings extend coverage as complete triplets and retain an earlier triplet when one new band is missing',async()=>{
+  const root=await mkdtemp(join(tmpdir(),'camera-color-'));
+  try{
+    await writeFile(join(root,'shape.tab'),'6 8\n200 0 0\n-200 0 0\n0 200 0\n0 -200 0\n0 0 200\n0 0 -200\n0 2 4\n2 1 4\n1 3 4\n3 0 4\n2 0 5\n1 2 5\n3 1 5\n0 3 5');
+    const shape={path:'shape.tab',format:'pds-plate-model',grid:{metersPerUnit:1,expectedVertices:6,expectedFaces:8,indexBase:0}};
+    const channels:{channel:string;filter:string;frames:ReturnType<typeof parseCameraFrame>[]}[]=[];
+    for(const [c,channel] of ['red','green','blue'].entries()){
+      const frames=[];
+      for(let set=0;set<2;set++){
+        const id=`frame-${set}-${c}`,path=id+'.img',labelPath=id+'.lbl',bytes=Buffer.alloc(512+32*32*4);
+        bytes.write("LBLSIZE=512 FORMAT='REAL' ORG='BSQ' NS=32 NL=32 NB=1 NBB=0 NLB=0 RECSIZE=128 REALFMT='RIEEE'");
+        for(let i=0;i<1024;i++)bytes.writeFloatLE(set===1&&c===1&&i%32<16?NaN:[[.6,.3,.1],[.1,.6,.3]][set][c],512+i*4);
+        await writeFile(join(root,path),bytes);await writeFile(join(root,labelPath),'Synthetic calibrated detector fixture');
+        frames.push(parseCameraFrame({id,path,labelPath,observerLatitude:0,observerWestLongitude:0,sunLatitude:0,sunWestLongitude:0,rangeKm:set?900:1000,
+          northAzimuthDegrees:0,center:[set?24:8,16],pixelAngleMicroradians:6}));
+      }
+      channels.push({channel,filter:channel,frames});
+    }
+    const base={channels,photometry:{model:'observed',weight:.5,maximumGain:1,maximumIncidenceDegrees:75,maximumEmissionDegrees:75,displayMaximum:1,gamma:1,minimumLevel:1,maximumLevel:1},metadata:{falseColor:true}};
+    const prepare=(selected:typeof channels)=>prepareShapeCameraColor(root,selected.flatMap(c=>c.frames.flatMap(f=>[{path:f.path,width:32,height:32},{path:f.labelPath}])),{...base,channels:selected},96,48,shape);
+    const first=await prepare(channels.map(c=>({...c,frames:[c.frames[0]]}))),second=await prepare(channels.map(c=>({...c,frames:[c.frames[1]]}))),merged=await prepare(channels);
+    let retained=0,extended=0,overlap=0;
+    for(let i=0;i<merged.missing.length;i++){
+      assert.equal(merged.missing[i],Number(Boolean(first.missing[i]&&second.missing[i])));
+      const pixel=merged.rgb.subarray(i*3,i*3+3);
+      if(!first.missing[i]&&second.missing[i]){retained++;assert.deepEqual(pixel,first.rgb.subarray(i*3,i*3+3));}
+      if(first.missing[i]&&!second.missing[i]){extended++;assert.deepEqual(pixel,second.rgb.subarray(i*3,i*3+3));}
+      if(!first.missing[i]&&!second.missing[i]){
+        overlap++;const alpha=(pixel[0]-first.rgb[i*3])/(second.rgb[i*3]-first.rgb[i*3]);
+        for(let c=1;c<3;c++)assert.ok(Math.abs(pixel[c]-(first.rgb[i*3+c]*(1-alpha)+second.rgb[i*3+c]*alpha))<=2,'All filters share one blend weight');
+      }
+    }
+    assert.ok(retained>0&&extended>0&&overlap>0,'Fixture exercises old coverage, new coverage and overlap');
+    await assert.rejects(prepare(channels.map((c,i)=>i?c:{...c,frames:[c.frames[0]]})),/equally sized camera sets/);
+  }finally{await rm(root,{recursive:true,force:true});}
 });
