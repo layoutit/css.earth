@@ -34,6 +34,7 @@ Feature notes: 112 of the labelled names carry a caption note, the lead summary 
 
 - Magellan colors are synthetic; they are not natural-color views.
 - The atmosphere is a display approximation, and rotation is accelerated.
+- The Magellan color source map has a darker one-pixel column at both its left and right edges (mean brightness 108 against about 124 beside them). A thin dark line can show along 180° E at close zoom.
 - The Venera photographs include archive assembly and tonal processing. PDS distributes this material outside its formally archived collection.
 - The camera and background sky do not represent an observer at a stated epoch.
 

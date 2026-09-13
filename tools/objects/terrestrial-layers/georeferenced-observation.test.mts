@@ -56,6 +56,26 @@ test('a shorter longitude footprint is not stretched or cyclically filled to cov
   assert.deepEqual([...r.missing],[0,0,1,0,0,0,1,0]);
 });
 
+test('a source declared to wrap longitude interpolates across its edge meridian instead of leaving a missing column',()=>{
+  const f=fixture();
+  // Sixteen target columns put one centre at 191.25 E, half a source cell past the last source centre (168.75 E).
+  const open=resampleGeoreferencedObservation(f.source,f.entry,policy,f.grid,16,2);
+  assert.deepEqual([...open.missing].flatMap((value,index)=>value?[index]:[]),[8,24]);
+  const wrapped=resampleGeoreferencedObservation(f.source,f.entry,{...policy,wrapLongitude:true},f.grid,16,2);
+  assert.deepEqual([...wrapped.missing],Array(32).fill(0));
+  // Independently: half-way between source columns 7 and 0 at y = 11/18 and 47/18 on the plane 10+16*x+8*y.
+  assert.deepEqual([reds(wrapped)[8],reds(wrapped)[24]],[71,87]);
+  const nearest=resampleGeoreferencedObservation(f.source,f.entry,{...policy,resampling:'source-georeferenced-nearest',wrapLongitude:true},f.grid,16,2);
+  assert.deepEqual([...nearest.missing],Array(32).fill(0));
+  assert.equal(reds(nearest)[8],18,'the cell past the last column is source column 0, row 1');
+});
+
+test('only a source spanning 360 degrees, to within one of its pixels, may declare that it wraps',()=>{
+  // 8 cells of 30 degrees cover 240 degrees: 120 degrees short, more than one 45-degree pixel.
+  const f=fixture({origin:[-120,95],resolution:[30,-45]});
+  assert.throws(()=>resampleGeoreferencedObservation(f.source,f.entry,{...policy,wrapLongitude:true},f.grid,4,2),/span 360/);
+});
+
 test('actual masked and legacy monochrome dispatch preserve the same nonintegral GeoTIFF grid',async()=>{
   const dir=await mkdtemp(join(tmpdir(),'cssearth-georeferenced-observation-'));
   try {
