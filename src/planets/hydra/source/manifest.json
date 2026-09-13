@@ -112,7 +112,7 @@
       "licenseEvidence": [
         "../../../../LICENSE"
       ],
-      "acquisition": "Checked-in 64×32 RGB raster; every channel160. This exact no-data representation is specified in measurements.json.",
+      "acquisition": "Checked-in 64\u00d732 RGB raster; every channel160. This exact no-data representation is specified in measurements.json.",
       "redistribution": "MIT display representation; preserve no-data status and source-shape attribution.",
       "consumers": [
         "surfaces"
@@ -138,13 +138,345 @@
           }
         ]
       }
+    },
+    {
+      "id": "lorri-best",
+      "path": "observations/lor_0299165548_0x630_sci.fit",
+      "expectedBytes": 10529280,
+      "expectedSha256": "7b225229428505208024279bf86104381ce24617e56be89a1cc89236ad17e91b",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165548_0x630_sci.fit",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain original mission, instrument and author attribution.",
+      "acquisition": "Restored from the pinned archive URL in preparation/acquisition.json.",
+      "consumers": [
+        "lorri-observation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-pluto-lorri-v3",
+            "role": "material",
+            "evidence": "Native PDS product identifier, release and header; kernel comments identify the adopted science-team reconstruction."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165548_0x630_sci.fit"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lorri-best-label",
+      "path": "observations/lor_0299165548_0x630_sci.lbl",
+      "expectedBytes": 46080,
+      "expectedSha256": "fd947906745512adcaf81365eac518f6019e752a618f4fb0cc335718a460a153",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165548_0x630_sci.lbl",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain original mission, instrument and author attribution.",
+      "acquisition": "Restored from the pinned archive URL in preparation/acquisition.json.",
+      "consumers": [
+        "photography-reference"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-pluto-lorri-v3",
+            "role": "reference",
+            "evidence": "Native PDS product identifier, release and header; kernel comments identify the adopted science-team reconstruction."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165548_0x630_sci.lbl"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lorri-holdout",
+      "path": "observations/lor_0299165545_0x630_sci.fit",
+      "expectedBytes": 10529280,
+      "expectedSha256": "d8d89e5e679c22435e7c800b3d617498fb8d4148f1b54aa3fc8c7d00f3cb5964",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165545_0x630_sci.fit",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain original mission, instrument and author attribution.",
+      "acquisition": "Restored from the pinned archive URL in preparation/acquisition.json.",
+      "consumers": [
+        "photography-reference"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-pluto-lorri-v3",
+            "role": "reference",
+            "evidence": "Native PDS product identifier, release and header; kernel comments identify the adopted science-team reconstruction."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165545_0x630_sci.fit"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lorri-holdout-label",
+      "path": "observations/lor_0299165545_0x630_sci.lbl",
+      "expectedBytes": 46080,
+      "expectedSha256": "e211894f4be15fdff20eb16afdffb68e9487d34f09e677551a9d34b1ac5f99e2",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165545_0x630_sci.lbl",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain original mission, instrument and author attribution.",
+      "acquisition": "Restored from the pinned archive URL in preparation/acquisition.json.",
+      "consumers": [
+        "photography-reference"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-pluto-lorri-v3",
+            "role": "reference",
+            "evidence": "Native PDS product identifier, release and header; kernel comments identify the adopted science-team reconstruction."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165545_0x630_sci.lbl"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pluto-system-orientation",
+      "path": "geometry/nh_pcnh_010.tpc",
+      "expectedBytes": 13614,
+      "expectedSha256": "cf79342b3cc13d8dab485ce87ebfb2d74d12e3f79039de260e730aaaefffce01",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/nh-j_p_ss-spice-6-v1.0/nhsp_1000/data/pck/nh_pcnh_010.tpc",
+      "credit": "NASA/JPL NAIF; Southwest Research Institute / New Horizons science team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain original mission, instrument and author attribution.",
+      "acquisition": "Restored from the pinned archive URL in preparation/acquisition.json.",
+      "consumers": [
+        "photography-reference"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-pluto-pck-v010",
+            "role": "method",
+            "evidence": "Native PDS product identifier, release and header; kernel comments identify the adopted science-team reconstruction."
+          }
+        ]
+      }
+    },
+    {
+      "id": "registered-lorri-camera",
+      "path": "observations/best-camera.json",
+      "origin": "Prepared from the pinned PDS mission kernel, native TAN-SIP camera and unchanged Porter2021 source mesh.",
+      "credit": "NASA / JHUAPL / SwRI; Simon Porter; cssEarth pointing refinement",
+      "license": "MIT for authored preparation; original source notices retained.",
+      "redistribution": "Retain original source attribution and the registration limitations.",
+      "acquisition": "node tools/objects/new-horizons/prepare-photographic-cameras.mts src/planets/hydra/source/preparation/photography.json",
+      "consumers": [
+        "lorri-observation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Experimental camera from pinned PDS pole/phase, source mesh and native WCS, with two fitted detector translations. Separate views and withheld interior regions measure limitations; the camera remains unqualified for photographic publication."
+      },
+      "expectedBytes": 2917,
+      "expectedSha256": "52d4415d0070d87828cf0a4794223bce26bfd5e32d411b3d988c10c8b349bddb"
+    },
+    {
+      "path": "preparation/photography.json",
+      "expectedBytes": 1890,
+      "expectedSha256": "94b0b7cb224efcdc07d0dbf536056c8b86b8d7c7f2dc4f96e4536c091e136760",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Source-bound diagnostic recipe retains native image, mesh and PCK pins, with spatially separate fit and holdout regions and independent views."
+      },
+      "id": "photography-registration",
+      "consumers": [
+        "photography-reference"
+      ],
+      "origin": "Project-authored source-bound camera registration recipe.",
+      "credit": "cssEarth",
+      "license": "MIT",
+      "acquisition": "Checked-in recipe; reproduced by tools/objects/new-horizons/prepare-photographic-cameras.mts",
+      "redistribution": "MIT recipe; preserve the original source credits and recorded limitations."
+    },
+    {
+      "id": "lorri-interior-validation",
+      "path": "observations/lor_0299165692_0x630_sci.fit",
+      "expectedBytes": 10529280,
+      "expectedSha256": "03039ad34f31052c538497497bfa4651c93bb2aea60d8591346cc99919f46c67",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/NHxxLO_xxxx/NHPELO_2001/data/20150714_029916/lor_0299165692_0x630_sci.fit",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain original mission, instrument and author attribution.",
+      "acquisition": "Restored from the pinned archive URL in preparation/acquisition.json.",
+      "consumers": [
+        "photography-reference"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-pluto-lorri-v3",
+            "role": "reference",
+            "evidence": "Native calibrated PDS LORRI observation and its original label; separate exposure for spatially withheld interior registration checks."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/NHxxLO_xxxx/NHPELO_2001/data/20150714_029916/lor_0299165692_0x630_sci.fit"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lorri-interior-validation-label",
+      "path": "observations/lor_0299165692_0x630_sci.lbl",
+      "expectedBytes": 46080,
+      "expectedSha256": "f060d206462807a5444a56ea2704fb2008672ebb50effb4b3bbbab9bd3cd16a9",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/NHxxLO_xxxx/NHPELO_2001/data/20150714_029916/lor_0299165692_0x630_sci.lbl",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain original mission, instrument and author attribution.",
+      "acquisition": "Restored from the pinned archive URL in preparation/acquisition.json.",
+      "consumers": [
+        "photography-reference"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-pluto-lorri-v3",
+            "role": "reference",
+            "evidence": "Native calibrated PDS LORRI observation and its original label; separate exposure for spatially withheld interior registration checks."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/NHxxLO_xxxx/NHPELO_2001/data/20150714_029916/lor_0299165692_0x630_sci.lbl"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lorri-wide-validation",
+      "path": "observations/lor_0299155705_0x636_sci.fit",
+      "expectedBytes": 10529280,
+      "expectedSha256": "93851402e9d15729f721c5e84a3bb9fe299590b854f198fb7190f92487cc4252",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/NHxxLO_xxxx/NHPELO_2001/data/20150714_029915/lor_0299155705_0x636_sci.fit",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain original mission, instrument and author attribution.",
+      "acquisition": "Restored from the pinned archive URL in preparation/acquisition.json.",
+      "consumers": [
+        "photography-reference"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-pluto-lorri-v3",
+            "role": "reference",
+            "evidence": "Native calibrated PDS LORRI image and label; wider-angle observation used to investigate model registration."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/NHxxLO_xxxx/NHPELO_2001/data/20150714_029915/lor_0299155705_0x636_sci.fit"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lorri-wide-validation-label",
+      "path": "observations/lor_0299155705_0x636_sci.lbl",
+      "expectedBytes": 46080,
+      "expectedSha256": "46c67fe8f111cd6d88d342f45cadcebd594bb9c72f8f57c403add15f6f58e5ed",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/NHxxLO_xxxx/NHPELO_2001/data/20150714_029915/lor_0299155705_0x636_sci.lbl",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain original mission, instrument and author attribution.",
+      "acquisition": "Restored from the pinned archive URL in preparation/acquisition.json.",
+      "consumers": [
+        "photography-reference"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-pluto-lorri-v3",
+            "role": "reference",
+            "evidence": "Native calibrated PDS LORRI image and label; wider-angle observation used to investigate model registration."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/NHxxLO_xxxx/NHPELO_2001/data/20150714_029915/lor_0299155705_0x636_sci.lbl"
+          }
+        ]
+      }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3883,
-      "expectedSha256": "e2505a65631f159607e19fb11daf7591d46a2561bf1c1d262389893df5df46bd",
+      "expectedBytes": 4713,
+      "expectedSha256": "3ba91b4728f2fbf1f406a863056303ba09deed7a431ce8bec702f0a2134a2cdc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -157,8 +489,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 685,
-      "expectedSha256": "419d74ee876297a2d5b4fbefb0c2c0688d58e1366fb0014555917cccc26277d5"
+      "expectedBytes": 3132,
+      "expectedSha256": "14a9cd8f266aaa436e706be9a0f58fc240f478e158d47764a099774ffa1b1cf2"
     },
     {
       "path": "preparation/navigation.json",
@@ -172,8 +504,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2461,
-      "expectedSha256": "71421b1e078a50a3b4c2e13e5931fdd7c8178d6d86bd16a8b2d0b08c53325b01"
+      "expectedBytes": 3666,
+      "expectedSha256": "5e4d6692114eb03f0372077daf6ef5fe159f1a400f94f243077bcfe7940cb3b1"
     },
     {
       "path": "presentation/minimap.json",

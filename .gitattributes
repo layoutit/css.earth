@@ -106,6 +106,12 @@ src/planets/comet-1p/evidence/encounters/*.log -whitespace
 # Preserve native New Horizons labels, including fixed-width CRLF records.
 src/planets/arrokoth/source/observations/*.lbl -text -whitespace
 src/planets/arrokoth/source/observations/*.lblx -text -whitespace
+src/planets/nix/source/observations/*.lbl -text -whitespace
+src/planets/hydra/source/observations/*.lbl -text -whitespace
+# The native PCK history heading contains seven equals signs. Use longer
+# actual conflict markers while retaining the original kernel bytes.
+src/planets/nix/source/geometry/*.tpc -text -whitespace conflict-marker-size=32
+src/planets/hydra/source/geometry/*.tpc -text -whitespace conflict-marker-size=32
 
 # Preserve HRI-IR native calibration tables and fixed-width archive labels.
 src/planets/comet-103p/source/science/hrii/*.lbl -text -whitespace
