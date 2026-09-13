@@ -1,0 +1,67 @@
+{
+  "baseline": "ebd16155a5eb408b6a96a7eaf4c9620b8a0b8451",
+  "checks": {
+    "package": {
+      "assetCount": 38,
+      "sourceInputCount": 23
+    },
+    "sourceGeometryRecipeUnchanged": true,
+    "retainedSceneGeometryUnchanged": true,
+    "geometrySha256": "2d3ddb2bb3a788d72abca4004b9c4e39c874fd2c79ce1b06a5aec26547ba339a",
+    "surfaceTrianglesSha256": "8965be49176e7f362a41761c2b928f293f70054f0ebaa3b4a962f25ff2267753"
+  },
+  "normal": {
+    "beforeFrames": 5,
+    "afterFrames": 7,
+    "beforeGridCells": 1268390,
+    "afterGridCells": 1275448,
+    "totalGridCells": 2097152,
+    "newFrames": [
+      {
+        "id": "n1831469816_1",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "rasterOffset": 8192,
+        "encoding": "calibrated",
+        "resolutionMeters": 112.03190512318811,
+        "correctedPixels": 39950,
+        "level": 1.4,
+        "overlapSamples": 2200
+      },
+      {
+        "id": "n1831468631_1",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "rasterOffset": 8192,
+        "encoding": "calibrated",
+        "resolutionMeters": 90.97931557720719,
+        "correctedPixels": 93698,
+        "level": 1.4,
+        "overlapSamples": 5451
+      }
+    ]
+  },
+  "falseColor": {
+    "gridCells": 137013,
+    "totalGridCells": 2097152,
+    "colorDisplay": {
+      "kind": "band-composite",
+      "inputQuantity": "radiance-factor",
+      "bands": [
+        "IR3",
+        "GRN",
+        "UV3"
+      ],
+      "displayRange": [
+        0,
+        0.95
+      ],
+      "outputEncoding": "srgb",
+      "interpretation": "false-color",
+      "transferReference": "https://registry.color.org/rgb-registry/files/sRGB.pdf",
+      "processing": "Source values remain floating point through interpolation, photometry and compositing. One common range maps the selected bands to linear display channels; IEC sRGB encoding and 8-bit quantization happen once, at output. This does not reconstruct natural color."
+    }
+  },
+  "interpretation": "Grid-cell counts describe the fixed 2048 by 1024 cylindrical preparation map. They are not physical surface-area percentages or an atlas-texel count. Nominal source resolution varies across the projected surface.",
+  "recipeSha256": "9a3790e0629eca9ca4c0f3853b0e5b85b1991ef75b9c9ecbf9fd883edaefe8c2"
+}
