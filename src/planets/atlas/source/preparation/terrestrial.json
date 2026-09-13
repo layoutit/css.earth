@@ -59,11 +59,16 @@
       }
     ],
     "observedColors": [],
-    "mosaics": [
+    "surfaceObservations": [
       {
         "id": "normal",
         "format": "controlled-shape-camera",
         "consumer": "cassini-frames",
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas."
+        },
         "frames": [
           {
             "id": "n1870699307",
@@ -79,7 +84,8 @@
               197.7,
               480.9
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1870698933",
@@ -95,7 +101,8 @@
               363.6,
               340.6
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1870697721",
@@ -111,7 +118,8 @@
               484.4,
               401.5
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1560303787",
@@ -127,7 +135,8 @@
               539.6,
               528.2
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1828131657",
@@ -143,109 +152,42 @@
               956.2,
               527.6
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           }
         ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 64,
+          "minimumPairs": 64,
+          "maximumGain": 2.55,
+          "maximumAngleDegrees": 70
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 78
+        },
         "photometry": {
+          "model": "lunar-lambert",
           "weight": 0.5,
-          "maximumGain": 2.5,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
           "maximumIncidenceDegrees": 80,
           "maximumEmissionDegrees": 78,
-          "displayMaximum": 0.7,
-          "gamma": 1,
-          "minimumLevel": 0.7,
-          "maximumLevel": 1.4,
-          "backgroundMaximum": 0.003
+          "maximumGain": 2.5
         },
-        "metadata": {
-          "label": "Monochrome",
-          "falseColor": false,
-          "coverage": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas."
+        "display": {
+          "displayRange": [
+            0,
+            0.928
+          ]
         }
       },
       {
         "id": "filter-color",
         "format": "controlled-shape-color",
         "consumer": "cassini-color-frames",
-        "channels": [
-          {
-            "channel": "red",
-            "filter": "IR3",
-            "frames": [
-              {
-                "id": "n1870699274",
-                "path": "observations/N1870699274_1_CALIB.IMG",
-                "labelPath": "observations/N1870699274_1_CALIB.LBL",
-                "observerLatitude": 32.35,
-                "observerWestLongitude": 151.71,
-                "sunLatitude": 26.73,
-                "sunWestLongitude": 191.65,
-                "rangeKm": 15121.7,
-                "northAzimuthDegrees": 356.58,
-                "center": [
-                  215,
-                  460.5
-                ],
-                "pixelAngleMicroradians": 5.989697719850105,
-                "coverageInsetPixels": 2
-              }
-            ]
-          },
-          {
-            "channel": "green",
-            "filter": "GRN",
-            "frames": [
-              {
-                "id": "n1870699208",
-                "path": "observations/N1870699208_1_CALIB.IMG",
-                "labelPath": "observations/N1870699208_1_CALIB.LBL",
-                "observerLatitude": 35.5,
-                "observerWestLongitude": 149.65,
-                "sunLatitude": 26.73,
-                "sunWestLongitude": 191.2,
-                "rangeKm": 16089.7,
-                "northAzimuthDegrees": 0.17,
-                "center": [
-                  248.2,
-                  424.6
-                ],
-                "pixelAngleMicroradians": 5.989697719850105,
-                "coverageInsetPixels": 2
-              }
-            ]
-          },
-          {
-            "channel": "blue",
-            "filter": "UV3",
-            "frames": [
-              {
-                "id": "n1870699153",
-                "path": "observations/N1870699153_1_CALIB.IMG",
-                "labelPath": "observations/N1870699153_1_CALIB.LBL",
-                "observerLatitude": 37.87,
-                "observerWestLongitude": 147.96,
-                "sunLatitude": 26.72,
-                "sunWestLongitude": 190.8,
-                "rangeKm": 16955.8,
-                "northAzimuthDegrees": 2.57,
-                "center": [
-                  272.7,
-                  405.3
-                ],
-                "pixelAngleMicroradians": 5.989697719850105,
-                "coverageInsetPixels": 2
-              }
-            ]
-          }
-        ],
-        "photometry": {
-          "model": "observed",
-          "weight": 0.5,
-          "maximumGain": 1,
-          "maximumIncidenceDegrees": 75,
-          "maximumEmissionDegrees": 75,
-          "backgroundMaximum": 0.003
-        },
         "metadata": {
           "label": "False color",
           "falseColor": true,
@@ -255,15 +197,103 @@
             "url": "https://pds-rings.seti.org/cassini/iss/"
           }
         },
+        "bands": [
+          {
+            "channel": "red",
+            "filter": "IR3"
+          },
+          {
+            "channel": "green",
+            "filter": "GRN"
+          },
+          {
+            "channel": "blue",
+            "filter": "UV3"
+          }
+        ],
+        "frames": [
+          {
+            "id": "set-1",
+            "red": {
+              "id": "n1870699274",
+              "path": "observations/N1870699274_1_CALIB.IMG",
+              "labelPath": "observations/N1870699274_1_CALIB.LBL",
+              "observerLatitude": 32.35,
+              "observerWestLongitude": 151.71,
+              "sunLatitude": 26.73,
+              "sunWestLongitude": 191.65,
+              "rangeKm": 15121.7,
+              "northAzimuthDegrees": 356.58,
+              "center": [
+                215,
+                460.5
+              ],
+              "pixelAngleMicroradians": 5.989697719850105,
+              "coverageInsetPixels": 2,
+              "backgroundMaximum": 0.003
+            },
+            "green": {
+              "id": "n1870699208",
+              "path": "observations/N1870699208_1_CALIB.IMG",
+              "labelPath": "observations/N1870699208_1_CALIB.LBL",
+              "observerLatitude": 35.5,
+              "observerWestLongitude": 149.65,
+              "sunLatitude": 26.73,
+              "sunWestLongitude": 191.2,
+              "rangeKm": 16089.7,
+              "northAzimuthDegrees": 0.17,
+              "center": [
+                248.2,
+                424.6
+              ],
+              "pixelAngleMicroradians": 5.989697719850105,
+              "coverageInsetPixels": 2,
+              "backgroundMaximum": 0.003
+            },
+            "blue": {
+              "id": "n1870699153",
+              "path": "observations/N1870699153_1_CALIB.IMG",
+              "labelPath": "observations/N1870699153_1_CALIB.LBL",
+              "observerLatitude": 37.87,
+              "observerWestLongitude": 147.96,
+              "sunLatitude": 26.72,
+              "sunWestLongitude": 190.8,
+              "rangeKm": 16955.8,
+              "northAzimuthDegrees": 2.57,
+              "center": [
+                272.7,
+                405.3
+              ],
+              "pixelAngleMicroradians": 5.989697719850105,
+              "coverageInsetPixels": 2,
+              "backgroundMaximum": 0.003
+            }
+          }
+        ],
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 75
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 75,
+          "maximumEmissionDegrees": 75,
+          "maximumGain": 1
+        },
+        "display": {
+          "displayRange": [
+            0,
+            0.8
+          ]
+        },
         "focus": {
           "longitudeDegrees": 210.35,
           "latitudeDegrees": 35.5,
           "zoom": 1.1
-        },
-        "displayRange": [
-          0,
-          0.8
-        ]
+        }
       }
     ]
   },

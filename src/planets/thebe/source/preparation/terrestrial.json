@@ -60,11 +60,20 @@
       }
     ],
     "observedColors": [],
-    "mosaics": [
+    "surfaceObservations": [
       {
         "id": "normal",
         "format": "controlled-shape-camera",
         "consumer": "galileo-clear-frames",
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Galileo clear-filter observations registered to the PDS shape. Bounded illumination normalization and overlap brightness matching reduce photographed shading. This is relative image brightness, not calibrated albedo. Gray grid marks unobserved or unreliable samples; cast shadows are not reconstructed.",
+          "attribution": {
+            "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/galileo/"
+          }
+        },
         "frames": [
           {
             "id": "c0401759200",
@@ -143,25 +152,32 @@
             "backgroundMaximum": 0.02
           }
         ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 64,
+          "minimumPairs": 64,
+          "maximumGain": 1.8,
+          "maximumAngleDegrees": 70
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 75
+        },
         "photometry": {
+          "model": "lunar-lambert",
           "weight": 0.5,
-          "maximumGain": 2.5,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
           "maximumIncidenceDegrees": 75,
           "maximumEmissionDegrees": 75,
-          "displayMaximum": 0.65,
-          "gamma": 1,
-          "minimumLevel": 0.5,
-          "maximumLevel": 2,
-          "backgroundMaximum": 0.02
+          "maximumGain": 2.5
         },
-        "metadata": {
-          "label": "Monochrome",
-          "falseColor": false,
-          "coverage": "Galileo clear-filter observations registered to the PDS shape. Bounded illumination normalization and overlap brightness matching reduce photographed shading. This is relative image brightness, not calibrated albedo. Gray grid marks unobserved or unreliable samples; cast shadows are not reconstructed.",
-          "attribution": {
-            "label": "NASA/JPL; PDS Ring-Moon Systems Node",
-            "url": "https://pds-rings.seti.org/galileo/"
-          }
+        "display": {
+          "displayRange": [
+            0,
+            0.446
+          ]
         }
       }
     ]

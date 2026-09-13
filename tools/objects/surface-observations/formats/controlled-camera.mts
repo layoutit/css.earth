@@ -70,7 +70,9 @@ function validateCameraLens(value: unknown, sourceGeometry: unknown) {
   for (const frame of requireArray(requireRecord(value).frames)) checkFrame(frame, `${CONTEXT} frame`);
   const recipe = decodeProfile(parseControlledCameraLens, value, `Invalid source-bound ${CONTEXT}.`);
   if (recipe.format !== 'controlled-shape-camera') throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
-  validateEnvelope(recipe, cameraPaths(recipe.frames), { ...RULES, displays: ['percentiles'] }, CONTEXT);
+  validateEnvelope(recipe, cameraPaths(recipe.frames), { ...RULES, displays: ['percentiles', 'displayRange'] }, CONTEXT);
+  // A uniformly bright body has no dark samples, so an authored range starts at zero instead of stretching between its own extremes.
+  if (recipe.display.displayRange !== undefined && recipe.display.displayRange[0] !== 0) throw new TypeError(`Invalid source-bound ${CONTEXT}: a monochrome display range starts at zero.`);
   validateTransfer(recipe.transfer, parseSurfaceGeometry(sourceGeometry), CONTEXT);
   validatePhotometry(recipe.photometry, requireRecord(value).photometry, recipe.transfer.maximumEmissionDegrees, false);
 }
