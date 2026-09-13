@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d1ee87bb79744f7b4d5dfa103bace8240056befa49beb380134f1e71bec58623"
+    "sha256": "af09c9638133c53c9f7e8be8969f11b8dec43411e51d081477e17ff565b10b57"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "67f8aac95c694d927968a12a22f9f131689774a060ec322d34bd589cf92c396e",
+      "sha256": "9ee5b5c1ad7c413d0769da744725d1623a9cfc02b5c8c311ebbc766f20d4fe8f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -46,11 +46,15 @@
               "id": "llorri",
               "format": "llorri-camera",
               "consumer": "llorri-observation",
-              "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
-              "cameraPath": "observations/llorri-camera.json",
-              "startTime": "2025-04-20T17:50:14.018",
               "filter": "PANCHROMATIC",
-              "allowLossy": false,
+              "frames": [
+                {
+                  "id": "llorri",
+                  "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
+                  "cameraPath": "observations/llorri-camera.json",
+                  "startTime": "2025-04-20T17:50:14.018"
+                }
+              ],
               "transfer": {
                 "maximumSourceDistanceMeters": 56,
                 "maximumSeparationMeters": 30,
@@ -65,10 +69,12 @@
                 "maximumEmissionDegrees": 70,
                 "maximumGain": 1
               },
-              "displayPercentiles": [
-                1,
-                99
-              ],
+              "display": {
+                "percentiles": [
+                  1,
+                  99
+                ]
+              },
               "metadata": {
                 "label": "L’LORRI observation",
                 "coverage": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",

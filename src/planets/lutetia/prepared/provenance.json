@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eb4f76f545e1f3ce275e50aa251d79f0c877843abc3018f50447b5ffef01d4d7"
+    "sha256": "f470f5998a2f0ca3790e2af8fb771d90f10637f64f43c17ac28d1db87cae613f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "21fc9b4e46a4a2caa6c842873d3b5e525332efd91aa0c730203088e82eb2cfb2",
+      "sha256": "5577685d91ad3a171e6547043d68155c3d0a23fef60358b53ed85c54d6991607",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,6 +90,27 @@
               "consumer": "osiris-observation",
               "filter": "FFP-Vis_Orange",
               "allowLossy": true,
+              "frames": [
+                {
+                  "id": "approach",
+                  "path": "observations/n20100710t154047674id4df22.img",
+                  "cameraPath": "observations/osiris-camera.json",
+                  "startTime": "2010-07-10T15:41:06.632"
+                },
+                {
+                  "id": "image-n20100710t154135529id4df22",
+                  "path": "observations/n20100710t154135529id4df22.img",
+                  "cameraPath": "observations/n20100710t154135529id4df22-camera.json",
+                  "startTime": "2010-07-10T15:41:54.488"
+                }
+              ],
+              "selection": "lowest-emission",
+              "levelMatching": {
+                "samplesPerTriangle": 24,
+                "minimumPairs": 64,
+                "maximumLogMad": 0.25,
+                "maximumGain": 1.35
+              },
               "transfer": {
                 "maximumSourceDistanceMeters": 1200,
                 "maximumSeparationMeters": 600,
@@ -114,35 +135,16 @@
                   "maximumGain": 2.5
                 }
               },
-              "displayPercentiles": [
-                1,
-                99
-              ],
+              "display": {
+                "percentiles": [
+                  1,
+                  99
+                ]
+              },
               "metadata": {
                 "label": "OSIRIS",
                 "coverage": "Two Rosetta orange-filter close-ups show Lutetia’s craters and ridges. Each uses the published shape and a separately checked camera. Approximate disk correction reduces broad shading; the grid marks gaps.",
                 "falseColor": false
-              },
-              "frames": [
-                {
-                  "id": "approach",
-                  "path": "observations/n20100710t154047674id4df22.img",
-                  "cameraPath": "observations/osiris-camera.json",
-                  "startTime": "2010-07-10T15:41:06.632"
-                },
-                {
-                  "id": "image-n20100710t154135529id4df22",
-                  "path": "observations/n20100710t154135529id4df22.img",
-                  "cameraPath": "observations/n20100710t154135529id4df22-camera.json",
-                  "startTime": "2010-07-10T15:41:54.488"
-                }
-              ],
-              "selection": "lowest-emission",
-              "levelMatching": {
-                "samplesPerTriangle": 24,
-                "minimumPairs": 64,
-                "maximumLogMad": 0.25,
-                "maximumGain": 1.35
               }
             }
           ]
@@ -527,34 +529,6 @@
       "verificationOperations": []
     },
     {
-      "path": "photometry/hasselmann-2016-hapke-1993.json",
-      "purpose": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "doi-10-1016-j-icarus-2015-11-023",
-            "role": "method",
-            "evidence": "Hasselmann et al. (2016) fit the Hapke (1993) model to NAC F82+F22 images of the Baetica and Etruria regions. Table 5 prints the parameters with uncertainties. Table 1 gives the 0.15-144.15 degree phase range, and the analysis removed facets beyond 80 degrees incidence or emission.",
-            "locator": "Table 5, Hapke (1993) column; Table 1, NAC F82+F22 row"
-          }
-        ]
-      },
-      "id": "source-document:photometry/hasselmann-2016-hapke-1993.json",
-      "kind": "source-document",
-      "origin": "object:source/photometry/hasselmann-2016-hapke-1993.json",
-      "title": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
-      "credit": "Credit not recorded in source manifest.",
-      "acquisition": "Acquisition not recorded in source manifest.",
-      "upstreamLineage": "not-recorded",
-      "sha256": "c2e60730c7d6c0b9bc8b5a688d8d5dfeed8fe948bb240141da3c8ecf9037f718",
-      "bytes": 663,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
       "kind": "source-input",
       "id": "lutetia-observations-n20100710t154047674id4df22-img",
       "path": "observations/n20100710t154047674id4df22.img",
@@ -660,6 +634,34 @@
       },
       "sha256": "619648154d976db683f43838d45668a140e9fac3ee508335eaf53076f2866fde",
       "bytes": 5104,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "photometry/hasselmann-2016-hapke-1993.json",
+      "purpose": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-icarus-2015-11-023",
+            "role": "method",
+            "evidence": "Hasselmann et al. (2016) fit the Hapke (1993) model to NAC F82+F22 images of the Baetica and Etruria regions. Table 5 prints the parameters with uncertainties. Table 1 gives the 0.15-144.15 degree phase range, and the analysis removed facets beyond 80 degrees incidence or emission.",
+            "locator": "Table 5, Hapke (1993) column; Table 1, NAC F82+F22 row"
+          }
+        ]
+      },
+      "id": "source-document:photometry/hasselmann-2016-hapke-1993.json",
+      "kind": "source-document",
+      "origin": "object:source/photometry/hasselmann-2016-hapke-1993.json",
+      "title": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
+      "credit": "Credit not recorded in source manifest.",
+      "acquisition": "Acquisition not recorded in source manifest.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "c2e60730c7d6c0b9bc8b5a688d8d5dfeed8fe948bb240141da3c8ecf9037f718",
+      "bytes": 663,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -889,11 +891,11 @@
         "kind": "surfaceObservations"
       },
       "inputs": [
-        "source-document:photometry/hasselmann-2016-hapke-1993.json",
         "lutetia-observations-n20100710t154047674id4df22-img",
         "lutetia-observations-osiris-camera-json",
         "lutetia-n20100710t154135529id4df22-img",
         "lutetia-n20100710t154135529id4df22-camera",
+        "source-document:photometry/hasselmann-2016-hapke-1993.json",
         "lutetia-shape"
       ],
       "outputs": [

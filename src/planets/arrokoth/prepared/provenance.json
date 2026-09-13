@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "729909dd1d95664212902bccd6cf3f5ec74367cdaa671d48e742795815935152"
+    "sha256": "bb6b7979909764bfc0cc06a8339493bc3278ee8d60afb06ed5b312011da0a8dd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "df26536cdfe20b8ee284ba00e45c154f203682904bec2ea6e6be09851f64e1b6",
+      "sha256": "ab09d3c4d323427c27d2c9274116446d18c20faa856096ec9e085ed5e62f3619",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -84,11 +84,15 @@
               "id": "lorri",
               "format": "nh-lorri-camera",
               "consumer": "lorri-observation",
-              "path": "observations/lor_0408626332_0x636_sci.fit",
-              "cameraPath": "observations/ca06-camera.json",
-              "startTime": "2019-01-01T05:26:54.116",
               "filter": "PANCHROMATIC",
-              "allowLossy": false,
+              "frames": [
+                {
+                  "id": "lorri",
+                  "path": "observations/lor_0408626332_0x636_sci.fit",
+                  "cameraPath": "observations/ca06-camera.json",
+                  "startTime": "2019-01-01T05:26:54.116"
+                }
+              ],
               "transfer": {
                 "maximumSourceDistanceMeters": 250,
                 "maximumSeparationMeters": 180,
@@ -103,10 +107,12 @@
                 "maximumEmissionDegrees": 70,
                 "maximumGain": 1
               },
-              "displayPercentiles": [
-                1,
-                99.8
-              ],
+              "display": {
+                "percentiles": [
+                  1,
+                  99.8
+                ]
+              },
               "metadata": {
                 "label": "LORRI",
                 "falseColor": false,
@@ -117,11 +123,15 @@
               "id": "mvic",
               "format": "nh-mvic-camera",
               "consumer": "mvic-observation",
-              "path": "observations/ca05_mvic_cube.fit",
-              "cameraPath": "observations/mvic-camera.json",
-              "startTime": "2019-01-01T05:12:55.280",
               "filter": "NIR/RED/BLUE",
-              "allowLossy": false,
+              "frames": [
+                {
+                  "id": "mvic",
+                  "path": "observations/ca05_mvic_cube.fit",
+                  "cameraPath": "observations/mvic-camera.json",
+                  "startTime": "2019-01-01T05:12:55.280"
+                }
+              ],
               "transfer": {
                 "maximumSourceDistanceMeters": 250,
                 "maximumSeparationMeters": 600,
@@ -136,18 +146,16 @@
                 "maximumEmissionDegrees": 65,
                 "maximumGain": 1
               },
-              "displayPercentiles": [
-                1,
-                99.8
-              ],
+              "display": {
+                "linear": [
+                  0,
+                  0.17
+                ]
+              },
               "metadata": {
                 "label": "MVIC",
                 "falseColor": true,
                 "coverage": "New Horizons near-infrared, red and blue bands, registered and blur-matched by the mission team. Enhanced color at 340 m native resolution. Unseen and grazing surfaces remain gridded."
-              },
-              "colorDisplay": {
-                "minimum": 0,
-                "maximum": 0.17
               }
             }
           ]

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "87623847528765d271dfaa37ec6609325b8e109bdddde78c2c096a7e38cf1d76"
+    "sha256": "267af0bf6e897949d5cfc05e5b4d81af8b781e2bd608a84c33c7ceb639e6286e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e42ba397654f9b00e06f66c015bda8728b5cfc5120c2bc69bac9708e52b9f909",
+      "sha256": "9a97fc999fe62325e65911156a1709fc7435950a3fc8e76188a3f6dea009083d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,29 +101,6 @@
               "consumer": "osiris-observation",
               "filter": "Empty_OI",
               "allowLossy": true,
-              "transfer": {
-                "maximumSourceDistanceMeters": 100,
-                "maximumSeparationMeters": 450,
-                "maximumEmissionDegrees": 70,
-                "visibilityToleranceMeters": 0.5
-              },
-              "photometry": {
-                "model": "retained-observation",
-                "referenceIncidenceDegrees": 0,
-                "referenceEmissionDegrees": 0,
-                "maximumIncidenceDegrees": 70,
-                "maximumEmissionDegrees": 70,
-                "maximumGain": 1
-              },
-              "displayPercentiles": [
-                1,
-                99
-              ],
-              "metadata": {
-                "label": "OSIRIS",
-                "coverage": "Two OI-filter photographs show Šteins as Rosetta approached. Original illumination is retained, with a bounded brightness match where the images overlap. The grid marks gaps; this is not an albedo map.",
-                "falseColor": false
-              },
               "frames": [
                 {
                   "id": "approach",
@@ -144,6 +121,31 @@
                 "minimumPairs": 64,
                 "maximumLogMad": 0.25,
                 "maximumGain": 1.35
+              },
+              "transfer": {
+                "maximumSourceDistanceMeters": 100,
+                "maximumSeparationMeters": 450,
+                "maximumEmissionDegrees": 70,
+                "visibilityToleranceMeters": 0.5
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1
+              },
+              "display": {
+                "percentiles": [
+                  1,
+                  99
+                ]
+              },
+              "metadata": {
+                "label": "OSIRIS",
+                "coverage": "Two OI-filter photographs show Šteins as Rosetta approached. Original illumination is retained, with a bounded brightness match where the images overlap. The grid marks gaps; this is not an albedo map.",
+                "falseColor": false
               }
             }
           ]
