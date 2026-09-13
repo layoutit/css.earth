@@ -20,7 +20,7 @@ const json = async (path: string): Promise<unknown> => JSON.parse(await readFile
 const { sources } = parsePreparedSources(await json('../prepared-sources.json'));
 const prepared = parsePreparedExploration(await json('../prepared-machines.json'), sources);
 const catalog = prepared.catalog;
-const provenance = async (id: string): Promise<ProvenanceDocument> => validateObjectProvenance(await json(`../../src/planets/${id}/prepared/provenance.json`), id);
+const provenance = async (id: string): Promise<ProvenanceDocument> => validateObjectProvenance(await json(`../../src/objects/${id}/prepared/provenance.json`), id);
 const missions = Object.fromEntries(catalog.missions.map(mission => [mission.id, mission]));
 interface PreparedPage { readonly controls: { readonly lenses?: { readonly controls: readonly { readonly id: string; readonly label: string }[] } } }
 interface ArtworkSource { readonly sourcePage?: string; readonly sourceUrl?: string; readonly credit: string; readonly localSource?: string; readonly inputSha256?: string; }
@@ -50,7 +50,7 @@ const artworkLibrary = (value: unknown, emblem: boolean): readonly ArtworkEntry[
 async function objectInput(id: string, document: ProvenanceDocument | null = null): Promise<ContributionObject> {
   const object = OBJECTS.find(object => object.id === id);
   assert.ok(object, `${id}: registered object`);
-  const rawPage = explorationRecord(await json(`../../src/planets/${id}/prepared/page.json`));
+  const rawPage = explorationRecord(await json(`../../src/objects/${id}/prepared/page.json`));
   const rawControls = explorationRecord(rawPage.controls);
   const rawLenses = rawControls.lenses === undefined ? undefined : explorationRecord(rawControls.lenses);
   const page: PreparedPage = { controls: rawLenses === undefined ? {} : { lenses: { controls: explorationArray(rawLenses.controls, raw => {
@@ -117,7 +117,7 @@ test('every migrated capture stays bound to its source; the full prepared graph 
   const objects = []; let captured = 0, authored = 0;
   for (const object of OBJECTS) {
     const document = await provenance(object.id);
-    const manifest = explorationRecord(await json(`../../src/planets/${object.id}/source/manifest.json`));
+    const manifest = explorationRecord(await json(`../../src/objects/${object.id}/source/manifest.json`));
     const inputs = explorationArray(manifest.inputs, raw => {
       const input = explorationRecord(raw); return { id: explorationText(input.id), capture: input.capture };
     });

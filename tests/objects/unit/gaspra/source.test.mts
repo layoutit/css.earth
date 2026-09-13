@@ -6,7 +6,7 @@ import {loadPdsRadialTable} from '../../../../tools/objects/terrestrial-layers/p
 import {prepareFitsObservation} from '../../../../tools/objects/terrestrial-layers/observed-fits.mts';
 import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {evaluateRegistration} from './registration.mts';
-const directory='src/planets/gaspra/source',read=async (path: string)=>JSON.parse(await readFile(`${directory}/${path}`,'utf8'));
+const directory='src/objects/gaspra/source',read=async (path: string)=>JSON.parse(await readFile(`${directory}/${path}`,'utf8'));
 
 test('Gaspra radial model keeps independent west-longitude source anchors',async()=>{
  const config=await read('preparation/terrestrial.json'),grid=await loadPdsRadialTable(`${directory}/shape/951gaspra.tab`,config.geometry.radialTerrain.grid);
@@ -43,7 +43,7 @@ test('Gaspra rotation binds the pinned NAIF pole and spin',async()=>{
 
 test('Gaspra prepared silhouette keeps bounded sampled error against the source radii',async()=>{
  const config=await read('preparation/terrestrial.json'),source=await loadPdsRadialTable(`${directory}/shape/951gaspra.tab`,config.geometry.radialTerrain.grid);
- const {faces}=JSON.parse(await readFile('src/planets/gaspra/prepared/terrain.json','utf8')),metersPerUnit=6100/config.geometry.radius;
+ const {faces}=JSON.parse(await readFile('src/objects/gaspra/prepared/terrain.json','utf8')),metersPerUnit=6100/config.geometry.radius;
  const text=faces.flatMap((f: { vertices: number[][]; })=>f.vertices.map((v: number[])=>'v '+v.map((n: number)=>n*metersPerUnit).join(' '))).join('\n')+'\n'+faces.map((_:unknown,i: number)=>`f ${i*3+1} ${i*3+2} ${i*3+3}`).join('\n');
  const reduced=parseObjShape(text,{metersPerUnit:1,expectedVertices:faces.length*3,expectedFaces:faces.length}),errors=[];
  for(let y=0;y<40;y++)for(let x=0;x<80;x++){

@@ -2,7 +2,7 @@
 import type { OverviewScope } from '../overview-context.mts';
 interface Props { objectId?: string; scope?: OverviewScope; includeObject?: boolean; }
 import { OBJECTS } from '../objects.mts';
-import preparedWorld from '../../src/planets/sun/prepared/world-context.json';
+import preparedWorld from '../../src/objects/sun/prepared/world-context.json';
 import { solarSystemFocus } from '../overview-selection.mts';
 
 const { objectId, scope, includeObject = false } = Astro.props;

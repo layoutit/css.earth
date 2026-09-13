@@ -11,7 +11,7 @@ const json = (value: unknown) => JSON.stringify(value, null, 2) + '\n';
 // A completed anonymous acquisition is installed only after every source tile
 // and the reproducible mosaic have been verified. No partial face publication.
 export async function installMurEnso(root: string, acquiredDirectory: string) {
-  const object = resolve(root, 'src/planets/earth'), source = join(object, 'source');
+  const object = resolve(root, 'src/objects/earth'), source = join(object, 'source');
   const config = await readMapConfiguration(join(source, 'preparation/paged-ellipsoid.json'));
   const map = config.surface.maps.find(map => map.name === 'earth-enso');
   const receipt = parseMurReceipt(await readJsonSource(join(acquiredDirectory, 'mur-gibs-receipt.json')));
@@ -60,7 +60,7 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
     const at = manifest.inputs.findIndex(e => e.id === id); if (at < 0) manifest.inputs.push(record); else manifest.inputs[at] = record;
   }
   const mosaic = { id: 'nasa-mur-gibs-mosaic', path: 'science/mur-gibs.png', origin: 'tools/objects/paged-ellipsoid/mur-imagery.mts',
-    generator: 'tools/objects/paged-ellipsoid/mur-imagery.mts restore src/planets/earth/source/science',
+    generator: 'tools/objects/paged-ellipsoid/mur-imagery.mts restore src/objects/earth/source/science',
     expectedSha256: receipt.mosaic.sha256, expectedBytes: requireUpdateBytes(updates, 'science/mur-gibs.png').length,
     description: 'Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.',
     consumers: ['enso'] };

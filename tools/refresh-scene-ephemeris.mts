@@ -17,7 +17,7 @@ import { prepareObjectJson } from './prepare-object-json.mts';
 const states = await loadSceneEpochEphemeris(SOLAR_GEOMETRY_EPOCH_JD_TT);
 const ids = [...states.keys()].filter(id => id !== 'earth');
 for (const id of ids) {
-  const directory = resolve('src/planets', id), output = resolve(directory, 'prepared');
+  const directory = resolve('src/objects', id), output = resolve(directory, 'prepared');
   const descriptor = parseObjectDescriptor(await readFile(resolve(directory, 'object.json'), 'utf8'));
   const recipe=requireRecord(descriptor.properties.recipe);
   const source = requireArray(recipe.sources).map(value=>requireRecord(value)).find(source => source.id === 'terrestrial');

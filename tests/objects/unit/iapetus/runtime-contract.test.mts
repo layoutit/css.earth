@@ -4,11 +4,11 @@
 import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../src/planets/iapetus/prepared/runtime.json" with { type: "json" };
-import assets from "../../../../src/planets/iapetus/prepared/assets.json" with { type: "json" };
-import scene from "../../../../src/planets/iapetus/prepared/scene.json" with { type: "json" };
-import lenses from "../../../../src/planets/iapetus/prepared/lenses.json" with { type: "json" };
-import controls from "../../../../src/planets/iapetus/prepared/controls.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/iapetus/prepared/runtime.json" with { type: "json" };
+import assets from "../../../../src/objects/iapetus/prepared/assets.json" with { type: "json" };
+import scene from "../../../../src/objects/iapetus/prepared/scene.json" with { type: "json" };
+import lenses from "../../../../src/objects/iapetus/prepared/lenses.json" with { type: "json" };
+import controls from "../../../../src/objects/iapetus/prepared/controls.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";

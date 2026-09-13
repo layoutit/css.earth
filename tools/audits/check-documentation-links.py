@@ -142,7 +142,7 @@ for file in sorted(guides - reachable):
 for file in sorted(illustrations - used_illustrations):
     errors.append({'file': file, 'reason': 'illustration is not linked from a guide reachable from docs/README.md'})
 for file in sorted(known):
-    if re.fullmatch(r'src/planets/[^/]+/(?:SOURCE|EVIDENCE|USAGE)\.md', file, re.I):
+    if re.fullmatch(r'src/objects/[^/]+/(?:SOURCE|EVIDENCE|USAGE)\.md', file, re.I):
         errors.append({'file': file, 'reason': 'use the body README for sources and evidence; shared guides cover usage'})
 
 print(json.dumps({'base': base, 'markdownFiles': len(markdown),

@@ -39,7 +39,7 @@ async function main() {
   const output = resolve(args.find(a => a.startsWith('--output='))?.slice(9) ?? resolve(root, 'output/comet-intake/67p-rosetta'));
   const tileSize = Number(args.find(a => a.startsWith('--tile-size='))?.slice(12) ?? 64);
   if (![32, 64].includes(tileSize)) throw new Error('Bounded trial requires 32 or 64 pixel tiles.');
-  const sourceDirectory = resolve(root, 'src/planets/comet-67p/source');
+  const sourceDirectory = resolve(root, 'src/objects/comet-67p/source');
   const manifestBytes = await readFile(resolve(sourceDirectory, 'reference/osiris-trial.json'));
   const manifest = parseTrial(JSON.parse(manifestBytes.toString('utf8'))), policy = manifest.transfer;
   const sourceBytes = await readFile(resolve(sourceDirectory, manifest.shape.path));

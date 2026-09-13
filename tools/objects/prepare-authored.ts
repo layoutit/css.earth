@@ -208,6 +208,6 @@ const direct = process.argv[1] !== undefined && import.meta.url === pathToFileUR
 if (direct) {
   if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || (flag !== undefined && flag !== '--write')) throw new TypeError('Usage: prepare-authored <object-id> [--write].');
   const root = process.cwd(), write = flag === '--write';
-  const result = await prepareAuthoredObject({ objectDirectory: resolve(root, 'src/planets', id), publicDirectory: write ? resolve(root, 'public/scenes', id) : resolve(root, '.local/full-json-migration/staged-public', id), outputDirectory: write ? resolve(root, 'src/planets', id, 'prepared') : resolve(root, '.local/full-json-migration/staged', id), write });
+  const result = await prepareAuthoredObject({ objectDirectory: resolve(root, 'src/objects', id), publicDirectory: write ? resolve(root, 'public/scenes', id) : resolve(root, '.local/full-json-migration/staged-public', id), outputDirectory: write ? resolve(root, 'src/objects', id, 'prepared') : resolve(root, '.local/full-json-migration/staged', id), write });
   console.log(JSON.stringify({ id: result.descriptor.id, runtime: result.definition !== undefined }));
 }

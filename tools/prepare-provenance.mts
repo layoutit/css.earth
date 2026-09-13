@@ -28,9 +28,9 @@ export async function recoverObjectProvenance(ids: readonly string[] | null = nu
   const outputs: { path: string; text: string }[] = [];
   const documents = new Map<string, ProvenanceDocument>();
   for (const object of selected) {
-    const document = validateObjectProvenance(await prepareObjectProvenance({ objectDirectory: resolve(root, 'src/planets', object.id),
+    const document = validateObjectProvenance(await prepareObjectProvenance({ objectDirectory: resolve(root, 'src/objects', object.id),
       publicDirectory: resolve(root, 'public/scenes', object.id), basis: 'recovered', verify, write: false }));
-    const path = resolve(root, 'src/planets', object.id, 'prepared/provenance.json');
+    const path = resolve(root, 'src/objects', object.id, 'prepared/provenance.json');
     const existing = await readFile(path, 'utf8').then(text => {
       const raw: unknown = JSON.parse(text);
       if (sourceObject(raw).schema !== 'cssearth-object-provenance@3') return null;

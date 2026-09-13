@@ -9,7 +9,7 @@ import sharp from 'sharp';
 // A latitude inversion or east/west reversal must not preserve this correspondence.
 test('prepared Enceladus imagery keeps source terrain at its geographic coordinates', async () => {
   const root = new URL('../../../../', import.meta.url);
-  const file = await fromFile(new URL('src/planets/enceladus/source/observations/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif', root).pathname);
+  const file = await fromFile(new URL('src/objects/enceladus/source/observations/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif', root).pathname);
   try {
     const source = await file.getImage();
     const mapped = await observation('enceladus', 'normal');

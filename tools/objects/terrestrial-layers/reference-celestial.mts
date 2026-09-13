@@ -35,7 +35,7 @@ export async function prepareReferenceCelestial({config,sourceDirectory,publicDi
   const localDirection=normalize(contract.sun.bodyDirectionAtReference),referenceViewDirection=normalize(contract.sun.defaultCameraBinding.viewDirection);
   const sun=await preparePlanetDirectionalSun({objectId:config.namespace,publicRoot:publicDirectory,ensureDirectories,writeModule:false,
     meanHeliocentricDistanceAu:config.distanceAu,presentation:{schema:DIRECTIONAL_SUN_PRESENTATION_STANDARD.schema,
-      source:contract.sourceProduct,sourcePath:`src/planets/${config.namespace}/source/${entry.path}`,localDirection,referenceViewDirection,
+      source:contract.sourceProduct,sourcePath:`src/objects/${config.namespace}/source/${entry.path}`,localDirection,referenceViewDirection,
       appearance:{model:'clean-room-native-radial-profile-fit',nativeBlend:[...contract.sun.appearance.nativeBlend],
         sourceOverApproximation:'alpha-encoded-additive-radiance-without-runtime-blend-mode',analyticRadialFit:{...contract.sun.appearance.analyticRadialFit}},
       projection:{focalX:projection.focalX,horizontalFovDegrees:projection.horizontalFovDegrees,

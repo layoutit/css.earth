@@ -11,13 +11,13 @@ import { setTimeout as delay } from "node:timers/promises";
 import test from "node:test";
 import { acquirePinnedGlobalWmts } from "../../../../tools/objects/geographic-pages/operations/acquire-pinned-global-wmts.mts";
 
-const version = "1111111111111111", sourcePath = "src/planets/earth/source/";
+const version = "1111111111111111", sourcePath = "src/objects/earth/source/";
 const fixtureOrigin = "https://wmts-fixture.invalid";
 const hash = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
-const actualManifest = validateSourceManifest('earth',JSON.parse((await readFile(new URL("../../../../src/planets/earth/source/manifest.json", import.meta.url))).toString('utf8')));
-const catalogPin = await readFile(new URL("../../../../src/planets/earth/source/city/catalog-pin.json", import.meta.url));
-const catalogBytes = await readFile(new URL("../../../../src/planets/earth/source/city/worldcover-rgbnir-2021.json.gz", import.meta.url));
-const actualContent = parseCitySource(JSON.parse((await readFile(new URL("../../../../src/planets/earth/source/city/manifest.json", import.meta.url))).toString('utf8')));
+const actualManifest = validateSourceManifest('earth',JSON.parse((await readFile(new URL("../../../../src/objects/earth/source/manifest.json", import.meta.url))).toString('utf8')));
+const catalogPin = await readFile(new URL("../../../../src/objects/earth/source/city/catalog-pin.json", import.meta.url));
+const catalogBytes = await readFile(new URL("../../../../src/objects/earth/source/city/worldcover-rgbnir-2021.json.gz", import.meta.url));
+const actualContent = parseCitySource(JSON.parse((await readFile(new URL("../../../../src/objects/earth/source/city/manifest.json", import.meta.url))).toString('utf8')));
 
 async function fixture(t: test.TestContext) {
   const projectRoot = await mkdtemp(resolve(tmpdir(), "cssearth-acquire-pinned-"));

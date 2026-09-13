@@ -193,7 +193,7 @@ export async function prepareEncounters(sourceDirectory:string) {
 
 if(process.argv[1] && import.meta.url===pathToFileURL(resolve(process.argv[1])).href) {
   assert.equal(process.argv.length,3);assert.ok(['--diagnostic','--write'].includes(process.argv[2]));
-  const source=resolve('src/planets/comet-1p/source'),result=await prepareEncounters(source),write=process.argv[2]==='--write';
+  const source=resolve('src/objects/comet-1p/source'),result=await prepareEncounters(source),write=process.argv[2]==='--write';
   const output=write?source:resolve('output/comet-intake/halley-mosaic');
   await writeFile(resolve(output,write?'material/encounters.png':'encounters.png'),result.png);
   await writeFile(resolve(output,write?'reference/encounter-attribution.bin':'attribution.bin'),result.attribution);

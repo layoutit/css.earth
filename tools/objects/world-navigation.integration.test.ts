@@ -19,10 +19,10 @@ function descriptorFixture(value: unknown) {
   const descriptor = parseAuthoredObjectDescriptor(raw);
   return {...raw, id: descriptor.id, properties: {...properties, recipe: descriptor.recipe, worldFrame: requireRecord(properties.worldFrame)}};
 }
-const directories = (await readdir(resolve(root, 'src/planets'), { withFileTypes: true })).filter(entry => entry.isDirectory());
+const directories = (await readdir(resolve(root, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory());
 const objects: {directory: string; descriptor: ReturnType<typeof descriptorFixture>}[] = [];
 for (const entry of directories) {
-  const directory = resolve(root, 'src/planets', entry.name);
+  const directory = resolve(root, 'src/objects', entry.name);
   try { objects.push({ directory, descriptor: descriptorFixture(await read(resolve(directory, 'object.json'))) }); }
   catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
 }

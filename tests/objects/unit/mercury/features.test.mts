@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
-import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with { type: "json" };
-import descriptor from "../../../../src/planets/mercury/prepared/features.json" with { type: "json" };
-import surfaceMap from "../../../../src/planets/mercury/source/presentation/surface-map.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/mercury/prepared/runtime.json" with { type: "json" };
+import descriptor from "../../../../src/objects/mercury/prepared/features.json" with { type: "json" };
+import surfaceMap from "../../../../src/objects/mercury/source/presentation/surface-map.json" with { type: "json" };
 import { parsePreparedSurfaceFeatureCatalog } from "../../../../src/renderers/css/dist/index.js";
 import { mapDirection } from "../../../../site/surface-minimap-math.mts";
 

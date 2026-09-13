@@ -8,7 +8,7 @@ import { budgetTracePaths, extentPolygon, meshRadiusBand, nodeIndex as nodeIndex
 import { parseShpPolylines } from './shp.js';
 
 const root = process.cwd();
-const mercurySource = resolve(root, 'src/planets/mercury/source');
+const mercurySource = resolve(root, 'src/objects/mercury/source');
 const axes = { prime: [0, 1, 0] as const, east: [1, 0, 0] as const, north: [0, 0, 1] as const };
 
 test('DBF reader decodes fixed-width records, field descriptors and deletion flags', () => {
