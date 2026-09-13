@@ -90,7 +90,7 @@
         },
         "display": {
           "percentiles": [
-            1,
+            0.9,
             99.8
           ]
         },
