@@ -42,6 +42,6 @@ describe('retained presentation compiler compatibility', () => {
 // Both hashes were updated for the stepped seam outset and matched raster overscan,
 // and when every prepared raster became a single @2x file.
 const expectedDigests: Record<string, string> = {
-  mercury: '336836135265631894b9eebf96ed8c139e71686f48a3a2901190ecb6070f638a',
-  venus: 'b9f5672a7da890357576489ad4c812d28fc204ab0b57689c81996485e0e965a4',
+  mercury: 'ec9416f87949505927aaa70a462a74e8a0633f73c716ef5df5efb17800d90d01',
+  venus: '07cd6e0d9e78886ec8e99be8146c58e3408b3ad8efea630f694b0f015291f41c',
 };

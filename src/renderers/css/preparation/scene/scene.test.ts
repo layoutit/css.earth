@@ -36,11 +36,12 @@ const fixtures:[string,[number,number,number],number,string,string?][]=[
  ['venus',[0.9978458208272254,-0.04897654126493434,0.043646491993803105],0.008,'c868963aa383bfcd2b5947e0835743a27fa6a7b63d70d62697114e32c131a2d7']];
 for(const [id,direction,fixedOverlap,bodyHash,interiorHash] of fixtures){
  test(`authored ${id} geometry preserves independent pre-migration leaf oracle`,async()=>{
-  // The oracle predates the stepped seam outset. Restoring the fixed overlap it was taken
-  // with must reproduce it exactly, so the outset changes nothing else about the leaves.
+  // The oracle predates the stepped seam outset and single-density file names. Restoring the fixed
+  // overlap and the names it was taken with must reproduce it exactly, so neither change moves the leaves.
   const result=await prepareAuthored(id,direction,profile=>{const {seamOutset:_stepped,...projection}=profile.projection;return {...profile,projection:{...projection,overlap:fixedOverlap,rasterOverscan:0}};});
-  assert.equal(hash('bodyLeaves' in result?result.bodyLeaves:result.body.leaves),bodyHash);
-  if(interiorHash){assert.ok('interior' in result&&result.interior);const interior=result.interior;assert.equal(hash({outerBodyLeaves:interior.outerBodyLeaves,coreLeaves:interior.coreLeaves,sectionLeaves:interior.sectionLeaves}),interiorHash);}
+  const oracleHash=(value:unknown)=>createHash('sha256').update(JSON.stringify(value).replace(/@2x\.(webp|jpg|png)/gu,'.$1')).digest('hex');
+  assert.equal(oracleHash('bodyLeaves' in result?result.bodyLeaves:result.body.leaves),bodyHash);
+  if(interiorHash){assert.ok('interior' in result&&result.interior);const interior=result.interior;assert.equal(oracleHash({outerBodyLeaves:interior.outerBodyLeaves,coreLeaves:interior.coreLeaves,sectionLeaves:interior.sectionLeaves}),interiorHash);}
  });
  test(`authored ${id} geometry overlaps by its raster overscan and gives every surface leaf a seam outset`,async()=>{
   const result=await prepareAuthored(id,direction);
