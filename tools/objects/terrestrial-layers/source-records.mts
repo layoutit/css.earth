@@ -65,7 +65,12 @@ export const parseFloatObservationPolicy = shape({kind:text,coordinates:optional
   noData:nullable(number),resolutionDegrees:optional(number),resolutionMeters:optional(number),origin:array(number),
   specialValueMagnitude:optional(number),displayRange:array(number),wrapLongitude:optional(boolean)});
 export const parseMaskedObservationPolicy = shape({...pixelValidityFields,centerLongitude:number,resampling:optional(text),
-  resolutionMeters:optional(number),channels:optional(text),colorSpace:optional(text)});
+  resolutionMeters:optional(number),channels:optional(text),colorSpace:optional(text),wrapLongitude:optional(boolean)});
+/** A source declared to wrap must cover 360° of longitude to within one of its own pixels. */
+export function requireWrappedLongitudeSpan(width: number, resolution: number, unitsPerDegree: number) {
+  const span = width * resolution / unitsPerDegree;
+  if (!(Math.abs(span - 360) <= 360 / width)) throw new TypeError(`A wrapped longitude source must span 360°, not ${span}°.`);
+}
 export const parseIsisObservationPolicy = shape({grid:parseIsis3Grid,displayRange:array(number)});
 export type NumericRaster = Uint8Array | Uint16Array | Uint32Array | Int8Array | Int16Array | Int32Array | Float32Array | Float64Array;
 export function numericRaster(value: unknown): NumericRaster {

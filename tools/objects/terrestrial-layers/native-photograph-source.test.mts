@@ -63,6 +63,33 @@ test('legacy monochrome GeoTIFF alias supplies its historical channel defaults',
   } finally { await rm(directory, {recursive: true, force: true}); }
 });
 
+test('a GeoTIFF declared to wrap longitude samples footprints across its edge meridian', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-native-wrap-'));
+  try {
+    const radius = 180 / Math.PI, values = Uint8Array.from({length: 32}, (_, index) => 10 + index);
+    const bytes = Buffer.from(writeArrayBuffer(values, {width: 8, height: 4, BitsPerSample: [8], SampleFormat: [1], GDAL_NODATA: '0',
+      ModelPixelScale: [45, 45, 0], ModelTiepoint: [0, 0, 0, 0, 90, 0], ProjectedCSTypeGeoKey: 32767,
+      GeoKeyDirectory: [1, 1, 0, 10,
+        1024, 0, 1, 1, 1025, 0, 1, 1, 2057, 34736, 1, 0, 2058, 34736, 1, 0,
+        3072, 0, 1, 32767, 3075, 0, 1, 17, 3076, 0, 1, 9001,
+        3078, 34736, 1, 1, 3088, 34736, 1, 2, 3089, 34736, 1, 1],
+      GeoDoubleParams: [radius, 0, 180]}));
+    await writeFile(join(directory, 'map.tif'), bytes);
+    const record = source('map.tif', bytes, 8, 4, {
+      type: 'equirectangular', referenceRadiusMeters: radius, centerLongitude: 180,
+      longitudeDirection: 'east-positive', latitudeType: 'planetocentric'
+    });
+    const validity = {kind: 'geotiff-monochrome-alpha', noData: 0, centerLongitude: 180};
+    const rgb = [0, 0, 0];
+    assert.equal((await loadNativePhotograph(directory, record, validity)).sample(180, 22.5, rgb), false,
+      'without the declaration a footprint across the edge meridian is incomplete');
+    const wrapped = await loadNativePhotograph(directory, record, {...validity, wrapLongitude: true});
+    assert.equal(wrapped.sample(180, 22.5, rgb), true);
+    // Half-way between the last (25) and first (18) samples of the second row.
+    assert.ok(rgb.every(value => Math.abs(value - 21.5) < 1e-9), String(rgb));
+  } finally { await rm(directory, {recursive: true, force: true}); }
+});
+
 test('native photographic images preserve connected fill, an explicit crop, and observed black', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-native-image-'));
   try {

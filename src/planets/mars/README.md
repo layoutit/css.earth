@@ -37,6 +37,7 @@ Feature notes: 644 of the labelled names carry a caption note, the lead summary 
 - The MOLA and THEMIS lens mosaics were re-stitched from the OpenSpace tile server on 2026-09-11 with the pinned tile recipe because the server no longer reproduced the bytes pinned earlier; the source manifest pins the refreshed mosaics.
 - The atmosphere is a display approximation from OpenSpace scattering parameters; it is not an epoch-specific observation. The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
 - The camera and background sky do not represent an observer at a stated epoch.
+- The first column of the Viking MDIM 2.1 color source map is nearly black (mean brightness 4 against about 100). A thin dark line can show along 180° E at close zoom.
 - Phobos and Deimos are standalone bodies with their own packages; this package keeps only the pinned OpenSpace kernel record.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)

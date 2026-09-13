@@ -8,7 +8,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { blackFillCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 import { readFitsPrimary } from '../observation/fits.mts';
 import { numericRaster, numericRasterBands, parseByteObservationPolicy, parseFitsPolicy, parseFloatObservationPolicy,
-  parseGeoImageEntry, parseIsisObservationPolicy, parseMaskedObservationPolicy } from './source-records.mts';
+  parseGeoImageEntry, parseIsisObservationPolicy, parseMaskedObservationPolicy, requireWrappedLongitudeSpan } from './source-records.mts';
 import { loadScienceSurface } from './scientific-raster.mts';
 
 export interface NativePhotograph {
@@ -133,8 +133,9 @@ async function loadGeoTiff(source: Record<string, unknown>, path: string, width:
       if (decoded.info.width !== width || decoded.info.height !== height || decoded.info.channels !== channels) {
         throw new Error(`Native photograph bands changed: ${path}`);
       }
-      const anyChannel = policy.zeroValidity === 'any-channel';
-      return makeSampler({width, height, channels, pixels, wrapLongitude: false, low: 0, high: 255,
+      const anyChannel = policy.zeroValidity === 'any-channel', wrapLongitude = policy.wrapLongitude === true;
+      if (wrapLongitude) requireWrappedLongitudeSpan(width, resolution[0], entry.projection.referenceRadiusMeters * Math.PI / 180);
+      return makeSampler({width, height, channels, pixels, wrapLongitude, low: 0, high: 255,
         point: (longitude, latitude) => cylindricalSourcePoint(longitude, latitude, policy.centerLongitude, origin, resolution,
           entry.projection.referenceRadiusMeters, false, width),
         valid: (offset, x, y) => {
