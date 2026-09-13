@@ -185,7 +185,6 @@
         "levelMatching": {
           "samplesPerTriangle": 64,
           "minimumPairs": 64,
-          "maximumLogMad": 0.15,
           "maximumGain": 1.2,
           "maximumAngleDegrees": 70
         },

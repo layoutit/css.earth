@@ -32,7 +32,7 @@ export type LensDisplay = ReturnType<typeof parseDisplay>;
 
 export interface LensEnvelope {
   id: string; consumer: string; metadata: { label?: string; coverage?: string }; frames: readonly { id: string }[]; selection?: string;
-  levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumLogMad: number; maximumGain: number; samplesPerTriangle?: number };
+  levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumGain: number; samplesPerTriangle?: number };
   display: LensDisplay;
 }
 
@@ -42,8 +42,6 @@ export interface EnvelopeRules {
   displays: readonly ('percentiles' | 'displayRange')[];
   maximumFrames: number;
   maximumLevelGain: number;
-  /** The widest robust spread of an accepted overlap's log ratios. */
-  maximumLogMad: number;
   samplesPerTriangle: 'required' | 'optional';
 }
 
@@ -52,14 +50,14 @@ export interface EnvelopeRules {
 export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[], rules: EnvelopeRules, context: string) {
   const { frames, levelMatching: levels, display } = recipe, mosaic = frames.length > 1;
   checkKeys(display, [], ['percentiles', 'displayRange'], `${context} display`);
-  if (levels) checkKeys(levels, ['minimumPairs', 'maximumLogMad', 'maximumGain'], ['maximumAngleDegrees', 'samplesPerTriangle'], `${context} level matching`);
+  if (levels) checkKeys(levels, ['minimumPairs', 'maximumGain'], ['maximumAngleDegrees', 'samplesPerTriangle'], `${context} level matching`);
   const range = display.percentiles ?? display.displayRange, kind = display.percentiles ? 'percentiles' : 'displayRange';
   if (!identifier.test(recipe.id) || !identifier.test(recipe.consumer) || !recipe.metadata?.label || !recipe.metadata?.coverage ||
       frames.length < 1 || frames.length > rules.maximumFrames || frames.some(frame => !identifier.test(frame.id)) || new Set(frames.map(frame => frame.id)).size !== frames.length ||
       !paths.every(safePath) || new Set(paths).size !== paths.length ||
       mosaic !== (recipe.selection !== undefined) || mosaic !== (levels !== undefined) || (recipe.selection !== undefined && !rules.selections.includes(recipe.selection)) ||
       (levels !== undefined && (!Number.isInteger(levels.minimumPairs) || levels.minimumPairs < 64 || levels.minimumPairs > 10000 ||
-        !positive(levels.maximumLogMad) || levels.maximumLogMad > rules.maximumLogMad || !(levels.maximumGain >= 1 && levels.maximumGain <= rules.maximumLevelGain) ||
+        !(levels.maximumGain >= 1 && levels.maximumGain <= rules.maximumLevelGain) ||
         (levels.samplesPerTriangle === undefined ? rules.samplesPerTriangle === 'required'
           : !Number.isInteger(levels.samplesPerTriangle) || levels.samplesPerTriangle < 4 || levels.samplesPerTriangle > 64) ||
         (levels.maximumAngleDegrees !== undefined && (!positive(levels.maximumAngleDegrees) || levels.maximumAngleDegrees >= 90)))) ||

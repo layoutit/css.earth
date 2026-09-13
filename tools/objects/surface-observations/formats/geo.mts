@@ -101,7 +101,7 @@ function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
   for (const frame of requireArray(record.frames)) checkKeys(frame, ['id', 'path', 'startTime', ...schema.frame.required], schema.frame.optional ?? [], `${CONTEXT} frame`);
   const recipe = decodeProfile(parseGeoLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
   validateEnvelope(recipe, [...recipe.frames.flatMap(framePaths), ...sharedPaths(recipe)],
-    { selections: ['lowest-emission', 'recipe-order'], displays: [schema.display], maximumFrames: schema.maximumFrames, maximumLevelGain: 1.5, maximumLogMad: .3, samplesPerTriangle: 'required' }, CONTEXT);
+    { selections: ['lowest-emission', 'recipe-order'], displays: [schema.display], maximumFrames: schema.maximumFrames, maximumLevelGain: 1.5, samplesPerTriangle: 'required' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
   if (!recipe.filter || (recipe.format === 'amica-gaskell' && recipe.filter !== 'V') || recipe.frames.some(frame => !frame.startTime)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
   if (schema.color && (recipe.display.displayRange?.[0] !== 0 || recipe.metadata.falseColor !== true)) throw new TypeError('MVIC color requires source-derived bands, false color and retained illumination.');
