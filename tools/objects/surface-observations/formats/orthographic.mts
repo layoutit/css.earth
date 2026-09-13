@@ -18,7 +18,7 @@ function validateOrthographicRecipe(value: unknown, sourceGeometry: unknown) {
   for (const frame of requireArray(requireRecord(value).frames)) checkKeys(frame, ['id', 'path', 'coordinatePaths'], [], `${CONTEXT} frame`);
   const recipe = decodeProfile(parseOrthographicLens, value, 'Invalid source-registered orthographic observation.'), geometry = parseSurfaceGeometry(sourceGeometry);
   // An orthophoto is one registered image with its three coordinate cubes; it has no mosaic selection.
-  validateEnvelope(recipe, lensPaths(recipe), { selections: [], displays: ['percentiles'], maximumFrames: 1, maximumLogMad: .3, maximumLevelGain: 1, samplesPerTriangle: 'optional' }, CONTEXT);
+  validateEnvelope(recipe, lensPaths(recipe), { selections: [], displays: ['percentiles'], maximumFrames: 1, maximumLevelGain: 1, samplesPerTriangle: 'optional' }, CONTEXT);
   if (recipe.format !== 'isis2-orthographic' || recipe.frames[0].coordinatePaths.length !== 3 ||
       geometry?.format !== 'image-plane-dem' || geometry.sourceTopology !== 'open' ||
       !Number.isFinite(recipe.maximumCoordinateErrorMeters) || recipe.maximumCoordinateErrorMeters <= 0 ||

@@ -39,7 +39,7 @@ export interface GeoFrame {colorPlanes?:readonly ArrayLike<number>[];radianceFac
 export interface SipCamera {matrix:number[][];sip:{referencePixel:number[];a:number[][];b:number[][];offsetPixels:number[]}}
 
 export interface ObservationSample {maximumIncidenceDegrees?:number;reason?:string; radiance?:number; maximumEmissionDegrees?:number}
-export interface ObservationLevelPolicy {maximumAngleDegrees?:number;minimumPairs:number;maximumLogMad:number;maximumGain:number;samplesPerTriangle?:number}
+export interface ObservationLevelPolicy {maximumAngleDegrees?:number;minimumPairs:number;maximumGain:number;samplesPerTriangle?:number}
 export interface SourceAccess {manifest?:SourceManifest;validateGroup(consumer:string):Promise<readonly SourceInput[]>;validatePath(path:string):Promise<SourceEntry>}
 export interface SurfaceConfig {geometry:{radius:number;radiusKm:number;radialTerrain:{path:string;format?:string;sourceTopology?:string;simplification:{method:string;maximumErrorMeters:number}}};raster:{height:number}}
 export interface RadialSurface {grid:SourceMesh;faces:PreparedTriangle[]}

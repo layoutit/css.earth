@@ -1,8 +1,13 @@
 import type { ObservationSample, ObservationLevelPolicy, PreparedTriangle } from '../terrestrial-layers/contracts.mts';
-export interface OverlapPair {a:number;b:number;samples:number;medianLogRatio:number|null;logMad:number|null;accepted:boolean;residualLogRatio?:number}
+export interface OverlapPair {a:number;b:number;samples:number;medianLogRatio:number|null;logMad:number|null;levelError:number|null;accepted:boolean;residualLogRatio?:number}
 // Preparation-only overlap calibration and source selection. No samples or
 // camera solutions are constructed by the retained runtime.
 const median = (values: readonly number[]) => [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
+/** sqrt(pi / 2) x 1.4826: a median's standard error per root sample, in median absolute deviations of normal data. */
+const MEDIAN_ERROR = Math.sqrt(Math.PI / 2) * 1.4826;
+/** A pair's log level ratio must be known to 0.07: the precision the former spread cap guaranteed at its limit, a spread of 0.3 over the
+ * minimum 64 pairs. A scattered but well-sampled overlap then counts, and a precise one needs no authored spread. */
+export const MAXIMUM_LEVEL_ERROR = .07;
 
 export function sampleTrianglePoints(faces: Pick<PreparedTriangle, "vertices">[], count: number) {
   if (!Number.isInteger(count) || count < 4 || count > 64) throw new Error('Invalid overlap sample count.');
@@ -38,8 +43,9 @@ export function fitObservationLevels(samples: ObservationSample[][], policy: Obs
     }
     const ratio = ratios.length ? median(ratios) : null;
     const mad = ratio === null ? null : median(ratios.map(x => Math.abs(x - ratio)));
-    const accepted = ratios.length >= policy.minimumPairs && mad !== null && mad <= policy.maximumLogMad;
-    const pair = { a, b, samples: ratios.length, medianLogRatio: ratio, logMad: mad, accepted };
+    const levelError = mad === null ? null : MEDIAN_ERROR * mad / Math.sqrt(ratios.length);
+    const accepted = ratios.length >= policy.minimumPairs && levelError !== null && levelError <= MAXIMUM_LEVEL_ERROR;
+    const pair = { a, b, samples: ratios.length, medianLogRatio: ratio, logMad: mad, levelError, accepted };
     pairs.push(pair);
     if (accepted && mad !== null) weights.set(pair, Math.min(ratios.length, 1000) / Math.max(.05, mad) ** 2);
   }
