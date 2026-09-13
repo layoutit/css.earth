@@ -6,6 +6,8 @@ The Shape view is a shape visualization with the shared no-imagery grid; Elevati
 
 Physical and orbital context: NASA/JPL Horizons. The local source shape's geometry and frame own the body presentation.
 
+DRACO photographs: NASA/Johns Hopkins Applied Physics Laboratory/DART. Source: NASA PDS, DART calibrated images with geometric backplanes (Ernst, Daly, Barnouin, Espiritu and Waller 2023, DOI 10.26007/QAAN-F992). Retain the dataset citation, native labels and source notices. The photographic mosaic shows the encounter surface with approximate brightness normalization, not measured albedo.
+
 ESO/S. Brunier Milky Way panorama: CC BY 4.0; complete notice in `source/stars/ESO-IMAGE-LICENSE.md`. HYG Stellar Database: David Nash/Astronexus, CC BY-SA 4.0; `source/stars/LICENSE.md`. Inter title/font: Inter Project Authors, SIL Open Font License 1.1; `source/presentation/LICENSE.INTER-OFL`.
 
 Context brightness reference: Sunshine et al., Lunar and Planetary Science Conference 2023, NASA NTRS 20230000704. The unchanged abstract is retained as scientific documentation; its global visible geometric albedo is distinct from the grid used by the Shape view.

@@ -8,7 +8,9 @@ import {requireRecord} from '../../../tools/source-values.mts';
 const acquisition = shape({operations:array(shape({path:text,kind:optional(text),url:optional(text)}))});
 const damit = shape({modelId:number,fields:dictionary(text)});
 const rotation = shape({periodHours:number,phase:text,rightAscensionDegrees:optional(number),declinationDegrees:optional(number)});
-const scalar = shape({id:text,path:text,format:text,grid:requireRecord,valueTransform:shape({scale:number,offset:number}),
+// The sampler treats an omitted linear transform as identity.
+const transform = (value:unknown) => value === undefined ? {scale:1,offset:0} : shape({scale:number,offset:number})(value);
+const scalar = shape({id:text,path:text,format:text,grid:requireRecord,valueTransform:transform,
   surfaceSampling:optional(shape({method:text,maximumDistanceMeters:number})),minimum:number,maximum:number,colors:array(text)});
 const terrestrial = shape({namespace:text,geometry:shape({radius:number,radiusKm:number,radialTerrain:parseRadialSource}),
   raster:shape({width:number,height:number,scientific:array(scalar)})});
