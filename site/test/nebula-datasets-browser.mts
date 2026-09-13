@@ -30,6 +30,9 @@ try {
     const provenance = validateObjectProvenance(await read(objectId, 'provenance'), objectId);
     assert.equal((await page.goto(`${origin}/sun/?focus=${objectId}`))?.status(), 200);
     await waitReady();
+    // Initial focus navigation publishes its canonical camera URL after scene readiness.
+    // Start lens assertions only after that handoff, not during its first history write.
+    await page.waitForFunction(() => new URL(location.href).searchParams.has('v'));
     const card = page.locator('[data-prepared-focus-card]');
     const bank = card.locator(`[data-focus-lens-bank="${objectId}"]`);
     await bank.waitFor({ state: 'visible' });
@@ -75,6 +78,7 @@ try {
     await card.getByRole('tab', { name: 'Datasets', exact: true }).click();
     await rail.waitFor({ state: 'visible' });
     await page.screenshot({ path: resolve(output, `${objectId}.png`) });
+    await page.screenshot({ path: resolve(output, `${objectId}.jpg`), type: 'jpeg', quality: 82 });
   }
   assert.equal(cases.length, 9);
   await page.setViewportSize({ width: 390, height: 844 });

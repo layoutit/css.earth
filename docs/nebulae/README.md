@@ -45,6 +45,24 @@ Each object owns `source/presentation.json` and a source manifest with image ide
 
 The site reuses the planets' dataset selector, descriptions, details and source/telescope sidebar. Selecting a lens updates that lens's source context and URL while retaining the world camera and scene. Supporting observations remain distinguishable from the selected image; papers do not become spacecraft observations. Horálek's camera remains unidentified in the retained evidence, so its attribution names the photographer without inventing an instrument.
 
+## Using the shared dataset panels
+
+Select a dataset on the left to recolor the retained cloud. Its image credit and supporting observations appear on the right. The catalogue-star toggle preserves the common positions across spectral lenses; M2–9 has no inferred star catalogue.
+
+![Orion with its VISTA dataset, source preview and observation sidebar](../images/nebulae/m42-datasets.jpg)
+
+Orion, ESO VISTA near infrared (ESO/J. Emerson/VISTA; Cambridge Astronomical Survey Unit).
+
+![Helix with its wide optical dataset and the supporting telescopes](../images/nebulae/helix-datasets.jpg)
+
+Helix, ESO wider-field optical observation, with VISTA and WFI retained as supporting observations.
+
+![M2–9 with its Hubble dataset and source attribution](../images/nebulae/m2-9-datasets.jpg)
+
+M2–9, Hubble optical (Bruce Balick, Vincent Icke, Garrelt Mellema, NASA/ESA).
+
+These are actual shared-app captures at 1440 × 1000 CSS pixels, DPR 1, from `6d07dface` with the subsequent dependency and browser-readiness corrections. They illustrate the dataset workflow and current appearance, not an independent measurement of 3D shape. The browser probe switches all nine datasets and retains the camera; the source records linked above own the processing and scientific limits.
+
 ## Distant appearance
 
 Each delivered lens includes transparent, pre-rendered views of its completed cloud. At small projected screen sizes, the renderer uses these billboards; approaching the cloud hands back to the original volume slices. This changes the amount of displayed geometry, not the nebula's physical bounds, adopted distance or close-view resolution. Viewing direction selects from the fixed prepared views; the browser never generates their pixels.
