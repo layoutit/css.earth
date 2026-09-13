@@ -7,14 +7,14 @@ current checkout before using them.
 
 ## Start from authored data
 
-Current celestial packages live under `src/planets/<id>/`, including moons and
+Current celestial packages live under `src/objects/<id>/`, including moons and
 dwarf planets. Their `object.json` supplies a `properties.recipe` with pinned
 source references and supported capabilities. Shared preparation produces the
 renderer payload. Do not scaffold a private runtime, preparation script suite,
 or shell for each new body.
 
 ```text
-src/planets/<id>/
+src/objects/<id>/
   object.json                         authored recipe and prepared reference
   README.md                           sources, processing, evidence and known problems
   NOTICE.md                           credits and reuse terms
@@ -85,7 +85,7 @@ Navigation marker appearance comes from each authored package's
 individual `public/navigation/body-<id>.webp` images and their 2x counterparts.
 Builds assemble the ignored `site/prepared-navigation-markers.mjs` from those
 images and recipes; `PlanetNavigationMarker.astro` consumes it. Follow the
-[registration steps](../../../../src/planets/README.md#register-a-body-without-editing-shared-lists)
+[registration steps](../../../../src/objects/README.md#register-a-body-without-editing-shared-lists)
 instead of editing a shared list or atlas position.
 
 ## Choose examples by source needs
@@ -203,13 +203,13 @@ for availability; this reference does not establish merge or deployment status.
 
 | Capability | Owner relative to the repository |
 | --- | --- |
-| Observation pins, quality policy, photometry and transfer limits | `src/planets/comet-67p/source/preparation/terrestrial.json` and `acquisition.json` in the same directory |
+| Observation pins, quality policy, photometry and transfer limits | `src/objects/comet-67p/source/preparation/terrestrial.json` and `acquisition.json` in the same directory |
 | OSIRIS decoding, companion identity and quality flags | `tools/objects/terrestrial-layers/osiris-geo.mts` |
 | Projective fit with a disjoint holdout, footprint sampling, source-mesh correspondence and visibility | `tools/objects/surface-observations/`, described in its [README](../../../../tools/objects/surface-observations/README.md) |
 | Deterministic surface samples, bounded overlap gains and observation selection | `tools/objects/surface-observations/levels.mts` |
 | Atlas baking and lossless observation-index output | `tools/objects/terrestrial-layers/radial-terrain.mts` |
 | Selection/level regressions and prepared provenance checks | `tools/objects/surface-observations/levels.test.mts`, `tests/objects/unit/comet-67p/mosaic.test.mts` |
-| Worked method, limitations and measured evidence | [67P source and evidence account](../../../../src/planets/comet-67p/README.md) |
+| Worked method, limitations and measured evidence | [67P source and evidence account](../../../../src/objects/comet-67p/README.md) |
 
 Inspect the actual recipe/schema before reuse. The OSIRIS decoder and quality
 bits are instrument-specific; source identity, geometry qualification and
@@ -224,11 +224,11 @@ FITS header expectations. `tools/objects/terrestrial-layers/pds4-geometry-cube.m
 validates all of it against the label (offsets, units, special constants) and
 the header, converts units, and recovers nothing else; the camera comes from the
 shared fit above. Dimorphos's DART DRACO view
-(`src/planets/dimorphos/source/preparation/terrestrial.json`) is the first
+(`src/objects/dimorphos/source/preparation/terrestrial.json`) is the first
 instance; a second archive needs a recipe, not a decoder. Frames that share one
 viewing direction use `selection: "recipe-order"`, finest footprint first,
 because lowest-emission selection cannot separate them. The
-[Dimorphos README](../../../../src/planets/dimorphos/README.md) records the
+[Dimorphos README](../../../../src/objects/dimorphos/README.md) records the
 measured residuals, transfer distances and the archive's pixel-scale unit slip.
 
 A cube can contain intercepts for multiple bodies in their respective local

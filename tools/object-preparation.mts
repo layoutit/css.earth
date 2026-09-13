@@ -31,7 +31,7 @@ export function resolveObjectPreparation(input: unknown, { projectRoot = default
     parseAuthoredObjectDescriptor(descriptor);
     if (descriptor.type !== 'layered-body') throw new TypeError('Unsupported prepared object type.');
     return Object.freeze({ objectName: typeof recipe?.label === 'string' ? recipe.label : descriptor.id,
-      projectRoot: resolve(projectRoot), toolDirectory: resolve(projectRoot, 'src/planets', descriptor.id, 'tools'),
+      projectRoot: resolve(projectRoot), toolDirectory: resolve(projectRoot, 'src/objects', descriptor.id, 'tools'),
       steps: Object.freeze([Object.freeze(['../../../../tools/objects/dist/prepare-authored.js', descriptor.id, '--write'])]) });
   }
   if (descriptor.type !== 'layered-body' || !recipe || typeof recipe !== 'object' || isArray(recipe) ||
@@ -49,7 +49,7 @@ export function resolveObjectPreparation(input: unknown, { projectRoot = default
   });
   const root = resolve(projectRoot);
   return Object.freeze({ objectName: recipe.label, projectRoot: root,
-    toolDirectory: resolve(root, 'src/planets', descriptor.id, 'tools'), steps: Object.freeze(steps) });
+    toolDirectory: resolve(root, 'src/objects', descriptor.id, 'tools'), steps: Object.freeze(steps) });
 }
 
 export async function readObjectPreparation(descriptorPath: string | URL, { projectRoot = defaultProjectRoot } = {}) {

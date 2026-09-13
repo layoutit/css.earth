@@ -8,7 +8,7 @@ import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/asteroid-1996-hw1/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/asteroid-1996-hw1/source');
 const read=async (path: string)=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('1996 HW1 retains original source pins and acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'asteroid-1996-hw1',planetName:'1996 HW1',sourceRoot:root});await source.verify();

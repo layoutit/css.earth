@@ -10,7 +10,7 @@ const json=async (p:string):Promise<unknown>=>JSON.parse(await readFile(p,'utf8'
 const near=(a:number,b:number,t:number)=>assert.ok(Math.abs(a-b)<t,`${a} differs from ${b}`);
 export function testLightcurveModel(id:string,ab:number,bc:number,radius:number,longitude:number,latitude:number) {
  test(`${id}: delivered approximation retains published proportions and closes one surface`,async()=>{
-  const root=resolve('src/planets',id),model=await json(`${root}/source/shape/model.json`);
+  const root=resolve('src/objects',id),model=await json(`${root}/source/shape/model.json`);
   const mesh=ellipsoidParameterMesh(model),[a,b,c]=mesh.axesMeters;
   near(a/b,ab,1e-12);near(b/c,bc,1e-12);near(Math.cbrt(a*b*c),radius*1000,1e-8);
   const config=modelConfig(await json(`${root}/source/preparation/terrestrial.json`)),terrain=preparedModelTerrain(await json(`${root}/prepared/terrain.json`));
@@ -45,7 +45,7 @@ export function testLightcurveModel(id:string,ab:number,bc:number,radius:number,
   assert.ok(Math.max(...sampleErrors)<150,'Sampled distance to the analytic ellipsoid stays under 150 metres');
  });
  test(`${id}: fixed nominal pole recovers the published J2000 ecliptic coordinates`,async()=>{
-  const root=resolve('src/planets',id),d=await json(`${root}/object.json`),ref=requireObjectRotationReference(d);
+  const root=resolve('src/objects',id),d=await json(`${root}/object.json`),ref=requireObjectRotationReference(d);
   const a=await readAuthoredRotation(root,ref,2461286.5),b=await readAuthoredRotation(root,ref,2461316.5);assert.deepEqual(a,b);assert.equal(a.spinRateRadPerDay,0);
   const e=84381.448*Math.PI/(180*3600),x=Math.cos(a.poleDeclinationRad)*Math.cos(a.poleRightAscensionRad),y=Math.cos(a.poleDeclinationRad)*Math.sin(a.poleRightAscensionRad),z=Math.sin(a.poleDeclinationRad);
   const ey=y*Math.cos(e)+z*Math.sin(e),ez=-y*Math.sin(e)+z*Math.cos(e);

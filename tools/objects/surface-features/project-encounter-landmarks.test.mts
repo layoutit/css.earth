@@ -39,7 +39,7 @@ test('output commit creates nested evidence directories; dry runs reject missing
 });
 
 test('Wild 2 consumes both checked-in diagram-to-photo and photo-to-native control stages', async () => {
-  const configuration = JSON.parse(await readFile('src/planets/comet-81p/source/features/image-registration.json', 'utf8'));
+  const configuration = JSON.parse(await readFile('src/objects/comet-81p/source/features/image-registration.json', 'utf8'));
   assert.equal(configuration.stages.length, 2);
   const stages: ReturnType<typeof fitImageControls>[] = (configuration.stages as unknown[]).map(fitImageControls);
   assert.deepEqual(stages.map(stage => [stage.stats.fit.count, stage.stats.holdout.count]), [[3, 3], [35, 36]]);

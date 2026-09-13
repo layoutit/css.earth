@@ -5,7 +5,7 @@ import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/angelina/source'),read=createSourceFixtureReader(root);
+const root=resolve(import.meta.dirname,'../../../../src/objects/angelina/source'),read=createSourceFixtureReader(root);
 test('Angelina retains source identity and restoration closure',async()=>{
  const source=await createSourceManifest({planetId:'angelina',planetName:'Angelina',sourceRoot:root});await source.verify();
  const plan=await read('preparation/acquisition.json');for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));

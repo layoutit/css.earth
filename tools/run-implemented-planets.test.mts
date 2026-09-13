@@ -67,7 +67,7 @@ test("default preparation covers every actual OBJECTS package exactly once", asy
     assert.equal(call.command, process.execPath);
     assert.equal(call.cwd, root);
     assert.deepEqual(call.argumentsList, [
-      ...(await authoredObject(call.id, root) ? [resolve(root, 'tools/objects/dist/prepare-authored.js'), call.id, '--write'] : [resolve(root, `src/planets/${call.id}/tools/prepare.mjs`)]),
+      ...(await authoredObject(call.id, root) ? [resolve(root, 'tools/objects/dist/prepare-authored.js'), call.id, '--write'] : [resolve(root, `src/objects/${call.id}/tools/prepare.mjs`)]),
       "--fixture-forwarded-argument",
     ]);
   }

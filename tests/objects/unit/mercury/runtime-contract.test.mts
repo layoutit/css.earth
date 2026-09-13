@@ -1,7 +1,7 @@
 import {required} from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
+import runtimeDefinition from "../../../../src/objects/mercury/prepared/runtime.json" with {type: "json"};
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";

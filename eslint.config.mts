@@ -21,7 +21,7 @@ export default [
         selector: 'TSAnyKeyword', message: 'Use an owned type or validate unknown input at the boundary.',
       }],
       'no-restricted-imports': ['error', {
-        patterns: [{ group: ['**/src/platform/**', '**/src/planets/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**'],
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**'],
           message: 'Runtime packages must not depend on the application, legacy sources, or Node tooling.' }],
       }],
     },
@@ -31,7 +31,7 @@ export default [
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {
-        patterns: [{ group: ['**/src/platform/**', '**/src/planets/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**', '@cssearth/objects', '@cssearth/objects/*'],
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', 'node:*', '@layoutit/polycss', '**/renderers/**', '@cssearth/objects', '@cssearth/objects/*'],
           message: 'The engine accepts object data and application policy through its public interfaces.' }],
       }],
     },

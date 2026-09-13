@@ -25,7 +25,7 @@ async function verifyPinnedSource(sourceDirectory: string, id: string, manifest:
   for await(const chunk of createReadStream(filename))digest.update(chunk);
   const sha256=digest.digest('hex');
   if(sha256!==expectedSha256)throw new Error(`Photographic source digest differs: ${path}`);
-  return {path:`src/planets/${id}/source/${path}`,sha256};
+  return {path:`src/objects/${id}/source/${path}`,sha256};
 }
 
 function textureBanks(input: unknown, maps: readonly {name: string}[], raster: ReturnType<typeof createPagedSurfaceRaster>, pageCount: number): TextureLevelBank[] {
@@ -46,7 +46,7 @@ function textureBanks(input: unknown, maps: readonly {name: string}[], raster: R
 export async function refreshPagedPhotographs(id: string, mapNames: readonly string[]) {
   if(!/^[a-z][a-z0-9-]*$/u.test(id)||!mapNames.length||new Set(mapNames).size!==mapNames.length)throw new TypeError('Choose one body and distinct photographic map names.');
   sharp.concurrency(1);sharp.cache(false);
-  const objectDirectory=resolve('src/planets',id),sourceDirectory=resolve(objectDirectory,'source'),outputDirectory=resolve(objectDirectory,'prepared');
+  const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),outputDirectory=resolve(objectDirectory,'prepared');
   const recipePath=resolve(sourceDirectory,'preparation/paged-ellipsoid.json'),manifestPath=resolve(sourceDirectory,'manifest.json'),scenePath=resolve(outputDirectory,'surface-raster-plan.json'),textureLevelsPath=resolve(outputDirectory,'texture-levels.json');
   const [descriptorBytes,recipeBytes,manifestBytes,sceneBytes,textureLevelsBytes]=await Promise.all([readFile(resolve(objectDirectory,'object.json')),readFile(recipePath),readFile(manifestPath),readFile(scenePath),readFile(textureLevelsPath)]);
   const descriptor=parseAuthoredObjectDescriptor(JSON.parse(descriptorBytes.toString('utf8'))),recipeSource=descriptor.recipe.sources.find(source=>source.id==='paged-ellipsoid');
@@ -72,7 +72,7 @@ export async function refreshPagedPhotographs(id: string, mapNames: readonly str
   }));
   const files=await readdir(stage);
   if(files.some(filename=>filename!=='receipt.json'&&!assets.some(asset=>asset.filename===filename)))throw new Error('Selective refresh stage contains an unexpected file.');
-  const receipt={id,inputs:{[`src/planets/${id}/prepared/surface-raster-plan.json`]:hash(sceneBytes),[`src/planets/${id}/prepared/texture-levels.json`]:hash(textureLevelsBytes),[`src/planets/${id}/source/preparation/paged-ellipsoid.json`]:hash(recipeBytes),[`src/planets/${id}/source/manifest.json`]:hash(manifestBytes),...Object.fromEntries(sourcePins.map(pin=>[pin.path,pin.sha256]))},assets,
+  const receipt={id,inputs:{[`src/objects/${id}/prepared/surface-raster-plan.json`]:hash(sceneBytes),[`src/objects/${id}/prepared/texture-levels.json`]:hash(textureLevelsBytes),[`src/objects/${id}/source/preparation/paged-ellipsoid.json`]:hash(recipeBytes),[`src/objects/${id}/source/manifest.json`]:hash(manifestBytes),...Object.fromEntries(sourcePins.map(pin=>[pin.path,pin.sha256]))},assets,
     textureLevelUpdates:{entries:levels.entries,receipts:levels.provenance.receipts}};
   await writeFile(resolve(stage,'receipt.json'),`${JSON.stringify(receipt,null,2)}\n`);
   return receipt;

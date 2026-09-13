@@ -10,10 +10,10 @@ import sharp from 'sharp';
 import { readMantleTomography, tomographyColor, tomographyLegend } from '../../../../tools/objects/paged-ellipsoid/tomography.mts';
 import { prepareLocationPoint } from '../../../../tools/objects/geographic-pages/prepare-location.mts';
 
-const source = fileURLToPath(new URL('../../../../src/planets/earth/source/', import.meta.url));
+const source = fileURLToPath(new URL('../../../../src/objects/earth/source/', import.meta.url));
 const json = async (path: string|URL):Promise<unknown> => JSON.parse((await readFile(new URL(path, import.meta.url))).toString('utf8'));
-const interior = parseInteriorSource(await json('../../../../src/planets/earth/source/interior/earth-interior.json'));
-const config = parsePagedProfile(await json('../../../../src/planets/earth/source/preparation/paged-ellipsoid.json'));
+const interior = parseInteriorSource(await json('../../../../src/objects/earth/source/interior/earth-interior.json'));
+const config = parsePagedProfile(await json('../../../../src/objects/earth/source/preparation/paged-ellipsoid.json'));
 const tomography = required(await readMantleTomography(source, interior, config));
 
 // Independently read from the upstream NetCDF with h5py. References use NumPy
@@ -36,7 +36,7 @@ test('both cut meridians preserve independently decoded source velocity, referen
 });
 
 test('tomography meridians occupy the same longitude frame as the photographed exterior', async () => {
-  const scene = parseEarthScene(await json('../../../../src/planets/earth/prepared/scene.json'));
+  const scene = parseEarthScene(await json('../../../../src/objects/earth/prepared/scene.json'));
   for (const longitude of tomography.recipe.sectionLongitudesDegrees) {
     const p = prepareLocationPoint(scene, longitude, 0);
     // PolyCSS's prepared CSS frame swaps the source X/Y axes.

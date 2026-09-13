@@ -7,13 +7,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 import sharp from "sharp";
-import runtimeDefinition from "../../../../src/planets/sun/prepared/runtime.json" with { type: "json" };
-import assets from "../../../../src/planets/sun/prepared/assets.json" with { type: "json" };
-import scene from "../../../../src/planets/sun/prepared/scene.json" with { type: "json" };
-import lenses from "../../../../src/planets/sun/prepared/lenses.json" with { type: "json" };
-import controls from "../../../../src/planets/sun/prepared/controls.json" with { type: "json" };
-import panel from "../../../../src/planets/sun/prepared/panel.json" with { type: "json" };
-import raster from "../../../../src/planets/sun/source/preparation/raster.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/sun/prepared/runtime.json" with { type: "json" };
+import assets from "../../../../src/objects/sun/prepared/assets.json" with { type: "json" };
+import scene from "../../../../src/objects/sun/prepared/scene.json" with { type: "json" };
+import lenses from "../../../../src/objects/sun/prepared/lenses.json" with { type: "json" };
+import controls from "../../../../src/objects/sun/prepared/controls.json" with { type: "json" };
+import panel from "../../../../src/objects/sun/prepared/panel.json" with { type: "json" };
+import raster from "../../../../src/objects/sun/source/preparation/raster.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { validateRuntimeAssetManifest } from "../../../../src/platform/runtime-asset-closure.mts";
 import { createSourceManifest } from "../../../../src/platform/source-manifest.mts";
@@ -29,10 +29,10 @@ const LAYERS = ["surface", "poles", "corona", "limb"] as const;
 objectRuntimePackageTests(runtimeDefinition);
 
 test("binds the exact Sun source and runtime closures", async () => {
-  const source = await createSourceManifest({ planetId: "sun", planetName: "Sun", sourceRoot: resolve(projectRoot, "src/planets/sun/source") });
+  const source = await createSourceManifest({ planetId: "sun", planetName: "Sun", sourceRoot: resolve(projectRoot, "src/objects/sun/source") });
   // 38 retired-lane inputs + 7 authored records that moved from documents to local inputs (the navigation recipe included); 3 documents remain.
   assert.deepEqual(await source.verify(), { inputCount: 45, generatedIntermediateCount: 0, documentCount: 3 });
-  const runtime = JSON.parse(await readFile(new URL("../../../../src/planets/sun/runtime-assets.json", import.meta.url), "utf8"));
+  const runtime = JSON.parse(await readFile(new URL("../../../../src/objects/sun/runtime-assets.json", import.meta.url), "utf8"));
   assert.equal(validateRuntimeAssetManifest("sun", runtime), true);
   // 4 lenses x (surface, poles, corona, limb) x 2 densities + 4 thumbnails + 24 starfield faces + 2 system marker strips.
   assert.equal(runtime.assets.length, 62);
@@ -76,7 +76,7 @@ test("Sun is prepared by the generic raster lane as an emissive sphere with flat
   assert.equal(runtimeDefinition.tree.nodes.some(node => node.className?.includes("sun-material-composite")), false);
   for (const layer of ["corona", "limb"]) assert.ok(runtimeDefinition.tree.nodes.some(node => node.className === `sun-${layer}-layer planet-render-root`));
   assert.equal(runtimeDefinition.viewBindings.filter(binding => binding.kind === "silhouette-fit").length, 2);
-  const context = JSON.parse(await readFile(new URL("../../../../src/planets/sun/prepared/world-context.json", import.meta.url), "utf8"));
+  const context = JSON.parse(await readFile(new URL("../../../../src/objects/sun/prepared/world-context.json", import.meta.url), "utf8"));
   assert.equal(context.focus.id, "sun");
   assert.deepEqual(scene.worldFrame, context.frame);
   assert.deepEqual(scene.camera.projection, context.camera.presentation.projection);
@@ -147,7 +147,7 @@ test("preserves both HMI magnetic polarities in the prepared magnetic lens", asy
 
 test("keeps the runtime free of forbidden render paths", async () => {
   const [acquisition, client, styles] = await Promise.all([
-    readFile(new URL("../../../../src/planets/sun/source/preparation/acquisition.json", import.meta.url), "utf8"),
+    readFile(new URL("../../../../src/objects/sun/source/preparation/acquisition.json", import.meta.url), "utf8"),
     readFile(new URL("../../../../src/renderers/css/dist/index.js", import.meta.url), "utf8"),
     readFile(new URL("../../../../src/renderers/css/styles/planet-surfaces.css", import.meta.url), "utf8"),
   ]);

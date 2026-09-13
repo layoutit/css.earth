@@ -29,7 +29,7 @@ test('facet previews alone can opt into smaller band-compatible dimensions; defa
   }
   let count=0;
   for(const id of ['phobos','deimos','dimorphos']) {
-    const recipe=JSON.parse(await readFile(new URL(`../../../src/planets/${id}/source/preparation/terrestrial.json`,import.meta.url), 'utf8'));
+    const recipe=JSON.parse(await readFile(new URL(`../../../src/objects/${id}/source/preparation/terrestrial.json`,import.meta.url), 'utf8'));
     parseTerrestrialProfile(recipe);
     for(const lens of recipe.raster.scientific)if(lens.format==='facet-scalars') {
       assert.deepEqual(lens.previewGrid,grid);assert.equal(lens.displaySampling,'nearest');count++;

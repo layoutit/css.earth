@@ -90,7 +90,7 @@ function inspectOriginalShape(text: string): {vertices: number[][]; faces: numbe
  */
 export async function assertCalibratedAsteroidSource(id: string, independentExpected: CalibrationExpectation): Promise<void> {
   const expected = independentExpected;
-  const directory = resolve(projectRoot, 'src/planets', id), sourceRoot = resolve(directory, 'source');
+  const directory = resolve(projectRoot, 'src/objects', id), sourceRoot = resolve(directory, 'source');
   const read = async (path: string): Promise<Record<string, unknown>> => requireRecord(
     await readJsonSource(resolve(directory, path)), `${id} ${path}`,
   );

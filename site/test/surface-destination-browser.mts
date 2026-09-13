@@ -9,7 +9,7 @@ import { prepareLocationPoint } from '../../tools/objects/geographic-pages/prepa
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://localhost:4210';
 const output = '.local/surface-destination-browser';
-const scene = parseEarthScene(JSON.parse(await readFile(new URL('../../src/planets/earth/prepared/scene.json', import.meta.url),'utf8')));
+const scene = parseEarthScene(JSON.parse(await readFile(new URL('../../src/objects/earth/prepared/scene.json', import.meta.url),'utf8')));
 const catalog = shape({places:array(shape({id:text,name:text,context:text,longitude:number,latitude:number,camera:shape({zoom:number})}))})(JSON.parse(await readFile(new URL('../../public/scenes/earth/earth-places.json', import.meta.url),'utf8')));
 const place = catalog.places.find(place => place.id === '3435910');
 assert.ok(place, 'The real prepared catalogue includes Buenos Aires');
