@@ -106,6 +106,34 @@ not a photographic accuracy measurement. Both the body orientation and
 independent internal-feature agreement remain unresolved. This diagnostic
 does not replace the existing product evidence or justify a texture bake.
 
+The follow-up checked TEMPEST's public `main`/`dev` inventories and relevant
+commit history. Its historical
+[`analyze_flyby_temperatures.py`](https://github.com/duncanLyster/TEMPEST/blob/b52891180d9e7771a7c2d01ff9937cff7827c944/scripts/analyze_flyby_temperatures.py)
+uses a simplified planar trajectory and references a private configuration
+absent from that public tree. It does not release a matched Lucy camera or an
+epoch-bound Dinkinesh orientation. This narrows the missing input; it is not a
+claim that the author's full TESBY setup lacks those data.
+
+The next diagnostic applied native TAN-SIP distortion within the shared limb
+fit, retained the paired FITS quality/sigma checks, and examined observations
+`lor_0752129545_03599`, `lor_0752129617_03613` and
+`lor_0752129722_03634`. The trial pole stayed fixed at the Jackson et al. value;
+18 phases at 20° intervals were screened on the first two frames with a common
+epoch and the published 3.737-hour period. Four phases passed the middle
+image's limited outline check. All four failed the same check on the later
+view, where their trial rotation phases were propagated rather than refitted.
+Small pointing corrections remained independently fitted per image. No
+candidate qualified across the views, and no internal terrain control network
+was established. This coarse search does not rule out a valid orientation or
+a usable mesh.
+
+The detector-aware helper passes its nonlinear-distortion regression and the
+three existing limb-refinement tests; the preparation TypeScript check passes.
+These checks validate the helper, not a Dinkinesh surface. The prepared, unsent source
+request identifies the STL export transform, epoch-bound rotation, matching
+camera/control data, higher-resolution reference mesh, coverage mask and reuse
+terms needed to resume photographic qualification.
+
 Continue by establishing the retrieved candidate's upstream attribution,
 body-frame and observed/model-filled coverage, and the matching reconstructed
 cameras or control network. Inspect a native-pixel image/model projection with
