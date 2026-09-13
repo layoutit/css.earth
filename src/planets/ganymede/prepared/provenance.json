@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c54feb743c2f113749b4eda7d0dbe357b507b9ff39cfd38534230251a793179f"
+    "sha256": "f37d1e8ccf51fee3d39e32b8539da00b203fc5d27030802330cad4520b714eef"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "83966eb31ec4df23259449d93bff1ebfcb191ee32ec41805e7ccf045c8a0e230",
+      "sha256": "b3c795cdafe20f1b1d2223b1e6f344a4aea145d3f59e9f1bd9778e6d7e1ec2b0",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ganymede/",
