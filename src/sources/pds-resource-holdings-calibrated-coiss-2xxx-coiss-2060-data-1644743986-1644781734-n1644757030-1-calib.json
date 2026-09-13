@@ -1,0 +1,28 @@
+{
+  "id": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2060-data-1644743986-1644781734-n1644757030-1-calib",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Cassini ISS calypso · N1644757030_1_CALIB · RED",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644757030_1_CALIB"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644757030_1_CALIB.LBL",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644757030_1_CALIB.LBL",
+      "checkedOn": "2026-09-13",
+      "locator": "PRODUCT_ID 1_N1644757030.118; FILTER_NAME \"RED\",\"CL2\"; CISSCAL 4.0beta DESCRIPTION, I/F units; PC_REAL, 32 bits; LOSSLESS compression"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
