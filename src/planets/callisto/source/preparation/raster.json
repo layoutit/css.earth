@@ -60,7 +60,8 @@
           "centerLongitude": 180,
           "channels": "rgb",
           "zeroValidity": "all-channels",
-          "resampling": "source-georeferenced-bilinear"
+          "resampling": "source-georeferenced-bilinear",
+          "wrapLongitude": true
         },
         "nativePhotographicSampling": {
           "samplesPerAxis": 2,
@@ -84,7 +85,8 @@
           "centerLongitude": 0,
           "channels": "rgb",
           "zeroValidity": "all-channels",
-          "resampling": "source-georeferenced-bilinear"
+          "resampling": "source-georeferenced-bilinear",
+          "wrapLongitude": true
         },
         "textureScale": 0.25
       }

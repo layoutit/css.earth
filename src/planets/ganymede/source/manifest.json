@@ -774,8 +774,8 @@
     {
       "id": "ganymede-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 10958,
-      "expectedSha256": "691c76717afc0a82a3922ee7b0f300a0b018cb6132b90f2c84ada18cd49b3626",
+      "expectedBytes": 11024,
+      "expectedSha256": "b2cf063a3cb8413f24105db5ad067f84d576dfdc3741c563fd6f919db78c5bb8",
       "origin": "Repository-authored Ganymede raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
