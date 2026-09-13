@@ -535,8 +535,8 @@
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit",
       "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
       "license": "NASA PDS public scientific data; retain attribution and source notices.",
-      "expectedBytes": 91335,
-      "expectedSha256": "8d6b2077244356f99618c76e18a7d47c7d514f85e2f8c9c747b1837078b577b8",
+      "expectedBytes": 90870,
+      "expectedSha256": "2b8893d9517f0e2a419fa4b6f43cc52dd5ce29888b53479a993f7daca792ac95",
       "consumers": [
         "navigation"
       ],
@@ -574,7 +574,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1310,
-      "expectedSha256": "bbe53e9759329968afc528eecbf0bf04249ae9180a738514f526fabb051ec1d0"
+      "expectedSha256": "dee47e04d6e3eb8f283c2c847e7699400b19294117ecbf39b45901007e0e46b5"
     },
     {
       "path": "preparation/rotation.json",
