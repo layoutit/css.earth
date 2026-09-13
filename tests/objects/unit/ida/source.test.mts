@@ -12,7 +12,9 @@ const read=async (path: string)=>JSON.parse(await readFile(resolve(root,path),'u
 test('Ida source closure retains original mission bytes, labels and restoration inputs',async()=>{
  const source=await createSourceManifest({planetId:'ida',planetName:'Ida',sourceRoot:root});await source.verify();
  const plan=await read('preparation/acquisition.json');
- for(const input of source.manifest.inputs)assert.ok(plan.operations.some((step: { path: string; })=>step.path===input.path),`Missing acquisition path for ${input.path}`);
+ // Surface places are project-authored and committed, so they have nothing to restore.
+ const authored=new Set(['features/manifest.json','preparation/features.json','presentation/surface-map.json']);
+ for(const input of source.manifest.inputs)if(!authored.has(input.path))assert.ok(plan.operations.some((step: { path: string; })=>step.path===input.path),`Missing acquisition path for ${input.path}`);
 });
 
 test('Ida measured radii preserve independent pole, equatorial and extremity anchors',async()=>{
