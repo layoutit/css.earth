@@ -192,14 +192,12 @@
         "metersPerUnit": 1000,
         "expectedRecords": 16471
       },
-      "latitudeSegments": 90,
-      "longitudeSegments": 180,
       "faceBudget": 800,
       "tileSize": 128,
       "atlasColumns": 16,
       "primitive": "u",
       "simplification": {
-        "method": "meshoptimizer",
+        "method": "source-meshoptimizer",
         "targetFaces": 800,
         "maximumErrorMeters": 200,
         "regularize": true
