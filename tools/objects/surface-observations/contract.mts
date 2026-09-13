@@ -89,8 +89,6 @@ export interface ObservationFrame {
   sample(point: readonly number[]): FootprintSample;
   /** Whether the frame's camera sees a source-surface point without obstruction. */
   visible(point: readonly number[]): boolean;
-  /** The display range of this frame's own qualified pixels, when its route displays by pixel percentiles. */
-  pixelRange?: { low: number; high: number };
   /** Measured footprint: nadir-equivalent ground size of one pixel, from the camera's pixel angle and each pixel's range. */
   footprint: FrameFootprint;
   report: Record<string, unknown>;
@@ -104,7 +102,7 @@ export interface SurfacePolicy {
   selection: 'single' | 'lowest-emission' | 'recipe-order' | 'finest-resolution';
   levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumLogMad: number; maximumGain: number; samplesPerTriangle?: number };
   samplesPerTriangle: number;
-  display: { range: 'reference-pixels' | 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay };
+  display: { range: 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay };
   photometry: Record<string, unknown>;
   limits: Record<string, unknown>;
   limitations?: string;

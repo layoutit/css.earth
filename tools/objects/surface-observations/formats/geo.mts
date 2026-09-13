@@ -175,8 +175,7 @@ async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory,
     if (decoded.startTime !== frame.startTime || decoded.filter !== recipe.filter) throw new Error('GEO observation identity changed.');
     return { startTime: frame.startTime, filter: recipe.filter };
   };
-  // An authored display range keeps its common scale, so its frame computes no pixel percentiles.
-  const common = { id: frame.id, photometry, limits: recipe.transfer, mesh: radial.grid, displayPercentiles: recipe.display.percentiles };
+  const common = { id: frame.id, photometry, limits: recipe.transfer, mesh: radial.grid };
   // A declared refinement fits one rotation of the camera to the mesh's lit limb before any geometry is derived.
   const refined = <T extends { camera: unknown; width: number; height: number; planes: Record<string, NumericRaster>; acceptPixel?(index: number): boolean; qualityReport: Record<string, unknown> }>(decoded: T): T => {
     if (!recipe.refinement) return decoded;
@@ -269,7 +268,7 @@ export const geoFormat: SurfaceObservationFormat = {
       // A colour product's floating bands are encoded once, after surface transfer, on the shared band display.
       display: range && color ? { range: 'authored', low: range[0], high: range[1], units: color.units,
           colorDisplay: bandColorDisplay(color.bands, color.inputQuantity, range) }
-        : { range: 'reference-pixels', percentiles: recipe.display.percentiles ?? [], units: displayUnits(recipe, photometry) }, photometry: photometry.report, limits };
+        : { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: displayUnits(recipe, photometry) }, photometry: photometry.report, limits };
     return { frames, policy, exceeded };
   },
 };

@@ -21,7 +21,8 @@ test('a lens refuses keys its format does not declare and a second display', () 
   const changes: [string, (lens: unknown) => void][] = [
     ['lens key', lens => { fixtureRecord(lens)['displayPercentiles'] = [1, 99]; }],
     ['frame key', lens => { fixtureRecord(lens, 'frames', 0)['exposure'] = 1; }],
-    ['transfer key', lens => { fixtureRecord(lens, 'transfer')['maximumSeparation'] = 1; }],
+    // A lens without transfer limits refuses a transfer block; a lens with them refuses an undeclared limit.
+    ['transfer key', lens => { const record = fixtureRecord(lens); if (record.transfer === undefined) record.transfer = { maximumSeparationMeters: 1 }; else fixtureRecord(lens, 'transfer')['maximumSeparation'] = 1; }],
     ['second display', lens => { const display = fixtureRecord(lens, 'display'); display[display.percentiles ? 'displayRange' : 'percentiles'] = [1, 99]; }],
   ];
   for (const { id, profile } of authored) profile.raster.surfaceObservations.forEach((_, index) => {

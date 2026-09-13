@@ -344,6 +344,7 @@
       "tileSize": 128,
       "atlasColumns": 16,
       "simplification": {
+        "method": "source-meshoptimizer",
         "targetFaces": 720,
         "maximumErrorMeters": 1300
       }
