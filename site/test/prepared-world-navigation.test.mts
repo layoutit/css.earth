@@ -126,6 +126,20 @@ test('a long fly-to ends once its remaining approach no longer moves the body on
   assert.ok(shown.length - 1 - settled <= 30, `${shown.length - 1 - settled} of ${shown.length} publications drew the body within a quarter pixel of its resting place`);
 });
 
+test('a short center selection slows into its target instead of stopping at full speed', async () => {
+  const f = fixtureFactory(), frame = f.navigation.frame, optics = f.navigation.optics();
+  f.navigation.apply({ referenceFrame: 'world', epochJdTt: 1, pose: { positionM: [0, 0, 2.3e9], orientationXyzw: [0, 0, 0, 1] } });
+  f.paints.length = 0;
+  const target = createWorldSelectionTarget(f.navigation.capture(), frame, optics);
+  await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation },
+    signal: f.controller.signal, targetWorldCamera: target, centerSelection: true }) });
+  assert.deepEqual(required(f.paints.at(-1)).pose, target.pose, 'The flight still ends on its exact target');
+  // Pixel oracle: how far the drawn body edge moves between publications.
+  const radii = f.paints.map(world => presentWorldCamera(world, frame, optics).silhouette?.tangentialSemiAxis ?? 0);
+  const steps = radii.slice(1).map((radius, index) => Math.abs(radius - required(radii[index])));
+  assert.ok(Math.max(...steps.slice(-5)) <= 5, `the last five publications moved the body edge by up to ${Math.max(...steps.slice(-5)).toFixed(1)} px`);
+});
+
 test('the exact final camera demand finishes before the old scene is handed off', async () => {
   const f = fixtureFactory(), viewReady = deferred();
   let readView: (() => ObjectPreparationView) | undefined, finalView: ObjectPreparationView | undefined;
