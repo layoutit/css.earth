@@ -1,28 +1,26 @@
 {
-  "method": "Restored newly published immutable runtime assets over HTTPS, verified size and SHA-256 against the delivery inventory.",
+  "baseline": "8cc1a2fae",
+  "method": "Fetched immutable runtime URLs over HTTPS and verified byte counts and SHA-256 against the current runtime inventory.",
   "assets": [
     {
-      "id": "prometheus",
       "filename": "prometheus-filter-color-shadow@2x.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/be2f7a47c24dc975a27a9bd633fb8030a2560491d7bd4e640bdf47ef172a6ed2/prometheus-filter-color-shadow@2x.webp",
-      "bytes": 271090,
-      "sha256": "be2f7a47c24dc975a27a9bd633fb8030a2560491d7bd4e640bdf47ef172a6ed2",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2dd8cb4d104e5687312f02d37f8f40d1188c6efa3315bf73f4ab767a01a756cc/prometheus-filter-color-shadow@2x.webp",
+      "bytes": 251602,
+      "sha256": "2dd8cb4d104e5687312f02d37f8f40d1188c6efa3315bf73f4ab767a01a756cc",
       "verified": true
     },
     {
-      "id": "prometheus",
       "filename": "prometheus-filter-color-surface@2x.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c9009c69ffec9bdf0153f0bbec6095c72fe865288fb35adf05b780f5f5fe0152/prometheus-filter-color-surface@2x.webp",
-      "bytes": 416390,
-      "sha256": "c9009c69ffec9bdf0153f0bbec6095c72fe865288fb35adf05b780f5f5fe0152",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9f0c20d3e7c9b1419790e99bdd0bd5e6c0ce29e7e16a2784af1ff4022d0f7326/prometheus-filter-color-surface@2x.webp",
+      "bytes": 388058,
+      "sha256": "9f0c20d3e7c9b1419790e99bdd0bd5e6c0ce29e7e16a2784af1ff4022d0f7326",
       "verified": true
     },
     {
-      "id": "prometheus",
       "filename": "prometheus-filter-color-thumbnail.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/6b24d01ec79a90ef904acb954d6f2d816b1a1e8d68d10ef21eda5ee35cb4cc31/prometheus-filter-color-thumbnail.webp",
-      "bytes": 3624,
-      "sha256": "6b24d01ec79a90ef904acb954d6f2d816b1a1e8d68d10ef21eda5ee35cb4cc31",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a0546bd0932de13dc23d6e34c5b0615ed03c9cbc40691cf93d6e2a21b607de9e/prometheus-filter-color-thumbnail.webp",
+      "bytes": 3342,
+      "sha256": "a0546bd0932de13dc23d6e34c5b0615ed03c9cbc40691cf93d6e2a21b607de9e",
       "verified": true
     }
   ]

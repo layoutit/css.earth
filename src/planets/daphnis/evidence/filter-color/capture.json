@@ -1,23 +1,45 @@
 {
   "body": "daphnis",
   "lens": "filter-color",
-  "baselineRef": "52d5d4815",
-  "baselineCommit": "52d5d48155b62c62cc35052f4d82800d4d12c208",
-  "toolSha256": "655c8fed7f29c8f3359bec7b2b9ea985112790a42321106d01485537892f7039",
-  "recipeSha256": "b713fb50199dff7b66a4cac0c9b9ff0222064483feee9a3f02cec282d9f1e056",
-  "runtimeSha256": "74aa5e770dd018e5d1e106627e7f4e3c1c929bb91597d836526ae4eb8252fae5",
+  "baselineRef": "8cc1a2fae",
+  "baselineCommit": "8cc1a2faead111bd3535c0bed326180631b42f09",
+  "toolSha256": "89775171909802da8bad5ada20f2e21bc8880b632541920f3d31aea1ee1f7aea",
+  "colorTransferSha256": "4fdacc08867ab12c5b4f4b5819210f52f044155a5ebcbbf912f0ff0d9d201fe5",
+  "recipeSha256": "d5e5d05263dd0939a3b4833749e3d606328f33cbbf8b1d77703b9b8b2903cf64",
+  "runtimeSha256": "00ac47ef864049cfd26825269a16106c652058ae0c9b910e2dce18a0f7f0cf64",
   "geometrySha256": "b9c756040a635f76d26c315091067ba93e8c4fd164e5e8ec62721b11c875e2d0",
   "surfaceTrianglesSha256": "b1e1ee272666ab47f43253b995d67ec17daa7108b310a139ec25aa40b0049026",
   "geometryUnchanged": true,
-  "browser": "148.0.7778.96",
-  "existingAssetChanges": [],
+  "browser": "152.0.7977.84",
+  "channel": "chrome",
+  "purpose": "Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.",
+  "existingAssetChanges": [
+    {
+      "filename": "daphnis-filter-color-shadow@2x.webp",
+      "beforeSha256": "798e9a8b1cfe48d96600fa8285102e2b5f9ccab3eabf928c0631c64beba41d3f",
+      "afterSha256": "3a17a6cdd15a5e9068835adcb3b631449d0be3128dccc38c4fa1945d1fddc78b",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "daphnis-filter-color-surface@2x.webp",
+      "beforeSha256": "e243badf990347c4fc0c540e6a8b587b445d412f0ed0d8ba5a140d6cba4c8af0",
+      "afterSha256": "3c3866822ece15c5089dd5dfb335e5a3540976b067f82b9f897353cbdb3bdec0",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "daphnis-filter-color-thumbnail.webp",
+      "beforeSha256": "c381e458af37fa58188fab457e65995fe714aebdad53f4bec231bd6c9467d23b",
+      "afterSha256": "c3c1a9844c7b1d000e4ff504d4da6b1d288d8e5cb20d3216b97f3ee79883654c",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    }
+  ],
   "mobile": {
     "viewport": {
       "width": 390,
       "height": 844
     },
     "dpr": 2,
-    "rowText": "Filter color\nCassini",
+    "rowText": "False color\nCassini",
     "bounds": {
       "x": 20,
       "y": 785.25,
@@ -32,7 +54,7 @@
       "sunView": "matrix3d(0.99816540691,-0.006414035617,0.060205320331,0,0,0.994372892885,0.105936537116,0,-0.060546019267,-0.105742186677,0.992548623246,0,0,0,0,1)"
     },
     "stableDom": true,
-    "sha256": "62f4929f618e3e8dc5d6f5c9ff1f90f580e31c4e93dc7bbbc0983ec544538075",
+    "sha256": "fb9a27c0e55311a9ddc92afdd6bff42c4fdcefeb11428270e9c51716806720d2",
     "errors": []
   },
   "reports": [
@@ -52,7 +74,7 @@
         {
           "name": "color",
           "file": "color-dpr1.png",
-          "sha256": "54ac73f813644fc0b468842a744ca1f754555e482d30be05c8c94428b3e00286",
+          "sha256": "b0fecb9e1c36f50aff1e7279cc1147ac37c54aa8ee06222d48fabb4ce3879072",
           "url": "http://127.0.0.1:4284/daphnis/?v=MEZAPJWIxGaf-0FCxzNAAAAAP77a7R8bO5u_x9tqyz31J7_g8XOUefvRAAA#dataset=filter-color",
           "pose": {
             "schema": "cssearth-camera-pose@1",
@@ -96,22 +118,64 @@
       },
       "loaded": [
         {
+          "filename": "daphnis-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "daphnis-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "daphnis-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
           "filename": "daphnis-normal-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-normal-surface@2x.webp",
           "sha256": "0a951ef3f3e1a2a3b85c3aa5302e4ba064de02204d130a7ab3e810acc37d4099",
           "bytes": 181544
         },
         {
+          "filename": "daphnis-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-normal-thumbnail.webp",
+          "sha256": "526f75327b04f745b9e6e56f4eb13494d34c5fb6fe06d6b167c8d3ecbf504b65",
+          "bytes": 2328
+        },
+        {
+          "filename": "daphnis-filter-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-filter-color-thumbnail.webp",
+          "sha256": "c3c1a9844c7b1d000e4ff504d4da6b1d288d8e5cb20d3216b97f3ee79883654c",
+          "bytes": 2566
+        },
+        {
+          "filename": "daphnis-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-elevation-thumbnail.webp",
+          "sha256": "5a7fab90da67b55a8cffcfc0e9e1b006549959b3c2d206077e1dbecc02040b70",
+          "bytes": 4514
+        },
+        {
+          "filename": "daphnis-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
           "filename": "daphnis-filter-color-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-filter-color-surface@2x.webp",
-          "sha256": "e243badf990347c4fc0c540e6a8b587b445d412f0ed0d8ba5a140d6cba4c8af0",
-          "bytes": 181242
+          "sha256": "3c3866822ece15c5089dd5dfb335e5a3540976b067f82b9f897353cbdb3bdec0",
+          "bytes": 182240
         },
         {
           "filename": "daphnis-filter-color-shadow@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-filter-color-shadow@2x.webp",
-          "sha256": "798e9a8b1cfe48d96600fa8285102e2b5f9ccab3eabf928c0631c64beba41d3f",
-          "bytes": 128670
+          "sha256": "3a17a6cdd15a5e9068835adcb3b631449d0be3128dccc38c4fa1945d1fddc78b",
+          "bytes": 128344
         }
       ],
       "errors": []
@@ -132,7 +196,7 @@
         {
           "name": "color",
           "file": "color-dpr2.png",
-          "sha256": "58435ad421102a83a58b087295e9ee6850bfb2ef1f36589ac655f7b85c2b63a4",
+          "sha256": "4f74bfe9877523af752c5dffe13ca4f03b10911b2c1d0d8cd7f30c0995572bef",
           "url": "http://127.0.0.1:4284/daphnis/?v=MEZAPJWIxGaf-0FCxzNAAAAAP77a7R8bO5u_x9tqyz31J7_g8XOUefvRAAA#dataset=filter-color",
           "pose": {
             "schema": "cssearth-camera-pose@1",
@@ -176,59 +240,67 @@
       },
       "loaded": [
         {
+          "filename": "daphnis-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "daphnis-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
+          "filename": "daphnis-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-elevation-thumbnail.webp",
+          "sha256": "5a7fab90da67b55a8cffcfc0e9e1b006549959b3c2d206077e1dbecc02040b70",
+          "bytes": 4514
+        },
+        {
           "filename": "daphnis-normal-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-normal-surface@2x.webp",
           "sha256": "0a951ef3f3e1a2a3b85c3aa5302e4ba064de02204d130a7ab3e810acc37d4099",
           "bytes": 181544
         },
         {
+          "filename": "daphnis-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "daphnis-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-normal-thumbnail.webp",
+          "sha256": "526f75327b04f745b9e6e56f4eb13494d34c5fb6fe06d6b167c8d3ecbf504b65",
+          "bytes": 2328
+        },
+        {
+          "filename": "daphnis-filter-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-filter-color-thumbnail.webp",
+          "sha256": "c3c1a9844c7b1d000e4ff504d4da6b1d288d8e5cb20d3216b97f3ee79883654c",
+          "bytes": 2566
+        },
+        {
+          "filename": "daphnis-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
           "filename": "daphnis-filter-color-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-filter-color-surface@2x.webp",
-          "sha256": "e243badf990347c4fc0c540e6a8b587b445d412f0ed0d8ba5a140d6cba4c8af0",
-          "bytes": 181242
+          "sha256": "3c3866822ece15c5089dd5dfb335e5a3540976b067f82b9f897353cbdb3bdec0",
+          "bytes": 182240
         },
         {
           "filename": "daphnis-filter-color-shadow@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/daphnis/daphnis-filter-color-shadow@2x.webp",
-          "sha256": "798e9a8b1cfe48d96600fa8285102e2b5f9ccab3eabf928c0631c64beba41d3f",
-          "bytes": 128670
+          "sha256": "3a17a6cdd15a5e9068835adcb3b631449d0be3128dccc38c4fa1945d1fddc78b",
+          "bytes": 128344
         }
       ],
       "errors": []
-    }
-  ],
-  "acquisitionRevision": "78feb6ad9",
-  "purpose": "Inspected mounted color views, loaded source-asset identity, unchanged geometry and interaction checks. Scientific acceptance uses the source and registration evidence.",
-  "images": [
-    {
-      "file": "color-dpr1.png",
-      "bytes": 209949,
-      "sha256": "54ac73f813644fc0b468842a744ca1f754555e482d30be05c8c94428b3e00286"
-    },
-    {
-      "file": "color-dpr2.png",
-      "bytes": 558650,
-      "sha256": "58435ad421102a83a58b087295e9ee6850bfb2ef1f36589ac655f7b85c2b63a4"
-    },
-    {
-      "file": "mobile.png",
-      "bytes": 310820,
-      "sha256": "62f4929f618e3e8dc5d6f5c9ff1f90f580e31c4e93dc7bbbc0983ec544538075"
-    },
-    {
-      "file": "oblique-shadows-dpr1.png",
-      "bytes": 152590,
-      "sha256": "9a625e411134d2069bf33bd57b5edabff5c01a5d187457f9654b22f31822cec5"
-    },
-    {
-      "file": "oblique-shadows-dpr2.png",
-      "bytes": 384736,
-      "sha256": "6508f1de35ad8a4dd6aca7d226cadd7983c87ddc19fb6b629bb7fdf1c18e74c0"
-    },
-    {
-      "file": "product.png",
-      "bytes": 485400,
-      "sha256": "fb0ea7fe0a8435f7c96997bc9498afd4bffaa6b16dfd84fef739765c4a82f5bf"
     }
   ]
 }

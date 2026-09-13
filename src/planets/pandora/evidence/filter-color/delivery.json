@@ -1,28 +1,26 @@
 {
-  "method": "Restored newly published immutable runtime assets over HTTPS, verified size and SHA-256 against the delivery inventory.",
+  "baseline": "8cc1a2fae",
+  "method": "Fetched immutable runtime URLs over HTTPS and verified byte counts and SHA-256 against the current runtime inventory.",
   "assets": [
     {
-      "id": "pandora",
       "filename": "pandora-filter-color-shadow@2x.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/7ef0905f9edff1fcad8bd6c73c730de344272f60ded3288e9ce279523ec86a10/pandora-filter-color-shadow@2x.webp",
-      "bytes": 200762,
-      "sha256": "7ef0905f9edff1fcad8bd6c73c730de344272f60ded3288e9ce279523ec86a10",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a3210726a6fa07139ae4d47bc66a9961618e27974abc5c605be9e47420efaf03/pandora-filter-color-shadow@2x.webp",
+      "bytes": 202296,
+      "sha256": "a3210726a6fa07139ae4d47bc66a9961618e27974abc5c605be9e47420efaf03",
       "verified": true
     },
     {
-      "id": "pandora",
       "filename": "pandora-filter-color-surface@2x.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/7a1ba147a2849fa54147f2b22a9ec11a471e5509017420f8b4c9ed1393839f9b/pandora-filter-color-surface@2x.webp",
-      "bytes": 309922,
-      "sha256": "7a1ba147a2849fa54147f2b22a9ec11a471e5509017420f8b4c9ed1393839f9b",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/5caa568868054703e006aac24096fe8618d2b61533c90a648b0a3413e32ec477/pandora-filter-color-surface@2x.webp",
+      "bytes": 307508,
+      "sha256": "5caa568868054703e006aac24096fe8618d2b61533c90a648b0a3413e32ec477",
       "verified": true
     },
     {
-      "id": "pandora",
       "filename": "pandora-filter-color-thumbnail.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f919c0c909d9d518967b9b5eaaac120e9cd0d1c9634fdb9cf3af3067f9e5a339/pandora-filter-color-thumbnail.webp",
-      "bytes": 2990,
-      "sha256": "f919c0c909d9d518967b9b5eaaac120e9cd0d1c9634fdb9cf3af3067f9e5a339",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b72ed5f44da68b9801a6780fd5ace795e0022f81e82d9ab5b40ae81bf3382f7b/pandora-filter-color-thumbnail.webp",
+      "bytes": 2952,
+      "sha256": "b72ed5f44da68b9801a6780fd5ace795e0022f81e82d9ab5b40ae81bf3382f7b",
       "verified": true
     }
   ]

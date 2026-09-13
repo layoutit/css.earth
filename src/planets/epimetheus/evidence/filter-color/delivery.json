@@ -1,44 +1,26 @@
 {
-  "method": "Restored newly published immutable runtime assets over HTTPS, verified size and SHA-256 against the delivery inventory.",
+  "baseline": "8cc1a2fae",
+  "method": "Fetched immutable runtime URLs over HTTPS and verified byte counts and SHA-256 against the current runtime inventory.",
   "assets": [
     {
-      "id": "epimetheus",
-      "filename": "epimetheus-elevation-shadow@2x.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/db3f3f76f660510bdd5be1863dd30d57c2e1d69bdfbe112804c0a849c085c166/epimetheus-elevation-shadow@2x.webp",
-      "bytes": 304344,
-      "sha256": "db3f3f76f660510bdd5be1863dd30d57c2e1d69bdfbe112804c0a849c085c166",
-      "verified": true
-    },
-    {
-      "id": "epimetheus",
       "filename": "epimetheus-filter-color-shadow@2x.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/fb827610da1501c53e30f4c3494d89e4b17a4ec146416a973875a2cbe440ea9a/epimetheus-filter-color-shadow@2x.webp",
-      "bytes": 207964,
-      "sha256": "fb827610da1501c53e30f4c3494d89e4b17a4ec146416a973875a2cbe440ea9a",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/afba716c73c6946bd1274d9ded84923d572b7ed8727a8c3944fdc889394a87e1/epimetheus-filter-color-shadow@2x.webp",
+      "bytes": 209236,
+      "sha256": "afba716c73c6946bd1274d9ded84923d572b7ed8727a8c3944fdc889394a87e1",
       "verified": true
     },
     {
-      "id": "epimetheus",
       "filename": "epimetheus-filter-color-surface@2x.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f8368000b2a30fdfb6acfb9b242c18fefcdc7692c5bcbc871d48e818f7d64dda/epimetheus-filter-color-surface@2x.webp",
-      "bytes": 291398,
-      "sha256": "f8368000b2a30fdfb6acfb9b242c18fefcdc7692c5bcbc871d48e818f7d64dda",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3af2f95d23c728719870faf3f87500d8c75ce485f68a4d4d672f476c6e748b7a/epimetheus-filter-color-surface@2x.webp",
+      "bytes": 296894,
+      "sha256": "3af2f95d23c728719870faf3f87500d8c75ce485f68a4d4d672f476c6e748b7a",
       "verified": true
     },
     {
-      "id": "epimetheus",
       "filename": "epimetheus-filter-color-thumbnail.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4f84d87d4b6878aab517218ee77f3da5f5b66623c84c801be1efa49e24c5be8e/epimetheus-filter-color-thumbnail.webp",
-      "bytes": 2100,
-      "sha256": "4f84d87d4b6878aab517218ee77f3da5f5b66623c84c801be1efa49e24c5be8e",
-      "verified": true
-    },
-    {
-      "id": "epimetheus",
-      "filename": "epimetheus-normal-shadow@2x.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/fc3264c8f9a4a96d59a5e6f3e948600309d379706e0a9dbe9e283573935f10ca/epimetheus-normal-shadow@2x.webp",
-      "bytes": 370248,
-      "sha256": "fc3264c8f9a4a96d59a5e6f3e948600309d379706e0a9dbe9e283573935f10ca",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/0719f648d5ba90dbbfdf92b6e5ec6a608ac10f94efe3604e4a2fc0a956597035/epimetheus-filter-color-thumbnail.webp",
+      "bytes": 2120,
+      "sha256": "0719f648d5ba90dbbfdf92b6e5ec6a608ac10f94efe3604e4a2fc0a956597035",
       "verified": true
     }
   ]

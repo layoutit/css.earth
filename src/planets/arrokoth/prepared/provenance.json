@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "arrokoth",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "729909dd1d95664212902bccd6cf3f5ec74367cdaa671d48e742795815935152"
+    "sha256": "74ac614da0454b96e5cf027064a9789d764d31b22bb85ae221914638cdbde95a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "df26536cdfe20b8ee284ba00e45c154f203682904bec2ea6e6be09851f64e1b6",
+      "sha256": "314eabd1f022d1740f6174fcc3f367a97386826ecec60eeb98f6e4327bf7267d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -146,9 +146,20 @@
                 "coverage": "New Horizons near-infrared, red and blue bands, registered and blur-matched by the mission team. Enhanced color at 340 m native resolution. Unseen and grazing surfaces remain gridded."
               },
               "colorDisplay": {
-                "minimum": 0,
-                "maximum": 0.17
-              }
+                "kind": "band-composite",
+                "inputQuantity": "derived-band-value",
+                "bands": [
+                  "NIR",
+                  "RED",
+                  "BLUE"
+                ],
+                "displayRange": [
+                  0,
+                  0.17
+                ],
+                "outputEncoding": "srgb"
+              },
+              "labelPath": "observations/ca05_mvic_cube.lblx"
             }
           ]
         },
@@ -209,7 +220,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f04f29310a16838dd3288d0c8bfd0e7fbae43ab37d5ecf407107bc137456f092",
+      "sha256": "90263d6e9e853754148bf4691a53ff9ca94e77729e84fe7376f5ac40bce98571",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -254,7 +265,7 @@
             "model": "Shape model",
             "albedo": "Modeled albedo",
             "lorri": "LORRI",
-            "mvic": "MVIC"
+            "mvic": "False color"
           },
           "controls": [
             {
@@ -275,11 +286,11 @@
             },
             {
               "id": "mvic",
-              "label": "MVIC",
-              "title": "New Horizons enhanced color",
-              "detail": "NIR / red / blue · 340 m/pixel",
+              "label": "False color",
+              "title": "New Horizons false color",
+              "detail": "New Horizons",
               "falseColor": true,
-              "description": "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is enhanced color at 340 metres per native pixel; the grid marks unsupported coverage.",
+              "description": "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is false color, not a human-visible reconstruction, at 340 metres per native pixel; the grid marks unsupported coverage.",
               "thumbnail": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
               "surface": "arrokoth-mvic-surface@2x.webp",
               "poles": "arrokoth-mvic-poles@2x.webp",
@@ -287,7 +298,8 @@
                 "id": "mvic-ca05",
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.26007/fv5e-eh92"
-              }
+              },
+              "summary": "Near-infrared, red and blue bands show spectral differences at 340 metres per native pixel. This is false color; the grid marks unsupported coverage."
             },
             {
               "id": "albedo",
@@ -424,7 +436,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -459,7 +471,7 @@
       "sha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5",
       "bytes": 3686921,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -503,7 +515,7 @@
       "sha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39",
       "bytes": 2882880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -540,7 +552,7 @@
       "sha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
       "bytes": 9529,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -574,7 +586,7 @@
       "sha256": "1fbb5124f417ea465db18cfdf5b7b8caee38cc30d8f1663b9939a648e27f0640",
       "bytes": 10532160,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -602,7 +614,7 @@
       "sha256": "5992738be4a7607b8ed2ccfe60643c7aab465f046cd674972c27efa2b426a263",
       "bytes": 3104,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -628,7 +640,7 @@
       "sha256": "37d71a90bd10c2a7812af0b350db1e6cb770c1c3f0e0a26e35a67547efef640e",
       "bytes": 2882880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -656,8 +668,42 @@
       "sha256": "8b4f7ef786172c6d928ab7bf3145e1876c6264d916609f4ed3f40235fdccede1",
       "bytes": 5767,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mvic-label",
+      "path": "observations/ca05_mvic_cube.lblx",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx",
+      "credit": "Grundy et al.; NASA / JHUAPL / SwRI; New Horizons science team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain source attribution and enhanced-color qualifications.",
+      "acquisition": "Restored by preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-arrokoth-mvic-ca05",
+            "role": "reference",
+            "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
+          }
+        ]
+      },
+      "sha256": "46565f1d4ecee1a836351365700d8acc01e150ebcece4ec69b39536fd1af36e5",
+      "bytes": 18710,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/ca05_mvic_cube.lblx",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx"
+      },
       "verificationOperations": []
     },
     {
@@ -673,10 +719,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f04f29310a16838dd3288d0c8bfd0e7fbae43ab37d5ecf407107bc137456f092",
-      "bytes": 6915,
+      "sha256": "90263d6e9e853754148bf4691a53ff9ca94e77729e84fe7376f5ac40bce98571",
+      "bytes": 7113,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -714,13 +760,13 @@
           "url": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
           "bytes": 119308,
           "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -754,19 +800,19 @@
           "url": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
           "bytes": 610,
           "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
           "bytes": 58,
           "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
           "bytes": 589518,
           "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -800,26 +846,26 @@
           "url": "/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
           "bytes": 1372,
           "sha256": "a384095b589f6084b5ab530d2c963f418f3500c4041e3794406eff5a724c2076",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
           "bytes": 903156,
           "sha256": "4022dde474771158d08d13d78c503b573dade60d66216549fe0e4571b37d0c34",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
       "id": "mvic",
-      "label": "MVIC",
+      "label": "False color",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/1",
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is enhanced color at 340 metres per native pixel; the grid marks unsupported coverage."
+        "Near-infrared, red and blue bands reveal color differences across the two lobes. The mission team aligned the bands and matched their blur. This is false color, not a human-visible reconstruction, at 340 metres per native pixel; the grid marks unsupported coverage."
       ],
       "lensIds": [
         "mvic"
@@ -833,20 +879,21 @@
       "inputs": [
         "mvic-ca05",
         "mvic-camera",
+        "mvic-label",
         "published-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
-          "bytes": 2172,
-          "sha256": "08d59b0d4b3d628b600549e500ef7c34ef4351c276929a1759cf99e29870b87e",
-          "verification": "bytes-verified"
+          "bytes": 2036,
+          "sha256": "cc041d2351ead311fb0283ee6863ca393bc6f58fdce47b1e73fa6ec30ee0dff2",
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-mvic-surface@2x.webp",
-          "bytes": 256406,
-          "sha256": "8864742cfd5e837d59be23ae6d033b6724ff3e70880b10b55e2db8486ebb8f42",
-          "verification": "bytes-verified"
+          "bytes": 254052,
+          "sha256": "d7c807ca1763f467c01e0bde7e3e8e9b601af45b661898cae0ed03a688c8be8b",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -926,7 +973,7 @@
     },
     {
       "id": "preview:mvic",
-      "label": "MVIC preview",
+      "label": "False color preview",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/1",
       "recipeDependencies": [
@@ -942,8 +989,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/mvic.webp",
-          "bytes": 6380,
-          "sha256": "424d1f7f62bdc9d160a524a28837b7a97fa645040a5de371c3ab504e0bcc19e7",
+          "bytes": 5928,
+          "sha256": "7bc2dbea824ad18ca778120b0ee7cd8d010a7ee490eb8dfd4e99a7bd4fdafd15",
           "verification": "bytes-verified"
         }
       ]

@@ -223,7 +223,7 @@
           "backgroundMaximum": 0.003
         },
         "metadata": {
-          "label": "Filter color",
+          "label": "False color",
           "falseColor": true,
           "coverage": "Cassini RED, GRN, BL1 filters displayed as red, green and blue; observed illumination and common coverage only.",
           "attribution": {
@@ -235,6 +235,20 @@
           "longitudeDegrees": 246.01999999999998,
           "latitudeDegrees": 20.68,
           "zoom": 1.1
+        },
+        "colorDisplay": {
+          "kind": "band-composite",
+          "inputQuantity": "radiance-factor",
+          "bands": [
+            "RED",
+            "GRN",
+            "BL1"
+          ],
+          "displayRange": [
+            0,
+            0.8
+          ],
+          "outputEncoding": "srgb"
         }
       }
     ]

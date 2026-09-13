@@ -4,7 +4,7 @@
   "id": "atlas",
   "displayName": "Atlas",
   "panel": {
-    "introduction": "Atlas travels just outside Saturn’s A ring. Its rounded central body and wide equatorial ridge give it a striking saucer shape. Cassini’s closest flyby in 2017 revealed the ridge in detail.",
+    "introduction": "Atlas travels just outside Saturn\u2019s A ring. Its rounded central body and wide equatorial ridge give it a striking saucer shape. Cassini\u2019s closest flyby in 2017 revealed the ridge in detail.",
     "facts": [
       {
         "id": "radius",
@@ -45,14 +45,14 @@
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "Richard Terrile / Voyager 1 team · 1980"
+        "value": "Richard Terrile / Voyager 1 team \u00b7 1980"
       }
     ],
     "moreFacts": [
       {
         "id": "density",
         "label": "Mean density",
-        "value": "0.39 ± 0.06 g/cm³",
+        "value": "0.39 \u00b1 0.06 g/cm\u00b3",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
           "label": "NASA/JPL reference",
@@ -70,7 +70,7 @@
     "labels": {
       "normal": "Monochrome",
       "elevation": "Elevation",
-      "filter-color": "Filter color"
+      "filter-color": "False color"
     },
     "controls": [
       {
@@ -78,7 +78,7 @@
         "label": "Monochrome",
         "description": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
         "title": "ISS mosaic",
-        "detail": "Cassini · corrected mosaic",
+        "detail": "Cassini \u00b7 corrected mosaic",
         "thumbnail": "/scenes/atlas/atlas-normal-thumbnail.webp",
         "surface": "atlas-normal-surface@2x.webp",
         "poles": "atlas-normal-poles@2x.webp",
@@ -91,9 +91,9 @@
       },
       {
         "id": "filter-color",
-        "label": "Filter color",
+        "label": "False color",
         "description": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
-        "title": "Cassini filter color",
+        "title": "Cassini false color",
         "detail": "Cassini",
         "thumbnail": "/scenes/atlas/atlas-filter-color-thumbnail.webp",
         "surface": "atlas-filter-color-surface@2x.webp",
@@ -103,7 +103,7 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/"
         },
-        "summary": "False color from separately registered filters. Gray grid marks missing common coverage; photographed shadows remain."
+        "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
       },
       {
         "id": "elevation",

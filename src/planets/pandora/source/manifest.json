@@ -940,7 +940,7 @@
         "type": "body-fixed-mesh",
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Radial height above a 40.6 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+      "coverage": "Radial height above a 40.6 km reference sphere from the Cassini shape model. Includes the moon\u2019s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
       "capture": {
         "attributions": [
           {
@@ -1310,8 +1310,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6750,
-      "expectedSha256": "ec0c997674f042197a09f308788acdb6b751cc39dc6bb813f373bd669ae6a3ff",
+      "expectedBytes": 6808,
+      "expectedSha256": "3a63768f20f181f4a6ef8c4eebe1a88b554efc0ab79be1fbb8865d747fd2c1d2",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -1334,8 +1334,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 13226,
-      "expectedSha256": "8130c4f1b2256d9c49d8798d84fa4a25294f0bca5acae87c1e4c01dbffc638ef"
+      "expectedBytes": 13541,
+      "expectedSha256": "37adba4843d899bcf6ce42ef4fe05aa05aa01e987c11382b4be38412418c1660"
     },
     {
       "path": "presentation/minimap.json",

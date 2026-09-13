@@ -121,6 +121,14 @@ GitHub language classification does not determine what belongs in Git.
 
 ### Interpretation
 
+For color surfaces, follow [Source-backed surface color](../color-preparation.md).
+Keep source calibration, geometric registration and display interpretation
+separate. A natural-color claim requires an applicable sourced color method;
+calibrated bands, three RGB channels, or an sRGB encoding cannot establish it.
+Never invent missing visible measurements or tune an undocumented white balance.
+Measured-band composition retains floating values until its final declared
+display encoding; publisher-prepared RGB does not receive that transfer twice.
+
 Explain the following where relevant:
 
 - Observations, derived measurements, models or illustrations; the provider's

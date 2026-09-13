@@ -17,13 +17,37 @@ const hash=(bytes:Uint8Array|string)=>createHash('sha256').update(bytes).digest(
 const runtime=await read(`${root}/prepared/runtime.refs.json`),assets=requireArray((await read(`${root}/runtime-assets.json`)).assets).map(value=>requireRecord(value));
 const variant=requireArray(runtime.variants).map(value=>requireRecord(value)).find(v=>requireRecord(v.when).lensId===lens);
 if(!variant)throw new Error('No prepared dataset');
-const camera=requireRecord(requireRecord(variant.navigation).camera);
-const pose={controlPitch:requireFiniteNumber(camera.controlPitch),controlYaw:requireFiniteNumber(camera.controlYaw),zoom:.8};
-const oldAssets=requireArray(requireRecord(JSON.parse(execFileSync('git',['show',`${baselineRef}:${root}/runtime-assets.json`],{encoding:'utf8'}))).assets).map(value=>requireRecord(value));
+const navigation=variant.navigation===undefined?undefined:requireRecord(variant.navigation);
+const runtimeCamera=requireRecord(runtime.camera);
+const camera=navigation?.camera===undefined?{controlPitch:runtimeCamera.defaultControlPitchDegrees,controlYaw:runtimeCamera.defaultControlYawDegrees}:requireRecord(navigation.camera);
+const defaultPose={controlPitch:requireFiniteNumber(camera.controlPitch),controlYaw:requireFiniteNumber(camera.controlYaw),zoom:.8};
+const suppliedPose=process.env.CSSEARTH_CAPTURE_POSE;
+const requestedPose=suppliedPose?requireRecord(JSON.parse(suppliedPose)):defaultPose;
+const pose={controlPitch:requireFiniteNumber(requestedPose.controlPitch),controlYaw:requireFiniteNumber(requestedPose.controlYaw),zoom:requireFiniteNumber(requestedPose.zoom)};
+assert.ok(pose.zoom>0,'Capture zoom must be positive');
+const descriptor=await read(`${root}/object.json`);
+const recipeSources=requireArray(requireRecord(requireRecord(descriptor.properties).recipe).sources).map(value=>requireRecord(value));
+const surfaceRecipe=recipeSources.find(source=>source.id==='raster')??recipeSources.find(source=>source.id==='terrestrial');
+assert.ok(surfaceRecipe,'No authored surface recipe');
+const recipePath=`${root}/${requireString(surfaceRecipe.path)}`,recipe=await read(recipePath);
+const selectedFiles=new Set([`${body}-${lens}-surface@2x.webp`,`${body}-${lens}-shadow@2x.webp`,`${body}-${lens}-thumbnail.webp`]);
+if(surfaceRecipe.id==='raster'){
+ const surface=requireArray(recipe.surfaces).map(value=>requireRecord(value)).find(surface=>surface.id===lens);assert.ok(surface,'No selected raster surface');
+ const name=(template:unknown,density=1)=>requireString(template).replaceAll('{id}',lens).replaceAll('{density}',String(density)).replaceAll('{suffix}',density===1?'':'@2x');
+ selectedFiles.clear();selectedFiles.add(name(surface.thumbnail));
+ assert.equal(recipe.polesCombined,false,'A selected capture needs independently bound polar assets');
+ for(const density of requireArray(recipe.densities).map(value=>requireFiniteNumber(value))){selectedFiles.add(name(surface.output,density));selectedFiles.add(name(recipe.polesOutput,density));}
+}
+const oldAssets=requireArray(requireRecord(JSON.parse(execFileSync('git',['show',`${baselineRef}:${root}/runtime-assets.json`],{encoding:'utf8',maxBuffer:32*1024*1024}))).assets).map(value=>requireRecord(value));
 const existingAssetChanges=[];
 for(const old of oldAssets){
  const a=assets.find(b=>b.filename===old.filename);assert.ok(a,`Existing asset removed: ${old.filename}`);
  if(a.sha256===old.sha256)continue;
+ const filename=requireString(old.filename);
+ if(selectedFiles.has(filename)){
+  existingAssetChanges.push({filename,beforeSha256:old.sha256,afterSha256:a.sha256,reason:'The selected dataset was re-prepared; source and color evidence qualify this change.'});
+  continue;
+ }
  // The matched unshaded reference must retain its delivered bytes. Rebuilding
  // older shadow banks can expose existing main/prepared drift; qualify that
  // separately against an explicit regeneration of the baseline recipe.
@@ -34,18 +58,26 @@ for(const old of oldAssets){
  existingAssetChanges.push({filename:old.filename,previousSha256:old.sha256,currentSha256:a.sha256,baselineRegeneratedSha256:hash(baseline),bytes:a.bytes});
 }
 await mkdir(outputDirectory,{recursive:true});
-const browser=await chromium.launch({headless:true});
+const channel=process.env.CSSEARTH_CAPTURE_CHANNEL;
+if(channel!==undefined&&channel!=='chrome')throw new TypeError('The optional capture channel must be chrome.');
+const browser=await chromium.launch({headless:true,...(channel?{channel}:{})});
 const reports=[];
 let mobile;
 try{for(const dpr of [1,2]){
  const viewport={width:1440,height:900},crop={x:360,y:80,width:720,height:660};
  const page=await createTestPage(browser,{viewport,deviceScaleFactor:dpr,reducedMotion:'reduce'});
+ // Retain response bodies until their hashes are recorded, including large sphere atlases.
+ const network=await page.context().newCDPSession(page);
+ await network.send('Network.enable',{maxTotalBufferSize:64*1024*1024,maxResourceBufferSize:16*1024*1024,enableDurableMessages:true});
  const errors:string[]=[],pending:Promise<void>[]=[],loaded:{filename:string;url:string;sha256:string;bytes:number}[]=[];
  page.on('pageerror',e=>errors.push(e.message));
  page.on('response',response=>{
   const filename=new URL(response.url()).pathname.split('/').at(-1)??'';
-  if(!filename.startsWith(`${body}-`)||!filename.includes('-surface@2x.webp')&&!filename.includes('-shadow@2x.webp'))return;
-  pending.push((async()=>{assert.equal(response.status(),200,response.url());const bytes=await response.body(),expected=assets.find(a=>a.filename===filename);assert.equal(hash(bytes),expected?.sha256,filename);loaded.push({filename,url:response.url(),sha256:hash(bytes),bytes:bytes.length});})().catch(e=>{errors.push(String(e));}));
+  if(!assets.some(asset=>asset.filename===filename))return;
+  // A duplicate image request can revalidate a response already hashed above.
+  // A 304 contains no new image bytes; never hash it as a replacement body.
+  if(response.status()===304)return;
+  pending.push((async()=>{assert.equal(response.status(),200,response.url());const bytes=await response.body(),expected=assets.find(a=>a.filename===filename);assert.equal(hash(bytes),expected?.sha256,filename);loaded.push({filename,url:response.url(),sha256:hash(bytes),bytes:bytes.length});})().catch(e=>{errors.push(`${filename}: ${String(e)}`);}));
  });
  const views=[];
  try{
@@ -79,6 +111,7 @@ try{for(const dpr of [1,2]){
   await page.waitForFunction(body=>window.__cssearthTest.object(body).runtime.selection().committed?.shadows===true,body);
   await page.waitForTimeout(150);await page.screenshot({path:resolve(outputDirectory,`oblique-shadows-dpr${dpr}.png`),clip:crop});
   await Promise.all(pending);assert.deepEqual(errors,[]);
+  assert.ok(loaded.some(asset=>selectedFiles.has(asset.filename)&&!asset.filename.includes('thumbnail')&&!asset.filename.includes('-lens-')),'The selected surface must have a verified image response');
   reports.push({dpr,viewport,crop,views,interaction,loaded,errors});
  }finally{await page.close();}
 }
@@ -92,6 +125,7 @@ try{
  const row=phone.locator(`button[name="lens"][value="${lens}"]`);
  await row.click();
  await phone.waitForFunction(({body,lens})=>{const o=window.__cssearthTest.object(body);return o.lens().ready&&o.lens().id===lens;},{body,lens});
+ await phone.evaluate(({body,pose})=>window.__cssearthTest.object(body).setView({...pose,zoom:.6}),{body,pose});
  await phone.waitForLoadState('networkidle');
  const bounds=await row.boundingBox();assert.ok(bounds);assert.ok(bounds.x>=0&&bounds.x+bounds.width<=390);
  const state=await phone.evaluate(body=>({pageWidth:document.documentElement.scrollWidth,pose:window.__cssearthTest.object(body).view().pose,stableDom:window.__cssearthTest.object(body).assertStableDomIdentity()}),body);
@@ -99,11 +133,12 @@ try{
  const buffer=await phone.screenshot({path:resolve(outputDirectory,'mobile.png'),animations:'disabled'});
  mobile={viewport:{width:390,height:844},dpr:2,rowText:await row.innerText(),bounds,...state,sha256:hash(buffer),errors};
 }finally{await phone.close();}
-const sceneBefore=requireRecord(JSON.parse(execFileSync('git',['show',`${baselineRef}:${root}/prepared/scene.refs.json`],{encoding:'utf8'}))),sceneNow=await read(`${root}/prepared/scene.refs.json`);
-assert.deepEqual(sceneNow.bodyLeaves,sceneBefore.bodyLeaves);assert.deepEqual(sceneNow.surfaceTriangles,sceneBefore.surfaceTriangles);
-await writeFile(resolve(outputDirectory,'capture.json'),JSON.stringify({body,lens,baselineRef,baselineCommit:execFileSync('git',['rev-parse',baselineRef],{encoding:'utf8'}).trim(),
- toolSha256:hash(await readFile(import.meta.filename)),recipeSha256:hash(await readFile(`${root}/source/preparation/terrestrial.json`)),runtimeSha256:hash(await readFile(`${root}/prepared/runtime.refs.json`)),
- geometrySha256:hash(JSON.stringify(sceneNow.bodyLeaves)),surfaceTrianglesSha256:hash(JSON.stringify(sceneNow.surfaceTriangles)),geometryUnchanged:true,browser:await browser.version(),
+const sceneBefore=requireRecord(JSON.parse(execFileSync('git',['show',`${baselineRef}:${root}/prepared/scene.refs.json`],{encoding:'utf8',maxBuffer:32*1024*1024}))),sceneNow=await read(`${root}/prepared/scene.refs.json`);
+const geometry=sceneNow.bodyLeaves??sceneNow.body;assert.ok(geometry,'Missing prepared body geometry');
+assert.deepEqual(geometry,sceneBefore.bodyLeaves??sceneBefore.body);assert.deepEqual(sceneNow.surfaceTriangles,sceneBefore.surfaceTriangles);
+await writeFile(resolve(outputDirectory,'capture.json'),JSON.stringify({body,lens,baselineRef,baselineCommit:execFileSync('git',['rev-parse',baselineRef],{encoding:'utf8',maxBuffer:32*1024*1024}).trim(),
+ toolSha256:hash(await readFile(import.meta.filename)),colorTransferSha256:hash(await readFile('tools/objects/color-transfer.mts')),recipeSha256:hash(await readFile(recipePath)),runtimeSha256:hash(await readFile(`${root}/prepared/runtime.refs.json`)),
+ geometrySha256:hash(JSON.stringify(geometry)),...(sceneNow.surfaceTriangles?{surfaceTrianglesSha256:hash(JSON.stringify(sceneNow.surfaceTriangles))}:{}),geometryUnchanged:true,browser:await browser.version(),channel:channel??'bundled-chromium',
  purpose:'Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.',existingAssetChanges,mobile,reports},null,2)+'\n');
 console.log(`${body}: ${reports.length} DPR cases with retained DOM and verified assets`);
 }finally{await browser.close();}

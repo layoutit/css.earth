@@ -1094,7 +1094,7 @@
       "expectedSha256": "4e516858ee1881f66658648066ba11aee2fb11a2c1dde846a17a6d5e31847ad3",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/HYPERION_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -2498,8 +2498,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7097,
-      "expectedSha256": "9cdf19a4129000740e5fbb75368836fac1193e1417f5714e7869885b8676b710",
+      "expectedBytes": 7143,
+      "expectedSha256": "1c20f125075eb9fcc25381920cd603153fa4c1466ddb02d85847a0bc13dd18b4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -2527,8 +2527,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 23600,
-      "expectedSha256": "4d11acb5ef5940695c850977c3e70e5fe9a9bada936fec577220fde130b20c34"
+      "expectedBytes": 23918,
+      "expectedSha256": "ef7af975e45ef41a69b45d122eb1183f3f9b095bad9ae6182db0e05cd41ea4b9"
     },
     {
       "path": "presentation/minimap.json",

@@ -1,0 +1,306 @@
+{
+  "body": "proteus",
+  "lens": "filter-color",
+  "baselineRef": "8cc1a2fae",
+  "baselineCommit": "8cc1a2faead111bd3535c0bed326180631b42f09",
+  "toolSha256": "9b436e502e37039985cf2f412556ca90d038edfb1538ced55cafa411a459e6a6",
+  "colorTransferSha256": "4fdacc08867ab12c5b4f4b5819210f52f044155a5ebcbbf912f0ff0d9d201fe5",
+  "recipeSha256": "69a672edd51f6d6122f6bf9d852db9dc6d233a9d4007408ae6146021a4438b94",
+  "runtimeSha256": "f56b0f2242d45485c49ae741b0db0a0371b2e030525bd50ab58f1718a05a04df",
+  "geometrySha256": "69e130816d9a69d0ac122602353e9717ba508c3aade09b393be4e27f18f7b70e",
+  "surfaceTrianglesSha256": "ec460afcb4d4a70bcc0be75eff68e0d6ea5e5f6f285893859adcd1761d18b797",
+  "geometryUnchanged": true,
+  "browser": "152.0.7977.84",
+  "channel": "chrome",
+  "purpose": "Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.",
+  "existingAssetChanges": [
+    {
+      "filename": "proteus-filter-color-shadow@2x.webp",
+      "beforeSha256": "be0335700a5e3b9701e6ac1fc14f185bd06a1183b249454adf47e4630455c0b5",
+      "afterSha256": "787d908a0d0c89120d14d6bf13ed8d1de4e4604f6be5e0042de36d007d6d4c7a",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "proteus-filter-color-surface@2x.webp",
+      "beforeSha256": "8f7546054163722d68ed54f322bbaf48cf447c858c238da9d8ed460c0348cb00",
+      "afterSha256": "165fb921fb9de96e9b82b15659e4342d0832bb31dfd6f5f4e50a3fc24a09e160",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "proteus-filter-color-thumbnail.webp",
+      "beforeSha256": "2053e1e0086f86217939322a359aadde5b42edaa76ed8df0f72a681480a2f22f",
+      "afterSha256": "fff84f5716cd883019faf6ea3639b0341dcebf54ebfbe3321c737b3c28013c4f",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    }
+  ],
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 2,
+    "rowText": "False color\nG / B / V",
+    "bounds": {
+      "x": 20,
+      "y": 695.6875,
+      "width": 350,
+      "height": 20
+    },
+    "pageWidth": 390,
+    "pose": {
+      "schema": "cssearth-camera-pose@1",
+      "scene": "matrix3d(-0.702621119668,0.361384689486,-0.612963839392,0,0,0.861431573939,0.507873649072,0,0.711564165903,0.356842751961,-0.605260016998,0,0,0,0,1)",
+      "skybox": "matrix3d(-0.73272928783,0.345618233616,-0.586221512988,0,0.624365077801,0.684083935965,-0.377090644523,0,0.270695339705,-0.642321631488,-0.717040284878,0,0,0,0,1)",
+      "sunView": "matrix3d(-0.681875486013,0.484615550288,0.547899251681,0,0,0.74904035961,-0.662524369118,0,-0.731468264229,-0.451759126188,-0.510752259253,0,0,0,0,1)"
+    },
+    "stableDom": true,
+    "sha256": "59b7c747960c0152bcbba0d585e857c81e9b5b08751ddab951a369507882a878",
+    "errors": []
+  },
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr1.png",
+          "sha256": "225f6f757eaa1883b4965522acba5e17b04c8781016606fb5de9e896558fa0ee",
+          "url": "http://127.0.0.1:4284/proteus/?v=MEZAmHJq3d6CFkFCxzNAAAAAP7n7xMhA9JA_zxYhj95khD_Xzu1vd5PjAAA#dataset=filter-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.702621119668,0.361384689486,-0.612963839392,0,0,0.861431573939,0.507873649072,0,0.711564165903,0.356842751961,-0.605260016998,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.73272928783,0.345618233616,-0.586221512988,0,0.624365077801,0.684083935965,-0.377090644523,0,0.270695339705,-0.642321631488,-0.717040284878,0,0,0,0,1)",
+            "sunView": "matrix3d(-0.681875486013,0.484615550288,0.547899251681,0,0,0.74904035961,-0.662524369118,0,-0.731468264229,-0.451759126188,-0.510752259253,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "filter-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 1112,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.898161024723,0.28805722509,-0.332159312292,0,0.174000944197,0.926681928012,0.333143025912,0,0.403770287525,0.241420047569,-0.882431819204,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.914778517061,0.277349772655,-0.293695766525,0,0.403690646412,0.601331024194,-0.689517800605,0,-0.014629205545,-0.749318335956,-0.662048210554,0,0,0,0,1)",
+          "sunView": "matrix3d(-0.857211160266,0.418864672443,0.299568711474,0,0.238454684332,0.838460866235,-0.490023202831,0,-0.456430049663,-0.348619795726,-0.818618255228,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "proteus-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "proteus-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "proteus-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
+          "filename": "proteus-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-normal-surface@2x.webp",
+          "sha256": "3569954d7533c338ad73a0a25f737e54278b3b05aeeb3235842e23908f656153",
+          "bytes": 426212
+        },
+        {
+          "filename": "proteus-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-normal-thumbnail.webp",
+          "sha256": "93c16a2ac7a30062c0f44c64d611f8cf86afe248e3a3128314fa3c36bb282015",
+          "bytes": 3420
+        },
+        {
+          "filename": "proteus-filter-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-filter-color-thumbnail.webp",
+          "sha256": "fff84f5716cd883019faf6ea3639b0341dcebf54ebfbe3321c737b3c28013c4f",
+          "bytes": 2664
+        },
+        {
+          "filename": "proteus-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
+          "filename": "proteus-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-elevation-thumbnail.webp",
+          "sha256": "ff525fb48621156a083633751a9fbf82bb7e69a7a419ad534da93dad3572b064",
+          "bytes": 7376
+        },
+        {
+          "filename": "proteus-filter-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-filter-color-surface@2x.webp",
+          "sha256": "165fb921fb9de96e9b82b15659e4342d0832bb31dfd6f5f4e50a3fc24a09e160",
+          "bytes": 190164
+        },
+        {
+          "filename": "proteus-filter-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-filter-color-shadow@2x.webp",
+          "sha256": "787d908a0d0c89120d14d6bf13ed8d1de4e4604f6be5e0042de36d007d6d4c7a",
+          "bytes": 106466
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr2.png",
+          "sha256": "3ef0157e0bc11f6f1ff83dcd75d211282252a59c9809a070a27dee3e65b3a173",
+          "url": "http://127.0.0.1:4284/proteus/?v=MEZAmHJq3d6CFkFCxzNAAAAAP7n7xMhA9JA_zxYhj95khD_Xzu1vd5PjAAA#dataset=filter-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(-0.702621119668,0.361384689486,-0.612963839392,0,0,0.861431573939,0.507873649072,0,0.711564165903,0.356842751961,-0.605260016998,0,0,0,0,1)",
+            "skybox": "matrix3d(-0.73272928783,0.345618233616,-0.586221512988,0,0.624365077801,0.684083935965,-0.377090644523,0,0.270695339705,-0.642321631488,-0.717040284878,0,0,0,0,1)",
+            "sunView": "matrix3d(-0.681875486013,0.484615550288,0.547899251681,0,0,0.74904035961,-0.662524369118,0,-0.731468264229,-0.451759126188,-0.510752259253,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "filter-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 1112,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(-0.898161024723,0.28805722509,-0.332159312292,0,0.174000944197,0.926681928012,0.333143025912,0,0.403770287525,0.241420047569,-0.882431819204,0,0,0,0,1)",
+          "skybox": "matrix3d(-0.914778517061,0.277349772655,-0.293695766525,0,0.403690646412,0.601331024194,-0.689517800605,0,-0.014629205545,-0.749318335956,-0.662048210554,0,0,0,0,1)",
+          "sunView": "matrix3d(-0.857211160266,0.418864672443,0.299568711474,0,0.238454684332,0.838460866235,-0.490023202831,0,-0.456430049663,-0.348619795726,-0.818618255228,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "proteus-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "proteus-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
+          "filename": "proteus-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "proteus-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-normal-thumbnail.webp",
+          "sha256": "93c16a2ac7a30062c0f44c64d611f8cf86afe248e3a3128314fa3c36bb282015",
+          "bytes": 3420
+        },
+        {
+          "filename": "proteus-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-normal-surface@2x.webp",
+          "sha256": "3569954d7533c338ad73a0a25f737e54278b3b05aeeb3235842e23908f656153",
+          "bytes": 426212
+        },
+        {
+          "filename": "proteus-filter-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-filter-color-thumbnail.webp",
+          "sha256": "fff84f5716cd883019faf6ea3639b0341dcebf54ebfbe3321c737b3c28013c4f",
+          "bytes": 2664
+        },
+        {
+          "filename": "proteus-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-elevation-thumbnail.webp",
+          "sha256": "ff525fb48621156a083633751a9fbf82bb7e69a7a419ad534da93dad3572b064",
+          "bytes": 7376
+        },
+        {
+          "filename": "proteus-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
+          "filename": "proteus-filter-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-filter-color-surface@2x.webp",
+          "sha256": "165fb921fb9de96e9b82b15659e4342d0832bb31dfd6f5f4e50a3fc24a09e160",
+          "bytes": 190164
+        },
+        {
+          "filename": "proteus-filter-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/proteus/proteus-filter-color-shadow@2x.webp",
+          "sha256": "787d908a0d0c89120d14d6bf13ed8d1de4e4604f6be5e0042de36d007d6d4c7a",
+          "bytes": 106466
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

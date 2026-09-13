@@ -1,23 +1,45 @@
 {
   "body": "pan",
   "lens": "filter-color",
-  "baselineRef": "52d5d4815",
-  "baselineCommit": "52d5d48155b62c62cc35052f4d82800d4d12c208",
-  "toolSha256": "655c8fed7f29c8f3359bec7b2b9ea985112790a42321106d01485537892f7039",
-  "recipeSha256": "64548bcd12ca97903074b15ad2d9dbd33d8754df03302c9bdc2b4f4782ec78c3",
-  "runtimeSha256": "710ec2ee2ad3d1604ea1de807b5fc58b5836a05b76840b498a7282f0139b76e4",
+  "baselineRef": "8cc1a2fae",
+  "baselineCommit": "8cc1a2faead111bd3535c0bed326180631b42f09",
+  "toolSha256": "89775171909802da8bad5ada20f2e21bc8880b632541920f3d31aea1ee1f7aea",
+  "colorTransferSha256": "4fdacc08867ab12c5b4f4b5819210f52f044155a5ebcbbf912f0ff0d9d201fe5",
+  "recipeSha256": "8b95fd35b962befc47741c2e88488fa96bfb5572cddb0b00f692fb780dcfada4",
+  "runtimeSha256": "fcc7ec9e9631ce083a6f29855e89221370bb2f23e856c2be137c49ceefb38ae0",
   "geometrySha256": "d05c2f0ddfa0e76f1d20b03458178b4d6f7b4cdbdb5acdc756039bc0e0ff6314",
   "surfaceTrianglesSha256": "42d1c13d1afe56fb434ad89d6558bf515de0e288a1b3b1e377b498261f4ad2b0",
   "geometryUnchanged": true,
-  "browser": "148.0.7778.96",
-  "existingAssetChanges": [],
+  "browser": "152.0.7977.84",
+  "channel": "chrome",
+  "purpose": "Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.",
+  "existingAssetChanges": [
+    {
+      "filename": "pan-filter-color-shadow@2x.webp",
+      "beforeSha256": "0037669e4cb5a6b0231b22db66e59d730f5c47bc387b1d593544a9673586fa3f",
+      "afterSha256": "c8aeb16d3aea09d5ed014c93a7104dc253eecf8782c4e3cdb09ae7ba88c98480",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "pan-filter-color-surface@2x.webp",
+      "beforeSha256": "4f7dd785b35ddcd58d0909801b5d82207e6b77224d43bbeacfb1349012c45eb9",
+      "afterSha256": "b80480d5247685f980d33a6f396ac0413af624abb6726276f14bfeda6cf36d33",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "pan-filter-color-thumbnail.webp",
+      "beforeSha256": "9e91f4f53942e4718f4ba4d9ad62ef4aa6b180b3824cb731e3ebdceb3649e4a2",
+      "afterSha256": "1e606cbca865cb20daecc1d6cf38f5f49f5e43b2d2cc3c12844078a2957790db",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    }
+  ],
   "mobile": {
     "viewport": {
       "width": 390,
       "height": 844
     },
     "dpr": 2,
-    "rowText": "Filter color\nCassini",
+    "rowText": "False color\nCassini",
     "bounds": {
       "x": 20,
       "y": 695.6875,
@@ -32,7 +54,7 @@
       "sunView": "matrix3d(0.983787420358,-0.171746849547,-0.051626845877,0,0,0.287873683962,-0.957668388369,0,0.179338538927,0.942142113353,0.283206508934,0,0,0,0,1)"
     },
     "stableDom": true,
-    "sha256": "904ada3ec0badc60d4014b619ce82850a1bc793678592dc1adf582016e51da97",
+    "sha256": "871fc32634ee9d655db324e7eb7b452407dbc95a8b821805fb89754b3305977e",
     "errors": []
   },
   "reports": [
@@ -52,7 +74,7 @@
         {
           "name": "color",
           "file": "color-dpr1.png",
-          "sha256": "5deea4e78d3632a90656acc081e138619397b3ceb6e7029189b2d695feb001b7",
+          "sha256": "3d82a173acbc50a124bf983d628804ba362cf6dc181fe5b9857c5b8824f294a7",
           "url": "http://127.0.0.1:4284/pan/?v=MEZAWlPVjHl4Z0FCxzNAAAAAv8NQZmViL3c_zS-KT8zYCL_g_J-fnjHLAAA#dataset=filter-color",
           "pose": {
             "schema": "cssearth-camera-pose@1",
@@ -96,22 +118,64 @@
       },
       "loaded": [
         {
+          "filename": "pan-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "pan-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "pan-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
           "filename": "pan-normal-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/pan/pan-normal-surface@2x.webp",
           "sha256": "d1e3076927c46cecac85c36b603da80cb46dabd47e5e6754b0b81a96eee5772d",
           "bytes": 417044
         },
         {
+          "filename": "pan-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-normal-thumbnail.webp",
+          "sha256": "1d8e395a24b966df1837e5566828f0ee0d5b1baa899be43440a9c7c0d90357a5",
+          "bytes": 2660
+        },
+        {
+          "filename": "pan-filter-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-filter-color-thumbnail.webp",
+          "sha256": "1e606cbca865cb20daecc1d6cf38f5f49f5e43b2d2cc3c12844078a2957790db",
+          "bytes": 2310
+        },
+        {
+          "filename": "pan-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-elevation-thumbnail.webp",
+          "sha256": "194b0c49280c80df41e5fbcc7dfef93d011c0ccc529f90a8dc9f84307c850ed8",
+          "bytes": 4756
+        },
+        {
+          "filename": "pan-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
           "filename": "pan-filter-color-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/pan/pan-filter-color-surface@2x.webp",
-          "sha256": "4f7dd785b35ddcd58d0909801b5d82207e6b77224d43bbeacfb1349012c45eb9",
-          "bytes": 387998
+          "sha256": "b80480d5247685f980d33a6f396ac0413af624abb6726276f14bfeda6cf36d33",
+          "bytes": 380864
         },
         {
           "filename": "pan-filter-color-shadow@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/pan/pan-filter-color-shadow@2x.webp",
-          "sha256": "0037669e4cb5a6b0231b22db66e59d730f5c47bc387b1d593544a9673586fa3f",
-          "bytes": 297626
+          "sha256": "c8aeb16d3aea09d5ed014c93a7104dc253eecf8782c4e3cdb09ae7ba88c98480",
+          "bytes": 294486
         }
       ],
       "errors": []
@@ -132,7 +196,7 @@
         {
           "name": "color",
           "file": "color-dpr2.png",
-          "sha256": "7f8a85d28f3d823967ab8c422b9df4a4620abfc3b7df49fab13533fcff277d04",
+          "sha256": "7edd0b598a9150a599fcae365ed182d61f4e6eed8f857b06f33287d12518b8e0",
           "url": "http://127.0.0.1:4284/pan/?v=MEZAWlPVjHl4Z0FCxzNAAAAAv8NQZmViL3c_zS-KT8zYCL_g_J-fnjHLAAA#dataset=filter-color",
           "pose": {
             "schema": "cssearth-camera-pose@1",
@@ -176,59 +240,67 @@
       },
       "loaded": [
         {
+          "filename": "pan-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "pan-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
           "filename": "pan-normal-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/pan/pan-normal-surface@2x.webp",
           "sha256": "d1e3076927c46cecac85c36b603da80cb46dabd47e5e6754b0b81a96eee5772d",
           "bytes": 417044
         },
         {
+          "filename": "pan-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "pan-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-normal-thumbnail.webp",
+          "sha256": "1d8e395a24b966df1837e5566828f0ee0d5b1baa899be43440a9c7c0d90357a5",
+          "bytes": 2660
+        },
+        {
+          "filename": "pan-filter-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-filter-color-thumbnail.webp",
+          "sha256": "1e606cbca865cb20daecc1d6cf38f5f49f5e43b2d2cc3c12844078a2957790db",
+          "bytes": 2310
+        },
+        {
+          "filename": "pan-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-elevation-thumbnail.webp",
+          "sha256": "194b0c49280c80df41e5fbcc7dfef93d011c0ccc529f90a8dc9f84307c850ed8",
+          "bytes": 4756
+        },
+        {
+          "filename": "pan-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/pan/pan-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
           "filename": "pan-filter-color-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/pan/pan-filter-color-surface@2x.webp",
-          "sha256": "4f7dd785b35ddcd58d0909801b5d82207e6b77224d43bbeacfb1349012c45eb9",
-          "bytes": 387998
+          "sha256": "b80480d5247685f980d33a6f396ac0413af624abb6726276f14bfeda6cf36d33",
+          "bytes": 380864
         },
         {
           "filename": "pan-filter-color-shadow@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/pan/pan-filter-color-shadow@2x.webp",
-          "sha256": "0037669e4cb5a6b0231b22db66e59d730f5c47bc387b1d593544a9673586fa3f",
-          "bytes": 297626
+          "sha256": "c8aeb16d3aea09d5ed014c93a7104dc253eecf8782c4e3cdb09ae7ba88c98480",
+          "bytes": 294486
         }
       ],
       "errors": []
-    }
-  ],
-  "acquisitionRevision": "78feb6ad9",
-  "purpose": "Inspected mounted color views, loaded source-asset identity, unchanged geometry and interaction checks. Scientific acceptance uses the source and registration evidence.",
-  "images": [
-    {
-      "file": "color-dpr1.png",
-      "bytes": 165395,
-      "sha256": "5deea4e78d3632a90656acc081e138619397b3ceb6e7029189b2d695feb001b7"
-    },
-    {
-      "file": "color-dpr2.png",
-      "bytes": 453732,
-      "sha256": "7f8a85d28f3d823967ab8c422b9df4a4620abfc3b7df49fab13533fcff277d04"
-    },
-    {
-      "file": "mobile.png",
-      "bytes": 369763,
-      "sha256": "904ada3ec0badc60d4014b619ce82850a1bc793678592dc1adf582016e51da97"
-    },
-    {
-      "file": "oblique-shadows-dpr1.png",
-      "bytes": 255386,
-      "sha256": "b8f3cfee4f5ecd94ec5088ba70406c2aecbe9e7f6a9448aff31dfd07393f5910"
-    },
-    {
-      "file": "oblique-shadows-dpr2.png",
-      "bytes": 635785,
-      "sha256": "13ef5250bc1eeae088129e83d84eedf312700affd22f5793d59d31d1eed0c37f"
-    },
-    {
-      "file": "product.png",
-      "bytes": 378614,
-      "sha256": "8c37a15c75fbaa3372146f194c764d4d396354b2ffcbad38cc41e863910f6180"
     }
   ]
 }

@@ -57,7 +57,7 @@
           "height": 361
         },
         "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
-        "description": "Cassini shape · radial height",
+        "description": "Cassini shape \u00b7 radial height",
         "title": "Radial height from the Cassini-derived Epimetheus shape model above the 58.2 km reference sphere. Includes the broad irregular figure; not a local geodetic DEM.",
         "labels": [
           "-15",
@@ -263,7 +263,7 @@
           "backgroundMaximum": 0.003
         },
         "metadata": {
-          "label": "Filter color",
+          "label": "False color",
           "falseColor": true,
           "coverage": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
           "attribution": {
@@ -275,6 +275,20 @@
           "longitudeDegrees": 56.389999999999986,
           "latitudeDegrees": 60.73,
           "zoom": 1.1
+        },
+        "colorDisplay": {
+          "kind": "band-composite",
+          "inputQuantity": "radiance-factor",
+          "bands": [
+            "IR3",
+            "GRN",
+            "UV3"
+          ],
+          "displayRange": [
+            0,
+            0.8
+          ],
+          "outputEncoding": "srgb"
         }
       }
     ]

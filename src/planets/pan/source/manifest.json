@@ -777,8 +777,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5984,
-      "expectedSha256": "07350e5442d5238ed34cc0b510f162ed6138133082dc5dab449fbaa6737f80ab",
+      "expectedBytes": 6015,
+      "expectedSha256": "be6cd9f81e643bae33d3e7f11dbab79b6e0ca4fcea07129c6b20c6a48baa74dc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -806,8 +806,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 9746,
-      "expectedSha256": "64548bcd12ca97903074b15ad2d9dbd33d8754df03302c9bdc2b4f4782ec78c3"
+      "expectedBytes": 10061,
+      "expectedSha256": "8b95fd35b962befc47741c2e88488fa96bfb5572cddb0b00f692fb780dcfada4"
     },
     {
       "path": "presentation/minimap.json",

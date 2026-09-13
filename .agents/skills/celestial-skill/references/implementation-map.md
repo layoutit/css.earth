@@ -160,11 +160,11 @@ instead of writing a reader for one body.
 | AMICA Gaskell DDR cubes | `amica-gaskell` | Itokawa `amica` | Image, label, original and flat-field pins | `amica-geo.oracle.test.mts` |
 | L'LORRI images with TAN-SIP distortion | `llorri-camera` | Donaldjohanson `llorri` | Camera pins | `llorri-geo.oracle.test.mts` |
 | New Horizons LORRI calibrated FITS, uncertainty and quality HDUs | `nh-lorri-camera` | Arrokoth `lorri` | Camera pins with a qualified attitude for the exact mesh; native TAN-SIP WCS | `new-horizons-geo.test.mts` (Astropy pixels and WCS) |
-| Arrokoth CA05 registered four-band MVIC cube | `nh-mvic-camera` | Arrokoth `mvic` | Image-space registration to its contemporaneous LORRI camera; one common linear NIR / RED / BLUE scale | `new-horizons-geo.test.mts` (Astropy pixels) |
+| Arrokoth CA05 registered four-band MVIC cube | `nh-mvic-camera` | Arrokoth `mvic` | Image-space registration to its contemporaneous LORRI camera; native PDS band/quantity label and the shared band-composite display policy | `new-horizons-geo.test.mts` (Astropy pixels) |
 | Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tools/spice/oracle.test.mts` |
 | Encounter FITS frames with a control network | `encounter-fits` | Wild 2 `navcam`, Tempel 1, Hartley 2 | Frame, label and control pins, level matching | `encounter-fits.oracle.test.mts` |
 | Catalog cameras for a shape model | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame catalog pins and display settings | None yet |
-| Three filters with controlled cameras | `controlled-shape-color` | Proteus and Hyperion `filter-color` | Equal-length filter frame lists; matching indices form complete observing triplets. No single-filter photometric model | None yet |
+| Three filters with controlled cameras | `controlled-shape-color` | Proteus and Hyperion `filter-color` | Equal-length filter frame lists; matching indices form complete observing triplets. Native filters/units and the shared color-display policy are required. No single-filter photometric model | None yet |
 | ISIS2 orthographic image cubes | `isis2-orthographic` | Borrelly `micas` | Cube pins; no Sun geometry, so no photometry | `isis2-qube.oracle.test.mts` |
 
 For `controlled-shape-color`, matching indices in the three `frames` lists
