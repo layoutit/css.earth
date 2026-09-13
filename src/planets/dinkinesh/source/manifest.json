@@ -85,15 +85,15 @@
       "id": "usgs-gazetteer-dinkinesh-nomenclature-center-pts",
       "path": "features/DINKINESH_nomenclature_center_pts.zip",
       "expectedBytes": 14569,
-      "expectedSha256": "816e61347e9ac78a896ee01077bd391da4e9c0bf8d90679eccbb8d9a5a1ab0b6",
+      "expectedSha256": "b3e19298f41ce5d9f908fa37fe10621817ecb9a8c78b09096879296060a2c2c4",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DINKINESH_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dinkinesh on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Pinned the 2026-09-13 Gazetteer export after the missing 2026-09-12 ZIP had been replaced upstream. The small snapshot is retained in Git for reproducibility.",
+      "redistribution": "Committed public-domain snapshot with credit; byte identity includes the export archive metadata.",
       "consumers": [
         "features"
       ],
@@ -103,6 +103,62 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
+      }
+    },
+    {
+      "id": "tempest-dinkinesh-model",
+      "path": "shape/tempest-dinkinesh.stl",
+      "origin": "https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl",
+      "expectedBytes": 237239,
+      "expectedSha256": "3c38e04484e42a90e8b284302111325f0519a61ab22772f73d541e2715e11622",
+      "credit": "Duncan Lyster; Lyster, D., Howett, C., & Penn, J. (2025), TEMPEST",
+      "license": "Modified MIT License (Attribution Required)",
+      "licenseEvidence": [
+        "shape/TEMPEST-LICENSE.md"
+      ],
+      "acquisition": "Restore exact bytes from the pinned public Git commit through preparation/acquisition.json.",
+      "redistribution": "Retain the supplied license and credit Lyster, Howett & Penn (2025) in the publicly released derivative.",
+      "consumers": [
+        "terrain",
+        "tempest-shape"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "tempest-dinkinesh-7df4c88",
+            "role": "method",
+            "evidence": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl"
+          }
+        ]
+      },
+      "coverage": "Numerical Dinkinesh shape distributed with the TEMPEST thermal model: 635 vertices and 1,266 triangles, retained at their published metre scale. The linked study describes a Lucy stereo-derived model with estimated unseen terrain. This recovered file does not identify its upstream mission-model version or observed/fill boundary. The grid marks missing qualified photography; it does not mark measured terrain."
+    },
+    {
+      "id": "tempest-license",
+      "path": "shape/TEMPEST-LICENSE.md",
+      "origin": "https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/LICENSE.md",
+      "expectedBytes": 1476,
+      "expectedSha256": "830ce983cfcfa1dd44466f708c3eeb92ba0eb80f7bc695aefebc243d55d277b8",
+      "credit": "Duncan Lyster; Lyster, D., Howett, C., & Penn, J. (2025), TEMPEST",
+      "license": "Modified MIT License (Attribution Required)",
+      "licenseEvidence": [
+        "shape/TEMPEST-LICENSE.md"
+      ],
+      "acquisition": "Restore exact bytes from the pinned public Git commit through preparation/acquisition.json.",
+      "redistribution": "Retain the supplied license and credit Lyster, Howett & Penn (2025) in the publicly released derivative.",
+      "consumers": [
+        "tempest-shape"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "tempest-dinkinesh-7df4c88",
+            "role": "method",
+            "evidence": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl"
+          }
+        ]
       }
     }
   ],
@@ -136,8 +192,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3579,
-      "expectedSha256": "600f7fa7918f799141a098e023a1af66d461e8b76c7bc3550f7b7dda25563f49",
+      "expectedBytes": 5691,
+      "expectedSha256": "5c18d03676a357f07020f1c29522988582011e3d92a885be3cce8e78acab51a2",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -150,8 +206,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 786,
-      "expectedSha256": "6f9a3e7afcc71c0128d64c7960a2d102f778ea26a2bde10ccbc70dc2a231a6df"
+      "expectedBytes": 1344,
+      "expectedSha256": "1c6908b145e225204d8ef35dc466d9c0b202669f20ef6d75294713ad73ac0367"
     },
     {
       "path": "preparation/navigation.json",
@@ -170,8 +226,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2276,
-      "expectedSha256": "3203dab2bec21a047c6c4298e67c47151a7e6894541aa094d8d65e5137644a89"
+      "expectedBytes": 3062,
+      "expectedSha256": "a947a9fe3f37ae64b5cafd2fa765e9fc3c427aab48398db61b3dfc5d827a4708"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -227,7 +283,7 @@
       "id": "dinkinesh-surface-features-source",
       "path": "features/manifest.json",
       "expectedBytes": 1319,
-      "expectedSha256": "b16cab803ffb76d6b5874f63e6ffbb36beee9c211d5b6afdfdff419b10ff4d3a",
+      "expectedSha256": "031d0052c8559b803bccaa617d03b0885da1fc88a8b5ee85a9c9a4fb84fa8320",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
