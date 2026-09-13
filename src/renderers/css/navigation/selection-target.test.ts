@@ -9,7 +9,7 @@ const viewport = { focalPixels: 1247.08, principalOffsetPixels: [-170, 0] as con
 for (const [fromId, toId] of [['mercury', 'venus'], ['venus', 'mercury']]) {
   test(`${fromId} to ${toId} arrives at the authored physical size without resetting the viewing angle`, async () => {
     const frames = await Promise.all([fromId, toId].map(async id => {
-      const descriptor = JSON.parse(await readFile(new URL(`../../../planets/${id}/object.json`, import.meta.url), 'utf8'));
+      const descriptor = JSON.parse(await readFile(new URL(`../../../objects/${id}/object.json`, import.meta.url), 'utf8'));
       return parsePreparedWorldCameraFrame(descriptor.properties.worldFrame)!;
     }));
     const [source, target] = frames;

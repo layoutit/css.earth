@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root = new URL('../../../../src/planets/orus/source/', import.meta.url);
+const root = new URL('../../../../src/objects/orus/source/', import.meta.url);
 test('Orus preserves the published approximation extents, not the full axis lengths as radii', async () => {
   const config = JSON.parse((await readFile(new URL('preparation/terrestrial.json', root))).toString('utf8'));
   const shape = parsePdsRadiusTable(await readFile(new URL('shape/ellipsoid.tab', root), 'utf8'), config.geometry.radialTerrain.grid);

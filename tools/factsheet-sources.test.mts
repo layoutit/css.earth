@@ -26,7 +26,7 @@ const sources = sourceResolver(parseSourceCatalog({ schema: 'cssearth-source-cat
 test('facts sharing one evidence file retain separate claim citations and create no dataset destinations', () => {
   const parsed = parseFactsheet(panel);
   assert.deepEqual(parsed, panel);
-  const edges = factsheetCitations(parsed, 'src/planets/body/source/content.json', { id: 'body' });
+  const edges = factsheetCitations(parsed, 'src/objects/body/source/content.json', { id: 'body' });
   const usage = compileSourceUsage([], sources, edges);
   assert.deepEqual(edges.map(edge => edge.catalogueId), ['radius-table', 'rotation-table']);
   assert.equal(edges[0].locator, '/panel/facts/0/source');

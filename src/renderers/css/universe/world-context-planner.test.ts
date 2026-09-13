@@ -5,7 +5,7 @@ import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
 
 const plan = parsePreparedWorldContext(JSON.parse(await readFile(
-  new URL('../../../planets/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
 const freeze = <T>(value: T): T => {
   if (value && typeof value === 'object') {
     for (const child of Object.values(value)) freeze(child);

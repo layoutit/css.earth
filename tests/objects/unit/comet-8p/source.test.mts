@@ -8,7 +8,7 @@ import { readFile } from 'node:fs/promises';
 import { contactEllipsoidMesh, loadContactEllipsoids } from '../../../../tools/objects/terrestrial-layers/contact-ellipsoids.mts';
 import { simplifyRadialShape } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { parseVectors } from '../../../../packages/astronomy/tools/lib/horizons.mts';
-const root = new URL('../../../../src/planets/comet-8p/source/', import.meta.url);
+const root = new URL('../../../../src/objects/comet-8p/source/', import.meta.url);
 const json = async (path: string|URL) => JSON.parse(await readFile(new URL(path, root), 'utf8'));
 const near = (actual: number, expected: number, tolerance: number) => assert.ok(Math.abs(actual - expected) < tolerance, `${actual} vs ${expected}`);
 

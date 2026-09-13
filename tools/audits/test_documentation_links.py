@@ -43,7 +43,7 @@ class DocumentationChecks(unittest.TestCase):
         self.write('docs/methods/mapping.md', '# Mapping\n\n[Back](../guide.md)\n\n'
                    '<img width="120" src="../images/comparison.svg">\n')
         self.write('tests/fixtures/sample.json', '{}')
-        self.write('src/planets/example/source/reference/SOURCE.md', '# Provider notes\n')
+        self.write('src/objects/example/source/reference/SOURCE.md', '# Provider notes\n')
         status, result = self.check()
         self.assertEqual(status, 0, result['errors'])
         self.assertEqual(result['documentation']['reachableGuides'], 3)
@@ -57,9 +57,9 @@ class DocumentationChecks(unittest.TestCase):
             'docs/run.json': '{}',
             'docs/author.py': 'print("a tool, not a guide")',
             'docs/captures.zip': 'archive',
-            'src/planets/example/SOURCE.md': '# Duplicate sources',
-            'src/planets/example/EVIDENCE.md': '# Duplicate evidence',
-            'src/planets/example/USAGE.md': '# Duplicate usage',
+            'src/objects/example/SOURCE.md': '# Duplicate sources',
+            'src/objects/example/EVIDENCE.md': '# Duplicate evidence',
+            'src/objects/example/USAGE.md': '# Duplicate usage',
         }
         for path, content in additions.items():
             self.write(path, content)

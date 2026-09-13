@@ -16,7 +16,7 @@ if (!output) throw new TypeError('Usage: node tools/audit-prepared-depth.mts <re
 const rows:AuditRow[] = [];
 for (const { id } of OBJECTS) {
   let definition:CheckedObjectRuntimeDefinition|undefined;
-  try { definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(`src/planets/${id}/prepared/runtime.json`, 'utf8'))); }
+  try { definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(`src/objects/${id}/prepared/runtime.json`, 'utf8'))); }
   catch (error) { if (!hasErrorCode(error,'ENOENT')) throw error; }
   if (!definition?.surfaceHit) { rows.push({ id, reason: 'no triangle surface contract' }); continue; }
   await preparePresentationBindings(definition, process.cwd(), { onDepthResult({ source, compiled, surface, reason }) {

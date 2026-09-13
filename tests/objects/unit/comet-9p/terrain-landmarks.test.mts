@@ -5,9 +5,9 @@ import test from "node:test";
 import { parsePreparedObjectRuntime, parsePreparedSurfaceFeatureCatalog } from "../../../../src/renderers/css/dist/index.js";
 
 const root = new URL("../../../../", import.meta.url);
-const sourceFile = new URL("src/planets/comet-9p/source/features/landmarks.json", root);
-const descriptorFile = new URL("src/planets/comet-9p/prepared/features.json", root);
-const runtimeFile = new URL("src/planets/comet-9p/prepared/runtime.json", root);
+const sourceFile = new URL("src/objects/comet-9p/source/features/landmarks.json", root);
+const descriptorFile = new URL("src/objects/comet-9p/prepared/features.json", root);
+const runtimeFile = new URL("src/objects/comet-9p/prepared/runtime.json", root);
 const catalogFile = new URL("public/scenes/comet-9p/comet-9p-features.json", root);
 
 function object(value: unknown): Record<string, unknown> {

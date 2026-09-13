@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import type { PreparedCubicSkyPlan } from '../../src/platform/cubic-sky-contract.mts';
 import { focusedCameraProjection } from './focused-heliocentric.mts';
 
-const prepared = (path: string): unknown => JSON.parse(readFileSync(new URL(`../../src/planets/${path}`, import.meta.url), 'utf8'));
+const prepared = (path: string): unknown => JSON.parse(readFileSync(new URL(`../../src/objects/${path}`, import.meta.url), 'utf8'));
 
 test("an object camera without its own projection shares the sky's focal length", () => {
   const sky = prepared('earth/prepared/sky.refs.json') as PreparedCubicSkyPlan;

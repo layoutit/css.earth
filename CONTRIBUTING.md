@@ -46,7 +46,7 @@ must be run locally. Cite this section in a PR instead of explaining it again.
 | You want to | Read |
 | --- | --- |
 | Understand the rules every change must keep | [AGENTS.md](AGENTS.md) |
-| Add or fix a planet, moon, asteroid or comet | [Body guide](src/planets/README.md) and the [celestial skill](.agents/skills/celestial-skill/SKILL.md) |
+| Add or fix a planet, moon, asteroid or comet | [Body guide](src/objects/README.md) and the [celestial skill](.agents/skills/celestial-skill/SKILL.md) |
 | Record sources, credits and evidence | [Provenance and documentation contract](docs/provenance/CONTRACT.md) |
 | Find the shared guides | [docs/README.md](docs/README.md) |
 | Write the PR | [PR template](.github/pull_request_template.md) and the [PR rules](docs/provenance/CONTRACT.md#pull-requests) |
