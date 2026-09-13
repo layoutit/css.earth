@@ -51,7 +51,7 @@ function importedName(ast: Program, source: string, symbol: string): string | un
 }
 
 /** Resolve published entries through their actual build configurations. */
-export async function resolveRuntimeSource(imported: string, importer: string, { root, source }: {root: string; source: RuntimeSourceReader}): Promise<string> {
+export async function resolveRuntimeSource(imported: string, importer: string, { root, source, objectIds }: {root: string; source: RuntimeSourceReader; objectIds?: ReadonlySet<string>}): Promise<string> {
   let target: string;
   if (imported.startsWith('.')) target = resolve(dirname(importer), imported);
   else if (imported.startsWith('@cssearth/')) {
@@ -110,7 +110,9 @@ export async function resolveRuntimeSource(imported: string, importer: string, {
     try { await source(typed); target = typed; } catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
   }
   if (!/\.(?:mjs|js|ts|mts|astro|css|json)$/.test(target)) throw new Error(`Unclosed runtime source ${imported}`);
-  if (relative(root, target).startsWith('src/objects/')) throw new Error('Shared runtime imports an object package');
+  // Given the registered object ids, context folders beside them stay importable application data.
+  const targetFile = relative(root, target);
+  if (targetFile.startsWith('src/objects/') && (!objectIds || objectIds.has(targetFile.split('/')[2] ?? ''))) throw new Error('Shared runtime imports an object package');
   await source(target);
   return target;
 }
