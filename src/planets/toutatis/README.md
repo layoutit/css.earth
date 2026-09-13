@@ -2,114 +2,57 @@
 
 ## Sources
 
-**Shape** uses the Hudson, Ostro and Scheeres (2003) radar model archived in
-[NASA PDS](https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.xml)
-as `urn:nasa:pds:compil.ast.radar.shape-models:data:4179toutatis2_tab::1.0`.
-The 2020 PDS4 migration did not change the scientific data. The `.tab` is
-Wavefront OBJ text, with its original label preserved beside the recipe.
-The grid marks unavailable imagery. Shape remains the default dataset.
+The Shape view uses the original high-resolution Hudson, Ostro and Scheeres (2003) radar model archived in NASA PDS as `urn:nasa:pds:compil.ast.radar.shape-models:data:4179toutatis2_tab::1.0`. The PDS4 migration in 2020 did not change the scientific data. Input `source/shape/4179toutatis2.tab` is Wavefront OBJ text despite its extension; its unchanged label is kept beside the recipe under `source/reference/`. The acquisition plan restores the exact pinned bytes from [PDS](https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.tab).
 
-**Chang’e-2** adds the full-body photograph in
-[Jiang et al. (2015), Figure 1c](https://pmc.ncbi.nlm.nih.gov/articles/PMC4629198/#f1),
-taken during the 13 December 2012 flyby at a stated range of 67.7 km and original
-sampling of 8.3 m/pixel. The source is a published, enlarged figure under
-[CC BY 4.0](source/reference/CHANG-E-2-IMAGE-LICENSE.md). Its colors and lighting
-are preserved. Placement on the radar shape is **approximate**, as stated in
-the selector's summary and explanation. The grid covers excluded areas.
-
-Both views use the same 800 retained triangles and default to Shadows off.
-The [photographic method](source/reference/chang-e-2-method.md) records the
-assumed camera, manual framing, source comparisons and transfer limits.
-Accurate image-to-shape registration remains deferred.
-
-[Inputs](source/manifest.json) · [Recipe](source/preparation/terrestrial.json) ·
-[Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) ·
-[Credits](NOTICE.md)
+Shape uses the shared no-imagery grid with Shadows disabled by default. Optional prepared directional lighting conveys the source geometry, with no photographic texture, albedo claim, invented craters or compositional colors. The map, thumbnail and navigation context derive from the same mesh and grid.
 
 ## Evidence
 
-The source has 20,000 vertices and 39,996 facets, with kilometre units, centre
-of mass at the origin and +Z along the long axis toward the small head. Bounds
-are 2.281652 × 1.914287 × 4.581037 km; signed closed volume is 7.681121590 km³.
-The reference radius is 1.224 km. Geometry is not rescaled to an incompatible
-radius in the pinned Horizons record.
+Meshoptimizer 1.2.0 simplifies the original connectivity to 800 triangles before texture preparation, with `ErrorAbsolute` and `RegularizeLight`, a 50 m error setting, no radial geometry replacement, and no removed opposite faces. The result is closed and consistently wound. The library estimate is 27.55 m, distinct from a geometric bound. Two-way area-stratified surface samples (8,192 per direction) give source-to-display mean 6.12 m, p95 16.57 m, maximum 33.31 m, and display-to-source mean 6.10 m, p95 16.55 m, maximum 40.50 m. These are sampled nearest-triangle distances, not exhaustive Hausdorff bounds or source measurement uncertainties. Native PolyCSS `u` triangles use 128 px raster cells and the established prepared lighting path.
 
-Meshoptimizer 1.2.0 retains source connectivity at 800 triangles using
-`ErrorAbsolute`, `RegularizeLight` and a 50 m error setting. No radial geometry
-replacement or opposite-face removal is used. The result is closed and
-consistently wound, with 128 px native PolyCSS raster cells. The existing mesh
-benchmark remains applicable because this addition does not change the source,
-simplification or retained geometry: the library estimate is 27.55 m; 8,192
-area-stratified samples per direction gave source-to-display mean 6.12 m,
-p95 16.57 m, maximum 33.31 m, and display-to-source mean 6.10 m, p95 16.55 m,
-maximum 40.50 m. These are sampled distances, not exhaustive bounds or source
-measurement uncertainties.
-
-The photographic report in [surfaces.json](prepared/surfaces.json) records
-accepted pixels, sampled display-area coverage, source hashes, mask, projection
-and transfer limits. Registration is explicitly `approximate`, `qualified: false`.
-The reported coverage is coverage of this assumed projection. Neither the
-50 m mesh-transfer limit nor its 0.01 m ray tolerance measures placement accuracy.
-The [preparer tests](../../../tools/objects/surface-observations/published-image.test.mts)
-exercise known planar correspondences, four-pixel rejection, occlusion, RGB
-preservation and grid gaps. [Body tests](../../../tests/objects/unit/toutatis/)
-check the original geometry, source pins and prepared package.
-
-Validation on 13 September 2026 used the photographic recipe with SHA-256
-`4e38f58d39e41df5deff1237bed6cd9ad01f3a1bfce46cf17d567992952a2480`
-and its regenerated package. Preparation and preparation TypeScript checks
-passed, as did 13 affected tests, three Toutatis source-closure checks, the
-shared polygon-mask regression, package validation and focused test typing.
-The image restored from its public URL into a fresh source directory. A fresh
-runtime installation downloaded and verified all 34 files (7,904,888 bytes);
-the three added image assets total 552,444 bytes.
-
-Browser review exercised Shape/Chang’e-2 switching, preserved camera state,
-rotation, close zoom, excluded-region grid, source credits and Shadows off.
-Both datasets retained 800 triangles. Desktop 1405 × 1236 and mobile 390 × 844
-were inspected at DPR 1. The running preview used shell base `ebd16155`, with
-this package's prepared bytes installed and checked against the worktree.
-No DPR 2 or full browser-suite result is claimed. The broader source suite
-found Moon's stale factsheet record; aggregate test typing stopped on
-`PerformanceEntry.detail` in the navigation timing test. Both affected files
-were unchanged from base `d63ac090`; these failures are outside this addition.
+[Source test definitions](../../../tests/objects/unit/toutatis/source.test.mts).
 
 ## Known problems
 
-The radar model uses 1992 and 1996 observations, with nominal average model
-resolution around 34 m. Later radar and Chang’e-2 images reveal differences,
-particularly around the large lobe and neck. The photo view is not a complete
-spacecraft reconstruction or a map for measuring feature positions. Figure
-resizing adds no camera detail. No calibrated reflectance or natural-color
-reconstruction is claimed.
+The source is based on radar observations in 1992 and 1996, with nominal average model resolution around 34 m. Later radar and Chang’e-2 images show mismatches, particularly at the large lobe; it must not be described as a complete spacecraft reconstruction. The [2013 rotation study](https://echo.jpl.nasa.gov/asteroids/takahashi.etal.toutatis.2013.pdf) discusses the residual shape differences. Details below the display mesh’s spacing are not retained.
 
-Toutatis tumbles, with characteristic rotation and precession periods near
-5.4 and 7.4 days. Its existing `cssearth-display-orientation@1` recipe uses a
-fixed arbitrary orientation and zero propagated spin. Optional directional
-lighting is illustrative, including when applied to an already lit photograph;
-it does not recreate an observation or present-day attitude. See the
-[rotation analysis](https://arxiv.org/abs/1511.04357).
+Toutatis has non-principal-axis tumbling, with characteristic rotation and precession periods around 5.4 and 7.4 days. The existing `cssearth-display-orientation@1` recipe deliberately uses a fixed arbitrary frame, zero propagated spin and illustrative lighting. It does not apply a linear rotation period or claim a present-day attitude. The [2015 rotational analysis](https://arxiv.org/html/1511.04357) gives a measured flyby attitude and dynamics; no current attitude propagation is derived from it here.
+
+The Chang’e-2 photograph route was checked again on 2026-09-13.
+[Huang et al. (2013)](https://doi.org/10.1038/srep03411) and its supplement give
+camera dimensions and a radar-model attitude comparison, but no complete
+per-frame camera registration for this mesh. That article's CC BY-NC-ND terms
+also exclude a modified texture derivative. [Jiang et al. (2015)](https://doi.org/10.1038/srep16029)
+provides photographs under CC BY 4.0, but its annotated figure is not a released
+registered raster. Reuse permission and shape registration are separate gaps;
+neither a silhouette match nor a flyby attitude alone resolves the latter.
+A trial the same day projected Jiang et al.'s Figure 1c onto this mesh
+([method record](https://github.com/layoutit/css.earth/blob/a1570599b69cd007f21af69635a46e60987ebe40/src/planets/toutatis/source/reference/chang-e-2-method.md)).
+Its camera direction came from the rotation angles Bu et al. (2015) quote for
+Zou et al. (2014), Figure 3, and its scale and position were matched by hand to
+Zou's radar rendering. Three check windows agreed within 1.0–2.2 figure pixels,
+but they compare two photographs, not photograph pixels with surface points.
+With no measured camera or control points, that placement does not register
+the photograph, so the photographic lens stays deferred.
+
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="toutatis-source-and-presentation"></a>
 <a id="dataset-survey"></a>
 
 <details>
-<summary>Other source routes</summary>
+<summary>Methods and source notes</summary>
 
-- The older low-resolution radar model and NASA STL add no necessary dataset
-  beside the better documented PDS model.
-- A radial elevation trial found multiple source intersections in 7 of 8,192
-  sampled directions through the neck. A single radial scalar cannot truthfully
-  color those distinct patches, so Elevation remains excluded.
-- [Huang et al. (2013)](https://doi.org/10.1038/srep03411) has CC BY-NC-ND terms;
-  its image is not used for a modified texture. Jiang's later figure has different,
-  reusable terms.
-- [Optical/radar fusion](https://doi.org/10.1016/j.pss.2016.03.008) may provide a
-  better matching shape, but a released mesh with independent controls was not
-  retrieved. That is an unresolved source route, not evidence that none exists.
-- [Stooke's 1996 outline map](https://www.lpi.usra.edu/meetings/lpsc1996/pdf/1642.pdf)
-  uses an older arbitrary mapping frame and is not a registered photographic map.
+The archive specifies kilometers, center of mass as origin, and principal axes. For Toutatis, +Z is the long axis, not a spin pole. Longitude is eastward around that source axis and latitude is planetocentric; they describe the model frame. The 20,000 vertices and 39,996 facets span 2.281652 × 1.914287 × 4.581037 km. Signed closed volume is 7.681121590 km³, giving a volume-equivalent radius of 1.223992275 km; the common reference radius is rounded to 1.224 km. The mesh is not rescaled to the incompatible radius field in the pinned Horizons physical record.
 
-Shared sky and font inputs retain their original licenses and pins.
+**Dataset survey**
+
+- **Included: PDS high-resolution radar shape.** [Release](https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/) supplies exact model connectivity, scale and coordinate documentation. Its [JPL OBJ counterpart](https://echo.jpl.nasa.gov/asteroids/shapes/hirestoutatis.obj) adds no separate view.
+- **Excluded: older low-resolution radar model and NASA STL.** [JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) and [NASA 3D resource](https://science.nasa.gov/3d-resources/asteroid-4179-toutatis/) were reviewed. The scientific high-resolution release has clearer metadata and sufficient detail before budget reduction.
+- **Excluded from current view: radial Elevation.** A trial found multiple surface intersections in 7 of 8,192 sampled directions through the concave neck. One direction intersects the source at 1,285.61, 1,363.00 and 1,734.56 m. The current shared radial scalar would assign one ray height to distinct surface patches, so it cannot truthfully color this full connected mesh. Geometry itself retains the neck. A future mesh-attached scalar preparation is needed.
+- **Unresolved: Chang’e-2 photographic coverage and later fused geometry.** [Flyby observations](https://arxiv.org/abs/1511.02131), [boulder study](https://pmc.ncbi.nlm.nih.gov/articles/PMC4629198/) and the 2016 paper *Radar model fusion of asteroid (4179) Toutatis via its optical images observed by Chang’e-2 probe*, Planetary and Space Science 125, 87–95, describe richer information. The flyby observed roughly 45% of the surface. A restorable released texture/mesh with full calibration and source-frame registration was not qualified in this survey; literature figures are not a global surface map. This is an unresolved release route, not evidence that the data do not exist.
+- **Excluded: preliminary geological outline map.** [Stooke 1996](https://www.lpi.usra.edu/meetings/lpsc1996/pdf/1642.pdf) has tentative features in an older arbitrary mapping frame and discusses radar image reversals. It does not provide a registered calibrated raster for this mesh. The related CE2DEM2014 search result concerns the Moon, not Toutatis.
+
+Shared sky and font inputs retain their original licenses and acquisition pins. Runtime installation uses the generated body-specific asset inventory; source restoration and runtime delivery are separate checks.
 
 </details>

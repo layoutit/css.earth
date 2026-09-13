@@ -26,11 +26,6 @@
               "id": "shape",
               "source": "content",
               "material": "lighting"
-            },
-            {
-              "id": "chang-e-2",
-              "source": "content",
-              "material": "lighting"
             }
           ]
         }
@@ -51,7 +46,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "4e38f58d39e41df5deff1237bed6cd9ad01f3a1bfce46cf17d567992952a2480"
+          "sha256": "6c32e54d541c090334da48beb4b1e8bd0cd0a476b1cc67ed700325ca8ab1ba0b"
         },
         {
           "id": "rotation",
@@ -61,7 +56,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "66e8ba0fb01fee49ea4815979663c7517856078909b175fd00a99326465daa3a"
+          "sha256": "c4b8a1028284c0ee6670046313beb027dbdf49f6c0626c09110c1aa4d9a4f220"
         },
         {
           "id": "title",
@@ -76,7 +71,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "a22e520e263f8b3e1b77dcc070862e52d0ccfdd0faa47eb80f9d0638c248fd16"
+          "sha256": "b9571c2d2620e59a4bdc91a95a9941197192d8dc87a82e067ad404ae48012829"
         }
       ]
     },
@@ -113,7 +108,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "eca42e36ae44b045b01103781541657fbe533b49b99c622305ef8eeb60a5e795"
+        "sha256": "4de249f8e88a961bd00ad8e9ce6efd6ab999651db2c9b4e27234ec82cc06a56f"
       }
     },
     "catalog": {
@@ -121,7 +116,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.543055738919472,
-      "description": "Explore Toutatis with its radar shape and a Chang’e-2 flyby photograph.",
+      "description": "Explore Toutatis with its published radar shape model.",
       "systemName": "Solar System",
       "order": 138,
       "context": {
@@ -134,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "517e0751f7bc69392bfe98a0a2b26f05572c26559414af0f6baf15fe3290a3c0"
+    "sha256": "5c53a341e73c35796465f5700f5775efecdbdab11d49532790c94e07b2427ca4"
   }
 }

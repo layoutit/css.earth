@@ -212,8 +212,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     observationRadial.observationSurfaces.set(recipe.id, observation);
     const { rgb, missing } = observation.preview(width, height);
     const surface = await packSurface(recipe.id, rgb, missing, { ...recipe.metadata, observation: observation.report });
-    const eye = observation.report.camera.viewingDirection ?? observation.report.camera.positionKm;
-    if (!eye) throw new Error('Observation thumbnail needs a viewing direction.');
+    const eye = observation.report.camera.positionKm;
     const snapshot = await renderRadialSnapshot({ faces: observationRadial.faces, sampleSurface: observation.samplePoint, size: 96,
       longitudeDegrees: Math.atan2(eye[1], eye[0]) * 180 / Math.PI,
       latitudeDegrees: Math.atan2(eye[2], Math.hypot(eye[0], eye[1])) * 180 / Math.PI, ambient: .4, diffuse: .6 });
