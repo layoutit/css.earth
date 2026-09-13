@@ -1,0 +1,61 @@
+PDS_VERSION_ID               = PDS3                                           
+RECORD_TYPE                  = "FIXED_LENGTH"                                 
+RECORD_BYTES                 = 24                                             
+FILE_RECORDS                 = 4507                                           
+                                                                              
+^TABLE                       = "HRIIR_020601_2_0.TAB"                         
+                                                                              
+DATA_SET_ID                  = "DIF-C-HRII-3/4-9P-ENCOUNTER-V3.0"             
+INSTRUMENT_HOST_NAME         = "DEEP IMPACT FLYBY SPACECRAFT"                 
+INSTRUMENT_HOST_ID           = "DIF"                                          
+INSTRUMENT_NAME              = "DEEP IMPACT HIGH RESOLUTION INSTRUMENT        
+                                - IR SPECTROMETER"                            
+INSTRUMENT_ID                = "HRII"                                         
+PRODUCT_ID                   = "SUNPSEC_HRIIR_020601_2_0-200607"              
+PRODUCT_NAME                 = "HRII SOLAR IRRADIANCE TABLE 2"                
+PRODUCT_CREATION_TIME        = 2006-07-11T16:25:00                            
+START_TIME                   = 2005-01-12T18:00:00                            
+STOP_TIME                    = 2005-07-13T23:59:59                            
+SPACECRAFT_CLOCK_START_COUNT = "N/A"                                          
+SPACECRAFT_CLOCK_STOP_COUNT  = "N/A"                                          
+FILTER_NAME                  = "N/A"                                          
+FILTER_NUMBER                = "N/A"                                          
+TARGET_NAME                  = "N/A"                                          
+INSTRUMENT_MODE_ID           = "N/A"                                          
+                                                                              
+OBJECT     = TABLE                                                            
+  NAME               = "SOLAR SPECTRAL IRRADIANCE TABLE"                      
+  INTERCHANGE_FORMAT = "ASCII"                                                
+  COLUMNS            = 2                                                      
+  ROWS               = 4507                                                   
+  ROW_BYTES          = 24                                                     
+  DESCRIPTION        = "This table provides the solar spectral                
+    irradiance at 1 AU for the given wavelengths.  This a newer               
+    version of the solar irradiance supplied by J. Sunshine on                
+    05 April 2005."                                                           
+                                                                              
+OBJECT     = COLUMN                                                           
+  NAME          = "WAVELENGTH"                                                
+  COLUMN_NUMBER = 1                                                           
+  START_BYTE    = 1                                                           
+  BYTES         = 10                                                          
+  DATA_TYPE     = "ASCII_REAL"                                                
+  FORMAT        = "E10.7"                                                     
+  UNIT          = "MICRON"                                                    
+  DESCRIPTION   = "Wavelength"                                                
+END_OBJECT = COLUMN                                                           
+                                                                              
+OBJECT     = COLUMN                                                           
+  NAME          = "CONVERSION_NUMBER"                                         
+  COLUMN_NUMBER = 2                                                           
+  START_BYTE    = 12                                                          
+  BYTES         = 11                                                          
+  DATA_TYPE     = "ASCII_REAL"                                                
+  FORMAT        = "E11.8"                                                     
+  UNIT          = "W/(M**2 MICRON)"                                           
+  DESCRIPTION   = "Solar irradiance for given wavelength"                     
+END_OBJECT = COLUMN                                                           
+                                                                              
+END_OBJECT = TABLE                                                            
+                                                                              
+END                                                                           

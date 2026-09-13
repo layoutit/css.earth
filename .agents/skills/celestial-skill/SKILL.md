@@ -221,6 +221,15 @@ Keep the essential interpretation visible beside the active view: measured or
 modeled, false color, datum and meaningful coverage/date limits. A source note,
 tooltip or image alt text alone does not disclose these to a sighted user.
 
+For slit spectroscopy, a detector column may be wavelength rather than a surface
+coordinate. Preserve the wavelength/quality planes and construct spatial sampling
+from the observation times and slit pointing. Keep an independent numerical fit
+reference, validate the image-to-shape placement separately, and preserve missing
+spectra. A small reprojection residual is relative to the selected reference frame;
+it does not remove inherited absolute shape or pointing uncertainty. The
+[HRI-IR preparer](../../../tools/objects/terrestrial-layers/hrii-facets.mts) is one
+example using native spectra and a dataset-owned source mesh.
+
 ## 4. Inspect the mounted body
 
 Mount the first usable presentation early, before expanding views or polishing.

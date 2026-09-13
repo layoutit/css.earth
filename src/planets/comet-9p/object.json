@@ -21,12 +21,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "89f308b718a7729029a33a51e7ac3ba8a1727b99ce01ad265e54868f4def0430"
+          "sha256": "0a6e3bfeff694f4dd05f892469a6cbce0ebd2de3ecdbfc8d61585f3e51b06aac"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02"
+          "sha256": "a201c29e1e7aabb838f3c06a9b790c68dce95add97d5c00120114f3e5f425f46"
         },
         {
           "id": "title",
@@ -41,7 +41,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "ba81ddbcdea80bdc3a6a2e600fab4cbf980e75c8e21f484fc085d856ab5588eb"
+          "sha256": "b29f0fe63ddb00f37b4cc6b936910de0ef6cb0af5a94d31697ab446aa04e11d3"
         },
         {
           "id": "rotation",
@@ -81,6 +81,16 @@
             },
             {
               "id": "next",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "temperature",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "spectral-slope",
               "source": "content",
               "material": "lighting"
             }
@@ -132,7 +142,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3f26762e0821c07c5f4c3ce6738d3bd99432c8b54cf4f7c6f813fe8aefec9dc9"
+        "sha256": "3475633378878fa1ae98cc066d535fb4e65734570859af917562f6d0c09c9fc5"
       }
     },
     "catalog": {
@@ -152,7 +162,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e06275ab63ebfe0fe47d482363f787024dbfad08e7e4ae958310b28d61f412ee"
+    "sha256": "1304e98e06b1f7b5a0edc638923530f96d2877ae1af0231adf56e23719db4ee4"
   },
   "type": "layered-body",
   "id": "comet-9p"
