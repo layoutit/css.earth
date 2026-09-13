@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { readObservation } from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
-const root = new URL('../../../../src/planets/styx/source/', import.meta.url);
+const root = new URL('../../../../src/objects/styx/source/', import.meta.url);
 
 test('Styx source radii preserve the 2025 ellipsoid semi-axes in metres', async () => {
   // Porter et al. 2025 presentation slide 9: full axes 10.6 × 6.0 × 5.3 km.

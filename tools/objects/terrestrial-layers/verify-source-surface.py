@@ -10,7 +10,7 @@ ROOT=Path.cwd()
 OUT=ROOT/'output/faithfulness-fixes/source-surface'
 
 def read_mesh(id):
- p=ROOT/f'src/planets/{id}/source'
+ p=ROOT/f'src/objects/{id}/source'
  cfg=json.loads((p/'preparation/terrestrial.json').read_text())
  spec=cfg['geometry']['radialTerrain']; path=p/spec['path']; profile=spec['grid']
  with path.open('rb') as f: sha=hashlib.file_digest(f,'sha256').hexdigest()

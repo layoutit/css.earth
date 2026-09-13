@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { decodeNearMsi, mathildeImageCamera, readMathildeImageGeometry } from './near-msi.mts';
 import { matrixCamera } from '../surface-observations/cameras.mts';
 
-const table = readFileSync(new URL('../../../src/planets/mathilde/source/reference/253mathimg.tab', import.meta.url), 'utf8');
+const table = readFileSync(new URL('../../../src/objects/mathilde/source/reference/253mathimg.tab', import.meta.url), 'utf8');
 const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 
 test('released Mathilde table selects a reconstructed camera and rejects missing or ambiguous images', () => {

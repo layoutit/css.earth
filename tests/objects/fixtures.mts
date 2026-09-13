@@ -25,7 +25,7 @@ export async function readPreparedFixture(id: string, artifact: string): Promise
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !/^[a-z][a-z0-9-]*$/.test(artifact)) throw new TypeError('Unsafe prepared fixture address.');
   const root = process.env.OBJECT_PREPARATION_ROOT
     ? resolve(process.env.OBJECT_PREPARATION_ROOT, id)
-    : resolve(projectRoot, 'src/planets', id, 'prepared');
+    : resolve(projectRoot, 'src/objects', id, 'prepared');
   const value:unknown=JSON.parse(await readFile(resolve(root, `${artifact}.json`), 'utf8'));
   if(artifact==='runtime')return checkedRuntime(value);
   if(artifact==='sky')return validatePreparedCubicSky(value,{requireSun:false});

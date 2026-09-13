@@ -4,7 +4,7 @@ import sys
 import numpy as np,json
 from scipy.optimize import least_squares
 from scipy.ndimage import distance_transform_edt,map_coordinates
-p=Path('src/planets/comet-19p/source');u=np.loadtxt(p/'shape/usgsdem.tab');d=np.loadtxt(p/'shape/dlrdem.tab');mn=u[:,:2].min(0);wh=((u[:,:2].max(0)-mn)/16).astype(int)+1
+p=Path('src/objects/comet-19p/source');u=np.loadtxt(p/'shape/usgsdem.tab');d=np.loadtxt(p/'shape/dlrdem.tab');mn=u[:,:2].min(0);wh=((u[:,:2].max(0)-mn)/16).astype(int)+1
 z=np.full(wh[::-1],np.nan);coords=((u[:,:2]-mn)/16).astype(int);z[coords[:,1],coords[:,0]]=u[:,2];mask=np.isfinite(z);dist,inds=distance_transform_edt(~mask,return_indices=True);filled=z[tuple(inds)];center=(d[:,:2].min(0)+d[:,:2].max(0))/2;dc=d[:,:2]-center
 record=json.loads((p/'reference/registration.json').read_text());reference=record['parameters'];results=[]
 def transform(v,pts):

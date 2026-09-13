@@ -4,7 +4,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
-const descriptor = parseObjectDescriptor(JSON.parse(await readFile('src/planets/venus/object.json', 'utf8')));
+const descriptor = parseObjectDescriptor(JSON.parse(await readFile('src/objects/venus/object.json', 'utf8')));
 const output = 'output/playwright/prepared-worker';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
@@ -19,7 +19,7 @@ try {
       const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=="object"||Array.isArray(value))throw new TypeError("Invalid prepared mutation fixture");return value as Record<string,unknown>;};
       const descriptor=record(JSON.parse(descriptorJson));
       const { loadPreparedCssObject } = await import('/src/renderers/css/dist/index.js');
-      const source = await (await fetch('/src/planets/venus/prepared/object.json')).arrayBuffer();
+      const source = await (await fetch('/src/objects/venus/prepared/object.json')).arrayBuffer();
       const NativeWorker = window.Worker;
       let created = 0, retired = 0;
       window.Worker = class extends NativeWorker {

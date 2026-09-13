@@ -28,7 +28,7 @@ export { parseEnsoAdvisory } from './enso-advisory.mts';
 
 // Explicit acquisition step; ordinary preparation remains offline and pinned.
 export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
-  const object = resolve(root, 'src/planets/earth'), source = resolve(object, 'source');
+  const object = resolve(root, 'src/objects/earth'), source = resolve(object, 'source');
   const config = await readMapConfiguration(resolve(source, 'preparation/paged-ellipsoid.json'));
   if (config.surface.maps.some(map => map.scientific?.kind === 'gibs-mur-imagery')) {
     const { refreshMurEnso } = await import('./refresh-mur-enso.mts');

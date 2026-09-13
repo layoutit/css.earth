@@ -4,23 +4,23 @@ import test from "node:test";
 import { orderFacts } from "../fact-order.mts";
 import { requireArray, requireRecord, requireString } from "../../tools/source-values.mts";
 
-import PREPARED_EARTH_PANEL from "../../src/planets/earth/prepared/content.json" with { type: "json" };
-import PREPARED_CERES_PANEL from "../../src/planets/ceres/prepared/content.json" with { type: "json" };
-import PREPARED_JUPITER_PANEL from "../../src/planets/jupiter/prepared/content.json" with { type: "json" };
-import PREPARED_MARS_PANEL from "../../src/planets/mars/prepared/content.json" with { type: "json" };
-import PREPARED_MOON_PANEL from "../../src/planets/moon/prepared/content.json" with { type: "json" };
-import PREPARED_NEPTUNE_PANEL from "../../src/planets/neptune/prepared/content.json" with { type: "json" };
-import PREPARED_PLUTO_PANEL from "../../src/planets/pluto/prepared/content.json" with { type: "json" };
-import PREPARED_SATURN_PANEL from "../../src/planets/saturn/prepared/content.json" with { type: "json" };
-import PREPARED_SUN_PANEL from "../../src/planets/sun/prepared/content.json" with { type: "json" };
-import PREPARED_URANUS_PANEL from "../../src/planets/uranus/prepared/content.json" with { type: "json" };
+import PREPARED_EARTH_PANEL from "../../src/objects/earth/prepared/content.json" with { type: "json" };
+import PREPARED_CERES_PANEL from "../../src/objects/ceres/prepared/content.json" with { type: "json" };
+import PREPARED_JUPITER_PANEL from "../../src/objects/jupiter/prepared/content.json" with { type: "json" };
+import PREPARED_MARS_PANEL from "../../src/objects/mars/prepared/content.json" with { type: "json" };
+import PREPARED_MOON_PANEL from "../../src/objects/moon/prepared/content.json" with { type: "json" };
+import PREPARED_NEPTUNE_PANEL from "../../src/objects/neptune/prepared/content.json" with { type: "json" };
+import PREPARED_PLUTO_PANEL from "../../src/objects/pluto/prepared/content.json" with { type: "json" };
+import PREPARED_SATURN_PANEL from "../../src/objects/saturn/prepared/content.json" with { type: "json" };
+import PREPARED_SUN_PANEL from "../../src/objects/sun/prepared/content.json" with { type: "json" };
+import PREPARED_URANUS_PANEL from "../../src/objects/uranus/prepared/content.json" with { type: "json" };
 
 const mercurySource = JSON.parse(await readFile(
-  new URL("../../src/planets/mercury/source/content/object.json", import.meta.url),
+  new URL("../../src/objects/mercury/source/content/object.json", import.meta.url),
   "utf8",
 ));
 const venusSource = JSON.parse(await readFile(
-  new URL("../../src/planets/venus/source/content/object.json", import.meta.url),
+  new URL("../../src/objects/venus/source/content/object.json", import.meta.url),
   "utf8",
 ));
 interface Fact { readonly id: string; readonly label: string; readonly value: string; readonly source?: { readonly url: string }; }

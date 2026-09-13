@@ -6,7 +6,7 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireRadialTestConfig} from '../radial-fixture.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/dimorphos/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/dimorphos/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Dimorphos restores all required source inputs from pinned acquisition operations',async()=>{
  const source=await createSourceManifest({planetId:'dimorphos',planetName:'Dimorphos',sourceRoot:root});await source.verify();

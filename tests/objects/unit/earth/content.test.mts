@@ -10,7 +10,7 @@ import { PREPARED_EARTH_PANEL } from "../../unit/earth/prepared-fixture.mts";
 test("publishes evidence-backed Earth shell content", async () => {
   assert.match(PREPARED_EARTH_PANEL.introduction, /third planet from the Sun/u);
   const facts = new Map([...PREPARED_EARTH_PANEL.facts, ...PREPARED_EARTH_PANEL.moreFacts].map(fact => [fact.id, fact]));
-  const review = shape({checked:text,references:array(shape({url:text,values:optional(dictionary(text))}))})(JSON.parse((await readFile(new URL("../../../../src/planets/earth/source/editorial/factsheet-review.json", import.meta.url))).toString('utf8')));
+  const review = shape({checked:text,references:array(shape({url:text,values:optional(dictionary(text))}))})(JSON.parse((await readFile(new URL("../../../../src/objects/earth/source/editorial/factsheet-review.json", import.meta.url))).toString('utf8')));
   assert.equal(required(facts.get("distance-from-sun")).value, required(review.references[0].values)["distance-from-sun"]);
   assert.equal(required(facts.get("radius")).value, "6,371 km");
   for (const id of ["radius", "mass", "density", "gravity", "rotation-period", "orbital-period"]) {
@@ -27,7 +27,7 @@ test("publishes evidence-backed Earth shell content", async () => {
   assert.equal(required(facts.get("ocean-coverage")).value, "71%");
   assert.equal(required(facts.get("atmosphere-composition")).value, "78% N₂, 21% O₂");
   const license = await readFile(
-    new URL("../../../../src/planets/earth/source/presentation/LICENSE.INTER-OFL", import.meta.url),
+    new URL("../../../../src/objects/earth/source/presentation/LICENSE.INTER-OFL", import.meta.url),
     "utf8",
   );
   assert.match(license, /SIL OPEN FONT LICENSE Version 1\.1/u);

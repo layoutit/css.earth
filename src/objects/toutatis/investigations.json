@@ -1,0 +1,115 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toutatis",
+  "entries": [
+    {
+      "id": "pds-radar-shape",
+      "subject": "PDS high-resolution radar shape",
+      "status": "included",
+      "finding": "[Release](https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/) supplies exact model connectivity, scale and coordinate documentation. Its [JPL OBJ counterpart](https://echo.jpl.nasa.gov/asteroids/shapes/hirestoutatis.obj) adds no separate view.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L17",
+        "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/hirestoutatis.obj"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-07",
+          "commit": "75d25fd259a1e942da153d7b359b84fbb3874917",
+          "pr": 34
+        }
+      ]
+    },
+    {
+      "id": "older-radar-models",
+      "subject": "Older low-resolution radar model and NASA STL",
+      "status": "excluded",
+      "finding": "[JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) and [NASA 3D resource](https://science.nasa.gov/3d-resources/asteroid-4179-toutatis/) were reviewed. The scientific high-resolution release has clearer metadata and sufficient detail before budget reduction.",
+      "revisitWhen": "A newer release adds detail or metadata beyond the PDS high-resolution model.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L18",
+        "https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html",
+        "https://science.nasa.gov/3d-resources/asteroid-4179-toutatis/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-07",
+          "commit": "75d25fd259a1e942da153d7b359b84fbb3874917",
+          "pr": 34
+        }
+      ]
+    },
+    {
+      "id": "radial-elevation",
+      "subject": "Radial Elevation view",
+      "status": "excluded",
+      "finding": "A trial found multiple surface intersections in 7 of 8,192 sampled directions through the concave neck. One direction intersects the source at 1,285.61, 1,363.00 and 1,734.56 m. The current shared radial scalar would assign one ray height to distinct surface patches, so it cannot truthfully color this full connected mesh. Geometry itself retains the neck. A future mesh-attached scalar preparation is needed.",
+      "revisitWhen": "Shared preparation can attach scalars to mesh faces instead of radial directions.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L19"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-07",
+          "commit": "75d25fd259a1e942da153d7b359b84fbb3874917",
+          "pr": 34
+        }
+      ]
+    },
+    {
+      "id": "change-2-release",
+      "subject": "Chang’e-2 photographs and fused geometry as released data",
+      "status": "unresolved",
+      "finding": "[Flyby observations](https://arxiv.org/abs/1511.02131), [boulder study](https://pmc.ncbi.nlm.nih.gov/articles/PMC4629198/) and the 2016 paper *Radar model fusion of asteroid (4179) Toutatis via its optical images observed by Chang’e-2 probe*, Planetary and Space Science 125, 87–95, describe richer information. The flyby observed roughly 45% of the surface. A restorable released texture/mesh with full calibration and source-frame registration was not qualified in this survey; literature figures are not a global surface map. This is an unresolved release route, not evidence that the data do not exist.",
+      "revisitWhen": "A restorable calibrated image set or fused mesh with its source-frame registration is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L20",
+        "https://arxiv.org/abs/1511.02131",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC4629198/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-07",
+          "commit": "75d25fd259a1e942da153d7b359b84fbb3874917",
+          "pr": 34
+        }
+      ]
+    },
+    {
+      "id": "stooke-1996-map",
+      "subject": "Stooke 1996 preliminary geological outline map",
+      "status": "excluded",
+      "finding": "[Stooke 1996](https://www.lpi.usra.edu/meetings/lpsc1996/pdf/1642.pdf) has tentative features in an older arbitrary mapping frame and discusses radar image reversals. It does not provide a registered calibrated raster for this mesh. The related CE2DEM2014 search result concerns the Moon, not Toutatis.",
+      "revisitWhen": "A registered geological map in this model's frame is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/75d25fd259a1e942da153d7b359b84fbb3874917/src/planets/toutatis/SOURCE.md#L21",
+        "https://www.lpi.usra.edu/meetings/lpsc1996/pdf/1642.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-07",
+          "commit": "75d25fd259a1e942da153d7b359b84fbb3874917",
+          "pr": 34
+        }
+      ]
+    },
+    {
+      "id": "change-2-figure-lens",
+      "subject": "Chang’e-2 figure placed by hand as a photographic lens",
+      "status": "deferred",
+      "finding": "A camera direction from rotation angles quoted by Bu et al. (2015) and a scale and position matched by hand to Zou et al. (2014)'s radar rendering agreed within 1.0–2.2 figure pixels in three photo-to-photo check windows. Those windows compare two photographs, not photograph pixels with surface points, so the placement does not register the photograph to this mesh.",
+      "revisitWhen": "Measured cameras or surface control points for this mesh, with disjoint holdouts, become available.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/a1570599b69cd007f21af69635a46e60987ebe40/src/planets/toutatis/source/reference/chang-e-2-method.md",
+        "https://github.com/layoutit/css.earth/pull/183"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "a1570599b69cd007f21af69635a46e60987ebe40",
+          "pr": 183
+        }
+      ]
+    }
+  ]
+}
