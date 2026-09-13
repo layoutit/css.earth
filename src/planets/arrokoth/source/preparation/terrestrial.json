@@ -66,11 +66,15 @@
         "id": "lorri",
         "format": "nh-lorri-camera",
         "consumer": "lorri-observation",
-        "path": "observations/lor_0408626332_0x636_sci.fit",
-        "cameraPath": "observations/ca06-camera.json",
-        "startTime": "2019-01-01T05:26:54.116",
         "filter": "PANCHROMATIC",
-        "allowLossy": false,
+        "frames": [
+          {
+            "id": "lorri",
+            "path": "observations/lor_0408626332_0x636_sci.fit",
+            "cameraPath": "observations/ca06-camera.json",
+            "startTime": "2019-01-01T05:26:54.116"
+          }
+        ],
         "transfer": {
           "maximumSourceDistanceMeters": 250,
           "maximumSeparationMeters": 180,
@@ -85,10 +89,12 @@
           "maximumEmissionDegrees": 70,
           "maximumGain": 1
         },
-        "displayPercentiles": [
-          1,
-          99.8
-        ],
+        "display": {
+          "percentiles": [
+            1,
+            99.8
+          ]
+        },
         "metadata": {
           "label": "LORRI",
           "falseColor": false,
@@ -99,11 +105,15 @@
         "id": "mvic",
         "format": "nh-mvic-camera",
         "consumer": "mvic-observation",
-        "path": "observations/ca05_mvic_cube.fit",
-        "cameraPath": "observations/mvic-camera.json",
-        "startTime": "2019-01-01T05:12:55.280",
         "filter": "NIR/RED/BLUE",
-        "allowLossy": false,
+        "frames": [
+          {
+            "id": "mvic",
+            "path": "observations/ca05_mvic_cube.fit",
+            "cameraPath": "observations/mvic-camera.json",
+            "startTime": "2019-01-01T05:12:55.280"
+          }
+        ],
         "transfer": {
           "maximumSourceDistanceMeters": 250,
           "maximumSeparationMeters": 600,
@@ -118,18 +128,16 @@
           "maximumEmissionDegrees": 65,
           "maximumGain": 1
         },
-        "displayPercentiles": [
-          1,
-          99.8
-        ],
+        "display": {
+          "linear": [
+            0,
+            0.17
+          ]
+        },
         "metadata": {
           "label": "MVIC",
           "falseColor": true,
           "coverage": "New Horizons near-infrared, red and blue bands, registered and blur-matched by the mission team. Enhanced color at 340 m native resolution. Unseen and grazing surfaces remain gridded."
-        },
-        "colorDisplay": {
-          "minimum": 0,
-          "maximum": 0.17
         }
       }
     ]
