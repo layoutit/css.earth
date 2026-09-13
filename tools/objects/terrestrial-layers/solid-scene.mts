@@ -14,7 +14,7 @@ import {validateMarkerDescriptor} from '../../../src/navigation/marker-recipe.mt
 export interface SolidSceneConfig {
   rings?:unknown;namespace:string;kind?:string;publicBase:string;
   geometry:{radius:number;radiusKm:number;mapUrl:string;polesUrl:string;radialTerrain?:{sourceTopology?:string};camera:{initialScenePitchDegrees:number;defaultControlYawDegrees:number;framingScale?:number}};
-  raster:SolidRasterGrid & Partial<Record<'observations'|'mosaics'|'scientific'|'observedColors',readonly {id:string;focus?:unknown}[]>>;
+  raster:SolidRasterGrid & Partial<Record<'observations'|'mosaics'|'scientific'|'observedColors'|'surfaceObservations',readonly {id:string;focus?:unknown}[]>>;
   presentation:{pointColor:readonly number[];defaultLens:string;markerAtlasUrl:string};
   parentMarker?:{consumer:string;operations:readonly unknown[];tileSize:number;size:number};
 }
@@ -188,7 +188,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     demand: { capacity: 1, defaultFrame: Math.floor(lighting.frameCount / 2) },
     rotation: { kind: 'angle', source: 'view-sun', reference: 'prepared', baseDegrees: 0,
       zeroAtPole: false, property: `--${id}-light-roll` }, frameAttribute: null, modeAttribute: null, quoted: true };
-  const focus = new Map((['observations','mosaics','scientific','observedColors'] as const).flatMap(kind =>
+  const focus = new Map((['observations','mosaics','scientific','observedColors','surfaceObservations'] as const).flatMap(kind =>
     (config.raster[kind]??[]).filter(lens=>lens.focus).map(lens=>[lens.id,lens.focus] as const)));
   const variants = surfaces.flatMap(s => [false, true].flatMap(shadows => [false, true].map((orbit):PreparedVariant => ({
     ...(focus.has(s.id) ? {navigation: prepareScientificNavigation(id, focus.get(s.id), plan.camera)} : {}),

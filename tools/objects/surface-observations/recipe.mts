@@ -12,6 +12,8 @@ import { MAXIMUM_SEPARATION_FOOTPRINTS } from './limits.mts';
 /** Keys every lens has, and the two a mosaic adds. */
 export const LENS_KEYS = ['id', 'format', 'consumer', 'metadata', 'frames', 'transfer', 'photometry', 'display'] as const;
 export const MOSAIC_KEYS = ['selection', 'levelMatching'] as const;
+/** A lens may name where the camera looks when the lens opens. */
+export const OPTIONAL_LENS_KEYS = ['focus'] as const;
 
 export const safePath = (path: unknown): path is string => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.includes('\\') && !path.split('/').includes('..');
 export const positive = (value: number | undefined): value is number => value !== undefined && Number.isFinite(value) && value > 0;

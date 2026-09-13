@@ -14,7 +14,7 @@ import { castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
 import { observedPhotometry, publishedPhotometry } from '../photometry.mts';
 import { deriveLimits } from '../limits.mts';
-import { LENS_KEYS, MOSAIC_KEYS, checkKeys, parseDisplay, validateEnvelope, validateTransfer } from '../recipe.mts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, parseDisplay, validateEnvelope, validateTransfer } from '../recipe.mts';
 
 const CONTEXT = 'encounter photography recipe';
 const sha256 = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
@@ -24,7 +24,7 @@ export const parseEncounterLens = shape({ id: text, format: text, consumer: text
   photometry: publishedOr(shape({ model: text, maximumGain: number })), selection: optional(text), levelMatching: optional(parseLevelMatching), display: parseDisplay });
 
 export function validateEncounterRecipe(value: unknown, sourceGeometry: unknown) {
-  checkKeys(value, [...LENS_KEYS], [...MOSAIC_KEYS], CONTEXT);
+  checkKeys(value, [...LENS_KEYS], [...MOSAIC_KEYS, ...OPTIONAL_LENS_KEYS], CONTEXT);
   for (const frame of requireArray(requireRecord(value).frames)) checkKeys(frame, ['id', 'path', 'labelPath', 'controlPath'], [], `${CONTEXT} frame`);
   const recipe = decodeProfile(parseEncounterLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
   validateEnvelope(recipe, recipe.frames.flatMap(f => [f.path, f.labelPath, f.controlPath]),
