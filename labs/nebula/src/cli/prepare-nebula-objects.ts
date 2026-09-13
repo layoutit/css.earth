@@ -5,7 +5,8 @@ const args = process.argv.slice(2);
 if (args.some(arg => arg !== '--if-missing')) throw new TypeError('Usage: prepare-nebula-objects [--if-missing]');
 const root = process.cwd(), objects = resolve(root,'src/objects');
 const results = [];
-for (const name of (await readdir(objects)).sort()) {
+// The objects folder also holds its guide; only folders can be objects.
+for (const name of (await readdir(objects,{ withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort()) {
   const directory = resolve(objects,name);
   try { await access(resolve(directory,'source/delivery.json')); }
   catch(error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') continue; throw error; }
