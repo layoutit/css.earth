@@ -98,6 +98,18 @@ and useful complementary products, such as elevation, geology or composition.
 Follow promising citations to the actual release; a display-texture catalog or
 press-image search alone does not establish what datasets exist.
 
+For photograph-to-shape work, inspect the selected shape release as a bundle
+before deriving a camera or looking for a replacement model. Read its labels,
+file inventory and linked methods for companion image-geometry tables,
+reconstructed pointing, control points, backplanes and detector-quality files.
+Compare their observation IDs and model frame with the image headers; headers
+may retain preliminary geometry superseded by the shape reconstruction.
+Establish sample/line order, pixel origin, aspect ratio, flips and units, then
+inspect one native-pixel projection before fitting or baking. Follow the
+[source investigation sequence](references/registered-photographic-mosaics.md#inspect-the-release-before-reconstructing-geometry)
+for conflicting or undocumented conventions. Record the selected companion and
+any remaining inference in the existing recipe and body README.
+
 Search the relevant papers explicitly as well as the data archives. Inspect
 full text, tables, appendices and supplementary files: a usable radius table,
 mesh, camera solution or registration controls may be published there without

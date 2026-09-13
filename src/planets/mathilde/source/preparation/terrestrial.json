@@ -74,7 +74,69 @@
       }
     ],
     "observedColors": [],
-    "surfaceQuality": 90
+    "surfaceQuality": 90,
+    "surfaceObservations": [
+      {
+        "id": "near-msi",
+        "format": "near-msi-camera",
+        "consumer": "near-msi",
+        "frames": [
+          {
+            "id": "msi-42826360",
+            "path": "observations/near-msi/m0042826360f0_2p_iof.fit",
+            "originalPath": "observations/near-msi/m0042826360f0_2p.fit",
+            "cameraPath": "observations/near-msi/42826360-camera.json",
+            "startTime": "1997-06-27T12:55:52.496Z"
+          },
+          {
+            "id": "msi-42826370",
+            "path": "observations/near-msi/m0042826370f0_2p_iof.fit",
+            "originalPath": "observations/near-msi/m0042826370f0_2p.fit",
+            "cameraPath": "observations/near-msi/42826370-camera.json",
+            "startTime": "1997-06-27T12:56:02.506Z"
+          }
+        ],
+        "filter": "0",
+        "allowLossy": false,
+        "refinement": {
+          "method": "mesh-limb",
+          "maximumCorrectionDegrees": 0.5,
+          "maximumResidualPixels": 2,
+          "minimumControls": 16,
+          "searchPixels": 16,
+          "maximumControls": 1000
+        },
+        "selection": "recipe-order",
+        "levelMatching": {
+          "minimumPairs": 64,
+          "maximumLogMad": 0.3,
+          "maximumGain": 1.5,
+          "samplesPerTriangle": 16
+        },
+        "transfer": {
+          "maximumSourceDistanceMeters": 600,
+          "maximumSeparationFootprints": 4,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 75
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 89,
+          "maximumEmissionDegrees": 75,
+          "maximumGain": 1
+        },
+        "displayPercentiles": [
+          0,
+          99.5
+        ],
+        "metadata": {
+          "label": "NEAR close-ups",
+          "coverage": "Two calibrated broadband images from the 1997 flyby. Original shadows and detector artifacts remain. Grid marks unavailable image coverage; the visualization shape includes modeled crater floors and unseen areas."
+        }
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,
@@ -123,7 +185,31 @@
         "maximumErrorMeters": 600,
         "regularize": true
       }
-    }
+    },
+    "radialTerrainAlternatives": [
+      {
+        "lensId": "near-msi",
+        "path": "shape/stooke-253mathilde.tab",
+        "format": "pds-radius-table",
+        "grid": {
+          "stepDegrees": 5,
+          "longitudeDirection": "east-positive",
+          "metersPerUnit": 1000,
+          "expectedVertices": 2522,
+          "expectedFaces": 5040
+        },
+        "faceBudget": 800,
+        "tileSize": 128,
+        "atlasColumns": 16,
+        "primitive": "u",
+        "simplification": {
+          "method": "source-meshoptimizer",
+          "targetFaces": 800,
+          "maximumErrorMeters": 600,
+          "regularize": true
+        }
+      }
+    ]
   },
   "celestial": {
     "sunSource": "Illustrative directional lighting in the published Mathilde mapping frame; source spin pole and phase are unknown",

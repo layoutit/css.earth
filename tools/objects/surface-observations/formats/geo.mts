@@ -12,6 +12,7 @@ import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, osirisRadian
 import { decodeAmicaGeo } from '../../terrestrial-layers/amica-geo.mts';
 import { decodeOsirisReflectance } from '../../terrestrial-layers/archived-camera.mts';
 import { decodeLlorri } from '../../terrestrial-layers/llorri-geo.mts';
+import { decodeNearMsi, parseNearCameraClosure } from '../../terrestrial-layers/near-msi.mts';
 import { decodeNewHorizonsLorri, decodeArrokothMvic } from '../../terrestrial-layers/new-horizons-geo.mts';
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
 import { decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT } from '../../terrestrial-layers/pds4-geometry-cube.mts';
@@ -27,15 +28,16 @@ import { deriveLimits, MAXIMUM_SEPARATION_FOOTPRINTS } from '../limits.mts';
 import { parseBandColorDisplay } from '../../color-transfer.mts';
 
 type GeoRecipe = ReturnType<typeof parseGeoRecipe>;
-export const GEO_FORMATS = ['osiris-geo', 'amica-gaskell', 'osiris-camera', 'llorri-camera', 'nh-lorri-camera', 'nh-mvic-camera', PDS4_GEOMETRY_CUBE_FORMAT, SPICE_CAMERA_FORMAT];
+export const GEO_FORMATS = ['osiris-geo', 'amica-gaskell', 'osiris-camera', 'llorri-camera', 'near-msi-camera', 'nh-lorri-camera', 'nh-mvic-camera', PDS4_GEOMETRY_CUBE_FORMAT, SPICE_CAMERA_FORMAT];
 const safePath = (path: unknown) => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.split(/[\\/]/).includes('..');
 const positive = (value: number | undefined): value is number => value !== undefined && Number.isFinite(value) && value > 0;
-const archivedCamera = (recipe: { format: string }) => ['osiris-camera', 'llorri-camera', 'nh-lorri-camera', 'nh-mvic-camera'].includes(recipe.format);
+const archivedCamera = (recipe: { format: string }) => ['osiris-camera', 'llorri-camera', 'near-msi-camera', 'nh-lorri-camera', 'nh-mvic-camera'].includes(recipe.format);
 const kernelCamera = (recipe: { format: string }) => recipe.format === SPICE_CAMERA_FORMAT;
 const cubeDeclaration = (recipe: Pick<GeoRecipe, 'cube'>) => { if (!recipe.cube) throw new TypeError('Geometry cube recipes declare their planes and identity.'); return recipe.cube; };
 const spiceDeclaration = (recipe: Pick<GeoRecipe, 'spice'>) => { if (!recipe.spice) throw new TypeError('SPICE camera recipes declare their kernels, bodies, instrument and pixel axes.'); return recipe.spice; };
 const framePaths = (recipe: Pick<GeoRecipe, 'format' | 'path' | 'labelPath' | 'originalPath' | 'flatPath' | 'cameraPath' | 'qualityPath' | 'spice'>): string[] => (recipe.format === 'amica-gaskell'
   ? [recipe.path, recipe.labelPath, recipe.originalPath, recipe.flatPath]
+  : recipe.format === 'near-msi-camera' ? [recipe.path, recipe.originalPath, recipe.cameraPath]
   : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? [recipe.path, recipe.labelPath]
   // Kernels from a shared bank are pinned by the bank's manifest, not the body's; a VICAR frame brings its PDS3 label.
   : kernelCamera(recipe) ? [recipe.path, ...(spiceDeclaration(recipe).image.format === 'vicar-pds3' ? [recipe.labelPath] : []), ...(spiceDeclaration(recipe).kernelSet ? [] : spiceDeclaration(recipe).kernels)]
@@ -91,7 +93,8 @@ function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
       !['X', '-X', 'Y', '-Y', 'Z', '-Z'].includes(spice.pixels.column) || !['X', '-X', 'Y', '-Y', 'Z', '-Z'].includes(spice.pixels.row) || spice.pixels.column.replace('-', '') === spice.pixels.row.replace('-', '') ||
       (spice.image.plane !== undefined && (!Number.isInteger(spice.image.plane) || spice.image.plane < 1)) || !spice.image.quantity)) throw new TypeError('Invalid SPICE camera declaration.');
   const refinement = recipe.refinement;
-  if (refinement !== undefined && (!(kernels || recipe.format === 'osiris-camera') || refinement.method !== 'mesh-limb' ||
+  if (recipe.format === 'near-msi-camera' && (!refinement || recipe.allowLossy !== false)) throw new TypeError('NEAR MSI requires uncompressed inputs and an independently checked limb refinement.');
+  if (refinement !== undefined && (!(kernels || recipe.format === 'osiris-camera' || recipe.format === 'near-msi-camera') || refinement.method !== 'mesh-limb' ||
       !positive(refinement.maximumCorrectionDegrees) || refinement.maximumCorrectionDegrees > 2 || !positive(refinement.maximumResidualPixels) || refinement.maximumResidualPixels > 5 ||
       !Number.isInteger(refinement.minimumControls) || refinement.minimumControls < 16 || refinement.minimumControls > 5000 ||
       (refinement.threshold !== undefined && !Number.isFinite(refinement.threshold)) ||
@@ -108,7 +111,8 @@ function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
       (amica ? recipe.qualityPath !== undefined || recipe.allowLossy !== true || recipe.filter !== 'V'
         : cube ? recipe.cube === undefined || recipe.qualityPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.allowLossy !== false
         : kernels ? recipe.qualityPath !== undefined || (recipe.labelPath !== undefined) !== (recipe.spice?.image.format === 'vicar-pds3') || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.cameraPath !== undefined || recipe.allowLossy !== false
-        : (recipe.format === 'nh-mvic-camera' ? !safePath(recipe.labelPath) : recipe.labelPath !== undefined) || recipe.originalPath !== undefined || recipe.flatPath !== undefined) ||
+        : (recipe.format === 'nh-mvic-camera' ? !safePath(recipe.labelPath) : recipe.labelPath !== undefined) ||
+          (recipe.format === 'near-msi-camera' ? !safePath(recipe.originalPath) : recipe.originalPath !== undefined) || recipe.flatPath !== undefined) ||
       (!cube && recipe.cube !== undefined) ||
       (controlled ? recipe.qualityPath !== undefined : recipe.cameraPath !== undefined) ||
       !recipe.startTime || !recipe.filter || typeof recipe.allowLossy !== 'boolean' ||
@@ -175,6 +179,11 @@ async function loadGeoFrame(recipe: GeoRecipe, id: string, { sourceDirectory, so
     const decoded = decodeLlorri(await read(recipe.path), closure);
     return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera, decoded));
   }
+  if (recipe.format === 'near-msi-camera') {
+    const nativeClosure = parseNearCameraClosure(closure);
+    const decoded = refined({ ...decodeNearMsi(await read(recipe.path), await read(recipe.originalPath), nativeClosure), camera: closure });
+    return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera));
+  }
   if (recipe.format === 'nh-lorri-camera') {
     const decoded = decodeNewHorizonsLorri(await read(recipe.path), closure);
     return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera, decoded));
@@ -215,7 +224,7 @@ function displayUnits(recipe: GeoRecipe, photometry: ObservationPhotometry) {
   const quantity = (name: string) => retained ? `relative ${name} with original illumination` : `relative disk-normalized ${name}`;
   return photometry.units ?? `${recipe.format === 'amica-gaskell' ? 'relative flat-fielded detector brightness with approximate disk normalization'
     : ['llorri-camera', 'nh-lorri-camera'].includes(recipe.format) ? 'relative DN/s with original illumination'
-    : recipe.format === 'osiris-camera' ? quantity('I/F')
+    : ['osiris-camera', 'near-msi-camera'].includes(recipe.format) ? quantity('I/F')
     : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? quantity(cubeDeclaration(recipe).quantity)
     : kernelCamera(recipe) ? quantity(spiceDeclaration(recipe).image.quantity)
     : recipe.radiometry === 'radiance-factor' ? 'relative disk- and phase-normalized I/F' : 'relative disk-normalized radiance'}; linear grayscale display`;
