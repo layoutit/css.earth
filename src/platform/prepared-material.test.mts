@@ -7,7 +7,7 @@ import { createPreparedMaterialPublisher, preparedMaterialFrame } from '../rende
 import { selectedPreparedVariant } from '../renderers/css/dist/testing.js';
 import { initialObjectSelection } from '../renderers/css/dist/testing.js';
 import { retainedPresentationFixture } from "./test/object-runtime-package.mts";
-import definitionJson from "../../src/planets/venus/prepared/runtime.json" with {type: "json"};
+import definitionJson from "../../src/objects/venus/prepared/runtime.json" with {type: "json"};
 
 import { parsePreparedObjectRuntime } from '../renderers/css/dist/index.js';
 import { parse, object, array, tuple, number, boolean, string } from '../../tools/objects/material-composition/data-schema.mts';

@@ -5,7 +5,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import { fixtureRecord } from '../../test-values.mts';
 import { parseTerrestrialProfile } from '../terrestrial-layers/index.mts';
 
-const planets = new URL('../../../src/planets/', import.meta.url);
+const planets = new URL('../../../src/objects/', import.meta.url);
 const authored: { id: string; profile: { raster: { surfaceObservations: unknown[] } } }[] = [];
 for (const id of (await readdir(planets)).sort()) {
   const profile = await readFile(new URL(`${id}/source/preparation/terrestrial.json`, planets), 'utf8').then(JSON.parse, () => null);

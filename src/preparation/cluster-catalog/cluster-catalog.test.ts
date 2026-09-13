@@ -65,11 +65,11 @@ test('shared navigation reaches the selected release and source, context and nav
   const read = async (path: string) => JSON.parse(await readFile(resolve(path), 'utf8'));
   const catalogue = await read('src/objects/galaxy-clusters/prepared/catalogue.json');
   const presentation = await read('src/objects/local-group/source/presentation.json');
-  const context = await read('src/planets/sun/prepared/world-context.json');
-  const sourceBytes = await readFile(resolve('src/planets/sun/source/navigation/universe.json'));
+  const context = await read('src/objects/sun/prepared/world-context.json');
+  const sourceBytes = await readFile(resolve('src/objects/sun/source/navigation/universe.json'));
   const hash = createHash('sha256').update(sourceBytes).digest('hex');
-  const descriptor = await read('src/planets/sun/object.json'), navigation = await read('src/planets/sun/prepared/world-navigation.json');
-  const manifest = await read('src/planets/sun/source/manifest.json');
+  const descriptor = await read('src/objects/sun/object.json'), navigation = await read('src/objects/sun/prepared/world-navigation.json');
+  const manifest = await read('src/objects/sun/source/manifest.json');
   assert.equal(JSON.parse(sourceBytes.toString()).camera.maximumDistanceM, context.camera.maximumDistanceM);
   assert.equal(presentation.maximumDistanceM, context.camera.maximumDistanceM);
   for (const row of catalogue.objects) assert.ok(context.camera.maximumDistanceM > Math.hypot(...row.positionM) + row.aperture.comovingRadiusM * 10);

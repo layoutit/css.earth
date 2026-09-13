@@ -15,15 +15,15 @@ async function verifySource(sourceDirectory: string, id: string, path: string, e
   for await(const chunk of createReadStream(filename))digest.update(chunk);
   const sha256=digest.digest('hex');
   if(sha256!==expectedSha256)throw new Error(`Observed source digest differs: ${path}`);
-  return [`src/planets/${id}/source/${path}`,sha256];
+  return [`src/objects/${id}/source/${path}`,sha256];
 }
 
 /** Stage selected observed pole atlases without rebuilding the body or any surface product. */
 export async function refreshObservedPoles(id: string, lensIds: readonly string[]) {
   if(!/^[a-z][a-z0-9-]*$/u.test(id)||!lensIds.length||new Set(lensIds).size!==lensIds.length)throw new TypeError('Choose one body and distinct observed lens ids.');
   sharp.cache(false);sharp.concurrency(1);
-  const objectDirectory=resolve('src/planets',id),sourceDirectory=resolve(objectDirectory,'source'),recipePath=resolve(sourceDirectory,'preparation/observations.json'),manifestPath=resolve(sourceDirectory,'manifest.json');
-  const scenePath=`src/planets/${id}/prepared/scene.refs.json`,sceneBytes=await readFile(scenePath);
+  const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),recipePath=resolve(sourceDirectory,'preparation/observations.json'),manifestPath=resolve(sourceDirectory,'manifest.json');
+  const scenePath=`src/objects/${id}/prepared/scene.refs.json`,sceneBytes=await readFile(scenePath);
   const [descriptorBytes,recipeBytes,manifestBytes]=await Promise.all([readFile(resolve(objectDirectory,'object.json')),readFile(recipePath),readFile(manifestPath)]);
   const descriptor=parseAuthoredObjectDescriptor(JSON.parse(descriptorBytes.toString('utf8'))),recipeSource=descriptor.recipe.sources.find(source=>source.id==='observations');
   if(descriptor.id!==id||!recipeSource||recipeSource.path!=='source/preparation/observations.json'||recipeSource.sha256!==hash(recipeBytes))throw new Error('Observed pole refresh requires the current descriptor recipe pin.');
@@ -37,7 +37,7 @@ export async function refreshObservedPoles(id: string, lensIds: readonly string[
   const result=await prepareObservedSurfaces({sourceDirectory,publicDirectory:stage,config,lensIds,productKinds:['poles'],write:true});
   const assets=result.assets.map(asset=>({filename:asset.filename,url:`/scenes/${id}/${asset.filename}`,width:asset.width,height:asset.height,bytes:asset.bytes,sha256:asset.sha256}));
   if(assets.length!==lensIds.length||new Set(assets.map(asset=>asset.filename)).size!==assets.length)throw new Error('Observed pole refresh produced an unexpected asset set.');
-  const receipt={id,inputs:{[scenePath]:hash(sceneBytes),[`src/planets/${id}/source/preparation/observations.json`]:hash(recipeBytes),[`src/planets/${id}/source/manifest.json`]:hash(manifestBytes),...sourceInputs},assets};
+  const receipt={id,inputs:{[scenePath]:hash(sceneBytes),[`src/objects/${id}/source/preparation/observations.json`]:hash(recipeBytes),[`src/objects/${id}/source/manifest.json`]:hash(manifestBytes),...sourceInputs},assets};
   await writeFile(resolve(stage,'receipt.json'),`${JSON.stringify(receipt,null,2)}\n`);
   return receipt;
 }

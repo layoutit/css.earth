@@ -6,7 +6,7 @@ import{resolve}from'node:path';
 import{loadPdsRadialTable}from'../../../../tools/objects/terrestrial-layers/pds-radial-table.mts';
 import{readAuthoredRotation}from'../../../../tools/objects/authored-rotation.mts';
 import{assertAsteroidPackage}from'../asteroid-contract.mts';
-const base=resolve(import.meta.dirname,'../../../../src/planets/mathilde');
+const base=resolve(import.meta.dirname,'../../../../src/objects/mathilde');
 const read=async (p: string)=>JSON.parse(await readFile(resolve(base,p),'utf8'));
 test('Mathilde Stooke column order, east longitude and meter scale preserve independent release anchors',async()=>{
  const config=await read('source/preparation/terrestrial.json'),profile=config.geometry.radialTerrain;

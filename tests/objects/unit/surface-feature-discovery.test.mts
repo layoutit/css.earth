@@ -4,7 +4,7 @@ import { readdir, readFile } from "node:fs/promises";
 import { parsePreparedObjectRuntime, parsePreparedSurfaceFeatureCatalog } from "../../../src/renderers/css/dist/index.js";
 
 const root = new URL("../../../", import.meta.url);
-const bodies = new URL("src/planets/", root);
+const bodies = new URL("src/objects/", root);
 for (const id of await readdir(bodies)) {
   const descriptor = await readFile(new URL(`${id}/prepared/features.json`, bodies), "utf8").catch(() => null);
   if (!descriptor) continue;

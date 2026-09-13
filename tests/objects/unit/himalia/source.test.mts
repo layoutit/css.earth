@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root = new URL('../../../../src/planets/himalia/source/', import.meta.url);
+const root = new URL('../../../../src/objects/himalia/source/', import.meta.url);
 const read = async (path: string|URL) => JSON.parse((await readFile(new URL(path, root))).toString('utf8'));
 
 test('Himalia preserves approximate elongation and volume through a closed physical surface', async () => {

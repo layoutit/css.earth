@@ -22,7 +22,7 @@ import { parseSpiceCamera } from '../../../../tools/objects/terrestrial-layers/s
  * switch frame and a fixed-offset quaternion, the parameterized Dimorphos
  * frame, SCLK and leap seconds, light time and stellar aberration.
  */
-const root = resolve(import.meta.dirname, '../../../../src/planets/dimorphos/source');
+const root = resolve(import.meta.dirname, '../../../../src/objects/dimorphos/source');
 const config = JSON.parse((await readFile(resolve(root, 'preparation/terrestrial.json'))).toString('utf8'));
 const mosaic = config.raster.surfaceObservations.find((recipe: { id: string }) => recipe.id === 'draco');
 const cubeRecipe = { ...mosaic, ...mosaic.frames.find((frame: { id: string }) => frame.id === 't-minus-11s') };

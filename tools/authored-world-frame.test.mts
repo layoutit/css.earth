@@ -10,7 +10,7 @@ import type { PathLike } from 'node:fs';
 
 const readText = (path: string) => readFile(path, 'utf8');
 async function inputs(id: string) {
-  const directory = resolve('src/planets', id);
+  const directory = resolve('src/objects', id);
   const read = async (name: string) => JSON.parse(await readText(resolve(directory, name)));
   return { directory, descriptor: await read('object.json'), scene: await read('prepared/scene.json'),
     runtime: await read('prepared/runtime.json'), readText };
@@ -21,7 +21,7 @@ test('every authored object closes over its numerical publication stage', async 
 test('final numerical stage rejects mutated frame, source pins, scene scale and removed receipt', async () => {
   let input;
   for (const object of OBJECTS) {
-    const descriptor = JSON.parse(await readText(resolve('src/planets', object.id, 'object.json')));
+    const descriptor = JSON.parse(await readText(resolve('src/objects', object.id, 'object.json')));
     if (!requireArray(fixtureRecord(descriptor, 'properties', 'recipe').sources).some(source => fixtureRecord(source).id === 'world-context')) {
       input = await inputs(object.id);
       break;

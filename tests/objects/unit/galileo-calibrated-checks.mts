@@ -5,7 +5,7 @@ import {resolve} from 'node:path';
 import {test} from 'node:test';
 import {loadShapeCameraImage,applySsiQuality,resolveCatalogCamera,controlledShapeCamera,loadCameraShape} from '../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 export function checkGalileo(body: string,anchors: number[][],expectedQuality: { records: number; badBlockPixels: number; saturatedPixels: number; specialPixels: number; withheldPixels: number; }){
- const root=resolve('src/planets',body,'source');
+ const root=resolve('src/objects',body,'source');
  test(`${body}: calibrated pixels and archived bad-data blocks preserve source identity`,async()=>{
   const config=JSON.parse((await readFile(resolve(root,'preparation/terrestrial.json'))).toString('utf8')),recipe=config.raster.surfaceObservations.find((lens: { id: string })=>lens.id==='calibrated'),frame=recipe.frames[0];
   const image=await loadShapeCameraImage(root,frame);

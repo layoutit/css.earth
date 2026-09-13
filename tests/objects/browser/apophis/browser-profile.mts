@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/apophis/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/apophis/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'apophis',controls,audit:{
   "preparedAssetPairs": [
     {

@@ -12,7 +12,7 @@ import {requireRecord,requireArray,requireString,requireFiniteNumber} from './so
 const [body,lens,baseUrl,baselineRef,outputDirectory,baselineAssetDirectory]=process.argv.slice(2);
 if(!body||!lens||!baseUrl||!baselineRef||!outputDirectory||!/^[a-z0-9-]+$/.test(body)||!/^[a-z0-9-]+$/.test(lens))
  throw new Error('Usage: capture-surface-lens.mts BODY LENS BASE_URL BASELINE_REF OUTPUT_DIRECTORY [REGENERATED_BASELINE_ASSETS]');
-const root=`src/planets/${body}`,read=async(path:string)=>requireRecord(JSON.parse(await readFile(path,'utf8')));
+const root=`src/objects/${body}`,read=async(path:string)=>requireRecord(JSON.parse(await readFile(path,'utf8')));
 const hash=(bytes:Uint8Array|string)=>createHash('sha256').update(bytes).digest('hex');
 const runtime=await read(`${root}/prepared/runtime.refs.json`),assets=requireArray((await read(`${root}/runtime-assets.json`)).assets).map(value=>requireRecord(value));
 const variant=requireArray(runtime.variants).map(value=>requireRecord(value)).find(v=>requireRecord(v.when).lensId===lens);

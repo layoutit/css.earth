@@ -25,7 +25,7 @@ def evaluate(v):
     p=[(cp*cn-sp*sn*ci)*x+(-sp*cn-cp*sn*ci)*y,(cp*sn+sp*cn*ci)*x+(-sp*sn+cp*cn*ci)*y,sp*si*x+cp*si*y]
     return p,abs(a*(1-e)-q)
 results=[]
-for catalog in sorted(Path('src/planets').glob('comet-*/source/reference/celestia.ssc')):
+for catalog in sorted(Path('src/objects').glob('comet-*/source/reference/celestia.ssc')):
     s=catalog.parent;id=s.parents[1].name
     line=(s/'horizons-elements.txt').read_text().split('$$SOE')[1].strip().splitlines()[0]
     fields=[v.strip() for v in line.split(',')]

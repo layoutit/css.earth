@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/pandora-55/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/pandora-55/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'pandora-55',controls,audit:{
   "preparedAssetPairs": [
     {

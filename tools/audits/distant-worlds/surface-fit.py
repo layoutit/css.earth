@@ -6,7 +6,7 @@ output.mkdir(parents=True,exist_ok=True)
 bodies=json.loads(Path(os.environ.get('CSSEARTH_AUDIT_INPUTS','tools/objects/source-authoring/distant-worlds/inputs.json')).read_text())['bodies']
 results=[]
 for b in bodies:
-    terrain=json.loads(Path(f'src/planets/{b["id"]}/prepared/terrain.json').read_text())
+    terrain=json.loads(Path(f'src/objects/{b["id"]}/prepared/terrain.json').read_text())
     to_meters=b['radiusKm']*1000/230
     axes=[x*500 for x in b['fullAxesKm']]
     errors=[]

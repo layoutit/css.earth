@@ -7,7 +7,7 @@ import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/o
 import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import {decodeCalibratedCamera} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 import {coveredPixels,loadLens} from '../surface-observation-lens.mts';
-const source=new URL('../../../../src/planets/pallene/source/',import.meta.url);
+const source=new URL('../../../../src/objects/pallene/source/',import.meta.url);
 const json=async (path: string|URL)=>JSON.parse(await readFile(new URL(path,source),'utf8'));
 
 test('Pallene realizes the published ellipsoid dimensions without invented terrain',async()=>{

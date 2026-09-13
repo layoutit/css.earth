@@ -11,7 +11,7 @@ import type { PreparationCommand } from '../src/platform/preparation-runner.mts'
 const projectRoot = resolve(import.meta.dirname, '..');
 const expectedRecipes = {mercury: true, venus: true};
 async function descriptor(id: string) {
-  return JSON.parse(await readFile(resolve(projectRoot, 'src/planets', id, 'object.json'), 'utf8'));
+  return JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, 'object.json'), 'utf8'));
 }
 function expectedSteps(id: string) {
   return [['../../../../tools/objects/dist/prepare-authored.js', id, '--write']];
@@ -19,11 +19,11 @@ function expectedSteps(id: string) {
 
 for (const id of Object.keys(expectedRecipes)) {
   test(`${id} executes the approved producers, arguments and ordering`, async () => {
-    const plan = await readObjectPreparation(resolve(projectRoot, 'src/planets', id, 'object.json'));
+    const plan = await readObjectPreparation(resolve(projectRoot, 'src/objects', id, 'object.json'));
     assert.deepEqual(plan.steps, expectedSteps(id));
     assert.equal(plan.objectName, id[0].toUpperCase() + id.slice(1));
     const calls: PreparationCommand[] = [];
-    await runObjectPreparation(resolve(projectRoot, 'src/planets', id, 'object.json'), {
+    await runObjectPreparation(resolve(projectRoot, 'src/objects', id, 'object.json'), {
       runCommand: async call => { calls.push(call); },
     });
     assert.deepEqual(calls.map(({ script, argumentsList }) => [script, argumentsList]),
@@ -68,7 +68,7 @@ test('recipe data cannot supply executable paths, arguments or unsupported types
 
 test('a failed producer stops before subsequent recipe capabilities', async () => {
   const calls: string[] = [];
-  await assert.rejects(runObjectPreparation(resolve(projectRoot, 'src/planets/venus/object.json'), {
+  await assert.rejects(runObjectPreparation(resolve(projectRoot, 'src/objects/venus/object.json'), {
     async runCommand({ script }) {
       calls.push(script);
       if (script.endsWith('prepare-authored.js')) throw new Error('producer failed');

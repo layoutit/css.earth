@@ -9,8 +9,8 @@ import type { CachedPreparationOptions, PreparationFileSet } from './prepare-pla
 import type { PreparationCommand, PreparationReport } from './run-implemented-planets.mts';
 import { requireRecord } from './source-values.mts';
 
-const repository = resolve(import.meta.dirname, '..'), descriptorPath = 'src/planets/mercury/object.json';
-const payloadPath = 'src/planets/mercury/prepared/object.json';
+const repository = resolve(import.meta.dirname, '..'), descriptorPath = 'src/objects/mercury/object.json';
+const payloadPath = 'src/objects/mercury/prepared/object.json';
 type FixtureContext = { root: string; write: (path: string, value: unknown) => Promise<void>; descriptor: Record<string, unknown> };
 async function fixture(run: (context: FixtureContext) => Promise<void>) {
   const root = await mkdtemp(join(tmpdir(), 'object-preparation-cache-'));
@@ -23,14 +23,14 @@ async function fixture(run: (context: FixtureContext) => Promise<void>) {
     await write(descriptorPath, descriptor);
     await write(payloadPath, { prepared: 'fixture' });
     await write('tools/objects/compiler.ts', '// shared compiler\n');
-    await write('src/planets/mercury/prepared/runtime.json', {prepared:'fixture'});
+    await write('src/objects/mercury/prepared/runtime.json', {prepared:'fixture'});
     await run({ root, write, descriptor });
   } finally { await rm(root, { recursive: true, force: true }); }
 }
 
 const packageFiles = async (): Promise<PreparationFileSet> => ({
   inputs: [descriptorPath, 'tools/objects/compiler.ts'].sort(),
-  outputs: [descriptorPath, payloadPath, 'src/planets/mercury/prepared/runtime.json'].sort(),
+  outputs: [descriptorPath, payloadPath, 'src/objects/mercury/prepared/runtime.json'].sort(),
   inputKinds: {[descriptorPath]: 'object-descriptor-authored@1'} as const,
 });
 const scheduleFixture: NonNullable<CachedPreparationOptions['schedule']> = async (options = {}) => {
@@ -44,9 +44,9 @@ test('authored closure binds source JSON and shared TypeScript compilers without
   const files = await objectPreparationFiles(repository, 'mercury');
   assert.equal(files.inputKinds?.[descriptorPath], 'object-descriptor-authored@1');
   for (const path of ['tools/objects/prepare-authored.ts', 'src/renderers/css/preparation/scene/index.ts',
-    'src/planets/mercury/source/preparation/raster.json']) assert.ok(files.inputs.includes(path), path);
+    'src/objects/mercury/source/preparation/raster.json']) assert.ok(files.inputs.includes(path), path);
   assert.ok(files.outputs.includes(payloadPath));
-  assert.ok(!files.inputs.some(path => /^src\/planets\/mercury\/(tools|runtime|site)\//.test(path)));
+  assert.ok(!files.inputs.some(path => /^src\/objects\/mercury\/(tools|runtime|site)\//.test(path)));
 });
 
 test('authored recipe and producer mutations rebuild; generated hash updates seal only verified outputs', async () => fixture(async ({ root, write, descriptor }) => {
