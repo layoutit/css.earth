@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5118a64756b9b5b2f4e2717d9e77a34dc641bb7c872e74aba8e04d6d99255942"
+    "sha256": "d0630650562f6b43e8c34bc2dc3970862662e7bb9c60628b231ceb4744932fc9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "46d6ca2cacbb280057fbebea55226541328781f678e40635b04564a7619480b4",
+      "sha256": "6fdcc2d7f584623cf160621e9bbdae5bc15e5ef4926126c99d6e60453ffbfa57",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -67,7 +67,8 @@
                 "centerLongitude": 0,
                 "channels": "rgb",
                 "zeroValidity": "all-channels",
-                "resampling": "source-georeferenced-nearest"
+                "resampling": "source-georeferenced-nearest",
+                "wrapLongitude": true
               },
               "textureScale": 0.125,
               "focus": {
@@ -1320,7 +1321,8 @@
           "centerLongitude": 0,
           "channels": "rgb",
           "zeroValidity": "all-channels",
-          "resampling": "source-georeferenced-nearest"
+          "resampling": "source-georeferenced-nearest",
+          "wrapLongitude": true
         }
       },
       "inputs": [

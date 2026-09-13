@@ -402,9 +402,12 @@ export function createPerspectiveDolly({
   // proxy. In the marker stage the opaque marker or point-source star stands for
   // the body. A mesh there adds a few pixels yet keeps hundreds of composited 3D
   // leaves alive, so it leaves layout until the body resolves.
-  // On entry its prepared groups join over a few frames, so the leaves' layers
-  // are created across paints. The proxy beneath carries the body's colour.
-  const REVEAL_FRAMES = 4;
+  // On entry its prepared groups join across frames, so the leaves' layers are
+  // created across paints. Each frame admits whole groups up to a leaf budget:
+  // a fixed frame count gave Uranus 384 leaves per frame, whose style, layerize
+  // and paint took 15 ms and dropped the frame. The proxy beneath carries the
+  // body's colour.
+  const REVEAL_LEAVES_PER_FRAME = 128;
   const revealView = cameraElement.ownerDocument.defaultView;
   const revealClock = revealView && createOpacityClock(revealView);
   const revealed = new Uint8Array(revealGroups.length).fill(1);
@@ -424,7 +427,10 @@ export function createPerspectiveDolly({
   const continueReveal = () => {
     revealFrame = null;
     if (sceneElement.hidden || revealCount >= revealGroups.length) return;
-    revealTo(Math.min(revealGroups.length, revealCount + Math.ceil(revealGroups.length / REVEAL_FRAMES)));
+    let count = revealCount, leaves = 0;
+    do leaves += revealGroups[count++]!.length;
+    while (count < revealGroups.length && leaves + revealGroups[count]!.length <= REVEAL_LEAVES_PER_FRAME);
+    revealTo(count);
     if (revealCount < revealGroups.length) revealFrame = revealClock!.request(continueReveal);
   };
   const capturePresentation = (sceneMatrix: Matrix3dLike, scenePresentation: string) => ({
@@ -455,16 +461,6 @@ export function createPerspectiveDolly({
         });
       }
       const [bodyX, bodyY, bodyZ] = projection?.body.translate ?? genericTranslation ?? [0, 0, focal - distance];
-      const transform =
-        `translate3d(${formatNumber(bodyX)}px, ${formatNumber(bodyY)}px, ` +
-        `${formatNumber(bodyZ)}px) ` +
-        `scale3d(${cameraPlan.sceneScale}, ${cameraPlan.sceneScale}, ` +
-        `${cameraPlan.sceneScale}) ${scenePresentation}`;
-      if (transform !== publishedSceneTransform) {
-        sceneElement.style.transform = transform;
-        publishedSceneTransform = transform;
-        transformWrites += 1;
-      }
       if (projection && heliocentric) {
         heliocentric.setOrbitOpacity(orbitLineOpacity(
           cameraPlan.orbitLineFade,
@@ -490,6 +486,21 @@ export function createPerspectiveDolly({
       // resolving camera commits instead of revealing an untextured globe.
       const hidden = Boolean(lod.stage === 'marker' || (projection && !projection.body.visible) ||
         (canReveal !== undefined && !canReveal()));
+      // A hidden scene draws nothing: its transform is formatted and written only
+      // while shown, so marker-stage motion and fly-tos skip it, and the entry
+      // below writes the current pose before the scene is shown.
+      if (!hidden) {
+        const transform =
+          `translate3d(${formatNumber(bodyX)}px, ${formatNumber(bodyY)}px, ` +
+          `${formatNumber(bodyZ)}px) ` +
+          `scale3d(${cameraPlan.sceneScale}, ${cameraPlan.sceneScale}, ` +
+          `${cameraPlan.sceneScale}) ${scenePresentation}`;
+        if (transform !== publishedSceneTransform) {
+          sceneElement.style.transform = transform;
+          publishedSceneTransform = transform;
+          transformWrites += 1;
+        }
+      }
       if (revealGroups.length && revealView) {
         if (hidden && revealFrame !== null) { revealClock!.cancel(revealFrame); revealFrame = null; }
         if (!hidden && sceneElement.hidden) {

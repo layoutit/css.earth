@@ -189,6 +189,13 @@ atlas addresses.
 Longitude direction, latitude convention, physical scale, pole and meridian
 belong to the source recipe. A generic image resize cannot establish them.
 
+A global map's west and east edges meet at one meridian. When a georeferenced
+source spans 360° of longitude, to within one of its pixels, its recipe declares
+`wrapLongitude: true`, and interpolation reads across that meridian. Without the
+declaration, a target pixel whose footprint crosses the edge counts as missing
+and receives the gray coverage grid. That drew a one-pixel line at 180° on Io's
+8K maps. Preparation rejects the declaration for a source that does not span 360°.
+
 ![Gaspra detector image beside a reprojected mosaic, with four matching patches marked](images/gaspra-registration.png)
 
 Gaspra registration example: detector image at left, published mosaic reprojected
@@ -249,9 +256,9 @@ declares a seam outset, preparation writes two corrections instead:
 result at saved Venus radar views. It renders each view over a black and then a
 white backdrop to find pixels that let the backdrop through, and it compares the
 brightness profile across each seam with parallel lines inside both leaves.
-These corrections do not change breaks in the prepared imagery itself, such as
-the darker columns on either side of 0° in the Venus radar atlas or the
-one-pixel column at 180° in Io’s 8K bands.
+These corrections do not change breaks in the source imagery itself, such as
+the one-pixel border columns at the edges of the Venus radar, Mars and Ceres
+source maps.
 
 [solid-raster.mjs](../tools/objects/terrestrial-layers/solid-raster.mts) writes
 WebP assets and records their dimensions, sizes and hashes. Normalized maps stay
