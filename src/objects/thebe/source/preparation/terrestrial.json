@@ -162,7 +162,7 @@
         "transfer": {
           "maximumSeparationFootprints": 2,
           "visibilityToleranceMeters": 0.5,
-          "maximumEmissionDegrees": 75
+          "maximumEmissionDegrees": 70
         },
         "photometry": {
           "model": "lunar-lambert",
@@ -170,7 +170,7 @@
           "referenceIncidenceDegrees": 0,
           "referenceEmissionDegrees": 0,
           "maximumIncidenceDegrees": 75,
-          "maximumEmissionDegrees": 75,
+          "maximumEmissionDegrees": 70,
           "maximumGain": 1.75
         },
         "display": {
