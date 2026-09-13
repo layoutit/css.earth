@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d38941ad7e1faecff77744070720f56151bb68d36255c78c64d64cf14af2802b"
+    "sha256": "bb680f3561e4f3120cef1106ff1eee6ea6013607b8539a1cca6329e8ad52d7b4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c824fdf13bd29a402bf417628b2b203c846a3daa1a5325b67d36292c70206196",
+      "sha256": "d6346f4248d44f1f62e52103d4c8d9e89d1d69c8fca8faac3294e6049725c0d7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -77,217 +77,11 @@
             }
           ],
           "observedColors": [],
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "normal",
               "format": "controlled-shape-camera",
               "consumer": "cassini-frames",
-              "frames": [
-                {
-                  "id": "n1506383441",
-                  "path": "observations/N1506383441_2_CALIB.IMG",
-                  "labelPath": "observations/N1506383441_2_CALIB.LBL",
-                  "observerLatitude": 11.3,
-                  "observerWestLongitude": 196,
-                  "sunLatitude": 11.11,
-                  "sunWestLongitude": 248.57,
-                  "rangeKm": 61848.1,
-                  "northAzimuthDegrees": 329.39,
-                  "center": [
-                    479.2,
-                    428.2
-                  ],
-                  "pixelAngleMicroradians": 5.9896977199
-                },
-                {
-                  "id": "n1506388174",
-                  "path": "observations/N1506388174_2_CALIB.IMG",
-                  "labelPath": "observations/N1506388174_2_CALIB.LBL",
-                  "observerLatitude": 11.11,
-                  "observerWestLongitude": 200.35,
-                  "sunLatitude": 11.11,
-                  "sunWestLongitude": 252.51,
-                  "rangeKm": 35121.2,
-                  "northAzimuthDegrees": 329.49,
-                  "center": [
-                    304.2,
-                    704.6
-                  ],
-                  "pixelAngleMicroradians": 5.9896977199
-                },
-                {
-                  "id": "n1506388518",
-                  "path": "observations/N1506388518_2_CALIB.IMG",
-                  "labelPath": "observations/N1506388518_2_CALIB.LBL",
-                  "observerLatitude": 11.08,
-                  "observerWestLongitude": 200.69,
-                  "sunLatitude": 11.11,
-                  "sunWestLongitude": 252.8,
-                  "rangeKm": 33179.5,
-                  "northAzimuthDegrees": 329.53,
-                  "center": [
-                    794.8,
-                    693.6
-                  ],
-                  "pixelAngleMicroradians": 5.9896977199
-                },
-                {
-                  "id": "n1506388840",
-                  "path": "observations/N1506388840_2_CALIB.IMG",
-                  "labelPath": "observations/N1506388840_2_CALIB.LBL",
-                  "observerLatitude": 11.06,
-                  "observerWestLongitude": 201.02,
-                  "sunLatitude": 11.11,
-                  "sunWestLongitude": 253.07,
-                  "rangeKm": 31362.1,
-                  "northAzimuthDegrees": 329.53,
-                  "center": [
-                    954.7,
-                    356.1
-                  ],
-                  "pixelAngleMicroradians": 5.9896977199
-                },
-                {
-                  "id": "n1506389178",
-                  "path": "observations/N1506389178_2_CALIB.IMG",
-                  "labelPath": "observations/N1506389178_2_CALIB.LBL",
-                  "observerLatitude": 11.02,
-                  "observerWestLongitude": 201.36,
-                  "sunLatitude": 11.11,
-                  "sunWestLongitude": 253.35,
-                  "rangeKm": 29454.5,
-                  "northAzimuthDegrees": 329.66,
-                  "center": [
-                    792.4,
-                    -144.5
-                  ],
-                  "pixelAngleMicroradians": 5.9896977199
-                },
-                {
-                  "id": "n1513999046",
-                  "path": "observations/N1513999046_1_CALIB.IMG",
-                  "labelPath": "observations/N1513999046_1_CALIB.LBL",
-                  "observerLatitude": 0.19,
-                  "observerWestLongitude": 35.33,
-                  "sunLatitude": 11.54,
-                  "sunWestLongitude": 111.61,
-                  "rangeKm": 228024.2,
-                  "northAzimuthDegrees": 327.28,
-                  "center": [
-                    501.4,
-                    496.7
-                  ],
-                  "pixelAngleMicroradians": 5.9896977199
-                },
-                {
-                  "id": "n1530182624",
-                  "path": "observations/N1530182624_1_CALIB.IMG",
-                  "labelPath": "observations/N1530182624_1_CALIB.LBL",
-                  "observerLatitude": -10.62,
-                  "observerWestLongitude": 353.64,
-                  "sunLatitude": -33.72,
-                  "sunWestLongitude": 332.79,
-                  "rangeKm": 296897.3,
-                  "northAzimuthDegrees": 70.85,
-                  "center": [
-                    506.3,
-                    511.8
-                  ],
-                  "pixelAngleMicroradians": 5.9896977199
-                },
-                {
-                  "id": "n1530201013",
-                  "path": "observations/N1530201013_1_CALIB.IMG",
-                  "labelPath": "observations/N1530201013_1_CALIB.LBL",
-                  "observerLatitude": -24.5,
-                  "observerWestLongitude": 348.35,
-                  "sunLatitude": -41.5,
-                  "sunWestLongitude": 346.59,
-                  "rangeKm": 291442.3,
-                  "northAzimuthDegrees": 82.2,
-                  "center": [
-                    519.6,
-                    551.9
-                  ],
-                  "pixelAngleMicroradians": 5.9896977199
-                },
-                {
-                  "id": "n1692997492",
-                  "path": "observations/N1692997492_1_CALIB.IMG",
-                  "labelPath": "observations/N1692997492_1_CALIB.LBL",
-                  "observerLatitude": -26.2,
-                  "observerWestLongitude": 213.35,
-                  "sunLatitude": 12.05,
-                  "sunWestLongitude": 204.33,
-                  "rangeKm": 68756.9,
-                  "northAzimuthDegrees": 229.7,
-                  "center": [
-                    488.8,
-                    530.9
-                  ],
-                  "pixelAngleMicroradians": 5.9896977199
-                },
-                {
-                  "id": "n1694888328",
-                  "path": "observations/N1694888328_1_CALIB.IMG",
-                  "labelPath": "observations/N1694888328_1_CALIB.LBL",
-                  "observerLatitude": -39,
-                  "observerWestLongitude": 239.55,
-                  "sunLatitude": -28.95,
-                  "sunWestLongitude": 280.07,
-                  "rangeKm": 92274.3,
-                  "northAzimuthDegrees": 297,
-                  "center": [
-                    494.9,
-                    594.4
-                  ],
-                  "pixelAngleMicroradians": 5.9896977199
-                },
-                {
-                  "id": "n1811772616",
-                  "path": "observations/N1811772616_1_CALIB.IMG",
-                  "labelPath": "observations/N1811772616_1_CALIB.LBL",
-                  "observerLatitude": 7.86,
-                  "observerWestLongitude": 39.72,
-                  "sunLatitude": 1.73,
-                  "sunWestLongitude": 98.5,
-                  "rangeKm": 35231.5,
-                  "northAzimuthDegrees": 190.32,
-                  "center": [
-                    370,
-                    223
-                  ],
-                  "pixelAngleMicroradians": 5.9896977199
-                },
-                {
-                  "id": "n1506391424",
-                  "observerLatitude": 10.62,
-                  "observerWestLongitude": 204.06,
-                  "sunLatitude": 11.11,
-                  "sunWestLongitude": 255.22,
-                  "rangeKm": 16782.2,
-                  "northAzimuthDegrees": 329.3949554495464,
-                  "center": [
-                    72.10596576651524,
-                    374.01763246187295
-                  ],
-                  "pixelAngleMicroradians": 5.9896977199,
-                  "path": "observations/N1506391424_2_CALIB.IMG",
-                  "labelPath": "observations/N1506391424_2_CALIB.LBL",
-                  "coverageInsetPixels": 16
-                }
-              ],
-              "photometry": {
-                "weight": 0.5,
-                "maximumGain": 2.5,
-                "maximumIncidenceDegrees": 80,
-                "maximumEmissionDegrees": 78,
-                "displayMaximum": 0.45,
-                "gamma": 1.15,
-                "minimumLevel": 0.7,
-                "maximumLevel": 1.4,
-                "backgroundMaximum": 0.003
-              },
               "metadata": {
                 "label": "Monochrome",
                 "falseColor": false,
@@ -308,295 +102,229 @@
                   "id": "cassini-n1506383441",
                   "sha256": "737553c1ebb0de17daa91d5c3fb5a81e3b3607b3b12db623a606a73f5b539d8e"
                 }
+              },
+              "frames": [
+                {
+                  "id": "n1506383441",
+                  "path": "observations/N1506383441_2_CALIB.IMG",
+                  "labelPath": "observations/N1506383441_2_CALIB.LBL",
+                  "observerLatitude": 11.3,
+                  "observerWestLongitude": 196,
+                  "sunLatitude": 11.11,
+                  "sunWestLongitude": 248.57,
+                  "rangeKm": 61848.1,
+                  "northAzimuthDegrees": 329.39,
+                  "center": [
+                    479.2,
+                    428.2
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199,
+                  "backgroundMaximum": 0.003
+                },
+                {
+                  "id": "n1506388174",
+                  "path": "observations/N1506388174_2_CALIB.IMG",
+                  "labelPath": "observations/N1506388174_2_CALIB.LBL",
+                  "observerLatitude": 11.11,
+                  "observerWestLongitude": 200.35,
+                  "sunLatitude": 11.11,
+                  "sunWestLongitude": 252.51,
+                  "rangeKm": 35121.2,
+                  "northAzimuthDegrees": 329.49,
+                  "center": [
+                    304.2,
+                    704.6
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199,
+                  "backgroundMaximum": 0.003
+                },
+                {
+                  "id": "n1506388518",
+                  "path": "observations/N1506388518_2_CALIB.IMG",
+                  "labelPath": "observations/N1506388518_2_CALIB.LBL",
+                  "observerLatitude": 11.08,
+                  "observerWestLongitude": 200.69,
+                  "sunLatitude": 11.11,
+                  "sunWestLongitude": 252.8,
+                  "rangeKm": 33179.5,
+                  "northAzimuthDegrees": 329.53,
+                  "center": [
+                    794.8,
+                    693.6
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199,
+                  "backgroundMaximum": 0.003
+                },
+                {
+                  "id": "n1506388840",
+                  "path": "observations/N1506388840_2_CALIB.IMG",
+                  "labelPath": "observations/N1506388840_2_CALIB.LBL",
+                  "observerLatitude": 11.06,
+                  "observerWestLongitude": 201.02,
+                  "sunLatitude": 11.11,
+                  "sunWestLongitude": 253.07,
+                  "rangeKm": 31362.1,
+                  "northAzimuthDegrees": 329.53,
+                  "center": [
+                    954.7,
+                    356.1
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199,
+                  "backgroundMaximum": 0.003
+                },
+                {
+                  "id": "n1506389178",
+                  "path": "observations/N1506389178_2_CALIB.IMG",
+                  "labelPath": "observations/N1506389178_2_CALIB.LBL",
+                  "observerLatitude": 11.02,
+                  "observerWestLongitude": 201.36,
+                  "sunLatitude": 11.11,
+                  "sunWestLongitude": 253.35,
+                  "rangeKm": 29454.5,
+                  "northAzimuthDegrees": 329.66,
+                  "center": [
+                    792.4,
+                    -144.5
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199,
+                  "backgroundMaximum": 0.003
+                },
+                {
+                  "id": "n1530182624",
+                  "path": "observations/N1530182624_1_CALIB.IMG",
+                  "labelPath": "observations/N1530182624_1_CALIB.LBL",
+                  "observerLatitude": -10.62,
+                  "observerWestLongitude": 353.64,
+                  "sunLatitude": -33.72,
+                  "sunWestLongitude": 332.79,
+                  "rangeKm": 296897.3,
+                  "northAzimuthDegrees": 70.85,
+                  "center": [
+                    506.3,
+                    511.8
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199,
+                  "backgroundMaximum": 0.003
+                },
+                {
+                  "id": "n1530201013",
+                  "path": "observations/N1530201013_1_CALIB.IMG",
+                  "labelPath": "observations/N1530201013_1_CALIB.LBL",
+                  "observerLatitude": -24.5,
+                  "observerWestLongitude": 348.35,
+                  "sunLatitude": -41.5,
+                  "sunWestLongitude": 346.59,
+                  "rangeKm": 291442.3,
+                  "northAzimuthDegrees": 82.2,
+                  "center": [
+                    519.6,
+                    551.9
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199,
+                  "backgroundMaximum": 0.003
+                },
+                {
+                  "id": "n1692997492",
+                  "path": "observations/N1692997492_1_CALIB.IMG",
+                  "labelPath": "observations/N1692997492_1_CALIB.LBL",
+                  "observerLatitude": -26.2,
+                  "observerWestLongitude": 213.35,
+                  "sunLatitude": 12.05,
+                  "sunWestLongitude": 204.33,
+                  "rangeKm": 68756.9,
+                  "northAzimuthDegrees": 229.7,
+                  "center": [
+                    488.8,
+                    530.9
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199,
+                  "backgroundMaximum": 0.003
+                },
+                {
+                  "id": "n1694888328",
+                  "path": "observations/N1694888328_1_CALIB.IMG",
+                  "labelPath": "observations/N1694888328_1_CALIB.LBL",
+                  "observerLatitude": -39,
+                  "observerWestLongitude": 239.55,
+                  "sunLatitude": -28.95,
+                  "sunWestLongitude": 280.07,
+                  "rangeKm": 92274.3,
+                  "northAzimuthDegrees": 297,
+                  "center": [
+                    494.9,
+                    594.4
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199,
+                  "backgroundMaximum": 0.003
+                },
+                {
+                  "id": "n1811772616",
+                  "path": "observations/N1811772616_1_CALIB.IMG",
+                  "labelPath": "observations/N1811772616_1_CALIB.LBL",
+                  "observerLatitude": 7.86,
+                  "observerWestLongitude": 39.72,
+                  "sunLatitude": 1.73,
+                  "sunWestLongitude": 98.5,
+                  "rangeKm": 35231.5,
+                  "northAzimuthDegrees": 190.32,
+                  "center": [
+                    370,
+                    223
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199,
+                  "backgroundMaximum": 0.003
+                },
+                {
+                  "id": "n1506391424",
+                  "observerLatitude": 10.62,
+                  "observerWestLongitude": 204.06,
+                  "sunLatitude": 11.11,
+                  "sunWestLongitude": 255.22,
+                  "rangeKm": 16782.2,
+                  "northAzimuthDegrees": 329.3949554495464,
+                  "center": [
+                    72.10596576651524,
+                    374.01763246187295
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199,
+                  "path": "observations/N1506391424_2_CALIB.IMG",
+                  "labelPath": "observations/N1506391424_2_CALIB.LBL",
+                  "coverageInsetPixels": 16,
+                  "backgroundMaximum": 0.003
+                }
+              ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumGain": 1.8,
+                "maximumAngleDegrees": 70
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 78
+              },
+              "photometry": {
+                "model": "lunar-lambert",
+                "weight": 0.5,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 80,
+                "maximumEmissionDegrees": 78,
+                "maximumGain": 2.5
+              },
+              "display": {
+                "displayRange": [
+                  0,
+                  0.339
+                ]
               }
             },
             {
               "id": "filter-color",
               "format": "controlled-shape-color",
               "consumer": "cassini-color-frames",
-              "channels": [
-                {
-                  "channel": "red",
-                  "filter": "IR3",
-                  "frames": [
-                    {
-                      "id": "n1506388324",
-                      "path": "observations/N1506388324_2_CALIB.IMG",
-                      "labelPath": "observations/N1506388324_2_CALIB.LBL",
-                      "observerLatitude": 11.096918604651162,
-                      "observerWestLongitude": 200.49825581395348,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 252.6364534883721,
-                      "rangeKm": 34274.52848837209,
-                      "northAzimuthDegrees": 329.4895000849899,
-                      "center": [
-                        300.90448509833834,
-                        700.2599348901572
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    },
-                    {
-                      "id": "n1506388668",
-                      "path": "observations/N1506388668_2_CALIB.IMG",
-                      "labelPath": "observations/N1506388668_2_CALIB.LBL",
-                      "observerLatitude": 11.070683229813666,
-                      "observerWestLongitude": 200.84372670807454,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 252.92577639751553,
-                      "rangeKm": 32332.8850931677,
-                      "northAzimuthDegrees": 329.4822462392758,
-                      "center": [
-                        792.4786696287061,
-                        691.6788143082762
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    },
-                    {
-                      "id": "n1506388990",
-                      "path": "observations/N1506388990_2_CALIB.IMG",
-                      "labelPath": "observations/N1506388990_2_CALIB.LBL",
-                      "observerLatitude": 11.042248520710059,
-                      "observerWestLongitude": 201.1708875739645,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 253.19426035502957,
-                      "rangeKm": 30515.53195266272,
-                      "northAzimuthDegrees": 329.5234947450581,
-                      "center": [
-                        953.4934464258838,
-                        345.8224467220334
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    },
-                    {
-                      "id": "n1506389328",
-                      "path": "observations/N1506389328_2_CALIB.IMG",
-                      "labelPath": "observations/N1506389328_2_CALIB.LBL",
-                      "observerLatitude": 11.003561643835617,
-                      "observerWestLongitude": 201.52027397260275,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 253.47328767123287,
-                      "rangeKm": 28607.924657534248,
-                      "northAzimuthDegrees": 329.5634989082285,
-                      "center": [
-                        789.7293377933214,
-                        -161.29403024713716
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    },
-                    {
-                      "id": "n1506389683",
-                      "path": "observations/N1506389683_2_CALIB.IMG",
-                      "labelPath": "observations/N1506389683_2_CALIB.LBL",
-                      "observerLatitude": 10.9632,
-                      "observerWestLongitude": 201.904,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 253.76760000000002,
-                      "rangeKm": 26604.48,
-                      "northAzimuthDegrees": 329.62087494941414,
-                      "center": [
-                        -48.916573617256965,
-                        -12.833810239141867
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    }
-                  ]
-                },
-                {
-                  "channel": "green",
-                  "filter": "IR1",
-                  "frames": [
-                    {
-                      "id": "n1506388291",
-                      "path": "observations/N1506388291_2_CALIB.IMG",
-                      "labelPath": "observations/N1506388291_2_CALIB.LBL",
-                      "observerLatitude": 11.099796511627906,
-                      "observerWestLongitude": 200.4656395348837,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 252.60863372093024,
-                      "rangeKm": 34460.79622093023,
-                      "northAzimuthDegrees": 329.4907473751497,
-                      "center": [
-                        301.8959746449202,
-                        700.3018234666115
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    },
-                    {
-                      "id": "n1506388635",
-                      "path": "observations/N1506388635_2_CALIB.IMG",
-                      "labelPath": "observations/N1506388635_2_CALIB.LBL",
-                      "observerLatitude": 11.072732919254658,
-                      "observerWestLongitude": 200.80990683229814,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 252.89810559006213,
-                      "rangeKm": 32519.14037267081,
-                      "northAzimuthDegrees": 329.4910415666191,
-                      "center": [
-                        792.8871649059492,
-                        690.4025771092948
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    },
-                    {
-                      "id": "n1506388957",
-                      "path": "observations/N1506388957_2_CALIB.IMG",
-                      "labelPath": "observations/N1506388957_2_CALIB.LBL",
-                      "observerLatitude": 11.046153846153846,
-                      "observerWestLongitude": 201.1376923076923,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 253.16692307692307,
-                      "rangeKm": 30701.776923076923,
-                      "northAzimuthDegrees": 329.5175649204647,
-                      "center": [
-                        953.3992610943161,
-                        344.4253813097221
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    },
-                    {
-                      "id": "n1506389295",
-                      "path": "observations/N1506389295_2_CALIB.IMG",
-                      "labelPath": "observations/N1506389295_2_CALIB.LBL",
-                      "observerLatitude": 11.00717808219178,
-                      "observerWestLongitude": 201.48501369863015,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 253.44616438356164,
-                      "rangeKm": 28794.171232876713,
-                      "northAzimuthDegrees": 329.56516603175646,
-                      "center": [
-                        789.922718547025,
-                        -162.18577605059454
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    },
-                    {
-                      "id": "n1506389650",
-                      "path": "observations/N1506389650_2_CALIB.IMG",
-                      "labelPath": "observations/N1506389650_2_CALIB.LBL",
-                      "observerLatitude": 10.96716,
-                      "observerWestLongitude": 201.8677,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 253.73988,
-                      "rangeKm": 26790.699,
-                      "northAzimuthDegrees": 329.62725323434876,
-                      "center": [
-                        -47.595707411770555,
-                        -15.19937115345824
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    }
-                  ]
-                },
-                {
-                  "channel": "blue",
-                  "filter": "UV3",
-                  "frames": [
-                    {
-                      "id": "n1506388236",
-                      "path": "observations/N1506388236_2_CALIB.IMG",
-                      "labelPath": "observations/N1506388236_2_CALIB.LBL",
-                      "observerLatitude": 11.104593023255813,
-                      "observerWestLongitude": 200.41127906976743,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 252.56226744186046,
-                      "rangeKm": 34771.242441860464,
-                      "northAzimuthDegrees": 329.47534502613877,
-                      "center": [
-                        303.68434650673964,
-                        702.0989319256197
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    },
-                    {
-                      "id": "n1506388580",
-                      "path": "observations/N1506388580_2_CALIB.IMG",
-                      "labelPath": "observations/N1506388580_2_CALIB.LBL",
-                      "observerLatitude": 11.076149068322982,
-                      "observerWestLongitude": 200.7535403726708,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 252.85198757763976,
-                      "rangeKm": 32829.56583850932,
-                      "northAzimuthDegrees": 329.50170797175787,
-                      "center": [
-                        793.8980869955841,
-                        692.6212786245933
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    },
-                    {
-                      "id": "n1506388902",
-                      "path": "observations/N1506388902_2_CALIB.IMG",
-                      "labelPath": "observations/N1506388902_2_CALIB.LBL",
-                      "observerLatitude": 11.052662721893492,
-                      "observerWestLongitude": 201.08236686390535,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 253.12136094674557,
-                      "rangeKm": 31012.18520710059,
-                      "northAzimuthDegrees": 329.509412067782,
-                      "center": [
-                        955.1279771558324,
-                        346.848101519506
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    },
-                    {
-                      "id": "n1506389240",
-                      "path": "observations/N1506389240_2_CALIB.IMG",
-                      "labelPath": "observations/N1506389240_2_CALIB.LBL",
-                      "observerLatitude": 11.013205479452054,
-                      "observerWestLongitude": 201.42624657534247,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 253.4009589041096,
-                      "rangeKm": 29104.58219178082,
-                      "northAzimuthDegrees": 329.58629748423454,
-                      "center": [
-                        791.1168477646188,
-                        -160.6113827963068
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    },
-                    {
-                      "id": "n1506389595",
-                      "path": "observations/N1506389595_2_CALIB.IMG",
-                      "labelPath": "observations/N1506389595_2_CALIB.LBL",
-                      "observerLatitude": 10.97376,
-                      "observerWestLongitude": 201.8072,
-                      "sunLatitude": 11.11,
-                      "sunWestLongitude": 253.69368,
-                      "rangeKm": 27101.064,
-                      "northAzimuthDegrees": 329.6456926830586,
-                      "center": [
-                        -45.627052678994886,
-                        -12.182220178612205
-                      ],
-                      "pixelAngleMicroradians": 5.9896977199,
-                      "coverageInsetPixels": 3
-                    }
-                  ]
-                }
-              ],
-              "photometry": {
-                "model": "observed",
-                "weight": 0.5,
-                "maximumGain": 1,
-                "maximumIncidenceDegrees": 75,
-                "maximumEmissionDegrees": 75,
-                "backgroundMaximum": 0.003
-              },
               "metadata": {
                 "label": "False color",
                 "falseColor": true,
@@ -606,14 +334,306 @@
                   "url": "https://pds-rings.seti.org/cassini/iss/"
                 }
               },
-              "focus": {
-                "longitudeDegrees": 159.5343604651163,
-                "latitudeDegrees": 11.099796511627906,
-                "zoom": 1.1
-              },
-              "displayRange": [
-                0,
-                0.5
+              "bands": [
+                {
+                  "channel": "red",
+                  "filter": "IR3"
+                },
+                {
+                  "channel": "green",
+                  "filter": "IR1"
+                },
+                {
+                  "channel": "blue",
+                  "filter": "UV3"
+                }
+              ],
+              "frames": [
+                {
+                  "id": "set-1",
+                  "red": {
+                    "id": "n1506388324",
+                    "path": "observations/N1506388324_2_CALIB.IMG",
+                    "labelPath": "observations/N1506388324_2_CALIB.LBL",
+                    "observerLatitude": 11.096918604651162,
+                    "observerWestLongitude": 200.49825581395348,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 252.6364534883721,
+                    "rangeKm": 34274.52848837209,
+                    "northAzimuthDegrees": 329.4895000849899,
+                    "center": [
+                      300.90448509833834,
+                      700.2599348901572
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  },
+                  "green": {
+                    "id": "n1506388291",
+                    "path": "observations/N1506388291_2_CALIB.IMG",
+                    "labelPath": "observations/N1506388291_2_CALIB.LBL",
+                    "observerLatitude": 11.099796511627906,
+                    "observerWestLongitude": 200.4656395348837,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 252.60863372093024,
+                    "rangeKm": 34460.79622093023,
+                    "northAzimuthDegrees": 329.4907473751497,
+                    "center": [
+                      301.8959746449202,
+                      700.3018234666115
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  },
+                  "blue": {
+                    "id": "n1506388236",
+                    "path": "observations/N1506388236_2_CALIB.IMG",
+                    "labelPath": "observations/N1506388236_2_CALIB.LBL",
+                    "observerLatitude": 11.104593023255813,
+                    "observerWestLongitude": 200.41127906976743,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 252.56226744186046,
+                    "rangeKm": 34771.242441860464,
+                    "northAzimuthDegrees": 329.47534502613877,
+                    "center": [
+                      303.68434650673964,
+                      702.0989319256197
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  }
+                },
+                {
+                  "id": "set-2",
+                  "red": {
+                    "id": "n1506388668",
+                    "path": "observations/N1506388668_2_CALIB.IMG",
+                    "labelPath": "observations/N1506388668_2_CALIB.LBL",
+                    "observerLatitude": 11.070683229813666,
+                    "observerWestLongitude": 200.84372670807454,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 252.92577639751553,
+                    "rangeKm": 32332.8850931677,
+                    "northAzimuthDegrees": 329.4822462392758,
+                    "center": [
+                      792.4786696287061,
+                      691.6788143082762
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  },
+                  "green": {
+                    "id": "n1506388635",
+                    "path": "observations/N1506388635_2_CALIB.IMG",
+                    "labelPath": "observations/N1506388635_2_CALIB.LBL",
+                    "observerLatitude": 11.072732919254658,
+                    "observerWestLongitude": 200.80990683229814,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 252.89810559006213,
+                    "rangeKm": 32519.14037267081,
+                    "northAzimuthDegrees": 329.4910415666191,
+                    "center": [
+                      792.8871649059492,
+                      690.4025771092948
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  },
+                  "blue": {
+                    "id": "n1506388580",
+                    "path": "observations/N1506388580_2_CALIB.IMG",
+                    "labelPath": "observations/N1506388580_2_CALIB.LBL",
+                    "observerLatitude": 11.076149068322982,
+                    "observerWestLongitude": 200.7535403726708,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 252.85198757763976,
+                    "rangeKm": 32829.56583850932,
+                    "northAzimuthDegrees": 329.50170797175787,
+                    "center": [
+                      793.8980869955841,
+                      692.6212786245933
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  }
+                },
+                {
+                  "id": "set-3",
+                  "red": {
+                    "id": "n1506388990",
+                    "path": "observations/N1506388990_2_CALIB.IMG",
+                    "labelPath": "observations/N1506388990_2_CALIB.LBL",
+                    "observerLatitude": 11.042248520710059,
+                    "observerWestLongitude": 201.1708875739645,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 253.19426035502957,
+                    "rangeKm": 30515.53195266272,
+                    "northAzimuthDegrees": 329.5234947450581,
+                    "center": [
+                      953.4934464258838,
+                      345.8224467220334
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  },
+                  "green": {
+                    "id": "n1506388957",
+                    "path": "observations/N1506388957_2_CALIB.IMG",
+                    "labelPath": "observations/N1506388957_2_CALIB.LBL",
+                    "observerLatitude": 11.046153846153846,
+                    "observerWestLongitude": 201.1376923076923,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 253.16692307692307,
+                    "rangeKm": 30701.776923076923,
+                    "northAzimuthDegrees": 329.5175649204647,
+                    "center": [
+                      953.3992610943161,
+                      344.4253813097221
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  },
+                  "blue": {
+                    "id": "n1506388902",
+                    "path": "observations/N1506388902_2_CALIB.IMG",
+                    "labelPath": "observations/N1506388902_2_CALIB.LBL",
+                    "observerLatitude": 11.052662721893492,
+                    "observerWestLongitude": 201.08236686390535,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 253.12136094674557,
+                    "rangeKm": 31012.18520710059,
+                    "northAzimuthDegrees": 329.509412067782,
+                    "center": [
+                      955.1279771558324,
+                      346.848101519506
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  }
+                },
+                {
+                  "id": "set-4",
+                  "red": {
+                    "id": "n1506389328",
+                    "path": "observations/N1506389328_2_CALIB.IMG",
+                    "labelPath": "observations/N1506389328_2_CALIB.LBL",
+                    "observerLatitude": 11.003561643835617,
+                    "observerWestLongitude": 201.52027397260275,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 253.47328767123287,
+                    "rangeKm": 28607.924657534248,
+                    "northAzimuthDegrees": 329.5634989082285,
+                    "center": [
+                      789.7293377933214,
+                      -161.29403024713716
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  },
+                  "green": {
+                    "id": "n1506389295",
+                    "path": "observations/N1506389295_2_CALIB.IMG",
+                    "labelPath": "observations/N1506389295_2_CALIB.LBL",
+                    "observerLatitude": 11.00717808219178,
+                    "observerWestLongitude": 201.48501369863015,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 253.44616438356164,
+                    "rangeKm": 28794.171232876713,
+                    "northAzimuthDegrees": 329.56516603175646,
+                    "center": [
+                      789.922718547025,
+                      -162.18577605059454
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  },
+                  "blue": {
+                    "id": "n1506389240",
+                    "path": "observations/N1506389240_2_CALIB.IMG",
+                    "labelPath": "observations/N1506389240_2_CALIB.LBL",
+                    "observerLatitude": 11.013205479452054,
+                    "observerWestLongitude": 201.42624657534247,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 253.4009589041096,
+                    "rangeKm": 29104.58219178082,
+                    "northAzimuthDegrees": 329.58629748423454,
+                    "center": [
+                      791.1168477646188,
+                      -160.6113827963068
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  }
+                },
+                {
+                  "id": "set-5",
+                  "red": {
+                    "id": "n1506389683",
+                    "path": "observations/N1506389683_2_CALIB.IMG",
+                    "labelPath": "observations/N1506389683_2_CALIB.LBL",
+                    "observerLatitude": 10.9632,
+                    "observerWestLongitude": 201.904,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 253.76760000000002,
+                    "rangeKm": 26604.48,
+                    "northAzimuthDegrees": 329.62087494941414,
+                    "center": [
+                      -48.916573617256965,
+                      -12.833810239141867
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  },
+                  "green": {
+                    "id": "n1506389650",
+                    "path": "observations/N1506389650_2_CALIB.IMG",
+                    "labelPath": "observations/N1506389650_2_CALIB.LBL",
+                    "observerLatitude": 10.96716,
+                    "observerWestLongitude": 201.8677,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 253.73988,
+                    "rangeKm": 26790.699,
+                    "northAzimuthDegrees": 329.62725323434876,
+                    "center": [
+                      -47.595707411770555,
+                      -15.19937115345824
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  },
+                  "blue": {
+                    "id": "n1506389595",
+                    "path": "observations/N1506389595_2_CALIB.IMG",
+                    "labelPath": "observations/N1506389595_2_CALIB.LBL",
+                    "observerLatitude": 10.97376,
+                    "observerWestLongitude": 201.8072,
+                    "sunLatitude": 11.11,
+                    "sunWestLongitude": 253.69368,
+                    "rangeKm": 27101.064,
+                    "northAzimuthDegrees": 329.6456926830586,
+                    "center": [
+                      -45.627052678994886,
+                      -12.182220178612205
+                    ],
+                    "pixelAngleMicroradians": 5.9896977199,
+                    "coverageInsetPixels": 3,
+                    "backgroundMaximum": 0.003
+                  }
+                }
               ],
               "registration": {
                 "references": [
@@ -734,6 +754,37 @@
                     ]
                   }
                 ]
+              },
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumGain": 1.1,
+                "maximumAngleDegrees": 70
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 75
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 75,
+                "maximumEmissionDegrees": 75,
+                "maximumGain": 1
+              },
+              "display": {
+                "displayRange": [
+                  0,
+                  0.5
+                ]
+              },
+              "focus": {
+                "longitudeDegrees": 159.5343604651163,
+                "latitudeDegrees": 11.099796511627906,
+                "zoom": 1.1
               }
             }
           ]
@@ -773,6 +824,7 @@
             "tileSize": 128,
             "atlasColumns": 16,
             "simplification": {
+              "method": "source-meshoptimizer",
               "targetFaces": 1200,
               "maximumErrorMeters": 3000
             }
@@ -1613,106 +1665,6 @@
     },
     {
       "kind": "source-input",
-      "id": "cassini-n1513999046",
-      "path": "observations/N1513999046_1_CALIB.IMG",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1513999046",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "width": 1024,
-      "height": 1024,
-      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2017-data-1513745034-1514010212-n1513999046-1-calib",
-            "role": "material",
-            "evidence": "src/planets/hyperion/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
-          }
-        ]
-      },
-      "sha256": "13b6d5694f2e9024f220e7564d5cb5ae8227047fa7a1659b62b7655769f97183",
-      "bytes": 4202496,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1513999046_1_CALIB.IMG",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "cassini-n1513999046-label",
-      "path": "observations/N1513999046_1_CALIB.LBL",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1513999046",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "width": 1024,
-      "height": 1024,
-      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2017-data-1513745034-1514010212-n1513999046-1-calib",
-            "role": "material",
-            "evidence": "src/planets/hyperion/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
-          }
-        ]
-      },
-      "sha256": "43892adf0226af67675dfcfccc6550e912520507d76cae00bc29c5f5a1b935a2",
-      "bytes": 3824,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1513999046_1_CALIB.LBL",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.LBL"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
       "id": "cassini-n1530182624",
       "path": "observations/N1530182624_1_CALIB.IMG",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530158136_1530199809/N1530182624_1_CALIB.IMG",
@@ -2415,414 +2367,6 @@
     },
     {
       "kind": "source-input",
-      "id": "n1506388668",
-      "path": "observations/N1506388668_2_CALIB.IMG",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388668",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "coverage": "IR3 member of a complete camera-registered triplet; valid common coverage only.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388668-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.LBL"
-          }
-        ]
-      },
-      "width": 1024,
-      "height": 1024,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "validation/filter-color-1506388518-registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "sha256": "01d312521609da44f165296b7930d591048fa143145b1187ecc7d06399aff261",
-      "bytes": 4202496,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506388668_2_CALIB.IMG",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.IMG"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506388668-label",
-      "path": "observations/N1506388668_2_CALIB.LBL",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388668",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388668-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.LBL"
-          }
-        ]
-      },
-      "sha256": "52e01663eaecc834b9563ec7a0e0d2ecf6698a3522208d3462217a06b116b3e1",
-      "bytes": 3834,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506388668_2_CALIB.LBL",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.LBL"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506388990",
-      "path": "observations/N1506388990_2_CALIB.IMG",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388990",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "coverage": "IR3 member of a complete camera-registered triplet; valid common coverage only.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388990-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.LBL"
-          }
-        ]
-      },
-      "width": 1024,
-      "height": 1024,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "validation/filter-color-1506388840-registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "sha256": "659a2d7e6bc3d839326918fc9360e449188f9dcdc152dc1b61a51b8f6906750f",
-      "bytes": 4202496,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506388990_2_CALIB.IMG",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.IMG"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506388990-label",
-      "path": "observations/N1506388990_2_CALIB.LBL",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388990",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388990-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.LBL"
-          }
-        ]
-      },
-      "sha256": "19a02b614daf33f048e4d02315d6ca09553867e5ef1256b6682c63811cb77f80",
-      "bytes": 3834,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506388990_2_CALIB.LBL",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.LBL"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506389328",
-      "path": "observations/N1506389328_2_CALIB.IMG",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389328",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "coverage": "IR3 member of a complete camera-registered triplet; valid common coverage only.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389328-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.LBL"
-          }
-        ]
-      },
-      "width": 1024,
-      "height": 1024,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "validation/filter-color-1506389178-registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "sha256": "9b9801ebeed7727e7036747665153f2f6a0a8dec7c243715f098e671b68083ab",
-      "bytes": 4202496,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506389328_2_CALIB.IMG",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.IMG"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506389328-label",
-      "path": "observations/N1506389328_2_CALIB.LBL",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389328",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389328-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.LBL"
-          }
-        ]
-      },
-      "sha256": "67c9e27287b72b4cdd2f79f886369b76dab02d658545e450fa4b6bffca184746",
-      "bytes": 3834,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506389328_2_CALIB.LBL",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.LBL"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506389683",
-      "path": "observations/N1506389683_2_CALIB.IMG",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389683",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "coverage": "IR3 member of a complete camera-registered triplet; valid common coverage only.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389683-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.LBL"
-          }
-        ]
-      },
-      "width": 1024,
-      "height": 1024,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "validation/filter-color-1506389543-registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "sha256": "3bfea2721c94efea01c2900f4529263fabfd736644b9714fddd606977e679dad",
-      "bytes": 4202496,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506389683_2_CALIB.IMG",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.IMG"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506389683-label",
-      "path": "observations/N1506389683_2_CALIB.LBL",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389683",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389683-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.LBL"
-          }
-        ]
-      },
-      "sha256": "bc8481cbcf2dabdd14f40175f68a5edd7c1694308b6d1be54811d4f754a755c5",
-      "bytes": 3835,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506389683_2_CALIB.LBL",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.LBL"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
       "id": "n1506388291",
       "path": "observations/N1506388291_2_CALIB.IMG",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388291_2_CALIB.IMG",
@@ -2920,414 +2464,6 @@
         ],
         "path": "observations/N1506388291_2_CALIB.LBL",
         "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388291_2_CALIB.LBL"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506388635",
-      "path": "observations/N1506388635_2_CALIB.IMG",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388635",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "coverage": "IR1 member of a complete camera-registered triplet; valid common coverage only.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388635-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.LBL"
-          }
-        ]
-      },
-      "width": 1024,
-      "height": 1024,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "validation/filter-color-1506388518-registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "sha256": "747d00f6a2f412902ea91538c33003f95c6c27d59432ff38135d85946bc127fd",
-      "bytes": 4202496,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506388635_2_CALIB.IMG",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.IMG"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506388635-label",
-      "path": "observations/N1506388635_2_CALIB.LBL",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388635",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388635-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.LBL"
-          }
-        ]
-      },
-      "sha256": "b482b4e909876f5bcb09ab91b8e732fbb7b5a3c717e7541c387826fca01b0d9b",
-      "bytes": 3833,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506388635_2_CALIB.LBL",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.LBL"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506388957",
-      "path": "observations/N1506388957_2_CALIB.IMG",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388957",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "coverage": "IR1 member of a complete camera-registered triplet; valid common coverage only.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388957-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.LBL"
-          }
-        ]
-      },
-      "width": 1024,
-      "height": 1024,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "validation/filter-color-1506388840-registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "sha256": "036719e8db82051fb1e9d593b864130175f70cf3d0d0dea9f36676051524022c",
-      "bytes": 4202496,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506388957_2_CALIB.IMG",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.IMG"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506388957-label",
-      "path": "observations/N1506388957_2_CALIB.LBL",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388957",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388957-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.LBL"
-          }
-        ]
-      },
-      "sha256": "d9b2722aae8bc34e33ca8e2280672f866844e2a46bc22c07d942178e632f8955",
-      "bytes": 3833,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506388957_2_CALIB.LBL",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.LBL"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506389295",
-      "path": "observations/N1506389295_2_CALIB.IMG",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389295",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "coverage": "IR1 member of a complete camera-registered triplet; valid common coverage only.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389295-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.LBL"
-          }
-        ]
-      },
-      "width": 1024,
-      "height": 1024,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "validation/filter-color-1506389178-registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "sha256": "0d2c29e5198b1317b37acbf01a4f2a724e760cf6e4876ff121a7e6e218bdc560",
-      "bytes": 4202496,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506389295_2_CALIB.IMG",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.IMG"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506389295-label",
-      "path": "observations/N1506389295_2_CALIB.LBL",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389295",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389295-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.LBL"
-          }
-        ]
-      },
-      "sha256": "518c7bf6cff77e5f466dc267a97d2f65d9980ef95cc06619e6823ef8fbb78372",
-      "bytes": 3833,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506389295_2_CALIB.LBL",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.LBL"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506389650",
-      "path": "observations/N1506389650_2_CALIB.IMG",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389650",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "coverage": "IR1 member of a complete camera-registered triplet; valid common coverage only.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389650-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.LBL"
-          }
-        ]
-      },
-      "width": 1024,
-      "height": 1024,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "validation/filter-color-1506389543-registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "sha256": "85bc61dd6496227b989d4a143abfc23e12fa59d69e2d51d42141849e5ed73a7a",
-      "bytes": 4202496,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506389650_2_CALIB.IMG",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.IMG"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "n1506389650-label",
-      "path": "observations/N1506389650_2_CALIB.LBL",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389650",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.LBL",
-            "missionId": "cassini"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389650-2-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.LBL"
-          }
-        ]
-      },
-      "sha256": "d5e2f42aa6ee381e8fb39016c2ef9cdb6b4fee076c83a8cb2eee98fc532e4ed8",
-      "bytes": 3834,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/N1506389650_2_CALIB.LBL",
-        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.LBL"
       },
       "verificationOperations": []
     },
@@ -3435,6 +2571,210 @@
     },
     {
       "kind": "source-input",
+      "id": "n1506388668",
+      "path": "observations/N1506388668_2_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388668",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "coverage": "IR3 member of a complete camera-registered triplet; valid common coverage only.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388668-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.LBL"
+          }
+        ]
+      },
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "validation/filter-color-1506388518-registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "sha256": "01d312521609da44f165296b7930d591048fa143145b1187ecc7d06399aff261",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506388668_2_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506388668-label",
+      "path": "observations/N1506388668_2_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388668",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388668-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.LBL"
+          }
+        ]
+      },
+      "sha256": "52e01663eaecc834b9563ec7a0e0d2ecf6698a3522208d3462217a06b116b3e1",
+      "bytes": 3834,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506388668_2_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388668_2_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506388635",
+      "path": "observations/N1506388635_2_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388635",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "coverage": "IR1 member of a complete camera-registered triplet; valid common coverage only.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388635-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.LBL"
+          }
+        ]
+      },
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "validation/filter-color-1506388518-registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "sha256": "747d00f6a2f412902ea91538c33003f95c6c27d59432ff38135d85946bc127fd",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506388635_2_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506388635-label",
+      "path": "observations/N1506388635_2_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388635",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388635-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.LBL"
+          }
+        ]
+      },
+      "sha256": "b482b4e909876f5bcb09ab91b8e732fbb7b5a3c717e7541c387826fca01b0d9b",
+      "bytes": 3833,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506388635_2_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388635_2_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "n1506388580",
       "path": "observations/N1506388580_2_CALIB.IMG",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388580_2_CALIB.IMG",
@@ -3532,6 +2872,210 @@
         ],
         "path": "observations/N1506388580_2_CALIB.LBL",
         "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388580_2_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506388990",
+      "path": "observations/N1506388990_2_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388990",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "coverage": "IR3 member of a complete camera-registered triplet; valid common coverage only.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388990-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.LBL"
+          }
+        ]
+      },
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "validation/filter-color-1506388840-registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "sha256": "659a2d7e6bc3d839326918fc9360e449188f9dcdc152dc1b61a51b8f6906750f",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506388990_2_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506388990-label",
+      "path": "observations/N1506388990_2_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388990",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388990-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.LBL"
+          }
+        ]
+      },
+      "sha256": "19a02b614daf33f048e4d02315d6ca09553867e5ef1256b6682c63811cb77f80",
+      "bytes": 3834,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506388990_2_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388990_2_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506388957",
+      "path": "observations/N1506388957_2_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388957",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "coverage": "IR1 member of a complete camera-registered triplet; valid common coverage only.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388957-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.LBL"
+          }
+        ]
+      },
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "validation/filter-color-1506388840-registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "sha256": "036719e8db82051fb1e9d593b864130175f70cf3d0d0dea9f36676051524022c",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506388957_2_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506388957-label",
+      "path": "observations/N1506388957_2_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506388957",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506388957-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.LBL"
+          }
+        ]
+      },
+      "sha256": "d9b2722aae8bc34e33ca8e2280672f866844e2a46bc22c07d942178e632f8955",
+      "bytes": 3833,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506388957_2_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388957_2_CALIB.LBL"
       },
       "verificationOperations": []
     },
@@ -3639,6 +3183,210 @@
     },
     {
       "kind": "source-input",
+      "id": "n1506389328",
+      "path": "observations/N1506389328_2_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389328",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "coverage": "IR3 member of a complete camera-registered triplet; valid common coverage only.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389328-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.LBL"
+          }
+        ]
+      },
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "validation/filter-color-1506389178-registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "sha256": "9b9801ebeed7727e7036747665153f2f6a0a8dec7c243715f098e671b68083ab",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506389328_2_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506389328-label",
+      "path": "observations/N1506389328_2_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389328",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389328-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.LBL"
+          }
+        ]
+      },
+      "sha256": "67c9e27287b72b4cdd2f79f886369b76dab02d658545e450fa4b6bffca184746",
+      "bytes": 3834,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506389328_2_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389328_2_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506389295",
+      "path": "observations/N1506389295_2_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389295",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "coverage": "IR1 member of a complete camera-registered triplet; valid common coverage only.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389295-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.LBL"
+          }
+        ]
+      },
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "validation/filter-color-1506389178-registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "sha256": "0d2c29e5198b1317b37acbf01a4f2a724e760cf6e4876ff121a7e6e218bdc560",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506389295_2_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506389295-label",
+      "path": "observations/N1506389295_2_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389295",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389295-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.LBL"
+          }
+        ]
+      },
+      "sha256": "518c7bf6cff77e5f466dc267a97d2f65d9980ef95cc06619e6823ef8fbb78372",
+      "bytes": 3833,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506389295_2_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389295_2_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "n1506389240",
       "path": "observations/N1506389240_2_CALIB.IMG",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389240_2_CALIB.IMG",
@@ -3736,6 +3484,210 @@
         ],
         "path": "observations/N1506389240_2_CALIB.LBL",
         "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389240_2_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506389683",
+      "path": "observations/N1506389683_2_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389683",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "coverage": "IR3 member of a complete camera-registered triplet; valid common coverage only.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389683-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.LBL"
+          }
+        ]
+      },
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "validation/filter-color-1506389543-registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "sha256": "3bfea2721c94efea01c2900f4529263fabfd736644b9714fddd606977e679dad",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506389683_2_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506389683-label",
+      "path": "observations/N1506389683_2_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389683",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389683-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.LBL"
+          }
+        ]
+      },
+      "sha256": "bc8481cbcf2dabdd14f40175f68a5edd7c1694308b6d1be54811d4f754a755c5",
+      "bytes": 3835,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506389683_2_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389683_2_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506389650",
+      "path": "observations/N1506389650_2_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389650",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "coverage": "IR1 member of a complete camera-registered triplet; valid common coverage only.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389650-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.LBL"
+          }
+        ]
+      },
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "validation/filter-color-1506389543-registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "sha256": "85bc61dd6496227b989d4a143abfc23e12fa59d69e2d51d42141849e5ed73a7a",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506389650_2_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1506389650-label",
+      "path": "observations/N1506389650_2_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1506389650",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2015-data-1506388291-1506396299-n1506389650-2-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.LBL"
+          }
+        ]
+      },
+      "sha256": "d5e2f42aa6ee381e8fb39016c2ef9cdb6b4fee076c83a8cb2eee98fc532e4ed8",
+      "bytes": 3834,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506389650_2_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389650_2_CALIB.LBL"
       },
       "verificationOperations": []
     },
@@ -4004,8 +3956,8 @@
         },
         {
           "url": "/scenes/hyperion/hyperion-elevation-surface@2x.webp",
-          "bytes": 893378,
-          "sha256": "30370bc79e49f4372164b19fc9ea490fae15725781d296ba599d3d413b65137d",
+          "bytes": 893420,
+          "sha256": "cc35d6a02b7c8fe555f3549e44a981c679e41af930d37cca00e31f9f7ea58051",
           "verification": "bytes-verified"
         }
       ],
@@ -4015,9 +3967,9 @@
       "id": "normal",
       "label": "Monochrome",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
         "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked."
       ],
@@ -4028,7 +3980,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "cassini-n1506383441",
@@ -4041,8 +3993,6 @@
         "cassini-n1506388840-label",
         "cassini-n1506389178",
         "cassini-n1506389178-label",
-        "cassini-n1513999046",
-        "cassini-n1513999046-label",
         "cassini-n1530182624",
         "cassini-n1530182624-label",
         "cassini-n1530201013",
@@ -4060,14 +4010,14 @@
       "outputs": [
         {
           "url": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
-          "bytes": 4314,
-          "sha256": "af9fb9ee2775cf477952cc9510a677b8e85e0a8fd309c0d515678fc020de43ff",
+          "bytes": 2020,
+          "sha256": "a8480f6302da6f66fbd64634336b0dca1081c6b6277e1dd331e67873a8f182d6",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hyperion/hyperion-normal-surface@2x.webp",
-          "bytes": 1361026,
-          "sha256": "be463cf8477fc34d4426d152b0c9c2b9872aca12bfbbb03046281c3ab86a12ac",
+          "bytes": 1373634,
+          "sha256": "cf956a191334a80b721ee85352e524da5d49e7156c80bc1a2492a14457be7b7c",
           "verification": "bytes-verified"
         }
       ],
@@ -4077,9 +4027,9 @@
       "id": "filter-color",
       "label": "False color",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/1",
+      "selector": "/raster/surfaceObservations/1",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
         "Five Cassini pointings in IR3, IR1 and UV3, displayed as red, green and blue. Cameras use measured registration in the published shape frame; complete three-filter footprints are combined."
       ],
@@ -4090,37 +4040,37 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "n1506388324",
         "n1506388324-label",
-        "n1506388668",
-        "n1506388668-label",
-        "n1506388990",
-        "n1506388990-label",
-        "n1506389328",
-        "n1506389328-label",
-        "n1506389683",
-        "n1506389683-label",
         "n1506388291",
         "n1506388291-label",
-        "n1506388635",
-        "n1506388635-label",
-        "n1506388957",
-        "n1506388957-label",
-        "n1506389295",
-        "n1506389295-label",
-        "n1506389650",
-        "n1506389650-label",
         "n1506388236",
         "n1506388236-label",
+        "n1506388668",
+        "n1506388668-label",
+        "n1506388635",
+        "n1506388635-label",
         "n1506388580",
         "n1506388580-label",
+        "n1506388990",
+        "n1506388990-label",
+        "n1506388957",
+        "n1506388957-label",
         "n1506388902",
         "n1506388902-label",
+        "n1506389328",
+        "n1506389328-label",
+        "n1506389295",
+        "n1506389295-label",
         "n1506389240",
         "n1506389240-label",
+        "n1506389683",
+        "n1506389683-label",
+        "n1506389650",
+        "n1506389650-label",
         "n1506389595",
         "n1506389595-label",
         "cassini-n1506388174",
@@ -4136,14 +4086,14 @@
       "outputs": [
         {
           "url": "/scenes/hyperion/hyperion-filter-color-thumbnail.webp",
-          "bytes": 3540,
-          "sha256": "fbc611e0678a02abc5035466401aef2229ef3e471bd9178798fa35c374d12b11",
+          "bytes": 2522,
+          "sha256": "e92676dde9c3f856b9437ac123648afd6683a47fba9aaded9d371b11614afde2",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hyperion/hyperion-filter-color-surface@2x.webp",
-          "bytes": 825742,
-          "sha256": "a7c85c63051d0c689972cb371e961ff4799b2e5642338b768f9d8437d9323fa9",
+          "bytes": 829376,
+          "sha256": "999563e51776ec4293cff8a1f7bdb32f5615705e57dafdfa3eec7b6c7b3e2b12",
           "verification": "bytes-verified"
         }
       ],
@@ -4213,7 +4163,7 @@
       "id": "preview:normal",
       "label": "Monochrome preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -4227,8 +4177,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 43988,
-          "sha256": "010db482ea0825f1d30042106107e3cb7d5778f213a411f21b2b75d2d97df5ce",
+          "bytes": 45380,
+          "sha256": "6aa5e8e0d30ad572a1fd0ced793c6a579dda335f918f2dc1035fb9218d06bca1",
           "verification": "bytes-verified"
         }
       ]
@@ -4237,7 +4187,7 @@
       "id": "preview:filter-color",
       "label": "False color preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/1",
+      "selector": "/raster/surfaceObservations/1",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -4251,8 +4201,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 18454,
-          "sha256": "1aa50cf9accd4c596be0c66979cf17a9c9c784c84c1ec8c5496a5d1d34123359",
+          "bytes": 18592,
+          "sha256": "528b8e5b07ba16ff86bbaa4c907c1590abe34441c3156597bb8066cda32d30aa",
           "verification": "bytes-verified"
         }
       ]

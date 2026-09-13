@@ -770,8 +770,8 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 71406,
-      "expectedSha256": "552a7c0e3d9c464ac2cc8efac2b5b87f44d45126ccb1940fd11c1c79163d83f6"
+      "expectedBytes": 72269,
+      "expectedSha256": "082f9b97c047ec1ada0e1290a92a18aa88c21c53fd403620d024de241b35745d"
     }
   ],
   "documents": [
@@ -797,7 +797,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1320,
-      "expectedSha256": "d7f2d389dad2b971b538020eb2381761a5c5981d2e9b56a5b4519b703d82f832"
+      "expectedSha256": "846435280797d1a0b49dd9235a2a793713ca8877a2d8f24ca007fc4387114cbc"
     },
     {
       "path": "preparation/rotation.json",
@@ -806,8 +806,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 9703,
-      "expectedSha256": "2ed5ba287fd0d668f46f7f7090b65adf00c3e643a24d511b9055e160a314b931"
+      "expectedBytes": 10642,
+      "expectedSha256": "e2bf2941411ebda01dcc46cbaadefd8bd2102d7fdae40428f89283dd8ec02b98"
     },
     {
       "path": "presentation/minimap.json",

@@ -45,7 +45,7 @@ export async function prepareLlorriOverlap(sourceDirectory:string, write=false) 
     for(const pin of refClosure.provenance) assert.equal(digest(await pinned(pin.path)),pin.sha256);
     const reference=decodeLlorri(refBytes,refClosure),refCamera=matrixCamera('archived-closure',refClosure,bindSipCamera(refClosure));
     const footprint={image:{width:1024,height:1024,values:reference.planes.IMAGE,startTime:reference.startTime,filter:reference.filter,reject:(i:number)=>reference.acceptPixel(i)?null:'quality',report:reference.qualityReport},
-      camera:refCamera,geometry:castSourceRays(refCamera,mesh,1024,1024),photometry:{gain:()=>1}};
+      camera:refCamera,geometry:castSourceRays(refCamera,mesh,1024,1024),photometry:{gain:()=>1,retainsIllumination:true}};
     const targetBytes=await pinned(entry.image); await pinned(entry.label);
     const seed=llorriHeaderCamera(targetBytes,kernels,recipe.bodyId),target=decodeLlorri(targetBytes,seed),camera=matrixCamera('archived-closure',seed,bindSipCamera(seed));
     const width=1024+2*recipe.margin,height=width,values=new Float32Array(width*height),valid=new Uint8Array(width*height),xyz=new Float64Array(width*height*3),uv=new Float64Array(width*height*2);

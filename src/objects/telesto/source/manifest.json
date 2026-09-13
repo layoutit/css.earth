@@ -602,89 +602,6 @@
       }
     },
     {
-      "id": "n1831469816_1",
-      "path": "observations/N1831469816_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "54f441297dbecc611faf34f1c95e796d03c493087cee7dbd930b81c2591415a4",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2102/data/1831460120_1831497435/N1831469816_1_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1831469816",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated product.",
-      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
-      "consumers": [
-        "cassini-frames"
-      ],
-      "width": 1024,
-      "height": 1024,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "shape/telesto_document.pdf",
-        "longitudeDirection": "west-positive"
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "missionId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2102/data/1831460120_1831497435/N1831469816_1_CALIB.LBL"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2102-data-1831460120-1831497435-n1831469816-1-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2102/data/1831460120_1831497435/N1831469816_1_CALIB.LBL"
-          }
-        ]
-      }
-    },
-    {
-      "id": "n1831469816_1-label",
-      "path": "observations/N1831469816_1_CALIB.LBL",
-      "expectedBytes": 3852,
-      "expectedSha256": "1645b39d1ccc2f3f0e7055a35a87b37dbf2a50b0acbd2ac26690305b76cccec1",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2102/data/1831460120_1831497435/N1831469816_1_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1831469816",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated product.",
-      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
-      "consumers": [
-        "cassini-frames"
-      ],
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "missionId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2102/data/1831460120_1831497435/N1831469816_1_CALIB.LBL"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2102-data-1831460120-1831497435-n1831469816-1-calib",
-            "role": "material",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2102/data/1831460120_1831497435/N1831469816_1_CALIB.LBL"
-          }
-        ]
-      }
-    },
-    {
       "id": "n1831466962_1",
       "path": "observations/N1831466962_1_CALIB.IMG",
       "expectedBytes": 4202496,
@@ -953,7 +870,6 @@
           "n1831466361_1",
           "n1831467723_1",
           "n1831468631_1",
-          "n1831469816_1",
           "thomas-2018-shape"
         ],
         "size": 512,
@@ -964,8 +880,8 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
-      "expectedBytes": 97630,
-      "expectedSha256": "f8f9d02b2d7ecf5f3111df1b4f09c019028db426e7562b548b3b124bfe0a77a6"
+      "expectedBytes": 91172,
+      "expectedSha256": "9bf151de98036ee23d8e3b1e97495712f14429d95d070ce20ae59902b15a1e77"
     }
   ],
   "documents": [
@@ -980,13 +896,13 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 6290,
-      "expectedSha256": "7c4f277da32b531b0ec81f35875e205b808a7b5e8bf61bf4e9e7d6d4a74cc6d2"
+      "expectedBytes": 5734,
+      "expectedSha256": "ccb191d944676d4fe8ac55dbf562cbf42c9c665813a1a76beb60fd8ffa772ac0"
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1382,
-      "expectedSha256": "fa3845b96870c8165b5c49ce8eb5db35075507f95504929b982d64bafd6356f7"
+      "expectedBytes": 1407,
+      "expectedSha256": "35c21e8ef1870756897324b73d55bcdc5f1367406229c0e2f0d53321089a53ca"
     },
     {
       "path": "preparation/rotation.json",
@@ -995,8 +911,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 11145,
-      "expectedSha256": "9a3790e0629eca9ca4c0f3853b0e5b85b1991ef75b9c9ecbf9fd883edaefe8c2"
+      "expectedBytes": 11580,
+      "expectedSha256": "0943dc0cb0a8dba4ffee16b2c953954a184ac2997831dac1390b99f10a4c109a"
     },
     {
       "path": "presentation/minimap.json",

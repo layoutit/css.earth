@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "metis",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "478fb94fd96ebf87389b541cdae562fe7ff8e4884a9016c4fe8d6d39dd8f9b02"
+    "sha256": "cf0098bee540ef58adab60a60916542e78c7debad7a6e9819751bbfd20818c1b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2fe33f6d6c696ab4eab6fe39b074f3dbd7acd94f927f3376ccf71f7bbe91c5e6",
+      "sha256": "0873b6ad4fa2914a3911b6358db965af59ad0690937c367e6143f9753ce19d38",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -34,11 +34,20 @@
           "observations": [],
           "scientific": [],
           "observedColors": [],
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "normal",
               "format": "controlled-shape-camera",
               "consumer": "galileo-clear-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo.",
+                "attribution": {
+                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/galileo/"
+                }
+              },
               "frames": [
                 {
                   "id": "c0532890500",
@@ -136,25 +145,32 @@
                   "backgroundMaximum": 0.02352941
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumGain": 1.85,
+                "maximumAngleDegrees": 70
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 70
+              },
               "photometry": {
+                "model": "lunar-lambert",
                 "weight": 0.5,
-                "maximumGain": 2,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 70,
                 "maximumEmissionDegrees": 70,
-                "displayMaximum": 0.8,
-                "gamma": 1,
-                "minimumLevel": 0.7,
-                "maximumLevel": 1.4,
-                "backgroundMaximum": 0.00784313725490196
+                "maximumGain": 1.5
               },
-              "metadata": {
-                "label": "Monochrome",
-                "falseColor": false,
-                "coverage": "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo.",
-                "attribution": {
-                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
-                  "url": "https://pds-rings.seti.org/galileo/"
-                }
+              "display": {
+                "displayRange": [
+                  0,
+                  0.893
+                ]
               }
             }
           ]
@@ -419,7 +435,7 @@
       "sha256": "4c3501a4e341b74405b89b285b404361fcff442b4819423a745cd6dbf26fe811",
       "bytes": 857088,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -466,7 +482,7 @@
       "sha256": "05b777e7781d3ade918ccbb7ce8993b54624cd7ac1c5a4f237f16f2a6f672bd0",
       "bytes": 5033,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -520,7 +536,7 @@
       "sha256": "9a3e93326e589847d6033a75cae9dbbd884ff52a9022c6f96ae722321f3f8895",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -567,7 +583,7 @@
       "sha256": "a2d5298b3f28aaa247d402ae7269d8744233bf97c123fd2d800e09d3c1cfc3a7",
       "bytes": 4837,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -621,7 +637,7 @@
       "sha256": "d34cbf3bafcc2d7f079c3ad250287660d0dac936082b183436ecc7d1f92c2e3b",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -668,7 +684,7 @@
       "sha256": "9e63ce4fcadfc499663fffca4460971ff94b7f7514e13ac55842d9fd18d3dbda",
       "bytes": 4837,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -722,7 +738,7 @@
       "sha256": "4daafe1c0c21cdaca61cc258f7835d31561ec76e7ac2ef8e07f033471ec67d71",
       "bytes": 810000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -769,7 +785,7 @@
       "sha256": "9d258a9ae9a4229a9e66d5af9379b205ea50e412c90e64ce7e871bb89b1930db",
       "bytes": 4835,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -823,7 +839,7 @@
       "sha256": "9df4199697827534e3d6429f4a879d2cc851c5a17f287c8d6b46925227ad3f69",
       "bytes": 808000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -870,7 +886,7 @@
       "sha256": "73057c454d46f4fa7cc024ab8b005a4742935f38375718255f919e02e0f3693a",
       "bytes": 4728,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -911,7 +927,7 @@
       "sha256": "e7dc2d82d1e95a2cfb35ed9466bfcc21196b883887ce48981e96bf61b2c93a91",
       "bytes": 67525,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -931,7 +947,7 @@
       "sha256": "d7bf6c23227922ed76a45502ab32a0145a2d57f72229f64397579e62cf9fdb08",
       "bytes": 4972,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -941,9 +957,9 @@
       "id": "normal",
       "label": "Monochrome",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
         "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo."
       ],
@@ -954,7 +970,7 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
         "c0532890500",
@@ -972,15 +988,15 @@
       "outputs": [
         {
           "url": "/scenes/metis/metis-normal-thumbnail.webp",
-          "bytes": 2544,
-          "sha256": "4a4959fe7939793e83855433f0d1be8f1a4e5b6bf6d7e4e6c8827d9ed4beae67",
-          "verification": "asset-manifest-pin"
+          "bytes": 1414,
+          "sha256": "dcf8b7a04cb1c530804827acd1340a4faa0ed4f12d553968700659b23c4a2eb7",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/metis/metis-normal-surface@2x.webp",
-          "bytes": 32284,
-          "sha256": "6b524a2ca6fbf47d05c4856dd44a65012adedda355c4dbc1df995d99592ab791",
-          "verification": "asset-manifest-pin"
+          "bytes": 30766,
+          "sha256": "f6077d939c90aa90f39ae2cb546ff1f2b311477010f65d753e12df2ca7978859",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1014,7 +1030,7 @@
       "id": "preview:normal",
       "label": "Monochrome preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -1028,8 +1044,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 5382,
-          "sha256": "c28f5c4b7c1f56375eb8e84097c6258f7b91d2aacd9eded9a3159fb24a3335e6",
+          "bytes": 5628,
+          "sha256": "063f037bc0be3aecf108ba2a3b89618b27d14d6fa157c8af0010582bd79a1beb",
           "verification": "bytes-verified"
         }
       ]

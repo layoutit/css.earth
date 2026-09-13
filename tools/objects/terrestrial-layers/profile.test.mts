@@ -18,7 +18,7 @@ test('observation recipes reject ambiguous masks and fallback ordering',async()=
 
 test('a shape display requires a source mesh and consumer for the shared no-imagery grid', async () => {
  const profile=await read('ida');
- profile.raster.observations=[];profile.raster.scientific=[];
+ profile.raster.observations=[];profile.raster.scientific=[];profile.raster.surfaceObservations=[];
  profile.raster.shapeViews=[{id:'shape',label:'Shape',consumer:'geometry'}];
  profile.presentation.defaultLens='shape';
  assert.equal(fixtureRecord(parseTerrestrialProfile(profile),'presentation').defaultLens,'shape');
@@ -31,7 +31,7 @@ test('georeferenced photographs bind quality, physical distances and bounded dis
  const profile = await read('comet-67p');
  assert.equal(fixtureRecord(parseTerrestrialProfile(profile),'raster','surfaceObservations',0).id, 'osiris');
  for (const alter of [(p: unknown) => fixtureRecord(p,"frames",0)["qualityPath"] = '../unbound.IMG', (p: unknown) => fixtureRecord(p)["allowLossy"] = undefined,
-(p: unknown) => fixtureRecord(p,"transfer")["maximumSourceDistanceMeters"] = 51, (p: unknown) => fixtureRecord(p,"transfer")["visibilityToleranceMeters"] = 2,
+(p: unknown) => fixtureRecord(p,"transfer")["maximumEmissionDegrees"] = 90, (p: unknown) => fixtureRecord(p,"transfer")["visibilityToleranceMeters"] = 2,
 (p: unknown) => fixtureRecord(p,"photometry")["maximumGain"] = 4, (p: unknown) => fixtureRecord(p,"photometry")["maximumIncidenceDegrees"] = 90,
 (p: unknown) => fixtureRecord(p,"photometry")["referenceIncidenceDegrees"] = 30, (p: unknown) => fixtureRecord(p,"display")["percentiles"] = [99, 1]]) {
   const changed = structuredClone(profile); alter(changed.raster.surfaceObservations[0]);
@@ -39,17 +39,14 @@ test('georeferenced photographs bind quality, physical distances and bounded dis
  }
 });
 
-test('an alternative model owns its observation mesh, transfer limit, and sampler state', async () => {
+test('an alternative model owns its observation mesh and sampler state', async () => {
   const profile = await read('comet-67p');
   const alternative = structuredClone(profile.geometry.radialTerrain);
-  alternative.simplification.maximumErrorMeters = 60;
   profile.geometry.radialTerrainAlternatives = [{ ...alternative, lensId: 'osiris' }];
-  // The OSIRIS transfer limit now exceeds the default mesh bound (50 m) and
-  // stays within its own model's bound; the other 50 m lenses are untouched.
-  profile.raster.surfaceObservations.find((recipe: {id: string}) => recipe.id === 'osiris').transfer.maximumSourceDistanceMeters = 55;
-  assert.doesNotThrow(() => parseTerrestrialProfile(profile), 'OSIRIS transfer limit belongs to its declared alternative mesh');
-  profile.geometry.radialTerrainAlternatives[0].simplification.maximumErrorMeters = 49;
-  assert.throws(() => parseTerrestrialProfile(profile), /source-bound/, 'the alternative mesh enforces the transfer limit');
+  assert.doesNotThrow(() => parseTerrestrialProfile(profile), 'OSIRIS samples its declared alternative mesh');
+  // The OSIRIS lens validates against its own model, which must preserve the source mesh like the default.
+  delete profile.geometry.radialTerrainAlternatives[0].simplification.method;
+  assert.throws(() => parseTerrestrialProfile(profile), /source-bound/, 'the alternative mesh must preserve its source');
 
   const observation = { samplePoint() { return null; } };
   const base: {observationSurfaces?: Map<string, typeof observation>} = {};
@@ -62,12 +59,12 @@ test('an alternative model owns its observation mesh, transfer limit, and sample
   assert.equal(alternativeRadial.observationSurfaces?.get('osiris'), observation);
 });
 
-test('PDS4 geometry cubes declare their planes and identity and bind a lossless, labelled frame within the mesh transfer bound', async () => {
+test('PDS4 geometry cubes declare their planes and identity and bind a lossless, labelled frame within its transfer limits', async () => {
  const profile = await read('dimorphos');
  assert.equal(fixtureRecord(parseTerrestrialProfile(profile),'raster','surfaceObservations',0).format, 'pds4-geometry-cube');
  for (const alter of [(p: unknown) => fixtureRecord(p,"frames",0)["labelPath"] = undefined, (p: unknown) => fixtureRecord(p,"frames",0)["qualityPath"] = 'observations/quality.fits',
 (p: unknown) => fixtureRecord(p)["allowLossy"] = true, (p: unknown) => fixtureRecord(p)["cube"] = undefined, (p: unknown) => fixtureRecord(p,"frames",0)["cameraPath"] = 'observations/camera.json',
-(p: unknown) => fixtureRecord(p,"transfer")["maximumSourceDistanceMeters"] = 3]) {
+(p: unknown) => fixtureRecord(p,"transfer")["maximumEmissionDegrees"] = 90]) {
   const changed = structuredClone(profile); alter(changed.raster.surfaceObservations[0]);
   assert.throws(() => parseTerrestrialProfile(changed), /source-bound/);
  }

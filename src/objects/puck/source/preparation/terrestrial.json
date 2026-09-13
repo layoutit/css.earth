@@ -16,11 +16,20 @@
     "observations": [],
     "scientific": [],
     "observedColors": [],
-    "mosaics": [
+    "surfaceObservations": [
       {
         "id": "normal",
         "format": "controlled-shape-camera",
         "consumer": "voyager-clear-frames",
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Voyager 2 clear-filter image C2683716 registered to an approximate 81 km reference sphere. Illumination correction reduces photographed shading. Gray grid marks unseen or unreliable samples. Original detector sampling is about 4.77 km/pixel; the small image does not resolve fine terrain.",
+          "attribution": {
+            "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/voyager/iss/"
+          }
+        },
         "frames": [
           {
             "id": "c2683716",
@@ -42,25 +51,25 @@
             "coverageInsetPixels": 2
           }
         ],
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 70
+        },
         "photometry": {
+          "model": "lunar-lambert",
           "weight": 0.5,
-          "maximumGain": 2.5,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
           "maximumIncidenceDegrees": 75,
           "maximumEmissionDegrees": 70,
-          "displayMaximum": 0.065,
-          "gamma": 1,
-          "minimumLevel": 0.7,
-          "maximumLevel": 1.4,
-          "backgroundMaximum": 0.002965199761092663
+          "maximumGain": 2.5
         },
-        "metadata": {
-          "label": "Monochrome",
-          "falseColor": false,
-          "coverage": "Voyager 2 clear-filter image C2683716 registered to an approximate 81 km reference sphere. Illumination correction reduces photographed shading. Gray grid marks unseen or unreliable samples. Original detector sampling is about 4.77 km/pixel; the small image does not resolve fine terrain.",
-          "attribution": {
-            "label": "NASA/JPL; PDS Ring-Moon Systems Node",
-            "url": "https://pds-rings.seti.org/voyager/iss/"
-          }
+        "display": {
+          "displayRange": [
+            0,
+            0.0594
+          ]
         }
       }
     ]

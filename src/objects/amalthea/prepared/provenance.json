@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "amalthea",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "872fd6d1265bdddcf8cab5bf39e2aad2bf13b7b91cb2309659bf253aab410aa1"
+    "sha256": "2a3c4aef9a5eff86c4feb0491b9a4e4ab8c16e93e8252810600f44dcd59d668a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2fd15ae8786fc1886e0aed3b55aa5c186afc20728f253ba70724eb5a8e529bae",
+      "sha256": "5f6ebbc6ba7e99e7815b6687db3817dc1fd853497facbd1dfede9bbfb29b1af5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -78,31 +78,21 @@
             }
           ],
           "observedColors": [],
-          "mosaics": [
+          "surfaceObservations": [
             {
               "id": "normal",
               "format": "controlled-shape-camera",
               "consumer": "galileo-frames",
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
+                "attribution": {
+                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/galileo/ssi/"
+                }
+              },
               "frames": [
-                {
-                  "id": "c0368603500",
-                  "path": "observations/C0368603500R.IMG",
-                  "labelPath": "observations/C0368603500R.LBL",
-                  "encoding": "vicar-byte-dn",
-                  "observerLatitude": -0.009,
-                  "observerWestLongitude": 333.853,
-                  "sunLatitude": -1.229,
-                  "sunWestLongitude": 22.432,
-                  "rangeKm": 818766.085,
-                  "northAzimuthDegrees": 0.2189999999999941,
-                  "center": [
-                    264.84,
-                    122.08
-                  ],
-                  "pixelAngleMicroradians": 10.15,
-                  "backgroundOffset": 0.0117647,
-                  "backgroundMaximum": 0.0078431
-                },
                 {
                   "id": "c0420626379",
                   "path": "observations/C0420626379R.IMG",
@@ -178,28 +168,35 @@
                   "pixelAngleMicroradians": 10.15,
                   "backgroundOffset": 0.023529411764705882,
                   "backgroundMaximum": 0.011764705882352941,
-                  "coverageInsetPixels": 5
+                  "coverageInsetPixels": 10
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 64,
+                "minimumPairs": 64,
+                "maximumGain": 9.1,
+                "maximumAngleDegrees": 70
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 75
+              },
               "photometry": {
+                "model": "lunar-lambert",
                 "weight": 0.5,
-                "maximumGain": 2,
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 72,
                 "maximumEmissionDegrees": 75,
-                "displayMaximum": 0.42,
-                "gamma": 1,
-                "minimumLevel": 0.2,
-                "maximumLevel": 4,
-                "backgroundMaximum": 0.00784313725490196
+                "maximumGain": 2
               },
-              "metadata": {
-                "label": "Monochrome",
-                "falseColor": false,
-                "coverage": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
-                "attribution": {
-                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
-                  "url": "https://pds-rings.seti.org/galileo/ssi/"
-                }
+              "display": {
+                "displayRange": [
+                  0,
+                  0.133
+                ]
               }
             }
           ]
@@ -537,7 +534,7 @@
       "sha256": "031ee6036cf67e170d39da24487672cd3d4dd2bbb5e9391cf1e3ad56c67706f1",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -545,107 +542,6 @@
         ],
         "path": "shape/j5amalthea.tab",
         "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/j5amalthea.tab"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "c0368603500",
-      "path": "observations/C0368603500R.IMG",
-      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368603500",
-      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/galileo/ssi/"
-      ],
-      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
-      "redistribution": "Retain NASA/JPL and PDS credits.",
-      "width": 800,
-      "height": 800,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "geometry/registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0017-c3-sml-sats-c0368603500r",
-            "role": "material",
-            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      },
-      "sha256": "0c2786700d45f25d74828a2a274ffc1e8b2cd9fdaf049e5c461e44800b7d48ee",
-      "bytes": 831488,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/C0368603500R.IMG",
-        "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "c0368603500-label",
-      "path": "observations/C0368603500R.LBL",
-      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368603500",
-      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/galileo/ssi/"
-      ],
-      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
-      "redistribution": "Retain NASA/JPL and PDS credits.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL",
-            "missionId": "galileo"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0017-c3-sml-sats-c0368603500r",
-            "role": "material",
-            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      },
-      "sha256": "498fc2ee6c38eca35f33051a78f5e4b5ae082914e7dd8deee57f643259f02296",
-      "bytes": 4754,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "observations/C0368603500R.LBL",
-        "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL"
       },
       "verificationOperations": []
     },
@@ -692,7 +588,7 @@
       "sha256": "5183ec1e59c472691fd82c30956f485b37d499154a0ca9fddbc245ccadf25e0a",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -739,7 +635,7 @@
       "sha256": "ba48dd397a1e9dfd94b6dce4c71c07e9c3c9f80f0958fa1140d9b4e67a793a73",
       "bytes": 4842,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -793,7 +689,7 @@
       "sha256": "ed9310d63df477a715f46349aec4d07eb66466ef7878046f6de8fcc7a8e33495",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -840,7 +736,7 @@
       "sha256": "ec662262f35a5c10841283d69884888b2ba639bde352826224afd1ae8f35430d",
       "bytes": 5012,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -894,7 +790,7 @@
       "sha256": "28617d6c3a4e3efe8532db03d6479ed494f79712dd2c24d1ddd0e99964bc5b4f",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -941,7 +837,7 @@
       "sha256": "2223991ed2b60d11428be5efc996132318c440be0f945ae4fc8f576e10a8dd32",
       "bytes": 5010,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -995,7 +891,7 @@
       "sha256": "a9984536219b37e770cd92036aca30cd53a83b91b9d87e881550ed0de23a01bf",
       "bytes": 840192,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1042,7 +938,7 @@
       "sha256": "7f3421111331a7dad25384ac63a89eebc4b63e672d34905e977ece5f5dbbe73e",
       "bytes": 5038,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1069,7 +965,7 @@
       "sha256": "0ce5495fa7995818a8c3b27514b397a15cdccf86b153d2e3afe8f4d3e7c98243",
       "bytes": 5982,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1089,7 +985,7 @@
       "sha256": "13c207f7804b474543fc841279f64ab3c7e6aea5b4270f491e2c4c9534609e4a",
       "bytes": 1014,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1115,7 +1011,7 @@
       "sha256": "6c8c8921eb0929a738207b862d02ee3d5452bcc89f7d8f98714260d7cc1ee8db",
       "bytes": 47678,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1142,7 +1038,7 @@
       "sha256": "38f55714f6a719c11d68896d591602df177cddda737cd39b411c23590e06be83",
       "bytes": 155,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1169,7 +1065,7 @@
       "sha256": "1be489ba72361b411b6aff145ec081f6834c4c791c14c93de2fe45a6cf37359b",
       "bytes": 2424,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1202,19 +1098,19 @@
           "url": "/scenes/amalthea/amalthea-elevation-thumbnail.webp",
           "bytes": 6320,
           "sha256": "9d847355902640f4324b2a5a9da0065c1c4bff1df78ae75631a13da2f12d1144",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/amalthea/amalthea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/amalthea/amalthea-elevation-surface@2x.webp",
           "bytes": 235688,
           "sha256": "3628a7e922a59e4ad06bddce33da7c5177431d76e095c250fadae50d9ae57d18",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1223,9 +1119,9 @@
       "id": "normal",
       "label": "Monochrome",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "parents": [],
-      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
         "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel."
       ],
@@ -1236,11 +1132,9 @@
         "terrestrial"
       ],
       "interpretation": {
-        "kind": "mosaics"
+        "kind": "surfaceObservations"
       },
       "inputs": [
-        "c0368603500",
-        "c0368603500-label",
         "c0420626379",
         "c0420626379-label",
         "c0420652501",
@@ -1254,15 +1148,15 @@
       "outputs": [
         {
           "url": "/scenes/amalthea/amalthea-normal-thumbnail.webp",
-          "bytes": 3642,
-          "sha256": "981e03ba4ea6120c914657603ee990e7f850db49f7042f611e24bde026fcaa04",
-          "verification": "asset-manifest-pin"
+          "bytes": 1352,
+          "sha256": "8ec47433c6d57a2afd5a68cf9bb43b5556c177a4b2588808b6f778709143ca0c",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/amalthea/amalthea-normal-surface@2x.webp",
-          "bytes": 153080,
-          "sha256": "f2c72c3300ef926550eea6f0370f6cad7bef05bc2196cfbfdf34ca63be6bc7d0",
-          "verification": "asset-manifest-pin"
+          "bytes": 143368,
+          "sha256": "d9a53a0a03de46abfd09505fa851836ad53c775fc0d97d28ba88072b07b47456",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1322,7 +1216,7 @@
           "url": "/scenes/amalthea/amalthea-features.json",
           "bytes": 5294,
           "sha256": "656bae0f938e09ced747d024e2bedc108bc7fef2346191ae53d4c718233e57f2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1331,7 +1225,7 @@
       "id": "preview:normal",
       "label": "Monochrome preview",
       "recipe": "terrestrial",
-      "selector": "/raster/mosaics/0",
+      "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -1345,8 +1239,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 12248,
-          "sha256": "7a07e644c26a780b9e4432c2b8d6bf653779d66b8db0672ab147dddb30350aa8",
+          "bytes": 13858,
+          "sha256": "fbea88a2776af0f82458728d5264213af89f8783740e99fd2268f93e3f3449f8",
           "verification": "bytes-verified"
         }
       ]

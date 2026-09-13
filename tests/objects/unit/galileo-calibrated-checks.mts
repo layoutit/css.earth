@@ -7,7 +7,7 @@ import {loadShapeCameraImage,applySsiQuality,resolveCatalogCamera,controlledShap
 export function checkGalileo(body: string,anchors: number[][],expectedQuality: { records: number; badBlockPixels: number; saturatedPixels: number; specialPixels: number; withheldPixels: number; }){
  const root=resolve('src/objects',body,'source');
  test(`${body}: calibrated pixels and archived bad-data blocks preserve source identity`,async()=>{
-  const config=JSON.parse((await readFile(resolve(root,'preparation/terrestrial.json'))).toString('utf8')),recipe=config.raster.mosaics[0],frame=recipe.frames[0];
+  const config=JSON.parse((await readFile(resolve(root,'preparation/terrestrial.json'))).toString('utf8')),recipe=config.raster.surfaceObservations.find((lens: { id: string })=>lens.id==='calibrated'),frame=recipe.frames[0];
   const image=await loadShapeCameraImage(root,frame);
   assert.equal(image.offset,2880);assert.deepEqual(image.quality,expectedQuality);
   for(const [x,y,value] of anchors)assert.equal(image.data[y*800+x],value); // Independent Astropy primary-image decoding.
@@ -19,7 +19,7 @@ export function checkGalileo(body: string,anchors: number[][],expectedQuality: {
   assert.throws(()=>applySsiQuality(image,Buffer.alloc(10),'',frame.quality),/FITS/);
  });
  test(`${body}: published camera controls use the full original radial mesh`,async()=>{
-  const config=JSON.parse((await readFile(resolve(root,'preparation/terrestrial.json'))).toString('utf8')),frame=await resolveCatalogCamera(root,config.raster.mosaics[0].frames[0]),camera=controlledShapeCamera(frame);
+  const config=JSON.parse((await readFile(resolve(root,'preparation/terrestrial.json'))).toString('utf8')),frame=await resolveCatalogCamera(root,config.raster.surfaceObservations.find((lens: { id: string })=>lens.id==='calibrated').frames[0]),camera=controlledShapeCamera(frame);
   assert.deepEqual(camera.project([0,0,0]),body==='ida'?[546,191]:[116.4,435]);
   assert.ok(Math.abs(frame.pixelAngleMicroradians-10.152967377580689)<1e-12);
   const mesh=await loadCameraShape(root,config.geometry.radialTerrain);assert.equal(mesh.faces,32040);assert.equal(mesh.positions.length,16022);

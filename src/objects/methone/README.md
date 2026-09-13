@@ -56,7 +56,7 @@ CISSCAL's attached VICAR header owns the raster offset: 8,192 bytes, little-endi
 
 ## Photometry and display
 
-The shared preparer applies a 50:50 Lommel–Seeliger/Lambert disk correction to linear I/F before encoding. Its disk factor is normalized at normal incidence and emission. Display maximum is 0.65, gamma 1; no image exposure matching is needed for one observation.
+The shared preparer applies a 50:50 Lommel–Seeliger/Lambert disk correction to linear I/F before encoding. Its disk factor is normalized at normal incidence and emission. The display range is 0–0.505 I/F, the 99.5th percentile of displayed samples, shown linearly; one observation needs no level matching.
 
 The real leading-side oval remains darker. The published comparison finds an approximately 13% contrast and notes that small isolated image spots are not reproducible between frames. Such detector artifacts are not interpreted as craters. No texture sharpening, invented terrain or reconstructed shadowed surface is added. Flood and directional Shadows use the shared mesh lighting.
 

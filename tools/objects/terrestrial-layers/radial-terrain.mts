@@ -51,7 +51,7 @@ import { loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFa
 import { createSourceSurfacePainter } from './scientific-raster.mts';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mts';
-import { loadPdsRadialTable } from './pds-radial-table.mts';
+import { loadPdsRadialTable, loadPdsRadialTableMesh } from './pds-radial-table.mts';
 import { createRasterEmitter } from './solid-raster.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';
 import { createSourceMeshLighting } from './source-mesh-lighting.mts';
@@ -88,7 +88,8 @@ export async function loadRadialTerrain({config,sourceDirectory,source}: {
     : profile.format === 'vrml-mesh' ? loadVrmlShape
     : profile.format === 'pds-plate-model' ? loadPdsPlateShape
     : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape
-    : profile.format === 'pds-radial-table' ? loadPdsRadialTable : loadPdsScalarGrid;
+    // A radial table simplified with source preservation needs its source mesh; a radially resampled one keeps the height field.
+    : profile.format === 'pds-radial-table' ? (profile.simplification?.method === 'source-meshoptimizer' ? loadPdsRadialTableMesh : loadPdsRadialTable) : loadPdsScalarGrid;
   if (profile.sourceTopology !== undefined && profile.sourceTopology !== 'open') throw new TypeError('Unknown source mesh topology.');
   let grid: TerrainGrid = await loader(resolve(sourceDirectory, profile.path), profile.grid);
   if (profile.sourceTopology === 'open') {

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d072bd1412c188530d1b9481bab6edf95487a3be1cf73a7c663800f5c0450792"
+    "sha256": "4aead1312861a4d4511edc77e44c5ae6d559c551558aceb8b507ed077000aae2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "750a15a07000680fe0750e105484731cfff797c583e8015ab3a71cf58f107604"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fb8e49e445e369436520e32c66ee29a12642451322d5fc97ab15eacad0e74cad",
+      "sha256": "8fd61a24e4831ee7b6b2c473f06aa522d829712b737dff9791fe15c145fb1e3b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -114,11 +114,9 @@
               "levelMatching": {
                 "samplesPerTriangle": 24,
                 "minimumPairs": 64,
-                "maximumLogMad": 0.25,
                 "maximumGain": 1.35
               },
               "transfer": {
-                "maximumSourceDistanceMeters": 1200,
                 "maximumSeparationMeters": 600,
                 "maximumEmissionDegrees": 70,
                 "visibilityToleranceMeters": 0.5
@@ -143,8 +141,8 @@
               },
               "display": {
                 "percentiles": [
-                  1,
-                  99
+                  2.7,
+                  97.6
                 ]
               },
               "metadata": {
@@ -963,14 +961,14 @@
       "outputs": [
         {
           "url": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
-          "bytes": 2292,
-          "sha256": "59f563ae84cd7b0d87594451a7b1859afd596d3a98083c64efb1cf3940828871",
+          "bytes": 2374,
+          "sha256": "9ef32d7daafc5a94714755115788bbe5ba95bb18e84aaa378638f88343e1779f",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
-          "bytes": 918122,
-          "sha256": "2014d72a996af4d0c8810c8d8d3b04e4822c7f9b38f708b65ec8ad82cef8a605",
+          "bytes": 839936,
+          "sha256": "9fdd8643ef0935915b8018f6eb9436da663259b5fa9c0d861841c45802fcb73f",
           "verification": "bytes-verified"
         }
       ],
@@ -1078,8 +1076,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 30752,
-          "sha256": "dd015a835dc66984b3fbe8796674ec31f8f7eef81bb9698bb9525f7dca42f95d",
+          "bytes": 29842,
+          "sha256": "46b2cfd611ca94145dff80d8f7a9bf069715b58e170452b85c8b1ca4e5f03c47",
           "verification": "bytes-verified"
         }
       ]
