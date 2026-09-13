@@ -645,6 +645,180 @@
           }
         ]
       }
+    },
+    {
+      "id": "draco-0401930049-43695-geo",
+      "path": "observations/dart_0401930049_43695_01_geo.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930049_43695_01_geo.fits",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930049_43695_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 67132800,
+      "expectedSha256": "d8b2171b610235dced9306b01bcf2c6dbfb9317693457b441cdb36678a9ab629",
+      "observationDate": "2022-09-26T23:14:22.365Z",
+      "width": 1024,
+      "height": 1024,
+      "interpretation": "Calibrated DRACO I/F and pixel-centre geometry on the Dimorphos v004 0.243 m DSK.",
+      "coverage": "One approach observation acquired 2022-09-26T23:14:22.365Z; valid coverage is bounded by the native readout window and qualified surface geometry.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401930049-43695-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930049_43695_01_geo.xml: Identification_Area and the labelled File_Area_Observational."
+          }
+        ]
+      }
+    },
+    {
+      "id": "draco-0401930049-43695-label",
+      "path": "observations/dart_0401930049_43695_01_geo.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930049_43695_01_geo.xml",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930049_43695_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 39996,
+      "expectedSha256": "3085249f3334090f2227c30cf4037be88d82ddef78e4c79edebaf94c1ad27fee",
+      "observationDate": "2022-09-26T23:14:22.365Z",
+      "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401930049-43695-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930049_43695_01_geo.xml: Identification_Area and the labelled product metadata."
+          }
+        ]
+      },
+      "coverage": "One approach observation acquired 2022-09-26T23:14:22.365Z; valid coverage is bounded by the native readout window and qualified surface geometry."
+    },
+    {
+      "id": "draco-0401930046-49265-geo",
+      "path": "observations/dart_0401930046_49265_01_geo.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930046_49265_01_geo.fits",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930046_49265_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 67132800,
+      "expectedSha256": "d16f3b899ee14588f0ee89abf60babe85c5b1dc8f1d2203f322c3db980c68443",
+      "observationDate": "2022-09-26T23:14:19.477Z",
+      "width": 1024,
+      "height": 1024,
+      "interpretation": "Calibrated DRACO I/F and pixel-centre geometry on the Dimorphos v004 0.243 m DSK.",
+      "coverage": "One approach observation acquired 2022-09-26T23:14:19.477Z; valid coverage is bounded by the native readout window and qualified surface geometry.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401930046-49265-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930046_49265_01_geo.xml: Identification_Area and the labelled File_Area_Observational."
+          }
+        ]
+      }
+    },
+    {
+      "id": "draco-0401930046-49265-label",
+      "path": "observations/dart_0401930046_49265_01_geo.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930046_49265_01_geo.xml",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930046_49265_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 40081,
+      "expectedSha256": "bea15e0e21e86f9e41a30013fe9d58241d1d827638e0007b2ebd44b812c15319",
+      "observationDate": "2022-09-26T23:14:19.477Z",
+      "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401930046-49265-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930046_49265_01_geo.xml: Identification_Area and the labelled product metadata."
+          }
+        ]
+      },
+      "coverage": "One approach observation acquired 2022-09-26T23:14:19.477Z; valid coverage is bounded by the native readout window and qualified surface geometry."
+    },
+    {
+      "id": "draco-0401930045-02979-geo",
+      "path": "observations/dart_0401930045_02979_01_geo.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930045_02979_01_geo.fits",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930045_02979_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 67132800,
+      "expectedSha256": "12a5f0021799f65f1ee3fb35dfda3b6857def98473fbc4d43307b9e6cb082bbe",
+      "observationDate": "2022-09-26T23:14:17.551Z",
+      "width": 1024,
+      "height": 1024,
+      "interpretation": "Calibrated DRACO I/F and pixel-centre geometry on the Dimorphos v004 0.243 m DSK.",
+      "coverage": "One approach observation acquired 2022-09-26T23:14:17.551Z; valid coverage is bounded by the native readout window and qualified surface geometry.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401930045-02979-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930045_02979_01_geo.xml: Identification_Area and the labelled File_Area_Observational."
+          }
+        ]
+      }
+    },
+    {
+      "id": "draco-0401930045-02979-label",
+      "path": "observations/dart_0401930045_02979_01_geo.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930045_02979_01_geo.xml",
+      "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401930045_02979_01_geo::1.0",
+      "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "consumers": [
+        "draco-observation"
+      ],
+      "expectedBytes": 40081,
+      "expectedSha256": "7e9cafb0c623e63b8f07f82ede148e8ebd77fd05169092d0cc9487eec59c0a5e",
+      "observationDate": "2022-09-26T23:14:17.551Z",
+      "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "dart-draco-0401930045-02979-geometry",
+            "role": "material",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/dart_0401930045_02979_01_geo.xml: Identification_Area and the labelled product metadata."
+          }
+        ]
+      },
+      "coverage": "One approach observation acquired 2022-09-26T23:14:17.551Z; valid coverage is bounded by the native readout window and qualified surface geometry."
     }
   ],
   "generatedIntermediates": [
@@ -677,8 +851,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 15111,
-      "expectedSha256": "0f4ac1a0365de8455d889f20449e977414ba0e9da9a8019a06faefdd33f484ce",
+      "expectedBytes": 15033,
+      "expectedSha256": "d72e3f54a8a833133c98ca9de0ce538f4a43afa02ccab434175957940884e90f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -686,8 +860,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 7024,
-      "expectedSha256": "c249750d7b119e50ca2de1e3561c8ccb08a4f1db7519787a7aa1727ba086eb30"
+      "expectedBytes": 8716,
+      "expectedSha256": "6b6d27e3edef2155e8d0986567410aed553e0342ee48af918d0f1ab6d5f5df4b"
     },
     {
       "path": "preparation/navigation.json",
@@ -701,8 +875,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 8758,
-      "expectedSha256": "0f0a02c055da9d1e62184cd92e5f4e63a85d1db97d463a3d45eaedc4d5aff453"
+      "expectedBytes": 9826,
+      "expectedSha256": "84f36e5501c656e30e3754dca542badc0c6fc0723ff990d006047642a40b6803"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -761,7 +935,7 @@
       "expectedBytes": 7093,
       "expectedSha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
       "kind": "source-document",
-      "title": "Dimorphos global slope relative to gravity, model v004 \u2014 PDS4 label",
+      "title": "Dimorphos global slope relative to gravity, model v004 — PDS4 label",
       "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
       "acquisition": "Unmodified PDS4 product label; restored through source/preparation/acquisition.json.",
       "productId": "urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004:dimorphos_g_0972mm_spc_slp_0000n00000_v004::1.0",
@@ -798,8 +972,8 @@
     {
       "id": "dimorphos-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1180,
-      "expectedSha256": "62621f87e15f29b0e0e081826b60c070c30c4c35ad939d802a4a27541d1e2dd6",
+      "expectedBytes": 1193,
+      "expectedSha256": "c93be12a666cd7216804b2e6c2c59a3bc1385a1f63ba92f5a22f51bfe7bd48a2",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
