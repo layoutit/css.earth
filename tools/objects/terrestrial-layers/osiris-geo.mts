@@ -1,4 +1,4 @@
-import type {GeoFrame,GeoSample,DiskPhotometry,PhasePhotometry} from './contracts.mts';
+import type {GeoFrame,DiskPhotometry,PhasePhotometry} from './contracts.mts';
 import { diskGain as diskFunctionGain, minnaertExponent, NORMAL_GEOMETRY } from '../../photometry/disk.mts';
 import { phaseGain as phaseFunctionGain } from '../../photometry/phase.mts';
 // Preparation-only decoder and measured camera for the corrected OSIRIS GEO
@@ -220,28 +220,4 @@ export function fitCamera(points: readonly number[][], pixels: readonly number[]
   if (project(matrix, mean)[2] < 0) matrix = matrix.map(row => row.map(n => -n));
   const positionKm = solve(matrix.map(row => row.slice(0, 3)), matrix.map(row => -row[3]));
   return { matrix, positionKm };
-}
-
-export function sampleGeo(frame: GeoFrame, matrix: readonly number[][], pointKm: readonly number[], { maximumSeparationMeters, maximumEmissionDegrees, photometry, normalize }: {maximumSeparationMeters:number;maximumEmissionDegrees:number;photometry?:DiskPhotometry;normalize?:(incidence:number,emission:number,phase:number|undefined)=>number|null}): GeoSample {
-  const [x, y, depth] = frame.projectPoint ? frame.projectPoint(pointKm) : project(matrix, pointKm), { width, height, planes } = frame;
-  if (!(depth > 0) || !Number.isFinite(x + y) || x < 0 || y < 0 || x >= width - 1 || y >= height - 1) return { reason: 'outside' };
-  const ix = Math.floor(x), iy = Math.floor(y), tx = x - ix, ty = y - iy;
-  const ids = [iy * width + ix, iy * width + ix + 1, (iy + 1) * width + ix, (iy + 1) * width + ix + 1];
-  if (ids.some(i => !frame.valid(i))) return { reason: 'no-geometry' };
-  const {acceptPixel,quality}=frame;
-  if (acceptPixel && ids.some(i => !acceptPixel(i))) return { reason: 'quality' };
-  if (quality && ids.some(i => !acceptOsirisQuality(quality.flags[i], quality.allowLossy))) return { reason: 'quality' };
-  if (ids.some(i => !Number.isFinite(planes.EMISSION_ANGLE_IMAGE[i]) || planes.EMISSION_ANGLE_IMAGE[i] < 0 ||
-      planes.EMISSION_ANGLE_IMAGE[i] > maximumEmissionDegrees * Math.PI / 180)) return { reason: 'grazing' };
-  // Every bilinear contributor must lie on this surface patch. This rejects
-  // foreground/background mixing at the neck and limb, not merely zero fill.
-  const separationMeters = Math.max(...ids.map(i => Math.hypot(...frame.xyz(i).map((n, j) => n - pointKm[j])) * 1000));
-  if (separationMeters > maximumSeparationMeters) return { reason: 'geometry-mismatch', separationMeters };
-  const weights = [(1 - tx) * (1 - ty), tx * (1 - ty), (1 - tx) * ty, tx * ty];
-  const gains = ids.map(i => normalize ? normalize(planes.INCIDENCE_ANGLE_IMAGE[i], planes.EMISSION_ANGLE_IMAGE[i], planes.PHASE_ANGLE_IMAGE?.[i])
-    : photometry ? observationGain(planes.INCIDENCE_ANGLE_IMAGE[i], planes.EMISSION_ANGLE_IMAGE[i], photometry, planes.PHASE_ANGLE_IMAGE?.[i]) : 1);
-  if (!gains.every((gain): gain is number => gain !== null)) return { reason: 'photometry' };
-  return { radiance: ids.reduce((sum, id, i) => sum + planes.IMAGE[id] * weights[i] * gains[i], 0) * (frame.radianceFactor?.factor ?? 1), separationMeters,
-    maximumIncidenceDegrees: Math.max(...ids.map(i => planes.INCIDENCE_ANGLE_IMAGE[i])) * 180 / Math.PI,
-    gain: Math.max(...gains), maximumEmissionDegrees: Math.max(...ids.map(i => planes.EMISSION_ANGLE_IMAGE[i])) * 180 / Math.PI };
 }
