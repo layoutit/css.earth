@@ -1439,6 +1439,84 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       }
+    },
+    {
+      "id": "n1807429484",
+      "path": "observations/N1807429484_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "35fddf10a0f669e60677b9b9f5668d1a6d9bf9d8ee86ca91055eead5964526f7",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "iss-observation"
+      ],
+      "acquisition": "Download the pinned CISSCAL-calibrated I/F image and its PDS3 label from the PDS RMS archive.",
+      "width": 1024,
+      "height": 1024,
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-n1807429484",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@0000000000000000000000000000000000000000#/inputs/44"
+          }
+        ]
+      }
+    },
+    {
+      "id": "n1807429484-label",
+      "path": "observations/N1807429484_1_CALIB.LBL",
+      "expectedBytes": 3845,
+      "expectedSha256": "7ea4077893d9524e32ec252ba0633605a59770293ea0c2e86e0ad2cd06f991c3",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "iss-observation"
+      ],
+      "acquisition": "Download the pinned CISSCAL-calibrated I/F image and its PDS3 label from the PDS RMS archive.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-n1807429484-label",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@0000000000000000000000000000000000000000#/inputs/45"
+          }
+        ]
+      }
     }
   ],
   "documents": [
