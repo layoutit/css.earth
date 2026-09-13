@@ -50,7 +50,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       const planes = new Map<number, FacingBinding | null>(), variablePlanes = new Set<number>();
       const dynamic = new Set([
         ...definition.animations.map(plan => plan.target),
-        ...definition.viewBindings.filter(binding => !['view-attribute', 'view-property'].includes(binding.kind)).map(binding => binding.target),
+        ...definition.viewBindings.filter(binding => !['view-attribute', 'view-property', 'silhouette-step-property'].includes(binding.kind)).map(binding => binding.target),
         ...definition.materials.map(track => track.target),
         // These properties have another publisher. A facing binding must not
         // override selection visibility or an authored changing transform.

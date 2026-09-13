@@ -157,6 +157,9 @@
     "expect": "fail",
     "reason": "needs the Earth city assets (public/scenes/earth/earth-places.json), which setup does not install"
   },
+  "surface-seams-browser.mts": {
+    "expect": "pass"
+  },
   "typescript-owners-browser.mts": {
     "expect": "pass"
   },
