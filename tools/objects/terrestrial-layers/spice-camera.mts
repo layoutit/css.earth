@@ -17,7 +17,7 @@ import type { SpiceCameraDeclaration } from './source-records.mts';
  * mesh exactly as for the archived-camera formats.
  */
 export const SPICE_CAMERA_FORMAT = 'spice-camera';
-export const ABERRATIONS: readonly Aberration[] = ['LT+S', 'LT', 'NONE'];
+export const ABERRATIONS: readonly Aberration[] = ['LT+S', 'LT', 'CN+S', 'CN', 'NONE'];
 
 /** Header card values as the FITS reader keeps them: quoted strings lose their quotes and padding. */
 export const unquoteCard = (value: string | undefined) => value === undefined ? undefined : /^'.*'$/su.test(value) ? value.slice(1, -1).trim() : value.trim();

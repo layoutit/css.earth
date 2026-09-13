@@ -12,6 +12,8 @@
 
 ## Evidence
 
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
+
 - The radial projection preserves observed-versus-estimated classification at all 17,518 source plate centers; this finite check is not an exhaustive subpixel boundary proof.
 
 - The previous 996-leaf open-surface qualification is historical; current source-fit, browser and drag evidence is recorded in [the completion record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/WILD2-COMPLETION.md).
@@ -21,6 +23,8 @@
 - Each place intersects an observed face of the full PDS mesh before attachment to the existing 992-triangle display. The labels add no new mesh, photograph or dataset.
 
 - The [terrain-place browser record](evidence/terrain-places/browser.json) covers all three search flights at 1440 × 900 and 390 × 844 on main `e986b9280` plus this change. Inspected [desktop](evidence/terrain-places/desktop.png) and [mobile viewport](evidence/terrain-places/mobile.png) captures show qualified captions on the photographs. Both matching datasets retain the labels; Shadows stay Off and all 992 leaves survive selection. Sixteen focused tests, preparation build/typecheck, coordinate reproduction and both changed bodies' provenance pass. Aggregate source preparation is blocked by unchanged Earth, Moon and Mars recipe pins on that main revision; full browser conformance was not rerun.
+
+- **Reader oracle, 2026-09-12:** `tools/oracles/fits/encounter.py` reads the pinned NAVCAM product `n2075we02_rr.fit` with astropy. `tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts` requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, flagged and non-finite pixels to agree.
 
 ## Known problems
 

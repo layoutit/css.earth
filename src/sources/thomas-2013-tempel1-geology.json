@@ -1,0 +1,33 @@
+{
+  "id": "thomas-2013-tempel1-geology",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The nucleus of Comet 9P/Tempel 1: Shape and geology from two flybys",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/j.icarus.2012.02.037"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2012.02.037",
+      "label": "Icarus paper"
+    },
+    {
+      "role": "original",
+      "url": "https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf",
+      "label": "NASA author copy"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf",
+      "locator": "Title page; Fig. 2b; section 5.2. The current PDS V2.0 shape uses the same model frame.",
+      "checkedOn": "2026-09-12"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
