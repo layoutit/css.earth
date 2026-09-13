@@ -18,7 +18,7 @@ new route.
 | Stage | Module | What it does |
 | --- | --- | --- |
 | Decode | `formats/*.mts`, with the readers in `../terrestrial-layers/` | Reads the product, checks its identity against the recipe and applies the archive's own quality verdict to each pixel. |
-| Camera | `cameras.mts` | Projects surface points to detector pixels and casts rays back. A camera is fitted to archive backplanes, read from an archived closure, derived from SPICE kernels or taken from a registered control network. A limb refinement can rotate a matrix camera onto the mesh's lit limb. |
+| Camera | `cameras.mts` | Projects surface points to detector pixels and casts rays back. A camera is fitted to archive backplanes, read from an archived closure, derived from SPICE kernels or taken from a registered control network. A limb refinement can rotate a SPICE or OSIRIS reflectance camera onto the mesh's lit limb. |
 | Pixel geometry | `geometry.mts` | Gives each pixel a surface point, a range and its incidence, emission and phase angles. They come from the archive's backplanes, or from the camera's rays cast onto the full source mesh. Hits on faces the source marks as unconstrained are withheld. |
 | Photometry | `photometry.mts` | One gain function per lens: a published model record, a historical disk function or the photograph's own shading. |
 | Footprint | `footprint.mts` | Interpolates the four pixels around a projected point. Each pixel must have geometry, pass quality, face the camera within the emission limit, lie on the sampled surface patch and admit a gain. |
