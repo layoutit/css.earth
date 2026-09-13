@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6cfe64e5cd3b4eeb91fefddca3f9e224d57cb9a95e30a227c32c598ded76c34e"
+    "sha256": "f3efeb16f352b9533bf1e7894e030b26519d01520f5d0fcda7fca6ba1a279a80"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -342,7 +342,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d72e3f54a8a833133c98ca9de0ce538f4a43afa02ccab434175957940884e90f",
+      "sha256": "32cc560268b159e5ae8494a556de8f61a6961696cf77e1f545c84a64ef1a523d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -443,7 +443,7 @@
                   "value": "None · panchromatic"
                 }
               ],
-              "summary": "Four DRACO frames from 11 to 1.8 seconds before impact. Closer qualified footprints take precedence; the unseen surface keeps the grid."
+              "summary": "Four DRACO frames from 11 to 1.8 seconds before impact, using closer qualified detail where available. Brightness is approximately normalized; photographed shadows remain. Grid marks unobserved or rejected areas."
             },
             {
               "id": "elevation",
@@ -534,7 +534,7 @@
             }
           ],
           "labels": {
-            "draco": "DRACO image",
+            "draco": "DRACO mosaic",
             "slope": "Slope"
           }
         },
@@ -1184,8 +1184,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d72e3f54a8a833133c98ca9de0ce538f4a43afa02ccab434175957940884e90f",
-      "bytes": 15033,
+      "sha256": "32cc560268b159e5ae8494a556de8f61a6961696cf77e1f545c84a64ef1a523d",
+      "bytes": 15111,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1498,7 +1498,7 @@
     },
     {
       "id": "draco",
-      "label": "DRACO image",
+      "label": "DRACO mosaic",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
       "parents": [],
@@ -1629,7 +1629,7 @@
     },
     {
       "id": "preview:draco",
-      "label": "DRACO image preview",
+      "label": "DRACO mosaic preview",
       "recipe": "terrestrial",
       "selector": "/raster/surfaceObservations/0",
       "recipeDependencies": [
