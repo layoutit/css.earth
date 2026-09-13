@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5964220e40307cff8a2f863632c58a1a0b76333ea277126a7de51255bbdfc84c"
+    "sha256": "1dccd365fc98774b2517b6a5b9182827e033a878599d71b739616ca81130ba77"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a234252997a7084de84b57ab07d99b701cedcf3ffffd663c92231190b05b9751",
+      "sha256": "99535fb2c47296cc9319e705cb4d3f424572fca1e5819db00069a7dbec918610",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -180,7 +180,7 @@
               "transfer": {
                 "maximumSeparationFootprints": 2,
                 "visibilityToleranceMeters": 0.5,
-                "maximumEmissionDegrees": 75
+                "maximumEmissionDegrees": 70
               },
               "photometry": {
                 "model": "lunar-lambert",
@@ -188,7 +188,7 @@
                 "referenceIncidenceDegrees": 0,
                 "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 75,
-                "maximumEmissionDegrees": 75,
+                "maximumEmissionDegrees": 70,
                 "maximumGain": 1.75
               },
               "display": {
@@ -1133,14 +1133,14 @@
       "outputs": [
         {
           "url": "/scenes/thebe/thebe-normal-thumbnail.webp",
-          "bytes": 1760,
-          "sha256": "a4ba853639e14f947fde22586f18630827d34bdad54f7f37915ed2f9e700048d",
+          "bytes": 1716,
+          "sha256": "74ca4e237dc043ee761f4e78349275388ccb6c86b0e751860fa0c1e1f64c0e9a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/thebe/thebe-normal-surface@2x.webp",
-          "bytes": 126306,
-          "sha256": "af82c33ab2eb1bcd57a1755ea7e576937f6d456e0c7bc387f3970ab54b1be3cd",
+          "bytes": 117868,
+          "sha256": "46d8bacd54fd8baeebbbdf095a64fa7b7445f346a50282b10109192164375282",
           "verification": "bytes-verified"
         }
       ],
@@ -1224,8 +1224,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 12526,
-          "sha256": "7cb6653bfc5c8a8576599808df2f6838f189d4eb56917146b08576548b977860",
+          "bytes": 9626,
+          "sha256": "3e444aee4d12da2795d07544c7a9c2f608c57eb136f980b54dffcfcc1429808c",
           "verification": "bytes-verified"
         }
       ]
