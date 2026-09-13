@@ -1,0 +1,89 @@
+{
+  "body": "helene",
+  "sourceRoot": "..",
+  "shape": {
+    "path": "shape/helene_30k_plt.tab",
+    "format": "pds-plate-model",
+    "grid": {
+      "metersPerUnit": 1000,
+      "expectedVertices": 13495,
+      "expectedFaces": 26986,
+      "indexBase": 0
+    },
+    "faceBudget": 2000,
+    "tileSize": 128,
+    "atlasColumns": 16,
+    "simplification": {
+      "targetFaces": 800,
+      "maximumErrorMeters": 300,
+      "method": "source-meshoptimizer"
+    }
+  },
+  "referenceFrame": {
+    "id": "n1687120497_1",
+    "path": "observations/N1687120497_1_CALIB.IMG",
+    "labelPath": "observations/N1687120497_1_CALIB.LBL",
+    "observerLatitude": 1.89,
+    "observerWestLongitude": 101.55,
+    "sunLatitude": 9.76,
+    "sunWestLongitude": 29.2,
+    "rangeKm": 8047.6,
+    "northAzimuthDegrees": 179.7,
+    "center": [
+      509.7,
+      602.4
+    ],
+    "pixelAngleMicroradians": 5.989697719921734
+  },
+  "color": {
+    "id": "filter-color",
+    "format": "controlled-shape-color",
+    "consumer": "cassini-color-frames",
+    "channels": [
+      {
+        "channel": "red",
+        "filter": "RED",
+        "frames": [
+          {
+            "id": "n1687120033_1",
+            "path": "observations/N1687120033_1_CALIB.IMG",
+            "labelPath": "observations/N1687120033_1_CALIB.LBL",
+            "observerLatitude": 2.43,
+            "observerWestLongitude": 115.79,
+            "sunLatitude": 9.76,
+            "sunWestLongitude": 28.49,
+            "rangeKm": 7214.9,
+            "northAzimuthDegrees": 179.71,
+            "center": [
+              512.7,
+              602.8
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          }
+        ]
+      }
+    ],
+    "displayRange": [
+      0,
+      1.05
+    ],
+    "photometry": {
+      "weight": 0.5,
+      "maximumGain": 2.5,
+      "maximumIncidenceDegrees": 80,
+      "maximumEmissionDegrees": 78,
+      "backgroundMaximum": 0.003
+    },
+    "metadata": {
+      "label": "False color",
+      "falseColor": true,
+      "coverage": "Cassini IR3, IR1 and UV3 observations; only registered three-filter overlap contributes."
+    }
+  },
+  "tableSource": {
+    "path": "shape/helene_document.pdf",
+    "sha256": "87b5af238d1e6a333bd1b33cc0cb46d5a1ef096b88c1ec2439070772dc5166d2",
+    "page": 3,
+    "method": "Camera values transcribed from the released table; all seven existing camera records agree exactly."
+  }
+}

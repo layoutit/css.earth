@@ -31,12 +31,22 @@ const surfaceRecipe=recipeSources.find(source=>source.id==='raster')??recipeSour
 assert.ok(surfaceRecipe,'No authored surface recipe');
 const recipePath=`${root}/${requireString(surfaceRecipe.path)}`,recipe=await read(recipePath);
 const selectedFiles=new Set([`${body}-${lens}-surface@2x.webp`,`${body}-${lens}-shadow@2x.webp`,`${body}-${lens}-thumbnail.webp`]);
+// A body PR may add one dataset while improving another. Declare those exact
+// lens IDs; this never permits removed assets or changes to body geometry.
+const changedLenses=(process.env.CSSEARTH_CAPTURE_CHANGED_LENSES??lens).split(',');
+assert.ok(changedLenses.includes(lens)&&new Set(changedLenses).size===changedLenses.length);
+for(const id of changedLenses){
+ assert.ok(/^[a-z0-9-]+$/.test(id)&&requireArray(runtime.variants).some(v=>requireRecord(requireRecord(v).when).lensId===id),'Changed lens must exist in the prepared runtime');
+}
+const changedFiles=new Set(changedLenses.flatMap(id=>[`${body}-${id}-surface@2x.webp`,`${body}-${id}-shadow@2x.webp`,`${body}-${id}-thumbnail.webp`]));
 if(surfaceRecipe.id==='raster'){
+ assert.deepEqual(changedLenses,[lens],'Multi-lens capture currently supports terrain atlases only');
  const surface=requireArray(recipe.surfaces).map(value=>requireRecord(value)).find(surface=>surface.id===lens);assert.ok(surface,'No selected raster surface');
  const name=(template:unknown,density=1)=>requireString(template).replaceAll('{id}',lens).replaceAll('{density}',String(density)).replaceAll('{suffix}',density===1?'':'@2x');
  selectedFiles.clear();selectedFiles.add(name(surface.thumbnail));
  assert.equal(recipe.polesCombined,false,'A selected capture needs independently bound polar assets');
  for(const density of requireArray(recipe.densities).map(value=>requireFiniteNumber(value))){selectedFiles.add(name(surface.output,density));selectedFiles.add(name(recipe.polesOutput,density));}
+ changedFiles.clear();for(const filename of selectedFiles)changedFiles.add(filename);
 }
 const oldAssets=requireArray(requireRecord(JSON.parse(execFileSync('git',['show',`${baselineRef}:${root}/runtime-assets.json`],{encoding:'utf8',maxBuffer:32*1024*1024}))).assets).map(value=>requireRecord(value));
 const existingAssetChanges=[];
@@ -44,8 +54,8 @@ for(const old of oldAssets){
  const a=assets.find(b=>b.filename===old.filename);assert.ok(a,`Existing asset removed: ${old.filename}`);
  if(a.sha256===old.sha256)continue;
  const filename=requireString(old.filename);
- if(selectedFiles.has(filename)){
-  existingAssetChanges.push({filename,beforeSha256:old.sha256,afterSha256:a.sha256,reason:'The selected dataset was re-prepared; source and color evidence qualify this change.'});
+ if(changedFiles.has(filename)){
+  existingAssetChanges.push({filename,beforeSha256:old.sha256,afterSha256:a.sha256,reason:'An explicitly declared dataset was re-prepared; its source evidence qualifies this change.'});
   continue;
  }
  // The matched unshaded reference must retain its delivered bytes. Rebuilding
@@ -136,7 +146,7 @@ try{
 const sceneBefore=requireRecord(JSON.parse(execFileSync('git',['show',`${baselineRef}:${root}/prepared/scene.refs.json`],{encoding:'utf8',maxBuffer:32*1024*1024}))),sceneNow=await read(`${root}/prepared/scene.refs.json`);
 const geometry=sceneNow.bodyLeaves??sceneNow.body;assert.ok(geometry,'Missing prepared body geometry');
 assert.deepEqual(geometry,sceneBefore.bodyLeaves??sceneBefore.body);assert.deepEqual(sceneNow.surfaceTriangles,sceneBefore.surfaceTriangles);
-await writeFile(resolve(outputDirectory,'capture.json'),JSON.stringify({body,lens,baselineRef,baselineCommit:execFileSync('git',['rev-parse',baselineRef],{encoding:'utf8',maxBuffer:32*1024*1024}).trim(),
+await writeFile(resolve(outputDirectory,'capture.json'),JSON.stringify({body,lens,changedLenses,baselineRef,baselineCommit:execFileSync('git',['rev-parse',baselineRef],{encoding:'utf8',maxBuffer:32*1024*1024}).trim(),
  toolSha256:hash(await readFile(import.meta.filename)),colorTransferSha256:hash(await readFile('tools/objects/color-transfer.mts')),recipeSha256:hash(await readFile(recipePath)),runtimeSha256:hash(await readFile(`${root}/prepared/runtime.refs.json`)),
  geometrySha256:hash(JSON.stringify(geometry)),...(sceneNow.surfaceTriangles?{surfaceTrianglesSha256:hash(JSON.stringify(sceneNow.surfaceTriangles))}:{}),geometryUnchanged:true,browser:await browser.version(),channel:channel??'bundled-chromium',
  purpose:'Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.',existingAssetChanges,mobile,reports},null,2)+'\n');
