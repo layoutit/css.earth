@@ -33,7 +33,7 @@ Reversing the transfer exposes a limitation. Using the measured correction for t
 
 ![Reverse Nix source-transfer comparison](evidence/photography/best-separate-view-reverse-interior-transfer.png)
 
-Only contributions within 500 m of the fixed display mesh and 1.5 source footprints are accepted; incidence and emission are each limited to 70°. Gray marks unobserved or rejected coverage. It is not dark terrain, color, or albedo.
+Only contributions within 1.5 source footprints are accepted, and a sample needs at least half of its bilinear weight from them; incidence and emission are each limited to 70°. Gray marks unobserved or rejected coverage. It is not dark terrain, color, or albedo.
 
 The serial body preparation completed and the experimental view was inspected and rotated in the local browser. All 31 existing delivered assets remain byte-identical; the photographic view adds three images. The updated Nix/Hydra source checks pass (four tests), as do the camera tools’ TypeScript check and source-catalogue refresh. The source cameras, input pins and evidence were regenerated together; the camera matrices did not change. These checks do not qualify registration. DPR, mobile and publication validation were not completed because the source-frame gate remains unresolved.
 
