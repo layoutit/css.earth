@@ -10,8 +10,7 @@ export interface InteriorSource extends Record<string, unknown> {
   presentation?: {cutThroughCenter?: boolean; thumbnailCutawayDegrees?: number};
 }
 export interface SurfaceRasterSource {width: number; height: number; bandCount: number; gutter: number; overscan: number;}
-export type GlobeTexture = {width: number; height: number; presentationCellSize?: number; raster?: SurfaceRasterSource; two?: string} &
-  ({url: string; one?: string} | {url?: undefined; one: string});
+export interface GlobeTexture {url: string; width: number; height: number; presentationCellSize?: number; raster?: SurfaceRasterSource;}
 export interface SphereConfiguration {
   latitudeSegments: number; longitudeSegments: number; equatorialRadius: number; polarRadius: number;
   texture: GlobeTexture; poles: GlobeTexture; surfaceClassName: string; polarClassName: string; polarInnerClassName: string;

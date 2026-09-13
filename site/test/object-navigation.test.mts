@@ -25,7 +25,7 @@ test("search contains every object, including the Sun; only planets enter the sc
 
 test("prepared marker addresses and presentation follow packages", async () => {
   for (const { id } of PLANET_SEARCH_OBJECTS) {
-    assert.equal(PREPARED_NAVIGATION_MARKERS[id].url, `/navigation/body-${id}.webp`);
+    assert.equal(PREPARED_NAVIGATION_MARKERS[id].url, `/navigation/body-${id}@2x.webp`);
     assert.equal(PREPARED_NAVIGATION_MARKERS[id].index, 0);
     assert.equal(PREPARED_NAVIGATION_MARKERS[id].count, 1);
   }
@@ -34,11 +34,11 @@ test("prepared marker addresses and presentation follow packages", async () => {
   for (const descriptor of descriptors) {
     const marker = PREPARED_NAVIGATION_MARKERS[descriptor.planetId];
     const { context: _context, ...atlasMarker } = marker;
-    assert.deepEqual(atlasMarker, { url: `/navigation/body-${descriptor.planetId}.webp`, url2x: `/navigation/body-${descriptor.planetId}@2x.webp`, index: 0, count: 1, presentation: descriptor.presentation });
+    assert.deepEqual(atlasMarker, { url: `/navigation/body-${descriptor.planetId}@2x.webp`, pixels: 32, index: 0, count: 1, presentation: descriptor.presentation });
     const result = markerStyle(marker, { color: "#ffffff" });
     assert.ok(result.style.includes("color:#ffffff"));
     assert.ok(result.innerStyle.includes("background-size:100% 100%"));
-    assert.ok(result.innerStyle.includes(`url("${marker.url2x}")`));
+    assert.ok(result.innerStyle.includes(`url("${marker.url}")`));
   }
   assert.equal(PREPARED_NAVIGATION_MARKERS.saturn.presentation.scale?.ringExtra, 20);
   assert.equal(PREPARED_NAVIGATION_MARKERS.saturn.presentation.ringExtra, 14);
@@ -66,7 +66,7 @@ test("scale overrides must form a complete presentation after inheritance", () =
   }
   const presentation = { size: 8, ringAngle: 0, ringExtra: 12, ringHeight: 4, scale: { ringExtra: 20 } };
   assert.equal(validateMarkerPresentation(presentation), presentation);
-  const result = markerStyle({ url: '/navigation/body-test.webp', url2x: '/navigation/body-test@2x.webp', index: 0, count: 1, presentation }, { color: "#ffffff", view: "scale" });
+  const result = markerStyle({ url: '/navigation/body-test@2x.webp', pixels: 32, index: 0, count: 1, presentation }, { color: "#ffffff", view: "scale" });
   assert.equal(result.ringed, true);
   assert.match(result.ringStyle, /width:28px/);
   assert.match(result.ringStyle, /height:4px/);

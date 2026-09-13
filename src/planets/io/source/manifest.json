@@ -209,7 +209,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -927,7 +927,7 @@
       "expectedSha256": "be1afafaa7adb0492cef2cfc8dc7ec8dc063f23e386fe9bdebf6d5a3ca2ac37c",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IO_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -1043,8 +1043,8 @@
     {
       "id": "io-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1502,
-      "expectedSha256": "5075bd97b106724c1fc9a90ed46a7c2068cce09f77e0963f65fa4a4877cbce07",
+      "expectedBytes": 1570,
+      "expectedSha256": "49d2308bd4d28ae21c042d35693552c2625a3ff310624a1cf4e55dae87669335",
       "origin": "Repository-authored Io solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1064,8 +1064,8 @@
     {
       "id": "io-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 12270,
-      "expectedSha256": "b5e92caca00f8c62e7801015442e5845883347939c1709b9b4a6faaf74cc443a",
+      "expectedBytes": 12563,
+      "expectedSha256": "eea8a761f448acd288b104e90f63055bdb1a53a3def123ec2a6109cfbf0d50ee",
       "origin": "Repository-authored Io raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1083,8 +1083,8 @@
     {
       "id": "io-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1392,
-      "expectedSha256": "e20eb1618de51350f118d402904d05d9dd9bc7a9e0ee9b01a725a87e3d731043",
+      "expectedBytes": 1386,
+      "expectedSha256": "7edfa226f8fdf6d490553e3e1e67866282d9cb28b4de2b72e68fa8dc690b7e02",
       "origin": "Repository-authored Io geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1177,8 +1177,8 @@
     {
       "id": "io-object-content",
       "path": "content/object.json",
-      "expectedBytes": 15692,
-      "expectedSha256": "d0a8429f4d8df23984d82dad5ef754571db4ebcf59bdabbaa0db20bb3e67fa36",
+      "expectedBytes": 15662,
+      "expectedSha256": "633b7683b64c3b503cdd339edb27922cbeb62894ebb3873e4bc98cf32c52308e",
       "origin": "Repository-authored Io object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

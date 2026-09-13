@@ -2,23 +2,23 @@ import {array,boolean,dictionary,number,optional,shape,text,choice,nullable} fro
 import {requireRecord} from '../../../../tools/source-values.mts';
 
 const dimensions={width:number,height:number};
-const pair=shape({one:text,two:text});
+const address=shape({url:text});
 const rectangle=shape({x:number,y:number,...dimensions});
 const layer=shape({schema:text,rasterScale:number,frameMatrix:text,textureMatrix:text});
 const leaf=shape({tag:choice('s','u'),className:text,style:text,projectiveTextureLayer:optional(layer),geographicFrameMatrix:optional(text),
   sourceRect:optional(rectangle),leafWidth:number,leafHeight:number,projection:text,lighting:text,lightingOverlay:boolean,
-  asset:optional(shape({one:text,two:text,width:optional(number),height:optional(number)})),backfaceVisible:optional(boolean)});
+  asset:optional(shape({url:text,width:optional(number),height:optional(number)})),backfaceVisible:optional(boolean)});
 const bands=array(shape({latitudeIndex:number,visualRotationSeconds:number,leaves:array(leaf)}));
 const transport=shape({model:text,defaultRow:number,initialWarmRows:array(number),maximumRetainedRowCount:number,framesPerShard:number,
   shardCount:number,retainLastReadyPresentation:boolean,addressWritesOnlyOnInput:boolean,idleCallbacks:number,
-  initialDecodedWorkingSetBytes:shape({one:number,two:number}),maximumDecodedWorkingSetBytes:shape({one:number,two:number})});
+  initialDecodedWorkingSetBytes:number,maximumDecodedWorkingSetBytes:number});
 const material=shape({id:text,model:text,source:nullable(requireRecord),frameCount:number,columns:number,rows:number,framesPerShard:number,
-  shardCount:number,preparedRows:array(shape({rowIndex:number,assets:pair})),planetRadius:number,physicalRadius:number,
+  shardCount:number,preparedRows:array(shape({rowIndex:number,url:text,width:number,height:number,decodedRgbaBytes:number})),planetRadius:number,physicalRadius:number,
   sourceTileSize:number,presentationTileSize:number,gutter:number,stride:number,shardWidth:number,shardHeight:number,defaultFrame:number,
-  defaultRow:number,defaultAssets:pair,shadowlessAssets:optional(pair),defaultScenePitchDegrees:number,
-  defaultPresentation:shape({transform:text,assets:pair,backgroundPosition:text,backgroundSize:text}),
-  shadowlessPresentation:optional(shape({assets:pair,backgroundPosition:text,backgroundSize:text})),
-  frames:array(shape({frameIndex:number,rowIndex:number,columnIndex:number,tileRowIndex:number,scenePitchDegrees:number,assets:pair,
+  defaultRow:number,defaultUrl:text,shadowlessUrl:optional(text),defaultScenePitchDegrees:number,
+  defaultPresentation:shape({transform:text,url:text,backgroundPosition:text,backgroundSize:text}),
+  shadowlessPresentation:optional(shape({url:text,backgroundPosition:text,backgroundSize:text})),
+  frames:array(shape({frameIndex:number,rowIndex:number,columnIndex:number,tileRowIndex:number,scenePitchDegrees:number,url:text,
     backgroundPosition:text,backgroundSize:text,transform:text})),transformPlayback:shape({schema:text,keyframes:array(requireRecord),runtimeTransformConstruction:boolean}),
 
   leaf:shape({tag:choice('s','u'),className:text,style:text}),transport,runtimeLightingMath:boolean,runtimeRasterization:boolean});
@@ -38,8 +38,8 @@ export const parseEarthScene=shape({schema:text,
     seamRepair:shape({model:text,seamBleed:number,presentationOverlap:number,rasterGutter:number,rasterOverscan:number,runtimeEdgeDiscovery:boolean})}),
   material:shape({transform:text,lighting:material,atmosphere:(value:unknown)=>({...material(value),source:atmosphereSource(requireRecord(value).source),illumination:shape({minimumLightViewZ:number,maximumLightViewZ:number})(requireRecord(value).illumination)})}),
   interior:shape({schema:text,qualification:text,source:requireRecord,cutaway:shape({centerLongitudeDegrees:number,widthDegrees:number,qualification:text}),
-    outerBodyBands:bands,outerAssets:shape({surface:shape({one:text,two:text,oneUrls:array(text),twoUrls:array(text)}),poles:pair,
-      litSurface:shape({urls:array(text)}),litPoles:pair}),shells:array(shape({id:text,label:text,radiusScale:number,cutaway:boolean,className:text,leaves:array(leaf)})),
+    outerBodyBands:bands,outerAssets:shape({surface:shape({url:text,urls:array(text)}),poles:address,
+      litSurface:shape({urls:array(text)}),litPoles:address}),shells:array(shape({id:text,label:text,radiusScale:number,cutaway:boolean,className:text,leaves:array(leaf)})),
     sectionLeaves:array(leaf),leafCount:number,runtimeGeometry:boolean,runtimeRasterization:boolean}),
   assets:shape({starfield:text}),counts:shape({surfaceLeafCount:number,cloudLeafCount:number,lightingLeafCount:number,atmosphereLeafCount:number,
     directionalSunLeafCount:number,interiorLeafCount:number,cityPageLeafCount:number,noisePageLeafCount:number,retainedLeafCount:number,

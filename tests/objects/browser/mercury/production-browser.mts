@@ -210,7 +210,6 @@ if (!(input instanceof HTMLInputElement)) throw new Error("Expected HTMLInputEle
     reports.push({
       deviceScaleFactor,
       retainedNodes: initial.retainedNodes,
-      selectedPreparedDensity: 2,
       externalRequests: externalRequests.length,
       browserProblems: problems.length,
     });

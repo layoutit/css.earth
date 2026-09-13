@@ -96,7 +96,7 @@ function mountStarFixture(t: TestContext, { width = 1440, height = 900 }: { widt
     for (const restoreOne of restore.reverse()) restoreOne();
   });
   const sky = mountRetainedCubicSky({ host: nativeElement(new Element()), plan: PREPARED_MERCURY_STARFIELD,
-    imageDensity: 1, objectId: "mercury" } satisfies CubicSkyMountOptions);
+    objectId: "mercury" } satisfies CubicSkyMountOptions);
   t.after(() => sky.destroy());
   assert.ok(sky.starGroup !== null, "prepared Mercury fixture includes retained stars");
   const starGroup = sky.starGroup;

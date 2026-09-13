@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "3ead3f731ccc49a2d907fa7dac95dd3b46089dc03eb9cdfee70c075286559934"
+    "sha256": "6e20e4f7a680f8a4f4a9f5818437d69e26b2df77b730c46d54fd80b062f3d3a3"
   },
   "id": "europa",
   "properties": {
@@ -103,12 +103,12 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "dbc711f8effd1cc1ff697e8604db4f40d1209c489a172dddaaf888c482895b72"
+          "sha256": "be586369fca14d6a6ed74d3c15218f673842c58f40a3117c4b976c51b9159079"
         },
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "1c8d1f924668e426140e4dd85c45720bc57175a39f4553e80550c250893233a9"
+          "sha256": "da0a452d777481cde1a97248d2b5258d6d409c2bb377d82a0c50f963297abe48"
         },
         {
           "id": "celestial",
@@ -123,12 +123,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ff68c87172d33b3113ba716dec9416f68df4e3336b3cb89784c3bf5c02b5f7c6"
+          "sha256": "adea0fe714df61db29809426fc78d414766723e35b1cca490aae48371373a85d"
         },
         {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
-          "sha256": "3ea935df09463d5dea39af2ef8ff561eb2b817cd9367ce4a130e5d9fc87bc72f"
+          "sha256": "4f6d21e75d3b88a7cccf2b984c2cee8778ad8f388159444859324ca477b10df6"
         },
         {
           "id": "title",
@@ -162,7 +162,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2cda22911fbc6012837e51a9ce0e5793729c802439b669168b2cbc906533eb93"
+        "sha256": "f32916c38a981a00cd8053abd4abb87e32281edd5cfeaf84d36a453081bab7b8"
       }
     },
     "catalog": {
@@ -170,7 +170,7 @@
       "classification": "satellite",
       "color": "#b5b3a9",
       "distanceAu": 5.2,
-      "description": "Explore Europa in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s fractured icy moon and its orbit around Jupiter.",
+      "description": "Explore Europa in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter\u2019s fractured icy moon and its orbit around Jupiter.",
       "systemName": "Solar System",
       "order": 427,
       "context": {

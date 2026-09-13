@@ -52,10 +52,8 @@ test("defines one reusable retained cubic-sky contract", () => {
       CUBIC_SKY_STANDARD.presentationYawOffsetDegrees,
     faces: CUBIC_SKY_FACE_IDS.map((id) => ({
       id,
-      url: `/${id}-standard.webp`,
-      url2x: `/${id}-standard@2x.webp`,
-      highContrastUrl: `/${id}.webp`,
-      highContrastUrl2x: `/${id}@2x.webp`,
+      url: `/${id}-standard@2x.webp`,
+      highContrastUrl: `/${id}@2x.webp`,
     })),
     sun: {
       schema: PREPARED_CUBIC_SKY_SUN_SCHEMA,
@@ -90,10 +88,8 @@ test("rejects a cube with no prepared Sun binding", () => {
     presentationYawOffsetDegrees: 66,
     faces: CUBIC_SKY_FACE_IDS.map((id) => ({
       id,
-      url: `${id}-standard`,
-      url2x: `${id}-standard@2x`,
-      highContrastUrl: id,
-      highContrastUrl2x: `${id}@2x`,
+      url: `${id}-standard@2x`,
+      highContrastUrl: `${id}@2x`,
     })),
   };
   assert.equal(

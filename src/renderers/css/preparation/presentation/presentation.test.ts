@@ -26,32 +26,21 @@ describe('retained presentation compiler compatibility', () => {
     // metadata. Compare compiler-owned structure, then every raw output byte
     // against the independently executed pre-migration JavaScript helpers.
     const accepted = expected as Record<string, unknown>;
-    for (const key of ['tree', 'variants', 'materials', 'camera', 'sky', 'sun', 'controls', 'viewBindings', 'animations', 'textureLevels'] as const) {
+    for (const key of ['tree', 'variants', 'materials', 'camera', 'sky', 'sun', 'controls', 'viewBindings', 'animations'] as const) {
       expect(prepared[key]).toEqual(accepted[key]);
     }
     expect(prepared.tree.nodes.length).toBe(id === 'mercury' ? 909 : 456);
     expect(createHash('sha256').update(JSON.stringify(canonical(prepared))).digest('hex')).toBe(expectedDigests[id]);
-    if (id === 'mercury') {
-      // Two prepared surface levels: mount and startup name only the 1x maps;
-      // @2x follows once the disc reaches 2 texels per CSS pixel (2048 / 2pi).
-      const levels = prepared.textureLevels!.levels;
-      expect(levels.map(level => level.minimumDiameter)).toEqual([0, 2048 / (2 * Math.PI)]);
-      expect(levels[0].resources['surface:normal']).toBe('surface:normal:level:2048');
-      expect(prepared.assets.startup).toContain('surface:normal:level:2048');
-      expect(prepared.assets.startup.filter(key => key.startsWith('surface:'))).toEqual(['surface:normal:level:2048']);
-      const surfaceImages = prepared.tree.properties.filter(property => property.name === '--mercury-surface-image');
-      expect(surfaceImages.map(property => property.value)).toEqual(['url("/scenes/mercury/mercury-surface-normal.jpg")']);
-    }
+    expect(prepared.textureLevels).toBeUndefined();
   }, 30_000);
-  it('rejects surface texture levels outside the row-bank cutaway presentation', () => {
-    const profile = { schema: 'cssearth-css-presentation-profile@1', namespace: 'venus', mode: 'composite', textureLevels: { hysteresis: 0.2, texelsPerCssPixel: 2 } };
-    expect(() => parsePresentationProfile(profile)).toThrow();
-    expect(() => parsePresentationProfile({ ...profile, mode: 'row-bank-cutaway', textureLevels: { hysteresis: 1, texelsPerCssPixel: 2 } })).toThrow();
+  it('rejects surface texture levels in every retained globe presentation', () => {
+    for (const mode of ['composite', 'row-bank-cutaway'])
+      expect(() => parsePresentationProfile({ schema: 'cssearth-css-presentation-profile@1', namespace: 'venus', mode, textureLevels: { hysteresis: 0.2, texelsPerCssPixel: 2 } })).toThrow();
   });
 });
 // Full raw output hashes from original JS helpers; see tools/evidence/presentation-typescript-parity.json.
-// Mercury's hash was updated for its surface texture levels and JPEG surface maps.
+// Both hashes were updated when every prepared raster became a single @2x file.
 const expectedDigests: Record<string, string> = {
-  mercury: '4070cf874d98f9ead4aed6abdaeb4be984759350cff9b637bf1c3c1131cd3dd1',
-  venus: 'e0df212c4a67bb80ec3abd5e11bd39cd84aa563e4c0044abff1d22c92c1bbdbe',
+  mercury: '336836135265631894b9eebf96ed8c139e71686f48a3a2901190ecb6070f638a',
+  venus: 'b9f5672a7da890357576489ad4c812d28fc204ab0b57689c81996485e0e965a4',
 };

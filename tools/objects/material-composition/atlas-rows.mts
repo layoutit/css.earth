@@ -5,11 +5,11 @@ import sharp from 'sharp';
 // Preserve the existing material frames exactly. Only their transport changes:
 // the shared residency owner can retain the current row and warm its neighbor.
 export interface AtlasRowVariant {
-  runtimeAtlas: {assetUrl: string; asset2xUrl?: string};
+  runtimeAtlas: {assetUrl: string};
   presentations: readonly {rowIndex: number; frameIndex: number; backgroundPosition: string; backgroundSize: string}[];
 }
 export async function prepareAtlasRows({ variant, resource, publicDirectory }: {variant: AtlasRowVariant; resource: string; publicDirectory: string}) {
-  const sourceUrl = variant.runtimeAtlas.asset2xUrl || variant.runtimeAtlas.assetUrl;
+  const sourceUrl = variant.runtimeAtlas.assetUrl;
   const sourcePath = resolve(publicDirectory, basename(sourceUrl));
   const { width, height } = await sharp(sourcePath).metadata();
   if (width === undefined || height === undefined) throw new Error('Material atlas dimensions are missing.');

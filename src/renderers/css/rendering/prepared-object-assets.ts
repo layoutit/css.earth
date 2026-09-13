@@ -1,5 +1,4 @@
 import type { PreparedResourceEntry, PreparedResourcePool } from "./prepared-residency.js";
-export interface PreparedAssetPair { two?: string; url2x?: string; one?: string; url?: string; }
 export type PreparedResourcePoolOptions = Partial<Omit<PreparedResourcePool, "id">>;
 
 export const CANONICAL_PREPARED_IMAGE_DENSITY = 2;
@@ -7,13 +6,6 @@ export const CANONICAL_PREPARED_IMAGE_DENSITY = 2;
 // Addresses are read from prepared data once when a definition is bound.
 // No device-density input, asset generation, image owner, or eviction lives here.
 export function preparedAssetAddress(url: unknown): string {
-  if (typeof url !== "string" || !url.startsWith("/scenes/")) throw new TypeError("A prepared asset address is required.");
-  return url;
-}
-
-export function canonicalPreparedAsset(pair: string | PreparedAssetPair | null | undefined, high?: string) {
-  if (typeof pair === "string") return high || pair;
-  const url = [pair?.two, pair?.url2x, pair?.one, pair?.url].find(value => typeof value === "string");
   if (typeof url !== "string" || !url.startsWith("/scenes/")) throw new TypeError("A prepared asset address is required.");
   return url;
 }

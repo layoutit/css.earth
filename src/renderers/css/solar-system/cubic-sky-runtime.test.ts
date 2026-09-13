@@ -31,7 +31,7 @@ test('the shared-universe path keeps camera orientation without unused sky image
   vi.stubGlobal('ResizeObserver', class { constructor() { observers(); } observe() {} disconnect() {} });
   const plan = preparedSky as unknown as CubicSkyPlan;
   const mount = (renderContent: boolean) => mountRetainedCubicSky({ host: new Element() as unknown as HTMLElement,
-    plan, objectId: 'mercury', imageDensity: 2, renderContent });
+    plan, objectId: 'mercury', renderContent });
   const orientationOnly = mount(false);
   expect(orientationOnly.faceCount).toBe(0);
   expect(orientationOnly.retainedStarCount).toBe(0);

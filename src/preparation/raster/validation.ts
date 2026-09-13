@@ -22,6 +22,10 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             throw new TypeError(`raster.${key} must be an integer.`);
     if (recipe.resample !== 'source-packed' && recipe.resample !== 'density-before-pack')
         throw new TypeError('Unknown raster resampling operator.');
+    if (recipe.unpackedResizeBeforePack !== undefined && recipe.unpackedResizeBeforePack !== true)
+        throw new TypeError('unpackedResizeBeforePack must be true when declared.');
+    if (recipe.unpackedResizeBeforePack && recipe.resample !== 'source-packed')
+        throw new TypeError('unpackedResizeBeforePack needs source-packed storage.');
     if (recipe.polarProjection !== 'angular-nearest' && recipe.polarProjection !== 'orthographic-bilinear')
         throw new TypeError('Unknown polar projection operator.');
     if (typeof recipe.polesCombined !== 'boolean')
@@ -82,6 +86,10 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             throw new TypeError(`surface.output must end in ${extension} for its encoding.`);
         if (surface.exposure !== undefined)
             numbers(surface.exposure, 'surface.exposure', 3);
+        if (surface.nativeSourcePoles !== undefined && surface.nativeSourcePoles !== true)
+            throw new TypeError('surface.nativeSourcePoles must be true when declared.');
+        if (surface.nativeSourcePoles && recipe.resample !== 'density-before-pack')
+            throw new TypeError('Native source poles need density-before-pack storage.');
         if (surface.science !== undefined) {
             const science = record(surface.science, 'surface.science');
             if (recipe.resample === 'source-packed') throw new TypeError('surface.science needs density-before-pack resampling.');
@@ -91,6 +99,8 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         }
         if (surface.sharpen !== undefined)
             finite(surface.sharpen, 'surface.sharpen', true);
+        if (surface.nativeSourcePoles && surface.sharpen !== undefined)
+            throw new TypeError('Native source poles cannot reproduce a resized-map sharpen pass.');
         if (surface.coverage !== undefined) {
             const coverage = record(surface.coverage, 'coverage');
             path(coverage.normal, 'coverage.normal');

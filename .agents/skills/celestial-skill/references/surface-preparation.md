@@ -8,11 +8,20 @@ their algorithms are reusable, their body-specific parameters are not defaults.
 Paged ellipsoids can declare `material.shadowlessOverlay` with RGB byte values
 and an opacity from 0 to 1. This changes only the prepared Shadows-off overlay;
 an omitted setting retains the black shading. The asset preparer's `shadowless`
-mode rebuilds that overlay at both densities without rebuilding surface imagery
+mode rebuilds that overlay at 2x without rebuilding surface imagery
 or directional lighting. Treat a light-colored overlay as a display adjustment,
 not a physical illumination measurement.
 
 ## Photographic observations
+
+Before increasing a texture budget, trace all resizes between the original
+observation and the delivered atlas. Prefer sampling the pinned original grid
+at the final atlas/pole footprint where the existing registration permits it.
+Keep necessary mosaics, spectral calculations and presentation transforms.
+Resize unpacked maps before copying latitude bands and gutters. Compare a
+matched-encoding control so compression changes are not attributed to sampling;
+report compressed bytes and decoded pixels separately. See the shared
+[photographic preparation guide](../../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation).
 
 First separate source resolution, acquisition illumination, exposure steps and
 projection errors. Enlarging a coarse insert will not restore detail; brightness

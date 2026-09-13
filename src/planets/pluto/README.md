@@ -12,6 +12,15 @@
 
 ## Evidence
 
+Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
+
+| View | Both prepared levels, before → current |
+| --- | --- |
+| monochrome | 147.4 → 172.8 kB |
+| surface | 207.2 → 209.6 kB |
+
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/pluto/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+
 Lane change (this PR): the static-surface lane was retired for Pluto; the same pinned inputs and observation interpretation (coverage grid, signed DEM decoding, relief) now feed the shared raster lane used by Mercury, Venus and Mars. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request.
 
 The retained notes point to [unit checks](../../../tests/objects/unit/pluto) and [browser checks](../../../tests/objects/browser/pluto), and mentions separate capture/Saturn reports. They do not identify a dated report here; test definitions are not passing-run evidence.
@@ -62,8 +71,8 @@ The provider pages and labels are checked in alongside the data.
 **Observation limits and authored choices**
 
 The full 2:1 maps use north-to-south latitude rows and a common 0–360° longitude
-domain. The shared raster lane paints each lens at 2,048 × 1,024 (DPR 1) and
-4,096 × 2,048 (DPR 2), packs 16 latitude bands with a 16-texel gutter and
+domain. The shared raster lane paints each lens at 4,096 × 2,048, two texels
+per layout pixel, packs 16 latitude bands with a 16-texel gutter and
 prepares 256-pixel orthographic polar tiles; the retained faces are the shared
 projective sphere leaves used by Mercury, Venus and Mars. The retired lane's
 inverse-homography RGBA atlas and its lossless seam treatment are gone with it.

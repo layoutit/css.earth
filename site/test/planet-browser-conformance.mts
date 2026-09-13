@@ -1125,37 +1125,23 @@ async function provePreparedDensity(browser: Browser, planet: ObjectEntry, profi
       document.addEventListener("pointerdown", () => pointer.style.background = "#ffb14e", true);
       document.addEventListener("pointerup", () => pointer.style.background = "transparent", true);
     });
-    assert.equal(await profile.selectedDensity(page), 2,
-      `${planet.id}: DPR ${density} must select the canonical high-density bank`);
     // The application now owns the shared universe. Its pinned sky replaces
     // private object cubemaps and suns. Their retained bank may still warm its
     // declared startup resources, but no private sky may render beside it.
     const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(`src/planets/${planet.id}/prepared/runtime.json`), 'utf8')));
     const privateCelestialAssets = new Set([
-      ...definition.sky.faces.flatMap(face => [face.url, face.url2x, face.highContrastUrl, face.highContrastUrl2x]),
-      definition.sun?.asset.url, definition.sun?.asset.url2x,
+      ...definition.sky.faces.flatMap(face => [face.url, face.highContrastUrl]),
+      definition.sun?.asset.url,
     ].filter((url):url is string=>typeof url==='string'));
     const sharedSky = await proveSharedPreparedSky(page, requestedPaths, responses);
     assert.equal(await page.locator('.planet-cubic-sky-cube s, .planet-cubic-sky-stars s').count(), 0,
       `${planet.id}: the application owns all rendered sky content`);
-    const canonicalAssets = required(profile.audit).canonicalPreparedAssets ?? [];
+    const canonicalAssets = required(profile.audit).canonicalPreparedAssets;
     assert.ok(Array.isArray(canonicalAssets));
     for (const url of canonicalAssets) {
       if (privateCelestialAssets.has(url)) continue;
       assert.ok(requestedPaths.has(url),
         `${planet.id}: DPR ${density} must request canonical ${url}`);
-    }
-    for (const pair of required(profile.audit).preparedAssetPairs) {
-      if (privateCelestialAssets.has(pair.one) && privateCelestialAssets.has(pair.two)) {
-        assert.equal(requestedPaths.has(pair.one), false, `${planet.id}: private bank must not request low-density ${pair.one}`);
-        continue;
-      }
-      const selectedAsset = pair.two;
-      const rejectedAsset = pair.one;
-      assert.ok(requestedPaths.has(selectedAsset),
-        `${planet.id}: DPR ${density} must request canonical ${selectedAsset}`);
-      assert.equal(requestedPaths.has(rejectedAsset), false,
-        `${planet.id}: DPR ${density} must not request low-density ${rejectedAsset}`);
     }
     const skyboxPointerBoundary = await proveSkyboxPointerBoundary(
       page,
@@ -1184,7 +1170,6 @@ async function provePreparedDensity(browser: Browser, planet: ObjectEntry, profi
     return {
       id: planet.id,
       viewport: `dpr-${density}`,
-      selectedDensity: 2,
       requestedCanonicalAssets: [...canonicalAssets].filter(url => !privateCelestialAssets.has(url)).sort(),
       replacedPrivateCelestialAssets: [...privateCelestialAssets].sort(),
       warmedPrivateCelestialAssets: [...privateCelestialAssets].filter(url => requestedPaths.has(url)).sort(),

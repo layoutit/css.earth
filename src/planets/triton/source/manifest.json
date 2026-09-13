@@ -343,8 +343,8 @@
     {
       "id": "triton-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1562,
-      "expectedSha256": "0a919c68ada2d7db83023b62c48cfc0cd1dcb44961ff4d3e32bcbe1120572cd5",
+      "expectedBytes": 1638,
+      "expectedSha256": "85b0b1aa6b199010892e6ec43a2d0d76ef78c2a85b1deedbef0804f489bbf866",
       "origin": "Repository-authored Triton solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -364,8 +364,8 @@
     {
       "id": "triton-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 4903,
-      "expectedSha256": "73707020cfec67b133340c5a8eca5b32673a8fbedc447daa3969fa73870cbba0",
+      "expectedBytes": 5075,
+      "expectedSha256": "b01cc2895974945754e13a929f3302e14f0ea6bb5ae787de2bf5c0bf08ae81ce",
       "origin": "Repository-authored Triton raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -383,8 +383,8 @@
     {
       "id": "triton-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1424,
-      "expectedSha256": "ec3757330120b93f6bb4fa52e64906e83131ec824b54d2d83e318fca894dedb5",
+      "expectedBytes": 1418,
+      "expectedSha256": "12e6ea96743bb0744c189bc41d9c15283344795904568dbba92984ec43453822",
       "origin": "Repository-authored Triton geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -477,8 +477,8 @@
     {
       "id": "triton-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7868,
-      "expectedSha256": "deb1c865a83a2ff2f03f510f1c9e0efde587e43931a81f5dee4f72f19e2ec92a",
+      "expectedBytes": 7856,
+      "expectedSha256": "2dea5b396bb43746389ae3169fb9d7ca4ae87b9e44704441719648bdb1dae773",
       "origin": "Repository-authored Triton object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

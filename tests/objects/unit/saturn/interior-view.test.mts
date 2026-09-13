@@ -25,8 +25,8 @@ test("publishes a prepared retained Saturn interior view", () => {
   assert.equal(PREPARED_SATURN_VIEWS.lighting.runtimeLighting, false);
   assert.equal(PREPARED_SATURN_VIEWS.assets.section.width, 2048);
   assert.equal(PREPARED_SATURN_VIEWS.assets.section.height, 2048);
-  assert.equal(PREPARED_SATURN_VIEWS.assets.section.asset2x.width, 4096);
-  assert.equal(PREPARED_SATURN_VIEWS.assets.section.asset2x.height, 4096);
+  assert.equal(PREPARED_SATURN_VIEWS.assets.section.asset.width, 4096);
+  assert.equal(PREPARED_SATURN_VIEWS.assets.section.asset.height, 4096);
   assert.deepEqual(
     Object.keys(PREPARED_SATURN_VIEWS.interiorLenses),
     ["normal"],
@@ -35,10 +35,10 @@ test("publishes a prepared retained Saturn interior view", () => {
     assert.equal(lens.runtimeFiltering, false);
     assert.equal(lens.runtimeRasterization, false);
     for (const asset of Object.values(lens.assets)) {
-      assert.equal(asset.asset2x.width, asset.asset.width * 2);
-      assert.equal(asset.asset2x.height, asset.asset.height * 2);
+      assert.equal(asset.asset.width, asset.width * 2);
+      assert.equal(asset.asset.height, asset.height * 2);
+      assert.equal(asset.asset.url, asset.url);
       assert.match(asset.asset.sha256, /^[a-f0-9]{64}$/u);
-      assert.match(asset.asset2x.sha256, /^[a-f0-9]{64}$/u);
     }
   }
   assert.deepEqual(
@@ -48,10 +48,10 @@ test("publishes a prepared retained Saturn interior view", () => {
   for (const asset of Object.values(
     PREPARED_SATURN_VIEWS.assets.outerPoles,
   )) {
-    assert.equal(asset.asset2x.width, asset.asset.width * 2);
-    assert.equal(asset.asset2x.height, asset.asset.height * 2);
+    assert.equal(asset.asset.width, asset.width * 2);
+    assert.equal(asset.asset.height, asset.height * 2);
+    assert.equal(asset.asset.url, asset.url);
     assert.match(asset.asset.sha256, /^[a-f0-9]{64}$/u);
-    assert.match(asset.asset2x.sha256, /^[a-f0-9]{64}$/u);
   }
   assert.equal(PREPARED_SATURN_SCENE.interior.schema,
     "csssaturn-prepared-cutaway@1");
@@ -116,10 +116,9 @@ test("ships lossless DPR assets and keeps view switching declarative", async () 
     "corePoles",
   ] as const) {
     const asset = PREPARED_SATURN_VIEWS.assets[key];
-    assert.equal(asset.asset2x.width, asset.asset.width * 2);
-    assert.equal(asset.asset2x.height, asset.asset.height * 2);
+    assert.equal(asset.asset.width, asset.width * 2);
+    assert.equal(asset.asset.height, asset.height * 2);
     assert.match(asset.asset.sha256, /^[a-f0-9]{64}$/u);
-    assert.match(asset.asset2x.sha256, /^[a-f0-9]{64}$/u);
   }
   assert.match(preparer, /webp\(\{ lossless: true \}\)/u);
   const variants = PREPARED_PRESENTATION.variants;

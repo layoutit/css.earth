@@ -26,8 +26,7 @@ test('the NASA illustration stays evenly lit with an identified model dataset an
   assert.deepEqual(runtime.controls.lenses.controls.map((lens:unknown) => requireRecord(lens).label), ['Illustrative model']);
   const lens = (await json('prepared/lenses.json')).controls[0];
   assert.ok(lens.surfaceUrl && lens.polesUrl);
-  assert.equal(lens.surfaceUrl, lens.surface2xUrl);
-  assert.equal(lens.polesUrl, lens.poles2xUrl);
+  assert.equal(Object.keys(lens).some(key => /2x/u.test(key)), false);
   const { images } = await json('prepared/minimaps.json');
   assert.equal(images.length, 1);
   assert.equal(images[0].id, lens.id);

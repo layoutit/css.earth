@@ -324,7 +324,7 @@ function createSpherePolygons(config: SphereConfiguration, surfaceOverlap: numbe
           spherePoint(config, latitude1 + latitudeOverlap, longitude0 - longitudeOverlap),
         ],
         uvs: [[u0, v0], [u1, v0], [u1, v1], [u0, v1]],
-        texture: config.texture.url ?? config.texture.one,
+        texture: config.texture.url,
         ...(config.texture.raster ? {
           surfaceRaster: config.texture.raster,
           surfaceSourceRect: {
@@ -339,7 +339,7 @@ function createSpherePolygons(config: SphereConfiguration, surfaceOverlap: numbe
           },
         } : {}),
         textureImageSource: {
-          url: config.texture.url ?? config.texture.one,
+          url: config.texture.url,
           width: config.texture.width,
           height: config.texture.height,
           sourceRect: {
@@ -387,9 +387,9 @@ function createPolarCapPolygon(config: SphereConfiguration, pole: "north" | "sou
     uvs: north
       ? [[0, 0], [1, 0], [1, 1], [0, 1]]
       : [[0, 1], [1, 1], [1, 0], [0, 0]],
-    texture: config.poles.url ?? config.poles.one,
+    texture: config.poles.url,
     textureImageSource: {
-      url: config.poles.url ?? config.poles.one,
+      url: config.poles.url,
       width: config.poles.width,
       height: config.poles.height,
       sourceRect: {
@@ -451,8 +451,7 @@ function prepareInteriorPlan() {
       ...(entry.polarCap ? {
         className: `${profile.namespace}-interior-outer-polar ${profile.namespace}-interior-outer-polar-${entry.polarCap}`,
         asset: Object.freeze({
-          one: `${profile.publicBase}${profile.namespace}-interior-outer-poles.webp`,
-          two: `${profile.publicBase}${profile.namespace}-interior-outer-poles@2x.webp`,
+          url: `${profile.publicBase}${profile.namespace}-interior-outer-poles@2x.webp`,
         }),
       } : {}),
     }),
@@ -473,15 +472,13 @@ function prepareInteriorPlan() {
       equatorialRadius: EQUATORIAL_RADIUS * radiusScale,
       polarRadius: POLAR_RADIUS * radiusScale,
       texture: Object.freeze({
-        one: `${profile.publicBase}${profile.namespace}-interior-${id}.webp`,
-        two: `${profile.publicBase}${profile.namespace}-interior-${id}@2x.webp`,
+        url: `${profile.publicBase}${profile.namespace}-interior-${id}@2x.webp`,
         width: 1024,
         height: 512,
         presentationCellSize: 32,
       }),
       poles: Object.freeze({
-        one: `${profile.publicBase}${profile.namespace}-interior-${id}-poles.webp`,
-        two: `${profile.publicBase}${profile.namespace}-interior-${id}-poles@2x.webp`,
+        url: `${profile.publicBase}${profile.namespace}-interior-${id}-poles@2x.webp`,
         width: 512,
         height: 128,
       }),
@@ -528,21 +525,17 @@ function prepareInteriorPlan() {
     outerBodyBands,
     outerAssets: Object.freeze({
       surface: Object.freeze({
-        one: `${profile.publicBase}${profile.namespace}-interior-outer.webp`,
-        two: `${profile.publicBase}${profile.namespace}-interior-outer@2x.webp`,
-        oneUrls: surfacePageUrls(`${profile.namespace}-interior-outer`, surfaceRasterPlan.pages.length),
-        twoUrls: surfacePageUrls(`${profile.namespace}-interior-outer`, surfaceRasterPlan.pages.length, "@2x"),
+        url: `${profile.publicBase}${profile.namespace}-interior-outer@2x.webp`,
+        urls: surfacePageUrls(`${profile.namespace}-interior-outer`, surfaceRasterPlan.pages.length, "@2x"),
       }),
       poles: Object.freeze({
-        one: `${profile.publicBase}${profile.namespace}-interior-outer-poles.webp`,
-        two: `${profile.publicBase}${profile.namespace}-interior-outer-poles@2x.webp`,
+        url: `${profile.publicBase}${profile.namespace}-interior-outer-poles@2x.webp`,
       }),
       litSurface: Object.freeze({
         urls: surfacePageUrls(`${profile.namespace}-interior-outer-lit`, surfaceRasterPlan.pages.length, "@2x"),
       }),
       litPoles: Object.freeze({
-        one: `${profile.publicBase}${profile.namespace}-interior-outer-lit-poles.webp`,
-        two: `${profile.publicBase}${profile.namespace}-interior-outer-lit-poles@2x.webp`,
+        url: `${profile.publicBase}${profile.namespace}-interior-outer-lit-poles@2x.webp`,
       }),
     }),
     shells,
@@ -566,8 +559,7 @@ function groupPreparedEntries<T>(entries: readonly {latitudeIndex: number; leaf:
 
 function prepareInteriorSectionLeaves() {
   const asset = Object.freeze({
-    one: `${profile.publicBase}${profile.namespace}-interior-section.webp`,
-    two: `${profile.publicBase}${profile.namespace}-interior-section@2x.webp`,
+    url: `${profile.publicBase}${profile.namespace}-interior-section@2x.webp`,
     width: 1024,
     height: 512,
   });
@@ -589,9 +581,9 @@ function prepareInteriorSectionLeaves() {
         [0, 0, POLAR_RADIUS],
       ],
       uvs: [[0, 1], [1, 1], [1, 0], [0, 0]],
-      texture: asset.one,
+      texture: asset.url,
       textureImageSource: {
-        url: asset.one,
+        url: asset.url,
         width: asset.width,
         height: asset.height,
         sourceRect: {
@@ -770,7 +762,7 @@ function prepareMaterialBank({
         columnIndex,
         tileRowIndex,
         scenePitchDegrees,
-        assets: materialAssetPair(
+        url: materialUrl(
           id,
           `row-${String(rowIndex).padStart(2, "0")}`,
         ),
@@ -793,16 +785,14 @@ function prepareMaterialBank({
   const preparedRows = Object.freeze(Array.from({ length: shardCount },
     (_, rowIndex) => Object.freeze({
       rowIndex,
-      assets: materialAssetPair(
+      url: materialUrl(
         id,
         `row-${String(rowIndex).padStart(2, "0")}`,
       ),
-      width: Object.freeze({ one: shardWidth, two: shardWidth * 2 }),
-      height: Object.freeze({ one: shardHeight, two: shardHeight * 2 }),
-      decodedRgbaBytes: Object.freeze({
-        one: shardWidth * shardHeight * 4,
-        two: shardWidth * shardHeight * 16,
-      }),
+      // Shards carry two texels per layout pixel.
+      width: shardWidth * 2,
+      height: shardHeight * 2,
+      decodedRgbaBytes: shardWidth * shardHeight * 16,
       firstFrame: rowIndex * MATERIAL_FRAMES_PER_SHARD,
       frameCount: MATERIAL_FRAMES_PER_SHARD,
     })));
@@ -864,21 +854,21 @@ function prepareMaterialBank({
     shardHeight,
     defaultFrame,
     defaultRow,
-    defaultAssets: materialAssetPair(id, "default"),
+    defaultUrl: materialUrl(id, "default"),
     ...(supportsShadowless ? {
-      shadowlessAssets: materialAssetPair(id, "shadowless"),
+      shadowlessUrl: materialUrl(id, "shadowless"),
     } : {}),
     defaultScenePitchDegrees: CAMERA_SCENE_PITCH_DEGREES,
     defaultPresentation: Object.freeze({
       transform: defaultPlane.transform,
-      assets: materialAssetPair(id, "default"),
+      url: materialUrl(id, "default"),
       backgroundPosition: "0px 0px",
       backgroundSize:
         `${presentationTileSize}px ${presentationTileSize}px`,
     }),
     ...(supportsShadowless ? {
       shadowlessPresentation: Object.freeze({
-        assets: materialAssetPair(id, "shadowless"),
+        url: materialUrl(id, "shadowless"),
         backgroundPosition: "0px 0px",
         backgroundSize:
           `${presentationTileSize}px ${presentationTileSize}px`,
@@ -897,7 +887,7 @@ function prepareMaterialBank({
       tag: "s",
       className,
       style: defaultPlane.style +
-        `;background-image:url(${profile.publicBase}${profile.namespace}-${id}-default.webp)` +
+        `;background-image:url(${profile.publicBase}${profile.namespace}-${id}-default@2x.webp)` +
         `;background-size:${presentationTileSize}px ${presentationTileSize}px`,
     }),
     transport: Object.freeze({
@@ -910,28 +900,17 @@ function prepareMaterialBank({
       retainLastReadyPresentation: true,
       addressWritesOnlyOnInput: true,
       idleCallbacks: 0,
-      initialDecodedWorkingSetBytes: Object.freeze({
-        one: preparedRows[defaultRow].decodedRgbaBytes.one *
-          initialWarmRows.length,
-        two: preparedRows[defaultRow].decodedRgbaBytes.two *
-          initialWarmRows.length,
-      }),
-      maximumDecodedWorkingSetBytes: Object.freeze({
-        one: preparedRows[defaultRow].decodedRgbaBytes.one * 3,
-        two: preparedRows[defaultRow].decodedRgbaBytes.two * 3,
-      }),
+      initialDecodedWorkingSetBytes: preparedRows[defaultRow].decodedRgbaBytes *
+        initialWarmRows.length,
+      maximumDecodedWorkingSetBytes: preparedRows[defaultRow].decodedRgbaBytes * 3,
     }),
     runtimeLightingMath: false,
     runtimeRasterization: false,
   });
 }
 
-function materialAssetPair(id: string, suffix: string) {
-  const prefix = `${profile.publicBase}${profile.namespace}-${id}-${suffix}`;
-  return Object.freeze({
-    one: `${prefix}.webp`,
-    two: `${prefix}@2x.webp`,
-  });
+function materialUrl(id: string, suffix: string) {
+  return `${profile.publicBase}${profile.namespace}-${id}-${suffix}@2x.webp`;
 }
 
 function prepareScreenMaterialPlane({

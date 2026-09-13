@@ -27,7 +27,7 @@ type SceneConfig = Parameters<typeof prepareSolarSystemScene>[0];
 type PreparedScene = Awaited<ReturnType<typeof prepareSolarSystemScene>> & { body: { leaves: { style: string; polarCap: string | null }[] }; bodyLeaves: { style: string; polar?: unknown }[] };
 type PreparedSun = SceneConfig['sun'] & { distanceScaling: { meanHeliocentricDistanceAu: number }; asset: { generator: string }; provenance: { sourcePath: string } };
 type PhaseAtlas = NonNullable<Parameters<typeof prepareSolarSystemPresentation>[0]['phaseAtlas']>;
-type PreparedAssets = { lighting: { banks: Record<string, { billboard: Omit<PhaseAtlas, 'minimumLightViewZ' | 'maximumLightViewZ' | 'baseLightAzimuthDegrees'> }>;
+type PreparedAssets = { lighting: { bank: { billboard: Omit<PhaseAtlas, 'minimumLightViewZ' | 'maximumLightViewZ' | 'baseLightAzimuthDegrees'> };
   minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number; presentationFrameSize: number } };
 type PreparedStrip = Awaited<ReturnType<typeof prepareSolarSystemMarkerStrip>>['plan'];
 const prepared = async <T,>(id: string, file: string) => requireRecord(await readJsonSource(new URL(`../../src/planets/${id}/prepared/${file}`, import.meta.url))) as T;
@@ -42,7 +42,7 @@ const mercuryConfig: Parameters<typeof prepareSolarSystemScene>[0] = { bodyId: "
   defaultZoom: 1.1, geometryScale: 1, starfield: mercurySky, sun: mercurySun };
 const mercuryPrepared = await prepareSolarSystemScene(mercuryConfig);
 const catalogue = await prepareCatalogueStars({ fovDegrees: 60 });
-const phaseAtlas = { ...mercuryAssets.lighting.banks["2"].billboard,
+const phaseAtlas = { ...mercuryAssets.lighting.bank.billboard,
   minimumLightViewZ: mercuryAssets.lighting.minimumLightViewZ,
   maximumLightViewZ: mercuryAssets.lighting.maximumLightViewZ,
   baseLightAzimuthDegrees: mercuryAssets.lighting.baseLightAzimuthDegrees };

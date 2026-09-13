@@ -22,7 +22,7 @@ export interface PagedPresentationInput { config: PresentationConfiguration; pla
   catalog?: Awaited<ReturnType<typeof preparePlaces>>; city?: NonNullable<Awaited<ReturnType<typeof preparePinnedGlobalWmts>>['plan']>;
   noise?: Awaited<ReturnType<typeof prepareVectorOverlay>>; }
 const materialIds: readonly MaterialId[] = ['lighting', 'atmosphere'];
-import { canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
+import { preparedAssetAddress, preparedSunResources, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
 import { prepareCssomDeclarationReads } from "../../prepared-cssom.mts";
 import { createPreparedNodeTree } from "../../prepared-node-tree.mts";
@@ -35,9 +35,9 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   const bodyFrame=requireRecord(plan[config.sceneBodyKey], 'paged body frame');
   const systemTransform=requireString(bodyFrame.systemTransform, 'paged system transform');
   const meshTransform=requireString(bodyFrame.meshTransform, 'paged mesh transform');
-  const shadowlessAssets=plan.material.lighting.shadowlessAssets;
+  const shadowlessUrl=plan.material.lighting.shadowlessUrl;
   const shadowlessPresentation=plan.material.lighting.shadowlessPresentation;
-  if (!shadowlessAssets || !shadowlessPresentation) throw new TypeError('Paged lighting requires a prepared shadowless material.');
+  if (!shadowlessUrl || !shadowlessPresentation) throw new TypeError('Paged lighting requires a prepared shadowless material.');
   const defaultLens=lenses.controls.find(lens=>lens.id===lenses.defaultLens);
   if (!defaultLens) throw new TypeError('Paged presentation requires its declared default lens.');
   if (city && !noise) throw new TypeError('Paged city presentation requires its noise layer.');
@@ -50,7 +50,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   };
   const interiorUrls=[...new Set([
     ...plan.interior.shells.flatMap(shell=>shell.leaves.map(leaf=>leaf.asset)),
-    ...plan.interior.sectionLeaves.map(leaf=>leaf.asset)].map(pair=>canonicalPreparedAsset(pair)))];
+    ...plan.interior.sectionLeaves.map(leaf=>leaf.asset)].map(asset=>preparedAssetAddress(asset.url)))];
   const interiorBanks=new Map(lenses.controls.filter(lens=>lens.view==='interior').map(lens=>{
     const overrides=lens.interiorTextures??{};
     for(const [original,url] of Object.entries(overrides)) {
@@ -62,14 +62,14 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   const celestial=preparedSunResources(sun,"mounted");
   const entries=[...celestial,...(textureLevels?.entries??banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"})))),
     ...lenses.controls.flatMap(lens=>lens.view==="interior"?
-      [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(plan.interior.outerAssets.poles),pool:"mounted"},
-        {key:`poles:${lens.id}-lit`,url:canonicalPreparedAsset(plan.interior.outerAssets.litPoles),pool:"mounted"}]:
-      [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(requireString(lens.polesUrl, `Pole texture for ${lens.id}`)),pool:"mounted"}]),
+      [{key:`poles:${lens.id}`,url:preparedAssetAddress(plan.interior.outerAssets.poles.url),pool:"mounted"},
+        {key:`poles:${lens.id}-lit`,url:preparedAssetAddress(plan.interior.outerAssets.litPoles.url),pool:"mounted"}]:
+      [{key:`poles:${lens.id}`,url:preparedAssetAddress(requireString(lens.polesUrl, `Pole texture for ${lens.id}`)),pool:"mounted"}]),
     ...[...interiorBanks.values()].flat(),
-    {key:"shadowless:lighting",url:canonicalPreparedAsset(shadowlessAssets),pool:"mounted"},
+    {key:"shadowless:lighting",url:preparedAssetAddress(shadowlessUrl),pool:"mounted"},
     ...materialIds.flatMap(id=>[
-      {key:`default:${id}`,url:canonicalPreparedAsset(plan.material[id].defaultAssets),pool:"default-materials"},
-      ...plan.material[id].preparedRows.map(row=>({key:`${id}:${row.rowIndex}`,url:canonicalPreparedAsset(row.assets),pool:id}))])];
+      {key:`default:${id}`,url:preparedAssetAddress(plan.material[id].defaultUrl),pool:"default-materials"},
+      ...plan.material[id].preparedRows.map(row=>({key:`${id}:${row.rowIndex}`,url:preparedAssetAddress(row.url),pool:id}))])];
   const allLeaves=[...plan.body.bands.flatMap(band=>band.leaves),...plan.interior.outerBodyBands.flatMap(band=>band.leaves),
     ...plan.interior.shells.flatMap(shell=>shell.leaves),...plan.interior.sectionLeaves,
     plan.material.lighting.leaf,plan.material.atmosphere.leaf];
@@ -101,7 +101,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     if(!resource)throw new TypeError(`Missing initial prepared page resource: ${key}`);
     return resource.url;
   });
-  const body=bands(system,plan.body.bands,`${config.namespace}-body`,`${config.namespace}-body-polar`,`${config.namespace}-polar`,initialUrls,canonicalPreparedAsset(plan.body.assets.poles));
+  const body=bands(system,plan.body.bands,`${config.namespace}-body`,`${config.namespace}-body-polar`,`${config.namespace}-polar`,initialUrls,preparedAssetAddress(plan.body.assets.poles.url));
   const cutaway=b.mesh(`${config.namespace}-cutaway`);
   b.append(system,cutaway);
   // Inactive datasets own no browser image references. Selection publishes
@@ -110,19 +110,19 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   const interiorTextureNodes: {node: PreparedNode; url: string}[]=[];
   for(const shell of plan.interior.shells) {
     const mesh=b.mesh(`${config.namespace}-interior-shell ${shell.className}`,meshTransform);b.append(cutaway,mesh);
-    for(const leaf of shell.leaves) {const node=b.leaf(leaf),url=canonicalPreparedAsset(leaf.asset);node.style.backgroundImage="none";b.append(mesh,node);interiorTextureNodes.push({node,url});}
+    for(const leaf of shell.leaves) {const node=b.leaf(leaf),url=preparedAssetAddress(leaf.asset.url);node.style.backgroundImage="none";b.append(mesh,node);interiorTextureNodes.push({node,url});}
   }
   const sections=b.mesh(`${config.namespace}-interior-sections`,meshTransform);b.append(cutaway,sections);
   for(const leaf of plan.interior.sectionLeaves) {
     const node=b.leaf(leaf);node.style.backgroundImage="none";
     if(leaf.backfaceVisible)node.style.backfaceVisibility="visible";b.append(sections,node);
-    interiorTextureNodes.push({node,url:canonicalPreparedAsset(leaf.asset)});
+    interiorTextureNodes.push({node,url:preparedAssetAddress(leaf.asset.url)});
   }
   const materialCounter=b.mesh(`${config.namespace}-material-counter`),materialSystem=b.mesh(`${config.namespace}-system`,systemTransform),materialMesh=b.mesh(`${config.namespace}-material`,plan.material.transform);
   b.append(scene,materialCounter);b.append(materialCounter,materialSystem);b.append(materialSystem,materialMesh);
   const materialNodes=Object.fromEntries(materialIds.map(id=>{
     const material=plan.material[id],node=b.leaf(material.leaf),frame=material.defaultPresentation;
-    node.style.transform=frame.transform;node.style.backgroundImage=`url("${canonicalPreparedAsset(frame.assets)}")`;
+    node.style.transform=frame.transform;node.style.backgroundImage=`url("${preparedAssetAddress(frame.url)}")`;
     node.style.backgroundPosition=frame.backgroundPosition;node.style.backgroundSize=frame.backgroundSize;
     node.attributes["data-material-frame"]="default";b.append(materialMesh,node);return[id,node];
   }));

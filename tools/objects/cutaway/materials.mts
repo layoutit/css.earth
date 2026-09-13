@@ -64,8 +64,7 @@ const assets = Object.freeze({
       lens,
       await writePreparedOuterPoleRaster({
         sourceUrl,
-        url: `${config.publicPrefix}${config.namespace}-interior-outer-poles-${lens}.webp`,
-        url2x: `${config.publicPrefix}${config.namespace}-interior-outer-poles-${lens}@2x.webp`,
+        url: `${config.publicPrefix}${config.namespace}-interior-outer-poles-${lens}@2x.webp`,
         cutaway: manifest.cutaway,
       }),
     ] as const),
@@ -233,99 +232,87 @@ async function prepareInteriorLensAssets(plan:InteriorLensPlan) {
 function interiorAssetUrls(kind:string, lensId:string) {
   const suffix = lensId === "normal" ? "" : `-${lensId}`;
   return Object.freeze({
-    url: `${config.publicPrefix}${config.namespace}-interior-${kind}${suffix}.webp`,
-    url2x: `${config.publicPrefix}${config.namespace}-interior-${kind}${suffix}@2x.webp`,
+    url: `${config.publicPrefix}${config.namespace}-interior-${kind}${suffix}@2x.webp`,
   });
 }
 
-async function writePreparedRaster({ url, url2x, width, height, render }: {url:string;url2x:string;width:number;height:number;render:(width:number,height:number)=>Buffer}) {
-  const outputs = [];
-  for (const [assetUrl, scale] of [[url, 1], [url2x, 2]] as const) {
-    const rasterWidth = width * scale;
-    const rasterHeight = height * scale;
-    const raw = render(rasterWidth, rasterHeight);
-    await sharp(raw, {
-      raw: { width: rasterWidth, height: rasterHeight, channels: 4 },
-    }).webp({ lossless: true, effort: 6 }).toFile(publicPath(assetUrl));
-    const bytes = await readFile(publicPath(assetUrl));
-    outputs.push(Object.freeze({
-      url: assetUrl,
+/** Rasters are declared in layout pixels; the prepared image carries two texels per layout pixel. */
+async function writePreparedRaster({ url, width, height, render }: {url:string;width:number;height:number;render:(width:number,height:number)=>Buffer}) {
+  const rasterWidth = width * 2;
+  const rasterHeight = height * 2;
+  const raw = render(rasterWidth, rasterHeight);
+  await sharp(raw, {
+    raw: { width: rasterWidth, height: rasterHeight, channels: 4 },
+  }).webp({ lossless: true, effort: 6 }).toFile(publicPath(url));
+  const bytes = await readFile(publicPath(url));
+  return Object.freeze({
+    url,
+    width,
+    height,
+    asset: Object.freeze({
+      url,
       width: rasterWidth,
       height: rasterHeight,
       bytes: bytes.byteLength,
       sha256: sha256(bytes),
-    }));
-  }
-  return Object.freeze({
-    url,
-    url2x,
-    width,
-    height,
-    asset: outputs[0],
-    asset2x: outputs[1],
+    }),
   });
 }
 
 async function writePreparedOuterPoleRaster({
   sourceUrl,
   url,
-  url2x,
   cutaway,
-}: {sourceUrl:string;url:string;url2x:string;cutaway:InteriorSource['cutaway']}) {
+}: {sourceUrl:string;url:string;cutaway:InteriorSource['cutaway']}) {
   const sourcePath = publicPath(sourceUrl);
   const metadata = await sharp(sourcePath).metadata();
   if (metadata.width !== config.outerPoleAtlas.width || metadata.height !== config.outerPoleAtlas.height) {
     throw new Error(`Cutaway outer pole source changed: ${sourceUrl}.`);
   }
-  const outputs = [];
-  for (const [assetUrl, scale] of [[url, 1], [url2x, 2]] as const) {
-    const tileSize = config.outerPoleAtlas.outputTileSize * scale;
-    const width = tileSize * 2;
-    const height = tileSize;
-    const { data, info } = await sharp(sourcePath)
-      .extract(config.outerPoleAtlas.extract)
-      .resize(width, height, { kernel: sharp.kernel.lanczos3 })
-      .ensureAlpha()
-      .raw()
-      .toBuffer({ resolveWithObject: true });
-    if (info.channels !== 4) {
-      throw new Error(`Cutaway outer pole source lost alpha: ${sourceUrl}.`);
-    }
-    for (let tile = 0; tile < 2; tile += 1) {
-      for (let row = 0; row < tileSize; row += 1) {
-        const y = (row + 0.5) / tileSize * 2 - 1;
-        for (let column = 0; column < tileSize; column += 1) {
-          const x = (column + 0.5) / tileSize * 2 - 1;
-          const longitude = Math.atan2(y, x) * 180 / Math.PI;
-          if (angularDistance(
-            longitude,
-            cutaway.centerLongitudeDegrees,
-          ) <= cutaway.widthDegrees / 2) {
-            data[(row * width + tile * tileSize + column) * 4 + 3] = 0;
-          }
+  // Tiles are declared in layout pixels; the prepared atlas carries two texels per layout pixel.
+  const tileSize = config.outerPoleAtlas.outputTileSize * 2;
+  const width = tileSize * 2;
+  const height = tileSize;
+  const { data, info } = await sharp(sourcePath)
+    .extract(config.outerPoleAtlas.extract)
+    .resize(width, height, { kernel: sharp.kernel.lanczos3 })
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  if (info.channels !== 4) {
+    throw new Error(`Cutaway outer pole source lost alpha: ${sourceUrl}.`);
+  }
+  for (let tile = 0; tile < 2; tile += 1) {
+    for (let row = 0; row < tileSize; row += 1) {
+      const y = (row + 0.5) / tileSize * 2 - 1;
+      for (let column = 0; column < tileSize; column += 1) {
+        const x = (column + 0.5) / tileSize * 2 - 1;
+        const longitude = Math.atan2(y, x) * 180 / Math.PI;
+        if (angularDistance(
+          longitude,
+          cutaway.centerLongitudeDegrees,
+        ) <= cutaway.widthDegrees / 2) {
+          data[(row * width + tile * tileSize + column) * 4 + 3] = 0;
         }
       }
     }
-    await sharp(data, {
-      raw: { width, height, channels: 4 },
-    }).webp({ lossless: true }).toFile(publicPath(assetUrl));
-    const bytes = await readFile(publicPath(assetUrl));
-    outputs.push(Object.freeze({
-      url: assetUrl,
+  }
+  await sharp(data, {
+    raw: { width, height, channels: 4 },
+  }).webp({ lossless: true }).toFile(publicPath(url));
+  const bytes = await readFile(publicPath(url));
+  return Object.freeze({
+    sourceUrl,
+    url,
+    width: width / 2,
+    height: height / 2,
+    asset: Object.freeze({
+      url,
       width,
       height,
       bytes: bytes.byteLength,
       sha256: sha256(bytes),
-    }));
-  }
-  return Object.freeze({
-    sourceUrl,
-    url,
-    url2x,
-    width: outputs[0].width,
-    height: outputs[0].height,
-    asset: outputs[0],
-    asset2x: outputs[1],
+    }),
   });
 }
 

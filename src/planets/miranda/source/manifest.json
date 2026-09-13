@@ -1549,8 +1549,8 @@
     {
       "id": "miranda-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1569,
-      "expectedSha256": "a628181beb99c9a1ee4ac0a0fe5a526be195580fd91a4744f4482932b4c50414",
+      "expectedBytes": 1647,
+      "expectedSha256": "04e06de6bf0f3bc8c05fa0cb4573ec1e09fb0b63b417ec1f063006cef38f8807",
       "origin": "Repository-authored Miranda solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1570,8 +1570,8 @@
     {
       "id": "miranda-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 8945,
-      "expectedSha256": "d631fed0035a1997a06796d98d6187835a6424f66dbdefc6313fee56034261e1",
+      "expectedBytes": 9122,
+      "expectedSha256": "d36b58fb00854c3228dbb9e56a26b17d9d366e42d38357ddb1a6eeb4fe7e8c9a",
       "origin": "Repository-authored Miranda raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1589,8 +1589,8 @@
     {
       "id": "miranda-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1427,
-      "expectedSha256": "b8ef8aeca64f7fcf5f2ef6e725e8730c2efb009ead23422282c82303c1ccbbb5",
+      "expectedBytes": 1421,
+      "expectedSha256": "6918aff045563afa496224f1ba904381a582e90ae1bb5689eb938893b943cb61",
       "origin": "Repository-authored Miranda geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1683,8 +1683,8 @@
     {
       "id": "miranda-object-content",
       "path": "content/object.json",
-      "expectedBytes": 15350,
-      "expectedSha256": "4ed71c0ff91ed9c771aa3c444c5ee1a0a7e421fdfa3e34cb702c7d25885f3e99",
+      "expectedBytes": 15332,
+      "expectedSha256": "3e7037e99ecaf6f185da6abb191cef8c435048e3229bf49331eba12f2908164c",
       "origin": "Repository-authored Miranda object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

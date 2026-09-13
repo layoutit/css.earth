@@ -26,8 +26,7 @@ export interface VisibleView {
 }
 
 export interface BrowserProfileAudit {
-  readonly preparedAssetPairs: readonly { readonly one: string; readonly two: string }[];
-  readonly canonicalPreparedAssets?: readonly string[];
+  readonly canonicalPreparedAssets: readonly string[];
   readonly retained: {
     readonly lensIds?: readonly string[];
     readonly speedClicks?: number;
@@ -66,7 +65,6 @@ export interface ObjectBrowserProfile {
   stable(page: BrowserPage): Promise<boolean>;
   runtimePresent(page: BrowserPage): Promise<boolean>;
   retainedImages(page: BrowserPage): Promise<number>;
-  selectedDensity(page: BrowserPage): Promise<number>;
   selectLens(page: BrowserPage, lensId: string): Promise<boolean>;
   lens(page: BrowserPage): Promise<{ readonly id: string | null; readonly [name: string]: unknown }>;
   visibleLens(page: BrowserPage): Promise<string | null>;

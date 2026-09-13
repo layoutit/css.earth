@@ -7,6 +7,7 @@
   "latitudeBands": 16,
   "polarTile": 256,
   "resample": "source-packed",
+  "unpackedResizeBeforePack": true,
   "polarProjection": "angular-nearest",
   "polesCombined": true,
   "polesOutput": "mercury-poles@2x.webp",

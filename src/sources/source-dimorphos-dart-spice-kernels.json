@@ -1,0 +1,66 @@
+{
+  "id": "source-dimorphos-dart-spice-kernels",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "DART SPICE kernel collection",
+  "version": "4.0",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:dart.spice:spice_kernels::4.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds.nasa.gov/api/search/1/products/urn%3Anasa%3Apds%3Adart.spice",
+      "label": "PDS registry record of the DART SPICE bundle"
+    },
+    {
+      "role": "archive",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/",
+      "label": "NAIF holdings of the kernel collection"
+    },
+    {
+      "role": "original",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/collection_spice_kernels_v004.xml",
+      "label": "Collection label v004"
+    }
+  ],
+  "creators": [
+    "Hari Nair",
+    "Marc Costa Sitja",
+    "Amanda M. Bailey"
+  ],
+  "publisher": "NASA Planetary Data System, Navigation and Ancillary Information Facility",
+  "publicationDate": "2025",
+  "evidence": [
+    {
+      "path": "src/planets/dimorphos/source/manifest.json",
+      "revision": "95b3cff2858ae64a4007591e735660b6ce8f5f46",
+      "sha256": "305100a924d3aa9da82496a5b4e222d68477718fa04731be14c909c01306d175",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Nair, H., Costa Sitja, M. and Bailey, A. M. (2025), DART SPICE Kernel Archive Bundle, NASA Planetary Data System, urn:nasa:pds:dart.spice::4.0.",
+      "scope": "Every kernel in the pinned set: leap seconds, planetary and Didymos-system constants, DART and Didymos frames, the DRACO instrument kernel, the spacecraft clock, DE430, the Didymos-system and DART ephemerides, structures, and the terminal-approach pointing.",
+      "evidence": "Citation_Information of the bundle label bundle_dart_spice_v004.xml."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA public scientific data; retain the bundle citation and source notices.",
+      "scope": "Derived camera geometry and its evidence.",
+      "evidence": "PDS NAIF node data policy."
+    },
+    {
+      "kind": "limitation",
+      "text": "Kernel versions differ from those the DRACO backplane cubes cite (spc_v03 pointing, s527 system ephemeris, didymos_system_12 constants), which are not in the archived collection; the pinned v04/s542/15 set moves the DRACO frame by under half a pixel relative to the archived intercepts.",
+      "scope": "Cross-validation of the kernel-derived DRACO camera against the archived backplanes.",
+      "evidence": "geom:SPICE_Kernel_Identification of the cube label and the Dimorphos README residuals."
+    }
+  ]
+}

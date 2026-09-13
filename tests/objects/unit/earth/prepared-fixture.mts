@@ -70,10 +70,8 @@ function readSurfaceBankPlan(value: unknown): SurfaceBankPlan {
   return {
     body: { assets: { surface: { url: requireString(surface.url, 'Earth prepared scene surface URL'), urls: urls(surface.urls, 'Earth prepared scene surface URLs') } } },
     interior: { outerAssets: { surface: {
-      one: requireString(outerSurface.one, 'Earth prepared scene outer surface one'),
-      two: requireString(outerSurface.two, 'Earth prepared scene outer surface two'),
-      oneUrls: urls(outerSurface.oneUrls, 'Earth prepared scene outer surface one URLs'),
-      twoUrls: urls(outerSurface.twoUrls, 'Earth prepared scene outer surface two URLs'),
+      url: requireString(outerSurface.url, 'Earth prepared scene outer surface URL'),
+      urls: urls(outerSurface.urls, 'Earth prepared scene outer surface URLs'),
     }, litSurface: { urls: urls(litSurface.urls, 'Earth prepared scene lit outer surface URLs') } } },
   };
 }

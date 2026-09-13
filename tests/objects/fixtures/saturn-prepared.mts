@@ -3,7 +3,7 @@ import {requireRecord} from '../../../tools/source-values.mts';
 import {preparedLeaf,textureLayer} from './prepared-schemas.mts';
 const bands=array(shape({visualRotationSeconds:number,leaves:array(preparedLeaf)}));
 const asset=shape({url:text,width:number,height:number,bytes:number,sha256:text});
-const pair=shape({url:text,url2x:text,width:number,height:number,asset,asset2x:asset});
+const prepared=shape({url:text,width:number,height:number,asset});
 const frame=shape({assetUrl:text,frameIndex:optional(number),rowIndex:optional(number),backgroundPosition:text,backgroundSize:text});
 const shards=shape({model:text,defaultVariant:text,defaultPreparedFrame:number,defaultPreparedRow:number,initialWarmRows:array(number),
   maximumRetainedAtlasCount:number,variants:dictionary(shape({runtimeAtlas:shape({assetUrl:text}),defaultPresentation:frame,
@@ -20,7 +20,7 @@ export const parseSaturnScene=shape({schema:text,systemTransform:text,meshTransf
     coverageScale:number,textureSize:number,depthBias:number,presentationNodeDegrees:number,meshRotationDegrees:number,tileSize:number})}),
   preparedRingSource:shape({planeVisualOrbitSeconds:number,saturnGmKm3PerS2:number,shadowModel:shape({systemTiltDegrees:number,systemNodeDegrees:number})}),
   ringPlane:shape({style:text,projectiveTextureLayer:textureLayer}),ringShadowPlane:shape({style:text,projectiveTextureLayer:textureLayer}),
-  ringMotionPlates:array(shape({population:text,durationSeconds:number,textureUrl:text,texture2xUrl:text,leaf:shape({style:text,projectiveTextureLayer:textureLayer})})),
+  ringMotionPlates:array(shape({population:text,durationSeconds:number,textureUrl:text,leaf:shape({style:text,projectiveTextureLayer:textureLayer})})),
   ringMotionExpansionPlates:array(requireRecord),ringPointGroups:array(requireRecord),bodyBands:bands,
   interior:shape({schema:text,outerBodyBands:bands,shells:array(shape({className:text,leaves:array(preparedLeaf)})),sectionLeaves:array(preparedLeaf),
     atmosphere:shape({model:text,frameCount:number,minimumScenePitchDegrees:number,maximumScenePitchDegrees:number,leaf:preparedLeaf,runtimeShards:shards}),leafCount:number}),
@@ -29,17 +29,17 @@ export const parseSaturnViews=shape({schema:text,presentation:text,runtimeGeomet
   defaultView:optional(text),controls:optional(array(requireRecord)),
   lighting:shape({model:text,authority:text,objectLightDirection:array(number),sectionFaceLongitudesDegrees:array(number),sectionFaceCount:number,runtimeLighting:boolean}),
   cutaway:requireRecord,interiorLenses:dictionary(shape({id:text,model:text,qualification:text,sectionResponse:requireRecord,shellGain:dictionary(number),
-    assets:dictionary(pair),runtimeFiltering:boolean,runtimeRasterization:boolean})),
-  assets:shape({section:pair,metallic:pair,core:pair,metallicPoles:pair,corePoles:pair,outerPoles:dictionary(pair),thumbnail:asset}),provenance:requireRecord});
+    assets:dictionary(prepared),runtimeFiltering:boolean,runtimeRasterization:boolean})),
+  assets:shape({section:prepared,metallic:prepared,core:prepared,metallicPoles:prepared,corePoles:prepared,outerPoles:dictionary(prepared),thumbnail:asset}),provenance:requireRecord});
 const lensBase={id:text,materialLens:text,label:text,shortLabel:text,thumbnailUrl:text,qualification:text};
-const exteriorFields={...lensBase,surfaceUrl:text,surface2xUrl:optional(text),polesUrl:text,ringUrl:text,ring2xUrl:text,materialUrl:optional(text)};
-const colorFields={...exteriorFields,surface2xUrl:text,materialVariant:text,materialPreparationFile:text,filter:text,
+const exteriorFields={...lensBase,surfaceUrl:text,polesUrl:text,ringUrl:text,materialUrl:optional(text)};
+const colorFields={...exteriorFields,materialVariant:text,materialPreparationFile:text,filter:text,
   falseColorPalette:array(array(number)),materialGain:number,sourceModel:text,detailPreparation:text,detailCarrierUrl:text,
   maximumDetailScale:number,sourceFiles:array(text),sourceUrls:array(text)};
 function lens(value:unknown) {
  const record=requireRecord(value);
  if(record.view==='interior')return {...shape({...lensBase,interiorMaterialUrl:text})(value),view:'interior' as const,
-  falseColor:undefined,surface2xUrl:undefined,surfaceUrl:undefined,polesUrl:undefined,ringUrl:undefined,ring2xUrl:undefined,materialUrl:undefined};
+  falseColor:undefined,surfaceUrl:undefined,polesUrl:undefined,ringUrl:undefined,materialUrl:undefined};
  if(record.falseColor===true)return {...shape(colorFields)(value),falseColor:true as const,view:undefined,interiorMaterialUrl:undefined};
  return {...shape(exteriorFields)(value),falseColor:undefined,view:undefined,interiorMaterialUrl:undefined};
 }

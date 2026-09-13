@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "55509f3d7d6367da6baec0fc4a6f312444dd66adf3157adc0d0c940ef0f8d0e5"
+    "sha256": "50f3e771495081a11fed1e5c0c24739c603f65c92289c2b9cb0edd640e0287e0"
   },
   "id": "mercury",
   "properties": {
@@ -59,12 +59,12 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "4584d82888be0c3fb20d3c5d23973ff08b4d733e4823ec553c18207f73688b16"
+          "sha256": "2dcc03a3423504532b6fa10e6658d3c7ff8d5fb7c92f94c114d396b32dc63a96"
         },
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "1d6a3cc572ba22e7d45a7b6649ad6c961e3366dbdccda7d23082ade9427aff45"
+          "sha256": "ef877dc3dd0b5b0b6f6378d92df9d6888542ac58f2fc8fe9b8f34b4f23412f15"
         },
         {
           "id": "celestial",
@@ -74,17 +74,17 @@
         {
           "id": "presentation",
           "path": "source/preparation/presentation.json",
-          "sha256": "93f35492fb9aa508c31dc024f67045900139e73d72f186cdaa353e8cf441a42f"
+          "sha256": "da5bc1aa4ab75b761dd0b52beacc9b19d79f8e665a81bcd2a5709c89f4ba0a50"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "5a043a916f0cd7a8eebb048b363c045dafc123f86f0be98f55f8b78d0998ecb7"
+          "sha256": "4786a8cb8ed870bea24c6128736c5a42488b068365e20a9b30a01c729b45446f"
         },
         {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
-          "sha256": "80b7bc7ce4c8a612514fe9e1beba4d6d7e5f65bf1015b48971303eed07c7c48c"
+          "sha256": "c51699bf26519d8f03a19eb1f903dcb4130364a58b7118870f127c51f64dff57"
         },
         {
           "id": "charts",
@@ -169,7 +169,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4d3c592a0a6e0528d2e164a80a2732fd45110638fa45ffa5642f32bc1570953c"
+        "sha256": "c09099435742eda3c937fdfe999232d4c742a026ee26f8691f8cf5d19f5cd410"
       }
     },
     "catalog": {

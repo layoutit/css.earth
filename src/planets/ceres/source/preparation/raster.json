@@ -31,6 +31,10 @@
         "id": "normal",
         "validity": {
           "kind": "south-connected-black"
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     },
@@ -46,6 +50,10 @@
         "id": "enhanced",
         "validity": {
           "kind": "south-connected-black"
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       }
     },

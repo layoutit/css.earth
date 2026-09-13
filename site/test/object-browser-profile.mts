@@ -38,7 +38,6 @@ type BrowserObjectRuntime = {
     select(lensId: string): boolean;
     state(): Record<string, unknown>;
   };
-  readonly renderStats: { readonly selectedPreparedDensity: number };
   readonly assertStableDomIdentity: () => boolean;
   readonly dom: { readonly retainedInitialNodeCount: number };
   readonly stableNodes: { readonly length: number };
@@ -114,7 +113,6 @@ export function createObjectBrowserProfile({
     stable: (page) => page.evaluate((runtimeKey) => (window as unknown as Record<string, BrowserObjectRuntime>)[runtimeKey].assertStableDomIdentity(), key),
     runtimePresent: (page) => page.evaluate((runtimeKey) => typeof (window as unknown as Record<string, unknown>)[runtimeKey] !== "undefined", key),
     retainedImages: (page) => page.evaluate((runtimeKey) => (window as unknown as Record<string, BrowserObjectRuntime>)[runtimeKey].runtime.resources().images.entries.filter((entry) => entry.ready).length, key),
-    selectedDensity: (page) => page.evaluate((runtimeKey) => (window as unknown as Record<string, BrowserObjectRuntime>)[runtimeKey].renderStats.selectedPreparedDensity, key),
     selectLens: (page, lensId) => page.evaluate(({ runtimeKey, selectedLensId }) => (window as unknown as Record<string, BrowserObjectRuntime>)[runtimeKey].lenses.select(selectedLensId), { runtimeKey: key, selectedLensId: lensId }),
     lens: (page) => page.evaluate((runtimeKey) => {
       const runtime = (window as unknown as Record<string, BrowserObjectRuntime>)[runtimeKey];

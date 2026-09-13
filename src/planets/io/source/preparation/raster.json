@@ -44,6 +44,10 @@
             0,
             360
           ]
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "resolutionScale": 2
@@ -79,6 +83,10 @@
         "metadata": {
           "withheldColorLatitudeDegrees": 85,
           "sourceProcessing": "USGS Lunar-Lambert L=0.7, seam matching and color-ratio merge; no additional photometric normalization."
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
         }
       },
       "resolutionScale": 2

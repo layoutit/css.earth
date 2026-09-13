@@ -41,11 +41,11 @@ test("verifies Earth acquisition without a network request", async () => {
 
 test("prepares the shared photographed cubic sky and independent Sun", () => {
   assert.equal(PREPARED_EARTH_STARFIELD.schema,
-    "cssearth-prepared-cubic-sky@2");
+    "cssearth-prepared-cubic-sky@3");
   assert.equal(PREPARED_EARTH_STARFIELD.faces.length, 6);
   assert.equal("sun" in PREPARED_EARTH_STARFIELD, false);
   assert.equal(PREPARED_EARTH_SKY_SUN.schema,
-    "cssearth-prepared-directional-sun@3");
+    "cssearth-prepared-directional-sun@4");
   assert.equal(PREPARED_EARTH_SKY_SUN.bakedIntoStarfield, false);
   assert.equal(PREPARED_EARTH_SKY_SUN.billboard, true);
   assert.equal(Reflect.get(PREPARED_EARTH_SKY_SUN.asset,"googlePixelsRedistributed"), false);
@@ -114,21 +114,16 @@ test("prepares OpenSpace Earth colour with Google directional exposure response"
       source.outerRadiusRatio,
   ) < 1e-12);
   assert.equal(atmosphere.sourceTileSize, EARTH_MATERIAL_TILE_SIZE);
-  assert.deepEqual(atmosphere.defaultAssets, {
-    one: "/scenes/earth/earth-atmosphere-default.webp",
-    two: "/scenes/earth/earth-atmosphere-default@2x.webp",
-  });
-  assert.equal(atmosphere.frames.every(({ assets }) =>
-    assets.one.endsWith(".webp") && assets.two.endsWith("@2x.webp")), true);
+  assert.equal(atmosphere.defaultUrl, "/scenes/earth/earth-atmosphere-default@2x.webp");
+  assert.equal(atmosphere.frames.every(({ url }) => url.endsWith("@2x.webp")), true);
 
-  for (const density of [1, 2]) {
-    const suffix = density === 2 ? "@2x" : "";
+  {
     const { data, info } = await sharp(resolve(
       publicRoot,
-      `earth-atmosphere-default${suffix}.webp`,
+      "earth-atmosphere-default@2x.webp",
     )).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-    assert.equal(info.width, EARTH_MATERIAL_TILE_SIZE * density);
-    assert.equal(info.height, EARTH_MATERIAL_TILE_SIZE * density);
+    assert.equal(info.width, EARTH_MATERIAL_TILE_SIZE * 2);
+    assert.equal(info.height, EARTH_MATERIAL_TILE_SIZE * 2);
     let alpha = 0;
     let maximumAlpha = 0;
     const weighted = [0, 0, 0];
@@ -151,7 +146,7 @@ test("prepares OpenSpace Earth colour with Google directional exposure response"
     const frame = atmosphere.frames[frameIndex];
     const { data, info } = await sharp(resolve(
       publicRoot,
-      required(frame.assets.two.split('/').at(-1)),
+      required(frame.url.split('/').at(-1)),
     )).extract({
       left: (frame.columnIndex * atmosphere.stride + atmosphere.gutter)*2,
       top: (frame.tileRowIndex * atmosphere.stride + atmosphere.gutter)*2,
@@ -237,17 +232,14 @@ test("publishes the prepared Earth title and retained scene", async () => {
       "cssearth-prepared-material-transform@1");
     assert.equal(material.transformPlayback.keyframes.length, 129);
     assert.equal(material.transformPlayback.runtimeTransformConstruction, false);
-    for (const density of [2]) {
-      for (let rowIndex = 0;
-        rowIndex < material.shardCount;
-        rowIndex += 1) {
-        const row = await sharp(resolve(
-          publicRoot,
-          required(material.preparedRows[rowIndex].assets.two.split('/').at(-1)),
-        )).metadata();
-        assert.equal(row.width, 508 * density * shardSide);
-        assert.equal(row.height, 508 * density * shardSide);
-      }
+    for (const preparedRow of material.preparedRows) {
+      const row = await sharp(resolve(
+        publicRoot,
+        required(preparedRow.url.split('/').at(-1)),
+      )).metadata();
+      assert.equal(row.width, 508 * 2 * shardSide);
+      assert.equal(row.height, 508 * 2 * shardSide);
+      assert.deepEqual({ width: row.width, height: row.height }, { width: preparedRow.width, height: preparedRow.height });
     }
     for (const frame of material.frames) {
       assert.equal(frame.rowIndex,
@@ -295,18 +287,16 @@ test("publishes the prepared Earth title and retained scene", async () => {
       assert.equal(image.hasAlpha, true, "prebaked outside-quad pixels need alpha");
     }
   }
-  // Runtime selects the canonical 2x bank on every DPR; retired 1x delivery
-  // files are not part of the consumer-derived public closure.
-  for (const [key, scale] of [["twoUrls", 0.5]] as const) {
-    const urls = PREPARED_EARTH_SCENE.interior.outerAssets.surface[key];
-    assert.equal(urls.length, pages.length);
-    for (const [index, url] of urls.entries()) {
-      const image = await sharp(resolve(publicRoot, required(url.split("/").at(-1)))).metadata();
-      assert.deepEqual({ width: image.width, height: image.height }, {
-        width: pages[index].width * scale, height: pages[index].height * scale,
-      });
-      assert.equal(image.hasAlpha, true);
-    }
+  // Interior outer pages carry half the body page size.
+  const outerPages = PREPARED_EARTH_SCENE.interior.outerAssets.surface.urls;
+  assert.equal(outerPages.length, pages.length);
+  assert.equal(PREPARED_EARTH_SCENE.interior.outerAssets.surface.url, outerPages[0]);
+  for (const [index, url] of outerPages.entries()) {
+    const image = await sharp(resolve(publicRoot, required(url.split("/").at(-1)))).metadata();
+    assert.deepEqual({ width: image.width, height: image.height }, {
+      width: pages[index].width * 0.5, height: pages[index].height * 0.5,
+    });
+    assert.equal(image.hasAlpha, true);
   }
   const polarLeaves = surfaceLeaves.filter(({ className }) =>
     className.includes("earth-polar"));
