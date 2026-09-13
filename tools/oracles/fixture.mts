@@ -29,7 +29,7 @@ export async function pinnedOracleVersions() {
 /** Every fixture input must be a pinned manifest input of its body with the same sha256. */
 export async function assertPinnedInputs(inputs: readonly { path: string; sha256: string; bytes: number }[]) {
   for (const input of inputs) {
-    const match = /^src\/planets\/([^/]+)\/source\/(.+)$/u.exec(input.path);
+    const match = /^src\/objects\/([^/]+)\/source\/(.+)$/u.exec(input.path);
     if (!match) throw new Error(`Oracle input outside a body's sources: ${input.path}`);
     const manifest = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/objects', match[1], 'source/manifest.json'), 'utf8')));
     const entry = requireArray(manifest.inputs).map(e => requireRecord(e)).find(e => e.path === match[2]);
