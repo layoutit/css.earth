@@ -20,13 +20,16 @@ function last<T>(values: T[]): T { return required(values.at(-1)); }
 
 function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, volumeBank = null }: FixtureOptions = {}) {
   let current: PreparedNavigationFocus | null = null, signal: AbortSignal | undefined;
+  const flights: {id:string; reducedMotion?:boolean}[] = [];
   const callbacks = new Set<() => void>(), errors: Error[] = [], selections: (string | null)[] = [], writes: (string | URL)[] = [], content: Content[] = [];
   const windowTarget = { location: new URL('https://example.test/mercury/?focus=catalogue:a&v=saved'),
     history: { state: {}, replaceState(state: unknown, _: string, url?: string | URL | null) { assert.ok(url); windowTarget.location = new URL(url, windowTarget.location); writes.push(url); } } };
   const owner = { preparedFocus: () => current,
     setPreparedFocus(focus: PreparedNavigationFocus | null) { current = focus; for (const callback of callbacks) callback(); },
     subscribe(callback: () => void) { callbacks.add(callback); callback(); return () => callbacks.delete(callback); },
-    flyToPreparedFocus(focus: PreparedNavigationFocus, options: { signal?: AbortSignal } = {}) { signal = required(options.signal); this.setPreparedFocus(focus);
+    flyToPreparedFocus(focus: PreparedNavigationFocus, options: { signal?: AbortSignal; reducedMotion?: boolean } = {}) { signal = required(options.signal); this.setPreparedFocus(focus);
+      flights.push({id:focus.id,reducedMotion:options.reducedMotion});
+      if (options.reducedMotion) return Promise.resolve({completed:true});
       return new Promise<{ completed: boolean }>(resolve => required(signal).addEventListener('abort', () => resolve({ completed: false }), { once: true })); } };
   const lensCallbacks = new Set<() => void>(), lensWrites: string[] = [];
   let bankState = volumeBank;
@@ -58,8 +61,25 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
   const controller = createPreparedContextNavigation({ layer: layer as unknown as ContextLayer, windowTarget: windowTarget as unknown as Window, onError: error => { assert.ok(error instanceof Error); errors.push(error); },
     sources, presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
   controller.connect(owner as unknown as ObjectWorldNavigation, { onFocusContentChange: (record, references, presentation) => content.push({ record, references, presentation }) });
-  return { controller, owner, layer, lensCallbacks, lensWrites, windowTarget, errors, selections, writes, callbacks, content, signal: () => signal };
+  return { controller, owner, layer, lensCallbacks, lensWrites, windowTarget, errors, selections, writes, callbacks, content, flights, signal: () => signal };
 }
+
+test('a direct focus link without a saved camera frames its target immediately', () => {
+  const f = fixture();
+  f.windowTarget.location.searchParams.delete('v');
+  f.controller.restore(f.windowTarget.location.href);
+  assert.deepEqual(f.flights,[{id:'catalogue:a',reducedMotion:true}]);
+  assert.deepEqual(f.errors,[]);
+  f.controller.destroy();
+});
+
+test('a focus link with a saved camera restores selection without reframing', () => {
+  const f = fixture();
+  f.controller.restore(f.windowTarget.location.href);
+  assert.deepEqual(f.flights,[]);
+  assert.equal(f.owner.preparedFocus()?.id,'catalogue:a');
+  f.controller.destroy();
+});
 
 test('suspension isolates camera restore publications from incoming focus history and cancels an older selection flight', async () => {
   const f = fixture();

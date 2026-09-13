@@ -1,4 +1,4 @@
-import { isPreparedCluster } from '@cssearth/catalog';
+import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
 import type { PreparedCatalogObject, SpatialCatalogSource } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
 import { requiredElement } from './browser-types.mts';
@@ -12,13 +12,15 @@ const number = new Intl.NumberFormat('en-US', { maximumSignificantDigits: 4 });
 const words = (value: string) => value.replaceAll('-', ' ').replace(/^./u, letter => letter.toUpperCase());
 
 /** One retained card transports the selected prepared record; no catalogue is imported here. */
-export function createPreparedFocusCard(root: HTMLElement | null): PreparedFocusCard {
+export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: string) => void = () => {}): PreparedFocusCard {
   if (!root) return { set() {}, destroy() {} };
   const fields = Object.fromEntries(['name', 'aliases', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']
     .map(name => [name, requiredElement(root, `[data-focus-${name}]`)]));
   const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-focus-source]')];
   const events = new AbortController();
   let currentPresentation: PreparedFocusPresentation | null = null;
+  const datasetTab = root.querySelector<HTMLElement>('[data-information-tab="dataset"]');
+  let currentRecordId: string | undefined;
   const banks = [...root.querySelectorAll<HTMLElement>('[data-focus-lens-bank]')].map(bank => ({ root: bank,
     buttons: [...bank.querySelectorAll<HTMLButtonElement>('[data-focus-lens]')],
     details: [...bank.querySelectorAll<HTMLElement>('[data-focus-lens-details]')],
@@ -33,7 +35,12 @@ export function createPreparedFocusCard(root: HTMLElement | null): PreparedFocus
     }, { signal: events.signal });
   }
   const setPresentation = (record: PreparedCatalogObject | null, presentation: PreparedFocusPresentation | null) => {
+    const previous = currentPresentation?.objectId;
     currentPresentation = record && !isPreparedCluster(record) && record.detailedObjectId === presentation?.objectId ? presentation : null;
+    if (datasetTab) datasetTab.hidden = !currentPresentation;
+    if (record && (record.id !== currentRecordId || previous !== currentPresentation?.objectId))
+      showTab(currentPresentation ? 'dataset' : 'factsheet');
+    currentRecordId = record?.id;
     for (const bank of banks) {
       const active = currentPresentation?.objectId === bank.root.dataset.focusLensBank;
       bank.root.hidden = !active;
@@ -41,7 +48,8 @@ export function createPreparedFocusCard(root: HTMLElement | null): PreparedFocus
       const available = new Set(currentPresentation.lenses.map(lens => lens.id));
       for (const button of bank.buttons) {
         button.disabled = !available.has(button.value);
-        button.setAttribute('aria-pressed', String(button.value === currentPresentation.selectedLens));
+        const pressed = String(button.value === currentPresentation.selectedLens);
+        if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
       }
       for (const detail of bank.details) detail.hidden = detail.dataset.focusLensDetails !== currentPresentation.selectedLens;
       if (bank.stars) {
@@ -58,15 +66,15 @@ export function createPreparedFocusCard(root: HTMLElement | null): PreparedFocus
     write('name', record.name);
     write('aliases', record.aliases.length ? `Also known as ${record.aliases.join(', ')}` : '');
     fields.aliases.hidden = record.aliases.length === 0;
-    const cluster = isPreparedCluster(record);
-    write('status', cluster ? record.classification.name : `${words(record.status)} galaxy`);
+    const cluster = isPreparedCluster(record), nebula = isPreparedNebula(record);
+    write('status', cluster || nebula ? record.classification.name : `${words(record.status)} galaxy`);
     write('distance', `${number.format(record.distance.valuePc)} pc${cluster ? ' (comoving, redshift-derived)' : ''}`);
     const { minusPc, plusPc, uncertainty } = record.distance;
     write('uncertainty', uncertainty ? `${number.format(uncertainty.statisticalPc)} pc statistical; ${number.format(uncertainty.systematicPc)} pc systematic`
       : minusPc !== undefined && plusPc !== undefined ? `−${number.format(minusPc)} / +${number.format(plusPc)} pc` : 'Not supplied');
-    write('membership', cluster ? 'Galaxy cluster' : words(record.membership.group));
-    write('association', cluster ? `Spectroscopic redshift ${record.redshift.value}` : words(record.membership.subgroup));
-    write('basis', cluster ? `${record.classification.basis} ${record.distance.method}` : record.membership.basis);
+    write('membership', cluster ? 'Galaxy cluster' : nebula ? 'Milky Way' : words(record.membership.group));
+    write('association', cluster ? `Spectroscopic redshift ${record.redshift.value}` : nebula ? 'Galactic nebula' : words(record.membership.subgroup));
+    write('basis', cluster || nebula ? `${record.classification.basis} ${record.distance.method}` : record.membership.basis);
     write('reference', `Distance reference: ${record.distance.sourceRef}`);
     for (const [index, link] of links.entries()) {
       const source = sources[index];

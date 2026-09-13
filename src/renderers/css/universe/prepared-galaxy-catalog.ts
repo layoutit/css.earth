@@ -1,4 +1,4 @@
-import { isPreparedCluster, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog } from '@cssearth/catalog';
+import { isPreparedCluster, isPreparedNebula, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
@@ -24,13 +24,15 @@ interface Entry {
 }
 
 /** One fixed catalogue bank, shared by every detailed scene and every camera focus. */
-export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, onSelect = () => {}, pickingHost = host }: {
-  host: HTMLElement; before: Element; payload: unknown; clusters?: unknown; onSelect?: (object: PreparedCatalogObject) => void; pickingHost?: HTMLElement;
+export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, nebulae, onSelect = () => {}, pickingHost = host }: {
+  host: HTMLElement; before: Element; payload: unknown; clusters?: unknown; nebulae?: unknown; onSelect?: (object: PreparedCatalogObject) => void; pickingHost?: HTMLElement;
 }) {
   const catalog = parsePreparedGalaxyCatalog(payload), document = host.ownerDocument;
   const clusterCatalog = clusters === undefined ? null : parsePreparedClusterCatalog(clusters);
   if (clusterCatalog && (clusterCatalog.frame.referenceFrame !== catalog.frame.referenceFrame || clusterCatalog.frame.epochJdTt !== catalog.frame.epochJdTt)) throw new TypeError('Prepared catalogues must share one frame and epoch.');
-  const objects: readonly PreparedCatalogObject[] = [...catalog.objects.filter(object => object.membership.group === 'local-group'), ...clusterCatalog?.objects ?? []];
+  const nebulaCatalog = nebulae === undefined ? null : parsePreparedNebulaCatalog(nebulae);
+  if (nebulaCatalog && (nebulaCatalog.frame.referenceFrame !== catalog.frame.referenceFrame || nebulaCatalog.frame.epochJdTt !== catalog.frame.epochJdTt)) throw new TypeError('Prepared catalogues must share one frame and epoch.');
+  const objects: readonly PreparedCatalogObject[] = [...catalog.objects.filter(object => object.membership.group === 'local-group'), ...clusterCatalog?.objects ?? [], ...nebulaCatalog?.objects ?? []];
   if (new Set(objects.map(object => object.id)).size !== objects.length) throw new TypeError('Prepared catalogue focus identifiers must be unique.');
   const root = document.createElement('div');
   root.className = 'prepared-galaxy-catalog';
@@ -90,9 +92,9 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
       const apertures = new Set<string>();
       const alpha = Math.max(0, Math.min(1, opacity));
       const clusterAlpha = Math.max(0, Math.min(1, clusterOpacity));
-      // Invisible catalogues still animate out: publish one complete frame at
-      // zero, then skip projection and DOM writes until a fade rises again.
-      if (alpha === 0 && clusterAlpha === 0) {
+      // Only the extragalactic populations sleep with their fades. Nearby
+      // nebulae keep following the camera and remain available as fly-to targets.
+      if (alpha === 0 && clusterAlpha === 0 && !nebulaCatalog?.objects.length) {
         if (dormant) return exclusions;
         dormant = true;
       } else dormant = false;
@@ -119,7 +121,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
         entry.labelX = point.x; entry.labelY = y;
         const labelRect = { left: point.x - entry.width / 2, right: point.x + entry.width / 2,
           top: y - entry.height, bottom: y };
-        const objectAlpha = isPreparedCluster(entry.object) ? clusterAlpha : alpha;
+        const objectAlpha = isPreparedCluster(entry.object) ? clusterAlpha : isPreparedNebula(entry.object) ? 1 : alpha;
         if (labelRect.left >= -width / 2 && labelRect.right <= width / 2 && labelRect.top >= -height / 2 && labelRect.bottom <= height / 2 && objectAlpha > 0) {
           candidates.push({ object: entry.object, ...point, labelRect });
         }
@@ -128,7 +130,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
       const admittedById = new Map(admitted.map(entry => [entry.object.id, entry]));
       const pickTargets: ScreenPickTarget[] = [];
       for (const entry of entries) {
-        const objectAlpha = isPreparedCluster(entry.object) ? clusterAlpha : alpha;
+        const objectAlpha = isPreparedCluster(entry.object) ? clusterAlpha : isPreparedNebula(entry.object) ? 1 : alpha;
         const projected = admittedById.get(entry.object.id);
         const labelOpacity = projected ? objectAlpha * .85 : 0;
         fader.set(entry.label, labelOpacity, 200);

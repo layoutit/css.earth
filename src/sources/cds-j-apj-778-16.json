@@ -1,0 +1,37 @@
+{
+  "id": "cds-j-apj-778-16",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Helix HCO+ component measurements · J/ApJ/778/16",
+  "identifiers": [
+    {
+      "type": "CDS catalogue",
+      "value": "J/ApJ/778/16"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.26093/cds/vizier.17780016",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/helix/kinematics-hco.json",
+      "revision": "ab1967ed45fe7ad670cc5eaa4e892789a04f01f3",
+      "sha256": "f6fec28e77fb4e87bbcee87941f57c6d1463910cafb9f113c60e6e02fe8db125",
+      "locator": "/table"
+    }
+  ],
+  "publisher": "Zeigler et al. (2013); CDS/VizieR",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Zeigler et al. (2013); CDS/VizieR",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/helix/kinematics-hco.json#/table"
+    }
+  ]
+}

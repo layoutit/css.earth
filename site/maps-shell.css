@@ -505,9 +505,9 @@
   padding-top: 0;
 }
 /* Dataset sections are no longer accordions; own their spacing explicitly. */
-.planet-information-panel .planet-card-tabpanel > .planet-lenses { padding-bottom: 0; }
+.planet-dataset-content > .planet-lenses { padding-bottom: 0; }
 .planet-card-tabpanel .planet-observation-controls { padding-bottom: 0; }
-.planet-information-panel .planet-card-tabpanel > :is(.planet-lens-details, .planet-mission-details) {
+.planet-dataset-content > :is(.planet-lens-details, .planet-mission-details) {
   width: auto;
   margin-top: 16px;
   margin-inline: calc(-1 * var(--explorer-card-padding-inline-start)) calc(-1 * var(--explorer-card-padding-inline-end));
