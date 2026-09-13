@@ -60,7 +60,7 @@ material relative to the spectral contrast and are not calibrated error bars.
 With NumPy and Rasterio available, from the repository root:
 
 ```sh
-python3 tools/objects/acquisition/muse-spectral-maps.py src/planets/ganymede/source/muse/ganymede-recipe.json
+python3 tools/objects/acquisition/muse-spectral-maps.py src/objects/ganymede/source/muse/ganymede-recipe.json
 ```
 
 Original inputs and derived TIFFs are retained with exact manifest pins. The

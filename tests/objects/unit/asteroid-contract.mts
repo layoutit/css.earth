@@ -9,7 +9,7 @@ const recordAt=(value:Record<string,unknown>,key:string,label:string):Record<str
 const arrayAt=(value:Record<string,unknown>,key:string,label:string):unknown[]=>requireArray(value[key],label);
 const vector=(value:unknown,label:string):number[]=>requireArray(value,label).map((entry,index)=>requireFiniteNumber(entry,`${label}[${index}]`));
 export async function assertAsteroidPackage(id:string, expectedLenses:readonly string[], radiusM:number):Promise<void> {
- const directory=resolve(root,'src/planets',id),read=async(path:string):Promise<Record<string,unknown>>=>requireRecord(await readJsonSource(resolve(directory,path)),`${id} ${path}`);
+ const directory=resolve(root,'src/objects',id),read=async(path:string):Promise<Record<string,unknown>>=>requireRecord(await readJsonSource(resolve(directory,path)),`${id} ${path}`);
  const [runtime,terrain,descriptor,manifest,scene]=await Promise.all(['prepared/runtime.json','prepared/terrain.json','object.json','runtime-assets.json','prepared/scene.json'].map(read));
  const descriptorProperties=recordAt(descriptor,'properties','descriptor properties');
  assert.equal(requireFiniteNumber(recordAt(recordAt(descriptorProperties,'recipe','descriptor recipe'),'shape','descriptor shape').radiusKm,'descriptor radiusKm')*1000,radiusM);
@@ -53,7 +53,7 @@ export async function assertAsteroidPackage(id:string, expectedLenses:readonly s
   }
  }
  const topology=validateClosedMesh(indices,positions);assert.equal(topology.components,1);assert.equal(topology.eulerCharacteristic,2);
- const context=requireRecord(await readJsonSource(resolve(root,'src/planets/sun/prepared/world-context.json')),'world context'),body=arrayAt(context,'bodies','world context bodies').map((entry,index)=>requireRecord(entry,`world context body ${index}`)).find(entry=>entry.id===id);
+ const context=requireRecord(await readJsonSource(resolve(root,'src/objects/sun/prepared/world-context.json')),'world context'),body=arrayAt(context,'bodies','world context bodies').map((entry,index)=>requireRecord(entry,`world context body ${index}`)).find(entry=>entry.id===id);
  assert.ok(body, 'Asteroid is reachable through the application context');assert.equal(body.radiusM,radiusM);
  assert.deepEqual(body.positionM,recordAt(descriptorProperties,'worldFrame','world frame').originM);
  const assets=arrayAt(manifest,'assets','runtime assets').map((asset,index)=>requireRecord(asset,`runtime asset ${index}`));

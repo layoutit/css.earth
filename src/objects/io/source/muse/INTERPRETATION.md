@@ -60,7 +60,7 @@ a mineral percentage. Median absolute cross-night differences are about
 With NumPy and Rasterio available, from the repository root:
 
 ```sh
-python3 tools/objects/acquisition/muse-spectral-maps.py src/planets/io/source/muse/io-recipe.json
+python3 tools/objects/acquisition/muse-spectral-maps.py src/objects/io/source/muse/io-recipe.json
 ```
 
 Original inputs and derived TIFFs are retained with exact manifest pins. The

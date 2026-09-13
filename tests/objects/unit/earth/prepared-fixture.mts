@@ -26,10 +26,10 @@ interface DiagnosticDescriptor extends JsonRecord {
   prepared: JsonRecord & { sha256: string };
 }
 
-const sourceDirectory = fileURLToPath(new URL('../../../../src/planets/earth/source/', import.meta.url));
+const sourceDirectory = fileURLToPath(new URL('../../../../src/objects/earth/source/', import.meta.url));
 
 async function read(path: string): Promise<JsonRecord> {
-  const value: unknown = JSON.parse(await readFile(new URL(`../../../../src/planets/earth/${path}`, import.meta.url), 'utf8'));
+  const value: unknown = JSON.parse(await readFile(new URL(`../../../../src/objects/earth/${path}`, import.meta.url), 'utf8'));
   requirePreparedData(value, `Earth fixture ${path}`);
   return requireRecord(value, `Earth fixture ${path}`);
 }

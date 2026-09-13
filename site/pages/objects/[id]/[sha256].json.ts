@@ -8,7 +8,7 @@ import { readPreparedObjectBytes } from '../../../object-page-data.mts';
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = [];
   for (const { id } of OBJECTS) {
-    const descriptor = parseObjectDescriptor(JSON.parse(await readFile(resolve('src/planets', id, 'object.json'), 'utf8')));
+    const descriptor = parseObjectDescriptor(JSON.parse(await readFile(resolve('src/objects', id, 'object.json'), 'utf8')));
     if (!descriptor.prepared) throw new TypeError(`Object ${id} has no prepared data.`);
     paths.push({ params: { id, sha256: descriptor.prepared.sha256 } });
   }

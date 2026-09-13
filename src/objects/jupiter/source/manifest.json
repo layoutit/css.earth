@@ -407,7 +407,7 @@
         "moons"
       ],
       "expectedBytes": 87703,
-      "historicalAcquisition": "node src/planets/jupiter/tools/acquire-moon-catalog.mjs validates the pinned snapshot; explicit refresh must pass all authority hashes",
+      "historicalAcquisition": "node src/objects/jupiter/tools/acquire-moon-catalog.mjs validates the pinned snapshot; explicit refresh must pass all authority hashes",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

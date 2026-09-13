@@ -110,7 +110,7 @@ export async function resolveRuntimeSource(imported: string, importer: string, {
     try { await source(typed); target = typed; } catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
   }
   if (!/\.(?:mjs|js|ts|mts|astro|css|json)$/.test(target)) throw new Error(`Unclosed runtime source ${imported}`);
-  if (relative(root, target).startsWith('src/planets/')) throw new Error('Shared runtime imports an object package');
+  if (relative(root, target).startsWith('src/objects/')) throw new Error('Shared runtime imports an object package');
   await source(target);
   return target;
 }

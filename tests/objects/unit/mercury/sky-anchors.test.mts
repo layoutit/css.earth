@@ -15,7 +15,7 @@ import {
 // drift from the source it claims to describe. Skipped when the reacquirable
 // image is absent (it is not tracked); `pnpm acquire:planets` restores it.
 const PANORAMA_PATH = fileURLToPath(new URL(
-  "../../../../src/planets/mercury/source/stars/eso0932a.tif",
+  "../../../../src/objects/mercury/source/stars/eso0932a.tif",
   import.meta.url,
 ));
 const SCALE = 4;

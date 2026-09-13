@@ -31,7 +31,7 @@ export async function assertPinnedInputs(inputs: readonly { path: string; sha256
   for (const input of inputs) {
     const match = /^src\/planets\/([^/]+)\/source\/(.+)$/u.exec(input.path);
     if (!match) throw new Error(`Oracle input outside a body's sources: ${input.path}`);
-    const manifest = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/planets', match[1], 'source/manifest.json'), 'utf8')));
+    const manifest = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/objects', match[1], 'source/manifest.json'), 'utf8')));
     const entry = requireArray(manifest.inputs).map(e => requireRecord(e)).find(e => e.path === match[2]);
     if (!entry) throw new Error(`Oracle input is not a manifest input: ${input.path}`);
     if (entry.expectedSha256 !== input.sha256 || entry.expectedBytes !== input.bytes) throw new Error(`Oracle input differs from the manifest pin: ${input.path}`);

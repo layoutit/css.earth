@@ -2624,7 +2624,7 @@
       "id": "nasa-mur-gibs-mosaic",
       "path": "science/mur-gibs.png",
       "origin": "tools/objects/paged-ellipsoid/mur-imagery.mjs",
-      "generator": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/planets/earth/source/science",
+      "generator": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/objects/earth/source/science",
       "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
       "sourceBinding": {
@@ -2639,7 +2639,7 @@
       },
       "kind": "generated-intermediate",
       "title": "science/mur-gibs.png",
-      "acquisition": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/planets/earth/source/science",
+      "acquisition": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/objects/earth/source/science",
       "upstreamLineage": "not-recorded",
       "sha256": "eb4f6ee98ea4293de369acd709110f8970f503dcc5b523a6a9124a6f39f5a3f0",
       "bytes": 22564700,

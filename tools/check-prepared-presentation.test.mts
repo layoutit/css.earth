@@ -54,7 +54,7 @@ export const objectControls = Object.freeze({ lenses: PREPARED_LENSES.controls.m
   ]) assert.throws(() => requirePreparedControlSource(source), /static prepared content/);
 });
 
-const root = process.cwd(), moonPath = `${root}/src/planets/moon/prepared/runtime.json`;
+const root = process.cwd(), moonPath = `${root}/src/objects/moon/prepared/runtime.json`;
 const moonSource = await readFile(moonPath, "utf8");
 const moonPlan = requireObjectRuntimeDefinition(JSON.parse(moonSource));
 const writes=(plan: unknown)=>requireArray(fixtureRecord(plan,"variants",0).writes);
@@ -79,7 +79,7 @@ test("adapter differences report actual data counts and source hashes without fa
 });
 
 test('authored JSON transport cannot escape its descriptor package', async () => {
-  const descriptorPath = `${root}/src/planets/mercury/object.json`;
+  const descriptorPath = `${root}/src/objects/mercury/object.json`;
   const descriptor = JSON.parse(await readFile(descriptorPath, 'utf8'));
   for (const url of ['../venus/prepared/object.json', 'prepared/../prepared/object.json']) {
     const changed = JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, url } });

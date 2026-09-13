@@ -13,7 +13,7 @@ import { renderRadialSnapshot } from './radial-snapshot.mts';
 
 const [id, output] = process.argv.slice(2);
 if (!/^[a-z][a-z0-9-]*$/.test(id ?? '') || !output) throw new TypeError('Usage: prepare-source-surface-context.mts <object-id> <output.png>');
-const sourceDirectory = resolve('src/planets', id, 'source');
+const sourceDirectory = resolve('src/objects', id, 'source');
 const input=requireRecord(JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/terrestrial.json'), 'utf8')));
 const config=Object.assign({},parseRadialLoaderConfig(input),{raster:{width:requireFiniteNumber(requireRecord(input.raster).width)}});
 const source = await createSourceManifest({ planetId: id, planetName: config.displayName ?? id, sourceRoot: sourceDirectory });

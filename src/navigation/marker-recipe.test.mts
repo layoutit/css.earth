@@ -8,7 +8,7 @@ import sharp from "sharp";
 import { PREPARED_NAVIGATION_MARKERS } from "../../site/prepared-navigation-markers.mjs";
 import { contextMarkerSprite } from "./marker-presentation.mts";
 
-import marsMarker from "../planets/mars/source/preparation/navigation.json" with { type: "json" };
+import marsMarker from "../objects/mars/source/preparation/navigation.json" with { type: "json" };
 import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mts";
 import {
   validateMarkerDescriptor,

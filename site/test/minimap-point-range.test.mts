@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { minimapPointRange } from '../minimap/point-range.mts';
 import prepared from '../minimap/prepared.json' with { type: 'json' };
-import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import context from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { OBJECTS } from '../objects.mts';
 
 test('prepared minimap index includes every source point once without changing DOM order', () => {

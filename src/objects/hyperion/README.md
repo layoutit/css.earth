@@ -85,10 +85,10 @@ Preparation measures every delivered camera again. The recipe's `registration` b
 
 ```sh
 node tools/objects/terrestrial-layers/register-camera-bands.mts \
-  src/planets/hyperion/source/preparation/filter-color-registration.json \
+  src/objects/hyperion/source/preparation/filter-color-registration.json \
   output/hyperion-color-fit.json
 node tools/objects/terrestrial-layers/register-camera-bands.mts \
-  src/planets/hyperion/source/preparation/filter-color-validation.json \
+  src/objects/hyperion/source/preparation/filter-color-validation.json \
   output/hyperion-color-validation.json --check-only
 ```
 

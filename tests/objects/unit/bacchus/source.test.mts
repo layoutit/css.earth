@@ -7,7 +7,7 @@ import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireProjectionAnchors,requireRadialTestConfig,requireRotation} from '../radial-fixture.mts';
 import {requireArray,requireRecord,requireString} from '../../../../tools/source-values.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/bacchus/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/bacchus/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Bacchus retains original source pins and acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'bacchus',planetName:'Bacchus',sourceRoot:root});await source.verify();

@@ -1047,7 +1047,7 @@
       ],
       "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "prepared derivative with OPAL and STScI credit",
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "capture": {
         "attributions": [
           {
@@ -1094,7 +1094,7 @@
       ],
       "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked true-colour calibration reference with attribution",
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1131,7 +1131,7 @@
       ],
       "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "prepared false-colour derivative with source credit",
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "capture": {
         "attributions": [
           {
@@ -1178,7 +1178,7 @@
       ],
       "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "prepared false-colour derivative with source credit",
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "capture": {
         "attributions": [
           {
@@ -1242,7 +1242,7 @@
       "license": "United States government scientific model response",
       "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
       "redistribution": "checked raw ASCII response with NASA attribution",
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1287,7 +1287,7 @@
       "license": "United States government scientific model response",
       "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
       "redistribution": "checked text configuration with NASA attribution",
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
