@@ -12,6 +12,12 @@
 
 ## Evidence
 
+The new filtered-camera registration passes disjoint holdouts and a second published clear image: 0.875–0.933 detector-pixel RMS and maximum 1.689 pixels for that second image. [Original correspondences and residuals](source/validation/filter-color-independent.json) retain all accepted matches.
+
+**Filter color:** The intersecting detector footprints reveal a detailed regional crater field with photographed shadows and straight coverage edges. Existing IAU names remain available in this lens. The [browser record](evidence/filter-color/capture.json) pins the loaded image responses, camera, settings and inspected views at DPR 1 and 2. The original unshaded image bytes, body leaves and picking triangles are unchanged. Dragging, Shadows and the mobile selector passed without page errors or replaced scene DOM. Scientific qualification comes from the original camera/shape release and the registration evidence described here; these screenshots document the mounted result.
+
+[Filter color](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Oblique with Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). Captures correspond to the implementation and source inputs at `78feb6ad9`; the record retains its acquisition-tool and prepared-file hashes.
+
 - The prepared 4096 × 2048 Monochrome map contains 6,836,406 valid output samples out of 8,388,608 (81.5% of equirectangular pixels). This is raster coverage, not an equal-area surface fraction.
 
 - Recorded B3 source-mesh reprojection gives held-out correlations 0.99169 and 0.99276, with displacement magnitudes 1.62 and 5.70 detector pixels. The correction is source-relative; it does not override the mesh's published uncertainty or establish absolute 100 m accuracy. Exact pins, fit regions and independent checks are in [source/validation/n1506391424-registration.json](source/validation/n1506391424-registration.json).
@@ -42,6 +48,9 @@ fits on screen; facing and overlap still control display.
 
 ## Filter camera registration
 
+<details>
+<summary>Source products, processing and qualification</summary>
+
 Thomas’s [model documentation](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf) explicitly says ordinary geometry for other images does not share this model’s body frame. Its Table 1 supplies controlled clear images, rather than a filtered-image solution. The published camera for `N1506388174` anchors this fit. Initial range, observer/Sun directions and roll were interpolated between the bracketing controlled `N1506388174` and `N1506388518` records. These are search seeds only: the accepted cameras add detector translation and roll measured from spatially distributed interior features through the full source mesh.
 
 The shared preparation tool [register-camera-bands.mts](../../../tools/objects/terrestrial-layers/register-camera-bands.mts) uses a 27-pixel patch and a 5-minus-31-pixel detail filter for correspondence only. Original I/F values are never sharpened or replaced. Every patch retains the full convolution footprint inside the detector; all projected samples must be visible on the original mesh. A checkerboard grid separates fitting and held-out coordinates. Correlation, peak separation and curvature reject ambiguous matches before fitting; no residual pruning is applied.
@@ -68,6 +77,8 @@ node tools/objects/terrestrial-layers/register-camera-bands.mts \
 ```
 
 The delivered [recipe](source/preparation/terrestrial.json) uses the accepted cameras and untouched calibrated pixels. It withholds non-common coverage, samples beyond 75° incidence or emission, and a three-pixel detector coverage margin. The existing edge-connected 0.003 I/F background exclusion is an approximate background mask, not a detector-quality flag; interior dark samples remain. All channels share a linear display scale of 0.5 I/F to 255, gamma 1 and unit gains. No per-filter equalization, clear-filter detail injection or photometric model alters their ratios. Existing geometry and the shared Shadows control are retained.
+
+</details>
 
 ## Methods and source notes
 

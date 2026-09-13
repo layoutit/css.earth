@@ -12,11 +12,17 @@
 
 ## Evidence
 
+**Filter color:** A small northern footprint resolves craters within the three-filter intersection. Most of the body has no common color coverage. The [browser record](evidence/filter-color/capture.json) pins the loaded image responses, camera, settings and inspected views at DPR 1 and 2. The original unshaded image bytes, body leaves and picking triangles are unchanged. Dragging, Shadows and the mobile selector passed without page errors or replaced scene DOM. Scientific qualification comes from the original camera/shape release and the registration evidence described here; these screenshots document the mounted result.
+
+[Filter color](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Oblique with Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). Captures correspond to the implementation and source inputs at `78feb6ad9`; the record retains its acquisition-tool and prepared-file hashes.
+
 - The exact frames, archive URLs and byte pins are in [source/manifest.json](source/manifest.json). [source/preparation/terrestrial.json](source/preparation/terrestrial.json) retains each measured camera solution from the shape release's [source/shape/epimetheus_document.pdf](source/shape/epimetheus_document.pdf).
 
 - Dimensions, floating-point encoding and record lengths are checked before reading.
 
 ## Known problems
+
+The existing Monochrome and Elevation shadow atlases changed slightly when rebuilt. A separate preparation of the unchanged main-branch recipe produces these new files byte for byte: this is prior prepared-output drift, not a color-lens effect. [Pinned comparison and reproduction](evidence/filter-color/shadow-reproduction.json). Unshaded maps and textures retain their previous bytes.
 
 **Filter color:** Three filters were acquired sequentially, and are not a simultaneous true-color photograph or a composition map. Source shadows and phase-dependent brightness remain. The common footprint is smaller than Monochrome coverage; gray grid marks gaps. Small color fringes can remain at sharp relief because the shape and camera solutions have finite accuracy. The close 2017 sequence covers a northern region; most of the moon has no common color coverage.
 
@@ -33,6 +39,9 @@
 
 ## Filter color preparation
 
+<details>
+<summary>Source products, processing and qualification</summary>
+
 | RGB channel | Filter | Observation | Mid-time (UTC) | Approx. m/pixel at centre |
 | --- | --- | --- | --- | ---: |
 | red | IR3 | n1866365919 | 2017-02-21T09:50:45.553 | 87 |
@@ -44,6 +53,8 @@ Original floating-point IMG products and detached labels are pinned in [the inpu
 Only common, visible three-filter samples are colored. The maximum incidence and emission angles are 75° to avoid the most foreshortened limb and terminator; detector coverage is inset by two source pixels. The existing edge-connected 0.003 I/F background exclusion retains interior dark patches. This signal-based background rule is an approximate coverage mask, not a detector-quality flag.
 
 The observed I/F channels share one linear display scale (0.8 I/F maps to 255), gamma 1 and fixed unit gains. No per-band brightness equalization, clear-filter sharpening or single-band photometric model changes their ratios. No colorimetric transform has been applied; even visible-filter RGB is labelled false color. Prepared source illumination and the app's Shadows control remain separate.
+
+</details>
 
 ## Methods and source notes
 

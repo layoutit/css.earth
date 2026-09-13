@@ -12,6 +12,10 @@
 
 ## Evidence
 
+**Filter color:** The 2010 color view is coarse (roughly 18 detector pixels across the moon). The sharper 2017 Monochrome view remains available. The [browser record](evidence/filter-color/capture.json) pins the loaded image responses, camera, settings and inspected views at DPR 1 and 2. The original unshaded image bytes, body leaves and picking triangles are unchanged. Dragging, Shadows and the mobile selector passed without page errors or replaced scene DOM. Scientific qualification comes from the original camera/shape release and the registration evidence described here; these screenshots document the mounted result.
+
+[Filter color](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Oblique with Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). Captures correspond to the implementation and source inputs at `78feb6ad9`; the record retains its acquisition-tool and prepared-file hashes.
+
 - The exact observations, source URLs and restoration pins are in [source/manifest.json](source/manifest.json) and [source/preparation/acquisition.json](source/preparation/acquisition.json). The simplified surface remains closed and outward wound.
 
 ## Known problems
@@ -29,6 +33,9 @@
 
 ## Filter color preparation
 
+<details>
+<summary>Source products, processing and qualification</summary>
+
 | RGB channel | Filter | Observation | Mid-time (UTC) | Approx. m/pixel at centre |
 | --- | --- | --- | --- | ---: |
 | red | RED | n1656999219 | 2010-07-05T04:48:08.995 | 436 |
@@ -40,6 +47,8 @@ Original floating-point IMG products and detached labels are pinned in [the inpu
 Only common, visible three-filter samples are colored. The maximum incidence and emission angles are 75° to avoid the most foreshortened limb and terminator; detector coverage is inset by two source pixels. The existing edge-connected 0.003 I/F background exclusion retains interior dark patches. This signal-based background rule is an approximate coverage mask, not a detector-quality flag.
 
 The observed I/F channels share one linear display scale (0.8 I/F maps to 255), gamma 1 and fixed unit gains. No per-band brightness equalization, clear-filter sharpening or single-band photometric model changes their ratios. No colorimetric transform has been applied; even visible-filter RGB is labelled false color. Prepared source illumination and the app's Shadows control remain separate.
+
+</details>
 
 ## Methods and source notes
 
