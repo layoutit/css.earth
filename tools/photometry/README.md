@@ -69,6 +69,22 @@ The Shadows lighting option still bakes Lambert shading with cast shadows. A
 Hapke model depends on the emission angle, which changes as the viewer rotates,
 and the runtime must not evaluate it.
 
+## Reviewing a model record
+
+Check each point against the source before merging a record:
+
+- Every value comes from the paper, its archive document or a compilation that
+  cites it, and the binding's locator names the table or the abstract.
+- The fitted phase, incidence and emission ranges are the ones the source states,
+  and the recipe's reference phase lies inside them.
+- The phase function's sign follows the source. A negative one-term asymmetry
+  scatters backward, and ISIS and Hapke (2012) weight two-term functions differently.
+- The H-function approximation matches the source's Hapke version: 1981 for the
+  1981 to 1993 formulations, 2002 for Hapke (2002) and later.
+- Values the source held fixed during its fit are named in the binding's evidence.
+- A difference between the source's filter and the photographs' filter is stated
+  in the body README.
+
 ## Conventions that differ between sources
 
 - **Henyey-Greenstein asymmetry:** with the phase angle g in

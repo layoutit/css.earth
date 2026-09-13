@@ -1,0 +1,37 @@
+{
+  "id": "source-tethys-n1807429484",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Tethys · n1807429484",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.IMG",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/tethys/source/manifest.json",
+      "revision": "7f457e1b401738a0688a6f6c8bf44f55b2f5cae5",
+      "sha256": "f25ca63715eadf2912f915df5955694fc56560f80397166d359c381d4ac737e6",
+      "locator": "/inputs/44"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "scope": "The n1807429484 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

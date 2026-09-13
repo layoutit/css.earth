@@ -34,7 +34,8 @@ Reference implementations live under `tools/oracles/` with their own pinned
 Python environment (`pnpm oracles:setup`); their fixtures under `tests/oracles/`
 are committed evidence, and the comparing tests run without Python. See
 [tools/oracles/README.md](tools/oracles/README.md) before adding or regenerating
-one.
+one. When an archive product has no reader, route or kernel bank yet, open an
+issue from the archive-product template instead of writing a reader for one body.
 
 **Standing limit: GitHub Actions does not run on this repository.** Jobs complete
 as a failure with no steps recorded, so no branch has CI evidence and every check
