@@ -21,6 +21,7 @@ using the existing files.
 ```text
 src/planets/<id>/
   README.md                    sources, processing, evidence and known problems
+  investigations.json          every examined source, route, lens and frame, with its decision
   NOTICE.md, LICENSE*          attribution and applicable terms
   object.json                  catalogue entry, recipe and prepared transport reference
   source/manifest.json         exact inputs, documents and intermediate pins
@@ -132,7 +133,8 @@ pass. Tests requiring sources/assets need those dependencies installed.
 Use the [body README examples](../../docs/provenance/CONTRACT.md#examples).
 The README explains the body’s sources, processing, evidence and known problems.
 Link detailed source notes, exact manifests, credits and original reports from
-that explanation. Keep shared commands and usage here instead of repeating them
+that explanation. Record what you examined in the object's investigation ledger,
+including failed trials, and link the ledger from the README. Keep shared commands and usage here instead of repeating them
 for each body.
 Keep earlier test results and their limits. Do not replace original failure
 reports with summaries or claim a visual check without inspecting the images.

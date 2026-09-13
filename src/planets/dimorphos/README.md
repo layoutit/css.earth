@@ -86,7 +86,7 @@ Exact URL, byte size and SHA-256 are in `source/manifest.json`; original label a
 
 - DRACO and LICIACube imagery contributes to the source model. Individual calibrated images require registered camera projection, coverage and photometry to become surface imagery; they are not silently used as global textures.
 
-- **Included:** the released v004 SPC relative-albedo FITS field, using the existing source-facet material path introduced for Didymos. Its values and uncertainties are bound to the original Dimorphos mesh as described below.
+- Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 - Other ancillary fields remain unselected; slope is not relabeled as elevation.
 

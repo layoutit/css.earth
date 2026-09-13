@@ -45,7 +45,7 @@ fits on screen; facing and overlap still control display.
 
 - The model uses the spin frame observed during Cassini's September 26, 2005 flyby and retains Bahloo at 196°W. Hyperion has no IAU-approved modern rotation solution. Its source record therefore requests an explicitly arbitrary display orientation with no simulated constant spin. Orbital position comes from the shared astronomy package; the surface attitude is not a prediction for that epoch.
 
-- **Unresolved:** Zubarev and Nadezhdina's 2025 paper, [Shape, mosaic and control point network](https://doi.org/10.1016/j.icarus.2024.116440), reports a newer 50 m/pixel mosaic and DEM in a new reference frame. Its public downloadable pixel/model release was not located from the paper and linked 2025 LPSC abstract. The research exists; this package does not claim to include it.
+- No public release of the newer 2025 mosaic and DEM was located; see the [investigation ledger](investigations.json).
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
@@ -125,13 +125,7 @@ The navigation image comes from the same prepared shape and Monochrome map. The 
 
 ## Source survey
 
-- **Included:** Cassini calibrated clear-filter frames and the PDS controlled shape/camera release. They provide restorable imagery with an explicit common registration frame and a conceptually distinct global-relief view.
-
-- **Excluded:** The [USGS Voyager control network](https://astrogeology.usgs.gov/search/map/hyperion_image_control_network) has a four-frame high-pass-filtered Voyager map. It is much coarser than the selected Cassini data and uses an older frame; it is not an extra lens.
-
-- **Excluded:** NASA's [Hyperion 3D model](https://science.nasa.gov/resource/hyperion-3d-model/) is a useful visualization but its small UV atlas has no delivered per-pixel observational coverage or controlled frame. It is not relabeled as an observation or used to fill gaps in measured imagery.
-
-- **Excluded:** NASA press mosaics provide excellent regional images but do not publish a single projection/camera model for the composited pixels. The original controlled ISS frames are used instead. Available enhanced-color press views are not treated as a registered global color dataset.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 Facts and context follow [NASA's Hyperion overview](https://science.nasa.gov/saturn/moons/hyperion/) and the vendored JPL physical/orbital data. The stars and title retain the common ESO/S. Brunier and Inter credits documented beside the source inputs.
 

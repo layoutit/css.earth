@@ -124,9 +124,12 @@ Record any transcription or digitization and check it against the published
 table or figure. A paper's availability does not establish image or data reuse
 rights; unresolved access remains unresolved evidence, not proof of absence.
 
-Explain the selected sources and useful alternatives once in the body's README
-or a linked detailed method: source link,
-what it adds, and whether it is included, excluded or unresolved, with a reason.
+Read the object's investigation ledger (`investigations.json`) before searching.
+Reopen an excluded, unresolved or deferred entry only when its `revisitWhen`
+condition is met, and say which. Record each examined source, route, lens or
+frame there once, including failed trials: status, finding, evidence pinned to a
+commit or pull request, and what would reopen it. The body README explains the
+selected sources and links the ledger instead of repeating the survey.
 Compare detail, registration, coverage and reuse terms before choosing. A better
 mosaic can replace a weaker one without becoming a duplicate lens. Missing
 metadata or a failed download leaves a candidate unresolved; it is not evidence
@@ -338,7 +341,7 @@ Use reader feedback to fix confusing wording or structure; do not treat agent
 review or a word count as reader testing.
 
 Finish with the working location/URL, supported views, checked outcomes and
-remaining limitations, including useful unresolved dataset candidates. A working
+remaining limitations, including useful unresolved dataset candidates recorded in the investigation ledger. A working
 first lens does not establish that the body's useful datasets have been covered.
 Complete authorized commit/PR work, respecting the
 user's merge instructions. Source fidelity, visual acceptance and runtime
