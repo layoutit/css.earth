@@ -1,5 +1,7 @@
 # Pleiades (M45): image and science intake
 
+Current Alignment selection: **NOIRLab optical, both Spitzer composites and WISE**. All four pass the existing relative-star checks. 2MASS is hidden because it mainly supplies stellar context; IRIS is hidden because its coarse beam and unverified placement offer little usable nebular structure here. All six original records remain preserved.
+
 Six image candidates are pinned for the local Nebula Lab Alignment tab. This is
 original-image inspection only. No star removal, reconstruction, physical
 constraints, volume, or production object has been prepared by this intake.

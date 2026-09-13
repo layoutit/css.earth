@@ -1,6 +1,6 @@
 {
   "objectId": "m1",
-  "summary": "Six Crab Nebula views compare optical line emission, near/mid-infrared components, radio synchrotron and the X-ray pulsar wind on a shared sky frame. Different epochs, passbands and resolutions produce real morphological differences; alignment must not erase expansion or force different emission mechanisms into agreement.",
+  "summary": "1 selected Alignment image; Six Crab Nebula views compare optical line emission, near/mid-infrared components, radio synchrotron and the X-ray pulsar wind on a shared sky frame. Different epochs, passbands and resolutions produce real morphological differences; alignment must not erase expansion or force different emission mechanisms into agreement.",
   "images": [
     {
       "id": "hubble-optical",
@@ -14,7 +14,8 @@
       "notes": [
         "Eight-field observation interval is documented in Dubner et al. §V: https://arxiv.org/html/1704.02968v1",
         "Publisher AVM has a full TAN solution attributed to NASA/Hubble. Field-star residuals must establish independent registration quality."
-      ]
+      ],
+      "alignmentSelection": "selected"
     },
     {
       "id": "webb-infrared",
@@ -30,7 +31,8 @@
         "AVM quality is Position, not Full: complete numerical WCS is supplied, but publisher accuracy remains provisional.",
         "Master grid is 10509 × 9151; preserve its AVM reference pixels when using the 4000 × 3483 derivative.",
         "Publisher PAH/silicate band labels are not evidence of pure PAH or silicate emission."
-      ]
+      ],
+      "alignmentSelection": "excluded-pending-review"
     },
     {
       "id": "webb-components",
@@ -44,7 +46,8 @@
       "notes": [
         "Full TAN AVM retained; component subtraction makes field-star matching unsuitable as a required registration test.",
         "Component isolation depends on subtraction and PSF matching: https://arxiv.org/html/2406.00172v1"
-      ]
+      ],
+      "alignmentSelection": "excluded-pending-review"
     },
     {
       "id": "spitzer-infrared",
@@ -59,7 +62,8 @@
         "Selected ESA/Hubble release omits instrument/filter tags. MIPS and 24 µm come from the linked CXC companion TIFF AVM, not a measured spectrum: https://chandra.harvard.edu/photo/2017/crab/more.html",
         "Treat line emission, synchrotron and dust as possible contributors; infrared brightness alone is not dust mass.",
         "Full TAN publisher WCS retained without fitting the nebular structure."
-      ]
+      ],
+      "alignmentSelection": "excluded-pending-review"
     },
     {
       "id": "vla-radio",
@@ -74,7 +78,8 @@
         "Parent map combines S-band data with an expanded, spectrally scaled older template; an additional high-pass version exists: https://arxiv.org/html/1704.02968v1",
         "Not a flux-calibrated TIFF. Do not interpret a narrow display pixel or missing smooth emission as instrumental resolution or physical absence.",
         "Full TAN publisher WCS retained; radio wisps must not be forced onto optical features."
-      ]
+      ],
+      "alignmentSelection": "excluded-pending-review"
     },
     {
       "id": "chandra-xray",
@@ -90,7 +95,8 @@
         "CXC AVM central wavelength 0.8267 nm is a representative display tag, not an energy-band definition.",
         "The companion paper’s near-contemporaneous 2012 exposure must not be substituted for the release stack epoch.",
         "Full TAN publisher WCS retained; compact torus morphology is not a field-star registration reference."
-      ]
+      ],
+      "alignmentSelection": "excluded-pending-review"
     }
   ],
   "papers": [
@@ -146,5 +152,12 @@
         "The faint northern ejecta jet is different from the inner X-ray pulsar jet and is not fully covered by the selected tight optical/Webb mosaics."
       ]
     }
-  ]
+  ],
+  "selection": {
+    "referenceId": "hubble-optical",
+    "imageIds": [
+      "hubble-optical"
+    ],
+    "reason": "Optical reference retained. Webb and other spectral views remain documented but hidden until their independent sky alignment can be established; publisher placement alone is not enough."
+  }
 }

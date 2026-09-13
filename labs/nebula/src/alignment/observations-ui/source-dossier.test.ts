@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { readSourceDossier } from './source-dossier';
+import { readSourceDossier, selectObservationCandidates } from './source-dossier';
+import { readObservations } from './model';
 import { readObservationRecipe } from '../observations/recipe';
 import { publisherRegistration } from '../observations/registration';
 
@@ -17,6 +18,32 @@ test('every new candidate has a source dossier and primary-paper context', async
     const invalid = JSON.parse(await readFile(`${root}/source-dossier.json`, 'utf8'));
     invalid.papers[0].url = 'javascript:alert(1)';
     assert.throws(() => readSourceDossier(invalid), /HTTPS/);
+  }
+});
+
+test('curation hides weak sources and refuses unverified comparison images', async () => {
+  const expected: Record<string, string[]> = {
+    m45: ['noirlab-optical', 'spitzer-irac', 'spitzer-irac-mips', 'wise-four-band'],
+    m1: ['hubble-optical'], m8: ['eso-optical', 'eso-vista', 'spitzer-mid-infrared'],
+  };
+  for (const [id, ids] of Object.entries(expected)) {
+    const dossier = readSourceDossier(JSON.parse(await readFile(`labs/nebula/models/${id}/source-dossier.json`, 'utf8')));
+    assert.deepEqual(dossier.selection?.imageIds, ids);
+    const recipe = readObservationRecipe(JSON.parse(await readFile(`labs/nebula/models/${id}/${id === 'm8' ? 'alignment-candidates' : 'observations'}.json`, 'utf8')));
+    const data = readObservations({ schema: 'cssearth-nebula-observations@1', id, frame: recipe.frame,
+      images: recipe.images.map(image => ({ id: image.id, label: image.label, source: image,
+        layers: { original: { path: `test/${image.id}.png`, width: image.width, height: image.height } },
+        imageToFrame: [1, 0, 0, 1, 0, 0], registration: publisherRegistration('Test source') })) });
+    // Real astrometry is exercised by browser-source-candidates; this boundary check needs no ignored images.
+    for (const image of data.images) if (ids.length > 1 && ids.includes(image.id)) image.registration.status = 'verified';
+    const selected = selectObservationCandidates(data, dossier.selection);
+    assert.deepEqual(selected.images.map(image => image.id), ids);
+    if (ids.length > 1) {
+      const broken = structuredClone(data);
+      broken.images.find(image => image.id === ids[1])!.registration.status = 'publisher';
+      assert.throws(() => selectObservationCandidates(broken, dossier.selection), /no verified alignment/);
+    } else assert.equal(selected.images[0]!.registration.status, 'publisher', 'A single reference must not become verified by curation.');
+    assert.equal(data.images.length, 6, 'Excluded source records remain available.');
   }
 });
 

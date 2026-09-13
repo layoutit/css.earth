@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-nebula-source-dossier@1",
   "objectId": "m8",
-  "summary": "Six separate Lagoon alignment candidates spanning optical, near-, mid- and far-infrared. Two Hubble images cover only the central detail; the Herschel context has incomplete survey support. This packet records source facts and literature, not accepted registration or processed nebulae.",
+  "summary": "3 selected Alignment images; Six separate Lagoon alignment candidates spanning optical, near-, mid- and far-infrared. Two Hubble images cover only the central detail; the Herschel context has incomplete survey support. This packet records source facts and literature, not accepted registration or processed nebulae.",
   "status": "alignment-intake-only",
   "inspectedOn": "2026-09-13",
   "acquisitionNote": "Existing ESO files reused unchanged from the 2026-09-12 cache; four new source images and supporting metadata downloaded 2026-09-13.",
@@ -37,7 +37,8 @@
       "rights": "CC BY 4.0; retain ESO credit.",
       "footprintScope": "full-field",
       "astrometrySource": "Embedded AVM in pinned TIFF",
-      "observationEpoch": null
+      "observationEpoch": null,
+      "alignmentSelection": "selected"
     },
     {
       "id": "eso-vista",
@@ -65,7 +66,8 @@
       "rights": "CC BY 4.0; retain ESO/VVV and Cambridge Astronomical Survey Unit acknowledgment.",
       "footprintScope": "full-field-strip",
       "astrometrySource": "Embedded AVM in pinned TIFF",
-      "observationEpoch": null
+      "observationEpoch": null,
+      "alignmentSelection": "selected"
     },
     {
       "id": "hst-optical",
@@ -97,7 +99,8 @@
         "start": "2018-02-12",
         "end": "2018-02-18",
         "source": "https://esahubble.org/images/heic1808a/"
-      }
+      },
+      "alignmentSelection": "excluded-pending-review"
     },
     {
       "id": "hst-infrared",
@@ -125,7 +128,8 @@
       "rights": "CC BY 4.0; credit NASA, ESA, STScI.",
       "footprintScope": "local-detail",
       "astrometrySource": "Embedded AVM in pinned original TIFF",
-      "observationEpoch": null
+      "observationEpoch": null,
+      "alignmentSelection": "excluded-pending-review"
     },
     {
       "id": "spitzer-mid-infrared",
@@ -163,7 +167,8 @@
         "mipsStart": "2005-09-27T08:05",
         "timezone": "Not stated in source AVM",
         "source": "https://www.astropix.org/image/spitzer/sig11-012"
-      }
+      },
+      "alignmentSelection": "selected"
     },
     {
       "id": "herschel-pacs160",
@@ -215,7 +220,8 @@
         "nativeHierarchy": "HEALPix order 8, 512-pixel tiles; bilinear sampling, mean overlay, median hierarchy.",
         "sourceArchiveUrl": "https://archives.esac.esa.int/hsa/whsa/"
       },
-      "observationEpoch": null
+      "observationEpoch": null,
+      "alignmentSelection": "excluded-pending-review"
     }
   ],
   "papers": [
@@ -298,5 +304,14 @@
     "Angular sampling is the selected raster grid spacing, never a substitute for measured PSF/beam resolution.",
     "Publisher astrometry is provisional. No stellar registration, star removal, reconstruction, compilation or bake was performed for this intake.",
     "Source image differences include tracers, coverage, epoch, PSF and display stretch. They do not by themselves establish density, membership or physical depth."
-  ]
+  ],
+  "selection": {
+    "referenceId": "eso-optical",
+    "imageIds": [
+      "eso-optical",
+      "eso-vista",
+      "spitzer-mid-infrared"
+    ],
+    "reason": "Full-nebula optical and complementary near/mid-infrared structure with passing relative field-star checks. Hubble close-ups remain unverified; the Herschel map is zero-filled over the central Lagoon region."
+  }
 }

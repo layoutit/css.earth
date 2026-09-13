@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { localFile } from '../viewer/viewer';
 import { ObservationSources } from './observation-sources';
+import { readSourceDossier, selectObservationCandidates, type SourceDossier } from '../alignment/observations-ui/source-dossier';
 import { adjustedMatrix, imageCorners, observationFitStorageKey, savedObservationFit, readAdjustment, readObservations, transform, unchanged,
   type Adjustment, type LayerId, type Observation, type Observations } from '../alignment/observations-ui/model';
 
@@ -10,6 +11,7 @@ const layers = [{ id: 'original', label: 'Original', symbol: '▧' }, { id: 'dif
 /** Common astrometric canvas. Inspection never launches image processing. */
 export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler }: { manifestPath: string; dossierPath?: string; onOpenCompiler?(): void }) {
   const [data, setData] = useState<Observations | null>(null), [error, setError] = useState('');
+  const [dossier, setDossier] = useState<SourceDossier | null>(null);
   const [selected, setSelected] = useState('');
   const [layer, setLayer] = useState<LayerId>('original');
   const [showMatches, setShowMatches] = useState(false);
@@ -24,10 +26,15 @@ export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler
   useEffect(() => {
     const controller = new AbortController(), refreshing = loadedPath.current === manifestPath;
     sourceRevision.current++; setLoading(true); setError(''); setImageErrors({}); setCopyStatus('');
-    if (!refreshing) { initialFit.current = false; setData(null); setStorageError(''); }
-    void fetch(localFile(manifestPath), { signal: controller.signal }).then(async response => {
-      if (!response.ok) throw new Error(`Aligned images unavailable (${response.status}).`);
-      const next = readObservations(await response.json());
+    if (!refreshing) { initialFit.current = false; setData(null); setDossier(null); setStorageError(''); }
+    const readJson = async (path: string) => {
+      const response = await fetch(localFile(path), { signal: controller.signal });
+      if (!response.ok) throw new Error(`Alignment inputs unavailable (${response.status}).`);
+      return response.json() as Promise<unknown>;
+    };
+    void Promise.all([readJson(manifestPath), dossierPath ? readJson(dossierPath) : Promise.resolve(null)]).then(([raw, sourceInfo]) => {
+      const info = sourceInfo === null ? null : readSourceDossier(sourceInfo);
+      const next = selectObservationCandidates(readObservations(raw), info?.selection);
       if (controller.signal.aborted) return;
       const prior = loadedManifest.current;
       setFits(previous => Object.fromEntries(next.images.map(image => [image.id,
@@ -35,11 +42,11 @@ export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler
           ? previous[image.id] ?? savedObservationFit(manifestPath, image) : savedObservationFit(manifestPath, image)])));
       setSelected(refreshing && next.images.some(item => item.id === selected) ? selected : next.images[0]!.id);
       if (!refreshing) setLayer('original');
-      loadedPath.current = manifestPath; loadedManifest.current = next; setData(next);
+      loadedPath.current = manifestPath; loadedManifest.current = next; setData(next); setDossier(info);
     }).catch((reason: unknown) => { if (!controller.signal.aborted) setError(reason instanceof Error ? reason.message : 'Aligned images unavailable.'); })
       .finally(() => { if (!controller.signal.aborted) setLoading(false); });
     return () => { controller.abort(); sourceRevision.current++; };
-  }, [manifestPath, reload]);
+  }, [manifestPath, dossierPath, reload]);
   useEffect(() => {
     const element = viewport.current; if (!element) return;
     const observer = new ResizeObserver(([entry]) => { if (entry) setExtent({ width: entry.contentRect.width, height: entry.contentRect.height }); });
@@ -134,6 +141,7 @@ export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler
         }}>
           {data?.images.map(item => <option value={item.id} key={item.id}>{item.label}</option>)}
         </select>
+        {dossier?.selection && <p className="overlay-detail" title={dossier.selection.reason}>{data?.images.length === 1 ? 'Reference image only · other alignments pending' : `${data?.images.length} selected images · star alignment checked`}</p>}
         <div className="image-layer-buttons observation-layers" role="group" aria-label="Observation image layer">{layers.map(item => {
           const missing = data?.images.filter(visible).filter(candidate => !candidate.layers[item.id]) ?? [];
           return <button type="button" key={item.id} aria-label={item.label} aria-pressed={layer === item.id} disabled={!data || missing.length > 0}
@@ -158,7 +166,7 @@ export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler
           <p className="overlay-detail" title="Full-resolution star extraction runs offline. These buttons only inspect completed outputs.">{image.layers.diffuse && image.layers.stars ? 'Native star removal prepared' : 'Star removal not prepared'}</p>
           <div className="placement-actions"><button className="text-button" type="button" disabled={loading} onClick={() => setReload(value => value + 1)} title="Read newly completed star-removal layers without moving the camera or changing the alignment.">{loading ? 'Reloading…' : 'Reload prepared layers'}</button>
           <a className="overlay-detail" href={image.source.page} target="_blank" rel="noreferrer" title={image.source.credit}>Source & credit ↗</a></div>
-          {dossierPath && <ObservationSources path={dossierPath} image={image} />}
+          {dossier && <ObservationSources data={dossier} image={image} />}
         </>}
         {(storageError || missingLayer.length > 0) && <p className="overlay-detail" role="status">{storageError || `Not prepared: ${missingLayer.map(item => item.label).join(', ')}`}</p>}
         {Object.values(imageErrors).map(message => <p className="overlay-detail" role="alert" key={message}>{message}</p>)}

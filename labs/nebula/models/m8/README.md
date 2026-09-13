@@ -1,5 +1,7 @@
 # Lagoon · M8
 
+Current Alignment selection: **ESO optical, ESO VISTA and Spitzer**. These retain the existing passing relative-star transforms (held-out RMS ≈0.76″ and 1.00″). Hubble close-ups remain documented but hidden until their small core fields can be independently matched. Herschel is hidden: its paired FITS array is zero-filled across a 6′ patch around both the Hubble and Spitzer central coordinates. This is missing support, not absence of nebular material.
+
 Asymmetric H II region and star-forming nebula.
 
 ## Sources

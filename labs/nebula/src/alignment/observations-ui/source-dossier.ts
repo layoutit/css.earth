@@ -1,5 +1,8 @@
+import type { Observations } from './model';
+export interface CandidateSelection { referenceId: string; imageIds: string[]; reason: string }
 export interface SourceDossier {
   objectId: string; summary: string;
+  selection?: CandidateSelection;
   images: { id: string; provider: string; telescope: string; wavelengths: string; coverage: string; quality: string;
     epoch?: string; masterUrl?: string; notes: string[] }[];
   papers: { title: string; url: string; year: number; access: string; constraints: string[] }[];
@@ -20,9 +23,28 @@ export function readSourceDossier(value: unknown): SourceDossier {
       ...(r.epoch === undefined ? {} : { epoch: text(r.epoch) }), ...(r.masterUrl === undefined ? {} : { masterUrl: link(r.masterUrl) }) };
   });
   if (new Set(images.map(r => r.id)).size !== images.length) throw new TypeError('Duplicate dossier image.');
-  return { objectId: text(row.objectId), summary: text(row.summary), images, papers: list(row.papers).map(value => {
+  let selection: CandidateSelection | undefined;
+  if (row.selection !== undefined) {
+    const s = record(row.selection), imageIds = list(s.imageIds).map(text), referenceId = text(s.referenceId);
+    if (!imageIds.length || new Set(imageIds).size !== imageIds.length || !imageIds.includes(referenceId) ||
+        imageIds.some(id => !images.some(image => image.id === id))) throw new TypeError('Invalid candidate selection.');
+    selection = { referenceId, imageIds, reason: text(s.reason) };
+  }
+  return { objectId: text(row.objectId), summary: text(row.summary), ...(selection ? { selection } : {}), images, papers: list(row.papers).map(value => {
     const r = record(value);
     if (typeof r.year !== 'number' || !Number.isInteger(r.year)) throw new TypeError('Invalid paper year.');
     return { title: text(r.title), url: link(r.url), year: r.year, access: text(r.access), constraints: list(r.constraints).map(text) };
   }) };
+}
+
+/** Only the named sky anchor may lack a relative fit. Selection never upgrades its status. */
+export function selectObservationCandidates(data: Observations, selection?: CandidateSelection): Observations {
+  if (!selection) return data;
+  const images = selection.imageIds.map(id => {
+    const image = data.images.find(image => image.id === id);
+    if (!image) throw new TypeError(`Selected candidate ${id} is not prepared.`);
+    if (id !== selection.referenceId && image.registration.status !== 'verified') throw new TypeError(`Selected candidate ${id} has no verified alignment.`);
+    return image;
+  });
+  return { ...data, images };
 }

@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-nebula-source-dossier@1",
   "objectId": "m45",
-  "summary": "Six original-image candidates for the Pleiades reflection nebula: optical filaments, two Spitzer infrared composites, a wider WISE mosaic, 2MASS stellar context and coarse IRAS/IRIS far-infrared context. These display rasters and literature notes establish intake evidence, not recovered 3D dust density.",
+  "summary": "4 selected Alignment images; Six original-image candidates for the Pleiades reflection nebula: optical filaments, two Spitzer infrared composites, a wider WISE mosaic, 2MASS stellar context and coarse IRAS/IRIS far-infrared context. These display rasters and literature notes establish intake evidence, not recovered 3D dust density.",
   "intakeDate": "2026-09-13",
   "images": [
     {
@@ -21,7 +21,8 @@
       "metadataUrls": [
         "https://noirlab.edu/public/images/noao-m45/",
         "https://www.astropix.org/image/noirlab/noao-m45"
-      ]
+      ],
+      "alignmentSelection": "selected"
     },
     {
       "id": "spitzer-irac",
@@ -41,7 +42,8 @@
         "https://www.astropix.org/image/spitzer/ssc2007-07b1",
         "https://science.nasa.gov/photojournal/pink-pleiades/",
         "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/5/"
-      ]
+      ],
+      "alignmentSelection": "selected"
     },
     {
       "id": "spitzer-irac-mips",
@@ -61,7 +63,8 @@
         "https://www.astropix.org/image/spitzer/ssc2007-07a1",
         "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
         "https://irsa.ipac.caltech.edu/data/SPITZER/docs/mips/mipsinstrumenthandbook/3/"
-      ]
+      ],
+      "alignmentSelection": "selected"
     },
     {
       "id": "wise-four-band",
@@ -81,7 +84,8 @@
         "https://science.nasa.gov/photojournal/seven-sisters-get-wise/",
         "https://www.astropix.org/image/wise/WISE2010-025",
         "https://irsa.ipac.caltech.edu/onlinehelp/finderchart/help.pdf"
-      ]
+      ],
+      "alignmentSelection": "selected"
     },
     {
       "id": "twomass-jhk",
@@ -102,7 +106,8 @@
         "https://alasky.cds.unistra.fr/2MASS/Color/properties",
         "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
         "https://www.ipac.caltech.edu/2mass/overview/access.html"
-      ]
+      ],
+      "alignmentSelection": "excluded-pending-review"
     },
     {
       "id": "iris-far-infrared",
@@ -123,7 +128,8 @@
         "https://alasky.cds.unistra.fr/IRISColor/properties",
         "https://irsa.ipac.caltech.edu/data/IRIS/overview.html",
         "https://arxiv.org/abs/astro-ph/0412216"
-      ]
+      ],
+      "alignmentSelection": "excluded-pending-review"
     }
   ],
   "papers": [
@@ -224,5 +230,15 @@
     "WISP 165/220 nm diffuse UV signal is real and documented, but native original rasters with verified WCS and reuse terms have not been acquired; no UV image is invented or substituted from a paper figure.",
     "No calibrated spectral cubes, polarimetric map, absorption sightline catalogue or three-dimensional dust model has been qualified.",
     "2MASS and IRIS are context references with conspicuous quality limits; morphology/density inference must not treat their RGB as calibrated flux."
-  ]
+  ],
+  "selection": {
+    "referenceId": "noirlab-optical",
+    "imageIds": [
+      "noirlab-optical",
+      "spitzer-irac",
+      "spitzer-irac-mips",
+      "wise-four-band"
+    ],
+    "reason": "Optical filaments and infrared dust structure with passing relative star registration. 2MASS is mainly stellar context; IRIS is coarse cirrus context without verified registration."
+  }
 }
