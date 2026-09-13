@@ -323,8 +323,8 @@
     {
       "id": "pluto-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1156,
-      "expectedSha256": "22e358610fede5e6683bc1351b4edc990afc988074298b3ebbcd10b14f73c10c",
+      "expectedBytes": 1212,
+      "expectedSha256": "e3b8d6d6c9d3132108b3505292c74a6a41a3af95f0c65503d06d99840ca6d2b3",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -380,8 +380,8 @@
     {
       "id": "pluto-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "7521e019234efcf9286f841c3dbe382389efe580b2a00d1ab8d882a9185ab776",
-      "expectedBytes": 3434,
+      "expectedSha256": "d42cb9dde57e8d5fe359499f88e0db03db4d8e0c2d72072ed25d4e6da37e2faf",
+      "expectedBytes": 14717,
       "origin": "Repository-authored Pluto raster preparation recipe (generic sphere lane) carrying the science interpretation blocks of the retired static recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -474,8 +474,8 @@
     {
       "id": "pluto-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "5e0ef5f318b20f4a662c4b17783f9bb073df019dde58d3c3171d7fb4fa30aba1",
-      "expectedBytes": 1269,
+      "expectedSha256": "f1e6c908348cb7912c6bb2b450fed902f3ee096a46520674b4f8bd8fbe3b489b",
+      "expectedBytes": 1943,
       "origin": "Repository-authored Pluto acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -493,8 +493,8 @@
     {
       "id": "pluto-object-content",
       "path": "content/object.json",
-      "expectedSha256": "924a299604725b552468ce335eb075a2d15b99c94c30082f2329ded994c6f599",
-      "expectedBytes": 11761,
+      "expectedSha256": "8cdb254475f0f575d8530bc0ed86f2c83ca5f98f0695a193e252c04a05e04dbf",
+      "expectedBytes": 17225,
       "origin": "Repository-authored Pluto panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -507,6 +507,92 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet, view descriptions and legends."
+      }
+    },
+    {
+      "id": "pluto-leisa-ice-fractions",
+      "path": "science/leisa/params_ls.fits",
+      "expectedBytes": 22841280,
+      "expectedSha256": "eb8a44c51dcd0e2abd55aa8e85cae1814b2f0c1de840ea193ea28fcb9647ac95",
+      "origin": "https://zenodo.org/api/records/18825240/files/params_ls.fits/content",
+      "productId": "params_ls.fits",
+      "version": "10.5281/zenodo.18825240",
+      "title": "New Horizons LEISA ice composition",
+      "sourceUrl": "https://zenodo.org/records/18825240",
+      "credit": "A. E. Drozdov and N. V. Emelyanov; New Horizons NASA/JHUAPL/SwRI",
+      "displayCredit": "Drozdov & Emelyanov · New Horizons LEISA",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/18825240",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original published FITS download; checked against the Zenodo file size and MD5, then pinned with SHA-256. No conversion.",
+      "redistribution": "CC BY 4.0 with attribution; independent of the manuscript license.",
+      "consumers": [
+        "leisa-ice-composition"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pluto-leisa-composition-2026",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/18825240#/files/params_ls.fits"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://arxiv.org/html/2603.21860v1#S2.SS1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pluto-leisa-fit-errors",
+      "path": "science/leisa/params_ls_errors.fits",
+      "expectedBytes": 22841280,
+      "expectedSha256": "c50ee685c0ed18da5f4c12cc5df3ceb842cd0aeb6c86ce4d424697a686a162a1",
+      "origin": "https://zenodo.org/api/records/18825240/files/params_ls_errors.fits/content",
+      "productId": "params_ls_errors.fits",
+      "version": "10.5281/zenodo.18825240",
+      "title": "New Horizons LEISA fit uncertainties",
+      "sourceUrl": "https://zenodo.org/records/18825240",
+      "credit": "A. E. Drozdov and N. V. Emelyanov; New Horizons NASA/JHUAPL/SwRI",
+      "displayCredit": "Drozdov & Emelyanov · New Horizons LEISA",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/18825240",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original published FITS download; checked against the Zenodo file size and MD5, then pinned with SHA-256. No conversion.",
+      "redistribution": "CC BY 4.0 with attribution; independent of the manuscript license.",
+      "consumers": [
+        "leisa-ice-composition"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pluto-leisa-composition-2026",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/18825240#/files/params_ls_errors.fits"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://arxiv.org/html/2603.21860v1#S2.SS1"
+          }
+        ]
       }
     }
   ],

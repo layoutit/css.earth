@@ -7,10 +7,31 @@
 | Color | [NASA/JHUAPL/SwRI MVIC mosaic](https://science.nasa.gov/resource/pluto-global-color-map/), published 20 January 2017. Published color, not calibrated true-color reflectance. |
 | Monochrome | [USGS LORRI/MVIC mosaic](https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_mosaic_300m), July 2017; 24,888 × 12,444, east-positive longitude. |
 | Elevation | [USGS stereo DEM](https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m): signed metres above a 1,188.3 km sphere; −32,768 means missing. False-color scale −8 to +8 km. |
+| Methane, nitrogen and water ice | [Drozdov & Emelyanov (2026), Zenodo 18825240](https://zenodo.org/records/18825240), CC BY 4.0. Modeled surface fractions from five New Horizons LEISA scans on 14 July 2015. All three use the same 0–100% scale; they are infrared spectral fits, not photographs. |
 | Physical facts | Pinned [JPL](https://ssd.jpl.nasa.gov/planets/phys_par.html) and [NASA](https://science.nasa.gov/dwarf-planets/pluto/facts/) records; shared ESO/HYG sky and Inter title sources. |
-| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/PLUTO/target) Pluto centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/PLUTO/target) Pluto centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels depend on their size on screen, and a selected feature stays labelled. Available in all six views. |
 
 ## Evidence
+
+The LEISA reader matches 192 independent Astropy/NumPy sample decisions and the
+accepted cell counts for all three ice maps. The unchanged native maps give
+69.31% methane-rich ice and 19.88% nitrogen-rich ice averaged over 60–90° N,
+matching the paper's rounded 69% and 20% in section 3 and Figure 9.
+[Pinned reference values](../../../tests/objects/fixtures/pluto/leisa-astropy.json)
+and [the comparison test](../../../tests/objects/unit/pluto/leisa.test.mts)
+identify the exact source files and oracle versions. These checks establish
+decoding, source sampling and the declared mask; they do not validate the
+authors' spectral inversion.
+
+The [LEISA validation record](evidence/leisa/validation.json) identifies the
+tested inputs and code. All six views passed dataset interaction checks at
+DPR 1 and 2. A [focused browser check](../../../tests/objects/browser/pluto/ice-surfaces-browser.mts)
+verifies the actual latitude and pole texture bindings on desktop and mobile,
+450 retained surface pieces, and shadows off at startup. The original FITS
+files restored from Zenodo into an empty directory; all 125 runtime files
+restored from their published content-addressed URLs. Repreparation reproduced
+the complete asset inventory exactly. Broader shared-test failures are recorded
+separately and are not a full-suite pass.
 
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
 
@@ -21,13 +42,22 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 
 These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/pluto/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
-Lane change (this PR): the static-surface lane was retired for Pluto; the same pinned inputs and observation interpretation (coverage grid, signed DEM decoding, relief) now feed the shared raster lane used by Mercury, Venus and Mars. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request.
+Pluto uses the shared raster lane used by Mercury, Venus and Mars. Photographs,
+elevation and composition share the existing geometry, camera and lighting bank.
 
 The retained notes point to [unit checks](../../../tests/objects/unit/pluto) and [browser checks](../../../tests/objects/browser/pluto), and mentions separate capture/Saturn reports. They do not identify a dated report here; test definitions are not passing-run evidence.
 
 Pinned inputs are checked by the shared [source closure test](../../../tests/objects/source-closure.test.mts).
 
 ## Known problems
+
+LEISA fractions depend on the assumed ice optical properties and the fitting
+method. The paper reports residual scan seams and sensitivity of Sputnik
+Planitia's nitrogen fraction to the assumed nitrogen absorption. Formal errors
+do not include every model or calibration uncertainty. Gray grid means no
+usable fit under the display policy below; it does not mean zero ice.
+The maps have nominal 7 km cells, with varying effective resolution and
+registration accuracy. They cannot support close-up geological detail.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Pluto (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 0° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Sputnik Planitia on the New Horizons colour mosaic coincide with the imagery.
 
@@ -58,6 +88,67 @@ All these choices are prepared; the browser only transports state.
 
 <details>
 <summary>Methods and source notes</summary>
+
+**LEISA ice composition**
+
+[Drozdov & Emelyanov, Icarus 452 (2026), 117031](https://doi.org/10.1016/j.icarus.2026.117031)
+combine five calibrated LEISA scans and fit a four-material Hapke mixture.
+We use their baseline least-squares solution, `params_ls.fits`, and its matching
+`params_ls_errors.fits`, from the versioned release
+[10.5281/zenodo.18825240](https://zenodo.org/records/18825240).
+The dataset has CC BY 4.0 terms; the manuscript has separate terms.
+The authors prefer this solution over the chi-squared fit, which creates a
+strong polar discontinuity. Alternative fits are not extra dataset rows.
+Temperature is excluded because the paper identifies unphysical upper-bound
+solutions; grain sizes and the tholin proxy are outside this three-ice view.
+
+The native files have an empty primary HDU and ten float32 IMAGE extensions,
+each 1,067 × 534. Extensions 1–3 contain methane-rich ice, nitrogen-rich ice and
+water-ice area fractions in percent. Their names, units, primary solution name,
+`IMAGKN2 = 'k = 0'`, dimensions, byte order and unscaled encoding are checked.
+No Hapke inversion, sharpening, photo-detail injection or smoothing runs here.
+
+The FITS headers omit WCS. Section 2.4 describes 7 km equirectangular maps;
+Figure 6 establishes east longitude increasing from 0° to 360° and north up.
+We map the nearly 2:1 array over the full sphere (+90° to −90° latitude),
+sampling cell centres. Its Sputnik feature, blank footprint and northern
+averages agree with the publication in this orientation. This is regional map
+registration; the release does not provide subpixel coordinate metadata.
+The existing Pluto map frame also starts at 0° E. The original figure is a
+coordinate reference and is not used as a texture.
+
+Uncomputed cells are finite, not NaN: all ten parameters retain the tuple
+`[25, 25, 25, 25, float32(0.06), float32(0.06), float32(0.06), float32(0.06), -1, 40]`.
+The error file repeats it. This inferred initialization signature matches the
+blank footprint in Figure 6 and includes the impossible negative solubility.
+We withhold the complete tuple, not individual 25% values. It occurs in 335,273
+cells. Valid zero or low fractions remain values of the fitted model.
+
+The corresponding component error must be finite and between 0 and 100
+percentage points. The upper limit is our display choice: an error exceeding
+the entire fraction scale provides no useful constraint. It is not an author
+confidence threshold. We do not claim the remaining cells are precise, or that
+small formal errors cover systematic uncertainty. Sampling is nearest-cell
+before the missing-coverage grid is painted, so missing neighbours are never
+used to interpolate a fraction.
+
+| Ice view | Accepted native cells | Fraction of the sphere, area weighted |
+| --- | ---: | ---: |
+| Methane | 213,048 | 34.28% |
+| Nitrogen | 210,515 | 34.04% |
+| Water | 204,625 | 32.58% |
+
+The display uses one linear viridis palette and one 0–100% legend for all three
+fractions. Pole tiles, thumbnails and minimaps use the same interpretation.
+Globe lighting supplies the existing curvature shading; colors are a numeric
+scale, not physical surface color. Mesh and camera parameters are unchanged.
+
+The reference fixture was calculated with Astropy 8.0.1 and NumPy 2.5.3 in the
+repository oracle environment, opening both original FITS files independently.
+It samples 64 fixed random cells per component (NumPy seeds 18825241–18825243),
+applies the tuple/error policy to the native arrays, and sums
+`cos(90° − (row + 0.5) × 180° / 534)` for area weighting. The northern mean is
+computed before the error cutoff to match the paper's published quantity.
 
 Pluto is a standalone dwarf planet in the shared object shell. Charon and the
 other moons are not mounted. This is a source-backed presentation, not an
