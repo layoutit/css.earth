@@ -46,6 +46,13 @@ Do not infer a precise camera from a caption or sub-spacecraft longitude alone.
 A holdout from the same GEO product proves internal consistency, not independent
 absolute accuracy or agreement with a different display mesh.
 
+For OSIRIS image/model registration, the existing archived-camera preparer
+accepts `registrationSearchRadiusPixels` in the source profile (128 by default,
+up to 256 source pixels). A wider search locates a larger pointing translation;
+it does not relax the 0.70 correlation or 12-pixel withheld-error limits. Keep
+two spatially disjoint fit windows and two holdouts, include the search margin
+inside the image, and report the adjustment and its source-shape limitations.
+
 ## Qualify a surface sample before interpolation
 
 Keep camera fit, correspondence between shape models, detector quality and
