@@ -475,10 +475,10 @@ test('the generated catalogue is checked as data without executing source overla
 test('descriptor context binding pins both prepared contexts to the shared factories and physical references', async () => {
   const contextFile = 'src/objects/sun/prepared/world-context.json';
   const packagedFile = 'site/packaged-object-runtime.mts', applicationFile = 'site/application-world-context.mts', starsDescriptorFile = 'src/objects/stellar-neighbourhood/object.json';
-  const starsPayloadFile = 'src/objects/stellar-neighbourhood/prepared/stars.json';
-  const [contextText, packaged, application, starDescriptorText, starsPayloadText] = await Promise.all([
+  const starsPayloadFile = 'src/objects/stellar-neighbourhood/prepared/stars.json', contextObjectsFile = 'site/prepared-context-objects.mts';
+  const [contextText, packaged, application, starDescriptorText, starsPayloadText, contextObjects] = await Promise.all([
     readFile(contextFile, 'utf8'), readFile(packagedFile, 'utf8'), readFile(applicationFile, 'utf8'),
-    readFile(starsDescriptorFile, 'utf8'), readFile(starsPayloadFile, 'utf8'),
+    readFile(starsDescriptorFile, 'utf8'), readFile(starsPayloadFile, 'utf8'), readFile(contextObjectsFile, 'utf8'),
   ]);
   const contextInput = requireRecord(JSON.parse(contextText), 'world context');
   const context: ContextValue = {
@@ -541,7 +541,8 @@ test('descriptor context binding pins both prepared contexts to the shared facto
     [{ [packagedFile]: packaged.replace('createWorldContextObjectRuntime', 'createObjectRuntime') }, /Contextual binding/],
     [{ [packagedFile]: packaged.replace('world-context.json', 'other-context.json') }, /Contextual binding/],
     [{ [applicationFile]: application.replace('createPreparedUniverse', 'createObjectRuntime') }, /Application world context/],
-    [{ [applicationFile]: application.replace('../src/objects/*/prepared/**/*.{json,png,webp,bin}', '../src/objects/*/prepared/**/*.{json,png,webp}') }, /Application world context/],
+    [{ [applicationFile]: application.replace('assets = CONTEXT_OBJECT_ASSET_URLS', "assets = import.meta.glob('../src/objects/*/prepared/**/*.{json,png,webp,bin}', { query: '?url', import: 'default', eager: true })") }, /Application world context/],
+    [{ [contextObjectsFile]: contextObjects.replace('/prepared/**/*.{json,png,webp,bin}', '/prepared/**/*.{json,png,webp}') }, /Application world context/],
     [{ [applicationFile]: application.replace('loadPreparedCssPointField', 'loadPreparedCssVolume') }, /Application world context/],
     [{ [applicationFile]: application.replace('loadPreparedCssSurfaceShell', 'loadPreparedCssVolume') }, /Application world context/],
     [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, prepared: { ...starPrepared, sha256: '0'.repeat(64) } }) }, /point field.*(?:identity|hash).*drifted/],
