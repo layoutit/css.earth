@@ -158,30 +158,11 @@ export const cameraFrameFields = {id:text,path:text,labelPath:text,encoding:opti
   quality:optional(shape({imageId:text,target:text,startTime:text,filter:text,rawPath:text,rawLabelPath:text,badDataPath:text,badDataLabelPath:text}))};
 export const parseCameraFrame = shape(cameraFrameFields);
 export const parseCameraShape = shape({format:text,path:text,grid:requireRecord});
-const legacyCameraPhotometry = shape({model:optional(text),weight:number,maximumGain:number,displayMaximum:number,gamma:number,minimumLevel:number,maximumLevel:number,
- maximumIncidenceDegrees:number,maximumEmissionDegrees:number,backgroundMaximum:optional(number)});
-const publishedCameraPhotometry = shape({model:text,referenceDegrees:shape({incidence:number,emission:number,phase:number}),
- limits:shape({maximumIncidenceDegrees:number,maximumEmissionDegrees:number,phaseDegrees:array(number),minimumGain:number,maximumGain:number}),
- displayMaximum:number,gamma:number,minimumLevel:number,maximumLevel:number,backgroundMaximum:optional(number)});
-const PUBLISHED_CAMERA_KEYS = ['model','referenceDegrees','limits','displayMaximum','gamma','minimumLevel','maximumLevel','backgroundMaximum'];
-/** A camera mosaic names a published model record with its display settings, or keeps the historical Lunar-Lambert block; never a mix. */
-export const cameraPhotometry: Decoder<ReturnType<typeof legacyCameraPhotometry> | ReturnType<typeof publishedCameraPhotometry>> = value => {
- const record = requireRecord(value), published = typeof record.model === 'string' && record.model.startsWith('photometry/');
- if (published && Object.keys(record).some(key => !PUBLISHED_CAMERA_KEYS.includes(key))) throw new TypeError('A published camera photometry block names only its model, reference geometry, limits and display settings.');
- if (!published && ('referenceDegrees' in record || 'limits' in record)) throw new TypeError('Only a published photometric model declares a reference geometry and limits.');
- return published ? publishedCameraPhotometry(value) : legacyCameraPhotometry(value);
-};
-export const parseCameraMosaic = shape({frames:array(parseCameraFrame),photometry:cameraPhotometry});
-/** Filter colour keeps each filter's observed brightness: its photometry has no display or level settings, and one range displays every band. */
-const colorCameraPhotometry = shape({model:optional(text),weight:number,maximumGain:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,backgroundMaximum:optional(number)});
-export const parseCameraColor = shape({channels:array(shape({filter:text,channel:text,frames:array(parseCameraFrame)})),photometry:colorCameraPhotometry,
- metadata:shape({falseColor:boolean}),displayRange:array(number),
- registration:optional(shape({references:array(parseCameraFrame),checks:array(shape({reference:text,targets:array(text)}))}))});
 
-export const levelMatchingFields = {maximumAngleDegrees:optional(number),minimumPairs:number,maximumLogMad:number,maximumGain:number,samplesPerTriangle:optional(number)};
+export const levelMatchingFields = {maximumAngleDegrees:optional(number),minimumPairs:number,maximumGain:number,samplesPerTriangle:optional(number)};
 export const parseLevelMatching = shape(levelMatchingFields);
 /** Contributor separation is either a fixed distance or a multiple of each sample's measured pixel footprint. */
-export const surfaceTransfer = shape({maximumSourceDistanceMeters:number,maximumSeparationMeters:optional(number),maximumSeparationFootprints:optional(number),visibilityToleranceMeters:number,maximumEmissionDegrees:number,interpretation:optional(text)});
+export const surfaceTransfer = shape({maximumSeparationMeters:optional(number),maximumSeparationFootprints:optional(number),visibilityToleranceMeters:number,maximumEmissionDegrees:number,interpretation:optional(text)});
 export const parseSurfaceGeometry = shape({format:optional(text),sourceTopology:optional(text),simplification:shape({method:optional(text),maximumErrorMeters:number})});
 export const parsePublishedPhotometry = shape({model:text,referenceDegrees:shape({incidence:number,emission:number,phase:number}),
  limits:shape({maximumIncidenceDegrees:number,maximumEmissionDegrees:number,phaseDegrees:array(number),minimumGain:number,maximumGain:number})});

@@ -17,7 +17,6 @@
     "recipe": {
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
       "inputs": [
-        "c0368603500",
         "c0420626379",
         "c0420652501",
         "c0512324200",
@@ -32,8 +31,8 @@
       "lensId": "normal"
     },
     "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-    "expectedBytes": 44558,
-    "expectedSha256": "cc24a3d225625321b94229125518492454d0d2262642fdcf215f5c8719c516d7"
+    "expectedBytes": 46346,
+    "expectedSha256": "fac868da09c4a7adf37c39a09588f3661f13f47e989b42af6c3bf3168e070abb"
   },
   "operations": [
     {

@@ -59,11 +59,20 @@
       }
     ],
     "observedColors": [],
-    "mosaics": [
+    "surfaceObservations": [
       {
         "id": "normal",
         "format": "controlled-shape-camera",
         "consumer": "cassini-frames",
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+          "attribution": {
+            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/cassini/iss/"
+          }
+        },
         "frames": [
           {
             "id": "n1563643679_1",
@@ -79,7 +88,8 @@
               548.9,
               376.9
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1606207298_1",
@@ -95,7 +105,8 @@
               910.1,
               825.5
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1646319036_1",
@@ -111,7 +122,8 @@
               907.3,
               922.3
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1646319549_1",
@@ -127,7 +139,8 @@
               817.6,
               840.5
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1687121104_1",
@@ -143,7 +156,8 @@
               489.6,
               654.9
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1687121284_1",
@@ -159,7 +173,8 @@
               490.6,
               473.3
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1687121464_1",
@@ -175,7 +190,8 @@
               496.3,
               292.9
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1687119135_1",
@@ -191,7 +207,8 @@
               530.3,
               598.9
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1687121164_1",
@@ -207,7 +224,8 @@
               489.7,
               593.6
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1687121224_1",
@@ -223,7 +241,8 @@
               489,
               533.9
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1687121524_1",
@@ -239,161 +258,42 @@
               498.3,
               232.1
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           }
         ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 64,
+          "minimumPairs": 64,
+          "maximumGain": 2.1,
+          "maximumAngleDegrees": 70
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 78
+        },
         "photometry": {
+          "model": "lunar-lambert",
           "weight": 0.5,
-          "maximumGain": 2.5,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
           "maximumIncidenceDegrees": 80,
           "maximumEmissionDegrees": 78,
-          "displayMaximum": 1.05,
-          "gamma": 1,
-          "minimumLevel": 0.7,
-          "maximumLevel": 1.4,
-          "backgroundMaximum": 0.003
+          "maximumGain": 2.5
         },
-        "metadata": {
-          "label": "Monochrome",
-          "falseColor": false,
-          "coverage": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-          "attribution": {
-            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
-            "url": "https://pds-rings.seti.org/cassini/iss/"
-          }
+        "display": {
+          "displayRange": [
+            0,
+            1.26
+          ]
         }
       },
       {
         "id": "false-color",
         "format": "controlled-shape-color",
         "consumer": "cassini-color-frames",
-        "channels": [
-          {
-            "channel": "red",
-            "filter": "IR3",
-            "frames": [
-              {
-                "id": "n1687120587_1",
-                "path": "observations/N1687120587_1_CALIB.IMG",
-                "labelPath": "observations/N1687120587_1_CALIB.LBL",
-                "observerLatitude": 1.78,
-                "observerWestLongitude": 99.2,
-                "sunLatitude": 9.75,
-                "sunWestLongitude": 29.33,
-                "rangeKm": 8262.9,
-                "northAzimuthDegrees": 179.7,
-                "center": [
-                  510.8,
-                  603.4
-                ],
-                "pixelAngleMicroradians": 5.989697719921734
-              },
-              {
-                "id": "n1687119936_1",
-                "path": "observations/N1687119936_1_CALIB.IMG",
-                "labelPath": "observations/N1687119936_1_CALIB.LBL",
-                "observerLatitude": 2.54,
-                "observerWestLongitude": 119.18,
-                "sunLatitude": 9.75,
-                "sunWestLongitude": 28.34,
-                "rangeKm": 7110.1,
-                "northAzimuthDegrees": 179.7937212433228,
-                "center": [
-                  513.7981718836712,
-                  605.3668969971911
-                ],
-                "pixelAngleMicroradians": 5.989697719921734
-              }
-            ]
-          },
-          {
-            "channel": "green",
-            "filter": "IR1",
-            "frames": [
-              {
-                "id": "n1687120557_1",
-                "path": "observations/N1687120557_1_CALIB.IMG",
-                "labelPath": "observations/N1687120557_1_CALIB.LBL",
-                "observerLatitude": 1.82,
-                "observerWestLongitude": 99.96,
-                "sunLatitude": 9.75,
-                "sunWestLongitude": 29.29,
-                "rangeKm": 8190.5,
-                "northAzimuthDegrees": 179.7,
-                "center": [
-                  511.2,
-                  600.8
-                ],
-                "pixelAngleMicroradians": 5.989697719921734
-              },
-              {
-                "id": "n1687119906_1",
-                "path": "observations/N1687119906_1_CALIB.IMG",
-                "labelPath": "observations/N1687119906_1_CALIB.LBL",
-                "observerLatitude": 2.57,
-                "observerWestLongitude": 120.21,
-                "sunLatitude": 9.76,
-                "sunWestLongitude": 28.3,
-                "rangeKm": 7084.2,
-                "northAzimuthDegrees": 179.77956754830004,
-                "center": [
-                  513.4453164193327,
-                  603.0741155820724
-                ],
-                "pixelAngleMicroradians": 5.989697719921734
-              }
-            ]
-          },
-          {
-            "channel": "blue",
-            "filter": "UV3",
-            "frames": [
-              {
-                "id": "n1687120624_1",
-                "path": "observations/N1687120624_1_CALIB.IMG",
-                "labelPath": "observations/N1687120624_1_CALIB.LBL",
-                "observerLatitude": 1.74,
-                "observerWestLongitude": 98.29,
-                "sunLatitude": 9.75,
-                "sunWestLongitude": 29.38,
-                "rangeKm": 8353.4,
-                "northAzimuthDegrees": 179.7,
-                "center": [
-                  511.3,
-                  601.6
-                ],
-                "pixelAngleMicroradians": 5.989697719921734
-              },
-              {
-                "id": "n1687119973_1",
-                "path": "observations/N1687119973_1_CALIB.IMG",
-                "labelPath": "observations/N1687119973_1_CALIB.LBL",
-                "observerLatitude": 2.5,
-                "observerWestLongitude": 117.93,
-                "sunLatitude": 9.75,
-                "sunWestLongitude": 28.39,
-                "rangeKm": 7145.1,
-                "northAzimuthDegrees": 179.7738505551833,
-                "center": [
-                  513.1535970546234,
-                  602.5656334438557
-                ],
-                "pixelAngleMicroradians": 5.989697719921734
-              }
-            ]
-          }
-        ],
-        "displayRange": [
-          0,
-          1.05
-        ],
-        "photometry": {
-          "weight": 0.5,
-          "maximumGain": 2.5,
-          "maximumIncidenceDegrees": 80,
-          "maximumEmissionDegrees": 78,
-          "backgroundMaximum": 0.003
-        },
         "metadata": {
           "label": "False color",
           "falseColor": true,
@@ -403,6 +303,130 @@
             "url": "https://pds-rings.seti.org/cassini/iss/"
           }
         },
+        "bands": [
+          {
+            "channel": "red",
+            "filter": "IR3"
+          },
+          {
+            "channel": "green",
+            "filter": "IR1"
+          },
+          {
+            "channel": "blue",
+            "filter": "UV3"
+          }
+        ],
+        "frames": [
+          {
+            "id": "set-1",
+            "red": {
+              "id": "n1687120587_1",
+              "path": "observations/N1687120587_1_CALIB.IMG",
+              "labelPath": "observations/N1687120587_1_CALIB.LBL",
+              "observerLatitude": 1.78,
+              "observerWestLongitude": 99.2,
+              "sunLatitude": 9.75,
+              "sunWestLongitude": 29.33,
+              "rangeKm": 8262.9,
+              "northAzimuthDegrees": 179.7,
+              "center": [
+                510.8,
+                603.4
+              ],
+              "pixelAngleMicroradians": 5.989697719921734,
+              "backgroundMaximum": 0.003
+            },
+            "green": {
+              "id": "n1687120557_1",
+              "path": "observations/N1687120557_1_CALIB.IMG",
+              "labelPath": "observations/N1687120557_1_CALIB.LBL",
+              "observerLatitude": 1.82,
+              "observerWestLongitude": 99.96,
+              "sunLatitude": 9.75,
+              "sunWestLongitude": 29.29,
+              "rangeKm": 8190.5,
+              "northAzimuthDegrees": 179.7,
+              "center": [
+                511.2,
+                600.8
+              ],
+              "pixelAngleMicroradians": 5.989697719921734,
+              "backgroundMaximum": 0.003
+            },
+            "blue": {
+              "id": "n1687120624_1",
+              "path": "observations/N1687120624_1_CALIB.IMG",
+              "labelPath": "observations/N1687120624_1_CALIB.LBL",
+              "observerLatitude": 1.74,
+              "observerWestLongitude": 98.29,
+              "sunLatitude": 9.75,
+              "sunWestLongitude": 29.38,
+              "rangeKm": 8353.4,
+              "northAzimuthDegrees": 179.7,
+              "center": [
+                511.3,
+                601.6
+              ],
+              "pixelAngleMicroradians": 5.989697719921734,
+              "backgroundMaximum": 0.003
+            }
+          },
+          {
+            "id": "set-2",
+            "red": {
+              "id": "n1687119936_1",
+              "path": "observations/N1687119936_1_CALIB.IMG",
+              "labelPath": "observations/N1687119936_1_CALIB.LBL",
+              "observerLatitude": 2.54,
+              "observerWestLongitude": 119.18,
+              "sunLatitude": 9.75,
+              "sunWestLongitude": 28.34,
+              "rangeKm": 7110.1,
+              "northAzimuthDegrees": 179.7937212433228,
+              "center": [
+                513.7981718836712,
+                605.3668969971911
+              ],
+              "pixelAngleMicroradians": 5.989697719921734,
+              "backgroundMaximum": 0.003
+            },
+            "green": {
+              "id": "n1687119906_1",
+              "path": "observations/N1687119906_1_CALIB.IMG",
+              "labelPath": "observations/N1687119906_1_CALIB.LBL",
+              "observerLatitude": 2.57,
+              "observerWestLongitude": 120.21,
+              "sunLatitude": 9.76,
+              "sunWestLongitude": 28.3,
+              "rangeKm": 7084.2,
+              "northAzimuthDegrees": 179.77956754830004,
+              "center": [
+                513.4453164193327,
+                603.0741155820724
+              ],
+              "pixelAngleMicroradians": 5.989697719921734,
+              "backgroundMaximum": 0.003
+            },
+            "blue": {
+              "id": "n1687119973_1",
+              "path": "observations/N1687119973_1_CALIB.IMG",
+              "labelPath": "observations/N1687119973_1_CALIB.LBL",
+              "observerLatitude": 2.5,
+              "observerWestLongitude": 117.93,
+              "sunLatitude": 9.75,
+              "sunWestLongitude": 28.39,
+              "rangeKm": 7145.1,
+              "northAzimuthDegrees": 179.7738505551833,
+              "center": [
+                513.1535970546234,
+                602.5656334438557
+              ],
+              "pixelAngleMicroradians": 5.989697719921734,
+              "backgroundMaximum": 0.003
+            }
+          }
+        ],
         "registration": {
           "references": [
             {
@@ -461,6 +485,33 @@
                 "n1687119973_1"
               ]
             }
+          ]
+        },
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 64,
+          "minimumPairs": 64,
+          "maximumGain": 1.4,
+          "maximumAngleDegrees": 70
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 78
+        },
+        "photometry": {
+          "model": "lunar-lambert",
+          "weight": 0.5,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 78,
+          "maximumGain": 2.5
+        },
+        "display": {
+          "displayRange": [
+            0,
+            1.05
           ]
         },
         "focus": {

@@ -2,89 +2,6 @@
   "schema": "cssthebe-authoritative-sources@2",
   "inputs": [
     {
-      "id": "c0368591600",
-      "path": "observations/C0368591600R.IMG",
-      "expectedBytes": 831488,
-      "expectedSha256": "16802209e6eb0bf3bb5fc028e613d527ce42e12227e7bce5c6b0665b086eb64e",
-      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368591600R.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368591600",
-      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS; retain NASA/JPL and PDS attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/galileo/"
-      ],
-      "acquisition": "Download the original Galileo SSI reconstructed experiment data record; byte digital numbers, not calibrated I/F.",
-      "redistribution": "Retain NASA/JPL and PDS credits.",
-      "consumers": [
-        "galileo-clear-frames"
-      ],
-      "width": 800,
-      "height": 800,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "geometry/registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "missionId": "galileo",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368591600R.IMG"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0017-c3-sml-sats-c0368591600r",
-            "role": "material",
-            "evidence": "src/planets/thebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
-      "id": "c0368591600-label",
-      "path": "observations/C0368591600R.LBL",
-      "expectedBytes": 4755,
-      "expectedSha256": "b482751e27d82f27662eeb5d4aa6860698279733690ef1f8373d35999d754569",
-      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368591600R.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368591600",
-      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS; retain NASA/JPL and PDS attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/galileo/"
-      ],
-      "acquisition": "Download the original Galileo SSI reconstructed experiment data record; byte digital numbers, not calibrated I/F.",
-      "redistribution": "Retain NASA/JPL and PDS credits.",
-      "consumers": [
-        "galileo-clear-frames"
-      ],
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "missionId": "galileo",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368591600R.LBL"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0017-c3-sml-sats-c0368591600r",
-            "role": "material",
-            "evidence": "src/planets/thebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      }
-    },
-    {
       "id": "c0401759200",
       "path": "observations/C0401759200R.IMG",
       "expectedBytes": 808000,
@@ -599,7 +516,6 @@
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
-          "c0368591600",
           "c0401759200",
           "c0401787200",
           "c0420691700",
@@ -614,8 +530,8 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 86897,
-      "expectedSha256": "4ce6673f4841257d1378ea381aee467595c01b3aaa7ed305f7ca48c62f94e71e"
+      "expectedBytes": 87103,
+      "expectedSha256": "89b909c7dc504416e58e08021b8d9dee239a7cd49d04cc1ab8dc0ec4a6a31209"
     }
   ],
   "documents": [
@@ -627,11 +543,6 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
       }
-    },
-    {
-      "path": "geometry/c0368591600-opus.json",
-      "expectedBytes": 11689,
-      "expectedSha256": "226069555b12f604fce24f1132ba957da00ed50b5a661c538c285f27b951df65"
     },
     {
       "path": "geometry/c0401759200-opus.json",
@@ -655,23 +566,23 @@
     },
     {
       "path": "geometry/registration.json",
-      "expectedBytes": 6022,
-      "expectedSha256": "c1606a3e68511bbe29d439d69717dae2ba9bb44be17d4880f67ecb0ba89b49ae"
+      "expectedBytes": 5009,
+      "expectedSha256": "9efba0f9398944e897c63b6c752b6aaa08c26aca3cd29eec4c04d6cbc40950f2"
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3374,
-      "expectedSha256": "3caeb0af07e65861f83138a5e002100d0371ca968198b3319ee163e7b32a2e12"
+      "expectedBytes": 2894,
+      "expectedSha256": "30ed1baa076845b608626925b270b3690c9e2bce72d8b8e845644de5ce78519a"
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1329,
-      "expectedSha256": "f1de3b89c6cdbf5f4ecf2b1759196931af70e83e011ed6f02ca30786ce1afbd5"
+      "expectedBytes": 1306,
+      "expectedSha256": "ca2aa4305a7546acdd58a232b0cad35ea0114e37161c100d0cce7df5a1cd6a50"
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 7377,
-      "expectedSha256": "11dfd899e3e6ea6a7ec17a20c3daa83f1dded9eb805403c7ba2927a3459e7ff9"
+      "expectedBytes": 7150,
+      "expectedSha256": "99535fb2c47296cc9319e705cb4d3f424572fca1e5819db00069a7dbec918610"
     },
     {
       "path": "presentation/minimap.json",

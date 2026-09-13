@@ -30,7 +30,7 @@ Geometry is simplified from the source connectivity with the shared meshoptimize
 
 **False color:** Three filters were acquired sequentially, and are not a simultaneous true-color photograph or a composition map. Source shadows and phase-dependent brightness remain. The common footprint is smaller than Monochrome coverage; gray grid marks gaps. Small color fringes can remain at sharp relief because the shape and camera solutions have finite accuracy. This sequence covers part of the southern face and ridge; ring shadows and unobserved terrain remain gaps.
 
-Lunar-Lambert normalization and limited brightness matching reduce acquisition shading; they do not recover cast shadows or calibrated albedo. The edge-connected I/F≤0.003 sky mask can withhold very dark limb pixels. Unobserved regions remain a grid; source resolution varies.
+Lunar-Lambert normalization and level matching between overlapping frames reduce acquisition shading; they do not recover cast shadows or calibrated albedo. The edge-connected I/F≤0.003 sky mask can withhold very dark limb pixels. Unobserved regions remain a grid; source resolution varies.
 
 The package's approximate fixed-epoch display rotation comes from the pinned [NAIF pck00011 coefficients](https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc), with the pole evaluated at the shared 2026 epoch. It is not the `pan_mst2018.bpc` libration solution used to control the shape. Image registration uses the source PDF's independent measured geometry, not the approximate display phase.
 
@@ -63,6 +63,6 @@ Facts are sourced from [NASA's Pan overview](https://science.nasa.gov/saturn/moo
 
 The initial camera uses the prepared ecliptic presentation basis and the radial mesh’s CSS X/Y transport to face the source portrait direction; geographic longitude/latitude are not copied into scene yaw/pitch.
 
-The shared preparation applies a bounded Lunar-Lambert display normalization using source geometry, then limited inter-frame brightness matching. This reduces broad acquisition shading; it does not reconstruct cast-shadow interiors or become a calibrated albedo map. Samples beyond the accepted incidence/emission angles, bounded gain or available image footprint are withheld. The frame-edge-connected sky mask uses I/F ≤ 0.003, retaining disconnected dark crater floors; this boundary heuristic may withhold very dark limb pixels. Unobserved regions receive the shared neutral grid. Overlapping views use the better-supported samples; lower-resolution frames remain lower-resolution.
+The shared preparation applies a bounded Lunar-Lambert display normalization using source geometry, then overlap level matching fitted where both frames see the surface within 70° of incidence and emission (widest gain 1.78). This reduces broad acquisition shading; it does not reconstruct cast-shadow interiors or become a calibrated albedo map. Samples beyond the accepted incidence/emission angles, bounded gain or available image footprint are withheld. The frame-edge-connected sky mask uses I/F ≤ 0.003, retaining disconnected dark crater floors; this boundary heuristic may withhold very dark limb pixels. Unobserved regions receive the shared neutral grid. Where views overlap, each point keeps the finest-resolution photograph; lower-resolution frames remain lower-resolution.
 
 </details>

@@ -169,17 +169,16 @@ instead of writing a reader for one body.
 | Arrokoth CA05 registered four-band MVIC cube | `nh-mvic-camera` | Arrokoth `mvic` | Image-space registration to its contemporaneous LORRI camera; its native PDS label confirms the bands and data-number quantity, and the recipe declares one `displayRange` | `new-horizons-geo.test.mts` (Astropy pixels) |
 | Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tools/spice/oracle.test.mts` |
 | Encounter FITS frames with a control network | `encounter-fits` | Wild 2 `navcam`, Tempel 1, Hartley 2 | Frame, label and control pins, level matching | `encounter-fits.oracle.test.mts` |
-| Catalog cameras for a shape model | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame catalog pins and display settings | None yet |
-| Three filters with controlled cameras | `controlled-shape-color` | Proteus and Hyperion `filter-color` | Equal-length filter frame lists; matching indices form complete observing triplets. Native filters/units and the shared color-display policy are required. No single-filter photometric model | None yet |
+| Published camera controls for a shape model, or the Galileo SSI image catalog | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame pins with the control network's camera fields or a `cameraCatalog`, photometry, transfer limits, level matching | None yet; preparation refuses a frame whose camera puts more than a quarter of its lit shape on sky |
+| Three filters with controlled cameras | `controlled-shape-color` | Proteus and Hyperion `filter-color` | `bands` naming the three filters, and `frames` as band sets naming each set's red, green and blue photographs. Native filters/units and the shared color-display policy are required. No single-filter photometric model | None yet |
 | ISIS2 orthographic image cubes | `isis2-orthographic` | Borrelly `micas` | Cube pins; no Sun geometry, so no photometry | `isis2-qube.oracle.test.mts` |
 
-For `controlled-shape-color`, matching indices in the three `frames` lists
-identify one observing triplet. Preparation intersects that triplet's valid
-coverage before adding it to the mosaic. It processes coarser pointings first
-and uses one shared overlap weight for all three channels. A missing filter
-withholds that triplet; an earlier complete triplet can still cover the point.
-Existing single-triplet recipes retain their output. The runtime consumes the
-same prepared color atlas.
+For `controlled-shape-color`, each band set is one observing triplet. A point is
+colored only where all three of its bands qualify, and band sets compete for a
+point like the frames of a monochrome mosaic. Level matching scales the three
+bands of a set by one gain, so their measured ratios stay. Cameras named in
+`registration` are measured again against their reference images before any
+pixel is sampled. The runtime consumes the same prepared color atlas.
 
 When a photographed patch ends at a straight boundary, trace that edge to the
 detector bounds and validity masks, then inspect adjacent pointings in the

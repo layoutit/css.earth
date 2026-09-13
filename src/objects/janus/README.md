@@ -77,7 +77,7 @@ The generic source-shape camera preparer maps calibrated photographs using the m
 
 The attached VICAR header owns the calibrated raster offset. These products retain a binary telemetry record after the label, so the pixels begin at byte 8192; some detached PDS labels have a stale record-2 image pointer.
 
-A bounded Lunar-Lambert disk correction reduces photographed illumination. Incidence/emission cutoffs and source-mesh shadow/visibility tests reject unstable or hidden samples. An edge-connected 0.003 I/F background threshold withholds sky without deleting isolated dark crater interiors. Robust overlap level matching reduces exposure changes. The display maps I/F 0–0.4 linearly to the available brightness range after correction; original calibrated source values remain unchanged. Photographic crater shadows that lack recoverable signal are not invented.
+A bounded Lunar-Lambert disk correction reduces photographed illumination. Incidence/emission cutoffs and source-mesh shadow/visibility tests reject unstable or hidden samples. An edge-connected 0.003 I/F background threshold withholds sky without deleting isolated dark crater interiors. Robust overlap level matching fitted where both frames see the surface within 70° of incidence and emission (widest gain 1.71) reduces exposure changes. The display maps I/F 0–0.558, the 99.5th percentile of displayed samples, linearly to the available brightness range after correction; original calibrated source values remain unchanged. Photographic crater shadows that lack recoverable signal are not invented.
 
 Flood mode retains the corrected observations under uniform illumination. The shared Shadows toggle selects a prepared normal-based directional bank on the same irregular mesh. A spherical lighting overlay is not fitted to this shape. Small dedicated minimaps and navigation images are prepared from the same interpreted surface; HD atlases are never used as minimap downloads.
 
@@ -92,6 +92,8 @@ The astronomy package already owns the moon's Saturn-relative orbital elements. 
 - Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 - **Not added as duplicate lenses:** individual clear-filter photographs of the same terrain. They contribute to one Monochrome map.
+
+Cassini frame `N1630068448_1` is not used. On the lit body its calibrated I/F has a median of 0.046 at 23° phase, a third or less of the 0.14–0.27 measured in the other six clear-filter frames at 39–90° phase, although a lower phase should look brighter. No level between frames reconciles it: with it, Monochrome showed a dark region with bright seams. The 7% of covered area it supplied now shows the missing-coverage grid.
 
 
 - **Facts:** [NASA Janus](https://science.nasa.gov/saturn/moons/janus/) and [JPL physical parameters](https://ssd.jpl.nasa.gov/sats/phys_par/). No substantial atmosphere or cutaway is claimed.

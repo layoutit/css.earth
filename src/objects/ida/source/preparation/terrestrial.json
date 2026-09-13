@@ -76,11 +76,15 @@
     ],
     "observedColors": [],
     "surfaceQuality": 90,
-    "mosaics": [
+    "surfaceObservations": [
       {
         "id": "calibrated",
         "format": "controlled-shape-camera",
         "consumer": "galileo-calibrated",
+        "metadata": {
+          "label": "SSI reflectance",
+          "coverage": "Two Galileo green-filter photographs cover Ida from different approach positions. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels."
+        },
         "frames": [
           {
             "id": "202561278",
@@ -133,6 +137,18 @@
             "coverageInsetPixels": 5
           }
         ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 64,
+          "minimumPairs": 64,
+          "maximumGain": 1.1,
+          "maximumAngleDegrees": 70
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 65
+        },
         "photometry": {
           "model": "photometry/helfenstein-1996-hapke.json",
           "referenceDegrees": {
@@ -149,15 +165,13 @@
             ],
             "minimumGain": 0.4,
             "maximumGain": 4
-          },
-          "displayMaximum": 0.12,
-          "gamma": 2.2,
-          "minimumLevel": 1,
-          "maximumLevel": 1
+          }
         },
-        "metadata": {
-          "label": "SSI reflectance",
-          "coverage": "Two Galileo green-filter photographs cover Ida from different approach positions. Their calibrated brightness retains the original illumination. The grid marks gaps and rejected pixels."
+        "display": {
+          "displayRange": [
+            0,
+            0.0931
+          ]
         }
       }
     ]
@@ -192,14 +206,12 @@
         "metersPerUnit": 1000,
         "expectedRecords": 16471
       },
-      "latitudeSegments": 90,
-      "longitudeSegments": 180,
       "faceBudget": 800,
       "tileSize": 128,
       "atlasColumns": 16,
       "primitive": "u",
       "simplification": {
-        "method": "meshoptimizer",
+        "method": "source-meshoptimizer",
         "targetFaces": 800,
         "maximumErrorMeters": 600,
         "regularize": true
