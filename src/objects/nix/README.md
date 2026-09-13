@@ -22,7 +22,7 @@ The neutral grid marks missing imagery, not surface color or albedo. The real re
 
 Model longitude is `atan2(y,x)` and north latitude is `asin(z/r)`. The historical Weaver et al. (2016) encounter pole, RA 350°, Dec 42°, and 1.829 day rotation period are explicitly approximate display inputs. Arbitrary phase is not a 2026 ephemeris or a recovered Porter-mesh prime meridian. Nix is not synchronously aligned toward Pluto.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 <a id="nix-sources-and-interpretation"></a>
 <a id="dataset-survey"></a>

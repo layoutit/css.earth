@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "orcus",
+  "entries": [
+    {
+      "id": "binary-mass-ratio",
+      "subject": "Binary mass ratio and double-synchronous evolution",
+      "status": "included",
+      "finding": "[Binary astrometric mass ratio and likely double-synchronous evolution](https://arxiv.org/abs/2307.04848) do not determine unique spin attitude or shape.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/orcus/README.md#L34",
+        "https://arxiv.org/abs/2307.04848"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    },
+    {
+      "id": "jwst-spectra",
+      "subject": "JWST spectral characterization as surface data",
+      "status": "excluded",
+      "finding": "[JWST spectral characterization references](https://arxiv.org/abs/2508.17101) include Orcus but supply no resolved longitude-latitude map.",
+      "revisitWhen": "A resolved longitude–latitude map of Orcus is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/orcus/README.md#L35",
+        "https://arxiv.org/abs/2508.17101"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    },
+    {
+      "id": "vanth-occultation",
+      "subject": "2017 occultation as Orcus's size",
+      "status": "excluded",
+      "finding": "The [2017 occultation](https://arxiv.org/abs/1810.08977) constrains Vanth, not Orcus. Its **443 km** diameter cannot be used for the primary.",
+      "revisitWhen": "An occultation by Orcus itself is published.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/orcus/README.md#L36",
+        "https://arxiv.org/abs/1810.08977"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    }
+  ]
+}

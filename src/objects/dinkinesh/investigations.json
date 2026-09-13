@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "dinkinesh",
+  "entries": [
+    {
+      "id": "lucy-photographs",
+      "subject": "Lucy L’LORRI photographs as a photographic lens",
+      "status": "unresolved",
+      "finding": "The displayed shape is an authored reconstruction, not the mission photogrammetric model, and no photograph is registered to it. The unmerged feat/lucy-dinkinesh-surfaces branch adds a recovered numerical shape whose frame and image registration remain unqualified.",
+      "revisitWhen": "A mission-derived shape with a documented body frame, and a joint orientation and camera registration that passes interior holdouts from a different viewing direction.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/ee46ac802f813a6c121b8e16c5e4d265668c0732/src/planets/dinkinesh/README.md#L7",
+        "https://github.com/layoutit/css.earth/blob/2582bfe569f2610623f8890fb5f36e2075338d38/src/planets/dinkinesh/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-13",
+          "commit": "2582bfe569f2610623f8890fb5f36e2075338d38"
+        }
+      ]
+    }
+  ]
+}

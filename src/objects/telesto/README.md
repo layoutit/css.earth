@@ -59,7 +59,7 @@ Navigation portraits and small dedicated minimaps are derived from the prepared 
 
 ## Dataset survey
 
-- **Included:** [PDS calibrated Cassini ISS](https://pds-rings.seti.org/cassini/iss/calibration.html), the [2018 shape release and controlled camera table](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/telesto_document.pdf), and shape-derived radial elevation.
+- Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 - **Monochrome extension:** Clear frames N1831468631_1 and N1831469816_1 extend the 2016 released-table sweep beyond the former N1831467723_1 endpoint. They contribute through the table’s original cameras; no shape, topology or renderer change is involved.
 
