@@ -15,6 +15,7 @@ import { readPreparedJsonExports, readPreparedPresentationModule, requirePrepare
   requirePreparedControlSource } from "./check-prepared-presentation.mts";
 import { parseRuntimeSource, resolveRuntimeSource } from './runtime-source-graph.mts';
 import { readDescriptorDefinition, requireDescriptorAdapterSource } from './prepared-object-source.mts';
+import { readContextObjects } from './prepare-catalog.mts';
 
 const runtimePath = "src/platform/object-runtime.mts";
 const registryPath = "site/objects.mts";
@@ -528,9 +529,10 @@ function requireApplicationWorldContextSource(source: string) {
     ![...imports].some(([local, binding]) => binding.name === 'PREPARED_NAVIGATION_MARKERS' && binding.source === './prepared-navigation-markers.mjs')) fail();
   const nodes: Node[] = []; walkRuntimeAst(ast, node => nodes.push(node));
   const calls = (name: string) => nodes.filter((node): node is CallExpression => node.type === 'CallExpression' && (imports.get(nameOf(node.callee))?.name ?? nameOf(node.callee)) === name);
-  const globs = nodes.filter((node): node is CallExpression => node.type === 'CallExpression' && node.callee.type === 'MemberExpression' && nameOf(node.callee.property) === 'glob' && node.callee.object.type === 'MetaProperty');
-  const patterns = globs.map(node => astKind(node.arguments[0], 'Literal')?.value);
-  if (!patterns.includes('../src/objects/*/object.json') || !patterns.includes('../src/objects/*/prepared/**/*.{json,png,webp,bin}') ||
+  // Bodies share src/objects, so descriptors and asset URLs come from the generated module that globs each context object by name.
+  const initializers = nodes.flatMap(node => node.type === 'VariableDeclarator' && node.init?.type === 'Identifier' ? [node.init.name] : []);
+  const generated = (name: string) => initializers.some(local => imports.get(local)?.name === name && imports.get(local)?.source === './prepared-context-objects.mts');
+  if (!generated('CONTEXT_OBJECT_DESCRIPTORS') || !generated('CONTEXT_OBJECT_ASSET_URLS') ||
     calls('loadPreparedCssVolume').length !== 1 || calls('loadPreparedCssPointField').length !== 1 || calls('createPreparedUniverse').length !== 1 ||
     calls('loadPreparedCssSurfaceShell').length !== 1 || calls('prepareObjectResources').length !== 1) fail();
   const resourceCalls = nodes.filter((node): node is CallExpression => node.type === 'CallExpression' && nameOf(node.callee) === 'resourceSet');
@@ -561,6 +563,24 @@ function requireApplicationWorldContextSource(source: string) {
   const universe = calls('createPreparedUniverse')[0];
   if (universe.arguments.length !== 1 || universe.arguments[0]?.type !== 'ObjectExpression' ||
     !['context', 'volume', 'stars', 'sprites', 'shells', 'resolveResource', 'resolveStarResource'].every(name => property(universe.arguments[0], name))) fail();
+}
+
+/** The generated module names each context object; each must reach its descriptor and prepared assets, binary banks included. */
+function requireContextObjectModuleSource(source: string, contexts: readonly { id: string; type: string }[]) {
+  function fail(): never { throw new TypeError('Application world context must use the shared prepared-universe inventory and pinned context.'); }
+  const globs = new Map<string, unknown[]>();
+  for (const statement of parseRuntimeSource(source, "source.mts").body) {
+    if (statement.type !== 'ExportNamedDeclaration' || statement.declaration?.type !== 'VariableDeclaration') continue;
+    for (const declaration of statement.declaration.declarations) {
+      const call = astKind(declaration.init, 'CallExpression'), callee = astKind(call?.callee, 'MemberExpression');
+      if (callee && nameOf(callee.property) === 'glob' && callee.object.type === 'MetaProperty')
+        globs.set(nameOf(declaration.id), astKind(call?.arguments[0], 'ArrayExpression')?.elements.map(element => astKind(element, 'Literal')?.value) ?? []);
+    }
+  }
+  const descriptors = globs.get('CONTEXT_OBJECT_DESCRIPTORS'), assets = globs.get('CONTEXT_OBJECT_ASSET_URLS');
+  if (!descriptors || !assets || !contexts.length) fail();
+  for (const { id, type } of contexts) if (!descriptors.includes(`../src/objects/${id}/object.json`) ||
+    !assets.includes(`../src/objects/${id}/prepared/**/*.{json,png,webp,bin}`) || assets.includes(`!../src/objects/${id}/prepared/*.bin`) !== (type === 'point-field')) fail();
 }
 
 function requireContextFrame(value: unknown, objectId: string) {
@@ -790,6 +810,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   if (sharedClosure.has(applicationContextPath)) {
     try {
       requireApplicationWorldContextSource(await source(applicationContextPath));
+      requireContextObjectModuleSource(await source(resolve(root, 'site/prepared-context-objects.mts')), await readContextObjects(resolve(root, 'src/objects')));
       const context = requireContextFrame(JSON.parse(await source(resolve(root, 'src/objects/sun/prepared/world-context.json'))), 'sun');
       await requireContextPointField(root, context, source);
     } catch (error) { sharedViolations.push({ file: 'site/application-world-context.mts', line: 1, reason: errorMessage(error) }); }
