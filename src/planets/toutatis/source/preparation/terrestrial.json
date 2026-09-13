@@ -22,6 +22,215 @@
         "label": "Shape",
         "consumer": "shape"
       }
+    ],
+    "surfaceObservations": [
+      {
+        "id": "chang-e-2",
+        "format": "published-image-projection",
+        "consumer": "chang-e-2",
+        "metadata": {
+          "label": "Chang’e-2",
+          "coverage": "A cropped 2012 flyby photograph, approximately placed on the radar shape; excluded terrain stays gridded."
+        },
+        "frames": [
+          {
+            "id": "jiang-figure-1c",
+            "path": "chang-e-2/jiang-2015-figure-1.jpg",
+            "projection": {
+              "status": "approximate",
+              "method": "Camera direction inferred from Zou et al. (2014), Figure 3, using the angles quoted by Bu et al. (2015). Scale and translation manually match the published radar rendering; its photograph is matched to Jiang et al. (2015), Figure 1c. The image-to-image holdouts do not validate the 3D placement. See source/reference/chang-e-2-method.md.",
+              "limitations": "Approximate placement on the 1992/1996 radar model. Absolute image-to-shape registration has not been measured. Camera-axis interpretation and figure framing are inferred, and the radar model differs from the photographed surface. Transfer limits and coverage describe this assumed projection, not positional accuracy.",
+              "shapeSha256": "28c94e3c5c4fadab97c6f1fc78dbb3800a4248b86302681cf1c629e48df5f00a",
+              "imageSha256": "0d26efacddb0f7e0cc07f2feeeaef0dcc7d1815093dba63c533ef554abef5aed",
+              "imageSize": [
+                1575,
+                1506
+              ],
+              "crop": {
+                "left": 3,
+                "top": 790,
+                "width": 804,
+                "height": 714
+              },
+              "camera": {
+                "right": [
+                  0.7876145425342866,
+                  0.047142949912943155,
+                  -0.6143621689703984
+                ],
+                "up": [
+                  0.4024867539686374,
+                  0.7155955324091268,
+                  0.5709005577820784
+                ],
+                "eye": [
+                  0.4665487597971899,
+                  -0.6969222168001278,
+                  0.5446390350150271
+                ],
+                "pixelsPerMeter": 0.2181544838418488,
+                "center": [
+                  506.049838733906,
+                  354.72686324961
+                ]
+              },
+              "mask": {
+                "polygon": [
+                  [
+                    139,
+                    91
+                  ],
+                  [
+                    183,
+                    77
+                  ],
+                  [
+                    236,
+                    107
+                  ],
+                  [
+                    280,
+                    113
+                  ],
+                  [
+                    299,
+                    140
+                  ],
+                  [
+                    329,
+                    170
+                  ],
+                  [
+                    371,
+                    199
+                  ],
+                  [
+                    419,
+                    230
+                  ],
+                  [
+                    475,
+                    236
+                  ],
+                  [
+                    516,
+                    267
+                  ],
+                  [
+                    531,
+                    315
+                  ],
+                  [
+                    572,
+                    370
+                  ],
+                  [
+                    623,
+                    405
+                  ],
+                  [
+                    651,
+                    453
+                  ],
+                  [
+                    625,
+                    486
+                  ],
+                  [
+                    627,
+                    531
+                  ],
+                  [
+                    651,
+                    562
+                  ],
+                  [
+                    633,
+                    607
+                  ],
+                  [
+                    607,
+                    635
+                  ],
+                  [
+                    548,
+                    638
+                  ],
+                  [
+                    498,
+                    608
+                  ],
+                  [
+                    449,
+                    556
+                  ],
+                  [
+                    401,
+                    516
+                  ],
+                  [
+                    352,
+                    480
+                  ],
+                  [
+                    315,
+                    457
+                  ],
+                  [
+                    300,
+                    416
+                  ],
+                  [
+                    325,
+                    369
+                  ],
+                  [
+                    316,
+                    332
+                  ],
+                  [
+                    268,
+                    300
+                  ],
+                  [
+                    218,
+                    283
+                  ],
+                  [
+                    171,
+                    262
+                  ],
+                  [
+                    136,
+                    240
+                  ],
+                  [
+                    119,
+                    195
+                  ],
+                  [
+                    123,
+                    141
+                  ]
+                ],
+                "insetPixels": 20
+              }
+            }
+          }
+        ],
+        "transfer": {
+          "maximumSourceDistanceMeters": 50,
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.01,
+          "maximumEmissionDegrees": 60
+        },
+        "display": {
+          "displayRange": [
+            0,
+            255
+          ]
+        }
+      }
     ]
   },
   "lighting": {

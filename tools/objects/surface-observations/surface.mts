@@ -15,7 +15,7 @@ const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2
 type Missing = { reason: string; color: number[]; radiance?: never; maximumEmissionDegrees?: never; maximumIncidenceDegrees?: never };
 type Accepted = Extract<FootprintSample, { reason?: undefined }> & { distanceMeters: number };
 
-export interface SurfaceObservationReport { schema: string; format: string; camera: { kind: string; positionKm: readonly number[] }; frames: Record<string, unknown>[]; [key: string]: unknown }
+export interface SurfaceObservationReport { schema: string; format: string; camera: { kind: string; positionKm: readonly number[] | null; viewingDirection?: readonly number[] }; frames: Record<string, unknown>[]; [key: string]: unknown }
 export interface SurfaceObservation {
   samplePoint(point: readonly number[]): SurfaceColorSample;
   preview(width: number, height: number): { rgb: Buffer; missing: Uint8Array };
@@ -79,9 +79,10 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     if (value.reason !== undefined) return value;
     const gain = levels.gains[index], radiance = value.radiance * gain, level = (v: number) => Math.round(Math.max(0, Math.min(1, (v - low) / (high - low))) * 255), gray = level(radiance);
     const colorDisplay = policy.display.range === 'authored' ? policy.display.colorDisplay : undefined;
-    if (Boolean(value.color) !== Boolean(colorDisplay)) throw new Error('Floating color samples require their source-bound band display policy.');
+    if (Boolean(value.color) !== Boolean(colorDisplay)) throw new Error('Color samples require their source-bound display policy.');
+    if (colorDisplay?.kind === 'provider-rgb' && (gain !== 1 || value.gain !== 1 || low !== 0 || high !== 255)) throw new Error('Published RGB must retain its original display levels.');
     // The shared footprint and level matching retain floats; encode the selected bands once here.
-    return { ...value, color: value.color && colorDisplay ? value.color.map(channel => bandColorByte(channel * gain,colorDisplay)) : [gray, gray, gray], radiance, frameId: frames[index].id, frameIndex: index };
+    return { ...value, color: value.color && colorDisplay ? value.color.map(channel => colorDisplay.kind === 'provider-rgb' ? level(channel) : bandColorByte(channel * gain,colorDisplay)) : [gray, gray, gray], radiance, frameId: frames[index].id, frameIndex: index };
   };
   const sourceSquareMeters: Record<string, number> = {};
   const areaCoverage = { method: 'Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed', samplesPerTriangle: policy.samplesPerTriangle,
@@ -100,11 +101,11 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
   areaCoverage.acceptedFraction = areaCoverage.acceptedSquareMeters / areaCoverage.totalSquareMeters;
   const { display } = policy;
   const report: SurfaceObservationReport = { schema: SURFACE_OBSERVATION_REPORT, format: policy.format,
-    camera: { kind: frames[0].cameraKind, positionKm: frames[0].positionKm },
+    camera: { kind: frames[0].cameraKind, positionKm: frames[0].positionKm, ...(frames[0].viewingDirection ? { viewingDirection: frames[0].viewingDirection } : {}) },
     frames: frames.map(frame => frame.report), limits: policy.limits, photometry: policy.photometry, selection: policy.selection,
     levelMatching: frames.length > 1 ? { ...policy.levelMatching, ...levels, sampledPoints: points.length } : null,
     display: { range: display.range, ...(display.range === 'authored' ? {} : { percentiles: display.percentiles }), low, high, units: display.units,
-      ...(display.range === 'reference-pixels' ? { referenceFrame: frames[0].id } : {}), ...(display.range === 'authored' && display.colorDisplay ? { colorDisplay: bandColorEvidence(display.colorDisplay) } : {}) },
+      ...(display.range === 'reference-pixels' ? { referenceFrame: frames[0].id } : {}), ...(display.range === 'authored' && display.colorDisplay ? { colorDisplay: display.colorDisplay.kind === 'provider-rgb' ? display.colorDisplay : bandColorEvidence(display.colorDisplay) } : {}) },
     areaCoverage, sourceIds: entries.map(entry => ({ id: entry.id, sha256: entry.expectedSha256 })), previewPolicy: PREVIEW_POLICY,
     ...(policy.limitations ? { limitations: policy.limitations } : {}) };
   const preview = (width: number, height: number) => {

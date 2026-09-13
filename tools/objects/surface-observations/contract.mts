@@ -28,7 +28,7 @@ export interface ObservationImage {
 }
 
 /** Where a camera comes from. Every kind projects and casts rays the same way. */
-export type CameraKind = 'backplane-fit' | 'archived-closure' | 'kernels' | 'control-network' | 'orthographic-registration';
+export type CameraKind = 'backplane-fit' | 'archived-closure' | 'kernels' | 'control-network' | 'orthographic-registration' | 'approximate-orthographic';
 
 /** A camera in body-fixed metres. project() returns zero-based detector coordinates and depth; null or depth ≤ 0 is behind the camera. */
 export interface ObservationCamera {
@@ -79,7 +79,9 @@ export type FootprintSample =
 
 /** One qualified photograph, ready for the shared surface transfer. */
 export interface ObservationFrame {
-  id: string; startTime: string; filter: string; positionKm: readonly number[];
+  id: string; startTime: string; filter: string; positionKm: readonly number[] | null;
+  /** Direction toward an orthographic viewer; it is not a spacecraft position. */
+  viewingDirection?: readonly number[];
   cameraKind: CameraKind; geometrySource: PixelGeometry['source'] | 'registered-posts';
   nominalPixelScaleMeters?: number;
   /** Sample at a point in metres. The allowance widens the separation limit for a displayed point that lies off the source surface. */
@@ -104,7 +106,7 @@ export interface SurfacePolicy {
   selection: 'single' | 'lowest-emission' | 'recipe-order' | 'finest-resolution';
   levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumLogMad: number; maximumGain: number; samplesPerTriangle?: number };
   samplesPerTriangle: number;
-  display: { range: 'reference-pixels' | 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay };
+  display: { range: 'reference-pixels' | 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay | { kind: 'provider-rgb'; interpolation: 'encoded'; interpretation: string } };
   photometry: Record<string, unknown>;
   limits: Record<string, unknown>;
   limitations?: string;
