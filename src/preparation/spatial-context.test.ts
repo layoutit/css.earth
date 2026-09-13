@@ -6,7 +6,7 @@ import { M_PER_AU } from '@cssearth/astronomy';
 import { parseWorldContextSource, prepareWorldContext } from './spatial-context.js';
 import type { OrbitalState } from './spatial-context.js';
 
-const sourcePath = 'src/planets/sun/source/navigation/universe.json';
+const sourcePath = 'src/objects/sun/source/navigation/universe.json';
 // Unit cases supply their own body inventory; the application resolves catalogue membership.
 async function readSource() {
   return { ...JSON.parse(await readFile(sourcePath, 'utf8')), bodies: [{id: 'test-body', name: 'Test body', color: '#aaaaaa'}] };

@@ -315,7 +315,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
   assert.equal(new Set(polarLeaves.map(({ sourceRect }) =>
     `${required(sourceRect).x}:${required(sourceRect).y}`)).size, 2);
   const interiorSource = parseInteriorSource(JSON.parse(await readFile(
-    new URL("../../../../src/planets/earth/source/interior/earth-interior.json", import.meta.url),
+    new URL("../../../../src/objects/earth/source/interior/earth-interior.json", import.meta.url),
     "utf8",
   )));
   assert.deepEqual(PREPARED_EARTH_SCENE.interior.source.layers,

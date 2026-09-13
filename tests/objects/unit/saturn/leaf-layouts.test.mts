@@ -6,7 +6,7 @@ import {prepareLayeredLeafLayouts} from '../../../../tools/objects/material-comp
 import {readPreparedFixture} from '../../fixtures.mts';
 const [scene, PREPARED_SATURN_LEAF_LAYOUTS] = await Promise.all([readPreparedFixture('saturn','scene'),readPreparedFixture('saturn','layouts')]);
 const stylesheet = await readFile(new URL('../../../../src/renderers/css/styles/saturn-surfaces.css',import.meta.url),'utf8');
-const config=JSON.parse(await readFile(new URL('../../../../src/planets/saturn/source/preparation/presentation.json',import.meta.url),'utf8'));
+const config=JSON.parse(await readFile(new URL('../../../../src/objects/saturn/source/preparation/presentation.json',import.meta.url),'utf8'));
 test("missing interior leaf layouts reproduce from checked scene and stylesheet bytes", async () => {
   const generated = prepareLayeredLeafLayouts({scene,stylesheet,config});
   assert.deepEqual(generated, PREPARED_SATURN_LEAF_LAYOUTS);

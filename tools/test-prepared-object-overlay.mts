@@ -5,7 +5,7 @@ import { requireRecord } from './source-values.mts';
 
 /** Mutate the actual transported payload and its pin together for adversarial tests. */
 export async function preparedObjectOverlay(id: string, mutate: (runtime: Record<string, unknown>) => unknown, root = process.cwd()) {
-  const base = resolve(root, 'src/planets', id), descriptorPath = resolve(base, 'object.json');
+  const base = resolve(root, 'src/objects', id), descriptorPath = resolve(base, 'object.json');
   const runtimePath = resolve(base, 'prepared/runtime.json'), payloadPath = resolve(base, 'prepared/object.json');
   const descriptor = requireRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));
   const runtime = requireRecord(JSON.parse(await readFile(runtimePath, 'utf8')));

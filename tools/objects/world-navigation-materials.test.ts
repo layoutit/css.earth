@@ -15,7 +15,7 @@ const root=resolve(import.meta.dirname,'../..'),identity=[1,0,0,0,0,1,0,0,0,0,1,
 
 test('independent materials retain their actual silhouette-fit owner, never an unbound fallback',async()=>{
   for(const id of ['mercury','venus']){
-    const runtime=parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(root,'src/planets',id,'prepared/runtime.json'),'utf8')));
+    const runtime=parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(root,'src/objects',id,'prepared/runtime.json'),'utf8')));
     const input={definition:runtime,bodyToPresentation:[1,0,0,0,1,0,0,0,1] as const,sourceRadiusUnits:230,tilePixels:50,
       physicalShape:{equatorialRadiusM:1000,polarRadiusM:1000},sources:new Map()};
     const output=preparePhysicalMaterialTracks(input);
@@ -26,7 +26,7 @@ test('independent materials retain their actual silhouette-fit owner, never an u
 });
 
 for(const id of ['earth','mars','uranus','neptune'])test(`${id}: actual accepted material maps gain physical projection without changing affine content`,async()=>{
-  const directory=resolve(root,'src/planets',id),read=async(path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(directory,path),'utf8'));
+  const directory=resolve(root,'src/objects',id),read=async(path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(directory,path),'utf8'));
   const descriptor=parseAuthoredObjectDescriptor(await read('object.json')),runtime=parsePreparedObjectRuntime(await read('prepared/runtime.json')),recipe=descriptor.recipe;
   const sources=new Map<string,Record<string,unknown>>();
   for(const source of recipe.sources)if(source.path.endsWith('.json'))sources.set(source.id,requireRecord(await read(source.path)));

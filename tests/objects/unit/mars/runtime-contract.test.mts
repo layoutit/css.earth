@@ -3,10 +3,10 @@
 import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../src/planets/mars/prepared/runtime.json" with { type: "json" };
-import assets from "../../../../src/planets/mars/prepared/assets.json" with { type: "json" };
-import scene from "../../../../src/planets/mars/prepared/scene.json" with { type: "json" };
-import lenses from "../../../../src/planets/mars/prepared/lenses.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/mars/prepared/runtime.json" with { type: "json" };
+import assets from "../../../../src/objects/mars/prepared/assets.json" with { type: "json" };
+import scene from "../../../../src/objects/mars/prepared/scene.json" with { type: "json" };
+import lenses from "../../../../src/objects/mars/prepared/lenses.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";

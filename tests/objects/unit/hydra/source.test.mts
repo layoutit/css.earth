@@ -5,7 +5,7 @@ import {readFile} from 'node:fs/promises';
 import sharp from 'sharp';
 import {loadStlShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const source=new URL('../../../../src/planets/hydra/source/',import.meta.url);
+const source=new URL('../../../../src/objects/hydra/source/',import.meta.url);
 
 test('Hydra retains the released kilometre mesh and independent source anchors',async()=>{
  const recipe=JSON.parse((await readFile(new URL('preparation/terrestrial.json',source))).toString('utf8'));

@@ -8,7 +8,7 @@ import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-c
 import { parsePreparedWorldCameraFrame } from '../../src/renderers/css/dist/navigation.js';
 import { createTestPage } from './browser-observations.mts';
 import { required } from '../../tools/test-values.mts';
-import PREPARED_MERCURY_SCENE from '../../src/planets/mercury/prepared/scene.json' with { type: 'json' };
+import PREPARED_MERCURY_SCENE from '../../src/objects/mercury/prepared/scene.json' with { type: 'json' };
 
 const base = process.argv[2] ?? 'http://127.0.0.1:4211';
 const directory = resolve('.local/world-camera-owner');

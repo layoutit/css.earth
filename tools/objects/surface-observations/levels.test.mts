@@ -34,7 +34,7 @@ test('robust overlap fit recovers connected source scales despite missing pairs 
 });
 
 test('archived-camera mosaics bind a separate camera to each image', async () => {
-  const config = JSON.parse(await readFile(new URL('../../../src/planets/steins/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
+  const config = JSON.parse(await readFile(new URL('../../../src/objects/steins/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
   const recipe = config.raster.surfaceObservations[0], shape = config.geometry.radialTerrain;
   validateSurfaceObservation(recipe, shape);
   for (const alter of [(r: unknown) => fixtureRecord(r,"frames",1)["cameraPath"] = fixtureRecord(r,"frames",0)["cameraPath"],
@@ -46,7 +46,7 @@ test('archived-camera mosaics bind a separate camera to each image', async () =>
 });
 
 test('each archived-camera mosaic frame verifies its original source closure before decoding', async () => {
-  const sourceDirectory = resolve('src/planets/steins/source');
+  const sourceDirectory = resolve('src/objects/steins/source');
   const config = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/terrestrial.json'), 'utf8'));
   const source = await createSourceManifest({ planetId: 'steins', planetName: 'Steins', sourceRoot: sourceDirectory });
   const drift = new Error('Original camera kernel bytes changed');
@@ -88,7 +88,7 @@ test('overlap points stay inside their own triangle and include both shape lobes
 });
 
 test('the authored mosaic binds distinct images and rejects ambiguous frame policies', async () => {
-  const config = JSON.parse(await readFile(new URL('../../../src/planets/comet-67p/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
+  const config = JSON.parse(await readFile(new URL('../../../src/objects/comet-67p/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
   const recipe = config.raster.surfaceObservations[0], shape = config.geometry.radialTerrain;
   validateSurfaceObservation(recipe, shape);
   for (const alter of [(r: unknown) => fixtureRecord(r,"frames",1)["id"] = fixtureRecord(r,"frames",0)["id"], (r: unknown) => fixtureRecord(r,"frames",1)["qualityPath"] = fixtureRecord(r,"frames",0)["qualityPath"],

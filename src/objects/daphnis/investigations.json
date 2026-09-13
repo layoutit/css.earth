@@ -1,0 +1,24 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "daphnis",
+  "entries": [
+    {
+      "id": "cassini-iss-and-shape-release",
+      "subject": "Cassini ISS frames, 2018 shape release and radial elevation",
+      "status": "included",
+      "finding": "[PDS calibrated Cassini ISS](https://pds-rings.seti.org/cassini/iss/calibration.html) frames, the [2018 shape release and controlled camera table](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/daphnis_document.pdf) and shape-derived radial elevation supply the delivered views.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/daphnis/README.md#L50",
+        "https://pds-rings.seti.org/cassini/iss/calibration.html",
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/daphnis_document.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-09",
+          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
+          "pr": 83
+        }
+      ]
+    }
+  ]
+}

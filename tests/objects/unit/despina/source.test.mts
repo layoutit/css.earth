@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
-const root=new URL('../../../../src/planets/despina/',import.meta.url);
+const root=new URL('../../../../src/objects/despina/',import.meta.url);
 test('Despina preserves the published triaxial axes rather than using the PCK sphere as shape',async()=>{
   const cfg=JSON.parse((await readFile(new URL('source/preparation/terrestrial.json',root))).toString('utf8'));
   const shape=parsePdsRadiusTable(await readFile(new URL('source/shape/ellipsoid.tab',root),'utf8'),cfg.geometry.radialTerrain.grid);

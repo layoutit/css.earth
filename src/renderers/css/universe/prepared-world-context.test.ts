@@ -532,7 +532,7 @@ test('context alignment accepts observed Linux roundoff but rejects detached ori
 });
 
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
-  const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
+  const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   const { readCatalog } = await import('../../../../tools/prepare-catalog.mts');
   const contextEntries = (await readCatalog()).filter(body => body.context && body.id !== 'sun')
     .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
@@ -582,7 +582,7 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
 });
 
 test('prepared planetary systems retain moon orbits with a small selected planet', async () => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
@@ -606,7 +606,7 @@ test('prepared planetary systems retain moon orbits with a small selected planet
 });
 
 test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits stay complete across selection, hover, flight and zoom', async planet => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const viewport = { focalPixels: 1100, framingRadiusPixels: 200, principalOffsetPixels: [0, 0] as const,
@@ -645,7 +645,7 @@ test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits s
 });
 
 test('initial Jupiter system framing makes the four large moons and their labels readable', async () => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const viewport = { focalPixels: 1100, framingRadiusPixels: 200, principalOffsetPixels: [0, 0] as const,

@@ -10,7 +10,7 @@ import { requireRecord, requireString, requireFiniteNumber } from '../../source-
 /** pvl and numpy as the oracle for the OSIRIS level-4 reflectance reader behind the archived-camera route (Steins). */
 const fixture = await readOracleFixture('pds3/osiris-reflectance.json');
 const [input] = fixture.inputs;
-const source = resolve(ORACLE_ROOT, 'src/planets/steins/source');
+const source = resolve(ORACLE_ROOT, 'src/objects/steins/source');
 const config = JSON.parse(await readFile(resolve(source, 'preparation/terrestrial.json'), 'utf8'));
 const recipe = config.raster.surfaceObservations[0], frameRecipe = recipe.frames.find((frame: { path: string }) => input.path.endsWith(frame.path));
 const camera = JSON.parse(await readFile(resolve(source, frameRecipe.cameraPath), 'utf8'));

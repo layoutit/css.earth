@@ -4,8 +4,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
-import runtimeDefinition from "../../../../src/planets/umbriel/prepared/runtime.json" with { type: "json" };
-import descriptor from "../../../../src/planets/umbriel/prepared/features.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/umbriel/prepared/runtime.json" with { type: "json" };
+import descriptor from "../../../../src/objects/umbriel/prepared/features.json" with { type: "json" };
 import { parsePreparedSurfaceFeatureCatalog } from "../../../../src/renderers/css/dist/index.js";
 
 const plan = runtimeDefinition.features;

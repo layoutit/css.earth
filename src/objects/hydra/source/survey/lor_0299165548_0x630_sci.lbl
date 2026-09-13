@@ -1,0 +1,576 @@
+PDS_VERSION_ID       = PDS3                                                   
+                                                                              
+RECORD_TYPE          = FIXED_LENGTH                                           
+RECORD_BYTES         = 2880                                                   
+FILE_RECORDS         = 3656                                                   
+                                                                              
+^HEADER = "LOR_0299165548_0X630_SCI.FIT"                                      
+^IMAGE = ("LOR_0299165548_0X630_SCI.FIT", 12)                                 
+^EXTENSION_CALIB_ERROR_EST_HEADER = ("LOR_0299165548_0X630_SCI.FIT", 1469)    
+^EXTENSION_CALIB_ERROR_EST_IMAGE = ("LOR_0299165548_0X630_SCI.FIT", 1470)     
+^EXTENSION_CALIB_QUALITY_HEADER = ("LOR_0299165548_0X630_SCI.FIT", 2927)      
+^EXTENSION_CALIB_QUALITY_IMAGE = ("LOR_0299165548_0X630_SCI.FIT", 2928)       
+NOTE = "                                                                      
+                                                                              
+                                                                              
+- Earth Mean Equator and Vernal Equinox of J2000 is the inertial              
+  reference frame used to specify observational geometry. Geometric           
+  parameters are based on best available data at time of product              
+  creation. Refer to the SPICE archive for the most current                   
+  observational geometry data.                                                
+                                                                              
+- All positions are relative to body centers                                  
+                                                                              
+                                                                              
+- SC_TARGET_POSITION_VECTOR/_VELOCITY_VECTOR                                  
+  - TARGET wrt S/C                                                            
+  - Light time and stellar aberration correction                              
+    (per the PDS Data Dictionary)                                             
+    for light originating from Sun, reflected                                 
+    off of HYDRA                                                              
+    and received by S/C at observation midpoint.                              
+                                                                              
+- TARGET_SUN_POSITION_VECTOR/_VELOCITY_VECTOR                                 
+  - SUN wrt TARGET                                                            
+  - Light time and stellar aberration correction                              
+    (per the PDS Data Dictionary)                                             
+    for light originating from Sun, reflected                                 
+    off of SUN                                                                
+    and received by S/C at observation midpoint.                              
+                                                                              
+- SC_SUN_POSITION_VECTOR/_VELOCITY_VECTOR                                     
+  - SUN wrt S/C                                                               
+  - Light time and stellar aberration correction                              
+    (per the PDS Data Dictionary)                                             
+    for light originating from Sun                                            
+    and received by S/C at observation midpoint.                              
+                                                                              
+- SC_EARTH_POSITION_VECTOR                                                    
+  - EARTH wrt S/C                                                             
+  - Light time and no stellar aberration correction                           
+    (per the PDS Data Dictionary)                                             
+    for light reflected off of, or radiated signal originating from, Earth    
+    and received by S/C at observation midpoint.                              
+                                                                              
+- PHASE_ANGLE                                                                 
+  - Angle between two vectors:                                                
+    - HYDRA target body center to Sun                                         
+    - HYDRA target body center to NH spacecraft                               
+    - Light time and stellar aberration corrections for light leaving         
+      Sun and arriving at target center, for light that arrives at            
+      spacecraft at observation midpoint                                      
+    - Light time correction only, and no stellar aberration, for light        
+      leaving target center and arriving at spacecraft at observation         
+      midpoint.                                                               
+                                                                              
+- SUB_SOLAR_LATITUDE                                                          
+- SUB_SPACECRAFT_LATITUDE                                                     
+  - Same vectors used as for PHASE_ANGLE                                      
+  - IAU convention:                                                           
+    - Positive toward N/A pole                                                
+                                                                              
+- SUB_SOLAR_LONGITUDE                                                         
+- SUB_SPACECRAFT_LONGITUDE                                                    
+  - Same vectors used as for PHASE_ANGLE                                      
+  - IAU convention                                                            
+    - N/A                                                                     
+                                                                              
+- Azimuth to Sun in FOV:                                                      
+  - Projection of HYDRA to Sun vector                                         
+    (same as for PHASE_ANGLE) into instrument FOV                             
+  - Positive clockwise from up                                                
+  - PDS3 provides no suitable keyword, here is a placeholder:                 
+                                                                              
+NEWHORIZONS:SOLAR_FOV_AZIMUTH = 282.8 <DEGREE>                                
+                                                                              
+- TARGET_NAME                                                                 
+  - Note if TARGET_NAME is N/A, these parameters may be undefined.            
+    This can occur, for instance, if an instrument was performing             
+    an internal calibration.                                                  
+                                                                              
+By mutual agreement with PDS-SBN, FITS headers are the domain of the NH       
+Project and were not part of the peer review beyond adherence to the          
+FITS standard.  FITS header values, especially geometric conventions          
+regarding phase angle, direction of supplied vectors and sense of light       
+time and stellar aberration corrections, were chosen to serve                 
+operational purposes and should be used with care.                            
+                                                                              
+- Keyword NEWHORIZONS:APPROX_TARGET_NAME is the best guess of the             
+  intended target of the observation made by the automated data               
+  processing pipeline.                                                        
+                                                                              
+- Keywords NEWHORIZONS:APPROX_TARGET_LINE and                                 
+  NEWHORIZONS:APPROX_TARGET_SAMPLE provide the approximate pixel              
+  position in the image of the center of that best guess target in            
+  one-based absolute units of the PDS keywords LINES and LINE_SAMPLES,        
+  respectively, as defined in the IMAGE OBJECT of this label and in the       
+  PDS Standards Reference.  The origin is dependent on the definitions        
+  of LINE_DISPLAY_DIRECTION and SAMPLE_DISPLAY_DIRECTION; if those are        
+  UP and RIGHT, respectively, then the origin is in the lower left.           
+                                                                              
+- If the best guess at the target is unknown, then all three keywords         
+  will be UNK i.e. unknown. If there was no target, i.e. for some             
+  instances of instrument calibration activities, the keywords will           
+  be N/A.                                                                     
+                                                                              
+                                                                              
+                                                                              
+- This image is not windowed                                                  
+"                                                                             
+                                                                              
+MISSION_NAME         = "NEW HORIZONS"                                         
+DATA_SET_ID          = "NH-P-LORRI-3-PLUTO-V3.0"                              
+PRODUCT_ID           = "LOR_0299165548_0X630_SCI"                             
+PRODUCER_INSTITUTION_NAME = "SOUTHWEST RESEARCH INSTITUTE"                    
+PRODUCT_TYPE         = "RDR"                                                  
+MISSION_PHASE_NAME   = "PLUTO ENCOUNTER"                                      
+NEWHORIZONS:SEQUENCE_ID = "                                                   
+  PELR_H_LORRI_BEST"                                                          
+NEWHORIZONS:OBSERVATION_DESC  = "                                             
+  LORRI 2X3 MOSAIC OF HYDRA                                                   
+"                                                                             
+TARGET_NAME          = "HYDRA"                                                
+                                                                              
+PRODUCT_CREATION_TIME = 2017-09-21T00:00:00                                   
+START_TIME           = 2015-07-14T07:40:29.706                                
+STOP_TIME            = 2015-07-14T07:40:29.856                                
+SPACECRAFT_CLOCK_CNT_PARTITION = 3                                            
+SPACECRAFT_CLOCK_START_COUNT   = "0299165547:41500"                           
+SPACECRAFT_CLOCK_STOP_COUNT    = "0299165547:49000"                           
+                                                                              
+INSTRUMENT_NAME="LONG RANGE RECONNAISSANCE IMAGER"                            
+INSTRUMENT_HOST_NAME = "NEW HORIZONS"                                         
+INSTRUMENT_HOST_ID   = "NH"                                                   
+INSTRUMENT_ID        = "LORRI"                                                
+TELEMETRY_APPLICATION_ID = "0x630"                                            
+EXPOSURE_DURATION    = 0.150 <s>                                              
+DETECTOR_TYPE        = "SI CCD"                                               
+INST_CMPRS_TYPE      = "LOSSLESS"                                             
+                                                                              
+                                                                              
+EQUINOX_EPOCH               = 2000.0                                          
+COORDINATE_SYSTEM_ID        = "J2000"                                         
+                                                                              
+SC_TARGET_POSITION_VECTOR = (                                                 
+  -44407.918 <km>                                                             
+, -224898.21 <km>                                                             
+, 5136.3091 <km>                                                              
+ )                                                                            
+SC_TARGET_VELOCITY_VECTOR = (                                                 
+  -0.095350989 <km/s>                                                         
+, 13.407751 <km/s>                                                            
+, 3.5599093 <km/s>                                                            
+ )                                                                            
+TARGET_CENTER_DISTANCE      = 229298.16 <km>                                  
+                                                                              
+TARGET_SUN_POSITION_VECTOR = (                                                
+  -1197005875.7973645 <km>                                                    
+, 4444005541.2077732 <km>                                                     
+, 1747580637.6134753 <km>                                                     
+ )                                                                            
+TARGET_SUN_VELOCITY_VECTOR = (                                                
+  -5.4394143 <km/s>                                                           
+, -0.88061732 <km/s>                                                          
+, 1.2904269 <km/s>                                                            
+ )                                                                            
+SOLAR_DISTANCE              = 4923011923.8064346 <km>                         
+                                                                              
+SC_SUN_POSITION_VECTOR = (                                                    
+  -1197102197.5097945 <km>                                                    
+, 4443758955.1308308 <km>                                                     
+, 1747605378.5968559 <km>                                                     
+ )                                                                            
+SC_SUN_VELOCITY_VECTOR = (                                                    
+  -5.5366589 <km/s>                                                           
+, 12.525429 <km/s>                                                            
+, 4.8531936 <km/s>                                                            
+ )                                                                            
+SPACECRAFT_SOLAR_DISTANCE   = 4922821536.6686716 <km>                         
+                                                                              
+SC_EARTH_POSITION_VECTOR = (                                                  
+  -1142172854.2187781 <km>                                                    
+, 4313656033.5440912 <km>                                                     
+, 1691203362.2314827 <km>                                                     
+ )                                                                            
+SC_GEOCENTRIC_DISTANCE      = 4772038978.9972048 <km>                         
+                                                                              
+PHASE_ANGLE                 = 33.9 <DEGREE>                                   
+SOLAR_ELONGATION            = 146.2 <DEGREE>                                  
+                                                                              
+SUB_SOLAR_LATITUDE          = "N/A"                                           
+SUB_SOLAR_LONGITUDE         = "N/A"                                           
+                                                                              
+SUB_SPACECRAFT_LATITUDE     = "N/A"                                           
+SUB_SPACECRAFT_LONGITUDE    = "N/A"                                           
+                                                                              
+RIGHT_ASCENSION             = 258.8 <DEGREE>                                  
+DECLINATION                 = 1.1 <DEGREE>                                    
+CELESTIAL_NORTH_CLOCK_ANGLE = 234.7 <DEGREE>                                  
+BODY_POLE_CLOCK_ANGLE       = "N/A"                                           
+                                                                              
+QUATERNION = (                                                                
+  0.6859116046                                                                
+, 0.3519457062                                                                
+, 0.3004713592                                                                
+, 0.5615838787                                                                
+ )                                                                            
+QUATERNION_DESC = "QUAT_AXYZ_J2K_TO_INSTR.ASC"                                
+/* See NOTE keyword above for definition of NEWH*:APPROX_TARGET_* fields */   
+NEWHORIZONS:APPROX_TARGET_NAME   = "HYDRA"                                    
+NEWHORIZONS:APPROX_TARGET_LINE   = 106                                        
+NEWHORIZONS:APPROX_TARGET_SAMPLE = 111                                        
+                                                                              
+SPICE_FILE_NAME      = { "nh_pred_20060119_20070401_od020.bsp"                
+                       , "nh_pred_20060119_20070101_od021.bsp"                
+                       , "nh_pred_20060119_20100601_od022.bsp"                
+                       , "nh_pred_20060119_20100101_od032.bsp"                
+                       , "nh_pred_20061001_20100101_od040.bsp"                
+                       , "nh_pred_20070307_20100101_od041.bsp"                
+                       , "nh_pred_20070321_20100101_od042.bsp"                
+                       , "nh_pred_20070319_20100101_od051.bsp"                
+                       , "nh_pred_20070319_20110101_od059.bsp"                
+                       , "nh_pred_20080710_20160101_od059.bsp"                
+                       , "nh_pred_20070319_20130101_od061.bsp"                
+                       , "nh_pred_20070319_20140101_od064.bsp"                
+                       , "nh_pred_20070319_20150101_od070.bsp"                
+                       , "nh_pred_20070319_20150501_od072.bsp"                
+                       , "nh_pred_20070319_20150901_od077.bsp"                
+                       , "nh_pred_20120501_20160913_od091.bsp"                
+                       , "nh_pred_20150801_20190301_od124.bsp"                
+                       , "nh_pred_20150801_20190901_od126.bsp"                
+                       , "naif0012.tls"                                       
+                       , "new_horizons_1535.tsc"                              
+                       , "nh_stars_kbo_centaur_ppinp.tpc"                     
+                       , "pck00010.tpc"                                       
+                       , "nh_v220.tf"                                         
+                       , "nh_allinstruments_v002.ti"                          
+                       , "nh_alice_v200.ti"                                   
+                       , "nh_lorri_v201.ti"                                   
+                       , "nh_pepssi_v110.ti"                                  
+                       , "nh_ralph_v100.ti"                                   
+                       , "nh_rex_v100.ti"                                     
+                       , "nh_sdc_v101.ti"                                     
+                       , "nh_swap_v200.ti"                                    
+                       , "nh_soc_misc_v001.tf"                                
+                       , "sb_2002jf56_2.bsp"                                  
+                       , "jup260.bsp"                                         
+                       , "kbo_centaur_horizons_20131129.bsp"                  
+                       , "kbo_centaur_20170422.bsp"                           
+                       , "sb_2014mu69_20150903_s6.bsp"                        
+                       , "nh_extras.bsp"                                      
+                       , "nh_stars.bsp"                                       
+                       , "NavPE_de433_od128.bsp"                              
+                       , "NavSE_plu047_od123.bsp"                             
+                       , "nh_nep_ura_000.bsp"                                 
+                       , "nh_recon_e2j_v1.bsp"                                
+                       , "nh_recon_j2sep07_prelimv1.bsp"                      
+                       , "nh_recon_pluto_od122_v01.bsp"                       
+                       , "merged_nhpc_2006_v001.bc"                           
+                       , "merged_nhpc_2007_v001.bc"                           
+                       , "merged_nhpc_2008_v001.bc"                           
+                       , "merged_nhpc_2009_v001.bc"                           
+                       , "merged_nhpc_2010_v001.bc"                           
+                       , "merged_nhpc_2011_v001.bc"                           
+                       , "merged_nhpc_2012_v001.bc"                           
+                       , "merged_nhpc_2013_v001.bc"                           
+                       , "merged_nhpc_2014_v001.bc"                           
+                       , "merged_nhpc_2015_v039.bc"                           
+                       , "merged_nhpc_2016_v003.bc"                           
+                       , "merged_nhpc_2017_01_v011.bc"                        
+                       , "merged_nhpc_2017_02_v004.bc"                        
+                       , "merged_nhpc_2017_03_v004.bc"                        
+                       , "merged_nhpc_2017_04_v004.bc"                        
+                       , "merged_nhpc_2017_09_v011.bc"                        
+                       , "merged_nhpc_2017_10_v010.bc"                        
+                       , "merged_nhpc_2017_11_v004.bc"                        
+                       , "nhpc_2017_335_02.bc"                                
+                       , "nhpc_2017_338_02.bc"                                
+                       , "nhpc_2017_339_04.bc"                                
+                       , "nhpc_2017_340_04.bc"                                
+                       , "nhpc_2017_341_03.bc"                                
+                       , "nhpc_2017_342_03.bc"                                
+                       , "nhpc_2017_343_02.bc"                                
+                       , "nhpc_2017_344_02.bc"                                
+                       , "nhpc_2017_346_01.bc"                                
+                       , "naif0012.tls"                                       
+                       , "pck00010.tpc"                                       
+                       , "nh_stars_kbo_centaur_v002.tpc"                      
+                       , "new_horizons_1454.tsc"                              
+                       , "nh_v220.tf"                                         
+                       , "nh_soc_misc_v002.tf"                                
+                       , "heliospheric_v004u.tf"                              
+                       , "nh_alice_v200.ti"                                   
+                       , "nh_lorri_v201.ti"                                   
+                       , "nh_pepssi_v110.ti"                                  
+                       , "nh_ralph_v100u.ti"                                  
+                       , "nh_rex_v100.ti"                                     
+                       , "nh_sdc_v101.ti"                                     
+                       , "nh_swap_v200.ti"                                    
+                       , "de418.bsp"                                          
+                       , "jup260.bsp"                                         
+                       , "nh_plu017.bsp"                                      
+                       , "kbo_centaur_20170422.bsp"                           
+                       , "kbo_centaur_20131129.bsp"                           
+                       , "nh_extras.bsp"                                      
+                       , "sb_2002jf56_2.bsp"                                  
+                       , "sb_2014mu69_20150903_s6.bsp"                        
+                       , "nh_nep_ura_000.bsp"                                 
+                       , "nh_pred_alleph_od124.bsp"                           
+                       , "nh_recon_e2j_v1.bsp"                                
+                       , "nh_recon_j2sep07_prelimv1.bsp"                      
+                       , "nh_recon_od077_v01.bsp"                             
+                       , "nh_recon_od117_v01.bsp"                             
+                       , "nh_recon_pluto_od122_v01.bsp"                       
+                       , "merged_nhpc_2006_v011.bc"                           
+                       , "merged_nhpc_2007_v006.bc"                           
+                       , "merged_nhpc_2008_v001.bc"                           
+                       , "merged_nhpc_2009_v001.bc"                           
+                       , "merged_nhpc_2010_v001.bc"                           
+                       , "merged_nhpc_2011_v001.bc"                           
+                       , "merged_nhpc_2012_v001.bc"                           
+                       , "merged_nhpc_2013_v001.bc"                           
+                       , "merged_nhpc_2014_v001.bc"                           
+                       , "merged_nhpc_2015_v001.bc"                           
+                       , "merged_nhpc_2016_v003.bc"                           
+                       }                                                      
+PROCESSING_HISTORY_TEXT = "                                                   
+History retrieval result: SUCCESS                                             
+Refer to SOC_INST_ICD document for more detail                                
+************************************************************************      
+***N.B. The ABSCCORR (Absolute Calibration) step does not change pixel        
+***     values in the IMAGE.  Pixel values are *CALIBRATED* DATA NUMBERs      
+***     e.g. typically only removal of bias, smear, and pixel-to-pixel        
+***     variation (flat-fielding) steps are performed.                        
+***                                                                           
+***     The ABSCCORR step *ONLY* adds conversion factor keywords              
+***     to the FITS header, which are later copied to this label              
+***       R*:  to radiance, units = (DN/*s/pixel)/(erg/s/cm^2/Angstrom);      
+***       P*:  to irradiance, units = (DN/*s/pixel)/(erg/s/cm^2)              
+************************************************************************      
+COMMENT *********************************************************             
+COMMENT *** LORRI Level 2 software name and version info      ***             
+COMMENT *********************************************************             
+L2_SWNAM= 'lorri_level2_pipeline' /*Level 2 calibration software              
+L2_SWVER= '1.3.1   '           /*software version tag                         
+COMMENT *********************************************************             
+COMMENT *** LORRI Level 2 software logic flow control flags   ***             
+COMMENT *********************************************************             
+IMGSUBTR= 'OMIT    '           /*image subtraction step                       
+BIASCORR= 'PERFORM '           /*bias subtraction step                        
+FILLCORR= 'PERFORM '           /*fill missing data                            
+SLINCORR= 'OMIT    '           /*signal linearization step                    
+CTICORR = 'OMIT    '           /*charge transfer inefficiency step            
+DARKCORR= 'OMIT    '           /*dark subtraction step                        
+SMEARCOR= 'PERFORM '           /*smear removal step                           
+FLATCORR= 'PERFORM '           /*flat-fielding step                           
+GEOMCORR= 'OMIT    '           /*geometric correction step                    
+MASKCORR= 'PERFORM '           /*mask missing data                            
+ABSCCORR= 'PERFORM '           /*absolute calibration step                    
+COMPERR = 'PERFORM '           /*compute error estimate                       
+COMPQUAL= 'PERFORM '           /*compute quality flags                        
+COMMENT *********************************************************             
+COMMENT *** LORRI Level 2 Reference Filename                  ***             
+COMMENT *********************************************************             
+REFDEBIA= 'sap_006_combined_100img_1x1.fit' /*debias image filename           
+REFFLAT = 'cflat_grnd_SFA_20050309_v2.fit' /*flat field image filename        
+REFDEAD = 'dead_ground_1x1_synthetic.fit' /*dead pixel image filename         
+REFHOT  = 'hot_ground_1x1_synthetic.fit' /*hot pixel image filename           
+REFSUBIM= '        '           /*subtraction image filename                   
+COMMENT *********************************************************             
+COMMENT *** LORRI Level 2 Absolute Calibration Parameters     ***             
+COMMENT *** Rxxx keyword units=(DN/s/pixel)/(erg/cm^2/s/A/sr) ***             
+COMMENT *** Pxxx keyword units=(DN/s)/(erg/cm^2/s/A)          ***             
+COMMENT *********************************************************             
+BIASMTHD= 'median of dark column data' /*Method used to calculate bias value  
+BIASLEVL=        537.000000000 /*median bias level of dark columns, units=DN  
+RDNOISE =        1.10000000000 /*Read noise, units=DN                         
+CCDGAIN =        22.0000000000 /*CCD gain, units=e/DN                         
+PIVOT   =        6076.20019531 /*LORRI pivot wavelength. units=angstroms      
+RSOLAR  =        234900.000000 /*Conv to radiance for solar source            
+RPLUTO  =        227000.000000 /*Conv to radiance for pluto source            
+RPHOLUS =        272400.000000 /*Conv to radiance for 5145 pholus source      
+RCHARON =        231800.000000 /*Conv to radiance for charon source           
+RJUPITER=        206900.000000 /*Conv to radiance for jupiter source          
+PPLUTO  =    9.21399978256E+15 /*Conv to irradiance for pluto source          
+PSOLAR  =    9.53299988854E+15 /*Conv to irradiance for solar source          
+PPHOLUS =    1.10600003487E+16 /*Conv to irradiance for 5145 pholus source    
+PCHARON =    9.40999954137E+15 /*Conv to irradiance for charon source         
+PJUPITER=    8.39699982923E+15 /*Conv to irradiance for jupiter source        
+PHOTZPT =        18.8700000000 /*Zero point for visual magnitude, V           
+COMMENT *********************************************************             
+COMMENT *** LORRI Level 2 Calibrated telemetry items          ***             
+COMMENT *********************************************************             
+EPU_P5VO=        5.04305504857 /*EPU +5 voltage. units=Volts                  
+EPU_P5CU=       0.143143000000 /*EPU +5 current. units=Amps                   
+FPU_P15V=        14.9797220368 /*FPU +15 voltage. units=Volts                 
+FPU_P15C=      0.0610920000000 /*FPU +15 current. units=Amps                  
+FPU_P6_V=        6.04818995353 /*FPU +6 voltage. units=Volts                  
+FPU_P6_C=       0.168168000000 /*FPU +6 current. units=Amps                   
+FPU_HTRC=        0.00000000000 /*FPU heater current. units=Amps               
+EPU_25PV=        2.50228518180 /*EPU +2.5 voltage. units=Volts                
+RINGTEMP=       -70.0886308310 /*Intermediate ring temp. units=celsius        
+MFOOTTMP=       -65.4590140309 /*Mounting foot-top temp. units=celsius        
+M2MNTTMP=       -70.0886308310 /*M2 mirror mount temp. units=celsius          
+RADTEMP =       -89.3125623037 /*Radiator temp. units=celsius                 
+BAFATEMP=       -66.5275372052 /*Baffle-aft temp. units=celsius               
+BAFFTEMP=       -76.1408535268 /*Baffle-forward temp. units=celsius           
+M1SUPTMP=       -70.4446924814 /*M1 mirror support temp. units=celsius        
+M1MIRTMP=       -69.3764837983 /*M1 mirror temp. units=celsius                
+CCDTEMP =       -79.5485000000 /*CCD temperature. units=celsius               
+M1VFTEMP=       -68.8004447000 /*M1 V/F temperature. units=celsius            
+M2VFTEMP=       -69.5252910000 /*M2 V/F temperature. units=celsius            
+FPUBTEMP=        26.4826400000 /*FPU board V/F temp. units=celsius            
+STEMPCVR= 'ENABLE  '           /*Temperature conversion enable                
+SCLMP2PE= 'OFF     '           /*Cal lamp 2 power enable                      
+SCLMP1PE= 'OFF     '           /*Cal lamp 2 power enable                      
+SSOURCE = 'CCD     '           /*Image source                                 
+SFORMAT = '1X1     '           /*Image format                                 
+SEXPMODE= 'MANUAL  '           /*Exposure mode                                
+PDUNAME = 'Level 2 LORRI image'                                               
+"                                                                             
+                                                                              
+OBJECT                          = HEADER                                      
+  BYTES                           = 31680                                     
+  HEADER_TYPE                     = "FITS"                                    
+  INTERCHANGE_FORMAT              = "BINARY"                                  
+  RECORDS                         = 11                                        
+  DESCRIPTION                     = "                                         
+    FITS format defined in NASA/Science                                       
+    Office Standards Technology 100-1.0                                       
+                                                                              
+By mutual agreement with PDS-SBN, FITS headers are the domain of the NH       
+Project and were not part of the peer review beyond adherence to the          
+FITS standard.  FITS header values, especially geometric conventions          
+regarding phase angle, direction of supplied vectors and sense of light       
+time and stellar aberration corrections, were chosen to serve                 
+operational purposes and should be used with care.                            
+  "                                                                           
+END_OBJECT                      = HEADER                                      
+                                                                              
+OBJECT                          = IMAGE                                       
+  DESCRIPTION                   = "                                           
+    FITS PDU                                                                  
+      PDU                                                                     
+                                                                              
+    Calibrated data image                                                     
+    - Corrections applied:                                                    
+      - Bias subtraction                                                      
+      - Smear removal (if non-zero exposure)                                  
+      - Flatfield correction (if non-zero exposure)                           
+      - Absolute calibration                                                  
+        - N.B. NO pixel values are CHANGED                                    
+        - So pixel values are *CALIBRATED* DATA NUMBERs (DNs)                 
+        - ABSCCORR only adds conversion factors for                           
+          - radiance and irradiance e.g. RPLUTO; PPHOLUS                      
+    - Corrections omitted:                                                    
+      - Image subtraction                                                     
+      - Signal linearization                                                  
+      - CTI correction                                                        
+      - Smear removal (if zero exposure)                                      
+      - Dark subtraction                                                      
+      - Flatfield correction (if zero exposure)                               
+      - Geometric correction                                                  
+      - Geometric correction                                                  
+    See the data set documentation, specifically the                          
+    SOC Instrument Interface Control Document (ICD),                          
+    for more details.                                                         
+  "                                                                           
+  UNIT                            = "DATA NUMBER"                             
+  SAMPLE_BITS                     = 32                                        
+  SAMPLE_TYPE                     = "IEEE_REAL"                               
+  AXIS_ORDER_TYPE                 = "FIRST_INDEX_FASTEST"                     
+  LINE_DISPLAY_DIRECTION          = "UP"                                      
+  SAMPLE_DISPLAY_DIRECTION        = "RIGHT"                                   
+  LINE_SAMPLES                    = 1024                                      
+  LINES                           = 1024                                      
+END_OBJECT                      = IMAGE                                       
+                                                                              
+OBJECT                          = EXTENSION_CALIB_ERROR_EST_HEADER            
+  BYTES                           = 2880                                      
+  HEADER_TYPE                     = "FITS"                                    
+  INTERCHANGE_FORMAT              = "BINARY"                                  
+  RECORDS                         = 1                                         
+  DESCRIPTION                     = "                                         
+    This is the FITS header for                                               
+      FITS EDU number:  1                                                     
+      FITS EDU name:                                                          
+        LORRI Error image                                                     
+  "                                                                           
+END_OBJECT                      = EXTENSION_CALIB_ERROR_EST_HEADER            
+                                                                              
+OBJECT                          = EXTENSION_CALIB_ERROR_EST_IMAGE             
+  DESCRIPTION                   = "                                           
+    FITS EDU number:  1                                                       
+      LORRI Error image                                                       
+                                                                              
+    Calibrated error estimate image                                           
+    - 1-sigma error in photometrically corrected signal                       
+    - Formula:                                                                
+                                                                              
+                   _______________________                                    
+                  /PmeasI     2          2                                    
+                 / ------ + RN + (fPmeas)                                     
+      sigma  = \/    g                                                        
+           I   ---------------------------                                    
+                           FF                                                 
+    - Where:                                                                  
+      sigma  is the 1-sigma error pixel I                                     
+           I                                                                  
+       PmeasI is the observed signal in pixel I after                         
+              bias subtraction but before smear removal                       
+            g is the electronics gain (22 e/DN)                               
+           RN is the electronics noise (1.3 DN)                               
+            f is the estimated error in the reference                         
+              flat-field image (0.005)                                        
+           FF is the value of the reference flat-field                        
+              image at the relevant pixel                                     
+  "                                                                           
+  UNIT                            = "DATA NUMBER"                             
+  SAMPLE_BITS                     = 32                                        
+  SAMPLE_TYPE                     = "IEEE_REAL"                               
+  AXIS_ORDER_TYPE                 = "FIRST_INDEX_FASTEST"                     
+  LINE_DISPLAY_DIRECTION          = "UP"                                      
+  SAMPLE_DISPLAY_DIRECTION        = "RIGHT"                                   
+  LINE_SAMPLES                    = 1024                                      
+  LINES                           = 1024                                      
+END_OBJECT                      = EXTENSION_CALIB_ERROR_EST_IMAGE             
+                                                                              
+OBJECT                          = EXTENSION_CALIB_QUALITY_HEADER              
+  BYTES                           = 2880                                      
+  HEADER_TYPE                     = "FITS"                                    
+  INTERCHANGE_FORMAT              = "BINARY"                                  
+  RECORDS                         = 1                                         
+  DESCRIPTION                     = "                                         
+    This is the FITS header for                                               
+      FITS EDU number:  2                                                     
+      FITS EDU name:                                                          
+        LORRI Quality flag image                                              
+  "                                                                           
+END_OBJECT                      = EXTENSION_CALIB_QUALITY_HEADER              
+                                                                              
+OBJECT                          = EXTENSION_CALIB_QUALITY_IMAGE               
+  DESCRIPTION                   = "                                           
+    FITS EDU number:  2                                                       
+      LORRI Quality flag image                                                
+                                                                              
+    Calibrated quality image                                                  
+    - Zero values are good                                                    
+    - Non-zero values flag pixels with known artifact(s)                      
+    - Non-zero bits in flag pixels identify artifacts:                        
+      -  1 => Reed-Solomon error                                              
+      -  2 => Defect in one of the reference calib. files                     
+      -  4 => Permanent CCD defect (e.g., dead pixel)                         
+      -  8 => Saturated pixel (A/D value of 4095)                             
+      - 16 => Missing data                                                    
+      - 32 => Bad pixel not in any of above categories                        
+  "                                                                           
+  SAMPLE_BITS                     = 16                                        
+  SAMPLE_TYPE                     = "MSB_INTEGER"                             
+  AXIS_ORDER_TYPE                 = "FIRST_INDEX_FASTEST"                     
+  LINE_DISPLAY_DIRECTION          = "UP"                                      
+  SAMPLE_DISPLAY_DIRECTION        = "RIGHT"                                   
+  LINE_SAMPLES                    = 1024                                      
+  LINES                           = 1024                                      
+  OFFSET                          = 32768.0000000                             
+END_OBJECT                      = EXTENSION_CALIB_QUALITY_IMAGE               
+END                                                                           

@@ -66,5 +66,5 @@ export async function prepareCloseups(sourceDirectory:string,write=false) {
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
   assert.ok(process.argv.slice(2).every(a=>a==='--write'));
-  console.log(JSON.stringify(await prepareCloseups(resolve('src/planets/comet-9p/source'),process.argv.includes('--write')),null,2));
+  console.log(JSON.stringify(await prepareCloseups(resolve('src/objects/comet-9p/source'),process.argv.includes('--write')),null,2));
 }

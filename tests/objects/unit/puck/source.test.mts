@@ -6,7 +6,7 @@ import {readFile} from 'node:fs/promises';
 import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {decodeCalibratedCamera,controlledShapeCamera} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 
-const root=new URL('../../../../src/planets/puck/source/',import.meta.url);
+const root=new URL('../../../../src/objects/puck/source/',import.meta.url);
 
 test('Puck decodes the actual Voyager calibrated HALF raster without consuming header bytes',async()=>{
   const bytes=await readFile(new URL('observations/C2683716_GEOMED.IMG',root));

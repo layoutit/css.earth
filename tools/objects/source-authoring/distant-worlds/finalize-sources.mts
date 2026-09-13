@@ -26,7 +26,7 @@ const files = async (path: string): Promise<string[]> => (await Promise.all((awa
 const refreshOnly = process.argv.includes('--refresh-pins');
 let font: fontkit.Font | undefined, map: Buffer | undefined;
 if (!refreshOnly) {
-  const fontPath = resolve('src/planets/oumuamua/source/presentation/InterVariable.ttf');
+  const fontPath = resolve('src/objects/oumuamua/source/presentation/InterVariable.ttf');
   if (hash(await readFile(fontPath)) !== PLANET_TITLE_RECIPE.sourceSha256) throw new Error('Title font changed.');
   const baseFont = fontkit.openSync(fontPath);
   if (!('getVariation' in baseFont)) throw new TypeError('The title source must contain one font face.');
@@ -36,7 +36,7 @@ if (!refreshOnly) {
   map=await sharp(pixels,{raw:{width,height,channels:3}}).png().toBuffer();
 }
 for (const b of bodies) {
-  const pkg=resolve('src/planets',b.id),src=resolve(pkg,'source');
+  const pkg=resolve('src/objects',b.id),src=resolve(pkg,'source');
   const manifest=await read(resolve(src,'manifest.json'));
   if (!refreshOnly) {
     if (!font || !map) throw new TypeError('Title and source map preparation must finish before publication.');
@@ -50,7 +50,7 @@ for (const b of bodies) {
     const recipe={generator:'tools/objects/terrestrial-layers/radial-snapshot.mts',inputs:['published-shape','model-surface'],size:512,longitudeDegrees:55,latitudeDegrees:20,ambient:.45,diffuse:.55,lensId:'model'};
     const context=await renderRadialSnapshot({...recipe,faces:radial.faces,map});
     await write(resolve(src,'presentation/context.png'),context);
-    const navigation=await read('src/planets/annefrank/source/preparation/navigation.json');
+    const navigation=await read('src/objects/annefrank/source/preparation/navigation.json');
     const navigationSource=requireRecord(navigation.source);
     navigation.planetId=b.id;
     Object.assign(navigationSource,{id:'prepared-source-context',origin:b.source,credit:b.credit,expectedBytes:context.length,expectedSha256:hash(context),recipe});

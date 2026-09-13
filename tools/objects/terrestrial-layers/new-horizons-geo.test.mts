@@ -9,7 +9,7 @@ import {array,number,nullable,optional,shape,text} from './source-records.mts';
 import {validateSurfaceObservation} from '../surface-observations/index.mts';
 import {pinnedOracleVersions} from '../../oracles/fixture.mts';
 
-const source=new URL('../../../src/planets/arrokoth/source/',import.meta.url);
+const source=new URL('../../../src/objects/arrokoth/source/',import.meta.url);
 const read=async(path:string)=>JSON.parse(await readFile(new URL(path,source),'utf8'));
 const fixture=shape({schema:text,tool:text,version:text,images:array(shape({path:text,sha256:text,bytes:number,
   planes:array(shape({name:text,shape:array(number),samples:array(shape({index:number,value:nullable(number)}))})),

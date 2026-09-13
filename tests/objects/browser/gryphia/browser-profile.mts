@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/gryphia/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/gryphia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'gryphia',controls,audit:{
   "preparedAssetPairs": [
     {

@@ -1,0 +1,242 @@
+{
+  "checkedOn": "2026-09-13T18:18:27.394Z",
+  "baseRevision": "0b53ca718880f83180f5577d030ccfeda399ddae",
+  "scope": "Full application at /dinkinesh/ with the shared shell and persistent universe; focused browser checks, not complete conformance or photographic qualification.",
+  "localChanges": "The attached browser-profile and conformance test changes. Missing Helix, M2-9 and M42 banks rebuilt from their saved recipes, LMC reused, and prepare-machines refreshed. The rebuilt M2-9 descriptor and a pre-existing unrelated orbit-renderer edit were present locally; neither changes the Dinkinesh package.",
+  "baseUrl": "http://127.0.0.1:4278",
+  "conformanceBrowser": "152.0.7977.84",
+  "manualBrowser": "Chrome for Testing 153.0.8010.12, headless",
+  "checks": [
+    {
+      "case": "initial-shell",
+      "status": "passed",
+      "milliseconds": 710
+    },
+    {
+      "case": "desktop",
+      "milliseconds": 9155,
+      "status": "passed"
+    },
+    {
+      "case": "mobile",
+      "milliseconds": 2409,
+      "status": "passed"
+    },
+    {
+      "case": "dataset-interactions",
+      "milliseconds": 5660,
+      "status": "passed"
+    },
+    {
+      "case": "dataset-interactions-dpr-2",
+      "milliseconds": 6006,
+      "status": "passed"
+    },
+    {
+      "id": "dinkinesh",
+      "viewport": "lens-race",
+      "lens": "tempest-shape",
+      "slowDecodeCount": 1
+    },
+    {
+      "id": "dinkinesh",
+      "viewport": "lens-reacquire",
+      "lens": "shape"
+    },
+    {
+      "id": "dinkinesh",
+      "viewport": "lens-rejection-retry",
+      "lens": "shape"
+    },
+    {
+      "id": "dinkinesh",
+      "viewport": "lens-destroy"
+    }
+  ],
+  "featureDatasetGate": {
+    "before": {
+      "selection": {
+        "lensId": "tempest-shape",
+        "shadows": false,
+        "orbit": true
+      },
+      "features": {
+        "loaded": true,
+        "count": 4,
+        "visible": 0,
+        "eligible": 0,
+        "enabled": false,
+        "playing": false,
+        "frames": 5,
+        "error": null,
+        "zoomGate": true,
+        "outlinePieces": 0,
+        "flying": false,
+        "hovered": null,
+        "pinned": null
+      },
+      "stable": true
+    },
+    "legacy": {
+      "selection": {
+        "lensId": "shape",
+        "shadows": false,
+        "orbit": true
+      },
+      "features": {
+        "loaded": true,
+        "count": 4,
+        "visible": 0,
+        "eligible": 0,
+        "enabled": true,
+        "playing": false,
+        "frames": 6,
+        "error": null,
+        "zoomGate": true,
+        "outlinePieces": 0,
+        "flying": false,
+        "hovered": null,
+        "pinned": null
+      },
+      "stable": true
+    },
+    "restored": {
+      "selection": {
+        "lensId": "tempest-shape",
+        "shadows": false,
+        "orbit": true
+      },
+      "features": {
+        "loaded": true,
+        "count": 4,
+        "visible": 0,
+        "eligible": 0,
+        "enabled": false,
+        "playing": false,
+        "frames": 9,
+        "error": null,
+        "zoomGate": true,
+        "outlinePieces": 0,
+        "flying": false,
+        "hovered": null,
+        "pinned": null
+      },
+      "stable": true
+    }
+  },
+  "mobileTouchTrial": {
+    "ok": false,
+    "before": {
+      "distance": 1285.4533263532928,
+      "stable": true
+    },
+    "after": {
+      "distance": 1285.4533263532928,
+      "stable": true
+    },
+    "viewport": {
+      "width": 390,
+      "height": 844
+    }
+  },
+  "mobileCapture": "390x844 DPR 1, after entering the normal route and a -100 pixel wheel zoom. Camera distance changed from 1285.4533263532928 to 576.5088279384782 scene units; retained identity remained true. This is not a successful pinch test.",
+  "browserTestCommand": "CSSEARTH_CONFORMANCE_CASES=<selected cases> CSSEARTH_CONFORMANCE_OUTPUT=output/playwright/dinkinesh-tempest-full-app node site/test/planet-browser-conformance.mts http://127.0.0.1:4278 dinkinesh",
+  "limitations": [
+    {
+      "check": "dpr-1 complete conformance",
+      "result": "Fails the shared wheel-notch distance expectation: observed ratio 0.49891966917638764, expected 0.5488116360940265. The policy, wheel implementation and expectation match origin/main d63ac090; the expectation models the commanded step without the new wheel inertia. Complete DPR-2 conformance was not run after this failure; dataset interactions passed at both DPRs."
+    },
+    {
+      "check": "generic surface-features conformance",
+      "result": "Times out because it assumes the default dataset exposes the feature catalogue. This model deliberately excludes legacy coordinates. The separate actual-browser gate verifies disabled/enabled/disabled across TEMPEST/Celestia/TEMPEST, but does not qualify label placement or hovering."
+    },
+    {
+      "check": "browser-profile unit file",
+      "result": "Six tests passed; the all-object inventory fails on Ryugu retained lens coverage. Ryugu controls and profile are unchanged by this PR."
+    },
+    {
+      "check": "mobile pinch",
+      "result": "The CDP two-finger trial did not change camera distance. Mobile layout, wheel zoom and retained identity passed; complete phone touch behavior remains unqualified."
+    },
+    {
+      "check": "photography",
+      "result": "No photographic surface is qualified or delivered."
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src/planets/dinkinesh/object.json",
+      "bytes": 4126,
+      "sha256": "90447aa2da72ba3aa018a532ae032e15e4d0fb5500bc85d9dcdcb50d33986e1a"
+    },
+    {
+      "path": "src/planets/dinkinesh/prepared/object.json",
+      "bytes": 2232028,
+      "sha256": "19f79ec1fc606878f52cdf4018c1d023fb1f80c2cd39c61f2701f66046704f03"
+    },
+    {
+      "path": "src/planets/dinkinesh/prepared/runtime.json",
+      "bytes": 7958734,
+      "sha256": "488b809970d9612d8f32eb2995f200afb1befcfe39d017efc5d4fbd326a22ff5"
+    },
+    {
+      "path": "src/planets/dinkinesh/source/manifest.json",
+      "bytes": 15930,
+      "sha256": "67301d0ab5d357c2d28684c0aa68643e0e3f5a2540385e6044582b37d2031d58"
+    },
+    {
+      "path": "src/planets/dinkinesh/source/shape/tempest-dinkinesh.stl",
+      "bytes": 237239,
+      "sha256": "3c38e04484e42a90e8b284302111325f0519a61ab22772f73d541e2715e11622"
+    },
+    {
+      "path": "tests/objects/browser/dinkinesh/browser-profile.mts",
+      "bytes": 891,
+      "sha256": "2cc17b172ae561fba0193cee5b854d2da23a81462d2d8d62ec0c68e3d3380f44"
+    },
+    {
+      "path": "site/test/load-browser-profile.mts",
+      "bytes": 6638,
+      "sha256": "ddfc597b9f72b8bebf1d0a33ab25d0852113148103b14e3304ea8916cbd1e893"
+    },
+    {
+      "path": "site/test/planet-browser-conformance.mts",
+      "bytes": 107421,
+      "sha256": "485adbf7f980e55a91e7cf444039f17806ce5a2bef2e39b3478bf3f08d37bbdc"
+    },
+    {
+      "path": "site/runtime-policy.mts",
+      "bytes": 9703,
+      "sha256": "2b7a5c220d8d7bc455fb8d6e519e2716612417644685718de4080e829c6fc9ef"
+    },
+    {
+      "path": "site/test/wheel-zoom-distance.mts",
+      "bytes": 15449,
+      "sha256": "78b221fbb6d794687ae32311023d4c10e434733b680049678a749b5416f92132"
+    }
+  ],
+  "localEnvironmentInputs": [
+    {
+      "path": "src/objects/m2-9/object.json",
+      "bytes": 1070,
+      "sha256": "7a42a55831d8c171fd9725cdd56d23ebc65035b8689600e44a64d3a8ce846cb6"
+    },
+    {
+      "path": "src/renderers/css/solar-system/prepared-orbit-lines.ts",
+      "bytes": 11030,
+      "sha256": "07dbc7bcc0fc2b88c04175cae8a56646f99a2d7e4a9f7e8908a22d7a76447314"
+    }
+  ],
+  "images": [
+    {
+      "path": "src/planets/dinkinesh/evidence/dinkinesh-tempest-full-app.png",
+      "bytes": 523205,
+      "sha256": "62afe98b1d905d4e6b96d0741f39d4739d57ae0b74fc571d7a9cabaee70f214b"
+    },
+    {
+      "path": "src/planets/dinkinesh/evidence/dinkinesh-tempest-mobile.png",
+      "bytes": 148705,
+      "sha256": "b658a0660b400cd87f6ade2c0d444463d593ee9af21f2f311ae190d6979f3751"
+    }
+  ]
+}

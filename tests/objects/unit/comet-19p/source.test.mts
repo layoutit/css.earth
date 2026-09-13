@@ -10,7 +10,7 @@ import { loadRadialTerrain } from '../../../../tools/objects/terrestrial-layers/
 import { loadSurfaceObservation } from '../../../../tools/objects/surface-observations/index.mts';
 import { loadImageDemScience } from '../../../../tools/objects/terrestrial-layers/image-dem-science.mts';
 
-const root = resolve(import.meta.dirname, '../../../../src/planets/comet-19p/source');
+const root = resolve(import.meta.dirname, '../../../../src/objects/comet-19p/source');
 const config = JSON.parse(await readFile(resolve(root, 'preparation/terrestrial.json'), 'utf8'));
 const profile = config.geometry.radialTerrain;
 const source = await createSourceManifest({ planetId: 'comet-19p', planetName: 'Borrelly', sourceRoot: root });

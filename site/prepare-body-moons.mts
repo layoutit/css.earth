@@ -1,5 +1,5 @@
 import { PLANET_SEARCH_OBJECTS } from './planet-search-objects.mts';
-import preparedWorld from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import preparedWorld from '../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 
 export function prepareBodyMoons(objectId: string) {
   const children = new Set(preparedWorld.bodies

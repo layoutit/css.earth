@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/dione-106/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/dione-106/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'dione-106',controls,audit:{
   "preparedAssetPairs": [
     {
