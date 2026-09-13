@@ -6,7 +6,7 @@ import {decodeNewHorizonsLorri,decodeArrokothMvic,newHorizonsCamera} from './new
 import {bindSipCamera} from './llorri-geo.mts';
 import {readFitsPrimary} from '../observation/fits.mts';
 import {array,number,nullable,optional,shape,text} from './source-records.mts';
-import {validateGeoSurfaceRecipe} from './observed-geo-surface.mts';
+import {validateSurfaceObservation} from '../surface-observations/index.mts';
 import {pinnedOracleVersions} from '../../oracles/fixture.mts';
 
 const source=new URL('../../../src/planets/arrokoth/source/',import.meta.url);
@@ -69,7 +69,7 @@ test('LORRI rejects a different image, incomplete quality layout and non-rigid b
 
 test('enhanced color keeps one shared zero-based scale and rejects photometric recoloring',async()=>{
   const config=await read('preparation/terrestrial.json'),recipe=config.raster.surfaceObservations.find((v:{id:string})=>v.id==='mvic');
-  validateGeoSurfaceRecipe(recipe,config.geometry.radialTerrain);
-  assert.throws(()=>validateGeoSurfaceRecipe({...recipe,colorDisplay:{minimum:.01,maximum:.17}},config.geometry.radialTerrain));
-  assert.throws(()=>validateGeoSurfaceRecipe({...recipe,photometry:{...recipe.photometry,model:'lommel-seeliger'}},config.geometry.radialTerrain));
+  validateSurfaceObservation(recipe,config.geometry.radialTerrain);
+  assert.throws(()=>validateSurfaceObservation({...recipe,colorDisplay:{minimum:.01,maximum:.17}},config.geometry.radialTerrain));
+  assert.throws(()=>validateSurfaceObservation({...recipe,photometry:{...recipe.photometry,model:'lommel-seeliger'}},config.geometry.radialTerrain));
 });

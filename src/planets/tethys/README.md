@@ -116,7 +116,7 @@ The lens projects one Cassini ISS narrow-angle frame onto the SPC shape model. T
 | Range and phase against OPUS's geometry for this frame | Within 0.3 km and 0.001° |
 | Limb residual before and after refinement, holdout edges | 5.4 px → 0.70 px RMS |
 | Refinement rotation | 0.012°, a 6.8 px boresight shift |
-| Surface showing the photograph | 26% of the displayed surface: 3,428,177 of 13,174,380 texels |
+| Surface showing the photograph | 28.5% of the displayed surface area; 3,590,340 of 13,174,380 atlas texels |
 | Largest distance from the displayed mesh to the source surface | 4.39 km, within the 5.31 km limit |
 
-A texel keeps the photograph only when its four image contributors lie within 3 km of the closest source-mesh point, about two pixel footprints, and that point lies within 5.31 km of the displayed mesh and is visible to the camera. The far side, the night side and strongly foreshortened surface keep the grid. Brightness uses the empirical Lommel-Seeliger law with incidence and emission limited to 80°; no published Tethys photometric model has been checked yet.
+A texel keeps the photograph only when four conditions hold. Its four image contributors lie within two diagonal pixel footprints of the closest source-mesh point; a footprint is about 1.1 km at nadir and grows with emission. The surface is seen at less than 75° emission. That point lies within 5.31 km of the displayed mesh, and the camera can see it. The far side, the night side and surface seen beyond 75° keep the grid. Brightness uses the empirical Lommel-Seeliger law, with incidence limited to 80° and emission to 75°. No published Tethys photometric model has been checked yet. A fixed 3 km separation used to leave a stippled fringe where it cut foreshortened pixels. Stating it in footprints removed that fringe, and coverage rose from 27.1% to 28.5% of the displayed surface area.
