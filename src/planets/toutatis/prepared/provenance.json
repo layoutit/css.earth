@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "toutatis",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "100323d48f67559345f8155fea77f71b6190e57fe81b5a3a9c5614c31e3ac7a3"
+    "sha256": "d859807f07bf62ff1d3dbcfe53d05fd55ab6d59bc17c2f1852d3934004b1523f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
+    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4e38f58d39e41df5deff1237bed6cd9ad01f3a1bfce46cf17d567992952a2480",
+      "sha256": "6c32e54d541c090334da48beb4b1e8bd0cd0a476b1cc67ed700325ca8ab1ba0b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -39,215 +39,6 @@
               "id": "shape",
               "label": "Shape",
               "consumer": "shape"
-            }
-          ],
-          "surfaceObservations": [
-            {
-              "id": "chang-e-2",
-              "format": "published-image-projection",
-              "consumer": "chang-e-2",
-              "metadata": {
-                "label": "Chang’e-2",
-                "coverage": "A cropped 2012 flyby photograph, approximately placed on the radar shape; excluded terrain stays gridded."
-              },
-              "frames": [
-                {
-                  "id": "jiang-figure-1c",
-                  "path": "chang-e-2/jiang-2015-figure-1.jpg",
-                  "projection": {
-                    "status": "approximate",
-                    "method": "Camera direction inferred from Zou et al. (2014), Figure 3, using the angles quoted by Bu et al. (2015). Scale and translation manually match the published radar rendering; its photograph is matched to Jiang et al. (2015), Figure 1c. The image-to-image holdouts do not validate the 3D placement. See source/reference/chang-e-2-method.md.",
-                    "limitations": "Approximate placement on the 1992/1996 radar model. Absolute image-to-shape registration has not been measured. Camera-axis interpretation and figure framing are inferred, and the radar model differs from the photographed surface. Transfer limits and coverage describe this assumed projection, not positional accuracy.",
-                    "shapeSha256": "28c94e3c5c4fadab97c6f1fc78dbb3800a4248b86302681cf1c629e48df5f00a",
-                    "imageSha256": "0d26efacddb0f7e0cc07f2feeeaef0dcc7d1815093dba63c533ef554abef5aed",
-                    "imageSize": [
-                      1575,
-                      1506
-                    ],
-                    "crop": {
-                      "left": 3,
-                      "top": 790,
-                      "width": 804,
-                      "height": 714
-                    },
-                    "camera": {
-                      "right": [
-                        0.7876145425342866,
-                        0.047142949912943155,
-                        -0.6143621689703984
-                      ],
-                      "up": [
-                        0.4024867539686374,
-                        0.7155955324091268,
-                        0.5709005577820784
-                      ],
-                      "eye": [
-                        0.4665487597971899,
-                        -0.6969222168001278,
-                        0.5446390350150271
-                      ],
-                      "pixelsPerMeter": 0.2181544838418488,
-                      "center": [
-                        506.049838733906,
-                        354.72686324961
-                      ]
-                    },
-                    "mask": {
-                      "polygon": [
-                        [
-                          139,
-                          91
-                        ],
-                        [
-                          183,
-                          77
-                        ],
-                        [
-                          236,
-                          107
-                        ],
-                        [
-                          280,
-                          113
-                        ],
-                        [
-                          299,
-                          140
-                        ],
-                        [
-                          329,
-                          170
-                        ],
-                        [
-                          371,
-                          199
-                        ],
-                        [
-                          419,
-                          230
-                        ],
-                        [
-                          475,
-                          236
-                        ],
-                        [
-                          516,
-                          267
-                        ],
-                        [
-                          531,
-                          315
-                        ],
-                        [
-                          572,
-                          370
-                        ],
-                        [
-                          623,
-                          405
-                        ],
-                        [
-                          651,
-                          453
-                        ],
-                        [
-                          625,
-                          486
-                        ],
-                        [
-                          627,
-                          531
-                        ],
-                        [
-                          651,
-                          562
-                        ],
-                        [
-                          633,
-                          607
-                        ],
-                        [
-                          607,
-                          635
-                        ],
-                        [
-                          548,
-                          638
-                        ],
-                        [
-                          498,
-                          608
-                        ],
-                        [
-                          449,
-                          556
-                        ],
-                        [
-                          401,
-                          516
-                        ],
-                        [
-                          352,
-                          480
-                        ],
-                        [
-                          315,
-                          457
-                        ],
-                        [
-                          300,
-                          416
-                        ],
-                        [
-                          325,
-                          369
-                        ],
-                        [
-                          316,
-                          332
-                        ],
-                        [
-                          268,
-                          300
-                        ],
-                        [
-                          218,
-                          283
-                        ],
-                        [
-                          171,
-                          262
-                        ],
-                        [
-                          136,
-                          240
-                        ],
-                        [
-                          119,
-                          195
-                        ],
-                        [
-                          123,
-                          141
-                        ]
-                      ],
-                      "insetPixels": 20
-                    }
-                  }
-                }
-              ],
-              "transfer": {
-                "maximumSourceDistanceMeters": 50,
-                "maximumSeparationFootprints": 2,
-                "visibilityToleranceMeters": 0.01,
-                "maximumEmissionDegrees": 60
-              },
-              "display": {
-                "displayRange": [
-                  0,
-                  255
-                ]
-              }
             }
           ]
         },
@@ -311,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "66e8ba0fb01fee49ea4815979663c7517856078909b175fd00a99326465daa3a",
+      "sha256": "c4b8a1028284c0ee6670046313beb027dbdf49f6c0626c09110c1aa4d9a4f220",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -335,7 +126,7 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Toutatis is a two-lobed near-Earth asteroid that tumbles as it travels around the Sun. Explore its radar shape or the side photographed by Chang’e-2 during the 2012 flyby.",
+          "introduction": "Toutatis is an elongated, two-lobed near-Earth asteroid that tumbles as it travels around the Sun. Its radar-derived shape reveals a narrow neck, ridges and depressions. Chang’e-2 photographed one side during a 2012 flyby. Explore the published radar model here in a fixed illustrative orientation.",
           "facts": [
             {
               "id": "radius",
@@ -393,22 +184,6 @@
               "falseColor": false,
               "detail": "Published radar shape",
               "summary": "Shape from 1992 and 1996 radar data. Later images show differences; the gray grid marks missing imagery."
-            },
-            {
-              "id": "chang-e-2",
-              "label": "Chang’e-2",
-              "detail": "2012 flyby photograph",
-              "title": "Chang’e-2 photograph",
-              "summary": "A photograph from 13 December 2012, taken at 67.7 km range. Placement on the radar model is approximate; the grid marks excluded terrain.",
-              "description": "The original camera sampled about 8.3 m per pixel. This published image has been enlarged and cropped, with its colors and lighting preserved. Craters and boulders are visible, but their positions on the radar shape remain approximate. The back, limb and uncertain patches stay gridded.",
-              "thumbnail": "/scenes/toutatis/toutatis-chang-e-2-thumbnail.webp",
-              "surface": "toutatis-chang-e-2-surface@2x.webp",
-              "poles": "toutatis-chang-e-2-surface@2x.webp",
-              "source": {
-                "id": "chang-e-2-jiang-figure-1",
-                "path": "../manifest.json"
-              },
-              "falseColor": false
             }
           ]
         },
@@ -431,12 +206,6 @@
         },
         "charts": [],
         "resources": [
-          {
-            "label": "Photograph",
-            "role": "photography",
-            "description": "Jiang et al. (2015), Figure 1c · CC BY 4.0",
-            "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4629198/"
-          },
           {
             "label": "Shape data",
             "role": "terrain",
@@ -532,7 +301,7 @@
       "sha256": "28c94e3c5c4fadab97c6f1fc78dbb3800a4248b86302681cf1c629e48df5f00a",
       "bytes": 2879779,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -541,46 +310,6 @@
         ],
         "path": "shape/4179toutatis2.tab",
         "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.tab"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "chang-e-2-jiang-figure-1",
-      "path": "chang-e-2/jiang-2015-figure-1.jpg",
-      "origin": "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fsrep16029/MediaObjects/41598_2015_Article_BFsrep16029_Fig1_HTML.jpg",
-      "credit": "Y. Jiang, J. Ji, J. Huang, S. Marchi, Y. Li and W.-H. Ip (2015); Chang’e-2; Scientific Reports 5, 16029, Figure 1c.",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "reference/CHANG-E-2-IMAGE-LICENSE.md"
-      ],
-      "acquisition": "Restore the pinned published JPEG with source/preparation/acquisition.json.",
-      "redistribution": "Cropped and approximately projected under CC BY 4.0, with attribution and the changes identified.",
-      "lensId": "chang-e-2",
-      "coverage": "One visible side of Toutatis. This is an approximate projection of the published figure, not a calibrated camera product.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "jiang-2015-toutatis-boulders",
-            "role": "material",
-            "evidence": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4629198/#f1"
-          }
-        ]
-      },
-      "displayCredit": "Y. Jiang et al. (2015) · Chang’e-2",
-      "sha256": "0d26efacddb0f7e0cc07f2feeeaef0dcc7d1815093dba63c533ef554abef5aed",
-      "bytes": 240400,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "restore",
-          "refresh"
-        ],
-        "path": "chang-e-2/jiang-2015-figure-1.jpg",
-        "url": "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fsrep16029/MediaObjects/41598_2015_Article_BFsrep16029_Fig1_HTML.jpg"
       },
       "verificationOperations": []
     },
@@ -597,10 +326,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "66e8ba0fb01fee49ea4815979663c7517856078909b175fd00a99326465daa3a",
-      "bytes": 9480,
+      "sha256": "c4b8a1028284c0ee6670046313beb027dbdf49f6c0626c09110c1aa4d9a4f220",
+      "bytes": 8440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -633,52 +362,13 @@
           "url": "/scenes/toutatis/toutatis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/toutatis/toutatis-shape-surface@2x.webp",
           "bytes": 243256,
           "sha256": "89dbe6aa8d80304ffe388f9eaa16457f3306bfc24970aab8b70380a887d5f176",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "chang-e-2",
-      "label": "Chang’e-2",
-      "recipe": "terrestrial",
-      "selector": "/raster/surfaceObservations/0",
-      "parents": [],
-      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
-      "limitations": [
-        "The original camera sampled about 8.3 m per pixel. This published image has been enlarged and cropped, with its colors and lighting preserved. Craters and boulders are visible, but their positions on the radar shape remain approximate. The back, limb and uncertain patches stay gridded."
-      ],
-      "lensIds": [
-        "chang-e-2"
-      ],
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "interpretation": {
-        "kind": "surfaceObservations"
-      },
-      "inputs": [
-        "chang-e-2-jiang-figure-1",
-        "toutatis-shape"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/toutatis/toutatis-chang-e-2-thumbnail.webp",
-          "bytes": 1632,
-          "sha256": "a60d1e4b5549d6db1d2ab663846842fb8890a983ad5ba7136caf630d82f6fa76",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/toutatis/toutatis-chang-e-2-surface@2x.webp",
-          "bytes": 315962,
-          "sha256": "a8bb943d4cd214490e74390436664e8ded2d653c27aac983e5a57119d184ab25",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -701,8 +391,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6373,
-          "sha256": "4abb2f92ee8ae493cf299426f88649d56e72ef8f052ab0b54fdb07f4fb5adce9",
+          "bytes": 6337,
+          "sha256": "ea7642028ce328bf674e064de540fc8e8acad9fc2c5b764da51752b2fa2e536a",
           "verification": "bytes-verified"
         }
       ],
@@ -728,30 +418,6 @@
           "url": "object:prepared/minimaps/shape.webp",
           "bytes": 2964,
           "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
-          "verification": "bytes-verified"
-        }
-      ]
-    },
-    {
-      "id": "preview:chang-e-2",
-      "label": "Chang’e-2 preview",
-      "recipe": "terrestrial",
-      "selector": "/raster/surfaceObservations/0",
-      "recipeDependencies": [
-        "terrestrial"
-      ],
-      "inputs": [],
-      "parents": [
-        "chang-e-2"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/chang-e-2.webp",
-          "bytes": 10238,
-          "sha256": "425fa368e92a32f9a63b55cb543e2e8649a6edb0385721b80429f9bc873e74d8",
           "verification": "bytes-verified"
         }
       ]
