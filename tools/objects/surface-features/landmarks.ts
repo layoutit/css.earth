@@ -63,15 +63,16 @@ export function parseLandmarks(value: unknown) {
  * A representative point is neither an official region centre nor an invented circular boundary. */
 export async function prepareLandmarks(value: unknown, context: SurfaceFeaturePreparationContext, axes: SurfaceFeatureAxes, leftEdge: number) {
   const doc = parseLandmarks(value), hit = context.hitMesh;
-  if (!hit) throw new TypeError('Landmarks require the prepared picking mesh.');
+  if (!hit && (!context.referenceSphere || doc.vtk || doc.entries.some(e => !('longitudeDeg' in e.position)))) throw new TypeError('Landmarks require the prepared picking mesh or an explicit sphere with geographic coordinates.');
   const unitsPerMeter = context.meshRadiusUnits / (context.radiusKm * 1000);
   if (leftEdge !== 0 && (doc.vtk || doc.entries.some(e => 'pointMeters' in e.position))) throw new TypeError('Cartesian landmarks require an explicit zero-longitude surface frame.');
   const native = (v: readonly number[]): Vec => [dot(v, axes.prime) / unitsPerMeter, dot(v, axes.east) / unitsPerMeter, dot(v, axes.north) / unitsPerMeter];
   const prepared = (v: readonly number[]): Vec => [0, 1, 2].map(i => (v[0]! * axes.prime[i]! + v[1]! * axes.east[i]! + v[2]! * axes.north[i]!) * unitsPerMeter) as unknown as Vec;
-  const positions = hit.triangles.flatMap(triangle => triangle.map(p => [...native(p)]));
-  const preparedMesh = createIndexedShape(positions, hit.triangles.map((_, i) => [3 * i, 3 * i + 1, 3 * i + 2]), { metersPerUnit: 1, expectedVertices: positions.length, expectedFaces: hit.triangles.length });
+  const positions = hit?.triangles.flatMap(triangle => triangle.map(p => [...native(p)]));
+  const preparedMesh = hit && positions ? createIndexedShape(positions, hit.triangles.map((_, i) => [3 * i, 3 * i + 1, 3 * i + 2]), { metersPerUnit: 1, expectedVertices: positions.length, expectedFaces: hit.triangles.length }) : null;
   const regions = new Map<number, { anchor: Vec; sourceFace: number; displayFace: number; distanceMeters: number; score: number }>();
   if (doc.vtk) {
+    if (!hit || !preparedMesh) throw new TypeError('Mapped regions require the prepared picking mesh.');
     const bytes = await readFile(resolve(context.sourceDirectory, doc.vtk.path));
     if (bytes.length !== doc.vtk.bytes || createHash('sha256').update(bytes).digest('hex') !== doc.vtk.sha256) throw new TypeError('Landmark region mesh changed.');
     const decoded = decodeVtkCategories(bytes.toString('utf8'), doc.vtk.grid);
@@ -126,6 +127,7 @@ export async function prepareLandmarks(value: unknown, context: SurfaceFeaturePr
       anchor = selected.anchor;
       evidence.push({ id: e.id, regionId: e.position.regionId, sourceFace: selected.sourceFace, displayFace: selected.displayFace, distanceMeters: Number(selected.distanceMeters.toFixed(3)) });
     } else if ('pointMeters' in e.position) {
+      if (!preparedMesh) throw new TypeError('Cartesian landmarks require the prepared picking mesh.');
       const closest = preparedMesh.closestPoint(e.position.pointMeters, e.position.maximumDistanceMeters);
       if (!closest) throw new TypeError(`No display surface within the source-position budget for ${e.name}.`);
       anchor = prepared(closest.point);
@@ -136,7 +138,7 @@ export async function prepareLandmarks(value: unknown, context: SurfaceFeaturePr
       evidence.push({ id: e.id, displayFace: closest.faceId, distanceMeters: Number(closest.distanceMeters.toFixed(3)) });
     } else {
       const direction = surfaceDirection(e.position.longitudeDeg, e.position.latitudeDeg, axes, leftEdge);
-      const radius = projectRadial(hit.triangles, direction);
+      const radius = hit ? projectRadial(hit.triangles, direction) : context.referenceSphere ? context.meshRadiusUnits : null;
       if (radius === null) throw new TypeError(`No display surface at ${e.name}.`);
       anchor = [direction[0] * radius, direction[1] * radius, direction[2] * radius];
       evidence.push({ id: e.id });

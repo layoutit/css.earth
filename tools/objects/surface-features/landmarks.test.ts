@@ -16,6 +16,19 @@ const context = (sourceDirectory: string): SurfaceFeaturePreparationContext => (
   config: {}, maxEntries: 10, radiusKm: 1, meshRadiusUnits: 1000, tree: { scene: 0, nodes: [{ className: 'body', parent: -1 }] }, declaredLensIds: ['model'],
   hitMesh: { target: 0, triangles: [[[-10, -10, 10], [10, -10, 10], [0, 10, 10]]] } });
 
+test('published coordinates can anchor on an explicitly authored sphere; a missing irregular mesh still fails', async () => {
+  const { hitMesh, ...ctx } = context('.');
+  const doc = document({ longitudeDeg: 310.9, latitudeDeg: 54.3 });
+  await assert.rejects(prepareLandmarks(doc, ctx, axes, 180), /picking mesh/);
+  const result = await prepareLandmarks(doc, { ...ctx, referenceSphere: true }, axes, 180);
+  const p = result.features[0]!;
+  assert.ok(Math.abs(Math.hypot(...p.anchorUnits) - 1000) < .001);
+  assert.ok(Math.abs(p.longitudeDeg - 310.9) < 1e-10);
+  assert.ok(Math.abs(p.latitudeDeg - 54.3) < 1e-10);
+  assert.equal(p.diameterKm, 0);
+  await assert.rejects(prepareLandmarks(document({pointMeters:[1,2,3],maximumDistanceMeters:1}), { ...ctx, referenceSphere: true }, axes, 180), /picking mesh/);
+});
+
 test('Cartesian mission points use source axes and preserve qualification without an IAU credit or invented boundary', async () => {
   const result = await prepareLandmarks(document({ pointMeters: [2, 1, 10], maximumDistanceMeters: 0.01 }), context('.'), axes, 0);
   const feature = result.features[0]!;
