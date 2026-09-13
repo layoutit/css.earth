@@ -1875,8 +1875,8 @@
     {
       "id": "titan-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1596,
-      "expectedSha256": "15e967900bca207b7d76ed95bf266e1e8da76f3174bcbbad46cd0aaed15833df",
+      "expectedBytes": 1522,
+      "expectedSha256": "9c6a6860ede333378fe3639b2d5d9dec0ed997e10b1dd46fe82586c30ad9818f",
       "origin": "Repository-authored Titan solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1896,8 +1896,8 @@
     {
       "id": "titan-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 13809,
-      "expectedSha256": "c0d292abada427546d5ce2d322cd20a7480f89632977ee70ef2b69f017b0b11b",
+      "expectedBytes": 13723,
+      "expectedSha256": "4e3c2416d7700e2eb2f6049f0db1cd2f85b45d0290be9e5cf30af4677c089bba",
       "origin": "Repository-authored Titan raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1915,8 +1915,8 @@
     {
       "id": "titan-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1408,
-      "expectedSha256": "94404f7ee4a3e0f4405c30ce982dc632fd88670998e41ee41cfdb0b7d55a6db4",
+      "expectedBytes": 1414,
+      "expectedSha256": "b48f1ef41e6e4b7c869488c461f606358f341600db8c05d1c96584d161cfbe5f",
       "origin": "Repository-authored Titan geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2009,8 +2009,8 @@
     {
       "id": "titan-object-content",
       "path": "content/object.json",
-      "expectedBytes": 16133,
-      "expectedSha256": "fc03cf7c708181b9b3d29b199160edc74232bfe1bff00d22651c25b701f73a53",
+      "expectedBytes": 16169,
+      "expectedSha256": "f9ac0205d08acec6dd1be4c1d3eeb02812226ae75040f41bd6ddf4a02c107066",
       "origin": "Repository-authored Titan object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

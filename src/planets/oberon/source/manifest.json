@@ -253,8 +253,8 @@
     {
       "id": "oberon-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 1637,
-      "expectedSha256": "9a89c86955f0ba084f7902bedf0f405b12a0fe83a0f1248c8f959f75bd9bccb9",
+      "expectedBytes": 1561,
+      "expectedSha256": "bfdda9e22775203dc6c18a0871f4f06782a03fecdb57213fd31b8569bed63a01",
       "origin": "Repository-authored Oberon solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -274,8 +274,8 @@
     {
       "id": "oberon-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 3001,
-      "expectedSha256": "2e122c859659be0fd19466cbc6839146f1f9aaecadbc66ab825d0d5050416438",
+      "expectedBytes": 2940,
+      "expectedSha256": "a2e34321f0b44e2c545eaee4304d7ab726f3039a9d1bf857d2d7e86ef2070c07",
       "origin": "Repository-authored Oberon raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -293,8 +293,8 @@
     {
       "id": "oberon-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1415,
-      "expectedSha256": "9fa75c3779e97562e33729602f95873856e406e1a1b0b7675cf7c510a6bfa390",
+      "expectedBytes": 1421,
+      "expectedSha256": "2c0b909d603171600056a79254fe256c7fc3e8fec877bd5b949109b66d20fb5a",
       "origin": "Repository-authored Oberon geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -387,8 +387,8 @@
     {
       "id": "oberon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 8134,
-      "expectedSha256": "3e47b5cd546cc90ee38740673d64a03658f53206c12585b07136634792a99ed3",
+      "expectedBytes": 8140,
+      "expectedSha256": "09f56d901238ba702e8cd7d0b560fe7223644f9904e71160745be917742fc280",
       "origin": "Repository-authored Oberon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
