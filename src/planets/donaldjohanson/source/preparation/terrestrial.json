@@ -28,9 +28,6 @@
         "id": "llorri",
         "format": "llorri-camera",
         "consumer": "llorri-observation",
-        "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
-        "cameraPath": "observations/llorri-camera.json",
-        "startTime": "2025-04-20T17:50:14.018",
         "filter": "PANCHROMATIC",
         "allowLossy": false,
         "transfer": {
@@ -52,9 +49,31 @@
           99
         ],
         "metadata": {
-          "label": "L’LORRI observation",
-          "coverage": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
+          "label": "L’LORRI mosaic",
+          "coverage": "Two Lucy L’LORRI photographs from 20 April 2025, registered to the source shape through the original cameras, published landmarks and image overlap. The closer photograph supplies detail; the approach photograph fills additional coverage. Grayscale retains photographed illumination and matched relative detector brightness, not measured albedo. The ordinary grid marks unseen, grazing or rejected areas, including the source model’s unobserved reconstruction.",
           "falseColor": false
+        },
+        "frames": [
+          {
+            "id": "llorri-close",
+            "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
+            "cameraPath": "observations/llorri-camera.json",
+            "startTime": "2025-04-20T17:50:14.018"
+          },
+          {
+            "id": "llorri-approach",
+            "path": "observations/lor_0798443242_04596_00001_1x1_sci_03.fit",
+            "cameraPath": "observations/llorri-approach-camera.json",
+            "startTime": "2025-04-20T17:49:26.021"
+          }
+        ],
+        "selection": "recipe-order",
+        "levelMatching": {
+          "samplesPerTriangle": 24,
+          "minimumPairs": 128,
+          "maximumLogMad": 0.25,
+          "maximumGain": 1.5,
+          "maximumAngleDegrees": 60
         }
       }
     ]

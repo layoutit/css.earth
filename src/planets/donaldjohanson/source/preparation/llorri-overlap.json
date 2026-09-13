@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-llorri-overlap@1",
+  "shapeSha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7",
+  "bodyId": 20052246,
+  "kernels": [
+    "reference/naif0012.tls",
+    "reference/donaldjohanson_v12.tpc"
+  ],
+  "margin": 80,
+  "maximumRmsPixels": 1,
+  "maximumResidualPixels": 3,
+  "transfer": {
+    "maximumSourceDistanceMeters": 56,
+    "maximumSeparationMeters": 30,
+    "maximumEmissionDegrees": 70,
+    "visibilityToleranceMeters": 0.5
+  },
+  "frames": [
+    {
+      "image": "observations/lor_0798443242_04596_00001_1x1_sci_03.fit",
+      "label": "reference/lor_0798443242_04596_00001_1x1_sci_03.xml",
+      "referenceImage": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
+      "referenceCamera": "observations/llorri-camera.json",
+      "output": "observations/llorri-approach-camera.json",
+      "matching": {
+        "patchRadius": 12,
+        "searchRadius": 64,
+        "gridStride": 32,
+        "gridOrigin": 16,
+        "targetSmoothingSigma": 0.85,
+        "minimumCorrelation": 0.9,
+        "minimumPeakMargin": 0.05,
+        "minimumJointValidFraction": 0.95
+      }
+    }
+  ]
+}

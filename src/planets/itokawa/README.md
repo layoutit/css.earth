@@ -4,11 +4,26 @@
 
 | View or property | Source and interpretation |
 | --- | --- |
-| AMICA mosaic | Seven v-band observations from September–October 2005, with [Gaskell-controlled AMICA records](https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/), original FITS and preflight flat. The October close-ups add finer terrain detail and views north of the equator. Relative detector brightness, not absolute radiance or albedo. |
+| AMICA mosaic | Eight v-band observations from September–October 2005, with [Gaskell-controlled AMICA records](https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/), original FITS and preflight flat. The October close-ups add finer terrain detail and views north and south of the equator. Relative detector brightness, not absolute radiance or albedo. |
 | Shape and Elevation | [Gaskell ver128q](https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab), derived from 775 AMICA images. Elevation is source radius minus 165 m; the original black-rock prime meridian is retained. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/ITOKAWA/target) Itokawa centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
 ## Evidence
+
+### Eight-image expansion, 13 September 2026
+
+The new southern view `2473604354` fills additional coverage while retaining the same 794 triangles, camera and hit mesh. At the same 64 stratified samples per triangle, area-weighted coverage is **61.88% → 73.41%** across this PR (72.66% before the final southern addition). The eighth frame contributes 5.60% of displayed area, mostly replacing more foreshortened views.
+
+Its controlled camera has 375,607 withheld pixels, maximum residual 0.00002713 px. Every thirteenth valid archive XYZ pixel gives 29,053 source-mesh comparisons, maximum separation 2.218 m, below the unchanged 5 m contributor limit. [Source-transfer evidence](evidence/photographic-expansion/source-transfer.json) records the sampled checks. The final overlap gains span 0.759–1.030; these are relative display adjustments, not recovered albedo.
+
+[Before](evidence/photographic-expansion/before.webp) · [After](evidence/photographic-expansion/after.webp) · [Diff and validation](evidence/photographic-expansion/evidence.json).
+The eight-image refresh took 412.6 s and peaked at 2,283 MiB RSS, compared with 683 s for the earlier seven-image full preparation. It replaces three runtime assets and retains 33. Geometry and other lenses are retained; source and output hashes identify the run. See the [observation refresh guide](../../../docs/surface-preparation.md).
+
+Four additional southern frames were decoded in the same batch; the selected frame gave the largest extra supported area. A subsequent header survey examined all 31 controlled v-band products dated 26 October onward: 24 have headers compatible with the existing paired-exposure reader, while the later single-exposure/subwindow formats remain withheld. Header compatibility does not qualify their imagery. No new detector calibration was inferred for them.
+
+### Initial seven-image qualification
+
+The following record describes the earlier seven-image outputs at commit `55fe2579fa741da71a0bd5498712d0f3d7e5fe25`. Its photographs and source checks remain relevant because those native inputs and camera fitting are unchanged; the new capture and eight-frame measurements above supersede its displayed-area and pixel-difference results.
 
 [Before](evidence/photographic-coverage/before.webp) ·
 [After](evidence/photographic-coverage/after.webp) ·
