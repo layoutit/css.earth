@@ -134,6 +134,108 @@
             "url": "https://pds-rings.seti.org/cassini/iss/"
           }
         }
+      },
+      {
+        "id": "filter-color",
+        "format": "controlled-shape-color",
+        "consumer": "cassini-color-frames",
+        "channels": [
+          {
+            "channel": "red",
+            "filter": "RED",
+            "frames": [
+              {
+                "id": "n1656999219",
+                "path": "observations/N1656999219_1_CALIB.IMG",
+                "labelPath": "observations/N1656999219_1_CALIB.LBL",
+                "observerLatitude": 20.4,
+                "observerWestLongitude": 113.94,
+                "sunLatitude": 4.97,
+                "sunWestLongitude": 63.64,
+                "rangeKm": 72779.3,
+                "northAzimuthDegrees": 21.53,
+                "center": [
+                  148.6,
+                  67
+                ],
+                "pixelAngleMicroradians": 5.989697719850105,
+                "coverageInsetPixels": 2
+              }
+            ]
+          },
+          {
+            "channel": "green",
+            "filter": "GRN",
+            "frames": [
+              {
+                "id": "n1656999274",
+                "path": "observations/N1656999274_1_CALIB.IMG",
+                "labelPath": "observations/N1656999274_1_CALIB.LBL",
+                "observerLatitude": 20.68,
+                "observerWestLongitude": 113.98,
+                "sunLatitude": 4.97,
+                "sunWestLongitude": 64.03,
+                "rangeKm": 72728.8,
+                "northAzimuthDegrees": 21.51,
+                "center": [
+                  145.9,
+                  62.3
+                ],
+                "pixelAngleMicroradians": 5.989697719850105,
+                "coverageInsetPixels": 2
+              }
+            ]
+          },
+          {
+            "channel": "blue",
+            "filter": "BL1",
+            "frames": [
+              {
+                "id": "n1656999330",
+                "path": "observations/N1656999330_1_CALIB.IMG",
+                "labelPath": "observations/N1656999330_1_CALIB.LBL",
+                "observerLatitude": 20.95,
+                "observerWestLongitude": 114.03,
+                "sunLatitude": 4.97,
+                "sunWestLongitude": 64.41,
+                "rangeKm": 72682,
+                "northAzimuthDegrees": 21.49,
+                "center": [
+                  144.2,
+                  58.1
+                ],
+                "pixelAngleMicroradians": 5.989697719850105,
+                "coverageInsetPixels": 2
+              }
+            ]
+          }
+        ],
+        "photometry": {
+          "model": "observed",
+          "weight": 0.5,
+          "maximumGain": 1,
+          "maximumIncidenceDegrees": 75,
+          "maximumEmissionDegrees": 75,
+          "displayMaximum": 0.8,
+          "gamma": 1,
+          "minimumLevel": 1,
+          "maximumLevel": 1,
+          "backgroundMaximum": 0.003
+        },
+        "metadata": {
+          "label": "Filter color",
+          "falseColor": true,
+          "coverage": "Cassini RED, GRN, BL1 filters displayed as red, green and blue; observed illumination and common coverage only.",
+          "attribution": {
+            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/cassini/iss/"
+          }
+        },
+        "focus": {
+          "longitudeDegrees": 246.01999999999998,
+          "latitudeDegrees": 20.68,
+          "zoom": 1.1
+        }
       }
     ]
   },

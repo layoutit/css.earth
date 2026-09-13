@@ -69,7 +69,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "filter-color": "Filter color"
     },
     "controls": [
       {
@@ -87,6 +88,22 @@
           "url": "https://pds-rings.seti.org/cassini/iss/access.html"
         },
         "summary": "Photographs are mapped onto the measured shape. Shadows and unreliable samples are withheld; the gray grid marks gaps."
+      },
+      {
+        "id": "filter-color",
+        "label": "Filter color",
+        "description": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
+        "title": "Cassini filter color",
+        "detail": "Cassini",
+        "thumbnail": "/scenes/atlas/atlas-filter-color-thumbnail.webp",
+        "surface": "atlas-filter-color-surface@2x.webp",
+        "poles": "atlas-filter-color-surface@2x.webp",
+        "source": {
+          "id": "n1870699274",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/"
+        },
+        "summary": "False color from separately registered filters. Gray grid marks missing common coverage; photographed shadows remain."
       },
       {
         "id": "elevation",

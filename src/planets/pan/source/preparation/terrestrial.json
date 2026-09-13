@@ -162,6 +162,108 @@
           "falseColor": false,
           "coverage": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas."
         }
+      },
+      {
+        "id": "filter-color",
+        "format": "controlled-shape-color",
+        "consumer": "cassini-color-frames",
+        "channels": [
+          {
+            "channel": "red",
+            "filter": "IR1",
+            "frames": [
+              {
+                "id": "n1867606339",
+                "path": "observations/N1867606339_1_CALIB.IMG",
+                "labelPath": "observations/N1867606339_1_CALIB.LBL",
+                "observerLatitude": -30.18,
+                "observerWestLongitude": 248.36,
+                "sunLatitude": 26.71,
+                "sunWestLongitude": 211.39,
+                "rangeKm": 32614.2,
+                "northAzimuthDegrees": 234.15,
+                "center": [
+                  420.9,
+                  483.3
+                ],
+                "pixelAngleMicroradians": 5.989697719850105,
+                "coverageInsetPixels": 2
+              }
+            ]
+          },
+          {
+            "channel": "green",
+            "filter": "GRN",
+            "frames": [
+              {
+                "id": "n1867606284",
+                "path": "observations/N1867606284_1_CALIB.IMG",
+                "labelPath": "observations/N1867606284_1_CALIB.LBL",
+                "observerLatitude": -28.85,
+                "observerWestLongitude": 247.57,
+                "sunLatitude": 26.71,
+                "sunWestLongitude": 210.99,
+                "rangeKm": 31804.5,
+                "northAzimuthDegrees": 234.12,
+                "center": [
+                  423,
+                  482.4
+                ],
+                "pixelAngleMicroradians": 5.989697719850105,
+                "coverageInsetPixels": 2
+              }
+            ]
+          },
+          {
+            "channel": "blue",
+            "filter": "UV3",
+            "frames": [
+              {
+                "id": "n1867606229",
+                "path": "observations/N1867606229_1_CALIB.IMG",
+                "labelPath": "observations/N1867606229_1_CALIB.LBL",
+                "observerLatitude": -27.3,
+                "observerWestLongitude": 246.69,
+                "sunLatitude": 26.71,
+                "sunWestLongitude": 210.55,
+                "rangeKm": 30932.6,
+                "northAzimuthDegrees": 234.05,
+                "center": [
+                  423.7,
+                  482
+                ],
+                "pixelAngleMicroradians": 5.989697719850105,
+                "coverageInsetPixels": 2
+              }
+            ]
+          }
+        ],
+        "photometry": {
+          "model": "observed",
+          "weight": 0.5,
+          "maximumGain": 1,
+          "maximumIncidenceDegrees": 75,
+          "maximumEmissionDegrees": 75,
+          "displayMaximum": 0.8,
+          "gamma": 1,
+          "minimumLevel": 1,
+          "maximumLevel": 1,
+          "backgroundMaximum": 0.003
+        },
+        "metadata": {
+          "label": "Filter color",
+          "falseColor": true,
+          "coverage": "Cassini IR1, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
+          "attribution": {
+            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/cassini/iss/"
+          }
+        },
+        "focus": {
+          "longitudeDegrees": 112.43,
+          "latitudeDegrees": -28.85,
+          "zoom": 1.1
+        }
       }
     ]
   },
