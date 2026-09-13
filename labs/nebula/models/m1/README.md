@@ -11,6 +11,27 @@ prove misalignment. Radio, X-ray and component-subtracted maps require suitable
 astrometric evidence rather than a universal optical-star matcher. No nebular
 morphology fit or expansion correction was substituted for stellar evidence.
 
+### Webb near/mid-infrared placement check
+
+The [compact-star diagnostic](webb-alignment-check.json), checked against
+`86a6060ec`, finds **52 stellar counterparts** across all four quadrants. At the
+unchanged publisher placement their RMS separation is **0.209″** (2.54 native
+Webb pixels). A trial affine changes scale by only 0.019% and moves the image
+centre by 0.119″; its 18 withheld fit points have 0.135″ RMS. All 52 paired native
+crops were visually inspected. Shifted, mirrored, wrong-scale and rotated
+placements fail the diagnostic controls. No correction was installed.
+
+This supports the existing relative placement, with no large rotation or scale
+error. It does not validate absolute astrometry: the exploratory similarity
+search preceded the fit/holdout split, and Hubble supplies the sky reference.
+The automatic pipeline still uses the earlier matcher, so its unverified status
+is unchanged. The receipt retains source/recipe hashes, native centroids, method
+settings and measured limits for replay and a later detector improvement.
+
+Webb's footprint is tighter and the tracers differ. Compare
+[ESA's own Hubble/Webb slider](https://esawebb.org/images/comparisons/weic2326a/)
+before interpreting different emission boundaries as an alignment error.
+
 Six publisher images cover optical emission lines, near/mid-infrared emission,
 radio synchrotron, and the X-ray pulsar wind. They are comparison observations,
 not six interchangeable measurements of one material or one epoch.
