@@ -1,5 +1,11 @@
 # Registered photographic mosaics
 
+The shared `camera-band-registration.mts` matcher accepts a bounded
+`searchRadiusPixels` (1–64; default 9) when an independently justified pointing
+seed is farther away. This changes the search window only. Preserve its
+correlation, disjoint holdout and residual requirements; a larger search does
+not qualify a camera. Recheck from the fitted camera with the normal window.
+
 Use this when preparing several observations onto a known surface, especially
 an irregular mesh. Reuse already-controlled maps when suitable; this is not a
 requirement to fit a camera for an existing global mosaic. The

@@ -4,13 +4,24 @@ Dinkinesh was Lucy’s first asteroid encounter. Its equatorial ridge and trough
 
 ## Representation
 
-Celestia contributors’ reconstruction inspired by Lucy images, uniformly scaled to the published 738 m volume-equivalent diameter. This is an authored approximation, not the mission photogrammetric shape model. The grid marks missing qualified surface imagery.
+The default **TEMPEST shape** dataset shows the recovered numerical model in
+its original metre coordinates: 635 vertices, 1,266 faces and a 737.508 m
+volume-equivalent diameter. The **Celestia model** dataset retains the earlier
+authored reconstruction for comparison. Both use the ordinary missing-imagery
+grid, one shared camera and the existing PolyCSS raster-triangle renderer.
+Only the selected model is displayed and pickable.
 
-JPL supplies the heliocentric orbit. The reconstruction has an illustrative meridian; its detailed geometry and unseen hemisphere are not measured terrain.
-
-The shared missing-imagery grid covers the surface. The body uses the existing generic object adapter, one shared world camera and retained PolyCSS geometry. The selector detail is **Model**.
+The recovered file is associated with the published Lucy stereo-derived thermal
+model. Its exact upstream mission-model version, prime meridian and observed/fill
+mask remain unknown. The grid means photography is unavailable; it does not
+classify terrain as measured. Existing Gazetteer places remain restricted to the
+Celestia dataset because their placement has not been qualified in the recovered
+frame. Shadows default to off.
 
 ## Scientific sources
+
+- [TEMPEST Dinkinesh mesh, Git 7df4c88](https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl): preserved numerical shape; original coordinates and connectivity retained.
+- [Lyster, Howett & Penn (2025)](https://doi.org/10.5194/epsc-dps2025-546): thermal-model methods, the 1,266-facet derivative and its source association.
 
 - [Levison et al. (2024)](https://doi.org/10.1038/s41586-024-07378-0): Lucy discovery, ridge and contact-binary satellite.
 - [Bierhaus et al. (2025)](https://doi.org/10.3847/PSJ/ae1968): Revised shape, geology and 738 m equivalent diameter.
@@ -23,6 +34,30 @@ The original Celestia reconstruction is CC BY 4.0, credited to ItzImcool and dom
 The JPL heliocentric state is retained in [elements](source/reference/horizons-elements.txt) and [independent vectors](source/reference/horizons-vectors.txt). The 2023 WISE geometric-albedo estimate in [photometry](source/preparation/photometry.json) affects only context-point brightness, not surface color.
 
 ## Evidence
+
+The current source test verifies both mesh identities, 1,266/1,200 prepared
+triangles, the dataset selection ranges, native PolyCSS `u` raster leaves,
+separate provenance, the restriction on legacy places and Shadows off. The
+preparation and focused test TypeScript checks pass. Source preparation resolves
+all dataset bindings; the changed shape fact cites its pinned mesh. The daily
+Gazetteer archive was refreshed to 13 September: all prepared names and positions
+remain unchanged, with only the archive hash and snapshot date changing.
+
+The [focused renderer check](evidence/tempest-renderer.json) uses headless
+Chrome 153.0.8010.12 at 1280 × 720, DPR 1. The actual packaged renderer displayed
+1,266 TEMPEST or 1,200 Celestia triangles, retained all 2,466 DOM leaves across
+switching and dragging, preserved the camera across a dataset round trip and
+kept Shadows off. [Initial TEMPEST view](evidence/dinkinesh-tempest-browser.png),
+[Celestia comparison](evidence/dinkinesh-celestia-browser.png) and
+[rotated TEMPEST view](evidence/dinkinesh-tempest-dragged-browser.png) were inspected.
+The report pins the uncommitted package tested above `fe4a37496`.
+
+This was a diagnostic page mounting the shared object adapter, without the
+application's persistent universe or full shell. The ordinary `/dinkinesh/` page
+is blocked in this checkout by missing local Helix, M42 and M2–9 prepared lens
+banks. Full application and mobile conformance remain unverified for this
+upgrade. The older browser evidence below covers the Celestia dataset only.
+
 
 The [browser conformance report](evidence/dinkinesh-conformance.json) passed desktop/mobile input, picking, wheel/pinch zoom, lighting, single-scene lifecycle and retained identity at DPR 1/2. Its [DPR 1 video](evidence/dinkinesh-dpr-1.webm) and [DPR 2 video](evidence/dinkinesh-dpr-2.webm) retain the input sequences. These were captured at `514f6b497`; body geometry, asset banks and input/lifecycle code remain unchanged in the final renderer at `66448c17d`. The production check below repeats the navigation and presentation affected by later changes.
 
@@ -37,9 +72,10 @@ The [Shadows-on view](evidence/dinkinesh-shadows-true.png) was also inspected. T
 An initial archive survey missed a downloadable mesh in the public history of
 the TEMPEST thermal-model repository. The photographic upgrade now has a
 numerical source candidate; its frame and image registration remain unqualified.
-The current Celestia reconstruction is still the displayed model. Its
-illustrative meridian and different dimensions prevent treating archived camera
-geometry as a qualified mapping onto that surface.
+The recovered mesh is now available as its own shape dataset. Neither it nor
+the Celestia approximation has a qualified photographic surface. Different
+coordinate frames and dimensions prevent transferring cameras or landmarks
+between the models by body name alone.
 
 - [TEMPEST's `dinkinesh.stl` at commit `7df4c88`](https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl)
   was retrieved and parsed: 237,239 bytes, 635 distinct vertices, 1,266 triangles,
@@ -146,13 +182,25 @@ Continue by establishing the retrieved candidate's upstream attribution,
 body-frame and observed/model-filled coverage, and the matching reconstructed
 cameras or control network. Inspect a native-pixel image/model projection with
 independent holdouts before baking.
-No photographic surface, new geometry, or new landmark registration was
-prepared by this check; the existing browser evidence concerns the
-approximation only.
+The source investigation now supports a separate numerical-shape dataset,
+while photography remains deferred. The corrected SPK positions were compared
+with CSPICE through SpiceyPy 8.2.0 at three observation midpoints and agree.
+That verifies the trajectory calculation, not the recovered mesh orientation.
 
-Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Dinkinesh (retrieved 2026-09-12, public domain as USGS-produced data; the export ships no FGDC record, so the pin cites the USGS Copyrights and Credits statement) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (no projection file or metadata: the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. Names the Gazetteer has not positioned (centre 0°, 0° with an empty extent) are not placed and are tallied in the prepared descriptor.
+Native-image features were then matched through the fixed mesh using the
+existing normalized-correlation helper. Joint phase/pointing trials use disjoint
+fit and holdout features. A central patch in image `9617`, bounded by detector
+coordinates [500, 660]–[640, 840], gives roughly 0.6–0.7 px holdout RMS against
+`9602` and `9632`. An additional image, `9587`, gives 1.082 px RMS and 1.724 px
+maximum over six holdouts, exceeding the unchanged one-pixel RMS target. A
+second local fit loses sufficient independent controls in that additional view.
+These are exploratory results, not a qualified surface or an absolute terrain
+accuracy claim. The crop is frozen for the next test; the unsuccessful wider
+views remain evidence against promoting a full photographic lens.
 
-Named features run of 2026-09-12 (this version): the catalogue labels 4 IAU names on the hit mesh (1 DO without a published centre); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band, and a headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page, selected every lens and pinned Bella Dorsum from the sidebar search with no console errors or failed requests.
+Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Dinkinesh (snapshot refreshed 2026-09-13 after the missing prior archive had changed upstream, public domain as USGS-produced data; the export ships no FGDC record, so the pin cites the USGS Copyrights and Credits statement) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table (no projection file or metadata: the authored radius scales outline sizes), drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. Names the Gazetteer has not positioned (centre 0°, 0° with an empty extent) are not placed and are tallied in the prepared descriptor.
+
+Earlier named features run of 2026-09-12 (Celestia model): the catalogue labels 4 IAU names on the hit mesh (1 DO without a published centre); `tests/objects/unit/surface-features.test.mts` verifies the pinned bytes, the body-frame anchors and the hit-mesh radius band, and a headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page, selected every lens and pinned Bella Dorsum from the sidebar search with no console errors or failed requests.
 
 ## Integrated validation
 
