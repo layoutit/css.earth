@@ -170,7 +170,8 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
           data.framingRadiusUnits, data.pointVisibility!);
         stars!.root.style.opacity = String(pointOpacity);
         stars!.root.style.display = starsVisible && pointOpacity > 0 ? 'block' : 'none';
-        stars!.publish(publication);
+        // Hidden points leave layout; projecting them only wrote styles nobody draws.
+        if (starsVisible && pointOpacity > 0) stars!.publish(publication);
         root.dataset.pointOpacity = String(pointOpacity); root.dataset.cloudOpacity = String(opacity);
         latest = publication;
       };
