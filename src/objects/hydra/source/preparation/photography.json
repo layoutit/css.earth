@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-nh-lorri-photography@1",
+  "bodyId": "hydra",
+  "naifBodyId": 903,
+  "mesh": {
+    "path": "shape/hydra_shf1k3_hipoly.stl.gz",
+    "sha256": "8bbfce67597caf2bfef95e3f526f66cac7d967e9b425cb183a1088fc0e97d163",
+    "compression": "gzip",
+    "metersPerUnit": 1000,
+    "expectedVertices": 26246,
+    "expectedFaces": 52488
+  },
+  "pck": {
+    "path": "geometry/nh_pcnh_010.tpc",
+    "sha256": "cf79342b3cc13d8dab485ce87ebfb2d74d12e3f79039de260e730aaaefffce01",
+    "timeMode": "receive-minus-range-light-time"
+  },
+  "frames": [
+    {
+      "id": "best",
+      "imagePath": "observations/lor_0299165548_0x630_sci.fit",
+      "outputCameraPath": "observations/best-camera.json",
+      "crop": {
+        "left": 49,
+        "top": 56,
+        "width": 96,
+        "height": 96
+      },
+      "independentExposure": {
+        "imagePath": "observations/lor_0299165545_0x630_sci.fit",
+        "crop": {
+          "left": 49,
+          "top": 56,
+          "width": 96,
+          "height": 96
+        }
+      },
+      "interiorValidations": [
+        {
+          "id": "separate-view",
+          "imagePath": "observations/lor_0299165692_0x630_sci.fit",
+          "sha256": "03039ad34f31052c538497497bfa4651c93bb2aea60d8591346cc99919f46c67",
+          "crop": {
+            "left": 100,
+            "top": 864,
+            "width": 160,
+            "height": 160
+          },
+          "supersampling": 1
+        },
+        {
+          "id": "wide-view",
+          "imagePath": "observations/lor_0299155705_0x636_sci.fit",
+          "sha256": "93851402e9d15729f721c5e84a3bb9fe299590b854f198fb7190f92487cc4252",
+          "crop": {
+            "left": 593,
+            "top": 141,
+            "width": 160,
+            "height": 160
+          },
+          "supersampling": 2
+        }
+      ]
+    }
+  ],
+  "outputEvidencePath": "../evidence/photography/registration.json"
+}

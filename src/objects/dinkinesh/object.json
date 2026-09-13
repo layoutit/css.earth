@@ -24,12 +24,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "3203dab2bec21a047c6c4298e67c47151a7e6894541aa094d8d65e5137644a89"
+          "sha256": "a947a9fe3f37ae64b5cafd2fa765e9fc3c427aab48398db61b3dfc5d827a4708"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "600f7fa7918f799141a098e023a1af66d461e8b76c7bc3550f7b7dda25563f49"
+          "sha256": "5c18d03676a357f07020f1c29522988582011e3d92a885be3cce8e78acab51a2"
         },
         {
           "id": "title",
@@ -44,7 +44,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "6f9a3e7afcc71c0128d64c7960a2d102f778ea26a2bde10ccbc70dc2a231a6df"
+          "sha256": "1c6908b145e225204d8ef35dc466d9c0b202669f20ef6d75294713ad73ac0367"
         },
         {
           "id": "rotation",
@@ -67,6 +67,11 @@
           "source": "terrestrial",
           "projection": "equirectangular",
           "lenses": [
+            {
+              "id": "tempest-shape",
+              "source": "content",
+              "material": "lighting"
+            },
             {
               "id": "shape",
               "source": "content",
@@ -93,7 +98,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fc85015507bdc31a1bd915881b5dbd8b1d684aa870a1cc2fd895792d1d2e995f"
+        "sha256": "7bb2cd4d7efd015060e4f8637f8d48ab949dacef36c5d2653529740a12c822f1"
       }
     },
     "worldFrame": {
@@ -136,6 +141,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "c71d3a8dfff1607a5622a177c768bf933b6fd64731aa643e8a7cb08b3fd98491"
+    "sha256": "19f79ec1fc606878f52cdf4018c1d023fb1f80c2cd39c61f2701f66046704f03"
   }
 }

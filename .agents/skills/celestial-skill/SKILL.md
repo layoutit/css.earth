@@ -39,6 +39,10 @@ Explain meaningful model differences beside the dataset and qualify registration
 coverage and picking against the selected mesh. The [implementation map](references/implementation-map.md)
 locates the existing support for alternative models.
 
+For shape-only alternatives, bind each `shapeViews` entry to its selected
+`radialTerrain` source as well. Verify that generated surface provenance names
+that mesh, rather than reusing the default mesh's source for every dataset.
+
 Surface places also belong to a source frame. Use `source/preparation/features.json`
 and its pinned `landmarks` document for mission-defined regions, paper coordinates,
 or explicitly inferred model anatomy. Keep mission names distinct from IAU names.
@@ -95,10 +99,14 @@ silently validate a different checkout or accumulate servers on new ports.
 
 Inspect available pinned inputs before downloading alternatives. Before
 finalizing a new body's lenses or expanding its views, make a brief source
-survey beyond the first usable texture. Search the relevant mission archives,
-mapping repositories (such as PDS, USGS and LPI/USRA), and papers' linked data
-releases for better-resolution, registered or photometrically corrected imagery
-and useful complementary products, such as elevation, geology or composition.
+survey beyond the first usable texture. Use the
+[source directory](references/source-directory.md) to choose concrete archives
+for the target and product: mission images and geometry, mapped surfaces,
+radar or optical shape models, paper tables, and research-code inputs.
+Search those relevant sources for better-resolution, registered or
+photometrically corrected imagery and useful complementary products, such as
+elevation, geology or composition. The directory also gives the public Git-history
+route when a paper's input model is missing from a repository's current files.
 Follow promising citations to the actual release; a display-texture catalog or
 press-image search alone does not establish what datasets exist.
 
@@ -108,11 +116,22 @@ file inventory and linked methods for companion image-geometry tables,
 reconstructed pointing, control points, backplanes and detector-quality files.
 Compare their observation IDs and model frame with the image headers; headers
 may retain preliminary geometry superseded by the shape reconstruction.
+Read kernel comments before accepting a body frame: a mission-hosted file can
+retain placeholder pole coordinates or a pre-encounter rotation period. A
+trajectory correction does not also establish the shape's prime meridian or
+rotational phase. Keep these questions separate in the qualification evidence.
 Establish sample/line order, pixel origin, aspect ratio, flips and units, then
 inspect one native-pixel projection before fitting or baking. Follow the
 [source investigation sequence](references/registered-photographic-mosaics.md#inspect-the-release-before-reconstructing-geometry)
 for conflicting or undocumented conventions. Record the selected companion and
 any remaining inference in the existing recipe and body README.
+
+Blank body-fixed convenience fields in an image header do not establish that
+PDS lacks geometry. Inspect the mission SPICE release, including reconstructed
+ephemerides, pointing, instrument and body-orientation kernels. Distinguish
+active kernel assignments from commented or rejected alternatives, and match
+receive time, target emission time and aberration conventions to the image.
+Recover and verify the available archive inputs before declaring a source gap.
 
 Search the relevant papers explicitly as well as the data archives. Inspect
 full text, tables, appendices and supplementary files: a usable radius table,
@@ -294,6 +313,16 @@ camera record. A limb/terminator-only fit, generic sphere, approximate orbit or
 attitude, visual similarity, or same-renderer screenshot does not establish
 image-to-shape registration. Keep an honest model or coarse pointing view, mark
 the photographic lens deferred, and preserve the source gaps.
+
+For image-transfer diagnostics, distinguish detector alignment from surface
+control. A nearly repeated view can correlate closely without constraining the
+mesh frame or depth. Inspect distributed interior detail and a meaningfully
+different viewing direction; retain contradictory results, including reverse
+transfer when it exposes a concrete ambiguity. Keep fitting pixels separate
+from holdouts. Report native pixel scales, search boundaries and broad or weak
+correlation peaks. A correlation score or an arbitrary residual cutoff is not a
+publication gate. Removing a brightness plane for a diagnostic must not change
+the delivered photograph or be described as a photometric calibration.
 
 Treat model transfer as its own gate: a map registered to one shape cannot be
 draped onto another shape until their frame and surface correspondence are

@@ -1,0 +1,50 @@
+{
+  "id": "tempest-dinkinesh-7df4c88",
+  "kind": "model",
+  "identityLevel": "release",
+  "title": "Dinkinesh shape model distributed with TEMPEST",
+  "version": "Git 7df4c88063ebe811cbdd25b97c19f85559607459",
+  "identifiers": [
+    {
+      "type": "Git commit",
+      "value": "7df4c88063ebe811cbdd25b97c19f85559607459"
+    }
+  ],
+  "creators": [
+    "Duncan Lyster"
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl",
+      "label": "Preserved shape model"
+    },
+    {
+      "role": "rights",
+      "url": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/LICENSE.md",
+      "label": "Modified MIT License (Attribution Required)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl",
+      "checkedOn": "2026-09-13",
+      "locator": "data/shape_models/dinkinesh.stl; 635 unique vertices, 1266 triangles, metre coordinates"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Lyster, D., Howett, C., & Penn, J. (2025). TEMPEST: A Modular Thermophysical Model for Airless Bodies with Support for Surface Roughness and Non-Periodic Heating.",
+      "scope": "Recovered numerical mesh and derived presentation",
+      "evidence": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/LICENSE.md"
+    },
+    {
+      "kind": "limitation",
+      "text": "The recovered file does not identify its upstream mission-model version or an observed/fill mask. Photo registration and the spin epoch remain unqualified.",
+      "scope": "Shape model",
+      "evidence": "https://github.com/duncanLyster/TEMPEST/blob/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl"
+    }
+  ]
+}
