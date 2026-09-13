@@ -35,6 +35,12 @@ Model longitude is `atan2(y,x)` and north latitude is `asin(z/r)`. The historica
 
 Checked 2026-09-08, including actual archive metadata and research releases beyond press imagery. Labels and OPUS metadata are pinned in `source/survey/`.
 
+2026-09-12 follow-up: retrieved the native `lor_0299174134_0x636_sci` FITS and
+revisited the [published shape-fitting method](https://www.hou.usra.edu/meetings/plutosystem2019/pdf/7038.pdf).
+The image exists and resolves surface detail. The remaining gap is its transform
+to the released 2021 STL: that release still supplies no fitted attitude or
+pointing sidecar. The new Arrokoth camera registration does not qualify Nix.
+
 | Candidate | Disposition |
 | --- | --- |
 | [Porter 2021 Figshare mesh](https://doi.org/10.6084/m9.figshare.12779948.v1) | **Included.** Clearly licensed released shape; the API lists one STL gzip and no texture, fitted attitude or image-registration sidecar. Geometry scale is qualified above. |

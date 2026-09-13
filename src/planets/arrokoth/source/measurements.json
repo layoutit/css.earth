@@ -3,7 +3,7 @@
   "periodHours": null,
   "periodText": "About 15.9 hours; display phase is illustrative",
   "population": "Trans-Neptunian object",
-  "surfaceMeaning": "No resolved global surface imagery; the standard grid marks unmapped terrain.",
+  "surfaceMeaning": "LORRI photographs and enhanced MVIC filter color cover part of the encounter-facing surface; the grid marks unsupported coverage.",
   "unresolved": [
     "The released albedo FITS has no explicit observational coverage mask and contains a broad uniform baseline; that fill is not resolved imagery.",
     "The bundled paper and PDS XML disagree on the pole and the XML calls a sub-day period an orbital period. Absolute phase is not claimed.",
