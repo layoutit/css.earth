@@ -43,6 +43,17 @@ function skyFieldOfView(sky: PreparedCubicSkyPlan) {
     : CUBIC_SKY_CAMERA_PRESENTATION_STANDARD.horizontalFovDegrees;
 }
 
+/** An object camera without its own projection shares its sky's. A fixed 1000000px perspective gave
+ * Earth a million-pixel focal length while every other body frames with 0.87 of the viewport width. */
+export function focusedCameraProjection(sky: PreparedCubicSkyPlan) {
+  const horizontalFovDegrees = skyFieldOfView(sky);
+  const shared = sky.projection?.horizontalFovDegrees === horizontalFovDegrees ? sky.projection : undefined;
+  const focalLengthOverViewportWidth = shared?.focalLengthOverViewportWidth ?? 1 / (2 * Math.tan(horizontalFovDegrees * Math.PI / 360));
+  return Object.freeze({ model: "css-perspective-shared-with-sky", horizontalFovDegrees, focalLengthOverViewportWidth,
+    cssPerspective: shared?.cssPerspective ?? `${focalLengthOverViewportWidth * 100}cqw`,
+    eyeOnCameraRootAxis: true, nearPlaneClipping: "javascript-before-publication" });
+}
+
 /** Prepare the shared Sun-centred layer used by every focused planet view. */
 export async function prepareFocusedHeliocentricPresentation({
   bodyId,
@@ -76,8 +87,6 @@ export async function prepareFocusedHeliocentricPresentation({
     sunSprite: { imagePixels: sun.asset?.density1?.width,
       opaqueCoreDiameterShare: sun.distanceScaling?.spriteOpaqueCoreDiameterShare }, system });
   const catalogue = await prepareCatalogueStars({ fovDegrees: skyFieldOfView(sky) });
-  const horizontalFovDegrees = skyFieldOfView(sky);
-  const focalLengthOverViewportWidth = 1 / (2 * Math.tan(horizontalFovDegrees * Math.PI / 360));
   const captionNames = Object.fromEntries(Object.entries(astronomy.BODIES).map(([key, value]) => [key, value.name]));
   const phase = lambertAttenuationAtlas({ frameSize: 32, columns: PHASE_ATLAS.columns,
     frameCount: PHASE_ATLAS.frameCount, terminatorWidth: .1, directionalAmbient: .05,
@@ -91,9 +100,7 @@ export async function prepareFocusedHeliocentricPresentation({
     phaseAtlas: { ...PHASE_ATLAS, url: phaseUrl }, captionNames, catalogue });
   return Object.freeze({
     heliocentricView: presentation,
-    cameraProjection: Object.freeze({ model: "css-perspective-shared-with-sky",
-      horizontalFovDegrees, focalLengthOverViewportWidth, cssPerspective: "1000000px",
-      eyeOnCameraRootAxis: true, nearPlaneClipping: "javascript-before-publication" }),
+    cameraProjection: focusedCameraProjection(sky),
     phaseEntry: Object.freeze({ key: "marker-phase", url: phaseUrl, pool: "warm" }),
   });
 }
