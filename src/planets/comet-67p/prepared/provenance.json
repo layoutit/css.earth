@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3e977e10c8e246f1e5ac9d66461c68e5d451667e4ba5996a4ad0b714919d0fc2"
+    "sha256": "bc5d78fbcf406eccb24734b7a9f80fefb171caa757b38e07e6aeabdc2d970c74"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -2971,42 +2971,38 @@
       "verificationOperations": []
     },
     {
-      "id": "comet-67p-surface-features-source",
+      "kind": "source-input",
+      "id": "comet-67p-features-manifest",
       "path": "features/manifest.json",
-      "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
-      "redistribution": "Repository-authored metadata; no imagery",
+      "origin": "Byte pins and source qualifications for the surface-place compilation.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored source pin for the nomenclature archive."
+        "reason": "Byte pins and source qualifications for the surface-place compilation."
       },
-      "kind": "source-document",
-      "title": "features/manifest.json",
-      "upstreamLineage": "not-recorded",
-      "sha256": "4a54a2dd7164ecdfb85203bf63c2ebffc71016369ece87c87a73a80cbe776c73",
-      "bytes": 935,
+      "sha256": "fee7f80d11b9ddb05f0bb2e050276eb7c78c14b67e44f34be31bfdc0de8e47ab",
+      "bytes": 1075,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
-      "id": "comet-67p-surface-map-frame",
+      "kind": "source-input",
+      "id": "comet-67p-presentation-surface-map",
       "path": "presentation/surface-map.json",
-      "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
-      "credit": "cssEarth contributors",
-      "license": "Repository-authored presentation parameters",
-      "acquisition": "Authored from the shared mesh convention.",
-      "redistribution": "Repository-authored parameters; no imagery",
+      "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
+      "credit": "cssEarth contributors; authors cited per place",
+      "license": "MIT (project compilation); underlying publications cited in the document",
+      "acquisition": "Authored and checked in beside the body source records.",
+      "redistribution": "Factual records and coordinates with citations; no publication images.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored map frame."
+        "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
       },
-      "kind": "source-document",
-      "title": "presentation/surface-map.json",
-      "upstreamLineage": "not-recorded",
       "sha256": "2c4d670c40f6c544aba99082892839f03047ee3fec94d3a7dfdc0d0aa332ed09",
       "bytes": 156,
       "dependencies": [],
@@ -3523,8 +3519,8 @@
         "excludedTypeCodes": {}
       },
       "inputs": [
-        "comet-67p-surface-features-source",
-        "comet-67p-surface-map-frame",
+        "comet-67p-features-manifest",
+        "comet-67p-presentation-surface-map",
         "comet-67p-surface-sites",
         "comet-67p-features-landmarks",
         "shap7-region-cells"

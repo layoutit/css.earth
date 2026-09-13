@@ -127,7 +127,8 @@ export async function authorSourceRecords({ root, objectId, evidence, manifestAt
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const arguments_ = process.argv.slice(2), evidenceIndex = arguments_.indexOf('--evidence');
   const evidence = evidenceIndex >= 0 ? arguments_[evidenceIndex + 1] : undefined;
-  const ids = arguments_.filter((argument, index) => argument !== '--evidence' && index !== evidenceIndex + 1);
+  // Without --evidence, evidenceIndex + 1 is 0, which must not drop the object id.
+  const ids = arguments_.filter((argument, index) => argument !== '--evidence' && (evidenceIndex < 0 || index !== evidenceIndex + 1));
   if (ids.length !== 1 || (evidenceIndex >= 0 && !evidence)) throw new TypeError('Usage: author-source-records <object-id> [--evidence <revision>]');
   const result = await authorSourceRecords({ root: process.cwd(), objectId: ids[0], evidence });
   console.log(JSON.stringify(result, null, 1));

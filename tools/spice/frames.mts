@@ -41,10 +41,32 @@ export function pckRotation(pool: KernelPool, body: number, et: number): Matrix3
 
 export interface FrameDefinition { readonly id: number; readonly name: string; readonly class: number; readonly classId: number; readonly center?: number }
 
-/** Frame ids and classes from FRAME_* variables; J2000 (1) is built in. */
+/**
+ * NAIF body codes for SPICE's built-in IAU_<body> frames, which no kernel defines. Their
+ * orientation still comes from the loaded PCK. Built-in frames get the internal id
+ * BUILT_IN_FRAME_BASE + body code here; SPICE's own numbering is not reproduced.
+ */
+export const IAU_BODY_CODES: Readonly<Record<string, number>> = Object.freeze({
+  SUN: 10, MERCURY: 199, VENUS: 299, EARTH: 399, MOON: 301, MARS: 499, PHOBOS: 401, DEIMOS: 402,
+  JUPITER: 599, IO: 501, EUROPA: 502, GANYMEDE: 503, CALLISTO: 504, AMALTHEA: 505, HIMALIA: 506, THEBE: 514, ADRASTEA: 515, METIS: 516,
+  SATURN: 699, MIMAS: 601, ENCELADUS: 602, TETHYS: 603, DIONE: 604, RHEA: 605, TITAN: 606, HYPERION: 607, IAPETUS: 608, PHOEBE: 609,
+  JANUS: 610, EPIMETHEUS: 611, HELENE: 612, TELESTO: 613, CALYPSO: 614, ATLAS: 615, PROMETHEUS: 616, PANDORA: 617, PAN: 618,
+  METHONE: 632, PALLENE: 633, POLYDEUCES: 634, DAPHNIS: 635,
+  URANUS: 799, ARIEL: 701, UMBRIEL: 702, TITANIA: 703, OBERON: 704, MIRANDA: 705, PUCK: 715,
+  NEPTUNE: 899, TRITON: 801, NEREID: 802, LARISSA: 807, PROTEUS: 808, PLUTO: 999, CHARON: 901,
+});
+const BUILT_IN_FRAME_BASE = 1_000_000;
+
+/** Frame ids and classes from FRAME_* variables; J2000 (1), ECLIPJ2000 (17) and IAU_<body> frames are built in. */
 export function frameDefinition(pool: KernelPool, nameOrId: string | number): FrameDefinition {
   if (nameOrId === 'J2000' || nameOrId === 1) return { id: 1, name: 'J2000', class: 1, classId: 1 };
   if (nameOrId === 'ECLIPJ2000' || nameOrId === 17) return { id: 17, name: 'ECLIPJ2000', class: 1, classId: 17 };
+  const builtInBody = typeof nameOrId === 'string' ? (!has(pool, `FRAME_${nameOrId}`) && /^IAU_[A-Z]+$/u.test(nameOrId) ? IAU_BODY_CODES[nameOrId.slice(4)] : undefined)
+    : Object.values(IAU_BODY_CODES).find(code => BUILT_IN_FRAME_BASE + code === nameOrId);
+  if (builtInBody !== undefined) {
+    const name = `IAU_${Object.keys(IAU_BODY_CODES).find(key => IAU_BODY_CODES[key] === builtInBody)}`;
+    return { id: BUILT_IN_FRAME_BASE + builtInBody, name, class: 2, classId: builtInBody, center: builtInBody };
+  }
   const id = typeof nameOrId === 'number' ? nameOrId : has(pool, `FRAME_${nameOrId}`) ? number(pool, `FRAME_${nameOrId}`) : NaN;
   if (!Number.isInteger(id)) throw new Error(`Unknown frame: ${nameOrId}`);
   const name = has(pool, `FRAME_${id}_NAME`) ? string(pool, `FRAME_${id}_NAME`) : String(nameOrId);
