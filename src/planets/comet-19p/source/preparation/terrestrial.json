@@ -176,9 +176,9 @@
         },
         "maximumCoordinateErrorMeters": 1e-06,
         "display": {
-          "displayRange": [
+          "percentiles": [
             0,
-            0.018
+            99.5
           ]
         },
         "metadata": {

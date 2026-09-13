@@ -69,7 +69,7 @@ function validateCameraLens(value: unknown, sourceGeometry: unknown) {
   for (const frame of requireArray(requireRecord(value).frames)) checkFrame(frame, `${CONTEXT} frame`);
   const recipe = decodeProfile(parseControlledCameraLens, value, `Invalid source-bound ${CONTEXT}.`);
   if (recipe.format !== 'controlled-shape-camera') throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
-  validateEnvelope(recipe, cameraPaths(recipe.frames), { ...RULES, displays: ['displayRange', 'percentiles'] }, CONTEXT);
+  validateEnvelope(recipe, cameraPaths(recipe.frames), { ...RULES, displays: ['percentiles'] }, CONTEXT);
   validateTransfer(recipe.transfer, parseSurfaceGeometry(sourceGeometry), CONTEXT);
   validatePhotometry(recipe.photometry, requireRecord(value).photometry, recipe.transfer.maximumEmissionDegrees, false);
 }
