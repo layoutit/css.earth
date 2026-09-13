@@ -74,6 +74,6 @@ test('LORRI rejects a different image, incomplete quality layout and non-rigid b
 test('enhanced color keeps one shared zero-based scale and rejects photometric recoloring',async()=>{
   const config=await read('preparation/terrestrial.json'),recipe=config.raster.surfaceObservations.find((v:{id:string})=>v.id==='mvic');
   validateSurfaceObservation(recipe,config.geometry.radialTerrain);
-  assert.throws(()=>validateSurfaceObservation({...recipe,colorDisplay:{minimum:.01,maximum:.17}},config.geometry.radialTerrain));
+  assert.throws(()=>validateSurfaceObservation({...recipe,display:{displayRange:[.01,.17]}},config.geometry.radialTerrain));
   assert.throws(()=>validateSurfaceObservation({...recipe,photometry:{...recipe.photometry,model:'lommel-seeliger'}},config.geometry.radialTerrain));
 });

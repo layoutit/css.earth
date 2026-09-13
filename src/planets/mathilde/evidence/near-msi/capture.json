@@ -156,5 +156,23 @@
       "bytes": 97616,
       "sha256": "7364365244c11e686bbb3d65a88dc5f9b7bc45a8121590aa85c3e76301c379f5"
     }
+  },
+  "recipeMigrationRevalidation": {
+    "mainRevision": "2f2752abb4a6fac0b40c8c549ef1d20d9ae395b3",
+    "change": "NEAR MSI migrated to the shared lens recipe and PDS4 label reader; full Mathilde preparation replayed.",
+    "runtimeAssets": {
+      "count": 39,
+      "bytes": 9361957,
+      "allPinsAndLocalBytesUnchanged": true
+    },
+    "preparedOutputsUnchanged": [
+      "runtime-assets.json",
+      "surfaces.json",
+      "lenses.json",
+      "scene.refs.json"
+    ],
+    "nativeCameraClosuresUnchanged": true,
+    "browserCaptureReused": true,
+    "browserRecheckLimit": "The local application requires the missing Helix prepared lens bank introduced on main. No new browser pass is claimed."
   }
 }

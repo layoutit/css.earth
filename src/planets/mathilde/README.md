@@ -34,9 +34,17 @@ Headless Chrome on the existing server verified drag, lighting, mobile framing
 and DPR 2 with retained triangle identity and Shadows off by default. The three
 lenses and both closed 800-face model banks pass the focused package checks;
 all 39 runtime files match their local inventory. Preparation TypeScript passes.
-The shared profile suite has two existing Dimorphos cube/SPICE test failures,
-reproduced with the unchanged base implementation at `ebf7c8456`; they are not
-Mathilde results. Full application and aggregate browser suites were not run.
+The shared recipe and profile checks pass after integrating the observation
+recipe migration from `2f2752abb` (#175), which also fixes the previously recorded
+Dimorphos cube/SPICE test failures. Full application and aggregate browser suites
+were not run.
+
+The full Mathilde preparation was replayed after that migration. All 39 runtime
+assets (9,361,957 bytes), both native camera files, surface reports, lens controls
+and prepared scene match the previous PR outputs exactly. The existing captures
+therefore remain evidence for those pixels and geometry. A fresh browser run is
+not claimed: the local application is missing the Helix prepared lens bank newly
+required by `main`.
 
 The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
 
@@ -118,6 +126,10 @@ above. FITS pixels stay in file order; display flips affect only a complete
 diagnostic image and its overlay together.
 
 `node tools/objects/near-msi/prepare-cameras.mts` reproduces the camera inputs.
+It uses the shared PDS4 label reader for the native filename and acquisition time.
+The lens follows the common surface-observation recipe with `display.percentiles`;
+the format requires raw companions and camera refinement, retains the photograph's
+illumination and rejects compressed frames in its decoder.
 `node tools/objects/near-msi/capture-registration.mts` reproduces the source
 projection after preparation; the browser capture is
 `node tests/objects/browser/asteroid-photographic-coverage.mts mathilde after`.

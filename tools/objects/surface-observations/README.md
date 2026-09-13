@@ -34,7 +34,7 @@ new route.
 | `pds4-geometry-cube` | `formats/geo.mts` | Fitted to the backplanes | Archive backplanes |
 | `osiris-camera` | `formats/geo.mts` | Archived closure | Source-mesh rays |
 | `llorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
-| `near-msi-camera` | `formats/geo.mts` | Thomas reconstructed Mathilde image table, with a checked limb refinement | Source-mesh rays |
+| `near-msi-camera` | `formats/geo.mts` | Reconstructed image table and bounded limb refinement | Source-mesh rays; paired raw detector validity |
 | `nh-lorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
 | `nh-mvic-camera` | `formats/geo.mts` | Archived closure through a fitted image transform; three registered filters shown as colour | Source-mesh rays |
 | `spice-camera` | `formats/geo.mts` | SPICE kernels | Source-mesh rays |
@@ -44,20 +44,55 @@ new route.
 The [implementation map](../../../.agents/skills/celestial-skill/references/implementation-map.md#choose-a-photograph-route)
 says which format fits what an archive ships.
 
-NEAR MSI uses the calibrated I/F frame and its original raw detector frame.
-The raw frame identifies missing telemetry and saturation independently of
-brightness. The archive's unresolved quality index remains a reported
-limitation. [Mathilde's recipe](../../../src/planets/mathilde/source/preparation/near-msi.json)
-binds the reconstructed image table and calibration; reproduce its cameras with
-`node tools/objects/near-msi/prepare-cameras.mts`. Preliminary FITS pointing is
-not interchangeable with the geometry used to construct the shape model.
+The NEAR MSI adapter retains calibrated I/F with its original illumination.
+Mathilde's [source method](../../../src/planets/mathilde/README.md) records the
+reconstructed image table, inferred detector conventions, raw-data checks and
+limits of silhouette registration on the visualization shape.
+
+## Recipes
+
+Every lens has the same shape. A format adds only its frame inputs and its own
+blocks, and validation refuses any key the format does not declare, so a
+misspelt field fails instead of being ignored.
+
+```json
+{
+  "id": "osiris", "format": "osiris-geo", "consumer": "osiris-observation",
+  "filter": "...", "allowLossy": false,
+  "frames": [{ "id": "...", "path": "...", "qualityPath": "...", "startTime": "..." }],
+  "selection": "lowest-emission", "levelMatching": { "minimumPairs": 128, "maximumLogMad": 0.25, "maximumGain": 1.35, "samplesPerTriangle": 64 },
+  "transfer": { "...": "see Transfer limits" }, "photometry": { "...": "..." },
+  "display": { "percentiles": [1, 99.5] },
+  "metadata": { "label": "OSIRIS", "coverage": "..." }
+}
+```
+
+- `frames` lists the photographs, one to eight. A lens with more than one frame
+  also names its `selection` and `levelMatching`; a single frame names neither.
+- `display` is either `percentiles` of the qualified values or one authored
+  `displayRange`.
+- `recipe.mts` checks the shared shape. Each adapter declares the rest:
+
+| Format | Each frame adds | The lens adds |
+| --- | --- | --- |
+| `osiris-geo` | `startTime`, `qualityPath` | `filter`, `allowLossy`, optional `radiometry` |
+| `amica-gaskell` | `startTime`, `labelPath`, `originalPath` | `filter` (`V`) and the shared `flatPath` |
+| `pds4-geometry-cube` | `startTime`, `labelPath` | `filter`, `cube` |
+| `osiris-camera` | `startTime`, `cameraPath` | `filter`, `allowLossy`, optional `refinement` |
+| `llorri-camera`, `nh-lorri-camera` | `startTime`, `cameraPath` | `filter` |
+| `near-msi-camera` | `startTime`, `cameraPath`, `originalPath` | `filter`, required `refinement`; retained illumination, uncompressed calibrated/raw FITS pairs |
+| `nh-mvic-camera` | `startTime`, `cameraPath`, `labelPath` | `filter`; one frame with retained illumination, `metadata.falseColor` and a `displayRange` from 0 for all three bands |
+| `spice-camera` | `startTime`, and `labelPath` for a VICAR image | `filter`, `spice`, optional `refinement` |
+| `encounter-fits` | `labelPath`, `controlPath` | nothing |
+| `isis2-orthographic` | `coordinatePaths` | `grid`, `maximumCoordinateErrorMeters`; one frame, a `transfer` with only `maximumSourceDistanceMeters`, no `photometry` |
 
 ## Adding an archive product
 
 Write an adapter that implements `SurfaceObservationFormat` from `contract.mts`
 and register it in `index.mts`. The adapter:
 
-1. validates its recipe and names every pinned path the lens consumes;
+1. declares what its frames and lens add to the shared recipe, checks them with
+   `recipe.mts` and names every pinned path the lens consumes;
 2. decodes each frame into an `ObservationImage`;
 3. builds an `ObservationCamera` and a `PixelGeometry`, usually with
    `matrixCamera` or `fittedCamera` and `castSourceRays` or `archiveBackplanes`;
@@ -75,10 +110,12 @@ Three choices still differ by format, and each lens report records them:
   must cover both.
 - **Display range.** Those formats take the display percentiles from the first
   frame's qualified pixels. Encounter frames take them from samples on the
-  displayed surface. An orthophoto uses its authored range, and a registered color cube declares its actual bands, quantity and common
-  linear display range. Floating samples receive the [shared IEC sRGB
-  transfer](../color-transfer.mts) after surface transfer. Its policy is included
-  in the report; encoding does not qualify natural color.
+  displayed surface. An orthophoto uses its authored range. The MVIC colour cube
+  shows its three bands on one authored range: its format names the bands and
+  their data-number quantity, which the decoder checks against the native label.
+  Floating samples receive the [shared IEC sRGB transfer](../color-transfer.mts)
+  once, after surface transfer, and the report records the band policy. Encoding
+  does not qualify natural color.
 - **Selection.** A mosaic picks the lowest emission, the first frame in recipe
   order, or the finest pixel scale.
 

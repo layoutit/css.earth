@@ -99,6 +99,13 @@
             "controlPath": "photography/deep-impact/iv05070405_9000688_001_r.json"
           }
         ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 64,
+          "minimumPairs": 64,
+          "maximumLogMad": 0.3,
+          "maximumGain": 1.5
+        },
         "transfer": {
           "maximumSourceDistanceMeters": 90,
           "maximumSeparationMeters": 200,
@@ -109,17 +116,12 @@
           "model": "observed",
           "maximumGain": 1
         },
-        "selection": "finest-resolution",
-        "levelMatching": {
-          "samplesPerTriangle": 64,
-          "minimumPairs": 64,
-          "maximumLogMad": 0.3,
-          "maximumGain": 1.5
+        "display": {
+          "percentiles": [
+            1,
+            99.5
+          ]
         },
-        "displayPercentiles": [
-          1,
-          99.5
-        ],
         "metadata": {
           "label": "Deep Impact \u00b7 2005",
           "coverage": "Photographs taken as the impactor approached Tempel 1, before the collision. Wider views surround a closer view of the impact region. The gray grid marks gaps; the original shadows remain."
@@ -167,6 +169,13 @@
             "controlPath": "photography/next/n30048te02_rr.json"
           }
         ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 32,
+          "minimumPairs": 64,
+          "maximumLogMad": 0.3,
+          "maximumGain": 3
+        },
         "transfer": {
           "maximumSourceDistanceMeters": 90,
           "maximumSeparationMeters": 200,
@@ -177,17 +186,12 @@
           "model": "observed",
           "maximumGain": 1
         },
-        "selection": "finest-resolution",
-        "levelMatching": {
-          "samplesPerTriangle": 32,
-          "minimumPairs": 64,
-          "maximumLogMad": 0.3,
-          "maximumGain": 3
+        "display": {
+          "percentiles": [
+            1,
+            99.5
+          ]
         },
-        "displayPercentiles": [
-          1,
-          99.5
-        ],
         "metadata": {
           "label": "Stardust-NExT \u00b7 2011",
           "coverage": "Stardust returned six years after Deep Impact. These photographs show a different encounter and viewing direction, rather than a direct before-and-after comparison. Original shadows remain; the gray grid marks gaps."

@@ -12,8 +12,7 @@ const small = label.replace('<elements>1904</elements>', '<elements>2</elements>
   .replace('>-1904000<', '>-2<').replace('>952000<', '>1<');
 const policy = { kind: 'pds4-float-rgb', labelPath: 'observations/nh_charon_color_mosaic.lblx',
   lidvid: 'urn:nasa:pds:nh_derived:plutosystem_composition:nh_charon_color_mosaic::1.0',
-  bands: [2, 3, 4], wavelengthsNm: [870, 625, 475], displayRange: [0, 100],
-  colorDisplay:{kind:'band-composite',inputQuantity:'derived-band-value',bands:['870 nm','625 nm','475 nm'],displayRange:[0,100],outputEncoding:'srgb'} };
+  bands: [2, 3, 4], wavelengthsNm: [870, 625, 475], displayRange: [0, 100] };
 const entry = { path: 'observations/nh_charon_color_mosaic.img', width: 4, height: 2, projection: { referenceRadiusMeters: radius } };
 const bytes = () => {
   const b = Buffer.alloc(4 * 2 * 4 * 4);
@@ -73,4 +72,5 @@ test('unsupported identities, orders, projection conventions, units, scales and 
   assert.throws(() => decodePds4Color(bytes(), small, entry, { ...policy, bands: [1, 3, 4] }), /identity, bands/);
   assert.throws(() => validatePds4ObservationPolicy({ ...policy, labelPath: '../other.xml' }), /policy/);
   assert.throws(() => validatePds4ObservationPolicy({ ...policy, displayRange: [1, 0] }), /policy/);
+  assert.throws(() => validatePds4ObservationPolicy({ ...policy, colorDisplay: {} }), /unknown colorDisplay/);
 });
