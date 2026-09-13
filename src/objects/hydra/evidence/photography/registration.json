@@ -1,0 +1,365 @@
+{
+  "schema": "cssearth-nh-lorri-registration-evidence@1",
+  "bodyId": "hydra",
+  "generator": {
+    "path": "tools/objects/new-horizons/prepare-photographic-cameras.mts",
+    "sha256": "bd0ec170aa35449a7f618c2766e85d7cfe0fc9cf5e310ef7a1e095206845f344"
+  },
+  "helpers": [
+    {
+      "path": "tools/objects/new-horizons/compare-photographic-interiors.mts",
+      "sha256": "95d4d25d820113e29b27419455908618c1660665430faef927c27f2c1f659f32"
+    },
+    {
+      "path": "tools/objects/new-horizons/render-interior-comparison.mts",
+      "sha256": "e8e44b5bab4a0a1cfc3b12079efe19018f5764fdf53ba48c97a695542a2cd2f9"
+    }
+  ],
+  "recipe": {
+    "path": "preparation/photography.json",
+    "sha256": "94b0b7cb224efcdc07d0dbf536056c8b86b8d7c7f2dc4f96e4536c091e136760"
+  },
+  "mesh": {
+    "path": "shape/hydra_shf1k3_hipoly.stl.gz",
+    "sha256": "8bbfce67597caf2bfef95e3f526f66cac7d967e9b425cb183a1088fc0e97d163",
+    "compression": "gzip",
+    "metersPerUnit": 1000,
+    "expectedVertices": 26246,
+    "expectedFaces": 52488
+  },
+  "frames": [
+    {
+      "id": "best",
+      "imagePath": "observations/lor_0299165548_0x630_sci.fit",
+      "imageSha256": "7b225229428505208024279bf86104381ce24617e56be89a1cc89236ad17e91b",
+      "outputCameraPath": "observations/best-camera.json",
+      "pck": {
+        "path": "geometry/nh_pcnh_010.tpc",
+        "sha256": "cf79342b3cc13d8dab485ce87ebfb2d74d12e3f79039de260e730aaaefffce01",
+        "naifBodyId": 903,
+        "receiveEt": 490131697.9643558,
+        "emissionEt": 490131697.1994995,
+        "lightTimeSeconds": 0.7648563385009766,
+        "timeMode": "receive-minus-range-light-time"
+      },
+      "registration": {
+        "offsetPixels": [
+          -12.875,
+          -1.5
+        ],
+        "fit": {
+          "candidatePoints": 25,
+          "litMatches": 20,
+          "unmatched": 0,
+          "unlit": 5,
+          "rmsPixels": 0.5615757703194971,
+          "litRmsPixels": 0.49153562701493925,
+          "maximumPixels": 1.1767578125
+        },
+        "holdout": {
+          "candidatePoints": 27,
+          "litMatches": 22,
+          "unmatched": 0,
+          "unlit": 5,
+          "rmsPixels": 1.2123432745623977,
+          "litRmsPixels": 0.7925879541725348,
+          "maximumPixels": 2.685546875
+        },
+        "beforeFit": {
+          "candidatePoints": 45,
+          "litMatches": 25,
+          "unmatched": 2,
+          "unlit": 18,
+          "rmsPixels": 11.457030115623631,
+          "litRmsPixels": 13.716217666514165,
+          "maximumPixels": 31.828125
+        },
+        "beforeHoldout": {
+          "candidatePoints": 52,
+          "litMatches": 27,
+          "unmatched": 8,
+          "unlit": 17,
+          "rmsPixels": 11.140203749846584,
+          "litRmsPixels": 11.926231766257047,
+          "maximumPixels": 13.4921875
+        },
+        "threshold": {
+          "threshold": 194.4514421331178,
+          "split": 1880.3068613559008,
+          "backgroundMedian": 10.19742202758789,
+          "backgroundSigma": 12.118848788309096,
+          "bodyMean": 3695.277824138186
+        },
+        "fittingPointCount": 25,
+        "holdoutPointCount": 27,
+        "method": "Two detector pointing offsets only; maximum vector offset 32 pixels. PCK attitude, source mesh, range, and TAN-SIP model are fixed. Alternating 12-row crop blocks reserve a spatially disjoint lit-limb holdout."
+      },
+      "independentExposure": {
+        "imagePath": "observations/lor_0299165545_0x630_sci.fit",
+        "imageSha256": "d8d89e5e679c22435e7c800b3d617498fb8d4148f1b54aa3fc8c7d00f3cb5964",
+        "receiveEt": 490131695.0143558,
+        "emissionEt": 490131694.249371,
+        "holdout": {
+          "candidatePoints": 51,
+          "litMatches": 26,
+          "unmatched": 0,
+          "unlit": 25,
+          "rmsPixels": 2.559292135861003,
+          "litRmsPixels": 1.580891867467201,
+          "maximumPixels": 4.98046875
+        }
+      },
+      "interiorValidations": [
+        {
+          "id": "separate-view",
+          "imagePath": "observations/lor_0299165692_0x630_sci.fit",
+          "imageSha256": "03039ad34f31052c538497497bfa4651c93bb2aea60d8591346cc99919f46c67",
+          "receiveEt": 490131842.0143576,
+          "emissionEt": 490131841.25576955,
+          "observerDirectionDifferenceDegrees": 0.45076959019977664,
+          "supersampling": 1,
+          "initialPointingOffsetPixels": [
+            -8.875,
+            -1.125
+          ],
+          "crop": {
+            "left": 100,
+            "top": 864,
+            "width": 160,
+            "height": 160
+          },
+          "validSampleCount": 858,
+          "fittedShift": {
+            "dx": -0.5,
+            "dy": -1.25,
+            "correlation": 0.9974273617707599
+          },
+          "fitMean": 0.9974273617707599,
+          "regions": [
+            {
+              "left": 157,
+              "top": 926,
+              "right": 170,
+              "bottom": 946,
+              "partition": "fit",
+              "pixels": 218,
+              "atPrediction": 0.9233601108672822,
+              "afterFit": 0.9972958579672542,
+              "best": {
+                "dx": -0.25,
+                "dy": -1.5,
+                "correlation": 0.9987618919722738
+              },
+              "residualPixels": 0.3535533905932738,
+              "detrended": {
+                "correlation": 0.9973698725993823,
+                "referenceResidualRms": 977.1732525787768,
+                "targetResidualRms": 966.0338305255635
+              }
+            },
+            {
+              "left": 172,
+              "top": 926,
+              "right": 186,
+              "bottom": 946,
+              "partition": "holdout",
+              "pixels": 208,
+              "atPrediction": 0.9611878258049479,
+              "afterFit": 0.9963657157110724,
+              "best": {
+                "dx": -0.5,
+                "dy": -1.5,
+                "correlation": 0.9976630693077634
+              },
+              "residualPixels": 0.25,
+              "detrended": {
+                "correlation": 0.9943295098918815,
+                "referenceResidualRms": 670.238990244676,
+                "targetResidualRms": 688.2672353133865
+              }
+            },
+            {
+              "left": 157,
+              "top": 948,
+              "right": 170,
+              "bottom": 968,
+              "partition": "holdout",
+              "pixels": 250,
+              "atPrediction": 0.9242427148693106,
+              "afterFit": 0.9958883866010511,
+              "best": {
+                "dx": -0.5,
+                "dy": -1.5,
+                "correlation": 0.996485777679786
+              },
+              "residualPixels": 0.25,
+              "detrended": {
+                "correlation": 0.9963932712538955,
+                "referenceResidualRms": 784.2457406859577,
+                "targetResidualRms": 830.541829086769
+              }
+            },
+            {
+              "left": 172,
+              "top": 948,
+              "right": 186,
+              "bottom": 968,
+              "partition": "fit",
+              "pixels": 120,
+              "atPrediction": 0.934995424051617,
+              "afterFit": 0.9975588655742657,
+              "best": {
+                "dx": -0.5,
+                "dy": -1.25,
+                "correlation": 0.9975588655742657
+              },
+              "residualPixels": 0,
+              "detrended": {
+                "correlation": 0.9872429402808458,
+                "referenceResidualRms": 314.48307933463144,
+                "targetResidualRms": 336.681140106495
+              }
+            }
+          ],
+          "searchBoundary": {
+            "fitting": false,
+            "holdouts": [
+              false,
+              false
+            ]
+          },
+          "interpretation": "Relative image-to-mesh registration only; no absolute cartography or body qualification.",
+          "illustration": "best-separate-view-interior-transfer.png",
+          "method": "Project native reference pixels through the unchanged mesh at the published PCK pose. Fit two relative detector translations on two diagonal interior quadrants; withhold the other two. Pixel membership is fixed for every trial. No attitude, shape, blur, or photometric model is fitted.",
+          "limits": "The relative detector residual is not absolute surface position accuracy. Similar viewing directions may not constrain a model-frame error; source-frame qualification is a separate decision."
+        },
+        {
+          "id": "wide-view",
+          "imagePath": "observations/lor_0299155705_0x636_sci.fit",
+          "imageSha256": "93851402e9d15729f721c5e84a3bb9fe299590b854f198fb7190f92487cc4252",
+          "receiveEt": 490121854.9892386,
+          "emissionEt": 490121853.78592205,
+          "observerDirectionDifferenceDegrees": 22.995213299532928,
+          "supersampling": 2,
+          "initialPointingOffsetPixels": [
+            -4.625,
+            -4.625
+          ],
+          "crop": {
+            "left": 593,
+            "top": 141,
+            "width": 160,
+            "height": 160
+          },
+          "validSampleCount": 308,
+          "fittedShift": {
+            "dx": -4.75,
+            "dy": 2,
+            "correlation": 0.7671096529864856
+          },
+          "fitMean": 0.7671096529864856,
+          "regions": [
+            {
+              "left": 659,
+              "top": 206,
+              "right": 670,
+              "bottom": 214,
+              "partition": "fit",
+              "pixels": 61,
+              "atPrediction": 0.05498383608589659,
+              "afterFit": 0.792381087633905,
+              "best": {
+                "dx": -5,
+                "dy": 1.5,
+                "correlation": 0.8043027688070916
+              },
+              "residualPixels": 0.5590169943749475,
+              "detrended": {
+                "correlation": 0.5550701164572902,
+                "referenceResidualRms": 548.4359671771334,
+                "targetResidualRms": 542.3883245542909
+              }
+            },
+            {
+              "left": 672,
+              "top": 206,
+              "right": 683,
+              "bottom": 214,
+              "partition": "holdout",
+              "pixels": 26,
+              "atPrediction": -0.5914011076815127,
+              "afterFit": 0.7198042816361165,
+              "best": {
+                "dx": -5,
+                "dy": 0,
+                "correlation": 0.9252823097320747
+              },
+              "residualPixels": 2.0155644370746373,
+              "detrended": {
+                "correlation": -0.13593114730325492,
+                "referenceResidualRms": 235.5058390947252,
+                "targetResidualRms": 284.6913350970365
+              }
+            },
+            {
+              "left": 659,
+              "top": 216,
+              "right": 670,
+              "bottom": 224,
+              "partition": "holdout",
+              "pixels": 99,
+              "atPrediction": 0.4546745763061599,
+              "afterFit": 0.6501907211983107,
+              "best": {
+                "dx": -0.5,
+                "dy": 2.25,
+                "correlation": 0.9379245971707089
+              },
+              "residualPixels": 4.257346591481601,
+              "detrended": {
+                "correlation": 0.37185040107245454,
+                "referenceResidualRms": 869.1206816588691,
+                "targetResidualRms": 655.6010001979192
+              }
+            },
+            {
+              "left": 672,
+              "top": 216,
+              "right": 683,
+              "bottom": 224,
+              "partition": "fit",
+              "pixels": 87,
+              "atPrediction": 0.42318256120168635,
+              "afterFit": 0.741838218339066,
+              "best": {
+                "dx": -0.75,
+                "dy": 1.25,
+                "correlation": 0.8611482370052459
+              },
+              "residualPixels": 4.0697051490249265,
+              "detrended": {
+                "correlation": 0.7382998193058407,
+                "referenceResidualRms": 650.9858127940895,
+                "targetResidualRms": 528.8329780638699
+              }
+            }
+          ],
+          "searchBoundary": {
+            "fitting": false,
+            "holdouts": [
+              true,
+              false
+            ]
+          },
+          "interpretation": "Relative image-to-mesh registration only; no absolute cartography or body qualification.",
+          "illustration": "best-wide-view-interior-transfer.png",
+          "method": "Project native reference pixels through the unchanged mesh at the published PCK pose. Fit two relative detector translations on two diagonal interior quadrants; withhold the other two. Pixel membership is fixed for every trial. No attitude, shape, blur, or photometric model is fitted.",
+          "limits": "The relative detector residual is not absolute surface position accuracy. Similar viewing directions may not constrain a model-frame error; source-frame qualification is a separate decision."
+        }
+      ],
+      "qualification": "UNQUALIFIED: diagnostic projection only; photographic publication is deferred.",
+      "interpretation": "Fixed PDS PCK pose applied to the released native STL axes, with two fitted detector translations. The source receive-time SPCSCET minus source range/c mode follows the apparent LT+S vector convention.",
+      "limitations": "The lit-limb and interior-transfer checks have separate claims. Relative image agreement does not establish absolute surface control or resolve all possible STL-to-PCK frame errors. Photographic publication requires review of the source frame and the sensitivity of the interior check."
+    }
+  ]
+}

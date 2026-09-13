@@ -114,6 +114,13 @@ inspect one native-pixel projection before fitting or baking. Follow the
 for conflicting or undocumented conventions. Record the selected companion and
 any remaining inference in the existing recipe and body README.
 
+Blank body-fixed convenience fields in an image header do not establish that
+PDS lacks geometry. Inspect the mission SPICE release, including reconstructed
+ephemerides, pointing, instrument and body-orientation kernels. Distinguish
+active kernel assignments from commented or rejected alternatives, and match
+receive time, target emission time and aberration conventions to the image.
+Recover and verify the available archive inputs before declaring a source gap.
+
 Search the relevant papers explicitly as well as the data archives. Inspect
 full text, tables, appendices and supplementary files: a usable radius table,
 mesh, camera solution or registration controls may be published there without
@@ -294,6 +301,16 @@ camera record. A limb/terminator-only fit, generic sphere, approximate orbit or
 attitude, visual similarity, or same-renderer screenshot does not establish
 image-to-shape registration. Keep an honest model or coarse pointing view, mark
 the photographic lens deferred, and preserve the source gaps.
+
+For image-transfer diagnostics, distinguish detector alignment from surface
+control. A nearly repeated view can correlate closely without constraining the
+mesh frame or depth. Inspect distributed interior detail and a meaningfully
+different viewing direction; retain contradictory results, including reverse
+transfer when it exposes a concrete ambiguity. Keep fitting pixels separate
+from holdouts. Report native pixel scales, search boundaries and broad or weak
+correlation peaks. A correlation score or an arbitrary residual cutoff is not a
+publication gate. Removing a brightness plane for a diagnostic must not change
+the delivered photograph or be described as a photometric calibration.
 
 Treat model transfer as its own gate: a map registered to one shape cannot be
 draped onto another shape until their frame and surface correspondence are
