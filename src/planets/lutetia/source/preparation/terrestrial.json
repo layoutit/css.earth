@@ -79,14 +79,22 @@
           "visibilityToleranceMeters": 0.5
         },
         "photometry": {
-          "model": "minnaert",
-          "referenceIncidenceDegrees": 0,
-          "referenceEmissionDegrees": 0,
-          "maximumIncidenceDegrees": 70,
-          "maximumEmissionDegrees": 70,
-          "maximumGain": 2.5,
-          "coefficient": 0.5505,
-          "phaseCoefficientPerDegree": 0.005
+          "model": "photometry/hasselmann-2016-hapke-1993.json",
+          "referenceDegrees": {
+            "incidence": 35,
+            "emission": 0,
+            "phase": 35
+          },
+          "limits": {
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "phaseDegrees": [
+              25,
+              45
+            ],
+            "minimumGain": 0.4,
+            "maximumGain": 2.5
+          }
         },
         "displayPercentiles": [
           1,

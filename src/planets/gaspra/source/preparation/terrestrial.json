@@ -134,13 +134,24 @@
           }
         ],
         "photometry": {
-          "model": "observed",
-          "weight": 1,
-          "maximumGain": 1,
+          "model": "photometry/helfenstein-1994-hapke.json",
+          "referenceDegrees": {
+            "incidence": 50,
+            "emission": 0,
+            "phase": 50
+          },
+          "limits": {
+            "maximumIncidenceDegrees": 65,
+            "maximumEmissionDegrees": 65,
+            "phaseDegrees": [
+              48,
+              54
+            ],
+            "minimumGain": 0.4,
+            "maximumGain": 4
+          },
           "displayMaximum": 0.12,
           "gamma": 2.2,
-          "maximumIncidenceDegrees": 65,
-          "maximumEmissionDegrees": 65,
           "minimumLevel": 1,
           "maximumLevel": 1
         },

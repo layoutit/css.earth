@@ -59,3 +59,25 @@ test('placeholder evidence is pinned to the manifest bytes of the given revision
     await assert.rejects(authorSourceRecords({ root, objectId: 'rock' }), /orphan has no origin URL/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('placeholder evidence of a publication cited by a document is pinned only for that manifest and locator', async () => {
+  const root = await fixture();
+  try {
+    const manifestPath = join(root, 'src/planets/rock/source/manifest.json'), manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+    manifest.documents.push({ path: 'photometry/model.json', expectedBytes: 1, expectedSha256: 'a'.repeat(64),
+      sourceBinding: { kind: 'catalogued', references: [{ catalogueId: 'doi-10-1000-rock', role: 'method', evidence: 'Table 2 prints the parameters.', locator: 'Table 2' }] } });
+    await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+    const own = { path: 'src/planets/rock/source/manifest.json', revision: PLACEHOLDER_REVISION, sha256: '0'.repeat(64), locator: '/documents/0' };
+    const other = { path: 'src/planets/pebble/source/manifest.json', revision: PLACEHOLDER_REVISION, sha256: '0'.repeat(64), locator: '/documents/0' };
+    await writeFile(join(root, 'src/sources/doi-10-1000-rock.json'), JSON.stringify({ id: 'doi-10-1000-rock', kind: 'publication', identityLevel: 'work', title: 'Rock photometry',
+      identifiers: [{ type: 'DOI', value: '10.1000/rock' }], links: [{ role: 'landing', url: 'https://doi.org/10.1000/rock', label: 'Source' }], evidence: [own, other], relations: [], statements: [] }, null, 2) + '\n');
+    const committed = Buffer.from('{"documents":[]}\n'), revision = 'f'.repeat(40);
+    const result = await authorSourceRecords({ root, objectId: 'rock', evidence: revision, manifestAt: async () => committed });
+    assert.ok(result.pinned.includes('doi-10-1000-rock'));
+    const record = JSON.parse(await readFile(join(root, 'src/sources/doi-10-1000-rock.json'), 'utf8'));
+    assert.deepEqual(record.evidence, [{ ...own, revision, sha256: createHash('sha256').update(committed).digest('hex') }, other], "another body's placeholder waits for its own manifest");
+    manifest.documents[0].sourceBinding.references[0].catalogueId = 'doi-10-1000-missing';
+    await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+    await assert.rejects(authorSourceRecords({ root, objectId: 'rock', evidence: revision, manifestAt: async () => committed }), /has no catalogue record/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
