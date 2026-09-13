@@ -420,88 +420,6 @@
       }
     },
     {
-      "id": "cassini-n1513999046",
-      "path": "observations/N1513999046_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "13b6d5694f2e9024f220e7564d5cb5ae8227047fa7a1659b62b7655769f97183",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1513999046",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "consumers": [
-        "cassini-frames"
-      ],
-      "width": 1024,
-      "height": 1024,
-      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "missionId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2017-data-1513745034-1514010212-n1513999046-1-calib",
-            "role": "material",
-            "evidence": "src/planets/hyperion/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
-          }
-        ]
-      }
-    },
-    {
-      "id": "cassini-n1513999046-label",
-      "path": "observations/N1513999046_1_CALIB.LBL",
-      "expectedBytes": 3824,
-      "expectedSha256": "43892adf0226af67675dfcfccc6550e912520507d76cae00bc29c5f5a1b935a2",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1513999046",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/access.html"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
-      "redistribution": "Retain mission and archive credits.",
-      "consumers": [
-        "cassini-frames"
-      ],
-      "width": 1024,
-      "height": 1024,
-      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "missionId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.LBL"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2017-data-1513745034-1514010212-n1513999046-1-calib",
-            "role": "material",
-            "evidence": "src/planets/hyperion/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
-          }
-        ]
-      }
-    },
-    {
       "id": "cassini-n1530182624",
       "path": "observations/N1530182624_1_CALIB.IMG",
       "expectedBytes": 4202496,
@@ -2483,7 +2401,6 @@
           "cassini-n1506388518",
           "cassini-n1506388840",
           "cassini-n1506389178",
-          "cassini-n1513999046",
           "cassini-n1530182624",
           "cassini-n1530201013",
           "cassini-n1692997492",

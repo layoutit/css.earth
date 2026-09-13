@@ -2,89 +2,6 @@
   "schema": "cssamalthea-authoritative-sources@2",
   "inputs": [
     {
-      "id": "c0368603500",
-      "path": "observations/C0368603500R.IMG",
-      "expectedBytes": 831488,
-      "expectedSha256": "0c2786700d45f25d74828a2a274ffc1e8b2cd9fdaf049e5c461e44800b7d48ee",
-      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368603500",
-      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/galileo/ssi/"
-      ],
-      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
-      "redistribution": "Retain NASA/JPL and PDS credits.",
-      "consumers": [
-        "galileo-frames"
-      ],
-      "width": 800,
-      "height": 800,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "geometry/registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "missionId": "galileo",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0017-c3-sml-sats-c0368603500r",
-            "role": "material",
-            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
-      "id": "c0368603500-label",
-      "path": "observations/C0368603500R.LBL",
-      "expectedBytes": 4754,
-      "expectedSha256": "498fc2ee6c38eca35f33051a78f5e4b5ae082914e7dd8deee57f643259f02296",
-      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368603500",
-      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/galileo/ssi/"
-      ],
-      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
-      "redistribution": "Retain NASA/JPL and PDS credits.",
-      "consumers": [
-        "galileo-frames"
-      ],
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "missionId": "galileo",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0017-c3-sml-sats-c0368603500r",
-            "role": "material",
-            "evidence": "src/planets/amalthea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      }
-    },
-    {
       "id": "c0420626379",
       "path": "observations/C0420626379R.IMG",
       "expectedBytes": 831488,
@@ -599,7 +516,6 @@
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
-          "c0368603500",
           "c0420626379",
           "c0420652501",
           "c0512324200",
@@ -627,11 +543,6 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
       }
-    },
-    {
-      "path": "geometry/c0368603500-opus.json",
-      "expectedBytes": 11797,
-      "expectedSha256": "11558603ad40acad346d3316c5183ea94da07d349bd293b6cd1fff0341dfb651"
     },
     {
       "path": "geometry/c0420626379-opus.json",

@@ -53,6 +53,8 @@ Surface/pole atlases, native triangle maps, shared flood/directional lighting, t
 
 - [Galileo SSI archive](https://pds-rings.seti.org/galileo/ssi/) and the [2026 mission review](https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf): surveyed all available Amalthea SSI entries; selected useful complementary aspects and best resolved clear frame. Repeated versions/nearby frames duplicate coverage. Several December 1996 frames contain sparse corrupted blocks and were excluded.
 
+- `C0368603500` (November 1996, 8.3 km per pixel): excluded from Monochrome. Amalthea is a 156-pixel lit crescent in it. Its only overlap, with the green-filter frame, gives a level that disagrees with the lit brightness of the four other frames by two to four times; the likely cause, not verified, is the crescent's blur across so few pixels. Without it, the four frames agree and cover 71% of the surface instead of 77%.
+
 - September 1996 green/violet/756nm and November 1996 multi-band sequences: original detector frames inspected. The body is only tens of pixels across, with different gains/exposures, noisy background and no qualified registered/radiometrically normalized multiband product. They remain possible future Enhanced color work; raw channel stacking would misstate the color. No artificial red tint is painted onto the monochrome map.
 
 - [NASA PIA01626 color comparison](https://www.jpl.nasa.gov/images/pia01626-comparison-of-amalthea-to-io/): useful color reference; display composite, without sufficient camera-band calibration/registration provenance for this mapped lens.

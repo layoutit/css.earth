@@ -749,89 +749,6 @@
       }
     },
     {
-      "id": "n1860792100_1",
-      "path": "observations/N1860792100_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "5cd1e348c48336f7444e1d10eafe69e9eae173c05b0fbae414fe53a981b082c4",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2109/data/1860788796_1860996096/N1860792100_1_CALIB.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1860792100",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated product.",
-      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
-      "consumers": [
-        "cassini-frames"
-      ],
-      "width": 1024,
-      "height": 1024,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "shape/pandora_document.pdf",
-        "longitudeDirection": "west-positive"
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "missionId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2109/data/1860788796_1860996096/N1860792100_1_CALIB.IMG"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2109-data-1860788796-1860996096-n1860792100-1-calib",
-            "role": "material",
-            "evidence": "src/planets/pandora/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
-          }
-        ]
-      }
-    },
-    {
-      "id": "n1860792100_1-label",
-      "path": "observations/N1860792100_1_CALIB.LBL",
-      "expectedBytes": 3842,
-      "expectedSha256": "0731b37a712052ae18146419e3e58dfbc427124d77083a757351af5911ba48ed",
-      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2109/data/1860788796_1860996096/N1860792100_1_CALIB.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1860792100",
-      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS. Retain mission and calibration credits.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/cassini/iss/"
-      ],
-      "acquisition": "Download the pinned CISSCAL calibrated product.",
-      "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
-      "consumers": [
-        "cassini-frames"
-      ],
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "cassini",
-            "missionId": "cassini",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2109/data/1860788796_1860996096/N1860792100_1_CALIB.LBL"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2109-data-1860788796-1860996096-n1860792100-1-calib",
-            "role": "material",
-            "evidence": "src/planets/pandora/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
-          }
-        ]
-      }
-    },
-    {
       "id": "n1860792666_1",
       "path": "observations/N1860792666_1_CALIB.IMG",
       "expectedBytes": 4202496,
@@ -1291,7 +1208,6 @@
           "n1860788161_1",
           "n1860788917_1",
           "n1860790502_1",
-          "n1860792100_1",
           "n1860792666_1",
           "thomas-2018-shape"
         ],
