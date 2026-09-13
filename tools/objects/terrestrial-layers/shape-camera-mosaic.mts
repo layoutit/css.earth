@@ -2,7 +2,7 @@ import { diskGain as diskFunctionGain, NORMAL_GEOMETRY } from '../../photometry/
 import type { SourceManifest } from '../../../src/platform/source-manifest.mts';
 import { resolvePublishedPhotometry, validPublishedPhotometryShape, type ResolvedPhotometry } from './published-photometry.mts';
 import type { SourceMesh } from './contracts.mts';
-import { parseControlledCamera, parseCameraFrame, parseCameraShape, parseRadialTableProfile, parseCameraMosaic, parseCameraColor } from './source-records.mts';
+import { parseControlledCamera, parseCameraFrame, parseCameraShape, parseCameraMosaic, parseCameraColor } from './source-records.mts';
 type Vector = readonly number[] | Float32Array | Float64Array;
 export interface CameraImage {data:Float32Array | Float64Array; width:number; height:number; offset?:number; encoding?:string; allowZero?:boolean; sampleFormat?:string;
  missing?:Uint8Array;allowFiniteSigned?:boolean;quality?:{records:number;badBlockPixels:number;saturatedPixels:number;specialPixels:number;withheldPixels:number}}
@@ -10,8 +10,8 @@ type CameraFrame = ReturnType<typeof parseCameraFrame>;
 interface CameraEntry {expectedSha256?:string;path:string;width?:number;height?:number}
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable,parsePdsRadiusTable} from './obj-shape.mts';
-import {parsePdsRadialTable} from './pds-radial-table.mts';
+import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.mts';
+import {loadPdsRadialTableMesh} from './pds-radial-table.mts';
 import {readFitsPrimary} from '../observation/fits.mts';
 import { bandColorDisplay, encodeBandColor, bandColorEvidence } from '../color-transfer.mts';
 import { createHash } from 'node:crypto';
@@ -162,15 +162,7 @@ function smoothNormals(mesh: SourceMesh){
  * grid before changing column order; this does not change the display mesh. */
 export async function loadCameraShape(sourceDirectory: string, source: unknown){
   const shape = parseCameraShape(source);
-  if(shape.format==='pds-radial-table'){
-    const text=await readFile(resolve(sourceDirectory,shape.path),'utf8'),grid=parsePdsRadialTable(text,shape.grid);
-    const profile = parseRadialTableProfile(shape.grid);
-    const step=profile.latitudeStepDegrees,columns=profile.columns??['latitude','longitude','radius'];
-    if(step!==profile.longitudeStepDegrees)throw new Error('Camera source mesh requires equal angular steps.');
-    const reordered=text.trim().split(/\r?\n/).map(line=>{const row=line.trim().split(/\s+/);return ['longitude','latitude','radius'].map(name=>row[columns.indexOf(name)]).join(' ');}).join('\n');
-    return parsePdsRadiusTable(reordered,{stepDegrees:step,longitudeDirection:profile.longitudeDirection+'-positive',metersPerUnit:profile.metersPerUnit,
-      expectedVertices:(grid.width-1)*(grid.height-2)+2,expectedFaces:2*(grid.width-1)*(grid.height-2)});
-  }
+  if(shape.format==='pds-radial-table')return loadPdsRadialTableMesh(resolve(sourceDirectory,shape.path),shape.grid);
   const load=shape.format==='stl'?loadStlShape:shape.format==='pds-radius-table'?loadPdsRadiusTable:shape.format==='pds-plate-model'?loadPdsPlateShape:shape.format==='pds-vertex-facet'?loadPdsVertexFacetShape:loadObjShape;
   return load(resolve(sourceDirectory,shape.path),shape.grid);
 }
