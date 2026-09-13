@@ -4,7 +4,6 @@
   "id": "mentor",
   "displayName": "Mentor",
   "panel": {
-    "introduction": "Jupiter Trojan in the L5 trailing cloud. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 126.288 km effective diameter (fit ±1.642 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
-        "title": "Mentor · DAMIT 4281 convex shape",
         "thumbnail": "/scenes/mentor/mentor-shape-thumbnail.webp",
         "surface": "mentor-shape-surface@2x.webp",
         "poles": "mentor-shape-surface@2x.webp",
@@ -78,13 +75,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "DAMIT model"
+        "notes": "Convex light-curve reconstruction with approximate thermal size: 126.288 km effective diameter (fit ±1.642 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 63.144 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Mentor · source-model radial height",
         "thumbnail": "/scenes/mentor/mentor-elevation-thumbnail.webp",
         "surface": "mentor-elevation-surface@2x.webp",
         "poles": "mentor-elevation-surface@2x.webp",
@@ -106,7 +102,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4281",
           "image": "/scenes/mentor/mentor-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 63.144 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

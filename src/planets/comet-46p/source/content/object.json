@@ -4,7 +4,6 @@
   "id": "comet-46p",
   "displayName": "Wirtanen",
   "panel": {
-    "introduction": "Wirtanen was Rosetta’s planned destination before a launch delay changed the mission’s target to 67P. Its small nucleus returns to the inner Solar System roughly every five years.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "46P/Wirtanen",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-46p/comet-46p-model-thumbnail.webp",
         "surface": "comet-46p-model-surface@2x.webp",
         "poles": "comet-46p-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "1.06 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

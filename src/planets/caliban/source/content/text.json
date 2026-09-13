@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "caliban",
+  "card": {
+    "text": "Explore Caliban, a moon of Uranus, through its lightcurve-constrained shape approximation.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://arxiv.org/pdf/1706.06837",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Caliban is an outer moon of Uranus. Its light curve constrains a minimum elongation, while a tentative thermal measurement sets the adopted size. This is an illustrative ellipsoid with assumed depth and orientation. The grid marks unmapped terrain.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://arxiv.org/pdf/1706.06837",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Light-curve shape approximation",
+      "detail": "Approximate shape",
+      "summary": "Approximate minimum-elongation ellipsoid from the K 2 light curve. The tentative thermal diameter is 42 (+20/−12)km. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain."
+    }
+  }
+}

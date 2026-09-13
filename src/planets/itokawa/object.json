@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "5af2f58a0a88e6663c7065984e8f9f8e1327d06a4949f031ceaabe5c9b048383"
+    "sha256": "d851ec6a604ac1082fd997b472c39441d73235d84104ed5e9898b46a92c9a683"
   },
   "id": "itokawa",
   "properties": {
@@ -67,7 +67,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "2e8fb3414b446234b87f4255bff80b19bdd473806e1037d35e9dc547b1ad2275"
+          "sha256": "a47d5e857e066ca69a53f889711cdc100a0607d960a0b98f93593c5a2b0c5010"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "a1ec0d52bb496e4704ee3f1a743d20f06992013bbcba68287e422bb11acc593b"
         },
         {
           "id": "title",
@@ -128,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9f5156b45be07afd10db42cc5f9f802d548ab7ad07fca0fbebd675cac7bd07df"
+        "sha256": "e6f5269ec1898d8c2bca98d340b88da43adc248c2377ec6f7911acc9b1a15352"
       }
     },
     "catalog": {

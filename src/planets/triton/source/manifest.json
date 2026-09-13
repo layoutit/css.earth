@@ -477,8 +477,8 @@
     {
       "id": "triton-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7856,
-      "expectedSha256": "2dea5b396bb43746389ae3169fb9d7ca4ae87b9e44704441719648bdb1dae773",
+      "expectedBytes": 7219,
+      "expectedSha256": "c24aae7747e4e49814c69fe6d0554a68124b8b49b1551474de68500ea4e21469",
       "origin": "Repository-authored Triton object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -490,7 +490,26 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "triton-object-text",
+      "path": "content/text.json",
+      "expectedBytes": 1344,
+      "expectedSha256": "19fc1e0a279de3dd511035a9ecd07e1ce0a91407ae4082c5c3d4aadbb3d2f0c5",
+      "origin": "Repository-authored Triton reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     }
   ],

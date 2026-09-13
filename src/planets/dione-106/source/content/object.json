@@ -4,7 +4,6 @@
   "id": "dione-106",
   "displayName": "106 Dione",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 153.42 km effective diameter (catalog ±2.38 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "DAMIT 5942 shape model",
         "thumbnail": "/scenes/dione-106/dione-106-shape-thumbnail.webp",
         "surface": "dione-106-shape-surface@2x.webp",
         "poles": "dione-106-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 76.71 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "DAMIT 5942 radial height",
         "thumbnail": "/scenes/dione-106/dione-106-elevation-thumbnail.webp",
         "surface": "dione-106-elevation-surface@2x.webp",
         "poles": "dione-106-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5942",
           "image": "/scenes/dione-106/dione-106-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 76.71 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

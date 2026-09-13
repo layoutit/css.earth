@@ -773,8 +773,8 @@
     {
       "id": "saturn-authored-content",
       "path": "content/object.json",
-      "expectedBytes": 19083,
-      "expectedSha256": "e6227563c894bd830f1825779a3295d1056b29c8bfb9c2bd324773177c3bf4fd",
+      "expectedBytes": 17805,
+      "expectedSha256": "d7102e88052d1dedf97d58e635bee339c917f10ee1925bf929261c8798f126f4",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -785,7 +785,25 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "saturn-authored-text",
+      "path": "content/text.json",
+      "expectedBytes": 2055,
+      "expectedSha256": "1a71beb51f0ae190254e92949f293b1cd02bb5475ae09a9e0d74a826f9bca76d",
+      "origin": "Repository-authored Saturn reader text",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "content"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     },
     {

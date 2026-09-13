@@ -4,7 +4,6 @@
   "id": "asterope",
   "displayName": "Asterope",
   "panel": {
-    "introduction": "Nonconvex ADAM reconstruction constrained by adaptive optics and occultation. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Nonconvex ADAM reconstruction constrained by adaptive optics and occultation; 107 km volume-equivalent diameter (±3 km). The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "DAMIT 1823 shape model",
         "thumbnail": "/scenes/asterope/asterope-shape-thumbnail.webp",
         "surface": "asterope-shape-surface@2x.webp",
         "poles": "asterope-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 53.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "DAMIT 1823 radial height",
         "thumbnail": "/scenes/asterope/asterope-elevation-thumbnail.webp",
         "surface": "asterope-elevation-surface@2x.webp",
         "poles": "asterope-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1823",
           "image": "/scenes/asterope/asterope-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 53.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

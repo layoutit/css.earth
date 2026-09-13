@@ -387,8 +387,8 @@
     {
       "id": "umbriel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7897,
-      "expectedSha256": "f5fd068fb26185a5962ccdd66d47f5d690068e13e67ee53563113e66ea3a2801",
+      "expectedBytes": 7536,
+      "expectedSha256": "8514d2b7599f63288f07ad7e4f5f587defa282096886b9e74ee4f414c2eef18c",
       "origin": "Repository-authored Umbriel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -400,7 +400,26 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "umbriel-object-text",
+      "path": "content/text.json",
+      "expectedBytes": 1099,
+      "expectedSha256": "0d827ecbb7746392a80a895fa75b618169bbbad27468863aaffb60ed347d1571",
+      "origin": "Repository-authored Umbriel reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     }
   ],

@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Io is Jupiter’s volcanic moon. Tidal heating drives hundreds of volcanoes, continually renewing its sulfur-rich surface.",
     "facts": [
       {
         "id": "radius",
@@ -109,8 +108,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "USGS Voyager/Galileo mosaic on a 1 km grid; original detail varies from about 1 to 10 km per pixel. Gray grid marks documented no-data and its resampled boundary. Photographed terrain shading remains; globe lighting is approximate.",
-        "title": "Global image mosaic",
         "thumbnail": "io-lens-normal.webp",
         "surface": "io-normal.webp",
         "poles": "io-poles-normal.webp",
@@ -118,14 +115,12 @@
           "id": "usgs-normal-global-1km",
           "path": "../manifest.json"
         },
-        "detail": "Global mosaic",
-        "summary": "Source detail ranges from 1 to 10 km per pixel. Photographed shadows remain; the gray grid marks missing imagery."
+        "notes": "USGS Voyager/Galileo mosaic on a 1 km grid; original detail varies from about 1 to 10 km per pixel. Gray grid marks documented no-data and its resampled boundary. Photographed terrain shading remains; globe lighting is approximate.",
+        "noData": true
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "USGS enhanced-color mosaic: near-infrared, green and violet color ratios combined with observed monochrome detail. USGS corrected broad limb darkening and matched image seams. Source color detail varies from 1.3 to 21 km per pixel. Interpolated polar color is withheld; observed monochrome remains where available. Gray grid marks missing imagery. Acquisition shading, seams and changes between mission dates can remain; globe lighting is approximate.",
-        "title": "False-color mosaic",
         "thumbnail": "io-lens-enhanced.webp",
         "surface": "io-enhanced.webp",
         "poles": "io-poles-enhanced.webp",
@@ -133,15 +128,12 @@
           "id": "usgs-enhanced-global-1km",
           "path": "../manifest.json"
         },
-        "detail": "Color mosaic",
-        "summary": "Infrared, green and violet ratios add color to monochrome detail. Interpolated polar color is withheld from this view."
+        "notes": "USGS enhanced-color mosaic: near-infrared, green and violet color ratios combined with observed monochrome detail. USGS corrected broad limb darkening and matched image seams. Source color detail varies from 1.3 to 21 km per pixel. Interpolated polar color is withheld; observed monochrome remains where available. Gray grid marks missing imagery. Acquisition shading, seams and changes between mission dates can remain; globe lighting is approximate.",
+        "noData": true
       },
       {
         "id": "geology",
         "label": "Geology",
-        "detail": "Interpreted units",
-        "description": "Fourteen base geologic units mapped from Voyager and Galileo observations. Colors distinguish interpreted plains, lava flows, patera floors and mountains. The separate diffuse-deposit overlay and structural linework are not shown. Gray grid marks unmapped or conflicting polygons; this view adds no measured relief.",
-        "title": "Global geologic map",
         "thumbnail": "io-lens-geology.webp",
         "surface": "io-geology.webp",
         "poles": "io-poles-geology.webp",
@@ -250,14 +242,13 @@
               "color": "#649c76"
             }
           ]
-        }
+        },
+        "notes": "Fourteen base geologic units mapped from Voyager and Galileo observations. Colors distinguish interpreted plains, lava flows, patera floors and mountains. The separate diffuse-deposit overlay and structural linework are not shown. Gray grid marks unmapped or conflicting polygons; this view adds no measured relief.",
+        "noData": true
       },
       {
         "id": "spectral-slope",
         "label": "Spectral slope",
-        "description": "Slope from 477.5 to 495 nm, normalized at 495 nm, in published VLT/MUSE observations from July 2019. Sulfur materials affect this slope; it is not sulfur-dioxide abundance. Native two-degree samples remain visible. Nights retain differences and seams; gray grid marks missing or conservatively withheld edges. Absolute subpixel registration is unresolved.",
-        "title": "Sulfur-sensitive visible spectral slope",
-        "summary": "Sulfur-sensitive slope from 2° samples with approximate registration. Gray grid marks missing or withheld data; joins between nights remain. Values do not measure sulfur abundance.",
         "thumbnail": "io-lens-spectral-slope.webp",
         "surface": "io-spectral-slope.webp",
         "poles": "io-poles-spectral-slope.webp",
@@ -266,7 +257,6 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.5281/zenodo.11402374"
         },
-        "detail": "2019 MUSE",
         "falseColor": true,
         "legend": {
           "kind": "scale",
@@ -307,14 +297,13 @@
               "6.6"
             ]
           }
-        }
+        },
+        "notes": "Slope from 477.5 to 495 nm, normalized at 495 nm, in published VLT/MUSE observations from July 2019. Sulfur materials affect this slope; it is not sulfur-dioxide abundance. Native two-degree samples remain visible. Nights retain differences and seams; gray grid marks missing or conservatively withheld edges. Absolute subpixel registration is unresolved.",
+        "noData": true
       },
       {
         "id": "visible-absorption",
         "label": "Visible absorption",
-        "description": "Published mean absorption around 560 nm after continuum removal. The 578–605 nm instrument gap is omitted. Sulfur-bearing materials can contribute, but the absorbing species is not uniquely identified. July 2019 observing nights retain seams and residual differences. Native two-degree samples, missing areas and withheld edges remain; this is not abundance.",
-        "title": "Continuum-relative visible absorption",
-        "summary": "A broad 520–660 nm absorption feature with uncertain chemical attribution. These 2° samples have approximate registration. Gray grid marks missing or withheld data; joins between nights remain.",
         "thumbnail": "io-lens-visible-absorption.webp",
         "surface": "io-visible-absorption.webp",
         "poles": "io-poles-visible-absorption.webp",
@@ -323,7 +312,6 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.5281/zenodo.11402374"
         },
-        "detail": "2019 MUSE",
         "falseColor": true,
         "legend": {
           "kind": "scale",
@@ -364,7 +352,9 @@
               "0.060"
             ]
           }
-        }
+        },
+        "notes": "Published mean absorption around 560 nm after continuum removal. The 578–605 nm instrument gap is omitted. Sulfur-bearing materials can contribute, but the absorbing species is not uniquely identified. July 2019 observing nights retain seams and residual differences. Native two-degree samples, missing areas and withheld edges remain; this is not abundance.",
+        "noData": true
       }
     ],
     "labels": {

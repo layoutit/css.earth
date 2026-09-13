@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "cerberus",
+  "card": {
+    "text": "Explore Cerberus, a near-Earth asteroid, through its published shape model.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/456",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/456",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Cerberus · DAMIT shape model 456",
+      "detail": "Published shape · grid marks missing imagery",
+      "summary": "Convex lightcurve model at an uncertain 1.2 km archive scale. The published thermal fit is poor and its size uncertainty is unconstrained. Grid marks unavailable imagery."
+    },
+    "elevation": {
+      "title": "Cerberus · radius relative to the 0.6 km reference sphere",
+      "detail": "Shape-derived radial height",
+      "summary": "Radius on the shape model minus a 0.6 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+    }
+  }
+}

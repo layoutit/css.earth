@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "daphnis",
+  "card": {
+    "text": "Explore Daphnis in 3D with Cassini imagery and its measured irregular shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/daphnis/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Daphnis travels inside the Keeler Gap in Saturn’s A ring. This tiny moon raises waves along the gap’s edges, while Cassini’s close views reveal ridges and a coating of fine material. The displayed 2026 orbit extrapolates a 2005–2018 fit; Horizons has no ephemeris at this date. Its orientation uses an arbitrary display phase, not a measured attitude.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/daphnis/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "ISS mosaic",
+      "detail": "Cassini · corrected mosaic",
+      "summary": "Green-filter detail is combined with clear-filter images. Brightness matching reduces shading; the gray grid marks gaps."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Cassini shape · radial height",
+      "summary": "Height relative to a 3.8 km sphere, from the Cassini shape model. Small craters are unresolved."
+    }
+  }
+}

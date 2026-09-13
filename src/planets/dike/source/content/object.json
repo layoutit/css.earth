@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Published lightcurve reconstruction, scaled using a thermophysical size estimate. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -69,8 +68,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Thermophysical volume-equivalent diameter 66.5 ± 0.9 km. The displayed pole differs by 1° from the fitted model family; rotational phase is illustrative.",
-        "title": "Light-curve shape model",
         "thumbnail": "/scenes/dike/dike-shape-thumbnail.webp",
         "surface": "dike-shape-surface@2x.webp",
         "poles": "dike-shape-surface@2x.webp",
@@ -79,13 +76,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "notes": "Thermophysical volume-equivalent diameter 66.5 ± 0.9 km. The displayed pole differs by 1° from the fitted model family; rotational phase is illustrative.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 33.25 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Shape-derived elevations",
         "thumbnail": "/scenes/dike/dike-elevation-thumbnail.webp",
         "surface": "dike-elevation-surface@2x.webp",
         "poles": "dike-elevation-surface@2x.webp",
@@ -107,7 +103,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1144",
           "image": "/scenes/dike/dike-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 33.25 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

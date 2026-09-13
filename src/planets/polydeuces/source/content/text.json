@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "polydeuces",
+  "card": {
+    "text": "Explore Polydeuces, a small moon of Saturn, through its measured shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/polydeuces/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Polydeuces shares Dione’s orbit around Saturn, wandering around its trailing Lagrange region. Cassini measured this small moon’s elongated outline.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/polydeuces/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "ISS CL1/IR1 image",
+      "detail": "Near infrared · coarse coverage",
+      "summary": "Only about 9 × 7 source pixels resolve the moon. Brightness is approximate; the gray grid marks unobserved surface."
+    }
+  }
+}

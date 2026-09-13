@@ -8,9 +8,12 @@ import { SCIENTIFIC_CHART_TITLES } from "../../../site/scientific-chart-titles.m
 import { createPreparedTitleLayout } from "../../../src/platform/prepared-title.mts";
 import { prepareLenses } from "./lenses";
 import { parseFactsheet, verifyFactsheetSources } from '../../factsheet-sources.mts';
+import { describeTextViolations, reviewObjectText } from '../../object-text-sources.mts';
+import type { ObjectText } from '../../../site/object-text.mts';
 import type {
   ContentPreparationContext,
   ObjectContentSource,
+  PreparedDatasetTexts,
   PreparedObjectContent,
   PreparedObjectContentAssets,
   PreparedObjectContentDocument,
@@ -42,8 +45,25 @@ function requiredChartTitle(key: string) {
   return title;
 }
 
+/** Dataset prose is published once, beside the introduction; controls and the scene transport carry none. */
+function prepareDatasetTexts(source: ObjectContentSource, text: ObjectText): PreparedDatasetTexts {
+  if (text.objectId !== source.id) throw new Error(`${source.id}: reader text belongs to ${text.objectId}`);
+  const unknown = Object.keys(text.datasets).filter(id => !source.lenses.controls.some(control => control.id === id));
+  if (unknown.length) throw new Error(`${source.id}: reader text names unknown datasets: ${unknown.join(", ")}`);
+  return Object.freeze(Object.fromEntries(source.lenses.controls.map(control => {
+    const dataset = text.datasets[control.id];
+    if (!dataset) throw new Error(`${source.id}/${control.id}: dataset has no reader text`);
+    return [control.id, Object.freeze({
+      title: dataset.title,
+      ...(dataset.detail === undefined ? {} : { detail: dataset.detail }),
+      summary: dataset.summary,
+    })];
+  })));
+}
+
 export function prepareObjectContent(
   source: ObjectContentSource,
+  text: ObjectText,
   assets: PreparedRasterAssets = {},
 ): PreparedObjectContent {
   if (source.schema !== "cssearth-object-content@1" || source.version !== 1) {
@@ -63,7 +83,8 @@ export function prepareObjectContent(
   return {
     objectId: source.id,
     title,
-    introduction: source.panel.introduction,
+    introduction: text.introduction.text,
+    datasets: prepareDatasetTexts(source, text),
     facts,
     moreFacts,
     lenses: prepareLenses(source.id, {
@@ -100,7 +121,16 @@ export async function prepareObjectContentAssets({
   }
   const sourcePath = resolve(sourceDirectory, config.contentPath ?? "content/object.json");
   const source = JSON.parse(await readFile(sourcePath, "utf8")) as ObjectContentSource;
-  await verifyFactsheetSources(source.panel, { objectDirectory: resolve(sourceDirectory, '..') });
+  const objectDirectory = resolve(sourceDirectory, '..');
+  await verifyFactsheetSources(source.panel, { objectDirectory });
+  const review = await reviewObjectText(JSON.parse(await readFile(resolve(sourceDirectory, config.textPath ?? "content/text.json"), "utf8")), {
+    objectId: source.id, name: source.displayName, content: source,
+    manifest: JSON.parse(await readFile(resolve(sourceDirectory, "manifest.json"), "utf8")),
+    read: path => readFile(resolve(objectDirectory, path)),
+  });
+  if (review.violations.length) {
+    throw new Error(`${source.id}: reader text breaks the text contract:\n${describeTextViolations(review.violations)}`);
+  }
   const titleSourcePath = source.provenance.title?.path;
   let preparedSource = source;
   if (titleSourcePath?.endsWith(".json")) {
@@ -133,7 +163,7 @@ export async function prepareObjectContentAssets({
       gallery?: { items: GalleryRecipe["items"]; qualification?: string };
     };
   }
-  const prepared = prepareObjectContent(preparedSource, assets);
+  const prepared = prepareObjectContent(preparedSource, review.text, assets);
   const lenses = await deriveLensBillboardColors(prepared.lenses, publicDirectory);
   const preparedWithAssets = { ...prepared, lenses };
   const content: PreparedObjectContentDocument = {
@@ -141,6 +171,7 @@ export async function prepareObjectContentAssets({
     objectId: preparedWithAssets.objectId,
     title: preparedWithAssets.title,
     introduction: preparedWithAssets.introduction,
+    datasets: preparedWithAssets.datasets,
     facts: preparedWithAssets.facts,
     moreFacts: preparedWithAssets.moreFacts,
     charts: preparedWithAssets.charts,
@@ -161,17 +192,14 @@ export async function prepareObjectContentAssets({
   const shellLenses = {
     title: preparedWithAssets.lenses.title,
     defaultLens: preparedWithAssets.lenses.defaultLens,
-    controls: preparedWithAssets.lenses.controls.map(({ id, label, detail, thumbnailUrl, description, summary, facts, legend, legendNote, title }) => ({
+    controls: preparedWithAssets.lenses.controls.map(({ id, label, thumbnailUrl, noData, facts, legend, legendNote }) => ({
       id,
       label,
-      ...(detail ? { detail } : {}),
       thumbnailUrl,
-      description,
-      ...(summary ? { summary } : {}),
+      ...(noData === true ? { noData } : {}),
       ...(facts?.length ? { facts } : {}),
       ...(legend ? { legend } : {}),
       ...(legendNote ? { legendNote } : {}),
-      title,
     })),
   };
   const controls = {

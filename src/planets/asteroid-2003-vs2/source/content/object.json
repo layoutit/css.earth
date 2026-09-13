@@ -4,7 +4,6 @@
   "id": "asteroid-2003-vs2",
   "displayName": "2003 VS2",
   "panel": {
-    "introduction": "2003 VS2 is an elongated world beyond Neptune. A multi-site occultation and rotational brightness measurements support this smooth triaxial shape.",
     "facts": [
       {
         "id": "shape",
@@ -45,9 +44,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain. Uses the published model-derived ecliptic pole (longitude 228°, latitude 39°), converted using J2000 mean obliquity 23.439291111°; J2000 is assumed because the paper does not specify equinox. The 59°/121° aspect ambiguity and unquoted pole uncertainty remain; prime meridian and rotational phase are arbitrary. The grid marks unmapped terrain.",
-        "title": "Occultation and light-curve shape",
-        "detail": "Inferred shape · unmapped surface grid",
         "thumbnail": "/scenes/asteroid-2003-vs2/asteroid-2003-vs2-model-thumbnail.webp",
         "surface": "asteroid-2003-vs2-model-surface@2x.webp",
         "poles": "asteroid-2003-vs2-model-poles@2x.webp",
@@ -55,7 +51,9 @@
           "id": "published-shape",
           "path": "../manifest.json",
           "url": "https://doi.org/10.1051/0004-6361/202141842"
-        }
+        },
+        "notes": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain. Uses the published model-derived ecliptic pole (longitude 228°, latitude 39°), converted using J2000 mean obliquity 23.439291111°; J2000 is assumed because the paper does not specify equinox. The 59°/121° aspect ambiguity and unquoted pole uncertainty remain; prime meridian and rotational phase are arbitrary. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

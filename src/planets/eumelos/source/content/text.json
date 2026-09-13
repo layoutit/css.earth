@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "eumelos",
+  "card": {
+    "text": "Explore Eumelos in 3D with its published shape model and radial elevation.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3920",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Jupiter Trojan in the L4 leading cloud. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3920",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Eumelos · DAMIT 3920 convex shape",
+      "detail": "DAMIT model",
+      "summary": "Convex light-curve reconstruction with approximate thermal size: 37.696 km effective diameter (fit ±0.329 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery."
+    },
+    "elevation": {
+      "title": "Eumelos · source-model radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Radius on the shape model minus a 18.848 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+    }
+  }
+}

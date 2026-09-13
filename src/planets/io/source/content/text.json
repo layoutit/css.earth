@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "io",
+  "card": {
+    "text": "Explore Io in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s volcanic moon and its orbit around Jupiter.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/jupiter/jupiter-moons/io/facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Io is Jupiter’s volcanic moon. Tidal heating drives hundreds of volcanoes, continually renewing its sulfur-rich surface.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/jupiter/jupiter-moons/io/facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "Global image mosaic",
+      "detail": "Global mosaic",
+      "summary": "Source detail ranges from 1 to 10 km per pixel. Photographed shadows remain; the gray grid marks missing imagery."
+    },
+    "enhanced": {
+      "title": "False-color mosaic",
+      "detail": "Color mosaic",
+      "summary": "Infrared, green and violet ratios add color to monochrome detail. Interpolated polar color is withheld from this view."
+    },
+    "geology": {
+      "title": "Global geologic map",
+      "detail": "Interpreted units",
+      "summary": "Fourteen base geologic units mapped from Voyager and Galileo observations. Colors distinguish interpreted plains, lava flows, patera floors and mountains. The separate diffuse-deposit overlay and structural linework are not shown. Gray grid marks unmapped or conflicting polygons; this view adds no measured relief."
+    },
+    "spectral-slope": {
+      "title": "Sulfur-sensitive visible spectral slope",
+      "detail": "2019 MUSE",
+      "summary": "Sulfur-sensitive slope from 2° samples with approximate registration. Gray grid marks missing or withheld data; joins between nights remain. Values do not measure sulfur abundance."
+    },
+    "visible-absorption": {
+      "title": "Continuum-relative visible absorption",
+      "detail": "2019 MUSE",
+      "summary": "A broad 520–660 nm absorption feature with uncertain chemical attribution. These 2° samples have approximate registration. Gray grid marks missing or withheld data; joins between nights remain."
+    }
+  }
+}

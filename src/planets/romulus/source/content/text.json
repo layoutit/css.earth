@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "romulus",
+  "card": {
+    "text": "Explore Romulus, a moon of Sylvia, through its explicitly approximate occultation shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Romulus is Sylvia’s outer moon. This approximation selects one published occultation-limb solution and assumes equal depth. A later reanalysis admits different correlated limb shapes, so this is not a unique measured figure. The grid marks unmapped terrain. The orbit follows a published model; its current phase is approximate.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Occultation shape approximation",
+      "detail": "Approximate shape",
+      "summary": "One published projected-limb solution, 23.1±0.7 km area-equivalent diameter and 2.7±0.3 axis ratio, with equal depth assumed. The 2020 reanalysis allows other correlated ellipse shapes. The grid marks unmapped terrain."
+    }
+  }
+}

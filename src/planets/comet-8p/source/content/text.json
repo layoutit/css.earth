@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comet-8p",
+  "card": {
+    "text": "Explore Tuttle's inferred contact-body model from Hubble and Spitzer observations.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://arxiv.org/abs/1911.04897",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Tuttle’s nucleus is thought to have two touching lobes. Hubble, Spitzer and Arecibo observations give different estimates of their shape and size.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://arxiv.org/abs/1911.04897",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Hubble-derived contact model scaled by Spitzer measurements.",
+      "detail": "Inferred shape",
+      "summary": "Two touching spheres fitted to Hubble and Spitzer observations. This shape fits the thermal measurements better. Surface detail is unknown; the rotation phase is illustrative."
+    },
+    "arecibo": {
+      "title": "Alternative contact-body model fitted to Arecibo radar observations.",
+      "detail": "Radar model",
+      "summary": "Two elongated lobes fitted to radar echoes. Their axes are aligned with the other model for comparison. Surface detail is unknown; the orientation is illustrative."
+    }
+  }
+}

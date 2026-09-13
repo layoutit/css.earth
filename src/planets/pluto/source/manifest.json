@@ -493,8 +493,8 @@
     {
       "id": "pluto-object-content",
       "path": "content/object.json",
-      "expectedSha256": "924a299604725b552468ce335eb075a2d15b99c94c30082f2329ded994c6f599",
-      "expectedBytes": 11761,
+      "expectedSha256": "288adc5834256004a78b31fe4dda6ceb93e814085512326891d046846fdab977",
+      "expectedBytes": 11007,
       "origin": "Repository-authored Pluto panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -506,7 +506,26 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "pluto-object-text",
+      "path": "content/text.json",
+      "expectedSha256": "a5d81da1495b8e6b11985a39f62875c0fc0f29fa38b7d3b0b929630cb8d2e0cd",
+      "expectedBytes": 1554,
+      "origin": "Repository-authored Pluto reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared shell content with source provenance.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     }
   ],

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "cordelia",
+  "card": {
+    "text": "Explore Cordelia, the inner shepherd of Uranus's epsilon ring.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/cordelia/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Cordelia travels just inside Uranus’s bright epsilon ring. Its gravity helps confine the ring’s inner edge, while Voyager observations constrain the moon’s elongated shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/cordelia/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Shape approximation",
+      "detail": "Measured shape",
+      "summary": "A 50 × 36 × 36 km shape estimate from Voyager. Two axes are assumed equal; gray grid: no surface imagery."
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "charon",
+  "card": {
+    "text": "Explore Charon with New Horizons imagery, deep canyons and measured elevation.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/charon/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Pluto’s largest moon is a world of deep canyons and broad icy plains. Charon and Pluto keep the same faces turned toward one another.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/charon/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "Monochrome mosaic",
+      "detail": "Corrected mosaic",
+      "summary": "Lighting is corrected, but local photographed shadows remain. Detail varies; the unobserved south is left unavailable."
+    },
+    "enhanced-color": {
+      "title": "MVIC enhanced-color mosaic",
+      "detail": "MVIC color bands",
+      "summary": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map."
+    },
+    "elevation": {
+      "title": "Stereo and shading terrain model",
+      "detail": "Shaded relief",
+      "summary": "Stereo and shading height relative to a 606 km sphere. Detail varies; the gray grid marks missing data."
+    },
+    "albedo": {
+      "title": "New Horizons modeled Bond albedo",
+      "detail": "Photometric model",
+      "summary": "New Horizons photometric model estimating the fraction of sunlight reflected by Charon. Derived from LORRI brightness and scattering assumptions, not a direct bolometric measurement. Gray grid marks missing source cells and uncovered southern latitudes. Colors span 0.1–0.5; values beyond those limits use endpoint colors."
+    }
+  }
+}

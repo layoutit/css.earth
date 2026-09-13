@@ -7,7 +7,6 @@
     "label": "Haumea"
   },
   "panel": {
-    "introduction": "Haumea is a rapidly rotating, elongated dwarf planet with a narrow ring. Its surface is shown using NASA’s illustrative model texture; no spacecraft has mapped it.",
     "facts": [
       {
         "id": "dimensions",
@@ -73,8 +72,6 @@
       {
         "id": "illustration",
         "label": "Illustrative model",
-        "description": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
-        "title": "Surface illustration",
         "qualification": "Illustration; not an observed surface map.",
         "thumbnail": "illustration-thumbnail.webp",
         "surface": "surface.webp",
@@ -84,7 +81,7 @@
           "path": "../manifest.json",
           "url": "https://science.nasa.gov/resource/haumea-3d-model/"
         },
-        "summary": "The depicted terrain is imagined, not photographed. The real surface is unresolved, and the displayed coordinates are arbitrary."
+        "notes": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
       }
     ]
   },

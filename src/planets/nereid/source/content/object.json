@@ -4,7 +4,6 @@
   "id": "nereid",
   "displayName": "Nereid",
   "panel": {
-    "introduction": "Nereid follows a highly elongated orbit around Neptune. This approximate ellipsoid comes from light-curve and thermal modelling; its shape and pole are not unique. The grid marks unmapped terrain.",
     "facts": [
       {
         "id": "radius",
@@ -50,9 +49,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Approximate ellipsoid from light-curve and thermal modelling (long/short ≈ 1.3), scaled to a 170 km mean radius. Shape and pole are not unique. The grid marks unmapped terrain.",
-        "title": "Light-curve shape approximation",
-        "detail": "Approximate ellipsoid",
         "thumbnail": "/scenes/nereid/nereid-model-thumbnail.webp",
         "surface": "nereid-model-surface@2x.webp",
         "poles": "nereid-model-poles@2x.webp",
@@ -60,7 +56,9 @@
           "id": "size-approximation",
           "path": "../manifest.json",
           "url": "https://doi.org/10.1093/mnras/stw081"
-        }
+        },
+        "notes": "Approximate ellipsoid from light-curve and thermal modelling (long/short ≈ 1.3), scaled to a 170 km mean radius. Shape and pole are not unique. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

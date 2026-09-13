@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comet-81p",
+  "card": {
+    "text": "Explore Wild 2's observed Stardust terrain, preserving its real coverage gaps.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/catalog/dataset.cat",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Stardust flew past Wild 2 in 2004 and returned samples of its dust to Earth. Its photographs reveal deep depressions, steep walls and ridges across the sunlit part of the nucleus.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/catalog/dataset.cat",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Nucleus shape reconstruction",
+      "detail": "PDS",
+      "summary": "Measured terrain covers about half the nucleus. The gray grid marks the fitted ellipsoid and joins used to complete the unseen side. Gray is a model material."
+    },
+    "navcam": {
+      "title": "NavCam mosaic",
+      "detail": "NAVCAM",
+      "summary": "Only the measured side is photographed. Original shadows and some seams remain; the gray grid marks gaps in the coverage."
+    }
+  }
+}

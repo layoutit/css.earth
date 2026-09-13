@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ida",
+  "card": {
+    "text": "Explore Ida in 3D with cssEarth using archived spacecraft imagery and source-backed shape data.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/solar-system/asteroids/243-ida/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Galileo’s 1993 flyby revealed Ida’s cratered surface and its tiny moon Dactyl.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/solar-system/asteroids/243-ida/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "SSI monochrome mosaic",
+      "detail": "Galileo SSI",
+      "summary": "Photographed shadows remain and detail varies across the mosaic. Brightness is not calibrated reflectance; the grid marks gaps."
+    },
+    "calibrated": {
+      "title": "Calibrated Galileo photographs",
+      "detail": "Galileo SSI",
+      "summary": "These two Galileo photographs show overlapping parts of Ida’s surface. Both were taken through a green filter. The original sunlight and shadows remain visible; the grid marks areas without usable photographs."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "PDS",
+      "summary": "Height relative to a 16 km sphere, from the shape model. Colors include Ida's broad form; the outline is simplified."
+    }
+  }
+}

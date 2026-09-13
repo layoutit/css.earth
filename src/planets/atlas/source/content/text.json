@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "atlas",
+  "card": {
+    "text": "Explore Atlas with Cassini imagery, mapped radial height and its measured irregular shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/atlas/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Atlas travels just outside Saturn’s A ring. Its rounded central body and wide equatorial ridge give it a striking saucer shape. Cassini’s closest flyby in 2017 revealed the ridge in detail.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/atlas/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "ISS mosaic",
+      "detail": "Cassini · corrected mosaic",
+      "summary": "Photographs are mapped onto the measured shape. Shadows and unreliable samples are withheld; the gray grid marks gaps."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Shaded relief",
+      "summary": "Height relative to a 15.1 km sphere, from the Cassini shape model. Accuracy varies by region."
+    }
+  }
+}

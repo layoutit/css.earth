@@ -4,7 +4,6 @@
   "id": "atalante",
   "displayName": "Atalante",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 110.54 km effective diameter (catalog ±1.57 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery.",
-        "title": "DAMIT shape model",
         "thumbnail": "/scenes/atalante/atalante-shape-thumbnail.webp",
         "surface": "atalante-shape-surface@2x.webp",
         "poles": "atalante-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 55.27 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Shape-derived elevations",
         "thumbnail": "/scenes/atalante/atalante-elevation-thumbnail.webp",
         "surface": "atalante-elevation-surface@2x.webp",
         "poles": "atalante-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/823",
           "image": "/scenes/atalante/atalante-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 55.27 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

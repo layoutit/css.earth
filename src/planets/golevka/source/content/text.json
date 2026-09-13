@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "golevka",
+  "card": {
+    "text": "Explore Golevka in 3D with its published radar shape model.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Golevka is a near-Earth asteroid whose radar reconstruction has angular faces, sharp edges and large concavities. Explore its original shape and radial heights. The grid marks unavailable surface imagery.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://echo.jpl.nasa.gov/asteroids/6489_Golevka/hudson.etal.2000.golevka.pdf",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Radar shape model",
+      "detail": "Published shape",
+      "summary": "Radar shape resolved at tens of metres. Its angular edges are modeled; no optical texture is mapped."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Radar height relative to a 265 m sphere. Colors include the overall form; pixels add no measured detail."
+    }
+  }
+}

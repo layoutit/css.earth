@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "nix",
+  "card": {
+    "text": "Explore Nix through the measured New Horizons shape model.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/nix/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Nix is a small moon orbiting the Pluto–Charon pair. New Horizons resolved its elongated shape and a reddish region around a large crater. The moon spins much faster than it circles the system; it keeps no single face turned toward Pluto.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/nix/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Porter shape reconstruction",
+      "detail": "New Horizons shape fit",
+      "summary": "A New Horizons shape fit. The released mesh lacks image registration; gray grid: no mapped imagery."
+    }
+  }
+}

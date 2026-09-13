@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "mercury",
+  "card": {
+    "text": "Explore Mercury in 3D with cssEarth. Inspect the smallest planet, its cratered surface, and the extreme conditions closest to the Sun.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/mercury/facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Closest to the Sun, Mercury is the smallest planet: a cratered terrestrial world with a large metallic core and extreme surface temperatures.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/mercury/facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "MDIS Global Basemap BDR",
+      "detail": "750 nm",
+      "summary": "Brightness at 750 nm varies with the surface and the lighting when each image was taken. The mosaic is grayscale."
+    },
+    "enhanced": {
+      "title": "MDIS Enhanced Color Mosaic",
+      "detail": "False color",
+      "summary": "Colors distinguish surface materials. Missing polar color is reconstructed from nearby imagery and terrain, not observed."
+    },
+    "topography": {
+      "title": "MDIS Color Shaded Relief",
+      "detail": "Shaded relief",
+      "summary": "Colors show elevation, while shading makes slopes visible. Both describe the terrain; they do not depict its visible color."
+    },
+    "interior": {
+      "title": "Interior structure model",
+      "detail": "Structure",
+      "summary": "A large metallic core sits inside a rocky outer shell. Layer sizes follow the structural model; colors identify each layer."
+    }
+  }
+}

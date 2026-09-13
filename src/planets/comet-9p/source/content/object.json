@@ -4,7 +4,6 @@
   "id": "comet-9p",
   "displayName": "Tempel 1",
   "panel": {
-    "introduction": "Deep Impact struck Tempel 1 in 2005; Stardust returned in 2011. Explore the two encounters separately, alongside the shape model built from both visits.",
     "facts": [
       {
         "id": "diameter",
@@ -37,9 +36,6 @@
       {
         "id": "constraints",
         "label": "Source constraints",
-        "description": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
-        "title": "Shape-constraint map",
-        "detail": "PDS",
         "thumbnail": "/scenes/comet-9p/comet-9p-constraints-thumbnail.webp",
         "surface": "comet-9p-constraints-surface@2x.webp",
         "poles": "comet-9p-constraints-poles@2x.webp",
@@ -59,14 +55,13 @@
             "label": "Blue",
             "value": "Limb outlines"
           }
-        ]
+        ],
+        "notes": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
+        "noData": true
       },
       {
         "id": "model",
         "label": "Shape model",
-        "description": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
-        "title": "Nucleus shape reconstruction",
-        "detail": "PDS",
         "thumbnail": "/scenes/comet-9p/comet-9p-model-thumbnail.webp",
         "surface": "comet-9p-model-surface@2x.webp",
         "poles": "comet-9p-model-poles@2x.webp",
@@ -86,14 +81,13 @@
             "label": "Shape observations",
             "value": "2005 and 2011"
           }
-        ]
+        ],
+        "notes": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
+        "noData": true
       },
       {
         "id": "deep-impact",
         "label": "Deep Impact · 2005",
-        "description": "Eight images follow Deep Impact’s approach in 2005. The closest views reveal finer ridges and depressions within the earlier photographs. Original shadows remain; the grid marks gaps or uncertain shape.",
-        "title": "ITS mosaic",
-        "detail": "ITS",
         "thumbnail": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
         "surface": "comet-9p-deep-impact-surface@2x.webp",
         "poles": "comet-9p-deep-impact-poles@2x.webp",
@@ -114,14 +108,12 @@
             "value": "3–34 m/pixel"
           }
         ],
-        "summary": "Eight approach images show the surface before impact. Close-ups add detail in smaller patches. Original shadows remain; the grid marks gaps or uncertain shape."
+        "notes": "Eight images follow Deep Impact’s approach in 2005. The closest views reveal finer ridges and depressions within the earlier photographs. Original shadows remain; the grid marks gaps or uncertain shape.",
+        "noData": true
       },
       {
         "id": "next",
         "label": "Stardust-NExT · 2011",
-        "description": "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps.",
-        "title": "Encounter image mosaic",
-        "detail": "NAVCAM",
         "thumbnail": "/scenes/comet-9p/comet-9p-next-thumbnail.webp",
         "surface": "comet-9p-next-surface@2x.webp",
         "poles": "comet-9p-next-poles@2x.webp",
@@ -142,7 +134,8 @@
             "value": "12–42 m/pixel"
           }
         ],
-        "summary": "These images show the surface six years after the 2005 encounter. Lighting differs between visits; the grid marks gaps."
+        "notes": "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps.",
+        "noData": true
       }
     ]
   },

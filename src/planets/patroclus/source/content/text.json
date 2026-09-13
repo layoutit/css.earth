@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "patroclus",
+  "card": {
+    "text": "Explore Patroclus, a Lucy target, through its observation-constrained approximate ellipsoid.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Patroclus and Menoetius form a large Trojan binary that Lucy will visit in the trailing swarm. This published ellipsoid represents Patroclus alone. The grid marks unmapped terrain.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Occultation shape approximation",
+      "detail": "Approximate shape",
+      "summary": "Published primary-component ellipsoid combining occultation and light-curve constraints. Its full axes differ from the two-dimensional occultation limb and from the unresolved binary system's radiometric diameter. Full approximation dimensions: 127 × 117 × 98 km. Synchronous spin-axis approximation using the same 2024 orbital pole as Menoetius; arbitrary display meridian. A physical mutual-event phase is not claimed. The grid marks unmapped terrain."
+    }
+  }
+}

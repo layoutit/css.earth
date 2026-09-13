@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comet-c1956-r1",
+  "card": {
+    "text": "C/1956 R1: Arend–Roland is remembered as the Great Comet of 1957. Its bright appearance came during a close passage around the Sun. Illustrative nucleus at Celestia’s catalog scale.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://ssd.jpl.nasa.gov/sb/great_comets.html",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Arend–Roland is remembered as the Great Comet of 1957. Its bright appearance came during a close passage around the Sun.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://ssd.jpl.nasa.gov/sb/great_comets.html",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "C/1956 R1 Arend–Roland",
+      "detail": "Celestia",
+      "summary": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
+    }
+  }
+}

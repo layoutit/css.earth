@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "iapetus",
+  "card": {
+    "text": "Explore Iapetus in 3D with cssEarth. Inspect Cassini imagery of Saturn’s two-toned moon and its equatorial ridge.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/iapetus/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Saturn’s two-toned moon, with a dark leading hemisphere, bright icy terrain and a mountain ridge along its equator.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/iapetus/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "Multi-mission image mosaic",
+      "summary": "Polar detail is coarse compared with the rest of the surface. Photographed shadows and seams remain; the grid marks gaps."
+    },
+    "enhanced": {
+      "title": "Enhanced-color composite",
+      "summary": "Colors extend into infrared and ultraviolet. The dark leading hemisphere is real surface material, not missing imagery."
+    },
+    "infrared": {
+      "title": "Cassini VIMS flyby spectra · 10 September 2007",
+      "detail": "Partial VIMS",
+      "summary": "Cassini false color: red 2.02, green 1.59, blue 1.28 µm. Coverage is partial; gray grid marks gaps. Illumination and archive filtering remain in these uncorrected measurements."
+    },
+    "ice-absorption": {
+      "title": "Cassini VIMS flyby water-ice absorption · 10 September 2007",
+      "detail": "Partial VIMS",
+      "summary": "Near-2.02 µm water-ice absorption in partial Cassini coverage. Gray grid marks gaps. Viewing angle, grain size, noise and archive filtering affect these uncorrected values; they do not measure ice abundance."
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "cressida",
+  "card": {
+    "text": "Explore Cressida, an inner moon of Uranus, through its measured shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/cressida/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Cressida is an elongated inner moon of Uranus. Its gravitational influence on the eta ring lets researchers estimate its mass.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/cressida/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Measured shape",
+      "summary": "A 92 × 74 × 74 km shape estimate. Two axes are assumed equal; gray grid: no imagery, not observed terrain."
+    }
+  }
+}

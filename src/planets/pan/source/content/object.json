@@ -4,7 +4,6 @@
   "id": "pan",
   "displayName": "Pan",
   "panel": {
-    "introduction": "Pan orbits inside the Encke Gap of Saturn’s A ring. Its gravity helps keep the gap open. Cassini revealed a small icy body surrounded by a broad equatorial ridge.",
     "facts": [
       {
         "id": "radius",
@@ -61,9 +60,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
-        "title": "ISS mosaic",
-        "detail": "Cassini · corrected mosaic",
         "thumbnail": "/scenes/pan/pan-normal-thumbnail.webp",
         "surface": "pan-normal-surface@2x.webp",
         "poles": "pan-normal-poles@2x.webp",
@@ -72,14 +68,12 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/access.html"
         },
-        "summary": "Photographs are mapped onto the measured shape. Shadows and unreliable samples are withheld; the gray grid marks gaps."
+        "notes": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radial height above a 14 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region.",
-        "title": "Shape-derived radial height",
-        "detail": "Shaded relief",
         "thumbnail": "/scenes/pan/pan-elevation-thumbnail.webp",
         "surface": "pan-elevation-surface@2x.webp",
         "poles": "pan-elevation-poles@2x.webp",
@@ -102,7 +96,7 @@
           "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
           "image": "/scenes/pan/pan-elevation-legend.webp"
         },
-        "summary": "Height relative to a 14 km sphere, from the Cassini shape model. Accuracy varies by region."
+        "notes": "Radial height above a 14 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region."
       }
     ]
   },

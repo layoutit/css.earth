@@ -6,7 +6,7 @@ import type { SourceResolver, SourceReference } from './source-catalog.mts';
 export type SourceUseKind = 'product-input' | 'method' | 'citation' | 'shared-context' | 'artwork';
 export interface SourceUse {
   readonly catalogueId: string; readonly kind: SourceUseKind;
-  readonly consumerKind: 'object-product' | 'object-fact' | 'mission' | 'machine' | 'shared-context' | 'artwork';
+  readonly consumerKind: 'object-product' | 'object-fact' | 'object-text' | 'mission' | 'machine' | 'shared-context' | 'artwork';
   readonly consumerId: string; readonly consumerLabel: string;
   readonly ownerPath: string; readonly locator: string; readonly evidence: string;
   readonly objectId?: string; readonly productId?: string; readonly localSourceId?: string;
@@ -81,17 +81,17 @@ export function parseSourceUsage(raw: unknown, sources: SourceResolver): SourceU
     const edge = sourceObject(raw,['catalogueId','kind','consumerKind','consumerId','consumerLabel','ownerPath','locator','evidence','objectId','productId','localSourceId','citationUrl','lensIds','limitations','credit','license','redistribution']);
     const catalogueId = sourceId(edge.catalogueId), kind = sourceEnum(edge.kind,['product-input','method','citation','shared-context','artwork']);
     if (!Object.hasOwn(sources,catalogueId) || sources[catalogueId].id !== catalogueId) throw new TypeError('Usage must name a canonical source.');
-    const consumerKind = sourceEnum(edge.consumerKind,['object-product','object-fact','mission','machine','shared-context','artwork']);
+    const consumerKind = sourceEnum(edge.consumerKind,['object-product','object-fact','object-text','mission','machine','shared-context','artwork']);
     const lensIds = sourceArray(edge.lensIds,sourceId); sourceUnique(lensIds,'usage lens');
     const objectId = edge.objectId === undefined ? undefined : sourceId(edge.objectId);
     if (consumerKind === 'object-product') {
       if (!objectId || edge.productId === undefined || edge.localSourceId === undefined || kind === 'shared-context') throw new TypeError('Incomplete source product use.');
       if (lensIds.some(lensId => !keys.includes(sourceDatasetKey(objectId,lensId)))) throw new TypeError('Source use names an unknown dataset.');
-    } else if (consumerKind === 'object-fact') {
-      if (!objectId || kind !== 'citation' || edge.citationUrl === undefined || edge.productId !== undefined || edge.localSourceId !== undefined || lensIds.length) throw new TypeError('A factsheet citation cannot become an observation or product input.');
+    } else if (consumerKind === 'object-fact' || consumerKind === 'object-text') {
+      if (!objectId || kind !== 'citation' || edge.citationUrl === undefined || edge.productId !== undefined || edge.localSourceId !== undefined || lensIds.length) throw new TypeError('A factsheet or reader-text citation cannot become an observation or product input.');
     } else if (objectId || edge.productId !== undefined || edge.localSourceId !== undefined || lensIds.length ||
       (consumerKind === 'mission' || consumerKind === 'machine' ? kind !== 'citation' : kind !== consumerKind)) throw new TypeError('Metadata citation cannot become an object observation.');
-    if (consumerKind !== 'object-fact' && edge.citationUrl !== undefined) throw new TypeError('Unexpected factsheet citation URL.');
+    if (consumerKind !== 'object-fact' && consumerKind !== 'object-text' && edge.citationUrl !== undefined) throw new TypeError('Unexpected citation URL.');
     return Object.freeze({catalogueId,kind,consumerKind,consumerId:sourceText(edge.consumerId),consumerLabel:sourceText(edge.consumerLabel),
       ownerPath:sourcePath(edge.ownerPath),locator:sourceText(edge.locator),evidence:sourceText(edge.evidence),lensIds,
       limitations:sourceArray(edge.limitations,sourceText),...(objectId === undefined ? {} : {objectId}),

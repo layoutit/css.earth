@@ -560,8 +560,8 @@
     {
       "id": "charon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 13037,
-      "expectedSha256": "c13e034a49e79d266f0119e801e14459092addbe8c9578d7b2e0a876043be798",
+      "expectedBytes": 12318,
+      "expectedSha256": "f84cfd26deb390c00cf9ea6af9b65016528a31b155692ea82c59adac4513e1ee",
       "origin": "Repository-authored Charon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -573,7 +573,26 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "charon-object-text",
+      "path": "content/text.json",
+      "expectedBytes": 2126,
+      "expectedSha256": "71f035e8f0d64dd5da90707baf8e617c1f6c1569cda14622bf32b185b4d8d4fc",
+      "origin": "Repository-authored Charon reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     }
   ],

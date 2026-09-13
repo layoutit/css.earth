@@ -4,7 +4,6 @@
   "id": "annefrank",
   "displayName": "Annefrank",
   "panel": {
-    "introduction": "Stardust visited Annefrank in 2002. This approximate ellipsoid shows the minimum dimensions inferred from the flyby; its angular outline and local terrain are unresolved. The grid marks unmapped terrain.",
     "facts": [
       {
         "id": "shape",
@@ -39,9 +38,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Published preliminary ellipsoid using minimum full dimensions from Stardust flyby images. It does not reproduce the observed angular outline or establish a complete global shape. Full approximation dimensions: 6.6 × 5 × 3.4 km. Arbitrary display pole and meridian. The flyby did not establish a spin pole or current surface longitude; the display orientation is not a measured attitude. The grid marks unmapped terrain.",
-        "title": "Stardust minimum-size approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/annefrank/annefrank-model-thumbnail.webp",
         "surface": "annefrank-model-surface@2x.webp",
         "poles": "annefrank-model-poles@2x.webp",
@@ -49,7 +45,8 @@
           "id": "occultation-approximation",
           "path": "../manifest.json",
           "url": "https://doi.org/10.1029/2003JE002108"
-        }
+        },
+        "noData": true
       }
     ]
   },

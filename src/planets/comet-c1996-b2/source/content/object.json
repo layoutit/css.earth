@@ -4,7 +4,6 @@
   "id": "comet-c1996-b2",
   "displayName": "Hyakutake",
   "panel": {
-    "introduction": "Hyakutake passed just 0.10 AU from Earth in March 1996. Its close approach made it a striking sight despite its much smaller nucleus than Hale–Bopp’s.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "C/1996 B2 Hyakutake",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-c1996-b2/comet-c1996-b2-model-thumbnail.webp",
         "surface": "comet-c1996-b2-model-surface@2x.webp",
         "poles": "comet-c1996-b2-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "0.24 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

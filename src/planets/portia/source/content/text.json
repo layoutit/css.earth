@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "portia",
+  "card": {
+    "text": "Explore Portia through its published prolate shape model.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/portia/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Portia lends its name to a crowded group of moons close to Uranus. Voyager 2 observations reveal an elongated body, while its surface remains unresolved in useful detail.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/portia/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Shape approximation",
+      "detail": "Measured shape",
+      "summary": "Voyager-based shape estimate with two axes assumed equal. The gray grid marks missing surface imagery."
+    }
+  }
+}

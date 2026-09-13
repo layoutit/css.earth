@@ -703,8 +703,8 @@
     {
       "id": "titania-object-content",
       "path": "content/object.json",
-      "expectedBytes": 13209,
-      "expectedSha256": "4b276f37299fed0e596a91f6227c33da9e6d079a790e4354c12c28c4e4a2c617",
+      "expectedBytes": 12440,
+      "expectedSha256": "7e10ddc4b9921f30dfe7274b352a70deea75045a53aebf5418bd4cd2f32a5ed7",
       "origin": "Repository-authored Titania object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -716,7 +716,26 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "titania-object-text",
+      "path": "content/text.json",
+      "expectedBytes": 1579,
+      "expectedSha256": "5544ff43f082f023e69a0ea0640affd7f78410d98dd4615abafa6cf07ad3b2e6",
+      "origin": "Repository-authored Titania reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     }
   ],

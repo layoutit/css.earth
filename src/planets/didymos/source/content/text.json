@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "didymos",
+  "card": {
+    "text": "Explore the DART encounter shape of Didymos and its radial heights.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/overview_data_derived_didymos_model_v003.txt",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Didymos is the rapidly rotating primary of the near-Earth binary visited by DART and LICIACube in 2022. Its broad equatorial ridge and flattened poles are reconstructed from their images. Its moon Dimorphos was the target of DART’s asteroid-deflection experiment. Explore the published shape, radial heights and derived relative surface brightness.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/overview_data_derived_didymos_model_v003.txt",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "SPC shape model v003",
+      "detail": "Published shape",
+      "summary": "An image-based shape model. Smooth regions lack image coverage; no surface photograph is mapped."
+    },
+    "draco": {
+      "title": "DART approach photographs",
+      "detail": "DRACO · DART",
+      "summary": "Two DRACO frames from 158 and 94 seconds before impact: one wider view and one closer partial view. Brightness is approximately normalized; photographed shadows remain. Grid marks unobserved or rejected areas."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Height relative to a 365 m sphere, including the ridge. Smooth regions have weaker image constraints."
+    },
+    "albedo": {
+      "title": "Relative-albedo model",
+      "detail": "DART surface brightness",
+      "summary": "Grayscale shows modeled brightness, not absolute albedo. Accepted facets cover about 58% of the shape; the grid marks the rest."
+    }
+  }
+}

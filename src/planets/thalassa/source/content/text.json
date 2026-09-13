@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "thalassa",
+  "card": {
+    "text": "Explore Thalassa through its Voyager-derived shape model.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/neptune/moons/thalassa/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Thalassa is a small, unusually flattened moon close to Neptune. Voyager 2 barely resolved its disk; this view shows its measured shape with a grid where surface imagery is unavailable.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/neptune/moons/thalassa/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Measured axes",
+      "summary": "Shape estimated from Voyager images with motion blur. No reliable surface map is available; gray grid: no imagery."
+    }
+  }
+}

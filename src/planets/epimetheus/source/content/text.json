@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "epimetheus",
+  "card": {
+    "text": "Explore Epimetheus with Cassini imagery, mapped radial height and its measured irregular shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/epimetheus/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Epimetheus shares an orbit with the larger moon Janus. The pair exchanges inner and outer tracks about every four years. Cassini revealed a battered icy surface, including a flattened south pole and branching ridges.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/epimetheus/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "ISS mosaic",
+      "detail": "Cassini · corrected mosaic",
+      "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Cassini shape · radial height",
+      "summary": "Height relative to a 58.2 km sphere, from the Cassini shape model. Small craters are unresolved."
+    }
+  }
+}

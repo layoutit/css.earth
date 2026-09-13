@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "asteroid-2002-tx300",
+  "card": {
+    "text": "2002 TX300 is an icy member of the Haumea family. Reanalysis of a two-chord occultation supports a range of sizes and shapes; this view illustrates one published flattened solution.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://doi.org/10.1051/0004-6361/201732564",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "2002 TX300 is an icy member of the Haumea family. Reanalysis of a two-chord occultation supports a range of sizes and shapes; this view illustrates one published flattened solution.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://doi.org/10.1051/0004-6361/201732564",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Conditional occultation-shape illustration",
+      "detail": "Inferred shape · unmapped surface grid",
+      "summary": "The adopted example projected ellipse is 363 × 289 km from the published timing-error reanalysis, with effective diameter 323 (+95/−37) km. This axisymmetric illustration assumes 363 km equatorial depth. The original two chords do not uniquely determine the shape; an old 286 km circular fit is not treated as definitive. Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement. The grid marks unmapped terrain."
+    }
+  }
+}

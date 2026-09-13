@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "badenia",
+  "card": {
+    "text": "Explore Badenia in 3D with its published shape model and documented physical size scale.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3298",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Coarse lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3298",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Light-curve shape model",
+      "detail": "Published shape · grid marks missing imagery",
+      "summary": "Thermal diameter 69.73 ± 2.8 km; quoted error excludes unquantified shape, viewing and thermal-model effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Radius on the shape model minus a 34.865 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+    }
+  }
+}

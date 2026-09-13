@@ -130,11 +130,20 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3712,
-      "expectedSha256": "d87880682f5f24f9cc35afa9e5bee3b43a56cd5ddee61564abd530ac118110fe",
+      "expectedBytes": 2928,
+      "expectedSha256": "bbeda93714d3f6036f85df24f14a2b8d44f6b3eb87af6232a4b7b497bbe7cba2",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "content/text.json",
+      "expectedBytes": 1605,
+      "expectedSha256": "f806c8b9cfdd40f5cdcc500bcdfd37d48d30383300c0e443d28e95d328538aaa",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     },
     {

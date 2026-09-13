@@ -484,8 +484,8 @@
     {
       "id": "ceres-object-content",
       "path": "content/object.json",
-      "expectedBytes": 10474,
-      "expectedSha256": "465f5536a8561d2c66a0e1cafa0afdca64b6f51f458043e500cb6c115c8d8ea9",
+      "expectedBytes": 9725,
+      "expectedSha256": "2cb2a131acafd655953caef27890548a79e9df8f8c2f0e46d79277b8a7d92463",
       "origin": "Repository-authored Ceres object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -497,7 +497,26 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "ceres-object-text",
+      "path": "content/text.json",
+      "expectedBytes": 1604,
+      "expectedSha256": "50dd79ff101c2685a59a926609b84f2b232975393a350771b8f388c54758d46f",
+      "origin": "Repository-authored Ceres reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     }
   ],

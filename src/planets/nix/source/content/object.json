@@ -4,7 +4,6 @@
   "id": "nix",
   "displayName": "Nix",
   "panel": {
-    "introduction": "Nix is a small moon orbiting the Pluto–Charon pair. New Horizons resolved its elongated shape and a reddish region around a large crater. The moon spins much faster than it circles the system; it keeps no single face turned toward Pluto.",
     "facts": [
       {
         "id": "radius",
@@ -49,9 +48,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Porter’s New Horizons shape fit. LORRI and MVIC constrain the broad shape, but the public mesh omits its fitted image registration. Gray grid marks unavailable registered surface imagery; it does not recreate Nix’s photographed reddish crater region.",
-        "title": "Porter shape reconstruction",
-        "detail": "New Horizons shape fit",
         "thumbnail": "/scenes/nix/nix-model-thumbnail.webp",
         "surface": "nix-model-surface@2x.webp",
         "poles": "nix-model-poles@2x.webp",
@@ -60,7 +56,8 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.6084/m9.figshare.12779948.v1"
         },
-        "summary": "A New Horizons shape fit. The released mesh lacks image registration; gray grid: no mapped imagery."
+        "notes": "Porter’s New Horizons shape fit. LORRI and MVIC constrain the broad shape, but the public mesh omits its fitted image registration. Gray grid marks unavailable registered surface imagery; it does not recreate Nix’s photographed reddish crater region.",
+        "noData": true
       }
     ]
   },

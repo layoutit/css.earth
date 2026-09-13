@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "proteus",
+  "card": {
+    "text": "Explore Proteus with Voyager 2 imagery and its source-backed irregular shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/neptune/moons/proteus/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Proteus is Neptune’s largest inner moon. Voyager 2 revealed an angular, cratered world, dominated on one side by the enormous impact basin Pharos.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/neptune/moons/proteus/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "Clear-filter mosaic",
+      "detail": "Voyager 2",
+      "summary": "Brightness is corrected for illumination; much of the fine grain is image noise. The gray grid marks unavailable samples."
+    },
+    "filter-color": {
+      "title": "Voyager green / blue / violet filter color",
+      "detail": "G / B / V",
+      "summary": "Three Voyager filters, shown as RGB. Broad color only; gray grid marks unknown coverage."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Radial shape",
+      "summary": "Height relative to a 208 km sphere, from a Voyager shape model. Unseen terrain is modeled; small features are uncertain."
+    }
+  }
+}

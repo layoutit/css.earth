@@ -4,7 +4,6 @@
   "id": "erigone",
   "displayName": "Erigone",
   "panel": {
-    "introduction": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -68,8 +67,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Convex light-curve reconstruction with approximate thermal size: 72.14 km (catalog ±0.95 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
-        "title": "DAMIT 1399 shape model",
         "thumbnail": "/scenes/erigone/erigone-shape-thumbnail.webp",
         "surface": "erigone-shape-surface@2x.webp",
         "poles": "erigone-shape-surface@2x.webp",
@@ -78,13 +75,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 36.07 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "DAMIT 1399 radial height",
         "thumbnail": "/scenes/erigone/erigone-elevation-thumbnail.webp",
         "surface": "erigone-elevation-surface@2x.webp",
         "poles": "erigone-elevation-surface@2x.webp",
@@ -106,7 +101,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1399",
           "image": "/scenes/erigone/erigone-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 36.07 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

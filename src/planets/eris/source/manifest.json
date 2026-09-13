@@ -285,8 +285,8 @@
     {
       "id": "eris-object-content",
       "path": "content/object.json",
-      "expectedBytes": 5991,
-      "expectedSha256": "649563d1dc65838ad58371ee5a064253dbde2a34d298904934996bfdc056d1c9",
+      "expectedBytes": 5607,
+      "expectedSha256": "bae4883e58250a946c99e11747303fc2c0305dd0554ba00891e4159b89069c62",
       "origin": "Repository-authored Eris object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -298,7 +298,26 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "eris-object-text",
+      "path": "content/text.json",
+      "expectedBytes": 1085,
+      "expectedSha256": "95e3996f499d4d63f6557d22fef51d73dcc7aa2e84b0533986cee4e6e6bf06c3",
+      "origin": "Repository-authored Eris reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     }
   ],

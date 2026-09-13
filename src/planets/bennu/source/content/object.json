@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Bennu is a dark, boulder-covered asteroid explored by OSIRIS-REx. Its laser-altimeter shape reveals an equatorial ridge and an irregular surface. The mission returned samples to Earth in 2023.",
     "facts": [
       {
         "id": "radius",
@@ -67,8 +66,6 @@
       {
         "id": "normal",
         "label": "Albedo",
-        "description": "The low-phase PolyCam mosaic is normalized with the ROLO phase function and Lommel–Seeliger disk function. Its 6.25 cm source sampling covers approximately ±55° latitude. The publisher’s 8-bit stretch maps 0.002–0.007 to 1–254. Gray grid marks source NoData, including the polar gaps.",
-        "title": "PolyCam reflectance mosaic",
         "thumbnail": "/scenes/bennu/bennu-normal-thumbnail.webp",
         "surface": "bennu-normal-surface@2x.webp",
         "poles": "bennu-normal-surface@2x.webp",
@@ -77,14 +74,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "PolyCam · albedo",
-        "summary": "Corrected reflectance covers roughly 55° north to 55° south. The gray grid marks the unobserved polar regions."
+        "notes": "The low-phase PolyCam mosaic is normalized with the ROLO phase function and Lommel–Seeliger disk function. Its 6.25 cm source sampling covers approximately ±55° latitude. The publisher’s 8-bit stretch maps 0.002–0.007 to 1–254. Gray grid marks source NoData, including the polar gaps.",
+        "noData": true
       },
       {
         "id": "surface",
         "label": "Monochrome",
-        "description": "The 5 cm global image basemap retains surface texture and photographed shading. It was normalized to 30° phase and registered to the SPC v28 control shape; small differences from the OLA v20 display mesh remain. This is a separate observed image view; it does not silently fill the albedo view’s missing poles.",
-        "title": "PolyCam 5 cm image basemap",
         "thumbnail": "/scenes/bennu/bennu-surface-thumbnail.webp",
         "surface": "bennu-surface-surface@2x.webp",
         "poles": "bennu-surface-surface@2x.webp",
@@ -93,14 +88,11 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "PolyCam",
-        "summary": "The 5 cm basemap retains photographed shadows. Its control shape differs from the display mesh, so small offsets remain."
+        "notes": "The 5 cm global image basemap retains surface texture and photographed shading. It was normalized to 30° phase and registered to the SPC v28 control shape; small differences from the OLA v20 display mesh remain. This is a separate observed image view; it does not silently fill the albedo view’s missing poles."
       },
       {
         "id": "spectral",
         "label": "Spectral color",
-        "description": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
-        "title": "MapCam spectral composite",
         "thumbnail": "/scenes/bennu/bennu-spectral-thumbnail.webp",
         "surface": "bennu-spectral-surface@2x.webp",
         "poles": "bennu-spectral-surface@2x.webp",
@@ -109,14 +101,12 @@
           "path": "../manifest.json"
         },
         "falseColor": true,
-        "detail": "MapCam",
-        "summary": "Published false-color MapCam composite. Colors emphasize spectral differences; gray grid marks missing coverage, including both poles."
+        "notes": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows radius minus a 241 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/bennu/bennu-elevation-thumbnail.webp",
         "surface": "bennu-elevation-surface@2x.webp",
         "poles": "bennu-elevation-surface@2x.webp",
@@ -138,8 +128,7 @@
           "sourceUrl": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj",
           "image": "/scenes/bennu/bennu-elevation-legend.webp"
         },
-        "detail": "Shape-derived height",
-        "summary": "Height relative to a 241 m sphere, from the shape model. Colors include Bennu's broad form; the outline is simplified."
+        "notes": "Color shows radius minus a 241 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces."
       }
     ]
   },

@@ -1,0 +1,32 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "makemake",
+  "card": {
+    "text": "Explore Makemake with an illustrative NASA surface texture and its distant orbit around the Sun.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Makemake is a distant, reddish dwarf planet with one known moon. Its surface is shown using NASA’s illustrative model texture; no spacecraft has mapped it.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "illustration": {
+      "title": "Surface illustration",
+      "summary": "The depicted terrain is imagined, not photographed. The real surface is unresolved, and the displayed coordinates are arbitrary."
+    }
+  }
+}

@@ -4,7 +4,6 @@
   "id": "romulus",
   "displayName": "Romulus",
   "panel": {
-    "introduction": "Romulus is Sylvia’s outer moon. This approximation selects one published occultation-limb solution and assumes equal depth. A later reanalysis admits different correlated limb shapes, so this is not a unique measured figure. The grid marks unmapped terrain. The orbit follows a published model; its current phase is approximate.",
     "facts": [
       {
         "id": "parent",
@@ -45,9 +44,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "One published projected-limb solution, 23.1±0.7 km area-equivalent diameter and 2.7±0.3 axis ratio, with equal depth assumed. The 2020 reanalysis allows other correlated ellipse shapes. The grid marks unmapped terrain.",
-        "title": "Occultation shape approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/romulus/romulus-model-thumbnail.webp",
         "surface": "romulus-model-surface@2x.webp",
         "poles": "romulus-model-poles@2x.webp",
@@ -55,7 +51,8 @@
           "id": "occultation-approximation",
           "path": "../manifest.json",
           "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X"
-        }
+        },
+        "noData": true
       }
     ]
   },

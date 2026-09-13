@@ -52,16 +52,23 @@ export interface Gallery {
   items: GalleryItem[];
 }
 
-export interface Lens {
+/** Reader text for one dataset, published in prepared content rather than in its controls. */
+export interface DatasetReaderText {
+  title: string;
+  detail?: string;
+  summary: string;
+}
+
+export type Lens = LensControl & DatasetReaderText;
+
+export interface LensControl {
   id: string;
   label: string;
-  detail?: string;
   thumbnailUrl: string;
   texture?: { url: string; width: number; height: number; minimap?: unknown; attribution?: { label: string; url?: string } };
-  description: string;
-  summary?: string;
+  /** The surface marks missing observations with the shared no-data grid. */
+  noData?: boolean;
   facts?: Fact[];
-  title: string;
   legend?: {
     kind: "scale" | "categories";
     title: string;

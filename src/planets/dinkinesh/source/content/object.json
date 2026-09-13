@@ -4,7 +4,6 @@
   "id": "dinkinesh",
   "displayName": "Dinkinesh",
   "panel": {
-    "introduction": "Dinkinesh was Lucy’s first asteroid encounter. Its equatorial ridge and trough accompany a remarkable moon: the contact binary Selam. JPL supplies the heliocentric orbit. The reconstruction has an illustrative meridian; its detailed geometry and unseen hemisphere are not measured terrain.",
     "facts": [
       {
         "id": "parent",
@@ -34,9 +33,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "detail": "Model",
-        "title": "Lucy encounter reconstruction",
-        "description": "Celestia contributors’ reconstruction inspired by Lucy images, uniformly scaled to the published 738 m volume-equivalent diameter. This is an authored approximation, not the mission photogrammetric shape model. The grid marks missing qualified surface imagery.",
         "thumbnail": "/scenes/dinkinesh/dinkinesh-shape-thumbnail.webp",
         "surface": "dinkinesh-shape-surface@2x.webp",
         "poles": "dinkinesh-shape-poles@2x.webp",
@@ -44,7 +40,8 @@
           "id": "shape-model",
           "path": "../manifest.json",
           "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/dinkinesh.cmod"
-        }
+        },
+        "noData": true
       }
     ]
   },

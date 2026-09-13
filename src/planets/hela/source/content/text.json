@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hela",
+  "card": {
+    "text": "Explore Hela, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/454",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Hela is a Mars-crossing asteroid. Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/454",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Hela · DAMIT shape model 454",
+      "detail": "Published shape · grid marks missing imagery",
+      "summary": "Convex lightcurve reconstruction at approximate thermal scale: 13.39 km effective diameter (catalog ±0.45 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes."
+    },
+    "elevation": {
+      "title": "Hela · radius relative to the 6.695 km reference sphere",
+      "detail": "Shape-derived radial height",
+      "summary": "Radius on the shape model minus a 6.695 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+    }
+  }
+}
