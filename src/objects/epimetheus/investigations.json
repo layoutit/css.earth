@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "epimetheus",
+  "entries": [
+    {
+      "id": "cassini-iss-and-shape-release",
+      "subject": "Cassini ISS frames with 2018 shape-release cameras",
+      "status": "included",
+      "finding": "[PDS Cassini calibrated imagery](https://pds-rings.seti.org/cassini/iss/calibration.html) and the camera geometry in the [2018 shape release](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/) supply the photographs. Complementary viewpoints provide observed coverage without fabricating the far side.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/epimetheus/README.md#L60",
+        "https://pds-rings.seti.org/cassini/iss/calibration.html",
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-09",
+          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
+          "pr": 83
+        }
+      ]
+    },
+    {
+      "id": "n1866366469-1",
+      "subject": "Cassini frame N1866366469_1",
+      "status": "excluded",
+      "finding": "Cassini `n1866366469_1` is dominated by cast shadow and contributes less than 0.04% unique valid map coverage in the 512 × 256 source comparison. Its unstable isolated samples are omitted; the remaining five views retain the useful observed terrain.",
+      "revisitWhen": "A shadow-free view or finer processing adds usable unique coverage.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/epimetheus/README.md#L62"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-09",
+          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
+          "pr": 83
+        }
+      ]
+    },
+    {
+      "id": "stooke-maps",
+      "subject": "Voyager/Stooke photomosaics and drawings as the main map",
+      "status": "excluded",
+      "finding": "Legacy Voyager/Stooke photomosaics and shaded-relief drawings in the [Stooke map archive](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html) are not the main map: the selected Cassini frames offer finer source detail with explicit registration to this shape, and drawings are not observational textures.",
+      "revisitWhen": "A registered observational map finer than the Cassini frames is released.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/epimetheus/README.md#L64",
+        "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-09",
+          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
+          "pr": 83
+        }
+      ]
+    }
+  ]
+}

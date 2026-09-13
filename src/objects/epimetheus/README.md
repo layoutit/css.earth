@@ -89,11 +89,7 @@ The astronomy package already owns the moon's Saturn-relative orbital elements. 
 
 ## Dataset survey
 
-- **Included:** [PDS Cassini calibrated imagery](https://pds-rings.seti.org/cassini/iss/calibration.html) and the camera geometry in the [2018 shape release](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/). Complementary viewpoints provide observed coverage without fabricating the far side.
-
-- **Excluded photograph:** Cassini `n1866366469_1` is dominated by cast shadow and contributes less than 0.04% unique valid map coverage in the 512 × 256 source comparison. Its unstable isolated samples are omitted; the remaining five views retain the useful observed terrain.
-
-- **Excluded as the main map:** legacy Voyager/Stooke photomosaics and shaded-relief drawings in the [Stooke map archive](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html). The selected Cassini frames offer finer source detail with explicit registration to this shape. Drawings are not observational textures.
+- Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 - **Not added as duplicate lenses:** individual clear-filter photographs of the same terrain. They contribute to one Monochrome map.
 

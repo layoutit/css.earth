@@ -26,6 +26,14 @@ also exclude a modified texture derivative. [Jiang et al. (2015)](https://doi.or
 provides photographs under CC BY 4.0, but its annotated figure is not a released
 registered raster. Reuse permission and shape registration are separate gaps;
 neither a silhouette match nor a flyby attitude alone resolves the latter.
+A trial the same day projected Jiang et al.'s Figure 1c onto this mesh
+([method record](https://github.com/layoutit/css.earth/blob/a1570599b69cd007f21af69635a46e60987ebe40/src/planets/toutatis/source/reference/chang-e-2-method.md)).
+Its camera direction came from the rotation angles Bu et al. (2015) quote for
+Zou et al. (2014), Figure 3, and its scale and position were matched by hand to
+Zou's radar rendering. Three check windows agreed within 1.0–2.2 figure pixels,
+but they compare two photographs, not photograph pixels with surface points.
+With no measured camera or control points, that placement does not register
+the photograph, so the photographic lens stays deferred.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
@@ -39,11 +47,7 @@ The archive specifies kilometers, center of mass as origin, and principal axes. 
 
 **Dataset survey**
 
-- **Included: PDS high-resolution radar shape.** [Release](https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/) supplies exact model connectivity, scale and coordinate documentation. Its [JPL OBJ counterpart](https://echo.jpl.nasa.gov/asteroids/shapes/hirestoutatis.obj) adds no separate view.
-- **Excluded: older low-resolution radar model and NASA STL.** [JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) and [NASA 3D resource](https://science.nasa.gov/3d-resources/asteroid-4179-toutatis/) were reviewed. The scientific high-resolution release has clearer metadata and sufficient detail before budget reduction.
-- **Excluded from current view: radial Elevation.** A trial found multiple surface intersections in 7 of 8,192 sampled directions through the concave neck. One direction intersects the source at 1,285.61, 1,363.00 and 1,734.56 m. The current shared radial scalar would assign one ray height to distinct surface patches, so it cannot truthfully color this full connected mesh. Geometry itself retains the neck. A future mesh-attached scalar preparation is needed.
-- **Unresolved: Chang’e-2 photographic coverage and later fused geometry.** [Flyby observations](https://arxiv.org/abs/1511.02131), [boulder study](https://pmc.ncbi.nlm.nih.gov/articles/PMC4629198/) and the 2016 paper *Radar model fusion of asteroid (4179) Toutatis via its optical images observed by Chang’e-2 probe*, Planetary and Space Science 125, 87–95, describe richer information. The flyby observed roughly 45% of the surface. A restorable released texture/mesh with full calibration and source-frame registration was not qualified in this survey; literature figures are not a global surface map. This is an unresolved release route, not evidence that the data do not exist.
-- **Excluded: preliminary geological outline map.** [Stooke 1996](https://www.lpi.usra.edu/meetings/lpsc1996/pdf/1642.pdf) has tentative features in an older arbitrary mapping frame and discusses radar image reversals. It does not provide a registered calibrated raster for this mesh. The related CE2DEM2014 search result concerns the Moon, not Toutatis.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 Shared sky and font inputs retain their original licenses and acquisition pins. Runtime installation uses the generated body-specific asset inventory; source restoration and runtime delivery are separate checks.
 
