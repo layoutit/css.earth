@@ -423,8 +423,8 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     if (variants.filter(variant => Object.entries(variant.when).every(([key, value]) => state[key] === value)).length !== 1) fail(`selection table must cover ${JSON.stringify(state)} exactly once`);
   }
   for (const binding of array(plan.viewBindings, "view bindings")) {
-    record(binding, "view binding", ["kind", "target", "property", "variable", "defaultZoom", "systemTransform", "source", "precision", "minimumRadius", "unitScale"]);
-    choice(binding.kind, new Set(["zoom-property", "shell-scale", "counter-rotation", "view-attribute", "view-property", "silhouette-fit"]), "view binding");
+    record(binding, "view binding", ["kind", "target", "property", "variable", "defaultZoom", "systemTransform", "source", "precision", "minimumRadius", "unitScale", "hysteresis", "levels"]);
+    choice(binding.kind, new Set(["zoom-property", "shell-scale", "counter-rotation", "view-attribute", "view-property", "silhouette-fit", "silhouette-step-property"]), "view binding");
     // The stage itself may carry a published level-of-detail attribute or
     // property; every other binding names a retained node.
     node(binding.target, ["view-attribute", "view-property"].includes(binding.kind));
@@ -434,6 +434,21 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       // publishes (see perspective-dolly.mjs), never below a prepared radius.
       if (!(binding.minimumRadius >= 0) || !(binding.unitScale > 0)) fail("silhouette fit requires a prepared floor and unit scale");
       if (!plan.camera.projection || plan.camera.projection.model !== "css-perspective-shared-with-sky") fail("silhouette fit requires the perspective camera");
+    } else if (binding.kind === "silhouette-step-property") {
+      // A prepared value per published silhouette step; thresholds are CSS pixels.
+      string(binding.property, "silhouette step property");
+      if (!binding.property.startsWith("--")) fail("silhouette step property must be a custom property");
+      finite(binding.hysteresis, "silhouette step hysteresis");
+      if (binding.hysteresis < 0 || binding.hysteresis >= 1) fail("silhouette step hysteresis must be in [0, 1)");
+      const levels = array(binding.levels, "silhouette steps");
+      if (levels.length < 2 || levels.length > 64) fail("silhouette steps must hold 2 to 64 levels");
+      let previous = -1;
+      for (const [index, level] of levels.entries()) {
+        record(level, "silhouette step", ["minimumDiameter", "value"]);
+        finite(level.minimumDiameter, "silhouette step diameter"); string(level.value, "silhouette step value");
+        if (index === 0 ? level.minimumDiameter !== 0 : level.minimumDiameter <= previous) fail("silhouette steps must start at 0 and increase");
+        previous = level.minimumDiameter;
+      }
     } else if (binding.kind === "view-property") {
       string(binding.property, "view property");
       if (!binding.property.startsWith("--")) fail("view property must be a custom property");
