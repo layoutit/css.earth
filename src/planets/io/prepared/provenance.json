@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d07a34b3e5526269a869443af7f8cfacb728b7786d208fc92ae565e598f5da9"
+    "sha256": "16f2cba1567b7b069acbcf60a2b6196c999903b31c935610bb33c28436689d70"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "eea8a761f448acd288b104e90f63055bdb1a53a3def123ec2a6109cfbf0d50ee",
+      "sha256": "ec71f6539debbf0d1be915b0389f449830111e6b251529bb15b7b62d7844b5e3",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/io/",
@@ -59,7 +59,8 @@
                 "zeroValidity": "all-channels",
                 "colorSpace": "srgb",
                 "resolutionMeters": 1000,
-                "resampling": "source-georeferenced-bilinear"
+                "resampling": "source-georeferenced-bilinear",
+                "wrapLongitude": true
               },
               "projection": {
                 "longitudeDegrees": [
@@ -93,7 +94,8 @@
                 "colorSpace": "srgb",
                 "resolutionMeters": 1000,
                 "withholdLatitudeDegrees": 85,
-                "resampling": "source-georeferenced-bilinear"
+                "resampling": "source-georeferenced-bilinear",
+                "wrapLongitude": true
               },
               "monochromeBase": "normal",
               "projection": {
@@ -1751,14 +1753,14 @@
         },
         {
           "url": "/scenes/io/io-normal@2x.webp",
-          "bytes": 1777218,
-          "sha256": "8ad1fcb7cd1be3683f5ac873072719684ef3b60d11731af3c01084da5b82f01f",
+          "bytes": 1776680,
+          "sha256": "29f79bd355cce033a23a9e5a447a0d3fa74eb1987459d710121768eee66344b1",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/io/io-lens-normal.webp",
-          "bytes": 916,
-          "sha256": "9cf1e7ddfc22581986694897e0816321c467db6d477c8d03cf4d759c464bc385",
+          "bytes": 926,
+          "sha256": "c38754025da59739d88955de31c1e477cc9bda6a2a0d98936df6642dc022183e",
           "verification": "asset-manifest-pin"
         },
         {
@@ -1808,14 +1810,14 @@
         },
         {
           "url": "/scenes/io/io-enhanced@2x.webp",
-          "bytes": 1683698,
-          "sha256": "1ae43bbc2805c9de5fc4a70efb3a975a3f3e850cf542e89dfca7baf8a36052cd",
+          "bytes": 1681394,
+          "sha256": "cf392c0b06cd1b110c13838059f53fa437a86a6f0ecbe3b2ca8a4242de19ca78",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/io/io-lens-enhanced.webp",
           "bytes": 1384,
-          "sha256": "98ab7ec61d8165f86352d71bb7f80562ce860714e44468432a57dd3ecc94c936",
+          "sha256": "3607ed19a3bb055d2f6a2bb07cff01651346ddbdaf52a3a1fe282ee91f9fe1f6",
           "verification": "asset-manifest-pin"
         },
         {

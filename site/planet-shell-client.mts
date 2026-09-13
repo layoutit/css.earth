@@ -251,6 +251,7 @@ export function mountPlanetShell({
         viewReadout.setPlaybackState(state);
       }
     },
+    setNavigationInFlight(active: boolean) { if (!lifetime.disposed) viewReadout.setNavigationInFlight(active); },
     destroy() {
       const errors = lifetime.destroy();
       if (errors.length) throw new AggregateError(errors, "Shell cleanup failed.");
