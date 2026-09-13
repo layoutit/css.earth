@@ -88,9 +88,10 @@ Three choices still differ by format, and each lens report records them:
 
 The loader measures each frame's pixel angle and nadir footprint. The report
 lists the authored limits beside the limits the frames support (`limits.derived`).
-A fixed separation may be at most two diagonal footprints of the coarsest frame
+A fixed separation may be at most four diagonal footprints of the coarsest frame
 at the emission limit, plus the mesh error when the backplanes come from the
-archive's own shape model.
+archive's own shape model. Preparation stops when an authored limit exceeds the
+derived one.
 
 ## Report
 

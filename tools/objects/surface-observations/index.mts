@@ -33,6 +33,8 @@ export async function loadSurfaceObservation({ sourceDirectory, source, recipe, 
   if (entries.length !== paths.length || new Set(paths).size !== paths.length || !paths.every(path => entries.some(entry => entry.path === path))) {
     throw new Error('A surface observation must consume exactly its pinned images, labels, cameras and companions.');
   }
-  const { frames, policy } = await format.load(recipe, { sourceDirectory, source, radial, config, entries });
+  const { frames, policy, exceeded } = await format.load(recipe, { sourceDirectory, source, radial, config, entries });
+  // A limit looser than the frames' measured footprint and the mesh error allow would admit pixels across a limb or a neck.
+  if (exceeded.length) throw new Error(`Surface observation ${String(requireRecord(recipe).id)} states ${exceeded.join(' and ')} beyond what its frames support: ${JSON.stringify(requireRecord(policy.limits).derived)}.`);
   return createSurfaceObservation({ frames, policy, radial, config, entries });
 }
