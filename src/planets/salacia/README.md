@@ -32,9 +32,7 @@ The [shared checks](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe9
 <details>
 <summary>Source survey and model selection</summary>
 
-- **Selected:** The separately estimated ALMA primary size. The abstract paragraph beginning “Using the same approach” reports 838 ±44 km for Salacia and 393 ±33 km for Actaea. Only Salacia’s value sets this model’s diameter; [measurements](source/measurements.json) retain the extraction and uncertainty. See [NOTICE.md](NOTICE.md) for attribution.
-- **Excluded from the surface and primary axes:** The [JWST Salacia–Actaea spectrum](https://arxiv.org/abs/2508.17101) is spatially blended. Its **901 km** discussion concerns the system.
-- **Superseded size:** The [older 866 ±37 km estimate](https://doi.org/10.3847/1538-3881/aa6346) used equal-albedo binary partitioning; the newer resolved-component result is selected.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 </details>
 

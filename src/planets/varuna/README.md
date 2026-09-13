@@ -32,9 +32,7 @@ The [shared checks](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe9
 <details>
 <summary>Source survey and model selection</summary>
 
-- **Selected:** The published numerical light-curve model, without re-fitting or invented terrain.
-- **Excluded:** [Rotationally resolved near-infrared spectroscopy](https://arxiv.org/abs/1401.5962). Unresolved spectra do not provide spatially registered surface texels.
-- **Unresolved:** The [JWST Varuna observing-program overview](https://www.hou.usra.edu/meetings/acm2023/pdf/2534.pdf) identifies spectral and imaging observations, not a released global surface map. No texture is inferred from the program description.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 </details>
 
