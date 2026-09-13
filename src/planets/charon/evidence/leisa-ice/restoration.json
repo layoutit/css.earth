@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-source-restoration-check@1",
+  "baseCommit": "ebd16155a5eb408b6a96a7eaf4c9620b8a0b8451",
+  "destination": "/Users/ekrof/fed/cssEarth-comets/output/charon-leisa/restored-jKyspq",
+  "transportNote": "The original empty-destination run restored all PDS inputs and regenerated both maps. Node could not validate the SwRI certificate chain; the method PDF was retried with system curl certificate validation enabled. No TLS verification was disabled.",
+  "bootstrap": "Only the checked-in bands.json policy was copied; all native observations and method PDF were downloaded, and the two maps/report were regenerated.",
+  "result": {
+    "operationCount": 1
+  },
+  "verified": [
+    {
+      "path": "science/leisa/0299175509_charon_cube.fit",
+      "bytes": 419434560,
+      "sha256": "c33dbdd082d6612ba41a5e8e7ce4fd76421334813558efe06f2c8a0d7b24f4b2"
+    },
+    {
+      "path": "science/leisa/0299175509_charon_wavelengths.fit",
+      "bytes": 419434560,
+      "sha256": "5f4ebc9cb6ecb9f67d685dceb5da948d30c547373f52b348717e1e0ed44134da"
+    },
+    {
+      "path": "science/leisa/0299175509_charon_geometry.fit",
+      "bytes": 8196480,
+      "sha256": "49b20130e431e988d004f5142d40d360b5b4a0d6dd65c8ffabb9f5e5e71554ff"
+    },
+    {
+      "path": "science/leisa/0299175509_charon_cube.lblx",
+      "bytes": 17729,
+      "sha256": "0edfb68a81bda916b72fe77e392db7f26fd2559a48829b904be9ac59cf85bf22"
+    },
+    {
+      "path": "science/leisa/0299171308_charon_cube.fit",
+      "bytes": 104860800,
+      "sha256": "00ea97e6c828f535868a8864d3b592f49f7473aaf349ac4d28d0e9cd88d3190d"
+    },
+    {
+      "path": "science/leisa/0299171308_charon_wavelengths.fit",
+      "bytes": 104860800,
+      "sha256": "f517266558805c5bee41956d590065934c3120eb4f5be56ad00da3b300e69e17"
+    },
+    {
+      "path": "science/leisa/0299171308_charon_geometry.fit",
+      "bytes": 2053440,
+      "sha256": "b53c0815a430cff5fa7e541808a6105dcdcd7a40fe037b42246003c7d7971b74"
+    },
+    {
+      "path": "science/leisa/0299171308_charon_cube.lblx",
+      "bytes": 17730,
+      "sha256": "773847bb6f69bc71be633a8147e35b74c4cf16c25dbcc8f85d60f7c7def439c8"
+    },
+    {
+      "path": "science/leisa/water-ice.tif",
+      "bytes": 1037800,
+      "sha256": "d5e97dc34ed6bbb93a9ec148f7a38efb92a7b580cc044ae365a9976a14810a91"
+    },
+    {
+      "path": "science/leisa/ammonia.tif",
+      "bytes": 1037800,
+      "sha256": "863ce7313592e1370c4e4c86837e1bcc56d05beb0443aee085b5ea1a531d6657"
+    },
+    {
+      "path": "science/leisa/bands.json",
+      "bytes": 3115,
+      "sha256": "1887411040bae02b71058eea94422db5ba8800b03f5b4a2eb3eb314fe7a65384"
+    },
+    {
+      "path": "science/leisa/grundy-2016-supplement.pdf",
+      "bytes": 2820762,
+      "sha256": "6607dd35232b08be79db3006b7610a728785f9309fb0f0437461c1de223099b7"
+    },
+    {
+      "path": "science/leisa/preparation.json",
+      "bytes": 25961,
+      "sha256": "ae64af36af753c1240e41d9ebe95dd2ee8a242c809ecd8580adfece059bd3ada"
+    }
+  ]
+}

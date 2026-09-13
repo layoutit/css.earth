@@ -8,7 +8,7 @@
     "metadata": "metadata_nomenclature_points_CHARON.xml"
   },
   "surfaceMap": "presentation/surface-map.json",
-  "mapLeftEdgeLongitudeDeg": 180,
+  "mapLeftEdgeLongitudeDeg": 0,
   "output": "charon-features.json",
   "publicBase": "/scenes/charon/",
   "target": {
@@ -18,7 +18,9 @@
     "normal",
     "enhanced-color",
     "elevation",
-    "albedo"
+    "albedo",
+    "water-ice",
+    "ammonia"
   ],
   "kinds": {
     "point": [
@@ -51,5 +53,11 @@
   "outline": {
     "pieces": 256
   },
-  "notes": "notes.json"
+  "notes": "notes.json",
+  "landmarks": {
+    "document": "landmarks.json",
+    "inputs": [
+      "landmarks.json"
+    ]
+  }
 }
