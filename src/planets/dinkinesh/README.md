@@ -52,11 +52,24 @@ kept Shadows off. [Initial TEMPEST view](evidence/dinkinesh-tempest-browser.png)
 [rotated TEMPEST view](evidence/dinkinesh-tempest-dragged-browser.png) were inspected.
 The report pins the uncommitted package tested above `fe4a37496`.
 
-This was a diagnostic page mounting the shared object adapter, without the
-application's persistent universe or full shell. The ordinary `/dinkinesh/` page
-is blocked in this checkout by missing local Helix, M42 and M2–9 prepared lens
-banks. Full application and mobile conformance remain unverified for this
-upgrade. The older browser evidence below covers the Celestia dataset only.
+That diagnostic page omitted the persistent universe and full shell. The
+subsequent [full-application check](evidence/tempest-full-app.json) rebuilt the
+missing Helix, M42 and M2–9 banks from their saved recipes and tested the ordinary
+`/dinkinesh/` page above `0b53ca718`, with the test revisions pinned in the report.
+Desktop interaction, the mobile layout and wheel policy, switching and dragging
+both models at DPR 1/2, dataset races, reload, rejection recovery and teardown
+passed. The actual-browser label gate confirms that legacy coordinates are
+enabled only on the Celestia dataset. The
+[desktop capture](evidence/dinkinesh-tempest-full-app.png) and
+[phone viewport after wheel zoom](evidence/dinkinesh-tempest-mobile.png) show the
+recovered model in the shared application with Shadows off.
+
+Complete conformance remains unqualified: the shared wheel-distance check does
+not include main's new inertia, the generic feature test assumes labels on the
+default dataset, and a separate two-finger trial did not zoom. The browser-profile
+unit file passes six tests but its all-object inventory fails on unchanged Ryugu
+lens coverage. These limits and the exact observed results are retained in the
+report. The older browser evidence below covers the Celestia dataset only.
 
 
 The [browser conformance report](evidence/dinkinesh-conformance.json) passed desktop/mobile input, picking, wheel/pinch zoom, lighting, single-scene lifecycle and retained identity at DPR 1/2. Its [DPR 1 video](evidence/dinkinesh-dpr-1.webm) and [DPR 2 video](evidence/dinkinesh-dpr-2.webm) retain the input sequences. These were captured at `514f6b497`; body geometry, asset banks and input/lifecycle code remain unchanged in the final renderer at `66448c17d`. The production check below repeats the navigation and presentation affected by later changes.

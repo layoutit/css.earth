@@ -80,7 +80,7 @@ export async function assertRenderedObjectControls(page: BrowserPage, profile: O
     ...remainingSettings.map(({ name, kind }) => ({ name, kind })),
   ];
   const actual = await page.evaluate(() => ({
-    lensPanelCount: document.querySelectorAll('.planet-lenses[aria-label="Datasets"]').length,
+    lensPanelCount: document.querySelectorAll('.planet-lenses nav[aria-label="Datasets"]:has(button[name="lens"])').length,
     settingsPanelCount: document.querySelectorAll(".planet-settings").length,
     lenses: [...document.querySelectorAll<HTMLButtonElement>('.planet-lenses button[name="lens"]')].map((button) => button.value),
     settings: [...document.querySelectorAll(".planet-settings input, .planet-settings button")]
