@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { array, number, shape, text } from '../terrestrial-layers/source-records.mts';
 import { mathildeImageCamera, decodeNearMsi } from '../terrestrial-layers/near-msi.mts';
+import { pds4Field } from '../pds-labels.mts';
 
 const source = resolve(process.argv[2] ?? 'src/planets/mathilde/source');
 const profilePath = 'preparation/near-msi.json';
@@ -14,8 +15,8 @@ const digest = async (path: string) => createHash('sha256').update(await bytes(p
 const table = (await bytes(profile.imageGeometry)).toString('utf8');
 for (const frame of profile.frames) {
   const label = (await bytes(frame.label)).toString('utf8');
-  const startTime = /<start_date_time>([^<]+)<\/start_date_time>/.exec(label)?.[1];
-  if (!startTime || !Number.isFinite(Date.parse(startTime)) || !label.includes(`<file_name>${frame.image.split('/').at(-1)}</file_name>`)) throw new Error('NEAR MSI label does not identify the selected observation.');
+  const startTime = pds4Field(label, 'start_date_time');
+  if (!Number.isFinite(Date.parse(startTime)) || pds4Field(label, 'file_name') !== frame.image.split('/').at(-1)) throw new Error('NEAR MSI label does not identify the selected observation.');
   const identity = { met: frame.met, filter: frame.filter, startTime,
     imageSha256: await digest(frame.image), rawSha256: await digest(frame.raw) };
   decodeNearMsi(await bytes(frame.image), await bytes(frame.raw), identity);

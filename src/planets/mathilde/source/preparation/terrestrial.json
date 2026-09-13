@@ -97,7 +97,6 @@
           }
         ],
         "filter": "0",
-        "allowLossy": false,
         "refinement": {
           "method": "mesh-limb",
           "maximumCorrectionDegrees": 0.5,
@@ -127,10 +126,12 @@
           "maximumEmissionDegrees": 75,
           "maximumGain": 1
         },
-        "displayPercentiles": [
-          0,
-          99.5
-        ],
+        "display": {
+          "percentiles": [
+            0,
+            99.5
+          ]
+        },
         "metadata": {
           "label": "NEAR close-ups",
           "coverage": "Two calibrated broadband images from the 1997 flyby. Original shadows and detector artifacts remain. Grid marks unavailable image coverage; the visualization shape includes modeled crater floors and unseen areas."
