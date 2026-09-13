@@ -121,9 +121,9 @@ async function frameIdentity(sourceDirectory: string, frame: CameraFrameRecipe) 
 
 /** A stated camera that misses the photographed body puts lit source shape on the edge-connected sky. Across the first 136 controlled
  * frames, registered ones place at most 13% of it there (a 77-pixel crescent) and the two misregistered ones 36% and 99.8%. */
-const MAXIMUM_LIT_SHAPE_ON_SKY = .25;
+export const MAXIMUM_LIT_SHAPE_ON_SKY = .25;
 
-function litShapeOnSky(geometry: PixelGeometry, sky: Uint8Array | undefined, quality: Uint8Array | undefined, maximumIncidenceDegrees: number, count: number) {
+export function litShapeOnSky(geometry: PixelGeometry, sky: Uint8Array | undefined, quality: Uint8Array | undefined, maximumIncidenceDegrees: number, count: number) {
   const limit = maximumIncidenceDegrees * Math.PI / 180;
   let litPixels = 0, onSkyPixels = 0;
   for (let i = 0; i < count; i++) {
