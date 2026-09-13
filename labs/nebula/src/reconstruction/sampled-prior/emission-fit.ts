@@ -4,12 +4,14 @@ import type { CompilerImage } from '../compiler/images';
 import type { ComponentWeights } from './model';
 import type { PreparedSampledField, SpatialField } from './field';
 import type { SampledEmissionFit } from './emission-fit-model';
+import { finiteDetailAtoms } from './emission-detail';
 
 export interface DiffuseAtom { centerArcsec: EmissionVector3; sigmaArcsec: number }
 interface Column { indices: Uint32Array; values: Float32Array }
 export interface EmissionFitResult {
   diffuse: Float32Array; field: SpatialField;
   receipt: { sourceId: string; ejectaGain: number; coefficients: number[]; atoms: DiffuseAtom[];
+    broadAtomCount: number; detailAtomCount: number;
     trainingPixels: number; validationPixels: number; coveredPixels: number;
     beforeRmse: number; afterRmse: number; validationBeforeRmse: number; validationAfterRmse: number;
     missingBefore: number; missingAfter: number; excessAfter: number; iterations: number; interpretation: string };
@@ -102,11 +104,28 @@ export function fitSampledEmission(prepared: PreparedSampledField, image: Pick<C
   if (covered.reduce((a, b) => a + b, 0) < 64) throw new TypeError('Insufficient observed coverage for an emission fit.');
   if (!covered.some((value, i) => value && !training[i]) || !training.some(Boolean))
     throw new TypeError('Emission fit requires observed training and validation pixels.');
-  const columns: Column[] = [ejecta, ...atoms.map(atom => Float32Array.from(xs, (x, i) => covered[i] ? diffuseAtomProjection(atom, x, ys[i]!) : 0))].map(values => {
+  const broadAtomCount = atoms.length;
+  atoms.push(...finiteDetailAtoms(prepared, recipe, target, chromaLuma, training, xs, ys, signal));
+  if (atoms.length > 5500) throw new TypeError('Combined finite emitter budget exceeded.');
+  const sparse = (values: Float32Array): Column => {
     const indices: number[] = [], nonzero: number[] = [];
     values.forEach((value, i) => { if (covered[i] && value > 0) { indices.push(i); nonzero.push(value); } });
     return { indices: Uint32Array.from(indices), values: Float32Array.from(nonzero) };
-  });
+  };
+  const pixelX = (bounds.max[0] - bounds.min[0]) / width, pixelY = (bounds.max[1] - bounds.min[1]) / width;
+  const columns: Column[] = [sparse(ejecta), ...atoms.map(atom => {
+    const indices: number[] = [], values: number[] = [], radius = 4 * atom.sigmaArcsec;
+    const x0 = Math.max(0, Math.floor((atom.centerArcsec[0] - radius - bounds.min[0]) / pixelX));
+    const x1 = Math.min(width - 1, Math.ceil((atom.centerArcsec[0] + radius - bounds.min[0]) / pixelX));
+    const y0 = Math.max(0, Math.floor((bounds.max[1] - atom.centerArcsec[1] - radius) / pixelY));
+    const y1 = Math.min(width - 1, Math.ceil((bounds.max[1] - atom.centerArcsec[1] + radius) / pixelY));
+    for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
+      const at = y * width + x; if (!covered[at]) continue;
+      const value = diffuseAtomProjection(atom, xs[at]!, ys[at]!); if (!(value > 0)) continue;
+      indices.push(at); values.push(value);
+    }
+    return { indices: Uint32Array.from(indices), values: Float32Array.from(values) };
+  })];
   const rowSum = new Float64Array(count), coefficients = new Float64Array(columns.length), prediction = new Float64Array(count);
   coefficients[0] = 1;
   for (const column of columns) column.indices.forEach((at, j) => { rowSum[at] += column.values[j]!; });
@@ -142,10 +161,11 @@ export function fitSampledEmission(prepared: PreparedSampledField, image: Pick<C
   const diffuse = gridDiffuse(prepared, atoms, [...coefficients].slice(1), signal);
   const field = prepared.field({ ejecta: weights.ejecta * coefficients[0]!, pwn: weights.pwn }, 1, diffuse);
   return { diffuse, field, receipt: { sourceId: image.id, ejectaGain: coefficients[0]!, coefficients: [...coefficients].slice(1), atoms,
+    broadAtomCount, detailAtomCount: atoms.length - broadAtomCount,
     trainingPixels: coveredPixels - validationPixels, validationPixels, coveredPixels,
     beforeRmse: Math.sqrt(beforeError / coveredPixels), afterRmse: Math.sqrt(afterError / coveredPixels),
     validationBeforeRmse: Math.sqrt(validationBefore / validationPixels), validationAfterRmse: Math.sqrt(validationAfter / validationPixels),
     missingBefore: missingBefore / Math.max(1e-12, targetLight), missingAfter: missingAfter / Math.max(1e-12, targetLight),
     excessAfter: excessAfter / Math.max(1e-12, targetLight), iterations: recipe.iterations,
-    interpretation: 'Regularized nonnegative display-opacity fit on fixed measured ejecta and finite 3D Gaussian atoms. Atom positions, depth, width and outer support are authored before reading images. Every seventh image pixel is withheld from coefficient fitting, not an independent physical observation. Residual light may mix synchrotron, dust, line emission, epoch differences and separation artifacts. No recovered dust/gas density or measured continuum depth.' } };
+    interpretation: 'Regularized nonnegative display-opacity fit on fixed measured ejecta and finite 3D Gaussian atoms. Broad atoms have image-independent authored support. Optional fine structures use training-image contrast to select XY and the local spatial-prior mode to assign depth; their finite isotropic widths and branch choice are authored, not measured structures. Every seventh image pixel is excluded from candidate selection and coefficient fitting, not an independent physical observation. Residual light may mix synchrotron, dust, line emission, epoch differences and separation artifacts. No recovered dust/gas density or measured continuum depth.' } };
 }

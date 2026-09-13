@@ -7,6 +7,8 @@ export interface SampledEmissionFit {
   centerArcsec: EmissionVector3; axis: EmissionVector3; radiiArcsec: EmissionVector3;
   spacingArcsec: number; sigmaArcsec: number; imageWidth: number; iterations: number;
   regularization: number; maximumCoefficient: number; maximumEjectaGain: number;
+  /** Optional image structures become finite, locally depth-conditioned emitters, never color columns. */
+  detail?: { scalesArcsec: number[]; maximumAtoms: number };
 }
 function number(value: unknown, min: number, max: number): number {
   if (typeof value !== 'number' || !Number.isFinite(value) || value < min || value > max)
@@ -30,8 +32,16 @@ export function readSampledEmissionFit(value: unknown): SampledEmissionFit {
     throw new TypeError('Emission-fit envelope requires a unit axis and positive radii.');
   const imageWidth = number(value.imageWidth, 32, 256), iterations = number(value.iterations, 1, 200);
   if (![imageWidth, iterations].every(Number.isInteger)) throw new TypeError('Emission-fit sampling must be integral.');
+  let detail: SampledEmissionFit['detail'];
+  if (value.detail !== undefined) {
+    if (!jointRecord(value.detail) || !Array.isArray(value.detail.scalesArcsec) || value.detail.scalesArcsec.length < 1 || value.detail.scalesArcsec.length > 4)
+      throw new TypeError('Invalid finite detail scales.');
+    const scalesArcsec = value.detail.scalesArcsec.map(v => number(v, 1, 1e3)), maximumAtoms = number(value.detail.maximumAtoms, 1, 3500);
+    if (!Number.isInteger(maximumAtoms) || new Set(scalesArcsec).size !== scalesArcsec.length) throw new TypeError('Invalid finite detail budget.');
+    detail = { scalesArcsec, maximumAtoms };
+  }
   return { sourceIds: ids(value.sourceIds), evidenceIds: ids(value.evidenceIds), centerArcsec: vector(value.centerArcsec), axis, radiiArcsec,
     spacingArcsec: number(value.spacingArcsec, 1, 1e4), sigmaArcsec: number(value.sigmaArcsec, 1, 1e4), imageWidth, iterations,
     regularization: number(value.regularization, .0001, 10), maximumCoefficient: number(value.maximumCoefficient, .01, 10),
-    maximumEjectaGain: number(value.maximumEjectaGain, 1, 20) };
+    maximumEjectaGain: number(value.maximumEjectaGain, 1, 20), ...(detail ? { detail } : {}) };
 }

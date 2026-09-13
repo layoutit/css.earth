@@ -22,6 +22,8 @@ export interface CloudMaterialOptions {
   /** Physical coordinates in the unchanged quad units. RGB is [0,255]; false means outside image coverage. */
   sampleImageRgb(x: number, y: number, z: number, out: Vector3, slab: { axis: 'x' | 'y' | 'z'; pitch: number; samples: number }): boolean;
   appearance?: CloudAppearance;
+  /** A mixture of normalized 3D component colors already has a physical RGB weight; do not boost its peak again. */
+  preserveMaterialIntensity?: boolean;
   /** Prepared local-contrast multiplier, sampled in the same physical frame as image color. */
   sampleDetailGain?(x: number, y: number, z: number): number;
   outputDirectory: string;
@@ -74,13 +76,14 @@ export async function recolorCloudSlices(options: CloudMaterialOptions): Promise
       if (rgb.some(value => !Number.isFinite(value) || value < 0 || value > 255))
         throw new TypeError('Cloud image samples must be finite RGB in [0,255].');
       const peak = Math.max(...rgb);
-      if (peak === 0) { coverage.blackImageTexels++; continue; }
+      if (peak === 0 && !options.preserveMaterialIntensity) { coverage.blackImageTexels++; continue; }
       const gain = appearance.detailStrength > 0 ? options.sampleDetailGain!(x, y, z) : 1;
       if (!Number.isFinite(gain) || gain < 0 || gain > 1) throw new TypeError('Cloud detail must be a finite material multiplier in [0,1].');
-      const luminance = (.2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2]) / peak;
-      const color = appearance.saturation === 1 ? rgb.map(value => value / peak) :
-        rgb.map(value => Math.max(0, luminance + (value / peak - luminance) * appearance.saturation));
-      const colorPeak = Math.max(...color);
+      const divisor = options.preserveMaterialIntensity ? 255 : peak;
+      const luminance = (.2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2]) / divisor;
+      const color = appearance.saturation === 1 ? rgb.map(value => value / divisor) :
+        rgb.map(value => Math.max(0, luminance + (value / divisor - luminance) * appearance.saturation));
+      const colorPeak = options.preserveMaterialIntensity ? Math.max(1, ...color) : Math.max(...color);
       for (let channel = 0; channel < 3; channel++) {
         const material = color[channel]! / colorPeak * gain;
         rgba[offset + channel] = tone(material);
@@ -106,9 +109,10 @@ export async function recolorCloudSlices(options: CloudMaterialOptions): Promise
   coverage.preservedReferenceTexels = coverage.outsideImageTexels + coverage.blackImageTexels;
   const slices: VolumeSlices = { ...structuredClone(options.slices), quads,
     provenance: { schema: 'cssearth-cloud-material@1', method: CLOUD_MATERIAL_METHOD,
-      reference: options.slices.provenance, coverage, appearance,
+      reference: options.slices.provenance, coverage, appearance, ...(options.preserveMaterialIntensity ? { preserveMaterialIntensity: true } : {}),
       opacity: 'Every decoded reference alpha byte is preserved exactly; no geometry, crop, extent or depth change.',
-      color: 'Normalized candidate chromaticity with authored saturation, registered local contrast, then RGB gamma and brightness. Image brightness never changes alpha or density.',
+      color: options.preserveMaterialIntensity ? 'Emission-weighted 3D component chromaticity, without renormalizing mixed colors. Material cannot change alpha or density.' :
+        'Normalized candidate chromaticity with authored saturation, registered local contrast, then RGB gamma and brightness. Image brightness never changes alpha or density.',
       fallback: 'Uncovered or zero-RGB pixels retain neutral reference material with the same whole-cloud brightness/gamma. Lossy delivery may re-encode RGB; alpha remains exact.' },
     approximation: { ...structuredClone(options.slices.approximation),
       method: `${options.slices.approximation.method} Material: ${CLOUD_MATERIAL_METHOD}.`,

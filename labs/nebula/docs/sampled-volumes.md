@@ -1,8 +1,32 @@
 # Qualified spatial samples and separate emitting components
 
 Crab uses the existing compiler workspace and PolyCSS volume renderer with a
-different offline support operator. The image-fitting compiler remains unchanged
-for Pleiades, Lagoon and the earlier experiments.
+different offline support operator. Both compiler paths now require material
+attached to finite 3D emitters. Their historical bakes remain separate baselines;
+changing that interface does not establish visual acceptance.
+
+## Mandatory material qualification
+
+The baker accepts only `sampleMaterial(x,y,z,out)`, without a projected-image
+fallback. Each raw spatial point receives registered chromaticity before its
+finite XYZ kernel is splatted. Analytic and diffuse components own their colors;
+the same 3D support mixes them with neutral emission. All slab axes use the same
+emitting sub-samples. A mixture is not normalized back to full RGB brightness.
+Known black material stays black; missing coverage remains explicitly neutral.
+
+The sampled operator can fit bounded RGB coefficients using actual near-to-far
+attenuation on its fixed grid. That stage cannot change geometry, alpha or stars.
+Optional experimental detail atoms use training-image contrast for XY and a
+local spatial-prior mode for depth. They are inferred additions, not measured
+filaments. Separate receipts record each stage and its unresolved ambiguities.
+
+Unit tests reject the old XY-only path and its repeated-depth counterfactual.
+They do not prove visual quality: front, oblique, both side axes and continuous
+rotation remain mandatory before acceptance or promotion. Crab's
+[material trials](../models/m1/material-trial.json) currently **fail**: averaging
+removes front detail; isolated fine emitters produce beads. Connected structures
+are the next required model work. The historical fixed-density/symmetry painters
+also require requalification; their existing pinned assets were not replaced.
 
 ## What establishes the shape
 

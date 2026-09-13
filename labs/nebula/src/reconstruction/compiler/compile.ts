@@ -14,6 +14,7 @@ import { restoreCompilerInputs, type CompilerProgress } from './prerequisites';
 import { compilerTarget, loadCompilerImages, compilerImagePanel } from './images';
 import { fitEmissionField } from './fit';
 import { createEmissionField } from './field';
+import { createEmissionMaterial } from './component-material';
 import { loadDepthModel, readDepthRecipe, verifyDepthEvidence } from './depth-model';
 import { bakeCompiler } from './bake';
 import { compilerStars } from './stars';
@@ -114,10 +115,11 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
   const span = Math.max(field.bounds.max[0] - field.bounds.min[0], field.bounds.max[1] - field.bounds.min[1]) * 1.04;
   const skyBounds = { min: [centerX - span / 2, centerY - span / 2] as [number, number], max: [centerX + span / 2, centerY + span / 2] as [number, number] };
   started = performance.now();
+  const materials = sourceData.images.map(image => ({ image, ...createEmissionMaterial(fitted.field, image, field) }));
   const scene = await bakeCompiler({ root, outputDirectory: `${directory}/scene`, id, fieldIdentity: fitted.field.identity,
     boundsArcsec: field.bounds, skyBoundsArcsec: skyBounds, sampleEmission: field.sampleEmission, stars,
     minimumFeatureScaleArcsec: depthModel ? Math.min(...fitted.field.components.flatMap(component => component.sigma)) : undefined,
-    lenses: sourceData.images.map(image => ({ id: image.id, label: image.label, sampleRgb: image.sampleRgb })), signal,
+    lenses: materials.map(material => ({ id: material.image.id, label: material.image.label, sampleMaterial: material.sampleMaterial })), signal,
     progress: value => progress(value.message, value.phase === 'volume' ? .45 + .2 * value.completed / value.total : value.phase === 'texture' ? .65 + .25 * value.completed / value.total : .92) });
   pipeline.push({ id: 'bake', label: 'Bake shared geometry + image lenses', state: 'complete', seconds: (performance.now() - started) / 1000 });
   const sources: CompilerResult['sources'] = [];
@@ -141,7 +143,7 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
     physicalDepth, ...(union ? { starCatalogue: union.selection } : {}),
     inputIdentity: inputs.identity, target: { ...target, target: undefined, coverage: undefined }, scaffoldFit, fieldMetrics: fitted.metrics,
     assumptions: fitted.field.assumptions, stars: union ? union.selection.interpretation : 'Compact points detected once from the reference stellar residual. Each lens preserves its own local background-subtracted residual aperture display energy and angular footprint at the same registered xy; absent coverage or residual emits zero light. Only columns with fitted emission are included. Depth is a deterministic conditional field sample, unchanged across lenses, not a measured stellar distance or confirmed membership. Encoded RGB display accounting is not calibrated stellar flux, and stars visible only outside the reference catalogue are not added.',
-    materials: 'Independent RGB-only lenses. Every source uses the identical fitted field and every neutral alpha byte. Evidence-guided thin fields weight material chromaticity by the same emitting sub-samples used for each geometry slab; missing material remains neutral. No image ray normalization.',
+    materials: materials.map(material => material.receipt),
     pipeline }, null, 2)));
   const m = fitted.metrics;
   const result: CompilerResult = { schema: 'cssearth-nebula-compiler-result@1', id, label: recipe.label, defaultSourceId: recipe.defaultSourceId, controls: request.controls, scene, sources, pipeline,
