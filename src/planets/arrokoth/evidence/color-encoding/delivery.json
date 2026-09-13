@@ -1,0 +1,27 @@
+{
+  "baseline": "8cc1a2fae",
+  "method": "Fetched immutable runtime URLs over HTTPS and verified byte counts and SHA-256 against the current runtime inventory.",
+  "assets": [
+    {
+      "filename": "arrokoth-mvic-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/542c2fefa64d4c80d92f61b76d3c6bf67a83da8bd9a8545820e27b100b0834c2/arrokoth-mvic-shadow@2x.webp",
+      "bytes": 207780,
+      "sha256": "542c2fefa64d4c80d92f61b76d3c6bf67a83da8bd9a8545820e27b100b0834c2",
+      "verified": true
+    },
+    {
+      "filename": "arrokoth-mvic-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d7c807ca1763f467c01e0bde7e3e8e9b601af45b661898cae0ed03a688c8be8b/arrokoth-mvic-surface@2x.webp",
+      "bytes": 254052,
+      "sha256": "d7c807ca1763f467c01e0bde7e3e8e9b601af45b661898cae0ed03a688c8be8b",
+      "verified": true
+    },
+    {
+      "filename": "arrokoth-mvic-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/cc041d2351ead311fb0283ee6863ca393bc6f58fdce47b1e73fa6ec30ee0dff2/arrokoth-mvic-thumbnail.webp",
+      "bytes": 2036,
+      "sha256": "cc041d2351ead311fb0283ee6863ca393bc6f58fdce47b1e73fa6ec30ee0dff2",
+      "verified": true
+    }
+  ]
+}

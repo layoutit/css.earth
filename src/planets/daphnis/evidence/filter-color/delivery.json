@@ -1,0 +1,27 @@
+{
+  "baseline": "8cc1a2fae",
+  "method": "Fetched immutable runtime URLs over HTTPS and verified byte counts and SHA-256 against the current runtime inventory.",
+  "assets": [
+    {
+      "filename": "daphnis-filter-color-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3a17a6cdd15a5e9068835adcb3b631449d0be3128dccc38c4fa1945d1fddc78b/daphnis-filter-color-shadow@2x.webp",
+      "bytes": 128344,
+      "sha256": "3a17a6cdd15a5e9068835adcb3b631449d0be3128dccc38c4fa1945d1fddc78b",
+      "verified": true
+    },
+    {
+      "filename": "daphnis-filter-color-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3c3866822ece15c5089dd5dfb335e5a3540976b067f82b9f897353cbdb3bdec0/daphnis-filter-color-surface@2x.webp",
+      "bytes": 182240,
+      "sha256": "3c3866822ece15c5089dd5dfb335e5a3540976b067f82b9f897353cbdb3bdec0",
+      "verified": true
+    },
+    {
+      "filename": "daphnis-filter-color-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c3c1a9844c7b1d000e4ff504d4da6b1d288d8e5cb20d3216b97f3ee79883654c/daphnis-filter-color-thumbnail.webp",
+      "bytes": 2566,
+      "sha256": "c3c1a9844c7b1d000e4ff504d4da6b1d288d8e5cb20d3216b97f3ee79883654c",
+      "verified": true
+    }
+  ]
+}

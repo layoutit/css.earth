@@ -1,6 +1,7 @@
 import type {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {RgbObservation} from './contracts.mts';
 import type {RadialState} from './solid-contract.mts';
+import { encodeBandColor } from '../color-transfer.mts';
 import {parseSolidRasterConfig,parseSurfaceSource} from './solid-source.mts';
 import {requireTerrainMesh} from './radial-terrain.mts';
 import {shape,text,number} from './source-records.mts';
@@ -288,14 +289,13 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     if (!base) throw new Error(`Color observation base does not exist: ${recipe.monochromeBase}`);
     if (photometry && !('owners' in color)) throw new Error('Corrected color has no observation ownership.');
     const levels=recipe.photometry && 'owners' in color ? matchObservedColorLevels(color,base,{width,height,...recipe.photometry.levels}):null;
-    if(photometry && !color.rgb.every(value=>Number.isFinite(value)&&value>=0&&value<=255))throw new Error('Corrected observation exceeds the display range.');
-    const rgb = color.rgb instanceof Uint8Array ? color.rgb : Buffer.from(color.rgb);
+    const rgb = color.rgb instanceof Uint8Array ? color.rgb : encodeBandColor(color.rgb,color.missing,color.display);
     let monochromePixels = 0;
     for (let i = 0; i < color.missing.length; i++) if (color.missing[i] && !base.missing[i]) {
       rgb.set(base.rgb.subarray(i * 3, i * 3 + 3), i * 3); color.missing[i] = 0; monochromePixels++;
     }
     surfaces.push(await packSurface(recipe.id, rgb, color.missing, {
-      ...recipe.metadata, sourceIds: color.sourceIds, monochromePixels, observationCoverage: color.coverage,
+      ...recipe.metadata, sourceIds: color.sourceIds, monochromePixels, observationCoverage: color.coverage,colorDisplay:color.colorDisplay,
       ...(photometry?{photometry:'photometry' in color ? color.photometry : undefined,levels}:{}),
     }));
   }

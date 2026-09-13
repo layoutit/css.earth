@@ -4,7 +4,7 @@
   "id": "hyperion",
   "displayName": "Hyperion",
   "panel": {
-    "introduction": "Hyperion is Saturn’s sponge-like, chaotically tumbling moon. Deep craters cover a porous, irregular body whose dark crater floors contrast with brighter icy walls. The displayed orientation and lighting are illustrative; its chaotic tumbling is not simulated.",
+    "introduction": "Hyperion is Saturn\u2019s sponge-like, chaotically tumbling moon. Deep craters cover a porous, irregular body whose dark crater floors contrast with brighter icy walls. The displayed orientation and lighting are illustrative; its chaotic tumbling is not simulated.",
     "facts": [
       {
         "id": "radius",
@@ -50,14 +50,14 @@
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "William Lassell and William and George Bond · 1848"
+        "value": "William Lassell and William and George Bond \u00b7 1848"
       }
     ],
     "moreFacts": [
       {
         "id": "density",
         "label": "Mean density",
-        "value": "0.54 ± 0.05 g/cm³",
+        "value": "0.54 \u00b1 0.05 g/cm\u00b3",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
           "label": "NASA/JPL reference",
@@ -74,7 +74,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "filter-color": "False color"
     },
     "controls": [
       {
@@ -92,6 +93,22 @@
           "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
         },
         "summary": "Twelve Cassini frames, including a regional ~100 m/pixel close view. Shape and registration limit detail; shadows and marked gaps remain."
+      },
+      {
+        "id": "filter-color",
+        "label": "False color",
+        "description": "Five Cassini pointings in IR3, IR1 and UV3, displayed as red, green and blue. Cameras use measured registration in the published shape frame; complete three-filter footprints are combined.",
+        "title": "Cassini false color",
+        "detail": "Cassini",
+        "thumbnail": "/scenes/hyperion/hyperion-filter-color-thumbnail.webp",
+        "surface": "hyperion-filter-color-surface@2x.webp",
+        "poles": "hyperion-filter-color-surface@2x.webp",
+        "source": {
+          "id": "n1506388324",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/"
+        },
+        "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
       },
       {
         "id": "elevation",
@@ -113,7 +130,7 @@
           "width": 256,
           "height": 16,
           "labels": [
-            "−50",
+            "\u221250",
             "0",
             "60"
           ],

@@ -50,6 +50,7 @@ export function applyNativeSurfaceExposure(source: NativePoleSampler, shoulders:
 export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: string, publicDirectory: string, interpret?: ObservationInterpretation) {
     const decoded = new Map<string, Uint8Array>();
     const metadata: Record<string, unknown> = {};
+    const interpretations: Record<string, Record<string, Readonly<Record<string, unknown>>>> = {};
     const nativeSourcePoles = new Map<string, Promise<NativePoleSampler>>();
     const load = async (path: string) => { let data = decoded.get(path); if (!data) {
         data = await readRgba(resolve(sourceDirectory, path), config.sourceWidth, config.sourceHeight);
@@ -83,6 +84,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                 if (!interpret) throw new TypeError(`Surface ${surface.id} declares a scientific interpretation but none was supplied.`);
                 const interpreted = await interpret({ id: surface.id, source: surface.source, science: surface.science, ...(surface.nativeSourcePoles ? { nativeSourcePoles: true } : {}) }, width, height, density);
                 nearest = interpreted.nearest; pixels = withAlpha(interpreted, width, height); nativePhotograph = interpreted.nativePhotograph;
+                if (interpreted.report) (interpretations[surface.id] ??= {})[density] = interpreted.report;
                 if (config.emission) {
                     const plates = interpreted.plates;
                     if (!plates) throw new TypeError(`Surface ${surface.id} declares emission but its interpretation returned no plates.`);
@@ -165,5 +167,5 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                 }
             await raster(atlas, width, tileSize).webp({ quality: 90, alphaQuality: 100 }).toFile(assetPath(publicDirectory, config.polesOutput, density));
         }
-    return { metadata, decoded };
+    return { metadata, decoded, interpretations };
 }

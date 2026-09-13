@@ -13,6 +13,7 @@ import {resolve} from 'node:path';
 import {loadStlShape, loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable,parsePdsRadiusTable} from './obj-shape.mts';
 import {parsePdsRadialTable} from './pds-radial-table.mts';
 import {readFitsPrimary} from '../observation/fits.mts';
+import { parseBandColorDisplay, encodeBandColor, bandColorEvidence } from '../color-transfer.mts';
 
 const rad = Math.PI / 180;
 const dot = (a: Vector,b: Vector) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
@@ -236,32 +237,69 @@ function sampleStatistics(values: ArrayLike<number>,missing?: Uint8Array){
 }
 
 /** Independently project each calibrated filter; display only their common
- * footprint. A common transfer function preserves band ratios. No invented
+ * footprint. Retain measured ratios in linear light until display encoding. No invented
  * luminance detail, per-channel gain matching, or missing-band fill is used. */
 export async function prepareShapeCameraColor(sourceDirectory: string,entries: readonly CameraEntry[],source: unknown,width: number,height: number,shape: unknown){
   const recipe = parseCameraColor(source);
   if('referenceDegrees' in recipe.photometry)throw new Error("Filter colour keeps each filter's observed brightness; a published photometric model is fitted to one filter.");
+  const display = parseBandColorDisplay(recipe.colorDisplay, recipe.channels.map(channel => channel.filter));
+  if (display.inputQuantity !== 'radiance-factor' || recipe.photometry.gamma !== 1 ||
+      display.displayRange[0] !== 0 || display.displayRange[1] !== recipe.photometry.displayMaximum) {
+    throw new Error('Calibrated camera color uses floating I/F, one declared range and one final sRGB transfer; legacy gamma cannot be applied first.');
+  }
   if(recipe.channels?.length!==3||recipe.photometry?.minimumLevel!==1||recipe.photometry?.maximumLevel!==1||
       recipe.frames!==undefined||recipe.metadata?.falseColor!==true||
       new Set(recipe.channels.map(c=>c.filter)).size!==3||
       ['red','green','blue'].some((name,i)=>recipe.channels[i]?.channel!==name||
-        typeof recipe.channels[i].filter!=='string'||!recipe.channels[i].filter||recipe.channels[i].frames?.length!==1))
-    throw new Error('Filter color requires three distinct ordered filters, one camera per channel, and a common fixed display scale.');
+        typeof recipe.channels[i].filter!=='string'||!recipe.channels[i].filter||!recipe.channels[i].frames?.length||
+        recipe.channels[i].frames.length!==recipe.channels[0].frames.length))
+    throw new Error('Filter color requires three distinct ordered filters, equally sized camera sets, and a common fixed display scale.');
   const paths=new Set(recipe.channels.flatMap(c=>c.frames.flatMap(framePaths)));
   if(entries.length!==paths.size||entries.some(e=>!paths.has(e.path)))throw new Error('Unconsumed color camera input.');
-  const channels=[];
-  for(const channel of recipe.channels){
-    const paths=new Set(channel.frames.flatMap(framePaths));
-    const map=await prepareShapeCameraMosaic(sourceDirectory,entries.filter(e=>paths.has(e.path)),
-      {frames:channel.frames,photometry:recipe.photometry},width,height,shape);
-    channels.push({channel:channel.channel,filter:channel.filter,...map});
+  // Matching indices form one observing triplet. Intersect before mosaicking:
+  // a missing band must never borrow another pointing's unrelated channel.
+  const sets=[];
+  for(let i=0;i<recipe.channels[0].frames.length;i++){
+    const frames=await Promise.all(recipe.channels.map(c=>resolveCatalogCamera(sourceDirectory,c.frames[i])));
+    sets.push({index:i,rangeKm:Math.max(...frames.map(f=>f.rangeKm))});
   }
-  const rgb=Buffer.alloc(width*height*3),missing=new Uint8Array(width*height).fill(1);
-  for(let i=0;i<missing.length;i++)if(channels.every(c=>!c.missing[i])){
-    missing[i]=0;for(let c=0;c<3;c++)rgb[i*3+c]=channels[c].rgb[i*3];
+  sets.sort((a,b)=>b.rangeKm-a.rangeKm);
+  // All filters use the same pinned shape and map grid. Retain that geometry once
+  // for this composite; do not rebuild its ray intersections for every exposure.
+  const surface = await cameraSampleSurface(sourceDirectory,shape,width,height);
+  const values=new Float32Array(width*height*3),missing=new Uint8Array(width*height).fill(1);
+  const channelCoverage=recipe.channels.map(()=>new Uint8Array(missing.length));
+  const grids:Awaited<ReturnType<typeof prepareShapeCameraSamples>>['grid'][]=[];
+  const frameSets=[];
+  for(const set of sets){
+    const channels=[];
+    for(const [c,channel] of recipe.channels.entries()){
+      const frame=channel.frames[set.index],paths=new Set(framePaths(frame));
+      const label=await readFile(resolve(sourceDirectory,frame.labelPath),'utf8');
+      const filterValue=label.match(/\bFILTER_NAME\s*=\s*(\([^)]*\)|"[^"]*"|'[^']*'|[^\s]+)/)?.[1];
+      const filters=filterValue?.replace(/[()"']/g,'').split(/[,\s]+/).filter(Boolean);
+      const reflectance=/\bUNITS\s*=\s*['"]I\/F['"]/.test(label)||/\bREFLECTANCE_SCALING_FACTOR\s*=\s*1\.0+(?:E-0?4)/i.test(label);
+      if(!filters?.includes(channel.filter)||!reflectance)throw new Error(`Band color needs the actual filter and calibrated reflectance units in its native label: ${frame.id}`);
+      const map=await prepareShapeCameraSamples(sourceDirectory,entries.filter(e=>paths.has(e.path)),
+        {frames:[frame],photometry:recipe.photometry},width,height,shape,{retainConfidence:sets.length>1},surface);
+      if(!grids[c])grids[c]=map.grid;else grids[c].frames.push(...map.grid.frames);
+      for(let i=0;i<missing.length;i++)if(!map.missing[i])channelCoverage[c][i]=1;
+      channels.push(map);
+    }
+    let coveragePixels=0,addedPixels=0;
+    for(let i=0;i<missing.length;i++)if(channels.every(c=>!c.missing[i])){
+      coveragePixels++;if(missing[i])addedPixels++;
+      // Use the same edge/angle weight for R, G and B; no filter-specific gains.
+      const weight=missing[i]?1:Math.min(...channels.map(c=>c.confidence?.[i]??1));
+      for(let c=0;c<3;c++)values[i*3+c]=values[i*3+c]*(1-weight)+channels[c].values[i]*weight;
+      missing[i]=0;
+    }
+    frameSets.push({frames:recipe.channels.map(c=>c.frames[set.index].id),coveragePixels,addedPixels});
   }
-  return {rgb,missing,grid:{model:'controlled-shape-color',photometry:recipe.photometry,
-    channels:channels.map(({channel,filter,grid})=>({channel,filter,...grid})),
+  const rgb=encodeBandColor(values,missing,display);
+  return {rgb,missing,grid:{model:'controlled-shape-color',photometry:recipe.photometry,colorDisplay:bandColorEvidence(display),
+    channels:recipe.channels.map(({channel,filter},c)=>({channel,filter,...grids[c],coveragePixels:channelCoverage[c].reduce((a,b)=>a+b,0)})),
+    ...(sets.length>1?{frameSets,composition:'Complete triplets, coarse to fine, with one common detector-edge and incidence/emission blend weight for all three channels.'}:{}),
     coveragePixels:missing.reduce((sum,v)=>sum+1-v,0),totalPixels:missing.length}};
 }
 
@@ -275,7 +313,27 @@ export async function resolveCameraPhotometry(sourceDirectory: string,manifest: 
   return 'referenceDegrees' in p?resolvePublishedPhotometry(sourceDirectory,manifest,{model:p.model,referenceDegrees:p.referenceDegrees,limits:p.limits}):null;
 }
 
-export async function prepareShapeCameraMosaic(sourceDirectory: string,entries: readonly CameraEntry[],source: unknown,width: number,height: number,shape: unknown,{retainContributions=false,photometry=null}: {retainContributions?:boolean;photometry?:ResolvedPhotometry|null}={}){
+type CameraSampleOptions = {retainContributions?:boolean;retainConfidence?:boolean;photometry?:ResolvedPhotometry|null};
+/** The historical monochrome display remains separate from calibrated color. */
+export async function prepareShapeCameraMosaic(sourceDirectory: string,entries: readonly CameraEntry[],source: unknown,width: number,height: number,shape: unknown,options:CameraSampleOptions={}){
+  const {values,...result}=await prepareShapeCameraSamples(sourceDirectory,entries,source,width,height,shape,options);
+  const p=parseCameraMosaic(source).photometry,rgb=Buffer.alloc(values.length*3);
+  for(let i=0;i<values.length;i++){const v=Math.round(255*Math.max(0,Math.min(1,values[i]/p.displayMaximum))**(1/p.gamma));rgb.fill(v,i*3,i*3+3);}
+  return {rgb,...result};
+}
+
+async function cameraSampleSurface(sourceDirectory:string,shape:unknown,width:number,height:number){
+  const mesh=await loadCameraShape(sourceDirectory,shape),normalAt=smoothNormals(mesh);
+  const points=new Float64Array(width*height*3),normals=new Float32Array(points.length),valid=new Uint8Array(width*height);
+  for(let y=0;y<height;y++)for(let x=0;x<width;x++){
+    const lon=(x+.5)/width*360,lat=90-(y+.5)/height*180,h=mesh.hit(lon,lat);if(!h)continue;
+    const point=vector(lat,-lon).map(v=>v*h.radius),i=y*width+x;
+    points.set(point,i*3);normals.set(normalAt(h.faceId,point),i*3);valid[i]=1;
+  }
+  return {mesh,points,normals,valid};
+}
+
+async function prepareShapeCameraSamples(sourceDirectory: string,entries: readonly CameraEntry[],source: unknown,width: number,height: number,shape: unknown,{retainContributions=false,retainConfidence=false,photometry=null}:CameraSampleOptions={},surface?:Awaited<ReturnType<typeof cameraSampleSurface>>){
   const recipe = parseCameraMosaic(source);
   const p=recipe.photometry;
   // A published block carries its own angle and gain limits; the historical block is ISIS Lunar-Lambert or observed brightness.
@@ -294,14 +352,9 @@ export async function prepareShapeCameraMosaic(sourceDirectory: string,entries: 
   if(paths.size!==new Set(recipe.frames.flatMap(framePaths)).size)throw new Error('Unconsumed camera input.');
   const frames=await Promise.all(recipe.frames.map(frame=>resolveCatalogCamera(sourceDirectory,frame)));
   if(legacy&&legacy.model!==undefined&&(!observed||legacy.maximumGain!==1||legacy.minimumLevel!==1||legacy.maximumLevel!==1))throw new Error('Observed camera brightness must not be photometrically normalized.');
-  const mesh=await loadCameraShape(sourceDirectory,shape),normalAt=smoothNormals(mesh);
-  const points=new Float64Array(width*height*3),normals=new Float32Array(points.length),valid=new Uint8Array(width*height);
-  for(let y=0;y<height;y++)for(let x=0;x<width;x++){
-    const lon=(x+.5)/width*360,lat=90-(y+.5)/height*180,h=mesh.hit(lon,lat);if(!h)continue;
-    const point=vector(lat,-lon).map(v=>v*h.radius),i=y*width+x;
-    points.set(point,i*3);normals.set(normalAt(h.faceId,point),i*3);valid[i]=1;
-  }
+  const {mesh,points,normals,valid}=surface??await cameraSampleSurface(sourceDirectory,shape,width,height);
   const values=new Float32Array(width*height),missing=new Uint8Array(values.length).fill(1),statistics=[];
+  const confidence=retainConfidence?new Float32Array(values.length):undefined;
   // Optional preparation evidence: retain every contributor, including blends.
   // These weights are never part of the material or runtime transport.
   const contributions:{id:string;path:string;sha256:string;weights:Float32Array}[]|null=retainContributions?[]:null;
@@ -335,6 +388,7 @@ export async function prepareShapeCameraMosaic(sourceDirectory: string,entries: 
     ratios.sort((a,b)=>a-b);
     const level=ratios.length>=100?Math.max(p.minimumLevel,Math.min(p.maximumLevel,ratios[Math.floor(ratios.length/2)])):1;
     for(let j=0;j<samples.length;j+=3){const [i,value,weight]=samples.slice(j,j+3);
+      if(confidence)confidence[i]=Math.max(confidence[i],weight);
       if(weights && contributions){
         const applied=missing[i]?1:weight;
         for(const previous of contributions)previous.weights[i]*=1-applied;
@@ -351,9 +405,7 @@ export async function prepareShapeCameraMosaic(sourceDirectory: string,entries: 
       // With a published model, the unclamped median overlap ratio measures what level matching would still have to correct.
       ...(photometry&&ratios.length>=100?{overlapMedianRatio:ratios[Math.floor(ratios.length/2)]}:{})});
   }
-  const rgb=Buffer.alloc(values.length*3);
-  for(let i=0;i<values.length;i++){const v=Math.round(255*Math.max(0,Math.min(1,values[i]/p.displayMaximum))**(1/p.gamma));rgb.fill(v,i*3,i*3+3);}
-  return {rgb,missing,...(contributions?{contributions}:{}),grid:{model:'controlled-shape-camera',photometry:photometry?{...photometry.report,display:{displayMaximum:p.displayMaximum,gamma:p.gamma,minimumLevel:p.minimumLevel,maximumLevel:p.maximumLevel}}:p,frames:statistics,
+  return {values,missing,...(confidence?{confidence}:{}),...(contributions?{contributions}:{}),grid:{model:'controlled-shape-camera',photometry:photometry?{...photometry.report,display:{displayMaximum:p.displayMaximum,gamma:p.gamma,minimumLevel:p.minimumLevel,maximumLevel:p.maximumLevel}}:p,frames:statistics,
     ...(frames.some(f=>f.allowFiniteSigned)?{beforeDisplay:sampleStatistics(values,missing)}:{}),
     coveragePixels:missing.reduce((sum,v)=>sum+1-v,0),totalPixels:values.length}};
 }

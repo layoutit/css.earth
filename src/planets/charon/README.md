@@ -14,6 +14,10 @@ Charon combines New Horizons monochrome and enhanced-color mosaics, a terrain mo
 
 ## Evidence
 
+The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+
+[Displayed surface](evidence/color-encoding/color-dpr1.png) · [DPR 2](evidence/color-encoding/color-dpr2.png) · [Shadows](evidence/color-encoding/oblique-shadows-dpr1.png) · [Mobile](evidence/color-encoding/mobile.png). The capture uses installed Chrome 152. The bundled headless Chromium rejected both the old and new 13,000 × 9,600 atlases in an isolated image decode; Chrome decoded both. Twelve missing baseline assets were [reproduced exactly and restored](evidence/color-encoding/restored-delivery.json), preserving all existing inventory hashes.
+
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
 
 | View | Both prepared levels, before → current |
@@ -105,7 +109,10 @@ The additional Enhanced color lens uses the PDS product
 retained as the original 116,006,912-byte four-band float32 array. SHA-256:
 `dd23352035996d670b9c278a1466461623556acc88d66aabd3bc2da1dd15fc5a`.
 The bands are CH4 895 nm, NIR 870 nm, red 625 nm and blue 475 nm;
-display RGB uses NIR/red/blue with one common linear 0–0.6 stretch.
+Display RGB assigns the derived NIR/red/blue values to linear channels over one
+common 0–0.6 range, then applies the [shared IEC sRGB output
+transfer](../../../docs/color-preparation.md). The source remains floating point
+through interpolation; clipping and 8-bit quantization happen at output.
 This is enhanced false color, not natural color or quantitative albedo.
 
 The PDS4 label declares 3,808 × 1,904, band-sequential little-endian float32,
@@ -121,7 +128,8 @@ Independent NumPy decoding found 4,105,311 RGB-valid source pixels, about
 60.0019% of surface area after latitude weighting, before conservative
 interpolation. Unknown color coverage remains the neutral grid. A raw anchor
 at 0°E,80°N has NIR/red/blue values 0.2344332486/0.1650196165/0.1310233623,
-consistent with the mission's separately described reddish northern pole.
+before any display transfer. These infrared/visible ratios do not independently
+establish the pole's natural color.
 The southern cap and unobserved longitudes retain missing values. Numeric and
 bit-pattern anchors are in source/validation/color-source-inspection.json.
 
