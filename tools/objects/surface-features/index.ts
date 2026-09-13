@@ -295,6 +295,8 @@ export interface SurfaceFeaturePreparationContext {
   readonly config: unknown; readonly maxEntries: number; readonly radiusKm: number; readonly meshRadiusUnits: number;
   readonly tree: { readonly nodes: readonly { readonly className: string | null; readonly parent: number; readonly style?: string }[]; readonly scene: number };
   readonly declaredLensIds: readonly string[];
+  /** Explicit authored sphere; permits coordinate-only mission landmarks without a triangle hit mesh. */
+  readonly referenceSphere?: true;
   /** The prepared picking mesh of a shape-model body: anchors and outline points are cast onto it instead of a reference sphere. */
   readonly hitMesh?: { readonly target: number; readonly triangles: readonly (readonly (readonly number[])[])[] };
   /** An ellipsoidal body: map directions are cast onto its rendered surface instead of the reference sphere (ellipsoid.ts). */
