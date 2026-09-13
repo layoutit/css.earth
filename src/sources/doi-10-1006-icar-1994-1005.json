@@ -1,0 +1,29 @@
+{
+  "id": "doi-10-1006-icar-1994-1005",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Galileo Photometry of Asteroid 951 Gaspra",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1006/icar.1994.1005"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1006/icar.1994.1005",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/gaspra/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/documents/28"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
