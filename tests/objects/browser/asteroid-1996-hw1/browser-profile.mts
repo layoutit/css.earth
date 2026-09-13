@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/asteroid-1996-hw1/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/asteroid-1996-hw1/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'asteroid-1996-hw1',controls,audit:{
   "preparedAssetPairs": [
     {

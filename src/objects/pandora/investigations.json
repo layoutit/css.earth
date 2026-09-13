@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "pandora",
+  "entries": [
+    {
+      "id": "cassini-iss-and-shape-release",
+      "subject": "Cassini ISS archive and PDS shape release",
+      "status": "included",
+      "finding": "The [Cassini ISS calibrated archive](https://pds-rings.seti.org/cassini/iss/) supplies the observation lens and the [PDS shape release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html) supplies geometry and radial-height visualization.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/pandora/README.md#L50",
+        "https://pds-rings.seti.org/cassini/iss/",
+        "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-09",
+          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
+          "pr": 83
+        }
+      ]
+    },
+    {
+      "id": "stooke-celestia-maps",
+      "subject": "Voyager-era Stooke and Celestia maps",
+      "status": "excluded",
+      "finding": "The Voyager-era Stooke shaded-relief and Celestia maps represent a different, older cartographic interpretation and cannot be described as Cassini observed pixels; the original Western University distribution URL currently returns 404. They add no qualified improvement over the chosen Cassini frames.",
+      "revisitWhen": "A registered observational map improves on the Cassini frames.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/pandora/README.md#L52"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-09",
+          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
+          "pr": 83
+        }
+      ]
+    },
+    {
+      "id": "sbib-catalog",
+      "subject": "SBIB Cassini catalog as a download path",
+      "status": "excluded",
+      "finding": "[SBIB’s Cassini catalog](https://sbn.psi.edu/pds/sbib/saturn.html) currently omits Pandora from its listed targets. This is a limitation of that catalog, not a claim that other Pandora datasets do not exist.",
+      "revisitWhen": "The catalog lists Pandora.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/pandora/README.md#L56",
+        "https://sbn.psi.edu/pds/sbib/saturn.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-09",
+          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
+          "pr": 83
+        }
+      ]
+    }
+  ]
+}

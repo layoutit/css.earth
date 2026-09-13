@@ -43,7 +43,7 @@ async function gitShow(revision: string, repositoryPath: string, root: string) {
 /** Add missing bindings and records; pin placeholder evidence when a revision is given. */
 export async function authorSourceRecords({ root, objectId, evidence, manifestAt, write = true }: AuthoringOptions): Promise<AuthoringResult> {
   if (!/^[a-z][a-z0-9-]*$/u.test(objectId)) throw new TypeError(`Invalid object id: ${objectId}`);
-  const objectDirectory = resolve(root, 'src/planets', objectId), manifestPath = resolve(objectDirectory, 'source/manifest.json');
+  const objectDirectory = resolve(root, 'src/objects', objectId), manifestPath = resolve(objectDirectory, 'source/manifest.json');
   const repositoryPath = relative(root, manifestPath).split('\\').join('/');
   const manifest = requireRecord(JSON.parse(await readFile(manifestPath, 'utf8')), 'source manifest');
   const inputs = requireArray(manifest.inputs, 'manifest inputs').map(value => requireRecord(value, 'manifest input'));

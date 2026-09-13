@@ -10,7 +10,7 @@ const projectRoot=fileURLToPath(new URL('../../../',import.meta.url));
 /** Asset manifest identities predate the generic operators and remain unchanged. */
 export async function assertRadialPreparationParity(id: string) {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new TypeError('Unsafe object identity.');
-  const objectDirectory=resolve(projectRoot,'src/planets',id);
+  const objectDirectory=resolve(projectRoot,'src/objects',id);
   const config: unknown=JSON.parse(await readFile(resolve(objectDirectory,'source/preparation/rings.json'),'utf8'));
   const manifest=parse(JSON.parse(await readFile(resolve(objectDirectory,'runtime-assets.json'),'utf8')), runtimeAssetManifest, 'runtime asset manifest');
   const result=await prepareGiantLayers({sourceDirectory:resolve(objectDirectory,'source'),config,write:false});

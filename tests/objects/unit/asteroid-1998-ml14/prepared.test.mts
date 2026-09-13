@@ -5,7 +5,7 @@ import {requireArray, requireFiniteNumber, requireRecord} from '../../../../tool
 import {assertAsteroidPackage} from '../asteroid-contract.mts';
 test('1998 ML14 retains Shape, Elevation and native raster triangles',async()=>{
  await assertAsteroidPackage('asteroid-1998-ml14',['shape','elevation'],500);
- const surfaces=requireRecord(JSON.parse(await readFile(new URL('../../../../src/planets/asteroid-1998-ml14/prepared/surfaces.json',import.meta.url),'utf8')),'prepared surfaces');
+ const surfaces=requireRecord(JSON.parse(await readFile(new URL('../../../../src/objects/asteroid-1998-ml14/prepared/surfaces.json',import.meta.url),'utf8')),'prepared surfaces');
  const science=requireArray(surfaces.surfaces,'prepared surfaces').map((surface,index)=>requireRecord(surface,`prepared surface ${index}`)).find(surface=>surface.id==='elevation');
  assert.ok(science,'Elevation surface is prepared');
  const sampling=requireRecord(science.surfaceSampling,'elevation sampling'),transfer=requireRecord(sampling.transfer,'elevation transfer');

@@ -3,7 +3,7 @@ export interface MercuryEphemeris { readonly source: string; readonly heliocentr
 // Independent oracle for the Mercury lighting and sky geometry browser suite.
 //
 // Everything here is derived from raw astronomy and its own vector maths. It
-// deliberately imports nothing from src/platform or src/planets: the published
+// deliberately imports nothing from src/platform or src/objects: the published
 // solar geometry, presentation frame, view-direction and sky-registration
 // helpers are the code under test, and an expectation computed with them would
 // agree with any wrong render they produce.

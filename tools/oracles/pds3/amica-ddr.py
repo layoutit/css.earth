@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fixture import ROOT, samples, write, find, label_text
 warnings.simplefilter('ignore')
 
-source = ROOT / 'src/planets/itokawa/source/observations'
+source = ROOT / 'src/objects/itokawa/source/observations'
 cube, label_path, original, flat = source / 'st_2402987304_v_ddr.img.gz', source / 'st_2402987304_v_ddr.lbl', source / 'st_2402987304_v.fit', source / 'flat_v.fit'
 label = pvl.load(str(label_path)); image = find(label, 'IMAGE')
 bands, lines, samples_per_line = int(image['BANDS']), int(image['LINES']), int(image['LINE_SAMPLES'])

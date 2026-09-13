@@ -24,7 +24,7 @@ const save = (path: string, value: unknown) => writeFile(path, JSON.stringify(va
 export async function refreshSurfaceObservations(id: string, lensIds: readonly string[]) {
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !lensIds.length || new Set(lensIds).size !== lensIds.length)
     throw new TypeError('Choose a body and distinct existing observation lenses.');
-  const started = performance.now(), objectDirectory = resolve('src/planets', id), sourceDirectory = resolve(objectDirectory, 'source');
+  const started = performance.now(), objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
   const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const stage = resolve('output/surface-observation-refresh', id), recipePath = resolve(sourceDirectory, 'preparation/terrestrial.json');
   const recipeBytes = await readFile(recipePath), descriptor = await json(resolve(objectDirectory, 'object.json'));
@@ -106,7 +106,7 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
 /** Refresh source-owned lens descriptions and the refreshed lenses' billboard colours without rebaking any images. */
 export async function refreshObservationDescriptions(id: string, lensIds: readonly string[], surfaceColors: ReadonlyMap<string, string> = new Map()) {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Invalid object id.');
-  const objectDirectory = resolve('src/planets', id), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
+  const objectDirectory = resolve('src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const descriptor = await json(resolve(objectDirectory, 'object.json'));
   const references = records(requireRecord(requireRecord(descriptor.properties).recipe).sources);
   // The source-owned description explains the selected observations. Keep the

@@ -126,6 +126,13 @@ inspect one native-pixel projection before fitting or baking. Follow the
 for conflicting or undocumented conventions. Record the selected companion and
 any remaining inference in the existing recipe and body README.
 
+Blank body-fixed convenience fields in an image header do not establish that
+PDS lacks geometry. Inspect the mission SPICE release, including reconstructed
+ephemerides, pointing, instrument and body-orientation kernels. Distinguish
+active kernel assignments from commented or rejected alternatives, and match
+receive time, target emission time and aberration conventions to the image.
+Recover and verify the available archive inputs before declaring a source gap.
+
 Search the relevant papers explicitly as well as the data archives. Inspect
 full text, tables, appendices and supplementary files: a usable radius table,
 mesh, camera solution or registration controls may be published there without
@@ -136,9 +143,12 @@ Record any transcription or digitization and check it against the published
 table or figure. A paper's availability does not establish image or data reuse
 rights; unresolved access remains unresolved evidence, not proof of absence.
 
-Explain the selected sources and useful alternatives once in the body's README
-or a linked detailed method: source link,
-what it adds, and whether it is included, excluded or unresolved, with a reason.
+Read the object's investigation ledger (`investigations.json`) before searching.
+Reopen an excluded, unresolved or deferred entry only when its `revisitWhen`
+condition is met, and say which. Record each examined source, route, lens or
+frame there once, including failed trials: status, finding, evidence pinned to a
+commit or pull request, and what would reopen it. The body README explains the
+selected sources and links the ledger instead of repeating the survey.
 Compare detail, registration, coverage and reuse terms before choosing. A better
 mosaic can replace a weaker one without becoming a duplicate lens. Missing
 metadata or a failed download leaves a candidate unresolved; it is not evidence
@@ -199,7 +209,7 @@ examples of capabilities, not templates for a new controller or a whole planet.
   Body selection navigates one active scene; standalone moons have their own
   routes, not embedded moon scenes in the parent's package.
 - Register additions in the body's descriptor and individual astronomy record,
-  following the [contributor guide](../../../src/planets/README.md#register-a-body-without-editing-shared-lists).
+  following the [contributor guide](../../../src/objects/README.md#register-a-body-without-editing-shared-lists).
   Keep combined catalogues and navigation outputs generated. Do not edit shared
   body lists or force-add ignored build files to register a destination.
 - Put source interpretation, geometry, materials, scientific content and
@@ -304,6 +314,16 @@ attitude, visual similarity, or same-renderer screenshot does not establish
 image-to-shape registration. Keep an honest model or coarse pointing view, mark
 the photographic lens deferred, and preserve the source gaps.
 
+For image-transfer diagnostics, distinguish detector alignment from surface
+control. A nearly repeated view can correlate closely without constraining the
+mesh frame or depth. Inspect distributed interior detail and a meaningfully
+different viewing direction; retain contradictory results, including reverse
+transfer when it exposes a concrete ambiguity. Keep fitting pixels separate
+from holdouts. Report native pixel scales, search boundaries and broad or weak
+correlation peaks. A correlation score or an arbitrary residual cutoff is not a
+publication gate. Removing a brightness plane for a diagnostic must not change
+the delivered photograph or be described as a photometric calibration.
+
 Treat model transfer as its own gate: a map registered to one shape cannot be
 draped onto another shape until their frame and surface correspondence are
 shown. Do not delete a candidate before checking the source release or paper;
@@ -350,7 +370,7 @@ Use reader feedback to fix confusing wording or structure; do not treat agent
 review or a word count as reader testing.
 
 Finish with the working location/URL, supported views, checked outcomes and
-remaining limitations, including useful unresolved dataset candidates. A working
+remaining limitations, including useful unresolved dataset candidates recorded in the investigation ledger. A working
 first lens does not establish that the body's useful datasets have been covered.
 Complete authorized commit/PR work, respecting the
 user's merge instructions. Source fidelity, visual acceptance and runtime

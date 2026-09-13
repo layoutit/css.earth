@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/philagoria/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/philagoria/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'philagoria',controls,audit:{
   "preparedAssetPairs": [
     {

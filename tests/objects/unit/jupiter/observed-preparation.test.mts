@@ -5,7 +5,7 @@ import {readFile} from 'node:fs/promises';
 import {prepareObservedPolarSurfaces} from '../../../../tools/objects/giant-observations/index.mts';
 
 test('reproduces every observed/polar asset from pinned sources without prepared inputs',{timeout:120000},async()=>{
-  const objectRoot=new URL('../../../../src/planets/jupiter/',import.meta.url).pathname;
+  const objectRoot=new URL('../../../../src/objects/jupiter/',import.meta.url).pathname;
   const config=JSON.parse(await readFile(objectRoot+'/source/preparation/observations.json','utf8'));
   const manifest=JSON.parse(await readFile(objectRoot+'/runtime-assets.json','utf8'));
   const result=await prepareObservedPolarSurfaces({sourceDirectory:objectRoot+'/source',publicDirectory:'/unused',config,write:false});

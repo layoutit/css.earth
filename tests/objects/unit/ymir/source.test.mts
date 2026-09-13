@@ -6,7 +6,7 @@ import sharp from 'sharp';
 import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 
-const root = new URL('../../../../src/planets/ymir/source/', import.meta.url);
+const root = new URL('../../../../src/objects/ymir/source/', import.meta.url);
 const read = async (path: string|URL) => JSON.parse((await readFile(new URL(path, root))).toString('utf8'));
 
 test('Ymir sampled surface preserves the published triangle, polar size and cap volume', async () => {

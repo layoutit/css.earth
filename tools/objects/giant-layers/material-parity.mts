@@ -10,7 +10,7 @@ import {parseRadialLayerRecipe,rasterAnnularField} from './index.mts';
 const root=fileURLToPath(new URL('../../../',import.meta.url));
 export async function assertMaterialPreparationParity(id: string){
   if(!/^[a-z][a-z0-9-]*$/u.test(id))throw new TypeError('Unsafe object identity.');
-  const directory=resolve(root,'src/planets',id),sourceDirectory=resolve(directory,'source');
+  const directory=resolve(root,'src/objects',id),sourceDirectory=resolve(directory,'source');
   const json=async(path: string):Promise<unknown>=>JSON.parse(await readFile(resolve(directory,path),'utf8'));
   const config=parseEllipsoidMaterialRecipe(await json('source/preparation/materials.json')),observations=await prepareObservedSurfaces({sourceDirectory,config:await json('source/preparation/observations.json')});
   let radialLayer;

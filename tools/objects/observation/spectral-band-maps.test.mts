@@ -7,7 +7,7 @@ import { estimateBand, fitsCube, paintCell, parseSpectralBandRecipe, prepareSpec
 import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '../../oracles/fixture.mts';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '../../source-values.mts';
 
-const source = resolve(ORACLE_ROOT, 'src/planets/charon/source');
+const source = resolve(ORACLE_ROOT, 'src/objects/charon/source');
 const recipePath = 'science/leisa/bands.json';
 const recipe = parseSpectralBandRecipe(JSON.parse(await readFile(resolve(source, recipePath), 'utf8')));
 

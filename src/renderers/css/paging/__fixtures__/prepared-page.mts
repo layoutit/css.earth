@@ -7,7 +7,7 @@ import { inlineSharedFromBanks } from '../../../../platform/prepared-shared-bank
 
 // Paging is an optional authored capability. Exercise the retained, source-backed
 // page plans without requiring Earth's current product card to enable city lenses.
-const read = async (name:string) => requireRecord(JSON.parse(await readFile(new URL(`../../../../planets/earth/prepared/${name}.json`, import.meta.url), 'utf8')));
+const read = async (name:string) => requireRecord(JSON.parse(await readFile(new URL(`../../../../objects/earth/prepared/${name}.json`, import.meta.url), 'utf8')));
 // The transport references shared banks; the fixture inlines them as the decoder does.
 const runtime = requireObjectRuntimeDefinition(await inlineSharedFromBanks(fileURLToPath(new URL('../../../../../', import.meta.url)), requireRecord(await read('object')).data));
 const nodes = runtime.tree.nodes;
