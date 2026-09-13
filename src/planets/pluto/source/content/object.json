@@ -226,6 +226,192 @@
         "summary": "Images from LORRI and MVIC provide varying surface detail. The gray grid marks regions without imagery in this mosaic.",
         "falseColor": false,
         "qualification": "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
+      },
+      {
+        "id": "methane-ice",
+        "label": "Methane ice",
+        "title": "LEISA methane ice",
+        "description": "Methane ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
+        "thumbnail": "pluto-lens-methane-ice.webp",
+        "surface": "pluto-methane-ice.webp",
+        "poles": "pluto-poles-methane-ice.webp",
+        "source": {
+          "id": "pluto-leisa-ice-fractions",
+          "url": "https://zenodo.org/records/18825240"
+        },
+        "detail": "LEISA",
+        "summary": "Methane-rich ice is widespread in the northern terrain. Colors show its estimated share of each mapped area, fitted from infrared spectra. Grid: no usable fit.",
+        "falseColor": true,
+        "qualification": "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
+        "legend": {
+          "kind": "scale",
+          "title": "Estimated surface fraction",
+          "labels": [
+            "0",
+            "50",
+            "100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0",
+              "50",
+              "100"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://zenodo.org/records/18825240"
+        }
+      },
+      {
+        "id": "nitrogen-ice",
+        "label": "Nitrogen ice",
+        "title": "LEISA nitrogen ice",
+        "description": "Nitrogen ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
+        "thumbnail": "pluto-lens-nitrogen-ice.webp",
+        "surface": "pluto-nitrogen-ice.webp",
+        "poles": "pluto-poles-nitrogen-ice.webp",
+        "source": {
+          "id": "pluto-leisa-ice-fractions",
+          "url": "https://zenodo.org/records/18825240"
+        },
+        "detail": "LEISA",
+        "summary": "Nitrogen-rich ice stands out in Sputnik Planitia. Colors show its estimated share of each mapped area; the result depends on the ice model. Grid: no usable fit.",
+        "falseColor": true,
+        "qualification": "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
+        "legend": {
+          "kind": "scale",
+          "title": "Estimated surface fraction",
+          "labels": [
+            "0",
+            "50",
+            "100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0",
+              "50",
+              "100"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://zenodo.org/records/18825240"
+        }
+      },
+      {
+        "id": "water-ice",
+        "label": "Water ice",
+        "title": "LEISA water ice",
+        "description": "Water ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
+        "thumbnail": "pluto-lens-water-ice.webp",
+        "surface": "pluto-water-ice.webp",
+        "poles": "pluto-poles-water-ice.webp",
+        "source": {
+          "id": "pluto-leisa-ice-fractions",
+          "url": "https://zenodo.org/records/18825240"
+        },
+        "detail": "LEISA",
+        "summary": "Water ice forms part of Pluto’s solid terrain beneath its more volatile ices. Colors show the surface fraction estimated from infrared spectra. Grid: no usable fit.",
+        "falseColor": true,
+        "qualification": "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
+        "legend": {
+          "kind": "scale",
+          "title": "Estimated surface fraction",
+          "labels": [
+            "0",
+            "50",
+            "100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0",
+              "50",
+              "100"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://zenodo.org/records/18825240"
+        }
       }
     ]
   },
@@ -271,6 +457,12 @@
       "role": "maps",
       "description": "Mosaic and elevation",
       "href": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
+    },
+    {
+      "label": "LEISA",
+      "role": "composition",
+      "description": "Published ice maps and paper",
+      "href": "https://zenodo.org/records/18825240"
     },
     {
       "label": "JPL",
