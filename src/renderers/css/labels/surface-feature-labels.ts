@@ -55,6 +55,9 @@ const SITE_CODES = new Set(['LS', 'IM', 'SS', 'RT']);
 const MINIMUM_FRAMED_RADIUS_M = 25_000;
 
 const CLICK_SLOP_PIXELS = 5;
+/** Catalogue names are written and measured in batches. All 2,000 names of a body at once took
+ * one 56-70 ms task in the middle of the arrival flight. */
+const LABELS_PER_FRAME = 128;
 
 export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene, zoomRange, navigation, flightLimits, onFlight, lifetime, pickingHost = host, inputSurface, onError, transport }: SurfaceFeatureMountOptions): SurfaceFeatureLayerRuntime {
   if (!host?.ownerDocument || !target || !scene.contains(target)) throw new TypeError('Surface feature labels need a host and a mesh target inside the scene.');
@@ -102,7 +105,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   let resolveLoaded!: (catalog: PreparedSurfaceFeatureCatalog) => void, rejectLoaded!: (error: unknown) => void;
   const loadedCatalog = new Promise<PreparedSurfaceFeatureCatalog>((resolve, reject) => { resolveLoaded = resolve; rejectLoaded = reject; });
   loadedCatalog.catch(() => {});
-  let pendingFrame: number | null = null, loopFrame: number | null = null;
+  let pendingFrame: number | null = null, loopFrame: number | null = null, populateFrame: number | null = null;
   let visible = new Set<number>(), rects = new Map<string, LabelScreenRect>(), eligible = 0;
   let hoveredIndex: number | null = null, pinnedIndex: number | null = null, shownIndex: number | null = null;
   const measure = () => {
@@ -148,16 +151,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   void loadPreparedSurfaceFeatureCatalog(plan, objectId, controller.signal, transport).then(loadedValue => {
     if (destroyed) return;
     catalog = loadedValue;
-    catalog.features.forEach((feature, index) => {
-      const entry = entries[index]!;
-      entry.feature = feature;
-      entry.element.dataset.featureLabel = feature.id;
-      entry.element.dataset.featureKind = feature.kind;
-      entry.element.textContent = feature.name;
-    });
-    loaded = true;
-    measure();
-    resolveLoaded(loadedValue);
+    catalog.features.forEach((feature, index) => { entries[index]!.feature = feature; });
+    populate(loadedValue, 0);
   }, failure => {
     if (destroyed || controller.signal.aborted) { rejectLoaded(failure); return; }
     error = failure instanceof Error ? failure.message : String(failure);
@@ -167,6 +162,29 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   function schedule() {
     if (destroyed || pendingFrame !== null) return;
     pendingFrame = windowTarget!.requestAnimationFrame(() => { pendingFrame = null; refresh(); });
+  }
+  function populate(loadedValue: PreparedSurfaceFeatureCatalog, start: number) {
+    populateFrame = null;
+    if (destroyed) return;
+    const end = Math.min(loadedValue.features.length, start + LABELS_PER_FRAME);
+    for (let index = start; index < end; index++) {
+      const entry = entries[index]!, feature = entry.feature!;
+      entry.element.dataset.featureLabel = feature.id;
+      entry.element.dataset.featureKind = feature.kind;
+      entry.element.textContent = feature.name;
+    }
+    // Read after this batch's writes, so each forced layout covers the new names, not the whole pool.
+    for (let index = start; index < end; index++) {
+      const entry = entries[index]!;
+      entry.width = entry.element.offsetWidth; entry.height = entry.element.offsetHeight;
+    }
+    if (end < loadedValue.features.length) {
+      populateFrame = windowTarget!.requestAnimationFrame(() => populate(loadedValue, end));
+      return;
+    }
+    loaded = true;
+    schedule();
+    resolveLoaded(loadedValue);
   }
   function loop() {
     loopFrame = null;
@@ -329,6 +347,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     flight?.cancel(); flight = null;
     if (pendingFrame !== null) windowTarget!.cancelAnimationFrame(pendingFrame);
     if (loopFrame !== null) windowTarget!.cancelAnimationFrame(loopFrame);
+    if (populateFrame !== null) windowTarget!.cancelAnimationFrame(populateFrame);
     fonts?.removeEventListener('loadingdone', measure);
     pickingHost.removeEventListener('objecthoverchange', onHover);
     if (inputSurface) { windowTarget!.removeEventListener('pointerdown', onPress, { capture: true }); windowTarget!.removeEventListener('click', onSurfaceClick); windowTarget!.removeEventListener('keydown', onKey); }

@@ -16,6 +16,8 @@ interface Entry {
   readonly activate: (event: Event) => void;
   width: number;
   height: number;
+  /** Last published label interactivity; null until the first publication. */
+  interactive: boolean | null;
 }
 
 /** One fixed catalogue bank, shared by every detailed scene and every camera focus. */
@@ -60,7 +62,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
     label.addEventListener('keydown', event => { if (event.key === 'Enter') activate(event); });
     label.setAttribute('role', 'button'); label.tabIndex = -1;
     root.append(marker, label);
-    return { object, marker, label, aperture, activate, width: 0, height: 0 };
+    return { object, marker, label, aperture, activate, width: 0, height: 0, interactive: null };
   });
   let destroyed = false, selectedId: string | null = null;
   let exclusions: readonly LabelScreenRect[] = [];
@@ -129,9 +131,14 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
         fader.set(entry.label, labelOpacity, 200);
         fader.set(entry.marker, visible.has(entry.object.id) ? objectAlpha * .45 : 0, 200);
         if (entry.aperture) fader.set(entry.aperture, apertures.has(entry.object.id) ? objectAlpha * .2 : 0, 200);
-        entry.label.style.pointerEvents = labelOpacity > .1 ? 'auto' : 'none';
-        entry.label.tabIndex = labelOpacity > .1 ? 0 : -1;
-        entry.label.ariaHidden = labelOpacity > .1 ? 'false' : 'true';
+        // Interactivity flips rarely; rewriting it for every galaxy each frame reflected three attributes.
+        const interactive = labelOpacity > .1;
+        if (entry.interactive !== interactive) {
+          entry.label.style.pointerEvents = interactive ? 'auto' : 'none';
+          entry.label.tabIndex = interactive ? 0 : -1;
+          entry.label.ariaHidden = interactive ? 'false' : 'true';
+          entry.interactive = interactive;
+        }
         // Catalogue labels remain behind the focus point and detailed bodies.
         if (projected && labelOpacity > .1) pickTargets.push({ element: entry.label, rank: -2,
           shape: { kind: 'rect', ...projected.labelRect } });
