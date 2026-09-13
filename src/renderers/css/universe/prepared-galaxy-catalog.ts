@@ -16,6 +16,8 @@ interface Entry {
   readonly activate: (event: Event) => void;
   width: number;
   height: number;
+  /** Last published label interactivity; null until the first publication. */
+  interactive: boolean | null;
 }
 
 /** One fixed catalogue bank, shared by every detailed scene and every camera focus. */
@@ -60,7 +62,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
     label.addEventListener('keydown', event => { if (event.key === 'Enter') activate(event); });
     label.setAttribute('role', 'button'); label.tabIndex = -1;
     root.append(marker, label);
-    return { object, marker, label, aperture, activate, width: 0, height: 0, interactive: null as boolean | null };
+    return { object, marker, label, aperture, activate, width: 0, height: 0, interactive: null };
   });
   let destroyed = false, selectedId: string | null = null;
   let exclusions: readonly LabelScreenRect[] = [];
