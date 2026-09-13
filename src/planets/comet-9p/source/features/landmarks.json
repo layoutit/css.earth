@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-surface-landmarks@1",
-  "source": "NASA PDS, Tempel 1 shape model version 2.0 (2012 model)",
+  "source": "NASA PDS 2012 shape model; Thomas et al. (2013), Fig. 2b",
   "frame": "PDS TEMPEL1_2012_PLAN body-fixed, planetocentric latitude and east-positive longitude. Prime meridian passes through the reference crater west of the impact.",
   "entries": [
     {
@@ -12,7 +12,7 @@
         "longitudeDeg": 16,
         "latitudeDeg": -28
       },
-      "minimumZoomShare": 0.45,
+      "minimumZoomShare": 0.3,
       "description": "Deep Impact struck here on 4 July 2005.",
       "qualification": "Approximate location from the PDS shape-model release.",
       "reference": {
@@ -20,6 +20,120 @@
         "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DIF-C-HRIV%2FITS%2FMRI-5-TEMPEL1-SHAPE-V2.0",
         "credit": "NASA PDS · Thomas et al., 2013"
       }
+    },
+    {
+      "id": "83000001",
+      "name": "S1 smooth region",
+      "kind": "region",
+      "type": "Mapped terrain",
+      "position": {
+        "longitudeDeg": 253.4,
+        "latitudeDeg": 40.1
+      },
+      "minimumZoomShare": 0.2,
+      "description": "A smooth deposit that widens downslope. Its shape suggests flowing material.",
+      "qualification": "Approximate location from the published map. The local shape is poorly constrained.",
+      "digitizedPixel": [
+        235,
+        685
+      ],
+      "reference": {
+        "title": "Thomas et al. (2013), The nucleus of Comet 9P/Tempel 1: Shape and geology from two flybys, Fig. 2b and §5.2",
+        "url": "https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf",
+        "credit": "Thomas et al. · Icarus 222, 453–466"
+      }
+    },
+    {
+      "id": "83000002",
+      "name": "S2 smooth region",
+      "kind": "region",
+      "type": "Mapped terrain",
+      "position": {
+        "longitudeDeg": 330.6,
+        "latitudeDeg": -66.9
+      },
+      "minimumZoomShare": 0.2,
+      "description": "A smooth deposit beside a scarp that changed between 2005 and 2011.",
+      "qualification": "Approximate location from the published map. The local shape is poorly constrained.",
+      "digitizedPixel": [
+        420,
+        940
+      ],
+      "reference": {
+        "title": "Thomas et al. (2013), The nucleus of Comet 9P/Tempel 1: Shape and geology from two flybys, Fig. 2b and §5.2",
+        "url": "https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf",
+        "credit": "Thomas et al. · Icarus 222, 453–466"
+      }
+    },
+    {
+      "id": "83000003",
+      "name": "S3 smooth region",
+      "kind": "region",
+      "type": "Mapped terrain",
+      "position": {
+        "longitudeDeg": 110.3,
+        "latitudeDeg": 19.1
+      },
+      "minimumZoomShare": 0.2,
+      "description": "A deposit with finger-like edges and pits, interpreted as a flow.",
+      "qualification": "Approximate location from the published map.",
+      "digitizedPixel": [
+        755,
+        735
+      ],
+      "reference": {
+        "title": "Thomas et al. (2013), The nucleus of Comet 9P/Tempel 1: Shape and geology from two flybys, Fig. 2b and §5.2",
+        "url": "https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf",
+        "credit": "Thomas et al. · Icarus 222, 453–466"
+      }
+    },
+    {
+      "id": "83000004",
+      "name": "S4 smooth region",
+      "kind": "region",
+      "type": "Mapped terrain",
+      "position": {
+        "longitudeDeg": 45.7,
+        "latitudeDeg": 54.8
+      },
+      "minimumZoomShare": 0.2,
+      "description": "A smooth area with low mesas and indistinct edges, possibly formed by several flows.",
+      "qualification": "Approximate location from the published map.",
+      "digitizedPixel": [
+        600,
+        650
+      ],
+      "reference": {
+        "title": "Thomas et al. (2013), The nucleus of Comet 9P/Tempel 1: Shape and geology from two flybys, Fig. 2b and §5.2",
+        "url": "https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf",
+        "credit": "Thomas et al. · Icarus 222, 453–466"
+      }
     }
-  ]
+  ],
+  "digitization": {
+    "reference": "https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf",
+    "pdfSha256": "33cc898a17b33c68a83bd451f901d11220ec3bb1fae4d17690787e8717849429",
+    "figure": "2b",
+    "imageDimensions": [
+      946,
+      1100
+    ],
+    "longitudeAxisPixels": [
+      59,
+      922
+    ],
+    "longitudeAxisDegreesUnwrapped": [
+      180,
+      540
+    ],
+    "latitudeAxisPixels": [
+      566,
+      995
+    ],
+    "latitudeAxisDegrees": [
+      90,
+      -90
+    ],
+    "method": "Read representative interiors from the published cylindrical map; affine axis conversion, east longitude modulo 360, rounded to 0.1 degree. Sampling is about 0.42 degree/pixel; region centres and boundaries are not determined."
+  }
 }

@@ -12,11 +12,15 @@ Borrelly compares two reconstructions of the Deep Space 1 encounter terrain and 
 
 ## Evidence
 
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
+
 The [9 September 2026 browser record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/borrelly/browser.json) covers five datasets, lighting states, DPR 1/2 and a fresh asset installation. The [qualification report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/BORRELLY.md) links source-fit, registration and capture evidence. These are recorded results; they do not establish physical-mobile performance or a fresh unrestricted all-body preparation run.
 
 Four terrain places follow [Britt et al. (2004), Figs. 1 and 4](https://doi.org/10.1016/j.icarus.2003.09.004): Upper Mottled Terrain, Central Mesas, Central Smooth Terrain and Lower Mottled Terrain. Image controls transfer selected interiors from the published unit map to the native MICAS orthophoto and XYZ cubes. The map-to-photo fit has 55 withheld controls (1.41 pixels RMS, 5.43 maximum); the photo-to-orthophoto fit has 32 (1.10 native pixels RMS, 2.19 maximum). These measure image correspondence, not absolute geological accuracy. [Recomputed placements](source/features/evidence/image-landmarks.json) retain both fitted and withheld residuals.
 
 The [terrain-place browser record](evidence/terrain-places/browser.json) covers all four search flights at 1440 × 900 and 390 × 844 on main `e986b9280` plus this change. Inspected [desktop](evidence/terrain-places/desktop.png) and [mobile viewport](evidence/terrain-places/mobile.png) captures show the MICAS labels and qualified captions. Shadows stay Off, all 2,856 retained leaves survive the selections, and switching to DLR hides the labels. Sixteen focused tests, preparation build/typecheck, coordinate reproduction and both changed bodies' provenance pass. Aggregate source preparation is blocked by unchanged Earth, Moon and Mars recipe pins on that main revision; full browser conformance was not rerun.
+
+- **Reader oracle, 2026-09-12:** `tools/oracles/isis2/borrelly-micas.py` reads the four pinned MICAS cubes with pvl and numpy. `tools/objects/terrestrial-layers/isis2-qube.oracle.test.mts` requires 48 sampled core values per cube to match exactly and the valid and special-pixel counts to agree.
 
 ## Known problems
 
