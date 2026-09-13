@@ -1,0 +1,246 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "m45",
+  "name": "Pleiades",
+  "defaultLens": "optical-composite",
+  "sharedInputs": [
+    "noirlab-optical",
+    "spitzer-irac",
+    "spitzer-irac-mips",
+    "wise-four-band",
+    "niittee-widefield",
+    "physical-evidence",
+    "observed-stars",
+    "distance",
+    "stellar-field"
+  ],
+  "lenses": [
+    {
+      "id": "optical-composite",
+      "label": "Optical composite \u00b7 NOIRLab + Niittee",
+      "title": "Pleiades optical cloud with wider image coverage",
+      "description": "Relative display colors on an authored finite depth surface. Dust layering, scattering, extinction and individual stellar depths are not recovered; fine filaments and bright-star halos remain imperfect. This lens fuses Niittee's wide optical color with central NOIRLab luminance detail; its reference preview shows Niittee's original photograph before fusion. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Optical \u00b7 broadband color camera with Optolong L-Pro light-pollution filter",
+      "detail": "8000 \u00d7 5199 px \u00b7 wide optical source",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Optical \u00b7 broadband color camera with Optolong L-Pro light-pollution filter"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "8000 \u00d7 5199"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "264.79 \u00d7 172.08 arcmin"
+        }
+      ],
+      "input": "niittee-widefield",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m45-optical-composite/sources/niittee-widefield.tif",
+        "sha256": "96c04d4db1cd317544bd616fe41ce337f32aa1dac2fcd69702419f29c426e5aa",
+        "bytes": 16654428,
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Plejades.jpg"
+      }
+    },
+    {
+      "id": "noirlab-optical",
+      "label": "NOIRLab \u00b7 optical B / V / I",
+      "title": "Pleiades reflection filaments in visible light",
+      "description": "Relative display colors on an authored finite depth surface. Dust layering, scattering, extinction and individual stellar depths are not recovered; fine filaments and bright-star halos remain imperfect. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Optical \u00b7 B 436 nm / V 537 nm / I 805 nm",
+      "detail": "4000 \u00d7 2920 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Optical \u00b7 B 436 nm / V 537 nm / I 805 nm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4000 \u00d7 2920"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "68.68 \u00d7 50.13 arcmin"
+        }
+      ],
+      "input": "noirlab-optical",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m45-processing/sources/noirlab-optical.tif",
+        "sha256": "473b92b49bee00f7a7028c80d9d63ea8f384ae80e46eb470558fecf93b255544",
+        "bytes": 25288332,
+        "url": "https://storage.noirlab.edu/media/archives/images/publicationtiff/noao-m45.tif"
+      }
+    },
+    {
+      "id": "spitzer-irac",
+      "label": "Spitzer \u00b7 IRAC 3.6\u20138 \u00b5m",
+      "title": "Pleiades dust in the Spitzer IRAC bands",
+      "description": "Relative display colors on an authored finite depth surface. Dust layering, scattering, extinction and individual stellar depths are not recovered; fine filaments and bright-star halos remain imperfect. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Infrared \u00b7 IRAC 3.6 / 4.5 / 5.8 / 8.0 \u00b5m",
+      "detail": "2855 \u00d7 2855 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Infrared \u00b7 IRAC 3.6 / 4.5 / 5.8 / 8.0 \u00b5m"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "2855 \u00d7 2855"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "58.07 \u00d7 58.07 arcmin"
+        }
+      ],
+      "input": "spitzer-irac",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m45-processing/sources/spitzer-irac.tif",
+        "sha256": "03ef667b77b49f79040e4e12b3d601efe34c02abcee0e5eb78464eeafaf63684",
+        "bytes": 24453299,
+        "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09262/PIA09262.tif"
+      }
+    },
+    {
+      "id": "spitzer-irac-mips",
+      "label": "Spitzer \u00b7 IRAC + MIPS 4.5\u201324 \u00b5m",
+      "title": "Pleiades warm dust through 24 micrometres",
+      "description": "Relative display colors on an authored finite depth surface. Dust layering, scattering, extinction and individual stellar depths are not recovered; fine filaments and bright-star halos remain imperfect. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Infrared \u00b7 IRAC 4.5 / 8.0 \u00b5m + MIPS 24 \u00b5m",
+      "detail": "2855 \u00d7 2855 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Infrared \u00b7 IRAC 4.5 / 8.0 \u00b5m + MIPS 24 \u00b5m"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "2855 \u00d7 2855"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "58.07 \u00d7 58.07 arcmin"
+        }
+      ],
+      "input": "spitzer-irac-mips",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m45-processing/sources/spitzer-irac-mips.tif",
+        "sha256": "16bc76835b046b48c6682bd169bd8f75cbcb1b49d5a45b78ba7f4e7c281d8c8e",
+        "bytes": 24453299,
+        "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09263/PIA09263.tif"
+      }
+    },
+    {
+      "id": "wise-four-band",
+      "label": "WISE \u00b7 3.4\u201322 \u00b5m wide field",
+      "title": "The wider Pleiades infrared cloud",
+      "description": "Relative display colors on an authored finite depth surface. Dust layering, scattering, extinction and individual stellar depths are not recovered; fine filaments and bright-star halos remain imperfect. The reference preview shows the published photograph before star removal and 3D material fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
+      "summary": "Infrared \u00b7 W1 3.4 / W2 4.6 / W3 12 / W4 22 \u00b5m",
+      "detail": "4007 \u00d7 3061 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Infrared \u00b7 W1 3.4 / W2 4.6 / W3 12 / W4 22 \u00b5m"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4007 \u00d7 3061"
+        },
+        {
+          "id": "coverage",
+          "label": "Image field",
+          "value": "182.99 \u00d7 139.79 arcmin"
+        }
+      ],
+      "input": "wise-four-band",
+      "preview": {
+        "path": ".local/nebula-lab/observations/m45-processing/sources/wise-four-band.tif",
+        "sha256": "641b6b6298a9c04d752e05f4b6d8986a377be3139df3f3cf915bd23d7559076c",
+        "bytes": 36796505,
+        "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia13/pia13121/PIA13121.tif"
+      }
+    }
+  ],
+  "bank": {
+    "path": "src/objects/m45/prepared/lenses.json",
+    "sha256": "d27b5b2d3da99ba735410f60e27e6e59ceb70e6c18d8c54d2df265498437460a",
+    "bytes": 6710388
+  },
+  "recipes": [
+    {
+      "id": "recipe-1",
+      "path": "src/objects/m45/source/delivery.json",
+      "sha256": "b81e2f7af2bc765bc624ebce322e44457c2efd7272cd734c625551fbf9a8a34d",
+      "bytes": 2449
+    },
+    {
+      "id": "recipe-2",
+      "path": "src/objects/m45/source/request.json",
+      "sha256": "3bb422960ec26a91969880747c14aabea9044b84b138436ffdf5edec32e2c82d",
+      "bytes": 354
+    },
+    {
+      "id": "recipe-3",
+      "path": "labs/nebula/models/m45/compiler.json",
+      "sha256": "1800455c7fcb2d8915d9d6dff68aec5ec70c45335316ad0666b3e22878ead44e",
+      "bytes": 1147
+    },
+    {
+      "id": "recipe-4",
+      "path": "labs/nebula/models/m45/depth-model.json",
+      "sha256": "81dcdc57f35def587304c69a3562cd5e052f44ecfe2b1b0543e2ef2ee8735305",
+      "bytes": 3319
+    },
+    {
+      "id": "recipe-5",
+      "path": "labs/nebula/models/m45/observation-structures.json",
+      "sha256": "86d89e8901a62ebad11ac6babb3e175a047bd3dbf5de66ac4fb6c223a6a711ee",
+      "bytes": 423
+    },
+    {
+      "id": "recipe-6",
+      "path": "labs/nebula/models/m45/physical-evidence.json",
+      "sha256": "73ec8317dbd6e75b0e39184b2196011495a4ddf0e88571cc1719ec871d9385c4",
+      "bytes": 15400
+    },
+    {
+      "id": "recipe-7",
+      "path": "labs/nebula/models/m45/processing-observations.json",
+      "sha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705",
+      "bytes": 8832
+    },
+    {
+      "id": "recipe-8",
+      "path": "labs/nebula/models/m45/stellar-catalogue.json",
+      "sha256": "725466bded167e153b071941c63584313bc73503db6a61ed9aa57649a0ce6ac7",
+      "bytes": 1654998
+    },
+    {
+      "id": "recipe-9",
+      "path": "labs/nebula/models/m45/optical-composite-observations.json",
+      "sha256": "2fa3d672cb4c7d20aea35dc444393a4b9a0fe5b65d5a86fd8409b5a4332f6cfe",
+      "bytes": 5257
+    },
+    {
+      "id": "recipe-10",
+      "path": "labs/nebula/models/m45/optical-composite.json",
+      "sha256": "2237970cf3a72f09ad43ea694a6cc40a4f8b0a692986f6d5b9eb20106ebb84fa",
+      "bytes": 1320
+    }
+  ]
+}

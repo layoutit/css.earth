@@ -7,7 +7,7 @@
       "path": ".local/nebula-lab/observations/m42/sources/eso-optical.tif",
       "origin": "https://www.eso.org/public/images/eso1723a/",
       "sourceUrl": "https://www.eso.org/public/images/eso1723a/",
-      "title": "Orion · eso1723a",
+      "title": "Orion \u00b7 eso1723a",
       "credit": "ESO/G. Beccari",
       "displayCredit": "ESO/G. Beccari",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -41,7 +41,7 @@
       "path": ".local/nebula-lab/observations/m42/sources/eso-vista.tif",
       "origin": "https://www.eso.org/public/images/eso1006a/",
       "sourceUrl": "https://www.eso.org/public/images/eso1006a/",
-      "title": "Orion · eso1006a",
+      "title": "Orion \u00b7 eso1006a",
       "credit": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
       "displayCredit": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
       "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
@@ -115,8 +115,8 @@
       "title": "Orion adopted world placement",
       "credit": "Menten et al. (2007); cssEarth placement",
       "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
-      "expectedSha256": "b4e3da0a6639f432b4ef877d6920b73a6acd699f07421612d617ff7120059254",
-      "expectedBytes": 1727,
+      "expectedSha256": "6ccc6e360bc0c6fd931dd9061631490fdae07ee31c46d0d872dc9e06044d4a14",
+      "expectedBytes": 1888,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -128,14 +128,48 @@
         ]
       },
       "dependencies": []
+    },
+    {
+      "id": "stellar-field",
+      "path": "src/objects/m42/source/stellar-field.json",
+      "origin": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "sourceUrl": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
+      "title": "Orion Nebula surrounding Gaia DR3 stellar field",
+      "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
+      "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
+      "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
+      "expectedSha256": "32ee5f15a5b589caed768a568b67afd648dda116da31881f0ffcd47e7353a3fa",
+      "expectedBytes": 1913911,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gavo",
+            "role": "material",
+            "evidence": "src/objects/m42/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "bailer-jones-2021-distances",
+            "role": "method",
+            "evidence": "src/objects/m42/source/stellar-field.json#/provenance"
+          },
+          {
+            "catalogueId": "cardiel-2021-rgb",
+            "role": "method",
+            "evidence": "src/objects/m42/source/stellar-field.json#/provenance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0 distance catalogue; retain ESA/Gaia/DPAC, authors and GAVO acknowledgements."
     }
   ],
   "documents": [
     {
       "id": "document-1",
       "path": "src/objects/m42/source/delivery.json",
-      "expectedSha256": "b4e3da0a6639f432b4ef877d6920b73a6acd699f07421612d617ff7120059254",
-      "expectedBytes": 1727,
+      "expectedSha256": "6ccc6e360bc0c6fd931dd9061631490fdae07ee31c46d0d872dc9e06044d4a14",
+      "expectedBytes": 1888,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -154,8 +188,8 @@
     {
       "id": "document-3",
       "path": "src/objects/m42/source/presentation.json",
-      "expectedSha256": "e1ade739ba75dc71641c14714d0d70c5dd1d930f68e3e5b0be8edd7cbf072605",
-      "expectedBytes": 4399,
+      "expectedSha256": "92c0f8b7a7a44c94f15bb21a6cfdb87c28656c91c10e47f4f112a1279717de6a",
+      "expectedBytes": 4764,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."

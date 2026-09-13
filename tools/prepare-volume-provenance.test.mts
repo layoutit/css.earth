@@ -15,7 +15,10 @@ const root = resolve(import.meta.dirname, '..');
 test('all installed volume lenses produce standard source cards with real source-to-product edges', async () => {
   const closure = new Set<string>();
   const entries = await prepareVolumeProvenance({ root, input: async path => { closure.add(path); return readFile(resolve(root, path)); } });
-  assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [['helix', 3], ['lmc', 3], ['m2-9', 1], ['m42', 2]]);
+  assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [
+    ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m42', 2], ['m45', 5], ['m8', 3],
+  ]);
+  assert.equal(entries.find(entry => entry.id === 'm45')?.defaultLens, 'optical-composite');
   assert.ok([...closure].every(path => !path.startsWith('.local/') && !path.endsWith('/prepared/lenses.json')));
   const sourceFiles = await readdir(resolve(root, 'src/sources'));
   const sources = sourceResolver(parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records: await Promise.all(sourceFiles.filter(path => path.endsWith('.json')).map(async path => JSON.parse(await readFile(resolve(root, 'src/sources', path), 'utf8')))) }));
@@ -55,9 +58,35 @@ test('all installed volume lenses produce standard source cards with real source
   const hubble = graph.edges.filter(edge => edge.objectId === 'm2-9' && edge.attribution.kind === 'machine');
   assert.ok(hubble.some(edge => edge.attribution.kind === 'machine' && edge.attribution.machineId === 'hubble'));
   const captures = entries.flatMap(entry => entry.provenance.sources.flatMap(source => source.lensId ? (source.capture?.attributions ?? []).map(attribution => ({ objectId: entry.id, lensId: source.lensId, attribution })) : []));
-  assert.equal(captures.length, 9);
-  assert.deepEqual(captures.filter(capture => capture.attribution.kind === 'unresolved').map(capture => `${capture.objectId}/${capture.lensId}`), ['lmc/horalek-widefield']);
-  assert.deepEqual([...new Set(captures.flatMap(capture => capture.attribution.kind === 'machine' ? [capture.attribution.machineId] : []))].sort(), ['eso-3-6m', 'hubble', 'mpg-eso-2-2m', 'vista', 'vst', 'wise']);
+  const legacyCaptures = captures.filter(capture => ['helix', 'lmc', 'm2-9', 'm42'].includes(capture.objectId));
+  assert.equal(legacyCaptures.length, 9);
+  assert.deepEqual(legacyCaptures.filter(capture => capture.attribution.kind === 'unresolved').map(capture => `${capture.objectId}/${capture.lensId}`), ['lmc/horalek-widefield']);
+  assert.deepEqual([...new Set(legacyCaptures.flatMap(capture => capture.attribution.kind === 'machine' ? [capture.attribution.machineId] : []))].sort(), ['eso-3-6m', 'hubble', 'mpg-eso-2-2m', 'vista', 'vst', 'wise']);
+  const newEntries = entries.filter(entry => ['m1', 'm45', 'm8'].includes(entry.id));
+  const newLenses = newEntries.flatMap(entry => entry.controls.map(control => `${entry.id}/${control.id}`)).sort();
+  assert.equal(newLenses.length, 14);
+  const newCaptures = captures.filter(capture => ['m1', 'm45', 'm8'].includes(capture.objectId));
+  assert.deepEqual([...new Set(newCaptures.map(capture => `${capture.objectId}/${capture.lensId}`))].sort(), newLenses,
+    'All fourteen added observations retain capture attribution, including explicitly unresolved instruments.');
+  assert.deepEqual(newCaptures.map(capture => [
+    `${capture.objectId}/${capture.lensId}`, capture.attribution.kind,
+    capture.attribution.kind === 'machine' ? capture.attribution.machineId : null,
+  ]).sort((left, right) => String(left[0]).localeCompare(String(right[0]))), [
+    ['m1/chandra-xray', 'unresolved', null],
+    ['m1/hubble-optical', 'machine', 'hubble'],
+    ['m1/spitzer-infrared', 'machine', 'spitzer'],
+    ['m1/vla-radio', 'unresolved', null],
+    ['m1/webb-components', 'unresolved', null],
+    ['m1/webb-infrared', 'unresolved', null],
+    ['m45/noirlab-optical', 'unresolved', null],
+    ['m45/optical-composite', 'unresolved', null],
+    ['m45/spitzer-irac', 'machine', 'spitzer'],
+    ['m45/spitzer-irac-mips', 'machine', 'spitzer'],
+    ['m45/wise-four-band', 'machine', 'wise'],
+    ['m8/eso-optical', 'machine', 'mpg-eso-2-2m'],
+    ['m8/eso-vista', 'machine', 'vista'],
+    ['m8/spitzer-mid-infrared', 'machine', 'spitzer'],
+  ]);
 });
 
 test('source-lens binding and recipe pins fail closed when their properties are removed', async () => {

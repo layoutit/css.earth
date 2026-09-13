@@ -37,5 +37,9 @@
   "description": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and the front/back assignment remain conditional. Compact lights have observed image positions, with illustrative field depths.",
   "defaultLens": "eso-wfi",
   "framingRadiusUnits": 1500,
-  "acceptedLabResult": "2e6d9eccd15ca15ccc053b1d564e2b0763522207c1c6ba79c42c86111796c9ce"
+  "acceptedLabResult": "2e6d9eccd15ca15ccc053b1d564e2b0763522207c1c6ba79c42c86111796c9ce",
+  "fieldStars": {
+    "path": "src/objects/helix/source/stellar-field.json",
+    "sha256": "f7cc8d1533503cc709a20deb7ea759604d6384ae61b00cb769e5bd7160f28e08"
+  }
 }
