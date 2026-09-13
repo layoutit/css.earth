@@ -231,8 +231,9 @@ src/objects/*/source/**/*.bpc
 /src/objects/helix/.prepared-*/
 /src/objects/m2-9/.prepared-*/
 # Shared dataset cards and lineage are restored by prepare:nebulae / prepare:sources.
-/src/objects/*/prepared/presentation.json
-/src/objects/*/prepared/provenance.json
+# Name each object: bodies commit their prepared/provenance.json in the same folder.
+/src/objects/lmc/prepared/presentation.json
+/src/objects/lmc/prepared/provenance.json
 # Binary kernels in shared SPICE kernel banks are restored by tools/spice/kernel-bank.mts; text kernels are committed.
 src/spice/**/*.bsp
 src/spice/**/*.bc
