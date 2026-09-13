@@ -19,7 +19,7 @@ function validateOrthographicRecipe(value: unknown, sourceGeometry: unknown) {
   checkKeys(requireRecord(value).transfer, ['maximumSourceDistanceMeters'], [], `${CONTEXT} transfer`);
   const recipe = decodeProfile(parseOrthographicLens, value, 'Invalid source-registered orthographic observation.'), geometry = parseSurfaceGeometry(sourceGeometry);
   // An orthophoto is one registered image with its three coordinate cubes; it has no mosaic selection.
-  validateEnvelope(recipe, lensPaths(recipe), { selections: [], displays: ['linear'], maximumFrames: 1, maximumLevelGain: 1, samplesPerTriangle: 'optional' }, CONTEXT);
+  validateEnvelope(recipe, lensPaths(recipe), { selections: [], displays: ['displayRange'], maximumFrames: 1, maximumLevelGain: 1, samplesPerTriangle: 'optional' }, CONTEXT);
   if (recipe.format !== 'isis2-orthographic' || recipe.frames[0].coordinatePaths.length !== 3 ||
       geometry?.format !== 'image-plane-dem' || geometry.sourceTopology !== 'open' ||
       !Number.isFinite(recipe.maximumCoordinateErrorMeters) || recipe.maximumCoordinateErrorMeters <= 0 ||
@@ -39,7 +39,7 @@ export const orthographicFormat: SurfaceObservationFormat = {
     const rasters = await Promise.all([frameRecipe.path, ...frameRecipe.coordinatePaths].map(async path => decodeIsis2Qube(await readFile(resolve(sourceDirectory, path)), recipe.grid)));
     const [photo, x, y, z] = rasters;
     if (!mesh.imageGrid) throw new Error('Orthographic source mesh lacks its image grid.');
-    const [sx, x0, sy, y0] = recipe.grid.pixelToSource, [low, high] = recipe.display.linear ?? [];
+    const [sx, x0, sy, y0] = recipe.grid.pixelToSource, [low, high] = recipe.display.displayRange ?? [];
     let coordinatePixels = 0, maximumCoordinateErrorMeters = 0;
     const sourcePoints = new Map(mesh.positions.map((point, i) => [point.slice(0, 2).join(','), i]));
     const seen = new Set();

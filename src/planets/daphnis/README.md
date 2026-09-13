@@ -2,6 +2,8 @@
 
 ## Sources
 
+**False color** adds three original Cassini ISS NAC filter observations displayed as RGB (RED / GRN / BL1), calibrated by CISSCAL 4.0beta into linear I/F. This is false color. Each frame uses its own measured camera row in the [Thomas 2018 daphnis document](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/daphnis_document.pdf), registered to the matching original plate model.
+
 - **Monochrome:** 3 calibrated Cassini ISS NAC photographs, projected using the measured camera records accompanying this moon’s PDS shape. Clear-filter images supply the base and the best 2017 green-filter photograph supplies the fine detail.
 
 - **Elevation:** radial height above a 3.8 km reference sphere from the same measured shape.
@@ -10,9 +12,17 @@
 
 ## Evidence
 
+The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/filter-color/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+
+**False color:** The 2010 color view is coarse (roughly 18 detector pixels across the moon). The sharper 2017 Monochrome view remains available. The [browser record](evidence/filter-color/capture.json) pins the loaded image responses, camera, settings and inspected views at DPR 1 and 2. The existing Monochrome images, body leaves and picking triangles are unchanged; the selected false-color assets use the revised display encoding. Dragging, Shadows and the mobile selector passed without page errors or replaced scene DOM. Scientific qualification comes from the original camera/shape release and the registration evidence described here; these screenshots document the mounted result.
+
+[False color](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Oblique with Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). These captures were refreshed on 2026-09-13 after integrating main at `0636327ba`. The record pins the tested recipe, runtime, display transfer and loaded image bytes, and compares retained geometry with `8cc1a2fae`.
+
 - The exact observations, source URLs and restoration pins are in [source/manifest.json](source/manifest.json) and [source/preparation/acquisition.json](source/preparation/acquisition.json). The simplified surface remains closed and outward wound.
 
 ## Known problems
+
+**False color:** Three filters were acquired sequentially, and are not a simultaneous true-color photograph or a composition map. Source shadows and phase-dependent brightness remain. The common footprint is smaller than Monochrome coverage; gray grid marks gaps. Small color fringes can remain at sharp relief because the shape and camera solutions have finite accuracy. These 2010 observations resolve only about 18 pixels across the moon; the sharper 2017 Monochrome photograph remains the detail view.
 
 - **Monochrome:** This is a grayscale visualization across these bandpasses, not a uniform-band albedo product.
 
@@ -21,6 +31,26 @@
 - **Orbit:** Its model is fitted only to 2005–2018; the 2026 scene extrapolates that fit and has no validated current-epoch position accuracy. Its display uses an approximate Saturn-equatorial pole and explicitly arbitrary meridian because this package does not include the binary Cassini attitude kernel.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+
+
+## False color preparation
+
+<details>
+<summary>Source products, processing and qualification</summary>
+
+| RGB channel | Filter | Observation | Mid-time (UTC) | Approx. m/pixel at centre |
+| --- | --- | --- | --- | ---: |
+| red | RED | n1656999219 | 2010-07-05T04:48:08.995 | 436 |
+| green | GRN | n1656999274 | 2010-07-05T04:49:03.955 | 436 |
+| blue | BL1 | n1656999330 | 2010-07-05T04:49:59.192 | 435 |
+
+Original floating-point IMG products and detached labels are pinned in [the input manifest](source/manifest.json). All three products are unbinned FULL resolution, use lossless spacecraft compression and report zero missing lines. The [recipe](source/preparation/terrestrial.json) records the zero-based detector centres, west-positive observer and solar longitudes, and 2003.44 mm / 12 μm Cassini NAC focal scale. Camera rays and occlusion are evaluated on the original shape; the existing simplified display mesh is retained.
+
+Only common, visible three-filter samples are colored. The maximum incidence and emission angles are 75° to avoid the most foreshortened limb and terminator; detector coverage is inset by two source pixels. The existing edge-connected 0.003 I/F background exclusion retains interior dark patches. This signal-based background rule is an approximate coverage mask, not a detector-quality flag.
+
+The observed I/F samples remain floating point through registration and overlap composition. One common range, 0–0.8 I/F, maps them to linear display channels, followed by the [shared IEC sRGB output transfer](../../../docs/color-preparation.md). Clipping and 8-bit quantization happen only at that final boundary. No per-band brightness equalization, clear-filter sharpening or single-band photometric model changes their ratios. No colorimetric transform has been applied; even visible-filter RGB is labelled false color. Prepared source illumination and the app's Shadows control remain separate.
+
+</details>
 
 ## Methods and source notes
 
@@ -53,7 +83,6 @@ Navigation portraits and small dedicated minimaps are derived from the prepared 
 
 - **Investigated, not included as an observed map:** legacy Voyager/Stooke maps and global shaded-relief illustrations. They do not offer the combination of Cassini detail and measured camera registration used here; drawings are not observational textures.
 
-- **Filtered imaging:** the source camera table includes visible/UV/IR observations. A separate registered color product is not qualified in this release; this is not a claim that only two datasets exist.
 
 - **Spectroscopy:** [Cassini spectra and photometry of small inner satellites](https://www.usgs.gov/publications/cassini-spectra-and-photometry-025-51-mm-small-inner-satellites-saturn) and [small-moon photometric analyses](https://doi.org/10.3847/1538-3881/ab659d) inform interpretation. Disk-integrated measurements do not supply a spatially resolved composition texture.
 

@@ -64,7 +64,7 @@ misspelt field fails instead of being ignored.
 - `frames` lists the photographs, one to eight. A lens with more than one frame
   also names its `selection` and `levelMatching`; a single frame names neither.
 - `display` is either `percentiles` of the qualified values or one authored
-  `linear` range.
+  `displayRange`.
 - `recipe.mts` checks the shared shape. Each adapter declares the rest:
 
 | Format | Each frame adds | The lens adds |
@@ -74,7 +74,7 @@ misspelt field fails instead of being ignored.
 | `pds4-geometry-cube` | `startTime`, `labelPath` | `filter`, `cube` |
 | `osiris-camera` | `startTime`, `cameraPath` | `filter`, `allowLossy`, optional `refinement` |
 | `llorri-camera`, `nh-lorri-camera` | `startTime`, `cameraPath` | `filter` |
-| `nh-mvic-camera` | `startTime`, `cameraPath` | `filter`; one frame with retained illumination and a `linear` display from 0 |
+| `nh-mvic-camera` | `startTime`, `cameraPath`, `labelPath` | `filter`; one frame with retained illumination, `metadata.falseColor` and a `displayRange` from 0 for all three bands |
 | `spice-camera` | `startTime`, and `labelPath` for a VICAR image | `filter`, `spice`, optional `refinement` |
 | `encounter-fits` | `labelPath`, `controlPath` | nothing |
 | `isis2-orthographic` | `coordinatePaths` | `grid`, `maximumCoordinateErrorMeters`; one frame, a `transfer` with only `maximumSourceDistanceMeters`, no `photometry` |
@@ -103,8 +103,12 @@ Three choices still differ by format, and each lens report records them:
   must cover both.
 - **Display range.** Those formats take the display percentiles from the first
   frame's qualified pixels. Encounter frames take them from samples on the
-  displayed surface. An orthophoto uses its authored range, and an enhanced-colour
-  cube shows its filter planes on one authored linear scale.
+  displayed surface. An orthophoto uses its authored range. The MVIC colour cube
+  shows its three bands on one authored range: its format names the bands and
+  their data-number quantity, which the decoder checks against the native label.
+  Floating samples receive the [shared IEC sRGB transfer](../color-transfer.mts)
+  once, after surface transfer, and the report records the band policy. Encoding
+  does not qualify natural color.
 - **Selection.** A mosaic picks the lowest emission, the first frame in recipe
   order, or the finest pixel scale.
 

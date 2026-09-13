@@ -21,6 +21,7 @@ import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, ABERRATIONS } from '../../
 import { refineCameraByLimb } from '../../terrestrial-layers/limb-refinement.mts';
 import { loadKernelSet } from '../../../spice/kernel-set.mts';
 import { kernelBankPaths } from '../../../spice/kernel-bank.mts';
+import { parseBandColorDisplay, type BandColorDisplay } from '../../color-transfer.mts';
 import { fittedCamera, matrixCamera } from '../cameras.mts';
 import { archiveBackplanes, castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
@@ -37,7 +38,9 @@ interface GeoSchema {
   lens: { required: readonly string[]; optional?: readonly string[] };
   /** The historical disk functions the format accepts, and whether it may name a published photometric model instead. */
   photometry: readonly string[]; published: boolean;
-  display: 'percentiles' | 'linear'; maximumFrames: number;
+  display: 'percentiles' | 'displayRange'; maximumFrames: number;
+  /** A colour product's bands and quantity, which its decoder checks against the native label. The recipe declares only their common range. */
+  color?: { bands: readonly string[]; inputQuantity: BandColorDisplay['inputQuantity']; units: string };
 }
 
 export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
@@ -56,9 +59,10 @@ export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
   'nh-lorri-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
-  // Registered enhanced colour keeps its acquisition illumination on one common linear scale.
-  'nh-mvic-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter'] },
-    photometry: ['retained-observation'], published: false, display: 'linear', maximumFrames: 1 },
+  // Registered enhanced colour keeps its acquisition illumination. Its decoder checks these bands and data-number units against the label.
+  'nh-mvic-camera': { camera: 'archived-closure', frame: { required: ['cameraPath', 'labelPath'] }, lens: { required: ['filter'] },
+    photometry: ['retained-observation'], published: false, display: 'displayRange', maximumFrames: 1,
+    color: { bands: ['NIR', 'RED', 'BLUE'], inputQuantity: 'derived-band-value', units: 'archive-derived data numbers; enhanced NIR / RED / BLUE color' } },
   // A VICAR frame brings its PDS3 label; a FITS frame carries its own header.
   [SPICE_CAMERA_FORMAT]: { camera: 'kernels', frame: { required: [], optional: ['labelPath'] }, lens: { required: ['filter', 'spice'], optional: ['refinement'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
@@ -66,7 +70,7 @@ export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
 export const GEO_FORMATS = Object.keys(GEO_SCHEMAS);
 
 const CONTEXT = 'georeferenced observation recipe';
-export const parseGeoLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text }),
+export const parseGeoLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text, falseColor: optional(boolean) }),
   frames: array(shape({ id: text, path: text, startTime: text, qualityPath: optional(text), labelPath: optional(text), originalPath: optional(text), cameraPath: optional(text) })),
   filter: text, allowLossy: optional(boolean), radiometry: optional(text), flatPath: optional(text),
   cube: optional(parseGeometryCube), spice: optional(parseSpiceCamera), refinement: optional(parseLimbRefinement),
@@ -100,7 +104,7 @@ function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
     { selections: ['lowest-emission', 'recipe-order'], displays: [schema.display], maximumFrames: schema.maximumFrames, maximumLevelGain: 1.5, samplesPerTriangle: 'required' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
   if (!recipe.filter || (recipe.format === 'amica-gaskell' && recipe.filter !== 'V') || recipe.frames.some(frame => !frame.startTime)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
-  if (schema.display === 'linear' && recipe.display.linear?.[0] !== 0) throw new TypeError('MVIC color requires one common linear display and retained illumination.');
+  if (schema.color && (recipe.display.displayRange?.[0] !== 0 || recipe.metadata.falseColor !== true)) throw new TypeError('MVIC color requires source-derived bands, false color and retained illumination.');
   if (recipe.radiometry !== undefined && recipe.radiometry !== 'radiance-factor') throw new TypeError('Invalid observation radiometry.');
   validatePhotometry(recipe, schema);
   if (recipe.spice) validateSpice(recipe.spice, recipe.frames);
@@ -171,7 +175,7 @@ async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory,
     if (decoded.startTime !== frame.startTime || decoded.filter !== recipe.filter) throw new Error('GEO observation identity changed.');
     return { startTime: frame.startTime, filter: recipe.filter };
   };
-  // A linear display keeps its authored common scale, so its frame computes no pixel percentiles.
+  // An authored display range keeps its common scale, so its frame computes no pixel percentiles.
   const common = { id: frame.id, photometry, limits: recipe.transfer, mesh: radial.grid, displayPercentiles: recipe.display.percentiles };
   // A declared refinement fits one rotation of the camera to the mesh's lit limb before any geometry is derived.
   const refined = <T extends { camera: unknown; width: number; height: number; planes: Record<string, NumericRaster>; acceptPixel?(index: number): boolean; qualityReport: Record<string, unknown> }>(decoded: T): T => {
@@ -204,7 +208,7 @@ async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory,
     return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera, decoded));
   }
   if (recipe.format === 'nh-mvic-camera') {
-    const decoded = decodeArrokothMvic(await read(frame.path), closure);
+    const decoded = decodeArrokothMvic(await read(frame.path), closure, (await read(frame.labelPath)).toString('utf8'));
     return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera, decoded), decoded.colorPlanes);
   }
   if (recipe.format === 'osiris-camera') {
@@ -258,11 +262,13 @@ export const geoFormat: SurfaceObservationFormat = {
       frames.push(await loadGeoFrame(recipe, frame, { ...context, entries: context.entries.filter(entry => paths.includes(entry.path)) }, photometry));
     }
     const { report: limits, exceeded } = deriveLimits(recipe.transfer, frames, context.config.geometry.radialTerrain.simplification.maximumErrorMeters);
-    const linear = recipe.display.linear;
+    const range = recipe.display.displayRange, color = schemaOf(recipe.format).color;
     const policy: SurfacePolicy = { format: recipe.format, maximumSourceDistanceMeters: recipe.transfer.maximumSourceDistanceMeters, precheckDisplayPoint: true,
       selection: frames.length === 1 ? 'single' : recipe.selection === 'recipe-order' ? 'recipe-order' : 'lowest-emission',
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
-      display: linear ? { range: 'authored', low: linear[0], high: linear[1], units: 'archived filter values; enhanced NIR / RED / BLUE color', channels: ['NIR', 'RED', 'BLUE'] }
+      // A colour product's floating bands are encoded once, after surface transfer, on the shared band display.
+      display: range && color ? { range: 'authored', low: range[0], high: range[1], units: color.units,
+          colorDisplay: parseBandColorDisplay({ kind: 'band-composite', inputQuantity: color.inputQuantity, bands: color.bands, displayRange: range, outputEncoding: 'srgb' }, color.bands) }
         : { range: 'reference-pixels', percentiles: recipe.display.percentiles ?? [], units: displayUnits(recipe, photometry) }, photometry: photometry.report, limits };
     return { frames, policy, exceeded };
   },

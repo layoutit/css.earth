@@ -1,0 +1,28 @@
+{
+  "id": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2059-data-1640478062-1640518661-n1640497881-1-calib",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Cassini ISS prometheus · N1640497881_1_CALIB · IR3",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640497881_1_CALIB"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640497881_1_CALIB.LBL",
+      "label": "Calibrated image label"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2059/data/1640478062_1640518661/N1640497881_1_CALIB.LBL",
+      "checkedOn": "2026-09-12",
+      "locator": "PRODUCT_ID 1_N1640497881.118; FILTER_NAME; CISSCAL 4.0beta DESCRIPTION, I/F units"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

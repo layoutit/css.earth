@@ -24,8 +24,8 @@ export function checkKeys(value: unknown, required: readonly string[], allowed: 
   if (unknown.length || missing.length) throw new TypeError(`Invalid source-bound ${context}: ${[...unknown.map(key => `unknown ${key}`), ...missing.map(key => `missing ${key}`)].join(', ')}.`);
 }
 
-/** A display maps either a percentile range of the qualified values or one authored linear range to grey levels. */
-export const parseDisplay = shape({ percentiles: optional(array(number)), linear: optional(array(number)) });
+/** A display maps either a percentile range of the qualified values or one authored display range to display levels; a colour product's bands share that range. */
+export const parseDisplay = shape({ percentiles: optional(array(number)), displayRange: optional(array(number)) });
 export type LensDisplay = ReturnType<typeof parseDisplay>;
 
 export interface LensEnvelope {
@@ -37,7 +37,7 @@ export interface LensEnvelope {
 /** What a format decides within the shared envelope. */
 export interface EnvelopeRules {
   selections: readonly string[];
-  displays: readonly ('percentiles' | 'linear')[];
+  displays: readonly ('percentiles' | 'displayRange')[];
   maximumFrames: number;
   maximumLevelGain: number;
   samplesPerTriangle: 'required' | 'optional';
@@ -47,9 +47,9 @@ export interface EnvelopeRules {
  * distinct safe input paths and one valid display. */
 export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[], rules: EnvelopeRules, context: string) {
   const { frames, levelMatching: levels, display } = recipe, mosaic = frames.length > 1;
-  checkKeys(display, [], ['percentiles', 'linear'], `${context} display`);
+  checkKeys(display, [], ['percentiles', 'displayRange'], `${context} display`);
   if (levels) checkKeys(levels, ['minimumPairs', 'maximumLogMad', 'maximumGain'], ['maximumAngleDegrees', 'samplesPerTriangle'], `${context} level matching`);
-  const range = display.percentiles ?? display.linear, kind = display.percentiles ? 'percentiles' : 'linear';
+  const range = display.percentiles ?? display.displayRange, kind = display.percentiles ? 'percentiles' : 'displayRange';
   if (!identifier.test(recipe.id) || !identifier.test(recipe.consumer) || !recipe.metadata?.label || !recipe.metadata?.coverage ||
       frames.length < 1 || frames.length > rules.maximumFrames || frames.some(frame => !identifier.test(frame.id)) || new Set(frames.map(frame => frame.id)).size !== frames.length ||
       !paths.every(safePath) || new Set(paths).size !== paths.length ||
@@ -59,7 +59,7 @@ export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[],
         (levels.samplesPerTriangle === undefined ? rules.samplesPerTriangle === 'required'
           : !Number.isInteger(levels.samplesPerTriangle) || levels.samplesPerTriangle < 4 || levels.samplesPerTriangle > 64) ||
         (levels.maximumAngleDegrees !== undefined && (!positive(levels.maximumAngleDegrees) || levels.maximumAngleDegrees >= 90)))) ||
-      (display.percentiles === undefined) === (display.linear === undefined) || !rules.displays.includes(kind) ||
+      (display.percentiles === undefined) === (display.displayRange === undefined) || !rules.displays.includes(kind) ||
       !Array.isArray(range) || range.length !== 2 || !range.every(Number.isFinite) || !(range[0] < range[1]) ||
       (kind === 'percentiles' && (range[0] < 0 || range[1] > 100))) throw new TypeError(`Invalid source-bound ${context}.`);
 }
