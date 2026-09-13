@@ -769,6 +769,83 @@
         ]
       },
       "observationDate": "2005-10-27T10:36:18"
+    },
+    {
+      "id": "amica-2473604354-label",
+      "path": "observations/st_2473604354_v_ddr.lbl",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2473604354_v_ddr.lbl",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 6640,
+      "expectedSha256": "b9a2926adf3fc22b5ccc88a9b4e9c2b743512f742e65a93bd3190a422b6a0db8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2473604354-geometry",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2473604354_v_ddr.lbl"
+          }
+        ]
+      },
+      "observationDate": "2005-10-19T14:53:17",
+      "productId": "20051019_ST_2473604354_V_DDR_IMG"
+    },
+    {
+      "id": "amica-2473604354-geometry",
+      "path": "observations/st_2473604354_v_ddr.img.gz",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2473604354_v_ddr.img.gz",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 19500685,
+      "expectedSha256": "8388ce181b20156c072230ca9cdb34618e577c6894ee05d083055e7cca196a5c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2473604354-geometry",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2473604354_v_ddr.img.gz"
+          }
+        ]
+      },
+      "observationDate": "2005-10-19T14:53:17",
+      "productId": "20051019_ST_2473604354_V_DDR_IMG"
+    },
+    {
+      "id": "amica-2473604354-detector",
+      "path": "observations/st_2473604354_v.fit",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051019/st_2473604354_v.fit",
+      "credit": "JAXA/ISAS Hayabusa AMICA; Saito et al. (2010), Gaskell et al. (2008), Barnouin et al. (2012)",
+      "license": "PDS scientific archive; retain dataset attribution and original notices.",
+      "redistribution": "Attributed scientific display derivatives with original source labels and citation.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "amica-observation"
+      ],
+      "expectedBytes": 1056960,
+      "expectedSha256": "81dd34cc05b6d547c876cfbf1c69161c5d88e97bdc4dbcffae5d30578d892daa",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hayabusa-amica-2473604354-detector",
+            "role": "material",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051019/st_2473604354_v.fit"
+          }
+        ]
+      },
+      "observationDate": "2005-10-19T14:53:17"
     }
   ],
   "generatedIntermediates": [
@@ -801,8 +878,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9650,
-      "expectedSha256": "2f9072ff94d2c1aabb9b058512465982b57f000e2f8c960675851e1a4fa4a7f1",
+      "expectedBytes": 9480,
+      "expectedSha256": "3518b728b4dce39ae8ac1f5ae4d5fe090b742042ce9cfb4becaba5f669d9aa10",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -810,8 +887,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 7611,
-      "expectedSha256": "20bbbb5e5b04e16ac388110a4f2ee9a5d69e90c6a4ce463042568a74c5e3467a"
+      "expectedBytes": 8454,
+      "expectedSha256": "ba93b10dc3f3eb6470a9cc7d0561cfbcaddc15a8f82bbbcf17e2e8e7f70ac44b"
     },
     {
       "path": "preparation/navigation.json",
@@ -825,8 +902,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6683,
-      "expectedSha256": "9964c3be4834ef6c43ef117ec7fa039eb24beae5dd98d1989d9f1c72dd3a1349"
+      "expectedBytes": 6995,
+      "expectedSha256": "fb33cf8dfd2cd3868ddb88db921eed5f1ed117fa03ce93bfd3c4f143cddb8ead"
     },
     {
       "path": "presentation/title-mark.json",

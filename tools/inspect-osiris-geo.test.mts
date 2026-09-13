@@ -1,7 +1,19 @@
 import { required } from './test-values.mts';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, sampleGeo, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain } from './objects/terrestrial-layers/osiris-geo.mts';
+import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain } from './objects/terrestrial-layers/osiris-geo.mts';
+import { sampleFootprint } from './objects/surface-observations/footprint.mts';
+import { archiveBackplanes } from './objects/surface-observations/geometry.mts';
+import { diskPhotometry } from './objects/surface-observations/photometry.mts';
+import type { DiskPhotometry } from './objects/terrestrial-layers/contracts.mts';
+
+/** A decoded GEO frame as the footprint stage sees it: optional quality flags and disk photometry. */
+const sampleGeo = (frame: ReturnType<typeof decodeOsirisGeo> & { quality?: { flags: ArrayLike<number>; allowLossy: boolean }; colorPlanes?: readonly ArrayLike<number>[]; acceptPixel?(index: number): boolean }, matrix: number[][], pointKm: number[],
+  { maximumSeparationMeters, maximumEmissionDegrees, photometry }: { maximumSeparationMeters: number; maximumEmissionDegrees: number; photometry?: DiskPhotometry }) => sampleFootprint({
+  image: { width: frame.width, height: frame.height, values: frame.planes.IMAGE, ...(frame.colorPlanes ? { colorValues: frame.colorPlanes } : {}), startTime: frame.startTime, filter: frame.filter, report: {},
+    reject: i => (frame.acceptPixel && !frame.acceptPixel(i)) || (frame.quality && !acceptOsirisQuality(frame.quality.flags[i], frame.quality.allowLossy)) ? 'quality' : null },
+  camera: { project: point => project(matrix, point.map(n => n / 1000)) }, geometry: archiveBackplanes(frame, { positionMeters: [0, 0, 0] }),
+  photometry: photometry ? diskPhotometry(photometry) : { gain: () => 1 } }, pointKm.map(n => n * 1000), { maximumSeparationMeters, maximumEmissionDegrees });
 
 test('radiance factor uses calibrated solar flux and squared distance without normalizing twice', () => {
   const history = 'SOLAR_DISTANCE = 2 <AU>\nSOLAR_FLUX = 4 <W/m**2/nm>\nROSETTA:REFLECTIVITY_NORMALIZATION_FLAG = FALSE\n';
@@ -133,7 +145,7 @@ test('surface sampling rejects occlusion boundaries and grazing geometry without
   frame.planes.EMISSION_ANGLE_IMAGE[0] = .2;
   frame.planes.FACET_INDEX_IMAGE[0] = 0;
   assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).reason, 'no-geometry');
-  assert.equal(sampleGeo(frame, matrix, [2, 0, 0], policy).reason, 'outside');
+  assert.equal(sampleGeo(frame, matrix, [2, 0, 0], policy).reason, 'outside-detector');
 });
 
 test('registered filter colors share interpolation and geometry rejection with grayscale', () => {

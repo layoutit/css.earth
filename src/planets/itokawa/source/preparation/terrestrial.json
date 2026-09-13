@@ -91,7 +91,7 @@
         ],
         "metadata": {
           "label": "AMICA mosaic",
-          "coverage": "Seven Hayabusa AMICA v-band photographs from September and October 2005, including closer views from north of the equator. Registered through the archived Gaskell Cartesian backplanes. Brightness is approximately normalized and matched across overlaps; photographed shadows remain. The grid marks unsupported surface coverage.",
+          "coverage": "Eight Hayabusa AMICA v-band photographs from September and October 2005, including closer views from north and south of the equator. Registered through the archived Gaskell Cartesian backplanes. Brightness is approximately normalized and matched across overlaps; photographed shadows remain. The grid marks unsupported surface coverage.",
           "falseColor": false
         },
         "frames": [
@@ -143,6 +143,13 @@
             "labelPath": "observations/st_2495230070_v_ddr.lbl",
             "originalPath": "observations/st_2495230070_v.fit",
             "startTime": "2005-10-27T10:36:18"
+          },
+          {
+            "id": "amica-2473604354",
+            "path": "observations/st_2473604354_v_ddr.img.gz",
+            "labelPath": "observations/st_2473604354_v_ddr.lbl",
+            "originalPath": "observations/st_2473604354_v.fit",
+            "startTime": "2005-10-19T14:53:17"
           }
         ],
         "selection": "lowest-emission",
