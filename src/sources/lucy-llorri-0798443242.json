@@ -1,0 +1,33 @@
+{
+  "id": "lucy-llorri-0798443242",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Donaldjohanson · Lucy L’LORRI approach image, 20 April 2025 17:49:26 UTC",
+  "identifiers": [
+    {
+      "type": "pds4-lid",
+      "value": "urn:nasa:pds:lucy.llorri:data_donaldjohanson_partially_processed:lor_0798443242_04596_00001_1x1_sci"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.xml",
+      "label": "Native label"
+    },
+    {
+      "role": "archive",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.fit",
+      "label": "Original FITS"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.xml",
+      "checkedOn": "2026-09-13",
+      "locator": "logical_identifier, start_date_time and FITS array definitions"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

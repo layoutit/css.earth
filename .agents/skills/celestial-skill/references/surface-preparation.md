@@ -33,6 +33,13 @@ For multiple photographs projected onto a surface, also read
 [registered photographic mosaics](registered-photographic-mosaics.md) for camera
 validation, surface correspondence, observation selection and coverage evidence.
 
+For an existing single-model observation lens with unchanged geometry, use the
+[observation refresh command](../../../../docs/surface-preparation.md#refresh-photographs-without-rebuilding-geometry)
+to prepare only the selected imagery and its delivery records. It checks the
+retained atlas against the source recipe and reuses the full preparer's owners.
+Run one body at a time; alternative models or source-lighting changes need full
+preparation. A faster refresh still requires source and visual qualification.
+
 When baked illumination needs correction, try the following in preparation:
 
 1. Bind each contributing observation/band to capture time, Sun and observer

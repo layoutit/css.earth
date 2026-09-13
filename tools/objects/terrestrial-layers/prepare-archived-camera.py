@@ -116,21 +116,27 @@ def register_osiris(source, profile, camera, temporary):
     from scipy.signal import fftconvolve
     camera_path=temporary/'camera.json';camera_path.write_text(json.dumps(camera))
     output=temporary/'reference.f32'
-    subprocess.run(['node',str(Path(__file__).with_name('camera-reference.mjs')),str(source),str(camera_path),str(source/profile['image']),str(output)],check=True)
+    subprocess.run(['node',str(Path(__file__).with_name('camera-reference.mts')),str(source),str(camera_path),str(source/profile['image']),str(output)],check=True)
     width,height=camera['width'],camera['height'];m=np.fromfile(output,'<f4').reshape(height,width)
     data=(source/profile['image']).read_bytes();offset=(int(field(data[:65536].decode('ascii',errors='replace'),'^IMAGE'))-1)*512
     a=np.frombuffer(data,dtype='<f4',count=width*height,offset=offset).reshape(height,width).astype('float64');a[~np.isfinite(a)]=0
     # A standard difference of Gaussians removes unmatched broad photometric
     # trends. Matching only estimates a translation, never modifies source pixels.
     a=gaussian_filter(a,2)-gaussian_filter(a,30);m=gaussian_filter(m,2)-gaussian_filter(m,30)
+    pad=profile.get('registrationSearchRadiusPixels',128)
+    if type(pad) is not int or not 128<=pad<=256:
+        raise ValueError('Registration search must be between 128 and 256 source pixels')
     results=[]
     for window in profile['registrationWindows']:
-        x0,y0,x1,y1=window['rectangle'];t=m[y0:y1,x0:x1];im=a[y0-128:y1+128,x0-128:x1+128];t=t-t.mean();ones=np.ones(t.shape);n=t.size
+        x0,y0,x1,y1=window['rectangle']
+        if not (pad<=x0<x1<=width-pad and pad<=y0<y1<=height-pad):
+            raise ValueError('Registration window and search margin must fit inside the source image')
+        t=m[y0:y1,x0:x1];im=a[y0-pad:y1+pad,x0-pad:x1+pad];t=t-t.mean();ones=np.ones(t.shape);n=t.size
         sums=fftconvolve(im,ones,mode='valid');sq=fftconvolve(im*im,ones,mode='valid');cov=fftconvolve(im,t[::-1,::-1],mode='valid')
         cc=cov/np.sqrt(np.maximum(1e-30,(sq-sums*sums/n)*np.sum(t*t)));iy,ix=np.unravel_index(cc.argmax(),cc.shape)
-        if min(ix,iy)<=0 or max(ix,iy)>=256 or cc[iy,ix]<.7:
-            raise ValueError('Unqualified image/model correlation window')
-        results.append(dict(**window,offsetPixels=[int(ix)-128,int(iy)-128],correlation=float(cc[iy,ix])))
+        if min(ix,iy)<=0 or max(ix,iy)>=2*pad or cc[iy,ix]<.7:
+            raise ValueError(f"Unqualified image/model correlation window {window['name']}: offset ({int(ix)-pad}, {int(iy)-pad}), correlation {float(cc[iy,ix]):.6f}")
+        results.append(dict(**window,offsetPixels=[int(ix)-pad,int(iy)-pad],correlation=float(cc[iy,ix])))
     fits=[w for w in results if w['role']=='fit'];holdouts=[w for w in results if w['role']=='holdout']
     if len(fits)!=2 or len(holdouts)!=2:
         raise ValueError('Expected disjoint two-fit/two-holdout registration')
@@ -142,6 +148,8 @@ def register_osiris(source, profile, camera, temporary):
     camera['checks']['imageRegistration']=dict(method='Bounded zero-mean normalized image/model correlation; BORESIGHT_V01 section 4.2.',
         windows=results,offsetPixels=delta.tolist(),maximumHoldoutResidualPixels=maximum,maximumAcceptedHoldoutResidualPixels=12,
         interpretation='Registration to the pinned source shape; not absolute ground truth. Header pointing checks describe the camera before adjustment.')
+    if pad!=128:
+        camera['checks']['imageRegistration']['searchRadiusPixels']=pad
 
 
 def main():
