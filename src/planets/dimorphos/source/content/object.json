@@ -98,7 +98,7 @@
             "value": "None · panchromatic"
           }
         ],
-        "summary": "Four DRACO frames from 11 to 1.8 seconds before impact. Closer qualified footprints take precedence; the unseen surface keeps the grid."
+        "summary": "Four DRACO frames from 11 to 1.8 seconds before impact, using closer qualified detail where available. Brightness is approximately normalized; photographed shadows remain. Grid marks unobserved or rejected areas."
       },
       {
         "id": "elevation",
@@ -189,7 +189,7 @@
       }
     ],
     "labels": {
-      "draco": "DRACO image",
+      "draco": "DRACO mosaic",
       "slope": "Slope"
     }
   },
