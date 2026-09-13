@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "313aadd804ad9725f6c3e77042ffd97e601713f6c0947c3686c6a2adcadd5add"
+    "sha256": "c6ac81dc0d97c69704223769846269962876d66eac23a95aa4ff2bc45a2da38b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1671,8 +1671,8 @@
       "outputs": [
         {
           "url": "/scenes/miranda/miranda-features.json",
-          "bytes": 74684,
-          "sha256": "d33c9e6e09e8ab33d6e58bdd95044a366e01d41a02484966af80a8303f792f35",
+          "bytes": 74694,
+          "sha256": "d4a0199cdcdd30e9c78c4a26e761d551d3ce7bf2284cf29a25b52fab4fab0838",
           "verification": "asset-manifest-pin"
         }
       ],

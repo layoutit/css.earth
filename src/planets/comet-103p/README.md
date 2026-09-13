@@ -10,6 +10,8 @@
 
 ## Evidence
 
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. Only the prepared zoom thresholds changed; coordinates, captions, mesh and imagery match the preceding version.
+
 - The [constraint-grid qualification](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/CONSTRAINT-GRIDS.md) records checks and captured views.
 
 - The [shared qualification record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/QUALIFICATION.md) records verification.
@@ -17,6 +19,8 @@
 - The [landmark source record](source/features/landmarks.json) links each location to the published figure and records its coordinate precision.
 
 - **Surface places, 2026-09-12:** preparation and the runtime parser accepted three locations; three focused unit tests passed. Browser inspection on base `53b262bd` with this addition covered the waist search, camera arrival and EPOXI dataset. The published catalog passed a fresh byte-count and SHA-256 check. Surface assets are unchanged.
+
+- **Reader oracle, 2026-09-12:** `tools/oracles/fits/encounter.py` reads the pinned MRI product `mv10110413_6000001_001_r.fit` with astropy. `tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts` requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, border, flagged and non-finite pixels to agree.
 
 ## Known problems
 

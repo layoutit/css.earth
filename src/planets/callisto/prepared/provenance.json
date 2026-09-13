@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dcbe81bd9892a4bafeef087cbd9757079f3a2fa448dc105ba4d785e575552411"
+    "sha256": "34d7c41dce68df1bb519e09b2e66ee05a92be4ef6501e0bd8974d8e8d939121b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1419,8 +1419,8 @@
       "outputs": [
         {
           "url": "/scenes/callisto/callisto-features.json",
-          "bytes": 191289,
-          "sha256": "87d1648f88ecc291f7ca1f8dc73d404a4d81d57e5c5ac0eaefde6cb462dfffdf",
+          "bytes": 191301,
+          "sha256": "702e444e9fdf4ccabaeaa2f0698528dce1cf0411b3de843e01c35ddaf29f7074",
           "verification": "asset-manifest-pin"
         }
       ],

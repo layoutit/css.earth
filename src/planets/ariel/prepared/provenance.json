@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cd34088a1d36cf6699dcb7e6f5305838fe9a0996b3f9126bf356fdef0ea0e362"
+    "sha256": "6d217b6aebb3265032255a53d425dfa13b88162baf11ba9e77cec7e8588d86c9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1314,8 +1314,8 @@
       "outputs": [
         {
           "url": "/scenes/ariel/ariel-features.json",
-          "bytes": 87586,
-          "sha256": "2a8e910c9da369ece9f14dfeeb68fbb255392cd783a075b7a1b8ecdc5dc04ff7",
+          "bytes": 87591,
+          "sha256": "d4bdc1dfb38c5b880099d45b6c3fe1f5db519f2080772c9071ba4a6e72b68479",
           "verification": "asset-manifest-pin"
         }
       ],

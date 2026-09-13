@@ -39,6 +39,34 @@ test("the shared builder mounts exactly the prepared parent order and publishes 
     assert.equal(presentation.observe().presentation.nodes, nodes.length);
   } finally { f.restore(); }
 });
+const venusDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('venus'));
+test("the body publishes the prepared seam outset step for the camera's silhouette", () => {
+  const f = retainedPresentationFixture(venusDefinition);
+  try {
+    const presentation = mountPreparedPresentation(f.stage, f.context, venusDefinition);
+    const nodes = f.stage.querySelectorAll("*");
+    const binding = venusDefinition.viewBindings.find(candidate => candidate.kind === "silhouette-step-property");
+    if (binding?.kind !== "silhouette-step-property") throw new Error("Venus publishes no seam outset.");
+    const selection = initialObjectSelection(venusDefinition.controls);
+    const value = () => nodes[binding.target].style.getPropertyValue(binding.property);
+    const frame = (silhouetteDiameter: number | null) => presentation.publishFrame({ selection, resources: f.resources,
+      view: { ...f.view, levelOfDetail: { stage: "geometry", silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0 } } });
+    const prepared = value();
+    assert.ok(binding.levels.some(level => level.value === prepared), "the retained body starts on a prepared step");
+    frame(null);
+    assert.equal(value(), prepared, "an unavailable projection keeps the published step");
+    const index = binding.levels.findIndex(level => level.minimumDiameter >= 1000), step = binding.levels[index];
+    frame(step.minimumDiameter);
+    assert.equal(value(), step.value);
+    const outsetPixels = Number(step.value) * step.minimumDiameter;
+    assert.ok(outsetPixels > 0.35 && outsetPixels < 0.6, `the step holds ${outsetPixels} px at its threshold`);
+    // Below its threshold a step holds until the hysteresis margin is spent.
+    frame(step.minimumDiameter * (1 - binding.hysteresis / 2));
+    assert.equal(value(), step.value);
+    frame(step.minimumDiameter * (1 - binding.hysteresis * 2));
+    assert.equal(value(), binding.levels[index - 1].value);
+  } finally { f.restore(); }
+});
 test("a missing member cannot publish a partial texture group", () => {
   const f = retainedPresentationFixture(runtimeDefinition);
   try {
