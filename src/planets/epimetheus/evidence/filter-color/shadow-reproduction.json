@@ -1,0 +1,36 @@
+{
+  "baseline": "52d5d4815",
+  "method": "Current unchanged main preparer, main terrestrial recipes, byte-pinned original native inputs. Extra filter inputs and content present in the branch do not participate in the two original surfaces.",
+  "reports": [
+    {
+      "body": "epimetheus",
+      "file": "epimetheus-normal-shadow@2x.webp",
+      "mainRecipeSha256": "f1ab612ac524703eaaf41240a46a0a5a27fc8aec7662e1e3f33a31b25032d79c",
+      "mainRegeneratedSha256": "fc3264c8f9a4a96d59a5e6f3e948600309d379706e0a9dbe9e283573935f10ca",
+      "colorBranchSha256": "fc3264c8f9a4a96d59a5e6f3e948600309d379706e0a9dbe9e283573935f10ca",
+      "exactMatch": true,
+      "previous": {
+        "filename": "epimetheus-normal-shadow@2x.webp",
+        "bytes": 370282,
+        "sha256": "8f8c76055156fb6d632fd662323c7b77ffdf2a591cc4636bb6f57a03dbe8c588"
+      },
+      "previousUrl": "https://earth-assets.lowpoly.cc/runtime-assets/8f8c76055156fb6d632fd662323c7b77ffdf2a591cc4636bb6f57a03dbe8c588/epimetheus-normal-shadow@2x.webp",
+      "regeneratedUrl": "https://earth-assets.lowpoly.cc/runtime-assets/fc3264c8f9a4a96d59a5e6f3e948600309d379706e0a9dbe9e283573935f10ca/epimetheus-normal-shadow@2x.webp"
+    },
+    {
+      "body": "epimetheus",
+      "file": "epimetheus-elevation-shadow@2x.webp",
+      "mainRecipeSha256": "f1ab612ac524703eaaf41240a46a0a5a27fc8aec7662e1e3f33a31b25032d79c",
+      "mainRegeneratedSha256": "db3f3f76f660510bdd5be1863dd30d57c2e1d69bdfbe112804c0a849c085c166",
+      "colorBranchSha256": "db3f3f76f660510bdd5be1863dd30d57c2e1d69bdfbe112804c0a849c085c166",
+      "exactMatch": true,
+      "previous": {
+        "filename": "epimetheus-elevation-shadow@2x.webp",
+        "bytes": 304750,
+        "sha256": "95ee956bb635958579bc8db9486b02161c472db0fae957de28964ca420f83362"
+      },
+      "previousUrl": "https://earth-assets.lowpoly.cc/runtime-assets/95ee956bb635958579bc8db9486b02161c472db0fae957de28964ca420f83362/epimetheus-elevation-shadow@2x.webp",
+      "regeneratedUrl": "https://earth-assets.lowpoly.cc/runtime-assets/db3f3f76f660510bdd5be1863dd30d57c2e1d69bdfbe112804c0a849c085c166/epimetheus-elevation-shadow@2x.webp"
+    }
+  ]
+}

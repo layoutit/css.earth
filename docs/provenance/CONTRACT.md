@@ -121,6 +121,14 @@ GitHub language classification does not determine what belongs in Git.
 
 ### Interpretation
 
+For color surfaces, follow [Source-backed surface color](../color-preparation.md).
+Keep source calibration, geometric registration and display interpretation
+separate. A natural-color claim requires an applicable sourced color method;
+calibrated bands, three RGB channels, or an sRGB encoding cannot establish it.
+Never invent missing visible measurements or tune an undocumented white balance.
+Measured-band composition retains floating values until its final declared
+display encoding; publisher-prepared RGB does not receive that transfer twice.
+
 Explain the following where relevant:
 
 - Observations, derived measurements, models or illustrations; the provider's
@@ -178,8 +186,24 @@ comparisons, retain reference, result and diff with matching capture settings.
 Disclose different sources or framing and inspect affected views, boundaries and
 lighting before making comparison claims.
 
-**Use Pixelmatch with threshold `0.1` for matched visual evidence.** This cssEarth
-requirement makes pixel changes inspectable and reproducible. Compare equal-sized, unscaled
+**Choose a meaningful comparison before choosing a tool.** State the reference,
+what visual content should agree, and what defect a difference could reveal.
+Pixelmatch is conditional on that comparison; it is not a required deliverable
+for every visual PR. For example, checking that an existing Monochrome view is
+unchanged after adding a lens is meaningful. Comparing Monochrome with false
+color, two different filters, or a photograph with an elevation map is not a
+fidelity check: those datasets are supposed to look different. Do not run such
+comparisons merely to produce a mismatch count.
+
+If no meaningful matched reference exists, retain inspected source and browser
+images, explain their relationship, and use the relevant calibration, coordinate
+or registration checks. An A/A repeat establishes capture stability only; it
+does not qualify a new surface or substitute for independent source evidence.
+Run it when capture noise could affect an actual matched comparison, not as a
+standalone delivery gate.
+
+**When using Pixelmatch for matched visual evidence, use threshold `0.1`.** This
+cssEarth requirement makes pixel changes inspectable and reproducible. Compare equal-sized, unscaled
 captures or identical documented crops. Retain the input images, generated diff,
 input hashes, Pixelmatch version, threshold, anti-aliasing setting, mismatch count
 and compared pixel count beside the owning evidence. Choose settings before

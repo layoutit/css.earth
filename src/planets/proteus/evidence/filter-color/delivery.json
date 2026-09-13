@@ -1,0 +1,27 @@
+{
+  "baseline": "8cc1a2fae",
+  "method": "Fetched immutable runtime URLs over HTTPS and verified byte counts and SHA-256 against the current runtime inventory.",
+  "assets": [
+    {
+      "filename": "proteus-filter-color-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/787d908a0d0c89120d14d6bf13ed8d1de4e4604f6be5e0042de36d007d6d4c7a/proteus-filter-color-shadow@2x.webp",
+      "bytes": 106466,
+      "sha256": "787d908a0d0c89120d14d6bf13ed8d1de4e4604f6be5e0042de36d007d6d4c7a",
+      "verified": true
+    },
+    {
+      "filename": "proteus-filter-color-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/165fb921fb9de96e9b82b15659e4342d0832bb31dfd6f5f4e50a3fc24a09e160/proteus-filter-color-surface@2x.webp",
+      "bytes": 190164,
+      "sha256": "165fb921fb9de96e9b82b15659e4342d0832bb31dfd6f5f4e50a3fc24a09e160",
+      "verified": true
+    },
+    {
+      "filename": "proteus-filter-color-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/fff84f5716cd883019faf6ea3639b0341dcebf54ebfbe3321c737b3c28013c4f/proteus-filter-color-thumbnail.webp",
+      "bytes": 2664,
+      "sha256": "fff84f5716cd883019faf6ea3639b0341dcebf54ebfbe3321c737b3c28013c4f",
+      "verified": true
+    }
+  ]
+}

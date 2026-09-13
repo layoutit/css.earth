@@ -66,8 +66,10 @@ Three choices still differ by format, and each lens report records them:
   must cover both.
 - **Display range.** Those formats take the display percentiles from the first
   frame's qualified pixels. Encounter frames take them from samples on the
-  displayed surface. An orthophoto uses its authored range, and an enhanced-colour
-  cube shows its filter planes on one authored linear scale.
+  displayed surface. An orthophoto uses its authored range, and a registered color cube declares its actual bands, quantity and common
+  linear display range. Floating samples receive the [shared IEC sRGB
+  transfer](../color-transfer.mts) after surface transfer. Its policy is included
+  in the report; encoding does not qualify natural color.
 - **Selection.** A mosaic picks the lowest emission, the first frame in recipe
   order, or the finest pixel scale.
 

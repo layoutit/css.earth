@@ -128,9 +128,20 @@
           "coverage": "New Horizons near-infrared, red and blue bands, registered and blur-matched by the mission team. Enhanced color at 340 m native resolution. Unseen and grazing surfaces remain gridded."
         },
         "colorDisplay": {
-          "minimum": 0,
-          "maximum": 0.17
-        }
+          "kind": "band-composite",
+          "inputQuantity": "derived-band-value",
+          "bands": [
+            "NIR",
+            "RED",
+            "BLUE"
+          ],
+          "displayRange": [
+            0,
+            0.17
+          ],
+          "outputEncoding": "srgb"
+        },
+        "labelPath": "observations/ca05_mvic_cube.lblx"
       }
     ]
   },
