@@ -28,7 +28,7 @@ export function validateEncounterRecipe(value: unknown, sourceGeometry: unknown)
   for (const frame of requireArray(requireRecord(value).frames)) checkKeys(frame, ['id', 'path', 'labelPath', 'controlPath'], [], `${CONTEXT} frame`);
   const recipe = decodeProfile(parseEncounterLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
   validateEnvelope(recipe, recipe.frames.flatMap(f => [f.path, f.labelPath, f.controlPath]),
-    { selections: ['lowest-emission', 'finest-resolution'], displays: ['percentiles'], maximumFrames: 8, maximumLevelGain: 3, samplesPerTriangle: 'optional' }, CONTEXT);
+    { selections: ['lowest-emission', 'finest-resolution'], displays: ['percentiles'], maximumFrames: 8, maximumLevelGain: 3, maximumLogMad: .3, samplesPerTriangle: 'optional' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
   if (recipe.format !== 'encounter-fits' || !('referenceDegrees' in recipe.photometry ? validPublishedPhotometryShape(recipe.photometry, recipe.transfer.maximumEmissionDegrees)
       : recipe.photometry.model === 'observed' && recipe.photometry.maximumGain === 1)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
@@ -74,7 +74,7 @@ export const encounterFormat: SurfaceObservationFormat = {
       frames.push(frame); units ||= decoded.units;
     }
     const { report: limits, exceeded } = deriveLimits(recipe.transfer, frames, config.geometry.radialTerrain.simplification.maximumErrorMeters);
-    return { frames, exceeded, policy: { format: recipe.format, maximumSourceDistanceMeters: recipe.transfer.maximumSourceDistanceMeters, precheckDisplayPoint: false,
+    return { frames, exceeded, policy: { format: recipe.format,
       selection: frames.length === 1 ? 'single' : recipe.selection === 'finest-resolution' ? 'finest-resolution' : 'lowest-emission',
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
       display: { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: photometry.units ?? units }, photometry: photometry.report, limits } };

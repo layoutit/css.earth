@@ -175,9 +175,6 @@
           ]
         },
         "maximumCoordinateErrorMeters": 1e-06,
-        "transfer": {
-          "maximumSourceDistanceMeters": 85
-        },
         "display": {
           "displayRange": [
             0,

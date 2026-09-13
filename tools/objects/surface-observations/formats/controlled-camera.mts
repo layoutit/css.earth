@@ -24,7 +24,7 @@ const CAMERA_FIELDS = ['observerLatitude', 'observerWestLongitude', 'sunLatitude
 const FRAME_OPTIONAL = ['encoding', 'allowFiniteSigned', 'backgroundMaximum', 'backgroundOffset', 'coverageInsetPixels', 'cameraCatalog', 'quality', ...CAMERA_FIELDS];
 const BANDS = ['red', 'green', 'blue'] as const;
 type Band = typeof BANDS[number];
-const RULES: Omit<EnvelopeRules, 'displays'> = { selections: ['finest-resolution', 'lowest-emission'], maximumFrames: 16, maximumLevelGain: 5, samplesPerTriangle: 'optional' };
+const RULES: Omit<EnvelopeRules, 'displays'> = { selections: ['finest-resolution', 'lowest-emission'], maximumFrames: 16, maximumLevelGain: 5, maximumLogMad: .5, samplesPerTriangle: 'optional' };
 
 const diskBlock = shape({ model: text, weight: optional(number), referenceIncidenceDegrees: number, referenceEmissionDegrees: number,
   maximumIncidenceDegrees: number, maximumEmissionDegrees: number, maximumGain: number });
@@ -144,11 +144,11 @@ function bandSetFrame(id: string, bands: readonly ObservationFrame[]): Observati
   const coarsest = bands.reduce((a, b) => b.footprint.nadirMedianMeters > a.footprint.nadirMedianMeters ? b : a);
   return { id, startTime: bands[0].startTime, filter: bands.map(frame => frame.filter).join(' / '), positionKm: coarsest.positionKm,
     cameraKind: 'control-network', geometrySource: 'source-mesh-rays', nominalPixelScaleMeters: coarsest.nominalPixelScaleMeters, footprint: coarsest.footprint,
-    sample(point, allowance) {
+    sample(point) {
       const color: number[] = [];
       let separationMeters = 0, gain = 0, maximumEmissionDegrees = 0, maximumIncidenceDegrees = 0;
       for (const frame of bands) {
-        const sample = frame.sample(point, allowance);
+        const sample = frame.sample(point);
         if (sample.reason !== undefined) return sample;
         color.push(sample.radiance); separationMeters = Math.max(separationMeters, sample.separationMeters); gain = Math.max(gain, sample.gain);
         maximumEmissionDegrees = Math.max(maximumEmissionDegrees, sample.maximumEmissionDegrees); maximumIncidenceDegrees = Math.max(maximumIncidenceDegrees, sample.maximumIncidenceDegrees);
@@ -166,7 +166,7 @@ const lensPhotometry = (block: CameraLens['photometry'], { sourceDirectory, sour
 function lensPolicy(recipe: CameraLens | ColorLens, frames: readonly ObservationFrame[], photometry: ObservationPhotometry, context: LoadContext, units: string, colorDisplay?: BandColorDisplay) {
   const { report: limits, exceeded } = deriveLimits(recipe.transfer, frames, context.config.geometry.radialTerrain.simplification.maximumErrorMeters);
   const range = recipe.display.displayRange;
-  const policy: SurfacePolicy = { format: recipe.format, maximumSourceDistanceMeters: recipe.transfer.maximumSourceDistanceMeters, precheckDisplayPoint: false,
+  const policy: SurfacePolicy = { format: recipe.format,
     selection: frames.length === 1 ? 'single' : recipe.selection === 'lowest-emission' ? 'lowest-emission' : 'finest-resolution',
     levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
     display: range ? { range: 'authored', low: range[0], high: range[1], units, ...(colorDisplay ? { colorDisplay } : {}) }

@@ -105,7 +105,6 @@
           "maximumAngleDegrees": 70
         },
         "transfer": {
-          "maximumSourceDistanceMeters": 2,
           "maximumSeparationMeters": 2,
           "maximumEmissionDegrees": 80,
           "visibilityToleranceMeters": 0.5,
