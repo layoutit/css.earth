@@ -64,6 +64,105 @@
       ],
       "path": "features/CHARON_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CHARON_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-leisa-ice"
+      ],
+      "path": "science/leisa/0299175509_charon_cube.fit",
+      "url": "https://pdssbn.astro.umd.edu/holdings/nh-p_psa-leisa_mvic-5-comp-v1.0/data/spec/0299175509_charon_cube.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-leisa-ice"
+      ],
+      "path": "science/leisa/0299175509_charon_wavelengths.fit",
+      "url": "https://pdssbn.astro.umd.edu/holdings/nh-p_psa-leisa_mvic-5-comp-v1.0/data/spec/0299175509_charon_wavelengths.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-leisa-ice"
+      ],
+      "path": "science/leisa/0299175509_charon_geometry.fit",
+      "url": "https://pdssbn.astro.umd.edu/holdings/nh-p_psa-leisa_mvic-5-comp-v1.0/data/spec/0299175509_charon_geometry.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-leisa-ice"
+      ],
+      "path": "science/leisa/0299175509_charon_cube.lblx",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-leisa-ice"
+      ],
+      "path": "science/leisa/0299171308_charon_cube.fit",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-leisa-ice"
+      ],
+      "path": "science/leisa/0299171308_charon_wavelengths.fit",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_wavelengths.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-leisa-ice"
+      ],
+      "path": "science/leisa/0299171308_charon_geometry.fit",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_geometry.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-leisa-ice"
+      ],
+      "path": "science/leisa/0299171308_charon_cube.lblx",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx"
+    },
+    {
+      "kind": "spectral-band-maps",
+      "groups": [
+        "refresh-leisa-ice"
+      ],
+      "path": "science/leisa/water-ice.tif",
+      "recipePath": "science/leisa/bands.json",
+      "product": "water-ice"
+    },
+    {
+      "kind": "spectral-band-maps",
+      "groups": [
+        "refresh-leisa-ice"
+      ],
+      "path": "science/leisa/ammonia.tif",
+      "recipePath": "science/leisa/bands.json",
+      "product": "ammonia"
+    },
+    {
+      "kind": "spectral-band-maps",
+      "groups": [
+        "refresh-leisa-ice"
+      ],
+      "path": "science/leisa/preparation.json",
+      "recipePath": "science/leisa/bands.json",
+      "product": "report"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-leisa-ice"
+      ],
+      "path": "science/leisa/grundy-2016-supplement.pdf",
+      "url": "https://boulder.swri.edu/~buie/biblio/pub106.SOM.pdf"
     }
   ]
 }

@@ -1,0 +1,48 @@
+{
+  "baseline": "ebd16155a",
+  "method": "Fetched immutable runtime URLs over HTTPS and verified byte counts and SHA-256 against the current runtime inventory.",
+  "assets": [
+    {
+      "filename": "telesto-false-color-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/139558572ce7ef3d44f7220d0b67559ecebee583fed282578a2705c56b02ce1d/telesto-false-color-shadow@2x.webp",
+      "bytes": 195228,
+      "sha256": "139558572ce7ef3d44f7220d0b67559ecebee583fed282578a2705c56b02ce1d",
+      "verified": true
+    },
+    {
+      "filename": "telesto-false-color-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/51806fccf7a299f702c424de0fa3387a3477528bc08da3c41f5bc9ec59890dfe/telesto-false-color-surface@2x.webp",
+      "bytes": 280230,
+      "sha256": "51806fccf7a299f702c424de0fa3387a3477528bc08da3c41f5bc9ec59890dfe",
+      "verified": true
+    },
+    {
+      "filename": "telesto-false-color-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/0959a9165fd3c6927da3bd455659d589d7dab240d684dee2d54f5159cc87b2dd/telesto-false-color-thumbnail.webp",
+      "bytes": 2436,
+      "sha256": "0959a9165fd3c6927da3bd455659d589d7dab240d684dee2d54f5159cc87b2dd",
+      "verified": true
+    },
+    {
+      "filename": "telesto-normal-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d706ecc2a3ccc309c58175d08279207cd70ce7198aef7761198ec7b4337d2a61/telesto-normal-shadow@2x.webp",
+      "bytes": 214524,
+      "sha256": "d706ecc2a3ccc309c58175d08279207cd70ce7198aef7761198ec7b4337d2a61",
+      "verified": true
+    },
+    {
+      "filename": "telesto-normal-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d6f770e4bbe3e39285d7bc309e9d8bdbfaf9a22bd2abdbdd067ec2063e1fb69d/telesto-normal-surface@2x.webp",
+      "bytes": 397894,
+      "sha256": "d6f770e4bbe3e39285d7bc309e9d8bdbfaf9a22bd2abdbdd067ec2063e1fb69d",
+      "verified": true
+    },
+    {
+      "filename": "telesto-normal-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e6741dfefb677b2c381f78357bf55a555cb1e631dc98857ce82d907211c7222b/telesto-normal-thumbnail.webp",
+      "bytes": 4166,
+      "sha256": "e6741dfefb677b2c381f78357bf55a555cb1e631dc98857ce82d907211c7222b",
+      "verified": true
+    }
+  ]
+}

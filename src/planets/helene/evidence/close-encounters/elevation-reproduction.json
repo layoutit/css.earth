@@ -1,0 +1,18 @@
+{
+  "body": "helene",
+  "baseline": "ebd16155a",
+  "purpose": "The current unchanged main preparer reproduces the unaffected elevation dataset using its main recipe, unchanged source mesh and byte-identical elevation map. Both atlases exactly match this branch; the shadow drift predates the new imagery.",
+  "recipeSha256": "388484df938563399a892a9f0b4e572985df19fa27648f7c319a7268f965c1ac",
+  "assets": [
+    {
+      "filename": "helene-elevation-surface@2x.webp",
+      "sha256": "c9708ca1ca69a288380a94e919af0fcfa931f97562d2180beb6c633dd96e04e1",
+      "bytes": 626068
+    },
+    {
+      "filename": "helene-elevation-shadow@2x.webp",
+      "sha256": "44eb2f12c7c8b6ee66f54b1aa4c6a40766a35c463736e8ca0e9bb8cc40b7a9da",
+      "bytes": 326030
+    }
+  ]
+}

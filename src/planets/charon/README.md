@@ -1,6 +1,6 @@
 # Charon
 
-Charon combines New Horizons monochrome and enhanced-color mosaics, a terrain model, and modeled Bond albedo.
+Charon combines New Horizons photographs, elevation, modeled Bond albedo and two infrared views: water-ice absorption and an ammonia-related absorption. Search for **Organa** to compare its ejecta with the surrounding terrain.
 
 ## Sources
 
@@ -10,40 +10,32 @@ Charon combines New Horizons monochrome and enhanced-color mosaics, a terrain mo
 | Enhanced color | [PDS nh_charon_color_mosaic::1.0](https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx) |
 | Bond albedo | [PDS nh_charon_bond::1.0](https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx) |
 | Physical placement | JPL Horizons PLU060 and NAIF pck00011 |
-| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/CHARON/target) Charon centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
+| Water ice and ammonia | [C_LEISA_HIRES](https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx) and [C_LEISA_LORRI_1](https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299171308_charon_cube.lblx), spectra and per-pixel wavelengths/coordinates; [Grundy et al. (2016), supplementary method](https://boulder.swri.edu/~buie/biblio/pub106.SOM.pdf), p. 3 and Fig. S6 |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/CHARON/target) Charon centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin. Organa is an additional informal mission landmark from Grundy et al. |
 
 ## Evidence
 
-The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+The [LEISA capture record](evidence/leisa-ice/capture.json) binds the tested inputs, prepared assets and browser views. It checks both datasets at DPR 1 and 2, the mobile selector, dragging, Shadows off/on/off, and the Organa search result. The browser verifies the downloaded texture hashes and keeps the same 450 surface leaves while switching datasets.
 
-[Displayed surface](evidence/color-encoding/color-dpr1.png) · [DPR 2](evidence/color-encoding/color-dpr2.png) · [Shadows](evidence/color-encoding/oblique-shadows-dpr1.png) · [Mobile](evidence/color-encoding/mobile.png). The capture uses installed Chrome 152. The bundled headless Chromium rejected both the old and new 13,000 × 9,600 atlases in an isolated image decode; Chrome decoded both. Twelve missing baseline assets were [reproduced exactly and restored](evidence/color-encoding/restored-delivery.json), preserving all existing inventory hashes.
+[Water ice](evidence/leisa-ice/water-ice.png) · [Ammonia](evidence/leisa-ice/ammonia.png) · [Organa](evidence/leisa-ice/organa.png) · [DPR 2](evidence/leisa-ice/ammonia-dpr2.png) · [Mobile](evidence/leisa-ice/mobile.png)
 
-Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite remains 512 × 256 pixels at density 1 and 1024 × 512 at density 2; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
+The current raster textures start at 0° east. Features and minimaps now use that same frame; the retired 180° feature offset put labels on the opposite hemisphere. The Organa regression checks its published coordinate against the sphere axes, and the browser checks the minimap centre after flying there. Original photographs, elevation, albedo, geometry and lighting assets are byte-identical to the main baseline.
 
-| View | Both prepared levels, before → current |
-| --- | --- |
-| normal | 145.6 → 159.1 kB |
+The [source restoration check](evidence/leisa-ice/restoration.json) downloaded the original observations into an empty source directory and reproduced the two numeric maps and processing record. The only bootstrap was the checked-in band recipe. Node could not verify the SwRI PDF certificate chain in this environment, so that exact method PDF was retrieved with system curl and normal certificate validation. The [delivery check](evidence/leisa-ice/delivery.json) independently installed and hashed every Charon runtime asset from its immutable URL.
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/charon/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+Browser scope: installed Chrome on application base `ebd16155a`, with the final Charon runtime and texture bytes. The subsequent main merges changed other bodies and preparation, not the application runtime used in these captures. Two preview-only filters omit unavailable Helix/Cat’s Eye volume banks; their local restoration requires a missing NOX model. This is Charon interaction evidence, not an unmodified whole-application build pass. The capture record lists the exact preview differences and the unrelated baseline test failures.
 
-Lane change (this PR): the terrestrial solid-observation lane was retired for Charon; the same pinned inputs and the same decoders (`terrestrial-observation`, `terrestrial-scientific` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 6400 × 3200 (DPR 1) and 12800 × 6400 (DPR 2) — retired 12800 × 6400 atlas; native 300 m mosaic 12,693 px wide. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
-
-Run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js charon --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/charon/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
-
-A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, enhanced-color, elevation, albedo) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 15738).
-
-Gazetteer rims drawn over the prepared equirectangular minimap at both candidate map edges (`output/edge-markers.mjs`) agree with the declared `mapLeftEdgeLongitudeDeg` in `source/preparation/features.json`.
-
-[Independent color-source inspection](source/validation/color-source-inspection.json) records numeric and missing-value anchors. It found about 60% area-weighted RGB coverage before interpolation. No dated test or browser run is cited.
+Earlier [color-encoding evidence](evidence/color-encoding/capture.json) still applies to the unchanged photographic bytes. Its [delivery record](evidence/color-encoding/delivery.json), [color method](../../../docs/color-preparation.md) and [independent source inspection](source/validation/color-source-inspection.json) retain the earlier decoding and display qualifications. The older captures do not verify the corrected feature frame.
 
 ## Known problems
 
-Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Charon (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. The map edge was fixed by drawing Gazetteer rims under both edge hypotheses and keeping the one where Dorothy, Nasreddin and the Mandjet/Argo chasmata rims on the New Horizons mosaic coincide with the imagery.
+Named features: preparation reads the pinned IAU Gazetteer centre-point archive, drops historic albedo names, folds repeated rows and converts positive-east coordinates through `presentation/surface-map.json` with a 0° map edge. Craters and faculae use diameter circles; other types use published extent boxes. These outlines are approximations, not official boundaries. Organa has only its published centre, with no invented rim. The minimap also starts at 0° east, so the observed hemisphere crosses its left/right seam.
 
 Feature notes: 7 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 - Monochrome values are relative brightness. Enhanced color is false color, with mixed resolution and no per-pixel uncertainty array.
 - Terrain post spacing of 300 m is not a 300 m accuracy claim. Missing areas remain gridded.
+- The ice views show absorption strength, not ice abundance. Grain size, illumination and instrument noise affect the values. Ammonia is a weak feature: fine variations should not be read as confirmed deposits. Organa is an informal mission name; the roughly 5 km crater is smaller than the averaged infrared footprint.
 - Bond albedo depends on scattering assumptions and omits unobserved regions. Its label summary mistakenly names Pluto; the target, title, LIDVID and data identify Charon.
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
@@ -66,7 +58,7 @@ Both GeoTIFFs have origin (−1,903,950, 952,200) m, 300/−300 m pixels and a
 0° central meridian. The preparer samples those coordinates; it does not assume
 that rounded image dimensions are an exact longitude/latitude rectangle.
 Longitude wraps into the source's −180°…180° domain. The dedicated 640 × 320
-minimaps are centred at 0°, keeping the encounter hemisphere together.
+minimaps share the globe's 0° east map edge; encounter coverage crosses that seam.
 
 ## Preparation and interpretation
 
@@ -193,5 +185,74 @@ See the [mapped-science conversion method](../../../tools/objects/acquisition/MA
 <summary>Shape, rotation and camera on the shared raster lane</summary>
 
 The recipe declares a sphere of 606 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 6.3872-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 47.87° initial pitch, -171.78° yaw, taken from the retired lane's camera). The heliocentric view keeps the orbit around Pluto and the parent marker now comes from the shared navigation atlas.
+
+</details>
+
+<details>
+<summary>LEISA ice absorption: source selection, method and limits</summary>
+
+The two closest Charon scans have native sampling of approximately 5.0 and 8.6 km,
+from the archive's mid-scan distances and LEISA's 62 microradian pixels. Their
+640 × 640 and 320 × 320 arrays are resampled observations, not finer measurements.
+Each has a per-pixel wavelength cube and five geometry backplanes: phase,
+emission, incidence, latitude and longitude. We use those surface coordinates
+with positive-east longitude on the existing 606 km reference sphere.
+
+| Display | Calculation, wavelengths in micrometres | Display scale |
+| --- | --- | --- |
+| Water ice | `1 − band / continuum`; mean band 1.980–2.025, linear continuum between means at 1.760–1.810 and 2.240–2.270 | 45–75% band depth |
+| Ammonia | Pooled mean of 2.10–2.17 and 2.26–2.29 divided by mean at 2.20–2.24, following Grundy's supplementary method | 0.75–0.95 continuum/band ratio |
+
+Water depth is an authored diagnostic of the broad 2 micrometre ice feature,
+not a reproduction of a published mixture model. The ammonia quantity follows
+the published ratio. Values below 1 do not mean negative ammonia: the surrounding
+water-ice spectrum is curved. Neither quantity measures ice abundance.
+
+Only zero-based channels 0–196 of the ordinary-resolution spectral segment are
+used. The archive warns of uncertain scattered-light calibration in the
+high-resolution segment, particularly channels 199–207. Wavelength selection
+is per pixel. The recipe sets minimum channel counts for each band. NaNs and
+finite special values above 1e30 in magnitude are missing. Every contributing
+pixel and all four interpolated footprint corners must pass the 70-degree
+incidence and emission limits. Gaps are not filled.
+
+Water spectra are pooled over 3 × 3 archived pixels. Ammonia uses 6 × 6 in the
+closest scan and 3 × 3 in the earlier scan, about 12 km near the disk centre;
+footprints broaden toward the limb. Ratios are formed after pooling spectra.
+No uncertainty reduction from independent resampled pixels is claimed.
+Each accepted footprint paints only covered centres on a 720 × 360 map. Overlap
+chooses the smaller ground footprint, bounded below by native instrument
+resolution, independently of absorption strength. No gain matching is applied.
+The [preparation record](source/science/leisa/preparation.json) gives per-scan
+contributions and area-weighted coverage, about 24% of the globe per quantity.
+
+The six earlier scans in the archive overview have roughly 30–132 km native
+sampling. Their metadata were surveyed; their spectra were not processed or
+qualified here. They remain candidates for coarse-scale work, but cannot add
+crater-scale detail. Pluto's ready-made absorption maps are not Charon data.
+
+Three archive inconsistencies remain explicit. The migrated PDS4 label says
+little-endian for spectra/wavelengths, but native FITS bytes are big-endian;
+astropy independently verifies their physical values. The label retains
+radiance units, while the collection overview describes these products as I/F.
+The overview mistypes the missing-value exponent; native bytes contain about
+−3.4028235e38. These ratios use the overview's I/F interpretation.
+
+The [astropy fixture](../../../tests/oracles/fits/charon-leisa.json) and
+[comparing test](../../../tools/objects/observation/spectral-band-maps.test.mts)
+check both scans' native values and independently calculated cells around
+Organa's published coordinate (310.9° E, 54.3° N). This proves decoding and
+arithmetic, not a new mineralogical detection. The published map supplies the
+spatial interpretation; LEISA is coarser and noisier than the visible mosaic.
+
+The new views use 2048 × 1024 and 4096 × 2048 maps before latitude-band packing.
+Numeric bilinear interpolation softens display transitions only where all four
+neighbouring cells are valid; it does not add measurements. A less-averaged visual comparison showed stronger scan-pattern variation; it did
+not establish finer surface features, so the original spectral pooling is retained.
+The existing per-surface size declaration keeps broad signals out of
+photograph-sized atlases. Geometry, lighting, camera and the previous four
+textures are retained; Shadows starts off. The source manifest and acquisition
+recipe restore the original FITS and reproduce the numerical GeoTIFFs before
+the normal body bake. The runtime inventory records the ten added image sizes.
 
 </details>
