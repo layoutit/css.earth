@@ -46,11 +46,11 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   const sourceLenses=requireArray(rasterInput?.lenses ?? []).map(value=>shape({id:text})(value));
   const surfaces = new Map(sourceSurfaces.map(surface => [surface.id, surface] as const));
   const selected = photographs ? new Set(photographs) : null;
-  if (selected && (!selected.size || selected.size !== photographs!.length || [...selected].some(id => !surfaces.has(id))))
-    throw new TypeError('Choose existing photographic raster surfaces for minimap refresh.');
   // Raster-lane surfaces with a scientific interpretation preview through the same decoders the lane packs with.
   const science = new Map(requireArray(rasterInput?.surfaces ?? []).flatMap(value => { const record = requireRecord(value); return isRecord(record.science) ? [[requireString(record.id), record.science] as const] : []; }));
-  for (const surface of requireArray(prepared?.surfaces ?? []).map(parsePreviewSurface)) if (surface.map && !selected?.has(surface.id)) surfaces.set(surface.id, surface);
+  for (const surface of requireArray(prepared?.surfaces ?? []).map(parsePreviewSurface)) if (surface.map && (!selected || !surfaces.has(surface.id))) surfaces.set(surface.id, surface);
+  if (selected && (!selected.size || selected.size !== photographs!.length || [...selected].some(id => !surfaces.has(id))))
+    throw new TypeError('Choose existing photographic surfaces for minimap refresh.');
   const framingValue=await optionalJson(resolve(objectDirectory, 'source/presentation/minimap.json'));
   const framing=framingValue && parseMinimapFraming(framingValue);
   const images = [];

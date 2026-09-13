@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "36a2ab443ae073b3c728a03113af7474bf3b4de8f7b80dee7f8b15142e1fb353"
+    "sha256": "0d1338d04ab5377972ee57f6719bfc237d8d86bc851ef90e6478c7ba0b09ceff"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8bedb79bd92dd495ec4443730cc597ca1a4d2f63fc0b8cdd8549ff9eeb793d4e",
+      "sha256": "27d0b0ae994a38aa705f87ce613d7f8c690432dde89732b77caa2f0dae090d91",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -429,17 +429,17 @@
               },
               "transfer": {
                 "maximumSourceDistanceMeters": 5310,
-                "maximumSeparationMeters": 3000,
-                "maximumEmissionDegrees": 80,
+                "maximumSeparationFootprints": 2,
+                "maximumEmissionDegrees": 75,
                 "visibilityToleranceMeters": 0.5,
-                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must lie within 3 km of the closest source-mesh point, about two 1.1 km pixel footprints, which also withholds strongly foreshortened surface; that point must lie within 5.31 km of the displayed mesh, its simplification error, and be visible from the refined camera in the full mesh."
+                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must lie within two diagonal pixel footprints of the closest source-mesh point; a footprint is the pixel's range times the camera's pixel angle, stretched by the emission angle, about 1.6 km across the diagonal at nadir from 190,000 km. Emission is limited to 75°, where a pixel stretches nearly four times along the surface. The closest point must lie within 5.31 km of the displayed mesh, its simplification error, and be visible from the refined camera in the full mesh."
               },
               "photometry": {
                 "model": "lommel-seeliger",
                 "referenceIncidenceDegrees": 0,
                 "referenceEmissionDegrees": 0,
                 "maximumIncidenceDegrees": 80,
-                "maximumEmissionDegrees": 80,
+                "maximumEmissionDegrees": 75,
                 "maximumGain": 3
               },
               "displayPercentiles": [
@@ -2154,14 +2154,14 @@
       "outputs": [
         {
           "url": "/scenes/tethys/tethys-iss-thumbnail.webp",
-          "bytes": 2428,
-          "sha256": "51f90432165d1f7fe5cfbc6002c2260dae43f15799c0ef8f3ec7b9fd0b3d0b18",
+          "bytes": 2414,
+          "sha256": "a30716a92c09b324ca9350289899e66807db9330d78b0ac206568e57c9c5edf5",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-iss-surface@2x.webp",
-          "bytes": 1806630,
-          "sha256": "a854ec7dd06d3cd27a87d5e84bb2891d465baa2efbed71a0a52eea8ebe569787",
+          "bytes": 1372560,
+          "sha256": "dca5b01921fff23b218f13e3d2e087a2b141250aedc02131424645fb3bc90f2e",
           "verification": "bytes-verified"
         }
       ],
@@ -2341,8 +2341,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/iss.webp",
-          "bytes": 21560,
-          "sha256": "1d58a6dd850e29cb3f794736c1d4b69b5b0ad12f995f2542a4b6c42f68b0b11c",
+          "bytes": 22440,
+          "sha256": "81ad74453f479474425316a223e0c2fa493b973ef1142d23fbb6b0507196fc00",
           "verification": "bytes-verified"
         }
       ]

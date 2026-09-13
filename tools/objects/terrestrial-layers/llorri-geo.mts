@@ -66,7 +66,7 @@ export function decodeLlorri(bytes: Buffer, value: unknown) {
     acceptPixel:(i: number) => flags[i] === 0 && Number.isFinite(values[i]) && Number.isFinite(sigma.values[i]) && sigma.values[i] >= 0,
     qualityReport:{units:'relative DN per second',pairedSigmaAndQuality:true,exposureSeconds:Number(h.EXPTIME),
       flagDefinition:'All nonzero bits rejected: bias, flat, permanent defect, hot pixel, saturation, missing pixel.',
-      geometry:'Source-mesh intersections through the original TAN-SIP WCS and a two-landmark translation; independent third landmark withheld.',
+      geometry:'Source-mesh intersections through the original TAN-SIP WCS and the registered image-to-surface translation recorded in the pinned camera closure.',
       illumination:'Original acquisition illumination retained. No albedo or disk-normalization claim.',
       limitations:'Partially processed image: bias, smear and flat corrected; absolute calibration omitted by the source.'} };
 }

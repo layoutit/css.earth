@@ -1,5 +1,5 @@
 // Headless, sequential evidence on the existing server; no server is started.
-// Usage: node tests/objects/browser/asteroid-photographic-coverage.mts <itokawa|lutetia> <before|after>
+// Usage: node tests/objects/browser/asteroid-photographic-coverage.mts <itokawa|lutetia|donaldjohanson> <before|after>
 import {chromium} from 'playwright';
 import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -7,21 +7,26 @@ import {createHash} from 'node:crypto';
 import {createTestPage} from '../../../site/test/browser-observations.mts';
 import {conformanceBrowserLaunch} from '../../../site/test/conformance-browser-launch.mts';
 const [id='itokawa',phase='before']=process.argv.slice(2),out=resolve('output/playwright/asteroid-photographic-coverage',id,phase);await mkdir(out,{recursive:true});
-if(!['itokawa','lutetia'].includes(id)||!['before','after'].includes(phase))throw Error('Choose itokawa or lutetia and before or after');
+if(!['itokawa','lutetia','donaldjohanson'].includes(id)||!['before','after'].includes(phase))throw Error('Choose itokawa, lutetia or donaldjohanson and before or after');
 const launch=await conformanceBrowserLaunch({channel:'chrome',evidenceDirectory:out,redirectStdio:true});const browser=await chromium.launch(launch.options),reports=[];
 const overrides:Record<string,never>={};
 try{
  const page=await createTestPage(browser,{viewport:{width:1440,height:1000},deviceScaleFactor:1});const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')console.log('console error',m.text());});page.on('response',r=>{if(r.status()>=400)errors.push(`HTTP ${r.status()} ${r.url()}`);});
  await page.goto(`http://127.0.0.1:4278/${id}/`,{waitUntil:'networkidle'});try{await page.waitForFunction(id=>window.__cssEarth?.object(id)?.ready,id,{timeout:10000});}catch(error){await page.screenshot({path:resolve(out,'loaded.png')});console.log('Loaded state',errors,await page.evaluate(()=>({keys:Object.keys(window.__cssEarth??{}),body:document.body.innerText.slice(0,1000)})));throw error;}
  await page.evaluate(()=>{const input=window.__cssearthTest.input('input[name="motion"]');if(input.checked)input.click();});
- const lens=id==='itokawa'?'amica':id==='lutetia'?'osiris':'calibrated';await page.locator(`button[name="lens"][value="${lens}"]`).click();await page.waitForFunction(({id,lens})=>window.__cssearthTest.object(id).runtime.selection().committed?.lensId===lens,{id,lens});
+ const lens=id==='itokawa'?'amica':id==='lutetia'?'osiris':'llorri';await page.locator(`button[name="lens"][value="${lens}"]`).click();await page.waitForFunction(({id,lens})=>window.__cssearthTest.object(id).runtime.selection().committed?.lensId===lens,{id,lens});
  for(const yaw of [0,90,180,270]){await page.evaluate(({id,yaw})=>window.__cssearthTest.object(id).camera.setState({controlPitch:100,controlYaw:yaw,zoom:1.7}),{id,yaw});await page.waitForTimeout(300);await page.screenshot({path:resolve(out,`${yaw}.png`)});reports.push({yaw,camera:await page.evaluate(id=>window.__cssearthTest.object(id).camera.state(),id)});}
  const interaction:Record<string,unknown>={};
  if(phase==='after'){
-  const yaw=id==='itokawa'?180:0;
+  const yaw=['itokawa','donaldjohanson'].includes(id)?180:0;
   const geometry=await page.evaluateHandle(()=>[...document.querySelectorAll('.planet-stage .polycss-camera u')]);
   await page.evaluate(({id,yaw})=>{window.__cssearthTest.object(id).camera.setState({controlPitch:100,controlYaw:yaw,zoom:1.7});},{id,yaw});
   await page.waitForTimeout(300);await page.screenshot({path:resolve(out,'repeat-1.png')});await page.waitForTimeout(400);await page.screenshot({path:resolve(out,'repeat-2.png')});
+  if(id==='donaldjohanson'){
+   await page.evaluate(id=>window.__cssearthTest.object(id).camera.setState({controlPitch:150,controlYaw:180,zoom:1.3}),id);
+   await page.waitForTimeout(300);await page.screenshot({path:resolve(out,'hero.png')});interaction.heroCamera=await page.evaluate(id=>window.__cssearthTest.object(id).camera.state(),id);
+   await page.evaluate(({id,yaw})=>window.__cssearthTest.object(id).camera.setState({controlPitch:100,controlYaw:yaw,zoom:1.7}),{id,yaw});
+  }
   interaction.defaultShadows=await page.evaluate(()=>window.__cssearthTest.input('input[name="shadows"]').checked);if(interaction.defaultShadows!==false)throw Error('Shadows enabled by default');
   await page.evaluate(()=>window.__cssearthTest.input('input[name="shadows"]').click());await page.waitForFunction(id=>window.__cssearthTest.object(id).runtime.selection().committed?.shadows===true,id);await page.waitForTimeout(200);await page.screenshot({path:resolve(out,'shadows.png')});
   await page.evaluate(id=>window.__cssearthTest.object(id).camera.setState({controlPitch:100,controlYaw:0,zoom:1.7}),id);await page.waitForTimeout(200);await page.screenshot({path:resolve(out,'shadows-opposite.png')});

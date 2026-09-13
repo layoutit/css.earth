@@ -10,6 +10,8 @@
 
 ## Evidence
 
+The final expansion is also qualified through main's shared surface-observation pipeline. [Current browser comparison and evidence](evidence/photographic-expansion/evidence.json) preserve the same camera, tree and hit mesh. The observation-only refresh took 228.4 s, compared with 417 s for the previous full preparation; it replaced three runtime files and retained 36. Photographic coverage remains 29.66% at the same 64 area-weighted samples per triangle. The older capture record below describes the initial bake; its source-camera checks remain applicable because those inputs and solutions are unchanged.
+
 [Before](evidence/photographic-coverage/before.webp) ·
 [After](evidence/photographic-coverage/after.webp) ·
 [Pixelmatch diff](evidence/photographic-coverage/diff.webp) ·

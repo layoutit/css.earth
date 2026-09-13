@@ -133,7 +133,7 @@ the decoder named by the recipe. Ordinary images use Sharp; PDS, FITS, ISIS and
 GeoTIFF observations use format-specific readers that check the expected grid
 and encoding. [Acquisition tools](../tools/objects/acquisition/) handle
 instrument-specific calibration and geometry. The
-[observation preparer](../tools/objects/terrestrial-layers/observed-geo-surface.mts)
+[surface-observation pipeline](../tools/objects/surface-observations/README.md)
 also fits and validates cameras and applies photometric corrections.
 
 [loadScienceSurface](../tools/objects/terrestrial-layers/scientific-raster.mts)
@@ -163,7 +163,7 @@ atlas coordinates locate the baked tile that the CSS surface will display.
 | --- | --- |
 | Geographic or projected map | [scienceMapPoint](../tools/objects/terrestrial-layers/scientific-raster.mts) applies the declared projection; grid origin, spacing and pixel-center rules locate the sample. [Solid-body reprojection](../src/platform/prepare-solid-body-surface.mts) handles the display surface and poles. |
 | Mesh with released UVs | [obj-uv-fits.mjs](../tools/objects/terrestrial-layers/obj-uv-fits.mts) keeps each face corner's original texture index, including seams. It transfers a prepared point to the closest original triangle within the recipe's distance limit. |
-| Registered photograph | [observed-geo-surface.mjs](../tools/objects/terrestrial-layers/observed-geo-surface.mts) uses source geometry, camera validation and visibility checks. [observation-mosaic.mjs](../tools/objects/terrestrial-layers/observation-mosaic.mts) selects among qualified observations. |
+| Registered photograph | The [surface-observation pipeline](../tools/objects/surface-observations/README.md) projects the point through the photograph's camera and checks source geometry, footprint continuity and visibility. [levels.mts](../tools/objects/surface-observations/levels.mts) selects among qualified frames. |
 
 For released OBJ UVs, the matched triangle supplies three barycentric weights:
 fractions describing the point's position within that triangle. The sampler
@@ -294,6 +294,23 @@ operation consumes inputs or emits products, and retain its original check resul
 under the [evidence rules](provenance/CONTRACT.md#save-enough-evidence-to-check-the-result).
 
 ## Refresh photographs without rebuilding geometry
+
+Existing single-model spacecraft observation lenses can refresh through the same
+surface-observation and triangle-atlas preparers used by a full preparation:
+
+```sh
+node --experimental-strip-types tools/objects/refresh-surface-observations.mts itokawa amica
+node --experimental-strip-types tools/objects/refresh-surface-observations.mts lutetia osiris
+```
+
+Pin the recipe and source inputs first. This command checks the retained atlas's
+layout and transform matrices, prepares only the selected lenses, and updates
+their photographs, thumbnails, minimaps, source indices and delivery pins.
+Geometry, other lenses and starfields remain retained. Provenance uses the
+existing `recovered` basis because this is a partial refresh. The run's timings,
+source recipe hash and changed asset list are kept in ignored
+`output/surface-observation-refresh/<body>/refresh.json`. Alternative models or
+source-lighting changes require full preparation. Run one body at a time.
 
 For a `density-before-pack` raster with separate pole sprites, a surface may set
 `resolutionScale` to a positive integer. It multiplies that photograph's map
