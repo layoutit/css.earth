@@ -33,9 +33,7 @@ The [shared checks](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe9
 <details>
 <summary>Source survey and model selection</summary>
 
-- **Selected:** Mashchenko’s DISC solution uses the paper’s stated geometric albedo 0.1. The CIGAR alternative remains viable; a familiar artist impression is not measured geometry.
-- **Excluded:** NASA/ESO artist impressions as surface textures. Telescopes measured only unresolved light.
-- **Included for position:** The fixed-epoch Horizons heliocentric osculating trajectory and independent vectors. The open conic is not a simulation of non-gravitational acceleration or a reconstruction of the object’s unknown origin.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 </details>
 

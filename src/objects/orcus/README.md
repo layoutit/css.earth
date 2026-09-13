@@ -31,9 +31,7 @@ The [shared checks](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe9
 <details>
 <summary>Source survey and model selection</summary>
 
-- **Included as context:** [Binary astrometric mass ratio and likely double-synchronous evolution](https://arxiv.org/abs/2307.04848) do not determine unique spin attitude or shape.
-- **Excluded from the surface:** [JWST spectral characterization references](https://arxiv.org/abs/2508.17101) include Orcus but supply no resolved longitude-latitude map.
-- **Excluded as the wrong component:** The [2017 occultation](https://arxiv.org/abs/1810.08977) constrains Vanth, not Orcus. Its **443 km** diameter cannot be used for the primary.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 </details>
 

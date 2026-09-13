@@ -32,8 +32,7 @@ The [shared checks](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe9
 <details>
 <summary>Source survey and model selection</summary>
 
-- **Selected for size:** Herschel’s effective primary diameter. Rotational photometry is insufficient to select unique three-dimensional axes.
-- **Excluded from the surface:** [JWST spectroscopy](https://doi.org/10.1016/j.icarus.2024.116017) constrains integrated composition but supplies no registered terrain or albedo map.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 </details>
 
