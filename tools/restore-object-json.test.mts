@@ -9,10 +9,10 @@ import { restoreObjectJson } from './restore-object-json.mts';
 test('restores a missing transport from its pinned runtime twin without rebaking or repinning', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-json-restore-'));
   try {
-    const directory = resolve(root, 'src/planets/thetis');
+    const directory = resolve(root, 'src/objects/thetis');
     await mkdir(resolve(directory, 'prepared'), { recursive: true });
     for (const file of ['object.json', 'prepared/runtime.refs.json']) {
-      await copyFile(new URL(`../src/planets/thetis/${file}`, import.meta.url), resolve(directory, file));
+      await copyFile(new URL(`../src/objects/thetis/${file}`, import.meta.url), resolve(directory, file));
     }
     const descriptorBytes = await readFile(resolve(directory, 'object.json'));
     const descriptor = JSON.parse(descriptorBytes.toString('utf8'));

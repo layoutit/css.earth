@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {parseObservedPolarRecipe,prepareObservedPolarSurfaces,measureRgbCoverage} from '../../tools/objects/giant-observations/index.mts';
 import {measureScalarCoverage,finitePercentiles,falseColorMap} from '../../tools/objects/giant-observations/scalar-coverage.mts';
 import {preparePolarContinuationAtlas,preparePolarSurfaceTransition} from '../../tools/objects/giant-observations/polar-continuation.mts';
-const sourceDirectory=new URL('../../src/planets/jupiter/source/',import.meta.url).pathname;
+const sourceDirectory=new URL('../../src/objects/jupiter/source/',import.meta.url).pathname;
 const recipe=JSON.parse(await readFile(sourceDirectory+'/preparation/observations.json','utf8'));
 
 test('RGB coverage is measured and checked against authored row bounds',()=>{

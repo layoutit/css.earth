@@ -11,16 +11,16 @@ import type { PreparedTree, PreparedWrite } from '../src/renderers/css/rendering
 
 interface Fixture { root: string; definition: PresentationSource; css: string; setCss(value: string): Promise<void>; }
 async function mimasRuntime(root: string): Promise<PresentationSource> {
-  const raw: unknown = JSON.parse(await readFile(join(root, 'src/planets/mimas/prepared/runtime.json'), 'utf8'));
+  const raw: unknown = JSON.parse(await readFile(join(root, 'src/objects/mimas/prepared/runtime.json'), 'utf8'));
   return requireObjectRuntimeDefinition(raw);
 }
 
 async function fixture(run: (fixture: Fixture) => Promise<void>) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-bindings-'));
-  const page = join(root, 'src/planets/fixture'); await mkdir(page, { recursive: true });
+  const page = join(root, 'src/objects/fixture'); await mkdir(page, { recursive: true });
   await mkdir(join(root, 'site'));
   await writeFile(join(root, 'site/planet-shell.css'), '');
-  await writeFile(join(page, 'object.json'), JSON.stringify({id:'fixture', properties:{page:{stylesheets:['src/planets/fixture/fixture.css']}}}));
+  await writeFile(join(page, 'object.json'), JSON.stringify({id:'fixture', properties:{page:{stylesheets:['src/objects/fixture/fixture.css']}}}));
   const css = `.scene, .moving, .fixed, .leaf { position:absolute; top:0; left:0; transform-origin:0 0; }
     .scene, .moving, .fixed { transform-style:preserve-3d; }
     .leaf { width:10px; height:10px; backface-visibility:hidden; transform:translateZ(4px); }

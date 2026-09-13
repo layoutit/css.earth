@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { newHorizonsCamera, multiplyCameraMatrices, inverseCameraMatrix } from '../terrestrial-layers/new-horizons-geo.mts';
 import { array, number, optional, shape, text } from '../terrestrial-layers/source-records.mts';
 
-const source = resolve(process.argv[2] ?? 'src/planets/arrokoth/source');
+const source = resolve(process.argv[2] ?? 'src/objects/arrokoth/source');
 const path = 'preparation/photography.json';
 const profile = shape({mesh:text,references:array(text),frames:array(shape({id:text,image:text,output:text,
   bodyToJ2000:array(array(number)),offsetPixels:array(number)})),

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import sharp from 'sharp';
-const root = new URL('../../../../src/planets/portia/', import.meta.url);
+const root = new URL('../../../../src/objects/portia/', import.meta.url);
 
 test('Portia preserves published prolate radii and separates projected from volume radius', async () => {
   const recipe = JSON.parse((await readFile(new URL('source/preparation/terrestrial.json', root))).toString('utf8'));

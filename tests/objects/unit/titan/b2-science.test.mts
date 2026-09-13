@@ -6,7 +6,7 @@ import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 import {parseInterpreterRecipe} from '../../../../tools/objects/observation/interpret.mts';
-const sourceRoot=new URL('../../../../src/planets/titan/source/',import.meta.url).pathname;
+const sourceRoot=new URL('../../../../src/objects/titan/source/',import.meta.url).pathname;
 /** The raster lane's science blocks for the scalar lenses (`terrestrial-scientific`), minus the retired elevation id. */
 const scalarLenses=async()=>parseInterpreterRecipe(JSON.parse((await readFile(sourceRoot+'preparation/raster.json')).toString('utf8'))).surfaces
  .filter(s=>s.science?.kind==='terrestrial-scientific'&&s.id!=='elevation').map(s=>({id:s.id,science:required(s.science)}));

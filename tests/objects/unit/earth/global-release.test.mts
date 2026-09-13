@@ -12,14 +12,14 @@ import { prepareWmtsCoverage } from "../../../../tools/objects/geographic-pages/
 import { prepareWmtsTile,wmtsAddress } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mts";
 import { readPreparedWmtsBlock,isPreparedBlockReference } from "../../../../src/renderers/css/dist/testing.js";
 
-const pinBytes=await readFile(new URL("../../../../src/planets/earth/source/city/wmts-release.json",import.meta.url));
+const pinBytes=await readFile(new URL("../../../../src/objects/earth/source/city/wmts-release.json",import.meta.url));
 const pin=parseWmtsRelease(JSON.parse(pinBytes.toString('utf8'))),hash=(bytes: string|NodeJS.ArrayBufferView<ArrayBufferLike>|NonSharedBuffer)=>createHash("sha256").update(bytes).digest("hex");
 const files=new Map(pin.files.map(file=>[file.filename,file]));
 const root=new URL(`../../../../.local/wmts-global/${pin.version}/`,import.meta.url);
 
 test("the global release closes over every published source footprint and pins each pack",async()=>{
-  const {pin:catalog,entries}=await readWorldCoverCatalog({directory:new URL("../../../../src/planets/earth/source/city/",import.meta.url)});
-  const source=validateSourceManifest('earth',JSON.parse((await readFile(new URL("../../../../src/planets/earth/source/manifest.json",import.meta.url))).toString('utf8')));
+  const {pin:catalog,entries}=await readWorldCoverCatalog({directory:new URL("../../../../src/objects/earth/source/city/",import.meta.url)});
+  const source=validateSourceManifest('earth',JSON.parse((await readFile(new URL("../../../../src/objects/earth/source/manifest.json",import.meta.url))).toString('utf8')));
   const document=required(source.inputs.find(d=>d.path==="city/wmts-release.json"));
   assert.equal(hash(pinBytes),document.expectedSha256);assert.equal(pinBytes.length,document.expectedBytes);
   assert.equal(pin.sourceSha256,catalog.expectedSha256);assert.equal(plan.geometryVersion,pin.version);

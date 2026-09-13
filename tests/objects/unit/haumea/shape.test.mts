@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
-const root = new URL('../../../../src/planets/haumea/', import.meta.url);
+const root = new URL('../../../../src/objects/haumea/', import.meta.url);
 const json = async (path: string|URL) => JSON.parse(await readFile(new URL(path, root), 'utf8'));
 
 test('Haumea retains its measured triaxial shape and ring within the actual leaf budget', async () => {

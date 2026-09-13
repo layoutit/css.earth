@@ -5,7 +5,7 @@ import { OBJECTS } from '../objects.mts';
 import { createObjectBrowserProfile } from './object-browser-profile.mts';
 import { loadPlanetBrowserProfile } from './load-browser-profile.mts';
 import type { BrowserPage, CameraField } from './browser-profile-types.mts';
-import objectControls from '../../src/planets/moon/prepared/controls.json' with { type: 'json' };
+import objectControls from '../../src/objects/moon/prepared/controls.json' with { type: 'json' };
 
 const state = { pitch: 37, controlPitch: 37, controlYaw: -92, zoom: 1.4 };
 function nativePage(id: string, cameraState: unknown = state): BrowserPage {

@@ -33,7 +33,7 @@ function readSeam(value: unknown): SeamContract {
 }
 const PLANET_SURFACE_SEAMS: Record<string, SeamContract> = {};
 for (const id of ["mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune"]) {
-  const scene = SourceEvidence.parse(JSON.parse(await readFile(new URL("../../src/planets/" + id + "/prepared/scene.json", import.meta.url), "utf8"))).value;
+  const scene = SourceEvidence.parse(JSON.parse(await readFile(new URL("../../src/objects/" + id + "/prepared/scene.json", import.meta.url), "utf8"))).value;
   const loaded = await loadObjectContent(id);
   const geometry = loaded.descriptor.properties.recipe.sources.some(source => source.id === "geometry")
     ? await loaded.source("geometry") : null;

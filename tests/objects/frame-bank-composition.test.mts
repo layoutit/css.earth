@@ -9,7 +9,7 @@ import {assertLayeredGiantFrameBank} from '../../tools/objects/giant-layers/obje
 
 const readJson=async (path: string|URL)=>JSON.parse(await readFile(new URL(path,import.meta.url),'utf8'));
 const input=async (id: string)=>{
-  const root=`../../src/planets/${id}/`;
+  const root=`../../src/objects/${id}/`;
   return {descriptor:parseAuthoredObjectDescriptor(await readJson(`${root}object.json`)),
     material:await readJson(`${root}source/preparation/materials.json`),
     // Row resource pools are optional since the focused heliocentric views (#123); the tool checks them only when declared.

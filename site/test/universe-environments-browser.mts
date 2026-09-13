@@ -19,7 +19,7 @@ import { chromium } from 'playwright';
 import { scrollToDistance as scrollTo } from './wheel-zoom-distance.mts';
 import shell from '../../src/objects/heliosphere/prepared/shell.json' with { type: 'json' };
 import volume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
-import worldContext from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import worldContext from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 
 const output = resolve(process.env.UNIVERSE_BROWSER_OUTPUT ?? '.local/universe-shared-sky');
 const reportedView = '/mercury/?v=QMZBVmWEdTha6EHA0HFrNnyfwfqFzIA0Li5BQsczQAAAAL-57UJuUPUpP6TYXnEpHWy_4dF-IEqKvAABAAAAAAAAAAA';

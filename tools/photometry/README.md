@@ -21,8 +21,8 @@ Angles are radians in code and degrees in records and recipes.
 
 ## Model records
 
-A body keeps each published model in `src/planets/<body>/source/photometry/<id>.json`.
-[Lutetia's record](../../src/planets/lutetia/source/photometry/hasselmann-2016-hapke-1993.json)
+A body keeps each published model in `src/objects/<body>/source/photometry/<id>.json`.
+[Lutetia's record](../../src/objects/lutetia/source/photometry/hasselmann-2016-hapke-1993.json)
 is a complete example: instrument, filter, the quantity the paper fitted, the
 model, and the phase, incidence and emission ranges of the fitted data.
 

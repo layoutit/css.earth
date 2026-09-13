@@ -9,7 +9,7 @@ import { loadPdsScalarGrid } from '../../../../tools/objects/terrestrial-layers/
 import { colorForValue } from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 import { preparePlanetarySystem } from '../../../../src/platform/prepare-planetary-system.mts';
 import { prepareEclipticPresentationFrame } from '../../../../src/platform/solar-presentation-frame.mts';
-const root = resolve(import.meta.dirname, '../../../..'), base = resolve(root, 'src/planets/vesta');
+const root = resolve(import.meta.dirname, '../../../..'), base = resolve(root, 'src/objects/vesta');
 const read = async (path: string) => JSON.parse(await readFile(resolve(base, path), 'utf8'));
 
 test('Dawn radius anchors preserve meters, poles and east longitude; elevation has a numeric datum', async () => {

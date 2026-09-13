@@ -747,7 +747,7 @@ async function proveDesktop(browser: Browser, planet: ObjectEntry, profile: Obje
 // must label the visible hemisphere, expose the prepared caption on hover through
 // the shared input surface, follow the prepared spin, and stay retained.
 async function proveSurfaceFeatures(browser: Browser, planet: ObjectEntry, profile: ObjectBrowserProfile) {
-  const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve("src/planets", planet.id, "prepared/runtime.json"), "utf8")));
+  const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve("src/objects", planet.id, "prepared/runtime.json"), "utf8")));
   const plan = definition.features;
   if (!plan) return { id: planet.id, case: "surface-features", skipped: true, reason: "no prepared feature catalogue" };
   const page = await createTestPage(browser, { viewport: { width: 1440, height: 900 } });
@@ -880,7 +880,7 @@ async function surfaceFlyCoordinates(page: Page) {
   };
   const id = required(await page.locator('.planet-stage').getAttribute('data-object-id'));
   if (!surfaceHitPlans.has(id)) {
-    const prepared = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(`src/planets/${id}/prepared/runtime.json`), 'utf8')));
+    const prepared = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(`src/objects/${id}/prepared/runtime.json`), 'utf8')));
     surfaceHitPlans.set(id, prepared.surfaceHit ?? null);
   }
   const surfaceHit = surfaceHitPlans.get(id);
@@ -1130,7 +1130,7 @@ async function provePreparedDensity(browser: Browser, planet: ObjectEntry, profi
     // The application now owns the shared universe. Its pinned sky replaces
     // private object cubemaps and suns. Their retained bank may still warm its
     // declared startup resources, but no private sky may render beside it.
-    const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(`src/planets/${planet.id}/prepared/runtime.json`), 'utf8')));
+    const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(`src/objects/${planet.id}/prepared/runtime.json`), 'utf8')));
     const privateCelestialAssets = new Set([
       ...definition.sky.faces.flatMap(face => [face.url, face.url2x, face.highContrastUrl, face.highContrastUrl2x]),
       definition.sun?.asset.url, definition.sun?.asset.url2x,
@@ -1207,7 +1207,7 @@ async function provePreparedDensity(browser: Browser, planet: ObjectEntry, profi
 }
 
 async function proveSharedPreparedSky(page: Page, requestedPaths:ReadonlySet<string>, responses:ReadonlyMap<string,Response>) {
-  const context = JSON.parse(await readFile(resolve('src/planets/sun/prepared/world-context.json'), 'utf8'));
+  const context = JSON.parse(await readFile(resolve('src/objects/sun/prepared/world-context.json'), 'utf8'));
   const root = resolve('src/objects', context.volume.objectId);
   const descriptor = JSON.parse(await readFile(resolve(root, 'object.json'), 'utf8'));
   const bytes = await readFile(resolve(root, descriptor.prepared.url));

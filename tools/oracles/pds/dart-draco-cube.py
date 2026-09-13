@@ -11,7 +11,7 @@ import numpy as np
 import pds4_tools
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fixture import ROOT as root, write
-source = root / 'src/planets/dimorphos/source'
+source = root / 'src/objects/dimorphos/source'
 label = source / 'observations/dart_0401930040_12262_01_geo.xml'
 fits = source / 'observations/dart_0401930040_12262_01_geo.fits'
 structures = pds4_tools.read(str(label), quiet=True)
