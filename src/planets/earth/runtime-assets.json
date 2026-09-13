@@ -2,11 +2,6 @@
   "schema": "cssearth-runtime-assets@1",
   "assets": [
     {
-      "filename": "earth-atmosphere-default.webp",
-      "bytes": 50882,
-      "sha256": "b9bf4628fb88346191fa06cab61be936bef1495bd3a751a87ac0ec2e69b2cbdf"
-    },
-    {
       "filename": "earth-atmosphere-default@2x.webp",
       "bytes": 128110,
       "sha256": "9236b1aaf66619be03126da1a3dc682db7e859732a8330ebec8359411bab16ed"
@@ -830,11 +825,6 @@
       "filename": "earth-lens-topography.webp",
       "bytes": 1950,
       "sha256": "b9fa0fc3c2238ce31009358bebda5b48092cb64c4249df278aa6c66a99bcba86"
-    },
-    {
-      "filename": "earth-lighting-default.webp",
-      "bytes": 16268,
-      "sha256": "e769090b7da996da9030d51cfdd9564fc8bdb9c4cbcb8f4e9c39404af5433753"
     },
     {
       "filename": "earth-lighting-default@2x.webp",
