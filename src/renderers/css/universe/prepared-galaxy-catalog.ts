@@ -16,6 +16,9 @@ interface Entry {
   readonly activate: (event: Event) => void;
   width: number;
   height: number;
+  /** This frame's projected label anchor; written to the label only while it shows or fades. */
+  labelX: number;
+  labelY: number;
   /** Last published label interactivity; null until the first publication. */
   interactive: boolean | null;
 }
@@ -62,7 +65,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
     label.addEventListener('keydown', event => { if (event.key === 'Enter') activate(event); });
     label.setAttribute('role', 'button'); label.tabIndex = -1;
     root.append(marker, label);
-    return { object, marker, label, aperture, activate, width: 0, height: 0, interactive: null };
+    return { object, marker, label, aperture, activate, width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
   });
   let destroyed = false, selectedId: string | null = null;
   let exclusions: readonly LabelScreenRect[] = [];
@@ -113,7 +116,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
         visible.add(entry.object.id);
         entry.marker.style.transform = `translate(${point.x}px,${point.y}px) translate(-50%,-50%)`;
         const y = point.y - 8;
-        entry.label.style.transform = `translate(${point.x}px,${y}px) translate(-50%,-100%)`;
+        entry.labelX = point.x; entry.labelY = y;
         const labelRect = { left: point.x - entry.width / 2, right: point.x + entry.width / 2,
           top: y - entry.height, bottom: y };
         const objectAlpha = isPreparedCluster(entry.object) ? clusterAlpha : alpha;
@@ -129,6 +132,11 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
         const projected = admittedById.get(entry.object.id);
         const labelOpacity = projected ? objectAlpha * .85 : 0;
         fader.set(entry.label, labelOpacity, 200);
+        // Only a shown or still-fading label follows its galaxy. Moving every on-screen
+        // candidate restyled each hidden label on every camera frame.
+        if (visible.has(entry.object.id) && (projected || fader.current(entry.label) > 0)) {
+          entry.label.style.transform = `translate(${entry.labelX}px,${entry.labelY}px) translate(-50%,-100%)`;
+        }
         fader.set(entry.marker, visible.has(entry.object.id) ? objectAlpha * .45 : 0, 200);
         if (entry.aperture) fader.set(entry.aperture, apertures.has(entry.object.id) ? objectAlpha * .2 : 0, 200);
         // Interactivity flips rarely; rewriting it for every galaxy each frame reflected three attributes.
