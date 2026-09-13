@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "salacia",
+  "entries": [
+    {
+      "id": "alma-primary-size",
+      "subject": "ALMA primary size",
+      "status": "included",
+      "finding": "The separately estimated ALMA primary size. The abstract paragraph beginning “Using the same approach” reports 838 ±44 km for Salacia and 393 ±33 km for Actaea. Only Salacia’s value sets this model’s diameter; [measurements](https://github.com/layoutit/css.earth/blob/8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf/src/planets/salacia/source/measurements.json) retain the extraction and uncertainty. See [NOTICE.md](https://github.com/layoutit/css.earth/blob/8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf/src/planets/salacia/NOTICE.md) for attribution.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf/src/planets/salacia/README.md#L35",
+        "https://github.com/layoutit/css.earth/blob/8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf/src/planets/salacia/source/measurements.json",
+        "https://github.com/layoutit/css.earth/blob/8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf/src/planets/salacia/NOTICE.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
+          "pr": 112
+        }
+      ]
+    },
+    {
+      "id": "jwst-blended-spectrum",
+      "subject": "JWST Salacia–Actaea spectrum for surface and axes",
+      "status": "excluded",
+      "finding": "The [JWST Salacia–Actaea spectrum](https://arxiv.org/abs/2508.17101) is spatially blended. Its **901 km** discussion concerns the system.",
+      "revisitWhen": "Spatially separated measurements of Salacia's surface or shape are published.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/salacia/README.md#L36",
+        "https://arxiv.org/abs/2508.17101"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    },
+    {
+      "id": "equal-albedo-estimate",
+      "subject": "Older equal-albedo size estimate",
+      "status": "excluded",
+      "finding": "The [older 866 ±37 km estimate](https://doi.org/10.3847/1538-3881/aa6346) used equal-albedo binary partitioning; the newer resolved-component result is selected.",
+      "revisitWhen": "A newer resolved-component size overturns the ALMA estimate.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/085a404c16626ee90a8150f018229609e2c3828e/src/planets/salacia/README.md#L37",
+        "https://doi.org/10.3847/1538-3881/aa6346"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-10",
+          "commit": "085a404c16626ee90a8150f018229609e2c3828e",
+          "pr": 99
+        }
+      ]
+    }
+  ]
+}

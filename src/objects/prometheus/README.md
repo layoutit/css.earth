@@ -77,14 +77,7 @@ All lenses use the same prepared geometry and coverage interpretation. A dedicat
 
 ## Source survey
 
-- **Included:** [Cassini ISS calibrated archive](https://pds-rings.seti.org/cassini/iss/) for the observation lens and [PDS shape release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html) for geometry and radial-height visualization.
-
-- **Excluded frame:** `N1828136577_1` has a PDS table center sample of 790.20, inconsistent with the body in the image near sample 490. The earlier `N1828134597_1` covers this region at finer resolution; no camera-center correction is invented.
-
-- **Excluded from this release:** the Voyager-era Stooke shaded-relief/Celestia maps. They represent a different, older cartographic interpretation and cannot be described as Cassini observed pixels; the original Western University distribution URL currently returns 404. They add no qualified improvement over the chosen Cassini frames.
-
-
-- **Excluded as a download path for this body:** [SBIB’s Cassini catalog](https://sbn.psi.edu/pds/sbib/saturn.html), whose listed targets currently omit Prometheus. This is a limitation of that catalog, not a claim that other Prometheus datasets do not exist.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 [NASA’s Prometheus overview](https://science.nasa.gov/saturn/moons/prometheus/) supplies editorial context. JPL values in the vendored astronomy package supply the physical radius and orbit used by the shared application. Restore source bytes with the authored acquisition recipe, then run the shared object preparer; prepared runtime files are distributed through `runtime-assets.json`.
 

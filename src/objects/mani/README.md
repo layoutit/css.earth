@@ -33,8 +33,7 @@ The [shared checks](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe9
 <details>
 <summary>Source survey and model selection</summary>
 
-- **Selected:** The measured silhouette anchors the smooth assumed-depth model, without crater or limb-feature extrusion.
-- **Included as context:** The [same study’s thermal-size comparison and preference for an oblate interpretation](https://doi.org/10.1051/0004-6361/202346892). Thermal size is not substituted for the directly observed outline; the pole and true flattening remain undetermined.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 </details>
 
