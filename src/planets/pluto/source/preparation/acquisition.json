@@ -40,6 +40,28 @@
       ],
       "path": "features/PLUTO_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PLUTO_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/leisa/params_ls.fits",
+      "url": "https://zenodo.org/api/records/18825240/files/params_ls.fits/content",
+      "headers": {
+        "User-Agent": "cssEarth/1.0 (https://css.earth; scientific source restoration)"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/leisa/params_ls_errors.fits",
+      "url": "https://zenodo.org/api/records/18825240/files/params_ls_errors.fits/content",
+      "headers": {
+        "User-Agent": "cssEarth/1.0 (https://css.earth; scientific source restoration)"
+      }
     }
   ]
 }

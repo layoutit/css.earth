@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ebb75ac39498edc98cdfcd4929cbf3c16d9f3cee4e16b2ac571a47f807cf8529"
+    "sha256": "65aa889c59e4deb7723412a8350a5c7b371297805433757c33bf3b638e9488de"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "7521e019234efcf9286f841c3dbe382389efe580b2a00d1ab8d882a9185ab776",
+      "sha256": "d42cb9dde57e8d5fe359499f88e0db03db4d8e0c2d72072ed25d4e6da37e2faf",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/pluto/",
@@ -107,6 +107,399 @@
               }
             },
             "nativeSourcePoles": true
+          },
+          {
+            "id": "methane-ice",
+            "source": "science/leisa/params_ls.fits",
+            "falseColor": true,
+            "output": "pluto-{id}{suffix}.webp",
+            "thumbnail": "pluto-lens-{id}.webp",
+            "science": {
+              "kind": "terrestrial-scientific",
+              "id": "methane-ice",
+              "label": "Methane ice",
+              "format": "fits-image-map",
+              "path": "science/leisa/params_ls.fits",
+              "consumer": "leisa-ice-composition",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "extension": 1,
+              "name": "CH4 DISTRIBUTION",
+              "units": "%",
+              "primary": {
+                "NAME": "params with Lev-Mar least square minimization",
+                "IMAGKN2": "k = 0"
+              },
+              "grid": {
+                "width": 1067,
+                "height": 534,
+                "longitudeOrigin": 0,
+                "rowOrder": "north-to-south"
+              },
+              "missingTuple": [
+                {
+                  "extension": 1,
+                  "name": "CH4 DISTRIBUTION",
+                  "units": "%",
+                  "value": 25
+                },
+                {
+                  "extension": 2,
+                  "name": "N2 DISTRIBUTION",
+                  "units": "%",
+                  "value": 25
+                },
+                {
+                  "extension": 3,
+                  "name": "H2O DISTRIBUTION",
+                  "units": "%",
+                  "value": 25
+                },
+                {
+                  "extension": 4,
+                  "name": "TITAN THOLINS DISTRIBUTION",
+                  "units": "%",
+                  "value": 25
+                },
+                {
+                  "extension": 5,
+                  "name": "CH4 EFFECTIVE PARTICLE DIAMETERS",
+                  "units": "cm",
+                  "value": 0.05999999865889549
+                },
+                {
+                  "extension": 6,
+                  "name": "N2 EFFECTIVE PARTICLE DIAMETERS",
+                  "units": "cm",
+                  "value": 0.05999999865889549
+                },
+                {
+                  "extension": 7,
+                  "name": "H2O EFFECTIVE PARTICLE DIAMETERS",
+                  "units": "cm",
+                  "value": 0.05999999865889549
+                },
+                {
+                  "extension": 8,
+                  "name": "TITAN THOLINS EFFECTIVE PARTICLE DIAMETERS",
+                  "units": "cm",
+                  "value": 0.05999999865889549
+                },
+                {
+                  "extension": 9,
+                  "name": "CH4 SOLIBILITY IN N2",
+                  "units": "%",
+                  "value": -1
+                },
+                {
+                  "extension": 10,
+                  "name": "TEMPERATURE DISTRIBUTION",
+                  "units": "K",
+                  "value": 40
+                }
+              ],
+              "minimum": 0,
+              "maximum": 100,
+              "colors": [
+                "#440154",
+                "#3b528b",
+                "#21918c",
+                "#5ec962",
+                "#fde725"
+              ],
+              "labels": [
+                "0",
+                "50",
+                "100"
+              ],
+              "description": "Methane-rich ice is widespread in the northern terrain. Colors show its estimated share of each mapped area, fitted from infrared spectra. Grid: no usable fit.",
+              "title": "New Horizons LEISA · modeled surface fraction",
+              "sourceUrl": "https://zenodo.org/records/18825240",
+              "qualityMasks": [
+                {
+                  "format": "fits-image-map",
+                  "path": "science/leisa/params_ls_errors.fits",
+                  "sampling": "nearest",
+                  "extension": 1,
+                  "name": "CH4 DISTRIBUTION ERROR",
+                  "units": "%",
+                  "primary": {
+                    "NAME": "params errors Lev-Mar least square minimization",
+                    "IMAGKN2": "k = 0"
+                  },
+                  "grid": {
+                    "width": 1067,
+                    "height": 534,
+                    "longitudeOrigin": 0,
+                    "rowOrder": "north-to-south"
+                  },
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              ]
+            }
+          },
+          {
+            "id": "nitrogen-ice",
+            "source": "science/leisa/params_ls.fits",
+            "falseColor": true,
+            "output": "pluto-{id}{suffix}.webp",
+            "thumbnail": "pluto-lens-{id}.webp",
+            "science": {
+              "kind": "terrestrial-scientific",
+              "id": "nitrogen-ice",
+              "label": "Nitrogen ice",
+              "format": "fits-image-map",
+              "path": "science/leisa/params_ls.fits",
+              "consumer": "leisa-ice-composition",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "extension": 2,
+              "name": "N2 DISTRIBUTION",
+              "units": "%",
+              "primary": {
+                "NAME": "params with Lev-Mar least square minimization",
+                "IMAGKN2": "k = 0"
+              },
+              "grid": {
+                "width": 1067,
+                "height": 534,
+                "longitudeOrigin": 0,
+                "rowOrder": "north-to-south"
+              },
+              "missingTuple": [
+                {
+                  "extension": 1,
+                  "name": "CH4 DISTRIBUTION",
+                  "units": "%",
+                  "value": 25
+                },
+                {
+                  "extension": 2,
+                  "name": "N2 DISTRIBUTION",
+                  "units": "%",
+                  "value": 25
+                },
+                {
+                  "extension": 3,
+                  "name": "H2O DISTRIBUTION",
+                  "units": "%",
+                  "value": 25
+                },
+                {
+                  "extension": 4,
+                  "name": "TITAN THOLINS DISTRIBUTION",
+                  "units": "%",
+                  "value": 25
+                },
+                {
+                  "extension": 5,
+                  "name": "CH4 EFFECTIVE PARTICLE DIAMETERS",
+                  "units": "cm",
+                  "value": 0.05999999865889549
+                },
+                {
+                  "extension": 6,
+                  "name": "N2 EFFECTIVE PARTICLE DIAMETERS",
+                  "units": "cm",
+                  "value": 0.05999999865889549
+                },
+                {
+                  "extension": 7,
+                  "name": "H2O EFFECTIVE PARTICLE DIAMETERS",
+                  "units": "cm",
+                  "value": 0.05999999865889549
+                },
+                {
+                  "extension": 8,
+                  "name": "TITAN THOLINS EFFECTIVE PARTICLE DIAMETERS",
+                  "units": "cm",
+                  "value": 0.05999999865889549
+                },
+                {
+                  "extension": 9,
+                  "name": "CH4 SOLIBILITY IN N2",
+                  "units": "%",
+                  "value": -1
+                },
+                {
+                  "extension": 10,
+                  "name": "TEMPERATURE DISTRIBUTION",
+                  "units": "K",
+                  "value": 40
+                }
+              ],
+              "minimum": 0,
+              "maximum": 100,
+              "colors": [
+                "#440154",
+                "#3b528b",
+                "#21918c",
+                "#5ec962",
+                "#fde725"
+              ],
+              "labels": [
+                "0",
+                "50",
+                "100"
+              ],
+              "description": "Nitrogen-rich ice stands out in Sputnik Planitia. Colors show its estimated share of each mapped area; the result depends on the ice model. Grid: no usable fit.",
+              "title": "New Horizons LEISA · modeled surface fraction",
+              "sourceUrl": "https://zenodo.org/records/18825240",
+              "qualityMasks": [
+                {
+                  "format": "fits-image-map",
+                  "path": "science/leisa/params_ls_errors.fits",
+                  "sampling": "nearest",
+                  "extension": 2,
+                  "name": "N2 DISTRIBUTION ERROR",
+                  "units": "%",
+                  "primary": {
+                    "NAME": "params errors Lev-Mar least square minimization",
+                    "IMAGKN2": "k = 0"
+                  },
+                  "grid": {
+                    "width": 1067,
+                    "height": 534,
+                    "longitudeOrigin": 0,
+                    "rowOrder": "north-to-south"
+                  },
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              ]
+            }
+          },
+          {
+            "id": "water-ice",
+            "source": "science/leisa/params_ls.fits",
+            "falseColor": true,
+            "output": "pluto-{id}{suffix}.webp",
+            "thumbnail": "pluto-lens-{id}.webp",
+            "science": {
+              "kind": "terrestrial-scientific",
+              "id": "water-ice",
+              "label": "Water ice",
+              "format": "fits-image-map",
+              "path": "science/leisa/params_ls.fits",
+              "consumer": "leisa-ice-composition",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "extension": 3,
+              "name": "H2O DISTRIBUTION",
+              "units": "%",
+              "primary": {
+                "NAME": "params with Lev-Mar least square minimization",
+                "IMAGKN2": "k = 0"
+              },
+              "grid": {
+                "width": 1067,
+                "height": 534,
+                "longitudeOrigin": 0,
+                "rowOrder": "north-to-south"
+              },
+              "missingTuple": [
+                {
+                  "extension": 1,
+                  "name": "CH4 DISTRIBUTION",
+                  "units": "%",
+                  "value": 25
+                },
+                {
+                  "extension": 2,
+                  "name": "N2 DISTRIBUTION",
+                  "units": "%",
+                  "value": 25
+                },
+                {
+                  "extension": 3,
+                  "name": "H2O DISTRIBUTION",
+                  "units": "%",
+                  "value": 25
+                },
+                {
+                  "extension": 4,
+                  "name": "TITAN THOLINS DISTRIBUTION",
+                  "units": "%",
+                  "value": 25
+                },
+                {
+                  "extension": 5,
+                  "name": "CH4 EFFECTIVE PARTICLE DIAMETERS",
+                  "units": "cm",
+                  "value": 0.05999999865889549
+                },
+                {
+                  "extension": 6,
+                  "name": "N2 EFFECTIVE PARTICLE DIAMETERS",
+                  "units": "cm",
+                  "value": 0.05999999865889549
+                },
+                {
+                  "extension": 7,
+                  "name": "H2O EFFECTIVE PARTICLE DIAMETERS",
+                  "units": "cm",
+                  "value": 0.05999999865889549
+                },
+                {
+                  "extension": 8,
+                  "name": "TITAN THOLINS EFFECTIVE PARTICLE DIAMETERS",
+                  "units": "cm",
+                  "value": 0.05999999865889549
+                },
+                {
+                  "extension": 9,
+                  "name": "CH4 SOLIBILITY IN N2",
+                  "units": "%",
+                  "value": -1
+                },
+                {
+                  "extension": 10,
+                  "name": "TEMPERATURE DISTRIBUTION",
+                  "units": "K",
+                  "value": 40
+                }
+              ],
+              "minimum": 0,
+              "maximum": 100,
+              "colors": [
+                "#440154",
+                "#3b528b",
+                "#21918c",
+                "#5ec962",
+                "#fde725"
+              ],
+              "labels": [
+                "0",
+                "50",
+                "100"
+              ],
+              "description": "Water ice forms part of Pluto’s solid terrain beneath its more volatile ices. Colors show the surface fraction estimated from infrared spectra. Grid: no usable fit.",
+              "title": "New Horizons LEISA · modeled surface fraction",
+              "sourceUrl": "https://zenodo.org/records/18825240",
+              "qualityMasks": [
+                {
+                  "format": "fits-image-map",
+                  "path": "science/leisa/params_ls_errors.fits",
+                  "sampling": "nearest",
+                  "extension": 3,
+                  "name": "H2O DISTRIBUTION ERROR",
+                  "units": "%",
+                  "primary": {
+                    "NAME": "params errors Lev-Mar least square minimization",
+                    "IMAGKN2": "k = 0"
+                  },
+                  "grid": {
+                    "width": 1067,
+                    "height": 534,
+                    "longitudeOrigin": 0,
+                    "rowOrder": "north-to-south"
+                  },
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              ]
+            }
           }
         ],
         "lighting": {
@@ -155,7 +548,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "924a299604725b552468ce335eb075a2d15b99c94c30082f2329ded994c6f599",
+      "sha256": "8cdb254475f0f575d8530bc0ed86f2c83ca5f98f0695a193e252c04a05e04dbf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -384,6 +777,192 @@
               "summary": "Images from LORRI and MVIC provide varying surface detail. The gray grid marks regions without imagery in this mosaic.",
               "falseColor": false,
               "qualification": "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset"
+            },
+            {
+              "id": "methane-ice",
+              "label": "Methane ice",
+              "title": "LEISA methane ice",
+              "description": "Methane ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
+              "thumbnail": "pluto-lens-methane-ice.webp",
+              "surface": "pluto-methane-ice.webp",
+              "poles": "pluto-poles-methane-ice.webp",
+              "source": {
+                "id": "pluto-leisa-ice-fractions",
+                "url": "https://zenodo.org/records/18825240"
+              },
+              "detail": "LEISA",
+              "summary": "Methane-rich ice is widespread in the northern terrain. Colors show its estimated share of each mapped area, fitted from infrared spectra. Grid: no usable fit.",
+              "falseColor": true,
+              "qualification": "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
+              "legend": {
+                "kind": "scale",
+                "title": "Estimated surface fraction",
+                "labels": [
+                  "0",
+                  "50",
+                  "100"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      68,
+                      1,
+                      84
+                    ],
+                    [
+                      59,
+                      82,
+                      139
+                    ],
+                    [
+                      33,
+                      145,
+                      140
+                    ],
+                    [
+                      94,
+                      201,
+                      98
+                    ],
+                    [
+                      253,
+                      231,
+                      37
+                    ]
+                  ],
+                  "labels": [
+                    "0",
+                    "50",
+                    "100"
+                  ]
+                },
+                "meta": "%",
+                "sourceUrl": "https://zenodo.org/records/18825240"
+              }
+            },
+            {
+              "id": "nitrogen-ice",
+              "label": "Nitrogen ice",
+              "title": "LEISA nitrogen ice",
+              "description": "Nitrogen ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
+              "thumbnail": "pluto-lens-nitrogen-ice.webp",
+              "surface": "pluto-nitrogen-ice.webp",
+              "poles": "pluto-poles-nitrogen-ice.webp",
+              "source": {
+                "id": "pluto-leisa-ice-fractions",
+                "url": "https://zenodo.org/records/18825240"
+              },
+              "detail": "LEISA",
+              "summary": "Nitrogen-rich ice stands out in Sputnik Planitia. Colors show its estimated share of each mapped area; the result depends on the ice model. Grid: no usable fit.",
+              "falseColor": true,
+              "qualification": "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
+              "legend": {
+                "kind": "scale",
+                "title": "Estimated surface fraction",
+                "labels": [
+                  "0",
+                  "50",
+                  "100"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      68,
+                      1,
+                      84
+                    ],
+                    [
+                      59,
+                      82,
+                      139
+                    ],
+                    [
+                      33,
+                      145,
+                      140
+                    ],
+                    [
+                      94,
+                      201,
+                      98
+                    ],
+                    [
+                      253,
+                      231,
+                      37
+                    ]
+                  ],
+                  "labels": [
+                    "0",
+                    "50",
+                    "100"
+                  ]
+                },
+                "meta": "%",
+                "sourceUrl": "https://zenodo.org/records/18825240"
+              }
+            },
+            {
+              "id": "water-ice",
+              "label": "Water ice",
+              "title": "LEISA water ice",
+              "description": "Water ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit",
+              "thumbnail": "pluto-lens-water-ice.webp",
+              "surface": "pluto-water-ice.webp",
+              "poles": "pluto-poles-water-ice.webp",
+              "source": {
+                "id": "pluto-leisa-ice-fractions",
+                "url": "https://zenodo.org/records/18825240"
+              },
+              "detail": "LEISA",
+              "summary": "Water ice forms part of Pluto’s solid terrain beneath its more volatile ices. Colors show the surface fraction estimated from infrared spectra. Grid: no usable fit.",
+              "falseColor": true,
+              "qualification": "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
+              "legend": {
+                "kind": "scale",
+                "title": "Estimated surface fraction",
+                "labels": [
+                  "0",
+                  "50",
+                  "100"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      68,
+                      1,
+                      84
+                    ],
+                    [
+                      59,
+                      82,
+                      139
+                    ],
+                    [
+                      33,
+                      145,
+                      140
+                    ],
+                    [
+                      94,
+                      201,
+                      98
+                    ],
+                    [
+                      253,
+                      231,
+                      37
+                    ]
+                  ],
+                  "labels": [
+                    "0",
+                    "50",
+                    "100"
+                  ]
+                },
+                "meta": "%",
+                "sourceUrl": "https://zenodo.org/records/18825240"
+              }
             }
           ]
         },
@@ -431,6 +1010,12 @@
             "href": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
           },
           {
+            "label": "LEISA",
+            "role": "composition",
+            "description": "Published ice maps and paper",
+            "href": "https://zenodo.org/records/18825240"
+          },
+          {
             "label": "JPL",
             "role": "physical",
             "description": "Physical parameters",
@@ -466,7 +1051,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "22e358610fede5e6683bc1351b4edc990afc988074298b3ebbcd10b14f73c10c",
+      "sha256": "e3b8d6d6c9d3132108b3505292c74a6a41a3af95f0c65503d06d99840ca6d2b3",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -486,7 +1071,10 @@
         "lensIds": [
           "surface",
           "topography",
-          "monochrome"
+          "monochrome",
+          "methane-ice",
+          "nitrogen-ice",
+          "water-ice"
         ],
         "kinds": {
           "point": [
@@ -663,6 +1251,116 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "pluto-leisa-ice-fractions",
+      "path": "science/leisa/params_ls.fits",
+      "origin": "https://zenodo.org/api/records/18825240/files/params_ls.fits/content",
+      "productId": "params_ls.fits",
+      "version": "10.5281/zenodo.18825240",
+      "title": "New Horizons LEISA ice composition",
+      "sourceUrl": "https://zenodo.org/records/18825240",
+      "credit": "A. E. Drozdov and N. V. Emelyanov; New Horizons NASA/JHUAPL/SwRI",
+      "displayCredit": "Drozdov & Emelyanov · New Horizons LEISA",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/18825240",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original published FITS download; checked against the Zenodo file size and MD5, then pinned with SHA-256. No conversion.",
+      "redistribution": "CC BY 4.0 with attribution; independent of the manuscript license.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pluto-leisa-composition-2026",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/18825240#/files/params_ls.fits"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "evidence": "https://arxiv.org/html/2603.21860v1#S2.SS1",
+            "missionId": "new-horizons"
+          }
+        ]
+      },
+      "sha256": "eb8a44c51dcd0e2abd55aa8e85cae1814b2f0c1de840ea193ea28fcb9647ac95",
+      "bytes": 22841280,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/leisa/params_ls.fits",
+        "url": "https://zenodo.org/api/records/18825240/files/params_ls.fits/content",
+        "headers": {
+          "User-Agent": "cssEarth/1.0 (https://css.earth; scientific source restoration)"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "pluto-leisa-fit-errors",
+      "path": "science/leisa/params_ls_errors.fits",
+      "origin": "https://zenodo.org/api/records/18825240/files/params_ls_errors.fits/content",
+      "productId": "params_ls_errors.fits",
+      "version": "10.5281/zenodo.18825240",
+      "title": "New Horizons LEISA fit uncertainties",
+      "sourceUrl": "https://zenodo.org/records/18825240",
+      "credit": "A. E. Drozdov and N. V. Emelyanov; New Horizons NASA/JHUAPL/SwRI",
+      "displayCredit": "Drozdov & Emelyanov · New Horizons LEISA",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/18825240",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original published FITS download; checked against the Zenodo file size and MD5, then pinned with SHA-256. No conversion.",
+      "redistribution": "CC BY 4.0 with attribution; independent of the manuscript license.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pluto-leisa-composition-2026",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/18825240#/files/params_ls_errors.fits"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "evidence": "https://arxiv.org/html/2603.21860v1#S2.SS1",
+            "missionId": "new-horizons"
+          }
+        ]
+      },
+      "sha256": "c50ee685c0ed18da5f4c12cc5df3ceb842cd0aeb6c86ce4d424697a686a162a1",
+      "bytes": 22841280,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/leisa/params_ls_errors.fits",
+        "url": "https://zenodo.org/api/records/18825240/files/params_ls_errors.fits/content",
+        "headers": {
+          "User-Agent": "cssEarth/1.0 (https://css.earth; scientific source restoration)"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "kind": "authored-content",
       "id": "pluto-object-content",
       "path": "content/object.json",
@@ -675,8 +1373,8 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet, view descriptions and legends."
       },
-      "sha256": "924a299604725b552468ce335eb075a2d15b99c94c30082f2329ded994c6f599",
-      "bytes": 11761,
+      "sha256": "8cdb254475f0f575d8530bc0ed86f2c83ca5f98f0695a193e252c04a05e04dbf",
+      "bytes": 17225,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -952,6 +1650,180 @@
           "url": "/scenes/pluto/pluto-poles-monochrome@2x.webp",
           "bytes": 128206,
           "sha256": "6b58d987a1553a0ec8c172f281a9e4f52984b724119e76595764a0153bda5be4",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "methane-ice",
+      "label": "Methane ice",
+      "recipe": "raster",
+      "selector": "/surfaces/3",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
+        "Methane ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit"
+      ],
+      "lensIds": [
+        "methane-ice"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "pluto-leisa-ice-fractions",
+        "pluto-leisa-fit-errors"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/pluto/pluto-methane-ice.webp",
+          "bytes": 424336,
+          "sha256": "9a9cd2dbc9bdde34c034ca643e849ed268d35316b21e4e30582bdf15ec2a8270",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pluto/pluto-methane-ice@2x.webp",
+          "bytes": 703068,
+          "sha256": "cf4f7ffc67d2ae64b27a6ca9d0f9a916d19a0ee303b13c439e22dfd808786766",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pluto/pluto-lens-methane-ice.webp",
+          "bytes": 3640,
+          "sha256": "4459b4dda1838f8906a95bcfafca121b7c595df5c31496d73603b3ca47a4e233",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pluto/pluto-poles-methane-ice.webp",
+          "bytes": 60694,
+          "sha256": "12bf621211568ec5eebf8cfa74d1ebb0e8ba112c031dc47654c5a55273474178",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pluto/pluto-poles-methane-ice@2x.webp",
+          "bytes": 141794,
+          "sha256": "916199567fbd853cc7ea23e7a629008b7d7b85f6e10fabe063dca89be5808ace",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "nitrogen-ice",
+      "label": "Nitrogen ice",
+      "recipe": "raster",
+      "selector": "/surfaces/4",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
+        "Nitrogen ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit"
+      ],
+      "lensIds": [
+        "nitrogen-ice"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "pluto-leisa-ice-fractions",
+        "pluto-leisa-fit-errors"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/pluto/pluto-nitrogen-ice.webp",
+          "bytes": 384690,
+          "sha256": "d14681bcb8ddbe28e1572d147d202a9d60e08e5aacfa4cba4ab84649899d688f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pluto/pluto-nitrogen-ice@2x.webp",
+          "bytes": 664218,
+          "sha256": "22bb9322697be7d45e5e734768e1aac3b870132a75396190f5e9d607f42e823f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pluto/pluto-lens-nitrogen-ice.webp",
+          "bytes": 3884,
+          "sha256": "dd959cba6e36bf8cec85b63319f1c3050ca3c001228b3e20f186b83033ee7e1c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pluto/pluto-poles-nitrogen-ice.webp",
+          "bytes": 36032,
+          "sha256": "9c195ffd2e8e0d823bd47f523b6070a59d88d972d0585332dd33dbd5b5dbb0fb",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pluto/pluto-poles-nitrogen-ice@2x.webp",
+          "bytes": 77590,
+          "sha256": "57d9b37d6ec06e9c6986c2c7f7495d91b6323639c68cb2d93b7720117d121959",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "water-ice",
+      "label": "Water ice",
+      "recipe": "raster",
+      "selector": "/surfaces/5",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Modeled surface fraction · 7 km map cells · 14 July 2015 observations",
+        "Water ice: modeled surface fraction from New Horizons infrared spectra; grid: no usable fit"
+      ],
+      "lensIds": [
+        "water-ice"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "pluto-leisa-ice-fractions",
+        "pluto-leisa-fit-errors"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/pluto/pluto-water-ice.webp",
+          "bytes": 333292,
+          "sha256": "063295a67d11ef0b821ac5e626edb6af196443c6c603cc79ec9c12d32e71ee70",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pluto/pluto-water-ice@2x.webp",
+          "bytes": 587092,
+          "sha256": "272c673066082897c86d7f26cddd81f1afa63ff39162ac5495065e17874c1bb6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pluto/pluto-lens-water-ice.webp",
+          "bytes": 2334,
+          "sha256": "60650628bfac1a411f31077f66ce3aba30ac864a2a35618613d4e508152d58f0",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pluto/pluto-poles-water-ice.webp",
+          "bytes": 28752,
+          "sha256": "22f2d9b3e7538c12c58bcf960181f0056ec47fea46507ad19b311d01ca7e118e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/pluto/pluto-poles-water-ice@2x.webp",
+          "bytes": 64260,
+          "sha256": "ef3538ec1263da7f16aaae6cbd2867eb2b59e9c8fead071e1f7d60f53ba66c72",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1391,8 +2263,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6098,
-          "sha256": "fd679cc7486dbfb2a2fe3fa03191134d10be2cf2c0fb29dde70c083ae88127b8",
+          "bytes": 6227,
+          "sha256": "2802a9b39b35bd5b0ed414e0753cbe8e8b3a09e5e1b9d6a5873f531436d1853c",
           "verification": "bytes-verified"
         }
       ],
@@ -1501,6 +2373,78 @@
           "url": "object:prepared/minimaps/monochrome.webp",
           "bytes": 39532,
           "sha256": "0c1aeae9a3ac9f702941c1d9069bc34abca8c6f8e34714c6a445874e7ee8b3c4",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:methane-ice",
+      "label": "Methane ice preview",
+      "recipe": "raster",
+      "selector": "/surfaces/3",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "methane-ice"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/methane-ice.webp",
+          "bytes": 123678,
+          "sha256": "68d6729784a109c3eb924bc5f38caa0c260150e6b068be27f76afa8555b7c2c6",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:nitrogen-ice",
+      "label": "Nitrogen ice preview",
+      "recipe": "raster",
+      "selector": "/surfaces/4",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "nitrogen-ice"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/nitrogen-ice.webp",
+          "bytes": 114590,
+          "sha256": "3a5e3609f44a836f6f14786829d846c3db01b8dfb0dab582118e97104a28cc6b",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:water-ice",
+      "label": "Water ice preview",
+      "recipe": "raster",
+      "selector": "/surfaces/5",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "water-ice"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/water-ice.webp",
+          "bytes": 92382,
+          "sha256": "11a3cfc4f0d91d9629554a814d3c491b71967e72b1972b7722af3dae1bcbd66b",
           "verification": "bytes-verified"
         }
       ]

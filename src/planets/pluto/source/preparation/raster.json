@@ -89,6 +89,399 @@
         }
       },
       "nativeSourcePoles": true
+    },
+    {
+      "id": "methane-ice",
+      "source": "science/leisa/params_ls.fits",
+      "falseColor": true,
+      "output": "pluto-{id}{suffix}.webp",
+      "thumbnail": "pluto-lens-{id}.webp",
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "methane-ice",
+        "label": "Methane ice",
+        "format": "fits-image-map",
+        "path": "science/leisa/params_ls.fits",
+        "consumer": "leisa-ice-composition",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "extension": 1,
+        "name": "CH4 DISTRIBUTION",
+        "units": "%",
+        "primary": {
+          "NAME": "params with Lev-Mar least square minimization",
+          "IMAGKN2": "k = 0"
+        },
+        "grid": {
+          "width": 1067,
+          "height": 534,
+          "longitudeOrigin": 0,
+          "rowOrder": "north-to-south"
+        },
+        "missingTuple": [
+          {
+            "extension": 1,
+            "name": "CH4 DISTRIBUTION",
+            "units": "%",
+            "value": 25
+          },
+          {
+            "extension": 2,
+            "name": "N2 DISTRIBUTION",
+            "units": "%",
+            "value": 25
+          },
+          {
+            "extension": 3,
+            "name": "H2O DISTRIBUTION",
+            "units": "%",
+            "value": 25
+          },
+          {
+            "extension": 4,
+            "name": "TITAN THOLINS DISTRIBUTION",
+            "units": "%",
+            "value": 25
+          },
+          {
+            "extension": 5,
+            "name": "CH4 EFFECTIVE PARTICLE DIAMETERS",
+            "units": "cm",
+            "value": 0.05999999865889549
+          },
+          {
+            "extension": 6,
+            "name": "N2 EFFECTIVE PARTICLE DIAMETERS",
+            "units": "cm",
+            "value": 0.05999999865889549
+          },
+          {
+            "extension": 7,
+            "name": "H2O EFFECTIVE PARTICLE DIAMETERS",
+            "units": "cm",
+            "value": 0.05999999865889549
+          },
+          {
+            "extension": 8,
+            "name": "TITAN THOLINS EFFECTIVE PARTICLE DIAMETERS",
+            "units": "cm",
+            "value": 0.05999999865889549
+          },
+          {
+            "extension": 9,
+            "name": "CH4 SOLIBILITY IN N2",
+            "units": "%",
+            "value": -1
+          },
+          {
+            "extension": 10,
+            "name": "TEMPERATURE DISTRIBUTION",
+            "units": "K",
+            "value": 40
+          }
+        ],
+        "minimum": 0,
+        "maximum": 100,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "0",
+          "50",
+          "100"
+        ],
+        "description": "Methane-rich ice is widespread in the northern terrain. Colors show its estimated share of each mapped area, fitted from infrared spectra. Grid: no usable fit.",
+        "title": "New Horizons LEISA · modeled surface fraction",
+        "sourceUrl": "https://zenodo.org/records/18825240",
+        "qualityMasks": [
+          {
+            "format": "fits-image-map",
+            "path": "science/leisa/params_ls_errors.fits",
+            "sampling": "nearest",
+            "extension": 1,
+            "name": "CH4 DISTRIBUTION ERROR",
+            "units": "%",
+            "primary": {
+              "NAME": "params errors Lev-Mar least square minimization",
+              "IMAGKN2": "k = 0"
+            },
+            "grid": {
+              "width": 1067,
+              "height": 534,
+              "longitudeOrigin": 0,
+              "rowOrder": "north-to-south"
+            },
+            "minimum": 0,
+            "maximum": 100
+          }
+        ]
+      }
+    },
+    {
+      "id": "nitrogen-ice",
+      "source": "science/leisa/params_ls.fits",
+      "falseColor": true,
+      "output": "pluto-{id}{suffix}.webp",
+      "thumbnail": "pluto-lens-{id}.webp",
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "nitrogen-ice",
+        "label": "Nitrogen ice",
+        "format": "fits-image-map",
+        "path": "science/leisa/params_ls.fits",
+        "consumer": "leisa-ice-composition",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "extension": 2,
+        "name": "N2 DISTRIBUTION",
+        "units": "%",
+        "primary": {
+          "NAME": "params with Lev-Mar least square minimization",
+          "IMAGKN2": "k = 0"
+        },
+        "grid": {
+          "width": 1067,
+          "height": 534,
+          "longitudeOrigin": 0,
+          "rowOrder": "north-to-south"
+        },
+        "missingTuple": [
+          {
+            "extension": 1,
+            "name": "CH4 DISTRIBUTION",
+            "units": "%",
+            "value": 25
+          },
+          {
+            "extension": 2,
+            "name": "N2 DISTRIBUTION",
+            "units": "%",
+            "value": 25
+          },
+          {
+            "extension": 3,
+            "name": "H2O DISTRIBUTION",
+            "units": "%",
+            "value": 25
+          },
+          {
+            "extension": 4,
+            "name": "TITAN THOLINS DISTRIBUTION",
+            "units": "%",
+            "value": 25
+          },
+          {
+            "extension": 5,
+            "name": "CH4 EFFECTIVE PARTICLE DIAMETERS",
+            "units": "cm",
+            "value": 0.05999999865889549
+          },
+          {
+            "extension": 6,
+            "name": "N2 EFFECTIVE PARTICLE DIAMETERS",
+            "units": "cm",
+            "value": 0.05999999865889549
+          },
+          {
+            "extension": 7,
+            "name": "H2O EFFECTIVE PARTICLE DIAMETERS",
+            "units": "cm",
+            "value": 0.05999999865889549
+          },
+          {
+            "extension": 8,
+            "name": "TITAN THOLINS EFFECTIVE PARTICLE DIAMETERS",
+            "units": "cm",
+            "value": 0.05999999865889549
+          },
+          {
+            "extension": 9,
+            "name": "CH4 SOLIBILITY IN N2",
+            "units": "%",
+            "value": -1
+          },
+          {
+            "extension": 10,
+            "name": "TEMPERATURE DISTRIBUTION",
+            "units": "K",
+            "value": 40
+          }
+        ],
+        "minimum": 0,
+        "maximum": 100,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "0",
+          "50",
+          "100"
+        ],
+        "description": "Nitrogen-rich ice stands out in Sputnik Planitia. Colors show its estimated share of each mapped area; the result depends on the ice model. Grid: no usable fit.",
+        "title": "New Horizons LEISA · modeled surface fraction",
+        "sourceUrl": "https://zenodo.org/records/18825240",
+        "qualityMasks": [
+          {
+            "format": "fits-image-map",
+            "path": "science/leisa/params_ls_errors.fits",
+            "sampling": "nearest",
+            "extension": 2,
+            "name": "N2 DISTRIBUTION ERROR",
+            "units": "%",
+            "primary": {
+              "NAME": "params errors Lev-Mar least square minimization",
+              "IMAGKN2": "k = 0"
+            },
+            "grid": {
+              "width": 1067,
+              "height": 534,
+              "longitudeOrigin": 0,
+              "rowOrder": "north-to-south"
+            },
+            "minimum": 0,
+            "maximum": 100
+          }
+        ]
+      }
+    },
+    {
+      "id": "water-ice",
+      "source": "science/leisa/params_ls.fits",
+      "falseColor": true,
+      "output": "pluto-{id}{suffix}.webp",
+      "thumbnail": "pluto-lens-{id}.webp",
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "water-ice",
+        "label": "Water ice",
+        "format": "fits-image-map",
+        "path": "science/leisa/params_ls.fits",
+        "consumer": "leisa-ice-composition",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "extension": 3,
+        "name": "H2O DISTRIBUTION",
+        "units": "%",
+        "primary": {
+          "NAME": "params with Lev-Mar least square minimization",
+          "IMAGKN2": "k = 0"
+        },
+        "grid": {
+          "width": 1067,
+          "height": 534,
+          "longitudeOrigin": 0,
+          "rowOrder": "north-to-south"
+        },
+        "missingTuple": [
+          {
+            "extension": 1,
+            "name": "CH4 DISTRIBUTION",
+            "units": "%",
+            "value": 25
+          },
+          {
+            "extension": 2,
+            "name": "N2 DISTRIBUTION",
+            "units": "%",
+            "value": 25
+          },
+          {
+            "extension": 3,
+            "name": "H2O DISTRIBUTION",
+            "units": "%",
+            "value": 25
+          },
+          {
+            "extension": 4,
+            "name": "TITAN THOLINS DISTRIBUTION",
+            "units": "%",
+            "value": 25
+          },
+          {
+            "extension": 5,
+            "name": "CH4 EFFECTIVE PARTICLE DIAMETERS",
+            "units": "cm",
+            "value": 0.05999999865889549
+          },
+          {
+            "extension": 6,
+            "name": "N2 EFFECTIVE PARTICLE DIAMETERS",
+            "units": "cm",
+            "value": 0.05999999865889549
+          },
+          {
+            "extension": 7,
+            "name": "H2O EFFECTIVE PARTICLE DIAMETERS",
+            "units": "cm",
+            "value": 0.05999999865889549
+          },
+          {
+            "extension": 8,
+            "name": "TITAN THOLINS EFFECTIVE PARTICLE DIAMETERS",
+            "units": "cm",
+            "value": 0.05999999865889549
+          },
+          {
+            "extension": 9,
+            "name": "CH4 SOLIBILITY IN N2",
+            "units": "%",
+            "value": -1
+          },
+          {
+            "extension": 10,
+            "name": "TEMPERATURE DISTRIBUTION",
+            "units": "K",
+            "value": 40
+          }
+        ],
+        "minimum": 0,
+        "maximum": 100,
+        "colors": [
+          "#440154",
+          "#3b528b",
+          "#21918c",
+          "#5ec962",
+          "#fde725"
+        ],
+        "labels": [
+          "0",
+          "50",
+          "100"
+        ],
+        "description": "Water ice forms part of Pluto’s solid terrain beneath its more volatile ices. Colors show the surface fraction estimated from infrared spectra. Grid: no usable fit.",
+        "title": "New Horizons LEISA · modeled surface fraction",
+        "sourceUrl": "https://zenodo.org/records/18825240",
+        "qualityMasks": [
+          {
+            "format": "fits-image-map",
+            "path": "science/leisa/params_ls_errors.fits",
+            "sampling": "nearest",
+            "extension": 3,
+            "name": "H2O DISTRIBUTION ERROR",
+            "units": "%",
+            "primary": {
+              "NAME": "params errors Lev-Mar least square minimization",
+              "IMAGKN2": "k = 0"
+            },
+            "grid": {
+              "width": 1067,
+              "height": 534,
+              "longitudeOrigin": 0,
+              "rowOrder": "north-to-south"
+            },
+            "minimum": 0,
+            "maximum": 100
+          }
+        ]
+      }
     }
   ],
   "lighting": {
