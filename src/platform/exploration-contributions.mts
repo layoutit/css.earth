@@ -2,6 +2,7 @@ import { productSourceIds, validateObjectProvenance } from './object-provenance.
 import type { ProvenanceDocument } from './object-provenance.mts';
 import { explorationArray, explorationId, explorationRecord, explorationText, parseCapture, validateCapture } from './exploration-catalog.mts';
 import type { CaptureAttribution, ExplorationCatalog } from './exploration-catalog.mts';
+import { datasetDestination, parseDatasetDestination } from './dataset-destination.mts';
 export interface ContributionEdge {
   readonly objectId: string; readonly productId: string; readonly sourceId: string;
   readonly lensIds: readonly string[]; readonly attribution: CaptureAttribution;
@@ -52,8 +53,7 @@ export function compileContributions(objects: readonly ContributionObject[], cat
       }
     }
     for (const lens of object.controls) if (linked.has(lens.id)) {
-      if (object.route !== `/${object.id}/`) throw new TypeError('Dataset destinations need a registered object route.');
-      datasets.push(Object.freeze({ objectId: object.id, objectName: object.name, lensId: lens.id, label: lens.label, href: `${object.route}#dataset=${encodeURIComponent(lens.id)}` }));
+      datasets.push(Object.freeze({ objectId: object.id, objectName: object.name, lensId: lens.id, label: lens.label, href: datasetDestination(object.id, object.route, lens.id) }));
     }
   }
   return Object.freeze({ edges: Object.freeze(edges), datasets: Object.freeze(datasets), ...contributionIndexes(edges) });
@@ -62,8 +62,7 @@ export function parseContributionGraph(input: unknown, catalog: ExplorationCatal
   const graph = explorationRecord(input, ['edges', 'datasets', 'byObject', 'byMission', 'byMachine']);
   const datasets = explorationArray(graph.datasets, raw => {
     const view = explorationRecord(raw, ['objectId', 'objectName', 'lensId', 'label', 'href']);
-    const objectId = explorationId(view.objectId), lensId = explorationId(view.lensId), href = explorationText(view.href);
-    if (href !== `/${objectId}/#dataset=${encodeURIComponent(lensId)}`) throw new TypeError('Invalid dataset destination.');
+    const objectId = explorationId(view.objectId), lensId = explorationId(view.lensId), href = parseDatasetDestination(view.href, objectId, lensId);
     return Object.freeze({ objectId, lensId, href, objectName: explorationText(view.objectName), label: explorationText(view.label) });
   });
   const keys = new Set(datasets.map(view => datasetKey(view.objectId, view.lensId)));

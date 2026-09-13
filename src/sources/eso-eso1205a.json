@@ -1,0 +1,47 @@
+{
+  "id": "eso-eso1205a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Helix Nebula · ESO eso1205a",
+  "identifiers": [
+    {
+      "type": "ESO image",
+      "value": "eso1205a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1205a/",
+      "label": "Published source"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.eso.org/public/outreach/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/helix/observations.json",
+      "revision": "ab1967ed45fe7ad670cc5eaa4e892789a04f01f3",
+      "sha256": "94c86a73e965bf38c4df792047cdbeb2321cccecb2bfd3a4d0340b84c4af38ea",
+      "locator": "/images/0"
+    },
+    {
+      "url": "https://www.eso.org/public/images/eso1205a/",
+      "checkedOn": "2026-09-13",
+      "locator": "Image description and Colours & filters: named telescope and instrument"
+    }
+  ],
+  "publisher": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/helix/observations.json#/images/0"
+    }
+  ]
+}

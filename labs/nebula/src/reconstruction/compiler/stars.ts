@@ -87,18 +87,26 @@ export async function compilerStars(image: CompilerImage, model: EmissionFieldMo
     throw new TypeError('Compiler star lenses must have unique configured identities.');
   const lensPhotometers = lenses.map(lens => ({ id: lens.id, photometer: lens.id === image.id ? photometer :
     createCompilerStarPhotometer(lens, compilerStarLensPoints(image, lens, nativePoints)) }));
-  for (let index = 0; index < detected.length && output.length < maximum; index++) {
-    const star = detected[index]!, [x, y] = image.pixelToSky(...star.point); let total = 0;
+  // Detection peak measures compactness, not total displayed light: broad bright
+  // sources must compete for the budget using their measured residual apertures.
+  const ranked = detected.flatMap((star, index) => {
+    const measured = photometer.measure(index);
+    return measured ? [{ star, index, measured, energy: Math.max(...measured.measurement.residualDisplayEnergyRgb) }] : [];
+  }).sort((a, b) => b.energy - a.energy || a.index - b.index);
+  for (const { star, index, measured } of ranked) {
+    if (output.length >= maximum) break;
+    const [x, y] = image.pixelToSky(...star.point); let total = 0;
     if (x < field.bounds.min[0] || x > field.bounds.max[0] || y < field.bounds.min[1] || y > field.bounds.max[1]) continue;
     for (let k = 0; k < count; k++) { field.sampleEmission(x, y, field.bounds.min[2] + (k + .5) * dz, light); samples[k] = light[0]; total += light[0]; }
-    if (total * dz < .025) continue;
+    // These are observed field lights with illustrative conditional depths,
+    // not confirmed members selected by the nebula's projected brightness.
+    if (!(total > 0)) continue;
     const id = `${image.id}-${index}`, chosen = fraction(id) * total; let cumulative = 0, slot = count - 1;
     for (let k = 0; k < count; k++) { cumulative += samples[k]!; if (cumulative >= chosen) { slot = k; break; } }
     const z = field.bounds.min[2] + (slot + .5) * dz;
-    const measured = photometer.measure(index); if (!measured) continue;
     const materials: Record<string, CompilerStarMaterial> = {};
     for (const lens of lensPhotometers) {
-      const light = lens.photometer.measure(index);
+      const light = lens.id === image.id ? measured : lens.photometer.measure(index);
       materials[lens.id] = light ? { rgb: light.rgb, diameterUnits: light.diameterUnits, alpha: light.alpha } :
         { rgb: [0, 0, 0], diameterUnits: measured.diameterUnits, alpha: 0 };
     }

@@ -1,0 +1,37 @@
+{
+  "id": "noirlab-iotw2547a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Large Magellanic Cloud · NOIRLab iotw2547a",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "iotw2547a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://noirlab.edu/public/images/iotw2547a/",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/image-candidates.json",
+      "revision": "ab1967ed45fe7ad670cc5eaa4e892789a04f01f3",
+      "sha256": "a8b7554a9919b5fcd65290d6715572ff1a63d7ab41f263637a93b6f881766583",
+      "locator": "/targets/0/images/1"
+    }
+  ],
+  "publisher": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/image-candidates.json#/targets/0/images/1"
+    }
+  ]
+}

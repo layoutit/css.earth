@@ -229,3 +229,6 @@ src/planets/*/source/**/*.bpc
 /src/objects/m42/.prepared-*/
 /src/objects/helix/.prepared-*/
 /src/objects/m2-9/.prepared-*/
+# Shared dataset cards and lineage are restored by prepare:nebulae / prepare:sources.
+/src/objects/*/prepared/presentation.json
+/src/objects/*/prepared/provenance.json

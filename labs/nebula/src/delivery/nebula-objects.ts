@@ -9,6 +9,7 @@ import { readCompilerResult } from '../reconstruction/compiler/result.js';
 import { parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import { validatePreparedCssVolume } from '../../../../src/renderers/css/volume/validation.js';
 import { validatePreparedVolumeLenses } from '../../../../src/renderers/css/volume/prepared-volume-lenses.js';
+import { prepareVolumeImpostors } from '../../../../src/renderers/css/preparation/volume-impostors.js';
 import type { PreparedVolumeLens } from '../../../../src/renderers/css/volume/prepared-volume-lenses.js';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.js';
 const sha = (v: Uint8Array | string) => createHash('sha256').update(v).digest('hex');
@@ -16,6 +17,18 @@ const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
 const record = (v: unknown): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Expected nebula delivery object.'); return v as Record<string, unknown>; };
 const text = (v: unknown) => { if (typeof v !== 'string' || !v) throw new TypeError('Expected nebula delivery text.'); return v; };
 const finite = (v: unknown) => { if (typeof v !== 'number' || !Number.isFinite(v)) throw new TypeError('Expected finite nebula delivery value.'); return v; };
+// Prepared pixels and their contract must invalidate a previously installed handoff together.
+const implementationFiles = [
+  'labs/nebula/src/delivery/nebula-objects.ts',
+  'labs/nebula/src/delivery/nebula-frame.ts',
+  'labs/nebula/src/reconstruction/compiler/stars.ts',
+  'src/renderers/css/preparation/volume-order.ts',
+  'src/renderers/css/preparation/volume-impostors.ts',
+  'src/renderers/css/volume/types.ts',
+  'src/renderers/css/volume/validation.ts',
+  'src/renderers/css/volume/volume-impostor-validation.ts',
+  'src/renderers/css/volume/prepared-volume-lenses.ts',
+];
 function local(root: string, path: string): string {
   const target = resolve(root,path), rel = relative(root,target);
   if (isAbsolute(path) || rel === '..' || rel.startsWith(`..${sep}`) || /[\\\u0000]/.test(path)) throw new TypeError('Nebula resource escapes its owner.');
@@ -69,7 +82,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       catalogue.objects[0]!.skyPosition.raDeg !== recipe.sky.centerIcrsDegrees[0] ||
       catalogue.objects[0]!.skyPosition.decDeg !== recipe.sky.centerIcrsDegrees[1]) throw new TypeError('Nebula catalogue and delivery identity/sky frame differ.');
   for (const input of [recipe.request,...recipe.inputPins]) await pinned(root,input);
-  const implementationSha256 = sha(Buffer.concat(await Promise.all(['nebula-objects.ts','nebula-frame.ts'].map(name=>readFile(local(root,`labs/nebula/src/delivery/${name}`))))));
+  const implementationSha256 = sha(json(await Promise.all(implementationFiles.map(async path => ({path,sha256:sha(await readFile(local(root,path)))})))));
   if (ifMissing && await installed(directory,sha(recipeBytes),implementationSha256)) return { id:recipe.id,status:'verified' };
   const staging = resolve(directory,`.prepared-${process.pid}`); await mkdir(staging,{recursive:true});
   const lenses: PreparedVolumeLens[] = []; let sourceResult = recipe.acceptedLabResult;
@@ -80,10 +93,16 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       const volume = validatePreparedCssVolume(raw.data ?? raw);
       for (const resource of volume.resources) {
         const bytes = await pinned(dirname(local(root,volumePath)),{path:resource.path,sha256:resource.sha256});
-        await put(resolve(staging,id,resource.path),bytes);
+        await put(local(staging,`${id}/${resource.path}`),bytes);
       }
+      const brightness: PreparedVolumeLens['brightness'] = {overall:1,x:1,y:1,z:1};
+      const prepared = await prepareVolumeImpostors({
+        volume:embedNebulaVolume(volume,frame,`${recipe.id}-${id}`,id),brightness,prefix:`${id}/impostors`,
+        readResource:path=>readFile(local(staging,path)),
+        writeResource:(path,bytes)=>put(local(staging,path),bytes),
+      });
       lenses.push({ id,label,title:label,sourceUrl,description:recipe.description,
-        volume:embedNebulaVolume(volume,frame,`${recipe.id}-${id}`,id),stars,brightness:{overall:1,x:1,y:1,z:1} });
+        volume:prepared,stars,brightness });
     };
     if (recipe.method === 'compiler') {
       const request = readCompilerRequest(JSON.parse((await pinned(root,recipe.request)).toString()));

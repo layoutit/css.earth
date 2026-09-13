@@ -1,4 +1,5 @@
 import { mountPreparedCssVolume } from './prepared-volume-runtime.js';
+import { mountPreparedVolumeLod } from './prepared-volume-lod.js';
 import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
 import { validatePreparedCssVolume } from './validation.js';
@@ -170,7 +171,8 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         const opacity = volumeLensCompositeOpacity(bank.runtime.roots.map((axisRoot, index) => ({
           axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
         })), bank.lens.brightness);
-        bank.surface.style.opacity = String(opacity);
+        // Impostors contain the saved exposure; their detail wrapper owns the matching full-volume exposure.
+        bank.surface.style.opacity = bank.lens.volume.impostors ? '1' : String(opacity);
         const frame = bank.lens.volume.frame, { world, viewport } = publication;
         const distanceUnits = Math.hypot(...world.pose.positionM.map((value, axis) => value - frame.originM[axis])) / frame.metersPerUnit;
         const radiusPixels = viewport.focalPixels * data.framingRadiusUnits / Math.max(Number.MIN_VALUE, distanceUnits);
@@ -180,7 +182,7 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         const pointOpacity = t * t * (3 - 2 * t);
         stars!.root.style.opacity = String(pointOpacity);
         stars!.root.style.display = starsVisible && pointOpacity > 0 ? 'block' : 'none';
-        stars!.publish(publication);
+        if (starsVisible && pointOpacity > 0) stars!.publish(publication);
         root.dataset.pointOpacity = String(pointOpacity); root.dataset.cloudOpacity = String(opacity);
         latest = publication;
       };
@@ -189,7 +191,10 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
           const surface = document.createElement('div'); surface.className = 'prepared-volume-lens-cloud'; surface.dataset.volumeLens = lens.id;
           Object.assign(surface.style, { position: 'absolute', inset: '0', pointerEvents: 'none', display: lens.id === selected ? 'block' : 'none' });
           const marker = document.createElement('span'); marker.hidden = true; surface.append(marker); root.insertBefore(surface, end);
-          const runtime = mountPreparedCssVolume({ host: surface, before: marker, payload: lens.volume, resolveResource: resolvePrepared });
+          const runtime = mountPreparedVolumeLod({ host: surface, before: marker, payload: lens.volume, resolveResource: resolvePrepared },
+            detail => volumeLensCompositeOpacity(detail.roots.map((axisRoot, index) => ({
+              axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
+            })), lens.brightness));
           // The shared universe must remain visible through the cloud and beyond its prepared footprint.
           for (const axisRoot of runtime.roots) axisRoot.style.background = 'transparent';
           banks.push({ lens, surface, runtime });

@@ -15,6 +15,8 @@ import type { PreparedNavigationFocus } from '../../src/renderers/css/navigation
 import type { PreparedGalaxyRecord, SpatialCatalogSource } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from '../prepared-context-navigation.mts';
 import type { ShellOptions } from '../planet-shell-client.mts';
+import type { PreparedVolumeLensState } from '../../src/renderers/css/volume/prepared-volume-lenses.ts';
+import { isFocusDatasetUrl } from '../dataset-url.mts';
 
 type Mutable<T> = { -readonly [K in keyof T]: T[K] };
 function required<T>(value: T | null | undefined): T { assert.ok(value !== null && value !== undefined); return value; }
@@ -973,6 +975,51 @@ test('dataset links commit one same-body history entry, preserve the camera and 
   assert.equal(mount.value.camera.distanceKilometers, 54321);
   assert.equal(h.windowTarget.location.hash, '#vault');
   assert.equal(h.mounts.length, 1); h.router.destroy();
+});
+
+test('source focus links preserve the requested lens and create history without refocusing the Sun', async () => {
+  const errors: unknown[] = [], bodyFocuses: string[] = [];
+  let bank: PreparedVolumeLensState = { objectId: 'm42', id: 'optical', defaultLens: 'optical', selectedLens: 'optical', starsVisible: true,
+    lenses: ['optical', 'infrared'].map(id => ({ id, label: id, title: id, description: 'Prepared observation', sourceUrl: 'https://example.test/source' })) };
+  const context: MockWorldContext = { async mount({ windowTarget }) {
+    const layer = { imageLayerFrames: {}, selectGalaxy() {},
+      resolveGalaxy: (id: string) => id === 'm42' ? { ...galaxyRecord(id), detailedObjectId: id } : null,
+      volumeLensState: (id: string) => id === bank.objectId ? bank : null,
+      selectVolumeLens(id: string, lensId: string) { assert.equal(id, bank.objectId); bank = { ...bank, id: lensId, selectedLens: lensId }; },
+    };
+    const controller = createPreparedContextNavigation({ layer: layer as unknown as Parameters<typeof createPreparedContextNavigation>[0]['layer'], windowTarget,
+      onError: error => errors.push(error), presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
+    return { publish() {}, connectNavigation: controller.connect, suspendFocus: controller.suspend, restoreFocus: controller.restore, destroy: controller.destroy };
+  } };
+  const h = harness({ withSun: true, persistentWorldContext: context, focus: async ({ objectId }) => { bodyFocuses.push(objectId); } });
+  await h.router.settled;
+  assert.equal(clickRoute(h, 'https://example.test/sun/?focus=m42&focusLens=optical').defaultPrevented, true);
+  await h.router.settled;
+  assert.equal(h.preparations.at(-1)?.url, 'https://example.test/sun/?focus=m42&focusLens=optical', 'Cross-body transport keeps the complete destination.');
+  const pushes = h.writes.filter(write => write === 'push').length;
+  assert.equal(clickRoute(h, 'https://example.test/sun/?focus=m42&focusLens=infrared').defaultPrevented, true);
+  await h.router.settled;
+  assert.deepEqual(bodyFocuses, []);
+  assert.equal(bank.selectedLens, 'infrared');
+  assert.equal(h.shells[0].focusPresentation?.selectedLens, 'infrared');
+  assert.equal(h.windowTarget.location.searchParams.get('focus'), 'm42');
+  assert.equal(h.windowTarget.location.searchParams.get('focusLens'), 'infrared');
+  assert.equal(h.writes.filter(write => write === 'push').length, pushes + 1);
+  h.windowTarget.history.back(); await h.router.settled;
+  assert.equal(bank.selectedLens, 'optical');
+  assert.equal(h.windowTarget.location.searchParams.get('focusLens'), 'optical');
+  assert.equal(h.mounts.length, 2, 'The same Sun owner remains mounted while focus datasets change.');
+  assert.deepEqual([...errors, ...h.errors], []);
+  h.router.destroy();
+});
+
+test('only canonical focus dataset URLs bypass ordinary same-body framing', () => {
+  assert.equal(isFocusDatasetUrl(new URL('https://example.test/sun/?focus=m42&focusLens=optical')), true);
+  for (const path of ['/mercury/?focus=m42&focusLens=optical', '/sun/?focus=m42', '/sun/?focusLens=optical',
+    '/sun/?focus=m42&focusLens=optical&focusLens=infrared', '/sun/?focus=m42&focus=helix&focusLens=optical',
+    '/sun/?focus=m42&focusLens=optical#dataset=normal', '/sun/?focus=m42&focusLens=optical&unrelated=value']) {
+    assert.equal(isFocusDatasetUrl(new URL(path, 'https://example.test')), false, path);
+  }
 });
 
 test('manual datasets replace history and ordinary body navigation removes only the dataset fragment', async () => {
