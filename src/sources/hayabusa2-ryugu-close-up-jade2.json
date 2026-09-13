@@ -1,0 +1,33 @@
+{
+  "id": "hayabusa2-ryugu-close-up-jade2",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Hayabusa2 ONC MASCOT-operation I/F mosaic",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/03_HighResolution/hyb2_onc_20181003_MSC_l3dm_v06.tif"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
+      "label": "JAXA JADE2 maps"
+    },
+    {
+      "role": "original",
+      "url": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/03_HighResolution/hyb2_onc_20181003_MSC_l3dm_v06.tif",
+      "label": "Original numeric GeoTIFF"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
+      "locator": "1. High-Resolution Mosaic Maps: High resolution",
+      "checkedOn": "2026-09-13"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
