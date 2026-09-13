@@ -1475,7 +1475,7 @@
           {
             "catalogueId": "source-tethys-n1807429484",
             "role": "material",
-            "evidence": "src/planets/tethys/source/manifest.json@0000000000000000000000000000000000000000#/inputs/44"
+            "evidence": "src/planets/tethys/source/manifest.json@7f457e1b401738a0688a6f6c8bf44f55b2f5cae5#/inputs/44"
           }
         ]
       }
@@ -1513,7 +1513,7 @@
           {
             "catalogueId": "source-tethys-n1807429484-label",
             "role": "material",
-            "evidence": "src/planets/tethys/source/manifest.json@0000000000000000000000000000000000000000#/inputs/45"
+            "evidence": "src/planets/tethys/source/manifest.json@7f457e1b401738a0688a6f6c8bf44f55b2f5cae5#/inputs/45"
           }
         ]
       }
@@ -1562,8 +1562,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 11343,
-      "expectedSha256": "7c1a3fc890eec415cd8c8600db89b7bcc0e2729521a3c14c4c65d5d327599d1c"
+      "expectedBytes": 14694,
+      "expectedSha256": "8bedb79bd92dd495ec4443730cc597ca1a4d2f63fc0b8cdd8549ff9eeb793d4e"
     },
     {
       "path": "preparation/navigation.json",
@@ -1572,13 +1572,13 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 14061,
-      "expectedSha256": "99ad7c8286c80f2dc80b8891e484e7fbfe3c1d4ec8609fd91c063509b757e1bb"
+      "expectedBytes": 14655,
+      "expectedSha256": "7105046ef5d72b851580646b805bec1dcc7dc2c38f6ba2562a908ea78957aeba"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 15841,
-      "expectedSha256": "6dd38ece1b2146204fe804d3aa7fce4560eabae5d714d4390d0f5ec4bd456d43",
+      "expectedBytes": 17339,
+      "expectedSha256": "dbed13ca8d267ceb71a322bb1aeef42fe7524c33b1370d786b39541735e107ba",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."

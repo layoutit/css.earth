@@ -101,7 +101,8 @@ export function validateGeoSurfaceRecipe(value: unknown, sourceGeometry: unknown
       typeof recipe.metadata?.label !== 'string' || !recipe.metadata?.coverage ||
       !geometry || geometry.simplification?.method !== 'source-meshoptimizer' ||
       !positive(policy?.maximumSourceDistanceMeters) || policy.maximumSourceDistanceMeters > geometry.simplification.maximumErrorMeters ||
-      !positive(policy?.maximumSeparationMeters) || policy.maximumSeparationMeters > (controlled ? 600 : 50) ||
+      // Kernel cameras photograph bodies at any resolution, so their contributor separation is bounded by the displayed mesh's error, as source distance is.
+      !positive(policy?.maximumSeparationMeters) || policy.maximumSeparationMeters > (controlled ? 600 : kernels ? geometry.simplification.maximumErrorMeters : 50) ||
       !positive(policy?.visibilityToleranceMeters) || policy.visibilityToleranceMeters > 1 ||
       !positive(policy?.maximumEmissionDegrees) || policy.maximumEmissionDegrees >= 90 ||
       (published ? !validPublishedPhotometryShape(published, policy.maximumEmissionDegrees) :
