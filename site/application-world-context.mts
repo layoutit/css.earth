@@ -18,6 +18,7 @@ import galaxyPresentation from '../src/objects/local-group/source/presentation.j
 import clusterCatalog from '../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
 import clusterPresentation from '../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import { createPreparedContextNavigation } from './prepared-context-navigation.mts';
+import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
 
 const annotationOpacities = Object.fromEntries(OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
 const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
@@ -37,12 +38,8 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const nebulaCatalog = parsePreparedNebulaCatalog({ schema: 'cssearth-nebula-catalog@1', frame: galaxyCatalog.frame,
       sources: [...new Map(nebulaParts.flatMap(part => part.sources).map(source => [source.id, source])).values()],
       objects: nebulaParts.flatMap(part => part.objects) });
-    const descriptors = import.meta.glob('../src/objects/*/object.json', { import: 'default', eager: true });
-    // The individual-star binary bank is a preparation input, never an application asset.
-    const assets = import.meta.glob(['../src/objects/*/prepared/**/*.{json,png,webp,bin}',
-      '!../src/objects/stellar-neighbourhood/prepared/*.bin'], {
-      query: '?url', import: 'default', eager: true,
-    });
+    // Only the context objects' folders are globbed; bodies share src/objects but are not world resources.
+    const descriptors = CONTEXT_OBJECT_DESCRIPTORS, assets = CONTEXT_OBJECT_ASSET_URLS;
     const resourceSet = (objectId: string) => {
       const base = `../src/objects/${objectId}/`;
       const resolve = (path: string) => {
