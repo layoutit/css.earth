@@ -17,13 +17,14 @@ export function qualifiedFace(mesh: Pick<SourceMesh, 'indices' | 'faceProvenance
 
 export interface BackplaneFrame { width: number; height: number; planes: Record<string, ArrayLike<number>>; xyz(index: number): number[]; valid(index: number): boolean }
 
-/** Archive backplanes: surface points in kilometres and angles in radians, decoded beside the image. */
+/** Archive backplanes: surface points in kilometres and angles in radians, decoded beside the image. Range comes from the fitted
+ * camera position, because archives disagree on what a distance plane measures. */
 export function archiveBackplanes(frame: BackplaneFrame, camera: Pick<ObservationCamera, 'positionMeters'>, shapeModel?: string): PixelGeometry {
-  const { planes } = frame, range = planes.DISTANCE_IMAGE;
+  const { planes } = frame;
   return { source: 'archive-backplanes', report: { source: 'archive-backplanes', ...(shapeModel ? { shapeModel } : {}) },
     reject: i => frame.valid(i) ? null : 'no-geometry',
     distanceMeters: (i, point) => Math.hypot(...frame.xyz(i).map((n, j) => n - point[j] / 1000)) * 1000,
-    rangeMeters: i => range ? range[i] * 1000 : Math.hypot(...frame.xyz(i).map((n, j) => n * 1000 - camera.positionMeters[j])),
+    rangeMeters: i => Math.hypot(...frame.xyz(i).map((n, j) => n * 1000 - camera.positionMeters[j])),
     incidence: i => planes.INCIDENCE_ANGLE_IMAGE[i], emission: i => planes.EMISSION_ANGLE_IMAGE[i], phase: i => planes.PHASE_ANGLE_IMAGE?.[i] };
 }
 
