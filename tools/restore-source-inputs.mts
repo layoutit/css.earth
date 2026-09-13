@@ -10,7 +10,7 @@ const projectRoot = resolve(import.meta.dirname, "..");
 const ids = setupObjectIds(process.argv.slice(2));
 for (const id of ids) {
   if (id === "earth") {
-    const scienceDirectory = resolve(projectRoot, "src/planets/earth/source/science");
+    const scienceDirectory = resolve(projectRoot, "src/objects/earth/source/science");
     try {
       await lstat(resolve(scienceDirectory, "mur-gibs.png"));
     } catch (error) {

@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { loadPdsPlanetocentricShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { preparePdsConstraintMap } from '../../../../tools/objects/terrestrial-layers/pds-constraint-map.mts';
-const root = resolve(import.meta.dirname, '../../../../src/planets/comet-103p');
+const root = resolve(import.meta.dirname, '../../../../src/objects/comet-103p');
 const json = async (path: string) => JSON.parse((await readFile(resolve(root, path))).toString('utf8'));
 
 test('Hartley 2 retains published geometry, source constraint flags and fixed non-spin orientation', async () => {

@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 
-const source = resolve(import.meta.dirname, '../../../../src/planets/telesto/source');
+const source = resolve(import.meta.dirname, '../../../../src/objects/telesto/source');
 
 test('Telesto released plate mesh preserves PDS units, axes and vertex indices', async () => {
   const recipe = JSON.parse((await readFile(resolve(source, 'preparation/terrestrial.json'))).toString('utf8'));

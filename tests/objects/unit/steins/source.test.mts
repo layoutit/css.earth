@@ -4,7 +4,7 @@ import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {loadVrmlShape,parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {prepareByteObservation} from '../../../../tools/objects/terrestrial-layers/observed-image.mts';
-const directory='src/planets/steins/source',read=async (p: string)=>JSON.parse(await readFile(`${directory}/${p}`,'utf8'));
+const directory='src/objects/steins/source',read=async (p: string)=>JSON.parse(await readFile(`${directory}/${p}`,'utf8'));
 
 test('Steins source mesh preserves released kilometer coordinates and independent principal rays',async()=>{
  const c=await read('preparation/terrestrial.json'),mesh=await loadVrmlShape(`${directory}/shape/steins_cart.wrl`,c.geometry.radialTerrain.grid);
@@ -33,7 +33,7 @@ test('Steins rotation uses the revised PCK model that matches the released pole'
 
 test('Steins reduced mesh retains bounded source fit over independent equal-area rays',async()=>{
  const c=await read('preparation/terrestrial.json'),source=await loadVrmlShape(`${directory}/shape/steins_cart.wrl`,c.geometry.radialTerrain.grid);
- const {faces}=JSON.parse(await readFile('src/planets/steins/prepared/terrain.json','utf8')),scale=2580/c.geometry.radius;
+ const {faces}=JSON.parse(await readFile('src/objects/steins/prepared/terrain.json','utf8')),scale=2580/c.geometry.radius;
  const text=faces.flatMap((f: { vertices: number[][]; })=>f.vertices.map((v: number[])=>'v '+v.map((n: number)=>n*scale).join(' '))).join('\n')+'\n'+faces.map((_:unknown,i: number)=>`f ${i*3+1} ${i*3+2} ${i*3+3}`).join('\n');
  const mesh=parseObjShape(text,{metersPerUnit:1,expectedVertices:faces.length*3,expectedFaces:faces.length}),errors=[];
  for(let y=0;y<40;y++)for(let x=0;x<80;x++){const lon=(x+.37)/80*360,lat=Math.asin(-1+2*(y+.5)/40)*180/Math.PI,a=required(source.sample(lon,lat)),b=required(mesh.sample(lon,lat));assert.notEqual(b,null);errors.push(Math.abs(a-b));}

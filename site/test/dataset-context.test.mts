@@ -10,7 +10,7 @@ const read = async (path: string): Promise<unknown> => JSON.parse(await readFile
 const prepared = parsePreparedSources(await read('../prepared-sources.json'));
 const exploration = parsePreparedExploration(await read('../prepared-machines.json'), prepared.sources);
 const context = async (objectId: string, lensId: string) => datasetContext(objectId, lensId,
-  validateObjectProvenance(await read(`../../src/planets/${objectId}/prepared/provenance.json`), objectId),
+  validateObjectProvenance(await read(`../../src/objects/${objectId}/prepared/provenance.json`), objectId),
   exploration.graph, exploration.catalog, prepared.usage, prepared.sources);
 const ids = (value: Awaited<ReturnType<typeof context>>) => value.sources.flatMap(group => group.links.map(link => link.id));
 

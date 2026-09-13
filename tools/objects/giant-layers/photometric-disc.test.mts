@@ -19,7 +19,7 @@ test('hypothetical Minnaert overlays preserve coverage and do not replace source
  assert.ok(night.data[(8*16+8)*4+3]>day.data[(8*16+8)*4+3]);assert.throws(()=>Reflect.apply(rasterPhotometricDisc, undefined, [config, 2]),/phase/);
 });
 test('invalid photometric recipes and altered source pins fail before writing',async()=>{
- const sourceDirectory=new URL('../../../src/planets/jupiter/source/',import.meta.url).pathname,config=parsePhotometricDiscRecipe(JSON.parse(await readFile(join(sourceDirectory,'preparation/materials.json'),'utf8')));
+ const sourceDirectory=new URL('../../../src/objects/jupiter/source/',import.meta.url).pathname,config=parsePhotometricDiscRecipe(JSON.parse(await readFile(join(sourceDirectory,'preparation/materials.json'),'utf8')));
  for(const change of[
  (c: unknown)=>fixtureRecord(c).rowOutput='../escape-{row}.webp',
  (c: unknown)=>fixtureRecord(c,'shape').polarRadius=0,

@@ -11,7 +11,7 @@ import { resolve } from 'node:path';
 import { readCoraltempAnomaly, anomalyColor } from '../../../../tools/objects/paged-ellipsoid/sst-anomaly.mts';
 import { newestCoraltemp, parseEnsoAdvisory } from '../../../../tools/objects/paged-ellipsoid/refresh-earth-enso.mts';
 
-const source = resolve('src/planets/earth/source');
+const source = resolve('src/objects/earth/source');
 const map=required(config.surface.maps.find(map=>map.name==='earth-enso'));
 const scientific=map.scientific;
 assert.ok(scientific?.kind==='gibs-mur-imagery');

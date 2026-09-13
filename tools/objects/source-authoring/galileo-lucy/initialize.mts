@@ -9,11 +9,11 @@ import {readFile,writeFile,mkdir,readdir} from 'node:fs/promises';import {resolv
 import * as fontkit from 'fontkit';import {createPlanetTitleSource} from '../../../../tools/prepare-planet-title-sources.mts';import {PLANET_TITLE_RECIPE} from '../../../../src/platform/planet-title-recipe.mts';
 import {loadRadialTerrain} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';import {prepareSolidRasters} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';import {renderRadialSnapshot} from '../../../../tools/objects/terrestrial-layers/radial-snapshot.mts';import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 const read=async (p: string): Promise<unknown>=>JSON.parse(await readFile(p,'utf8')),write=async(p: string,o: unknown)=>writeFile(p,JSON.stringify(o,null,2)+'\n'),pin=(b: Uint8Array)=>({expectedBytes:b.length,expectedSha256:createHash('sha256').update(b).digest('hex')});
-const loadedFont=fontkit.openSync('src/planets/dactyl/source/presentation/InterVariable.ttf');
+const loadedFont=fontkit.openSync('src/objects/dactyl/source/presentation/InterVariable.ttf');
 assert('getVariation' in loadedFont);
 const font=loadedFont.getVariation({wght:PLANET_TITLE_RECIPE.weight,opsz:PLANET_TITLE_RECIPE.opticalSize});
 for(const c of bodies){
- const p=resolve('src/planets',c.id),s=resolve(p,'source'),config=parseAuthoringSolid(await read(resolve(s,'preparation/terrestrial.json')));
+ const p=resolve('src/objects',c.id),s=resolve(p,'source'),config=parseAuthoringSolid(await read(resolve(s,'preparation/terrestrial.json')));
  assert.equal(c.name,config.displayName);
  await write(resolve(s,'presentation/title-mark.json'),{schema:'cssearth-title-source@1',...createPlanetTitleSource(c.name,font)});
  const source=await createSourceManifest({planetId:c.id,planetName:c.name,sourceRoot:s});

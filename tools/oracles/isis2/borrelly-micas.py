@@ -13,7 +13,7 @@ import pvl
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fixture import ROOT, samples, write, find
 
-source = ROOT / 'src/planets/comet-19p/source/micas'
+source = ROOT / 'src/objects/comet-19p/source/micas'
 paths = [source / name for name in ['ccd_near_1_ortho.cub', 'dem_x_component.cub', 'dem_y_component.cub', 'dem_z_component.cub']]
 NULL, LOW_REPR, LOW_INSTR, HIGH_INSTR, HIGH_REPR = 0xFF7FFFFB, 0xFF7FFFFC, 0xFF7FFFFD, 0xFF7FFFFE, 0xFF7FFFFF
 cubes = {}

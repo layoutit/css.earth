@@ -27,11 +27,11 @@ test("publisher inventory parsing fails closed on malformed, duplicate and incom
 });
 
 test("the pinned global object inventory binds every published proof source",async()=>{
-  const {pin,entries}=await readWorldCoverCatalog({directory:new URL("../../../../src/planets/earth/source/city/",import.meta.url)});
+  const {pin,entries}=await readWorldCoverCatalog({directory:new URL("../../../../src/objects/earth/source/city/",import.meta.url)});
   assert.equal(entries.size,pin.tileCount);
   const bounds=[...entries.values()].map(entry=>worldCoverTileBounds(entry.tile));
   assert.deepEqual([Math.min(...bounds.map(b=>b.south)),Math.max(...bounds.map(b=>b.north))],shape({latitudeExtent:array(number)})(pin).latitudeExtent);
-  const source=parseCitySource(JSON.parse(await readFile(new URL('../../../../src/planets/earth/source/city/manifest.json',import.meta.url),'utf8')));
+  const source=parseCitySource(JSON.parse(await readFile(new URL('../../../../src/objects/earth/source/city/manifest.json',import.meta.url),'utf8')));
   for(const region of source.regions)for(const entry of region.sources??[region]) {
     const listed=worldCoverSourceEntry(required(entries.get(required(entry.tile))));
     assert.equal(listed.etag,entry.etag);assert.equal(listed.sourceBytes,entry.sourceBytes);assert.equal(listed.url,entry.url);
@@ -39,7 +39,7 @@ test("the pinned global object inventory binds every published proof source",asy
 });
 
 test("source lookup wraps the antimeridian and distinguishes absent tiles from imagery",async()=>{
-  const {entries}=await readWorldCoverCatalog({directory:new URL("../../../../src/planets/earth/source/city/",import.meta.url)});
+  const {entries}=await readWorldCoverCatalog({directory:new URL("../../../../src/objects/earth/source/city/",import.meta.url)});
   const crossing=sourceTilesForBounds({west:179.5,east:180.5,south:-17,north:-16},entries);
   assert.deepEqual(crossing.available.map(e=>e.tile),['S17E179','S17W180']);
   assert.deepEqual(crossing.unavailable,[]);
@@ -52,8 +52,8 @@ test("source lookup wraps the antimeridian and distinguishes absent tiles from i
 });
 
 test('global source-window planning uses the accepted faces and reproduces all pinned regions',async()=>{
-  const {entries}=await readWorldCoverCatalog({directory:new URL("../../../../src/planets/earth/source/city/",import.meta.url)});
-  const source=parseCitySource(JSON.parse(await readFile(new URL('../../../../src/planets/earth/source/city/manifest.json',import.meta.url),'utf8')));
+  const {entries}=await readWorldCoverCatalog({directory:new URL("../../../../src/objects/earth/source/city/",import.meta.url)});
+  const source=parseCitySource(JSON.parse(await readFile(new URL('../../../../src/objects/earth/source/city/manifest.json',import.meta.url),'utf8')));
   assert.equal(cityCoverageRoots().length,PREPARED_EARTH_SCENE.body.bands.reduce((sum,band)=>sum+band.leaves.length,0));
   for(const region of source.regions) {
     const jobs=[...planCityCoverage(PREPARED_EARTH_SCENE,entries,[region.root])];
@@ -70,7 +70,7 @@ test('global source-window planning uses the accepted faces and reproduces all p
 });
 
 test('absent source tiles require exact publisher evidence and cannot hide missing or failed sources',async()=>{
-  const {entries}=await readWorldCoverCatalog({directory:new URL("../../../../src/planets/earth/source/city/",import.meta.url)});
+  const {entries}=await readWorldCoverCatalog({directory:new URL("../../../../src/objects/earth/source/city/",import.meta.url)});
   const bounds={west:44.99,east:45.01,south:.25,north:.26};
   const coverage=sourceTilesForBounds(bounds,entries);
   const region={id:'catalog-gap',sources:coverage.available,unavailableTiles:coverage.unavailable};

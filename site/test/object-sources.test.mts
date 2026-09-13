@@ -6,7 +6,7 @@ import { objectSources } from '../object-sources.mts';
 import { productSourceIds, validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 
 const read = async (id: string) => {
-  const document = validateObjectProvenance(JSON.parse(await readFile(new URL(`../../src/planets/${id}/prepared/provenance.json`, import.meta.url), 'utf8')), id);
+  const document = validateObjectProvenance(JSON.parse(await readFile(new URL(`../../src/objects/${id}/prepared/provenance.json`, import.meta.url), 'utf8')), id);
   return { ...document, sources: document.sources.map(source => ({ ...source })) };
 };
 

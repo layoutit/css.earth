@@ -17,7 +17,7 @@ import { verifyDepthStyles } from './prepared-depth-styles.mts';
  * explicit animation handles and planes, never a live style discovery pass. */
 export async function preparePresentationBindings<T extends PresentationSource>(input: T, root: string, { onDepthResult }: {onDepthResult?: (result: DepthResult) => void} = {}) {
   const definition = restoreDepthSource(input);
-  const descriptor: unknown = JSON.parse(await readFile(resolve(root, 'src/planets', definition.id, 'object.json'), 'utf8'));
+  const descriptor: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', definition.id, 'object.json'), 'utf8'));
   const styles = await Promise.all(objectPageStyles(descriptor).map(path => readFile(resolve(root, path), 'utf8')));
   const browser = await chromium.launch({ headless: true });
   try {

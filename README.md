@@ -117,7 +117,7 @@ package; CSS compilation and file/image I/O stay in application adapters.
 The recipe selects each body's supported capabilities.
 
 ```text
-src/planets/<id>/
+src/objects/<id>/
 ├── object.json                  Pinned capability recipe and transport digest
 ├── source/                      Authored JSON, scientific inputs and provenance
 ├── prepared/                    Baked JSON, committed for clean checkouts
@@ -217,14 +217,14 @@ object-owned NASA and JPL sources, without adding another registry entry here.
 cssEarth source code is [MIT licensed](LICENSE). Scientific data, imagery, and
 prepared derivatives retain the terms and attribution of their respective
 sources. See the planet-owned
-[Mars](src/planets/mars/README.md) and
-[Saturn](src/planets/saturn/README.md) source records for exact provenance,
+[Mars](src/objects/mars/README.md) and
+[Saturn](src/objects/saturn/README.md) source records for exact provenance,
 presentation limits, and credits. NASA and other source credits do not imply
 endorsement.
 
 ## Contributing scientific data and evidence
 
-Start with [adding a body](src/planets/README.md), the
+Start with [adding a body](src/objects/README.md), the
 [provenance and documentation contract](docs/provenance/CONTRACT.md), and the
 [repository-owned celestial skill](.agents/skills/celestial-skill/SKILL.md).
 The [documentation index](docs/README.md) separates maintained guidance from

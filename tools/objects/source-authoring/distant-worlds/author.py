@@ -20,12 +20,12 @@ def pin(path):
     return dict(expectedBytes=len(data), expectedSha256=hashlib.sha256(data).hexdigest())
 
 def current(path, body):
-    return json.loads((ROOT / 'src/planets' / body['id'] / path).read_text())
+    return json.loads((ROOT / 'src/objects' / body['id'] / path).read_text())
 
 # Source identities are authored in the current package before extraction.
 reviewed = {}
 for body in INPUTS['bodies']:
-    path = ROOT / 'src/planets' / body['id'] / 'source/manifest.json'
+    path = ROOT / 'src/objects' / body['id'] / 'source/manifest.json'
     if not path.exists():
         raise ValueError(f'Author source identities and bindings in {path} before extracting a new body.')
     manifest = json.loads(path.read_text())
@@ -41,7 +41,7 @@ for body in INPUTS['bodies']:
 
 for body in INPUTS['bodies']:
     ident, name, radius = body['id'], body['name'], body['radiusKm']
-    package = ROOT / 'src/planets' / ident
+    package = ROOT / 'src/objects' / ident
     source = package / 'source'
     description = body['shapeMeaning'] + ' ' + body['orientationMeaning'] + ' The grid marks unmapped terrain.'
     config = current('source/preparation/terrestrial.json', body)
@@ -109,7 +109,7 @@ for body in INPUTS['bodies']:
     for file in ['material/neutral.png','stars/eso0932a.tif','presentation/InterVariable.ttf']:
         target=source/file
         if not target.exists():
-            available=ROOT/'src/planets/annefrank/source'/file
+            available=ROOT/'src/objects/annefrank/source'/file
             if not available.exists(): raise FileNotFoundError(f'Restore common input: {available}')
             target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(available,target)

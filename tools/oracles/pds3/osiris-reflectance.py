@@ -11,7 +11,7 @@ import pvl
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fixture import ROOT, samples, write, find, label_text
 
-path = ROOT / 'src/planets/steins/source/observations/w20080905t183606461id4df17.img'
+path = ROOT / 'src/objects/steins/source/observations/w20080905t183606461id4df17.img'
 DTYPES = {'PC_REAL': '<f4', 'LSB_UNSIGNED_INTEGER': 'u1'}
 label = pvl.load(str(path)); record = int(find(label, 'RECORD_BYTES')); raw = np.fromfile(str(path), dtype='u1')
 planes = {}

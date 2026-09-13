@@ -10,7 +10,7 @@ for(const c of candidates){
  const et=await horizons(query,`comet-elements-${c.id}`),row=parseElements(et,c.id)[0];
  const vt=await horizons(vectorQuery,`comet-vectors-${c.id}`),vectors=parseVectors(vt,c.id);
  const elements={epochJdTt:epoch,semiMajorAxisKm:row.semiMajorAxisKm,eccentricity:row.eccentricity,inclinationRad:row.inclinationDeg*rad,ascendingNodeRad:row.nodeDeg*rad,argumentOfPeriapsisRad:row.periapsisDeg*rad,meanAnomalyAtEpochRad:row.meanAnomalyDeg*rad,meanMotionRadPerDay:row.meanMotionDegPerDay*rad};
- const s=`src/planets/${c.id}/source/reference`;await mkdir(s,{recursive:true});
+ const s=`src/objects/${c.id}/source/reference`;await mkdir(s,{recursive:true});
  await writeFile(`${s}/horizons-elements.txt`,`# ${query}\n${et}`);await writeFile(`${s}/horizons-vectors.txt`,`# ${vectorQuery}\n${vt}`);
  const distanceAu=Math.hypot(...vectors[1].position)/149597870.7;
  records.push({...c,command,record:{query,elements},fixture:{query:vectorQuery,rows:vectors},distanceAu,perihelionAu:row.semiMajorAxisKm*(1-row.eccentricity)/149597870.7});

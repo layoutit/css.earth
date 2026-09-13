@@ -13,7 +13,7 @@ const preparedControls = (value: unknown) => parse(value, object({ controls: obj
 
 test("asteroid, trans-Neptunian and comet Shadows default off in authored content and prepared runtime", async () => {
   for (const { id } of OBJECTS.filter(object => ["asteroid", "trans-neptunian", "comet", "interstellar"].includes(object.classification))) {
-    const source = preparedControls({ controls: JSON.parse(await readFile(new URL(`../../src/planets/${id}/source/content/object.json`, import.meta.url), "utf8")) });
+    const source = preparedControls({ controls: JSON.parse(await readFile(new URL(`../../src/objects/${id}/source/content/object.json`, import.meta.url), "utf8")) });
     const prepared = preparedControls(await loadObjectTestDefinition(id));
     for (const [stage, settings] of [["authored", source.settings], ["prepared", prepared.settings]] as const) {
       assert.deepEqual(settings.controls.filter(control => control.name === "shadows"),

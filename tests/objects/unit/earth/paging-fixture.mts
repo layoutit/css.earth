@@ -4,7 +4,7 @@ import { requireObjectRuntimeDefinition } from '../../../../tools/object-runtime
 
 // Optional paging conformance uses the retained prepared city/noise plans.
 // The current Earth registry intentionally mounts its fixed global dataset.
-const root = new URL('../../../../src/planets/earth/', import.meta.url);
+const root = new URL('../../../../src/objects/earth/', import.meta.url);
 const read = async (path: string) => requireRecord(JSON.parse(await readFile(new URL(path, root), 'utf8')));
 const earth = requireObjectRuntimeDefinition(await read('prepared/runtime.json'));
 const config = await read('source/preparation/paged-ellipsoid.json');

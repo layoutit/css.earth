@@ -25,7 +25,7 @@ export function overviewMeasurements(object: Pick<ObjectEntry, 'worldFrame' | 'd
 // Runs in Astro's preparation/build process; the browser receives only HTML and an image.
 export async function prepareBodyOverview(objectId: string) {
   const object = requireObject(objectId);
-  const sourceDirectory = resolve(root, 'src/planets', objectId, 'source');
+  const sourceDirectory = resolve(root, 'src/objects', objectId, 'source');
   const presentationPath = resolve(sourceDirectory, 'presentation/overview.json');
   const presentation: unknown = existsSync(presentationPath) ? JSON.parse(await readFile(presentationPath, 'utf8')) : {};
   if (!record(presentation) || (presentation.classificationLabel !== undefined && typeof presentation.classificationLabel !== 'string')) throw new TypeError('Invalid object overview presentation.');

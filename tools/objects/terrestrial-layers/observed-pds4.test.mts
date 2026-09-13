@@ -5,7 +5,7 @@ import { validatePds4ObservationPolicy, readPds4ColorLabel, decodePds4Color, map
 import {linearToSrgb} from '../color-transfer.mts';
 
 // This test reads only the small pinned label, never an ignored image.
-const label = readFileSync(new URL('../../../src/planets/charon/source/observations/nh_charon_color_mosaic.lblx', import.meta.url), 'utf8');
+const label = readFileSync(new URL('../../../src/objects/charon/source/observations/nh_charon_color_mosaic.lblx', import.meta.url), 'utf8');
 const radius = 2 / Math.PI;
 const small = label.replace('<elements>1904</elements>', '<elements>2</elements>').replace('<elements>3808</elements>', '<elements>4</elements>')
   .replaceAll('>606000<', `>${radius}<`).replaceAll('>1000<', '>1<').replaceAll('>10.576695267086<', `>${1 / 90}<`)

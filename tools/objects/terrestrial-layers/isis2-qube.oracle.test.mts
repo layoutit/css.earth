@@ -8,7 +8,7 @@ import { requireRecord, requireFiniteNumber } from '../../source-values.mts';
 
 /** pvl and numpy as the oracle for the ISIS2 QUBE reader over Borrelly's MICAS orthographic image and DEM components. */
 const fixture = await readOracleFixture('isis2/borrelly-micas.json');
-const config = JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/planets/comet-19p/source/preparation/terrestrial.json'), 'utf8'));
+const config = JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/objects/comet-19p/source/preparation/terrestrial.json'), 'utf8'));
 const recipe = config.raster.surfaceObservations[0];
 const cubes = requireRecord(fixture.cases.cubes);
 

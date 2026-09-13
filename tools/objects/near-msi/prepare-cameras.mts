@@ -5,7 +5,7 @@ import { array, number, shape, text } from '../terrestrial-layers/source-records
 import { mathildeImageCamera, decodeNearMsi } from '../terrestrial-layers/near-msi.mts';
 import { pds4Field } from '../pds-labels.mts';
 
-const source = resolve(process.argv[2] ?? 'src/planets/mathilde/source');
+const source = resolve(process.argv[2] ?? 'src/objects/mathilde/source');
 const profilePath = 'preparation/near-msi.json';
 const profile = shape({ mesh: text, imageGeometry: text, references: array(text), frames: array(shape({
   met: number, filter: text, image: text, raw: text, label: text, output: text,
