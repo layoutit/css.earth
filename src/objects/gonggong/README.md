@@ -31,9 +31,7 @@ The [shared checks](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe9
 <details>
 <summary>Source survey and model selection</summary>
 
-- **Selected:** The 2019 model incorporates satellite-orbit constraints.
-- **Superseded size:** The [earlier equator-on estimate](https://arxiv.org/abs/1603.03090), **1535 +75/−225 km**, was revisited after those constraints and is not the selected diameter.
-- **Excluded from the surface:** [Integrated JWST composition](https://doi.org/10.1016/j.icarus.2024.116017) is not a registered photographic texture.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 </details>
 

@@ -20,7 +20,7 @@ The grid marks missing visible-light imagery; it is not surface color, albedo or
 
 Model XYZ is retained, with longitude `atan2(y,x)` and latitude `asin(z/r)`. The mesh download does not include its fitted rotational phase, prime-meridian epoch or per-observation camera solution. A numerical pole from another fit cannot establish this release’s cartographic registration. The application’s physical orientation is therefore an explicitly approximate presentation, not a recovered absolute mesh attitude. Hydra rotates nonsynchronously; a synchronous Pluto-facing orientation would be incorrect.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 <a id="hydra-sources-and-interpretation"></a>
 <a id="dataset-survey"></a>

@@ -32,10 +32,7 @@ The [shared checks](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe9
 <details>
 <summary>Source survey and model selection</summary>
 
-- **Selected:** The 2026 triaxial example was the most recent qualified numerical fit found in the source survey. Its depth degeneracy is retained.
-- **Older interpretation:** The 2020 study offered several Maclaurin interpretations. If spin and satellite orbit are aligned, the 2026 study rules out the older mirror-orbit interpretation supporting the spheroidal fit.
-- **Excluded as surface data:** [Astrometry and occultation light curves](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/643/A125) are unresolved time series; they imply neither a spatial surface mosaic nor additional terrain.
-- **Excluded from runtime:** [Published occult3d analysis software](https://github.com/benp175/occult3d). The existing ellipsoid preparer consumes the published numbers; it introduces no new fitting or rendering technique.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 </details>
 

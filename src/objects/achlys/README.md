@@ -33,8 +33,7 @@ The [shared checks](https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe9
 <details>
 <summary>Source survey and model selection</summary>
 
-- **Selected:** The paper’s stated model dimensions are used through the existing ellipsoid recipe.
-- **Excluded from the surface:** The [JWST/NIRSpec spectrum of 2003 AZ84](https://doi.org/10.1051/0004-6361/202346998) explicitly treats the target as spatially unresolved. A spectrum cannot become registered surface texels.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 </details>
 

@@ -55,10 +55,7 @@ All lenses retain the generic Shadows control. The native triangle atlases conta
 
 **Dataset survey**
 
-- **Included:** original PDS ISS calibrated frames plus the model release's registered viewing geometry. The 2017 closest-flyby images provide the strongest available detail in the qualified footprint.
-- **Included:** PDS plate model, supplying both real geometry and the complementary radial-height view.
-- **Excluded as duplicate imagery:** NASA press portraits ([Atlas overview](https://science.nasa.gov/saturn/moons/atlas/)) reuse the Cassini observations; directly calibrated frames preserve their original coordinates and numerical pixels.
-- **Not selected:** the USGS/DLR standard Cassini global-mosaic series does not supply a downloadable registered Atlas map in the inspected release. Papers on these small moons provide regional geological and compositional interpretation; no corresponding global scalar raster was identified for this package. This is a bounded survey, not a claim that no further data exists.
+Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
 **Orientation, content and credits**
 
