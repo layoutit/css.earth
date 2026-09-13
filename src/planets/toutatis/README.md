@@ -18,6 +18,15 @@ The source is based on radar observations in 1992 and 1996, with nominal average
 
 Toutatis has non-principal-axis tumbling, with characteristic rotation and precession periods around 5.4 and 7.4 days. The existing `cssearth-display-orientation@1` recipe deliberately uses a fixed arbitrary frame, zero propagated spin and illustrative lighting. It does not apply a linear rotation period or claim a present-day attitude. The [2015 rotational analysis](https://arxiv.org/html/1511.04357) gives a measured flyby attitude and dynamics; no current attitude propagation is derived from it here.
 
+The Chang’e-2 photograph route was checked again on 2026-09-13.
+[Huang et al. (2013)](https://doi.org/10.1038/srep03411) and its supplement give
+camera dimensions and a radar-model attitude comparison, but no complete
+per-frame camera registration for this mesh. That article's CC BY-NC-ND terms
+also exclude a modified texture derivative. [Jiang et al. (2015)](https://doi.org/10.1038/srep16029)
+provides photographs under CC BY 4.0, but its annotated figure is not a released
+registered raster. Reuse permission and shape registration are separate gaps;
+neither a silhouette match nor a flyby attitude alone resolves the latter.
+
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="toutatis-source-and-presentation"></a>

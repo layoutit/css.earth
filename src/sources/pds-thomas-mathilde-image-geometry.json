@@ -1,0 +1,29 @@
+{
+  "id": "pds-thomas-mathilde-image-geometry",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Mathilde \u00b7 Thomas reconstructed NEAR image geometry",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:ast-sat.thomas.shape-models:data:253mathimg_tab::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathimg.xml",
+      "label": "PDS image geometry table"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathimg.xml",
+      "checkedOn": "2026-09-13",
+      "locator": "25 rows: MET, spacecraft and Sun latitude/longitude, range, north azimuth, projected centre and camera code."
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "version": "1.0"
+}

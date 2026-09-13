@@ -80,6 +80,42 @@
       ],
       "path": "features/RYUGU_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RYUGU_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "maps/hyb2_onc_20181003_MSC_l3dm_v06.tif",
+      "url": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/03_HighResolution/hyb2_onc_20181003_MSC_l3dm_v06.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "maps/Thermal_Inertia_Map.tif",
+      "url": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/07_Thermal_Inertia/Thermal_Inertia_Map.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "maps/b-x_Slope_Map.tif",
+      "url": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/06_b-x_slope/b-x_Slope_Map.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/hyb2_onc_20181003_MSC_l3dm_v06.lblx",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_iof_map/vband/hyb2_onc_20181003_MSC_l3dm_v06.lblx"
     }
   ]
 }

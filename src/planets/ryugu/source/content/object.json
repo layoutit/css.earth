@@ -124,6 +124,85 @@
         },
         "detail": "Shape-derived height",
         "summary": "Height relative to a 448 m sphere, from the shape model. Colors include Ryugu's broad form; the outline is simplified."
+      },
+      {
+        "id": "close-up",
+        "label": "Equatorial close-up",
+        "title": "Hayabusa2 ONC MASCOT-operation I/F mosaic",
+        "detail": "ONC-T · 3–4 Oct 2018",
+        "description": "Images taken by Hayabusa2 during MASCOT deployment show boulders across Ryugu’s equatorial strip. The original sampling is about 28 cm per pixel; the display is coarser. Brightness includes the illumination when the photographs were taken. The grid marks gaps and the unobserved poles.",
+        "summary": "Images taken by Hayabusa2 during MASCOT deployment show boulders across Ryugu’s equatorial strip. The original sampling is about 28 cm per pixel; the display is coarser. Brightness includes the illumination when the photographs were taken. The grid marks gaps and the unobserved poles.",
+        "thumbnail": "/scenes/ryugu/ryugu-close-up-thumbnail.webp",
+        "surface": "ryugu-close-up-surface@2x.webp",
+        "poles": "ryugu-close-up-surface@2x.webp",
+        "source": {
+          "id": "ryugu-close-up",
+          "path": "../manifest.json",
+          "url": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/"
+        },
+        "falseColor": false
+      },
+      {
+        "id": "thermal-inertia",
+        "label": "Thermal inertia",
+        "title": "Hayabusa2 TIR thermal inertia map",
+        "detail": "TIR · model-derived",
+        "description": "False colors show how slowly the surface heats and cools, inferred from a thermal model fitted to Hayabusa2 observations. Higher values mean slower temperature changes. This is a thermal property, not a temperature map. The underlying observations sampled roughly 4.5 m per pixel; the finer map grid adds no measured detail. The grid marks missing values.",
+        "summary": "False colors show how slowly the surface heats and cools, inferred from a thermal model fitted to Hayabusa2 observations. Higher values mean slower temperature changes. This is a thermal property, not a temperature map. The underlying observations sampled roughly 4.5 m per pixel; the finer map grid adds no measured detail. The grid marks missing values.",
+        "thumbnail": "/scenes/ryugu/ryugu-thermal-inertia-thumbnail.webp",
+        "surface": "ryugu-thermal-inertia-surface@2x.webp",
+        "poles": "ryugu-thermal-inertia-poles@2x.webp",
+        "source": {
+          "id": "ryugu-thermal-inertia",
+          "path": "../manifest.json",
+          "url": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Thermal inertia",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0",
+            "200",
+            "400"
+          ],
+          "meta": "J m⁻² K⁻¹ s⁻½",
+          "sourceUrl": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
+          "image": "/scenes/ryugu/ryugu-thermal-inertia-legend.webp"
+        }
+      },
+      {
+        "id": "spectral-slope",
+        "label": "Spectral slope",
+        "title": "Hayabusa2 ONC b–x spectral slope map",
+        "detail": "ONC-T · normal-albedo spectral slope",
+        "description": "False colors show the change in reflectance from blue to near-infrared light (b–x bands). Positive values mean a redder spectrum; negative values mean bluer. This does not measure terrain slope or identify minerals. The source’s saturated ±1 endpoints are withheld, and the grid marks those pixels. Polar mapping artifacts remain.",
+        "summary": "False colors show the change in reflectance from blue to near-infrared light (b–x bands). Positive values mean a redder spectrum; negative values mean bluer. This does not measure terrain slope or identify minerals. The source’s saturated ±1 endpoints are withheld, and the grid marks those pixels. Polar mapping artifacts remain.",
+        "thumbnail": "/scenes/ryugu/ryugu-spectral-slope-thumbnail.webp",
+        "surface": "ryugu-spectral-slope-surface@2x.webp",
+        "poles": "ryugu-spectral-slope-poles@2x.webp",
+        "source": {
+          "id": "ryugu-spectral-slope",
+          "path": "../manifest.json",
+          "url": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Spectral slope",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-0.148",
+            "0",
+            "0.148"
+          ],
+          "meta": "µm⁻¹",
+          "sourceUrl": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
+          "image": "/scenes/ryugu/ryugu-spectral-slope-legend.webp"
+        }
       }
     ]
   },

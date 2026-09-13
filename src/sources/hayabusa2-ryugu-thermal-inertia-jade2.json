@@ -1,0 +1,33 @@
+{
+  "id": "hayabusa2-ryugu-thermal-inertia-jade2",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Hayabusa2 TIR thermal inertia map",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/07_Thermal_Inertia/Thermal_Inertia_Map.tif"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
+      "label": "JAXA JADE2 maps"
+    },
+    {
+      "role": "original",
+      "url": "https://data.darts.isas.jaxa.jp/pub/hayabusa2/products/07_Thermal_Inertia/Thermal_Inertia_Map.tif",
+      "label": "Original numeric GeoTIFF"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
+      "locator": "Thermal inertia",
+      "checkedOn": "2026-09-13"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

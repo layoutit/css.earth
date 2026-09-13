@@ -18,6 +18,14 @@ No dated test report is cited in the existing source notes.
 
 - Original closed scientific mesh and registered surface mosaic were not located in the checked Stardust archive.
 
+The [Stryk and Stooke (2016) partial map](https://www.hou.usra.edu/meetings/lpsc2016/pdf/1148.pdf)
+is a promising alternative, checked 2026-09-13. Its authors corrected mirrored
+Stardust images, removed scattered light and stacked frames. Figure 4 uses
+tentative ellipsoid control, not a high-precision shape solution. The figure
+does not supply labelled longitude bounds or a reusable raster release with
+clear derivative terms. It is not yet registered to this display ellipsoid;
+the map's existence does not qualify a surface texture here.
+
 - The reported 6.6 × 5.0 × 3.4 km dimensions are minimum extents from limited viewing, not three exact global axis measurements.
 
 - The real body has angular surfaces that this preliminary ellipsoid does not reproduce.
