@@ -209,6 +209,7 @@ export const parsePhasePhotometry = shape({model:text,asymmetry:number,amplitude
  * their label identifiers, the archive identity and DSK to bind, and optional FITS header expectations. */
 export const parseGeometryCube = shape({collection:text,target:text,observingSystem:array(text),shapeKernel:optional(text),quantity:text,
   planes:shape({image:text,x:text,y:text,z:text,incidence:text,emission:text,phase:text,pixelScale:optional(array(text))}),
+  geometrySelection:optional(shape({plane:text,unit:text,minimum:number,maximum:number,interpretation:text})),
   header:optional(dictionary(text)),headerTime:optional(text),headerPlaneNames:optional(shape({prefix:text,names:dictionary(text)}))});
 export type GeometryCubeDeclaration = ReturnType<typeof parseGeometryCube>;
 /** A camera derived from SPICE kernels for an image without archived geometry: the kernel set in load order, the SPK ids and

@@ -1,0 +1,750 @@
+{
+  "body": "dimorphos",
+  "faces": 800,
+  "samplesPerTriangle": 64,
+  "areaCoverage": 0.18076602713826373,
+  "frameAreaFractions": {
+    "t-minus-11s": 0.020019876358788855,
+    "t-minus-6-6s": 0.07574874089638968,
+    "t-minus-4-7s": 0.07360532896819615,
+    "t-minus-1-8s": 0.011392080914880925
+  },
+  "counts": {
+    "no-qualified-observation": 33655,
+    "accepted": 17545
+  },
+  "report": {
+    "camera": {
+      "matrix": [
+        [
+          -147821.95073059178,
+          -2995.6890402173312,
+          -137080.77678984447,
+          3055.543614050569
+        ],
+        [
+          132580.63105121636,
+          48275.68393872336,
+          -144026.1055651641,
+          10366.96605582658
+        ],
+        [
+          -0.17276384549655352,
+          0.9715104282708029,
+          0.16223483426910515,
+          11.225529444508693
+        ]
+      ],
+      "positionKm": [
+        1.9238270811875233,
+        -10.90970205900977,
+        -1.813866680128402
+      ],
+      "fitPixels": 1464,
+      "holdoutPixels": 260680,
+      "maximumResidualPixels": 0.000196418810455344,
+      "rmsResidualPixels": 0.00004290637412997224
+    },
+    "frames": [
+      {
+        "id": "t-minus-1-8s",
+        "startTime": "2022-09-26T23:14:22.365Z",
+        "filter": "unfiltered",
+        "camera": {
+          "matrix": [
+            [
+              -147821.95073059178,
+              -2995.6890402173312,
+              -137080.77678984447,
+              3055.543614050569
+            ],
+            [
+              132580.63105121636,
+              48275.68393872336,
+              -144026.1055651641,
+              10366.96605582658
+            ],
+            [
+              -0.17276384549655352,
+              0.9715104282708029,
+              0.16223483426910515,
+              11.225529444508693
+            ]
+          ],
+          "positionKm": [
+            1.9238270811875233,
+            -10.90970205900977,
+            -1.813866680128402
+          ],
+          "fitPixels": 1464,
+          "holdoutPixels": 260680,
+          "maximumResidualPixels": 0.000196418810455344,
+          "rmsResidualPixels": 0.00004290637412997224
+        },
+        "sourceCoverage": {
+          "geometryPixels": 262144,
+          "qualityRejectedPixels": 0,
+          "photometryRejectedPixels": 7926,
+          "acceptedPixels": 254218,
+          "acceptedLossyPixels": 0
+        },
+        "quality": {
+          "units": "I/F",
+          "product": "urn:nasa:pds:dart:data_dracoddp:dart_0401930049_43695_01_geo",
+          "target": "(65803) Didymos I (Dimorphos)",
+          "observingSystem": [
+            "DART:Host",
+            "DRACO:Instrument"
+          ],
+          "filter": "unfiltered",
+          "shapeKernel": "dimorphos_g_00243mm_spc_0000n00000_v004.bds",
+          "spiceKernels": 22,
+          "planes": {
+            "image": "ioverf",
+            "x": "xcoord",
+            "y": "ycoord",
+            "z": "zcoord",
+            "incidence": "incidence",
+            "emission": "emission",
+            "phase": "phase"
+          },
+          "planeUnits": {
+            "image": null,
+            "x": "km",
+            "y": "km",
+            "z": "km",
+            "incidence": "deg",
+            "emission": "deg",
+            "phase": "deg"
+          },
+          "specialConstants": {
+            "image": {
+              "missing_constant": 10000000000,
+              "not_applicable_constant": -10000000000,
+              "high_instrument_saturation": 1000000000
+            },
+            "x": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "y": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "z": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "incidence": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "emission": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "phase": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            }
+          },
+          "flagDefinition": "Geometry-backed pixels need finite intercepts, angles and image values outside every gap and range constant of their plane; image saturation constants keep geometry but are rejected as quality.",
+          "geometryPixels": 262144,
+          "saturatedPixels": 0,
+          "medianPhaseDegrees": 60.56918865394596,
+          "minimumEmissionDegrees": 0.3028765745337232,
+          "nadirPixelFootprintMeters": 0.055615223552361884,
+          "archivedPixelScaleMedianMeters": 3.1680338382720947,
+          "archivedPixelScaleRatio": 56.963429002301545,
+          "archivedPixelScalePolicy": "Not used for sampling or display; reported against the intercept-derived footprint.",
+          "geometry": "Archived pixel-centre surface intercepts on dimorphos_g_00243mm_spc_0000n00000_v004.bds from the label's SPICE kernels; the controlled camera is recovered from those pairs and every displayed intersection is re-derived on the retained source mesh."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3,
+          "formula": "D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.",
+          "applicationLighting": "Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.",
+          "limitations": "No phase correction, Hapke roughness correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ],
+          "low": 0.025428483998368223,
+          "high": 0.10772004630911336,
+          "units": "relative disk-normalized I/F; linear grayscale display"
+        },
+        "sourceIds": [
+          {
+            "id": "draco-0401930049-43695-geo",
+            "sha256": "d8b2171b610235dced9306b01bcf2c6dbfb9317693457b441cdb36678a9ab629"
+          },
+          {
+            "id": "draco-0401930049-43695-label",
+            "sha256": "3085249f3334090f2227c30cf4037be88d82ddef78e4c79edebaf94c1ad27fee"
+          }
+        ],
+        "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+      },
+      {
+        "id": "t-minus-4-7s",
+        "startTime": "2022-09-26T23:14:19.477Z",
+        "filter": "unfiltered",
+        "camera": {
+          "matrix": [
+            [
+              -148081.479420578,
+              -3094.197860741702,
+              -137353.84449275568,
+              11785.107877356915
+            ],
+            [
+              132817.33150566346,
+              48432.68410293899,
+              -144283.83211937663,
+              22486.70603330772
+            ],
+            [
+              -0.17346400067026477,
+              0.9714287004534482,
+              0.16197691319071084,
+              28.97846991657596
+            ]
+          ],
+          "positionKm": [
+            5.011059405970383,
+            -28.15522633923284,
+            -4.68237451736932
+          ],
+          "fitPixels": 1465,
+          "holdoutPixels": 260679,
+          "maximumResidualPixels": 0.0002773312130641524,
+          "rmsResidualPixels": 0.00003872014933474034
+        },
+        "sourceCoverage": {
+          "geometryPixels": 262144,
+          "qualityRejectedPixels": 0,
+          "photometryRejectedPixels": 19075,
+          "acceptedPixels": 243069,
+          "acceptedLossyPixels": 0
+        },
+        "quality": {
+          "units": "I/F",
+          "product": "urn:nasa:pds:dart:data_dracoddp:dart_0401930046_49265_01_geo",
+          "target": "(65803) Didymos I (Dimorphos)",
+          "observingSystem": [
+            "DART:Host",
+            "DRACO:Instrument"
+          ],
+          "filter": "unfiltered",
+          "shapeKernel": "dimorphos_g_00243mm_spc_0000n00000_v004.bds",
+          "spiceKernels": 22,
+          "planes": {
+            "image": "ioverf",
+            "x": "xcoord",
+            "y": "ycoord",
+            "z": "zcoord",
+            "incidence": "incidence",
+            "emission": "emission",
+            "phase": "phase"
+          },
+          "planeUnits": {
+            "image": null,
+            "x": "km",
+            "y": "km",
+            "z": "km",
+            "incidence": "deg",
+            "emission": "deg",
+            "phase": "deg"
+          },
+          "specialConstants": {
+            "image": {
+              "missing_constant": 10000000000,
+              "not_applicable_constant": -10000000000,
+              "high_instrument_saturation": 1000000000
+            },
+            "x": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "y": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "z": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "incidence": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "emission": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "phase": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            }
+          },
+          "flagDefinition": "Geometry-backed pixels need finite intercepts, angles and image values outside every gap and range constant of their plane; image saturation constants keep geometry but are rejected as quality.",
+          "geometryPixels": 262144,
+          "saturatedPixels": 0,
+          "medianPhaseDegrees": 60.560896804293556,
+          "minimumEmissionDegrees": 0.06728794211371118,
+          "nadirPixelFootprintMeters": 0.1437904896831459,
+          "archivedPixelScaleMedianMeters": 8.199224472045898,
+          "archivedPixelScaleRatio": 57.022022041329436,
+          "archivedPixelScalePolicy": "Not used for sampling or display; reported against the intercept-derived footprint.",
+          "geometry": "Archived pixel-centre surface intercepts on dimorphos_g_00243mm_spc_0000n00000_v004.bds from the label's SPICE kernels; the controlled camera is recovered from those pairs and every displayed intersection is re-derived on the retained source mesh."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3,
+          "formula": "D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.",
+          "applicationLighting": "Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.",
+          "limitations": "No phase correction, Hapke roughness correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ],
+          "low": 0.023128736806615275,
+          "high": 0.08283576721550788,
+          "units": "relative disk-normalized I/F; linear grayscale display"
+        },
+        "sourceIds": [
+          {
+            "id": "draco-0401930046-49265-geo",
+            "sha256": "d16f3b899ee14588f0ee89abf60babe85c5b1dc8f1d2203f322c3db980c68443"
+          },
+          {
+            "id": "draco-0401930046-49265-label",
+            "sha256": "bea15e0e21e86f9e41a30013fe9d58241d1d827638e0007b2ebd44b812c15319"
+          }
+        ],
+        "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+      },
+      {
+        "id": "t-minus-6-6s",
+        "startTime": "2022-09-26T23:14:17.551Z",
+        "filter": "unfiltered",
+        "camera": {
+          "matrix": [
+            [
+              -148112.15101597985,
+              -3164.2401515914876,
+              -137418.9645012403,
+              16688.034223548864
+            ],
+            [
+              132859.3279946735,
+              48503.10085012331,
+              -144316.70000057563,
+              31027.503406461423
+            ],
+            [
+              -0.1737610676461024,
+              0.9713895600061861,
+              0.1618932181454018,
+              40.81764789717255
+            ]
+          ],
+          "positionKm": [
+            7.079023821646663,
+            -39.65437674724509,
+            -6.595344705830261
+          ],
+          "fitPixels": 1363,
+          "holdoutPixels": 242438,
+          "maximumResidualPixels": 0.00024225216692492894,
+          "rmsResidualPixels": 0.00004220904430162961
+        },
+        "sourceCoverage": {
+          "geometryPixels": 243801,
+          "qualityRejectedPixels": 0,
+          "photometryRejectedPixels": 38122,
+          "acceptedPixels": 205679,
+          "acceptedLossyPixels": 0
+        },
+        "quality": {
+          "units": "I/F",
+          "product": "urn:nasa:pds:dart:data_dracoddp:dart_0401930045_02979_01_geo",
+          "target": "(65803) Didymos I (Dimorphos)",
+          "observingSystem": [
+            "DART:Host",
+            "DRACO:Instrument"
+          ],
+          "filter": "unfiltered",
+          "shapeKernel": "dimorphos_g_00243mm_spc_0000n00000_v004.bds",
+          "spiceKernels": 22,
+          "planes": {
+            "image": "ioverf",
+            "x": "xcoord",
+            "y": "ycoord",
+            "z": "zcoord",
+            "incidence": "incidence",
+            "emission": "emission",
+            "phase": "phase"
+          },
+          "planeUnits": {
+            "image": null,
+            "x": "km",
+            "y": "km",
+            "z": "km",
+            "incidence": "deg",
+            "emission": "deg",
+            "phase": "deg"
+          },
+          "specialConstants": {
+            "image": {
+              "missing_constant": 10000000000,
+              "not_applicable_constant": -10000000000,
+              "high_instrument_saturation": 1000000000
+            },
+            "x": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "y": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "z": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "incidence": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "emission": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "phase": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            }
+          },
+          "flagDefinition": "Geometry-backed pixels need finite intercepts, angles and image values outside every gap and range constant of their plane; image saturation constants keep geometry but are rejected as quality.",
+          "geometryPixels": 243801,
+          "saturatedPixels": 0,
+          "medianPhaseDegrees": 60.558588200354095,
+          "minimumEmissionDegrees": 0.04813008858504522,
+          "nadirPixelFootprintMeters": 0.20209446235594913,
+          "archivedPixelScaleMedianMeters": 11.554752349853516,
+          "archivedPixelScaleRatio": 57.175007247363965,
+          "archivedPixelScalePolicy": "Not used for sampling or display; reported against the intercept-derived footprint.",
+          "geometry": "Archived pixel-centre surface intercepts on dimorphos_g_00243mm_spc_0000n00000_v004.bds from the label's SPICE kernels; the controlled camera is recovered from those pairs and every displayed intersection is re-derived on the retained source mesh."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3,
+          "formula": "D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.",
+          "applicationLighting": "Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.",
+          "limitations": "No phase correction, Hapke roughness correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ],
+          "low": 0.016123058319824194,
+          "high": 0.07255912353841458,
+          "units": "relative disk-normalized I/F; linear grayscale display"
+        },
+        "sourceIds": [
+          {
+            "id": "draco-0401930045-02979-geo",
+            "sha256": "12a5f0021799f65f1ee3fb35dfda3b6857def98473fbc4d43307b9e6cb082bbe"
+          },
+          {
+            "id": "draco-0401930045-02979-label",
+            "sha256": "7e9cafb0c623e63b8f07f82ede148e8ebd77fd05169092d0cc9487eec59c0a5e"
+          }
+        ],
+        "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+      },
+      {
+        "id": "t-minus-11s",
+        "startTime": "2022-09-26T23:14:12.737Z",
+        "filter": "unfiltered",
+        "camera": {
+          "matrix": [
+            [
+              -148092.2712359067,
+              -3336.2957097661015,
+              -137464.0772173167,
+              25934.29468083332
+            ],
+            [
+              132853.49493187567,
+              48626.40174854971,
+              -144307.43364703187,
+              52914.503128866
+            ],
+            [
+              -0.17440156993117925,
+              0.9712855159765156,
+              0.16182873310933932,
+              70.39176654379663
+            ]
+          ],
+          "positionKm": [
+            12.273123880169544,
+            -68.37401290556859,
+            -11.373913837176797
+          ],
+          "fitPixels": 716,
+          "holdoutPixels": 127575,
+          "maximumResidualPixels": 0.00015439616115771763,
+          "rmsResidualPixels": 0.00003182553540393924
+        },
+        "sourceCoverage": {
+          "geometryPixels": 128291,
+          "qualityRejectedPixels": 0,
+          "photometryRejectedPixels": 52590,
+          "acceptedPixels": 75701,
+          "acceptedLossyPixels": 0
+        },
+        "quality": {
+          "units": "I/F",
+          "product": "urn:nasa:pds:dart:data_dracoddp:dart_0401930040_12262_01_geo",
+          "target": "(65803) Didymos I (Dimorphos)",
+          "observingSystem": [
+            "DART:Host",
+            "DRACO:Instrument"
+          ],
+          "filter": "unfiltered",
+          "shapeKernel": "dimorphos_g_00243mm_spc_0000n00000_v004.bds",
+          "spiceKernels": 22,
+          "planes": {
+            "image": "ioverf",
+            "x": "xcoord",
+            "y": "ycoord",
+            "z": "zcoord",
+            "incidence": "incidence",
+            "emission": "emission",
+            "phase": "phase"
+          },
+          "planeUnits": {
+            "image": null,
+            "x": "km",
+            "y": "km",
+            "z": "km",
+            "incidence": "deg",
+            "emission": "deg",
+            "phase": "deg"
+          },
+          "specialConstants": {
+            "image": {
+              "missing_constant": 10000000000,
+              "not_applicable_constant": -10000000000,
+              "high_instrument_saturation": 1000000000
+            },
+            "x": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "y": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "z": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "incidence": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "emission": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            },
+            "phase": {
+              "invalid_constant": -999,
+              "not_applicable_constant": -10000000000
+            }
+          },
+          "flagDefinition": "Geometry-backed pixels need finite intercepts, angles and image values outside every gap and range constant of their plane; image saturation constants keep geometry but are rejected as quality.",
+          "geometryPixels": 128291,
+          "saturatedPixels": 0,
+          "medianPhaseDegrees": 60.5417995953742,
+          "minimumEmissionDegrees": 0.03883065262794064,
+          "nadirPixelFootprintMeters": 0.3482945071425612,
+          "archivedPixelScaleMedianMeters": 19.940431594848633,
+          "archivedPixelScaleRatio": 57.25163959214197,
+          "archivedPixelScalePolicy": "Not used for sampling or display; reported against the intercept-derived footprint.",
+          "geometry": "Archived pixel-centre surface intercepts on dimorphos_g_00243mm_spc_0000n00000_v004.bds from the label's SPICE kernels; the controlled camera is recovered from those pairs and every displayed intersection is re-derived on the retained source mesh."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3,
+          "formula": "D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.",
+          "applicationLighting": "Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.",
+          "limitations": "No phase correction, Hapke roughness correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ],
+          "low": 0.013043723994088157,
+          "high": 0.06252384197757078,
+          "units": "relative disk-normalized I/F; linear grayscale display"
+        },
+        "sourceIds": [
+          {
+            "id": "draco-0401930040-12262-geo",
+            "sha256": "280764106bd4a2eb43fd614a5f70a5008b3820b0ef22d3f75bfea8875300edd2"
+          },
+          {
+            "id": "draco-0401930040-12262-label",
+            "sha256": "3b417f2952fb40a01ff395e6b55c81fbe7d1b150a61fb47a0118e8b4bff48890"
+          }
+        ],
+        "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+      }
+    ],
+    "sourceIds": [
+      {
+        "id": "draco-0401930040-12262-geo",
+        "sha256": "280764106bd4a2eb43fd614a5f70a5008b3820b0ef22d3f75bfea8875300edd2"
+      },
+      {
+        "id": "draco-0401930040-12262-label",
+        "sha256": "3b417f2952fb40a01ff395e6b55c81fbe7d1b150a61fb47a0118e8b4bff48890"
+      },
+      {
+        "id": "draco-0401930049-43695-geo",
+        "sha256": "d8b2171b610235dced9306b01bcf2c6dbfb9317693457b441cdb36678a9ab629"
+      },
+      {
+        "id": "draco-0401930049-43695-label",
+        "sha256": "3085249f3334090f2227c30cf4037be88d82ddef78e4c79edebaf94c1ad27fee"
+      },
+      {
+        "id": "draco-0401930046-49265-geo",
+        "sha256": "d16f3b899ee14588f0ee89abf60babe85c5b1dc8f1d2203f322c3db980c68443"
+      },
+      {
+        "id": "draco-0401930046-49265-label",
+        "sha256": "bea15e0e21e86f9e41a30013fe9d58241d1d827638e0007b2ebd44b812c15319"
+      },
+      {
+        "id": "draco-0401930045-02979-geo",
+        "sha256": "12a5f0021799f65f1ee3fb35dfda3b6857def98473fbc4d43307b9e6cb082bbe"
+      },
+      {
+        "id": "draco-0401930045-02979-label",
+        "sha256": "7e9cafb0c623e63b8f07f82ede148e8ebd77fd05169092d0cc9487eec59c0a5e"
+      }
+    ],
+    "selection": "recipe-order",
+    "levelMatching": {
+      "samplesPerTriangle": 64,
+      "minimumPairs": 64,
+      "maximumLogMad": 0.15,
+      "maximumGain": 1.25,
+      "maximumAngleDegrees": 70,
+      "gains": [
+        1,
+        1.0625105546709293,
+        1.1098105951957562,
+        1.203491940873271
+      ],
+      "pairs": [
+        {
+          "a": 0,
+          "b": 1,
+          "samples": 1016,
+          "medianLogRatio": 0.05985372629425658,
+          "logMad": 0.09392127313584392,
+          "accepted": true,
+          "residualLogRatio": -0.0007808292807716874
+        },
+        {
+          "a": 0,
+          "b": 2,
+          "samples": 992,
+          "medianLogRatio": 0.10577928773053816,
+          "logMad": 0.13348413783429067,
+          "accepted": true,
+          "residualLogRatio": 0.0015899219248744767
+        },
+        {
+          "a": 0,
+          "b": 3,
+          "samples": 966,
+          "medianLogRatio": 0.2026915447597734,
+          "logMad": 0.16964696935345697,
+          "accepted": false
+        },
+        {
+          "a": 1,
+          "b": 2,
+          "samples": 6622,
+          "medianLogRatio": 0.04201041159496332,
+          "logMad": 0.043298513261163775,
+          "accepted": true,
+          "residualLogRatio": -0.0015443986356721007
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "samples": 6327,
+          "medianLogRatio": 0.12850304170410928,
+          "logMad": 0.08595649197020619,
+          "accepted": true,
+          "residualLogRatio": 0.003910315468320685
+        },
+        {
+          "a": 2,
+          "b": 3,
+          "samples": 10011,
+          "medianLogRatio": 0.07936943008268338,
+          "logMad": 0.05614796988353776,
+          "accepted": true,
+          "residualLogRatio": -0.0016684859224697923
+        }
+      ],
+      "referenceIndex": 0,
+      "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo.",
+      "sampledPoints": 51200
+    },
+    "display": {
+      "percentiles": [
+        1,
+        99
+      ],
+      "low": 0.025428483998368223,
+      "high": 0.10772004630911336,
+      "units": "relative disk-normalized I/F; linear grayscale display",
+      "referenceFrame": "t-minus-1-8s"
+    },
+    "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+  },
+  "recipeSha256": "84f36e5501c656e30e3754dca542badc0c6fc0723ff990d006047642a40b6803",
+  "interpretation": "Preparation trial at 64 samples per triangle on the retained 800-face mesh. The same source frames and selection/photometry/transfer parameters feed the delivered atlas. Coverage is area-weighted sampling, not exhaustive integration."
+}
