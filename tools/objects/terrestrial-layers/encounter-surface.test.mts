@@ -12,7 +12,7 @@ const sample=()=>{
  const geometry: PixelGeometry={source:'source-mesh-rays',report:{},reject:i=>accepted[i]?null:'no-geometry',
   distanceMeters:(i,p)=>Math.hypot(xyz[i*3]-p[0],xyz[i*3+1]-p[1],xyz[i*3+2]-p[2]),rangeMeters:()=>10,incidence:()=>0,emission:i=>emissions[i]*Math.PI/180,phase:()=>0};
  const image={width:2,height:2,values:[0,-1,2,3],reject:()=>null,startTime:'',filter:'',report:{}};
- return {source:{image,camera:{project:()=>[.5,.5,10]},geometry,photometry:{gain:()=>1}},accepted,xyz};
+ return {source:{image,camera:{project:()=>[.5,.5,10]},geometry,photometry:{gain:()=>1,retainsIllumination:true}},accepted,xyz};
 };
 const limits={maximumSeparationMeters:2,maximumEmissionDegrees:75};
 test('a bilinear footprint retains calibrated darkness and checks every contributor',()=>{

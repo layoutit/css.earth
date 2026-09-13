@@ -27,7 +27,7 @@ import { archiveBackplanes, castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
 import { deriveLimits } from '../limits.mts';
-import { LENS_KEYS, MOSAIC_KEYS, checkKeys, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.mts';
+import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.mts';
 
 /** What a format adds to the shared lens shape, and which of the shared choices its product supports. */
 interface GeoSchema {
@@ -97,7 +97,7 @@ const AXES = ['X', '-X', 'Y', '-Y', 'Z', '-Z'];
 
 function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
   const record = requireRecord(value), schema = schemaOf(record.format);
-  checkKeys(record, [...LENS_KEYS, ...schema.lens.required], [...MOSAIC_KEYS, ...(schema.lens.optional ?? [])], CONTEXT);
+  checkKeys(record, [...LENS_KEYS, ...schema.lens.required], [...MOSAIC_KEYS, ...OPTIONAL_LENS_KEYS, ...(schema.lens.optional ?? [])], CONTEXT);
   for (const frame of requireArray(record.frames)) checkKeys(frame, ['id', 'path', 'startTime', ...schema.frame.required], schema.frame.optional ?? [], `${CONTEXT} frame`);
   const recipe = decodeProfile(parseGeoLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
   validateEnvelope(recipe, [...recipe.frames.flatMap(framePaths), ...sharedPaths(recipe)],
