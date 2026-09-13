@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-nebula-observation-recipe@1",
+  "id": "m8",
+  "referenceId": "eso-optical",
+  "frame": {
+    "width": 1024,
+    "height": 1024,
+    "fieldArcminutes": [
+      121,
+      121
+    ],
+    "centerIcrsDegrees": [
+      270.76531645904527,
+      -24.30622861770443
+    ],
+    "northUp": true
+  },
+  "images": [
+    {
+      "id": "eso-optical",
+      "label": "ESO \u00b7 optical",
+      "url": "https://cdn.eso.org/images/publicationtiff/eso0936a.tif",
+      "page": "https://www.eso.org/public/images/eso0936a/",
+      "sha256": "a0a2b4e1b926592642c1ee550925ca3d770d5d63522e37e39f058b27172d0c22",
+      "width": 4000,
+      "height": 2679,
+      "fieldArcminutes": [
+        93.4928042112,
+        62.6101887672
+      ],
+      "centerIcrsDegrees": [
+        270.904114,
+        -24.386937
+      ],
+      "northRightDegrees": -0.00447384225,
+      "bands": "Optical \u00b7 H-alpha / R / V / B",
+      "credit": "ESO",
+      "termsUrl": "https://www.eso.org/public/outreach/copyright/",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          7856.0,
+          5261.0
+        ],
+        "referencePixel": [
+          4147.05352943,
+          1376.38291846
+        ],
+        "referenceValueDeg": [
+          270.904114,
+          -24.386937
+        ],
+        "scaleDeg": [
+          -0.00019834692,
+          0.00019834692
+        ],
+        "rotationDeg": 0.00447384225
+      },
+      "metadataNote": "Official publisher Publication TIFF 4K variant, downloaded unchanged; full master footprint retained. AVM reference dimensions/pixel are the publisher astrometric grid, not this TIFF grid. Publisher WCS is provisional until independently verified with held-out field stars.",
+      "master": {
+        "url": "https://cdn.eso.org/images/original/eso0936a.tif",
+        "width": 23569,
+        "height": 15784
+      },
+      "processingVariant": "ESO Publication TIFF 4K, full footprint, no local resizing or cropping"
+    },
+    {
+      "id": "eso-vista",
+      "label": "ESO VISTA \u00b7 infrared",
+      "url": "https://cdn.eso.org/images/publicationtiff/eso1101d.tif",
+      "page": "https://www.eso.org/public/images/eso1101d/",
+      "sha256": "906a2960105ac9344be261ba524c3e221f5bfdce3ab2efe33c022773cd7db3e9",
+      "width": 4000,
+      "height": 2202,
+      "fieldArcminutes": [
+        71.80800500989025,
+        39.537044088580906
+      ],
+      "centerIcrsDegrees": [
+        270.578561429,
+        -24.4742172395
+      ],
+      "northRightDegrees": 29.49999999999999,
+      "bands": "Near-infrared \u00b7 J / H / Ks (caption; publisher AVM incorrectly labels H as H-alpha)",
+      "credit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "termsUrl": "https://www.eso.org/public/outreach/copyright/",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          12630.0,
+          6954.0
+        ],
+        "referencePixel": [
+          6315.0,
+          3477.0
+        ],
+        "referenceValueDeg": [
+          270.578561429,
+          -24.4742172395
+        ],
+        "scaleDeg": [
+          -9.47585180917e-05,
+          9.47585180917e-05
+        ],
+        "rotationDeg": -29.49999999999999
+      },
+      "metadataNote": "Official publisher Publication TIFF 4K variant, downloaded unchanged; full master footprint retained. AVM reference dimensions/pixel are the publisher astrometric grid, not this TIFF grid. Publisher WCS is provisional until independently verified with held-out field stars.",
+      "master": {
+        "url": "https://cdn.eso.org/images/original/eso1101d.tif",
+        "width": 12630,
+        "height": 6954
+      },
+      "processingVariant": "ESO Publication TIFF 4K, full footprint, no local resizing or cropping"
+    }
+  ],
+  "nativeRemoval": {
+    "model": {
+      "path": ".local/open-star-removal/noxGeneratorColor.pb",
+      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
+    },
+    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+  }
+}

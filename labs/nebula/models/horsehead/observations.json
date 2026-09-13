@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-nebula-observation-recipe@1",
+  "id": "horsehead",
+  "referenceId": "eso-optical",
+  "frame": {
+    "width": 1024,
+    "height": 1024,
+    "fieldArcminutes": [
+      193,
+      193
+    ],
+    "centerIcrsDegrees": [
+      85.43502069818746,
+      -1.9145446912125104
+    ],
+    "northUp": true
+  },
+  "images": [
+    {
+      "id": "eso-optical",
+      "label": "ESO \u00b7 optical",
+      "url": "https://cdn.eso.org/images/publicationtiff/eso0949k.tif",
+      "page": "https://www.eso.org/public/images/eso0949k/",
+      "sha256": "1058116501e54c2a752ae49cfcaa4d82aa349d5c937be63f2c74f05212da1966",
+      "width": 4000,
+      "height": 3655,
+      "fieldArcminutes": [
+        179.14258077312,
+        163.74751523793
+      ],
+      "centerIcrsDegrees": [
+        85.3689733755,
+        -1.72382503574
+      ],
+      "northRightDegrees": -0.0,
+      "bands": "Optical \u00b7 R / B",
+      "credit": "ESO and Digitized Sky Survey 2. Acknowledgment: Davide De Martin ",
+      "termsUrl": "https://www.eso.org/public/outreach/copyright/",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          1280.0,
+          1170.0
+        ],
+        "referencePixel": [
+          666.0,
+          604.0
+        ],
+        "referenceValueDeg": [
+          85.3689733755,
+          -1.72382503574
+        ],
+        "scaleDeg": [
+          -0.00233258568715,
+          0.00233258568715
+        ],
+        "rotationDeg": 0.0
+      },
+      "metadataNote": "Official publisher Publication TIFF 4K variant, downloaded unchanged; full master footprint retained. AVM reference dimensions/pixel are the publisher astrometric grid, not this TIFF grid. Publisher WCS is provisional until independently verified with held-out field stars. DSS2 optical includes the wider Orion Belt environment, not a tightly bounded Horsehead object.",
+      "master": {
+        "url": "https://cdn.eso.org/images/original/eso0949k.tif",
+        "width": 10663,
+        "height": 9744
+      },
+      "processingVariant": "ESO Publication TIFF 4K, full footprint, no local resizing or cropping"
+    },
+    {
+      "id": "eso-vista",
+      "label": "ESO VISTA \u00b7 infrared",
+      "url": "https://cdn.eso.org/images/publicationtiff/eso0949n.tif",
+      "page": "https://www.eso.org/public/images/eso0949n/",
+      "sha256": "352705a08911572ffd7312a3660a6c004f78ba3156319d28408abca0f82c56bc",
+      "width": 3288,
+      "height": 4000,
+      "fieldArcminutes": [
+        71.49934940399999,
+        86.972664513
+      ],
+      "centerIcrsDegrees": [
+        85.42805,
+        -1.912129
+      ],
+      "northRightDegrees": -10.0584588008,
+      "bands": "Near-infrared \u00b7 K / H / J",
+      "credit": "ESO/J. Emerson/VISTA. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "termsUrl": "https://www.eso.org/public/outreach/copyright/",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          12564.0,
+          15283.0
+        ],
+        "referencePixel": [
+          6146.47731478,
+          9223.87912909
+        ],
+        "referenceValueDeg": [
+          85.42805,
+          -1.912129
+        ],
+        "scaleDeg": [
+          -9.484685e-05,
+          9.484685e-05
+        ],
+        "rotationDeg": 10.0584588008
+      },
+      "metadataNote": "Official publisher Publication TIFF 4K variant, downloaded unchanged; full master footprint retained. AVM reference dimensions/pixel are the publisher astrometric grid, not this TIFF grid. Publisher WCS is provisional until independently verified with held-out field stars.",
+      "master": {
+        "url": "https://cdn.eso.org/images/original/eso0949n.tif",
+        "width": 12564,
+        "height": 15283
+      },
+      "processingVariant": "ESO Publication TIFF 4K, full footprint, no local resizing or cropping"
+    }
+  ],
+  "nativeRemoval": {
+    "model": {
+      "path": ".local/open-star-removal/noxGeneratorColor.pb",
+      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
+    },
+    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+  }
+}

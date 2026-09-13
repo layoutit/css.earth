@@ -192,7 +192,7 @@
         "type": "body-centered-radius-grid",
         "longitudeDirection": "west-positive"
       },
-      "coverage": "Radial height above a 208 km reference sphere from Stooke’s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5° radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
+      "coverage": "Radial height above a 208 km reference sphere from Stooke\u2019s Voyager-derived shape model. Shows the broad irregular shape, not local height above a geoid. The archived 5\u00b0 radius grid includes modeled unseen terrain and can exaggerate facets or depressions. Small craters are not resolved.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -540,8 +540,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6644,
-      "expectedSha256": "499a4d858072cb1c0ee05e7d12824b4ac1ed5f6a494c0525a9ef8262ffb130b2",
+      "expectedBytes": 6697,
+      "expectedSha256": "2456ceb80037284da257500ee13b31c9c888368f8e8cbb26ca6082d7b5dde760",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -599,8 +599,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 9373,
-      "expectedSha256": "f9c7b352f33c4d4ee6613952d34732ea08c4393dc5494dedd2985648b65054ef"
+      "expectedBytes": 9694,
+      "expectedSha256": "69a672edd51f6d6122f6bf9d852db9dc6d233a9d4007408ae6146021a4438b94"
     },
     {
       "path": "presentation/minimap.json",

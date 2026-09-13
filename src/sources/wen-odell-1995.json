@@ -1,0 +1,32 @@
+{
+  "id": "wen-odell-1995",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Wen & O’Dell (1995) · Orion geometry",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/175123",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/m42/physical-evidence.json",
+      "revision": "ab1967ed45fe7ad670cc5eaa4e892789a04f01f3",
+      "sha256": "4a86d6d830b7753fe2af9c1ba30f35ebc4526095bb605939f66fba765d17a8cc",
+      "locator": "/sources/1"
+    }
+  ],
+  "publisher": "Wen & O’Dell (1995) · Orion geometry",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wen & O’Dell (1995) · Orion geometry",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/m42/physical-evidence.json#/sources/1"
+    }
+  ]
+}

@@ -60,7 +60,7 @@
       "output": "charon-{id}{suffix}.webp",
       "thumbnail": "charon-lens-{id}.webp",
       "source": "observations/nh_charon_color_mosaic.img",
-      "falseColor": false,
+      "falseColor": true,
       "science": {
         "kind": "terrestrial-observation",
         "input": "new-horizons-charon-mvic-color",
@@ -82,7 +82,21 @@
           "displayRange": [
             0,
             0.6
-          ]
+          ],
+          "colorDisplay": {
+            "kind": "band-composite",
+            "inputQuantity": "derived-band-value",
+            "bands": [
+              "870 nm",
+              "625 nm",
+              "475 nm"
+            ],
+            "displayRange": [
+              0,
+              0.6
+            ],
+            "outputEncoding": "srgb"
+          }
         },
         "metadata": {
           "description": "Near-infrared, red and blue observations highlight surface differences. Gray grid marks missing color coverage; detail varies across the map.",
@@ -102,7 +116,7 @@
         "label": "Elevation",
         "format": "geotiff",
         "path": "science/charon-dem.tif",
-        "description": "New Horizons terrain model · shaded relief",
+        "description": "New Horizons terrain model \u00b7 shaded relief",
         "title": "Color encodes elevation relative to a 606 km reference sphere. Fixed northwest relief lighting reveals terrain slopes; gray grid marks missing measurements.",
         "sourceUrl": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m",
         "minimum": -15000,
@@ -113,7 +127,7 @@
           "#aa3e24"
         ],
         "labels": [
-          "−15",
+          "\u221215",
           "0",
           "15"
         ],

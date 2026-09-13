@@ -220,7 +220,7 @@
           "backgroundMaximum": 0.001
         },
         "metadata": {
-          "label": "Filter color",
+          "label": "False color",
           "falseColor": true,
           "coverage": "Voyager green, blue and violet filters displayed as red, green and blue. Only the common reliable interior is shown. Registration and blur limit interpretation to broad patterns at roughly 40 km or coarser; small colored details are noise or uncertain. This is not true color or a calibrated albedo map.",
           "attribution": {
@@ -232,6 +232,20 @@
           "longitudeDegrees": 261,
           "latitudeDegrees": -27,
           "zoom": 1.1
+        },
+        "colorDisplay": {
+          "kind": "band-composite",
+          "inputQuantity": "radiance-factor",
+          "bands": [
+            "GREEN",
+            "BLUE",
+            "VIOLET"
+          ],
+          "displayRange": [
+            0,
+            0.1
+          ],
+          "outputEncoding": "srgb"
         }
       }
     ]

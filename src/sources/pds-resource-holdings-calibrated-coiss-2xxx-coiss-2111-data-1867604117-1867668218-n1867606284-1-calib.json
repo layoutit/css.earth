@@ -1,0 +1,28 @@
+{
+  "id": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2111-data-1867604117-1867668218-n1867606284-1-calib",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Cassini ISS pan · N1867606284_1_CALIB · GRN",
+  "identifiers": [
+    {
+      "type": "PDS archive resource path",
+      "value": "/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606284_1_CALIB"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606284_1_CALIB.LBL",
+      "label": "Calibrated image label"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606284_1_CALIB.LBL",
+      "checkedOn": "2026-09-12",
+      "locator": "PRODUCT_ID 1_N1867606284.125; FILTER_NAME; CISSCAL 4.0beta DESCRIPTION, I/F units"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

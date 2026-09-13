@@ -2375,6 +2375,308 @@
         ]
       },
       "imageId": "vlba"
+    },
+    {
+      "id": "vst",
+      "name": {
+        "value": "VLT Survey Telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-vst",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "VST",
+          "citations": [
+            {
+              "catalogueId": "reference-vst",
+              "checkedOn": "2026-09-13"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "A survey telescope at Paranal whose OmegaCAM camera recorded the Orion optical image.",
+        "citations": [
+          {
+            "catalogueId": "reference-vst",
+            "checkedOn": "2026-09-13"
+          },
+          {
+            "catalogueId": "eso-eso1723a",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-vst",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-vst",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "band": {
+        "value": "Optical",
+        "citations": [
+          {
+            "catalogueId": "reference-vst",
+            "checkedOn": "2026-09-13"
+          },
+          {
+            "catalogueId": "eso-eso1723a",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vista",
+      "name": {
+        "value": "VISTA",
+        "citations": [
+          {
+            "catalogueId": "reference-vista",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Visible and Infrared Survey Telescope for Astronomy",
+          "citations": [
+            {
+              "catalogueId": "reference-vista",
+              "checkedOn": "2026-09-13"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "A near-infrared survey telescope at Paranal whose VIRCAM camera records wide fields of stars, nebulae and galaxies.",
+        "citations": [
+          {
+            "catalogueId": "reference-vista",
+            "checkedOn": "2026-09-13"
+          },
+          {
+            "catalogueId": "eso-eso1205a",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-vista",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-vista",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "band": {
+        "value": "Near infrared",
+        "citations": [
+          {
+            "catalogueId": "reference-vista",
+            "checkedOn": "2026-09-13"
+          },
+          {
+            "catalogueId": "eso-eso1205a",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mpg-eso-2-2m",
+      "name": {
+        "value": "MPG/ESO 2.2-metre telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-mpg-eso-2-2m",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "A telescope at La Silla whose Wide Field Imager recorded the Helix optical image in blue, green and red filters.",
+        "citations": [
+          {
+            "catalogueId": "reference-mpg-eso-2-2m",
+            "checkedOn": "2026-09-13"
+          },
+          {
+            "catalogueId": "eso-eso0907a",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-mpg-eso-2-2m",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-mpg-eso-2-2m",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "band": {
+        "value": "Optical",
+        "citations": [
+          {
+            "catalogueId": "reference-mpg-eso-2-2m",
+            "checkedOn": "2026-09-13"
+          },
+          {
+            "catalogueId": "eso-eso0907a",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "eso-3-6m",
+      "name": {
+        "value": "ESO 3.6-metre telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-eso-3-6m",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "A telescope at La Silla credited with the wider Helix photograph. The published image record does not list its filters.",
+        "citations": [
+          {
+            "catalogueId": "reference-eso-3-6m",
+            "checkedOn": "2026-09-13"
+          },
+          {
+            "catalogueId": "eso-helix",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-eso-3-6m",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-eso-3-6m",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wise",
+      "name": {
+        "value": "WISE",
+        "citations": [
+          {
+            "catalogueId": "reference-wise",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Wide-field Infrared Survey Explorer",
+          "citations": [
+            {
+              "catalogueId": "reference-wise",
+              "checkedOn": "2026-09-13"
+            }
+          ]
+        }
+      ],
+      "description": {
+        "value": "An infrared space telescope that surveyed the sky. Its survey observations supply the AllWISE color mosaic used for the Large Magellanic Cloud.",
+        "citations": [
+          {
+            "catalogueId": "reference-wise",
+            "checkedOn": "2026-09-13"
+          },
+          {
+            "catalogueId": "cds-allwise-color",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "citations": [
+          {
+            "catalogueId": "reference-wise",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-wise",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      },
+      "band": {
+        "value": "Infrared",
+        "citations": [
+          {
+            "catalogueId": "reference-wise",
+            "checkedOn": "2026-09-13"
+          },
+          {
+            "catalogueId": "cds-allwise-color",
+            "checkedOn": "2026-09-13"
+          }
+        ]
+      }
     }
   ],
   "missions": [
