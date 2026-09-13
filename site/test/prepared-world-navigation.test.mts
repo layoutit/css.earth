@@ -51,7 +51,8 @@ function fixtureFactory() {
     mounted(): ObjectSceneLifecycle & { navigation: MockNavigation } { return { ...lifecycle, navigation: { ...navigation, frame: frames[1] } }; },
     tick(value: number) { time = value; const entries = [...callbacks.values()]; callbacks.clear(); for (const fn of entries) fn(time); },
     step(milliseconds = 1000 / 60) { this.tick(time + milliseconds); },
-    input() { const event = new Event('wheel'); Object.defineProperty(event, 'target', { value: { closest: () => true } }); documentTarget.dispatchEvent(event); },
+    input() { const event = new Event('pointerdown'); Object.defineProperty(event, 'target', { value: { closest: () => true } }); documentTarget.dispatchEvent(event); },
+    wheel() { const event = new Event('wheel', { cancelable: true }); Object.defineProperty(event, 'target', { value: { closest: () => true } }); documentTarget.dispatchEvent(event); return event; },
     get pending() { return callbacks.size; } };
 }
 function deferred<T = void>() {
@@ -530,4 +531,43 @@ test('centering changes the focus at the same range and orientation, then focus 
   assert.ok(Math.abs(projection.distanceM / 2e8 - 1) < 1e-12);
   await drainFrames(f, { task: f.service.focus({ objectId: '1', mount, signal: f.controller.signal }) });
   assert.ok(range(mount.navigation.capture().pose, mount.navigation.frame.originM) < 2e6);
+});
+
+test('a wheel during a flight hurries the arrival instead of stopping it', async () => {
+  const normal = fixtureFactory(), hurried = fixtureFactory();
+  const fly = (f: ReturnType<typeof fixtureFactory>) => f.service.focus({ objectId: '0', mount: { sharedView: unusedSharedView, navigation: f.navigation }, signal: f.controller.signal });
+  const frames = async (f: ReturnType<typeof fixtureFactory>, task: Promise<void>) => {
+    let settled = false, failure: unknown = null, count = 0;
+    task.then(() => { settled = true; }, error => { settled = true; failure = error; });
+    while (count < 1000) { await nextTurn(); if (settled) break; f.step(); count++; }
+    if (failure) throw failure;
+    return count;
+  };
+  const normalTask = fly(normal), hurriedTask = fly(hurried);
+  for (const f of [normal, hurried]) { f.tick(0); f.tick(100); }
+  const wheel = hurried.wheel();
+  assert.equal(wheel.defaultPrevented, true, 'The flight keeps the wheel from zooming the camera mid-flight');
+  const normalFrames = await frames(normal, normalTask), hurriedFrames = await frames(hurried, hurriedTask);
+  assert.ok(hurriedFrames < normalFrames / 2, `A hurried flight arrives in under half the frames (${hurriedFrames} of ${normalFrames})`);
+  closePose(hurried.navigation.capture().pose, normal.navigation.capture().pose);
+  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(hurried.documentTarget, name).length, 0);
+});
+
+test('a wheel during a prepared navigation hurries it to the destination instead of abandoning it', async () => {
+  const run = async (hurried: boolean) => {
+    const f = fixtureFactory(), context: WorldCameraPose[] = [];
+    f.navigation.apply({ ...f.navigation.capture(), pose: { positionM: [0, 0, 2e8], orientationXyzw: [0, 0, 0, 1] } });
+    const task = f.start({ presentWorld: (world, _viewport, options) => { options?.commit?.(); context.push(world); } });
+    f.step(); f.step();
+    if (hurried) assert.equal(f.wheel().defaultPrevented, true, 'The navigation keeps the wheel from zooming the camera mid-flight');
+    const handoff = await drainFrames(f, { task });
+    required(handoff.mountOptions.onNavigationReady)(f.mounted().navigation);
+    await drainFrames(f, { task: handoff.afterMount({ ...lifecycle, navigation: f.navigation }, { signal: f.controller.signal }) });
+    assert.equal(f.pending, 0);
+    for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+    return { frames: context.length + f.paints.length, pose: f.navigation.capture().pose };
+  };
+  const normal = await run(false), hurried = await run(true);
+  assert.ok(hurried.frames < normal.frames / 2, `A hurried navigation arrives in under half the frames (${hurried.frames} of ${normal.frames})`);
+  closePose(hurried.pose, normal.pose);
 });
