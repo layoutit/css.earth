@@ -283,6 +283,17 @@ until relevant changes or unresolved failures invalidate it.
 Keep project-required checks; do not add a new dashboard, gate framework,
 Burnlist or exhaustive test matrix to implement an ordinary body.
 
+A body PR is finished when its branch turns the change on end to end. It holds:
+
+- the recipe, source pins, acquisition operations and catalogued bindings;
+- the prepared outputs the recipe produces;
+- the body README's account of sources, processing, results and known problems;
+- any published photometric model as a cited record, used inside its fitted range.
+
+Do not open a mergeable PR with code that nothing uses yet. When an archive
+product needs a reader, route or kernel bank that does not exist, open the
+archive-product issue template instead of writing one for a single body.
+
 Update the body README with source choices, processing, results and known
 problems. Update affected credits and reports in the same change. Keep common
 usage and commands in shared guides. Save cited screenshots in Git or agreed
