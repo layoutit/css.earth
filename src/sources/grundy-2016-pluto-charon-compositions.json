@@ -1,0 +1,35 @@
+{
+  "id": "grundy-2016-pluto-charon-compositions",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Surface compositions across Pluto and Charon",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1126/science.aad9189"
+    }
+  ],
+  "publisher": "Science",
+  "publicationDate": "2016-03-18",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1126/science.aad9189",
+      "label": "Grundy et al. (2016)"
+    },
+    {
+      "role": "original",
+      "url": "https://boulder.swri.edu/~buie/biblio/pub106.SOM.pdf",
+      "label": "Supplementary methods and maps"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://boulder.swri.edu/~buie/biblio/pub106.SOM.pdf",
+      "checkedOn": "2026-09-13",
+      "locator": "Page 3, Charon’s NH3 absorption; Figure S6"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

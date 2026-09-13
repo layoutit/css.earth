@@ -1,0 +1,188 @@
+{
+  "schema": "cssearth-hrii-facet-result@1",
+  "recipeSha256": "00386f1605d85c75af635bcf27bbcf5acf8aa972a9738223a2e505697ec02951",
+  "sourceShapeSha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777",
+  "inputFrames": 40,
+  "acceptedPixels": 221,
+  "rejectedPixels": {
+    "outside-nucleus": 8865,
+    "outside-stereo-control": 300,
+    "uncertain-nucleus-edge": 342,
+    "grazing-or-unlit": 211,
+    "spectrum-not-qualified": 141
+  },
+  "sourceFacets": 32040,
+  "acceptedFacets": 1590,
+  "temperatureRangeKelvin": [
+    288.546834260759,
+    309.19479835447106
+  ],
+  "slopeRangePercentPer100Nm": [
+    3.4612738624838837,
+    4.943006357187725
+  ],
+  "spectralAnchors": [
+    {
+      "frame": "science/hrii/hi05070405_9000036_005_r.fit",
+      "row": 140,
+      "incidenceCosine": 0.4106978467358816,
+      "heliocentricDistanceAu": 1.506205313051633,
+      "temperatureKelvin": 291.0146723935929,
+      "slopePercentPer100Nm": 4.853354703088986
+    },
+    {
+      "frame": "science/hrii/hi05070405_9000036_016_r.fit",
+      "row": 128,
+      "incidenceCosine": 0.4873406770028162,
+      "heliocentricDistanceAu": 1.5062052862472217,
+      "temperatureKelvin": 304.13630114012284,
+      "slopePercentPer100Nm": 4.053901715414448
+    },
+    {
+      "frame": "science/hrii/hi05070405_9000036_035_r.fit",
+      "row": 132,
+      "incidenceCosine": 0.38597202467081587,
+      "heliocentricDistanceAu": 1.5062052399762607,
+      "temperatureKelvin": 301.9824864142374,
+      "slopePercentPer100Nm": 3.843128287796638
+    }
+  ],
+  "registration": {
+    "context": {
+      "image": "science/hrii/hv05070405_9000844_001_r.fit",
+      "sha256": "62449ca95557872405544fae40cec5b7adc972dc1be27940e400b36b3588e109",
+      "fitControls": 10,
+      "holdoutControls": 17,
+      "offsetPixels": [
+        -27.705813349459085,
+        5.129342692189883
+      ],
+      "rmsMeters": 71.85522771536421,
+      "maximumMeters": 179.96445900297496,
+      "residuals": [
+        {
+          "id": "patch-15-18",
+          "meters": 54.58006108741373
+        },
+        {
+          "id": "patch-15-20",
+          "meters": 76.2514294414192
+        },
+        {
+          "id": "patch-16-19",
+          "meters": 66.63975899204831
+        },
+        {
+          "id": "patch-16-21",
+          "meters": 77.78277559995387
+        },
+        {
+          "id": "patch-17-14",
+          "meters": 45.85423600756902
+        },
+        {
+          "id": "patch-17-16",
+          "meters": 30.47904075677612
+        },
+        {
+          "id": "patch-17-20",
+          "meters": 35.96146840562934
+        },
+        {
+          "id": "patch-17-22",
+          "meters": 117.163855137248
+        },
+        {
+          "id": "patch-18-21",
+          "meters": 25.725710127828957
+        },
+        {
+          "id": "patch-20-21",
+          "meters": 57.709449068767675
+        },
+        {
+          "id": "patch-22-19",
+          "meters": 16.67070471507723
+        },
+        {
+          "id": "patch-22-21",
+          "meters": 28.93341124174528
+        },
+        {
+          "id": "patch-23-18",
+          "meters": 58.30536602491061
+        },
+        {
+          "id": "patch-23-20",
+          "meters": 52.389598464647506
+        },
+        {
+          "id": "patch-23-22",
+          "meters": 57.322961179921144
+        },
+        {
+          "id": "patch-24-21",
+          "meters": 59.26999252151609
+        },
+        {
+          "id": "patch-28-25",
+          "meters": 179.96445900297496
+        }
+      ]
+    },
+    "dense": {
+      "offsetPixels": [
+        -2.5,
+        1.25
+      ],
+      "fitPixels": 2031,
+      "fitCorrelation": 0.9888045332917172,
+      "holdoutCorrelation": 0.9979594756508479,
+      "withheldPatchRadiusPixels": 4,
+      "trials": 1089,
+      "region": "surface-and-background"
+    },
+    "rmsPixels": 1.2233072720767155,
+    "maximumPixels": 1.6559855183966021,
+    "controls": [
+      {
+        "id": "patch-17-2",
+        "residualPixels": [
+          0.468327183813375,
+          -0.4811740356431642
+        ],
+        "distancePixels": 0.6714602026000467,
+        "pixelScaleMeters": 158.8786262526247
+      },
+      {
+        "id": "patch-19-3",
+        "residualPixels": [
+          0.11733006737297352,
+          0.704312358875427
+        ],
+        "distancePixels": 0.7140183776167212,
+        "pixelScaleMeters": 156.90254693816877
+      },
+      {
+        "id": "patch-19-4",
+        "residualPixels": [
+          -1.1615853775723808,
+          -1.1802573650476802
+        ],
+        "distancePixels": 1.6559855183966021,
+        "pixelScaleMeters": 154.90126400121807
+      },
+      {
+        "id": "patch-20-2",
+        "residualPixels": [
+          0.992891068161461,
+          -1.138912187150055
+        ],
+        "distancePixels": 1.5109446195257221,
+        "pixelScaleMeters": 158.7240384057848
+      }
+    ]
+  },
+  "method": "Native V3 calibrated spectra; iterated solar continuum and free-amplitude L1 Planck fit; nearest slit footprint on the selected source mesh.",
+  "coverage": "Stereo-controlled source facets, detector flags, spectral-fit checks, incidence/emission below 75 degrees, and a two-pixel nucleus-edge margin. No interpolation across missing spectra."
+}

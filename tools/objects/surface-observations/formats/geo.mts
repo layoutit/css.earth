@@ -1,17 +1,20 @@
 /**
- * Georeferenced photographs named by one recipe shape: archive backplanes (OSIRIS GEO, AMICA Gaskell, PDS4 geometry cubes),
- * archived camera closures (OSIRIS reflectance, L'LORRI) and cameras derived from SPICE kernels.
+ * Georeferenced photographs: archive backplanes (OSIRIS GEO, AMICA Gaskell, PDS4 geometry cubes), archived camera closures
+ * (OSIRIS reflectance, L'LORRI, New Horizons LORRI and MVIC) and cameras derived from SPICE kernels. GEO_SCHEMAS states what
+ * each format adds to the lens shape every format shares (recipe.mts).
  */
-import type { LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
-import type { NumericRaster } from '../../terrestrial-layers/source-records.mts';
-import { parseGeoRecipe, parseSurfaceGeometry, parseGeoCameraClosure, decodeProfile } from '../../terrestrial-layers/source-records.mts';
-import { requireString } from '../../../source-values.mts';
+import type { CameraKind, LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
+import type { NumericRaster, SpiceCameraDeclaration } from '../../terrestrial-layers/source-records.mts';
+import { array, boolean, decodeProfile, number, optional, shape, text, parseGeoCameraClosure, parseGeometryCube, parseLevelMatching, parseLimbRefinement,
+  parsePhasePhotometry, parseSpiceCamera, parseSurfaceGeometry, publishedOr, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
+import { requireArray, requireRecord, requireString } from '../../../source-values.mts';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, osirisRadianceFactorScale } from '../../terrestrial-layers/osiris-geo.mts';
 import { decodeAmicaGeo } from '../../terrestrial-layers/amica-geo.mts';
 import { decodeOsirisReflectance } from '../../terrestrial-layers/archived-camera.mts';
 import { decodeLlorri } from '../../terrestrial-layers/llorri-geo.mts';
+import { decodeNearMsi, parseNearCameraClosure } from '../../terrestrial-layers/near-msi.mts';
 import { decodeNewHorizonsLorri, decodeArrokothMvic } from '../../terrestrial-layers/new-horizons-geo.mts';
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
 import { decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT } from '../../terrestrial-layers/pds4-geometry-cube.mts';
@@ -19,122 +22,150 @@ import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, ABERRATIONS } from '../../
 import { refineCameraByLimb } from '../../terrestrial-layers/limb-refinement.mts';
 import { loadKernelSet } from '../../../spice/kernel-set.mts';
 import { kernelBankPaths } from '../../../spice/kernel-bank.mts';
+import { bandColorDisplay, type BandColorDisplay } from '../../color-transfer.mts';
 import { fittedCamera, matrixCamera } from '../cameras.mts';
 import { archiveBackplanes, castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
-import { deriveLimits, MAXIMUM_SEPARATION_FOOTPRINTS } from '../limits.mts';
-import { parseBandColorDisplay } from '../../color-transfer.mts';
+import { deriveLimits } from '../limits.mts';
+import { LENS_KEYS, MOSAIC_KEYS, checkKeys, parseDisplay, positive, safePath, validateEnvelope, validateTransfer } from '../recipe.mts';
 
-type GeoRecipe = ReturnType<typeof parseGeoRecipe>;
-export const GEO_FORMATS = ['osiris-geo', 'amica-gaskell', 'osiris-camera', 'llorri-camera', 'nh-lorri-camera', 'nh-mvic-camera', PDS4_GEOMETRY_CUBE_FORMAT, SPICE_CAMERA_FORMAT];
-const safePath = (path: unknown) => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.split(/[\\/]/).includes('..');
-const positive = (value: number | undefined): value is number => value !== undefined && Number.isFinite(value) && value > 0;
-const archivedCamera = (recipe: { format: string }) => ['osiris-camera', 'llorri-camera', 'nh-lorri-camera', 'nh-mvic-camera'].includes(recipe.format);
-const kernelCamera = (recipe: { format: string }) => recipe.format === SPICE_CAMERA_FORMAT;
-const cubeDeclaration = (recipe: Pick<GeoRecipe, 'cube'>) => { if (!recipe.cube) throw new TypeError('Geometry cube recipes declare their planes and identity.'); return recipe.cube; };
-const spiceDeclaration = (recipe: Pick<GeoRecipe, 'spice'>) => { if (!recipe.spice) throw new TypeError('SPICE camera recipes declare their kernels, bodies, instrument and pixel axes.'); return recipe.spice; };
-const framePaths = (recipe: Pick<GeoRecipe, 'format' | 'path' | 'labelPath' | 'originalPath' | 'flatPath' | 'cameraPath' | 'qualityPath' | 'spice'>): string[] => (recipe.format === 'amica-gaskell'
-  ? [recipe.path, recipe.labelPath, recipe.originalPath, recipe.flatPath]
-  : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? [recipe.path, recipe.labelPath]
-  // Kernels from a shared bank are pinned by the bank's manifest, not the body's; a VICAR frame brings its PDS3 label.
-  : kernelCamera(recipe) ? [recipe.path, ...(spiceDeclaration(recipe).image.format === 'vicar-pds3' ? [recipe.labelPath] : []), ...(spiceDeclaration(recipe).kernelSet ? [] : spiceDeclaration(recipe).kernels)]
-  : archivedCamera(recipe) ? [recipe.path, recipe.cameraPath, ...(recipe.format === 'nh-mvic-camera' ? [recipe.labelPath] : [])] : [recipe.path, recipe.qualityPath]).map(path => requireString(path, 'source-bound observation path'));
-/** One recipe per frame: a mosaic's frame entries override the shared recipe. */
-const frameRecipes = (recipe: GeoRecipe) => recipe.frames === undefined ? [{ id: recipe.id, recipe }]
-  : recipe.frames.map(frame => ({ id: frame.id, recipe: parseGeoRecipe({ ...recipe, ...frame, id: recipe.id, frames: undefined, selection: undefined, levelMatching: undefined }) }));
+/** What a format adds to the shared lens shape, and which of the shared choices its product supports. */
+interface GeoSchema {
+  camera: Extract<CameraKind, 'backplane-fit' | 'archived-closure' | 'kernels'>;
+  /** Inputs a frame names beside its id, image path and start time. */
+  frame: { required: readonly string[]; optional?: readonly string[] };
+  /** Blocks the lens adds beside the shared keys. */
+  lens: { required: readonly string[]; optional?: readonly string[] };
+  /** The historical disk functions the format accepts, and whether it may name a published photometric model instead. */
+  photometry: readonly string[]; published: boolean;
+  display: 'percentiles' | 'displayRange'; maximumFrames: number;
+  /** A colour product's bands and quantity, which its decoder checks against the native label. The recipe declares only their common range. */
+  color?: { bands: readonly string[]; inputQuantity: BandColorDisplay['inputQuantity']; units: string };
+}
+
+export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
+  // Archive backplanes carry each pixel's surface point; the camera is fitted to them.
+  'osiris-geo': { camera: 'backplane-fit', frame: { required: ['qualityPath'] }, lens: { required: ['filter', 'allowLossy'], optional: ['radiometry'] },
+    photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
+  // AMICA admits lossy frames and counts them in the report; one flat field serves every frame.
+  'amica-gaskell': { camera: 'backplane-fit', frame: { required: ['labelPath', 'originalPath'] }, lens: { required: ['filter', 'flatPath'] },
+    photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
+  [PDS4_GEOMETRY_CUBE_FORMAT]: { camera: 'backplane-fit', frame: { required: ['labelPath'] }, lens: { required: ['filter', 'cube'] },
+    photometry: ['lommel-seeliger'], published: true, display: 'percentiles', maximumFrames: 8 },
+  // Archived cameras close over the exact source mesh, so they may also keep the acquisition illumination.
+  'osiris-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter', 'allowLossy'], optional: ['refinement'] },
+    photometry: ['lommel-seeliger', 'minnaert', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
+  'llorri-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter'] },
+    photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
+  // Paired raw frames supply detector validity; the native decoder rejects compressed inputs.
+  'near-msi-camera': { camera: 'archived-closure', frame: { required: ['cameraPath', 'originalPath'] }, lens: { required: ['filter', 'refinement'] },
+    photometry: ['retained-observation'], published: false, display: 'percentiles', maximumFrames: 8 },
+  'nh-lorri-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter'] },
+    photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
+  // Registered enhanced colour keeps its acquisition illumination. Its decoder checks these bands and data-number units against the label.
+  'nh-mvic-camera': { camera: 'archived-closure', frame: { required: ['cameraPath', 'labelPath'] }, lens: { required: ['filter'] },
+    photometry: ['retained-observation'], published: false, display: 'displayRange', maximumFrames: 1,
+    color: { bands: ['NIR', 'RED', 'BLUE'], inputQuantity: 'derived-band-value', units: 'archive-derived data numbers; enhanced NIR / RED / BLUE color' } },
+  // A VICAR frame brings its PDS3 label; a FITS frame carries its own header.
+  [SPICE_CAMERA_FORMAT]: { camera: 'kernels', frame: { required: [], optional: ['labelPath'] }, lens: { required: ['filter', 'spice'], optional: ['refinement'] },
+    photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
+};
+export const GEO_FORMATS = Object.keys(GEO_SCHEMAS);
+
+const CONTEXT = 'georeferenced observation recipe';
+export const parseGeoLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text, falseColor: optional(boolean) }),
+  frames: array(shape({ id: text, path: text, startTime: text, qualityPath: optional(text), labelPath: optional(text), originalPath: optional(text), cameraPath: optional(text) })),
+  filter: text, allowLossy: optional(boolean), radiometry: optional(text), flatPath: optional(text),
+  cube: optional(parseGeometryCube), spice: optional(parseSpiceCamera), refinement: optional(parseLimbRefinement),
+  selection: optional(text), levelMatching: optional(parseLevelMatching), transfer: surfaceTransfer,
+  photometry: publishedOr(shape({ model: text, phaseCorrection: optional(parsePhasePhotometry), coefficient: optional(number), phaseCoefficientPerDegree: optional(number),
+    referenceIncidenceDegrees: number, referenceEmissionDegrees: number, maximumIncidenceDegrees: number, maximumEmissionDegrees: number, maximumGain: number })),
+  display: parseDisplay });
+type GeoLens = ReturnType<typeof parseGeoLens>;
+type GeoFrame = GeoLens['frames'][number];
+
+const schemaOf = (format: unknown) => {
+  const key = String(format);
+  if (!Object.hasOwn(GEO_SCHEMAS, key)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
+  return GEO_SCHEMAS[key];
+};
+const cubeDeclaration = (recipe: Pick<GeoLens, 'cube'>) => { if (!recipe.cube) throw new TypeError('Geometry cube recipes declare their planes and identity.'); return recipe.cube; };
+const spiceDeclaration = (recipe: Pick<GeoLens, 'spice'>) => { if (!recipe.spice) throw new TypeError('SPICE camera recipes declare their kernels, bodies, instrument and pixel axes.'); return recipe.spice; };
+/** A frame's own inputs, the inputs its frames share and everything one frame consumes. Kernels from a shared bank are pinned by the bank's manifest, not the body's. */
+const framePaths = (frame: GeoFrame) => [frame.path, frame.qualityPath, frame.labelPath, frame.originalPath, frame.cameraPath].filter((path): path is string => path !== undefined);
+const sharedPaths = (recipe: GeoLens) => [...(recipe.flatPath === undefined ? [] : [recipe.flatPath]), ...(recipe.spice && !recipe.spice.kernelSet ? recipe.spice.kernels : [])];
+const consumedPaths = (recipe: GeoLens, frame: GeoFrame) => [...framePaths(frame), ...sharedPaths(recipe)];
+const within = (value: number | undefined, low: number, high: number) => value !== undefined && value >= low && value <= high;
+const AXES = ['X', '-X', 'Y', '-Y', 'Z', '-Z'];
 
 function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
-  const recipe = decodeProfile(parseGeoRecipe, value, 'Invalid source-bound georeferenced observation recipe.'), geometry = parseSurfaceGeometry(sourceGeometry);
-  if (recipe.frames !== undefined) {
-    const frames = recipe.frames, levels = recipe.levelMatching;
-    const ownedPaths = Array.isArray(frames) ? frames.flatMap(frame => framePaths({ ...recipe, ...frame })
-      .filter(path => recipe.format !== 'amica-gaskell' || path !== recipe.flatPath)) : [];
-    if (!Array.isArray(frames) || frames.length < 2 || frames.length > 8 || recipe.path !== undefined ||
-        recipe.qualityPath !== undefined || recipe.labelPath !== undefined || recipe.originalPath !== undefined || recipe.cameraPath !== undefined || recipe.startTime !== undefined ||
-        recipe.selection === undefined || !['lowest-emission', 'recipe-order'].includes(recipe.selection) ||
-        !levels || !Number.isInteger(levels.samplesPerTriangle) || levels.samplesPerTriangle === undefined || levels.samplesPerTriangle < 4 || levels.samplesPerTriangle > 64 ||
-        !Number.isInteger(levels.minimumPairs) || levels.minimumPairs < 64 || levels.minimumPairs > 10000 ||
-        !positive(levels.maximumLogMad) || levels.maximumLogMad > .3 || !positive(levels.maximumGain) || levels.maximumGain < 1 || levels.maximumGain > 1.5 ||
-        (levels.maximumAngleDegrees !== undefined && (!positive(levels.maximumAngleDegrees) || levels.maximumAngleDegrees >= 90)) ||
-        frames.some(frame => !frame || !/^[a-z][a-z0-9-]*$/.test(frame.id) || Object.keys(frame).some(key => !['id', 'path', 'qualityPath', 'labelPath', 'originalPath', 'cameraPath', 'startTime'].includes(key))) ||
-        new Set(frames.map(frame => frame.id)).size !== frames.length || new Set(ownedPaths).size !== ownedPaths.length) {
-      throw new TypeError('Invalid source-bound georeferenced observation mosaic.');
-    }
-    for (const frame of frames) validateGeoRecipe({ ...recipe, ...frame, id: recipe.id, frames: undefined, selection: undefined, levelMatching: undefined }, geometry);
+  const record = requireRecord(value), schema = schemaOf(record.format);
+  checkKeys(record, [...LENS_KEYS, ...schema.lens.required], [...MOSAIC_KEYS, ...(schema.lens.optional ?? [])], CONTEXT);
+  for (const frame of requireArray(record.frames)) checkKeys(frame, ['id', 'path', 'startTime', ...schema.frame.required], schema.frame.optional ?? [], `${CONTEXT} frame`);
+  const recipe = decodeProfile(parseGeoLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
+  validateEnvelope(recipe, [...recipe.frames.flatMap(framePaths), ...sharedPaths(recipe)],
+    { selections: ['lowest-emission', 'recipe-order'], displays: [schema.display], maximumFrames: schema.maximumFrames, maximumLevelGain: 1.5, samplesPerTriangle: 'required' }, CONTEXT);
+  validateTransfer(recipe.transfer, geometry, CONTEXT);
+  if (!recipe.filter || (recipe.format === 'amica-gaskell' && recipe.filter !== 'V') || recipe.frames.some(frame => !frame.startTime)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
+  if (schema.color && (recipe.display.displayRange?.[0] !== 0 || recipe.metadata.falseColor !== true)) throw new TypeError('MVIC color requires source-derived bands, false color and retained illumination.');
+  if (recipe.radiometry !== undefined && recipe.radiometry !== 'radiance-factor') throw new TypeError('Invalid observation radiometry.');
+  validatePhotometry(recipe, schema);
+  if (recipe.spice) validateSpice(recipe.spice, recipe.frames);
+  if (recipe.refinement) validateRefinement(recipe.refinement);
+}
+
+/** A published model record, or one of the format's historical disk functions within the bounds every camera route shares. */
+function validatePhotometry(recipe: GeoLens, schema: GeoSchema) {
+  const photometry = recipe.photometry, emission = recipe.transfer.maximumEmissionDegrees;
+  if ('referenceDegrees' in photometry) {
+    if (!schema.published || !validPublishedPhotometryShape(photometry, emission)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
     return;
   }
-  if (recipe.selection !== undefined || recipe.levelMatching !== undefined) throw new TypeError('Invalid source-bound observation selection.');
-  const policy = recipe.transfer, published = 'referenceDegrees' in recipe.photometry ? recipe.photometry : null, photometry = 'referenceDegrees' in recipe.photometry ? null : recipe.photometry;
-  const phase = photometry?.phaseCorrection;
-  if (recipe.format === 'nh-mvic-camera') {
-    const display = parseBandColorDisplay(recipe.colorDisplay,['NIR','RED','BLUE']);
-    if (display.inputQuantity !== 'derived-band-value' || display.displayRange[0] !== 0 || recipe.metadata.falseColor !== true ||
-        photometry?.model !== 'retained-observation' || recipe.frames !== undefined) throw new TypeError('MVIC color requires source-derived bands, false color and retained illumination.');
-  } else if (recipe.colorDisplay !== undefined) throw new TypeError('Only a registered color product declares a band display.');
-  if (recipe.radiometry !== undefined && (recipe.format !== 'osiris-geo' || recipe.radiometry !== 'radiance-factor')) throw new TypeError('Invalid observation radiometry.');
+  const phase = photometry.phaseCorrection;
   if (phase && (recipe.format !== 'osiris-geo' || recipe.radiometry !== 'radiance-factor' || phase.model !== 'hg-shadow-hiding' ||
       !Number.isFinite(phase.asymmetry) || Math.abs(phase.asymmetry) >= 1 || !positive(phase.amplitude) || !positive(phase.width) ||
       !positive(phase.minimumDegrees) || !(phase.maximumDegrees > phase.minimumDegrees) || phase.maximumDegrees >= 90 ||
       !(phase.referenceDegrees >= phase.minimumDegrees && phase.referenceDegrees <= phase.maximumDegrees) ||
       !positive(phase.maximumGain) || phase.maximumGain < 1 || phase.maximumGain > 1.5)) throw new TypeError('Invalid observation phase correction.');
-  const paths = framePaths(recipe), amica = recipe.format === 'amica-gaskell', cube = recipe.format === PDS4_GEOMETRY_CUBE_FORMAT, controlled = archivedCamera(recipe), kernels = kernelCamera(recipe);
-  const spice = recipe.spice;
-  if (kernels !== (spice !== undefined)) throw new TypeError('Only SPICE camera recipes declare a spice block.');
-  if (spice && (spice.kernels.length < 2 || spice.kernels.length > 32 || !Number.isInteger(spice.observer) || !Number.isInteger(spice.target) || spice.observer === spice.target ||
+  if (!schema.photometry.includes(photometry.model) ||
+      (photometry.model === 'minnaert' && !(within(photometry.coefficient, .5, 1) && within(photometry.phaseCoefficientPerDegree, 0, .01))) ||
+      (photometry.model === 'retained-observation' && photometry.maximumGain !== 1) ||
+      photometry.referenceIncidenceDegrees !== 0 || photometry.referenceEmissionDegrees !== 0 ||
+      !positive(photometry.maximumIncidenceDegrees) || photometry.maximumIncidenceDegrees >= 90 ||
+      !positive(photometry.maximumEmissionDegrees) || photometry.maximumEmissionDegrees > emission ||
+      !positive(photometry.maximumGain) || photometry.maximumGain > 3) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
+}
+
+function validateSpice(spice: SpiceCameraDeclaration, frames: readonly GeoFrame[]) {
+  const vicar = spice.image.format === 'vicar-pds3';
+  if (spice.kernels.length < 2 || spice.kernels.length > 32 || !Number.isInteger(spice.observer) || !Number.isInteger(spice.target) || spice.observer === spice.target ||
       !Number.isInteger(spice.instrument) || !Number.isInteger(spice.clock.spacecraft) ||
       !(spice.clock.header ? spice.clock.start === undefined && spice.clock.stop === undefined : spice.clock.start && spice.clock.stop) ||
       (spice.kernelSet !== undefined && !/^[a-z][a-z0-9-]*$/u.test(spice.kernelSet)) ||
       (spice.image.format !== undefined && !['fits', 'vicar-pds3'].includes(spice.image.format)) ||
-      ((spice.image.format === 'vicar-pds3') !== (spice.clock.start !== undefined) || (spice.image.format === 'vicar-pds3' && !safePath(recipe.labelPath))) || !spice.bodyFrame || !ABERRATIONS.includes(spice.aberration as typeof ABERRATIONS[number]) ||
+      vicar !== (spice.clock.start !== undefined) || frames.some(frame => (frame.labelPath !== undefined) !== vicar) ||
+      !spice.bodyFrame || !ABERRATIONS.includes(spice.aberration as typeof ABERRATIONS[number]) ||
       spice.pixels.focalLength.unit !== 'mm' || !['micrometre', 'mm'].includes(spice.pixels.pixelPitch.unit) || ![0, 1].includes(spice.pixels.origin) ||
-      !['X', '-X', 'Y', '-Y', 'Z', '-Z'].includes(spice.pixels.column) || !['X', '-X', 'Y', '-Y', 'Z', '-Z'].includes(spice.pixels.row) || spice.pixels.column.replace('-', '') === spice.pixels.row.replace('-', '') ||
-      (spice.image.plane !== undefined && (!Number.isInteger(spice.image.plane) || spice.image.plane < 1)) || !spice.image.quantity)) throw new TypeError('Invalid SPICE camera declaration.');
-  const refinement = recipe.refinement;
-  if (refinement !== undefined && (!(kernels || recipe.format === 'osiris-camera') || refinement.method !== 'mesh-limb' ||
+      !AXES.includes(spice.pixels.column) || !AXES.includes(spice.pixels.row) || spice.pixels.column.replace('-', '') === spice.pixels.row.replace('-', '') ||
+      (spice.image.plane !== undefined && (!Number.isInteger(spice.image.plane) || spice.image.plane < 1)) || !spice.image.quantity) throw new TypeError('Invalid SPICE camera declaration.');
+}
+
+function validateRefinement(refinement: ReturnType<typeof parseLimbRefinement>) {
+  if (refinement.method !== 'mesh-limb' ||
       !positive(refinement.maximumCorrectionDegrees) || refinement.maximumCorrectionDegrees > 2 || !positive(refinement.maximumResidualPixels) || refinement.maximumResidualPixels > 5 ||
       !Number.isInteger(refinement.minimumControls) || refinement.minimumControls < 16 || refinement.minimumControls > 5000 ||
       (refinement.threshold !== undefined && !Number.isFinite(refinement.threshold)) ||
       (refinement.searchPixels !== undefined && (!Number.isInteger(refinement.searchPixels) || refinement.searchPixels < 8 || refinement.searchPixels > 512)) ||
       (refinement.maximumControls !== undefined && (!Number.isInteger(refinement.maximumControls) || refinement.maximumControls < 2 * refinement.minimumControls || refinement.maximumControls > 20000)) ||
-      (refinement.minimumSharpness !== undefined && (!Number.isFinite(refinement.minimumSharpness) || refinement.minimumSharpness < 0 || refinement.minimumSharpness > 0.9)))) throw new TypeError('Invalid camera limb refinement.');
-  const validPhotometry = photometry && (photometry.model === 'lommel-seeliger' ||
-    (recipe.format === 'osiris-camera' && photometry.model === 'minnaert' &&
-      Number.isFinite(photometry.coefficient) && photometry.coefficient !== undefined && photometry.coefficient >= .5 && photometry.coefficient <= 1 &&
-      Number.isFinite(photometry.phaseCoefficientPerDegree) && photometry.phaseCoefficientPerDegree !== undefined && photometry.phaseCoefficientPerDegree >= 0 && photometry.phaseCoefficientPerDegree <= .01) ||
-    ((controlled || kernels) && photometry.model === 'retained-observation' && photometry.maximumGain === 1));
-  if (!GEO_FORMATS.includes(recipe.format) || !/^[a-z][a-z0-9-]*$/.test(recipe.id) || !/^[a-z][a-z0-9-]*$/.test(recipe.consumer) ||
-      !paths.every(safePath) || new Set(paths).size !== paths.length ||
-      (amica ? recipe.qualityPath !== undefined || recipe.allowLossy !== true || recipe.filter !== 'V'
-        : cube ? recipe.cube === undefined || recipe.qualityPath !== undefined || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.allowLossy !== false
-        : kernels ? recipe.qualityPath !== undefined || (recipe.labelPath !== undefined) !== (recipe.spice?.image.format === 'vicar-pds3') || recipe.originalPath !== undefined || recipe.flatPath !== undefined || recipe.cameraPath !== undefined || recipe.allowLossy !== false
-        : (recipe.format === 'nh-mvic-camera' ? !safePath(recipe.labelPath) : recipe.labelPath !== undefined) || recipe.originalPath !== undefined || recipe.flatPath !== undefined) ||
-      (!cube && recipe.cube !== undefined) ||
-      (controlled ? recipe.qualityPath !== undefined : recipe.cameraPath !== undefined) ||
-      !recipe.startTime || !recipe.filter || typeof recipe.allowLossy !== 'boolean' ||
-      typeof recipe.metadata?.label !== 'string' || !recipe.metadata?.coverage ||
-      !geometry || geometry.simplification?.method !== 'source-meshoptimizer' ||
-      !positive(policy?.maximumSourceDistanceMeters) || policy.maximumSourceDistanceMeters > geometry.simplification.maximumErrorMeters ||
-      // Separation is a fixed distance checked against the frames' measured footprint on load, or a multiple of each sample's own footprint.
-      !(policy.maximumSeparationFootprints === undefined ? positive(policy.maximumSeparationMeters)
-        : policy.maximumSeparationMeters === undefined && positive(policy.maximumSeparationFootprints) && policy.maximumSeparationFootprints <= MAXIMUM_SEPARATION_FOOTPRINTS) ||
-      !positive(policy?.visibilityToleranceMeters) || policy.visibilityToleranceMeters > 1 ||
-      !positive(policy?.maximumEmissionDegrees) || policy.maximumEmissionDegrees >= 90 ||
-      (published ? !validPublishedPhotometryShape(published, policy.maximumEmissionDegrees) :
-      !validPhotometry || !photometry || photometry.referenceIncidenceDegrees !== 0 || photometry.referenceEmissionDegrees !== 0 ||
-      !positive(photometry.maximumIncidenceDegrees) || photometry.maximumIncidenceDegrees >= 90 ||
-      !positive(photometry.maximumEmissionDegrees) || photometry.maximumEmissionDegrees > policy.maximumEmissionDegrees ||
-      !positive(photometry.maximumGain) || photometry.maximumGain > 3) ||
-      !Array.isArray(recipe.displayPercentiles) || recipe.displayPercentiles.length !== 2 ||
-      !recipe.displayPercentiles.every(Number.isFinite) || recipe.displayPercentiles[0] < 0 || recipe.displayPercentiles[1] > 100 ||
-      recipe.displayPercentiles[0] >= recipe.displayPercentiles[1]) throw new TypeError('Invalid source-bound georeferenced observation recipe.');
+      (refinement.minimumSharpness !== undefined && (!Number.isFinite(refinement.minimumSharpness) || refinement.minimumSharpness < 0 || refinement.minimumSharpness > 0.9))) throw new TypeError('Invalid camera limb refinement.');
 }
 
-async function loadGeoFrame(recipe: GeoRecipe, id: string, { sourceDirectory, source, radial, config, entries }: LoadContext, photometry: ObservationPhotometry): Promise<ObservationFrame> {
-  const paths = framePaths(recipe);
+async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory, source, radial, config, entries }: LoadContext, photometry: ObservationPhotometry): Promise<ObservationFrame> {
+  const paths = consumedPaths(recipe, frame);
   if (entries.length !== paths.length || !paths.every(path => entries.some(e => e.path === path))) throw new Error('GEO observation must consume its exact pinned image and quality companion.');
   const read = (path: string | undefined) => readFile(resolve(sourceDirectory, requireString(path)));
-  const closure = archivedCamera(recipe) ? parseGeoCameraClosure(JSON.parse((await read(recipe.cameraPath)).toString('utf8'))) : null;
+  const closure = schemaOf(recipe.format).camera === 'archived-closure' ? parseGeoCameraClosure(JSON.parse((await read(frame.cameraPath)).toString('utf8'))) : null;
   if (closure) {
     const pins = source.manifest?.inputs;
     if (!pins || closure.meshSha256 !== pins.find(e => e.path === config.geometry.radialTerrain.path)?.expectedSha256 ||
@@ -144,12 +175,12 @@ async function loadGeoFrame(recipe: GeoRecipe, id: string, { sourceDirectory, so
       await source.validatePath(entry.path);
     }
   }
-  const identity = (frame: { startTime?: unknown; filter?: unknown }) => {
-    if (frame.startTime !== recipe.startTime || frame.filter !== recipe.filter) throw new Error('GEO observation identity changed.');
-    return { startTime: requireString(recipe.startTime), filter: recipe.filter };
+  const identity = (decoded: { startTime?: unknown; filter?: unknown }) => {
+    if (decoded.startTime !== frame.startTime || decoded.filter !== recipe.filter) throw new Error('GEO observation identity changed.');
+    return { startTime: frame.startTime, filter: recipe.filter };
   };
-  // Registered colour keeps its authored common scale, so its frame computes no pixel percentiles.
-  const common = { id, photometry, limits: recipe.transfer, mesh: radial.grid, displayPercentiles: recipe.colorDisplay ? undefined : recipe.displayPercentiles };
+  // An authored display range keeps its common scale, so its frame computes no pixel percentiles.
+  const common = { id: frame.id, photometry, limits: recipe.transfer, mesh: radial.grid, displayPercentiles: recipe.display.percentiles };
   // A declared refinement fits one rotation of the camera to the mesh's lit limb before any geometry is derived.
   const refined = <T extends { camera: unknown; width: number; height: number; planes: Record<string, NumericRaster>; acceptPixel?(index: number): boolean; qualityReport: Record<string, unknown> }>(decoded: T): T => {
     if (!recipe.refinement) return decoded;
@@ -171,75 +202,83 @@ async function loadGeoFrame(recipe: GeoRecipe, id: string, { sourceDirectory, so
     return cameraFrame({ ...common, image: { width: decoded.width, height: decoded.height, values: decoded.planes.IMAGE, ...identity(decoded), ...image }, camera,
       geometry: archiveBackplanes(decoded, camera, shapeModel) });
   };
+  const allowLossy = recipe.allowLossy === true;
+  if (recipe.format === 'near-msi-camera') {
+    const nativeClosure = parseNearCameraClosure(closure);
+    const decoded = refined({ ...decodeNearMsi(await read(frame.path), await read(frame.originalPath), nativeClosure), camera: closure });
+    return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera));
+  }
   if (recipe.format === 'llorri-camera') {
-    const decoded = decodeLlorri(await read(recipe.path), closure);
+    const decoded = decodeLlorri(await read(frame.path), closure);
     return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera, decoded));
   }
   if (recipe.format === 'nh-lorri-camera') {
-    const decoded = decodeNewHorizonsLorri(await read(recipe.path), closure);
+    const decoded = decodeNewHorizonsLorri(await read(frame.path), closure);
     return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera, decoded));
   }
   if (recipe.format === 'nh-mvic-camera') {
-    const decoded = decodeArrokothMvic(await read(recipe.path), closure, (await read(recipe.labelPath)).toString('utf8'));
+    const decoded = decodeArrokothMvic(await read(frame.path), closure, (await read(frame.labelPath)).toString('utf8'));
     return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera, decoded), decoded.colorPlanes);
   }
   if (recipe.format === 'osiris-camera') {
-    const decoded = refined(decodeOsirisReflectance(await read(recipe.path), closure, recipe.allowLossy));
+    const decoded = refined(decodeOsirisReflectance(await read(frame.path), closure, allowLossy));
     return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera));
   }
-  if (kernelCamera(recipe)) {
+  if (recipe.format === SPICE_CAMERA_FORMAT) {
     const spice = spiceDeclaration(recipe);
     const kernels = await loadKernelSet(spice.kernelSet ? await kernelBankPaths(spice.kernelSet, spice.kernels) : spice.kernels.map(path => resolve(sourceDirectory, path)));
-    const decoded = refined(decodeSpiceCameraFrame(await read(recipe.path), kernels, spice, recipe.filter,
-      spice.image.format === 'vicar-pds3' ? (await read(recipe.labelPath)).toString('latin1') : undefined));
+    const decoded = refined(decodeSpiceCameraFrame(await read(frame.path), kernels, spice, recipe.filter,
+      spice.image.format === 'vicar-pds3' ? (await read(frame.labelPath)).toString('latin1') : undefined));
     return rayFrame(decoded, matrixCamera('kernels', decoded.camera));
   }
   if (recipe.format === PDS4_GEOMETRY_CUBE_FORMAT) {
-    const decoded = decodePds4GeometryCube(await read(recipe.path), (await read(recipe.labelPath)).toString('utf8'),
-      { fileName: basename(requireString(recipe.path)), cube: cubeDeclaration(recipe), filter: recipe.filter });
+    const decoded = decodePds4GeometryCube(await read(frame.path), (await read(frame.labelPath)).toString('utf8'),
+      { fileName: basename(frame.path), cube: cubeDeclaration(recipe), filter: recipe.filter });
     return backplaneFrame(decoded, { reject: i => decoded.acceptPixel(i) ? null : 'quality', report: decoded.qualityReport }, decoded.shapeKernel);
   }
   if (recipe.format === 'amica-gaskell') {
-    const decoded = decodeAmicaGeo(await read(recipe.path), (await read(recipe.labelPath)).toString('ascii'), await read(recipe.originalPath), await read(recipe.flatPath));
+    const decoded = decodeAmicaGeo(await read(frame.path), (await read(frame.labelPath)).toString('ascii'), await read(frame.originalPath), await read(recipe.flatPath));
     return backplaneFrame(decoded, { reject: i => decoded.acceptPixel(i) ? null : 'quality', lossy: () => decoded.qualityReport.outputMode === 'LOSSY', report: decoded.qualityReport }, decoded.shapeModel);
   }
-  const decoded = decodeOsirisGeo(await read(recipe.path));
+  const decoded = decodeOsirisGeo(await read(frame.path));
   identity(decoded);
-  const quality = decodeOsirisQuality(await read(recipe.qualityPath), decoded);
-  return backplaneFrame(decoded, { reject: i => acceptOsirisQuality(quality.flags[i], recipe.allowLossy) ? null : 'quality', lossy: i => Boolean(quality.flags[i] & 8),
+  const quality = decodeOsirisQuality(await read(frame.qualityPath), decoded);
+  return backplaneFrame(decoded, { reject: i => acceptOsirisQuality(quality.flags[i], allowLossy) ? null : 'quality', lossy: i => Boolean(quality.flags[i] & 8),
     ...(recipe.radiometry === 'radiance-factor' ? { radianceFactor: osirisRadianceFactorScale(decoded.history) } : {}), report: quality.report }, decoded.shapeModel);
 }
 
-function displayUnits(recipe: GeoRecipe, photometry: ObservationPhotometry) {
+function displayUnits(recipe: GeoLens, photometry: ObservationPhotometry) {
   const retained = !('referenceDegrees' in recipe.photometry) && recipe.photometry.model === 'retained-observation';
   const quantity = (name: string) => retained ? `relative ${name} with original illumination` : `relative disk-normalized ${name}`;
   return photometry.units ?? `${recipe.format === 'amica-gaskell' ? 'relative flat-fielded detector brightness with approximate disk normalization'
     : ['llorri-camera', 'nh-lorri-camera'].includes(recipe.format) ? 'relative DN/s with original illumination'
-    : recipe.format === 'osiris-camera' ? quantity('I/F')
+    : ['osiris-camera', 'near-msi-camera'].includes(recipe.format) ? quantity('I/F')
     : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? quantity(cubeDeclaration(recipe).quantity)
-    : kernelCamera(recipe) ? quantity(spiceDeclaration(recipe).image.quantity)
+    : recipe.format === SPICE_CAMERA_FORMAT ? quantity(spiceDeclaration(recipe).image.quantity)
     : recipe.radiometry === 'radiance-factor' ? 'relative disk- and phase-normalized I/F' : 'relative disk-normalized radiance'}; linear grayscale display`;
 }
 
 export const geoFormat: SurfaceObservationFormat = {
   validate: validateGeoRecipe,
-  paths: value => [...new Set(frameRecipes(parseGeoRecipe(value)).flatMap(frame => framePaths(frame.recipe)))],
+  paths: value => { const recipe = parseGeoLens(value); return [...new Set(recipe.frames.flatMap(frame => consumedPaths(recipe, frame)))]; },
   async load(value, context) {
-    const recipe = parseGeoRecipe(value);
+    const recipe = parseGeoLens(value);
     // One photometric treatment serves every frame of a mosaic.
     const photometry = 'referenceDegrees' in recipe.photometry ? await publishedPhotometry(context.sourceDirectory, context.source.manifest, recipe.photometry) : diskPhotometry(recipe.photometry);
     const frames: ObservationFrame[] = [];
-    for (const frame of frameRecipes(recipe)) {
-      const paths = framePaths(frame.recipe);
-      frames.push(await loadGeoFrame(frame.recipe, frame.id, { ...context, entries: context.entries.filter(entry => paths.includes(entry.path)) }, photometry));
+    for (const frame of recipe.frames) {
+      const paths = consumedPaths(recipe, frame);
+      frames.push(await loadGeoFrame(recipe, frame, { ...context, entries: context.entries.filter(entry => paths.includes(entry.path)) }, photometry));
     }
     const { report: limits, exceeded } = deriveLimits(recipe.transfer, frames, context.config.geometry.radialTerrain.simplification.maximumErrorMeters);
-    const colorDisplay = recipe.colorDisplay === undefined ? undefined : parseBandColorDisplay(recipe.colorDisplay,['NIR','RED','BLUE']);
+    const range = recipe.display.displayRange, color = schemaOf(recipe.format).color;
     const policy: SurfacePolicy = { format: recipe.format, maximumSourceDistanceMeters: recipe.transfer.maximumSourceDistanceMeters, precheckDisplayPoint: true,
-      selection: recipe.frames === undefined ? 'single' : recipe.selection === 'recipe-order' ? 'recipe-order' : 'lowest-emission',
+      selection: frames.length === 1 ? 'single' : recipe.selection === 'recipe-order' ? 'recipe-order' : 'lowest-emission',
       levelMatching: recipe.levelMatching, samplesPerTriangle: recipe.levelMatching?.samplesPerTriangle ?? 8,
-      display: colorDisplay ? { range: 'authored', low: colorDisplay.displayRange[0], high: colorDisplay.displayRange[1], units: 'archive-derived data numbers; enhanced NIR / RED / BLUE color', colorDisplay }
-        : { range: 'reference-pixels', percentiles: recipe.displayPercentiles, units: displayUnits(recipe, photometry) }, photometry: photometry.report, limits };
+      // A colour product's floating bands are encoded once, after surface transfer, on the shared band display.
+      display: range && color ? { range: 'authored', low: range[0], high: range[1], units: color.units,
+          colorDisplay: bandColorDisplay(color.bands, color.inputQuantity, range) }
+        : { range: 'reference-pixels', percentiles: recipe.display.percentiles ?? [], units: displayUnits(recipe, photometry) }, photometry: photometry.report, limits };
     return { frames, policy, exceeded };
   },
 };

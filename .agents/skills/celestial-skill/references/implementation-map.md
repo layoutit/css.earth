@@ -111,6 +111,12 @@ instead of editing a shared list or atlas position.
   its height datum, validity limits and cartographic lighting to
   `tools/objects/terrestrial-layers/scientific-raster.mts`. These values and gap
   rules belong to its dataset.
+- **Spectral absorption maps:** Charon's `source/science/leisa/bands.json`
+  pairs LEISA spectra with wavelength and geometry cubes.
+  `tools/objects/observation/spectral-band-maps.mts` prepares footprint-limited
+  numeric maps; `tools/oracles/fits/charon-leisa.py` independently checks the
+  native samples and arithmetic. Follow the spectral guidance in
+  [scientific faithfulness](scientific-faithfulness.md).
 - **A sourced shape model:** Haumea's `source/preparation/shape-model.json` uses
   `tools/objects/shape-model/`. Inspect both the authored schema and that
   preparer's actual shape support before choosing it for another body; verify
@@ -160,7 +166,7 @@ instead of writing a reader for one body.
 | AMICA Gaskell DDR cubes | `amica-gaskell` | Itokawa `amica` | Image, label, original and flat-field pins | `amica-geo.oracle.test.mts` |
 | L'LORRI images with TAN-SIP distortion | `llorri-camera` | Donaldjohanson `llorri` | Camera pins | `llorri-geo.oracle.test.mts` |
 | New Horizons LORRI calibrated FITS, uncertainty and quality HDUs | `nh-lorri-camera` | Arrokoth `lorri` | Camera pins with a qualified attitude for the exact mesh; native TAN-SIP WCS | `new-horizons-geo.test.mts` (Astropy pixels and WCS) |
-| Arrokoth CA05 registered four-band MVIC cube | `nh-mvic-camera` | Arrokoth `mvic` | Image-space registration to its contemporaneous LORRI camera; native PDS band/quantity label and the shared band-composite display policy | `new-horizons-geo.test.mts` (Astropy pixels) |
+| Arrokoth CA05 registered four-band MVIC cube | `nh-mvic-camera` | Arrokoth `mvic` | Image-space registration to its contemporaneous LORRI camera; its native PDS label confirms the bands and data-number quantity, and the recipe declares one `displayRange` | `new-horizons-geo.test.mts` (Astropy pixels) |
 | Images with SPICE kernels and no geometry | `spice-camera` | Tethys `iss`: a Cassini ISS VICAR image with its PDS3 label | The `spice` block: kernel bank and kernels in load order, bodies, body-fixed frame, instrument, clock keywords, pixel axes; limb refinement | `tools/spice/oracle.test.mts` |
 | Encounter FITS frames with a control network | `encounter-fits` | Wild 2 `navcam`, Tempel 1, Hartley 2 | Frame, label and control pins, level matching | `encounter-fits.oracle.test.mts` |
 | Catalog cameras for a shape model | `controlled-shape-camera` | Ida and Gaspra `calibrated`, and 20 other small bodies | Frame catalog pins and display settings | None yet |

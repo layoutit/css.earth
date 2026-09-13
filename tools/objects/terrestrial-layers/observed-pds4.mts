@@ -1,9 +1,13 @@
 import {parsePds4Policy,parseImageEntry} from './source-records.mts';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { parseBandColorDisplay, bandColorByte, bandColorEvidence } from '../color-transfer.mts';
+import { bandColorDisplay, bandColorByte, bandColorEvidence } from '../color-transfer.mts';
+import { pds4Block, pds4Blocks, pds4Number } from '../pds-labels.mts';
+import { checkKeys } from '../surface-observations/recipe.mts';
 
 export function validatePds4ObservationPolicy(value: unknown) {
+  // The wavelengths name the bands, so the policy declares one display range and nothing else about colour.
+  checkKeys(value, ['kind', 'labelPath', 'lidvid', 'bands', 'wavelengthsNm', 'displayRange'], [], 'PDS4 color observation policy');
   const p=parsePds4Policy(value);
   if (p.kind !== 'pds4-float-rgb' || typeof p.labelPath !== 'string' || !p.labelPath || p.labelPath.startsWith('/') ||
       p.labelPath.split(/[\\/]/).includes('..') || !/^urn:nasa:pds:.+::\d+\.\d+$/.test(p.lidvid) ||
@@ -12,50 +16,36 @@ export function validatePds4ObservationPolicy(value: unknown) {
       !Array.isArray(p.displayRange) || p.displayRange.length !== 2 || !p.displayRange.every(Number.isFinite) || !(p.displayRange[0] < p.displayRange[1])) {
     throw new TypeError('Invalid PDS4 color observation policy.');
   }
-  const display=parseBandColorDisplay(p.colorDisplay,p.wavelengthsNm.map(n=>`${n} nm`));
-  if(display.inputQuantity!=='derived-band-value'||display.displayRange.some((n,i)=>n!==p.displayRange[i]))
-    throw new TypeError('PDS4 enhanced-color policy must preserve the archive-derived values and declared display range.');
   return p;
 }
 
 // Narrow pinned PDS4 product family: no entity expansion, projection guessing or implicit scaling.
 export function readPds4ColorLabel(xml: string) {
   if (typeof xml !== 'string' || /<!DOCTYPE|<!ENTITY/.test(xml)) throw new Error('Unsupported PDS4 XML.');
-  const all = (text: string, tag: string) => [...text.matchAll(new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)</${tag}>`, 'g'))];
-  const field = (text: string, tag: string) => {
-    const values = all(text, tag);
-    if (values.length !== 1) throw new Error(`Missing or ambiguous PDS4 field: ${tag}`);
-    return values[0][1].trim();
-  };
-  const number = (text: string, tag: string, unit?: string) => {
-    const value = Number(field(text, tag));
-    if (!Number.isFinite(value) || (unit && !all(text, tag)[0][0].startsWith(`<${tag} unit="${unit}">`))) throw new Error(`Invalid PDS4 number or unit: ${tag}`);
-    return value;
-  };
-  const array = field(xml, 'Array_3D_Spectrum'), cart = field(xml, 'cart:Cartography');
-  const identity = field(xml, 'Identification_Area').split('<Modification_History>')[0];
-  const axes = all(array, 'Axis_Array'), sizes = axes.map(a => number(a[1], 'elements'));
-  const bins = all(xml, 'sp:Bin_Wavelength'), wavelengthsNm = bins.map(b => number(b[1], 'sp:center_wavelength', 'nm'));
-  const radius = number(cart, 'cart:a_axis_radius', 'm'), resolution = number(cart, 'cart:pixel_resolution_x', 'm/pixel');
-  const missing = field(array, 'missing_constant'), centerLongitude = number(cart, 'cart:longitude_of_central_meridian', 'deg');
-  if (field(array, 'axis_index_order') !== 'Last Index Fastest' || field(array, 'data_type') !== 'IEEE754LSBSingle' ||
-      number(array, 'offset', 'byte') !== 0 || number(array, 'axes') !== 3 || axes.length !== 3 || /<(?:scaling_factor|value_offset)[ >]/.test(array) ||
-      axes.some((a, i) => field(a[1], 'axis_name') !== ['Band', 'Line', 'Sample'][i] || number(a[1], 'sequence_number') !== i + 1) ||
+  const array = pds4Block(xml, 'Array_3D_Spectrum'), cart = pds4Block(xml, 'cart:Cartography');
+  const identity = pds4Block(xml, 'Identification_Area').split('<Modification_History>')[0];
+  const axes = pds4Blocks(array, 'Axis_Array'), sizes = axes.map(a => pds4Number(a, 'elements'));
+  const bins = pds4Blocks(xml, 'sp:Bin_Wavelength'), wavelengthsNm = bins.map(b => pds4Number(b, 'sp:center_wavelength', 'nm'));
+  const radius = pds4Number(cart, 'cart:a_axis_radius', 'm'), resolution = pds4Number(cart, 'cart:pixel_resolution_x', 'm/pixel');
+  const missing = pds4Block(array, 'missing_constant'), centerLongitude = pds4Number(cart, 'cart:longitude_of_central_meridian', 'deg');
+  if (pds4Block(array, 'axis_index_order') !== 'Last Index Fastest' || pds4Block(array, 'data_type') !== 'IEEE754LSBSingle' ||
+      pds4Number(array, 'offset', 'byte') !== 0 || pds4Number(array, 'axes') !== 3 || axes.length !== 3 || /<(?:scaling_factor|value_offset)[ >]/.test(array) ||
+      axes.some((a, i) => pds4Block(a, 'axis_name') !== ['Band', 'Line', 'Sample'][i] || pds4Number(a, 'sequence_number') !== i + 1) ||
       sizes.some(n => !Number.isSafeInteger(n) || n < 1) || sizes[0] !== bins.length || sizes[0] > 256 ||
-      bins.some((b, i) => number(b[1], 'sp:bin_sequence_number') !== i + 1) || !/^0x[0-9A-Fa-f]{8}$/.test(missing) ||
-      field(cart, 'cart:map_projection_name') !== 'Equirectangular' || field(cart, 'cart:latitude_type') !== 'Planetocentric' ||
-      field(cart, 'cart:longitude_direction') !== 'Positive East' || number(cart, 'cart:latitude_of_projection_origin', 'deg') !== 0 ||
-      number(cart, 'cart:standard_parallel_1', 'deg') !== 0 || radius <= 0 || resolution <= 0 ||
-      number(cart, 'cart:b_axis_radius', 'm') !== radius || number(cart, 'cart:c_axis_radius', 'm') !== radius ||
-      number(cart, 'cart:pixel_resolution_y', 'm/pixel') !== resolution ||
-      Math.abs(number(cart, 'cart:pixel_scale_x', 'pixel/deg') - radius * Math.PI / 180 / resolution) > 1e-10 ||
-      Math.abs(number(cart, 'cart:pixel_scale_y', 'pixel/deg') - radius * Math.PI / 180 / resolution) > 1e-10 ||
-      field(xml, 'disp:horizontal_display_axis') !== 'Sample' || field(xml, 'disp:horizontal_display_direction') !== 'Left to Right' ||
-      field(xml, 'disp:vertical_display_axis') !== 'Line' || field(xml, 'disp:vertical_display_direction') !== 'Top to Bottom') throw new Error('Unsupported PDS4 color layout or projection.');
+      bins.some((b, i) => pds4Number(b, 'sp:bin_sequence_number') !== i + 1) || !/^0x[0-9A-Fa-f]{8}$/.test(missing) ||
+      pds4Block(cart, 'cart:map_projection_name') !== 'Equirectangular' || pds4Block(cart, 'cart:latitude_type') !== 'Planetocentric' ||
+      pds4Block(cart, 'cart:longitude_direction') !== 'Positive East' || pds4Number(cart, 'cart:latitude_of_projection_origin', 'deg') !== 0 ||
+      pds4Number(cart, 'cart:standard_parallel_1', 'deg') !== 0 || radius <= 0 || resolution <= 0 ||
+      pds4Number(cart, 'cart:b_axis_radius', 'm') !== radius || pds4Number(cart, 'cart:c_axis_radius', 'm') !== radius ||
+      pds4Number(cart, 'cart:pixel_resolution_y', 'm/pixel') !== resolution ||
+      Math.abs(pds4Number(cart, 'cart:pixel_scale_x', 'pixel/deg') - radius * Math.PI / 180 / resolution) > 1e-10 ||
+      Math.abs(pds4Number(cart, 'cart:pixel_scale_y', 'pixel/deg') - radius * Math.PI / 180 / resolution) > 1e-10 ||
+      pds4Block(xml, 'disp:horizontal_display_axis') !== 'Sample' || pds4Block(xml, 'disp:horizontal_display_direction') !== 'Left to Right' ||
+      pds4Block(xml, 'disp:vertical_display_axis') !== 'Line' || pds4Block(xml, 'disp:vertical_display_direction') !== 'Top to Bottom') throw new Error('Unsupported PDS4 color layout or projection.');
   return { width: sizes[2], height: sizes[1], bandCount: sizes[0], wavelengthsNm, radius, resolution, centerLongitude,
-    origin: [number(cart, 'cart:upperleft_corner_x', 'm'), number(cart, 'cart:upperleft_corner_y', 'm')],
-    missingBits: Number.parseInt(missing.slice(2), 16), fileName: field(xml, 'file_name'),
-    lidvid: `${field(identity, 'logical_identifier')}::${field(identity, 'version_id')}` };
+    origin: [pds4Number(cart, 'cart:upperleft_corner_x', 'm'), pds4Number(cart, 'cart:upperleft_corner_y', 'm')],
+    missingBits: Number.parseInt(missing.slice(2), 16), fileName: pds4Block(xml, 'file_name'),
+    lidvid: `${pds4Block(identity, 'logical_identifier')}::${pds4Block(identity, 'version_id')}` };
 }
 
 export function decodePds4Color(bytes: Buffer, xml: string, sourceEntry: unknown, value: unknown) {
@@ -79,9 +69,8 @@ export function decodePds4Color(bytes: Buffer, xml: string, sourceEntry: unknown
 // clamp only within the outer half-cell and require a valid complete RGB footprint.
 export function mapPds4Color(source: ReturnType<typeof decodePds4Color>, value: unknown, width: number, height: number) {
   const policy=validatePds4ObservationPolicy(value);
-  const display=parseBandColorDisplay(policy.colorDisplay,policy.wavelengthsNm.map(n=>`${n} nm`));
-  if(display.inputQuantity!=='derived-band-value'||display.displayRange.some((n,i)=>n!==policy.displayRange[i]))
-    throw new Error('The archive color mosaic requires its documented derived band values and one common display range, not an I/F or natural-color claim.');
+  // The archive publishes derived band values at these wavelengths, not I/F or natural colour.
+  const display=bandColorDisplay(policy.wavelengthsNm.map(n=>`${n} nm`),'derived-band-value',policy.displayRange);
   if (![width, height].every(n => Number.isSafeInteger(n) && n > 0)) throw new Error('Invalid output dimensions.');
   const { grid, values, selected, valid } = source, rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
   const scale = grid.radius * Math.PI / 180;

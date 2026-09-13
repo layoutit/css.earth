@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1O00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1O00_1510.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1O00_1970.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/img/v1/PDS4_IMG_1O00_1920.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational
+    xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:disp="http://pds.nasa.gov/pds4/disp/v1"
+    xmlns:cart="http://pds.nasa.gov/pds4/cart/v1"
+    xmlns:img="http://pds.nasa.gov/pds4/img/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1O00.xsd
+                        http://pds.nasa.gov/pds4/disp/v1 https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1O00_1510.xsd
+                        http://pds.nasa.gov/pds4/cart/v1 https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1O00_1970.xsd
+                        http://pds.nasa.gov/pds4/img/v1 https://pds.nasa.gov/pds4/img/v1/PDS4_IMG_1O00_1920.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:jaxa:darts:hyb2_onc_map:data_iof_map:hyb2_onc_20181003_msc_l3dm</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>Hayabusa2 ONC Single Band I/F Mosaic Map hyb2_onc_20181003_MSC_l3dm</title>
+    <information_model_version>1.24.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Modification_History>
+      <Modification_Detail>
+        <modification_date>2026-01-06</modification_date>
+        <version_id>1.0</version_id>
+        <description>Initial version.</description>
+      </Modification_Detail>
+    </Modification_History>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>2018-10-03T09:18:11Z</start_date_time>
+      <stop_date_time>2018-10-04T06:21:59Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <wavelength_range>Visible</wavelength_range>
+        <domain>Surface</domain>
+        <discipline_name>Imaging</discipline_name>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>Hayabusa2 Asteroid Sample Return Mission</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:jaxa:darts:context:investigation:mission.hyb2</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Hayabusa2</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:jaxa:darts:context:instrument_host:spacecraft.hyb2</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Optical Navigation Camera</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:jaxa:darts:context:instrument:hyb2.onc</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>(162173) Ryugu</name>
+      <type>Asteroid</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:asteroid.162173_ryugu</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+    <Discipline_Area>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Top to Bottom</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <img:Imaging>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>imaging_parameters_to_image_object</local_reference_type>
+        </Local_Internal_Reference>
+        <img:Optical_Filter>
+          <img:filter_name>v-band</img:filter_name>
+          <img:filter_id>v</img:filter_id>
+          <img:filter_number>3</img:filter_number>
+          <img:bandwidth unit="nm">27.9</img:bandwidth>
+          <img:center_filter_wavelength unit="nm">548.9</img:center_filter_wavelength>
+          <img:array_band_number>1</img:array_band_number>
+        </img:Optical_Filter>
+      </img:Imaging>
+      <cart:Cartography>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>cartography_parameters_to_image_object</local_reference_type>
+        </Local_Internal_Reference>
+        <cart:Spatial_Domain>
+          <cart:Bounding_Coordinates>
+            <cart:west_bounding_coordinate unit="deg">0</cart:west_bounding_coordinate>
+            <cart:east_bounding_coordinate unit="deg">360</cart:east_bounding_coordinate>
+            <cart:north_bounding_coordinate unit="deg">28.6462</cart:north_bounding_coordinate>
+            <cart:south_bounding_coordinate unit="deg">-31.869799999999998</cart:south_bounding_coordinate>
+          </cart:Bounding_Coordinates>
+        </cart:Spatial_Domain>
+        <cart:Spatial_Reference_Information>
+          <cart:Horizontal_Coordinate_System_Definition>
+            <cart:Planar>
+              <cart:Map_Projection>
+                <cart:map_projection_name>Equirectangular</cart:map_projection_name>
+                <cart:Equirectangular>
+                  <cart:latitude_of_projection_origin unit="deg">0</cart:latitude_of_projection_origin>
+                  <cart:standard_parallel_1 unit="deg">0</cart:standard_parallel_1>
+                  <cart:longitude_of_central_meridian unit="deg">0</cart:longitude_of_central_meridian>
+                </cart:Equirectangular>
+              </cart:Map_Projection>
+              <cart:Planar_Coordinate_Information>
+                <cart:planar_coordinate_encoding_method>Coordinate Pair</cart:planar_coordinate_encoding_method>
+                <cart:Coordinate_Representation>
+                  <cart:pixel_resolution_x unit="m/pixel">0.28148670176164547</cart:pixel_resolution_x>
+                  <cart:pixel_resolution_y unit="m/pixel">0.28148670176164547</cart:pixel_resolution_y>
+                  <cart:pixel_scale_x unit="pixel/deg">27.777777777777779</cart:pixel_scale_x>
+                  <cart:pixel_scale_y unit="pixel/deg">27.777777777777779</cart:pixel_scale_y>
+                </cart:Coordinate_Representation>
+              </cart:Planar_Coordinate_Information>
+              <cart:Geo_Transformation>
+                <cart:upperleft_corner_x unit="m">0</cart:upperleft_corner_x>
+                <cart:upperleft_corner_y unit="m">223.98678766679024</cart:upperleft_corner_y>
+              </cart:Geo_Transformation>
+            </cart:Planar>
+            <cart:Geodetic_Model>
+              <cart:latitude_type>Planetocentric</cart:latitude_type>
+              <cart:spheroid_name>162173_Ryugu_JAXA2024_-_Sphere</cart:spheroid_name>
+              <cart:a_axis_radius unit="m">448</cart:a_axis_radius>
+              <cart:b_axis_radius unit="m">448</cart:b_axis_radius>
+              <cart:c_axis_radius unit="m">448</cart:c_axis_radius>
+              <cart:longitude_direction>Positive East</cart:longitude_direction>
+            </cart:Geodetic_Model>
+          </cart:Horizontal_Coordinate_System_Definition>
+        </cart:Spatial_Reference_Information>
+      </cart:Cartography>
+    </Discipline_Area>
+  </Observation_Area>
+  <Reference_List>
+    <Internal_Reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc_map:browse:hyb2_onc_20181003_msc_l3dm::1.0</lidvid_reference>
+      <reference_type>data_to_browse</reference_type>
+    </Internal_Reference>
+    <Source_Product_Internal>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_091811_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_093515_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_095219_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_141509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_142939_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_143149_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_151510_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_152940_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_153150_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_161510_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_162940_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_163150_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_171510_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_172940_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_173150_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_181510_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_182940_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_183150_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_191510_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_192939_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_193149_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_201509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_202939_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_203149_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_211509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_212939_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_213149_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_222509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_225159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_225509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_232159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_232509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_235159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181003_235509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_002159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_002509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_005159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_005509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_012159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_012509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_015159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_015509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_022159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_022509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_025159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_025509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_032159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_032509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_035159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_035509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_042159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_042509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_045159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_045509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_052159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_052509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_055159_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_055509_tvf_l2d::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_iof:hyb2_onc_20181004_062159_tvf_l2d::1.0</lidvid_reference>
+      <reference_type>data_to_derived_source_product</reference_type>
+    </Source_Product_Internal>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>hyb2_onc_20181003_MSC_l3dm_v06.tif</file_name>
+    </File>
+    <Header>
+      <offset unit="byte">0</offset>
+      <object_length unit="byte">13995</object_length>
+      <parsing_standard_id>TIFF 6.0</parsing_standard_id>
+      <description>TIFF/GeoTIFF header. The TIFF/GeoTIFF format is used throughout the geospatial and science communities to share geographic image data. </description>
+    </Header>
+    <Array_3D_Image>
+      <local_identifier>image</local_identifier>
+      <offset unit="byte">13995</offset>
+      <axes>3</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <Element_Array>
+        <data_type>IEEE754LSBDouble</data_type>
+        <unit>none</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Band</axis_name>
+        <elements>1</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1681</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>10000</elements>
+        <sequence_number>3</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <missing_constant>-1</missing_constant>
+      </Special_Constants>
+    </Array_3D_Image>
+  </File_Area_Observational>
+</Product_Observational>

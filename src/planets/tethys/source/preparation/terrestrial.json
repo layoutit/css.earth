@@ -348,10 +348,14 @@
         "format": "spice-camera",
         "consumer": "iss-observation",
         "filter": "CL1,CL2",
-        "allowLossy": false,
-        "path": "observations/N1807429484_1_CALIB.IMG",
-        "labelPath": "observations/N1807429484_1_CALIB.LBL",
-        "startTime": "2015-04-11T06:43:09.748Z",
+        "frames": [
+          {
+            "id": "iss",
+            "path": "observations/N1807429484_1_CALIB.IMG",
+            "labelPath": "observations/N1807429484_1_CALIB.LBL",
+            "startTime": "2015-04-11T06:43:09.748Z"
+          }
+        ],
         "spice": {
           "kernelSet": "cassini",
           "kernels": [
@@ -424,10 +428,12 @@
           "maximumEmissionDegrees": 75,
           "maximumGain": 3
         },
-        "displayPercentiles": [
-          1,
-          99
-        ],
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ]
+        },
         "metadata": {
           "label": "ISS photograph",
           "falseColor": false,

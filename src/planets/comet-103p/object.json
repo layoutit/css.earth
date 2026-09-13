@@ -21,12 +21,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "269899c03e5c22546fc5940bf2ed5dbb201187997375b5e2563c185f51e0535e"
+          "sha256": "225013e36cc91344ab073adacebd8272136484e2b7db4973368f883c9bcc6ed9"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ab3111e15c3a0d169e02fe1916b617c101579078480fbf1ad4ceb2da250c8551"
+          "sha256": "34e97d7d3ff5715b4b443942533e71ccc5844d18a92d1bd762986bf8e5b1a401"
         },
         {
           "id": "title",
@@ -41,7 +41,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "c4974fbc229a727fe348ea21994baa5a257047ead48a638067e6acc141a3ba10"
+          "sha256": "e0fde0afca207381a01f1abe02d4d1732f4096d8070a2b1dba74704c8b7faafe"
         },
         {
           "id": "rotation",
@@ -76,6 +76,16 @@
             },
             {
               "id": "mri",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "temperature",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "spectral-slope",
               "source": "content",
               "material": "lighting"
             }
@@ -127,7 +137,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8b825771534bd0539ce9047e9aef2a061ae30e3c3718ae12e4257c75c40ca55d"
+        "sha256": "7c702745b46953f451b84298088da93b06f224171e9bc352f9ca910d97933344"
       }
     },
     "catalog": {
@@ -147,7 +157,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "103ff73ad2f2dcb3fee1f7650ccd6c9524d40363abec1372aa1211e2219ecb37"
+    "sha256": "4301df22452b504d664ac7e03a9ba1e7c035884c367fab332e525e02e1321e08"
   },
   "type": "layered-body",
   "id": "comet-103p"

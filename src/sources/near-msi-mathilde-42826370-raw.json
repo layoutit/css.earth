@@ -1,0 +1,29 @@
+{
+  "id": "near-msi-mathilde-42826370-raw",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Mathilde \u00b7 NEAR MSI raw detector frame 42826370",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:near.msi:data_raw:mathilde_1997_178_m0042826370f0_2p_fit::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826370f0_2p.xml",
+      "label": "PDS raw detector image and metadata"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826370f0_2p.xml",
+      "checkedOn": "2026-09-13",
+      "locator": "Identification_Area; full 537 by 244 unsigned 16-bit FITS array; raw DN."
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "version": "1.0"
+}
