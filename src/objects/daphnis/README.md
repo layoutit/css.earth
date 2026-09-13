@@ -24,7 +24,7 @@ The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) chec
 
 **False color:** Three filters were acquired sequentially, and are not a simultaneous true-color photograph or a composition map. Source shadows and phase-dependent brightness remain. The common footprint is smaller than Monochrome coverage; gray grid marks gaps. Small color fringes can remain at sharp relief because the shape and camera solutions have finite accuracy. These 2010 observations resolve only about 18 pixels across the moon; the sharper 2017 Monochrome photograph remains the detail view.
 
-- **Monochrome:** This is a grayscale visualization across these bandpasses, not a uniform-band albedo product.
+- **Monochrome:** This is a grayscale visualization across these bandpasses, not a uniform-band albedo product. Frame N1863267232_1 samples beyond 70° of incidence carry photometric gains of 1.8–2.1 and read a median 0.38–0.41 against 0.31–0.33 below 70°; they draw strips along the northern edge of the map. N1656997950_1 reads a median 0.03–0.07 between 40° and 75° of incidence against 0.26–0.41 in the other two frames, which draws a dark crescent in the south. Limiting incidence and emission to 70° shrank the crescent but kept the strips and cut coverage from 39.3% to 29.4%, so the lens keeps its 80° incidence and 78° emission limits.
 
 - **Elevation and gaps:** Includes the broad irregular figure; it is not local altitude above a geoid. Published regional radius uncertainty is 0.2–0.7 km. Small crater morphology is not reliably represented. Missing samples remain gray grid.
 
