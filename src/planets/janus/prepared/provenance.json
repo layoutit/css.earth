@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4db1a3484ba9b8609bfcffbc52425afb2cc8b31025664357e5f28101bfb4ff75"
+    "sha256": "5f2fc65382a9ec6bf86ae564caad0ee95d6fd7b624c0423b3e4c3a028b1305a5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "350a73a2a5a98dbeb994712e218d6dcd1db80755e15f441313370daaeffa3347",
+      "sha256": "7bec6027414e23f6df2d667a1346530d2eada3a75e85d88e3f23a32575be92c4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -313,7 +313,7 @@
                 "backgroundMaximum": 0.003
               },
               "metadata": {
-                "label": "Filter color",
+                "label": "False color",
                 "falseColor": true,
                 "coverage": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
                 "attribution": {
@@ -325,6 +325,20 @@
                 "longitudeDegrees": 186.61,
                 "latitudeDegrees": -39.51,
                 "zoom": 1.1
+              },
+              "colorDisplay": {
+                "kind": "band-composite",
+                "inputQuantity": "radiance-factor",
+                "bands": [
+                  "IR3",
+                  "GRN",
+                  "UV3"
+                ],
+                "displayRange": [
+                  0,
+                  0.8
+                ],
+                "outputEncoding": "srgb"
               }
             }
           ]
@@ -384,7 +398,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0a2ddef3cd3ed5070cfdea931e1ef49e9a9e6b35457b6fefa073e7b273d089dd",
+      "sha256": "db169d462e31129fd4e66d35a613a731a985e0e87dc894b57ce315f7bda27699",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -462,7 +476,7 @@
           "labels": {
             "normal": "Monochrome",
             "elevation": "Elevation",
-            "filter-color": "Filter color"
+            "filter-color": "False color"
           },
           "controls": [
             {
@@ -483,9 +497,9 @@
             },
             {
               "id": "filter-color",
-              "label": "Filter color",
+              "label": "False color",
               "description": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
-              "title": "Cassini filter color",
+              "title": "Cassini false color",
               "detail": "Cassini",
               "thumbnail": "/scenes/janus/janus-filter-color-thumbnail.webp",
               "surface": "janus-filter-color-surface@2x.webp",
@@ -495,7 +509,7 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/"
               },
-              "summary": "False color from separately registered filters. Gray grid marks missing common coverage; photographed shadows remain."
+              "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
             },
             {
               "id": "elevation",
@@ -1666,8 +1680,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0a2ddef3cd3ed5070cfdea931e1ef49e9a9e6b35457b6fefa073e7b273d089dd",
-      "bytes": 6764,
+      "sha256": "db169d462e31129fd4e66d35a613a731a985e0e87dc894b57ce315f7bda27699",
+      "bytes": 6822,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1774,7 +1788,7 @@
     },
     {
       "id": "filter-color",
-      "label": "Filter color",
+      "label": "False color",
       "recipe": "terrestrial",
       "selector": "/raster/mosaics/1",
       "parents": [],
@@ -1803,14 +1817,14 @@
       "outputs": [
         {
           "url": "/scenes/janus/janus-filter-color-thumbnail.webp",
-          "bytes": 2776,
-          "sha256": "43a1ffdcc0c6b610e7b5179a464d0437d68ff538f1be0da0ee10d3f4f3244c4f",
+          "bytes": 2696,
+          "sha256": "da7918a3df206acfec17311646fdf783d646133bdf6d56b489aac8997341042a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/janus/janus-filter-color-surface@2x.webp",
-          "bytes": 326390,
-          "sha256": "5268306adaf2a44b9380a4681fded569917596c6658aa686fc1e38a770d1b04f",
+          "bytes": 327594,
+          "sha256": "468d164a210ddd313d1b71d7116f2ffde2bac5dd995d232646b24c3a3f3aa095",
           "verification": "bytes-verified"
         }
       ],
@@ -1867,7 +1881,7 @@
     },
     {
       "id": "preview:filter-color",
-      "label": "Filter color preview",
+      "label": "False color preview",
       "recipe": "terrestrial",
       "selector": "/raster/mosaics/1",
       "recipeDependencies": [
@@ -1883,8 +1897,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 7882,
-          "sha256": "c0ee5171d22cd77174d8a0df8baaa7cd841ff536a508cad17c7b2e9c6ea84032",
+          "bytes": 7678,
+          "sha256": "12c98554dfcd8b35015d74384401622f73ea96727446dd3e0d94456e1dbc1263",
           "verification": "bytes-verified"
         }
       ]

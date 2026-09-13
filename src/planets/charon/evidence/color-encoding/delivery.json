@@ -1,0 +1,41 @@
+{
+  "baseline": "8cc1a2fae",
+  "method": "Fetched immutable runtime URLs over HTTPS and verified byte counts and SHA-256 against the current runtime inventory.",
+  "assets": [
+    {
+      "filename": "charon-enhanced-color.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3d8bae625694b85de3207e0ad74cf49ff296d7b3c590ba19198fe42c1a4617f4/charon-enhanced-color.webp",
+      "bytes": 552444,
+      "sha256": "3d8bae625694b85de3207e0ad74cf49ff296d7b3c590ba19198fe42c1a4617f4",
+      "verified": true
+    },
+    {
+      "filename": "charon-enhanced-color@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/df7ddc1ede1e7e69ac35d24acfe1e37601096d71a4f9c069459780c8557de620/charon-enhanced-color@2x.webp",
+      "bytes": 1589082,
+      "sha256": "df7ddc1ede1e7e69ac35d24acfe1e37601096d71a4f9c069459780c8557de620",
+      "verified": true
+    },
+    {
+      "filename": "charon-lens-enhanced-color.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e3b8942645f8510b65b42822732b735f2318c8223d21ede0fde8a3b563cd08f0/charon-lens-enhanced-color.webp",
+      "bytes": 380,
+      "sha256": "e3b8942645f8510b65b42822732b735f2318c8223d21ede0fde8a3b563cd08f0",
+      "verified": true
+    },
+    {
+      "filename": "charon-poles-enhanced-color.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/ec91937f2398ce61111f265e5a653b3607874d2321486ef9411b52bc4114e914/charon-poles-enhanced-color.webp",
+      "bytes": 46738,
+      "sha256": "ec91937f2398ce61111f265e5a653b3607874d2321486ef9411b52bc4114e914",
+      "verified": true
+    },
+    {
+      "filename": "charon-poles-enhanced-color@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/ca059654e408d48831ed254cff5224c6a99bf49971f843522936148777e67d4f/charon-poles-enhanced-color@2x.webp",
+      "bytes": 120610,
+      "sha256": "ca059654e408d48831ed254cff5224c6a99bf49971f843522936148777e67d4f",
+      "verified": true
+    }
+  ]
+}

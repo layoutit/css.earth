@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "88f5ba532868ff52f8e07a52dfd4f823ee8f53c2fd9aabcae8ccd90cd30dec55"
+    "sha256": "02e52fa6aeae4c10eda1cf8dd43fb140ec56d0e20ef63221ea68a94882f7a3cf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4d11acb5ef5940695c850977c3e70e5fe9a9bada936fec577220fde130b20c34",
+      "sha256": "ef7af975e45ef41a69b45d122eb1183f3f9b095bad9ae6182db0e05cd41ea4b9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -602,7 +602,7 @@
                 "backgroundMaximum": 0.003
               },
               "metadata": {
-                "label": "Filter color",
+                "label": "False color",
                 "falseColor": true,
                 "coverage": "Five Cassini pointings in IR3, IR1 and UV3, displayed as red, green and blue. Cameras use measured registration in the published shape frame; complete three-filter footprints are combined.",
                 "attribution": {
@@ -614,6 +614,20 @@
                 "longitudeDegrees": 159.5343604651163,
                 "latitudeDegrees": 11.099796511627906,
                 "zoom": 1.1
+              },
+              "colorDisplay": {
+                "kind": "band-composite",
+                "inputQuantity": "radiance-factor",
+                "bands": [
+                  "IR3",
+                  "IR1",
+                  "UV3"
+                ],
+                "displayRange": [
+                  0,
+                  0.5
+                ],
+                "outputEncoding": "srgb"
               }
             }
           ]
@@ -676,7 +690,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9cdf19a4129000740e5fbb75368836fac1193e1417f5714e7869885b8676b710",
+      "sha256": "1c20f125075eb9fcc25381920cd603153fa4c1466ddb02d85847a0bc13dd18b4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -754,7 +768,7 @@
           "labels": {
             "normal": "Monochrome",
             "elevation": "Elevation",
-            "filter-color": "Filter color"
+            "filter-color": "False color"
           },
           "controls": [
             {
@@ -775,9 +789,9 @@
             },
             {
               "id": "filter-color",
-              "label": "Filter color",
+              "label": "False color",
               "description": "Five Cassini pointings in IR3, IR1 and UV3, displayed as red, green and blue. Cameras use measured registration in the published shape frame; complete three-filter footprints are combined.",
-              "title": "Cassini filter color",
+              "title": "Cassini false color",
               "detail": "Cassini",
               "thumbnail": "/scenes/hyperion/hyperion-filter-color-thumbnail.webp",
               "surface": "hyperion-filter-color-surface@2x.webp",
@@ -787,7 +801,7 @@
                 "path": "../manifest.json",
                 "url": "https://pds-rings.seti.org/cassini/iss/"
               },
-              "summary": "False color from five registered Cassini pointings. Gray grid marks missing common coverage; photographed shadows remain."
+              "summary": "Measured filter bands in false color; this does not reproduce human-visible color. Gray grid marks missing common coverage; photographed shadows remain."
             },
             {
               "id": "elevation",
@@ -3734,8 +3748,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9cdf19a4129000740e5fbb75368836fac1193e1417f5714e7869885b8676b710",
-      "bytes": 7097,
+      "sha256": "1c20f125075eb9fcc25381920cd603153fa4c1466ddb02d85847a0bc13dd18b4",
+      "bytes": 7143,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3955,7 +3969,7 @@
     },
     {
       "id": "filter-color",
-      "label": "Filter color",
+      "label": "False color",
       "recipe": "terrestrial",
       "selector": "/raster/mosaics/1",
       "parents": [],
@@ -4008,14 +4022,14 @@
       "outputs": [
         {
           "url": "/scenes/hyperion/hyperion-filter-color-thumbnail.webp",
-          "bytes": 3622,
-          "sha256": "2c1de7a4f8da1373e4fb0af5d74be728f49f6d332e928328e01abd758ef3ca4a",
+          "bytes": 3540,
+          "sha256": "fbc611e0678a02abc5035466401aef2229ef3e471bd9178798fa35c374d12b11",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hyperion/hyperion-filter-color-surface@2x.webp",
-          "bytes": 872976,
-          "sha256": "f8e4010096e568c64aa2bd5965d9020210c7acb057dd927c44e344165d40abd2",
+          "bytes": 825742,
+          "sha256": "a7c85c63051d0c689972cb371e961ff4799b2e5642338b768f9d8437d9323fa9",
           "verification": "bytes-verified"
         }
       ],
@@ -4107,7 +4121,7 @@
     },
     {
       "id": "preview:filter-color",
-      "label": "Filter color preview",
+      "label": "False color preview",
       "recipe": "terrestrial",
       "selector": "/raster/mosaics/1",
       "recipeDependencies": [
@@ -4123,8 +4137,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 19660,
-          "sha256": "d00d0933916133e05055e0afa83fd84422cab3d06dd3f7a94d6d8059e94d14be",
+          "bytes": 18454,
+          "sha256": "1aa50cf9accd4c596be0c66979cf17a9c9c784c84c1ec8c5496a5d1d34123359",
           "verification": "bytes-verified"
         }
       ]

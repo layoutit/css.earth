@@ -287,7 +287,7 @@
           "backgroundMaximum": 0.003
         },
         "metadata": {
-          "label": "Filter color",
+          "label": "False color",
           "falseColor": true,
           "coverage": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
           "attribution": {
@@ -299,6 +299,20 @@
           "longitudeDegrees": 259.94,
           "latitudeDegrees": 1.79,
           "zoom": 1.1
+        },
+        "colorDisplay": {
+          "kind": "band-composite",
+          "inputQuantity": "radiance-factor",
+          "bands": [
+            "IR3",
+            "GRN",
+            "UV3"
+          ],
+          "displayRange": [
+            0,
+            0.8
+          ],
+          "outputEncoding": "srgb"
         }
       }
     ]

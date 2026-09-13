@@ -1,23 +1,45 @@
 {
   "body": "prometheus",
   "lens": "filter-color",
-  "baselineRef": "52d5d4815",
-  "baselineCommit": "52d5d48155b62c62cc35052f4d82800d4d12c208",
-  "toolSha256": "655c8fed7f29c8f3359bec7b2b9ea985112790a42321106d01485537892f7039",
-  "recipeSha256": "6fc44edd2066441e24b75d66858d277f31fc7e678bf52b6f7252dca016678528",
-  "runtimeSha256": "df49f3296ec3b8a4a3f722ed7b4659e9d4a4b2931a913ccb62becac23971b673",
+  "baselineRef": "8cc1a2fae",
+  "baselineCommit": "8cc1a2faead111bd3535c0bed326180631b42f09",
+  "toolSha256": "89775171909802da8bad5ada20f2e21bc8880b632541920f3d31aea1ee1f7aea",
+  "colorTransferSha256": "4fdacc08867ab12c5b4f4b5819210f52f044155a5ebcbbf912f0ff0d9d201fe5",
+  "recipeSha256": "6db8b2f1446aa371331fa0e9fa9afcea28ad1b2d5537b9e3cbaba70ddf45686e",
+  "runtimeSha256": "835cc5a8ccf59fcfe35ede92028059c4a7f4be981e9231fee7272570da86bd0b",
   "geometrySha256": "34d04c4ecb53af4a36d91a450641ef2969e43527d1099688113ca40e1e16905f",
   "surfaceTrianglesSha256": "0a97ea17cf1cc6b9708f0649f692f275284a69d437b3d6ac42429322d96ac262",
   "geometryUnchanged": true,
-  "browser": "148.0.7778.96",
-  "existingAssetChanges": [],
+  "browser": "152.0.7977.84",
+  "channel": "chrome",
+  "purpose": "Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.",
+  "existingAssetChanges": [
+    {
+      "filename": "prometheus-filter-color-shadow@2x.webp",
+      "beforeSha256": "be2f7a47c24dc975a27a9bd633fb8030a2560491d7bd4e640bdf47ef172a6ed2",
+      "afterSha256": "2dd8cb4d104e5687312f02d37f8f40d1188c6efa3315bf73f4ab767a01a756cc",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "prometheus-filter-color-surface@2x.webp",
+      "beforeSha256": "c9009c69ffec9bdf0153f0bbec6095c72fe865288fb35adf05b780f5f5fe0152",
+      "afterSha256": "9f0c20d3e7c9b1419790e99bdd0bd5e6c0ce29e7e16a2784af1ff4022d0f7326",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "prometheus-filter-color-thumbnail.webp",
+      "beforeSha256": "6b24d01ec79a90ef904acb954d6f2d816b1a1e8d68d10ef21eda5ee35cb4cc31",
+      "afterSha256": "a0546bd0932de13dc23d6e34c5b0615ed03c9cbc40691cf93d6e2a21b607de9e",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    }
+  ],
   "mobile": {
     "viewport": {
       "width": 390,
       "height": 844
     },
     "dpr": 2,
-    "rowText": "Filter color\nCassini",
+    "rowText": "False color\nCassini",
     "bounds": {
       "x": 20,
       "y": 718.078125,
@@ -32,7 +54,7 @@
       "sunView": "matrix3d(0.967190222431,0.033453921423,0.251841038703,0,0,0.991292180194,-0.131680725567,0,-0.254053288964,0.127360310251,0.958768104256,0,0,0,0,1)"
     },
     "stableDom": true,
-    "sha256": "4a347c99652874334c37393dd2dcfbec07bb8e93ab71b7b07b8cdc7eb76bb25c",
+    "sha256": "1633de6bbe4631736327be77debf289351ac39654ff2f87eb1cef9dab38f63b0",
     "errors": []
   },
   "reports": [
@@ -52,7 +74,7 @@
         {
           "name": "color",
           "file": "color-dpr1.png",
-          "sha256": "ef36b4450336cdb6ee18273bd175079ecc2c628654fa5ab00a52f042fd213a2f",
+          "sha256": "69ccd2df913ca824d513229be8330acc6e4a383501f4fa255e9a0a5b2c3fa823",
           "url": "http://127.0.0.1:4284/prometheus/?v=MMZAdEND5iweCUFCxzNAAAAAP6mqdD684wA_3MIEP4DDjj-Z3rJB4D2PAAA#dataset=filter-color",
           "pose": {
             "schema": "cssearth-camera-pose@1",
@@ -96,22 +118,64 @@
       },
       "loaded": [
         {
+          "filename": "prometheus-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "prometheus-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "prometheus-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
           "filename": "prometheus-normal-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-normal-surface@2x.webp",
           "sha256": "2d8c06486e474b10e3040e63c810c51b06dd9e8a0e3e79949a6867c812686af6",
           "bytes": 475502
         },
         {
+          "filename": "prometheus-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-normal-thumbnail.webp",
+          "sha256": "e8c2110e96089f087d976b4ec6f4c3acc5ae666a7b501c0cfb844b40fff99f7e",
+          "bytes": 3450
+        },
+        {
+          "filename": "prometheus-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-elevation-thumbnail.webp",
+          "sha256": "11750d7eea48541ecfcf349e217480c6243f3780d876c2d5bcfc7e4058e912f6",
+          "bytes": 5504
+        },
+        {
+          "filename": "prometheus-filter-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-filter-color-thumbnail.webp",
+          "sha256": "a0546bd0932de13dc23d6e34c5b0615ed03c9cbc40691cf93d6e2a21b607de9e",
+          "bytes": 3342
+        },
+        {
+          "filename": "prometheus-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
           "filename": "prometheus-filter-color-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-filter-color-surface@2x.webp",
-          "sha256": "c9009c69ffec9bdf0153f0bbec6095c72fe865288fb35adf05b780f5f5fe0152",
-          "bytes": 416390
+          "sha256": "9f0c20d3e7c9b1419790e99bdd0bd5e6c0ce29e7e16a2784af1ff4022d0f7326",
+          "bytes": 388058
         },
         {
           "filename": "prometheus-filter-color-shadow@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-filter-color-shadow@2x.webp",
-          "sha256": "be2f7a47c24dc975a27a9bd633fb8030a2560491d7bd4e640bdf47ef172a6ed2",
-          "bytes": 271090
+          "sha256": "2dd8cb4d104e5687312f02d37f8f40d1188c6efa3315bf73f4ab767a01a756cc",
+          "bytes": 251602
         }
       ],
       "errors": []
@@ -132,7 +196,7 @@
         {
           "name": "color",
           "file": "color-dpr2.png",
-          "sha256": "2521f84ad8c610c6c1900fe2dd9deebffb4284d83ce9494d18f9dda6dd1e8e25",
+          "sha256": "a8d02ed701d93a05695ed491646056e696873845f87fed10a8ef606300660b58",
           "url": "http://127.0.0.1:4284/prometheus/?v=MMZAdEND5iweCUFCxzNAAAAAP6mqdD684wA_3MIEP4DDjj-Z3rJB4D2PAAA#dataset=filter-color",
           "pose": {
             "schema": "cssearth-camera-pose@1",
@@ -176,59 +240,67 @@
       },
       "loaded": [
         {
+          "filename": "prometheus-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "prometheus-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-system-point.webp",
+          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
+          "bytes": 96
+        },
+        {
           "filename": "prometheus-normal-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-normal-surface@2x.webp",
           "sha256": "2d8c06486e474b10e3040e63c810c51b06dd9e8a0e3e79949a6867c812686af6",
           "bytes": 475502
         },
         {
+          "filename": "prometheus-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
+          "filename": "prometheus-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-normal-thumbnail.webp",
+          "sha256": "e8c2110e96089f087d976b4ec6f4c3acc5ae666a7b501c0cfb844b40fff99f7e",
+          "bytes": 3450
+        },
+        {
+          "filename": "prometheus-filter-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-filter-color-thumbnail.webp",
+          "sha256": "a0546bd0932de13dc23d6e34c5b0615ed03c9cbc40691cf93d6e2a21b607de9e",
+          "bytes": 3342
+        },
+        {
+          "filename": "prometheus-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-elevation-thumbnail.webp",
+          "sha256": "11750d7eea48541ecfcf349e217480c6243f3780d876c2d5bcfc7e4058e912f6",
+          "bytes": 5504
+        },
+        {
+          "filename": "prometheus-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
           "filename": "prometheus-filter-color-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-filter-color-surface@2x.webp",
-          "sha256": "c9009c69ffec9bdf0153f0bbec6095c72fe865288fb35adf05b780f5f5fe0152",
-          "bytes": 416390
+          "sha256": "9f0c20d3e7c9b1419790e99bdd0bd5e6c0ce29e7e16a2784af1ff4022d0f7326",
+          "bytes": 388058
         },
         {
           "filename": "prometheus-filter-color-shadow@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/prometheus/prometheus-filter-color-shadow@2x.webp",
-          "sha256": "be2f7a47c24dc975a27a9bd633fb8030a2560491d7bd4e640bdf47ef172a6ed2",
-          "bytes": 271090
+          "sha256": "2dd8cb4d104e5687312f02d37f8f40d1188c6efa3315bf73f4ab767a01a756cc",
+          "bytes": 251602
         }
       ],
       "errors": []
-    }
-  ],
-  "acquisitionRevision": "78feb6ad9",
-  "purpose": "Inspected mounted color views, loaded source-asset identity, unchanged geometry and interaction checks. Scientific acceptance uses the source and registration evidence.",
-  "images": [
-    {
-      "file": "color-dpr1.png",
-      "bytes": 274328,
-      "sha256": "ef36b4450336cdb6ee18273bd175079ecc2c628654fa5ab00a52f042fd213a2f"
-    },
-    {
-      "file": "color-dpr2.png",
-      "bytes": 792758,
-      "sha256": "2521f84ad8c610c6c1900fe2dd9deebffb4284d83ce9494d18f9dda6dd1e8e25"
-    },
-    {
-      "file": "mobile.png",
-      "bytes": 462635,
-      "sha256": "4a347c99652874334c37393dd2dcfbec07bb8e93ab71b7b07b8cdc7eb76bb25c"
-    },
-    {
-      "file": "oblique-shadows-dpr1.png",
-      "bytes": 237221,
-      "sha256": "490dcbc3963a386586073cd32a5212d888dc657f133da7b63e0ec540da055f42"
-    },
-    {
-      "file": "oblique-shadows-dpr2.png",
-      "bytes": 638399,
-      "sha256": "88d6295a554ecaee9640f666bf9511d2b592ca9823d0ac91043ea3431939f419"
-    },
-    {
-      "file": "product.png",
-      "bytes": 538021,
-      "sha256": "6383884fe93eca288bfe0c522bf84e828afbebb544a8a8d21212af984608917f"
     }
   ]
 }
