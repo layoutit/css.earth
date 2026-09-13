@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ced30d34d87622ae0d6785346a293a3c8ec1799b5fb75fba605f2893c2c4e2b"
+    "sha256": "151a200928cab631a6d8432cc0914a3cb9b89e93ba9e8e441463529c01bebae8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "28145e97a968ed401664dd0f7132e21a66e61f65b4260ca75d9c6479fb761001",
+      "sha256": "7725965ada011228099956849262ea2b6059787e578f6bf6c0b296883fa4dc64",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/charon/",
@@ -216,6 +216,108 @@
               },
               "textureScale": 0.25
             }
+          },
+          {
+            "id": "water-ice",
+            "output": "charon-{id}{suffix}.webp",
+            "thumbnail": "charon-lens-{id}.webp",
+            "source": "science/leisa/water-ice.tif",
+            "falseColor": true,
+            "resolutionScale": 0.32,
+            "science": {
+              "kind": "terrestrial-scientific",
+              "id": "water-ice",
+              "label": "Water ice",
+              "format": "geotiff",
+              "path": "science/leisa/water-ice.tif",
+              "consumer": "leisa-ice",
+              "sampling": "bilinear",
+              "displaySampling": "nearest",
+              "minimum": 0.45,
+              "maximum": 0.75,
+              "colors": [
+                "#263f6b",
+                "#358eac",
+                "#a8d9c5",
+                "#fff0b0"
+              ],
+              "labels": [
+                "45",
+                "60",
+                "75"
+              ],
+              "units": "% band depth",
+              "description": "Water ice absorbs strongly near 2.0 µm across Charon’s observed terrain. Colors show the depth of that absorption, which also depends on ice grain size. Grid: no usable spectrum.",
+              "title": "Water-ice absorption",
+              "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+              "grid": {
+                "width": 720,
+                "height": 360,
+                "noData": -9999,
+                "origin": [
+                  -1903805.1480754146,
+                  951902.5740377073
+                ],
+                "resolution": [
+                  5288.347633542819,
+                  -5288.347633542819
+                ],
+                "referenceRadiusMeters": 606000,
+                "centerLongitude": 0,
+                "wrapLongitude": true
+              }
+            }
+          },
+          {
+            "id": "ammonia",
+            "output": "charon-{id}{suffix}.webp",
+            "thumbnail": "charon-lens-{id}.webp",
+            "source": "science/leisa/ammonia.tif",
+            "falseColor": true,
+            "resolutionScale": 0.32,
+            "science": {
+              "kind": "terrestrial-scientific",
+              "id": "ammonia",
+              "label": "Ammonia",
+              "format": "geotiff",
+              "path": "science/leisa/ammonia.tif",
+              "consumer": "leisa-ice",
+              "sampling": "bilinear",
+              "displaySampling": "nearest",
+              "minimum": 0.75,
+              "maximum": 0.95,
+              "colors": [
+                "#263648",
+                "#46696a",
+                "#70b38a",
+                "#e5f4ab"
+              ],
+              "labels": [
+                "0.75",
+                "0.85",
+                "0.95"
+              ],
+              "units": "continuum / absorption band",
+              "description": "A weak 2.2 µm absorption is associated with ammonia-bearing material, including ejecta around Organa crater. Colors show infrared contrast averaged over roughly 12 km; fine variations include instrument noise. Grid: no usable spectrum.",
+              "title": "Ammonia-related absorption",
+              "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+              "grid": {
+                "width": 720,
+                "height": 360,
+                "noData": -9999,
+                "origin": [
+                  -1903805.1480754146,
+                  951902.5740377073
+                ],
+                "resolution": [
+                  5288.347633542819,
+                  -5288.347633542819
+                ],
+                "referenceRadiusMeters": 606000,
+                "centerLongitude": 0,
+                "wrapLongitude": true
+              }
+            }
           }
         ],
         "lighting": {
@@ -264,7 +366,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6d0efbb6ad1999da95abbbcfab5a381c4dc1d0d7df6c5091170db48eddcc8c53",
+      "sha256": "598566c1aba93a9a76397911794fb9a818ce470c7cdce48f3a4edb88489d511e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -343,7 +445,9 @@
             "normal": "Monochrome",
             "elevation": "Elevation",
             "enhanced-color": "False color",
-            "albedo": "Bond albedo"
+            "albedo": "Bond albedo",
+            "water-ice": "Water ice",
+            "ammonia": "Ammonia"
           },
           "controls": [
             {
@@ -485,6 +589,120 @@
                   ]
                 }
               }
+            },
+            {
+              "id": "water-ice",
+              "label": "Water ice",
+              "description": "Water ice absorbs strongly near 2.0 µm across Charon’s observed terrain. Colors show the depth of that absorption, which also depends on ice grain size. Grid: no usable spectrum.",
+              "title": "Water-ice absorption",
+              "thumbnail": "charon-lens-water-ice.webp",
+              "surface": "charon-water-ice.webp",
+              "poles": "charon-poles-water-ice.webp",
+              "source": {
+                "id": "charon-leisa-water-ice",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx"
+              },
+              "detail": "LEISA",
+              "summary": "Depth of water ice’s 2.0 µm absorption; grain size also changes the signal. This is not ice abundance. Grid: no usable spectrum.",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "2.0 µm band depth",
+                "labels": [
+                  "45",
+                  "60",
+                  "75"
+                ],
+                "meta": "% band depth",
+                "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+                "recipe": {
+                  "palette": [
+                    [
+                      38,
+                      63,
+                      107
+                    ],
+                    [
+                      53,
+                      142,
+                      172
+                    ],
+                    [
+                      168,
+                      217,
+                      197
+                    ],
+                    [
+                      255,
+                      240,
+                      176
+                    ]
+                  ],
+                  "labels": [
+                    "45",
+                    "60",
+                    "75"
+                  ]
+                }
+              }
+            },
+            {
+              "id": "ammonia",
+              "label": "Ammonia",
+              "description": "A weak 2.2 µm absorption is associated with ammonia-bearing material, including ejecta around Organa crater. Colors show infrared contrast averaged over roughly 12 km; fine variations include instrument noise. Grid: no usable spectrum.",
+              "title": "Ammonia-related absorption",
+              "thumbnail": "charon-lens-ammonia.webp",
+              "surface": "charon-ammonia.webp",
+              "poles": "charon-poles-ammonia.webp",
+              "source": {
+                "id": "charon-leisa-ammonia",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx"
+              },
+              "detail": "LEISA",
+              "summary": "Infrared contrast associated with ammonia-bearing material, including Organa’s ejecta. Averaged over roughly 12 km; fine variations include noise. Grid: no usable spectrum.",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "2.2 µm contrast",
+                "labels": [
+                  "0.75",
+                  "0.85",
+                  "0.95"
+                ],
+                "meta": "continuum / absorption band",
+                "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+                "recipe": {
+                  "palette": [
+                    [
+                      38,
+                      54,
+                      72
+                    ],
+                    [
+                      70,
+                      105,
+                      106
+                    ],
+                    [
+                      112,
+                      179,
+                      138
+                    ],
+                    [
+                      229,
+                      244,
+                      171
+                    ]
+                  ],
+                  "labels": [
+                    "0.75",
+                    "0.85",
+                    "0.95"
+                  ]
+                }
+              }
             }
           ]
         },
@@ -524,6 +742,12 @@
             "role": "surface",
             "description": "MVIC enhanced-color mosaic · New Horizons team",
             "href": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx"
+          },
+          {
+            "label": "PDS",
+            "role": "surface",
+            "description": "LEISA infrared spectra and surface coordinates",
+            "href": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx"
           },
           {
             "label": "ESO",
@@ -567,7 +791,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "d9e55e0f63f006dc9335f335a8895d189db0b6c77ca7e67bd93a8a3af767234b",
+      "sha256": "06c6682fae014a5860652e8b45d46532dc0dcd5ce82db30e6109350bf11175ba",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -578,7 +802,7 @@
           "metadata": "metadata_nomenclature_points_CHARON.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
+        "mapLeftEdgeLongitudeDeg": 0,
         "output": "charon-features.json",
         "publicBase": "/scenes/charon/",
         "target": {
@@ -588,7 +812,9 @@
           "normal",
           "enhanced-color",
           "elevation",
-          "albedo"
+          "albedo",
+          "water-ice",
+          "ammonia"
         ],
         "kinds": {
           "point": [
@@ -621,7 +847,13 @@
         "outline": {
           "pieces": 256
         },
-        "notes": "notes.json"
+        "notes": "notes.json",
+        "landmarks": {
+          "document": "landmarks.json",
+          "inputs": [
+            "landmarks.json"
+          ]
+        }
       }
     }
   ],
@@ -891,6 +1123,120 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "charon-leisa-water-ice",
+      "path": "science/leisa/water-ice.tif",
+      "origin": "Project preparation from the pinned New Horizons LEISA spectra",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons team; cssEarth band-map preparation",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Reproduce from science/leisa/bands.json with the spectral-band-maps acquisition operation.",
+      "redistribution": "Retain source and method credits.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299175509",
+            "role": "material",
+            "evidence": "science/leisa/preparation.json"
+          },
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299171308",
+            "role": "material",
+            "evidence": "science/leisa/preparation.json"
+          },
+          {
+            "catalogueId": "grundy-2016-pluto-charon-compositions",
+            "role": "method",
+            "evidence": "Supplement page 3: continuum and absorption windows, Organa 310.9 E / 54.3 N; Fig. S6 spatial comparison."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "evidence": "science/leisa/preparation.json",
+            "missionId": "new-horizons"
+          }
+        ]
+      },
+      "sha256": "d5e97dc34ed6bbb93a9ec148f7a38efb92a7b580cc044ae365a9976a14810a91",
+      "bytes": 1037800,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "spectral-band-maps",
+        "groups": [
+          "refresh-leisa-ice"
+        ],
+        "path": "science/leisa/water-ice.tif",
+        "recipePath": "science/leisa/bands.json",
+        "product": "water-ice"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "charon-leisa-ammonia",
+      "path": "science/leisa/ammonia.tif",
+      "origin": "Project preparation from the pinned New Horizons LEISA spectra",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons team; cssEarth band-map preparation",
+      "license": "Public NASA scientific mission data; retain archive and author attribution",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Reproduce from science/leisa/bands.json with the spectral-band-maps acquisition operation.",
+      "redistribution": "Retain source and method credits.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299175509",
+            "role": "material",
+            "evidence": "science/leisa/preparation.json"
+          },
+          {
+            "catalogueId": "new-horizons-charon-leisa-0299171308",
+            "role": "material",
+            "evidence": "science/leisa/preparation.json"
+          },
+          {
+            "catalogueId": "grundy-2016-pluto-charon-compositions",
+            "role": "method",
+            "evidence": "Supplement page 3: continuum and absorption windows, Organa 310.9 E / 54.3 N; Fig. S6 spatial comparison."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "evidence": "science/leisa/preparation.json",
+            "missionId": "new-horizons"
+          }
+        ]
+      },
+      "sha256": "863ce7313592e1370c4e4c86837e1bcc56d05beb0443aee085b5ea1a531d6657",
+      "bytes": 1037800,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "spectral-band-maps",
+        "groups": [
+          "refresh-leisa-ice"
+        ],
+        "path": "science/leisa/ammonia.tif",
+        "recipePath": "science/leisa/bands.json",
+        "product": "ammonia"
+      },
+      "verificationOperations": []
+    },
+    {
       "kind": "authored-content",
       "id": "charon-object-content",
       "path": "content/object.json",
@@ -903,8 +1249,8 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet, view descriptions and legends."
       },
-      "sha256": "6d0efbb6ad1999da95abbbcfab5a381c4dc1d0d7df6c5091170db48eddcc8c53",
-      "bytes": 13230,
+      "sha256": "598566c1aba93a9a76397911794fb9a818ce470c7cdce48f3a4edb88489d511e",
+      "bytes": 17364,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -923,8 +1269,8 @@
         "kind": "local",
         "reason": "Project-authored source pin for the nomenclature archive."
       },
-      "sha256": "bccf79b8dd338107720151a034eb60cd27a3b16c52c0f22182a24d71cf9b8251",
-      "bytes": 1004,
+      "sha256": "e2aa1821dc8e0ff93d4e38ef94455827eaba0c5d64c5d8c7ea2084587f270925",
+      "bytes": 1239,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1005,6 +1351,32 @@
       "upstreamLineage": "not-recorded",
       "sha256": "095a48ea646fb7aaf1b3a7060cfd23cc35a13f432a8dbe253dd2f225ffe9da95",
       "bytes": 3655,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "charon-organa-landmark",
+      "path": "features/landmarks.json",
+      "origin": "Transcribed from Grundy et al. (2016), supplementary page 3.",
+      "credit": "Grundy et al. (2016); cssEarth transcription",
+      "license": "MIT for the authored coordinate record; cite the original study.",
+      "redistribution": "Retain the scientific citation and informal-name qualification.",
+      "acquisition": "Checked-in transcription of the published coordinate.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "grundy-2016-pluto-charon-compositions",
+            "role": "method",
+            "evidence": "Supplement page 3: continuum and absorption windows, Organa 310.9 E / 54.3 N; Fig. S6 spatial comparison."
+          }
+        ]
+      },
+      "sha256": "c7ff1789d718ce710db089b5b2ff9c312c113bbe90d4de184f9c845549fc161d",
+      "bytes": 971,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1233,6 +1605,118 @@
           "url": "/scenes/charon/charon-poles-albedo@2x.webp",
           "bytes": 14168,
           "sha256": "9abf55667011be61a0c2983c26478b142a56c4f5331bcb94b4cc71b246f908b5",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "water-ice",
+      "label": "Water ice",
+      "recipe": "raster",
+      "selector": "/surfaces/4",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Water ice absorbs strongly near 2.0 µm across Charon’s observed terrain. Colors show the depth of that absorption, which also depends on ice grain size. Grid: no usable spectrum."
+      ],
+      "lensIds": [
+        "water-ice"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "charon-leisa-water-ice"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/charon/charon-water-ice.webp",
+          "bytes": 495484,
+          "sha256": "b85f81927fe554e93ecedc77c949661a54b6f36e08ff53c8e381e20b2cdb1de6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/charon/charon-water-ice@2x.webp",
+          "bytes": 1783736,
+          "sha256": "f038a5e9d7bb8e24b4d80ee887e7590cc4df646d5b7c68b7c5eed124d82aff16",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/charon/charon-lens-water-ice.webp",
+          "bytes": 178,
+          "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/charon/charon-poles-water-ice.webp",
+          "bytes": 38118,
+          "sha256": "1df493f6d7863c23180a3eecccd40b7bbf1e2227ae50f32e79d17b6094025429",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/charon/charon-poles-water-ice@2x.webp",
+          "bytes": 103854,
+          "sha256": "34c2dc40cbd87bbde52b552b10f97f4be7051e2c321bc68809317293eee6dce9",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "ammonia",
+      "label": "Ammonia",
+      "recipe": "raster",
+      "selector": "/surfaces/5",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "A weak 2.2 µm absorption is associated with ammonia-bearing material, including ejecta around Organa crater. Colors show infrared contrast averaged over roughly 12 km; fine variations include instrument noise. Grid: no usable spectrum."
+      ],
+      "lensIds": [
+        "ammonia"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "charon-leisa-ammonia"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/charon/charon-ammonia.webp",
+          "bytes": 284676,
+          "sha256": "89f6181c3fbdfdaefe0895e64d17e92c86b425a7b1cde76354067456327a9492",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/charon/charon-ammonia@2x.webp",
+          "bytes": 921744,
+          "sha256": "52441cde913d84450456a24fbd613fe39b3122bc2d5118543ab403d86530ef40",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/charon/charon-lens-ammonia.webp",
+          "bytes": 178,
+          "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/charon/charon-poles-ammonia.webp",
+          "bytes": 27966,
+          "sha256": "d3933bc6c9417a9377e3edf1e3629ca664341bf2fe151741bc20d29b205b7d55",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/charon/charon-poles-ammonia@2x.webp",
+          "bytes": 71400,
+          "sha256": "1c3c00a8145bcc9205ea12933bcd9728ec580be4efc8fc28f92aa9cb16b17661",
           "verification": "bytes-verified"
         }
       ],
@@ -1672,8 +2156,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6441,
-          "sha256": "03b0ee4e9efb40c25d58cf2de517b5a7e6057b8252d04eb25e2fff389dd5b984",
+          "bytes": 6665,
+          "sha256": "491631188cbfcdcc6f7611ce6a6a61f155dc7c7f8aa77c9fe916e81a00326084",
           "verification": "bytes-verified"
         }
       ],
@@ -1685,7 +2169,7 @@
       "recipe": "features",
       "selector": "",
       "parents": [],
-      "process": "Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.",
+      "process": "Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.",
       "limitations": [],
       "lensIds": [],
       "recipeDependencies": [
@@ -1693,7 +2177,7 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
+        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1702,13 +2186,14 @@
         "charon-surface-features-source",
         "usgs-gazetteer-charon-nomenclature-center-pts",
         "charon-surface-map-frame",
-        "charon-surface-feature-notes"
+        "charon-surface-feature-notes",
+        "charon-organa-landmark"
       ],
       "outputs": [
         {
           "url": "/scenes/charon/charon-features.json",
-          "bytes": 77138,
-          "sha256": "9a9472803a3edc7f1d0251388c8c453b0dd91793d3db64af4a8cf8c69a7db08a",
+          "bytes": 76716,
+          "sha256": "f1c006b5e1fad0a948e192694dbe551815091d0c43c9c4debe065992175e4556",
           "verification": "bytes-verified"
         }
       ],
@@ -1732,8 +2217,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 34566,
-          "sha256": "d89bd6093997e986b6543344cc69e01ccd34d1bde895410d7fa39e2e7dc4a0bd",
+          "bytes": 34620,
+          "sha256": "c465ecdef75f4cd5d0f2d60922eeb881306c18d19378e514894127a99d187bbc",
           "verification": "bytes-verified"
         }
       ]
@@ -1756,8 +2241,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/enhanced-color.webp",
-          "bytes": 17426,
-          "sha256": "1cc9bac89bb7d2ba0f39573f4486e64143c4669d64ff823de09805089009252d",
+          "bytes": 17406,
+          "sha256": "e237ca76e683ff9a29916e266e18541fc8d7e51efe44d5e7aefda81685757229",
           "verification": "bytes-verified"
         }
       ]
@@ -1780,8 +2265,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/elevation.webp",
-          "bytes": 27154,
-          "sha256": "76442d4496010e4dc1f808531356eabd1a9e84401129fbf7140a39d3a2875eb9",
+          "bytes": 27074,
+          "sha256": "6722f525468e91a107c3a41ba3a77c8e95e5c497d3c5f861738d540b4838edae",
           "verification": "bytes-verified"
         }
       ]
@@ -1804,8 +2289,56 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/albedo.webp",
-          "bytes": 26116,
-          "sha256": "88d9e8ed04239101f54a975c1e838258fb527858f552c556b9138f3f440de345",
+          "bytes": 26110,
+          "sha256": "0c81231db29ae2fe66c12a540be74bed139ba1304e2607db045d3f3d01564967",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:water-ice",
+      "label": "Water ice preview",
+      "recipe": "raster",
+      "selector": "/surfaces/4",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "water-ice"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/water-ice.webp",
+          "bytes": 63642,
+          "sha256": "3fa8f8769e814d59277eec681c47d1c2c1bf165baaa037e9346c5b7ebc06b4d0",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:ammonia",
+      "label": "Ammonia preview",
+      "recipe": "raster",
+      "selector": "/surfaces/5",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "inputs": [],
+      "parents": [
+        "ammonia"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/ammonia.webp",
+          "bytes": 44296,
+          "sha256": "0447da653bfd668d742f9de45bd343bd88098a9936219440d74c9f538dc49506",
           "verification": "bytes-verified"
         }
       ]
