@@ -10,6 +10,9 @@ export const MOBILE_TOUCH_ACTION = "none";
 export { CANONICAL_PREPARED_IMAGE_DENSITY } from "../src/renderers/css/rendering/prepared-object-assets.ts";
 export const SKYBOX_DRAG_ENABLED = true;
 export const CENTER_SELECTION_DURATION_SECONDS = 0.35;
+// A wheel during a fly-to hurries the arrival by this factor instead of stopping the flight
+// where it is, which stranded distant bodies such as comets millions of kilometres away.
+export const FLIGHT_WHEEL_SPEEDUP = 6;
 // The traced reference response is one interval of travel per 100 delta units,
 // so a multiplier of 1 puts a device on that reference. A trackpad reports the
 // scroll distance a wheel notch stands for, in the same delta units, and needs
