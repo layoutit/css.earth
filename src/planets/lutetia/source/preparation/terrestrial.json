@@ -90,7 +90,7 @@
             "maximumEmissionDegrees": 70,
             "phaseDegrees": [
               25,
-              45
+              55
             ],
             "minimumGain": 0.4,
             "maximumGain": 2.5
@@ -102,7 +102,7 @@
         ],
         "metadata": {
           "label": "OSIRIS",
-          "coverage": "Two Rosetta orange-filter close-ups show Lutetia’s craters and ridges. Each uses the published shape and a separately checked camera. Approximate disk correction reduces broad shading; the grid marks gaps.",
+          "coverage": "Three Rosetta orange-filter photographs show Lutetia’s craters and ridges, including a closer view at 15:43 UTC. Each uses the published shape and a separately checked camera. Published photometric normalization reduces broad shading; the grid marks gaps.",
           "falseColor": false
         },
         "frames": [
@@ -117,6 +117,12 @@
             "path": "observations/n20100710t154135529id4df22.img",
             "cameraPath": "observations/n20100710t154135529id4df22-camera.json",
             "startTime": "2010-07-10T15:41:54.488"
+          },
+          {
+            "id": "image-n20100710t154241240id4df22",
+            "path": "observations/n20100710t154241240id4df22.img",
+            "cameraPath": "observations/n20100710t154241240id4df22-camera.json",
+            "startTime": "2010-07-10T15:43:00.199"
           }
         ],
         "selection": "lowest-emission",
