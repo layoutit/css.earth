@@ -2,6 +2,8 @@
 
 M42, Helix and M2–9 use the retained `volume-lens-bank` capability, shared camera, focus card and source controls. They do not have separate scene owners. Open `/sun/?focus=m42`, `/sun/?focus=helix` or `/sun/?focus=m2-9`, or double-click their scene labels.
 
+Search by common name or catalogue alias (Orion/M42/NGC 1976, Helix/NGC 7293, Twin Jet/M2–9), or browse the Nebulae category. Search rows come from each object's nebula record; selecting a result uses the current scene's shared fly-to without loading another page.
+
 | Object | Method | Lenses | Adopted distance |
 | --- | --- | --- | --- |
 | [M42](../../src/objects/m42/README.md) | Image emission with an evidence-guided coherent depth surface | ESO optical and VISTA infrared | 414 ± 7 pc |

@@ -81,6 +81,7 @@ export function createSceneRouter({
   if (navigation && windowTarget.location?.href) {
     historyOwner = createNavigationHistory({ windowTarget, objects, capture: captureUrl, navigate, onError: report });
     unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
+      selectPreparedFocus: id => worldContextMount?.selectPreparedFocus?.(id) ?? null,
       supports: id => navigation.supports(objectId, id), navigate, onError: report });
   }
   mountTask = mountApplication();
