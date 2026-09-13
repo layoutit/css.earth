@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-103p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "302ae38636d5c4ef13be2920f73dc31a5692b47e25f0113608ae008f8b8457cf"
+    "sha256": "55d2a1924973f538b9f872725dd70cbb7806605068c0ceb6996a732051a37c19"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c1fa460f028de2be843f8c02ca3670e9b7c718ae7e15e909f5c2447b2f5373fb",
+      "sha256": "225013e36cc91344ab073adacebd8272136484e2b7db4973368f883c9bcc6ed9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -181,6 +181,13 @@
                   "controlPath": "photography/hri/hv10110413_5004008_001_d050.json"
                 }
               ],
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 32,
+                "minimumPairs": 64,
+                "maximumLogMad": 0.3,
+                "maximumGain": 1.5
+              },
               "transfer": {
                 "maximumSourceDistanceMeters": 20,
                 "maximumSeparationMeters": 50,
@@ -191,17 +198,12 @@
                 "model": "observed",
                 "maximumGain": 1
               },
-              "selection": "finest-resolution",
-              "levelMatching": {
-                "samplesPerTriangle": 32,
-                "minimumPairs": 64,
-                "maximumLogMad": 0.3,
-                "maximumGain": 1.5
+              "display": {
+                "percentiles": [
+                  1,
+                  99.5
+                ]
               },
-              "displayPercentiles": [
-                1,
-                99.5
-              ],
               "metadata": {
                 "label": "EPOXI photographs",
                 "coverage": "MRI and restored HRI photographs from the EPOXI flyby are combined on the nucleus. HRI supplies finer image sampling, with MRI extending the coverage. Original shadows remain; the gray grid marks gaps or poorly constrained shape."

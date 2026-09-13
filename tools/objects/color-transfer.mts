@@ -1,4 +1,4 @@
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../source-values.mts';
+import { requireArray, requireFiniteNumber } from '../source-values.mts';
 
 /** IEC 61966-2-1 as published by the ICC. This is a display encoding, not an
  * instrument calibration or a transformation from spectral bands to human vision. */
@@ -12,26 +12,16 @@ export interface BandColorDisplay {
   readonly outputEncoding: 'srgb';
 }
 
-/** Calibrated bands are not RGB primaries. A band composite is always a
- * scientific visualization. Natural-color reconstruction needs a separately
- * qualified instrument-specific method; changing this enum cannot qualify it. */
-export function parseBandColorDisplay(value: unknown, bands?: readonly string[]): BandColorDisplay {
-  const record = requireRecord(value);
-  const keys = ['kind', 'inputQuantity', 'bands', 'displayRange', 'outputEncoding'];
-  if (Object.keys(record).some(key => !keys.includes(key)) || record.kind !== 'band-composite' ||
-      !['radiance-factor', 'derived-band-value'].includes(requireString(record.inputQuantity)) ||
-      record.outputEncoding !== 'srgb') {
-    throw new TypeError('Measured bands require an explicit scientific band-composite display; no inferred natural color, channel gains or white balance.');
+/** Calibrated bands are not RGB primaries: a band composite is always a scientific visualization. The route names the
+ * source bands, in display order, and their quantity from the product it reads, so a recipe declares only the common
+ * range and has no place for channel gains, white balance or natural color. Natural-color reconstruction needs a
+ * separately qualified instrument-specific method. */
+export function bandColorDisplay(bands: readonly string[], inputQuantity: BandColorDisplay['inputQuantity'], displayRange: unknown): BandColorDisplay {
+  const range = requireArray(displayRange).map(value => requireFiniteNumber(value));
+  if (bands.length !== 3 || new Set(bands).size !== 3 || bands.some(band => !band) || range.length !== 2 || !(range[1] > range[0])) {
+    throw new TypeError('The color display must bind three distinct source bands, in order, and one common finite range.');
   }
-  const selected = requireArray(record.bands).map(value=>requireString(value));
-  const range = requireArray(record.displayRange).map(value=>requireFiniteNumber(value));
-  if (selected.length !== 3 || new Set(selected).size !== 3 || selected.some(band => !band) ||
-      range.length !== 2 || !(range[1] > range[0]) ||
-      (bands && (bands.length !== 3 || bands.some((band, index) => band !== selected[index])))) {
-    throw new TypeError('The color display must bind the three actual source bands, in order, and one common finite range.');
-  }
-  return { kind: 'band-composite', inputQuantity: record.inputQuantity === 'radiance-factor' ? 'radiance-factor' : 'derived-band-value',
-    bands: selected, displayRange: [range[0], range[1]], outputEncoding: 'srgb' };
+  return { kind: 'band-composite', inputQuantity, bands: [...bands], displayRange: [range[0], range[1]], outputEncoding: 'srgb' };
 }
 
 /** A normalized linear display channel -> sRGB code value. Clamp only at the

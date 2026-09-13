@@ -29,7 +29,7 @@ export interface Relief {referenceRadiusMeters:number;lightDirection:number[];am
 export type SciencePalette = ({categories:{color:string}[];minimum?:number;maximum?:number;colors?:string[]} | {categories?:undefined;minimum:number;maximum:number;colors:string[]}) & {relief?:Relief;outputLongitudeOrigin?:number};
 export interface ObservationGeometry {sun:number[];observer:number[]}
 export interface ColorBand extends ScalarGrid {data:ArrayLike<number>;origin:number[];resolution:number[];filter:string;capture?:ObservationGeometry}
-export interface ObservedColorProfile {filters:string[];referenceRadiusMeters:number;centerLongitude:number;gamma:number;colorDisplay?:unknown}
+export interface ObservedColorProfile {filters:string[];referenceRadiusMeters:number;centerLongitude:number;displayRange?:readonly number[]}
 export interface PhotometryProfile {radiusKm:number;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;referenceIncidenceDegrees:number;referenceEmissionDegrees:number;observationWeights:Record<string,number>}
 export interface ObservedColorContext {groups:ReadonlyMap<string,ColorBand[]>;profile:ObservedColorProfile;width:number;height:number;sourceIds?:string[]}
 export interface PhasePhotometry {model:string;asymmetry:number;amplitude:number;width:number;minimumDegrees:number;maximumDegrees:number;referenceDegrees:number;maximumGain:number}
