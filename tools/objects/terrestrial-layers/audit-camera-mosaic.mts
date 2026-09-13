@@ -12,7 +12,7 @@ import {gzipSync} from 'node:zlib';
 import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import {loadRadialTerrain} from './radial-terrain.mts';
 import {prepareShapeCameraMosaic,resolveCameraPhotometry} from './shape-camera-mosaic.mts';
-import {sampleTrianglePoints} from './observation-mosaic.mts';
+import {sampleTrianglePoints} from '../surface-observations/levels.mts';
 const [sourceArg,outputArg]=process.argv.slice(2);
 if(!sourceArg||!outputArg)throw new Error('Usage: audit-camera-mosaic.mts SOURCE OUT');
 const sourceDirectory=resolve(sourceArg),output=resolve(outputArg);
