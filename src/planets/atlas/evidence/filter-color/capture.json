@@ -1,0 +1,234 @@
+{
+  "body": "atlas",
+  "lens": "filter-color",
+  "baselineRef": "52d5d4815",
+  "baselineCommit": "52d5d48155b62c62cc35052f4d82800d4d12c208",
+  "toolSha256": "655c8fed7f29c8f3359bec7b2b9ea985112790a42321106d01485537892f7039",
+  "recipeSha256": "672aba4b093c2ce17a1828ec4a62d5c87581cec30a07954a4e81dbbbdf1abf46",
+  "runtimeSha256": "e45f1965fa8054c194916d2bd909af81c26f30755abb2998abcb7b8502d80da0",
+  "geometrySha256": "3afdf410cf187887d4514cf41b43f46faecb2be0fb88b7f3040956143f5cf8f8",
+  "surfaceTrianglesSha256": "8660c4e6f381c76e3cbd1465dd6ad3b7515c114151a222e9a6cfd081ac95fdb0",
+  "geometryUnchanged": true,
+  "browser": "148.0.7778.96",
+  "existingAssetChanges": [],
+  "mobile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "dpr": 2,
+    "rowText": "Filter color\nCassini",
+    "bounds": {
+      "x": 20,
+      "y": 695.6875,
+      "width": 350,
+      "height": 20
+    },
+    "pageWidth": 390,
+    "pose": {
+      "schema": "cssearth-camera-pose@1",
+      "scene": "matrix3d(0.847966683969,-0.187323557675,-0.495845124629,0,0,0.935469418947,-0.353407648778,0,0.530049528703,0.299677912024,0.793246901139,0,0,0,0,1)",
+      "skybox": "matrix3d(0.744858633379,-0.235801416898,-0.624165931936,0,0.612164403398,0.613625147072,0.49871716244,0,0.265405688548,-0.753565996761,0.601413284649,0,0,0,0,1)",
+      "sunView": "matrix3d(0.996382830253,0.00470191593,-0.084847790568,0,0,0.998468066934,0.055330997754,0,0.084977971132,-0.055130856143,0.994856438449,0,0,0,0,1)"
+    },
+    "stableDom": true,
+    "sha256": "84a5d13915663e145497d15b1a6952f8699ce1e8252af965166a1e50ed36757c",
+    "errors": []
+  },
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr1.png",
+          "sha256": "ed4e6bb01bc413f9eed435234aa432d58a52f597d9276cf486f96a7f590ab1e6",
+          "url": "http://127.0.0.1:4284/atlas/?v=MMZAXGVkf72HXEFCxzNAAAAAv8YZ1CbkKHA_0VvHgizM67-pW05p2ecBAAA#dataset=filter-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.847966683969,-0.187323557675,-0.495845124629,0,0,0.935469418947,-0.353407648778,0,0.530049528703,0.299677912024,0.793246901139,0,0,0,0,1)",
+            "skybox": "matrix3d(0.744858633379,-0.235801416898,-0.624165931936,0,0.612164403398,0.613625147072,0.49871716244,0,0.265405688548,-0.753565996761,0.601413284649,0,0,0,0,1)",
+            "sunView": "matrix3d(0.996382830253,0.00470191593,-0.084847790568,0,0,0.998468066934,0.055330997754,0,0.084977971132,-0.055130856143,0.994856438449,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "filter-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 812,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.588862394535,-0.284487666213,-0.756510309299,0,-0.168062054883,0.872446148366,-0.458903981144,0,0.790567028159,0.397371974319,0.465939146256,0,0,0,0,1)",
+          "skybox": "matrix3d(0.445028640606,-0.348237664188,-0.825033236179,0,0.740170361265,0.661627381273,0.11998721046,0,0.504080530812,-0.664062930912,0.552198399296,0,0,0,0,1)",
+          "sunView": "matrix3d(0.94838408129,-0.013297614931,0.31684508485,0,-0.052391789977,0.978821145693,0.197899633874,0,-0.312766262086,-0.204284943599,0.927601707156,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "atlas-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/atlas/atlas-normal-surface@2x.webp",
+          "sha256": "591d15855845dbd0a5053346af36657f045649700f1299a833dcb74e09e84303",
+          "bytes": 383476
+        },
+        {
+          "filename": "atlas-filter-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/atlas/atlas-filter-color-surface@2x.webp",
+          "sha256": "c991aeec4419d298628b291311a0474af507bf6a3af60be7154f8a08e942fdeb",
+          "bytes": 391142
+        },
+        {
+          "filename": "atlas-filter-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/atlas/atlas-filter-color-shadow@2x.webp",
+          "sha256": "4266eb872160f1a17556fdee45100d67ab102b9e9f768e12fbb38ea08a85d810",
+          "bytes": 233066
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "crop": {
+        "x": 360,
+        "y": 80,
+        "width": 720,
+        "height": 660
+      },
+      "views": [
+        {
+          "name": "color",
+          "file": "color-dpr2.png",
+          "sha256": "e4ece6be3d45408f664084089e46529f534313359f5f12d2a949410949212c9a",
+          "url": "http://127.0.0.1:4284/atlas/?v=MMZAXGVkf72HXEFCxzNAAAAAv8YZ1CbkKHA_0VvHgizM67-pW05p2ecBAAA#dataset=filter-color",
+          "pose": {
+            "schema": "cssearth-camera-pose@1",
+            "scene": "matrix3d(0.847966683969,-0.187323557675,-0.495845124629,0,0,0.935469418947,-0.353407648778,0,0.530049528703,0.299677912024,0.793246901139,0,0,0,0,1)",
+            "skybox": "matrix3d(0.744858633379,-0.235801416898,-0.624165931936,0,0.612164403398,0.613625147072,0.49871716244,0,0.265405688548,-0.753565996761,0.601413284649,0,0,0,0,1)",
+            "sunView": "matrix3d(0.996382830253,0.00470191593,-0.084847790568,0,0,0.998468066934,0.055330997754,0,0.084977971132,-0.055130856143,0.994856438449,0,0,0,0,1)"
+          },
+          "settings": {
+            "shadows": false,
+            "orbit": true
+          },
+          "lens": {
+            "id": "filter-color",
+            "ready": true
+          },
+          "stats": {
+            "selectedPreparedDensity": 2,
+            "visibleAssetsDecodedBeforeMount": 0,
+            "textureStats": {
+              "selectedPreparedDensity": 2,
+              "retainedInteractiveImageCount": 3,
+              "pendingInteractiveImageCount": 0
+            }
+          },
+          "geometry": {
+            "retainedNodes": 812,
+            "retainedLeaves": 2,
+            "directlyHiddenLeaves": 0
+          },
+          "stableDom": true
+        }
+      ],
+      "interaction": {
+        "pose": {
+          "schema": "cssearth-camera-pose@1",
+          "scene": "matrix3d(0.588862394535,-0.284487666213,-0.756510309299,0,-0.168062054883,0.872446148366,-0.458903981144,0,0.790567028159,0.397371974319,0.465939146256,0,0,0,0,1)",
+          "skybox": "matrix3d(0.445028640606,-0.348237664188,-0.825033236179,0,0.740170361265,0.661627381273,0.11998721046,0,0.504080530812,-0.664062930912,0.552198399296,0,0,0,0,1)",
+          "sunView": "matrix3d(0.94838408129,-0.013297614931,0.31684508485,0,-0.052391789977,0.978821145693,0.197899633874,0,-0.312766262086,-0.204284943599,0.927601707156,0,0,0,0,1)"
+        },
+        "stableDom": true
+      },
+      "loaded": [
+        {
+          "filename": "atlas-normal-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/atlas/atlas-normal-surface@2x.webp",
+          "sha256": "591d15855845dbd0a5053346af36657f045649700f1299a833dcb74e09e84303",
+          "bytes": 383476
+        },
+        {
+          "filename": "atlas-filter-color-surface@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/atlas/atlas-filter-color-surface@2x.webp",
+          "sha256": "c991aeec4419d298628b291311a0474af507bf6a3af60be7154f8a08e942fdeb",
+          "bytes": 391142
+        },
+        {
+          "filename": "atlas-filter-color-shadow@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/atlas/atlas-filter-color-shadow@2x.webp",
+          "sha256": "4266eb872160f1a17556fdee45100d67ab102b9e9f768e12fbb38ea08a85d810",
+          "bytes": 233066
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "acquisitionRevision": "78feb6ad9",
+  "purpose": "Inspected mounted color views, loaded source-asset identity, unchanged geometry and interaction checks. Scientific acceptance uses the source and registration evidence.",
+  "images": [
+    {
+      "file": "color-dpr1.png",
+      "bytes": 206341,
+      "sha256": "ed4e6bb01bc413f9eed435234aa432d58a52f597d9276cf486f96a7f590ab1e6"
+    },
+    {
+      "file": "color-dpr2.png",
+      "bytes": 604501,
+      "sha256": "e4ece6be3d45408f664084089e46529f534313359f5f12d2a949410949212c9a"
+    },
+    {
+      "file": "mobile.png",
+      "bytes": 409980,
+      "sha256": "84a5d13915663e145497d15b1a6952f8699ce1e8252af965166a1e50ed36757c"
+    },
+    {
+      "file": "oblique-shadows-dpr1.png",
+      "bytes": 171317,
+      "sha256": "eff474bcd1302db9aeb53310710cba81964742d1ced33c7ba41285fa3b74e74e"
+    },
+    {
+      "file": "oblique-shadows-dpr2.png",
+      "bytes": 464545,
+      "sha256": "34a1d3350953d733d12f28aef6636b4fa7fc6526577b9583666af78422090301"
+    },
+    {
+      "file": "product.png",
+      "bytes": 425550,
+      "sha256": "349f29ea359e46e1eabbc274774c575d51c5459538f4a316fb619759bc2243e6"
+    }
+  ]
+}

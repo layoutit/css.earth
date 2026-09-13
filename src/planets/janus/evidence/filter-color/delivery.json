@@ -1,0 +1,45 @@
+{
+  "method": "Restored newly published immutable runtime assets over HTTPS, verified size and SHA-256 against the delivery inventory.",
+  "assets": [
+    {
+      "id": "janus",
+      "filename": "janus-elevation-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/85e1579ffd4b15c65ae974a8ffdf6932c2bfceff3ea269d17c5270e52e4bd5ca/janus-elevation-shadow@2x.webp",
+      "bytes": 328362,
+      "sha256": "85e1579ffd4b15c65ae974a8ffdf6932c2bfceff3ea269d17c5270e52e4bd5ca",
+      "verified": true
+    },
+    {
+      "id": "janus",
+      "filename": "janus-filter-color-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2712efdfbfc2dbf034fb85c264338ae11f8bacdcdd1e3795e43eb41c7929531e/janus-filter-color-shadow@2x.webp",
+      "bytes": 226828,
+      "sha256": "2712efdfbfc2dbf034fb85c264338ae11f8bacdcdd1e3795e43eb41c7929531e",
+      "verified": true
+    },
+    {
+      "id": "janus",
+      "filename": "janus-filter-color-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/5268306adaf2a44b9380a4681fded569917596c6658aa686fc1e38a770d1b04f/janus-filter-color-surface@2x.webp",
+      "bytes": 326390,
+      "sha256": "5268306adaf2a44b9380a4681fded569917596c6658aa686fc1e38a770d1b04f",
+      "verified": true
+    },
+    {
+      "id": "janus",
+      "filename": "janus-filter-color-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/43a1ffdcc0c6b610e7b5179a464d0437d68ff538f1be0da0ee10d3f4f3244c4f/janus-filter-color-thumbnail.webp",
+      "bytes": 2776,
+      "sha256": "43a1ffdcc0c6b610e7b5179a464d0437d68ff538f1be0da0ee10d3f4f3244c4f",
+      "verified": true
+    },
+    {
+      "id": "janus",
+      "filename": "janus-normal-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/04610988fc3d2a313668022c7bc7c7729c3964be15d511650e337ed536397b5d/janus-normal-shadow@2x.webp",
+      "bytes": 261012,
+      "sha256": "04610988fc3d2a313668022c7bc7c7729c3964be15d511650e337ed536397b5d",
+      "verified": true
+    }
+  ]
+}

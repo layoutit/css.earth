@@ -1,0 +1,29 @@
+{
+  "method": "Restored newly published immutable runtime assets over HTTPS, verified size and SHA-256 against the delivery inventory.",
+  "assets": [
+    {
+      "id": "atlas",
+      "filename": "atlas-filter-color-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4266eb872160f1a17556fdee45100d67ab102b9e9f768e12fbb38ea08a85d810/atlas-filter-color-shadow@2x.webp",
+      "bytes": 233066,
+      "sha256": "4266eb872160f1a17556fdee45100d67ab102b9e9f768e12fbb38ea08a85d810",
+      "verified": true
+    },
+    {
+      "id": "atlas",
+      "filename": "atlas-filter-color-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c991aeec4419d298628b291311a0474af507bf6a3af60be7154f8a08e942fdeb/atlas-filter-color-surface@2x.webp",
+      "bytes": 391142,
+      "sha256": "c991aeec4419d298628b291311a0474af507bf6a3af60be7154f8a08e942fdeb",
+      "verified": true
+    },
+    {
+      "id": "atlas",
+      "filename": "atlas-filter-color-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/fead3d7a41f3f5aa0300d70885ef3217b270156e58bf91daccdb74e33e26a5e8/atlas-filter-color-thumbnail.webp",
+      "bytes": 3122,
+      "sha256": "fead3d7a41f3f5aa0300d70885ef3217b270156e58bf91daccdb74e33e26a5e8",
+      "verified": true
+    }
+  ]
+}

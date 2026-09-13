@@ -10,6 +10,10 @@
 
 ## Evidence
 
+**Filter color:** The color footprint covers part of the large crater and adjacent terrain; the reverse side and other missing intersections stay gray. The [browser record](evidence/filter-color/capture.json) pins the loaded image responses, camera, settings and inspected views at DPR 1 and 2. The original unshaded image bytes, body leaves and picking triangles are unchanged. Dragging, Shadows and the mobile selector passed without page errors or replaced scene DOM. Scientific qualification comes from the original camera/shape release and the registration evidence described here; these screenshots document the mounted result.
+
+[Filter color](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Oblique with Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). Captures correspond to the implementation and source inputs at `78feb6ad9`; the record retains its acquisition-tool and prepared-file hashes.
+
 - Their observation IDs and camera geometry are authored in [source/preparation/terrestrial.json](source/preparation/terrestrial.json); each geometry row comes from Table 1 of the [PDS Pandora model documentation](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/pandora_document.pdf).
 
 - Across 4,096 approximately uniform radial rays, the simplified model differs from the original by 188 m on average, 445 m at the 95th percentile and 949 m at the largest sampled point. These are sampled radial differences, not an exhaustive geometric bound or the source measurement uncertainty.
@@ -29,6 +33,9 @@
 
 ## Filter color preparation
 
+<details>
+<summary>Source products, processing and qualification</summary>
+
 | RGB channel | Filter | Observation | Mid-time (UTC) | Approx. m/pixel at centre |
 | --- | --- | --- | --- | ---: |
 | red | IR3 | n1860790942 | 2016-12-18T21:15:05.265 | 209 |
@@ -40,6 +47,8 @@ Original floating-point IMG products and detached labels are pinned in [the inpu
 Only common, visible three-filter samples are colored. The maximum incidence and emission angles are 75° to avoid the most foreshortened limb and terminator; detector coverage is inset by two source pixels. The existing edge-connected 0.003 I/F background exclusion retains interior dark patches. This signal-based background rule is an approximate coverage mask, not a detector-quality flag.
 
 The observed I/F channels share one linear display scale (0.8 I/F maps to 255), gamma 1 and fixed unit gains. No per-band brightness equalization, clear-filter sharpening or single-band photometric model changes their ratios. No colorimetric transform has been applied; even visible-filter RGB is labelled false color. Prepared source illumination and the app's Shadows control remain separate.
+
+</details>
 
 ## Methods and source notes
 
