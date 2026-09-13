@@ -2,6 +2,8 @@
 
 ## Sources
 
+**Filter color** adds three original Cassini ISS NAC filter observations displayed as RGB (IR3 / GRN / UV3), calibrated by CISSCAL 4.0beta into linear I/F. This is false color. Each frame uses its own measured camera row in the [Thomas 2018 janus document](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/janus_document.pdf), registered to the matching original plate model.
+
 - **Monochrome:** 7 Cassini ISS narrow-angle, clear-filter frames calibrated to I/F by CISSCAL and distributed by the PDS Ring-Moon Systems Node.
 
 - **Elevation:** radial height of the released shape above a 89.2 km reference sphere, with a shared shaded-relief palette.
@@ -16,6 +18,8 @@
 
 ## Known problems
 
+**Filter color:** Three filters were acquired sequentially, and are not a simultaneous true-color photograph or a composition map. Source shadows and phase-dependent brightness remain. The common footprint is smaller than Monochrome coverage; gray grid marks gaps. Small color fringes can remain at sharp relief because the shape and camera solutions have finite accuracy.
+
 - **Elevation:** This is a shape-derived scientific visualization, not local altitude above a geoid or a high-resolution crater DEM.
 
 - Model uncertainty: 0.3–1.3 km; the sub-Saturn region is least certain.
@@ -25,6 +29,21 @@
 - **Rotation:** Its secular IAU/PCK rotation terms provide an explicitly approximate fixed-epoch display orientation; periodic libration terms and the precise Cassini binary rotation kernel are omitted.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+
+
+## Filter color preparation
+
+| RGB channel | Filter | Observation | Mid-time (UTC) | Approx. m/pixel at centre |
+| --- | --- | --- | --- | ---: |
+| red | IR3 | n1627319215 | 2009-07-26T16:24:54.075 | 595 |
+| green | GRN | n1627319647 | 2009-07-26T16:32:07.946 | 586 |
+| blue | UV3 | n1627319759 | 2009-07-26T16:33:49.367 | 584 |
+
+Original floating-point IMG products and detached labels are pinned in [the input manifest](source/manifest.json). All three products are unbinned FULL resolution, use lossless spacecraft compression and report zero missing lines. The [recipe](source/preparation/terrestrial.json) records the zero-based detector centres, west-positive observer and solar longitudes, and 2003.44 mm / 12 μm Cassini NAC focal scale. Camera rays and occlusion are evaluated on the original shape; the existing simplified display mesh is retained.
+
+Only common, visible three-filter samples are colored. The maximum incidence and emission angles are 75° to avoid the most foreshortened limb and terminator; detector coverage is inset by two source pixels. The existing edge-connected 0.003 I/F background exclusion retains interior dark patches. This signal-based background rule is an approximate coverage mask, not a detector-quality flag.
+
+The observed I/F channels share one linear display scale (0.8 I/F maps to 255), gamma 1 and fixed unit gains. No per-band brightness equalization, clear-filter sharpening or single-band photometric model changes their ratios. No colorimetric transform has been applied; even visible-filter RGB is labelled false color. Prepared source illumination and the app's Shadows control remain separate.
 
 ## Methods and source notes
 
@@ -63,7 +82,6 @@ The astronomy package already owns the moon's Saturn-relative orbital elements. 
 
 - **Not added as duplicate lenses:** individual clear-filter photographs of the same terrain. They contribute to one Monochrome map.
 
-- **Unresolved for a separate lens:** UV/visible/IR filtered observations exist, but no registered, qualified global color/composition map was located in this pass. The selected package does not claim that only two datasets exist.
 
 - **Facts:** [NASA Janus](https://science.nasa.gov/saturn/moons/janus/) and [JPL physical parameters](https://ssd.jpl.nasa.gov/sats/phys_par/). No substantial atmosphere or cutaway is claimed.
 

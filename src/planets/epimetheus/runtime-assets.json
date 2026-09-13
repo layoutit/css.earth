@@ -18,8 +18,8 @@
     },
     {
       "filename": "epimetheus-elevation-shadow@2x.webp",
-      "bytes": 304750,
-      "sha256": "95ee956bb635958579bc8db9486b02161c472db0fae957de28964ca420f83362"
+      "bytes": 304344,
+      "sha256": "db3f3f76f660510bdd5be1863dd30d57c2e1d69bdfbe112804c0a849c085c166"
     },
     {
       "filename": "epimetheus-elevation-surface@2x.webp",
@@ -32,14 +32,29 @@
       "sha256": "c340c1607ca4ac044247dd00682efb90965561caa04eac0f3da67d5f1acdd8ce"
     },
     {
+      "filename": "epimetheus-filter-color-shadow@2x.webp",
+      "bytes": 207964,
+      "sha256": "fb827610da1501c53e30f4c3494d89e4b17a4ec146416a973875a2cbe440ea9a"
+    },
+    {
+      "filename": "epimetheus-filter-color-surface@2x.webp",
+      "bytes": 291398,
+      "sha256": "f8368000b2a30fdfb6acfb9b242c18fefcdc7692c5bcbc871d48e818f7d64dda"
+    },
+    {
+      "filename": "epimetheus-filter-color-thumbnail.webp",
+      "bytes": 2100,
+      "sha256": "4f84d87d4b6878aab517218ee77f3da5f5b66623c84c801be1efa49e24c5be8e"
+    },
+    {
       "filename": "epimetheus-lighting.webp",
       "bytes": 1050836,
       "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
     },
     {
       "filename": "epimetheus-normal-shadow@2x.webp",
-      "bytes": 370282,
-      "sha256": "8f8c76055156fb6d632fd662323c7b77ffdf2a591cc4636bb6f57a03dbe8c588"
+      "bytes": 370248,
+      "sha256": "fc3264c8f9a4a96d59a5e6f3e948600309d379706e0a9dbe9e283573935f10ca"
     },
     {
       "filename": "epimetheus-normal-surface@2x.webp",

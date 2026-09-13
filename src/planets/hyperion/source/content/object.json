@@ -74,7 +74,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "filter-color": "Filter color"
     },
     "controls": [
       {
@@ -92,6 +93,22 @@
           "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
         },
         "summary": "Twelve Cassini frames, including a regional ~100 m/pixel close view. Shape and registration limit detail; shadows and marked gaps remain."
+      },
+      {
+        "id": "filter-color",
+        "label": "Filter color",
+        "description": "Cassini IR3, IR1 and UV3 filters displayed as red, green and blue. Cameras are fitted to controlled clear-frame features; only common coverage is shown.",
+        "title": "Cassini filter color",
+        "detail": "Cassini",
+        "thumbnail": "/scenes/hyperion/hyperion-filter-color-thumbnail.webp",
+        "surface": "hyperion-filter-color-surface@2x.webp",
+        "poles": "hyperion-filter-color-surface@2x.webp",
+        "source": {
+          "id": "n1506388324",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/"
+        },
+        "summary": "False color from separately registered filters. Gray grid marks missing common coverage; photographed shadows remain."
       },
       {
         "id": "elevation",

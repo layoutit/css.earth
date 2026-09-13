@@ -291,6 +291,108 @@
             "sha256": "737553c1ebb0de17daa91d5c3fb5a81e3b3607b3b12db623a606a73f5b539d8e"
           }
         }
+      },
+      {
+        "id": "filter-color",
+        "format": "controlled-shape-color",
+        "consumer": "cassini-color-frames",
+        "channels": [
+          {
+            "channel": "red",
+            "filter": "IR3",
+            "frames": [
+              {
+                "id": "n1506388324",
+                "path": "observations/N1506388324_2_CALIB.IMG",
+                "labelPath": "observations/N1506388324_2_CALIB.LBL",
+                "observerLatitude": 11.096918604651162,
+                "observerWestLongitude": 200.49825581395348,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 252.6364534883721,
+                "rangeKm": 34274.52848837209,
+                "northAzimuthDegrees": 329.4895000849899,
+                "center": [
+                  300.90448509833834,
+                  700.2599348901572
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              }
+            ]
+          },
+          {
+            "channel": "green",
+            "filter": "IR1",
+            "frames": [
+              {
+                "id": "n1506388291",
+                "path": "observations/N1506388291_2_CALIB.IMG",
+                "labelPath": "observations/N1506388291_2_CALIB.LBL",
+                "observerLatitude": 11.099796511627906,
+                "observerWestLongitude": 200.4656395348837,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 252.60863372093024,
+                "rangeKm": 34460.79622093023,
+                "northAzimuthDegrees": 329.4907473751497,
+                "center": [
+                  301.8959746449202,
+                  700.3018234666115
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              }
+            ]
+          },
+          {
+            "channel": "blue",
+            "filter": "UV3",
+            "frames": [
+              {
+                "id": "n1506388236",
+                "path": "observations/N1506388236_2_CALIB.IMG",
+                "labelPath": "observations/N1506388236_2_CALIB.LBL",
+                "observerLatitude": 11.104593023255813,
+                "observerWestLongitude": 200.41127906976743,
+                "sunLatitude": 11.11,
+                "sunWestLongitude": 252.56226744186046,
+                "rangeKm": 34771.242441860464,
+                "northAzimuthDegrees": 329.47534502613877,
+                "center": [
+                  303.68434650673964,
+                  702.0989319256197
+                ],
+                "pixelAngleMicroradians": 5.9896977199,
+                "coverageInsetPixels": 3
+              }
+            ]
+          }
+        ],
+        "photometry": {
+          "model": "observed",
+          "weight": 0.5,
+          "maximumGain": 1,
+          "maximumIncidenceDegrees": 75,
+          "maximumEmissionDegrees": 75,
+          "displayMaximum": 0.5,
+          "gamma": 1,
+          "minimumLevel": 1,
+          "maximumLevel": 1,
+          "backgroundMaximum": 0.003
+        },
+        "metadata": {
+          "label": "Filter color",
+          "falseColor": true,
+          "coverage": "Cassini IR3, IR1 and UV3 filters displayed as red, green and blue. Cameras are fitted to controlled clear-frame features; only common coverage is shown.",
+          "attribution": {
+            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/cassini/iss/"
+          }
+        },
+        "focus": {
+          "longitudeDegrees": 159.5343604651163,
+          "latitudeDegrees": 11.099796511627906,
+          "zoom": 1.1
+        }
       }
     ]
   },
@@ -336,7 +438,7 @@
   },
   "celestial": {
     "sunSource": "JPL Saturn-system orbital data; the shape uses the controlled Cassini September 2005 frame. Its displayed orientation is arbitrary because Hyperion rotates chaotically.",
-    "qualification": "The ephemeris locates the Sun, but Hyperion\u2019s body attitude is an explicitly arbitrary display orientation. Its directional lighting is a display convention, not a prediction of the current tumbling surface phase."
+    "qualification": "The ephemeris locates the Sun, but Hyperion’s body attitude is an explicitly arbitrary display orientation. Its directional lighting is a display convention, not a prediction of the current tumbling surface phase."
   },
   "presentation": {
     "defaultLens": "normal",
