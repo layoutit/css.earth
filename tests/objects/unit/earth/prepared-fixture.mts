@@ -26,10 +26,10 @@ interface DiagnosticDescriptor extends JsonRecord {
   prepared: JsonRecord & { sha256: string };
 }
 
-const sourceDirectory = fileURLToPath(new URL('../../../../src/planets/earth/source/', import.meta.url));
+const sourceDirectory = fileURLToPath(new URL('../../../../src/objects/earth/source/', import.meta.url));
 
 async function read(path: string): Promise<JsonRecord> {
-  const value: unknown = JSON.parse(await readFile(new URL(`../../../../src/planets/earth/${path}`, import.meta.url), 'utf8'));
+  const value: unknown = JSON.parse(await readFile(new URL(`../../../../src/objects/earth/${path}`, import.meta.url), 'utf8'));
   requirePreparedData(value, `Earth fixture ${path}`);
   return requireRecord(value, `Earth fixture ${path}`);
 }
@@ -153,6 +153,6 @@ export async function preparePagingDiagnostic(plan: unknown): Promise<PagingDiag
   return { preparedJson, descriptorJson: JSON.stringify(descriptor), descriptorModule: `export default ${JSON.stringify(descriptor)};` };
 }
 export async function routePagingDiagnostic(target: Page | BrowserContext, diagnostic: PagingDiagnostic): Promise<void> {
-  await target.route(/\/src\/planets\/earth\/object\.json(?:\?.*)?$/, route => route.fulfill({ contentType: 'text/javascript', body: diagnostic.descriptorModule }));
-  await target.route(/\/src\/planets\/earth\/prepared\/object\.json$/, route => route.fulfill({ contentType: 'application/json', body: diagnostic.preparedJson }));
+  await target.route(/\/src\/objects\/earth\/object\.json(?:\?.*)?$/, route => route.fulfill({ contentType: 'text/javascript', body: diagnostic.descriptorModule }));
+  await target.route(/\/src\/objects\/earth\/prepared\/object\.json$/, route => route.fulfill({ contentType: 'application/json', body: diagnostic.preparedJson }));
 }

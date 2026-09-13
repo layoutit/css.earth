@@ -26,7 +26,7 @@ interface LoadedObjectContent {
 
 // Follow descriptor references, not a fixed source filename or private module.
 export async function loadObjectContent(id: string): Promise<LoadedObjectContent> {
-  const root = new URL(`../../src/planets/${id}/`, import.meta.url);
+  const root = new URL(`../../src/objects/${id}/`, import.meta.url);
   const readJson = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, root), "utf8"));
   const descriptor = requireDescriptor(await readJson("object.json"), `${id}: object descriptor`);
   async function source(name: string): Promise<Record<string, unknown>> {

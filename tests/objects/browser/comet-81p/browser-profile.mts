@@ -1,5 +1,5 @@
 import { browserProfileLensIds, createObjectBrowserProfile } from '../../../../site/test/object-browser-profile.mts';
-import objectControls from '../../../../src/planets/comet-81p/prepared/controls.json' with { type: 'json' };
+import objectControls from '../../../../src/objects/comet-81p/prepared/controls.json' with { type: 'json' };
 
 export const browserProfile = createObjectBrowserProfile({ id: 'comet-81p', controls: objectControls,
   audit: {

@@ -15,7 +15,7 @@ export function operationArguments(args=process.argv.slice(2)) {
 /** Operational paths are selected explicitly; all scientific scene state remains prepared JSON. */
 export function createOperationContext({objectId,projectRoot=projectDirectory}: { objectId?: string; projectRoot?: string }={}) {
   if(typeof objectId!=='string'||! /^[a-z][a-z0-9-]*$/.test(objectId))throw new TypeError('A geographic object id is required.');
-  const root=resolve(projectRoot),objectRoot=resolve(root,'src/planets',objectId),sourceRoot=resolve(objectRoot,'source'),preparedRoot=resolve(objectRoot,'prepared');
+  const root=resolve(projectRoot),objectRoot=resolve(root,'src/objects',objectId),sourceRoot=resolve(objectRoot,'source'),preparedRoot=resolve(objectRoot,'prepared');
   const contained=(base: string,path: string)=>{if(typeof path!=='string'||path.includes('\\')||isAbsolute(path)||path.split('/').includes('..'))throw new TypeError('Invalid operation-relative path.');return resolve(base,path);};
   const url=(base: string,path: string)=>pathToFileURL(contained(base,path)+(!path||path.endsWith('/')?'/':''));
   async function readPrepared(name: string): Promise<unknown>;

@@ -7,7 +7,7 @@ import { OBJECTS } from '../site/objects.mts';
 // Run after prepare:object-json. The checked-in tree gate also runs in CI
 // without requiring generated transports or an asset download.
 for (const { id } of OBJECTS) test(`${id}: serialized activation bank matches its descriptor and tree`, async () => {
-  const root = new URL(`../src/planets/${id}/`, import.meta.url);
+  const root = new URL(`../src/objects/${id}/`, import.meta.url);
   const runtime = JSON.parse(await readFile(new URL('prepared/runtime.json', root), 'utf8'));
   const descriptor = JSON.parse(await readFile(new URL('object.json', root), 'utf8'));
   const bytes = await readFile(new URL(descriptor.prepared.url, root));

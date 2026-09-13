@@ -109,12 +109,12 @@ const GM_SUN_AU3_PER_DAY2 = GAUSSIAN_GRAVITATIONAL_CONSTANT ** 2;
 
 // Object-owned orientation sources distinguish observed poles from display axes.
 const authoredRotations = new Map(await Promise.all(BODIES.map(async (id): Promise<readonly [BodyId, RotationElements | null]> => {
-  const descriptor = requireRecord(await readJsonSource(resolve("src/planets", id, "object.json")));
+  const descriptor = requireRecord(await readJsonSource(resolve("src/objects", id, "object.json")));
   const recipe = requireRecord(requireRecord(descriptor.properties).recipe);
   const ref = requireArray(recipe.sources).map(source => requireRecord(source)).find(source => source.id === "rotation");
   if (!ref) return [id, null];
   const { readAuthoredRotation } = await import('./objects/authored-rotation.mts');
-  return [id, await readAuthoredRotation(resolve('src/planets', id), { path: requireString(ref.path), sha256: requireString(ref.sha256) }, EPOCH_JD_TT)];
+  return [id, await readAuthoredRotation(resolve('src/objects', id), { path: requireString(ref.path), sha256: requireString(ref.sha256) }, EPOCH_JD_TT)];
 })));
 const rotationAtEpoch = (id: BodyId): RotationElements => {
   const authored = authoredRotations.get(id);

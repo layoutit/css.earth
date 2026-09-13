@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {readFitsPrimary} from '../../../../tools/objects/observation/fits.mts';
 import {parseObjTextureCoordinates,createObjUvFitsSampler} from '../../../../tools/objects/terrestrial-layers/obj-uv-fits.mts';
-const root=new URL('../../../../src/planets/arrokoth/source/',import.meta.url);
+const root=new URL('../../../../src/objects/arrokoth/source/',import.meta.url);
 const json=async (path: string|URL)=>JSON.parse((await readFile(new URL(path,root))).toString('utf8'));
 test('released Arrokoth topology retains two closed source lobes at kilometre scale',async()=>{
  const config=await json('preparation/terrestrial.json'),text=await readFile(new URL(config.geometry.radialTerrain.path,root),'utf8');

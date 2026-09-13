@@ -4,11 +4,11 @@
 import { required } from '../../../../tools/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../src/planets/miranda/prepared/runtime.json" with { type: "json" };
-import assets from "../../../../src/planets/miranda/prepared/assets.json" with { type: "json" };
-import scene from "../../../../src/planets/miranda/prepared/scene.json" with { type: "json" };
-import lenses from "../../../../src/planets/miranda/prepared/lenses.json" with { type: "json" };
-import controls from "../../../../src/planets/miranda/prepared/controls.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/miranda/prepared/runtime.json" with { type: "json" };
+import assets from "../../../../src/objects/miranda/prepared/assets.json" with { type: "json" };
+import scene from "../../../../src/objects/miranda/prepared/scene.json" with { type: "json" };
+import lenses from "../../../../src/objects/miranda/prepared/lenses.json" with { type: "json" };
+import controls from "../../../../src/objects/miranda/prepared/controls.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";

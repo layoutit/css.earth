@@ -9,7 +9,7 @@ import sharp from 'sharp';
 import { parseScalarMap, scalarMapIndex } from '../../../../tools/objects/terrestrial-layers/pds-scalar-map.mts';
 import { colorForValue } from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 const root = new URL('../../../../', import.meta.url);
-const body = new URL('src/planets/comet-67p/', root);
+const body = new URL('src/objects/comet-67p/', root);
 const json = async (path: string|URL) => JSON.parse((await readFile(new URL(path, body))).toString('utf8'));
 const config = await json('source/preparation/terrestrial.json');
 const parsed = new Map<string,ReturnType<typeof parseScalarMap>>();

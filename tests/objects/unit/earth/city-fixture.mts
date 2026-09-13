@@ -12,7 +12,7 @@ export async function readCityFixture(overrides: Record<string, unknown> = {}) {
   // Local raster tests cover the reproducible proof inputs. Published regions
   // have their own pinned receipts and remote closure checks; their full trees
   // must not become a prerequisite of this small offline fixture.
-  const source = parseCitySource(JSON.parse((await readFile(new URL("../../../../src/planets/earth/source/city/manifest.json", import.meta.url))).toString('utf8')));
+  const source = parseCitySource(JSON.parse((await readFile(new URL("../../../../src/objects/earth/source/city/manifest.json", import.meta.url))).toString('utf8')));
   const prepared = parseCityFixtureManifest(JSON.parse((await readFile(new URL(
     `../../../../output/earth-city/${source.dataset}/manifest.json`, import.meta.url))).toString('utf8')));
   const index = prepareCityIndex(prepared.pages, source.dataset, PREPARED_EARTH_SCENE, source.delivery);

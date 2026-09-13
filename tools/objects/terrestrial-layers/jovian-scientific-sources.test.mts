@@ -10,7 +10,7 @@ import {loadScienceSurface} from './scientific-raster.mts';
 import {loadGeologySurface} from './categorical-geology.mts';
 import type { PathLike } from 'node:fs';
 
-const planets = fileURLToPath(new URL('../../../src/planets/', import.meta.url));
+const planets = fileURLToPath(new URL('../../../src/objects/', import.meta.url));
 const json = async (path: string) => JSON.parse(await readFile(path, 'utf8'));
 
 for (const id of ['io', 'ganymede']) test(`${id} independently archived label points anchor both hemispheres of the geology view`, async () => {

@@ -7,7 +7,7 @@ import sharp from 'sharp';
 import { prepareGiottoProjection, createGiottoSampler, polygonInteriorDistance } from './prepare-giotto.mts';
 import { parsePdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 
-const source = resolve('src/planets/comet-1p/source');
+const source = resolve('src/objects/comet-1p/source');
 
 test('Giotto preparation reproduces the reviewed image and lossless footprint', async () => {
   const result = await prepareGiottoProjection(source);

@@ -74,7 +74,7 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   const contextBinding = bindings.get(contextName);
   const contextJsonImport = ast.body.some(statement => statement.type === 'ImportDeclaration' && statement.specifiers.length === 1 &&
     statement.specifiers[0].type === 'ImportDefaultSpecifier' && statement.specifiers[0].local.name === contextName &&
-    statement.source.value === '../src/planets/sun/prepared/world-context.json' &&
+    statement.source.value === '../src/objects/sun/prepared/world-context.json' &&
     statement.attributes?.length === 1 && propertyKey(statement.attributes[0].key) === 'type' && statement.attributes[0].value.value === 'json');
   if (!contextJsonImport && !(contextBinding?.source === './world-context-plan.mts' && contextBinding.name === 'APPLICATION_WORLD_CONTEXT')) fail();
   const plainBinding = functions.get('bindPackagedObject');
@@ -239,7 +239,7 @@ function authoredRecipe(descriptor: Record<string, unknown>) {
 async function readAuthoredDefinition({ objectId, descriptor, root, source, closure }: {objectId: string; descriptor: Record<string, unknown>; root: string; source: RuntimeSourceReader; closure: Set<string>}) {
   const recipe = authoredRecipe(descriptor);
   if (!recipe) return null;
-  const directory = resolve(root, `src/planets/${objectId}`);
+  const directory = resolve(root, `src/objects/${objectId}`);
   for (const reference of recipe.sources) {
     const path = resolve(directory, reference.path);
     if (relative(directory, path).startsWith('../')) throw new TypeError(`Authored source escapes its object package: ${reference.path}.`);
@@ -286,7 +286,7 @@ export async function readDescriptorDefinition({ objectId, descriptorFile, root,
     if (!isDeepStrictEqual(transported, authored)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
     return { plan: authored, definition: authored, closure, payloadPath };
   }
-  const directory = resolve(root, `src/planets/${objectId}`);
+  const directory = resolve(root, `src/objects/${objectId}`);
   const definitionPath = resolve(directory, 'runtime/definition.mjs'), presentationPath = resolve(directory, 'runtime/preparedPresentation.mjs'), controlPath = resolve(directory, 'site/control-content.mjs');
   if (requirePreparedDefinitionSource(await source(definitionPath)) !== objectId) throw new TypeError('Prepared source definition names another object.');
   const plan = requireRecord(readPreparedPresentationModule(await source(presentationPath)));

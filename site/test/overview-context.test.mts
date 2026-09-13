@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import preparedContext from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import preparedContext from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { bodyCardViewAtCamera, overviewScopeAtCamera, viewDistance } from '../overview-context.mts';
 import { presentWorldCamera } from '../../src/renderers/css/dist/navigation.js';
 import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';

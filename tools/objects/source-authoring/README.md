@@ -5,8 +5,8 @@ radius-table calculation, and check the result against `source/manifest.json`.
 They write the table to standard output. Run from the repository root:
 
 ```sh
-node tools/objects/source-authoring/lucy-targets/author.mts src/planets/polymele/source > /tmp/polymele-ellipsoid.tab
-python3 tools/objects/source-authoring/trans-neptunian/author.py src/planets/quaoar/source > /tmp/quaoar-ellipsoid.tab
+node tools/objects/source-authoring/lucy-targets/author.mts src/objects/polymele/source > /tmp/polymele-ellipsoid.tab
+python3 tools/objects/source-authoring/trans-neptunian/author.py src/objects/quaoar/source > /tmp/quaoar-ellipsoid.tab
 ```
 
 The JavaScript calculation covers Polymele, Leucus, Orus, Eurybates, Patroclus,

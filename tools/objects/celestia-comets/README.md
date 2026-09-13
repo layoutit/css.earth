@@ -51,7 +51,7 @@ original C++ code, follow the [native exporter instructions](native/README.md).
 4. `node tools/objects/celestia-comets/integrate.mts` registers each body's
    descriptor and individual astronomy record, then regenerates the combined
    astronomy exports and object catalogue.
-5. Follow the [body contributor guide](../../../src/planets/README.md) to prepare
+5. Follow the [body contributor guide](../../../src/objects/README.md) to prepare
    and assemble the packages, publish pinned runtime assets, and verify delivery.
 
 The checked-in source packages are the maintained authoring boundary after
