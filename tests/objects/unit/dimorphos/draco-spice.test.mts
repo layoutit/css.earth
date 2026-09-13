@@ -7,6 +7,7 @@ import { loadSurfaceObservation, validateSurfaceObservation } from '../../../../
 import { fitBackplaneCamera } from '../../../../tools/objects/surface-observations/cameras.mts';
 import { fixtureRecord } from '../../../../tools/test-values.mts';
 import { decodeSpiceCameraFrame } from '../../../../tools/objects/terrestrial-layers/spice-camera.mts';
+import { parseSpiceCamera } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 import { project } from '../../../../tools/objects/terrestrial-layers/osiris-geo.mts';
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { requireTerrainMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
@@ -32,10 +33,10 @@ const kernels = ['lsk/naif0012.tls', 'pck/pck00010.tpc', 'pck/didymos_system_15.
 const recipe = {
   id: 'draco-spice', format: 'spice-camera', consumer: 'draco-spice', path: cubeRecipe.path, startTime: cubeRecipe.startTime, filter: cubeRecipe.filter, allowLossy: false,
   metadata: { label: 'DRACO image (SPICE camera)', coverage: cubeRecipe.metadata.coverage },
-  spice: { kernels, observer: -135, target: 120065803, bodyFrame: 'DIMORPHOS_FIXED', instrument: -135102, clock: { header: 'ACQTMSOC', spacecraft: -135 }, aberration: 'LT+S',
+  spice: parseSpiceCamera({ kernels, observer: -135, target: 120065803, bodyFrame: 'DIMORPHOS_FIXED', instrument: -135102, clock: { header: 'ACQTMSOC', spacecraft: -135 }, aberration: 'LT+S',
     pixels: { focalLength: { key: 'FOCAL_LENGTH', unit: 'mm' }, pixelPitch: { key: 'PIXEL_SIZE', unit: 'micrometre' }, center: 'DETECTOR_CENTER', boresight: 'BORESIGHT',
       samples: 'PIXEL_SAMPLES', lines: 'PIXEL_LINES', frame: 'FOV_FRAME', origin: 0, column: '-X', row: '-Y' },
-    image: { quantity: 'I/F', plane: 1, header: { MISSION: 'DART', INSTRUME: 'DRACO', SRCFILE: 'dart_0401930040_12262_01.fits', SCLKNAME: 'dart_sclk_0204.tsc' }, missingValueKeys: ['MISPXVAL', 'PXOUTWIN'], saturationKey: 'SATPXVAL' } },
+    image: { quantity: 'I/F', plane: 1, header: { MISSION: 'DART', INSTRUME: 'DRACO', SRCFILE: 'dart_0401930040_12262_01.fits', SCLKNAME: 'dart_sclk_0204.tsc' }, missingValueKeys: ['MISPXVAL', 'PXOUTWIN'], saturationKey: 'SATPXVAL' } }),
   transfer: cubeRecipe.transfer, photometry: cubeRecipe.photometry, displayPercentiles: cubeRecipe.displayPercentiles,
 };
 const bytes = await readFile(resolve(root, recipe.path));
