@@ -1,0 +1,35 @@
+{
+  "id": "doi-10-1016-j-icarus-2015-11-023",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Asteroid (21) Lutetia: Disk-resolved photometric analysis of Baetica region",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/j.icarus.2015.11.023"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2015.11.023",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/lutetia/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/documents/22"
+    },
+    {
+      "path": "src/planets/gaspra/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/documents/28"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

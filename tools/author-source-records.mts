@@ -5,8 +5,10 @@
  * which exists only after that manifest is committed. Run without `--evidence`
  * to add missing bindings and records with placeholder evidence, commit the
  * manifest, then run with `--evidence <revision>` to pin the placeholders to
- * that revision's manifest bytes. Existing records and pinned evidence are
- * never rewritten.
+ * that revision's manifest bytes. Documents cite records authored by hand,
+ * such as the publication behind a photometric model record; their placeholder
+ * evidence is pinned the same way, for this manifest and locator only. Existing
+ * records and pinned evidence are never rewritten.
  */
 import { createHash } from 'node:crypto';
 import { execFile } from 'node:child_process';
@@ -91,6 +93,30 @@ export async function authorSourceRecords({ root, objectId, evidence, manifestAt
       if (result.records.includes(catalogueId) || result.pinned.includes(catalogueId)) {
         parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records: [record] });
         if (write) await writeFile(recordPath, JSON.stringify(record, null, 2) + '\n');
+      }
+    }
+  }
+  if (pinned) {
+    const documents = requireArray(manifest.documents ?? [], 'manifest documents').map(value => requireRecord(value, 'manifest document'));
+    for (const [index, document] of documents.entries()) {
+      if (document.sourceBinding === undefined) continue;
+      const binding = requireRecord(document.sourceBinding, 'source binding'), locator = `/documents/${index}`;
+      if (binding.kind !== 'catalogued') continue;
+      for (const value of requireArray(binding.references, 'binding references')) {
+        const catalogueId = requireString(requireRecord(value, 'binding reference').catalogueId, 'catalogue id');
+        const recordPath = resolve(root, 'src/sources', `${catalogueId}.json`);
+        if (!await exists(recordPath)) throw new TypeError(`Document ${requireString(document.path, 'document path')} cites ${catalogueId}, which has no catalogue record.`);
+        const record = requireRecord(JSON.parse(await readFile(recordPath, 'utf8')), 'catalogue record');
+        let changed = false;
+        // A publication may be cited by several bodies; only this manifest's placeholder at this locator is pinned now.
+        for (const entry of requireArray(record.evidence, 'record evidence').map(item => requireRecord(item, 'record evidence entry'))) {
+          if (entry.revision !== PLACEHOLDER_REVISION || entry.path !== repositoryPath || entry.locator !== locator) continue;
+          entry.revision = pinned.revision; entry.sha256 = pinned.sha256; changed = true;
+        }
+        if (!changed) continue;
+        parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records: [record] });
+        if (write) await writeFile(recordPath, JSON.stringify(record, null, 2) + '\n');
+        if (!result.pinned.includes(catalogueId)) result.pinned.push(catalogueId);
       }
     }
   }
