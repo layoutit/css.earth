@@ -1,0 +1,29 @@
+{
+  "id": "deep-impact-tempel1-hri-v3",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "version": "3.0",
+  "title": "Deep Impact Tempel 1 calibrated HRI images, version 3",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/dataset.shtml"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/dataset.shtml",
+      "label": "HRI context photographs"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/dataset.shtml",
+      "checkedOn": "2026-09-13",
+      "locator": "Dataset identity and citation"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
