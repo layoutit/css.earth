@@ -7,17 +7,29 @@ import { readFile } from "node:fs/promises";
 import { loadObjectContent } from "./load-object-content.mts";
 import { prepareBandedEllipsoid } from "../../tools/objects/giant-layers/geometry.mts";
 
-interface SeamContract { model: string; seamBleed: number; presentationOverlap: number; rasterGutter: number; rasterOverscan: number; runtimeEdgeDiscovery: boolean; }
+const STEPPED_OUTSET = "with-silhouette-stepped-outset";
+interface SeamOutset { hysteresis: number; levels: { minimumDiameter: number; value: number }[]; }
+interface SeamContract { model: string; seamBleed: number; presentationOverlap: number; rasterGutter: number; rasterOverscan: number; runtimeEdgeDiscovery: boolean; outset: SeamOutset | null; }
+function readOutset(value: unknown): SeamOutset {
+  const outset = SourceEvidence.parse(value);
+  const levels = outset.field("levels");
+  if (!Array.isArray(levels)) throw new TypeError("Invalid seam outset levels");
+  return { hysteresis: requireFiniteNumber(outset.field("hysteresis")),
+    levels: levels.map(input => { const level = SourceEvidence.parse(input);
+      return { minimumDiameter: requireFiniteNumber(level.field("minimumDiameter")), value: requireFiniteNumber(Number(level.text("value"))) }; }) };
+}
 function readSeam(value: unknown): SeamContract {
   const evidence = SourceEvidence.parse(value);
   const runtimeEdgeDiscovery = evidence.field("runtimeEdgeDiscovery");
   assert.equal(typeof runtimeEdgeDiscovery, "boolean");
   if (typeof runtimeEdgeDiscovery !== "boolean") throw new TypeError("Invalid seam runtime contract");
-  return { model: evidence.text("model"), runtimeEdgeDiscovery,
+  const model = evidence.text("model");
+  return { model, runtimeEdgeDiscovery,
     seamBleed: requireFiniteNumber(evidence.field("seamBleed")),
     presentationOverlap: requireFiniteNumber(evidence.field("presentationOverlap")),
     rasterGutter: requireFiniteNumber(evidence.field("rasterGutter")),
-    rasterOverscan: requireFiniteNumber(evidence.field("rasterOverscan")) };
+    rasterOverscan: requireFiniteNumber(evidence.field("rasterOverscan")),
+    outset: model.endsWith(STEPPED_OUTSET) ? readOutset(evidence.field("outset")) : null };
 }
 const PLANET_SURFACE_SEAMS: Record<string, SeamContract> = {};
 for (const id of ["mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune"]) {
@@ -41,7 +53,7 @@ for (const id of ["mercury", "venus", "earth", "mars", "jupiter", "saturn", "ura
       model: overscan > 0 ? "prepared-zero-seam-bleed-with-matched-raster-and-compositor-overlap"
         : "prepared-zero-seam-bleed-with-compositor-overlap",
       seamBleed, presentationOverlap: overlap, rasterGutter: gutter, rasterOverscan: overscan,
-      runtimeEdgeDiscovery: false,
+      runtimeEdgeDiscovery: false, outset: null,
     };
   } else {
     PLANET_SURFACE_SEAMS[id] = readSeam(SourceEvidence.parse(scene.preparedSurface ?? scene.body ?? scene.surface).field("seamRepair"));
@@ -63,12 +75,19 @@ test("all prepared planet surfaces use the measured Chrome seam contract", () =>
     assert.ok([
       "prepared-zero-seam-bleed-with-compositor-overlap",
       "prepared-zero-seam-bleed-with-matched-raster-and-compositor-overlap",
+      `prepared-exact-tiling-${STEPPED_OUTSET}`,
+      `prepared-matched-raster-overscan-${STEPPED_OUTSET}`,
     ].includes(seam.model), `${planet} seam model`);
     assert.equal(seam.seamBleed, 0, `${planet} seam bleed`);
-    assert.ok(
-      seam.presentationOverlap >= 0.005,
-      `${planet} compositor overlap`,
-    );
+    if (seam.outset) {
+      // The outset is published per silhouette step; any prepared overlap is the matched raster overscan.
+      assert.ok(seam.model.includes("matched-raster") ? seam.presentationOverlap > 0 : seam.presentationOverlap === 0, `${planet} overlap without stretch`);
+    } else {
+      assert.ok(
+        seam.presentationOverlap >= 0.005,
+        `${planet} compositor overlap`,
+      );
+    }
     assert.ok(seam.rasterGutter > 0, `${planet} raster gutter`);
     if (seam.model.includes("matched-raster")) {
       assert.ok(seam.rasterOverscan > 0, `${planet} matched raster overscan`);
@@ -80,5 +99,24 @@ test("all prepared planet surfaces use the measured Chrome seam contract", () =>
       `${planet} raster overscan stays inside its prepared gutter`,
     );
     assert.equal(seam.runtimeEdgeDiscovery, false, `${planet} runtime work`);
+  }
+});
+
+test("stepped seam outsets stay between 0.35 and 0.6 CSS pixels across each silhouette step", () => {
+  // Probed on Venus radar in Chrome: 0.42 px per edge hides the antialiased gaps
+  // at the default zoom, while 1 px already shows misregistered texture at feature zoom.
+  for (const [planet, { outset }] of Object.entries(PLANET_SURFACE_SEAMS)) {
+    if (!outset) continue;
+    assert.equal(outset.levels[0]?.minimumDiameter, 0, `${planet} first step`);
+    for (const [index, level] of outset.levels.entries()) {
+      const next: SeamOutset["levels"][number] | undefined = outset.levels[index + 1];
+      if (!next) continue;
+      assert.ok(next.minimumDiameter > level.minimumDiameter, `${planet} steps increase`);
+      const largest: number = next.minimumDiameter * level.value;
+      // A step is kept below its own threshold until the hysteresis margin runs out.
+      const smallest: number = level.minimumDiameter * (1 - outset.hysteresis) * level.value;
+      assert.ok(largest <= 0.6, `${planet} step ${index} reaches ${largest.toFixed(3)} px`);
+      if (index > 0) assert.ok(smallest >= 0.35, `${planet} step ${index} falls to ${smallest.toFixed(3)} px`);
+    }
   }
 });
