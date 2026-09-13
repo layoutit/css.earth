@@ -48,6 +48,24 @@ const truth = camera([0, -60, 20], [1, -1, 0.3]);
 const image = render(truth);
 const frame = { width, height, planes: { IMAGE: image } };
 
+test('the edge budget retains every side of the body when it downsamples', () => {
+  const size = 100, values = new Float32Array(size * size);
+  for (let y = 20; y < 80; y++) for (let x = 20; x < 80; x++) values[y * size + x] = 1;
+  const square = { width: size, height: size, planes: { IMAGE: values } };
+  for (const budget of [140, 90]) {
+    const edges = observedLimb(square, 0.1, budget, 1);
+    assert.equal(edges.length, budget);
+    assert.equal(new Set(edges.map(p => `${p.x},${p.y}`)).size, budget);
+    for (const partition of ['fit', 'holdout']) {
+      const points = edges.filter(p => p.partition === partition);
+      assert.ok(points.some(p => p.y < 21), `${partition} retains the top edge`);
+      assert.ok(points.some(p => p.y > 78), `${partition} retains the bottom edge`);
+      assert.ok(points.some(p => p.x < 21), `${partition} retains the left edge`);
+      assert.ok(points.some(p => p.x > 78), `${partition} retains the right edge`);
+    }
+  }
+});
+
 test('fixed nonlinear detector distortion is retained during pointing refinement', () => {
   // An analytically invertible quadratic shear, independent of the camera fitter.
   // Its displacement varies across the limb, so a pointing shift cannot absorb it.

@@ -149,8 +149,9 @@ export function observedLimb(frame: LimbImage, threshold: number, maximumPoints:
     const vo = value(x + outward[0], y + outward[1]), t = coverage !== null ? coverage - 0.5 : Math.max(0, Math.min(1, (value(x, y) - threshold) / (value(x, y) - vo)));
     points.push({ x: x + t * outward[0], y: y + t * outward[1], normal, partition: 'fit' });
   }
-  const step = Math.max(1, Math.floor(points.length / maximumPoints));
-  const kept = points.filter((_, i) => i % step === 0).slice(0, maximumPoints);
+  // Sample across the entire raster-ordered list. A floored stride followed by
+  // truncation drops the lower limb when the count is not a budget multiple.
+  const kept = points.length <= maximumPoints ? points : Array.from({ length: maximumPoints }, (_, i) => points[Math.floor((i + 0.5) * points.length / maximumPoints)]);
   kept.forEach((point, i) => { point.partition = i % 2 === 0 ? 'fit' : 'holdout'; });
   return kept;
 }
