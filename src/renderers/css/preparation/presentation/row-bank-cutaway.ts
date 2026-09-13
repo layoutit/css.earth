@@ -4,6 +4,7 @@ import type { PreparedVariant, PreparedWrite } from '../../rendering/prepared-pr
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
 import type { PreparedNode, PresentationAdapters } from './adapters.js';
 import { prepareSurfaceTextureLevels } from './surface-texture-levels.js';
+import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.js';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard';
 export async function prepareRowBankCutaway(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
@@ -53,6 +54,9 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   const camera = b.element("div", `polycss-camera ${ns}-camera planet-render-root`);
   const scene = b.element("div", `polycss-scene ${ns}-scene`); scene.style.transform = plan.camera.defaultTransform;
   const system = b.mesh(`${ns}-system`); system.style.transform = plan.systemTransform;
+  // The outset reaches both the body and the cutaway body, which reuses the surface leaves.
+  const seamOutset = plan.preparedSurface?.seamRepair?.outset;
+  if (seamOutset) system.style.setProperty(seamOutset.property, seamOutsetInitialValue(seamOutset, plan.camera.logicalBodyDiameter));
   const body = b.mesh(`${ns}-body`); body.style.transform = plan.bodyTransform;
   // The retained tree names the level-0 surface, so mount never fetches a
   // refined level before the selection asks for it.
@@ -147,6 +151,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
       // Level of detail from the camera's published stage (see styles.css).
       { kind: "view-attribute", target: -1, property: "data-lod", source: "level-of-detail-stage", precision: null },
       { kind: "view-property", target: index(materialRoot), property: `--${ns}-billboard-opacity`, source: "billboard-opacity", precision: 6 },
+      ...(seamOutset ? [seamOutsetBinding(seamOutset, index(system))] : []),
     ],
     animations: [{ target: index(cutaway), id: `${ns}-interior-presentation-orbit`, mode: "pose", duration: pose.durationMilliseconds,
       sourceMinimum: plan.camera.minimumControlPitchDegrees, millisecondsPerDegree: pose.millisecondsPerControlDegree, keyframes: pose.keyframes }] };

@@ -3,11 +3,12 @@ import type { ComputeTextureAtlasPlanOptions, PolyTextureLeafGeometry, Polygon }
 import type { SurfacePatch } from '@cssearth/objects';
 import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, prepareProjectiveTextureLayer } from './projective.js';
 import type { GeometryProfile } from './profile.js';
+import { prepareLeafSeamOutset, type PreparedLeafSeamOutset } from './seam-outset.js';
 
 export interface PreparedLeaf {
   tag: 's'; className: string; style: string; polar?: string | null; polarCap?: string | null;
   longitudeIndex?: number | null; latitudeIndex?: number; longitudeDegrees?: number;
-  projectiveTextureLayer?: ReturnType<typeof prepareProjectiveTextureLayer>;
+  projectiveTextureLayer?: ReturnType<typeof prepareProjectiveTextureLayer> & { seamOutset?: PreparedLeafSeamOutset };
 }
 export const rendererPolygon = (patch: SurfacePatch): Polygon => ({ ...patch,
   texturePresentation: { backend: 'image', lighting: 'source', projection: 'projective' } });
@@ -56,7 +57,9 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
         ? `transform:matrix3d(${fitted.matrix});${variable}:${position};background-position:var(${variable});background-size:${size};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px`
         : `transform:matrix3d(${fitted.matrix});--polycss-atlas-width:${formatCssLength(fitted.leafWidth)};--polycss-atlas-height:${formatCssLength(fitted.leafHeight)};background-image:url(${fitted.url});background-position:${position};background-size:${size}`;
       return { tag: 's', className: className ?? (patch.pole ? `${ns}-polar ${ns}-polar-${patch.pole}${patch.inner ? ` ${ns}-polar-inner` : ''}` : ''), style,
-        ...(!patch.pole || p.projectivePoles ? { projectiveTextureLayer: prepareProjectiveTextureLayer(fitted.matrix, p.rasterScale) } : {}),
+        ...(!patch.pole || p.projectivePoles ? { projectiveTextureLayer: { ...prepareProjectiveTextureLayer(fitted.matrix, p.rasterScale),
+          // Surface leaves tile exactly; the body publishes the outset that closes their antialiased seams.
+          ...(p.seamOutset && !patch.pole ? { seamOutset: prepareLeafSeamOutset(fitted.matrix, fitted.leafWidth, fitted.leafHeight, 2 * surface.radius * p.tileSize) } : {}) } } : {}),
         ...(p.positionVariables ? { polar: patch.pole ?? null } : { polarCap: patch.pole ?? null, longitudeIndex: patch.longitudeIndex ?? null, latitudeIndex: patch.latitudeIndex }) };
     },
     interior(patch: SurfacePatch, index: number, className: string, dimensions?: readonly [number, number]): PreparedLeaf {

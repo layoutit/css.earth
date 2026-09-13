@@ -59,7 +59,8 @@ export function createPreparedNodeTree({ cssomReads = new Map() }: { cssomReads?
     // Compose once during preparation; runtime only transports this matrix.
     scalePreparedBackgroundAddresses(node.style, scale);
     node.attributes['data-prepared-projection'] = 'single-leaf';
-    node.style.transform = `matrix3d(${composePreparedTextureMatrices(layer.frameMatrix, layer.textureMatrix)})`;
+    const matrix = `matrix3d(${composePreparedTextureMatrices(layer.frameMatrix, layer.textureMatrix)})`;
+    node.style.transform = layer.seamOutset ? `${matrix} ${seamOutsetTransform(layer.seamOutset)}` : matrix;
     node.style.transformStyle = "preserve-3d";
     for (const property of ["--polycss-atlas-width", "--polycss-atlas-height"]) {
       const value = node.style.getPropertyValue(property); if (value) node.style.setProperty(property, scalePreparedPixelLengths(value, scale));
@@ -91,6 +92,16 @@ export function createPreparedNodeTree({ cssomReads = new Map() }: { cssomReads?
     return { index, tree: { nodes, properties, camera: index(camera), scene: index(scene), stageClasses } };
   }
   return { element, mesh: (className: string, style = "", attributes: Readonly<Record<string, string>> = {}) => element("div", `polycss-mesh ${className}`, style, attributes), append, leaf, finish };
+}
+
+// Scale about the leaf centre by `1 + outset × scale` per axis. The outset is the
+// silhouette-stepped custom property the body publishes; before a step, 0 keeps exact tiling.
+function seamOutsetTransform({ property, scale }: { property: string; scale: readonly number[] }) {
+  if (!/^--[a-z][a-z0-9-]*$/u.test(property) || scale.length !== 2 || scale.some(value => !Number.isFinite(value) || value <= 0)) {
+    throw new TypeError("Prepared seam outset is invalid.");
+  }
+  const axis = (value: number) => `calc(1 + var(${property}, 0) * ${value})`;
+  return `translate(50%, 50%) scale(${axis(scale[0])}, ${axis(scale[1])}) translate(-50%, -50%)`;
 }
 
 function composePreparedTextureMatrices(frameValue: string | readonly number[], textureValue: string | readonly number[]) {

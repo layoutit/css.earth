@@ -33,7 +33,7 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "12e6ea96743bb0744c189bc41d9c15283344795904568dbba92984ec43453822"
+          "sha256": "9e8c9c6412738c083dadb446ec841d1172aab8d38881384d3552d0734ad5644f"
         },
         {
           "id": "celestial",
@@ -144,7 +144,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8c90feaac1294f86dca2a710bf75d22b7fe3faab080887bdd81464c1d2d42591"
+        "sha256": "b528d5d86ec3def35c2556c7b6a406573b21f843951d5c26a024cf213bfd612e"
       }
     },
     "catalog": {
@@ -163,6 +163,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "8e2828aef2ef6f8da88b6d639215a28b712abb0479a3ddc49abb59f42f8134c7"
+    "sha256": "af0d7f0a063ea1f11d01fbaeb32c863fe12805d2f8b9fd47d273ddbc88af371e"
   }
 }

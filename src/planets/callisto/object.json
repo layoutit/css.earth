@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "9b412b14d975cdab415cfb174c09644629a19c3cc2e0b6ec92adf99f6bb2001e"
+    "sha256": "6829a99a676647a5bcade6778244f194556e45ca14962e759b6ec11a619b78dc"
   },
   "id": "callisto",
   "properties": {
@@ -98,7 +98,7 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json",
-          "sha256": "8b641c41ec4eccc4f45e16315ff86aaa663c4ba3a2db934d6846c3e0da55b878"
+          "sha256": "865cad41fc185912bad82bc7a63a9f56e609aa3229d366d83eae2d7a7d5c4cf7"
         },
         {
           "id": "celestial",
@@ -152,7 +152,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d608582846a71d3d0eaa4d5e6f08f32360d64a688ea273c1e00ea805c8aad95b"
+        "sha256": "9bb52528b227198982e066fbea3b1a2b2b6a452c35124894c81bf9e0c6345533"
       }
     },
     "catalog": {
