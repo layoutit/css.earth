@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "466a1d3dc16789da26c4fa320691d503d2d6a711bfec0ef9efe86ee4cb192dfd"
+    "sha256": "1819cd71bdf5758d96d03a02d306a1e3a66d6017eafbcb7840f1c69b35d9f5f5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "188d2e0dff3958da841484112fe8e65809f6e416ad29a5285dcac9c8efe618ec",
+      "sha256": "0943dc0cb0a8dba4ffee16b2c953954a184ac2997831dac1390b99f10a4c109a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -205,15 +205,15 @@
               "transfer": {
                 "maximumSeparationFootprints": 2,
                 "visibilityToleranceMeters": 0.5,
-                "maximumEmissionDegrees": 78
+                "maximumEmissionDegrees": 70
               },
               "photometry": {
                 "model": "lunar-lambert",
                 "weight": 0.5,
                 "referenceIncidenceDegrees": 0,
                 "referenceEmissionDegrees": 0,
-                "maximumIncidenceDegrees": 80,
-                "maximumEmissionDegrees": 78,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
                 "maximumGain": 2.5
               },
               "display": {
@@ -1636,14 +1636,14 @@
       "outputs": [
         {
           "url": "/scenes/telesto/telesto-normal-thumbnail.webp",
-          "bytes": 1788,
-          "sha256": "6b2ebc466763e52d4a8982187e4639746250bb73ba5c76cec0b642888b9ec036",
+          "bytes": 1728,
+          "sha256": "1f06f3c5f83975efb24cf728719d0579aa11b6787a1079eb48887dcfa8401895",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/telesto/telesto-normal-surface@2x.webp",
-          "bytes": 431724,
-          "sha256": "f1da33c8185e6367070ac775826a112f72b49831b9edc7b7a0771145c3a6bfe8",
+          "bytes": 342086,
+          "sha256": "a2a9c91d3ef4c116ae8e3e9740b7c9d6d2a4943628bdcacb17ec196daca1c642",
           "verification": "bytes-verified"
         }
       ],
@@ -1736,8 +1736,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 18436,
-          "sha256": "0fc24dca19734af86e8bf5b268540e4bcc0491a263e977f3251d1b73d0f1388c",
+          "bytes": 12332,
+          "sha256": "cbf0266da6a286689a43f3f0857772ad0ab64d88f56855bed2010330103b88e1",
           "verification": "bytes-verified"
         }
       ]
