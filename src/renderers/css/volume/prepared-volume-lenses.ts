@@ -3,6 +3,8 @@ import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject } fr
 import type { PreparedCssTransport } from '../loader.js';
 import { validatePreparedCssVolume } from './validation.js';
 import type { PreparedCssVolume, VolumeAxis, VolumeCameraPublication } from './types.js';
+import { DEFAULT_POINT_VISIBILITY, projectedVolumeOpacity } from './projected-volume-visibility.js';
+import type { PreparedPointVisibility } from './projected-volume-visibility.js';
 import type { PreparedAssets } from '../rendering/prepared-residency.js';
 import { mountPreparedCataloguePoints, samePreparedCatalogueGeometry, samePreparedPhysicalFrame,
   validatePreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
@@ -19,10 +21,7 @@ export interface PreparedVolumeLens {
   readonly brightness: PreparedVolumeLensBrightness;
   readonly stars: PreparedCataloguePoints;
 }
-export interface PreparedPointVisibility {
-  readonly hiddenBelowRadiusPixels: number;
-  readonly fullAboveRadiusPixels: number;
-}
+export type { PreparedPointVisibility };
 export interface PreparedVolumeLenses {
   readonly schema: 'cssearth-volume-lenses@1';
   readonly id: string;
@@ -43,7 +42,6 @@ export interface PreparedVolumeLensState {
   readonly starsVisible: boolean;
   readonly lenses: readonly Pick<PreparedVolumeLens, 'id' | 'label' | 'title' | 'description' | 'sourceUrl'>[];
 }
-const DEFAULT_POINT_VISIBILITY = Object.freeze({ hiddenBelowRadiusPixels: 2, fullAboveRadiusPixels: 24 });
 
 /** Decode and verify the authored generic bank; preparation is never a runtime fallback. */
 export async function loadPreparedVolumeLenses(input: unknown, transport: PreparedCssTransport): Promise<PreparedVolumeLenses> {
@@ -168,16 +166,12 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
           axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
         })), bank.lens.brightness);
         bank.surface.style.opacity = String(opacity);
-        const frame = bank.lens.volume.frame, { world, viewport } = publication;
-        const distanceUnits = Math.hypot(...world.pose.positionM.map((value, axis) => value - frame.originM[axis])) / frame.metersPerUnit;
-        const radiusPixels = viewport.focalPixels * data.framingRadiusUnits / Math.max(Number.MIN_VALUE, distanceUnits);
-        const thresholds = data.pointVisibility!;
-        const t = Math.max(0, Math.min(1, (radiusPixels - thresholds.hiddenBelowRadiusPixels) /
-          (thresholds.fullAboveRadiusPixels - thresholds.hiddenBelowRadiusPixels)));
-        const pointOpacity = t * t * (3 - 2 * t);
+        const pointOpacity = projectedVolumeOpacity(publication.world, publication.viewport, bank.lens.volume.frame,
+          data.framingRadiusUnits, data.pointVisibility!);
         stars!.root.style.opacity = String(pointOpacity);
         stars!.root.style.display = starsVisible && pointOpacity > 0 ? 'block' : 'none';
-        stars!.publish(publication);
+        // Hidden points leave layout; projecting them only wrote styles nobody draws.
+        if (starsVisible && pointOpacity > 0) stars!.publish(publication);
         root.dataset.pointOpacity = String(pointOpacity); root.dataset.cloudOpacity = String(opacity);
         latest = publication;
       };

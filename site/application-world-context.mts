@@ -149,10 +149,11 @@ export function createApplicationWorldContext() {
           }
           if (staged) staged.consumed = true;
           layer.publish(world, viewport, { heliosphere: heliosphereEnabled }, frame);
-          // The decorative minimap follows a drag at half rate; release publishes it.
-          if (!rotating || (minimapFrame++ & 1) === 0) minimap.publish(world, viewport);
+          // The decorative minimap follows a drag at half rate and holds still
+          // through a fly-to; release and arrival publish it once.
+          if (!flying && (!rotating || (minimapFrame++ & 1) === 0)) minimap.publish(world, viewport);
         };
-        let rotating = false, minimapFrame = 0;
+        let rotating = false, flying = false, minimapFrame = 0;
         const frameQueue = createWorldFrameQueue(async request => {
           const snapshot = layer.captureFrame(request.world, request.viewport);
           const frame = await framePlanner.plan(snapshot.view);
@@ -184,6 +185,12 @@ export function createApplicationWorldContext() {
         const diagnostics = DIAGNOSTICS_ENABLED ? createWorldContextDiagnostics(layer, frameQueue, presentationHost !== stage) : null;
         if (diagnostics) Reflect.set(target, '__cssEarthUniverse', diagnostics);
         return { ...layer, viewport, publish,
+          setNavigationInFlight(active: boolean) {
+            layer.setNavigationInFlight(active);
+            if (flying === active) return;
+            flying = active;
+            if (!active && !destroyed && publication) minimap.publish(publication.world, publication.viewport);
+          },
           connectNavigation: contextNavigation.connect,
           suspendFocus: contextNavigation.suspend, restoreFocus: contextNavigation.restore,
           present(world: WorldCameraPose, viewport: WorldCameraViewport, { signal, commit = () => {} }: { signal: AbortSignal; commit?: () => void }) {
