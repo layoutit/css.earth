@@ -9,17 +9,41 @@ consumes the same list. There is no page-source regex or second object registry.
 
 Preparation writes `prepared/page.json` from the finalized scene definition.
 Its descriptor pin validates the small metadata file and its `sceneSha256`
-binds controls/preloads to the full scene transport. Page rendering no longer
-reads/parses the full scene. The `/objects/<id>/<sha256>.json` endpoint still
+binds controls/preloads to the full scene transport. A first-load page also
+decodes the authenticated scene during the build and serializes its prepared
+tree into the existing `.planet-stage`. Navigation fragments use the small page
+metadata without including another scene. The `/objects/<id>/<sha256>.json` endpoint still
 verifies the complete transport's hash independently. Changing prepared scenes
 must update both outputs through `writeObjectJson`.
 
-First-load pages retain the complete inert card bank so selection is synchronous
-and complete, even while a destination's scene request is held. Subsequent
-navigation fetches `/navigation/<id>/`: the same panels, attribution, metadata
-and styles, without the bank or repeated object catalog. The existing shell,
-card selection ownership, stylesheet nodes and world camera stay retained.
-Embedding the complete card bank adds to the initial HTML size.
+Navigation fetches `/navigation/<id>/`: the same panels, attribution, metadata
+and styles, without a repeated object catalog. The existing shell, card selection
+ownership, stylesheet nodes and world camera stay retained.
+
+## One scene before and after JavaScript
+
+`serialize-prepared-scene.mts` publishes the package's prepared reference pose,
+initial variant and texture addresses. It does not generate another mesh or
+process source images. The page remains the same shell at the same URL.
+Information tabs use native radio selection, including body overview, prepared
+focus and dataset credit cards. Their labels use the existing shared tab styles;
+CSS selects the panels. The mobile information sheet uses a checkbox, and
+ordinary object/source links remain links. Prepared surface previews use native
+lazy image loading. JavaScript observes selection where a map or dataset context
+needs it; it does not install the information tabs' click or arrow-key behavior.
+
+The interactive renderer verifies the prepared object revision, node identities,
+tags, parents and sibling order, then takes ownership of those exact elements.
+Its normal camera, material and animation publishers update that tree. An early
+startup failure restores the original attributes and children on the same
+elements. No second scene is kept as a fallback. Successful startup releases the
+initial attribute snapshot; subsequent navigation uses the existing lifecycle.
+
+JavaScript still provides camera input, animation, search and category filtering,
+dataset switching and world navigation. Dataset buttons remain disabled until their owner is ready.
+The HTML reference pose does not restore a saved camera URL or publish the
+surrounding interactive world. This change adds prepared HTML to the first page;
+it does not claim a smaller JavaScript bundle.
 
 The prepared-object decoder retains one module worker across successful jobs.
 Jobs are serialized and their bytes transfer only on activation. Cancelling an
@@ -37,6 +61,8 @@ After building the packages and renderer, check page metadata with:
 
 ```sh
 node --test site/test/object-page-data.test.mts
+node --test tools/serialize-prepared-scene.test.mts
+node site/test/progressive-enhancement-browser.mts http://127.0.0.1:4210
 ```
 
 Worker reuse, cancellation and disposal are covered by
@@ -44,6 +70,21 @@ Worker reuse, cancellation and disposal are covered by
 in the renderer suite. Browser checks should hold a destination's actual scene
 request and verify an immediate complete card, one scene swap, retained camera
 and correct interruption behavior.
+
+The progressive enhancement browser check disables JavaScript at desktop and
+phone widths, exercises native controls and links, then holds and releases
+scripts on one page to verify retained element identity, unchanged tab styles,
+selection-dependent dataset context and exactly one scene.
+It also aborts the object transport to check that the base scene stays usable.
+
+The [continuous Saturn capture](../site/test/evidence/progressive-enhancement.mp4) shows
+this change at 1280×900: application scripts are held for the first ten seconds,
+while the existing information tabs work by click and keyboard. Script startup
+then adds camera input and dataset switching to those same 972 scene elements.
+The capture's assertions verify element identity and exactly one detailed scene.
+It illustrates this implementation; it is not a matched camera-pose comparison.
+
+![Factsheet selected while application scripts are held](images/progressive-enhancement.png)
 
 The [404-object migration and matched captures](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/page-navigation-transport.md#synchronized-natural-navigation-comparison)
 retain their measurements, source pins, failures and later integration scope.

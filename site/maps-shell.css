@@ -400,7 +400,7 @@
   overflow-x: auto;
   scrollbar-width: none;
 }
-:is(.planet-object-tabs, .planet-card-tabs) > [role="tab"] {
+:is(.planet-object-tabs, .planet-card-tabs) > :is([role="tab"], .planet-native-tab-label) {
   display: inline-flex;
   justify-self: start;
   align-items: baseline;
@@ -416,10 +416,13 @@
   cursor: pointer;
 }
 .planet-object-tab-count { display: none; font-size: 13px; font-variant-numeric: tabular-nums; }
-:is(.planet-object-tabs, .planet-card-tabs) > [aria-selected="true"] .planet-object-tab-count { display: inline; }
-:is(.planet-object-tabs, .planet-card-tabs) > [role="tab"]:hover { color: var(--shell-text); }
-:is(.planet-object-tabs, .planet-card-tabs) > [aria-selected="true"] { color: var(--shell-text); border-bottom-color: transparent; }
-:is(.planet-object-tabs, .planet-card-tabs) > [role="tab"]:focus-visible {
+:is(.planet-object-tabs, .planet-card-tabs) > [aria-selected="true"] .planet-object-tab-count,
+.planet-native-tab:checked + .planet-native-tab-label .planet-object-tab-count { display: inline; }
+:is(.planet-object-tabs, .planet-card-tabs) > :is([role="tab"], .planet-native-tab-label):hover { color: var(--shell-text); }
+:is(.planet-object-tabs, .planet-card-tabs) > [aria-selected="true"],
+:is(.planet-object-tabs, .planet-card-tabs) > .planet-native-tab:checked + .planet-native-tab-label { color: var(--shell-text); border-bottom-color: transparent; }
+:is(.planet-object-tabs, .planet-card-tabs) > [role="tab"]:focus-visible,
+:is(.planet-object-tabs, .planet-card-tabs) > .planet-native-tab:focus-visible + .planet-native-tab-label {
   color: var(--shell-focus);
   border-bottom-color: currentColor;
   outline: 0;
@@ -485,11 +488,14 @@
 
 /* Object tabs share the overview tabs without moving the card heading. */
 .planet-card.planet-information-panel > .planet-selected-panel { padding-bottom: 8px; }
-.planet-card-tabs:not(:has(> [role="tab"]:not([hidden]))) { display: none; }
+.planet-card-tabs:not(:has(> :is([role="tab"], .planet-native-tab):not([hidden]))) { display: none; }
+.planet-native-tab { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.planet-native-tab[hidden] + .planet-native-tab-label { display: none; }
 .planet-card-tabs > [role="tab"][hidden] { display: none; }
 /* Keep the Dataset count visible without moving the tab labels. */
 .planet-card-tabs .planet-object-tab-count { display: inline; }
 .planet-card-tabpanel {
+  display: var(--information-panel-display, block);
   padding: 8px var(--explorer-card-padding-inline-end) 20px var(--explorer-card-padding-inline-start);
 }
 .planet-card-tabpanel :is(.planet-facts, .planet-resources-links) { margin-top: 0; }

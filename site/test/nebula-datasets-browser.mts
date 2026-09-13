@@ -73,9 +73,9 @@ try {
       await toggle.click();
       assert.equal(await stars.isChecked(), true);
     }
-    await card.getByRole('tab', { name: 'Factsheet', exact: true }).click();
+    await card.getByRole('radio', { name: 'Factsheet', exact: true }).press('Space');
     await rail.waitFor({ state: 'hidden' });
-    await card.getByRole('tab', { name: 'Datasets', exact: true }).click();
+    await card.getByRole('radio', { name: 'Datasets', exact: true }).press('Space');
     await rail.waitFor({ state: 'visible' });
     await page.screenshot({ path: resolve(output, `${objectId}.png`) });
     await page.screenshot({ path: resolve(output, `${objectId}.jpg`), type: 'jpeg', quality: 82 });

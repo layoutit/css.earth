@@ -82,6 +82,7 @@ jobs:
           site/test/navigation-router.test.mts site/test/planet-shell.test.mts
           site/test/router-runtime.test.mts
           site/test/object-page-data.test.mts
+          tools/serialize-prepared-scene.test.mts
       - name: Enforce activation preparation for every registered object
         run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
       - name: Test complete shared renderer and camera

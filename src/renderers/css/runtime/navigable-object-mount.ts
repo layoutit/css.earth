@@ -26,8 +26,13 @@ export function createNavigableObjectMount<Options extends DeferredMountOptions>
     }
     return loading;
   }
-  const mount = createDeferredObjectMount(load, definition => (stage: HTMLElement, options: Options) =>
-    bind(definition)(stage, { ...options, ...(frame ? { worldFrame: frame } : {}) }));
+  const mount = createDeferredObjectMount(load, definition => (stage: HTMLElement, options: Options) => {
+    if (stage.dataset?.preparedObject && (stage.dataset.preparedObject !== descriptor.id ||
+        stage.dataset.preparedSha256 !== descriptor.prepared?.sha256)) {
+      throw new TypeError('Initial view belongs to another prepared object revision.');
+    }
+    return bind(definition)(stage, { ...options, ...(frame ? { worldFrame: frame } : {}) });
+  });
   const navigation = frame ? createPreparedObjectNavigation(load, frame) : null;
   return Object.assign(mount, { navigation });
 }
