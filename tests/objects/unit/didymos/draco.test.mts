@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { decodePds4GeometryCube } from '../../../../tools/objects/terrestrial-layers/pds4-geometry-cube.mts';
-import { calibrateGeoCamera } from '../../../../tools/objects/terrestrial-layers/observed-geo-surface.mts';
+import { fitBackplaneCamera } from '../../../../tools/objects/surface-observations/cameras.mts';
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { parseGeoRecipe } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 
@@ -35,7 +35,7 @@ for (const frame of recipe.frames) test(`${frame.id}: target selection preserves
   assert.equal(selected.header.SHAPREF1, 'didymos_g_1165mm_spc_obj_0000n00000_v003.obj');
   assert.ok(selected.qualityReport.geometryPixels > 5000);
   assert.ok((selected.qualityReport.geometrySelection?.excludedGeometryPixels ?? 0) > 500);
-  const camera = calibrateGeoCamera(selected);
+  const camera = fitBackplaneCamera(selected);
   assert.ok(camera.holdoutPixels > 5000 && camera.maximumResidualPixels < 0.00002);
   let sampled = 0;
   for (let i = 0; i < selected.width * selected.height; i += 53) if (selected.valid(i)) {
@@ -44,5 +44,5 @@ for (const frame of recipe.frames) test(`${frame.id}: target selection preserves
   }
   assert.ok(sampled >= 100);
   const mixed = decodePds4GeometryCube(bytes, label, { fileName: basename(frame.path), cube: { ...declaration, geometrySelection: undefined }, filter: recipe.filter });
-  assert.throws(() => calibrateGeoCamera(mixed), /GEO camera.*(?:holdout|invalid projection)/);
+  assert.throws(() => fitBackplaneCamera(mixed), /GEO camera.*(?:holdout|invalid projection)/);
 });
