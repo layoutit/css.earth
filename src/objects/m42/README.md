@@ -9,3 +9,5 @@ World placement adopts 414 ± 7 pc from [Menten et al. (2007)](https://arxiv.org
 The [physical evidence ledger](../../../labs/nebula/models/m42/physical-evidence.json) and [model notes](../../../labs/nebula/models/m42/README.md) separate measured constraints from authored extrapolation. Star depths and membership are unmeasured. Follow the [shared preparation and validation guide](../../../docs/nebulae/README.md).
 
 Known visual limits: rectangular optical coverage edges and pale residual structures outside the colored core remain from the assessed lab result. Delivery preserves that result; it does not repair missing image coverage.
+
+The shared dataset cards use the [source manifest](source/manifest.json) and [presentation record](source/presentation.json). Preparation generates the standard source-to-product provenance and small local image previews. These previews show the published photograph before star removal; source pixel counts describe image sampling, not telescope resolution. Preparing the cards checks their inputs and the installed volume identity, but does not rerun or scientifically validate the reconstruction.

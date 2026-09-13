@@ -7,3 +7,5 @@ Delivery replays the documented assessed Detail 65%, Faint 35%, Depth 1 settings
 Placement adopts 216 −12/+14 pc from [Benedict et al. (2009)](https://arxiv.org/html/0909.4281), with the molecular-source ICRS sky origin. Velocity measurements constrain only part of the field; halo depth, front/back allocation and star depths remain assumptions.
 
 The [lab source record](../../../labs/nebula/models/helix/README.md) covers limitations. Follow the [shared preparation and validation guide](../../../docs/nebulae/README.md).
+
+The shared dataset cards use the [source manifest](source/manifest.json) and [presentation record](source/presentation.json). Preparation generates the standard source-to-product provenance and small local image previews. These previews show the published photograph before star removal; source pixel counts describe image sampling, not telescope resolution. Preparing the cards checks their inputs and the installed volume identity, but does not rerun or scientifically validate the reconstruction.

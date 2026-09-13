@@ -1,0 +1,373 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "vista-infrared",
+      "path": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
+      "origin": "https://www.eso.org/public/images/eso1914a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1914a/",
+      "title": "Large Magellanic Cloud · ESO eso1914a",
+      "credit": "ESO/VMC Survey",
+      "displayCredit": "ESO/VMC Survey",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "expectedSha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
+      "expectedBytes": 230317392,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1914a",
+            "role": "material",
+            "evidence": "labs/nebula/models/image-candidates.json#/targets/0/images/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "vista-infrared",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vista",
+            "evidence": "https://www.eso.org/public/images/eso1914a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "horalek-widefield",
+      "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
+      "origin": "https://noirlab.edu/public/images/iotw2547a/",
+      "sourceUrl": "https://noirlab.edu/public/images/iotw2547a/",
+      "title": "Large Magellanic Cloud · NOIRLab iotw2547a",
+      "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "displayCredit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "expectedSha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
+      "expectedBytes": 8507407,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-iotw2547a",
+            "role": "material",
+            "evidence": "labs/nebula/models/image-candidates.json#/targets/0/images/1"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "horalek-widefield",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Petr Horálek",
+            "evidence": "https://noirlab.edu/public/images/iotw2547a/",
+            "reason": "The photograph credits Petr Horálek but does not identify the individual camera."
+          }
+        ]
+      }
+    },
+    {
+      "id": "wise-wide-infrared",
+      "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+      "origin": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
+      "sourceUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
+      "title": "Large Magellanic Cloud · AllWISE color mosaic",
+      "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
+      "displayCredit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "expectedSha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
+      "expectedBytes": 1942085,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cds-allwise-color",
+            "role": "material",
+            "evidence": "labs/nebula/models/image-candidates.json#/targets/0/images/2"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "wise-wide-infrared",
+      "license": "ODbL-1.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "wise",
+            "evidence": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "density-prior",
+      "path": "labs/nebula/models/lmc/particles/source/provenance.json",
+      "origin": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "sourceUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "title": "LMC simulated stellar-density prior",
+      "credit": "Garver, Nidever, Debattista & Deg",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
+      "expectedSha256": "024cbd58275980986b15b6204e4fa9257d1e367271f88b918d4e61c7d4c4a7a8",
+      "expectedBytes": 2969,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "garver-magellanic-simulation",
+            "role": "method",
+            "evidence": "labs/nebula/models/lmc/particles/source/provenance.json: source archive and snapshot pins; stellar-particle density"
+          },
+          {
+            "catalogueId": "garver-magellanic-model",
+            "role": "method",
+            "evidence": "labs/nebula/models/lmc/particles/source/provenance.json: /source/paper"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "catalogue-stars",
+      "path": "labs/nebula/models/lmc/stars/source/catalogue.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003",
+      "title": "LMC observed catalogue astrometry and photometry",
+      "credit": "Bonanos et al. (2009); CDS/VizieR",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
+      "expectedSha256": "49c1eb40446ea782d34beba3f2ad85f6a2a042387c1821b04912d0f9d171f8b8",
+      "expectedBytes": 2527,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "bonanos-2009-lmc",
+            "role": "material",
+            "evidence": "labs/nebula/models/lmc/stars/source/catalogue.json: files: ReadMe, table1.dat, table3.dat, refs.dat; measured positions and photometry, conditional modeled depths"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "sky-registration",
+      "path": "labs/nebula/models/image-candidates.json",
+      "origin": "https://noirlab.edu/public/images/noirlab2030a/",
+      "sourceUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+      "title": "LMC shared source registration",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
+      "expectedSha256": "a8b7554a9919b5fcd65290d6715572ff1a63d7ab41f263637a93b6f881766583",
+      "expectedBytes": 9320,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-noirlab2030a",
+            "role": "method",
+            "evidence": "labs/nebula/models/image-candidates.json: targets/0/images/*/wcsSource: SMASH astrometric anchor; distinct from authored simulation placement"
+          }
+        ]
+      },
+      "dependencies": []
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-1",
+      "path": "src/objects/lmc/source/lens-manifest.json",
+      "expectedSha256": "a6748babbb14411e3a5784792c5a24836b754fd6447829b2dd67de78e5cd943e",
+      "expectedBytes": 72546,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/lmc/source/lens-settings-evidence.json",
+      "expectedSha256": "540c04e9855adbba5510247e2d11f4d61a44ddb2bfcb4d405f7bfb9c4857467c",
+      "expectedBytes": 1270,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/lmc/source/lenses/horalek-widefield/catalogue-stars.json",
+      "expectedSha256": "1327e088131c51e4f95a18e9829a1040dece6f25cd306a6b03c407968beb1aee",
+      "expectedBytes": 504083,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/lmc/source/lenses/horalek-widefield/provenance.json",
+      "expectedSha256": "37cd89af9448904d90de3a3ade6a3236ff8760b3bd94fdf5135cd9dc5184ab21",
+      "expectedBytes": 14017,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-5",
+      "path": "src/objects/lmc/source/lenses/horalek-widefield/result.json",
+      "expectedSha256": "bf80859fdd2cc2fc094b2d7ff872fa7421f86ab5e858e6e284e636e8a7676c03",
+      "expectedBytes": 3345,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-6",
+      "path": "src/objects/lmc/source/lenses/horalek-widefield/selection.json",
+      "expectedSha256": "3a716364f91ad88ee0c8a51c47d3097ba7c1bf111c4433c5d607c7e54087eafe",
+      "expectedBytes": 7716,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-7",
+      "path": "src/objects/lmc/source/lenses/vista-infrared/catalogue-stars.json",
+      "expectedSha256": "1327e088131c51e4f95a18e9829a1040dece6f25cd306a6b03c407968beb1aee",
+      "expectedBytes": 504083,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-8",
+      "path": "src/objects/lmc/source/lenses/vista-infrared/provenance.json",
+      "expectedSha256": "44efcafb094af409cdc3ed702309de752e1170ef960c3087630c060366377d84",
+      "expectedBytes": 14008,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-9",
+      "path": "src/objects/lmc/source/lenses/vista-infrared/result.json",
+      "expectedSha256": "801d6316405ce96b7b92ddc3a8c6e94aaea1eea8ec63f2783e7467dd092fddf2",
+      "expectedBytes": 3304,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-10",
+      "path": "src/objects/lmc/source/lenses/vista-infrared/selection.json",
+      "expectedSha256": "ace27b56789d5d8a153cb90d192128230e13da40cf54e4de85675f2da2d74dff",
+      "expectedBytes": 7684,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-11",
+      "path": "src/objects/lmc/source/lenses/wise-wide-infrared/catalogue-stars.json",
+      "expectedSha256": "1327e088131c51e4f95a18e9829a1040dece6f25cd306a6b03c407968beb1aee",
+      "expectedBytes": 504083,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-12",
+      "path": "src/objects/lmc/source/lenses/wise-wide-infrared/provenance.json",
+      "expectedSha256": "49911f66301558825c972abfadbcf30c527e7a87e10646e05cbb5eb833b048e7",
+      "expectedBytes": 13094,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-13",
+      "path": "src/objects/lmc/source/lenses/wise-wide-infrared/result.json",
+      "expectedSha256": "43c4cc3a0ae1e9142c6fd62e077fac57cc1ab4b7db6a282ace6eacf70edc633b",
+      "expectedBytes": 3224,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-14",
+      "path": "src/objects/lmc/source/lenses/wise-wide-infrared/selection.json",
+      "expectedSha256": "2d2b22e9c7ff1674cedb931881b36e8c9d2a3322022c91b30a5f8d3c98cf5d4e",
+      "expectedBytes": 7689,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-15",
+      "path": "src/objects/lmc/source/lenses.json",
+      "expectedSha256": "fbfc0cb34daba7b894046d4c81c3c0be0d9ab80ac357be66d0daa3d053cb651d",
+      "expectedBytes": 2192,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-16",
+      "path": "src/objects/lmc/source/presentation.json",
+      "expectedSha256": "6dca73f28a6d58496ba2ba645a59583454b2e9eb798656560a9d85cc3fa21a7b",
+      "expectedBytes": 5793,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-17",
+      "path": "src/objects/lmc/source/provenance.json",
+      "expectedSha256": "a59b8dfda8bcd82e65244cb32a7e3483ceedde33217013e6fbec039cb8ad56a8",
+      "expectedBytes": 1705,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-18",
+      "path": "src/objects/lmc/source/recipe.json",
+      "expectedSha256": "61b7f642ae69064bf245f870e2fdbe8498dbeb9ea241fa9d0280249193861021",
+      "expectedBytes": 2888,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-19",
+      "path": "src/objects/lmc/source/source.jpg",
+      "expectedSha256": "68cce2d2ebd9d43839c66f513df4819365e920fa4e6added41cc054f78739d58",
+      "expectedBytes": 5126095,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

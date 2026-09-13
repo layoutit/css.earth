@@ -9,3 +9,5 @@ Distance is uncertain. We adopt 650 pc as explicitly used in [Sánchez Contreras
 See the [symmetry method](../../../labs/nebula/models/m2-9/README.md) and [shared preparation guide](../../../docs/nebulae/README.md).
 
 Known visual limit: faint planar background residue remains in the accepted lab reconstruction and is visible from some oblique views.
+
+The shared dataset cards use the [source manifest](source/manifest.json) and [presentation record](source/presentation.json). Preparation generates the standard source-to-product provenance and small local image previews. These previews show the published photograph before star removal; source pixel counts describe image sampling, not telescope resolution. Preparing the cards checks their inputs and the installed volume identity, but does not rerun or scientifically validate the reconstruction.

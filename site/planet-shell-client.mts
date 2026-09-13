@@ -70,7 +70,9 @@ export function mountPlanetShell({
   let cardObjectId = objectId;
   let overview = false, overviewScope: OverviewScope = 'solar-system', camera: ShellCamera | null = null, unsubscribeOverview: (() => void) | null = null;
   let preparedFocus: PreparedCatalogObject | null = null;
-  const focusCard = createPreparedFocusCard(drawer.querySelector<HTMLElement>('[data-prepared-focus-card]'));
+  const focusRoot = drawer.querySelector<HTMLElement>('[data-prepared-focus-card]');
+  const focusTabs = createTabsController(focusRoot, lifetime, 'prepared-focus');
+  const focusCard = createPreparedFocusCard(focusRoot, id => focusTabs.show(id));
   lifetime.onDispose(() => focusCard.destroy());
   lifetime.onDispose(() => unsubscribeOverview?.());
   // The card panel is retained; a camera frame re-queries it only after a card swap.
@@ -315,7 +317,7 @@ export function createTabsController(card: HTMLElement | null, lifetime: SceneLi
   for (const tab of tabs) {
     tab.addEventListener('click', () => select(tab), { signal: events.signal });
     tab.addEventListener('keydown', event => {
-      const siblings = tabs.filter(item => group(item) === group(tab));
+      const siblings = tabs.filter(item => group(item) === group(tab) && !item.hidden);
       const index = siblings.indexOf(tab);
       const next = event.key === 'Home' ? 0 : event.key === 'End' ? siblings.length - 1
         : event.key === 'ArrowRight' ? (index + 1) % siblings.length
