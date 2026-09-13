@@ -180,8 +180,8 @@
         },
         "display": {
           "percentiles": [
-            1,
-            99.5
+            0.9,
+            99.3
           ]
         },
         "metadata": {
