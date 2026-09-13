@@ -68,14 +68,14 @@
       },
       {
         "id": "draco",
-        "label": "DRACO image",
-        "description": "One DRACO photograph, taken 11 seconds before DART struck, projected onto the shape model through the camera recovered from the archived per-pixel geometry. Grid marks surface the camera did not see or that lay in shadow; the far side was never photographed. Brightness is disk-normalized; it is not measured albedo.",
-        "title": "DRACO terminal approach image",
+        "label": "DRACO mosaic",
+        "description": "Four DRACO frames from 11 to 1.8 seconds before impact. Closer qualified footprints take precedence; the unseen surface keeps the grid. Each image is registered through its archived geometry and checked against the source shape. Brightness is approximately disk-normalized and matched over shared surface patches; shadows remain in the photographs. This is not measured albedo or a post-impact surface.",
+        "title": "DART approach photographs",
         "thumbnail": "/scenes/dimorphos/dimorphos-draco-thumbnail.webp",
         "surface": "dimorphos-draco-surface@2x.webp",
         "poles": "dimorphos-draco-poles@2x.webp",
         "source": {
-          "id": "draco-0401930040-12262-geo",
+          "id": "draco-0401930049-43695-geo",
           "path": "../manifest.json",
           "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/"
         },
@@ -85,17 +85,12 @@
           {
             "id": "observed",
             "label": "Observed",
-            "value": "26 September 2022, 23:14:12 UTC"
+            "value": "26 September 2022, 23:14:12–22 UTC"
           },
           {
-            "id": "coverage",
-            "label": "Surface photographed",
-            "value": "About 17% of the displayed mesh"
-          },
-          {
-            "id": "footprint",
-            "label": "Pixel footprint",
-            "value": "0.35 m from 70 km"
+            "id": "frames",
+            "label": "Source photographs",
+            "value": "4"
           },
           {
             "id": "filter",
@@ -103,7 +98,7 @@
             "value": "None · panchromatic"
           }
         ],
-        "summary": "One DRACO photograph from 11 seconds before impact, projected onto the shape model. Grid marks unphotographed or shadowed surface."
+        "summary": "Four DRACO frames from 11 to 1.8 seconds before impact, using closer qualified detail where available. Brightness is approximately normalized; photographed shadows remain. Grid marks unobserved or rejected areas."
       },
       {
         "id": "elevation",
@@ -194,7 +189,7 @@
       }
     ],
     "labels": {
-      "draco": "DRACO image",
+      "draco": "DRACO mosaic",
       "slope": "Slope"
     }
   },

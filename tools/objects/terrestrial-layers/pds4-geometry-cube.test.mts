@@ -55,6 +55,23 @@ function label(edit: (xml: string) => string = xml => xml, units: Record<string,
 }
 const decode = (bytes = bytesOf(), xml = label(), options: Partial<Parameters<typeof decodePds4GeometryCube>[2]> = {}) => decodePds4GeometryCube(bytes, xml, { fileName, cube, filter: 'unfiltered', ...options });
 
+test('selects a target using a native geometry plane before fitting, retaining valid dark image pixels', () => {
+  const selection = { plane: 'radius', unit: 'km', minimum: 0.2, maximum: 0.5, interpretation: 'Separate disjoint body radii.' };
+  const i = 3 * size + 4, dark = 3 * size + 5;
+  const bytes = bytesOf({}, p => { p.radius[i] = 0.4; p.radius[dark] = 0.4; p.ioverf[dark] = 0; });
+  const frame = decode(bytes, label(), { cube: { ...cube, geometrySelection: selection } });
+  assert.equal(frame.valid(i), true);
+  assert.equal(frame.valid(dark), true);
+  assert.equal(frame.valid(2 * size + 2), false);
+  assert.equal(frame.qualityReport.geometryPixels, 2);
+  assert.equal(frame.qualityReport.geometrySelection?.excludedGeometryPixels, 14);
+  assert.equal(frame.planes.IMAGE[dark], 0);
+  assert.throws(() => decode(bytes, label(), { cube: { ...cube, geometrySelection: { ...selection, unit: 'm' } } }), /selection plane/);
+  assert.throws(() => decode(bytes, label(), { cube: { ...cube, geometrySelection: { ...selection, minimum: 0.5, maximum: 0.2 } } }), /selection plane/);
+  assert.throws(() => decode(bytes, label(), { cube: { ...cube, geometrySelection: { ...selection, plane: 'ioverf', unit: '' } } }), /selection plane/);
+  assert.throws(() => decode(bytesOf({}, p => { p.radius.fill(-999); }), label(), { cube: { ...cube, geometrySelection: selection } }), /no on-body/);
+});
+
 test('decodes the declared planes into kilometre intercepts, radian angles and image values', () => {
   const frame = decode();
   assert.equal(frame.width, size);
