@@ -135,7 +135,7 @@ The navigation image comes from the same prepared shape and Monochrome map. The 
 
 Facts and context follow [NASA's Hyperion overview](https://science.nasa.gov/saturn/moons/hyperion/) and the vendored JPL physical/orbital data. The stars and title retain the common ESO/S. Brunier and Inter credits documented beside the source inputs.
 
-Three additional published control rows (N1497116847, N1550270298 and N1550320098) produced grossly mismatched source-image silhouettes and were excluded. Four SUM2 close-up frames were also excluded: their full-resolution center convention was ambiguous and their binned resolution did not improve on the retained full-resolution mosaic images.
+Three additional published control rows (N1497116847, N1550270298 and N1550320098) produced grossly mismatched source-image silhouettes and were excluded. N1513999046 is excluded for the same reason: its published camera places 36% of the lit source shape on the photograph's sky, and preparation refuses a frame above 25%. Four SUM2 close-up frames were also excluded: their full-resolution center convention was ambiguous and their binned resolution did not improve on the retained full-resolution mosaic images.
 
 The 1,200-leaf approximation was compared with the released 29,268-plate model using 2,048 equal-area Fibonacci radial rays. Mean radial difference was 371 m, 95th percentile 945 m, 99th percentile 1.34 km and maximum sampled difference 1.94 km. These are sampled approximation errors, not exhaustive bounds or a claim that the observational shape itself is accurate to those values.
 

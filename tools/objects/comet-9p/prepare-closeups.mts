@@ -33,7 +33,7 @@ export async function prepareCloseups(sourceDirectory:string,write=false) {
   await pinned('preparation/closeups.json');
   assert.equal(digest(await pinned(geometry.path)),recipe.shapeSha256);
   const mesh=await loadPdsPlanetocentricShape(resolve(source,geometry.path),geometry.grid);
-  const transfer={maximumSourceDistanceMeters:90,maximumSeparationMeters:200,visibilityToleranceMeters:.5,maximumEmissionDegrees:75};
+  const transfer={maximumSeparationMeters:200,visibilityToleranceMeters:.5,maximumEmissionDegrees:75};
   const reports=[];
   for(const entry of recipe.frames){
     assert.match(entry.id,/^iv05070405_9000\d{3}_001_r$/);assert.match(entry.referenceId,/^iv05070405_9000\d{3}_001_r$/);

@@ -79,6 +79,8 @@ All lenses use the same prepared geometry and coverage interpretation. A dedicat
 
 - **Included:** [Cassini ISS calibrated archive](https://pds-rings.seti.org/cassini/iss/) for the observation lens and [PDS shape release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html) for geometry and radial-height visualization.
 
+- **Excluded frame:** `N1860792100_1`. Its published camera places 99.9% of the lit source shape on the photograph's sky, while the photographed body lies elsewhere in the frame, so preparation refuses it. No camera correction is invented. The frame had supplied no displayed samples.
+
 - **Excluded from this release:** the Voyager-era Stooke shaded-relief/Celestia maps. They represent a different, older cartographic interpretation and cannot be described as Cassini observed pixels; the original Western University distribution URL currently returns 404. They add no qualified improvement over the chosen Cassini frames.
 
 
