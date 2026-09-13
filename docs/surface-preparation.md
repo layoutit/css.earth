@@ -219,6 +219,37 @@ packs latitude bands and gutters; poles have separate prepared tiles.
 Atlas dimensions, tile sizes and padding must agree with those addresses.
 Padding hides sampling seams; it does not add observed coverage.
 
+Chrome antialiases each leaf edge separately and paints each leaf's texture only
+up to that edge. Two leaves that meet exactly therefore leave a faint see-through
+line, and a magnified seam shows where one leaf's texels stop. A fixed overlap
+that stretches the texture cannot hide both at every zoom. Venus's former 0.8%
+overlap was 0.4 CSS pixels per edge at the default view, too little for every
+edge, and 1.9 pixels at feature zoom, where the stretched texture showed as a
+band along each seam.
+
+When a [CSS geometry profile](../src/renderers/css/preparation/scene/profile.ts)
+declares a seam outset, preparation writes two corrections instead:
+
+- **Matched raster overscan.** Each surface leaf's texture address and its
+  geometry both extend by half a canonical source texel, one displayed texel of
+  real neighbouring imagery past each edge. A magnified seam then blends into the
+  neighbouring texels.
+- **Stepped seam outset.** Each surface leaf gets a scale per axis, and the body
+  a table of silhouette steps
+  ([seam-outset.ts](../src/renderers/css/preparation/scene/seam-outset.ts)). At
+  runtime the body publishes the value for its projected diameter as
+  `--surface-seam-outset`, and each leaf scales about its centre by
+  `1 + outset × scale`. From a 16-pixel disc to the closest zoom, every step adds
+  0.38–0.6 CSS pixels on each edge. The runtime only selects a prepared step.
+
+[surface-seams-browser.mts](../site/test/surface-seams-browser.mts) measures the
+result at saved Venus radar views. It renders each view over a black and then a
+white backdrop to find pixels that let the backdrop through, and it compares the
+brightness profile across each seam with parallel lines inside both leaves.
+These corrections do not change breaks in the prepared imagery itself, such as
+the darker columns on either side of 0° in the Venus radar atlas or the
+one-pixel column at 180° in Io’s 8K bands.
+
 [solid-raster.mjs](../tools/objects/terrestrial-layers/solid-raster.mts) writes
 WebP assets and records their dimensions, sizes and hashes. Normalized maps stay
 lossless; banded display output defaults to lossless unless the recipe selects

@@ -7,6 +7,7 @@ import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant } from '../../rendering/prepared-presentation.js';
 import type { PresentationInputs, PresentationDraft } from './types.js';
 import type { PresentationAdapters } from './adapters.js';
+import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.js';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const LAYERS = ['surface', 'poles', 'corona', 'limb'] as const;
 
@@ -24,6 +25,8 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   const camera = b.element('div', 'polycss-camera planet-render-root');
   const scene = b.element('div', 'polycss-scene', `transform:${plan.camera.defaultTransform}`, { 'aria-hidden': 'true', 'data-polycss-lighting': 'baked' });
   const system = b.mesh(`${ns}-system`, `transform:${plan.systemTransform}`), body = b.mesh(`${ns}-body`, '', { style: '' });
+  const seamOutset = plan.body.seamRepair?.outset;
+  if (seamOutset) system.style.setProperty(seamOutset.property, seamOutsetInitialValue(seamOutset, plan.camera.logicalBodyDiameter));
   b.append(null, camera); b.append(camera, scene); b.append(scene, system); b.append(system, body);
   for (const leaf of plan.body.leaves) b.append(body, b.leaf(leaf));
   // Off-limb context (stationary observed plate behind the sphere) and limb plate (rim over the leaves):
@@ -49,6 +52,7 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
       ...([['data-polycss-camera-rot-x', 'scene-pitch', 2], ['data-polycss-camera-rot-y', 'control-yaw', null],
         ['data-polycss-camera-zoom', 'zoom', null], [`data-${ns}-camera-matrix`, 'scene-matrix', null]] as const)
         .map(([property, source, precision]) => ({ kind: 'view-attribute' as const, target: index(camera), property, source, precision })),
+      ...(seamOutset ? [seamOutsetBinding(seamOutset, index(system))] : []),
     ],
     animations: [],
   };

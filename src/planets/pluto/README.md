@@ -36,7 +36,8 @@ Feature notes: 21 of the labelled names carry a caption note, the lead summary o
 The mosaics and DEM have incomplete, uneven coverage. A gray grid marks identified gaps. The color JPEG uses only exactly-black pixels connected to the southern border, so a dark boundary fringe can remain. Nonzero dark pixels are preserved; no terrain is filled.
 
 The sphere is the shared raster-lane mesh: 230 units, 16 latitude bands and 32
-longitude segments, 450 leaves, the 50-pixel tile and 0.005 seam overlap.
+longitude segments, 450 leaves, the 50-pixel tile and the shared
+[seam treatment](../../../docs/surface-preparation.md#reduce-geometry-and-bake-the-atlas): a half-texel raster overscan and a stepped outset.
 Display radius, camera, spin origin (180°, keeping the Sputnik Planitia face of
 the retired lane) and the 84-second retrograde visual rotation are authored
 presentation choices. The pole, prime meridian and Sun direction at the shared

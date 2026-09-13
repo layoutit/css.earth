@@ -51,8 +51,10 @@ the USGS Viking MDIM product and the JPL physical parameters pinned in
 `source/editorial/factsheet-review.json`: 3,396.19 km equatorial and
 3,376.20 km polar. The prepared mesh uses 230 units at the equator and
 228.646218 units at the poles (the same ratio), 16 latitude bands and 32
-longitude segments, the shared 50-pixel tile and the Mercury seam overlap of
-0.005. The retained mesh is authored 145° around its spin axis; the 25.19°
+longitude segments, the shared 50-pixel tile and the shared
+[seam treatment](../../../docs/surface-preparation.md#reduce-geometry-and-bake-the-atlas):
+a half-texel raster overscan and a stepped outset. The retained mesh is
+authored 145° around its spin axis; the 25.19°
 axial tilt and the 1.02595676-day sidereal rotation are recorded with the
 body for the presentation, while the world frame, pole and prime meridian at
 the shared epoch come from the IAU/WGCCRE rotation model in the astronomy

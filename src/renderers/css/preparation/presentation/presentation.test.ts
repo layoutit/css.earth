@@ -39,7 +39,8 @@ describe('retained presentation compiler compatibility', () => {
   });
 });
 // Full raw output hashes from original JS helpers; see tools/evidence/presentation-typescript-parity.json.
-// Both hashes were updated when every prepared raster became a single @2x file.
+// Both hashes were updated for the stepped seam outset and matched raster overscan,
+// and when every prepared raster became a single @2x file.
 const expectedDigests: Record<string, string> = {
   mercury: '336836135265631894b9eebf96ed8c139e71686f48a3a2901190ecb6070f638a',
   venus: 'b9f5672a7da890357576489ad4c812d28fc204ab0b57689c81996485e0e965a4',

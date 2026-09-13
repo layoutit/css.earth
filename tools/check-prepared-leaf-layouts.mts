@@ -43,10 +43,16 @@ function missingLayoutProperties(style:StyleRecord) {
     return !value || value === "auto";
   });
 }
-function requireMatrix(value:string, label:string) {
-  const matrix = /^matrix3d\(([^)]+)\)$/.exec(value);
-  const values = matrix?.[1].split(",").map(Number);
-  if (values?.length !== 16 || !values.every(Number.isFinite)) throw new TypeError(`Prepared projective ${label} transform is missing or invalid.`);
+// A projective surface leaf may follow its matrix with the prepared seam outset:
+// a scale about the leaf centre driven by the body's silhouette-stepped property.
+const SCALE = String.raw`\d+(?:\.\d+)?(?:e[+-]?\d+)?`;
+const SEAM_OUTSET = new RegExp(String.raw`^ translate\(50%, 50%\) scale\(calc\(1 \+ var\((--[a-z][a-z0-9-]*), 0\) \* ${SCALE}\), calc\(1 \+ var\(\1, 0\) \* ${SCALE}\)\) translate\(-50%, -50%\)$`);
+function requireMatrix(value:string, label:string, seamOutset = false) {
+  const matrix = /^matrix3d\(([^)]+)\)(.*)$/.exec(value);
+  const values = matrix?.[1].split(",").map(Number), suffix = matrix?.[2] ?? "";
+  if (values?.length !== 16 || !values.every(Number.isFinite) || suffix !== "" && !(seamOutset && SEAM_OUTSET.test(suffix))) {
+    throw new TypeError(`Prepared projective ${label} transform is missing or invalid.`);
+  }
   return values;
 }
 function requireLeaf(carrier:StyleRecord, nativeRaster = false) {
@@ -67,7 +73,7 @@ function requireLeaf(carrier:StyleRecord, nativeRaster = false) {
   if ((!nativeRaster || carrier.transformStyle) && carrier.transformStyle !== "preserve-3d") {
     throw new TypeError("Prepared projective carrier/texture flattening is invalid.");
   }
-  const matrix = requireMatrix(carrier.transform, "carrier");
+  const matrix = requireMatrix(carrier.transform, "carrier", !nativeRaster);
   if (nativeRaster) {
     if ([3, 7, 11].some(index => matrix[index] !== 0) || matrix[15] !== 1) {
       throw new TypeError("Prepared native raster triangle requires an affine transform.");
