@@ -10,7 +10,7 @@ import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/s
 import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
 import {parseInterpreterRecipe} from '../../../../tools/objects/observation/interpret.mts';
 
-const root = new URL('../../../../src/planets/oberon/source/', import.meta.url).pathname;
+const root = new URL('../../../../src/objects/oberon/source/', import.meta.url).pathname;
 const read = async (path: string) => JSON.parse((await readFile(root + path)).toString('utf8'));
 
 test('Oberon preserves the original cube inside its source gzip', async () => {

@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { loadPdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { readAuthoredRotation } from '../../../../tools/objects/authored-rotation.mts';
-const root = resolve(import.meta.dirname, '../../../../src/planets/comet-1p');
+const root = resolve(import.meta.dirname, '../../../../src/objects/comet-1p');
 const json = async (path: string) => JSON.parse((await readFile(resolve(root, path))).toString('utf8'));
 
 test('Halley keeps east-positive source anchors, asymmetric origin and closed retained geometry', async () => {

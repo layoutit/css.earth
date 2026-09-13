@@ -26,7 +26,7 @@ const numbers=(value: string)=>value.split(' ').map(parseFloat);
 export const canonicalPoint=(x: number,y: number,width: number,height: number)=>({longitude:(x+.5)/width*360,latitude:90-(y+.5)/height*180});
 
 async function loadContext(body: string) {
-    const directory=resolve(root,'src/planets',body);
+    const directory=resolve(root,'src/objects',body);
     const material=materialShape(await json(resolve(directory,'prepared/material.json')));
     const scene=sceneShape(await json(resolve(directory,'prepared/scene.json')));
     const manifest=manifestShape(await json(resolve(directory,'runtime-assets.json')));

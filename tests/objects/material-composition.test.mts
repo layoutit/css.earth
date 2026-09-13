@@ -8,7 +8,7 @@ import {writeMaterialAtlasTile,sampleRgbaBilinear,sampleAlphaBilinear} from '../
 import {validateMaterialRecipe,validateRelativePath} from '../../tools/objects/material-composition/recipe.mts';
 import {prepareLayeredLeafLayouts} from '../../tools/objects/material-composition/leaf-layouts.mts';
 import {prepareLayeredOblateObject,isLayeredOblateRecipe} from '../../tools/objects/material-composition/index.mts';
-const objectDirectory=new URL('../../src/planets/saturn/',import.meta.url).pathname;
+const objectDirectory=new URL('../../src/objects/saturn/',import.meta.url).pathname;
 
 test('oblate ray arithmetic preserves facing and positive-root conventions without body dispatch',()=>{
  for(const arithmetic of ['division','reciprocal'] as const)for(const rootSelection of ['facing','positive'] as const){
@@ -73,7 +73,7 @@ test('projective leaf layout is derived from pinned scoped CSS',()=>{
 });
 
 test('full entry rejects canonical comparison output before any raster writes',async()=>{
- const geometry=JSON.parse(await readFile(new URL('../../src/planets/saturn/source/preparation/geometry.json',import.meta.url),'utf8'));
+ const geometry=JSON.parse(await readFile(new URL('../../src/objects/saturn/source/preparation/geometry.json',import.meta.url),'utf8'));
  assert.equal(isLayeredOblateRecipe(geometry),true);assert.equal(isLayeredOblateRecipe({schema:'unknown'}),false);
  await assert.rejects(prepareLayeredOblateObject({objectDirectory,publicDirectory:new URL('../../public/scenes/saturn/',import.meta.url).pathname,outputDirectory:'/unused',prepareContent:async()=>{throw Error('must not execute');}}),/canonical public/);
 });

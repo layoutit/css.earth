@@ -13,7 +13,7 @@ import {normalizedPresentationRecipe} from './normalized-presentation-contract.m
 import {parseRadialLayerRecipe} from './index.mts';
 import {parseObservedSurfaceRecipe} from './observations.mts';
 import {parseEllipsoidMaterialRecipe} from './materials.mts';
-const read = async (body: string, file: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../../src/planets/${body}/source/preparation/${file}.json`, import.meta.url), 'utf8'));
+const read = async (body: string, file: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../../src/objects/${body}/source/preparation/${file}.json`, import.meta.url), 'utf8'));
 
 test('all existing giant preparation recipes satisfy the operator-owned structural contracts', async () => {
   const fixtures: [string, string, Guard<unknown>][] = [

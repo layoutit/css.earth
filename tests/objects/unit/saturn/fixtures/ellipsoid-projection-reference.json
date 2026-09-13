@@ -4,15 +4,15 @@
   "sourceIdentity": "eb00da8f48f78e356c8b3389eec96d7c3c33d39f10820860ec11040c6ec08a84",
   "sources": [
     {
-      "path": "src/planets/saturn/runtime/ellipsoid-material.mjs",
+      "path": "src/objects/saturn/runtime/ellipsoid-material.mjs",
       "sha256": "5ffc3d2e42eccd2d43c90ea62572ee7d58c655b818aab7d6154adecfe4f19e29"
     },
     {
-      "path": "src/planets/saturn/runtime/preparedSceneRuntime.mjs",
+      "path": "src/objects/saturn/runtime/preparedSceneRuntime.mjs",
       "sha256": "905e62206128ed9a2daae9fa6c165cf3a5bfe5d668ce538aa6708edc49f67818"
     },
     {
-      "path": "src/planets/saturn/runtime/camera-plan.mjs",
+      "path": "src/objects/saturn/runtime/camera-plan.mjs",
       "sha256": "deebc1e661ce02bbb4a8352a3c8e91b94afd6d5740866183905c6ced137a4aa6"
     },
     {
@@ -1084,7 +1084,7 @@
   },
   "modules": [
     {
-      "url": "http://127.0.0.1:4304/src/planets/saturn/runtime/camera-plan.mjs",
+      "url": "http://127.0.0.1:4304/src/objects/saturn/runtime/camera-plan.mjs",
       "status": 200,
       "headers": {
         "access-control-allow-origin": "http://127.0.0.1:4304",
@@ -1118,7 +1118,7 @@
       }
     },
     {
-      "url": "http://127.0.0.1:4304/src/planets/saturn/runtime/preparedStarfield.mjs",
+      "url": "http://127.0.0.1:4304/src/objects/saturn/runtime/preparedStarfield.mjs",
       "status": 200,
       "headers": {
         "access-control-allow-origin": "http://127.0.0.1:4304",
@@ -1169,7 +1169,7 @@
       }
     },
     {
-      "url": "http://127.0.0.1:4304/src/planets/saturn/runtime/ellipsoid-material.mjs",
+      "url": "http://127.0.0.1:4304/src/objects/saturn/runtime/ellipsoid-material.mjs",
       "status": 200,
       "headers": {
         "access-control-allow-origin": "http://127.0.0.1:4304",
@@ -1339,7 +1339,7 @@
       }
     },
     {
-      "url": "http://127.0.0.1:4304/src/planets/saturn/runtime/preparedSceneRuntime.mjs",
+      "url": "http://127.0.0.1:4304/src/objects/saturn/runtime/preparedSceneRuntime.mjs",
       "status": 200,
       "headers": {
         "access-control-allow-origin": "http://127.0.0.1:4304",

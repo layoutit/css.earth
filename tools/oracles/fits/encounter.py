@@ -20,7 +20,7 @@ warnings.simplefilter('ignore')
 QUALITY_PLANE = {'ITSVIS': 'FLAGS', 'MRIVIS': 'FLAGS', 'NAVCAM': 'QUALITY_MAP'}
 products, inputs = {}, []
 for k, body in enumerate(['comet-9p', 'comet-81p', 'comet-103p']):
-    source = ROOT / 'src/planets' / body / 'source'
+    source = ROOT / 'src/objects' / body / 'source'
     frame = json.loads((source / 'preparation/terrestrial.json').read_text())['raster']['surfaceObservations'][0]['frames'][0]
     border = int(json.loads((source / frame['controlPath']).read_text())['observation']['detectorBorderPixels'])
     path = source / frame['path']; inputs.append(path)

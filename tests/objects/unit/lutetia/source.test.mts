@@ -7,7 +7,7 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadVrmlShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/lutetia/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/lutetia/source');
 const read=createSourceFixtureReader(root);
 
 test('Lutetia preserves its source pins and each runtime preparation input has a restoration operation',async()=>{

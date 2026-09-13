@@ -8,7 +8,7 @@ import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/geographos/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/geographos/source');
 const read=async (path: string)=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Geographos retains original source pins and acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'geographos',planetName:'Geographos',sourceRoot:root});await source.verify();

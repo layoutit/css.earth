@@ -15,7 +15,7 @@ import { requireString } from '../source-values.mts';
 export async function refreshPhotographs(id: string, lensIds: readonly string[]) {
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !lensIds.length || new Set(lensIds).size !== lensIds.length)
     throw new TypeError('Choose an object and distinct photographic lens IDs.');
-  const objectDirectory = resolve('src/planets', id), sourceDirectory = resolve(objectDirectory, 'source');
+  const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
   const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')));
   const sources = new Map<string, unknown>();
@@ -66,7 +66,7 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
 export async function refreshSurfaceContent(id: string, lensIds: readonly string[]) {
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !lensIds.length || new Set(lensIds).size !== lensIds.length)
     throw new TypeError('Choose an object and distinct surface lens IDs.');
-  const objectDirectory = resolve('src/planets', id), sourceDirectory = resolve(objectDirectory, 'source');
+  const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
   const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')));
   const content = descriptor.recipe.sources.find(source => source.id === 'content');

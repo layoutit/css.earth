@@ -14,7 +14,7 @@ test('every investigation ledger parses, and its body README links it instead of
   const ledgers = await readInvestigationLedgers(root);
   assert.ok(ledgers.length > 0, 'At least one object keeps an investigation ledger.');
   for (const { objectId } of ledgers) {
-    const readme = await readFile(resolve(root, 'src/planets', objectId, 'README.md'), 'utf8');
+    const readme = await readFile(resolve(root, 'src/objects', objectId, 'README.md'), 'utf8');
     assert.ok(readme.includes(`](${INVESTIGATION_LEDGER_FILE})`), `${objectId} README links its investigation ledger.`);
     assert.doesNotMatch(readme, SURVEY_ITEM, `${objectId} README leaves its source survey to the ledger.`);
   }
@@ -26,7 +26,7 @@ const fixture = () => ({ schema: INVESTIGATION_LEDGER_SCHEMA, objectId: 'fixture
     evidence: ['https://doi.org/10.0000/example'], checked: [{ date: '2026-09-13', commit: commit('a') }] },
   { id: 'flyby-photograph', subject: 'Flyby photograph as a photographic lens', status: 'deferred', finding: 'Placement was matched by eye.',
     revisitWhen: 'A measured camera or surface control points for this mesh.',
-    evidence: [`https://github.com/layoutit/css.earth/blob/${commit('b')}/src/planets/fixture/README.md#L1`],
+    evidence: [`https://github.com/layoutit/css.earth/blob/${commit('b')}/src/objects/fixture/README.md#L1`],
     checked: [{ date: '2026-09-13', commit: commit('b'), pr: 183 }] },
 ] });
 
@@ -39,7 +39,7 @@ test('a ledger entry states its decision, pinned evidence and what would reopen 
     ['a duplicate id', ledger => { fixtureRecord(ledger, 'entries', 1).id = 'radar-shape'; }],
     ['an open decision without a revisit condition', ledger => { delete fixtureRecord(ledger, 'entries', 1).revisitWhen; }],
     ['a revisit condition on an included source', ledger => { fixtureRecord(ledger, 'entries', 0).revisitWhen = 'Never.'; }],
-    ['a repository link to a moving branch', ledger => { fixtureRecord(ledger, 'entries', 1).evidence = ['https://github.com/layoutit/css.earth/blob/main/src/planets/fixture/README.md']; }],
+    ['a repository link to a moving branch', ledger => { fixtureRecord(ledger, 'entries', 1).evidence = ['https://github.com/layoutit/css.earth/blob/main/src/objects/fixture/README.md']; }],
     ['a plain http link', ledger => { fixtureRecord(ledger, 'entries', 0).evidence = ['http://example.org/source']; }],
     ['no evidence', ledger => { fixtureRecord(ledger, 'entries', 0).evidence = []; }],
     ['an abbreviated commit', ledger => { fixtureRecord(ledger, 'entries', 0, 'checked', 0).commit = 'a1570599b'; }],

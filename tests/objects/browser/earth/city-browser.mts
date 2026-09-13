@@ -409,7 +409,7 @@ return requiredDiagnostics(window.__earth).camera.setState({zoom}); },mobile?102
 console.log(JSON.stringify(reports.map(({transitions,...report})=>({...report,transitions:transitions?.length})),null,2));
 
 async function measureCityMotion(page: Page,root: string) {
-  const {entries}=await readWorldCoverCatalog({directory:new URL('../../../../src/planets/earth/source/city/',import.meta.url)});
+  const {entries}=await readWorldCoverCatalog({directory:new URL('../../../../src/objects/earth/source/city/',import.meta.url)});
   const availableRoots=[];
   for(let y=0;y<16;y++)for(let x=0;x<(y===0||y===15?1:32);x++) {
     const geometry=prepareCityPageGeometry({level:0,x,y},PREPARED_EARTH_SCENE);

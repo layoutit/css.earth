@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/ambrosia/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/ambrosia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'ambrosia',controls,audit:{
   "preparedAssetPairs": [
     {

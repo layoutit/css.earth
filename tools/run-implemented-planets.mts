@@ -21,7 +21,7 @@ export interface PreparationOptions {projectRoot?: string; objectIds?: readonly 
 interface ResolveOptions {projectRoot?: string; accessFile?: typeof access;}
 
 export function planetTestDirectory(id: string, projectRoot = process.cwd()) {
-  return resolve(projectRoot, "src", "planets", id, "test");
+  return resolve(projectRoot, "src", "objects", id, "test");
 }
 
 export async function discoverPlanetTests(
@@ -257,7 +257,7 @@ async function main(mode = process.argv[2]) {
 }
 
 function planetOwnedScript(id: string, path: string, projectRoot: string) {
-  return resolve(projectRoot, "src", "planets", id, ...path.split("/"));
+  return resolve(projectRoot, "src", "objects", id, ...path.split("/"));
 }
 
 function run(command: string, argumentsList: readonly string[]) {
