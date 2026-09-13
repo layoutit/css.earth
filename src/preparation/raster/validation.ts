@@ -64,7 +64,9 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
             throw new TypeError('falseColor must be boolean.');
         if (surface.resolutionScale !== undefined) {
             finite(surface.resolutionScale, 'surface.resolutionScale', true);
-            if (!Number.isInteger(surface.resolutionScale) || recipe.resample !== 'density-before-pack' || recipe.polesCombined || thumbnail.crop !== undefined || recipe.emission !== undefined)
+            const width = Number(recipe.width) * surface.resolutionScale;
+            const height = Number(recipe.height) * surface.resolutionScale;
+            if (![width, height, height / Number(recipe.latitudeBands) / 4].every(n => Number.isSafeInteger(n) && n > 0) || recipe.resample !== 'density-before-pack' || recipe.polesCombined || thumbnail.crop !== undefined || recipe.emission !== undefined)
                 throw new TypeError('Surface resolution scaling needs integer density-before-pack output with separate poles and an uncropped thumbnail.');
         }
         if (surface.encoding !== undefined) {

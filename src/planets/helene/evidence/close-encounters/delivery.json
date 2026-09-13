@@ -1,0 +1,55 @@
+{
+  "baseline": "ebd16155a",
+  "method": "Fetched immutable runtime URLs over HTTPS and verified byte counts and SHA-256 against the current runtime inventory.",
+  "assets": [
+    {
+      "filename": "helene-elevation-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/44eb2f12c7c8b6ee66f54b1aa4c6a40766a35c463736e8ca0e9bb8cc40b7a9da/helene-elevation-shadow@2x.webp",
+      "bytes": 326030,
+      "sha256": "44eb2f12c7c8b6ee66f54b1aa4c6a40766a35c463736e8ca0e9bb8cc40b7a9da",
+      "verified": true
+    },
+    {
+      "filename": "helene-false-color-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c3ade3b0c06f3e91724ede24cbab63a77eced5de50e48ed4b92945aa1ed34d61/helene-false-color-shadow@2x.webp",
+      "bytes": 283248,
+      "sha256": "c3ade3b0c06f3e91724ede24cbab63a77eced5de50e48ed4b92945aa1ed34d61",
+      "verified": true
+    },
+    {
+      "filename": "helene-false-color-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/ccd538ba4e4fa28bafc351522ca4645008caf03f2d07b00fa64a98ce64e3081b/helene-false-color-surface@2x.webp",
+      "bytes": 414930,
+      "sha256": "ccd538ba4e4fa28bafc351522ca4645008caf03f2d07b00fa64a98ce64e3081b",
+      "verified": true
+    },
+    {
+      "filename": "helene-false-color-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4fbc6071eb7d6053b5a3d6204af63ef8a8143f5518ee5456ef8a4aa874e8eafe/helene-false-color-thumbnail.webp",
+      "bytes": 2528,
+      "sha256": "4fbc6071eb7d6053b5a3d6204af63ef8a8143f5518ee5456ef8a4aa874e8eafe",
+      "verified": true
+    },
+    {
+      "filename": "helene-normal-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/38024b3f3703c60bda7effd54fbc9fe3fe6cc447b30e53a27dbf5d257d2cee27/helene-normal-shadow@2x.webp",
+      "bytes": 297414,
+      "sha256": "38024b3f3703c60bda7effd54fbc9fe3fe6cc447b30e53a27dbf5d257d2cee27",
+      "verified": true
+    },
+    {
+      "filename": "helene-normal-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c6eb21136fcbad4f023c0db946cdc68acf31a678d78755377a22c6607e82b608/helene-normal-surface@2x.webp",
+      "bytes": 633922,
+      "sha256": "c6eb21136fcbad4f023c0db946cdc68acf31a678d78755377a22c6607e82b608",
+      "verified": true
+    },
+    {
+      "filename": "helene-normal-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f8d1fc38436659e638664415f69978f63907dab52492b31af71232a987b0ea62/helene-normal-thumbnail.webp",
+      "bytes": 4106,
+      "sha256": "f8d1fc38436659e638664415f69978f63907dab52492b31af71232a987b0ea62",
+      "verified": true
+    }
+  ]
+}

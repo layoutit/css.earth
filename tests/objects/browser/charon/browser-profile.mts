@@ -19,7 +19,7 @@ export const browserProfile = createObjectBrowserProfile({
       preReadyDisabled: true,
     }),
     retained: Object.freeze({
-      lensIds: Object.freeze(["normal","enhanced-color","elevation","albedo"]),
+      lensIds: Object.freeze(["normal","enhanced-color","elevation","albedo","water-ice","ammonia"]),
       allowedMountSelectors: Object.freeze([]),
     }),
   }),

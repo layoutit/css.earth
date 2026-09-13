@@ -50,6 +50,10 @@ make coordinates transferable between models. Keep approximate placement visible
 in the caption. Unresolved photograph-to-shape registration cannot establish a
 terrain landmark; neither can a camera direction alone.
 
+For a body explicitly prepared as a reference sphere, published geographic
+landmarks can use that sphere without a triangle hit mesh. This exception does
+not apply to missing irregular-body meshes or Cartesian model coordinates.
+
 Check label discovery with no place selected: selection bypasses the zoom gate.
 Inspect whole-body framing, a closer view and rotation on a sparse asteroid,
 comet and small moon. Physical size alone does not require a separate label

@@ -1,0 +1,18 @@
+{
+  "body": "telesto",
+  "baseline": "ebd16155a",
+  "purpose": "The current unchanged main preparer reproduces the unaffected elevation dataset using its main recipe, unchanged source mesh and byte-identical elevation map. Both atlases exactly match this branch; the shadow drift predates the new imagery.",
+  "recipeSha256": "f28e5f15bd74af463fbed7198303332f2665ab31d5124547476e0840620a9e8d",
+  "assets": [
+    {
+      "filename": "telesto-elevation-surface@2x.webp",
+      "sha256": "24ce083da640c5c371c596e5405bd7a085d15fb2eb1dbb024e9a09c96c166250",
+      "bytes": 432722
+    },
+    {
+      "filename": "telesto-elevation-shadow@2x.webp",
+      "sha256": "d24157bca5aedafaec20904de47d76b9935538c3805a4bc38ff8ea1826e37afa",
+      "bytes": 234812
+    }
+  ]
+}
