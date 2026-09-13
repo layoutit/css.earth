@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1dc5d53ffaec33166231ae333042753f78bf07bc423e6292428d88bed719fc86"
+    "sha256": "48ae011fb9d265291923efbe729db0fb1f4528f1c5700e58d5a8718212824c15"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "59bc50d4d8e791303287442207f0e1dff48d70e9ee2e2d2d8954d812e8ecaaed",
+      "sha256": "863508a7053be085da029310e2aa1acce2814bf9c19e5f80635fd2639092e7eb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -171,11 +171,16 @@
               "id": "micas",
               "format": "isis2-orthographic",
               "consumer": "micas",
-              "path": "micas/ccd_near_1_ortho.cub",
-              "coordinatePaths": [
-                "micas/dem_x_component.cub",
-                "micas/dem_y_component.cub",
-                "micas/dem_z_component.cub"
+              "frames": [
+                {
+                  "id": "micas",
+                  "path": "micas/ccd_near_1_ortho.cub",
+                  "coordinatePaths": [
+                    "micas/dem_x_component.cub",
+                    "micas/dem_y_component.cub",
+                    "micas/dem_z_component.cub"
+                  ]
+                }
               ],
               "grid": {
                 "width": 356,
@@ -188,11 +193,15 @@
                 ]
               },
               "maximumCoordinateErrorMeters": 0.000001,
-              "maximumSourceDistanceMeters": 85,
-              "displayRange": [
-                0,
-                0.018
-              ],
+              "transfer": {
+                "maximumSourceDistanceMeters": 85
+              },
+              "display": {
+                "displayRange": [
+                  0,
+                  0.018
+                ]
+              },
               "metadata": {
                 "label": "MICAS",
                 "coverage": "Mission orthophoto registered to USGS terrain, retaining its original lighting. The grid marks missing imagery and an estimated completion of the unmeasured side."
