@@ -14,6 +14,7 @@ import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, osirisRadian
 import { decodeAmicaGeo } from '../../terrestrial-layers/amica-geo.mts';
 import { decodeOsirisReflectance } from '../../terrestrial-layers/archived-camera.mts';
 import { decodeLlorri } from '../../terrestrial-layers/llorri-geo.mts';
+import { decodeNearMsi, parseNearCameraClosure } from '../../terrestrial-layers/near-msi.mts';
 import { decodeNewHorizonsLorri, decodeArrokothMvic } from '../../terrestrial-layers/new-horizons-geo.mts';
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
 import { decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT } from '../../terrestrial-layers/pds4-geometry-cube.mts';
@@ -57,6 +58,9 @@ export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
     photometry: ['lommel-seeliger', 'minnaert', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
   'llorri-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
+  // Paired raw frames supply detector validity; the native decoder rejects compressed inputs.
+  'near-msi-camera': { camera: 'archived-closure', frame: { required: ['cameraPath', 'originalPath'] }, lens: { required: ['filter', 'refinement'] },
+    photometry: ['retained-observation'], published: false, display: 'percentiles', maximumFrames: 8 },
   'nh-lorri-camera': { camera: 'archived-closure', frame: { required: ['cameraPath'] }, lens: { required: ['filter'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
   // Registered enhanced colour keeps its acquisition illumination. Its decoder checks these bands and data-number units against the label.
@@ -199,6 +203,11 @@ async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory,
       geometry: archiveBackplanes(decoded, camera, shapeModel) });
   };
   const allowLossy = recipe.allowLossy === true;
+  if (recipe.format === 'near-msi-camera') {
+    const nativeClosure = parseNearCameraClosure(closure);
+    const decoded = refined({ ...decodeNearMsi(await read(frame.path), await read(frame.originalPath), nativeClosure), camera: closure });
+    return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera));
+  }
   if (recipe.format === 'llorri-camera') {
     const decoded = decodeLlorri(await read(frame.path), closure);
     return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera, decoded));
@@ -243,7 +252,7 @@ function displayUnits(recipe: GeoLens, photometry: ObservationPhotometry) {
   const quantity = (name: string) => retained ? `relative ${name} with original illumination` : `relative disk-normalized ${name}`;
   return photometry.units ?? `${recipe.format === 'amica-gaskell' ? 'relative flat-fielded detector brightness with approximate disk normalization'
     : ['llorri-camera', 'nh-lorri-camera'].includes(recipe.format) ? 'relative DN/s with original illumination'
-    : recipe.format === 'osiris-camera' ? quantity('I/F')
+    : ['osiris-camera', 'near-msi-camera'].includes(recipe.format) ? quantity('I/F')
     : recipe.format === PDS4_GEOMETRY_CUBE_FORMAT ? quantity(cubeDeclaration(recipe).quantity)
     : recipe.format === SPICE_CAMERA_FORMAT ? quantity(spiceDeclaration(recipe).image.quantity)
     : recipe.radiometry === 'radiance-factor' ? 'relative disk- and phase-normalized I/F' : 'relative disk-normalized radiance'}; linear grayscale display`;
