@@ -192,6 +192,10 @@ export function createApplicationWorldContext() {
         return { ...layer, viewport, publish,
           connectNavigation: contextNavigation.connect,
           suspendFocus: contextNavigation.suspend, restoreFocus: contextNavigation.restore,
+          selectPreparedFocus(id: string) {
+            const object = layer.resolveGalaxy(id);
+            return object ? contextNavigation.select(object) : null;
+          },
           present(world: WorldCameraPose, viewport: WorldCameraViewport, { signal, commit = () => {} }: { signal: AbortSignal; commit?: () => void }) {
             return frameQueue.presentAndWait({ world, viewport, commit,
               current: () => !destroyed, fail() {} }, signal);

@@ -22,6 +22,7 @@ import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createChartPixelAlignmentController } from "./chart-pixel-alignment.mts";
 import { createDestinationBrowser } from "./destination-browser.mts";
 import { createFeatureBrowser } from "./feature-browser.mts";
+import { normalizeDestinationQuery } from './destination-search.mts';
 import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createExplorerRailController } from "./explorer-rail.mts";
@@ -553,6 +554,11 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   if (items.length === 0) {
     throw new Error("Planet shell object browser has no objects.");
   }
+  const searchNames = new Map(items.map(item => {
+    const names: unknown = JSON.parse(item.dataset.objectSearchNames ?? '[]');
+    if (!Array.isArray(names) || !names.every(name => typeof name === 'string')) throw new TypeError('Prepared object search names are invalid.');
+    return [item, names as string[]] as const;
+  }));
   const tabs = [...browser.querySelectorAll<HTMLElement>('[data-object-tab]')];
   const resultsPanel = requiredElement(browser, '#object-category-results');
   const chunks = [...browser.querySelectorAll<HTMLElement>('.planet-object-chunk')]
@@ -617,6 +623,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     refreshChunks();
     visibleObjects = items.filter(item => !item.hidden).length;
     empty.hidden = visibleObjects > 0;
+    const systemHeading = system?.querySelector<HTMLElement>(':scope > .planet-selected-panel');
+    if (systemHeading) systemHeading.hidden = classification === 'nebula';
   };
 
   const events = new AbortController();
@@ -690,7 +698,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       void destinations?.search(''); void features?.search('');
       return;
     }
-    browser.ariaLabel = galactic ? 'Milky Way' : 'Solar System objects';
+    browser.ariaLabel = galactic ? 'Milky Way' : 'Celestial objects';
     if (galactic) {
       setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
       void destinations?.search(''); void features?.search('');
@@ -699,7 +707,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     const showAll = query === "all objects";
     const classification = items.find(item => {
       const name = item.dataset.objectClassificationName;
-      return name && (query === name || query === `${name}s` || query === item.dataset.objectClassification);
+      return name && (query === name || query === `${name}s` || (name === 'nebula' && query === 'nebulae') || query === item.dataset.objectClassification);
     })?.dataset.objectClassification;
     markCategory(classification);
     filteredClassification = classification;
@@ -715,12 +723,13 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       return;
     }
     setPanelHidden(browser, false);
+    const normalizedQuery = normalizeDestinationQuery(query);
     for (const item of items) {
       // A class search stays exact inside grouped tabs; only Planets deliberately includes dwarf planets.
       const match = classification && classification !== "planet" ? item.dataset.objectClassification === classification
         : showAll || classification || (systemName
         ? item.dataset.objectSystemName === systemName
-        : (item.dataset.objectName ?? "").includes(query));
+        : (item.dataset.objectName ?? "").includes(query) || (normalizedQuery.length > 0 && searchNames.get(item)?.some(name => name.includes(normalizedQuery))));
       item.dataset.objectMatch = String(Boolean(match));
     }
     const matches = items.filter(item => item.dataset.objectMatch === 'true');
@@ -824,6 +833,12 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       if (next < 0) search.focus(); else controls[Math.min(next, controls.length - 1)]?.focus();
     }
   }, { signal: events.signal });
+  browser.addEventListener('click', event => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (!(event.target instanceof windowTarget.Element) || !event.target.closest('a[data-prepared-focus-id]')) return;
+    render(false);
+    search.blur();
+  }, { signal: events.signal });
   documentTarget.querySelector(".planet-find-destination")?.addEventListener("click", () => {
     browsing = true;
     render(true, { resetQuery: true });
@@ -839,7 +854,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const markSelection = () => {
     documentTarget.documentElement.dataset.selection = preparedFocus ? 'prepared-focus' : overview ? overviewScope : 'object';
     for (const anchor of browser.querySelectorAll<HTMLElement>('.planet-object-link')) {
-      const selected = !preparedFocus && !overview && anchor.querySelector('.planet-object-name')?.textContent === selectedObjectName;
+      const selected = preparedFocus ? anchor.dataset.preparedFocusId === preparedFocus.id
+        : !overview && !anchor.dataset.preparedFocusId && anchor.querySelector('.planet-object-name')?.textContent === selectedObjectName;
       anchor.classList.toggle('is-active', selected);
       if (selected) anchor.setAttribute('aria-current', 'page');
       else anchor.removeAttribute('aria-current');
