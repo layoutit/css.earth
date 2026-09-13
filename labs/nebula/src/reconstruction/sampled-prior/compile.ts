@@ -18,6 +18,7 @@ import { sampledOwnerPins } from './ownership';
 import { jointRecord } from '../joint-fit/model';
 import { sampledBakeProgress } from './progress';
 import { registerComponentBanks } from './layout';
+import { fitSampledEmission, type EmissionFitResult } from './emission-fit';
 
 async function readSourcePin(root: string, pin: CompilerPin): Promise<Buffer> {
   if (!/^(labs\/nebula\/(models|src)\/|\.local\/nebula-lab\/)/.test(pin.path) || /[\\?#\s]/.test(pin.path) ||
@@ -41,6 +42,19 @@ async function validateSpatialArtifacts(root: string, result: CompilerResult) {
       throw new TypeError('Missing prepared spatial grid pin.');
     const bytes = await readGeometryPin(root, { path: pin.path, sha256: pin.sha256 });
     if (bytes.length !== expectedBytes) throw new TypeError('Prepared spatial grid size differs.');
+  }
+  if (model.emissionFits !== undefined) {
+    if (!Array.isArray(model.emissionFits) || model.emissionFits.length > 8) throw new TypeError('Invalid spatial emission fits.');
+    for (const fit of model.emissionFits) {
+      if (!jointRecord(fit) || typeof fit.sourceId !== 'string' || !result.sources.some(s => s.id === fit.sourceId)) throw new TypeError('Unknown fitted spectral source.');
+      for (const name of ['grid', 'receipt']) {
+        const pin = fit[name];
+        if (!jointRecord(pin) || typeof pin.path !== 'string' || !pin.path.startsWith(`.local/nebula-lab/compiler/${result.id}/`) || typeof pin.sha256 !== 'string')
+          throw new TypeError('Missing spatial fit artifact pin.');
+        const bytes = await readGeometryPin(root, { path: pin.path, sha256: pin.sha256 });
+        if (name === 'grid' && bytes.length !== expectedBytes) throw new TypeError('Fitted spatial grid size differs.');
+      }
+    }
   }
 }
 
@@ -107,10 +121,9 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   let started = performance.now();
   progress('Splatting the released 3D samples and separate analytic wind…', .24);
   const prepared = prepareSampledField(fits.values, sampled, signal), field = prepared.field({ ejecta: 1, pwn: 1 });
-  const fieldIdentity = geometrySha(JSON.stringify({ inputPins, extraImplementation, evidence: prepared.evidence }));
+  const fieldIdentity = geometrySha(JSON.stringify({ inputPins, extraImplementation, evidence: prepared.evidence,
+    fittingImages: sampled.emissionFit ? sourceData.images.map(image => [image.id, image.matrix, image.diffuse.sha256]) : undefined }));
   const ejecta = await save('ejecta.float32', float32LittleEndian(prepared.ejecta)), wind = await save('wind.float32', float32LittleEndian(prepared.pwn));
-  const model = await save('field.json', Buffer.from(JSON.stringify({ schema: 'cssearth-sampled-emission-field@1', fieldIdentity,
-    ...prepared.evidence, source: sampled.source, rawToArcsec: sampled.rawToArcsec, terms: sampled.terms, ejecta, wind })));
   pipeline.push({ id: 'sampled-field', label: 'Qualified ejecta samples + independent wind model', state: 'complete', seconds: (performance.now() - started) / 1000 });
   started = performance.now();
   const stars = await sampledStars(reference, sourceData.images, field, recipe.maximumStars, sampled.pulsar);
@@ -118,21 +131,40 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   const cx = (field.bounds.min[0] + field.bounds.max[0]) / 2, cy = (field.bounds.min[1] + field.bounds.max[1]) / 2;
   const span = Math.max(field.bounds.max[0] - field.bounds.min[0], field.bounds.max[1] - field.bounds.min[1]) * 1.04;
   const skyBounds: SkyBounds = { min: [cx - span / 2, cy - span / 2], max: [cx + span / 2, cy + span / 2] };
+  const fitsBySource = new Map<string, EmissionFitResult>();
+  const emissionFits: { sourceId: string; grid: CompilerPin; receipt: CompilerPin }[] = [];
+  if (sampled.emissionFit) {
+    started = performance.now();
+    for (const sourceId of sampled.emissionFit.sourceIds) {
+      const image = sourceData.images.find(image => image.id === sourceId);
+      if (!image) throw new TypeError('Emission-fit source unavailable.');
+      progress(`Fitting ${image.label} · measured filaments and inferred diffuse emission…`, .27);
+      const fit = fitSampledEmission(prepared, image, sampled.lensComponents[sourceId]!, sampled.emissionFit, skyBounds, signal);
+      fitsBySource.set(sourceId, fit);
+      emissionFits.push({ sourceId, grid: await save(`diffuse-${sourceId}.float32`, float32LittleEndian(fit.diffuse)),
+        receipt: await save(`emission-fit-${sourceId}.json`, Buffer.from(JSON.stringify(fit.receipt))) });
+    }
+    pipeline.push({ id: 'emission-fit', label: 'Fit filament brightness + separate diffuse emission', state: 'complete', seconds: (performance.now() - started) / 1000 });
+  }
+  const model = await save('field.json', Buffer.from(JSON.stringify({ schema: 'cssearth-sampled-emission-field@1', fieldIdentity,
+    ...prepared.evidence, source: sampled.source, rawToArcsec: sampled.rawToArcsec, terms: sampled.terms, ejecta, wind, emissionFits })));
+  const referenceFit = fitsBySource.get(reference.id);
+  const neutralField = referenceFit ? prepared.field({ ejecta: referenceFit.receipt.ejectaGain, pwn: 1 }, 1, referenceFit.diffuse) : field;
   started = performance.now();
   // Independent radiative components share a frame, never an inferred photo extrusion.
   // Within one mixture the normal baker enforces exact shared alpha for its RGB materials.
   const groups = new Map<string, typeof sourceData.images>();
   for (const image of sourceData.images) {
-    const weights = sampled.lensComponents[image.id]!, key = `${weights.ejecta},${weights.pwn}`;
+    const weights = sampled.lensComponents[image.id]!, key = fitsBySource.has(image.id) ? image.id : `${weights.ejecta},${weights.pwn}`;
     const group = groups.get(key) ?? []; group.push(image); groups.set(key, group);
   }
   const neutral = await bakeCompiler({ root, outputDirectory: `${directory}/scene-neutral`, id, fieldIdentity, boundsArcsec: field.bounds,
-    skyBoundsArcsec: skyBounds, sampleEmission: field.sampleEmission, lenses: [{ id: 'neutral-material', label: 'Neutral components', sampleRgb(_x, _y, rgb) { rgb.fill(255); return true; } }],
+    skyBoundsArcsec: skyBounds, sampleEmission: neutralField.sampleEmission, lenses: [{ id: 'neutral-material', label: 'Neutral components', sampleRgb(_x, _y, rgb) { rgb.fill(255); return true; } }],
     stars: stars.map(({ materials: _materials, ...star }) => star), signal,
     progress: p => progress(`Neutral components · ${p.message}`, .3 + .08 * sampledBakeProgress(p)) });
   const lenses: CompilerBakeResult['lenses'] = []; let groupIndex = 0;
-  for (const [key, images] of groups) {
-    const [ejectaWeight, pwnWeight] = key.split(',').map(Number), mixture = prepared.field({ ejecta: ejectaWeight!, pwn: pwnWeight! });
+  for (const images of groups.values()) {
+    const mixture = fitsBySource.get(images[0]!.id)?.field ?? prepared.field(sampled.lensComponents[images[0]!.id]!);
     const bank = await bakeCompiler({ root, outputDirectory: `${directory}/scene-${groupIndex}`, id, fieldIdentity,
       boundsArcsec: field.bounds, skyBoundsArcsec: skyBounds, sampleEmission: mixture.sampleEmission,
       lenses: images.map(image => ({ id: image.id, label: image.label, sampleRgb: image.sampleRgb })), signal,
@@ -150,19 +182,20 @@ export async function compileSampledNebula(root: string, request: CompilerReques
     sources.push({ id: image.id, label: image.label, credit: image.credit, page: image.page, width: original.width, height: original.height,
       boundsArcsec: skyBounds, original: await save(`source-${image.id}.png`, original.bytes), starless: await save(`starless-${image.id}.png`, starless.bytes) });
   }
-  const comparison = await sampledPanels(prepared.field(sampled.lensComponents[reference.id]!), reference, skyBounds);
+  const comparison = await sampledPanels(referenceFit?.field ?? prepared.field(sampled.lensComponents[reference.id]!), reference, skyBounds);
   const sampledPrior = { recipe: await save('sampled-recipe.json', sampledBytes), evidence: await save('physical-evidence.json', evidenceBytes), source: inputPins[2],
-    emissionComponents: sampled.lensComponents, coordinateEvidence: prepared.evidence };
+    emissionComponents: sampled.lensComponents, coordinateEvidence: prepared.evidence, emissionFit: sampled.emissionFit, emissionFits };
   const method = await save('method.json', Buffer.from(JSON.stringify({ version: COMPILER_VERSION, implementation, extraImplementation, inputPins,
     recipe, recipeSha256: geometrySha(recipeBytes), request, sampledPrior, pipeline,
-    materials: 'The qualified spatial points and independent analytic wind retain one fixed coordinate frame. Spectral tracer weights intentionally change component emission/alpha; photographs supply RGB within each selected support. No photo is extruded or used to move the samples.',
+    materials: 'Qualified spatial points and independent analytic wind retain one fixed coordinate frame. An optional regularized fit changes only ejecta amplitude and coefficients of finite 3D diffuse atoms fixed before image fitting. Each selected lens fits its own observed display signal; photographs supply registered chromaticity. No photo is extruded or used to move samples. Diffuse depths remain an authored prior.',
     stars: 'Observed reference residual positions with deterministic conditional support depths; not measured membership. The named pulsar uses a separately pinned position and authored angular display size, without simulated time variability.',
-    metrics: 'Image-space display-luminance disagreement against the default starless composite. This operator does not fit those pixels, calibrate radiance, or infer accuracy of its depth from this score.',
+    metrics: 'Image-space display-luminance disagreement including normalized source chromaticity. Optional fit receipts retain before/after and withheld-pixel results. This is not calibrated radiance or evidence of true depth; outreach stretch, coverage and epochs remain distinct.',
     limitations: ['SITELLE depth depends on the cited expansion law and sky registration.', 'Spectral epochs differ; no false common epoch is applied.',
       'Analytic wind thickness, jets and tracer strengths remain explicit model/presentation assumptions.', 'Emission-only transport omits scattering, absorption and Doppler boosting.'] }, null, 2)));
   const result: CompilerResult = { schema: 'cssearth-nebula-compiler-result@1', id, label: recipe.label, defaultSourceId: recipe.defaultSourceId,
     controls: request.controls, scene, sources, pipeline, inspectionBoundsArcsec: sourceData.inspectionBoundsArcsec,
-    metrics: { components: prepared.evidence.pointCount + sampled.terms.length, unconstrainedComponents: sampled.terms.length, stars: stars.length, ...comparison.metrics },
+    metrics: { components: prepared.evidence.pointCount + sampled.terms.length + (referenceFit?.receipt.atoms.length ?? 0),
+      unconstrainedComponents: sampled.terms.length + (referenceFit?.receipt.atoms.length ?? 0), stars: stars.length, ...comparison.metrics },
     model, method, target: await save('target.png', comparison.target), projection: await save('projection.png', comparison.projection),
     residual: await save('residual.png', comparison.residual), interpretation: recipe.interpretation };
   readCompilerResult(result); await validateSpatialArtifacts(root, result);

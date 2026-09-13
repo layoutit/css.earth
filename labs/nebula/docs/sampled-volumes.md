@@ -15,9 +15,13 @@ for Pleiades, Lagoon and the earlier experiments.
 3. Analytic torus, finite jet and ellipsoid terms form a separate component field.
    Every term cites observations, published models or explicitly authored choices.
    These terms do not move or replace the spatial sample array.
-4. Each registered image names its component weights. Neutral shows their union;
-   spectral lenses select the corresponding emission and supply registered RGB.
-   X-ray wind emission therefore does not paint the outer optical ejecta shell.
+4. Each registered image names its component weights. An optional `emissionFit`
+   fits one ejecta amplitude and a separate diffuse field per selected source.
+   Finite spherical Gaussian atoms occupy a fixed, tilted 3D envelope established
+   before reading images. Their centers, widths and depths never follow image
+   brightness. Positive coefficients add inferred light without moving samples.
+   Sources omitted from this fit retain their original mixture; Crab's Chandra
+   wind therefore stays separate from its optical/infrared diffuse proxy.
 5. The baker prepares XYZ slabs in one unchanged angular frame. Within a mixture,
    RGB lenses retain identical alpha. Between different tracers, component opacity
    intentionally differs. Lens switching performs no fitting or baking.
@@ -34,6 +38,33 @@ No source photograph is extruded. Depth/fit sliders are unavailable for this
 operator because the generic image-fit controls cannot validly modify its
 qualified coordinates. Material, original-image, star and camera controls remain
 available. Changing the spatial model requires its object recipe and a new bake.
+
+## Fit the remaining image emission
+
+The optional recipe pins source and evidence IDs, envelope position/orientation,
+three semi-axes, atom width/spacing, sampling, regularization, iteration limit and
+coefficient limits. Candidate-count guards reject unsupported envelopes before
+enumeration. Every finite kernel must fit inside the inspected physical bounds.
+
+The forward fit combines the unchanged ejecta projection, fixed inner-wind
+projection and analytically integrated 3D atoms. Nonnegative coefficients minimize
+regularized disagreement with the registered starless image's display opacity.
+The target uses peak RGB because the retained material normalizes chromaticity;
+diagnostic panels include that material's luminance rather than comparing a white
+opacity map with a colored image. No photograph is normalized along individual
+depth rays or repeated into a volume. Missing source coverage remains excluded.
+
+Every seventh pixel is withheld from fitting. Receipts retain before/after and
+withheld-pixel errors, missing/excess signal, fitted amplitudes and every atom.
+These are interpolation and display checks, not independent depth validation or
+calibrated flux. Different tracers fit independently; a generic RGB residual
+cannot identify synchrotron separately from dust, lines or processing artifacts.
+
+After fitting, atoms are sampled once into ordinary float grids; the existing
+XYZ baker and retained renderer consume the result. Original ejecta/wind arrays,
+astrometry, velocities and the existing star catalogue remain unchanged. The
+neutral view includes the reference lens's fitted diffuse field. Grid and fit
+receipts are hashed and checked alongside the base model before cached reuse.
 
 ## Registration and compact emission
 
@@ -60,13 +91,15 @@ The compiler hashes source images, qualified samples, recipes, evidence and both
 shared/compiler-specific TypeScript owners. It writes float grids, model and method
 snapshots, spectral banks and comparison panels to the ignored local cache.
 Local publication pins those inputs before the browser loads a result.
+On opening the workspace, a currently validated CLI bake supersedes a historical
+completed job only when its controls, evidence settings and registration match.
+Saved job history and active work remain intact; loading never starts a new bake.
 
 The diagnostic source/projection residual is a comparison of stretched display
-images. It is not a fitted line-flux residual or evidence that inferred depth is
+images. It is not a calibrated line-flux residual or evidence that inferred depth is
 correct. Spectral epochs, velocity frame, expansion-law assumptions, unobserved
 tracers, missing uncertainties and front/back ambiguity remain in the object ledger.
 
-See [Crab's source and evidence record](../models/m1/README.md). The initial
-operator separates released line-emitting ejecta from the inner wind model;
-extended diffuse synchrotron, scattering, absorption and Doppler boosting require
-additional supported operators rather than stronger image thresholds.
+See [Crab's source and evidence record](../models/m1/README.md). Its fitted diffuse
+interior is a bounded continuum proxy, not the complete extended PWN. Missing
+outer coverage, scattering, absorption and Doppler boosting remain unresolved.

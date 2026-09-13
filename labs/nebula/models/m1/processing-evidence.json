@@ -2,61 +2,320 @@
   "schema": "cssearth-nebula-processing-evidence@1",
   "subjectId": "m1",
   "asOf": "2026-09-13",
-  "status": "Compiled and interactively inspected; immediate CSS paint readiness remains unresolved.",
+  "status": "Diffuse fit compiled and visually inspected as a bounded interior approximation; physical diffuse depth and immediate paint readiness remain unvalidated.",
   "result": {
-    "id": "68ab19f6dfa0180e124e672eb406fcaab6fd200c61a03d5d7e574e8c65cf1ff5",
-    "sha256": "17b9b322e5513e9f0855ac4828730904859abf39be2f4bf3d1cb74929621b1e2",
-    "secondsWithPreparedSources": 327.666735208,
+    "id": "88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596",
+    "sha256": "0b8a420af0f922149c0abc03d9fa40e983adbb5fed05f36d8be723c08f4817ee",
+    "secondsWithPreparedSources": 509.723635916,
     "releasedEmissionSamples": 416573,
     "analyticWindTerms": 4,
+    "inferredDiffuseAtoms": 143,
     "compactLights": 351,
-    "lenses": ["hubble-optical", "webb-infrared", "webb-components", "spitzer-infrared", "vla-radio", "chandra-xray"],
-    "sampling": { "gridLongestAxis": 256, "textureWidth": 512, "samplesPerSlab": 4, "sliceCounts": { "x": 192, "y": 181, "z": 174 } }
+    "lenses": [
+      "hubble-optical",
+      "webb-infrared",
+      "webb-components",
+      "spitzer-infrared",
+      "vla-radio",
+      "chandra-xray"
+    ],
+    "sampling": {
+      "sliceCounts": {
+        "x": 192,
+        "y": 181,
+        "z": 174
+      },
+      "imageWidth": 512,
+      "samplesPerSlab": 4
+    }
   },
   "inputs": {
     "recipe": "sampled.json",
+    "physicalEvidence": "physical-evidence.json",
     "physicalSources": "physical-sources.json",
-    "coordinateQualification": "sitelle-alignment-check.json",
-    "nativeSeparationAndPreservation": "native-accounting-check.json",
-    "interpretation": "Qualified released line-emission coordinates with conditional expansion-law depth; separate published torus parameters and authored finite jets. No recovered mass density or six-band radiative transfer."
+    "sourceAndSeparation": "native-accounting-check.json",
+    "coordinateQualification": "sitelle-alignment-check.json"
   },
-  "integration": {
-    "rounds": 3,
-    "firstFailure": "The original shared-alpha validator rejected explicitly distinct tracer mixtures.",
-    "secondFailure": "The crop compiler produced different retained slabs and pixel rectangles for each component mixture.",
-    "resolution": "Explicit per-lens alpha pins, one retained mesh from the union of actual registered RGBA footprints, and exact integer pixel padding. Different mixtures retain their own original RGBA; no image resampling or fabricated occupancy.",
-    "decodeRegression": "Repeated bank switches failed with temporary HTML image decoders despite valid source hashes and native PNG decoding. Closeable bitmap validation passed 24 material/pose switches; CSS uses the same pinned blob textures.",
-    "checks": ["All neutral/lens resource hashes and dimensions verified before publication", "Shared physical frame and exact retained leaf geometry", "Distinct component alpha explicitly pinned", "XYZ registered padding fixtures preserve original pixels and reject resampling"]
+  "fit": {
+    "method": "Nonnegative regularized display-opacity fit with a fixed ejecta template, fixed inner wind and finite 3D Gaussian diffuse atoms. One ejecta gain and separate diffuse coefficients per selected lens.",
+    "secondsForFiveLenses": 12.749066082999997,
+    "counterfactuals": "The same independent-pixel acceptance assertion rejects both the original field and a field with fitted gain but no diffuse component.",
+    "lenses": [
+      {
+        "sourceId": "hubble-optical",
+        "receipt": {
+          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-hubble-optical.json",
+          "sha256": "1d894c3285fa4c32b6d689f0eb3f6b1bf203c58b0bd4cbb2680656bf080721fc"
+        },
+        "atomCount": 143,
+        "ejectaGain": 1.0407954901531884,
+        "beforeRmse": 0.2720764097661869,
+        "afterRmse": 0.12376402528563173,
+        "validationBeforeRmse": 0.27320864456347516,
+        "validationAfterRmse": 0.12543254452097102,
+        "missingBefore": 0.7242568509779648,
+        "missingAfter": 0.22109628352711705,
+        "excessAfter": 0.07444863295951945
+      },
+      {
+        "sourceId": "spitzer-infrared",
+        "receipt": {
+          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-spitzer-infrared.json",
+          "sha256": "0f097fa86aa19fa53ca5afad0117c35d8440878f2bf0a45b6b1d1843203a0562"
+        },
+        "atomCount": 143,
+        "ejectaGain": 0.40845510873534047,
+        "beforeRmse": 0.12912395216591768,
+        "afterRmse": 0.05949036026047874,
+        "validationBeforeRmse": 0.12800101593837962,
+        "validationAfterRmse": 0.05858483565790333,
+        "missingBefore": 0.5369855458544704,
+        "missingAfter": 0.1778761374307832,
+        "excessAfter": 0.12047577707535029
+      },
+      {
+        "sourceId": "vla-radio",
+        "receipt": {
+          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-vla-radio.json",
+          "sha256": "f64d37fa8bc49c3e40ea48de55e5ff2fc48d14ff1a7e22c46e565c85e11cc0be"
+        },
+        "atomCount": 143,
+        "ejectaGain": 2.758817892664468,
+        "beforeRmse": 0.08468866097099793,
+        "afterRmse": 0.028270732704418544,
+        "validationBeforeRmse": 0.08492716573561568,
+        "validationAfterRmse": 0.02866817903220897,
+        "missingBefore": 0.8229274198315448,
+        "missingAfter": 0.16626293041062976,
+        "excessAfter": 0.09744861650686348
+      },
+      {
+        "sourceId": "webb-components",
+        "receipt": {
+          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-webb-components.json",
+          "sha256": "dc2ef8e99ad3b92ef8f903564935d9c5e52d506350c26a49d7dce52a59b12696"
+        },
+        "atomCount": 143,
+        "ejectaGain": 0.5400976988698133,
+        "beforeRmse": 0.24241486375976506,
+        "afterRmse": 0.10737004791956614,
+        "validationBeforeRmse": 0.23983721782828,
+        "validationAfterRmse": 0.10538605630320652,
+        "missingBefore": 0.6286918019216887,
+        "missingAfter": 0.17779519610465513,
+        "excessAfter": 0.07629638886245153
+      },
+      {
+        "sourceId": "webb-infrared",
+        "receipt": {
+          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-webb-infrared.json",
+          "sha256": "79ae0bdf1f84a755fe7ea7ced4faaec9cfe2f1d297880b77511c32a974f32259"
+        },
+        "atomCount": 143,
+        "ejectaGain": 0.9190453236587317,
+        "beforeRmse": 0.32070187840463477,
+        "afterRmse": 0.13484901425564702,
+        "validationBeforeRmse": 0.3185683503727172,
+        "validationAfterRmse": 0.13191921339148976,
+        "missingBefore": 0.712164783224972,
+        "missingAfter": 0.19306891434064674,
+        "excessAfter": 0.06838707255013649
+      }
+    ],
+    "diagnosticCorrection": "Projected luminance now includes normalized material color. New before/after values use identical images and coverage; the old white-opacity comparison below is historical, not a directly comparable baseline."
+  },
+  "preservation": {
+    "receipt": {
+      "path": "output/m1-continuum/preservation.json",
+      "sha256": "58240ad3f81bde45c10d6e596efeefbb23e8f3153b58eb6b91ab1294c518e035"
+    },
+    "starsIdentical": true,
+    "boundsIdentical": true,
+    "samplingIdentical": true,
+    "ejecta.float32Identical": true,
+    "wind.float32Identical": true,
+    "chandraRawSlabsIdentical": true
+  },
+  "validation": {
+    "strictTypescript": "passed",
+    "targetedTests": 51,
+    "testsLog": {
+      "path": "output/m1-continuum/tests.log",
+      "sha256": "682765e4a90219aef36d561d222c38e5247a7dbec817f5dfc0e008c1db6e1cca"
+    },
+    "cancelledTrial": "An early bake was stopped to fix candidate-lattice bounding before processing extreme recipe inputs. Its log remains in output/m1-continuum/bake-interrupted-for-lattice-guard.log. No live lab server or user job was stopped."
   },
   "browser": {
-    "receipt": "output/m1-sampled-inspection-60ebe9b9/receipt.json",
-    "version": "Chromium 148.0.7778.96",
-    "lenses": 6,
-    "poses": ["Earth", "59.5 degrees / 35 degrees oblique", "West side", "North side"],
-    "checks": ["All six lenses load", "351 retained lights", "Chandra shows the named pulsar without foreground optical lights", "Original-image overlays", "Refresh retains the result", "No processing requests during material, camera or star switches", "No browser errors"],
-    "testedResultId": "60ebe9b931f75a6c9b527dfb48062bf60772aae31e9171797f0016774d3e2120",
-    "visualFinding": "Earth-facing optical filaments and separate Chandra tori/jets are visible. Initial oblique captures were substantially darker, but a timed investigation found deferred CSS painting: at unchanged pose and framing, Hubble luminance was 0.701 after one second, then 7.175 at five and ten seconds. This does not prove permanent angular darkening; immediate readiness is still a failed gate."
+    "status": "All six spectral lenses visibly rendered; original overlay and reload checked in the live lab.",
+    "loadingFix": "A historical completed job previously hid the updated CLI result. Restoration now considers the current validated publication and checks matching controls, evidence and registration before superseding saved display state. No job is deleted and active work is preserved.",
+    "testedResultId": "88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596",
+    "method": "Task-scoped inspection in Chrome through the native browser interface; screenshots inspected interactively, not an automated performance or console-error audit.",
+    "views": [
+      {
+        "sourceId": "hubble-optical",
+        "poses": [
+          "Earth",
+          "oblique"
+        ],
+        "finding": "Cyan interior restored while bright filament gaps remain. The oblique view is broader and shows faint opacity contours."
+      },
+      {
+        "sourceId": "webb-infrared",
+        "poses": [
+          "oblique"
+        ],
+        "finding": "Diffuse interior and filament structure remain visible."
+      },
+      {
+        "sourceId": "webb-components",
+        "poses": [
+          "Earth"
+        ],
+        "finding": "Blue interior, bright filament cage and distinct tracer colors visible."
+      },
+      {
+        "sourceId": "spitzer-infrared",
+        "poses": [
+          "Earth"
+        ],
+        "finding": "Connected yellow-green interior visible."
+      },
+      {
+        "sourceId": "vla-radio",
+        "poses": [
+          "Earth"
+        ],
+        "finding": "Red interior and streaks visible."
+      },
+      {
+        "sourceId": "chandra-xray",
+        "poses": [
+          "Earth"
+        ],
+        "finding": "Separate purple wind tori/jets and pulsar visible without the new optical diffuse component."
+      }
+    ],
+    "originalOverlay": "Hubble original and cloud inspected at the same Earth-view pose; major filament landmarks retain orientation, scale and position. Faint outer image detail remains incompletely reconstructed.",
+    "reload": "Reload restored Prepared nebula ready with the completed diffuse-fit stage, Hubble lens, Earth view and Original off. No Compile action was issued during this inspection.",
+    "limits": "This does not repeat the historical 24-pose matrix or establish immediate CSS paint readiness, zero browser errors, measured diffuse depth or full outer coverage.",
+    "receipt": {
+      "path": "output/m1-continuum/browser-check.json",
+      "sha256": "e3cad6b152adbf0e0ac2070fb07a26be7835aab6944c0b03a8d77a231ca1b31d"
+    }
   },
-  "sharedOwnerReplay": {
-    "previousResultId": "60ebe9b931f75a6c9b527dfb48062bf60772aae31e9171797f0016774d3e2120",
-    "receipt": "output/nebula-processing/m1-star-union-replay.json",
-    "sha256": "1313fadc13685da96783027d9a17e15a2bde030d5c6e2d8e878cea3473a8cdac",
-    "interpretation": "The optional multisource star catalogue is enabled only for Lagoon. This current-owner replay preserves all 351 Crab lights, physical grids, panels, geometry, alpha and every bank resource. Only the field descriptor's generated grid paths changed with the result ID."
-  },
-  "currentBrowser": {
-    "testedResultId": "68ab19f6dfa0180e124e672eb406fcaab6fd200c61a03d5d7e574e8c65cf1ff5",
-    "receipt": { "path": "output/m1-sampled-inspection-68ab19f6-steady-bitmap/receipt.json", "sha256": "aaa1044e6cd45c1d2553f60829a4671cc5519c6b4e1ef5505976ab51f444c7a2" },
-    "visualAssessment": { "path": "output/m1-sampled-inspection-68ab19f6-steady-bitmap/visual-assessment.json", "sha256": "4f156458157a5454c7dff10b68b7393eeb0343fb771167b469e302911997cd9f" },
-    "result": "All 24 lens/pose loads, 351 lights, pulsar-only X-ray appearance, original overlays and refresh passed; zero processing requests or browser errors.",
-    "captureLimit": "Each capture uses a bounded five-second delay. Hubble's full oblique ejecta are visible; Webb infrared remains dim in its oblique capture. These captures do not prove universal settling or immediate readiness.",
-    "immediatePaintReadiness": "failed; bounded preload attempt reverted after repeat HTMLImage decoding failure"
-  },
-  "diagnostics": {
-    "rmse": 0.2608203796714166,
-    "zeroModelRmse": 0.37214307203400937,
-    "missingSignalFraction": 0.6839143189720424,
-    "excessSignalFraction": 0.004999833623206762,
-    "interpretation": "Unfitted display-luminance comparison against the Hubble composite. Missing diffuse continuum and fixed component strengths dominate disagreement; this is not a depth-accuracy or calibrated-flux measurement."
-  },
-  "remaining": ["Resolve CSS raster/upload readiness for dense material and newly active axis layers; URL image preloading regressed decoding and was reverted. No arbitrary wait or exposure correction is part of the runtime.", "Extended synchrotron emission and the faint northern oxygen jet are not modeled", "Finite jet dimensions, spectral strengths, pulsar display size/depth and smoothing remain authored", "Epoch, foreground extinction, scattering and relativistic transport remain unresolved", "Source restoration was exercised with local caches; no cold-clone validation claim"]
+  "remaining": [
+    "Full 7.6 arcmin diffuse PWN and faint northern oxygen jet extend beyond this current image/field coverage.",
+    "Added diffuse depths and lattice geometry are authored; RGB residuals mix continuum, line/dust emission, epoch differences and separation artifacts.",
+    "The broad inferred component loses small-scale detail from oblique views; finite RGBA8 layers show faint opacity contours.",
+    "Existing CSS paint/upload delays on bank or axis changes remain outside this emission-fit change.",
+    "No absorption, scattering, relativistic beaming, common-epoch correction or cold-clone validation claim."
+  ],
+  "measuredOnlyBaseline": {
+    "schema": "cssearth-nebula-processing-evidence@1",
+    "subjectId": "m1",
+    "asOf": "2026-09-13",
+    "status": "Compiled and interactively inspected; immediate CSS paint readiness remains unresolved.",
+    "result": {
+      "id": "68ab19f6dfa0180e124e672eb406fcaab6fd200c61a03d5d7e574e8c65cf1ff5",
+      "sha256": "17b9b322e5513e9f0855ac4828730904859abf39be2f4bf3d1cb74929621b1e2",
+      "secondsWithPreparedSources": 327.666735208,
+      "releasedEmissionSamples": 416573,
+      "analyticWindTerms": 4,
+      "compactLights": 351,
+      "lenses": [
+        "hubble-optical",
+        "webb-infrared",
+        "webb-components",
+        "spitzer-infrared",
+        "vla-radio",
+        "chandra-xray"
+      ],
+      "sampling": {
+        "gridLongestAxis": 256,
+        "textureWidth": 512,
+        "samplesPerSlab": 4,
+        "sliceCounts": {
+          "x": 192,
+          "y": 181,
+          "z": 174
+        }
+      }
+    },
+    "inputs": {
+      "recipe": "sampled.json",
+      "physicalSources": "physical-sources.json",
+      "coordinateQualification": "sitelle-alignment-check.json",
+      "nativeSeparationAndPreservation": "native-accounting-check.json",
+      "interpretation": "Qualified released line-emission coordinates with conditional expansion-law depth; separate published torus parameters and authored finite jets. No recovered mass density or six-band radiative transfer."
+    },
+    "integration": {
+      "rounds": 3,
+      "firstFailure": "The original shared-alpha validator rejected explicitly distinct tracer mixtures.",
+      "secondFailure": "The crop compiler produced different retained slabs and pixel rectangles for each component mixture.",
+      "resolution": "Explicit per-lens alpha pins, one retained mesh from the union of actual registered RGBA footprints, and exact integer pixel padding. Different mixtures retain their own original RGBA; no image resampling or fabricated occupancy.",
+      "decodeRegression": "Repeated bank switches failed with temporary HTML image decoders despite valid source hashes and native PNG decoding. Closeable bitmap validation passed 24 material/pose switches; CSS uses the same pinned blob textures.",
+      "checks": [
+        "All neutral/lens resource hashes and dimensions verified before publication",
+        "Shared physical frame and exact retained leaf geometry",
+        "Distinct component alpha explicitly pinned",
+        "XYZ registered padding fixtures preserve original pixels and reject resampling"
+      ]
+    },
+    "browser": {
+      "receipt": "output/m1-sampled-inspection-60ebe9b9/receipt.json",
+      "version": "Chromium 148.0.7778.96",
+      "lenses": 6,
+      "poses": [
+        "Earth",
+        "59.5 degrees / 35 degrees oblique",
+        "West side",
+        "North side"
+      ],
+      "checks": [
+        "All six lenses load",
+        "351 retained lights",
+        "Chandra shows the named pulsar without foreground optical lights",
+        "Original-image overlays",
+        "Refresh retains the result",
+        "No processing requests during material, camera or star switches",
+        "No browser errors"
+      ],
+      "testedResultId": "60ebe9b931f75a6c9b527dfb48062bf60772aae31e9171797f0016774d3e2120",
+      "visualFinding": "Earth-facing optical filaments and separate Chandra tori/jets are visible. Initial oblique captures were substantially darker, but a timed investigation found deferred CSS painting: at unchanged pose and framing, Hubble luminance was 0.701 after one second, then 7.175 at five and ten seconds. This does not prove permanent angular darkening; immediate readiness is still a failed gate."
+    },
+    "sharedOwnerReplay": {
+      "previousResultId": "60ebe9b931f75a6c9b527dfb48062bf60772aae31e9171797f0016774d3e2120",
+      "receipt": "output/nebula-processing/m1-star-union-replay.json",
+      "sha256": "1313fadc13685da96783027d9a17e15a2bde030d5c6e2d8e878cea3473a8cdac",
+      "interpretation": "The optional multisource star catalogue is enabled only for Lagoon. This current-owner replay preserves all 351 Crab lights, physical grids, panels, geometry, alpha and every bank resource. Only the field descriptor's generated grid paths changed with the result ID."
+    },
+    "currentBrowser": {
+      "testedResultId": "68ab19f6dfa0180e124e672eb406fcaab6fd200c61a03d5d7e574e8c65cf1ff5",
+      "receipt": {
+        "path": "output/m1-sampled-inspection-68ab19f6-steady-bitmap/receipt.json",
+        "sha256": "aaa1044e6cd45c1d2553f60829a4671cc5519c6b4e1ef5505976ab51f444c7a2"
+      },
+      "visualAssessment": {
+        "path": "output/m1-sampled-inspection-68ab19f6-steady-bitmap/visual-assessment.json",
+        "sha256": "4f156458157a5454c7dff10b68b7393eeb0343fb771167b469e302911997cd9f"
+      },
+      "result": "All 24 lens/pose loads, 351 lights, pulsar-only X-ray appearance, original overlays and refresh passed; zero processing requests or browser errors.",
+      "captureLimit": "Each capture uses a bounded five-second delay. Hubble's full oblique ejecta are visible; Webb infrared remains dim in its oblique capture. These captures do not prove universal settling or immediate readiness.",
+      "immediatePaintReadiness": "failed; bounded preload attempt reverted after repeat HTMLImage decoding failure"
+    },
+    "diagnostics": {
+      "rmse": 0.2608203796714166,
+      "zeroModelRmse": 0.37214307203400937,
+      "missingSignalFraction": 0.6839143189720424,
+      "excessSignalFraction": 0.004999833623206762,
+      "interpretation": "Unfitted display-luminance comparison against the Hubble composite. Missing diffuse continuum and fixed component strengths dominate disagreement; this is not a depth-accuracy or calibrated-flux measurement."
+    },
+    "remaining": [
+      "Resolve CSS raster/upload readiness for dense material and newly active axis layers; URL image preloading regressed decoding and was reverted. No arbitrary wait or exposure correction is part of the runtime.",
+      "Extended synchrotron emission and the faint northern oxygen jet are not modeled",
+      "Finite jet dimensions, spectral strengths, pulsar display size/depth and smoothing remain authored",
+      "Epoch, foreground extinction, scattering and relativistic transport remain unresolved",
+      "Source restoration was exercised with local caches; no cold-clone validation claim"
+    ]
+  }
 }

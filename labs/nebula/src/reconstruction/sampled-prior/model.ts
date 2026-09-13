@@ -1,6 +1,7 @@
 /** A qualified spatial sample set and explicitly authored analytic components. No object-specific code. */
 import { jointPath, jointRecord } from '../joint-fit/model';
 import type { EmissionVector3 } from '../compiler/field-types';
+import { readSampledEmissionFit, type SampledEmissionFit } from './emission-fit-model';
 
 export interface SamplePin { path: string; sha256: string }
 interface TermBase { id: string; weight: number; evidenceIds: string[] }
@@ -15,6 +16,7 @@ export interface SampledRecipe {
   rawToArcsec: number[];
   grid: { longestAxis: number; blurSigmaCells: number; weightExponent: number; peakOpticalDepth: number };
   terms: SampleTerm[]; lensComponents: Record<string, ComponentWeights>;
+  emissionFit?: SampledEmissionFit;
   pulsar?: { id: string; positionArcsec: EmissionVector3; rgb: [number, number, number]; diameterArcsec: number; alpha: number; evidenceIds: string[] };
 }
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
@@ -81,10 +83,13 @@ export function readSampledRecipe(v: unknown): SampledRecipe {
     if (!rgb.every(n => Number.isInteger(n) && n >= 0 && n <= 255)) throw new TypeError('Invalid central-source color.');
     pulsar = { id: id(p.id), positionArcsec: vector(p.positionArcsec), rgb, diameterArcsec: number(p.diameterArcsec, .001, 1e3), alpha: number(p.alpha, 0, 1), evidenceIds: evidenceIds(p.evidenceIds) };
   }
+  const emissionFit = v.emissionFit === undefined ? undefined : readSampledEmissionFit(v.emissionFit);
+  if (emissionFit?.sourceIds.some(id => !lensComponents[id])) throw new TypeError('Emission fit references an unknown spectral lens.');
   return { schema: v.schema, id: id(v.id), centerIcrsDegrees: [number(v.centerIcrsDegrees[0], 0, 359.999999), number(v.centerIcrsDegrees[1], -90, 90)],
     evidence: pin(v.evidence), source: { ...pin(s), url: s.url, width, height, columns: [s.columns[0], s.columns[1], s.columns[2], s.columns[3]] },
     rawToArcsec: [...m], grid: { longestAxis, blurSigmaCells: number(v.grid.blurSigmaCells, .35, 4), weightExponent: number(v.grid.weightExponent, .1, 1),
-      peakOpticalDepth: v.grid.peakOpticalDepth === undefined ? 1.5 : number(v.grid.peakOpticalDepth, .01, 10) }, terms, lensComponents, ...(pulsar ? { pulsar } : {}) };
+      peakOpticalDepth: v.grid.peakOpticalDepth === undefined ? 1.5 : number(v.grid.peakOpticalDepth, .01, 10) }, terms, lensComponents,
+    ...(emissionFit ? { emissionFit } : {}), ...(pulsar ? { pulsar } : {}) };
 }
 export function verifySampledEvidence(recipe: SampledRecipe, value: unknown) {
   if (!jointRecord(value) || value.schema !== 'cssearth-nebula-physical-evidence@1' || value.subjectId !== recipe.id || !Array.isArray(value.evidence) || !Array.isArray(value.sources))
@@ -101,6 +106,6 @@ export function verifySampledEvidence(recipe: SampledRecipe, value: unknown) {
         row.classification !== 'authored' && !row.sourceIds.length) throw new TypeError('Invalid sampled physical evidence attribution or classification.');
     ids.add(id(row.id));
   }
-  for (const term of [...recipe.terms, ...(recipe.pulsar ? [recipe.pulsar] : [])])
+  for (const term of [...recipe.terms, ...(recipe.pulsar ? [recipe.pulsar] : []), ...(recipe.emissionFit ? [recipe.emissionFit] : [])])
     if (term.evidenceIds.some(id => !ids.has(id))) throw new TypeError('Sampled component references missing physical evidence.');
 }

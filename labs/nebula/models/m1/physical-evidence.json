@@ -140,7 +140,7 @@
       "quantity": "depth conditional on linear expansion",
       "value": {
         "expansionPerYear": 0.00116,
-        "uncertaintyPerYear": 0.000015,
+        "uncertaintyPerYear": 1.5e-05,
         "adoptedDistancePc": 2000
       },
       "unit": "units named in keys",
@@ -385,7 +385,52 @@
       },
       "unit": "units named in keys",
       "scope": "Local rotating visualization; positive emissivity only",
-      "limitations": "Smoothing, relative component weights, finite jet lengths, pulsar radius/alpha, and field-star depths are display assumptions. At approximately1.4arcsec grid spacing, sigma0.5cell has about1.65arcsec FWHM, coarser than SITELLE seeing1.17±0.04arcsec. The initial128cell/sigma1 prototype was replaced before completed visual qualification. Absorption/scattering, relativistic beaming, and time evolution are not solved."
+      "limitations": "Smoothing, relative component weights, finite jet lengths, pulsar radius/alpha, and field-star depths are display assumptions. At approximately1.4arcsec grid spacing, sigma0.5cell has about1.65arcsec FWHM, coarser than SITELLE seeing1.17\u00b10.04arcsec. The initial128cell/sigma1 prototype was replaced before completed visual qualification. Absorption/scattering, relativistic beaming, and time evolution are not solved."
+    },
+    {
+      "id": "extended-diffuse-emission",
+      "classification": "published-model",
+      "sourceIds": [
+        "temim-2024",
+        "dubner-2017"
+      ],
+      "quantity": "extended synchrotron morphology distinct from line-emitting ejecta and inner tori",
+      "value": {
+        "projectedLongAxisArcmin": 7.6,
+        "projectedShortAxisArcmin": 5.5,
+        "orientation": "SE-NW, approximately the pulsar jet axis"
+      },
+      "unit": "arcminutes",
+      "scope": "Main PWN; larger than the selected close optical/infrared footprints and current sampled field. X-rays are more compact than optical/IR and radio.",
+      "limitations": "Published projected morphology does not give continuum depth. The current RGB residual also includes dust, lines, NOX leakage and epoch mismatch; do not label all fitted residual synchrotron."
+    },
+    {
+      "id": "diffuse-fit-prior",
+      "classification": "authored",
+      "sourceIds": [
+        "temim-2024",
+        "dubner-2017",
+        "ng-romani-2004"
+      ],
+      "quantity": "bounded inferred diffuse-emission prior and image fit",
+      "value": {
+        "envelopeSemiAxesArcsec": [
+          185,
+          135,
+          135
+        ],
+        "orientation": "existing outer-torus axis",
+        "atomSigmaArcsec": 20,
+        "atomSpacingArcsec": 36,
+        "fitWidth": 128,
+        "iterations": 150,
+        "regularization": 0.015,
+        "maximumAtomCoefficient": 1.5,
+        "maximumEjectaGain": 8
+      },
+      "unit": "units named in keys",
+      "scope": "Current registered image coverage and existing sampled volume bounds only. Chandra retains the independent inner-wind baseline.",
+      "limitations": "Finite spherical 3D kernels occupy a fixed tilted ellipsoidal lattice; only full kernels contained in the inspected field are eligible. Nonnegative coefficients and one filament gain are fitted independently per lens. No point displacement, velocity change, photo extrusion or recovered continuum depth. Withheld image pixels test interpolation, not physical truth. The complete 7.6 arcmin PWN outskirts are outside this bounded reconstruction."
     }
   ],
   "implementationContract": [
