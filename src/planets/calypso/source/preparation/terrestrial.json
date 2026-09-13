@@ -59,11 +59,20 @@
       }
     ],
     "observedColors": [],
-    "mosaics": [
+    "surfaceObservations": [
       {
         "id": "normal",
         "format": "controlled-shape-camera",
         "consumer": "cassini-frames",
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+          "attribution": {
+            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/cassini/iss/"
+          }
+        },
         "frames": [
           {
             "id": "n1506184171_1",
@@ -79,7 +88,8 @@
               600.5,
               685
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1644755203_1",
@@ -95,7 +105,8 @@
               615.9,
               434
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1644756472_1",
@@ -111,7 +122,8 @@
               475.6,
               455.6
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           },
           {
             "id": "n1644756964_1",
@@ -127,28 +139,36 @@
               457.3,
               469.4
             ],
-            "pixelAngleMicroradians": 5.989697719921734
+            "pixelAngleMicroradians": 5.989697719921734,
+            "backgroundMaximum": 0.003
           }
         ],
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 64,
+          "minimumPairs": 64,
+          "maximumGain": 1.7,
+          "maximumAngleDegrees": 70
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 78
+        },
         "photometry": {
+          "model": "lunar-lambert",
           "weight": 0.5,
-          "maximumGain": 2.5,
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
           "maximumIncidenceDegrees": 80,
           "maximumEmissionDegrees": 78,
-          "displayMaximum": 1.05,
-          "gamma": 1,
-          "minimumLevel": 0.7,
-          "maximumLevel": 1.4,
-          "backgroundMaximum": 0.003
+          "maximumGain": 2.5
         },
-        "metadata": {
-          "label": "Monochrome",
-          "falseColor": false,
-          "coverage": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-          "attribution": {
-            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
-            "url": "https://pds-rings.seti.org/cassini/iss/"
-          }
+        "display": {
+          "displayRange": [
+            0,
+            1.12
+          ]
         }
       }
     ]
