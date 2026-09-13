@@ -61,6 +61,13 @@ compare before/after percentages only on a common, justified surface basis.
 
 ## Bind observations and validate cameras
 
+Apply detector distortion inside both the fit and its holdout ray checks, not
+only when drawing the final overlay. The shared limb-refinement helper accepts
+a fixed `pixelMapping` between detector and pinhole coordinates; Lucy diagnostics
+use the existing TAN-SIP forward/inverse mapping. Limb agreement alone does not
+establish rotational phase or internal terrain registration. Test the proposed
+orientation against another viewing angle and identifiable surface features.
+
 Record each observation's pinned bytes, calibration level, units, filter,
 acquisition time, pixel conventions, body frame and geometry's shape-model
 identity. Different epochs or bands need an explicit interpretation before

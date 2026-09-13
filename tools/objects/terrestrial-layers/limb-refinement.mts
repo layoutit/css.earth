@@ -15,7 +15,12 @@ import { parseArchivedCamera, parseLimbRefinement } from './source-records.mts';
  */
 export interface LimbCamera { schema: string; matrix: number[][]; rayMatrix: number[][]; positionKm: number[]; sunDirection: number[] }
 export interface LimbImage { width: number; height: number; planes: { IMAGE: ArrayLike<number> }; acceptPixel?(index: number): boolean }
-export interface LimbFrame extends LimbImage { camera: unknown }
+/** Fixed detector distortion. Pointing refinement rotates rays after this mapping. */
+export interface LimbPixelMapping {
+  toPinhole(x: number, y: number): readonly number[];
+  fromPinhole(x: number, y: number): readonly number[];
+}
+export interface LimbFrame extends LimbImage { camera: unknown; pixelMapping?: LimbPixelMapping }
 export interface LimbEdgePoint { x: number; y: number; normal: [number, number]; partition: 'fit' | 'holdout' }
 type Vec3 = [number, number, number];
 type Matrix3 = [Vec3, Vec3, Vec3];
@@ -159,8 +164,13 @@ interface Residual { residual: number; lit: boolean }
  * search from a terminator runs across the night side and meets the far limb
  * where the surface faces away from the Sun.
  */
-function limbResidual(point: LimbEdgePoint, camera: LimbCamera, mesh: SourceMesh, eye: readonly number[], sun: readonly number[], search: number, normals: readonly Vec3[]): Residual | null {
-  const ray = (s: number) => { const px = point.x + s * point.normal[0], py = point.y + s * point.normal[1]; return unit(apply(camera.rayMatrix, [px, py, 1])); };
+function limbResidual(point: LimbEdgePoint, camera: LimbCamera, mesh: SourceMesh, eye: readonly number[], sun: readonly number[], search: number, normals: readonly Vec3[], pixelMapping?: LimbPixelMapping): Residual | null {
+  const ray = (s: number) => {
+    const x = point.x + s * point.normal[0], y = point.y + s * point.normal[1];
+    const [px, py] = pixelMapping ? pixelMapping.toPinhole(x, y) : [x, y];
+    if (![px, py].every(Number.isFinite)) throw new Error('Invalid detector-to-pinhole pixel mapping.');
+    return unit(apply(camera.rayMatrix, [px, py, 1]));
+  };
   let lit = true;
   // The hit nearest the transition decides: the far limb reached from a terminator edge faces away from the Sun.
   const hits = (s: number) => { const hit = mesh.intersect(eye, ray(s)); if (hit) lit = dot(normals[hit.faceId], sun) > 0; return hit; };
@@ -185,7 +195,7 @@ export function refineCameraByLimb(frame: LimbFrame, mesh: SourceMesh, policy: u
   const points = observedLimb(frame, threshold, maximumPoints, thresholding.bodyMean, p.minimumSharpness ?? 0.15);
   const eye = original.positionKm.map(v => v * 1000), sun = original.sunDirection;
   const normals = mesh.indices.map(indices => { const [a, b, c] = indices.map(i => mesh.positions[i]); return unit(cross([b[0] - a[0], b[1] - a[1], b[2] - a[2]], [c[0] - a[0], c[1] - a[1], c[2] - a[2]])); });
-  const evaluate = (camera: LimbCamera, subset: LimbEdgePoint[], window = search) => subset.map(point => limbResidual(point, camera, mesh, eye, sun, window, normals));
+  const evaluate = (camera: LimbCamera, subset: LimbEdgePoint[], window = search) => subset.map(point => limbResidual(point, camera, mesh, eye, sun, window, normals, frame.pixelMapping));
   // Limb edges all sit at the pointing error from their predicted limb, while terminator and shadow edges spread out to
   // the far limb: the smallest window that matches enough edges is dominated by the limb. Unlit matches never enter.
   // Grow the window until enough edges match and the count plateaus: limb edges arrive together once the window
@@ -212,7 +222,12 @@ export function refineCameraByLimb(frame: LimbFrame, mesh: SourceMesh, policy: u
   // Levenberg-Marquardt on the rotation vector with numeric derivatives and a Huber cost, then a robust re-fit
   // without the outliers. Steps are capped at the match window so a poor derivative cannot throw the limb away.
   let omega: Vec3 = [0, 0, 0], active = fitPoints, camera = original;
-  const midRay = unit(apply(original.rayMatrix, [(frame.width - 1) / 2, (frame.height - 1) / 2, 1])), nextRay = unit(apply(original.rayMatrix, [(frame.width + 1) / 2, (frame.height - 1) / 2, 1]));
+  const nativeRay = (x: number, y: number) => {
+    const [px, py] = frame.pixelMapping ? frame.pixelMapping.toPinhole(x, y) : [x, y];
+    if (![px, py].every(Number.isFinite)) throw new Error('Invalid detector-to-pinhole pixel mapping.');
+    return unit(apply(original.rayMatrix, [px, py, 1]));
+  };
+  const midRay = nativeRay((frame.width - 1) / 2, (frame.height - 1) / 2), nextRay = nativeRay((frame.width + 1) / 2, (frame.height - 1) / 2);
   const radiansPerPixel = Math.acos(Math.max(-1, Math.min(1, dot(midRay, nextRay)))), delta = 0.5 * radiansPerPixel;
   const huber = (residuals: (Residual | null)[], scale: number) => residuals.reduce((sum, r) => { if (!r) return sum + scale * scale; const a = Math.abs(r.residual); return sum + (a <= scale ? 0.5 * a * a : scale * (a - 0.5 * scale)); }, 0);
   let scale = Math.max(1, window / 4);
@@ -266,13 +281,16 @@ export function refineCameraByLimb(frame: LimbFrame, mesh: SourceMesh, policy: u
   const holdoutMatched = after.holdout.count / Math.max(1, holdoutPoints.length);
   const correctionDegrees = Math.hypot(...omega) * 180 / Math.PI;
   // The boresight shift in pixels: the original centre ray, projected through the refined camera.
-  const centre = [(frame.width - 1) / 2, (frame.height - 1) / 2], centreRay = unit(apply(original.rayMatrix, [centre[0], centre[1], 1]));
+  const centre = [(frame.width - 1) / 2, (frame.height - 1) / 2], centreRay = nativeRay(centre[0], centre[1]);
   const rangeKm = Math.hypot(...original.positionKm), far = original.positionKm.map((v, k) => v + centreRay[k] * rangeKm);
-  const h = camera.matrix.map(row => dot(row, far) + row[3]), shift = Math.hypot(h[0] / h[2] - centre[0], h[1] / h[2] - centre[1]);
+  const h = camera.matrix.map(row => dot(row, far) + row[3]);
+  const shifted = frame.pixelMapping ? frame.pixelMapping.fromPinhole(h[0] / h[2], h[1] / h[2]) : [h[0] / h[2], h[1] / h[2]];
+  if (![shifted[0], shifted[1]].every(Number.isFinite)) throw new Error('Invalid pinhole-to-detector pixel mapping.');
+  const shift = Math.hypot(shifted[0] - centre[0], shifted[1] - centre[1]);
   if (correctionDegrees > p.maximumCorrectionDegrees) throw new Error(`Limb refinement of ${correctionDegrees.toFixed(4)}° exceeds the ${p.maximumCorrectionDegrees}° budget.`);
   // A fit that settled on stray edges leaves most genuine holdout edges unmatched; three in five must lie within the final window.
   if (after.holdout.rmsPixels > p.maximumResidualPixels || after.holdout.count < p.minimumControls || holdoutMatched < 0.6) throw new Error(`Limb refinement leaves ${after.holdout.rmsPixels.toFixed(3)} px RMS on ${after.holdout.count} of ${holdoutPoints.length} holdout points within ${finalWindow} px; budget ${p.maximumResidualPixels} px on at least 60% of them.`);
-  const report = { method: p.method, threshold, matchWindowPixels: window, finalWindowPixels: finalWindow, holdoutMatchedFraction: holdoutMatched, thresholding: { declared: p.threshold !== undefined, otsuSplit: thresholding.split, backgroundMedian: thresholding.backgroundMedian, backgroundSigma: thresholding.backgroundSigma, bodyMean: thresholding.bodyMean, minimumSharpness: p.minimumSharpness ?? 0.15 }, searchPixels: search,
+  const report = { method: p.method, ...(frame.pixelMapping ? { pixelCoordinates: 'native detector; fixed distortion applied before ray rotation' } : {}), threshold, matchWindowPixels: window, finalWindowPixels: finalWindow, holdoutMatchedFraction: holdoutMatched, thresholding: { declared: p.threshold !== undefined, otsuSplit: thresholding.split, backgroundMedian: thresholding.backgroundMedian, backgroundSigma: thresholding.backgroundSigma, bodyMean: thresholding.bodyMean, minimumSharpness: p.minimumSharpness ?? 0.15 }, searchPixels: search,
     edgePoints: { found: points.length, lit: usable.length, fit: fitPoints.length, holdout: holdoutPoints.length, retained: active.length, unlitOrUnmatched: points.length - usable.length },
     correction: { rotationVectorMicroradians: omega.map(v => v * 1e6), degrees: correctionDegrees, boresightShiftPixels: shift },
     residuals: { before, after }, budget: { maximumCorrectionDegrees: p.maximumCorrectionDegrees, maximumResidualPixels: p.maximumResidualPixels, minimumControls: p.minimumControls },
