@@ -113,7 +113,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
             input?.setAttribute('aria-label', `Explore ${object.name}`);
             // Anchors expose their resolved origin and path: ~500 menu links need no URL parse.
             for (const anchor of documentTarget.querySelectorAll<HTMLAnchorElement>('a.planet-object-link')) {
-              const selected = anchor.origin === windowTarget.location.origin && anchor.pathname === object.route;
+              const selected = !anchor.hasAttribute('data-prepared-focus-id') && anchor.origin === windowTarget.location.origin && anchor.pathname === object.route;
               if (selected) anchor.setAttribute('aria-current', 'page');
               else if (anchor.getAttribute('aria-current') === 'page') anchor.removeAttribute('aria-current');
               anchor.classList.toggle('is-active', selected);
