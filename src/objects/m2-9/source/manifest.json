@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "hst-optical",
+      "path": ".local/nebula-lab/research/wenger/m2-9-original.jpg",
+      "origin": "https://apod.nasa.gov/apod/ap040201.html",
+      "sourceUrl": "https://apod.nasa.gov/apod/ap040201.html",
+      "title": "Twin Jet Nebula · accepted APOD edition",
+      "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
+      "displayCredit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "expectedSha256": "29b1575bff3bb8dbbe8cb9934ef214676c98d49fcf488df488576e3723049e71",
+      "expectedBytes": 172547,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hubble-opo9738a",
+            "role": "material",
+            "evidence": "src/objects/m2-9/source/image-frame.json#/acceptedImage"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "hst-optical",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://esahubble.org/images/opo9738a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "image-frame",
+      "path": "src/objects/m2-9/source/image-frame.json",
+      "origin": "https://arxiv.org/html/2411.03825v1",
+      "sourceUrl": "https://arxiv.org/html/2411.03825v1",
+      "title": "M2–9 angular frame and adopted distance",
+      "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
+      "expectedSha256": "03b7bfa303f1776503301524fa6b24a57df4fd23d91dfbba9d355acbab4d8a14",
+      "expectedBytes": 5899,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "sanchez-contreras-2024",
+            "role": "method",
+            "evidence": "src/objects/m2-9/source/image-frame.json: /references"
+          },
+          {
+            "catalogueId": "corradi-2011",
+            "role": "method",
+            "evidence": "src/objects/m2-9/source/image-frame.json: /references"
+          },
+          {
+            "catalogueId": "hubble-opo9738a",
+            "role": "reference",
+            "evidence": "src/objects/m2-9/source/image-frame.json: publisherImage and WCS; angular registration transferred between editions of the same photograph"
+          }
+        ]
+      },
+      "dependencies": []
+    }
+  ],
+  "documents": [
+    {
+      "id": "document-1",
+      "path": "src/objects/m2-9/source/delivery.json",
+      "expectedSha256": "b4c999b140798a2e00b20d61f62d9e1c0eca1273d178b7230cbba7c8667f279d",
+      "expectedBytes": 1156,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/m2-9/source/image-frame.json",
+      "expectedSha256": "03b7bfa303f1776503301524fa6b24a57df4fd23d91dfbba9d355acbab4d8a14",
+      "expectedBytes": 5899,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/m2-9/source/nebula.json",
+      "expectedSha256": "4d0b89b73a17c7a7451848a9326edf47d8894b1b5a70b2ee7d058327e258d88f",
+      "expectedBytes": 2125,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/m2-9/source/presentation.json",
+      "expectedSha256": "881664089c3242281f6989a014efa070ed10dd9d5f30ee7c0fbb8e14d21f187c",
+      "expectedBytes": 2297,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

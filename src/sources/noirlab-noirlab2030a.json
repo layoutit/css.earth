@@ -1,0 +1,37 @@
+{
+  "id": "noirlab-noirlab2030a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "LMC SMASH mosaic · NOIRLab noirlab2030a",
+  "identifiers": [
+    {
+      "type": "NOIRLab image",
+      "value": "noirlab2030a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://noirlab.edu/public/images/noirlab2030a/",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/lmc/particles/source/provenance.json",
+      "revision": "ab1967ed45fe7ad670cc5eaa4e892789a04f01f3",
+      "sha256": "024cbd58275980986b15b6204e4fa9257d1e367271f88b918d4e61c7d4c4a7a8",
+      "locator": "/photo"
+    }
+  ],
+  "publisher": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+      "scope": "Published source",
+      "evidence": "labs/nebula/models/lmc/particles/source/provenance.json#/photo"
+    }
+  ]
+}

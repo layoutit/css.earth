@@ -156,6 +156,43 @@ test('unresolved catalogue points fade away without changing prepared resolved s
   runtime.destroy();
 });
 
+test('distant prepared images suspend the retained slice renderer and hand off by projected size', () => {
+  const f = dom(), original = payload(), lens = original.lenses[0]!;
+  const directions = [
+    { id: 'front', back: [0, 0, 1] as const, right: [1, 0, 0] as const, down: [0, -1, 0] as const },
+    { id: 'back', back: [0, 0, -1] as const, right: [-1, 0, 0] as const, down: [0, -1, 0] as const },
+    { id: 'right', back: [1, 0, 0] as const, right: [0, 0, -1] as const, down: [0, -1, 0] as const },
+    { id: 'left', back: [-1, 0, 0] as const, right: [0, 0, 1] as const, down: [0, -1, 0] as const },
+  ];
+  const impostors = { schema: 'cssearth-volume-impostors@1' as const, radiusUnits: 1,
+    fullBelowDiameterPixels: 16, volumeAboveDiameterPixels: 32,
+    views: directions.map(view => ({ ...view, texturePath: `${view.id}.png` })) };
+  const data = { ...original, lenses: [{ ...lens, volume: { ...lens.volume, impostors,
+    resources: [...lens.volume.resources, ...impostors.views.map(view => ({ path: view.texturePath, sha256: 'b'.repeat(64), bytes: 1, width: 1, height: 1 }))] } }] };
+  const runtime = createPreparedVolumeLenses({ payload: data, resolveResource: path => `/prepared/${path}` }).mount(f.options);
+  const root = runtime.root as unknown as FakeElement, initial = descendants(root);
+  const detail = initial.find(node => node.className === 'css-volume-detail')!;
+  const distant = initial.find(node => node.className === 'css-volume-impostors')!;
+  const scenes = initial.filter(node => node.className === 'css-volume-scene');
+  runtime.publish(publication(100));
+  expect(detail.style.display).toBe('none'); expect(distant.style.display).toBe('block');
+  expect(distant.dataset.activeViews).toBe('1');
+  const inactiveTransforms = scenes.map(scene => scene.style.transform);
+  runtime.publish(publication(50));
+  expect(scenes.map(scene => scene.style.transform)).toEqual(inactiveTransforms);
+  runtime.publish(publication(200 / 24));
+  expect(detail.style.display).toBe('block'); expect(distant.style.display).toBe('block');
+  expect(Number(distant.style.opacity)).toBeCloseTo(.5);
+  expect(Number(detail.style.opacity)).toBeCloseTo(.5 * .8 * .9);
+  runtime.publish(publication(4));
+  expect(distant.style.display).toBe('none'); expect(detail.style.display).toBe('block');
+  const visibleTransforms = scenes.map(scene => scene.style.transform);
+  runtime.publish(publication(100));
+  expect(scenes.map(scene => scene.style.transform)).toEqual(visibleTransforms);
+  expect(descendants(root)).toEqual(initial);
+  runtime.destroy(); expect(f.host.children).toEqual([f.before]);
+});
+
 test('saved star visibility stays toggleable with retained points and committed lens subscriptions', () => {
   const f = dom(), prepared = createPreparedVolumeLenses({ payload: { ...payload(), starsEnabled: false }, resolveResource: path => `/prepared/${path}` });
   const runtime = prepared.mount(f.options), root = runtime.root as unknown as FakeElement;
@@ -218,4 +255,25 @@ test('generic descriptor loader verifies pinned bytes, wrapper identity and all 
   const drift = { ...f.descriptor, properties: { ...f.descriptor.properties, frame: { ...frame, originM: [1, 0, 0] } } };
   await expect(loadPreparedVolumeLenses(drift, { read })).rejects.toThrow('identity/frame');
   await expect(loadPreparedVolumeLenses({ ...f.descriptor, id: 'different' }, { read })).rejects.toThrow('identity');
+});
+
+test('angular compact-light footprints zoom and change lens material without changing their positions or nodes', () => {
+  const f = dom(), initial = points();
+  const angular = { ...initial, points: initial.points.map(point => ({ ...point, diameterUnits: .2 })) };
+  const mount = mountPreparedCataloguePoints({ ...f.options, payload: angular });
+  const root = mount.root as unknown as FakeElement, nodes = [...root.children];
+  mount.publish(publication(10)); expect(nodes[0].style.width).toBe('2px');
+  mount.publish(publication(5)); expect(nodes[0].style.width).toBe('4px');
+  const center = nodes[0].style.transform;
+  mount.setPresentation({ ...angular, points: angular.points.map(point => ({ ...point, colorCss: '#ff1100', opacity: .1 })) });
+  expect(root.children).toEqual(nodes); expect(nodes[0].style.transform).toBe(center);
+  expect(nodes[0].style.background).toBe('#ff1100'); expect(nodes[0].style.opacity).toBe('0.1');
+  expect(() => validatePreparedCataloguePoints({ ...angular, points: [{ ...angular.points[0], diameterUnits: NaN }] })).toThrow();
+  mount.destroy();
+});
+
+test('nearby volume visibility is explicit and rejects unknown policies', () => {
+  expect(validatePreparedVolumeLenses({ ...payload(), contextVisibility: 'independent' }).contextVisibility).toBe('independent');
+  expect(validatePreparedVolumeLenses(payload()).contextVisibility).toBe('galactic');
+  expect(() => validatePreparedVolumeLenses({ ...payload(), contextVisibility: 'maybe' })).toThrow();
 });

@@ -370,6 +370,9 @@ test('overview and detail tabs keep independent selections and keyboard focus ac
     assert.equal(overviewTabs[2].getAttribute('aria-selected'), 'true');
     assert.equal(search.value, 'my search');
   }
+  overviewTabs[1].hidden = true;
+  overviewTabs[0].focus(); key('ArrowRight');
+  assert.equal(f.documentTarget.activeElement, overviewTabs[2], 'Tabs hidden after mount are skipped by the shared keyboard control');
   shell.destroy();
   assert.equal(listeners.size, 0);
   assert.ok([...overviewTabs, datasetTab, factsTab].every(tab => tab.listeners.size === 0));

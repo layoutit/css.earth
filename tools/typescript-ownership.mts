@@ -87,8 +87,12 @@ function boundaryRoleFor(path: string): BoundaryRole | undefined {
   if (/\.(?:test|spec)\.[cm]?[jt]sx?$/u.test(path) || path.startsWith('site/test/')
     || /^src\/(?:[^/]+\/)*test\//u.test(path)
     || path.startsWith('tests/') || /(?:^|\/)(?:__fixtures__|fixtures)(?:\/|$)/u.test(path)) return 'test';
+  // This exact namespace combines observation signals; it is authored processing,
+  // not an external evidence harness. Keep checking its descendants for real
+  // capture/evidence boundaries, and leave similarly named owners unchanged.
+  const rolePath = path.replace(/^labs\/nebula\/src\/reconstruction\/evidence-fusion\//u, 'labs/nebula/src/reconstruction/');
   // Audits and external-oracle comparisons produce evidence; they may use test harnesses.
-  if (path.startsWith('tools/audits/') || path.startsWith('tools/oracles/') || /(?:^|\/)(?:capture|captures|evidence)(?:[./_-]|$)/u.test(path)) return 'evidence';
+  if (path.startsWith('tools/audits/') || path.startsWith('tools/oracles/') || /(?:^|\/)(?:capture|captures|evidence)(?:[./_-]|$)/u.test(rolePath)) return 'evidence';
   return undefined;
 }
 
