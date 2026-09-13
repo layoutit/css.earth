@@ -1,3 +1,3 @@
 import {test} from 'node:test';
 import {assertAsteroidPackage} from '../asteroid-contract.mts';
-test('Toutatis retains its source shape, native raster triangles and physical context',()=>assertAsteroidPackage('toutatis',['shape'],1224));
+test('Toutatis retains its source shape, photo projection, native raster triangles and physical context',()=>assertAsteroidPackage('toutatis',['shape','chang-e-2'],1224));
