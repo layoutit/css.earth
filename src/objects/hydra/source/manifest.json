@@ -112,7 +112,7 @@
       "licenseEvidence": [
         "../../../../LICENSE"
       ],
-      "acquisition": "Checked-in 64\u00d732 RGB raster; every channel160. This exact no-data representation is specified in measurements.json.",
+      "acquisition": "Checked-in 64×32 RGB raster; every channel160. This exact no-data representation is specified in measurements.json.",
       "redistribution": "MIT display representation; preserve no-data status and source-shape attribution.",
       "consumers": [
         "surfaces"
@@ -504,8 +504,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3666,
-      "expectedSha256": "5e4d6692114eb03f0372077daf6ef5fe159f1a400f94f243077bcfe7940cb3b1"
+      "expectedBytes": 3621,
+      "expectedSha256": "37961fe127adb95b91c7729421731b84b636e2a08e781f76722ed8e5f84b82fc"
     },
     {
       "path": "presentation/minimap.json",
