@@ -93,7 +93,7 @@ The astronomy package already owns the moon's Saturn-relative orbital elements. 
 
 - **Not added as duplicate lenses:** individual clear-filter photographs of the same terrain. They contribute to one Monochrome map.
 
-- **Excluded frame:** `N1630068448_1`. On the lit body its calibrated I/F has a median of 0.046 at 23° phase, a third or less of the 0.14–0.27 measured in the other six clear-filter frames at 39–90° phase, although a lower phase should look brighter. No level between frames reconciles it: with it, Monochrome showed a dark region with bright seams. The 7% of covered area it supplied now shows the missing-coverage grid.
+Cassini frame `N1630068448_1` is not used. On the lit body its calibrated I/F has a median of 0.046 at 23° phase, a third or less of the 0.14–0.27 measured in the other six clear-filter frames at 39–90° phase, although a lower phase should look brighter. No level between frames reconciles it: with it, Monochrome showed a dark region with bright seams. The 7% of covered area it supplied now shows the missing-coverage grid.
 
 
 - **Facts:** [NASA Janus](https://science.nasa.gov/saturn/moons/janus/) and [JPL physical parameters](https://ssd.jpl.nasa.gov/sats/phys_par/). No substantial atmosphere or cutaway is claimed.
