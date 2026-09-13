@@ -46,12 +46,12 @@ export interface LensSource {
 export interface LensRecipe {
   id: string;
   label: string;
-  detail?: string;
   shortLabel?: string;
-  description: string;
-  summary?: string;
+  /** Maintainer notes about the dataset. They are never published; reader text lives in content/text.json. */
+  notes?: string;
+  /** The prepared surface marks missing observations with the shared no-data grid. */
+  noData?: boolean;
   facts?: Array<{ id: string; label: string; value: string }>;
-  title: string;
   filter?: string;
   qualification?: string;
   falseColor?: boolean;
@@ -100,7 +100,6 @@ export interface ObjectContentSource {
   displayName: string;
   title: TitleSource;
   panel: {
-    introduction: string;
     facts: Fact[];
     moreFacts?: Fact[];
   };
@@ -142,6 +141,7 @@ export interface PreparedObjectContent {
     renderPathOffsetY: number;
   };
   introduction: string;
+  datasets: PreparedDatasetTexts;
   facts: ObjectContentSource["panel"]["facts"];
   moreFacts: NonNullable<ObjectContentSource["panel"]["moreFacts"]>;
   lenses: {
@@ -166,8 +166,12 @@ export interface PreparedRasterAssets {
   interior?: Record<string, unknown>;
 }
 
+/** Reader text for each dataset, keyed by lens id; the only prepared copy of dataset prose. */
+export type PreparedDatasetTexts = Readonly<Record<string, { readonly title: string; readonly detail?: string; readonly summary: string }>>;
+
 export interface ContentPreparationConfig {
   contentPath?: string;
+  textPath?: string;
   assetsPath?: string;
   chartsPath?: string;
 }
@@ -195,6 +199,7 @@ export interface PreparedObjectContentDocument {
   objectId: string;
   title: PreparedObjectContent["title"];
   introduction: string;
+  datasets: PreparedDatasetTexts;
   facts: PreparedObjectContent["facts"];
   moreFacts: PreparedObjectContent["moreFacts"];
   charts: PreparedObjectContent["charts"];

@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "amalthea",
+  "card": {
+    "text": "Explore Amalthea with Galileo imagery and its source-backed irregular shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/jupiter/jupiter-moons/amalthea/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Amalthea is Jupiter’s largest inner moon, an elongated, reddish world with giant craters and bright patches. Dust escaping its low-gravity surface helps form Jupiter’s faint gossamer ring.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/jupiter/jupiter-moons/amalthea/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "SSI mosaic",
+      "detail": "Galileo",
+      "summary": "Surface brightness is adjusted to reduce photographed shading. Detail varies; the gray grid marks missing or unreliable images."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Radial shape",
+      "summary": "Height from a Voyager model, relative to an 83.5 km sphere. Unseen terrain and small features are uncertain."
+    }
+  }
+}

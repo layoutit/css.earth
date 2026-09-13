@@ -449,8 +449,8 @@
     {
       "id": "ariel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 8184,
-      "expectedSha256": "f353330cd8626bf91a855035e348c881104be918e8faab51889937b3036c9194",
+      "expectedBytes": 7555,
+      "expectedSha256": "905f3658fa3abf655a1640e164d4e05889586cb782a4f912990ed2f7bb9ac690",
       "origin": "Repository-authored Ariel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -462,7 +462,26 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "ariel-object-text",
+      "path": "content/text.json",
+      "expectedBytes": 1396,
+      "expectedSha256": "e71ceeedff65b285586da7603c2dfdd2d1d2597e554ae9005442092fc27935a0",
+      "origin": "Repository-authored Ariel reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     }
   ],

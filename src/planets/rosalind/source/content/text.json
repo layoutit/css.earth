@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "rosalind",
+  "card": {
+    "text": "Explore Rosalind, an inner moon of Uranus, through its measured shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/rosalind/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Rosalind is a small inner moon of Uranus discovered by Voyager 2. Its measured outline is consistent with a nearly spherical body.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/rosalind/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Measured shape",
+      "summary": "A published 72 km spherical shape estimate. The grid marks missing imagery; local terrain is unresolved."
+    }
+  }
+}

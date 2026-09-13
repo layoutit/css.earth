@@ -4,7 +4,6 @@
   "id": "comet-c1973-e1",
   "displayName": "Kohoutek",
   "panel": {
-    "introduction": "Kohoutek passed close to the Sun in late 1973. It is now travelling outward into the distant Solar System.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "C/1973 E1 Kohoutek",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-c1973-e1/comet-c1973-e1-model-thumbnail.webp",
         "surface": "comet-c1973-e1-model-surface@2x.webp",
         "poles": "comet-c1973-e1-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "0.159 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

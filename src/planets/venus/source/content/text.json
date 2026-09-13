@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "venus",
+  "card": {
+    "text": "Explore Venus in 3D with cssEarth. Look beneath its clouds, discover its volcanic surface, and learn about the hottest planet in our solar system.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/venus/facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Venus is the second planet from the Sun and our closest planetary neighbor. It is the hottest planet in the solar system, often called Earth's twin.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/venus/facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "clouds": {
+      "title": "Cloud illustration",
+      "detail": "Illustration",
+      "summary": "The cloud deck is illustrated with a texture from OpenSpace. Its original camera, wavelength and processing are unknown."
+    },
+    "radar": {
+      "title": "C3-MDIR synthetic-color radar mosaic",
+      "detail": "Radar mosaic",
+      "summary": "Radar images map the ground beneath the clouds. The added colors do not represent the surface as a person would see it."
+    },
+    "elevation": {
+      "title": "C3-MDIR colorized topography",
+      "detail": "Shaded relief",
+      "summary": "Colors show elevation and shading reveals slopes. The map describes terrain beneath the clouds, not visible surface color."
+    }
+  }
+}

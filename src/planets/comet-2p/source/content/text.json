@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comet-2p",
+  "card": {
+    "text": "Explore 2P/Encke through a shape approximation constrained by radar observations.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://doi.org/10.1016/j.icarus.2005.01.012",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Encke returns to the Sun roughly every 3.3 years. Radar echoes and infrared measurements suggest a long, narrow nucleus, though its tumbling motion makes the exact shape uncertain.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://doi.org/10.1016/j.icarus.2005.01.012",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Radar and infrared model",
+      "detail": "Arecibo",
+      "summary": "This smooth model follows one published radar and infrared solution for Encke. Its shape depends on the assumed tumbling motion. The grid marks absent surface photographs; the orientation is illustrative."
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "6829a99a676647a5bcade6778244f194556e45ca14962e759b6ec11a619b78dc"
+    "sha256": "42f40682925942fa41fda358e1e37681a477d55bf0db09d832e3638a015c4cf3"
   },
   "id": "callisto",
   "properties": {
@@ -113,7 +113,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "738d0e5ba469fc6423d8e5c4dce18a31bb9fcd8267f93b8fcfdb3945fa111195"
+          "sha256": "476b0270ae1e908854c1e8c60fd111917f0c83a1a90d8090d10289793e799a69"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "16b8f1755c7bea9e2fed633eaaaeaa367f0a57fcf8b25f9a941a39b6412c1016"
         },
         {
           "id": "solar-system",
@@ -152,7 +157,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9bb52528b227198982e066fbea3b1a2b2b6a452c35124894c81bf9e0c6345533"
+        "sha256": "17ccd54ad45928cc891dcbe22bf153f5e04fafe239f7d17e6a1361eb13233a92"
       }
     },
     "catalog": {

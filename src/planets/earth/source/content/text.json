@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "earth",
+  "card": {
+    "text": "Explore Earth in 3D with cssEarth. Orbit our home planet, discover its surface and atmosphere, and browse scientific facts in your browser.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/earth/facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Earth (our home planet) is the third planet from the Sun, and the fifth largest planet. It’s the only place we know of inhabited by living things.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/earth/facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "Blue Marble Next Generation",
+      "detail": "NASA · July 2004",
+      "summary": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic with brighter display midtones."
+    },
+    "clouds": {
+      "title": "Blue Marble cloud composite",
+      "detail": "NASA · archival",
+      "summary": "Archival NASA clouds over a brighter July 2004 surface mosaic. This is not live weather."
+    },
+    "topography": {
+      "title": "GEBCO land and seafloor heights",
+      "detail": "GEBCO · 2026",
+      "summary": "GEBCO_2026 modeled terrain. Colors show height and depth relative to mean sea level; ocean depths include estimates."
+    },
+    "night-lights": {
+      "title": "Black Marble annual night lights · 2025",
+      "detail": "NASA · 2025",
+      "summary": "2025 annual snow-free satellite radiance. Warm false color; logarithmic scale. Gray: missing data or outside 75°N–65°S. Aurora can remain at high latitudes. NASA Black Marble / Jurij Stare, lightpollutionmap.info."
+    },
+    "enso": {
+      "title": "ENSO: sea-surface temperature anomalies · 7 Sept 2026",
+      "detail": "7 Sept 2026",
+      "summary": "NASA MUR · 1 km source imagery · 7 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+    },
+    "cross-section": {
+      "title": "Interior structure model",
+      "detail": "Structure",
+      "summary": "A cut through Earth’s crust, rocky mantle, liquid outer core and solid inner core. Layer sizes follow the NASA Science model; colors are schematic."
+    },
+    "mantle-tomography": {
+      "title": "GLAD-M35 mantle tomography",
+      "detail": "GLAD-M35 · 2024",
+      "summary": "Red and blue map slower and faster mantle waves relative to the mean at each depth. This is not temperature. Crust and core colors are schematic; gray marks depths outside the model."
+    }
+  }
+}

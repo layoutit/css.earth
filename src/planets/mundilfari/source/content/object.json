@@ -4,7 +4,6 @@
   "id": "mundilfari",
   "displayName": "Mundilfari",
   "panel": {
-    "introduction": "A roughly nine-hour Cassini sequence provided Mundilfari’s elongation constraint and 6.74-hour rotation estimate. This ellipsoid uses assumed polar depth and orientation. The grid marks unmapped terrain.",
     "facts": [
       {
         "id": "diameter",
@@ -55,9 +54,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Approximate ellipsoid adopting minimum equatorial ratio 1.43:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
-        "title": "Light-curve shape approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/mundilfari/mundilfari-model-thumbnail.webp",
         "surface": "mundilfari-model-surface@2x.webp",
         "poles": "mundilfari-model-poles@2x.webp",
@@ -65,7 +61,9 @@
           "id": "lightcurve-approximation",
           "path": "../manifest.json",
           "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
-        }
+        },
+        "notes": "Approximate ellipsoid adopting minimum equatorial ratio 1.43:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+        "noData": true
       }
     ]
   },

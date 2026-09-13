@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "europa",
+  "card": {
+    "text": "Explore Europa in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s fractured icy moon and its orbit around Jupiter.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/jupiter/jupiter-moons/europa/europa-facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Europa is an icy moon of Jupiter. Its fractured surface and magnetic signature provide strong evidence for a salty ocean beneath the ice.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/jupiter/jupiter-moons/europa/europa-facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "Global image mosaic",
+      "detail": "Global mosaic",
+      "summary": "Source detail ranges from 200 m to 20 km per pixel. Photographed shadows remain; the gray grid marks missing imagery."
+    },
+    "enhanced": {
+      "title": "SSI enhanced-color mosaic",
+      "detail": "Color mosaic",
+      "summary": "Enhanced colors are combined with monochrome detail. Where color is unavailable, gray imagery remains; the grid marks gaps in both."
+    },
+    "elevation": {
+      "title": "Agenor Linea stereo terrain model",
+      "detail": "Agenor · relative",
+      "summary": "Agenor Linea only, near 142°E and 44°S. Colors encode the released local stereo heights in meters; their relative datum is not a global reference level. Effective detail is about 3 km. Fixed northwest cartographic relief shows slopes; it is not part of the numeric scale. Gray grid preserves the DTM’s finite/no-data footprint. The archive’s duplicated, cubic-resampled quality products are excluded; colors imply no quality class or pointwise accuracy."
+    },
+    "geology": {
+      "title": "USGS global geology (2024 SIM 3513)",
+      "detail": "Mapped units",
+      "summary": "USGS interpreted regional plains, bands, chaos terrains and crater deposits (2024; 1:15,000,000). Colors identify map units, not measured surface color. Gray grid marks no-data polygons. Fine line and point features are not represented by this polygon view."
+    },
+    "infrared": {
+      "title": "Galileo NIMS spectral color",
+      "detail": "NIMS spectral bands",
+      "summary": "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band."
+    }
+  }
+}

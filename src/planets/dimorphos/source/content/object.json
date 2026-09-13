@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Dimorphos is the small moon of Didymos that NASA’s DART spacecraft struck in September 2022. This view preserves its encounter-era shape, reconstructed from DRACO and LICIACube images. DART changed its orbit and shape; this surface is not a model of the altered asteroid.",
     "facts": [
       {
         "id": "radius",
@@ -53,8 +52,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "The shared grid marks unavailable surface imagery over the released DART v004 global shape. DRACO and LICIACube observations constrain different regions; the closed mesh also contains modeled terrain. It represents the encounter-era body, not a measured post-impact surface. Lighting uses an arbitrary display phase about the observed pole; no photographic texture or albedo is shown.",
-        "title": "SPC shape model v004",
         "thumbnail": "/scenes/dimorphos/dimorphos-shape-thumbnail.webp",
         "surface": "dimorphos-shape-surface@2x.webp",
         "poles": "dimorphos-shape-surface@2x.webp",
@@ -63,14 +60,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "DART encounter shape",
-        "summary": "Shape from DART and LICIACube encounter images, including modeled terrain. It is not a post-impact map."
+        "notes": "The shared grid marks unavailable surface imagery over the released DART v004 global shape. DRACO and LICIACube observations constrain different regions; the closed mesh also contains modeled terrain. It represents the encounter-era body, not a measured post-impact surface. Lighting uses an arbitrary display phase about the observed pole; no photographic texture or albedo is shown.",
+        "noData": true
       },
       {
         "id": "draco",
         "label": "DRACO mosaic",
-        "description": "Four DRACO frames from 11 to 1.8 seconds before impact. Closer qualified footprints take precedence; the unseen surface keeps the grid. Each image is registered through its archived geometry and checked against the source shape. Brightness is approximately disk-normalized and matched over shared surface patches; shadows remain in the photographs. This is not measured albedo or a post-impact surface.",
-        "title": "DART approach photographs",
         "thumbnail": "/scenes/dimorphos/dimorphos-draco-thumbnail.webp",
         "surface": "dimorphos-draco-surface@2x.webp",
         "poles": "dimorphos-draco-poles@2x.webp",
@@ -80,7 +75,6 @@
           "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/"
         },
         "falseColor": false,
-        "detail": "DRACO · DART",
         "facts": [
           {
             "id": "observed",
@@ -98,13 +92,12 @@
             "value": "None · panchromatic"
           }
         ],
-        "summary": "Four DRACO frames from 11 to 1.8 seconds before impact, using closer qualified detail where available. Brightness is approximately normalized; photographed shadows remain. Grid marks unobserved or rejected areas."
+        "notes": "Four DRACO frames from 11 to 1.8 seconds before impact. Closer qualified footprints take precedence; the unseen surface keeps the grid. Each image is registered through its archived geometry and checked against the source shape. Brightness is approximately disk-normalized and matched over shared surface patches; shadows remain in the photographs. This is not measured albedo or a post-impact surface.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows source-mesh radius minus a 75 m reference sphere, including the overall flattened shape. It is not height above an equipotential or a map of impact-induced change. Terrain coverage and precision follow the published encounter model. Cartographic relief and optional Sun lighting are display treatments.",
-        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/dimorphos/dimorphos-elevation-thumbnail.webp",
         "surface": "dimorphos-elevation-surface@2x.webp",
         "poles": "dimorphos-elevation-surface@2x.webp",
@@ -126,15 +119,11 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_obj_0000n00000_v004.xml",
           "image": "/scenes/dimorphos/dimorphos-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height",
-        "summary": "Encounter-model height relative to a 75 m sphere. It shows the overall shape, not impact-induced changes."
+        "notes": "Color shows source-mesh radius minus a 75 m reference sphere, including the overall flattened shape. It is not height above an equipotential or a map of impact-induced change. Terrain coverage and precision follow the published encounter model. Cartographic relief and optional Sun lighting are display treatments."
       },
       {
         "id": "albedo",
         "label": "Relative albedo",
-        "detail": "DART surface brightness",
-        "description": "Grayscale shows relative surface brightness from the DART v004 stereophotoclinometry model of the encounter-facing surface before impact. Values are modeled relative albedo, not absolute geometric albedo or a photograph. Facets with positive multi-image uncertainty cover about 31% of the source model area; the ordinary grid marks withheld coverage. Linear display scale: 0.45–1.30.",
-        "title": "SPC relative albedo model",
         "thumbnail": "/scenes/dimorphos/dimorphos-albedo-thumbnail.webp",
         "surface": "dimorphos-albedo-surface@2x.webp",
         "poles": "dimorphos-albedo-surface@2x.webp",
@@ -156,14 +145,12 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
           "image": "/scenes/dimorphos/dimorphos-albedo-legend.webp"
         },
-        "summary": "Grayscale shows modeled brightness before impact, not absolute albedo. Accepted facets cover about 31%; the grid marks the rest."
+        "notes": "Grayscale shows relative surface brightness from the DART v004 stereophotoclinometry model of the encounter-facing surface before impact. Values are modeled relative albedo, not absolute geometric albedo or a photograph. Facets with positive multi-image uncertainty cover about 31% of the source model area; the ordinary grid marks withheld coverage. Linear display scale: 0.45–1.30.",
+        "noData": true
       },
       {
         "id": "slope",
         "label": "Slope",
-        "description": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
-        "title": "Modeled surface slopes",
-        "detail": "Released facet values",
         "thumbnail": "/scenes/dimorphos/dimorphos-slope-thumbnail.webp",
         "surface": "dimorphos-slope-surface@2x.webp",
         "poles": "dimorphos-slope-surface@2x.webp",
@@ -185,7 +172,8 @@
           "meta": "deg",
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
           "image": "/scenes/dimorphos/dimorphos-slope-legend.webp"
-        }
+        },
+        "notes": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change."
       }
     ],
     "labels": {

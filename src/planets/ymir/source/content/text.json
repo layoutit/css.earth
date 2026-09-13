@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ymir",
+  "card": {
+    "text": "Explore Ymir, a moon of Saturn, through its source-constrained shape approximation.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Ymir is a distant retrograde moon of Saturn. This triangular approximation uses published light-curve model dimensions with assumed polar caps. The grid marks unmapped terrain.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Triangular shape approximation",
+      "detail": "Approximate shape",
+      "summary": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable."
+    }
+  }
+}

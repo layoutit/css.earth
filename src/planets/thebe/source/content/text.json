@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "thebe",
+  "card": {
+    "text": "Explore Thebe with Galileo imagery and its source-backed irregular shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/jupiter/moons/thebe/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Thebe is a small, irregular moon inside Io’s orbit. Its battered surface includes the enormous crater Zethus, and dust from impacts feeds Jupiter’s faint outer gossamer ring.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/jupiter/moons/thebe/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "SSI mosaic",
+      "detail": "Galileo SSI",
+      "summary": "Brightness matching reduces photographed shading without measuring albedo. The gray grid marks missing or unreliable images."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Radial shape",
+      "summary": "Galileo-model height relative to a 49.3 km sphere. Unseen terrain is modeled; depressions may be exaggerated."
+    }
+  }
+}

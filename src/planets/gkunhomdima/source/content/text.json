@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gkunhomdima",
+  "card": {
+    "text": "Explore its published shape and source constraints.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://arxiv.org/abs/2605.28636",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A distant dwarf-planet candidate with a measured occultation silhouette. This published spheroidal model combines the occultation with its satellite’s orbit; local terrain is unresolved.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://arxiv.org/abs/2605.28636",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Published occultation shape model",
+      "detail": "Source shape · unmapped surface grid",
+      "summary": "Published Maclaurin model with semiaxes 329, 329, 294 km. The satellite orbit is assumed equatorial. The source also permits a slightly triaxial fit; this smooth shape is a constrained model. J2000 pole prior RA 20.6 ± 1.5°, DEC 46.25 ± 0.32° from satellite-orbit alignment. Arbitrary meridian; 11.05 h photometric period has aliases and is not installed as a qualified sidereal spin. The grid marks unmapped terrain."
+    }
+  }
+}

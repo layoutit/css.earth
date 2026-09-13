@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "c176a58cdab809763fb0fbf5557a75b22e7610b70bdb25687823d81497f3d3bd"
+    "sha256": "d907153fae033d038f5b4f3d8814d4fe3dc7eddf617424297b9d883cce7662bb"
   },
   "id": "pluto",
   "properties": {
@@ -51,7 +51,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "924a299604725b552468ce335eb075a2d15b99c94c30082f2329ded994c6f599"
+          "sha256": "288adc5834256004a78b31fe4dda6ceb93e814085512326891d046846fdab977"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "a5d81da1495b8e6b11985a39f62875c0fc0f29fa38b7d3b0b929630cb8d2e0cd"
         },
         {
           "id": "solar-system",
@@ -152,7 +157,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c0362c38ec06a8e0a5b1e3ab6c2486f94bc6cd69221f9fd175473cca9030340d"
+        "sha256": "17ed0c01e13da3534f0e90950a6a8886b4dc29cf354192ab0f280cbbd380b8c2"
       }
     },
     "catalog": {

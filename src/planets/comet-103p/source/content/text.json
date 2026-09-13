@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comet-103p",
+  "card": {
+    "text": "Explore Hartley 2's published EPOXI nucleus model and its source constraints.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/catalog/dataset.cat",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "EPOXI passed Hartley 2 in 2010. A smooth waist joins its two rough lobes, while jets carry gas, dust and icy particles away from the nucleus.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/catalog/dataset.cat",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "constraints": {
+      "title": "Shape-constraint map",
+      "detail": "PDS",
+      "summary": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions."
+    },
+    "model": {
+      "title": "Nucleus shape reconstruction",
+      "detail": "PDS",
+      "summary": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints."
+    },
+    "mri": {
+      "title": "EPOXI mosaic",
+      "detail": "EPOXI",
+      "summary": "MRI views and restored HRI close-ups show the smooth waist and rough lobes. The photographs retain their shadows; the grid marks gaps or uncertain shape."
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ophelia",
+  "card": {
+    "text": "Explore Ophelia, the outer shepherd of Uranus's epsilon ring.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/ophelia/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Ophelia is the outer shepherd of Uranus’s epsilon ring. Together with Cordelia, it helps confine the narrow ring through gravitational resonances.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/ophelia/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Published shape",
+      "summary": "A 54 × 38 × 38 km shape estimate from Voyager. Two axes are assumed equal; gray grid: no surface imagery."
+    }
+  }
+}

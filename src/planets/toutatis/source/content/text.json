@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toutatis",
+  "card": {
+    "text": "Explore Toutatis with its published radar shape model.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.xml",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Toutatis is an elongated, two-lobed near-Earth asteroid that tumbles as it travels around the Sun. Its radar-derived shape reveals a narrow neck, ridges and depressions. Chang’e-2 photographed one side during a 2012 flyby. Explore the published radar model here in a fixed illustrative orientation.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.xml",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Radar shape model",
+      "detail": "Published radar shape",
+      "summary": "Shape from 1992 and 1996 radar data. Later images show differences; the gray grid marks missing imagery."
+    }
+  }
+}

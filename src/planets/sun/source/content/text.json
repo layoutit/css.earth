@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "sun",
+  "card": {
+    "text": "Explore the Sun in 3D with cssEarth. Discover our nearest star, its glowing atmosphere, and the science behind the center of the solar system.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/sun/facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "At the center of our solar system, the Sun is a 4.5-billion-year-old yellow dwarf star. Its light and heat make life on Earth possible.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/sun/facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "photosphere": {
+      "title": "HMI continuum mosaic CR2311",
+      "detail": "Continuum",
+      "summary": "Visible-light observations span May–June 2026. Color and brightness are adjusted; missing polar coverage is filled."
+    },
+    "magnetic": {
+      "title": "HMI radial magnetic field CR2311",
+      "detail": "Radial field",
+      "summary": "Colors show the radial field on a nonlinear scale. Measurements span May–June 2026 rather than a single instant."
+    },
+    "chromosphere": {
+      "title": "AIA 304 Å synoptic map CR2311",
+      "detail": "304 Å",
+      "summary": "The 304 Å measurements span May–June 2026. Gaps use nearby latitudes; the separate outer image is from 27 May."
+    },
+    "corona": {
+      "title": "AIA 171 Å synoptic map CR2311",
+      "detail": "171 Å",
+      "summary": "The 171 Å measurements span May–June 2026. Gaps use nearby latitudes; the separate outer image is from 27 May."
+    }
+  }
+}

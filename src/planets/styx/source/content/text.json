@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "styx",
+  "card": {
+    "text": "Explore Styx through a clearly labeled approximate shape fit.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/styx/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Styx is the innermost of Pluto’s four small moons. New Horizons revealed an elongated body, but too little surface detail for a map.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/styx/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Measured axes",
+      "summary": "Shape estimated from New Horizons images that resolve only a few pixels. The pole is uncertain; gray grid: no imagery."
+    }
+  }
+}

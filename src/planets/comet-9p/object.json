@@ -26,7 +26,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02"
+          "sha256": "4ed75dd1418482eb3da8e249803c3116ec909c6616daa7d03df8fb3f6ac71845"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "0dd552d5f3f829d2a0b74ad45aa6b7f334dde66ac186892c8df5659fc792e2c8"
         },
         {
           "id": "title",
@@ -132,7 +137,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3f26762e0821c07c5f4c3ce6738d3bd99432c8b54cf4f7c6f813fe8aefec9dc9"
+        "sha256": "bb5b6ffe99a6dcc142ceaee497eed599a2c61febeec5eface879f48835fcf4ff"
       }
     },
     "catalog": {
@@ -152,7 +157,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e06275ab63ebfe0fe47d482363f787024dbfad08e7e4ae958310b28d61f412ee"
+    "sha256": "e0311261c67839e61304a0a65d9172aa5c0764ee1f808da8b81c04ea36e7f8fd"
   },
   "type": "layered-body",
   "id": "comet-9p"

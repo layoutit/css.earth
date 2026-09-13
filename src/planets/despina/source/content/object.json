@@ -4,7 +4,6 @@
   "id": "despina",
   "displayName": "Despina",
   "panel": {
-    "introduction": "Despina is a small, irregular moon inside Neptune’s faint ring system. Voyager images constrain its overall shape, but do not provide reliable surface mapping at this scale.",
     "facts": [
       {
         "id": "radius",
@@ -49,9 +48,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes of 90 × 74 × 64 km. The images constrain the outline rather than a reliable map of craters or terrain. The standard gray grid marks unavailable surface coverage; shared lighting describes the model shape. The 74 km radius sets the scene scale and is not a replacement for the three measured axes.",
-        "title": "Approximate shape model",
-        "detail": "Measured axes",
         "thumbnail": "/scenes/despina/despina-model-thumbnail.webp",
         "surface": "despina-model-surface@2x.webp",
         "poles": "despina-model-poles@2x.webp",
@@ -60,7 +56,8 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.1016/S0019-1035(03)00002-2"
         },
-        "summary": "Shape estimated from Voyager images. Its outline is measured, but local terrain is unresolved; gray grid: no imagery."
+        "notes": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes of 90 × 74 × 64 km. The images constrain the outline rather than a reliable map of craters or terrain. The standard gray grid marks unavailable surface coverage; shared lighting describes the model shape. The 74 km radius sets the scene scale and is not a replacement for the three measured axes.",
+        "noData": true
       }
     ]
   },

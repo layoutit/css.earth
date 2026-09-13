@@ -4,7 +4,6 @@
   "id": "comet-162p",
   "displayName": "Siding Spring",
   "panel": {
-    "introduction": "Siding Spring has a large, elongated nucleus and rotates once in about thirty-three hours. Its thickness is less certain than its length.",
     "facts": [
       {
         "id": "radius",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Shape approximation",
-        "detail": "Lightcurves",
-        "title": "Inferred shape",
-        "description": "A smooth approximation of the published proportions. Its thickness is uncertain. The grid marks missing surface imagery; it does not show terrain. Rotation phase is illustrative.",
         "thumbnail": "/scenes/comet-162p/comet-162p-model-thumbnail.webp",
         "surface": "comet-162p-model-surface@2x.webp",
         "poles": "comet-162p-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Rotation period",
             "value": "32.86 hours"
           }
-        ]
+        ],
+        "notes": "A smooth approximation of the published proportions. Its thickness is uncertain. The grid marks missing surface imagery; it does not show terrain. Rotation phase is illustrative.",
+        "noData": true
       }
     ]
   },

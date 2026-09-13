@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "juliet",
+  "card": {
+    "text": "Explore Juliet through its published prolate shape model.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/juliet/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Juliet is an elongated inner moon of Uranus, discovered by Voyager 2. Its long axis is modeled as pointing toward the planet.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/juliet/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Published shape",
+      "summary": "A 150 × 74 × 74 km shape estimate from Voyager. Two axes are assumed equal; gray grid: no surface imagery."
+    }
+  }
+}

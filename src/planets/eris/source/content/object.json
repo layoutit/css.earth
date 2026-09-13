@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Eris is a bright, icy dwarf planet in the distant outer Solar System. Its surface is shown using NASA’s illustrative model texture; no spacecraft has mapped it.",
     "facts": [
       {
         "id": "diameter",
@@ -79,8 +78,6 @@
       {
         "id": "illustration",
         "label": "Illustrative model",
-        "description": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
-        "title": "Surface illustration",
         "qualification": "Illustration; not an observed surface map.",
         "thumbnail": "eris-lens-illustration.webp",
         "surface": "eris-illustration.webp",
@@ -90,7 +87,7 @@
           "path": "../manifest.json",
           "url": "https://science.nasa.gov/resource/eris-3d-model/"
         },
-        "summary": "The depicted terrain is imagined, not photographed. The real surface is unresolved, and the displayed coordinates are arbitrary."
+        "notes": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary."
       }
     ]
   },

@@ -26,7 +26,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ab3111e15c3a0d169e02fe1916b617c101579078480fbf1ad4ceb2da250c8551"
+          "sha256": "b02dfd7c64e4d211be2673bc480f56626d32bfcd386294120f6206192028ae89"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "15defee97729e28bdcbfe9b4c297431e78a40a6f615d9b5912d373d8c4b057de"
         },
         {
           "id": "title",
@@ -127,7 +132,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8b825771534bd0539ce9047e9aef2a061ae30e3c3718ae12e4257c75c40ca55d"
+        "sha256": "c05b8ffb4c8a5be25cdce6ea65185c44d0316912fd98340bb770fd80b55e9fe6"
       }
     },
     "catalog": {
@@ -147,7 +152,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "103ff73ad2f2dcb3fee1f7650ccd6c9524d40363abec1372aa1211e2219ecb37"
+    "sha256": "b5b4b7d83b6c7d4dc5369189f88bf433a2cd90aa1e56f39242e1707e576fedbf"
   },
   "type": "layered-body",
   "id": "comet-103p"

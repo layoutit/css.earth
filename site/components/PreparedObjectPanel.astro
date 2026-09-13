@@ -1,7 +1,7 @@
 ---
 import PlanetShell from "./PlanetShell.astro";
 import { validateObjectProvenance } from "../../src/platform/object-provenance.mts";
-import { parsePreparedPanelContent, parsePanelControls } from '../prepared-panel-content.mts';
+import { parsePreparedPanelContent, parsePanelControls, withDatasetText } from '../prepared-panel-content.mts';
 interface Props { navigation?: boolean; preparedContent: unknown; preparedControls: unknown; }
 const { preparedContent, preparedControls } = Astro.props;
 const content = parsePreparedPanelContent(preparedContent);
@@ -21,7 +21,7 @@ const provenanceData = await provenanceFiles[`${objectRoot}/prepared/provenance.
 const provenance = provenanceData === undefined ? undefined : validateObjectProvenance(provenanceData, content.objectId);
 const minimap = await minimapFiles[`${objectRoot}/source/presentation/surface-map.json`]?.();
 const previews = await previewFiles[`${objectRoot}/prepared/minimaps.json`]?.();
-const lenses = controls.lenses && {
+const lenses = withDatasetText(controls.lenses && {
   ...controls.lenses,
   controls: await Promise.all(controls.lenses.controls.map(async (lens) => {
     const preview = previews?.images.find(image => image.id === lens.id);
@@ -29,7 +29,7 @@ const lenses = controls.lenses && {
     const url = await imageFiles[`${objectRoot}/prepared/${preview.path}`]();
     return { ...lens, texture: { url, width: preview.width, height: preview.height, minimap, attribution: preview.attribution } };
   })),
-};
+}, content.datasets);
 ---
 
 <PlanetShell

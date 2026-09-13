@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "puck",
+  "card": {
+    "text": "Explore Puck with Voyager 2 imagery on its measured-size shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/puck/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Puck is the largest of Uranus’s small inner moons. Voyager 2 photographed its dark, cratered surface in 1986; most of this little world remains unseen.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/uranus/moons/puck/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "Image C2683716",
+      "detail": "Voyager clear",
+      "summary": "Each source pixel spans about 4.77 km, too coarse for fine terrain. The gray grid marks unseen or unreliable areas."
+    }
+  }
+}

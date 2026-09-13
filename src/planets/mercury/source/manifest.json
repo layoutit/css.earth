@@ -702,8 +702,8 @@
     {
       "id": "mercury-object-content",
       "path": "content/object.json",
-      "expectedSha256": "4786a8cb8ed870bea24c6128736c5a42488b068365e20a9b30a01c729b45446f",
-      "expectedBytes": 17101,
+      "expectedSha256": "4bf706c01c427935e3f13957f8430284795ea4e0d2389d33239736ec8c7c76f9",
+      "expectedBytes": 16032,
       "origin": "Repository-authored Mercury panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -716,7 +716,27 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "mercury-object-text",
+      "path": "content/text.json",
+      "expectedSha256": "955ae2abe59cd0f3fc87a558a93bebb519a5a8cc3dbf4d17b423301e1f592698",
+      "expectedBytes": 1833,
+      "origin": "Repository-authored Mercury reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared shell content with source provenance.",
+      "consumers": [
+        "panel",
+        "lenses",
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     },
     {

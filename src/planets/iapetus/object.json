@@ -48,7 +48,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "9c0d44c1273a05ed51008f0e4c4967af201fcd544a6c0e2251a6d6cf21602748"
+          "sha256": "c30b3306843a145214368fafa7309683aed023533725cb36e3d495169dcf303c"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "7aa4244809efa1fce3fa1c1d98b5e56f0355174be277982d99db9fc71bf3caa8"
         },
         {
           "id": "solar-system",
@@ -154,7 +159,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "79354a35966b595c8ee0308fadb3f1ff7f5d3f74f6c91e8d02b36d72a6aa7d56"
+        "sha256": "9fa07ccbdd205972daf3a11d3d768780313dc84997099a40d2f25af397bf3e13"
       }
     },
     "catalog": {
@@ -173,6 +178,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "c1149a2617bbcac2571e24f29e09581155273120e1965b6146112eac92f81e50"
+    "sha256": "b3bd88faf35877ccf147c3f5aa0afcd6531f38fac06ce18059ca33e37f511f23"
   }
 }

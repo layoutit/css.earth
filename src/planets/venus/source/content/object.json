@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Venus is the second planet from the Sun and our closest planetary neighbor. It is the hottest planet in the solar system, often called Earth's twin.",
     "facts": [
       {
         "id": "distance-from-sun",
@@ -158,8 +157,6 @@
       {
         "id": "clouds",
         "label": "Clouds",
-        "description": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
-        "title": "Cloud illustration",
         "thumbnail": "venus-lens-clouds.webp",
         "surface": "venus-clouds.webp",
         "source": {
@@ -171,14 +168,11 @@
         "shortLabel": "VIS",
         "qualification": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
         "falseColor": false,
-        "detail": "Illustration",
-        "summary": "The cloud deck is illustrated with a texture from OpenSpace. Its original camera, wavelength and processing are unknown."
+        "notes": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck."
       },
       {
         "id": "radar",
         "label": "Radar",
-        "description": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic. Colors represent an archival radar presentation, not visible surface color.",
-        "title": "C3-MDIR synthetic-color radar mosaic",
         "thumbnail": "venus-lens-radar.webp",
         "surface": "venus-radar.webp",
         "source": {
@@ -190,14 +184,11 @@
         "shortLabel": "SAR",
         "qualification": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic",
         "falseColor": true,
-        "detail": "Radar mosaic",
-        "summary": "Radar images map the ground beneath the clouds. The added colors do not represent the surface as a person would see it."
+        "notes": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic. Colors represent an archival radar presentation, not visible surface color."
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic with shaded relief. This archival scientific visualization is not visible surface color.",
-        "title": "C3-MDIR colorized topography",
         "thumbnail": "venus-lens-elevation.webp",
         "surface": "venus-elevation.webp",
         "source": {
@@ -252,8 +243,7 @@
         "shortLabel": "DEM",
         "qualification": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
         "falseColor": true,
-        "detail": "Shaded relief",
-        "summary": "Colors show elevation and shading reveals slopes. The map describes terrain beneath the clouds, not visible surface color."
+        "notes": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic with shaded relief. This archival scientific visualization is not visible surface color."
       }
     ],
     "labels": {

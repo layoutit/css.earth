@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "albiorix",
+  "card": {
+    "text": "Explore Albiorix, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://tilmanndenk.de/outersaturnianmoons/albiorix/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Albiorix belongs to Saturn’s Gallic group of outer moons. This ellipsoid illustrates a lightcurve-based minimum elongation, with assumed depth and orientation. The grid marks unmapped terrain.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://tilmanndenk.de/outersaturnianmoons/albiorix/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Light-curve shape approximation",
+      "detail": "Approximate shape",
+      "summary": "Approximate ellipsoid adopting the published minimum equatorial ratio 1.34:1 under uniform reflectivity. Equal short axes, volume scaling and orientation are assumed. The grid marks unmapped terrain."
+    }
+  }
+}
