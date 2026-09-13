@@ -1,10 +1,13 @@
 ---
 import DatasetLenses from './DatasetLenses.astro';
 import DatasetContextPanels from './DatasetContextPanels.astro';
+import PlanetFactsheet from './PlanetFactsheet.astro';
 import { parsePreparedVolumePresentation } from '../volume-presentation.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { PreparedVolumeLensBank } from '../../src/renderers/css/volume/prepared-volume-lenses';
 import { CONTEXT_OBJECT_DESCRIPTORS, CONTEXT_OBJECT_PREPARED_JSON } from '../prepared-context-objects.mts';
+interface Props { factsOnly?: boolean }
+const { factsOnly = false } = Astro.props;
 
 type Descriptor = { id: string; type: string; prepared?: { url: string } };
 // Bodies share src/objects; only the generated context objects' prepared JSON is read here.
@@ -19,7 +22,12 @@ const banks = Object.entries(descriptors).filter(([, descriptor]) => descriptor.
   return { bank, provenance, presentation };
 });
 ---
-{banks.map(({ bank, provenance, presentation }) => <div class="planet-dataset-content" data-focus-lens-bank={bank.id} hidden>
+{banks.map(({ bank, provenance, presentation }) => factsOnly ? <div data-focus-facts-bank={bank.id} hidden>
+  {presentation.controls.map(lens => <div data-focus-lens-details={lens.id} hidden={lens.id !== presentation.defaultLens}>
+    <h3 class="planet-lens-details-title">{lens.label}</h3>
+    <PlanetFactsheet id={`focus-${bank.id}-${lens.id}`} facts={lens.facts} embedded />
+  </div>)}
+</div> : <div class="planet-dataset-content" data-focus-lens-bank={bank.id} hidden>
   <DatasetLenses objectId={`focus-${bank.id}`} lenses={presentation} {provenance} controlName="focusLens" />
     {bank.lenses.some(lens => lens.stars.points.length > 0) && <label class="planet-setting-control">
       <input type="checkbox" data-focus-stars checked />

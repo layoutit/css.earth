@@ -274,6 +274,7 @@ const searchCategories = ([
             {[['distance', 'Distance from Sun'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
               <li><span class="planet-fact-label">{label}</span><span class="planet-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
           </ul></div></div>
+          <PreparedFocusLenses factsOnly />
           <p class="planet-introduction" data-focus-basis></p>
           <p class="planet-introduction" data-focus-reference></p>
           <div class="planet-resources-links">
