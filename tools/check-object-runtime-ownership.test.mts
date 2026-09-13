@@ -139,7 +139,7 @@ test('nullable physical lighting projection is data while adjacent identity tabl
 });
 test("shared owners reject private packages, fixed asset namespaces, v1 hooks and an extra native camera", async () => {
   const cases: readonly [string, RegExp][] = [
-    [shared + "\nimport { runtimeDefinition } from '../planets/moon/runtime/definition.mjs';", /Shared runtime imports an object package/],
+    [shared + "\nimport { runtimeDefinition } from '../objects/moon/runtime/definition.mjs';", /Shared runtime imports an object package/],
     [shared + '\nconst url = "/scenes/earth/wmts-data.pack";', /object-specific asset namespace/],
     [shared + '\nconst valid = /^\\/scenes\\/earth\\/wmts/;', /object-specific asset namespace/],
     [shared + '\nfunction hidden(value) { return value.createPresentation(); }', /Legacy object callbacks/],
@@ -414,7 +414,7 @@ test('the actual Sun-only shell and navigation share exactly one typed camera ow
   assert.ok(!report.sharedClosure.includes('src/platform/object-runtime.mts'));
   assert.ok(report.sharedClosure.includes('src/renderers/css/navigation/index.ts'));
   assert.ok(report.sharedClosure.includes('src/renderers/css/runtime/object-runtime.ts'));
-  assert.ok(!report.sharedClosure.some(file => /^src\/planets\/[^/]+\/runtime\//u.test(file)));
+  assert.ok(!report.sharedClosure.some(file => /^src\/objects\/[^/]+\/runtime\//u.test(file)));
   for (const file of ['site/scene-router.mts', 'site/view-url-runtime.mts', 'site/prepared-world-navigation.mts']) {
     const source = await readFile(file, 'utf8');
     const changed = source.replace('/dist/navigation.js', '/dist/index.js');

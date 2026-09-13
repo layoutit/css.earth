@@ -89,7 +89,7 @@ export async function repinObjectJson(id: string, projectRoot = root) {
 /** Existing descriptors opt into JSON baking; planned objects get no fallback. */
 export async function updateObjectJsonForPresentation(target:string|URL, presentation:unknown, controls:unknown) {
   const file = target instanceof URL ? fileURLToPath(target) : resolve(target);
-  const match = file.split(sep).join('/').match(/\/src\/planets\/([a-z][a-z0-9-]*)\/runtime\/preparedPresentation\.mjs$/);
+  const match = file.split(sep).join('/').match(/\/src\/objects\/([a-z][a-z0-9-]*)\/runtime\/preparedPresentation\.mjs$/);
   if (!match) return null;
   const id = match[1];
   try { await access(resolve(root, 'src/objects', id, 'object.json')); }
