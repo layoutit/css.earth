@@ -33,7 +33,7 @@
       "placement": "approximate",
       "referenceFrame": "ICRF",
       "source": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/asteroids.ssc",
-      "sourcePath": "src/planets/dactyl/source/orbit/published-parameters.json",
+      "sourcePath": "src/objects/dactyl/source/orbit/published-parameters.json",
       "sha256": "64e0bceb305b89bbc469edef488afba4c9c82c1e6e8e1a0fd1a5d11ea53afd0e",
       "timeQualification": "An illustrative zero mean anomaly is assigned at the shared TT scene epoch. This is not a propagation of a measured encounter phase or a prediction of present position.",
       "limitations": [
@@ -43,7 +43,7 @@
       ]
     }
   },
-  "physicalNotes": "Galileo/Lucy source dimensions and declared display assumptions. Source records and limits: src/planets/dactyl/README.md",
+  "physicalNotes": "Galileo/Lucy source dimensions and declared display assumptions. Source records and limits: src/objects/dactyl/README.md",
   "acquisition": {
     "sceneSatellite": {
       "parent": "ida",

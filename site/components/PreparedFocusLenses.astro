@@ -4,12 +4,13 @@ import DatasetContextPanels from './DatasetContextPanels.astro';
 import { parsePreparedVolumePresentation } from '../volume-presentation.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { PreparedVolumeLensBank } from '../../src/renderers/css/volume/prepared-volume-lenses';
+import { CONTEXT_OBJECT_DESCRIPTORS, CONTEXT_OBJECT_PREPARED_JSON } from '../prepared-context-objects.mts';
 
 type Descriptor = { id: string; type: string; prepared?: { url: string } };
-const descriptors = import.meta.glob<Descriptor>('../../src/objects/*/object.json', { eager: true, import: 'default' });
-const prepared = import.meta.glob<{ data: PreparedVolumeLensBank }>('../../src/objects/*/prepared/*.json', { eager: true, import: 'default' });
-const presentations = import.meta.glob<unknown>('../../src/objects/*/prepared/presentation.json', { eager: true, import: 'default' });
-const provenanceDocuments = import.meta.glob<unknown>('../../src/objects/*/prepared/provenance.json', { eager: true, import: 'default' });
+// Bodies share src/objects; only the generated context objects' prepared JSON is read here.
+const descriptors = CONTEXT_OBJECT_DESCRIPTORS as Record<string, Descriptor>;
+const prepared = CONTEXT_OBJECT_PREPARED_JSON as Record<string, { data: PreparedVolumeLensBank } | undefined>;
+const presentations = CONTEXT_OBJECT_PREPARED_JSON, provenanceDocuments = CONTEXT_OBJECT_PREPARED_JSON;
 const banks = Object.entries(descriptors).filter(([, descriptor]) => descriptor.type === 'volume-lens-bank').map(([path, descriptor]) => {
   const bank = prepared[path.replace(/object\.json$/u, descriptor.prepared?.url ?? '')]?.data;
   if (!bank || bank.id !== descriptor.id) throw new TypeError(`Prepared focus lenses unavailable: ${descriptor.id}.`);

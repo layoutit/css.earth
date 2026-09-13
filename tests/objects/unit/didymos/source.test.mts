@@ -7,7 +7,7 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/didymos/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/didymos/source');
 const read=createSourceFixtureReader(root);
 
 test('Didymos source closure pins every input and declares restoration for required acquisition data',async()=>{

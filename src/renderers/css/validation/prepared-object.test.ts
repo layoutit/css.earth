@@ -7,7 +7,7 @@ import { record, array } from './guards.js';
 // These are the real preparation outputs, loaded only by this browser-boundary test.
 const originals: unknown[] = [];
 for (const id of ['mercury', 'venus']) {
-  const source = await readFile(new URL(`../../../../src/planets/${id}/prepared/runtime.json`, import.meta.url), "utf8");
+  const source = await readFile(new URL(`../../../../src/objects/${id}/prepared/runtime.json`, import.meta.url), "utf8");
   originals.push(JSON.parse(source));
 }
 const copy = (index = 1): Record<string, unknown> => record(structuredClone(originals[index]), 'test document');
@@ -21,7 +21,7 @@ test('external transport cannot silently omit prepared activation ownership', ()
 });
 
 test('Tuttle transport preserves selection ranges and rejects incomplete or invalid picking banks', async () => {
-  const original = JSON.parse(await readFile(new URL('../../../planets/comet-8p/prepared/runtime.json', import.meta.url), 'utf8'));
+  const original = JSON.parse(await readFile(new URL('../../../objects/comet-8p/prepared/runtime.json', import.meta.url), 'utf8'));
   const parsed = parsePreparedObjectRuntime(original);
   assert.deepEqual(parsed.surfaceHit?.lensRanges, [
     {lensId: 'model', start: 0, count: 1000}, {lensId: 'arecibo', start: 1000, count: 1000},
@@ -132,7 +132,7 @@ test('executable values, symbols, nonfinite numbers and cycles are rejected with
 });
 
 test('a body without lenses validates both fixed and toggle-selected presentations', async () => {
-  const original = JSON.parse(await readFile(new URL('../../../../src/planets/haumea/prepared/runtime.json', import.meta.url), 'utf8'));
+  const original = JSON.parse(await readFile(new URL('../../../../src/objects/haumea/prepared/runtime.json', import.meta.url), 'utf8'));
   parsePreparedObjectRuntime(original);
   const input = structuredClone(original);
   // Exercise an absent capability independently of the body's current lenses.

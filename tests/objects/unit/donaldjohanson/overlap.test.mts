@@ -7,7 +7,7 @@ import { requireRecord, requireArray, requireString, requireFiniteNumber } from 
 import { bindSipCamera, decodeLlorri } from '../../../../tools/objects/terrestrial-layers/llorri-geo.mts';
 import { llorriHeaderCamera } from '../../../../tools/objects/terrestrial-layers/llorri-header-camera.mts';
 import { loadKernelSet } from '../../../../tools/spice/kernel-set.mts';
-const root=resolve('src/planets/donaldjohanson/source');
+const root=resolve('src/objects/donaldjohanson/source');
 const record=async(path:string)=>requireRecord(JSON.parse(await readFile(resolve(root,path),'utf8')));
 const vector=(value:unknown)=>requireArray(value).map(n=>requireFiniteNumber(n));
 

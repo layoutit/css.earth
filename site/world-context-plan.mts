@@ -4,7 +4,7 @@ import { parsePreparedWorldContext } from '../src/renderers/css/dist/index.js';
 // every detail mount share this immutable plan. The browser fetches the prepared
 // file instead of bundling it as a module, so only the validated plan stays
 // resident: a retained JSON module kept a second full copy alive on the heap.
-const source = new URL('../src/planets/sun/prepared/world-context.json', import.meta.url);
+const source = new URL('../src/objects/sun/prepared/world-context.json', import.meta.url);
 /** The same prepared file, for the world planner worker to read its own copy. */
 export const APPLICATION_WORLD_CONTEXT_URL = source.href;
 async function readPreparedWorldContext(): Promise<unknown> {

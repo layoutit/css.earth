@@ -18,49 +18,49 @@
   ],
   "evidence": [
     {
-      "path": "src/planets/earth/source/manifest.json",
+      "path": "src/objects/earth/source/manifest.json",
       "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
       "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16",
       "locator": "/inputs/19"
     },
     {
-      "path": "src/planets/jupiter/source/manifest.json",
+      "path": "src/objects/jupiter/source/manifest.json",
       "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
       "sha256": "2ffa5896b236cbe154361b47f7344ab3a3c21d31cc3689973284597326e15341",
       "locator": "/inputs/19"
     },
     {
-      "path": "src/planets/mars/source/manifest.json",
+      "path": "src/objects/mars/source/manifest.json",
       "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
       "sha256": "c8ac2a146613a1322fa1e2205fc30c2b881b88e5ef5bed82903e8e1a0acb8745",
       "locator": "/inputs/17"
     },
     {
-      "path": "src/planets/mercury/source/manifest.json",
+      "path": "src/objects/mercury/source/manifest.json",
       "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
       "sha256": "2c66d93686fe80a9cecb39cf8b6b6e486d2e4cebc900a62534185a26c5f565ec",
       "locator": "/inputs/21"
     },
     {
-      "path": "src/planets/neptune/source/manifest.json",
+      "path": "src/objects/neptune/source/manifest.json",
       "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
       "sha256": "fa485562067c99697c0286565297df4c9c55ca3ad9e6b6c9e86b601948f565e6",
       "locator": "/inputs/13"
     },
     {
-      "path": "src/planets/saturn/source/manifest.json",
+      "path": "src/objects/saturn/source/manifest.json",
       "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
       "sha256": "769d516be08271c9d2e91af225e515b1200803f25c389998dbfdaef9f40fc7b5",
       "locator": "/inputs/23"
     },
     {
-      "path": "src/planets/uranus/source/manifest.json",
+      "path": "src/objects/uranus/source/manifest.json",
       "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
       "sha256": "75d2dc8312a10ac087b17086d8a728769ceeca4b46d7e860d3225b82b5bedf0e",
       "locator": "/inputs/10"
     },
     {
-      "path": "src/planets/venus/source/manifest.json",
+      "path": "src/objects/venus/source/manifest.json",
       "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
       "sha256": "380fd3c49e698d4028d1dc6472507d98b037445472b1815c978f57ed7e225d91",
       "locator": "/inputs/20"

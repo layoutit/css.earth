@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
-import mercury from '../../../../src/planets/mercury/prepared/runtime.json' with { type: 'json' };
-import venus from '../../../../src/planets/venus/prepared/runtime.json' with { type: 'json' };
+import mercury from '../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
+import venus from '../../../../src/objects/venus/prepared/runtime.json' with { type: 'json' };
 import { selectPreparedResponsiveZoom } from './camera-layout.ts';
 
 type ResponsiveFitOptions = Parameters<typeof selectPreparedResponsiveZoom>[0];

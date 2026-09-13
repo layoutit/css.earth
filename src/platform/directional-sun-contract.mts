@@ -40,7 +40,7 @@ export const DIRECTIONAL_SUN_PRESENTATION_STANDARD = Object.freeze({
   schema: "cssearth-directional-sun-presentation-standard@1",
   source: "Google Earth Pro Mars native Sun contract-derived visual standard",
   sourcePath:
-    "src/planets/mars/source/sky/google-earth-pro-contract.json",
+    "src/objects/mars/source/sky/google-earth-pro-contract.json",
   localDirection: Object.freeze([
     0.888810066045983,
     0.13368164386698683,

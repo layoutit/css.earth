@@ -6,7 +6,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {simplifyRadialShape} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/phoebe/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/phoebe/source');
 test('Phoebe 2023 source frame, units and retained closed shape match independent source intersections',async()=>{
  const config=JSON.parse((await readFile(resolve(root,'preparation/terrestrial.json'))).toString('utf8')),p=config.geometry.radialTerrain;
  const independent=JSON.parse((await readFile(resolve(root,'validation/2023-independent-geometry.json'))).toString('utf8'));

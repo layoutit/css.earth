@@ -9,7 +9,7 @@ import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/s
 import {prepareMaskedObservation} from '../../../../tools/objects/terrestrial-layers/observed-geotiff.mts';
 
 const root = new URL('../../../../', import.meta.url);
-const sourceRoot = new URL('src/planets/rhea/source/', root).pathname;
+const sourceRoot = new URL('src/objects/rhea/source/', root).pathname;
 
 test('Rhea elevation uses measured radii, actual geotransform and source bounds', async () => {
   const config=JSON.parse((await readFile(`${sourceRoot}/preparation/terrestrial.json`)).toString('utf8'));

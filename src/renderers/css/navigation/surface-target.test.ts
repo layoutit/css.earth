@@ -36,8 +36,8 @@ test('surface correction is a finite proper rotation toward the real physical ey
 
 test('prepared destination correction preserves close-range framing when the globe radius changes', async () => {
   const read = async (path: string) => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
-  const scene = await read('../../../planets/earth/prepared/scene.json');
-  const config = await read('../../../planets/earth/source/preparation/paged-ellipsoid.json');
+  const scene = await read('../../../objects/earth/prepared/scene.json');
+  const config = await read('../../../objects/earth/source/preparation/paged-ellipsoid.json');
   const body = scene[config.sceneBodyKey];
   const point = prepareLocationPoint(scene, -58.3816, -34.6037);
   const destination = prepareLocationCamera(scene, point, 2048, { body, camera: config.camera });

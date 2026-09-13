@@ -9,7 +9,7 @@ import { createTestPage } from './browser-observations.mts';
 import { requireRecord } from '../../tools/source-values.mts';
 declare global { interface Window { __nebulaProductionNodes: Element[]; } }
 const directory='output/nebula-production-browser';await mkdir(directory,{recursive:true});
-const context=parsePreparedWorldContext(JSON.parse(await readFile('src/planets/sun/prepared/world-context.json','utf8')));
+const context=parsePreparedWorldContext(JSON.parse(await readFile('src/objects/sun/prepared/world-context.json','utf8')));
 const browser=await chromium.launch({headless:true}),page=await createTestPage(browser,{viewport:{width:1440,height:1000},deviceScaleFactor:1});
 const errors:string[]=[],requests:string[]=[];page.on('pageerror',e=>errors.push(e.message));
 page.on('request',request=>{if(request.isNavigationRequest()&&request.frame()===page.mainFrame())requests.push(request.url());});

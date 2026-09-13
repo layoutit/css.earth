@@ -5,12 +5,12 @@ import { contextLocatorImages } from '../../src/navigation/context-locator.mts';
 // Resolve provenance-bearing swatches during the page build. Colors and
 // locator images are published as ordinary CSS rules; the retained scene does
 // not carry a custom-property graph at runtime.
-const swatches = import.meta.glob<{ hex: string; display?: { hex: string } }>('../../src/planets/*/swatch.json', {
+const swatches = import.meta.glob<{ hex: string; display?: { hex: string } }>('../../src/objects/*/swatch.json', {
   eager: true,
   import: 'default',
 });
 const styles = OBJECTS.map(({ id }) => {
-  const swatch = swatches[`../../src/planets/${id}/swatch.json`];
+  const swatch = swatches[`../../src/objects/${id}/swatch.json`];
   if (!swatch) return '';
   const hex = swatch.display?.hex ?? swatch.hex;
   if (!/^#[0-9a-f]{6}$/i.test(hex)) throw new Error(`Invalid ${id} swatch.`);

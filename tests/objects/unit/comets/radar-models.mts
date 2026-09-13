@@ -9,7 +9,7 @@ import {readAuthoredRotation} from '../../../../tools/objects/authored-rotation.
 const read=async (p:string):Promise<unknown>=>JSON.parse(await readFile(p,'utf8'));
 export function testRadarApproximation(id:string,semiaxesMeters:readonly number[]){
  test(`${id}: published absolute axes produce a closed 800-triangle approximation`,async()=>{
-  const root=resolve('src/planets',id),source=await read(`${root}/source/shape/model.json`),mesh=ellipsoidParameterMesh(source);
+  const root=resolve('src/objects',id),source=await read(`${root}/source/shape/model.json`),mesh=ellipsoidParameterMesh(source);
   mesh.axesMeters.forEach((v,i)=>assert.ok(Math.abs(v-semiaxesMeters[i])<1e-8));
   const terrain=preparedModelTerrain(await read(`${root}/prepared/terrain.json`)),config=modelConfig(await read(`${root}/source/preparation/terrestrial.json`));
   assert.equal(terrain.faces.length,800);
@@ -33,13 +33,13 @@ export function testRadarApproximation(id:string,semiaxesMeters:readonly number[
   assert.ok(Math.max(...errors)<100,'Sampled analytic-surface distance is below 100 m; this is not a source uncertainty.');
  });
  test(`${id}: no-imagery grid covers the whole nucleus without default directional shading`,async()=>{
-  const root=resolve('src/planets',id),config=modelConfig(await read(`${root}/source/preparation/terrestrial.json`)),surfaces=modelSurfaces(await read(`${root}/prepared/surfaces.json`)),controls=modelSettings(await read(`${root}/source/content/object.json`));
+  const root=resolve('src/objects',id),config=modelConfig(await read(`${root}/source/preparation/terrestrial.json`)),surfaces=modelSurfaces(await read(`${root}/prepared/surfaces.json`)),controls=modelSettings(await read(`${root}/source/content/object.json`));
   assert.equal(surfaces.surfaces.length,1);const s=surfaces.surfaces[0];assert.equal(s.missingPixels,config.raster.width*config.raster.height);assert.match(s.appearance,/no-imagery grid/);assert.equal(s.layout.faceCount,800);assert.equal(s.layout.tileSize,64);
   assert.equal(config.geometry.radialTerrain.sourceLighting.uniformFlood,true);
   assert.deepEqual(config.raster.observations,[]);const shadows=controls.settings.controls.find(c=>c.name==='shadows');assert.ok(shadows);assert.equal(shadows.checked,false);
  });
  test(`${id}: scene attitude stays illustrative instead of inventing rotational phase`,async()=>{
-  const root=resolve('src/planets',id),d=await read(`${root}/object.json`),ref=requireObjectRotationReference(d);
+  const root=resolve('src/objects',id),d=await read(`${root}/object.json`),ref=requireObjectRotationReference(d);
   const a=await readAuthoredRotation(root,ref,2461286.5),b=await readAuthoredRotation(root,ref,2462286.5);assert.deepEqual(a,b);assert.equal(a.spinRateRadPerDay,0);
  });
 }

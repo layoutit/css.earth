@@ -10,7 +10,7 @@ import { parsePreparedObjectRuntime } from '../../../../src/renderers/css/dist/i
 const pickerBytes=await readFile('src/renderers/css/navigation/prepared-surface-hit.ts');
 const pickerModule='data:text/javascript;base64,'+Buffer.from(stripTypeScriptTypes(pickerBytes.toString())).toString('base64');
 const origin=process.argv[2]??'http://127.0.0.1:4257', id=process.argv[3]??'comet-81p';
-const bytes=await readFile(`src/planets/${id}/prepared/runtime.json`),plan=parsePreparedObjectRuntime(JSON.parse(bytes.toString('utf8'))).surfaceHit;
+const bytes=await readFile(`src/objects/${id}/prepared/runtime.json`),plan=parsePreparedObjectRuntime(JSON.parse(bytes.toString('utf8'))).surfaceHit;
 assert.ok(plan?.triangles?.length,'Surface qualification requires a prepared mesh.');
 // Derive closure from the selected bank's physical edges; a front-face picking
 // rule also applies to closed completed meshes and does not prove openness.

@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "dimorphos",
+  "entries": [
+    {
+      "id": "spc-relative-albedo",
+      "subject": "DART v004 SPC relative-albedo field",
+      "status": "included",
+      "finding": "The released v004 SPC relative-albedo FITS field uses the existing source-facet material path introduced for Didymos. Its values and uncertainties are bound to the original Dimorphos mesh as the README describes.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/src/planets/dimorphos/README.md#L50"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-09",
+          "commit": "cc01831f595e0b73ab6699d6235cf7b466f76cfc",
+          "pr": 83
+        }
+      ]
+    }
+  ]
+}

@@ -16,7 +16,7 @@ import { coverageLookup, hashBytes, prepareRegionPack, prepareTreeSection, tileK
 import type { WmtsCoverage } from "../../../../tools/objects/geographic-pages/contracts.mts";
 
 const version = "1111111111111111", dataset = "esa-worldcover-rgbnir-2021-v200";
-const sourcePath = "src/planets/earth/source/", outputPath = "src/planets/earth/prepared/pages.json";
+const sourcePath = "src/objects/earth/source/", outputPath = "src/objects/earth/prepared/pages.json";
 const records = new Map<string,Uint8Array>(), temporary: string[] = [];
 type ReleaseFile={filename:string;bytes:number;sha256:string;tiles:number;leaves:number};
 let release:{schema:string;version:string;dataset:string;regions:number;tiles:number;leaves:number;bytes:number;files:ReleaseFile[];qualification:string;sourceSha256?:string};
@@ -29,7 +29,7 @@ const list = (level: WmtsCoverage) => {
 };
 
 before(async () => {
-  const catalog = await readWorldCoverCatalog({directory:new URL("../../../../src/planets/earth/source/city/",import.meta.url)}), entry = required(catalog.entries.get("S35W059"));
+  const catalog = await readWorldCoverCatalog({directory:new URL("../../../../src/objects/earth/source/city/",import.meta.url)}), entry = required(catalog.entries.get("S35W059"));
   const levels = Array.from({ length: 10 }, (_, i) => prepareWmtsCoverage([entry], i + 5, { includePolar: true }));
   const hasTile = coverageLookup(levels), regions = new Map<string,ReturnType<typeof prepareRegionPack>["root"]>(), files: ReleaseFile[] = [];
   const add = (address: {zoom:number;x:number;y:number}, prepared: {bytes:Uint8Array;tiles:number;leaves:number}) => {
@@ -55,9 +55,9 @@ before(async () => {
   records.set(sourcePath + "city/wmts-release.json", Buffer.from(JSON.stringify(release)));
   records.set(sourcePath + "city/catalog-pin.json", Buffer.from(JSON.stringify(catalogPin)));
   records.set(sourcePath + "city/worldcover-rgbnir-2021.json.gz", encoded);
-  records.set(sourcePath + "city/manifest.json", await readFile(new URL("../../../../src/planets/earth/source/city/manifest.json", import.meta.url)));
-  records.set(sourcePath + "preparation/paged-ellipsoid.json", await readFile(new URL("../../../../src/planets/earth/source/preparation/paged-ellipsoid.json", import.meta.url)));
-  const actual = validateSourceManifest('earth',JSON.parse((await readFile(new URL("../../../../src/planets/earth/source/manifest.json", import.meta.url))).toString('utf8')));
+  records.set(sourcePath + "city/manifest.json", await readFile(new URL("../../../../src/objects/earth/source/city/manifest.json", import.meta.url)));
+  records.set(sourcePath + "preparation/paged-ellipsoid.json", await readFile(new URL("../../../../src/objects/earth/source/preparation/paged-ellipsoid.json", import.meta.url)));
+  const actual = validateSourceManifest('earth',JSON.parse((await readFile(new URL("../../../../src/objects/earth/source/manifest.json", import.meta.url))).toString('utf8')));
   const pinned = <T extends SourceEntry,>(values: readonly T[]) => values.filter(value => records.has(sourcePath + value.path)).map(value => ({ ...value,
     expectedBytes: required(records.get(sourcePath + value.path)).length, expectedSha256: hashBytes(required(records.get(sourcePath + value.path))) }));
   sourceManifest = { ...actual, inputs: pinned(actual.inputs), generatedIntermediates: [], documents: pinned(actual.documents) };

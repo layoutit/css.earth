@@ -3,7 +3,7 @@ import { createTestPage } from "../../../../site/test/browser-observations.mts";
 import assert from "node:assert/strict";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { chromium, type Page } from "playwright";
-import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with { type: "json" };
+import runtimeDefinition from "../../../../src/objects/mercury/prepared/runtime.json" with { type: "json" };
 
 // Registration evidence for the Mercury nomenclature labels: selecting a feature
 // from the search rows must fly the camera over it, pin its label and caption, and
