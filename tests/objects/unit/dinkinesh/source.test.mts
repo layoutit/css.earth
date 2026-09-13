@@ -10,7 +10,7 @@ import {parseTerrestrialProfile} from '../../../../tools/objects/terrestrial-lay
 import {requireRecord,requireArray,requireString} from '../../../../tools/source-values.mts';
 
 test('Dinkinesh keeps both source shapes and their provenance separate',async()=>{
- const sourceDirectory=resolve('src/planets/dinkinesh/source');
+ const sourceDirectory=resolve('src/objects/dinkinesh/source');
  const read=async(path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(sourceDirectory,path),'utf8'));
  const source=await createSourceManifest({planetId:'dinkinesh',planetName:'Dinkinesh',sourceRoot:sourceDirectory});
  await source.verify();

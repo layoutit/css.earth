@@ -61,7 +61,7 @@ contains `data/shape_models/dinkinesh.stl` and `selam_two_lobes.stl`.
 The retrieved Dinkinesh file has 635 distinct vertices and 1,266 triangles;
 the Selam file is a smooth lobe approximation. This establishes accessible
 geometry candidates, not photograph registration. The
-[Dinkinesh source account](../../../../src/planets/dinkinesh/README.md#lucy-photographic-source-check-13-september-2026)
+[Dinkinesh source account](../../../../src/objects/dinkinesh/README.md#lucy-photographic-source-check-13-september-2026)
 owns the inspection results and unresolved model/frame questions.
 
 For a numeric-table example, [Mathilde's Thomas release](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/)
