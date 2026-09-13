@@ -32,11 +32,6 @@
           "sha256": "5beccc5d2a2f6af6a9d69cd2fbbfb0b731be7cce999233830d1225f8898d3e48"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "e023ff8f1d0fbfa15b1afa986481b0c80a6bf2b047af8200114d8370ce4e702b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "4c3947c71005a0a0122167ac13cefa48d0c03556e4100e38e95eb3c68b667394"
@@ -158,7 +153,7 @@
       "classification": "satellite",
       "color": "#bebbb0",
       "distanceAu": 9.58,
-      "description": "Explore Rhea in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s icy moon, its impact basins and bright fractures.",
+      "description": "Saturn's second-largest moon, more heavily cratered than Dione and Tethys.",
       "systemName": "Solar System",
       "order": 442,
       "context": {

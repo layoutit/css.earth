@@ -64,11 +64,6 @@
           "sha256": "9132de1df85d00d10fa9bdf3d2e7f64ffd62bd74f4ae2da846cf6421e0abdb47"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "4eaf5f88dcd26c20543189870ace2d3f5c3850d1d59d10e64df8eb7820228699"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "fce8df82a8fc1165b0d8682aa1fa574bc20ec79656c906e586c543071d4573bf"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7118191273654264,
-      "description": "Explore Weringia in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in July 1882.",
       "systemName": "Solar System",
       "order": 324,
       "context": {

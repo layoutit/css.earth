@@ -64,11 +64,6 @@
           "sha256": "5e635507f2b0920d1b244e859fce0c3c18d8066673b062d142776c8749b174c0"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "07886f626e3c39b393c96208f1df301cff8a2cb492f28cec33881f0c99d69b1a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "bbd006552554970416ef70da83e396b5cf5efa605ca7b8e5a64646bcfebca5f4"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.6984168410443714,
-      "description": "Explore 1950 DA in 3D with its published shape model and radial elevation.",
+      "description": "Near-Earth asteroid with a pronounced equatorial ridge.",
       "systemName": "Solar System",
       "order": 201,
       "context": {

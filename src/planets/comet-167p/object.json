@@ -31,11 +31,6 @@
           "sha256": "773e59c57e71c7136e7dc4771c5cbf91c0f9879202134b9b00c263b83006b55c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "efe0367970728fd83364c31fa66c6ae546c20939fc829071c1d542c1e909d669"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "410fe8b44e1bbba5aea99e715739e33b05d4f2f6d0d01d6a5dd24fdbf2c5c267"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 19.938682340272877,
-      "description": "167P: CINEOS follows a distant orbit that stays beyond Saturn at its closest approach to the Sun. Its nucleus is represented here by a size illustration from Celestia’s catalog. Illustrative nucleus at Celestia’s catalog scale.",
+      "description": "Comet that stays beyond Saturn even at its closest to the Sun.",
       "systemName": "Solar System",
       "order": 59,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "17fb20395001c9da5fa1810db0d8a0dd62f353a4cccd3117b3a6c5c0897ad687"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "998a4086e0c8673a6cabd9a1a5302b97946f188bb2b7d064ccdb6a75c3ea69fd"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "fd966e6b171faff979ceaec8872fef159a513eb086d9db92875e836095689f86"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.629388047968044,
-      "description": "Explore Alkeste in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in August 1872.",
       "systemName": "Solar System",
       "order": 272,
       "context": {

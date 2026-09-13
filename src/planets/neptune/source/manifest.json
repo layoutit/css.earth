@@ -481,24 +481,6 @@
       }
     },
     {
-      "id": "neptune-authored-content-object",
-      "path": "content/text.json",
-      "expectedBytes": 1550,
-      "expectedSha256": "c667fe9234687b7be2fe9626025d79eb84a568064a6a253ce3a1aae36887e41f",
-      "origin": "Repository-authored Neptune reader text",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
-      "license": "Project-authored specification; referenced observations retain their source terms",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "content"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
-    },
-    {
       "id": "neptune-authored-presentation-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 3945,

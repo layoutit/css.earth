@@ -31,11 +31,6 @@
           "sha256": "044f397b9b2bfcd3d9aa0f66fe089a8d55b5bd2087102c1c62ff0e452b51638c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f8d0e8360ce024334bd579b786a393aa30b64e8e7599c4ad8e5f9fcd178075e0"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "ba4fffcb73ad9fc38e58406c77d31e8720eda4c3391a7cb7ba79144b1954f9cb"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Desdemona, an inner moon of Uranus, through its measured shape.",
+      "description": "Elongated inner moon of Uranus, named after Othello's wife.",
       "systemName": "Solar System",
       "order": 91,
       "context": {

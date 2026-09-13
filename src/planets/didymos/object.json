@@ -75,11 +75,6 @@
           "sha256": "997906495363a7dc18d488baeb9686fa910479d51e6d300afdfcadb3cc0ce324"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "cc770e84e7af850c94d364852a892cc396e9cc4329574e8c2c3b76be5421c54a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "e0d5dcf47be0d58535ff1e587ea79bf49126bd3027dbc24ea9a4269980b4f049"
@@ -146,7 +141,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.6427722213006,
-      "description": "Explore the DART encounter shape of Didymos and its radial heights.",
+      "description": "Near-Earth asteroid whose moon DART struck.",
       "systemName": "Solar System",
       "order": 135,
       "context": {

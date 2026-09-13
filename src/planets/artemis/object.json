@@ -64,11 +64,6 @@
           "sha256": "14d8458e58f755e6c99fc6e3b596f7df615a30092141690c1d4fa72658e4a6e0"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "b617d2f76356edb30edecbfa7042ae0678fa96b9fe5af7edf60c50436381bad0"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "d91a1bb38b218ad685ae33d30e503956e52e4224ef1192178814ad03ff62d795"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3721668452445526,
-      "description": "Explore Artemis in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 16 September 1868.",
       "systemName": "Solar System",
       "order": 260,
       "context": {

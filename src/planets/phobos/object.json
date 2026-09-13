@@ -32,11 +32,6 @@
           "sha256": "3e7d7c728d78f8b4a1eaa8bb24034909cf8dc1aac98d2435f7f906c4ba2b7702"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "84ce2be84d019ecac51b2d00660461da99c3e2f0be8e9682c39ff040e1392f5a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "ef7cc3adc17523f0c01f7e7128ff80a3534f371adb68e64fd99fa7e59e574b3a"
@@ -143,7 +138,7 @@
       "classification": "satellite",
       "color": "#99948e",
       "distanceAu": 1.52,
-      "description": "Explore Phobos in 3D with cssEarth. Inspect mapped spacecraft imagery, elevation and the measured irregular shape of Mars’s moon.",
+      "description": "The larger, inner moon of Mars, marked by the wide Stickney crater.",
       "systemName": "Solar System",
       "order": 422,
       "context": {

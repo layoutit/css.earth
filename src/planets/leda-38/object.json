@@ -64,11 +64,6 @@
           "sha256": "114b637a543d14028cd3e3b45139409e8e33cc647e267b5573d8b620b44463d3"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "3c4fabcf55653d8b24eafb529dd126aa3f44abf42e592e344d47504a15d1ae05"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2d1d7ffe6f8201defedb71f3d3b4fa3b4f23905e8a6cbcacda7a8b4b263bd073"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7426288995401285,
-      "description": "Explore 38 Leda in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in January 1856.",
       "systemName": "Solar System",
       "order": 224,
       "context": {

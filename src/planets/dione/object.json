@@ -32,11 +32,6 @@
           "sha256": "3684ab2d09995231a3e3c89d489c6e763dd1d9f9fe6537862530cbaf071e0f78"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "46b884053c89a3a6135cd76cff67acbdd6a1ab8fe9e103e6e3cb85f7f193e6e6"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "d6cf4475be0dc37fa0d3827fa762a87b9c408c8c3eff244716b51c2c0cf573c9"
@@ -158,7 +153,7 @@
       "classification": "satellite",
       "color": "#bab9b1",
       "distanceAu": 9.58,
-      "description": "Explore Dione in 3D with cssEarth. Inspect Cassini and Voyager imagery and elevation maps of Saturn’s icy moon, its bright cliffs and fractured terrain.",
+      "description": "Icy moon of Saturn streaked with bright ice cliffs.",
       "systemName": "Solar System",
       "order": 441,
       "context": {

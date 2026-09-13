@@ -31,11 +31,6 @@
           "sha256": "cc02548d87ea64859b6b7bd8c94377b523cbf87ef29b1e1f11e09d10f061cddf"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "4cbe291d6dbc888e94232a793b3ee56369d234856d1c150ed7972c1f1bd137de"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "4f443771eb4176ca078e1b9f12477973e0d1e040a101966f2cefe60543e33b16"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Erriapus, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Elongated Gallic-group moon of Saturn that turns in about 28 hours.",
       "systemName": "Solar System",
       "order": 37,
       "context": {

@@ -31,11 +31,6 @@
           "sha256": "0d6d3e60d37d7f278982a9e5fd26accef7c3d1f51d531c66247e0ad3bc0a50d3"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "176dc4860c864871d6cf04f423db527ac36b6133f4c1d114513fa0427342fc29"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "53ac68a0b17ae29199a5157f3d90e7da8b42aa765a24975f2d38e0cb9496f4fd"
@@ -128,7 +123,7 @@
       "classification": "satellite",
       "color": "#c3bfb7",
       "distanceAu": 9.58,
-      "description": "Explore Calypso in 3D with Cassini imagery and its measured irregular shape.",
+      "description": "Small moon that trails Tethys along its orbit around Saturn.",
       "systemName": "Solar System",
       "order": 113,
       "context": {

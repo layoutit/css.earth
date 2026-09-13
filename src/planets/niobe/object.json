@@ -64,11 +64,6 @@
           "sha256": "4763b32fb7374041e852015ec5f9747c7ea8447649836c16e6f141793c2e30e4"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d9cb2d47ad1effb8f595a3d4319214ace7d3d40dd8da2d33a61ec367776d633f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "f3510dc437e9c2dc40a9b42bc269ef873c923247c164bb95b246b2054ae68c08"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.754299168249887,
-      "description": "Explore Niobe in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in August 1861.",
       "systemName": "Solar System",
       "order": 241,
       "context": {

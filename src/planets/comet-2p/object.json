@@ -31,11 +31,6 @@
           "sha256": "57b09fc1a0931efa99b99f09394429662f50dab0b1401470de2bae46f6afe6ab"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "e592bc299976e8afe7c516a835115e41b9b0b94c6fb1df0e623115c03b9e65e2"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "4ff47d038fd5823ca502d8ae1cfc02000fd29dd0aa6e1764bb90084d74c20d7b"
@@ -123,7 +118,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 2.217736510492418,
-      "description": "Explore 2P/Encke through a shape approximation constrained by radar observations.",
+      "description": "Comet that returns to the inner Solar System every few years.",
       "systemName": "Solar System",
       "order": 71,
       "context": {

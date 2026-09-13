@@ -31,11 +31,6 @@
           "sha256": "0649f58ed5e3940f634d8716d5224a9641de4c1865c083e6a5c63e9fabf15d1b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "646d92df70599a007d3878d4bd01a1f6b9c96cc1d9a3c63740d4035ce7ad2628"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "4870865583973ce31eced0d17e84743f12cc1666df6f02b4ce957c72cafa8d27"
@@ -118,7 +113,7 @@
       "classification": "satellite",
       "color": "#9a8f85",
       "distanceAu": 5.2,
-      "description": "Explore Metis with Galileo imagery on a dimension-constrained shape.",
+      "description": "Small inner moon of Jupiter that circles inside the main ring.",
       "systemName": "Solar System",
       "order": 104,
       "context": {

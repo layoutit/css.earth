@@ -64,11 +64,6 @@
           "sha256": "f352cb5041ab2b1b44ae7a90d5da4aff1439bb8b42795f0d9e8cef3b79b58027"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "b217479e6880c653fac57ec221331362db9d7b7f9238a83e261a3981014b3eeb"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "da936e70aaa7ce600acd56152b698f3cfa489d23433f7a6e334fe2ad412764d0"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1509104848150167,
-      "description": "Explore Hygiea in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Nearly round asteroid that may count as a dwarf planet.",
       "systemName": "Solar System",
       "order": 140,
       "context": {

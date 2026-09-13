@@ -64,11 +64,6 @@
           "sha256": "3d680760e2b0e8bb0dd3476eba02c7db6abc1d7755a70defdf48387eab418276"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "dbd71383a018943da485459e09448c134cc1829a658b7ccb1e861b87c4afde6a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "110c25043b223c89419ea7993bfc3d5865048c76f2da091d5f9d7824d0329072"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.9765894346509167,
-      "description": "Explore 1999 FR33 in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered in March 1999.",
       "systemName": "Solar System",
       "order": 420,
       "context": {

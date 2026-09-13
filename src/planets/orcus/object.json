@@ -31,11 +31,6 @@
           "sha256": "edb192a8c495b152fc72020d504273a74fa96edeb822827f2200e33e9509f2bd"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "8cbbf04b12a2eb66ff50110c2f13fc71f5d202f6bfcd000e07e6eaa89ffd33b6"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "4ba1dd898708a30a0c19945d1b4e17793eb8f1b16937d5c1f0d1a04bf06a3be5"
@@ -123,7 +118,7 @@
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 47.98129781525766,
-      "description": "Orcus is a large resonant world beyond Neptune, partnered with the substantial moon Vanth. The displayed size belongs to Orcus alone; its smooth shape and grid surface are illustrative.",
+      "description": "Plutino paired with a large moon, Vanth.",
       "systemName": "Solar System",
       "order": 11,
       "context": {

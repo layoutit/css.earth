@@ -31,11 +31,6 @@
           "sha256": "3486664c672b7e7d0230e7fca54097a510c28147bab1655c4120c8546bc5a03a"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "84f1fb7baacf1aafa9f51fd9767a2f0e7eae70c9508b83e73114cf7c295605a8"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "92482c50e11b9d2a8fc79f4877c944142e3056dec716fa0f09c6bed7cc93f190"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Aegaeon, a small moon of Saturn, through its measured shape.",
+      "description": "Tiny moon inside a bright arc of Saturn's G ring.",
       "systemName": "Solar System",
       "order": 87,
       "context": {

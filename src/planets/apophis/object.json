@@ -64,11 +64,6 @@
           "sha256": "2fba0a94604dfba048c2fc7ebc1c9b291c6f180f353b8b67dfdb1607e71be4f9"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f6bded809fbc87f3d7aec5ec12380953da43904ce8df8a094d3183d9e42cc3cb"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "e413e503eb27e7af64f70843cc12416499586e339e46f48656f5277a53053e1c"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 0.9223337821550773,
-      "description": "Explore Apophis in 3D with its published shape model and radial elevation.",
+      "description": "Near-Earth asteroid listed as potentially hazardous.",
       "systemName": "Solar System",
       "order": 202,
       "context": {

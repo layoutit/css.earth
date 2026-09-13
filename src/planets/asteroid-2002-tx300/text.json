@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "asteroid-2002-tx300",
+  "card": {
+    "text": "Bright, icy object beyond Neptune, related to Haumea.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2002%20TX300",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "55636 (2002 TX300); Discovered 2002-10-15 by Palomar Mountain/N at Palomar Mountain/; orbit class: TransNeptunian Object; q: 38.2 au"
+      },
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201732564",
+        "url": "https://doi.org/10.1051/0004-6361/201732564",
+        "label": "Research publication · DOI 10.1051/0004-6361/201732564",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It belongs to the family of icy fragments thought to have been knocked off dwarf planet Haumea.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2002%20TX300",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "55636 (2002 TX300); Discovered 2002-10-15 by Palomar Mountain/N at Palomar Mountain/; orbit class: TransNeptunian Object; q: 38.2 au"
+      },
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201732564",
+        "url": "https://doi.org/10.1051/0004-6361/201732564",
+        "label": "Research publication · DOI 10.1051/0004-6361/201732564",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Occultation shape example",
+      "detail": "Inferred shape",
+      "summary": "One published flattened fit to a two-chord occultation; other sizes and shapes also fit."
+    }
+  }
+}

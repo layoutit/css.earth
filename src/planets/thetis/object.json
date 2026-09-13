@@ -64,11 +64,6 @@
           "sha256": "789b6b5750d1598efa6321ad8cd94af132a67322e41292e04e0e588fbb7510f7"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "e33d851c0cd6c41da28dcfc3f11a65b1d7242acee95af9809397eba84aad1a60"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "51960c04353ac09b535a406cc7a1813da7e04973d149411d8580407166df404b"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.472287077212926,
-      "description": "Explore Thetis in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in April 1852.",
       "systemName": "Solar System",
       "order": 216,
       "context": {

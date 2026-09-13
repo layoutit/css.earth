@@ -64,11 +64,6 @@
           "sha256": "86876278bb9d372f2f8657b5621066457a2f0eac328ba6a4521a1a0087d66598"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "939b88e370afdbb88791e02d6a486a82ff31db1fa8305fb5a3f49e20b723dc25"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "fb148ab4fca5429d07ac7630ee1d12c224a722165f3c99fd2135a41817ae48ee"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.10892633182096,
-      "description": "Explore Aemilia in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in January 1876.",
       "systemName": "Solar System",
       "order": 291,
       "context": {

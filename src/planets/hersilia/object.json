@@ -64,11 +64,6 @@
           "sha256": "89493c10c1caee054389265e8462bf3effa5a521e31a3aa7e5e863de4a02c97b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "00b3958e1019c366c9213f0fe842aa8d2a6c415141c1e6a9fa6fcd9f74ea20cf"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "d020df16cd6f3ffbac5ad1d5bf146e9c0e632efefdeb6cebb7d3763c85d9e412"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.741003699475706,
-      "description": "Explore Hersilia in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 13 October 1879.",
       "systemName": "Solar System",
       "order": 312,
       "context": {

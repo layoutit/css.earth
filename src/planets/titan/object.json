@@ -51,11 +51,6 @@
           "sha256": "5f3b5fa5532549b0c937f17d1a360d2f4339b74801af247f427aaad7cd65bcd4"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "2bc21c5a1c794a64bd71753809c5836cf5766a06b0e602ca4e65c2d6a7a1ea9b"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "15e967900bca207b7d76ed95bf266e1e8da76f3174bcbbad46cd0aaed15833df"
@@ -177,7 +172,7 @@
       "classification": "satellite",
       "color": "#bca06b",
       "distanceAu": 9.58,
-      "description": "Explore Titan in 3D with cssEarth. See through Saturn’s largest moon’s haze with Cassini near-infrared imagery.",
+      "description": "Saturn's largest moon, the only moon with a substantial atmosphere.",
       "systemName": "Solar System",
       "order": 443,
       "context": {

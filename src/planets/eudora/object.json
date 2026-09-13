@@ -64,11 +64,6 @@
           "sha256": "e6a0078be07270e8460182e7a1ad8189d8b78ee41f68f333b15d3cb5cd62121a"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f55165183962be9834f3c8506c7e065836e2b80d1521a66be7d7094ec4a42bcd"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "861cd173a57c4de2713dd3783f7e7973f2d1577f210bf96fd9fc3c4b7564624d"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.868342551130494,
-      "description": "Explore Eudora in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered in August 1880.",
       "systemName": "Solar System",
       "order": 320,
       "context": {

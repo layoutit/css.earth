@@ -64,11 +64,6 @@
           "sha256": "763bab1328cd4f785e0955a829a41680976f278fa6a6d19da3aea4a65c09397b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "e93652e364774b1ef242855758bb6c3f88816b6992fcc5c7c8d23dffbcc2923e"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "9057f5de65223f72bfe2d99cf67c63c322fc28548fece2fa403a8761c5aa2afa"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.707622170185717,
-      "description": "Explore Parysatis in 3D with its published shape model and documented physical size scale.",
+      "description": "Stony main-belt asteroid, discovered in February 1918.",
       "systemName": "Solar System",
       "order": 397,
       "context": {

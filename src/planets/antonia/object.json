@@ -64,11 +64,6 @@
           "sha256": "e8340526f52488e99b60628c425e4e2fa6373cf1968e512957e4c1b38261257d"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "57a21ff77c205b642a18a6429463b2167167096885b1769e963eaf70c2117121"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "bcd3c991a8eafbed1358ae515f0f4dcc861b8230a2c022511dae5a516b774798"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7790127024022557,
-      "description": "Explore Antonia in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in February 1888.",
       "systemName": "Solar System",
       "order": 348,
       "context": {

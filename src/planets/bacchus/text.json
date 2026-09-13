@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "bacchus",
+  "card": {
+    "text": "Near-Earth asteroid with a deep central dent.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Bacchus",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "2063 Bacchus (1977 HB); Discovered 1977-04-24 by Kowal, C. at Palomar; orbit class: Apollo; q: 0.701 au"
+      },
+      {
+        "catalogueId": "source-bacchus-bacchus-shape",
+        "url": "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj",
+        "label": "Bacchus · bacchus shape",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "C. Kowal found Bacchus at Palomar in 1977. It may be made of two lobes.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Bacchus",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "2063 Bacchus (1977 HB); Discovered 1977-04-24 by Kowal, C. at Palomar; orbit class: Apollo; q: 0.701 au"
+      },
+      {
+        "catalogueId": "source-bacchus-bacchus-shape",
+        "url": "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj",
+        "label": "Bacchus · bacchus shape",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Radar shape model",
+      "detail": "Published shape",
+      "summary": "A radar model from about half a rotation; its shape and pole are uncertain."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 315 m sphere. Colors mix the overall shape with local relief."
+    }
+  }
+}

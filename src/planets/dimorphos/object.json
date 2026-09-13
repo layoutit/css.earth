@@ -80,11 +80,6 @@
           "sha256": "e5898eeaab7969dc66bb4f4d1721c14b428cdb920917b63ea30fc214b4475215"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "1bb2133ec5a33de0560a7c552f84255b5b553966a418a680b7069b99c591f7a9"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "cabcef33ffacd495b2498ebff20faab3fae511aff5ba42ef88182f2c4922afb3"
@@ -151,7 +146,7 @@
       "classification": "satellite",
       "color": "#aaaaaa",
       "distanceAu": 1.6427722213006,
-      "description": "Explore Dimorphos, the moon of Didymos, with its DART encounter shape.",
+      "description": "Small moon of Didymos, target of the first asteroid deflection test.",
       "systemName": "Solar System",
       "order": 136,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "26a928076c646dd71d5093a1bf5b54e9f1537d4fb3f41cbe1999af81627ec951"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "02de840a0cee4d287ef36d892db4e4c5dbc4dc8945809c8c1fb42d67bc472cf6"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0bc43245b8c74b9bc59597108e79707287fd7fa6867fbdcb6243331bed8600c1"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.102547858991143,
-      "description": "Explore Semele in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in January 1866.",
       "systemName": "Solar System",
       "order": 251,
       "context": {

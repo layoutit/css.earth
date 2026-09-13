@@ -218,7 +218,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
   }
   if (recipe('content')) {
     add('content', 'content', '', [recipes.get('content')!.path.replace(/^source\//u, '')],
-      'Compile the authored introduction, facts, dataset descriptions and references into the shared content document.', {
+      'Compile the authored facts, dataset recipes and references into the shared content document.', {
         label: 'Object information', urls: ['object:prepared/content.json'], lensIds: [],
       });
   }

@@ -64,11 +64,6 @@
           "sha256": "15cae0903761a52708aa7584e66e19f79c3bf32d47ee23c20fc17e27f5f4ca9d"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "b653a84b0506e84596d1c1f30072a2b667cf07562af69c9a94e979ea654af80c"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0315514c4f1bd5fab4685900e478a1fd015e75cb4bbc6df0aac9fd0e43815b83"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1311603864437165,
-      "description": "Explore Meliboea in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 21 April 1874.",
       "systemName": "Solar System",
       "order": 279,
       "context": {

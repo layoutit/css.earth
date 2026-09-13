@@ -64,11 +64,6 @@
           "sha256": "38e57785af41740bdd628851b622327414525973e350c5cb9cbdb195d638832b"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "8a779ccca28e7d0f46046bf1a430966b2d8803272121ff691d69b4bdbb459c63"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "0b8f33386a33b9a26d87554009eb7446a1db9abb88a18d704782bd30b69d6e93"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0951664844463056,
-      "description": "Explore 52 Europa in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 4 February 1858.",
       "systemName": "Solar System",
       "order": 168,
       "context": {

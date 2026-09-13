@@ -64,11 +64,6 @@
           "sha256": "ae2191bee3149c57f268d85b3846852dcfde4503e33220d74a5154d424d58f8c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "fd45835d04d659d5f4c0f022412561f26bf1f84e3a75e00ff7ed32a9017f0423"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "b35a8cc96afe9c8e978a5ec83a5f482e671630f82675ce6681ddb06d5684eeb8"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4444877106591107,
-      "description": "Explore Isis in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in May 1856.",
       "systemName": "Solar System",
       "order": 226,
       "context": {

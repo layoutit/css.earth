@@ -116,11 +116,6 @@
           "sha256": "2cb2a131acafd655953caef27890548a79e9df8f8c2f0e46d79277b8a7d92463"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "50dd79ff101c2685a59a926609b84f2b232975393a350771b8f388c54758d46f"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "6ef42f0d2bef147f371835eaf317501d5ee173c41f0b1d70dc366a452e40eab1"
@@ -165,7 +160,7 @@
       "classification": "dwarf-planet",
       "color": "#8e8b86",
       "distanceAu": 2.77,
-      "description": "Explore Ceres in 3D with cssEarth. Inspect the largest body in the asteroid belt, its cratered surface and the bright salt deposits Dawn mapped.",
+      "description": "The dwarf planet in the asteroid belt, mapped by Dawn.",
       "systemName": "Solar System",
       "order": 424,
       "context": {

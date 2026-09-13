@@ -64,11 +64,6 @@
           "sha256": "4f5b7b798cfde5d83e78f5ca30ffb5245fd567ea049429c48e993c322e4ec0ca"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "76c37531cf5cad65557ea3266d5e217e2bb16c1481c540ad945008c013508b0f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "5df6e3231dce04808f215936811b69c102a958c484c7480af05aca20b0f88ace"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.217218141628041,
-      "description": "Explore Agenor in 3D with its published shape model and radial elevation.",
+      "description": "Dark Jupiter Trojan asteroid, discovered in March 1971.",
       "systemName": "Solar System",
       "order": 370,
       "context": {

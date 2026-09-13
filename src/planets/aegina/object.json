@@ -64,11 +64,6 @@
           "sha256": "463a621ba6b98291de5a431bacdeda6aba7f0252d29cc07d550cedeb278fb4e5"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "45adb1873725cec7f4787abc8c3bc28378aeb83fa157ff72798a9b6834c4fdf1"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "1512e6ee581424d9b75331bf18913a04328b42c9b79be1423e81ee844b2af3f1"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5889074402927057,
-      "description": "Explore Aegina in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in November 1866.",
       "systemName": "Solar System",
       "order": 252,
       "context": {

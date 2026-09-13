@@ -64,11 +64,6 @@
           "sha256": "11021573935feab6ffd9a6cc087ab9367e4420942593629692e01f653924a766"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d4e0f063e841a56ba36ee24668f9de368f382e4f9ac48c9eb06772dca1d047e8"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "b2a382d647ef979866e6ac3be34c74bab7af3a71b429bbf06bad4e7d6b2915ed"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.991273442215631,
-      "description": "Explore Reinmuthia in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in February 1927.",
       "systemName": "Solar System",
       "order": 404,
       "context": {

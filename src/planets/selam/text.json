@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "selam",
+  "card": {
+    "text": "The first contact-binary moon found, orbiting the asteroid Dinkinesh.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-024-07378-0",
+        "url": "https://doi.org/10.1038/s41586-024-07378-0",
+        "label": "Research publication · DOI 10.1038/s41586-024-07378-0",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Lucy saw Selam's two touching lobes when it flew past Dinkinesh. Selam is about 520 m end to end.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-024-07378-0",
+        "url": "https://doi.org/10.1038/s41586-024-07378-0",
+        "label": "Research publication · DOI 10.1038/s41586-024-07378-0",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Measured two-lobe envelope",
+      "detail": "Lucy",
+      "summary": "Two touching ellipsoids sized from Lucy images. Its orbit is measured; its current position is approximate."
+    }
+  }
+}

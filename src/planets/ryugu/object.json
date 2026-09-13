@@ -75,11 +75,6 @@
           "sha256": "65d192f4ac6eceb259985291afcca2f5000d053ef7284d75c84cf431bbfb05c2"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a9ae5a37a47e43ad26707bc596306a76685852537c5b30ef4fa7c50865956cec"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "f8459547fa630651abcddddf187d276eda8d348567bdda9d73d7a498544def16"
@@ -146,7 +141,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 1.19,
-      "description": "Explore Ryugu in 3D with cssEarth using mission-derived shape and surface data.",
+      "description": "Dark, spinning-top-shaped asteroid sampled by Hayabusa2.",
       "systemName": "Solar System",
       "order": 122,
       "context": {

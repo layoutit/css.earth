@@ -31,11 +31,6 @@
           "sha256": "98d1566c2b7c42d13f44ce31394334d97f887fee91673466c1cd48b5903a8c03"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "b95e09d7d73b993e8ea5a3fcfcf1c8a7b82282a549dfbc89a72fa697dfe64b0b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "218bb7b1e7d0063f4a9cd2caa4a021e89ca0e67b4fb96bd9209ce335d0a7e890"
@@ -128,7 +123,7 @@
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
-      "description": "Explore Epimetheus with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "description": "Moon that swaps orbits with its larger partner, Janus.",
       "systemName": "Solar System",
       "order": 436,
       "context": {

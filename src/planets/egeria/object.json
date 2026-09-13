@@ -64,11 +64,6 @@
           "sha256": "4cbaf4f6b8faf46c488e4f962d70de69d62ee4d6981a8c52170fb82c3fd4c79f"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "dd49b3ae7a1099f2b84fd282c9cd014e001395c77e2ac38cc246033b0274d187"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "31f92744c97ec27c55af550f448bde0b818a5448d6068b6ce92243d050ba4586"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5764780745110407,
-      "description": "Explore Egeria in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in November 1850.",
       "systemName": "Solar System",
       "order": 152,
       "context": {

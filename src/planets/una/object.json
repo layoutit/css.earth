@@ -64,11 +64,6 @@
           "sha256": "8a543e37656d69dd5f7edfad6dc5998c34b5fdd4ec17009828cfc7087ef04f4d"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0eb20033b845bcf1564e309b22ce9ed6571d73550082256763ae1c9c126b2378"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "3768531114fd0866a1b8c8d0f704aff7b81efc71bf60f63f226baec4605543aa"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.728272185210906,
-      "description": "Explore Una in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in February 1876.",
       "systemName": "Solar System",
       "order": 292,
       "context": {

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "anthe",
+  "card": {
+    "text": "Tiny moon of Saturn whose impact debris feeds a faint ring arc.",
+    "sources": [
+      {
+        "catalogueId": "nasa-saturn-moons",
+        "url": "https://science.nasa.gov/saturn/moons/anthe/",
+        "label": "NASA Science · Saturn’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Anthe circles Saturn in about 25 hours between Mimas and Enceladus, and Mimas tugs on its orbit.",
+    "sources": [
+      {
+        "catalogueId": "nasa-saturn-moons",
+        "url": "https://science.nasa.gov/saturn/moons/anthe/",
+        "label": "NASA Science · Saturn’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Estimated size",
+      "summary": "A 1 km sphere stands in for the estimated size; the real shape is not resolved."
+    }
+  }
+}

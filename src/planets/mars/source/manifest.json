@@ -440,26 +440,6 @@
       }
     },
     {
-      "id": "mars-object-text",
-      "path": "content/text.json",
-      "expectedSha256": "d8fdf711daab299cbbd26ce67562ab666e072d9cf94a8e851d73be8642d817e1",
-      "expectedBytes": 1643,
-      "origin": "Repository-authored Mars reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared shell content with source provenance.",
-      "consumers": [
-        "panel",
-        "lenses",
-        "charts"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
-    },
-    {
       "id": "mars-chart-assets",
       "path": "content/charts.json",
       "expectedSha256": "0f880b44549b5c6c7b2a532b65727c7d54fd05fa10c17b33c576ebe3d0f1d541",

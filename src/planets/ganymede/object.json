@@ -121,11 +121,6 @@
           "sha256": "a718326cfe99d522e99a4bb56eec126ae346312a7383d360a6a322d1b4f60fe9"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "e3623722ee6f9cc7868c4fb4dbffc2d15548d145c88ab9d629d5deb465078dba"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "b383792c26a9347aa7730d98e43020200ddeba7bd0528da8253c30292c076062"
@@ -170,7 +165,7 @@
       "classification": "satellite",
       "color": "#a49a83",
       "distanceAu": 5.2,
-      "description": "Explore Ganymede in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s largest moon and its grooved icy surface.",
+      "description": "The largest moon in the solar system, bigger than Mercury.",
       "systemName": "Solar System",
       "order": 428,
       "context": {

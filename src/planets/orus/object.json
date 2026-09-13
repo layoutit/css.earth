@@ -31,11 +31,6 @@
           "sha256": "681f17e6c28285db0fb362ffb3b6273de9fb4eaa7d004db092d0e3793c692374"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "32491f5fdb467afb3c6c9021d884adb245246e170463c331d05f694b966152f6"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "5de23d87016acf6d705e0c8b5a5e8f64bff46204b46946c7770362e94d87d307"
@@ -123,7 +118,7 @@
       "classification": "asteroid",
       "color": "#a0a0a0",
       "distanceAu": 5.1231730197676795,
-      "description": "Explore Orus, a Lucy target, through its observation-constrained approximate ellipsoid.",
+      "description": "Dark Jupiter Trojan that Lucy will visit.",
       "systemName": "Solar System",
       "order": 20,
       "context": {

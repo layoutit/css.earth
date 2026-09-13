@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "menoetius",
+  "card": {
+    "text": "Smaller partner of Patroclus in a binary pair of Jupiter Trojans.",
+    "sources": [
+      {
+        "catalogueId": "source-menoetius-model-surface",
+        "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+        "label": "Shape model",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Menoetius measures about 117 by 108 by 90 km, and circles Patroclus every 4.28 days.",
+    "sources": [
+      {
+        "catalogueId": "source-menoetius-model-surface",
+        "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+        "label": "Shape model",
+        "checked": "2026-09-13",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Occultation shape approximation",
+      "detail": "Approximate shape",
+      "summary": "A 117 × 108 × 90 km ellipsoid from occultations and light curves; local shape and surface are not resolved."
+    }
+  }
+}

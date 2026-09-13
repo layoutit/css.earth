@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "proteus",
+  "card": {
+    "text": "Box-shaped moon of Neptune, one of the darkest objects in the solar system.",
+    "sources": [
+      {
+        "catalogueId": "nasa-neptune-moons",
+        "url": "https://science.nasa.gov/neptune/moons/proteus/",
+        "label": "NASA Science · Neptune’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Proteus is almost massive enough to have pulled itself round. Craters cover it, with no sign of later geologic change.",
+    "sources": [
+      {
+        "catalogueId": "nasa-neptune-moons",
+        "url": "https://science.nasa.gov/neptune/moons/proteus/",
+        "label": "NASA Science · Neptune’s moons",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "Clear-filter mosaic",
+      "detail": "Voyager 2",
+      "summary": "Brightness is corrected for lighting; much of the fine grain is image noise."
+    },
+    "filter-color": {
+      "title": "Voyager green, blue and violet filters",
+      "detail": "G / B / V",
+      "summary": "Three Voyager filters shown as red, green and blue; broad color only."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Radial shape",
+      "summary": "Height above or below a 208 km sphere; unseen terrain is modeled."
+    }
+  }
+}

@@ -82,11 +82,6 @@
           "sha256": "4bb942375cb753e010be227203a2497852dea366dfe9928e5ce56b4887e336e1"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d8fdf711daab299cbbd26ce67562ab666e072d9cf94a8e851d73be8642d817e1"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "dc5bf43aad04eb5e7e60cde51fcb3ac3fa3040a589e8fe4012ff35e079f756ed"
@@ -176,7 +171,7 @@
       "classification": "planet",
       "color": "#a95e47",
       "distanceAu": 1.52,
-      "description": "Explore Mars in 3D with cssEarth. Discover the red planet’s volcanoes, deep canyons, polar ice, and thin atmosphere in an interactive explorer.",
+      "description": "Dusty red planet with the largest volcano in the solar system.",
       "systemName": "Solar System",
       "order": 121,
       "context": {

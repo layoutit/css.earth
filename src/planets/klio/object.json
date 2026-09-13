@@ -64,11 +64,6 @@
           "sha256": "82e068729a952b75ee91e07d06b4b3d6bc6097c2f088290650e025d4c6fe0f5c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "230b2ff6caa4eefe976a1ad9bcb6d95be22c3b976954d8f121a67caa010dd20d"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "3772501c143dc3c663687a4e136f2d9e149c4964b5192aaae61ba85aa9796a31"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3638584071567386,
-      "description": "Explore Klio in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in August 1865.",
       "systemName": "Solar System",
       "order": 249,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "a0b31164567ac9461eb33a84fa1f7512d3f56bb17a73bfac92e4f749eb1d1981"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "1dee5bb167fc0674f4d48978593af9477049e70ba5009c3b15b57b738c0ccc69"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2a4a5b4c457d5fc80ae661162a7813225569535fd874bbfd303c9d91f7520a0e"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4414298428674326,
-      "description": "Explore Fortuna in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in August 1852.",
       "systemName": "Solar System",
       "order": 149,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "0df4e5f6d2865e52000689b575d31dc3df30eaca654f7ba1d524ab0310b98dbd"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a9418d614e5a75b9b2333c9da74ebc059ae797a7194eb3376af4674329288a54"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "c6fb25beb2040b618709b74b70324642c6ae544eba71a5b1302b1b4f2e6e1a97"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.267273879169896,
-      "description": "Explore Harmonia in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in March 1856.",
       "systemName": "Solar System",
       "order": 198,
       "context": {

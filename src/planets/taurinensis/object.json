@@ -64,11 +64,6 @@
           "sha256": "24027356508db604a3d08ca0dbf0b891144b9cbd6f5583e456c3ba35008aad60"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f068acbab38e502bad23decbe94074438a2faf7734e9dbb4b4f39072d504347a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "ba1bee12a3c4f7c11672219c402fc23a8cae84a88ba50f30b55a7ae051118753"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.1894142356630333,
-      "description": "Explore Taurinensis, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.",
+      "description": "Stony Mars-crossing asteroid, discovered in June 1903.",
       "systemName": "Solar System",
       "order": 469,
       "context": {

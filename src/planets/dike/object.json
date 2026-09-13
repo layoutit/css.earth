@@ -64,11 +64,6 @@
           "sha256": "430c95dab824fa3ffdd801c05ebf90a3f2405f08152a2a194a763e1b32d3087e"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a00d28ad5d488f51f2b060f601c32f70f745542bdd903e5d47cabdd71d487c38"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "9cadacb16fd9a3beceab55f9e95a43af217dd7f05467ac8e49cb0728a73f5451"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.662672838262387,
-      "description": "Explore Dike in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark main-belt asteroid, discovered in May 1868.",
       "systemName": "Solar System",
       "order": 372,
       "context": {

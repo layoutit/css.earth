@@ -492,25 +492,6 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
-    },
-    {
-      "id": "triton-object-text",
-      "path": "content/text.json",
-      "expectedBytes": 1344,
-      "expectedSha256": "19fc1e0a279de3dd511035a9ecd07e1ce0a91407ae4082c5c3d4aadbb3d2f0c5",
-      "origin": "Repository-authored Triton reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "panel",
-        "lenses"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
     }
   ],
   "documents": [

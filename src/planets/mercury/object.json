@@ -82,11 +82,6 @@
           "sha256": "4bf706c01c427935e3f13957f8430284795ea4e0d2389d33239736ec8c7c76f9"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "955ae2abe59cd0f3fc87a558a93bebb519a5a8cc3dbf4d17b423301e1f592698"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "c51699bf26519d8f03a19eb1f903dcb4130364a58b7118870f127c51f64dff57"
@@ -182,7 +177,7 @@
       "classification": "planet",
       "color": "#9d9388",
       "distanceAu": 0.39,
-      "description": "Explore Mercury in 3D with cssEarth. Inspect the smallest planet, its cratered surface, and the extreme conditions closest to the Sun.",
+      "description": "The smallest planet and the closest to the Sun.",
       "systemName": "Solar System",
       "order": 117,
       "context": {

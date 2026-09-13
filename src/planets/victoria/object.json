@@ -64,11 +64,6 @@
           "sha256": "a6ebbcdeecfb2047ad8ad037b41ab62bc049ee5c579129bfc2d80ee89c7edda1"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "18b807c43dec718bc0781a84ed48c5d98998992c3aa967abb61fa883e7bc1fa8"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "471ac5db01b511fe753829e1465fbe449af9d49108b49ecf35665bf46cc0cb12"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3351679097411595,
-      "description": "Explore Victoria in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in September 1850.",
       "systemName": "Solar System",
       "order": 165,
       "context": {

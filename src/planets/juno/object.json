@@ -64,11 +64,6 @@
           "sha256": "89dc119c16d40040f671dd53d8d9e2d04a56cc474b027bbcb6624105b59cd541"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "29647fcd04a51f46385d72818d9505746baf506b3aab8d9abe47080bf02839bb"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "39354befd2e6462321e624e673301fc35409d3bb2183f28dad1d01fd08b0c934"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6710204451309156,
-      "description": "Explore Juno in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "One of the first asteroids ever discovered.",
       "systemName": "Solar System",
       "order": 141,
       "context": {

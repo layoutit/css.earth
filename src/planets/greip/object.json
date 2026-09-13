@@ -31,11 +31,6 @@
           "sha256": "86e70aa00e9e683d65999575bbcae0756ac75f4eb5b54a3ddddf629921d96948"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f72a2c873433eb6820871150fd406cb5f721b0fc47af18c41ac23ac6a52dc303"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "b27b2769572125a8008dba63db1087c4d4a1262510d5daabe71c0f99bfa93a44"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Greip, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Norse-group moon of Saturn with two possible rotation periods.",
       "systemName": "Solar System",
       "order": 47,
       "context": {

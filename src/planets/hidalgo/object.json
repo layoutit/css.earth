@@ -64,11 +64,6 @@
           "sha256": "ee4b5445cd1b6e8f2af3fa782d788b0926328c1991dff6716da2bcde0e3d2577"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a194cb6f8ebb3354fe162c2a5f74cba0ea4f55747b048e6f303569559c5e7994"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "46aeb59e03f520c76c31d1b442d54922d25d415bd9c8de4a2cfea196a531b051"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.728989790748572,
-      "description": "Explore Hidalgo in 3D with its published shape model and documented physical size scale.",
+      "description": "Very dark centaur, discovered in October 1920.",
       "systemName": "Solar System",
       "order": 400,
       "context": {

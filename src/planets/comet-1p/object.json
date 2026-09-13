@@ -31,11 +31,6 @@
           "sha256": "56f7c9b11d48fd68ea935276ad35f6369e3b36edd900596e3af3e9d2c1b3c24a"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "fc1142962e8bfa83df738665502a59c7dcb555fb247d9676b728b99c12da6af6"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "3d4d26b465fa2c05130181729b11e9b10c7838883df409b5f16be702dd7cec6d"
@@ -128,7 +123,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 17.859,
-      "description": "Explore Halley’s historical nucleus shape and Giotto–Vega photographic mosaic.",
+      "description": "The best-known periodic comet, photographed up close by Giotto and Vega 2.",
       "systemName": "Solar System",
       "order": 78,
       "context": {

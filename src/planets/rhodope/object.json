@@ -64,11 +64,6 @@
           "sha256": "2965929910426d54b1e3b0c60fd7bca928ef8c3ef60f26f7fb70181214df25d8"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "cc67f1f0f836d5ae4a826866754e0e3a4998d859fc1b3e4cbc6de0781889a764"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "1d7f88b638058328cfdb4b9cefba43e97f4f486aa7164492fe4bee5b8d0e208f"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6866911021546116,
-      "description": "Explore Rhodope in 3D with its published shape model and radial elevation.",
+      "description": "Dark main-belt asteroid, discovered on 15 August 1876 at Clinton.",
       "systemName": "Solar System",
       "order": 298,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "8272ea490eeb320a863d02f2ea363169ad873bfae21d7dde824ea18f44aa4326"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "20133854b046321f15687ede7a8da9671810d74f260010b5cfaeeb113a4b4a28"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "42c1b20a8450af688a7b57225d9f22b2fae76d68f26a414b8c6dd30e60dfcf48"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6925655976731475,
-      "description": "Explore Felicitas in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in October 1869.",
       "systemName": "Solar System",
       "order": 262,
       "context": {

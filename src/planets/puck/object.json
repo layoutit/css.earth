@@ -31,11 +31,6 @@
           "sha256": "33cc13defeaf3dbe010e75fbe43705851d5f3e2c1e1bcad3fafec4307d5d96ef"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "c48e24b0b33167e6b5466de299a5a1be967b500fdac697e8f53e35eb88d6cac9"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "5fc41aad71394e5e15168aac5fea2127e39d2480ec915c5fbab94619901d3a71"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
-      "description": "Explore Puck with Voyager 2 imagery on its measured-size shape.",
+      "description": "The largest of Uranus's small inner moons.",
       "systemName": "Solar System",
       "order": 101,
       "context": {

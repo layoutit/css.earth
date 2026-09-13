@@ -64,11 +64,6 @@
           "sha256": "5c8226ee11ab3b0d8d297bffc13d8af3d743b1dbb3abfe6c9e4795ee31254d4f"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "153c93a46044083b7a714b31e37db563fe64ce2f8cebafaf31d71063d5dcbdc0"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "05db7726268c2ac4fb38ebf3115e935bad9eb028202ee36612ba90299bd7486e"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.2485450870597032,
-      "description": "Explore 1992 SK in 3D with its published radar shape model.",
+      "description": "Elongated near-Earth asteroid mapped by Goldstone radar.",
       "systemName": "Solar System",
       "order": 213,
       "context": {

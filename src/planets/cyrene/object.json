@@ -64,11 +64,6 @@
           "sha256": "7ae3132f8b3700ea3f061716e8c2ae2e84e0e31ac88dbb5d8c5f6e9fba5c327d"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "90ad01aa217a337452eaf136034858388ae857dec2686fcecfc7f27fde309652"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "62729593c4027cfdec76ac5941037c67ce67f8bd2117db99730378289b5936a0"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.07124717724166,
-      "description": "Explore Cyrene in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in August 1873.",
       "systemName": "Solar System",
       "order": 277,
       "context": {

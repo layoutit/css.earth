@@ -31,11 +31,6 @@
           "sha256": "c0e64b6984e24cd0fdb2ca0b94bb2c3bf9f35ef47590098a63de7ef81a2490a0"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "7406e863457a519063bc5414294554e426a62b5a6fe7dd4a28c347a08882e6c7"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "d8135663d62811cf7a0944a0e610d5b3d1736a688687bc73c9ab602231b55475"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 1.9869,
-      "description": "Explore the larger outer moon of 2001 SN263 through its archived radar shape.",
+      "description": "The larger, outer moon of the triple asteroid 2001 SN263.",
       "systemName": "Solar System",
       "order": 16,
       "context": {

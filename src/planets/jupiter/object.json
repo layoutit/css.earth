@@ -65,11 +65,6 @@
           "sha256": "11aef1fc85e8c0073b14a6fb4f023b528a4ec6ee31b6ee53f29e2090e36ef068"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "022fd1065f8b5a0da97ba308e11a4fa69de2eb886900f0a177190f52df37c39c"
-        },
-        {
           "id": "rings",
           "path": "source/preparation/rings.json",
           "sha256": "b5ea81c832e4c4c6fa6656453a535d3b5bbc1fe3019e6d1d8d3cebb32ec2adb5"
@@ -223,7 +218,7 @@
       "classification": "planet",
       "color": "#b48b67",
       "distanceAu": 5.2,
-      "description": "Explore Jupiter in 3D with cssEarth. Discover the solar system’s largest planet, its colorful cloud bands, giant storms, and orbiting moons.",
+      "description": "The largest planet, home to the Great Red Spot, a storm wider than Earth.",
       "systemName": "Solar System",
       "order": 425,
       "context": {

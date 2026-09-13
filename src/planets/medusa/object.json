@@ -64,11 +64,6 @@
           "sha256": "62a6eb4140bddecc5d5780dd4a87a5d1bb51ff879bd5117ac5c2f3053c61b38f"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "97b0d025ca32a43b434a8a80e3d16fb4ef04d2ee2f6f82efc8d0da84e67f72d5"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "b3f912cf51582e956c3c25ee585c37322f5ecb423278069459981de07d18cf13"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.174593942921186,
-      "description": "Explore Medusa in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in September 1875.",
       "systemName": "Solar System",
       "order": 285,
       "context": {

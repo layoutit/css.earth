@@ -31,11 +31,6 @@
           "sha256": "9f1b4e949e98d9159c387e615965ac93a17031cdf6188742ceefc5bc6a206cce"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9639016c309a3d6525824c8eab27c17209177c679faa855ea33779b097cfce2c"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "f75966f4164ebb6dd509d22c4dc159c437966ca9fa1ad77af54cd4fcf56f0d61"
@@ -126,7 +121,7 @@
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 43.16573948799057,
-      "description": "Explore its published shape and source constraints.",
+      "description": "Kuiper Belt object with two narrow rings.",
       "systemName": "Solar System",
       "order": 358,
       "context": {

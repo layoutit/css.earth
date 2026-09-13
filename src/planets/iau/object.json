@@ -64,11 +64,6 @@
           "sha256": "23c537b77282133e29661b3ec4df5f083a6555875b220bdc84ef18d2fc6f9638"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "8efe3d8c6eaac8e96c311dae74917f47884accf66775684aa3e79ff1023b43a4"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "bd43a8ce6a9b9ddf4cbd8efb70e1f00d781707a32166b54394f5278146cf918f"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.535679875280375,
-      "description": "Explore IAU in 3D with its published shape model and documented physical size scale.",
+      "description": "Main-belt asteroid, discovered in August 1987.",
       "systemName": "Solar System",
       "order": 415,
       "context": {

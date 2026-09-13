@@ -31,11 +31,6 @@
           "sha256": "5175136381a487446b858434e93054062bb0f36815962a2cadddee0b291686e1"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0c6bc557c45f50d47bfe896bc51481c0ffcc33cd278ddbdb2a2f290e612c11fb"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "177a73279bdffa599799e3b94d4bdff2f57a72265ac0bddd7fe14c98e6f30616"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Hati, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Norse-group moon of Saturn that spins in about five and a half hours.",
       "systemName": "Solar System",
       "order": 43,
       "context": {

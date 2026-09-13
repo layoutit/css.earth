@@ -612,27 +612,6 @@
       }
     },
     {
-      "id": "venus-object-text",
-      "path": "content/text.json",
-      "expectedSha256": "12fa368682a0abd836b15a722f5b60bbcd10311dc2405fc11317d0656672e421",
-      "expectedBytes": 1622,
-      "origin": "Repository-authored Venus reader text",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "Prepared shell content with source provenance.",
-      "consumers": [
-        "panel",
-        "lenses",
-        "charts",
-        "surface-gallery"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
-    },
-    {
       "id": "venus-chart-assets",
       "path": "content/charts.json",
       "expectedSha256": "0b6e77d1c02d6d6a5406c934df69decfa81a59374a7aac1273d1d6c03a3f195a",

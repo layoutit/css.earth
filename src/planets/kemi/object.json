@@ -64,11 +64,6 @@
           "sha256": "f137449a4d3b3f7d8c7af9948b737524a6ba230bb6c16f1bba14eaef2a44af46"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9f1f9078c819c846129f0a031f6664873c6f97b4777f1b4b99a413bab6b7dc69"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "56376854f6d29a5e69f20c9141dd5018cdddd66f4d36af019316f3325b2b8adc"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.766954866279291,
-      "description": "Explore Kemi, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.",
+      "description": "Dark, carbon-rich Mars-crossing asteroid, discovered in October 1938.",
       "systemName": "Solar System",
       "order": 468,
       "context": {

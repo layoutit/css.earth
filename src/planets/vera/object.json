@@ -64,11 +64,6 @@
           "sha256": "f68cff2aff40bd2229f25ab77ee3101dd8e48b6b95a1d694a3e1f14f2ef50eb5"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "5f8309420dc9587e2ae0d333aa9effa6bebf5f6d02aa0d8d189423091caeb806"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2652a4f2f5614a4c620a93dc388c4987ecb3072703cdc2cdebdc73e6dba83e31"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.098448648035085,
-      "description": "Explore Vera in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in February 1885.",
       "systemName": "Solar System",
       "order": 333,
       "context": {

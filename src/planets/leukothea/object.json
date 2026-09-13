@@ -64,11 +64,6 @@
           "sha256": "b7c47ca2b2b7752a8c4dc4259d2651f844a428854584e68f59c2e3978f389e32"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "390fcce91b039268afea03be6973701e944e329340580dc0032f3ad1b3281f3f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "cf93657792e1c6a0d7a09322d747968a935fab8960ac283af2a9594ea24548d4"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0042313558099742,
-      "description": "Explore Leukothea in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 19 April 1855.",
       "systemName": "Solar System",
       "order": 376,
       "context": {

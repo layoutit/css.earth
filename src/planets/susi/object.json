@@ -64,11 +64,6 @@
           "sha256": "abcbacb2f57734f5db3043fe8c9a526dff34e45a443382c1dba3ef7e428001ac"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "f7b21ffbd612b47ad9d31d2632cb9462615758a90bd24e77d18f1b0bc7f6d7d5"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "c36f4ac4916c61e4294233afa844b5d5b3f6b47c9c524d22646f6b190f12da53"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3684607015715247,
-      "description": "Explore Susi in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark main-belt asteroid, discovered in February 1927.",
       "systemName": "Solar System",
       "order": 399,
       "context": {

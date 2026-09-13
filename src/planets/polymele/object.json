@@ -31,11 +31,6 @@
           "sha256": "b0cbc7968b0600c6f5748f6b2a18a86f95fa027dfd0029c0ec8f10c5a0e3b1ed"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a260d7718f22a79230cd48cd44cd07a1fa3d6a12c4cc4919a29521552cfa5743"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "198a8bf6b679f8044da6075d6321275b663355a7594b0040379f3897dd74c626"
@@ -123,7 +118,7 @@
       "classification": "asteroid",
       "color": "#a0a0a0",
       "distanceAu": 5.191974805775306,
-      "description": "Explore Polymele, a Lucy target, through its observation-constrained approximate ellipsoid.",
+      "description": "Very flattened Jupiter Trojan with a small moon.",
       "systemName": "Solar System",
       "order": 18,
       "context": {

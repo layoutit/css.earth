@@ -64,11 +64,6 @@
           "sha256": "df01e73fb8c02f773639d3cdbcfb96c79472601519695a67dca008e81278cea3"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "d479ffd59ae0d6f7942414fd874aa89e96999c02c7463eb9bedf7c5d92ffd459"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "5acef660dea70fca039c99c00f5cfba77b192ca6ba98679fe6732329b1212d45"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7707071057503048,
-      "description": "Explore Gallia in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in August 1875.",
       "systemName": "Solar System",
       "order": 284,
       "context": {

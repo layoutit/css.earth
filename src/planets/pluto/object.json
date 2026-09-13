@@ -54,11 +54,6 @@
           "sha256": "288adc5834256004a78b31fe4dda6ceb93e814085512326891d046846fdab977"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "a5d81da1495b8e6b11985a39f62875c0fc0f29fa38b7d3b0b929630cb8d2e0cd"
-        },
-        {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json",
           "sha256": "ef3df7c9ba745d79d866f20f01f5b311e2ae492af013dbf03519d24e40e2a640"
@@ -165,7 +160,7 @@
       "classification": "dwarf-planet",
       "color": "#bca18a",
       "distanceAu": 39,
-      "description": "Explore Pluto in 3D with cssEarth. Discover this distant dwarf planet’s icy landscape, its heart-shaped region, and its companion Charon.",
+      "description": "Dwarf planet with a vast, heart-shaped plain.",
       "systemName": "Solar System",
       "order": 454,
       "context": {

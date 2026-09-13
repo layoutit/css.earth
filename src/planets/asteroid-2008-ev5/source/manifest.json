@@ -196,15 +196,6 @@
       }
     },
     {
-      "path": "content/text.json",
-      "expectedBytes": 2388,
-      "expectedSha256": "c97d8bccc1239de5ea0d0030a0a8f86c622e0cabc6976d251ef150cc1b999ac7",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
-    },
-    {
       "path": "preparation/acquisition.json",
       "expectedBytes": 963,
       "expectedSha256": "0751cefb482872ff54e543f810651530769f83079be2d0b269555269c2658667"

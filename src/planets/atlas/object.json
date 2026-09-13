@@ -31,11 +31,6 @@
           "sha256": "e87de47f2175046a0175b045d682d5ece2102f63d7ddee33e056e1e253c9411c"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "20ad9ca746edd652e0b486070b2d924c735648acfa8bb5434eafd33307e657f4"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "66f124fe191bc18ade3ebd609543eb30286cb3e0d18a8220a77c741c1513dc7a"
@@ -128,7 +123,7 @@
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
-      "description": "Explore Atlas with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "description": "Saucer-shaped moon orbiting at the outer edge of Saturn's A ring.",
       "systemName": "Solar System",
       "order": 432,
       "context": {

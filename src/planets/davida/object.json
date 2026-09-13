@@ -64,11 +64,6 @@
           "sha256": "3ae44c42d8aeb4870dcd09794dfb25584c9894c9bf9bf4372dcc93f520f32071"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "8900989e9a849684d5e917c7c2ec4596d685f28686441164de8bf38f88c9f20c"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "1ece0cde56ff969b3a988c04486fc0c62103e23f972f7882b1e8c00abaec4b59"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.16136139912591,
-      "description": "Explore Davida in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in May 1903.",
       "systemName": "Solar System",
       "order": 144,
       "context": {

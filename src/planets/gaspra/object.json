@@ -75,11 +75,6 @@
           "sha256": "89eace3af6e5324588de7c0db95fce55e61383596d34a77b2a9e7329c313fb08"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "1dd836048ef36745cbe3f013fd6dd14d2154203621c8ea748691c7765f9ee49f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "ea129b86bf5d3cd5e06e8bb2e32242a30df3200924d8908c80ff250a35248147"
@@ -146,7 +141,7 @@
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 2.21,
-      "description": "Explore Gaspra in 3D with cssEarth using archived spacecraft imagery and source-backed shape data.",
+      "description": "The first asteroid visited by a spacecraft.",
       "systemName": "Solar System",
       "order": 131,
       "context": {

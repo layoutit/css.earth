@@ -64,11 +64,6 @@
           "sha256": "82baf4a6b9cf810538d3eb2981fe40a8995bef518630706d65efacdc6fca87bc"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0f305da185f2c408ccd37b1c5a20ad240228bcebe9b4258d6a386a8b8bcd623a"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "61ab823ba25dd6a4160795c1bf26c094659a50400026717a584db085f86543da"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.753464096843689,
-      "description": "Explore Minerva in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid with 2 known moons, discovered in August 1867.",
       "systemName": "Solar System",
       "order": 253,
       "context": {

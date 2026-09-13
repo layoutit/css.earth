@@ -31,11 +31,6 @@
           "sha256": "a43c64cbb09b484dc819895bc4216aa6316b5a214d43d789a73ac68f527a5a04"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "17700d0df4caf23bf4eefda6218b209025bd1f8a54dac0c0238aa76348c281b0"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "66f143840347ce90744375bfe73d7e7decde781cbbcd782c0ecfa8f2bbc6b6c1"
@@ -128,7 +123,7 @@
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
-      "description": "Explore Janus with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "description": "Moon that shares its orbit with Epimetheus, trading places with it.",
       "systemName": "Solar System",
       "order": 435,
       "context": {

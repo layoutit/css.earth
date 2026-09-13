@@ -31,11 +31,6 @@
           "sha256": "8c746477c74c168d57b8ee3a642662c2267d20a4debd13ca10c5e5509d76a5d4"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "78868cda28c2daceb3691820f41bd361349627ac8df0a562c23e9a08f82b7550"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "7590c505d453f923cf9d6c71d25272b7cc25900935350e5bc07d78e0f70c5df0"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Bergelmir, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Norse-group moon of Saturn with modest brightness changes as it spins.",
       "systemName": "Solar System",
       "order": 40,
       "context": {

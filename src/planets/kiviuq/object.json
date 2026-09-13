@@ -31,11 +31,6 @@
           "sha256": "69194af03ca2dceec1a42d485fec035e7269336a6d87dcc57cddbeca16f72e29"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "6e55a00595cf0a2b659dea408b8d3f4355eb4f80330018fd8e9287ea4007627d"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "cb379fc206a3f8fa800a38428d1e8ea11455c12b0efbe8d52fd175e2f7600b56"
@@ -123,7 +118,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
-      "description": "Explore Kiviuq, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "description": "Inuit-group moon of Saturn that turns in about 22 hours.",
       "systemName": "Solar System",
       "order": 50,
       "context": {

@@ -765,15 +765,6 @@
       }
     },
     {
-      "path": "content/text.json",
-      "expectedBytes": 2394,
-      "expectedSha256": "0be5118fff3b29f4333c18cbb82f8d1a0cac9107a575a1a8da86207476f37e4f",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
-    },
-    {
       "path": "observations/Enceladus_Cassini_DEM_global_200m_schenk2024.lbl",
       "expectedBytes": 1574,
       "expectedSha256": "3d1f1cf57178368a315143e9dc9a9b87a95102f3120d8ddcd1be99dc3a0186e0"

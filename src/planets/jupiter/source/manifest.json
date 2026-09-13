@@ -685,24 +685,6 @@
       }
     },
     {
-      "id": "jupiter-authored-content-object",
-      "path": "content/text.json",
-      "expectedBytes": 1577,
-      "expectedSha256": "022fd1065f8b5a0da97ba308e11a4fa69de2eb886900f0a177190f52df37c39c",
-      "origin": "Repository-authored Jupiter reader text",
-      "credit": "cssEarth and the institutional sources identified inside the JSON",
-      "license": "Project-authored specification; referenced observations retain their source terms",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "content"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
-    },
-    {
       "id": "jupiter-authored-presentation-title-mark",
       "path": "presentation/title-mark.json",
       "expectedBytes": 3291,

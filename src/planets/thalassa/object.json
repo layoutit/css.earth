@@ -31,11 +31,6 @@
           "sha256": "dcdfc90d29938c945330e8d27f01248b24f6f4bf4557e0cbe2f9989be60cc87e"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "8062338089ab8ecc7eba1bdfeca8d32af0d521bc86c86fc80d2d9f14ff58b1ee"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "d48448dd0c6e1eca545372936d5ef3358d67cc1cca30ee302e4040e35fc0816d"
@@ -118,7 +113,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 30.07,
-      "description": "Explore Thalassa through its Voyager-derived shape model.",
+      "description": "Disk-shaped moon of Neptune, unusual among irregular moons.",
       "systemName": "Solar System",
       "order": 107,
       "context": {

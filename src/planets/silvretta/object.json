@@ -64,11 +64,6 @@
           "sha256": "9dd2ede544d3389cc27f3b5d8578fd0fb656bbae754f1bcaa52a373ac7f8aadd"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "9bbbfba13a92d12b85932448d0699afc44635f590fb6766c4bfbf996467f8ef6"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "65abb7bdd14c7c10bd753ff551c41af3635001d4657f550c60964a7ba100adf2"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.204231585995867,
-      "description": "Explore Silvretta in 3D with its published shape model and documented physical size scale.",
+      "description": "Dark, carbon-rich asteroid in the outer main belt, discovered in September 1935.",
       "systemName": "Solar System",
       "order": 409,
       "context": {

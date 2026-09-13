@@ -2,23 +2,6 @@ import { sourceArray, sourceObject, sourceText, parseSourceBinding } from '../sr
 import type { SourceBinding, SourceResolver } from '../src/platform/source-catalog.mts';
 import type { SourceUse } from '../src/platform/source-usage.mts';
 import type { Fact } from './objects/content/types.js';
-import type { ObjectText, TextCitation } from '../site/object-text.mts';
-
-/** Each reader-text block names its own sources, so every citation is one edge from that block. */
-export function textCitations(text: ObjectText, ownerPath: string, object: { id: string }): SourceUse[] {
-  const blocks: [string, string, readonly TextCitation[]][] = [
-    ['card', 'Card line', text.card.sources], ['introduction', 'Introduction', text.introduction.sources],
-    ...Object.entries(text.datasets).map(([id, dataset]): [string, string, readonly TextCitation[]] =>
-      [`datasets/${id}`, `${dataset.title} summary`, dataset.sources ?? []]),
-  ];
-  return blocks.flatMap(([slot, label, citations]) => citations.map((citation, index): SourceUse => ({
-    catalogueId: citation.catalogueId, kind: 'citation', consumerKind: 'object-text',
-    consumerId: `${object.id}/${slot}`, consumerLabel: label, objectId: object.id, ownerPath,
-    locator: `/${slot}/sources/${index}`, citationUrl: citation.url,
-    evidence: `Checked ${citation.checked}${citation.path ? ` · ${citation.path}` : ''}${citation.locator ? ` · ${citation.locator}` : ''}`,
-    lensIds: [], limitations: [],
-  })));
-}
 
 export function factsheetCitations(panel: { facts: readonly Fact[]; moreFacts: readonly Fact[] }, ownerPath: string, object: { id: string }): SourceUse[] {
   return (['facts', 'moreFacts'] as const).flatMap(group => panel[group].flatMap((fact, index): SourceUse[] => {

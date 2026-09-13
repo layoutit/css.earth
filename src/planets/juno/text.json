@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "juno",
+  "card": {
+    "text": "One of the first asteroids ever discovered.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Juno",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "3 Juno (A804 RA); Discovered 1804-09-01 by Harding, K. at Lilienthal; orbit class: Main-belt Asteroid; q: 1.99 au"
+      },
+      {
+        "catalogueId": "vernazza-2021-survey",
+        "url": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
+        "label": "Vernazza et al. (2021) · Asteroid survey",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "K. Harding found Juno at Lilienthal in 1804. Its shape is broadly irregular.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Juno",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "3 Juno (A804 RA); Discovered 1804-09-01 by Harding, K. at Lilienthal; orbit class: Main-belt Asteroid; q: 1.99 au"
+      },
+      {
+        "catalogueId": "vernazza-2021-survey",
+        "url": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
+        "label": "Vernazza et al. (2021) · Asteroid survey",
+        "checked": "2026-09-13",
+        "locator": "Page text"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "SPHERE shape reconstruction",
+      "detail": "Published shape",
+      "summary": "Fitted to sharp images of the whole disc and to light curves, so large hollows can show."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a reference sphere. Colors mix the overall shape with local relief."
+    }
+  }
+}

@@ -32,11 +32,6 @@
           "sha256": "fdc9a0032b323c2ca768a478fc5e9a1770f23db1790f38f402f9fd9204e9e8c3"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "0be5118fff3b29f4333c18cbb82f8d1a0cac9107a575a1a8da86207476f37e4f"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "260343813824ac4967afeffd876addee5649809cb4f3d435e41109bcb4b830bc"
@@ -148,7 +143,7 @@
       "classification": "satellite",
       "color": "#d3d7d8",
       "distanceAu": 9.58,
-      "description": "Explore Enceladus in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s fractured icy ocean moon.",
+      "description": "Saturn's moon with the most reflective surface in the solar system.",
       "systemName": "Solar System",
       "order": 439,
       "context": {

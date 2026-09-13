@@ -59,11 +59,6 @@
           "sha256": "c4af125e98ce449ca48ec363db5b52093c9696a28b440d4ae11afdf29edb5c50"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "c0708f24171b2e5b2a9e137b05e16a2c25ea71a98eeb1b1566dde1b0090114a3"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "54ac8059ddde7d6b39941074a330e117cc2bacc0529a8483a6de638d242bea1c"
@@ -121,7 +116,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.543055738919472,
-      "description": "Explore Toutatis with its published radar shape model.",
+      "description": "Elongated near-Earth asteroid that tumbles through space.",
       "systemName": "Solar System",
       "order": 138,
       "context": {

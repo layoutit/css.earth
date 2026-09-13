@@ -64,11 +64,6 @@
           "sha256": "7e3263126fc709f0d7baa425a5e05caa1878dfb63ff331cfa1339d3ab4db97c3"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "80f5729e974e19ed9ff95c2bce4a20861d03210f5e834828c576740369936081"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "6b35b12f618f359962e5f91eeefbf61dfc95b75b67c96ef2b5fe4fe9ae14e251"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.367053015804557,
-      "description": "Explore Erigone in 3D with its published shape model and radial elevation.",
+      "description": "Dark, carbon-rich main-belt asteroid, discovered on 26 April 1876.",
       "systemName": "Solar System",
       "order": 295,
       "context": {

@@ -1530,25 +1530,6 @@
       ]
     },
     {
-      "id": "sun-object-text",
-      "path": "content/text.json",
-      "expectedBytes": 1821,
-      "expectedSha256": "6c124b101b6e983fa12b862dc94db5cc7287a96a85bb77d0a56515c47bc26499",
-      "origin": "Repository-authored Sun reader text",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      },
-      "credit": "cssEarth and the institutional sources identified in this record",
-      "license": "Project-authored preparation record; referenced observations retain their source terms",
-      "acquisition": "Written against the sources each text block cites.",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "panel",
-        "lenses"
-      ]
-    },
-    {
       "id": "sun-preparation-navigation",
       "path": "preparation/navigation.json",
       "expectedSha256": "52d121bd54a171a4aeaa0de8fbd812d2018bd1089143803c76b1786890bcde6c",

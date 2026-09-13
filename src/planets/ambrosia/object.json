@@ -64,11 +64,6 @@
           "sha256": "aa587d7cb3e56e5692ba8f1f8b00dba790c8921958eff0d703bb0c6879fc4ae6"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "784842645a18113093e5736042159997e936d4f5150fb85279da5bd2612a470b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "15346f558e60638214c55bd0c55f14786d8411180931e96d098188000b5ef2c8"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.59809056583152,
-      "description": "Explore Ambrosia in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered on 28 February 1879.",
       "systemName": "Solar System",
       "order": 308,
       "context": {

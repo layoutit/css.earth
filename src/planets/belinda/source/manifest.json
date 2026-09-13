@@ -140,15 +140,6 @@
       }
     },
     {
-      "path": "content/text.json",
-      "expectedBytes": 1112,
-      "expectedSha256": "221f335f31df9f7dbda25adc362fa46d24e4162ec0d379deec6b318b29c1b8f9",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
-      }
-    },
-    {
       "path": "kernels/naif0012.tls",
       "expectedBytes": 5257,
       "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"

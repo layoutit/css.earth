@@ -32,11 +32,6 @@
           "sha256": "3bd2e9be756a44f9c8eda4ac60d0d507068e5039cd05b1d285e7650987df4ed7"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "de7068819b3b4d6ea76d82cf33b851454c5c55dca7d7d0d1009f46e27ebfc062"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "2e1e43bca0ff0a5bcc125f3aa5861c9eb41973e328cf39ae5496de28f51e0a24"
@@ -134,7 +129,7 @@
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 2.861,
-      "description": "Dactyl, discovered beside Ida in Galileo images, was the first moon found orbiting an asteroid.",
+      "description": "The first moon found orbiting an asteroid, spotted beside Ida in Galileo images.",
       "context": {}
     }
   },

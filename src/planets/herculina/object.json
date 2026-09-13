@@ -64,11 +64,6 @@
           "sha256": "3e8e14650436e1c1a8d8ae5deee071ea49a6a3f673a4d83250da93ea1c37cd16"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "bf2043d6417572d29dd08fb8c02a067089764b39530554f87fabc1232293e12b"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "362c946bdb1f8194cbbd45fb4fde607c586c6bae24f19ebaebb0bb4c05d82b9b"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.769403168493778,
-      "description": "Explore Herculina in 3D with its published shape model and radial elevation.",
+      "description": "Stony main-belt asteroid, discovered in April 1904.",
       "systemName": "Solar System",
       "order": 175,
       "context": {

@@ -64,11 +64,6 @@
           "sha256": "e39dfdd07c027c811f89ed2ffbe37fe23ad466738c3a63a0ec6ec56abc1a7882"
         },
         {
-          "id": "text",
-          "path": "source/content/text.json",
-          "sha256": "5bb830d50f245308ef325c3496875f9be290e7dbfd5b9d517e0bae4a7e68294c"
-        },
-        {
           "id": "title",
           "path": "source/presentation/title-mark.json",
           "sha256": "472d693aa16313395911013c4a8f0e5cf69973cdbfbab048505c50b6f58be418"
@@ -126,7 +121,7 @@
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.579713770510923,
-      "description": "Explore Dejanira in 3D with its published shape model and radial elevation.",
+      "description": "Main-belt asteroid, discovered in December 1875.",
       "systemName": "Solar System",
       "order": 290,
       "context": {

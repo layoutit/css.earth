@@ -1,0 +1,24 @@
+{
+  "id": "nasa-mars-facts",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA Science · Mars facts",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/mars/facts/",
+      "label": "NASA Science · Mars facts"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://science.nasa.gov/mars/facts/",
+      "checkedOn": "2026-09-13",
+      "locator": "Page text cited by reader text"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA Science"
+}
