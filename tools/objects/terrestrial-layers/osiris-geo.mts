@@ -242,6 +242,7 @@ export function sampleGeo(frame: GeoFrame, matrix: readonly number[][], pointKm:
     : photometry ? observationGain(planes.INCIDENCE_ANGLE_IMAGE[i], planes.EMISSION_ANGLE_IMAGE[i], photometry, planes.PHASE_ANGLE_IMAGE?.[i]) : 1);
   if (!gains.every((gain): gain is number => gain !== null)) return { reason: 'photometry' };
   return { radiance: ids.reduce((sum, id, i) => sum + planes.IMAGE[id] * weights[i] * gains[i], 0) * (frame.radianceFactor?.factor ?? 1), separationMeters,
+    ...(frame.colorPlanes ? {color:frame.colorPlanes.map(plane => ids.reduce((sum,id,i) => sum+plane[id]*weights[i]*gains[i],0))} : {}),
     maximumIncidenceDegrees: Math.max(...ids.map(i => planes.INCIDENCE_ANGLE_IMAGE[i])) * 180 / Math.PI,
     gain: Math.max(...gains), maximumEmissionDegrees: Math.max(...ids.map(i => planes.EMISSION_ANGLE_IMAGE[i])) * 180 / Math.PI };
 }

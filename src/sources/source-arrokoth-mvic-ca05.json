@@ -1,0 +1,40 @@
+{
+  "id": "source-arrokoth-mvic-ca05",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Arrokoth CA05 MVIC Color Cube",
+  "version": "1.0",
+  "publisher": "NASA Planetary Data System",
+  "identifiers": [
+    {
+      "type": "PDS LIDVID",
+      "value": "urn:nasa:pds:nh_derived:arrokoth_composition:ca05_mvic_cube::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx",
+      "label": "MVIC product label"
+    },
+    {
+      "role": "archive",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/overview.pdf",
+      "label": "Processing and limitations"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx",
+      "checkedOn": "2026-09-12",
+      "locator": "Identification_Area, Spectral_Characteristics and File_Area_Observational"
+    },
+    {
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/overview.pdf",
+      "checkedOn": "2026-09-12",
+      "locator": "MVIC CA05 cube; upsampling, PSF matching and registration"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
