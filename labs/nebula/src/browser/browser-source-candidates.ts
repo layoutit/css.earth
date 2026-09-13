@@ -43,6 +43,8 @@ try {
       assert.equal(await page.locator('.observation-frame').getAttribute('style'), camera, 'Image switching moved the sky.');
       assert.deepEqual(await page.locator('.observation-frame img').evaluateAll(nodes => nodes.filter(node => getComputedStyle(node).visibility === 'visible').map(node => node.getAttribute('data-observation'))), [image.id]);
       assert.equal(await page.getByRole('alert').count(), 0);
+      assert.ok((await page.getByRole('status').textContent())?.includes(image.registration.status === 'publisher'
+        ? 'Publisher coordinates · not star-verified' : `${image.registration.matchedStars} matched stars`), 'Browsing misrepresented registration evidence.');
       assert.ok((await page.getByRole('region', { name: 'Source information' }).textContent())?.includes(dossier.images.find(i => i.id === image.id)!.wavelengths));
       await page.screenshot({ path: `${directory}/${id}-${image.id}.png` });
     }

@@ -37,13 +37,12 @@ export function readSourceDossier(value: unknown): SourceDossier {
   }) };
 }
 
-/** Only the named sky anchor may lack a relative fit. Selection never upgrades its status. */
+/** Curate inspection candidates, independently of processing eligibility. Preserve registration evidence. */
 export function selectObservationCandidates(data: Observations, selection?: CandidateSelection): Observations {
   if (!selection) return data;
   const images = selection.imageIds.map(id => {
     const image = data.images.find(image => image.id === id);
     if (!image) throw new TypeError(`Selected candidate ${id} is not prepared.`);
-    if (id !== selection.referenceId && image.registration.status !== 'verified') throw new TypeError(`Selected candidate ${id} has no verified alignment.`);
     return image;
   });
   return { ...data, images };

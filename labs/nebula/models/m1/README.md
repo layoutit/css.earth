@@ -1,6 +1,15 @@
 # Crab Nebula — Alignment intake
 
-Current Alignment selection: **Hubble optical reference only**. The other five views remain documented but hidden pending independent alignment. A 4096px detector trial supplied only 14 Hubble/Webb pattern-confirmed matches against the unchanged 45-match gate; it did not qualify the comparison. The reference retains publisher-only status. No nebular morphology fit or expansion correction was substituted for stellar evidence.
+Current Alignment selection: **all six spectral views**. Publisher coordinates
+place them in the common sky frame for comparison; their independent registration
+remains unverified. The earlier reference-only filter confused inspection
+eligibility with processing acceptance and has been removed.
+
+A 4096px detector trial supplied 14 Hubble/Webb pattern-confirmed matches against
+the unchanged 45-match gate. That failed to certify the comparison; it did not
+prove misalignment. Radio, X-ray and component-subtracted maps require suitable
+astrometric evidence rather than a universal optical-star matcher. No nebular
+morphology fit or expansion correction was substituted for stellar evidence.
 
 Six publisher images cover optical emission lines, near/mid-infrared emission,
 radio synchrotron, and the X-ray pulsar wind. They are comparison observations,

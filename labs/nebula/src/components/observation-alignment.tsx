@@ -141,7 +141,7 @@ export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler
         }}>
           {data?.images.map(item => <option value={item.id} key={item.id}>{item.label}</option>)}
         </select>
-        {dossier?.selection && <p className="overlay-detail" title={dossier.selection.reason}>{data?.images.length === 1 ? 'Reference image only · other alignments pending' : `${data?.images.length} selected images · star alignment checked`}</p>}
+        {dossier?.selection && data && <p className="overlay-detail" title={dossier.selection.reason}>{data.images.length} images · {data.images.filter(item => item.registration.status === 'verified').length} star-verified</p>}
         <div className="image-layer-buttons observation-layers" role="group" aria-label="Observation image layer">{layers.map(item => {
           const missing = data?.images.filter(visible).filter(candidate => !candidate.layers[item.id]) ?? [];
           return <button type="button" key={item.id} aria-label={item.label} aria-pressed={layer === item.id} disabled={!data || missing.length > 0}
