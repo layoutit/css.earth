@@ -48,7 +48,10 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     : policy.selection === 'recipe-order' ? values.findIndex(value => value.reason === undefined)
     : policy.selection === 'finest-resolution' ? values.reduce((best, value, i) => value.reason === undefined && (best < 0 || scale(i) < scale(best)) ? i : best, -1)
     : selectObservation(values);
-  const points = sampleTrianglePoints(radial.faces, policy.samplesPerTriangle), samples = points.map(point => sampleAll(point).values);
+  // Estimated faces complete an open source surface that no photograph observed, so their sample points stay withheld.
+  const points = sampleTrianglePoints(radial.faces, policy.samplesPerTriangle);
+  const samples = points.map((point, i) => radial.faces[Math.floor(i / policy.samplesPerTriangle)].estimated
+    ? frames.map((): Missing | Accepted => missing(point.map(n => n * metersPerUnit), 'estimated-geometry')) : sampleAll(point).values);
   if (frames.length > 1 && !policy.levelMatching) throw new Error('A multi-frame observation needs its level-matching budget.');
   const levels = frames.length === 1 || !policy.levelMatching ? { gains: [1], pairs: [] }
     : fitObservationLevels(frames.map((_, i) => samples.map(values => values[i])), policy.levelMatching);

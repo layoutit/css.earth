@@ -100,7 +100,7 @@ export interface FrameFootprint { pixelAngleMicroradians: number; nadirMedianMet
 export interface SurfacePolicy {
   format: string;
   selection: 'single' | 'lowest-emission' | 'recipe-order' | 'finest-resolution';
-  levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumLogMad: number; maximumGain: number; samplesPerTriangle?: number };
+  levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumGain: number; samplesPerTriangle?: number };
   samplesPerTriangle: number;
   display: { range: 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'authored'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay };
   photometry: Record<string, unknown>;

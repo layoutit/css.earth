@@ -131,7 +131,6 @@
         "levelMatching": {
           "samplesPerTriangle": 24,
           "minimumPairs": 128,
-          "maximumLogMad": 0.25,
           "maximumGain": 1.35
         },
         "transfer": {

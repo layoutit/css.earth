@@ -24,7 +24,7 @@ const CAMERA_FIELDS = ['observerLatitude', 'observerWestLongitude', 'sunLatitude
 const FRAME_OPTIONAL = ['encoding', 'allowFiniteSigned', 'backgroundMaximum', 'backgroundOffset', 'coverageInsetPixels', 'cameraCatalog', 'quality', ...CAMERA_FIELDS];
 const BANDS = ['red', 'green', 'blue'] as const;
 type Band = typeof BANDS[number];
-const RULES: Omit<EnvelopeRules, 'displays'> = { selections: ['finest-resolution', 'lowest-emission'], maximumFrames: 16, maximumLevelGain: 5, maximumLogMad: .5, samplesPerTriangle: 'optional' };
+const RULES: Omit<EnvelopeRules, 'displays'> = { selections: ['finest-resolution', 'lowest-emission'], maximumFrames: 16, maximumLevelGain: 5, samplesPerTriangle: 'optional' };
 
 const diskBlock = shape({ model: text, weight: optional(number), referenceIncidenceDegrees: number, referenceEmissionDegrees: number,
   maximumIncidenceDegrees: number, maximumEmissionDegrees: number, maximumGain: number });

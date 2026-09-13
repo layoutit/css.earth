@@ -28,7 +28,7 @@ export function validateEncounterRecipe(value: unknown, sourceGeometry: unknown)
   for (const frame of requireArray(requireRecord(value).frames)) checkKeys(frame, ['id', 'path', 'labelPath', 'controlPath'], [], `${CONTEXT} frame`);
   const recipe = decodeProfile(parseEncounterLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
   validateEnvelope(recipe, recipe.frames.flatMap(f => [f.path, f.labelPath, f.controlPath]),
-    { selections: ['lowest-emission', 'finest-resolution'], displays: ['percentiles'], maximumFrames: 8, maximumLevelGain: 3, maximumLogMad: .3, samplesPerTriangle: 'optional' }, CONTEXT);
+    { selections: ['lowest-emission', 'finest-resolution'], displays: ['percentiles'], maximumFrames: 8, maximumLevelGain: 3, samplesPerTriangle: 'optional' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
   if (recipe.format !== 'encounter-fits' || !('referenceDegrees' in recipe.photometry ? validPublishedPhotometryShape(recipe.photometry, recipe.transfer.maximumEmissionDegrees)
       : recipe.photometry.model === 'observed' && recipe.photometry.maximumGain === 1)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
