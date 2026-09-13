@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {parsePreparedObjectRuntime} from "../../../../src/renderers/css/dist/index.js";
 import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
-import runtimeDefinition from "../../../../src/planets/venus/prepared/runtime.json" with {type: "json"};
+import runtimeDefinition from "../../../../src/objects/venus/prepared/runtime.json" with {type: "json"};
 import { objectRuntimePackageTests, preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 
 objectRuntimePackageTests(runtimeDefinition);

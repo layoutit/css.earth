@@ -10,7 +10,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const root = resolve(import.meta.dirname, '../../..');
-const sourceRoot = resolve(root, 'src/planets/comet-1p/source');
+const sourceRoot = resolve(root, 'src/objects/comet-1p/source');
 const manifestPath = resolve(sourceRoot, 'reference/giotto-hmc-intake.json');
 const sha256 = (bytes:string|Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
@@ -145,7 +145,7 @@ async function main() {
   const sheet = await sharp({ create: { width: 1400, height: 988, channels: 3, background: '#141823' } }).composite(layers).png().toBuffer();
   await writeFile(resolve(output, 'contact-sheet.png'), sheet);
   const report = {
-    schema: 'cssearth-halley-giotto-intake-report@1', manifest: { path: 'src/planets/comet-1p/source/reference/giotto-hmc-intake.json', sha256: sha256(manifestBytes) },
+    schema: 'cssearth-halley-giotto-intake-report@1', manifest: { path: 'src/objects/comet-1p/source/reference/giotto-hmc-intake.json', sha256: sha256(manifestBytes) },
     shape: manifest.shape, dataset: manifest.dataset, guide: manifest.guide, frames,
     result: { status: 'UNQUALIFIED_SURFACE_LENS', projectedSurfacePixels: null,
       missingEvidence: ['Source-controlled mapping from Stooke body coordinates to the encounter camera.',

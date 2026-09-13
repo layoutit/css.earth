@@ -5,7 +5,7 @@ import { BASE_TILE } from '@layoutit/polycss';
 // Independent published semiaxes, not read back from the authored inputs.
 const sourceAxes = { chariklo: [143.8, 135.2, 99.1], bienor: [127, 55, 45] };
 export async function checkShape(id: keyof typeof sourceAxes) {
-  const root = `src/planets/${id}`;
+  const root = `src/objects/${id}`;
   const read = async (path: string) => JSON.parse(await readFile(`${root}/${path}`, 'utf8'));
   const scene = await read('prepared/scene.json');
   const config = await read('source/preparation/terrestrial.json');

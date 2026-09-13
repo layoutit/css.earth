@@ -45,7 +45,7 @@ test("regenerates every planet title from one pinned Saturn recipe", async () =>
 
   for (const planet of OBJECTS) {
     const { source, moduleSource } = generated[planet.id];
-    const contentPath = resolve(projectRoot, `src/planets/${planet.id}/source/content/object.json`);
+    const contentPath = resolve(projectRoot, `src/objects/${planet.id}/source/content/object.json`);
     const label = await exists(contentPath) ? JSON.parse(await readFile(contentPath, 'utf8')).displayName : planet.name;
     assert.equal(source.label, label);
     assert.equal(source.weight, PLANET_TITLE_RECIPE.weight);
@@ -58,9 +58,9 @@ test("regenerates every planet title from one pinned Saturn recipe", async () =>
     assert.equal(source.sourceSha256, PLANET_TITLE_RECIPE.sourceSha256);
     assert.equal(source.sourceGenerator, PLANET_TITLE_RECIPE.sourceGenerator);
     const jsonTitlePath = resolve(projectRoot,
-      `src/planets/${planet.id}/source/presentation/title-mark.json`);
+      `src/objects/${planet.id}/source/presentation/title-mark.json`);
     const moduleTitlePath = resolve(projectRoot,
-      `src/planets/${planet.id}/source/presentation/title-mark.mjs`);
+      `src/objects/${planet.id}/source/presentation/title-mark.mjs`);
     if (await exists(jsonTitlePath)) {
       const titleBytes = await readFile(jsonTitlePath, "utf8");
       const titleJson = JSON.parse(titleBytes);
@@ -71,7 +71,7 @@ test("regenerates every planet title from one pinned Saturn recipe", async () =>
       assert.equal(moduleSource, titleBytes, `${planet.id}: checked title source must be reproducible`);
     } else {
       const preparedTitlePath = resolve(projectRoot,
-        `src/planets/${planet.id}/site/preparedTitle.mjs`);
+        `src/objects/${planet.id}/site/preparedTitle.mjs`);
       assert.equal(await exists(preparedTitlePath), true,
         `${planet.id}: title must have a checked source or prepared output`);
       const preparedModule = await import(pathToFileURL(preparedTitlePath).href);

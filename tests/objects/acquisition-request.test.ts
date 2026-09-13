@@ -13,8 +13,8 @@ const temporary=async(work:(root:string)=>Promise<void>)=>{
  try{await work(root);}finally{await rm(root,{recursive:true,force:true});}
 };
 test('Mars refresh restores both pinned PSG products from intercepted source responses',()=>temporary(async root=>{
- const sourceRoot=resolve('src/planets/mars/source'),manifest:SourceManifest=await json('src/planets/mars/source/manifest.json');
- const authored=await json('src/planets/mars/source/preparation/acquisition.json');
+ const sourceRoot=resolve('src/objects/mars/source'),manifest:SourceManifest=await json('src/objects/mars/source/manifest.json');
+ const authored=await json('src/objects/mars/source/preparation/acquisition.json');
  const plan=parseAcquisitionPlan({...authored,operations:authored.operations.filter((step:{kind:string})=>step.kind==='request-download')});
  assert.equal(plan.operations.length,2,'Configuration and spectrum are real acquisition operations, not verification aliases.');
  const configuration=await readFile(join(sourceRoot,'atmosphere/psg-mars-20260829.cfg'),'utf8');
@@ -39,10 +39,10 @@ test('Mars refresh restores both pinned PSG products from intercepted source res
  assert.deepEqual((await readdir(join(root,'atmosphere'))).sort(),['psg-mars-20260829.cfg','psg-mars-r240-rif.txt']);
 }));
 test('solid observation inputs have an acquisition operation or byte-verified Git source',async()=>{
- const tracked = new Set(execFileSync('git', ['ls-files', '-z', '--', 'src/planets/ceres/source', 'src/planets/io/source', 'src/planets/europa/source', 'src/planets/ganymede/source', 'src/planets/callisto/source'], {encoding:'utf8'}).split('\0'));
+ const tracked = new Set(execFileSync('git', ['ls-files', '-z', '--', 'src/objects/ceres/source', 'src/objects/io/source', 'src/objects/europa/source', 'src/objects/ganymede/source', 'src/objects/callisto/source'], {encoding:'utf8'}).split('\0'));
  const {assertSourceBytes}=await import('../../tools/objects/operations.js');
  for(const id of ['ceres','io','europa','ganymede','callisto']){
-  const sourceRoot=`src/planets/${id}/source`;
+  const sourceRoot=`src/objects/${id}/source`;
   const manifest:SourceManifest=await json(`${sourceRoot}/manifest.json`),plan=parseAcquisitionPlan(await json(`${sourceRoot}/preparation/acquisition.json`));
   const paths=new Set(plan.operations.flatMap(step=>'path'in step?[step.path]:[]));
   for (const entry of manifest.inputs) {

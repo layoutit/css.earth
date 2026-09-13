@@ -13,7 +13,7 @@ import { renderCompactSpectrum } from '../../tools/objects/content/compact-spect
 test('overview charts retain every supplied spectrum sample across the registry', async () => {
   let charts = 0;
   for (const object of OBJECTS) {
-    const source = new URL(`../../src/planets/${object.id}/source/`, import.meta.url);
+    const source = new URL(`../../src/objects/${object.id}/source/`, import.meta.url);
     const recipe = await readFile(new URL('content/charts.json', source), 'utf8').then(text => SourceEvidence.parse(JSON.parse(text)))
       .catch(error => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
     const selected = recipe?.rows('charts').find(entry => entry.text('kind') === 'spectrum');

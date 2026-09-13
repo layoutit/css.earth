@@ -6,7 +6,7 @@ import { parsePreparedPanelContent, parsePanelControls } from '../prepared-panel
 
 type PanelContentInput = { schema: string; title: { baseline: unknown }; facts: { value: unknown }[] };
 type PanelControlsInput = { lenses: { controls: { description: unknown }[] } };
-const read = async (id: string, file: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/planets/${id}/prepared/${file}.json`, import.meta.url), 'utf8'));
+const read = async (id: string, file: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/${id}/prepared/${file}.json`, import.meta.url), 'utf8'));
 
 test('every registered object supplies typed shared panel content and controls', async () => {
   for (const { id } of OBJECTS) {

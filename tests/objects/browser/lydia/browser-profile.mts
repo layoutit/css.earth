@@ -1,5 +1,5 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
-import controls from '../../../../src/planets/lydia/prepared/controls.json' with {type:'json'};
+import controls from '../../../../src/objects/lydia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'lydia',controls,audit:{
   "preparedAssetPairs": [
     {

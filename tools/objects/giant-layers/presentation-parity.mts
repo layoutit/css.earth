@@ -11,7 +11,7 @@ import{prepareLayeredSurfacePresentation}from'./presentation.mts';
 import{prepareWorldNavigationDefinition}from'../dist/prepare-world-navigation.js';
 const root=fileURLToPath(new URL('../../../',import.meta.url));
 export async function assertLayeredPresentationParity(id:string){
- const directory=resolve(root,'src/planets',id),json=async(path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(directory,path),'utf8'));
+ const directory=resolve(root,'src/objects',id),json=async(path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(directory,path),'utf8'));
  const geometryConfig=await json('source/preparation/geometry.json'),geometry=prepareBandedEllipsoid(geometryConfig);
  const actual=await prepareLayeredSurfacePresentation({config:await json('source/preparation/presentation.json'),geometryConfig,geometry,observationConfig:await json('source/preparation/observations.json'),materialConfig:await json('source/preparation/materials.json'),sky:validatePreparedCubicSky(await json('prepared/sky.json'),{requireSun:false}),sun:validateDirectionalSunPlan(await json('prepared/sun.json'))});
  const expected=parse(await json('prepared/runtime.json'),object({schema:string}),'runtime presentation');const {definition:runtime}=await prepareWorldNavigationDefinition({objectDirectory:directory,projectRoot:root,definition:{...actual,schema:expected.schema,id,controls:await json('prepared/controls.json')}});
