@@ -19,6 +19,8 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     projection.style.background = 'transparent';
     projection.style.opacity = '0'; projection.style.visibility = 'hidden';
     camera.className = 'css-volume-camera'; scene.className = 'css-volume-scene'; mesh.className = 'css-volume-mesh';
+    // Same camera-driven scene as a volume: keep slice raster scales through rotation.
+    scene.style.willChange = 'transform';
     for (const leaf of stack.leaves) {
       const element = document.createElement('s');
       element.dataset.imageLayerLeaf = leaf.id;
