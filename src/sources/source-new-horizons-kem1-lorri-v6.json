@@ -1,0 +1,30 @@
+{
+  "id": "source-new-horizons-kem1-lorri-v6",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "New Horizons LORRI Calibrated KEM1 V6.0",
+  "identifiers": [
+    {
+      "type": "PDS dataset",
+      "value": "NH-A-LORRI-3-KEM1-V6.0"
+    }
+  ],
+  "version": "6.0",
+  "publisher": "NASA Planetary Data System",
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/",
+      "label": "Native LORRI exposures"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pdssbn.astro.umd.edu/holdings/nh-a-lorri-3-kem1-v6.0/data/20190101_040862/lor_0408626332_0x636_sci.lbl",
+      "checkedOn": "2026-09-12",
+      "locator": "DATA_SET_ID; IMAGE, ERROR_IMAGE and QUALITY_IMAGE objects"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

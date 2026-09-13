@@ -76,8 +76,9 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     if (index < 0) return frames.length === 1 && first.reason !== undefined ? first : missing(point, 'no-qualified-observation');
     const value = values[index];
     if (value.reason !== undefined) return value;
-    const radiance = value.radiance * levels.gains[index], gray = Math.round(Math.max(0, Math.min(1, (radiance - low) / (high - low))) * 255);
-    return { ...value, color: [gray, gray, gray], radiance, frameId: frames[index].id, frameIndex: index };
+    const gain = levels.gains[index], radiance = value.radiance * gain, level = (v: number) => Math.round(Math.max(0, Math.min(1, (v - low) / (high - low))) * 255), gray = level(radiance);
+    // Registered filter colour shares the lens's one linear scale; no channel is stretched on its own.
+    return { ...value, color: value.color ? value.color.map(channel => level(channel * gain)) : [gray, gray, gray], radiance, frameId: frames[index].id, frameIndex: index };
   };
   const sourceSquareMeters: Record<string, number> = {};
   const areaCoverage = { method: 'Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed', samplesPerTriangle: policy.samplesPerTriangle,
@@ -100,7 +101,7 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     frames: frames.map(frame => frame.report), limits: policy.limits, photometry: policy.photometry, selection: policy.selection,
     levelMatching: frames.length > 1 ? { ...policy.levelMatching, ...levels, sampledPoints: points.length } : null,
     display: { range: display.range, ...(display.range === 'authored' ? {} : { percentiles: display.percentiles }), low, high, units: display.units,
-      ...(display.range === 'reference-pixels' ? { referenceFrame: frames[0].id } : {}) },
+      ...(display.range === 'reference-pixels' ? { referenceFrame: frames[0].id } : {}), ...(display.range === 'authored' && display.channels ? { channels: display.channels, commonLinearScale: true } : {}) },
     areaCoverage, sourceIds: entries.map(entry => ({ id: entry.id, sha256: entry.expectedSha256 })), previewPolicy: PREVIEW_POLICY,
     ...(policy.limitations ? { limitations: policy.limitations } : {}) };
   const preview = (width: number, height: number) => {

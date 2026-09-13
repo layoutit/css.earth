@@ -34,6 +34,8 @@ new route.
 | `pds4-geometry-cube` | `formats/geo.mts` | Fitted to the backplanes | Archive backplanes |
 | `osiris-camera` | `formats/geo.mts` | Archived closure | Source-mesh rays |
 | `llorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
+| `nh-lorri-camera` | `formats/geo.mts` | Archived closure with TAN-SIP distortion | Source-mesh rays |
+| `nh-mvic-camera` | `formats/geo.mts` | Archived closure through a fitted image transform; three registered filters shown as colour | Source-mesh rays |
 | `spice-camera` | `formats/geo.mts` | SPICE kernels | Source-mesh rays |
 | `encounter-fits` | `formats/encounter.mts` | Registered control network | Source-mesh rays |
 | `isis2-orthographic` | `formats/orthographic.mts` | None: every pixel names a DEM post | Registered DEM posts |
@@ -64,7 +66,8 @@ Three choices still differ by format, and each lens report records them:
   must cover both.
 - **Display range.** Those formats take the display percentiles from the first
   frame's qualified pixels. Encounter frames take them from samples on the
-  displayed surface. An orthophoto uses its authored range.
+  displayed surface. An orthophoto uses its authored range, and an enhanced-colour
+  cube shows its filter planes on one authored linear scale.
 - **Selection.** A mosaic picks the lowest emission, the first frame in recipe
   order, or the finest pixel scale.
 

@@ -803,7 +803,9 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     && (element.classList.contains('planet-object-link') || element.getClientRects().length > 0);
   search.addEventListener("keydown", (event) => {
     if (open && (event.key === "Enter" || event.key === "ArrowDown")) {
-      const first = [...browser.querySelectorAll<HTMLElement>("a, button")].find(visibleControl);
+      // Enter opens the first result. The category tabs come first in the browser but are not results.
+      const first = [...browser.querySelectorAll<HTMLElement>("a, button")]
+        .find(control => (event.key !== "Enter" || control.getAttribute("role") !== "tab") && visibleControl(control));
       if (first) {
         event.preventDefault();
         if (event.key === "Enter") first.click(); else first.focus();
