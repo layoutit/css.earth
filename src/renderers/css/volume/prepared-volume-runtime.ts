@@ -30,6 +30,9 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     root.className = 'css-volume-projection';
     camera.className = 'css-volume-camera';
     scene.className = 'css-volume-scene';
+    // The camera turns this scene every frame. Without the hint Chrome re-rastered each slice
+    // layer whenever its projected scale moved: thousands of layers a second during a drag.
+    scene.style.willChange = 'transform';
     mesh.className = 'css-volume-mesh';
     root.style.opacity = '0';
     root.style.display = 'block';
