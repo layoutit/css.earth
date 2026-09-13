@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-observation-astrometric-calibration@1",
+  "source": {
+    "id": "webb-components",
+    "sha256": "1ec85e2b0cf6a35d176af48a48e1f37c8922abadb60dc53866ee282855808a36",
+    "width": 2958,
+    "height": 2569
+  },
+  "reference": {
+    "id": "hubble-optical",
+    "sha256": "8a4a08d56893e1a03339b2705dc41acb177693da75e21858800bdb584c5901c6",
+    "width": 3864,
+    "height": 3864
+  },
+  "frame": {
+    "width": 1024,
+    "height": 1024,
+    "fieldArcminutes": [
+      9.1,
+      9.1
+    ],
+    "centerIcrsDegrees": [
+      83.6334511837,
+      22.0151236394
+    ],
+    "northUp": true
+  },
+  "matchedStarCatalogueSha256": "7b6da0c051926aecc4e4919ba5db0aeacdbc0ebe924149596c1f414af901f6f5",
+  "publisherToCalibratedFrame": [
+    1.0267,
+    0,
+    0,
+    1.0267,
+    -13.300100410445426,
+    -13.449328070027251
+  ],
+  "interpretation": "Empirical native stellar correspondences require approximately +2.67 percent scale about the source centre. The original AVM WCS is preserved unchanged. This explicit rounded scalar initial calibration precedes the unchanged affine holdout/parity/coverage/plausibility gates. The heldout residual is conditional on the identified stars and this calibrated prior; no independent catalogue absolute calibration is claimed.",
+  "origin": {
+    "kind": "observed-stellar-registration",
+    "uncalibratedStars": 73,
+    "uncalibratedHeldOutStars": 25,
+    "uncalibratedRelativeScale": 1.0266642961655899,
+    "uncalibratedHeldOutRmsArcseconds": 0.15078023160037943,
+    "publisherWidthArcminutes": 5.325172132816618,
+    "calibratedWidthArcminutes": 5.467354228762821,
+    "comparisonWebbWidthArcminutes": 5.468003230840379
+  },
+  "uncertainty": "No formal publisher WCS uncertainty supplied. Residuals quantify relative centroid scatter, not uncertainty in absolute angular scale or shared systematic errors."
+}
