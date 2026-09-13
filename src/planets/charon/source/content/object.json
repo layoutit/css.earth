@@ -75,7 +75,7 @@
     "labels": {
       "normal": "Monochrome",
       "elevation": "Elevation",
-      "enhanced-color": "Enhanced color",
+      "enhanced-color": "False color",
       "albedo": "Bond albedo"
     },
     "controls": [
@@ -97,9 +97,9 @@
       },
       {
         "id": "enhanced-color",
-        "label": "Enhanced color",
+        "label": "False color",
         "description": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
-        "title": "MVIC enhanced-color mosaic",
+        "title": "MVIC false-color mosaic",
         "thumbnail": "charon-lens-enhanced-color.webp",
         "surface": "charon-enhanced-color.webp",
         "poles": "charon-poles-enhanced-color.webp",
@@ -108,7 +108,9 @@
           "path": "../manifest.json",
           "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx"
         },
-        "detail": "MVIC color bands"
+        "detail": "New Horizons",
+        "summary": "Near-infrared, red and blue bands show spectral differences, sharpened with panchromatic detail. This is false color; the gray grid marks missing coverage.",
+        "falseColor": true
       },
       {
         "id": "elevation",

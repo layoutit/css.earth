@@ -584,7 +584,7 @@
           "backgroundMaximum": 0.003
         },
         "metadata": {
-          "label": "Filter color",
+          "label": "False color",
           "falseColor": true,
           "coverage": "Five Cassini pointings in IR3, IR1 and UV3, displayed as red, green and blue. Cameras use measured registration in the published shape frame; complete three-filter footprints are combined.",
           "attribution": {
@@ -596,6 +596,20 @@
           "longitudeDegrees": 159.5343604651163,
           "latitudeDegrees": 11.099796511627906,
           "zoom": 1.1
+        },
+        "colorDisplay": {
+          "kind": "band-composite",
+          "inputQuantity": "radiance-factor",
+          "bands": [
+            "IR3",
+            "IR1",
+            "UV3"
+          ],
+          "displayRange": [
+            0,
+            0.5
+          ],
+          "outputEncoding": "srgb"
         }
       }
     ]
@@ -642,7 +656,7 @@
   },
   "celestial": {
     "sunSource": "JPL Saturn-system orbital data; the shape uses the controlled Cassini September 2005 frame. Its displayed orientation is arbitrary because Hyperion rotates chaotically.",
-    "qualification": "The ephemeris locates the Sun, but Hyperion’s body attitude is an explicitly arbitrary display orientation. Its directional lighting is a display convention, not a prediction of the current tumbling surface phase."
+    "qualification": "The ephemeris locates the Sun, but Hyperion\u2019s body attitude is an explicitly arbitrary display orientation. Its directional lighting is a display convention, not a prediction of the current tumbling surface phase."
   },
   "presentation": {
     "defaultLens": "normal",

@@ -1,24 +1,44 @@
 {
   "body": "hyperion",
   "lens": "filter-color",
-  "baselineRef": "52d5d4815",
-  "baselineCommit": "52d5d48155b62c62cc35052f4d82800d4d12c208",
-  "toolSha256": "b6b4b80cd9bf012152c8e71b8ffbf23f1df64f8a1dd12fe9c73880845fe6e2bc",
-  "recipeSha256": "4d11acb5ef5940695c850977c3e70e5fe9a9bada936fec577220fde130b20c34",
-  "runtimeSha256": "dc7b6b359d91f2ae8b2b566f3ced66ed7bd45bf3913cb131053cd7ca20f07440",
+  "baselineRef": "8cc1a2fae",
+  "baselineCommit": "8cc1a2faead111bd3535c0bed326180631b42f09",
+  "toolSha256": "40a26f7f6842ab754416710b072efba83decdf3983f3c3859fe95ac082bdabd4",
+  "colorTransferSha256": "4fdacc08867ab12c5b4f4b5819210f52f044155a5ebcbbf912f0ff0d9d201fe5",
+  "recipeSha256": "ef7af975e45ef41a69b45d122eb1183f3f9b095bad9ae6182db0e05cd41ea4b9",
+  "runtimeSha256": "8e62b04cce21c047e4fbe234663b80cdc0b89e5645cb9621b935adc3c214c719",
   "geometrySha256": "e635195881f80d3021bc571c8a9f61462f59241e9770cfb11c12ae4657499bc9",
   "surfaceTrianglesSha256": "2f721f3e914e1f659f41d2cbd4890659df1fca695bdd9ea24576101eecb10071",
   "geometryUnchanged": true,
   "browser": "148.0.7778.96",
   "purpose": "Mounted-lens inspection at DPR 1 and 2, with loaded asset hashes, geometry retention and interaction checks. Scientific qualification belongs to the source and registration evidence.",
-  "existingAssetChanges": [],
+  "existingAssetChanges": [
+    {
+      "filename": "hyperion-filter-color-shadow@2x.webp",
+      "beforeSha256": "f8d77f52c1839f31b3c749e6a1a9a98a862aa9e55ab00e5ef23bcaa5956a40bc",
+      "afterSha256": "9e7c4ef3ee9a039fb0428dbde60f8020f5ac2704e9ddb07d3613685f85245ebf",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "hyperion-filter-color-surface@2x.webp",
+      "beforeSha256": "f8e4010096e568c64aa2bd5965d9020210c7acb057dd927c44e344165d40abd2",
+      "afterSha256": "a7c85c63051d0c689972cb371e961ff4799b2e5642338b768f9d8437d9323fa9",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    },
+    {
+      "filename": "hyperion-filter-color-thumbnail.webp",
+      "beforeSha256": "2c1de7a4f8da1373e4fb0af5d74be728f49f6d332e928328e01abd758ef3ca4a",
+      "afterSha256": "fbc611e0678a02abc5035466401aef2229ef3e471bd9178798fa35c374d12b11",
+      "reason": "The selected dataset was re-prepared; source and color evidence qualify this change."
+    }
+  ],
   "mobile": {
     "viewport": {
       "width": 390,
       "height": 844
     },
     "dpr": 2,
-    "rowText": "Filter color\nCassini",
+    "rowText": "False color\nCassini",
     "bounds": {
       "x": 20,
       "y": 740.46875,
@@ -33,7 +53,7 @@
       "sunView": "matrix3d(0.999967548656,0.000010986862,0.008056147582,0,0,0.999999070045,-0.001363784872,0,-0.008056155073,0.001363740616,0.999966618731,0,0,0,0,1)"
     },
     "stableDom": true,
-    "sha256": "7b10ab7c0886ff461fb42a0010f19c8a0845ea7309e9c422abdef67b9938df38",
+    "sha256": "4499d02030fa221b985a332a27001cff85c8e79a789e5e89bf226e59c3ca3519",
     "errors": []
   },
   "reports": [
@@ -53,7 +73,7 @@
         {
           "name": "color",
           "file": "color-dpr1.png",
-          "sha256": "c4c9c281d28ad0d04a224e0c9d4b839d12ffb31d1ff04b51a08d3b1901311b82",
+          "sha256": "d09cdf317b376caf9dee8e2a49d6ff73a84292aade2d21b934acd53c6ae85326",
           "url": "http://127.0.0.1:4284/hyperion/?v=MMZAj7voQnb8j0FCxzNAAAAAv5AdubP8ByO_496wiDLaRD-Jin9uB7eSAAA#dataset=filter-color",
           "pose": {
             "schema": "cssearth-camera-pose@1",
@@ -97,28 +117,70 @@
       },
       "loaded": [
         {
-          "filename": "hyperion-normal-surface@2x.webp",
-          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-normal-surface@2x.webp",
-          "sha256": "be463cf8477fc34d4426d152b0c9c2b9872aca12bfbbb03046281c3ab86a12ac",
-          "bytes": 1361026
+          "filename": "hyperion-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "hyperion-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-system-point.webp",
+          "sha256": "83f0f1c0c2c0dfb86b59511d4f6ff85784987fac158b0e16ede049210dabaca2",
+          "bytes": 96
+        },
+        {
+          "filename": "hyperion-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-normal-thumbnail.webp",
+          "sha256": "af9fb9ee2775cf477952cc9510a677b8e85e0a8fd309c0d515678fc020de43ff",
+          "bytes": 4314
+        },
+        {
+          "filename": "hyperion-filter-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-filter-color-thumbnail.webp",
+          "sha256": "fbc611e0678a02abc5035466401aef2229ef3e471bd9178798fa35c374d12b11",
+          "bytes": 3540
+        },
+        {
+          "filename": "hyperion-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-elevation-thumbnail.webp",
+          "sha256": "34a8a891482eb762488bc26159d222c233303a77baeae7633b3432bcde431f58",
+          "bytes": 6440
+        },
+        {
+          "filename": "hyperion-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
+          "filename": "hyperion-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
         },
         {
           "filename": "hyperion-normal-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-normal-surface@2x.webp",
           "sha256": "be463cf8477fc34d4426d152b0c9c2b9872aca12bfbbb03046281c3ab86a12ac",
           "bytes": 1361026
+        },
+        {
+          "filename": "hyperion-features.json",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-features.json",
+          "sha256": "dcec8ebb7bfd3a02f0822461dfa848b60fd834b3018d0c88fead7f3ec0001ba5",
+          "bytes": 11977
         },
         {
           "filename": "hyperion-filter-color-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-filter-color-surface@2x.webp",
-          "sha256": "f8e4010096e568c64aa2bd5965d9020210c7acb057dd927c44e344165d40abd2",
-          "bytes": 872976
+          "sha256": "a7c85c63051d0c689972cb371e961ff4799b2e5642338b768f9d8437d9323fa9",
+          "bytes": 825742
         },
         {
           "filename": "hyperion-filter-color-shadow@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-filter-color-shadow@2x.webp",
-          "sha256": "f8d77f52c1839f31b3c749e6a1a9a98a862aa9e55ab00e5ef23bcaa5956a40bc",
-          "bytes": 628422
+          "sha256": "9e7c4ef3ee9a039fb0428dbde60f8020f5ac2704e9ddb07d3613685f85245ebf",
+          "bytes": 591450
         }
       ],
       "errors": []
@@ -139,7 +201,7 @@
         {
           "name": "color",
           "file": "color-dpr2.png",
-          "sha256": "8fb9de535cf2a9516f2e2718fea3045dd3768bbe98be20036adfd77202acb167",
+          "sha256": "2de6476c61336063db04af92088d529c9811ecd27e98df286cd0123dd7180f64",
           "url": "http://127.0.0.1:4284/hyperion/?v=MMZAj7voQnb8j0FCxzNAAAAAv5AdubP8ByO_496wiDLaRD-Jin9uB7eSAAA#dataset=filter-color",
           "pose": {
             "schema": "cssearth-camera-pose@1",
@@ -183,28 +245,73 @@
       },
       "loaded": [
         {
+          "filename": "hyperion-directional-sun@2x.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+          "bytes": 12530
+        },
+        {
+          "filename": "hyperion-system-point.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-system-point.webp",
+          "sha256": "83f0f1c0c2c0dfb86b59511d4f6ff85784987fac158b0e16ede049210dabaca2",
+          "bytes": 96
+        },
+        {
+          "filename": "hyperion-normal-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-normal-thumbnail.webp",
+          "sha256": "af9fb9ee2775cf477952cc9510a677b8e85e0a8fd309c0d515678fc020de43ff",
+          "bytes": 4314
+        },
+        {
+          "filename": "hyperion-filter-color-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-filter-color-thumbnail.webp",
+          "sha256": "fbc611e0678a02abc5035466401aef2229ef3e471bd9178798fa35c374d12b11",
+          "bytes": 3540
+        },
+        {
+          "filename": "hyperion-elevation-thumbnail.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-elevation-thumbnail.webp",
+          "sha256": "34a8a891482eb762488bc26159d222c233303a77baeae7633b3432bcde431f58",
+          "bytes": 6440
+        },
+        {
+          "filename": "hyperion-elevation-legend.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-elevation-legend.webp",
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "bytes": 298
+        },
+        {
+          "filename": "hyperion-lighting.webp",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+          "bytes": 1050836
+        },
+        {
           "filename": "hyperion-normal-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-normal-surface@2x.webp",
           "sha256": "be463cf8477fc34d4426d152b0c9c2b9872aca12bfbbb03046281c3ab86a12ac",
           "bytes": 1361026
         },
         {
+          "filename": "hyperion-features.json",
+          "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-features.json",
+          "sha256": "dcec8ebb7bfd3a02f0822461dfa848b60fd834b3018d0c88fead7f3ec0001ba5",
+          "bytes": 11977
+        },
+        {
           "filename": "hyperion-filter-color-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-filter-color-surface@2x.webp",
-          "sha256": "f8e4010096e568c64aa2bd5965d9020210c7acb057dd927c44e344165d40abd2",
-          "bytes": 872976
+          "sha256": "a7c85c63051d0c689972cb371e961ff4799b2e5642338b768f9d8437d9323fa9",
+          "bytes": 825742
         },
         {
           "filename": "hyperion-filter-color-shadow@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/hyperion/hyperion-filter-color-shadow@2x.webp",
-          "sha256": "f8d77f52c1839f31b3c749e6a1a9a98a862aa9e55ab00e5ef23bcaa5956a40bc",
-          "bytes": 628422
+          "sha256": "9e7c4ef3ee9a039fb0428dbde60f8020f5ac2704e9ddb07d3613685f85245ebf",
+          "bytes": 591450
         }
       ],
       "errors": []
     }
-  ],
-  "implementationCommit": "8a17bcab0d992b73881d983f53113dbfe1d4ddfb",
-  "preparationImplementationSha256": "a4a73e16e708c8738d62a837d2442ead5e4fbbae5f7a211a49e15acf91d9389c",
-  "visualInspection": "Inspected all six captures: expanded neighboring crater fields, remaining gray coverage gaps, IAU labels, oblique Shadows, full product and mobile selector. This is mounted evidence; source-camera holdouts qualify the projection."
+  ]
 }

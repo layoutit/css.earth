@@ -194,6 +194,7 @@ Read the applicable preparation guidance **before** processing those assets:
 
 | Source or issue | Preparation decision |
 | --- | --- |
+| Surface color, calibrated filters or RGB imagery | [Source-backed surface color](../../../docs/color-preparation.md): identify the input quantity and published color meaning; keep measured bands floating until one final display encoding. Registration and calibration do not qualify natural color. Never guess missing visible bands, white balance or an instrument color transform. |
 | Photographed shading or mosaic seams | [Photographic observations](references/surface-preparation.md#photographic-observations): corrected source or justified per-observation normalization, then bounded level matching where useful. Preserve shared lighting controls. |
 | Soft photographic textures | [Photographic observations](references/surface-preparation.md#photographic-observations): trace intermediate resizes, sample registered originals at the delivered footprint, and separate sampling gains from encoding quality. |
 | Multiple photographs registered to a surface | [Registered photographic mosaics](references/registered-photographic-mosaics.md): camera holdouts, quality and visibility checks, deterministic selection, overlap levels, provenance and area coverage. |

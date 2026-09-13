@@ -7,6 +7,7 @@ import {mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {prepareShapeCameraColor} from './shape-camera-mosaic.mts';
+import {srgbToLinear,linearToSrgb} from '../color-transfer.mts';
 import {parseCameraFrame} from './source-records.mts';
 
 test('calibrated VICAR skips binary telemetry and honors source byte order',()=>{
@@ -87,14 +88,15 @@ test('color pointings extend coverage as complete triplets and retain an earlier
       for(let set=0;set<2;set++){
         const id=`frame-${set}-${c}`,path=id+'.img',labelPath=id+'.lbl',bytes=Buffer.alloc(512+32*32*4);
         bytes.write("LBLSIZE=512 FORMAT='REAL' ORG='BSQ' NS=32 NL=32 NB=1 NBB=0 NLB=0 RECSIZE=128 REALFMT='RIEEE'");
-        for(let i=0;i<1024;i++)bytes.writeFloatLE(set===1&&c===1&&i%32<16?NaN:[[.6,.3,.1],[.1,.6,.3]][set][c],512+i*4);
-        await writeFile(join(root,path),bytes);await writeFile(join(root,labelPath),'Synthetic calibrated detector fixture');
+        for(let i=0;i<1024;i++)bytes.writeFloatLE(set===1&&c===1&&i%32<16?NaN:[[1.5,.3,.1],[.1,.6,.3]][set][c],512+i*4);
+        await writeFile(join(root,path),bytes);await writeFile(join(root,labelPath),`FILTER_NAME = "${channel}"\nUNITS = "I/F"\n`);
         frames.push(parseCameraFrame({id,path,labelPath,observerLatitude:0,observerWestLongitude:0,sunLatitude:0,sunWestLongitude:0,rangeKm:set?900:1000,
           northAzimuthDegrees:0,center:[set?24:8,16],pixelAngleMicroradians:6}));
       }
       channels.push({channel,filter:channel,frames});
     }
-    const base={channels,photometry:{model:'observed',weight:.5,maximumGain:1,maximumIncidenceDegrees:75,maximumEmissionDegrees:75,displayMaximum:1,gamma:1,minimumLevel:1,maximumLevel:1},metadata:{falseColor:true}};
+    const base={channels,photometry:{model:'observed',weight:.5,maximumGain:1,maximumIncidenceDegrees:75,maximumEmissionDegrees:75,displayMaximum:1,gamma:1,minimumLevel:1,maximumLevel:1},metadata:{falseColor:true},
+      colorDisplay:{kind:'band-composite',inputQuantity:'radiance-factor',bands:['red','green','blue'],displayRange:[0,1],outputEncoding:'srgb'}};
     const prepare=(selected:typeof channels)=>prepareShapeCameraColor(root,selected.flatMap(c=>c.frames.flatMap(f=>[{path:f.path,width:32,height:32},{path:f.labelPath}])),{...base,channels:selected},96,48,shape);
     const first=await prepare(channels.map(c=>({...c,frames:[c.frames[0]]}))),second=await prepare(channels.map(c=>({...c,frames:[c.frames[1]]}))),merged=await prepare(channels);
     let retained=0,extended=0,overlap=0;
@@ -104,8 +106,14 @@ test('color pointings extend coverage as complete triplets and retain an earlier
       if(!first.missing[i]&&second.missing[i]){retained++;assert.deepEqual(pixel,first.rgb.subarray(i*3,i*3+3));}
       if(first.missing[i]&&!second.missing[i]){extended++;assert.deepEqual(pixel,second.rgb.subarray(i*3,i*3+3));}
       if(!first.missing[i]&&!second.missing[i]){
-        overlap++;const alpha=(pixel[0]-first.rgb[i*3])/(second.rgb[i*3]-first.rgb[i*3]);
-        for(let c=1;c<3;c++)assert.ok(Math.abs(pixel[c]-(first.rgb[i*3+c]*(1-alpha)+second.rgb[i*3+c]*alpha))<=2,'All filters share one blend weight');
+        overlap++;
+        const decode=(value:number)=>srgbToLinear(value/255);
+        const alpha=Math.max(0,Math.min(1,(decode(pixel[1])-.3)/(.6-.3)));
+        const alphaLow=Math.max(0,(decode(pixel[1]-.5)-.3)/(.6-.3));
+        const alphaHigh=Math.min(1,(decode(pixel[1]+.5)-.3)/(.6-.3));
+        const red=(weight:number)=>Math.round(255*linearToSrgb(1.5*(1-weight)+.1*weight));
+        assert.ok(pixel[0]>=red(alphaHigh)-1&&pixel[0]<=red(alphaLow)+1,'The camera path blends unclipped source values within the green byte quantization interval');
+        assert.ok(Math.abs(decode(pixel[2])-(.1*(1-alpha)+.3*alpha))<=.012,'All filters share one blend weight in linear values, within final byte quantization');
       }
     }
     assert.ok(retained>0&&extended>0&&overlap>0,'Fixture exercises old coverage, new coverage and overlap');
