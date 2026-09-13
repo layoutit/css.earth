@@ -143,6 +143,141 @@
       ],
       "path": "features/ITOKAWA_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ITOKAWA_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2480981469_v_ddr.img.gz",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.img.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2480981469_v_ddr.lbl",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2480981469_v_ddr.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2480981469_v.fit",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051022/st_2480981469_v.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2481672682_v_ddr.img.gz",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2481672682_v_ddr.img.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2481672682_v_ddr.lbl",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2481672682_v_ddr.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2481672682_v.fit",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051022/st_2481672682_v.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2492513077_v_ddr.img.gz",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2492513077_v_ddr.img.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2492513077_v_ddr.lbl",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2492513077_v_ddr.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2492513077_v.fit",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051026/st_2492513077_v.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2495230070_v_ddr.img.gz",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2495230070_v_ddr.img.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2495230070_v_ddr.lbl",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2495230070_v_ddr.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2495230070_v.fit",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051027/st_2495230070_v.fit"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2473604354_v_ddr.lbl",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2473604354_v_ddr.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2473604354_v_ddr.img.gz",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-amicageom-v1.0/data/ddr_gaskell/st_2473604354_v_ddr.img.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/st_2473604354_v.fit",
+      "url": "https://data.darts.isas.jaxa.jp/pub/pds3/hay-a-amica-3-hayamica-v1.0/data/20051019/st_2473604354_v.fit"
     }
   ]
 }

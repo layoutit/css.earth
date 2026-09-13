@@ -18,6 +18,7 @@ import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-laye
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 import { createPreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
+import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import type { WorldPlannerSource } from './world-context-planner-client.js';
 import type { WorldContextPublication } from './world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context-planner-client.js';
@@ -74,6 +75,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       throw new TypeError('Prepared volume lenses must share the universe reference frame and epoch.');
     return createPreparedVolumeLenses(options);
   });
+  // Each galaxy's slices stand for it only while it spans pixels; below that its label does.
+  const volumeFramingUnits = volumeFramingRadiusUnits(payload.frame);
+  const imageFramingUnits = imageLayers.map(({ payload }) => volumeFramingRadiusUnits(payload.frame));
+  const lensFraming = volumeLenses.map(({ payload }) => ({ frame: payload.lenses[0]!.volume.frame,
+    radiusUnits: payload.framingRadiusUnits, visibility: payload.pointVisibility }));
   const assets: PreparedAssets = {
     entries: [...entries, ...pointEntries, ...shellEntries, ...imageEntries, ...lensPlans.flatMap(bank => bank.assets.entries)],
     pools: [{ id: pool, retention: 'mount', capacity: entries.length, concurrency: 8, reuse: false, decoding: 'async' },
@@ -134,11 +140,12 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       let prefetchGalaxy = (_distanceM: number) => {};
       const prefetchAbort = new AbortController();
       const lensBanks: ReturnType<ReturnType<typeof createPreparedVolumeLenses>['mount']>[] = [];
+      const publishedBankOpacity = imageLayers.map(() => NaN), publishedLensOpacity = volumeLenses.map(() => NaN);
       const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
       const mountedShells = [...shells];
       let selected = plan.focus;
       let destroyed = false;
-      let highContrastSky = false, volumeOpacity = 0, volumeBrightness = 1;
+      let highContrastSky = false, volumeOpacity = 0, volumeBrightness = 1, volumeSize = 1;
       let publishedVolumeAlpha = NaN, publishedImageAlpha = NaN, publishedSkyAlpha = NaN;
       let publishedVolumeOpacity = NaN, publishedVolumeBrightness = NaN;
       let publishedVolumeVisible: boolean | undefined, publishedScale = '';
@@ -149,8 +156,13 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // Compensate the opaque sky underlay so its contribution stays 1-t.
         const alpha = skyLayer ? volumeOpacity * brightness : volumeOpacity;
         if (alpha !== publishedVolumeAlpha) { volumeHost.style.opacity = String(alpha); publishedVolumeAlpha = alpha; }
-        const imageAlpha = skyLayer ? 1 : brightness;
-        if (imageAlpha !== publishedImageAlpha) { volumeImage.style.opacity = skyLayer ? '' : String(imageAlpha); publishedImageAlpha = imageAlpha; }
+        // The galaxy's own slices fade with its projected size; the matte and sky handoff do not.
+        const imageAlpha = (skyLayer ? 1 : brightness) * volumeSize;
+        if (imageAlpha !== publishedImageAlpha) {
+          volumeImage.style.opacity = skyLayer && imageAlpha === 1 ? '' : String(imageAlpha);
+          volumeImage.style.display = imageAlpha > 0 ? '' : 'none';
+          publishedImageAlpha = imageAlpha;
+        }
         const skyAlpha = alpha < 1 ? (1 - volumeOpacity) / (1 - alpha) : 0;
         if (skyLayer && skyAlpha !== publishedSkyAlpha) { skyLayer.root.style.opacity = String(skyAlpha); publishedSkyAlpha = skyAlpha; }
       };
@@ -260,6 +272,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
             volumeOpacity = preparedVolumeOpacity(distanceM, plan.volume.opacityProfile);
             volumeBrightness = preparedVolumeOpacity(distanceM, plan.volume.brightnessProfile);
+            volumeSize = projectedVolumeOpacity(world, viewport, payload.frame, volumeFramingUnits);
             const volumeVisible = volumeOpacity > 0;
             if (volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; publishedVolumeVisible = volumeVisible; }
             if (volumeOpacity !== publishedVolumeOpacity) {
@@ -272,17 +285,27 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             }
             publishBackground();
             skyLayer?.publish(world, viewport, volumeOpacity < 1);
-            if (volumeOpacity > 0) volumeLayer!.publish({ world, viewport });
-            // Like lens banks, a faded image bank leaves layout and compositing.
-            for (const bank of imageBanks) {
-              bank.root.style.opacity = String(volumeOpacity);
-              bank.root.style.display = volumeOpacity > 0 ? '' : 'none';
-              if (volumeOpacity > 0) bank.publish({ world, viewport });
+            if (volumeOpacity > 0 && volumeSize > 0) volumeLayer!.publish({ world, viewport });
+            // A galaxy under a few projected pixels is its label: its bank fades, then
+            // leaves layout and compositing. Like lens banks, a faded image bank does too.
+            for (const [index, bank] of imageBanks.entries()) {
+              const opacity = volumeOpacity * projectedVolumeOpacity(world, viewport, imageLayers[index]!.payload.frame, imageFramingUnits[index]!);
+              if (opacity !== publishedBankOpacity[index]) {
+                bank.root.style.opacity = String(opacity);
+                bank.root.style.display = opacity > 0 ? '' : 'none';
+                publishedBankOpacity[index] = opacity;
+              }
+              if (opacity > 0) bank.publish({ world, viewport });
             }
             for (const [index, bank] of lensBanks.entries()) {
-              const opacity = volumeLenses[index]!.payload.contextVisibility === 'independent' ? 1 : volumeOpacity;
-              bank.root.style.opacity = String(opacity);
-              bank.root.style.display = opacity > 0 ? 'block' : 'none';
+              const { frame, radiusUnits, visibility } = lensFraming[index]!;
+              const contextOpacity = volumeLenses[index]!.payload.contextVisibility === 'independent' ? 1 : volumeOpacity;
+              const opacity = contextOpacity * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
+              if (opacity !== publishedLensOpacity[index]) {
+                bank.root.style.opacity = String(opacity);
+                bank.root.style.display = opacity > 0 ? 'block' : 'none';
+                publishedLensOpacity[index] = opacity;
+              }
               if (opacity > 0) bank.publish({ world, viewport });
             }
             for (const [index, shell] of shellLayers.entries()) {

@@ -8,7 +8,8 @@ import {decodeEncounterFits} from '../terrestrial-layers/encounter-fits.mts';
 import {encounterCamera} from '../terrestrial-layers/encounter-camera.mts';
 import {validateEncounterRegistration} from '../terrestrial-layers/encounter-registration.mts';
 import {loadPdsPlanetocentricShape} from '../terrestrial-layers/obj-shape.mts';
-import {buildEncounterBackplane,sampleEncounterFootprint} from '../terrestrial-layers/encounter-surface.mts';
+import {castSourceRays} from '../surface-observations/geometry.mts';
+import {sampleFootprint} from '../surface-observations/footprint.mts';
 import {matchImageFeatures} from '../terrestrial-layers/image-feature-matching.mts';
 
 const matching=shape({patchRadius:number,searchRadius:number,gridStride:number,gridOrigin:number,targetSmoothingSigma:number,minimumCorrelation:number,minimumPeakMargin:number,minimumJointValidFraction:number});
@@ -39,12 +40,13 @@ export async function prepareCloseups(sourceDirectory:string,write=false) {
     const directory='photography/deep-impact',refBytes=await pinned(`${directory}/${entry.referenceId}.fit`),refControlBytes=await pinned(`${directory}/${entry.referenceId}.json`),refControl=parseEncounterSourceControl(JSON.parse(refControlBytes.toString('utf8')));
     const reference=decodeEncounterFits(refBytes,refControl.observation),refCamera=encounterCamera(reference.header,refControl.camera);
     validateEncounterRegistration(refCamera,refControl.registration,recipe.shapeSha256);
-    const plane=buildEncounterBackplane(reference,refCamera,mesh,{transfer}),targetBytes=await pinned(`${directory}/${entry.id}.fit`),target=decodeEncounterFits(targetBytes,entry.observation);
+    const referenceCamera={kind:'control-network' as const,project:refCamera.project,ray:refCamera.ray,positionMeters:refCamera.positionMeters,positionKm:refCamera.positionKm,sunDirection:refCamera.sunDirection,pinhole:true,report:refCamera.report};
+    const footprint={image:{width:reference.width,height:reference.height,values:reference.values,reject:reference.reason,startTime:String(reference.startTime),filter:String(reference.filter),report:reference.report},camera:referenceCamera,geometry:castSourceRays(referenceCamera,mesh,reference.width,reference.height),photometry:{gain:()=>1}},targetBytes=await pinned(`${directory}/${entry.id}.fit`),target=decodeEncounterFits(targetBytes,entry.observation);
     const seed={bodyToJ2000:refControl.camera.bodyToJ2000,offsetPixels:[0,0],maximumOffsetPixels:256},camera=encounterCamera(target.header,seed);
     const width=target.width+2*recipe.margin,height=target.height+2*recipe.margin,values=new Float32Array(width*height),valid=new Uint8Array(width*height),xyz=new Float64Array(width*height*3),uv=new Float64Array(width*height*2);
     for(let y=0;y<height;y++)for(let x=0;x<width;x++){
       const i=y*width+x,ray=camera.ray(x-recipe.margin,y-recipe.margin),hit=mesh.intersect(camera.positionMeters,ray);if(!hit)continue;
-      const point=camera.positionMeters.map((n,j)=>n+ray[j]*hit.radius),pixel=refCamera.project(point),sample=sampleEncounterFootprint(reference,refCamera,plane,point,transfer);
+      const point=camera.positionMeters.map((n,j)=>n+ray[j]*hit.radius),pixel=refCamera.project(point),sample=sampleFootprint(footprint,point,transfer);
       if(sample.reason||sample.radiance===undefined||!pixel)continue;
       const delta=point.map((n,j)=>n-refCamera.positionMeters[j]),distance=Math.hypot(...delta),visible=mesh.intersect(refCamera.positionMeters,delta.map(n=>n/distance),distance+.5);
       if(!visible||Math.abs(visible.radius-distance)>.5)continue;

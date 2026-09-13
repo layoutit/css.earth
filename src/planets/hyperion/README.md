@@ -2,6 +2,8 @@
 
 ## Sources
 
+**False color** combines original Cassini ISS IR3, IR1 and UV3 observations from September 26, 2005, displayed as red, green and blue. Both red and green display channels are infrared; this is false color. Fifteen FULL-resolution, losslessly compressed CISSCAL 4.0beta products cover five neighboring pointings at about 159–208 m per detector pixel near the centre. Their image IDs and registration records are listed below.
+
 - **Monochrome** uses 12 clear-filter Cassini ISS observations, calibrated to I/F by CISSCAL 4.0beta and distributed by the [PDS Ring-Moon Systems Node](https://pds-rings.seti.org/cassini/iss/access.html).
 
 - The [PDS Saturn Small Moon Shape Models release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html) provides Thomas's Hyperion model: 14,636 vertices and 29,268 triangular plates, with Cartesian coordinates in kilometers.
@@ -10,11 +12,23 @@
 
 ## Evidence
 
+The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above `8cc1a2fae`; retained geometry is identical to that baseline. [Image delivery](evidence/filter-color/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+
+All fifteen filtered cameras pass disjoint holdouts and checks against a separate clear exposure. Across the five pointings, the second-image held-out RMS is 0.242–0.933 detector pixels, with maximum held-out residual 1.689 pixels. The [registration method and original correspondence reports](#filter-camera-registration) preserve every accepted match, including the larger diagnostic residuals. These are relative registration checks within the published shape frame.
+
+**False color:** Five overlapping pointings extend the photographed crater field beyond the original rectangular detector footprint. Only complete three-filter coverage contributes; photographed shadows remain. Existing IAU names remain available in this lens. The [browser record](evidence/filter-color/capture.json) pins the loaded image responses, camera, settings and inspected views at DPR 1 and 2. The existing Monochrome images, body leaves and picking triangles are unchanged; only the selected false-color assets were re-encoded. Dragging, Shadows and the mobile selector passed without page errors or replaced scene DOM. Scientific qualification comes from the original camera/shape release and the registration evidence described here; these screenshots document the mounted result.
+
+[False color](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Oblique with Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). These captures were refreshed on 2026-09-13 after integrating main’s shared observation pipeline at `0636327ba`. The record pins the tested recipe, runtime, display transfer and loaded image bytes, and compares retained geometry with `8cc1a2fae`.
+
+- The expanded False color map contains 2,271,627 valid samples out of 8,388,608 (27.1%), up from 907,090 (10.8%) with one pointing: 2.50× the mapped coverage. The per-triplet contributions are recorded in [prepared/surfaces.json](prepared/surfaces.json). These are equirectangular raster counts, not equal-area surface fractions.
+
 - The prepared 4096 × 2048 Monochrome map contains 6,836,406 valid output samples out of 8,388,608 (81.5% of equirectangular pixels). This is raster coverage, not an equal-area surface fraction.
 
 - Recorded B3 source-mesh reprojection gives held-out correlations 0.99169 and 0.99276, with displacement magnitudes 1.62 and 5.70 detector pixels. The correction is source-relative; it does not override the mesh's published uncertainty or establish absolute 100 m accuracy. Exact pins, fit regions and independent checks are in [source/validation/n1506391424-registration.json](source/validation/n1506391424-registration.json).
 
 ## Known problems
+
+**False color:** Coverage is regional and the photographs retain acquisition shadows. The fifteen images span approximately 00:42–01:06 UTC and include changing viewpoints. They are not a simultaneous true-color view or a composition map. The camera fit is relative to the published 2005 control frame; it cannot improve the shape’s documented sub-kilometre uncertainty in this observed region. One UV3 fitting patch has a 4.88-pixel residual near a dark crater boundary; it is retained in the report rather than pruned. The fifth pointing has only 7–8 second-image holdouts per filter. Its other, diagnostic checkerboard partition includes residuals up to 2.62 pixels. All points remain in the reports; the disjoint holdouts pass the stated criteria.
 
 Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Hyperion (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, and converts each positive-east centre into the body-fixed frame the radial terrain sampler uses for this mesh (longitude 0 toward the mesh +y axis, 90° E toward +x, north +z), then casts that direction through the prepared hit mesh so every anchor and outline point sits on the shape model rather than on a reference sphere. Craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries. This export publishes no diameters, so every name is labelled without a rim, ranked after sized features, and the sidebar shows its size as unpublished.
 
@@ -34,6 +48,53 @@ fits on screen; facing and overlap still control display.
 - **Unresolved:** Zubarev and Nadezhdina's 2025 paper, [Shape, mosaic and control point network](https://doi.org/10.1016/j.icarus.2024.116440), reports a newer 50 m/pixel mosaic and DEM in a new reference frame. Its public downloadable pixel/model release was not located from the paper and linked 2025 LPSC abstract. The research exists; this package does not claim to include it.
 
 [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+
+
+## Filter camera registration
+
+<details>
+<summary>Source products, processing and qualification</summary>
+
+Thomas’s [model documentation](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf) explicitly says ordinary geometry for other images does not share this model’s body frame. Its Table 1 supplies controlled clear images, rather than a filtered-image solution. The published camera for `N1506388174` anchors the first pointing. Initial range, observer/Sun directions and roll interpolate the bracketing controlled clear-image records for each pointing. These are search seeds only: the accepted cameras add detector translation and roll measured from spatially distributed interior features through the full source mesh.
+
+The shared preparation tool [register-camera-bands.mts](../../../tools/objects/terrestrial-layers/register-camera-bands.mts) uses a 27-pixel patch and a 5-minus-31-pixel detail filter for correspondence only. Original I/F values are never sharpened or replaced. Every patch retains the full convolution footprint inside the detector; all projected samples must be visible on the original mesh. A checkerboard grid separates fitting and held-out coordinates. Correlation, peak separation and curvature reject ambiguous matches before fitting; no residual pruning is applied.
+
+Acceptance requires at least six fit and six held-out patches, held-out RMS at most one source pixel and maximum residual at most two. A second published clear image, `N1506388518`, validates the frozen color cameras without contributing to their fit. Its own published pointing is used for the primary second-image result below.
+
+| Filter | Fit / holdout patches | Fit RMS / max (px) | Holdout RMS / max (px) | Second-image holdouts | Second-image RMS / max (px) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| IR3 | 53 / 49 | 0.333 / 0.860 | 0.281 / 0.700 | 37 | 0.907 / 1.355 |
+| IR1 | 53 / 49 | 0.304 / 0.867 | 0.261 / 0.803 | 37 | 0.933 / 1.342 |
+| UV3 | 52 / 49 | 0.798 / 4.880 | 0.396 / 0.884 | 37 | 0.875 / 1.689 |
+
+[Camera fit and all correspondences](source/validation/filter-color-registration.json) · [Second-image validation](source/validation/filter-color-independent.json). The [clear-to-clear diagnostic](source/validation/clear-camera-registration.json) measures the two anchors’ small pointing difference. Using that independently fitted clear reference gives [0.19–0.38-pixel held-out RMS](source/validation/filter-color-independent-aligned.json); this is consistency within the same control network, not independent absolute accuracy. No existing Monochrome camera is changed.
+
+The additional pointings use separately registered clear cameras. The existing clear-to-clear fit ties `N1506388518` to `N1506388174`; new clear-only fits tie `N1506388840` to that aligned `N1506388518`, `N1506389178` to aligned `N1506388840`, and `N1506389543` directly to `N1506388174`. Each triplet is fitted against its own clear exposure and checked, without refitting, against the preceding anchor. This aligns the mosaic within the control network and does not improve absolute shape accuracy. Monochrome retains all its original cameras.
+
+| Clear pointing | IR3 / IR1 / UV3 image numbers (all `N…_2_CALIB`) | Second-image holdouts per filter | Second-image RMS range / maximum held-out residual (px) |
+| --- | --- | ---: | ---: |
+| 1506388174 | 1506388324 / 1506388291 / 1506388236 | 37 | 0.875–0.933 / 1.689 |
+| [1506388518](source/validation/filter-color-1506388518-registration.json) | 1506388668 / 1506388635 / 1506388580 | 37 | [0.460–0.531 / 1.339](source/validation/filter-color-1506388518-independent.json) |
+| [1506388840](source/validation/filter-color-1506388840-registration.json) | 1506388990 / 1506388957 / 1506388902 | 31 | [0.273–0.328 / 0.599](source/validation/filter-color-1506388840-independent.json) |
+| [1506389178](source/validation/filter-color-1506389178-registration.json) | 1506389328 / 1506389295 / 1506389240 | 19 | [0.242–0.350 / 0.556](source/validation/filter-color-1506389178-independent.json) |
+| [1506389543](source/validation/filter-color-1506389543-registration.json) | 1506389683 / 1506389650 / 1506389595 | 7–8 | [0.732–0.811 / 1.284](source/validation/filter-color-1506389543-independent.json) |
+
+The published table repeats `N1506389543` with two detector centres. The selected NAC observation uses the first row, (−56.50, −8.10); its [separate clear-frame fit](source/validation/filter-color-1506389543-clear.json) checks the measured features before the filtered-camera fit. The 8840 and 9178 pointings needed approximate −8 and −16-pixel detector-y offsets to centre the search. Those are unqualified search seeds, recorded in their jobs, followed by the same feature fit and holdout criteria.
+
+The seed and validation jobs are retained under `source/preparation/filter-color-*.json` and `clear-camera-registration.json`. Restore the body’s source inputs, then run, for example:
+
+```sh
+node tools/objects/terrestrial-layers/register-camera-bands.mts \
+  src/planets/hyperion/source/preparation/filter-color-registration.json \
+  output/hyperion-color-fit.json
+node tools/objects/terrestrial-layers/register-camera-bands.mts \
+  src/planets/hyperion/source/preparation/filter-color-validation.json \
+  output/hyperion-color-validation.json --check-only
+```
+
+The delivered [recipe](source/preparation/terrestrial.json) uses the accepted cameras and untouched calibrated pixels. Matching indices in its three filter lists form one observing triplet. Preparation intersects each complete triplet first, then adds the five pointings from coarse to fine. Overlap uses one common detector-edge and incidence/emission weight for all three channels; missing bands never borrow a different pointing’s channel. It withholds non-common coverage, samples beyond 75° incidence or emission, and a three-pixel detector coverage margin. The existing edge-connected 0.003 I/F background exclusion is an approximate background mask, not a detector-quality flag; interior dark samples remain. All channels share a 0–0.5 I/F range assigned to linear display channels. The [shared IEC sRGB output transfer](../../../docs/color-preparation.md) follows floating-point overlap composition; only then are values clipped and quantized to 8 bits. No per-filter equalization, clear-filter detail injection or photometric model alters their ratios. Existing geometry and the shared Shadows control are retained.
+
+</details>
 
 ## Methods and source notes
 

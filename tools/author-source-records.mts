@@ -5,8 +5,10 @@
  * which exists only after that manifest is committed. Run without `--evidence`
  * to add missing bindings and records with placeholder evidence, commit the
  * manifest, then run with `--evidence <revision>` to pin the placeholders to
- * that revision's manifest bytes. Existing records and pinned evidence are
- * never rewritten.
+ * that revision's manifest bytes. Documents cite records authored by hand,
+ * such as the publication behind a photometric model record; their placeholder
+ * evidence is pinned the same way, for this manifest and locator only. Existing
+ * records and pinned evidence are never rewritten.
  */
 import { createHash } from 'node:crypto';
 import { execFile } from 'node:child_process';
@@ -94,6 +96,30 @@ export async function authorSourceRecords({ root, objectId, evidence, manifestAt
       }
     }
   }
+  if (pinned) {
+    const documents = requireArray(manifest.documents ?? [], 'manifest documents').map(value => requireRecord(value, 'manifest document'));
+    for (const [index, document] of documents.entries()) {
+      if (document.sourceBinding === undefined) continue;
+      const binding = requireRecord(document.sourceBinding, 'source binding'), locator = `/documents/${index}`;
+      if (binding.kind !== 'catalogued') continue;
+      for (const value of requireArray(binding.references, 'binding references')) {
+        const catalogueId = requireString(requireRecord(value, 'binding reference').catalogueId, 'catalogue id');
+        const recordPath = resolve(root, 'src/sources', `${catalogueId}.json`);
+        if (!await exists(recordPath)) throw new TypeError(`Document ${requireString(document.path, 'document path')} cites ${catalogueId}, which has no catalogue record.`);
+        const record = requireRecord(JSON.parse(await readFile(recordPath, 'utf8')), 'catalogue record');
+        let changed = false;
+        // A publication may be cited by several bodies; only this manifest's placeholder at this locator is pinned now.
+        for (const entry of requireArray(record.evidence, 'record evidence').map(item => requireRecord(item, 'record evidence entry'))) {
+          if (entry.revision !== PLACEHOLDER_REVISION || entry.path !== repositoryPath || entry.locator !== locator) continue;
+          entry.revision = pinned.revision; entry.sha256 = pinned.sha256; changed = true;
+        }
+        if (!changed) continue;
+        parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records: [record] });
+        if (write) await writeFile(recordPath, JSON.stringify(record, null, 2) + '\n');
+        if (!result.pinned.includes(catalogueId)) result.pinned.push(catalogueId);
+      }
+    }
+  }
   if (write && manifestChanged) await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   return result;
 }
@@ -101,7 +127,8 @@ export async function authorSourceRecords({ root, objectId, evidence, manifestAt
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const arguments_ = process.argv.slice(2), evidenceIndex = arguments_.indexOf('--evidence');
   const evidence = evidenceIndex >= 0 ? arguments_[evidenceIndex + 1] : undefined;
-  const ids = arguments_.filter((argument, index) => argument !== '--evidence' && index !== evidenceIndex + 1);
+  // Without --evidence, evidenceIndex + 1 is 0, which must not drop the object id.
+  const ids = arguments_.filter((argument, index) => argument !== '--evidence' && (evidenceIndex < 0 || index !== evidenceIndex + 1));
   if (ids.length !== 1 || (evidenceIndex >= 0 && !evidence)) throw new TypeError('Usage: author-source-records <object-id> [--evidence <revision>]');
   const result = await authorSourceRecords({ root: process.cwd(), objectId: ids[0], evidence });
   console.log(JSON.stringify(result, null, 1));

@@ -46,6 +46,13 @@ Do not infer a precise camera from a caption or sub-spacecraft longitude alone.
 A holdout from the same GEO product proves internal consistency, not independent
 absolute accuracy or agreement with a different display mesh.
 
+For OSIRIS image/model registration, the existing archived-camera preparer
+accepts `registrationSearchRadiusPixels` in the source profile (128 by default,
+up to 256 source pixels). A wider search locates a larger pointing translation;
+it does not relax the 0.70 correlation or 12-pixel withheld-error limits. Keep
+two spatially disjoint fit windows and two holdouts, include the search margin
+inside the image, and report the adjustment and its source-shape limitations.
+
 ## Qualify a surface sample before interpolation
 
 Keep camera fit, correspondence between shape models, detector quality and
@@ -85,6 +92,10 @@ geometric criterion and deterministic ties. 67P minimizes the largest emission
 angle among each candidate's interpolation contributors, favoring less
 foreshortening. Brightness does not choose the winner. Different resolution or
 source uncertainty may justify a different criterion; retain its rationale.
+
+Level gains that follow phase angle rather than exposure mean a phase function
+is missing. Normalize with the body's published photometric model first (see
+`tools/photometry/README.md`), then fit only what remains.
 
 When residual exposure steps warrant level matching, sample the same surface
 locations in each observation after photometric correction. Robust median

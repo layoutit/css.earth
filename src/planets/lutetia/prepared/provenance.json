@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d8f55b50d6bd738d62a23b4c7dfb4f226c2bd5cb5a1c11ff5b4cbb25a4dd201e"
+    "sha256": "f67bb95e9efe3907f5cc074c5a8d9747685371a2790650c9ad3d1a654cd48e73"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0e289d02429797207c6067110d1ca4e4390b75cb29ebac48bee9c57ce0703425",
+      "sha256": "ddd9c2556b0a97a935313ea1679dfa9119ef4810edf7741343973b9eb88af53a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,14 +97,22 @@
                 "visibilityToleranceMeters": 0.5
               },
               "photometry": {
-                "model": "minnaert",
-                "referenceIncidenceDegrees": 0,
-                "referenceEmissionDegrees": 0,
-                "maximumIncidenceDegrees": 70,
-                "maximumEmissionDegrees": 70,
-                "maximumGain": 2.5,
-                "coefficient": 0.5505,
-                "phaseCoefficientPerDegree": 0.005
+                "model": "photometry/hasselmann-2016-hapke-1993.json",
+                "referenceDegrees": {
+                  "incidence": 35,
+                  "emission": 0,
+                  "phase": 35
+                },
+                "limits": {
+                  "maximumIncidenceDegrees": 70,
+                  "maximumEmissionDegrees": 70,
+                  "phaseDegrees": [
+                    25,
+                    55
+                  ],
+                  "minimumGain": 0.4,
+                  "maximumGain": 2.5
+                }
               },
               "displayPercentiles": [
                 1,
@@ -112,7 +120,7 @@
               ],
               "metadata": {
                 "label": "OSIRIS",
-                "coverage": "Two Rosetta orange-filter close-ups show Lutetia’s craters and ridges. Each uses the published shape and a separately checked camera. Approximate disk correction reduces broad shading; the grid marks gaps.",
+                "coverage": "Three Rosetta orange-filter photographs show Lutetia’s craters and ridges, including a closer view at 15:43 UTC. Each uses the published shape and a separately checked camera. Published photometric normalization reduces broad shading; the grid marks gaps.",
                 "falseColor": false
               },
               "frames": [
@@ -127,6 +135,12 @@
                   "path": "observations/n20100710t154135529id4df22.img",
                   "cameraPath": "observations/n20100710t154135529id4df22-camera.json",
                   "startTime": "2010-07-10T15:41:54.488"
+                },
+                {
+                  "id": "image-n20100710t154241240id4df22",
+                  "path": "observations/n20100710t154241240id4df22.img",
+                  "cameraPath": "observations/n20100710t154241240id4df22-camera.json",
+                  "startTime": "2010-07-10T15:43:00.199"
                 }
               ],
               "selection": "lowest-emission",
@@ -198,7 +212,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bd587a259341019b545870b8ec95df98192d86003d5dee82bac00122471b0ce1",
+      "sha256": "d97ddca4352caf06640098c91ac12f053ff853d0996588b49dc517f10263ebb6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -269,7 +283,7 @@
               "id": "osiris",
               "label": "OSIRIS",
               "detail": "OSIRIS",
-              "description": "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs.",
+              "description": "Three Rosetta close-ups show Lutetia’s craters and ridges during the 2010 flyby, at 68–88 metres per pixel. Brightness is normalized with a published photometric model; shadows and seams remain. The grid marks areas without usable photographs.",
               "title": "OSIRIS photographs",
               "thumbnail": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
               "surface": "lutetia-osiris-surface@2x.webp",
@@ -278,17 +292,17 @@
                 "id": "lutetia-observations-n20100710t154047674id4df22-img",
                 "path": "../manifest.json"
               },
-              "summary": "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs.",
+              "summary": "Three Rosetta close-ups show Lutetia’s craters and ridges during the 2010 flyby, at 68–88 metres per pixel. Brightness is normalized with a published photometric model; shadows and seams remain. The grid marks areas without usable photographs.",
               "facts": [
                 {
                   "id": "images",
                   "label": "Images",
-                  "value": "2"
+                  "value": "3"
                 },
                 {
                   "id": "image-scale",
                   "label": "Image scale",
-                  "value": "78–88 m/pixel"
+                  "value": "68–88 m/pixel"
                 }
               ]
             },
@@ -519,6 +533,34 @@
       "verificationOperations": []
     },
     {
+      "path": "photometry/hasselmann-2016-hapke-1993.json",
+      "purpose": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-icarus-2015-11-023",
+            "role": "method",
+            "evidence": "Hasselmann et al. (2016) fit the Hapke (1993) model to NAC F82+F22 images of the Baetica and Etruria regions. Table 5 prints the parameters with uncertainties. Table 1 gives the 0.15-144.15 degree phase range, and the analysis removed facets beyond 80 degrees incidence or emission.",
+            "locator": "Table 5, Hapke (1993) column; Table 1, NAC F82+F22 row"
+          }
+        ]
+      },
+      "id": "source-document:photometry/hasselmann-2016-hapke-1993.json",
+      "kind": "source-document",
+      "origin": "object:source/photometry/hasselmann-2016-hapke-1993.json",
+      "title": "Published Hapke (1993) photometric model of Lutetia at 649.2 nm, with the fitted angle ranges, used to normalize the OSIRIS photograph view.",
+      "credit": "Credit not recorded in source manifest.",
+      "acquisition": "Acquisition not recorded in source manifest.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "c2e60730c7d6c0b9bc8b5a688d8d5dfeed8fe948bb240141da3c8ecf9037f718",
+      "bytes": 663,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "kind": "source-input",
       "id": "lutetia-observations-n20100710t154047674id4df22-img",
       "path": "observations/n20100710t154047674id4df22.img",
@@ -630,6 +672,60 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "lutetia-n20100710t154241240id4df22-img",
+      "path": "observations/n20100710t154241240id4df22.img",
+      "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSINAC/RO-A-OSINAC-4-AST2-LUTETIA-STR-REFL-V1.0/DATA/IMG/N20100710T154241240ID4DF22.IMG",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "rosetta-osiris-n20100710t154241240id4df22",
+            "role": "material",
+            "evidence": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSINAC/RO-A-OSINAC-4-AST2-LUTETIA-STR-REFL-V1.0/DATA/IMG/N20100710T154241240ID4DF22.IMG"
+          }
+        ]
+      },
+      "sha256": "b1c6c6ecf86cd733290f2eebd972d6b227d235e5f5552bb3a1e42f3d9f496481",
+      "bytes": 37776384,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/n20100710t154241240id4df22.img",
+        "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSINAC/RO-A-OSINAC-4-AST2-LUTETIA-STR-REFL-V1.0/DATA/IMG/N20100710T154241240ID4DF22.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lutetia-n20100710t154241240id4df22-camera",
+      "path": "observations/n20100710t154241240id4df22-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Camera computed from the exact native image, released kernels and pinned source shape. Two disjoint image windows fit a translation; two withheld windows check it."
+      },
+      "sha256": "b6e70f70299f772905d3063b891fd8110c00799d54476ed66d068dd39dbefa3a",
+      "bytes": 5140,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -642,8 +738,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bd587a259341019b545870b8ec95df98192d86003d5dee82bac00122471b0ce1",
-      "bytes": 10209,
+      "sha256": "d97ddca4352caf06640098c91ac12f053ff853d0996588b49dc517f10263ebb6",
+      "bytes": 10397,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -841,7 +937,7 @@
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs."
+        "Three Rosetta close-ups show Lutetia’s craters and ridges during the 2010 flyby, at 68–88 metres per pixel. Brightness is normalized with a published photometric model; shadows and seams remain. The grid marks areas without usable photographs."
       ],
       "lensIds": [
         "osiris"
@@ -853,23 +949,26 @@
         "kind": "surfaceObservations"
       },
       "inputs": [
+        "source-document:photometry/hasselmann-2016-hapke-1993.json",
         "lutetia-observations-n20100710t154047674id4df22-img",
         "lutetia-observations-osiris-camera-json",
         "lutetia-n20100710t154135529id4df22-img",
         "lutetia-n20100710t154135529id4df22-camera",
+        "lutetia-n20100710t154241240id4df22-img",
+        "lutetia-n20100710t154241240id4df22-camera",
         "lutetia-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
-          "bytes": 2266,
-          "sha256": "1632f8974f762530b7827e9f105f90eed71de8dbdb2987cbf656eb3b4bb62974",
+          "bytes": 2292,
+          "sha256": "59f563ae84cd7b0d87594451a7b1859afd596d3a98083c64efb1cf3940828871",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
-          "bytes": 838004,
-          "sha256": "c9a1287c2b3fd59416e0e156442b3fc9cbac8629a59e8f277f1659b4be37fe97",
+          "bytes": 918122,
+          "sha256": "2014d72a996af4d0c8810c8d8d3b04e4822c7f9b38f708b65ec8ad82cef8a605",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -977,8 +1076,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 29868,
-          "sha256": "c54893d25775bc2d2a6ef038d7fa1352ace3896da4619cc7c54fb0bc8c27f9b4",
+          "bytes": 30752,
+          "sha256": "dd015a835dc66984b3fbe8796674ec31f8f7eef81bb9698bb9525f7dca42f95d",
           "verification": "bytes-verified"
         }
       ]

@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fea679db119627d4170fd383a7d32e910c5958e4c85143bcdd42e2eb235cace1"
+    "sha256": "497bba4530bb5d334c12364461b6d02e0041f59427abc88a788183e9b99837ba"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "be586369fca14d6a6ed74d3c15218f673842c58f40a3117c4b976c51b9159079",
+      "sha256": "9dce630a0df6ba25f2faebd41761a384240a3075f19fc3c34074e1af648ac590",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/europa/",
@@ -55,7 +55,8 @@
                 "kind": "geotiff-monochrome-alpha",
                 "noData": 0,
                 "centerLongitude": 180,
-                "resampling": "source-georeferenced-bilinear"
+                "resampling": "source-georeferenced-bilinear",
+                "wrapLongitude": true
               },
               "nativePhotographicSampling": {
                 "samplesPerAxis": 2,
@@ -88,7 +89,21 @@
                   "GREEN",
                   "VIOLET"
                 ],
-                "gamma": 2.2
+                "gamma": 1,
+                "colorDisplay": {
+                  "kind": "band-composite",
+                  "inputQuantity": "radiance-factor",
+                  "bands": [
+                    "IR-7560",
+                    "GREEN",
+                    "VIOLET"
+                  ],
+                  "displayRange": [
+                    0,
+                    1
+                  ],
+                  "outputEncoding": "srgb"
+                }
               },
               "metadata": {
                 "label": "Enhanced color",
@@ -321,7 +336,8 @@
                 "centerLongitude": 0,
                 "channels": "rgb",
                 "zeroValidity": "all-channels",
-                "resampling": "source-georeferenced-bilinear"
+                "resampling": "source-georeferenced-bilinear",
+                "wrapLongitude": true
               },
               "textureScale": 0.5
             }
@@ -373,7 +389,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "adea0fe714df61db29809426fc78d414766723e35b1cca490aae48371373a85d",
+      "sha256": "95869f5400c626c6d3302c9466003ede4b3b6eba525f87d6de0e56e516814c81",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -499,9 +515,9 @@
             },
             {
               "id": "enhanced",
-              "label": "Enhanced color",
-              "description": "Galileo enhanced color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving color ratios. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources.",
-              "title": "SSI enhanced-color mosaic",
+              "label": "False color",
+              "description": "Galileo false color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving linear band ratios. This is not a human-visible color reconstruction. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources.",
+              "title": "Galileo false-color mosaic",
               "thumbnail": "europa-lens-enhanced.webp",
               "surface": "europa-enhanced.webp",
               "poles": "europa-poles-enhanced.webp",
@@ -509,8 +525,9 @@
                 "id": "observed-color",
                 "path": "../manifest.json"
               },
-              "detail": "Color mosaic",
-              "summary": "Enhanced colors are combined with monochrome detail. Where color is unavailable, gray imagery remains; the grid marks gaps in both."
+              "detail": "Galileo",
+              "summary": "Galileo bands at 756, 559 and 404 nm show spectral differences. Monochrome imagery supplies brightness matching and fills missing color; this is not natural color.",
+              "falseColor": true
             },
             {
               "id": "elevation",
@@ -1169,8 +1186,8 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet, view descriptions and legends."
       },
-      "sha256": "adea0fe714df61db29809426fc78d414766723e35b1cca490aae48371373a85d",
-      "bytes": 16192,
+      "sha256": "95869f5400c626c6d3302c9466003ede4b3b6eba525f87d6de0e56e516814c81",
+      "bytes": 16298,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1343,13 +1360,13 @@
     },
     {
       "id": "enhanced",
-      "label": "Enhanced color",
+      "label": "False color",
       "recipe": "raster",
       "selector": "/surfaces/1",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Galileo enhanced color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving color ratios. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources."
+        "Galileo false color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving linear band ratios. This is not a human-visible color reconstruction. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources."
       ],
       "lensIds": [
         "enhanced"
@@ -1368,20 +1385,20 @@
       "outputs": [
         {
           "url": "/scenes/europa/europa-enhanced.webp",
-          "bytes": 2318986,
-          "sha256": "ece705e5acee7f14bebf24ada58a62973a6bf92b4f1799a27e674aee4c889b40",
+          "bytes": 2319192,
+          "sha256": "003af8c6437edbc9360590fcdabdc6093e42afbb40d4d3581280b2c78ed89cab",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/europa/europa-enhanced@2x.webp",
-          "bytes": 6463596,
-          "sha256": "4b876dcda47989db898f4d9a8b87434f6e318baf43565fbafdcd04817ffd8042",
+          "bytes": 6469160,
+          "sha256": "a1d399e34e5d34afb4909653f87b2e88d4c3391fa941d53719692a98a1b4bf60",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/europa/europa-lens-enhanced.webp",
-          "bytes": 924,
-          "sha256": "43cd769a21ff3a01c63238687758c66bdf13817470dc481947c9718515688603",
+          "bytes": 916,
+          "sha256": "a63aa6f1354bfc04c6147d9a0146bab661a0ab3ba97ae2933203a1c4bdf96c02",
           "verification": "asset-manifest-pin"
         },
         {
@@ -1542,14 +1559,14 @@
         },
         {
           "url": "/scenes/europa/europa-infrared@2x.webp",
-          "bytes": 219612,
-          "sha256": "ba2e605d83c8c8ca54534913934bcb7ce34687e1ec541370595b120504899a3b",
+          "bytes": 218316,
+          "sha256": "36f9d2a251ae888cec5020aeb38a39235152d78d09c64b13f591c5819a1f6c37",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/europa/europa-lens-infrared.webp",
-          "bytes": 710,
-          "sha256": "26d66673fa26a82988d34d298d94708f97d3b3d0d34cc637ea0ff9ea38bca538",
+          "bytes": 712,
+          "sha256": "74e0b9e6414fbb77b0a1cf3a9c5a9804e5dc430117cb6ce3e2b6d73074d4ad13",
           "verification": "asset-manifest-pin"
         },
         {
@@ -1560,8 +1577,8 @@
         },
         {
           "url": "/scenes/europa/europa-poles-infrared@2x.webp",
-          "bytes": 48836,
-          "sha256": "be613fee1b4a2a256f6c079d6476673d292ea9c7a068693eb31e85e99f6fa3e8",
+          "bytes": 48712,
+          "sha256": "098aede4a8356ea87f179e793fe7f2c020cf31a6446fb89683f1774c8231c8ee",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -2069,7 +2086,7 @@
     },
     {
       "id": "preview:enhanced",
-      "label": "Enhanced color preview",
+      "label": "False color preview",
       "recipe": "raster",
       "selector": "/surfaces/1",
       "recipeDependencies": [
@@ -2085,8 +2102,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/enhanced.webp",
-          "bytes": 52488,
-          "sha256": "840718750608fc2cd24ca5df70e1ca80365f3ea67a92c3fa8cbda7bf714303eb",
+          "bytes": 52654,
+          "sha256": "7e04c29ec19ad7ccf75f00e63358d843b90fb0669afcb9c463f175cd9b55d299",
           "verification": "bytes-verified"
         }
       ]

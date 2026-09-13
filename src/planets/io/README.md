@@ -54,6 +54,8 @@ The earlier map-edge claim was incorrect for Io: it confused the native GeoTIFF 
 
 - Focused checks are defined in the [unit tests](../../../tests/objects/unit/io).
 
+Edge meridian, 13 September 2026: the Normal and Enhanced GeoTIFFs span 360° of longitude, and their recipe now declares `wrapLongitude`. Before, the 2× maps kept one missing column at 180°, filled by the gray coverage grid. A [matched crop](evidence/wrap-longitude/crop.json) of the Normal 2× map, taken from main's published file and from this version, has 33 of 36,864 pixels over the Pixelmatch threshold of 0.1 ([report](evidence/wrap-longitude/change.json)). The largest change is 36 levels at the 180° column; no other column changes by more than 7, which is WebP re-encoding. The [comparison](evidence/wrap-longitude/comparison.png) shows the map pixels and this version in the browser.
+
 ## Known problems
 
 The existing atlas seams can remain visible at extreme close zoom. This change

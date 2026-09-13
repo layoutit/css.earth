@@ -123,9 +123,9 @@
       },
       {
         "id": "enhanced",
-        "label": "Enhanced color",
-        "description": "Galileo enhanced color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving color ratios. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources.",
-        "title": "SSI enhanced-color mosaic",
+        "label": "False color",
+        "description": "Galileo false color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving linear band ratios. This is not a human-visible color reconstruction. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources.",
+        "title": "Galileo false-color mosaic",
         "thumbnail": "europa-lens-enhanced.webp",
         "surface": "europa-enhanced.webp",
         "poles": "europa-poles-enhanced.webp",
@@ -133,8 +133,9 @@
           "id": "observed-color",
           "path": "../manifest.json"
         },
-        "detail": "Color mosaic",
-        "summary": "Enhanced colors are combined with monochrome detail. Where color is unavailable, gray imagery remains; the grid marks gaps in both."
+        "detail": "Galileo",
+        "summary": "Galileo bands at 756, 559 and 404 nm show spectral differences. Monochrome imagery supplies brightness matching and fills missing color; this is not natural color.",
+        "falseColor": true
       },
       {
         "id": "elevation",

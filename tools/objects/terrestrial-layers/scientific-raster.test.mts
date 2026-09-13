@@ -104,7 +104,8 @@ test('observed color retains dark valid pixels and rejects incomplete footprints
 });
 
 test('channel composition uses all three bands from one observation and source density precedence', () => {
-  const profile = { filters: ['red', 'green', 'blue'], gamma: 1, referenceRadiusMeters: 1, centerLongitude: 180 };
+  const profile = { filters: ['red', 'green', 'blue'], gamma: 1, referenceRadiusMeters: 1, centerLongitude: 180,
+    colorDisplay:{kind:'band-composite',inputQuantity:'radiance-factor',bands:['red','green','blue'],displayRange:[0,1],outputEncoding:'srgb'} };
   const band = (filter: string, value: number, resolution: number) => ({ filter, width: 2, height: 2, origin: [-resolution, resolution], resolution: [resolution, -resolution],
     data: new Float32Array(4).fill(value), noData: 0, specialValueMagnitude: 1e30 });
   const groups = new Map([
@@ -112,11 +113,11 @@ test('channel composition uses all three bands from one observation and source d
     ['fine', profile.filters.map((filter, index) => band(filter, (index + 1) / 4, 1))],
   ]);
   const result = composeObservedColor({ groups, profile, width: 1, height: 1 });
-  assert.deepEqual([...result.rgb], [64, 128, 191]); assert.deepEqual([...result.missing], [0]);
+  assert.deepEqual([...result.rgb], [137, 188, 225]); assert.deepEqual([...result.missing], [0]);
   const fine = groups.get('fine');
   assert.ok(fine);
   fine[1].data.fill(0);
-  assert.deepEqual([...composeObservedColor({ groups, profile, width: 1, height: 1 }).rgb], [128, 128, 128]);
+  assert.deepEqual([...composeObservedColor({ groups, profile, width: 1, height: 1 }).rgb], [188, 188, 188]);
   fine.pop();
   assert.throws(() => composeObservedColor({ groups, profile, width: 1, height: 1 }), /Incomplete color observation/);
 });

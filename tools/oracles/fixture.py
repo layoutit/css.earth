@@ -24,10 +24,14 @@ def samples(array, seed, count=48, valid=None):
     chosen = np.sort(rng.choice(picks, size=min(count, len(picks)), replace=False)) if len(picks) else np.array([], dtype=int)
     return [{'index': int(i), 'value': float(flat[i])} for i in chosen]
 
-def write(name, oracle, generated_by, tool, inputs, cases):
+def external_record(url, data):
+    """A reference outside the repository, pinned by a commit in its URL and by its bytes."""
+    return {'url': url, 'sha256': hashlib.sha256(data).hexdigest(), 'bytes': len(data)}
+
+def write(name, oracle, generated_by, tool, inputs, cases, references=()):
     fixture = {'schema': 'cssearth-oracle-fixture@1', 'oracle': oracle, 'generatedBy': generated_by,
                'tool': {**tool, 'python': platform.python_version(), 'numpy': np.__version__},
-               'inputs': [input_record(p) for p in inputs], 'cases': cases}
+               'inputs': [input_record(p) for p in inputs], **({'references': list(references)} if references else {}), 'cases': cases}
     out = ROOT / 'tests/oracles' / name
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(fixture, indent=1) + '\n')

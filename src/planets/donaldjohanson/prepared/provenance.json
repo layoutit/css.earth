@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d1ee87bb79744f7b4d5dfa103bace8240056befa49beb380134f1e71bec58623"
+    "sha256": "3e4d5e8e407d3d4d149e95f915eff92e7d5eefc9c203bc8033349984e0b5d4d1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "67f8aac95c694d927968a12a22f9f131689774a060ec322d34bd589cf92c396e",
+      "sha256": "4c54f277f5ab1f229e9db77b03ab8e93e29adf91e9fd5f18e45896559d4a8638",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -46,9 +46,6 @@
               "id": "llorri",
               "format": "llorri-camera",
               "consumer": "llorri-observation",
-              "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
-              "cameraPath": "observations/llorri-camera.json",
-              "startTime": "2025-04-20T17:50:14.018",
               "filter": "PANCHROMATIC",
               "allowLossy": false,
               "transfer": {
@@ -70,9 +67,31 @@
                 99
               ],
               "metadata": {
-                "label": "L’LORRI observation",
-                "coverage": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
+                "label": "L’LORRI mosaic",
+                "coverage": "Two Lucy L’LORRI photographs from 20 April 2025, registered to the source shape through the original cameras, published landmarks and image overlap. The closer photograph supplies detail; the approach photograph fills additional coverage. Grayscale retains photographed illumination and matched relative detector brightness, not measured albedo. The ordinary grid marks unseen, grazing or rejected areas, including the source model’s unobserved reconstruction.",
                 "falseColor": false
+              },
+              "frames": [
+                {
+                  "id": "llorri-close",
+                  "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
+                  "cameraPath": "observations/llorri-camera.json",
+                  "startTime": "2025-04-20T17:50:14.018"
+                },
+                {
+                  "id": "llorri-approach",
+                  "path": "observations/lor_0798443242_04596_00001_1x1_sci_03.fit",
+                  "cameraPath": "observations/llorri-approach-camera.json",
+                  "startTime": "2025-04-20T17:49:26.021"
+                }
+              ],
+              "selection": "recipe-order",
+              "levelMatching": {
+                "samplesPerTriangle": 24,
+                "minimumPairs": 128,
+                "maximumLogMad": 0.25,
+                "maximumGain": 1.5,
+                "maximumAngleDegrees": 60
               }
             }
           ]
@@ -138,7 +157,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6b1e91afe3a792eda78ec69e4399a38b8a8cd57ff154d98fe0dc80ec9632c8e2",
+      "sha256": "3b70231bb876c41bbe5b6eec127c031a8a94055b30d31b99810a658d1a50fb79",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -200,7 +219,7 @@
               "id": "llorri",
               "label": "L’LORRI observation",
               "detail": "Spacecraft observation",
-              "description": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
+              "description": "Two Lucy L’LORRI photographs from 20 April 2025, registered to the source shape through the original cameras, published landmarks and image overlap. The closer photograph supplies detail; the approach photograph fills additional coverage. Grayscale retains photographed illumination and matched relative detector brightness, not measured albedo. The ordinary grid marks unseen, grazing or rejected areas, including the source model’s unobserved reconstruction.",
               "title": "L’LORRI encounter image",
               "thumbnail": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
               "surface": "donaldjohanson-llorri-surface@2x.webp",
@@ -209,7 +228,7 @@
                 "id": "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
                 "path": "../manifest.json"
               },
-              "summary": "Only part of the encounter-facing surface is imaged. Brightness retains original lighting; the grid marks rejected or unseen areas."
+              "summary": "Two Lucy photographs cover part of the encounter-facing surface. Brightness retains original lighting; the grid marks rejected or unseen areas."
             },
             {
               "id": "shape",
@@ -384,7 +403,7 @@
       "sha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7",
       "bytes": 11193210,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -410,7 +429,7 @@
       "sha256": "74d897d04b791320f1acd63ab93726936bdea402d7f188201d3942af6f472557",
       "bytes": 10526400,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -438,7 +457,61 @@
       "sha256": "7acf747416aebcf252585d62d36b43aa98b299d308de5c7e1bb8fdf1b84e60ac",
       "bytes": 9023,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "donaldjohanson-lor_0798443242_04596_00001_1x1_sci_03-fit",
+      "path": "observations/lor_0798443242_04596_00001_1x1_sci_03.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.fit",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lucy-llorri-0798443242",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.xml"
+          }
+        ]
+      },
+      "sha256": "d7b06c7b8cb27ecb630d0b36b4c566adaeb272bfaea4b80ea55079627cdf8284",
+      "bytes": 10526400,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/lor_0798443242_04596_00001_1x1_sci_03.fit",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443242_04596_00001_1x1_sci_03.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "donaldjohanson-llorri-approach-camera",
+      "path": "observations/llorri-approach-camera.json",
+      "origin": "Source-bound overlap registration derived from pinned Lucy products.",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-llorri-overlap.mts --write.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Reproducible camera translation from native image overlap with disjoint fit and holdout controls."
+      },
+      "sha256": "b0b13261ce3adcd46636d9ece1bfcca4567423d90b08f3046358430773e47003",
+      "bytes": 276961,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -455,10 +528,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6b1e91afe3a792eda78ec69e4399a38b8a8cd57ff154d98fe0dc80ec9632c8e2",
-      "bytes": 13437,
+      "sha256": "3b70231bb876c41bbe5b6eec127c031a8a94055b30d31b99810a658d1a50fb79",
+      "bytes": 13495,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -480,7 +553,7 @@
       "sha256": "b5ca18dfacbff53035e64239d9e9fc2753a54a5e7cd2ade76b27a44bb25fcb92",
       "bytes": 1339,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -506,7 +579,7 @@
       "sha256": "1f516df5c1da65c45e435aa1a377998814561eec05c9823e1d5ddc715a97d5d9",
       "bytes": 30329,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -535,7 +608,7 @@
       "sha256": "4b235e29f861125fdab3b736f8d727c782bb449da1df0f9df73dfbe4c536bf6a",
       "bytes": 161,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -562,7 +635,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -595,13 +668,13 @@
           "url": "/scenes/donaldjohanson/donaldjohanson-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp",
           "bytes": 205278,
           "sha256": "fdab40973f952fad5e32ed40a551d22a998f19da6ad9cc84c86638b353694a99",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -614,7 +687,7 @@
       "parents": [],
       "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction."
+        "Two Lucy L’LORRI photographs from 20 April 2025, registered to the source shape through the original cameras, published landmarks and image overlap. The closer photograph supplies detail; the approach photograph fills additional coverage. Grayscale retains photographed illumination and matched relative detector brightness, not measured albedo. The ordinary grid marks unseen, grazing or rejected areas, including the source model’s unobserved reconstruction."
       ],
       "lensIds": [
         "llorri"
@@ -628,20 +701,22 @@
       "inputs": [
         "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
         "donaldjohanson-observations-llorri-camera-json",
+        "donaldjohanson-lor_0798443242_04596_00001_1x1_sci_03-fit",
+        "donaldjohanson-llorri-approach-camera",
         "donaldjohanson-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
-          "bytes": 1404,
-          "sha256": "04819d89aada26cfc41338c4eda34be652c50440eb5e78d3ca8d7ae68d3f185f",
-          "verification": "asset-manifest-pin"
+          "bytes": 1380,
+          "sha256": "658e0d5f48f4f33932012526c2f1687bd7f33f8302095ff79c519b289b5067de",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
-          "bytes": 588884,
-          "sha256": "1e6511e38006f9be67994da3cab08c4313b115757349ebe91904a96eaf8ca4c9",
-          "verification": "asset-manifest-pin"
+          "bytes": 686116,
+          "sha256": "be9059df07c37f955eda071b92027bb69beefd44b88ccbd6f9b1abc544226792",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -701,7 +776,7 @@
           "url": "/scenes/donaldjohanson/donaldjohanson-features.json",
           "bytes": 7930,
           "sha256": "ff7f6eebc5b85ac5912badd40fd4970bec98d95b2b5952ff99701344c4274692",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -748,8 +823,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/llorri.webp",
-          "bytes": 18896,
-          "sha256": "f8bd9ae818cffed78beae7210ae9c9d78dd80b370f7b852a05fe7c89a3e55635",
+          "bytes": 20606,
+          "sha256": "01c24f4166d5d3a8e77767f4bf94cf54fa784642e8357afe475e0ef25842c126",
           "verification": "bytes-verified"
         }
       ]
