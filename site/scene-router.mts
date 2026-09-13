@@ -80,7 +80,9 @@ export function createSceneRouter({
   windowTarget.addEventListener("pagehide", destroyActiveScene);
   windowTarget.addEventListener("pageshow", restoreCachedScene);
   if (navigation && windowTarget.location?.href) {
-    historyOwner = createNavigationHistory({ windowTarget, objects, capture: captureUrl, navigate, onError: report });
+    // Only a settled scene belongs to the entry that history names. An unfinished navigation
+    // has not committed its own entry, so snapshotting its scene would overwrite the entry it left.
+    historyOwner = createNavigationHistory({ windowTarget, objects, capture: () => pending ? null : captureUrl(), navigate, onError: report });
     unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
       supports: id => navigation.supports(objectId, id), navigate, onError: report });
   }
@@ -369,14 +371,15 @@ export function createSceneRouter({
       options = { ...options, overview: true };
     }
     const cancelledFlight = pending !== null && !pending.options.centerSelection && !options.centerSelection;
+    // Snapshot the departed view before cancelling: a superseded navigation records nothing.
+    const mode = options.history ?? 'push';
+    if (mode === 'pop') historyOwner?.remember();
+    else historyOwner?.checkpoint();
     if (pending) {
       const previous = pending;
       pending = null; previous.controller.abort(); previous.lifetime.destroy();
       if (active?.request === previous && sceneState !== 'ready') retire(active, null, { preserveShell: true, flush: false });
     }
-    const mode = options.history ?? 'push';
-    if (mode === 'pop') historyOwner?.remember();
-    else historyOwner?.checkpoint();
     worldContextMount?.suspendFocus?.();
     active?.viewUrl?.destroy();
     if (active) active.viewUrl = null;
@@ -429,6 +432,16 @@ export function createSceneRouter({
         if (restore) {
           if (request.options.history === 'pop' || request.url !== windowTarget.location.href) historyOwner?.commit(request.url, request.options);
           source.url = request.url;
+          // History within one object flies to its saved view, as history between objects does;
+          // it used to jump there in one frame. The exact saved state is still restored afterwards.
+          const savedWorld = request.options.history === 'pop' && !reducedMotionActive
+            ? navigation.savedTarget?.({ objectId: object.id, url: request.url, mount: source.mount }) : null;
+          if (savedWorld && navigation.focus) {
+            syncPlayback();
+            const flown = await request.lifetime.wait(navigation.focus({ objectId: object.id, mount: source.mount!,
+              signal: request.controller.signal, reducedMotion: reducedMotionActive, targetWorldCamera: savedWorld, timing: request.timing }));
+            if (flown.cancelled || pending !== request) return false;
+          }
         } else if (!datasetLink && !request.cancelledFlight && !request.options.preserveView && navigation.focus) {
           syncPlayback();
           const focused = await request.lifetime.wait(navigation.focus({ objectId: object.id,
