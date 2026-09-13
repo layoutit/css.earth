@@ -131,7 +131,7 @@
         "levelMatching": {
           "samplesPerTriangle": 64,
           "minimumPairs": 64,
-          "maximumGain": 1.5,
+          "maximumGain": 1.85,
           "maximumAngleDegrees": 70
         },
         "transfer": {
@@ -146,12 +146,12 @@
           "referenceEmissionDegrees": 0,
           "maximumIncidenceDegrees": 70,
           "maximumEmissionDegrees": 70,
-          "maximumGain": 2
+          "maximumGain": 1.5
         },
         "display": {
           "displayRange": [
             0,
-            0.903
+            0.893
           ]
         }
       }
