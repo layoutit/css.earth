@@ -46,7 +46,7 @@ test('authored closure binds source JSON and shared TypeScript compilers without
   for (const path of ['tools/objects/prepare-authored.ts', 'src/renderers/css/preparation/scene/index.ts',
     'src/objects/mercury/source/preparation/raster.json']) assert.ok(files.inputs.includes(path), path);
   assert.ok(files.outputs.includes(payloadPath));
-  assert.ok(!files.inputs.some(path => /^src\/planets\/mercury\/(tools|runtime|site)\//.test(path)));
+  assert.ok(!files.inputs.some(path => /^src\/objects\/mercury\/(tools|runtime|site)\//.test(path)));
 });
 
 test('authored recipe and producer mutations rebuild; generated hash updates seal only verified outputs', async () => fixture(async ({ root, write, descriptor }) => {

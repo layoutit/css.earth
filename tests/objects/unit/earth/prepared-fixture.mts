@@ -153,6 +153,6 @@ export async function preparePagingDiagnostic(plan: unknown): Promise<PagingDiag
   return { preparedJson, descriptorJson: JSON.stringify(descriptor), descriptorModule: `export default ${JSON.stringify(descriptor)};` };
 }
 export async function routePagingDiagnostic(target: Page | BrowserContext, diagnostic: PagingDiagnostic): Promise<void> {
-  await target.route(/\/src\/planets\/earth\/object\.json(?:\?.*)?$/, route => route.fulfill({ contentType: 'text/javascript', body: diagnostic.descriptorModule }));
-  await target.route(/\/src\/planets\/earth\/prepared\/object\.json$/, route => route.fulfill({ contentType: 'application/json', body: diagnostic.preparedJson }));
+  await target.route(/\/src\/objects\/earth\/object\.json(?:\?.*)?$/, route => route.fulfill({ contentType: 'text/javascript', body: diagnostic.descriptorModule }));
+  await target.route(/\/src\/objects\/earth\/prepared\/object\.json$/, route => route.fulfill({ contentType: 'application/json', body: diagnostic.preparedJson }));
 }

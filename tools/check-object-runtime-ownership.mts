@@ -408,7 +408,7 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
     if (statement.type === 'ImportDeclaration') {
       const specifier = statement.specifiers[0];
       if (statement.specifiers.length !== 1 || specifier?.type !== 'ImportDefaultSpecifier' || typeof statement.source.value !== 'string' ||
-          !/^\.\.\/src\/planets\/[a-z][a-z0-9-]*\/object\.json$/u.test(statement.source.value) ||
+          !/^\.\.\/src\/objects\/[a-z][a-z0-9-]*\/object\.json$/u.test(statement.source.value) ||
           statement.attributes?.length !== 1 || propertyKey(statement.attributes[0].key) !== 'type' || statement.attributes[0].value.value !== 'json' ||
           imports.has(specifier.local.name) || descriptorImports.has(statement.source.value)) fail('prepared catalogue must contain unique JSON descriptor imports');
       imports.set(specifier.local.name, statement.source.value); descriptorImports.add(statement.source.value);

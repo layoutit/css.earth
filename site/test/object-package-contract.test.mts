@@ -66,7 +66,7 @@ test("derives the complete owned file contract from planet identity", () => {
     `/project/src/objects/${planet.id}/source/manifest.json`,
   ));
   assert.ok(paths.requiredFiles.every((file) => !file.includes('/data/planets/')));
-  assert.ok(paths.requiredFiles.every(file => !/src\/planets\/[^/]+\/(?:tools|test|site|runtime)\//u.test(file)));
+  assert.ok(paths.requiredFiles.every(file => !/src\/objects\/[^/]+\/(?:tools|test|site|runtime)\//u.test(file)));
 });
 
 test("requires every registered object package file", async () => {
