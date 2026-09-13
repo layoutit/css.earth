@@ -33,13 +33,28 @@
     },
     {
       "filename": "mathilde-features.json",
-      "bytes": 16822,
-      "sha256": "b30f117b12fc1976f11969d29d55ede5ff03a0fc98b165ce43446da0d4c866b8"
+      "bytes": 16823,
+      "sha256": "b9cdc077f2008a2a44f5dc977138380aea69d6c5bfdb3eac400501bd89d68aaa"
     },
     {
       "filename": "mathilde-lighting.webp",
       "bytes": 1050836,
       "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "mathilde-near-msi-shadow@2x.webp",
+      "bytes": 214298,
+      "sha256": "d594c63098b2fd5d3753ff89b0acf233668a521839f948cdfad891d03b70b96c"
+    },
+    {
+      "filename": "mathilde-near-msi-surface@2x.webp",
+      "bytes": 356024,
+      "sha256": "b005eeaa7ea7b358844f004c14c8bc07f7d28de7dd2bb24770b874885736b7d9"
+    },
+    {
+      "filename": "mathilde-near-msi-thumbnail.webp",
+      "bytes": 1990,
+      "sha256": "814378016dd54e763ed0a0621cbbec43f09de2c2327946d31ea380e410a5b94a"
     },
     {
       "filename": "mathilde-normal-shadow@2x.webp",

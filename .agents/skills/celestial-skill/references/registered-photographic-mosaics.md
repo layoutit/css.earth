@@ -7,6 +7,42 @@ requirement to fit a camera for an existing global mosaic. The
 locates the 67P example and reusable helpers. Keep all decoding, camera fitting,
 selection, level matching and atlas construction in preparation.
 
+## Inspect the release before reconstructing geometry
+
+Start with the pinned model's release and its companion products. A mesh-only
+download or an image header can omit the reconstruction that made the two
+usable together. Work through the following before adding camera derivation:
+
+1. Read the model label, release inventory and linked paper or supplement.
+   Look for image-geometry tables, reconstructed pointing, control networks,
+   per-pixel geometry and raw or quality companions. Match exact observation
+   identifiers and model versions; a similar filename is insufficient.
+2. Compare the geometry sources. Determine whether a table or corrected product
+   supersedes preliminary header pointing and which mesh/frame it supports.
+   Prefer an already qualified map or compatible archived geometry over rebuilding
+   it. Document unresolved conflicts rather than silently choosing whichever fits.
+3. Resolve units, axis handedness, longitude direction, sample/line order,
+   zero/one-based centres, rectangular pixels and display flips. Keep an inference
+   distinct from a convention explicitly stated by the archive. Use metadata and
+   independent image features to discriminate plausible interpretations, not a
+   sequence of unrecorded sign or axis guesses.
+4. Project the selected mesh into one native-size observation and inspect the
+   illuminated limb and any identifiable internal features. Keep both in the same
+   pixel coordinates; composite the overlay before resizing the whole diagnostic.
+   Check the diagnostic transform itself before treating a mismatch as bad source
+   geometry. Separate a bounded pointing correction from model-shape disagreement,
+   then validate any fit on withheld controls before the full bake.
+
+Mathilde illustrates this failure mode: the already-pinned Thomas release's
+`253mathimg.tab` supplies reconstructed image centres and geometry that differ
+from preliminary NEAR FITS pointing. The `near-msi-camera` recipe uses that table;
+its conversion from square-pixel table lines to rectangular detector rows is an
+explicit inference checked against withheld limb points. Read
+[Mathilde's source method](../../../../src/planets/mathilde/README.md) for the
+exact inputs and limits. Its raw companions support missing-telemetry and
+saturation checks, while the archive's unresolved quality index stays unresolved.
+These are NEAR-specific facts, not default conventions for other instruments.
+
 ## Match observations to their shape model
 
 Check the model version, coordinate origin, axes, longitude convention and

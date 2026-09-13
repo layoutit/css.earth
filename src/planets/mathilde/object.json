@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "b833aab9ebf219221d51e09a82a8d663db956cb53c1da448022abfc04f6a31e3"
+    "sha256": "49b507d6bf5411348e18fe30672b8a23bc78faa64c3d20378a052541dadd4343"
   },
   "id": "mathilde",
   "properties": {
@@ -34,6 +34,11 @@
               "material": "lighting"
             },
             {
+              "id": "near-msi",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "elevation",
               "source": "content",
               "material": "lighting"
@@ -57,7 +62,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "0b727ee76829e037cb2480f9541d5e103965c98c2867e5dcb914133eba0cf453"
+          "sha256": "566216c11fbd9bcbed39c33e709d91b8681dc5f7007fd7bd5e344afa055dad37"
         },
         {
           "id": "rotation",
@@ -67,7 +72,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c02c00c4643e0f2648ee09ffaeac963e75e5355cf7087d29742b86ea6d413d8b"
+          "sha256": "1b633ccaa351b139ccc038ebd20ebd2755c1d794667120d74486827c728fcba6"
         },
         {
           "id": "title",
@@ -82,7 +87,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "202f59b24a7d90dcc1a6848640adc6123b5a9e3aa4b370d9fe6b733d2b4a4c58"
+          "sha256": "6fea76b92632f77cc09f5d08c435fa5bbcc5153bd96b1930b1cb9733ee82a4ce"
         },
         {
           "id": "features",
@@ -128,7 +133,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e616a0703da8178d40f6d33da439633d4b306749e388df27dda57218edeab080"
+        "sha256": "c72b1d4ec9092fb5c9dd6ea6f81c117888e149eea9d6e4829bbd2d88bc13baad"
       }
     },
     "catalog": {

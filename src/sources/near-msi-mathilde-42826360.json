@@ -1,0 +1,29 @@
+{
+  "id": "near-msi-mathilde-42826360",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Mathilde \u00b7 NEAR MSI broadband photograph 42826360",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "urn:nasa:pds:near.msi:data_calibrated:mathilde_1997_178_iof_m0042826360f0_2p_iof_fit::1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml",
+      "label": "PDS calibrated image and metadata"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml",
+      "checkedOn": "2026-09-13",
+      "locator": "Identification_Area; observation time and target; native FITS primary I/F array."
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "version": "1.0"
+}
