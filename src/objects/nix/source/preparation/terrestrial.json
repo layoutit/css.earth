@@ -25,13 +25,54 @@
         "metadata": {
           "label": "Shape model",
           "modeled": true,
-          "coverage": "Porter’s New Horizons shape fit. LORRI and MVIC constrain the broad shape, but the public mesh omits its fitted image registration. Gray grid marks unavailable registered surface imagery; it does not recreate Nix’s photographed reddish crater region."
+          "coverage": "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data."
         }
       }
     ],
     "scientific": [],
     "observedColors": [],
-    "mosaics": []
+    "mosaics": [],
+    "surfaceObservations": [
+      {
+        "id": "monochrome",
+        "format": "nh-lorri-camera",
+        "consumer": "lorri-observation",
+        "filter": "PANCHROMATIC",
+        "frames": [
+          {
+            "id": "best",
+            "path": "observations/lor_0299174134_0x636_sci.fit",
+            "cameraPath": "observations/best-camera.json",
+            "startTime": "2015-07-14T10:03:35.831"
+          }
+        ],
+        "transfer": {
+          "maximumSourceDistanceMeters": 500,
+          "maximumSeparationFootprints": 1.5,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99.8
+          ]
+        },
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "New Horizons LORRI photograph from 14 July 2015, at about 300 m/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map."
+        }
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,
@@ -77,7 +118,7 @@
     "sunSource": "JPL Pluto-system ephemeris; rapid nonsynchronous Nix spin. Mesh prime-meridian registration is unresolved and its orientation is a stated display convention."
   },
   "presentation": {
-    "defaultLens": "model",
+    "defaultLens": "monochrome",
     "pointColor": [
       160,
       160,

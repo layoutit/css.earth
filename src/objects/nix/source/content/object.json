@@ -41,17 +41,34 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "model",
+    "defaultLens": "monochrome",
     "labels": {
-      "model": "Shape model"
+      "model": "Shape model",
+      "monochrome": "Monochrome"
     },
     "controls": [
       {
+        "id": "monochrome",
+        "label": "Monochrome",
+        "description": "Experimental image placement; registration is not yet qualified. New Horizons LORRI photograph from 14 July 2015, at about 300 m/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map.",
+        "title": "New Horizons surface photograph",
+        "detail": "300 m/pixel",
+        "thumbnail": "/scenes/nix/nix-monochrome-thumbnail.webp",
+        "surface": "nix-monochrome-surface@2x.webp",
+        "poles": "nix-monochrome-poles@2x.webp",
+        "source": {
+          "id": "lorri-best",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029917/lor_0299174134_0x636_sci.lbl"
+        },
+        "summary": "Experimental placement; registration unverified. LORRI · 14 July 2015 · 300 m/pixel. Acquisition lighting retained; grid marks missing coverage."
+      },
+      {
         "id": "model",
         "label": "Shape model",
-        "description": "Porter’s New Horizons shape fit. LORRI and MVIC constrain the broad shape, but the public mesh omits its fitted image registration. Gray grid marks unavailable registered surface imagery; it does not recreate Nix’s photographed reddish crater region.",
+        "description": "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data.",
         "title": "Porter shape reconstruction",
-        "detail": "New Horizons shape fit",
+        "detail": "Shape",
         "thumbnail": "/scenes/nix/nix-model-thumbnail.webp",
         "surface": "nix-model-surface@2x.webp",
         "poles": "nix-model-poles@2x.webp",
@@ -60,7 +77,7 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.6084/m9.figshare.12779948.v1"
         },
-        "summary": "A New Horizons shape fit. The released mesh lacks image registration; gray grid: no mapped imagery."
+        "summary": "Published shape reconstruction."
       }
     ]
   },
