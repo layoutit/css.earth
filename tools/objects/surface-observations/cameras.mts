@@ -27,7 +27,7 @@ export function matrixCamera(kind: 'archived-closure' | 'kernels', value: unknow
 
 /** Recover the controlled pinhole camera from archived surface-point and pixel pairs. A disjoint holdout covers every remaining
  * geometry-backed pixel, and the fit must explain it to a hundredth of a pixel. */
-export function fittedCamera(frame: { width: number; height: number; valid(index: number): boolean; xyz(index: number): number[] }): ObservationCamera {
+export function fitBackplaneCamera(frame: { width: number; height: number; valid(index: number): boolean; xyz(index: number): number[] }) {
   const points = [], pixels = [];
   for (let i = 0; i < frame.width * frame.height; i += 179) if (frame.valid(i)) {
     points.push(frame.xyz(i)); pixels.push([i % frame.width, Math.floor(i / frame.width)]);
@@ -40,7 +40,12 @@ export function fittedCamera(frame: { width: number; height: number; valid(index
     count++; maximum = Math.max(maximum, residual); squared += residual * residual;
   }
   if (count < points.length || maximum > .01) throw new Error('GEO camera does not explain independent holdout coordinates.');
-  const report = { ...camera, fitPixels: points.length, holdoutPixels: count, maximumResidualPixels: maximum, rmsResidualPixels: Math.sqrt(squared / count) };
+  return { ...camera, fitPixels: points.length, holdoutPixels: count, maximumResidualPixels: maximum, rmsResidualPixels: Math.sqrt(squared / count) };
+}
+
+/** The fitted backplane camera as an ObservationCamera; its rays follow the inverse of the fitted projection. */
+export function fittedCamera(frame: Parameters<typeof fitBackplaneCamera>[0]): ObservationCamera {
+  const camera = fitBackplaneCamera(frame), report = camera;
   const m = camera.matrix.map(row => row.slice(0, 3)), columns = [cross(m[1], m[2]), cross(m[2], m[0]), cross(m[0], m[1])], determinant = dot(m[0], columns[0]);
   if (!Number.isFinite(determinant) || Math.abs(determinant) < 1e-12) throw new Error('GEO camera projection is degenerate.');
   const inverse = [0, 1, 2].map(i => columns.map(column => column[i] / determinant));
