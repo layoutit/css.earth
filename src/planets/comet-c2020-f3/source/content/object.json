@@ -4,7 +4,6 @@
   "id": "comet-c2020-f3",
   "displayName": "NEOWISE",
   "panel": {
-    "introduction": "NEOWISE was discovered by NASA’s infrared survey telescope in March 2020. Within months it became a bright comet visible to observers on Earth.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "C/2020 F3 NEOWISE",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-c2020-f3/comet-c2020-f3-model-thumbnail.webp",
         "surface": "comet-c2020-f3-model-surface@2x.webp",
         "poles": "comet-c2020-f3-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "0.292 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

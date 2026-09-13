@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "84df9d48dd5c4aeb79495ef36531a06954e254b8d95128b0ab3d307b63082978"
+    "sha256": "9c5888b1ef444deac6111202fcbec43d6c554343e28860d9f47ffdb7d1dcf170"
   },
   "id": "jupiter",
   "properties": {
@@ -62,7 +62,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "8d7c1c8656b30b7f3b1e6b03f222dfa231dffba6287f781fdc414ce72c18d35b"
+          "sha256": "11aef1fc85e8c0073b14a6fb4f023b528a4ec6ee31b6ee53f29e2090e36ef068"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "022fd1065f8b5a0da97ba308e11a4fa69de2eb886900f0a177190f52df37c39c"
         },
         {
           "id": "rings",
@@ -210,7 +215,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "42ff080c8e15716e8246ca798e1e35b64ab74ecd135c19876371ca15a71f50f0"
+        "sha256": "4970349eca46de70375b469a8339ec4302b62a3c3bfb8fe89568fc2a1c02d5cc"
       }
     },
     "catalog": {

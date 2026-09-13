@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "prometheus",
+  "card": {
+    "text": "Explore Prometheus with Cassini imagery, mapped radial height and its measured irregular shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/prometheus/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Prometheus is an elongated icy moon moving just inside Saturn’s F ring. Its gravity draws channels and streamers out of the ring. Cassini revealed craters and a soft-looking surface on this small, porous body.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/prometheus/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "ISS mosaic",
+      "detail": "Cassini · corrected mosaic",
+      "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Cassini shape · radial height",
+      "summary": "Height relative to a 43.1 km sphere, from the Cassini shape model. Small craters are unresolved."
+    }
+  }
+}

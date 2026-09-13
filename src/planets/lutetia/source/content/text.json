@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lutetia",
+  "card": {
+    "text": "Explore Lutetia with its Rosetta shape model and source-derived elevation.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/catalog/dataset.cat",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Rosetta photographed Lutetia in 2010. Craters and ridges cover this irregular, roughly 100 km asteroid.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/catalog/dataset.cat",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "osiris": {
+      "title": "OSIRIS photographs",
+      "detail": "OSIRIS",
+      "summary": "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs."
+    },
+    "shape": {
+      "title": "OSIRIS shape reconstruction",
+      "detail": "PDS",
+      "summary": "Rosetta shape detail in the north, coarser estimates elsewhere. Source seams remain; no imagery is mapped."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "PDS",
+      "summary": "Height relative to a 49 km sphere. Rosetta resolved the north; the far side is coarser, with source defects."
+    }
+  }
+}

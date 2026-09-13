@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "52d3400c5caf0e33df780cd70fda1dc161e0e7e2dbc7385aa1e8cf469d63ec1b"
+    "sha256": "284809c087eb80e7c356458ce80c51d670b01595cbb54188db637e61a3ee8a77"
   },
   "id": "neptune",
   "properties": {
@@ -66,7 +66,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ba93aa673b78a0117f0841a1e1391d74c4080d904653ee59f802e243d57a3794"
+          "sha256": "e2a3d86cda4fd43a71f449be62b7d42b7d29cebd4689629e4fd278350348cc22"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "c667fe9234687b7be2fe9626025d79eb84a568064a6a253ce3a1aae36887e41f"
         },
         {
           "id": "rings",
@@ -214,7 +219,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "90c22b5736eb517b28122522c563989049e9c1630bf353ed47e2d3e3f009799c"
+        "sha256": "c83067effdb2698875c83f7840de3217122bbf03cfd2cfc412c42456941440c8"
       }
     },
     "catalog": {

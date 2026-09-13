@@ -4,7 +4,6 @@
   "id": "atlas",
   "displayName": "Atlas",
   "panel": {
-    "introduction": "Atlas travels just outside Saturn’s A ring. Its rounded central body and wide equatorial ridge give it a striking saucer shape. Cassini’s closest flyby in 2017 revealed the ridge in detail.",
     "facts": [
       {
         "id": "radius",
@@ -75,9 +74,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
-        "title": "ISS mosaic",
-        "detail": "Cassini · corrected mosaic",
         "thumbnail": "/scenes/atlas/atlas-normal-thumbnail.webp",
         "surface": "atlas-normal-surface@2x.webp",
         "poles": "atlas-normal-poles@2x.webp",
@@ -86,14 +82,12 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/access.html"
         },
-        "summary": "Photographs are mapped onto the measured shape. Shadows and unreliable samples are withheld; the gray grid marks gaps."
+        "notes": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radial height above a 15.1 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region.",
-        "title": "Shape-derived radial height",
-        "detail": "Shaded relief",
         "thumbnail": "/scenes/atlas/atlas-elevation-thumbnail.webp",
         "surface": "atlas-elevation-surface@2x.webp",
         "poles": "atlas-elevation-poles@2x.webp",
@@ -116,7 +110,7 @@
           "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
           "image": "/scenes/atlas/atlas-elevation-legend.webp"
         },
-        "summary": "Height relative to a 15.1 km sphere, from the Cassini shape model. Accuracy varies by region."
+        "notes": "Radial height above a 15.1 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region."
       }
     ]
   },

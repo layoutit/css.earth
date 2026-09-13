@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "adrastea",
+  "card": {
+    "text": "Explore Adrastea through a model based on its measured dimensions.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/jupiter/jupiter-moons/adrastea/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Adrastea is a tiny moon near the outer edge of Jupiter’s main ring. Galileo barely resolved its outline; this view shows a model based on its measured dimensions.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/jupiter/jupiter-moons/adrastea/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Measured axes",
+      "summary": "Galileo-based shape estimate. No surface imagery is available; craters and terrain are unresolved."
+    }
+  }
+}

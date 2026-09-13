@@ -1,6 +1,6 @@
 import { requireControls } from '../src/renderers/css/dist/index.js';
 import { record } from './browser-types.mts';
-import type { Props, PlanetTitle, PreparedTitle, Fact, Chart, Gallery, Lens } from './planet-shell-types.js';
+import type { Props, PlanetTitle, PreparedTitle, Fact, Chart, Gallery, Lens, LensControl, DatasetReaderText } from './planet-shell-types.js';
 
 const object = (value: unknown, label: string): Record<string, unknown> => {
   if (!record(value)) throw new TypeError(`Prepared ${label} must be an object.`);
@@ -61,29 +61,56 @@ function legend(value: unknown, label: string): Lens['legend'] {
     items: legend.items === undefined ? undefined : array(legend.items, 'legend categories').map(value => { const item = object(value, 'legend category');
       return { label: text(item.label, 'legend category label'), description: optionalText(item.description, 'legend category description') ?? '', color: text(item.color, 'legend category color') }; }) };
 }
-function lens(value: unknown): Lens {
+function lensControl(value: unknown): LensControl {
   const lens = object(value, 'lens'), label = text(lens.label, 'lens label');
-  return { id: text(lens.id, 'lens id'), label, title: text(lens.title, 'lens title'), description: text(lens.description, 'lens description'),
-    summary: optionalText(lens.summary, 'lens summary'), detail: optionalText(lens.detail, 'lens detail'), thumbnailUrl: text(lens.thumbnailUrl, 'lens thumbnail'),
+  const prose = ['title', 'detail', 'summary', 'description'].filter(key => Object.hasOwn(lens, key));
+  if (prose.length) throw new TypeError(`Prepared lens controls carry reader text (${prose.join(', ')}); it belongs in prepared content.`);
+  const noData = optionalBoolean(lens.noData, 'lens no-data grid');
+  return { id: text(lens.id, 'lens id'), label, thumbnailUrl: text(lens.thumbnailUrl, 'lens thumbnail'),
+    ...(noData === undefined ? {} : { noData }),
     facts: lens.facts === undefined ? undefined : facts(lens.facts), legend: legend(lens.legend, label) };
 }
 
+function datasetTexts(value: unknown): Readonly<Record<string, DatasetReaderText>> {
+  return Object.freeze(Object.fromEntries(Object.entries(object(value, 'dataset text')).map(([id, raw]) => {
+    const dataset = object(raw, `dataset text ${id}`);
+    return [id, { title: text(dataset.title, 'dataset title'), detail: optionalText(dataset.detail, 'dataset detail'),
+      summary: text(dataset.summary, 'dataset summary') }];
+  })));
+}
+
+export interface PanelControls {
+  lenses?: Omit<NonNullable<Props['lenses']>, 'controls'> & { controls: LensControl[] };
+  settings: Props['settings'];
+}
+
+/** Join each dataset control to its published reader text; a control without text is an incomplete package. */
+export function withDatasetText(lenses: PanelControls['lenses'], datasets: Readonly<Record<string, DatasetReaderText>>): Props['lenses'] {
+  if (!lenses) return undefined;
+  return { ...lenses, controls: lenses.controls.map((control): Lens => {
+    const dataset = datasets[control.id];
+    if (!dataset) throw new TypeError(`Dataset ${control.id} has no published reader text.`);
+    return { ...control, title: dataset.title, ...(dataset.detail === undefined ? {} : { detail: dataset.detail }), summary: dataset.summary };
+  }) };
+}
+
 /** Validate the fields the shared Astro panel renders, before assigning display types. */
-export function parsePreparedPanelContent(value: unknown): Pick<Props, 'objectId' | 'title' | 'introduction' | 'facts' | 'moreFacts' | 'charts' | 'galleries' | 'resources' | 'destinations' | 'features'> {
+export function parsePreparedPanelContent(value: unknown): Pick<Props, 'objectId' | 'title' | 'introduction' | 'facts' | 'moreFacts' | 'charts' | 'galleries' | 'resources' | 'destinations' | 'features'> & { datasets: Readonly<Record<string, DatasetReaderText>> } {
   const content = object(value, 'panel content');
   if (content.schema !== 'cssearth-prepared-content@1') throw new TypeError('Prepared panel content schema is incompatible.');
   const destinations = content.destinations === undefined ? undefined : object(content.destinations, 'destinations');
   const features = content.features === undefined ? undefined : object(content.features, 'features');
   return { objectId: text(content.objectId, 'object id'), title: planetTitle(content.title), introduction: text(content.introduction, 'introduction'),
+    datasets: datasetTexts(content.datasets),
     facts: facts(content.facts), moreFacts: facts(content.moreFacts), charts: array(content.charts, 'charts').map(chart), galleries: array(content.galleries, 'galleries').map(gallery),
     resources: array(content.resources, 'source links').map(value => { const resource = object(value, 'source link'); return { label: text(resource.label, 'source label'), role: text(resource.role, 'source role'), description: text(resource.description, 'source description'), href: text(resource.href, 'source URL') }; }),
     destinations: destinations ? { searchLabel: text(destinations.searchLabel, 'destination search label'), description: text(destinations.description, 'destination description') } : undefined,
     features: features ? { searchLabel: text(features.searchLabel, 'feature search label'), description: text(features.description, 'feature description') } : undefined };
 }
 
-export function parsePanelControls(input: unknown): Pick<Props, 'lenses' | 'settings'> {
+export function parsePanelControls(input: unknown): PanelControls {
   requireControls(input);
   const controls = input;
-  return { lenses: controls.lenses ? { title: rasterTitle(controls.lenses.title), defaultLens: controls.lenses.defaultLens, controls: controls.lenses.controls.map(lens) } : undefined,
+  return { lenses: controls.lenses ? { title: rasterTitle(controls.lenses.title), defaultLens: controls.lenses.defaultLens, controls: controls.lenses.controls.map(lensControl) } : undefined,
     settings: controls.settings ? { title: rasterTitle(controls.settings.title), controls: [...controls.settings.controls] } : undefined };
 }

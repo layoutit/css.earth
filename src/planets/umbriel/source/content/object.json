@@ -4,7 +4,6 @@
   "id": "umbriel",
   "displayName": "Umbriel",
   "panel": {
-    "introduction": "Umbriel is a dark, heavily cratered moon of Uranus. Voyager 2 revealed an ancient surface and a striking bright ring at the crater Wunda.",
     "facts": [
       {
         "id": "radius",
@@ -79,9 +78,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
-        "title": "Monochrome mosaic",
-        "detail": "Corrected mosaic",
         "thumbnail": "umbriel-lens-normal.webp",
         "surface": "umbriel-normal.webp",
         "poles": "umbriel-poles-normal.webp",
@@ -90,7 +86,8 @@
           "path": "../manifest.json",
           "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
         },
-        "summary": "Illumination is corrected, but photographed terrain shadows and seams remain. The gray grid marks missing observations."
+        "notes": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
+        "noData": true
       }
     ]
   },

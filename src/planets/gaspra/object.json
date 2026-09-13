@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "4422d4a703d9711d6a51099818e59879e15bf1ed0a5636832c7c20b43b21b7c2"
+    "sha256": "404843b1ff8d5422e75d168cb871af71a49e425aa6f714f18adf51796c8ab7e0"
   },
   "id": "gaspra",
   "properties": {
@@ -72,7 +72,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "3609f1150269c46ced3e4175b8e19dfeb37b470f0d88e9a7e7a4666b755535cb"
+          "sha256": "89eace3af6e5324588de7c0db95fce55e61383596d34a77b2a9e7329c313fb08"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "1dd836048ef36745cbe3f013fd6dd14d2154203621c8ea748691c7765f9ee49f"
         },
         {
           "id": "title",
@@ -133,7 +138,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "13bd93a78c463ba9d5aeb505add64a5137f867faf68f990dcaae34a81e91a4d9"
+        "sha256": "aa30fdcca2b8d2520a4243903832fa25ac9fe92292f484fd99a75ead3cc4d465"
       }
     },
     "catalog": {

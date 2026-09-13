@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "metis",
+  "card": {
+    "text": "Explore Metis with Galileo imagery on a dimension-constrained shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/jupiter/moons/metis/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Metis is Jupiter’s innermost moon, a small elongated world embedded in the main ring. Dust knocked from its surface helps replenish that faint ring. Synchronous rotation is assumed; its actual rotation period is unknown.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/jupiter/moons/metis/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "SSI mosaic",
+      "detail": "Galileo SSI",
+      "summary": "The finest source pixels span about 3 km; other views are coarser. Brightness is adjusted; the gray grid marks unreliable data."
+    }
+  }
+}

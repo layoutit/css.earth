@@ -139,7 +139,7 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1859,7 +1859,7 @@
       "expectedSha256": "8405401201f42dca7e05fa205d8473f5e774845776fc1acd9b6c7e70de648d4a",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EUROPA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
@@ -2109,8 +2109,8 @@
     {
       "id": "europa-object-content",
       "path": "content/object.json",
-      "expectedBytes": 16192,
-      "expectedSha256": "adea0fe714df61db29809426fc78d414766723e35b1cca490aae48371373a85d",
+      "expectedBytes": 15399,
+      "expectedSha256": "7322aeef0ed2b3bb8fb2a0bbe2f94c0d86ff6544ffdcbf9dfe63421ec3e9974f",
       "origin": "Repository-authored Europa object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2122,7 +2122,26 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "europa-object-text",
+      "path": "content/text.json",
+      "expectedBytes": 2949,
+      "expectedSha256": "d9fa5270f5cc4db5f14d688ab89a99bfc7a43b4117b988e5f6586225fdad1256",
+      "origin": "Repository-authored Europa reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     }
   ],
@@ -2160,7 +2179,7 @@
       "kind": "source-document",
       "title": "JPL Horizons Sun vectors relative to Europa",
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
-      "credit": "NASA/JPL Solar System Dynamics \u2014 Horizons",
+      "credit": "NASA/JPL Solar System Dynamics — Horizons",
       "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -2181,7 +2200,7 @@
       "kind": "source-document",
       "title": "JPL Horizons Galileo vectors relative to Europa",
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-77%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
-      "credit": "NASA/JPL Solar System Dynamics \u2014 Horizons",
+      "credit": "NASA/JPL Solar System Dynamics — Horizons",
       "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
       "sourceBinding": {
         "kind": "catalogued",

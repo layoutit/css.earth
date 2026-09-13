@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "anthe",
+  "card": {
+    "text": "Explore Anthe, a small moon of Saturn, through its measured shape.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/anthe/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Anthe is a tiny moon between Mimas and Enceladus, accompanied by a faint arc of dust. Cassini detected it, but did not resolve its shape accurately.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/saturn/moons/anthe/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Approximate shape model",
+      "detail": "Estimated size",
+      "summary": "A 1 km sphere represents the estimated size. The actual shape is unresolved; gray grid: no surface imagery."
+    }
+  }
+}

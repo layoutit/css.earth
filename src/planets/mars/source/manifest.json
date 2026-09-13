@@ -422,8 +422,8 @@
     {
       "id": "mars-object-content",
       "path": "content/object.json",
-      "expectedSha256": "c241a9187643b00a8530d30b509ac5dd67067b1fc089131ecb1fddd0caa8ed7a",
-      "expectedBytes": 15140,
+      "expectedSha256": "4bb942375cb753e010be227203a2497852dea366dfe9928e5ce56b4887e336e1",
+      "expectedBytes": 14249,
       "origin": "Repository-authored Mars panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -436,7 +436,27 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "mars-object-text",
+      "path": "content/text.json",
+      "expectedSha256": "d8fdf711daab299cbbd26ce67562ab666e072d9cf94a8e851d73be8642d817e1",
+      "expectedBytes": 1643,
+      "origin": "Repository-authored Mars reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared shell content with source provenance.",
+      "consumers": [
+        "panel",
+        "lenses",
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     },
     {
@@ -578,7 +598,7 @@
       "expectedSha256": "58136a4ad15b287d1a01058d659974b44dfc67a65f2a53569d7654987d308e54",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
-      "license": "Public domain (United States Government work); the archived metadata declares the use constraint \u201cPublic domain.\u201d",
+      "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],

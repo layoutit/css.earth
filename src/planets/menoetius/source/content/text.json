@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "menoetius",
+  "card": {
+    "text": "Explore Menoetius, the companion of Patroclus, through its occultation-constrained shape approximation.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Menoetius forms a binary system with Patroclus. This published ellipsoid combines stellar-occultation and light-curve constraints. Local shape deviations are unresolved; no crater or albedo pattern is reconstructed. The grid marks unmapped terrain.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Occultation shape approximation",
+      "detail": "Approximate shape",
+      "summary": "Published approximate ellipsoid with full dimensions 117×108×90 km, inferred from occultation and photometry. Orbital-pole alignment is a synchronous approximation; the display meridian is arbitrary. The grid marks unmapped terrain."
+    }
+  }
+}

@@ -4,7 +4,6 @@
   "id": "prometheus",
   "displayName": "Prometheus",
   "panel": {
-    "introduction": "Prometheus is an elongated icy moon moving just inside Saturn’s F ring. Its gravity draws channels and streamers out of the ring. Cassini revealed craters and a soft-looking surface on this small, porous body.",
     "facts": [
       {
         "id": "radius",
@@ -80,9 +79,6 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
-        "title": "ISS mosaic",
-        "detail": "Cassini · corrected mosaic",
         "thumbnail": "/scenes/prometheus/prometheus-normal-thumbnail.webp",
         "surface": "prometheus-normal-surface@2x.webp",
         "poles": "prometheus-normal-surface@2x.webp",
@@ -91,14 +87,12 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/"
         },
-        "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
+        "notes": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radial height above a 43.1 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
-        "title": "Shape-derived radial height",
-        "detail": "Cassini shape · radial height",
         "thumbnail": "/scenes/prometheus/prometheus-elevation-thumbnail.webp",
         "surface": "prometheus-elevation-surface@2x.webp",
         "poles": "prometheus-elevation-surface@2x.webp",
@@ -121,7 +115,7 @@
           "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
           "image": "/scenes/prometheus/prometheus-elevation-legend.webp"
         },
-        "summary": "Height relative to a 43.1 km sphere, from the Cassini shape model. Small craters are unresolved."
+        "notes": "Radial height above a 43.1 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved."
       }
     ]
   },

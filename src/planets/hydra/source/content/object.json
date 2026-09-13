@@ -4,7 +4,6 @@
   "id": "hydra",
   "displayName": "Hydra",
   "panel": {
-    "introduction": "Hydra is Pluto’s outermost known moon. Its bright, water-ice-rich surface was resolved by New Horizons in 2015. A large northern hollow gives the small body its uneven shape, and it spins about ninety times during one orbit around the Pluto–Charon system.",
     "facts": [
       {
         "id": "radius",
@@ -49,9 +48,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Porter’s New Horizons shape fit, including the large northern concavity. Only the northern hemisphere was imaged; southern shape is poorly constrained. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the measured model geometry.",
-        "title": "Porter shape reconstruction",
-        "detail": "New Horizons shape fit",
         "thumbnail": "/scenes/hydra/hydra-model-thumbnail.webp",
         "surface": "hydra-model-surface@2x.webp",
         "poles": "hydra-model-poles@2x.webp",
@@ -60,7 +56,8 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.6084/m9.figshare.12779975.v1"
         },
-        "summary": "New Horizons shape fit. Only the north was imaged; the southern shape is uncertain. No imagery is mapped."
+        "notes": "Porter’s New Horizons shape fit, including the large northern concavity. Only the northern hemisphere was imaged; southern shape is poorly constrained. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the measured model geometry.",
+        "noData": true
       }
     ]
   },

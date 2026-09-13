@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "09431285c29a7ae7299719d9fbe67cc24155b227b8caf01c6302345133fa6663"
+    "sha256": "dd48a985ca52f30857b54cc18d197fadfc6c82da2c5785e8b7418580086ded9d"
   },
   "id": "uranus",
   "properties": {
@@ -62,7 +62,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e6934925bc2eded248d70f7baf6f06ad63068458489191bb76e886a804404197"
+          "sha256": "5d229eb23722aae97d1d9a1bdc44e6b7811ac37be2211cd9559515fa378fb8e9"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "1a874e6d1468ba5f7ea5f9b0c3e6e4476860fabf5dd737dc751f3015c7532ab0"
         },
         {
           "id": "rings",
@@ -210,7 +215,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d0b8847913ee0205bc5cbaeb90c2433aeefe0232b6b59d2891331d5788a3ec81"
+        "sha256": "2407ba96235b3bd61805f7cc63ebb9e6c13de3744f60ad40ac5f650e4e9553b6"
       }
     },
     "catalog": {

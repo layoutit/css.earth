@@ -4,7 +4,6 @@
   "id": "selam",
   "displayName": "Selam",
   "panel": {
-    "introduction": "Selam is the first contact-binary moon discovered around an asteroid. Lucy revealed its two touching lobes while passing Dinkinesh in November 2023. Approximate orbital placement. The 3.11 km separation and 52.67-hour period are measured; circular equatorial motion and synchronous orientation are approximations. The present orbital phase is illustrative.",
     "facts": [
       {
         "id": "parent",
@@ -34,9 +33,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "detail": "Lucy",
-        "title": "Measured two-lobe envelope",
-        "description": "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation.",
         "thumbnail": "/scenes/selam/selam-shape-thumbnail.webp",
         "surface": "selam-shape-surface@2x.webp",
         "poles": "selam-shape-poles@2x.webp",

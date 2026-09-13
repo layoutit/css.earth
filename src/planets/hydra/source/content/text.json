@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hydra",
+  "card": {
+    "text": "Explore Hydra’s irregular New Horizons shape and northern depression.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/hydra/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Hydra is Pluto’s outermost known moon. Its bright, water-ice-rich surface was resolved by New Horizons in 2015. A large northern hollow gives the small body its uneven shape, and it spins about ninety times during one orbit around the Pluto–Charon system.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/hydra/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Porter shape reconstruction",
+      "detail": "New Horizons shape fit",
+      "summary": "New Horizons shape fit. Only the north was imaged; the southern shape is uncertain. No imagery is mapped."
+    }
+  }
+}

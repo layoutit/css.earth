@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "cf08867ec0529f370da088d0879dc0b1ba93d9a2e21eb13d3f5604232e3f8bc4"
+    "sha256": "746fc8a1e8f0efe433b2ea3e49572e71a52efbe813d3184a168164288e1866d7"
   },
   "id": "ryugu",
   "properties": {
@@ -72,7 +72,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "c1cb474f7b85860defdf548e47326188ec2a48efa25bed3c1685c4a236ccb7ed"
+          "sha256": "65d192f4ac6eceb259985291afcca2f5000d053ef7284d75c84cf431bbfb05c2"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "a9ae5a37a47e43ad26707bc596306a76685852537c5b30ef4fa7c50865956cec"
         },
         {
           "id": "title",
@@ -133,7 +138,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fd955b3627c24446af4e02f08e563cf1be2258d6e5a11d0c7190b4f950e3df24"
+        "sha256": "462a5a2a9c11870b58e98cd99606e23c966d2762ba22b1fdaae35285119f0e49"
       }
     },
     "catalog": {

@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "camilla",
+  "card": {
+    "text": "Explore Camilla in 3D with its published shape model and radial elevation.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1813",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Camilla is a main-belt asteroid. Explore its calibrated nonconvex reconstruction from DAMIT, version 2017-06-14. The grid marks unavailable surface imagery.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1813",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT model 1813",
+      "detail": "Published shape",
+      "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
+    },
+    "elevation": {
+      "title": "Shape-derived radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
+    }
+  }
+}

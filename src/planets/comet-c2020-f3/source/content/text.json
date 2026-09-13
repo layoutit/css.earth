@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comet-c2020-f3",
+  "card": {
+    "text": "C/2020 F3: NEOWISE was discovered by NASA’s infrared survey telescope in March 2020. Within months it became a bright comet visible to observers on Earth. Illustrative nucleus at Celestia’s catalog scale.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://www.nasa.gov/blogs/watch-the-skies/2020/07/17/see-comet-neowise-a-once-in-a-lifetime-event/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "NEOWISE was discovered by NASA’s infrared survey telescope in March 2020. Within months it became a bright comet visible to observers on Earth.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://www.nasa.gov/blogs/watch-the-skies/2020/07/17/see-comet-neowise-a-once-in-a-lifetime-event/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "C/2020 F3 NEOWISE",
+      "detail": "Celestia",
+      "summary": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
+    }
+  }
+}

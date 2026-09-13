@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "artemis",
+  "card": {
+    "text": "Explore Artemis in 3D with its published shape model and radial elevation.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5939",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Convex light-curve reconstruction. The grid marks unavailable surface imagery.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5939",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "DAMIT 5939 shape model",
+      "detail": "Published shape",
+      "summary": "Convex light-curve reconstruction with approximate thermal size: 123.53 km effective diameter (catalog ±1.5 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative."
+    },
+    "elevation": {
+      "title": "DAMIT 5939 radial height",
+      "detail": "Shape-derived radial height",
+      "summary": "Radius on the shape model minus a 61.765 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+    }
+  }
+}

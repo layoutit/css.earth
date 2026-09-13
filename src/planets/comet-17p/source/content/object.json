@@ -4,7 +4,6 @@
   "id": "comet-17p",
   "displayName": "Holmes",
   "panel": {
-    "introduction": "Holmes became about a million times brighter during its 2007 outburst. The expanding dust cloud was enormous compared with the small nucleus that released it.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "17P/Holmes",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-17p/comet-17p-model-thumbnail.webp",
         "surface": "comet-17p-model-surface@2x.webp",
         "poles": "comet-17p-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "2.09 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

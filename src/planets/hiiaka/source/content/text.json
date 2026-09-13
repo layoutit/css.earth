@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hiiaka",
+  "card": {
+    "text": "Explore Hiʻiaka, a moon of Haumea, through its occultation-constrained ellipsoid.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://www.nature.com/articles/s41467-025-65749-1",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Hiʻiaka is Haumea’s largest moon. Stellar occultations and photometry constrain this published triaxial model. It illustrates the inferred bulk shape; the display pole and meridian are not a measured current attitude. The grid marks unmapped terrain.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://www.nature.com/articles/s41467-025-65749-1",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Occultation shape approximation",
+      "detail": "Approximate shape",
+      "summary": "Published occultation/photometric model with semiaxes 240±40, 180±30 and 143±7 km. The axes are inferred together under homogeneous surface brightness. Display orientation is illustrative. The grid marks unmapped terrain."
+    }
+  }
+}

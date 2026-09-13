@@ -1683,8 +1683,8 @@
     {
       "id": "miranda-object-content",
       "path": "content/object.json",
-      "expectedBytes": 15332,
-      "expectedSha256": "3e7037e99ecaf6f185da6abb191cef8c435048e3229bf49331eba12f2908164c",
+      "expectedBytes": 14572,
+      "expectedSha256": "bd34d98d07f9b0c8c55e7df9c7f10d6cf35396cf14906f07523dcb54d704d777",
       "origin": "Repository-authored Miranda object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1696,7 +1696,26 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet, view descriptions and legends."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "miranda-object-text",
+      "path": "content/text.json",
+      "expectedBytes": 1590,
+      "expectedSha256": "24d5cc930d673ea148c1bebca296c4c825d459cef0ebb9ba700f00a54ae8897d",
+      "origin": "Repository-authored Miranda reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared package configuration.",
+      "consumers": [
+        "panel",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     }
   ],

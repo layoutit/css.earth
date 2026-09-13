@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Coarse lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -69,8 +68,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "Thermal diameter 44.749 ± 0.37 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
-        "title": "Light-curve shape model",
         "thumbnail": "/scenes/parysatis/parysatis-shape-thumbnail.webp",
         "surface": "parysatis-shape-surface@2x.webp",
         "poles": "parysatis-shape-surface@2x.webp",
@@ -79,13 +76,12 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "notes": "Thermal diameter 44.749 ± 0.37 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+        "noData": true
       },
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Radius on the shape model minus a 22.375 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Shape-derived elevations",
         "thumbnail": "/scenes/parysatis/parysatis-elevation-thumbnail.webp",
         "surface": "parysatis-elevation-surface@2x.webp",
         "poles": "parysatis-elevation-surface@2x.webp",
@@ -107,7 +103,7 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5820",
           "image": "/scenes/parysatis/parysatis-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "notes": "Radius on the shape model minus a 22.375 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },

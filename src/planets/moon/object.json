@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "80d25a9803cf66e0409652a397144e41546a87d4502a3014f763acdf043d1712"
+    "sha256": "ef508148fd37f812dad4587b3446f05de53b41ff44050a7a48d5ee7256dadeba"
   },
   "id": "moon",
   "properties": {
@@ -51,7 +51,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ebccc20d6f7f238fad5aca33df03e2763cfa63eabee7ed6503a0c3da56330375"
+          "sha256": "7ab905836804b5f16347c9a1a05db64f3f059659506c38bd9f952679521406f5"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "4e8081a2f7be235992bf180675e30d21b1d6508a3eb557ee711f90df0274d1b5"
         },
         {
           "id": "solar-system",
@@ -177,7 +182,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4ceab7eb9bfd2d467caa9899fd54b061223869eacc8e2130378622ea8ee6d9d9"
+        "sha256": "4ec9e8a4b6e486a948488abf260256e642377c0476ea0a3a1f819ba7533f316e"
       }
     },
     "catalog": {

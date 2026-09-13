@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kiviuq",
+  "card": {
+    "text": "Explore Kiviuq, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://tilmanndenk.de/outersaturnianmoons/kiviuq/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kiviuq belongs to Saturn’s Inuit group of outer moons. This ellipsoid illustrates a lightcurve-based minimum elongation, with assumed depth and orientation. The grid marks unmapped terrain.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://tilmanndenk.de/outersaturnianmoons/kiviuq/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Light-curve shape approximation",
+      "detail": "Approximate shape",
+      "summary": "Approximate ellipsoid adopting the published minimum equatorial ratio 2.32:1 under uniform reflectivity. Equal short axes, volume scaling and orientation are assumed. The grid marks unmapped terrain."
+    }
+  }
+}

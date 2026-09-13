@@ -317,6 +317,26 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   color: var(--shell-text);
 }
 
+/* One key for the shared no-data grid, drawn with the grid's own colors. */
+.planet-lens-legend-no-data {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--shell-text-secondary);
+  font: 400 0.8125rem/18px var(--shell-ui-font);
+}
+
+.planet-lens-legend-panel > * + .planet-lens-legend-no-data {
+  margin-top: 4px;
+}
+
+.planet-lens-legend-no-data-swatch {
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+}
+
 .planet-lens-legend-category-description {
   min-width: 0;
   overflow-wrap: anywhere;

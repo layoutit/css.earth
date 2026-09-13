@@ -1,4 +1,3 @@
-import { validateDatasetText } from "../../../site/dataset-content.mts";
 import { prepareLensCategoryLegend, prepareLensScaleLegend } from "../../../site/prepared-lens-legends.mts";
 import type { LensRecipe, PreparedRasterAssets } from "./types";
 
@@ -63,7 +62,6 @@ export function prepareLenses(
     title: recipe.title,
     defaultLens: recipe.defaultLens,
     controls: recipe.controls.map((control) => {
-      validateDatasetText(control);
       const surface = assets.surfaces?.[control.id];
       const material = assets.materials?.[control.material ?? control.id];
       const poles = assets.poles;
@@ -78,17 +76,14 @@ export function prepareLenses(
       return {
         id: control.id,
         label: control.label,
-        ...(control.detail ? { detail: control.detail } : {}),
         ...(control.shortLabel ? { shortLabel: control.shortLabel } : {}),
         ...(control.falseColor !== undefined ? { falseColor: control.falseColor } : {}),
         ...(control.filter ? { filter: control.filter } : {}),
         ...(control.qualification ? { qualification: control.qualification } : {}),
         ...(control.view ? { view: control.view } : {}),
         thumbnailUrl: assetUrl(objectId, control.thumbnail),
-        description: control.description,
-        ...(control.summary ? { summary: control.summary } : {}),
+        ...(control.noData ? { noData: true } : {}),
         ...(facts?.length ? { facts } : {}),
-        title: control.title,
         ...(legend ? { legend } : {}),
         ...(control.legendNote ? { legendNote: control.legendNote } : {}),
         surfaceUrl: surface?.url ?? assetUrl(objectId, control.surface),

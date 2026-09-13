@@ -21,7 +21,6 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "Kleopatra is a main-belt asteroid with two broad lobes joined by a narrow neck. Its dog-bone shape was reconstructed from VLT/SPHERE images and complementary observations. Explore that published model under directional lighting; the grid marks unavailable surface imagery.",
     "facts": [
       {
         "id": "radius",
@@ -53,8 +52,6 @@
       {
         "id": "shape",
         "label": "Shape",
-        "description": "The shared grid marks unavailable surface imagery over the released MPCD shape reconstructed from ground-based VLT/SPHERE images. The two lobes and narrow neck are source geometry. This view has no photographic texture and does not represent albedo, color or composition. Lighting uses the observed pole with an arbitrary display phase.",
-        "title": "SPHERE shape reconstruction",
         "thumbnail": "/scenes/kleopatra/kleopatra-shape-thumbnail.webp",
         "surface": "kleopatra-shape-surface@2x.webp",
         "poles": "kleopatra-shape-surface@2x.webp",
@@ -63,8 +60,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape",
-        "summary": "A VLT/SPHERE shape model showing two lobes and a narrow neck. Gray grid: no surface imagery, not composition."
+        "notes": "The shared grid marks unavailable surface imagery over the released MPCD shape reconstructed from ground-based VLT/SPHERE images. The two lobes and narrow neck are source geometry. This view has no photographic texture and does not represent albedo, color or composition. Lighting uses the observed pole with an arbitrary display phase.",
+        "noData": true
       }
     ]
   },

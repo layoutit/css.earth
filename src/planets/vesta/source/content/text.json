@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "vesta",
+  "card": {
+    "text": "Explore Vesta with Dawn imagery and its measured terrain, giant impact basins, and rocky surface.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/mission/dawn/science/vesta/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Vesta is a rocky asteroid in the main belt between Mars and Jupiter. NASA’s Dawn spacecraft mapped its surface, revealing giant impact basins, equatorial troughs, and a diverse volcanic crust.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/mission/dawn/science/vesta/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "normal": {
+      "title": "FC natural-color composite",
+      "detail": "Dawn HAMO",
+      "summary": "The 650, 550 and 430 nm bands approximate visible color. Bright terrain clips to white; shadows and color offsets remain."
+    },
+    "ratios": {
+      "title": "Clementine-style color composite",
+      "detail": "Dawn FC",
+      "summary": "Published false-color Dawn filter ratios emphasize spectral differences. Source seams and missing coverage remain visible."
+    },
+    "elevation": {
+      "title": "HAMO digital terrain model",
+      "detail": "Shaded relief",
+      "summary": "Height relative to a 255 km sphere. Polar gaps are interpolated; those areas are not stereo measurements."
+    }
+  }
+}

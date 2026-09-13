@@ -4,7 +4,6 @@
   "id": "eurybates",
   "displayName": "Eurybates",
   "panel": {
-    "introduction": "Eurybates is a Jupiter Trojan and the largest remnant of a collisional family. This approximate ellipsoid preserves the published model's overall extents, while its irregular outline remains unresolved. The grid marks unmapped terrain.",
     "facts": [
       {
         "id": "shape",
@@ -39,9 +38,6 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Authored ellipsoid approximation constrained to the published convex model's maximum extents. These are not independently measured ellipsoid axes; the irregular convex outline and model volume are not reproduced. Full approximation dimensions: 77.5 × 71.3 × 61.8 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
-        "title": "Convex-model ellipsoid approximation",
-        "detail": "Approximate shape",
         "thumbnail": "/scenes/eurybates/eurybates-model-thumbnail.webp",
         "surface": "eurybates-model-surface@2x.webp",
         "poles": "eurybates-model-poles@2x.webp",
@@ -49,7 +45,8 @@
           "id": "occultation-approximation",
           "path": "../manifest.json",
           "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
-        }
+        },
+        "noData": true
       }
     ]
   },

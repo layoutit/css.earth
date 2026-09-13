@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "sycorax",
+  "card": {
+    "text": "Explore Sycorax, a moon of Uranus, through its lightcurve-constrained shape approximation.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://arxiv.org/pdf/1706.06837",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Sycorax is an outer moon of Uranus with measured rotational variability and thermal-size constraints. This ellipsoid adopts the minimum elongation under uniform reflectivity; depth and display orientation remain assumptions. The grid marks unmapped terrain.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://arxiv.org/pdf/1706.06837",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Light-curve shape approximation",
+      "detail": "Approximate shape",
+      "summary": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain."
+    }
+  }
+}

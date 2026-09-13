@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "moon",
+  "card": {
+    "text": "Explore the Moon in 3D with cssEarth. Discover impact craters, ancient lava plains, and the history of Earth’s natural satellite.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/moon/facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Earth's Moon records evidence of our solar system's history in the form of impact craters, cooled lava landforms, ancient ice deposits, and more.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/moon/facts/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "surface": {
+      "title": "LROC photographic mosaic",
+      "detail": "LROC mosaic",
+      "summary": "Monochrome photography from 2009–2011. Crater shadows remain in the images; gray grid marks missing observations."
+    },
+    "midnight-temperature": {
+      "title": "LRO Diviner GHRM: midnight temperature",
+      "detail": "Temperature",
+      "summary": "False-color temperature fitted to local midnight from 2009–2022 Diviner observations within ±70°. Gray grid marks unavailable data. This combines many nights, not current temperatures."
+    },
+    "heat-anomalies": {
+      "title": "LRO Diviner GHRM: heat anomalies",
+      "detail": "Anomaly",
+      "summary": "False-color difference from a typical-soil thermal model at slope-adjusted midnight, 2009–2022, within ±70°. Blue is cooler and red warmer; gray grid is unavailable. Residual terrain effects remain. Warm colors do not establish geothermal activity."
+    },
+    "rock-abundance": {
+      "title": "LRO Diviner GHRM: rock abundance",
+      "detail": "Rock area",
+      "summary": "Modeled rock-area fraction from 2009–2022 Diviner observations at slope-adjusted midnight, within ±70°. Gray grid marks missing or physically invalid values. This estimates rock area, not individual boulder counts."
+    },
+    "topography": {
+      "title": "LOLA LDEM16 elevation model",
+      "detail": "Numeric elevation",
+      "summary": "Colors show height above or below a 1,737.4 km sphere. Shading reveals slopes in the archived laser-altimeter measurements."
+    },
+    "crust": {
+      "title": "Crustal-thickness model",
+      "detail": "Thickness",
+      "summary": "Thickness is inferred from gravity and topography. The result depends on assumed rock densities, not direct underground imaging."
+    },
+    "silicate-signature": {
+      "title": "Diviner Christiansen feature, 2009–2016",
+      "detail": "Composition proxy",
+      "summary": "Diviner measures a thermal-infrared emissivity peak related to silicate composition. This 2021 map corrects viewing geometry and space weathering. Colors span 8.0–8.5 µm; values outside that range share endpoint colors. This is a composition proxy, not mineral abundance; residual topographic effects remain, especially above 50° latitude. Gray grid marks missing observations and latitudes beyond ±70°."
+    },
+    "geology": {
+      "title": "USGS unified global geology (2020 v2)",
+      "detail": "Mapped units",
+      "summary": "USGS interpreted geologic units from the 2020 unified map, version 2 (1:5,000,000). Colors distinguish mapped units and their relative ages; they are not photographed surface colors. Small units may be absent at this display scale."
+    }
+  }
+}

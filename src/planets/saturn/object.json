@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ed5df198023ac3935f25ca9b0480c6fe32a628645b4ded4eb072159923fd6726"
+    "sha256": "56801701219410fb33d53029ce7a0858f2d49767ae324f66e6a6bf2dc2b34f7d"
   },
   "id": "saturn",
   "properties": {
@@ -41,7 +41,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e6227563c894bd830f1825779a3295d1056b29c8bfb9c2bd324773177c3bf4fd"
+          "sha256": "d7102e88052d1dedf97d58e635bee339c917f10ee1925bf929261c8798f126f4"
+        },
+        {
+          "id": "text",
+          "path": "source/content/text.json",
+          "sha256": "1a71beb51f0ae190254e92949f293b1cd02bb5475ae09a9e0d74a826f9bca76d"
         },
         {
           "id": "geometry",
@@ -177,7 +182,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f9d21d62a2cb8f277e23aa62e34aace2c1fb0b6791c46025f613a8d7ef774be5"
+        "sha256": "e5f98124d93ad8842ea00e343d8c15737fceee4820d8554494a37de67ce5e35c"
       }
     },
     "catalog": {

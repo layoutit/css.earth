@@ -1513,8 +1513,8 @@
     {
       "id": "sun-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12783,
-      "expectedSha256": "f2ae43e88009d924e46647e38caf07da251cea5e15cff65074cc163a2ff6dd4f",
+      "expectedBytes": 11727,
+      "expectedSha256": "c679469a83de4d8a33b4c057cf9803d058d9256b31949f8923dd7f194c31849f",
       "origin": "Repository-authored object content: NASA Science facts with citations, four lens descriptions, legends as palette recipes, resources",
       "sourceBinding": {
         "kind": "local",
@@ -1523,6 +1523,25 @@
       "credit": "cssEarth and the institutional sources identified in this record",
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "panel",
+        "lenses"
+      ]
+    },
+    {
+      "id": "sun-object-text",
+      "path": "content/text.json",
+      "expectedBytes": 1821,
+      "expectedSha256": "6c124b101b6e983fa12b862dc94db5cc7287a96a85bb77d0a56515c47bc26499",
+      "origin": "Repository-authored Sun reader text",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "Written against the sources each text block cites.",
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "panel",

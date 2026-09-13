@@ -3,8 +3,9 @@ import { compileSourceUsage } from '../src/platform/source-usage.mts';
 import type { SourceUse } from '../src/platform/source-usage.mts';
 import { parsePreparedSources, sourceCatalogDigest } from '../src/platform/prepared-sources.mts';
 import { readSourceCatalog } from './read-source-catalogue.mts';
-import { sourceInventory, metadataCitations, factsheetCitations } from './source-catalogue-inputs.mts';
+import { sourceInventory, metadataCitations, factsheetCitations, textCitations } from './source-catalogue-inputs.mts';
 import { parseFactsheet, verifyFactsheetSources } from './factsheet-sources.mts';
+import { describeTextViolations, reviewObjectText } from './object-text-sources.mts';
 import { sourcePath, sourceDigest } from '../src/platform/source-catalog.mts';
 import type { SourceInventoryEntry } from './source-catalogue-inputs.mts';
 import { createHash } from 'node:crypto';
@@ -32,6 +33,7 @@ export const explorationCompilerClosure = [
   'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
   'src/platform/prepared-sources.mts', 'tools/source-catalogue-inputs.mts',
   'tools/factsheet-sources.mts', 'site/fact-order.mts', 'tools/restore-factsheet-evidence.mts',
+  'site/object-text.mts', 'tools/object-text-sources.mts',
   'tools/source-values.mts', 'tools/objects/operations.ts', 'tools/objects/operations-acquisition.ts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
   'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',
@@ -115,6 +117,23 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     const published = explorationRecord(await json(`${base}/prepared/content.json`));
     if (published.objectId !== object.id || JSON.stringify(parseFactsheet(published)) !== JSON.stringify(panel)) throw new Error(`Stale factsheet for ${object.id}; run pnpm prepare:factsheets -- ${object.id}.`);
     metadata.push(...factsheetCitations(panel, `${base}/${contentPath}`, object));
+    const textReference = explorationArray(recipe.sources, explorationRecord).find(source => source.id === 'text');
+    if (!textReference) throw new Error(`Missing reader text recipe for ${object.id}.`);
+    const textPath = sourcePath(textReference.path), textBytes = await input(`${base}/${textPath}`);
+    const textPin = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section => explorationArray(manifest[section] ?? [], explorationRecord))
+      .filter(entry => `source/${entry.path}` === textPath);
+    if (!textPath.startsWith('source/') || textPin.length !== 1 || textPin[0]!.expectedBytes !== textBytes.length || textPin[0]!.expectedSha256 !== digest(textBytes) ||
+      sourceDigest(textReference.sha256) !== digest(textBytes)) throw new Error(`Changed reader text for ${object.id}; run pnpm prepare:text -- ${object.id}.`);
+    const reader = await reviewObjectText(JSON.parse(textBytes.toString('utf8')), { objectId: object.id, name: object.name, content, manifest, sources,
+      read: path => input(`${base}/${path}`) });
+    if (reader.violations.length) throw new Error(`Reader text for ${object.id} breaks the text contract:\n${describeTextViolations(reader.violations)}`);
+    const publishedDatasets = explorationRecord(published.datasets);
+    if (published.introduction !== reader.text.introduction.text || explorationRecord(explorationRecord(descriptor.properties).catalog).description !== reader.text.card.text ||
+      Object.keys(reader.text.datasets).some(id => JSON.stringify(publishedDatasets[id]) !== JSON.stringify({ title: reader.text.datasets[id]!.title,
+        ...(reader.text.datasets[id]!.detail === undefined ? {} : { detail: reader.text.datasets[id]!.detail }), summary: reader.text.datasets[id]!.summary }))) {
+      throw new Error(`Stale reader text for ${object.id}; run pnpm prepare:text -- ${object.id}.`);
+    }
+    metadata.push(...textCitations(reader.text, `${base}/${textPath}`, object));
     for (const fact of [...panel.facts, ...panel.moreFacts]) {
       factsheets.facts++;
       if (fact.source) factsheets.cited++; else factsheets.uncited.push({ objectId: object.id, factId: fact.id });

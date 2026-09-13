@@ -4,7 +4,6 @@
   "id": "comet-c2013-a1",
   "displayName": "Siding Spring 2013",
   "panel": {
-    "introduction": "This Siding Spring comet passed close to Mars in October 2014. It is a different object from the short-period comet 162P/Siding Spring.",
     "facts": [
       {
         "id": "diameter",
@@ -29,9 +28,6 @@
       {
         "id": "model",
         "label": "Illustrative nucleus",
-        "detail": "Celestia",
-        "title": "C/2013 A1 Siding Spring 2013",
-        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
         "thumbnail": "/scenes/comet-c2013-a1/comet-c2013-a1-model-thumbnail.webp",
         "surface": "comet-c2013-a1-model-surface@2x.webp",
         "poles": "comet-c2013-a1-model-poles@2x.webp",
@@ -51,7 +47,9 @@
             "label": "Closest to Sun",
             "value": "1.39 AU"
           }
-        ]
+        ],
+        "notes": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "noData": true
       }
     ]
   },

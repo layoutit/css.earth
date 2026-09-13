@@ -593,8 +593,8 @@
     {
       "id": "venus-object-content",
       "path": "content/object.json",
-      "expectedSha256": "c37d72b0d97d73041322c7ecd3c5849efe9acba5f426d8166e43acb8ab98dd30",
-      "expectedBytes": 17582,
+      "expectedSha256": "952238549deb7b771d0ea5b6a652d4c36349a013d2e451a856bc62ddad388da7",
+      "expectedBytes": 16714,
       "origin": "Repository-authored Venus panel, lens, gallery, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -608,7 +608,28 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored page text, factsheet and view descriptions."
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "id": "venus-object-text",
+      "path": "content/text.json",
+      "expectedSha256": "12fa368682a0abd836b15a722f5b60bbcd10311dc2405fc11317d0656672e421",
+      "expectedBytes": 1622,
+      "origin": "Repository-authored Venus reader text",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Written against the sources each text block cites.",
+      "redistribution": "Prepared shell content with source provenance.",
+      "consumers": [
+        "panel",
+        "lenses",
+        "charts",
+        "surface-gallery"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored card line, introduction and dataset summaries; each block cites the sources a reviewer checks it against."
       }
     },
     {

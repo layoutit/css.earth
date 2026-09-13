@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comet-109p",
+  "card": {
+    "text": "109P: Swift–Tuttle leaves the dust behind the Perseid meteor shower. Its long orbit carries it far beyond the planets before it returns to the inner Solar System. Illustrative nucleus at Celestia’s catalog scale.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/solar-system/comets/109p-swift-tuttle/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Swift–Tuttle leaves the dust behind the Perseid meteor shower. Its long orbit carries it far beyond the planets before it returns to the inner Solar System.",
+    "sources": [
+      {
+        "catalogueId": "unreviewed-reader-text",
+        "url": "https://science.nasa.gov/solar-system/comets/109p-swift-tuttle/",
+        "label": "Unreviewed migrated text",
+        "checked": "2026-09-13"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "109P/Swift–Tuttle",
+      "detail": "Celestia",
+      "summary": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
+    }
+  }
+}
