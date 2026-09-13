@@ -18,6 +18,8 @@ export const OPTIONAL_LENS_KEYS = ['focus'] as const;
 export const safePath = (path: unknown): path is string => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.includes('\\') && !path.split('/').includes('..');
 export const positive = (value: number | undefined): value is number => value !== undefined && Number.isFinite(value) && value > 0;
 const identifier = /^[a-z][a-z0-9-]*$/;
+/** A frame keeps its archive product id, such as Cassini n1506184171_1 or a Galileo SSI image number. */
+const frameIdentifier = /^[a-z0-9][a-z0-9_-]*$/;
 
 /** Refuse keys a format does not declare, and require the ones it must have. */
 export function checkKeys(value: unknown, required: readonly string[], allowed: readonly string[], context: string) {
@@ -53,7 +55,7 @@ export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[],
   if (levels) checkKeys(levels, ['minimumPairs', 'maximumGain'], ['maximumAngleDegrees', 'samplesPerTriangle'], `${context} level matching`);
   const range = display.percentiles ?? display.displayRange, kind = display.percentiles ? 'percentiles' : 'displayRange';
   if (!identifier.test(recipe.id) || !identifier.test(recipe.consumer) || !recipe.metadata?.label || !recipe.metadata?.coverage ||
-      frames.length < 1 || frames.length > rules.maximumFrames || frames.some(frame => !identifier.test(frame.id)) || new Set(frames.map(frame => frame.id)).size !== frames.length ||
+      frames.length < 1 || frames.length > rules.maximumFrames || frames.some(frame => !frameIdentifier.test(frame.id)) || new Set(frames.map(frame => frame.id)).size !== frames.length ||
       !paths.every(safePath) || new Set(paths).size !== paths.length ||
       mosaic !== (recipe.selection !== undefined) || mosaic !== (levels !== undefined) || (recipe.selection !== undefined && !rules.selections.includes(recipe.selection)) ||
       (levels !== undefined && (!Number.isInteger(levels.minimumPairs) || levels.minimumPairs < 64 || levels.minimumPairs > 10000 ||

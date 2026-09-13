@@ -3,7 +3,7 @@
  * shape releases or the Galileo SSI image catalog. The camera looks at the body origin from a stated latitude, longitude and range, and
  * its rays are cast onto the source mesh the network was controlled to. Three filters can be shown together as colour.
  */
-import type { LoadContext, ObservationCamera, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
+import type { LoadContext, ObservationCamera, ObservationFrame, ObservationImage, ObservationPhotometry, PixelGeometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
 import { array, boolean, decodeProfile, number, optional, shape, text, parseCameraFrame, parseLevelMatching, parseSurfaceGeometry, publishedOr, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
 import { requireArray, requireRecord } from '../../../source-values.mts';
 import { readFile } from 'node:fs/promises';
@@ -24,7 +24,8 @@ const CAMERA_FIELDS = ['observerLatitude', 'observerWestLongitude', 'sunLatitude
 const FRAME_OPTIONAL = ['encoding', 'allowFiniteSigned', 'backgroundMaximum', 'backgroundOffset', 'coverageInsetPixels', 'cameraCatalog', 'quality', ...CAMERA_FIELDS];
 const BANDS = ['red', 'green', 'blue'] as const;
 type Band = typeof BANDS[number];
-const RULES: Omit<EnvelopeRules, 'displays'> = { selections: ['finest-resolution', 'lowest-emission'], maximumFrames: 16, maximumLevelGain: 5, samplesPerTriangle: 'optional' };
+// Raw detector frames through different filters and exposures need wide levels: Amalthea's Galileo frames measure 10.3 from their reference.
+const RULES: Omit<EnvelopeRules, 'displays'> = { selections: ['finest-resolution', 'lowest-emission'], maximumFrames: 16, maximumLevelGain: 16, samplesPerTriangle: 'optional' };
 
 const diskBlock = shape({ model: text, weight: optional(number), referenceIncidenceDegrees: number, referenceEmissionDegrees: number,
   maximumIncidenceDegrees: number, maximumEmissionDegrees: number, maximumGain: number });
@@ -118,7 +119,22 @@ async function frameIdentity(sourceDirectory: string, frame: CameraFrameRecipe) 
   return { label, startTime, filter: filters.join('+') };
 }
 
-async function loadControlledFrame(frame: CameraFrameRecipe, photometry: ObservationPhotometry, limits: CameraLens['transfer'], { sourceDirectory, radial, entries }: LoadContext) {
+/** A stated camera that misses the photographed body puts lit source shape on the edge-connected sky. Across the first 136 controlled
+ * frames, registered ones place at most 13% of it there (a 77-pixel crescent) and the two misregistered ones 36% and 99.8%. */
+const MAXIMUM_LIT_SHAPE_ON_SKY = .25;
+
+function litShapeOnSky(geometry: PixelGeometry, sky: Uint8Array | undefined, quality: Uint8Array | undefined, maximumIncidenceDegrees: number, count: number) {
+  const limit = maximumIncidenceDegrees * Math.PI / 180;
+  let litPixels = 0, onSkyPixels = 0;
+  for (let i = 0; i < count; i++) {
+    if (geometry.reject(i) !== null || !(geometry.incidence(i) < limit)) continue;
+    litPixels++;
+    if (sky?.[i] && !quality?.[i]) onSkyPixels++;
+  }
+  return { litPixels, onSkyPixels, share: litPixels ? onSkyPixels / litPixels : 0, maximumShare: MAXIMUM_LIT_SHAPE_ON_SKY };
+}
+
+async function loadControlledFrame(frame: CameraFrameRecipe, photometry: ObservationPhotometry, limits: CameraLens['transfer'], maximumIncidenceDegrees: number, { sourceDirectory, radial, entries }: LoadContext) {
   const [resolved, { label, startTime, filter }, image] = await Promise.all([resolveCatalogCamera(sourceDirectory, frame), frameIdentity(sourceDirectory, frame), loadShapeCameraImage(sourceDirectory, frame)]);
   const entry = requireRecord(entries.find(input => input.path === frame.path) ?? {});
   if (entry.width !== image.width || entry.height !== image.height) throw new Error(`Camera dimensions differ from pinned metadata: ${frame.id}`);
@@ -135,7 +151,11 @@ async function loadControlledFrame(frame: CameraFrameRecipe, photometry: Observa
       background: { offset: frame.backgroundOffset ?? 0, maximum: frame.backgroundMaximum ?? null }, coverageInsetPixels: frame.coverageInsetPixels ?? 0,
       withheldPixels: { quality: total(quality), background: total(background) - total(quality), coverageInset: total(withheld) - total(background) } } };
   const camera = controlNetworkCamera(resolved, frame.cameraCatalog ? { path: frame.cameraCatalog.path, imageNumber: frame.cameraCatalog.imageNumber } : undefined);
-  const built = cameraFrame({ id: frame.id, image: observation, camera, geometry: castSourceRays(camera, radial.grid, image.width, image.height), photometry, limits, mesh: radial.grid });
+  const geometry = castSourceRays(camera, radial.grid, image.width, image.height);
+  // Registration: lit shape within the photometric incidence limit must land on the photographed body, not on the sky.
+  const silhouette = litShapeOnSky(geometry, background, quality, maximumIncidenceDegrees, image.width * image.height);
+  if (silhouette.share > MAXIMUM_LIT_SHAPE_ON_SKY) throw new Error(`Controlled camera ${frame.id} places ${(silhouette.share * 100).toFixed(1)}% of its lit source shape on sky; its stated camera does not register to the photograph.`);
+  const built = cameraFrame({ id: frame.id, image: { ...observation, report: { ...observation.report, silhouette } }, camera, geometry, photometry, limits, mesh: radial.grid });
   return { frame: built, label };
 }
 
@@ -176,13 +196,14 @@ function lensPolicy(recipe: CameraLens | ColorLens, frames: readonly Observation
 }
 
 const retained = (block: CameraLens['photometry']) => !('referenceDegrees' in block) && block.model === 'retained-observation';
+const incidenceLimit = (block: CameraLens['photometry']) => 'referenceDegrees' in block ? block.limits.maximumIncidenceDegrees : block.maximumIncidenceDegrees;
 
 export const controlledCameraFormat: SurfaceObservationFormat = {
   validate: validateCameraLens,
   paths: value => cameraPaths(parseControlledCameraLens(value).frames),
   async load(value, context) {
     const recipe = parseControlledCameraLens(value), photometry = await lensPhotometry(recipe.photometry, context), frames: ObservationFrame[] = [];
-    for (const frame of recipe.frames) frames.push((await loadControlledFrame(frame, photometry, recipe.transfer, context)).frame);
+    for (const frame of recipe.frames) frames.push((await loadControlledFrame(frame, photometry, recipe.transfer, incidenceLimit(recipe.photometry), context)).frame);
     const quantity = recipe.frames.some(frame => frame.encoding === 'vicar-byte-dn') ? 'detector brightness, DN / 255' : 'I/F';
     const units = photometry.units ?? `relative ${retained(recipe.photometry) ? `${quantity} with original illumination` : `disk-normalized ${quantity}`}; linear grayscale display`;
     return lensPolicy(recipe, frames, photometry, context, units);
@@ -201,7 +222,7 @@ export const controlledColorFormat: SurfaceObservationFormat = {
     for (const set of recipe.frames) {
       const bands: ObservationFrame[] = [];
       for (const band of recipe.bands) {
-        const source = set[band.channel as Band], { frame, label } = await loadControlledFrame(source, photometry, recipe.transfer, context);
+        const source = set[band.channel as Band], { frame, label } = await loadControlledFrame(source, photometry, recipe.transfer, incidenceLimit(recipe.photometry), context);
         // Cassini labels state UNITS = 'I/F'; Voyager labels give I/F as DN times a 1.0E-4 reflectance scaling factor.
         const reflectance = pds3Keyword(label, 'UNITS') === 'I/F' || /^1\.0+E-0?4$/i.test(pds3Keyword(label, 'REFLECTANCE_SCALING_FACTOR') ?? '');
         if (!pds3Values(label, 'FILTER_NAME')?.includes(band.filter) || !reflectance) throw new Error(`Band colour needs the actual filter and calibrated reflectance units in its native label: ${source.id}`);

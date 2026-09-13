@@ -102,22 +102,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "observations/N1630068448_1_CALIB.IMG",
-      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2057/data/1629783492_1630072138/N1630068448_1_CALIB.IMG"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "observations/N1630068448_1_CALIB.LBL",
-      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2057/data/1629783492_1630072138/N1630068448_1_CALIB.LBL"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "shape/janus_30k_plt.tab",
       "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/janus_30k_plt.tab"
     },

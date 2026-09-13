@@ -2,89 +2,6 @@
   "schema": "cssthebe-authoritative-sources@2",
   "inputs": [
     {
-      "id": "c0368591600",
-      "path": "observations/C0368591600R.IMG",
-      "expectedBytes": 831488,
-      "expectedSha256": "16802209e6eb0bf3bb5fc028e613d527ce42e12227e7bce5c6b0665b086eb64e",
-      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368591600R.IMG",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368591600",
-      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS; retain NASA/JPL and PDS attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/galileo/"
-      ],
-      "acquisition": "Download the original Galileo SSI reconstructed experiment data record; byte digital numbers, not calibrated I/F.",
-      "redistribution": "Retain NASA/JPL and PDS credits.",
-      "consumers": [
-        "galileo-clear-frames"
-      ],
-      "width": 800,
-      "height": 800,
-      "projection": {
-        "type": "camera-perspective",
-        "coordinates": "geometry/registration.json",
-        "longitudeDirection": "west-positive"
-      },
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "missionId": "galileo",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368591600R.IMG"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0017-c3-sml-sats-c0368591600r",
-            "role": "material",
-            "evidence": "src/planets/thebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
-          }
-        ]
-      }
-    },
-    {
-      "id": "c0368591600-label",
-      "path": "observations/C0368591600R.LBL",
-      "expectedBytes": 4755,
-      "expectedSha256": "b482751e27d82f27662eeb5d4aa6860698279733690ef1f8373d35999d754569",
-      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368591600R.LBL",
-      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368591600",
-      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
-      "license": "Public NASA mission data archived in PDS; retain NASA/JPL and PDS attribution.",
-      "licenseEvidence": [
-        "https://pds-rings.seti.org/galileo/"
-      ],
-      "acquisition": "Download the original Galileo SSI reconstructed experiment data record; byte digital numbers, not calibrated I/F.",
-      "redistribution": "Retain NASA/JPL and PDS credits.",
-      "consumers": [
-        "galileo-clear-frames"
-      ],
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "galileo",
-            "missionId": "galileo",
-            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368591600R.LBL"
-          }
-        ]
-      },
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0017-c3-sml-sats-c0368591600r",
-            "role": "material",
-            "evidence": "src/planets/thebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
-          }
-        ]
-      }
-    },
-    {
       "id": "c0401759200",
       "path": "observations/C0401759200R.IMG",
       "expectedBytes": 808000,
@@ -599,7 +516,6 @@
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
-          "c0368591600",
           "c0401759200",
           "c0401787200",
           "c0420691700",
@@ -627,11 +543,6 @@
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
       }
-    },
-    {
-      "path": "geometry/c0368591600-opus.json",
-      "expectedBytes": 11689,
-      "expectedSha256": "226069555b12f604fce24f1132ba957da00ed50b5a661c538c285f27b951df65"
     },
     {
       "path": "geometry/c0401759200-opus.json",
