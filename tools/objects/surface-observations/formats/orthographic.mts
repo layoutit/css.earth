@@ -18,7 +18,7 @@ function validateOrthographicRecipe(value: unknown, sourceGeometry: unknown) {
   for (const frame of requireArray(requireRecord(value).frames)) checkKeys(frame, ['id', 'path', 'coordinatePaths'], [], `${CONTEXT} frame`);
   const recipe = decodeProfile(parseOrthographicLens, value, 'Invalid source-registered orthographic observation.'), geometry = parseSurfaceGeometry(sourceGeometry);
   // An orthophoto is one registered image with its three coordinate cubes; it has no mosaic selection.
-  validateEnvelope(recipe, lensPaths(recipe), { selections: [], displays: ['displayRange'], maximumFrames: 1, maximumLogMad: .3, maximumLevelGain: 1, samplesPerTriangle: 'optional' }, CONTEXT);
+  validateEnvelope(recipe, lensPaths(recipe), { selections: [], displays: ['percentiles'], maximumFrames: 1, maximumLogMad: .3, maximumLevelGain: 1, samplesPerTriangle: 'optional' }, CONTEXT);
   if (recipe.format !== 'isis2-orthographic' || recipe.frames[0].coordinatePaths.length !== 3 ||
       geometry?.format !== 'image-plane-dem' || geometry.sourceTopology !== 'open' ||
       !Number.isFinite(recipe.maximumCoordinateErrorMeters) || recipe.maximumCoordinateErrorMeters <= 0 ||
@@ -36,7 +36,7 @@ export const orthographicFormat: SurfaceObservationFormat = {
     const rasters = await Promise.all([frameRecipe.path, ...frameRecipe.coordinatePaths].map(async path => decodeIsis2Qube(await readFile(resolve(sourceDirectory, path)), recipe.grid)));
     const [photo, x, y, z] = rasters;
     if (!mesh.imageGrid) throw new Error('Orthographic source mesh lacks its image grid.');
-    const [sx, x0, sy, y0] = recipe.grid.pixelToSource, [low, high] = recipe.display.displayRange ?? [];
+    const [sx, x0, sy, y0] = recipe.grid.pixelToSource;
     let coordinatePixels = 0, maximumCoordinateErrorMeters = 0;
     const sourcePoints = new Map(mesh.positions.map((point, i) => [point.slice(0, 2).join(','), i]));
     const seen = new Set();
@@ -72,7 +72,7 @@ export const orthographicFormat: SurfaceObservationFormat = {
         registration: { coordinatePixels, maximumCoordinateErrorMeters, completeSourcePostBijection: true,
           method: 'Every XYZ pixel identifies one released terrain post; every terrain post is accounted for.' } } };
     return { frames: [frame], exceeded: [], policy: { format: recipe.format,
-      selection: 'single', samplesPerTriangle: 8, display: { range: 'authored', low, high, units: 'Mission orthophoto brightness; original illumination retained. No albedo interpretation.' },
+      selection: 'single', samplesPerTriangle: 8, display: { range: 'surface-samples', percentiles: recipe.display.percentiles ?? [], units: 'Mission orthophoto brightness; original illumination retained. No albedo interpretation.' },
       photometry: { model: 'retained-observation', maximumGain: 1 },
       limits: { maximumCoordinateErrorMeters: recipe.maximumCoordinateErrorMeters },
       limitations: 'Orthophoto from the rescued mission website, independently registered to the reviewed DEM. Radiometric calibration is not requalified.' } };

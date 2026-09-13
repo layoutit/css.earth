@@ -44,15 +44,13 @@ export function sampleFootprint({ image, camera, geometry, photometry }: Footpri
 export interface CameraFrameOptions {
   id: string; image: ObservationImage; camera: ObservationCamera; geometry: PixelGeometry; photometry: ObservationPhotometry;
   limits: TransferLimits; mesh: Pick<SourceMesh, 'intersect'>;
-  /** Give the frame its own display range from its qualified pixels, for routes that display by pixel percentiles. */
-  displayPercentiles?: readonly number[];
   report?: Record<string, unknown>;
 }
 
 /** Assemble a camera route's frame: count its pixels, measure its footprint and bind sampling and visibility to its limits. */
-export function cameraFrame({ id, image, camera, geometry, photometry, limits, mesh, displayPercentiles, report = {} }: CameraFrameOptions): ObservationFrame {
-  const angle = pixelAngle(camera, image.width, image.height), factor = image.radianceFactor?.factor ?? 1;
-  const values: number[] = [], nadir: number[] = [], rejectedPixels: Record<string, number> = {};
+export function cameraFrame({ id, image, camera, geometry, photometry, limits, mesh, report = {} }: CameraFrameOptions): ObservationFrame {
+  const angle = pixelAngle(camera, image.width, image.height);
+  const nadir: number[] = [], rejectedPixels: Record<string, number> = {};
   let geometryPixels = 0, acceptedPixels = 0, acceptedLossyPixels = 0;
   for (let i = 0; i < image.width * image.height; i++) {
     if (geometry.reject(i) !== null) continue;
@@ -61,16 +59,8 @@ export function cameraFrame({ id, image, camera, geometry, photometry, limits, m
     if (rejected !== null) { rejectedPixels[rejected] = (rejectedPixels[rejected] ?? 0) + 1; continue; }
     const gain = photometry.gain(geometry.incidence(i), geometry.emission(i), geometry.phase(i));
     if (gain === null) { rejectedPixels.photometry = (rejectedPixels.photometry ?? 0) + 1; continue; }
-    if (displayPercentiles) values.push(image.values[i] * gain * factor);
     acceptedPixels++;
     if (image.lossy?.(i)) acceptedLossyPixels++;
-  }
-  let pixelRange: { low: number; high: number } | undefined;
-  if (displayPercentiles) {
-    values.sort((a, b) => a - b);
-    const [low, high] = displayPercentiles.map(p => values[Math.min(values.length - 1, Math.floor(values.length * p / 100))]);
-    if (!(high > low)) throw new Error(`Observation frame ${id} has no qualified display contrast.`);
-    pixelRange = { low, high };
   }
   nadir.sort((a, b) => a - b);
   const footprint = { pixelAngleMicroradians: angle * 1e6, nadirMedianMeters: nadir[Math.floor(nadir.length / 2)] ?? NaN, nadirMinimumMeters: nadir[0] ?? NaN, sampledPixels: nadir.length };
@@ -81,13 +71,13 @@ export function cameraFrame({ id, image, camera, geometry, photometry, limits, m
   const separation = maximumSeparationFootprints === undefined ? maximumSeparationMeters ?? NaN : (ids: readonly number[]) => maximumSeparationFootprints * Math.max(...ids.map(diagonal));
   const eye = camera.positionMeters, tolerance = limits.visibilityToleranceMeters;
   return { id, startTime: image.startTime, filter: image.filter, positionKm: camera.positionKm, cameraKind: camera.kind, geometrySource: geometry.source,
-    nominalPixelScaleMeters: camera.nominalPixelScaleMeters, pixelRange, footprint,
+    nominalPixelScaleMeters: camera.nominalPixelScaleMeters, footprint,
     sample: point => sampleFootprint({ image, camera, geometry, photometry }, point, { maximumSeparationMeters: separation, maximumEmissionDegrees: limits.maximumEmissionDegrees }),
     visible: point => {
       const delta = point.map((n, i) => n - eye[i]), distance = Math.hypot(...delta), hit = mesh.intersect(eye, delta.map(n => n / distance), distance + tolerance);
       return !!hit && Math.abs(hit.radius - distance) <= tolerance;
     },
     report: { id, startTime: image.startTime, filter: image.filter, camera: { kind: camera.kind, ...camera.report }, geometry: geometry.report, quality: image.report,
-      pixels: { geometryPixels, acceptedPixels, acceptedLossyPixels, rejectedPixels }, footprint, ...(pixelRange ? { display: pixelRange } : {}),
+      pixels: { geometryPixels, acceptedPixels, acceptedLossyPixels, rejectedPixels }, footprint,
       ...(image.radianceFactor ? { radiometry: { ...image.radianceFactor, formula: 'I/F = pi * solarDistanceAu^2 * radiance / solarFlux; OSIRIS calibration HISTORY.' } } : {}), ...report } };
 }

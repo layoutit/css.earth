@@ -54,11 +54,7 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     : fitObservationLevels(frames.map((_, i) => samples.map(values => values[i])), policy.levelMatching);
   let low: number, high: number;
   if (policy.display.range === 'authored') ({ low, high } = policy.display);
-  else if (policy.display.range === 'reference-pixels') {
-    const range = frames[0].pixelRange;
-    if (!range) throw new Error('A pixel-percentile display needs the reference frame\'s pixel range.');
-    ({ low, high } = range);
-  } else {
+  else {
     const values: number[] = [];
     for (const atPoint of samples) {
       const i = choose(atPoint);
@@ -102,7 +98,7 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     frames: frames.map(frame => frame.report), limits: policy.limits, photometry: policy.photometry, selection: policy.selection,
     levelMatching: frames.length > 1 ? { ...policy.levelMatching, ...levels, sampledPoints: points.length } : null,
     display: { range: display.range, ...(display.range === 'authored' ? {} : { percentiles: display.percentiles }), low, high, units: display.units,
-      ...(display.range === 'reference-pixels' ? { referenceFrame: frames[0].id } : {}), ...(display.range === 'authored' && display.colorDisplay ? { colorDisplay: bandColorEvidence(display.colorDisplay) } : {}) },
+      ...(display.range === 'authored' && display.colorDisplay ? { colorDisplay: bandColorEvidence(display.colorDisplay) } : {}) },
     areaCoverage, sourceIds: entries.map(entry => ({ id: entry.id, sha256: entry.expectedSha256 })), previewPolicy: PREVIEW_POLICY,
     ...(policy.registration ? { registration: policy.registration } : {}), ...(policy.limitations ? { limitations: policy.limitations } : {}) };
   const preview = (width: number, height: number) => {
