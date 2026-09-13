@@ -7,6 +7,7 @@
   "structureRecipe": "labs/nebula/models/m8/processing-structures.json",
   "structureCatalogue": ".local/nebula-lab/observations/m8-processed/structures/catalogue.json",
   "defaultSourceId": "eso-optical",
+  "emissionWindow": { "sourceId": "eso-optical", "featherArcsec": 90 },
   "maximumStars": 650,
   "starCatalogue": {
     "sourceIds": ["eso-optical", "eso-vista"],

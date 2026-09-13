@@ -1,5 +1,6 @@
 import type { EvidenceInputs } from '../evidence-fusion/model';
 import type { SkyBounds } from './field-types';
+import { createEmissionWindowSampler, readEmissionWindow, type EmissionWindow } from './emission-window';
 
 export interface CompilerTargetSourceControls { backgroundSpread: number; edgeTaperArcsec: number }
 export interface CompilerTargetControls { sources: Record<string, CompilerTargetSourceControls>; minimumWeightNormalization?: number }
@@ -41,7 +42,8 @@ function footprintReliability(footprint: Uint8Array, width: number, height: numb
 }
 const quantile = (values: number[], q: number) => values[Math.min(values.length - 1, Math.floor(q * values.length))] ?? 0;
 /** All observed footprints enter one positive display-emission target; source color is kept separately. */
-export function compilerTarget(inputs: EvidenceInputs, weights: number[], centerOffset: [number, number] = [0, 0], requested?: CompilerTargetControls) {
+export function compilerTarget(inputs: EvidenceInputs, weights: number[], centerOffset: [number, number] = [0, 0], requested?: CompilerTargetControls, requestedWindow?: EmissionWindow) {
+  const emissionWindow = requestedWindow && readEmissionWindow(requestedWindow);
   const controls: CompilerTargetControls = requested === undefined ? { sources: {} } : readCompilerTargetControls(requested);
   if (Object.keys(controls.sources).some(id => !inputs.sources.some(source => source.id === id))) throw new TypeError('Compiler target controls reference an unavailable image.');
   const g = inputs.grid, width = Math.min(512, g.width), height = Math.max(1, Math.round(g.height * width / g.width));
@@ -71,5 +73,12 @@ export function compilerTarget(inputs: EvidenceInputs, weights: number[], center
   const x = (p: number) => (p - g.frameWidth / 2) * g.fieldArcminutes[0] * 60 / g.frameWidth + centerOffset[0];
   const y = (p: number) => (g.frameHeight / 2 - p) * g.fieldArcminutes[1] * 60 / g.frameHeight + centerOffset[1];
   const bounds: SkyBounds = { min: [x(g.originX), y(g.originY + g.extentHeight)], max: [x(g.originX + g.extentWidth), y(g.originY)] };
-  return { target, coverage, width, height, bounds, normalization, ...(requested ? { targetControls: controls } : {}) };
+  if (emissionWindow) {
+    const window = createEmissionWindowSampler(emissionWindow);
+    for (let py = 0; py < height; py++) for (let px = 0; px < width; px++) target[py * width + px] *=
+      window(bounds.min[0] + (px + .5) * (bounds.max[0] - bounds.min[0]) / width,
+        bounds.max[1] - (py + .5) * (bounds.max[1] - bounds.min[1]) / height);
+  }
+  // Authored display zeros do not rewrite observational coverage or any source raster.
+  return { target, coverage, width, height, bounds, normalization, ...(requested ? { targetControls: controls } : {}), ...(emissionWindow ? { emissionWindow } : {}) };
 }

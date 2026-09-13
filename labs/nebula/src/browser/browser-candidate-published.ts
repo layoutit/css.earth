@@ -77,7 +77,7 @@ try {
       assert.equal(await page.locator('.compiler-stage').getAttribute('data-compiler-pose'), pose);
     }
     await page.getByRole('button', { name: 'Neutral', exact: true }).click(); await material('', 'neutral'); await snapshot(`${id}-neutral-oblique`);
-    if (id === 'm42' || id === 'carina') {
+    if (id === 'm42' || id === 'carina' || id === 'm8') {
       for (const axis of ['west', 'north'] as const) {
         await page.getByRole('button', { name: 'Earth view', exact: true }).click();
         await page.getByRole('button', { name: 'Orbit', exact: true }).click();

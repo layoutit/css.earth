@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import type { EvidenceInputs, EvidenceSource } from '../evidence-fusion/model';
 import { compilerTarget, readCompilerTargetControls } from './target';
+import { createEmissionWindowSampler, type EmissionWindow } from './emission-window';
 function inputs(width = 100, height = 100): EvidenceInputs {
   const length = width * height;
   const plane = () => ({ signal: new Float32Array(length), coverage: new Uint8Array(length), noiseSigma: 1 });
@@ -62,4 +63,21 @@ test('an explicitly downweighted isolated footprint has no hidden normalized-mea
   const historical = compilerTarget(input, [.04]);
   assert.ok(historical.target[99]! / full.target[99]! > .3, 'counterfactual: per-pixel renormalization cancels low source weight');
   assert.deepEqual(faint.coverage, full.coverage);
+});
+
+test('an authored rotated optical window trims all source contributions without cropping observed rasters', () => {
+  const input = inputs(100, 100);
+  for (let y = 0; y < 100; y++) for (let x = 0; x < 100; x++) pixel(input, x, y, (x + y) % 4 === 0 ? 200 : 0);
+  const before = compilerTarget(input, [1]), unchanged = structuredClone(input);
+  const window: EmissionWindow = { sourceId: 'observed', polygonArcsec: [[0, 40], [40, 0], [0, -40], [-40, 0]], featherArcsec: 5, interpretation: 'Explicit display crop.' };
+  const after = compilerTarget(input, [1], [0, 0], undefined, window), sample = createEmissionWindowSampler(window);
+  let excludedPositive = 0, keptPositive = 0;
+  for (let p = 0; p < after.target.length; p++) {
+    const weight = sample(-50 + p % 100 + .5, 50 - Math.floor(p / 100) - .5);
+    if (weight === 0 && before.target[p]! > 0) { excludedPositive++; assert.equal(after.target[p], 0); }
+    if (weight === 1 && before.target[p]! > 0) { keptPositive++; assert.equal(after.target[p], before.target[p]); }
+  }
+  assert.ok(excludedPositive > 100 && keptPositive > 100);
+  assert.deepEqual(after.emissionWindow, window);
+  assert.deepEqual(after.coverage, before.coverage); assert.deepEqual(after.bounds, before.bounds); assert.deepEqual(input, unchanged);
 });

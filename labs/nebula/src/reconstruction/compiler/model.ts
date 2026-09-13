@@ -4,6 +4,7 @@ import { jointPath, jointRecord } from '../joint-fit/model';
 export const COMPILER_VERSION = 'registered-emission-compiler@1';
 export interface CompilerControls { detail: number; faint: number; depth: number }
 export interface CompilerStarCatalogue { sourceIds: string[]; mergeRadiusArcsec: number }
+export interface CompilerEmissionWindow { sourceId: string; featherArcsec: number }
 export interface ObservedStarCataloguePin { path: string; sha256: string }
 export const defaultCompilerControls: CompilerControls = { detail: .65, faint: .35, depth: 1 };
 export interface CompilerRequest { action: 'apply'; imageId: 'compiler'; recipePath: string; cataloguePath: string;
@@ -11,7 +12,7 @@ export interface CompilerRequest { action: 'apply'; imageId: 'compiler'; recipeP
 export interface CompilerRecipe { schema: 'cssearth-nebula-compiler@1'; id: string; label: string; observationRecipe: string;
   observationCatalogue: string; structureRecipe: string; structureCatalogue: string; jointRecipe?: string; depthRecipe?: string; sampledRecipe?: string;
   defaultSourceId: string; maximumStars: number; interpretation: string;
-  defaultControls?: CompilerControls; sourceWeights?: Record<string, number>; starCatalogue?: CompilerStarCatalogue; observedStars?: ObservedStarCataloguePin; targetControls?: CompilerTargetControls }
+  defaultControls?: CompilerControls; sourceWeights?: Record<string, number>; starCatalogue?: CompilerStarCatalogue; observedStars?: ObservedStarCataloguePin; targetControls?: CompilerTargetControls; emissionWindow?: CompilerEmissionWindow }
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const range = (v: unknown, low: number, high: number): v is number => finite(v) && v >= low && v <= high;
 export function readCompilerControls(v: unknown): CompilerControls {
@@ -37,6 +38,8 @@ export function readCompilerRecipe(v: unknown): CompilerRecipe {
       (v.sampledRecipe !== undefined && (!jointPath(v.sampledRecipe) || !v.sampledRecipe.startsWith('labs/nebula/models/'))) ||
       [v.jointRecipe, v.depthRecipe, v.sampledRecipe].filter(value => value !== undefined).length > 1 || typeof v.defaultSourceId !== 'string' || !range(v.maximumStars, 0, 2000) || !Number.isInteger(v.maximumStars) || typeof v.interpretation !== 'string') throw new TypeError('Invalid compiler recipe.');
   const targetControls = v.targetControls === undefined ? undefined : readCompilerTargetControls(v.targetControls);
+  const emissionWindow = v.emissionWindow === undefined ? undefined : readCompilerEmissionWindow(v.emissionWindow);
+  if (emissionWindow && v.sampledRecipe !== undefined) throw new TypeError('Image emission windows require the emission-field route.');
   const controls = v.defaultControls === undefined ? undefined : readCompilerControls(v.defaultControls);
   const starCatalogue = v.starCatalogue === undefined ? undefined : readCompilerStarCatalogue(v.starCatalogue);
   const observedStars = v.observedStars === undefined ? undefined : readObservedStarCataloguePin(v.observedStars);
@@ -53,7 +56,13 @@ export function readCompilerRecipe(v: unknown): CompilerRecipe {
   return { schema: v.schema, id: v.id, label: v.label, observationRecipe: v.observationRecipe, observationCatalogue: v.observationCatalogue,
     structureRecipe: v.structureRecipe, structureCatalogue: v.structureCatalogue, jointRecipe: v.jointRecipe, ...(v.depthRecipe ? { depthRecipe: v.depthRecipe } : {}), ...(v.sampledRecipe ? { sampledRecipe: v.sampledRecipe } : {}), defaultSourceId: v.defaultSourceId,
     maximumStars: v.maximumStars, interpretation: v.interpretation,
-    ...(controls ? { defaultControls: controls } : {}), ...(sourceWeights ? { sourceWeights } : {}), ...(starCatalogue ? { starCatalogue } : {}), ...(observedStars ? { observedStars } : {}), ...(targetControls ? { targetControls } : {}) };
+    ...(controls ? { defaultControls: controls } : {}), ...(sourceWeights ? { sourceWeights } : {}), ...(starCatalogue ? { starCatalogue } : {}), ...(observedStars ? { observedStars } : {}), ...(targetControls ? { targetControls } : {}), ...(emissionWindow ? { emissionWindow } : {}) };
+}
+export function readCompilerEmissionWindow(v: unknown): CompilerEmissionWindow {
+  if (!jointRecord(v) || Object.keys(v).some(key => !['sourceId', 'featherArcsec'].includes(key)) ||
+      typeof v.sourceId !== 'string' || !/^[a-z0-9][a-z0-9-]{0,95}$/.test(v.sourceId) || !range(v.featherArcsec, 0, 3600))
+    throw new TypeError('Invalid compiler emission window.');
+  return { sourceId: v.sourceId, featherArcsec: v.featherArcsec };
 }
 export function readObservedStarCataloguePin(value: unknown): ObservedStarCataloguePin {
   if (!jointRecord(value) || !jointPath(value.path) || !value.path.startsWith('labs/nebula/models/') ||
