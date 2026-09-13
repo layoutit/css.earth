@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/apophis/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'apophis',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/apophis/apophis-directional-sun.webp",
-      "two": "/scenes/apophis/apophis-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/apophis/apophis-shape-surface@2x.webp"
+    "/scenes/apophis/apophis-shape-surface@2x.webp",
+    "/scenes/apophis/apophis-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

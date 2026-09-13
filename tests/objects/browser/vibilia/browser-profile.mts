@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/vibilia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'vibilia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/vibilia/vibilia-directional-sun.webp",
-      "two": "/scenes/vibilia/vibilia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/vibilia/vibilia-shape-surface@2x.webp"
+    "/scenes/vibilia/vibilia-shape-surface@2x.webp",
+    "/scenes/vibilia/vibilia-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/mr-spock/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'mr-spock',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/mr-spock/mr-spock-directional-sun.webp",
-      "two": "/scenes/mr-spock/mr-spock-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/mr-spock/mr-spock-shape-surface@2x.webp"
+    "/scenes/mr-spock/mr-spock-shape-surface@2x.webp",
+    "/scenes/mr-spock/mr-spock-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

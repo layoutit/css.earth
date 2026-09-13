@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/betulia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'betulia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/betulia/betulia-directional-sun.webp",
-      "two": "/scenes/betulia/betulia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/betulia/betulia-shape-surface@2x.webp"
+    "/scenes/betulia/betulia-shape-surface@2x.webp",
+    "/scenes/betulia/betulia-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

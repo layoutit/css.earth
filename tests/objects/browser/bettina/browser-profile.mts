@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/bettina/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'bettina',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/bettina/bettina-directional-sun.webp",
-      "two": "/scenes/bettina/bettina-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/bettina/bettina-shape-surface@2x.webp"
+    "/scenes/bettina/bettina-shape-surface@2x.webp",
+    "/scenes/bettina/bettina-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

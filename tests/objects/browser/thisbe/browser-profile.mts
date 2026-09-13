@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/thisbe/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'thisbe',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/thisbe/thisbe-directional-sun.webp",
-      "two": "/scenes/thisbe/thisbe-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/thisbe/thisbe-shape-surface@2x.webp"
+    "/scenes/thisbe/thisbe-shape-surface@2x.webp",
+    "/scenes/thisbe/thisbe-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

@@ -16,8 +16,7 @@
     "fixedMaterial": "saturn-fixed-material.webp",
     "orbitMaterial": "saturn-orbit-material.webp",
     "interiorAtmosphere": "saturn-interior-atmosphere.webp",
-    "weather": "saturn-weather.webp",
-    "rings": "saturn-rings.webp"
+    "weather": "saturn-weather.webp"
   },
   "parameters": {
     "defaultLensId": "normal",
@@ -44,8 +43,7 @@
     "planetOrbitMaterialDefaultTextureUrl": "/scenes/saturn/saturn-orbit-material-default.webp",
     "interiorAtmosphereTextureUrl": "/scenes/saturn/saturn-interior-atmosphere.webp",
     "planetWeatherTextureUrl": "/scenes/saturn/saturn-weather.webp",
-    "ringTextureUrl": "/scenes/saturn/saturn-rings.webp",
-    "ringTexture_2xUrl": "/scenes/saturn/saturn-rings@2x.webp",
+    "ringTextureUrl": "/scenes/saturn/saturn-rings@2x.webp",
     "ringShadowTextureUrl": "/scenes/saturn/saturn-ring-shadow.webp",
     "ringShadowFootprintBlurSigma": 6,
     "planetSourceTextureWidth": 2880,

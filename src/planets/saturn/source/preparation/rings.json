@@ -43,16 +43,11 @@
     {
       "kind": "observed-radial-profile",
       "size": 2048,
-      "densities": [
-        1,
-        2
-      ],
-      "densityMode": "independent",
       "encoding": {
         "lossless": true,
         "effort": 6
       },
-      "output": "saturn-rings{suffix}.webp",
+      "output": "saturn-rings@2x.webp",
       "bounds": [
         66900,
         140612
@@ -137,10 +132,7 @@
         }
       ],
       "readability": {
-        "minimumPixels": {
-          "1": 4,
-          "2": 6
-        },
+        "minimumPixels": 6,
         "alphaGain": 1.8,
         "features": [
           {
@@ -385,7 +377,7 @@
             }
           ],
           "outerGain": 0.9,
-          "output": "saturn-rings-ultraviolet{suffix}.webp",
+          "output": "saturn-rings-ultraviolet@2x.webp",
           "encoding": {
             "quality": 96,
             "alphaQuality": 100,
@@ -444,7 +436,7 @@
             }
           ],
           "outerGain": 0.811,
-          "output": "saturn-rings-methane{suffix}.webp",
+          "output": "saturn-rings-methane@2x.webp",
           "encoding": {
             "quality": 96,
             "alphaQuality": 100,
@@ -503,7 +495,7 @@
             }
           ],
           "outerGain": 0.9,
-          "output": "saturn-rings-thermal{suffix}.webp",
+          "output": "saturn-rings-thermal@2x.webp",
           "encoding": {
             "quality": 96,
             "alphaQuality": 100,

@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/hedda/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'hedda',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/hedda/hedda-directional-sun.webp",
-      "two": "/scenes/hedda/hedda-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/hedda/hedda-shape-surface@2x.webp"
+    "/scenes/hedda/hedda-shape-surface@2x.webp",
+    "/scenes/hedda/hedda-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

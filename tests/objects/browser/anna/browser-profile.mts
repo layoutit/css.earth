@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/anna/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'anna',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/anna/anna-directional-sun.webp",
-      "two": "/scenes/anna/anna-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/anna/anna-shape-surface@2x.webp"
+    "/scenes/anna/anna-shape-surface@2x.webp",
+    "/scenes/anna/anna-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

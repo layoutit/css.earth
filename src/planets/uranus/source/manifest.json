@@ -368,8 +368,8 @@
     {
       "id": "uranus-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 15395,
-      "expectedSha256": "e6934925bc2eded248d70f7baf6f06ad63068458489191bb76e886a804404197",
+      "expectedBytes": 15422,
+      "expectedSha256": "af6f4c21662fc6202d39598b08bceb4b915cc3fd7a25cf2b60b95dda6ec357fc",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -465,8 +465,8 @@
     {
       "id": "uranus-authored-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1839,
-      "expectedSha256": "8ac51ff107b0f06444661f53134c4c001c59b08bb99357100b9ce6d67cd8f759",
+      "expectedBytes": 1851,
+      "expectedSha256": "26237d46a1dafec81d3f78688a90c0935ab595701feda2db8ceb088a09c25975",
       "origin": "Checked oblate tessellation and retained texture presentation conventions",
       "credit": "cssEarth",
       "license": "Project-authored specification",

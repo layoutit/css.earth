@@ -5,27 +5,12 @@ export const browserProfile = createObjectBrowserProfile({
   id: "jupiter", controls: objectControls,
   cameraFields: ["pitch", "controlPitch", "controlYaw", "zoom"],
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({
-        one: "/scenes/jupiter/jupiter-surface.webp",
-        two: "/scenes/jupiter/jupiter-surface@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/jupiter/jupiter-poles.webp",
-        two: "/scenes/jupiter/jupiter-poles@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/jupiter/jupiter-rings.webp",
-        two: "/scenes/jupiter/jupiter-rings@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/jupiter/jupiter-starfield-front.webp",
-        two: "/scenes/jupiter/jupiter-starfield-front@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/jupiter/jupiter-directional-sun.webp",
-        two: "/scenes/jupiter/jupiter-directional-sun@2x.webp",
-      }),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/jupiter/jupiter-surface@2x.webp",
+      "/scenes/jupiter/jupiter-poles@2x.webp",
+      "/scenes/jupiter/jupiter-rings@2x.webp",
+      "/scenes/jupiter/jupiter-starfield-front@2x.webp",
+      "/scenes/jupiter/jupiter-directional-sun@2x.webp",
     ]),
     lensRace: Object.freeze({
       defaultId: "normal",

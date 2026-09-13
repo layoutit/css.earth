@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/velleda/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'velleda',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/velleda/velleda-directional-sun.webp",
-      "two": "/scenes/velleda/velleda-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/velleda/velleda-shape-surface@2x.webp"
+    "/scenes/velleda/velleda-shape-surface@2x.webp",
+    "/scenes/velleda/velleda-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

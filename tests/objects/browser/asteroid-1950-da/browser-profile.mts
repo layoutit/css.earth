@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/asteroid-1950-da/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'asteroid-1950-da',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/asteroid-1950-da/asteroid-1950-da-directional-sun.webp",
-      "two": "/scenes/asteroid-1950-da/asteroid-1950-da-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/asteroid-1950-da/asteroid-1950-da-shape-surface@2x.webp"
+    "/scenes/asteroid-1950-da/asteroid-1950-da-shape-surface@2x.webp",
+    "/scenes/asteroid-1950-da/asteroid-1950-da-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

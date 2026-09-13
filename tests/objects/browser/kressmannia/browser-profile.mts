@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/kressmannia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'kressmannia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/kressmannia/kressmannia-directional-sun.webp",
-      "two": "/scenes/kressmannia/kressmannia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/kressmannia/kressmannia-shape-surface@2x.webp"
+    "/scenes/kressmannia/kressmannia-shape-surface@2x.webp",
+    "/scenes/kressmannia/kressmannia-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

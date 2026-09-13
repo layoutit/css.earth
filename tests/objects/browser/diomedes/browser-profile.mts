@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/diomedes/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'diomedes',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/diomedes/diomedes-directional-sun.webp",
-      "two": "/scenes/diomedes/diomedes-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/diomedes/diomedes-shape-surface@2x.webp"
+    "/scenes/diomedes/diomedes-shape-surface@2x.webp",
+    "/scenes/diomedes/diomedes-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

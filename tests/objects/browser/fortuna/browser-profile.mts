@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/fortuna/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'fortuna',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/fortuna/fortuna-directional-sun.webp",
-      "two": "/scenes/fortuna/fortuna-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/fortuna/fortuna-shape-surface@2x.webp"
+    "/scenes/fortuna/fortuna-shape-surface@2x.webp",
+    "/scenes/fortuna/fortuna-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

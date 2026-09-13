@@ -3,8 +3,7 @@ import objectControls from '../../../../src/planets/comet-19p/prepared/controls.
 
 export const browserProfile = createObjectBrowserProfile({ id: 'comet-19p', controls: objectControls,
   audit: {
-    preparedAssetPairs: [{ one: '/scenes/comet-19p/comet-19p-directional-sun.webp', two: '/scenes/comet-19p/comet-19p-directional-sun@2x.webp' }],
-    canonicalPreparedAssets: ['/scenes/comet-19p/comet-19p-micas-surface@2x.webp', '/scenes/comet-19p/comet-19p-lighting.webp'],
+    canonicalPreparedAssets: ['/scenes/comet-19p/comet-19p-micas-surface@2x.webp', '/scenes/comet-19p/comet-19p-lighting.webp', '/scenes/comet-19p/comet-19p-directional-sun@2x.webp'],
     lensRace: { defaultId: 'micas', slowId: 'dlr', winnerId: 'micas',
       slowAsset: '/scenes/comet-19p/comet-19p-dlr-surface@2x.webp', preReadyDisabled: false },
     retained: { lensIds: ['micas', 'usgs', 'dlr', 'height', 'difference'], speedClicks: 0, allowedMountSelectors: [] },

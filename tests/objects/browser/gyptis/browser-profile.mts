@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/gyptis/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'gyptis',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/gyptis/gyptis-directional-sun.webp",
-      "two": "/scenes/gyptis/gyptis-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/gyptis/gyptis-shape-surface@2x.webp"
+    "/scenes/gyptis/gyptis-shape-surface@2x.webp",
+    "/scenes/gyptis/gyptis-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

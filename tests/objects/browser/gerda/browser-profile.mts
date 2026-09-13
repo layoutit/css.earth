@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/gerda/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'gerda',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/gerda/gerda-directional-sun.webp",
-      "two": "/scenes/gerda/gerda-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/gerda/gerda-shape-surface@2x.webp"
+    "/scenes/gerda/gerda-shape-surface@2x.webp",
+    "/scenes/gerda/gerda-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

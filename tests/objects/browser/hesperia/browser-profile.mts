@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/hesperia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'hesperia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/hesperia/hesperia-directional-sun.webp",
-      "two": "/scenes/hesperia/hesperia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/hesperia/hesperia-shape-surface@2x.webp"
+    "/scenes/hesperia/hesperia-shape-surface@2x.webp",
+    "/scenes/hesperia/hesperia-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

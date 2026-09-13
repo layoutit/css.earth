@@ -3,6 +3,7 @@
   "namespace": "saturn",
   "publicPrefix": "/scenes/saturn/",
   "parameters": {
+    "layoutRingMinimumPixels": 4,
     "mainRingMotionTextureSize": 1024,
     "mainRingRasterizedBands": [
       "c",

@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/nausikaa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'nausikaa',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/nausikaa/nausikaa-directional-sun.webp",
-      "two": "/scenes/nausikaa/nausikaa-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/nausikaa/nausikaa-shape-surface@2x.webp"
+    "/scenes/nausikaa/nausikaa-shape-surface@2x.webp",
+    "/scenes/nausikaa/nausikaa-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

@@ -10,7 +10,7 @@
   "latitudeSegments": 20,
   "longitudeSegments": 40,
   "surface": {
-    "url": "/scenes/neptune/neptune-surface-normal.webp",
+    "url": "/scenes/neptune/neptune-surface-normal@2x.webp",
     "width": 2880,
     "height": 1440,
     "gutter": 18,
@@ -61,7 +61,7 @@
       "id": "rings",
       "radius": 559.0881925375545,
       "z": 0,
-      "url": "/scenes/neptune/neptune-rings.webp",
+      "url": "/scenes/neptune/neptune-rings@2x.webp",
       "size": 1024,
       "fitToSize": false,
       "color": "#8caeca"

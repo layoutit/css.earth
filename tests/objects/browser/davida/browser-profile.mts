@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/davida/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'davida',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/davida/davida-directional-sun.webp",
-      "two": "/scenes/davida/davida-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/davida/davida-shape-surface@2x.webp"
+    "/scenes/davida/davida-shape-surface@2x.webp",
+    "/scenes/davida/davida-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

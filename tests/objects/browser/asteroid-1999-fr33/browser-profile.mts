@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/asteroid-1999-fr33/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'asteroid-1999-fr33',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-directional-sun.webp",
-      "two": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-surface@2x.webp"
+    "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-surface@2x.webp",
+    "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/silvretta/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'silvretta',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/silvretta/silvretta-directional-sun.webp",
-      "two": "/scenes/silvretta/silvretta-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/silvretta/silvretta-shape-surface@2x.webp"
+    "/scenes/silvretta/silvretta-shape-surface@2x.webp",
+    "/scenes/silvretta/silvretta-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

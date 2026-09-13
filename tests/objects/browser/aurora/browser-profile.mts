@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/aurora/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'aurora',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/aurora/aurora-directional-sun.webp",
-      "two": "/scenes/aurora/aurora-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/aurora/aurora-shape-surface@2x.webp"
+    "/scenes/aurora/aurora-shape-surface@2x.webp",
+    "/scenes/aurora/aurora-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

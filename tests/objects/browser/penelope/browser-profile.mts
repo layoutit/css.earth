@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/penelope/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'penelope',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/penelope/penelope-directional-sun.webp",
-      "two": "/scenes/penelope/penelope-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/penelope/penelope-shape-surface@2x.webp"
+    "/scenes/penelope/penelope-shape-surface@2x.webp",
+    "/scenes/penelope/penelope-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

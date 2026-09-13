@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/nereus/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'nereus',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/nereus/nereus-directional-sun.webp",
-      "two": "/scenes/nereus/nereus-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/nereus/nereus-shape-surface@2x.webp"
+    "/scenes/nereus/nereus-shape-surface@2x.webp",
+    "/scenes/nereus/nereus-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

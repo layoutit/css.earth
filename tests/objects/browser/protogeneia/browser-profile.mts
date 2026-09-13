@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/protogeneia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'protogeneia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/protogeneia/protogeneia-directional-sun.webp",
-      "two": "/scenes/protogeneia/protogeneia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/protogeneia/protogeneia-shape-surface@2x.webp"
+    "/scenes/protogeneia/protogeneia-shape-surface@2x.webp",
+    "/scenes/protogeneia/protogeneia-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

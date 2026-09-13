@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/massalia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'massalia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/massalia/massalia-directional-sun.webp",
-      "two": "/scenes/massalia/massalia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/massalia/massalia-shape-surface@2x.webp"
+    "/scenes/massalia/massalia-shape-surface@2x.webp",
+    "/scenes/massalia/massalia-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

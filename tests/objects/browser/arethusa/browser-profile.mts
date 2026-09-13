@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/arethusa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'arethusa',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/arethusa/arethusa-directional-sun.webp",
-      "two": "/scenes/arethusa/arethusa-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/arethusa/arethusa-shape-surface@2x.webp"
+    "/scenes/arethusa/arethusa-shape-surface@2x.webp",
+    "/scenes/arethusa/arethusa-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

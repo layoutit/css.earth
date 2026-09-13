@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/musa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'musa',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/musa/musa-directional-sun.webp",
-      "two": "/scenes/musa/musa-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/musa/musa-shape-surface@2x.webp"
+    "/scenes/musa/musa-shape-surface@2x.webp",
+    "/scenes/musa/musa-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

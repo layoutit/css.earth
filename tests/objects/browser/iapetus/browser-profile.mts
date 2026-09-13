@@ -5,11 +5,11 @@ const objectControls = await readPreparedFixture("iapetus", "controls");
 export const browserProfile = createObjectBrowserProfile({
   id: "iapetus", controls: objectControls,
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({ one: "/scenes/iapetus/iapetus-normal.webp", two: "/scenes/iapetus/iapetus-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/iapetus/iapetus-poles-normal.webp", two: "/scenes/iapetus/iapetus-poles-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/iapetus/iapetus-starfield-front.webp", two: "/scenes/iapetus/iapetus-starfield-front@2x.webp" }),
-      Object.freeze({ one: "/scenes/iapetus/iapetus-directional-sun.webp", two: "/scenes/iapetus/iapetus-directional-sun@2x.webp" }),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/iapetus/iapetus-normal@2x.webp",
+      "/scenes/iapetus/iapetus-poles-normal@2x.webp",
+      "/scenes/iapetus/iapetus-starfield-front@2x.webp",
+      "/scenes/iapetus/iapetus-directional-sun@2x.webp",
     ]),
     lensRace: Object.freeze({
       defaultId: "normal",

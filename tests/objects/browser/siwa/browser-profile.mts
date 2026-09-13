@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/siwa/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'siwa',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/siwa/siwa-directional-sun.webp",
-      "two": "/scenes/siwa/siwa-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/siwa/siwa-shape-surface@2x.webp"
+    "/scenes/siwa/siwa-shape-surface@2x.webp",
+    "/scenes/siwa/siwa-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

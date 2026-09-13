@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/cerberus/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'cerberus',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/cerberus/cerberus-directional-sun.webp",
-      "two": "/scenes/cerberus/cerberus-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/cerberus/cerberus-shape-surface@2x.webp"
+    "/scenes/cerberus/cerberus-shape-surface@2x.webp",
+    "/scenes/cerberus/cerberus-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

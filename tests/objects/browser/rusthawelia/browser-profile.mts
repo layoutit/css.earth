@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/rusthawelia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'rusthawelia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/rusthawelia/rusthawelia-directional-sun.webp",
-      "two": "/scenes/rusthawelia/rusthawelia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/rusthawelia/rusthawelia-shape-surface@2x.webp"
+    "/scenes/rusthawelia/rusthawelia-shape-surface@2x.webp",
+    "/scenes/rusthawelia/rusthawelia-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

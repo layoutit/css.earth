@@ -1,14 +1,9 @@
 import {createObjectBrowserProfile} from '../../../../site/test/object-browser-profile.mts';
 import controls from '../../../../src/planets/thalia/prepared/controls.json' with {type:'json'};
 export const browserProfile=createObjectBrowserProfile({id:'thalia',controls,audit:{
-  "preparedAssetPairs": [
-    {
-      "one": "/scenes/thalia/thalia-directional-sun.webp",
-      "two": "/scenes/thalia/thalia-directional-sun@2x.webp"
-    }
-  ],
   "canonicalPreparedAssets": [
-    "/scenes/thalia/thalia-shape-surface@2x.webp"
+    "/scenes/thalia/thalia-shape-surface@2x.webp",
+    "/scenes/thalia/thalia-directional-sun@2x.webp"
   ],
   "retained": {
     "lensIds": [

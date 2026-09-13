@@ -5,23 +5,11 @@ const objectControls = await readPreparedFixture("moon", "controls");
 export const browserProfile = createObjectBrowserProfile({
   id: "moon", controls: objectControls,
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({
-        one: "/scenes/moon/moon-surface.webp",
-        two: "/scenes/moon/moon-surface@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/moon/moon-poles-surface.webp",
-        two: "/scenes/moon/moon-poles-surface@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/moon/moon-starfield-front.webp",
-        two: "/scenes/moon/moon-starfield-front@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/moon/moon-directional-sun.webp",
-        two: "/scenes/moon/moon-directional-sun@2x.webp",
-      }),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/moon/moon-surface@2x.webp",
+      "/scenes/moon/moon-poles-surface@2x.webp",
+      "/scenes/moon/moon-starfield-front@2x.webp",
+      "/scenes/moon/moon-directional-sun@2x.webp",
     ]),
     lensRace: Object.freeze({
       defaultId: "surface",
