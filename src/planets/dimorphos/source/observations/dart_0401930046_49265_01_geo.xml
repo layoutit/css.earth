@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model 
+    href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.sch" 
+	  schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model
+    href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1B00.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model
+    href="https://pds.nasa.gov/pds4/geom/v1/PDS4_GEOM_1E00_1810.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model 
+	  href="https://pds.nasa.gov/pds4/mission/dart/v1/PDS4_DART_1E00_1100.sch" 
+	  schematypens="http://purl.oclc.org/dsdl/schematron"?>    
+<Product_Observational 
+	xmlns="http://pds.nasa.gov/pds4/pds/v1" 
+    xmlns:dart="http://pds.nasa.gov/pds4/mission/dart/v1"
+	xmlns:disp="http://pds.nasa.gov/pds4/disp/v1" 
+	xmlns:geom="http://pds.nasa.gov/pds4/geom/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1     
+                        https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1E00.xsd
+                        http://pds.nasa.gov/pds4/mission/dart/v1 
+                        https://pds.nasa.gov/pds4/mission/dart/v1/PDS4_DART_1E00_1100.xsd
+                        http://pds.nasa.gov/pds4/disp/v1
+                        https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1B00.xsd
+                        http://pds.nasa.gov/pds4/geom/v1
+                        https://pds.nasa.gov/pds4/geom/v1/PDS4_GEOM_1E00_1810.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:dart:data_dracoddp:dart_0401930046_49265_01_geo</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>Image backplanes dart_0401930046_49265_01_geo from the Didymos Reconnaissance and Asteroid Camera for OpNav (DRACO) instrument</title>
+    <information_model_version>1.14.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+  <Modification_History>
+      <Modification_Detail>
+        <modification_date>2023-06-16</modification_date>
+        <version_id>1.0</version_id>
+        <description>Final Version</description>
+      </Modification_Detail>
+  </Modification_History>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>2022-09-26T23:14:19.477Z</start_date_time>
+      <stop_date_time>2022-09-26T23:14:19.481986Z</stop_date_time>
+    </Time_Coordinates>
+    <Investigation_Area>
+      <name>Double Asteroid Redirection Test</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.double_asteroid_redirection_test</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+       <Observing_System_Component>
+        <name>DART</name>
+        <type>Host</type>
+        <description>Double Asteroid Redirection Test Spacecraft</description>
+       <Internal_Reference>
+           <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.dart</lid_reference>
+           <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>DRACO</name>
+        <type>Instrument</type>
+        <description>Didymos Reconnaissance and Asteroid Camera for OpNav.
+          A narrow field of view imager on NASA’s Double Asteroid Redirection Test (DART) spacecraft</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:dart.draco</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>(65803) Didymos I (Dimorphos)</name>
+      <type>Satellite</type>
+      <Internal_Reference>
+         <lid_reference>urn:nasa:pds:context:target:satellite.65803_didymos.dimorphos</lid_reference>
+         <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+    <Mission_Area>
+      <dart:DART_Parameters>
+        <dart:mission_phase>final</dart:mission_phase>
+        <dart:Time>
+            <dart:acquisition_time>401930046:44330</dart:acquisition_time>
+        	<dart:soc_acquisition_time>0401930046:44330</dart:soc_acquisition_time>
+        </dart:Time>
+        <dart:DRACO_Instrument_Attributes>
+            <dart:imaging_mode>GLOBAL</dart:imaging_mode>
+            <dart:gain>1X</dart:gain>
+
+          <dart:bad_image>false</dart:bad_image>
+          <dart:observation_type>TERMINAL</dart:observation_type>
+          <dart:lineread unit="microseconds">87.4666</dart:lineread>
+          <dart:pix_delay unit="microseconds">0.0333</dart:pix_delay>
+            <dart:exposure_time unit="s">4.985619E-0003</dart:exposure_time>
+            <dart:binning>ON</dart:binning>
+            <dart:window2_x_start>278</dart:window2_x_start>
+            <dart:window2_y_start>406</dart:window2_y_start>
+            <dart:window2_x_end>790</dart:window2_x_end>
+            <dart:window2_y_end>918</dart:window2_y_end>
+            <dart:onboard_cal>ON</dart:onboard_cal>
+
+          <dart:calibration_file>DRACO_calibration_20220428.mat</dart:calibration_file>
+            <dart:badpix_invalidation_mode>USE</dart:badpix_invalidation_mode>
+            <dart:detector1_temp unit="degC">-2.0079325731262713E0001</dart:detector1_temp>
+            <dart:detector2_temp unit="degC">-1.92117005453228E0001</dart:detector2_temp>
+            <dart:fpe_temp unit="degC">4.064740000000003E0001</dart:fpe_temp>
+            <dart:current_18vd_supply unit="mA">2.3806799999999998E0002</dart:current_18vd_supply>
+            <dart:current_33va_supply unit="mA">2.58715E0002</dart:current_33va_supply>
+            <dart:current_33vd_supply unit="mA">5.758E0000</dart:current_33vd_supply>
+            <dart:current_analog_reset_supply unit="mA">5.54E0000</dart:current_analog_reset_supply>
+        </dart:DRACO_Instrument_Attributes>
+        <dart:DRACO_Data_Processing_Information>
+          <dart:undo_onboard_cal>UNDONE</dart:undo_onboard_cal>
+          <dart:bias_subtraction>PERFORM</dart:bias_subtraction>
+          <dart:dark_subtraction>PERFORM</dart:dark_subtraction>
+          <dart:flatfield>PERFORM</dart:flatfield>
+          <dart:radiance_conversion>PERFORM</dart:radiance_conversion>
+          <dart:ioverf_conversion>PERFORM</dart:ioverf_conversion>
+        </dart:DRACO_Data_Processing_Information>
+      </dart:DART_Parameters>
+    </Mission_Area>
+    <Discipline_Area>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>ioverf</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>xcoord</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>ycoord</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>zcoord</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>latitude</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>longitude</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>radius</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>incidence</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>emission</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>phase</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>horizpixscale</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>vertpixscale</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>slope</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>elevation</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>gravacc</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>gravpot</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <geom:Geometry>
+        <geom:SPICE_Kernel_Files>
+          
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>LSK</geom:kernel_type>
+            <geom:spice_kernel_file_name>naif0012.tls</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>PCK</geom:kernel_type>
+            <geom:spice_kernel_file_name>pck00010.tpc</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>PCK</geom:kernel_type>
+            <geom:spice_kernel_file_name>didymos_system_12.tpc</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>FK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dart_009.tf</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>FK</geom:kernel_type>
+            <geom:spice_kernel_file_name>didymos_system_005.tf</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>IK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dart_draco_003.ti</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SCLK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dart_sclk_0204.tsc</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SPK</geom:kernel_type>
+            <geom:spice_kernel_file_name>jup344.bsp</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SPK</geom:kernel_type>
+            <geom:spice_kernel_file_name>jup365.bsp</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SPK</geom:kernel_type>
+            <geom:spice_kernel_file_name>de430.bsp</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SPK</geom:kernel_type>
+            <geom:spice_kernel_file_name>didymos_barycenter_s205_v01.bsp</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SPK</geom:kernel_type>
+            <geom:spice_kernel_file_name>didymos_system_s527_v01.bsp</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SPK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dart_struct_v03.bsp</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Mixed</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SPK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dart_2021_328_2022_091_rec_v01.bsp</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Mixed</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SPK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dart_2022_091_2022_231_rec_v01.bsp</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Mixed</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SPK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dart_2022_231_2022_269_rec_v03.bsp</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Mixed</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SPK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dart_2022_269_2022_269_rec_v03.bsp</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Mixed</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SPK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dart_2022_269_2022_269_spc_v03.bsp</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Mixed</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>SPK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dart_2022_269_2099_001_imp_v02.bsp</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Mixed</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>CK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dart_2022_246_2022_269_rec_v02.bc</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>CK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dart_2022_269_2022_269_spc_v03.bc</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Reconstructed</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+          <geom:SPICE_Kernel_Identification>
+            <geom:kernel_type>DSK</geom:kernel_type>
+            <geom:spice_kernel_file_name>dimorphos_g_00243mm_spc_0000n00000_v004.bds</geom:spice_kernel_file_name>
+            <geom:kernel_provenance>Provenance Not Applicable</geom:kernel_provenance>
+          </geom:SPICE_Kernel_Identification>
+        </geom:SPICE_Kernel_Files>
+      </geom:Geometry>
+    </Discipline_Area>
+  </Observation_Area>
+  <Reference_List>
+    <Internal_Reference>
+      <lid_reference>urn:nasa:pds:dart:document_draco:jhuapl_dart_draco_uncalibrated_calibrated_sis</lid_reference>
+      <reference_type>data_to_document</reference_type>
+      <comment>DART DRACO Uncalibrated, Calibrated SIS document which describes the data
+         products in this collection.</comment>
+    </Internal_Reference>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>dart_0401930046_49265_01_geo.fits</file_name>
+      <comment>DRACO derived image file</comment>
+    </File>
+    <Header>
+      <offset unit="byte">0</offset>
+      <object_length unit="byte">23040</object_length>
+      <parsing_standard_id>FITS 3.0</parsing_standard_id>
+      <description>Fits header. Contains metadata about the I/F image and backplanes contained within the data cube. </description>
+    </Header>
+    <Array_2D_Image>
+      <local_identifier>ioverf</local_identifier>
+      <offset unit="byte">23040</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>I/F value of calibrated draco image</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <missing_constant>1E10</missing_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+        <high_instrument_saturation>1E09</high_instrument_saturation>
+      </Special_Constants>
+    </Array_2D_Image>
+    <Array_2D_Image>
+      <local_identifier>xcoord</local_identifier>
+      <offset unit="byte">4217344</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>X coordinate of pixel center surface intercept in body-fixed reference frame</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>km</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>
+    <Array_2D_Image>
+      <local_identifier>ycoord</local_identifier>
+      <offset unit="byte">8411648</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>Y coordinate of pixel center surface intercept in body-fixed reference frame</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>km</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>
+    <Array_2D_Image>
+      <local_identifier>zcoord</local_identifier>
+      <offset unit="byte">12605952</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>Z coordinate of pixel center surface intercept in body-fixed reference frame</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>km</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>
+    <Array_2D_Image>
+      <local_identifier>latitude</local_identifier>
+      <offset unit="byte">16800256</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>Planetocentric latitude of pixel center</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>deg</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>  
+    <Array_2D_Image>
+      <local_identifier>longitude</local_identifier>
+      <offset unit="byte">20994560</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>Planetocentric East longitude of pixel center</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>deg</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>  
+    <Array_2D_Image>
+      <local_identifier>radius</local_identifier>
+      <offset unit="byte">25188864</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>Radial distance from asteroid center to pixel center</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>km</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>  
+    <Array_2D_Image>
+      <local_identifier>incidence</local_identifier>
+      <offset unit="byte">29383168</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>Solar incidence angle</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>deg</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>  
+    <Array_2D_Image>
+      <local_identifier>emission</local_identifier>
+      <offset unit="byte">33577472</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>Emission angle</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>deg</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>  
+    <Array_2D_Image>
+      <local_identifier>phase</local_identifier>
+      <offset unit="byte">37771776</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>Solar phase angle</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>deg</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>  
+    <Array_2D_Image>
+      <local_identifier>horizpixscale</local_identifier>
+      <offset unit="byte">41966080</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>horizontal pixel scale</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>m</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>  
+    <Array_2D_Image>
+      <local_identifier>vertpixscale</local_identifier>
+      <offset unit="byte">46160384</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>vertical pixel scale</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>m</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>  
+    <Array_2D_Image>
+      <local_identifier>slope</local_identifier>
+      <offset unit="byte">50354688</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>average surface slope relative to gravity</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>deg</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>      
+    <Array_2D_Image>
+      <local_identifier>elevation</local_identifier>
+      <offset unit="byte">54548992</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>average elevation relative to gravity</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>m</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>      
+    <Array_2D_Image>
+      <local_identifier>gravacc</local_identifier>
+      <offset unit="byte">58743296</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>average gravitational acceleration</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>m/s**2</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>      
+    <Array_2D_Image>
+      <local_identifier>gravpot</local_identifier>
+      <offset unit="byte">62937600</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>average gravitational potential</description>
+      <Element_Array>
+        <data_type>IEEE754MSBSingle</data_type>
+        <unit>J/kg</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>1024</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1024</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <invalid_constant>-999</invalid_constant>
+        <not_applicable_constant>-1E10</not_applicable_constant>
+      </Special_Constants>
+    </Array_2D_Image>      
+  </File_Area_Observational>
+</Product_Observational>

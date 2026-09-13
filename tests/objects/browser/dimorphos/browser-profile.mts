@@ -15,6 +15,7 @@ export const browserProfile=createObjectBrowserProfile({id:'dimorphos',controls,
   "retained": {
     "lensIds": [
       "shape",
+      "draco",
       "elevation",
       "albedo",
       "slope"

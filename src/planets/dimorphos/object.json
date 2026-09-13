@@ -29,6 +29,11 @@
               "material": "lighting"
             },
             {
+              "id": "draco",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "elevation",
               "source": "content",
               "material": "lighting"
@@ -62,7 +67,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "0f0a02c055da9d1e62184cd92e5f4e63a85d1db97d463a3d45eaedc4d5aff453"
+          "sha256": "84f36e5501c656e30e3754dca542badc0c6fc0723ff990d006047642a40b6803"
         },
         {
           "id": "rotation",
@@ -72,7 +77,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "0f4ac1a0365de8455d889f20449e977414ba0e9da9a8019a06faefdd33f484ce"
+          "sha256": "32cc560268b159e5ae8494a556de8f61a6961696cf77e1f545c84a64ef1a523d"
         },
         {
           "id": "title",
@@ -87,12 +92,12 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "c249750d7b119e50ca2de1e3561c8ccb08a4f1db7519787a7aa1727ba086eb30"
+          "sha256": "6b6d27e3edef2155e8d0986567410aed553e0342ee48af918d0f1ab6d5f5df4b"
         },
         {
           "id": "features",
           "path": "source/preparation/features.json",
-          "sha256": "62621f87e15f29b0e0e081826b60c070c30c4c35ad939d802a4a27541d1e2dd6"
+          "sha256": "c93be12a666cd7216804b2e6c2c59a3bc1385a1f63ba92f5a22f51bfe7bd48a2"
         }
       ],
       "features": {

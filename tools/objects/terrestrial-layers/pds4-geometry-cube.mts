@@ -156,13 +156,33 @@ export function decodePds4GeometryCube(bytes: Buffer, xml: string, { fileName, c
     return out;
   };
   const plane = Object.fromEntries(ROLES.map(name => [name, converted(name)])) as Record<Role, Float32Array>;
+  // Some products include intercepts in more than one body's own frame. A
+  // declared native geometry plane can separate them before camera fitting.
+  // This never selects by image brightness or relaxes the later mesh checks.
+  let selected: Uint8Array | undefined;
+  const selection = cube.geometrySelection;
+  if (selection) {
+    const selector = byId.get(selection.plane);
+    if (!selector || selector.id === roles.image.id || selector.unit !== selection.unit ||
+        selector.width !== width || selector.height !== height || !selection.interpretation.trim() ||
+        !Number.isFinite(selection.minimum) || !Number.isFinite(selection.maximum) || selection.minimum >= selection.maximum) {
+      throw new Error('Invalid geometry cube selection plane, units or bounds.');
+    }
+    const values = readPlane(bytes, selector), exclude = [...gaps(selector), ...saturation(selector)];
+    selected = Uint8Array.from(values, value => Number.isFinite(value) && !exclude.includes(value) &&
+      (selector.constants.valid_minimum === undefined || value >= selector.constants.valid_minimum) &&
+      (selector.constants.valid_maximum === undefined || value <= selector.constants.valid_maximum) &&
+      value >= selection.minimum && value <= selection.maximum ? 1 : 0);
+  }
   const xyz = (i: number) => [plane.x[i], plane.y[i], plane.z[i]];
   /** Geometry-backed footprint: every declared plane usable at the pixel. Image saturation keeps its geometry but fails quality. */
-  const valid = (i: number) => Number.isInteger(i) && i >= 0 && i < count && ROLES.every(name => Number.isFinite(plane[name][i]));
+  const geometryValid = (i: number) => Number.isInteger(i) && i >= 0 && i < count && ROLES.every(name => Number.isFinite(plane[name][i]));
+  const valid = (i: number) => geometryValid(i) && (selected === undefined || selected[i] === 1);
   const acceptPixel = (i: number) => !policy.image.saturation.includes(raw.image[i]);
 
-  let geometryPixels = 0, saturatedPixels = 0, best = -1;
+  let geometryPixels = 0, saturatedPixels = 0, best = -1, excludedGeometryPixels = 0;
   const phases: number[] = [];
+  if (selected) for (let i = 0; i < count; i++) if (geometryValid(i) && !valid(i)) excludedGeometryPixels++;
   for (let i = 0; i < count; i++) if (valid(i)) {
     geometryPixels++;
     if (!acceptPixel(i)) saturatedPixels++;
@@ -196,10 +216,13 @@ export function decodePds4GeometryCube(bytes: Buffer, xml: string, { fileName, c
     specialConstants: Object.fromEntries(ROLES.map(name => [name, roles[name].constants])),
     flagDefinition: 'Geometry-backed pixels need finite intercepts, angles and image values outside every gap and range constant of their plane; image saturation constants keep geometry but are rejected as quality.',
     geometryPixels, saturatedPixels, medianPhaseDegrees: median(phases) * 180 / Math.PI,
+    ...(selection ? { geometrySelection: { ...selection, excludedGeometryPixels } } : {}),
     minimumEmissionDegrees: plane.emission[best] * 180 / Math.PI, nadirPixelFootprintMeters, archivedPixelScaleMedianMeters,
     ...(archivedPixelScaleMedianMeters !== undefined && nadirPixelFootprintMeters ? { archivedPixelScaleRatio: archivedPixelScaleMedianMeters / nadirPixelFootprintMeters,
       archivedPixelScalePolicy: 'Not used for sampling or display; reported against the intercept-derived footprint.' } : {}),
-    geometry: `Archived pixel-centre surface intercepts on ${shapeKernels[0]} from the label's SPICE kernels; the controlled camera is recovered from those pairs and every displayed intersection is re-derived on the retained source mesh.`,
+    geometry: selection
+      ? `Archived pixel-centre intercepts selected by ${selection.plane} in ${selection.unit}: ${selection.interpretation} The label lists ${shapeKernels[0]}; the selected target's model identity is bound separately by the recipe's FITS header checks. Camera holdouts and transfer to the retained source mesh remain required.`
+      : `Archived pixel-centre surface intercepts on ${shapeKernels[0]} from the label's SPICE kernels; the controlled camera is recovered from those pairs and every displayed intersection is re-derived on the retained source mesh.`,
   };
   return { width, height, xyz, valid, acceptPixel, startTime, filter, lid, shapeKernel: shapeKernels[0], header, qualityReport,
     planes: { IMAGE: plane.image, COORDINATE_X_IMAGE: plane.x, COORDINATE_Y_IMAGE: plane.y, COORDINATE_Z_IMAGE: plane.z,

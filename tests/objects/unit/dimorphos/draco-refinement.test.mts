@@ -9,6 +9,7 @@ import { project } from '../../../../tools/objects/terrestrial-layers/osiris-geo
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { requireTerrainMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { loadKernelSet } from '../../../../tools/spice/kernel-set.mts';
+import { parseSpiceCamera } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 
 /**
  * The archived DRACO intercepts give per-pixel truth for the camera, so the
@@ -18,7 +19,8 @@ import { loadKernelSet } from '../../../../tools/spice/kernel-set.mts';
  */
 const root = resolve(import.meta.dirname, '../../../../src/planets/dimorphos/source');
 const config = JSON.parse((await readFile(resolve(root, 'preparation/terrestrial.json'))).toString('utf8'));
-const cubeRecipe = config.raster.surfaceObservations.find((recipe: { id: string }) => recipe.id === 'draco');
+const mosaic = config.raster.surfaceObservations.find((recipe: { id: string }) => recipe.id === 'draco');
+const cubeRecipe = { ...mosaic, ...mosaic.frames.find((frame: { id: string }) => frame.id === 't-minus-11s') };
 const kernels = ['lsk/naif0012.tls', 'pck/pck00010.tpc', 'pck/didymos_system_15.tpc', 'fk/dart_009.tf', 'fk/didymos_system_007.tf', 'ik/dart_draco_003.ti', 'sclk/dart_sclk_0204.tsc',
   'spk/de430.bsp', 'spk/didymos_barycenter_s205_v01.bsp', 'spk/didymos_system_s542_v01.bsp', 'spk/dart_struct_v04.bsp', 'spk/dart_2022_231_2022_269_rec_v03.bsp',
   'spk/dart_2022_269_2022_269_rec_v03.bsp', 'spk/dart_2022_269_2022_269_spc_v04.bsp', 'ck/dart_2022_269_2022_269_spc_v04.bc'].map(path => `spice/${path}`);
@@ -31,7 +33,7 @@ const refinement = { method: 'mesh-limb', maximumCorrectionDegrees: 0.2, maximum
 const name = 'dart_0401930040_12262_01_geo.fits', bytes = await readFile(resolve(root, cubeRecipe.path));
 const cube = decodePds4GeometryCube(bytes, await readFile(resolve(root, cubeRecipe.labelPath), 'utf8'), { fileName: name, cube: cubeRecipe.cube, filter: cubeRecipe.filter });
 const set = await loadKernelSet(kernels.map(path => resolve(root, path)));
-const frame = decodeSpiceCameraFrame(bytes, set, spice, cubeRecipe.filter);
+const frame = decodeSpiceCameraFrame(bytes, set, parseSpiceCamera(spice), cubeRecipe.filter);
 const mesh = requireTerrainMesh(await loadObjShape(resolve(root, config.geometry.radialTerrain.path), config.geometry.radialTerrain.grid));
 
 /** RMS and mean offset of the archived intercepts projected through `matrix`, every 13th on-body pixel. */
