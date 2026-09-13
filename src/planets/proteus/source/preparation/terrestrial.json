@@ -213,10 +213,6 @@
           "maximumGain": 2.5,
           "maximumIncidenceDegrees": 60,
           "maximumEmissionDegrees": 60,
-          "displayMaximum": 0.1,
-          "gamma": 1,
-          "minimumLevel": 1,
-          "maximumLevel": 1,
           "backgroundMaximum": 0.001
         },
         "metadata": {
@@ -233,20 +229,10 @@
           "latitudeDegrees": -27,
           "zoom": 1.1
         },
-        "colorDisplay": {
-          "kind": "band-composite",
-          "inputQuantity": "radiance-factor",
-          "bands": [
-            "GREEN",
-            "BLUE",
-            "VIOLET"
-          ],
-          "displayRange": [
-            0,
-            0.1
-          ],
-          "outputEncoding": "srgb"
-        }
+        "displayRange": [
+          0,
+          0.1
+        ]
       }
     ]
   },

@@ -30,6 +30,8 @@ The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 
 
 ## Evidence
 
+- **Recipe update, 2026-09-13:** a full preparation after merging main's observation recipes (`2f2752abb` plus this infrared change) preserves all 49 delivered images byte-for-byte against `be628e35f`. Runtime values are unchanged, so the earlier browser captures still apply to the comet views. The photographic display fields, source pins and navigation receipts use the new shared recipe; source/package and numerical-frame checks pass.
+
 - **Infrared browser checks, 2026-09-13:** [temperature](evidence/infrared/temperature.png) and [continuum slope](evidence/infrared/spectral-slope.png) in the running application, on base `0636327b` plus this infrared addition. Both datasets render with correct legends, grid gaps, and Shadows off. Selecting either dataset turns to its measured region. Dataset switching, rotation and zoom were exercised; the shared mobile information sheet was checked at 390 × 844. The desktop captures are 1280 × 720 and show new views, not a before/after pixel comparison.
 - **Reproduction and closure:** both declared field tables and preparation records reproduce byte-for-byte through the acquisition operator from isolated native input copies. All 36 focused acquisition, spectrum, camera and facet tests, six affected body source/package checks, and four mesh/landmark checks passed. Preparation build and typecheck passed. This is focused validation, not an all-body suite result.
 

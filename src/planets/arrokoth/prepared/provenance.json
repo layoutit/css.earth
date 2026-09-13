@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "arrokoth",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "74ac614da0454b96e5cf027064a9789d764d31b22bb85ae221914638cdbde95a"
+    "sha256": "8b1ac38c5b5e444c821abe83531bb8eddedec3cd705fb62ce7cd8d40dacca229"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "314eabd1f022d1740f6174fcc3f367a97386826ecec60eeb98f6e4327bf7267d",
+      "sha256": "2ec5c5caa9da307035e752d52f47013f5a5b5d4da5094782322708f0d885f70c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -84,11 +84,15 @@
               "id": "lorri",
               "format": "nh-lorri-camera",
               "consumer": "lorri-observation",
-              "path": "observations/lor_0408626332_0x636_sci.fit",
-              "cameraPath": "observations/ca06-camera.json",
-              "startTime": "2019-01-01T05:26:54.116",
               "filter": "PANCHROMATIC",
-              "allowLossy": false,
+              "frames": [
+                {
+                  "id": "lorri",
+                  "path": "observations/lor_0408626332_0x636_sci.fit",
+                  "cameraPath": "observations/ca06-camera.json",
+                  "startTime": "2019-01-01T05:26:54.116"
+                }
+              ],
               "transfer": {
                 "maximumSourceDistanceMeters": 250,
                 "maximumSeparationMeters": 180,
@@ -103,10 +107,12 @@
                 "maximumEmissionDegrees": 70,
                 "maximumGain": 1
               },
-              "displayPercentiles": [
-                1,
-                99.8
-              ],
+              "display": {
+                "percentiles": [
+                  1,
+                  99.8
+                ]
+              },
               "metadata": {
                 "label": "LORRI",
                 "falseColor": false,
@@ -117,11 +123,16 @@
               "id": "mvic",
               "format": "nh-mvic-camera",
               "consumer": "mvic-observation",
-              "path": "observations/ca05_mvic_cube.fit",
-              "cameraPath": "observations/mvic-camera.json",
-              "startTime": "2019-01-01T05:12:55.280",
               "filter": "NIR/RED/BLUE",
-              "allowLossy": false,
+              "frames": [
+                {
+                  "id": "mvic",
+                  "path": "observations/ca05_mvic_cube.fit",
+                  "labelPath": "observations/ca05_mvic_cube.lblx",
+                  "cameraPath": "observations/mvic-camera.json",
+                  "startTime": "2019-01-01T05:12:55.280"
+                }
+              ],
               "transfer": {
                 "maximumSourceDistanceMeters": 250,
                 "maximumSeparationMeters": 600,
@@ -136,30 +147,17 @@
                 "maximumEmissionDegrees": 65,
                 "maximumGain": 1
               },
-              "displayPercentiles": [
-                1,
-                99.8
-              ],
+              "display": {
+                "displayRange": [
+                  0,
+                  0.17
+                ]
+              },
               "metadata": {
                 "label": "MVIC",
                 "falseColor": true,
                 "coverage": "New Horizons near-infrared, red and blue bands, registered and blur-matched by the mission team. Enhanced color at 340 m native resolution. Unseen and grazing surfaces remain gridded."
-              },
-              "colorDisplay": {
-                "kind": "band-composite",
-                "inputQuantity": "derived-band-value",
-                "bands": [
-                  "NIR",
-                  "RED",
-                  "BLUE"
-                ],
-                "displayRange": [
-                  0,
-                  0.17
-                ],
-                "outputEncoding": "srgb"
-              },
-              "labelPath": "observations/ca05_mvic_cube.lblx"
+              }
             }
           ]
         },
@@ -436,7 +434,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -471,7 +469,7 @@
       "sha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5",
       "bytes": 3686921,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -515,7 +513,7 @@
       "sha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39",
       "bytes": 2882880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -552,7 +550,7 @@
       "sha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
       "bytes": 9529,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -586,7 +584,7 @@
       "sha256": "1fbb5124f417ea465db18cfdf5b7b8caee38cc30d8f1663b9939a648e27f0640",
       "bytes": 10532160,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -614,7 +612,7 @@
       "sha256": "5992738be4a7607b8ed2ccfe60643c7aab465f046cd674972c27efa2b426a263",
       "bytes": 3104,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -640,7 +638,7 @@
       "sha256": "37d71a90bd10c2a7812af0b350db1e6cb770c1c3f0e0a26e35a67547efef640e",
       "bytes": 2882880,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -650,26 +648,6 @@
         "path": "observations/ca05_mvic_cube.fit",
         "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.fit"
       },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "mvic-camera",
-      "path": "observations/mvic-camera.json",
-      "origin": "Source-bound image registration",
-      "credit": "cssEarth; New Horizons science team",
-      "license": "MIT; retain upstream source attribution.",
-      "redistribution": "Retain source attribution and enhanced-color qualifications.",
-      "acquisition": "node tools/objects/arrokoth/prepare-photographic-cameras.mts",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Camera transferred from the qualified CA05 LORRI image through the fitted MVIC similarity; native inputs and source mesh are hash bound."
-      },
-      "sha256": "8b4f7ef786172c6d928ab7bf3145e1876c6264d916609f4ed3f40235fdccede1",
-      "bytes": 5767,
-      "dependencies": [],
-      "verification": "manifest-pin",
-      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -694,7 +672,7 @@
       "sha256": "46565f1d4ecee1a836351365700d8acc01e150ebcece4ec69b39536fd1af36e5",
       "bytes": 18710,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -704,6 +682,26 @@
         "path": "observations/ca05_mvic_cube.lblx",
         "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_composition-v1.0/data/ca05_mvic_cube.lblx"
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "mvic-camera",
+      "path": "observations/mvic-camera.json",
+      "origin": "Source-bound image registration",
+      "credit": "cssEarth; New Horizons science team",
+      "license": "MIT; retain upstream source attribution.",
+      "redistribution": "Retain source attribution and enhanced-color qualifications.",
+      "acquisition": "node tools/objects/arrokoth/prepare-photographic-cameras.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Camera transferred from the qualified CA05 LORRI image through the fitted MVIC similarity; native inputs and source mesh are hash bound."
+      },
+      "sha256": "8b4f7ef786172c6d928ab7bf3145e1876c6264d916609f4ed3f40235fdccede1",
+      "bytes": 5767,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -722,7 +720,7 @@
       "sha256": "90263d6e9e853754148bf4691a53ff9ca94e77729e84fe7376f5ac40bce98571",
       "bytes": 7113,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -760,13 +758,13 @@
           "url": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
           "bytes": 119308,
           "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -800,19 +798,19 @@
           "url": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
           "bytes": 610,
           "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
           "bytes": 58,
           "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
           "bytes": 589518,
           "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -846,13 +844,13 @@
           "url": "/scenes/arrokoth/arrokoth-lorri-thumbnail.webp",
           "bytes": 1372,
           "sha256": "a384095b589f6084b5ab530d2c963f418f3500c4041e3794406eff5a724c2076",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
           "bytes": 903156,
           "sha256": "4022dde474771158d08d13d78c503b573dade60d66216549fe0e4571b37d0c34",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -878,8 +876,8 @@
       },
       "inputs": [
         "mvic-ca05",
-        "mvic-camera",
         "mvic-label",
+        "mvic-camera",
         "published-shape"
       ],
       "outputs": [
@@ -887,13 +885,13 @@
           "url": "/scenes/arrokoth/arrokoth-mvic-thumbnail.webp",
           "bytes": 2036,
           "sha256": "cc041d2351ead311fb0283ee6863ca393bc6f58fdce47b1e73fa6ec30ee0dff2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-mvic-surface@2x.webp",
           "bytes": 254052,
           "sha256": "d7c807ca1763f467c01e0bde7e3e8e9b601af45b661898cae0ed03a688c8be8b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

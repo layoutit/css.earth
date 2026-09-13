@@ -29,30 +29,6 @@
         "format": "llorri-camera",
         "consumer": "llorri-observation",
         "filter": "PANCHROMATIC",
-        "allowLossy": false,
-        "transfer": {
-          "maximumSourceDistanceMeters": 56,
-          "maximumSeparationMeters": 30,
-          "maximumEmissionDegrees": 70,
-          "visibilityToleranceMeters": 0.5
-        },
-        "photometry": {
-          "model": "retained-observation",
-          "referenceIncidenceDegrees": 0,
-          "referenceEmissionDegrees": 0,
-          "maximumIncidenceDegrees": 70,
-          "maximumEmissionDegrees": 70,
-          "maximumGain": 1
-        },
-        "displayPercentiles": [
-          1,
-          99
-        ],
-        "metadata": {
-          "label": "L’LORRI mosaic",
-          "coverage": "Two Lucy L’LORRI photographs from 20 April 2025, registered to the source shape through the original cameras, published landmarks and image overlap. The closer photograph supplies detail; the approach photograph fills additional coverage. Grayscale retains photographed illumination and matched relative detector brightness, not measured albedo. The ordinary grid marks unseen, grazing or rejected areas, including the source model’s unobserved reconstruction.",
-          "falseColor": false
-        },
         "frames": [
           {
             "id": "llorri-close",
@@ -74,6 +50,31 @@
           "maximumLogMad": 0.25,
           "maximumGain": 1.5,
           "maximumAngleDegrees": 60
+        },
+        "transfer": {
+          "maximumSourceDistanceMeters": 56,
+          "maximumSeparationMeters": 30,
+          "maximumEmissionDegrees": 70,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ]
+        },
+        "metadata": {
+          "label": "L’LORRI mosaic",
+          "coverage": "Two Lucy L’LORRI photographs from 20 April 2025, registered to the source shape through the original cameras, published landmarks and image overlap. The closer photograph supplies detail; the approach photograph fills additional coverage. Grayscale retains photographed illumination and matched relative detector brightness, not measured albedo. The ordinary grid marks unseen, grazing or rejected areas, including the source model’s unobserved reconstruction.",
+          "falseColor": false
         }
       }
     ]

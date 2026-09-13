@@ -13,7 +13,8 @@ import { fromFile } from 'geotiff';
 import {loadIsis3Raster} from './isis3-raster.mts';
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 import {composeCorrectedColor} from './photometric-observations.mts';
-import { parseBandColorDisplay, encodeBandColor, bandColorEvidence } from '../color-transfer.mts';
+import { bandColorDisplay, encodeBandColor, bandColorEvidence } from '../color-transfer.mts';
+import { checkKeys } from '../surface-observations/recipe.mts';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mts';
 import { loadPdsRadialTable } from './pds-radial-table.mts';
 import { loadShapeScalarGrid } from './obj-shape.mts';
@@ -242,9 +243,10 @@ export function sampleColorBand(band: Omit<ColorBand, "filter">, easting: number
 }
 
 export async function prepareObservedColor({ sourceDirectory, entries:values, profile:profileValue, width, height, photometry }: {sourceDirectory:string;entries:readonly unknown[];profile:unknown;width:number;height:number;photometry?:{geometry:ReadonlyMap<string,ObservationGeometry>;profile:PhotometryProfile}|null}) {
+  // The filters name the bands. Corrected colour is matched in display-linear I/F, so only uncorrected colour declares a range.
+  checkKeys(profileValue,['sampleFormat','sampleBytes','noData','referenceRadiusMeters','centerLongitude','standardParallel','filters'],['specialValueMagnitude','displayRange'],'observed color profile');
   const entries=values.map(parseColorEntry),profile=parseColorSourceProfile(profileValue);
-  const display=parseBandColorDisplay(profile.colorDisplay,profile.filters);
-  if(profile.gamma!==1||display.inputQuantity!=='radiance-factor')throw new TypeError('Observed calibrated color requires its I/F band display before reading the source rasters.');
+  if(!photometry===(profile.displayRange===undefined))throw new TypeError('Observed calibrated color declares a display range exactly when it is not photometrically matched.');
   const groups = new Map<string,ColorBand[]>();
   for (const entry of entries) {
     const file = await fromFile(resolve(sourceDirectory, entry.path));
@@ -274,8 +276,7 @@ export async function prepareObservedColor({ sourceDirectory, entries:values, pr
 
 /** Highest native density owns a pixel only when every authored channel exists. */
 export function composeObservedColor({ groups, profile, width, height, sourceIds = [] }: ObservedColorContext) {
-  const display=parseBandColorDisplay(profile.colorDisplay,profile.filters);
-  if(profile.gamma!==1)throw new TypeError('Band color cannot apply legacy gamma before its final display encoding.');
+  const display=bandColorDisplay(profile.filters,'radiance-factor',profile.displayRange);
   const samples = new Float32Array(width * height * 3), missing = new Uint8Array(width * height).fill(1), coverage: Record<string,{pixels:number;surfacePercent:number}> = {};
   const ordered = [...groups].sort((a, b) => a[1][0].resolution[0] - b[1][0].resolution[0]);
   for (const [observation, bands] of ordered) {
