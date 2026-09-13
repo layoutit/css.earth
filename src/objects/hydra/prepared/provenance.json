@@ -4,18 +4,18 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f6bc8a47ce6640444925e03dd5e01342481baea70e4f2d9b869219127be90cbb"
+    "sha256": "07421eb846b2a0f1e5e230ee5f328afb521cc01bfbff57a4a4a97eb91a3b218c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "a48e6a805f09afe313f8f95bd8ca040d08b7881499a5ebbe6a029a92f8b671d1"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "71421b1e078a50a3b4c2e13e5931fdd7c8178d6d86bd16a8b2d0b08c53325b01",
+      "sha256": "5e4d6692114eb03f0372077daf6ef5fe159f1a400f94f243077bcfe7940cb3b1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -43,13 +43,54 @@
               "metadata": {
                 "label": "Shape model",
                 "modeled": true,
-                "coverage": "Porter’s New Horizons shape fit, including the large northern concavity. Only the northern hemisphere was imaged; southern shape is poorly constrained. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the measured model geometry."
+                "coverage": "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data."
               }
             }
           ],
           "scientific": [],
           "observedColors": [],
-          "mosaics": []
+          "mosaics": [],
+          "surfaceObservations": [
+            {
+              "id": "monochrome",
+              "format": "nh-lorri-camera",
+              "consumer": "lorri-observation",
+              "filter": "PANCHROMATIC",
+              "frames": [
+                {
+                  "id": "best",
+                  "path": "observations/lor_0299165548_0x630_sci.fit",
+                  "cameraPath": "observations/best-camera.json",
+                  "startTime": "2015-07-14T07:40:29.781"
+                }
+              ],
+              "transfer": {
+                "maximumSourceDistanceMeters": 500,
+                "maximumSeparationFootprints": 1.5,
+                "maximumEmissionDegrees": 70,
+                "visibilityToleranceMeters": 0.5
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1
+              },
+              "display": {
+                "percentiles": [
+                  1,
+                  99.8
+                ]
+              },
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "New Horizons LORRI photograph from 14 July 2015, at about 1.14 km/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map."
+              }
+            }
+          ]
         },
         "lighting": {
           "frameSize": 512,
@@ -95,7 +136,7 @@
           "sunSource": "JPL Pluto-system ephemeris; rapid nonsynchronous Hydra spin. Mesh prime-meridian registration is unresolved and its orientation is a stated display convention."
         },
         "presentation": {
-          "defaultLens": "model",
+          "defaultLens": "monochrome",
           "pointColor": [
             160,
             160,
@@ -108,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e2505a65631f159607e19fb11daf7591d46a2561bf1c1d262389893df5df46bd",
+      "sha256": "3ba91b4728f2fbf1f406a863056303ba09deed7a431ce8bec702f0a2134a2cdc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -152,17 +193,34 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "model",
+          "defaultLens": "monochrome",
           "labels": {
-            "model": "Shape model"
+            "model": "Shape model",
+            "monochrome": "Monochrome"
           },
           "controls": [
             {
+              "id": "monochrome",
+              "label": "Monochrome",
+              "description": "Experimental image placement; registration is not yet qualified. New Horizons LORRI photograph from 14 July 2015, at about 1.14 km/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map.",
+              "title": "New Horizons surface photograph",
+              "detail": "1.14 km/pixel",
+              "thumbnail": "/scenes/hydra/hydra-monochrome-thumbnail.webp",
+              "surface": "hydra-monochrome-surface@2x.webp",
+              "poles": "hydra-monochrome-poles@2x.webp",
+              "source": {
+                "id": "lorri-best",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165548_0x630_sci.lbl"
+              },
+              "summary": "Experimental placement; registration unverified. LORRI · 14 July 2015 · 1.14 km/pixel. Acquisition lighting retained; grid marks missing coverage."
+            },
+            {
               "id": "model",
               "label": "Shape model",
-              "description": "Porter’s New Horizons shape fit, including the large northern concavity. Only the northern hemisphere was imaged; southern shape is poorly constrained. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the measured model geometry.",
+              "description": "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data.",
               "title": "Porter shape reconstruction",
-              "detail": "New Horizons shape fit",
+              "detail": "Shape",
               "thumbnail": "/scenes/hydra/hydra-model-thumbnail.webp",
               "surface": "hydra-model-surface@2x.webp",
               "poles": "hydra-model-poles@2x.webp",
@@ -171,7 +229,7 @@
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.6084/m9.figshare.12779975.v1"
               },
-              "summary": "New Horizons shape fit. Only the north was imaged; the southern shape is uncertain. No imagery is mapped."
+              "summary": "Published shape reconstruction."
             }
           ]
         },
@@ -338,6 +396,69 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "lorri-best",
+      "path": "observations/lor_0299165548_0x630_sci.fit",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165548_0x630_sci.fit",
+      "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
+      "license": "NASA PDS scientific archive; retain original attribution and notices.",
+      "redistribution": "Retain original mission, instrument and author attribution.",
+      "acquisition": "Restored from the pinned archive URL in preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-new-horizons-pluto-lorri-v3",
+            "role": "material",
+            "evidence": "Native PDS product identifier, release and header; kernel comments identify the adopted science-team reconstruction."
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "new-horizons",
+            "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165548_0x630_sci.fit",
+            "missionId": "new-horizons"
+          }
+        ]
+      },
+      "sha256": "7b225229428505208024279bf86104381ce24617e56be89a1cc89236ad17e91b",
+      "bytes": 10529280,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/lor_0299165548_0x630_sci.fit",
+        "url": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165548_0x630_sci.fit"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "registered-lorri-camera",
+      "path": "observations/best-camera.json",
+      "origin": "Prepared from the pinned PDS mission kernel, native TAN-SIP camera and unchanged Porter2021 source mesh.",
+      "credit": "NASA / JHUAPL / SwRI; Simon Porter; cssEarth pointing refinement",
+      "license": "MIT for authored preparation; original source notices retained.",
+      "redistribution": "Retain original source attribution and the registration limitations.",
+      "acquisition": "node tools/objects/new-horizons/prepare-photographic-cameras.mts src/objects/hydra/source/preparation/photography.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Experimental camera from pinned PDS pole/phase, source mesh and native WCS, with two fitted detector translations. Separate views and withheld interior regions measure limitations; the camera remains unqualified for photographic publication."
+      },
+      "sha256": "52d4415d0070d87828cf0a4794223bce26bfd5e32d411b3d988c10c8b349bddb",
+      "bytes": 2917,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -350,8 +471,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e2505a65631f159607e19fb11daf7591d46a2561bf1c1d262389893df5df46bd",
-      "bytes": 3883,
+      "sha256": "3ba91b4728f2fbf1f406a863056303ba09deed7a431ce8bec702f0a2134a2cdc",
+      "bytes": 4713,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -367,7 +488,7 @@
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
       "limitations": [
-        "Porter’s New Horizons shape fit, including the large northern concavity. Only the northern hemisphere was imaged; southern shape is poorly constrained. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the measured model geometry."
+        "Published New Horizons shape fit. The neutral grid describes the modeled shape without photographic surface data."
       ],
       "lensIds": [
         "model"
@@ -397,6 +518,46 @@
           "url": "/scenes/hydra/hydra-model-surface@2x.webp",
           "bytes": 71382,
           "sha256": "a44dab31a19630cf501154fcfac5c659aa9ca5fe20da3e214dc040d58593a5ba",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "monochrome",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Experimental image placement; registration is not yet qualified. New Horizons LORRI photograph from 14 July 2015, at about 1.14 km/pixel. Original acquisition lighting is retained. The grid marks unseen or rejected surface coverage; this is not a global albedo map."
+      ],
+      "lensIds": [
+        "monochrome"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "lorri-best",
+        "registered-lorri-camera",
+        "porter-hydra-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/hydra/hydra-monochrome-thumbnail.webp",
+          "bytes": 1794,
+          "sha256": "ff730ebd39de810ab436251563977c91e86238a81ec426072a257c25e5f5f8f5",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/hydra/hydra-monochrome-surface@2x.webp",
+          "bytes": 101160,
+          "sha256": "f7ac2fb047cf93d02e1f838a8f7cee8ce79a0c47ad7236649181efc01f37b3e7",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -447,6 +608,30 @@
           "url": "object:prepared/minimaps/model.webp",
           "bytes": 2958,
           "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:monochrome",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "monochrome"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/monochrome.webp",
+          "bytes": 4828,
+          "sha256": "be95bc9e3d895d5d62507d8dd53317c9261e07e91ebe2d7c812d89458c39b5c9",
           "verification": "bytes-verified"
         }
       ]
