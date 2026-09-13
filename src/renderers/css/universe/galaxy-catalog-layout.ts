@@ -1,4 +1,4 @@
-import { isPreparedCluster } from '@cssearth/catalog';
+import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
@@ -40,7 +40,7 @@ export function projectCatalogAperture(radiusM: number, point: NonNullable<Retur
 }
 
 function priority(object: PreparedCatalogObject): number {
-  if (isPreparedCluster(object) || object.detailedObjectId) return 0;
+  if (isPreparedCluster(object) || isPreparedNebula(object) || object.detailedObjectId) return 0;
   if (object.status === 'candidate') return 3;
   return object.hostId ? 2 : 1;
 }

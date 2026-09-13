@@ -1,0 +1,10 @@
+.geometry-detection-controls { margin: 10px 0 14px; padding: 10px 0; border-block: 1px solid var(--divider); }
+.geometry-detection-controls h3 { margin: 0 0 9px; font-size: 12px; }
+.geometry-detection-controls .structure-slider { margin: 7px 0; }
+.geometry-detection-controls .structure-slider label { font-size: 11px; }
+.detector-feedback { display: grid; grid-template-rows: 4px 16px; gap: 5px; margin: 7px 0 2px; min-width: 0; }
+.detector-feedback progress { width: 100%; height: 4px; margin: 0; accent-color: #aec7cf; visibility: hidden; }
+.detector-feedback[data-active="true"] progress { visibility: visible; }
+.detector-feedback p { margin: 0; line-height: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.shape-cloud-workspace[hidden], .shape-cloud-workbench[hidden] { display: none; }
+.workspace-content:has(.shape-cloud-workspace:not([hidden])) .observation-structures-workspace { visibility: hidden; pointer-events: none; }

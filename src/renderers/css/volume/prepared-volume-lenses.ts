@@ -1,4 +1,5 @@
 import { mountPreparedCssVolume } from './prepared-volume-runtime.js';
+import { mountPreparedVolumeLod } from './prepared-volume-lod.js';
 import { parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
 import { validatePreparedCssVolume } from './validation.js';
@@ -30,6 +31,8 @@ export interface PreparedVolumeLenses {
   readonly lenses: readonly PreparedVolumeLens[];
   /** Visibility remains toggleable; saved exposure and support belong in prepared point opacity. */
   readonly starsEnabled?: boolean;
+  /** Nearby volumes must not inherit the Milky Way overview fade. */
+  readonly contextVisibility?: 'galactic' | 'independent';
   readonly pointVisibility?: PreparedPointVisibility;
   readonly provenance?: unknown;
 }
@@ -67,7 +70,8 @@ export function validatePreparedVolumeLenses(input: unknown): PreparedVolumeLens
   const value = input as PreparedVolumeLenses, validId = (id: unknown) => typeof id === 'string' && /^[a-z][a-z0-9-]*$/u.test(id);
   if (value.schema !== 'cssearth-volume-lenses@1' || !validId(value.id) || !Number.isFinite(value.framingRadiusUnits) ||
       value.framingRadiusUnits <= 0 || !Array.isArray(value.lenses) || !value.lenses.length ||
-      (value.starsEnabled !== undefined && typeof value.starsEnabled !== 'boolean')) {
+      (value.starsEnabled !== undefined && typeof value.starsEnabled !== 'boolean') ||
+      (value.contextVisibility !== undefined && !['galactic', 'independent'].includes(value.contextVisibility))) {
     throw new TypeError('Prepared volume lens identity, framing or bank is invalid.');
   }
   const ids = new Set<string>(), resources = new Map<string, string>();
@@ -100,7 +104,7 @@ export function validatePreparedVolumeLenses(input: unknown): PreparedVolumeLens
     throw new TypeError('Prepared point visibility needs increasing non-negative projected-radius thresholds.');
   }
   return Object.freeze({ schema: value.schema, id: value.id, defaultLens: value.defaultLens,
-    framingRadiusUnits: value.framingRadiusUnits, lenses: Object.freeze(lenses), starsEnabled: value.starsEnabled ?? true,
+    contextVisibility: value.contextVisibility ?? 'galactic', framingRadiusUnits: value.framingRadiusUnits, lenses: Object.freeze(lenses), starsEnabled: value.starsEnabled ?? true,
     pointVisibility: Object.freeze({ ...visibility }),
     ...(Object.hasOwn(value, 'provenance') ? { provenance: value.provenance } : {}) });
 }
@@ -165,7 +169,8 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         const opacity = volumeLensCompositeOpacity(bank.runtime.roots.map((axisRoot, index) => ({
           axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
         })), bank.lens.brightness);
-        bank.surface.style.opacity = String(opacity);
+        // Impostors contain the saved exposure; their detail wrapper owns the matching full-volume exposure.
+        bank.surface.style.opacity = bank.lens.volume.impostors ? '1' : String(opacity);
         const pointOpacity = projectedVolumeOpacity(publication.world, publication.viewport, bank.lens.volume.frame,
           data.framingRadiusUnits, data.pointVisibility!);
         stars!.root.style.opacity = String(pointOpacity);
@@ -180,7 +185,10 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
           const surface = document.createElement('div'); surface.className = 'prepared-volume-lens-cloud'; surface.dataset.volumeLens = lens.id;
           Object.assign(surface.style, { position: 'absolute', inset: '0', pointerEvents: 'none', display: lens.id === selected ? 'block' : 'none' });
           const marker = document.createElement('span'); marker.hidden = true; surface.append(marker); root.insertBefore(surface, end);
-          const runtime = mountPreparedCssVolume({ host: surface, before: marker, payload: lens.volume, resolveResource: resolvePrepared });
+          const runtime = mountPreparedVolumeLod({ host: surface, before: marker, payload: lens.volume, resolveResource: resolvePrepared },
+            detail => volumeLensCompositeOpacity(detail.roots.map((axisRoot, index) => ({
+              axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
+            })), lens.brightness));
           // The shared universe must remain visible through the cloud and beyond its prepared footprint.
           for (const axisRoot of runtime.roots) axisRoot.style.background = 'transparent';
           banks.push({ lens, surface, runtime });

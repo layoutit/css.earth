@@ -110,6 +110,30 @@ test('source-local test and audit JavaScript remain authored and receive no owne
   assert.deepEqual(result.violations, paths.map(path => `New authored JavaScript: ${path}. Use TypeScript or justify an exact exception.`));
 });
 
+test('nebula evidence fusion is an authored algorithm owner without exempting its harness imports', t => {
+  const repo = fixture(t);
+  const owner = 'labs/nebula/src/reconstruction/evidence-fusion/model.ts';
+  repo.write(owner, 'export const combine = () => 1;');
+  repo.write('labs/nebula/src/reconstruction/compiler.ts', 'import "./evidence-fusion/model.ts";');
+  assert.deepEqual(repo.audit().violations, [], 'The exact multiband processing owner is usable by authored source.');
+
+  const harnesses = [
+    ['tools/capture-image.mts', 'evidence'],
+    ['tools/evidence/compare.mts', 'evidence'],
+    ['tools/audits/images/compare.mts', 'evidence'],
+    ['labs/nebula/src/reconstruction/evidence-fusion/capture-image.ts', 'evidence'],
+    ['labs/nebula/src/reconstruction/evidence-fusion/model.test.ts', 'test'],
+    ['labs/nebula/src/reconstruction/evidence-fusion-copy/model.ts', 'evidence'],
+    ['labs/other/src/evidence-fusion/model.ts', 'evidence'],
+  ];
+  for (const [path] of harnesses) repo.write(path!, 'export const measure = 1;');
+  repo.write(owner, harnesses.map(([path]) => `import "/${path}";`).join('\n'));
+  assert.deepEqual(repo.audit().violations, harnesses.map(([path, role]) =>
+    `${owner}: source imports ${role} module ${path}; move shared behavior into an authored owner.`).sort());
+  repo.write('labs/nebula/src/reconstruction/evidence-fusion/new-owner.js', 'export const value = 1;');
+  assert.ok(repo.audit().violations.includes('New authored JavaScript: labs/nebula/src/reconstruction/evidence-fusion/new-owner.js. Use TypeScript or justify an exact exception.'));
+});
+
 test('a compatibility facade rejects added behavior and a different source owner', t => {
   const repo = fixture(t);
   repo.write('site/owner.mts', 'export const value: number = 1;');

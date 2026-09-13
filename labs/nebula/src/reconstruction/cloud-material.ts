@@ -20,7 +20,7 @@ export interface CloudMaterialOptions {
   slices: VolumeSlices;
   loadResource(path: string): Promise<Uint8Array>;
   /** Physical coordinates in the unchanged quad units. RGB is [0,255]; false means outside image coverage. */
-  sampleImageRgb(x: number, y: number, z: number, out: Vector3): boolean;
+  sampleImageRgb(x: number, y: number, z: number, out: Vector3, slab: { axis: 'x' | 'y' | 'z'; pitch: number; samples: number }): boolean;
   appearance?: CloudAppearance;
   /** Prepared local-contrast multiplier, sampled in the same physical frame as image color. */
   sampleDetailGain?(x: number, y: number, z: number): number;
@@ -69,7 +69,8 @@ export async function recolorCloudSlices(options: CloudMaterialOptions): Promise
       const y = origin[1] + u * (horizontal[1] - origin[1]) + v * (vertical[1] - origin[1]);
       const z = origin[2] + u * (horizontal[2] - origin[2]) + v * (vertical[2] - origin[2]);
       rgb[0] = rgb[1] = rgb[2] = 0;
-      if (!options.sampleImageRgb(x, y, z, rgb)) { coverage.outsideImageTexels++; continue; }
+      if (!options.sampleImageRgb(x, y, z, rgb, { axis: quad.axis, pitch: options.slices.approximation.slabPitchUnits[quad.axis],
+        samples: options.slices.approximation.samplesPerSlab })) { coverage.outsideImageTexels++; continue; }
       if (rgb.some(value => !Number.isFinite(value) || value < 0 || value > 255))
         throw new TypeError('Cloud image samples must be finite RGB in [0,255].');
       const peak = Math.max(...rgb);

@@ -1,0 +1,342 @@
+{
+  "schema": "cssearth-nebula-physical-evidence@1",
+  "subjectId": "m42",
+  "asOf": "2026-09-12",
+  "status": "evidence ledger; not an executable recipe or physical-fit acceptance",
+  "parameterClasses": {
+    "observed": "Published measurement or inspected metadata, retaining stated uncertainty and coverage.",
+    "published-model": "Inference conditional on the cited study assumptions; not direct measured depth.",
+    "authored": "Our geometry/display choice, including extrapolation and coordinate conventions."
+  },
+  "coordinateRule": "Sky offsets are east/north relative to theta1-ori-c. Convert angular offsets through the registered tangent projection. Preserve each paper distance; physical-to-angular conversions use that recorded distance, not a hidden global rescaling.",
+  "sources": [
+    {
+      "id": "simbad-theta1-ori-c",
+      "url": "https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Theta1+Orionis+C",
+      "locator": "ICRS coordinates (ep=J2000), Gaia EDR3 reference 2020yCat.1350....0G",
+      "access": "coordinate record inspected"
+    },
+    {
+      "id": "wen-odell-1995",
+      "url": "https://doi.org/10.1086/175123",
+      "fullTextUrl": "https://articles.adsabs.harvard.edu/pdf/1995ApJ...438..784W",
+      "locator": "Abstract; geometric reconstruction method",
+      "access": "original scanned PDF retrieved; first page visually inspected",
+      "sha256": "7e327ec1c998252837379bd4b5aeb48f1b93bf101e1586470b040ddad29628de"
+    },
+    {
+      "id": "henney-2005",
+      "url": "https://arxiv.org/html/astro-ph/0504221",
+      "locator": "Sections VI.1.3, VII; Figure 15",
+      "access": "full-text sections inspected"
+    },
+    {
+      "id": "odell-2009",
+      "url": "https://arxiv.org/html/0810.4375v1",
+      "locator": "Sections I, II.6, III.1.2, III.2, III.3.1",
+      "access": "full-text sections inspected"
+    },
+    {
+      "id": "odell-abel-2025",
+      "url": "https://arxiv.org/html/2507.02147v1",
+      "locator": "Sections II, VIII.2, VIII.4, X.2; Figure 23",
+      "access": "full-text sections inspected"
+    },
+    {
+      "id": "muse-2015",
+      "url": "https://arxiv.org/abs/1507.00006",
+      "datasetUrl": "https://doi.org/10.17876/data/2023_3",
+      "manifest": "physical-sources.json",
+      "access": "seven complete FITS arrays and headers inspected"
+    },
+    {
+      "id": "pabst-2019",
+      "url": "https://doi.org/10.1038/s41586-018-0844-1",
+      "locator": "Alternative hemispherical Veil interpretation",
+      "access": "previous research intake; preserve competing model"
+    },
+    {
+      "id": "aligned-images",
+      "url": "https://www.eso.org/public/images/eso1723a/",
+      "additionalUrl": "https://www.eso.org/public/images/eso1006a/",
+      "manifest": "observations.json",
+      "access": "pinned source/WCS recipes"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "theta1-ori-c",
+      "classification": "observed",
+      "sourceIds": [
+        "simbad-theta1-ori-c"
+      ],
+      "quantity": "sky anchor",
+      "value": [
+        83.8186095697,
+        -5.3897005033
+      ],
+      "unit": "deg",
+      "scope": "ICRS; catalogue epoch J2000",
+      "limitations": "Coordinate anchor only; not a measured gas-depth origin.",
+      "nativeCoordinate": "05 35 16.4662967280 -05 23 22.921811880"
+    },
+    {
+      "id": "observer-convention",
+      "classification": "authored",
+      "sourceIds": [],
+      "quantity": "model axes",
+      "value": {
+        "x": "west",
+        "y": "north",
+        "z": "away from observer",
+        "origin": "registered observation frame; z=0 is an authored stellar reference"
+      },
+      "unit": "direction convention",
+      "scope": "model coordinates",
+      "limitations": "Paper offsets east/north from theta1 Ori C are converted to the registered west/north tangent frame. Positive depth is away from Earth. This is a coordinate convention, not measured gas depth."
+    },
+    {
+      "id": "image-footprints",
+      "classification": "observed",
+      "sourceIds": [
+        "aligned-images"
+      ],
+      "quantity": "full native angular footprints",
+      "value": {
+        "eso-optical": [
+          59.95357779378228,
+          46.56109167168953
+        ],
+        "eso-vista": [
+          71.844974592,
+          88.3468671936
+        ]
+      },
+      "unit": "arcmin",
+      "scope": "Publisher WCS; optical and VISTA have different coverage",
+      "limitations": "Missing optical coverage is not zero emission. The common 104 arcminute square is a processing frame, not a measured object boundary."
+    },
+    {
+      "id": "muse-footprint",
+      "classification": "observed",
+      "sourceIds": [
+        "muse-2015"
+      ],
+      "quantity": "raster width and height",
+      "value": [
+        5.886666666666668,
+        4.92
+      ],
+      "unit": "arcmin",
+      "scope": "Central Huygens region; WCS/footprint in physical-sources.json",
+      "limitations": "No quality-mask or uncertainty extensions. Some units and the Halpha-flux WCS are absent. These maps are not active fit constraints."
+    },
+    {
+      "id": "front-reconstruction-method",
+      "classification": "published-model",
+      "sourceIds": [
+        "wen-odell-1995"
+      ],
+      "quantity": "geometric evidence model",
+      "value": "extinction-corrected Halpha + electron-density diagnostics + single-star illumination",
+      "unit": "method",
+      "scope": "Bright central nebula",
+      "limitations": "Compares constant and declining density profiles. It does not measure depth from RGB intensity; later Orion-S geometry revises the earlier interpretation."
+    },
+    {
+      "id": "core-reference-scales",
+      "classification": "published-model",
+      "sourceIds": [
+        "odell-2009"
+      ],
+      "quantity": "local model scales",
+      "value": {
+        "adoptedDistancePc": 440,
+        "starToFrontPc": 0.2,
+        "emittingLayerReferencePc": 0.1
+      },
+      "unit": "pc",
+      "scope": "Near theta1 Ori C only",
+      "limitations": "Approximate local reference scales; the thickness is an equivalent emitting layer, not a constant physical slab everywhere."
+    },
+    {
+      "id": "local-front-curvature",
+      "classification": "published-model",
+      "sourceIds": [
+        "henney-2005"
+      ],
+      "quantity": "front/flow fit",
+      "value": {
+        "starToFrontCm": 4.7e+17,
+        "flowAxisWestDegrees": 15,
+        "curvatureTimesDistance": 0.5
+      },
+      "unit": "mixed units named in keys",
+      "scope": "Central EW strip; local structure below about 1 arcmin",
+      "limitations": "Locally convex EW, approximately flat NS around a molecular filament; broader front can be concave. Axisymmetry does not hold globally."
+    },
+    {
+      "id": "bright-bar",
+      "classification": "published-model",
+      "sourceIds": [
+        "odell-2009"
+      ],
+      "quantity": "front fold",
+      "value": "near-edge-on ionization-front escarpment",
+      "unit": "morphology",
+      "scope": "Southeast Huygens boundary",
+      "limitations": "No numeric ridge trace or inclination is imported. Any initial ridge coordinates, width and curvature remain authored."
+    },
+    {
+      "id": "inner-cavity",
+      "classification": "published-model",
+      "sourceIds": [
+        "odell-2009"
+      ],
+      "quantity": "northern-arm reference",
+      "value": {
+        "radiusCm": 2e+17,
+        "fractionalThickness": 0.28,
+        "opening": "west-southwest"
+      },
+      "unit": "mixed units named in keys",
+      "scope": "Incomplete central OIII structure",
+      "limitations": "Radius/wall vary about 50 percent with position angle. Not a closed sphere or the larger neutral Veil shell."
+    },
+    {
+      "id": "orion-s-aperture",
+      "classification": "observed",
+      "sourceIds": [
+        "odell-abel-2025"
+      ],
+      "quantity": "Crossing aperture",
+      "value": {
+        "eastArcsec": -34.2,
+        "northArcsec": -26.2,
+        "ciiSquareArcsec": 52.8,
+        "hiSquareArcsec": 45
+      },
+      "unit": "arcsec",
+      "scope": "Offsets from theta1-ori-c; 2025 Figure 17",
+      "limitations": "This is a spectral sample center and aperture, not the measured cloud center or dimensions."
+    },
+    {
+      "id": "orion-s-cloud",
+      "classification": "published-model",
+      "sourceIds": [
+        "odell-2009"
+      ],
+      "quantity": "separate embedded cloud",
+      "value": {
+        "projectedDiameterCm": 2.8e+17,
+        "depthRelation": "in front of continuous MIF; near star depth"
+      },
+      "unit": "mixed units named in keys",
+      "scope": "Orion-S compact molecular region",
+      "limitations": "Exact depth uncertain. Projected diameter refers to a compact cloud estimate, not the larger Crossing aperture or all SW emission."
+    },
+    {
+      "id": "red-bay",
+      "classification": "published-model",
+      "sourceIds": [
+        "odell-2009"
+      ],
+      "quantity": "localized thicker zone",
+      "value": {
+        "projectedExtentArcsec": [
+          75,
+          25
+        ],
+        "lineOfSightThicknessCm": 1e+18,
+        "direction": "east-southeast from Trapezium"
+      },
+      "unit": "mixed units named in keys",
+      "scope": "Red Bay high-ionization zone",
+      "limitations": "Approximate region-specific model; do not impose the thin-front thickness here or promote to a full-field slab."
+    },
+    {
+      "id": "dark-bay-aperture",
+      "classification": "observed",
+      "sourceIds": [
+        "odell-abel-2025"
+      ],
+      "quantity": "spectral aperture",
+      "value": {
+        "eastArcsec": 113.5,
+        "northArcsec": 53,
+        "squareArcsec": 45
+      },
+      "unit": "arcsec",
+      "scope": "Offsets from theta1-ori-c; Section VIII.4",
+      "limitations": "An aperture is not an extinction mask or a measured dust-depth surface."
+    },
+    {
+      "id": "foreground-alternatives",
+      "classification": "published-model",
+      "sourceIds": [
+        "odell-abel-2025",
+        "pabst-2019"
+      ],
+      "quantity": "Veil topology",
+      "value": {
+        "preferredTrial": "foreground layers with wind-driven bulges",
+        "alternative": "closed hemispherical shell",
+        "outerMaximumExpansionKms": 15,
+        "innerMaximumExpansionKms": 27
+      },
+      "unit": "mixed units named in keys",
+      "scope": "Huygens + Extended Orion Nebula; distinct tracers/components",
+      "limitations": "Competing interpretations; do not infer wall depth from expansion speeds or paint the optical photograph onto neutral foreground material."
+    },
+    {
+      "id": "coherent-front-trial",
+      "classification": "authored",
+      "sourceIds": [
+        "wen-odell-1995",
+        "henney-2005",
+        "odell-2009"
+      ],
+      "quantity": "first implementation hypothesis",
+      "value": "smooth irregular support with finite local thickness; separate localized structures",
+      "unit": "method",
+      "scope": "Covered image field, with physical support localized to core",
+      "limitations": "Wide-field curvature, depth amplitudes, smoothing, local support weights and all unmeasured depths are authored. They must be pinned in the runnable recipe; no scalar RGB-to-depth or Helix expansion law."
+    }
+  ],
+  "implementationContract": [
+    "A runnable support recipe must pin this ledger and classify every adopted numeric parameter. A citation never changes an authored amplitude into a measurement.",
+    "Keep front, cavity, Orion-S, molecular filament and foreground layer identities separate. Localize evidence by its actual footprint.",
+    "Smoothness may connect unsupported regions as an explicitly authored hypothesis; it is not a continuation of measured depth.",
+    "Do not convert barycentric/heliocentric/LSRK values without explicit frame handling. Do not turn velocity into spatial depth.",
+    "Do not treat extinction or reflected-light deficits as missing positive emission, or infer molecular mass from an outreach RGB lens.",
+    "Inspect neutral observer/oblique/side views and preserve the same geometry, alpha and stars for all image lenses."
+  ],
+  "methods": [
+    {
+      "id": "coherent-irregular-front",
+      "inputRequirements": [
+        "verified registered images",
+        "source-pinned physical evidence ledger",
+        "explicit support parameters with authored values distinguished",
+        "full image and physical-data footprints"
+      ],
+      "evidenceIds": [
+        "front-reconstruction-method",
+        "core-reference-scales",
+        "local-front-curvature",
+        "bright-bar",
+        "inner-cavity",
+        "orion-s-aperture",
+        "orion-s-cloud",
+        "red-bay",
+        "foreground-alternatives",
+        "coherent-front-trial"
+      ],
+      "limitations": [
+        "A smooth support is a conditional visualization hypothesis until compared with qualified physical observables.",
+        "The MUSE maps remain research inputs; their download does not mean the current solver fits them.",
+        "Do not infer the entire wide-field geometry from Huygens-only scales or apply a planetary expansion law."
+      ]
+    }
+  ]
+}

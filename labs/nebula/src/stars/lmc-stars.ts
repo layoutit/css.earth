@@ -1,7 +1,7 @@
 /** Retained catalogue points: runtime projects prepared XYZ only, never source astrometry. */
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import { projectPreparedPoint } from '../../../../src/renderers/css/stars/prepared-point-field-runtime';
+import { projectPreparedPoint } from './point-projection';
 import { transposeWorldRotation, worldRotationFromQuaternion } from '../../../../src/renderers/css/navigation/world-camera-math';
 import type { WorldCameraPose, WorldCameraViewport } from '../../../../src/renderers/css/navigation/world-camera';
 import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter } from '../density/cloud-density';

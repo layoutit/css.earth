@@ -1,0 +1,33 @@
+{
+  "action": "apply",
+  "imageId": "compiler",
+  "recipePath": "labs/nebula/models/m42/compiler.json",
+  "cataloguePath": ".local/nebula-lab/observations/m42/structures/catalogue.json",
+  "imageToFrame": {
+    "eso-optical": [
+      0.14757607964283156,
+      0.0004642498954775647,
+      -0.00046612611570144574,
+      0.1476001397565087,
+      219.20331476776528,
+      328.10078806268785
+    ],
+    "eso-vista": [
+      0.2175181499296422,
+      -9.882274912542503e-06,
+      -0.000249255666787504,
+      0.2174455214264077,
+      157.11865274136818,
+      29.97239344892986
+    ]
+  },
+  "evidence": {
+    "sensitivity": 1,
+    "weights": []
+  },
+  "controls": {
+    "detail": 1,
+    "faint": 0.35,
+    "depth": 1
+  }
+}
