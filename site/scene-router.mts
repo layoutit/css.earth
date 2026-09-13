@@ -65,6 +65,7 @@ export function createSceneRouter({
   let destroyed = false;
   let nextGeneration = 0;
   let shellOwner: { shell: Shell | null } | null = null, pending: Request | null = null, historyOwner: ReturnType<typeof createNavigationHistory> | null = null, unbindLinks: (() => void) | null = null;
+  let publishedBodyState = '';
   let centeredObjectId: string | null = null;
   let overview = Boolean(overviewScopeFromUrl(windowTarget.location?.href ?? 'https://example.test'));
   const worldContextOwner = persistentWorldContext;
@@ -570,6 +571,11 @@ export function createSceneRouter({
     } catch (error) { fail(session, error); }
   }
 
+  function setData(element: HTMLElement, key: string, value: string | null) {
+    if (value === null) { if (key in element.dataset) delete element.dataset[key]; }
+    else if (element.dataset[key] !== value) element.dataset[key] = value;
+  }
+
   function publishSceneState() {
     const inFlight = Boolean(pending && pending.options.preserveView !== true);
     worldContextMount?.setNavigationInFlight?.(inFlight);
@@ -577,27 +583,21 @@ export function createSceneRouter({
     const state = readSceneState();
     const root = documentTarget.documentElement;
     const body = documentTarget.body;
-    root.dataset.scenePresented = String(hasPresented);
-    body.classList.remove("loading", "ready", "paused", "error");
-    if (sceneState === "loading") {
-      root.dataset.ready = "loading";
-      body.classList.add("loading");
-      stage.ariaBusy = "true";
-    } else if (sceneState === "ready") {
-      root.dataset.ready = "true";
-      body.classList.add("ready");
-      if (scenePaused) body.classList.add("paused");
-      stage.ariaBusy = "false";
-    } else {
-      if (sceneState === "error") {
-        root.dataset.ready = "error";
-        body.classList.add("error");
-      } else delete root.dataset.ready;
-      stage.ariaBusy = "false";
+    // Scene state is republished at every navigation step. Only changes are written: removing
+    // and re-adding an unchanged body class restyled the whole document (2,745 elements).
+    setData(root, "scenePresented", String(hasPresented));
+    setData(root, "ready", sceneState === "loading" ? "loading" : sceneState === "ready" ? "true" : sceneState === "error" ? "error" : null);
+    const bodyState = `${sceneState}:${scenePaused}`;
+    if (bodyState !== publishedBodyState) {
+      body.classList.remove("loading", "ready", "paused", "error");
+      if (sceneState === "loading") body.classList.add("loading");
+      else if (sceneState === "ready") { body.classList.add("ready"); if (scenePaused) body.classList.add("paused"); }
+      else if (sceneState === "error") body.classList.add("error");
+      publishedBodyState = bodyState;
     }
-    if (sceneState === "loading" || sceneState === "ready") {
-      root.dataset.playing = String(sceneState === "ready" && !scenePaused);
-    } else delete root.dataset.playing;
+    const busy = sceneState === "loading" ? "true" : "false";
+    if (stage.ariaBusy !== busy) stage.ariaBusy = busy;
+    setData(root, "playing", sceneState === "loading" || sceneState === "ready" ? String(sceneState === "ready" && !scenePaused) : null);
     shellOwner?.shell?.setPlaybackState?.(readPlayback());
     if (DIAGNOSTICS_ENABLED) {
       Reflect.set(windowTarget, '__cssEarth', createSceneDiagnostics(windowTarget, objectId, readSceneState, readPlayback));
