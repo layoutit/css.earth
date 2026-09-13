@@ -26,6 +26,14 @@ also exclude a modified texture derivative. [Jiang et al. (2015)](https://doi.or
 provides photographs under CC BY 4.0, but its annotated figure is not a released
 registered raster. Reuse permission and shape registration are separate gaps;
 neither a silhouette match nor a flyby attitude alone resolves the latter.
+A trial the same day projected Jiang et al.'s Figure 1c onto this mesh
+([method record](https://github.com/layoutit/css.earth/blob/a1570599b69cd007f21af69635a46e60987ebe40/src/planets/toutatis/source/reference/chang-e-2-method.md)).
+Its camera direction came from the rotation angles Bu et al. (2015) quote for
+Zou et al. (2014), Figure 3, and its scale and position were matched by hand to
+Zou's radar rendering. Three check windows agreed within 1.0–2.2 figure pixels,
+but they compare two photographs, not photograph pixels with surface points.
+With no measured camera or control points, that placement does not register
+the photograph, so the photographic lens stays deferred.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
