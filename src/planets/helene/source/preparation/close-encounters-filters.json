@@ -1,0 +1,127 @@
+{
+  "body": "helene",
+  "sourceRoot": "..",
+  "shape": {
+    "path": "shape/helene_30k_plt.tab",
+    "format": "pds-plate-model",
+    "grid": {
+      "metersPerUnit": 1000,
+      "expectedVertices": 13495,
+      "expectedFaces": 26986,
+      "indexBase": 0
+    },
+    "faceBudget": 2000,
+    "tileSize": 128,
+    "atlasColumns": 16,
+    "simplification": {
+      "targetFaces": 800,
+      "maximumErrorMeters": 300,
+      "method": "source-meshoptimizer"
+    }
+  },
+  "referenceFrame": {
+    "id": "n1687120033_1",
+    "path": "observations/N1687120033_1_CALIB.IMG",
+    "labelPath": "observations/N1687120033_1_CALIB.LBL",
+    "observerLatitude": 2.43,
+    "observerWestLongitude": 115.79,
+    "sunLatitude": 9.76,
+    "sunWestLongitude": 28.49,
+    "rangeKm": 7214.9,
+    "northAzimuthDegrees": 179.81446653018912,
+    "center": [
+      513.70666780311,
+      603.3301687417282
+    ],
+    "pixelAngleMicroradians": 5.989697719921734
+  },
+  "color": {
+    "id": "filter-color",
+    "format": "controlled-shape-color",
+    "consumer": "cassini-color-frames",
+    "channels": [
+      {
+        "channel": "red",
+        "filter": "IR3",
+        "frames": [
+          {
+            "id": "n1687119936_1",
+            "path": "observations/N1687119936_1_CALIB.IMG",
+            "labelPath": "observations/N1687119936_1_CALIB.LBL",
+            "observerLatitude": 2.54,
+            "observerWestLongitude": 119.18,
+            "sunLatitude": 9.75,
+            "sunWestLongitude": 28.34,
+            "rangeKm": 7110.1,
+            "northAzimuthDegrees": 179.71,
+            "center": [
+              512.6,
+              604.8
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          }
+        ]
+      },
+      {
+        "channel": "green",
+        "filter": "IR1",
+        "frames": [
+          {
+            "id": "n1687119906_1",
+            "path": "observations/N1687119906_1_CALIB.IMG",
+            "labelPath": "observations/N1687119906_1_CALIB.LBL",
+            "observerLatitude": 2.57,
+            "observerWestLongitude": 120.21,
+            "sunLatitude": 9.76,
+            "sunWestLongitude": 28.3,
+            "rangeKm": 7084.2,
+            "northAzimuthDegrees": 179.72,
+            "center": [
+              512,
+              602.6
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          }
+        ]
+      },
+      {
+        "channel": "blue",
+        "filter": "UV3",
+        "frames": [
+          {
+            "id": "n1687119973_1",
+            "path": "observations/N1687119973_1_CALIB.IMG",
+            "labelPath": "observations/N1687119973_1_CALIB.LBL",
+            "observerLatitude": 2.5,
+            "observerWestLongitude": 117.93,
+            "sunLatitude": 9.75,
+            "sunWestLongitude": 28.39,
+            "rangeKm": 7145.1,
+            "northAzimuthDegrees": 179.71,
+            "center": [
+              511.9,
+              602.2
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          }
+        ]
+      }
+    ],
+    "displayRange": [
+      0,
+      1.05
+    ],
+    "photometry": {
+      "weight": 0.5,
+      "maximumGain": 2.5,
+      "maximumIncidenceDegrees": 80,
+      "maximumEmissionDegrees": 78,
+      "backgroundMaximum": 0.003
+    },
+    "metadata": {
+      "label": "False color",
+      "falseColor": true,
+      "coverage": "Cassini IR3, IR1, UV3 observations; only registered three-filter overlap contributes."
+    }
+  }
+}

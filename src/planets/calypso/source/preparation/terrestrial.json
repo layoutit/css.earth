@@ -128,6 +128,38 @@
               469.4
             ],
             "pixelAngleMicroradians": 5.989697719921734
+          },
+          {
+            "id": "n1644754629_1",
+            "path": "observations/N1644754629_1_CALIB.IMG",
+            "labelPath": "observations/N1644754629_1_CALIB.LBL",
+            "observerLatitude": -12.4,
+            "observerWestLongitude": 106.28,
+            "sunLatitude": 4.28,
+            "sunWestLongitude": 17.28,
+            "rangeKm": 22466.8,
+            "northAzimuthDegrees": 181.39,
+            "center": [
+              640.7,
+              441.7
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          },
+          {
+            "id": "n1644754942_1",
+            "path": "observations/N1644754942_1_CALIB.IMG",
+            "labelPath": "observations/N1644754942_1_CALIB.LBL",
+            "observerLatitude": -12.58,
+            "observerWestLongitude": 98.85,
+            "sunLatitude": 4.28,
+            "sunWestLongitude": 17.97,
+            "rangeKm": 21686.2,
+            "northAzimuthDegrees": 181.31,
+            "center": [
+              631,
+              437.1
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
           }
         ],
         "photometry": {
@@ -149,6 +181,104 @@
             "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
             "url": "https://pds-rings.seti.org/cassini/iss/"
           }
+        }
+      },
+      {
+        "id": "false-color",
+        "format": "controlled-shape-color",
+        "consumer": "cassini-color-frames",
+        "channels": [
+          {
+            "channel": "red",
+            "filter": "RED",
+            "frames": [
+              {
+                "id": "n1644757030_1",
+                "path": "observations/N1644757030_1_CALIB.IMG",
+                "labelPath": "observations/N1644757030_1_CALIB.LBL",
+                "observerLatitude": -8.49,
+                "observerWestLongitude": 53.49,
+                "sunLatitude": 4.28,
+                "sunWestLongitude": 22.58,
+                "rangeKm": 27304.5,
+                "northAzimuthDegrees": 180.27,
+                "center": [
+                  457.9,
+                  470.1
+                ],
+                "pixelAngleMicroradians": 5.989697719921734
+              }
+            ]
+          },
+          {
+            "channel": "green",
+            "filter": "GRN",
+            "frames": [
+              {
+                "id": "n1644756997_1",
+                "path": "observations/N1644756997_1_CALIB.IMG",
+                "labelPath": "observations/N1644756997_1_CALIB.LBL",
+                "observerLatitude": -8.58,
+                "observerWestLongitude": 53.97,
+                "sunLatitude": 4.28,
+                "sunWestLongitude": 22.51,
+                "rangeKm": 27098.4,
+                "northAzimuthDegrees": 180.29,
+                "center": [
+                  456.4,
+                  469.7
+                ],
+                "pixelAngleMicroradians": 5.989697719921734
+              }
+            ]
+          },
+          {
+            "channel": "blue",
+            "filter": "BL1",
+            "frames": [
+              {
+                "id": "n1644756505_1",
+                "path": "observations/N1644756505_1_CALIB.IMG",
+                "labelPath": "observations/N1644756505_1_CALIB.LBL",
+                "observerLatitude": -9.95,
+                "observerWestLongitude": 62.15,
+                "sunLatitude": 4.27,
+                "sunWestLongitude": 21.42,
+                "rangeKm": 24360.8,
+                "northAzimuthDegrees": 180.52,
+                "center": [
+                  474.2,
+                  455.8
+                ],
+                "pixelAngleMicroradians": 5.989697719921734
+              }
+            ]
+          }
+        ],
+        "photometry": {
+          "weight": 0.5,
+          "maximumGain": 2.5,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 78,
+          "backgroundMaximum": 0.003
+        },
+        "displayRange": [
+          0,
+          1.05
+        ],
+        "metadata": {
+          "label": "False color",
+          "falseColor": true,
+          "coverage": "Cassini ISS NAC red, green and blue filters projected independently with the released PDS shape-camera table. Colors explicitly encode those three filters as red, green and blue; they are a registered false-color display, not natural color or a calibrated albedo map. Gray grid marks terrain outside the common reliable observation footprint and cast-shadow terrain is not reconstructed.",
+          "attribution": {
+            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/cassini/iss/"
+          }
+        },
+        "focus": {
+          "longitudeDegrees": 306.03,
+          "latitudeDegrees": -8.58,
+          "zoom": 1.1
         }
       }
     ]
