@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ef907b9920defd1a538f6ea0ca9049dedfe8c2bd46d35529d345d0313b6c1a6c"
+    "sha256": "ebb75ac39498edc98cdfcd4929cbf3c16d9f3cee4e16b2ac571a47f807cf8529"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1426,8 +1426,8 @@
       "outputs": [
         {
           "url": "/scenes/pluto/pluto-features.json",
-          "bytes": 453074,
-          "sha256": "68ccf9f4a77ebba2ef04f0cb5cb2ddf926e104ea6c03cb9e89a399816dd9caa6",
+          "bytes": 453080,
+          "sha256": "d9badd8fdb2e01b3847a0ef6190e2bb40376dcab842a5327b2088dbad971b088",
           "verification": "asset-manifest-pin"
         }
       ],

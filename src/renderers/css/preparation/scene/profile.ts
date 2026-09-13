@@ -1,10 +1,13 @@
 import type { SurfaceGeometryProfile } from '@cssearth/objects';
+import type { SeamOutsetProfile } from './seam-outset.js';
 
 export interface GeometryProfile {
   schema: 'cssearth-css-geometry-profile@1'; namespace: string; surface: SurfaceGeometryProfile;
   projection: { tileSize: number; layerElevation: number; seamBleed: number; interiorSeamBleed: number;
     overlap: number; fitToSource: boolean; rasterScale: number; rasterGutter: number; rasterOverscan: number;
-    positionVariables: boolean; projectivePoles: boolean; lightColor: string; ambientIntensity: number };
+    positionVariables: boolean; projectivePoles: boolean; lightColor: string; ambientIntensity: number;
+    /** Exact tiling whose surface leaves hold a silhouette-stepped outset instead of a fixed overlap. */
+    seamOutset?: SeamOutsetProfile };
   bodyRotationDegrees: number;
   output: { schema: string; materialSchema: string; layout: 'retained' | 'body-container'; cutawaySchema?: string; interiorOrbitSchema?: string;
     body?: { axialTiltDegrees: number; rotationDirection: string; rotationPeriodEarthDays: number };
@@ -45,6 +48,15 @@ export function parseGeometryProfile(value: unknown): GeometryProfile {
   numbers(projection, ['tileSize', 'layerElevation', 'seamBleed', 'interiorSeamBleed', 'overlap', 'rasterScale', 'rasterGutter', 'rasterOverscan', 'ambientIntensity'], 'projection');
   if (typeof projection.lightColor !== 'string') throw new TypeError('Projection needs a light colour.');
   for (const name of ['fitToSource', 'positionVariables', 'projectivePoles']) if (typeof projection[name] !== 'boolean') throw new TypeError(`projection.${name} must be boolean.`);
+  if (projection.seamOutset !== undefined) {
+    numbers(object(projection.seamOutset, 'projection.seamOutset'), ['targetPixels', 'stepRatio', 'hysteresis', 'firstDiameter', 'lastDiameter'], 'projection.seamOutset');
+    // The stepped outset replaces a stretched overlap. Leaves either tile exactly or overlap by exactly
+    // their raster overscan, so every overlapping texel is the neighbouring source texel.
+    const texture = object(surface.surface, 'surface texture');
+    const matched = [Number(texture.width) / Number(surface.longitudeSegments), Number(surface.surfaceLatitudeHeight) / Number(surface.latitudeSegments)]
+      .every(cellTexels => Math.abs(Number(projection.overlap) * cellTexels - Number(projection.rasterOverscan)) < 1e-9);
+    if (projection.seamBleed !== 0 || !matched) throw new TypeError('A stepped seam outset needs seamBleed 0 and an overlap matched to the raster overscan.');
+  }
   if (profile.cutaway !== undefined) {
     const cutaway = object(profile.cutaway, 'cutaway');
     numbers(cutaway, ['coreLatitudeSegments', 'coreLongitudeSegments', 'surfaceWidth', 'surfaceHeight', 'polarTileSize', 'polarWidth', 'polarHeight',

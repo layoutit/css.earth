@@ -9,6 +9,7 @@
  */
 import { has, number, numbers, string, strings, type KernelPool } from './text-kernel.mts';
 import { multiply, transpose, quaternionToMatrix, type Matrix3 } from './ck.mts';
+import { ECLIPTIC_OBLIQUITY_RAD } from './geometry.mts';
 
 const RAD = Math.PI / 180;
 /** SPICE `rotate`: the frame rotation by `angle` about axis 1, 2 or 3 (vectors expressed in the rotated frame). */
@@ -43,6 +44,7 @@ export interface FrameDefinition { readonly id: number; readonly name: string; r
 /** Frame ids and classes from FRAME_* variables; J2000 (1) is built in. */
 export function frameDefinition(pool: KernelPool, nameOrId: string | number): FrameDefinition {
   if (nameOrId === 'J2000' || nameOrId === 1) return { id: 1, name: 'J2000', class: 1, classId: 1 };
+  if (nameOrId === 'ECLIPJ2000' || nameOrId === 17) return { id: 17, name: 'ECLIPJ2000', class: 1, classId: 17 };
   const id = typeof nameOrId === 'number' ? nameOrId : has(pool, `FRAME_${nameOrId}`) ? number(pool, `FRAME_${nameOrId}`) : NaN;
   if (!Number.isInteger(id)) throw new Error(`Unknown frame: ${nameOrId}`);
   const name = has(pool, `FRAME_${id}_NAME`) ? string(pool, `FRAME_${id}_NAME`) : String(nameOrId);
@@ -88,7 +90,12 @@ export interface FrameProviders {
 export function rotation(pool: KernelPool, nameOrId: string | number, et: number, providers: FrameProviders, depth = 0): Matrix3 {
   if (depth > 32) throw new Error('Frame chain is too deep.');
   const frame = frameDefinition(pool, nameOrId);
-  if (frame.class === 1) { if (frame.id !== 1) throw new Error(`Only the J2000 inertial frame is supported, not ${frame.name}.`); return identity; }
+  if (frame.class === 1) {
+    if (frame.id === 1) return identity;
+    // ECLIPJ2000: the J2000 equator turned to the ecliptic about +X by the IAU 1976 obliquity.
+    if (frame.id === 17) return rotate(ECLIPTIC_OBLIQUITY_RAD, 1);
+    throw new Error(`Only the J2000 and ECLIPJ2000 inertial frames are supported, not ${frame.name}.`);
+  }
   if (frame.class === 2) { if (!providers.pck) throw new Error(`No PCK provider for ${frame.name}.`); return providers.pck(frame.classId, et); }
   if (frame.class === 3) {
     if (!providers.ck) throw new Error(`No CK provider for ${frame.name}.`);

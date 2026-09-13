@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ed573d5b7a6e657adcae2680dfe6481f194f00a75476a6398ccc601cd400e179"
+    "sha256": "61db37fbb387f4fd1caf116894f0ad83446a63a0a2f56c1bae34bf39638c74c1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
@@ -894,7 +894,7 @@
         "kind": "local",
         "reason": "Authored surface-place records with publication references and placement limits."
       },
-      "sha256": "734010530578b2fc8f17f8097f0a25ed10c9dc7c6399c8c929b9cd2457f8aa8d",
+      "sha256": "c3c1b04a02aa001662f44be2e6b9d038b751f8c18780cd540450f535dabd7e0a",
       "bytes": 2072,
       "dependencies": [],
       "verification": "manifest-pin",
@@ -934,8 +934,8 @@
         "kind": "local",
         "reason": "Authored surface-place records with publication references and placement limits."
       },
-      "sha256": "6fbbfb50780b3a9f160ae8c6818a56302b64d8f5b173e13ae0f77a4eb54fd3eb",
-      "bytes": 2832,
+      "sha256": "8e1ab63570bae7397c7a99a0919c9aca80a439bb70060259e3e830f6e1af850d",
+      "bytes": 2829,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1226,8 +1226,8 @@
       "outputs": [
         {
           "url": "/scenes/comet-81p/comet-81p-features.json",
-          "bytes": 4415,
-          "sha256": "1a953df931967f383bbeb978cf8b39fdae7c95425f109edb468c0fc55ee9b7e2",
+          "bytes": 4412,
+          "sha256": "72a415c4b86c59b2415c35829f2e9c3731b1450155725b42da750551d4ed1810",
           "verification": "asset-manifest-pin"
         }
       ],

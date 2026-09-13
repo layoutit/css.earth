@@ -9,6 +9,8 @@ import type { PreparedTree, PreparedVariant, PreparedViewBinding } from '../../r
 import type { PreparedMaterialTrack, PreparedMaterialAddress, PreparedMaterialRotation } from '../../rendering/prepared-material.js';
 import type { HeliocentricViewPlan } from '../../../../platform/heliocentric-view.mts';
 import type { PreparedTextureLevels } from '../../rendering/prepared-texture-levels.js';
+import type { PreparedSeamOutset } from '../scene/seam-outset.js';
+type SeamRepair = { outset?: PreparedSeamOutset };
 type PreparedMarkers = Awaited<ReturnType<typeof import('../../../../../tools/objects/solar-system-markers.mts').prepareSolarSystemMarkerStrip>>['plan'];
 
 export interface Lens {
@@ -41,7 +43,7 @@ export interface CompositeMaterial {
 export interface Scene {
   camera: CameraPlan & {defaultTransform: string}; systemTransform: string; bodyTransform: string;
   starfield: CubicSkyPlan & {catalogueStars: {exposure: {fovDegrees: number}}};
-  bodyLeaves: PreparedLeaf[]; body: {leaves: PreparedLeaf[]};
+  bodyLeaves: PreparedLeaf[]; body: {leaves: PreparedLeaf[]; seamRepair?: SeamRepair}; preparedSurface?: {seamRepair?: SeamRepair};
   interior: {bodyTransform: string; outerBodyLeaves: PreparedLeaf[]; coreLeaves: PreparedLeaf[]; sectionLeaves: PreparedLeaf[];
     presentationOrbit: {durationMilliseconds: number; millisecondsPerControlDegree: number; keyframes: Keyframe[]}};
   material: CompositeMaterial; heliocentricView: HeliocentricViewPlan;

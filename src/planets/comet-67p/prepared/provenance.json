@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ffd07006e16cc65450d3de96313a4165917b11e05638d192b7cfa9801ddf98b2"
+    "sha256": "3e977e10c8e246f1e5ac9d66461c68e5d451667e4ba5996a4ad0b714919d0fc2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
@@ -3058,7 +3058,7 @@
           }
         ]
       },
-      "sha256": "dd9670bdc5b53fab929a994379e95e865bac708ddbec8244921d4cb3230690ec",
+      "sha256": "4693cc2a4dd667061aa42acf8851e687ca1fb2679841072fd0b0a42f58cca5da",
       "bytes": 15859,
       "dependencies": [],
       "verification": "manifest-pin",
@@ -3533,7 +3533,7 @@
         {
           "url": "/scenes/comet-67p/comet-67p-features.json",
           "bytes": 28510,
-          "sha256": "f09e447c182a594b0d1e05ce7c328c69fad9e8a91bfe87e85a03973bec6b33d6",
+          "sha256": "30aa9c5c6d706c8aa41831703c591429a2fed3f6cdec8d46f5bc13af1ca7abf3",
           "verification": "asset-manifest-pin"
         }
       ],

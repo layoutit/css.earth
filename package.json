@@ -136,7 +136,9 @@
     "pretest": "pnpm prepare:shell",
     "typecheck:configs": "tsc -p tsconfig.configs.json",
     "lab:nebula:catalogue": "node --experimental-strip-types labs/nebula/src/run.ts inventory-messier",
-    "lab:nebula:catalogue:enrich": "node --experimental-strip-types labs/nebula/src/run.ts enrich-messier-catalogue"
+    "lab:nebula:catalogue:enrich": "node --experimental-strip-types labs/nebula/src/run.ts enrich-messier-catalogue",
+    "oracles:setup": "node tools/oracles/setup.mts",
+    "oracles:run": "node tools/oracles/run.mts"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",

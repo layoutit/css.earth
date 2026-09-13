@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "91939d0beba099baf3301b42a2fb8923e34240e0c7e024efa235aab35481d18e"
+    "sha256": "ed427fb63ad51108b66ad0531708a40c982506a54915c5cb34c831d0deec4062"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1328,8 +1328,8 @@
       "outputs": [
         {
           "url": "/scenes/triton/triton-features.json",
-          "bytes": 47759,
-          "sha256": "392cf282c0fc243bf4e1102c19e98245b2b37c978aab524201bcaae374aba2f5",
+          "bytes": 47761,
+          "sha256": "1afeae546f5bff7c64d2cae93f32cc119c8b11de8d886a58f1cffd4c58fde04a",
           "verification": "asset-manifest-pin"
         }
       ],

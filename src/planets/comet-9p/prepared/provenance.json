@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "86f143dd76efe1f17d524d79010f460b988f01f3b73729d5150df27f75e1b2df"
+    "sha256": "8f3bb875536d51325fee13bb0c52c0a453c8194f0f79d055b3e9b1e223547175"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
-    "bindingsSha256": "050134481be9f8523711d04296d5b29ff5341df598f36a63ea1be0e80ada80a5"
+    "bindingsSha256": "fafed2a02f74bea648dfb9f050ea3c01ebba34bb83d6548f755056fa5debb64c"
   },
   "recipes": [
     {
@@ -302,7 +302,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d0ec3bbfd36638a1f8cadda2f7544ae52cceed8dc2b0f1e33f7fe041aac31e8c",
+      "sha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -493,6 +493,12 @@
             "role": "stars",
             "description": "Milky Way panorama",
             "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "Thomas et al.",
+            "role": "terrain",
+            "description": "Tempel 1 mapped smooth regions, Figure 2b (2013)",
+            "href": "https://ntrs.nasa.gov/api/citations/20140010174/downloads/20140010174.pdf"
           }
         ],
         "provenance": {
@@ -2050,8 +2056,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d0ec3bbfd36638a1f8cadda2f7544ae52cceed8dc2b0f1e33f7fe041aac31e8c",
-      "bytes": 7026,
+      "sha256": "0e1de842d608b049361ea5f0c970a1a529933b9ebbfc370c5d2a9f565534fc02",
+      "bytes": 7259,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2070,8 +2076,8 @@
         "kind": "local",
         "reason": "Byte pins and source qualifications for the surface-place compilation."
       },
-      "sha256": "80b2e6c9341e1444588598c79e937c2f7c3c886bc0a030c1b724b1f24c7ddb7a",
-      "bytes": 1014,
+      "sha256": "76d286a5de111ba36b41fac8bb1224585fac07f10c7347403537279b680731a9",
+      "bytes": 1016,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2113,11 +2119,16 @@
             "catalogueId": "pds-tempel1-shape-2012",
             "role": "material",
             "evidence": "src/planets/comet-9p/source/features/landmarks.json: per-place coordinates, descriptions and publication references; checked 2026-09-12."
+          },
+          {
+            "catalogueId": "thomas-2013-tempel1-geology",
+            "role": "reference",
+            "evidence": "src/planets/comet-9p/source/features/landmarks.json: Fig. 2b axis calibration and interior controls for S1–S4; checked 2026-09-12."
           }
         ]
       },
-      "sha256": "9df9a04ae6ebfa5d8b5758659c3b8e4d322b0ae4fb24cc2d105bd59be1c12dcc",
-      "bytes": 969,
+      "sha256": "8a6244de19eeb4a33ad6b434a325817b658f51ab238e7dc05525d11577024f40",
+      "bytes": 4939,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -2347,8 +2358,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5111,
-          "sha256": "97afe153268bca8ef4fcbd7c9b0bea11ae0f808f2677ca892b237996068bcd2f",
+          "bytes": 5302,
+          "sha256": "2948069fc217849fa65f78f2f220dfa5117853e6418a552c55036eba99e22db1",
           "verification": "bytes-verified"
         }
       ],
@@ -2379,8 +2390,8 @@
       "outputs": [
         {
           "url": "/scenes/comet-9p/comet-9p-features.json",
-          "bytes": 2213,
-          "sha256": "89c802712a960e1276d8c815629c490f50aec1ced0c946ab47c6a772a626a6b9",
+          "bytes": 6342,
+          "sha256": "c1778069ed0ee9b77c4f0afcc7eac8de7479af3827d86f80ff72484b3957573e",
           "verification": "asset-manifest-pin"
         }
       ],

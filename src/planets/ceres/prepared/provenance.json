@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ff030f44d50bc0028b5a50f839a65e36b2c75cbff8d70c1d96756e62b731a530"
+    "sha256": "e133e9daf7b4d57edfbf5793a28a701cf172f8b0e72b86dbb9cb315045200c65"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1431,8 +1431,8 @@
       "outputs": [
         {
           "url": "/scenes/ceres/ceres-features.json",
-          "bytes": 255640,
-          "sha256": "77300a32ff48b3fd0e7573b05e00ab9c22e6494d0df2f171d411a227b4eb1919",
+          "bytes": 255643,
+          "sha256": "b7724d29a66795f79437d2188645827446b8c29253453e5efbb107c1c2e4d288",
           "verification": "asset-manifest-pin"
         }
       ],

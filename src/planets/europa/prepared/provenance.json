@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f3c4dfd8a269e32f20d6d1afaf63ebe2b468a0aeaf4ea2a7619719d560cc5c3d"
+    "sha256": "fea679db119627d4170fd383a7d32e910c5958e4c85143bcdd42e2eb235cace1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -2036,8 +2036,8 @@
       "outputs": [
         {
           "url": "/scenes/europa/europa-features.json",
-          "bytes": 700905,
-          "sha256": "514b6e90449f5c3285e61734a360293b89bb181dc998ce9d5cb92907b7f05321",
+          "bytes": 700906,
+          "sha256": "d1354e460f8f51451224b448eee0dd1d20456edb33773912b094c041a417b6e8",
           "verification": "asset-manifest-pin"
         }
       ],

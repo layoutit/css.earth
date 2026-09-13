@@ -51,7 +51,8 @@ describe('retained presentation compiler compatibility', () => {
 });
 // Full raw output hashes from original JS helpers; see tools/evidence/presentation-typescript-parity.json.
 // Mercury's hash was updated for its surface texture levels and JPEG surface maps.
+// Both hashes were updated for the stepped seam outset and matched raster overscan.
 const expectedDigests: Record<string, string> = {
-  mercury: '4070cf874d98f9ead4aed6abdaeb4be984759350cff9b637bf1c3c1131cd3dd1',
-  venus: 'e0df212c4a67bb80ec3abd5e11bd39cd84aa563e4c0044abff1d22c92c1bbdbe',
+  mercury: '510e8f2c6b5beafe2f5d4f9fb85fa1f5b20cd414cf9a1f7f149b4eb01f250c21',
+  venus: 'ef9676f16170a6e218e8aff6cdd16dfb7dec677b4af67f67b10d274580bfd170',
 };
