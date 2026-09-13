@@ -127,12 +127,20 @@ candidate qualified across the views, and no internal terrain control network
 was established. This coarse search does not rule out a valid orientation or
 a usable mesh.
 
-The detector-aware helper passes its nonlinear-distortion regression and the
-three existing limb-refinement tests; the preparation TypeScript check passes.
-These checks validate the helper, not a Dinkinesh surface. The prepared, unsent source
-request identifies the STL export transform, epoch-bound rotation, matching
-camera/control data, higher-resolution reference mesh, coverage mask and reuse
-terms needed to resume photographic qualification.
+A subsequent audit found a sampling defect in that check: limiting the
+raster-ordered edge list to 300 points removed its lower end. On image `9617`,
+the retained boundary ended at row 809 while detected edges extended to row
+949; 94 lower points were omitted. Sampling across the entire list instead
+changes the phase-0 trial from a 2.161-pixel holdout RMS pass to a 5.506-pixel
+failure under the unchanged 3-pixel budget. The earlier passes are therefore
+not evidence of agreement around the full outline.
+
+The corrected helper passes all five limb-refinement tests, including
+nonlinear detector distortion and coverage of all four boundary sides in both
+fit and holdout samples; the preparation TypeScript check passes.
+These checks validate the helper, not a Dinkinesh surface. The STL export
+transform, epoch-bound rotation and agreement with independent terrain features
+remain under investigation using the public model, mission products and papers.
 
 Continue by establishing the retrieved candidate's upstream attribution,
 body-frame and observed/model-filled coverage, and the matching reconstructed
