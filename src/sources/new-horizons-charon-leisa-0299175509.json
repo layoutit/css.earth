@@ -1,0 +1,30 @@
+{
+  "id": "new-horizons-charon-leisa-0299175509",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "New Horizons Charon C_LEISA_HIRES spectral cube",
+  "version": "1.0",
+  "identifiers": [
+    {
+      "type": "PDS4 LIDVID",
+      "value": "urn:nasa:pds:nh_derived:plutosystem_composition:0299175509_charon_cube::1.0"
+    }
+  ],
+  "publisher": "NASA Planetary Data System",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+      "label": "Spectra, wavelengths and surface coordinates"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/spec/charon/0299175509_charon_cube.lblx",
+      "checkedOn": "2026-09-13",
+      "locator": "Identification_Area; Observation_Area; File_Area_Observational and supplemental arrays"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

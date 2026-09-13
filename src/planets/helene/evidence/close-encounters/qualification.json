@@ -1,0 +1,228 @@
+{
+  "baseline": "ebd16155a5eb408b6a96a7eaf4c9620b8a0b8451",
+  "checks": {
+    "package": {
+      "assetCount": 38,
+      "sourceInputCount": 41
+    },
+    "sourceGeometryRecipeUnchanged": true,
+    "retainedSceneGeometryUnchanged": true,
+    "geometrySha256": "1e9cd3a8f21a144c91d6294b7db6aafc6d6673ffda39307ce52fba9140b5618a",
+    "surfaceTrianglesSha256": "641fb8995f7c4b7a2ad5568357c43cd9faf8b360ea51cb4e3f8f3eb1f28b2456"
+  },
+  "normal": {
+    "beforeFrames": 7,
+    "afterFrames": 11,
+    "beforeGridCells": 1066236,
+    "afterGridCells": 1067659,
+    "totalGridCells": 2097152,
+    "newFrames": [
+      {
+        "id": "n1687121524_1",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "rasterOffset": 8192,
+        "encoding": "calibrated",
+        "resolutionMeters": 67.15289701713053,
+        "correctedPixels": 344292,
+        "level": 1.1581243787523454,
+        "overlapSamples": 11736
+      },
+      {
+        "id": "n1687121224_1",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "rasterOffset": 8192,
+        "encoding": "calibrated",
+        "resolutionMeters": 60.85772471349279,
+        "correctedPixels": 326660,
+        "level": 1.231829359354172,
+        "overlapSamples": 20419
+      },
+      {
+        "id": "n1687121164_1",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "rasterOffset": 8192,
+        "encoding": "calibrated",
+        "resolutionMeters": 59.65798826019247,
+        "correctedPixels": 321276,
+        "level": 1.2494698081608513,
+        "overlapSamples": 20103
+      },
+      {
+        "id": "n1687119135_1",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "rasterOffset": 8192,
+        "encoding": "calibrated",
+        "resolutionMeters": 43.91227089406221,
+        "correctedPixels": 67027,
+        "level": 1.4,
+        "overlapSamples": 4117
+      }
+    ]
+  },
+  "falseColor": {
+    "gridCells": 241046,
+    "totalGridCells": 2097152,
+    "colorDisplay": {
+      "kind": "band-composite",
+      "inputQuantity": "radiance-factor",
+      "bands": [
+        "IR3",
+        "IR1",
+        "UV3"
+      ],
+      "displayRange": [
+        0,
+        1.05
+      ],
+      "outputEncoding": "srgb",
+      "interpretation": "false-color",
+      "transferReference": "https://registry.color.org/rgb-registry/files/sRGB.pdf",
+      "processing": "Source values remain floating point through interpolation, photometry and compositing. One common range maps the selected bands to linear display channels; IEC sRGB encoding and 8-bit quantization happen once, at output. This does not reconstruct natural color."
+    },
+    "registration": {
+      "method": "The authored cameras are measured against their reference images; preparation refits nothing.",
+      "criteria": {
+        "minimumCorrelation": 0.9,
+        "minimumSeparatedPeakMargin": 0.01,
+        "minimumPeakCurvature": 0.002,
+        "minimumFitControls": 6,
+        "minimumHoldoutControls": 6,
+        "maximumHoldoutRmsPixels": 1,
+        "maximumHoldoutResidualPixels": 2
+      },
+      "checks": [
+        {
+          "reference": "n1687120497_1",
+          "target": "n1687120033_1",
+          "filter": "reference",
+          "fit": {
+            "count": 20,
+            "rmsPixels": 2.1596130422442754,
+            "maximumPixels": 8.289632009571807
+          },
+          "holdout": {
+            "count": 18,
+            "rmsPixels": 0.8603335683203995,
+            "maximumPixels": 1.5008936991721653
+          }
+        },
+        {
+          "reference": "n1687120497_1",
+          "target": "n1687120587_1",
+          "filter": "IR3",
+          "fit": {
+            "count": 24,
+            "rmsPixels": 0.43899753160247684,
+            "maximumPixels": 1.1272486118345126
+          },
+          "holdout": {
+            "count": 26,
+            "rmsPixels": 0.48391514601166835,
+            "maximumPixels": 1.4129353947221643
+          }
+        },
+        {
+          "reference": "n1687120497_1",
+          "target": "n1687120557_1",
+          "filter": "IR1",
+          "fit": {
+            "count": 24,
+            "rmsPixels": 0.29377885686732863,
+            "maximumPixels": 0.6888224840286548
+          },
+          "holdout": {
+            "count": 26,
+            "rmsPixels": 0.26920300957748233,
+            "maximumPixels": 0.7996387101463504
+          }
+        },
+        {
+          "reference": "n1687120497_1",
+          "target": "n1687120624_1",
+          "filter": "UV3",
+          "fit": {
+            "count": 24,
+            "rmsPixels": 0.5607901924817352,
+            "maximumPixels": 1.5286639177268855
+          },
+          "holdout": {
+            "count": 25,
+            "rmsPixels": 0.604128734280381,
+            "maximumPixels": 1.1356616261534505
+          }
+        },
+        {
+          "reference": "n1687120033_1",
+          "target": "n1687119936_1",
+          "filter": "IR3",
+          "fit": {
+            "count": 17,
+            "rmsPixels": 0.350029312854913,
+            "maximumPixels": 1.1115438690212722
+          },
+          "holdout": {
+            "count": 20,
+            "rmsPixels": 0.34217498283960723,
+            "maximumPixels": 0.6248215714466027
+          }
+        },
+        {
+          "reference": "n1687120033_1",
+          "target": "n1687119906_1",
+          "filter": "IR1",
+          "fit": {
+            "count": 17,
+            "rmsPixels": 0.3046220520412056,
+            "maximumPixels": 0.7428987339578181
+          },
+          "holdout": {
+            "count": 20,
+            "rmsPixels": 0.4617309563611564,
+            "maximumPixels": 1.1546613567088038
+          }
+        },
+        {
+          "reference": "n1687120033_1",
+          "target": "n1687119973_1",
+          "filter": "UV3",
+          "fit": {
+            "count": 14,
+            "rmsPixels": 0.5293577018157756,
+            "maximumPixels": 1.1995118814839223
+          },
+          "holdout": {
+            "count": 19,
+            "rmsPixels": 0.47670037847054697,
+            "maximumPixels": 0.8927268945369844
+          }
+        }
+      ]
+    },
+    "frameSets": [
+      {
+        "frames": [
+          "n1687120587_1",
+          "n1687120557_1",
+          "n1687120624_1"
+        ],
+        "coveragePixels": 240918,
+        "addedPixels": 240918
+      },
+      {
+        "frames": [
+          "n1687119936_1",
+          "n1687119906_1",
+          "n1687119973_1"
+        ],
+        "coveragePixels": 108920,
+        "addedPixels": 128
+      }
+    ]
+  },
+  "interpretation": "Grid-cell counts describe the fixed 2048 by 1024 cylindrical preparation map. They are not physical surface-area percentages or an atlas-texel count. Nominal source resolution varies across the projected surface.",
+  "recipeSha256": "732e5697f309648c42ad4e70439ea567002b3b401537d5569af81510be21b95d"
+}

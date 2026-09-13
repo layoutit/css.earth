@@ -13,7 +13,7 @@ import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../..
 import { OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
-const LENS_IDS = ["normal","enhanced-color","elevation","albedo"];
+const LENS_IDS = ["normal","enhanced-color","elevation","albedo","water-ice","ammonia"];
 
 objectRuntimePackageTests(runtimeDefinition);
 
@@ -25,7 +25,7 @@ test("Charon's actual import closure has only shared runtime owners", async () =
   }
 });
 
-test("Charon is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 4 lenses", () => {
+test("Charon is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its lenses", () => {
   assert.equal(scene.schema, "csscharon-prepared-runtime-scene@1");
   assert.equal(scene.runtimeGeometry, false);
   assert.equal(scene.runtimeRasterization, false);

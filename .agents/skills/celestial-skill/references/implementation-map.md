@@ -111,6 +111,12 @@ instead of editing a shared list or atlas position.
   its height datum, validity limits and cartographic lighting to
   `tools/objects/terrestrial-layers/scientific-raster.mts`. These values and gap
   rules belong to its dataset.
+- **Spectral absorption maps:** Charon's `source/science/leisa/bands.json`
+  pairs LEISA spectra with wavelength and geometry cubes.
+  `tools/objects/observation/spectral-band-maps.mts` prepares footprint-limited
+  numeric maps; `tools/oracles/fits/charon-leisa.py` independently checks the
+  native samples and arithmetic. Follow the spectral guidance in
+  [scientific faithfulness](scientific-faithfulness.md).
 - **A sourced shape model:** Haumea's `source/preparation/shape-model.json` uses
   `tools/objects/shape-model/`. Inspect both the authored schema and that
   preparer's actual shape support before choosing it for another body; verify
