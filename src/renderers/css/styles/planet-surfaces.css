@@ -703,6 +703,30 @@
   background-image: url("/scenes/pluto/pluto-poles-monochrome@2x.webp") !important;
 }
 
+.planet-stage[data-object-id="pluto"][data-lens="methane-ice"] .polycss-scene s:not(.pluto-polar) {
+  background-image: url("/scenes/pluto/pluto-methane-ice@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="pluto"][data-lens="methane-ice"] .polycss-scene s.pluto-polar {
+  background-image: url("/scenes/pluto/pluto-poles-methane-ice@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="pluto"][data-lens="nitrogen-ice"] .polycss-scene s:not(.pluto-polar) {
+  background-image: url("/scenes/pluto/pluto-nitrogen-ice@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="pluto"][data-lens="nitrogen-ice"] .polycss-scene s.pluto-polar {
+  background-image: url("/scenes/pluto/pluto-poles-nitrogen-ice@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="pluto"][data-lens="water-ice"] .polycss-scene s:not(.pluto-polar) {
+  background-image: url("/scenes/pluto/pluto-water-ice@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="pluto"][data-lens="water-ice"] .polycss-scene s.pluto-polar {
+  background-image: url("/scenes/pluto/pluto-poles-water-ice@2x.webp") !important;
+}
+
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .planet-stage[data-object-id="pluto"] .pluto-fixed-material {

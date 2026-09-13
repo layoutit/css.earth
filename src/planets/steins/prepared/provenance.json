@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "steins",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "126ccf68ac2aee23609639bc7d6056bd84118ac56881ac60258d397a93a1d807"
@@ -512,7 +512,7 @@
       "sha256": "3362a9e73ddf7b4d11e9a4a2076e9c181d1c3e6e70a2ff71f742e27b6a96e9c9",
       "bytes": 725269,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -558,7 +558,7 @@
       "sha256": "4ef16c6d805336dc4dd878835e900b62c8ba4f0f8056da1ae18189cb6dc67aff",
       "bytes": 2470000,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -595,7 +595,7 @@
       "sha256": "8bfed974937fd7efc870911d9d7c6c8e2938e56633f0987f51bcfbd1388678f6",
       "bytes": 615424,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -623,7 +623,7 @@
       "sha256": "3b855f3764ab7baa2606a03fa3495e84ee8f4e3f0971d7a8757e5f29371069e9",
       "bytes": 2899,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -649,7 +649,7 @@
       "sha256": "f3c3f69503c25b4508d9d9b3fc37a602b0d25b8b7c843016c099c31d72e1791d",
       "bytes": 615424,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -680,7 +680,7 @@
       "sha256": "c300b7604f69398ee30f89554bd79e5aaeaa722ef48e4fb58a9d0425ca87430e",
       "bytes": 2932,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -700,7 +700,7 @@
       "sha256": "5630463a2e329b08951995123361970234d9f8a0f8186d32c2f5e3bf5a442395",
       "bytes": 9767,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -720,7 +720,7 @@
       "sha256": "987fa5861a1e49485dd57340708cd38ca9b863f1538f09c02e686bb6333243c0",
       "bytes": 1004,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -746,7 +746,7 @@
       "sha256": "16001f4727a58377f0482f02f19f38cb1da71930894acbc9c7c7e5f007ffb5e6",
       "bytes": 99707,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -773,7 +773,7 @@
       "sha256": "d3f502433696ef6dfb39d4070fc32ebe84d266034f2857e3d0221508152daf8a",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -800,7 +800,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -845,13 +845,13 @@
           "url": "/scenes/steins/steins-normal-thumbnail.webp",
           "bytes": 3332,
           "sha256": "ec0458c470557ad861f7b96fcfbcb3b506fb78c696c6fbb7fc7f69d85c07b7a4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/steins/steins-normal-surface@2x.webp",
           "bytes": 549196,
           "sha256": "57e0d02efc28bdcff47299bd63b29b776a12a90bc98cef36f498bfee9c083c1a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -881,19 +881,19 @@
           "url": "/scenes/steins/steins-elevation-thumbnail.webp",
           "bytes": 5488,
           "sha256": "c08bbe36248074cd7b95ccc68f8af37ad32b32ce305525cee72d46e53efefc87",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/steins/steins-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/steins/steins-elevation-surface@2x.webp",
           "bytes": 326066,
           "sha256": "ad844e537f006d2ad48935b7be2ca29f89fd1eb5bc24ac22b2fb21ef7b458f09",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -927,13 +927,13 @@
           "url": "/scenes/steins/steins-osiris-thumbnail.webp",
           "bytes": 1724,
           "sha256": "6699409a8ea267e5f676fae8be24f53ec661bcbbfb2d3da7d799ec84248f29ea",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/steins/steins-osiris-surface@2x.webp",
           "bytes": 283696,
           "sha256": "833b6747495c825d89c7696be2581bae9fd7594d90b870e444c63a8806425c8b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -993,7 +993,7 @@
           "url": "/scenes/steins/steins-features.json",
           "bytes": 17067,
           "sha256": "55da6b09e2ece924b9acbad3608143bf84010df77d4a2606ef149422a0e6f541",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

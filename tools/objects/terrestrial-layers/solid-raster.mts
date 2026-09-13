@@ -37,7 +37,7 @@ import { prepareControlledOrthographicMosaic } from './controlled-orthographic-m
 import { prepareShapeCameraMosaic, prepareShapeCameraColor, resolveCameraPhotometry } from './shape-camera-mosaic.mts';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mts';
 import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mts';
-import { loadGeoObservationSurface } from './observed-geo-surface.mts';
+import { loadSurfaceObservation } from '../surface-observations/index.mts';
 import { renderRadialSnapshot } from './radial-snapshot.mts';
 import { radialModelForLens } from './radial-models.mts';
 
@@ -206,7 +206,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   for (const recipe of config.raster.surfaceObservations ?? []) {
     const model = modelForLens(recipe.id), observationRadial = model?.radial ?? radial, observationConfig = model?.config ?? config;
     if (!observationRadial?.grid?.closestPoint) throw new Error('Georeferenced observations require source-preserving terrain.');
-    const observation = await loadGeoObservationSurface({ sourceDirectory, source, recipe, radial:{...observationRadial,grid:requireTerrainMesh(observationRadial.grid)}, config:{geometry:shape({radius:number,radiusKm:number,radialTerrain:shape({path:text,simplification:shape({method:text,maximumErrorMeters:number})})})(observationConfig.geometry),raster:config.raster} });
+    const observation = await loadSurfaceObservation({ sourceDirectory, source, recipe, radial:{...observationRadial,grid:requireTerrainMesh(observationRadial.grid)}, config:{geometry:shape({radius:number,radiusKm:number,radialTerrain:shape({path:text,simplification:shape({method:text,maximumErrorMeters:number})})})(observationConfig.geometry),raster:config.raster} });
     observationRadial.observationSurfaces ??= new Map();
     observationRadial.observationSurfaces.set(recipe.id, observation);
     const { rgb, missing } = observation.preview(width, height);

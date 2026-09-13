@@ -14,7 +14,7 @@
     ]
   },
   "introduction": {
-    "text": "Arrokoth's two lobes are joined at a narrow neck. New Horizons photographed its southern side up close.",
+    "text": "Arrokoth's two lobes, Wenu and Weeyo, meet at a bright neck. New Horizons photographed it on 1 January 2019.",
     "sources": [
       {
         "catalogueId": "source-arrokoth-published-shape",
@@ -26,6 +26,16 @@
     ]
   },
   "datasets": {
+    "lorri": {
+      "title": "New Horizons close approach",
+      "detail": "Photograph · 33 m/pixel",
+      "summary": "A photograph taken 6,628 km from Arrokoth, in its original lighting; bright patches and the neck show."
+    },
+    "mvic": {
+      "title": "New Horizons enhanced color",
+      "detail": "NIR, red, blue · 340 m/px",
+      "summary": "Near-infrared, red and blue bands aligned by the mission team: enhanced color, not natural color."
+    },
     "albedo": {
       "title": "New Horizons LORRI albedo model",
       "detail": "LORRI model",
