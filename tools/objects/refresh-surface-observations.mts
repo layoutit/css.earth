@@ -55,7 +55,7 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
         plan.rect.x !== radial.plans[i].rect.x || plan.rect.y !== radial.plans[i].rect.y ||
         plan.matrix.some((value, j) => value !== radial.plans[i].matrix[j]))) throw new Error('Retained atlas geometry differs from the source recipe.');
   await mkdir(stage, { recursive: true });
-  const rasterConfig = { ...config, raster: { ...config.raster, observations: [], scientific: [], shapeViews: [], mosaics: [], observedColors: [], surfaceObservations: selected } };
+  const rasterConfig = { ...config, raster: { ...config.raster, observations: [], scientific: [], shapeViews: [], observedColors: [], surfaceObservations: selected } };
   const surfaces = await prepareSolidRasters({ config: rasterConfig, sourceDirectory, source, radial, publicDirectory: stage, outputDirectory: stage });
   // Like the full preparer's material step, record each surface's billboard colour before the radial materials add its shadow surface.
   await prepareSolidSurfacePoles({ surfaces, publicDirectory: stage, config: rasterConfig });

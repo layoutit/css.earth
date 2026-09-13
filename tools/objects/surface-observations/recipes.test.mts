@@ -70,3 +70,13 @@ test('a controlled camera names a published model or a disk function, never a mi
     assert.throws(() => parseTerrestrialProfile(changed), /source-bound/, `${body.id} accepted a ${name}`);
   }
 });
+
+test('the retired raster.mosaics group refuses any lens, so photograph lenses stay on the surface-observation contract', () => {
+  const body = authored.find(candidate => candidate.id === 'pallene');
+  assert.ok(body);
+  const changed = structuredClone(body.profile);
+  fixtureRecord(changed, 'raster')['mosaics'] = [structuredClone(changed.raster.surfaceObservations[0])];
+  assert.throws(() => parseTerrestrialProfile(changed), /raster\.mosaics is retired/);
+  fixtureRecord(changed, 'raster')['mosaics'] = [];
+  assert.doesNotThrow(() => parseTerrestrialProfile(changed), 'an empty retired group is still accepted');
+});

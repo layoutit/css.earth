@@ -8,8 +8,8 @@ import { fitBackplaneCamera } from '../../../../tools/objects/surface-observatio
 import { fixtureRecord } from '../../../../tools/test-values.mts';
 import { decodeSpiceCameraFrame } from '../../../../tools/objects/terrestrial-layers/spice-camera.mts';
 import { project } from '../../../../tools/objects/terrestrial-layers/osiris-geo.mts';
-import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
-import { requireTerrainMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
+import { parseRadialLoaderConfig } from '../../../../tools/objects/terrestrial-layers/radial-source.mts';
+import { loadRadialTerrain, requireTerrainMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { loadKernelSet } from '../../../../tools/spice/kernel-set.mts';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
 import { parseSpiceCamera } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
@@ -117,8 +117,11 @@ test('the kernel Sun direction agrees with JPL Horizons; the archived phase plan
 
 test('the seam derives per-pixel geometry on the retained OBJ from the kernel camera within the transfer bound', async t => {
   const source = await createSourceManifest({ planetId: 'dimorphos', planetName: 'Dimorphos', sourceRoot: root });
-  const grid = requireTerrainMesh(await loadObjShape(resolve(root, config.geometry.radialTerrain.path), config.geometry.radialTerrain.grid));
-  const observation = await loadSurfaceObservation({ sourceDirectory: root, source, recipe, radial: { grid, faces: [] },
+  // Preparation's own terrain: the retained OBJ as the source mesh, and the display faces whose samples set the display range.
+  const radial = await loadRadialTerrain({ config: parseRadialLoaderConfig(config), sourceDirectory: root, source });
+  if (!radial) throw new Error('Dimorphos has no radial terrain.');
+  const grid = requireTerrainMesh(radial.grid);
+  const observation = await loadSurfaceObservation({ sourceDirectory: root, source, recipe, radial: { grid, faces: radial.faces },
     config: { geometry: { radius: config.geometry.radius, radiusKm: config.geometry.radiusKm, radialTerrain: config.geometry.radialTerrain }, raster: config.raster } });
   const prepared = observation.report, geometry = fixtureRecord(prepared, 'frames', 0, 'geometry'), coverage = fixtureRecord(prepared, 'frames', 0, 'pixels');
   assert.ok(Number(geometry.geometryPixels) > 100000, JSON.stringify(geometry));
