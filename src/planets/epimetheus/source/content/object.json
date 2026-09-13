@@ -74,7 +74,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "filter-color": "Filter color"
     },
     "controls": [
       {
@@ -92,6 +93,22 @@
           "url": "https://pds-rings.seti.org/cassini/iss/"
         },
         "summary": "Brightness matching reduces photographed shading. The gray grid marks missing coverage and terrain hidden in cast shadows."
+      },
+      {
+        "id": "filter-color",
+        "label": "Filter color",
+        "description": "Cassini IR3, GRN, UV3 filters displayed as red, green and blue; observed illumination and common coverage only.",
+        "title": "Cassini filter color",
+        "detail": "Cassini",
+        "thumbnail": "/scenes/epimetheus/epimetheus-filter-color-thumbnail.webp",
+        "surface": "epimetheus-filter-color-surface@2x.webp",
+        "poles": "epimetheus-filter-color-surface@2x.webp",
+        "source": {
+          "id": "n1866365919",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/"
+        },
+        "summary": "False color from separately registered filters. Gray grid marks missing common coverage; photographed shadows remain."
       },
       {
         "id": "elevation",

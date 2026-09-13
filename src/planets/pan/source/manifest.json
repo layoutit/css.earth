@@ -492,6 +492,258 @@
           }
         ]
       }
+    },
+    {
+      "id": "n1867606339",
+      "path": "observations/N1867606339_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "0a4f92747ec29748ccb5af530f282a2d8148ff15b6365f4410f80074af51ea54",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606339_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1867606339",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL 4.0beta I/F image from the PDS RMS archive.",
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "cassini-color-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606339_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2111-data-1867604117-1867668218-n1867606339-1-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606339_1_CALIB.LBL"
+          }
+        ]
+      },
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/pan_document.pdf",
+        "longitudeDirection": "west-positive"
+      },
+      "coverage": "IR1 observation registered with the Thomas 2018 camera table; common three-filter footprint only."
+    },
+    {
+      "id": "n1867606339-label",
+      "path": "observations/N1867606339_1_CALIB.LBL",
+      "expectedBytes": 3848,
+      "expectedSha256": "930579b1c3fec5a230ac0b8619120f196c533cf0b9516e9deeef645217517c14",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606339_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1867606339",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL 4.0beta I/F image from the PDS RMS archive.",
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "cassini-color-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606339_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2111-data-1867604117-1867668218-n1867606339-1-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606339_1_CALIB.LBL"
+          }
+        ]
+      }
+    },
+    {
+      "id": "n1867606284",
+      "path": "observations/N1867606284_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "7c3f5612d0d401fd07133f43a7a11ff9b84b87a9354c47776b2d72dab66c8e68",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606284_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1867606284",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL 4.0beta I/F image from the PDS RMS archive.",
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "cassini-color-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606284_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2111-data-1867604117-1867668218-n1867606284-1-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606284_1_CALIB.LBL"
+          }
+        ]
+      },
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/pan_document.pdf",
+        "longitudeDirection": "west-positive"
+      },
+      "coverage": "GRN observation registered with the Thomas 2018 camera table; common three-filter footprint only."
+    },
+    {
+      "id": "n1867606284-label",
+      "path": "observations/N1867606284_1_CALIB.LBL",
+      "expectedBytes": 3841,
+      "expectedSha256": "93ba6dd939f14556ad1de64e5b1bec2077383a00aaa28cef2396cb9268fbd5a0",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606284_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1867606284",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL 4.0beta I/F image from the PDS RMS archive.",
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "cassini-color-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606284_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2111-data-1867604117-1867668218-n1867606284-1-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606284_1_CALIB.LBL"
+          }
+        ]
+      }
+    },
+    {
+      "id": "n1867606229",
+      "path": "observations/N1867606229_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "980b591ca9266725a607b0597965f8403a242afd050fba5949ea2c52182c5a6d",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606229_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1867606229",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL 4.0beta I/F image from the PDS RMS archive.",
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "cassini-color-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606229_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2111-data-1867604117-1867668218-n1867606229-1-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606229_1_CALIB.LBL"
+          }
+        ]
+      },
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "shape/pan_document.pdf",
+        "longitudeDirection": "west-positive"
+      },
+      "coverage": "UV3 observation registered with the Thomas 2018 camera table; common three-filter footprint only."
+    },
+    {
+      "id": "n1867606229-label",
+      "path": "observations/N1867606229_1_CALIB.LBL",
+      "expectedBytes": 3841,
+      "expectedSha256": "3ec5e09e47300310739c6b3ec1498bff2c8010ee40acb2cbd9bdab48aa824e3b",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606229_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1867606229",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL 4.0beta I/F image from the PDS RMS archive.",
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "cassini-color-frames"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606229_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2111-data-1867604117-1867668218-n1867606229-1-calib",
+            "role": "material",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2111/data/1867604117_1867668218/N1867606229_1_CALIB.LBL"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -525,8 +777,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5172,
-      "expectedSha256": "0d4c650557d3461ac1bb925f4ae44958cda3d30c58d7dc4e2f3a6fd6293f3221",
+      "expectedBytes": 5984,
+      "expectedSha256": "07350e5442d5238ed34cc0b510f162ed6138133082dc5dab449fbaa6737f80ab",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored page text, factsheet and view descriptions."
@@ -539,8 +791,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3502,
-      "expectedSha256": "161266b27358750471ca43ae6e9938580d043ecc82f71b72de1ec92688bed533"
+      "expectedBytes": 5170,
+      "expectedSha256": "43ef89a52289bd18f1aa7309bfce2a462ab9ce0e5c7101e0fef123b16892d7c1"
     },
     {
       "path": "preparation/navigation.json",
@@ -554,8 +806,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6365,
-      "expectedSha256": "5b088ea498080b33468fc705aaf87e8c16b602f104b54322d620cfea33ae1e5e"
+      "expectedBytes": 9746,
+      "expectedSha256": "64548bcd12ca97903074b15ad2d9dbd33d8754df03302c9bdc2b4f4782ec78c3"
     },
     {
       "path": "presentation/minimap.json",

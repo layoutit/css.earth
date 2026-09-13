@@ -52,7 +52,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "filter-color": "Filter color"
     },
     "controls": [
       {
@@ -70,6 +71,22 @@
           "url": "https://pds-rings.seti.org/cassini/iss/calibration.html"
         },
         "summary": "Green-filter detail is combined with clear-filter images. Brightness matching reduces shading; the gray grid marks gaps."
+      },
+      {
+        "id": "filter-color",
+        "label": "Filter color",
+        "description": "Cassini RED, GRN, BL1 filters displayed as red, green and blue; observed illumination and common coverage only.",
+        "title": "Cassini filter color",
+        "detail": "Cassini",
+        "thumbnail": "/scenes/daphnis/daphnis-filter-color-thumbnail.webp",
+        "surface": "daphnis-filter-color-surface@2x.webp",
+        "poles": "daphnis-filter-color-surface@2x.webp",
+        "source": {
+          "id": "n1656999219",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/"
+        },
+        "summary": "Coarse 2010 filter color, about 18 source pixels across the moon. Monochrome has sharper 2017 imagery. Gray grid marks gaps; this is false color."
       },
       {
         "id": "elevation",

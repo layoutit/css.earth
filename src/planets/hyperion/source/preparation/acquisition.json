@@ -224,6 +224,54 @@
       ],
       "path": "features/HYPERION_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/HYPERION_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1506388324_2_CALIB.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388324_2_CALIB.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1506388324_2_CALIB.LBL",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388324_2_CALIB.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1506388291_2_CALIB.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388291_2_CALIB.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1506388291_2_CALIB.LBL",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388291_2_CALIB.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1506388236_2_CALIB.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506388236_2_CALIB.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1506388236_2_CALIB.LBL",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506388236_2_CALIB.LBL"
     }
   ]
 }
