@@ -47,7 +47,7 @@ export async function pinObjectDocuments(objectDirectory: string, { write = true
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const arguments_ = process.argv.slice(2), check = arguments_.includes('--check'), ids = arguments_.filter(argument => argument !== '--check');
   if (ids.length !== 1 || !/^[a-z][a-z0-9-]*$/u.test(ids[0])) throw new TypeError('Usage: pin-object-documents <object-id> [--check]');
-  const changes = await pinObjectDocuments(resolve('src/planets', ids[0]), { write: !check });
+  const changes = await pinObjectDocuments(resolve('src/objects', ids[0]), { write: !check });
   for (const change of changes) console.log(`${check ? 'stale' : 'pinned'} ${change.file} ${change.path} ${change.previousSha256.slice(0, 8)} -> ${change.expectedSha256.slice(0, 8)} (${change.expectedBytes} bytes)`);
   if (!changes.length) console.log(`${ids[0]}: document pins are current.`);
   if (check && changes.length) process.exitCode = 1;

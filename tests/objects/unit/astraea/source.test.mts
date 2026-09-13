@@ -7,7 +7,7 @@ import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/astraea/source'),read=async (p:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,p),'utf8'));
+const root=resolve(import.meta.dirname,'../../../../src/objects/astraea/source'),read=async (p:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,p),'utf8'));
 test('Astraea retains source identity and restoration closure',async()=>{
  const source=await createSourceManifest({planetId:'astraea',planetName:'Astraea',sourceRoot:root});await source.verify();
  const plan=requireAcquisitionPlan(await read('preparation/acquisition.json'));for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));

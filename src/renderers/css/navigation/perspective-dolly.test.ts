@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { createPerspectiveDolly, levelOfDetailFor } from './perspective-dolly.js';
-import scene from '../../../planets/mercury/prepared/scene.json';
+import scene from '../../../objects/mercury/prepared/scene.json';
 
 it('crossfades mesh and marker in two stages, drawing no billboard disc', () => {
   const lod = { model: 'silhouette-diameter-crossfade', billboardFadeStartDiscPixels: 20,

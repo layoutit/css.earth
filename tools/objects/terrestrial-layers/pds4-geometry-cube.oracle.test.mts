@@ -15,7 +15,7 @@ import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '
  */
 const fixture = await readOracleFixture('pds/dart-draco-cube.json');
 const planes = requireRecord(fixture.cases.planes);
-const source = resolve(ORACLE_ROOT, 'src/planets/dimorphos/source');
+const source = resolve(ORACLE_ROOT, 'src/objects/dimorphos/source');
 const config = JSON.parse(await readFile(resolve(source, 'preparation/terrestrial.json'), 'utf8'));
 const mosaic = config.raster.surfaceObservations.find((entry: { id: string }) => entry.id === 'draco');
 const recipe = { ...mosaic, ...mosaic.frames.find((frame: { id: string }) => frame.id === 't-minus-11s') };

@@ -1,5 +1,5 @@
 import { browserProfileLensIds, createObjectBrowserProfile } from '../../../../site/test/object-browser-profile.mts';
-import objectControls from '../../../../src/planets/helene/prepared/controls.json' with { type: 'json' };
+import objectControls from '../../../../src/objects/helene/prepared/controls.json' with { type: 'json' };
 
 export const browserProfile = createObjectBrowserProfile({ id: 'helene', controls: objectControls,
   audit: {

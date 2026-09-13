@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import sharp from 'sharp';
-const root=new URL('../../../../src/planets/galatea/',import.meta.url);
+const root=new URL('../../../../src/objects/galatea/',import.meta.url);
 test('Galatea ellipsoid retains Karkoschka published axes at independent cardinal anchors',async()=>{
  const recipe=JSON.parse((await readFile(new URL('source/preparation/terrestrial.json',root))).toString('utf8'));
  const shape=parsePdsRadiusTable(await readFile(new URL('source/shape/ellipsoid.tab',root),'utf8'),recipe.geometry.radialTerrain.grid);

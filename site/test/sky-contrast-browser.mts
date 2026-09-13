@@ -7,7 +7,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import { scrollToDistance as scrollTo } from './wheel-zoom-distance.mts';
-import contextInput from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import contextInput from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 
 const worldContext=parsePreparedWorldContext(contextInput);
 const opacityProfile = worldContext.volume.opacityProfile;

@@ -11,11 +11,11 @@ navigation. Shared banks store each of them once.
 
 | Path | What it holds |
 | --- | --- |
-| `src/planets/sun/prepared/shared/planet-points/<sha256>.json` | One planet point photometry table per body and epoch. The `label` names the body. |
-| `src/planets/sun/prepared/shared/heliocentric-labels/<sha256>.json` | One heliocentric label set per epoch. |
+| `src/objects/sun/prepared/shared/planet-points/<sha256>.json` | One planet point photometry table per body and epoch. The `label` names the body. |
+| `src/objects/sun/prepared/shared/heliocentric-labels/<sha256>.json` | One heliocentric label set per epoch. |
 | `src/objects/milky-way/prepared/shared/catalogue-stars/<sha256>.json` | The retained star catalogue. |
-| `src/planets/<id>/prepared/runtime.refs.json`, `scene.refs.json`, `sky.refs.json` | The checked-in twins. Each shared value is replaced by `{ "$shared": { "kind", "sha256" } }`. |
-| `src/planets/<id>/prepared/runtime.json`, `scene.json`, `sky.json` | The full files, restored from the twins and banks. Git-ignored, like `object.json`. |
+| `src/objects/<id>/prepared/runtime.refs.json`, `scene.refs.json`, `sky.refs.json` | The checked-in twins. Each shared value is replaced by `{ "$shared": { "kind", "sha256" } }`. |
+| `src/objects/<id>/prepared/runtime.json`, `scene.json`, `sky.json` | The full files, restored from the twins and banks. Git-ignored, like `object.json`. |
 
 A bank file is `{ "schema": "cssearth-shared-bank@1", "kind", "label"?, "value" }`
 followed by a newline. Its name is the SHA-256 of those bytes, so a reference

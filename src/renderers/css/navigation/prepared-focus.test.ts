@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { getEventListeners } from 'node:events';
-import scene from '../../../planets/mercury/prepared/scene.json';
+import scene from '../../../objects/mercury/prepared/scene.json';
 import { createRetainedCubicSkyOrbit } from './object-orbit.js';
 import { createPerspectiveDolly } from './perspective-dolly.js';
 import { presentWorldCamera } from './world-camera.js';

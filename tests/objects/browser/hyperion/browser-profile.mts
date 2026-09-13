@@ -1,5 +1,5 @@
 import { browserProfileLensIds, createObjectBrowserProfile } from '../../../../site/test/object-browser-profile.mts';
-import objectControls from '../../../../src/planets/hyperion/prepared/controls.json' with { type: 'json' };
+import objectControls from '../../../../src/objects/hyperion/prepared/controls.json' with { type: 'json' };
 
 export const browserProfile = createObjectBrowserProfile({ id: 'hyperion', controls: objectControls,
   audit: {

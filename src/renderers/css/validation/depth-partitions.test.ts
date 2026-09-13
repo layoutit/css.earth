@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 // The transport references shared banks; validation sees them inlined, as the decoder does.
 // The mutable fixture keeps the parsed-JSON shape the mutations below rely on.
 const source: ReturnType<typeof JSON.parse> = await inlineSharedFromBanks(fileURLToPath(new URL('../../../../', import.meta.url)),
-  JSON.parse(await readFile(new URL('../../../planets/deimos/prepared/object.json', import.meta.url), 'utf8')).data);
+  JSON.parse(await readFile(new URL('../../../objects/deimos/prepared/object.json', import.meta.url), 'utf8')).data);
 // The published Deimos package can retain native depth. Validate the optional
 // partition transport against explicit carriers, independent of that bake choice.
 const prepared = structuredClone(source), groups: { root: number; scene: number }[] = [];

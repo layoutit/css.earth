@@ -2,8 +2,8 @@
 
 These acquisition, authoring, release and local-mirror operations select their
 object explicitly with `--object=<id>`. They read scientific/source declarations
-from `src/planets/<id>/source` and prepared scene/page JSON from
-`src/planets/<id>/prepared`; no body-owned executable modules are imported or
+from `src/objects/<id>/source` and prepared scene/page JSON from
+`src/objects/<id>/prepared`; no body-owned executable modules are imported or
 generated. The current WorldCover provider and pinned R2 service remain unchanged.
 Provider qualification text and legacy release schemas describe the same accepted
 datasets; moving the tools does not establish broader imagery coverage.

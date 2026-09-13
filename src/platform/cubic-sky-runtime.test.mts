@@ -15,7 +15,7 @@ import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } f
 import { mountRetainedCubicSky } from "./cubic-sky-runtime.mts";
 import type { CubicSkyMountOptions, RetainedCubicSky } from "./cubic-sky-runtime.mts";
 import type { TrackballMetrics, CameraDelta, Quaternion } from "../renderers/css/navigation/types.ts";
-import PREPARED_MERCURY_STARFIELD from "../../src/planets/mercury/prepared/sky.json" with {type: "json"};
+import PREPARED_MERCURY_STARFIELD from "../../src/objects/mercury/prepared/sky.json" with {type: "json"};
 
 type Rotate = Parameters<typeof createUnboundedMatrixDragControls>[0]["rotate"];
 type Publication = Parameters<Rotate>[0];

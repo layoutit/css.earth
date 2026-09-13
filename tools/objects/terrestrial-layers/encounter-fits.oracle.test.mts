@@ -17,10 +17,10 @@ test('the fixture is bound to one pinned product per encounter instrument', asyn
 });
 
 for (const [body, raw] of Object.entries(products)) test(`${body}: planes, header identity and every per-pixel decision match astropy`, async () => {
-  const product = requireRecord(raw), source = resolve(ORACLE_ROOT, 'src/planets', body, 'source');
+  const product = requireRecord(raw), source = resolve(ORACLE_ROOT, 'src/objects', body, 'source');
   const frame = JSON.parse(await readFile(resolve(source, 'preparation/terrestrial.json'), 'utf8')).raster.surfaceObservations[0].frames[0];
   const control = JSON.parse(await readFile(resolve(source, frame.controlPath), 'utf8'));
-  assert.equal(`src/planets/${body}/source/${frame.path}`, requireString(product.path));
+  assert.equal(`src/objects/${body}/source/${frame.path}`, requireString(product.path));
   assert.equal(control.observation.detectorBorderPixels, requireFiniteNumber(product.detectorBorderPixels));
   const decoded = decodeEncounterFits(await readFile(resolve(source, frame.path)), control.observation);
   const identity = requireRecord(product.identity);

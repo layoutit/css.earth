@@ -72,7 +72,7 @@ test("runtime and shell edits do not prepare objects; imported generators and so
   await writeFile(join(root, "pnpm-lock.yaml"), "lock");
   await writeFile(join(root, "tools/generator.mjs"), "export const value = 1;");
   for (const id of ["moon", "pluto"]) {
-    const base = `src/planets/${id}`;
+    const base = `src/objects/${id}`;
     for (const directory of ["tools", "site", "source", "runtime"]) await mkdir(join(root, base, directory), { recursive: true });
     await writeFile(join(root, base, "source/manifest.json"), JSON.stringify({ generatedIntermediates: [] }));
     await writeFile(join(root, base, "site/control-content.source.mjs"), "export const objectControls = {};");
@@ -83,14 +83,14 @@ test("runtime and shell edits do not prepare objects; imported generators and so
   }
   const actual = { ...options, sharedFiles: sharedPreparationFiles, packageFiles: objectPreparationFiles };
   await runCachedPreparationObjects(actual); started.length = 0;
-  for (const path of ["site/runtime-policy.mts", "site/shell.mjs", "src/platform/camera-input.mts", "tools/audit.mjs", "src/planets/moon/runtime/client.mjs"]) {
+  for (const path of ["site/runtime-policy.mts", "site/shell.mjs", "src/platform/camera-input.mts", "tools/audit.mjs", "src/objects/moon/runtime/client.mjs"]) {
     await writeFile(join(root, path), "// changed runtime or audit code");
   }
   assert.deepEqual((await runCachedPreparationObjects(actual)).cached, ["moon", "pluto"]);
   assert.deepEqual(started, []);
   await writeFile(join(root, "tools/generator.mjs"), "export const value = 2;");
   await runCachedPreparationObjects(actual); assert.deepEqual(started, ["moon", "pluto"]); started.length = 0;
-  await writeFile(join(root, "src/planets/moon/source/texture.bin"), "changed source");
+  await writeFile(join(root, "src/objects/moon/source/texture.bin"), "changed source");
   await runCachedPreparationObjects(actual); assert.deepEqual(started, ["moon"]);
 }));
 test("full rebuild bypasses a valid cache and failed producers cannot seal outputs", async () => fixture(async ({ options, root, started }) => {
@@ -106,12 +106,12 @@ test("cache selection rejects unknown or duplicate registry objects", async () =
   await assert.rejects(runCachedPreparationObjects({ ...options, objectIds: ["invented-object"] }), /unique IDs/);
 }));
 test("external prepared inputs are declared as data and cannot escape the project", async () => fixture(async ({ root }) => {
-  await mkdir(join(root, "src/planets/earth"), { recursive: true });
-  const declaration = join(root, "src/planets/earth/preparation.json");
+  await mkdir(join(root, "src/objects/earth"), { recursive: true });
+  const declaration = join(root, "src/objects/earth/preparation.json");
   await writeFile(join(root, "release.json"), JSON.stringify({ version: "v1", files: [{ filename: "tile.pack" }] }));
   await writeFile(declaration, JSON.stringify({ schema: "cssearth-preparation-inputs@1",
     fileSets: [{ manifest: "release.json", directory: ".local/geometry" }] }));
-  assert.deepEqual(await preparationFileSets(root, "earth"), ["src/planets/earth/preparation.json", "release.json", ".local/geometry/v1/tile.pack"]);
+  assert.deepEqual(await preparationFileSets(root, "earth"), ["src/objects/earth/preparation.json", "release.json", ".local/geometry/v1/tile.pack"]);
   await writeFile(join(root, "release.json"), JSON.stringify({ version: "../escape", files: [{ filename: "tile.pack" }] }));
   await assert.rejects(preparationFileSets(root, "earth"));
 }));

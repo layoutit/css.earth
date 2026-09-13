@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 import {parseInterpreterRecipe} from '../../../../tools/objects/observation/interpret.mts';
 
-const source = new URL('../../../../src/planets/titania/source/', import.meta.url).pathname;
+const source = new URL('../../../../src/objects/titania/source/', import.meta.url).pathname;
 const recipe = async () => parseInterpreterRecipe(JSON.parse((await readFile(source + 'preparation/raster.json')).toString('utf8')));
 
 test('historical Titania categories retain named regions, valid black terrain and geographic gaps', async () => {

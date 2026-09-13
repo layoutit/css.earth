@@ -9,7 +9,7 @@ import { createSourceManifest } from '../../../src/platform/source-manifest.mts'
 
 const root = resolve(import.meta.dirname, '../../..');
 async function mosaic(body: string, format: string) {
-  const profile = requireRecord(JSON.parse(await readFile(resolve(root, 'src/planets', body, 'source/preparation/terrestrial.json'), 'utf8')));
+  const profile = requireRecord(JSON.parse(await readFile(resolve(root, 'src/objects', body, 'source/preparation/terrestrial.json'), 'utf8')));
   const recipe = requireArray(requireRecord(profile.raster).mosaics).map(value => requireRecord(value)).find(value => value.format === format);
   if (!recipe) throw new Error(`${body} has no ${format} mosaic.`);
   return recipe;
@@ -31,16 +31,16 @@ test('a camera mosaic decodes a published photometric model with its display set
 });
 
 test('a published camera block needs its resolved model and valid limits, and filter colour refuses a single-filter model', async () => {
-  const recipe = await mosaic('ida', 'controlled-shape-camera'), ida = resolve(root, 'src/planets/ida/source');
+  const recipe = await mosaic('ida', 'controlled-shape-camera'), ida = resolve(root, 'src/objects/ida/source');
   await assert.rejects(prepareShapeCameraMosaic(ida, [], { ...recipe, photometry: published }, 8, 4, {}), /resolved model record/);
   await assert.rejects(prepareShapeCameraMosaic(ida, [], { ...recipe, photometry: { ...published, limits: { ...published.limits, maximumEmissionDegrees: 90 } } }, 8, 4, {}), /Invalid shape-camera mosaic profile/);
   await assert.rejects(prepareShapeCameraMosaic(ida, [], { ...recipe, photometry: legacy }, 8, 4, {}, { photometry: { normalize: () => 1, report: {}, units: '' } }), /needs a published camera photometry block/);
   const color = await mosaic('proteus', 'controlled-shape-color');
-  await assert.rejects(prepareShapeCameraColor(resolve(root, 'src/planets/proteus/source'), [], { ...color, photometry: published }, 8, 4, {}), /one filter/);
+  await assert.rejects(prepareShapeCameraColor(resolve(root, 'src/objects/proteus/source'), [], { ...color, photometry: published }, 8, 4, {}), /one filter/);
 });
 
 test("Ida's published camera block resolves against its model record and the publication it cites", async () => {
-  const recipe = await mosaic('ida', 'controlled-shape-camera'), sourceRoot = resolve(root, 'src/planets/ida/source');
+  const recipe = await mosaic('ida', 'controlled-shape-camera'), sourceRoot = resolve(root, 'src/objects/ida/source');
   const source = await createSourceManifest({ planetId: 'ida', planetName: 'Ida', sourceRoot });
   const resolved = await resolveCameraPhotometry(sourceRoot, source.manifest, recipe);
   if (!resolved) throw new Error("Ida's recipe does not name a published photometric model.");

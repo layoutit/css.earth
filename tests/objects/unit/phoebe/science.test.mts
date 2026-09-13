@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';
 import {decodeIsis3Raster} from '../../../../tools/objects/terrestrial-layers/isis3-raster.mts';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
-const root=resolve(import.meta.dirname,'../../../../src/planets/phoebe/source');
+const root=resolve(import.meta.dirname,'../../../../src/objects/phoebe/source');
 const sha=(b: string|NodeJS.ArrayBufferView<ArrayBufferLike>|NonSharedBuffer)=>createHash('sha256').update(b).digest('hex');
 test('Phoebe paired cubes retain every native value and actual missing-maplet sentinel',async()=>{
  const proof=proofShape(JSON.parse((await readFile(resolve(root,'validation/2023-source-statistics.json'))).toString('utf8')));
