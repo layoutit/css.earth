@@ -125,6 +125,16 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         selected = id; layer.selectGalaxy(id); observeLens(id);
         publishContent(id);
         if (!id || (state && !query.has('focusLens'))) writeSelectionUrl(id);
+        // A focus-only link is a destination. Saved camera links retain their
+        // exact observer pose; changing the pivot alone must not reframe them.
+        if (focus && !query.has('v')) {
+          flight?.abort();
+          const controller = new AbortController(); flight = controller;
+          beforeFlight();
+          void navigation.flyToPreparedFocus(focus, { signal: controller.signal, reducedMotion: true })
+            .catch(error => { if (!controller.signal.aborted) onError(error); })
+            .finally(() => { if (flight === controller) flight = null; });
+        }
       } catch (error) {
         selected = navigation.preparedFocus?.()?.id ?? null;
         layer.selectGalaxy(selected); observeLens(selected);

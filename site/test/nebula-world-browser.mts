@@ -16,8 +16,15 @@ page.on('request',request=>{if(request.isNavigationRequest()&&request.frame()===
 const report:{objects:unknown[];errors:string[];navigationRequests:string[];result?:string}={objects:[],errors,navigationRequests:requests};
 const base=process.argv[2]??'http://127.0.0.1:4210';
 try{
- const response=await page.goto(`${base}/sun/`,{waitUntil:'domcontentloaded'});assert.equal(response?.status(),200);
+ const response=await page.goto(`${base}/sun/?focus=m42`,{waitUntil:'domcontentloaded'});assert.equal(response?.status(),200);
  await page.waitForFunction(()=>window.__sun?.ready&&document.querySelectorAll('[data-volume-lens-object]').length>=4,null,{timeout:120000});
+ const initial=validatePreparedVolumeLenses(requireRecord(JSON.parse(await readFile('src/objects/m42/prepared/lenses.json','utf8'))).data);
+ const initialFrame=initial.lenses[0]!.volume.frame;
+ await page.waitForFunction(({frame,center,radius})=>{
+  const position=window.__cssearthTest.object('sun').camera.captureWorldCamera(frame).pose.positionM;
+  return Math.hypot(...position.map((value,axis)=>value-center[axis]!))<radius*20;
+ },{frame:context.frame,center:initialFrame.originM,radius:initial.framingRadiusUnits*initialFrame.metersPerUnit},{timeout:15000});
+ await page.screenshot({path:`${directory}/m42-direct-focus.png`});
  const motion=page.locator('input[name="motion"]');if(await motion.count()&&await motion.isChecked())await motion.uncheck({force:true});
  await page.evaluate(()=>{window.__nebulaProductionNodes=[...document.querySelectorAll('[data-volume-lens-object], [data-volume-lens-object] .css-volume-mesh > s, [data-volume-lens-object] [data-catalogue-source]')];});
  for(const id of ['m42','helix','m2-9']){
